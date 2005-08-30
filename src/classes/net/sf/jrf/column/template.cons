@@ -1,0 +1,138 @@
+	/** Constructs a <code>X</code> with column options assuming
+	* reflection will be used for getting and setting values in the <code>PersistentObject</code>. 
+	* @param columnOption <code>ColumnOption</code> instance to use.
+	* @param getter name of the method to get the column data from the <code>PersistentObject</code>
+	* @param setter name of the method to set column data in the <code>PersistentObject</code>.
+	* @param defaultValue value to use for default if column value is null.
+	*/	
+	public XColumnSpec(ColumnOption columnOption, String getter,String setter,
+						Object defaultValue)
+	{
+		super(columnOption,getter,setter,defaultValue);
+	}
+
+	/** Constructs a <code>X</code> with column options and a <code>GetterSetter</code> instance.
+	* @param columnOption <code>ColumnOption</code> instance to use.
+	* @param getterSetterImpl implementation of GetterSetter.
+	* @param defaultValue value to use for default if column value is null.
+	*/	
+	public XColumnSpec(ColumnOption columnOption, GetterSetter getterSetter, Object defaultValue)
+	{
+		super(columnOption,getterSetter,defaultValue);
+	}
+
+
+	/** Constructs a <code>X</code> with three option values. 
+	 * @param columnName name of the column
+	 * @param getter name of the method to get the column data from the <code>PersistentObject</code>
+	 * @param setter name of the method to set column data in the <code>PersistentObject</code>.
+	 * @param defaultValue default value when the return value from the "getter" is null.
+	 * @param option1  One the six column option constants from <code>JRFConstants</code> or zero to denote no option.
+	 * @param option2  One the six column option constants from <code>JRFConstants</code> or zero to denote no option.
+	 * @param option3  One the six column option constants from <code>JRFConstants</code> or zero to denote no option.
+	 * @deprecated Use <code>ColumnOption</code> constructors as an alternative.
+	 */
+	public XColumnSpec(
+     	 String  columnName,
+	      String  getter,
+     	 String  setter,
+	      Object  defaultValue,
+     	 int     option1,
+	      int     option2,
+     	 int     option3)
+	{
+	    super(columnName,getter,setter,defaultValue,option1,option2,option3);
+     }
+
+	/** Constructs a <code>X</code> with no option values supplied. 
+	 * @param columnName name of the column
+	 * @param getter name of the method to get the column data from the <code>PersistentObject</code>
+	 * @param setter name of the method to set column data in the <code>PersistentObject</code>.
+	 * @param defaultValue default value when the return value from the "getter" is null.
+	 * @deprecated Use <code>ColumnOption</code> constructors as an alternative.
+	 */
+	public XColumnSpec(
+     	 String  columnName,
+	      String  getter,
+     	 String  setter,
+	      Object  defaultValue)
+	{
+		super(columnName,
+	         getter,
+     	    setter,
+	         defaultValue,
+     	    0,
+	         0,
+     	    0);
+	}
+
+	/** Constructs a <code>X</code> with one option value. 
+	 * @param columnName name of the column
+	 * @param getter name of the method to get the column data from the <code>PersistentObject</code>
+	 * @param setter name of the method to set column data in the <code>PersistentObject</code>.
+	 * @param defaultValue default value when the return value from the "getter" is null.
+	 * @param option1  One the six column option constants from <code>JRFConstants</code> or zero to denote no option.
+	 * @deprecated Use <code>ColumnOption</code> constructors as an alternative.
+	 */
+	public XColumnSpec(
+      	String  columnName,
+	      String  getter,
+     	 String  setter,
+	      Object  defaultValue,
+     	 int     option1)
+	{
+	    super(columnName,
+     	    getter,
+	         setter,
+     	    defaultValue,
+	         option1,
+     	    0,
+	         0);
+	}
+
+	/** Constructs a <code>X</code> with two option values. 
+	 * @param columnName name of the column
+	 * @param getter name of the method to get the column data from the <code>PersistentObject</code>
+	 * @param setter name of the method to set column data in the <code>PersistentObject</code>.
+	 * @param defaultValue default value when the return value from the "getter" is null.
+	 * @param option1  One the six column option constants from <code>JRFConstants</code> or zero to denote no option.
+	 * @deprecated Use <code>ColumnOption</code> constructors as an alternative.
+	 */
+	public XColumnSpec(
+     	 String  columnName,
+	      String  getter,
+	      String  setter,
+	      Object  defaultValue,
+	      int     option1,
+     	 int     option2)
+	{
+		    this(columnName,
+		         getter,
+		         setter,
+		         defaultValue,
+		         option1,
+		         option2,
+		         0);
+	}
+
+	/** Constructs a <code>X</code> with three option values and a <code>GetterSetter</code> implementation.
+	 * @param columnName name of the column
+	 * @param getterSetterImpl an implementation of <code>GetterSetter</code>.
+	 * @param defaultValue default value when the return value from the "getter" is null.
+	 * @param option1  One the six column option constants from <code>JRFConstants</code> or zero to denote no option.
+	 * @param option2  One the six column option constants from <code>JRFConstants</code> or zero to denote no option.
+	 * @param option3  One the six column option constants from <code>JRFConstants</code> or zero to denote no option.
+	 * @deprecated Use <code>ColumnOption</code> constructors as an alternative.
+	 */
+	public XColumnSpec(
+      	String  columnName,
+		 GetterSetter getterSetterImpl,
+     	 Object  defaultValue,
+	      int     option1,
+     	 int     option2,
+	      int     option3)
+	{
+		super(columnName,getterSetterImpl,defaultValue,option1,option2,option3);
+
+	}
+

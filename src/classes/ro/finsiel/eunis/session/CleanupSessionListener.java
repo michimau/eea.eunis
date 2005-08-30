@@ -1,0 +1,138 @@
+package ro.finsiel.eunis.session;
+
+import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.Settings;
+import ro.finsiel.eunis.OSEnvironment;
+
+import javax.servlet.http.HttpSessionListener;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.util.Properties;
+import java.util.Date;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+/**
+ * This class is used to clean up the files created in temporary directoy,
+ * during a session's life. These files are the PDF, CSV reports
+ * @author  finsiel
+ */
+public class CleanupSessionListener implements HttpSessionListener {
+  /** Path to temp directory. */
+  private String TEMP_PATH = "webapps/eunis/temp";
+
+  /** Creates a new instance of CleanupSessionListener. */
+  public CleanupSessionListener() {}
+
+  /**
+   * Method called by the container when the session is created.
+   * @param httpSessionEvent Event with information about the session
+   */
+  public void sessionCreated(javax.servlet.http.HttpSessionEvent httpSessionEvent) {}
+
+  /**
+   * Method called by container when the session is expired. It contains the cleanup procedure
+   * for the session's temporary files.
+   * @param httpSessionEvent Event with information about the session
+   */
+  public void sessionDestroyed(javax.servlet.http.HttpSessionEvent httpSessionEvent)
+  {
+    HttpSession session = httpSessionEvent.getSession();
+
+    Properties env = new Properties();
+    try {
+      env = OSEnvironment.getEnvVars();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    TEMP_PATH = env.getProperty("TOMCAT_HOME");
+    TEMP_PATH += "/" + Settings.getSetting("TEMP_DIR");
+    String sessionID = session.getId();
+
+    File tempDir = new File(TEMP_PATH);
+    File[] files = tempDir.listFiles();
+    if (null != files)
+    {
+      // Test each file from array if contains the session id in its name
+      // and delete it does and if it's not an directory
+      for (int i = 0; i < files.length; i++)
+      {
+        File aFile = files[i];
+        if ((aFile.getName().lastIndexOf(sessionID) >= 0) && aFile.isFile())
+        {
+          aFile.delete();
+        }
+      }
+    }
+    tempDir = new File(TEMP_PATH + "/no-cache/");
+    files = tempDir.listFiles();
+    if (null != files)
+    {
+      // Test each file from array if contains the session id in its name
+      // and delete it does and if it's not an directory
+      for (int i = 0; i < files.length; i++)
+      {
+        File aFile = files[i];
+        if ((aFile.getName().lastIndexOf(sessionID) >= 0) && aFile.isFile())
+        {
+          aFile.delete();
+        }
+      }
+    }
+
+    // Clear the tables used for advanced and combined search...
+    //System.out.println("Clearing temporary tables...");
+    String sqlDrv = Settings.getSetting("JDBC_DRV");
+    String sqlUrl = Settings.getSetting("JDBC_URL");
+    String sqlUsr = Settings.getSetting("JDBC_USR");
+    String sqlPwd = Settings.getSetting("JDBC_PWD");
+    if (!sqlDrv.equalsIgnoreCase("") && !sqlUrl.equalsIgnoreCase("") && !sqlUrl.equalsIgnoreCase("") &&
+            !sqlUsr.equalsIgnoreCase(""))
+    {
+      Utilities.ClearSessionData(httpSessionEvent.getSession().getId(), sqlDrv, sqlUrl, sqlUsr, sqlPwd);
+    }
+    else
+    {
+      System.out.println("CleanupSessionListener::sessionDestroyed(...) - Warning: database connection info incorrect. Temp tables not cleaned.");
+    }
+
+    // log the session expiration within database
+    // log the login process to database
+    String JDBC_DRV = Settings.getSetting("JDBC_DRV");
+    String JDBC_URL = Settings.getSetting("JDBC_URL");
+    String JDBC_USR = Settings.getSetting("JDBC_USR");
+    String JDBC_PWD = Settings.getSetting("JDBC_PWD");
+    long longTime = new Date().getTime();
+    Connection conn = null;
+    try
+    {
+      Class.forName(JDBC_DRV);
+      conn = DriverManager.getConnection(JDBC_URL, JDBC_USR, JDBC_PWD);
+      //System.out.println("Updating EUNIS_SESSION_LOG table.");
+      PreparedStatement ps = conn.prepareStatement("UPDATE EUNIS_SESSION_LOG SET START=START, END=? WHERE ID_SESSION=?");
+      // Check MySQL manual (START=START because MySQL updates *only* first occurring timestamp *if* the value differs)
+      ps.setTimestamp(1, new java.sql.Timestamp(longTime));
+      ps.setString(2, sessionID);
+      ps.executeUpdate();
+      ps.close();
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+    finally
+    {
+      if ( conn != null )
+      {
+        try
+        {
+          conn.close();
+        }
+        catch ( Exception e )
+        {
+        }
+      }
+    }
+  }
+}

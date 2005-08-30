@@ -1,3 +1,9 @@
+<%--
+  - Author(s) : The EUNIS Database Team.
+  - Date :
+  - Copyright : (c) 2002-2005 EEA - European Environment Agency.
+  - Description : Part of user management
+--%>
 <%@ page import="java.util.List,
                  ro.finsiel.eunis.jrfTables.users.UserDomain,
                  ro.finsiel.eunis.jrfTables.users.UserPersist,

@@ -1,0 +1,551 @@
+<%--
+  - Author(s)   : The EUNIS Database Team.
+  - Date        :
+  - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
+  - Description : 'Species Legal instruments' function - search page.
+--%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@page contentType="text/html"%>
+<%@page import="ro.finsiel.eunis.search.species.legal.LegalSearchCriteria,
+                ro.finsiel.eunis.search.species.SpeciesSearchUtility,
+                ro.finsiel.eunis.jrfTables.species.legal.ScientificLegalPersist,
+                ro.finsiel.eunis.jrfTables.species.legal.LegalReportsPersist,
+                ro.finsiel.eunis.search.Utilities,
+                ro.finsiel.eunis.WebContentManagement,
+                java.util.Vector"%>
+<%@page import="ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesPersist"%>
+<%@page import="java.util.List, java.util.Iterator"%>
+<jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
+  <head>
+  <jsp:include page="header-page.jsp" />
+    <script language="JavaScript" src="script/species-legal.js" type="text/javascript"></script>
+    <script language="JavaScript" type="text/javascript">
+      <!--
+        function setGroupName(selObj)
+        {
+          document.eunis.grName.value=selObj.options[selObj.selectedIndex].name;
+        }
+
+        function setGroupName2(selObj)
+        {
+          document.eunis2.grName.value=selObj.options[selObj.selectedIndex].name;
+        }
+
+        function legalText1OnChange()
+        {
+          var frm = document.eunis2;
+          var legalText1 = document.eunis2.legalText1.options[document.eunis2.legalText1.selectedIndex].value;
+          var arr = legalText1.split( "##" );
+
+          var grName = document.createElement("input");
+          grName.type= "hidden";
+          grName.name = "grName";
+          grName.value = arr[ 0 ];
+          frm.appendChild( grName );
+
+          var groupName = document.createElement("input");
+          groupName.type= "hidden";
+          groupName.name = "groupName";
+          groupName.value = arr[ 1 ];
+          frm.appendChild( groupName );
+
+          var annex = document.createElement("input");
+          annex.type= "hidden";
+          annex.name = "annex";
+          annex.value = arr[ 2 ];
+          frm.appendChild( annex );
+
+          var legalText = document.createElement("input");
+          legalText.type= "hidden";
+          legalText.name = "legalText";
+          legalText.value = arr[ 3 ];
+          frm.appendChild( legalText );
+
+          frm.submit();
+        }
+
+
+        function groupNameChanged()
+        {
+          var groupID = document.eunis2.groupName.options[document.eunis2.groupName.selectedIndex].value;
+          var groupName = document.eunis2.groupName.options[document.eunis2.groupName.selectedIndex].text;
+          var frm = document.createElement( "FORM" );
+          document.appendChild( frm );
+          frm.method = "get";
+          frm.action="species-legal.jsp";
+
+          var ctrl_h1 = document.createElement("input");
+          ctrl_h1.type= "hidden";
+          ctrl_h1.name = "groupID";
+          ctrl_h1.value = groupID;
+          frm.appendChild( ctrl_h1 );
+
+          var isPostBack = document.createElement("input");
+          isPostBack.type= "hidden";
+          isPostBack.name = "postBack";
+          isPostBack.value = "true";
+          frm.appendChild( isPostBack );
+
+          var ctrl_h2 = document.createElement("input");
+          ctrl_h2.type= "hidden";
+          ctrl_h2.name = "groupName";
+          ctrl_h2.value = groupName;
+          frm.appendChild( ctrl_h2 );
+
+          //var showScientificName = document.eunis2.showScientificName;
+          var ctrl_h3 = document.createElement("input");
+          ctrl_h3.type= "hidden";
+          ctrl_h3.name = "showScientificName";
+          //ctrl_h3.value = showScientificName.checked;
+          ctrl_h3.value = "true";
+          frm.appendChild( ctrl_h3 );
+
+          var showGroup = document.eunis2.showGroup;
+          var ctrl_h4 = document.createElement("input");
+          ctrl_h4.type= "hidden";
+          ctrl_h4.name = "showGroup";
+          ctrl_h4.value = showGroup.checked;
+          frm.appendChild( ctrl_h4 );
+
+          var showLegalText = document.eunis2.showLegalText;
+          var ctrl_h5 = document.createElement("input");
+          ctrl_h5.type= "hidden";
+          ctrl_h5.name = "showLegalText";
+          ctrl_h5.value = showLegalText.checked;
+          frm.appendChild( ctrl_h5 );
+
+          var showAbbreviation = document.eunis2.showAbbreviation;
+          var ctrl_h6 = document.createElement("input");
+          ctrl_h6.type= "hidden";
+          ctrl_h6.name = "showAbbreviation";
+          ctrl_h6.value = showAbbreviation.checked;
+          frm.appendChild( ctrl_h6 );
+
+          var showComment = document.eunis2.showComment;
+          var ctrl_h7 = document.createElement("input");
+          ctrl_h7.type= "hidden";
+          ctrl_h7.name = "showComment";
+          ctrl_h7.value = showComment.checked;
+          frm.appendChild( ctrl_h7 );
+
+          var showURL = document.eunis2.showURL;
+          var ctrl_h8 = document.createElement("input");
+          ctrl_h8.type= "hidden";
+          ctrl_h8.name = "showURL";
+          ctrl_h8.value = showURL.checked;
+          frm.appendChild( ctrl_h8 );
+
+          var typeForm = document.eunis2.typeForm;
+          var ctrl_h9 = document.createElement("input");
+          ctrl_h9.type= "hidden";
+          ctrl_h9.name = "typeForm";
+          ctrl_h9.value = typeForm.value;
+          frm.appendChild( ctrl_h9 );
+
+          frm.submit();
+        }
+
+        function onLoadFunction() {
+            <%
+              if (SessionManager.isAuthenticated()&&SessionManager.isSave_search_criteria_RIGHT())
+              {
+            %>
+                 document.eunis.saveCriteria.style.display = 'none';
+                 document.eunis2.saveCriteria.style.display = 'none';
+            <%
+              }
+            %>
+
+        document.eunis.action = 'species-legal-result.jsp';
+        document.eunis2.action = 'species-legal-result.jsp';
+     }
+
+     <%
+              if (SessionManager.isAuthenticated()&&SessionManager.isSave_search_criteria_RIGHT())
+              {
+      %>
+        function checkSaveCriteria(fromWhere) {
+        if((fromWhere == '2' && validateForm()) || (fromWhere == '1' && trim(document.eunis2.groupName.value) != ''))
+        {
+            if(fromWhere == '2')
+            {
+               document.eunis.saveCriteria.checked=true;
+               document.eunis.action = 'species-legal.jsp';
+               alert('You choose to save this search criteria.Saving will be made after the search is executed');
+               document.eunis.submit();
+            }
+            if(fromWhere == '1')
+            {
+               document.eunis2.saveCriteria.checked=true;
+               document.eunis2.action = 'species-legal.jsp';
+               alert('You choose to save this search criteria.Saving will be made after the search is executed');
+               document.eunis2.submit();
+            }
+        } else
+        {
+            if(fromWhere == '2')
+            {
+              document.eunis.action = 'species-legal.jsp';
+              document.eunis.submit();
+            }
+            if(fromWhere == '1')
+            {
+              if(trim(document.eunis2.groupName.value) == '') alert('Please select a group');
+              document.eunis2.action = 'species-legal.jsp';
+              document.eunis2.submit();
+            }
+        }
+        }
+            <%
+            }
+            %>
+
+      //-->
+    </script>
+<%
+  // REQUEST PARAMETERS (facultative)
+  // groupID - ID associated with groupName
+  String groupID = null;
+  if(request.getParameter( "groupID" ) == null && request.getParameter( "groupName" ) != null)
+     groupID = Utilities.formatString( request.getParameter( "groupName" ), "" );
+  else  groupID = Utilities.formatString( request.getParameter( "groupID" ), "" );
+  String sv = (request.getParameter("saveCriteria") == null ?
+                "false" :
+                request.getParameter("saveCriteria")).equalsIgnoreCase("true") ? "checked=\"checked\"" : "";
+  WebContentManagement contentManagement = SessionManager.getWebContent();
+%>
+    <jsp:useBean id="GroupspeciesDomain" class="ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesDomain" scope="page" />
+    <title>
+      <%=application.getInitParameter("PAGE_TITLE")%>
+      <%=contentManagement.getContent("species_legal_title", false )%>
+    </title>
+  </head>
+  <body style="background-color:#ffffff" onload="onLoadFunction()">
+  <div id="content">
+    <jsp:include page="header-dynamic.jsp">
+      <jsp:param name="location" value="Home#index.jsp,Species#species.jsp,Legal instruments" />
+      <jsp:param name="helpLink" value="species-help.jsp" />
+    </jsp:include>
+    <table summary="layout" width="100%" border="0">
+      <tr>
+        <td>
+        <h5>
+          <%=contentManagement.getContent("species_legal_16")%>
+        </h5>
+        <br />
+        <%=contentManagement.getContent("species_legal_30")%>
+        <br />
+        <br />
+        <form name="eunis2" action="species-legal-result.jsp" method="get">
+          <input type="hidden" name="typeForm" value="<%=LegalSearchCriteria.CRITERIA_LEGAL%>" />
+          <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td style="background-color:#EEEEEE">
+                <strong>
+                  <%=contentManagement.getContent("species_legal_17")%>
+                </strong>
+              </td>
+            </tr>
+            <tr>
+              <td style="background-color:#EEEEEE">
+<%
+  boolean ckShowScientificName = true;
+  boolean ckShowGroup = true;
+  boolean ckShowLegalText = true;
+  boolean ckShowAbbreviation = true;
+  boolean ckShowComment = true;
+  boolean ckShowURL = true;
+  //Utilities.dumpRequestParams( request );
+  boolean isPostBack = Utilities.checkedStringToBoolean( request.getParameter( "postBack"), false );
+  if ( isPostBack )
+  {
+    ckShowScientificName = Utilities.checkedStringToBoolean( request.getParameter( "showScientificName" ), true);
+    ckShowGroup = Utilities.checkedStringToBoolean( request.getParameter( "showGroup" ), true );
+    ckShowLegalText = Utilities.checkedStringToBoolean( request.getParameter( "showLegalText" ), true );
+    ckShowAbbreviation = Utilities.checkedStringToBoolean( request.getParameter( "showAbbreviation" ), true );
+    ckShowComment = Utilities.checkedStringToBoolean( request.getParameter( "showComment" ), true );
+    ckShowURL = Utilities.checkedStringToBoolean( request.getParameter( "showURL" ), true );
+  }
+%>
+                <input title="Scientific name" id="checkbox1" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" /><label for="checkbox1"><%=contentManagement.getContent("species_legal_18")%></label>
+                <input title="Group" id="checkbox2" type="checkbox" name="showGroup" value="true" <%=ckShowGroup ? "checked=\"checked\"" : ""%> /><label for="checkbox2"><%=contentManagement.getContent("species_legal_19")%></label>
+                <input title="Legal text" id="checkbox3" type="checkbox" name="showLegalText" value="true" <%=ckShowLegalText ? "checked=\"checked\"" : ""%> /><label for="checkbox3"><%=contentManagement.getContent("species_legal_20")%></label>
+                <input title="Abbreviation" id="checkbox4" type="checkbox" name="showAbbreviation" value="true" <%=ckShowAbbreviation ? "checked=\"checked\"" : ""%> /><label for="checkbox4"><%=contentManagement.getContent("species_legal_21")%></label>
+                <input title="Comment" id="checkbox5" type="checkbox" name="showComment" value="true" <%=ckShowComment ? "checked=\"checked\"" : ""%> /><label for="checkbox5">Comment</label>
+                <input title="URL" id="checkbox6" type="checkbox" name="showURL" value="true" <%=ckShowURL ? "checked=\"checked\"" : ""%> /><label for="checkbox6"><%=contentManagement.getContent("species_legal_22")%></label>
+              </td>
+            </tr>
+          </table>
+          <table summary="layout" cellspacing="2" cellpadding="0" border="0" width="100%" style="text-align:left">
+            <tr>
+              <td style="vertical-align:bottom" colspan="2">
+                <img width="11" height="12" style="vertical-align:middle" alt="This field is mandatory" title="This field is mandatory" src="images/mini/field_mandatory.gif" />
+                <strong>
+                  <%=contentManagement.getContent("species_legal_23")%>
+                </strong>
+              </td>
+              <td style="vertical-align:bottom" colspan="2">
+                <label for="select1" class="noshow">Group name</label>
+                <select id="select1" title="Group name" name="groupName" onchange="groupNameChanged();" class="inputTextField">
+                  <option value="" <%if (LegalSearchCriteria.CRITERIA_LEGAL.toString().equals(request.getParameter("typeForm")) && null == groupID) {%>selected="selected"<%}%>><%=contentManagement.getContent("species_legal_24", false)%></option>
+                  <option value="any" <%if (LegalSearchCriteria.CRITERIA_LEGAL.toString().equals(request.getParameter("typeForm")) && null != groupID && groupID.equalsIgnoreCase("any")){%>selected="selected"<%}%>><%=contentManagement.getContent("species_legal_25", false)%></option>
+                  <% // Find all groups
+                  List speciesNames2 = GroupspeciesDomain.findOrderBy("ID_GROUP_SPECIES");
+                  Iterator it2 = speciesNames2.iterator();
+                  while (it2.hasNext())
+                  {
+                    Chm62edtGroupspeciesPersist group = (Chm62edtGroupspeciesPersist)it2.next();%>
+                    <option value="<%=group.getIdGroupspecies()%>" <%if (LegalSearchCriteria.CRITERIA_LEGAL.toString().equals(request.getParameter("typeForm")) && null != groupID && groupID.equalsIgnoreCase(group.getIdGroupspecies().toString())) {%>selected="selected"<%}%>><%=(group.getCommonName() != null ? group.getCommonName().replaceAll("&","&amp;") : "")%></option>
+                <%
+                  }
+                %>
+                </select>
+              </td>
+              <%
+                   if ( !groupID.equalsIgnoreCase( "" ) )
+                   {
+              %>
+              <td style="vertical-align:bottom">&nbsp;&nbsp;<strong><%=contentManagement.getContent("species_legal_26")%></strong></td>
+              <%
+                  } else
+                  {
+              %>
+                    <td>
+                      &nbsp;
+                    </td>
+              <%
+                  }
+              %>
+            </tr>
+            <tr>
+              <%
+                  if ( !groupID.equalsIgnoreCase( "" ) )
+                  {
+              %>
+              <td style="vertical-align:bottom" colspan="2">
+                <br />
+                <img width="11" height="12" style="vertical-align:middle" alt="This field is mandatory" title="This field is mandatory" src="images/mini/field_mandatory.gif" />
+                <strong><%=contentManagement.getContent("species_legal_27")%></strong>
+              </td>
+              <%
+              } else
+              {
+              %>
+                <td colspan="2">
+                  &nbsp;
+                </td>
+              <%
+              }
+                if ( !groupID.equalsIgnoreCase( "" ) )
+                {
+              %>
+                  <td style="vertical-align:bottom" colspan="3">
+                    <label for="legalText1" class="noshow">Species legal instrument</label>
+                    <select name="legalText1" id="legalText1" onchange="legalText1OnChange();" class="inputTextField" title="Species Legal Instrument">
+                      <option value="" selected="selected"><%=contentManagement.getContent("species_legal_28", false)%></option>
+                      <option value="any##any##any##any">Any legal text</option>
+                      <%// Legal texts within selected group
+                      List results = SpeciesSearchUtility.findLegalTextsForGroup(groupID);
+                      Iterator resIt = results.iterator();
+                      // if we don't have any group
+                      if (!groupID.equalsIgnoreCase("any"))
+                      {
+                        while (resIt.hasNext())
+                        {
+                          ScientificLegalPersist item = (ScientificLegalPersist)resIt.next();%>
+                          <option value="<%=(item.getCommonName() != null ? item.getCommonName().replaceAll("&","&amp;") : "")%>##<%=item.getIdGroupspecies()%>##<%=item.getAnnex()%>##<%=item.getAlternative()%>">ANNEX <%=item.getAnnex()%> - <%=item.getAlternative()%></option>
+                    <%
+                        }
+                      } else {
+                      // if we have any group
+                        while (resIt.hasNext())
+                        {
+                          LegalReportsPersist item = (LegalReportsPersist)resIt.next();%>
+                          <option value="any##any##<%=item.getAnnex()%>##<%=item.getAlternative()%>">ANNEX <%=item.getAnnex()%> - <%=item.getAlternative()%></option>
+                    <%
+                        }
+                      }
+                    %>
+                    </select>
+                  </td>
+              <%
+                } else {
+              %>
+                  <td style="vertical-align:bottom" colspan="3">&nbsp;</td>
+              <%
+                }
+              %>
+            </tr>
+            <%
+                if (SessionManager.isAuthenticated()&&SessionManager.isSave_search_criteria_RIGHT())
+                {
+            %>
+                  <tr>
+                    <td colspan="5">&nbsp;
+                     <br />
+                      <input title="Save criteria" id="saveCriteria1" type="checkbox" name="saveCriteria" value="true" <%=sv%> />
+                      <label for="saveCriteria1"><%=contentManagement.getContent("species_legal_08")%></label>
+                      &nbsp;
+                      <a title="Save criteria" href="javascript:checkSaveCriteria(1)"><img alt="Save" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
+                    </td>
+                  </tr>
+            <%
+                }
+            %>
+
+            <tr>
+                <td colspan="5">
+                    <br />
+                    <div class="horizontal_line"><img alt="" src="images/pixel.gif" width="100%" height="1" /></div>
+                </td>
+            </tr>
+          </table>
+        </form>
+          <br />
+          <h5>
+            <%=contentManagement.getContent("species_legal_01")%>
+          </h5>
+          <br />
+          <%=contentManagement.getContent("species_legal_29")%>
+          <br />
+          <br />
+          <form onsubmit="javascript:return validateForm();" name="eunis" action="species-legal-result.jsp" method="get">
+            <input type="hidden" name="showScientificName" value="true" />
+            <input type="hidden" name="grName" value="" />
+            <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td style="background-color:#EEEEEE">
+                  <strong>
+                    <%=contentManagement.getContent("species_legal_02")%>:
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td style="background-color:#EEEEEE">
+                  <input title="Scientific name" id="checkbox11" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" /><label for="checkbox11"><%=contentManagement.getContent("species_legal_03")%></label>
+                  <input title="Group" id="checkbox12" type="checkbox" name="showGroup" value="true" checked="checked" /><label for="checkbox12"><%=contentManagement.getContent("species_legal_04")%></label>
+                  <input title="Legal text" id="checkbox13" type="checkbox" name="showLegalText" value="true" checked="checked" /><label for="checkbox13"><%=contentManagement.getContent("species_legal_05")%></label>
+                  <input title="Abbreviation" id="checkbox14" type="checkbox" name="showAbbreviation" value="true" checked="checked" /><label for="checkbox14"><%=contentManagement.getContent("species_legal_06")%></label>
+                  <input title="Comment" id="checkbox15" type="checkbox" name="showComment" value="true" checked="checked" /><label for="checkbox15">Comment</label>
+                  <input title="URL" id="checkbox16" type="checkbox" name="showURL" value="true" checked="checked" /><label for="checkbox16"><%=contentManagement.getContent("species_legal_07")%></label>
+                </td>
+              </tr>
+          </table>
+          <input type="hidden" name="typeForm" value="<%=LegalSearchCriteria.CRITERIA_SPECIES%>" />
+          <table summary="layout" cellspacing="2" cellpadding="0" border="0" style="text-align:left" width="100%">
+            <tr>
+              <td style="vertical-align:bottom" colspan="2">
+                <br />
+                <br />
+                <img width="11" height="12" style="vertical-align:middle" alt="This field is optional" title="This field is optional" src="images/mini/field_included.gif" />
+                <strong>
+                    <%=contentManagement.getContent("species_legal_04")%>
+                </strong>
+              </td>
+              <td style="vertical-align:bottom" colspan="2">
+                <label for="select2" class="noshow">Group name</label>
+                <select id="select2" title="Group name" name="groupName" onchange="setGroupName(this)" class="inputTextField">
+                  <option value="any" <%=(LegalSearchCriteria.CRITERIA_SPECIES.toString().equals(request.getParameter("typeForm")) && request.getParameter("groupName") == null ? "selected=\"selected\"" : "")%>><%=contentManagement.getContent("species_legal_09", false)%></option>
+                  <%
+                    // List of species group names
+                    List speciesNames = GroupspeciesDomain.findOrderBy("ID_GROUP_SPECIES");
+                    Iterator it = speciesNames.iterator();
+                    while (it.hasNext())
+                    {
+                      Chm62edtGroupspeciesPersist specieName = (Chm62edtGroupspeciesPersist)it.next();%>
+                      <option value="<%=specieName.getIdGroupspecies()%>" <%=(LegalSearchCriteria.CRITERIA_SPECIES.toString().equals(request.getParameter("typeForm")) && specieName.getIdGroupspecies() != null && specieName.getIdGroupspecies().toString().equalsIgnoreCase(request.getParameter("groupName")) ? "selected=\"selected\"" : "")%>><%=(specieName.getCommonName() != null ? specieName.getCommonName().replaceAll("&","&amp;") : "")%></option>
+                  <%
+                    }
+                  %>
+                </select>
+              </td>
+              <td>
+                &nbsp;
+                <strong>
+                  <%=contentManagement.getContent("species_legal_10")%>
+                </strong>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <br />
+                <img alt="<%=contentManagement.getContent("species_legal_11", false)%>" width="11" height="12" style="vertical-align:middle" title="<%=contentManagement.getContent("species_legal_11", false)%>" src="images/mini/field_mandatory.gif" />
+                <%=contentManagement.writeEditTag("species_legal_11",false)%>
+                <strong>
+                  <label for ="scientificName"><%=contentManagement.getContent("species_legal_12")%></label>
+                </strong>
+              </td>
+              <td style="vertical-align:bottom" colspan="3">
+                <input id="scientificName" alt="Scientific name" size="43" name="scientificName"  class="inputTextField" title="Species scientific name" value="<%=(request.getParameter("scientificName") == null ? "" : request.getParameter("scientificName"))%>" />&nbsp;
+                <a title="List of values. Link will open a new window." href="javascript:openHelper('species-legal-choice.jsp')"><img alt="<%=contentManagement.getContent("species_legal_13", false)%>" style="vertical-align:middle" height="18" title="<%=contentManagement.getContent("species_legal_13", false)%>" src="images/helper/helper.gif" width="11" border="0" /></a>
+                <%=contentManagement.writeEditTag("species_legal_13",false)%>
+              </td>
+            </tr>
+               <%
+              if (SessionManager.isAuthenticated()&&SessionManager.isSave_search_criteria_RIGHT())
+              {
+            %>
+                <tr>
+                  <td colspan="5">
+                    <br/>
+                    <input title="Save criteria" id="saveCriteria2" type="checkbox" name="saveCriteria" value="true" <%=sv%> />
+                      <label for="saveCriteria2">
+                          <%=contentManagement.getContent("species_legal_08")%>
+                      </label>
+                    &nbsp;
+                    <a title="Save criteria" href="javascript:checkSaveCriteria(2)"><img alt="Save" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
+                  </td>
+                </tr>
+            <%
+              }
+            %>
+            <tr>
+              <td style="text-align:right" colspan="5">
+                <label for="Reset" class="noshow"><%=contentManagement.getContent("species_legal_14", false)%></label>
+                <input id="Reset" type="reset" value="<%=contentManagement.getContent("species_legal_14", false)%>" name="Reset" class="inputTextField" title="Reset" />
+                <%=contentManagement.writeEditTag("species_legal_14")%>
+                <label for="Search" class="noshow"><%=contentManagement.getContent("species_legal_15", false)%></label>
+                <input id="Search" type="submit" value="<%=contentManagement.getContent("species_legal_15", false)%>" name="submit2"  class="inputTextField" title="Search" />
+                <%=contentManagement.writeEditTag("species_legal_15")%>
+              </td>
+            </tr>
+          </table>
+        </form>
+    </td>
+  </tr>
+</table>
+            <%
+              // Expand saved searches list for this jsp page
+              if (SessionManager.isAuthenticated()&&SessionManager.isSave_search_criteria_RIGHT())
+              {
+                // Set Vector for URL string
+                Vector show = new Vector();
+                show.addElement("showScientificName");
+                show.addElement("showGroup");
+                show.addElement("showLegalText");
+                show.addElement("showAbbreviation");
+                show.addElement("showURL");
+                show.addElement("showComment");
+
+                String pageName = "species-legal.jsp";
+                String pageNameResult = "species-legal-result.jsp?"+Utilities.writeURLCriteriaSave(show) + "&amp;expand=true";
+                // Expand or not save criterias list
+                String expandSearchCriteria = (request.getParameter("expandSearchCriteria")==null?"no":request.getParameter("expandSearchCriteria"));
+            %>
+        <div class="horizontal_line"><img alt="" src="images/pixel.gif" width="100%" height="1" /></div>
+        <br />
+                <jsp:include page="show-criteria-search.jsp">
+                  <jsp:param name="pageName" value="<%=pageName%>" />
+                  <jsp:param name="pageNameResult" value="<%=pageNameResult%>" />
+                  <jsp:param name="expandSearchCriteria" value="<%=expandSearchCriteria%>" />
+                </jsp:include>
+            <%
+              }
+            %>
+    <jsp:include page="footer.jsp">
+      <jsp:param name="page_name" value="species-legal.jsp" />
+    </jsp:include>
+  </div>
+  </body>
+</html>

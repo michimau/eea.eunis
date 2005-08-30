@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>EUNIS Database v2</title>
+        <link>http://eunis.finsiel.ro/eunis/</link>
+        <description>EUNIS Database v2 is the next version of EUNIS Database (the current version is available at http://eunis.eea.eu.int). EUNIS Database v2 is currently under development.</description>
+        <language>en-us</language>
+        <item>
+            <title>Version 2.0 Release Control 1 was released</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>Version 2.0 Release Control 1 was released</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-08-25</dc:date>
+        </item>
+        <item>
+            <title>Accessibility support</title>
+            <link>http://eunis.finsiel.ro/eunis/accessibility.jsp</link>
+            <description>Accessibility support has been implemented into EUNIS Database</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-08-25</dc:date>
+        </item>
+        <item>
+            <title>XHTML 1.0 and HTML 4 support</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>XHTML 1.0 and HTML 4 support has been implemented into EUNIS 
+		Database</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-08-25</dc:date>
+        </item>
+        <item>
+            <title>New PDF factsheets and new TSV downloads</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>New PDF factsheets and new TSV downloads have been developed</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-08-25</dc:date>
+        </item>
+        <item>
+            <title>Tutorials</title>
+            <link>http://eunis.finsiel.ro/eunis/tutorials.jsp</link>
+            <description>Tutorials have beed added to EUNIS Database to support better user 
+		experience</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-08-25</dc:date>
+        </item>
+        <item>
+            <title>GIS Tool</title>
+            <link>http://eunis.finsiel.ro/eunis/gis-tool.jsp</link>
+            <description>A new version of the GIS Tool was released</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-08-25</dc:date>
+        </item>
+        <item>
+            <title>Changes in software</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>Many changes were made to web site interface, site code, project 
+		organization</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-08-25</dc:date>
+        </item>
+        <item>
+            <title>The MySQL database was updated</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>The MySQL database was updated; New designation types support was 
+		implemented for sites</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-08-25</dc:date>
+        </item>
+        <item>
+            <title>Advanced and combined search</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>Revisions were made to advanced and combined search</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-08-25</dc:date>
+        </item>
+        <item>
+            <title>Statistical data for Species was updated</title>
+            <link>http://eunis.finsiel.ro/eunis/species-statistics-module.jsp</link>
+            <description>Statistical data for Species was updated</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-08-25</dc:date>
+        </item>
+        <item>
+            <title>All the searches implemented in EUNIS Database were revisited and 
+		updated</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>All the searches implemented in EUNIS Database were revisited and 
+		updated</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-08-25</dc:date>
+        </item>
+        <item>
+            <title>Multilanguage support</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>Multilanguage support will be completed during September - currently 
+		under development</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-08-25</dc:date>
+        </item>
+
+
+
+
+
+        <item>
+            <title>Interface update</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>Changes were made to the user interface: Main page, tabs in factsheets etc.</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-06-17</dc:date>
+        </item>
+        <item>
+            <title>Search results</title>
+            <link>http://eunis.finsiel.ro/eunis/species.jsp</link>
+            <description>The results columns were changed in the Species module; Under development.</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-06-17</dc:date>
+        </item>
+        <item>
+            <title>Taxonomy</title>
+            <link>http://eunis.finsiel.ro/eunis/species-taxonomic-browser.js</link>
+            <description>New species taxonomy classification implemented</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-06-17</dc:date>
+        </item>
+        <item>
+            <title>Statistics</title>
+            <link>http://eunis.finsiel.ro/eunis/species-statistics-module.jsp</link>
+            <description>More statistics added for Species module</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-06-17</dc:date>
+        </item>
+        <item>
+            <title>Species factsheet changed</title>
+            <link>http://eunis.finsiel.ro/eunis/species</link>
+            <description>Species factsheet changed: tabs, links, appearance</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-06-17</dc:date>
+        </item>
+        <item>
+            <title>Database update</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>Database update - approx. 300.000 species</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-06-17</dc:date>
+        </item>
+        <item>
+            <title>Security update</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>Security update for Apache server - directory listing</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-06-17</dc:date>
+        </item>
+        <item>
+            <title>Bug fixes</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>Many changes were made to all the modules to correct and improve functionality as result of two weeks testing</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-06-17</dc:date>
+        </item>
+        <item>
+            <title>Fuzzy search update</title>
+            <link>http://eunis.finsiel.ro/eunis/species</link>
+            <description>Fuzzy search update</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-06-17</dc:date>
+        </item>
+        <item>
+            <title>Interface update</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>More improvements were made to the user interface; Fonts, styles again, pictures, maps, logos etc.</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-27</dc:date>
+        </item>
+        <item>
+            <title>Inline content management editor</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>The content management system was redesigned</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-27</dc:date>
+        </item>
+        <item>
+            <title>Pick/Show easy searches update</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>The Pick/Show easy searches result pages were changed; No more popups and columns update</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-27</dc:date>
+        </item>
+        <item>
+            <title>List of values</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>The list of values windows were updated; Changes also in specific advanced/combined searches</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-27</dc:date>
+        </item>
+        <item>
+            <title>Services, Glossary, Bookmarks, Login, References, Feedback updates</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>The Glossary, Bookmarks, Login, References, Feedback functions were updated; bugs were fixed</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-27</dc:date>
+        </item>
+        <item>
+            <title>Automatic DiGIR check</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>The DiGIR menu changes color according to status of DiGIR Provider</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-27</dc:date>
+        </item>
+        <item>
+            <title>Habitat types updates</title>
+            <link>http://eunis.finsiel.ro/habitats.jsp</link>
+            <description>Changes were made to the habit types module, including the database</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-27</dc:date>
+        </item>
+        <item>
+            <title>Species and Sites modules updated</title>
+            <link>http://eunis.finsiel.ro/species.jsp</link>
+            <description>Changes were made to the species and sites modules: maps, lookups, etc.</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-27</dc:date>
+        </item>
+        <item>
+            <title>New headline function</title>
+            <link>http://eunis.finsiel.ro/headline.jsp</link>
+            <description>New headline inline editing function was added</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-27</dc:date>
+        </item>
+        <item>
+            <title>GIS Tool update</title>
+            <link>http://eunis.finsiel.ro/gis-tool.jsp</link>
+            <description>New update of the GIS Tool</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-27</dc:date>
+        </item>
+        <item>
+            <title>Show map function update</title>
+            <link>http://eunis.finsiel.ro/sites.jsp</link>
+            <description>Update of the Show Map functionality</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-27</dc:date>
+        </item>
+        <item>
+            <title>Fuzzy search update</title>
+            <link>http://eunis.finsiel.ro/eunis/fuzzy-search-help.jsp</link>
+            <description>Fuzzy search searches also in vernacular name</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-27</dc:date>
+        </item>
+        <item>
+            <title>Interface update</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>Improvements were made to the user interface; EC CHM portal compatibility look and feel</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-20</dc:date>
+        </item>
+        <item>
+            <title>Habitat types lookup tables</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>The database was updated with habitat types lookup tables</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-20</dc:date>
+        </item>
+        <item>
+            <title>References</title>
+            <link>http://eunis.finsiel.ro/references.jsp</link>
+            <description>Changes made to improve functionality</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-20</dc:date>
+        </item>
+        <item>
+            <title>Popups removed</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>Popup windows were removed from the web interface whenever appropiate for better usability</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-20</dc:date>
+        </item>
+        <item>
+            <title>Fuzzy search support</title>
+            <link>http://eunis.finsiel.ro/eunis/fuzzy-search-help.jsp</link>
+            <description>Quick search by name has support for fuzzy search</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-20</dc:date>
+        </item>
+        <item>
+            <title>Other updates</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>Updates were made to: users administration, habitat types module, factsheets</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-20</dc:date>
+        </item>
+        <item>
+            <title>Tabs interface for nature object pages updated</title>
+            <link>http://eunis.finsiel.ro/eunis/species.jsp</link>
+            <description>Tabs interface update for nature object factsheet pages</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-20</dc:date>
+        </item>
+        <item>
+            <title>Search in vernacular names</title>
+            <link>http://eunis.finsiel.ro/eunis/species.jsp</link>
+            <description>Quich search by names searches also in vernacular names</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-20</dc:date>
+        </item>
+        <item>
+            <title>New columns in advanced and combined search</title>
+            <link>http://eunis.finsiel.ro/eunis/habitats-advanced.jsp</link>
+            <description>New columns were added to the results pages for advanced and combined queries</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-20</dc:date>
+        </item>
+        <item>
+            <title>Columns removed from results</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>The 'Other info' columns were removed from results pages</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-05-20</dc:date>
+        </item>
+        <item>
+            <title>New GIS Tool</title>
+            <link>http://eunis.finsiel.ro/eunis/gis-tool.jsp</link>
+            <description>The first version of the new GIS Tool is online</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-04-18</dc:date>
+        </item>
+        <item>
+            <title>New Bookmark function</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>A new functionality for saving user bookmarks was added</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-04-18</dc:date>
+        </item>
+        <item>
+            <title>Main page updated</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>The main page design was updated</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-04-15</dc:date>
+        </item>
+        <item>
+            <title>General updates</title>
+            <link>http://eunis.finsiel.ro/eunis</link>
+            <description>General updates were made: searches, users, services</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-04-18</dc:date>
+        </item>
+        <item>
+            <title>Tabs interface for nature object pages</title>
+            <link>http://eunis.finsiel.ro/eunis/species.jsp</link>
+            <description>Tabs interface rebuild for nature object pages</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-04-10</dc:date>
+        </item>
+        <item>
+            <title>Tabs interface for nature object factsheets</title>
+            <link>http://eunis.finsiel.ro/eunis/species-factsheet.jsp?idSpecies=1599&amp;idSpeciesLink=1353</link>
+            <description>Tabs interface rebuild for nature object factsheet</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-04-10</dc:date>
+        </item>
+        <item>
+            <title>EUNIS Online Collaboration Tool</title>
+            <link>http://eunis.finsiel.ro/phpgroupware</link>
+            <description>EUNIS Online Collaboration Tool is online</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-04-4</dc:date>
+        </item>
+        <item>
+            <title>DiGIR Provider updated</title>
+            <link>http://eunis.finsiel.ro/eunis/digir.jsp</link>
+            <description>New DiGIR data is online - more than 800.000 entries are public</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-04-4</dc:date>
+        </item>
+        <item>
+            <title>Quick search by name</title>
+            <link>http://eunis.finsiel.ro/eunis/species.jsp</link>
+            <description>New Quick search by name functionality addded into EUNIS</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-04-8</dc:date>
+        </item>
+        <item>
+            <title>Natura 2000 sites factsheet updated</title>
+            <link>http://eunis.eea.eu.int/sites-factsheet.jsp?idsite=ES0000041</link>
+            <description>The Natura 2000 sites factsheet were updated</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-03-10</dc:date>
+        </item>
+        <item>
+            <title>Multilanguage support</title>
+            <link>http://eunis.finsiel.ro/eunis/web-content.jsp</link>
+            <description>All static text from EUNIS Database pages was moved into CMS (Content Management System) in order to enable online web site updates and multilanguage support</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-03-10</dc:date>
+        </item>
+        <item>
+            <title>GBIF link</title>
+            <link>http://eunis.finsiel.ro/eunis/species-factsheet.jsp?idSpecies=1599&amp;idSpeciesLink=1353</link>
+            <description>GBIF link from species factsheet was added</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-03-10</dc:date>
+        </item>
+        <item>
+            <title>EUNIS Database Tool update</title>
+            <link>http://eunis.finsiel.ro/eunis/</link>
+            <description>The EUNIS Database tool was updated to support dynamic runtime table names, support for new dictionaries etc.</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-03-10</dc:date>
+        </item>
+        <item>
+            <title>EUNIS Meeting</title>
+            <link>
+            </link>
+            <description>EUNIS Database meeting in Copenhagen scheduled for 15 and 16 March 2005</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-03-10</dc:date>
+        </item>
+        <item>
+            <title>Habitats factsheet update</title>
+            <link>http://eunis.finsiel.ro/eunis/</link>
+            <description>Habitats factsheet page updated: tooltips, attributes etc.</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-03-10</dc:date>
+        </item>
+        <item>
+            <title>Web site update</title>
+            <link>http://eunis.finsiel.ro/eunis/</link>
+            <description>Web site update: style, look and feel, news page etc.</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-03-10</dc:date>
+        </item>
+        <item>
+            <title>EUNIS Database logos</title>
+            <link>http://eunis.finsiel.ro/eunis/logos.jsp</link>
+            <description>New EUNIS Database logos available for anyone who likes to link to EUNIS Database</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-03-10</dc:date>
+        </item>
+        <item>
+            <title>EUNIS Database logos</title>
+            <link>http://eunis.finsiel.ro/eunis/logos.jsp</link>
+            <description>New EUNIS Database logos available for anyone who likes to link to EUNIS Database</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-03-10</dc:date>
+        </item>
+        <item>
+            <title>GIS Tool</title>
+            <link>http://eunis.finsiel.ro/eunis/gis</link>
+            <description>A very early preview of the new GIS Tool, developed in Macromedia Flash, is available</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-03-10</dc:date>
+        </item>
+        <item>
+            <title>Indicators easy searches development started</title>
+            <link>http://eunis.finsiel.ro/eunis/species.jsp</link>
+            <description>Two new prototype easy searches regarding indicators were added for Species and Habitat Types. This work is under development.</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-03-10</dc:date>
+        </item>
+        <item>
+            <title>Accesibility stylesheet</title>
+            <link>http://eunis.finsiel.ro/eunis/preferences.jsp</link>
+            <description>A new high contrast stylesheet (Black/White) is available for all users following the accessibility target</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-03-10</dc:date>
+        </item>
+        <item>
+            <title>Database update</title>
+            <link>http://eunis.finsiel.ro/eunis/species.jsp</link>
+            <description>10 new tables containing dictionary lookup codes were added to the EUNIS Database database. The database was updated.</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-03-10</dc:date>
+        </item>
+        <item>
+            <title>Visitors counter</title>
+            <link>http://eunis.finsiel.ro/eunis/</link>
+            <description>A visitors counter was added to EUNIS Database web application</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-03-10</dc:date>
+        </item>
+        <item>
+            <title>News page</title>
+            <link>http://eunis.finsiel.ro/eunis/news.jsp</link>
+            <description>News page added to EUNIS Database and also RSS syndication was added, accessible from the main page</description>
+            <dc:creator>EEA - European Environment Agency</dc:creator>
+            <dc:date>2005-03-10</dc:date>
+        </item>
+    </channel>
+</rss> 
+

@@ -1,0 +1,20 @@
+#tree
+{
+	font-family: verdana, helvetica;
+	font-size: 0.9em;
+}
+
+#tree a
+{
+	color: #000;
+	text-decoration: none;
+	font-size: 0.9em;
+	font-family: verdana, helvetica;
+}
+
+#tree img
+{
+	border: 0px;
+	width: 19px;
+	height: 16px;
+}

@@ -3,10 +3,6 @@ package ro.finsiel.eunis.jrfTables.users;
 import net.sf.jrf.domain.PersistentObject;
 import ro.finsiel.eunis.session.ThemeManager;
 
-/**
- *
- * @version $Revision: 1.1.1.1 $ $Date: 2003/12/09 08:35:20 $
- **/
 public class UserPersist extends PersistentObject {
   public static final Integer TEXT_SIZE_NORMAL = new Integer(0);
   public static final Integer TEXT_SIZE_MEDIUM = new Integer(1);
@@ -17,25 +13,17 @@ public class UserPersist extends PersistentObject {
   /** This is a database field. */
   private String i_password = null;
   /** This is a database field. */
-  private Integer i_fontsize = TEXT_SIZE_NORMAL;
-  /** This is a database field. */
   private String firstName = null;
   private Integer themeIndex = new Integer(ThemeManager.THEME_SKY_BLUE);
   private String lastName = null;
   private String EMail = null;
   private String loginDate = null;
+  private String lang = null;
 
 
   /** Default constructor */
   public UserPersist() {
     super();
-    i_fontsize = TEXT_SIZE_NORMAL;
-  }
-
-
-  /** Getter for a database field. */
-  public Integer getFontsize() {
-    return i_fontsize;
   }
 
 
@@ -48,15 +36,6 @@ public class UserPersist extends PersistentObject {
   /** Getter for a database field. */
   public String getUsername() {
     return i_username;
-  }
-
-  /**
-   * Setter for a database field.
-   * @param fontsize
-   **/
-  public void setFontsize(Integer fontsize) {
-    i_fontsize = fontsize;
-    this.markModifiedPersistentState();
   }
 
 
@@ -120,4 +99,11 @@ public class UserPersist extends PersistentObject {
     this.loginDate = loginDate;
   }
 
+  public String getLang() {
+    return lang;
+  }
+
+  public void setLang( String lang ) {
+    this.lang = lang;
+  }
 }

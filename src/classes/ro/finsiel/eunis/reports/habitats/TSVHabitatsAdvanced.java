@@ -7,7 +7,7 @@ import ro.finsiel.eunis.formBeans.CombinedSearchBean;
 import ro.finsiel.eunis.jrfTables.habitats.advanced.DictionaryDomain;
 import ro.finsiel.eunis.jrfTables.habitats.advanced.DictionaryPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.habitats.advanced.DictionaryPaginator;
 
@@ -16,20 +16,17 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * Generate the PDF reports for Habitats -> Advanced search
- *
- * @author finsiel
- * @version 1.0
+ * TSV and XML report generation.
  */
 public class TSVHabitatsAdvanced extends AbstractTSVReport
 {
   /**
-   * Use the bean in order to see which columns should I display on the report
+   * Use the bean in order to see which columns should I display on the report.
    */
   private CombinedSearchBean formBean = null;
 
   /**
-   * Constructor
+   * Constructor.
    *
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
@@ -39,22 +36,23 @@ public class TSVHabitatsAdvanced extends AbstractTSVReport
     super( "HabitatsAdvancedReport_" + sessionID + ".tsv" );
     this.formBean = ( CombinedSearchBean ) formBean;
     this.filename = "HabitatsAdvancedReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "HabitatsAdvancedReport_" + sessionID + ".xml" );
     this.dataFactory = new DictionaryPaginator( new DictionaryDomain( sessionID ) );
     this.dataFactory.setSortCriteria( formBean.toSortCriteria() );
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader()
+  public List<String> createHeader()
   {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     headers.addElement( "Level" );
     headers.addElement( "EUNIS code" );
     headers.addElement( "ANNEX I code" );
@@ -82,6 +80,7 @@ public class TSVHabitatsAdvanced extends AbstractTSVReport
         return;
       }
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
         List resultSet = dataFactory.getPage( _currPage );
@@ -93,7 +92,7 @@ public class TSVHabitatsAdvanced extends AbstractTSVReport
           if ( habitat.getHabLevel() != null ) level = habitat.getHabLevel().intValue() + "";
           boolean isEUNIS = idHabitat <= 10000;
 
-          Vector row = new Vector();
+          Vector<String> row = new Vector<String>();
           // Level
           row.addElement( level );
           // EUNIS code
@@ -105,6 +104,7 @@ public class TSVHabitatsAdvanced extends AbstractTSVReport
           // Priority
           row.addElement( habitat.getPriority() != null && 1 == habitat.getPriority().shortValue() ? "Yes" : "No" );
           writeRow( row );
+          xmlreport.writeRow( row );
         }
       }
     }

@@ -4,8 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Habitats code' function - Popup for list of values in search page.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page contentType="text/html" %>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.jrfTables.Chm62edtHabitatPersist,
                  ro.finsiel.eunis.jrfTables.habitats.code.CodeDomain,
@@ -15,14 +17,15 @@
                  java.util.List,
                  java.util.Vector" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
   <%
-    WebContentManagement contentManagement = SessionManager.getWebContent();
+    WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
-    <%=contentManagement.getContent("habitats_code-choice_title", false)%>
+    <%=cm.cms("habitats_code-choice_title")%>
   </title>
   <script language="JavaScript" type="text/javascript">
   <!--
@@ -31,12 +34,6 @@
        window.opener.document.eunis.searchString.value=val;
        window.close();
    }
-     function editContent( idPage )
-     {
-       var url = "web-content-inline-editor.jsp?idPage=" + idPage;
-       window.open( url ,'', "width=540,height=500,status=0,scrollbars=0,toolbar=0,resizable=1,location=0");
-     }
-
  // -->
   </script>
 </head>
@@ -64,23 +61,23 @@
 <body>
 <%
   if(results != null && results.size() > 0) {
-    out.print("<strong>Note: Only the first 100 values are listed below.</strong><br /><br />");
+    out.print(cm.cms("only_first_100_values"));
   }
 %>
 <%
   if(results.isEmpty()) {
 %>
 <strong>
-  <%=contentManagement.getContent("habitats_code-choice_01")%>
+  <%=cm.cmsText("habitats_code-choice_01")%>
 </strong>
 <br />
 <%
 } else {
 %>
-<h6>List of values</h6>
+<h2><%=cm.cmsText("list_of_values")%></h2>
 
 <div id="tab">
-<table summary="List of values" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+<table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
   // Search other classification
   if(idClassification != -1) {
@@ -88,13 +85,13 @@
 %>
 <tr>
   <th>
-    <%=contentManagement.getContent("habitats_code-choice_02")%>
+    <%=cm.cmsText("habitats_code-choice_02")%>
   </th>
   <th>
-    <%=contentManagement.getContent("habitats_code-choice_03")%>
+    <%=cm.cmsText("habitats_code-choice_03")%>
   </th>
   <th>
-    Habitat type name
+    <%=cm.cms("habitat_type_name")%>
   </th>
 </tr>
 <%
@@ -103,13 +100,13 @@
 %>
 <tr>
   <th>
-    <%=contentManagement.getContent("habitats_code-choice_04")%>
+    <%=cm.cmsText("habitats_code-choice_04")%>
   </th>
   <th>
-    <%=contentManagement.getContent("habitats_code-choice_05")%>
+    <%=cm.cmsText("habitats_code-choice_05")%>
   </th>
   <th>
-    Habitat type name
+    <%=cm.cms("habitat_type_name")%>
   </th>
 </tr>
 <%
@@ -118,16 +115,16 @@
 %>
 <tr>
   <th>
-    <%=contentManagement.getContent("habitats_code-choice_02")%>
+    <%=cm.cmsText("habitats_code-choice_02")%>
   </th>
   <th>
-    <%=contentManagement.getContent("habitats_code-choice_04")%>
+    <%=cm.cmsText("habitats_code-choice_04")%>
   </th>
   <th>
-    <%=contentManagement.getContent("habitats_code-choice_05")%>
+    <%=cm.cmsText("habitats_code-choice_05")%>
   </th>
   <th>
-    Habitat type name
+    <%=cm.cms("habitat_type_name")%>
   </th>
 </tr>
 <%
@@ -137,10 +134,10 @@
 %>
 <tr>
   <th>
-    <%=contentManagement.getContent("habitats_code-choice_02")%>
+    <%=cm.cmsText("habitats_code-choice_02")%>
   </th>
   <th>
-    Habitat type name
+    <%=cm.cms("habitat_type_name")%>
   </th>
 </tr>
 <%
@@ -149,10 +146,10 @@
 %>
 <tr>
   <th>
-    <%=contentManagement.getContent("habitats_code-choice_04")%>
+    <%=cm.cmsText("habitats_code-choice_04")%>
   </th>
   <th>
-    Habitat type name
+    <%=cm.cms("habitat_type_name")%>
   </th>
 </tr>
 <%
@@ -161,13 +158,13 @@
 %>
 <tr>
   <th>
-    <%=contentManagement.getContent("habitats_code-choice_02")%>
+    <%=cm.cmsText("habitats_code-choice_02")%>
   </th>
   <th>
-    <%=contentManagement.getContent("habitats_code-choice_04")%>
+    <%=cm.cmsText("habitats_code-choice_04")%>
   </th>
   <th>
-    Habitat type name
+    <%=cm.cms("habitat_type_name")%>
   </th>
 </tr>
 <%
@@ -229,7 +226,8 @@
     if(database == CodeDomain.SEARCH_EUNIS.intValue() || database == CodeDomain.SEARCH_ANNEX.intValue()) {
   %>
   <td bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-    <a title="Click link to select the value" href="javascript:setLine('<%=eunisOrAnnexcode%>')"><%=eunisOrAnnexcode%></a>&nbsp;
+    <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=eunisOrAnnexcode%>')"><%=eunisOrAnnexcode%></a>&nbsp;
+    <%=cm.cmsTitle("click_link_to_select_value")%>
   </td>
   <td>
     <%=habitatName%>
@@ -239,10 +237,12 @@
     if(database == CodeDomain.SEARCH_BOTH.intValue()) {
   %>
   <td bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-    <a title="Click link to select the value" href="javascript:setLine('<%=eunisCode%>')"><%=eunisCode%></a>&nbsp;
+    <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=eunisCode%>')"><%=eunisCode%></a>&nbsp;
+    <%=cm.cmsTitle("click_link_to_select_value")%>
   </td>
   <td bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-    <a title="Click link to select the value" href="javascript:setLine('<%=annexCode%>')"><%=annexCode%></a>&nbsp;
+    <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=annexCode%>')"><%=annexCode%></a>&nbsp;
+    <%=cm.cmsTitle("click_link_to_select_value")%>
   </td>
   <td>
     <%=habitatName%>
@@ -259,10 +259,12 @@
     if(database == CodeDomain.SEARCH_EUNIS.intValue() || database == CodeDomain.SEARCH_ANNEX.intValue()) {
   %>
   <td bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-    <a title="Click link to select the value" href="javascript:setLine('<%=eunisOrAnnexcode%>')"><%=eunisOrAnnexcode%></a>&nbsp;
+    <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=eunisOrAnnexcode%>')"><%=eunisOrAnnexcode%></a>&nbsp;
+    <%=cm.cmsTitle("click_link_to_select_value")%>
   </td>
   <td bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-    <a title="Click link to select the value" href="javascript:setLine('<%=code%>')"><%=code%></a>&nbsp;
+    <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=code%>')"><%=code%></a>&nbsp;
+    <%=cm.cmsTitle("click_link_to_select_value")%>
   </td>
   <td>
     <%=habitatName%>
@@ -272,13 +274,16 @@
     if(database == CodeDomain.SEARCH_BOTH.intValue()) {
   %>
   <td bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-    <a title="Click link to select the value" href="javascript:setLine('<%=eunisCode%>')"><%=eunisCode%></a>&nbsp;
+    <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=eunisCode%>')"><%=eunisCode%></a>&nbsp;
+    <%=cm.cmsTitle("click_link_to_select_value")%>
   </td>
-  <td title="Click link to select the value" bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
+  <td title="<%=cm.cms("click_link_to_select_value")%>" bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
     <a href="javascript:setLine('<%=annexCode%>')"><%=annexCode%></a>&nbsp;
+    <%=cm.cmsTitle("click_link_to_select_value")%>
   </td>
-  <td title="Click link to select the value" bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
+  <td title="<%=cm.cms("click_link_to_select_value")%>" bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
     <a href="javascript:setLine('<%=code%>')"><%=code%></a>&nbsp;
+    <%=cm.cmsTitle("click_link_to_select_value")%>
   </td>
   <td>
     <%=habitatName%>
@@ -297,8 +302,16 @@
 %>
 <br />
 <form action="">
-  <label for="button" class="noshow">Close window</label>
-  <input title="Close window" type="button" name="button" id="button" value="<%=contentManagement.getContent("habitats_code-choice_06",false)%>" onclick="javascript:window.close()" class="inputTextField" />
+  <label for="button" class="noshow"><%=cm.cms("close_window")%></label>
+  <input title="<%=cm.cms("close_window")%>" type="button" name="button" id="button" value="<%=cm.cms("habitats_code-choice_06")%>" onclick="javascript:window.close()" class="inputTextField" />
+  <%=cm.cmsLabel("close_window")%>
+  <%=cm.cmsInput("habitats_code-choice_06")%>
 </form>
+<%=cm.cmsMsg("habitats_code-choice_title")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("only_first_100_values")%>
+<%=cm.br()%>
+<%=cm.cmsTitle("list_of_values")%>
+<%=cm.br()%>
 </body>
 </html>

@@ -11,7 +11,7 @@ import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.sites.year.YearDomain;
 import ro.finsiel.eunis.jrfTables.sites.year.YearPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.search.sites.year.YearBean;
@@ -22,15 +22,18 @@ import java.util.List;
 import java.util.Vector;
 
 
+/**
+ * XML and PDF report.
+ */
 public class TSVYearReport extends AbstractTSVReport
 {
   /**
-   * Form bean used for search
+   * Form bean used for search.
    */
   private YearBean formBean = null;
 
   /**
-   * Normal constructor
+   * Constructor.
    *
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
@@ -40,6 +43,7 @@ public class TSVYearReport extends AbstractTSVReport
     super( "YearReport_" + sessionID + ".tsv" );
     this.formBean = ( YearBean ) formBean;
     this.filename = "YearReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "YearReport_" + sessionID + ".xml" );
     // Init the data factory
     if ( null != formBean )
     {
@@ -64,17 +68,17 @@ public class TSVYearReport extends AbstractTSVReport
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader()
+  public List<String> createHeader()
   {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     // Source database
     headers.addElement( "Source data set" );
     // Country
@@ -94,7 +98,7 @@ public class TSVYearReport extends AbstractTSVReport
   }
 
   /**
-   * Use this method to write specific data into the file. Implemented in inherited classes
+   * Use this method to write specific data into the file. Implemented in inherited classes.
    */
   public void writeData()
   {
@@ -112,6 +116,7 @@ public class TSVYearReport extends AbstractTSVReport
         return;
       }
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
         List resultSet = dataFactory.getPage( _currPage );
@@ -123,7 +128,7 @@ public class TSVYearReport extends AbstractTSVReport
           {
             designations = SitesSearchUtility.siteDesignationsAsCommaSeparatedString( site.getIdDesignation(), site.getIdGeoscope().toString() );
           }
-          Vector aRow = new Vector();
+          Vector<String> aRow = new Vector<String>();
           // Source database
           aRow.addElement( SitesSearchUtility.translateSourceDB( site.getSourceDB() ) );
           // Country
@@ -140,6 +145,7 @@ public class TSVYearReport extends AbstractTSVReport
           // Year
           aRow.addElement( SitesSearchUtility.parseDesignationYear( site.getDesignationDate(), site.getSourceDB() ) );
           writeRow( aRow );
+          xmlreport.writeRow( aRow );
         }
       }
     }

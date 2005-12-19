@@ -4,8 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Pick habitats, show references' function - results page.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page contentType="text/html" %>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.jrfTables.habitats.references.HabitatsBooksDomain,
                  ro.finsiel.eunis.jrfTables.habitats.references.HabitatsBooksPersist,
@@ -21,6 +23,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Vector" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
@@ -29,11 +32,11 @@
     <jsp:setProperty name="formBean" property="*" />
   </jsp:useBean>
   <%
-    WebContentManagement contentManagement = SessionManager.getWebContent();
+    WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=contentManagement.getContent("habitats_books-result_title", false)%>
+    <%=cm.cms("habitats_books-result_title")%>
   </title>
   <%
     // Prepare the search in results (fix)
@@ -67,21 +70,23 @@
     reportFields.addElement("criteriaSearch");
     reportFields.addElement("oper");
     reportFields.addElement("criteriaType");
-    String tsvLink = "javascript:openlink('reports/habitats/tsv-habitats-books.jsp?" + formBean.toURLParam(reportFields) + "')";
+    String tsvLink = "javascript:openTSVDownload('reports/habitats/tsv-habitats-books.jsp?" + formBean.toURLParam(reportFields) + "')";
 %>
 </head>
 
 <body>
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="Home#index.jsp,Habitat types#habitats.jsp,References#habitats-books.jsp,Results" />
+  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitats_references_location#habitats-books.jsp,results_location" />
   <jsp:param name="helpLink" value="habitats-help.jsp" />
   <jsp:param name="downloadLink" value="<%=tsvLink%>" />
 </jsp:include>
 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td>
-<h5><%=contentManagement.getContent("habitats_books-result_01")%></h5>
+<h1><%=cm.cmsText("habitats_books-result_01")%></h1>
 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
   <%
     // Set search description
@@ -89,8 +94,8 @@
   %>
   <tr>
     <td>
-      <%=contentManagement.getContent("habitats_books-result_02")%>
-      <strong><%=Utilities.getSourceHabitat(database, HabitatsBooksDomain.SEARCH_ANNEX_I.intValue(), HabitatsBooksDomain.SEARCH_BOTH.intValue())%> <%=contentManagement.getContent("habitats_books-result_03")%> <%=descr%></strong>
+      <%=cm.cmsText("habitats_books-result_02")%>
+      <strong><%=Utilities.getSourceHabitat(database, HabitatsBooksDomain.SEARCH_ANNEX_I.intValue(), HabitatsBooksDomain.SEARCH_BOTH.intValue())%> <%=cm.cmsText("habitats_books-result_03")%> <%=descr%></strong>
     </td>
   </tr>
 </table>
@@ -110,7 +115,7 @@
                return;
            }
        %>
-<%=contentManagement.getContent("habitats_books-result_04")%>:&nbsp;<strong><%=resultsCount%></strong>
+<%=cm.cmsText("habitats_books-result_04")%>:&nbsp;<strong><%=resultsCount%></strong>
 <%
   // Prepare parameters for pagesize.jsp
   Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
@@ -137,7 +142,7 @@
   <tr>
     <td bgcolor="#EEEEEE">
       <strong>
-        <%=contentManagement.getContent("habitats_books-result_05")%>
+        <%=cm.cmsText("habitats_books-result_05")%>
       </strong>
     </td>
   </tr>
@@ -145,26 +150,37 @@
     <td bgcolor="#EEEEEE">
       <form name="refineSearch" method="get" onsubmit="return(validateRefineForm(<%=noCriteria%>));" action="">
         <%=formBean.toFORMParam(filterSearch)%>
-        <label for="criteriaType" class="noshow">Criteria</label>
-        <select title="Criteria" name="criteriaType" id="criteriaType" class="inputTextField">
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_AUTHOR%>"><%=contentManagement.getContent("habitats_books-result_06", false)%></option>
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_DATE%>"><%=contentManagement.getContent("habitats_books-result_07", false)%></option>
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_TITLE%>" selected="selected"><%=contentManagement.getContent("habitats_books-result_08", false)%></option>
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_EDITOR%>"><%=contentManagement.getContent("habitats_books-result_09", false)%></option>
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_PUBLISHER%>"><%=contentManagement.getContent("habitats_books-result_10", false)%></option>
+        <label for="criteriaType" class="noshow"><%=cm.cms("Criteria")%></label>
+        <select title="<%=cm.cms("Criteria")%>" name="criteriaType" id="criteriaType" class="inputTextField">
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_AUTHOR%>"><%=cm.cms("habitats_books-result_06")%></option>
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_DATE%>"><%=cm.cms("habitats_books-result_07")%></option>
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_TITLE%>" selected="selected"><%=cm.cms("habitats_books-result_08")%></option>
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_EDITOR%>"><%=cm.cms("habitats_books-result_09")%></option>
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_PUBLISHER%>"><%=cm.cms("habitats_books-result_10")%></option>
         </select>
-        <label for="oper" class="noshow">Operator</label>
-        <select title="Operator" name="oper" id="oper" class="inputTextField">
-          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=contentManagement.getContent("habitats_books-result_11", false)%></option>
-          <option value="<%=Utilities.OPERATOR_STARTS%>"><%=contentManagement.getContent("habitats_books-result_12", false)%></option>
-          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=contentManagement.getContent("habitats_books-result_13", false)%></option>
+        <%=cm.cmsLabel("criteria")%>
+        <%=cm.cmsInput("habitats_books-result_06")%>
+        <%=cm.cmsInput("habitats_books-result_07")%>
+        <%=cm.cmsInput("habitats_books-result_08")%>
+        <%=cm.cmsInput("habitats_books-result_09")%>
+        <%=cm.cmsInput("habitats_books-result_10")%>
+        <label for="oper" class="noshow"><%=cm.cms("operator")%></label>
+        <select title="<%=cm.cms("operator")%>" name="oper" id="oper" class="inputTextField">
+          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("habitats_books-result_11")%></option>
+          <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("habitats_books-result_12")%></option>
+          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("habitats_books-result_13")%></option>
         </select>
-
-        <label for="criteriaSearch" class="noshow">Search value</label>
-        <input title="Search value" type="text" name="criteriaSearch" id="criteriaSearch" size="30" class="inputTextField" />
-        <label for="Submit" class="noshow">Search</label>
-        <input title="Search" type="submit" name="Submit" id="Submit" value="<%=contentManagement.getContent("habitats_books-result_14", false)%>" class="inputTextField" />
-        <%=contentManagement.writeEditTag("habitats_books-result_14")%>
+        <%=cm.cmsLabel("operator")%>
+        <%=cm.cmsInput("habitats_books-result_11")%>
+        <%=cm.cmsInput("habitats_books-result_12")%>
+        <%=cm.cmsInput("habitats_books-result_13")%>
+        <label for="criteriaSearch" class="noshow"><%=cm.cms("search_value")%></label>
+        <input title="<%=cm.cms("search_value")%>" type="text" name="criteriaSearch" id="criteriaSearch" size="30" class="inputTextField" />
+        <%=cm.cmsTitle("search_value")%>
+        <label for="Submit" class="noshow"><%=cm.cms("search")%></label>
+        <input title="<%=cm.cms("search")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("habitats_books-result_14")%>" class="inputTextField" />
+        <%=cm.cmsTitle("search")%>
+        <%=cm.cmsInput("habitats_books-result_14")%>
       </form>
     </td>
   </tr>
@@ -175,7 +191,7 @@
   %>
   <tr>
     <td bgcolor="#EEEEEE">
-      <%=contentManagement.getContent("habitats_books-result_15")%>:
+      <%=cm.cmsText("habitats_books-result_15")%>:
     </td>
   </tr>
   <%
@@ -185,11 +201,11 @@
       if (null != criteria && null != formBean.getCriteriaSearch()) {
   %>
   <tr>
-    <td bgcolor="#CCCCCC" align="left">
-      <a href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>">
-        <img src="images/mini/delete.jpg" alt="Delete" border="0" align="middle" />
+    <td bgcolor="#CCCCCC">
+      <a <%=cm.cms("delete_filter")%> href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>">
+        <img src="images/mini/delete.jpg" alt="<%=cm.cms("delete_filter")%>" border="0" align="middle" />
       </a>
-      &nbsp;&nbsp;
+      <%=cm.cmsTitle("delete_filter")%>&nbsp;&nbsp;
       <strong class="linkDarkBg"><%= i + ". " + criteria.toHumanString()%></strong>
     </td>
   </tr>
@@ -219,7 +235,7 @@
 </tr>
 <tr>
 <td>
-<table summary="Search results" border="1" cellpadding="0" cellspacing="0" align="center" width="100%" style="border-collapse: collapse">
+<table summary="<%=cm.cms("search_results")%>" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse">
 <%// Compute the sort criteria
   Vector sortURLFields = new Vector();      /* Used for sorting */
   sortURLFields.addElement("pageSize");
@@ -235,69 +251,74 @@
   String search = formBean.toURLParam(speciesURLFields);
 %>
 <tr>
-  <th class="resultHeader" width="16%" align="left">
-    <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortAuthor)%><%=contentManagement.getContent("habitats_books-result_06")%>
+  <th class="resultHeader" width="16%">
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor) ? true : false)%>">
+      <%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsText("habitats_books-result_06")%>
     </a>
+    <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
-  <th class="resultHeader" width="7%" align="center">
-    <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortDate)%><%=contentManagement.getContent("habitats_books-result_07")%>
+  <th class="resultHeader" width="7%" style="text-align : center;">
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate) ? true : false)%>">
+      <%=Utilities.getSortImageTag(sortDate)%><%=cm.cmsText("habitats_books-result_07")%>
     </a>
+    <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
-  <th class="resultHeader" width="19%" align="left">
+  <th title="<%=cm.cms("sort_results_on_this_column")%>" class="resultHeader" width="19%">
     <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle))%>">
-      <%=Utilities.getSortImageTag(sortTitle)%><%=contentManagement.getContent("habitats_books-result_08")%>
+      <%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsText("habitats_books-result_08")%>
     </a>
+    <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
-  <th class="resultHeader" width="19%" align="left">
-    <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortEditor)%><%=contentManagement.getContent("habitats_books-result_09")%>
+  <th class="resultHeader" width="19%">
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor) ? true : false)%>">
+      <%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsText("habitats_books-result_09")%>
     </a>
+    <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
-  <th class="resultHeader" width="20%" align="left">
-    <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortPublisher)%><%=contentManagement.getContent("habitats_books-result_10")%>
+  <th class="resultHeader" width="20%">
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher) ? true : false)%>">
+      <%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsText("habitats_books-result_10")%>
     </a>
+    <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
-  <th class="resultHeader" width="15%" align="center">
-    <%=contentManagement.getContent("habitats_books-result_16")%>
+  <th class="resultHeader" width="15%" style="text-align : center;">
+    <%=cm.cmsText("habitats_books-result_16")%>
   </th>
-  <th class="resultHeader" width="20%" align="center">
-    <%=contentManagement.getContent("habitats_books-result_17")%>
+  <th class="resultHeader" width="20%" style="text-align : center;">
+    <%=cm.cmsText("habitats_books-result_17")%>
   </th>
 </tr>
 <%
   // Display results
-  if (null != results) {
+  if (null != results)
+  {
+    int col = 0;
     Iterator it = results.iterator();
-    while (it.hasNext()) {
+    while (it.hasNext())
+    {
+      String bgColor = col++ % 2 == 0 ? "#EEEEEE" : "#FFFFFF";
       HabitatsBooksPersist book = (HabitatsBooksPersist) it.next();
 %>
 <tr>
-  <td align="left">
+  <td class="resultCell" style="background-color : <%=bgColor%>">
     &nbsp;<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(book.getsource()))%>
   </td>
-  <td align="center">
+  <td class="resultCell" style="background-color : <%=bgColor%>; text-align : center;">
     &nbsp;<%=Utilities.formatReferencesDate(book.getcreated())%>
   </td>
-  <td align="left">
+  <td class="resultCell" style="background-color : <%=bgColor%>">
     &nbsp;<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(book.gettitle()))%>
   </td>
-  <td align="left" style="white-space:nowrap">
+  <td class="resultCell" style="background-color : <%=bgColor%>; white-space : nowrap">
     &nbsp;<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(book.geteditor()))%>
   </td>
-  <td align="left">
+  <td class="resultCell" style="background-color : <%=bgColor%>">
     &nbsp;<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(book.getpublisher()))%>
   </td>
-  <%--                <%--%>
-  <%--                    String d = search + "&amp;id=" + book.getidDC()+"&amp;database="+formBean.getDatabase();--%>
-  <%--                %>--%>
-  <td align="center">
+  <td class="resultCell" style="background-color : <%=bgColor%>; text-align : center;">
     &nbsp;<%=Utilities.returnSourceValueReferences(book.getHaveSource())%>
   </td>
-  <td align="center">
-    <%--                  <a href="javascript:openlink('habitats-books-detail.jsp?<%=d%>')"><img src="images/group/10.gif" border="0"></a>--%>
+  <td class="resultCell" style="background-color : <%=bgColor%>; text-align : center;">
     <%
       // Request parameter
       HabitatsBooksDomain habitatsBooks = new HabitatsBooksDomain(formBean.toSearchCriteria(), database);
@@ -307,16 +328,17 @@
 
       if (resultsHabitats != null && resultsHabitats.size() > 0) {
     %>
-    <table summary="Habitat types" border="1" cellspacing="1" cellpadding="1" style="border-collapse: collapse">
+    <table summary="<%=cm.cms("habitat_types")%>" border="1" cellspacing="1" cellpadding="1" style="border-collapse: collapse">
       <%
         for (int ii = 0; ii < resultsHabitats.size(); ii++) {
           TableColumns tableColumns = (TableColumns) resultsHabitats.get(ii);
           String scientificName = (String) tableColumns.getColumnsValues().get(0);
           String idHabitat = (String) tableColumns.getColumnsValues().get(1);
       %>
-      <tr bgcolor="#FFFFFF">
+      <tr>
         <td>
-          <a title="Open habitat type factsheet" href="habitats-factsheet.jsp?idHabitat=<%=idHabitat%>"><%=scientificName%></a>
+          <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=idHabitat%>"><%=scientificName%></a>
+          <%=cm.cmsTitle("open_habitat_factsheet")%>
         </td>
       </tr>
       <%
@@ -333,36 +355,41 @@
   }
 %>
 <tr>
-  <th class="resultHeader" width="16%" align="left">
-    <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortAuthor)%><%=contentManagement.getContent("habitats_books-result_06")%>
+  <th class="resultHeader" width="16%">
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor) ? true : false)%>">
+      <%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsText("habitats_books-result_06")%>
     </a>
+    <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
-  <th class="resultHeader" width="7%" align="center">
-    <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortDate)%><%=contentManagement.getContent("habitats_books-result_07")%>
+  <th class="resultHeader" width="7%" style="text-align : center;">
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate) ? true : false)%>">
+      <%=Utilities.getSortImageTag(sortDate)%><%=cm.cmsText("habitats_books-result_07")%>
     </a>
+    <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
-  <th class="resultHeader" width="19%" align="left">
-    <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle))%>">
-      <%=Utilities.getSortImageTag(sortTitle)%><%=contentManagement.getContent("habitats_books-result_08")%>
+  <th class="resultHeader" width="19%">
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle))%>">
+      <%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsText("habitats_books-result_08")%>
     </a>
+    <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
-  <th class="resultHeader" width="19%" align="left">
-    <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortEditor)%><%=contentManagement.getContent("habitats_books-result_09")%>
+  <th class="resultHeader" width="19%">
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor) ? true : false)%>">
+      <%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsText("habitats_books-result_09")%>
     </a>
+    <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
-  <th class="resultHeader" width="20%" align="left">
-    <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortPublisher)%><%=contentManagement.getContent("habitats_books-result_10")%>
+  <th class="resultHeader" width="20%">
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher) ? true : false)%>">
+      <%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsText("habitats_books-result_10")%>
     </a>
+    <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
-  <th class="resultHeader" width="15%" align="center">
-    <%=contentManagement.getContent("habitats_books-result_16")%>
+  <th class="resultHeader" width="15%" style="text-align : center;">
+    <%=cm.cmsText("habitats_books-result_16")%>
   </th>
-  <th class="resultHeader" width="20%" align="center">
-    <%=contentManagement.getContent("habitats_books-result_17")%>
+  <th class="resultHeader" width="20%" style="text-align : center;">
+    <%=cm.cmsText("habitats_books-result_17")%>
   </th>
 </tr>
 </table>
@@ -378,9 +405,17 @@
 </td>
 </tr>
 </table>
+<%=cm.cmsMsg("habitats_books-result_title")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("search_results")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("habitat_types")%>
+<%=cm.br()%>
 <jsp:include page="footer.jsp">
   <jsp:param name="page_name" value="habitats-books-result.jsp" />
 </jsp:include>
+  </div>
+  </div>
   </div>
 </body>
 </html>

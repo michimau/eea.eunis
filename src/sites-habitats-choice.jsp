@@ -4,7 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : "Pick habitat types, show sites" function - Popup for list of values in search page.
 --%>
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@page import="java.util.List,
                 ro.finsiel.eunis.search.Utilities,
                 ro.finsiel.eunis.jrfTables.sites.habitats.HabitatDomain,
@@ -16,7 +19,7 @@
 </jsp:useBean>
 <%
   // Web content manager used in this page.
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
   Integer database = Utilities.checkedStringToInt(formBean.getDatabase(), HabitatDomain.SEARCH_EUNIS);
   Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), HabitatSearchCriteria.SEARCH_NAME);
@@ -44,18 +47,13 @@
   <head>
     <jsp:include page="header-page.jsp" />
     <title>
-      <%=contentManagement.getContent("sites_habitats-choice_title", false )%>
+      <%=cm.cms("sites_habitats-choice_title")%>
     </title>
     <script language="JavaScript" type="text/javascript">
       <!--
       function setLine(val) {
         window.opener.document.eunis.searchString.value = val;
         window.close();
-      }
-       function editContent( idPage )
-      {
-        var url = "web-content-inline-editor.jsp?idPage=" + idPage;
-        window.open( url ,'', "width=540,height=500,status=0,scrollbars=0,toolbar=0,resizable=1,location=0");
       }
       // -->
     </script>
@@ -64,10 +62,12 @@
 <%
   if ( results != null && !results.isEmpty())
   {
-    out.print( Utilities.getTextMaxLimitForPopup( contentManagement,( results.size() ) ) );
+    out.print( Utilities.getTextMaxLimitForPopup( cm,( results.size() ) ) );
     HabitatSearchCriteria habitatSearch = new HabitatSearchCriteria(searchAttribute,formBean.getSearchString(),relationOp);
 %>
-    <h6>List of values for:</h6>
+    <h2>
+      <%=cm.cmsText("list_of_values_for")%>:
+    </h2>
     <u>
       <%=habitatSearch.getHumanMappings().get(searchAttribute)%>
     </u>
@@ -87,7 +87,7 @@
     <br />
     <br />
     <div id="tab">
-      <table summary="List of values" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+      <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
     for (int i = 0; i < results.size(); i++)
     {
@@ -95,7 +95,8 @@
 %>
         <tr>
           <td bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-            <a title="Click link to select the value" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(value)%>');"><%=value%></a>
+            <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(value)%>');"><%=value%></a>
+            <%=cm.cmsTitle("click_link_to_select_value")%>
           </td>
         </tr>
 <%
@@ -109,14 +110,21 @@
   {
 %>
       <strong>
-        <%=contentManagement.getContent("sites_habitats-choice_01")%>
+        <%=cm.cmsText("sites_habitats-choice_01")%>
       </strong>
 <%
       }
 %>
     <br />
     <form action="">
-      <input title="Close window" type="button" value="Close" onclick="javascript:window.close()" name="button" class="inputTextField" />
+      <label for="button2" class="noshow"><%=cm.cms("close_window_label")%></label>
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
+      <%=cm.cmsLabel("close_window_label")%>
+      <%=cm.cmsTitle("close_window_title")%>
+      <%=cm.cmsInput("close_window_value")%>
     </form>
+    <%=cm.cmsMsg("sites_habitats-choice_title")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("list_of_values")%>
   </body>
 </html>

@@ -174,7 +174,7 @@ public class NamesDomain extends AbstractDomain implements Paginable {
       filterSQL.append(" A.ID_HABITAT<>'-1' AND A.ID_HABITAT <> '10000' AND ");
 
 
-    int i = 0;
+    int i;
     for (i = 0; i < searchCriteriaExtra.length; i++) {
       if (i > 0) filterSQL.append(" AND ");
       NameSearchCriteria aCriteria = (NameSearchCriteria) searchCriteriaExtra[i];
@@ -189,9 +189,8 @@ public class NamesDomain extends AbstractDomain implements Paginable {
       NameSearchCriteria aCriteria = (NameSearchCriteria) searchCriteria[i];
       filterSQL.append(aCriteria.toSQL());
     }
-    i = 0;
     filterSQL.append(" AND IF(TRIM(A.CODE_2000) <> '',RIGHT(A.CODE_2000,2),1) <> IF(TRIM(A.CODE_2000) <> '','00',2) AND IF(TRIM(A.CODE_2000) <> '',LENGTH(A.CODE_2000),1) = IF(TRIM(A.CODE_2000) <> '',4,1) ");
-    filterSQL.append(" GROUP BY A.SCIENTIFIC_NAME ");
+    filterSQL.append(" GROUP BY A.ID_HABITAT ");
     return filterSQL;
   }
 
@@ -222,8 +221,7 @@ public class NamesDomain extends AbstractDomain implements Paginable {
       }
     } catch (InitializationException e) {
       e.printStackTrace();  //To change body of catch statement use Options | File Templates.
-    } finally {
-      return filterSQL;
     }
+    return filterSQL;
   }
 }

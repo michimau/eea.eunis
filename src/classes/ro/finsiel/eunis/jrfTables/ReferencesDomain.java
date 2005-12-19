@@ -1,21 +1,22 @@
 package ro.finsiel.eunis.jrfTables;
 
-import ro.finsiel.eunis.search.Paginable;
-import ro.finsiel.eunis.search.AbstractSearchCriteria;
-import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.Utilities;
-import ro.finsiel.eunis.search.ReferencesWrapper;
-import ro.finsiel.eunis.formBeans.ReferencesSearchCriteria;
-import ro.finsiel.eunis.formBeans.ReferencesSortCriteria;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
+import ro.finsiel.eunis.formBeans.ReferencesSearchCriteria;
+import ro.finsiel.eunis.formBeans.ReferencesSortCriteria;
+import ro.finsiel.eunis.search.AbstractSearchCriteria;
+import ro.finsiel.eunis.search.AbstractSortCriteria;
+import ro.finsiel.eunis.search.Paginable;
+import ro.finsiel.eunis.search.ReferencesWrapper;
 
-import java.util.Vector;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
-import java.sql.*;
+import java.util.Vector;
 
 /**
- * JRF table for EUNIS_FEEDBACK.
  * @author finsiel
  **/
 public class ReferencesDomain implements Paginable {

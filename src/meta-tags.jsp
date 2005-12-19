@@ -4,8 +4,13 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : EUNIS meta tags
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <meta name="area" content="Science, Biological Diversity, Biodiversity, Species, Habitat types, Sites" />
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<!--<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />-->
 
 <meta name="description" content="European nature information system web site, EUNIS database, Biological Diversity, European Environment, Species, Habitat types, Sites, Designations" />
 <meta name="keywords" content="European, Nature, Information, EUNIS, Database, Biological, Diversity, Environment, Species, Habitat types, Sites, Designations" />
@@ -20,7 +25,7 @@
 <meta name="DC.Creator.CorporateName" content="EEA - European Environment Agency" />
 <link rel="SCHEMA.dc" href="http://purl.org/metadata/dublin_core_elements#creator" />
 
-<meta name="DC.Creator.CorporateName.Address" content="eunis@finsiel.ro" />
+<meta name="DC.Creator.CorporateName.Address" content="eunis@eea.eu.int" />
 <link rel="SCHEMA.dc" href="http://purl.org/metadata/dublin_core_elements#creator" />
 
 <meta name="DC.Subject" content="Biological Diversity" />

@@ -8,16 +8,23 @@
     -- if hide parameter is equal to "true", a page containing more details on EUNIS web status is displayed
   If the database connection does not work, error 500 is thrown by Tomcat
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.sql.Connection,
                  java.sql.PreparedStatement,
                  java.sql.DriverManager,
                  java.sql.ResultSet"%>
-<%@page contentType="text/html"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
-<title>EUNIS Database Status page check</title>
+<%
+    WebContentManagement cm = SessionManager.getWebContent();
+%>
+<title><%=cm.cms("systemcheck_01")%></title>
 </head>
 <body>
 
@@ -56,11 +63,11 @@
   {
   // If full details are show on page
   %>
-  <h6>Eunis status</h6>
+  <h2><%=cm.cmsText("systemcheck_02")%></h2>
   <table border="1" style="Font-family:Arial;Font-size:12px" summary="Eunis status">
   <tr>
    <td>
-    Tomcat status:
+    <%=cm.cmsText("systemcheck_03")%>:
    </td>
    <td>
     OK
@@ -68,7 +75,7 @@
   </tr>
   <tr>
    <td>
-    MySQL status:
+    <%=cm.cmsText("systemcheck_04")%>:
    </td>
    <td>
     OK
@@ -85,5 +92,9 @@
 <%
   }
 %>
+<%=cm.br()%>
+<%=cm.cmsMsg("systemcheck_01")%>
+<%=cm.br()%>
+
 </body>
 </html>

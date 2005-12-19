@@ -11,7 +11,7 @@ import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.species.habitats.ScientificNameDomain;
 import ro.finsiel.eunis.jrfTables.species.habitats.ScientificNamePersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.habitats.HabitateBean;
 import ro.finsiel.eunis.search.species.habitats.HabitatePaginator;
@@ -21,26 +21,29 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
-
+/**
+ * TSV and XML report generation.
+ */
 public class TSVSpeciesHabitatsReport extends AbstractTSVReport
 {
   /**
-   * Form bean used for search
+   * Form bean used for search.
    */
   private HabitateBean formBean = null;
   private boolean showInvalidatedSpecies = false;
 
   /**
-   * Normal constructor
-   *
+   * Constructor.
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
+   * @param showInvalidatedSpecies Show invalidated species
    */
   public TSVSpeciesHabitatsReport( String sessionID, AbstractFormBean formBean, boolean showInvalidatedSpecies )
   {
     super( "SpeciesHabitatsReport_" + sessionID + ".tsv" );
     this.formBean = ( HabitateBean ) formBean;
     this.filename = "SpeciesHabitatsReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "SpeciesHabitatsReport_" + sessionID + ".xml" );
     this.showInvalidatedSpecies = showInvalidatedSpecies;
     if ( null != formBean )
     {
@@ -57,17 +60,16 @@ public class TSVSpeciesHabitatsReport extends AbstractTSVReport
   }
 
   /**
-   * Create the table headers
-   *
+   * Create the table headers.
    * @return An array with the columns headers of the table
    */
-  public List createHeader()
+  public List<String> createHeader()
   {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     // Group
     headers.addElement( "Group" );
     // Order
@@ -104,6 +106,7 @@ public class TSVSpeciesHabitatsReport extends AbstractTSVReport
       Integer relationOp = Utilities.checkedStringToInt( formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS );
       Integer database = Utilities.checkedStringToInt( formBean.getDatabase(), HabitateSearchCriteria.SEARCH_NAME );
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
         List resultSet = dataFactory.getPage( _currPage );
@@ -111,7 +114,8 @@ public class TSVSpeciesHabitatsReport extends AbstractTSVReport
         {
           ScientificNamePersist specie = ( ScientificNamePersist ) resultSet.get( i );
 
-          Vector aRow = new Vector();
+          Vector<String> aRow = new Vector<String>();
+          Vector<String> xmlRow = new Vector<String>();
           String cellGroup;
           String cellOrder;
           String cellFamily;
@@ -128,11 +132,12 @@ public class TSVSpeciesHabitatsReport extends AbstractTSVReport
               searchAttribute,
               idNatureObject,
               showInvalidatedSpecies );
+          String habitats = "";
           if ( resultsHabitats.size() > 0 )
           {
             for ( int j = 0; j < resultsHabitats.size(); j++ )
             {
-              aRow = new Vector();
+              aRow = new Vector<String>();
               String habitatName = Utilities.treatURLSpecialCharacters( ( String ) resultsHabitats.get( j ) );
               if ( j == 0 )
               {
@@ -166,6 +171,7 @@ public class TSVSpeciesHabitatsReport extends AbstractTSVReport
                 aRow.addElement( habitatName );
                 writeRow( aRow );
               }
+              habitats += "<habitat>" + habitatName + "</habitat>";
             }
           }
           else
@@ -187,6 +193,12 @@ public class TSVSpeciesHabitatsReport extends AbstractTSVReport
             aRow.addElement( "-" );
             writeRow( aRow );
           }
+          xmlRow.add( specie.getCommonName() );
+          xmlRow.add( Utilities.formatString( specie.getTaxonomicNameOrder() ) );
+          xmlRow.add( specie.getTaxonomicNameFamily() );
+          xmlRow.add( specie.getScientificName() );
+          xmlRow.add( habitats );
+          xmlreport.writeRow( xmlRow );
         }
       }
     }

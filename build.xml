@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- ANT script for the EUNIS project -->
-<!-- (c) 2002 Finsiel Romania. All rights reserved. -->
+<!-- (c) 2002 - 2005 EEA - European Environment Agency. All rights reserved. -->
 <!--- Date: 7-07-2002 -->
 
 <project name="eunis" basedir="." default="deploy">
@@ -47,7 +47,6 @@
     <mkdir dir="${deployDir}/images/species"/>
     <mkdir dir="${deployDir}/images/habitats"/>
     <mkdir dir="${deployDir}/images/sites"/>
-    <mkdir dir="${deployDir}/style"/>
     <mkdir dir="${deployDir}/gis"/>
     <mkdir dir="${deployDir}/tutorials"/>
 
@@ -193,7 +192,9 @@
     </copy>
     <!-- Copy tutorial files -->
     <copy todir="${deployDir}/tutorials">
-      <fileset dir="${srcDir}/tutorials"/>
+      <fileset dir="${srcDir}/tutorials">
+        <include name="**/*.swf"/>
+      </fileset>
     </copy>
     <!-- Copy necessary jars -->
     <copy todir="${deployDir}/WEB-INF/lib">
@@ -201,9 +202,6 @@
         <include name="**/*.jar"/>
         <exclude name="servlet.jar"/>
       </fileset>
-    </copy>
-    <copy todir="${deployDir}/style">
-      <fileset dir="${srcDir}/style"/>
     </copy>
     <copy todir="${deployDir}/gis">
       <fileset dir="${srcDir}/gis"/>
@@ -256,8 +254,8 @@
   </target>
 
   <target name="javadoc" description="JavaDoc task. This will create the JavaDoc documentation for the classes in ro.finsiel.eunis.*">
-    <mkdir dir="doc"/>
-    <mkdir dir="doc/api"/>
+    <mkdir dir="docs"/>
+    <mkdir dir="docs/api"/>
     <path id="app_classpath">
       <fileset dir="${3rdpartyDir}">
         <include name="**/*.jar"/>
@@ -269,8 +267,8 @@
     </path>
     <javadoc sourcepath="src/classes" packagenames="ro.finsiel.eunis.*" destdir="doc/api" author="true" version="true"
       windowtitle="EUNIS Database application" use="true" classpathref="app_classpath">
-      <doctitle><![CDATA[<h1>Test</h1>]]></doctitle>
-      <bottom><![CDATA[<i>Copyright &#169; Finsiel Romania. All Rights Reserved.</i>]]></bottom>
+      <doctitle><![CDATA[<h1>Documentation</h1>]]></doctitle>
+      <bottom><![CDATA[<i>Copyright &#169; EEA - European Environment Agency. All Rights Reserved.</i>]]></bottom>
       <tag name="todo" scope="all" description="To do:" />
       <link href="http://developer.java.sun.com/developer/products/xml/docs/api/"/>
     </javadoc>
@@ -294,7 +292,6 @@
     <delete dir="${deployDir}/reports" verbose="false" failonerror="false" includeemptydirs="true" />
     <delete dir="${deployDir}/script" verbose="false" failonerror="false" includeemptydirs="true" />
     <delete dir="${deployDir}/sql" verbose="false" failonerror="false" includeemptydirs="true" />
-    <delete dir="${deployDir}/style" verbose="false" failonerror="false" includeemptydirs="true" />
     <delete dir="${deployDir}/users" verbose="false" failonerror="false" includeemptydirs="true" />
     <delete dir="${deployDir}/gis" verbose="false" failonerror="false" includeemptydirs="true" />
     <delete dir="${deployDir}/WEB-INF" verbose="false" failonerror="false" includeemptydirs="true" />

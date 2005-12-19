@@ -17,17 +17,6 @@ import ro.finsiel.eunis.search.sites.coordinates.CoordinatesSortCriteria;
 
 import java.util.List;
 
-/**
- SELECT * FROM CHM62EDT_SITES AS A
- INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON A.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT
- INNER JOIN CHM62EDT_COUNTRY AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE
- WHERE A.NAME="%Moor" AND C.AREA_NAME_EN='FRANCE'
- AND LEFT(A.DESIGNATION_DATE,4)>=1997 AND LEFT(A.DESIGNATION_DATE,4)<=2000
- AND ((A.SOURCE_DB = 'Nationally Designated Areas')
- OR (A.SOURCE_DB='International Designated Areas') OR (A.SOURCE_DB = 'EMERALD')
- OR (A.SOURCE_DB='CORINE Biotopes') OR (A.SOURCE_DB='Monitoring Sites'))
-
- */
 public class CoordinatesDomain extends AbstractDomain implements Paginable {
   /** Criterias applied for searching */
   private AbstractSearchCriteria[] searchCriteria = new AbstractSearchCriteria[0]; // 0 length means not criteria set

@@ -424,6 +424,7 @@ public class UsersUtility {
    * @param SQL_URL JDBC urle.
    * @param SQL_USR JDBC user.
    * @param SQL_PWD JDBC password.
+   * @param loginDate Login date.
    * @return true if operation was made with success
    */
   public static boolean editUser(String manager,
@@ -719,8 +720,8 @@ public class UsersUtility {
     if (username == null) return null;
     UserPersist result = null;
     try {
-      List users = new UserDomain().findCustom("SELECT USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,EMAIL," +
-              " FONTSIZE,THEME_INDEX,DATE_FORMAT(login_date,'%d %b %Y %H:%i:%s')" +
+      List users = new UserDomain().findCustom("SELECT USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,LANG,EMAIL," +
+              " THEME_INDEX,DATE_FORMAT(login_date,'%d %b %Y %H:%i:%s')" +
               " FROM EUNIS_USERS" +
               " WHERE USERNAME='" + username + "'");
       if (users != null && users.size() > 0) {
@@ -1203,6 +1204,7 @@ public class UsersUtility {
    * @param SQL_URL JDBC url.
    * @param SQL_USR JDBC user.
    * @param SQL_PWD JDBC password.
+   * @param loginDate Login date.
    * @return true if operation was made with success
    */
   public static boolean addUsers(String username,
@@ -1227,14 +1229,13 @@ public class UsersUtility {
         Class.forName(SQL_DRV);
         con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-        SQL = "INSERT INTO EUNIS_USERS(USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,EMAIL,FONTSIZE,THEME_INDEX,LOGIN_DATE) " +
+        SQL = "INSERT INTO EUNIS_USERS(USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,EMAIL,THEME_INDEX,LOGIN_DATE) " +
               " VALUES(?,'"+EncryptPassword.encrypt(password)+"',?,?,?,?,?,str_to_date(?,'%d %b %Y %H:%i:%s'))";
        ps = con.prepareStatement(SQL);
         ps.setString(1, username);
         ps.setString(2, firstname);
         ps.setString(3, lastname);
         ps.setString(4, mail);
-        ps.setInt(5,UserPersist.TEXT_SIZE_NORMAL.intValue());
         ps.setInt(6, ThemeManager.THEME_SKY_BLUE);
         ps.setString(7, (loginDate == null ? null : loginDate.trim()));
 

@@ -94,6 +94,8 @@ public class SetVectorsForSaveCriteria {
    * @param indice indice
    * @param nameGroup group species name
    * @param nameStatus species conservation status name
+   * @param idCountry Country id
+   * @param nameCountry Name of the country 
    */
   public void SetVectorsForSaveCriteriaSpeciesThreatInternational(String idGroup,
                                                      String idConservation,

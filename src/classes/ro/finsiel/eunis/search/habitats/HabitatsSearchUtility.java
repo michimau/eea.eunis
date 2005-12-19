@@ -80,16 +80,17 @@ public class HabitatsSearchUtility {
     }
     whereSQL.append("GROUP BY A.SCIENTIFIC_NAME ORDER BY A.SCIENTIFIC_NAME");
     whereSQL.append(" LIMIT 0, " + Utilities.MAX_POPUP_RESULTS);
-    List results = new Vector();
-    try {
+    List results;
+    try
+    {
       results = new NamesDomain().findWhere(whereSQL.toString());
-    } catch (Exception ex) {
+    } catch (Exception ex)
+    {
       // Return an empty list if exception occurred
       ex.printStackTrace(System.err);
       results = new Vector();
-    } finally {
-      return results;
     }
+    return results;
   }
 
   /**
@@ -144,9 +145,8 @@ public class HabitatsSearchUtility {
       // Return an empty list if exception occurred
       ex.printStackTrace(System.err);
       results = new Vector();
-    } finally {
-      return results;
     }
+    return results;
   }
 
   /**
@@ -163,9 +163,8 @@ public class HabitatsSearchUtility {
       // Return an empty list if exception occurrs.
       ex.printStackTrace(System.err);
       results = new Vector();
-    } finally {
-      return results;
     }
+    return results;
   }
 
   /**
@@ -182,9 +181,8 @@ public class HabitatsSearchUtility {
       // Return an empty list if exception occurrs
       ex.printStackTrace(System.err);
       results = new Vector();
-    } finally {
-      return results;
     }
+    return results;
   }
 
   /**
@@ -245,10 +243,26 @@ public class HabitatsSearchUtility {
     } catch (Exception ex) {
       ex.printStackTrace(System.err);
       result = new Vector();
-    } finally {
-      if (null == result) result = new Vector();
-      return result;
     }
+    if (null == result) result = new Vector();
+    return result;
+  }
+
+  /**
+   * Find all the clasifications available in database (from CHM62EDT_CLASS_CODE table).
+   * @param id ID_CLASS_CODE
+   * @return An non-null list with all the classif objects (Chm62edtClassCodePersist objects)
+   */
+  public static String getClassificationName(String id) {
+    String result;
+    try {
+      result = ((Chm62edtClassCodePersist)(new Chm62edtClassCodeDomain().findWhere(" ID_CLASS_CODE = '" + id + "'").get(0))).getClassName();
+    } catch (Exception ex) {
+      ex.printStackTrace(System.err);
+      result = "";
+    }
+
+    return result;
   }
 
   /**
@@ -263,7 +277,7 @@ public class HabitatsSearchUtility {
    */
   public static List findDatabaseClassificationsExamples(int idClassification, String codePartSQL, int database) {
     List results = new ArrayList();
-    String sql = "";
+    String sql;
     if (-1 == idClassification) // Current classification
     {
       sql = "SELECT * FROM CHM62EDT_HABITAT WHERE (1 = 1) ";
@@ -350,9 +364,8 @@ public class HabitatsSearchUtility {
     } catch (Exception ex) {
       ex.printStackTrace(System.err);
       result = -1;
-    } finally {
-      return result;
     }
+    return result;
   }
 
   /**
@@ -373,9 +386,8 @@ public class HabitatsSearchUtility {
     } catch (Exception ex) {
       ex.printStackTrace(System.err);
       ret = "n/a";
-    } finally {
-      return ret;
     }
+    return ret;
   }
 
   /**
@@ -390,7 +402,7 @@ public class HabitatsSearchUtility {
     Iterator it = list.iterator();
     while (it.hasNext()) {
       Chm62edtHabitatClassCodePersist aHabitat = (Chm62edtHabitatClassCodePersist) it.next();
-      String relationType = (null == aHabitat.getRelationType() || "" == aHabitat.getRelationType()) ? "not specified" : aHabitat.getRelationType();
+      String relationType = (null == aHabitat.getRelationType() || aHabitat.getRelationType().equalsIgnoreCase("")) ? "not specified" : aHabitat.getRelationType();
       List l1 = new Chm62edtClassCodeDomain().findWhere("ID_CLASS_CODE = " + aHabitat.getIdClassCode());
       if (l1.size() > 0) {
         Chm62edtClassCodePersist cd = (Chm62edtClassCodePersist) l1.get(0);
@@ -421,15 +433,19 @@ public class HabitatsSearchUtility {
     Iterator it = list.iterator();
     while (it.hasNext()) {
       Chm62edtHabitatClassCodePersist aHabitat = (Chm62edtHabitatClassCodePersist) it.next();
-      String relationType = (null == aHabitat.getRelationType() || "" == aHabitat.getRelationType()) ? "not specified" : aHabitat.getRelationType();
+
+      String relationType = (null == aHabitat.getRelationType() || aHabitat.getRelationType().equalsIgnoreCase("")) ? "not specified" : aHabitat.getRelationType();
+
       List l1 = new Chm62edtClassCodeDomain().findWhere("ID_CLASS_CODE = " + aHabitat.getIdClassCode());
+
       if (l1.size() > 0) {
         Chm62edtClassCodePersist cd = (Chm62edtClassCodePersist) l1.get(0);
-        result.add(new OtherClassWrapper(aHabitat.getCode(), cd.getClassName(), relationType));
+        result.add(new OtherClassWrapper(aHabitat.getCode(), cd.getClassName(), relationType, cd.getIdClassCode().toString(),aHabitat.getTitle()));
       } else {
         // Add the data to the row
-        result.add(new OtherClassWrapper(aHabitat.getCode(), "unknown", relationType));
+        result.add(new OtherClassWrapper(aHabitat.getCode(), "unknown", relationType, "",aHabitat.getTitle()));
       }
+
     }
     return result;
   }
@@ -442,7 +458,7 @@ public class HabitatsSearchUtility {
    */
   public static String mapDictionaryTermToID(Integer dictionary, String name) {
     Integer result = null;
-    List list = null;
+    List list;
     try {
       switch (dictionary.intValue()) {
         case DictionaryBean.DICT_ALTITUDE:
@@ -526,10 +542,9 @@ public class HabitatsSearchUtility {
     } catch (Exception ex) {
       ex.printStackTrace(System.err);
       result = new Integer(-1);
-    } finally {
-      if (null == result) result = new Integer(-1);
-      return result.toString();
     }
+    if (null == result) result = new Integer(-1);
+    return result.toString();
   }
 
   /**
@@ -596,9 +611,8 @@ public class HabitatsSearchUtility {
     } catch (Exception ex) {
       ex.printStackTrace(System.err);
       results = new Vector();
-    } finally {
-      return results;
     }
+    return results;
   }
 
   /**

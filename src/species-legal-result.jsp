@@ -4,8 +4,10 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Species Legal instruments' function - results page.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@page import="java.util.*,
                 ro.finsiel.eunis.search.species.legal.LegalSearchCriteria,
                 ro.finsiel.eunis.search.species.legal.LegalPaginator,
@@ -20,6 +22,7 @@
                 ro.finsiel.eunis.search.*,
                 ro.finsiel.eunis.search.save_criteria.SetVectorsForSaveCriteria,
                 ro.finsiel.eunis.search.save_criteria.SaveSearchCriteria"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
@@ -130,24 +133,26 @@
   // Set number criteria for the search result
   int noCriteria = (null == formBean.getCriteriaSearch() ? 0 : formBean.getCriteriaSearch().length);
 
-  String tsvLink = "javascript:openlink('reports/species/tsv-species-legal.jsp?" + formBean.toURLParam(reportFields) + "')";
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  String tsvLink = "javascript:openTSVDownload('reports/species/tsv-species-legal.jsp?" + formBean.toURLParam(reportFields) + "')";
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=contentManagement.getContent("species_legal-result_title", false )%>
+      <%=cm.cms("species_legal-result_title")%>
     </title>
   </head>
   <body>
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="Home#index.jsp,Species#species.jsp,Legal instruments#species-legal.jsp,Results" />
+      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,legal_instruments_location#species-legal.jsp,results_location" />
       <jsp:param name="helpLink" value="species-help.jsp" />
       <jsp:param name="downloadLink" value="<%=tsvLink%>" />
     </jsp:include>
-    <h5>
-      <%=contentManagement.getContent("species_legal-result_01")%>
-    </h5>
+    <h1>
+      <%=cm.cmsText("species_legal-result_01")%>
+    </h1>
     <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td>
@@ -159,11 +164,11 @@
           %>
             <tr>
               <td>
-                <%=contentManagement.getContent("species_legal-result_02")%>
+                <%=cm.cmsText("species_legal-result_02")%>
                 <strong>
                     <%=Utilities.treatURLAmp(groupCommonName)%>
                 </strong>
-                <%=contentManagement.getContent("species_legal-result_03")%>:
+                <%=cm.cmsText("species_legal-result_03")%>:
                 <strong>
                     <%=Utilities.treatURLAmp(formBean.getScientificName())%>
                 </strong>
@@ -177,29 +182,29 @@
           %>
             <tr>
               <td>
-                <%=contentManagement.getContent("species_legal-result_04")%>
+                <%=cm.cmsText("species_legal-result_04")%>
                 <strong>
                     <%=Utilities.treatURLAmp(groupCommonName)%>
                 </strong>
-                <%=contentManagement.getContent("species_legal-result_05")%>:
+                <%=cm.cmsText("species_legal-result_05")%>:
                 <%
                     if("any".equalsIgnoreCase(formBean.getAnnex()) && "any".equalsIgnoreCase(formBean.getLegalText()))
                     {
                 %>
                       <strong>
-                        <%=contentManagement.getContent("species_legal-result_any")%>
+                        <%=cm.cmsText("species_legal-result_any")%>
                       </strong>
                 <%
                     }else {
                 %>
                 <strong>
-                    <%=contentManagement.getContent("species_legal-result_06")%>
+                    <%=cm.cmsText("species_legal-result_06")%>
                     <%=Utilities.treatURLAmp(formBean.getAnnex())%> - <%=Utilities.treatURLAmp(formBean.getLegalText())%>
                 </strong>
                 <%
                     }
                 %>
-                <%=contentManagement.getContent("species_legal-result_07")%>
+                <%=cm.cmsText("species_legal-result_07")%>
               </td>
             </tr>
           <%
@@ -222,7 +227,7 @@
      }
        %>
        <br />
-      <%=contentManagement.getContent("species_legal-result_08")%>:
+      <%=cm.cmsText("species_legal-result_08")%>:
       <strong>
           <%=resultsCount%>
       </strong>
@@ -254,14 +259,14 @@
         <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
               <td style="background-color:#EEEEEE">
-                      <%=contentManagement.getContent("species_legal-result_09")%>
+                      <%=cm.cmsText("species_legal-result_09")%>
               </td>
           </tr>
           <tr>
             <td style="background-color:#EEEEEE">
               <form name="refineSearch" method="get" onsubmit="return(validateRefineForm(<%=noCriteria%>));" action="">
               <%=formBean.toFORMParam(filterSearch)%>
-              <label for="select1" class="noshow">Criteria</label>
+              <label for="select1" class="noshow"><%=cm.cms("criteria")%></label>
                   <%
                       if (!showGroup || !isAnyGroup)
                       {
@@ -271,13 +276,13 @@
                       }
                   %>
 
-              <select id="select1" title="Criteria" name="criteriaType" class="inputTextField" <%=(showGroup && isAnyGroup ? "" : "disabled=\"disabled\"")%>>
+              <select id="select1" title="<%=cm.cms("criteria")%>" name="criteriaType" class="inputTextField" <%=(showGroup && isAnyGroup ? "" : "disabled=\"disabled\"")%>>
                <%
                    if (showScientificName)
                    {
                %>
                   <option value="<%=LegalSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected">
-                      <%=contentManagement.getContent("species_legal-result_10", false)%>
+                      <%=cm.cms("species_legal-result_10")%>
                   </option>
                   <%
                       }
@@ -285,33 +290,42 @@
                       {
                    %>
                   <option value="<%=LegalSearchCriteria.CRITERIA_GROUP%>" selected="selected">
-                      <%=contentManagement.getContent("species_legal-result_11", false)%>
+                      <%=cm.cms("species_legal-result_11")%>
                   </option>
                   <%
                       }
                   %>
                 </select>
-                <label for="select2" class="noshow">Operator</label>
-                <select id="select2" title="Operator" name="oper" class="inputTextField">
+                <%=cm.cmsLabel("criteria")%>
+                <%=cm.cmsTitle("criteria")%>
+                <label for="select2" class="noshow"><%=cm.cms("operator")%></label>
+                <select id="select2" title="<%=cm.cms("operator")%>" name="oper" class="inputTextField">
                   <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                      <%=contentManagement.getContent("species_legal-result_12", false)%>
+                      <%=cm.cms("species_legal-result_12")%>
                   </option>
                   <option value="<%=Utilities.OPERATOR_STARTS%>">
-                      <%=contentManagement.getContent("species_legal-result_13", false)%>
+                      <%=cm.cms("species_legal-result_13")%>
                   </option>
                   <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                      <%=contentManagement.getContent("species_legal-result_14", false)%>
+                      <%=cm.cms("species_legal-result_14")%>
                   </option>
                 </select>
+                <%=cm.cmsLabel("operator")%>
+                <%=cm.cmsTitle("operator")%>
                 <input type="hidden" name="typeForm" value="<%=LegalSearchCriteria.CRITERIA_SPECIES%>" />
                   <label for="criteriaSearch" class="noshow">
-                    Criteria value
+                    <%=cm.cms("criteria_value")%>
                   </label>
-                <input id="criteriaSearch" title="Criteria value" alt="Criteria value" class="inputTextField" name="criteriaSearch" type="text" size="30" />
+                <input id="criteriaSearch" title="<%=cm.cms("criteria_value")%>" alt="<%=cm.cms("criteria_value")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
+                <%=cm.cmsLabel("criteria_value")%>
+                <%=cm.cmsTitle("criteria_value")%>
                   <label for="refine" class="noshow">
-                    Search
+                    <%=cm.cms("search")%>
                   </label>
-                <input title="Search" id="refine" class="inputTextField" type="submit" name="Submit" value="Search" />
+                <input title="<%=cm.cms("search")%>" id="refine" class="inputTextField" type="submit" name="Submit" value="<%=cm.cms("search_btn")%>" />
+                <%=cm.cmsLabel("search")%>
+                <%=cm.cmsTitle("search")%>
+                <%=cm.cmsInput("search_btn")%>
               </form>
             </td>
           </tr>
@@ -323,7 +337,7 @@
             %>
             <tr>
                 <td style="background-color:#EEEEEE">
-                    <%=contentManagement.getContent("species_legal-result_15")%>:
+                    <%=cm.cmsText("species_legal-result_15")%>:
                 </td>
             </tr>
             <%
@@ -338,7 +352,8 @@
                 %>
               <tr>
                 <td style="background-color:#CCCCCC;text-align:left">
-                  <a title="Delete this criteria search" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img alt="Delete" src="images/mini/delete.jpg" border="0" style="vertical-align:middle" /></a>
+                  <a title="<%=cm.cms("delete_criteria")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img alt="<%=cm.cms("delete_criteria")%>" src="images/mini/delete.jpg" border="0" style="vertical-align:middle" /></a>
+                  <%=cm.cmsTitle("delete_criteria")%>
                   &nbsp;&nbsp;
                   <strong class="linkDarkBg">
                       <%= i + ". " + criteria.toHumanString()%>
@@ -368,7 +383,7 @@
         <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>" />
       </jsp:include>
       <br />
-      <table summary="List of results" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;text-align:left">
+      <table summary="<%=cm.cms("search_results")%>" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse">
         <%// Compute the sort criteria
           Vector sortURLFields = new Vector();      /* Used for sorting */
           sortURLFields.addElement("pageSize");
@@ -385,7 +400,8 @@
   {
 %>
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
-              <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sciNameCrit)%><%=contentManagement.getContent("species_legal-result_10")%></span></a>
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("species_legal-result_10")%></span></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
 <%
   }
@@ -395,7 +411,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      <%=contentManagement.getContent("species_legal-result_11")%>
+                      <%=cm.cmsText("species_legal-result_11")%>
                   </span>
               </strong>
             </th>
@@ -407,7 +423,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      <%=contentManagement.getContent("species_legal-result_16")%>
+                      <%=cm.cmsText("species_legal-result_16")%>
                   </span>
              </strong>
             </th>
@@ -419,7 +435,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      <%=contentManagement.getContent("species_legal-result_17")%>
+                      <%=cm.cmsText("species_legal-result_17")%>
                   </span>
               </strong>
             </th>
@@ -431,7 +447,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      Comment
+                      <%=cm.cmsText("comment")%>
                   </span>
               </strong>
             </th>
@@ -443,7 +459,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      <%=contentManagement.getContent("species_legal-result_18")%>
+                      <%=cm.cmsText("species_legal-result_18")%>
                   </span>
               </strong>
             </th>
@@ -456,8 +472,10 @@
           // Coming from first form
           if (LegalSearchCriteria.CRITERIA_SPECIES.intValue() == typeForm)
           {
+            int col = 0;
             while (it.hasNext())
             {
+              String bgColor = col++ % 2 == 0 ? "#EEEEEE" : "#FFFFFF";
               ScientificLegalPersist specie = (ScientificLegalPersist)it.next();
 %>
         <tr>
@@ -465,92 +483,16 @@
               if (showScientificName)
               {
 %>
-                <td style="text-align:left">
-                  <a title="Species factsheet" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScientificName())%></a>
+                <td class="resultCell" style="background-color : <%=bgColor%>">
+                  <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScientificName())%></a>
+                  <%=cm.cmsTitle("open_species_factsheet")%>
                 </td>
 <%
               }
               if (showGroup)
               {
 %>
-                <td style="text-align:left">
-                    &nbsp;
-                    <%=Utilities.treatURLSpecialCharacters(specie.getCommonName())%>
-                </td>
-<%
-              }
-              if (showLegalText)
-              {
-%>
-                <td style="text-align:left">
-                    <%=Utilities.treatURLSpecialCharacters(specie.getTitle())%>
-                </td>
-<%
-              }
-              if ( showAbbreviation )
-              {
-%>
-                <td style="text-align:left">
-                    <%=Utilities.treatURLSpecialCharacters(specie.getAlternative() + "- Annex/Appendix " + specie.getAnnex())%>
-                </td>
-<%
-              }
-              if (showComment)
-              {
-%>
-                <td style="text-align:left">
-                    &nbsp;
-                    <%=Utilities.treatURLSpecialCharacters(specie.getComment())%>
-                </td>
-<%
-              }
-              if (showURL)
-              {
-%>
-                <td style="text-align:left">
-<%
-                if (null != specie.getUrl())
-                {
-%>
-                  <a title="References" href="<%=specie.getUrl()%>"><%=Utilities.treatURLSpecialCharacters(specie.getUrl().replaceAll("#",""))%></a>
-<%
-                }
-                else
-                {
-%>
-                  &nbsp;
-<%
-                }
-%>
-                  </td>
-<%
-              }
-%>
-              </tr>
-<%
-           }
-         }
-          // Coming from second form
-          if (LegalSearchCriteria.CRITERIA_LEGAL.intValue() == typeForm)
-          {
-            while (it.hasNext())
-            {
-              LegalStatusPersist specie = (LegalStatusPersist)it.next();
-%>
-              <tr>
-<%
-              if (showScientificName)
-              {
-%>
-                <td style="text-align:left">
-                  <a title="Species factsheet" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScientificName())%></a>
-                </td>
-<%
-              }
-              if (showGroup)
-              {
-%>
-                <td style="text-align:left">
+                <td class="resultCell" style="background-color : <%=bgColor%>">
                   &nbsp;
                   <%=Utilities.treatURLSpecialCharacters(specie.getCommonName())%>
                 </td>
@@ -559,32 +501,32 @@
               if (showLegalText)
               {
 %>
-                <td style="text-align:left">
-                    <%=Utilities.treatURLSpecialCharacters(specie.getTitle())%>
+                <td class="resultCell" style="background-color : <%=bgColor%>">
+                  <%=Utilities.treatURLSpecialCharacters(specie.getTitle())%>
                 </td>
 <%
               }
               if ( showAbbreviation )
               {
 %>
-                <td style="text-align:left">
-                    <%=Utilities.treatURLSpecialCharacters(specie.getAlternative() + "- Annex/Appendix " + specie.getAnnex())%>
+                <td class="resultCell" style="background-color : <%=bgColor%>">
+                  <%=Utilities.treatURLSpecialCharacters(specie.getAlternative() + "- Annex/Appendix " + specie.getAnnex())%>
                 </td>
 <%
               }
               if (showComment)
               {
 %>
-                  <td style="text-align:left">
-                      &nbsp;
-                      <%=Utilities.treatURLSpecialCharacters(specie.getComment())%>
-                  </td>
+                <td class="resultCell" style="background-color : <%=bgColor%>">
+                  &nbsp;
+                  <%=Utilities.treatURLSpecialCharacters(specie.getComment())%>
+                </td>
 <%
               }
               if (showURL)
               {
 %>
-                  <td style="text-align:left">
+                <td class="resultCell" style="background-color : <%=bgColor%>">
 <%
                     if(null != specie.getUrl().replaceAll("#",""))
                     {
@@ -604,7 +546,92 @@
 <%
                     }
 %>
-                  </td>
+                </td>
+<%
+              }
+%>
+              </tr>
+<%
+           }
+         }
+          // Coming from second form
+          if (LegalSearchCriteria.CRITERIA_LEGAL.intValue() == typeForm)
+          {
+            int col = 0;
+            while (it.hasNext())
+            {
+              String bgColor = col++ % 2 == 0 ? "#EEEEEE" : "#FFFFFF";
+              LegalStatusPersist specie = (LegalStatusPersist)it.next();
+%>
+              <tr>
+<%
+              if (showScientificName)
+              {
+%>
+                <td class="resultCell" style="background-color : <%=bgColor%>">
+                  <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScientificName())%></a>
+                  <%=cm.cmsTitle("open_species_factsheet")%>
+                </td>
+<%
+              }
+              if (showGroup)
+              {
+%>
+                <td class="resultCell" style="background-color : <%=bgColor%>">
+                  &nbsp;
+                  <%=Utilities.treatURLSpecialCharacters(specie.getCommonName())%>
+                </td>
+<%
+              }
+              if (showLegalText)
+              {
+%>
+                <td class="resultCell" style="background-color : <%=bgColor%>">
+                  <%=Utilities.treatURLSpecialCharacters(specie.getTitle())%>
+                </td>
+<%
+              }
+              if ( showAbbreviation )
+              {
+%>
+                <td class="resultCell" style="background-color : <%=bgColor%>">
+                    <%=Utilities.treatURLSpecialCharacters(specie.getAlternative() + "- Annex/Appendix " + specie.getAnnex())%>
+                </td>
+<%
+              }
+              if (showComment)
+              {
+%>
+                <td class="resultCell" style="background-color : <%=bgColor%>">
+                  &nbsp;
+                  <%=Utilities.treatURLSpecialCharacters(specie.getComment())%>
+                </td>
+<%
+              }
+              if (showURL)
+              {
+%>
+                <td class="resultCell" style="background-color : <%=bgColor%>">
+<%
+                    if(null != specie.getUrl().replaceAll("#",""))
+                    {
+                      String sFormattedURL = Utilities.formatString(specie.getUrl()).replaceAll("#","");
+                      if(sFormattedURL.length()>30)
+                      {
+                        sFormattedURL = sFormattedURL.substring(0,30) + "...";
+                      }
+%>
+                  <a href="<%=Utilities.formatString(specie.getUrl()).replaceAll("#","")%>" target="_blank" title="<%=Utilities.treatURLSpecialCharacters(Utilities.formatString(specie.getUrl()).replaceAll("#",""))%>"><%=Utilities.treatURLSpecialCharacters(sFormattedURL)%></a>
+<%
+                    }
+                    else
+                    {
+%>
+                  &nbsp;
+<%
+                    }
+%>
+                </td>
 <%
               }
 %>
@@ -613,13 +640,15 @@
             }
           }
 %>
-               <tr>
+
+        <tr>
 <%
   if (showScientificName)
   {
 %>
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
-              <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sciNameCrit)%><%=contentManagement.getContent("species_legal-result_10")%></span></a>
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("species_legal-result_10")%></span></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
 <%
   }
@@ -629,7 +658,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      <%=contentManagement.getContent("species_legal-result_11")%>
+                      <%=cm.cmsText("species_legal-result_11")%>
                   </span>
               </strong>
             </th>
@@ -641,7 +670,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      <%=contentManagement.getContent("species_legal-result_16")%>
+                      <%=cm.cmsText("species_legal-result_16")%>
                   </span>
              </strong>
             </th>
@@ -653,7 +682,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      <%=contentManagement.getContent("species_legal-result_17")%>
+                      <%=cm.cmsText("species_legal-result_17")%>
                   </span>
               </strong>
             </th>
@@ -665,7 +694,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      Comment
+                      <%=cm.cmsText("comment")%>
                   </span>
               </strong>
             </th>
@@ -677,7 +706,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      <%=contentManagement.getContent("species_legal-result_18")%>
+                      <%=cm.cmsText("species_legal-result_18")%>
                   </span>
               </strong>
             </th>
@@ -701,9 +730,28 @@
         </td>
       </tr>
     </table>
+
+<%=cm.br()%>
+<%=cm.cmsMsg("species_legal-result_title")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_legal-result_10")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_legal-result_11")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_legal-result_12")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_legal-result_13")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_legal-result_14")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("search_results")%>
+<%=cm.br()%>
+
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="species-legal-result.jsp" />
     </jsp:include>
-  </div>
+    </div>
+    </div>
+    </div>
   </body>
 </html>

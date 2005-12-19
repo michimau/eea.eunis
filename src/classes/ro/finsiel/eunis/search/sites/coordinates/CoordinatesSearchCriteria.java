@@ -110,6 +110,8 @@ public class CoordinatesSearchCriteria extends SitesSearchCriteria {
       sql.append(" ( (1 = 1) ");
       sql.append(" AND ( A.LONGITUDE >= " + longMin + " AND A.LONGITUDE <= " + longMax + " ) ");
       sql.append(" AND ( A.LATITUDE >= " + latMin + " AND A.LATITUDE <= " + latMax + " ) ");
+      sql.append(" AND A.LONGITUDE <> 0 AND A.LONGITUDE IS NOT NULL ");
+      sql.append(" AND A.LATITUDE <> 0 AND A.LATITUDE IS NOT NULL ");
       sql.append(")");
       if (null != country) {
         //AND C.AREA_NAME_EN='FRANCE'

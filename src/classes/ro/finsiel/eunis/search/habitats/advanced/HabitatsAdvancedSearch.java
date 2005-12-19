@@ -48,7 +48,7 @@ public class HabitatsAdvancedSearch {
 
   /**
    * Set the limit of retrieved results.
-   * @param SQLLimit
+   * @param SQLLimit Limit of results
    */
   public void SetSQLLimit(int SQLLimit) {
     SQL_LIMIT = SQLLimit;
@@ -96,6 +96,9 @@ public class HabitatsAdvancedSearch {
         return;
       }
       if (Operand.equalsIgnoreCase("Contains") && ValueMin.length() == 0) {
+        return;
+      }
+      if (Operand.equalsIgnoreCase("Regex") && ValueMin.length() == 0) {
         return;
       }
       if (Operand.equalsIgnoreCase("Between") && ValueMin.length() == 0) {
@@ -222,6 +225,9 @@ public class HabitatsAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " WHERE SCIENTIFIC_NAME = '" + sValueMin + "'";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " WHERE SCIENTIFIC_NAME REGEXP '" + sValueMin + "'";
+          }
         }
         if (sTable.equalsIgnoreCase("Code")) {
           habitatsSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_HABITAT";
@@ -229,7 +235,10 @@ public class HabitatsAdvancedSearch {
             habitatsSQL += " WHERE EUNIS_HABITAT_CODE LIKE '%" + sValueMin + "%' OR CODE_ANNEX1 LIKE '%" + sValueMin + "%'";
           }
           if (sOperand.equalsIgnoreCase("Equal")) {
-            habitatsSQL += " WHERE EUNIS_HABITAT_CODE = '%" + sValueMin + "%' OR CODE_ANNEX1 = '%" + sValueMin + "%'";
+            habitatsSQL += " WHERE EUNIS_HABITAT_CODE = '" + sValueMin + "' OR CODE_ANNEX1 = '" + sValueMin + "'";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " WHERE EUNIS_HABITAT_CODE REGEXP '" + sValueMin + "' OR CODE_ANNEX1 REGEXP '" + sValueMin + "'";
           }
           if (sOperand.equalsIgnoreCase("Between")) {
             habitatsSQL += " WHERE (EUNIS_HABITAT_CODE BETWEEN '%" + sValueMin + "%' AND '%" + sValueMax + "%')";
@@ -247,6 +256,9 @@ public class HabitatsAdvancedSearch {
           }
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_CLASS_CODE`.`NAME` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_CLASS_CODE`.`NAME` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_CLASS_CODE`.`NAME` LIKE '%" + sValueMin + "%')";
@@ -290,6 +302,9 @@ public class HabitatsAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " WHERE (`CHM62EDT_COUNTRY`.`AREA_NAME_EN` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " WHERE (`CHM62EDT_COUNTRY`.`AREA_NAME_EN` REGEXP '" + sValueMin + "')";
+          }
         }
         if (sTable.equalsIgnoreCase("Biogeoregion")) {
           habitatsSQL = "SELECT DISTINCT `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`";
@@ -305,6 +320,9 @@ public class HabitatsAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " WHERE (`CHM62EDT_BIOGEOREGION`.`NAME` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " WHERE (`CHM62EDT_BIOGEOREGION`.`NAME` REGEXP '" + sValueMin + "')";
+          }
         }
 
         if (sTable.equalsIgnoreCase("LegalInstrument")) {
@@ -318,6 +336,9 @@ public class HabitatsAdvancedSearch {
           }
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " WHERE (`DC_TITLE`.`TITLE` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " WHERE (`DC_TITLE`.`TITLE` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " WHERE (`DC_TITLE`.`TITLE` LIKE '%" + sValueMin + "%')";
@@ -335,6 +356,9 @@ public class HabitatsAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " WHERE (`DC_SOURCE`.`SOURCE` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " WHERE (`DC_SOURCE`.`SOURCE` REGEXP '" + sValueMin + "')";
+          }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " WHERE (`DC_SOURCE`.`SOURCE` LIKE '%" + sValueMin + "%')";
           }
@@ -351,6 +375,9 @@ public class HabitatsAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " WHERE (`DC_TITLE`.`TITLE` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " WHERE (`DC_TITLE`.`TITLE` REGEXP '" + sValueMin + "')";
+          }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " WHERE (`DC_TITLE`.`TITLE` LIKE '%" + sValueMin + "%')";
           }
@@ -365,6 +392,9 @@ public class HabitatsAdvancedSearch {
           habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'ALTITUDE')";
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_ALTITUDE`.`NAME` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_ALTITUDE`.`NAME` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_ALTITUDE`.`NAME` LIKE '%" + sValueMin + "%')";
@@ -384,6 +414,9 @@ public class HabitatsAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_CHEMISTRY`.`NAME` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_CHEMISTRY`.`NAME` REGEXP '" + sValueMin + "')";
+          }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_CHEMISTRY`.`NAME` LIKE '%" + sValueMin + "%')";
           }
@@ -401,6 +434,9 @@ public class HabitatsAdvancedSearch {
           habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'CLIMATE')";
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_CLIMATE`.`NAME` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_CLIMATE`.`NAME` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_CLIMATE`.`NAME` LIKE '%" + sValueMin + "%')";
@@ -420,6 +456,9 @@ public class HabitatsAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_COVER`.`NAME` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_COVER`.`NAME` REGEXP '" + sValueMin + "')";
+          }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_COVER`.`NAME` LIKE '%" + sValueMin + "%')";
           }
@@ -437,6 +476,9 @@ public class HabitatsAdvancedSearch {
           habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'DEPTH')";
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_DEPTH`.`NAME` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_DEPTH`.`NAME` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_DEPTH`.`NAME` LIKE '%" + sValueMin + "%')";
@@ -456,6 +498,9 @@ public class HabitatsAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_GEOMORPH`.`NAME` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_GEOMORPH`.`NAME` REGEXP '" + sValueMin + "')";
+          }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_GEOMORPH`.`NAME` LIKE '%" + sValueMin + "%')";
           }
@@ -473,6 +518,9 @@ public class HabitatsAdvancedSearch {
           habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'HUMIDITY')";
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_HUMIDITY`.`NAME` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_HUMIDITY`.`NAME` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_HUMIDITY`.`NAME` LIKE '%" + sValueMin + "%')";
@@ -492,6 +540,9 @@ public class HabitatsAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_LIFE_FORM`.`NAME` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_LIFE_FORM`.`NAME` REGEXP '" + sValueMin + "')";
+          }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_LIFE_FORM`.`NAME` LIKE '%" + sValueMin + "%')";
           }
@@ -509,6 +560,9 @@ public class HabitatsAdvancedSearch {
           habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'LIGHT_INTENSITY')";
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_LIGHT_INTENSITY`.`NAME` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_LIGHT_INTENSITY`.`NAME` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_LIGHT_INTENSITY`.`NAME` LIKE '%" + sValueMin + "%')";
@@ -528,6 +582,9 @@ public class HabitatsAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_MARINE`.`NAME` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_MARINE`.`NAME` REGEXP '" + sValueMin + "')";
+          }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_MARINE`.`NAME` LIKE '%" + sValueMin + "%')";
           }
@@ -545,6 +602,9 @@ public class HabitatsAdvancedSearch {
           habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'SALINITY')";
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_SALINITY`.`NAME` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_SALINITY`.`NAME` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_SALINITY`.`NAME` LIKE '%" + sValueMin + "%')";
@@ -564,6 +624,9 @@ public class HabitatsAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_SPATIAL`.`NAME` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_SPATIAL`.`NAME` REGEXP '" + sValueMin + "')";
+          }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_SPATIAL`.`NAME` LIKE '%" + sValueMin + "%')";
           }
@@ -581,6 +644,9 @@ public class HabitatsAdvancedSearch {
           habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'SUBSTRATE')";
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_SUBSTRATE`.`NAME` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_SUBSTRATE`.`NAME` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_SUBSTRATE`.`NAME` LIKE '%" + sValueMin + "%')";
@@ -600,6 +666,9 @@ public class HabitatsAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_TEMPORAL`.`NAME` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_TEMPORAL`.`NAME` REGEXP '" + sValueMin + "')";
+          }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_TEMPORAL`.`NAME` LIKE '%" + sValueMin + "%')";
           }
@@ -617,6 +686,9 @@ public class HabitatsAdvancedSearch {
           habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'TIDAL')";
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_TIDAL`.`NAME` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_TIDAL`.`NAME` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_TIDAL`.`NAME` LIKE '%" + sValueMin + "%')";
@@ -636,6 +708,9 @@ public class HabitatsAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_WATER`.`NAME` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_WATER`.`NAME` REGEXP '" + sValueMin + "')";
+          }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_WATER`.`NAME` LIKE '%" + sValueMin + "%')";
           }
@@ -653,6 +728,9 @@ public class HabitatsAdvancedSearch {
           habitatsSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'USAGE')";
           if (sOperand.equalsIgnoreCase("Equal")) {
             habitatsSQL += " AND (`CHM62EDT_USAGE`.`NAME` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            habitatsSQL += " AND (`CHM62EDT_USAGE`.`NAME` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             habitatsSQL += " AND (`CHM62EDT_USAGE`.`NAME` LIKE '%" + sValueMin + "%')";
@@ -731,6 +809,7 @@ public class HabitatsAdvancedSearch {
       }
       con.close();
     } catch (Exception e) {
+      System.out.println("SQL = " + SQL);
       e.printStackTrace();
       return "";
     }

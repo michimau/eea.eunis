@@ -4,8 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Habitats legal instruments' function - search page.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page contentType="text/html" %>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.jrfTables.Chm62edtClassCodePersist,
                  ro.finsiel.eunis.jrfTables.Chm62edtHabitatPersist,
@@ -18,34 +20,36 @@
 
 <jsp:useBean id="HabitatDomain" class="ro.finsiel.eunis.jrfTables.Chm62edtHabitatDomain" scope="page" />
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
   <script language="JavaScript" src="script/habitats-legal.js" type="text/javascript"></script>
   <script language="JavaScript" src="script/save-criteria.js" type="text/javascript"></script>
-  <script language="JavaScript" src="script/utils.js" type="text/javascript"></script>
   <%
-    WebContentManagement contentManagement = SessionManager.getWebContent();
+    WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=contentManagement.getContent("habitats_legal_title", false)%>
+    <%=cm.cms("habitats_legal_title")%>
   </title>
 </head>
 
 <body>
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="Home#index.jsp,Habitat types#habitats.jsp,Legal instruments" />
+  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitats_legal_location" />
   <jsp:param name="helpLink" value="habitats-help.jsp" />
 </jsp:include>
-<table width="100%" border="0">
+<table summary="layout" width="100%" border="0">
 <tr>
 <td>
-<h5>
-  <%=contentManagement.getContent("habitats_legal_01")%>
-</h5>
-<%=contentManagement.getContent("habitats_legal_17")%>
+<h1>
+  <%=cm.cmsText("habitats_legal_01")%>
+</h1>
+<%=cm.cmsText("habitats_legal_17")%>
 <br />
 <br />
 <form name="eunis" action="habitats-legal-result.jsp" method="get" onsubmit="javascript: return validateForm();">
@@ -56,49 +60,44 @@
   <tr>
     <td bgcolor="#EEEEEE">
       <strong>
-        <%=contentManagement.getContent("habitats_legal_02")%>
+        <%=cm.cmsText("habitats_legal_02")%>
       </strong>
     </td>
   </tr>
   <tr>
     <td bgcolor="#EEEEEE">
       <input title="Show level" type="checkbox" id="showLevel" name="showLevel" value="true" checked="checked" />
-      <label for="showLevel"><%=contentManagement.getContent("habitats_legal_03")%></label>
+      <label for="showLevel"><%=cm.cmsText("habitats_legal_03")%></label>
       &nbsp;
       <input title="Show code" type="checkbox" name="showCode" id="showCode" value="true" checked="checked" />
-      <label for="showCode"><%=contentManagement.getContent("habitats_legal_04")%></label>
+      <label for="showCode"><%=cm.cmsText("habitats_legal_04")%></label>
       &nbsp;
       <input title="Show name" type="checkbox" name="showScientificName" id="showScientificName" value="true" checked="checked" disabled="disabled" />
-      <label for="showScientificName"><%=contentManagement.getContent("habitats_legal_05")%></label>
+      <label for="showScientificName"><%=cm.cmsText("habitats_legal_05")%></label>
       &nbsp;
       <input title="Show legal text" type="checkbox" name="showLegalText" id="showLegalText" value="true" checked="checked" />
-      <label for="showLegalText"><%=contentManagement.getContent("habitats_legal_06")%></label>
+      <label for="showLegalText"><%=cm.cmsText("habitats_legal_06")%></label>
       &nbsp;
     </td>
   </tr>
 </table>
-<table summary="Search criteria" cellspacing="2" cellpadding="0" border="0" align="center" width="100%">
-  <tr>
-    <td colspan="5">
-      <br />
-    </td>
-  </tr>
+<table summary="layout" cellspacing="2" cellpadding="0" border="0" width="100%">
   <tr>
     <td valign="bottom" colspan="2">
       <p>
-        <img alt="Include" src="images/mini/field_included.gif" align="middle" />
+        <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" align="middle" /><%=cm.cmsTitle("included_field")%>
         &nbsp;
         <label for="habitatType">
         <strong>
-          <%=contentManagement.getContent("habitats_legal_08")%>
+          <%=cm.cmsText("habitats_legal_08")%>
         </strong>
         </label>
       </p>
     </td>
     <td valign="bottom" colspan="2">
-      <label for="habitatType" class="noshow">Habitat type</label>
-      <select title="Habitat type" name="habitatType" id="habitatType" class="inputTextField">
-        <option value="any" selected="selected"><%=contentManagement.getContent("habitats_legal_09", false)%></option>
+      <label for="habitatType" class="noshow"><%=cm.cms("habitat_type")%></label>
+      <select title="<%=cm.cms("habitat_type")%>" name="habitatType" id="habitatType" class="inputTextField">
+        <option value="any" selected="selected"><%=cm.cms("habitats_legal_09")%></option>
         <%
           // List of EUNIS habitats from first level.
           Iterator it = HabitatsSearchUtility.findEUNISHabitatTypes().iterator();
@@ -108,54 +107,48 @@
           - <%=habitat.getScientificName()%></option>
         <%}%>
       </select>
+      <%=cm.cmsLabel("habitat_type")%>
+      <%=cm.cmsInput("habitats_legal_09")%>
     </td>
     <td width="6%" align="right">
       <strong>
-        <%=contentManagement.getContent("habitats_legal_10")%>
+        <%=cm.cmsText("habitats_legal_10")%>
       </strong>
     </td>
   </tr>
   <tr valign="middle">
     <td colspan="2">
       <br />
-      <img alt="Include" src="images/mini/field_included.gif" align="middle" />
+      <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" align="middle" /><%=cm.cmsTitle("included_field")%>
       &nbsp;
-      <label for="searchString">
-      <strong>
-        <%=contentManagement.getContent("habitats_legal_11")%>
-      </strong>
-      </label>
+      <label for="searchString"><strong><%=cm.cmsText("habitats_legal_11")%></strong></label>
     </td>
     <td colspan="2">
       <br />
-      <input title="Legal text" size="30" name="searchString" id="searchString" class="inputTextField" />
+      <input title="<%=cm.cms("habitats_legal_11")%>" size="30" name="searchString" id="searchString" class="inputTextField" /><%=cm.cmsTitle("habitats_legal_11")%>
       &nbsp;
-      <a title="List of values" href="javascript:openHelper('habitats-legal-choice.jsp');">
-        <img alt="List of values" height="18" src="images/helper/helper.gif"  align="middle" width="11" border="0" /></a>
+      <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-legal-choice.jsp');">
+        <img alt="<%=cm.cms("list_of_values")%>" height="18" src="images/helper/helper.gif"  align="middle" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
     </td>
     <td width="6%" align="right">
       <br />
       <strong>
-        <%=contentManagement.getContent("habitats_legal_10")%>
+        <%=cm.cmsText("habitats_legal_10")%>
       </strong>
     </td>
   </tr>
   <tr valign="middle">
     <td valign="middle" colspan="2">
       <br />
-      <img alt="Include" src="images/mini/field_included.gif" align="middle" />
+      <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" align="middle" /><%=cm.cmsTitle("included_field")%>
       &nbsp;
-      <label for="legalText">
-      <strong>
-        <%=contentManagement.getContent("habitats_legal_12")%>
-      </strong>
-      </label>
+      <label for="legalText"><strong><%=cm.cmsText("habitats_legal_12")%></strong></label>
     </td>
     <td colspan="2">
       <br />
-      <label for="legalText" class="noshow">Legal text</label>
-      <select title="Legal text" name="legalText" id="legalText" class="inputTextField">
-        <option value="any" selected="selected"><%=contentManagement.getContent("habitats_legal_13", false)%></option>
+      <label for="legalText" class="noshow"><%=cm.cms("habitat_legal_text")%></label>
+      <select title="<%=cm.cms("habitat_legal_text")%>" name="legalText" id="legalText" class="inputTextField">
+        <option value="any" selected="selected"><%=cm.cms("habitats_legal_13")%></option>
         <%
           // List of habitats legal instruments.
           it = HabitatsSearchUtility.findLegalTexts().iterator();
@@ -164,17 +157,21 @@
         <option value="<%=element.getClassName()%>"><%=element.getClassName()%></option>
         <%}%>
       </select>
+      <%=cm.cmsLabel("habitat_legal_text")%>
+      <%=cm.cmsInput("habitats_legal_13")%>
     </td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td align="right" colspan="5">
-      <label for="Reset" class="noshow">Reset values</label>
-      <input title="Reset values" type="reset" value="<%=contentManagement.getContent("habitats_legal_14", false )%>" name="Reset" id="Reset" class="inputTextField" />
-      <%=contentManagement.writeEditTag("habitats_legal_14")%>
-      <label for="submit" class="noshow">Search</label>
-      <input title="Search" type="submit" value="<%=contentManagement.getContent("habitats_legal_15", false )%>" id="submit" name="submit" class="inputTextField" />
-      <%=contentManagement.writeEditTag("habitats_legal_15")%>
+      <label for="Reset" class="noshow"><%=cm.cms("reset_btn")%></label>
+      <input title="<%=cm.cms("reset_btn")%>" type="reset" value="<%=cm.cms("habitats_legal_14")%>" name="Reset" id="Reset" class="inputTextField" />
+      <%=cm.cmsTitle("reset_btn")%>
+      <%=cm.cmsInput("habitats_legal_14")%>
+      <label for="submit" class="noshow"><%=cm.cms("search_btn")%></label>
+      <input title="<%=cm.cms("search_btn")%>" type="submit" value="<%=cm.cms("habitats_legal_15")%>" id="submit" name="submit" class="inputTextField" />
+      <%=cm.cmsTitle("search_btn")%>
+      <%=cm.cmsInput("habitats_legal_15")%>
     </td>
   </tr>
 </table>
@@ -198,15 +195,14 @@
      var database3='';
     //-->
     </script>
-    <noscript>Your browser does not support JavaScript!</noscript>
   </td>
 </tr>
 <tr>
   <td>
     <script language="JavaScript" src="script/habitats-legal-save-criteria.js" type="text/javascript"></script>
-    <%=contentManagement.getContent("habitats_legal_16")%>:
-    <a title="Save" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',true,'habitats-legal.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');">
-      <img alt="Save" border="0" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+    <%=cm.cmsText("habitats_legal_16")%>:
+    <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',true,'habitats-legal.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+    <%=cm.cmsTitle("save_criteria")%>
   </td>
 </tr>
 <%
@@ -231,9 +227,14 @@
 </tr>
 <%}%>
 </table>
-<jsp:include page="footer.jsp">
-  <jsp:param name="page_name" value="habitats-legal.jsp" />
-</jsp:include>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("habitats_legal_title")%>
+      <%=cm.br()%>
+      <jsp:include page="footer.jsp">
+        <jsp:param name="page_name" value="habitats-legal.jsp" />
+      </jsp:include>
+    </div>
+    </div>
     </div>
   </body>
 </html>

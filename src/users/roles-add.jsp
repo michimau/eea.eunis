@@ -4,6 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Part of user management
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.List,
                  ro.finsiel.eunis.jrfTables.users.RolesDomain,
                  ro.finsiel.eunis.jrfTables.users.RolesPersist,
@@ -13,12 +17,12 @@
                  ro.finsiel.eunis.jrfTables.users.UserPersist,
                  ro.finsiel.eunis.jrfTables.users.RightsDomain,
                  ro.finsiel.eunis.jrfTables.users.RightsPersist"%>
-<%@ page contentType="text/html"%>
-
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
-
-
 <%
+    // Web content manager used in this page.
+      WebContentManagement cm = SessionManager.getWebContent();
+
   // If user is authentificated and has this right
   if(SessionManager.isAuthenticated() && SessionManager.isRole_management_RIGHT())
 {
@@ -38,7 +42,6 @@
        var roles_list = new Array(<%=ListRoles.size()%>);
       //-->
     </script>
-    <noscript>Your browser does not support JavaScript!</noscript>
 <%
      for (int i=0;i<ListRoles.size();i++)
      {
@@ -48,7 +51,6 @@
                roles_list[<%=i%>]='<%=((RolesPersist)ListRoles.get(i)).getRoleName()%>';
              //-->
          </script>
-         <noscript>Your browser does not support JavaScript!</noscript>
 <%
      }
   } else {
@@ -58,7 +60,6 @@
                var roles_list = new Array(0);
              //-->
           </script>
-          <noscript>Your browser does not support JavaScript!</noscript>
 <%
          }
   }catch(Exception e){e.printStackTrace();}
@@ -73,7 +74,7 @@
       exist=false;
       for(i=0;i<roles_list.length;i++)  if (roleName.toLowerCase() == roles_list[i].toLowerCase()) exist = true;
       if(exist) {
-                   alert("This role name already exist!");
+                   alert("<%=cm.cms("roles_add_01")%>");
                    document.eunis.roleName.value = "";
                 }
       return exist;
@@ -88,7 +89,7 @@
           if (newRoleName.toLowerCase() == roles_list[i].toLowerCase()
               && roleName.toLowerCase() != roles_list[i].toLowerCase()) exist = true;
       if(exist) {
-                   alert("This role name already exist!");
+                   alert("<%=cm.cms("roles_add_01")%>");
                    document.eunis.newRoleName.value = "";
                 }
       return exist;
@@ -98,7 +99,7 @@
 
          if (document.eunis.roleName == null || trim(document.eunis.roleName.value)=='')
             {
-             alert("You must insert a valid role name value!");
+             alert("<%=cm.cms("roles_add_02")%>");
              return false;
             }
 
@@ -113,13 +114,13 @@
            || trim(document.eunis.roleName.value)==''
            || trim(document.eunis.roleName.value)=='selectRoleName')
             {
-             alert("You must select a valid role name value!");
+             alert("<%=cm.cms("roles_add_03")%>");
              return false;
             }
 
        if (document.eunis.newRoleName == null || trim(document.eunis.newRoleName.value)=='')
             {
-             alert("You must insert a valid new role name value!");
+             alert("<%=cm.cms("roles_add_04")%>");
              return false;
             }
 
@@ -133,7 +134,7 @@
           || trim(document.eunis.roleName.value) == ''
           || trim(document.eunis.roleName.value) == 'selectRoleName')
             {
-             alert("You must select a valid role name value!");
+             alert("<%=cm.cms("roles_add_05")%>");
             }
       else {
                  roleName = escape(trim(document.eunis.roleName.value));
@@ -142,8 +143,6 @@
       }
       //-->
 </script>
-<noscript>Your browser does not support JavaScript!</noscript>
-
 <%
   // Set database parameters
   String SQL_DRV="";
@@ -159,7 +158,7 @@
   if(SQL_DRV == null || SQL_URL==null || SQL_USR == null || SQL_PWD==null )
   {
 %>
-    Error: The web.xml file does not contain one/all of these required values: JDBC_DRV,JDBC_URL,JDBC_USR,JDBC_PWD.
+    <%=cm.cmsText("roles_add_06")%>
 <%
     return;
   }
@@ -200,10 +199,10 @@ else
            }
 
 
-          if(addRoleSuccess && addRightsSuccess) message = "Roles adding operation was made successfully.";
-          else message = "<span color=\"red\">Roles adding operation wasn't made successfully.</span>";
+          if(addRoleSuccess && addRightsSuccess) message = cm.cms("roles_add_07");
+          else message = "<span color=\"red\">" + cm.cms("roles_add_08") + "</span>";
 
-        } else message = "<span color=\"red\">Roles adding operation wasn't made successfully.</span>";
+        } else message = "<span color=\"red\">"+cm.cms("roles_add_08")+"</span>";
       }
 
     // if user choose to update a role
@@ -231,10 +230,10 @@ else
                                      SQL_PWD);
 
 
-        if(updateRoleSuccess) message = "Roles edit operation was made successfully.";
-        else message = "<span color=\"red\">Roles edit operation wasn't made successfully.</span>";
+        if(updateRoleSuccess) message = cm.cms("roles_add_10");
+        else message = "<span color=\"red\">"+cm.cms("roles_add_11")+"</span>";
 
-      } else message = "<span color=\"red\">Roles edit operation wasn't made successfully.</span>";
+      } else message = "<span color=\"red\">"+cm.cms("roles_add_11")+"</span>";
     }
     // if user choose to delete a role
     if(operation.equalsIgnoreCase("delete"))
@@ -247,9 +246,9 @@ else
         {
             // delete the role
             boolean deleteWithSuccess = UsersUtility.deleteRole(request.getParameter("roleName"),SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-            if(deleteWithSuccess) message = "Roles deleting operation was made successfully.";
-            else message = "<span color=\"red\">Roles deleting operation wasn't made successfully.</span>";
-        } else message = "<span color=\"red\">Roles deleting operation wasn't made successfully.</span>";
+            if(deleteWithSuccess) message = cm.cms("roles_add_13");
+            else message = "<span color=\"red\">"+cm.cms("roles_add_14")+"</span>";
+        } else message = "<span color=\"red\">"+cm.cms("roles_add_14")+"</span>";
       }
   }
 
@@ -268,13 +267,13 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
  }
 %>
 
-   <h5>
-     EUNIS Database User Management
-   </h5>
+   <h1>
+     <%=cm.cmsText("roles_add_16")%>
+   </h1>
    <br />
-   <h6>
-       <%=(users_operation != null && users_operation.equalsIgnoreCase("edit")?"Edit":"Add")%> roles
-   </h6>
+   <h2>
+       <%=(users_operation != null && users_operation.equalsIgnoreCase("edit")?cm.cmsText("edit"):cm.cmsText("add"))%> <%=cm.cmsText("roles")%>
+   </h2>
    <br />
 
 <form name="eunis" method="post" action="users.jsp" <%=onSubmit%>>
@@ -293,12 +292,11 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
       %>
         <tr>
           <td>
-          &nbsp;&nbsp;<label for="roleName">Select role name</label>
-<%--            &nbsp;&nbsp;Select role name--%>
+          &nbsp;&nbsp;<label for="roleName"><%=cm.cmsText("roles_add_17")%></label>
           </td>
           <td>
-           <select id="roleName" name="roleName" class="inputTextField" style="border-width:1px" onchange="MM_jumpMenuRoles('parent',this,0,'<%=tab1%>','<%=tab2%>')"  title="List of role name">
-           <option value="selectRoleName" selected="selected">Select a role name</option>
+           <select id="roleName" name="roleName" class="inputTextField" style="border-width:1px" onchange="MM_jumpMenuRoles('parent',this,0,'<%=tab1%>','<%=tab2%>')"  title="<%=cm.cms("roles_add_18")%>">
+           <option value="selectRoleName" selected="selected"><%=cm.cms("roles_add_19")%></option>
             <%
             try
             {
@@ -317,8 +315,10 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
             }catch(Exception e){e.printStackTrace();}
             %>
            </select>
+           <%=cm.cmsTitle("roles_add_18")%>
            &nbsp;&nbsp;&nbsp;
-           <a title="Delete this role" href="javascript:deleteRole();">delete this role</a>
+           <a title="<%=cm.cms("roles_add_20")%>" href="javascript:deleteRole();"><%=cm.cmsText("roles_add_20")%></a>
+           <%=cm.cmsTitle("roles_add_20")%>
           </td>
         </tr>
         <%
@@ -327,11 +327,11 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
         %>
         <tr>
           <td>
-          &nbsp;&nbsp;<label for="roleName1">Role name(*):</label>
-<%--            &nbsp;&nbsp;Role name :--%>
+          &nbsp;&nbsp;<label for="roleName1"><%=cm.cmsText("roles_add_21")%>(*):</label>
           </td>
           <td>
-           &nbsp;<input class="inputTextField" title="Role name" alt="Role name" type="text" id="roleName1" name="roleName" size="50" value="" onchange="RoleExist();" />
+           &nbsp;<input class="inputTextField" title="<%=cm.cms("roles_add_22")%>" alt="<%=cm.cms("roles_add_22")%>" type="text" id="roleName1" name="roleName" size="50" value="" onchange="RoleExist();" />
+           <%=cm.cmsTitle("roles_add_22")%>
           </td>
         </tr>
         <%
@@ -348,11 +348,11 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
         %>
         <tr>
           <td>
-          &nbsp;&nbsp;<label for="newRoleName">Role name:</label>&nbsp;
-<%--            &nbsp;&nbsp;Role name :&nbsp;--%>
+          &nbsp;&nbsp;<label for="newRoleName"><%=cm.cmsText("roles_add_21")%>:</label>&nbsp;
           </td>
           <td>
-           <input class="inputTextField" title="Role name" alt="Role name" type="text" id="newRoleName" name="newRoleName" size ="50" value="<%=name%>" onchange="NewRoleExist();" />
+           <input class="inputTextField" title="<%=cm.cms("roles_add_22")%>" alt="<%=cm.cms("roles_add_22")%>" type="text" id="newRoleName" name="newRoleName" size ="50" value="<%=name%>" onchange="NewRoleExist();" />
+           <%=cm.cmsTitle("roles_add_22")%>
           </td>
         </tr>
         <%
@@ -360,11 +360,11 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
         %>
         <tr>
           <td>
-          &nbsp;&nbsp;<label for="description">Description:</label>
-<%--            &nbsp;&nbsp;Description :--%>
+          &nbsp;&nbsp;<label for="description"><%=cm.cmsText("roles_add_23")%>:</label>
           </td>
           <td>
-          <textarea title="Description" id="description" name="description" cols="50" rows="5" class="inputTextField"><%=description%></textarea>
+          <textarea title="<%=cm.cms("roles_add_23")%>" id="description" name="description" cols="50" rows="5" class="inputTextField"><%=description%></textarea>
+          <%=cm.cmsTitle("roles_add_23")%>
           </td>
         </tr>
     </table>
@@ -383,7 +383,7 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
      <table summary="layout" class="valign" width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
        <td style="text-align:left">
-          <strong>Rights</strong>
+          <strong><%=cm.cmsText("roles_add_24")%></strong>
        </td>
       </tr>
      <%
@@ -397,7 +397,8 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
       %>
       <td>
         <label for="rightxxx_<%=((RightsPersist)rights.get(i)).getRightName()%>" class="noshow">Right</label>
-        <input title="Choose a right" alt="Choose a right" type="checkbox" id="rightxxx_<%=((RightsPersist)rights.get(i)).getRightName()%>" name="rightxxx_<%=((RightsPersist)rights.get(i)).getRightName()%>" value ="<%=((RightsPersist)rights.get(i)).getRightName()%>" <%=(UsersUtility.ifRoleRightObjectExist(request.getParameter("roleName"),((RightsPersist)rights.get(i)).getRightName())?"checked=\"checked\"":"")%> /><label for="rightxxx_<%=((RightsPersist)rights.get(i)).getRightName()%>"><%=UsersUtility.getNameNice(((RightsPersist)rights.get(i)).getRightName())%></label>
+        <input title="<%=cm.cms("roles_add_25")%>" alt="<%=cm.cms("roles_add_25")%>" type="checkbox" id="rightxxx_<%=((RightsPersist)rights.get(i)).getRightName()%>" name="rightxxx_<%=((RightsPersist)rights.get(i)).getRightName()%>" value ="<%=((RightsPersist)rights.get(i)).getRightName()%>" <%=(UsersUtility.ifRoleRightObjectExist(request.getParameter("roleName"),((RightsPersist)rights.get(i)).getRightName())?"checked=\"checked\"":"")%> /><label for="rightxxx_<%=((RightsPersist)rights.get(i)).getRightName()%>"><%=UsersUtility.getNameNice(((RightsPersist)rights.get(i)).getRightName())%></label>
+        <%=cm.cmsTitle("roles_add_25")%>
       </td>
       <%
           } else
@@ -405,7 +406,8 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
       %>
       <td>
         <label for="rightxxx_<%=((RightsPersist)rights.get(i)).getRightName()%>" class="noshow">Right</label>
-        <input title="Choose a right" alt="Choose a right" type="checkbox" id="rightxxx_<%=((RightsPersist)rights.get(i)).getRightName()%>" name="rightxxx_<%=((RightsPersist)rights.get(i)).getRightName()%>" value ="<%=((RightsPersist)rights.get(i)).getRightName()%>" /><label for="rightxxx_<%=((RightsPersist)rights.get(i)).getRightName()%>"><%=UsersUtility.getNameNice(((RightsPersist)rights.get(i)).getRightName())%></label>
+        <input title="<%=cm.cms("roles_add_25")%>" alt="<%=cm.cms("roles_add_25")%>" type="checkbox" id="rightxxx_<%=((RightsPersist)rights.get(i)).getRightName()%>" name="rightxxx_<%=((RightsPersist)rights.get(i)).getRightName()%>" value ="<%=((RightsPersist)rights.get(i)).getRightName()%>" /><label for="rightxxx_<%=((RightsPersist)rights.get(i)).getRightName()%>"><%=UsersUtility.getNameNice(((RightsPersist)rights.get(i)).getRightName())%></label>
+        <%=cm.cmsTitle("roles_add_25")%>
       </td>
       <%
           }
@@ -428,19 +430,28 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
       if(users_operation != null && users_operation.equalsIgnoreCase("edit"))
       {
     %>
-    <label for="input1" class="noshow">Edit role</label>
-    <input id="input1" type="submit" value="Edit role" name="submit" onclick="document.eunis.operation.value='updateRole';" class="inputTextField"  title="Edit role" />&nbsp;&nbsp;
+    <label for="input1" class="noshow"><%=cm.cms("roles_add_26")%></label>
+    <input id="input1" type="submit" value="<%=cm.cms("roles_add_27")%>" name="submit" onclick="document.eunis.operation.value='updateRole';" class="inputTextField"  title="<%=cm.cms("roles_add_26")%>" />
+    <%=cm.cmsLabel("roles_add_26")%>
+    <%=cm.cmsTitle("roles_add_26")%>
+    <%=cm.cmsInput("roles_add_27")%> &nbsp;&nbsp;
     <%
       } else
       {
     %>
-    <label for="input2" class="noshow">Add role</label>
-    <input id="input2" type="submit" value="Add role" name="submit" onclick="document.eunis.operation.value='submit';" class="inputTextField"   title="Add role" />&nbsp;&nbsp;
+    <label for="input2" class="noshow"><%=cm.cms("roles_add_28")%></label>
+    <input id="input2" type="submit" value="<%=cm.cms("roles_add_29")%>" name="submit" onclick="document.eunis.operation.value='submit';" class="inputTextField"   title="<%=cm.cms("roles_add_28")%>" />
+    <%=cm.cmsLabel("roles_add_28")%>
+    <%=cm.cmsTitle("roles_add_28")%>
+    <%=cm.cmsInput("roles_add_29")%>&nbsp;&nbsp;
     <%
       }
     %>
-    <label for="input3" class="noshow">Reset</label>
-    <input id="input3" type="reset" value="Reset" name="Reset" class="inputTextField"  title="Reset" />
+    <label for="input3" class="noshow"><%=cm.cms("reset")%></label>
+    <input id="input3" type="reset" value="<%=cm.cms("reset_btn")%>" name="Reset" class="inputTextField"  title="<%=cm.cms("reset")%>" />
+    <%=cm.cmsLabel("reset")%>
+    <%=cm.cmsTitle("reset")%>
+    <%=cm.cmsInput("reset_btn")%>
   </td>
  </tr>
  <tr>
@@ -475,8 +486,34 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
   } else
   {
 %>
-<strong>You cann't do this because you are not authentificated or you haven't this right!</strong>
+<strong><%=cm.cmsText("roles_add_30")%></strong>
 <br />
 <%
   }
 %>
+
+<%=cm.br()%>
+<%=cm.cmsMsg("roles_add_01")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("roles_add_02")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("roles_add_03")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("roles_add_04")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("roles_add_05")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("roles_add_07")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("roles_add_08")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("roles_add_10")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("roles_add_11")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("roles_add_13")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("roles_add_14")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("roles_add_19")%>
+<%=cm.br()%>

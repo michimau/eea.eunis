@@ -4,34 +4,38 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Pick habitats, show references' function - search page.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page contentType="text/html" %>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.jrfTables.habitats.references.HabitatsBooksDomain,
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.search.habitats.references.ReferencesSearchCriteria,
                  java.util.Vector" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
   <script language="JavaScript" src="script/habitats-books.js" type="text/javascript"></script>
   <script language="JavaScript" src="script/save-criteria.js" type="text/javascript"></script>
   <script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
-  <script language="JavaScript" src="script/utils.js" type="text/javascript"></script>
   <%
-    WebContentManagement contentManagement = SessionManager.getWebContent();
+    WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=contentManagement.getContent("habitats_books_title", false)%>
+    <%=cm.cms("habitats_books_title")%>
   </title>
 </head>
 
 <body>
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="Home#index.jsp,Habitat types#habitats.jsp,Pick habitat type show references" />
+  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,pick_habitat_show_references_location" />
   <jsp:param name="helpLink" value="habitats-help.jsp" />
 </jsp:include>
 <div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>
@@ -40,45 +44,45 @@
 <table summary="Main content" width="100%" border="0">
 <tr>
   <td>
-    <table width="100%" border="0" align="center" summary="layout">
+    <table width="100%" border="0" summary="layout">
         <tr>
           <td>
-            <h5>
-              <%=contentManagement.getContent("habitats_books_01")%>
-            </h5>
-            <%=contentManagement.getContent("habitats_books_20")%>
+            <h1>
+              <%=cm.cmsText("habitats_books_01")%>
+            </h1>
+            <%=cm.cmsText("habitats_books_20")%>
             <br />
             <br />
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td bgcolor="#EEEEEE">
                   <strong>
-                    <%=contentManagement.getContent("habitats_books_02")%>
+                    <%=cm.cmsText("habitats_books_02")%>
                   </strong>
                 </td>
               </tr>
               <tr>
                 <td bgcolor="#EEEEEE">
                   <input type="checkbox" name="showAuthor" id="showAuthor" value="true" checked="checked" disabled="disabled" />
-                  <label for="showAuthor"><%=contentManagement.getContent("habitats_books_03")%></label>
+                  <label for="showAuthor"><%=cm.cmsText("habitats_books_03")%></label>
                   &nbsp;
                   <input type="checkbox" name="showDate" id="showDate" value="true" checked="checked" disabled="disabled" />
-                  <label for="showDate"><%=contentManagement.getContent("habitats_books_04")%></label>
+                  <label for="showDate"><%=cm.cmsText("habitats_books_04")%></label>
                   &nbsp;
                   <input type="checkbox" name="showTitle" id="showTitle" value="true" checked="checked" disabled="disabled" />
-                  <label for="showTitle"><%=contentManagement.getContent("habitats_books_05")%></label>
+                  <label for="showTitle"><%=cm.cmsText("habitats_books_05")%></label>
                   &nbsp;
                   <input type="checkbox" name="showEditor" id="showEditor" value="true" checked="checked" disabled="disabled" />
-                  <label for="showEditor"><%=contentManagement.getContent("habitats_books_06")%></label>
+                  <label for="showEditor"><%=cm.cmsText("habitats_books_06")%></label>
                   &nbsp;
                   <input type="checkbox" name="showPublisher" id="showPublisher" value="true" checked="checked" disabled="disabled" />
-                  <label for="showPublisher"><%=contentManagement.getContent("habitats_books_07")%></label>
+                  <label for="showPublisher"><%=cm.cmsText("habitats_books_07")%></label>
                   &nbsp;
                   <input type="checkbox" name="showSourceType" id="showSourceType" value="true" checked="checked" disabled="disabled" />
-                  <label for="showSourceType">Source type</label>
+                  <label for="showSourceType"><%=cm.cmsText("habitats_books_source")%></label>
                   &nbsp;
                   <input type="checkbox" name="showHabitatTypes" id="showHabitatTypes" value="true" checked="checked" disabled="disabled" />
-                  <label for="showHabitatTypes">Habitat types</label>
+                  <label for="showHabitatTypes"><%=cm.cmsText("habitats_books_habitats")%></label>
                   &nbsp;
                 </td>
               </tr>
@@ -87,47 +91,55 @@
           </td>
         </tr>
         <tr>
-          <td align="left">
+          <td>
             <img alt="Mandatory" src="images/mini/field_mandatory.gif" align="middle" />
-            &nbsp;
-            <label for="scientificName"><strong><%=contentManagement.getContent("habitats_books_08")%></strong></label>
-            &nbsp;
-            <label for="relationOp" class="noshow">Operator</label>
+            <label for="scientificName"><strong><%=cm.cmsText("habitats_books_08")%></strong></label>
+            <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
             <select name="relationOp" id="relationOp" class="inputTextField" title="Operator">
-              <option value="<%=Utilities.OPERATOR_IS%>"><%=contentManagement.getContent("habitats_books_09", false)%></option>
-              <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=contentManagement.getContent("habitats_books_10", false)%></option>
-              <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=contentManagement.getContent("habitats_books_11", false)%></option>
+              <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("habitats_books_09")%></option>
+              <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("habitats_books_10")%></option>
+              <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("habitats_books_11")%></option>
             </select>
-            <label for="scientificName" class="noshow">List of values</label>
+            <%=cm.cmsLabel("operator")%>
+            <%=cm.cmsInput("habitats_books_09")%>
+            <%=cm.cmsInput("habitats_books_10")%>
+            <%=cm.cmsInput("habitats_books_11")%>
+            <label for="scientificName" class="noshow"><%=cm.cms("list_of_values")%></label>
             <input  align="middle" size="32" name="scientificName" id="scientificName" value="" class="inputTextField" title="Name" />
-            <a title="List of values" href="javascript:openHelper('habitats-books-choice.jsp?')"><img align="middle" height="18" alt="<%=contentManagement.getContent("habitats_books_12", false )%>" src="images/helper/helper.gif" width="11" border="0" /></a>
+            <%=cm.cmsLabel("list_of_values")%>
+            <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-books-choice.jsp?')"><img align="middle" height="18" alt="<%=cm.cms("habitats_books_12")%>" src="images/helper/helper.gif" width="11" border="0" /></a>
+            <%=cm.cmsTitle("habitats_books_12")%>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <%=contentManagement.writeEditTag("habitats_books_12")%>
           </td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
-          <td align="left" bgcolor="#EEEEEE">
-            <%=contentManagement.getContent("habitats_books_13")%>:&nbsp;
-            <input type="radio" name="database" id="database1" value="<%=HabitatsBooksDomain.SEARCH_EUNIS%>" checked="checked" onmouseover="showtooltip('Habitats_Eunis')" onmouseout="hidetooltip()" />
-            <label for="database1"><%=contentManagement.getContent("habitats_books_14")%></label>
+          <td bgcolor="#EEEEEE">
+            <%=cm.cmsText("habitats_books_13")%>:&nbsp;
+            <input type="radio" name="database" id="database1" value="<%=HabitatsBooksDomain.SEARCH_EUNIS%>" checked="checked" title="<%=cm.cms("search_eunis")%>" />
+            <%=cm.cmsTitle("search_eunis")%>
+            <label for="database1"><%=cm.cmsText("habitats_books_14")%></label>
             &nbsp;&nbsp;
-            <input type="radio" name="database" id="database2" value="<%=HabitatsBooksDomain.SEARCH_ANNEX_I%>" onmouseover="showtooltip('Habitats_AnnexI')" onmouseout="hidetooltip()" />
-            <label for="database2"><%=contentManagement.getContent("habitats_books_15")%></label>
+            <input type="radio" name="database" id="database2" value="<%=HabitatsBooksDomain.SEARCH_ANNEX_I%>" title="<%=cm.cms("search_annex1")%>" />
+            <%=cm.cmsTitle("search_annex1")%>
+            <label for="database2"><%=cm.cmsText("habitats_books_15")%></label>
             &nbsp;&nbsp;
-            <input type="radio" name="database" id="database3" value="<%=HabitatsBooksDomain.SEARCH_BOTH%>" onmouseover="showtooltip('Habitats_Both')" onmouseout="hidetooltip()" />
-            <label for="database3"><%=contentManagement.getContent("habitats_books_16")%></label>
+            <input type="radio" name="database" id="database3" value="<%=HabitatsBooksDomain.SEARCH_BOTH%>" title="<%=cm.cms("search_both")%>" />
+            <%=cm.cmsTitle("search_both")%>
+            <label for="database3"><%=cm.cmsText("habitats_books_16")%></label>
           </td>
         </tr>
         <tr>
           <td align="right">
             <br />
-            <label for="Reset" class="noshow">Reset values</label>
-            <input type="reset" title="Reset fields" value="<%=contentManagement.getContent("habitats_books_17", false)%>" name="Reset" id="Reset" class="inputTextField" />
-            <%=contentManagement.writeEditTag("habitats_books_17")%>
-            <label for="submit2" class="noshow">Search</label>
-            <input type="submit" title="Search" value="<%=contentManagement.getContent("habitats_books_18", false)%>" name="submit2" id="submit2" class="inputTextField" />
-            <%=contentManagement.writeEditTag("habitats_books_18")%>
+            <label for="Reset" class="noshow"><%=cm.cms("reset_btn")%></label>
+            <input type="reset" title="Reset fields" value="<%=cm.cms("habitats_books_17")%>" name="Reset" id="Reset" class="inputTextField" />
+            <%=cm.cmsTitle("reset_values")%>
+            <%=cm.cmsInput("habitats_books_17")%>
+            <label for="submit2" class="noshow"><%=cm.cms("search_btn")%></label>
+            <input type="submit" title="<%=cm.cms("search_btn")%>" value="<%=cm.cms("habitats_books_18")%>" name="submit2" id="submit2" class="inputTextField" />
+            <%=cm.cmsTitle("search_btn")%>
+            <%=cm.cmsInput("habitats_books_18")%>
           </td>
         </tr>
     </table>
@@ -153,10 +165,9 @@
   //-->
   </script>
 <script language="JavaScript" src="script/habitats-books-save-criteria.js" type="text/javascript"></script>
-    <%=contentManagement.getContent("habitats_books_19")%>:
-    <a href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-books.jsp','2','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');">
-      <img alt="Save" border="0" src="images/save.jpg" width="21" height="19" align="middle" />
-    </a>
+    <%=cm.cmsText("habitats_books_19")%>:
+    <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-books.jsp','2','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+    <%=cm.cmsTitle("save_criteria")%>
 <%
   // Set Vector for URL string
   Vector show = new Vector();
@@ -173,9 +184,14 @@
 <%
   }
 %>
+<%=cm.br()%>
+<%=cm.cmsMsg("habitats_books_title")%>
+<%=cm.br()%>
 <jsp:include page="footer.jsp">
   <jsp:param name="page_name" value="habitats-books.jsp" />
 </jsp:include>
+  </div>
+  </div>
   </div>
 </body>
 </html>

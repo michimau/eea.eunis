@@ -1,4 +1,8 @@
-<html lang="en">
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
+<html lang="en-gb">
 <body bgcolor="#ffffff">
 <h2>Database connection error</h2>
 <br />

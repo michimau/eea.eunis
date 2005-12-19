@@ -4,13 +4,17 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Sites data source selection function - search page.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.search.Utilities,
                 ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   boolean showCorine = Utilities.checkedStringToBoolean(request.getParameter("showCorine"), true);
   String enableCorine = ( !showCorine ) ? "disabled=\"disabled\"" : "";
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
 <script language="JavaScript" type="text/javascript">
   <!--
@@ -19,7 +23,7 @@
     if (!document.criteria.NATURA2000.checked && !document.criteria.CDDA_NATIONAL.checked && !document.criteria.NATURENET.checked &&
         !document.criteria.CORINE.checked && !document.criteria.CDDA_INTERNATIONAL.checked && !document.criteria.DIPLOMA.checked &&
         !document.criteria.BIOGENETIC.checked && !document.criteria.EMERALD.checked) {
-            alert('<%=contentManagement.getContent("sites_databases_01", false )%>');
+            alert('<%=cm.cms("sites_databases_01")%>');
             return false;
     }
     return true;
@@ -62,95 +66,104 @@
 </script>
 <%
   String CORINE = "";
-  if(request.getParameter("CORINE") != null) CORINE="checked"; else CORINE="";
+  if(request.getParameter("CORINE") != null) CORINE="checked";
   String DIPLOMA = "";
-  if(request.getParameter("DIPLOMA") != null) DIPLOMA="checked"; else DIPLOMA="";
+  if(request.getParameter("DIPLOMA") != null) DIPLOMA="checked";
   String CDDA_NATIONAL = "";
-  if(request.getParameter("CDDA_NATIONAL") != null) CDDA_NATIONAL="checked"; else CDDA_NATIONAL="";
+  if(request.getParameter("CDDA_NATIONAL") != null) CDDA_NATIONAL="checked";
   String CDDA_INTERNATIONAL = "";
-  if(request.getParameter("CDDA_INTERNATIONAL") != null) CDDA_INTERNATIONAL="checked"; else CDDA_INTERNATIONAL="";
+  if(request.getParameter("CDDA_INTERNATIONAL") != null) CDDA_INTERNATIONAL="checked";
   String BIOGENETIC = "";
-  if(request.getParameter("BIOGENETIC") != null) BIOGENETIC="checked"; else BIOGENETIC="";
+  if(request.getParameter("BIOGENETIC") != null) BIOGENETIC="checked";
   String NATURA2000 = "";
-  if(request.getParameter("NATURA2000") != null) NATURA2000="checked"; else NATURA2000="";
+  if(request.getParameter("NATURA2000") != null) NATURA2000="checked";
   String NATURENET = "";
-  if(request.getParameter("NATURENET") != null) NATURENET="checked"; else NATURENET="";
+  if(request.getParameter("NATURENET") != null) NATURENET="checked";
   String EMERALD = "";
-  if(request.getParameter("EMERALD") != null) EMERALD="checked"; else EMERALD="";
+  if(request.getParameter("EMERALD") != null) EMERALD="checked";
   //EMERALD = null; // Disable EMERALD for now
 
-  WebContentManagement dbContentManagement = SessionManager.getWebContent();
-  String dbNatura2000 = Utilities.formatString(dbContentManagement.getContent("sites_databases_Natura 2000"), "Natura 2000");
-  String dbCDDANational = Utilities.formatString(dbContentManagement.getContent("sites_databases_CDDA National"), "CDDA National");
-  String dbNatureNet = Utilities.formatString(dbContentManagement.getContent("sites_databases_Nature Net"), "Nature Net");
-  String dbDiploma = Utilities.formatString(dbContentManagement.getContent("sites_databases_European Diploma"), "European Diploma");
-  String dbCDDAInternational = Utilities.formatString(dbContentManagement.getContent("sites_databases_CDDA International"), "CDDA International");
-  String dbCorine = Utilities.formatString(dbContentManagement.getContent("sites_databases_Corine Biotopes"), "Corine Biotopes");
-  String dbBiogenetic = Utilities.formatString(dbContentManagement.getContent("sites_databases_Biogenetic Reserve"), "Biogenetic Reserve");
-  String dbEmerald = Utilities.formatString(dbContentManagement.getContent("sites_databases_Emerald"), "Emerald");
+  String dbNatura2000 = Utilities.formatString(cm.cmsText("sites_databases_Natura 2000"), "Natura 2000");
+  String dbCDDANational = Utilities.formatString(cm.cmsText("sites_databases_CDDA National"), "CDDA National");
+  String dbNatureNet = Utilities.formatString(cm.cmsText("sites_databases_Nature Net"), "Nature Net");
+  String dbDiploma = Utilities.formatString(cm.cmsText("sites_databases_European Diploma"), "European Diploma");
+  String dbCDDAInternational = Utilities.formatString(cm.cmsText("sites_databases_CDDA International"), "CDDA International");
+  String dbCorine = Utilities.formatString(cm.cmsText("sites_databases_Corine Biotopes"), "Corine Biotopes");
+  String dbBiogenetic = Utilities.formatString(cm.cmsText("sites_databases_Biogenetic Reserve"), "Biogenetic Reserve");
+  String dbEmerald = Utilities.formatString(cm.cmsText("sites_databases_Emerald"), "Emerald");
 %>
-<div style="width:740px">
+<div style="width : 100%;">
 <table summary="layout" border="1" cellpadding="0" cellspacing="2" style="border-collapse: collapse; border-color : black;" width="100%">
   <tr>
     <td colspan="2">
-      <%=contentManagement.getContent("sites_databases_02")%>
+      <%=cm.cmsText("sites_databases_02")%>
     </td>
     <td>
-      <label for="checkAll" class="noshow">Check All</label>
+      <label for="checkAll" class="noshow"><%=cm.cms("check_all_btn_label")%></label>
       <input type="button" id="checkAll" name="checkAll"
-             title="Select all" value="Select all"
+             title="<%=cm.cms("check_all_btn_title")%>" value="<%=cm.cms("check_all_btn_value")%>"
              onclick="javascript:setSelection('true');"
              onkeypress="javascript:setSelection('true');"
              class="inputTextField" />
+      <%=cm.cmsLabel("check_all_btn_label")%>
+      <%=cm.cmsTitle("check_all_btn_title")%>
+      <%=cm.cmsInput("check_all_btn_value")%>
       &nbsp;
-      <label for="checkNone" class="noshow">Check none</label>
+      <label for="checkNone" class="noshow"><%=cm.cms("check_none_btn_label")%></label>
       <input type="button" id="checkNone" name="checkNone"
-             title="Select none" value="Select none"
+             title="<%=cm.cms("check_none_btn_title")%>" value="<%=cm.cms("check_none_btn_value")%>"
              onclick="javascript:setSelection('false');"
              onkeypress="javascript:setSelection('false');"
              class="inputTextField" />
+      <%=cm.cmsLabel("check_none_btn_label")%>
+      <%=cm.cmsTitle("check_none_btn_title")%>
+      <%=cm.cmsInput("check_none_btn_value")%>
     </td>
   </tr>
   <tr>
     <td width="33%">
-      <input type="checkbox" id="NATURA2000" title="NATURA2000" name="NATURA2000" value="<%=NATURA2000%>" />
+      <input type="checkbox" id="NATURA2000" title="NATURA2000" name="NATURA2000" value="<%=NATURA2000%>"  checked="<%=NATURA2000%>" />
       <label for="NATURA2000"><%=dbNatura2000%></label>
     </td>
     <td width="33%">
-      <input type="checkbox" id="CDDA_NATIONAL" title="CDDA_NATIONAL" name="CDDA_NATIONAL" value="<%=CDDA_NATIONAL%>" />
+      <input type="checkbox" id="CDDA_NATIONAL" title="CDDA_NATIONAL" name="CDDA_NATIONAL" value="<%=CDDA_NATIONAL%>"  checked="<%=CDDA_NATIONAL%>" />
       <label for="CDDA_NATIONAL"><%=dbCDDANational%></label>
     </td>
     <td width="34%">
-      <input type="checkbox" id="NATURENET" title="NATURENET" name="NATURENET" value="<%=NATURENET%>" disabled="disabled" />
+      <input type="checkbox" id="NATURENET" title="NATURENET" name="NATURENET" value="<%=NATURENET%>" checked="<%=NATURENET%>" disabled="disabled" />
       <label for="NATURENET"><%=dbNatureNet%></label>
     </td>
   </tr>
   <tr>
     <td width="33%">
-      <input type="checkbox" id="DIPLOMA" title="DIPLOMA" name="DIPLOMA" value="<%=DIPLOMA%>" />
+      <input type="checkbox" id="DIPLOMA" title="DIPLOMA" name="DIPLOMA" value="<%=DIPLOMA%>" checked="<%=DIPLOMA%>" />
       <label for="DIPLOMA"><%=dbDiploma%></label>
     </td>
     <td width="33%">
-      <input type="checkbox" id="CDDA_INTERNATIONAL" title="CDDA_INTERNATIONAL" name="CDDA_INTERNATIONAL" value="<%=CDDA_INTERNATIONAL%>" />
+      <input type="checkbox" id="CDDA_INTERNATIONAL" title="CDDA_INTERNATIONAL" name="CDDA_INTERNATIONAL" value="<%=CDDA_INTERNATIONAL%>" checked="<%=CDDA_INTERNATIONAL%>" />
       <label for="CDDA_INTERNATIONAL"><%=dbCDDAInternational%></label>
     </td>
     <td width="34%">
-      <input type="checkbox" id="CORINE" title="CORINE" name="CORINE" value="<%=CORINE%>" <%=enableCorine%> />
+      <input type="checkbox" id="CORINE" title="CORINE" name="CORINE" value="<%=CORINE%>" checked="<%=CORINE%>" <%=enableCorine%> />
       <label for="CORINE"><%=dbCorine%></label>
     </td>
   </tr>
   <tr>
     <td width="33%">
-      <input type="checkbox" id="BIOGENETIC" title="BIOGENETIC" name="BIOGENETIC" value="<%=BIOGENETIC%>" />
+      <input type="checkbox" id="BIOGENETIC" title="BIOGENETIC" name="BIOGENETIC" value="<%=BIOGENETIC%>" checked="<%=BIOGENETIC%>" />
       <label for="BIOGENETIC"><%=dbBiogenetic%></label>
     </td>
     <td width="33%">
-      <input type="checkbox" id="EMERALD" title="EMERALD" name="EMERALD" value="<%=EMERALD%>" />
+      <input type="checkbox" id="EMERALD" title="EMERALD" name="EMERALD" value="<%=EMERALD%>" checked="<%=EMERALD%>" />
       <label for="EMERALD"><%=dbEmerald%></label>
     </td>
     <td width="34%">
-      <a title="Download sites data" href="sites-download.jsp"><%=contentManagement.getContent("sites_databases_03")%></a>
+      <a title="<%=cm.cms("sites_databases_03_title")%>" href="sites-download.jsp"><%=cm.cmsText("sites_databases_03")%></a>
+      <%=cm.cmsTitle("sites_databases_03_title")%>
     </td>
   </tr>
 </table>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("sites_databases_01")%>
+  <%=cm.br()%>      
 </div>

@@ -1,20 +1,19 @@
 package ro.finsiel.eunis.search.sites.statistics;
 
-import ro.finsiel.eunis.search.sites.SitesFormBean;
+import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsDomain;
+import ro.finsiel.eunis.jrfTables.sites.statistics.StatisticsDomain;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.CountryUtil;
-import ro.finsiel.eunis.jrfTables.sites.statistics.*;
-import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsDomain;
+import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.sites.SitesFormBean;
 
-import java.util.Vector;
-import java.util.List;
-import java.util.Date;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.DriverManager;
+import java.util.List;
+import java.util.Vector;
 
 /**
  * Form bean used for sites->statistical data.
@@ -30,7 +29,8 @@ public class StatisticsBean extends SitesFormBean {
     private static String[] db = {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
 
     /**
-     * Compute number of sites for main search criteria
+     * Compute number of sites for main search criteria.
+     * @return number of sites
      */
   public Long computeNumberOfSites() {
         String sqlWhere = prepareSQLForComputeNoSites();
@@ -62,7 +62,7 @@ public class StatisticsBean extends SitesFormBean {
     }
 
     /**
-     * Construct the where condition for computeNumberOfSites function
+     * Construct the where condition for computeNumberOfSites function.
      * @return SQL.
      */
     public String prepareSQLForComputeNoSites() {
@@ -143,7 +143,7 @@ public class StatisticsBean extends SitesFormBean {
 
 
     /**
-     * Construct the where condition for query which returns the list of sites that fulfil main search criteria
+     * Construct the where condition for query which returns the list of sites that fulfil main search criteria.
      * @return SQL.
      */
 
@@ -204,7 +204,7 @@ public class StatisticsBean extends SitesFormBean {
     }
 
     /**
-     * Return where condition in the others cases
+     * Return where condition in the others cases.
      * @param useIso3l - country is obtained by iso3l
      * @return string condition
      */
@@ -322,7 +322,7 @@ public class StatisticsBean extends SitesFormBean {
     }
 
     /**
-     * Put list of sites in where condition format
+     * Put list of sites in where condition format.
      * @param idSitesList
      * @param alias
      * @return string condition
@@ -344,7 +344,7 @@ public class StatisticsBean extends SitesFormBean {
     }
 
     /**
-     *  Return list of designations
+     *  Return list of designations.
      * @param idSitesList
      * @return list of designations
      */
@@ -383,7 +383,7 @@ public class StatisticsBean extends SitesFormBean {
     }
 
     /**
-     * Return no of sites and total area for a designation
+     * Return no of sites and total area for a designation.
      * @param idSitesList
      * @param id
      * @param idGeoscope
@@ -493,10 +493,10 @@ public class StatisticsBean extends SitesFormBean {
     }
 
     /**
-     * Close all db elements
-     * @param con
-     * @param ps
-     * @param rs
+     * Close all db elements.
+     * @param con connection
+     * @param ps prepared sql statement
+     * @param rs result set
      */
     private void closeAll(Connection con,PreparedStatement ps,ResultSet rs) {
         try

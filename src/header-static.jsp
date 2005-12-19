@@ -4,39 +4,34 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Static part of the header
 --%>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,
-                 ro.finsiel.eunis.jrfTables.Chm62edtLanguagePersist,
-                 ro.finsiel.eunis.search.Utilities" %>
-<%@ page import="ro.finsiel.eunis.session.ThemeManager" %>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement" %>
 <%@ page import="java.util.List" %>
+<%@ page import="ro.finsiel.eunis.jrfTables.EunisISOLanguagesPersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-  WebContentManagement contentManagement = SessionManager.getWebContent();
-  ThemeManager themeManager = SessionManager.getThemeManager();
-  //String lightColor = (null != themeManager) ? themeManager.getLightColor() : "#669ACC";
-  String mediumColor = (null != themeManager) ? themeManager.getMediumColor() : "#4478AA";
-  String darkColor = (null != themeManager) ? themeManager.getDarkColor() : "#3759A3";
-  String imageName = (null != themeManager) ? themeManager.getHeaderImageName() : "banner.jpg";
-  String digir_url = Utilities.formatString(application.getInitParameter("DIGIR_URL"));
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
-<script type="text/javascript" language="JavaScript" src="script/utils.js"></script>
-<noscript>Your browser does not support JavaScript!</noscript>
-<script type="text/javascript" language="JavaScript" src="script/header.js"></script>
-<noscript>Your browser does not support JavaScript!</noscript>
 <a href="#main_content" style="display:none" title="Skip to main content">Skip to main content</a>
 <div id="header">
 <%
-  List translatedLanguages = contentManagement.getTranslatedLanguages();
+  List translatedLanguages = cm.getTranslatedLanguages();
 %>
-  <form action="">
+  <%-- span display the banner --%>
+  <span></span>
+  <div class="headerlanguageprint">
+  <form id="intl_lang" name="intl_lang" action="index.jsp" method="get">
+    <input type="hidden" name="operation" value="changeLanguage" />
     <label for="language_international" class="noshow">Language</label>
-    <select title="Select site language" id="language_international" name="language_international" onchange="changeLanguage();" class="languageTextField" disabled="disabled">
-        <option value="en" selected="selected">English</option>
+    <select title="Select site language" id="language_international" name="language_international" onchange="changeLanguage();" class="languageTextField">
 <%
-  String selected = "";
+  String selected;
   for(int i = 0; i < translatedLanguages.size(); i++)
   {
-    Chm62edtLanguagePersist language = (Chm62edtLanguagePersist) translatedLanguages.get(i);
+    EunisISOLanguagesPersist language = ( EunisISOLanguagesPersist ) translatedLanguages.get(i);
     if(language.getCode().equalsIgnoreCase( SessionManager.getCurrentLanguage() ) )
     {
       selected = " selected=\"selected\"";
@@ -46,88 +41,78 @@
       selected = "";
     }
 %>
-        <option value="<%=language.getCode()%>"<%=selected%>>
-          <%=language.getNameEn()%>
-        </option>
+      <option value="<%=language.getCode()%>"<%=selected%>>
+        <%=language.getName()%>
+      </option>
 <%
   }
 %>
     </select>
   </form>
+  </div>
+  <div class="headertextprint">
+    EUNIS Database 2 - European Nature Information System Database version 2
+  </div>
 </div>
-<div class="noshow">Begin main menu</div>
-<div style="width : 740px;">
+<div class="headerstaticprint">
   <table summary="layout" border="1" cellpadding="0" cellspacing="0" class="main_menu" width="100%">
     <tr>
       <td style="padding-left : 5px;">
-        <a class="menu_link" href="index.jsp" accesskey="1" title="Home page"><%=contentManagement.getContent("generic_header-static_home")%></a>
-        <img src="images/pixel.gif" width="1" height="1" alt="" />
+        <a class="menu_link" href="index.jsp" accesskey="1" title="<%=cm.cms("generic_header-static_home_title")%>"><%=cm.cmsText("generic_header-static_home")%></a><%=cm.cmsTitle("generic_header-static_home_title")%>
       </td>
       <td style="padding-left : 5px;">
-        <a class="menu_link" href="login.jsp" accesskey="l" title="User login"><%=contentManagement.getContent("generic_header-static_login")%></a>
-        <img src="images/pixel.gif" width="1" height="1" alt="" />
+        <a class="menu_link" href="login.jsp" accesskey="l" title="<%=cm.cms("generic_header-static_login_title")%>"><%=cm.cmsText("generic_header-static_login")%></a><%=cm.cmsTitle("generic_header-static_login_title")%>
       </td>
       <td style="padding-left : 5px;">
-        <a id="digir_url_link" class="menu_link" title="View DiGIR application provider information" href="<%=digir_url%>"><%=contentManagement.getContent("generic_header-static_digir")%></a>
-        <img src="images/pixel.gif" width="1" height="1" alt="" />
+        <a id="digir_url_link" href="digir.jsp" class="menu_link" title="<%=cm.cms("generic_header-static_digir_title")%>"><%=cm.cmsText("generic_header-static_digir")%></a><%=cm.cmsTitle("generic_header-static_digir_title")%>
       </td>
       <td style="padding-left : 5px;">
-        <a href="references.jsp" class="menu_link" accesskey="r" title="View references used in EUNIS"><%=contentManagement.getContent("generic_header-static_references")%></a>
-        <img src="images/pixel.gif" width="1" height="1" alt="" />
+        <a href="references.jsp" class="menu_link" accesskey="r" title="<%=cm.cms("generic_header-static_references_title")%>"><%=cm.cmsText("generic_header-static_references")%></a><%=cm.cmsTitle("generic_header-static_references_title")%>
       </td>
       <td style="padding-left : 5px;">
-        <a class="menu_link" href="related-reports.jsp" accesskey="p" title="View and download reports on biodiversity"><%=contentManagement.getContent("generic_header-static_reports")%></a>
-        <img src="images/pixel.gif" width="1" height="1" alt="" />
+        <a class="menu_link" href="related-reports.jsp" accesskey="p" title="<%=cm.cms("generic_header-static_reports_title")%>"><%=cm.cmsText("generic_header-static_reports")%></a><%=cm.cmsTitle("generic_header-static_reports_title")%>
       </td>
       <td colspan="3" style="padding-left : 5px; text-align : right;">
         <form action="" name="searchGoogle" id="searchGoogle" method="get" onsubmit="popSearch(); return false;">
-        <label class="menu_text" for="qq"><%=contentManagement.getContent("generic_header-static_google")%></label>
+        <label class="menu_text" for="qq"><%=cm.cmsText("generic_header-static_google")%></label>
         <input type="text"
                name="q"
                id="qq"
                size="15"
                class="textInputColorMain"
-               title="Type the string you are searching for and press 'Enter'"
-               alt="Type the string you are searching for and press 'Enter'"
-               value="Search on Google"
+               title="<%=cm.cms("header_google_title")%>"
+               value="<%=cm.cms("header_google")%>"
                onfocus="javascript:document.searchGoogle.qq.select();" />
+          <%=cm.cmsTitle("header_google_title")%>
+          <%=cm.cmsInput("header_google")%>
         </form>
       </td>
     </tr>
     <tr>
       <td style="padding-left : 5px;">
-        <a class="menu_link" href="species.jsp" accesskey="s" title="Species module"><%=contentManagement.getContent("generic_header-static_species")%></a>
-        <img src="images/pixel.gif" width="1" height="1" alt="" />
+        <a class="menu_link" href="species.jsp" accesskey="s" title="<%=cm.cms("generic_header-static_species_title")%>"><%=cm.cmsText("generic_header-static_species")%></a><%=cm.cmsTitle("generic_header-static_species_title")%>
       </td>
       <td style="padding-left : 5px;">
-        <a class="menu_link" href="habitats.jsp" accesskey="h" title="Habitat types module"><%=contentManagement.getContent("generic_header-static_habitats")%></a>
-        <img src="images/pixel.gif" width="1" height="1" alt="" />
+        <a class="menu_link" href="habitats.jsp" accesskey="h" title="<%=cm.cms("generic_header-static_habitats_title")%>"><%=cm.cmsText("generic_header-static_habitats")%></a><%=cm.cmsTitle("generic_header-static_habitats_title")%>
       </td>
       <td style="padding-left : 5px;">
-        <a class="menu_link" href="sites.jsp" accesskey="t" title="Sites module"><%=contentManagement.getContent("generic_header-static_sites")%></a>
-        <img src="images/pixel.gif" width="1" height="1" alt="" />
+        <a class="menu_link" href="sites.jsp" accesskey="t" title="<%=cm.cms("generic_header-static_sites_title")%>"><%=cm.cmsText("generic_header-static_sites")%></a><%=cm.cmsTitle("generic_header-static_sites_title")%>
       </td>
       <td style="padding-left : 5px;">
-        <a class="menu_link" href="combined-search.jsp" accesskey="c" title="Combined search tool"><%=contentManagement.getContent("generic_header-static_combined")%></a>
-        <img src="images/pixel.gif" width="1" height="1" alt="" />
+        <a class="menu_link" href="combined-search.jsp" accesskey="c" title="<%=cm.cms("generic_header-static_combined_title")%>"><%=cm.cmsText("generic_header-static_combined")%></a><%=cm.cmsTitle("generic_header-static_combined_title")%>
       </td>
       <td style="padding-left : 5px;">
-        <a class="menu_link" href="glossary.jsp" accesskey="g" title="Glossary of terms"><%=contentManagement.getContent("generic_header-static_glossary")%></a>
-        <img src="images/pixel.gif" width="1" height="1" alt="" />
+        <a class="menu_link" href="glossary.jsp" accesskey="g" title="<%=cm.cms("generic_header-static_glossary_title")%>"><%=cm.cmsText("generic_header-static_glossary")%></a><%=cm.cmsTitle("generic_header-static_glossary_title")%>
       </td>
       <td style="padding-left : 5px;">
-        <a class="menu_link" href="eunis-map.jsp" accesskey="3" title="EUNIS navigation map"><%=contentManagement.getContent("generic_header-static_sitemap")%></a>
-        <img src="images/pixel.gif" width="1" height="1" alt="" />
+        <a class="menu_link" href="eunis-map.jsp" accesskey="3" title="<%=cm.cms("generic_header-static_sitemap_title")%>"><%=cm.cmsText("generic_header-static_sitemap")%></a><%=cm.cmsTitle("generic_header-static_sitemap_title")%>
       </td>
       <td style="padding-left : 5px;">
-        <a class="menu_link" href="gis-tool.jsp" accesskey="u" title="Interactive map server"><%=contentManagement.getContent("generic_header-static_gistool")%></a>
-        <img src="images/pixel.gif" width="1" height="1" alt="" />
+        <a class="menu_link" href="gis-tool.jsp" accesskey="u" title="<%=cm.cms("generic_header-static_gistool_title")%>"><%=cm.cmsText("generic_header-static_gistool")%></a><%=cm.cmsTitle("generic_header-static_gistool_title")%>
       </td>
       <td style="padding-left : 5px;">
-        <a class="menu_link" href="about.jsp" accesskey="b" title="Information about EUNIS"><%=contentManagement.getContent("generic_header-static_about")%></a>
-        <img src="images/pixel.gif" width="1" height="1" alt="" />
+        <a class="menu_link" href="about.jsp" accesskey="b" title="<%=cm.cms("generic_header-static_about_title")%>"><%=cm.cmsText("generic_header-static_about")%></a><%=cm.cmsTitle("generic_header-static_about_title")%>
       </td>
     </tr>
   </table>
-</div>  
-<div class="noshow">End main menu</div>
+</div>

@@ -4,6 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Habitats general information' function - display links to all habitat searches.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.exceptions.InitializationException,
                  ro.finsiel.eunis.factsheet.habitats.DescriptionWrapper,
@@ -21,12 +25,12 @@
   String idHabitat = request.getParameter("idHabitat");
   HabitatsFactsheet factsheet = null;
   factsheet = new HabitatsFactsheet(idHabitat);
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
   <table summary="layout" width="100%" border="0" cellspacing="1" cellpadding="0" style="border-collapse: collapse;">
     <tr bgcolor="#CCCCCC" valign="middle">
-      <td width="15%" align="left">
-        <%=contentManagement.getContent("habitats_factsheet_04")%>
+      <td width="15%">
+        <%=cm.cmsText("habitats_factsheet_04")%>
       </td>
       <td width="40%">
         <strong>
@@ -41,7 +45,8 @@
     int realLevel = factsheet.getHabitatLevel().intValue() + 1;
 %>
     <%-- Key navigation--%>
-    <a title="Open key navigation page" href="habitats-key.jsp?pageCode=<%=factsheet.getEunisHabitatCode()%>&amp;level=<%=realLevel%>"><img alt="Key navigation" src="images/mini/key_in.png" width="20" height="20" title="<%=contentManagement.getContent("habitats_factsheet_80", false )%>" border="0" /></a>
+    <a title="<%=cm.cms("open_key_navigation")%>" href="habitats-key.jsp?pageCode=<%=factsheet.getEunisHabitatCode()%>&amp;level=<%=realLevel%>"><img alt="Key navigation" src="images/mini/key_in.png" width="20" height="20" title="<%=cm.cms("habitats_factsheet_80")%>" border="0" /></a>
+    <%=cm.cmsTitle("open_key_navigation")%><%=cm.cmsTitle("habitats_factsheet_80")%>
     &nbsp;&nbsp;
 <%
   }
@@ -50,19 +55,22 @@
     if (factsheet.getHabitatLevel() != null && factsheet.getHabitatLevel().intValue() > 1)
     {
 %>
-      <a title="Open code browser" href="habitats-code-browser.jsp?Code=<%=factsheet.getEunisHabitatCode()%>&amp;habID=<%=factsheet.getIdHabitat()%>&amp;fromFactsheet=yes"><img alt="Tree navigation" src="images/mini/tree.gif" width="20" height="20" border="0" title="<%=contentManagement.getContent("habitats_factsheet_06", false )%>" /></a>
+      <a title="<%=cm.cms("open_code_browser")%>" href="habitats-code-browser.jsp?Code=<%=factsheet.getEunisHabitatCode()%>&amp;habID=<%=factsheet.getIdHabitat()%>&amp;fromFactsheet=yes"><img alt="<%=cm.cms("open_code_browser")%>" src="images/mini/tree.gif" width="20" height="20" border="0" title="<%=cm.cms("habitats_factsheet_06")%>" /></a>
+      <%=cm.cmsTitle("open_code_browser")%><%=cm.cmsTitle("habitats_factsheet_06")%>
       &nbsp;&nbsp;
 <%
     }
     if (factsheet.getHabitatLevel() != null && factsheet.getHabitatLevel().intValue() == 1)
     {
 %>
-      <a title="Tree navigation" href="habitats-code-browser.jsp"><img alt="Tree navigation" src="images/mini/tree.gif" width="20" height="20" border="0" title="<%=contentManagement.getContent("habitats_factsheet_06", false )%>" /></a>
+      <a title="<%=cm.cms("open_tree_navigation")%>" href="habitats-code-browser.jsp"><img alt="<%=cm.cms("open_tree_navigation")%>" src="images/mini/tree.gif" width="20" height="20" border="0" title="<%=cm.cms("habitats_factsheet_06")%>" /></a>
+      <%=cm.cmsTitle("open_tree_navigation")%><%=cm.cmsTitle("habitats_factsheet_06")%>
       &nbsp;&nbsp;
 <%
     }
 %>
-      <a title="Open diagram" href="javascript:openDiagram('habitats-diagram.jsp?habCode=<%=factsheet.getEunisHabitatCode()%>','','toolbar=yes,scrollbars=yes,resizable=yes')"><img alt="Diagram" src="images/mini/diagram_out.png" title="<%=contentManagement.getContent("habitats_factsheet_07", false )%>" width="20" height="20" border="0" /></a>
+      <a title="<%=cm.cms("open_diagram")%>" href="javascript:openDiagram('habitats-diagram.jsp?habCode=<%=factsheet.getEunisHabitatCode()%>','','toolbar=yes,scrollbars=yes,resizable=yes')"><img alt="<%=cm.cms("open_diagram")%>" src="images/mini/diagram_out.png" title="<%=cm.cms("habitats_factsheet_07")%>" width="20" height="20" border="0" /></a>
+      <%=cm.cmsTitle("open_diagram")%><%=cm.cmsTitle("habitats_factsheet_07")%>
 <%
   }
 %>
@@ -78,7 +86,7 @@
 %>
     <tr bgcolor="#EEEEEE">
       <td width="30%">
-        <%=contentManagement.getContent("habitats_factsheet_10")%>
+        <%=cm.cmsText("habitats_factsheet_10")%>
       </td>
       <td width="40%">
         &nbsp;
@@ -87,7 +95,7 @@
         </strong>
       </td>
       <td width="15%" bgcolor="#DDDDDD" align="right">
-        <%=contentManagement.getContent("habitats_factsheet_11")%>
+        <%=cm.cmsText("habitats_factsheet_11")%>
       </td>
       <td width="15%" bgcolor="#DDDDDD">
         &nbsp;
@@ -103,7 +111,7 @@
 %>
     <tr bgcolor="#EEEEEE">
       <td width="30%">
-        <%=contentManagement.getContent("habitats_factsheet_12")%>
+        <%=cm.cmsText("habitats_factsheet_12")%>
       </td>
       <td width="40%">
         &nbsp;
@@ -116,7 +124,7 @@
     </tr>
     <tr bgcolor="#EEEEEE">
       <td>
-        <%=contentManagement.getContent("habitats_factsheet_13")%>
+        <%=cm.cmsText("habitats_factsheet_13")%>
       </td>
       <td>
         <strong>
@@ -125,13 +133,13 @@
         </strong>
       </td>
       <td bgcolor="#DDDDDD" align="right">
-        <%=contentManagement.getContent("habitats_factsheet_14")%>
+        <%=cm.cmsText("habitats_factsheet_14")%>
         &nbsp;
       </td>
       <td bgcolor="#DDDDDD">
         <strong>
           &nbsp;
-          <%=(factsheet.getPriority() != null && 1 == factsheet.getPriority().shortValue() ? contentManagement.getContent("habitats_factsheet_81") :  contentManagement.getContent("habitats_factsheet_82"))%>
+          <%=(factsheet.getPriority() != null && 1 == factsheet.getPriority().shortValue() ? cm.cmsText("habitats_factsheet_81") :  cm.cmsText("habitats_factsheet_82"))%>
           &nbsp;
         </strong>
       </td>
@@ -159,7 +167,7 @@
     <tr>
       <td bgcolor="#DDDDDD">
         <strong>
-          <%=contentManagement.getContent("habitats_factsheet_15")%>
+          <%=cm.cmsText("habitats_factsheet_15")%>
           (
             <%=description.getLanguage()%>
           )
@@ -178,7 +186,7 @@
     <tr>
       <td bgcolor="#DDDDDD">
         <strong>
-          <%=contentManagement.getContent("habitats_factsheet_16")%>
+          <%=cm.cmsText("habitats_factsheet_16")%>
         </strong>
       </td>
     </tr>
@@ -198,7 +206,7 @@
           <tr>
             <td bgcolor="#DDDDDD">
               <strong>
-                <%=contentManagement.getContent("habitats_factsheet_17")%>:
+                <%=cm.cmsText("habitats_factsheet_17")%>:
               </strong>
             </td>
           </tr>
@@ -227,17 +235,17 @@
   {
 %>
     <br />
-    <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;">Name in other languages</div>
-    <table summary="Name in other languages" border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse : collapse">
+    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitats_name_in_other_languages")%></div>
+    <table summary="<%=cm.cms("habitats_name_in_other_languages")%>" border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse : collapse">
       <tr bgcolor="#DDDDDD">
         <th class="resultHeader">
           <strong>
-            <%=contentManagement.getContent("habitats_factsheet-intern_02")%>
+            <%=cm.cmsText("habitats_factsheet-intern_02")%>
           </strong>
         </th>
         <th class="resultHeader">
           <strong>
-            <%=contentManagement.getContent("habitats_factsheet-intern_03")%>
+            <%=cm.cmsText("habitats_factsheet-intern_03")%>
           </strong>
         </th>
       </tr>
@@ -259,7 +267,6 @@
         }
 %>
     </table>
-
 <%
   }
   // Habitat codes in other classifications.
@@ -272,20 +279,32 @@
     int ii = 0;
 %>
     <br />
-    <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;"><%=contentManagement.getContent("habitats_factsheet_22")%></div>
-    <table width="100%" border="0" summary="Relation with other classifications" cellspacing="0" cellpadding="0" style="border-collapse: collapse;" id="relations">
+    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitats_factsheet_22")%></div>
+    <table width="100%" border="0" summary="<%=cm.cms("habitats_factsheet_22")%>" cellspacing="0" cellpadding="0" id="relations" class="sortable">
       <tr bgcolor="#DDDDDD">
-        <th class="resultHeader" width="30%">
-          <a title="Sort by this column" href="javascript:sortTable(4, 0, 'relations', false);"><strong><%=contentManagement.getContent("habitats_factsheet_23")%></strong></a>
+        <th width="30%" title="<%=cm.cms("sort_results_on_this_column")%>">
+          <strong>
+            <%=cm.cmsText("habitats_factsheet_23")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
+          </strong>
         </th>
-        <th class="resultHeader" width="15%">
-          <a title="Sort by this column" href="javascript:sortTable(4, 1, 'relations', false);"><strong><%=contentManagement.getContent("habitats_factsheet_24")%></strong></a>
+        <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
+          <strong>
+            <%=cm.cmsText("habitats_factsheet_24")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
+          </strong>
         </th>
-        <th class="resultHeader" width="40%">
-          <a title="Sort by this column" href="javascript:sortTable(4, 2, 'relations', false);"><strong><%=contentManagement.getContent("habitats_factsheet_25")%></strong></a>
+        <th width="40%" title="<%=cm.cms("sort_results_on_this_column")%>">
+          <strong>
+            <%=cm.cmsText("habitats_factsheet_25")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
+          </strong>
         </th>
-        <th class="resultHeader" width="15%">
-          <a title="Sort by this column" href="javascript:sortTable(4, 3, 'relations', false);"><strong><%=contentManagement.getContent("habitats_factsheet_26")%></strong></a>
+        <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
+          <strong>
+            <%=cm.cmsText("habitats_factsheet_26")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
+          </strong>
         </th>
       </tr>
 <%
@@ -319,15 +338,18 @@
 %>
       <tr bgcolor="<%=(0 == (ii++ % 2) ?  "#EEEEEE" : "#FFFFFF")%>">
         <td width="30%">&nbsp;</td>
-        <td width="15%" align="left"><%=otherHab.getEunisCode()%></td>
+        <td width="15%"><%=otherHab.getEunisCode()%></td>
 <%
         if (!otherHab.getIdHabitat().equalsIgnoreCase("10000")) {
 %>
-        <td width="40%"><a title="Open habitat type factsheet" href="habitats-factsheet.jsp?idHabitat=<%=otherHab.getIdHabitat()%>"><%=otherHab.getScientificName()%></a></td>
+          <td width="40%">
+            <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=otherHab.getIdHabitat()%>"><%=otherHab.getScientificName()%></a>
+            <%=cm.cmsTitle("open_habitat_factsheet")%>
+          </td>
 <%
         } else {
 %>  
-        <td width="40%"><%=otherHab.getScientificName()%></td>
+          <td width="40%"><%=otherHab.getScientificName()%></td>
 <%
         }
 %>
@@ -337,7 +359,8 @@
           {
             int realLevel = otherHab.getLevel().intValue() + 1;
 %>
-            <a href="habitats-key.jsp?pageCode=<%=otherHab.getEunisCode()%>&amp;level=<%=realLevel%>"><img src="images/mini/key_out.png" alt="Go to key navigator, starting with this habitat." border="0" /></a>
+            <a title="<%=cm.cms("go_to_key_navigator")%>" href="habitats-key.jsp?pageCode=<%=otherHab.getEunisCode()%>&amp;level=<%=realLevel%>"><img src="images/mini/key_out.png" alt="<%=cm.cms("go_to_key_navigator")%>" border="0" /></a>
+            <%=cm.cmsTitle("go_to_key_navigator")%>
 <%
           }
 %>

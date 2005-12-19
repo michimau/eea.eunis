@@ -170,7 +170,7 @@ public class CountryDomain extends AbstractDomain implements Paginable {
     StringBuffer sql = new StringBuffer();
     // Set the main QUERY
     sql.append("SELECT COUNT(DISTINCT B.ID_NATURE_OBJECT,B.ID_GEOSCOPE,B.ID_GEOSCOPE_LINK) FROM CHM62EDT_HABITAT AS A " +
-            "LEFT JOIN CHM62EDT_REPORTS AS B ON  A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT " +
+            "INNER JOIN CHM62EDT_REPORTS AS B ON  A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT " +
             "LEFT JOIN CHM62EDT_COUNTRY AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE " +
             "LEFT JOIN CHM62EDT_BIOGEOREGION AS D ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE " +
             "WHERE ");

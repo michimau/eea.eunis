@@ -4,24 +4,30 @@
   - Copyright   : (c) 2002-2004 European Environment Agency
   - Description : 'Species groups' function - search page.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.Iterator,
                  ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesPersist,
                  ro.finsiel.eunis.search.species.SpeciesSearchUtility,
                  ro.finsiel.eunis.search.Utilities,
                  java.util.Vector,
                  ro.finsiel.eunis.WebContentManagement"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
     <script language="JavaScript" src="script/species-groups-save-criteria.js" type="text/javascript"></script>
+    <%
+        WebContentManagement cm = SessionManager.getWebContent();
+    %>
     <script language="JavaScript" type="text/javascript">
     <!--
       function validateForm() {
-        var invalidSelectMsg = "Please select a group.";
+        var invalidSelectMsg = "<%=cm.cms("species_groups_18")%>";
         var len = document.eunis.groupID.length;
         var isOK = false;
         if (len == null) {
@@ -51,27 +57,26 @@
       }
     //-->
     </script>
-    <%
-      WebContentManagement contentManagement = SessionManager.getWebContent();
-    %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=contentManagement.getContent("species_groups_title", false )%>
+      <%=cm.cms("species_groups_title")%>
     </title>
   </head>
   <body style="background-color:#ffffff">
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="Home#index.jsp,Species#species.jsp,Groups" />
+      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,groups_location" />
       <jsp:param name="helpLink" value="species-help.jsp" />
     </jsp:include>
-    <h5>
-        <%=contentManagement.getContent("species_groups_01")%>
-    </h5>
+    <h1>
+        <%=cm.cmsText("species_groups_01")%>
+    </h1>
     <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td>
-          <%=contentManagement.getContent("species_groups_16")%>
+          <%=cm.cmsText("species_groups_16")%>
           <br />
           <br />
         <form name="eunis" onsubmit="return validateForm()" method="get" action="species-groups-result.jsp">
@@ -81,59 +86,48 @@
             <tr>
               <td style="background-color:#EEEEEE">
                 <strong>
-                  <%=contentManagement.getContent("species_groups_02")%>
+                  <%=cm.cmsText("species_groups_02")%>
                 </strong>
               </td>
             </tr>
             <tr>
               <td style="background-color:#EEEEEE">
-                <input title="Group" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" /><label for ="checkbox1"><%=contentManagement.getContent("species_groups_17")%></label>
-                <input title="Order" id="checkbox2" type="checkbox" name="showOrder" value="true" checked="checked" /><label for ="checkbox2"><%=contentManagement.getContent("species_groups_03")%></label>
-                <input title="Family" id="checkbox3" type="checkbox" name="showFamily" value="true" checked="checked" /><label for ="checkbox3"><%=contentManagement.getContent("species_groups_04")%></label>
-                <input title="Scientific name" id="checkbox4" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" /><label for ="checkbox4"><%=contentManagement.getContent("species_groups_05")%></label>
-                <input title="Vernacular name" id="checkbox5" type="checkbox" name="showVernacularNames" value="true" /><label for ="checkbox5"><%=contentManagement.getContent("species_groups_06")%></label>
+                <input title="<%=cm.cms("group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" />
+                  <%=cm.cmsTitle("group")%>
+                  <label for ="checkbox1"><%=cm.cmsText("group")%></label>
+                <input title="<%=cm.cms("order")%>" id="checkbox2" type="checkbox" name="showOrder" value="true" checked="checked" />
+                  <%=cm.cmsTitle("order")%>
+                  <label for ="checkbox2"><%=cm.cmsText("order")%></label>
+                <input title="<%=cm.cms("family")%>" id="checkbox3" type="checkbox" name="showFamily" value="true" checked="checked" />
+                  <%=cm.cmsTitle("family")%>
+                  <label for ="checkbox3"><%=cm.cmsText("family")%></label>
+                <input title="<%=cm.cms("scientific_name")%>" id="checkbox4" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" />
+                  <%=cm.cmsTitle("scientific_name")%>
+                  <label for ="checkbox4"><%=cm.cmsText("scientific_name")%></label>
+                  <input title="<%=cm.cms("vernacular_name")%>" id="checkbox5" type="checkbox" name="showVernacularNames" value="true" />
+                  <%=cm.cmsTitle("vernacular_name")%>
+                  <label for ="checkbox5"><%=cm.cmsText("vernacular_name")%></label>
               </td>
             </tr>
           </table>
-          <table summary="List of groups" cellspacing="0" cellpadding="0" width="100%" border="0">
+          <table summary="<%=cm.cms("species_groups_19_Sum")%>" cellspacing="0" cellpadding="0" width="100%" border="0">
             <%// Header row for group selection table %>
-            <tr style="background-color:<%=SessionManager.getThemeManager().getMediumColor()%>">
-              <th colspan="2" style="text-align:left">
-                  <strong>
-                      <span style="color:#FFFFFF">
-                          <%=contentManagement.getContent("species_groups_08")%>
-                      </span>
-                  </strong>
+            <tr>
+              <th class="resultHeader" colspan="2" style="text-align:left">
+                <%=cm.cmsText("species_groups_08")%>
               </th>
-              <th width="167" style="text-align:center">
-                  <strong>
-                      <span style="color:#FFFFFF">
-                          <%=contentManagement.getContent("species_groups_09")%>
-                      </span>
-                   </strong>
+              <th class="resultHeader" width="167" style="text-align:center">
+                <%=cm.cmsText("species_groups_09")%>
               </th>
-              <th width="205" style="text-align:center">
-                  <strong>
-                      <span style="color:#FFFFFF">
-                          <%=contentManagement.getContent("species_groups_10")%>
-                      </span>
-                  </strong>
+              <th class="resultHeader" width="205" style="text-align:center">
+                <%=cm.cmsText("species_groups_10")%>
               </th>
-              <th width="93" style="text-align:center">
-                  <strong>
-                      <span style="color:#FFFFFF">
-                          <%=contentManagement.getContent("species_groups_11")%>
-                      </span>
-                  </strong>
+              <th class="resultHeader" width="93" style="text-align:center">
+                <%=cm.cmsText("species_groups_11")%>
               </th>
             </tr>
             <jsp:useBean id="GroupSpeciesDomain" class="ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesDomain" scope="page" />
             <jsp:useBean id="SpeciesDomain" class="ro.finsiel.eunis.jrfTables.Chm62edtSpeciesDomain" scope="page" />
-            <tr>
-              <td>
-                &nbsp;
-              </td>
-            </tr>
             <%
               // List of species groups
               Iterator it = SpeciesSearchUtility.findAllGroups().iterator();
@@ -147,7 +141,8 @@
             %>
                 <tr style="background-color:<%=alternate ? "#EEEEEE" : "#FFFFFF"%>;vertical-align:middle">
                   <td style="text-align:left">
-                      <img alt="Group image" height="32" src="images/group/<%=group.getIdGroupspecies()%>.gif" width="32" />
+                      <img alt="<%=cm.cms("species_groups_20_Alt")%>" height="32" src="images/group/<%=group.getIdGroupspecies()%>.gif" width="32" />
+                      <%=cm.cmsAlt("species_groups_20_Alt")%>
                   </td>
                   <td>
                       <label for="radio_<%=ii%>">
@@ -155,53 +150,39 @@
                       </label>
                   </td>
                   <td style="text-align:center">
-                      <%=SpeciesDomain.countByGroupID(group.getIdGroupspecies())%>
+                      <%=SpeciesDomain.countByGroupID(group.getIdGroupspecies())%>*
                   </td>
                   <td style="text-align:center">
-                      <%=SpeciesSearchUtility.countUniqueSpecies(group.getIdGroupspecies(), SessionManager.getShowEUNISInvalidatedSpecies())%>
+                      <%=SpeciesSearchUtility.countUniqueSpecies(group.getIdGroupspecies(), SessionManager.getShowEUNISInvalidatedSpecies())%>*
                   </td>
                   <td style="text-align:center">
                     <input id="radio_<%=ii%>" type="radio" value="<%=group.getIdGroupspecies()%>" name="groupID" onclick="javascript:setGroupName('<%=(group.getCommonName() != null ? group.getCommonName().replaceAll("&","&amp;") : "")%>','<%=group.getIdGroupspecies()%>')"
-                      title="Select <%=(group.getCommonName() != null ? group.getCommonName().replaceAll("&","&amp;") : " ")%> group" class="inputTextField" />
+                      title="<%=cm.cms("select")%> <%=(group.getCommonName() != null ? group.getCommonName().replaceAll("&","&amp;") : " ")%> <%=cm.cms("group")%>" class="inputTextField" />
+                      <%=cm.cmsTitle("select")%>
+                      <%=cm.cmsTitle("group")%>
                   </td>
                 </tr>
           <%
               }
           %>
-            <tr style="background-color:<%=SessionManager.getThemeManager().getMediumColor()%>">
-              <th colspan="2" style="text-align:left">
-                  <strong>
-                      <span style="color:#FFFFFF">
-                          <%=contentManagement.getContent("species_groups_08")%>
-                      </span>
-                  </strong>
+            <tr>
+              <th class="resultHeader" colspan="2" style="text-align:left">
+                <%=cm.cmsText("species_groups_08")%>
               </th>
-              <th width="167" style="text-align:center">
-                  <strong>
-                      <span style="color:#FFFFFF">
-                          <%=contentManagement.getContent("species_groups_09")%>
-                      </span>
-                   </strong>
+              <th class="resultHeader" width="167" style="text-align:center">
+                <%=cm.cmsText("species_groups_09")%>
               </th>
-              <th width="205" style="text-align:center">
-                  <strong>
-                      <span style="color:#FFFFFF">
-                          <%=contentManagement.getContent("species_groups_10")%>
-                      </span>
-                  </strong>
+              <th class="resultHeader" width="205" style="text-align:center">
+                <%=cm.cmsText("species_groups_10")%>
               </th>
-              <th width="93" style="text-align:center">
-                  <strong>
-                      <span style="color:#FFFFFF">
-                          <%=contentManagement.getContent("species_groups_11")%>
-                      </span>
-                  </strong>
+              <th class="resultHeader" width="93" style="text-align:center">
+                <%=cm.cmsText("species_groups_11")%>
               </th>
             </tr>
             <tr>
               <td colspan="5" style="text-align:center">
                 <input type="hidden" name="groupName" />
-                <%=contentManagement.getContent("species_groups_12")%>
+                <%=cm.cmsText("species_groups_12")%>
                 <br />
               </td>
             </tr>
@@ -211,13 +192,25 @@
               </td>
             </tr>
             <tr>
+              <td colspan="5" style="text-align:center">
+                <strong>
+                <%=cm.cmsText("species_groups_Note")%>
+                </strong>
+              </td>
+            </tr>
+            <tr>
               <td colspan="5" style="text-align:right">
-                <label for="Reset" class="noshow">Reset</label>
-                <input id="Reset" type="reset" value="<%=contentManagement.getContent("species_groups_13",false)%>" name="Reset" class="inputTextField" title="Reset" />
-                <%=contentManagement.writeEditTag("species_groups_13")%>
-                <label for="Search" class="noshow">Search</label>  
-                <input id="Search" type="submit" value="<%=contentManagement.getContent("species_groups_14",false)%>" name="submit" class="inputTextField" title="Search" />
-                <%=contentManagement.writeEditTag("species_groups_14")%>
+                <br />
+                <label for="Reset" class="noshow"><%=cm.cms("reset")%></label>
+                <input id="Reset" type="reset" value="<%=cm.cms("reset_btn")%>" name="Reset" class="inputTextField" title="<%=cm.cms("reset")%>" />
+                <%=cm.cmsLabel("reset")%>
+                <%=cm.cmsTitle("reset")%>
+                <%=cm.cmsInput("reset_btn")%>
+                <label for="Search" class="noshow"><%=cm.cms("search")%></label>
+                <input id="Search" type="submit" value="<%=cm.cms("search_btn")%>" name="submit" class="inputTextField" title="<%=cm.cms("search")%>" />
+                <%=cm.cmsLabel("search")%>
+                <%=cm.cmsTitle("search")%>
+                <%=cm.cmsInput("search_btn")%>
               </td>
             </tr>
           </table>
@@ -240,10 +233,10 @@
            var database3='';
           //-->
           </script>
-          <noscript>Your browser does not support JavaScript!</noscript>
           <br />
-          <%=contentManagement.getContent("species_groups_15")%>:
-          <a title="Save. Link will open a new window." href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'species-groups.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="Save" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
+          <%=cm.cmsText("species_groups_15")%>:
+          <a title="<%=cm.cms("save_title")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'species-groups.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_title")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
+          <%=cm.cmsTitle("save_title")%>
           <%
               // Set Vector for URL string
               Vector show = new Vector();
@@ -266,9 +259,20 @@
         <%
             }
         %>
+
+<%=cm.br()%>
+<%=cm.cmsMsg("species_groups_18")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_groups_title")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_groups_19_Sum")%>
+<%=cm.br()%>
+
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="species-groups.jsp" />
     </jsp:include>
+  </div>
+  </div>
   </div>
   </body>
 </html>

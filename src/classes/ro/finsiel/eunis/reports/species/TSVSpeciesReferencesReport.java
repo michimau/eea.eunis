@@ -5,7 +5,7 @@ import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.species.speciesByReferences.RefDomain;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.JavaSorter;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
@@ -18,10 +18,7 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * Generate the PDF reports for Species -> Scientific names search
- *
- * @author finsiel
- * @version 1.0
+ * XML and PDF report.
  */
 public class TSVSpeciesReferencesReport extends AbstractTSVReport {
   /**
@@ -30,16 +27,22 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
   private ReferencesBean formBean = null;
 
   /**
-   * Constructor
+   * Constructor.
    *
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
+   * @param showEUNISInvalidatedSpecies Show invalidated species
+   * @param SQL_DRV SQL Driver
+   * @param SQL_URL SQL Driver URL
+   * @param SQL_USR SQL Driver user
+   * @param SQL_PWD SQL Driver password
    */
   public TSVSpeciesReferencesReport( String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies,
                                      String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
     super( "species-references_" + sessionID + ".tsv" );
     this.formBean = ( ReferencesBean ) formBean;
     this.filename = "species-references_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "species-references_" + sessionID + ".xml" );
     this.dataFactory = new ReferencesPaginator(new RefDomain(formBean.toSearchCriteria(),
                                                                           formBean.toSortCriteria(),
                                                                           showEUNISInvalidatedSpecies,
@@ -47,22 +50,20 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
                                                                           SQL_URL,
                                                                           SQL_USR,
                                                                           SQL_PWD));
-    int x = formBean.toSearchCriteria().length;
-    System.out.println( "x = " + x );
     dataFactory.setSortCriteria(formBean.toSortCriteria());
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader() {
+  public List<String> createHeader() {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     headers.addElement( "Group" );
     headers.addElement( "Order" );
     headers.addElement( "Family" );
@@ -72,7 +73,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
   }
 
   /**
-   * Use this method to write specific data into the file. Implemented in inherited classes
+   * Use this method to write specific data into the file. Implemented in inherited classes.
    */
   public void writeData() {
     if ( null == dataFactory )
@@ -89,11 +90,13 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
         return;
       }
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
         List resultSet = dataFactory.getPage( _currPage );
         for ( int i = 0; i < resultSet.size(); i++ )
         {
+          String xmlVernacularNames = "";
           SpeciesRefWrapper specie = (SpeciesRefWrapper)resultSet.get( i );
           Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
           Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);
@@ -103,10 +106,10 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
             {
               VernacularNameWrapper aVernName = (VernacularNameWrapper)sortVernList.get(ii);
               String vernacularName = aVernName.getName();
-
+              xmlVernacularNames += "<name language=\"" + aVernName.getLanguage() + "\">" + aVernName.getName() + "</name>";
               if ( ii == 0 )
               {
-                Vector row = new Vector();
+                Vector<String> row = new Vector<String>();
                 // Group
                 row.addElement( specie.getGroupName() );
                 // Order
@@ -121,7 +124,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
               }
               else
               {
-                Vector row = new Vector();
+                Vector<String> row = new Vector<String>();
                 // Group
                 row.addElement( "" );
                 // Order
@@ -138,7 +141,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
           }
           else
           {
-            Vector row = new Vector();
+            Vector<String> row = new Vector<String>();
             // Group
             row.addElement( specie.getGroupName() );
             // Order
@@ -151,6 +154,18 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
             row.addElement( "-" );
             writeRow( row );
           }
+          Vector<String> row = new Vector<String>();
+          // Group
+          row.addElement( specie.getGroupName() );
+          // Order
+          row.addElement( specie.getOrderName() );
+          // Family
+          row.addElement( specie.getFamilyName() );
+          // Scientific name
+          row.addElement( specie.getScientificName() );
+          // Vernacular name
+          row.addElement( xmlVernacularNames );
+          xmlreport.writeRow( row );
         }
       }
     }

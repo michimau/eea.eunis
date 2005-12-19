@@ -4,7 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : "Sites altitude" function - Map page displaying results of search visually, on image from map server.
 --%>
-<%@ page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.jrfTables.sites.altitude.AltitudeDomain,
                  ro.finsiel.eunis.jrfTables.sites.altitude.AltitudePersist,
@@ -16,17 +19,17 @@
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   boolean[] source =
   {
-    formBean.getDB_NATURA2000() == null,
-    formBean.getDB_CORINE() == null,
-    formBean.getDB_DIPLOMA() == null,
-    formBean.getDB_CDDA_NATIONAL() == null,
-    formBean.getDB_CDDA_INTERNATIONAL() == null,
-    formBean.getDB_BIOGENETIC() == null,
+    formBean.getDB_NATURA2000() != null,
+    formBean.getDB_CORINE() != null,
+    formBean.getDB_DIPLOMA() != null,
+    formBean.getDB_CDDA_NATIONAL() != null,
+    formBean.getDB_CDDA_INTERNATIONAL() != null,
+    formBean.getDB_BIOGENETIC() != null,
     false,
-    formBean.getDB_EMERALD() == null
+    formBean.getDB_EMERALD() != null
   };
   AltitudePaginator mapPaginator = new AltitudePaginator(new AltitudeDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(),source));
   List sites = new ArrayList();
@@ -52,7 +55,7 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <title>
-      <%=contentManagement.getContent("sites_altitude-map_title", false )%>
+      <%=cm.cms("sites_altitude-map_title")%>
     </title>
     <jsp:include page="header-page.jsp" />
   </head>
@@ -65,5 +68,6 @@
       <param name="FlashVars"  value="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>&amp;v_sh_sites=<%=sitesIds%>" />
       <embed src="gis/fl_eunis.swf" flashvars="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>&amp;v_sh_sites=<%=sitesIds%>" quality="high" bgcolor="#ffffff"  width="740" height="552" name="fl_eunis" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
     </object>
+    <%=cm.cmsMsg("sites_altitude-map_title")%>
   </body>
 </html>

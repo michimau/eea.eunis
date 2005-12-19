@@ -4,14 +4,17 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : "Sites country" function - Popup for list of values in search page.
 --%>
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@page import="ro.finsiel.eunis.jrfTables.*,java.util.*,
                 ro.finsiel.eunis.search.CountryUtil,
                 ro.finsiel.eunis.search.Utilities,
                 ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   String field = request.getParameter("field");
   String _country = request.getParameter("country");
   if ( null == _country ) _country = "%";
@@ -22,18 +25,13 @@
   <head>
     <jsp:include page="header-page.jsp" />
     <title>
-      <%=contentManagement.getContent("sites_country-choice_title", false )%>
+      <%=cm.cms("sites_country-choice_title")%>
     </title>
     <script language="JavaScript" type="text/javascript">
       <!--
       function setCountry(val) {
         window.opener.document.eunis.<%=field%>.value=val;
         window.close();
-      }
-       function editContent( idPage )
-      {
-        var url = "web-content-inline-editor.jsp?idPage=" + idPage;
-        window.open( url ,'', "width=540,height=500,status=0,scrollbars=0,toolbar=0,resizable=1,location=0");
       }
       // -->
     </script>
@@ -43,20 +41,22 @@
   if (list!=null && list.size() > 0)
   {
 %>
-    <%=Utilities.getTextMaxLimitForPopup(contentManagement, list.size() )%>
-    <h6>List of values for:</h6>
+    <%=Utilities.getTextMaxLimitForPopup(cm, list.size() )%>
+    <h2>
+      <%=cm.cmsText("list_of_values_for")%>:
+    </h2>
 <%
     if ( _country.equalsIgnoreCase( "" ) )
     {
 %>
-    All countries
+    <%=cm.cms("sites_country_choice_allcountries")%>
 <%
     }
     else
     {
 %>
     <u>
-      <%=contentManagement.getContent("sites_country-choice_01")%>
+      <%=cm.cmsText("sites_country-choice_01")%>
     </u>
     <em>
       <%=Utilities.ReturnStringRelatioOp( Utilities.OPERATOR_CONTAINS )%>
@@ -70,7 +70,7 @@
     <br />
     <br />
     <div id="tab">
-      <table summary="List of values" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+      <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
     int i = 0;
     Iterator regionsIt = list.iterator();
@@ -80,7 +80,8 @@
 %>
         <tr>
           <td bgcolor="<%=(0 == (i++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-            <a title="Click link to select the value" href="javascript:setCountry('<%=country.getAreaNameEnglish()%>')"><%=country.getAreaNameEnglish()%></a>
+            <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setCountry('<%=country.getAreaNameEnglish()%>')"><%=country.getAreaNameEnglish()%></a>
+            <%=cm.cmsTitle("click_link_to_select_value")%>
           </td>
         </tr>
 <%
@@ -93,7 +94,7 @@
   {
 %>
     <strong>
-      <%=contentManagement.getContent("sites_country-choice_02")%>
+      <%=cm.cmsText("sites_country-choice_02")%>
     </strong>
     <br />
     <br />
@@ -102,8 +103,15 @@
 %>
     </div>
     <br />
-    <form action="">
-      <input title="Close window" type="button" value="Close" onclick="javascript:window.close()" name="button" class="inputTextField" />
-    </form>
+      <form action="">
+        <label for="button2" class="noshow"><%=cm.cms("close_window_label")%></label>
+        <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
+        <%=cm.cmsLabel("close_window_label")%>
+        <%=cm.cmsTitle("close_window_title")%>
+        <%=cm.cmsInput("close_window_value")%>
+      </form>
+    <%=cm.cmsMsg("sites_country-choice_title")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("list_of_values")%>
   </body>
 </html>

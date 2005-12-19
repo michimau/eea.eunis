@@ -286,18 +286,34 @@ public class LegalBean extends AbstractFormBean {
     this.showURL = showURL;
   }
 
+  /**
+   * Getter.
+   * @return showComment
+   */
   public String getShowComment() {
     return showComment;
   }
 
+  /**
+   * Setter.
+   * @param showComment New value
+   */
   public void setShowComment(String showComment) {
     this.showComment = showComment;
   }
 
+  /**
+   * Getter.
+   * @return showAbbreviation
+   */
   public String getShowAbbreviation() {
     return showAbbreviation;
   }
 
+  /**
+   * Setter.
+   * @param showAbbreviation new value
+   */
   public void setShowAbbreviation( String showAbbreviation ) {
     this.showAbbreviation = showAbbreviation;
   }

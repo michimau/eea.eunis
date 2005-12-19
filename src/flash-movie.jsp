@@ -4,7 +4,10 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Tutorials page
 --%>
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   String title= Utilities.formatString(request.getParameter("title"),"");

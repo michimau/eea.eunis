@@ -4,8 +4,11 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Species advanced search tvs.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <%@ page import="ro.finsiel.eunis.reports.AbstractTSVReport,
                  ro.finsiel.eunis.reports.species.TSVSpeciesAdvanced"%><%@ page import="ro.finsiel.eunis.search.Utilities"%>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.formBeans.CombinedSearchBean" scope="page">
@@ -39,29 +42,15 @@
     else
     {
 %>
-    <img id="loading" src="<%=request.getContextPath()%>/images/loading_tsv.gif" width="200" height="10" alt="Loading animation" />
-    <div id="status">
-      &nbsp;
-    </div>
-    <script language="JavaScript" type="text/javascript">
-      <!--
-      updateText('Generating TSV file, please wait...');
-      //-->
-    </script>
+    <jsp:include page="../tsv-common.jsp" />
 <%
     out.flush();
     report.writeData();
 %>
-    <noscript>Your browser does not support JavaScript!</noscript>
-
-    <script language="JavaScript" type="text/javascript">
-    <!--
-       updateText('The TSV document is ready.');
-       showLoadingProgress( false );
-    //-->
-    </script>
-    <noscript>Your browser does not support JavaScript!</noscript>
-    <a title="Open TSV(Tab Separated Values) file" target="_blank" href="<%=request.getContextPath()%>/temp/<%=report.getFilename()%>">Open TSV(Tab Separated Values) file</a>
+    <jsp:include page="../tsv-links.jsp">
+      <jsp:param name="tsvfilename" value="<%=report.getFilename()%>" />
+      <jsp:param name="xmlfilename" value="<%=report.getXMLFilename()%>" />
+    </jsp:include>
 <%
     }
   }
@@ -74,7 +63,6 @@
        showLoadingProgress( false );
     //-->
     </script>
-    <noscript>Your browser does not support JavaScript!</noscript>
 <%
     ex.printStackTrace();
   }

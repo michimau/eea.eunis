@@ -4,6 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Designation for a site' - part of site's factsheet
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.factsheet.sites.SiteFactsheet, ro.finsiel.eunis.WebContentManagement"%>
 <%@ page import="java.util.List"%>
 <%@ page import="ro.finsiel.eunis.search.Utilities"%>
@@ -13,11 +17,11 @@
 <%
   String siteid = request.getParameter("idsite");
   ro.finsiel.eunis.factsheet.sites.SiteFactsheet factsheet = new SiteFactsheet( siteid );
-  //WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   int type = factsheet.getType();
   if( type == SiteFactsheet.TYPE_NATURA2000 || type == SiteFactsheet.TYPE_EMERALD  || type == SiteFactsheet.TYPE_CORINE )
   {
-    List sitesDesigc = null;
+    List sitesDesigc;
     if( type == SiteFactsheet.TYPE_NATURA2000 || type == SiteFactsheet.TYPE_EMERALD ) {
       sitesDesigc = factsheet.findSiteRelationsNatura2000Desigc();
     } else {
@@ -31,20 +35,24 @@
     if (sitesDesigc.size() > 0 )
     {
 %>
-      <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;">National and/or International Designation of Natura 2000 site</div>
-      <table border="1" cellpadding="1" cellspacing="1" width="100%" id="relationsNatura2000Natura20002" style="border-collapse:collapse">
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_designations_national")%></div>
+      <table border="1" cellpadding="1" cellspacing="1" width="100%" id="relationsNatura2000Natura20002" style="border-collapse:collapse" summary="<%=cm.cms("sites_factsheet_designations_national")%>" class="sortable">
         <tr>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 4, 0, 'relationsNatura2000Natura20002', false);">Designation code</a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_designations_code")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 4, 1, 'relationsNatura2000Natura20002', false);">Designation name</a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_designations_name")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 4, 2, 'relationsNatura2000Natura20002', false);">Category</a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_designations_category")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" style="text-align : right">
-            <a title="Sort results by this column" href="javascript:sortTable( 4, 3, 'relationsNatura2000Natura20002', false);">Cover(%)</a>
+          <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_designations_cover")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
 <%
@@ -54,10 +62,12 @@
 %>
         <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
           <td>
-            <a title="Designation factsheet" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescription()%></a>&nbsp;
+            <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescription()%></a>&nbsp;
+            <%=cm.cmsTitle("open_designation_factsheet")%>
           </td>
           <td>
-            <a title="Designation factsheet" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescriptionEn()%></a>
+            <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescriptionEn()%></a>
+            <%=cm.cmsTitle("open_designation_factsheet")%>
           </td>
           <td>
             <%=Utilities.formatString(desig.getNationalCategory())%>
@@ -89,23 +99,28 @@
      if (sitesDesigr.size() > 0 )
      {
 %>
-      <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;">Relation with designated areas</div>
-      <table border="1" cellpadding="1" cellspacing="1" width="100%" id="relationsNatura2000Natura20003" style="border-collapse:collapse">
-        <tr bgcolor="#DDDDDD">
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 5, 0, 'relationsNatura2000Natura20003', false);">Designated site</a>
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cms("sites_factsheet_designations_areas")%></div>
+      <table border="1" cellpadding="1" cellspacing="1" width="100%" id="relationsNatura2000Natura20003" summary="<%=cm.cms("sites_factsheet_designations_areas")%>" class="sortable">
+        <tr>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_designations_designatedsite")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 5, 1, 'relationsNatura2000Natura20003', false);">Designation name</a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_designations_designationname")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 5, 2, 'relationsNatura2000Natura20003', false);">Category</a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_designations_areascategory")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 5, 3, 'relationsNatura2000Natura20003', false);">Overlap</a>
+          <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_designations_areasoverlap")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" style="text-align : right">
-            <a title="Sort results by this column" href="javascript:sortTable( 5, 4, 'relationsNatura2000Natura20003', false);">Overlap P</a>
+          <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_designations_areasoverlapp")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
 <%
@@ -115,7 +130,8 @@
 %>
         <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
           <td>
-            <a title="Search site by name" href="sites-names.jsp?siteNameFromFactsheet=<%=desig.getDesignatedSite()%>"><%=Utilities.formatString(desig.getDesignatedSite())%></a>&nbsp;
+            <a title="<%=cm.cms("search_site_by_name")%>" href="sites-names.jsp?siteNameFromFactsheet=<%=desig.getDesignatedSite()%>"><%=Utilities.formatString(desig.getDesignatedSite())%></a>&nbsp;
+            <%=cm.cmsTitle("search_site_by_name")%>
           </td>
           <td><%=Utilities.formatString(desig.getDescriptionEn(),"")%>&nbsp;</td>
           <td><%=Utilities.formatString(desig.getNationalCategory())%>&nbsp;</td>

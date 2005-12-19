@@ -102,6 +102,10 @@ public class SpeciesSearchUtility {
    * @param scientificName The scientific name of the species searched. Note that the SQL is executing as
    *                       "... LIKE '%" + scientificName + "%' ..." so could find all the species matching criteria.
    * @param expandAll Apply limit or not in results (Utilities.MAX_POPUP_RESULTS)
+   * @param SQL_DRV SQL Driver
+   * @param SQL_URL SQL Driver URL
+   * @param SQL_USR SQL Driver user
+   * @param SQL_PWD SQL Driver password
    * @return A list with species belonging to the specified group.<br />
    * The returned list can contain the following possible values:<br />
    * <UL>
@@ -596,7 +600,7 @@ public class SpeciesSearchUtility {
   /**
    * Return species and their group species for a taxonomy( given by his ID_TAXONMY).
    * @param idTaxonomy ID of taxonomy
-   * @param showEUNISInvalidatedSpecies true or fasle
+   * @param showEUNISInvalidatedSpecies true or false
    * @return list of species.
    */
   public static List FindSpeciesforIdTaxonomy(String idTaxonomy, boolean showEUNISInvalidatedSpecies) {
@@ -713,6 +717,11 @@ public class SpeciesSearchUtility {
     threats.add(i, newThreat);
   }
 
+
+  /**
+   * Test method.
+   * @param args Command line arguments
+   */
   public static void main(String[] args) {
     Vector v = new Vector();
     v.add(new NationalThreatWrapper("Greece", "Data deficient", 1992));
@@ -741,6 +750,11 @@ public class SpeciesSearchUtility {
 
   }
 
+  /**
+   * Compute taxonomic tree.
+   * @param idTaxonomy
+   * @return Taxtree
+   */
   public static String getTaxonomicTree(String idTaxonomy) {
     if(idTaxonomy == null || idTaxonomy.trim().length()<=0) return "";
     List list = new ArrayList();
@@ -762,7 +776,11 @@ public class SpeciesSearchUtility {
 
 
   /**
-   * Finds all the languages with species vernacular names.<br />
+   * Finds all the languages with species vernacular names.
+   * @param SQL_DRV SQL Driver
+   * @param SQL_URL SQL Driver URL
+   * @param SQL_USR SQL Driver user
+   * @param SQL_PWD SQL Driver password
    * @return A list of languages
    */
   public static List findAllLanguagesWithVernacularNames(String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {

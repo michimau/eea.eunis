@@ -4,28 +4,27 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Habitats country' function - Popup for list of values in search page.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page contentType="text/html" %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.jrfTables.Chm62edtBiogeoregionPersist,
-                ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist,
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
                 ro.finsiel.eunis.search.CountryUtil,
-                ro.finsiel.eunis.search.Utilities,
-                ro.finsiel.eunis.search.species.country.CountryWrapper,
-                ro.finsiel.eunis.search.species.country.RegionWrapper" %>
-<%@ page import="java.util.Iterator" %>
+                ro.finsiel.eunis.search.Utilities" %>
 <%@ page import="ro.finsiel.eunis.utilities.SQLUtilities"%>
 <%@ page import="java.util.List"%>
 <%@ page import="ro.finsiel.eunis.utilities.TableColumns"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.habitats.country.CountryDomain"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
   <%
-    WebContentManagement contentManagement = SessionManager.getWebContent();
+    WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
-    <%=contentManagement.getContent("habitats_country-choice_title", false)%>
+    <%=cm.cms("habitats_country-choice_title")%>
   </title>
     <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.country.CountryBean" scope="request">
       <jsp:setProperty name="formBean" property="*" />
@@ -38,15 +37,10 @@
     String field = request.getParameter("field");
     int whichclicked = Utilities.checkedStringToInt(request.getParameter("whichclicked"), 0);
 
-    String SQL_DRV="";
-    String SQL_URL="";
-    String SQL_USR="";
-    String SQL_PWD="";
-
-    SQL_DRV = application.getInitParameter("JDBC_DRV");
-    SQL_URL = application.getInitParameter("JDBC_URL");
-    SQL_USR = application.getInitParameter("JDBC_USR");
-    SQL_PWD = application.getInitParameter("JDBC_PWD");
+    String SQL_DRV = application.getInitParameter("JDBC_DRV");
+    String SQL_URL = application.getInitParameter("JDBC_URL");
+    String SQL_USR = application.getInitParameter("JDBC_USR");
+    String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
     SQLUtilities sqlc = new SQLUtilities();
     sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
@@ -106,24 +100,18 @@ function setCountry(val) {
       window.opener.document.eunis.<%=field%>.value=val;
       window.close();
     }
-
-           function editContent( idPage )
-  {
-    var url = "web-content-inline-editor.jsp?idPage=" + idPage;
-    window.open( url ,'', "width=540,height=500,status=0,scrollbars=0,toolbar=0,resizable=1,location=0");
-  }
     // -->
   </script>
 </head>
 
 <body>
-<h6>List of values for:</h6>
-<u><%=(0 == whichclicked ? "Country names" : "Region names")%></u>
+<h2><%=cm.cmsText("list_of_values_for")%></h2>
+<u><%=(0 == whichclicked ? cm.cmsText("country_names") : cm.cmsText("region_names"))%></u>
 <br />
 <br />
 
 <div id="tab">
-  <table summary="List of values" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+  <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
     <%
         int i = 0;
         for(int j=0;j<results.size();j++)
@@ -136,11 +124,13 @@ function setCountry(val) {
          if(0 == whichclicked)
          {
      %>
-        <a title="Click link to select the value" href="javascript:setCountry('<%=name%>');"><%=name%></a>
+        <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setCountry('<%=name%>');"><%=name%></a>
+        <%=cm.cmsTitle("click_link_to_select_value")%>
      <%
      }else {
      %>
-          <a title="Click link to select the value" href="javascript:setRegion('<%=name%>');"><%=name%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setRegion('<%=name%>');"><%=name%></a>
+          <%=cm.cmsTitle("click_link_to_select_value")%>
       <%
           }
       %>
@@ -151,11 +141,17 @@ function setCountry(val) {
     %>
   </table>
 </div>
-<%=Utilities.getTextMaxLimitForPopup(contentManagement, results.size())%>
+<%=Utilities.getTextMaxLimitForPopup(cm, results.size())%>
 <form action="">
-  <label for="button" class="noshow">Close window</label>
-  <input title="Close window" type="button" value="<%=contentManagement.getContent("habitats_country-choice_01", false )%>" onclick="javascript:window.close()" name="button" id="button" class="inputTextField" />
+  <label for="button" class="noshow"><%=cm.cms("close_window")%></label>
+  <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("habitats_country-choice_01")%>" onclick="javascript:window.close()" name="button" id="button" class="inputTextField" />
+  <%=cm.cmsLabel("close_window")%>
 </form>
-<%=contentManagement.writeEditTag("habitats_country-choice_01")%>
+<%=cm.cmsInput("habitats_country-choice_01")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("habitats_country-choice_title")%>
+<%=cm.br()%>
+<%=cm.cmsTitle("list_of_values")%>
+<%=cm.br()%>
 </body>
 </html>

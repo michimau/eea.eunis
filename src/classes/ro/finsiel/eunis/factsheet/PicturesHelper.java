@@ -51,7 +51,7 @@ public class PicturesHelper {
     Chm62edtSitesPersist sitesObject = null;
     try
     {
-      species = new Chm62edtSitesDomain().findWhere("ID_SITE = " + IDObject);
+      species = new Chm62edtSitesDomain().findWhere("ID_SITE = '" + IDObject + "'");
       if (null != species && species.size() > 0)
       {
         sitesObject = ((Chm62edtSitesPersist) species.get(0));
@@ -102,6 +102,8 @@ public class PicturesHelper {
       try {
         Chm62edtNatureObjectPicturePersist picture = null;
         // First we find the object in database...
+        name = name.replaceAll( "'", "''");
+        filename = filename.replaceAll( "'", "''");
         String sql = " ID_OBJECT='" + idObject + "' AND NATURE_OBJECT_TYPE='" + natureObjectType + "' AND " +
                 " NAME='" + name + "' AND FILE_NAME='" + filename + "'";
         List pictures = new Chm62edtNatureObjectPictureDomain().findWhere(sql);

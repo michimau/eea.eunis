@@ -1,11 +1,17 @@
-<%@ page import="ro.finsiel.eunis.search.Utilities"%><%@ page import="java.util.Enumeration"%><%--
+<%--
   - Author(s)   : The EUNIS Database Team.
   - Date        :
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Check the size of the results and determine if should proceed to the report generation or not.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
 <%
-  Utilities.dumpRequestParams( request );
+  request.setCharacterEncoding( "UTF-8");
+%>
+<%@ page import="ro.finsiel.eunis.search.Utilities"%>
+<%@ page import="java.util.Enumeration"%>
+<%
+  //Utilities.dumpRequestParams( request );
   int resultsCount = Utilities.checkedStringToInt( request.getParameter( "resultsCount" ), 0 );
   int maxReportResults = Utilities.checkedStringToInt( application.getInitParameter( "TSV_REPORT_RESULTS_LIMIT_WARNING" ), 4000 );
   if ( resultsCount > maxReportResults )

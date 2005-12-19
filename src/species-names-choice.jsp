@@ -4,8 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Popup for list of values on second form from 'Species names' function.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@page import="java.util.List, java.util.Iterator,
                 ro.finsiel.eunis.search.Utilities,
                 ro.finsiel.eunis.search.species.SpeciesSearchUtility,
@@ -13,7 +15,9 @@
                 net.sf.jrf.domain.PersistentObject,
                 ro.finsiel.eunis.jrfTables.*,
                 ro.finsiel.eunis.jrfTables.species.VernacularNamesPersist,
-                ro.finsiel.eunis.WebContentManagement"%><%@ page import="java.util.ArrayList"%>
+                ro.finsiel.eunis.WebContentManagement,
+                java.util.ArrayList"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.names.NameBean" scope="page">
@@ -22,23 +26,19 @@
   <head>
     <jsp:include page="header-page.jsp" />
     <%
-      WebContentManagement contentManagement = SessionManager.getWebContent();
+      WebContentManagement cm = SessionManager.getWebContent();
       Integer typeForm = Utilities.checkedStringToInt(formBean.getTypeForm(), NameSearchCriteria.CRITERIA_SCIENTIFIC);
     %>
     <title>
-      <%=contentManagement.getContent("species_names-choice_pageTitle", false )%>
+      <%=cm.cms("species_names-choice_pageTitle")%>
     </title>
+      <script language="JavaScript" src="script/header.js" type="text/javascript"></script> 
       <script language="JavaScript" type="text/javascript">
       <!--
            function setLine(val) {
           <%if (typeForm.intValue() == SpeciesSearchUtility.CRITERIA_SCIENTIFIC_NAME.intValue()) {%>window.opener.document.eunis1.scientificName.value=val;<%}%>
           <%if (typeForm.intValue() == SpeciesSearchUtility.CRITERIA_VERNACULAR_NAME.intValue()) {%>window.opener.document.eunis2.vernacularName.value=val;<%}%>
               window.close();
-           }
-           function editContent( idPage )
-           {
-             var url = 'web-content-inline-editor.jsp?idPage=' + idPage;
-             window.open( url ,'', 'width=540,height=500,status=0,scrollbars=0,toolbar=0,resizable=1,location=0');
            }
       // -->
       </script>
@@ -61,29 +61,29 @@
 <%
   if ( species.size() > 0 )
   {
-    out.print(Utilities.getTextMaxLimitForPopup( contentManagement,( species.size() ) ) );
+    out.print(Utilities.getTextMaxLimitForPopup( cm,( species.size() ) ) );
   }
   if ( species.isEmpty() )
   {
 %>
           <strong>
-            <%=contentManagement.getContent("species_names-choice_notResults")%>.
+            <%=cm.cmsText("species_names-choice_notResults")%>.
           </strong>
           <br />
 <%
   }
   else
   {
-%>    <h6>List of values for:</h6>
+%>    <h2><%=cm.cmsText("species_names-choice_01_Text")%></h2>
       <u>
-        <%=contentManagement.getContent("species_names-choice_criteria")%>
+        <%=cm.cmsText("species_names-choice_criteria")%>
       </u>
       <em><%=Utilities.ReturnStringRelatioOp(oper)%></em>
       <strong><%=formBean.getVernacularName()%></strong>
       <br />
       <br />
       <div id="tab">
-      <table summary="List of values" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+      <table summary="<%=cm.cms("species_names-choice_02_Sum")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
     Iterator it = species.iterator();
     int i = 0;
@@ -100,7 +100,8 @@
 %>
               <tr style="background-color:<%=bgColor%>">
                 <td>
-                  <a title="Choose this value" href="javascript:setLine('<%=((Chm62edtReportAttributesPersist)specie).getValue()%>');"><%=((Chm62edtReportAttributesPersist)specie).getValue()%></a>
+                  <a title="<%=cm.cms("species_names-choice_03_Title")%>" href="javascript:setLine('<%=((Chm62edtReportAttributesPersist)specie).getValue()%>');"><%=((Chm62edtReportAttributesPersist)specie).getValue()%></a>
+                  <%=cm.cmsTitle("species_names-choice_03_Title")%>
                 </td>
               </tr>
 <%
@@ -110,7 +111,8 @@
 %>
               <tr style="background-color:<%=bgColor%>">
                   <td>
-                      <a title="Choose this value" href="javascript:setLine('<%=((VernacularNamesPersist)specie).getValue()%>');"><%=((VernacularNamesPersist)specie).getValue()%></a>
+                      <a title="<%=cm.cms("species_names-choice_03_Title")%>" href="javascript:setLine('<%=((VernacularNamesPersist)specie).getValue()%>');"><%=((VernacularNamesPersist)specie).getValue()%></a>
+                      <%=cm.cmsTitle("species_names-choice_03_Title")%>
                   </td>
               </tr>
 <%
@@ -121,13 +123,21 @@
       </table>
       </div>
 <%
-      out.print(Utilities.getTextWarningForPopup(cnt));
+      out.print(Utilities.getTextWarningForPopup(cm,cnt));
   }
 %>
     <br />
     <form action="">
-       <label for="button" class="noshow"><%=contentManagement.getContent("species_names-choice_btnClose", false)%></label> 
-       <input title="Close window" id="button" type="button" value="<%=contentManagement.getContent("species_names-choice_btnClose", false)%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
+       <label for="button" class="noshow"><%=cm.cms("species_names-choice_btnClose_Title")%></label>
+       <input title="<%=cm.cms("species_names-choice_btnClose_Title")%>" id="button" type="button" value="<%=cm.cms("species_names-choice_btnClose")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
+       <%=cm.cmsLabel("species_names-choice_btnClose_Title")%>
+       <%=cm.cmsTitle("species_names-choice_btnClose_Title")%>
+       <%=cm.cmsInput("species_names-choice_btnClose")%>
     </form>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("species_names-choice_pageTitle")%>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("species_names-choice_02_Sum")%>
+  <%=cm.br()%>
   </body>
 </html>

@@ -25,6 +25,7 @@ public class ThemeWrapper implements java.io.Serializable
    * @param mediumColor Medium shade.
    * @param lightColor Light shade.
    * @param headerImageName Header image (filename).
+   * @param inputFieldColor Color for input field
    */
   public ThemeWrapper( final String darkColor, final String mediumColor, final String lightColor, final String headerImageName, final String inputFieldColor )
   {
@@ -71,6 +72,10 @@ public class ThemeWrapper implements java.io.Serializable
     return lightColor;
   }
 
+  /**
+   * Gette for INPUT text field form element
+   * @return color for text elements
+   */
   public String getInputFieldColor()
   {
     return inputFieldColor;

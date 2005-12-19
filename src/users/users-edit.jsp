@@ -4,6 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Part of user management
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.List,
                  ro.finsiel.eunis.jrfTables.users.RolesDomain,
                  ro.finsiel.eunis.jrfTables.users.RolesPersist,
@@ -14,10 +18,13 @@
                  java.util.Enumeration,
                  ro.finsiel.eunis.auth.EncryptPassword,
                  ro.finsiel.eunis.search.Utilities"%>
-<%@ page contentType="text/html"%>
-  <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
+<jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 
 <%
+    // Web content manager used in this page.
+      WebContentManagement cm = SessionManager.getWebContent();
+
 // If user is authentificated and has this right
 if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
 {
@@ -29,8 +36,8 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
  try
 {
    // All users list
-   List ListUsers = new UserDomain().findCustom("SELECT USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,EMAIL, "  +
-              " FONTSIZE,THEME_INDEX,DATE_FORMAT(login_date,'%d %b %Y %H:%i:%s') "  +
+   List ListUsers = new UserDomain().findCustom("SELECT USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,LANG,EMAIL, "  +
+              " THEME_INDEX,DATE_FORMAT(login_date,'%d %b %Y %H:%i:%s') "  +
               " FROM EUNIS_USERS ORDER BY USERNAME ");
    if(ListUsers != null && ListUsers.size() > 0)
    {
@@ -40,7 +47,6 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
        var users_list = new Array(<%=ListUsers.size()%>);
       //-->
     </script>
-    <noscript>Your browser does not support JavaScript!</noscript>
     <script language="JavaScript" type="text/javascript">
       <!--
       <%
@@ -53,7 +59,6 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
       %>
        //-->
      </script>
-     <noscript>Your browser does not support JavaScript!</noscript>
 <%
   } else {
      %>
@@ -62,7 +67,6 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
                var users_list = new Array(0);
              //-->
           </script>
-          <noscript>Your browser does not support JavaScript!</noscript>
 <%
         }
 }catch(Exception e){e.printStackTrace();}
@@ -77,7 +81,7 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
       exist=false;
       for(i=0;i<users_list.length;i++) if (userName.toLowerCase() == users_list[i].toLowerCase()) exist = true;
       if(exist) {
-                   alert("This user name already exist!");
+                   alert("<%=cm.cms("users_edit_01")%>");
                    document.eunis.userName.value = "";
                 }
       return exist;
@@ -91,7 +95,7 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
              if (newUserName.toLowerCase() == users_list[i].toLowerCase()
                  && userName.toLowerCase() != users_list[i].toLowerCase()) exist = true;
       if(exist) {
-                   alert("This user name already exist!");
+                   alert("<%=cm.cms("users_edit_02")%>");
                    document.eunis.newUserName.value = "";
                 }
       return exist;
@@ -103,13 +107,13 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
            || trim(document.eunis.userName.value)==''
            || trim(document.eunis.userName.value)=='selectUserName')
             {
-             alert("You must select a valid user name value!");
+             alert("<%=cm.cms("users_edit_03")%>");
              return false;
             }
 
        if (document.eunis.newUserName == null || trim(document.eunis.newUserName.value)=='')
             {
-             alert("You must insert a valid new user name value!");
+             alert("<%=cm.cms("users_edit_04")%>");
              return false;
             }
 
@@ -117,13 +121,13 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
        if (document.eunis.password1 == null || trim(document.eunis.password1.value)==''
            || document.eunis.password2 == null || trim(document.eunis.password2.value)=='')
             {
-             alert("Fields password are mandatories!");
+             alert("<%=cm.cms("users_edit_05")%>");
              return false;
             }
 
           if (document.eunis.password1.value != document.eunis.password2.value)
             {
-             alert("You must insert the same password twice!");
+             alert("<%=cm.cms("users_edit_06")%>");
              return false;
             }
 
@@ -141,7 +145,7 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
         || trim(document.eunis.password1.value)==''
         || trim(document.eunis.password2.value)=='')
             {
-             alert("You must insert values for all mandatory fields!");
+             alert("<%=cm.cms("users_edit_07")%>");
              return false;
             }
 
@@ -149,7 +153,7 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
 
         if (document.eunis.password1.value != document.eunis.password2.value)
             {
-             alert("You must insert the same password twice!");
+             alert("<%=cm.cms("users_edit_08")%>");
              return false;
             }
 
@@ -164,11 +168,11 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
           || trim(document.eunis.userName.value)==''
           || trim(document.eunis.userName.value)=='selectUserName')
             {
-             alert("You must select a valid user name value!");
+             alert("<%=cm.cms("users_edit_09")%>");
             }
       else {
              if(trim(manager.toLowerCase()) == trim(document.eunis.userName.value.toLowerCase()))
-                 alert("You are logged as "+manager+", so you cannot delete your own user!");
+                 alert("<%=cm.cms("users_edit_10")%>"+manager+"<%=cm.cms("users_edit_11")%>");
              else
                {
                  userName = escape(trim(document.eunis.userName.value));
@@ -197,7 +201,7 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
 
           if (document.eunis.password1.value != document.eunis.password2.value)
             {
-             alert("You must insert the same password twice!");
+             alert("<%=cm.cms("users_edit_12")%>");
              document.eunis.password2.value='';
              return false;
             }
@@ -209,7 +213,7 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
     function validPassword(password){
        if(trim(password)=='')
          {
-             alert("You must insert a valid password!");
+             alert("<%=cm.cms("users_edit_13")%>");
              return false;
          }
        return true;
@@ -233,7 +237,7 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
 
        if (someIsChecked)
            {
-             alert("Administrator role cannot be combined with other roles. It already provides all privileges.");
+             alert("<%=cm.cms("users_edit_14")%>");
              box = eval(document.eunis.elements[str]);
              box.checked = !box.checked;
              return false;
@@ -245,7 +249,7 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
                      && document.eunis.rolexxx_Administrator != null
                      && eval(document.eunis.rolexxx_Administrator).checked == true)
                      {
-                       alert("Administrator role cannot be combined with other roles. It already provides all privileges.");
+                       alert("<%=cm.cms("users_edit_15")%>");
                        box = eval(document.eunis.elements[str]);
                        box.checked = !box.checked;
                        return false;
@@ -257,8 +261,6 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
 
       //-->
   </script>
-  <noscript>Your browser does not support JavaScript!</noscript>
-
 <%
   // Set database parameters
   String SQL_DRV="";
@@ -274,7 +276,7 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
   if(SQL_DRV == null || SQL_URL==null || SQL_USR == null || SQL_PWD==null )
   {
 %>
-    Error: The web.xml file does not contain one/all of these required values: JDBC_DRV,JDBC_URL,JDBC_USR,JDBC_PWD.
+    <%=cm.cmsText("users_edit_16")%>
 <%
     return;
   }
@@ -314,10 +316,10 @@ if(users_operation.equalsIgnoreCase("edit_users"))
         String goodNewUserName = request.getParameter("newUserName").toLowerCase();
         // Update user
         boolean editWithSuccess = UsersUtility.editUser(SessionManager.getUsername(),userName,firstName,lastName,mail,loginDate,password,goodNewUserName,request,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-        if(editWithSuccess) message = "User updating operation was made successfully.";
-        else message = "<span color=\"red\">User updating operation wasn't made successfully.</span>";
+        if(editWithSuccess) message = cm.cms("users_edit_17");
+        else message = "<span color=\"red\">"+cm.cms("users_edit_18")+"</span>";
 
-      } else message = "<span color=\"red\">User updating operation wasn't made successfully.</span>";
+      } else message = "<span color=\"red\">"+cm.cms("users_edit_18")+"</span>";
     }
   // if user choose to delete a user
   if(operation.equalsIgnoreCase("delete"))
@@ -331,9 +333,9 @@ if(users_operation.equalsIgnoreCase("edit_users"))
        {
            // delete the user
            boolean deleteWithSucces = UsersUtility.deleteUser(userName,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-           if(deleteWithSucces) message = "User deleting operation was made successfully.";
-           else message = "<span color=\"red\">User deleting operation wasn't made successfully.</span>";
-       }  else message = "<span color=\"red\">User deleting operation wasn't made successfully.</span>";
+           if(deleteWithSucces) message = cm.cms("users_edit_20");
+           else message = "<span color=\"red\">"+cm.cms("users_edit_21")+"</span>";
+       }  else message = "<span color=\"red\">"+cm.cms("users_edit_21")+"</span>";
    }
 
 }
@@ -375,9 +377,9 @@ if(users_operation.equalsIgnoreCase("edit_users"))
            }
 
 
-          if(addUserSuccess && addRolesSuccess) message = "User adding operation was made successfully.";
-          else message = "<span color=\"red\">User adding operation wasn't made successfully.</span>";
-        } else message = "<span color=\"red\">User adding operation wasn't made successfully.</span>";
+          if(addUserSuccess && addRolesSuccess) message = cm.cms("users_edit_23");
+          else message = "<span color=\"red\">"+cm.cms("users_edit_24")+"</span>";
+        } else message = "<span color=\"red\">"+cm.cms("users_edit_24")+"</span>";
       }
     }
   }
@@ -400,13 +402,13 @@ if(user != null) password = (user.getPassword()==null?"":user.getPassword());
 if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
 %>
 
-<h5>
-   EUNIS Database User Management
-</h5>
+<h1>
+   <%=cm.cmsText("users_edit_26")%>
+</h1>
 <br />
-<h6>
-    Edit users and roles
-</h6>
+<h2>
+   <%=cm.cmsText("users_edit_27")%>
+</h2>
 <br />
 
 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="tableBorder">
@@ -436,18 +438,17 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
     %>
    <tr>
      <td>
-     &nbsp;&nbsp;<label for="userName">Select user name</label>
-<%--       &nbsp;&nbsp;Select user name--%>
+     &nbsp;&nbsp;<label for="userName"><%=cm.cmsText("users_edit_28")%></label>
      </td>
      <td>
-       <select id="userName" name="userName" class="inputTextField" style="border-width : 1px" onchange="MM_jumpMenu('parent',this,0,'<%=tab1%>','<%=tab2%>')"  title="List of user name">
-            <option value="selectUserName" selected="selected">Select a user name</option>
+       <select id="userName" name="userName" class="inputTextField" style="border-width : 1px" onchange="MM_jumpMenu('parent',this,0,'<%=tab1%>','<%=tab2%>')"  title="<%=cm.cms("users_edit_29")%>">
+            <option value="selectUserName" selected="selected"><%=cm.cms("users_edit_30")%></option>
             <%
                try
                {
                // Users names list
-               List users = new UserDomain().findCustom("SELECT USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,EMAIL, "  +
-              " FONTSIZE,THEME_INDEX,DATE_FORMAT(login_date,'%d %b %Y %H:%i:%s') "  +
+               List users = new UserDomain().findCustom("SELECT USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,LANG,EMAIL, "  +
+              " THEME_INDEX,DATE_FORMAT(login_date,'%d %b %Y %H:%i:%s') "  +
               " FROM EUNIS_USERS ORDER BY USERNAME ");
                 if(users != null && users.size() > 0)
                 {
@@ -462,8 +463,10 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
                } catch(Exception e){e.printStackTrace();}
             %>
        </select>
+       <%=cm.cmsTitle("users_edit_29")%>
        &nbsp;&nbsp;&nbsp;
-      <a title="Delete this user" href="javascript:deleteUser('<%=SessionManager.getUsername()%>');">delete this user</a>
+      <a title="<%=cm.cms("users_edit_31")%>" href="javascript:deleteUser('<%=SessionManager.getUsername()%>');"><%=cm.cmsText("users_edit_32")%></a>
+      <%=cm.cmsTitle("users_edit_31")%>
     </td>
   </tr>
     <%
@@ -472,11 +475,11 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
     %>
   <tr>
     <td>
-       &nbsp;&nbsp;<label for="userName1">User name(*):</label>
-<%--      &nbsp;&nbsp;User name :--%>
+       &nbsp;&nbsp;<label for="userName1"><%=cm.cmsText("users_edit_33")%>(*):</label>
     </td>
     <td>
-     &nbsp;&nbsp;&nbsp;<input class="inputTextField" title="User name" alt="User name" type="text" name="userName" id="userName1" size="50" value="" onchange="UserExist();" />
+     &nbsp;&nbsp;&nbsp;<input class="inputTextField" title="<%=cm.cms("users_edit_33")%>" alt="<%=cm.cms("users_edit_33")%>" type="text" name="userName" id="userName1" size="50" value="" onchange="UserExist();" />
+     <%=cm.cmsTitle("users_edit_33")%>
     </td>
   </tr>
     <%
@@ -493,11 +496,11 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
     %>
     <tr>
       <td>
-        &nbsp;&nbsp;<label for="newUserName">User name:</label>
-<%--        &nbsp;&nbsp;User name :&nbsp;--%>
+        &nbsp;&nbsp;<label for="newUserName"><%=cm.cmsText("users_edit_34")%>:</label>
       </td>
       <td>
-       <input class="inputTextField" title="User name" alt="User name" type="text" name="newUserName" id="newUserName" size="50" value="<%=name%>" onchange="newUserNameExist();" />
+       <input class="inputTextField" title="<%=cm.cms("users_edit_34")%>" alt="<%=cm.cms("users_edit_34")%>" type="text" name="newUserName" id="newUserName" size="50" value="<%=name%>" onchange="newUserNameExist();" />
+       <%=cm.cmsTitle("users_edit_34")%>
       </td>
     </tr>
     <%
@@ -505,47 +508,47 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
     %>
     <tr>
       <td>
-        &nbsp;&nbsp;<label for="firstName">First name:</label>
-<%--        &nbsp;&nbsp;First name :--%>
+        &nbsp;&nbsp;<label for="firstName"><%=cm.cmsText("users_edit_35")%>:</label>
       </td>
       <td>
-        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input class="inputTextField" title="First name" alt="First name" type="text" id="firstName" name="firstName" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?firstName:"")%>" />
-      </td>
-    </tr>
-    <tr>
-      <td>
-       &nbsp;&nbsp;<label for="lastName">Last name:</label>
-<%--        &nbsp;&nbsp;Last name :--%>
-      </td>
-      <td>
-        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input class="inputTextField" title="Last name" alt="Last name" type="text" id="lastName" name="lastName" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?lastName:"")%>" />
+        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input class="inputTextField" title="<%=cm.cms("users_edit_35")%>" alt="<%=cm.cms("users_edit_35")%>" type="text" id="firstName" name="firstName" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?firstName:"")%>" />
+        <%=cm.cmsTitle("users_edit_35")%>
       </td>
     </tr>
     <tr>
       <td>
-      &nbsp;&nbsp;<label for="mail">E-Mail:</label>
-<%--        &nbsp;&nbsp;E-Mail :--%>
+       &nbsp;&nbsp;<label for="lastName"><%=cm.cmsText("users_edit_36")%>:</label>
       </td>
       <td>
-        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input class="inputTextField" title="Mail" alt="Mail" type="text" id="mail" name="mail" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?mail:"")%>" />
-      </td>
-    </tr>
-    <tr>
-      <td>
-        &nbsp;&nbsp;<label for="password1">Password<%=(users_operation.equalsIgnoreCase("add_users")?"(*)":"")%>:</label>
-<%--        &nbsp;&nbsp;Password :--%>
-      </td>
-      <td>
-        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input class="inputTextField" title="Password" alt="Password" type="text" id="password1" name="password1" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?password:"")%>" />
+        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input class="inputTextField" title="<%=cm.cms("users_edit_36")%>" alt="<%=cm.cms("users_edit_36")%>" type="text" id="lastName" name="lastName" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?lastName:"")%>" />
+        <%=cm.cmsTitle("users_edit_36")%>
       </td>
     </tr>
     <tr>
       <td>
-        &nbsp;&nbsp;<label for="password2">Re-enter password<%=(users_operation.equalsIgnoreCase("add_users")?"(*)":"")%>:</label>
-<%--        &nbsp;&nbsp;Re-enter password :--%>
+      &nbsp;&nbsp;<label for="mail"><%=cm.cmsText("users_edit_37")%>:</label>
       </td>
       <td>
-        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input class="inputTextField" title="Password" alt="Password" type="text" id="password2" name="password2" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?password:"")%>" />
+        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input class="inputTextField" title="<%=cm.cms("users_edit_37")%>" alt="<%=cm.cms("users_edit_37")%>" type="text" id="mail" name="mail" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?mail:"")%>" />
+        <%=cm.cmsTitle("users_edit_37")%>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        &nbsp;&nbsp;<label for="password1"><%=cm.cmsText("users_edit_38")%><%=(users_operation.equalsIgnoreCase("add_users")?"(*)":"")%>:</label>
+      </td>
+      <td>
+        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input class="inputTextField" title="<%=cm.cms("users_edit_38")%>" alt="<%=cm.cms("users_edit_38")%>" type="text" id="password1" name="password1" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?password:"")%>" />
+        <%=cm.cmsTitle("users_edit_38")%>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        &nbsp;&nbsp;<label for="password2"><%=cm.cmsText("users_edit_39")%><%=(users_operation.equalsIgnoreCase("add_users")?"(*)":"")%>:</label>
+      </td>
+      <td>
+        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input class="inputTextField" title="<%=cm.cms("users_edit_39")%>" alt="<%=cm.cms("users_edit_39")%>" type="text" id="password2" name="password2" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?password:"")%>" />
+        <%=cm.cmsTitle("users_edit_39")%>
       </td>
     </tr>
     </table>
@@ -564,7 +567,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
     <table summary="layout" class="valign" width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td style="text-align:left">
-            <strong>Roles</strong>
+            <strong><%=cm.cmsText("users_edit_40")%></strong>
           </td>
         </tr>
         <%
@@ -575,8 +578,8 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
        %>
        <tr>
          <td>
-           <label for="rolexxx_<%=roleName%>" class="noshow"></label>
-           <input title="Choose a role" alt="Choose a role" type="checkbox" id="rolexxx_<%=roleName%>" name="rolexxx_<%=roleName%>" onclick="validateChooseRoles('<%=roleName%>');" value ="<%=roleName%>" <%=(users_operation.equalsIgnoreCase("edit_users")?(UsersUtility.ObjectIsInVector(UsersUtility.getUsersRoles(userName),((RolesPersist)roles.get(i)).getRoleName())?"checked=\"checked\"":""):"")%>  onmouseover="return showtooltip('<%=UsersUtility.getRolesRightsAsString(((RolesPersist)roles.get(i)).getRoleName())%>')" onmouseout="hidetooltip()"  /><label for="rolexxx_<%=roleName%>"><%=((RolesPersist)roles.get(i)).getRoleName()%></label>
+           <input title="<%=cm.cms("users_edit_41")%>" alt="<%=cm.cms("users_edit_41")%>" type="checkbox" id="rolexxx_<%=roleName%>" name="rolexxx_<%=roleName%>" onclick="validateChooseRoles('<%=roleName%>');" value ="<%=roleName%>" <%=(users_operation.equalsIgnoreCase("edit_users")?(UsersUtility.ObjectIsInVector(UsersUtility.getUsersRoles(userName),((RolesPersist)roles.get(i)).getRoleName())?"checked=\"checked\"":""):"")%>  onmouseover="return showtooltip('<%=UsersUtility.getRolesRightsAsString(((RolesPersist)roles.get(i)).getRoleName())%>')" onmouseout="hidetooltip()"  /><label for="rolexxx_<%=roleName%>"><%=((RolesPersist)roles.get(i)).getRoleName()%></label>
+           <%=cm.cmsTitle("users_edit_41")%>
          </td>
       </tr>
       <%
@@ -595,7 +598,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
 %>
 <tr>
   <td colspan="2">
-  Note: Fields marked with * are mandatory!
+    <%=cm.cmsText("users_edit_42")%>
   </td>
 </tr>
 <tr>
@@ -609,14 +612,21 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
 <tr>
   <td style="text-align:left" colspan="2">
    &nbsp;&nbsp;
-   <label for="input1" class="noshow"><%=(users_operation.equalsIgnoreCase("edit_users")?"Update data":"Add user")%></label>
-   <input id="input1" type="submit" value="<%=(users_operation.equalsIgnoreCase("edit_users")?"Update data":"Add user")%>" name="submit" onclick="document.eunis.operation.value='submit';" class="inputTextField"  title="<%=(users_operation.equalsIgnoreCase("edit_users")?"Update data":"Add user")%>" />&nbsp;&nbsp;
+   <label for="input1" class="noshow"><%=(users_operation.equalsIgnoreCase("edit_users")?cm.cms("users_edit_43"):cm.cms("users_edit_44"))%></label>
+   <input id="input1" type="submit" value="<%=(users_operation.equalsIgnoreCase("edit_users")?cm.cms("users_edit_45"):cm.cms("users_edit_46"))%>" name="submit" onclick="document.eunis.operation.value='submit';" class="inputTextField"  title="<%=(users_operation.equalsIgnoreCase("edit_users")?cm.cms("users_edit_43"):cm.cms("users_edit_44"))%>" />
+   <%=(users_operation.equalsIgnoreCase("edit_users")?cm.cmsLabel("users_edit_43"):cm.cmsLabel("users_edit_44"))%>
+   <%=(users_operation.equalsIgnoreCase("edit_users")?cm.cmsTitle("users_edit_43"):cm.cmsTitle("users_edit_44"))%>
+   <%=(users_operation.equalsIgnoreCase("edit_users")?cm.cmsInput("users_edit_45"):cm.cmsInput("users_edit_46"))%>
+   &nbsp;&nbsp;
    <%
     if(users_operation.equalsIgnoreCase("add_users"))
     {
    %>
-     <label for="input2" class="noshow">Reset</label>
-     <input id="input2" type="reset" value="Reset" name="Reset" class="inputTextField"  title="Reset" />
+     <label for="input2" class="noshow"><%=cm.cms("reset")%></label>
+     <input id="input2" type="reset" value="<%=cm.cms("reset_btn")%>" name="Reset" class="inputTextField"  title="<%=cm.cms("reset")%>" />
+     <%=cm.cmsLabel("reset")%>
+     <%=cm.cmsTitle("reset")%>
+     <%=cm.cmsInput("reset_btn")%>
   <%
     }
   %>
@@ -654,8 +664,54 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
 <%
   } else {
 %>
-    <strong>You can't do this because you are not authenticated or you haven't got this right.</strong>
+    <strong><%=cm.cmsText("users_edit_47")%></strong>
 <br />
 <%
   }
 %>
+
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_01")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_02")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_03")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_04")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_05")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_06")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_07")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_08")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_09")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_10")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_11")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_12")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_13")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_14")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_15")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_17")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_18")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_20")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_21")%>                                                                    
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_23")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_24")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_edit_30")%>
+<%=cm.br()%>

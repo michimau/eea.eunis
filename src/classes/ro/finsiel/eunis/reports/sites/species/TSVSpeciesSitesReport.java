@@ -11,7 +11,7 @@ import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.sites.species.SpeciesDomain;
 import ro.finsiel.eunis.jrfTables.sites.species.SpeciesPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.search.sites.species.SpeciesBean;
@@ -24,26 +24,32 @@ import java.util.List;
 import java.util.Vector;
 
 
+/**
+ * XML and PDF report.
+ */
 public class TSVSpeciesSitesReport extends AbstractTSVReport
 {
   /**
-   * Form bean used for search
+   * Form bean used for search.
    */
   private SpeciesBean formBean = null;
 
   private boolean showInvalidatedSpecies = false;
 
   /**
-   * Normal constructor
+   * Normal constructor.
    *
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
+   * @param showInvalidatedSpecies Show invalidated species
+   * @param searchAttribute Type of search
    */
   public TSVSpeciesSitesReport( String sessionID, AbstractFormBean formBean, boolean showInvalidatedSpecies, Integer searchAttribute )
   {
     super( "SpeciesSitesReport_" + sessionID + ".tsv" );
     this.formBean = ( SpeciesBean )formBean;
     this.filename = "SpeciesSitesReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "SpeciesSitesReport_" + sessionID + ".xml" );
     this.showInvalidatedSpecies = showInvalidatedSpecies;
     // Init the data factory
     if ( null != formBean )
@@ -68,17 +74,17 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader()
+  public List<String> createHeader()
   {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     // Source database
     headers.addElement( "Source data set" );
     // DesignationTypes
@@ -91,7 +97,7 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
   }
 
   /**
-   * Use this method to write specific data into the file. Implemented in inherited classes
+   * Use this method to write specific data into the file. Implemented in inherited classes.
    */
   public void writeData()
   {
@@ -109,6 +115,7 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
         return;
       }
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
 
       Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), SpeciesSearchCriteria.SEARCH_SCIENTIFIC_NAME);
       Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
@@ -129,8 +136,11 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
         for ( int i = 0; i < resultSet.size(); i++ )
         {
           SpeciesPersist site = ( SpeciesPersist ) resultSet.get( i );
-
-          String designations = SitesSearchUtility.siteDesignationsAsCommaSeparatedString( site.getIdDesignation(), site.getIdGeoscope().toString() );
+          String designations = "";
+          if( site.getIdGeoscope() != null )
+          {
+            designations = SitesSearchUtility.siteDesignationsAsCommaSeparatedString( site.getIdDesignation(), site.getIdGeoscope().toString() );
+          }
 
           Integer idNatureObject = site.getIdNatureObject();
           List resultsSpecies = new SpeciesDomain().findSpeciesFromSite( new SpeciesSearchCriteria( searchAttribute,
@@ -147,7 +157,7 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
               String scientificName = (String)tableColumns.getColumnsValues().get(0);
               if ( ii == 0 )
               {
-                Vector aRow = new Vector();
+                Vector<String> aRow = new Vector<String>();
                 // Source database
                 aRow.addElement( ( SitesSearchUtility.translateSourceDB( site.getSourceDB() ) ) );
                 // Designations
@@ -160,7 +170,7 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
               }
               else
               {
-                Vector aRow = new Vector();
+                Vector<String> aRow = new Vector<String>();
                 // Source database
                 aRow.addElement( "" );
                 // Designations
@@ -175,7 +185,7 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
           }
           else
           {
-            Vector aRow = new Vector();
+            Vector<String> aRow = new Vector<String>();
             // Source database
             aRow.addElement( ( SitesSearchUtility.translateSourceDB( site.getSourceDB() ) ) );
             // Designations
@@ -183,9 +193,27 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
             // Name
             aRow.addElement( Utilities.formatString( site.getName() ) );
             // Species
-            aRow.addElement( Utilities.formatString( "-" ) );
+            aRow.addElement( "-" );
             writeRow( aRow );
           }
+
+          // XML Report
+          Vector<String> aRow = new Vector<String>();
+          // Source database
+          aRow.addElement( ( SitesSearchUtility.translateSourceDB( site.getSourceDB() ) ) );
+          // Designations
+          aRow.addElement( designations );
+          // Name
+          aRow.addElement( Utilities.formatString( site.getName() ) );
+          // Species
+          String species = "";
+          for(int ii=0;ii<resultsSpecies.size();ii++)
+          {
+            TableColumns tableColumns = (TableColumns) resultsSpecies.get(ii);
+            species += "<species>" + tableColumns.getColumnsValues().get(0) + "</species>";
+          }
+          aRow.addElement( species );
+          xmlreport.writeRow( aRow );
         }
       }
     }

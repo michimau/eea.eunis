@@ -29,7 +29,7 @@ public class LegalStatusWrapper {
 
   /**
    * Setter for comments property.
-   * @param comments
+   * @param comments New value
    */
   public void setComments(String comments) {
     this.comments = comments;
@@ -45,7 +45,7 @@ public class LegalStatusWrapper {
 
   /**
    * Setter for legalText property.
-   * @param legalText
+   * @param legalText New value
    */
   public void setLegalText(String legalText) {
     this.legalText = legalText;

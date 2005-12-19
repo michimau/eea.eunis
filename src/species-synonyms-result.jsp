@@ -4,8 +4,10 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Species synonyms' function - results page.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.search.species.synonyms.SynonymsSearchCriteria,
@@ -22,13 +24,17 @@
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
     <script language="JavaScript" type="text/javascript" src="script/species-result.js"></script>
+  <%
+      WebContentManagement cm = SessionManager.getWebContent();
+  %>
     <script language="JavaScript" type="text/javascript">
       <!--
-        var errRefineMessage = "Please enter the refine criteria correctly.";
+        var errRefineMessage = "<%=cm.cms("species_synonyms-result_15")%>";
         // Used in refine search ; check if criteria are empty
         function checkRefineSearch(noCriteria)
         {
@@ -96,27 +102,26 @@
   reportFields.addElement("criteriaSearch");
   reportFields.addElement("oper");
   reportFields.addElement("criteriaType");
-  String tsvLink = "javascript:openlink('reports/species/tsv-species-synonyms.jsp?" + formBean.toURLParam(reportFields) + "')";
+  String tsvLink = "javascript:openTSVDownload('reports/species/tsv-species-synonyms.jsp?" + formBean.toURLParam(reportFields) + "')";
 %>
-  <%
-    WebContentManagement contentManagement = SessionManager.getWebContent();
-  %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=contentManagement.getContent("species_synonyms-result_title", false )%>
+    <%=cm.cms("species_synonyms-result_title")%>
   </title>
   </head>
   <body style="background-color:#ffffff">
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="Home#index.jsp,Species#species.jsp,Synonyms#species-synonyms.jsp,Results" />
+      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,synonyms_location#species-synonyms.jsp,results_location" />
       <jsp:param name="helpLink" value="species-help.jsp" />
       <jsp:param name="downloadLink" value="<%=tsvLink%>" />
     </jsp:include>
 <%--      <jsp:param name="printLink" value="<%=pdfLink%>"/>--%>
-    <h5>
-          <%=contentManagement.getContent("species_synonyms-result_01")%>
-    </h5>
+    <h1>
+          <%=cm.cmsText("species_synonyms-result_01")%>
+    </h1>
     <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td>
@@ -135,7 +140,7 @@
 %>
               <tr>
                 <td>
-                  <%=contentManagement.getContent("species_synonyms-result_02")%>
+                  <%=cm.cmsText("species_synonyms-result_02")%>
                   <strong>
                       <%=Utilities.treatURLAmp(descr.toString())%>
                   </strong>
@@ -159,7 +164,7 @@
      }
        %>
             <br />
-            <%=contentManagement.getContent("species_synonyms-result_03")%>: <strong><%=resultsCount%></strong>
+            <%=cm.cmsText("species_synonyms-result_03")%>: <strong><%=resultsCount%></strong>
 <%// Prepare parameters for pagesize.jsp
             Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
             pageSizeFormFields.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
@@ -184,14 +189,14 @@
           <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td style="background-color:#EEEEEE">
-                  <%=contentManagement.getContent("species_synonyms-result_04")%>
+                  <%=cm.cmsText("species_synonyms-result_04")%>
               </td>
             </tr>
             <tr>
               <td style="background-color:#EEEEEE">
                 <form name="resultSearch" method="get" onsubmit="return(checkRefineSearch(<%=noCriteria%>));" action="" >
                   <%=formBean.toFORMParam(filterSearch)%>
-                  <label for="select1" class="noshow">Criteria</label>
+                  <label for="select1" class="noshow"><%=cm.cms("criteria")%></label>
 <%
     // Not any group
     if (!formBean.getGroupName().equals("0"))
@@ -202,14 +207,14 @@
     }
 %>
 
-                  <select id="select1" title="Criteria" name="criteriaType" class="inputTextField" <%=(formBean.getGroupName().equals("0") ? "" : "disabled=\"disabled\"")%>>
+                  <select id="select1" title="<%=cm.cms("criteria")%>" name="criteriaType" class="inputTextField" <%=(formBean.getGroupName().equals("0") ? "" : "disabled=\"disabled\"")%>>
 <%
                     // Any group
                     if (formBean.getGroupName().equals("0"))
                     {
 %>
                       <option value="<%=SynonymsSearchCriteria.CRITERIA_GROUP%>">
-                        <%=contentManagement.getContent("species_synonyms-result_05", false)%>
+                        <%=cm.cms("species_synonyms-result_05")%>
                       </option>
 <%
                     }
@@ -221,26 +226,34 @@
 <%--                      Family--%>
 <%--                    </OPTION>--%>
                     <option value="<%=SynonymsSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected">
-                      <%=contentManagement.getContent("species_synonyms-result_06", false)%>
+                      <%=cm.cms("species_synonyms-result_06")%>
                     </option>
                   </select>
-                  <label for="select2" class="noshow">Operator</label>
-                  <select id="select2" title="Operator" name="oper" class="inputTextField">
+                  <%=cm.cmsLabel("criteria")%>
+                  <%=cm.cmsTitle("criteria")%>
+                  <label for="select2" class="noshow"><%=cm.cms("operator")%></label>
+                  <select id="select2" title="<%=cm.cms("operator")%>" name="oper" class="inputTextField">
                     <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                        <%=contentManagement.getContent("species_synonyms-result_07", false)%>
+                        <%=cm.cms("species_synonyms-result_07")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_STARTS%>">
-                        <%=contentManagement.getContent("species_synonyms-result_08", false)%>
+                        <%=cm.cms("species_synonyms-result_08")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                        <%=contentManagement.getContent("species_synonyms-result_09", false)%>
+                        <%=cm.cms("species_synonyms-result_09")%>
                     </option>
                   </select>
-                  <label for="criteriaSearch" class="noshow">Criteria value</label>
-                  <input id="criteriaSearch" title="Criteria value" alt="Criteria value" class="inputTextField" name="criteriaSearch" type="text" size="30" />
-                  <label for="refine" class="noshow">Search</label>
-                  <input id="refine" title="<%=contentManagement.getContent("species_synonyms-result_10", false )%>" class="inputTextField" type="submit" name="Submit" value="<%=contentManagement.getContent("species_synonyms-result_10", false )%>" />
-                  <%=contentManagement.writeEditTag( "species_synonyms-result_10" )%>
+                  <%=cm.cmsLabel("operator")%>
+                  <%=cm.cmsTitle("operator")%>
+                  <label for="criteriaSearch" class="noshow"><%=cm.cms("criteria_value")%></label>
+                  <input id="criteriaSearch" title="<%=cm.cms("criteria_value")%>" alt="<%=cm.cms("criteria_value")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
+                  <%=cm.cmsLabel("criteria_value")%>
+                  <%=cm.cmsTitle("criteria_value")%>
+                  <label for="refine" class="noshow"><%=cm.cms("search")%></label>
+                  <input id="refine" title="<%=cm.cms("search")%>" class="inputTextField" type="submit" name="Submit" value="<%=cm.cms("search_btn")%>" />
+                  <%=cm.cmsLabel("search")%>
+                  <%=cm.cmsTitle("search")%>
+                  <%=cm.cmsInput("search_btn")%>
                 </form>
               </td>
             </tr>
@@ -252,7 +265,7 @@
 %>
                 <tr>
                   <td style="background-color:#EEEEEE">
-                    <%=contentManagement.getContent("species_synonyms-result_11")%>:
+                    <%=cm.cmsText("species_synonyms-result_11")%>:
                   </td>
                 </tr>
 <%
@@ -265,7 +278,7 @@
 %>
                   <tr>
                     <td style="background-color:#CCCCCC;text-align:left">
-                      <a title="Delete this search criteria" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img alt="Delete" src="images/mini/delete.jpg" border="0" style="vertical-align:middle" /></a>&nbsp;&nbsp;<strong class="linkDarkBg"><%= i + ". " + criteria.toHumanString()%></strong>
+                      <a title="<%=cm.cms("delete_criteria")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img alt="<%=cm.cms("delete_criteria")%>" src="images/mini/delete.jpg" border="0" style="vertical-align:middle" /></a><%=cm.cmsTitle("delete_criteria")%>&nbsp;&nbsp;<strong class="linkDarkBg"><%= i + ". " + criteria.toHumanString()%></strong>
                     </td>
                   </tr>
 <%
@@ -288,7 +301,7 @@
           <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>" />
           <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>" />
         </jsp:include>
-        <table summary="List of results" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+        <table summary="<%=cm.cms("search_results")%>" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse">
 <%
             // Compute the sort criteria
             Vector sortURLFields = new Vector();      /* Used for sorting */
@@ -306,37 +319,35 @@
 if (formBean.getGroupName().equals("0"))
     {
 %>
-              <a title="Sort results by this column" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sortGroup)%><%=contentManagement.getContent("species_synonyms-result_05")%></span></a>
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("species_synonyms-result_05")%></span></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
 <%
     }else
     {
 %>
-      <%=contentManagement.getContent("species_synonyms-result_05")%>
+      <%=cm.cmsText("species_synonyms-result_05")%>
 <%
     }
 %>
             </th>
-<%--            <th align="left" class="resultHeader">--%>
-<%--              <a class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(sortOrder, (null == sortOrder) ? true : false)%>"><FONT color="#FFFFFF"><%=Utilities.getSortImageTag(sortOrder)%><%=contentManagement.getContent("species_synonyms-result_12")%></FONT></a>--%>
-<%--            </th>--%>
-<%--            <th align="left" class="resultHeader">--%>
-<%--              <a class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(sortFamily, (null == sortFamily) ? true : false)%>"><FONT color="#FFFFFF"><%=Utilities.getSortImageTag(sortFamily)%><%=contentManagement.getContent("species_synonyms-result_13")%></FONT></a>--%>
-<%--            </th>--%>
             <th style="text-align:left" class="resultHeader">
-              <a title="Sort results by this column" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sortSciName)%><%=contentManagement.getContent("species_synonyms-result_06")%></span></a>
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("species_synonyms-result_06")%></span></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th style="text-align:left">
-              Species scientific name
+              <%=cm.cmsText("species_scientific_name")%>
             </th>
           </tr>
 <%
             Iterator it = results.iterator();
+            int col = 0;
             while (it.hasNext())
             {
-                ScientificNamePersist specie = (ScientificNamePersist)it.next();
+              String bgColor = col++ % 2 == 0 ? "#EEEEEE" : "#FFFFFF";
+              ScientificNamePersist specie = (ScientificNamePersist)it.next();
 %>
           <tr>
-            <td>
+            <td class="resultCell" style="background-color : <%=bgColor%>">
               <%=Utilities.treatURLSpecialCharacters(Utilities.formatString(specie.getGrName()))%>
             </td>
 <%--            <td>--%>
@@ -345,16 +356,17 @@ if (formBean.getGroupName().equals("0"))
 <%--            <td>--%>
 <%--              <%=Utilities.formatString(specie.getTaxonomicNameFamily(),"&nbsp;")%>--%>
 <%--            </td>--%>
-            <td>
-              <a title="Species factsheet" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpec()%>&amp;idSpeciesLink=<%=specie.getIdSpecLink()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScName())%></a>
+            <td class="resultCell" style="background-color : <%=bgColor%>">
+              <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpec()%>&amp;idSpeciesLink=<%=specie.getIdSpecLink()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScName())%></a>
+              <%=cm.cmsTitle("open_species_factsheet")%>
             </td>
-            <td>
+            <td class="resultCell" style="background-color : <%=bgColor%>">
             <%
                List resultsSpecies = new ScientificNameDomain(formBean.toSearchCriteria(),formBean.toSortCriteria(),SessionManager.getShowEUNISInvalidatedSpecies()).geSpeciesListForASynonym(specie.getIdSpec());
                if (resultsSpecies != null && resultsSpecies.size() > 0)
              {
              %>
-             <table summary="List of species" border="1" cellspacing="1" cellpadding="1" style="border-collapse: collapse">
+             <table summary="<%=cm.cms("list_species")%>" border="1" cellspacing="1" cellpadding="1" style="border-collapse: collapse; background-color : <%=bgColor%>">
              <%
                for(int ii=0;ii<resultsSpecies.size();ii++)
                {
@@ -363,9 +375,10 @@ if (formBean.getGroupName().equals("0"))
                  Integer idSpecies = (Integer)tableColumns.getColumnsValues().get(1);
                  Integer idSpeciesLink = (Integer)tableColumns.getColumnsValues().get(2);
                %>
-               <tr style="background-color:#FFFFFF">
+               <tr>
                  <td>
-                   <a href="species-factsheet.jsp?idSpecies=<%=idSpecies%>&amp;idSpeciesLink=<%=idSpeciesLink%>" title="Species factsheet"><%=Utilities.treatURLSpecialCharacters(scientificName)%></a>
+                   <a href="species-factsheet.jsp?idSpecies=<%=idSpecies%>&amp;idSpeciesLink=<%=idSpeciesLink%>" title="<%=cm.cms("open_species_factsheet")%>"><%=Utilities.treatURLSpecialCharacters(scientificName)%></a>
+                   <%=cm.cmsTitle("open_species_factsheet")%>
                  </td>
                </tr>
                <%
@@ -386,27 +399,23 @@ if (formBean.getGroupName().equals("0"))
 if (formBean.getGroupName().equals("0"))
     {
 %>
-              <a title="Sort results by this column" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sortGroup)%><%=contentManagement.getContent("species_synonyms-result_05")%></span></a>
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("species_synonyms-result_05")%></span></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
 <%
     }else
     {
 %>
-      <%=contentManagement.getContent("species_synonyms-result_05")%>
+      <%=cm.cmsText("species_synonyms-result_05")%>
 <%
     }
 %>
             </th>
-<%--            <th align="left" class="resultHeader">--%>
-<%--              <a class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(sortOrder, (null == sortOrder) ? true : false)%>"><FONT color="#FFFFFF"><%=Utilities.getSortImageTag(sortOrder)%><%=contentManagement.getContent("species_synonyms-result_12")%></FONT></a>--%>
-<%--            </th>--%>
-<%--            <th align="left" class="resultHeader">--%>
-<%--              <a class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(sortFamily, (null == sortFamily) ? true : false)%>"><FONT color="#FFFFFF"><%=Utilities.getSortImageTag(sortFamily)%><%=contentManagement.getContent("species_synonyms-result_13")%></FONT></a>--%>
-<%--            </th>--%>
             <th style="text-align:left" class="resultHeader">
-              <a title="Sort results by this column" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sortSciName)%><%=contentManagement.getContent("species_synonyms-result_06")%></span></a>
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("species_synonyms-result_06")%></span></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th style="text-align:left">
-              Species scientific name
+              <%=cm.cmsText("species_scientific_name")%>
             </th>
           </tr>
         </table>
@@ -421,9 +430,32 @@ if (formBean.getGroupName().equals("0"))
         </td>
       </tr>
     </table>
+
+<%=cm.br()%>
+<%=cm.cmsMsg("species_synonyms-result_15")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_synonyms-result_title")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_synonyms-result_05")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_synonyms-result_06")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_synonyms-result_07")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_synonyms-result_08")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_synonyms-result_09")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("search_results")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("list_species")%>
+<%=cm.br()%>
+
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="species-synonyms-result.jsp" />
     </jsp:include>
+  </div>
+  </div>
   </div>
   </body>
 </html>

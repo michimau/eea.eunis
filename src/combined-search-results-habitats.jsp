@@ -4,8 +4,10 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Results page for 'Combined search' function when starting nature object was Habitats.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page contentType="text/html" %>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.AbstractPaginator,
                  ro.finsiel.eunis.search.combined.CombinedSearchPaginator,
@@ -19,22 +21,23 @@
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
   <script language="JavaScript" src="script/species-result.js" type="text/javascript"></script>
   <%
-    WebContentManagement contentManagement = SessionManager.getWebContent();
+    WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=contentManagement.getContent("generic_combined-search-results-habitats_title", false)%>
+    <%=cm.cms("generic_combined-search-results-habitats_title")%>
   </title>
 </head>
-<%AbstractPaginator paginator = null;
+<%
   // Database where to search. Possible values are: Species, Habitats or Sites
   String searchedDatabase = formBean.getSearchedNatureObject();
-  paginator = new CombinedSearchPaginator(new HabitatsCombinedDomain(request.getSession().getId()));
+  AbstractPaginator paginator = new CombinedSearchPaginator(new HabitatsCombinedDomain(request.getSession().getId()));
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
   paginator.setSortCriteria(formBean.toSortCriteria());
   paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
@@ -60,26 +63,28 @@
   boolean showDiagram = (columnsDisplayed.contains("showDiagram")) ? true : false;
 %>
 <body>
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
   <jsp:include page="header-dynamic.jsp">
-    <jsp:param name="location" value="Home#index.jsp,Combined Search#combined-search.jsp,Results"/>
+    <jsp:param name="location" value="home_location#index.jsp,combined_search_location#combined-search.jsp,results_location"/>
   </jsp:include>
   <table summary="layout" width="100%" border=0 cellspacing="0" cellpadding="0">
     <tr>
       <td colspan="3">
-        <h5><%=contentManagement.getContent("generic_combined-search-results-habitats_01")%></h5>
+        <h1><%=cm.cmsText("generic_combined-search-results-habitats_01")%></h1>
         <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td>
-      <%=contentManagement.getContent("generic_combined-search-results-habitats_02")%>
+      <%=cm.cmsText("generic_combined-search-results-habitats_02")%>
     </td>
   </tr>
   <tr>
     <td bgcolor="#FFFFFF">
       <%=SessionManager.getCombinednatureobject1()%>
-      <%=contentManagement.getContent("generic_combined-search-results-habitats_03")%>
+      <%=cm.cmsText("generic_combined-search-results-habitats_03")%>
       <%=SessionManager.getCombinedexplainedcriteria1()%>
-      <%=contentManagement.getContent("generic_combined-search-results-habitats_04")%>
+      <%=cm.cmsText("generic_combined-search-results-habitats_04")%>
     </td>
   </tr>
   <tr>
@@ -93,9 +98,9 @@
   <tr>
     <td bgcolor="#FFFFFF">
       <%=SessionManager.getCombinednatureobject2()%>
-      <%=contentManagement.getContent("generic_combined-search-results-habitats_03")%>
+      <%=cm.cmsText("generic_combined-search-results-habitats_03")%>
       <%=SessionManager.getCombinedexplainedcriteria2()%>
-      <%=contentManagement.getContent("generic_combined-search-results-habitats_04")%>
+      <%=cm.cmsText("generic_combined-search-results-habitats_04")%>
     </td>
   </tr>
   <tr>
@@ -108,7 +113,7 @@
   %>
   <tr>
     <td bgcolor="#FFFFFF">
-      <%=contentManagement.getContent("generic_combined-search-results-habitats_05")%>
+      <%=cm.cmsText("generic_combined-search-results-habitats_05")%>
       <%=SessionManager.getSourcedb()%>
     </td>
   </tr>
@@ -122,9 +127,9 @@
   <tr>
     <td bgcolor="#FFFFFF">
       <%=SessionManager.getCombinednatureobject3()%>
-      <%=contentManagement.getContent("generic_combined-search-results-habitats_03")%>
+      <%=cm.cmsText("generic_combined-search-results-habitats_03")%>
       <%=SessionManager.getCombinedexplainedcriteria3()%>
-      <%=contentManagement.getContent("generic_combined-search-results-habitats_04")%>
+      <%=cm.cmsText("generic_combined-search-results-habitats_04")%>
     </td>
   </tr>
   <tr>
@@ -137,7 +142,7 @@
   %>
   <tr>
     <td bgcolor="#FFFFFF">
-      <%=contentManagement.getContent("generic_combined-search-results-habitats_05")%>
+      <%=cm.cmsText("generic_combined-search-results-habitats_05")%>
       <%=SessionManager.getSourcedb()%>
     </td>
   </tr>
@@ -150,7 +155,7 @@
   %>
   <tr>
     <td bgcolor="#FFFFFF">
-      <%=contentManagement.getContent("generic_combined-search-results-habitats_06")%>
+      <%=cm.cmsText("generic_combined-search-results-habitats_06")%>
       <%=SessionManager.getCombinedcombinationtype()%>
     </td>
   </tr>
@@ -160,9 +165,9 @@
   %>
   <tr>
     <td bgcolor="#FFFFFF">
-      <%=contentManagement.getContent("generic_combined-search-results-habitats_06")%>
+      <%=cm.cmsText("generic_combined-search-results-habitats_06")%>
       <%=SessionManager.getCombinednatureobject1()%>
-      <%=contentManagement.getContent("generic_combined-search-results-habitats_07")%>
+      <%=cm.cmsText("generic_combined-search-results-habitats_07")%>
       <%=SessionManager.getCombinednatureobject2()%>
     </td>
   </tr>
@@ -172,9 +177,9 @@
   %>
   <tr>
     <td bgcolor="#FFFFFF">
-      <%=contentManagement.getContent("generic_combined-search-results-habitats_06")%>
+      <%=cm.cmsText("generic_combined-search-results-habitats_06")%>
       <%=SessionManager.getCombinednatureobject1()%>
-      <%=contentManagement.getContent("generic_combined-search-results-habitats_07")%>
+      <%=cm.cmsText("generic_combined-search-results-habitats_07")%>
       <%=SessionManager.getCombinednatureobject3()%>
     </td>
   </tr>
@@ -183,146 +188,166 @@
     }
   %>
   </table>
-        <%=contentManagement.getContent("generic_combined-search-results-habitats_08")%>
-        <strong>
-          <%=resultsCount%>
-        </strong>
-        <br />
-        <%// Prepare parameters for pagesize.jsp
-          Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
-          pageSizeFormFields.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
-          pageSizeFormFields.addElement("ascendency");    /*   is overriden & also pageSize is set to default           */
-          pageSizeFormFields.addElement("criteriaSearch");/*   to page '0' aka first page. */
-        %>
-        <jsp:include page="pagesize.jsp">
-          <jsp:param name="guid" value="<%=guid + 1%>"/>
-          <jsp:param name="pageName" value="<%=pageName%>"/>
-          <jsp:param name="pageSize" value="<%=formBean.getPageSize()%>"/>
-          <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(pageSizeFormFields)%>"/>
-        </jsp:include>
-        <%
-          // Prepare the form parameters.
-          Vector filterSearch = new Vector();
-          filterSearch.addElement("sort");
-          filterSearch.addElement("ascendency");
-          filterSearch.addElement("criteriaSearch");
-          filterSearch.addElement("pageSize");
-        %>
-        <br />
-        <%
-          Vector navigatorFormFields = new Vector();  /*  The following fields are used by paginator.jsp, included below.      */
-          navigatorFormFields.addElement("pageSize"); /* NOTE* that I didn't add here currentPage since it is overriden in the */
-          navigatorFormFields.addElement("sort");     /* <form name='..."> in the navigator.jsp!                               */
-          navigatorFormFields.addElement("ascendency");
-          navigatorFormFields.addElement("criteriaSearch");
-        %>
-        <jsp:include page="navigator.jsp">
-          <jsp:param name="pagesCount" value="<%=pagesCount%>"/>
-          <jsp:param name="pageName" value="<%=pageName%>"/>
-          <jsp:param name="guid" value="<%=guid%>"/>
-          <jsp:param name="currentPage" value="<%=formBean.getCurrentPage()%>"/>
-          <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>"/>
-          <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>"/>
-        </jsp:include>
-        <table summary="layout" border="1" cellpadding="0" cellspacing="0" align="center" width="100%" style="border-collapse: collapse">
-          <%// Compute the sort criteria
-          Vector sortURLFields = new Vector();      /* Used for sorting */
-          sortURLFields.addElement("pageSize");
-          String urlSortString = formBean.toURLParam(sortURLFields);
-          AbstractSortCriteria sortLevel = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_LEVEL);
-          AbstractSortCriteria sortEunisCode = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_EUNIS_CODE);
-          AbstractSortCriteria sortAnnexCode = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_ANNEX_CODE);
-          AbstractSortCriteria sortScientificName = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_SCIENTIFIC_NAME);
-          AbstractSortCriteria sortEnglishName = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_ENGLISH_NAME);
 
-          // Expand/Collapse vernacular names
-          Vector expand = new Vector();
-          expand.addElement("sort");
-          expand.addElement("ascendency");
-          expand.addElement("pageSize");
-          expand.addElement("currentPage");
-          String expandURL = formBean.toURLParam(expand);%>
-          <tr bgcolor="<%=SessionManager.getThemeManager().getMediumColor()%>">
+  <%=cm.cmsText("generic_combined-search-results-habitats_08")%>
+  <strong>
+    <%=resultsCount%>
+  </strong>
+  <br />
+  <%// Prepare parameters for pagesize.jsp
+    Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
+    pageSizeFormFields.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
+    pageSizeFormFields.addElement("ascendency");    /*   is overriden & also pageSize is set to default           */
+    pageSizeFormFields.addElement("criteriaSearch");/*   to page '0' aka first page. */
+  %>
+  <jsp:include page="pagesize.jsp">
+    <jsp:param name="guid" value="<%=guid + 1%>"/>
+    <jsp:param name="pageName" value="<%=pageName%>"/>
+    <jsp:param name="pageSize" value="<%=formBean.getPageSize()%>"/>
+    <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(pageSizeFormFields)%>"/>
+  </jsp:include>
+  <%
+    // Prepare the form parameters.
+    Vector filterSearch = new Vector();
+    filterSearch.addElement("sort");
+    filterSearch.addElement("ascendency");
+    filterSearch.addElement("criteriaSearch");
+    filterSearch.addElement("pageSize");
+  %>
+  <br />
+  <%
+    Vector navigatorFormFields = new Vector();  /*  The following fields are used by paginator.jsp, included below.      */
+    navigatorFormFields.addElement("pageSize"); /* NOTE* that I didn't add here currentPage since it is overriden in the */
+    navigatorFormFields.addElement("sort");     /* <form name='..."> in the navigator.jsp!                               */
+    navigatorFormFields.addElement("ascendency");
+    navigatorFormFields.addElement("criteriaSearch");
+  %>
+  <jsp:include page="navigator.jsp">
+    <jsp:param name="pagesCount" value="<%=pagesCount%>"/>
+    <jsp:param name="pageName" value="<%=pageName%>"/>
+    <jsp:param name="guid" value="<%=guid%>"/>
+    <jsp:param name="currentPage" value="<%=formBean.getCurrentPage()%>"/>
+    <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>"/>
+    <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>"/>
+  </jsp:include>
+  <table summary="<%=cm.cms("search_results")%>" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse">
+    <%// Compute the sort criteria
+    Vector sortURLFields = new Vector();      /* Used for sorting */
+    sortURLFields.addElement("pageSize");
+    String urlSortString = formBean.toURLParam(sortURLFields);
+    AbstractSortCriteria sortLevel = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_LEVEL);
+    AbstractSortCriteria sortEunisCode = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_EUNIS_CODE);
+    AbstractSortCriteria sortAnnexCode = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_ANNEX_CODE);
+    AbstractSortCriteria sortScientificName = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_SCIENTIFIC_NAME);
+    AbstractSortCriteria sortEnglishName = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_ENGLISH_NAME);
+
+    // Expand/Collapse vernacular names
+    Vector expand = new Vector();
+    expand.addElement("sort");
+    expand.addElement("ascendency");
+    expand.addElement("pageSize");
+    expand.addElement("currentPage");
+    String expandURL = formBean.toURLParam(expand);%>
+      <tr>
           <%if(showLevel) {%>
-            <th class="resultHeader" align="left">
-              <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(sortLevel, (null == sortLevel) ? true : false)%>"><%=Utilities.getSortImageTag(sortLevel)%><%=contentManagement.getContent("generic_combined-search-results-habitats_09")%></a>
+            <th class="resultHeader">
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(sortLevel, (null == sortLevel) ? true : false)%>"><%=Utilities.getSortImageTag(sortLevel)%><%=cm.cmsText("generic_combined-search-results-habitats_09")%></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           <%}%>
           <%if(showEUNISCode) {%>
-            <th class="resultHeader" align="left">
-              <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(sortEunisCode, (null == sortEunisCode) ? true : false)%>"><%=Utilities.getSortImageTag(sortEunisCode)%><%=contentManagement.getContent("generic_combined-search-results-habitats_10")%></a>
+            <th class="resultHeader">
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(sortEunisCode, (null == sortEunisCode) ? true : false)%>"><%=Utilities.getSortImageTag(sortEunisCode)%><%=cm.cmsText("generic_combined-search-results-habitats_10")%></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           <%}%>
           <%if(showANNEXCode) {%>
-            <th class="resultHeader" align="left">
-              <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ANNEX_CODE%>&amp;ascendency=<%=formBean.changeAscendency(sortAnnexCode, (null == sortAnnexCode) ? true : false)%>"><%=Utilities.getSortImageTag(sortAnnexCode)%><%=contentManagement.getContent("generic_combined-search-results-habitats_11")%></a>
+            <th class="resultHeader">
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ANNEX_CODE%>&amp;ascendency=<%=formBean.changeAscendency(sortAnnexCode, (null == sortAnnexCode) ? true : false)%>"><%=Utilities.getSortImageTag(sortAnnexCode)%><%=cm.cmsText("generic_combined-search-results-habitats_11")%></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           <%}%>
           <%if(showScientificName) {%>
-            <th class="resultHeader" align="left">
-              <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortScientificName, (null == sortScientificName) ? true : false)%>"><%=Utilities.getSortImageTag(sortScientificName)%><%=contentManagement.getContent("generic_combined-search-results-habitats_12")%></a>
+            <th class="resultHeader">
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortScientificName, (null == sortScientificName) ? true : false)%>"><%=Utilities.getSortImageTag(sortScientificName)%><%=cm.cmsText("generic_combined-search-results-habitats_12")%></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           <%}%>
           <%if(showEnglishName) {%>
-            <th class="resultHeader" align="left">
-              <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ENGLISH_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortEnglishName, (null == sortEnglishName) ? true : false)%>"><%=Utilities.getSortImageTag(sortEnglishName)%><%=contentManagement.getContent("generic_combined-search-results-habitats_13")%></a>
+            <th class="resultHeader">
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ENGLISH_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortEnglishName, (null == sortEnglishName) ? true : false)%>"><%=Utilities.getSortImageTag(sortEnglishName)%><%=cm.cmsText("generic_combined-search-results-habitats_13")%></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           <%}%>
           </tr>
           <%int i = 0;
           while (it.hasNext()) {
           HabitatsCombinedPersist habitat = (HabitatsCombinedPersist)it.next();
-          String rowBgColor = (0 == (i++ % 2)) ? "#FFFFFF" : "#EEEEEE";
+          String bgColor = (0 == (i++ % 2)) ? "#FFFFFF" : "#EEEEEE";
           int level = habitat.getHabLevel().intValue();
           //boolean isEUNIS = (Utilities.EUNIS_HABITAT.intValue() == (Utilities.getHabitatType(habitat.getCodeAnnex1()).intValue())) ? true : false;
           int idHabitat = Utilities.checkedStringToInt(habitat.getIdHabitat(), -1);
           boolean isEUNIS = (idHabitat > 10000) ? false : true;
           %>
-          <tr bgcolor="<%=rowBgColor%>">
+          <tr>
             <%if(showLevel) {%>
-            <td align="left" width="90" nowrap="nowrap"><%for(int iter = 0; iter < level; iter++) {%><img alt="" src="images/mini/lev_blank.gif"><%}%><%=level%>
+            <td class="resultCell" style="background-color : <%=bgColor%>">
+              <%for(int iter = 0; iter < level; iter++) {%><img alt="" src="images/mini/lev_blank.gif"><%}%><%=level%>
             </td>
             <%}%>
             <%if(showEUNISCode) {%>
-            <td align="left" width="60"><%=(isEUNIS) ? habitat.getEunisHabitatCode() : "&nbsp;"%></td>
+            <td class="resultCell" style="background-color : <%=bgColor%>">
+              <%=(isEUNIS) ? habitat.getEunisHabitatCode() : "&nbsp;"%>
+            </td>
             <%}%>
             <%if(showANNEXCode) {%>
-            <td align="left" width="60"><%=(isEUNIS) ? "&nbsp;" : habitat.getCodeAnnex1()%></td>
+            <td class="resultCell" style="background-color : <%=bgColor%>">
+              <%=(isEUNIS) ? "&nbsp;" : habitat.getCodeAnnex1()%>
+            </td>
             <%}%>
             <%if(showScientificName) {%>
-            <td align="left" width="261">
-              <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a></td>
+            <td class="resultCell" style="background-color : <%=bgColor%>">
+              <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
+            </td>
             <%}%>
             <%if(showEnglishName) {%>
-            <td align="left" width="166">
-              <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getDescription()%></a></td>
+            <td class="resultCell" style="background-color : <%=bgColor%>">
+              <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getDescription()%></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
+            </td>
             <%}%>
           </tr>
           <%}%>
-          <tr bgcolor="<%=SessionManager.getThemeManager().getMediumColor()%>">
+          <tr>
           <%if(showLevel) {%>
-            <th class="resultHeader" align="left">
-              <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(sortLevel, (null == sortLevel) ? true : false)%>"><%=Utilities.getSortImageTag(sortLevel)%><%=contentManagement.getContent("generic_combined-search-results-habitats_09")%></a>
+            <th class="resultHeader">
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(sortLevel, (null == sortLevel) ? true : false)%>"><%=Utilities.getSortImageTag(sortLevel)%><%=cm.cmsText("generic_combined-search-results-habitats_09")%></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           <%}%>
           <%if(showEUNISCode) {%>
-            <th class="resultHeader" align="left">
-              <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(sortEunisCode, (null == sortEunisCode) ? true : false)%>"><%=Utilities.getSortImageTag(sortEunisCode)%><%=contentManagement.getContent("generic_combined-search-results-habitats_10")%></a>
+            <th class="resultHeader">
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(sortEunisCode, (null == sortEunisCode) ? true : false)%>"><%=Utilities.getSortImageTag(sortEunisCode)%><%=cm.cmsText("generic_combined-search-results-habitats_10")%></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           <%}%>
           <%if(showANNEXCode) {%>
-            <th class="resultHeader" align="left">
-              <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ANNEX_CODE%>&amp;ascendency=<%=formBean.changeAscendency(sortAnnexCode, (null == sortAnnexCode) ? true : false)%>"><%=Utilities.getSortImageTag(sortAnnexCode)%><%=contentManagement.getContent("generic_combined-search-results-habitats_11")%></a>
+            <th class="resultHeader">
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ANNEX_CODE%>&amp;ascendency=<%=formBean.changeAscendency(sortAnnexCode, (null == sortAnnexCode) ? true : false)%>"><%=Utilities.getSortImageTag(sortAnnexCode)%><%=cm.cmsText("generic_combined-search-results-habitats_11")%></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           <%}%>
           <%if(showScientificName) {%>
-            <th class="resultHeader" align="left">
-              <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortScientificName, (null == sortScientificName) ? true : false)%>"><%=Utilities.getSortImageTag(sortScientificName)%><%=contentManagement.getContent("generic_combined-search-results-habitats_12")%></a>
+            <th class="resultHeader">
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortScientificName, (null == sortScientificName) ? true : false)%>"><%=Utilities.getSortImageTag(sortScientificName)%><%=cm.cmsText("generic_combined-search-results-habitats_12")%></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           <%}%>
           <%if(showEnglishName) {%>
-            <th class="resultHeader" align="left">
-              <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ENGLISH_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortEnglishName, (null == sortEnglishName) ? true : false)%>"><%=Utilities.getSortImageTag(sortEnglishName)%><%=contentManagement.getContent("generic_combined-search-results-habitats_13")%></a>
+            <th class="resultHeader">
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ENGLISH_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortEnglishName, (null == sortEnglishName) ? true : false)%>"><%=Utilities.getSortImageTag(sortEnglishName)%><%=cm.cmsText("generic_combined-search-results-habitats_13")%></a>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           <%}%>
           </tr>
@@ -342,9 +367,14 @@
       </td>
     </tr>
   </table>
+  <%=cm.cmsMsg("generic_combined-search-results-habitats_title")%>
+  <%=cm.br()%>
+  <%=cm.cmsTitle("summary_search_results")%>
 <jsp:include page="footer.jsp">
   <jsp:param name="page_name" value="combined-search-results-habitats.jsp"/>
 </jsp:include>
     </div>
-  </body>
+    </div>
+    </div>
+</body>
 </html>

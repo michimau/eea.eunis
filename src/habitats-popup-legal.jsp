@@ -3,21 +3,24 @@ This is the popup displaying information about the legal instruments of a habita
 The following request parameters are available as input:
   idHabitat - ID of the habitat for which we are displaying Legal status information.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.jrfTables.habitats.legal.EUNISLegalPersist,
                  ro.finsiel.eunis.search.habitats.HabitatsSearchUtility,
                  java.util.List"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
    <head>
      <jsp:include page="header-page.jsp" />
     <%
-      WebContentManagement contentManagement = SessionManager.getWebContent();
+      WebContentManagement cm = SessionManager.getWebContent();
     %>
   <title>
-    <%=contentManagement.getContent("habitats_popup-legal_title", false )%>
+    <%=cm.cms("habitats_popup-legal_title")%>
     <%=HabitatsSearchUtility.findHabitatNameById(request.getParameter("idHabitat"))%>
   </title>
   </head>
@@ -32,7 +35,7 @@ The following request parameters are available as input:
           <tr bgcolor="#DDDDDD">
           <td>
             <strong>
-              <%=contentManagement.getContent("habitats_popup-legal_01")%>
+              <%=cm.cmsText("habitats_popup-legal_01")%>
             </strong>
           </td>
           </tr>
@@ -54,15 +57,17 @@ The following request parameters are available as input:
         else
         {
 %>
-          <%=contentManagement.getContent("habitats_popup-legal_02")%>
+          <%=cm.cmsText("habitats_popup-legal_02")%>
 <%
         }
 %>
-      </table>
-      <form action="">
-        <label for="button" class="noshow">Close window</label>
-        <input title="Close window" type="button" value="<%=contentManagement.getContent("habitats_popup-legal_03", false )%>" onclick="javascript:window.close()" id="button" name="button" class="inputTextField" />
-      </form>
-        <%=contentManagement.writeEditTag( "habitats_popup-legal_03" )%>
+    </table>
+    <form action="">
+      <label for="button" class="noshow"><%=cm.cms("close_window")%></label>
+      <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("habitats_popup-legal_03")%>" onclick="javascript:window.close()" id="button" name="button" class="inputTextField" />
+      <%=cm.cmsLabel("close_window")%>
+      <%=cm.cmsInput("habitats_popup-legal_03")%>
+    </form>
+    <%=cm.cms("habitats_popup-legal_title")%>
   </body>
 </html>

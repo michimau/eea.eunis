@@ -4,6 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Part of user management
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.List,
                  ro.finsiel.eunis.jrfTables.users.UserDomain,
                  ro.finsiel.eunis.jrfTables.users.UserPersist,
@@ -11,44 +15,47 @@
                  java.util.Vector,
                  ro.finsiel.eunis.search.users.UsersUtility,
                  ro.finsiel.eunis.jrfTables.users.RolesPersist"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
-
 <%
+  // Web content manager used in this page.
+     WebContentManagement cm = SessionManager.getWebContent();
+
   // If user is authentificated  and he has this right
   if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
 {
 %>
-    <h5>
-      EUNIS Database User Management
-    </h5>
+    <h1>
+      <%=cm.cmsText("users_list_01")%>
+    </h1>
     <br />
-    <h6>View users</h6>
+    <h2><%=cm.cmsText("users_list_02")%></h2>
     <br />
 <%
 try {
 // Users names list
-List usersList = new UserDomain().findCustom("SELECT USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,EMAIL," +
-              " FONTSIZE,THEME_INDEX,DATE_FORMAT(login_date,'%d %b %Y %H:%i:%s')" +
+List usersList = new UserDomain().findCustom("SELECT USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,LANG,EMAIL," +
+              " THEME_INDEX,DATE_FORMAT(login_date,'%d %b %Y %H:%i:%s')" +
               " FROM EUNIS_USERS ORDER BY USERNAME");
 if(usersList != null && usersList.size() > 0)
   {
 %>
-<table summary="List of users" width="100%" border="1" cellspacing="0" cellpadding="0">
+<table summary="<%=cm.cms("users_list_03")%>" width="100%" border="1" cellspacing="0" cellpadding="0">
 <tr  class="dusers" style="text-align:left;font-weight :bold;">
   <td>
-    User name
+    <%=cm.cmsText("users_list_04")%>
   </td>
   <td>
-    First name
+    <%=cm.cmsText("users_list_05")%>
   </td>
   <td>
-    Last name
+    <%=cm.cmsText("users_list_06")%>
   </td>
   <td style="text-align:center">
-    Last login date
+    <%=cm.cmsText("users_list_07")%>
   </td>
   <td>
-    Roles
+    <%=cm.cmsText("users_list_08")%>
   </td>
 </tr>
 <%
@@ -67,7 +74,8 @@ if(usersList != null && usersList.size() > 0)
     if (!Utilities.formatString(objUser.getUsername(),"&nbsp;").equalsIgnoreCase("&nbsp;"))
     {
   %>
-     <a href="users.jsp?userName=<%=objUser.getUsername()%>&amp;tab1=0&amp;tab2=1" title="Edit user"><%=Utilities.formatString(objUser.getUsername(),"&nbsp;")%></a>
+     <a href="users.jsp?userName=<%=objUser.getUsername()%>&amp;tab1=0&amp;tab2=1" title="<%=cm.cms("users_list_09")%>"><%=Utilities.formatString(objUser.getUsername(),"&nbsp;")%></a>
+     <%=cm.cmsTitle("users_list_09")%>
   <%
     } else
     {
@@ -118,8 +126,12 @@ if(usersList != null && usersList.size() > 0)
   } else
   {
 %>
-<strong>You can't do this because you are not authentificated or you don't haven enough rights!</strong>
+<strong><%=cm.cmsText("users_list_10")%></strong>
 <br />
 <%
   }
 %>
+
+<%=cm.br()%>
+<%=cm.cmsMsg("users_list_03")%>
+<%=cm.br()%>

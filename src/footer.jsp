@@ -4,10 +4,17 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Footer page - included in almost all other pages.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.net.URLEncoder,
                  java.util.Enumeration"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
+  WebContentManagement cm = SessionManager.getWebContent();
+
   String page_name = request.getParameter( "page_name" );
   String bookmarkURL = page_name + "?a=true";
 
@@ -31,39 +38,45 @@
     eval("page = window.open(URL, '', 'scrollbars=no,toolbar=0,resizable=yes, location=0,width=420,height=230');");
   }
 </script>
-<noscript>Your browser does not support JavaScript!</noscript>
-<div class="horizontal_line"><img alt="" src="images/pixel.gif" width="740" height="1" /></div>
-<div style="width : 740px; text-align : center;">
-  The <a href="about.jsp" class="footerLink">EUNIS Database application</a> is developed
-  under <a href="http://biodiversity-chm.eea.eu.int/" class="footerLink">IDA EC CHM project</a>
+<div  class="footerprint">
+<div class="horizontal_line"><img alt="" src="images/pixel.gif" width="100%" height="1" /></div>
+<br />
+  <%=cm.cmsText("footer_eunis_database")%>
   <br />
-  Content maintained by the <a href="http://nature.eionet.eu.int/" class="footerLink">European Topic Centre on Biological Diversity</a>
+  <%=cm.cmsText("footer_eunis_content")%>
   <br />
 <%
   if ( isAuthenticated )
   {
 %>
-  <a href="javascript:saveBookmark();" class="footerLink" title="Bookmark this page">Bookmark</a>
+  <a href="javascript:saveBookmark();" class="footerLink" title="<%=cm.cms("footer_bookmark_title")%>"><%=cm.cmsText("footer_bookmark")%></a>
+  <%=cm.cmsTitle("footer_bookmark_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 <%
   }
 %>
-  <a href="http://biodiversity-chm.eea.eu.int/information/database/" title="Other nature information sources" class="footerLink">Related databases</a>
+  <a href="http://biodiversity-chm.eea.eu.int/information/database/" title="<%=cm.cms("footer_related_databases_title")%>" class="footerLink"><%=cm.cmsText("footer_related_databases")%></a>
+  <%=cm.cmsTitle("footer_related_databases_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="mailto:<%=application.getInitParameter("EMAIL_FEEDBACK")%>" accesskey="9" title="Contact site administrator" class="footerLink">Contact</a>
+  <a href="mailto:<%=application.getInitParameter("EMAIL_FEEDBACK")%>" accesskey="9" title="<%=cm.cms("footer_contact_title")%>" class="footerLink"><%=cm.cmsText("footer_contact")%></a>
+  <%=cm.cmsTitle("footer_contact_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="news.jsp" class="footerLink" title="Latest news on EUNIS development">News</a>
+  <a href="news.jsp" class="footerLink" title="<%=cm.cms("footer_news_title")%>"><%=cm.cmsText("footer_news")%></a>
+  <%=cm.cmsTitle("footer_news_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="feedback.jsp" title="Send feedback on EUNIS Database" class="footerLink">Feedback</a>
+  <a href="feedback.jsp" title="<%=cm.cms("footer_feedback_title")%>" class="footerLink"><%=cm.cmsText("footer_feedback")%></a>
+  <%=cm.cmsTitle("footer_feedback_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="copyright.jsp" title="Copyright and Disclaimer information" class="footerLink">Copyright and Disclaimer</a>
+  <a href="copyright.jsp" title="<%=cm.cms("footer_copyright_title")%>" class="footerLink"><%=cm.cmsText("footer_copyright")%></a>
+  <%=cm.cmsTitle("footer_copyright_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="accessibility.jsp" title="Accessibility statement" class="footerLink" accesskey="0">Accessibility</a>
+  <a href="accessibility.jsp" title="<%=cm.cms("footer_accessibility_title")%>" class="footerLink" accesskey="0"><%=cm.cmsText("footer_accessibility")%></a>
+  <%=cm.cmsTitle("footer_accessibility_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 </div>
 <jsp:include page="digir_check.jsp" />

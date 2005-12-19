@@ -161,6 +161,28 @@ public final class Utilities {
   }
 
   /**
+   * Transforms an String object into an long, safely (without throwing exceptions).
+   *
+   * @param s            String to be transformed
+   * @param defaultValue Default value returned if s cannot be parsed
+   * @return The long representation of s or defaultValue if error occurred.
+   */
+  public static long checkedStringToLong( String s, int defaultValue ) {
+    if ( null == s )
+    {
+      return defaultValue;
+    }
+    try
+    {
+      return Long.parseLong( s );
+    }
+    catch ( NumberFormatException e )
+    {
+      return defaultValue;
+    }
+  }
+
+  /**
    * Transforms an String object into an Integer, safely (without throwing exceptions).
    *
    * @param s            String to be transformed
@@ -449,7 +471,7 @@ public final class Utilities {
     //paramValue = treatURLSpecialCharacters(paramValue);
     try
     {
-      paramValue = java.net.URLEncoder.encode( paramValue, "ISO-8859-1" );
+      paramValue = java.net.URLEncoder.encode( paramValue, "UTF-8" );
     }
     catch ( Exception ex )
     {
@@ -1313,6 +1335,10 @@ public final class Utilities {
     boolean corespund = false;
     if ( s1 != null && s2 != null )
     {
+      if( s2.equalsIgnoreCase( "%" ) )
+      {
+        return true;
+      }
       if ( relationOp.compareTo( OPERATOR_CONTAINS ) == 0 )
       {
         corespund = true;
@@ -2277,6 +2303,18 @@ public final class Utilities {
     return result;
   }
 
+     public static String getTextWarningForPopup( WebContentManagement cm, int size ) {
+    String result = "" +
+            "<strong>" + cm.cmsText("choice_warning_Text") + "</strong> " +
+            "<br /> " +
+            " ";
+//    if (size > 100)
+//           result += "<strong>Note:</strong> Only the first " + Utilities.MAX_POPUP_RESULTS + " values were displayed. Please refine the search criteria. " +
+//            "<br /><br /> ";
+//    else result +="<br />";
+    return result;
+  }
+
   /**
    * Warning string displayed in popups (helpers).
    *
@@ -2344,11 +2382,11 @@ public final class Utilities {
     return result;
   }
 
-  public static String getTextMaxLimitForPopup( WebContentManagement contentManagement, int size ) {
+  public static String getTextMaxLimitForPopup( WebContentManagement cm, int size ) {
     String result = ( size >= Utilities.MAX_POPUP_RESULTS ?
             "<br /> " +
-                    contentManagement.getContent( "list_of_values_limit_01" ) + " " +
-                    Utilities.MAX_POPUP_RESULTS + " " + contentManagement.getContent( "list_of_values_limit_02" ) +
+                    cm.cmsText( "list_of_values_limit_01" ) + " " +
+                    Utilities.MAX_POPUP_RESULTS + " " + cm.cmsText( "list_of_values_limit_02" ) +
                     "<br /><br /> " : "<br />" );
     return result;
   }
@@ -2473,14 +2511,14 @@ public final class Utilities {
     }
     String result = "";
     boolean isGood = false;
-    result += "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.getContent( "sites_statistical-result_25" ) + "</td>" +
-            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.getContent( "sites_statistical-result_33" ) + "</td>" +
-            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.getContent( "sites_statistical-result_34" ) + "</td>" +
-            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.getContent( "sites_statistical-result_26" ) + "</td>" +
-            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.getContent( "sites_statistical-result_27" ) + "</td>" +
-            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.getContent( "sites_statistical-result_28" ) + "</td>" +
-            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.getContent( "sites_statistical-result_29" ) + "</td>" +
-            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.getContent( "sites_statistical-result_30" ) + "</td>";
+    result += "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_25" ) + "</td>" +
+            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_33" ) + "</td>" +
+            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_34" ) + "</td>" +
+            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_26" ) + "</td>" +
+            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_27" ) + "</td>" +
+            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_28" ) + "</td>" +
+            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_29" ) + "</td>" +
+            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_30" ) + "</td>";
 
 
     for ( int i = 0; i < factList.size(); i++ )
@@ -2490,14 +2528,14 @@ public final class Utilities {
       String[] splitResult = result.split( "<tr>" );
       if ( splitResult != null && splitResult.length == 9 )
       {
-        splitResult[ 1 ] += "<td bgcolor=\"#FFFFFF\" align=\"right\">" + Utilities.formatArea( site.getNumberOfSites(), 9, 2, "&nbsp;" ) + "</td>";
-        splitResult[ 2 ] += "<td bgcolor=\"#EEEEEE\" align=\"right\">" + Utilities.formatArea( site.getNumberOfSpecies(), 9, 2, "&nbsp;" ) + "</td>";
-        splitResult[ 3 ] += "<td bgcolor=\"#FFFFFF\" align=\"right\">" + Utilities.formatArea( site.getNumberOfHabitats(), 9, 2, "&nbsp;" ) + "</td>";
-        splitResult[ 4 ] += "<td bgcolor=\"#EEEEEE\" align=\"right\">" + Utilities.formatArea( site.getPerSquare(), 9, 2, "&nbsp;" ) + "</td>";
-        splitResult[ 5 ] += "<td bgcolor=\"#FFFFFF\" align=\"right\">" + Utilities.formatArea( site.getSurfaceAvailable(), 9, 2, "&nbsp;" ) + "</td>";
-        splitResult[ 6 ] += "<td bgcolor=\"#EEEEEE\" align=\"right\">" + Utilities.formatArea( site.getTotalSize(), 9, 2, "&nbsp;" ) + "</td>";
-        splitResult[ 7 ] += "<td bgcolor=\"#FFFFFF\" align=\"right\">" + Utilities.formatArea( site.getAvgSize(), 9, 2, "&nbsp;" ) + "</td>";
-        splitResult[ 8 ] += "<td bgcolor=\"#EEEEEE\" align=\"right\">" + Utilities.formatArea( site.getDeviation(), 9, 2, "&nbsp;" ) + "</td>";
+        splitResult[ 1 ] += "<td bgcolor=\"#FFFFFF\" align=\"right\">" + Utilities.formatArea( site.getNumberOfSites(), 0, 2, "&nbsp;" ) + "</td>";
+        splitResult[ 2 ] += "<td bgcolor=\"#EEEEEE\" align=\"right\">" + Utilities.formatArea( site.getNumberOfSpecies(), 0, 2, "&nbsp;" ) + "</td>";
+        splitResult[ 3 ] += "<td bgcolor=\"#FFFFFF\" align=\"right\">" + Utilities.formatArea( site.getNumberOfHabitats(), 0, 2, "&nbsp;" ) + "</td>";
+        splitResult[ 4 ] += "<td bgcolor=\"#EEEEEE\" align=\"right\">" + Utilities.formatArea( site.getPerSquare(), 0, 2, "&nbsp;" ) + "</td>";
+        splitResult[ 5 ] += "<td bgcolor=\"#FFFFFF\" align=\"right\">" + Utilities.formatArea( site.getSurfaceAvailable(), 0, 2, "&nbsp;" ) + "</td>";
+        splitResult[ 6 ] += "<td bgcolor=\"#EEEEEE\" align=\"right\">" + Utilities.formatArea( site.getTotalSize(), 0, 2, "&nbsp;" ) + "</td>";
+        splitResult[ 7 ] += "<td bgcolor=\"#FFFFFF\" align=\"right\">" + Utilities.formatArea( site.getAvgSize(), 0, 2, "&nbsp;" ) + "</td>";
+        splitResult[ 8 ] += "<td bgcolor=\"#EEEEEE\" align=\"right\">" + Utilities.formatArea( site.getDeviation(), 0, 2, "&nbsp;" ) + "</td>";
 
         if ( i == factList.size() - 1 )
         {
@@ -2647,5 +2685,27 @@ public final class Utilities {
       ex.printStackTrace();
     }
     return ret;
+  }
+
+   public static boolean isCountry( String countryName ) {
+    try
+    {
+        if ( countryName != null && countryName.trim().length() > 0 )
+        {
+          List countries = new Chm62edtCountryDomain().findWhere( "ISO_2L<>'' AND ISO_2L<>'null' AND ISO_2L IS NOT NULL AND SELECTION <> 0 and AREA_NAME_EN ='" + countryName +  "'" );
+          if ( countries != null && countries.size() > 0 )
+          {
+            return true;
+          }
+          else
+          {
+            return false;
+          }
+        }
+        else
+        {
+          return false;
+        }
+    } catch (Exception ex) {return false;}
   }
 }

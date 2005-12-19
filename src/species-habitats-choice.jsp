@@ -4,21 +4,25 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Pick habitat, show species' function - Popup for list of values in search page.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.search.species.habitats.HabitateSearchCriteria,
                  java.util.List,
                  java.util.Vector,
                  ro.finsiel.eunis.jrfTables.species.habitats.ScientificNameDomain,
                  ro.finsiel.eunis.WebContentManagement"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
     <%
-      WebContentManagement contentManagement = SessionManager.getWebContent();
+      WebContentManagement cm = SessionManager.getWebContent();
     %>
-    <title><%=contentManagement.getContent("species_habitats-choice_title", false )%></title>
+    <title><%=cm.cmsText("species_habitats-choice_title")%></title>
   <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.habitats.HabitateBean" scope="request">
     <jsp:setProperty name="formBean" property="*"/>
   </jsp:useBean>
@@ -28,13 +32,6 @@
       window.opener.document.eunis.scientificName.value = val;
       window.close();
     }
-
-      function editContent( idPage )
-      {
-        var url = "web-content-inline-editor.jsp?idPage=" + idPage;
-        window.open( url ,'', 'width=540,height=500,status=0,scrollbars=0,toolbar=0,resizable=1,location=0');
-      }
-
   // -->
   </script>
   <%
@@ -55,7 +52,7 @@
   <%
       if (results != null && results.size() > 0)
       {
-        out.print(Utilities.getTextMaxLimitForPopup(contentManagement,(results == null ? 0 : results.size())));
+        out.print(Utilities.getTextMaxLimitForPopup(cm,(results == null ? 0 : results.size())));
       }
     %>
     <%
@@ -63,7 +60,7 @@
       {
         HabitateSearchCriteria habitatSearch = new HabitateSearchCriteria(searchAttribute,formBean.getScientificName(),relationOp);
     %>
-        <h6>List of values for:</h6>
+        <h2><%=cm.cmsText("list_values_for")%></h2>
         <u><%=habitatSearch.getHumanMappings().get(searchAttribute)%></u>
     <%
         if (null != formBean.getScientificName() && null != relationOp)
@@ -77,7 +74,7 @@
         <br />
         <br />
         <div id="tab">
-        <table summary="List of values" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+        <table summary="<%=cm.cms("list_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
         <%
           String rowBgColor = "";
           String value = "";
@@ -89,7 +86,8 @@
         %>
             <tr style="background-color:<%=rowBgColor%>">
               <td>
-                <a title="Choose this value" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(value)%>');"><%=value%></a>
+                <a title="<%=cm.cms("choose_this_value")%>" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(value)%>');"><%=value%></a>
+                <%=cm.cmsTitle("choose_this_value")%>
               </td>
             </tr>
         <%
@@ -103,15 +101,22 @@
       else
         {
     %>
-       <strong><%=contentManagement.getContent("species_habitats-choice_01")%>.</strong> <br />
+       <strong><%=cm.cmsText("species_habitats-choice_01")%>.</strong> <br />
      <%
         }
      %>
       <br />
       <form action="">
-        <label for="button" class="noshow"><%=contentManagement.getContent("species_habitats-choice_02", false )%></label>  
-        <input id="button" title="Close window" type="button" value="<%=contentManagement.getContent("species_habitats-choice_02", false )%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
+        <label for="button" class="noshow"><%=cm.cms("close_window")%></label>
+        <input id="button" title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
+        <%=cm.cmsLabel("close_window")%>
+        <%=cm.cmsTitle("close_window")%>
+        <%=cm.cmsInput("close_btn")%>
       </form>
-      <%=contentManagement.writeEditTag( "species_habitats-choice_02" )%>
+
+  <%=cm.br()%>
+  <%=cm.cmsMsg("list_values")%>
+  <%=cm.br()%>
+
   </body>
 </html>

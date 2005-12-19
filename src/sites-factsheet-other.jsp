@@ -4,6 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Other information about a site' - part of site's factsheet
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.factsheet.sites.SiteFactsheet,
                  java.util.List,
                  ro.finsiel.eunis.jrfTables.sites.factsheet.HumanActivityPersist,
@@ -14,9 +18,11 @@
 <%-- Human activity --%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
+  WebContentManagement cm = SessionManager.getWebContent();
+  try
+  {
   String siteid = request.getParameter("idsite");
   SiteFactsheet factsheet = new SiteFactsheet(siteid);
-  WebContentManagement contentManagement = SessionManager.getWebContent();
   int type = factsheet.getType();
 
   String SQL_DRV = application.getInitParameter("JDBC_DRV");
@@ -28,7 +34,7 @@
   sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
 
   // Human activity.
-  if (SiteFactsheet.TYPE_EMERALD == type || SiteFactsheet.TYPE_CORINE == type ||
+  if (SiteFactsheet.TYPE_CORINE == type ||
       SiteFactsheet.TYPE_DIPLOMA == type || SiteFactsheet.TYPE_BIOGENETIC == type)
   {
     //not a NATURA2000 factsheet
@@ -38,23 +44,23 @@
     {
 %>
         <br />
-        <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;"><%=contentManagement.getContent("sites_factsheet_129")%></div>
-        <table summary="<%=contentManagement.getContent("sites_factsheet_129", false )%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="human" style="border-collapse:collapse">
+        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_129")%></div>
+        <table summary="<%=cm.cms("sites_factsheet_129")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="human1" style="border-collapse:collapse">
           <tr>
             <th class="resultHeader">
-              <%=contentManagement.getContent("sites_factsheet_130")%>
+              <%=cm.cmsText("sites_factsheet_130")%>
             </th>
             <th class="resultHeader">
-              <%=contentManagement.getContent("sites_factsheet_131")%>
+              <%=cm.cmsText("sites_factsheet_131")%>
             </th>
             <th class="resultHeader">
-              <%=contentManagement.getContent("sites_factsheet_132")%>
+              <%=cm.cmsText("sites_factsheet_132")%>
             </th>
-            <th class="resultHeader" align="right">
-              <%=contentManagement.getContent("sites_factsheet_116")%>
+            <th class="resultHeader" style="text-align : right;">
+              <%=cm.cmsText("sites_factsheet_116")%>
             </th>
-            <th class="resultHeader" align="left">
-              <%=contentManagement.getContent("sites_factsheet_133")%>
+            <th class="resultHeader">
+              <%=cm.cmsText("sites_factsheet_133")%>
             </th>
           </tr>
 <%
@@ -69,15 +75,30 @@
             <td>
 <%
         HumanActivityAttributesPersist humanActivityAttribute;
-        humanActivityAttribute = factsheet.findHumanActivityAttribute("IN_OUT");
+        String ActivityLocation = "&nbsp;";
+        humanActivityAttribute = factsheet.findHumanActivityAttribute("IN_OUT", i);
+        if( humanActivityAttribute != null )
+        {
+          ActivityLocation = humanActivityAttribute.getAttributeValue();
+        }
+        if(ActivityLocation.equalsIgnoreCase("I")) ActivityLocation = "Inside";
+        if(ActivityLocation.equalsIgnoreCase("O")) ActivityLocation = "Outside";
 %>
-              <%=(null != humanActivityAttribute && SiteFactsheet.TYPE_CORINE != type) ? humanActivityAttribute.getAttributeValue() : "&nbsp;"%>&nbsp;
+              <%=SiteFactsheet.TYPE_CORINE != type ? ActivityLocation : "&nbsp;"%>
             </td>
             <td>
 <%
-        humanActivityAttribute = factsheet.findHumanActivityAttribute("INTENSITY");
+        humanActivityAttribute = factsheet.findHumanActivityAttribute("INTENSITY", i );
+        String ActivityIntensity = null;
+        if(null != humanActivityAttribute)
+        {
+          ActivityIntensity = humanActivityAttribute.getAttributeValue();
+          //System.out.println("ActivityIntensity = " + ActivityIntensity);
+          ActivityIntensity = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_ACTIVITY_INTENSITY WHERE ID_ACTIVITY_INTENSITY = '" + ActivityIntensity+"'");
+          if( ActivityIntensity.length() == 0 ) ActivityIntensity = Utilities.formatString( humanActivityAttribute.getAttributeValue(), "&nbsp;" );
+        }
 %>
-              <%=(null != humanActivityAttribute && SiteFactsheet.TYPE_CORINE != type) ? humanActivityAttribute.getAttributeValue() : "&nbsp;"%>&nbsp;
+              <%=(null != ActivityIntensity && SiteFactsheet.TYPE_CORINE != type) ? ActivityIntensity : "&nbsp;"%>&nbsp;
             </td>
             <td align="right">
 <%
@@ -85,11 +106,18 @@
 %>
               <%=(null != humanActivityAttribute) ? humanActivityAttribute.getAttributeValue() : "&nbsp;"%>&nbsp;
             </td>
-            <td align="left">
+            <td>
 <%
-        humanActivityAttribute = factsheet.findHumanActivityAttribute("INFLUENCE");
+        humanActivityAttribute = factsheet.findHumanActivityAttribute("INFLUENCE", i);
+        String ActivityInfluence = null;
+        if(null != humanActivityAttribute) {
+          ActivityInfluence = humanActivityAttribute.getAttributeValue();
+          //System.out.println("ActivityInfluence = " + ActivityInfluence);
+          ActivityInfluence = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_ACTIVITY_INFLUENCE WHERE ID_ACTIVITY_INFLUENCE = '" + ActivityInfluence+"'");
+          if( ActivityInfluence.length() == 0 ) ActivityInfluence = Utilities.formatString( humanActivityAttribute.getAttributeValue(), "&nbsp;" );
+        }
 %>
-              <%=(null != humanActivityAttribute && SiteFactsheet.TYPE_CORINE != type) ? humanActivityAttribute.getAttributeValue() : "&nbsp;"%>&nbsp;
+              <%=(null != humanActivityAttribute && SiteFactsheet.TYPE_CORINE != type) ? ActivityInfluence : "&nbsp;"%>&nbsp;
             </td>
           </tr>
 <%
@@ -108,26 +136,32 @@
     {
 %>
         <br />
-        <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;"><%=contentManagement.getContent("sites_factsheet_129")%></div>
-        <table summary="<%=contentManagement.getContent("sites_factsheet_129", false )%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="human" style="border-collapse:collapse">
+        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_129")%></div>
+        <table summary="<%=cm.cms("sites_factsheet_129")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="human" class="sortable">
           <tr>
-            <th class="resultHeader">
-              <a title="Sort results by this column" href="javascript:sortTable( 6, 0, 'human', false);">Activity code</a>
+            <th title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_other_activitycode")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader">
-              <a title="Sort results by this column" href="javascript:sortTable( 6, 1, 'human', false);">Description</a>
+            <th title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_other_description")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader">
-              <a title="Sort results by this column" href="javascript:sortTable( 6, 2, 'human', false);">Location</a>
+            <th title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_other_location")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader">
-              <a title="Sort results by this column" href="javascript:sortTable( 6, 3, 'human', false);">Intensity</a>
+            <th title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_other_intensity")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader" align="right">
-              <a title="Sort results by this column" href="javascript:sortTable( 6, 4, 'human', false);">Cover(%)</a>
+            <th style="text-align : right;" title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cms("sites_factsheet_other_cover")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader" align="left">
-              <a title="Sort results by this column" href="javascript:sortTable( 6, 5, 'human', false);">Influence</a>
+            <th title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cms("sites_factsheet_other_influence")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           </tr>
 <%
@@ -145,7 +179,7 @@
             <td>
 <%
         HumanActivityAttributesPersist humanActivityAttribute;
-        humanActivityAttribute = factsheet.findHumanActivityAttribute("IN_OUT");
+        humanActivityAttribute = factsheet.findHumanActivityAttribute("IN_OUT", i );
         String ActivityLocation = humanActivityAttribute.getAttributeValue();
         if(ActivityLocation.equalsIgnoreCase("I")) ActivityLocation = "Inside";
         if(ActivityLocation.equalsIgnoreCase("O")) ActivityLocation = "Outside";
@@ -154,21 +188,22 @@
             </td>
             <td>
 <%
-        humanActivityAttribute = factsheet.findHumanActivityAttribute("INTENSITY");
+        humanActivityAttribute = factsheet.findHumanActivityAttribute("INTENSITY", i );
         String ActivityIntensity = null;
         if(null != humanActivityAttribute)
         {
           ActivityIntensity = humanActivityAttribute.getAttributeValue();
           //System.out.println("ActivityIntensity = " + ActivityIntensity);
           ActivityIntensity = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_ACTIVITY_INTENSITY WHERE ID_ACTIVITY_INTENSITY = '" + ActivityIntensity+"'");
+          if( ActivityIntensity.length() == 0 ) ActivityIntensity = Utilities.formatString( humanActivityAttribute.getAttributeValue(), "&nbsp;" );
         }
 %>
 
-              <%=(null != humanActivityAttribute && SiteFactsheet.TYPE_CORINE != type) ? ActivityIntensity : "&nbsp;"%>&nbsp;
+              <%=null != humanActivityAttribute ? ActivityIntensity : "&nbsp;"%>&nbsp;
             </td>
             <td align="right">
 <%
-        humanActivityAttribute = factsheet.findHumanActivityAttribute("COVER");
+        humanActivityAttribute = factsheet.findHumanActivityAttribute("COVER", i );
         String ActivityCover = null;
         if(null != humanActivityAttribute) {
           ActivityCover = humanActivityAttribute.getAttributeValue();
@@ -177,14 +212,15 @@
 %>
               <%=(null != humanActivityAttribute) ? Utilities.formatDecimal( ActivityCover, 5 )  : "&nbsp;"%>
             </td>
-            <td align="left">
+            <td>
 <%
-        humanActivityAttribute = factsheet.findHumanActivityAttribute("INFLUENCE");
+        humanActivityAttribute = factsheet.findHumanActivityAttribute("INFLUENCE", i);
         String ActivityInfluence = null;
         if(null != humanActivityAttribute) {
           ActivityInfluence = humanActivityAttribute.getAttributeValue();
           //System.out.println("ActivityInfluence = " + ActivityInfluence);
           ActivityInfluence = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_ACTIVITY_INFLUENCE WHERE ID_ACTIVITY_INFLUENCE = '" + ActivityInfluence+"'");
+          if( ActivityInfluence.length() == 0 ) ActivityInfluence = Utilities.formatString( humanActivityAttribute.getAttributeValue(), "&nbsp;" );
         }
 %>
               <%=(null != humanActivityAttribute && SiteFactsheet.TYPE_CORINE != type) ? ActivityInfluence : "&nbsp;"%>&nbsp;
@@ -214,20 +250,20 @@
     {
 %>
         <br />
-        <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;"><%=contentManagement.getContent("sites_factsheet_134")%></div>
-        <table summary="<%=contentManagement.getContent("sites_factsheet_134", false )%>" border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse">
+        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_134")%></div>
+        <table summary="<%=cm.cms("sites_factsheet_134")%>" border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse">
           <tr>
             <th class="resultHeader">
-              <%=contentManagement.getContent("sites_factsheet_135")%>
+              <%=cm.cmsText("sites_factsheet_135")%>
             </th>
             <th class="resultHeader">
-              <%=contentManagement.getContent("sites_factsheet_136")%>
+              <%=cm.cmsText("sites_factsheet_136")%>
             </th>
             <th class="resultHeader">
-              <%=contentManagement.getContent("sites_factsheet_137")%>
+              <%=cm.cmsText("sites_factsheet_137")%>
             </th>
             <th class="resultHeader">
-              <%=contentManagement.getContent("sites_factsheet_138")%>
+              <%=cm.cmsText("sites_factsheet_138")%>
             </th>
           </tr>
           <tr>
@@ -272,26 +308,26 @@
     {
 %>
         <br />
-        <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;"><%=contentManagement.getContent("sites_factsheet_139")%></div>
-        <table summary="<%=contentManagement.getContent("sites_factsheet_139", false )%>" border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse">
+        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_139")%></div>
+        <table summary="<%=cm.cms("sites_factsheet_139")%>" border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse">
           <tr>
             <th class="resultHeader">
-                <%=contentManagement.getContent("sites_factsheet_127")%>
+                <%=cm.cmsText("sites_factsheet_127")%>
             </th>
             <th class="resultHeader">
-              <%=contentManagement.getContent("sites_factsheet_135")%>
+              <%=cm.cmsText("sites_factsheet_135")%>
             </th>
             <th class="resultHeader">
-              <%=contentManagement.getContent("sites_factsheet_140")%>
+              <%=cm.cmsText("sites_factsheet_140")%>
             </th>
             <th class="resultHeader">
-              <%=contentManagement.getContent("sites_factsheet_141")%>
+              <%=cm.cmsText("sites_factsheet_141")%>
             </th>
             <th class="resultHeader">
-              <%=contentManagement.getContent("sites_factsheet_142")%>
+              <%=cm.cmsText("sites_factsheet_142")%>
             </th>
             <th class="resultHeader">
-              <%=contentManagement.getContent("sites_factsheet_143")%>
+              <%=cm.cmsText("sites_factsheet_143")%>
             </th>
           </tr>
           <tr bgcolor="#EEEEEE">
@@ -327,7 +363,7 @@
       {
 %>
         <br />
-        <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;"><%=contentManagement.getContent("sites_factsheet_144")%></div>
+        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_144")%></div>
         <table border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse" summary="layout">
 <%
         if (SiteFactsheet.TYPE_CDDA_NATIONAL == type)
@@ -335,7 +371,7 @@
 %>
           <tr bgcolor="#EEEEEE">
             <td>
-              <%=contentManagement.getContent("sites_factsheet_145")%>
+              <%=cm.cmsText("sites_factsheet_145")%>
             </td>
             <td>
               <%=Utilities.formatString(category)%>&nbsp;
@@ -348,7 +384,7 @@
 %>
           <tr bgcolor="#FFFFFF">
             <td>
-              <%=contentManagement.getContent("sites_factsheet_146")%>
+              <%=cm.cmsText("sites_factsheet_146")%>
             </td>
             <td>
               <%=Utilities.formatString(typology)%>&nbsp;
@@ -361,7 +397,7 @@
 %>
           <tr bgcolor="#EEEEEE">
             <td>
-              <%=contentManagement.getContent("sites_factsheet_147")%>
+              <%=cm.cmsText("sites_factsheet_147")%>
             </td>
             <td>
               <%=referenceDocNumber%>&nbsp;
@@ -369,7 +405,7 @@
           </tr>
           <tr bgcolor="#FFFFFF">
             <td>
-              <%=contentManagement.getContent("sites_factsheet_148")%>
+              <%=cm.cmsText("sites_factsheet_148")%>
             </td>
             <td>
               <%=referenceDocSource%>&nbsp;
@@ -381,4 +417,15 @@
         </table>
 <%
       }
+
+  }
+  catch( Exception ex )
+  {
+    ex.printStackTrace();
+  }
 %>
+<%=cm.cmsMsg("sites_factsheet_129")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("sites_factsheet_134")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("sites_factsheet_139")%>

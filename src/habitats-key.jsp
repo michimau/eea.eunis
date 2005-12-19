@@ -4,8 +4,10 @@
   - Copyright : (c) 2002-2004 European Environment Agency
   - Description : 'Habitats key navigation' function - display and navigate between questions and answers from habitat key navigation.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page contentType="text/html" %>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement,
                 ro.finsiel.eunis.jrfTables.habitats.key.Chm62edtHabitatKeyNavigationPersist,
                 ro.finsiel.eunis.jrfTables.habitats.key.QuestionPersist,
@@ -24,8 +26,9 @@
   // List of questions.
   List questions = keyNavigator.findLevelQuestions(level, pageCode);
   String pageName = "habitats-key.jsp";
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <%-- Note: Include these three files this order. --%>
@@ -35,9 +38,8 @@
   </jsp:useBean>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=contentManagement.getContent("habitats_key_title", false)%>
+    <%=cm.cms("habitats_key_title")%>
   </title>
-  <script language="JavaScript" src="script/utils.js" type="text/javascript"></script>
   <script language="JavaScript" type="text/javascript">
   <!--
     function MM_jumpMenu(targ,selObj,restore){ //v3.0
@@ -54,7 +56,7 @@
         if( nextTable != null )
         {
           var tbl1 = document.getElementById(nextTable);
-          tbl1.style.backgroundColor="#AAAAAA";
+          tbl1.style.backgroundColor="#CCCCCC";
           tbl1.style.borderWidth="1";
         }
         if ( currentTable != null )
@@ -71,28 +73,32 @@
   </head>
 
   <body>
+    <div id="outline">
+    <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="Home#index.jsp,Habitat types#habitats.jsp,Habitat types key navigation" />
+        <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitats_key_navigation_location" />
         <jsp:param name="helpLink" value="habitats-help.jsp" />
       </jsp:include>
-      <h5>
-        <%=contentManagement.getContent("habitats_key_01")%>
-      </h5>
-      You may use 'key navigation' function to identify a specific habitat by answering a set of questions. Starting from
-      first question to next questions you select one of the possible answers. Here are samples of possible answers:
+      <h1>
+        <%=cm.cmsText("habitats_key_01")%>
+      </h1>
+      <%=cm.cmsText("habitats_key_help_01")%>
       <ul>
         <li>
-          No ( <img alt="Leading to other question" src="images/mini/navigate.gif" /> 002 ) - Leading to question named '002'
+          <%=cm.cmsText("no")%> ( <img alt="<%=cm.cms("other_question")%>" src="images/mini/navigate.gif" /> <%=cm.cmsText("leading_to_002")%>
+          <%=cm.cmsTitle("other_question")%>
         </li>
         <li>
-          Yes [ <img alt="Leading to another questions subset" src="images/mini/navigate.gif" /> G ] - Leading to another questions subset of level G
+          <%=cm.cmsText("yes")%> [ <img alt="<%=cm.cms("another_questions")%>" src="images/mini/navigate.gif" /> <%=cm.cmsText("leading_to_G")%>
+          <%=cm.cmsTitle("another_questions")%>
         </li>
         <li>
-          No <img alt="Leading to another sheet" src="images/mini/sheet.gif" />[ <img alt="Go to factsheet" src="images/mini/navigate.gif" /> E6 ] - Links directly to factsheet for E6
+          <%=cm.cmsText("no")%> <img alt="<%=cm.cms("another_sheet")%>" src="images/mini/sheet.gif" />[ <img alt="Go to factsheet" src="images/mini/navigate.gif" /> <%=cm.cmsText("leading_to_E6")%>
+          <%=cm.cmsTitle("another_sheet")%>
         </li>
       </ul>
-      Additionally the diagram may be used for reference.
+      <%=cm.cmsText("the_diagram_may_be_used_for_references")%>
       <br />
 <%
   if (questions.size() > 0)
@@ -102,13 +108,14 @@
       <br />
       <br />
       <strong>
-        <%=contentManagement.getContent("habitats_key_02")%> : (<%=(null == pageCode) ? "All" : pageCode%> )<%=question.getPageName()%>
+        <%=cm.cmsText("habitats_key_02")%> : (<%=(null == pageCode) ? cm.cmsText("all") : pageCode%> )<%=question.getPageName()%>
       </strong>
       <br />
       <strong>
-        <%=contentManagement.getContent("habitats_key_03")%> :
+        <%=cm.cmsText("habitats_key_03")%> :
       </strong>
-      <a href="javascript:openDiagram('habitats-diagram.jsp?habCode=<%=pageCode%>','','toolbar=yes,scrollbars=yes,resizable=yes,width=880,height=640')" title="Open diagram"><img alt="Show habitat type diagram in a new window" src="images/mini/diagram_out.png" width="20" height="20" border="0" align="middle" /></a>
+      <a href="javascript:openDiagram('habitats-diagram.jsp?habCode=<%=pageCode%>','','toolbar=yes,scrollbars=yes,resizable=yes,width=880,height=640')" title="Open diagram"><img alt="<%=cm.cms("show_habitat_diagram")%>" src="images/mini/diagram_out.png" width="20" height="20" border="0" align="middle" /></a>
+      <%=cm.cmsTitle("show_habitat_diagram")%>
       <br />
       <br />
 <%
@@ -129,7 +136,7 @@
       <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="3" id="DD<%=question.getIDQuestion()%>" style="background-color : #EEEEEE">
         <tr>
           <td>
-            <%=contentManagement.getContent("habitats_key_04")%>
+            <%=cm.cmsText("habitats_key_04")%>
             <strong>
               <%=keyNavigator.fixQuestionID(question.getIDQuestion())%>
             </strong>
@@ -156,15 +163,15 @@
         </tr>
         <tr>
           <td bgcolor="#DDDDDD">
-            Answers:
+            <%=cm.cmsText("answers")%>
 <%
     // List of question answers.
     List answers = keyNavigator.findQuestionAnswers(level, question.getIDQuestion(), question.getIDPage());
     if (answers.size() > 0)
     {
 %>
-            <table summary="layout" width="100%" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; background-color : #DDDDDD;">
-              <tr align="center">
+      <table summary="layout" width="100%" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; background-color : #DDDDDD;">
+      <tr align="center">
 <%
       for (int j = 0; j < answers.size(); j++)
       {
@@ -187,11 +194,12 @@
 %>
                     <%=correctedAnswer%>
                   </strong>
-                  <a title="Answer" href="habitats-factsheet.jsp?idHabitat=<%=answer.getIDHabitatLink()%>"><img title="Answer" alt="Answer" src="images/mini/sheet.gif" border="0" align="middle" /></a>
+                  <a title="<%=cm.cms("answer")%>" href="habitats-factsheet.jsp?idHabitat=<%=answer.getIDHabitatLink()%>"><img title="<%=cm.cms("answer")%>" alt="Answer" src="images/mini/sheet.gif" border="0" align="middle" /></a>
+                  <%=cm.cmsTitle("answer")%>
 <%
           if (level > 0 && level < 3)
           {
-            String str = contentManagement.getContent("habitats_key_05", false);
+            String str = cm.cms("habitats_key_05");
 %>
               <%--Ok, we are on the proper level, so we show the link to the next pagelevel (level + 1) --%>
                   [
@@ -212,7 +220,7 @@
         else
         {
           // If answer point to a habitat factsheet.
-          String str = contentManagement.getContent("habitats_key_06", false);
+          String str = cm.cms("habitats_key_06");
 %>
                   <strong>
 <%
@@ -224,7 +232,8 @@
                   </strong>
                   (<a onclick="javascript:changeColor('DD<%=answer.getIDQuestionLink()%>','DD<%=answer.getIDQuestion()%>');"
                     href="#<%=answer.getIDQuestionLink()%>"
-                    title="<%=str%><%=keyNavigator.fixQuestionID(answer.getIDQuestionLink())%>"><img alt="Question" src="images/mini/navigate.gif" border="0" align="middle" /></a>
+                    title="<%=str%><%=keyNavigator.fixQuestionID(answer.getIDQuestionLink())%>"><img alt="<%=cm.cms("question")%>" src="images/mini/navigate.gif" border="0" align="middle" /></a>
+                  <%=cm.cmsTitle("question")%>
                   <strong>
                     <%=keyNavigator.fixQuestionID(answer.getIDQuestionLink())%>
                   </strong>)
@@ -254,15 +263,21 @@
       changeColor( "<%=idFirstQuestion%>", null );
     //-->
     </script>
-    <noscript>
-      Your browser does not support JavaScript!
-    </noscript>
 <%
   }
 %>
+<%=cm.br()%>
+<%=cm.cmsMsg("habitats_key_title")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("habitats_key_05")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("habitats_key_06")%>
+<%=cm.br()%>
 <jsp:include page="footer.jsp">
   <jsp:param name="page_name" value="habitats-key.jsp" />
 </jsp:include>
+    </div>
+    </div>
     </div>
   </body>
 </html>

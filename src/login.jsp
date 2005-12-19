@@ -4,12 +4,15 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Login page
 --%>
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.search.Utilities"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   boolean success = false;
   String username = request.getParameter( "username" );
   String cmd = Utilities.formatString( request.getParameter( "cmd" ), "" );
@@ -22,6 +25,7 @@
     {
       String password = request.getParameter( "password" );
       success = ( null != username && null != password ) && SessionManager.login( username, password, request );
+      SessionManager.setCurrentLanguage( SessionManager.getUserPrefs().getLang() );
     }
     catch ( Exception e )
     {
@@ -35,20 +39,22 @@
   <head>
     <jsp:include page="header-page.jsp" />
     <title>
-      <%=application.getInitParameter("PAGE_TITLE")%>Login into EUNIS Database
+      <%=application.getInitParameter("PAGE_TITLE")%>
+      <%=cm.cms("login_page_title")%>
     </title>
   </head>
   <body>
-    <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="Home#index.jsp,Login"/>
-    </jsp:include>
+    <div id="outline">
+    <div id="alignment">
     <div id="content">
-      <h5>
-        EUNIS Database Login
-      </h5>
+      <jsp:include page="header-dynamic.jsp">
+        <jsp:param name="location" value="home_location#index.jsp,login_location"/>
+      </jsp:include>
+      <h1>
+        <%=cm.cmsText("login_title")%>
+      </h1>
       <br />
-    <div style="text-align : center; width : 740px;">
-      <div style="width : 740px; text-align : center; padding : 15px;">
+      <div style="text-align : center; width : 100%">
 <%
   if ( !success )
   {
@@ -63,15 +69,22 @@
 <%
       }
 %>
-          <label for="username">Username:</label>
-          <input class="inputTextField" title="Enter your username here" type="text" id="username" name="username" value="<%=(null != username) ? username : ""%>" />
+          <label for="username"><%=cm.cms("login_username_label")%>:</label>
+          <input class="inputTextField" title="<%=cm.cms("login_username_title")%>" type="text" id="username" name="username" value="<%=(null != username) ? username : ""%>" />
+          <%=cm.cmsTitle("login_username_title")%>
+          <%=cm.cmsLabel("login_username_label")%>
           <br />
-          <label for="password">Password:</label>
-          <input class="inputTextField" title="Enter your password here" type="password" id="password" name="password" />
+          <label for="password"><%=cm.cms("login_password_label")%>:</label>
+          <input class="inputTextField" title="<%=cm.cms("login_password_title")%>" type="password" id="password" name="password" />
+          <%=cm.cmsTitle("login_password_title")%>
+          <%=cm.cmsLabel("login_password_label")%>
           <br />
           <br />
-          <label for="submit" class="noshow">Login</label>
-          <input class="inputTextField" title="Login to EUNIS Database" type="submit" id="submit" name="Submit" value="Login" />
+          <label for="submit" class="noshow"><%=cm.cms("login_submit_label")%></label>
+          <input class="inputTextField" title="<%=cm.cms("login_submit_title")%>" type="submit" id="submit" name="Submit" value="<%=cm.cms("login_submit_value")%>" />
+          <%=cm.cmsLabel("login_submit_label")%>
+          <%=cm.cmsTitle("login_submit_title")%>
+          <%=cm.cmsInput("login_submit_value")%>
         </form>
 
 <%
@@ -80,7 +93,7 @@
 %>
     <script type="text/javascript" language="Javascript">
       <!--
-        alert( "Invalid username or password." );
+        alert( "<%=cm.cms("login_invalid")%>." );
       //-->
     </script>
 <%
@@ -89,19 +102,25 @@
   else
   {
 %>
-    You successfully logged as
+    <%=cm.cmsText("login_you_successfully_logged")%>
     <strong><%=SessionManager.getUsername()%></strong>.
-    <a title="Home page" href="index.jsp">Home</a>
+    <a title="<%=cm.cms("login_home_title")%>" href="index.jsp"><%=cm.cmsText("login_home")%></a>
+    <%=cm.cmsTitle("login_home_title")%>
 <%
   }
 %>
       </div>
-    </div>
     <br />
-    <%=contentManagement.getContent("habitats_login-help_01")%>
-    </div>
+    <%=cm.cmsText("habitats_login-help_01")%>
+
+    <%=cm.cmsMsg("login_page_title")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("login_invalid")%>
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="index.jsp" />
     </jsp:include>
+    </div>
+    </div>
+    </div>
   </body>
 </html>

@@ -26,27 +26,26 @@ public class Accesibility {
     hm.put("generic.criteria.optional","This search criteria is optional");
     hm.put("generic.criteria.included","At least one of these criteria must be entered");
     hm.put("generic.criteria.save","Save search criteria");
-
-    //anca
     hm.put("Species.Name.SearchButton.Alt","Search button");
-    //dan
-
-    //cristi
   }
 
+  /**
+   * Retrieve text
+   * @param key Key associated with the text
+   * @return Text or key if text does not exists
+   */
   public static String getText(String key)
   {
     String ret = key;
-    try
+    if( hm.containsKey( key ) )
     {
-      ret =  hm.get( key );
+      ret = hm.get( key );
     }
-    catch(Exception ex)
+    else
     {
       System.out.println("key: " + key + " not found!");
     }
     return ret;
   }
 }
-
 

@@ -4,41 +4,46 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Copyright page.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page contentType="text/html" %>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtReferencesDomain,
                  java.util.Iterator,
                  java.util.List,
                  ro.finsiel.eunis.jrfTables.Chm62edtReferencesPersist,
                  ro.finsiel.eunis.WebContentManagement" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
-  <title><%=application.getInitParameter("PAGE_TITLE")%>Copyright and Disclaimer</title>
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
+  <title><%=application.getInitParameter("PAGE_TITLE")%>
+    <%=cm.cms("copyright_and_disclaimer_title")%>
+  </title>
 </head>
 
-<body bgcolor="#ffffff">
+<body>
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
-<jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="Home#index.jsp,Copyright and Disclaimer"/>
-</jsp:include>
-<%
-  // Web content manager used in this page.
-  WebContentManagement contentManagement = SessionManager.getWebContent();
-  String paragraph01 = contentManagement.getContent("generic_copyright_01");
-  if(null != paragraph01) out.print(paragraph01);
-%>
-<table summary="References" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%">
+  <jsp:include page="header-dynamic.jsp">
+    <jsp:param name="location" value="home_location#index.jsp,copyright_and_disclaimer_title"/>
+  </jsp:include>
+  <%=cm.cmsText("generic_copyright_01")%>
+  <table summary="<%=cm.cms("copyright_references")%>" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%">
   <tr>
     <th width="40%" class="resultHeader">
-      Author
+      <%=cm.cmsText("copyright_author")%>
     </th>
     <th width="50%" class="resultHeader">
-      Title
+      <%=cm.cmsText("copyright_title")%>
     </th>
     <th width="10%" class="resultHeader" align="center">
-      Publication date
+      <%=cm.cmsText("copyright_publication_date")%>
     </th>
   </tr>
   <%
@@ -77,9 +82,8 @@
   %>
   <tr bgcolor="<%=(0 == (cnt % 2) ? "#EEEEEE" : "#FFFFFF")%>">
     <td width="40%" id="A<%=cnt%>1">
-      <a title="Search for author(s) information on Google in new window" target="_blank" href="http://www.google.com/search?hl=en&amp;lr=&amp;ie=UTF-8&amp;oe=UTF-8&amp;q=<%=nl.getAuthor()%>">
-        <%=nl.getAuthor()%>
-      </a>
+      <a title="<%=cm.cms("copyright_search_for_author")%>" target="_blank" href="http://www.google.com/search?hl=en&amp;lr=&amp;ie=UTF-8&amp;oe=UTF-8&amp;q=<%=nl.getAuthor()%>"><%=nl.getAuthor()%></a>
+      <%=cm.cmsTitle("copyright_search_for_author")%>
     </td>
     <td width="50%"><%=nl.getTitle()%></td>
     <td width="10%" align="center"><%=nl.getPublicationDate()%></td>
@@ -94,19 +98,25 @@
   %>
   <tr>
     <th width="40%" class="resultHeader">
-      Author
+      <%=cm.cmsText("copyright_author")%>
     </th>
     <th width="50%" class="resultHeader">
-      Title
+      <%=cm.cmsText("copyright_title")%>
     </th>
-    <th width="10%" class="resultHeader" align="center">
-      Publication date
+    <th width="10%" class="resultHeader" style="text-align : center;">
+      <%=cm.cmsText("copyright_publication_date")%>
     </th>
   </tr>
 </table>
-<jsp:include page="footer.jsp">
-  <jsp:param name="page_name" value="copyright.jsp"/>
-</jsp:include>
+  <%=cm.cmsMsg("copyright_and_disclaimer_title")%>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("copyright_references")%>
+  <%=cm.br()%>
+  <jsp:include page="footer.jsp">
+    <jsp:param name="page_name" value="copyright.jsp"/>
+  </jsp:include>
+    </div>
+    </div>
     </div>
   </body>
 </html>

@@ -17,7 +17,10 @@ Notes:
 - When embedded - only the table is generated (without any other HTML 'decorations')
 
 --%>
-<%@ page contentType="text/html" %>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.exceptions.InitializationException,
                  ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet,
@@ -26,7 +29,7 @@ Notes:
 <%@ page import="java.util.List"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   String idHabitat = request.getParameter("idHabitat");
   Integer infoID = Utilities.checkedStringToInt(request.getParameter("infoID"), new Integer(-1));
   HabitatsFactsheet factsheet = new HabitatsFactsheet(idHabitat);
@@ -39,15 +42,13 @@ Notes:
   }
   if(!results.isEmpty()) {
 %>
-<table summary="Habitat type other information" border="1" cellspacing="0" width="90%" id="table<%=infoID%>" style="border-collapse : collapse;">
+<table summary="<%=cm.cms("habitat_other_information")%>" border="1" cellspacing="0" width="90%" id="table<%=infoID%>" style="border-collapse : collapse;">
   <tr bgcolor="#DDDDDD">
     <th class="resultHeader" width="25%">
-      <a title="Sort table by this column" href="javascript:sortTable(2, 0, 'table<%=infoID%>', false);">
-        <strong><%=contentManagement.getContent("habitats_factsheet-other_02")%></strong></a>
+       <%=cm.cmsText("habitats_factsheet-other_02")%>
     </th>
     <th class="resultHeader" width="75%">
-      <a title="Sort table by this column" href="javascript:sortTable(2, 1, 'table<%=infoID%>', false);">
-        <strong><%=contentManagement.getContent("habitats_factsheet-other_03")%></strong></a>
+      <%=cm.cmsText("habitats_factsheet-other_03")%>
     </th>
   </tr>
   <%
@@ -77,6 +78,8 @@ Notes:
     }
   %>
 </table>
+<%=cm.br()%>
+<%=cm.cmsMsg("habitat_other_information")%>
 <br />
 <%
   }

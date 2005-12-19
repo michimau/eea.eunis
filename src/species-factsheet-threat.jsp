@@ -4,7 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Species factsheet' - Display national threat status.
 --%>
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@page import="java.util.*,
                  ro.finsiel.eunis.jrfTables.*,
                  ro.finsiel.eunis.search.species.SpeciesSearchUtility,
@@ -22,7 +25,7 @@
   </jsp:useBean>
   <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-    WebContentManagement contentManagement = SessionManager.getWebContent();
+    WebContentManagement cm = SessionManager.getWebContent();
 
     Integer idSpecies=Utilities.checkedStringToInt( request.getParameter("idSpecies"), new Integer("-1") );
     SpeciesFactsheet factsheet = new SpeciesFactsheet( idSpecies, idSpecies );
@@ -44,7 +47,7 @@
     if( nationalThreatStatus.size() > 0 )
     {
 %>
-    <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;">National threat status</div>
+    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_factsheet-threat_10")%></div>
 <%
     int COUNTRIES_PER_MAP = Utilities.checkedStringToInt( application.getInitParameter( "COUNTRIES_PER_MAP" ), 120 );
     // Mapping THREAT STATUS - COLOR
@@ -104,21 +107,23 @@
           if(filename.length() > 0)
           {
 %>
-            <img alt="Map image. Provided by EEA" src="<%=filename%>" title="Map image. Provided by EEA" />
+            <img alt="<%=cm.cms("map_image_eea")%>" src="<%=filename%>" title="<%=cm.cms("map_image_eea")%>" />
+            <%=cm.cmsAlt("map_image_eea")%>
             <br />
-            <a title="Open map in new window" href="javascript:openNewPage('<%=url + "?" + parameters%>');">Open map in new window</a>
+            <a title="<%=cm.cms("species_factsheet-threat_11_Title")%>" href="javascript:openNewPage('<%=url + "?" + parameters%>');"><%=cm.cmsText("species_factsheet-threat_11")%></a>
+            <%=cm.cmsTitle("species_factsheet-threat_11_Title")%>
 <%
           }
           else
           {
 %>
-            <%=contentManagement.getContent("species_factsheet-threat_02")%>.
+            <%=cm.cmsText("species_factsheet-threat_02")%>.
 <%
           }
 %>
           </td>
           <td style="padding-left : 20px;">
-            Legend:
+            <%=cm.cmsText("legend")%>:
             <br />
 <%
           Enumeration keys = threatsColors.keys();
@@ -126,13 +131,13 @@
           {
             String key = ( String )keys.nextElement();
 %>
-            <img alt="Map legend. Provided by EEA" src="<%=application.getInitParameter("EEA_MAP_SERVER")%>/getLegend.asp?Color=H<%=threatsColors.get(key)%>" title="Map legend. Provided by EEA" />&nbsp;<%=key%>
+            <img alt="<%=cm.cms("map_legend_eea")%>" src="<%=application.getInitParameter("EEA_MAP_SERVER")%>/getLegend.asp?Color=H<%=threatsColors.get(key)%>" title="<%=cm.cms("map_legend_eea")%>" /><%=cm.cmsAlt("map_legend_eea")%>&nbsp;<%=key%>
             <br />
 <%
           }
 %>
             <p>
-              <%=contentManagement.getContent("species_factsheet-threat_03")%>
+              <%=cm.cmsText("species_factsheet-threat_03")%>
             </p>
           </td>
         </tr>
@@ -140,26 +145,30 @@
 <%
     }
 %>
-      <table summary="National threat status" width="100%" border="1" cellspacing="1" cellpadding="0"  id="threat" style="border-collapse:collapse">
+      <table summary="<%=cm.cms("species_factsheet-threat_12_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="threat" class="sortable">
         <tr>
-          <th class="resultHeaderForFactsheet" style="width : 220px;">
+          <th style="width : 220px;" title="<%=cm.cms("sort_results_on_this_column")%>">
             <strong>
-              <a title="Sort by Country" href="javascript:sortTable(4,0, 'threat', false);"><%=contentManagement.getContent("species_factsheet-threat_04")%></a>
+              <%=cm.cmsText("species_factsheet-threat_04")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </strong>
           </th>
-          <th class="resultHeaderForFactsheet" style="width : 120px;">
+          <th style="width : 120px;" title="<%=cm.cms("sort_results_on_this_column")%>">
             <strong>
-              <a title="Sort by Status" href="javascript:sortTable(4,1, 'threat', false);"><%=contentManagement.getContent("species_factsheet-threat_05")%></a>
+              <%=cm.cmsText("species_factsheet-threat_05")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </strong>
           </th>
-          <th class="resultHeaderForFactsheet" style="width : 100px;">
+          <th style="width : 100px;" title="<%=cm.cms("sort_results_on_this_column")%>">
             <strong>
-              <a title="Sort by National threat code" href="javascript:sortTable(4,2, 'threat', false);"><%=contentManagement.getContent("species_factsheet-threat_06")%></a>
+              <%=cm.cmsText("species_factsheet-threat_06")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </strong>
           </th>
-          <th class="resultHeaderForFactsheet">
+          <th title="<%=cm.cms("sort_results_on_this_column")%>" title="<%=cm.cms("sort_results_on_this_column")%>">
             <strong>
-              <a title="Sort by Reference" href="javascript:sortTable(4,3, 'threat', false);"><%=contentManagement.getContent("species_factsheet-threat_07")%></a>
+              <%=cm.cmsText("species_factsheet-threat_07")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </strong>
           </th>
         </tr>
@@ -170,7 +179,19 @@
 %>
         <tr style="background-color:<%=((0 == i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
           <td>
-              <a href="sites-statistical-result.jsp?country=<%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>&amp;DB_CDDA_NATIONAL=true&amp;DB_DIPLOMA=true&amp;DB_CDDA_INTERNATIONAL=true&amp;DB_CORINE=true&amp;DB_BIOGENETIC=true" title="Open the statistical data for <%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>"><%=Utilities.treatURLSpecialCharacters(threat.getCountry())%></a>
+            <%
+                if(Utilities.isCountry(threat.getCountry()))
+                {
+            %>
+              <a href="javascript:goToCountryStatistics('<%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>')" title="<%=cm.cms("open_statistical_data")%> <%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>"><%=Utilities.treatURLSpecialCharacters(threat.getCountry())%></a>
+              <%=cm.cmsTitle("open_statistical_data")%>
+            <%
+            } else {
+            %>
+             <%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>
+            <%
+             }
+            %>
               &nbsp;
           </td>
           <td>
@@ -197,27 +218,31 @@
     {
 %>
       <br />
-      <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;">International threat status</div>
-      <table summary="International threat status" width="100%" border="1" cellspacing="1" cellpadding="0"  id="intlthreat" style="border-collapse:collapse">
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_factsheet-threat_13")%></div>
+      <table summary="<%=cm.cms("species_factsheet-threat_13_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="intlthreat" class="sortable">
         <tr>
-          <th class="resultHeaderForFactsheet">
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
             <strong>
-              <a title="Sort by Area" href="javascript:sortTable(4,0, 'intlthreat', false);"><%=contentManagement.getContent("species_factsheet-conservation_08")%></a>
+              <%=cm.cmsText("species_factsheet-conservation_08")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </strong>
           </th>
-          <th class="resultHeaderForFactsheet">
+          <th title="<%=cm.cms("sort_results_on_this_column")%>" >
             <strong>
-              <a title="Sort by Status" href="javascript:sortTable(4,1, 'intlthreat', false);"><%=contentManagement.getContent("species_factsheet-conservation_03")%></a>
+              <%=cm.cmsText("species_factsheet-conservation_03")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </strong>
           </th>
-          <th class="resultHeaderForFactsheet">
+          <th title="<%=cm.cms("sort_results_on_this_column")%>" >
             <strong>
-              <a title="Sort by International threat code" href="javascript:sortTable(4,2, 'intlthreat', false);"><%=contentManagement.getContent("species_factsheet-conservation_09")%></a>
+              <%=cm.cmsText("species_factsheet-conservation_09")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </strong>
           </th>
-          <th class="resultHeaderForFactsheet">
+          <th title="<%=cm.cms("sort_results_on_this_column")%>" >
             <strong>
-              <a title="Sort by Reference" href="javascript:sortTable(4,3, 'intlthreat', false);"><%=contentManagement.getContent("species_factsheet-conservation_05")%></a>
+              <%=cm.cmsText("species_factsheet-conservation_05")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </strong>
           </th>
         </tr>
@@ -250,5 +275,10 @@
 <%
     }
 %>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_factsheet-threat_12_Sum")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_factsheet-threat_13_Sum")%>
+
 <br />
 <br />

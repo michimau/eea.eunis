@@ -4,6 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Part of user management
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.List,
                  ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.jrfTables.users.RolesDomain,
@@ -14,11 +18,11 @@
                  ro.finsiel.eunis.jrfTables.users.UserPersist,
                  ro.finsiel.eunis.jrfTables.users.RightsDomain,
                  ro.finsiel.eunis.jrfTables.users.RightsPersist"%>
-<%@ page contentType="text/html"%>
-
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
-
 <%
+    // Web content manager used in this page.
+    WebContentManagement cm = SessionManager.getWebContent();
+
  //If user is authentificated and has this right
   if(SessionManager.isAuthenticated() && SessionManager.isRole_management_RIGHT())
 {
@@ -40,7 +44,6 @@
        var rights_list = new Array(<%=ListRights.size()%>);
       //-->
     </script>
-    <noscript>Your browser does not support JavaScript!</noscript>
 <%
      for (int i=0;i<ListRights.size();i++)
       {
@@ -50,7 +53,6 @@
                rights_list[<%=i%>]='<%=((RightsPersist)ListRights.get(i)).getRightName()%>';
              //-->
          </script>
-         <noscript>Your browser does not support JavaScript!</noscript>
 <%
       }
   } else
@@ -61,7 +63,6 @@
                var rights_list = new Array(0);
              //-->
           </script>
-          <noscript>Your browser does not support JavaScript!</noscript>
 <%
     }
   }catch(Exception e){e.printStackTrace();}
@@ -76,7 +77,7 @@
       exist=false;
       for(i=0;i<rights_list.length;i++) if (rightName.toLowerCase() == rights_list[i].toLowerCase()) exist = true;
       if(exist) {
-                   alert("This right name already exist!");
+                   alert("<%=cm.cms("rights_add_01")%>");
                    document.eunis.rightName.value = "";
                 }
       return exist;
@@ -85,7 +86,7 @@
         function validateFormAdd() {
        if (document.eunis.rightName == null || trim(document.eunis.rightName.value)=='')
             {
-             alert("You must insert a valid right name value!");
+             alert("<%=cm.cms("rights_add_02")%>");
              return false;
             }
 
@@ -99,7 +100,7 @@
             || trim(document.eunis.rightName.value) == ''
             || trim(document.eunis.rightName.value) == 'selectRightName')
             {
-             alert("You must select a valid right name value!");
+             alert("<%=cm.cms("rights_add_16")%>");
              return false;
             }
 
@@ -117,8 +118,6 @@
       }
       //-->
 </script>
-<noscript>Your browser does not support JavaScript!</noscript>
-
 <%
   // Set database parameters
   String SQL_DRV="";
@@ -135,7 +134,7 @@
   if(SQL_DRV == null || SQL_URL==null || SQL_USR == null || SQL_PWD==null )
   {
 %>
-    Error: The web.xml file does not contain one/all of these required values: JDBC_DRV,JDBC_URL,JDBC_USR,JDBC_PWD.
+    <%=cm.cmsText("rights_add_03")%>
 <%
     return;
   }
@@ -165,10 +164,10 @@ if(users_operation.equalsIgnoreCase("add_rights"))
           // add right
            boolean addRightSuccess = UsersUtility.addRights(SessionManager.getUsername(),goodRightName,description);
 
-          if(addRightSuccess) message = "Rights adding operation was made successfully.";
-          else message = "<span color=\"red\">Rights adding operation wasn't made successfully.</span>";
+          if(addRightSuccess) message = cm.cms("rights_add_04");
+          else message = "<span color=\"red\">"+cm.cms("rights_add_05")+"</span>";
 
-        } else message = "<span color=\"red\">Rights adding operation wasn't made successfully.</span>";
+        } else message = "<span color=\"red\">"+cm.cms("rights_add_05")+"</span>";
       }
   }
 }
@@ -191,10 +190,10 @@ if(users_operation.equalsIgnoreCase("add_rights"))
                String description = (request.getParameter("description") == null ? "" : request.getParameter("description"));
                // Edit right
                boolean editWithSuccess = UsersUtility.editRights(SessionManager.getUsername(),rightName,description,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-               if(editWithSuccess) message = "Rights updating operation was made successfully.";
-               else message = "<span color=\"red\">Rights updating operation wasn't made successfully.</span>";
+               if(editWithSuccess) message = cm.cms("rights_add_06");
+               else message = "<span color=\"red\">"+cm.cms("rights_add_07")+"</span>";
 
-             } else message = "<span color=\"red\">Rights updating operation wasn't made successfully.</span>";
+             } else message = "<span color=\"red\">"+cm.cms("rights_add_07")+"</span>";
         }
 
       // if user choose to delete a right
@@ -208,9 +207,9 @@ if(users_operation.equalsIgnoreCase("add_rights"))
        {
            // Delete right
            boolean deleteWithSucces = UsersUtility.deleteRights(rightName,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-           if(deleteWithSucces) message = "Rights deleting operation was made successfully.";
-           else message = "<span color=\"red\">Rights deleting operation wasn't made successfully.</span>";
-       }  else message = "<span color=\"red\">Rights deleting operation wasn't made successfully.</span>";
+           if(deleteWithSucces) message = cm.cms("rights_add_08");
+           else message = "<span color=\"red\">"+cm.cms("rights_add_09")+"</span>";
+       }  else message = "<span color=\"red\">"+cm.cms("rights_add_09")+"</span>";
       }
     }
   }
@@ -223,13 +222,13 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
   description = (UsersUtility.getRightsObject(rightName) == null ? "" : (UsersUtility.getRightsObject(rightName)).getDescription());
 }
 %>
-     <h5>
-       EUNIS Database User Management
-     </h5>
+     <h1>
+       <%=cm.cmsText("rights_add_10")%>
+     </h1>
      <br />
-     <h6>
-        <%=(users_operation.equalsIgnoreCase("add_rights")?"Add":"Edit")%> rights
-     </h6>
+     <h2>
+        <%=(users_operation.equalsIgnoreCase("add_rights")?cm.cms("add"):cm.cms("edit"))%> rights
+     </h2>
      <br />
 
 <form name="eunis" method="post" action="users.jsp" onsubmit="<%=onSubmit%>">
@@ -247,12 +246,11 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
     %>
     <tr>
       <td>
-      &nbsp;&nbsp;<label for="rightName1">Select right name</label>
-<%--        &nbsp;&nbsp;Select right name--%>
+      &nbsp;&nbsp;<label for="rightName1"><%=cm.cmsText("rights_add_11")%></label>
       </td>
       <td>
-       <select id="rightName1" name="rightName" class="inputTextField" style="border-width:1px" onchange="MM_jumpMenuRights('parent',this,0,'<%=tab1%>','<%=tab2%>')"  title="List of right name">
-        <option value="selectRightName" selected="selected">Select a right name</option>
+       <select id="rightName1" name="rightName" class="inputTextField" style="border-width:1px" onchange="MM_jumpMenuRights('parent',this,0,'<%=tab1%>','<%=tab2%>')"  title="<%=cm.cms("rights_add_12")%>">
+        <option value="selectRightName" selected="selected"><%=cm.cms("rights_add_11")%></option>
         <%
            try
            {
@@ -270,8 +268,10 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
            } catch(Exception e){e.printStackTrace();}
         %>
        </select>
+       <%=cm.cmsTitle("rights_add_12")%>
        &nbsp;&nbsp;&nbsp;
-       <a title="Delete this right" href="javascript:deleteRight();">delete this right</a>
+       <a title="<%=cm.cms("rights_add_13")%>" href="javascript:deleteRight();"><%=cm.cmsText("rights_add_13")%></a>
+       <%=cm.cmsTitle("rights_add_13")%>
       </td>
     </tr>
    <%
@@ -280,12 +280,11 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
    %>
      <tr>
        <td>
-       &nbsp;&nbsp;<label for="rightName2">Right name</label>
-<%--         &nbsp;&nbsp;Right name--%>
+       &nbsp;&nbsp;<label for="rightName2"><%=cm.cmsText("rights_add_14")%></label>
        </td>
        <td>
-         <label for="rightName2" class="noshow">Right name</label>
-         <input class="inputTextField" title="Right name" alt="Right name" type="text" id="rightName2" name="rightName" size="50" value="" onchange="RightExist();" />
+         <input class="inputTextField" title="<%=cm.cms("rights_add_14")%>" alt="<%=cm.cms("rights_add_14")%>" type="text" id="rightName2" name="rightName" size="50" value="" onchange="RightExist();" />
+         <%=cm.cmsTitle("rights_add_14")%>
        </td>
      </tr>
    <%
@@ -298,11 +297,11 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
       </tr>
       <tr>
         <td>
-        &nbsp;&nbsp;<label for="description">Description</label>
-<%--          &nbsp;&nbsp;Description :--%>
+        &nbsp;&nbsp;<label for="description"><%=cm.cmsText("description")%></label>
         </td>
         <td>
-          <textarea title="Description" id="description" name="description" cols="70" rows="5"  class="inputTextField"><%=description%></textarea>
+          <textarea title="<%=cm.cms("description")%>" id="description" name="description" cols="70" rows="5"  class="inputTextField"><%=description%></textarea>
+          <%=cm.cmsTitle("description")%>
         </td>
       </tr>
     </table>
@@ -312,10 +311,18 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
 <tr>
   <td style="text-align:left">
     &nbsp;&nbsp;
-    <label for="input1" class="noshow">Submit</label>
-    <input id="input1" type="submit" value="<%=(users_operation.equalsIgnoreCase("add_rights")?"Add right":"Update data")%>" name="submit" onclick="document.eunis.operation.value='submit';" class="inputTextField"  title="<%=(users_operation.equalsIgnoreCase("add_rights")?"Add right":"Update data")%>" />&nbsp;&nbsp;
-    <label for="input2" class="noshow">Reset</label>
-    <input id="input2" type="reset" value="Reset" name="Reset" class="inputTextField"  title="Reset" />
+    <label for="input1" class="noshow"><%=cm.cms("submit")%></label>
+    <input id="input1" type="submit" value="<%=(users_operation.equalsIgnoreCase("add_rights")?cm.cms("add_right_btn"):cm.cms("update_data"))%>" name="submit" onclick="document.eunis.operation.value='submit';" class="inputTextField"  title="<%=cm.cms("submit")%>" />
+    <%=cm.cmsLabel("submit")%>
+    <%=cm.cmsTitle("submit")%>
+    <%=cm.cmsInput("add_right_btn")%>
+    <%=cm.cmsInput("update_data")%>
+    &nbsp;&nbsp;
+    <label for="input2" class="noshow"><%=cm.cms("reset")%></label>
+    <input id="input2" type="reset" value="<%=cm.cms("reset_btn")%>" name="Reset" class="inputTextField"  title="<%=cm.cms("reset")%>" />
+    <%=cm.cmsLabel("reset")%>
+    <%=cm.cmsTitle("reset")%>
+    <%=cm.cmsInput("reset")%>
   </td>
 </tr>
 <tr>
@@ -349,8 +356,32 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
   } else
   {
 %>
-<strong>You cann't do this because you are not authentificated or you haven't this right!</strong>
+<strong><%=cm.cmsText("rights_add_15")%></strong>
 <br />
 <%
   }
 %>
+
+<%=cm.br()%>
+<%=cm.cmsMsg("rights_add_01")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("rights_add_02")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("rights_add_04")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("rights_add_05")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("rights_add_06")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("rights_add_07")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("rights_add_08")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("rights_add_09")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("add")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("edit")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("rights_add_16")%>
+<%=cm.br()%>

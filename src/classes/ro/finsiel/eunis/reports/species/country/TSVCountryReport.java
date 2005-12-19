@@ -4,7 +4,7 @@ import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.jrfTables.species.country.*;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.JavaSorter;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
@@ -16,26 +16,25 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * Generate the TSV reports for Species -> Country / Region search
- *
- * @author Monica Secrieru
- * @version 1.0
+ * XML and PDF report.
  */
 public class TSVCountryReport extends AbstractTSVReport
 {
   private CountryBean formBean = null;
 
   /**
-   * Constructor
+   * Constructor.
    *
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
+   * @param showEUNISInvalidatedSpecies Show invalidated species
    */
   public TSVCountryReport( String sessionID, CountryBean formBean, boolean showEUNISInvalidatedSpecies )
   {
     super( "SpeciesCountryReport_" + sessionID + ".tsv" );
     this.formBean = formBean;
     this.filename = "SpeciesCountryReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "SpeciesCountryReport_" + sessionID + ".xml" );
 
     String countryName = this.formBean.getCountryName();
     String regionName = this.formBean.getRegionName();
@@ -59,17 +58,17 @@ public class TSVCountryReport extends AbstractTSVReport
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader()
+  public List<String> createHeader()
   {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     headers.addElement( "Group" );
     headers.addElement( "Country" );
     headers.addElement( "Biogeoregion" );
@@ -98,6 +97,7 @@ public class TSVCountryReport extends AbstractTSVReport
       }
       // Write table header
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       // Write data page by page
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
@@ -108,7 +108,8 @@ public class TSVCountryReport extends AbstractTSVReport
         for ( int i = 0; i < resultSet.size(); i++ )
         {
           // Retrieve a specie
-          Vector aRow = new Vector();
+          Vector<String> aRow = new Vector<String>();
+          Vector<String> xmlRow = new Vector<String>();
           String cellGroup = "";
           String cellCountry = "";
           String cellBiogeoregion = "";
@@ -146,10 +147,15 @@ public class TSVCountryReport extends AbstractTSVReport
             cellIdVernacularSearch = specie.getIdNatureObjectRep();
           }
           aRow.addElement( cellGroup );
+          xmlRow.addElement( cellGroup );
           aRow.addElement( cellCountry );
+          xmlRow.addElement( cellCountry );
           aRow.addElement( cellBiogeoregion );
+          xmlRow.addElement( cellBiogeoregion );
           aRow.addElement( cellScientificName );
+          xmlRow.addElement( cellScientificName );
           // Vernacular names (multiple rows)
+          String xmlVernacularNames = "";
           Vector vernNamesList = SpeciesSearchUtility.findVernacularNames( cellIdVernacularSearch );
           if ( vernNamesList.size() > 0 )
           {
@@ -169,7 +175,7 @@ public class TSVCountryReport extends AbstractTSVReport
               }
               else
               {
-                Vector anotherRow = new Vector();
+                Vector<String> anotherRow = new Vector<String>();
                 anotherRow.addElement( "" );
                 anotherRow.addElement( "" );
                 anotherRow.addElement( "" );
@@ -180,6 +186,7 @@ public class TSVCountryReport extends AbstractTSVReport
                 anotherRow.addElement( aVernName.getName() );
                 writeRow( anotherRow );
               }
+              xmlVernacularNames += "<name language=\"" + aVernName.getLanguage() + "\">" + aVernName.getName() + "</name>";
             }
           }
           else
@@ -188,6 +195,9 @@ public class TSVCountryReport extends AbstractTSVReport
             aRow.addElement( "-" );
             writeRow( aRow );
           }
+          xmlRow.add( xmlVernacularNames );
+          // XML Report
+          xmlreport.writeRow( xmlRow );
         }
       }
     }

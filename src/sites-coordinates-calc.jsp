@@ -5,17 +5,20 @@
   - Description : 'Sites coordinates calculator' function - Utility to transform coordinates from
                    decimal degrees to degrees, minutes, seconds and vice-versa.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
-  <%
-      // Web content manager used in this page.
-      WebContentManagement contentManagement = SessionManager.getWebContent();
-  %>
     <title>
-      <%=contentManagement.getContent("sites_coordinates-calc_title", false )%>
+      <%=cm.cms("sites_coordinates-calc_title")%>
     </title>
     <jsp:include page="header-page.jsp" />
     <script language="JavaScript" type="text/javascript">
@@ -25,13 +28,13 @@
           if (0 == form.degrees.value.length) {
             toDegMinSec(form);
           } else {
-            alert( "<%=contentManagement.getContent("sites_coordinates-calc_01", false )%>");
+            alert( "<%=cm.cms("sites_coordinates-calc_01")%>");
           }
         } else {
           if (0 != form.degrees.value.length) {
             toDecimalDegrees(form);
           } else {
-            alert( "<%=contentManagement.getContent("sites_coordinates-calc_01", false )%>" );
+            alert( "<%=cm.cms("sites_coordinates-calc_01")%>" );
           }
         }
       }
@@ -43,7 +46,7 @@
         var NEG= 0;
         if (form.degrees.value==null||form.degrees.value.length==0)
         {
-          alert("<%=contentManagement.getContent("sites_coordinates-calc_02", false )%>");
+          alert("<%=cm.cms("sites_coordinates-calc_02")%>");
           return false;
         } else if(  (form.degrees.value<0) || (form.minutes.value<0) || (form.seconds.value<0)  ) {
           NEG = 1
@@ -70,7 +73,7 @@
         var NEG = 0;
         if(form.decimal.value==null || form.decimal.value.length==0)
         {
-          alert("<%=contentManagement.getContent("sites_coordinates-calc_03", false )%>");
+          alert("<%=cm.cms("sites_coordinates-calc_03")%>");
           return false;
         } else {
           decdeg = form.decimal.value
@@ -130,29 +133,46 @@
     <form name="converter" id="converter" action="" method="post">
       <div style="width : 100%">
         <br />
-        <label for="degrees">Degrees</label>
-        <input id="degrees" name="degrees" type="text" size="5" class="inputTextField" title="Degrees" />
+        <label for="degrees"><%=cm.cmsText("sites_coordinates_calc_degrees")%></label>
+        <input id="degrees" name="degrees" type="text" size="5" class="inputTextField" title="<%=cm.cms("sites_coordinates_calc_degrees_title")%>" />
+        <%=cm.cmsTitle("sites_coordinates_calc_degrees_title")%>
         &deg;
-        <label for="minutes">Minutes</label>
-        <input id="minutes" name="minutes" type="text" size="5" class="inputTextField" title="Minutes" />
+        <label for="minutes"><%=cm.cmsText("sites_coordinates_calc_minutes")%></label>
+        <input id="minutes" name="minutes" type="text" size="5" class="inputTextField" title="<%=cm.cms("sites_coordinates_calc_minutes_title")%>" />
+        <%=cm.cmsTitle("sites_coordinates_calc_minutes_title")%>
         '
-        <label for="seconds">Seconds</label>
-        <input id="seconds" name="seconds" type="text" size="5" class="inputTextField" title="Seconds" />
+        <label for="seconds"><%=cm.cmsText("sites_coordinates_calc_seconds")%></label>
+        <input id="seconds" name="seconds" type="text" size="5" class="inputTextField" title="<%=cm.cms("sites_coordinates_calc_seconds_title")%>" />
+        <%=cm.cmsTitle("sites_coordinates_calc_seconds_title")%>
         &quot;
         <br />
         <br />
-        <label for="decimal"><%=contentManagement.getContent("sites_coordinates-calc_05")%></label>
-        <input name="decimal" id="decimal" type="text" size="20" class="inputTextField" title="Decimal" />
+        <label for="decimal"><%=cm.cmsText("sites_coordinates-calc_05")%></label>
+        <input name="decimal" id="decimal" type="text" size="20" class="inputTextField" title="<%=cm.cms("sites_coordinates-calc_05_title")%>" />
+        <%=cm.cmsTitle("sites_coordinates-calc_05_title")%>
         <br />
         <div style="width : 100%; text-align : right;">
         <br />
-        <label for="reset" class="noshow">Reset</label>
-        <input id="reset" type="reset" name="Reset" value="Reset" class="inputTextField" title="Reset" />
+        <label for="reset" class="noshow"><%=cm.cms("sites_coordinates_calc_reset_label")%></label>
+        <input id="reset" type="reset" name="Reset" value="<%=cm.cms("sites_coordinates_calc_reset_value")%>" class="inputTextField" title="<%=cm.cms("sites_coordinates_calc_reset_title")%>" />
+        <%=cm.cmsLabel("sites_coordinates_calc_reset_label")%>
+        <%=cm.cmsInput("sites_coordinates_calc_reset_value")%>
+        <%=cm.cmsTitle("sites_coordinates_calc_reset_title")%>
           &nbsp;
-        <label for="calculate" class="noshow">Calculate</label>
-        <input id="calculate" type="button" name="calculate" value="Transform" onclick="javascript:transform(document.converter);" class="inputTextField" title="Calculate" />
+        <label for="calculate" class="noshow"><%=cm.cms("sites_coordinates_calc_calculate_label")%></label>
+        <input id="calculate" type="button" name="calculate" value="<%=cm.cms("sites_coordinates_calc_calculate_value")%>" onclick="javascript:transform(document.converter);" class="inputTextField" title="<%=cm.cms("sites_coordinates_calc_calculate_title")%>" />
+        <%=cm.cmsLabel("sites_coordinates_calc_calculate_label")%>
+        <%=cm.cmsInput("sites_coordinates_calc_calculate_value")%>
+        <%=cm.cmsTitle("sites_coordinates_calc_calculate_title")%>
         </div>
       </div>
     </form>
+    <%=cm.cmsMsg("sites_coordinates-calc_title")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("sites_coordinates-calc_01")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("sites_coordinates-calc_02")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("sites_coordinates-calc_03")%>
   </body>
 </html>

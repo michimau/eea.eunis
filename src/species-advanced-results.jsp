@@ -4,7 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Species advanced search results.
 --%>
-<%@ page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.AbstractPaginator,
                  ro.finsiel.eunis.jrfTables.species.advanced.DictionaryPersist,
@@ -16,16 +19,21 @@
                  ro.finsiel.eunis.search.AbstractSortCriteria,
                  ro.finsiel.eunis.search.advanced.AdvancedSortCriteria,
                  ro.finsiel.eunis.search.Utilities"%>
+<%@ page import="ro.finsiel.eunis.session.SessionManager"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
     <script language="JavaScript" type="text/javascript" src="script/species-result.js"></script>
+    <%
+        WebContentManagement cm = SessionManager.getWebContent();
+    %>
     <jsp:useBean id="formBean" class="ro.finsiel.eunis.formBeans.CombinedSearchBean" scope="page">
       <jsp:setProperty name="formBean" property="*"/>
     </jsp:useBean>
-    <title><%=application.getInitParameter("PAGE_TITLE")%>Species advanced search results</title>
+    <title><%=application.getInitParameter("PAGE_TITLE")%><%=cm.cms("species_advanced_result_title")%></title>
   </head>
 <%
 //  Utilities.dumpRequestParams(request);
@@ -69,26 +77,28 @@
   reportFields.addElement("criteriaSearch");
   reportFields.addElement("oper");
   reportFields.addElement("criteriaType");
-  String downloadLink = "javascript:openlink('reports/species/tsv-species-advanced.jsp?" + formBean.toURLParam(reportFields) + "')";
+  String downloadLink = "javascript:openTSVDownload('reports/species/tsv-species-advanced.jsp?" + formBean.toURLParam(reportFields) + "')";
 %>
   <body>
+    <div id="outline">
+    <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="Home#index.jsp,Species#species.jsp,Advanced Search#species-advanced.jsp,Results"/>
+        <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,advanced_search_location#species-advanced.jsp,results_location"/>
         <jsp:param name="downloadLink" value="<%=downloadLink%>"/>
       </jsp:include>
-      <h5>
-        Species advanced search results
-      </h5>
+      <h1>
+        <%=cm.cmsText("species_advanced_result_01")%>
+      </h1>
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td>
-            You searched species using advanced search criteria
+            <%=cm.cmsText("species_advanced_result_02")%>
           </td>
         </tr>
         <tr>
           <td>
-            Criteria combination used: <%=SessionManager.getExplainedcriteria()%>, where:
+            <%=cm.cmsText("species_advanced_result_03")%> <%=SessionManager.getExplainedcriteria()%><%=cm.cmsText("species_advanced_result_04")%>
           </td>
         </tr>
         <tr>
@@ -107,7 +117,7 @@
   }
 %>
     <br />
-    Results found: <strong><%=resultsCount%></strong>
+    <%=cm.cmsText("species_advanced_result_05")%> <strong><%=resultsCount%></strong>
     <br />
 <%
   // Prepare parameters for pagesize.jsp
@@ -143,7 +153,7 @@
       <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>"/>
       <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>"/>
     </jsp:include>
-    <table border="1" summary="Search results" cellpadding="0" cellspacing="0" align="center" width="100%" style="border-collapse: collapse">
+    <table summary="<%=cm.cms("search_results")%>" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse">
 <%
   Vector sortURLFields = new Vector();
   sortURLFields.addElement("pageSize");
@@ -159,63 +169,69 @@
   {
 %>
         <th class="resultHeader">
-          <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, null == sortGroup)%>"><%=Utilities.getSortImageTag(sortGroup)%>Group</a>
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, null == sortGroup)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
 <%
   }
   if (showOrder)
   {
 %>
-        <th align="left" class="resultHeader">
-          <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(sortOrder, null == sortOrder)%>"><%=Utilities.getSortImageTag(sortOrder)%>Order</a>
+        <th class="resultHeader">
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(sortOrder, null == sortOrder)%>"><%=Utilities.getSortImageTag(sortOrder)%><%=cm.cmsText("order")%></a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
 <%
   }
   if (showFamily)
   {
 %>
-        <th align="left" class="resultHeader">
-          <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(sortFamily, null == sortFamily)%>"><%=Utilities.getSortImageTag(sortFamily)%>Family</a>
+        <th class="resultHeader">
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(sortFamily, null == sortFamily)%>"><%=Utilities.getSortImageTag(sortFamily)%><%=cm.cmsText("family")%></a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
 <%
   }
   if (showScientificName)
   {
 %>
-        <th align="left" class="resultHeader">
-          <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, null == sortSciName)%>"><%=Utilities.getSortImageTag(sortSciName)%>Scientific Name</a>
+        <th class="resultHeader">
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, null == sortSciName)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("scientific_name")%></a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
 <%
   }
   if (showVernacularName)
   {
 %>
-        <th align="left" class="resultHeader">Vernacular names</th>
+        <th class="resultHeader"><%=cm.cmsText("vernacular_name")%></th>
 <%
   }
   if (showSource)
   {
 %>
-        <th align="left" class="resultHeader">Source</th>
+        <th class="resultHeader"><%=cm.cmsText("source")%></th>
 <%
   }
   if (showEditor)
   {
 %>
-        <th align="left" class="resultHeader">Editor</th>
+        <th class="resultHeader"><%=cm.cmsText("editor")%></th>
 <%
   }
   if (showBookTitle)
   {
 %>
-        <th align="left" class="resultHeader">Title</th>
+        <th class="resultHeader"><%=cm.cmsText("title")%></th>
 <%
   }
 %>
       </tr>
 <%
+  int col = 0;
   while (it.hasNext())
   {
+    String bgColor = col++ % 2 == 0 ? "#EEEEEE" : "#FFFFFF";
     DictionaryPersist specie = (DictionaryPersist)it.next();
     String order = Utilities.formatString(specie.getTaxonomicNameOrder());
     String family = Utilities.formatString(specie.getTaxonomicNameFamily());
@@ -227,7 +243,7 @@
   if (showGroup)
   {
 %>
-        <td>
+        <td class="resultCell" style="background-color : <%=bgColor%>">
           <%=specie.getCommonName()%>
         </td>
 <%
@@ -235,7 +251,7 @@
   if (showOrder)
   {
 %>
-        <td>
+        <td class="resultCell" style="background-color : <%=bgColor%>">
           <%=order%>
         </td>
 <%
@@ -243,7 +259,7 @@
   if (showFamily)
   {
 %>
-        <td>
+        <td class="resultCell" style="background-color : <%=bgColor%>">
           <%=family%>
         </td>
 <%
@@ -251,7 +267,7 @@
   if (showScientificName)
   {
 %>
-        <td>
+        <td class="resultCell" style="background-color : <%=bgColor%>">
           <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getScientificName()%></a>
         </td>
 <%
@@ -259,21 +275,21 @@
   if (showVernacularName)
   {
 %>
-        <td>
+        <td class="resultCell" style="background-color : <%=bgColor%>">
           <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 <%
-    String bgColor = "";
+    String bgColor1 = "";
     for (int i = 0; i < sortVernList.size(); i++)
     {
       VernacularNameWrapper aVernName = (VernacularNameWrapper)sortVernList.get(i);
       String vernacularName = aVernName.getName();
-      bgColor = (0 == i % 2) ? "#EEEEEE" : "#FFFFFF";
+      bgColor1 = (0 == i % 2) ? "#EEEEEE" : "#FFFFFF";
 %>
             <tr>
-              <td bgcolor="<%=bgColor%>">
+              <td bgcolor="<%=bgColor1%>">
                 <%=aVernName.getLanguage()%>
               </td>
-              <td bgcolor="<%=bgColor%>">
+              <td bgcolor="<%=bgColor1%>">
                 <%=vernacularName%>
               </td>
             </tr>
@@ -287,7 +303,7 @@
   if (showSource)
   {
 %>
-        <td>
+        <td class="resultCell" style="background-color : <%=bgColor%>">
           <%=specie.getSource()%>
         </td>
 <%
@@ -295,78 +311,86 @@
   if (showEditor)
   {
 %>
-        <td>
+        <td class="resultCell" style="background-color : <%=bgColor%>">
           <%=specie.getEditor()%>
         </td>
 <%
   }
   if (showBookTitle) {%>
-                  <td><%=specie.getBookTitle()%>&nbsp;</td>
-                <%}%>
-              </tr>
-          <%
-            }
-          %>
+        <td>
+          <%=specie.getBookTitle()%>&nbsp;
+        </td>
+<%
+  }
+%>
+      </tr>
+<%
+  }
+%>
     <tr>
 <%
   if (showGroup)
   {
 %>
-      <th class="resultHeader">
-        <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, null == sortGroup)%>"><%=Utilities.getSortImageTag(sortGroup)%>Group</a>
-      </th>
+        <th class="resultHeader">
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, null == sortGroup)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
 <%
   }
   if (showOrder)
   {
 %>
-      <th align="left" class="resultHeader">
-        <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(sortOrder, null == sortOrder)%>"><%=Utilities.getSortImageTag(sortOrder)%>Order</a>
-      </th>
+        <th class="resultHeader">
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(sortOrder, null == sortOrder)%>"><%=Utilities.getSortImageTag(sortOrder)%><%=cm.cmsText("order")%></a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
 <%
   }
   if (showFamily)
   {
 %>
-      <th align="left" class="resultHeader">
-        <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(sortFamily, null == sortFamily)%>"><%=Utilities.getSortImageTag(sortFamily)%>Family</a>
-      </th>
+        <th class="resultHeader">
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(sortFamily, null == sortFamily)%>"><%=Utilities.getSortImageTag(sortFamily)%><%=cm.cmsText("family")%></a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
 <%
   }
   if (showScientificName)
   {
 %>
-      <th align="left" class="resultHeader">
-        <a title="Sort results on this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, null == sortSciName)%>"><%=Utilities.getSortImageTag(sortSciName)%>Scientific Name</a>
-      </th>
+        <th class="resultHeader">
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, null == sortSciName)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("scientific_name")%></a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
 <%
   }
   if (showVernacularName)
   {
 %>
-      <th align="left" class="resultHeader">Vernacular names</th>
+        <th class="resultHeader"><%=cm.cmsText("vernacular_name")%></th>
 <%
   }
   if (showSource)
   {
 %>
-      <th align="left" class="resultHeader">Source</th>
+        <th class="resultHeader"><%=cm.cmsText("source")%></th>
 <%
   }
   if (showEditor)
   {
 %>
-      <th align="left" class="resultHeader">Editor</th>
+        <th class="resultHeader"><%=cm.cmsText("editor")%></th>
 <%
-}
-if (showBookTitle)
-{
+  }
+  if (showBookTitle)
+  {
 %>
-      <th align="left" class="resultHeader">Title</th>
+        <th class="resultHeader"><%=cm.cmsText("title")%></th>
 <%
-}
+  }
 %>
-    </tr>
+      </tr>
   </table>
           <jsp:include page="navigator.jsp">
             <jsp:param name="pagesCount" value="<%=pagesCount%>"/>
@@ -376,9 +400,16 @@ if (showBookTitle)
             <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>"/>
             <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>"/>
           </jsp:include>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("species_advanced_result_title")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("species_advanced_result_06")%>
+    <%=cm.br()%>
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="species-advanced-results.jsp" />
     </jsp:include>
+    </div>
+    </div>
     </div>
   </body>
 </html>

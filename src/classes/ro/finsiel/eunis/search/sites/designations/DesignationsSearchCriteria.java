@@ -166,10 +166,10 @@ public class DesignationsSearchCriteria extends SitesSearchCriteria {
       {
         sql.append( Utilities.prepareSQLOperator( ( String ) sqlMappings.get( criteriaType ), criteriaSearch, oper ) );
       }
-      if ( criteriaType.intValue() == CRITERIA_COUNTRY.intValue() )
-      {
-        sql.append( " and (I.ISO_3L is not null AND I.ISO_3L <>'') " );
-      }
+//      if ( criteriaType.intValue() == CRITERIA_COUNTRY.intValue() )
+//      {
+//        sql.append( " and (I.ISO_3L is not null AND I.ISO_3L <>'') " );
+//      }
     }
     return sql.toString();
   }

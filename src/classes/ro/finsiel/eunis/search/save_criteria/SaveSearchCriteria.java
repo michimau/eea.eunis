@@ -688,8 +688,8 @@ public class SaveSearchCriteria {
       if (criterias != null && criterias.size() > 0) {
         for (int i = 0; i < criterias.size(); i++) {
           CriteriasForUsersPersist criteria = (CriteriasForUsersPersist) criterias.get(i);
-          String firstValue = java.net.URLEncoder.encode(criteria.getCriteriaFirstValue(),"ISO-8859-1");
-          String lastValue = java.net.URLEncoder.encode(criteria.getCriteriaLastValue(),"ISO-8859-1");
+          String firstValue = java.net.URLEncoder.encode(criteria.getCriteriaFirstValue(),"UTF-8");
+          String lastValue = java.net.URLEncoder.encode(criteria.getCriteriaLastValue(),"UTF-8");
 
           //for check boxes like sourceDB on sites searches or 'search in' on habitats names search
           if (criteria.getCriteriaAttribute() != null &&

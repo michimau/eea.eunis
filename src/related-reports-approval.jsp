@@ -4,34 +4,26 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Related reports approval' function - search page.
 --%>
-<%@ page import="ro.finsiel.eunis.OSEnvironment,
-                 ro.finsiel.eunis.WebContentManagement,
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.jrfTables.EunisRelatedReportsPersist,
                  ro.finsiel.eunis.jrfTables.users.UserPersist,
                  ro.finsiel.eunis.related_reports.RelatedReportsUtil,
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.search.users.UsersUtility,
                  java.io.File,
-                 java.text.SimpleDateFormat,
                  java.util.Date,
-                 java.util.List,
-                 java.util.Properties" %>
-<%@ page contentType="text/html" %>
+                 java.util.List" %>
 <jsp:useBean id="FormBean" class="ro.finsiel.eunis.admin.RelatedReportsBean" scope="request">
   <jsp:setProperty name="FormBean" property="*"/>
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-  Properties osEnv = null;
-  try
-  {
-    osEnv = OSEnvironment.getEnvVars();
-  }
-  catch(Exception e)
-  {
-    e.printStackTrace();
-  }
-  String uploadDir = osEnv.getProperty("TOMCAT_HOME") + "/" + application.getInitParameter("UPLOAD_DIR_FILES");
+  WebContentManagement cm = SessionManager.getWebContent();
+  String uploadDir = application.getInitParameter( "TOMCAT_HOME" ) + "/" + application.getInitParameter("UPLOAD_DIR_FILES");
   String operation = FormBean.getOperation();
   String[] files = FormBean.getFilenames();
   if(null != operation && operation.equalsIgnoreCase("delete")) // Delete the files
@@ -47,8 +39,10 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
-  <script language="JavaScript" src="script/utils.js" type="text/javascript"></script>
-  <title><%=application.getInitParameter("PAGE_TITLE")%>Reports approval page</title>
+  <title>
+    <%=application.getInitParameter("PAGE_TITLE")%>
+    <%=cm.cms("related_reports_approval_page_title")%>
+  </title>
   <script language="JavaScript" type="text/JavaScript">
   <!--
     function MM_callJS(jsStr) { //v2.0
@@ -82,14 +76,14 @@
     function del_files() {
        nr=count_selFiles();
        if (!nr) {
-          alert('Nothing selected');
+          alert('<%=cm.cms("related_reports_approval_nothing")%>!');
           return false;
        } else {
           var ok = false;
           if (nr == 1) {
-            ok = confirm('Are you sure you want to delete 1 file ?');
+            ok = confirm('<%=cm.cms("related_reports_approval_delete1file")%> ?');
           } else {
-            ok = confirm('Are you sure you want to delete ' + nr +' files ?');
+            ok = confirm('<%=cm.cms("related_reports_approval_deletefiles")%> ' + nr +' <%=cm.cms("related_reports_approval_files")%> ?');
           }
           if (ok) {
             document.approve.operation.value = "delete";
@@ -101,22 +95,22 @@
   </script>
   </head>
   <body>
+    <div id="outline">
+    <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="Home#index.jsp,Related reports#related-reports.jsp,Approval"/>
+        <jsp:param name="location" value="home_location#index.jsp,related_reports_location#related-reports.jsp,related_reports_approval_location"/>
       </jsp:include>
-      <h5>
-        Related reports approval
-      </h5>
+      <h1>
+        <%=cm.cmsText("related_reports_approval_title")%>
+      </h1>
 <%
   if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
   {
     List pendingReportsList = RelatedReportsUtil.listPendingReports();
 %>
       <br />
-      Please note that this files are not available for download until they are approved.
-      <br />
-      Below is the list of documents uploaded by users which are pending for approval.
+      <%=cm.cmsText("related_reports_approval_description")%>
       <br />
 <%
     if(pendingReportsList.size() > 0)
@@ -126,26 +120,26 @@
         <input type="hidden" name="operation" value="approve"/>
         <table summary="Files pending to be approved" width="100%" border="1" cellspacing="0" cellpadding="4" style="border-collapse : collapse;">
           <tr bgcolor="#CCCCCC">
-            <th class="resultHeader" align="center">
-              Approve
+            <th class="resultHeader" style="text-align : center;">
+              <%=cm.cmsText("related_reports_approval_approve")%>
             </th>
-            <th class="resultHeader" align="center">
-              Valid
-            </th>
-            <th class="resultHeader">
-              Document description
+            <th class="resultHeader" style="text-align : center;">
+              <%=cm.cmsText("related_reports_approval_valid")%>
             </th>
             <th class="resultHeader">
-              File name
+              <%=cm.cmsText("related_reports_approval_docdescription")%>
             </th>
             <th class="resultHeader">
-              Size(kB)
+              <%=cm.cmsText("related_reports_approval_filename")%>
+            </th>
+            <th class="resultHeader" style="text-align : right;">
+              <%=cm.cmsText("related_reports_approval_size")%>(kB)
             </th>
             <th class="resultHeader">
-              Author
+              <%=cm.cmsText("related_reports_approval_author")%>
             </th>
             <th class="resultHeader">
-              Date
+              <%=cm.cmsText("related_reports_approval_date")%>
             </th>
           </tr>
 <%
@@ -154,7 +148,7 @@
           EunisRelatedReportsPersist report = ( EunisRelatedReportsPersist ) pendingReportsList.get( i );
           if ( null != report )
           {
-            File file = new File( osEnv.getProperty( "TOMCAT_HOME" ) + "/webapps/eunis/upload/" + report.getFileName() );
+            File file = new File( application.getInitParameter( "TOMCAT_HOME" ) + "/webapps/eunis/upload/" + report.getFileName() );
             long size = file.getAbsoluteFile().length();
             if ( size > 0 ) size /= 1024;
             // Find the author's e-mail address in the EUNIS_USERS table.
@@ -171,21 +165,27 @@
 %>
           <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
             <td align="center">
-              <label for="filename<%=i%>" class="noshow">Check this box to mark file for approval or deletion</label>
-              <input title="Check this box to mark file for approval or deletion" type="checkbox" id="filename<%=i%>" name="filenames" value="<%=report.getFileName()%>"/>
+              <label for="filename<%=i%>" class="noshow"><%=cm.cms("related_reports_approval_check_label")%></label>
+              <input title="<%=cm.cms("related_reports_approval_check_title")%>" type="checkbox" id="filename<%=i%>" name="filenames" value="<%=report.getFileName()%>"/>
+              <%=cm.cmsLabel("related_reports_approval_check_label")%>
+              <%=cm.cmsTitle("related_reports_approval_check_title")%>
             </td>
             <td align="center">
 <%
             if(file.exists())
             {
 %>
-              <img src="images/mini/download.gif" alt="File is downloadable" title="File is downloadable" />
+              <img src="images/mini/download.gif" alt="<%=cm.cms("related_reports_approval_download_alt")%>" title="<%=cm.cms("related_reports_approval_download_title")%>" />
+              <%=cm.cmsAlt("related_reports_approval_download_alt")%>
+              <%=cm.cmsTitle("related_reports_approval_download_title")%>
 <%
             }
             else
             {
 %>
-              <img src="images/mini/downloadu.gif" alt="Link is broken" title="Link is broken" />
+              <img src="images/mini/downloadu.gif" alt="<%=cm.cms("related_reports_approval_downloadu_alt")%>" title="<%=cm.cms("related_reports_approval_downloadu_title")%>" />
+              <%=cm.cmsAlt("related_reports_approval_downloadu_alt")%>
+              <%=cm.cmsTitle("related_reports_approval_downloadu_title")%>
 <%
             }
 %>
@@ -194,9 +194,10 @@
               <%=report.getReportName()%>&nbsp;
             </td>
             <td>
-              <a title="Download file to your computer" href="upload/<%=report.getFileName()%>"><%=file.getName()%></a>
+              <a title="<%=cm.cms("related_reports_approval_downloadfile_title")%>" href="upload/<%=report.getFileName()%>"><%=file.getName()%></a>
+              <%=cm.cmsTitle("related_reports_approval_downloadfile_title")%>
             </td>
-            <td>
+            <td style="text-align : right;">
               <%=size%>
             </td>
             <td style="white-space:nowrap">
@@ -210,12 +211,41 @@
         }
       }
 %>
+          <tr bgcolor="#CCCCCC">
+            <th class="resultHeader" style="text-align : center;">
+              <%=cm.cmsText("related_reports_approval_approve")%>
+            </th>
+            <th class="resultHeader" style="text-align : center;">
+              <%=cm.cmsText("related_reports_approval_valid")%>
+            </th>
+            <th class="resultHeader">
+              <%=cm.cmsText("related_reports_approval_docdescription")%>
+            </th>
+            <th class="resultHeader">
+              <%=cm.cmsText("related_reports_approval_filename")%>
+            </th>
+            <th class="resultHeader" style="text-align : right;">
+              <%=cm.cmsText("related_reports_approval_size")%>(kB)
+            </th>
+            <th class="resultHeader">
+              <%=cm.cmsText("related_reports_approval_author")%>
+            </th>
+            <th class="resultHeader">
+              <%=cm.cmsText("related_reports_approval_date")%>
+            </th>
+          </tr>
         </table>
         <br />
-        <label for="submitApprove" class="noshow">Approve checked files</label>
-        <input  type="submit" id="submitApprove" name="Submit" title="Approve checked files" value="Approve selected" class="inputTextField" />
-        <label for="submitDel" class="noshow">Delete checked files</label>
-        <input type="submit" id="submitDel" name="Submit" title="Delete checked files" value="Delete selected" class="inputTextField" onclick="return del_files();" />
+        <label for="submitApprove" class="noshow"><%=cm.cms("related_reports_approval_approve_label")%></label>
+        <input  type="submit" id="submitApprove" name="Submit" title="<%=cm.cms("related_reports_approval_approve_title")%>" value="<%=cm.cms("related_reports_approval_approve_value")%>" class="inputTextField" />
+        <%=cm.cmsLabel("related_reports_approval_approve_label")%>
+        <%=cm.cmsTitle("related_reports_approval_approve_title")%>
+        <%=cm.cmsInput("related_reports_approval_approve_value")%>
+        <label for="submitDel" class="noshow"><%=cm.cms("related_reports_approval_delete_label")%></label>
+        <input type="submit" id="submitDel" name="Submit" title="<%=cm.cms("related_reports_approval_delete_title")%>" value="<%=cm.cms("related_reports_approval_delete_value")%>" class="inputTextField" onclick="return del_files();" />
+        <%=cm.cmsLabel("related_reports_approval_delete_label")%>
+        <%=cm.cmsTitle("related_reports_approval_delete_title")%>
+        <%=cm.cmsInput("related_reports_approval_delete_value")%>
       </form>
 <%
     }
@@ -223,7 +253,9 @@
     {
 %>
       <br />
-      <strong>No documents are pending for approval at this time.</strong>
+      <strong>
+        <%=cm.cmsText("related_reports_approval_nonepending")%>.
+      </strong>
       <br />
 <%
     }
@@ -233,14 +265,26 @@
     // User is not authorized to see this page
 %>
       <br />
-      You are not authorized to use the functionality of this page.
+      <%=cm.cmsText("related_reports_approval_unauthorized")%>.
       <br />
 <%
   }
 %>
+
+      <%=cm.cmsMsg("related_reports_approval_page_title")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("related_reports_approval_nothing")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("related_reports_approval_delete1file")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("related_reports_approval_deletefiles")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("related_reports_approval_files")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="related-reports-approval.jsp"/>
       </jsp:include>
+    </div>
+    </div>
     </div>
   </body>
 </html>

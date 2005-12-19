@@ -4,8 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Habitats legal instruments' function - results page.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page contentType="text/html" %>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.formBeans.AbstractFormBean,
                  ro.finsiel.eunis.jrfTables.habitats.legal.EUNISLegalDomain,
@@ -21,11 +23,11 @@
                  java.util.List" %>
 <%@ page import="java.util.Vector" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
   <script language="JavaScript" src="script/habitats-result.js" type="text/javascript"></script>
-  <script language="JavaScript" src="script/utils.js" type="text/javascript"></script>
   <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.legal.LegalBean" scope="request">
     <jsp:setProperty name="formBean" property="*" />
   </jsp:useBean>
@@ -64,59 +66,61 @@
     reportFields.addElement("oper");
     reportFields.addElement("criteriaType");
 
-    String tsvLink = "javascript:openlink('reports/habitats/tsv-habitats-legal.jsp?" + formBean.toURLParam(reportFields) + "')";
-    WebContentManagement contentManagement = SessionManager.getWebContent();
+    String tsvLink = "javascript:openTSVDownload('reports/habitats/tsv-habitats-legal.jsp?" + formBean.toURLParam(reportFields) + "')";
+    WebContentManagement cm = SessionManager.getWebContent();
 %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=contentManagement.getContent("habitats_legal-result_title", false)%>
+    <%=cm.cms("habitats_legal-result_title")%>
   </title>
 </head>
 
 <body>
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="Home#index.jsp,Habitat types#habitats.jsp,Legal instruments#habitats-legal.jsp,Results" />
+  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitats_legal_location#habitats-legal.jsp,results_location" />
   <jsp:param name="helpLink" value="habitats-help.jsp" />
   <jsp:param name="downloadLink" value="<%=tsvLink%>" />
 </jsp:include>
 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td>
-<h5><%=contentManagement.getContent("habitats_legal-result_01")%></h5>
+<h1><%=cm.cmsText("habitats_legal-result_01")%></h1>
   <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
     <%LegalSearchCriteria mainSearch = (LegalSearchCriteria) formBean.getMainSearchCriteria();%>
     <%String realSearch = (null != formBean.getSearchString() && formBean.getSearchString().equalsIgnoreCase("%")) ? "" : " for which " + mainSearch.toHumanString();
       String scientName = HabitatsSearchUtility.getHabitatLevelName(formBean.getHabitatType());%>
     <tr>
       <td>
-        <%=contentManagement.getContent("habitats_legal-result_02")%>
+        <%=cm.cmsText("habitats_legal-result_02")%>
         '<strong><%=scientName%>'
         <%=realSearch%>
-        <%=contentManagement.getContent("habitats_legal-result_03")%>
+        <%=cm.cmsText("habitats_legal-result_03")%>
         '<%=formBean.getLegalText()%>'
-        <%=contentManagement.getContent("habitats_legal-result_04")%>
+        <%=cm.cmsText("habitats_legal-result_04")%>
       </strong>
       </td>
     </tr>
   </table>
-   <%
-          if (results.isEmpty())
-          {
-             boolean fromRefine = false;
-             if(formBean != null && formBean.getCriteriaSearch() != null && formBean.getCriteriaSearch().length > 0)
-               fromRefine = true;
+<%
+      if (results.isEmpty())
+      {
+         boolean fromRefine = false;
+         if(formBean != null && formBean.getCriteriaSearch() != null && formBean.getCriteriaSearch().length > 0)
+           fromRefine = true;
 
-      %>
+%>
 
-             <jsp:include page="noresults.jsp" >
-               <jsp:param name="fromRefine" value="<%=fromRefine%>" />
-             </jsp:include>
-       <%
-               return;
-           }
-       %>
-<%=contentManagement.getContent("habitats_legal-result_05")%>:<strong><%=resultsCount%></strong>
+           <jsp:include page="noresults.jsp" >
+             <jsp:param name="fromRefine" value="<%=fromRefine%>" />
+           </jsp:include>
+<%
+           return;
+       }
+%>
+<%=cm.cmsText("habitats_legal-result_05")%>:&nbsp;<strong><%=resultsCount%></strong>
 <%// Prepare parameters for pagesize.jsp
   Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
   pageSizeFormFields.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
@@ -147,7 +151,7 @@
   <tr>
     <td bgcolor="#EEEEEE">
       <strong>
-        <%=contentManagement.getContent("habitats_legal-result_06")%>
+        <%=cm.cmsText("habitats_legal-result_06")%>
       </strong>
     </td>
   </tr>
@@ -155,26 +159,36 @@
     <td bgcolor="#EEEEEE">
       <form name="resultSearch" method="get" onsubmit="return(checkHabitats(<%=noCriteria%>));" action="">
         <%=formBean.toFORMParam(filterSearch)%>
-        <label for="criteriaType" class="noshow">Criteria</label>
+        <label for="criteriaType" class="noshow"><%=cm.cms("Criteria")%></label>
         <select title="Criteria" name="criteriaType" id="criteriaType" class="inputTextField">
           <%if (showCode) {%>
-          <option value="<%=LegalSearchCriteria.CRITERIA_EUNIS_CODE%>"><%=contentManagement.getContent("habitats_legal-result_07", false)%></option><%}%>
+          <option value="<%=LegalSearchCriteria.CRITERIA_EUNIS_CODE%>"><%=cm.cms("habitats_legal-result_07")%></option><%}%>
           <%if (showScientificName) {%>
-          <option value="<%=LegalSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected"><%=contentManagement.getContent("habitats_legal-result_08", false)%></option><%}%>
+          <option value="<%=LegalSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected"><%=cm.cms("habitats_legal-result_08")%></option><%}%>
           <%if (showLegalText) {%>
-          <option value="<%=LegalSearchCriteria.CRITERIA_LEGAL_TEXT%>"><%=contentManagement.getContent("habitats_legal-result_09", false)%></option><%}%>
+          <option value="<%=LegalSearchCriteria.CRITERIA_LEGAL_TEXT%>"><%=cm.cms("habitats_legal-result_09")%></option><%}%>
         </select>
-        <label for="oper" class="noshow">Operator</label>
+        <%=cm.cmsMsg("Criteria")%>
+        <%=cm.cmsInput("habitats_legal-result_07")%>
+        <%=cm.cmsInput("habitats_legal-result_08")%>
+        <%=cm.cmsInput("habitats_legal-result_09")%>
+        <label for="oper" class="noshow"><%=cm.cms("Criteria")%></label>
         <select title="Operator" name="oper" id="oper" class="inputTextField">
-          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=contentManagement.getContent("habitats_legal-result_10", false)%></option>
-          <option value="<%=Utilities.OPERATOR_STARTS%>"><%=contentManagement.getContent("habitats_legal-result_11", false)%></option>
-          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=contentManagement.getContent("habitats_legal-result_12", false)%></option>
+          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("habitats_legal-result_10")%></option>
+          <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("habitats_legal-result_11")%></option>
+          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("habitats_legal-result_12")%></option>
         </select>
-        <label for="criteriaSearch" class="noshow">Search value</label>
-        <input title="Search value" class="inputTextField" name="criteriaSearch" id="criteriaSearch" type="text" size="30" />
-        <label for="Submit" class="noshow">Search</label>
-        <input title="Search" class="inputTextField" type="submit" name="Submit" id="Submit" value="<%=contentManagement.getContent("habitats_legal-result_13",false)%>" />
-        <%=contentManagement.writeEditTag("habitats_legal-result_13")%>
+        <%=cm.cmsLabel("Criteria")%>
+        <%=cm.cmsInput("habitats_legal-result_10")%>
+        <%=cm.cmsInput("habitats_legal-result_11")%>
+        <%=cm.cmsInput("habitats_legal-result_12")%>
+        <label for="criteriaSearch" class="noshow"><%=cm.cms("search_value")%></label>
+        <input title="<%=cm.cms("search_value")%>" class="inputTextField" name="criteriaSearch" id="criteriaSearch" type="text" size="30" />
+        <%=cm.cmsTitle("search_value")%>
+        <label for="Submit" class="noshow"><%=cm.cms("search")%></label>
+        <input title="<%=cm.cms("search")%>" class="inputTextField" type="submit" name="Submit" id="Submit" value="<%=cm.cms("habitats_legal-result_13")%>" />
+        <%=cm.cms("search")%>
+        <%=cm.cmsInput("habitats_legal-result_13")%>
       </form>
     </td>
   </tr>
@@ -185,7 +199,7 @@
   %>
   <tr>
     <td bgcolor="#EEEEEE">
-      <%=contentManagement.getContent("habitats_legal-result_14")%>
+      <%=cm.cmsText("habitats_legal-result_14")%>
     </td>
   </tr>
   <%
@@ -195,9 +209,11 @@
       if (null != criteria && null != formBean.getCriteriaSearch()) {
   %>
   <tr>
-    <td bgcolor="#EEEEEE" align="left">
-      <a title="Delete filter" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>">
-        <img src="images/mini/delete.jpg" alt="Delete filter" border="0" align="middle" /></a>&nbsp;&nbsp;
+    <td bgcolor="#EEEEEE">
+      <a title="<%=cm.cms("delete_filter")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>">
+        <img src="images/mini/delete.jpg" alt="<%=cm.cms("delete_filter")%>" border="0" align="middle" />
+      </a>
+      <%=cm.cms("delete_filter")%>&nbsp;&nbsp;
       <strong class="linkDarkBg"><%= i + ". " + criteria.toHumanString()%></strong>
     </td>
   </tr>
@@ -225,7 +241,7 @@
   <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>" />
   <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>" />
 </jsp:include>
-<table border="1" cellpadding="0" cellspacing="0" align="center" width="100%" style="border-collapse: collapse">
+<table summary="<%=cm.cms("search_results")%>" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse">
 <%// Compute the sort criteria
   Vector sortURLFields = new Vector();      /* Used for sorting */
   sortURLFields.addElement("pageSize");
@@ -241,28 +257,31 @@
   AbstractSortCriteria sortLevel = formBean.lookupSortCriteria(LegalSortCriteria.SORT_LEVEL);
 %>
 <tr>
-  <th class="resultHeader" align="left" width="20%">
-    <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(sortLevel, (null == sortLevel) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortLevel)%><%=contentManagement.getContent("habitats_legal-result_15")%>
+  <th class="resultHeader" width="20%">
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(sortLevel, (null == sortLevel) ? true : false)%>">
+      <%=Utilities.getSortImageTag(sortLevel)%><%=cm.cmsText("habitats_legal-result_15")%>
     </a>
+    <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%if (showCode) {%>
-  <th class="resultHeader" align="left" valign="top" width="10%">
-    <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(codeCrit, (null == codeCrit) ? true : false)%>">
-      <%=Utilities.getSortImageTag(codeCrit)%><%=contentManagement.getContent("habitats_legal-result_07")%>
+  <th class="resultHeader" valign="top" width="10%">
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(codeCrit, (null == codeCrit) ? true : false)%>">
+      <%=Utilities.getSortImageTag(codeCrit)%><%=cm.cmsText("habitats_legal-result_07")%>
     </a>
+    <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if (showScientificName) {%>
-  <th class="resultHeader" align="left" valign="top" width="29%">
-    <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sciNameCrit)%><%=contentManagement.getContent("habitats_legal-result_08")%>
+  <th class="resultHeader" valign="top" width="29%">
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>">
+      <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitats_legal-result_08")%>
     </a>
+    <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if (showLegalText) {%>
-  <th class="resultHeader" align="left" valign="top" width="20%">
-    <%=contentManagement.getContent("habitats_legal-result_09")%>
+  <th class="resultHeader" valign="top" width="20%">
+    <%=cm.cmsText("habitats_legal-result_09")%>
   </th>
   <%}%>
 </tr>
@@ -272,27 +291,35 @@
     int level = habitat.getHabLevel().intValue();
     String bgColor = (0 == i % 2) ? "#EEEEEE" : "#FFFFFF";
 %>
-<tr align="center" valign="middle" bgcolor="<%=bgColor%>">
-  <td align="left" width="20%" style="white-space:nowrap">
-    <%for (int iter = 0; iter < level; iter++) {
-    %>
+<tr valign="middle" bgcolor="<%=bgColor%>">
+  <td class="resultCell" style="background-color : <%=bgColor%>; white-space : nowrap;">
+<%
+  for (int iter = 0; iter < level; iter++)
+  {
+%>
     <img alt="" src="images/mini/lev_blank.gif" />
-    <%
-      }
-    %>
+<%
+  }
+%>
     <%=level%>
   </td>
   <%if (showCode) {%>
-  <td width="10%" align="left"><%=habitat.getEunisHabitatCode()%></td><%}%>
-  <%if (showScientificName) {
-  %>
-  <td width="29%" align="left">
-    <a title="Open habitat type factsheet" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
+  <td class="resultCell" style="background-color : <%=bgColor%>">
+    <%=habitat.getEunisHabitatCode()%>
+  </td>
+<%
+  }
+  if (showScientificName)
+  {
+%>
+  <td class="resultCell" style="background-color : <%=bgColor%>">
+    <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
+    <%=cm.cmsTitle("open_habitat_factsheet")%>
   </td>
   <%}%>
   <%if (showLegalText) {%>
-  <td valign="top">
-    <table summary="Legal instruments" border="0" cellpadding="0" cellspacing="0" width="100%">
+  <td class="resultCell" style="background-color : <%=bgColor%>;">
+    <table summary="<%=cm.cms("legal_instruments")%>" border="0" cellpadding="0" cellspacing="0" width="100%">
       <%
         List legalTexts = HabitatsSearchUtility.findHabitatLegalInstrument(habitat.getIdHabitat());
         for (int j = 0; j < legalTexts.size(); j++) {
@@ -300,7 +327,7 @@
           EUNISLegalPersist legalText = (EUNISLegalPersist) legalTexts.get(j);
       %>
       <tr bgcolor="<%=legalBgColor%>">
-        <td width="20%" align="left">
+        <td width="20%">
           <%=legalText.getLegalName()%>
         </td>
       </tr>
@@ -313,28 +340,31 @@
 </tr>
 <%}%>
 <tr>
-  <th class="resultHeader" align="left" width="20%">
-    <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(sortLevel, (null == sortLevel) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortLevel)%><%=contentManagement.getContent("habitats_legal-result_15")%>
+  <th class="resultHeader" width="20%">
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(sortLevel, (null == sortLevel) ? true : false)%>">
+      <%=Utilities.getSortImageTag(sortLevel)%><%=cm.cmsText("habitats_legal-result_15")%>
     </a>
+    <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%if (showCode) {%>
-  <th class="resultHeader" align="left" valign="top" width="10%">
-    <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(codeCrit, (null == codeCrit) ? true : false)%>">
-      <%=Utilities.getSortImageTag(codeCrit)%><%=contentManagement.getContent("habitats_legal-result_07")%>
+  <th class="resultHeader" valign="top" width="10%">
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(codeCrit, (null == codeCrit) ? true : false)%>">
+      <%=Utilities.getSortImageTag(codeCrit)%><%=cm.cmsText("habitats_legal-result_07")%>
     </a>
+    <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if (showScientificName) {%>
-  <th class="resultHeader" align="left" valign="top" width="29%">
-    <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sciNameCrit)%><%=contentManagement.getContent("habitats_legal-result_08")%>
+  <th class="resultHeader" valign="top" width="29%">
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>">
+      <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitats_legal-result_08")%>
     </a>
+    <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if (showLegalText) {%>
-  <th class="resultHeader" align="left" valign="top" width="20%">
-    <%=contentManagement.getContent("habitats_legal-result_09")%>
+  <th class="resultHeader" valign="top" width="20%">
+    <%=cm.cmsText("habitats_legal-result_09")%>
   </th>
   <%}%>
 </tr>
@@ -354,9 +384,15 @@
   </td>
 </tr>
 </table>
+<%=cm.cmsMsg("habitats_legal-result_title")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("legal_instruments")%>
+<%=cm.br()%>
 <jsp:include page="footer.jsp">
   <jsp:param name="page_name" value="habitats-legal-result.jsp" />
 </jsp:include>
     </div>
-  </body>
+    </div>
+    </div>
+</body>
 </html>

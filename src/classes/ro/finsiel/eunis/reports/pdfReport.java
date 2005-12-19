@@ -6,11 +6,6 @@
 
 package ro.finsiel.eunis.reports;
 
-/**
- *
- * @author  Adrian Dascalu
- */
-
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
@@ -23,6 +18,9 @@ import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.util.Vector;
 
+/**
+ * pdf report, low level report writer.
+ */
 public class pdfReport implements Serializable {
   private Paragraph HEADER;
   private Paragraph FOOTER;
@@ -32,12 +30,15 @@ public class pdfReport implements Serializable {
 
 
   /**
-   * Creates a new instance of pdfReport
+   * Creates a new instance of pdfReport.
    */
   public pdfReport() {
   }
 
-
+  /**
+   * Initialization.
+   * @param filename Filename to write report to.
+   */
   public void init( String filename ) {
 
     File pdfFile = new File( filename );
@@ -61,6 +62,12 @@ public class pdfReport implements Serializable {
     }
   }
 
+  /**
+   * Build an pdf table.
+   * @param columns no of columns
+   * @param headers header names
+   * @return table object
+   */
   public Table buildTable( int columns, Vector headers ) {
     // headers[0] - table title
     // headers[1]...headers[columns+1] - Column titles
@@ -99,6 +106,11 @@ public class pdfReport implements Serializable {
     return table;
   }
 
+  /**
+   * Fix table spanning multiple pages.
+   * @param value Table
+   * @return true if must rebuild last row
+   */
   public boolean fixTable( Table value ) {
     // this function fixes the white space that appears when a cell is forced
     // to fit the page
@@ -123,6 +135,10 @@ public class pdfReport implements Serializable {
     }
   }
 
+  /**
+   * Write text.
+   * @param value Text
+   */
   public void writeln( String value ) {
     try
     {
@@ -134,6 +150,11 @@ public class pdfReport implements Serializable {
     }
   }
 
+  /**
+   * Write text and add new line.
+   * @param value Text
+   * @param font Font
+   */
   public void writeln( String value, Font font ) {
     try
     {
@@ -145,6 +166,10 @@ public class pdfReport implements Serializable {
     }
   }
 
+  /**
+   * Add image to report.
+   * @param value image
+   */
   public void addImage( Image value ) {
     try
     {
@@ -156,6 +181,10 @@ public class pdfReport implements Serializable {
     }
   }
 
+  /**
+   * Add table to report.
+   * @param value table
+   */
   public void addTable( Table value ) {
     try
     {
@@ -167,34 +196,49 @@ public class pdfReport implements Serializable {
     }
   }
 
+  /**
+   * Add header.
+   * @param value header
+   */
   public void setHeader( Paragraph value ) {
     HEADER = value;
   }
 
+  /**
+   * Add footer.
+   * @param value footer
+   */
   public void setFooter( Paragraph value ) {
     FOOTER = value;
   }
 
+  /**
+   * Set output path.
+   * @param value absolute path
+   */
   public void setPath( String value ) {
     PATH = value;
   }
 
+  /**
+   * Get path.
+   * @return absolute path
+   */
   public String getPath() {
     return PATH;
   }
 
+  /**
+   * Close report document.
+   */
   public void close() {
     document.close();
   }
 
-  public void valueBound( javax.servlet.http.HttpSessionBindingEvent httpSessionBindingEvent ) {
-  }
-
-  public void valueUnbound( javax.servlet.http.HttpSessionBindingEvent httpSessionBindingEvent ) {
-    File pdfFile = new File( PATH + "EunisReport_" + httpSessionBindingEvent.getSession().getId() + ".pdf" );
-    pdfFile.delete();
-  }
-
+  /**
+   * Access internal document object.
+   * @return Document layer
+   */
   public Document getDocument() {
     return document;
   }

@@ -4,7 +4,14 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Page result navigator
 --%>
-<%@ page import="ro.finsiel.eunis.search.Utilities"%><%@ page import="ro.finsiel.eunis.session.ThemeWrapper"%><%@ page import="ro.finsiel.eunis.session.ThemeManager"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
+<%@ page import="ro.finsiel.eunis.search.Utilities,
+        ro.finsiel.eunis.session.ThemeWrapper,
+        ro.finsiel.eunis.session.ThemeManager,
+        ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   // INPUT VARIABLES. This must exist in your including JSP !!! If you DO NOT, compilation error would occurr. I think
@@ -23,6 +30,7 @@
   //                              new Vector("country", "region", "pageSize") in your JSP. This is the only way I can
   //                              then safely re-query, and the request parameters would preserve from page to page when
   //                              submiting the form to change page (one declared below).
+  WebContentManagement cm = SessionManager.getWebContent();
   int pagesCountNavigator = Utilities.checkedStringToInt(request.getParameter("pagesCount"), 0);
   int currentPageNavigator = Utilities.checkedStringToInt(request.getParameter("currentPage"), 0);
   String pageNameNavigator = request.getParameter("pageName");
@@ -74,20 +82,24 @@
   <form name="changePage<%=guidNavigator%>" action="<%=pageNameNavigator%>" method="get" onsubmit="decrement<%=guidNavigator%>();">
     <table width="100%" border="0" cellpadding="0" cellspacing="3" bgcolor="#FFFFFF" summary="layout">
       <tr>
-        <td width="20%" align="left" valign="middle">&nbsp;
+        <td width="20%" valign="middle">&nbsp;
 <%
   // Go to the first page
   if (currentPageNavigator > 1)
   {
 %>
-          <a title="First page" href="<%=pageNameNavigator + "?" + toURLParam%>&amp;currentPage=0"><img src="images/navigator/<%=jpgFirst%>" width="28" height="28" align="middle" border="0" title="First page" alt="First page" /></a>
+          <a title="<%=cm.cms("navigator_first_title")%>" href="<%=pageNameNavigator + "?" + toURLParam%>&amp;currentPage=0"><img src="images/navigator/<%=jpgFirst%>" width="28" height="28" align="middle" border="0" title="<%=cm.cms("navigator_first_alt")%>" alt="<%=cm.cms("navigator_first_alt")%>" /></a>
+          <%=cm.cmsTitle("navigator_first_title")%>
+          <%=cm.cmsAlt("navigator_first_alt")%>
 <%
   }
   // Show previous page
   if (currentPageNavigator > 0)
   {
 %>
-          <a title="Previous page" href="<%=pageNameNavigator + "?" + toURLParam%>&amp;currentPage=<%=currentPageNavigator - 1%>"><img src="images/navigator/<%=jpgPrev%>" width="28" height="28" align="middle" border="0" title="Previous page" alt="Previous page" /></a>
+          <a title="<%=cm.cms("navigator_previous_title")%>" href="<%=pageNameNavigator + "?" + toURLParam%>&amp;currentPage=<%=currentPageNavigator - 1%>"><img src="images/navigator/<%=jpgPrev%>" width="28" height="28" align="middle" border="0" title="<%=cm.cms("navigator_previous_alt")%>" alt="<%=cm.cms("navigator_previous_alt")%>" /></a>
+          <%=cm.cmsTitle("navigator_previous_title")%>
+          <%=cm.cmsAlt("navigator_previous_alt")%>
 <%
   }
 %>
@@ -97,14 +109,16 @@
 %>
         <td width="35%" align="center" valign="middle">
           <strong>
-            Current page: <%=(currentPageNavigator + 1 > pagesCountNavigator) ? currentPageNavigator : currentPageNavigator + 1%> / <%=pagesCountNavigator%>
+            <%=cm.cmsText("navigator_current_page")%>: <%=(currentPageNavigator + 1 > pagesCountNavigator) ? currentPageNavigator : currentPageNavigator + 1%> / <%=pagesCountNavigator%>
           </strong>
         </td>
         <td width="35%" align="center" valign="middle">
-          <label for="currentPage<%=guidNavigator%>">Go to page:</label>
-          <input title="Current page number" class="inputTextFieldCenter" id="currentPage<%=guidNavigator%>" name="currentPage" type="text" size="3" value="<%=(currentPageNavigator + 1 > pagesCountNavigator) ? currentPageNavigator : currentPageNavigator + 1%>" />
-          <label for="submit<%=guidNavigator%>" class="noshow">Change page</label>
-          <input title="Change page" class="inputTextField" type="submit" id="submit<%=guidNavigator%>" name="Submit" value="Change page" /><%=toFORMParam%>
+          <label for="currentPage<%=guidNavigator%>"><%=cm.cmsText("navigator_goto_page_label")%>:</label>
+          <input title="<%=cm.cms("navigator_goto_page_title")%>" class="inputTextFieldCenter" id="currentPage<%=guidNavigator%>" name="currentPage" type="text" size="3" value="<%=(currentPageNavigator + 1 > pagesCountNavigator) ? currentPageNavigator : currentPageNavigator + 1%>" />
+          <label for="submit<%=guidNavigator%>" class="noshow"><%=cm.cms("navigator_change_page_label")%></label>
+          <input title="<%=cm.cms("navigator_change_page_title")%>" class="inputTextField" type="submit" id="submit<%=guidNavigator%>" name="Submit" value="<%=cm.cms("navigator_change_page_value")%>" /><%=toFORMParam%>
+          <%=cm.cmsLabel("navigator_change_page_label")%>
+          <%=cm.cmsInput("navigator_change_page_value")%>
         </td>
         <td width="16%" align="right" valign="middle">
 <%
@@ -112,14 +126,18 @@
   if (currentPageNavigator < pagesCountNavigator - 1)
   {
 %>
-          <a title="Next page" href="<%=pageNameNavigator + "?" + toURLParam%>&amp;currentPage=<%=currentPageNavigator + 1%>"><img src="images/navigator/<%=jpgNext%>" width="28" height="28" align="middle" border="0" title="Next page" alt="Next page" /></a>
+          <a title="<%=cm.cms("navigator_next_page_title")%>" href="<%=pageNameNavigator + "?" + toURLParam%>&amp;currentPage=<%=currentPageNavigator + 1%>"><img src="images/navigator/<%=jpgNext%>" width="28" height="28" align="middle" border="0" title="<%=cm.cms("navigator_next_page_title")%>" alt="<%=cm.cms("navigator_next_page_alt")%>" /></a>
+          <%=cm.cmsTitle("navigator_next_page_title")%>
+          <%=cm.cmsAlt("navigator_next_page_alt")%>
 <%
   }
   // Go to the last page
   if (currentPageNavigator < pagesCountNavigator - 2)
   {
 %>
-          <a title="Last page" href="<%=pageNameNavigator + "?" + toURLParam%>&amp;currentPage=<%=pagesCountNavigator - 1%>"><img src="images/navigator/<%=jpgLast%>" width="28" height="28" align="middle" border="0" alt="Last page" title="Last page" /></a>
+          <a title="<%=cm.cms("navigator_last_page_title")%>" href="<%=pageNameNavigator + "?" + toURLParam%>&amp;currentPage=<%=pagesCountNavigator - 1%>"><img src="images/navigator/<%=jpgLast%>" width="28" height="28" align="middle" border="0" title="<%=cm.cms("navigator_last_page_title")%>" alt="<%=cm.cms("navigator_last_page_alt")%>" /></a>
+          <%=cm.cmsTitle("navigator_last_page_title")%>
+          <%=cm.cmsAlt("navigator_last_page_alt")%>
 <%
   }
 %>

@@ -4,32 +4,42 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Created by IntelliJ IDEA.
- * User: aignat
- * Date: 07.04.2005
- * Time: 12:08:53
- * To change this template use File | Settings | File Templates.
+ * Wrapper for table columns resulted from execution of a SQL statement
  */
 public class TableColumns {
 
  List columnsNames = new ArrayList();
  List columnsValues = new ArrayList();
 
+  /**
+   * Getter for columnNames property
+   * @return columnNames
+   */
   public List getColumnsNames() {
     return columnsNames;
   }
 
+  /**
+   * Setter for columnNames property
+   * @param columnsNames New value
+   */
   public void setColumnsNames(List columnsNames) {
     this.columnsNames = columnsNames;
   }
 
+  /**
+   * Getter for columnsValues property
+   * @return columnsValues
+   */
   public List getColumnsValues() {
     return columnsValues;
   }
 
+  /**
+   * Setter for columnsValues property
+   * @param columnsValues New value
+   */
   public void setColumnsValues(List columnsValues) {
     this.columnsValues = columnsValues;
   }
-
-
 }

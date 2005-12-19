@@ -4,6 +4,10 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Species factsheet - populations.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.factsheet.species.FactSheetPopulationWrapper,
                  ro.finsiel.eunis.factsheet.species.SpeciesFactsheet,
@@ -22,31 +26,37 @@
   if (list.size() > 0)
   {
 %>
-    <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;">Population</div>
-    <table summary="List of populations" width="100%" border="1" cellspacing="1" cellpadding="0" id="populations" style="border-collapse:collapse">
-      <tr style="background-color:#DDDDDD">
-        <th class="resultHeaderForFactsheet">
-          <a title="Sort by Country" href="javascript:sortTable(6,0, 'populations', false);"><%=cm.getContent("species_factsheet-pop_02")%></a>
+    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_factsheet-pop_11")%></div>
+    <table summary="<%=cm.cms("species_factsheet-pop_12_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="populations" class="sortable">
+      <tr>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-pop_02")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th class="resultHeaderForFactsheet">
-          <a title="Sort by Biogeographic region" href="javascript:sortTable(6,1, 'populations', false);"><%=cm.getContent("species_factsheet-pop_03")%></a>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-pop_03")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th class="resultHeaderForFactsheet">
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
           <span style="color:#006CAD">  
-          <%=cm.getContent("species_factsheet-pop_04")%>
+            <%=cm.cmsText("species_factsheet-pop_04")%>
           </span>
         </th>
-        <th class="resultHeaderForFactsheet">
-          <a title="Sort by Date" href="javascript:sortTable(6,2, 'populations', false);"><%=cm.getContent("species_factsheet-pop_05")%></a>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-pop_05")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th class="resultHeaderForFactsheet">
-          <a title="Sort by Status" href="javascript:sortTable(6,3, 'populations', false);"><%=cm.getContent("species_factsheet-pop_06")%></a>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-pop_06")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th class="resultHeaderForFactsheet">
-          <a title="Sort by Quality" href="javascript:sortTable(6,4, 'populations', false);"><%=cm.getContent("species_factsheet-pop_07")%></a>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-pop_07")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th class="resultHeaderForFactsheet">
-          <a title="Sort by Reference" href="javascript:sortTable(6,5, 'populations', false);"><%=cm.getContent("species_factsheet-pop_08")%></a>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-pop_08")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
 <%
@@ -62,7 +72,20 @@
 %>
       <tr style="background-color:<%=bgColor%>">
         <td>
-            <%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>&nbsp;
+        <%
+            if(Utilities.isCountry(aRow.getCountry()))
+            {
+        %>
+          <a href="javascript:goToSpeciesStatistics('<%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>')" title="<%=cm.cms("species_factsheet-geo_12_Title")%> <%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>"><%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%></a>
+          <%=cm.cmsTitle("species_factsheet-geo_12_Title")%>
+        <%
+            } else {
+        %>
+             <%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>
+        <%
+             }
+        %>
+            &nbsp;
           </td>
           <td>
             <%=Utilities.treatURLSpecialCharacters(aRow.getBioregion())%>&nbsp;
@@ -113,5 +136,9 @@
 <%
   }
 %>
+
+<%=cm.br()%>
+<%=cm.cmsMsg("species_factsheet-pop_12_Sum")%>
+
 <br />
 <br />

@@ -4,6 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : "Sites year" function - results page.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.List,
                  java.util.Iterator,
                  ro.finsiel.eunis.search.sites.SitesSearchUtility,
@@ -18,15 +22,13 @@
                  ro.finsiel.eunis.search.*,
                  ro.finsiel.eunis.search.sites.SitesSearchCriteria"%>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="ro.finsiel.eunis.utilities.Accesibility"%>
-<%@ page contentType="text/html"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.year.YearBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
   // Web content manager used in this page.
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 
   // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
@@ -80,7 +82,7 @@
   // Set number criteria for the search result
   int noCriteria = (null==formBean.getCriteriaSearch()?0:formBean.getCriteriaSearch().length);
 
-  String downloadLink = "javascript:openlink('reports/sites/tsv-sites-year.jsp?" + formBean.toURLParam(reportFields) + "')";
+  String downloadLink = "javascript:openTSVDownload('reports/sites/tsv-sites-year.jsp?" + formBean.toURLParam(reportFields) + "')";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -103,19 +105,19 @@
           var SIZE = <%=SitesSearchCriteria.CRITERIA_SIZE%>;
           removeElementsFromList(operList);
           var optIS = document.createElement("OPTION");
-          optIS.text = "<%=contentManagement.getContent("sites_year-result_23", false )%>";
+          optIS.text = "<%=cm.cms("sites_year-result_23")%>";
           optIS.value = "<%=Utilities.OPERATOR_IS%>";
           var optSTART = document.createElement("OPTION");
-          optSTART.text = "<%=contentManagement.getContent("sites_year-result_02", false )%>";
+          optSTART.text = "<%=cm.cms("sites_year-result_02")%>";
           optSTART.value = "<%=Utilities.OPERATOR_STARTS%>";
           var optCONTAIN = document.createElement("OPTION");
-          optCONTAIN.text = "<%=contentManagement.getContent("sites_year-result_03", false )%>";
+          optCONTAIN.text = "<%=cm.cms("sites_year-result_03")%>";
           optCONTAIN.value = "<%=Utilities.OPERATOR_CONTAINS%>";
           var optGREAT = document.createElement("OPTION");
-          optGREAT.text = "<%=contentManagement.getContent("sites_year-result_04", false )%>";
+          optGREAT.text = "<%=cm.cms("sites_year-result_04")%>";
           optGREAT.value = "<%=Utilities.OPERATOR_GREATER_OR_EQUAL%>";
           var optSMALL = document.createElement("OPTION");
-          optSMALL.text = "<%=contentManagement.getContent("sites_year-result_05", false )%>";
+          optSMALL.text = "<%=cm.cms("sites_year-result_05")%>";
           optSMALL.value = "<%=Utilities.OPERATOR_SMALLER_OR_EQUAL%>";
           // Source data set
           if (criteriaType == SOURCE_DB) {
@@ -146,22 +148,24 @@
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=contentManagement.getContent("sites_year-result_title", false )%>
+      <%=cm.cms("sites_year-result_title")%>
     </title>
   </head>
   <body>
+    <div id="outline">
+    <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="Home#index.jsp,Sites#sites.jsp,Designation year#sites-year.jsp,Results"/>
+        <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_designationyear_location#sites-year.jsp,results_location"/>
         <jsp:param name="helpLink" value="sites-help.jsp"/>
         <jsp:param name="mapLink" value="show"/>
         <jsp:param name="downloadLink" value="<%=downloadLink%>"/>
       </jsp:include>
 <%--      <jsp:param name="printLink" value="<%=printLink%>"/>--%>
-      <h5>
-        <%=contentManagement.getContent("sites_year-result_01")%>
-      </h5>
-      <%=contentManagement.getContent("sites_year-result_06")%>
+      <h1>
+        <%=cm.cmsText("sites_year-result_01")%>
+      </h1>
+      <%=cm.cmsText("sites_year-result_06")%>
       <strong>
         <%=formBean.getMainSearchCriteria().toHumanString()%>
       </strong>
@@ -172,19 +176,17 @@
        if(formBean != null && formBean.getCriteriaSearch() != null && formBean.getCriteriaSearch().length > 0)
          fromRefine = true;
 
-      %>
+%>
        <br />
        <jsp:include page="noresults.jsp" >
          <jsp:param name="fromRefine" value="<%=fromRefine%>" />
        </jsp:include>
-       <%
+<%
          return;
      }
-       %>
-
+%>
       <br />
-      <br />
-      <%=contentManagement.getContent("sites_year-result_07")%>
+      <%=cm.cmsText("sites_year-result_07")%>
       <strong>
         <%=resultsCount%>
       </strong>
@@ -194,6 +196,14 @@
   mapFields.addElement("criteriaSearch");
   mapFields.addElement("oper");
   mapFields.addElement("criteriaType");
+
+  for (int i = 0; i < results.size(); i++)
+  {
+    YearPersist site = (YearPersist)results.get( i );
+    String longitude = SitesSearchUtility.formatCoordinates(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec());
+    String latitude = SitesSearchUtility.formatCoordinates(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec());
+    if ( longitude.lastIndexOf( "n/a" ) < 0 && latitude.lastIndexOf( "n/a" ) < 0 )
+    {
 %>
       <jsp:include page="sites-map.jsp">
         <jsp:param name="resultsCount" value="<%=resultsCount%>"/>
@@ -201,6 +211,10 @@
         <jsp:param name="toURLParam" value="<%=formBean.toURLParam(mapFields)%>"/>
       </jsp:include>
 <%
+      break;
+    };
+  }
+
   // Prepare parameters for pagesize.jsp
   Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
   pageSizeFormFields.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
@@ -224,18 +238,18 @@
       <br />
       <div class="grey_rectangle">
         <strong>
-          <%=contentManagement.getContent("sites_year-result_08")%>
+          <%=cm.cmsText("sites_year-result_08")%>
         </strong>
         <form title="refine search results" name="criteriaSearch" onsubmit="return(check(<%=noCriteria%>));" method="get" action="">
         <%=formBean.toFORMParam(filterSearch)%>
-          <label for="criteriaType0" class="noshow">Criteria</label>
-          <select id="criteriaType0" name="criteriaType" class="inputTextField" onchange="changeCriteria()" title="Criteria">
+          <label for="criteriaType0" class="noshow"><%=cm.cms("criteria_type_label")%></label>
+          <select id="criteriaType0" name="criteriaType" class="inputTextField" onchange="changeCriteria()" title="<%=cm.cms("criteria_type_title")%>">
 <%
   if (showSourceDB)
   {
 %>
             <option value="<%=YearSearchCriteria.CRITERIA_SOURCE_DB%>">
-              <%=contentManagement.getContent("sites_year-result_09", false)%>
+              <%=cm.cms("sites_year-result_09")%>
             </option>
 <%
   }
@@ -243,7 +257,7 @@
   {
 %>
             <option value="<%=YearSearchCriteria.CRITERIA_COUNTRY%>">
-              <%=contentManagement.getContent("sites_year-result_10", false)%>
+              <%=cm.cms("sites_year-result_10")%>
             </option>
 <%
   }
@@ -251,7 +265,7 @@
   {
 %>
             <option value="<%=YearSearchCriteria.CRITERIA_ENGLISH_NAME%>">
-              <%=contentManagement.getContent("sites_year-result_11", false)%>
+              <%=cm.cms("sites_year-result_11")%>
             </option>
 <%
   }
@@ -259,31 +273,48 @@
   {
 %>
             <option value="<%=YearSearchCriteria.CRITERIA_SIZE%>">
-              <%=contentManagement.getContent("sites_year-result_12", false)%>
+              <%=cm.cms("sites_year-result_12")%>
             </option>
 <%
   }
 %>
           </select>
-          <label for="oper0" class="noshow">Operator</label>
-          <select id="oper0" name="oper" class="inputTextField" title="Operator">
+          <%=cm.cmsLabel("criteria_type_label")%>
+          <%=cm.cmsTitle("criteria_type_title")%>
+          <%=cm.cmsInput("sites_year-result_09")%>
+          <%=cm.cmsInput("sites_year-result_10")%>
+          <%=cm.cmsInput("sites_year-result_11")%>
+          <%=cm.cmsInput("sites_year-result_12")%>
+          <label for="oper0" class="noshow"><%=cm.cms("operator_label")%></label>
+          <select id="oper0" name="oper" class="inputTextField" title="<%=cm.cms("operator_title")%>">
             <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-              <%=contentManagement.getContent("sites_year-result_23", false)%>
+              <%=cm.cms("sites_year-result_23")%>
             </option>
           </select>
-          <label for="criteriaSearch0" class="noshow">Filter value</label>
-          <input id="criteriaSearch0" name="criteriaSearch" type="text" size="30" class="inputTextField" title="Filter value" />
-          <a title="<%=Accesibility.getText( "generic.refined.question" )%>" href="javascript:openRefineHint()" name="binocular" id="binocular"><img src="images/helper/helper.gif" alt="<%=Accesibility.getText( "generic.refined.question" )%>" title="<%=Accesibility.getText( "generic.refined.question" )%>" border="0" width="11" height="18" align="middle" /></a>
-          <label for="submit" class="noshow">Search</label>
-          <input id="submit" name="Submit"  title="Search" type="submit" value="<%=contentManagement.getContent("sites_year-result_13", false )%>" class="inputTextField" />
-          <%=contentManagement.writeEditTag( "sites_year-result_13" )%>
+          <%=cm.cmsLabel("operator_label")%>
+          <%=cm.cmsTitle("operator_title")%>
+          <%=cm.cmsInput("sites_year-result_23")%>
+          <label for="criteriaSearch0" class="noshow"><%=cm.cms("filter_label")%></label>
+          <input id="criteriaSearch0" name="criteriaSearch" type="text" size="30" class="inputTextField" title="<%=cm.cms("filter_title")%>" />
+          <%=cm.cmsLabel("filter_label")%>
+          <%=cm.cmsTitle("filter_title")%>
+
+          <a title="<%=cm.cms("refine_lov_title")%>" href="javascript:openRefineHint()" name="binocular" id="binocular"><img src="images/helper/helper.gif" alt="<%=cm.cms("refine_lov_alt")%>" border="0" width="11" height="18" align="middle" /></a>
+          <%=cm.cmsTitle("refine_lov_title")%>
+          <%=cm.cmsAlt("refine_lov_alt")%>
+
+          <label for="submit" class="noshow"><%=cm.cms("refine_btn_label")%></label>
+          <input id="submit" name="Submit" type="submit" value="<%=cm.cms("refine_btn_value")%>" class="inputTextField" title="<%=cm.cms("refine_btn_title")%>" />
+          <%=cm.cmsLabel("refine_btn_label")%>
+          <%=cm.cmsTitle("refine_btn_title")%>
+          <%=cm.cmsInput("refine_btn_value")%>
         </form>
 <%
   ro.finsiel.eunis.search.AbstractSearchCriteria[] criterias = formBean.toSearchCriteria();
   if (criterias.length > 1)
   {
 %>
-        <%=contentManagement.getContent("sites_year-result_14")%>
+        <%=cm.cmsText("sites_year-result_14")%>
         <br />
 <%
   }
@@ -293,8 +324,10 @@
     if (null != criteria && null != formBean.getCriteriaSearch())
     {
 %>
-        <a title="Remove filter" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img src="images/mini/delete.jpg" alt="<%=Accesibility.getText( "generic.refined.delete" )%>" title="<%=Accesibility.getText( "generic.refined.delete" )%>" border="0" align="middle" /></a>
-        <strong class="linkDarkBg"><%= i + ". " + criteria.toHumanString()%></strong>
+        <a title="<%=cm.cms("removefilter_title")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img src="images/mini/delete.jpg" alt="<%=cm.cms("removefilter_alt")%>"  border="0" align="middle" /></a>
+        <%=cm.cmsTitle("removefilter_title")%>
+        <%=cm.cmsAlt("removefilter_alt")%>
+        <strong><%= i + ". " + criteria.toHumanString()%></strong>
         <br />
 <%
     }
@@ -331,14 +364,15 @@
   AbstractSortCriteria sortLong = formBean.lookupSortCriteria(YearSortCriteria.SORT_LONG);
   AbstractSortCriteria sortYear = formBean.lookupSortCriteria(YearSortCriteria.SORT_YEAR);
 %>
-      <table summary="Search results" border="1" cellpadding="0" cellspacing="0" align="center" width="100%" style="border-collapse: collapse">
+      <table summary="<%=cm.cms("search_results")%>" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse">
         <tr>
 <%
   if (showSourceDB)
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=contentManagement.getContent("sites_year-result_15")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("sites_year-result_15")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -346,20 +380,22 @@
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, null == sortCountry)%>"><%=Utilities.getSortImageTag(sortCountry)%><%=contentManagement.getContent("sites_year-result_16")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, null == sortCountry)%>"><%=Utilities.getSortImageTag(sortCountry)%><%=cm.cmsText("sites_year-result_16")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=contentManagement.getContent("sites_year-result_17")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("sites_year-result_17")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   if(showDesignType)
   {
 %>
           <th class="resultHeader">
-            <%=contentManagement.getContent("sites_year-result_18")%>
+            <%=cm.cmsText("sites_year-result_18")%>
           </th>
 <%
   }
@@ -367,10 +403,12 @@
   {
 %>
           <th class="resultHeader" style="text-align : center; white-space:nowrap;">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_LONG%>&amp;ascendency=<%=formBean.changeAscendency(sortLong, null == sortLong)%>"><%=Utilities.getSortImageTag(sortLong)%><%=contentManagement.getContent("sites_year-result_19")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_LONG%>&amp;ascendency=<%=formBean.changeAscendency(sortLong, null == sortLong)%>"><%=Utilities.getSortImageTag(sortLong)%><%=cm.cmsText("sites_year-result_19")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th class="resultHeader" style="text-align : center; white-space:nowrap;">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_LAT%>&amp;ascendency=<%=formBean.changeAscendency(sortLat, null == sortLat)%>"><%=Utilities.getSortImageTag(sortLat)%><%=contentManagement.getContent("sites_year-result_20")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_LAT%>&amp;ascendency=<%=formBean.changeAscendency(sortLat, null == sortLat)%>"><%=Utilities.getSortImageTag(sortLat)%><%=cm.cmsText("sites_year-result_20")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -378,21 +416,23 @@
   {
 %>
           <th class="resultHeader" style="text-align : right;">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, null == sortSize)%>"><%=Utilities.getSortImageTag(sortSize)%><%=contentManagement.getContent("sites_year-result_21")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, null == sortSize)%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("sites_year-result_21")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
 %>
           <th class="resultHeader" style="text-align : right;">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, null == sortYear)%>"><%=Utilities.getSortImageTag(sortYear)%><%=contentManagement.getContent("sites_year-result_22")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, null == sortYear)%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsText("sites_year-result_22")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
 <%
   Iterator it = results.iterator();
-  int i = 0; String bgCol;
+  int i = 0; String bgColor;
   while (it.hasNext())
   {
-    bgCol = (0 == (i++) % 2) ? "#EEEEEE" : "#FFFFFF";
+    bgColor = (0 == (i++) % 2) ? "#EEEEEE" : "#FFFFFF";
     YearPersist site = (YearPersist)it.next();
 %>
         <tr>
@@ -400,7 +440,7 @@
   if (showSourceDB)
   {
 %>
-          <td bgcolor="<%=bgCol%>">
+          <td class="resultCell" style="background-color : <%=bgColor%>;">
             <strong>
               <%=SitesSearchUtility.translateSourceDB(site.getSourceDB())%>
             </strong>
@@ -410,25 +450,26 @@
   if (showCountry)
   {
 %>
-          <td bgcolor="<%=bgCol%>">
+          <td class="resultCell" style="background-color : <%=bgColor%>;">
             <%=site.getAreaNameEn()%>
           </td>
 <%
   }
 %>
-          <td bgcolor="<%=bgCol%>">
-            <a title="Site factsheet" href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=site.getName()%></a>
+          <td class="resultCell" style="background-color : <%=bgColor%>;">
+            <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=site.getName()%></a>
           </td>
 <%
   if (showDesignType)
   {
 %>
-            <td bgcolor="<%=bgCol%>">
+            <td class="resultCell" style="background-color : <%=bgColor%>;">
               <jsp:include page="sites-designations-detail.jsp">
                 <jsp:param name="idDesignation" value="<%=site.getIdDesignation()%>"/>
                 <jsp:param name="idGeoscope" value="<%=site.getIdGeoscope()%>"/>
                 <jsp:param name="sourceDB" value="<%=site.getSourceDB()%>"/>
-                <jsp:param name="bgcolor" value="<%=bgCol%>"/>
+                <jsp:param name="bgcolor" value="<%=bgColor%>"/>
+                <jsp:param name="idSite" value="<%=site.getIdSite()%>"/>
               </jsp:include>
             </td>
 <%
@@ -436,10 +477,10 @@
   if (showCoord)
   {
 %>
-          <td align="center" bgcolor="<%=bgCol%>" nowrap="nowrap">
+          <td class="resultCell" style="background-color : <%=bgColor%>; white-space : nowrap; text-align : center;">
             <%=SitesSearchUtility.formatCoordinates(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec())%>
           </td>
-          <td align="center" bgcolor="<%=bgCol%>" nowrap="nowrap">
+          <td class="resultCell" style="background-color : <%=bgColor%>; white-space : nowrap; text-align : center;">
             <%=SitesSearchUtility.formatCoordinates(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec())%>
           </td>
 <%
@@ -447,13 +488,13 @@
   if (showSize)
   {
 %>
-          <td align="right" bgcolor="<%=bgCol%>">
+          <td class="resultCell" style="background-color : <%=bgColor%>; text-align : right;">
             <%=Utilities.formatArea(site.getArea(), 9, 2, "&nbsp;")%>
           </td>
 <%
   }
 %>
-          <td align="right" bgcolor="<%=bgCol%>">
+          <td class="resultCell" style="background-color : <%=bgColor%>; text-align : right;">
             <%=SitesSearchUtility.parseDesignationYear(site.getDesignationDate(), site.getSourceDB())%>
           </td>
         </tr>
@@ -467,7 +508,8 @@
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=contentManagement.getContent("sites_year-result_15")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("sites_year-result_15")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -475,20 +517,22 @@
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, null == sortCountry)%>"><%=Utilities.getSortImageTag(sortCountry)%><%=contentManagement.getContent("sites_year-result_16")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, null == sortCountry)%>"><%=Utilities.getSortImageTag(sortCountry)%><%=cm.cmsText("sites_year-result_16")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=contentManagement.getContent("sites_year-result_17")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("sites_year-result_17")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   if(showDesignType)
   {
 %>
           <th class="resultHeader">
-            <%=contentManagement.getContent("sites_year-result_18")%>
+            <%=cm.cmsText("sites_year-result_18")%>
           </th>
 <%
   }
@@ -496,10 +540,10 @@
   {
 %>
           <th class="resultHeader" style="text-align : center; white-space:nowrap;">
-            <%=contentManagement.getContent("sites_year-result_19")%>
+            <%=cm.cmsText("sites_year-result_19")%>
           </th>
           <th class="resultHeader" style="text-align : center; white-space:nowrap;">
-            <%=contentManagement.getContent("sites_year-result_20")%>
+            <%=cm.cmsText("sites_year-result_20")%>
           </th>
 <%
   }
@@ -507,13 +551,15 @@
   {
 %>
           <th class="resultHeader" style="text-align : right;">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, null == sortSize)%>"><%=Utilities.getSortImageTag(sortSize)%><%=contentManagement.getContent("sites_year-result_21")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, null == sortSize)%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("sites_year-result_21")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
 %>
           <th class="resultHeader" style="text-align : right;">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, null == sortYear)%>"><%=Utilities.getSortImageTag(sortYear)%><%=contentManagement.getContent("sites_year-result_22")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=YearSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, null == sortYear)%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsText("sites_year-result_22")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
       </table>
@@ -525,9 +571,25 @@
         <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>"/>
         <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>"/>
       </jsp:include>
+
+      <%=cm.cmsMsg("sites_year-result_23")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("sites_year-result_02")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("sites_year-result_03")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("sites_year-result_04")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("sites_year-result_05")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("sites_year-result_title")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("search_results")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="sites-year-result.jsp" />
       </jsp:include>
+    </div>
+    </div>
     </div>
   </body>
 </html>

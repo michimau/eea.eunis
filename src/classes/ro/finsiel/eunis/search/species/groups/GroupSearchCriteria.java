@@ -149,7 +149,7 @@ public final class GroupSearchCriteria extends AbstractSearchCriteria {
 
   /**
    * Testing method.
-   * @param args
+   * @param args command line
    */
   public static void main(String[] args) {
     GroupSearchCriteria aCriteria = new GroupSearchCriteria(new Integer(234));

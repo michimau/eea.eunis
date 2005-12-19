@@ -5,7 +5,7 @@ import net.sf.jrf.column.columnspecs.ShortColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
-import net.sf.jrf.join.OuterJoinTable;
+import net.sf.jrf.join.JoinTable;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
@@ -79,11 +79,11 @@ public class CodeDomain extends AbstractDomain implements Paginable {
     this.addColumnSpec(new StringColumnSpec("CODE_PART_2", "getCodePart2", "setCodePart2", DEFAULT_TO_NULL));
     this.addColumnSpec(new IntegerColumnSpec("LEVEL", "getHabLevel", "setHabLevel", DEFAULT_TO_NULL));
 
-    OuterJoinTable habClassCode = new OuterJoinTable("CHM62EDT_HABITAT_CLASS_CODE B", "ID_HABITAT", "ID_HABITAT");
+    JoinTable habClassCode = new JoinTable("CHM62EDT_HABITAT_CLASS_CODE B", "ID_HABITAT", "ID_HABITAT");
     habClassCode.addJoinColumn(new StringJoinColumn("CODE", "setCode"));
     this.addJoinTable(habClassCode);
 
-    OuterJoinTable classCode = new OuterJoinTable("CHM62EDT_CLASS_CODE C", "ID_CLASS_CODE", "ID_CLASS_CODE");
+    JoinTable classCode = new JoinTable("CHM62EDT_CLASS_CODE C", "ID_CLASS_CODE", "ID_CLASS_CODE");
     habClassCode.addJoinTable(classCode);
   }
 
@@ -136,12 +136,15 @@ public class CodeDomain extends AbstractDomain implements Paginable {
     StringBuffer sql = new StringBuffer();
     // Set the main QUERY
     sql.append("SELECT COUNT(DISTINCT B.ID_HABITAT) FROM CHM62EDT_HABITAT AS A " +
-            "LEFT JOIN CHM62EDT_HABITAT_CLASS_CODE AS B ON A.ID_HABITAT = B.ID_HABITAT " +
-            "LEFT JOIN CHM62EDT_CLASS_CODE AS C ON B.ID_CLASS_CODE = C.ID_CLASS_CODE WHERE ");
+            "INNER JOIN CHM62EDT_HABITAT_CLASS_CODE AS B ON A.ID_HABITAT = B.ID_HABITAT " +
+            "INNER JOIN CHM62EDT_CLASS_CODE AS C ON B.ID_CLASS_CODE = C.ID_CLASS_CODE WHERE ");
     // Apply WHERE CLAUSE
     sql.append(_prepareWhereSearch().toString());
     // Apply SORT CLAUSE - DON'T NEED IT FOR COUNT...
     Long ret = findLong(sql.toString());
+
+    //System.out.println(sql.toString());
+
     if (null == ret) return new Long(0);
     return ret;
   }
@@ -165,6 +168,8 @@ public class CodeDomain extends AbstractDomain implements Paginable {
 
     filterSQL.append(" AND C.LEGAL = 0");
     filterSQL.append(" and IF(TRIM(A.CODE_2000) <> '',RIGHT(A.CODE_2000,2),1) <> IF(TRIM(A.CODE_2000) <> '','00',2) AND IF(TRIM(A.CODE_2000) <> '',LENGTH(A.CODE_2000),1) = IF(TRIM(A.CODE_2000) <> '',4,1) ");
+
+    //System.out.println(filterSQL);
     return filterSQL;
   }
 

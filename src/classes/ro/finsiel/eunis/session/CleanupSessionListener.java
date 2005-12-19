@@ -1,17 +1,15 @@
 package ro.finsiel.eunis.session;
 
-import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.Settings;
-import ro.finsiel.eunis.OSEnvironment;
+import ro.finsiel.eunis.search.Utilities;
 
-import javax.servlet.http.HttpSessionListener;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionListener;
 import java.io.File;
-import java.util.Properties;
-import java.util.Date;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.util.Date;
 
 /**
  * This class is used to clean up the files created in temporary directoy,
@@ -19,9 +17,6 @@ import java.sql.PreparedStatement;
  * @author  finsiel
  */
 public class CleanupSessionListener implements HttpSessionListener {
-  /** Path to temp directory. */
-  private String TEMP_PATH = "webapps/eunis/temp";
-
   /** Creates a new instance of CleanupSessionListener. */
   public CleanupSessionListener() {}
 
@@ -39,14 +34,7 @@ public class CleanupSessionListener implements HttpSessionListener {
   public void sessionDestroyed(javax.servlet.http.HttpSessionEvent httpSessionEvent)
   {
     HttpSession session = httpSessionEvent.getSession();
-
-    Properties env = new Properties();
-    try {
-      env = OSEnvironment.getEnvVars();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    TEMP_PATH = env.getProperty("TOMCAT_HOME");
+    String TEMP_PATH = session.getServletContext().getInitParameter( "TOMCAT_HOME" );
     TEMP_PATH += "/" + Settings.getSetting("TEMP_DIR");
     String sessionID = session.getId();
 
@@ -83,10 +71,11 @@ public class CleanupSessionListener implements HttpSessionListener {
 
     // Clear the tables used for advanced and combined search...
     //System.out.println("Clearing temporary tables...");
-    String sqlDrv = Settings.getSetting("JDBC_DRV");
-    String sqlUrl = Settings.getSetting("JDBC_URL");
-    String sqlUsr = Settings.getSetting("JDBC_USR");
-    String sqlPwd = Settings.getSetting("JDBC_PWD");
+
+    String sqlDrv = session.getServletContext().getInitParameter( "JDBC_DRV" );
+    String sqlUrl = session.getServletContext().getInitParameter( "JDBC_URL" );
+    String sqlUsr = session.getServletContext().getInitParameter( "JDBC_USR" );
+    String sqlPwd = session.getServletContext().getInitParameter( "JDBC_PWD" );
     if (!sqlDrv.equalsIgnoreCase("") && !sqlUrl.equalsIgnoreCase("") && !sqlUrl.equalsIgnoreCase("") &&
             !sqlUsr.equalsIgnoreCase(""))
     {
@@ -99,10 +88,10 @@ public class CleanupSessionListener implements HttpSessionListener {
 
     // log the session expiration within database
     // log the login process to database
-    String JDBC_DRV = Settings.getSetting("JDBC_DRV");
-    String JDBC_URL = Settings.getSetting("JDBC_URL");
-    String JDBC_USR = Settings.getSetting("JDBC_USR");
-    String JDBC_PWD = Settings.getSetting("JDBC_PWD");
+    String JDBC_DRV = session.getServletContext().getInitParameter( "JDBC_DRV" );
+    String JDBC_URL = session.getServletContext().getInitParameter( "JDBC_URL" );
+    String JDBC_USR = session.getServletContext().getInitParameter( "JDBC_USR" );
+    String JDBC_PWD = session.getServletContext().getInitParameter( "JDBC_PWD" );
     long longTime = new Date().getTime();
     Connection conn = null;
     try

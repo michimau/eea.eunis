@@ -24,9 +24,9 @@ public class NameBean extends SitesFormBean {
   private String showCountry = null;
   private String showYear = null;
 
-  /** name was choosen from soundex data */
+  /** name was choosen from soundex data. */
   private String newName = null;
-  /** searched name if name was choosen from soundex data */
+  /** searched name if name was choosen from soundex data. */
   private String oldName = null;
 
 
@@ -324,7 +324,7 @@ public class NameBean extends SitesFormBean {
 
    /**
     * Setter for newName property - Specifies if name was chossen from soundex table.
-    * @param newName
+    * @param newName New value
     */
    public void setNewName( String newName )
    {
@@ -342,25 +342,41 @@ public class NameBean extends SitesFormBean {
 
    /**
     * Setter for oldName property - Specifies searched name if name was chossen from soundex table.
-    * @param oldName
+    * @param oldName New value
     */
    public void setOldName( String oldName )
    {
      this.oldName = oldName;
    }
 
+  /**
+   * Getter.
+   * @return showYear
+   */
   public String getShowYear() {
     return showYear;
   }
 
+  /**
+   * Setter.
+   * @param showYear New value
+   */
   public void setShowYear( String showYear ) {
     this.showYear = showYear;
   }
 
+  /**
+   * Getter.
+   * @return noSoundex
+   */
   public String getNoSoundex() {
     return noSoundex;
   }
 
+  /**
+   * Setter.
+   * @param noSoundex New value
+   */
   public void setNoSoundex( String noSoundex ) {
     this.noSoundex = noSoundex;
   }

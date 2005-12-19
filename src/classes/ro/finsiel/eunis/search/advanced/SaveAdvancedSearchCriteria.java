@@ -284,7 +284,7 @@ public class SaveAdvancedSearchCriteria {
       rs = ps.executeQuery(SQL);
 
       if (rs.isBeforeFirst()) {
-        result = "<table width=\"740\" border=\"0\">";
+        result = "<table width=\"100%\" border=\"0\">";
         while (!rs.isLast()) {
           rs.next();
           result += "<tr>";

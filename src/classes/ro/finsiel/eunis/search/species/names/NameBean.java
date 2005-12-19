@@ -40,14 +40,14 @@ public class NameBean extends AbstractFormBean {
   /** Display / Hide Valid name column. */
   private String showValidName = null;
 
-  /** Search also in synonyms */
+  /** Search also in synonyms. */
   private String searchSynonyms = null;
 
   private Boolean searchVernacular = false;
 
-  /** name was choosen from soundex data */
+  /** name was choosen from soundex data. */
   private String newName = null;
-  /** searched name if name was choosen from soundex data */
+  /** searched name if name was choosen from soundex data. */
   private String oldName = null;
 
   private String noSoundex = null;
@@ -367,18 +367,26 @@ public class NameBean extends AbstractFormBean {
 
   /**
    * Setter for showValidName property - Specifies if Valid name column will be displayed in resulted table.
-   * @param showValidName
+   * @param showValidName New value
    */
   public void setShowValidName( String showValidName )
   {
     this.showValidName = showValidName;
   }
 
+  /**
+   * Getter.
+   * @return searchVernacular
+   */
   public Boolean getSearchVernacular()
   {
     return searchVernacular;
   }
 
+  /**
+   * Setter.
+   * @param searchVernacular new value
+   */
   public void setSearchVernacular( Boolean searchVernacular )
   {
     this.searchVernacular = searchVernacular;
@@ -395,7 +403,7 @@ public class NameBean extends AbstractFormBean {
 
   /**
    * Setter for newName property - Specifies if name was chossen from soundex table.
-   * @param newName
+   * @param newName New value
    */
   public void setNewName( String newName )
   {
@@ -413,18 +421,26 @@ public class NameBean extends AbstractFormBean {
 
   /**
    * Setter for oldName property - Specifies searched name if name was chossen from soundex table.
-   * @param oldName
+   * @param oldName New value
    */
   public void setOldName( String oldName )
   {
     this.oldName = oldName;
   }
 
+  /**
+   * Getter.
+   * @return noSoundex
+   */
   public String getNoSoundex()
   {
     return noSoundex;
   }
 
+  /**
+   * Setter.
+   * @param noSoundex New value
+   */
   public void setNoSoundex( String noSoundex )
   {
     this.noSoundex = noSoundex;

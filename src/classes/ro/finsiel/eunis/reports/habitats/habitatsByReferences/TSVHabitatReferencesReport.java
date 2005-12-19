@@ -11,7 +11,7 @@ import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.habitats.habitatsByReferences.RefDomain;
 import ro.finsiel.eunis.jrfTables.habitats.habitatsByReferences.RefPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.habitats.habitatsByReferences.ReferencesBean;
 import ro.finsiel.eunis.search.habitats.habitatsByReferences.ReferencesPaginator;
@@ -21,16 +21,18 @@ import java.util.List;
 import java.util.Vector;
 
 
+/**
+ * TSV and XML report generation.
+ */
 public class TSVHabitatReferencesReport extends AbstractTSVReport
 {
   /**
-   * Form bean used for search
+   * Form bean used for search.
    */
   private AbstractFormBean formBean = null;
 
   /**
-   * Normal constructor
-   *
+   * Constructor.
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    */
@@ -39,6 +41,7 @@ public class TSVHabitatReferencesReport extends AbstractTSVReport
     super( "HabitatReferencesNewReport_" + sessionID + ".tsv" );
     this.formBean = formBean;
     this.filename = "HabitatReferencesNewReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "HabitatReferencesNewReport_" + sessionID + ".xml" );
     if ( null != formBean )
     {
       Integer database = Utilities.checkedStringToInt( ( ( ReferencesBean ) formBean ).getDatabase(), RefDomain.SEARCH_EUNIS );
@@ -53,18 +56,17 @@ public class TSVHabitatReferencesReport extends AbstractTSVReport
   }
 
   /**
-   * Create the table headers
-   *
+   * Create the table headers.
    * @return An array with the columns headers of the table
    */
-  public List createHeader()
+  public List<String> createHeader()
   {
     Integer database = Utilities.checkedStringToInt( ( ( ReferencesBean ) formBean ).getDatabase(), RefDomain.SEARCH_EUNIS );
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     // Level
     if ( ( ( ReferencesBean ) formBean ).getDatabase().equalsIgnoreCase( RefDomain.SEARCH_EUNIS.toString() ) )
     {
@@ -113,6 +115,7 @@ public class TSVHabitatReferencesReport extends AbstractTSVReport
         return;
       }
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
         List resultSet = dataFactory.getPage( _currPage );
@@ -120,7 +123,7 @@ public class TSVHabitatReferencesReport extends AbstractTSVReport
         for ( int i = 0; i < resultSet.size(); i++ )
         {
           RefPersist specie = ( RefPersist ) resultSet.get( i );
-          Vector aRow = new Vector();
+          Vector<String> aRow = new Vector<String>();
           // Level
           if ( ( ( ReferencesBean ) formBean ).getDatabase().equalsIgnoreCase( RefDomain.SEARCH_EUNIS.toString() ) )
           {
@@ -145,6 +148,7 @@ public class TSVHabitatReferencesReport extends AbstractTSVReport
           // Habitat type english name
           aRow.addElement( specie.getDescription() );
           writeRow( aRow );
+          xmlreport.writeRow( aRow );
         }
       }
     }

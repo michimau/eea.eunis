@@ -56,7 +56,7 @@ public class SyntaxaWrapper {
 
   /**
    * Setter for author property.
-   * @param author
+   * @param author New value
    */
   public void setAuthor(String author) {
     this.author = author;

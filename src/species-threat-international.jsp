@@ -4,7 +4,10 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Species International threat status' function - search page.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.List,
                  ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesPersist,
                  ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesDomain,
@@ -13,12 +16,15 @@
                  ro.finsiel.eunis.jrfTables.species.internationalthreatstatus.InternationalThreatStatusPersist,
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.WebContentManagement"%>
-<%@page contentType="text/html"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
     <script language="JavaScript" src="script/species-country.js" type="text/javascript"></script>
+   <%
+      WebContentManagement cm = SessionManager.getWebContent();
+   %>
     <script language="JavaScript" type="text/javascript">
     <!--
         function onLoadFunction() {
@@ -113,13 +119,13 @@
 
               document.eunis.saveCriteria.checked=true;
               document.eunis.action = 'species-threat-international.jsp';
-              alert('You choose to save this search criteria.Saving will be made after the search is executed');
+              alert('<%=cm.cms("save_alert")%>');
               document.eunis.submit();
         } else
         {
               if(group != null && groupName != null)
               {
-                 alert('Please select a country');
+                 alert('<%=cm.cms("species_threat-international_25")%>');
                   var g = document.createElement("input");
                   g.type= "hidden";
                   g.name = "idGroup";
@@ -132,7 +138,7 @@
                   gn.value = groupName;
                   document.eunis.appendChild( gn );
               }
-              else alert('Please select a group');
+              else alert('<%=cm.cms("species_threat-international_26")%>');
               document.eunis.action = 'species-threat-international.jsp';
               document.eunis.submit();
 
@@ -144,12 +150,9 @@
 
    //-->
     </script>
-    <%
-      WebContentManagement contentManagement = SessionManager.getWebContent();
-    %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=contentManagement.getContent("species_threat-international_title", false )%>
+      <%=cm.cms("species_threat-international_title")%>
     </title>
 </head>
 <%
@@ -185,19 +188,21 @@
       showVernacularNames = Utilities.checkedStringToBoolean(request.getParameter("showVernacularNames"), false);
   }
 %>
-  <body style="background-color:#ffffff" onload="onLoadFunction()">
+  <body onload="onLoadFunction()">
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="Home#index.jsp,Species#species.jsp,International threat status" />
+      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,international_threat_status_location" />
       <jsp:param name="helpLink" value="species-help.jsp" />
     </jsp:include>
-    <h5>
-        <%=contentManagement.getContent("species_threat-international_01")%>
-    </h5>
+    <h1>
+        <%=cm.cmsText("species_threat-international_01")%>
+    </h1>
     <table summary="layout" width="100%" border="0">
       <tr>
         <td>
-          <%=contentManagement.getContent("species_threat-international_20")%>
+          <%=cm.cmsText("species_threat-international_20")%>
           <br />
           <br />
           <form name="eunis" method="post" action="species-threat-international-result.jsp">
@@ -205,17 +210,27 @@
             <tr>
               <td style="background-color:#EEEEEE">
                 <strong>
-                  <%=contentManagement.getContent("species_threat-international_02")%>
+                  <%=cm.cmsText("species_threat-international_02")%>
                 </strong>
               </td>
             </tr>
               <tr>
                 <td style="background-color:#EEEEEE">
-                  <input title="Group" id="checkbox2" type="checkbox" name="showGroup" value="true" <%=(showGroup ? "checked=\"checked\"" : "")%> /><label for="checkbox2"><%=contentManagement.getContent("species_threat-international_03")%></label>
-                  <input title="Geographic region" id="checkbox5" type="checkbox" name="showGeo" value="true" <%=(showGeo ? "checked=\"checked\"" : "")%> /><label for="checkbox5"><%=contentManagement.getContent("species_threat-international_08")%></label>
-                  <input title="Status" id="checkbox1" type="checkbox" name="showStatus" value="true" <%=(showStatus ? "checked=\"checked\"" : "")%> /><label for="checkbox1"><%=contentManagement.getContent("species_threat-international_status")%></label>
-                  <input title="Scientific name" id="checkbox3" type="checkbox" name="true" value="true" disabled="disabled" checked="checked" /><label for="checkbox3"><%=contentManagement.getContent("species_threat-international_06")%></label>
-                  <input title="Vernacular name" id="checkbox4" type="checkbox" name="showVernacularNames" value="true" <%=(showVernacularNames ? "checked=\"checked\"" : "")%> /><label for="checkbox4"><%=contentManagement.getContent("species_threat-international_07")%></label>
+                  <input title="<%=cm.cms("group")%>" id="checkbox2" type="checkbox" name="showGroup" value="true" <%=(showGroup ? "checked=\"checked\"" : "")%> />
+                    <label for="checkbox2"><%=cm.cmsText("species_threat-international_03")%></label>
+                    <%=cm.cmsTitle("group")%>
+                  <input title="<%=cm.cms("geographic_region")%>" id="checkbox5" type="checkbox" name="showGeo" value="true" <%=(showGeo ? "checked=\"checked\"" : "")%> />
+                    <label for="checkbox5"><%=cm.cmsText("species_threat-international_08")%></label>
+                    <%=cm.cmsTitle("geographic_region")%>
+                  <input title="<%=cm.cms("status")%>" id="checkbox1" type="checkbox" name="showStatus" value="true" <%=(showStatus ? "checked=\"checked\"" : "")%> />
+                    <label for="checkbox1"><%=cm.cmsText("species_threat-international_status")%></label>
+                    <%=cm.cmsTitle("status")%>
+                  <input title="<%=cm.cms("scientific_name")%>" id="checkbox3" type="checkbox" name="true" value="true" disabled="disabled" checked="checked" />
+                    <label for="checkbox3"><%=cm.cmsText("species_threat-international_06")%></label>
+                    <%=cm.cmsTitle("scientific_name")%>
+                  <input title="<%=cm.cms("vernacular_name")%>" id="checkbox4" type="checkbox" name="showVernacularNames" value="true" <%=(showVernacularNames ? "checked=\"checked\"" : "")%> />
+                    <label for="checkbox4"><%=cm.cmsText("species_threat-international_07")%></label>
+                    <%=cm.cmsTitle("vernacular_name")%>
                 </td>
               </tr>
               <tr>
@@ -226,21 +241,21 @@
           <table summary="layout" cellspacing="1" cellpadding="0" border="0" width="100%" style="text-align:left">
             <tr>
               <td style="vertical-align:middle">
-                <img width="11" height="12" style="vertical-align:middle" alt="<%=contentManagement.getContent("species_threat-international_11", false)%>" title="<%=contentManagement.getContent("species_threat-international_11", false)%>" src="images/mini/field_mandatory.gif" />
-                <%=contentManagement.writeEditTag("species_threat-international_11",false)%>
+                <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("species_threat-international_11")%>" title="<%=cm.cms("species_threat-international_11")%>" src="images/mini/field_mandatory.gif" />
+                <%=cm.cmsAlt("species_threat-international_11")%>
                 <%
                   if (null == group)
                   {
                     // If group is null then display the group selection texbox
                 %>
-                    <label for="Group" class="noshow">Group name</label>
-                    <select title="Group name" name="Group" id="Group" onchange="MM_jumpMenuInternational('parent',this,0)"
+                    <label for="Group" class="noshow"><%=cm.cms("group_name")%></label>
+                    <select title="<%=cm.cms("group_name")%>" name="Group" id="Group" onchange="MM_jumpMenuInternational('parent',this,0)"
                             class="inputTextField">
                       <option value="species-threat-international.jsp">
-                        <%=contentManagement.getContent("species_threat-international_12", false)%>
+                        <%=cm.cms("species_threat-international_12")%>
                       </option>
                       <option value="species-threat-international.jsp?idGroup=-1&amp;groupName=any">
-                        <%=contentManagement.getContent("species_threat-international_13", false)%>
+                        <%=cm.cms("species_threat-international_13")%>
                       </option>
                     <%
                       // List of groups species
@@ -259,6 +274,8 @@
                       }
                     %>
                   </select>
+                  <%=cm.cmsLabel("group_name")%>
+                  <%=cm.cmsTitle("group_name")%>
                 <%
                   } else
                   { // or else put out the selected group and let the user select the area.
@@ -269,16 +286,16 @@
                     if (anyGroupSelected) {
                 %>
                     <strong> <% //any group%>
-                      <%=contentManagement.getContent("species_threat-international_13")%>
+                      <%=cm.cmsText("species_threat-international_13")%>
                     </strong>
 
                     <br />
                     &nbsp;
                     <strong>   <% //and%>
-                      <%=contentManagement.getContent("species_threat-international_14")%>
+                      <%=cm.cmsText("species_threat-international_14")%>
                     </strong>
                     &nbsp;  <% //area%>
-                    <%=contentManagement.getContent("species_threat-international_19")%>
+                    <%=cm.cmsText("species_threat-international_19")%>
                   <%
                     } else {
                       String groupNameDispayed = (-1 == groupName.lastIndexOf("Mosses") ? groupName : "Mosses & Liverworts");
@@ -290,19 +307,19 @@
                       <br />
                         &nbsp;
                       <strong>
-                        <%=contentManagement.getContent("species_threat-international_14")%>
+                        <%=cm.cmsText("species_threat-international_14")%>
                       </strong>
                       &nbsp;
-                      <%=contentManagement.getContent("species_threat-international_19")%>
+                      <%=cm.cmsText("species_threat-international_19")%>
                   <%
                     }
                   %>
                        &nbsp;
-                       <label for="Country" class="noshow">Country</label>
-                       <select title="Country" name="Contry" id="Country" onchange="MM_jumpMenuInternational('parent',this,0)"
+                       <label for="Country" class="noshow"><%=cm.cms("country")%></label>
+                       <select title="<%=cm.cms("country")%>" name="Contry" id="Country" onchange="MM_jumpMenuInternational('parent',this,0)"
                               class="inputTextField">
                         <option value="species-threat-international.jsp?idGroup=<%=group%>&amp;groupName=<%=groupName%>" selected="selected">
-                          <%=contentManagement.getContent("species_threat-international_18", false)%>
+                          <%=cm.cms("species_threat-international_18")%>
                         </option>
                         <%
                         if (!anyGroupSelected)
@@ -344,24 +361,25 @@
                         }
                      %>
                       </select>
+                      <%=cm.cmsLabel("country")%>
+                      <%=cm.cmsTitle("country")%>
                 <%
-                       ////aici2
                     } else {
                  %>
                  <%
                     if (anyGroupSelected) {
                 %>
                     <strong>
-                      <%=contentManagement.getContent("species_threat-international_13")%>
+                      <%=cm.cmsText("species_threat-international_13")%>
                     </strong>
 
                     <br />
                     &nbsp;
                     <strong>
-                      <%=contentManagement.getContent("species_threat-international_14")%>
+                      <%=cm.cmsText("species_threat-international_14")%>
                     </strong>
                     &nbsp;
-                    <%=contentManagement.getContent("species_threat-international_19")%>
+                    <%=cm.cmsText("species_threat-international_19")%>
                   <%
                     } else {
                       String groupNameDispayed = (-1 == groupName.lastIndexOf("Mosses") ? groupName : "Mosses & Liverworts");
@@ -373,10 +391,10 @@
                       <br />
                         &nbsp;
                       <strong>
-                        <%=contentManagement.getContent("species_threat-international_14")%>
+                        <%=cm.cmsText("species_threat-international_14")%>
                       </strong>
                       &nbsp;
-                      <%=contentManagement.getContent("species_threat-international_19")%>
+                      <%=cm.cmsText("species_threat-international_19")%>
                   <%
                     }
                   %>
@@ -390,19 +408,19 @@
                      <br />
 
                      <strong>
-                     <%=contentManagement.getContent("species_threat-international_14")%>
+                     <%=cm.cmsText("species_threat-international_14")%>
                      </strong>
                      &nbsp;  <% //threat status%>
-                    <%=contentManagement.getContent("species_threat-international_15")%>
+                    <%=cm.cmsText("species_threat-international_15")%>
                     &nbsp;
-                    <label for="Status" class="noshow">Status</label>
-                    <select title="Status" name="Status" id="Status" onchange="MM_jumpMenuInternational('parent',this,0)"
+                    <label for="Status" class="noshow"><%=cm.cms("status")%></label>
+                    <select title="<%=cm.cms("status")%>" name="Status" id="Status" onchange="MM_jumpMenuInternational('parent',this,0)"
                             class="inputTextField">
                       <option value="species-threat-international.jsp?idGroup=<%=group%>&amp;groupName=<%=groupName%>&amp;countryName=<%=countryName%>&amp;idCountry=<%=country%>" selected="selected">
-                        <%=contentManagement.getContent("species_threat-international_16", false)%>
+                        <%=cm.cms("species_threat-international_16")%>
                       </option>
                       <option value="species-threat-international-result.jsp?idGroup=<%=group%>&amp;groupName=<%=groupName%>&amp;countryName=<%=countryName%>&amp;idCountry=<%=country%>&amp;idConservation=-1&amp;statusName=any">
-                        <%=contentManagement.getContent("species_threat-international_17", false)%>
+                        <%=cm.cms("species_threat-international_17")%>
                       </option>
                     <%
                     if (!anyGroupSelected)
@@ -438,6 +456,8 @@
                     }
                   %>
                  </select>
+                 <%=cm.cmsLabel("status")%>
+                 <%=cm.cmsTitle("status")%>
                  <%
                   }
                   }
@@ -450,10 +470,11 @@
               %>
                   <tr>
                     <td>&nbsp; <br />
-                      <input title="Save criteria" id="saveCriteria" type="checkbox" name="saveCriteria" value="true" <%=isSaveCriteriaChecked%> />
-                        <label for="saveCriteria"><%=contentManagement.getContent("species_threat-international_10")%></label>
+                      <input title="<%=cm.cms("save_criteria")%>" id="saveCriteria" type="checkbox" name="saveCriteria" value="true" <%=isSaveCriteriaChecked%> /> <%=cm.cmsTitle("save_criteria")%>
+                        <label for="saveCriteria"><%=cm.cmsText("species_threat-international_10")%></label>
                         &nbsp;
-                        <a title="Save criteria" href="javascript:checkSaveCriteria()"><img alt="Save" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
+                        <a title="<%=cm.cms("save_criteria")%>" href="javascript:checkSaveCriteria()"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
+                        <%=cm.cmsTitle("save_criteria")%>
                     </td>
                   </tr>
                   <tr><td>&nbsp;</td></tr>
@@ -494,9 +515,32 @@
             }
         %>
 
+
+<%=cm.br()%>
+<%=cm.cmsMsg("save_alert")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_threat-international_25")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_threat-international_26")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_threat-international_title")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_threat-international_12")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_threat-international_13")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_threat-international_18")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_threat-international_16")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_threat-international_17")%>
+<%=cm.br()%>
+
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="species-threat-international.jsp" />
     </jsp:include>
+  </div>
+  </div>
   </div>
   </body>
 </html>

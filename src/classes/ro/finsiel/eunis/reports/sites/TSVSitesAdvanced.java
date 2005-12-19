@@ -7,31 +7,27 @@ import ro.finsiel.eunis.formBeans.CombinedSearchBean;
 import ro.finsiel.eunis.jrfTables.sites.advanced.DictionaryDomain;
 import ro.finsiel.eunis.jrfTables.sites.advanced.DictionaryPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.Utilities;
-import ro.finsiel.eunis.search.sites.advanced.DictionaryPaginator;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
+import ro.finsiel.eunis.search.sites.advanced.DictionaryPaginator;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
 /**
- * Generate the PDF reports for Sites -> Advanced search
- *
- * @author finsiel
- * @version 1.0
+ * TSV and XML report generation.
  */
 public class TSVSitesAdvanced extends AbstractTSVReport
 {
   /**
-   * Use the bean in order to see which columns should I display on the report
+   * Use the bean in order to see which columns should I display on the report.
    */
   private CombinedSearchBean formBean = null;
 
   /**
-   * Constructor
-   *
+   * Constructor.
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    */
@@ -42,20 +38,21 @@ public class TSVSitesAdvanced extends AbstractTSVReport
     this.filename = "SitesAdvancedReport_" + sessionID + ".tsv";
     this.dataFactory = new DictionaryPaginator( new DictionaryDomain( sessionID ) );
     this.dataFactory.setSortCriteria( formBean.toSortCriteria() );
+    xmlreport = new XMLReport( "SitesAdvancedReport_" + sessionID + ".xml" );
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader()
+  public List<String> createHeader()
   {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     // Source data set
     headers.addElement( "Source data set" );
     // Site name
@@ -102,6 +99,7 @@ public class TSVSitesAdvanced extends AbstractTSVReport
         return;
       }
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
         List resultSet = dataFactory.getPage( _currPage );
@@ -110,7 +108,7 @@ public class TSVSitesAdvanced extends AbstractTSVReport
           DictionaryPersist site = ( DictionaryPersist ) resultSet.get( i );
           String designations = Utilities.formatString( site.getDesign() );
 
-          Vector row = new Vector();
+          Vector<String> row = new Vector<String>();
           // Source data set
           row.addElement( SitesSearchUtility.translateSourceDB(site.getSourceDB()) );
           // Site name
@@ -136,6 +134,7 @@ public class TSVSitesAdvanced extends AbstractTSVReport
           // Mean altitude
           row.addElement( Utilities.formatString(site.getAltMean()) );
           writeRow( row );
+          xmlreport.writeRow( row );
         }
       }
     }

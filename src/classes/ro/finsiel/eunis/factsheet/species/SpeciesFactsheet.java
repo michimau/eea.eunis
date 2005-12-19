@@ -52,6 +52,8 @@ public class SpeciesFactsheet {
       if (null != species && species.size() > 0)
       {
         speciesObject = ((Chm62edtSpeciesPersist) species.get(0));
+        this.idSpecies = speciesObject.getIdSpecies();
+        this.idSpeciesLink = speciesObject.getIdSpeciesLink();
         exists = true;
       } else {
         if (idSpecies.intValue() != idSpeciesLink.intValue()) {// Search again only if idSpecies != idSpeciesLink
@@ -59,6 +61,8 @@ public class SpeciesFactsheet {
           if (null != species && species.size() > 0)
           {
             speciesObject = ((Chm62edtSpeciesPersist) species.get(0));
+            this.idSpecies = speciesObject.getIdSpecies();
+            this.idSpeciesLink = speciesObject.getIdSpeciesLink();
             exists = true;
           } else {
             logger.info("Warning " + SpeciesFactsheet.class.getName() + "::ctor() - speciesObject not found: speciesObject is null");
@@ -260,6 +264,11 @@ public class SpeciesFactsheet {
     return results;
   }
 
+  /**
+   * Conservation status for an species.
+   * @param specie Species object
+   * @return List of conservation statuses associated with this species
+   */
   public List getConservationStatus( Chm62edtSpeciesPersist specie )
   {
     Vector results = new Vector();
@@ -1341,6 +1350,10 @@ public class SpeciesFactsheet {
     return exists;
   }
 
+  /**
+   * Retrive group classification for an species.
+   * @return Group name
+   */
   public String getSpeciesGroup() {
     String result = "";
     List groups = new Chm62edtGroupspeciesDomain().findWhere("ID_GROUP_SPECIES = "+ speciesNatureObject.getIdGroupspecies());
@@ -1349,6 +1362,11 @@ public class SpeciesFactsheet {
     return result;
   }
 
+  /**
+   * Retrieve conservation description.
+   * @param code Conservation code
+   * @return Description
+   */
   public String getConservationStatusDescriptionByCode(String code) {
     if (code == null || code.trim().equals("")) return "";
     String result = "";

@@ -32,9 +32,9 @@ public class UserDomain extends AbstractDomain {
     this.addColumnSpec(new StringColumnSpec("PASSWORD", "getPassword", "setPassword", DEFAULT_TO_EMPTY_STRING, REQUIRED));
     this.addColumnSpec(new StringColumnSpec("FIRST_NAME", "getFirstName", "setFirstName", DEFAULT_TO_EMPTY_STRING));
     this.addColumnSpec(new StringColumnSpec("LAST_NAME", "getLastName", "setLastName", DEFAULT_TO_EMPTY_STRING));
+    this.addColumnSpec(new StringColumnSpec("LANG", "getLang", "setLang", "en" ));
     this.addColumnSpec(new StringColumnSpec("EMAIL", "getEMail", "setEMail", DEFAULT_TO_EMPTY_STRING));
-    this.addColumnSpec(new IntegerColumnSpec("FONTSIZE", "getFontsize", "setFontsize", new Integer(0), REQUIRED));
     this.addColumnSpec(new IntegerColumnSpec("THEME_INDEX", "getThemeIndex", "setThemeIndex", new Integer(0), REQUIRED));
-    this.addColumnSpec(new StringColumnSpec("LOGIN_DATE", "getLoginDate", "setLoginDate", "1900-01-01 00:00:00"));
+    this.addColumnSpec(new StringColumnSpec("LOGIN_DATE", "getLoginDate", "setLoginDate", DEFAULT_TO_NULL));
   }
 }

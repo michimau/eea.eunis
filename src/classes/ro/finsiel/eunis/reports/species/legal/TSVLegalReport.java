@@ -8,7 +8,7 @@ import ro.finsiel.eunis.jrfTables.species.legal.LegalStatusPersist;
 import ro.finsiel.eunis.jrfTables.species.legal.ScientificLegalDomain;
 import ro.finsiel.eunis.jrfTables.species.legal.ScientificLegalPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.legal.LegalBean;
 import ro.finsiel.eunis.search.species.legal.LegalPaginator;
@@ -19,32 +19,32 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * Generate the PDF reports for Species -> Legal search
- * @version 1.0
+ * TSV and XML report generation.
  */
 public class TSVLegalReport extends AbstractTSVReport
 {
   /**
-   * Use the bean in order to see which columns should I display on the report
+   * Use the bean in order to see which columns should I display on the report.
    */
   private LegalBean formBean = null;
 
   /**
-   * Form we are coming from (I or II)
+   * Form we are coming from (I or II).
    */
   private int typeForm;
 
   /**
-   * Constructor
-   *
+   * Constructor.
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
+   * @param showEUNISInvalidatedSpecies Show invalidated species
    */
   public TSVLegalReport( String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies )
   {
-    super( "SpeciesCountryReport_" + sessionID + ".tsv" );
+    super( "SpeciesLegalReport_" + sessionID + ".tsv" );
     this.formBean = ( LegalBean ) formBean;
-    this.filename = "SpeciesCountryReport_" + sessionID + ".tsv";
+    this.filename = "SpeciesLegalReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "SpeciesLegalReport_" + sessionID + ".xml" );
     typeForm = Utilities.checkedStringToInt( this.formBean.getTypeForm(), LegalSearchCriteria.CRITERIA_SPECIES.intValue() );
     // Form 1
     if ( LegalSearchCriteria.CRITERIA_SPECIES.intValue() == typeForm )
@@ -59,17 +59,17 @@ public class TSVLegalReport extends AbstractTSVReport
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader()
+  public List<String> createHeader()
   {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     // Scientific name
     headers.addElement( "Scientific name" );
     // Group
@@ -104,12 +104,13 @@ public class TSVLegalReport extends AbstractTSVReport
         return;
       }
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
         List resultSet = dataFactory.getPage( _currPage );
         for ( int i = 0; i < resultSet.size(); i++ )
         {
-          Vector aRow = new Vector();
+          Vector<String> aRow = new Vector<String>();
 
           String cellScientificName = "";
           String cellGroup = "";
@@ -149,6 +150,7 @@ public class TSVLegalReport extends AbstractTSVReport
           aRow.addElement( cellComment );
           aRow.addElement( cellURL );
           writeRow( aRow );
+          xmlreport.writeRow( aRow );
         }
       }
     }

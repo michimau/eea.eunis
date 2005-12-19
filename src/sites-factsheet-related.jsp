@@ -4,6 +4,9 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Sites related to a site' - part of site's factsheet
 --%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.factsheet.sites.SiteFactsheet,
                  java.util.List,
                  ro.finsiel.eunis.jrfTables.sites.factsheet.SiteRelationsPersist,
@@ -14,7 +17,7 @@
 <%
   String siteid = request.getParameter("idsite");
   SiteFactsheet factsheet = new SiteFactsheet(siteid);
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   // Relation with other sites
   int type = factsheet.getType();
   if( type != SiteFactsheet.TYPE_NATURA2000 )
@@ -36,31 +39,38 @@
 %>
       <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
         <input type="hidden" name="sites" value="<%=ids%>" />
-        <input type="submit" name="Show map" value="Show map" title="Show map" class="inputTextField" />
+        <input type="submit" name="Show map" value="<%=cm.cms("show_map")%>" title="<%=cm.cms("show_map")%>" class="inputTextField" />
+        <%=cm.cmsInput("show_map")%>
+        <%=cm.cmsTitle("show_map")%>
       </form>
 <%
       }
 %>
       <br />
-      <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;">
-        <%=contentManagement.getContent("sites_factsheet_123")%>
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;">
+        <%=cm.cmsText("sites_factsheet_123")%>
       </div>
-      <table summary="<%=contentManagement.getContent("sites_factsheet_123", false )%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="relations" style="border-collapse:collapse">
+      <table summary="<%=cm.cms("sites_factsheet_123")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="relations" class="sortable">
         <tr>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 5, 0, 'relations', false);"><%=contentManagement.getContent("sites_factsheet_124")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_124")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 5, 1, 'relations', false);"><%=contentManagement.getContent("sites_factsheet_125")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_125")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 5, 2, 'relations', false);"><%=contentManagement.getContent("sites_factsheet_126")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_126")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 5, 3, 'relations', false);"><%=contentManagement.getContent("sites_factsheet_127")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_127")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" align="right">
-            <a title="Sort results by this column" href="javascript:sortTable( 5, 4, 'relations', false);"><%=contentManagement.getContent("sites_factsheet_128")%></a>
+          <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_128")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
 <%
@@ -79,9 +89,8 @@
         if ( site.getIdSiteLink() != null )
         {
 %>
-            <a title="Site factsheet" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
-
-
+            <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
+            <%=cm.cmsTitle("open_site_factsheet")%>
 <%
         }
         else
@@ -129,25 +138,30 @@
 %>
       <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
         <input type="hidden" name="sites" value="<%=ids%>" />
-        <input type="submit" name="Show map" value="Show map" title="Show map" class="inputTextField" />
+        <input type="submit" name="Show map" value="<%=cm.cms("show_map")%>" title="<%=cm.cms("show_map")%>" class="inputTextField" />
+        <%=cm.cmsInput("show_map")%>
+        <%=cm.cmsTitle("show_map")%>
       </form>
 <%
       }
 %>
       <br />
-      <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;">
-        Relation with other Natura 2000 sites
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;">
+        <%=cm.cmsText("sites_factsheet_related_natura2000")%>
       </div>
-      <table summary="Relation with other Natura 2000 sites" border="1" cellpadding="1" cellspacing="1" width="100%" id="relationsNatura2000Natura2000" style="border-collapse:collapse">
+      <table summary="<%=cm.cms("sites_factsheet_related_natura2000")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="relationsNatura2000Natura2000" class="sortable">
         <tr>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 3, 0, 'relationsNatura2000Natura2000', false);">Type of relation</a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_related_relationtype")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 3, 1, 'relationsNatura2000Natura2000', false);">Site code</a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_related_sitecode")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 3, 2, 'relationsNatura2000Natura2000', false);">Site name</a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_related_sitename")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
 <%
@@ -159,10 +173,12 @@
           <td>
             <%=site.getRelationName()%>&nbsp;</td>
           <td>
-            <a title="Site factsheet" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getIdSiteLink()%></a>
+            <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getIdSiteLink()%></a>
+            <%=cm.cmsTitle("open_site_factsheet")%>
           </td>
           <td>
-            <a title="Site factsheet" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
+            <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
+            <%=cm.cmsTitle("open_site_factsheet")%>
           </td>
         </tr>
 <%
@@ -180,22 +196,26 @@
     if (sitesCorine.size() > 0 )
     {
 %>
-      <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;">
-        Relation with Corine biotope sites
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;">
+        <%=cm.cmsText("sites_factsheet_related_corinesites")%>
       </div>
-      <table summary="Relation with Corine biotope sites" border="1" cellpadding="1" cellspacing="1" width="100%" id="relationsNatura2000sitesCorine" style="border-collapse:collapse">
+      <table summary="<%=cm.cms("sites_factsheet_related_corinesites")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="relationsNatura2000sitesCorine" class="sortable">
         <tr>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 4, 0, 'relationsNatura2000sitesCorine', false);">Site code</a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_related_sitecode1")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 4, 1, 'relationsNatura2000sitesCorine', false);">Site name</a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_related_sitename1")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 4, 2, 'relationsNatura2000sitesCorine', false);">Overlap</a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_related_overlap")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 4, 3, 'relationsNatura2000sitesCorine', false);">Overlap P</a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_related_overlapp")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
 <%
@@ -205,10 +225,12 @@
 %>
         <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
           <td>
-            <a title="Site factsheet" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getIdSiteLink()%></a>
+            <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getIdSiteLink()%></a>
+            <%=cm.cmsTitle("open_site_factsheet")%>
           </td>
           <td>
-            <a title="Site factsheet" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
+            <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
+            <%=cm.cmsTitle("open_site_factsheet")%>
           </td>
           <td>
             <%=site.getRelationType()%>
@@ -225,3 +247,4 @@
     }
   }
 %>
+<%=cm.cmsMsg("sites_factsheet_123")%>

@@ -26,9 +26,11 @@ public final class SessionManager implements java.io.Serializable {
   private static Logger logger = Logger.getLogger(SessionManager.class);
 
   private WebContentManagement webContent = new WebContentManagement();
+
   private String currentLanguage = "en";
   private static HashMap<String, WebContentManagement> languages = new HashMap();
   boolean editContentMode = false;
+  boolean advancedEditContentMode = false;
 
 
   /** This is the username for the current session. If user didn't logon, then this field is null */
@@ -72,6 +74,8 @@ public final class SessionManager implements java.io.Serializable {
   private boolean digirProviderRunChecked = false;
   private boolean digirProviderRunning = false;
 
+  private String cacheReportEmailAddress = "";
+
   static
   {
     // When server is initializing, load the default language.
@@ -84,7 +88,8 @@ public final class SessionManager implements java.io.Serializable {
    * Used for Combined Search function.
    * @return Source DB.
    */
-  public String getSourcedb() {
+  public String getSourcedb()
+  {
     return sourcedb;
   }
 
@@ -457,6 +462,7 @@ public final class SessionManager implements java.io.Serializable {
     this.edit_glossary_RIGHT = false;
     this.admin_ROLE = false;
     setEditContentMode( false );
+    setAdvancedEditContentMode( false );
   }
 
   /**
@@ -465,7 +471,10 @@ public final class SessionManager implements java.io.Serializable {
    * @return null if user was not found or username is null. UserPersist object associated with that user.
    */
   private UserPersist findUser(String username) {
-    if (null == username) return null;
+    if ( null == username )
+    {
+      return null;
+    }
     UserPersist user = null;
     List list = new Vector();
     try {
@@ -510,7 +519,6 @@ public final class SessionManager implements java.io.Serializable {
       password = null;
       this.userPrefs = new UserPersist();
       // If user is normal (not authenticated) default preferences.
-      userPrefs.setFontsize(UserPersist.TEXT_SIZE_NORMAL);
       userPrefs.setThemeIndex(new Integer(ThemeManager.THEME_SKY_BLUE));
     } else {
       this.userPrefs = user;
@@ -579,7 +587,10 @@ public final class SessionManager implements java.io.Serializable {
    * @return Vector of UsersRightsPersist objects, one for each right.
    */
   public Vector findUserRights(String username) {
-    if (null == username) return new Vector();
+    if ( null == username )
+    {
+      return new Vector();
+    }
     Vector<String> userRights = new Vector<String>();
     try {
       List list = new UsersRightsDomain().findWhere("A.username='" + username + "' GROUP BY A.USERNAME,C.RIGHTNAME");
@@ -600,7 +611,10 @@ public final class SessionManager implements java.io.Serializable {
    * @return Vector of UsersRolesPersist objects, one for each right.
    */
   public Vector findUserRoles(String username) {
-    if (null == username) return new Vector();
+    if ( null == username )
+    {
+      return new Vector();
+    }
     Vector<String> userRoles = new Vector<String>();
     try {
       List list = new UsersRolesDomain().findWhere("A.username='" + username + "' GROUP BY A.USERNAME,E.ROLENAME");
@@ -715,6 +729,13 @@ public final class SessionManager implements java.io.Serializable {
     return getWebContent( currentLanguage );  
   }
 
+  /**
+   * Return the current web content 'dictionary' for specified language.
+   * @param language Language code
+   * @return Content for that language, if not loaded application will try to
+   * load the specified language. If code not found in EUNIS_WEB_CONTENT table
+   * result will be null.
+   */
   public WebContentManagement getWebContent( String language )
   {
     WebContentManagement cm = new WebContentManagement();
@@ -724,6 +745,7 @@ public final class SessionManager implements java.io.Serializable {
       {
         cm = languages.get( language );
         cm.setEditMode( editContentMode );
+        cm.setAdvancedEditMode( advancedEditContentMode );
       }
       else
       {
@@ -820,43 +842,112 @@ public final class SessionManager implements java.io.Serializable {
     return edit_glossary_RIGHT;
   }
 
+  /**
+   * Getter for digirProviderRunChecked property. Digir provider is checked if
+   * runs every time a new session is spawned, then is no longer checked in
+   * order to prevent opening multiple connections to server, each request.
+   * @return digirProviderRunChecked (if check has been done)
+   */
   public boolean isDigirProviderRunChecked()
   {
     return digirProviderRunChecked;
   }
 
+  /**
+   * Setter for digirProviderRunChecked
+   * @param digirProviderRunChecked New value
+   */
   public void setDigirProviderRunChecked( boolean digirProviderRunChecked )
   {
     this.digirProviderRunChecked = digirProviderRunChecked;
   }
 
+  /**
+   * Getter for digirProviderRunning. Specifies if digir provider is running.
+   * @return digirProviderRunning
+   */
   public boolean isDigirProviderRunning()
   {
     return digirProviderRunning;
   }
 
+  /**
+   * Setter for digirProviderRunning property
+   * @param digirProviderRunning New value
+   */
   public void setDigirProviderRunning( boolean digirProviderRunning )
   {
     this.digirProviderRunning = digirProviderRunning;
   }
 
+  /**
+   * Current application language specified by the user
+   * @return currentLanguage
+   */
   public String getCurrentLanguage()
   {
     return currentLanguage;
   }
 
+  /**
+   * Sets application current language for an user
+   * @param currentLanguage New code for language.
+   */
   public void setCurrentLanguage( String currentLanguage )
   {
     this.currentLanguage = currentLanguage;
   }
 
+  /**
+   * Getter for editContentMode. If application is in edit content mode
+   * @return editContentMode
+   */
   public boolean isEditContentMode()
   {
     return editContentMode;
   }
 
+  /**
+   * Setter for editContentMode property. Activate inline editor
+   * @param editContentMode New value
+   */
   public void setEditContentMode( boolean editContentMode )
   {
     this.editContentMode = editContentMode;
+  }
+
+  /**
+   * Getter for advancedEditContentMode property. If advanced inline editor
+   * is activated
+   * @return advancedEditContentMode
+   */
+  public boolean isAdvancedEditContentMode() {
+    return advancedEditContentMode;
+  }
+
+  /**
+   * Setter for advancedEditContentMode property. Activate advanced inline
+   * editor
+   * @param advancedEditContentMode
+   */
+  public void setAdvancedEditContentMode( boolean advancedEditContentMode ) {
+    this.advancedEditContentMode = advancedEditContentMode;
+  }
+
+  /**
+   * Cache the e-mail address property. This e-mail is where generated reports
+   * are sent.
+   * @return e-mail address entered by user, where reports will be sent.
+   */
+  public String getCacheReportEmailAddress() {
+    return cacheReportEmailAddress;
+  }
+
+  /**
+   * Setter for e-mail address where reports are sent
+   * @param cacheReportEmailAddress New value
+   */
+  public void setCacheReportEmailAddress( String cacheReportEmailAddress ) {
+    this.cacheReportEmailAddress = cacheReportEmailAddress;
   }
 }

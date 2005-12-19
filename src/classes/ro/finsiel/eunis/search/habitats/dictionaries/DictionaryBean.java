@@ -13,25 +13,79 @@ import ro.finsiel.eunis.jrfTables.*;
 import java.util.Vector;
 import java.util.List;
 
+/**
+ * Form bean.
+ */
 public class DictionaryBean extends AbstractFormBean {
+  /**
+   * Database EUNIS.
+   */
   public static final int DATABASE_EUNIS = 0;
+  /**
+   * Database ANNEX.
+   */
   public static final int DATABASE_ANNEX = 1;
 
+  /**
+   * Dictionary altitude.
+   */
   public static final int DICT_ALTITUDE = 0;
+  /**
+   * Dictionary chemistry.
+   */
   public static final int DICT_CHEMISTRY = 1;
+  /**
+   * Dictionary climate.
+   */
   public static final int DICT_CLIMATE = 2;
+  /**
+   * Dictionary coverage.
+   */
   public static final int DICT_COVERAGE = 3;
+  /**
+   * Dictionary humidity.
+   */
   public static final int DICT_HUMIDITY = 4;
+  /**
+   * Dictionary impact.
+   */
   public static final int DICT_IMPACT = 5;
+  /**
+   * Dictionary light.
+   */
   public static final int DICT_LIGHT = 6;
+  /**
+   * Dictionary Ph.
+   */
   public static final int DICT_PH = 7;
+  /**
+   * Dictionary life form.
+   */
   public static final int DICT_LIFEFORM = 8;
+  /**
+   * Dictionary temperature.
+   */
   public static final int DICT_TEMPERATURE = 9;
+  /**
+   * Dictionary usage.
+   */
   public static final int DICT_USAGE = 10;
+  /**
+   * Dictionary water.
+   */
   public static final int DICT_WATER = 11;
+  /**
+   * Dictionary substrate.
+   */
   public static final int DICT_SUBSTRATE = 12;
 
+  /**
+   * Operator =.
+   */
   public static final int OP_EQUALS = 0;
+  /**
+   * Dictionary between.
+   */
   public static final int OP_BETWEEN = 1;
 
   private String selectDatabase = null;
@@ -42,8 +96,8 @@ public class DictionaryBean extends AbstractFormBean {
   private String searchValMax = null;
 
   /**
-   *
-   * @return
+   * Decode dictionary.
+   * @return Name of the dictionary.
    */
   public String getDictionaryHuman() {
     String ret = "n/a";
@@ -93,9 +147,9 @@ public class DictionaryBean extends AbstractFormBean {
   }
 
   /**
-   *
+   * Compute dictionary values.
    * @param dictionary
-   * @return
+   * @return Values as objects.
    */
   public List getDictionaryValues(int dictionary) {
     List results = new Vector();
@@ -144,10 +198,8 @@ public class DictionaryBean extends AbstractFormBean {
     } catch (Exception ex) {
       ex.printStackTrace(System.err);
       results = new Vector();
-    } finally {
-      if (null == results) results = new Vector();
-      return results;
     }
+    return results;
   }
 
   /** This method will transform the request parameters used for search back in search objects (AbstractSearchCriteria)
@@ -168,6 +220,7 @@ public class DictionaryBean extends AbstractFormBean {
 
   /** This method will transform the request parameters, back to an URL compatible type of request so that
    * one should not manually write the URL.
+   * @param classFields Fields which will be included within URL 
    * @return An URL compatible type of representation(i.e.: >>param1=val1&param2=val2&param3=val3 etc.<<
    */
   public String toURLParam(Vector classFields) {
@@ -175,57 +228,106 @@ public class DictionaryBean extends AbstractFormBean {
   }
 
   /** This method will transform the request parameters into a form compatible hidden input parameters, for example:
-   * &ltINPUT type="hidden" name="paramName" value="paramValue"&gt
+   * &ltINPUT type="hidden" name="paramName" value="paramValue"&gt.
+   * @param classFields Request fields which will be included in the FORM
    * @return An form compatible type of representation of request parameters
    */
   public String toFORMParam(Vector classFields) {
     return null;
   }
 
+  /**
+   * Getter.
+   * @return selectDatabase
+   */
   public String getSelectDatabase() {
     return selectDatabase;
   }
 
+  /**
+   * Setter.
+   * @param selectDatabase New value
+   */
   public void setSelectDatabase(String selectDatabase) {
     this.selectDatabase = selectDatabase;
   }
 
+  /**
+   * Getter.
+   * @return selectDictionary
+   */
   public String getSelectDictionary() {
     return selectDictionary;
   }
 
+  /**
+   * Setter.
+   * @param selectDictionary New value
+   */
   public void setSelectDictionary(String selectDictionary) {
     this.selectDictionary = selectDictionary;
   }
 
+  /**
+   * Getter.
+   * @return selectOp
+   */
   public String getSelectOp() {
     return selectOp;
   }
 
+  /**
+   * Setter.
+   * @param selectOp New value
+   */
   public void setSelectOp(String selectOp) {
     this.selectOp = selectOp;
   }
 
+  /**
+   * Getter.
+   * @return searchVal
+   */
   public String getSearchVal() {
     return searchVal;
   }
 
+  /**
+   * Setter.
+   * @param searchVal New value
+   */
   public void setSearchVal(String searchVal) {
     this.searchVal = searchVal;
   }
 
+  /**
+   * Getter.
+   * @return searchValMin
+   */
   public String getSearchValMin() {
     return searchValMin;
   }
 
+  /**
+   * Setter.
+   * @param searchValMin New value
+   */
   public void setSearchValMin(String searchValMin) {
     this.searchValMin = searchValMin;
   }
 
+  /**
+   * Getter.
+   * @return searchValMax
+   */
   public String getSearchValMax() {
     return searchValMax;
   }
 
+  /**
+   * Setter.
+   * @param searchValMax New value
+   */
   public void setSearchValMax(String searchValMax) {
     this.searchValMax = searchValMax;
   }

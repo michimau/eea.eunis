@@ -11,7 +11,7 @@ import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.sites.coordinates.CoordinatesDomain;
 import ro.finsiel.eunis.jrfTables.sites.coordinates.CoordinatesPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.search.sites.coordinates.CoordinatesBean;
@@ -22,15 +22,18 @@ import java.util.List;
 import java.util.Vector;
 
 
+/**
+ * TSV and XML report generation.
+ */
 public class TSVCoordinatesReport extends AbstractTSVReport
 {
   /**
-   * Form bean used for search
+   * Form bean used for search.
    */
   private CoordinatesBean formBean = null;
 
   /**
-   * Normal constructor
+   * Normal constructor.
    *
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
@@ -40,6 +43,7 @@ public class TSVCoordinatesReport extends AbstractTSVReport
     super( "CoordinatesReport_" + sessionID + ".tsv" );
     this.formBean = ( CoordinatesBean )formBean;
     this.filename = "CoordinatesReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "CoordinatesReport_" + sessionID + ".xml" );
     // Init the data factory
     if ( null != formBean )
     {
@@ -64,17 +68,17 @@ public class TSVCoordinatesReport extends AbstractTSVReport
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader()
+  public List<String> createHeader()
   {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     // Source database
     headers.addElement( "Source data set" );
     // Country
@@ -112,6 +116,7 @@ public class TSVCoordinatesReport extends AbstractTSVReport
         return;
       }
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
         List resultSet = dataFactory.getPage( _currPage );
@@ -124,7 +129,7 @@ public class TSVCoordinatesReport extends AbstractTSVReport
             designations = SitesSearchUtility.siteDesignationsAsCommaSeparatedString( site.getIdDesignation(), site.getIdGeoscope().toString() );
           }
 
-          Vector aRow = new Vector();
+          Vector<String> aRow = new Vector<String>();
           // Source data set
           aRow.addElement( SitesSearchUtility.translateSourceDB( site.getSourceDB() ) );
           // Country
@@ -141,9 +146,9 @@ public class TSVCoordinatesReport extends AbstractTSVReport
           // Year
           aRow.addElement( SitesSearchUtility.parseDesignationYear( site.getDesignationDate(), site.getSourceDB() ) );
           writeRow( aRow );
+          xmlreport.writeRow( aRow );
         }
       }
-
     }
     catch ( CriteriaMissingException ex )
     {

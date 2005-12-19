@@ -4,7 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : "Sites names" function - Popup for list of values in search page. Also used in "Sites neighborhood" function.
 --%>
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@page import="java.util.List, java.util.Iterator,
                 ro.finsiel.eunis.search.Utilities,
                 ro.finsiel.eunis.WebContentManagement"%>
@@ -13,7 +16,7 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   // Web content manager used in this page.
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   // getSearchString() - String to be searched
   String searchString = request.getParameter("englishName");
   boolean expandFullNames = Utilities.checkedStringToBoolean(request.getParameter("showAll"), false);
@@ -41,7 +44,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
     <title>
-      <%=contentManagement.getContent("sites_names-choice_title", false )%>
+      <%=cm.cms("sites_names-choice_title")%>
     </title>
     <script language="JavaScript" type="text/javascript">
       <!--
@@ -51,12 +54,6 @@
         window.opener.document.eunis.englishName.value=str;
         window.close();
       }
-
-      function editContent( idPage )
-      {
-        var url = "web-content-inline-editor.jsp?idPage=" + idPage;
-        window.open( url ,'', "width=540,height=500,status=0,scrollbars=0,toolbar=0,resizable=1,location=0");
-      }
     // -->
     </script>
   </head>
@@ -64,15 +61,17 @@
 <%
   if (sites != null && sites.size() > 0)
   {
-    out.print(Utilities.getTextMaxLimitForPopup(contentManagement,(sites == null ? 0 : sites.size())));
+    out.print(Utilities.getTextMaxLimitForPopup(cm,(sites == null ? 0 : sites.size())));
   }
   Iterator it = sites.iterator();
   if (sites!=null && !sites.isEmpty())
   {
 %>
-    <h6>List of values for:</h6>
+    <h2>
+      <%=cm.cmsText("list_of_values_for")%>:
+    </h2>
     <u>
-      <%=contentManagement.getContent("sites_names-choice_01")%>
+      <%=cm.cmsText("sites_names-choice_01")%>
     </u>
     <em>
       <%=Utilities.ReturnStringRelatioOp(operand)%>
@@ -83,7 +82,7 @@
     <br />
     <br />
     <div id="tab">
-      <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">
+      <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
     int i = 0;
     while (it.hasNext())
@@ -92,7 +91,8 @@
 %>
         <tr>
           <td bgcolor="<%=(0 == (i++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-            <a title="Click link to select the value" href="javascript:setLine('<%=site.getName().replaceAll( "'", "QUOTE")%>');"><%=Utilities.treatURLAmp( site.getName() )%></a>
+            <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=site.getName().replaceAll( "'", "QUOTE")%>');"><%=Utilities.treatURLAmp( site.getName() )%></a>
+            <%=cm.cmsTitle("click_link_to_select_value")%>
           </td>
         </tr>
 <%
@@ -107,14 +107,21 @@
   {
 %>
       <strong>
-        <%=contentManagement.getContent("sites_names-choice_02")%></strong>
+        <%=cm.cmsText("sites_names-choice_02")%></strong>
       <br />
       <br />
 <%
   }
 %>
       <form action="">
-        <input title="Close window" type="button" value="Close" onclick="javascript:window.close()" name="button" class="inputTextField" />
+        <label for="button2" class="noshow"><%=cm.cms("close_window_label")%></label>
+        <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
+        <%=cm.cmsLabel("close_window_label")%>
+        <%=cm.cmsTitle("close_window_title")%>
+        <%=cm.cmsInput("close_window_value")%>
       </form>
+    <%=cm.cmsMsg("sites_names-choice_title")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("list_of_values")%>
   </body>
 </html>

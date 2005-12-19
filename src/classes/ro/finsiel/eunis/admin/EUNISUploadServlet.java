@@ -4,13 +4,12 @@ import org.apache.commons.fileupload.DiskFileUpload;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.fileupload.FileUploadException;
-import ro.finsiel.eunis.OSEnvironment;
 import ro.finsiel.eunis.Settings;
 import ro.finsiel.eunis.factsheet.PicturesHelper;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
-import ro.finsiel.eunis.jrfTables.EunisRelatedReportsPersist;
 import ro.finsiel.eunis.jrfTables.EunisRelatedReportsDomain;
+import ro.finsiel.eunis.jrfTables.EunisRelatedReportsPersist;
 import ro.finsiel.eunis.session.SessionManager;
 
 import javax.servlet.http.HttpServlet;
@@ -19,9 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Properties;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is the servlet used for uploading files / documents on the server.<br />
@@ -65,7 +63,6 @@ public class EUNISUploadServlet extends HttpServlet {
     // Initilize the default settings
     try
     {
-      Properties env = OSEnvironment.getEnvVars();
       BASE_DIR = getServletContext().getInitParameter( "TOMCAT_HOME" );
       TEMP_DIR = BASE_DIR + "/webapps/eunis/temp";
     } catch (Exception ex) {

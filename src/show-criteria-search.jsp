@@ -4,12 +4,15 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Display saved search criterias per user, in all search pages.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.jrfTables.save_criteria.CriteriasForUsersDomain,
                  java.util.List,
                  ro.finsiel.eunis.jrfTables.save_criteria.CriteriasForUsersPersist,
-                 ro.finsiel.eunis.search.save_criteria.SaveSearchCriteria"%>
+                 ro.finsiel.eunis.search.save_criteria.SaveSearchCriteria"%><%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
-<%@page contentType="text/html"%>
 <form name="saveForm" method="post" action="delete-save-criteria.jsp">
   <input type ="hidden" name="userName" value="" />
   <input type ="hidden" name="pageName" value="" />
@@ -21,12 +24,12 @@ function setFormAndSubmit(userName,pageName,criteriaName) {
       document.saveForm.userName.value = userName;
       document.saveForm.pageName.value = pageName;
       document.saveForm.criteriaName.value = criteriaName;
-
       document.saveForm.submit();
    }
 //-->
 </script>
 <%
+  WebContentManagement cm = SessionManager.getWebContent();
 // If user has this right
 if( SessionManager.isAuthenticated() && SessionManager.isSave_search_criteria_RIGHT() )
 {
@@ -39,9 +42,12 @@ if( SessionManager.isAuthenticated() && SessionManager.isSave_search_criteria_RI
   if( criterias != null && criterias.size() > 0 )
   {
 %>
-    <img alt="Expand - Collapse" border="0" align="middle" src="images/mini/<%=(expandSearchCriteria.equals("yes") ? "collapse.gif" : "expand.gif")%>" />
+    <img alt="<%=cm.cms("show_criteria_search_expand")%>" border="0" align="middle" src="images/mini/<%=(expandSearchCriteria.equals("yes") ? "collapse.gif" : "expand.gif")%>" />
+    <%=cm.cmsAlt("show_criteria_search_expand")%>
     &nbsp;
-    <a title="Expand-Collapse" href="<%=pageName%>?expandSearchCriteria=<%=(expandSearchCriteria.equals("yes") ? "no" : "yes")%>"><%=(expandSearchCriteria.equalsIgnoreCase("yes") ? "Hide" : "Show")%> saved search criteria</a>
+    <a title="<%=cm.cms("show_criteria_search_expand")%>" href="<%=pageName%>?expandSearchCriteria=<%=(expandSearchCriteria.equals("yes") ? "no" : "yes")%>"><%=(expandSearchCriteria.equalsIgnoreCase("yes") ? cm.cms( "show_criteria_search_hide" ) :cm.cms( "show_criteria_search_show"))%> <%=cm.cmsText("show_criteria_search_saved_criteria")%></a>
+    <%=cm.cmsTitle("show_criteria_search_expand")%>
+
 <%
     if( expandSearchCriteria.equalsIgnoreCase( "yes" ) )
     {
@@ -61,9 +67,10 @@ if( SessionManager.isAuthenticated() && SessionManager.isSave_search_criteria_RI
          }
 %>
     <br />
-    <a title="Delete saved criteria" href="javascript:setFormAndSubmit('<%=SessionManager.getUsername()%>','<%=pageName%>','<%=criteria.getNameCriteria()%>');"><img alt="Delete" src="images/mini/delete.jpg" border="0" align="middle" /></a>
+    <a title="<%=cm.cms("show_criteria_search_delete")%>" href="javascript:setFormAndSubmit('<%=SessionManager.getUsername()%>','<%=pageName%>','<%=criteria.getNameCriteria()%>');"><img alt="<%=cm.cms("show_criteria_search_delete")%>" src="images/mini/delete.jpg" border="0" align="middle" /></a>
+    <%=cm.cmsTitle("show_criteria_search_delete")%>
     &nbsp;
-    <a title="Saved criteria" href="<%=url%>"><%=description%></a>
+    <a title="<%=cm.cms("show_criteria_saved_criteria")%>" href="<%=url%>"><%=description%></a>
 <%
       }
     }
@@ -71,3 +78,8 @@ if( SessionManager.isAuthenticated() && SessionManager.isSave_search_criteria_RI
 }
 %>
 <br />
+<%=cm.br()%>
+<%=cm.cmsMsg( "show_criteria_search_hide" )%>
+<%=cm.br()%>
+<%=cm.cmsMsg( "show_criteria_search_show")%>
+<%=cm.br()%>

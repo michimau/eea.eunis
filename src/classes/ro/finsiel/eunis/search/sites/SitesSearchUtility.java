@@ -1,8 +1,6 @@
 package ro.finsiel.eunis.search.sites;
 
-import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtSitesPersist;
+import ro.finsiel.eunis.jrfTables.*;
 import ro.finsiel.eunis.jrfTables.sites.designation_code.DesignationDomain;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SitesDesignationsDomain;
 import ro.finsiel.eunis.search.Utilities;
@@ -113,6 +111,52 @@ public class SitesSearchUtility
       _ex.printStackTrace( System.err );
     }
     return results;
+  }
+
+
+  /**
+   * Validate that site coordinates are correct in format.
+   * @param longitude Longitude
+   * @param longDeg Longitude
+   * @param longMin Longitude
+   * @param longSec Longitude
+   * @param latitude Latitude
+   * @param latDeg Latitude
+   * @param latMin Latitude
+   * @param latSec Latitude
+   * @return true if coordinates are valid (not null, not -1 etc.)
+   */
+  public static boolean validateCoordinates( String longitude, String longDeg, String longMin, String longSec,
+                                             String latitude, String latDeg, String latMin, String latSec )
+  {
+    boolean ret = false;
+    if ( longitude != null && longDeg != null && longMin != null && longSec != null &&
+            latitude != null && latDeg != null &&latMin != null && latSec != null )
+    {
+      if( longitude.equalsIgnoreCase( "E" ) || longitude.equalsIgnoreCase( "W" ) &&
+          latitude.equalsIgnoreCase( "N" ) || latitude.equalsIgnoreCase( "S" ) )
+      {
+        System.out.println( "longitude/latitude are OK..." );
+        if ( !longDeg.equalsIgnoreCase( "-1" ) && !longMin.equalsIgnoreCase( "-1" )
+                 && !longSec.equalsIgnoreCase( "-1" ) && !latDeg.equalsIgnoreCase( "-1" )
+                 && !latMin.equalsIgnoreCase( "-1" ) && !latSec.equalsIgnoreCase( "-1" ) )
+        {
+          int iLongDeg = Utilities.checkedStringToInt( longDeg, 0 );
+          int iLongMin = Utilities.checkedStringToInt( longMin, 0 );
+          int iLongSec = Utilities.checkedStringToInt( longSec, 0 );
+
+          int iLatDeg = Utilities.checkedStringToInt( latDeg, 0 );
+          int iLatMin = Utilities.checkedStringToInt( latMin, 0 );
+          int iLatSec = Utilities.checkedStringToInt( latSec, 0 );
+
+          if ( iLongDeg != 0 && iLongMin != 0 && iLongSec != 0 && iLatDeg != 0 && iLatMin != 0 && iLatSec != 0 )
+          {
+            ret = true;
+          }
+        }
+      }
+    }
+    return ret;
   }
 
   /**
@@ -226,7 +270,7 @@ public class SitesSearchUtility
     }
 
     StringBuffer ret = new StringBuffer();
-    ret.append( "<span class=\"coordinates\">" );
+    ret.append( "<span class=\"coordinates\">[" );
     // -----------
     ret.append( ( null != longitudeOrLatitude && !longitudeOrLatitude.equalsIgnoreCase( "n/a" ) ) ? longitudeOrLatitude : " " );
     ret.append( " " );
@@ -236,7 +280,7 @@ public class SitesSearchUtility
     ret.append( "'" );
     ret.append( ( null != seconds ) ? ( ( seconds.length() == 1 ) ? "0" + seconds : seconds ) : "00" );
     ret.append( "\"" );
-    ret.append( "</span>" );
+    ret.append( "]</span>" );
     return ret.toString();
   }
 
@@ -566,6 +610,12 @@ public class SitesSearchUtility
     return results;
   }
 
+  /**
+   * Retrieve site designations as comma separated string.
+   * @param idDesignation ID_DESIGN
+   * @param idGeoscope ID_GEOSCOPE
+   * @return Designations
+   */
   public static String siteDesignationsAsCommaSeparatedString( String idDesignation, String idGeoscope )
   {
     List results = new Vector();
@@ -665,4 +715,44 @@ public class SitesSearchUtility
     }
     return result;
   }
+
+  /**
+   * Find designations 'INHD'.
+   * @return List of Chm62edtDesignationsPersist objects
+   */
+  public static List findDesignationsTypeC()
+  {
+    List results = new Vector();
+    try
+    {
+      results = new Chm62edtDesignationsDomain().findWhere("ID_DESIGNATION='INBD' OR ID_DESIGNATION='INHD'");
+    }
+    catch ( Exception _ex )
+    {
+      _ex.printStackTrace( System.err );
+    }
+    return results;
+  }
+
+  /**
+   * Find site type.
+   * @param idSite site id
+   * @return Site type in english
+   */
+  public static String getSiteType(String idSite) {
+    List results = new Vector();
+    String sType = "";
+    try {
+      results = new Chm62edtSitesAttributesDomain().findWhere(" NAME='TYPE' AND ID_SITE = '" + idSite + "'");
+      if(results.size()>0) {
+        Chm62edtSitesAttributesPersist t = (Chm62edtSitesAttributesPersist)results.get(0);
+        sType = t.getValue();
+      }
+    } catch (Exception _ex) {
+      _ex.printStackTrace(System.err);
+    }
+    return sType;
+  }
+
+
 }

@@ -4,18 +4,17 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : In this page are deleted from database saved easy search criteria.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.search.users.UsersUtility"%>
 <%
   // Set the database connection parameters
-  String SQL_DRV="";
-  String SQL_URL="";
-  String SQL_USR="";
-  String SQL_PWD="";
-
-  SQL_DRV = application.getInitParameter("JDBC_DRV");
-  SQL_URL = application.getInitParameter("JDBC_URL");
-  SQL_USR = application.getInitParameter("JDBC_USR");
-  SQL_PWD = application.getInitParameter("JDBC_PWD");
+  String SQL_DRV = application.getInitParameter("JDBC_DRV");
+  String SQL_URL = application.getInitParameter("JDBC_URL");
+  String SQL_USR = application.getInitParameter("JDBC_USR");
+  String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
   // The record witch will be deteled is identified by userName, pageName and criteriaName parameters,
   // so they must be not null

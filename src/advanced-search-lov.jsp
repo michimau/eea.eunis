@@ -10,18 +10,24 @@
       * val - value/part of the value which is part of the search.
       * oper - Relation operator between criteria and value
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.sql.Connection,
                  java.sql.Statement,
                  java.sql.DriverManager,
-                 java.sql.ResultSet,
-                 ro.finsiel.eunis.search.Utilities"%>
-<%@page contentType="text/html"%>
+                 java.sql.ResultSet"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-    <title>List of values</title>
+  <%
+    WebContentManagement cm = SessionManager.getWebContent();
+  %>
+    <title><%=cm.cms("list_of_values")%></title>
   <%
     // Request parameters
     String ctl = request.getParameter("ctl");
@@ -76,76 +82,10 @@
   <body>
 <%
   // Set the database connection parameters
-  String SQL_DRV="";
-  String SQL_URL="";
-  String SQL_USR="";
-  String SQL_PWD="";
-
-    // If some of them is null, the wanted database operation isn't made
-  SQL_DRV = application.getInitParameter("JDBC_DRV");
-  if(SQL_DRV == null) {
-    %>
-    Error: Could not find parameter JDBC_DRV in web.xml.
-    <br />
-    The database connection could not be established.
-    <br />
-    <form action="">
-      <label for="btnclose" class="noshow">Close window</label>
-      <input type="button" title="Close window" value="Close" onclick="javascript:window.close()" name="btnclose" id="btnclose" class="inputTextField" />
-    </form>
-    </body>
-    </html>
-    <%
-    return;
-  }
-  SQL_URL = application.getInitParameter("JDBC_URL");
-  if(SQL_URL == null) {
-    %>
-    Error: Could not find parameter JDBC_URL in web.xml.
-    <br />
-    The database connection could not be established.
-    </body>
-    </html>
-    <br />
-    <form action="">
-      <label for="btnclose" class="noshow">Close window</label>
-      <input type="button" value="Close window" title="Close window" onclick="javascript:window.close()" id="btnclose" name="btnclose" class="inputTextField" />
-    </form>
-    <%
-    return;
-  }
-  SQL_USR = application.getInitParameter("JDBC_USR");
-  if(SQL_USR == null) {
-    %>
-    Error: Could not find parameter JDBC_USR in web.xml.
-    <br />
-    The database connection could not be established.
-    </body>
-    </html>
-    <br />
-    <form action="">
-      <label for="btnclose" class="noshow">Close window</label>
-      <input type="button" value="Close window" title="Close window" onclick="javascript:window.close()" id="btnclose" name="btnclose" class="inputTextField" />
-    </form>
-    <%
-    return;
-  }
-  SQL_PWD = application.getInitParameter("JDBC_PWD");
-  if(SQL_PWD == null) {
-    %>
-    Error: Could not find parameter JDBC_PWD in web.xml.
-    <br />
-    The database connection could not be established.
-    <br />
-    <form action="">
-      <label for="btnclose" class="noshow">Close window</label>
-      <input type=button value="Close window" title="Close" onclick="javascript:window.close()" name="btnclose" id="btnclose" class="inputTextField" />
-    </form>
-    </body>
-    </html>
-    <%
-    return;
-  }
+  String SQL_DRV = application.getInitParameter("JDBC_DRV");
+  String SQL_URL = application.getInitParameter("JDBC_URL");
+  String SQL_USR = application.getInitParameter("JDBC_USR");
+  String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
   String SQL="";
   Connection con = null;
@@ -178,6 +118,7 @@
      lov.equalsIgnoreCase("Ph") ||
      lov.equalsIgnoreCase("Climate") ||
      lov.equalsIgnoreCase("Cover") ||
+     lov.equalsIgnoreCase("Depth") ||
      lov.equalsIgnoreCase("Geomorph") ||
      lov.equalsIgnoreCase("Humidity") ||
      lov.equalsIgnoreCase("Life_Form") ||
@@ -453,15 +394,15 @@
     if(natureobject.equalsIgnoreCase("Species")) {
       String SQLWhere="";
       if(oper.equalsIgnoreCase("Equal")) {
-        SQLWhere=" (`DC_SOURCE`.`SOURCE` = '"+ val + "') ORDER BY `DC_SOURCE`.`SOURCE`";
+        SQLWhere=" (`DC_SOURCE`.`SOURCE` = '"+ val + "')";
       } else {
         if(oper.equalsIgnoreCase("Contains")) {
-          SQLWhere=" (`DC_SOURCE`.`SOURCE` LIKE '%"+ val + "%') ORDER BY `DC_SOURCE`.`SOURCE`";
+          SQLWhere=" (`DC_SOURCE`.`SOURCE` LIKE '%"+ val + "%')";
         } else {
           if(oper.equalsIgnoreCase("Between")) {
-            SQLWhere=" (`DC_SOURCE`.`SOURCE` = '"+ val + "') ORDER BY `DC_SOURCE`.`SOURCE`";
+            SQLWhere=" (`DC_SOURCE`.`SOURCE` = '"+ val + "')";
           } else {
-            SQLWhere=" (`DC_SOURCE`.`SOURCE` LIKE '%"+ val + "%') ORDER BY `DC_SOURCE`.`SOURCE`";
+            SQLWhere=" (`DC_SOURCE`.`SOURCE` LIKE '%"+ val + "%')";
           }
         }
       }
@@ -522,6 +463,8 @@
       SQL+="      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
       SQL+="    WHERE "+SQLWhere;
       SQL+="    GROUP BY DC_SOURCE.SOURCE,DC_SOURCE.EDITOR";
+      SQL+="    ORDER BY `DC_SOURCE`.`SOURCE`";
+      SQL+="    LIMIT 0,100";
     }
     if(natureobject.equalsIgnoreCase("Habitat")) {
       String isGoodHabitat = " IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',RIGHT(CHM62EDT_HABITAT.CODE_2000,2),1) <> IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '','00',2) AND IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',LENGTH(CHM62EDT_HABITAT.CODE_2000),1) = IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',4,1) ";
@@ -550,15 +493,15 @@
     if(natureobject.equalsIgnoreCase("Species")) {
       String SQLWhere="";
       if(oper.equalsIgnoreCase("Equal")) {
-        SQLWhere=" (`DC_TITLE`.`TITLE` = '"+ val + "') ORDER BY `DC_TITLE`.`TITLE`";
+        SQLWhere=" (`DC_TITLE`.`TITLE` = '"+ val + "')";
       } else {
         if(oper.equalsIgnoreCase("Contains")) {
-          SQLWhere=" (`DC_TITLE`.`TITLE` LIKE '%"+ val + "%') ORDER BY `DC_TITLE`.`TITLE`";
+          SQLWhere=" (`DC_TITLE`.`TITLE` LIKE '%"+ val + "%')";
         } else {
           if(oper.equalsIgnoreCase("Between")) {
-            SQLWhere=" (`DC_TITLE`.`TITLE` = '"+ val + "') ORDER BY `DC_TITLE`.`TITLE`";
+            SQLWhere=" (`DC_TITLE`.`TITLE` = '"+ val + "')";
           } else {
-            SQLWhere=" (`DC_TITLE`.`TITLE` LIKE '%"+ val + "%') ORDER BY `DC_TITLE`.`TITLE`";
+            SQLWhere=" (`DC_TITLE`.`TITLE` LIKE '%"+ val + "%')";
           }
         }
       }
@@ -619,6 +562,8 @@
       SQL+="      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
       SQL+="    WHERE "+SQLWhere;
       SQL+="    GROUP BY DC_SOURCE.SOURCE,DC_SOURCE.EDITOR";
+      SQL+="    ORDER BY `DC_TITLE`.`TITLE`";
+      SQL+="    LIMIT 0,100";
     }
 
     if(natureobject.equalsIgnoreCase("Habitat")) {
@@ -824,19 +769,25 @@
   try {
     // Execute SQL statement
     if(SQL.length()>0 && !lov.equalsIgnoreCase("SourceDatabase")) {
-      System.out.println("SQL = " + SQL);
+      //System.out.println("SQL = " + SQL);
       ps = con.createStatement();
       rs = ps.executeQuery(SQL);
 
       if(!rs.isBeforeFirst()) {
-        out.println("<strong>No results were found.</strong>");
+        out.println("<strong>"+cm.cms("no_results_were_found")+"</strong>");
         out.println("<br />");
       } else {
         %>
-        <h6>List of values:</h6>
+        <h2><%=cm.cmsText("list_of_values")%>:</h2>
+        <br />
+        <strong>
+        <%=cm.cmsText("warning_first_100_values")%>
+        </strong>
+        <br />
+        <br />
         <u><%=ro.finsiel.eunis.search.Utilities.SplitString(lov)%></u>
         <em><%=oper%></em>
-        <strong><%=val%></strong>
+        <strong><%=val.length()==0?"%":val%></strong>
         <br />
         <br />
         <div id="tab">
@@ -857,7 +808,7 @@
           <tr bgcolor="<%=(0 == (cnt % 2) ? "#EEEEEE" : "#FFFFFF")%>">
             <td>
             <%
-            out.println("<a title=\"Click link to select the value\" href=\"javascript:setValue('"+rs.getString(1)+"')\">"+rs.getString(1)+"</a>");
+            out.println("<a title=\"" + cm.cms("click_link_to_select_value") + "\" href=\"javascript:setValue('"+rs.getString(1)+"')\">"+rs.getString(1)+"</a>");
             %>
             </td>
             <td>
@@ -875,29 +826,40 @@
         %>
         </table>
         </div>
-        <%=Utilities.getAdvancedTextWarningForPopup(cnt)%>
         <%
       }
       rs.close();
       ps.close();
       con.close();
     } else {
-      out.println("<strong>No list of values available.</strong>");
-      out.println("<br />");
+        if(!lov.equalsIgnoreCase("SourceDatabase")) {
+          out.println("<strong>"+cm.cms("no_list_of_values_available")+"</strong>");
+          out.println("<br />");
+        }
     }
   } catch (Exception e) {
+    e.printStackTrace();
     //System.out.println(e.toString());
-    out.println("<strong>Could not retrieve the list of values from the database.</strong>");
+    out.println("<strong>"+cm.cms("could_not_retrieve_list_of_values")+"</strong>");
     out.println("<br />");
   }
 %>
     <br />
     <form action="">
-      <label for="btnclose" class="noshow">Close window</label>
-      <input type="button" title="Close window" value="Close" onclick="javascript:window.close()" name="btnclose" id="btnclose" class="inputTextField" />
+      <label for="btnclose" class="noshow"><%=cm.cms("close_window")%></label>
+      <input type="button" title="<%=cm.cms("close_window")%>" value="<%=cm.cms("close_button")%>" onclick="javascript:window.close()" name="btnclose" id="btnclose" class="inputTextField" />
+      <%=cm.cmsLabel("close_window")%>
+      <%=cm.cmsInput("close_button")%>
     </form>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("list_of_values")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("no_list_of_values_available")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("could_not_retrieve_list_of_values")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("click_link_to_select_value")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("no_results_were_found")%>
   </body>
 </html>
-<%
-  response.flushBuffer();
-%>

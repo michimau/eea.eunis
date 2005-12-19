@@ -305,10 +305,18 @@ public class SitesBean extends AbstractFormBean {
     this.searchAttribute = searchAttribute;
   }
 
+  /**
+   * Getter for showSites.
+   * @return showSites
+   */
   public String getShowSites() {
     return showSites;
   }
 
+  /**
+   * Setter for showSites.
+   * @param showSites New value
+   */
   public void setShowSites( String showSites ) {
     this.showSites = showSites;
   }

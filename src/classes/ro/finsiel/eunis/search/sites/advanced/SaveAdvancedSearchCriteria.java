@@ -98,7 +98,6 @@ public class SaveAdvancedSearchCriteria {
       String name = userName + CriteriaMaxNumber(userName);
       String d = (description != null && !description.equalsIgnoreCase("") ? description : getDescription());
       d = Utilities.removeQuotes(d);
-
       if (rs.isBeforeFirst()) {
         while (!rs.isLast()) {
           rs.next();
@@ -118,7 +117,6 @@ public class SaveAdvancedSearchCriteria {
           SQL += "'" + fromWhere + "')";
 
           ps1.executeUpdate(SQL);
-
           ps1.close();
           con1.close();
         }
@@ -458,7 +456,7 @@ public class SaveAdvancedSearchCriteria {
       rs = ps.executeQuery(SQL);
 
       if (rs.isBeforeFirst()) {
-        result = "<TABLE width='740' border=0>";
+        result = "<TABLE width=\"100%\" border=\"0\">";
         while (!rs.isLast()) {
           rs.next();
           String sourceDB = getSourceDB(rs.getString("CRITERIA_NAME"), rs.getString("NATURE_OBJECT"), SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);

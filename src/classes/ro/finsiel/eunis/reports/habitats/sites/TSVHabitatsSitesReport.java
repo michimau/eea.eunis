@@ -11,7 +11,7 @@ import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesDomain;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.habitats.sites.SitesBean;
 import ro.finsiel.eunis.search.habitats.sites.SitesPaginator;
@@ -22,16 +22,18 @@ import java.util.List;
 import java.util.Vector;
 
 
+/**
+ * TSV and XML report generation.
+ */
 public class TSVHabitatsSitesReport extends AbstractTSVReport
 {
   /**
-   * Form bean used for search
+   * Form bean used for search.
    */
   private SitesBean formBean = null;
 
   /**
-   * Normal constructor
-   *
+   * Constructor.
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    */
@@ -40,6 +42,7 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
     super( "HabitatsSitesReport_" + sessionID + ".tsv" );
     this.formBean = ( SitesBean ) formBean;
     this.filename = "HabitatsSitesReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "HabitatsSitesReport_" + sessionID + ".xml" );
     // Init the data factory
     if ( null != formBean )
     {
@@ -60,17 +63,17 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader()
+  public List<String> createHeader()
   {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     // Code
     headers.addElement( "EUNIS code" );
     headers.addElement( "ANNEX I code" );
@@ -104,6 +107,7 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
       boolean[] source_db = { true, true, true, true, true, true, true, true };
       Integer database = HabitatsSitesDomain.SEARCH_BOTH;
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
         List resultSet = dataFactory.getPage( _currPage );
@@ -128,33 +132,33 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
 
               if ( ii == 0 )
               {
-                Vector aRow = new Vector();
+                Vector<String> aRow = new Vector<String>();
                 // Code
                 aRow.addElement( habitat.getEunisHabitatCode() );
                 aRow.addElement( habitat.getCodeAnnex1() );
                 // Name
                 aRow.addElement( habitat.getScientificName() );
                 // Sites
-                aRow.addElement( (String) l.get(0) + "(" + (String) l.get(1) + ")" );
+                aRow.addElement( l.get(0) + "(" + l.get(1) + ")" );
                 writeRow( aRow );
               }
               else
               {
-                Vector aRow = new Vector();
+                Vector<String> aRow = new Vector<String>();
                 // Code
                 aRow.addElement( "" );
                 aRow.addElement( "" );
                 // Name
                 aRow.addElement( "" );
                 // Sites names
-                aRow.addElement( (String) l.get(0) + "(" + (String) l.get(1) + ")" );
+                aRow.addElement( l.get(0) + "(" + l.get(1) + ")" );
                 writeRow( aRow );
               }
             }
           }
           else
           {
-            Vector aRow = new Vector();
+            Vector<String> aRow = new Vector<String>();
             // Code
             aRow.addElement( habitat.getEunisHabitatCode() );
             aRow.addElement( habitat.getCodeAnnex1() );
@@ -164,6 +168,23 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
             aRow.addElement( "-" );
             writeRow( aRow );
           }
+
+          // XML report
+          Vector<String> aRow = new Vector<String>();
+          // Code
+          aRow.addElement( habitat.getEunisHabitatCode() );
+          aRow.addElement( habitat.getCodeAnnex1() );
+          // Name
+          aRow.addElement( habitat.getScientificName() );
+          // Sites names
+          String sites = "";
+          for (int ii = 0; ii < resultsSites.size(); ii++)
+          {
+            List l = (List) resultsSites.get(ii);
+            sites += "<site name=\"" + l.get(0)  + "\" database=\"" + l.get(1) + "\" />";
+          }
+          aRow.addElement( sites );
+          xmlreport.writeRow( aRow );
         }
       }
     }

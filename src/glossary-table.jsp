@@ -4,8 +4,10 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Editor for glossary' function - table page.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.List,
                  ro.finsiel.eunis.jrfTables.species.glossary.Chm62edtGlossaryDomain,
                  ro.finsiel.eunis.jrfTables.species.glossary.Chm62edtGlossaryPersist,
@@ -26,7 +28,7 @@
 // - term - Used when action is 'delete', specifies TERM column from table
 // - idLanguage - Used when action is 'delete', specifies ID_LANGUAGE column from table.
 // - source - Used when action is 'delete', specifies SOURCE column from table
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 
   // action specifies an operation to do. If null, no action was specified.
   String action = Utilities.formatString(request.getParameter("action"), "");
@@ -113,18 +115,19 @@
     sortURLParam = Utilities.writeURLParameter("sort", sort).toString();
   }
 %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=contentManagement.getContent( "generic_glossary-table_title", false )%>
+      <%=cm.cms("generic_glossary-table_title")%>
     </title>
     <script language="JavaScript" type="text/javascript">
     <!--
       function deleteEntry(index)
       {
-        if ( confirm( "<%=contentManagement.getContent( "generic_glossary-table_01" , false )%>" ) )
+        if ( confirm( "<%=cm.cms( "generic_glossary-table_01")%>" ) )
         {
           var formObject = eval("document.glossary" + index);
           formObject.submit();
@@ -135,14 +138,16 @@
     </script>
 </head>
 <body>
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="Home#index.jsp,Services#services.jsp,Glossary editor"/>
+      <jsp:param name="location" value="home_location#index.jsp,services_location#services.jsp,glossary_editor_location"/>
     </jsp:include>
     <table summary="layout" width="100%" border="0">
       <tr>
         <td>
-          <%=contentManagement.getContent( "generic_glossary-table_02" )%>
+          <%=cm.cmsText( "generic_glossary-table_02" )%>
         </td>
       </tr>
     </table>
@@ -153,17 +158,20 @@
         <tr>
           <td>
             <strong>
-              <%=contentManagement.getContent( "generic_glossary-table_03" )%>
+              <%=cm.cmsText( "generic_glossary-table_03" )%>
             </strong>
           </td>
         </tr>
         <tr>
           <td valign="middle">
-            <%=contentManagement.getContent( "generic_glossary-table_04" )%>
-            <label for="filter" class="noshow">Search value</label>
-            <input title="Searh value" type="text" name="filter" id="filter" value="<%=filter%>" size="30" class="inputTextField" />
-            <label for="search" class="noshow">Search</label>
-            <input title="Search" type="submit" name="search" id="search" value="<%=contentManagement.getContent( "generic_glossary-table_05",false )%>" class="inputTextField" />
+            <%=cm.cmsText( "generic_glossary-table_04" )%>
+            <label for="filter" class="noshow"><%=cm.cms("glossary_search_value")%></label>
+            <input title="<%=cm.cms("glossary_search_value")%>" type="text" name="filter" id="filter" value="<%=filter%>" size="30" class="inputTextField" />
+            <%=cm.cmsLabel("glossary_search_value")%>
+            <label for="search" class="noshow"><%=cm.cms("search_btn")%></label>
+            <input title="<%=cm.cms("search_btn")%>" type="submit" name="search" id="search" value="<%=cm.cms( "generic_glossary-table_05")%>" class="inputTextField" />
+            <%=cm.cmsLabel("search_btn")%>
+            <%=cm.cmsInput( "generic_glossary-table_05")%>
             <%
               if (null != sort && !sort.equalsIgnoreCase(""))
               {
@@ -177,7 +185,7 @@
       </table>
     </form>
     <br />
-    <a title="Open glossary editor" href="glossary-editor.jsp"><%=contentManagement.getContent( "generic_glossary-table_06" )%></a>
+    <a title="<%=cm.cms("open_glossary_editor")%>" href="glossary-editor.jsp"><%=cm.cmsText( "generic_glossary-table_06" )%></a><%=cm.cmsTitle("open_glossary_editor")%>
 <%
   if (rows.size() > 0)
   {
@@ -188,58 +196,68 @@
           &nbsp;
         </th>
         <th class="resultHeader" nowrap="nowrap">
-          <a title="Sort results on this column" href="glossary-table.jsp?sort=TERM<%=filterURLParam%>">
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=TERM<%=filterURLParam%>">
             <%=sort.equalsIgnoreCase("TERM") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%>
-            <%=contentManagement.getContent( "generic_glossary-table_07" )%>
+            <%=cm.cmsText( "generic_glossary-table_07" )%>
           </a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
-            <%=contentManagement.getContent( "generic_glossary-table_08" )%>
+            <%=cm.cmsText( "generic_glossary-table_08" )%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
-          <a title="Sort results on this column" href="glossary-table.jsp?sort=SOURCE<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("SOURCE") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=contentManagement.getContent( "generic_glossary-table_09" )%>
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=SOURCE<%=filterURLParam%>">
+            <%=sort.equalsIgnoreCase("SOURCE") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_09" )%>
           </a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
-          <a title="Sort results on this column" href="glossary-table.jsp?sort=DEFINITION<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("DEFINITION") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=contentManagement.getContent( "generic_glossary-table_10" )%>
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=DEFINITION<%=filterURLParam%>">
+            <%=sort.equalsIgnoreCase("DEFINITION") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_10" )%>
           </a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
-          <a title="Sort results on this column" href="glossary-table.jsp?sort=LINK_DESCRIPTION<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("LINK_DESCRIPTION") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=contentManagement.getContent( "generic_glossary-table_11" )%>
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=LINK_DESCRIPTION<%=filterURLParam%>">
+            <%=sort.equalsIgnoreCase("LINK_DESCRIPTION") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_11" )%>
           </a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
-          <a title="Sort results on this column" href="glossary-table.jsp?sort=LINK_URL<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("LINK_URL") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=contentManagement.getContent( "generic_glossary-table_12" )%>
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=LINK_URL<%=filterURLParam%>">
+            <%=sort.equalsIgnoreCase("LINK_URL") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_12" )%>
           </a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
-          <a title="Sort results on this column" href="glossary-table.jsp?sort=REFERENCE<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("REFERENCE") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=contentManagement.getContent( "generic_glossary-table_13" )%>
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=REFERENCE<%=filterURLParam%>">
+            <%=sort.equalsIgnoreCase("REFERENCE") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_13" )%>
           </a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
-          <a title="Sort results on this column" href="glossary-table.jsp?sort=DATE_CHANGED<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("DATE_CHANGED") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=contentManagement.getContent( "generic_glossary-table_14" )%>
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=DATE_CHANGED<%=filterURLParam%>">
+            <%=sort.equalsIgnoreCase("DATE_CHANGED") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_14" )%>
           </a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th align="center" class="resultHeader" nowrap="nowrap">
-          <a title="Sort results on this column" href="glossary-table.jsp?sort=CURRENT<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("CURRENT") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=contentManagement.getContent( "generic_glossary-table_15" )%>
+        <th class="resultHeader" style="text-align : center; white-space : nowrap;">
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=CURRENT<%=filterURLParam%>">
+            <%=sort.equalsIgnoreCase("CURRENT") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_15" )%>
           </a>
-        </th>
-        <th class="resultHeader" nowrap="nowrap">
-          <a title="Sort results on this column" href="glossary-table.jsp?sort=TERM_DOMAIN<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("TERM_DOMAIN") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=contentManagement.getContent( "generic_glossary-table_16" )%>
-          </a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
-          <a title="Sort results on this column" href="glossary-table.jsp?sort=SEARCH_DOMAIN<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("SEARCH_DOMAIN") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=contentManagement.getContent( "generic_glossary-table_17" )%>
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=TERM_DOMAIN<%=filterURLParam%>">
+            <%=sort.equalsIgnoreCase("TERM_DOMAIN") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_16" )%>
           </a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th class="resultHeader" nowrap="nowrap">
+          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=SEARCH_DOMAIN<%=filterURLParam%>">
+            <%=sort.equalsIgnoreCase("SEARCH_DOMAIN") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_17" )%>
+          </a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
 <%
@@ -303,11 +321,13 @@
 <%
               }
 %>
-            <a title="Delete term" href="javascript: deleteEntry(<%=i%>);"><img alt="Delete term" src="images/mini/delete.jpg" border="0" /></a>
+            <a title="<%=cm.cms("glossary_delete_term")%>" href="javascript: deleteEntry(<%=i%>);"><img alt="<%=cm.cms("glossary_delete_term")%>" src="images/mini/delete.jpg" border="0" /></a>
+            <%=cm.cmsTitle("glossary_delete_term")%>
           </form>
         </td>
         <td valign="top">
-          <a title="Open glossary editor" href="glossary-editor.jsp?term=<%=row.getTerm()%>&amp;idLanguage=<%=row.getIdLanguage()%>&amp;source=<%=row.getSource()%><%=sortURLParam%><%=filterURLParam%>">
+          <a title="<%=cm.cms("open_glossary_editor")%>" href="glossary-editor.jsp?term=<%=row.getTerm()%>&amp;idLanguage=<%=row.getIdLanguage()%>&amp;source=<%=row.getSource()%><%=sortURLParam%><%=filterURLParam%>">
+            <%=cm.cmsTitle("open_glossary_editor")%>
             <%=row.getTerm()%>
           </a>
         </td>
@@ -328,7 +348,7 @@
           if (linkUrl != null)
           {
         %>
-            <a title="Open URL" href="<%=linkUrl%>"><%=row.getLinkUrl()%></a>
+            <a title="<%=cm.cms("open_url")%>" href="<%=linkUrl%>"><%=row.getLinkUrl()%></a><%=cm.cmsTitle("open_url")%>
         <%
           } else {
         %>
@@ -360,9 +380,14 @@
 <%
   }
 %>
+    <%=cm.cmsMsg("generic_glossary-table_title")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg( "generic_glossary-table_01")%>
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="glossary-table.jsp" />
     </jsp:include>
     </div>
-  </body>
+    </div>
+    </div>
+</body>
 </html>

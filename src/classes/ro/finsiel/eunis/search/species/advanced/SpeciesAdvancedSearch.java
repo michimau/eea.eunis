@@ -98,6 +98,9 @@ public class SpeciesAdvancedSearch {
       if (Operand.equalsIgnoreCase("Contains") && ValueMin.length() == 0) {
         return;
       }
+      if (Operand.equalsIgnoreCase("Regex") && ValueMin.length() == 0) {
+        return;
+      }
       if (Operand.equalsIgnoreCase("Between") && ValueMin.length() == 0) {
         return;
       }
@@ -225,6 +228,9 @@ public class SpeciesAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             speciesSQL += " WHERE SCIENTIFIC_NAME = '" + sValueMin + "'";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            speciesSQL += " WHERE SCIENTIFIC_NAME REGEXP '" + sValueMin + "'";
+          }
         }
 
         if (sTable.equalsIgnoreCase("VernacularName")) {
@@ -242,6 +248,9 @@ public class SpeciesAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             speciesSQL += " (CHM62EDT_REPORT_ATTRIBUTES.VALUE = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regexp")) {
+            speciesSQL += " (CHM62EDT_REPORT_ATTRIBUTES.VALUE REGEXP '" + sValueMin + "')";
+          }
         }
 
         if (sTable.equalsIgnoreCase("Group")) {
@@ -253,6 +262,9 @@ public class SpeciesAdvancedSearch {
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             speciesSQL += " WHERE (`CHM62EDT_GROUP_SPECIES`.`COMMON_NAME` LIKE '%" + sValueMin + "%')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            speciesSQL += " WHERE (`CHM62EDT_GROUP_SPECIES`.`COMMON_NAME` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Between")) {
             speciesSQL += " WHERE ID_GROUP_SPECIES >= " + GetID(sValueMin, "GROUP_SPECIES", "", "COMMON_NAME");
@@ -267,6 +279,9 @@ public class SpeciesAdvancedSearch {
           }
           if (sOperand.equalsIgnoreCase("Equal")) {
             SQLWhere = " (`DC_SOURCE`.`SOURCE` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            SQLWhere = " (`DC_SOURCE`.`SOURCE` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             SQLWhere = " (`DC_SOURCE`.`SOURCE` LIKE '%" + sValueMin + "%')";
@@ -340,6 +355,9 @@ public class SpeciesAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             speciesSQL += " AND (`DC_TITLE`.`TITLE` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            speciesSQL += " AND (`DC_TITLE`.`TITLE` REGEXP '" + sValueMin + "')";
+          }
           if (sOperand.equalsIgnoreCase("Contains")) {
             speciesSQL += " AND (`DC_TITLE`.`TITLE` LIKE '%" + sValueMin + "%')";
           }
@@ -352,6 +370,9 @@ public class SpeciesAdvancedSearch {
           }
           if (sOperand.equalsIgnoreCase("Equal")) {
             SQLWhere = " (`DC_TITLE`.`TITLE` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            SQLWhere = " (`DC_TITLE`.`TITLE` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             SQLWhere = " (`DC_TITLE`.`TITLE` LIKE '%" + sValueMin + "%')";
@@ -419,6 +440,9 @@ public class SpeciesAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             speciesSQL += " WHERE (`CHM62EDT_TAXONOMY`.`NAME` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            speciesSQL += " WHERE (`CHM62EDT_TAXONOMY`.`NAME` REGEXP '" + sValueMin + "')";
+          }
           if (sOperand.equalsIgnoreCase("Contains")) {
             speciesSQL += " WHERE (`CHM62EDT_TAXONOMY`.`NAME` LIKE '%" + sValueMin + "%')";
           }
@@ -436,6 +460,9 @@ public class SpeciesAdvancedSearch {
           speciesSQL += " AND (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'CONSERVATION_STATUS')";
           if (sOperand.equalsIgnoreCase("Equal")) {
             speciesSQL += " AND (`CHM62EDT_CONSERVATION_STATUS`.`NAME` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            speciesSQL += " AND (`CHM62EDT_CONSERVATION_STATUS`.`NAME` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             speciesSQL += " AND (`CHM62EDT_CONSERVATION_STATUS`.`NAME` LIKE '%" + sValueMin + "%')";
@@ -456,6 +483,9 @@ public class SpeciesAdvancedSearch {
           speciesSQL += " AND (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'CONSERVATION_STATUS')";
           if (sOperand.equalsIgnoreCase("Equal")) {
             speciesSQL += " AND (`CHM62EDT_CONSERVATION_STATUS`.`NAME` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            speciesSQL += " AND (`CHM62EDT_CONSERVATION_STATUS`.`NAME` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             speciesSQL += " AND (`CHM62EDT_CONSERVATION_STATUS`.`NAME` LIKE '%" + sValueMin + "%')";
@@ -479,6 +509,9 @@ public class SpeciesAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             speciesSQL += " WHERE (`CHM62EDT_COUNTRY`.`AREA_NAME_EN` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            speciesSQL += " WHERE (`CHM62EDT_COUNTRY`.`AREA_NAME_EN` REGEXP '" + sValueMin + "')";
+          }
         }
         if (sTable.equalsIgnoreCase("Biogeoregion")) {
           speciesSQL = "SELECT DISTINCT `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`";
@@ -494,6 +527,9 @@ public class SpeciesAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             speciesSQL += " WHERE (`CHM62EDT_BIOGEOREGION`.`NAME` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            speciesSQL += " WHERE (`CHM62EDT_BIOGEOREGION`.`NAME` REGEXP '" + sValueMin + "')";
+          }
         }
         if (sTable.equalsIgnoreCase("Abundance")) {
           speciesSQL = "SELECT DISTINCT `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`";
@@ -504,6 +540,9 @@ public class SpeciesAdvancedSearch {
           speciesSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'ABUNDANCE')";
           if (sOperand.equalsIgnoreCase("Equal")) {
             speciesSQL += " AND (`CHM62EDT_ABUNDANCE`.`DESCRIPTION` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            speciesSQL += " AND (`CHM62EDT_ABUNDANCE`.`DESCRIPTION` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             speciesSQL += " AND (`CHM62EDT_ABUNDANCE`.`DESCRIPTION` LIKE '%" + sValueMin + "%')";
@@ -527,6 +566,9 @@ public class SpeciesAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             speciesSQL += " AND (`CHM62EDT_LEGAL_STATUS`.`COMMENT` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            speciesSQL += " AND (`CHM62EDT_LEGAL_STATUS`.`COMMENT` REGEXP '" + sValueMin + "')";
+          }
           if (sOperand.equalsIgnoreCase("Between")) {
             speciesSQL += " AND (`CHM62EDT_LEGAL_STATUS`.`ID_LEGAL_STATUS` >= " + GetID(sValueMin, "LEGAL_STATUS", "", "COMMENT") + ")";
             speciesSQL += " AND (`CHM62EDT_LEGAL_STATUS`.`ID_LEGAL_STATUS` <= " + GetID(sValueMax, "LEGAL_STATUS", "", "COMMENT") + ")";
@@ -542,6 +584,9 @@ public class SpeciesAdvancedSearch {
           speciesSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'TREND')";
           if (sOperand.equalsIgnoreCase("Equal")) {
             speciesSQL += " AND (`CHM62EDT_TREND`.`STATUS` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            speciesSQL += " AND (`CHM62EDT_TREND`.`STATUS` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             speciesSQL += " AND (`CHM62EDT_TREND`.`STATUS` LIKE '%" + sValueMin + "%')";
@@ -562,6 +607,9 @@ public class SpeciesAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             speciesSQL += " AND (`CHM62EDT_DISTRIBUTION_STATUS`.`NAME` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            speciesSQL += " AND (`CHM62EDT_DISTRIBUTION_STATUS`.`NAME` REGEXP '" + sValueMin + "')";
+          }
           if (sOperand.equalsIgnoreCase("Contains")) {
             speciesSQL += " AND (`CHM62EDT_DISTRIBUTION_STATUS`.`NAME` LIKE '%" + sValueMin + "%')";
           }
@@ -581,6 +629,9 @@ public class SpeciesAdvancedSearch {
           if (sOperand.equalsIgnoreCase("Equal")) {
             speciesSQL += " AND (`CHM62EDT_SPECIES_STATUS`.`DESCRIPTION` = '" + sValueMin + "')";
           }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            speciesSQL += " AND (`CHM62EDT_SPECIES_STATUS`.`DESCRIPTION` REGEX '" + sValueMin + "')";
+          }
           if (sOperand.equalsIgnoreCase("Contains")) {
             speciesSQL += " AND (`CHM62EDT_SPECIES_STATUS`.`DESCRIPTION` LIKE '%" + sValueMin + "%')";
           }
@@ -599,6 +650,9 @@ public class SpeciesAdvancedSearch {
           speciesSQL += " WHERE (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` = 'INFO_QUALITY')";
           if (sOperand.equalsIgnoreCase("Equal")) {
             speciesSQL += " AND (`CHM62EDT_INFO_QUALITY`.`STATUS` = '" + sValueMin + "')";
+          }
+          if (sOperand.equalsIgnoreCase("Regex")) {
+            speciesSQL += " AND (`CHM62EDT_INFO_QUALITY`.`STATUS` REGEXP '" + sValueMin + "')";
           }
           if (sOperand.equalsIgnoreCase("Contains")) {
             speciesSQL += " AND (`CHM62EDT_INFO_QUALITY`.`STATUS` LIKE '%" + sValueMin + "%')";
@@ -682,6 +736,7 @@ public class SpeciesAdvancedSearch {
       }
       con.close();
     } catch (Exception e) {
+      System.out.println("SQL = " + SQL);
       e.printStackTrace();
       return "";
     }

@@ -317,10 +317,18 @@ public class HabitatBean extends SitesFormBean {
     this.searchAttribute = searchAttribute;
   }
 
+  /**
+   * Getter.
+   * @return showSiteCode
+   */
   public String getShowSiteCode() {
     return showSiteCode;
   }
 
+  /**
+   * Setter.
+   * @param showSiteCode New value
+   */
   public void setShowSiteCode(String showSiteCode) {
     this.showSiteCode = showSiteCode;
   }

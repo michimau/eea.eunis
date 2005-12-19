@@ -34,16 +34,13 @@
  */
 package net.sf.jrf.sql.java14;
 
-import net.sf.jrf.sql.LocalDataSourceGenerator;
-
-import java.sql.*;
-import java.util.HashSet;
-import java.util.Properties;
-import javax.sql.DataSource;
-
-import net.sf.jrf.*;
+import net.sf.jrf.JRFProperties;
 import net.sf.jrf.exceptions.ConfigurationException;
+import net.sf.jrf.sql.LocalDataSourceGenerator;
 import org.apache.log4j.Category;
+
+import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * Implementation for default data source of <code>SimpleDataSource</code>

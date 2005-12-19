@@ -4,28 +4,35 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Related reports upload page' function - search page.
 --%>
-<%@ page contentType="text/html" %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement" %>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement" %><%@ page import="ro.finsiel.eunis.search.Utilities"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+  int maxSize = Utilities.checkedStringToInt( application.getInitParameter( "UPLOAD_FILE_MAX_SIZE" ), 10485760 ) / 1048576;
+%>
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    Upload manager
+    <%=cm.cms("related_reports_upload_page_title")%>
   </title>
   <script language="JavaScript" type="text/javascript">
   <!--
     function validateForm() {
       if (document.uploadFile.filename.value == "")
       {
-        alert("File selection field is empty. Please select a file from your computer.");
+        alert("<%=cm.cms("related_reports_upload_empty")%>.");
         return false;
       }
       if (document.uploadFile.description.value == "" ||
-          document.uploadFile.description.value == "Please enter a short document description here...") {
-          alert("Please enter a short description of your document, default is not acceptable.");
+          document.uploadFile.description.value == "<%=cm.cms("related_reports_upload_description_value")%>") {
+          alert("<%=cm.cms("related_reports_upload_validate_description")%>.");
           return false;
       }
       return true;
@@ -39,33 +46,46 @@
   if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT()) {
 %>
 <form action="<%=application.getInitParameter("DOMAIN_NAME")%>/fileupload" method="post" enctype="multipart/form-data" name="uploadFile" onsubmit="return validateForm();">
-  <input type="hidden" name="uploadType" value="file" />
+  <input type="hidden" name="uploadType" value="file" /><br />
+
+  <label for="filename"><%=cm.cmsText("related_reports_upload_filetoupload_label")%>:</label><br />
+  <input title="<%=cm.cms("related_reports_upload_filetoupload_title")%>" id="filename" name="filename" type="file" size="50" class="inputTextField" /><br />
+  <%=cm.cmsTitle("related_reports_upload_filetoupload_title")%>
+  <%=cm.cmsText("related_reports_upload_filetoupload_description")%>
   <br />
-  <label for="filename">File to upload:</label>
-  <br />
-  <input title="Select file to upload from your computer" id="filename" name="filename" type="file" size="50" class="inputTextField" />
-  <br />
-  Press <strong>Browse</strong> to select a file from your computer or <strong>Close</strong> to finish.
-  <br />
-  Please notice that file size is limited to <strong>4 MB</strong>.
+  <%=cm.cmsText("related_reports_upload_filetoupload_notice")%> <strong><%=maxSize%> MB</strong>.
   <br />
   <p>
-    <label for="description">Document description:</label>
+    <label for="description"><%=cm.cmsText("related_reports_upload_description_label")%>:</label>
     <br />
-    <textarea title="Document description" id="description" name="description" cols="60" rows="5" class="inputTextField">Please enter a document description here...</textarea>
+    <textarea title="<%=cm.cms("related_reports_upload_description_title")%>" id="description" name="description" cols="60" rows="5" class="inputTextField"><%=cm.cms("related_reports_upload_description_value")%></textarea>
+    <%=cm.cmsTitle("related_reports_upload_description_title")%>
+    <%=cm.cmsInput("related_reports_upload_description_value")%>
   </p>
   <p>
-    <label for="Reset" class="noshow">Reset values</label>
-    <input title="Reset values" type="reset" name="Reset" id="Reset" value="Reset" class="inputTextField" />
-    <label for="Submit" class="noshow">Upload document</label>
-    <input title="Upload document" type="submit" name="Submit" id="Submit" value="Upload" class="inputTextField" />
-    <label for="Close" class="noshow">Close</label>
-    <input title="Close window" type="button" name="Close" id="Close" value="Close" class="inputTextField" onclick="window.close();" />
+    <label for="Reset" class="noshow"><%=cm.cms("reset_btn_label")%></label>
+    <input title="<%=cm.cms("reset_btn_title")%>" type="reset" name="Reset" id="Reset" value="<%=cm.cms("reset_btn_value")%>" class="inputTextField" />
+    <%=cm.cmsLabel("reset_btn_label")%>
+    <%=cm.cmsTitle("reset_btn_title")%>
+    <%=cm.cmsInput("reset_btn_value")%>
+
+    <label for="Submit" class="noshow"><%=cm.cms("related_reports_upload_uploadbtn_label")%></label>
+    <input title="<%=cm.cms("related_reports_upload_uploadbtn_title")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("related_reports_upload_uploadbtn_value")%>" class="inputTextField" />
+    <%=cm.cmsLabel("related_reports_upload_uploadbtn_label")%>
+    <%=cm.cmsTitle("related_reports_upload_uploadbtn_title")%>
+    <%=cm.cmsInput("related_reports_upload_uploadbtn_value")%>
+
+    <label for="button2" class="noshow"><%=cm.cms("close_window_label")%></label>
+    <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_label")%>" title="<%=cm.cms("close_window_label")%>" id="button2" name="button" class="inputTextField" />
+    <%=cm.cmsLabel("close_window_label")%>
+    <%=cm.cmsTitle("close_window_label")%>
+    <%=cm.cmsInput("close_window_label")%>
   </p>
 </form>
 <%
   String message = request.getParameter("message");
-  if(null != message) {
+  if(null != message)
+  {
 %>
 <p>
   <strong><%=message%></strong>
@@ -73,23 +93,35 @@
 <%
   }
 %>
-<strong>Uploaded documents are not made available for download, until they are approved by an EUNIS Database administrator.</strong>
+  <strong>
+    <%=cm.cmsText("related_reports_upload_pending")%>.
+  </strong>
 <script language="JavaScript" type="text/javascript">
 <!--
   window.opener.location.href='related-reports.jsp';
 //-->
 </script>
 <%
-} else {
+}
+else
+{
 %>
-You must be logged in and have the proper rights in order to access this page.
-<br />
+  <%=cm.cmsText("related_reports_upload_unauthorized")%>.
+  <br />
   <form action="">
-    <label for="Close1" class="noshow"></label>
-    <input title="Close window" type="button" value="Close" id="Close1" onclick="javascript:window.close()" name="button" class="inputTextField" />
+    <label for="button1" class="noshow"><%=cm.cms("close_window_label")%></label>
+    <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_label")%>" title="<%=cm.cms("close_window_label")%>" id="button1" name="button" class="inputTextField" />
+    <%=cm.cmsLabel("close_window_label")%>
+    <%=cm.cmsTitle("close_window_label")%>
+    <%=cm.cmsInput("close_window_label")%>
   </form>
 <%
   }
 %>
+    <%=cm.cmsMsg("related_reports_upload_page_title")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("related_reports_upload_empty")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("related_reports_upload_validate_description")%>
   </body>
 </html>

@@ -6,7 +6,7 @@ import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.habitats.legal.EUNISLegalDomain;
 import ro.finsiel.eunis.jrfTables.habitats.legal.EUNISLegalPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.habitats.HabitatsSearchUtility;
 import ro.finsiel.eunis.search.habitats.legal.LegalPaginator;
 
@@ -15,21 +15,17 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * Generate the TSV report for the Habitats -> Legal search
- *
- * @author Monica Secrieru
- * @version 1.2
+ * TSV and XML report generation.
  */
 public class TSVHabitatLegalReport extends AbstractTSVReport
 {
   /**
-   * Form bean used for search
+   * Form bean used for search.
    */
   private AbstractFormBean formBean = null;
 
   /**
-   * Normal constructor
-   *
+   * Constructor.
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    */
@@ -38,7 +34,7 @@ public class TSVHabitatLegalReport extends AbstractTSVReport
     super( "HabitatsLegalReport_" + sessionID + ".tsv" );
     this.formBean = formBean;
     this.filename = "HabitatsLegalReport_" + sessionID + ".tsv";
-    // Init the data factory
+    xmlreport = new XMLReport( "HabitatsLegalReport_" + sessionID + ".xml" );
     if ( null != formBean )
     {
       dataFactory = new LegalPaginator( new EUNISLegalDomain( formBean.toSearchCriteria(), formBean.toSortCriteria() ) );
@@ -51,17 +47,17 @@ public class TSVHabitatLegalReport extends AbstractTSVReport
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader()
+  public List<String> createHeader()
   {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     // Level
     headers.addElement( "Level" );
     // Code
@@ -107,7 +103,7 @@ public class TSVHabitatLegalReport extends AbstractTSVReport
               EUNISLegalPersist legalText = (EUNISLegalPersist) legalTexts.get(j);
               if ( j == 0 )
               {
-                Vector aRow = new Vector();
+                Vector<String> aRow = new Vector<String>();
                 // Level
                 aRow.addElement( habitat.getHabLevel().toString() );
                 // Code
@@ -120,7 +116,7 @@ public class TSVHabitatLegalReport extends AbstractTSVReport
               }
               else
               {
-                Vector aRow = new Vector();
+                Vector<String> aRow = new Vector<String>();
                 // Level
                 aRow.addElement( "" );
                 // Code
@@ -135,7 +131,7 @@ public class TSVHabitatLegalReport extends AbstractTSVReport
           }
           else
           {
-            Vector aRow = new Vector();
+            Vector<String> aRow = new Vector<String>();
             // Level
             aRow.addElement( habitat.getHabLevel().toString() );
             // Code
@@ -146,6 +142,24 @@ public class TSVHabitatLegalReport extends AbstractTSVReport
             aRow.addElement( "-" );
             writeRow( aRow );
           }
+
+          // XML Report
+          Vector<String> aRow = new Vector<String>();
+          // Level
+          aRow.addElement( habitat.getHabLevel().toString() );
+          // Code
+          aRow.addElement( habitat.getEunisHabitatCode() );
+          // English name
+          aRow.addElement( habitat.getScientificName() );
+          String text = "";
+          for (int j = 0; j < legalTexts.size(); j++)
+          {
+            EUNISLegalPersist legalText = (EUNISLegalPersist) legalTexts.get(j);
+            text += "<legal_text>" + legalText.getLegalName() + "</legal_text>\n";
+          }
+          // Legal text
+          aRow.addElement( text );
+          xmlreport.writeRow( aRow );
         }
       }
     }

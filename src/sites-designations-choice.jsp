@@ -4,21 +4,21 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : "Sites Designation types" function - Popup for list of values in search page. Also used in "Sites by designation types" function
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@page contentType="text/html"%>
-<%@page import="java.util.List, java.util.Iterator,
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
+<%@page import="java.util.List,
                 ro.finsiel.eunis.search.Utilities,
                 java.util.Vector,
                 ro.finsiel.eunis.search.SortListString,
                 ro.finsiel.eunis.WebContentManagement"%>
-<%@page import="ro.finsiel.eunis.jrfTables.Chm62edtDesignationsDomain"%>
-<%@page import="ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.sites.designations.DesignationsDomain"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.sites.designations.DesignationsPersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   // Web content manager used in this page.
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 
   // getSearchString() - String to be searched
   String searchString = Utilities.formatString ( request.getParameter("searchString"), "" );
@@ -49,6 +49,7 @@
   sql = Utilities.getConditionForSourceDB(sql, source_db, db, "S");
   List designations = new DesignationsDomain().findWhere(sql + " GROUP BY J.DESCRIPTION,J.DESCRIPTION_EN");
   Vector v = new Vector();
+  System.out.println( "designations = " + designations.size() );
   if (designations != null && designations.size() > 0)
   {
     for (int i = 0; i < designations.size(); i++)
@@ -87,11 +88,12 @@
   v = sorter.sort( v, false );
   int nr = v.size() >= Utilities.MAX_POPUP_RESULTS ? Utilities.MAX_POPUP_RESULTS : v.size();
 %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
     <title>
-      <%=contentManagement.getContent("sites_designations-choice_title", false )%>
+      <%=cm.cms("sites_designations-choice_title")%>
     </title>
     <script language="JavaScript" type="text/javascript">
       <!--
@@ -100,11 +102,6 @@
         window.opener.document.eunis.searchString.value=val;
         window.close();
       }
-      function editContent( idPage )
-      {
-        var url = "web-content-inline-editor.jsp?idPage=" + idPage;
-        window.open( url ,"", "width=540,height=500,status=0,scrollbars=0,toolbar=0,resizable=1,location=0");
-      }
       // -->
     </script>
   </head>
@@ -112,21 +109,23 @@
 <%
   if ( v.size() > 0 )
   {
-    out.print( Utilities.getTextMaxLimitForPopup( contentManagement, v.size() ) );
+    out.print( Utilities.getTextMaxLimitForPopup( cm, v.size() ) );
 %>
-    <h6>List of values for:</h6>
+    <h2>
+      <%=cm.cmsText("list_of_values_for")%>
+    </h2>
 <%
     if( searchString.equalsIgnoreCase( "" ) )
     {
 %>
-      All designations
+      <%=cm.cms("sites_designations_choice_alldesignations")%>
 <%
     }
     else
     {
 %>
     <u>
-      <%=contentManagement.getContent("sites_designations-choice_01")%>
+      <%=cm.cms("sites_designations-choice_01")%>
     </u>
     <em>
       <%=Utilities.ReturnStringRelatioOp(relationOp)%>
@@ -140,7 +139,7 @@
     <br />
     <br />
     <div id="tab">
-      <table summary="List of values" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+      <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
     int j=0;
     for ( int i = 0; i < nr; i++ )
@@ -149,7 +148,8 @@
 %>
         <tr>
           <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-            <a title="Click link to select the value" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(description)%>');"><%=description%></a>
+            <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(description)%>');"><%=description%></a>
+            <%=cm.cmsTitle("click_link_to_select_value")%>
           </td>
         </tr>
 <%
@@ -158,24 +158,26 @@
       </table>
     </div>
 <%
-//    if ( request.getParameter("displayWarning") == null || !request.getParameter("displayWarning").equalsIgnoreCase("no") )
-//    {
-//      out.print( Utilities.getTextWarningForPopup( v.size() ) );
-//    }
   }
   else
   {
 %>
     <strong>
-      <%=contentManagement.getContent("sites_designations-choice_02")%>
+      <%=cm.cmsText("sites_designations-choice_02")%>
     </strong>
 <%
   }
 %>
     <br />
     <form action="">
-      <label for="close" class="noshow">Close window</label>
-      <input id="close" name="close"  title="Close window" type="button" value="Close" onclick="javascript:window.close()" class="inputTextField" />
+      <label for="button2" class="noshow"><%=cm.cms("close_window_label")%></label>
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
+      <%=cm.cmsLabel("close_window_label")%>
+      <%=cm.cmsTitle("close_window_title")%>
+      <%=cm.cmsInput("close_window_value")%>
     </form>
+    <%=cm.cmsMsg("sites_designations-choice_title")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("list_of_values")%>
   </body>
 </html>

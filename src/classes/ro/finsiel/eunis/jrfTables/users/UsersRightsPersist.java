@@ -12,8 +12,6 @@ public class UsersRightsPersist extends PersistentObject {
   /** This is a database field. */
   private String i_password = null;
   /** This is a database field. */
-  private Integer i_fontsize = null;
-  /** This is a database field. */
   private String firstName = null;
   private Integer themeIndex = null;
   private String lastName = null;
@@ -28,12 +26,6 @@ public class UsersRightsPersist extends PersistentObject {
 
 
   /** Getter for a database field. */
-  public Integer getFontsize() {
-    return i_fontsize;
-  }
-
-
-  /** Getter for a database field. */
   public String getPassword() {
     return i_password;
   }
@@ -42,15 +34,6 @@ public class UsersRightsPersist extends PersistentObject {
   /** Getter for a database field. */
   public String getUsername() {
     return i_username;
-  }
-
-  /**
-   * Setter for a database field.
-   * @param fontsize
-   **/
-  public void setFontsize(Integer fontsize) {
-    i_fontsize = fontsize;
-    this.markModifiedPersistentState();
   }
 
 

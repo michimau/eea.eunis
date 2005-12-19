@@ -4,17 +4,20 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Users bookmarks' function - list, edit user's bookmarks.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.utilities.SQLUtilities,
                  java.util.List,
                  ro.finsiel.eunis.utilities.TableColumns"%>
-<%@page contentType="text/html"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   // Web content manager used in this page.
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 
   String SQL_DRV = application.getInitParameter("JDBC_DRV");
   String SQL_URL = application.getInitParameter("JDBC_URL");
@@ -30,8 +33,10 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-    <script language="JavaScript" src="script/utils.js" type="text/javascript"></script>
-    <title><%=application.getInitParameter("PAGE_TITLE")%><%=contentManagement.getContent("users_bookmarks_title", false )%></title>
+    <title>
+        <%=application.getInitParameter("PAGE_TITLE")%>
+        <%=cm.cms("users_bookmarks_title")%>
+    </title>
     <script language="JavaScript" type="text/javascript">
     <!--
         function onClickEdit() {
@@ -48,9 +53,9 @@
                }
            }
 
-          if(!isSomethinkChecked) alert('Please select a bookmark.');
+          if(!isSomethinkChecked) alert('<%=cm.cms("users_bookmarks_01")%>');
           else
-          if(isTwoChecked) alert('Warning! Please select only one bookmark for edit.');
+          if(isTwoChecked) alert('<%=cm.cms("users_bookmarks_02")%>');
           else
           {
              document.eunis.typeAction.value = 'edit';
@@ -80,7 +85,7 @@
            }
 
 
-          if(!isSomethinkChecked) alert('Please select a bookmark.');
+          if(!isSomethinkChecked) alert('<%=cm.cms("users_bookmarks_01")%>');
           else
           {
             document.eunis.typeAction.value = 'delete';
@@ -92,18 +97,20 @@
    </script>
   </head>
 <%
-  String breadcrumbtrail = "Home#index.jsp,Services#services.jsp,User Bookmarks";
+  String breadcrumbtrail = "home_location#index.jsp,services_location#services.jsp,user_bookmarks_location";
   String typeAction = Utilities.formatString(request.getParameter( "typeAction" ), "" );
   if ( typeAction.equalsIgnoreCase( "edit" ) || typeAction.equalsIgnoreCase( "editSave" ) )
   {
-    breadcrumbtrail = "Home#index.jsp,Services#services.jsp,User Bookmarks#users-bookmarks.jsp,Edit bookmark";
+    breadcrumbtrail = "home_location#index.jsp,services_location#services.jsp,user_bookmarks_location#users-bookmarks.jsp,user_bookmarks_location_edit";
   }
   if ( typeAction.equalsIgnoreCase( "delete" ) )
   {
-    breadcrumbtrail = "Home#index.jsp,Services#services.jsp,User Bookmarks#users-bookmarks.jsp,Delete bookmark";
+    breadcrumbtrail = "home_location#index.jsp,services_location#services.jsp,user_bookmarks_location#users-bookmarks.jsp,user_bookmarks_location_delete";
   }
 %>
-  <body style="background-color:#ffffff">
+  <body>
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
       <jsp:param name="location" value="<%=breadcrumbtrail%>"/>
@@ -112,7 +119,7 @@
   if(SessionManager.isAuthenticated())
   {
 %>
-    <h5>EUNIS Database User Bookmarks</h5>
+    <h1><%=cm.cmsText("users_bookmarks_03")%></h1>
     <form name="eunis" method="post" action="users-bookmarks.jsp">
       <input type ="hidden" name="typeAction" value="<%=request.getParameter("typeAction")%>" />
       <input type ="hidden" name="bookmarkNameHidden" value="<%=request.getParameter("bookmarkNameHidden")%>" />
@@ -130,31 +137,36 @@
         String bookmDescription = (String)((TableColumns)bookmarksEdit.get(0)).getColumnsValues().get(1);
 %>
         <strong class="fontNormal">
-          Edit bookmark
+          <%=cm.cmsText("users_bookmarks_04")%>
         </strong>
         <br />
         <br />
         <label for="bookmarkNameEdit">
-        Bookmark name:
+        <%=cm.cmsText("users_bookmarks_05")%>:
         </label>
         <br />
-        <textarea id="bookmarkNameEdit" title="Bookmark name" name="bookmarkNameEdit" rows="3" cols="100" class="inputTextField"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(bookmName),"&nbsp;")%></textarea>
+        <textarea id="bookmarkNameEdit" title="<%=cm.cms("users_bookmarks_05")%>" name="bookmarkNameEdit" rows="3" cols="100" class="inputTextField"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(bookmName),"&nbsp;")%></textarea>
+        <%=cm.cmsTitle("users_bookmarks_05")%>
         <br />
         <br />
         <label for="bookmarkDescrptionEdit">
-        Bookmark description:
+        <%=cm.cmsText("users_bookmarks_06")%>:
         </label>
         <br />
-        <textarea id="bookmarkDescrptionEdit" title="Bookmark description" name="bookmarkDescrptionEdit" rows="3" cols="100" class="inputTextField"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(bookmDescription),"&nbsp;")%></textarea>
+        <textarea id="bookmarkDescrptionEdit" title="<%=cm.cms("users_bookmarks_06")%>" name="bookmarkDescrptionEdit" rows="3" cols="100" class="inputTextField"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(bookmDescription),"&nbsp;")%></textarea>
+        <%=cm.cmsTitle("users_bookmarks_06")%>
         <br />
-        <label for="input1" class="noshow">Save</label>
-        <input id="input1" type="button" value="Save" name="save" onclick="onClickEditSave()" class="inputTextField" title="Save this bookmark" />
+        <label for="input1" class="noshow"><%=cm.cms("save")%></label>
+        <input id="input1" type="button" value="<%=cm.cms("save_btn")%>" name="save" onclick="onClickEditSave()" class="inputTextField" title="<%=cm.cms("save")%>" />
+        <%=cm.cmsLabel("save")%>
+        <%=cm.cmsTitle("save")%>
+        <%=cm.cmsInput("save_btn")%>
 <%
       }
       else
       {
 %>
-        This bookmark does not exist.
+        <%=cm.cmsText("users_bookmarks_07")%>
 <%
       }
     }
@@ -170,7 +182,8 @@
  %>
         <br />
         <br />
-        Bookmark has been successfully updated. <a title="Go back" href="users-bookmarks.jsp">Back</a>
+        <%=cm.cmsText("users_bookmarks_08")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsText("users_bookmarks_10")%></a>
+        <%=cm.cmsTitle("users_bookmarks_09")%>
 <%
       }
       else
@@ -178,7 +191,8 @@
 %>
         <br />
         <br />
-        An error occurred while updating the bookmark. <a title="Go back" href="users-bookmarks.jsp">Back</a>
+        <%=cm.cmsText("users_bookmarks_11")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsText("users_bookmarks_10")%></a>
+        <%=cm.cmsTitle("users_bookmarks_09")%>
 <%
       }
     }
@@ -197,20 +211,22 @@
       {
  %>
         <br />
-        <strong class="fontNormal">Delete bookmark</strong>
+        <strong class="fontNormal"><%=cm.cmsText("users_bookmarks_12")%></strong>
         <br />
         <br />
-        Bookmark has been successfully deleted. <a title="Go back" href="users-bookmarks.jsp">Back</a>
+        <%=cm.cmsText("users_bookmarks_13")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsText("users_bookmarks_10")%></a>
+        <%=cm.cmsTitle("users_bookmarks_13")%>
 <%
       }
       else
       {
 %>
         <br />
-        <strong class="fontNormal">Delete bookmark</strong>
+        <strong class="fontNormal"><%=cm.cmsText("users_bookmarks_12")%></strong>
         <br />
         <br />
-        An error occurred while deleting the bookmark. <a title="Bookmarks list" href="users-bookmarks.jsp">Bookmarks list</a>
+        <%=cm.cmsText("users_bookmarks_14")%> <a title="<%=cm.cms("users_bookmarks_15")%>" href="users-bookmarks.jsp"><%=cm.cmsText("users_bookmarks_15")%></a>
+        <%=cm.cmsTitle("users_bookmarks_15")%>
 <%
       }
     }
@@ -219,16 +235,16 @@
       if( bookmarks != null && bookmarks.size() > 0 )
       {
 %>
-      <table summary="Bookmarks list" width="100%" border="1" cellspacing="0" cellpadding="0" style="border-collapse : collapse">
+      <table summary="<%=cm.cms("users_bookmarks_15")%>" width="100%" border="1" cellspacing="0" cellpadding="0" style="border-collapse : collapse">
         <tr style="background-color:#DDDDDD">
           <td style="text-align:center">
             Sel.
           </td>
           <td>
-            Bookmark
+            <%=cm.cmsText("users_bookmarks_16")%>
           </td>
           <td>
-            Description
+            <%=cm.cmsText("users_bookmarks_17")%>
           </td>
         </tr>
 <%
@@ -240,8 +256,10 @@
         <tr>
           <td style="text-align:center;background-color:<%=bgColor%>">
             <input type ="hidden" name="bookmarkName_<%=i%>" value="<%=Utilities.treatURLSpecialCharacters((String)bookmark.getColumnsValues().get(0))%>" />
-            <label for="bookmark_<%=i%>" class="noshow">Choose a bookmark</label>
-            <input title="Choose a bookmark" id="bookmark_<%=i%>" alt="Choose a bookmark" value="true" type="checkbox" name="bookmark_<%=i%>" />
+            <label for="bookmark_<%=i%>" class="noshow"><%=cm.cms("users_bookmarks_18")%></label>
+            <input title="<%=cm.cms("users_bookmarks_18")%>" id="bookmark_<%=i%>" alt="<%=cm.cms("users_bookmarks_18")%>" value="true" type="checkbox" name="bookmark_<%=i%>" />
+            <%=cm.cmsLabel("users_bookmarks_18")%>
+            <%=cm.cmsTitle("users_bookmarks_18")%>
           </td>
           <td style="text-align:left;background-color:<%=bgColor%>">
 <%
@@ -268,7 +286,8 @@
           {
 %>
             <span>
-              <a title="Bookmark" href="<%=Utilities.treatURLSpecialCharacters((String)bookmark.getColumnsValues().get(0))%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(bookm),"&nbsp;")%></a>
+              <a title="<%=cm.cms("users_bookmarks_16")%>" href="<%=Utilities.treatURLSpecialCharacters((String)bookmark.getColumnsValues().get(0))%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(bookm),"&nbsp;")%></a>
+              <%=cm.cmsTitle("users_bookmarks_16")%>
             </span>
 <%
           }
@@ -312,17 +331,23 @@
 %>
       </table>
       <br />
-      <label for="input2" class="noshow">Edit</label>
-      <input id="input2" type="button" value="Edit" name="edit" onclick="onClickEdit()" class="inputTextField" title="Edit bookmark" />
+      <label for="input2" class="noshow"><%=cm.cms("edit")%></label>
+      <input id="input2" type="button" value="<%=cm.cms("edit_btn")%>" name="edit" onclick="onClickEdit()" class="inputTextField" title="<%=cm.cms("edit")%>" />
+      <%=cm.cmsLabel("edit")%>
+      <%=cm.cmsTitle("edit")%>
+      <%=cm.cmsInput("edit_btn")%>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <label for="input3" class="noshow">Delete</label>
-      <input id="input3" type="button" value="Delete" name="delete" onclick="onClickDelete()" class="inputTextField" title="Delete bookmark" />
+      <label for="input3" class="noshow"><%=cm.cms("delete")%></label>
+      <input id="input3" type="button" value="<%=cm.cms("delete_btn")%>" name="delete" onclick="onClickDelete()" class="inputTextField" title="<%=cm.cms("delete")%>" />
+      <%=cm.cmsLabel("delete")%>
+      <%=cm.cmsTitle("delete")%>
+      <%=cm.cmsInput("delete_btn")%>
 <%
       }
       else
       {
 %>
-       <span style="color:red">There are no saved bookmarks.</span>
+       <span style="color:red"><%=cm.cmsText("users_bookmarks_19")%></span>
 <%
       }
     }
@@ -333,14 +358,25 @@
   else
   {
 %>
-    <span style="color : red">You must be authenticated and have the proper right to access this page.</span>
+    <span style="color : red"><%=cm.cmsText("users_bookmarks_20")%></span>
 <%
   }
 %>
     <br />
+
+<%=cm.br()%>
+<%=cm.cmsMsg("users_bookmarks_title")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_bookmarks_01")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_bookmarks_02")%>
+<%=cm.br()%>
+
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="users-bookmarks.jsp" />
     </jsp:include>
+  </div>
+  </div>
   </div>
   </body>
 </html>

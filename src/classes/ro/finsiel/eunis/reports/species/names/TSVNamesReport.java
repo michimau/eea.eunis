@@ -5,7 +5,7 @@ import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.species.names.*;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.JavaSorter;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
@@ -14,14 +14,12 @@ import ro.finsiel.eunis.search.species.names.NameBean;
 import ro.finsiel.eunis.search.species.names.NameSearchCriteria;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 /**
- * Generate the PDF reports for Species -> Scientific names search
- *
- * @author finsiel
- * @version 1.0
+ * TSV and XML report generation.
  */
 public class TSVNamesReport extends AbstractTSVReport {
   /**
@@ -30,26 +28,29 @@ public class TSVNamesReport extends AbstractTSVReport {
   private NameBean formBean = null;
 
   /**
-   * Form we are coming from
+   * Form we are coming from.
    */
   private int typeForm;
   /**
-   * Specifies if Any Language was selected from the search
+   * Specifies if Any Language was selected from the search.
    */
   private boolean isAnyLanguage;
 
+  //private XMLReport xmlreport = null;
+
   /**
-   * Constructor
-   *
+   * Constructor.
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
+   * @param showEUNISInvalidatedSpecies Show invalidated species
    */
   public TSVNamesReport( String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies ) {
     super( "SpeciesNamesReport_" + sessionID + ".tsv" );
     this.formBean = ( NameBean ) formBean;
     this.filename = "SpeciesNamesReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "SpeciesNamesReport_" + sessionID + ".xml" );
     typeForm = Utilities.checkedStringToInt( this.formBean.getTypeForm(), NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() );
-    isAnyLanguage = ( null == this.formBean.getLanguage() ) ? false : ( this.formBean.getLanguage().equalsIgnoreCase( "any" ) ) ? true : false;
+    isAnyLanguage = null != this.formBean.getLanguage() && this.formBean.getLanguage().equalsIgnoreCase( "any" );
     boolean searchSynonyms = Utilities.checkedStringToBoolean( this.formBean.getSearchSynonyms(), false );
 
     // Coming from form 1
@@ -73,19 +74,21 @@ public class TSVNamesReport extends AbstractTSVReport {
         this.dataFactory = new ro.finsiel.eunis.search.species.names.NamePaginator( new VernacularNameDomain( formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies ) );
       }
     }
+
+    //xmlreport = new XMLReport( "SpeciesNamesReport_" + sessionID + ".xml" );
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader() {
+  public List<String> createHeader() {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     headers.addElement( "Group" );
     headers.addElement( "Order" );
     headers.addElement( "Family" );
@@ -113,12 +116,14 @@ public class TSVNamesReport extends AbstractTSVReport {
         return;
       }
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
         List resultSet = dataFactory.getPage( _currPage );
         for ( int i = 0; i < resultSet.size(); i++ )
         {
-          Vector aRow = new Vector();
+          Vector<String>aRow = new Vector<String>();
+          ArrayList<String> xmlRow = new ArrayList<String>();
           String cellGroup = "";
           String cellOrder = "";
           String cellFamily = "";
@@ -165,13 +170,16 @@ public class TSVNamesReport extends AbstractTSVReport {
           aRow.addElement( cellOrder );
           aRow.addElement( cellFamily );
           aRow.addElement( cellScientificName );
-          // Valid name
-          if ( NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm )
-          {
-            aRow.addElement( cellValidName );
-          }
+          aRow.addElement( cellValidName );
+
+          xmlRow.add( cellGroup );
+          xmlRow.add( cellOrder );
+          xmlRow.add( cellFamily );
+          xmlRow.add( cellScientificName );
+          xmlRow.add( cellValidName );
           // Vernacular names (multiple rows)
           Vector vernNamesList = SpeciesSearchUtility.findVernacularNames( cellIdVernacularSearch );
+          String xmlVernacularNames = "";
           if ( vernNamesList.size() > 0 )
           {
             Vector sortVernList = new JavaSorter().sort( vernNamesList, JavaSorter.SORT_ALPHABETICAL );
@@ -210,7 +218,7 @@ public class TSVNamesReport extends AbstractTSVReport {
                 }
                 else
                 {
-                  Vector anotherRow = new Vector();
+                  Vector<String> anotherRow = new Vector<String>();
                   anotherRow.addElement( "" );
                   anotherRow.addElement( "" );
                   anotherRow.addElement( "" );
@@ -223,6 +231,7 @@ public class TSVNamesReport extends AbstractTSVReport {
                   writeRow( anotherRow );
                 }
               }
+              xmlVernacularNames += "<name language=\"" + aVernName.getLanguage() + "\">" + aVernName.getName() + "</name>";
             }
             if ( !atLeastALine )
             {
@@ -234,6 +243,8 @@ public class TSVNamesReport extends AbstractTSVReport {
             aRow.addElement( "-" );
             writeRow( aRow );
           }
+          xmlRow.add( xmlVernacularNames );
+          xmlreport.writeRow( xmlRow );
         }
       }
     }

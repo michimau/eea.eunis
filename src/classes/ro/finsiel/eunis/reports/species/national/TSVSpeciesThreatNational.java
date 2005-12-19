@@ -11,6 +11,7 @@ import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.species.national.NationalThreatStatusDomain;
 import ro.finsiel.eunis.jrfTables.species.national.NationalThreatStatusPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.JavaSorter;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
@@ -20,23 +21,26 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
-
+/**
+ * TSV and XML report generation.
+ */
 public class TSVSpeciesThreatNational extends AbstractTSVReport {
   /**
-   * Form bean used for search
+   * Form bean used for search.
    */
   private AbstractFormBean formBean = null;
 
   /**
-   * Normal constructor
-   *
+   * Constructor.
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
+   * @param showEUNISInvalidatedSpecies Show invalidated species
    */
   public TSVSpeciesThreatNational( String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies ) {
     super( "SpeciesThreatNationalReport_" + sessionID + ".tsv" );
     this.formBean = formBean;
     this.filename = "SpeciesThreatNationalReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "SpeciesThreatNationalReport_" + sessionID + ".xml" );
     if ( null != formBean )
     {
       dataFactory = new NationalPaginator( new NationalThreatStatusDomain( formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies ) );
@@ -50,16 +54,16 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader() {
+  public List<String> createHeader() {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     // Group
     headers.addElement( "Group" );
     // Scientific name
@@ -88,6 +92,7 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
         return;
       }
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
         List resultSet = dataFactory.getPage( _currPage );
@@ -96,6 +101,7 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
           NationalThreatStatusPersist specie = ( NationalThreatStatusPersist ) resultSet.get( i );
           Vector vernNamesList = SpeciesSearchUtility.findVernacularNames( specie.getIdNatureObject() );
           Vector sortVernList = new JavaSorter().sort( vernNamesList, JavaSorter.SORT_ALPHABETICAL );
+          String xmlVernacularNames = "";
           if ( sortVernList.size() > 0 )
           {
             for ( int ii = 0; ii < sortVernList.size(); ii++ )
@@ -105,7 +111,7 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
 
               if ( ii == 0 )
               {
-                Vector aRow = new Vector();
+                Vector<String> aRow = new Vector<String>();
                 // Group
                 aRow.addElement( specie.getCommonName() );
                 // Scientific name
@@ -116,7 +122,7 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
               }
               else
               {
-                Vector aRow = new Vector();
+                Vector<String> aRow = new Vector<String>();
                 // Group
                 aRow.addElement( "" );
                 // Scientific name
@@ -125,11 +131,12 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
                 aRow.addElement( vernacularName );
                 writeRow( aRow );
               }
+              xmlVernacularNames += "<name language=\"" + aVernName.getLanguage() + "\">" + aVernName.getName() + "</name>";
             }
           }
           else
           {
-            Vector aRow = new Vector();
+            Vector<String> aRow = new Vector<String>();
             // Group
             aRow.addElement( specie.getCommonName() );
             // Scientific name
@@ -138,6 +145,11 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
             aRow.addElement( "-" );
             writeRow( aRow );
           }
+          Vector<String> aRow = new Vector<String>();
+          aRow.addElement( specie.getCommonName() );
+          aRow.addElement( specie.getScientificName() );
+          aRow.addElement( xmlVernacularNames );
+          xmlreport.writeRow( aRow );
         }
       }
     }

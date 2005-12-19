@@ -5,12 +5,11 @@ import ro.finsiel.eunis.search.AbstractPaginator;
 
 /**
  * Paginator class for advanced search and combined search.
- * @author finsiel
  */
 public class DictionaryPaginator extends AbstractPaginator {
   /**
    * Ctor.
-   * @param finder
+   * @param finder Data source provider
    */
   public DictionaryPaginator(Paginable finder) {
     init(finder);

@@ -7,6 +7,7 @@ import ro.finsiel.eunis.formBeans.CombinedSearchBean;
 import ro.finsiel.eunis.jrfTables.species.advanced.DictionaryDomain;
 import ro.finsiel.eunis.jrfTables.species.advanced.DictionaryPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.JavaSorter;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
@@ -17,14 +18,14 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * Generate the PDF reports for Species -> Scientific names search
+ * Generate the PDF reports for Species -> Scientific names search.
  *
  * @author finsiel
  * @version 1.0
  */
 public class TSVSpeciesAdvanced extends AbstractTSVReport {
   /**
-   * Use the bean in order to see which columns should I display on the report
+   * Use the bean in order to see which columns should I display on the report.
    */
   private CombinedSearchBean formBean = null;
 
@@ -41,15 +42,16 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
   boolean showReferences = false;
 
   /**
-   * Constructor
-   *
+   * Constructor.
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
+   * @param showEUNISInvalidatedSpecies Show invalidated species
    */
   public TSVSpeciesAdvanced( String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies ) {
     super( "SpeciesAdvancedReport_" + sessionID + ".tsv" );
     this.formBean = ( CombinedSearchBean ) formBean;
     this.filename = "SpeciesAdvancedReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "SpeciesAdvancedReport_" + sessionID + ".xml" );
 
     Vector columnsDisplayed = this.formBean.parseShowColumns();
     showGroup = columnsDisplayed.contains( "showGroup" );
@@ -68,16 +70,16 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader() {
+  public List<String> createHeader() {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     // Group
     if ( showGroup )
     {
@@ -107,7 +109,7 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
   }
 
   /**
-   * Use this method to write specific data into the file. Implemented in inherited classes
+   * Use this method to write specific data into the file. Implemented in inherited classes.
    */
   public void writeData() {
     if ( null == dataFactory )
@@ -125,12 +127,14 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
       }
       // Write table header
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
         List resultSet = dataFactory.getPage( _currPage );
         for ( int i = 0; i < resultSet.size(); i++ )
         {
-          Vector aRow = new Vector();
+          Vector<String> aRow = new Vector<String>();
+          Vector<String> xmlrow = new Vector<String>();
           String cellGroup;
           String cellOrder;
           String cellFamily;
@@ -147,25 +151,30 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
           if ( showGroup )
           {
             aRow.addElement( cellGroup );
+            xmlrow.addElement( cellGroup );
           }
           // Order
           if ( showOrder )
           {
             aRow.addElement( cellOrder );
+            xmlrow.addElement( cellOrder );
           }
           // Family
           if ( showFamily )
           {
             aRow.addElement( cellFamily );
+            xmlrow.addElement( cellFamily );
           }
           // Scientific name
           if ( showScientificName )
           {
             aRow.addElement( cellScientificName );
+            xmlrow.addElement( cellScientificName );
           }
           // Vernacular names (multiple rows)
           if ( showVernacularName )
           {
+            String xmlVernacularNames = "";
             Vector vernNamesList = SpeciesSearchUtility.findVernacularNames( cellIdVernacularSearch );
             if ( vernNamesList.size() > 0 )
             {
@@ -175,6 +184,7 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
               for ( int v = 0; v < sortVernList.size(); v++ )
               {
                 VernacularNameWrapper aVernName = ( VernacularNameWrapper ) sortVernList.get( v );
+                xmlVernacularNames += "<name language=\"" + aVernName.getLanguage() + "\">" + aVernName.getName() + "</name>";
                 atLeastALine = true;
                 if ( !blankLine )
                 {
@@ -187,7 +197,7 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
                 }
                 else
                 {
-                  Vector anotherRow = new Vector();
+                  Vector<String> anotherRow = new Vector<String>();
                   if ( showGroup )
                   {
                     anotherRow.addElement( "" );
@@ -215,6 +225,7 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
               {
                 writeRow( aRow );
               }
+              xmlrow.add( xmlVernacularNames );
             }
             else
             {
@@ -227,6 +238,8 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
           {
             writeRow( aRow );
           }
+
+          xmlreport.writeRow( xmlrow );
         }
       }
     }

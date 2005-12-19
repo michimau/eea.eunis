@@ -5,7 +5,6 @@ import net.sf.jrf.domain.PersistentObject;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.join.JoinTable;
-import net.sf.jrf.join.OuterJoinTable;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 /**
@@ -78,10 +77,10 @@ public class HumanActivityDomain extends AbstractDomain {
     JoinTable nort = new JoinTable("CHM62EDT_NATURE_OBJECT_REPORT_TYPE", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
     this.addJoinTable(nort);
 
-    OuterJoinTable reportType = new OuterJoinTable("CHM62EDT_REPORT_TYPE", "ID_REPORT_TYPE", "ID_REPORT_TYPE");
+    JoinTable reportType = new JoinTable("CHM62EDT_REPORT_TYPE", "ID_REPORT_TYPE", "ID_REPORT_TYPE");
     nort.addJoinTable(reportType);
 
-    OuterJoinTable humanActivities = new OuterJoinTable("CHM62EDT_NATURA2000_ACTIVITY_CODE", "ID_LOOKUP", "ID_ACTIVITY_CODE");
+    JoinTable humanActivities = new JoinTable("CHM62EDT_NATURA2000_ACTIVITY_CODE", "ID_LOOKUP", "ID_ACTIVITY_CODE");
     humanActivities.addJoinColumn(new StringJoinColumn("ID_ACTIVITY_CODE", "setActivityCode"));
     humanActivities.addJoinColumn(new StringJoinColumn("NAME", "setActivityName"));
     reportType.addJoinTable(humanActivities);

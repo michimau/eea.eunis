@@ -4,6 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Used in combined search - load saved data in input from field.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%
   // Set IdSession and NatureObject variables
   String IdSession = request.getParameter("idsession");

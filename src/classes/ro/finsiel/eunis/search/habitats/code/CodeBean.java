@@ -33,6 +33,7 @@ public class CodeBean extends AbstractFormBean {
   private String showScientificName = null;
   /** Display / Hide Vernacular name column. */
   private String showEnglishName = null;
+  private String expanded = null;
 
 
   /**
@@ -54,7 +55,10 @@ public class CodeBean extends AbstractFormBean {
    */
   public AbstractSearchCriteria[] toSearchCriteria() {
     Vector criterias = new Vector();
-    if (null == database) database = CodeDomain.SEARCH_BOTH.toString();
+    if ( null == database )
+    {
+      database = CodeDomain.SEARCH_BOTH.toString();
+    }
     criterias.add(getMainSearchCriteria());
     // Search in results criterias
     if (null != criteriaSearch && null != oper && null != criteriaType) {
@@ -77,7 +81,10 @@ public class CodeBean extends AbstractFormBean {
    * @return objects which are used for sorting
    */
   public AbstractSortCriteria[] toSortCriteria() {
-    if (null == sort || null == ascendency) return new AbstractSortCriteria[0];
+    if ( null == sort || null == ascendency )
+    {
+      return new AbstractSortCriteria[0];
+    }
     AbstractSortCriteria criterias[] = new AbstractSortCriteria[sort.length];
     Integer database = Utilities.checkedStringToInt(this.database, CodeDomain.SEARCH_EUNIS);
     for (int i = 0; i < sort.length; i++) {
@@ -112,11 +119,30 @@ public class CodeBean extends AbstractFormBean {
       }
     }
     // Write columns to be displayed
-    if (null != showLevel && showLevel.equalsIgnoreCase("true")) url.append(Utilities.writeURLParameter("showLevel", CodeBean.SHOW.toString()));
-    if (null != showCode && showCode.equalsIgnoreCase("true")) url.append(Utilities.writeURLParameter("showCode", CodeBean.SHOW.toString()));
-    if (null != showOtherCodes && showOtherCodes.equalsIgnoreCase("true")) url.append(Utilities.writeURLParameter("showOtherCodes", CodeBean.SHOW.toString()));
-    if (null != showScientificName && showScientificName.equalsIgnoreCase("true")) url.append(Utilities.writeURLParameter("showScientificName", CodeBean.SHOW.toString()));
-    if (null != showEnglishName && showEnglishName.equalsIgnoreCase("true")) url.append(Utilities.writeURLParameter("showEnglishName", CodeBean.SHOW.toString()));
+    if ( null != expanded && expanded.equalsIgnoreCase( "true" ) )
+    {
+      url.append( Utilities.writeURLParameter( "expanded", CodeBean.SHOW.toString() ) );
+    }
+    if ( null != showLevel && showLevel.equalsIgnoreCase( "true" ) )
+    {
+      url.append( Utilities.writeURLParameter( "showLevel", CodeBean.SHOW.toString() ) );
+    }
+    if ( null != showCode && showCode.equalsIgnoreCase( "true" ) )
+    {
+      url.append( Utilities.writeURLParameter( "showCode", CodeBean.SHOW.toString() ) );
+    }
+    if ( null != showOtherCodes && showOtherCodes.equalsIgnoreCase( "true" ) )
+    {
+      url.append( Utilities.writeURLParameter( "showOtherCodes", CodeBean.SHOW.toString() ) );
+    }
+    if ( null != showScientificName && showScientificName.equalsIgnoreCase( "true" ) )
+    {
+      url.append( Utilities.writeURLParameter( "showScientificName", CodeBean.SHOW.toString() ) );
+    }
+    if ( null != showEnglishName && showEnglishName.equalsIgnoreCase( "true" ) )
+    {
+      url.append( Utilities.writeURLParameter( "showEnglishName", CodeBean.SHOW.toString() ) );
+    }
     return url.toString();
   }
 
@@ -143,11 +169,30 @@ public class CodeBean extends AbstractFormBean {
       }
     }
     // Write columns to be displayed
-    if (null != showLevel && showLevel.equalsIgnoreCase("true")) form.append(Utilities.writeFormParameter("showLevel", CodeBean.SHOW.toString()));
-    if (null != showCode && showCode.equalsIgnoreCase("true")) form.append(Utilities.writeFormParameter("showCode", CodeBean.SHOW.toString()));
-    if (null != showOtherCodes && showOtherCodes.equalsIgnoreCase("true")) form.append(Utilities.writeFormParameter("showOtherCodes", CodeBean.SHOW.toString()));
-    if (null != showScientificName && showScientificName.equalsIgnoreCase("true")) form.append(Utilities.writeFormParameter("showScientificName", CodeBean.SHOW.toString()));
-    if (null != showEnglishName && showEnglishName.equalsIgnoreCase("true")) form.append(Utilities.writeFormParameter("showEnglishName", CodeBean.SHOW.toString()));
+    if ( null != expanded && expanded.equalsIgnoreCase( "true" ) )
+    {
+      form.append( Utilities.writeFormParameter( "expanded", CodeBean.SHOW.toString() ) );
+    }
+    if ( null != showLevel && showLevel.equalsIgnoreCase( "true" ) )
+    {
+      form.append( Utilities.writeFormParameter( "showLevel", CodeBean.SHOW.toString() ) );
+    }
+    if ( null != showCode && showCode.equalsIgnoreCase( "true" ) )
+    {
+      form.append( Utilities.writeFormParameter( "showCode", CodeBean.SHOW.toString() ) );
+    }
+    if ( null != showOtherCodes && showOtherCodes.equalsIgnoreCase( "true" ) )
+    {
+      form.append( Utilities.writeFormParameter( "showOtherCodes", CodeBean.SHOW.toString() ) );
+    }
+    if ( null != showScientificName && showScientificName.equalsIgnoreCase( "true" ) )
+    {
+      form.append( Utilities.writeFormParameter( "showScientificName", CodeBean.SHOW.toString() ) );
+    }
+    if ( null != showEnglishName && showEnglishName.equalsIgnoreCase( "true" ) )
+    {
+      form.append( Utilities.writeFormParameter( "showEnglishName", CodeBean.SHOW.toString() ) );
+    }
     return form.toString();
   }
 
@@ -295,5 +340,21 @@ public class CodeBean extends AbstractFormBean {
    */
   public void setShowEnglishName(String showEnglishName) {
     this.showEnglishName = showEnglishName;
+  }
+
+  /**
+   * Getter for expanded property.
+   * @return expanded
+   */
+  public String getExpanded() {
+    return expanded;
+  }
+
+  /**
+   * Setter for expanded property.
+   * @param expanded New value
+   */
+  public void setExpanded( String expanded ) {
+    this.expanded = expanded;
   }
 }

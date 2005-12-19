@@ -9,21 +9,24 @@
       * idsession -
       * nextnatureobject -
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement" %>
 <%@ page import="java.sql.*" %>
-<%@ page contentType="text/html" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
 <%
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
 <title>
   <%=application.getInitParameter("PAGE_TITLE")%>
   <%=request.getParameter("previousnatureobject") != null ? request.getParameter("previousnatureobject") : ""%>
-  <%=contentManagement.getContent("generic_combined-search-step2_title", false)%>
+  <%=cm.cms("generic_combined-search-step2_title")%>
 </title>
 <script language="JavaScript" type="text/javascript">
 <!--
@@ -39,7 +42,6 @@
   }
 
   function setCurrentSelected(val) {
-<%--    alert(val);--%>
     current_selected = val;
     return true;
   }
@@ -82,7 +84,6 @@
 
   // action specifies what to do (how to modify the submited url...
   function submitCriteriaForm(criteria, idnode) {
-<%--    alert("criteria=" + criteria.value + ", idnode=" + idnode);--%>
     document.criteria.criteria.value=criteria.value;
     document.criteria.attribute.value="";
     document.criteria.operator.value="";
@@ -96,17 +97,16 @@
   function enableSaveButton() {
     document.criteria.Save.disabled=false;
     document.criteria.Search.disabled=true;
-    document.getElementById("status").innerHTML="<span style=\"color:Red\">Press 'Save' to save criteria.</span>"
+    document.getElementById("status").innerHTML="<span style=\"color:Red\"><%=cm.cms("press_save_to_save_criteria")%></span>"
   }
 
   function disableSaveButton() {
     document.criteria.Save.disabled=true;
     document.criteria.Search.disabled=false;
-    document.getElementById("status").innerHTML="<span style=\"color:Red\">Your criteria has been saved.</span>"
+    document.getElementById("status").innerHTML="<span style=\"color:Red\"><%=cm.cms("your_criteria_has_been_saved")%></span>"
   }
 
   function submitAttributeForm(attribute, idnode) {
-<%--    alert("attribute=" + attribute.value + ", idnode=" + idnode);--%>
     document.criteria.criteria.value="";
     document.criteria.attribute.value=attribute.value;
     document.criteria.operator.value="";
@@ -118,7 +118,6 @@
   }
 
   function submitOperatorForm(operator, idnode) {
-<%--    alert("operator=" + operator.value + ", idnode=" + idnode);--%>
     document.criteria.criteria.value="";
     document.criteria.attribute.value="";
     document.criteria.operator.value=operator.value;
@@ -132,7 +131,7 @@
   function submitFirstValueForm(firstvalue, idnode) {
     if(firstvalue.value == "") {
       firstvalue.value = document.criteria.oldfirstvalue.value;
-      alert('<%=contentManagement.getContent("generic_combined-search-step2_09",false)%>');
+      alert('<%=cm.cms("previous_values_was_restored")%>');
       firstvalue.focus();
 		  return(false);
     }
@@ -147,7 +146,6 @@
     var ofv = document.criteria.oldfirstvalue.value;
     var fv = document.criteria.firstvalue.value;
     if(ofv != fv) {
-<%--      alert(current_selected);--%>
       if(current_selected == "first_binocular") {
         var lov="";
         var natureobject="<%=request.getParameter("natureobject")%>";
@@ -162,8 +160,7 @@
   function submitLastValueForm(lastvalue, idnode) {
     if(lastvalue.value == "") {
       lastvalue.value = document.criteria.oldlastvalue.value;
-      <%-- Same message as above --%>
-      alert('<%=contentManagement.getContent("generic_combined-search-step2_09",false)%>');
+      alert('<%=cm.cms("previous_values_was_restored")%>');
       firstvalue.focus();
 		  return false;
     }
@@ -178,7 +175,6 @@
     var olv = document.criteria.oldlastvalue.value;
     var lv = document.criteria.lastvalue.value;
     if(olv != lv) {
-<%--      alert(current_selected);--%>
       if(current_selected == "last_binocular") {
         var lov="";
         var natureobject="<%=request.getParameter("natureobject")%>";
@@ -191,7 +187,6 @@
   }
 
   function submitButtonForm(action, idnode) {
-<%--    alert("action=" + action + ", idnode=" + idnode);--%>
     document.criteria.criteria.value="";
     document.criteria.attribute.value="";
     document.criteria.operator.value="";
@@ -209,7 +204,6 @@
   function saveLastValue(val) {
     document.criteria.oldlastvalue.value=val.value;
   }
-
 
   function submitClearData() {
     document.criteria.criteria.value="";
@@ -235,33 +229,28 @@
     document.criteria.submit();
   }
 
-
-//  function changeNatureObject() {
-//<%--    alert(document.criteria.natureobject.value);--%>
-//    document.criteria.submit();
-//  }
-
   function changeNatureObject(action) {
-<%--    alert(document.criteria.natureobject.value);--%>
-     document.criteria.action.value=action;
+    document.criteria.action.value=action;
     document.criteria.submit();
   }
 //-->
 </script>
-</head>
 
+</head>
 <body>
+<div id="outline">
+<div id="alignment">
 <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="Home#index.jsp,Combined search#combined-search.jsp,Combined search - step 2" />
+  <jsp:param name="location" value="home_location#index.jsp,combined_search_location#combined-search.jsp,combined_search_location_2" />
   <jsp:param name="helpLink" value="combined-help.jsp" />
 </jsp:include>
-<%=contentManagement.getContent("generic_combined-search-step2_01")%>
+<%=cm.cmsText("generic_combined-search-step2_01")%>
 <br />
 <table summary="layout" border="0">
   <tr>
     <td id="status">
-      <%=contentManagement.getContent("generic_combined-search-step2_02")%>
+      <%=cm.cmsText("generic_combined-search-step2_02")%>
     </td>
   </tr>
 </table>
@@ -284,7 +273,7 @@
   String NatureObject = request.getParameter("natureobject");
   String PreviousNatureObject = request.getParameter("previousnatureobject");
   String NextNatureObject = request.getParameter("nextnatureobject");
-//  System.out.println("NatureObject = " + NatureObject);
+  //  System.out.println("NatureObject = " + NatureObject);
   if(IdSession == null || IdSession.length() == 0 || IdSession.equalsIgnoreCase("undefined")) {
     IdSession = request.getSession().getId();
   }
@@ -315,25 +304,25 @@
   sourcedbcriteria = SourceDB;
 %>
 <form method="post" action="combined-search-2.jsp" name="criteria">
-<strong>Step 2.</strong>
+<strong><%=cm.cmsText("step_2")%></strong>
 <%
   if(PreviousNatureObject.equalsIgnoreCase("Species")) {
 %>
-<%=contentManagement.getContent("generic_combined-search-step2_03")%>
+<%=cm.cmsText("generic_combined-search-step2_03")%>
 <%
   }
   if(PreviousNatureObject.equalsIgnoreCase("Habitat")) {
 %>
-<%=contentManagement.getContent("generic_combined-search-step2_04")%>
+<%=cm.cmsText("generic_combined-search-step2_04")%>
 <%
   }
   if(PreviousNatureObject.equalsIgnoreCase("Sites")) {
 %>
-<%=contentManagement.getContent("generic_combined-search-step2_05")%>
+<%=cm.cmsText("generic_combined-search-step2_05")%>
 <%
   }
 %>
-<hr width="740" size="1" align="left" />
+<hr width="100%" size="1" align="left" />
 <input type="hidden" name="criteria" value="" />
 <input type="hidden" name="attribute" value="" />
 <input type="hidden" name="operator" value="" />
@@ -349,17 +338,13 @@
 <input type="hidden" name="idsession" value="<%=IdSession%>" />
 <%
   //  System.out.println("NatureObject = " + NatureObject);
-//  System.out.println("IdSession = " + IdSession);
-  String SQL_DRV = "";
-  String SQL_URL = "";
-  String SQL_USR = "";
-  String SQL_PWD = "";
-  int SQL_LIMIT = 500000;
+  //  System.out.println("IdSession = " + IdSession);
+  int SQL_LIMIT = Integer.parseInt(application.getInitParameter("SQL_LIMIT"));
 
-  SQL_DRV = application.getInitParameter("JDBC_DRV");
-  SQL_URL = application.getInitParameter("JDBC_URL");
-  SQL_USR = application.getInitParameter("JDBC_USR");
-  SQL_PWD = application.getInitParameter("JDBC_PWD");
+  String SQL_DRV = application.getInitParameter("JDBC_DRV");
+  String SQL_URL = application.getInitParameter("JDBC_URL");
+  String SQL_USR = application.getInitParameter("JDBC_USR");
+  String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
   //Utilities.dumpRequestParams(request);
   String p_action = request.getParameter("action");
@@ -406,7 +391,7 @@
       %>
       <script language="JavaScript" type="text/javascript">
       <!--
-      alert('<%=contentManagement.getContent("generic_combined-search-step2_20",false)%>');
+      alert('<%=cm.cms("error_deleting_root")%>');
       //-->
       </script>
       <%
@@ -432,7 +417,7 @@
 %>
 <script language="JavaScript" type="text/javascript">
 <!--
-  alert('<%=contentManagement.getContent("generic_combined-search-step2_10",false)%>');
+  alert('<%=cm.cms("error_adding_branch")%>');
 //-->
 </script>
 <%
@@ -446,7 +431,7 @@
       %>
       <script language="JavaScript" type="text/javascript">
       <!--
-      alert('<%=contentManagement.getContent("generic_combined-search-step2_11",false)%>');
+      alert('<%=cm.cms("error_deleting_branch")%>');
       //-->
       </script>
 <%
@@ -460,7 +445,7 @@
       %>
       <script language="JavaScript" type="text/javascript">
       <!--
-      alert('<%=contentManagement.getContent("generic_combined-search-step2_12",false)%>');
+      alert('<%=cm.cms("error_composing_branch")%>');
       //-->
       </script>
       <%
@@ -553,12 +538,11 @@
           out.println("&nbsp;");
         }
       }
-      ;
 
       if(!IdNode.equalsIgnoreCase("0")) {
         if(IdNode.length() <= 3) {
 %>
-  <a title="Add criteria" href="javascript:submitButtonForm('add','<%=IdNode%>');"><img alt="Add criteria" border="0" src="images/mini/add.gif" width="13" height="13" title="Add new criterion" /></a>
+          <a title="<%=cm.cms("add_criterion")%>" href="javascript:submitButtonForm('add','<%=IdNode%>');"><img alt="<%=cm.cms("add_criterion")%>" border="0" src="images/mini/add.gif" width="13" height="13" title="<%=cm.cms("add_criterion")%>" /></a><%=cm.cmsTitle("add_criterion")%>
   <%
     }
     if(IdNode.equalsIgnoreCase("1")) {
@@ -566,411 +550,266 @@
   <img alt="" border="0" src="images/mini/space.gif" />
   <%
     } else {
-      out.println("<a title=\"Delete\" href=\"javascript:submitButtonForm('delete','" + IdNode + "');\"><img alt=\"Delete\" border=\"0\" src=\"images/mini/delete.gif\" width=\"13\" height=\"13\" title=\"Delete criterion\" /></a>");
+  %>
+      <a title="<%=cm.cms("delete_criterion")%>" href="javascript:submitButtonForm('delete','<%=IdNode%>');"><img border="0" src="images/mini/delete.gif" alt="<%=cm.cms("delete_criterion")%>" width="13" height="13" title="<%=cm.cms("delete_criterion")%>" /></a><%=cm.cmsTitle("delete_criterion")%>
+  <%
     }
     if(IdNode.length() < 3) {
       if(NodeType.equalsIgnoreCase("Criteria")) {
-        out.println("<a title=\"Compose\" href=\"javascript:submitButtonForm('compose','" + IdNode + "');\"><img alt=\"Compose\" border=\"0\" src=\"images/mini/compose.gif\" width=\"13\" height=\"13\" title=\"Transform this node into a combination of criteria\" /></a>");
+      %>
+        <a title="<%=cm.cms("compose_criterion")%>" href="javascript:submitButtonForm('compose','<%=IdNode%>');"><img alt="<%=cm.cms("compose_criterion")%>" border="0" src="images/mini/compose.gif" width="13" height="13" title="<%=cm.cms("compose_criterion")%>" /></a><%=cm.cmsTitle("compose_criterion")%>
+      <%
       }
     }
     out.println(" " + IdNode);
   } else {
-    out.println("<a title=\"Delete root\" href=\"javascript:submitButtonForm('deleteroot','" + IdNode + "');\"><img alt=\"Delete root\" border=\"0\" src=\"images/mini/delete.gif\" width=\"13\" height=\"13\" title=\"Delete the criterion node, including the subnode\" /></a>");
+    %>
+    <a title="<%=cm.cms("delete_root_criterion")%>" href="javascript:submitButtonForm('deleteroot','<%=IdNode%>');"><img alt="<%=cm.cms("delete_root_criterion")%>" border="0" src="images/mini/delete.gif" width="13" height="13" title="<%=cm.cms("delete_root_criterion")%>" /></a><%=cm.cmsTitle("delete_root_criterion")%>
+    <%
   }
 
-  if(!NodeType.equalsIgnoreCase("Criteria")) {
-    out.println("<label for=\"Criteria" + IdNode + "\" class=\"noshow\">Criteria</label>");
-    out.println("<select name=\"Criteria" + IdNode + "\" class=\"inputTextField\" onchange=\"submitCriteriaForm(this,'" + IdNode + "','" + IdSession + "','" + NatureObject + "')\" title=\"Select criteria\" id=\"Criteria" + IdNode + "\">");
-    if(NodeType.equalsIgnoreCase("All")) {
+  String cmsCriteria = cm.cms("advanced_criteria");
+  String cmsAttribute = cm.cms("advanced_attribute");
+  String cmsOperator = cm.cms("advanced_operator");
+  String cmsAll = cm.cms("advanced_all");
+  String cmsAny = cm.cms("advanced_any");
+  String cmsFollowingCriteria = cm.cms("of_following_criteria_are_met");
+
+  if (!NodeType.equalsIgnoreCase("Criteria")) {
+    out.println("<label for=\"Criteria" + IdNode + "\" class=\"noshow\">"+cmsCriteria+"</label>");
+    out.println("<select name=\"Criteria" + IdNode + "\" class=\"inputTextField\" onchange=\"submitCriteriaForm(this,'" + IdNode + "','" + IdSession + "','" + NatureObject + "')\" title=\""+cmsCriteria+"\" id=\"Criteria"+ IdNode + "\">");
+    if (NodeType.equalsIgnoreCase("All")) {
       selected = " selected=\"selected\"";
     } else {
       selected = "";
     }
-    out.println("<option" + selected + " value=\"All\">All</option>");
-    if(NodeType.equalsIgnoreCase("Any")) {
+    out.println("<option" + selected + " value=\"All\">"+cmsAll+"</option>");
+    if (NodeType.equalsIgnoreCase("Any")) {
       selected = " selected=\"selected\"";
     } else {
       selected = "";
     }
-    out.println("<option" + selected + " value=\"Any\">Any</option>");
-    out.println("</select> of following criteria are met:");
+    out.println("<option" + selected + " value=\"Any\">"+cmsAny+"</option>");
+    out.println("</select> " + cmsFollowingCriteria + ":");
     out.println("<br />");
   } else {
     val = rs.getString("ATTRIBUTE");
     currentAttribute = val;
-    out.println("<label for=\"Attribute" + IdNode + "\" class=\"noshow\">Attribute</label>");
-    out.println("<select title=\"Attribute\" name=\"Attribute" + IdNode + "\" id=\"Attribute" + IdNode + "\" class=\"inputTextField\" onchange=\"submitAttributeForm(this,'" + IdNode + "','" + IdSession + "','" + NatureObject + "')\">");
-    if(NatureObject.equalsIgnoreCase("Habitat")) {
-      if(val.equalsIgnoreCase("ScientificName")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"ScientificName\">Name</option>");
-      if(val.equalsIgnoreCase("LegalInstruments")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      if(val.equalsIgnoreCase("Code")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Code\">Code (EUNIS or Annex I)</option>");
-      out.println("<option" + selected + " value=\"LegalInstruments\">Legal Instruments</option>");
-      if(val.equalsIgnoreCase("SourceDatabase")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"SourceDatabase\">Source Database</option>");
-      if(val.equalsIgnoreCase("Country")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Country\">Country</option>");
-      if(val.equalsIgnoreCase("Biogeoregion")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Biogeoregion\">Biogeoregion</option>");
-      if(val.equalsIgnoreCase("Author")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Author\">Reference author</option>");
-      if(val.equalsIgnoreCase("Title")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Title\">Reference title</option>");
-      if(val.equalsIgnoreCase("Altitude")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Altitude\">Altitude</option>");
-      if(val.equalsIgnoreCase("Chemistry")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Chemistry\">Chemistry</option>");
-      if(val.equalsIgnoreCase("Climate")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Climate\">Climate</option>");
-      if(val.equalsIgnoreCase("Cover")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Cover\">Cover</option>");
-      if(val.equalsIgnoreCase("Depth")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Depth\">Depth</option>");
-      if(val.equalsIgnoreCase("Geomorph")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Geomorph\">Geomorph</option>");
-      if(val.equalsIgnoreCase("Humidity")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Humidity\">Humidity</option>");
-      if(val.equalsIgnoreCase("LifeForm")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"LifeForm\">Life Form</option>");
-      if(val.equalsIgnoreCase("LightIntensity")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"LightIntensity\">Light Intensity</option>");
-      if(val.equalsIgnoreCase("Marine")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Marine\">Marine</option>");
-      if(val.equalsIgnoreCase("Salinity")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Salinity\">Salinity</option>");
-      if(val.equalsIgnoreCase("Spatial")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Spatial\">Spatial</option>");
-      if(val.equalsIgnoreCase("Substrate")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Substrate\">Substrate</option>");
-      if(val.equalsIgnoreCase("Temporal")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Temporal\">Temporal</option>");
-      if(val.equalsIgnoreCase("Tidal")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Tidal\">Tidal</option>");
-      if(val.equalsIgnoreCase("Water")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Water\">Water</option>");
-      if(val.equalsIgnoreCase("Usage")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Usage\">Usage</option>");
+    out.println("<label for=\"Attribute" + IdNode + "\" class=\"noshow\">"+cmsAttribute+"</label>");
+    out.println("<select name=\"Attribute" + IdNode + "\" class=\"inputTextField\" onchange=\"submitAttributeForm(this,'" + IdNode + "','" + IdSession + "','" + NatureObject + "')\" title=\""+cmsAttribute+"\" id=\"Attribute" + IdNode + "\">");
+
+    if (NatureObject.equalsIgnoreCase("Habitat")) {
+      if (val.equalsIgnoreCase("ScientificName")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"ScientificName\">" + cm.cms("habitats_advanced_14") + "</option>");
+      if (val.equalsIgnoreCase("Code")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Code\">" + cm.cms("habitats_advanced_15") + "</option>");
+      if (val.equalsIgnoreCase("LegalInstruments")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"LegalInstruments\">" + cm.cms("habitats_advanced_16") + "</option>");
+      if (val.equalsIgnoreCase("SourceDatabase")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"SourceDatabase\">" + cm.cms("habitats_advanced_17") + "</option>");
+      if (val.equalsIgnoreCase("Country")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Country\">" + cm.cms("habitats_advanced_18") + "</option>");
+      if (val.equalsIgnoreCase("Biogeoregion")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Biogeoregion\">" + cm.cms("habitats_advanced_19") + "</option>");
+      if (val.equalsIgnoreCase("Author")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Author\">" + cm.cms("habitats_advanced_20") + "</option>");
+      if (val.equalsIgnoreCase("Title")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Title\">" + cm.cms("habitats_advanced_21") + "</option>");
+      if (val.equalsIgnoreCase("Altitude")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Altitude\">" + cm.cms("habitats_advanced_22") + "</option>");
+      if (val.equalsIgnoreCase("Chemistry")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Chemistry\">" + cm.cms("habitats_advanced_23") + "</option>");
+      if (val.equalsIgnoreCase("Climate")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Climate\">" + cm.cms("habitats_advanced_24") + "</option>");
+      if (val.equalsIgnoreCase("Cover")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Cover\">" + cm.cms("habitats_advanced_25") + "</option>");
+      if (val.equalsIgnoreCase("Depth")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Depth\">" + cm.cms("habitats_advanced_26") + "</option>");
+      if (val.equalsIgnoreCase("Geomorph")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Geomorph\">" + cm.cms("habitats_advanced_27") + "</option>");
+      if (val.equalsIgnoreCase("Humidity")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Humidity\">" + cm.cms("habitats_advanced_28") + "</option>");
+      if (val.equalsIgnoreCase("LifeForm")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"LifeForm\">" + cm.cms("habitats_advanced_29") + "</option>");
+      if (val.equalsIgnoreCase("LightIntensity")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"LightIntensity\">" + cm.cms("habitats_advanced_30") + "</option>");
+      if (val.equalsIgnoreCase("Salinity")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Salinity\">" + cm.cms("habitats_advanced_32") + "</option>");
+      if (val.equalsIgnoreCase("Spatial")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Spatial\">" + cm.cms("habitats_advanced_33") + "</option>");
+      if (val.equalsIgnoreCase("Substrate")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Substrate\">" + cm.cms("habitats_advanced_34") + "</option>");
+      if (val.equalsIgnoreCase("Temporal")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Temporal\">" + cm.cms("habitats_advanced_35") + "</option>");
+      if (val.equalsIgnoreCase("Water")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Water\">" + cm.cms("habitats_advanced_37") + "</option>");
+      if (val.equalsIgnoreCase("Usage")) { selected = " selected=\"selected\""; } else { selected = ""; }
+      out.println("<option" + selected + " value=\"Usage\">" + cm.cms("habitats_advanced_38") + "</option>");
+      out.println("</select>");
+      %>
+      <%=cm.cmsInput("habitats_advanced_14")%>
+      <%=cm.cmsInput("habitats_advanced_15")%>
+      <%=cm.cmsInput("habitats_advanced_16")%>
+      <%=cm.cmsInput("habitats_advanced_17")%>
+      <%=cm.cmsInput("habitats_advanced_18")%>
+      <%=cm.cmsInput("habitats_advanced_19")%>
+      <%=cm.cmsInput("habitats_advanced_20")%>
+      <%=cm.cmsInput("habitats_advanced_21")%>
+      <%=cm.cmsInput("habitats_advanced_22")%>
+      <%=cm.cmsInput("habitats_advanced_23")%>
+      <%=cm.cmsInput("habitats_advanced_24")%>
+      <%=cm.cmsInput("habitats_advanced_25")%>
+      <%=cm.cmsInput("habitats_advanced_26")%>
+      <%=cm.cmsInput("habitats_advanced_27")%>
+      <%=cm.cmsInput("habitats_advanced_28")%>
+      <%=cm.cmsInput("habitats_advanced_29")%>
+      <%=cm.cmsInput("habitats_advanced_30")%>
+      <%=cm.cmsInput("habitats_advanced_31")%>
+      <%=cm.cmsInput("habitats_advanced_32")%>
+      <%=cm.cmsInput("habitats_advanced_33")%>
+      <%=cm.cmsInput("habitats_advanced_34")%>
+      <%=cm.cmsInput("habitats_advanced_35")%>
+      <%=cm.cmsInput("habitats_advanced_36")%>
+      <%=cm.cmsInput("habitats_advanced_37")%>
+      <%=cm.cmsInput("habitats_advanced_38")%>
+      <%
     } else if(NatureObject.equalsIgnoreCase("Species")) {
-      if(val.equalsIgnoreCase("ScientificName")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"ScientificName\">Scientific Name</option>");
-      if(val.equalsIgnoreCase("VernacularName")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"VernacularName\">Vernacular Name</option>");
-      if(val.equalsIgnoreCase("Group")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Group\">Group</option>");
-      if(val.equalsIgnoreCase("ThreatStatus")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"ThreatStatus\">Threat Status</option>");
-      if(val.equalsIgnoreCase("InternationalThreatStatus")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"InternationalThreatStatus\">International Threat Status</option>");
-      if(val.equalsIgnoreCase("Country")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Country\">Country</option>");
-      if(val.equalsIgnoreCase("Biogeoregion")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Biogeoregion\">Biogeoregion</option>");
-      if(val.equalsIgnoreCase("Author")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Author\">Reference author</option>");
-      if(val.equalsIgnoreCase("Title")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Title\">Reference title</option>");
-      if(val.equalsIgnoreCase("LegalInstrument")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"LegalInstrument\">Legal instr. title</option>");
-      if(val.equalsIgnoreCase("Taxonomy")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Taxonomy\">Taxonomy</option>");
-      if(val.equalsIgnoreCase("Abundance")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Abundance\">Abundance</option>");
-      if(val.equalsIgnoreCase("Trend")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Trend\">Trend</option>");
-      if(val.equalsIgnoreCase("DistributionStatus")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"DistributionStatus\">Distribution Status</option>");
+      if(val.equalsIgnoreCase("ScientificName")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"ScientificName\">"+cm.cms("species_advanced_10")+"</option>");
+      if(val.equalsIgnoreCase("VernacularName")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"VernacularName\">"+cm.cms("species_advanced_11")+"</option>");
+      if(val.equalsIgnoreCase("Group")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"Group\">"+cm.cms("species_advanced_12")+"</option>");
+      if(val.equalsIgnoreCase("ThreatStatus")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"ThreatStatus\">"+cm.cms("species_advanced_13")+"</option>");
+      if(val.equalsIgnoreCase("InternationalThreatStatus")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"InternationalThreatStatus\">"+cm.cms("species_advanced_14")+"</option>");
+      if(val.equalsIgnoreCase("Country")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"Country\">"+cm.cms("species_advanced_15")+"</option>");
+      if(val.equalsIgnoreCase("Biogeoregion")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"Biogeoregion\">"+cm.cms("species_advanced_16")+"</option>");
+      if(val.equalsIgnoreCase("Author")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"Author\">"+cm.cms("species_advanced_17")+"</option>");
+      if(val.equalsIgnoreCase("Title")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"Title\">"+cm.cms("species_advanced_18")+"</option>");
+      if(val.equalsIgnoreCase("LegalInstrument")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"LegalInstrument\">"+cm.cms("species_advanced_19")+"</option>");
+      if(val.equalsIgnoreCase("Taxonomy")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"Taxonomy\">"+cm.cms("species_advanced_20")+"</option>");
+      if(val.equalsIgnoreCase("Abundance")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"Abundance\">"+cm.cms("species_advanced_21")+"</option>");
+      if(val.equalsIgnoreCase("Trend")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"Trend\">"+cm.cms("species_advanced_22")+"</option>");
+      if(val.equalsIgnoreCase("DistributionStatus")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"DistributionStatus\">"+cm.cms("species_advanced_23")+"</option>");
+      out.println("</select>");
+      %>
+      <%=cm.cmsInput("species_advanced_10")%>
+      <%=cm.cmsInput("species_advanced_11")%>
+      <%=cm.cmsInput("species_advanced_12")%>
+      <%=cm.cmsInput("species_advanced_13")%>
+      <%=cm.cmsInput("species_advanced_14")%>
+      <%=cm.cmsInput("species_advanced_15")%>
+      <%=cm.cmsInput("species_advanced_16")%>
+      <%=cm.cmsInput("species_advanced_17")%>
+      <%=cm.cmsInput("species_advanced_18")%>
+      <%=cm.cmsInput("species_advanced_19")%>
+      <%=cm.cmsInput("species_advanced_20")%>
+      <%=cm.cmsInput("species_advanced_21")%>
+      <%=cm.cmsInput("species_advanced_22")%>
+      <%=cm.cmsInput("species_advanced_23")%>
+      <%
     } else if(NatureObject.equalsIgnoreCase("Sites")) {
-      if(val.equalsIgnoreCase("Name")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Name\">Name</option>");
-      if(val.equalsIgnoreCase("Code")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Code\">Code</option>");
-      if(val.equalsIgnoreCase("DesignationYear")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"DesignationYear\">Designation Year</option>");
-      if(val.equalsIgnoreCase("Country")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Country\">Country</option>");
-      if(val.equalsIgnoreCase("Size")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Size\">Size</option>");
-      if(val.equalsIgnoreCase("Longitude")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Longitude\">Longitude</option>");
-      if(val.equalsIgnoreCase("Latitude")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Latitude\">Latitude</option>");
-      if(val.equalsIgnoreCase("MinimumAltitude")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"MinimumAltitude\">Minimum Altitude</option>");
-      if(val.equalsIgnoreCase("MaximumAltitude")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"MaximumAltitude\">Maximum Altitude</option>");
-      if(val.equalsIgnoreCase("MeanAltitude")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"MeanAltitude\">Mean Altitude</option>");
-      if(val.equalsIgnoreCase("Designation")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Designation\">Designation</option>");
-      if(val.equalsIgnoreCase("HumanActivity")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"HumanActivity\">HumanActivity</option>");
-      if(val.equalsIgnoreCase("Motivation")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"Motivation\">Motivation</option>");
-      if(val.equalsIgnoreCase("RegionCode")) {
-        selected = " selected=\"selected\"";
-      } else {
-        selected = "";
-      }
-      out.println("<option" + selected + " value=\"RegionCode\">RegionCode</option>");
+      if(val.equalsIgnoreCase("Name")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"Name\">"+cm.cms("sites_advanced_28")+"</option>");
+      if(val.equalsIgnoreCase("Code")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"Code\">"+cm.cms("sites_advanced_29")+"</option>");
+      if(val.equalsIgnoreCase("DesignationYear")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"DesignationYear\">"+cm.cms("sites_advanced_30")+"</option>");
+      if(val.equalsIgnoreCase("Country")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"Country\">"+cm.cms("sites_advanced_31")+"</option>");
+      if(val.equalsIgnoreCase("Size")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"Size\">"+cm.cms("sites_advanced_32")+"</option>");
+      if(val.equalsIgnoreCase("Longitude")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"Longitude\">"+cm.cms("sites_advanced_33")+"</option>");
+      if(val.equalsIgnoreCase("Latitude")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"Latitude\">"+cm.cms("sites_advanced_34")+"</option>");
+      if(val.equalsIgnoreCase("MinimumAltitude")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"MinimumAltitude\">"+cm.cms("sites_advanced_35")+"</option>");
+      if(val.equalsIgnoreCase("MaximumAltitude")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"MaximumAltitude\">"+cm.cms("sites_advanced_36")+"</option>");
+      if(val.equalsIgnoreCase("MeanAltitude")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"MeanAltitude\">"+cm.cms("sites_advanced_37")+"</option>");
+      if(val.equalsIgnoreCase("Designation")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"Designation\">"+cm.cms("sites_advanced_38")+"</option>");
+      if(val.equalsIgnoreCase("HumanActivity")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"HumanActivity\">"+cm.cms("sites_advanced_39")+"</option>");
+      if(val.equalsIgnoreCase("Motivation")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"Motivation\">"+cm.cms("sites_advanced_40")+"</option>");
+      if(val.equalsIgnoreCase("RegionCode")) { selected=" selected=\"selected\""; } else { selected=""; }
+      out.println("<option"+selected+" value=\"RegionCode\">"+cm.cms("sites_advanced_region")+"</option>");
+      out.println("</select>");
+      %>
+      <%=cm.cmsInput("sites_advanced_28")%>
+      <%=cm.cmsInput("sites_advanced_29")%>
+      <%=cm.cmsInput("sites_advanced_30")%>
+      <%=cm.cmsInput("sites_advanced_31")%>
+      <%=cm.cmsInput("sites_advanced_32")%>
+      <%=cm.cmsInput("sites_advanced_33")%>
+      <%=cm.cmsInput("sites_advanced_34")%>
+      <%=cm.cmsInput("sites_advanced_35")%>
+      <%=cm.cmsInput("sites_advanced_36")%>
+      <%=cm.cmsInput("sites_advanced_37")%>
+      <%=cm.cmsInput("sites_advanced_38")%>
+      <%=cm.cmsInput("sites_advanced_39")%>
+      <%=cm.cmsInput("sites_advanced_40")%>
+      <%
     }
-    out.println("</select>");
 
     out.println("&nbsp;");
 
-    val = rs.getString("OPERATOR");
+    val=rs.getString("OPERATOR");
     currentOperator = val;
-    out.println("<label for=\"Operator" + IdNode + "\" class=\"noshow\">Operator</label>");
-    out.println("<select name=\"Operator" + IdNode + "\" id=\"Operator"+IdNode+"\" class=\"inputTextField\" onchange=\"submitOperatorForm(this,'" + IdNode + "','" + IdSession + "','" + NatureObject + "')\" title=\"Select operator type\">");
-    if(val.equalsIgnoreCase("Equal")) {
-      selected = " selected=\"selected\"";
-    } else {
-      selected = "";
-    }
-    out.println("<option" + selected + " value=\"Equal\">Equal</option>");
-    if(val.equalsIgnoreCase("Contains")) {
-      selected = " selected=\"selected\"";
-    } else {
-      selected = "";
-    }
-    out.println("<option" + selected + " value=\"Contains\">Contains</option>");
-    if(val.equalsIgnoreCase("Between")) {
-      selected = " selected=\"selected\"";
-    } else {
-      selected = "";
-    }
-    out.println("<option" + selected + " value=\"Between\">Between</option>");
-    out.println("</select>");
+    out.println("<label for=\"Operator" + IdNode + "\" class=\"noshow\">"+cmsOperator+"</label>");
+    out.println("<select name=\"Operator" + IdNode + "\" class=\"inputTextField\" onchange=\"submitOperatorForm(this,'" + IdNode + "','" + IdSession + "','" + NatureObject + "')\" title=\""+cmsOperator+"\" id=\"Operator" + IdNode + "\">");
 
+    if(val.equalsIgnoreCase("Equal")) { selected=" selected=\"selected\""; } else { selected=""; }
+    out.println("<option"+selected+" value=\"Equal\">"+cm.cms("combined_advanced_30")+"</option>");
+    if(val.equalsIgnoreCase("Contains")) { selected=" selected=\"selected\""; } else { selected=""; }
+    out.println("<option"+selected+" value=\"Contains\">"+cm.cms("combined_advanced_31")+"</option>");
+    if(val.equalsIgnoreCase("Between")) { selected=" selected=\"selected\""; } else { selected=""; }
+    out.println("<option"+selected+" value=\"Between\">"+cm.cms("combined_advanced_32")+"</option>");
+    if(val.equalsIgnoreCase("Regex")) { selected=" selected=\"selected\""; } else { selected=""; }
+    out.println("<option"+selected+" value=\"Regex\">Regex</option>");
+    out.println("</select>");
+    %>
+    <%=cm.cmsInput("combined_advanced_30")%>
+    <%=cm.cmsInput("combined_advanced_31")%>
+    <%=cm.cmsInput("combined_advanced_32")%>
+    <%
     out.println("&nbsp;");
 
     val = rs.getString("FIRST_VALUE");
     currentValue = val;
 %>
-<label for="First_Value<%=IdNode%>" class="noshow">First search value</label>
-<input type="text" title="List of values" class="inputTextField" name="First_Value<%=IdNode%>" id="First_Value<%=IdNode%>" size="25" value="<%=val%>" onblur="submitFirstValueForm(this,'<%=IdNode%>','<%=IdSession%>','<%=NatureObject%>');" onfocus="saveFirstValue(this)" onkeyup="textChanged(event)" />
-<a title="List of values" href="javascript:choice('First_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="first_binocular" onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="Display list of possible values" /></a>
+    <label for="First_Value<%=IdNode%>" class="noshow"><%=cm.cms("list_of_values")%></label>
+    <input type="text" title="<%=cm.cms("list_of_values")%>" class="inputTextField" id="First_Value<%=IdNode%>" name="First_Value<%=IdNode%>" size="25" value="<%=val%>" onblur="submitFirstValueForm(this,'<%=IdNode%>','<%=IdSession%>','<%=NatureObject%>');" onfocus="saveFirstValue(this)" onkeyup="textChanged(event)" />
+    <%=cm.cmsTitle("list_of_values")%>
+    <a title="<%=cm.cms("list_of_values")%>" href="javascript:choice('First_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="first_binocular" onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cms("list_of_values")%>" /></a>
 <%
-  if(rs.getString("OPERATOR").equalsIgnoreCase("Between")) {
-    out.println(" and ");
-    val = rs.getString("LAST_VALUE");
-    currentValue = val;
+    if (rs.getString("OPERATOR").equalsIgnoreCase("Between")) {
+      out.println(cm.cmsText("habitats_advanced_43"));
+      val = rs.getString("LAST_VALUE");
+      currentValue = val;
 %>
-<label for="Last_Value<%=IdNode%>" class="noshow">Second search value</label>
-<input type="text" title="List of values" class="inputTextField" name="Last_Value<%=IdNode%>" id="Last_Value<%=IdNode%>" size="25" value="<%=val%>" onblur="submitLastValueForm(this,'<%=IdNode%>','<%=IdSession%>','<%=NatureObject%>')" onfocus="saveLastValue(this)" onkeyup="textChanged(event)" />
-<a title="List of values" href="javascript:choice('Last_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="last_binocular" onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="Display list of possible values" /></a>
+    <label for="Last_Value<%=IdNode%>" class="noshow"><%=cm.cms("list_of_values")%></label>
+    <input type="text" title="<%=cm.cms("list_of_values")%>" class="inputTextField" id="Last_Value<%=IdNode%>" name="Last_Value<%=IdNode%>" size="25" value="<%=val%>" onblur="submitLastValueForm(this,'<%=IdNode%>','<%=IdSession%>','<%=NatureObject%>')" onfocus="saveLastValue(this)" onkeyup="textChanged(event)" />
+    <%=cm.cmsTitle("list_of_values")%>
+    <a title="<%=cm.cms("list_of_values")%>" href="javascript:choice('Last_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="last_binocular" onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cms("list_of_values")%>" /></a>
 <%
-  }
+    }
 %>
-<br />
+  <br />
 <%
     }
   }
@@ -981,32 +820,34 @@
 <br />
 <% } %>
 <br />
-<label for="Save" class="noshow">Save criteria</label>
-<input type="button" class="inputTextField" onclick="disableSaveButton()" disabled="disabled" value="Save" name="Save" id="Save" alt="Save search criteria" />
-&nbsp;&nbsp;&nbsp;
-<label for="Search" class="noshow">Search</label>
-<input type="submit" class="inputTextField" value="Search" name="Search" id="Search" alt="Execute search" />
-&nbsp;&nbsp;&nbsp;
-<label for="Reset" class="noshow">Reset</label>
-<input type="button" class="inputTextField" onclick="submitButtonForm('reset','0')" value="Reset" name="Reset" id="Reset" alt="Clear search criteria" />
+  <label for="Save" class="noshow"><%=cm.cms("save_btn")%></label>
+  <input type="button" class="inputTextField" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save_btn")%>" />
+  <%=cm.cmsTitle("save_btn")%>
+  &nbsp;&nbsp;&nbsp;
+  <label for="Search" class="noshow"><%=cm.cms("search_btn")%></label>
+  <input type="submit" class="inputTextField" value="Search" id="Search" name="Search" title="<%=cm.cms("search_btn")%>" />
+  <%=cm.cmsTitle("search_btn")%>
+  &nbsp;&nbsp;&nbsp;
+  <label for="Reset" class="noshow"><%=cm.cms("reset_btn")%></label>
+  <input type="button" class="inputTextField" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cms("reset_btn")%>" />
+  <%=cm.cmsTitle("reset_btn")%>
 <%
 } else {
 %>
-<a title="Add root" href="javascript:submitButtonForm('addroot','0');"><img border="0" src="images/mini/add.gif" width="13" height="13" alt="Add condition" /></a>
-<%=contentManagement.getContent("generic_combined-search-step2_06")%>
+  <a title="<%=cm.cms("add_root")%>" href="javascript:submitButtonForm('addroot','0');"><img border="0" src="images/mini/add.gif" width="13" height="13" title="<%=cm.cms("add_root")%>" alt="<%=cm.cms("add_root")%>" /></a>&nbsp;<%=cm.cmsText("add_root")%>
 <%
-  }
+}
   rs.close();
 %>
 </form>
 <br />
 <strong>
-  <%=contentManagement.getContent("generic_combined-search-step2_07")%>
+  <%=cm.cmsText("generic_combined-search-step2_07")%>
 </strong>
 <br />
 <%
   String criteria = tas.createCriteria(IdSession, NatureObject);
-  out.println("Calculated search criteria expression: ");
+  out.println(cm.cmsText("combined_calculated_criteria"));
   combinedexplainedcriteria2 = criteria.replace('#', ' ').replace('[', '(').replace(']', ')').replaceAll("AND", "<strong>AND</strong>").replaceAll("OR", "<strong>OR</strong>");
   out.println(combinedexplainedcriteria2);
 
@@ -1034,12 +875,12 @@
         node = criteria.substring(pos_start + 1, pos_end);
         interpretedcriteria = tsas.InterpretCriteria(node, IdSession, NatureObject);
         combinedlistcriteria2 += node + ": " + interpretedcriteria + "<br />";
-        out.println("Searching for: " + interpretedcriteria + "...");
+        out.println(cm.cmsText("advanced_searching_for") + " " + interpretedcriteria + "...");
         out.flush();
         intermediatefilter = tsas.BuildFilter(node, IdSession, NatureObject);
-        out.println("found: <strong>" + tsas.getResultCount() + "</strong>");
+        out.println(cm.cmsText("advanced_found") + " <strong>" + tsas.getResultCount() + "</strong>");
         if(tsas.getResultCount() >= SQL_LIMIT) {
-          String str = contentManagement.getContent("generic_combined-search-step2_13");
+          String str = cm.cmsText("generic_combined-search-step2_13");
           if(str != null) {
             str = str.replaceAll("SQL_LIMIT", "" + SQL_LIMIT);
             out.println(str);
@@ -1074,12 +915,12 @@
         node = criteria.substring(pos_start + 1, pos_end);
         interpretedcriteria = tsas.InterpretCriteria(node, IdSession, NatureObject);
         combinedlistcriteria2 += node + ": " + interpretedcriteria + "<br />";
-        out.println("Searching for: " + interpretedcriteria + "...");
+        out.println(cm.cmsText("advanced_searching_for") + " " + interpretedcriteria + "...");
         out.flush();
         intermediatefilter = tsas.BuildFilter(node, IdSession, NatureObject);
-        out.println("found: <strong>" + tsas.getResultCount() + "</strong>");
+        out.println(cm.cmsText("advanced_found") + " <strong>" + tsas.getResultCount() + "</strong>");
         if(tsas.getResultCount() >= SQL_LIMIT) {
-          String str = contentManagement.getContent("generic_combined-search-step2_13");
+          String str = cm.cmsText("generic_combined-search-step2_13");
           if(str != null) {
             str = str.replaceAll("SQL_LIMIT", "" + SQL_LIMIT);
             out.println(str);
@@ -1115,12 +956,12 @@
         node = criteria.substring(pos_start + 1, pos_end);
         interpretedcriteria = tsas.InterpretCriteria(node, IdSession, NatureObject);
         combinedlistcriteria2 += node + ": " + interpretedcriteria + "<br />";
-        out.println("Searching for: " + interpretedcriteria + "...");
+        out.println(cm.cmsText("advanced_searching_for") + " " + interpretedcriteria + "...");
         out.flush();
         intermediatefilter = tsas.BuildFilter(node, IdSession, NatureObject);
-        out.println("found: <strong>" + tsas.getResultCount() + "</strong>");
+        out.println(cm.cmsText("advanced_found") + " <strong>" + tsas.getResultCount() + "</strong>");
         if(tsas.getResultCount() >= SQL_LIMIT) {
-          String str = contentManagement.getContent("generic_combined-search-step2_13");
+          String str = cm.cmsText("generic_combined-search-step2_13");
           if(str != null) {
             str = str.replaceAll("SQL_LIMIT", "" + SQL_LIMIT);
             out.println(str);
@@ -1164,7 +1005,7 @@
       str = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE (" + str + ")";
     }
     String query = tsas.ExecuteFilterSQL(str, "");
-    out.println("<br /><strong>Total found in database: " + tsas.getResultCount() + "</strong><br /><br />");
+    out.println("<br /><strong>" + cm.cmsText("combined_total_matches") + "&nbsp;" + tsas.getResultCount() + "</strong><br /><br />");
     out.flush();
 
     if(tsas.getResultCount() > 0) {
@@ -1180,24 +1021,27 @@
   <%
     if(NatureObject.equalsIgnoreCase("Species")) {
   %>
-  <label for="NextPageSpecies" class="noshow">Proceed to next page</label>
-  <input type="submit" name="Proceed to next page" title="<%=contentManagement.getContent("generic_combined-search-step2_14",false)%>" id="NextPageSpecies" value="<%=contentManagement.getContent("generic_combined-search-step2_14",false)%>" class="inputTextField" />
+  <label for="NextPageSpecies" class="noshow"><%=cm.cms("combined_proceed_to_next_page")%></label>
+  <input type="submit" name="Proceed to next page" title="<%=cm.cms("combined_proceed_to_next_page")%>" id="NextPageSpecies" value="<%=cm.cms("combined_proceed_to_next_page")%>" class="inputTextField" />
+  <%=cm.cmsInput("combined_proceed_to_next_page")%>
   <%
     }
   %>
   <%
     if(NatureObject.equalsIgnoreCase("Habitat")) {
   %>
-  <label for="NextPageHabitat" class="noshow">Proceed to next page</label>
-  <input type="submit" title="<%=contentManagement.getContent("generic_combined-search-step2_15",false)%>" name="Proceed to next page" id="NextPageHabitat" value="<%=contentManagement.getContent("generic_combined-search-step2_15",false)%>" class="inputTextField" />
+  <label for="NextPageHabitat" class="noshow"><%=cm.cms("combined_proceed_to_next_page")%></label>
+  <input type="submit" title="<%=cm.cms("combined_proceed_to_next_page")%>" name="Proceed to next page" id="NextPageHabitat" value="<%=cm.cms("combined_proceed_to_next_page")%>" class="inputTextField" />
+  <%=cm.cmsInput("combined_proceed_to_next_page")%>
   <%
     }
   %>
   <%
     if(NatureObject.equalsIgnoreCase("Sites")) {
   %>
-  <label for="NextPageSites" class="noshow">Proceed to next page</label>
-  <input type="submit" title="<%=contentManagement.getContent("generic_combined-search-step2_16",false)%>" name="Proceed to next page" id="NextPageSites" value="<%=contentManagement.getContent("generic_combined-search-step2_16",false)%>" class="inputTextField" />
+  <label for="NextPageSites" class="noshow"><%=cm.cms("combined_proceed_to_next_page")%></label>
+  <input type="submit" title="<%=cm.cms("combined_proceed_to_next_page")%>" name="Proceed to next page" id="NextPageSites" value="<%=cm.cms("combined_proceed_to_next_page")%>" class="inputTextField" />
+  <%=cm.cmsInput("combined_proceed_to_next_page")%>
   <input type="hidden" name="sourcedbcriteria" value="<%=sourcedbcriteria.replaceAll("'","")%>" />
   <%
     }
@@ -1237,24 +1081,27 @@
   <%
     if(NatureObject.equalsIgnoreCase("Species")) {
   %>
-  <label for="NextPageSpecies2" class="noshow">Proceed to next page</label>
-  <input type="submit" name="Proceed to next page" title="<%=contentManagement.getContent("generic_combined-search-step2_17",false)%>" id="NextPageSpecies2" value="<%=contentManagement.getContent("generic_combined-search-step2_17",false)%>" class="inputTextField" />
+  <label for="NextPageSpecies2" class="noshow"><%=cm.cms("combined_proceed_to_next_page_sites")%></label>
+  <input type="submit" name="Proceed to next page" title="<%=cm.cms("combined_proceed_to_next_page_sites")%>" id="NextPageSpecies2" value="<%=cm.cms("combined_proceed_to_next_page_sites")%>" class="inputTextField" />
+  <%=cm.cmsInput("combined_proceed_to_next_page_sites")%>
   <%
     }
   %>
   <%
     if(NatureObject.equalsIgnoreCase("Habitat")) {
   %>
-  <label for="NextPageHabitat2" class="noshow">Proceed to next page</label>
-  <input type="submit" name="Proceed to next page" title="<%=contentManagement.getContent("generic_combined-search-step2_18",false)%>" id="NextPageHabitat2" value="<%=contentManagement.getContent("generic_combined-search-step2_18",false)%>" class="inputTextField" />
+  <label for="NextPageHabitat2" class="noshow"><%=cm.cms("combined_proceed_to_next_page_species")%></label>
+  <input type="submit" name="Proceed to next page" title="<%=cm.cms("combined_proceed_to_next_page_species")%>" id="NextPageHabitat2" value="<%=cm.cms("combined_proceed_to_next_page_species")%>" class="inputTextField" />
+  <%=cm.cmsInput("combined_proceed_to_next_page_species")%>
   <%
     }
   %>
   <%
     if(NatureObject.equalsIgnoreCase("Sites")) {
   %>
-  <label for="NextPageSites2" class="noshow">Proceed to next page</label>
-  <input type="submit" name="Proceed to next page" title="<%=contentManagement.getContent("generic_combined-search-step2_19",false)%>" id="NextPageSites2" value="<%=contentManagement.getContent("generic_combined-search-step2_19",false)%>" class="inputTextField" />
+  <label for="NextPageSites2" class="noshow"><%=cm.cms("combined_proceed_to_next_page_habitats")%></label>
+  <input type="submit" name="Proceed to next page" title="<%=cm.cms("combined_proceed_to_next_page_habitats")%>" id="NextPageSites2" value="<%=cm.cms("combined_proceed_to_next_page_habitats")%>" class="inputTextField" />
+  <%=cm.cmsInput("combined_proceed_to_next_page_habitats")%>
   <input type="hidden" name="sourcedbcriteria" value="<%=sourcedbcriteria.replaceAll("'","")%>" />
   <%
     }
@@ -1293,17 +1140,34 @@
 <%--    end modify--%>
 <%} else { %>
 <br />
-<%=contentManagement.getContent("generic_combined-search-step2_08")%>
+<%=cm.cmsText("generic_combined-search-step2_08")%>
 <br />
 <% }
 }
   con.close();
 %>
+<%=cm.br()%>
+<%=cm.cmsMsg("generic_combined-search-step2_title")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("press_save_to_save_criteria")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("your_criteria_has_been_saved")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("advanced_any")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("advanced_all")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("error_deleting_root")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("error_adding_branch")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("error_deleting_branch")%>
+<%=cm.br()%>
 <jsp:include page="footer.jsp">
   <jsp:param name="page_name" value="combined-search-2.jsp" />
 </jsp:include>
 </div>
+</div>
+</div>
 </body>
 </html>
-<%out.flush();
-%>

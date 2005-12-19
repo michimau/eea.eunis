@@ -4,11 +4,18 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Display DiGIR Provider status
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%@ page import="ro.finsiel.eunis.search.Utilities,
                  java.net.HttpURLConnection,
-                 java.net.URL"%><%@ page import="java.io.OutputStream"%><%@ page import="java.io.InputStream"%>
+                 java.net.URL"%>
+<%@ page import="java.io.InputStream"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <%
+  WebContentManagement cms = SessionManager.getWebContent();
   //Check if digir provider is running
   if( !SessionManager.isDigirProviderRunChecked() )
   {
@@ -69,4 +76,3 @@
     ctrl_digir_url_link.style.color = "#FF6A6A";
   }
 </script>
-<noscript>Your browser does not support JavaScript!</noscript>

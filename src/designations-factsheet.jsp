@@ -4,7 +4,10 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Designation factsheet for a country - display information about a specified country.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.List, ro.finsiel.eunis.search.sites.designations.FactsheetDesignations,
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.search.sites.SitesSearchUtility,
@@ -15,8 +18,8 @@
 <%@ page import="java.sql.ResultSet"%>
 <%@ page import="java.sql.DriverManager"%>
 <%@ page import="java.sql.Statement"%>
-<%@page contentType="text/html"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
@@ -29,9 +32,73 @@
     {
       eval("page = window.open(URL, '', 'scrollbars=no,toolbar=0,resizable=yes, location=0,width=380,height=350');");
     }
+
+   function goToCountryStatistics(countryName) {
+
+      var frm = document.createElement( "FORM" );
+      document.appendChild( frm );
+      frm.method = "post";
+      frm.action="sites-statistical-result.jsp";
+
+      var c = document.createElement("input");
+      c.type= "hidden";
+      c.name = "country";
+      c.value = countryName;
+      frm.appendChild( c );
+
+     var db1 = document.createElement("input");
+     db1.type= "hidden";
+     db1.name = "DB_NATURA2000";
+     db1.value = true;
+     frm.appendChild( db1 );
+
+    var db2 = document.createElement("input");
+    db2.type= "hidden";
+    db2.name = "DB_CDDA_NATIONAL";
+    db2.value = true;
+    frm.appendChild( db2 );
+
+    var db3 = document.createElement("input");
+    db3.type= "hidden";
+    db3.name = "DB_NATURE_NET";
+    db3.value = false;
+    frm.appendChild( db3 );
+
+    var db4 = document.createElement("input");
+    db4.type= "hidden";
+    db4.name = "DB_CORINE";
+    db4.value = true;
+    frm.appendChild( db4 );
+
+    var db5 = document.createElement("input");
+    db5.type= "hidden";
+    db5.name = "DB_CDDA_INTERNATIONAL";
+    db5.value = true;
+    frm.appendChild( db5 );
+
+    var db6 = document.createElement("input");
+    db6.type= "hidden";
+    db6.name = "DB_DIPLOMA";
+    db6.value = true;
+    frm.appendChild( db6 );
+
+    var db7 = document.createElement("input");
+    db7.type= "hidden";
+    db7.name = "DB_BIOGENETIC";
+    db7.value = true;
+    frm.appendChild( db7 );
+
+    var db8 = document.createElement("input");
+    db8.type= "hidden";
+    db8.name = "DB_EMERALD";
+    db8.value = true;
+    frm.appendChild( db8 );
+
+    frm.submit();
+}
     //-->
     </script>
-    <script language="JavaScript" src="script/sort-table.js" type="text/javascript"></script>
+    <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
 <%
   try
   {
@@ -40,7 +107,7 @@
   String geoscope = (request.getParameter("geoscope") == null ? null : request.getParameter("geoscope"));
   boolean showSites = Utilities.checkedStringToBoolean( request.getParameter( "showSites" ), false );
 
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 
   // The designation for witch the factsheet is made is identified by id, iso, description and sourceDb parameters,
   // so they must be not null
@@ -54,16 +121,18 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=contentManagement.getContent( "sites_designations-factsheet_title", false )%>
+      <%=cm.cms("sites_designations-factsheet_title")%>
     </title>
   </head>
   <body>
+    <div id="outline">
+    <div id="alignment">
     <div id="content">
-  <div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>
+    <div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="Home#index.jsp,Sites#sites.jsp,Designation type factsheet"/>
+      <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,designation_factsheet_location"/>
     </jsp:include>
-    <img alt="Loading data..." id="loading" src="images/loading.gif" />
+    <img alt="<%=cm.cms("loading_data")%>" id="loading" src="images/loading.gif" />
     <br />
 <%
   if (factsheet != null)
@@ -77,12 +146,13 @@
     <table width="100%" border="0" summary="layout">
       <tr>
         <td>
+          <!--General information-->
           <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse">
             <tr align="center">
               <td>
-                <h5>
-                  <%=contentManagement.getContent( "sites_designations-factsheet_01" )%> : <%=fromWho%>
-                </h5>
+                <h1>
+                  <%=cm.cmsText( "sites_designations-factsheet_01" )%> : <%=fromWho%>
+                </h1>
               </td>
             </tr>
           </table>
@@ -91,13 +161,14 @@
             <tr bgcolor="#CCCCCC">
               <td colspan="2">
                 <strong>
-                  <%=contentManagement.getContent( "sites_designations-factsheet_03" )%>
+                  <%=cm.cmsText( "sites_designations-factsheet_03" )%>
                 </strong>
               </td>
             </tr>
+            <%--Code--%>
             <tr bgcolor="#EEEEEE">
               <td width="30%">
-                <%=contentManagement.getContent( "sites_designations-factsheet_04" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_04" )%>
               </td>
               <td width="70%">
                 &nbsp;
@@ -106,9 +177,10 @@
                 </strong>
               </td>
             </tr>
+            <!--Source data set-->
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=contentManagement.getContent( "sites_designations-factsheet_05" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_05" )%>
               </td>
               <td>
                 &nbsp;
@@ -119,19 +191,34 @@
             </tr>
 <%
             String country = Utilities.formatString(Utilities.findCountryByIdGeoscope(factsheet.getIdGeoscope()), "");
+            if( country.equalsIgnoreCase( "Europe" ) )
+            {
+              country = "European Community";
+            }
 %>
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=contentManagement.getContent( "sites_designations-factsheet_06" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_06" )%>
               </td>
               <td>
                 &nbsp;
-                <a href="sites-statistical-result.jsp?country=<%=country%>&amp;DB_CDDA_NATIONAL=true&amp;DB_DIPLOMA=true&amp;DB_CDDA_INTERNATIONAL=true&amp;DB_CORINE=true&amp;DB_BIOGENETIC=true" title="Open the statistical data for <%=country%>"><strong><%=country%></strong></a>&nbsp;
+                <%
+                   if(Utilities.isCountry(country))
+                   {
+                %>
+                <a href="javascript:goToCountryStatistics('<%=country%>')" title="<%=cm.cms("open_statistical_data_for")%> <%=country%>"><strong><%=country%></strong></a><%=cm.cmsTitle("open_statistical_data_for")%>&nbsp;
+                <%
+                   } else {
+                %>
+                    <strong><%=country%></strong>
+                <%
+                    }
+                %>
               </td>
             </tr>
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=contentManagement.getContent( "sites_designations-factsheet_07" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_07" )%>
               </td>
               <td>
                 &nbsp;
@@ -142,7 +229,7 @@
             </tr>
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=contentManagement.getContent( "sites_designations-factsheet_08" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_08" )%>
               </td>
               <td>
                 &nbsp;
@@ -153,7 +240,7 @@
             </tr>
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=contentManagement.getContent( "sites_designations-factsheet_09" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_09" )%>
               </td>
               <td>
                 &nbsp;
@@ -164,7 +251,7 @@
             </tr>
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=contentManagement.getContent( "sites_designations-factsheet_10" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_10" )%>
               </td>
               <td>
                 &nbsp;
@@ -173,7 +260,7 @@
             </tr>
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=contentManagement.getContent( "sites_designations-factsheet_11" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_11" )%>
               </td>
 <%
                 // Is CDDA sites or not
@@ -198,7 +285,7 @@
             </tr>
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=contentManagement.getContent( "sites_designations-factsheet_12" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_12" )%>
               </td>
               <td>
                 &nbsp;
@@ -207,7 +294,7 @@
             </tr>
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=contentManagement.getContent( "sites_designations-factsheet_13" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_13" )%>
               </td>
               <td>
                 &nbsp;
@@ -227,13 +314,13 @@
             <tr bgcolor="#CCCCCC">
               <td colspan="2">
                 <strong>
-                  <%=contentManagement.getContent( "sites_designations-factsheet_14" )%>
+                  <%=cm.cmsText( "sites_designations-factsheet_14" )%>
                 </strong>
               </td>
             </tr>
             <tr bgcolor="#EEEEEE">
               <td width="161">
-                <%=contentManagement.getContent( "sites_designations-factsheet_15" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_15" )%>
               </td>
               <td width="579">
                 &nbsp;
@@ -242,7 +329,7 @@
             </tr>
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=contentManagement.getContent( "sites_designations-factsheet_16" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_16" )%>
               </td>
               <td>
                 &nbsp;
@@ -251,7 +338,7 @@
             </tr>
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=contentManagement.getContent( "sites_designations-factsheet_17" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_17" )%>
               </td>
               <td>
                 &nbsp;
@@ -260,7 +347,7 @@
             </tr>
              <tr bgcolor="#EEEEEE">
               <td>
-                <%=contentManagement.getContent( "sites_designations-factsheet_18" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_18" )%>
               </td>
               <td>
                 &nbsp;
@@ -284,13 +371,13 @@
             <tr bgcolor="#CCCCCC">
               <td colspan="2">
                 <strong>
-                  <%=contentManagement.getContent( "sites_designations-factsheet_19" )%>
+                  <%=cm.cmsText( "sites_designations-factsheet_19" )%>
                 </strong>
               </td>
             </tr>
             <tr bgcolor="#EEEEEE">
               <td width="161">
-                <%=contentManagement.getContent( "sites_designations-factsheet_20" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_20" )%>
               </td>
               <td width="579">
                 &nbsp;
@@ -299,7 +386,7 @@
             </tr>
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=contentManagement.getContent( "sites_designations-factsheet_21" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_21" )%>
               </td>
               <td>
                 &nbsp;
@@ -308,7 +395,7 @@
             </tr>
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=contentManagement.getContent( "sites_designations-factsheet_22" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_22" )%>
               </td>
               <td>
                 &nbsp;
@@ -317,7 +404,7 @@
             </tr>
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=contentManagement.getContent( "sites_designations-factsheet_23" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_23" )%>
               </td>
               <td>
                 &nbsp;
@@ -326,7 +413,7 @@
             </tr>
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=contentManagement.getContent( "sites_designations-factsheet_24" )%>
+                <%=cm.cmsText( "sites_designations-factsheet_24" )%>
               </td>
               <td>
                 &nbsp;
@@ -393,13 +480,13 @@
             <tr bgcolor="#CCCCCC">
               <td colspan="2">
                 <strong>
-                  Designation references
+                  <%=cm.cmsText("designation_factsheet_references")%>
                 </strong>
               </td>
             </tr>
             <tr>
               <td width="20%">
-                Author:
+                <%=cm.cmsText("designation_factsheet_author")%>
               </td>
               <td width="80%">
                 <%=author%>
@@ -407,7 +494,7 @@
             </tr>
             <tr>
               <td width="20%">
-                Editor:
+                <%=cm.cmsText("designation_factsheet_editor")%>
               </td>
               <td width="80%">
                 <%=editor%>
@@ -415,7 +502,7 @@
             </tr>
             <tr>
               <td width="20%">
-                Date:
+                <%=cm.cmsText("designation_factsheet_date")%>
               </td>
               <td width="80%">
                 <%=date%>
@@ -423,7 +510,7 @@
             </tr>
             <tr>
               <td width="20%">
-                Title:
+                <%=cm.cmsText("designation_factsheet_title")%>
               </td>
               <td width="80%">
                 <%=title%>
@@ -431,7 +518,7 @@
             </tr>
             <tr>
               <td width="20%">
-                Publisher:
+                <%=cm.cmsText("designation_factsheet_publisher")%>
               </td>
               <td width="80%">
                 <%=publisher%>
@@ -442,7 +529,6 @@
           <br />
 <%
           }
-
   }
   catch( Exception ex )
   {
@@ -455,9 +541,6 @@
     if ( con != null ) con.close();
   }
 
-
-
-
     // If show sites for this designation
     if( showSites )
     {
@@ -465,16 +548,16 @@
       if (sites != null && sites.size() > 0)
       {
 %>
-               <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;">
-                        <%=contentManagement.getContent( "sites_designations-factsheet_25" )%>
-               </div>
+       <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;">
+          <%=cm.cmsText( "sites_designations-factsheet_25" )%>
+       </div>
 <%
     String ids = "";
     int maxSitesPerMap = Utilities.checkedStringToInt( application.getInitParameter( "MAX_SITES_PER_MAP" ), 2000 );
     if ( sites.size() < maxSitesPerMap )
     {
 %>
-              <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
+      <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
 <%
       for (int i = 0; i < sites.size(); i++)
       {
@@ -488,8 +571,9 @@
                       <br />
                       <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
                         <input type="hidden" name="sites" value="<%=ids%>" />
-                        <label for="showMap" class="noshow">Show map</label>
-                        <input id="showMap" type="submit" title="Show map" name="Show map" value="Show map" class="inputTextField" />
+                        <label for="showMap" class="noshow"><%=cm.cms("show_map")%></label>
+                        <input id="showMap" type="submit" title="<%=cm.cms("show_map")%>" name="Show map" value="<%=cm.cms("show_map")%>" class="inputTextField" />
+                        <%=cm.cmsLabel("show_map")%>
                       </form>
                     </td>
                   </tr>
@@ -498,35 +582,31 @@
 <%
   }
 %>
-                <table summary="Sites" width="100%" border="0" cellspacing="0" cellpadding="0" id="sitesx">
+                <table summary="<%=cm.cms("designation_factsheet_sites")%>" width="100%" border="0" cellspacing="0" cellpadding="0" id="sitesx" class="sortable">
                   <tr>
-                    <th class="resultHeader" width="15%">
-                      <a title="Sort table on this column" href="javascript:sortTable(4, 0, 'sitesx', false);">
-                        <strong>
-                          <%=contentManagement.getContent( "sites_designations-factsheet_28" )%>
-                        </strong>
-                      </a>
+                    <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
+                      <strong>
+                        <%=cm.cmsText( "sites_designations-factsheet_28" )%>
+                        <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </strong>
                     </th>
-                    <th class="resultHeader" width="15%">
-                      <a title="Sort table on this column" href="javascript:sortTable(4, 1, 'sitesx', false);">
-                        <strong>
-                          <%=contentManagement.getContent( "sites_designations-factsheet_05" )%>
-                        </strong>
-                      </a>
+                    <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
+                      <strong>
+                        <%=cm.cmsText( "sites_designations-factsheet_05" )%>
+                        <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </strong>
                     </th>
                     <th class="resultHeader" width="20%">
-                      <a title="Sort table on this column" href="javascript:sortTable(4, 2, 'sitesx', false);">
-                        <strong>
-                          <%=contentManagement.getContent( "sites_designations-factsheet_06" )%>
-                        </strong>
-                      </a>
+                      <strong>
+                        <%=cm.cmsText( "sites_designations-factsheet_06" )%>
+                        <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </strong>
                     </th>
                     <th class="resultHeader" width="50%">
-                      <a title="Sort table on this column" href="javascript:sortTable(4, 3, 'sitesx', false);">
-                        <strong>
-                          <%=contentManagement.getContent( "sites_designations-factsheet_29" )%>
-                        </strong>
-                      </a>
+                      <strong>
+                        <%=cm.cmsText( "sites_designations-factsheet_29" )%>
+                        <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </strong>
                     </th>
                   </tr>
 <%
@@ -535,12 +615,15 @@
         {
           DesignationPersist site = (DesignationPersist)sites.get(i);
 %>
-                  <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-                    <td><%=Utilities.formatString(site.getIdSite())%></td>
-                    <td><%=Utilities.formatString(SitesSearchUtility.translateSourceDB(site.getSourceDB()))%></td>
-                    <td><%=Utilities.formatString(site.getCountry())%></td>
-                    <td><a title="Open site factsheet" href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=Utilities.formatString(site.getName())%></a></td>
-                  </tr>
+          <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
+            <td><%=Utilities.formatString(site.getIdSite())%></td>
+            <td><%=Utilities.formatString(SitesSearchUtility.translateSourceDB(site.getSourceDB()))%></td>
+            <td><%=Utilities.formatString(site.getCountry())%></td>
+            <td>
+              <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=Utilities.formatString(site.getName())%></a>
+              <%=cm.cmsTitle("open_site_factsheet")%>
+            </td>
+          </tr>
 <%
         }
 %>
@@ -552,7 +635,7 @@
 %>
           <br />
           <strong>
-            <%=contentManagement.getContent( "sites_designations-factsheet_30" )%>
+            <%=cm.cmsText( "sites_designations-factsheet_30" )%>
           </strong>
 <%
       }
@@ -563,12 +646,13 @@
     else
     {
 %>
-          <a title="Show sites in page" href="designations-factsheet.jsp?showSites=true&amp;fromWhere=<%=fromWhere%>&amp;idDesign=<%=id%>&amp;geoscope=<%=geoscope%>"><%=contentManagement.getContent( "sites_designations-factsheet_31" )%></a>
-          <br />
-          <strong>
-            <%=contentManagement.getContent( "sites_designations-factsheet_32" )%>
-          </strong>
-
+      <a title="<%=cm.cms("show_sites_in_page")%>" href="designations-factsheet.jsp?showSites=true&amp;fromWhere=<%=fromWhere%>&amp;idDesign=<%=id%>&amp;geoscope=<%=geoscope%>"><%=cm.cmsText( "sites_designations-factsheet_31" )%></a>
+      <%=cm.cmsTitle("show_sites_in_page")%>
+      <br />
+      <br />
+      <strong>
+        <%=cm.cmsText( "sites_designations-factsheet_32" )%>
+      </strong>
 <%
     }
 %>
@@ -584,7 +668,7 @@
             <br />
             <br />
             <strong>
-              <%=contentManagement.getContent( "sites_designations-factsheet_33")%>
+              <%=cm.cmsText( "sites_designations-factsheet_33")%>
             </strong>
             <br />
             <br />
@@ -594,6 +678,12 @@
   }
 %>
     </table>
+    <%=cm.cmsMsg("sites_designations-factsheet_title")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("loading_data")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("designation_factsheet_sites")%>
+    <%=cm.br()%>
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="designations-factsheet.jsp" />
     </jsp:include>
@@ -605,6 +695,8 @@
     catch ( e ) { }
     //-->
     </script>
+    </div>
+    </div>
     </div>
   </body>
 </html>

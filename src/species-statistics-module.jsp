@@ -4,8 +4,10 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'statistics species module'.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.utilities.SQLUtilities,
                  ro.finsiel.eunis.WebContentManagement,
                  java.util.List,
@@ -13,11 +15,10 @@
 <%@ page import="ro.finsiel.eunis.search.CountryUtil"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-    <script language="JavaScript" src="script/utils.js" type="text/javascript"></script>
-    <script language="JavaScript" type="text/javascript" src="script/sort-table.js"></script>
     <script language="JavaScript" type="text/javascript">
     <!--
        function MM_jumpMenuCountry(targ,selObj,restore){ //v3.0
@@ -27,7 +28,7 @@
     //-->
     </script>
     <%
-      WebContentManagement contentManagement = SessionManager.getWebContent();
+      WebContentManagement cm = SessionManager.getWebContent();
 
       String SQL_DRV = application.getInitParameter("JDBC_DRV");
       String SQL_URL = application.getInitParameter("JDBC_URL");
@@ -42,28 +43,30 @@
     %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      Statistics Species Module
+      <%=cm.cms("statistics_species_module")%>
     </title>
   </head>
-  <body style="background-color:#ffffff">
+  <body>
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="Home#index.jsp,Species#species.jsp,Species statistics" />
+      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,species_statistics_location" />
       <jsp:param name="helpLink" value="species-help.jsp" />
     </jsp:include>
     <img alt="Loading" id="loading" src="images/loading.gif" />
 <%
   out.flush();
 %>
-<h5>
-Species Statistics
-</h5>
+<h1>
+<%=cm.cmsText("species_statistics")%>
+</h1>
 <%
   out.flush();
 %>
     <br />
     <strong>
-    Statistical data at EUNIS Database level:
+    <%=cm.cmsText("statistical_data_EUNIS")%>
     </strong>
       <br /><br/>
 <%
@@ -93,7 +96,7 @@ Species Statistics
     <table summary="layout" width="100%" cellspacing="1" cellpadding="1" border="1" style="border-collapse:collapse">
       <tr style="background-color:#EEEEEE">
         <td width="80%">
-          Number of distinct species:
+         <%=cm.cmsText("number_distinct_species")%>
         </td>
         <td width="20%">
           <%=nDistinctSpecies%>
@@ -101,7 +104,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#FFFFFF">
         <td>
-          Number of species names:
+          <%=cm.cmsText("number_species_names")%>
         </td>
         <td>
           <%=nSpeciesNames%>
@@ -109,7 +112,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#EEEEEE">
         <td>
-          Number of vernacular names:
+          <%=cm.cmsText("number_vernacular_names")%>
         </td>
         <td>
           <%=nVernacularNames%>
@@ -117,7 +120,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#FFFFFF">
         <td>
-          Number of languages concerned in vernacular names search:
+         <%=cm.cmsText("number_languages")%>
         </td>
         <td>
           <%=nLanguages%>
@@ -125,7 +128,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#EEEEEE">
         <td>
-          Number of species having international legal status:
+          <%=cm.cmsText("number_international_status")%>
         </td>
         <td>
           <%=nInternationalLegalStatus%>
@@ -133,7 +136,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#FFFFFF">
         <td>
-          Number of international legal instruments:
+          <%=cm.cmsText("number_international_instruments")%>
         </td>
         <td>
           <%=nInternationalLegalInstruments%>
@@ -141,7 +144,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#EEEEEE">
         <td>
-          Number of species having conservation status at international level:
+          <%=cm.cmsText("number_international_conservation")%>
         </td>
         <td>
           <%=nInternationalConservationStatus%>
@@ -149,7 +152,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#FFFFFF">
         <td>
-          Number of species having conservation status at national level:
+          <%=cm.cmsText("number_national_conservation")%>
         </td>
         <td>
           <%=nNationalConservationStatus%>
@@ -157,7 +160,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#EEEEEE">
         <td>
-          Number of countries concerned in conservation status at national level search:
+          <%=cm.cmsText("number_countries_conservation")%>
         </td>
         <td>
           <%=nNationalConservationStatusCountries%>
@@ -165,7 +168,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#FFFFFF">
         <td>
-          Number of species having geographical distribution:
+          <%=cm.cmsText("number_geo")%>
         </td>
         <td>
           <%=nGeographicalDistribution%>
@@ -173,7 +176,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#EEEEEE">
         <td>
-          Number of species having grid distribution:
+          <%=cm.cmsText("number_grid")%>
         </td>
         <td>
           <%=nGridDistribution%>
@@ -184,7 +187,7 @@ Species Statistics
     } else
     {
 %>
-    <span style="color:red">No data was found at Eunis Database level!</span>
+    <span style="color:red"><%=cm.cmsText("no_data_eunis")%></span>
 <%
     }
   out.flush();
@@ -197,13 +200,13 @@ Species Statistics
 
     <br /><br />
     <strong>
-    If you want statistical data at country level,
+    <%=cm.cmsText("if_want")%>
     <br />
-    please choose a country: &nbsp;&nbsp;
+    <%=cm.cmsText("please_choose")%> &nbsp;&nbsp;
     </strong>
-    <label for="Country" class="noshow">Country</label>
-    <select title="Country" name="Country" id="Country" onchange="MM_jumpMenuCountry('parent',this,0)" class="inputTextField">
-    <option value="species-statistics-module.jsp">Please choose a country</option>
+    <label for="Country" class="noshow"><%=cm.cms("country")%></label>
+    <select title="<%=cm.cms("country")%>" name="Country" id="Country" onchange="MM_jumpMenuCountry('parent',this,0)" class="inputTextField">
+    <option value="species-statistics-module.jsp"><%=cm.cms("please_choose_country")%></option>
       <%
          for(int i=0;i<allCountries.size();i++)
          {
@@ -215,6 +218,8 @@ Species Statistics
          }
       %>
     </select>
+    <%=cm.cmsLabel("country")%>
+    <%=cm.cmsTitle("country")%>
     <br />
     <%
        if(countryName.trim().length()>0)
@@ -241,12 +246,12 @@ Species Statistics
          String nGridDistributionByCountry = (String)((TableColumns) listOfStatisticsForACountry.get(0)).getColumnsValues().get(8);
     %>
       <br /> <br />
-      <h6>Statistical data for <span style="font-style: italic"><%=countryName%></span>:</h6>
+      <h2><%=cm.cmsText("statistical_data_for")%>&nbsp;<span style="font-style: italic"><%=countryName%></span>:</h2>
       <br />
-    <table summary="Statistical data by country" width="100%" border="1" style="border-collapse:collapse">
+    <table summary="<%=cm.cms("statistical_data_country")%>" width="100%" border="1" style="border-collapse:collapse">
       <tr style="background-color:#EEEEEE">
         <td width="80%">
-          Number of distinct species:
+          <%=cm.cmsText("number_distinct_species")%>
         </td>
         <td width="20%">
           <%=nDistinctSpeciesByCountry%>
@@ -254,7 +259,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#FFFFFF">
         <td>
-          Number of species names:
+          <%=cm.cmsText("number_species_names")%>
         </td>
         <td>
           <%=nSpeciesNamesByCountry%>
@@ -262,7 +267,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#EEEEEE">
         <td>
-          Number of vernacular names:
+          <%=cm.cmsText("number_vernacular_names")%>
         </td>
         <td>
           <%=nVernacularNamesByCountry%>
@@ -270,7 +275,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#FFFFFF">
         <td>
-          Number of languages concerned in vernacular names search:
+          <%=cm.cmsText("number_languages")%>
         </td>
         <td>
           <%=nLanguagesByCountry%>
@@ -278,7 +283,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#EEEEEE">
         <td>
-          Number of species having international legal status:
+          <%=cm.cmsText("number_international_status")%>
         </td>
         <td>
           <%=nInternationalLegalStatusByCountry%>
@@ -286,7 +291,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#FFFFFF">
         <td>
-          Number of international legal instruments:
+          <%=cm.cmsText("number_international_instruments")%>
         </td>
         <td>
           <%=nInternationalLegalInstrumentsByCountry%>
@@ -294,7 +299,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#EEEEEE">
         <td>
-          Number of species having conservation status at national level:
+          <%=cm.cmsText("number_national_conservation")%>
         </td>
         <td>
           <%=nNationalConservationStatusByCountry%>
@@ -302,7 +307,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#FFFFFF">
         <td>
-          Number of species having geographical distribution:
+          <%=cm.cmsText("number_geo")%>
         </td>
         <td>
           <%=nGeographicalDistributionByCountry%>
@@ -310,7 +315,7 @@ Species Statistics
       </tr>
       <tr style="background-color:#EEEEEE">
         <td>
-          Number of species having grid distribution:
+          <%=cm.cmsText("number_grid")%>
         </td>
         <td>
           <%=nGridDistributionByCountry%>
@@ -322,7 +327,7 @@ Species Statistics
        } else {
    %>
        <br />
-       <span style="color:red">No data was found at country <%=countryName%> level!</span>
+       <span style="color:red"><%=cm.cmsText("no_data_country")%> <%=countryName%> <%=cm.cmsText("level")%>!</span>
        <br />
    <%
            }
@@ -339,10 +344,20 @@ Species Statistics
       load.style.display="none";
      //-->
     </script>
-    <noscript>Your browser does not support JavaScript!</noscript>
+
+    <%=cm.br()%>
+    <%=cm.cmsMsg("statistics_species_module")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("please_choose_country")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("statistical_data_country")%>
+    <%=cm.br()%>
+
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="species-statistics-module.jsp" />
     </jsp:include>
+  </div>
+  </div>
   </div>
   </body>
 </html>

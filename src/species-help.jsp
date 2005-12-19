@@ -4,29 +4,42 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Species help.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">        
-<%@ page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
+    <%
+        // Web content manager used in this page.
+        WebContentManagement cm = SessionManager.getWebContent();
+    %>
   <head>
     <jsp:include page="header-page.jsp" />
-    <title><%=application.getInitParameter("PAGE_TITLE")%>Species search help</title>
+    <title><%=application.getInitParameter("PAGE_TITLE")%><%=cm.cms("species_help_02")%></title>
   </head>
   <body style="background-color:#ffffff">
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="Home#index.jsp,Help on EUNIS Database species" />
+      <jsp:param name="location" value="home_location#index.jsp,help_on_eunis_database_species_location" />
     </jsp:include>
     <%
-      // Web content manager used in this page.
-      WebContentManagement contentManagement = SessionManager.getWebContent();
-      String paragraph01 = contentManagement.getContent("species_help_01");
+      String paragraph01 = cm.cmsText("species_help_01");
       if (null != paragraph01) out.print(paragraph01);
     %>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("species_help_02")%>
+    <%=cm.br()%>
+
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="species-help.jsp" />
     </jsp:include>
+  </div>
+  </div>
   </div>
   </body>
 </html>

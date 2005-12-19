@@ -4,20 +4,25 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Species factsheet - distribution.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="  ro.finsiel.eunis.search.Utilities,
                    ro.finsiel.eunis.jrfTables.species.factsheet.DistributionWrapper,
                    ro.finsiel.eunis.jrfTables.species.factsheet.ReportsDistributionStatusPersist,
                    java.util.List,
-                 ro.finsiel.eunis.WebContentManagement"%>
-<%@ page import="ro.finsiel.eunis.ImageProcessing"%>
-<%@ page import="java.awt.*"%><%@ page import="java.io.File"%><%@ page import="java.util.Date"%>
+                   ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.ImageProcessing,java.awt.*,
+                   java.io.File,java.util.Date"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
+  try
+  {
   // Input parameters
   // expand - if expand into factsheet or work as a standalone popup window
   // idNatureObject - Nature object for the specie
   // name - Name of the species
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   Integer idNatureObj = Utilities.checkedStringToInt(request.getParameter("idNatureObject"),new Integer(0));
 
   DistributionWrapper dist = new DistributionWrapper(idNatureObj);
@@ -27,8 +32,10 @@
   {
     String filename = request.getSession().getId() + "_" + new Date().getTime() + "_europe.jpg";
     String inputFilename = application.getInitParameter( "TOMCAT_HOME" ) + "/webapps/eunis/gis/europe-bio.jpg";
-    String outputFilename = application.getInitParameter( "TOMCAT_HOME" ) + "/" + application.getInitParameter( "TEMP_DIR" ) + "/" + filename;
+    String outputFilename = application.getInitParameter( "TOMCAT_HOME" ) + "/" + application.getInitParameter( "TEMP_DIR" ) + filename;
 
+    System.out.println( "outputFilename = " + outputFilename );
+    System.out.println( "inputFilename = " + inputFilename );
     boolean success = false;
     try
     {
@@ -64,45 +71,47 @@
         }
       }
       img.save();
-      File physicalFile = new File( outputFilename );
-      if ( physicalFile.exists() && physicalFile.length() > 0 )
-      {
-        success = true;
-      }
+      success = true;
     }
-    catch( Exception ex )
+    catch( Throwable ex )
     {
       success = false;
       ex.printStackTrace();
     }
 %>
-    <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;">Grid distribution</div>
+    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_factsheet-distribution_10")%></div>
 <%
   if ( success )
   {
 %>
-    <img alt="Sites grid distribution" name = "mmap" src="temp/<%=filename%>" style="vertical-align:middle" title="Sites grid distribution" />
+    <img alt="<%=cm.cms("species_factsheet-distribution_11_Title")%>" name = "mmap" src="temp/<%=filename%>" style="vertical-align:middle" title="<%=cm.cms("species_factsheet-distribution_11_Title")%>" />
+    <%=cm.cmsTitle("species_factsheet-distribution_11_Title")%>
     <br />
     <br />
 <%
   }
 %>
-    <table summary="Table of results" width="100%" border="1" cellspacing="1" cellpadding="0" id="distribution" style="border-collapse:collapse">
-      <tr style="vertical-align:middle;background-color:#DDDDDD">
-        <th class="resultHeaderForFactsheet" style="text-align:left">
-          <a title="Sort by code cell" href="javascript:sortTable(5,0, 'distribution', false);"><%=contentManagement.getContent("species_factsheet-distribution_03")%></a>
+    <table summary="<%=cm.cms("species_factsheet-distribution_12_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="distribution" class="sortable">
+      <tr style="vertical-align:middle" title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th style="text-align:left">
+          <%=cm.cmsText("species_factsheet-distribution_03")%>
+          <%=cm.cmsTitle("species_factsheet-distribution_13_Title")%>
         </th>
-        <th class="resultHeaderForFactsheet" style="text-align:right">
-          <a title="Sort by latitude" href="javascript:sortTable(5,1, 'distribution', false);"><%=contentManagement.getContent("species_factsheet-distribution_04")%></a>
+        <th style="text-align:right" title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-distribution_04")%>
+          <%=cm.cmsTitle("species_factsheet-distribution_13_Title")%>
         </th>
-        <th class="resultHeaderForFactsheet" style="text-align:right">
-          <a title="Sort by longitude" href="javascript:sortTable(5,2, 'distribution', false);"><%=contentManagement.getContent("species_factsheet-distribution_05")%></a>
+        <th style="text-align:right" title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-distribution_05")%>
+          <%=cm.cmsTitle("species_factsheet-distribution_13_Title")%>
         </th>
-        <th class="resultHeaderForFactsheet">
-          <a title="Sort by status" href="javascript:sortTable(5,3, 'distribution', false);"><%=contentManagement.getContent("species_factsheet-distribution_06")%></a>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-distribution_06")%>
+          <%=cm.cmsTitle("species_factsheet-distribution_13_Title")%>
         </th>
-        <th class="resultHeaderForFactsheet">
-          <a title="Sort by references" href="javascript:sortTable(5,4, 'distribution', false);"><%=contentManagement.getContent("species_factsheet-distribution_07")%></a>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-distribution_07")%>
+          <%=cm.cmsTitle("species_factsheet-distribution_13_Title")%>
         </th>
       </tr>
 <%
@@ -131,10 +140,10 @@
           <%=Utilities.treatURLSpecialCharacters(GridName)%>
         </td>
         <td style="text-align:right">
-          <%=GridLongitude%>
+          <%=Utilities.formatArea(GridLongitude, 3, 4, "&nbsp;")%>
         </td>
         <td style="text-align:right">
-          <%=GridLatitude%>
+          <%=Utilities.formatArea(GridLatitude, 3, 4, "&nbsp;")%>
         </td>
         <td>
           <%=Utilities.treatURLSpecialCharacters(GridStatus)%>
@@ -169,5 +178,15 @@
 <%
   }
 %>
+
+<%=cm.br()%>
+<%=cm.cmsMsg("species_factsheet-distribution_12_Sum")%>
+
 <br />
 <br />
+<%
+  }catch( Exception ex )
+  {
+    ex.printStackTrace();
+  }
+%>

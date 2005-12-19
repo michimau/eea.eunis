@@ -211,6 +211,10 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
       if (i > 0) filterSQL.append(" AND ");
       SynonymsSearchCriteria aCriteria = (SynonymsSearchCriteria) searchCriteria[i]; // upcast
       filterSQL.append(aCriteria.toSQL());
+
+      filterSQL.append(" AND C.TYPE_RELATED_SPECIES<>'Synonym'");
+      filterSQL.append(" AND D.`TYPE_RELATED_SPECIES`='Synonym'");
+      filterSQL.append(" AND D.ID_SPECIES<>D.ID_SPECIES_LINK");
     }
 
     return filterSQL;

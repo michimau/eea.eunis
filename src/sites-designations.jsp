@@ -4,15 +4,18 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : "Sites Designation types" function - search page.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.search.Utilities,
                  java.util.Vector,
                  ro.finsiel.eunis.WebContentManagement"%>
 <%@ page import="ro.finsiel.eunis.utilities.Accesibility"%>
-<%@page contentType="text/html"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   // Web content manager used in this page.
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -23,81 +26,121 @@
     <script language="JavaScript" type="text/javascript" src="script/sites-designations-save-criteria.js"></script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=contentManagement.getContent("sites_designations_title", false )%>
+      <%=cm.cms("sites_designations_title")%>
     </title>
   </head>
   <body>
+    <div id="outline">
+    <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="Home#index.jsp,Sites#sites.jsp,Designation types"/>
+        <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_designations_location"/>
         <jsp:param name="helpLink" value="sites-help.jsp"/>
         <jsp:param name="mapLink" value="show"/>
       </jsp:include>
       <form name="eunis" method="get" onsubmit="javascript: return validateForm();" action="sites-designations-result.jsp">
         <input type="hidden" name="source" value="sitedesignatedname" />
-        <h5>
-          <%=contentManagement.getContent("sites_designations_01")%>
-        </h5>
+        <h1>
+          <%=cm.cmsText("sites_designations_01")%>
+        </h1>
 
-        <%=contentManagement.getContent("sites_designations_19")%>
+        <%=cm.cmsText("sites_designations_19")%>
         <br />
         <br />
         <div class="grey_rectangle">
           <strong>
-            <%=contentManagement.getContent("sites_designations_02")%>
+            <%=cm.cmsText("search_will_provide_following_information")%>
           </strong>
           <br />
-          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=contentManagement.getContent("sites_designations_03", false )%>" />
-          <label for="showSourceDB"><%=contentManagement.getContent("sites_designations_03")%></label>
+          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_designations_03")%>" />
+          <label for="showSourceDB"><%=cm.cmsText("sites_designations_03")%></label>
+          <%=cm.cmsTitle("sites_designations_03")%>
 
-          <input id="showIso" name="showIso" type="checkbox" value="true" checked="checked" title="<%=contentManagement.getContent("sites_designations_07", false )%>" />
-          <label for="showIso"><%=contentManagement.getContent("sites_designations_07")%></label>
+          <input id="showIso" name="showIso" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_designations_07")%>" />
+          <label for="showIso"><%=cm.cmsText("sites_designations_07")%></label>
+          <%=cm.cmsTitle("sites_designations_07")%>
 
-          <input id="showDesignation" name="showDesignation" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=contentManagement.getContent("sites_designations_04", false )%>" />
-          <label for="showDesignation"><%=contentManagement.getContent("sites_designations_04")%></label>
+          <input id="showDesignation" name="showDesignation" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=cm.cms("sites_designations_04")%>" />
+          <label for="showDesignation"><%=cm.cmsText("sites_designations_04")%></label>
+          <%=cm.cmsTitle("sites_designations_04")%>
 
-          <input id="showDesignationEn" name="showDesignationEn" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=contentManagement.getContent("sites_designations_05", false )%>" />
-          <label for="showDesignationEn"><%=contentManagement.getContent("sites_designations_05")%></label>
+          <input id="showDesignationEn" name="showDesignationEn" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=cm.cms("sites_designations_05")%>" />
+          <label for="showDesignationEn"><%=cm.cmsText("sites_designations_05")%></label>
+          <%=cm.cmsTitle("sites_designations_05")%>
 
-          <input id="showDesignationFr" name="showDesignationFr" type="checkbox" value="true" title="<%=contentManagement.getContent("sites_designations_06", false )%>" />
-          <label for="showDesignationFr"><%=contentManagement.getContent("sites_designations_06")%></label>
+          <input id="showDesignationFr" name="showDesignationFr" type="checkbox" value="true" title="<%=cm.cms("sites_designations_06")%>" />
+          <label for="showDesignationFr"><%=cm.cmsText("sites_designations_06")%></label>
+          <%=cm.cmsTitle("sites_designations_06")%>
 
-          <input id="showAbreviation" name="showAbreviation" type="checkbox" value="true" checked="checked" title="<%=contentManagement.getContent("sites_designations_08", false )%>" />
-          <label for="showAbreviation"><%=contentManagement.getContent("sites_designations_08")%></label>
+          <input id="showAbreviation" name="showAbreviation" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_designations_08")%>" />
+          <label for="showAbreviation"><%=cm.cmsText("sites_designations_08")%></label>
+          <%=cm.cmsTitle("sites_designations_08")%>
         </div>
-        <img align="middle" alt="<%=Accesibility.getText( "generic.criteria.mandatory")%>" title="<%=Accesibility.getText( "generic.criteria.mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
+        <img align="middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
+        <%=cm.cmsAlt("field_mandatory")%>
         <strong>
-          <%=contentManagement.getContent("sites_designations_09")%>
+          <%=cm.cmsText("sites_designations_09")%>
         </strong>
-        <label for="relationOp" class="noshow">Operator</label>
-        <select id="relationOp" name="relationOp" class="inputTextField" title="Operator">
-            <option value="<%=Utilities.OPERATOR_IS%>"><%=contentManagement.getContent("sites_designations_10", false)%></option>
-            <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=contentManagement.getContent("sites_designations_11", false)%></option>
-            <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=contentManagement.getContent("sites_designations_12", false)%></option>
+        <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
+        <select id="relationOp" name="relationOp" class="inputTextField" title="<%=cm.cms("operator")%>">
+          <option value="<%=Utilities.OPERATOR_IS%>">
+            <%=cm.cms("sites_designations_10")%>
+          </option>
+          <option value="<%=Utilities.OPERATOR_CONTAINS%>">
+            <%=cm.cms("sites_designations_11")%>
+          </option>
+          <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected">
+            <%=cm.cms("sites_designations_12")%>
+          </option>
         </select>
-        <label for="searchString" class="noshow">Search string</label>
-        <input id="searchString" name="searchString" value="" size="32" class="inputTextField" title="Search string" />
-        <a title="<%=Accesibility.getText( "generic.popup.lov" )%>" href="javascript:openHelper('sites-designations-choice.jsp','no')"><img src="images/helper/helper.gif" alt="<%=Accesibility.getText( "generic.popup.lov" )%>" title="<%=Accesibility.getText( "generic.popup.lov" )%>" width="11" height="18" border="0" align="middle" /></a>
+        <%=cm.cmsLabel("operator")%>
+        <%=cm.cmsTitle("operator")%>
+        <%=cm.cmsInput("sites_designations_10")%>
+        <%=cm.cmsInput("sites_designations_11")%>
+        <%=cm.cmsInput("sites_designations_12")%>
+        <label for="searchString" class="noshow"><%=cm.cms("sites_designations_designationname")%></label>
+        <input id="searchString" name="searchString" value="" size="32" class="inputTextField" title="<%=cm.cms("sites_designations_designationname")%>" />
+        <%=cm.cmsLabel("sites_designations_designationname")%>
+        <%=cm.cmsTitle("sites_designations_designationname")%>
+
+        <a title="<%=cm.cms("helper")%>" href="javascript:openHelper('sites-designations-choice.jsp','no')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" align="middle" /></a>
+        <%=cm.cmsTitle("helper")%>
+        <%=cm.cmsAlt("helper")%>
         <br />
-        <img align="middle" alt="<%=Accesibility.getText( "generic.criteria.optional" )%>" title="<%=Accesibility.getText( "generic.criteria.optional" )%>" src="images/mini/field_optional.gif" width="11" height="12" />
+        <img align="middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
+        <%=cm.cmsAlt("field_optional")%>
         <label for="category">
           <strong>
-            <%=contentManagement.getContent("sites_designations_14")%>
+            <%=cm.cmsText("sites_designations_14")%>
           </strong>
         </label>
-        <select id="category" name="category" class="inputTextField" title="Designation category">
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-          <option value="any" selected="selected"><%=contentManagement.getContent("sites_designations_15", false)%></option>
+        <select id="category" name="category" class="inputTextField" title="<%=cm.cms("sites_designations_14")%>">
+          <option value="A"><%=cm.cms("sites_designations_cata")%></option>
+          <option value="B"><%=cm.cms("sites_designations_catb")%></option>
+          <option value="C"><%=cm.cms("sites_designations_catc")%></option>
+          <option value="any" selected="selected">
+            <%=cm.cms("sites_designations_15")%>
+          </option>
         </select>
+        <%=cm.cmsLabel("sites_designations_14")%>
+        <%=cm.cmsTitle("sites_designations_14")%>
+        <%=cm.cmsInput("sites_designations_15")%>
+        <%=cm.cmsInput("sites_designations_cata")%>
+        <%=cm.cmsInput("sites_designations_catb")%>
+        <%=cm.cmsInput("sites_designations_catc")%>
+
         <div class="submit_buttons">
-            <label for="Reset" class="noshow">Reset values</label>
-            <input type="reset" value="<%=contentManagement.getContent("sites_designations_16", false )%>" id="Reset" name="Reset" class="inputTextField" title="Reset values" />
-            <%=contentManagement.writeEditTag( "sites_designations_16" )%>
-            <label for="submit2" class="noshow">Search</label>
-            <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=contentManagement.getContent("sites_designations_17", false )%>" title="Search" />
-            <%=contentManagement.writeEditTag( "sites_designations_17" )%>
+          <label for="reset" class="noshow"><%=cm.cms("reset_btn_label")%></label>
+          <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset_btn_value")%>" class="inputTextField" title="<%=cm.cms("reset_btn_title")%>" />
+          <%=cm.cmsLabel("reset_btn_label")%>
+          <%=cm.cmsTitle("reset_btn_title")%>
+          <%=cm.cmsInput("reset_btn_value")%>
+
+          <label for="submit2" class="noshow"><%=cm.cms("search_btn_label")%></label>
+          <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=cm.cms("search_btn_value")%>" title="<%=cm.cms("search_btn_title")%>" />
+          <%=cm.cmsLabel("search_btn_label")%>
+          <%=cm.cmsTitle("search_btn_title")%>
+          <%=cm.cmsInput("search_btn_value")%>
         </div>
         <jsp:include page="sites-search-common.jsp" />
       </form>
@@ -120,8 +163,10 @@
     String expandSearchCriteria = (request.getParameter("expandSearchCriteria")==null?"no":request.getParameter("expandSearchCriteria"));
 %>
       <br />
-    <%=contentManagement.getContent("sites_designations_18")%>
-    <a title="<%=Accesibility.getText( "generic.criteria.save" )%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-designations.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=Accesibility.getText( "generic.criteria.save" )%>" title="<%=Accesibility.getText( "generic.criteria.save" )%>" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+    <%=cm.cmsText("sites_designations_18")%>
+    <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-designations.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+    <%=cm.cmsTitle("save")%>
+    <%=cm.cmsAlt("save")%>
     <jsp:include page="show-criteria-search.jsp">
       <jsp:param name="pageName" value="<%=pageName%>" />
       <jsp:param name="pageNameResult" value="<%=pageNameResult%>" />
@@ -130,9 +175,13 @@
 <%
   }
 %>
+
+      <%=cm.cmsMsg("sites_designations_title")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="sites-designations.jsp" />
       </jsp:include>
+    </div>
+    </div>
     </div>
   </body>
 </html>

@@ -11,7 +11,7 @@ import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.sites.habitats.HabitatDomain;
 import ro.finsiel.eunis.jrfTables.sites.habitats.HabitatPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.search.sites.habitats.HabitatBean;
@@ -23,24 +23,29 @@ import java.util.List;
 import java.util.Vector;
 
 
+/**
+ * TSV and XML report generation.
+ */
 public class TSVHabitatsSitesReport extends AbstractTSVReport
 {
   /**
-   * Form bean used for search
+   * Form bean used for search.
    */
   private HabitatBean formBean = null;
 
   /**
-   * Normal constructor
+   * Normal constructor.
    *
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
+   * @param searchAttribute Attribute searched
    */
   public TSVHabitatsSitesReport( String sessionID, AbstractFormBean formBean, Integer searchAttribute )
   {
     super( "HabitatsSitesReport_" + sessionID + ".tsv" );
     this.formBean = ( HabitatBean ) formBean;
     this.filename = "HabitatsSitesReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "HabitatsSitesReport_" + sessionID + ".xml" );
     // Init the data factory
     if ( null != formBean )
     {
@@ -59,17 +64,17 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader()
+  public List<String> createHeader()
   {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     // Source database
     headers.addElement( "Source data set" );
     // DesignationTypes
@@ -105,6 +110,7 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
       Integer relationOp = Utilities.checkedStringToInt( formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS );
       boolean[] source_db = { true, true, true, true, true, true, false, true };
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
         List resultSet = dataFactory.getPage( _currPage );
@@ -130,7 +136,7 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
               String habitatName = (String) resultsHabitats.get(ii);
               if ( ii == 0 )
               {
-                Vector aRow = new Vector();
+                Vector<String> aRow = new Vector<String>();
                 // Source database
                 aRow.addElement( SitesSearchUtility.translateSourceDB( site.getSourceDB() ) );
                 // DesignationTypes
@@ -145,7 +151,7 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
               }
               else
               {
-                Vector aRow = new Vector();
+                Vector<String> aRow = new Vector<String>();
                 // Source database
                 aRow.addElement( "" );
                 // DesignationTypes
@@ -162,7 +168,7 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
           }
           else
           {
-            Vector aRow = new Vector();
+            Vector<String> aRow = new Vector<String>();
             // Source database
             aRow.addElement( SitesSearchUtility.translateSourceDB( site.getSourceDB() ) );
             // DesignationTypes
@@ -175,6 +181,25 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
             aRow.addElement( "-" );
             writeRow( aRow );
           }
+
+          // XML Report
+          Vector<String> aRow = new Vector<String>();
+          // Source database
+          aRow.addElement( SitesSearchUtility.translateSourceDB( site.getSourceDB() ) );
+          // DesignationTypes
+          aRow.addElement( designations );
+          // Site code
+          aRow.addElement( site.getIdSite() );
+          // Name
+          aRow.addElement( Utilities.formatString( site.getName() ) );
+          // Habitat
+          String habitats = "";
+          for ( int ii = 0; ii < resultsHabitats.size(); ii++ )
+          {
+            habitats += "<habitats>" + resultsHabitats.get(ii) + "</habitats>";
+          }
+          aRow.addElement( habitats );
+          xmlreport.writeRow( aRow );
         }
       }
 

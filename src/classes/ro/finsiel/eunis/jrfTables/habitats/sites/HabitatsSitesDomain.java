@@ -265,7 +265,6 @@ public class HabitatsSitesDomain extends AbstractDomain implements Paginable {
             "H.CODE_2000, H.CODE_ANNEX1, H.EUNIS_HABITAT_CODE, H.LEVEL, C.NAME, C.SOURCE_DB ",
             filterSQL + " GROUP BY C.ID_NATURE_OBJECT ORDER BY C.NAME");
     try {
-      //System.out.println("sqlXXX = " + sql);
       results = new HabitatsSitesDomain().findCustom(sql);
     } catch (Exception _ex) {
       _ex.printStackTrace();

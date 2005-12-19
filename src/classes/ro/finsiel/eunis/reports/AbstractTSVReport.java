@@ -12,28 +12,32 @@ import java.util.Properties;
  * @version 1.0
  */
 public abstract class AbstractTSVReport implements Serializable {
-  /** Sets the number of results retrieved at one query, and write at once in PDF file */
+  /** Sets the number of results retrieved at one query, and write at once in PDF file. */
   protected static final int RESULTS_PER_PAGE = 1000;
   // TSV generator dependent fields
-  /** Directory where file will be written */
+  /** Directory where file will be written. */
   protected static String BASE_FILENAME = "webapps/eunis/temp/";
-  /** EOL - END OF LINE \r\n */
+  /** EOL - END OF LINE \r\n .*/
   protected static final byte[] EOL = new String("\r\n").getBytes();
-  /** TAB - Separator for two rows of the table */
+  /** TAB - Separator for two rows of the table. */
   protected static final byte[] TAB = new String("\t").getBytes();
-  /** File extenstion */
-  public static final String FILE_EXT = "csv";
-  /** Basic I/O data stream constructed around the file object */
+  /** Basic I/O data stream constructed around the file object. */
   protected BufferedOutputStream fileStream = null;
-  /** Path to the file */
+  /** Path to the file. */
   protected String filename = null;
 
   /**
-   * Data factory used to do the search
+   * Data factory used to do the search.
    */
   protected AbstractPaginator dataFactory = null;
 
   /**
+   * XML report writer.
+   */
+  protected XMLReport xmlreport = null;
+
+  /**
+   * Constructor.
    * @param filename The absolute path to the generated file (PATH + FILENAME)
    */
   public AbstractTSVReport(String filename) {
@@ -46,17 +50,27 @@ public abstract class AbstractTSVReport implements Serializable {
     }
   }
 
-  /** Use this method to write specific data into the file. Implemented in inherited classes */
+  /** Use this method to write specific data into the file. Implemented in inherited classes. */
   public abstract void writeData();
 
-  /** Returns the name of the file (the last element from the path i.e. /temp/myapp/test.txt - returns test.txt)
+  /** Returns the name of the file (the last element from the path i.e. /temp/myapp/test.txt - returns test.txt).
    * @return The name of the file
    */
   public String getFilename() {
     return filename;
   }
 
-  /** Write a single row of data into the file
+  /**
+   * XML file name.
+   * @return filename
+   */
+  public String getXMLFilename()
+  {
+    if ( xmlreport == null ) return null;
+    return xmlreport.getFilename();
+  }
+
+  /** Write a single row of data into the file.
    * @param data data to be written, resembling the row...
    * @throws IOException When I/O exception occurrs
    */
@@ -75,19 +89,28 @@ public abstract class AbstractTSVReport implements Serializable {
     fileStream.write(EOL);
   }
 
-  /** Closes the file, but before if flushes the output */
+  /** Closes the file, but before if flushes the output. */
   public void closeFile() {
     if (null != fileStream) {
-      try {
-        fileStream.flush();// Actually, close() calls flush, but I'm calling it first to be sure fo that.
+      try
+      {
+        if( xmlreport != null )
+        {
+          xmlreport.closeFile();
+        }
         fileStream.close();
-      } catch (Exception _ex) {
+      } catch (Exception _ex)
+      {
         System.err.println("Exception while closing stream.");
         _ex.printStackTrace();
       }
     }
   }
 
+  /**
+   * Count search results.
+   * @return no. of results
+   */
   public int countResults()
   {
     int ret = 0;

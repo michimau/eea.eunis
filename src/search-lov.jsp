@@ -4,7 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : List of values for species names
 --%>
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.sql.Connection,
                  java.sql.Statement,
                  java.sql.DriverManager,
@@ -12,23 +15,24 @@
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+  String ctl = request.getParameter("ctl");
+  String lov = request.getParameter("lov");
+  String natureobject = request.getParameter("natureobject");
+  String val = request.getParameter("val");
+  if(val == null) {
+    val="";
+  }
+  String oper = request.getParameter("oper");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-    <title>List of values</title>
-  <%
-    // Request parameters.
-    String ctl = request.getParameter("ctl");
-    String lov = request.getParameter("lov");
-    String natureobject = request.getParameter("natureobject");
-    String val = request.getParameter("val");
-    if(val == null) {
-      val="";
-    }
-    String oper = request.getParameter("oper");
-    WebContentManagement contentManagement = SessionManager.getWebContent();
-  %>
+    <title>
+      <%=cm.cms("search_lov_page_title")%>
+    </title>
     <script language="JavaScript" type="text/javascript">
     <!--
       function setValue(v) {
@@ -41,15 +45,10 @@
   <body>
 <%
   // Set the database connection parameters
-  String SQL_DRV;
-  String SQL_URL;
-  String SQL_USR;
-  String SQL_PWD;
-
-  SQL_DRV = application.getInitParameter("JDBC_DRV");
-  SQL_URL = application.getInitParameter("JDBC_URL");
-  SQL_USR = application.getInitParameter("JDBC_USR");
-  SQL_PWD = application.getInitParameter("JDBC_PWD");
+  String SQL_DRV = application.getInitParameter("JDBC_DRV");
+  String SQL_URL = application.getInitParameter("JDBC_URL");
+  String SQL_USR = application.getInitParameter("JDBC_USR");
+  String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
   String SQL="";
   Connection con;
@@ -493,7 +492,7 @@
       <br />
       <br />
     <div id="tab">
-      <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">
+      <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" summary="layout">
       <%
       // Display results.
       int cnt = 0;
@@ -518,7 +517,7 @@
         </tr>
         <%
       }
-      String str = Utilities.getTextMaxLimitForPopup(contentManagement,cnt);
+      String str = Utilities.getTextMaxLimitForPopup(cm,cnt);
       %>
       </table>
     </div>
@@ -528,17 +527,24 @@
     }
     rs.close();
   } else {
-    out.println("<strong>No list of values available.</strong>");
-    out.println("<br />");
+%>
+    <strong>
+      <%=cm.cmsText("search_lov_novalues")%>.
+    </strong>
+    <br />
+<%
   }
-
   ps.close();
   con.close();
 %>
     <br />
-    <form action="">
-      <label for="button" class="noshow">Close window</label>
-      <input title="Close window" type="button" value="<%=contentManagement.getContent("habitats_sites-choice_02", false )%>" onclick="javascript:window.close()" id="button" name="button" class="inputTextField" />
-    </form>
+      <form action="">
+        <label for="button2" class="noshow"><%=cm.cms("close_window_label")%></label>
+        <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
+        <%=cm.cmsLabel("close_window_label")%>
+        <%=cm.cmsTitle("close_window_title")%>
+        <%=cm.cmsInput("close_window_value")%>
+      </form>
+    <%=cm.cmsMsg("search_lov_page_title")%>
   </body>
 </html>

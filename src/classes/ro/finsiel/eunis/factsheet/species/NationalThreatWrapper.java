@@ -25,6 +25,12 @@ public class NationalThreatWrapper {
     this.reference = reference;
   }
 
+  /**
+   * Alternative constructor.
+   * @param country Country
+   * @param status Status
+   * @param referenceYear Referenced year
+   */
   public NationalThreatWrapper(String country, String status, int referenceYear) {
     this.country = country;
     this.status = status;
@@ -62,7 +68,7 @@ public class NationalThreatWrapper {
 
   /**
    * Setter for status property.
-   * @param status
+   * @param status New value
    */
   public void setStatus(String status) {
     this.status = status;
@@ -94,7 +100,7 @@ public class NationalThreatWrapper {
 
   /**
    * Setter for iso2L property.
-   * @param iso2L
+   * @param iso2L New value
    */
   public void setIso2L(String iso2L) {
     this.iso2L = iso2L;

@@ -4,6 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Relation with habitats for a site' - part of site's factsheet
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.List,
                  java.util.ArrayList,
                  ro.finsiel.eunis.factsheet.sites.SiteFactsheet,
@@ -17,7 +21,7 @@
 <%
   String siteid = request.getParameter("idsite");
   SiteFactsheet factsheet = new SiteFactsheet(siteid);
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   int type = factsheet.getType();
 
   String SQL_DRV = application.getInitParameter("JDBC_DRV");
@@ -56,37 +60,44 @@
     if( SiteFactsheet.TYPE_NATURA2000 == type || type == SiteFactsheet.TYPE_EMERALD &&
             ( !habit1Eunis.isEmpty() || !habit1NotEunis.isEmpty() || !habits2Eunis.isEmpty() || !habits2NotEunis.isEmpty() ) )
     {
-      Chm62edtReportAttributesPersist attribute = null;
+      Chm62edtReportAttributesPersist attribute;
 %>
 <%
 
         if (!habit1Eunis.isEmpty() || !habit1NotEunis.isEmpty())
         {
 %>
-        <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;">Ecological information: Habitats within site</div>
-        <strong><%=contentManagement.getContent("sites_factsheet_114")%></strong>
-        <table summary="<%=contentManagement.getContent("sites_factsheet_114", false )%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitats1" style="border-collapse:collapse">
-          <tr bgcolor="#DDDDDD">
-            <th class="resultHeader">
-              <a title="Sort results by this column" href="javascript:sortTable( 7, 0, 'habitats1', false);">Code</a>
+        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_habitats_habwithinsite")%></div>
+        <strong><%=cm.cmsText("sites_factsheet_114")%></strong>
+        <table summary="<%=cm.cms("sites_factsheet_114")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitats1" class="sortable">
+          <tr>
+            <th title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_habitats_habwithinsite_code")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader" align="right">
-              <a title="Sort results by this column" href="javascript:sortTable( 7, 1, 'habitats1', false);"><%=contentManagement.getContent("sites_factsheet_115")%></a>
+            <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_115")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader" style="text-align : right">
-              <a title="Sort results by this column" href="javascript:sortTable( 7, 2, 'habitats1', false);"><%=contentManagement.getContent("sites_factsheet_116")%></a>
+            <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_116")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader" align="right">
-              <a title="Sort results by this column" href="javascript:sortTable( 7, 3, 'habitats1', false);"><%=contentManagement.getContent("sites_factsheet_117")%></a>
+            <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_117")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader">
-              <a title="Sort results by this column" href="javascript:sortTable( 7, 4, 'habitats1', false);"><%=contentManagement.getContent("sites_factsheet_118")%></a>
+            <th title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_118")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader">
-              <a title="Sort results by this column" href="javascript:sortTable( 7, 5, 'habitats1', false);"><%=contentManagement.getContent("sites_factsheet_119")%></a>
+            <th title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_119")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader">
-              <a title="Sort results by this column" href="javascript:sortTable( 7, 6, 'habitats1', false);"><%=contentManagement.getContent("sites_factsheet_120")%></a>
+            <th title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_120")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           </tr>
           <%
@@ -98,12 +109,14 @@
               SiteHabitatsPersist habitat = (SiteHabitatsPersist)habit1Eunis.get(i);%>
               <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
                 <td>
-                  <a title="Habitat type factsheet" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getIdHabitat()%></a>
+                  <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getIdHabitat()%></a>
+                  <%=cm.cmsTitle("open_habitat_factsheet")%>
                 </td>
                 <td>
-                  <a title="Habitat type factsheet" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getHabitatDescription()%></a>
+                  <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getHabitatDescription()%></a>
+                  <%=cm.cmsTitle("open_habitat_factsheet")%>
                 </td>
-              <td align="right">
+              <td style="text-align:right">
                 <%attribute = factsheet.findSiteAttributes("COVER", habitat.getIdReportAttributes());%>
                 <%=(null != attribute) ? Utilities.formatDecimal( attribute.getValue(), 2 ) : "&nbsp;"%>
               </td>
@@ -118,7 +131,7 @@
                  <a href="#" onclick="return false;"><%=(null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""%></a>
                </span>
               </td>
-              <td align="right">
+              <td  style="text-align:right">
                 <%
                 attribute = factsheet.findSiteAttributes("RELATIVE_SURFACE", habitat.getIdReportAttributes());
                 attVal = "";
@@ -157,7 +170,7 @@
           }
           if (!habit1NotEunis.isEmpty())
           {
-            Chm62edtSitesAttributesPersist attribute2 = null;
+            Chm62edtSitesAttributesPersist attribute2;
             for (int i = 0; i < habit1NotEunis.size(); i++)
             {
               Chm62edtSitesAttributesPersist habitat = (Chm62edtSitesAttributesPersist)habit1NotEunis.get(i);
@@ -172,7 +185,7 @@
                   <%attribute2 = factsheet.findHabit1NotEunisAttributes("NAME_EN_"+habCode);%>
                   <%=(null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""%>&nbsp;
                 </td>
-              <td align="right">
+              <td  style="text-align:right">
                 <%attribute2 = factsheet.findHabit1NotEunisAttributes("COVER_"+habCode);%>
                 <%=(null != attribute2) ? Utilities.formatDecimal(attribute2.getValue(), 2) : "&nbsp;"%>
               </td>
@@ -187,7 +200,7 @@
                  <a href="#" onclick="return false;"><%=(null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""%></a>
                </span>
               </td>
-              <td>
+              <td style="text-align:right">
                 <%
                 attribute2 = factsheet.findHabit1NotEunisAttributes("RELATIVE_SURFACE_"+habCode);
                 attVal = "";
@@ -233,21 +246,23 @@
         {
 %>
         <br />
-        <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;"><%=contentManagement.getContent("sites_factsheet_166")%></div>
-        <table summary="<%=contentManagement.getContent("sites_factsheet_166", false )%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitats2" style="border-collapse:collapse">
+        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_166")%></div>
+        <table summary="<%=cm.cms("sites_factsheet_166")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitats2" class="sortable">
           <tr>
-            <th class="resultHeader">
-              <a title="Sort results by this column" href="javascript:sortTable( 3, 0, 'habitats2', false);"><%=contentManagement.getContent("sites_factsheet_122")%></a>
+            <th title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_122")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader">
-              <a title="Sort results by this column" href="javascript:sortTable( 3, 1, 'habitats2', false);"><%=contentManagement.getContent("sites_factsheet_167")%></a>
+            <th title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_167")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader" style="text-align : right;">
-              <a title="Sort results by this column" href="javascript:sortTable( 3, 2, 'habitats2', false);"><%=contentManagement.getContent("sites_factsheet_169")%></a>
+            <th style="text-align : right;" title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_169")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           </tr>
 <%
-          attribute = null;
           if (!habits2Eunis.isEmpty())
           {
             for (int i = 0; i < habits2Eunis.size(); i++)
@@ -256,7 +271,8 @@
 %>
                 <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
                     <td>
-                     <a title="Habitat type factsheet" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getIdHabitat()%></a>
+                     <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getIdHabitat()%></a>
+                     <%=cm.cmsTitle("open_habitat_factsheet")%>
                    </td>
                     <td>
                       <%String val = habitat.getHabitatDescription();%>
@@ -272,7 +288,7 @@
           }
           if (!habits2NotEunis.isEmpty())
           {
-            Chm62edtSitesAttributesPersist  attribute2 = null;
+            Chm62edtSitesAttributesPersist attribute2;
             for (int i = 0; i < habits2NotEunis.size(); i++)
             {
               Chm62edtSitesAttributesPersist habitat = (Chm62edtSitesAttributesPersist)habits2NotEunis.get(i);
@@ -306,38 +322,47 @@
       {
 %>
         <br />
-        <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;">Ecological information: Habitats within site</div>
-        <table summary="Ecological information: Habitats within site" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitats" style="border-collapse:collapse">
-          <tr bgcolor="#DDDDDD">
-            <th class="resultHeader">
-              <a title="Sort results by this column" href="javascript:sortTable( 6, 0, 'habitats', false);">Habitat type english name</a>
+        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;">
+          <%=cm.cmsText("sites_factsheet_habitats_habitatswithinsite")%>
+        </div>
+        <table summary="<%=cm.cms("sites_factsheet_habitats_habitatswithinsite")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitats" class="sortable">
+          <tr>
+            <th title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_habitats_name")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader" align="right">
-              <a title="Sort results by this column" href="javascript:sortTable( 6, 1, 'habitats', false);">Cover (%)</a>
+            <th style="text-align : right;" title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_habitats_cover")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader">
-              <a title="Sort results by this column" href="javascript:sortTable( 6, 2, 'habitats', false);">Representativity</a>
+            <th title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_habitats_representativity")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader" align="right">
-              <a title="Sort results by this column" href="javascript:sortTable( 6, 3, 'habitats', false);">Surface (ha)</a>
+            <th style="text-align : right;" title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_habitats_surface")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader">
-              <a title="Sort results by this column" href="javascript:sortTable( 6, 4, 'habitats', false);">Conservation</a>
+            <th title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_habitats_conservation")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
-            <th class="resultHeader">
-              <a title="Sort results by this column" href="javascript:sortTable( 6, 5, 'habitats', false);">Global</a>
+            <th title="<%=cm.cms("sort_results_on_this_column")%>">
+              <%=cm.cmsText("sites_factsheet_habitats_global")%>
+              <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           </tr>
 <%
-        Chm62edtReportAttributesPersist attribute = null;
+        Chm62edtReportAttributesPersist attribute;
         for (int i = 0; i < habitats.size(); i++)
         {
           SiteHabitatsPersist habitat = (SiteHabitatsPersist)habitats.get(i);%>
           <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
             <td>
-              <a title="Habitat type factsheet" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getHabitatDescription()%></a>&nbsp;
+              <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getHabitatDescription()%></a>&nbsp;
+              <%=cm.cmsTitle("open_habitat_factsheet")%>
             </td>
-            <td align="right">
+            <td  style="text-align:right">
               <%attribute = factsheet.findSiteAttributes("COVER", habitat.getIdReportAttributes());%>
               <%=(null != attribute) ? Utilities.formatDecimal( attribute.getValue(), 2) : "&nbsp;"%>
             </td>
@@ -345,7 +370,7 @@
               <%attribute = factsheet.findSiteAttributes("REPRESENTATIVITY", habitat.getIdReportAttributes());%>
               <%=(null != attribute) ? Utilities.formatString(attribute.getValue()) : "&nbsp;"%>
             </td>
-            <td align="right">
+            <td  style="text-align:right">
               <%attribute = factsheet.findSiteAttributes("SURFACE", habitat.getIdReportAttributes());%>
               <%=(null != attribute) ? Utilities.formatString(attribute.getValue()) : "&nbsp;"%>
             </td>
@@ -367,11 +392,11 @@
         {
 %>
         <br />
-        <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;">Habitat types not in EUNIS</div>
-        <table summary="Habitat types not in EUNIS" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitatsNonEUNIS" style="border-collapse:collapse">
+        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_habitats_habitatsnoteunis")%></div>
+        <table summary="<%=cm.cms("sites_factsheet_habitats_habitatsnoteunis")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitatsNonEUNIS" style="border-collapse:collapse">
           <tr>
             <th class="resultHeader">
-              Habitat type code
+              <%=cm.cms("sites_factsheet_habitats_habitatscode")%>
             </th>
           </tr>
 <%
@@ -392,3 +417,6 @@
     }
   }
 %>
+<%=cm.cmsMsg("sites_factsheet_114")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("sites_factsheet_166")%>

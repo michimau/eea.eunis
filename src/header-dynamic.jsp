@@ -4,10 +4,14 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Header dynamic'
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@page import="ro.finsiel.eunis.backtrail.BacktrailObject,
                  ro.finsiel.eunis.backtrail.BacktrailUtil,
                 java.util.Vector"%>
-<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%><%@ page import="ro.finsiel.eunis.search.Utilities"%>
  <%--
 Input parameters  on REQUEST:
   - SessionManager - to get theme info
@@ -24,106 +28,110 @@ Input parameters  on REQUEST:
       <jsp:param name="downloadLink" value="javascript:openlink('reports/species/tsv.jsp?<%=formBean.toURLParam(reportFields)%>')"/>
     </jsp:include>
 --%>
+<jsp:include page="header-static.jsp"/>
+<jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
+  WebContentManagement cm = SessionManager.getWebContent();
   // Request parameters.
   String dynHeaderLocation = request.getParameter("location");
   String dynHeaderHelpLink = request.getParameter("helpLink");
   String dynHeaderPrintLink = request.getParameter("printLink");
-  String dynHeaderDownloadLink = request.getParameter("downloadLink");
-
+  String dynHeaderDownloadLink = Utilities.formatString( request.getParameter("downloadLink"), "null" );
+  if ( dynHeaderDownloadLink.equalsIgnoreCase( "null" ) )
+  {
+    dynHeaderDownloadLink = null;
+  }
   // Get the backtrail from string (order of objects is preserved).
-  Vector backtrailObjects = BacktrailUtil.parseBacktrailString(dynHeaderLocation);
-//  String lightColor = (null != dynHeadSessionManager) ? dynHeadSessionManager.getThemeManager().getLightColor() : "#669ACC";
-//  String darkColor = (null != dynHeadSessionManager) ? dynHeadSessionManager.getThemeManager().getDarkColor() : "#669ACC";
+  Vector backtrailObjects = BacktrailUtil.parseBacktrailString( dynHeaderLocation, cm );
 %>
-<jsp:include page="header-static.jsp"/>
-<jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
-<%
-  WebContentManagement contentManagement = SessionManager.getWebContent();
-%>
-<div style="width : 740px;">
-<table summary="layout" border="0" cellpadding="0" cellspacing="0" width="100%">
+<div class="headerdynamicprint">
+<table summary="layout" border="0" cellpadding="0" cellspacing="0" width="100%" style="text-align : left;">
   <tr>
     <td width="60%">
-      <img alt="Current location in web site" src="images/path.gif" width="20" height="16" align="middle" />
-      <%
+      <img alt="<%=cm.cms( "header_current_location_alt" )%>" src="images/path.gif" width="20" height="16" align="middle" /><%=cm.cmsAlt("header_current_location_alt")%>
+<%
         for (int i = 0; i < backtrailObjects.size(); i++)
         {
           BacktrailObject backtrailObject = ( BacktrailObject ) backtrailObjects.elementAt(i);
           backtrailObject.setCssStyle( "breadcrumbtrail" );
-      %>
-          <%if (i > 0) {%>
-            <span class="breadcrumbtrailNormalFont">&gt;&gt;&nbsp;</span>
-         <%}%>
+          if (i > 0)
+          {
+%>
+            <span class="breadcrumbtrailNormalFont">&gt;&gt;</span>
+<%
+          }
+%>
          <%=backtrailObject.toURLString()%>
-      <%
+<%
         }
-      %>
+%>
     </td>
-    <%
+<%
       if (null != dynHeaderHelpLink)
       {
-    %>
-        <td width="7%" align="left">
-          <a class="breadcrumbtrail" href="<%=dynHeaderHelpLink%>" title="Help information">Help</a>
+%>
+        <td width="7%" align="right">
+          <a class="breadcrumbtrail" href="<%=dynHeaderHelpLink%>" title="<%=cm.cms( "header_help_title" )%>"><%=cm.cmsText( "header_help" )%></a>
+          <%=cm.cmsTitle( "header_help_title" )%>
         </td>
-    <%
-      } else {
-    %>
-        <td width="7%" align="left">
-          &nbsp;
-        </td>
-    <%
-      }
-    %>
-    <%
-      if (null != dynHeaderPrintLink)
-      {
-    %>
-        <td width="15%" align="left">
-          <a class="breadcrumbtrail" href="<%=dynHeaderPrintLink%>" title="Create downloadable PDF page content">Downloadable PDF</a>
-        </td>
-    <%
-      } else {
-    %>
-        <td width="10%" align="left">&nbsp;</td>
-    <%
-      }
-    %>
-    <%
-      if (null != dynHeaderDownloadLink)
-      {
-    %>
-        <td width="15%" align="left">
-          <a class="breadcrumbtrail" href="<%=dynHeaderDownloadLink%>" title="Create Excel compatible file with search result">
-            <img alt="Download" src="images/mini/download.gif" width="16" height="16" border="0" align="middle" />
-            </a>
-          <a class="breadcrumbtrail" href="<%=dynHeaderDownloadLink%>" title="Create Excel compatible file with search result">Download results</a>
-        </td>
-    <%
+<%
       }
       else
       {
-    %>
-        <td width="15%" align="left">
+%>
+        <td width="7%" align="right">
           &nbsp;
         </td>
-    <%
+<%
       }
-    %>
+%>
   </tr>
+</table>
+<table summary="layout" border="0" cellpadding="0" cellspacing="0" width="100%">
+<%
+  if (null != dynHeaderPrintLink || null != dynHeaderDownloadLink) {
+%>
+
   <tr>
-    <td colspan="5">
-      <div class="horizontal_line"><img alt="" src="images/pixel.gif" width="740" height="1" /></div>
+<%
+      if (null != dynHeaderPrintLink)
+      {
+%>
+        <td width="100%" align="right">
+          <a class="breadcrumbtrail" href="<%=dynHeaderPrintLink%>" title="<%=cm.cms( "header_download_pdf_title" )%>"><%=cm.cmsText( "header_download_pdf" )%></a>
+          <%=cm.cmsTitle( "header_download_pdf_title" )%>
+        </td>
+<%
+      }
+      if (null != dynHeaderDownloadLink)
+      {
+%>
+        <td width="100%" align="right">
+          <a class="breadcrumbtrail" href="<%=dynHeaderDownloadLink%>" title="<%=cm.cms( "header_download_tsv_title" )%>"><img alt="<%=cm.cms( "header_download_alt" )%>" src="images/mini/download.gif" width="16" height="16" border="0" align="middle" /></a>
+          <%=cm.cmsTitle( "header_download_tsv_title" )%><%=cm.cmsAlt( "header_download_alt" )%>
+          <a class="breadcrumbtrail" href="<%=dynHeaderDownloadLink%>" title="<%=cm.cms( "header_download_tsv_title" )%>"><%=cm.cmsText( "header_download_tsv" )%></a>
+          <%=cm.cmsTitle( "header_download_tsv_title" )%>
+        </td>
+<%
+      }
+%>
+  </tr>
+<%
+  }
+%>
+  <tr>
+    <td colspan="2">
+      <div class="horizontal_line"><img alt="" src="images/pixel.gif" width="100%" height="1" /></div>
     </td>
   </tr>
   <tr>
-    <td colspan="5" class="fontSmall" align="right">
+    <td class="fontSmall" align="right">
       <span class="textVersion">
-        <%=contentManagement.getContent("generic_last_update_01")%>
+        <%=cm.cmsText("generic_last_update_01")%>
       </span>
     </td>
   </tr>
 </table>
-</div>
-<a name="main_content" title="Main content of the page" accesskey="2"><img alt="" src="images/pixel.gif" width="1" height="1" /></a>
+</div>  
+<a name="main_content" title="<%=cm.cms("header_main_content")%>" accesskey="2"><img alt="" src="images/pixel.gif" width="1" height="1" /></a>
+<%=cm.cmsTitle("header_main_content")%>

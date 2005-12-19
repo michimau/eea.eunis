@@ -4,11 +4,14 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Display tree of the EUNIS habitats.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.jrfTables.*, ro.finsiel.eunis.WebContentManagement" %>
 <%@ page import="java.util.*"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
@@ -72,21 +75,23 @@
     //-->
   </script>
   <%
-    WebContentManagement contentManagement = SessionManager.getWebContent();
+    WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=contentManagement.getContent("habitats_code-browser_title", false )%>
+    <%=cm.cms("habitats_code-browser_title")%>
   </title>
 </head>
 <body>
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="Home#index.jsp,Habitat types#habitats.jsp,EUNIS habitat type hierarchical view" />
+  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,eunis_habitats_tree_location" />
 </jsp:include>
-<h5>
-  <%=contentManagement.getContent("habitats_code-browser_01")%>
-</h5>
+<h1>
+  <%=cm.cmsText("habitats_code-browser_01")%>
+</h1>
 <%
   // Get max level
   int mx=0;
@@ -99,23 +104,26 @@
   {
 %>
 <form name="setings" action="habitats-code-browser.jsp" method="post">
-  <label for="depth" class="noshow"><%=contentManagement.getContent("habitats_code-browser_05")%>:</label>
-  <select title="Level depth" name="depth" id="depth" onchange="MM_jumpMenu('parent',this,0)" class="inputTextField">
-    <option value="habitats-code-browser.jsp" <%=(request.getParameter("level")==null ? "selected=\"selected\"" : "")%> ><%=contentManagement.getContent("habitats_code-browser_03", false)%></option>
+  <label for="depth" class="noshow"><%=cm.cms("habitats_code-browser_05")%>:</label>
+  <select title="<%=cm.cms("habitats_code-browser_05")%>" name="depth" id="depth" onchange="MM_jumpMenu('parent',this,0)" class="inputTextField">
+    <option value="habitats-code-browser.jsp" <%=(request.getParameter("level")==null ? "selected=\"selected\"" : "")%> ><%=cm.cms("habitats_code-browser_03")%></option>
     <%
       for (int ii=2;ii<=mx;ii++)
       {
     %>
-        <option value="habitats-code-browser.jsp?level=<%=ii%>&amp;habCode=<%=habCode%>" <%=(request.getParameter("level")!=null&&request.getParameter("level").equals((new Integer(ii)).toString())) ? "selected=\"selected\"" : ""%>><%=contentManagement.getContent("habitats_code-browser_04", false)%>&nbsp;<%=ii%></option>
+        <option value="habitats-code-browser.jsp?level=<%=ii%>&amp;habCode=<%=habCode%>" <%=(request.getParameter("level")!=null&&request.getParameter("level").equals((new Integer(ii)).toString())) ? "selected=\"selected\"" : ""%>><%=cm.cms("habitats_code-browser_04")%>&nbsp;<%=ii%></option>
     <%
       }
     %>
   </select>
+  <%=cm.cmsLabel("habitats_code-browser_05")%>
+  <%=cm.cmsInput("habitats_code-browser_03")%>
+  <%=cm.cmsInput("habitats_code-browser_04")%>
 </form>
 <%
   }
 %>
-<table summary="Habitat types" width="100%" border="0">
+<table summary="<%=cm.cms("habitat_types")%>" width="100%" border="0">
   <%
     // If the short factsheet of habitat is not open
     if (habID == null)
@@ -135,7 +143,8 @@
           {
             Chm62edtHabitatPersist h= (Chm62edtHabitatPersist) it.next();%>
             <li>
-              <a title="Expand data for the habitat type" href="habitats-code-browser.jsp?habCode=<%=h.getEunisHabitatCode()%>#factsheet"><%=h.getEunisHabitatCode()%> : <%=h.getScientificName()%></a>
+              <a title="<%=cm.cms("expand_data_for_habitat_type")%>" href="habitats-code-browser.jsp?habCode=<%=h.getEunisHabitatCode()%>#factsheet"><%=h.getEunisHabitatCode()%> : <%=h.getScientificName()%></a>
+              <%=cm.cmsTitle("expand_data_for_habitat_type")%>
             </li>
       <%
           }
@@ -160,7 +169,6 @@
         createTree(<%=level%>, level1, Tree2, 0<%=(habID==null)?",0":","+openNode%>, "habitats-code-browser.jsp");
               //-->
         </script>
-        <noscript>Your browser does not support JavaScript!</noscript>
       </div>
     </td>
   </tr>
@@ -170,8 +178,7 @@
   <tr>
     <td>
       <%
-        String paragraph02 = contentManagement.getContent("habitats_code-browser_02");
-        if (null != paragraph02) out.print(paragraph02);
+        cm.cmsText("habitats_code-browser_02");
       %>
     </td>
   </tr>
@@ -184,9 +191,8 @@
     <td>
       <br />
       <br />
-      <a href="habitats-factsheet.jsp?idHabitat=<%=habID%>">Open full factsheet</a>
+      <a href="habitats-factsheet.jsp?idHabitat=<%=habID%>"><%=cm.cmsText("open_habitat_factsheet")%></a>
       <br />
-      <script language="JavaScript" type="text/javascript" src="script/sort-table.js"></script>
       <jsp:include page="habitats-factsheet-general.jsp">
         <jsp:param name="idHabitat" value="<%=habID%>" />
       </jsp:include>
@@ -200,5 +206,11 @@
   <jsp:param name="page_name" value="habitats-code-browser.jsp" />
 </jsp:include>
   </div>
+  </div>
+  </div>
+  <%=cm.cmsMsg("habitats_code-browser_title")%>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("habitat_types")%>
+  <%=cm.br()%>
 </body>
 </html>

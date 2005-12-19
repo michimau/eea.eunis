@@ -4,7 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : "Sites Number/Total area" function - results page.
 --%>
-<%@ page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.search.sites.SitesSearchUtility,
@@ -36,22 +39,26 @@
   }
   String showDesignations = (request.getParameter("showDesignations")==null ? "false" : request.getParameter("showDesignations"));
   // Web content manager used in this page.
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-    <script language="JavaScript" type="text/javascript" src="script/sort-table.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/sites-statistical.js"></script>
+    <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
     <title>
-      <%=application.getInitParameter("PAGE_TITLE")%><%=contentManagement.getContent("sites_statistical-result_title", false )%> <%=country.getAreaNameEnglish()%>
+      <%=application.getInitParameter("PAGE_TITLE")%>
+      <%=cm.cms("sites_statistical-result_title")%>
+      <%=country.getAreaNameEnglish()%>
     </title>
 </head>
   <body>
+    <div id="outline">
+    <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="Home#index.jsp,Sites#sites.jsp,Statistical Data#sites-statistical.jsp,Result"/>
+        <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_statistical_location#sites-statistical.jsp,results_location"/>
         <jsp:param name="mapLink" value="show"/>
       </jsp:include>
       <img id="loading" alt="Loading" title="Loading" src="images/loading.gif" />
@@ -59,13 +66,17 @@
   if (null != country)
   {
 %>
-      <h5>
-        Number / Total area
-      </h5>
-      <%=contentManagement.getContent("sites_statistical-result_01")%>
-      <strong><%=formBean.toHumanString()%></strong>
+      <h1>
+        <%=cm.cmsText("sites_statistical_result_totalarea")%>
+      </h1>
+      <%=cm.cmsText("sites_statistical-result_01")%>
+      <strong>
+        <%=formBean.toHumanString()%>
+      </strong>
       <br />
-      <img src="<%=application.getInitParameter("EEA_MAP_SERVER")%>/getmap.asp?Q=<%=sbCCodes.toString().toUpperCase()%>&amp;outline=1" alt="<%=contentManagement.getContent("sites_statistical-result_02",false)%>" title="<%=contentManagement.getContent("sites_statistical-result_02",false)%>" />
+      <img src="<%=application.getInitParameter("EEA_MAP_SERVER")%>/getmap.asp?Q=<%=sbCCodes.toString().toUpperCase()%>&amp;outline=1" alt="<%=cm.cms("sites_statistical-result_02")%>" title="<%=cm.cms("sites_statistical-result_02")%>" />
+      <%=cm.cmsTitle("sites_statistical-result_02")%>
+      <%=cm.cmsAlt("sites_statistical-result_02")%>
       <br />
       <%
         Long nrSites = formBean.computeNumberOfSites();
@@ -74,15 +85,15 @@
           nrSites = new Long( 0 );
         }
       %>
-      <%=contentManagement.getContent("sites_statistical-result_03")%>&nbsp;&nbsp;<%=nrSites%>
+      <%=cm.cmsText("sites_statistical-result_03")%>&nbsp;&nbsp;<%=nrSites%>
       <br /><br />
       <strong>
-        <%=contentManagement.getContent("sites_statistical-result_04")%>
+        <%=cm.cmsText("sites_statistical-result_04")%>
       </strong>
       <table width="100%" border="0" cellspacing="0" cellpadding="0" summary="Country information">
         <tr>
           <td width="221">
-            <%=contentManagement.getContent("sites_statistical-result_05")%>
+            <%=cm.cmsText("sites_statistical-result_05")%>
           </td>
           <td width="158">
             <strong>
@@ -90,7 +101,7 @@
             </strong>
           </td>
           <td width="221">
-            <%=contentManagement.getContent("sites_statistical-result_06")%>
+            <%=cm.cmsText("sites_statistical-result_06")%>
           </td>
           <td width="158">
             <strong>
@@ -100,7 +111,7 @@
         </tr>
         <tr>
           <td width="221">
-            <%=contentManagement.getContent("sites_statistical-result_07")%>
+            <%=cm.cmsText("sites_statistical-result_07")%>
           </td>
           <td width="158">
             <strong>
@@ -108,7 +119,7 @@
             </strong>
           </td>
           <td width="221">
-            <%=contentManagement.getContent("sites_statistical-result_08")%>
+            <%=cm.cmsText("sites_statistical-result_08")%>
           </td>
           <td width="158">
             <strong>
@@ -118,7 +129,7 @@
         </tr>
         <tr>
           <td width="221">
-            <%=contentManagement.getContent("sites_statistical-result_09")%>
+            <%=cm.cmsText("sites_statistical-result_09")%>
           </td>
           <td width="158">
             <strong>
@@ -126,7 +137,7 @@
             </strong>
           </td>
           <td width="221">
-            <%=contentManagement.getContent("sites_statistical-result_10")%>
+            <%=cm.cmsText("sites_statistical-result_10")%>
           </td>
           <td width="158">
             <strong>
@@ -136,7 +147,7 @@
         </tr>
         <tr>
           <td width="221">
-            <%=contentManagement.getContent("sites_statistical-result_11")%>
+            <%=cm.cmsText("sites_statistical-result_11")%>
           </td>
           <td width="158">
             <strong>
@@ -144,7 +155,7 @@
             </strong>
           </td>
           <td width="202">
-            <%=contentManagement.getContent("sites_statistical-result_12")%>
+            <%=cm.cmsText("sites_statistical-result_12")%>
           </td>
           <td width="151">
             <strong>
@@ -154,7 +165,7 @@
         </tr>
         <tr>
           <td width="221">
-            <%=contentManagement.getContent("sites_statistical-result_13")%>
+            <%=cm.cmsText("sites_statistical-result_13")%>
           </td>
           <td width="158">
             <strong>
@@ -162,7 +173,7 @@
             </strong>
           </td>
           <td width="202">
-            <%=contentManagement.getContent("sites_statistical-result_14")%>
+            <%=cm.cmsText("sites_statistical-result_14")%>
           </td>
           <td width="151">
             <strong>
@@ -179,15 +190,17 @@
    {
  %>
       <strong>
-        <%=contentManagement.getContent("sites_statistical-result_15")%>
+        <%=cm.cmsText("sites_statistical-result_15")%>
       </strong>
-      <table id="rsTable2" border="1" cellpadding="1" cellspacing="1" style="border-collapse: collapse" width="100%" summary="Biogeographic regions">
+      <table id="rsTable2" border="1" cellpadding="1" cellspacing="1" width="100%" summary="<%=cm.cms("sites_statistical_biogeographicregions")%>" class="sortable">
         <tr>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 2, 0, 'rsTable2', false);"><%=contentManagement.getContent("sites_statistical-result_16")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_statistical-result_16")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" align="right">
-            <a title="Sort results by this column" href="javascript:sortTable( 2, 1, 'rsTable2', false);"><%=contentManagement.getContent("sites_statistical-result_17")%></a>
+          <th style="text-align : right;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_statistical-result_17")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
 <%
@@ -212,6 +225,9 @@
       </table>
 <%
   }
+
+  if(Utilities.isCountry(country.getAreaNameEnglish()))
+  {  
   if(showDesignations.equals("true"))
   {
     out.flush();
@@ -244,52 +260,59 @@
       //System.out.println( "Found " + design.size() + " designations" );
 %>
       <br />
-      <table border="1" cellpadding="1" cellspacing="1" style="border-collapse: collapse" width="100%" id="rsTable" summary="Designations">
+      <table border="1" cellpadding="1" cellspacing="1" width="100%" id="rsTable" summary="<%=cm.cms("sites_statistical_result_designations")%>" class="sortable">
         <tr>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 7, 0, 'rsTable', false);"><%=contentManagement.getContent("sites_statistical-result_18")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_statistical-result_18")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 7, 1, 'rsTable', false);"><%=contentManagement.getContent("sites_statistical-result_19")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_statistical-result_19")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 7, 2, 'rsTable', false);"><%=contentManagement.getContent("sites_statistical-result_20")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_statistical-result_20")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 7, 3, 'rsTable', false);"><%=contentManagement.getContent("sites_statistical-result_21")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_statistical-result_21")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 7, 4, 'rsTable', false);"><%=contentManagement.getContent("sites_statistical-result_22")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_statistical-result_22")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 7, 5, 'rsTable', false);"><%=contentManagement.getContent("sites_statistical-result_23")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_statistical-result_23")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 7, 6, 'rsTable', false);"><%=contentManagement.getContent("sites_statistical-result_24")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_statistical-result_24")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
 <%
       for(int i=0;i<design.size();i++)
       {
         Chm62edtDesignationsPersist d = (Chm62edtDesignationsPersist)design.get(i);
-        List res = new ArrayList();
         //System.out.println( "Started iteration : " + i );
         //long l = new Date().getTime();
-        res = formBean.getValueForDesignations(idSitesList,d.getIdDesignation(),d.getIdGeoscope(),SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+        List res = formBean.getValueForDesignations(idSitesList,d.getIdDesignation(),d.getIdGeoscope(),SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
         //long l1 = new Date().getTime();
         //System.out.println( "iteration took " +  ( l1 - l ) + " msecs");
         String bgcolor = (0 == (i % 2) ? "#FFFFFF" : "#EEEEEE");
 %>
         <tr>
-          <td bgcolor="<%=bgcolor%>" align="left">
+          <td bgcolor="<%=bgcolor%>">
             <%=(d.getOriginalDataSource() == null || d.getOriginalDataSource().trim().length() <= 0? "n/a" : d.getOriginalDataSource())%>
           </td>
-          <td bgcolor="<%=bgcolor%>" align="left">
+          <td bgcolor="<%=bgcolor%>">
 <%
         if (null != d.getDescription() && !d.getDescription().equalsIgnoreCase(""))
         {
 %>
-            <a title="Designation type factsheet" href="designations-factsheet.jsp?idDesign=<%=d.getIdDesignation()%>&amp;geoscope=<%=d.getIdGeoscope()%>"><%=d.getDescription()%></a>
+            <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?idDesign=<%=d.getIdDesignation()%>&amp;geoscope=<%=d.getIdGeoscope()%>"><%=d.getDescription()%></a>
+            <%=cm.cmsTitle("open_designation_factsheet")%>
 <%
         }
         else
@@ -300,12 +323,13 @@
         }
 %>
           </td>
-          <td bgcolor="<%=bgcolor%>" align="left">
+          <td bgcolor="<%=bgcolor%>">
 <%
         if (null != d.getDescriptionEn() && !d.getDescriptionEn().equalsIgnoreCase(""))
         {
 %>
-            <a title="Designation type factsheet" href="designations-factsheet.jsp?idDesign=<%=d.getIdDesignation()%>&amp;geoscope=<%=d.getIdGeoscope()%>"><%=d.getDescriptionEn()%></a>
+            <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?idDesign=<%=d.getIdDesignation()%>&amp;geoscope=<%=d.getIdGeoscope()%>"><%=d.getDescriptionEn()%></a>
+            <%=cm.cmsTitle("open_designation_factsheet")%>
 <%
         }
         else
@@ -316,12 +340,13 @@
         }
 %>
           </td>
-          <td bgcolor="<%=bgcolor%>" align="left">
+          <td bgcolor="<%=bgcolor%>">
 <%
         if (null != d.getDescriptionFr() && !d.getDescriptionFr().equalsIgnoreCase(""))
         {
 %>
-            <a title="Designation type factsheet" href="designations-factsheet.jsp?idDesign=<%=d.getIdDesignation()%>&amp;geoscope=<%=d.getIdGeoscope()%>"><%=d.getDescriptionFr()%></a>
+            <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?idDesign=<%=d.getIdDesignation()%>&amp;geoscope=<%=d.getIdGeoscope()%>"><%=d.getDescriptionFr()%></a>
+            <%=cm.cmsTitle("open_designation_factsheet")%>
 <%
         }
         else
@@ -354,7 +379,7 @@
 %>
       <br />
       <strong>
-        This country has no designation types.
+        <%=cm.cmsText("sites_statistical_result_nodesignations")%>.
       </strong>
 <%
     }
@@ -363,10 +388,11 @@
   {
 %>
       <br />
-      <a title="<%=contentManagement.getContent( "sites_statistical-result_32", false )%>" href="sites-statistical-result.jsp?showDesignations=true&amp;yearMin=<%=formBean.getYearMin()%>&amp;yearMax=<%=formBean.getYearMax()%>&amp;designationCat=<%=formBean.getDesignationCat()%>&amp;designation=<%=formBean.getDesignation()%>&amp;country=<%=countryName%>&amp;DB_NATURA2000=<%=request.getParameter("DB_NATURA2000")%>&amp;DB_CORINE=<%=request.getParameter("DB_CORINE")%>&amp;DB_DIPLOMA=<%=request.getParameter("DB_DIPLOMA")%>&amp;DB_CDDA_NATIONAL=<%=request.getParameter("DB_CDDA_NATIONAL")%>&amp;DB_BIOGENETIC=<%=request.getParameter("DB_BIOGENETIC")%>&amp;DB_EMERALD=<%=request.getParameter("DB_EMERALD")%>&amp;DB_CDDA_INTERNATIONAL=<%=request.getParameter("DB_CDDA_INTERNATIONAL")%>"><%=contentManagement.getContent( "sites_statistical-result_32")%></a>
+      <a title="<%=cm.cms( "sites_statistical-result_32")%>" href="sites-statistical-result.jsp?showDesignations=true&amp;yearMin=<%=formBean.getYearMin()%>&amp;yearMax=<%=formBean.getYearMax()%>&amp;designationCat=<%=formBean.getDesignationCat()%>&amp;designation=<%=formBean.getDesignation()%>&amp;country=<%=countryName%>&amp;DB_NATURA2000=<%=request.getParameter("DB_NATURA2000")%>&amp;DB_CORINE=<%=request.getParameter("DB_CORINE")%>&amp;DB_DIPLOMA=<%=request.getParameter("DB_DIPLOMA")%>&amp;DB_CDDA_NATIONAL=<%=request.getParameter("DB_CDDA_NATIONAL")%>&amp;DB_BIOGENETIC=<%=request.getParameter("DB_BIOGENETIC")%>&amp;DB_EMERALD=<%=request.getParameter("DB_EMERALD")%>&amp;DB_CDDA_INTERNATIONAL=<%=request.getParameter("DB_CDDA_INTERNATIONAL")%>"><%=cm.cmsText( "sites_statistical-result_32")%></a>
+      <%=cm.cmsTitle("sites_statistical-result_32")%>
       <br />
       <strong>
-        <%=contentManagement.getContent( "sites_statistical-result_31")%>
+        <%=cm.cmsText( "sites_statistical-result_31")%>
       </strong>
 <%
   }
@@ -402,17 +428,18 @@
   {
 %>
    <br />
-   <%=contentManagement.getContent( "sites_statistical-result_35")%> : <%=noSpecies%>
+   <%=cm.cmsText( "sites_statistical-result_35")%> : <%=noSpecies%>
 <%
   }
   else
   {
 %>
         <br />
-        <a title="Species.Link will open a new window" href="javascript:openNewPage('species-country-result.jsp?country=<%=country.getIdCountry()%>&amp;countryName=<%=countryName%>&amp;region=any&amp;regionName=any')"><%=contentManagement.getContent( "sites_statistical-result_35")%>(<%=noSpecies%> species)</a>
+        <a title="<%=cm.cms("sites_statistical_result_species")%>" href="javascript:openNewPage('species-country-result.jsp?country=<%=country.getIdCountry()%>&amp;countryName=<%=countryName%>&amp;region=any&amp;regionName=any')"><%=cm.cmsText( "sites_statistical-result_35")%>(<%=noSpecies%> species)</a>
+        <%=cm.cmsTitle("sites_statistical_result_species")%>
         <br />
         <strong>
-          <%=contentManagement.getContent( "sites_statistical-result_31")%>
+          <%=cm.cmsText( "sites_statistical-result_31")%>
         </strong>
 <%
   }
@@ -430,7 +457,7 @@
   {
 %>
         <br />
-        <%=contentManagement.getContent( "sites_statistical-result_36")%>: <%=noHabitats%>
+        <%=cm.cmsText( "sites_statistical-result_36")%>: <%=noHabitats%>
 <%
   }
   else
@@ -438,10 +465,11 @@
 %>
       <br />
       <br />
-      <a title="Habitat types.Link will open a new window." href="javascript:openNewPage('habitats-country-result.jsp?database=2&amp;showScientificName=true&amp;showVernacularName=true&amp;country=<%=countryName%>&amp;region=')"><%=contentManagement.getContent( "sites_statistical-result_36")%>(<%=noHabitats%> habitat types)</a>
+      <a title="<%=cm.cms("sites_statistical_result_habitats")%>" href="javascript:openNewPage('habitats-country-result.jsp?database=2&amp;showScientificName=true&amp;showVernacularName=true&amp;country=<%=countryName%>&amp;region=')"><%=cm.cmsText( "sites_statistical-result_36")%>(<%=noHabitats%> habitat types)</a>
+      <%=cm.cmsTitle("sites_statistical_result_habitats")%>
       <br />
       <strong>
-        <%=contentManagement.getContent( "sites_statistical-result_31")%>
+        <%=cm.cmsText( "sites_statistical-result_31")%>
       </strong>
 <%
   }
@@ -466,6 +494,21 @@
     false,
     request.getParameter( "DB_EMERALD" ) != null
   };
+
+  if(source[0] == false && source[1] == false
+          && source[2] == false && source[3] == false
+          && source[4] == false && source[5] == false
+          && source[6] == false && source[7] == false)
+  {
+    source[0] = true;
+    source[1] = true;
+    source[2] = true;
+    source[3] = true;
+    source[4] = true;
+    source[5] = true;
+    source[6] = false;
+    source[7] = true;
+  }
   // List of sites source data set
   String[] db = {"Natura2000","Corine","Diploma","CDDA_National","CDDA_International","Biogenetic","NatureNet","Emerald"};
 
@@ -483,10 +526,10 @@
   if(result != null && result.size()>0)
   {
 %>
-      <table border="1" cellpadding="1" cellspacing="1" style="border-collapse: collapse" width="100%" id="rsTableNew" summary="Sites">
+      <table border="1" cellpadding="1" cellspacing="1" style="border-collapse: collapse" width="100%" id="rsTableNew" summary="<%=cm.cms("sites_statistical_result_sites")%>">
         <tr>
           <th class="resultHeader">
-            <%=contentManagement.getContent("sites_statistical-result_18")%>
+            <%=cm.cmsText("sites_statistical-result_18")%>
           </th>
 <%
      for(int i=0;i<result.size();i++)
@@ -500,11 +543,20 @@
       }
 %>
         </tr>
-        <%=Utilities.getSitesCountryFactsheetInTable(result,contentManagement)%>
+        <%=Utilities.getSitesCountryFactsheetInTable(result,cm )%>
       </table>
 <%
     }
+    }
 %>
+
+      <%=cm.cmsMsg("sites_statistical-result_title")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("sites_statistical_biogeographicregions")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("sites_statistical_result_designations")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("sites_statistical_result_sites")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="sites-statistical-result.jsp" />
       </jsp:include>
@@ -530,6 +582,8 @@
       }
       //-->
     </script>
+    </div>
+    </div>
     </div>
   </body>
 </html>

@@ -11,7 +11,7 @@ import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.habitats.species.ScientificNameDomain;
 import ro.finsiel.eunis.jrfTables.habitats.species.ScientificNamePersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.habitats.species.SpeciesBean;
 import ro.finsiel.eunis.search.habitats.species.SpeciesPaginator;
@@ -22,21 +22,24 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
-
+/**
+ * TSV and XML report generation.
+ */
 public class TSVHabitatSpeciesReport extends AbstractTSVReport
 {
   /**
-   * Form bean used for search
+   * Form bean used for search.
    */
   private SpeciesBean formBean = null;
 
   private boolean showEUNISInvalidatedSpecies = false;
 
   /**
-   * Normal constructor
-   *
+   * Constructor.
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
+   * @param showEUNISInvalidatedSpecies Show invalidated species
+   * @param searchAttribute attribute searched
    */
   public TSVHabitatSpeciesReport( String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies, Integer searchAttribute )
   {
@@ -44,6 +47,7 @@ public class TSVHabitatSpeciesReport extends AbstractTSVReport
     this.formBean = ( SpeciesBean ) formBean;
     this.filename = "HabitatSpeciesReport_" + sessionID + ".tsv";
     this.showEUNISInvalidatedSpecies = showEUNISInvalidatedSpecies;
+    xmlreport = new XMLReport( "HabitatSpeciesReport_" + sessionID + ".xml" );
     // Init the data factory
     if ( null != formBean )
     {
@@ -62,18 +66,18 @@ public class TSVHabitatSpeciesReport extends AbstractTSVReport
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader()
+  public List<String> createHeader()
   {
     Integer database = Utilities.checkedStringToInt( formBean.getDatabase(), ScientificNameDomain.SEARCH_EUNIS );
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     // Level
     if ( formBean.getDatabase().equalsIgnoreCase( ScientificNameDomain.SEARCH_EUNIS.toString() ) )
     {
@@ -123,6 +127,7 @@ public class TSVHabitatSpeciesReport extends AbstractTSVReport
         return;
       }
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       Integer searchAttribute = Utilities.checkedStringToInt( formBean.getSearchAttribute(), SpeciesSearchCriteria.SEARCH_SCIENTIFIC_NAME );
       Integer relationOp = Utilities.checkedStringToInt( formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
@@ -150,7 +155,7 @@ public class TSVHabitatSpeciesReport extends AbstractTSVReport
 
               if( ii == 0 )
               {
-                Vector aRow = new Vector();
+                Vector<String> aRow = new Vector<String>();
                 // Level
                 if ( ( formBean ).getDatabase().equalsIgnoreCase( ScientificNameDomain.SEARCH_EUNIS.toString() ) )
                 {
@@ -180,7 +185,7 @@ public class TSVHabitatSpeciesReport extends AbstractTSVReport
               }
               else
               {
-                Vector aRow = new Vector();
+                Vector<String> aRow = new Vector<String>();
                 // Level
                 if ( ( formBean ).getDatabase().equalsIgnoreCase( ScientificNameDomain.SEARCH_EUNIS.toString() ) )
                 {
@@ -212,7 +217,7 @@ public class TSVHabitatSpeciesReport extends AbstractTSVReport
           }
           else
           {
-            Vector aRow = new Vector();
+            Vector<String> aRow = new Vector<String>();
             // Level
             if ( ( formBean ).getDatabase().equalsIgnoreCase( ScientificNameDomain.SEARCH_EUNIS.toString() ) )
             {
@@ -240,6 +245,41 @@ public class TSVHabitatSpeciesReport extends AbstractTSVReport
             aRow.addElement( "" );
             writeRow( aRow );
           }
+
+          // XML Report
+          Vector<String> aRow = new Vector<String>();
+          // Level
+          if ( ( formBean ).getDatabase().equalsIgnoreCase( ScientificNameDomain.SEARCH_EUNIS.toString() ) )
+          {
+            aRow.addElement( habitat.getHabLevel().toString() );
+          }
+          // Code
+          if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_BOTH ) )
+          {
+            aRow.addElement( habitat.getEunisHabitatCode() );
+            aRow.addElement( habitat.getCodeAnnex1() );
+          }
+          if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_EUNIS ) )
+          {
+            aRow.addElement( habitat.getEunisHabitatCode() );
+          }
+          if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_ANNEX_I ) )
+          {
+            aRow.addElement( habitat.getCodeAnnex1() );
+          }
+          // Name
+          aRow.addElement( habitat.getScientificName() );
+          // English name
+          aRow.addElement( habitat.getDescription() );
+          // Species
+          String species = "";
+          for(int ii = 0; ii < resultsSpecies.size(); ii++)
+          {
+            TableColumns tableColumns = (TableColumns) resultsSpecies.get(ii);
+            species += "<species>" + tableColumns.getColumnsValues().get(0) + "</species>";
+          }
+          aRow.addElement( species );
+          xmlreport.writeRow( aRow );
         }
       }
     }

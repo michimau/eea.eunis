@@ -5,19 +5,34 @@
   - Description : Display a table with designations of a site. Used in (almost all) results of search functions from Sites module.
 
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.List,
                  ro.finsiel.eunis.search.sites.SitesSearchUtility,
                  ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist,
                  java.util.ArrayList"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
+<jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
+  WebContentManagement cm = SessionManager.getWebContent();
   // This page is used in JSP include to display the designations for a site in results of a search.
+  String idSite = request.getParameter("idSite");
   String idDesignation = request.getParameter("idDesignation");
   String idGeoscope = request.getParameter("idGeoscope");
   String sourceDB = request.getParameter("sourceDB");
   List results = new ArrayList();
   if(!sourceDB.equalsIgnoreCase("CORINE"))
   {
-    results = SitesSearchUtility.findDesignationsForSite(idDesignation, idGeoscope);
+    String SiteType = SitesSearchUtility.getSiteType(idSite);
+
+    if(!sourceDB.equalsIgnoreCase("NATURA2000") || !SiteType.equalsIgnoreCase("C"))
+    {
+      results = SitesSearchUtility.findDesignationsForSite(idDesignation, idGeoscope);
+    } else {
+      results = SitesSearchUtility.findDesignationsTypeC();
+    }
   }
   if (results.size() > 0)
   {
@@ -34,9 +49,15 @@
       if (!description.equalsIgnoreCase(""))
       {
 %>
-        <a title="Designation factsheet" href="designations-factsheet.jsp?idDesign=<%=designation.getIdDesignation()%>&amp;geoscope=<%=designation.getIdGeoscope()%>"><%=description%></a>
-        <br />
+        <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?idDesign=<%=designation.getIdDesignation()%>&amp;geoscope=<%=designation.getIdGeoscope()%>"><%=description%></a>
+        <%=cm.cmsTitle("open_designations_factsheet")%>
 <%
+        if(i < results.size()-1)
+        {
+%>
+          <hr />
+<%
+        }
       }
     }
   }

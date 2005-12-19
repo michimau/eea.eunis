@@ -4,6 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Part of user management
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.List,
                  ro.finsiel.eunis.jrfTables.users.RolesDomain,
                  ro.finsiel.eunis.jrfTables.users.RightsDomain,
@@ -11,20 +15,23 @@
                  ro.finsiel.eunis.jrfTables.users.RolesPersist,
                  ro.finsiel.eunis.search.users.UsersUtility,
                  java.util.Enumeration"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
-
 <%
+    // Web content manager used in this page.
+      WebContentManagement cm = SessionManager.getWebContent();
+
   // If user is authentificated and has this right
   if(SessionManager.isAuthenticated() && SessionManager.isRole_management_RIGHT())
 {
 %>
-<h5>
-  EUNIS Database User Management
-</h5>
+<h1>
+  <%=cm.cmsText("roles_view_01")%>
+</h1>
 <br />
-<h6>
-   View roles
-</h6>
+<h2>
+   <%=cm.cmsText("roles_view_02")%>
+</h2>
 <br />
 <%
   // Set database parameters
@@ -41,7 +48,7 @@
   if(SQL_DRV == null || SQL_URL==null || SQL_USR == null || SQL_PWD==null )
   {
 %>
-    Error: The web.xml file does not contain one/all of these required values: JDBC_DRV,JDBC_URL,JDBC_USR,JDBC_PWD.
+    <%=cm.cmsText("roles_view_03")%>
 <%
     return;
   }
@@ -68,7 +75,7 @@ if(roles != null && roles.size() > 0)
   <tr>
     <td style="text-align:left">
      <strong>
-      Right name
+      <%=cm.cmsText("roles_view_04")%>
      </strong>
     </td>
   <%
@@ -79,9 +86,10 @@ if(roles != null && roles.size() > 0)
   %>
     <td style="text-align:center" <%=tooltip%>>
       <strong>
-      <a href="users.jsp?tab1=1&amp;tab2=1&amp;roleName=<%=role.getRoleName()%>" title="Edit role">
+      <a href="users.jsp?tab1=1&amp;tab2=1&amp;roleName=<%=role.getRoleName()%>" title="<%=cm.cms("roles_view_05")%>">
         <%=UsersUtility.getNameNice(role.getRoleName())%>
       </a>
+      <%=cm.cmsTitle("roles_view_05")%>
       </strong>    
     </td>
   <%
@@ -98,9 +106,10 @@ if(roles != null && roles.size() > 0)
   %>
   <tr>
     <td style="text-align:left" <%=tooltip%>>
-      <a href="users.jsp?tab1=1&amp;tab2=3&amp;rightName=<%=right.getRightName()%>" title="Edit right">
+      <a href="users.jsp?tab1=1&amp;tab2=3&amp;rightName=<%=right.getRightName()%>" title="<%=cm.cms("roles_view_06")%>">
        <%=UsersUtility.getNameNice(right.getRightName())%>
       </a>
+      <%=cm.cmsTitle("roles_view_06")%>
     </td>
   <%
      for(int i=0;i<roles.size();i++)
@@ -108,8 +117,10 @@ if(roles != null && roles.size() > 0)
         RolesPersist role = (RolesPersist)roles.get(i);
     %>
     <td style="text-align:center">
-       <label for="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" class="noshow">Right</label>
-       <input id="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" title="Choose a right" alt="Choose a right" name="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" type="checkbox" value="checkbox" <%=(UsersUtility.ObjectIsInVector(UsersUtility.getRolesRightsName(role.getRoleName()),right.getRightName())?"checked=\"checked\"":"")%> disabled="disabled" />
+       <label for="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" class="noshow"><%=cm.cms("roles_view_07")%></label>
+       <input id="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" title="<%=cm.cms("roles_view_07")%>" alt="<%=cm.cms("roles_view_07")%>" name="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" type="checkbox" value="checkbox" <%=(UsersUtility.ObjectIsInVector(UsersUtility.getRolesRightsName(role.getRoleName()),right.getRightName())?"checked=\"checked\"":"")%> disabled="disabled" />
+       <%=cm.cmsLabel("roles_view_07")%>
+       <%=cm.cmsTitle("roles_view_07")%>
     </td>
   <%
     }
@@ -129,7 +140,7 @@ if(roles != null && roles.size() > 0)
 } else
   {
 %>
-  <strong>You cann't do this because you are not authentificated or you haven't this right!</strong>
+  <strong><%=cm.cmsText("roles_view_08")%></strong>
 <br />
 <%
   }

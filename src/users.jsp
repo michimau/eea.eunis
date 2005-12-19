@@ -1,16 +1,26 @@
-<%@ page import="ro.finsiel.eunis.search.Utilities"%><%--
+<%--
   - Author(s)   : The EUNIS Database Team.
   - Date        :
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Main user management page. This page also includes pages from 'users/*' directory
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
+<%@ page import="ro.finsiel.eunis.search.Utilities"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
+<%
+    // Web content manager used in this page.
+    WebContentManagement cm = SessionManager.getWebContent();
+%>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      User management console
+      <%=cm.cms("users_title")%>
     </title>
     <jsp:include page="header-page.jsp" />
     <style type="text/css">
@@ -25,7 +35,7 @@ border: 1px solid #000000;background-color: #EEEEEE;
     /* Tabbed menus  */
 #tabbedmenu2 {
   float: left;
-  width: 740px;
+  width: 100%;
 
   font-size: x-small;
   line-height: normal;
@@ -74,24 +84,24 @@ border: 1px solid #000000;background-color: #EEEEEE;
   padding: 5px 15px 2px 3px;
 }
     </style>
-    <script language="JavaScript" type="text/javascript" src="script/utils.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/overlib.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/user-management.js"></script>
   </head>
-<%--<body leftmargin="20" bgcolor="#ffffff">--%>
 <body>
 <div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>
+<div id="outline">
+<div id="alignment">
 <div id="content">
 <jsp:include page="header-dynamic.jsp">
-    <jsp:param name="location" value="Home#index.jsp,Services#services.jsp,User Management"/>
+    <jsp:param name="location" value="home_location#index.jsp,services_location#services.jsp,user_management_location"/>
 </jsp:include>
 <%
 int tab1 = Utilities.checkedStringToInt( request.getParameter( "tab1" ), 0 );
-String []tabs1 = { "User management","Role management"};
+String []tabs1 = {cm.cms("user_management"),cm.cms("role_management")};
 
 int tab2 = Utilities.checkedStringToInt( request.getParameter( "tab2" ), 0 );
-String []tabs2 = { "List of users","Edit user","Add user"};
-String []tabs3 = { "List of roles","Edit role","Add role","Edit right","Add right"};
+String []tabs2 = { cm.cms("list_users"),cm.cms("edit_user"),cm.cms("add_user")};
+String []tabs3 = { cm.cms("list_roles"),cm.cms("edit_role"),cm.cms("add_role"),cm.cms("edit_right"),cm.cms("add_right")};
 %>
 <div id="tabbedmenu2">
       <ul>
@@ -104,7 +114,7 @@ String []tabs3 = { "List of roles","Edit role","Add role","Edit right","Add righ
 
               %>
               <li<%=currentTab%>>
-                <a title="Show <%=tabs1[i]%>" href="users.jsp?tab1=<%=i%>"><%=tabs1[ i ]%></a>
+                <a title="<%=cm.cms("show")%> <%=tabs1[i]%>" href="users.jsp?tab1=<%=i%>"><%=tabs1[ i ]%></a>
               </li>
               <%
           }
@@ -128,7 +138,7 @@ else tabs = tabs3;
 
               %>
                 <li<%=currentTab%>>
-                  <a title="Show <%=tabs[i]%>" href="users.jsp?tab1=<%=tab1%>&amp;tab2=<%=i%>"><%=tabs[ i ]%></a>
+                  <a title="<%=cm.cms("show")%> <%=tabs[i]%>" href="users.jsp?tab1=<%=tab1%>&amp;tab2=<%=i%>"><%=tabs[ i ]%></a>
                 </li>
               <%
             }
@@ -268,9 +278,37 @@ else tabs = tabs3;
       }
      %>
 
+<%=cm.br()%>
+<%=cm.cmsMsg("users_title")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("user_management")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("role_management")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("list_users")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("edit_user")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("add_user")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("list_roles")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("edit_role")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("add_role")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("edit_right")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("add_right")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("show")%>
+<%=cm.br()%>
+
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="users.jsp" />
     </jsp:include>
+</div>
+</div>
 </div>
   </body>
 </html>

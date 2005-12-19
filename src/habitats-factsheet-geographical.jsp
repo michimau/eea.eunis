@@ -4,19 +4,22 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Habitats geographical distribution' function - display links to all habitat searches.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet,
                  ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatCountryPersist,
                  ro.finsiel.eunis.search.UniqueVector" %>
 <%@ page import="java.util.List"%>
-
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   String idHabitat = request.getParameter("idHabitat");
   // Mini factsheet shows only the uppermost part of the factsheet with generic information.
   HabitatsFactsheet factsheet = null;
   factsheet = new HabitatsFactsheet(idHabitat);
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   // Geographical distribution
   List results = factsheet.getHabitatCountries();
   String url = "";
@@ -35,7 +38,7 @@
     url = colorURL.getElementsSeparatedByComma();
     url2 = colorURL2.getElementsSeparatedByComma();
 %>
-<div style="width : 740px; background-color : #CCCCCC; font-weight : bold;"><%=contentManagement.getContent("habitats_factsheet_31")%></div>
+<div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitats_factsheet_31")%></div>
 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse">
   <tr>
     <td>
@@ -46,23 +49,28 @@
     </td>
   </tr>
 </table>
-<table summary="Habitat type distribution" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;" id="distribution">
+<table summary="<%=cm.cms("habitat_distribution")%>" width="100%" border="0" cellspacing="0" cellpadding="0" id="distribution" class="sortable">
   <tr>
-    <th class="resultHeader" bgcolor="#DDDDDD">
-      <a title="Sort table by this column" href="javascript:sortTable(4, 0, 'distribution', false);"><%=contentManagement.getContent("habitats_factsheet_32")%></a>
+    <th title="<%=cm.cms("sort_results_on_this_column")%>">
+      <%=cm.cmsText("habitats_factsheet_32")%>
+      <%=cm.cmsTitle("sort_results_on_this_column")%>
     </th>
-    <th class="resultHeader" bgcolor="#DDDDDD">
-      <a title="Sort table by this column" href="javascript:sortTable(4, 1, 'distribution', false);"><%=contentManagement.getContent("habitats_factsheet_33")%></a>
+    <th title="<%=cm.cms("sort_results_on_this_column")%>">
+      <%=cm.cmsText("habitats_factsheet_33")%>
+      <%=cm.cmsTitle("sort_results_on_this_column")%>
     </th>
-    <th class="resultHeader" bgcolor="#DDDDDD">
-      <a title="Sort table by this column" href="javascript:sortTable(4, 2, 'distribution', false);"><%=contentManagement.getContent("habitats_factsheet_34")%></a>
+    <th title="<%=cm.cms("sort_results_on_this_column")%>">
+      <%=cm.cmsText("habitats_factsheet_34")%>
+      <%=cm.cmsTitle("sort_results_on_this_column")%>
     </th>
-    <th class="resultHeader" bgcolor="#DDDDDD">
-      <a title="Sort table by this column" href="javascript:sortTable(4, 3, 'distribution', false);"><%=contentManagement.getContent("habitats_factsheet_35")%></a>
+    <th title="<%=cm.cms("sort_results_on_this_column")%>">
+      <%=cm.cmsText("habitats_factsheet_35")%>
+      <%=cm.cmsTitle("sort_results_on_this_column")%>
     </th>
   </tr>
   <%
-    for(int i = 0; i < results.size(); i++) {
+    for(int i = 0; i < results.size(); i++)
+    {
       HabitatCountryPersist country = (HabitatCountryPersist) results.get(i);
   %>
   <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
@@ -71,7 +79,7 @@
     <td><%=HabitatsFactsheet.getProbabilityAndCommentForHabitatGeoscope(country.getIdReportAttributes()).get(0)%></td>
     <%
       String _comment = HabitatsFactsheet.getProbabilityAndCommentForHabitatGeoscope(country.getIdReportAttributes()).get(1).toString();
-      _comment = _comment.replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("&","&amp;");
+      _comment = _comment.replaceAll("<","&lt;").replaceAll(">","&gt;");
     %>
     <td><%=_comment%></td>
   </tr>
@@ -79,6 +87,9 @@
     }
   %>
 </table>
+<%=cm.br()%>
+<%=cm.cmsMsg("habitat_distribution")%>
+<%=cm.br()%>
 <%
   }
 %>

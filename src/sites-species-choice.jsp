@@ -4,12 +4,13 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : "Pick species, show sites" function - Popup for list of values in search page.
 --%>
-<%@page contentType="text/html"%>
-<%@page import="java.util.List, java.util.Iterator,
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
+<%@page import="java.util.List,
                 ro.finsiel.eunis.search.Utilities,
-                java.util.Enumeration,
                 ro.finsiel.eunis.jrfTables.sites.species.SpeciesDomain,
-                ro.finsiel.eunis.jrfTables.sites.species.SpeciesPersist,
                 java.util.Vector,
                 ro.finsiel.eunis.search.sites.species.SpeciesSearchCriteria,
                 ro.finsiel.eunis.WebContentManagement"%>
@@ -19,13 +20,12 @@
 </jsp:useBean>
 <%
   // Web content manager used in this page.
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
   Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), SpeciesSearchCriteria.SEARCH_SCIENTIFIC_NAME);
   boolean[] source_db = {(request.getParameter("DB_NATURA2000")!=null&&request.getParameter("DB_NATURA2000").equalsIgnoreCase("true")?true:false),(request.getParameter("DB_CORINE")!=null&&request.getParameter("DB_CORINE").equalsIgnoreCase("true")?true:false),(request.getParameter("DB_DIPLOMA")!=null&&request.getParameter("DB_DIPLOMA").equalsIgnoreCase("true")?true:false),(request.getParameter("DB_CDDA_NATIONAL")!=null&&request.getParameter("DB_CDDA_NATIONAL").equalsIgnoreCase("true")?true:false),(request.getParameter("DB_CDDA_INTERNATIONAL")!=null&&request.getParameter("DB_CDDA_INTERNATIONAL").equalsIgnoreCase("true")?true:false),(request.getParameter("DB_BIOGENETIC")!=null&&request.getParameter("DB_BIOGENETIC").equalsIgnoreCase("true")?true:false),false,(request.getParameter("DB_EMERALD")!=null&&request.getParameter("DB_EMERALD").equalsIgnoreCase("true")?true:false)};
-  List results = new Vector();
   // List of values (in accordance with searchAttribute)
-  results = new SpeciesDomain().findPopupLOV(new SpeciesSearchCriteria(searchAttribute,
+  List results = new SpeciesDomain().findPopupLOV(new SpeciesSearchCriteria(searchAttribute,
                                                                        formBean.getSearchString(),
                                                                        relationOp),
                                                        SessionManager.getShowEUNISInvalidatedSpecies(),
@@ -37,19 +37,13 @@
   <head>
     <jsp:include page="header-page.jsp" />
     <title>
-      <%=contentManagement.getContent("sites_species-choice_title", false )%>
+      <%=cm.cms("sites_species-choice_title")%>
     </title>
     <script language="JavaScript" type="text/javascript">
       <!--
       function setLine(val) {
         window.opener.document.eunis.searchString.value = val;
         window.close();
-      }
-
-      function editContent( idPage )
-      {
-        var url = "web-content-inline-editor.jsp?idPage=" + idPage;
-        window.open( url ,'', "width=540,height=500,status=0,scrollbars=0,toolbar=0,resizable=1,location=0");
       }
       // -->
     </script>
@@ -58,10 +52,12 @@
 <%
   if (results != null && results.size() > 0)
   {
-    out.print(Utilities.getTextMaxLimitForPopup(contentManagement,(results == null ? 0 : results.size())));
+    out.print(Utilities.getTextMaxLimitForPopup(cm,(results == null ? 0 : results.size())));
     SpeciesSearchCriteria speciesSearch = new SpeciesSearchCriteria(searchAttribute,formBean.getSearchString(),relationOp);
 %>
-    <h6>List of values for:</h6>
+    <h2>
+      <%=cm.cmsText("list_of_values_for")%>:
+    </h2>
     <u>
       <%=speciesSearch.getHumanMappings().get(searchAttribute)%>
     </u>
@@ -81,7 +77,7 @@
     <br />
     <br />
     <div id="tab">
-      <table summary="List of values" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+      <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
     for ( int i = 0; i < results.size(); i++ )
     {
@@ -89,7 +85,8 @@
 %>
         <tr>
           <td bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-            <a title="Click link to select the value" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(value)%>');"><%=value%></a>
+            <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(value)%>');"><%=value%></a>
+            <%=cm.cmsTitle("click_link_to_select_value")%>
           </td>
         </tr>
 <%
@@ -110,7 +107,7 @@
   {
 %>
     <strong>
-      <%=contentManagement.getContent("sites_species-choice_01")%>
+      <%=cm.cmsText("sites_species-choice_01")%>
     </strong>
     <br />
 <%
@@ -118,7 +115,12 @@
 %>
     <br />
     <form action="">
-      <input title="Close window" type="button" value="Close" onclick="javascript:window.close()" name="button" class="inputTextField" />
+      <label for="button2" class="noshow"><%=cm.cms("close_window_label")%></label>
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
+      <%=cm.cmsLabel("close_window_label")%>
+      <%=cm.cmsTitle("close_window_title")%>
+      <%=cm.cmsInput("close_window_value")%>
     </form>
+    <%=cm.cmsMsg("sites_species-choice_title")%>
   </body>
 </html>

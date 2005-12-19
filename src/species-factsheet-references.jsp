@@ -4,6 +4,10 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Species factsheet - references.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtReportsPersist,java.util.*,
                  ro.finsiel.eunis.jrfTables.Chm62edtReportsDcSourcePersist,
                  java.text.SimpleDateFormat,
@@ -116,26 +120,31 @@
     Statement ps = con.createStatement();
     ResultSet rs = ps.executeQuery(sql);
 %>
-    <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;">References</div>
-    <table summary="List of references" width="100%" border="1" cellspacing="1" cellpadding="0"  id="references" style="border-collapse:collapse">
-      <tr style="background-color:#EEEEEE">
-        <th class="resultHeaderForFactsheet" width="25%">
-          <a title="Sort by Title" href="javascript:sortTable(5,0, 'references', false);"><%=cm.getContent("species_factsheet-references_02")%></a>
+    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;">References</div>
+    <table summary="<%=cm.cms("species_factsheet-references_09_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0"  id="references" class="sortable">
+      <tr>
+        <th width="25%" title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-references_02")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th class="resultHeaderForFactsheet" width="25%">
-          <a title="Sort by Author" href="javascript:sortTable(5,1, 'references', false);"><%=cm.getContent("species_factsheet-references_03")%></a>
+        <th width="25%" title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-references_03")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th class="resultHeaderForFactsheet" width="15%">
-          <a title="Sort by Editor" href="javascript:sortTable(5,2, 'references', false);"><%=cm.getContent("species_factsheet-references_04")%></a>
+        <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-references_04")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th class="resultHeaderForFactsheet" width="15%" style="text-align:right">
-          <a title="Sort by Date" href="javascript:sortTable(5,3, 'references', false);"><%=cm.getContent("species_factsheet-references_05")%></a>
+        <th width="15%" style="text-align:right" title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-references_05")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
 <%--        <td width="10%" align="center">--%>
-<%--          <a href="javascript:sortTable(4, references, false);"><%=cm.getContent("species_factsheet-references_06")%></a>--%>
+<%--          <%=cm.cmsText("species_factsheet-references_06")%>--%>
 <%--        </td>--%>
-        <th class="resultHeaderForFactsheet" width="10%">
-          <a title="Sort by Source" href="javascript:sortTable(5,4, 'references', false);"><%=cm.getContent("species_factsheet-references_07")%></a>
+        <th width="10%">
+          <%=cm.cmsText("species_factsheet-references_07")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
 <%
@@ -198,5 +207,7 @@
     e.printStackTrace();
   }
 %>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_factsheet-references_09_Sum")%>
 <br />
 <br />

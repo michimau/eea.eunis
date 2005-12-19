@@ -34,16 +34,11 @@
  */
 package net.sf.jrf;
 
-import java.sql.SQLException;
-import java.util.Properties;
-import javax.naming.NamingException;
-
-import net.sf.jrf.*;
-import net.sf.jrf.exceptions.*;
-import net.sf.jrf.sql.JDBCHelper;
+import net.sf.jrf.exceptions.ConfigurationException;
 import net.sf.jrf.util.PropertiesHelper;
-
 import org.apache.log4j.Category;
+
+import java.util.Properties;
 
 /**
  *  This class manages the properties file for the jRelationalFramework.
@@ -302,6 +297,7 @@ public class JRFProperties {
       return null;
     }
     String result = p.getProperty(key);
+    System.out.println( key + "=" + result );
     if (result != null && result.length() > 0) {
       return result;
     }

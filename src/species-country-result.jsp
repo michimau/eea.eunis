@@ -4,8 +4,10 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Species country' function - results page.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.List,
                  ro.finsiel.eunis.WebContentManagement,
                  java.util.Iterator,
@@ -22,8 +24,10 @@
                  ro.finsiel.eunis.jrfTables.species.country.CountryPersist,
                  ro.finsiel.eunis.search.*,
                  ro.finsiel.eunis.search.save_criteria.SaveSearchCriteria,
-                 ro.finsiel.eunis.search.save_criteria.SetVectorsForSaveCriteria"%><%@ page import="ro.finsiel.eunis.search.species.country.CountrySearchCriteria"%>
+                 ro.finsiel.eunis.search.save_criteria.SetVectorsForSaveCriteria"%>
+<%@ page import="ro.finsiel.eunis.search.species.country.CountrySearchCriteria"%>
 <%@ page import="ro.finsiel.eunis.search.species.country.CountrySortCriteria"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.country.CountryBean" scope="request">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
@@ -33,15 +37,15 @@
     <jsp:include page="header-page.jsp" />
     <script language="JavaScript" type="text/javascript" src="script/species-result.js"></script>
     <%
-      WebContentManagement contentManagement = SessionManager.getWebContent();
+      WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=contentManagement.getContent("species_country-result_title", false )%>
+      <%=cm.cms("species_country-result_title")%>
     </title>
     <script language="JavaScript" type="text/javascript">
       <!--
-        var errRefineMessage = "<%=contentManagement.getContent("species_country-result_02", false )%>.";
+        var errRefineMessage = "<%=cm.cms("species_country-result_02")%>.";
         // Used in refine search ; check if criteria are empty
         function checkRefineSearch(noCriteria)
         {
@@ -175,28 +179,30 @@
 
   // Set number criteria for the search result
   int noCriteria = (null == formBean.getCriteriaSearch() ? 0 : formBean.getCriteriaSearch().length);
-  String tsvLink = "javascript:openlink('reports/species/tsv-species-country.jsp?" + formBean.toURLParam(reportFields) + "')";
+  String tsvLink = "javascript:openTSVDownload('reports/species/tsv-species-country.jsp?" + formBean.toURLParam(reportFields) + "')";
 %>
   <body  style="background-color:#ffffff">
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="Home#index.jsp,Species#species.jsp,Country/Region#species-country.jsp,Results"/>
+      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,country_biogeographic_region_location#species-country.jsp,results_location"/>
       <jsp:param name="helpLink" value="species-help.jsp"/>
       <jsp:param name="downloadLink" value="<%=tsvLink%>"/>
     </jsp:include>
 <%--      <jsp:param name="printLink" value="<%=pdfLink%>"/>--%>
-    <h5>
-        <%=contentManagement.getContent("species_country-result_01")%>
-    </h5>
+    <h1>
+        <%=cm.cmsText("species_country-result_01")%>
+    </h1>
    <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td>
         <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td>
-              <%=contentManagement.getContent("species_country-result_03")%>
+              <%=cm.cmsText("species_country-result_03")%>
               <strong><%=Utilities.treatURLAmp(formBean.getRegionName())%></strong>
-              <%=contentManagement.getContent("species_country-result_04")%>
+              <%=cm.cmsText("species_country-result_04")%>
               <strong><%=Utilities.treatURLAmp(formBean.getCountryName())%></strong>
             </td>
           </tr>
@@ -217,7 +223,7 @@
      }
        %>
         <br />
-        <%=contentManagement.getContent("species_country-result_05")%>: <strong><%=resultsCount%></strong>
+        <%=cm.cmsText("species_country-result_05")%>: <strong><%=resultsCount%></strong>
         <%// Prepare parameters for pagesize.jsp
           Vector pageSizeFormFields = new Vector(); /*  These fields are used by pagesize.jsp, included below.    */
           pageSizeFormFields.addElement("country"); /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
@@ -252,7 +258,7 @@
           <tr>
             <td style="background-color:#EEEEEE">
               <strong>
-                <%=contentManagement.getContent("species_country-result_06")%>
+                <%=cm.cmsText("species_country-result_06")%>
               </strong>
             </td>
           </tr>
@@ -260,45 +266,80 @@
             <td style="background-color:#EEEEEE">
               <form name="resultSearch" method="get" onsubmit="return(checkRefineSearch(<%=noCriteria%>));" action="">
               <%=formBean.toFORMParam(filterSearch)%>
-                <label for="select1" class="noshow">Criteria</label>
-                <select id="select1" title="Criteria" name="criteriaType" class="inputTextField">
-                  <option value="<%=CountrySearchCriteria.CRITERIA_GROUP%>"><%=contentManagement.getContent("species_country-result_07", false)%></option>
-<%--                  <option value="<%=CountrySearchCriteria.CRITERIA_ORDER%>"><%=contentManagement.getContent("species_country-result_08")%></option>--%>
-<%--                  <option value="<%=CountrySearchCriteria.CRITERIA_FAMILY%>"><%=contentManagement.getContent("species_country-result_09")%></option>--%>
-                  <option value="<%=CountrySearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected"><%=contentManagement.getContent("species_country-result_10", false)%></option>
+                <label for="select1" class="noshow"><%=cm.cms("species_country-result_20_Label")%></label>
+                <select id="select1" title="<%=cm.cms("species_country-result_20_Title")%>" name="criteriaType" class="inputTextField">
+                  <option value="<%=CountrySearchCriteria.CRITERIA_GROUP%>">
+                      <%=cm.cms("species_country-result_07")%>
+                  </option>
+<%--                  <option value="<%=CountrySearchCriteria.CRITERIA_ORDER%>"><%=cm.cms("species_country-result_08")%></option>--%>
+<%--                  <option value="<%=CountrySearchCriteria.CRITERIA_FAMILY%>"><%=cm.cms("species_country-result_09")%></option>--%>
+                  <option value="<%=CountrySearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected">
+                      <%=cm.cms("species_country-result_10")%>
+                  </option>
                 </select>
-                <label for="select2" class="noshow">Operator</label>
-                <select id="select2" title="Operator" name="oper" class="inputTextField">
-                  <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=contentManagement.getContent("species_country-result_11", false)%></option>
-                  <option value="<%=Utilities.OPERATOR_STARTS%>"><%=contentManagement.getContent("species_country-result_12", false)%></option>
-                  <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=contentManagement.getContent("species_country-result_13", false)%></option>
+                <%=cm.cmsLabel("species_country-result_20_Label")%>
+                <%=cm.cmsTitle("species_country-result_20_Title")%>
+                <label for="select2" class="noshow"><%=cm.cms("species_country-result_21_Label")%></label>
+                <select id="select2" title="<%=cm.cms("species_country-result_21_Title")%>" name="oper" class="inputTextField">
+                  <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
+                      <%=cm.cms("species_country-result_11")%>
+                  </option>
+                  <option value="<%=Utilities.OPERATOR_STARTS%>">
+                      <%=cm.cms("species_country-result_12")%>
+                  </option>
+                  <option value="<%=Utilities.OPERATOR_CONTAINS%>">
+                      <%=cm.cms("species_country-result_13")%>
+                  </option>
                 </select>
+                <%=cm.cmsLabel("species_country-result_21_Label")%>
+                <%=cm.cmsTitle("species_country-result_21_Title")%>
                 <label for="criteriaSearch" class="noshow">
-                  Criteria value
+                  <%=cm.cms("species_country-result_22_Label")%>
                 </label>
-                <input id="criteriaSearch" title="Criteria value" alt="Criteria value" class="inputTextField" name="criteriaSearch" type="text" size="30" />
+                <input id="criteriaSearch" title="<%=cm.cms("species_country-result_22_Title")%>" alt="<%=cm.cms("species_country-result_22_Title")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
+                <%=cm.cmsLabel("species_country-result_22_Label")%>
+                <%=cm.cmsTitle("species_country-result_22_Title")%>
                   <label for="search" class="noshow">
-                    <%=contentManagement.getContent("species_country-result_14", false )%>
+                    <%=cm.cms("species_country-result_14_Title")%>
                   </label>
-                <input id="search" title="<%=contentManagement.getContent("species_country-result_14", false )%>" class="inputTextField" type="submit" name="Submit" value="<%=contentManagement.getContent("species_country-result_14", false )%>" />
-                <%=contentManagement.writeEditTag( "species_country-result_14" )%>
+                <input id="search" title="<%=cm.cms("species_country-result_14_Title")%>" class="inputTextField" type="submit" name="Submit" value="<%=cm.cms("species_country-result_14")%>" />
+                <%=cm.cmsLabel("species_country-result_14_Title")%>
+                <%=cm.cmsTitle("species_country-result_14_Title")%>
+                <%=cm.cmsInput("species_country-result_14")%>
               </form>
             </td>
           </tr>
           <%-- This is the code which shows the search filters --%>
-          <%ro.finsiel.eunis.search.AbstractSearchCriteria[] criterias = formBean.toSearchCriteria();%>
-          <%if (criterias.length > 1) {%><tr><td style="background-color:#EEEEEE"><%=contentManagement.getContent("species_country-result_15")%>:</td></tr><%}%>
-          <%for (int i = criterias.length - 1; i > 0; i--) {%>
-            <%AbstractSearchCriteria criteria = criterias[i];%>
-            <%if (null != criteria && null != formBean.getCriteriaSearch()) {%>
+          <%
+              ro.finsiel.eunis.search.AbstractSearchCriteria[] criterias = formBean.toSearchCriteria();
+              if (criterias.length > 1)
+              {
+          %>
+            <tr>
+                <td style="background-color:#EEEEEE">
+                    <%=cm.cmsText("species_country-result_15")%>:
+                </td>
+           </tr>
+            <%
+                }
+              for (int i = criterias.length - 1; i > 0; i--)
+              {
+                AbstractSearchCriteria criteria = criterias[i];
+                if (null != criteria && null != formBean.getCriteriaSearch())
+                {
+            %>
               <tr>
                   <td style="background-color:#CCCCCC;text-align:left">
-                      <a title="Delete criteria" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img alt="Delete criteria" src="images/mini/delete.jpg" border="0" style="vertical-align:middle" /></a>&nbsp;&nbsp;
+                      <a title="<%=cm.cms("species_country-result_23_Title")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img alt="<%=cm.cms("species_country-result_23_Title")%>" src="images/mini/delete.jpg" border="0" style="vertical-align:middle" /></a>
+                      <%=cm.cmsTitle("species_country-result_23_Title")%>
+                      &nbsp;&nbsp;
                       <strong class="linkDarkBg"><%= i + ". " + criteria.toHumanString()%></strong>
                   </td>
               </tr>
-            <%}%>
-          <%}%>
+            <%
+                }
+              }
+          %>
         </table>
         <%
           Vector navigatorFormFields = new Vector(); /*  The following fields are used by paginator.jsp, included below.      */
@@ -332,10 +373,15 @@
           expand.addElement("criteriaType");
           String expandURL = formBean.toURLParam(expand);
           boolean isExpanded = (null == formBean.getExpand()) ? false : (formBean.getExpand().equalsIgnoreCase("true")) ? true : false;
-          if (!isExpanded) {%>
-          <a title="Expand vernacular names" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=contentManagement.getContent("species_country-result_16")%></a>
-        <%}%>
-        <table summary="Table of results" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse; text-align:left">
+          if (!isExpanded)
+          {
+        %>
+             <a title="<%=cm.cms("species_country-result_24_Title")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("species_country-result_16")%></a>
+             <%=cm.cmsTitle("species_country-result_24_Title")%>
+        <%
+          }
+        %>
+        <table summary="<%=cm.cms("search_results")%>" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse">
         <%// Compute the sort criteria
           Vector sortURLFields = new Vector();      /* Used for sorting */
           sortURLFields.addElement("country");
@@ -351,34 +397,38 @@
           AbstractSortCriteria groupCrit = formBean.lookupSortCriteria(CountrySortCriteria.SORT_GROUP);
           //AbstractSortCriteria orderCrit = formBean.lookupSortCriteria(CountrySortCriteria.SORT_ORDER);
           //AbstractSortCriteria familyCrit = formBean.lookupSortCriteria(CountrySortCriteria.SORT_FAMILY);
-          AbstractSortCriteria sciNameCrit = formBean.lookupSortCriteria(CountrySortCriteria.SORT_SCIENTIFIC_NAME);%>
+          AbstractSortCriteria sciNameCrit = formBean.lookupSortCriteria(CountrySortCriteria.SORT_SCIENTIFIC_NAME);
+        %>
         <tr>
           <th style="text-align:left" class="resultHeader">
-            <a title="Sort by group" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(groupCrit, (null == groupCrit))%>"><%=Utilities.getSortImageTag(groupCrit)%><%=contentManagement.getContent("species_country-result_07")%></a>
-          </th>
-<%--          <th align="left" class="resultHeader">--%>
-<%--            <a class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(orderCrit, (null == orderCrit) ? true : false)%>"><%=Utilities.getSortImageTag(orderCrit)%><%=contentManagement.getContent("species_country-result_08")%></a>--%>
-<%--          </th>--%>
-<%--          <th align="left" class="resultHeader">--%>
-<%--            <a class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(familyCrit, (null == familyCrit) ? true : false)%>"><%=Utilities.getSortImageTag(familyCrit)%><%=contentManagement.getContent("species_country-result_09")%></a>--%>
-<%--          </th>--%>
-          <th style="text-align:left" class="resultHeader">
-            <strong>Country</strong>
+            <a title="<%=cm.cms("species_country-result_26_Title")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(groupCrit, (null == groupCrit))%>"><%=Utilities.getSortImageTag(groupCrit)%>
+                <%=cm.cmsText("species_country-result_07")%>
+            </a>
+            <%=cm.cmsTitle("species_country-result_26_Title")%>
           </th>
           <th style="text-align:left" class="resultHeader">
-            <strong>Biogeoregion</strong>
+            <strong><%=cm.cmsText("species_country-result_27")%></strong>
           </th>
           <th style="text-align:left" class="resultHeader">
-            <a title="Sort by scientific name" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit)) %>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=contentManagement.getContent("species_country-result_10")%></a>
+            <strong><%=cm.cmsText("species_country-result_28")%></strong>
+          </th>
+          <th style="text-align:left" class="resultHeader">
+            <a title="<%=cm.cms("species_country-result_26_Title")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit)) %>"><%=Utilities.getSortImageTag(sciNameCrit)%>
+                <%=cm.cmsText("species_country-result_10")%>
+            </a>
+            <%=cm.cmsTitle("species_country-result_26_Title")%>
           </th>
 <%
             if (isExpanded)
             {
 %>
           <th style="text-align:left" class="resultHeader">
-            <%=contentManagement.getContent("species_country-result_17")%>
+            <%=cm.cmsText("species_country-result_17")%>
             &nbsp;
-            [<a title="Hide vernacular names" class="resultHeaderLink" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=contentManagement.getContent("species_country-result_18")%></a>]
+            [<a title="<%=cm.cms("species_country-result_17_Title")%>" class="resultHeaderLink" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>">
+              <%=cm.cmsText("species_country-result_18")%>
+          </a>
+          <%=cm.cmsTitle("species_country-result_17_Title")%>]
           </th>
 <%
             }
@@ -386,8 +436,10 @@
         </tr>
 <%
             Iterator it = results.iterator();
+            int col = 0;
             while (it.hasNext())
             {
+              String bgColor = col++ % 2 == 0 ? "#EEEEEE" : "#FFFFFF";
               PersistentObject specie = (PersistentObject)it.next();
               Vector vernNamesList = new Vector();
               // FIND VERNACULAR NAMES DEPENDING ON THE TYPE OF SEARCH
@@ -413,7 +465,7 @@
               if (null != countryName && !countryName.equalsIgnoreCase("any") && null != regionName && !regionName.equalsIgnoreCase("any"))
               {
 %>
-              <td style="text-align:left" width="15%" class="resultCell">
+              <td class="resultCell" style="background-color : <%=bgColor%>">
                 <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(((CountryRegionPersist)specie).getCommonName()),"&nbsp;")%>
               </td>
 <%
@@ -422,7 +474,7 @@
               if (null != countryName && countryName.equalsIgnoreCase("any") && null != regionName && !regionName.equalsIgnoreCase("any"))
               {
 %>
-              <td style="text-align:left" width="15%" class="resultCell">
+              <td class="resultCell" style="background-color : <%=bgColor%>">
                 <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(((RegionPersist)specie).getCommonName()),"&nbsp;")%>
               </td>
 <%
@@ -431,7 +483,7 @@
               if (null != countryName && !countryName.equalsIgnoreCase("any") && null != regionName && regionName.equalsIgnoreCase("any"))
               {
 %>
-              <td style="text-align:left" width="15%" class="resultCell">
+              <td class="resultCell" style="background-color : <%=bgColor%>">
                 <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(((CountryPersist)specie).getCommonName()),"&nbsp;")%>
               </td>
 <%
@@ -442,7 +494,7 @@
 <%--              if (null != countryName && !countryName.equalsIgnoreCase("any") && null != regionName && !regionName.equalsIgnoreCase("any"))--%>
 <%--              {--%>
 <%--%>--%>
-<%--              <td align="left" width="15%" class="resultCell">--%>
+<%--              <td width="15%" class="resultCell">--%>
 <%--                <%=Utilities.formatString(((CountryRegionPersist)specie).getTaxonomicNameOrder(),"&nbsp;")%>--%>
 <%--              </td>--%>
 <%--<%--%>
@@ -451,7 +503,7 @@
 <%--              if (null != countryName && countryName.equalsIgnoreCase("any") && null != regionName && !regionName.equalsIgnoreCase("any"))--%>
 <%--              {--%>
 <%--%>--%>
-<%--              <td align="left" width="15%" class="resultCell">--%>
+<%--              <td width="15%" class="resultCell">--%>
 <%--                <%=Utilities.formatString(((RegionPersist)specie).getTaxonomicNameOrder(),"&nbsp;")%>--%>
 <%--              </td>--%>
 <%--<%--%>
@@ -460,7 +512,7 @@
 <%--              if (null != countryName && !countryName.equalsIgnoreCase("any") && null != regionName && regionName.equalsIgnoreCase("any"))--%>
 <%--              {--%>
 <%--%>--%>
-<%--              <td align="left" width="15%" class="resultCell">--%>
+<%--              <td width="15%" class="resultCell">--%>
 <%--                <%=Utilities.formatString(((CountryPersist)specie).getTaxonomicNameOrder(),"&nbsp;")%>--%>
 <%--              </td>--%>
 <%--<%--%>
@@ -470,13 +522,13 @@
               if (null != countryName)
               {
 %>
-              <td style="text-align:left" width="15%" class="resultCell">
+              <td class="resultCell" style="background-color : <%=bgColor%>">
                 <%=Utilities.treatURLSpecialCharacters(countryName)%>
               </td>
 <%
               } else {
 %>
-              <td style="text-align:left" width="15%" class="resultCell">
+              <td class="resultCell" style="background-color : <%=bgColor%>">
                 &nbsp;
               </td>
 <%
@@ -485,13 +537,13 @@
               if (null != regionName)
               {
 %>
-              <td style="text-align:left" width="15%" class="resultCell">
+              <td class="resultCell" style="background-color : <%=bgColor%>">
                 <%=Utilities.treatURLSpecialCharacters(regionName)%>
               </td>
 <%
               } else {
 %>
-              <td style="text-align:left" width="15%" class="resultCell">
+              <td class="resultCell" style="background-color : <%=bgColor%>">
                 &nbsp;
               </td>
 <%
@@ -503,7 +555,7 @@
 <%--              {--%>
 <%--              String familyName = (((CountryRegionPersist)specie).getTaxonomicLevel()!=null&&((CountryRegionPersist)specie).getTaxonomicLevel().equalsIgnoreCase("family") ? (((CountryRegionPersist)specie).getTaxonomicNameFamily()!=null&&!((CountryRegionPersist)specie).getTaxonomicNameFamily().equalsIgnoreCase("null")?((CountryRegionPersist)specie).getTaxonomicNameFamily():"") : "");--%>
 <%--%>--%>
-<%--              <td align="left" width="15%" class="resultCell">--%>
+<%--              <td width="15%" class="resultCell">--%>
 <%--                <%=familyName%>--%>
 <%--              </td>--%>
 <%--<%--%>
@@ -512,7 +564,7 @@
 <%--              if (null != countryName && countryName.equalsIgnoreCase("any") && null != regionName && !regionName.equalsIgnoreCase("any")) {--%>
 <%--              String familyName = (((RegionPersist)specie).getTaxonomicLevel()!=null&&((RegionPersist)specie).getTaxonomicLevel().equalsIgnoreCase("family") ? (((RegionPersist)specie).getTaxonomicNameFamily()!=null&&!((RegionPersist)specie).getTaxonomicNameFamily().equalsIgnoreCase("null")?((RegionPersist)specie).getTaxonomicNameFamily():"") : "");--%>
 <%--%>--%>
-<%--              <td align="left" width="15%" class="resultCell">--%>
+<%--              <td width="15%" class="resultCell">--%>
 <%--                <%=familyName%>--%>
 <%--              </td>--%>
 <%--<%--%>
@@ -521,7 +573,7 @@
 <%--              if (null != countryName && !countryName.equalsIgnoreCase("any") && null != regionName && regionName.equalsIgnoreCase("any"))--%>
 <%--              {--%>
 <%--%>--%>
-<%--              <td align="left" width="15%" class="resultCell">--%>
+<%--              <td width="15%" class="resultCell">--%>
 <%--                <%=Utilities.formatString(((CountryPersist)specie).getTaxonomicNameFamily(),"&nbsp;")%>--%>
 <%--              </td>--%>
 <%
@@ -530,7 +582,7 @@
               if (null != countryName && !countryName.equalsIgnoreCase("any") && null != regionName && !regionName.equalsIgnoreCase("any"))
               {
 %>
-              <td style="text-align:left" width="22%" class="resultCell">
+              <td class="resultCell" style="background-color : <%=bgColor%>">
                 <a title="Species factsheet" href="species-factsheet.jsp?idSpecies=<%=((CountryRegionPersist)specie).getIdSpecies()%>&amp;idSpeciesLink=<%=((CountryRegionPersist)specie).getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(((CountryRegionPersist)specie).getScientificName())%></a>
               </td>
 <%
@@ -539,7 +591,7 @@
               if (null != countryName && countryName.equalsIgnoreCase("any") && null != regionName && !regionName.equalsIgnoreCase("any"))
               {
 %>
-              <td style="text-align:left" width="22%" class="resultCell">
+              <td class="resultCell" style="background-color : <%=bgColor%>">
                 <a title="Species factsheet" href="species-factsheet.jsp?idSpecies=<%=((RegionPersist)specie).getIdSpecies()%>&amp;idSpeciesLink=<%=((RegionPersist)specie).getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(((RegionPersist)specie).getScientificName())%></a>
               </td>
 <%
@@ -548,7 +600,7 @@
               if (null != countryName && !countryName.equalsIgnoreCase("any") && null != regionName && regionName.equalsIgnoreCase("any"))
               {
 %>
-              <td style="text-align:left" width="22%" class="resultCell">
+              <td class="resultCell" style="background-color : <%=bgColor%>">
                 <a title="Species factsheet" href="species-factsheet.jsp?idSpecies=<%=((CountryPersist)specie).getIdSpecies()%>&amp;idSpeciesLink=<%=((CountryPersist)specie).getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(((CountryPersist)specie).getScientificName())%></a>
               </td>
 <%
@@ -556,31 +608,33 @@
               if (isExpanded)
               {
 %>
-              <td>
+              <td class="resultCell" style="background-color : <%=bgColor%>">
                 <table summary="List of vernacular names" width="100%" border="0" cellspacing="0" cellpadding="0" style="text-align:center">
 <%                  if(sortVernList == null || sortVernList.size()<=0)
                      {
 %>
                     <tr><td>&nbsp;</td></tr>
 <%
-                   } else {
-               for (int i = 0; i < sortVernList.size(); i++)
-                {
-                  VernacularNameWrapper aVernName = (VernacularNameWrapper)sortVernList.get(i);
-                  String vernacularName = aVernName.getName();
-                  String bgColor = (0 == i % 2) ? "#EEEEEE" : "#FFFFFF";
+                   }
+                   else
+                   {
+                    for (int i = 0; i < sortVernList.size(); i++)
+                    {
+                      VernacularNameWrapper aVernName = (VernacularNameWrapper)sortVernList.get(i);
+                      String vernacularName = aVernName.getName();
+                      String bgColor1 = (0 == i % 2) ? "#EEEEEE" : "#FFFFFF";
 %>
                   <tr>
-                    <td width="30%" style="background-color:<%=bgColor%>;text-align:left" class="resultCell">
+                    <td width="30%" style="background-color:<%=bgColor1%>;text-align:left" class="resultCell">
                       <%=Utilities.treatURLSpecialCharacters(aVernName.getLanguage())%>
                     </td>
-                    <td width="70%" style="background-color:<%=bgColor%>;text-align:left" class="resultCell">
+                    <td width="70%" style="background-color:<%=bgColor1%>;text-align:left" class="resultCell">
                       <%=Utilities.treatURLSpecialCharacters(vernacularName)%>
                     </td>
                   </tr>
 <%
+                  }
                 }
-    }   
 %>
                 </table>
               </td>
@@ -593,31 +647,40 @@
 %>
         <tr>
           <th style="text-align:left" class="resultHeader">
-            <a title="Sort by group" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(groupCrit, (null == groupCrit))%>"><%=Utilities.getSortImageTag(groupCrit)%><%=contentManagement.getContent("species_country-result_07")%></a>
+            <a title="<%=cm.cms("species_country-result_26_Title")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(groupCrit, (null == groupCrit))%>"><%=Utilities.getSortImageTag(groupCrit)%>
+                <%=cm.cmsText("species_country-result_07")%>
+            </a>
+            <%=cm.cmsTitle("species_country-result_26_Title")%>
           </th>
-<%--          <th align="left" class="resultHeader">--%>
-<%--            <a class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(orderCrit, (null == orderCrit) ? true : false)%>"><%=Utilities.getSortImageTag(orderCrit)%><%=contentManagement.getContent("species_country-result_08")%></a>--%>
+<%--          <th class="resultHeader">--%>
+<%--            <a class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(orderCrit, (null == orderCrit) ? true : false)%>"><%=Utilities.getSortImageTag(orderCrit)%><%=cm.cms("species_country-result_08")%></a>--%>
 <%--          </th>--%>
-<%--          <th align="left" class="resultHeader">--%>
-<%--            <a class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(familyCrit, (null == familyCrit) ? true : false)%>"><%=Utilities.getSortImageTag(familyCrit)%><%=contentManagement.getContent("species_country-result_09")%></a>--%>
+<%--          <th class="resultHeader">--%>
+<%--            <a class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(familyCrit, (null == familyCrit) ? true : false)%>"><%=Utilities.getSortImageTag(familyCrit)%><%=cm.cms("species_country-result_09")%></a>--%>
 <%--          </th>--%>
           <th style="text-align:left" class="resultHeader">
-            <strong>Country</strong>
+            <strong><%=cm.cmsText("species_country-result_27")%></strong>
           </th>
           <th style="text-align:left" class="resultHeader">
-            <strong>Biogeoregion</strong>
+            <strong><%=cm.cmsText("species_country-result_28")%></strong>
           </th>
           <th style="text-align:left" class="resultHeader">
-            <a title="Sort by scientific name" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit))%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=contentManagement.getContent("species_country-result_10")%></a>
+            <a title="<%=cm.cms("species_country-result_26_Title")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit)) %>"><%=Utilities.getSortImageTag(sciNameCrit)%>
+                <%=cm.cmsText("species_country-result_10")%>
+            </a>
+            <%=cm.cmsTitle("species_country-result_26_Title")%>
           </th>
 <%
             if (isExpanded)
             {
 %>
           <th style="text-align:left" class="resultHeader">
-            <%=contentManagement.getContent("species_country-result_17")%>
+            <%=cm.cmsText("species_country-result_17")%>
             &nbsp;
-            [<a title="Hide vernacular names" class="resultHeaderLink" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=contentManagement.getContent("species_country-result_18")%></a>]
+            [<a title="<%=cm.cms("species_country-result_17_Title")%>" class="resultHeaderLink" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>">
+              <%=cm.cmsText("species_country-result_18")%>
+          </a>
+          <%=cm.cmsTitle("species_country-result_17_Title")%>]
           </th>
 <%
             }
@@ -636,9 +699,30 @@
     </td>
   </tr>
 </table>
+
+<%=cm.br()%>
+<%=cm.cmsMsg("species_country-result_title")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_country-result_02")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_country-result_07")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_country-result_10")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_country-result_11")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_country-result_12")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_country-result_13")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_country-result_25_Sum")%>
+<%=cm.br()%>
+
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="species-country-result.jsp" />
     </jsp:include>
+  </div>
+  </div>
   </div>
   </body>
 </html>

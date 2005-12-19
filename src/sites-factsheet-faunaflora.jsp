@@ -4,6 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Fauna and flora' - part of site's factsheet.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.factsheet.sites.SiteFactsheet,
                  java.util.List,
                  ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesPersist,
@@ -16,7 +20,7 @@
 <%
   String siteid = request.getParameter("idsite");
   SiteFactsheet factsheet = new SiteFactsheet(siteid);
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   int type = factsheet.getType();
   String designationDescr = factsheet.getDesignation();
 
@@ -46,9 +50,9 @@
             SiteFactsheet.TYPE_DIPLOMA == type)) // If some attributes are non-null and site is from these dbs
   {
 %>
-    <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;"><%=contentManagement.getContent("sites_factsheet_61")%></div>
+    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_61")%></div>
     <%-- Site contact authorities --%>
-    <table summary="<%=contentManagement.getContent("sites_factsheet_61", false )%>" border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse" >
+    <table summary="<%=cm.cms("sites_factsheet_61")%>" border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse" >
 <%
     if (SiteFactsheet.TYPE_NATURA2000 == type ||
               SiteFactsheet.TYPE_EMERALD == type ||
@@ -58,7 +62,7 @@
 %>
       <tr bgcolor="#EEEEEE">
         <td width="40%">
-          <%=contentManagement.getContent("sites_factsheet_62")%>
+          <%=cm.cmsText("sites_factsheet_62")%>
         </td>
         <td width="60%">
           <%=respondent%>
@@ -71,7 +75,7 @@
 %>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_63")%>
+          <%=cm.cmsText("sites_factsheet_63")%>
         </td>
         <td>
           <%=author%>
@@ -87,7 +91,7 @@
 %>
       <tr bgcolor="#EEEEEE">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_64")%>
+          <%=cm.cmsText("sites_factsheet_64")%>
         </td>
         <td>
           <%=manager%>
@@ -100,7 +104,7 @@
 %>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_65")%>
+          <%=cm.cmsText("sites_factsheet_65")%>
         </td>
         <td>
           <%=information%>
@@ -108,7 +112,7 @@
       </tr>
       <tr bgcolor="#EEEEEE">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_66")%>
+          <%=cm.cmsText("sites_factsheet_66")%>
         </td>
         <td>
           <%=officialContactInternational%>&nbsp;
@@ -116,7 +120,7 @@
       </tr>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_67")%>
+          <%=cm.cmsText("sites_factsheet_67")%>
         </td>
         <td>
           <%=officialContactNational%>&nbsp;
@@ -124,7 +128,7 @@
       </tr>
       <tr bgcolor="#EEEEEE">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_68")%>
+          <%=cm.cmsText("sites_factsheet_68")%>
         </td>
         <td>
           <%=officialContactRegional%>&nbsp;
@@ -132,7 +136,7 @@
       </tr>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_69")%>
+          <%=cm.cmsText("sites_factsheet_69")%>
         </td>
         <td>
           <%=officialContactLocal%>&nbsp;
@@ -190,7 +194,7 @@
       <tr>
         <td colspan="2" bgcolor="#DDDDDD">
           <strong>
-            Description
+            <%=cm.cmsText("sites_factsheet_faunaflora_description")%>
           </strong>
         </td>
       </tr>
@@ -203,7 +207,7 @@
 %>
       <tr bgcolor="#EEEEEE">
         <td width="30%">
-          <%=contentManagement.getContent("sites_factsheet_70")%>
+          <%=cm.cmsText("sites_factsheet_70")%>
         </td>
         <td width="70%">
           <%=character%>&nbsp;
@@ -216,7 +220,7 @@
 %>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_71")%>
+          <%=cm.cmsText("sites_factsheet_71")%>
         </td>
         <td>
           <%=quality%>&nbsp;
@@ -224,7 +228,7 @@
       </tr>
       <tr bgcolor="#EEEEEE">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_72")%>
+          <%=cm.cmsText("sites_factsheet_72")%>
         </td>
         <td>
           <%=vulnerability%>&nbsp;
@@ -232,7 +236,7 @@
       </tr>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_73")%>
+          <%=cm.cmsText("sites_factsheet_73")%>
         </td>
         <td>
           <%=designation%>&nbsp;
@@ -240,7 +244,7 @@
       </tr>
       <tr bgcolor="#EEEEEE">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_74")%>
+          <%=cm.cmsText("sites_factsheet_74")%>
         </td>
         <td>
           <%=ownership%>&nbsp;
@@ -248,7 +252,7 @@
       </tr>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_75")%>
+          <%=cm.cmsText("sites_factsheet_75")%>
         </td>
         <td>
           <%=documentation%>&nbsp;
@@ -261,7 +265,7 @@
 %>
       <tr bgcolor="#EEEEEE">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_76")%>
+          <%=cm.cmsText("sites_factsheet_76")%>
         </td>
         <td>
           <%=characterization%>&nbsp;
@@ -269,7 +273,7 @@
       </tr>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_77")%>
+          <%=cm.cmsText("sites_factsheet_77")%>
         </td>
         <td>
           <%=floraCharacterization%>&nbsp;
@@ -277,7 +281,7 @@
       </tr>
       <tr bgcolor="#EEEEEE">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_78")%>
+          <%=cm.cmsText("sites_factsheet_78")%>
         </td>
         <td>
           <%=faunaCharacterization%>&nbsp;
@@ -285,7 +289,7 @@
       </tr>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_79")%>
+          <%=cm.cmsText("sites_factsheet_79")%>
         </td>
         <td>
           <%=potentialVegetation%>&nbsp;
@@ -298,7 +302,7 @@
 %>
       <tr bgcolor="#EEEEEE">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_80")%>
+          <%=cm.cmsText("sites_factsheet_80")%>
         </td>
         <td>
           <%=geomorphology%>&nbsp;
@@ -306,14 +310,14 @@
       </tr>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=contentManagement.getContent("sites_factsheet_81")%>
+          <%=cm.cmsText("sites_factsheet_81")%>
         </td>
         <td>
           <%=educationalInterest%>&nbsp;
         </td>
       </tr>
       <tr bgcolor="#EEEEEE">
-        <td><%=contentManagement.getContent("sites_factsheet_82")%></td>
+        <td><%=cm.cmsText("sites_factsheet_82")%></td>
         <td><%=culturalHeritage%>&nbsp;</td>
       </tr>
 <%
@@ -322,7 +326,7 @@
   {
 %>
       <tr bgcolor="#FFFFFF">
-        <td><%=contentManagement.getContent("sites_factsheet_83")%></td>
+        <td><%=cm.cmsText("sites_factsheet_83")%></td>
         <td><%=justification%>&nbsp;</td>
       </tr>
 <%
@@ -331,11 +335,11 @@
   {
 %>
       <tr bgcolor="#EEEEEE">
-        <td><%=contentManagement.getContent("sites_factsheet_84")%></td>
+        <td><%=cm.cmsText("sites_factsheet_84")%></td>
         <td><%=methodology%>&nbsp;</td>
       </tr>
       <tr bgcolor="#FFFFFF">
-        <td><%=contentManagement.getContent("sites_factsheet_85")%></td>
+        <td><%=cm.cmsText("sites_factsheet_85")%></td>
         <td><%=budget%>&nbsp;</td>
       </tr>
 <%
@@ -347,7 +351,7 @@
   {
 %>
       <tr bgcolor="#EEEEEE">
-        <td><%=contentManagement.getContent("sites_factsheet_86")%></td>
+        <td><%=cm.cmsText("sites_factsheet_86")%></td>
         <td><%=managementPlan%>&nbsp;</td>
       </tr>
 <%
@@ -356,11 +360,11 @@
   {
 %>
       <tr bgcolor="#FFFFFF">
-        <td><%=contentManagement.getContent("sites_factsheet_87")%></td>
+        <td><%=cm.cmsText("sites_factsheet_87")%></td>
         <td><a title="Official URL" href="<%=urlOfficial%>"><%=urlOfficial%></a>&nbsp;</td>
       </tr>
       <tr bgcolor="#EEEEEE">
-        <td><%=contentManagement.getContent("sites_factsheet_88")%></td>
+        <td><%=cm.cmsText("sites_factsheet_88")%></td>
         <td><a title="URL interesting" href="<%=urlInteresting%>"><%=urlInteresting%></a>&nbsp;</td>
       </tr>
 <%
@@ -385,62 +389,77 @@
         List sitesSpecificspecies = factsheet.findSitesSpecificSpecies();
         if (!species.isEmpty() || !sitesSpecificspecies.isEmpty())
         {
-          Chm62edtReportAttributesPersist attribute = null;
+          Chm62edtReportAttributesPersist attribute;
           if ( species.size() > 0 )
           {
 %>
 
-      <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;"><%=contentManagement.getContent("sites_factsheet_89")%></div>
-      <table summary="<%=contentManagement.getContent("sites_factsheet_89", false )%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="species" style="border-collapse:collapse">
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_89")%></div>
+      <table summary="<%=cm.cms("sites_factsheet_89")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="species" class="sortable">
         <tr>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 13, 0, 'species', false);"><%=contentManagement.getContent("sites_factsheet_90")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_90")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Sort results by this column" href="javascript:sortTable( 13, 1, 'species', false);"><%=contentManagement.getContent("sites_factsheet_91")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_91")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Sort results by this column" href="javascript:sortTable( 13, 2, 'species', false);"><%=contentManagement.getContent("sites_factsheet_92")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_92")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Sort results by this column" href="javascript:sortTable( 13, 3, 'species', false);"><%=contentManagement.getContent("sites_factsheet_93")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_93")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Wintering status.Sort results by this column" href="javascript:sortTable( 13, 4, 'species', false);"><%=contentManagement.getContent("sites_factsheet_94")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_94")%>
+            <%=cm.cmsTitle("sites_factsheet_faunaflora_wintering")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Species listed in Annexes of Directives.Sort results by this column" href="javascript:sortTable( 13, 5, 'species', false);"><%=contentManagement.getContent("sites_factsheet_95")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_95")%>
+            <%=cm.cmsTitle("sites_factsheet_faunaflora_annexesofdirectives")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Population status.Sort results by this column" href="javascript:sortTable( 13, 6, 'species', false);"><%=contentManagement.getContent("sites_factsheet_96")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_96")%>
+            <%=cm.cmsTitle("sites_factsheet_faunaflora_populationstatus")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Sort results by this column" href="javascript:sortTable( 13, 7, 'species', false);"><%=contentManagement.getContent("sites_factsheet_97")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_97")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Sort results by this column" href="javascript:sortTable( 13, 8, 'species', false);"><%=contentManagement.getContent("sites_factsheet_98")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_98")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Conservation status.Sort results by this column" href="javascript:sortTable( 13, 9, 'species', false);"><%=contentManagement.getContent("sites_factsheet_99")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_99")%>
+            <%=cm.cmsTitle("sites_factsheet_faunaflora_conservationstatus")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Sort results by this column" href="javascript:sortTable( 13, 10, 'species', false);"><%=contentManagement.getContent("sites_factsheet_100")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_100")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Sort results by this column" href="javascript:sortTable( 13, 11, 'species', false);"><%=contentManagement.getContent("sites_factsheet_101")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_101")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Sort results by this column" href="javascript:sortTable( 13, 12, 'species', false);"><%=contentManagement.getContent("sites_factsheet_102")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_102")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
 <%
           for (int i = 0; i < species.size(); i++)
           {
             SiteSpeciesPersist specie = (SiteSpeciesPersist)species.get(i);
+            String attrValue;
 %>
         <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
           <td>
-            <a title="Species factsheet" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getSpeciesScientificName()%></a>
+            <a title="<%=cm.cms("open_site_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getSpeciesScientificName()%></a>
+            <%=cm.cmsTitle("open_site_factsheet")%>
           </td>
           <td align="center">
             <%=specie.getSpeciesCommonName()%>
@@ -474,16 +493,52 @@
             <%=(null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : ""%>
           </td>
           <td align="center">
-            <%attribute = factsheet.findSiteAttributes("CONSERVATION", specie.getIdReportAttributes());%>
-            <%=(null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : ""%>
+<%
+            attribute = factsheet.findSiteAttributes("CONSERVATION", specie.getIdReportAttributes());
+            if ( attribute != null && attribute.getValue() != null && attribute.getValue().length() > 0 )
+            {
+              attrValue = sqlc.ExecuteSQL( "SELECT NAME FROM CHM62EDT_NATURA2000_CONSERVATION_CODE WHERE ID_CONSERVATION_CODE='" + attribute.getValue() + "'" );
+%>
+              <span class="boldUnderline" title="<%=attrValue%>"><%=attribute.getValue()%></span>
+<%
+            } else {
+%>
+              &nbsp;
+<%
+            }
+%>
           </td>
           <td align="center">
-            <%attribute = factsheet.findSiteAttributes("ISOLATION",specie.getIdReportAttributes());%>
-            <%=(null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : ""%>
+<%
+            attribute = factsheet.findSiteAttributes("ISOLATION",specie.getIdReportAttributes());
+            if ( attribute != null && attribute.getValue() != null && attribute.getValue().length() > 0 )
+            {
+              attrValue = sqlc.ExecuteSQL( "SELECT NAME FROM CHM62EDT_ISOLATION WHERE ID_ISOLATION='" + attribute.getValue() + "'" );
+%>
+              <span class="boldUnderline" title="<%=attrValue%>"><%=attribute.getValue()%></span>
+<%
+            } else {
+%>
+              &nbsp;
+<%
+            }
+%>
           </td>
           <td align="center">
-            <%attribute = factsheet.findSiteAttributes("GLOBAL", specie.getIdReportAttributes());%>
-            <%=(null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : ""%>
+<%
+            attribute = factsheet.findSiteAttributes("GLOBAL", specie.getIdReportAttributes());
+            if ( attribute != null && attribute.getValue() != null && attribute.getValue().length() > 0 )
+            {
+              attrValue = sqlc.ExecuteSQL( "SELECT NAME FROM CHM62EDT_GLOBAL WHERE ID_GLOBAL='" + attribute.getValue() + "'" );
+%>
+              <span class="boldUnderline" title="<%=attrValue%>"><%=attribute.getValue()%></span>
+<%
+            } else {
+%>
+              &nbsp;
+<%
+            }
+%>
           </td>
           <td align="center">
             <%attribute = factsheet.findSiteAttributes("SPECIES_STATUS", specie.getIdReportAttributes());%>
@@ -500,11 +555,11 @@
     if (sitesSpecificspecies.size() > 0)
     {
 %>
-      <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;"><%=contentManagement.getContent("sites_factsheet_103")%></div>
-      <table summary="<%=contentManagement.getContent("sites_factsheet_103", false )%>" border="1" cellpadding="1" cellspacing="1" width="100%" name="speciesNonEUNIS" id="speciesNonEUNIS" cols="1" style="border-collapse:collapse">
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_103")%></div>
+      <table summary="<%=cm.cms("sites_factsheet_103")%>" border="1" cellpadding="1" cellspacing="1" width="100%" name="speciesNonEUNIS" id="speciesNonEUNIS" cols="1" style="border-collapse:collapse">
         <tr>
           <th class="resultHeader">
-            <%=contentManagement.getContent("sites_factsheet_104")%>
+            <%=cm.cmsText("sites_factsheet_104")%>
           </th>
         </tr>
 <%
@@ -515,7 +570,8 @@
 %>
             <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
               <td>
-                <a title="<%=contentManagement.getContent("sites_factsheet_105",false)%>" href="javascript:openGooglePics('http://www.google.com/search?q=<%=specie.getValue()%>')"><%=specie.getValue()%></a>
+                <a title="<%=cm.cms("sites_factsheet_105")%>" href="javascript:openGooglePics('http://www.google.com/search?q=<%=specie.getValue()%>')"><%=specie.getValue()%></a>
+                <%=cm.cmsTitle("sites_factsheet_105")%>
               </td>
             </tr>
 <%
@@ -538,46 +594,56 @@
       if (!eunisSpeciesListedAnnexesDirectives.isEmpty() || !eunisSpeciesOtherMentioned.isEmpty()
       || !notEunisSpeciesListedAnnexesDirectives.isEmpty() || !notEunisSpeciesOtherMentioned.isEmpty())
       {
-        Chm62edtReportAttributesPersist attribute = null;
+        Chm62edtReportAttributesPersist attribute;
 %>
-      <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;"><%=contentManagement.getContent("sites_factsheet_106")%></div>
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_106")%></div>
       <%-- species mentioned in annexes and directives --%>
 <%
     if (!eunisSpeciesListedAnnexesDirectives.isEmpty() || !notEunisSpeciesListedAnnexesDirectives.isEmpty())
     {
 %>
-      <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;"><%=contentManagement.getContent("sites_factsheet_97")%></div>
-      <table summary="<%=contentManagement.getContent("sites_factsheet_97", false )%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="species1" style="border-collapse:collapse">
-        <tr bgcolor="#DDDDDD">
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 10, 0, 'species1', false);"><%=contentManagement.getContent("sites_factsheet_107")%></a>
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_97")%></div>
+      <table summary="<%=cm.cms("sites_factsheet_97")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="species1" class="sortable">
+        <tr>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_107")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 10, 1, 'species1', false);"><%=contentManagement.getContent("sites_factsheet_108")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_108")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Sort results by this column" href="javascript:sortTable( 10, 2, 'species1', false);"><%=contentManagement.getContent("sites_factsheet_92")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_92")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Sort results by this column" href="javascript:sortTable( 10, 3, 'species1', false);"><%=contentManagement.getContent("sites_factsheet_93")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_93")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Wintering.Sort results by this column" href="javascript:sortTable( 10, 4, 'species1', false);"><%=contentManagement.getContent("sites_factsheet_94")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_94")%>
+            <%=cm.cmsTitle("sites_factsheet_faunaflora_wintering")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Sort results by this column" href="javascript:sortTable( 10, 5, 'species1', false);"><%=contentManagement.getContent("sites_factsheet_95")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_95")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Conservation status.Sort results by this column" href="javascript:sortTable( 10, 6, 'species1', false);"><%=contentManagement.getContent("sites_factsheet_99")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_99")%>
+            <%=cm.cmsTitle("sites_factsheet_faunaflora_conservationstatus")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Population status.Sort results by this column" href="javascript:sortTable( 10, 7, 'species1', false);"><%=contentManagement.getContent("sites_factsheet_96")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_96")%>
+            <%=cm.cmsTitle("sites_factsheet_faunaflora_populationstatus")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Sort results by this column" href="javascript:sortTable( 10, 8, 'species1', false);"><%=contentManagement.getContent("sites_factsheet_100")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_100")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader" align="center">
-            <a title="Sort results by this column" href="javascript:sortTable( 10, 9, 'species1', false);"><%=contentManagement.getContent("sites_factsheet_101")%></a>
+          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_101")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
 <%
@@ -589,7 +655,8 @@
 %>
         <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
           <td>
-            <a title="Species factsheet" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getSpeciesScientificName()%></a>
+            <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getSpeciesScientificName()%></a>
+            <%=cm.cmsTitle("open_species_factsheet")%>
           </td>
           <td>
             <%=specie.getSpeciesCommonName()%>
@@ -734,20 +801,24 @@
     if (!eunisSpeciesOtherMentioned.isEmpty() || !notEunisSpeciesOtherMentioned.isEmpty())
     {
 %>
-      <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;"><%=contentManagement.getContent("sites_factsheet_103")%></div>
-      <table summary="<%=contentManagement.getContent("sites_factsheet_103", false )%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="species_other" style="border-collapse:collapse">
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_103")%></div>
+      <table summary="<%=cm.cms("sites_factsheet_103")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="species_other" class="sortable">
         <tr>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 4, 0, 'species_other', false);"><%=contentManagement.getContent("sites_factsheet_111")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_111")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 4, 1, 'species_other', false);"><%=contentManagement.getContent("sites_factsheet_110")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_110")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 4, 2, 'species_other', false);"><%=contentManagement.getContent("sites_factsheet_113")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_113")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
-          <th class="resultHeader">
-            <a title="Sort results by this column" href="javascript:sortTable( 4, 3, 'species_other', false);"><%=contentManagement.getContent("sites_factsheet_112")%></a>
+          <th title="<%=cm.cms("sort_results_on_this_column")%>">
+            <%=cm.cmsText("sites_factsheet_112")%>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
 <%
@@ -762,7 +833,8 @@
             <%=specie.getSpeciesCommonName()%>
           </td>
           <td>
-           <a title="Species factsheet" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getSpeciesScientificName()%></a>
+           <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getSpeciesScientificName()%></a>
+           <%=cm.cmsTitle("open_species_factsheet")%>
           </td>
           <td>
             <%attribute = factsheet.findSiteAttributes("OTHER_POPULATION",specie.getIdReportAttributes());%>

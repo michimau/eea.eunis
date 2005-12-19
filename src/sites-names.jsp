@@ -4,7 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : "Sites names" function - search page.
 --%>
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.Vector,
                  ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.search.sites.names.NameSortCriteria,
@@ -14,14 +17,13 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   // Web content manager used in this page.
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   String siteNameFromFactsheet = (request.getParameter("siteNameFromFactsheet") == null ? "" : request.getParameter("siteNameFromFactsheet").trim());
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-    <script language="JavaScript" type="text/javascript" src="script/utils.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/sites-names.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/sites-names-save-criteria.js"></script>
@@ -37,18 +39,24 @@
           document.eunis.DB_DIPLOMA.checked = true;
           document.eunis.DB_CDDA_INTERNATIONAL.checked = true;
           document.eunis.DB_BIOGENETIC.checked = true;
+          document.eunis.DB_EMERALD.checked = true;
+          document.eunis.DB_CORINE.checked = true;
+          document.eunis.DB_NATURA2000.checked = true;
         }
       }
       //-->
     </script>
     <title>
-      <%=application.getInitParameter("PAGE_TITLE")%><%=contentManagement.getContent("sites_names_title", false )%>
+      <%=application.getInitParameter("PAGE_TITLE")%>
+      <%=cm.cms("sites_names_title")%>
     </title>
   </head>
   <body onload="functionOnLoad()">
+    <div id="outline">
+    <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="Home#index.jsp,Sites#sites.jsp,Name"/>
+        <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_names_location"/>
         <jsp:param name="helpLink" value="sites-help.jsp"/>
         <jsp:param name="mapLink" value="show"/>
       </jsp:include>
@@ -58,81 +66,116 @@
         <input type="hidden" name="sort" value="<%=NameSortCriteria.SORT_NAME%>" />
         <input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
         <input type="hidden" name="noSoundex" value="true" />
-        <h5>
-          <%=contentManagement.getContent("sites_names_01")%>
-        </h5>
-        <%=contentManagement.getContent("sites_names_21")%>
+        <h1>
+          <%=cm.cmsText("sites_names_01")%>
+        </h1>
+        <%=cm.cmsText("sites_names_21")%>
         <br />
         <br />
         <div class="grey_rectangle">
           <strong>
-            <%=contentManagement.getContent("sites_names_20")%>
+            <%=cm.cmsText("search_will_provide_following_information")%>
           </strong>
           <br />
-          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=contentManagement.getContent("sites_names_03", false )%>" />
-          <label for="showSourceDB"><%=contentManagement.getContent("sites_names_03" )%></label>
+          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_names_03")%>" />
+          <label for="showSourceDB"><%=cm.cmsText("sites_names_03" )%></label>
+          <%=cm.cmsTitle("sites_names_03")%>
 
-          <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=contentManagement.getContent("sites_names_04", false )%>" />
-          <label for="showCountry"><%=contentManagement.getContent("sites_names_04" )%></label>
+          <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_names_04")%>" />
+          <label for="showCountry"><%=cm.cmsText("sites_names_04" )%></label>
+          <%=cm.cmsTitle("sites_names_04")%>
 
-          <input id="showName" name="showName" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=contentManagement.getContent("sites_names_06", false )%>" />
-          <label for="showName"><%=contentManagement.getContent("sites_names_06" )%></label>
+          <input id="showName" name="showName" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("sites_names_06")%>" />
+          <label for="showName"><%=cm.cmsText("sites_names_06" )%></label>
+          <%=cm.cmsTitle("sites_names_06")%>
 
-          <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=contentManagement.getContent("sites_names_05", false )%>" />
-          <label for="showDesignationTypes"><%=contentManagement.getContent("sites_names_05" )%></label>
+          <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_names_05")%>" />
+          <label for="showDesignationTypes"><%=cm.cmsText("sites_names_05" )%></label>
+          <%=cm.cmsTitle("sites_names_05")%>
 
-          <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=contentManagement.getContent("sites_names_07", false )%>" />
-          <label for="showCoordinates"><%=contentManagement.getContent("sites_names_07" )%></label>
+          <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_names_07")%>" />
+          <label for="showCoordinates"><%=cm.cmsText("sites_names_07" )%></label>
+          <%=cm.cmsTitle("sites_names_07")%>
 
-          <input id="showSize" name="showSize" type="checkbox" value="true" checked="checked" title="<%=contentManagement.getContent("sites_names_08", false )%>" />
-          <label for="showSize"><%=contentManagement.getContent("sites_names_08")%></label>
+          <input id="showSize" name="showSize" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_names_08")%>" />
+          <label for="showSize"><%=cm.cmsText("sites_names_08")%></label>
+          <%=cm.cmsTitle("sites_names_08")%>
 
-          <input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=contentManagement.getContent("sites_names_09", false )%>" />
-          <label for="showDesignationYear"><%=contentManagement.getContent("sites_names_09")%></label>
+          <!--<input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("sites_names_09")%>" />-->
+          <!--<label for="showDesignationYear"><%=cm.cmsText("sites_names_09")%></label>-->
+          <%--<%=cm.cmsTitle("sites_names_09")%>--%>
         </div>
-        <img align="middle" alt="<%=Accesibility.getText( "generic.criteria.mandatory")%>" title="<%=Accesibility.getText( "generic.criteria.mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
+        <img align="middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
+        <%=cm.cmsAlt("field_mandatory")%>
         <strong>
-          <%=contentManagement.getContent("sites_names_10")%>
+          <%=cm.cmsText("sites_names_10")%>
         </strong>
-        <label for="relationOp" class="noshow">Operator</label>
-        <select id="relationOp" name="relationOp" class="inputTextField" title="Operator">
+        <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
+        <select id="relationOp" name="relationOp" class="inputTextField" title="<%=cm.cms("operator")%>">
           <option value="<%=Utilities.OPERATOR_IS%>">
-            <%=contentManagement.getContent("sites_names_13", false)%>
+            <%=cm.cms("sites_names_13")%>
           </option>
           <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-            <%=contentManagement.getContent("sites_names_14", false)%>
+            <%=cm.cms("sites_names_14")%>
           </option>
           <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected">
-            <%=contentManagement.getContent("sites_names_15", false)%>
+            <%=cm.cms("sites_names_15")%>
           </option>
         </select>
-        <label for="englishName" class="noshow">Search term</label>
-        <input id="englishName" name="englishName" size="32" class="inputTextField" value="<%=siteNameFromFactsheet%>" title="Search term" />
-        <a title="<%=Accesibility.getText( "generic.popup.lov" )%>" href="javascript:openHelper('sites-names-choice.jsp')"><img src="images/helper/helper.gif" alt="<%=Accesibility.getText( "generic.popup.lov" )%>" title="<%=Accesibility.getText( "generic.popup.lov" )%>" width="11" height="18" border="0" align="middle" /></a>
+        <%=cm.cmsLabel("operator")%>
+        <%=cm.cmsTitle("operator")%>
+        <%=cm.cmsInput("sites_names_13")%>
+        <%=cm.cmsInput("sites_names_14")%>
+        <%=cm.cmsInput("sites_names_15")%>
+
+        <label for="englishName" class="noshow"><%=cm.cms("sites_names_sitename")%></label>
+        <input id="englishName" name="englishName" size="32" class="inputTextField" value="<%=siteNameFromFactsheet%>" title="<%=cm.cms("sites_names_sitename")%>" />
+        <%=cm.cmsLabel("sites_names_sitename")%>
+        <%=cm.cmsInput("sites_names_sitename")%>
+
+        <a title="<%=cm.cms("helper")%>" href="javascript:openHelper('sites-names-choice.jsp')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" align="middle" /></a>
+        <%=cm.cmsTitle("helper")%>
+        <%=cm.cmsAlt("helper")%>
         <br />
-        <img align="middle" alt="<%=Accesibility.getText( "generic.criteria.optional" )%>" title="<%=Accesibility.getText( "generic.criteria.optional" )%>" src="images/mini/field_optional.gif" width="11" height="12" />
+        <img align="middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
+        <%=cm.cmsAlt("field_optional")%>
         <strong>
-          <%=contentManagement.getContent("sites_names_11")%>
+          <%=cm.cmsText("sites_names_11")%>
         </strong>
-        <label for="country" class="noshow">Country</label>
-        <input id="country" name="country" type="text" size="30" class="inputTextField" title="Country" />
-        <a title="<%=Accesibility.getText( "generic.popup.lov" )%>" href="javascript:chooseCountry('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=Accesibility.getText( "generic.popup.lov" )%>" title="<%=Accesibility.getText( "generic.popup.lov" )%>" width="11" height="18" border="0" align="middle" /></a>
+        <label for="country" class="noshow"><%=cm.cms("sites_names_countryname")%></label>
+        <input id="country" name="country" type="text" size="30" class="inputTextField" title="<%=cm.cms("sites_names_countryname")%>" />
+        <%=cm.cmsLabel("sites_names_countryname")%>
+        <%=cm.cmsTitle("sites_names_countryname")%>
+        <a title="<%=cm.cms("helper")%>" href="javascript:chooseCountry('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" align="middle" /></a>
+        <%=cm.cmsTitle("helper")%>
+        <%=cm.cmsAlt("helper")%>
         <br />
-        <img align="middle" alt="<%=Accesibility.getText( "generic.criteria.optional" )%>" title="<%=Accesibility.getText( "generic.criteria.optional" )%>" src="images/mini/field_optional.gif" width="11" height="12" />
+        <img align="middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
+        <%=cm.cmsAlt("field_optional")%>
         <strong>
-          <%=contentManagement.getContent("sites_names_12")%>
-          <label for="yearMin" class="noshow">Minimum year</label>
-          <input id="yearMin" name="yearMin" type="text" maxlength="4" size="4" class="inputTextField" title="Minimum year" />
+          <%=cm.cmsText("sites_names_12")%>
+          <label for="yearMin" class="noshow"><%=cm.cms("minimum_designation_year")%></label>
+          <input id="yearMin" name="yearMin" type="text" maxlength="4" size="4" class="inputTextField" title="<%=cm.cms("minimum_designation_year")%>" />
+          <%=cm.cmsLabel("minimum_designation_year")%>
+          <%=cm.cmsTitle("minimum_designation_year")%>
           and
-          <label for="yearMax" class="noshow">Maximum year</label>
-          <input id="yearMax" name="yearMax" type="text" maxlength="4" size="4" class="inputTextField" title="Maximum year" />
+          <label for="yearMax" class="noshow"><%=cm.cms("maximum_designation_year")%></label>
+          <input id="yearMax" name="yearMax" type="text" maxlength="4" size="4" class="inputTextField" title="<%=cm.cms("maximum_designation_year")%>" />
+          <%=cm.cmsLabel("maximum_designation_year")%>
+          <%=cm.cmsTitle("maximum_designation_year")%>
         </strong>
         <div class="submit_buttons">
-          <label for="reset" class="noshow">Reset values</label>
-          <input type="reset" value="Reset" id="reset" name="Reset" title="Reset" class="inputTextField" />&nbsp;&nbsp;
-          <label for="submit2" class="noshow">Search</label>
-          <input type="submit" value="<%=contentManagement.getContent("sites_names_18", false)%>" id="submit2" name="Submit2" title="Search" class="inputTextField" />
-          <%=contentManagement.writeEditTag( "sites_names_18" )%>
+          <label for="reset" class="noshow"><%=cm.cms("reset_btn_label")%></label>
+          <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset_btn_value")%>" class="inputTextField" title="<%=cm.cms("reset_btn_title")%>" />
+          <%=cm.cmsLabel("reset_btn_label")%>
+          <%=cm.cmsTitle("reset_btn_title")%>
+          <%=cm.cmsInput("reset_btn_value")%>
+
+          <label for="submit2" class="noshow"><%=cm.cms("search_btn_label")%></label>
+          <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=cm.cms("search_btn_value")%>" title="<%=cm.cms("search_btn_title")%>" />
+          <%=cm.cmsLabel("search_btn_label")%>
+          <%=cm.cmsTitle("search_btn_title")%>
+          <%=cm.cmsInput("search_btn_value")%>
         </div>
         <jsp:include page="sites-search-common.jsp" />
       </form>
@@ -155,8 +198,10 @@
     String expandSearchCriteria = (request.getParameter("expandSearchCriteria")==null?"no":request.getParameter("expandSearchCriteria"));
 %>
       <br />
-    <%=contentManagement.getContent("sites_names_19")%>
-      <a title="<%=Accesibility.getText( "generic.criteria.save" )%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-names.jsp','4','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=Accesibility.getText( "generic.criteria.save" )%>" title="<%=Accesibility.getText( "generic.criteria.save" )%>" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+      <%=cm.cmsText("sites_names_19")%>
+      <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-names.jsp','4','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+      <%=cm.cmsTitle("save")%>
+      <%=cm.cmsAlt("save")%>
       <jsp:include page="show-criteria-search.jsp">
         <jsp:param name="pageName" value="<%=pageName%>" />
         <jsp:param name="pageNameResult" value="<%=pageNameResult%>" />
@@ -165,9 +210,13 @@
 <%
   }
 %>
+
+      <%=cm.cmsMsg("sites_names_title")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="sites-names.jsp" />
       </jsp:include>
+    </div>
+    </div>
     </div>
   </body>
 </html>

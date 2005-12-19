@@ -4,8 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Display tree of the species taxonomy.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.search.species.taxcode.*,
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.jrfTables.Chm62edtTaxonomyDomain,
@@ -20,18 +22,19 @@
   <jsp:setProperty name="treeBeantax" property="*" />
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
   <jsp:include page="header-page.jsp" />
     <link rel="StyleSheet" href="css/tree.css" type="text/css" />
     <script language="JavaScript" type="text/javascript" src="script/tree.js"></script>
-    <script language="JavaScript" type="text/javascript" src="script/sort-table.js"></script>
+  <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
     <%
-      WebContentManagement contentManagement = SessionManager.getWebContent();
+      WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=contentManagement.getContent("habitats_taxonomic-browser_title", false )%>
+      <%=cm.cms("habitats_taxonomic-browser_title")%>
     </title>
     <%
       TaxonomicBrowser tree = new TaxonomicBrowser();
@@ -127,19 +130,21 @@
     </script>
   </head>
   <body style="background-color:#ffffff">
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
   <div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="Home#index.jsp,Species#species.jsp,Taxonomic classification#species-taxonomic-browser.jsp" />
+      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,taxonomic_classification_location#species-taxonomic-browser.jsp" />
       <jsp:param name="helpLink" value="species-help.jsp" />
     </jsp:include>
-    <h5>
-         <%=contentManagement.getContent("habitats_taxonomic-browser_01")%>
-    </h5>
+    <h1>
+         <%=cm.cmsText("habitats_taxonomic-browser_01")%>
+    </h1>
     <table summary="layout" width="100%" border="0">
       <tr>
         <td>
-          <%=contentManagement.getContent("habitats_taxonomic-browser_02")%>
+          <%=cm.cmsText("habitats_taxonomic-browser_02")%>
           <br />
           <br />
           <%
@@ -151,11 +156,11 @@
               {
           %>
                 <form name="setings" action="species-taxonomic-browser.jsp" method="post">
-                  <%=contentManagement.getContent("habitats_taxonomic-browser_04")%>:
-                 <label for="select1" class="noshow">Depth</label>
-                 <select id="select1" title="Depth" name="depth" onchange="MM_jumpMenu('parent',this,0)" class="inputTextField">
+                  <%=cm.cmsText("habitats_taxonomic-browser_04")%>:
+                 <label for="select1" class="noshow"><%=cm.cms("depth")%></label>
+                 <select id="select1" title="<%=cm.cms("depth")%>" name="depth" onchange="MM_jumpMenu('parent',this,0)" class="inputTextField">
                     <option value="species-taxonomic-browser.jsp" <%=(request.getParameter("level")==null)?"selected=\"selected\"":""%> >
-                      <%=contentManagement.getContent("habitats_taxonomic-browser_03", false)%>
+                      <%=cm.cms("habitats_taxonomic-browser_03")%>
                     </option>
                     <%
                       // Display the levels
@@ -163,12 +168,14 @@
                       {
                     %>
                       <option value="species-taxonomic-browser.jsp?level=<%=ii%>&amp;idTaxonomy=<%=idTaxonomy%>" <%=(request.getParameter("level")!=null&&request.getParameter("level").equals((new Integer(ii)).toString())) ? "selected=\"selected\"" : ""%>>
-                        <%=contentManagement.getContent("habitats_taxonomic-browser_05")%> <%=ii%>
+                        <%=cm.cms("habitats_taxonomic-browser_05")%> <%=ii%>
                       </option>
                     <%
                       }
                     %>
                   </select>
+                  <%=cm.cmsLabel("depth")%>
+                  <%=cm.cmsTitle("depth")%>
                 </form>
           <%
               }
@@ -188,8 +195,8 @@
                   while (it.hasNext())
                   {
                     Chm62edtTaxcodePersist h= (Chm62edtTaxcodePersist) it.next();%>
-                        <a title="Taxonomic browser" href="species-taxonomic-browser.jsp?idTaxonomy=<%=h.getIdTaxcode()%>"><%=h.getTaxonomicLevel()%>&nbsp;<%=h.getTaxonomicName()%>
-                      </a> <br />
+                        <a title="<%=cm.cms("taxonomic_browser")%>" href="species-taxonomic-browser.jsp?idTaxonomy=<%=h.getIdTaxcode()%>"><%=h.getTaxonomicLevel()%>&nbsp;<%=h.getTaxonomicName()%>
+                      </a><%=cm.cmsTitle("taxonomic_browser")%> <br />
                 <%
                   }
                 %>
@@ -220,7 +227,6 @@
                       createTreeSpeciesTaxonomy('<%=taxLevel%>','<%=taxName%>',<%=level%>,level1,Tree1,0,<%=(idTaxExpanded==null)?"0":treeBeantax.getOpenNode()%>, "species-taxonomic-browser.jsp");
                     //-->
                     </script>
-                    <noscript>Your browser does not support JavaScript!</noscript>
                   </div>
                 </td>
               </tr>
@@ -244,18 +250,26 @@
              <tr style="background-color:#CCCCCC">
               <td>
                 <strong>
-                  <%=contentManagement.getContent("habitats_taxonomic-browser_06")%>
+                  <%=cm.cmsText("habitats_taxonomic-browser_06")%>
                 </strong>
               </td>
             </tr>
              <tr>
                <td>
-                  <table summary="List of species" border="1" style="border-collapse:collapse" cellpadding="1" cellspacing="1" width="100%" id="species">
-                  <tr style="background-color:#DDDDDD">
-                    <th class="resultHeader">
-                      <a title="Sort by Group name" href="javascript:sortTable(2,0, 'species', false);"><strong><%=contentManagement.getContent("habitats_taxonomic-browser_07")%></strong></a>
+                  <table summary="<%=cm.cms("list_species")%>" border="1" style="border-collapse:collapse" cellpadding="1" cellspacing="1" width="100%" id="species">
+                  <tr>
+                    <th title="<%=cm.cms("sort_results_on_this_column")%>">
+                      <strong>
+                        <%=cm.cmsText("habitats_taxonomic-browser_07")%>
+                        <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </strong>
                     </th>
-                    <th class="resultHeader"><a title="Sort by Scientific name" href="javascript:sortTable(2,1, 'species', false);"><strong><%=contentManagement.getContent("habitats_taxonomic-browser_08")%></strong></a></th>
+                    <th title="<%=cm.cms("sort_results_on_this_column")%>">
+                      <strong>
+                        <%=cm.cmsText("habitats_taxonomic-browser_08")%>
+                        <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </strong>
+                    </th>
                   </tr>
                   <%
                      for (int i=0;i<species.size();i++)
@@ -267,7 +281,8 @@
                       <%=Utilities.formatString((specie.getCommonName() != null ? specie.getCommonName().replaceAll("&","&amp;") : ""),"&nbsp;")%>
                     </td>
                     <td>
-                      <a title="Species factsheet" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=Utilities.formatString(specie.getScientificName(),"&nbsp;")%></a>
+                      <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=Utilities.formatString(specie.getScientificName(),"&nbsp;")%></a>
+                      <%=cm.cmsTitle("open_species_factsheet")%>
                     </td>
                   </tr>
                   <%
@@ -283,7 +298,7 @@
 %>
                   <tr>
                   <td>
-                  <span style="color : red;"><%=contentManagement.getContent("habitats_taxonomic-browser_09")%>.</span>
+                  <span style="color : red;"><%=cm.cmsText("habitats_taxonomic-browser_09")%>.</span>
                   </td>
                   </tr>
 <%
@@ -292,9 +307,22 @@
            }
            %>
     </table>
+
+<%=cm.br()%>  
+<%=cm.cmsMsg("habitats_taxonomic-browser_title")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("habitats_taxonomic-browser_03")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("habitats_taxonomic-browser_05")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("list_species")%>
+<%=cm.br()%>
+
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="species-taxonomic-browser.jsp" />
     </jsp:include>
+  </div>
+  </div>
   </div>
   </body>
 </html>

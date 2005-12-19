@@ -4,10 +4,13 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Upload pictures for sites, species and habitats
 --%>
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.factsheet.PicturesHelper,
                  ro.finsiel.eunis.search.Utilities,
-                 ro.finsiel.eunis.admin.EUNISUploadServlet"%>
+                 ro.finsiel.eunis.admin.EUNISUploadServlet"%><%@ page import="java.io.File"%><%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   // Request parameters
@@ -31,6 +34,7 @@
   {
     scientificName = PicturesHelper.findHabitatsByIDObject(IDObject);
   }
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -40,18 +44,21 @@
       <!--
         function validateForm() {
           if (document.uploadPicture.filename.value == "") {
-            alert("Please click 'Browse' and select the appropriate file from your computer.");
+            alert("<%=cm.cms("pictures_upload_click_browse")%>");
             return false;
           }
           if (document.uploadPicture.description.value.length > 255) {
-            alert("The description text exceeds the limit of 255 characters. Cannot upload picture.");
+            alert("<%=cm.cms("pictures_upload_limit_description")%>");
             return false;
           }
           return true;
         }
       //-->
     </script>
-      <title>Upload images for <%=scientificName%></title>
+      <title>
+        <%=cm.cms("pictures_upload_page_title")%>
+        <%=scientificName%>
+      </title>
   </head>
   <body>
 <%
@@ -61,31 +68,57 @@
     {
 %>
     <p>
-      This page allows to upload new pictures for <strong><%=scientificName%></strong>.
+      <%=cm.cmsText("pictures_upload_description")%> <strong><%=scientificName%></strong>.
     </p>
     <p>
-      Please click browse and select the picture from your computer.
+      <%=cm.cmsText("pictures_upload_browse")%>.
       <br />
     </p>
-    <form action="/eunis/fileupload" method="post" enctype="multipart/form-data" name="uploadPicture" onsubmit="return validateForm();">
+    <%
+      String contextPath = request.getContextPath();
+      if( contextPath.endsWith( "/" ) )
+      {
+        contextPath += "fileupload";
+      }
+      else
+      {
+        contextPath += "/fileupload";
+      }
+    %>
+    <form action="<%=contextPath%>" method="post" enctype="multipart/form-data" name="uploadPicture" onsubmit="return validateForm();">
       <input type="hidden" name="uploadType" value="picture" />
       <input type="hidden" name="natureobjecttype" value="<%=NatureObjectType%>" />
       <input type="hidden" name="idobject" value="<%=IDObject%>" />
       <p>
-        <label for="filename" class="noshow">Filename</label>
-        <input id="filename" name="filename" type="file" size="50" class="inputTextField" />
+        <label for="filename" class="noshow"><%=cm.cms("pictures_upload_filename_label")%></label>
+        <input id="filename" name="filename" type="file" size="50" class="inputTextField" title="<%=cm.cms("pictures_upload_filename_label")%>" />
+        <%=cm.cmsLabel("pictures_upload_filename_label")%>
       </p>
       <p>
-        Picture description (max 255 characters)
+        <%=cm.cmsText("pictures_upload_pictures_description")%>
         <br />
-        <label for="description" class="noshow">Picture description</label>
-        <textarea id="description" name="description" cols="60" rows="5"></textarea>
+        <label for="description" class="noshow"><%=cm.cms("pictures_upload_description_label")%></label>
+        <textarea id="description" name="description" cols="60" rows="5" class="inputTextField" title="<%=cm.cms("pictures_upload_description_label")%>"></textarea>
+        <%=cm.cmsLabel("pictures_upload_description_label")%>
       </p>
       <p>
-        <label for="reset" class="noshow">Reset values</label>
-        <input type="reset" id="reset" title="Reset values" name="Reset" value="Reset" class="inputTextField" />
-        <label for="submit" class="noshow">Upload</label>
-        <input type="submit" id="submit" title="Submit" name="Submit" value="Upload" class="inputTextField" />
+        <label for="reset" class="noshow"><%=cm.cms("pictures_upload_reset_label")%></label>
+        <input type="reset" id="reset" title="<%=cm.cms("pictures_upload_reset_title")%>" name="Reset" value="<%=cm.cms("pictures_upload_reset_value")%>" class="inputTextField" />
+        <%=cm.cmsLabel("pictures_upload_reset_label")%>
+        <%=cm.cmsTitle("pictures_upload_reset_title")%>
+        <%=cm.cmsInput("pictures_upload_reset_value")%>
+
+        <label for="submit" class="noshow"><%=cm.cms("pictures_upload_upload_label")%></label>
+        <input type="submit" id="submit" title="<%=cm.cms("pictures_upload_upload_title")%>" name="Submit" value="<%=cm.cms("pictures_upload_upload_value")%>" class="inputTextField" />
+        <%=cm.cmsLabel("pictures_upload_upload_label")%>
+        <%=cm.cmsTitle("pictures_upload_upload_title")%>
+        <%=cm.cmsInput("pictures_upload_upload_value")%>
+
+        <label for="button0" class="noshow"><%=cm.cms("close_window_label")%></label>
+        <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button0" name="button" class="inputTextField" />
+        <%=cm.cmsLabel("close_window_label")%>
+        <%=cm.cmsTitle("close_window_title")%>
+        <%=cm.cmsInput("close_window_value")%>
       </p>
     </form>
 <%
@@ -101,6 +134,28 @@
     else if (null != IDObject && null != NatureObjectType && null != operation && operation.equalsIgnoreCase("delete"))
     {
       boolean ret = PicturesHelper.deletePicture(IDObject, NatureObjectType, scientificName, filename);
+      // Delete picture physically from disk
+      String tomcatHome = application.getInitParameter( "TOMCAT_HOME" );
+      String baseDir = "";
+      if (null != NatureObjectType && NatureObjectType.equalsIgnoreCase("species"))
+      {
+        baseDir = application.getInitParameter( "UPLOAD_DIR_PICTURES_SPECIES" );
+      }
+      if (null != NatureObjectType && NatureObjectType.equalsIgnoreCase("Sites"))
+      {
+        baseDir = application.getInitParameter( "UPLOAD_DIR_PICTURES_SITES");
+      }
+      if (null != NatureObjectType && NatureObjectType.equalsIgnoreCase("Habitats"))
+      {
+        baseDir = application.getInitParameter( "UPLOAD_DIR_PICTURES_HABITATS");
+      }
+      String absoluteFilename = tomcatHome + "/" + baseDir + filename;
+      File absolutFile = new File( absoluteFilename );
+      if ( absolutFile.exists() )
+      {
+        System.out.println( "removing file:" + absoluteFilename );
+        absolutFile.delete();
+      }
 %>
     <%-- Delete the picture --%>
     <script language="JavaScript" type="text/javascript">
@@ -109,13 +164,13 @@
       if (ret)
       {
 %>
-      alert("Picture was successfully deleted from the server! Please refresh the parent page to refresh status.");
+      alert("<%=cm.cms("pictures_upload_success")%>.");
 <%
       }
       else
       {
 %>
-      alert("Picture could not be deleted from the server!");
+      alert("<%=cm.cms("pictures_upload_error")%>!");
 <%
       }
 %>
@@ -127,22 +182,43 @@
     else
     {
 %>
-    This page was accessed in a wrong way.
+    <%=cm.cms("pictures_upload_denied")%>.
     <br />
-    <a title="Close Window" href="javascript:this.window.close()">Close</a>
+    <form action="">
+      <label for="button1" class="noshow"><%=cm.cms("close_window_label")%></label>
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button1" name="button" class="inputTextField" />
+      <%=cm.cmsLabel("close_window_label")%>
+      <%=cm.cmsTitle("close_window_title")%>
+      <%=cm.cmsInput("close_window_value")%>
+    </form>
 <%
     }
   }
   else
   {
 %>
-    You must be logged in and have the 'upload pictures' right in order to access this page.
+    <%=cm.cms("pictures_upload_login")%>.
     <br />
-    <div style="width : 740px; text-align:left;">
-      <input type="button" onClick="javascript:window.close();" value="Close" title="Close window" name="button" class="inputTextField" />
+    <div style="width : 100%; text-align:left;">
+      <form action="">
+        <label for="button2" class="noshow"><%=cm.cms("close_window_label")%></label>
+        <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
+        <%=cm.cmsLabel("close_window_label")%>
+        <%=cm.cmsTitle("close_window_title")%>
+        <%=cm.cmsInput("close_window_value")%>
+      </form>
     </div>
 <%
   }
 %>
+    <%=cm.cmsMsg("pictures_upload_click_browse")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("pictures_upload_limit_description")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("pictures_upload_page_title")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("pictures_upload_success")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("pictures_upload_error")%>
   </body>
 </html>

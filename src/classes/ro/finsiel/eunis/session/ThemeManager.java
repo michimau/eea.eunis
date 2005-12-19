@@ -94,15 +94,22 @@ public class ThemeManager implements Serializable {
     return currentTheme.getLightColor();
   }
 
+  /**
+   * Retrive color for INPUT text form field.
+   * @return color from current theme
+   */
   public String getInputFieldColor() {
     return currentTheme.getInputFieldColor();
   }
 
+  /**
+   * Getter for currentTheme property
+   * @return Current web application look
+   */
   public ThemeWrapper getCurrentTheme()
   {
     return currentTheme;
   }
-
 
   /**
    * Change currently used theme in web page.

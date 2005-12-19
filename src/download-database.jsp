@@ -4,34 +4,44 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Display links to downloadable databases (zipped mdb etc.)
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=contentManagement.getContent("generic_download-database_title", false )%>
+      <%=cm.cms("generic_download-database_title")%>
     </title>
     <jsp:include page="header-page.jsp" />
   </head>
   <body>
+    <div id="outline">
+    <div id="alignment">
+    <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="Home#index.jsp,Services#services.jsp,Download database"/>
+      <jsp:param name="location" value="home_location#index.jsp,services_location#services.jsp,download_database_location"/>
     </jsp:include>
-    <h5>
-      <%=contentManagement.getContent("generic_download-database_01")%>
-    </h5>
+    <h1>
+      <%=cm.cmsText("generic_download-database_01")%>
+    </h1>
     <br />
-    <a title="Download database" href="downloads/eunis.zip"><%=contentManagement.getContent("generic_download-database_02")%></a>
+    <a title="<%=cm.cms("generic_download-database_02")%>" href="downloads/eunis.zip"><%=cm.cmsText("generic_download-database_02")%></a>
     <br />
     <br />
+    <%=cm.cmsMsg("generic_download-database_title")%>
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="download-database.jsp" />
     </jsp:include>
+    </div>
+    </div>
+    </div>
   </body>
 </html>

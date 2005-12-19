@@ -235,10 +235,18 @@ public class GroupsBean extends AbstractFormBean {
     this.showVernacularNames = showVernacularNames;
   }
 
+  /**
+   * Getter.
+   * @return showGroup
+   */
   public String getShowGroup() {
     return showGroup;
   }
 
+  /**
+   * Setter.
+   * @param showGroup New value
+   */
   public void setShowGroup( String showGroup ) {
     this.showGroup = showGroup;
   }

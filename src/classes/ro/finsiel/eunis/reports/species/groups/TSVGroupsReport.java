@@ -6,7 +6,7 @@ import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.species.groups.GroupsDomain;
 import ro.finsiel.eunis.jrfTables.species.groups.GroupsPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.JavaSorter;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
@@ -19,7 +19,7 @@ import java.util.Vector;
 
 
 /**
- * Generate the PDF reports for Species -> Groups search
+ * XML and PDF report.
  *
  * @author Monica Secrieru
  * @version 1.0
@@ -27,21 +27,23 @@ import java.util.Vector;
 public class TSVGroupsReport extends AbstractTSVReport
 {
   /**
-   * Use the bean in order to see which columns should I display on the report
+   * Use the bean in order to see which columns should I display on the report.
    */
   private GroupsBean formBean = null;
 
   /**
-   * Constructor
+   * Constructor.
    *
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
+   * @param showEUNISInvalidatedSpecies Show invalidated species
    */
   public TSVGroupsReport( String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies )
   {
     super( "SpeciesCountryReport_" + sessionID + ".tsv" );
     this.formBean = ( GroupsBean ) formBean;
     this.filename = "SpeciesCountryReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "SpeciesCountryReport_" + sessionID + ".xml" );
     if ( null != formBean )
     {
       dataFactory = new GroupsPaginator( new GroupsDomain( formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies ) );
@@ -53,17 +55,17 @@ public class TSVGroupsReport extends AbstractTSVReport
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader()
+  public List<String> createHeader()
   {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     headers.addElement( "Group" );
     headers.addElement( "Order" );
     headers.addElement( "Family" );
@@ -91,6 +93,7 @@ public class TSVGroupsReport extends AbstractTSVReport
         return;
       }
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
         List resultSet = dataFactory.getPage( _currPage );
@@ -103,12 +106,18 @@ public class TSVGroupsReport extends AbstractTSVReport
           cellOrder = specie.getTaxonomicNameOrder();
           cellOrder = ( null == specie.getTaxonomicNameOrder() ) ? "" : ( specie.getTaxonomicNameOrder().equalsIgnoreCase( "null" ) ) ? "" : cellOrder;
           cellFamily = ( specie.getTaxonomyLevel() != null && specie.getTaxonomyLevel().equalsIgnoreCase( "family" ) ? ( specie.getTaxonomicNameFamily() != null && !specie.getTaxonomicNameFamily().equalsIgnoreCase( "null" ) ? specie.getTaxonomicNameFamily() : "" ) : "" );
-          Vector aRow = new Vector();
+          Vector<String> aRow = new Vector<String>();
+          Vector<String> xmlRow = new Vector<String>();
           aRow.addElement( cellGroup );
+          xmlRow.addElement( cellGroup );
           aRow.addElement( cellOrder );
+          xmlRow.addElement( cellOrder );
           aRow.addElement( cellFamily );
+          xmlRow.addElement( cellFamily );
           aRow.addElement( specie.getScientificName() );
+          xmlRow.addElement( specie.getScientificName() );
           // Vernacular names (multiple rows)
+          String xmlVernacularNames = "";
           Vector vernNamesList = SpeciesSearchUtility.findVernacularNames( specie.getIdNatureObject() );
           if ( vernNamesList.size() > 0 )
           {
@@ -128,7 +137,7 @@ public class TSVGroupsReport extends AbstractTSVReport
               }
               else
               {
-                Vector anotherRow = new Vector();
+                Vector<String> anotherRow = new Vector<String>();
                 anotherRow.addElement( "" );
                 anotherRow.addElement( "" );
                 anotherRow.addElement( "" );
@@ -139,6 +148,7 @@ public class TSVGroupsReport extends AbstractTSVReport
                 anotherRow.addElement( aVernName.getName() );
                 writeRow( anotherRow );
               }
+              xmlVernacularNames += "<name language=\"" + aVernName.getLanguage() + "\">" + aVernName.getName() + "</name>";
             }
           }
           else
@@ -146,6 +156,9 @@ public class TSVGroupsReport extends AbstractTSVReport
             aRow.addElement( "-" );
             writeRow( aRow );
           }
+          xmlRow.add( xmlVernacularNames );
+          // XML Report
+          xmlreport.writeRow( xmlRow );
         }
       }
     }

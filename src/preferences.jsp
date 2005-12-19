@@ -4,13 +4,13 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'User preferences' function.
 --%>
-<%@page import="java.util.*,
-                ro.finsiel.eunis.jrfTables.users.UserPersist,
-                ro.finsiel.eunis.search.Utilities,
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
+<%@page import="ro.finsiel.eunis.search.Utilities,
                 ro.finsiel.eunis.session.ThemeManager,
-                ro.finsiel.eunis.session.ThemeWrapper,
-                ro.finsiel.eunis.WebContentManagement,
-                ro.finsiel.eunis.jrfTables.Chm62edtLanguagePersist"%>
+                ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="FormBean" class="ro.finsiel.eunis.formBeans.UserPrefsBean" scope="request">
   <jsp:setProperty name="FormBean" property="*"/>
@@ -22,7 +22,7 @@
   /// * themeIndex - Which theme to use
   String action = FormBean.getAction();
   int themeIndex = Utilities.checkedStringToInt(FormBean.getThemeIndex(), 0);
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 
   if ( action.equals( "save" ) )
   {
@@ -37,82 +37,69 @@
   <head>
     <jsp:include page="header-page.jsp" />
     <title>
-      <%=application.getInitParameter("PAGE_TITLE")%>Application Preferences
+      <%=application.getInitParameter("PAGE_TITLE")%>
+      <%=cm.cms("preferences_page_title")%>
     </title>
   </head>
   <body>
+    <div id="outline">
+    <div id="alignment">
     <div id="content">
-    <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="Home#index.jsp,Preferences"/>
-    </jsp:include>
-    <h5>
-      Preferences
-    </h5>
-    <%=contentManagement.getContent("generic_preferences_01")%>
-    <br />
-    <br />
-    <form name="preferences" action="preferences.jsp" method="post">
-      <input name="action" type="hidden" id="action" value="save" />
-        <label for="themeIndex">Web page theme color</label>
-        <select id="themeIndex" name="themeIndex" title="Web page theme color">
+      <jsp:include page="header-dynamic.jsp">
+        <jsp:param name="location" value="home_location#index.jsp,preferences_location"/>
+      </jsp:include>
+      <h1>
+        <%=cm.cmsText("preferences_title")%>
+      </h1>
+      <%=cm.cmsText("generic_preferences_01")%>
+      <br />
+      <br />
+      <form name="preferences" action="preferences.jsp" method="post">
+        <input name="action" type="hidden" id="action" value="save" />
+        <label for="themeIndex"><%=cm.cmsText("preferences_theme_label")%></label>
+        <select id="themeIndex" name="themeIndex" title="<%=cm.cms("preferences_theme_title")%>">
           <option value="<%=ThemeManager.THEME_SKY_BLUE%>"
             <%=SessionManager.getThemeManager().getCurrentTheme().equals( ThemeManager.SKY_BLUE ) ? "selected=\"selected\"" : ""%>>
-            Sky blue
+            <%=cm.cms("preferences_theme_sky_blue")%>
           </option>
           <option value="<%=ThemeManager.THEME_FRESH_ORANGE%>"
             <%=SessionManager.getThemeManager().getCurrentTheme().equals( ThemeManager.FRESH_ORANGE ) ? "selected=\"selected\"" : ""%>>
-            Fresh orange
+            <%=cm.cms("preferences_theme_fresh_orange")%>
           </option>
           <option value="<%=ThemeManager.THEME_NATURE_GREEN%>"
             <%=SessionManager.getThemeManager().getCurrentTheme().equals( ThemeManager.NATURE_GREEN ) ? "selected=\"selected\"" : ""%>>
-            Nature green
+            <%=cm.cms("preferences_theme_nature_green")%>
           </option>
           <option value="<%=ThemeManager.THEME_CHERRY%>"
             <%=SessionManager.getThemeManager().getCurrentTheme().equals( ThemeManager.CHERRY ) ? "selected=\"selected\"" : ""%>>
-            Cherry
+            <%=cm.cms("preferences_theme_cherry")%>
           </option>
           <option value="<%=ThemeManager.THEME_BLACKWHITE%>"
             <%=SessionManager.getThemeManager().getCurrentTheme().equals( ThemeManager.BLACKWHITE ) ? "selected=\"selected\"" : ""%>>
-            High contrast
+            <%=cm.cms("preferences_theme_bw")%>
           </option>
         </select>
+        <%=cm.cmsLabel("preferences_theme_label")%>
+        <%=cm.cmsTitle("preferences_theme_title")%>
+        <%=cm.cmsInput("preferences_theme_sky_blue")%>
+        <%=cm.cmsInput("preferences_theme_fresh_orange")%>
+        <%=cm.cmsInput("preferences_theme_nature_green")%>
+        <%=cm.cmsInput("preferences_theme_cherry")%>
+        <%=cm.cmsInput("preferences_theme_bw")%>
         <br />
-        <br />
-<%
-        List translatedLanguages = contentManagement.getTranslatedLanguages();
-%>
-        <label for="language_international1">Language</label>
-        <select id="language_international1" title="Language" name="language_international" class="inputTextField" disabled="disabled">
-          <option value="en">English</option>
-<%
-        String selected;
-        for ( int i = 0; i < translatedLanguages.size(); i++ )
-        {
-          Chm62edtLanguagePersist language = ( Chm62edtLanguagePersist )translatedLanguages.get( i );
-          if ( language.getCode().equalsIgnoreCase( SessionManager.getCurrentLanguage() ) )
-          {
-            selected = "selected=\"selected\"";
-          }
-          else
-          {
-            selected = "";
-          }
-%>
-          <option value="<%=language.getCode()%>" <%=selected%>>
-            <%=language.getNameEn()%>
-          </option>
-<%
-        }
-%>
-        </select>
-        <br />
-        <br />
-        <label for="Submit" class="noshow">Save Preferences</label>
-        <input type="submit" name="Submit" id="Submit" value="Save Preferences" title="Save Preferences" class="inputTextField" />
+        <label for="submit1" class="noshow"><%=cm.cms("preferences_save_label")%></label>
+        <input id="submit1" type="submit" name="Submit" value="<%=cm.cms("preferences_save_value")%>" title="<%=cm.cms("preferences_save_title")%>" class="inputTextField" />
+        <%=cm.cmsLabel("preferences_save_label")%>
+        <%=cm.cmsTitle("preferences_save_title")%>
+        <%=cm.cmsInput("preferences_save_value")%>
       </form>
+
+      <%=cm.cmsMsg("preferences_page_title")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="preferences.jsp" />
       </jsp:include>
+    </div>
+    </div>
     </div>
   </body>
 </html>

@@ -8,13 +8,16 @@ package ro.finsiel.eunis.jrfTables.users;
 import net.sf.jrf.domain.PersistentObject;
 
 
+/**
+ * Persistent object.
+ */
 public class RightsPersist extends PersistentObject {
   /** This is a database field. */
   private String rightName = null;
   /** This is a database field. */
   private String description = null;
 
-  /** Default constructor */
+  /** Default constructor. */
   public RightsPersist() {
     super();
   }

@@ -4,17 +4,18 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : "Sites Number/Total area" function - Popup for list of values in search page.
 --%>
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@page import="java.util.List,
                 ro.finsiel.eunis.search.Utilities,
                 ro.finsiel.eunis.search.sites.SitesSearchUtility,
                 ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist,
                 ro.finsiel.eunis.WebContentManagement"%>
-<%@page import="ro.finsiel.eunis.jrfTables.Chm62edtSitesDomain"%>
-<%@page import="ro.finsiel.eunis.jrfTables.Chm62edtSitesPersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   String name = Utilities.formatString( request.getParameter("designation"), "%" );
 //  boolean[] source_db =
 //  {
@@ -42,7 +43,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
     <title>
-      <%=contentManagement.getContent("sites_statistical-choice_title", false )%>
+      <%=cm.cms("sites_statistical-choice_title")%>
     </title>
     <script language="JavaScript" type="text/javascript">
       <!--
@@ -54,19 +55,21 @@
     </script>
   </head>
   <body>
-    <h6>List of values for:</h6>
+    <h2>
+      <%=cm.cmsText("list_of_values_for")%>:
+    </h2>
 <%
   if ( name.equalsIgnoreCase( "%" ) )
   {
 %>
-    All designations
+    <%=cm.cms("sites_statistical_choice_alldesignations")%>
 <%
   }
   else
   {
 %>
     <u>
-      <%=contentManagement.getContent("sites_statistical-choice_01")%>
+      <%=cm.cmsText("sites_statistical-choice_01")%>
     </u>
     <em>
       <%=Utilities.ReturnStringRelatioOp(Utilities.OPERATOR_CONTAINS)%>
@@ -80,7 +83,7 @@
     <br />
     <br />
     <div id="tab">
-      <table summary="List of values" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+      <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
     for (int i = 0; i < sites.size(); i++)
     {
@@ -91,7 +94,8 @@
 %>
         <tr bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
           <td>
-            <a title="Click link to select the value" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(description)%>');"><%=description%></a>
+            <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(description)%>');"><%=description%></a>
+            <%=cm.cmsTitle("click_link_to_select_value")%>
           </td>
         </tr>
 <%
@@ -107,7 +111,7 @@
   {
 %>
     <strong>
-      <%=contentManagement.getContent("sites_statistical-choice_02")%>
+      <%=cm.cmsText("sites_statistical-choice_02")%>
     </strong>
     <br />
     <br />
@@ -115,7 +119,14 @@
   }
 %>
     <form action="">
-      <input title="Close window" type="button" value="Close" onclick="javascript:window.close()" name="button" class="inputTextField" />
+      <label for="button2" class="noshow"><%=cm.cms("close_window_label")%></label>
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
+      <%=cm.cmsLabel("close_window_label")%>
+      <%=cm.cmsTitle("close_window_title")%>
+      <%=cm.cmsInput("close_window_value")%>
     </form>
+    <%=cm.cmsMsg("sites_statistical-choice_title")%>
+    <%=cm.br()%>
+    <%=cm.cmsMsg("list_of_values")%>
   </body>
 </html>

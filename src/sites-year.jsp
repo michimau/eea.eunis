@@ -4,7 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : "Sites year" function - search page.
 --%>
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.search.Utilities,
                  java.util.Vector,
                  ro.finsiel.eunis.WebContentManagement"%>
@@ -12,7 +15,7 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   // Web content manager used in this page.
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   String relationOpParam = request.getParameter("relationOp");
   int relationOp = Utilities.checkedStringToInt(relationOpParam, -1);
 %>
@@ -20,7 +23,6 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-    <script language="JavaScript" type="text/javascript" src="script/utils.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/sites-year-save-criteria.js"></script>
     <script language="JavaScript" type="text/JavaScript">
@@ -37,8 +39,8 @@
   if (relationOp != Utilities.OPERATOR_BETWEEN.intValue())
   {
 %>
-            var errInvalidYear = "<%=contentManagement.getContent("sites_year_02", false )%>";
-            var errDesignationYear = "<%=contentManagement.getContent("sites_year_03", false )%>";
+            var errInvalidYear = "<%=cm.cms("sites_year_02")%>";
+            var errDesignationYear = "<%=cm.cms("sites_year_03")%>";
 
             document.eunis.searchString.value = trim(document.eunis.searchString.value);
             if (document.eunis.searchString.value == "")
@@ -64,10 +66,10 @@
   else
   {
 %>
-            var errInvalidYear = "<%=contentManagement.getContent("sites_year_04", false )%>";
-            var errMinDesignationYear = "<%=contentManagement.getContent("sites_year_05", false )%>";
-            var errMaxDesignationYear = "<%=contentManagement.getContent("sites_year_06", false )%>";
-            var errInvalidYearCombination = "<%=contentManagement.getContent("sites_year_07", false )%>";
+            var errInvalidYear = "<%=cm.cms("sites_year_04")%>";
+            var errMinDesignationYear = "<%=cm.cms("sites_year_05")%>";
+            var errMaxDesignationYear = "<%=cm.cms("sites_year_06")%>";
+            var errInvalidYearCombination = "<%=cm.cms("sites_year_07")%>";
 
             document.eunis.searchStringMin.value = trim(document.eunis.searchStringMin.value);
             document.eunis.searchStringMax.value = trim(document.eunis.searchStringMax.value);
@@ -107,100 +109,138 @@
     //-->
     </script>
     <title>
-      <%=application.getInitParameter("PAGE_TITLE")%><%=contentManagement.getContent("sites_year_title", false )%>
+      <%=application.getInitParameter("PAGE_TITLE")%>
+      <%=cm.cms("sites_year_title")%>
     </title>
   </head>
   <body>
+    <div id="outline">
+    <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="Home#index.jsp,Sites#sites.jsp,Designation year"/>
+        <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_designationyear_location"/>
         <jsp:param name="helpLink" value="sites-help.jsp"/>
         <jsp:param name="mapLink" value="show"/>
       </jsp:include>
       <form name="eunis" method="get" action="sites-year-result.jsp" onsubmit="return validateForm();">
         <input type="hidden" name="showSiteName" value="true" />
-        <strong>
-          <%=contentManagement.getContent("sites_year_01")%>
-        </strong>
+        <h1>
+          <%=cm.cmsText("sites_year_01")%>
+        </h1>
         <br />
-        <%=contentManagement.getContent("sites_year_27")%>
+        <%=cm.cmsText("sites_year_27")%>
         <br />
         <br />
         <div class="grey_rectangle">
           <strong>
-            <%=contentManagement.getContent("sites_year_08")%>
+            <%=cm.cmsText("search_will_provide_following_information")%>
           </strong>
           <br />
-          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=contentManagement.getContent("sites_year_09", false )%>" />
-          <label for="showSourceDB"><%=contentManagement.getContent("sites_year_09")%></label>
+          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_year_09")%>" />
+          <label for="showSourceDB"><%=cm.cmsText("sites_year_09")%></label>
+          <%=cm.cmsTitle("sites_year_09")%>
 
-          <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=contentManagement.getContent("sites_year_10", false )%>" />
-          <label for="showCountry"><%=contentManagement.getContent("sites_year_10")%></label>
+          <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_year_10")%>" />
+          <label for="showCountry"><%=cm.cmsText("sites_year_10")%></label>
+          <%=cm.cmsTitle("sites_year_10")%>
 
-          <input id="showName" name="showName" type="checkbox" value="true" disabled="disabled" checked="checked" title="<%=contentManagement.getContent("sites_year_12", false )%>" />
-          <label for="showName"><%=contentManagement.getContent("sites_year_12")%></label>
+          <input id="showName" name="showName" type="checkbox" value="true" disabled="disabled" checked="checked" title="<%=cm.cms("sites_year_12")%>" />
+          <label for="showName"><%=cm.cmsText("sites_year_12")%></label>
+          <%=cm.cmsTitle("sites_year_12")%>
 
-          <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=contentManagement.getContent("sites_year_11", false )%>" />
-          <label for="showDesignationTypes"><%=contentManagement.getContent("sites_year_11")%></label>
+          <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_year_11")%>" />
+          <label for="showDesignationTypes"><%=cm.cmsText("sites_year_11")%></label>
+          <%=cm.cmsTitle("sites_year_11")%>
 
-          <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=contentManagement.getContent("sites_year_13", false )%>" />
-          <label for="showCoordinates"><%=contentManagement.getContent("sites_year_13")%></label>
+          <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_year_13")%>" />
+          <label for="showCoordinates"><%=cm.cmsText("sites_year_13")%></label>
+          <%=cm.cmsTitle("sites_year_13")%>
 
-          <input id="showSize" name="showSize" type="checkbox" value="true" checked="checked" title="<%=contentManagement.getContent("sites_year_14", false )%>" />
-          <label for="showSize"><%=contentManagement.getContent("sites_year_14")%></label>
+          <input id="showSize" name="showSize" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_year_14")%>" />
+          <label for="showSize"><%=cm.cmsText("sites_year_14")%></label>
+          <%=cm.cmsTitle("sites_year_14")%>
 
-          <input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=contentManagement.getContent("sites_year_15", false )%>" />
-          <label for="showDesignationYear"><%=contentManagement.getContent("sites_year_15")%></label>
+          <input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("sites_year_15")%>" />
+          <label for="showDesignationYear"><%=cm.cmsText("sites_year_15")%></label>
+          <%=cm.cmsTitle("sites_year_15")%>
         </div>
         <br />
-        <img align="middle" alt="<%=Accesibility.getText( "generic.criteria.mandatory")%>" title="<%=Accesibility.getText( "generic.criteria.mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
+        <img align="middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
+        <%=cm.cmsAlt("field_mandatory")%>
+
         <strong>
-          <%=contentManagement.getContent("sites_year_17")%>
+          <%=cm.cmsText("sites_year_17")%>
         </strong>
-        <label for="relationOp" class="noshow">Operator</label>
-        <select id="relationOp" name="relationOp" class="inputTextField" onchange="MM_jumpMenu('parent',this,0)" title="Operator">
-          <option value="sites-year.jsp?relationOp=<%=Utilities.OPERATOR_IS%>" <%if (relationOp == Utilities.OPERATOR_IS.intValue()) {%>selected="selected"<%}%>><%=contentManagement.getContent("sites_year_18", false )%></option>
-          <option value="sites-year.jsp?relationOp=<%=Utilities.OPERATOR_BETWEEN%>" <%if (relationOp == Utilities.OPERATOR_BETWEEN.intValue()) {%>selected="selected"<%}%>><%=contentManagement.getContent("sites_year_19", false )%></option>
-          <option value="sites-year.jsp?relationOp=<%=Utilities.OPERATOR_GREATER_OR_EQUAL%>" <%if (relationOp == Utilities.OPERATOR_GREATER_OR_EQUAL.intValue()) {%>selected="selected"<%}%>><%=contentManagement.getContent("sites_year_20", false )%></option>
-          <option value="sites-year.jsp?relationOp=<%=Utilities.OPERATOR_SMALLER_OR_EQUAL%>" <%if (relationOp == Utilities.OPERATOR_SMALLER_OR_EQUAL.intValue()) {%>selected="selected"<%}%>><%=contentManagement.getContent("sites_year_21", false )%></option>
+        <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
+        <select id="relationOp" name="relationOp" class="inputTextField" onchange="MM_jumpMenu('parent',this,0)" title="<%=cm.cms("operator")%>">
+          <option value="sites-year.jsp?relationOp=<%=Utilities.OPERATOR_IS%>" <%if (relationOp == Utilities.OPERATOR_IS.intValue()) {%>selected="selected"<%}%>>
+            <%=cm.cms("sites_year_18")%>
+          </option>
+          <option value="sites-year.jsp?relationOp=<%=Utilities.OPERATOR_BETWEEN%>" <%if (relationOp == Utilities.OPERATOR_BETWEEN.intValue()) {%>selected="selected"<%}%>>
+            <%=cm.cms("sites_year_19")%>
+          </option>
+          <option value="sites-year.jsp?relationOp=<%=Utilities.OPERATOR_GREATER_OR_EQUAL%>" <%if (relationOp == Utilities.OPERATOR_GREATER_OR_EQUAL.intValue()) {%>selected="selected"<%}%>>
+            <%=cm.cms("sites_year_20")%>
+          </option>
+          <option value="sites-year.jsp?relationOp=<%=Utilities.OPERATOR_SMALLER_OR_EQUAL%>" <%if (relationOp == Utilities.OPERATOR_SMALLER_OR_EQUAL.intValue()) {%>selected="selected"<%}%>>
+            <%=cm.cms("sites_year_21")%>
+          </option>
         </select>
+        <%=cm.cmsLabel("operator")%>
+        <%=cm.cmsInput("sites_year_18")%>
+        <%=cm.cmsInput("sites_year_19")%>
+        <%=cm.cmsInput("sites_year_20")%>
+        <%=cm.cmsInput("sites_year_21")%>
 <%
   if (relationOp == Utilities.OPERATOR_BETWEEN.intValue())
   {
 %>
-        <label for="searchStringMin" class="noshow">Minimum designation year</label>
-        <input id="searchStringMin" name="searchStringMin" title="Minimum designation year" size="4" maxlength="4" value="" class="inputTextField" />
+        <label for="searchStringMin" class="noshow"><%=cm.cms("minimum_designation_year")%></label>
+        <input id="searchStringMin" name="searchStringMin" title="<%=cm.cms("minimum_designation_year")%>" size="4" maxlength="4" value="" class="inputTextField" />
+        <%=cm.cmsTitle("minimum_designation_year")%>
         and
-        <label for="searchStringMax" class="noshow">Maximum designation year</label>
-        <input id="searchStringMax" name="searchStringMax" title="Maximum designation year" size="4" maxlength="4" value="" class="inputTextField" />&nbsp;&nbsp;
+        <label for="searchStringMax" class="noshow"><%=cm.cms("maximum_designation_year")%></label>
+        <input id="searchStringMax" name="searchStringMax" title="<%=cm.cms("maximum_designation_year")%>" size="4" maxlength="4" value="" class="inputTextField" />&nbsp;&nbsp;
+        <%=cm.cmsTitle("maximum_designation_year")%>
 <%
   }
   else
   {
 %>
-        <label for="searchString" class="noshow">Designation year</label>
-        <input id="searchString" name="searchString" title="Designation year" value="" size="4" maxlength="4" class="inputTextField" />&nbsp;&nbsp;
+        <label for="searchString" class="noshow"><%=cm.cms("designation_year")%></label>
+        <input id="searchString" name="searchString" title="<%=cm.cms("designation_year")%>" value="" size="4" maxlength="4" class="inputTextField" />&nbsp;&nbsp;
+        <%=cm.cmsTitle("designation_year")%>
 <%
   }
 %>
         <br />
-        <img align="middle" alt="<%=Accesibility.getText( "generic.criteria.optional" )%>" title="<%=Accesibility.getText( "generic.criteria.optional" )%>" src="images/mini/field_optional.gif" width="11" height="12" />
+        <img align="middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
+        <%=cm.cmsAlt("field_optional")%>
         <label for="country">
           <strong>
-            <%=contentManagement.getContent("sites_year_23")%>
+            <%=cm.cmsText("sites_year_23")%>
           </strong>
         </label>
-        <input id="country" name="country" type="text" size="30" class="inputTextField" title="Country" />
-        <a title="<%=Accesibility.getText( "generic.popup.lov" )%>" href="javascript:choiceprec('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=Accesibility.getText( "generic.popup.lov" )%>" title="<%=Accesibility.getText( "generic.popup.lov" )%>" width="11" height="18" border="0" align="middle" /></a>
+        <input id="country" name="country" type="text" size="30" class="inputTextField" title="<%=cm.cms("sites_year_23")%>" />
+        <%=cm.cmsTitle("sites_year_23")%>
+
+        <a title="<%=cm.cms("helper")%>" href="javascript:choiceprec('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" width="11" height="18" border="0" align="middle" /></a>
+        <%=cm.cmsTitle("helper")%>
+        <%=cm.cmsAlt("helper")%>
         <br />
         <br />
         <div class="submit_buttons">
-          <label for="reset" class="noshow">Reset values</label>
-          <input id="reset" name="Reset" type="reset" value="<%=contentManagement.getContent("sites_year_24", false )%>" class="inputTextField"  title="Reset values" />
-          <%=contentManagement.writeEditTag( "sites_year_24" )%>
-          <label for="submit2" class="noshow">Search</label>
-          <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=contentManagement.getContent("sites_year_25", false)%>" title="Search" />
-          <%=contentManagement.writeEditTag( "sites_year_25" )%>
+          <label for="reset" class="noshow"><%=cm.cms("reset_btn_label")%></label>
+          <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset_btn_value")%>" class="inputTextField" title="<%=cm.cms("reset_btn_title")%>" />
+          <%=cm.cmsLabel("reset_btn_label")%>
+          <%=cm.cmsTitle("reset_btn_title")%>
+          <%=cm.cmsInput("reset_btn_value")%>
+
+          <label for="submit2" class="noshow"><%=cm.cms("search_btn_label")%></label>
+          <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=cm.cms("search_btn_value")%>" title="<%=cm.cms("search_btn_title")%>" />
+          <%=cm.cmsLabel("search_btn_label")%>
+          <%=cm.cmsTitle("search_btn_title")%>
+          <%=cm.cmsInput("search_btn_value")%>
         </div>
         <jsp:include page="sites-search-common.jsp" />
       </form>
@@ -210,8 +250,10 @@
   {
 %>
       <br />
-      <%=contentManagement.getContent("sites_year_26")%>
-      <a title="<%=Accesibility.getText( "generic.criteria.save" )%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-year.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=Accesibility.getText( "generic.criteria.save" )%>" title="<%=Accesibility.getText( "generic.criteria.save" )%>" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+      <%=cm.cmsText("sites_year_26")%>
+      <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-year.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+      <%=cm.cmsTitle("save")%>
+      <%=cm.cmsAlt("save")%>
 <%
   // Set Vector for URL string
   Vector show = new Vector();
@@ -235,9 +277,25 @@
 <%
   }
 %>
+
+      <%=cm.cmsMsg("sites_year_title")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("sites_year_02")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("sites_year_03")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("sites_year_04")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("sites_year_05")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("sites_year_06")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("sites_year_07")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="sites-year.jsp" />
       </jsp:include>
+    </div>
+    </div>
     </div>
   </body>
 </html>

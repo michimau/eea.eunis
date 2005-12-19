@@ -100,10 +100,12 @@ public class DesignationDomain extends AbstractDomain implements Paginable {
     J4.addJoinColumn(new StringJoinColumn("ORIGINAL_DATASOURCE", "setDesignSourceDb"));
     this.addJoinTable(J4);
 
-    OuterJoinTable J6 = new OuterJoinTable("CHM62EDT_COUNTRY G", "ID_GEOSCOPE", "ID_GEOSCOPE");
-    J6.addJoinColumn(new StringJoinColumn("AREA_NAME_EN", "country", "setCountry"));
-    J4.addJoinTable(J6);
+    OuterJoinTable natureObjectGeoscope = new OuterJoinTable("CHM62EDT_NATURE_OBJECT_GEOSCOPE B ", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+    this.addJoinTable(natureObjectGeoscope);
 
+    OuterJoinTable country = new OuterJoinTable("CHM62EDT_COUNTRY G", "ID_GEOSCOPE", "ID_GEOSCOPE");
+    country.addJoinColumn(new StringJoinColumn("AREA_NAME_EN", "country", "setCountry"));
+    natureObjectGeoscope.addJoinTable(country);
 
   }
 
@@ -161,10 +163,11 @@ public class DesignationDomain extends AbstractDomain implements Paginable {
     StringBuffer filterSQL = _prepareWhereSearch();
     String sql = "";
     sql = " SELECT COUNT(DISTINCT C.ID_NATURE_OBJECT) " +
-            "FROM CHM62EDT_SITES C " +
-            "INNER JOIN CHM62EDT_DESIGNATIONS J ON (C.ID_DESIGNATION=J.ID_DESIGNATION AND C.ID_GEOSCOPE=J.ID_GEOSCOPE) " +
-            "LEFT OUTER JOIN CHM62EDT_COUNTRY G ON C.ID_GEOSCOPE=G.ID_GEOSCOPE " +
-            "WHERE " + filterSQL.toString();
+            " FROM CHM62EDT_SITES C " +
+            " INNER JOIN CHM62EDT_DESIGNATIONS J ON (C.ID_DESIGNATION=J.ID_DESIGNATION AND C.ID_GEOSCOPE=J.ID_GEOSCOPE) " +
+            " LEFT OUTER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE B ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT" +
+            " LEFT OUTER JOIN CHM62EDT_COUNTRY G ON B.ID_GEOSCOPE = G.ID_GEOSCOPE " +
+            " WHERE " + filterSQL.toString();
     Long tempList = this.findLong(sql);
     if (null != tempList)
       return tempList;

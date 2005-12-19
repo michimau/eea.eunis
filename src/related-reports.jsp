@@ -4,8 +4,11 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Related reports' function - search page.
 --%>
-<%@ page import="ro.finsiel.eunis.OSEnvironment,
-                 ro.finsiel.eunis.WebContentManagement,
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.jrfTables.EunisRelatedReportsPersist,
                  ro.finsiel.eunis.jrfTables.users.UserPersist,
                  ro.finsiel.eunis.related_reports.RelatedReportsUtil,
@@ -16,24 +19,35 @@
                  java.util.Date,
                  java.util.List,
                  java.util.Properties" %>
-<%@ page contentType="text/html" %>
 <jsp:useBean id="FormBean" class="ro.finsiel.eunis.admin.RelatedReportsBean" scope="request">
   <jsp:setProperty name="FormBean" property="*"/>
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+  String uploadDir = application.getInitParameter("TOMCAT_HOME") + "/" + application.getInitParameter("UPLOAD_DIR_FILES");
+  String[] deleteFile = FormBean.getFilenames();
+  String operation = FormBean.getOperation();
+
+  // Delete the specified files from server
+  if(null != operation && operation.equalsIgnoreCase("delete") && null != deleteFile)
+  {
+    RelatedReportsUtil.deleteFiles(deleteFile, uploadDir);
+  }
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
-  <script language="JavaScript" src="script/utils.js" type="text/javascript"></script>
-  <title><%=application.getInitParameter("PAGE_TITLE")%>Additional reports related to biodiversity</title>
+  <title>
+    <%=application.getInitParameter("PAGE_TITLE")%>
+    <%=cm.cms("related_reports_page_title")%>
+  </title>
   <style type="text/css">
-  <!--
-  .tableBorder {
-    border: 1px solid #000000;
-  }
-
-  -->
+    .tableBorder
+    {
+      border: 1px solid #000000;
+    }
   </style>
   <script language="JavaScript" type="text/JavaScript">
   <!--
@@ -72,14 +86,14 @@
     function del_files() {
        nr=count_selFiles();
        if (!nr) {
-          alert('Nothing selected');
+          alert('<%=cm.cms("related_reports_approval_nothing")%>!');
           return false;
        } else {
           var ok = false;
           if (nr == 1) {
-            return confirm('Are you sure you want to delete 1 file ?');
+            return confirm('<%=cm.cms("related_reports_approval_delete1file")%> ?');
           } else {
-            return confirm('Are you sure you want to delete ' + nr +' files ?');
+            return confirm('<%=cm.cms("related_reports_approval_deletefiles")%> ' + nr +' <%=cm.cms("related_reports_approval_files")%> ?');
           }
        }
     }
@@ -95,39 +109,25 @@
   </script>
 </head>
   <body>
-  <div id="content">
-  <jsp:include page="header-dynamic.jsp">
-    <jsp:param name="location" value="Home#index.jsp,Related reports"/>
-  </jsp:include>
-  <table summary="layout" width="100%" border="0">
-    <tr>
-      <td>
-<%
-  Properties osEnv = null;
-  try {
-    osEnv = OSEnvironment.getEnvVars();
-  } catch(Exception e) {
-    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-  }
-  String uploadDir = osEnv.getProperty("TOMCAT_HOME") + "/" + application.getInitParameter("UPLOAD_DIR_FILES");
-  String[] deleteFile = FormBean.getFilenames();
-  String operation = FormBean.getOperation();
-
-  // Delete the specified files from server
-  if(null != operation && operation.equalsIgnoreCase("delete") && null != deleteFile) {
-    RelatedReportsUtil.deleteFiles(deleteFile, uploadDir);
-  }
-%>
-    <h5>Related reports</h5>
-
+    <div id="outline">
+    <div id="alignment">
+    <div id="content">
+      <jsp:include page="header-dynamic.jsp">
+        <jsp:param name="location" value="home_location#index.jsp,related_reports_location"/>
+      </jsp:include>
+    <h1>
+      <%=cm.cmsText("related_reports_title")%>
+    </h1>
     <br />
-    From this page you can download additional reports related to biodiversity.
+    <%=cm.cmsText("related_reports_description")%>.
 <%
   // If there are documents pending, display this to the user who has such right, to know this.
-  if(RelatedReportsUtil.listPendingReports().size() > 0 && SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT()) {
+  if(RelatedReportsUtil.listPendingReports().size() > 0 && SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
+  {
 %>
     <br />
-    Please note that some documents are uploaded and pending to be <a title="See documents waiting to be approved" href="related-reports-approval.jsp">approved</a>.
+    <%=cm.cmsText("related_reports_pendingnotice")%> <a title="<%=cm.cms("related_reports_pendinglink_title")%>" href="related-reports-approval.jsp"><%=cm.cmsText("related_reports_pendinglink")%></a>.
+    <%=cm.cmsTitle("related_reports_pendinglink_title")%>
     <br />
 <%
   }
@@ -135,7 +135,9 @@
   {
 %>
     <br />
-    <a title="Upload new document. This link will open a new page" href="javascript:openUpload();">Upload new document</a>
+
+    <a title="<%=cm.cms("related_reports_uploadlink_title")%>" href="javascript:openUpload();"><%=cm.cmsText("related_reports_uploadlink")%></a>
+    <%=cm.cmsTitle("related_reports_uploadlink_title")%>
     <br />
 <%
   }
@@ -146,7 +148,7 @@
 %>
     <br />
     <strong>
-      No documents available for download at this time.
+      <%=cm.cmsText("related_reports_nodocs")%>.
     </strong>
     <br />
 <%
@@ -156,14 +158,25 @@
 %>
     <form name="upload" action="related-reports.jsp" method="post" onsubmit="javascript:return del_files();">
       <input type="hidden" name="operation" value="delete" />
-      <div align="right" style="background-color : #EEEEEE; width : 740px;">
+      <div align="right" style="background-color : #EEEEEE; width : 100%;">
         <strong>
-          <input type="button" name="Submit" value="Refresh list" title="Refresh document list" onclick="javascript:ReloadPage()" class="inputTextField" />
+          <label for="refresh" class="noshow"><%=cm.cms("related_reports_refresh_label")%></label>
+          <input type="button" id="refresh" name="Submit" value="<%=cm.cms("related_reports_refresh_value")%>" title="<%=cm.cms("related_reports_refresh_title")%>" onclick="javascript:ReloadPage()" class="inputTextField" />
+          <%=cm.cmsLabel("related_reports_refresh_label")%>
+          <%=cm.cmsInput("related_reports_refresh_value")%>
+          <%=cm.cmsTitle("related_reports_refresh_title")%>
+
+
+
 <%
   if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
   {
 %>
-          <input type="submit" name="Submit" value="Delete selected" class="inputTextField" />
+          <label for="delete" class="noshow"><%=cm.cms("related_reports_delete_label")%></label>
+          <input type="submit" id="delete" name="Submit" value="<%=cm.cms("related_reports_delete_value")%>" class="inputTextField" title="<%=cm.cms("related_reports_delete_title")%>" />
+          <%=cm.cmsLabel("related_reports_delete_label")%>
+          <%=cm.cmsInput("related_reports_delete_value")%>
+          <%=cm.cmsTitle("related_reports_delete_title")%>
 <%
   }
 %>
@@ -171,34 +184,34 @@
       </div>
       <br />
       <table width="100%" border="0" cellspacing="0" cellpadding="4" class="tableBorder" summary="Uploaded files">
-        <tr bgcolor="#CCCCCC">
+        <tr>
 <%
   if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
   {
 %>
-          <th align="center">
+          <th style="text-align : center;">
             &nbsp;
           </th>
   <%
     }
   %>
-          <th class="resultHeader" align="center">
-            <strong>Valid</strong>
+          <th class="resultHeader" style="text-align : center;">
+            <%=cm.cmsText("related_reports_valid")%>
           </th>
           <th class="resultHeader">
-            <strong>Description</strong>
+            <%=cm.cmsText("related_reports_description_column")%>
           </th>
           <th class="resultHeader">
-            <strong>File name</strong>
+            <%=cm.cmsText("related_reports_filename")%>
           </th>
           <th  class="resultHeader" style="text-align:right">
-            <strong>Size(kB)</strong>
+            <%=cm.cmsText("related_reports_size")%>(kB)
           </th>
           <th class="resultHeader" style="white-space:nowrap">
-            <strong>Uploaded by</strong>
+            <%=cm.cmsText("related_reports_author")%>
           </th>
           <th class="resultHeader">
-            <strong>Date</strong>
+            <%=cm.cmsText("related_reports_date")%>
           </th>
         </tr>
 <%
@@ -207,7 +220,7 @@
     EunisRelatedReportsPersist report = (EunisRelatedReportsPersist) approvedReportsList.get(i);
     if(null != report)
     {
-      File file = new File(osEnv.getProperty("TOMCAT_HOME") + "/webapps/eunis/upload/" + report.getFileName());
+      File file = new File(application.getInitParameter("TOMCAT_HOME") + "/webapps/eunis/upload/" + report.getFileName());
 %>
         <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
 <%
@@ -215,8 +228,10 @@
       {
  %>
           <td align="center">
-            <label for="filename<%=i%>" class="noshow">Check this box to mark file for deletion</label>
-            <input title="Check this box to mark file for deletion" type="checkbox" id="filename<%=i%>" name="filenames" value="<%=report.getFileName()%>" />
+            <label for="filename<%=i%>" class="noshow"><%=cm.cms("related_reports_file_label")%></label>
+            <input title="<%=cm.cms("related_reports_file_title")%>" type="checkbox" id="filename<%=i%>" name="filenames" value="<%=report.getFileName()%>" />
+            <%=cm.cmsLabel("related_reports_file_label")%>
+            <%=cm.cmsTitle("related_reports_file_title")%>
           </td>
   <%
       }
@@ -226,13 +241,17 @@
       if(file.exists())
       {
 %>
-            <img src="images/mini/download.gif" title="File is downloadable" alt="File is downloadable" />
+            <img src="images/mini/download.gif" title="<%=cm.cms("related_reports_approval_download_title")%>" alt="<%=cm.cms("related_reports_approval_download_alt")%>" />
+            <%=cm.cmsAlt("related_reports_approval_download_alt")%>
+            <%=cm.cmsTitle("related_reports_approval_download_title")%>
 <%
       }
       else
       {
 %>
-            <img src="images/mini/downloadu.gif" title="Link is broken" alt="Link is broken" />
+            <img src="images/mini/downloadu.gif" title="<%=cm.cms("related_reports_approval_downloadu_title")%>" alt="<%=cm.cms("related_reports_approval_downloadu_alt")%>" />
+            <%=cm.cmsAlt("related_reports_approval_downloadu_alt")%>
+            <%=cm.cmsTitle("related_reports_approval_downloadu_title")%>
 <%
       }
 %>
@@ -295,29 +314,29 @@
   if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
   {
 %>
-          <th align="center">
+          <th style="text-align : center;">
             &nbsp;
           </th>
 <%
   }
 %>
-          <th  class="resultHeader" align="center">
-            Valid
+          <th class="resultHeader" style="text-align : center;">
+            <%=cm.cmsText("related_reports_valid")%>
           </th>
           <th class="resultHeader">
-            Description
+            <%=cm.cmsText("related_reports_description_column")%>
           </th>
           <th class="resultHeader">
-            File name
+            <%=cm.cmsText("related_reports_filename")%>
           </th>
-          <th class="resultHeader" style="text-align:right">
-            Size(kB)
+          <th  class="resultHeader" style="text-align:right">
+            <%=cm.cmsText("related_reports_size")%>(kB)
           </th>
           <th class="resultHeader" style="white-space:nowrap">
-            Uploaded by
+            <%=cm.cmsText("related_reports_author")%>
           </th>
           <th class="resultHeader">
-            Date
+            <%=cm.cmsText("related_reports_date")%>
           </th>
         </tr>
       </table>
@@ -325,12 +344,18 @@
 <%
   }
 %>
-    </td>
-    </tr>
-</table>
-<jsp:include page="footer.jsp">
-  <jsp:param name="page_name" value="related-reports.jsp"/>
-</jsp:include>
-  </div>
-</body>
+      <%=cm.cmsMsg("related_reports_page_title")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("related_reports_approval_delete1file")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("related_reports_approval_deletefiles")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("related_reports_approval_files")%>
+      <jsp:include page="footer.jsp">
+        <jsp:param name="page_name" value="related-reports.jsp"/>
+      </jsp:include>
+    </div>
+    </div>
+    </div>
+  </body>
 </html>

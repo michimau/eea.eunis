@@ -4,21 +4,32 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : "Sites year" function - Map page displaying results of search visually, on image from map server.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.List,
-                 ro.finsiel.eunis.search.sites.SitesSearchUtility,
-                 ro.finsiel.eunis.search.CountryUtil,
                  ro.finsiel.eunis.search.sites.year.YearPaginator,
                  ro.finsiel.eunis.jrfTables.sites.year.YearDomain,
                  ro.finsiel.eunis.jrfTables.sites.year.YearPersist,
                  ro.finsiel.eunis.WebContentManagement"%><%@ page import="java.util.ArrayList"%>
-<%@ page contentType="text/html"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.year.YearBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-  WebContentManagement contentManagement = SessionManager.getWebContent();
-  boolean[] source = {(formBean.getDB_NATURA2000()==null?false:true),(formBean.getDB_CORINE()==null?false:true),(formBean.getDB_DIPLOMA()==null?false:true),(formBean.getDB_CDDA_NATIONAL()==null?false:true),(formBean.getDB_CDDA_INTERNATIONAL()==null?false:true),(formBean.getDB_BIOGENETIC()==null?false:true),false};
+  WebContentManagement cm = SessionManager.getWebContent();
+  boolean[] source =
+  {
+    formBean.getDB_NATURA2000() != null,
+    formBean.getDB_CORINE() != null,
+    formBean.getDB_DIPLOMA() != null,
+    formBean.getDB_CDDA_NATIONAL() != null,
+    formBean.getDB_CDDA_INTERNATIONAL() != null,
+    formBean.getDB_BIOGENETIC() != null,
+    false,
+    formBean.getDB_EMERALD() != null      
+  };
   YearPaginator mapPaginator = new YearPaginator(new YearDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), source));
   List sites = new ArrayList();
   try
@@ -47,8 +58,9 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <title>
-      <%=contentManagement.getContent("sites_year-map_title", false )%>
+      <%=cm.cms("sites_year-map_title")%>
     </title>
+    <jsp:include page="header-page.jsp" />
   </head>
   <body style="margin : 0px; padding : 0px;" >
     <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="740" height="552" id="fl_eunis" align="middle">
@@ -59,5 +71,6 @@
       <param name="FlashVars"  value="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>&amp;v_sh_sites=<%=sitesIds%>" />
       <embed src="gis/fl_eunis.swf" FLASHVARS="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>&amp;v_sh_sites=<%=sitesIds%>" quality="high" bgcolor="#FFFFFF"  width="740" height="552" name="fl_eunis" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
     </object>
+    <%=cm.cmsMsg("sites_year-map_title")%>
   </body>
 </html>

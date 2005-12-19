@@ -4,7 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : "Sites names" function - results page.
 --%>
-<%@ page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.sites.names.NamePaginator,
                  ro.finsiel.eunis.jrfTables.sites.names.NameDomain,
@@ -17,13 +20,16 @@
                  ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.search.sites.SitesSearchCriteria,
                  ro.finsiel.eunis.jrfTables.Chm62edtSoundexPersist,
-                 ro.finsiel.eunis.jrfTables.Chm62edtSoundexDomain,
-                 ro.finsiel.eunis.utilities.Accesibility"%>
+                 ro.finsiel.eunis.jrfTables.Chm62edtSoundexDomain"%>
+<%@ page import="ro.finsiel.eunis.admin.FileUtils"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.names.NameBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
+  Utilities.dumpRequestParams( request );
+  FileUtils.dumpToFile( request.getParameter("englishName").toString(), false );
+  FileUtils.dumpToFile( java.net.URLDecoder.decode( request.getParameter("englishName").toString(), "UTF-8" ), false );
   boolean noSoundex = Utilities.checkedStringToBoolean( formBean.getNoSoundex(), false );
   // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
@@ -82,8 +88,8 @@
   reportFields.addElement("criteriaType");
   // Set number criteria for the search result
   int noCriteria = (null==formBean.getCriteriaSearch()?0:formBean.getCriteriaSearch().length);
-  String downloadLink = "javascript:openlink('reports/sites/tsv-sites-names.jsp?" + formBean.toURLParam(reportFields) + "')";
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  String downloadLink = "javascript:openTSVDownload('reports/sites/tsv-sites-names.jsp?" + formBean.toURLParam(reportFields) + "')";
+  WebContentManagement cm = SessionManager.getWebContent();
   if (results.isEmpty() && !newName && !noSoundex )
   {
     String sname = formBean.getEnglishName();
@@ -168,66 +174,92 @@
         }
       //-->
     </script>
-    <title><%=application.getInitParameter("PAGE_TITLE")%><%=contentManagement.getContent("sites_names-result_title", false )%></title>
+    <title>
+      <%=application.getInitParameter("PAGE_TITLE")%>
+      <%=cm.cms("sites_names-result_title")%>
+    </title>
   </head>
   <body>
+    <div id="outline">
+    <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="Home#index.jsp,Sites#sites.jsp,Names#sites-names.jsp,Results"/>
+        <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_names_location#sites-names.jsp,results_location"/>
         <jsp:param name="helpLink" value="sites-help.jsp"/>
         <jsp:param name="mapLink" value="show"/>
         <jsp:param name="downloadLink" value="<%=downloadLink%>"/>
       </jsp:include>
-<%--      <jsp:param name="printLink" value="<%=printLink%>"/>--%>
-      <h5>
-        <%=contentManagement.getContent("sites_names-result_01")%>
-      </h5>
+      <h1>
+        <%=cm.cmsText("sites_names-result_01")%>
+      </h1>
 <%
-  if(newName)
-  {
-    String searchDescription = "";
-    searchDescription = "No match was found for <strong>"+formBean.getOldName()+"</strong>.&nbsp;";
-    searchDescription += "The closest phonetic match we found is: <strong>"+formBean.getEnglishName()+"</strong>";
+  if (!results.isEmpty()) {
+    if(newName)
+    {
+      String searchDescription = "";
+      if(!formBean.getOldName().equalsIgnoreCase(formBean.getEnglishName()))
+      {
+        searchDescription = cm.cms( "no_match_was_found_for") + " <strong>"+formBean.getOldName()+"</strong>.&nbsp;";
+        searchDescription += cm.cms( "phonetic_match" ) + ": <strong>"+formBean.getEnglishName()+"</strong>";
+      }
+      else
+      {
+        searchDescription += cm.cms( "phonetic_match" ) + ": <strong>"+formBean.getEnglishName()+"</strong>";
+      }
 %>
       <%=searchDescription%>
 <%
-  }
-  else
-  {
+    } else {
 %>
-      <%=contentManagement.getContent("sites_names-result_02")%> <strong><%=formBean.getMainSearchCriteria().toHumanString()%></strong>
+      <%=cm.cmsText("sites_names-result_02")%>
+      <strong>
+        <%=formBean.getMainSearchCriteria().toHumanString()%>
+      </strong>
 <%
+    }
   }
-            if (results.isEmpty())
-          {
-             boolean fromRefine = false;
-             if(formBean != null && formBean.getCriteriaSearch() != null && formBean.getCriteriaSearch().length > 0)
-               fromRefine = true;
+
+  if (results.isEmpty()) {
+       boolean fromRefine = false;
+       if(formBean != null && formBean.getCriteriaSearch() != null && formBean.getCriteriaSearch().length > 0)
+         fromRefine = true;
 
       %>
-             <br />
-             <jsp:include page="noresults.jsp" >
-               <jsp:param name="fromRefine" value="<%=fromRefine%>" />
-             </jsp:include>
+         <br />
+         <jsp:include page="noresults.jsp" >
+           <jsp:param name="fromRefine" value="<%=fromRefine%>" />
+         </jsp:include>
        <%
-               return;
-           }
-       %>
-      <br />
-      Results found: <strong><%=resultsCount%></strong>
-      <br />
+         return;
+   }
+   %>
+  <br />
+  <%=cm.cmsText("results_found")%>: <strong><%=resultsCount%></strong>
+  <br />
 <%
   Vector mapFields = new Vector();
   mapFields.addElement("criteriaSearch");
   mapFields.addElement("oper");
   mapFields.addElement("criteriaType");
+
+  for (int i = 0; i < results.size(); i++)
+  {
+    NamePersist site = (NamePersist)results.get(i);
+    String longitude = SitesSearchUtility.formatCoordinates(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec());
+    String latitude = SitesSearchUtility.formatCoordinates(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec());
+    if ( longitude.lastIndexOf( "n/a" ) < 0 && latitude.lastIndexOf( "n/a" ) < 0 )
+    {
 %>
       <jsp:include page="sites-map.jsp">
-        <jsp:param name="resultsCount" value="<%=resultsCount%>"/>
+        <jsp:param name="resultsCount" value="<%=resultsCount%>" />
         <jsp:param name="mapName" value="sites-names-map.jsp"/>
         <jsp:param name="toURLParam" value="<%=formBean.toURLParam(mapFields)%>"/>
       </jsp:include>
 <%
+      break;
+    };
+  }
+
   Vector pageSizeFormFields = new Vector();
   pageSizeFormFields.addElement("sort");
   pageSizeFormFields.addElement("ascendency");
@@ -248,20 +280,20 @@
 %>
       <br />
       <div class="grey_rectangle">
-        <%=contentManagement.getContent("sites_names-result_03")%>
-        <form title="refine search results" name="criteriaSearch" onsubmit="return(check(<%=noCriteria%>));" method="post" action="">
+        <%=cm.cmsText("sites_names-result_03")%>
+        <form title="Refine search results" name="criteriaSearch" onsubmit="return(check(<%=noCriteria%>));" method="get" action="">
           <input type="hidden" name="noSoundex" value="true" />
           <strong>
             <%=formBean.toFORMParam(filterSearch)%>
           </strong>
-          <label for="criteriaType0" class="noshow">Criteria</label>
-          <select id="criteriaType0" name="criteriaType" class="inputTextField" onchange="changeCriteria()" title="Criteria">
+          <label for="criteriaType0" class="noshow"><%=cm.cms("criteria_type_label")%></label>
+          <select id="criteriaType0" name="criteriaType" class="inputTextField" onchange="changeCriteria()" title="<%=cm.cms("criteria_type_title")%>">
 <%
   if ( showSourceDB )
   {
 %>
             <option value="<%=NameSearchCriteria.CRITERIA_SOURCE_DB%>">
-              <%=contentManagement.getContent("sites_names-result_04", false)%>
+              <%=cm.cms("sites_names-result_04")%>
             </option>
 <%
   }
@@ -269,7 +301,7 @@
   {
 %>
             <option value="<%=NameSearchCriteria.CRITERIA_COUNTRY%>">
-              <%=contentManagement.getContent("sites_names-result_05", false)%>
+              <%=cm.cms("sites_names-result_05")%>
             </option>
 <%
   }
@@ -277,7 +309,7 @@
   {
 %>
             <option value="<%=NameSearchCriteria.CRITERIA_ENGLISH_NAME%>">
-              <%=contentManagement.getContent("sites_names-result_06", false)%>
+              <%=cm.cms("sites_names-result_06")%>
             </option>
 <%
   }
@@ -285,28 +317,48 @@
   {
 %>
             <option value="<%=NameSearchCriteria.CRITERIA_SIZE%>">
-              <%=contentManagement.getContent("sites_names-result_07", false)%>
+              <%=cm.cms("sites_names-result_07")%>
             </option>
 <%
   }
 %>
           </select>
-          <label for="oper0" class="noshow">Operator</label>
-          <select id="oper0" name="oper" class="inputTextField" title="Operator">
-            <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=contentManagement.getContent("sites_names-result_08", false)%></option>
+          <%=cm.cmsLabel("criteria_type_label")%>
+          <%=cm.cmsTitle("criteria_type_title")%>
+          <%=cm.cmsInput("sites_names-result_04")%>
+          <%=cm.cmsInput("sites_names-result_05")%>
+          <%=cm.cmsInput("sites_names-result_06")%>
+          <%=cm.cmsInput("sites_names-result_07")%>
+
+          <label for="oper0" class="noshow"><%=cm.cms("operator_label")%></label>
+          <select id="oper0" name="oper" class="inputTextField" title="<%=cm.cms("operator_title")%>">
+            <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("sites_names-result_08")%></option>
           </select>
-          <label for="criteriaSearch0" class="noshow">Filter value</label>
-          <input id="criteriaSearch0" name="criteriaSearch" type="text" size="30" class="inputTextField" title="Filter value" />
-          <a href="javascript:openRefineHint()" name="binocular" id="binocular"><img src="images/helper/helper.gif" alt="<%=Accesibility.getText( "generic.refined.question" )%>" title="<%=Accesibility.getText( "generic.refined.question" )%>" border="0" width="11" height="18" align="middle" /></a>
-          <label for="submit" class="noshow">Search</label>
-          <input id="submit" name="Submit" title="Search" type="submit" value="<%=contentManagement.getContent("sites_names-result_09", false)%>" class="inputTextField" />
+          <%=cm.cmsLabel("operator_label")%>
+          <%=cm.cmsTitle("operator_title")%>
+          <%=cm.cmsInput("sites_names-result_08")%>
+
+          <label for="criteriaSearch0" class="noshow"><%=cm.cms("filter_label")%></label>
+          <input id="criteriaSearch0" name="criteriaSearch" type="text" size="30" class="inputTextField" title="<%=cm.cms("filter_title")%>" />
+          <%=cm.cmsLabel("filter_label")%>
+          <%=cm.cmsTitle("filter_title")%>
+
+          <a href="javascript:openRefineHint()" title="<%=cm.cms("refine_lov_title")%>" name="binocular" id="binocular"><img src="images/helper/helper.gif" alt="<%=cm.cms("refine_lov_alt")%>" border="0" width="11" height="18" align="middle" /></a>
+          <%=cm.cmsTitle("refine_lov_title")%>
+          <%=cm.cmsAlt("refine_lov_alt")%>
+
+          <label for="submit" class="noshow"><%=cm.cms("refine_btn_label")%></label>
+          <input id="submit" name="Submit" type="submit" value="<%=cm.cms("refine_btn_value")%>" class="inputTextField" title="<%=cm.cms("refine_btn_title")%>" />
+          <%=cm.cmsLabel("refine_btn_label")%>
+          <%=cm.cmsTitle("refine_btn_title")%>
+          <%=cm.cmsInput("refine_btn_value")%>
         </form>
 <%
   ro.finsiel.eunis.search.AbstractSearchCriteria[] criterias = formBean.toSearchCriteria();
   if (criterias.length > 1)
   {
 %>
-        <%=contentManagement.getContent("sites_names-result_10")%>
+        <%=cm.cmsText("sites_names-result_10")%>
         <br />
 <%
   }
@@ -317,9 +369,10 @@
     {
 %>
         <br />
-        <a title="Remove filter" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img src="images/mini/delete.jpg" alt="<%=Accesibility.getText( "generic.refined.delete" )%>" title="<%=Accesibility.getText( "generic.refined.delete" )%>" border="0" align="middle" /></a>
-        &nbsp;&nbsp;
-        <strong class="linkDarkBg">
+        <a title="<%=cm.cms("removefilter_title")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img src="images/mini/delete.jpg" alt="<%=cm.cms("removefilter_alt")%>" border="0" align="middle" /></a>
+        <%=cm.cmsTitle("removefilter_title")%>
+        <%=cm.cmsAlt("removefilter_alt")%>
+        <strong>
           <%= i + ". " + criteria.toHumanString()%>
         </strong>
 <%
@@ -358,14 +411,15 @@
   AbstractSortCriteria sortYear = formBean.lookupSortCriteria(NameSortCriteria.SORT_YEAR);
 %>
       <br />
-      <table summary="Search results" border="0" cellpadding="0" cellspacing="0" width="100%">
+      <table summary="<%=cm.cms("search_results")%>" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse">
         <tr>
 <%
   if ( showSourceDB )
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=contentManagement.getContent("sites_names-result_11")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("sites_names-result_11")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -373,20 +427,22 @@
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, null == sortCountry)%>"><%=Utilities.getSortImageTag(sortCountry)%><%=contentManagement.getContent("sites_names-result_05")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, null == sortCountry)%>"><%=Utilities.getSortImageTag(sortCountry)%><%=cm.cmsText("sites_names-result_05")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=contentManagement.getContent("sites_names-result_12")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("sites_names-result_12")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   if ( showDesignType )
   {
 %>
           <th class="resultHeader">
-            <%=contentManagement.getContent("sites_names-result_13")%>
+            <%=cm.cmsText("sites_names-result_13")%>
           </th>
 <%
   }
@@ -394,10 +450,10 @@
   {
 %>
           <th class="resultHeader" style="text-align : center; white-space:nowrap;">
-            <%=contentManagement.getContent("sites_names-result_14")%>
+            <%=cm.cmsText("sites_names-result_14")%>
           </th>
           <th class="resultHeader" style="text-align : center; white-space:nowrap;">
-            <%=contentManagement.getContent("sites_names-result_15")%>
+            <%=cm.cmsText("sites_names-result_15")%>
           </th>
 <%
   }
@@ -405,7 +461,8 @@
   {
 %>
           <th class="resultHeader" style="text-align : right">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, null == sortSize)%>"><%=Utilities.getSortImageTag(sortSize)%><%=contentManagement.getContent("sites_names-result_16")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, null == sortSize)%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("sites_names-result_16")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -413,17 +470,18 @@
   {
 %>
           <th class="resultHeader" style="text-align : right">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, null == sortYear)%>"><%=Utilities.getSortImageTag(sortYear)%><%=contentManagement.getContent("sites_names-result_17")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, null == sortYear)%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsText("sites_names-result_17")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
 %>
         </tr>
 <%
-  String bgcolor;
+  String bgColor;
   for (int i = 0; i < results.size(); i++)
   {
-    bgcolor = (0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF";
+    bgColor = (0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF";
     NamePersist site = (NamePersist)results.get(i);
 %>
         <tr>
@@ -431,7 +489,7 @@
   if ( showSourceDB )
   {
 %>
-          <td bgcolor="<%=bgcolor%>">
+          <td class="resultCell" style="background-color : <%=bgColor%>;">
             <strong>
               <%=SitesSearchUtility.translateSourceDB(site.getSourceDB())%>
             </strong>
@@ -441,25 +499,27 @@
   if (showCountry)
   {
 %>
-          <td bgcolor="<%=bgcolor%>">
+          <td class="resultCell" style="background-color : <%=bgColor%>;">
             <%=Utilities.formatString(site.getAreaNameEn())%>&nbsp;
           </td>
 <%
   }
 %>
-          <td bgcolor="<%=bgcolor%>">
-            <a title="Site factsheet" href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=Utilities.formatString( site.getName() )%></a>
+          <td class="resultCell" style="background-color : <%=bgColor%>;">
+            <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=Utilities.formatString( site.getName() )%></a>
+            <%=cm.cmsTitle("open_site_factsheet")%>
           </td>
 <%
   if (showDesignType)
   {
 %>
-          <td bgcolor="<%=bgcolor%>">
+          <td bgcolor="<%=bgColor%>">
             <jsp:include page="sites-designations-detail.jsp">
               <jsp:param name="idDesignation" value="<%=site.getIdDesignation()%>"/>
               <jsp:param name="idGeoscope" value="<%=site.getIdGeoscope()%>"/>
               <jsp:param name="sourceDB" value="<%=site.getSourceDB()%>"/>
-              <jsp:param name="bgcolor" value="<%=bgcolor%>"/>
+              <jsp:param name="bgcolor" value="<%=bgColor%>"/>
+              <jsp:param name="idSite" value="<%=site.getIdSite()%>"/>
             </jsp:include>
           </td>
 <%
@@ -467,10 +527,10 @@
   if ( showCoord )
   {
 %>
-          <td align="center" bgcolor="<%=bgcolor%>" nowrap="nowrap">
+          <td class="resultCell" style="background-color : <%=bgColor%>; white-space : nowrap; text-align : center;">
             <%=SitesSearchUtility.formatCoordinates(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec())%>
           </td>
-          <td align="center" bgcolor="<%=bgcolor%>" nowrap="nowrap">
+          <td class="resultCell" style="background-color : <%=bgColor%>; white-space : nowrap; text-align : center;">
             <%=SitesSearchUtility.formatCoordinates(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec())%>
           </td>
 <%
@@ -478,7 +538,7 @@
   if (showSize)
   {
 %>
-          <td align="right" bgcolor="<%=bgcolor%>">
+          <td class="resultCell" style="background-color : <%=bgColor%>; text-align : right;">
             <%=Utilities.formatArea(site.getArea(), 9, 2, "&nbsp;")%>
           </td>
 <%
@@ -486,7 +546,7 @@
     if ( showYear )
     {
 %>
-          <td align="right" bgcolor="<%=bgcolor%>">
+          <td class="resultCell" style="background-color : <%=bgColor%>; text-align : right;">
             <%=SitesSearchUtility.parseDesignationYear(site.getDesignationDate(), site.getSourceDB())%>
           </td>
 <%
@@ -502,7 +562,8 @@
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=contentManagement.getContent("sites_names-result_11")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("sites_names-result_11")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -510,20 +571,22 @@
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, null == sortCountry)%>"><%=Utilities.getSortImageTag(sortCountry)%><%=contentManagement.getContent("sites_names-result_05")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, null == sortCountry)%>"><%=Utilities.getSortImageTag(sortCountry)%><%=cm.cmsText("sites_names-result_05")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=contentManagement.getContent("sites_names-result_12")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("sites_names-result_12")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   if ( showDesignType )
   {
 %>
           <th class="resultHeader">
-            <%=contentManagement.getContent("sites_names-result_13")%>
+            <%=cm.cmsText("sites_names-result_13")%>
           </th>
 <%
   }
@@ -531,10 +594,10 @@
   {
 %>
           <th class="resultHeader" style="text-align : center; white-space:nowrap;">
-            <%=contentManagement.getContent("sites_names-result_14")%>
+            <%=cm.cmsText("sites_names-result_14")%>
           </th>
           <th class="resultHeader" style="text-align : center; white-space:nowrap;">
-            <%=contentManagement.getContent("sites_names-result_15")%>
+            <%=cm.cmsText("sites_names-result_15")%>
           </th>
 <%
   }
@@ -542,7 +605,8 @@
   {
 %>
           <th class="resultHeader" align="right" style="text-align : right">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, null == sortSize)%>"><%=Utilities.getSortImageTag(sortSize)%><%=contentManagement.getContent("sites_names-result_16")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, null == sortSize)%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("sites_names-result_16")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -550,7 +614,8 @@
   {
 %>
           <th class="resultHeader" style="text-align : right">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, null == sortYear)%>"><%=Utilities.getSortImageTag(sortYear)%><%=contentManagement.getContent("sites_names-result_17")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, null == sortYear)%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsText("sites_names-result_17")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -565,9 +630,15 @@
         <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>"/>
         <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>"/>
       </jsp:include>
+
+      <%=cm.cmsMsg("sites_names-result_title")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("search_results")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="sites-names-result.jsp" />
       </jsp:include>
+    </div>
+    </div>
     </div>
   </body>
 </html>

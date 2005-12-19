@@ -4,23 +4,26 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Pick references, show species' - Popup for list of values in search page.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@page import="java.util.List, java.util.Iterator, java.util.Vector,
                 java.util.Enumeration,
                 ro.finsiel.eunis.search.species.speciesByReferences.ReferencesForSpecies,
                 ro.finsiel.eunis.search.Utilities,
                 net.sf.jrf.domain.PersistentObject,
                 ro.finsiel.eunis.WebContentManagement"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
     <%
-      WebContentManagement contentManagement = SessionManager.getWebContent();
+      WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title>
-      <%=contentManagement.getContent("species_references-choice_title", false )%>
+      <%=cm.cms("species_references-choice_title")%>
     </title>
     <script language="JavaScript" type="text/javascript">
     <!--
@@ -37,12 +40,6 @@
         if (fromWhere == "publisher") window.opener.document.eunis.publisher.value=val;
         window.close();
       }
-
-  function editContent( idPage )
-  {
-    var url = 'web-content-inline-editor.jsp?idPage=' + idPage;
-    window.open( url ,'', 'width=540,height=500,status=0,scrollbars=0,toolbar=0,resizable=1,location=0');
-  }
     // -->
     </script>
   </head>
@@ -164,7 +161,7 @@
 <%
   if (results != null && results.size() > 0)
   {
-    out.print(Utilities.getTextMaxLimitForPopup(contentManagement,(results == null ? 0 : results.size())));
+    out.print(Utilities.getTextMaxLimitForPopup(cm,(results == null ? 0 : results.size())));
   }
   // if result list is not empty, will display the title of the popup
   if (results != null && results.size() > 0)
@@ -177,11 +174,11 @@
       if (request.getParameter("fromWhere").equalsIgnoreCase("date")) listOfWhat = "years";
     }
 %>
-    <h6>
-      <%=contentManagement.getContent("species_references-choice_02")%>&nbsp;<%=listOfWhat%>&nbsp;for
-    </h6>
+    <h2>
+      <%=cm.cmsText("species_references-choice_02")%>&nbsp;<%=listOfWhat%>&nbsp;for
+    </h2>
     <strong>
-      <%=contentManagement.getContent("species_references-choice_03")%>
+      <%=cm.cmsText("species_references-choice_03")%>
       <%=forWhat.equalsIgnoreCase("") ? "" : "with following characteristics"%>&nbsp;:
     </strong>
     <br />
@@ -201,7 +198,7 @@
           {
       %>
           <strong>
-            <%=contentManagement.getContent("species_references-choice_04")%> <%=request.getParameter("fromWhere")%>.
+            <%=cm.cmsText("species_references-choice_04")%> <%=request.getParameter("fromWhere")%>.
           </strong>
           <br />
       <%
@@ -210,10 +207,10 @@
           {
       %>
             <div id="tab">
-            <table summary="List of values" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+            <table summary="<%=cm.cms("list_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
              <tr>
               <th class="resultHeader">
-                Values
+                <%=cm.cmsText("values")%>
               </th>
              </tr>
       <%
@@ -225,7 +222,8 @@
       %>
         <tr>
           <td style="background-color:<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-            <a title="Choose this value" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n))%>','<%=request.getParameter("fromWhere")%>','<%=dateVal%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n))%></a>
+            <a title="<%=cm.cms("choose_this_value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n))%>','<%=request.getParameter("fromWhere")%>','<%=dateVal%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n))%></a>
+            <%=cm.cmsTitle("choose_this_value")%>
           </td>
        </tr>
  <%           }
@@ -240,7 +238,7 @@
       {
  %>
               <strong>
-                <%=contentManagement.getContent("species_references-choice_05")%>.
+                <%=cm.cmsText("species_references-choice_05")%>.
               </strong>
               <br />
        <%
@@ -249,9 +247,18 @@
 
    <br />
    <form action="">
-   <label for="button" class="noshow"><%=contentManagement.getContent("species_references-choice_06",false)%></label>    
-   <input id="button" title="Close window" type="button" value="<%=contentManagement.getContent("species_references-choice_06",false)%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
+   <label for="button" class="noshow"><%=cm.cms("close")%></label>
+   <input id="button" title="<%=cm.cms("close")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
+   <%=cm.cmsLabel("close")%>
+   <%=cm.cmsTitle("close")%>
+   <%=cm.cmsInput("close_btn")%>
    </form>
-   <%=contentManagement.writeEditTag("species_references-choice_06")%>
+
+<%=cm.br()%>
+<%=cm.cmsMsg("species_references-choice_title")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("list_values")%>
+<%=cm.br()%>
+
   </body>
 </html>

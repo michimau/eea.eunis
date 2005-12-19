@@ -4,14 +4,17 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Results for references
 --%>
-<%@ page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.search.*,
                  ro.finsiel.eunis.formBeans.ReferencesBean,
                  ro.finsiel.eunis.jrfTables.*,
                  ro.finsiel.eunis.formBeans.ReferencesSortCriteria,
-                 ro.finsiel.eunis.formBeans.ReferencesSearchCriteria"%>
+                 ro.finsiel.eunis.formBeans.ReferencesSearchCriteria"%><%@ page import="ro.finsiel.eunis.exceptions.CriteriaMissingException"%>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.formBeans.ReferencesBean" scope="request">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
@@ -48,23 +51,25 @@
   paginator.setSortCriteria(formBean.toSortCriteria());
   paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
   currentPage = paginator.setCurrentPage(currentPage);// Compute *REAL* current page (adjusted if user messes up)
-  int resultsCount = paginator.countResults();
   final String pageName = "references-result.jsp";
-  int pagesCount = paginator.countPages();// This is used in @page include...
-  int guid = 0;// This is used in @page include...
-  // Now extract the results for the current page.
-  List results = paginator.getPage(currentPage);
-  // Set number criteria for the search result
+  int guid = 0;
+
+  int resultsCount = 0;
+  int pagesCount = 0;
+  List results = null;
+  try
+  {
+    resultsCount = paginator.countResults();
+    pagesCount = paginator.countPages();
+    results = paginator.getPage(currentPage);
+  }
+  catch( Exception ex )
+  {
+    ex.printStackTrace();
+  }
+
   int noCriteria = (null==formBean.getCriteriaSearch()?0:formBean.getCriteriaSearch().length);
-  // Prepare parameters for tsv
-  Vector reportFields = new Vector();
-  reportFields.addElement("sort");
-  reportFields.addElement("ascendency");
-  reportFields.addElement("criteriaSearch");
-  reportFields.addElement("oper");
-  reportFields.addElement("criteriaType");
-  // Web content manager used in this page.
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -79,48 +84,52 @@
     //-->
     </script>
     <title>
-      <%=application.getInitParameter("PAGE_TITLE")%><%=contentManagement.getContent("references_references-result_title", false )%>
+      <%=application.getInitParameter("PAGE_TITLE")%>
+      <%=cm.cms("references_references-result_title")%>
     </title>
   </head>
   <body>
+    <div id="outline">
+    <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="Home#index.jsp,References#references.jsp,Results"/>
+        <jsp:param name="location" value="home_location#index.jsp,references_location#references.jsp,results_location"/>
       </jsp:include>
-      <h5>
-        <%=contentManagement.getContent("references_references-result_01")%>
-      </h5>
+      <h1>
+        <%=cm.cmsText("references_references-result_01")%>
+      </h1>
 <%
   ReferencesSearchCriteria mainCriteria = (ReferencesSearchCriteria)formBean.getMainSearchCriteria();
 %>
-      <%=contentManagement.getContent("references_references-result_02")%>
+      <%=cm.cmsText("references_references-result_02")%>
 <%
   if(mainCriteria.toHumanString().length()>0)
   {
 %>
       <br />
-      <%=contentManagement.getContent("references_references-result_03")%>&nbsp;
+      <%=cm.cmsText("references_references-result_03")%>&nbsp;
       <strong>
         <%=mainCriteria.toHumanString()%>
       </strong>
- <%
-          if (results.isEmpty())
-          {
-             boolean fromRefine = false;
-             if(formBean != null && formBean.getCriteriaSearch() != null && formBean.getCriteriaSearch().length > 0)
-               fromRefine = true;
+<%
+  }
+  if (results.isEmpty())
+  {
+    boolean fromRefine = false;
+    if(formBean != null && formBean.getCriteriaSearch() != null && formBean.getCriteriaSearch().length > 0)
+      fromRefine = true;
 
-      %>
+%>
 
              <jsp:include page="noresults.jsp" >
                <jsp:param name="fromRefine" value="<%=fromRefine%>" />
              </jsp:include>
-       <%
-               return;
-           }
-       %>
+<%
+    return;
+  }
+%>
       <br />
-      <%=contentManagement.getContent("references_references-result_05")%>
+      <%=cm.cmsText("references_references-result_05")%>
       <strong><%=resultsCount%></strong>
 <%
   // Prepare parameters for pagesize.jsp
@@ -150,19 +159,19 @@
         <br />
         <div class="grey_rectangle">
           <strong>
-            <%=contentManagement.getContent("references_references-result_06")%>
+            <%=cm.cmsText("references_references-result_06")%>
           </strong>
           <br />
           <form name="criteriaSearch" method="get" onsubmit="return(check(<%=noCriteria%>));" action="" >
            <%=formBean.toFORMParam(filterSearch)%>
-            <label for="criteriaType" class="noshow">Criteria</label>
+            <label for="criteriaType" class="noshow"><%=cm.cms("criteria_type_label")%></label>
             <select id="criteriaType" name="criteriaType" class="inputTextField">
 <%
   if (showEditor)
   {
 %>
               <option value="<%=ReferencesSearchCriteria.CRITERIA_EDITOR%>" selected="selected">
-                <%=contentManagement.getContent("references_references-result_07")%>
+                <%=cm.cms("references_references-result_07")%>
               </option>
 <%
   }
@@ -170,7 +179,7 @@
   {
 %>
               <option value="<%=ReferencesSearchCriteria.CRITERIA_PUBLISHER%>">
-                <%=contentManagement.getContent("references_references-result_08")%>
+                <%=cm.cms("references_references-result_08")%>
               </option>
 <%
   }
@@ -178,7 +187,7 @@
   {
 %>
               <option value="<%=ReferencesSearchCriteria.CRITERIA_YEAR%>">
-                <%=contentManagement.getContent("references_references-result_09")%>
+                <%=cm.cms("references_references-result_09")%>
               </option>
 <%
   }
@@ -186,37 +195,56 @@
   {
 %>
               <option value="<%=ReferencesSearchCriteria.CRITERIA_TITLE%>">
-                <%=contentManagement.getContent("references_references-result_10")%>
+                <%=cm.cms("references_references-result_10")%>
               </option>
 <%
   }
 %>
-
               <option value="<%=ReferencesSearchCriteria.CRITERIA_AUTHOR%>">
-                <%=contentManagement.getContent("references_references-result_11")%>
+                <%=cm.cms("references_references-result_11")%>
               </option>
             </select>
-            <label for="oper" class="noshow">Operator</label>
+            <%=cm.cmsLabel("criteria_type_label")%>
+            <%=cm.cmsInput("references_references-result_07")%>
+            <%=cm.cmsInput("references_references-result_08")%>
+            <%=cm.cmsInput("references_references-result_09")%>
+            <%=cm.cmsInput("references_references-result_10")%>
+            <%=cm.cmsInput("references_references-result_11")%>
+
+            <label for="oper" class="noshow"><%=cm.cms("operator_label")%></label>
             <select id="oper" name="oper" class="inputTextField">
               <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                <%=contentManagement.getContent("references_references-result_12", false)%>
+                <%=cm.cms("references_references-result_12")%>
               </option>
               <option value="<%=Utilities.OPERATOR_STARTS%>">
-                <%=contentManagement.getContent("references_references-result_13", false)%>
+                <%=cm.cms("references_references-result_13")%>
               </option>
-              <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=contentManagement.getContent("references_references-result_14", false)%></option>
+              <option value="<%=Utilities.OPERATOR_CONTAINS%>">
+                <%=cm.cms("references_references-result_14")%>
+              </option>
             </select>
-            <label for="criteriaSearch" class="noshow">Filter value</label>
-            <input class="inputTextField" title="Filter value" id="criteriaSearch" name="criteriaSearch" type="text" size="30" />
-            <label for="submit" class="noshow">Search</label>
-            <input class="inputTextField" type="submit" id="submit" name="Submit" value="Search" title="Search" />
+            <%=cm.cmsLabel("operator_label")%>
+            <%=cm.cmsInput("references_references-result_12")%>
+            <%=cm.cmsInput("references_references-result_13")%>
+            <%=cm.cmsInput("references_references-result_14")%>
+
+            <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_label")%></label>
+            <input class="inputTextField" title="<%=cm.cms("filter_title")%>" id="criteriaSearch" name="criteriaSearch" type="text" size="30" />
+            <%=cm.cmsLabel("filter_label")%>
+            <%=cm.cmsTitle("filter_title")%>
+
+            <label for="submit" class="noshow"><%=cm.cms("refine_btn_label")%></label>
+            <input class="inputTextField" type="submit" id="submit" name="Submit" value="<%=cm.cms("refine_btn_value")%>" title="<%=cm.cms("refine_btn_title")%>" />
+            <%=cm.cmsLabel("refine_btn_label")%>
+            <%=cm.cmsTitle("refine_btn_title")%>
+            <%=cm.cmsInput("refine_btn_value")%>
           </form>
 <%
     ro.finsiel.eunis.search.AbstractSearchCriteria[] criterias = formBean.toSearchCriteria();
     if (criterias.length > 1)
     {
 %>
-          <%=contentManagement.getContent("references_references-result_15")%><%}%>
+          <%=cm.cmsText("references_references-result_15")%><%}%>
 <%
       for (int i = criterias.length - 1; i > 0; i--)
       {
@@ -224,9 +252,11 @@
         if (null != criteria && null != formBean.getCriteriaSearch())
         {
 %>
-              <a href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img src="images/mini/delete.jpg" border="0" align="middle"></a>
+              <a title="<%=cm.cms("removefilter_title")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img src="images/mini/delete.jpg" border="0" align="middle" alt="<%=cm.cms("references_result_removefilter_alt")%>"></a>
+              <%=cm.cmsTitle("removefilter_title")%>
+              <%=cm.cmsAlt("removefilter_alt")%>
               &nbsp;&nbsp;
-              <strong class="linkDarkBg"><%= i + ". " + criteria.toHumanString()%></strong>
+              <strong><%= i + ". " + criteria.toHumanString()%></strong>
 <%
     }
   }
@@ -251,7 +281,7 @@
         <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>"/>
       </jsp:include>
       <br />
-      <table border="1" cellpadding="0" cellspacing="0" align="center" width="100%" style="border-collapse: collapse">
+      <table summary="<%=cm.cms("search_results")%>" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse">
 <%
   // Compute the sort criteria
   Vector sortURLFields = new Vector();      /* Used for sorting */
@@ -273,7 +303,8 @@
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor) ? true : false)%>"><%=Utilities.getSortImageTag(sortAuthor)%><%=contentManagement.getContent("references_references-result_11")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, null==sortAuthor)%>"><%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsText("references_references-result_11")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -281,7 +312,8 @@
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, (null == sortYear) ? true : false)%>"><%=Utilities.getSortImageTag(sortYear)%><%=contentManagement.getContent("references_references-result_09")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, null==sortYear)%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsText("references_references-result_09")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -289,7 +321,8 @@
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle) ? true : false)%>"><%=Utilities.getSortImageTag(sortTitle)%><%=contentManagement.getContent("references_references-result_10")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, null==sortTitle)%>"><%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsText("references_references-result_10")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -297,7 +330,8 @@
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor) ? true : false)%>"><%=Utilities.getSortImageTag(sortEditor)%><%=contentManagement.getContent("references_references-result_07")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, null==sortEditor)%>"><%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsText("references_references-result_07")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -305,7 +339,8 @@
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher) ? true : false)%>"><%=Utilities.getSortImageTag(sortPublisher)%><%=contentManagement.getContent("references_references-result_08")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, null==sortPublisher)%>"><%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsText("references_references-result_08")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -313,45 +348,47 @@
   {
 %>
           <th class="resultHeader">
-            <%=contentManagement.getContent("references_references-result_16")%></th><%}%>
-          <th align="center" class="resultHeader">
-            <%=contentManagement.getContent("references_references-result_17")%>
+            <%=cm.cmsText("references_references-result_16")%></th><%}%>
+          <th class="resultHeader" style="text-align : center;">
+            <%=cm.cmsText("references_references-result_17")%>
           </th>
-          <th align="center" class="resultHeader">
-            <%=contentManagement.getContent("references_references-result_18")%>
+          <th class="resultHeader" style="text-align : center;">
+            <%=cm.cmsText("references_references-result_18")%>
           </th>
         </tr>
 <%
   Iterator it = results.iterator();
+  int col = 0;
   while (it.hasNext())
   {
+    String bgColor = col++ % 2 == 0 ? "#EEEEEE" : "#FFFFFF";
     ReferencesWrapper ref = (ReferencesWrapper)it.next();
 %>
         <tr>
 <%
-  if (showAuthor)
-  {
+    if (showAuthor)
+    {
 %>
-          <td>
+          <td class="resultCell" style="background-color : <%=bgColor%>">
 <%
-  String author = Utilities.formatString( ref.getAuthor() );
-  if ( author.equalsIgnoreCase( "" ) )
-  {
-    author = "&nbsp;";
-  }
-  else
-  {
-    author = Utilities.treatURLAmp( author );
-  }
+      String author = Utilities.formatString( ref.getAuthor() );
+      if ( author.equalsIgnoreCase( "" ) )
+      {
+        author = "&nbsp;";
+      }
+      else
+      {
+        author = Utilities.treatURLAmp( author );
+      }
 %>
             <%=author%>
           </td>
 <%
-  }
-  if (showYear)
-  {
+    }
+    if (showYear)
+    {
 %>
-          <td>
+          <td class="resultCell" style="background-color : <%=bgColor%>">
             <%=Utilities.formatDate( ref.getYear() )%>
           </td>
 <%
@@ -359,7 +396,7 @@
   if (showTitle)
   {
 %>
-          <td>
+          <td class="resultCell" style="background-color : <%=bgColor%>">
 <%
   String title = Utilities.formatString( ref.getTitle() );
   if ( title.equalsIgnoreCase( "" ) )
@@ -378,7 +415,7 @@
   if (showEditor)
   {
 %>
-          <td>
+          <td class="resultCell" style="background-color : <%=bgColor%>">
 <%
   String editor = Utilities.formatString( ref.getEditor() );
   if ( editor.equalsIgnoreCase( "" ) )
@@ -397,7 +434,7 @@
   if (showPublisher)
 {
 %>
-          <td>
+          <td class="resultCell" style="background-color : <%=bgColor%>">
 <%
   String publisher = Utilities.formatString( ref.getPublisher() );
   if ( publisher.equalsIgnoreCase( "" ) )
@@ -416,7 +453,7 @@
   if (showURL)
   {
 %>
-          <td>
+          <td class="resultCell" style="background-color : <%=bgColor%>">
 <%
   String url = Utilities.formatString( ref.getURL() );
   if ( url.equalsIgnoreCase( "" ) )
@@ -433,15 +470,23 @@
 <%
   }
 %>
-          <td align="center">
+          <td class="resultCell" style="background-color : <%=bgColor%>; text-align : center;">
 <%
       SQL_DRV = application.getInitParameter("JDBC_DRV");
       SQL_URL = application.getInitParameter("JDBC_URL");
       SQL_USR = application.getInitParameter("JDBC_USR");
       SQL_PWD = application.getInitParameter("JDBC_PWD");
       // List of species scientific names related to this reference
-      List speciesResults = ReferencesDomain.getSpeciesForAReference(ref.getIdDc(),SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-      int speciesResultSize = (null == speciesResults ? 0 : speciesResults.size());
+  List speciesResults = null;
+  try
+  {
+    speciesResults = ReferencesDomain.getSpeciesForAReference(ref.getIdDc(),SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+  }
+  catch ( CriteriaMissingException e )
+  {
+    e.printStackTrace();
+  }
+  int speciesResultSize = (null == speciesResults ? 0 : speciesResults.size());
       if(speciesResultSize>0)
       {
 %>
@@ -454,8 +499,9 @@
           String speciesId = (String)speciesData.get(0);
 %>
               <tr>
-                <td bgcolor="<%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>">
-                  <a title="Species factsheet" href="javascript:openlink('species-factsheet.jsp?idSpecies=<%=speciesId%>')"><%=speciesName%></a>
+                <td bgcolor="<%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>" style="text-align : left;">
+                  <a title="<%=cm.cms("open_species_factsheet")%>" href="javascript:openlink('species-factsheet.jsp?idSpecies=<%=speciesId%>')"><%=speciesName%></a>
+                  <%=cm.cmsTitle("open_species_factsheet")%>
                 </td>
               </tr>
 <%
@@ -472,12 +518,8 @@
       }
 %>
           </td>
-          <td align="center">
+          <td class="resultCell" style="background-color : <%=bgColor%>; text-align : center;">
 <%
-      SQL_DRV = application.getInitParameter("JDBC_DRV");
-      SQL_URL = application.getInitParameter("JDBC_URL");
-      SQL_USR = application.getInitParameter("JDBC_USR");
-      SQL_PWD = application.getInitParameter("JDBC_PWD");
       // List of species scientific names related to this reference
       List habitatsResults = ReferencesDomain.getHabitatsForAReferences(ref.getIdDc(),SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
       int habitatsResultSize = (null == habitatsResults ? 0 : habitatsResults.size());
@@ -493,8 +535,9 @@
           String habitatsId = (String)habitatsData.get(0);
 %>
               <tr>
-                <td bgcolor="<%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>">
-                  <a title="Habitat type factsheet" href="javascript:openlink('habitats-factsheet.jsp?idHabitat=<%=habitatsId%>')"><%=habitatsName%></a>
+                <td bgcolor="<%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>" style="text-align : left;">
+                  <a title="<%=cm.cms("open_habitat_factsheet")%>" href="javascript:openlink('habitats-factsheet.jsp?idHabitat=<%=habitatsId%>')"><%=habitatsName%></a>
+                  <%=cm.cmsTitle("open_habitat_factsheet")%>
                 </td>
               </tr>
 <%
@@ -521,7 +564,8 @@
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor) ? true : false)%>"><%=Utilities.getSortImageTag(sortAuthor)%><%=contentManagement.getContent("references_references-result_11")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, null==sortAuthor)%>"><%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsText("references_references-result_11")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -529,7 +573,8 @@
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, (null == sortYear) ? true : false)%>"><%=Utilities.getSortImageTag(sortYear)%><%=contentManagement.getContent("references_references-result_09")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, null==sortYear)%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsText("references_references-result_09")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -537,7 +582,8 @@
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle) ? true : false)%>"><%=Utilities.getSortImageTag(sortTitle)%><%=contentManagement.getContent("references_references-result_10")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, null==sortTitle)%>"><%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsText("references_references-result_10")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -545,7 +591,8 @@
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor) ? true : false)%>"><%=Utilities.getSortImageTag(sortEditor)%><%=contentManagement.getContent("references_references-result_07")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, null==sortEditor)%>"><%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsText("references_references-result_07")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -553,7 +600,8 @@
   {
 %>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher) ? true : false)%>"><%=Utilities.getSortImageTag(sortPublisher)%><%=contentManagement.getContent("references_references-result_08")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, null==sortPublisher)%>"><%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsText("references_references-result_08")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
@@ -561,12 +609,16 @@
   {
 %>
           <th class="resultHeader">
-            <%=contentManagement.getContent("references_references-result_16")%></th><%}%>
-          <th align="center" class="resultHeader">
-            <%=contentManagement.getContent("references_references-result_17")%>
+            <%=cm.cmsText("references_references-result_16")%>
           </th>
-          <th align="center" class="resultHeader">
-            <%=contentManagement.getContent("references_references-result_18")%>
+<%
+  }
+%>
+          <th class="resultHeader" style="text-align : center;">
+            <%=cm.cmsText("references_references-result_17")%>
+          </th>
+          <th class="resultHeader" style="text-align : center;">
+            <%=cm.cmsText("references_references-result_18")%>
           </th>
         </tr>
       </table>
@@ -578,9 +630,15 @@
         <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>"/>
         <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>"/>
       </jsp:include>
+
+      <%=cm.cmsMsg("references_references-result_title")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("search_results")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="references-result.jsp" />
       </jsp:include>
+    </div>
+    </div>
     </div>
   </body>
 </html>

@@ -11,7 +11,7 @@ import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.habitats.country.CountryDomain;
 import ro.finsiel.eunis.jrfTables.habitats.country.CountryPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.habitats.country.CountryBean;
 import ro.finsiel.eunis.search.habitats.country.CountryPaginator;
@@ -20,25 +20,29 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
+/**
+ * TSV and XML report generation.
+ */
 public class TSVCountryReport extends AbstractTSVReport
 {
   /**
-   * Form bean used for search
+   * Form bean used for search.
    */
   private CountryBean formBean = null;
   private Integer database;
 
   /**
-   * Normal constructor
+   * Constructor.
    *
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    */
   public TSVCountryReport( String sessionID, AbstractFormBean formBean )
   {
-    super( "HabitatsCodeReport_" + sessionID + ".tsv" );
+    super( "HabitatsCountryReport_" + sessionID + ".tsv" );
     this.formBean = ( CountryBean ) formBean;
-    this.filename = "HabitatsCodeReport_" + sessionID + ".tsv";
+    this.filename = "HabitatsCountryReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "HabitatsCountryReport_" + sessionID + ".xml" );
     // Init the data factory
     if ( null != formBean )
     {
@@ -54,17 +58,16 @@ public class TSVCountryReport extends AbstractTSVReport
   }
 
   /**
-   * Create the table headers
-   *
+   * Create the table headers.
    * @return An array with the columns headers of the table
    */
-  public List createHeader()
+  public List<String> createHeader()
   {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     // Country
     headers.addElement( "Country" );
     // Region
@@ -114,6 +117,7 @@ public class TSVCountryReport extends AbstractTSVReport
         return;
       }
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
         List resultSet = dataFactory.getPage( _currPage );
@@ -121,7 +125,7 @@ public class TSVCountryReport extends AbstractTSVReport
         {
           // Retrieve a habitat
           CountryPersist habitat = ( CountryPersist ) resultSet.get( i );
-          Vector aRow = new Vector();
+          Vector<String> aRow = new Vector<String>();
           // Country
           aRow.addElement( habitat.getCountry() );
           // Region
@@ -149,6 +153,7 @@ public class TSVCountryReport extends AbstractTSVReport
           // English name
           aRow.addElement( Utilities.formatString( habitat.getDescription() ) );
           writeRow( aRow );
+          xmlreport.writeRow( aRow );
         }
       }
     }

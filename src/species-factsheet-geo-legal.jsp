@@ -4,21 +4,20 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Species factsheet - legal informations.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page contentType="text/html; charset=iso-8859-1" language="java" %>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.factsheet.species.SpeciesFactsheet,
                  ro.finsiel.eunis.search.Utilities,
-                 ro.finsiel.eunis.factsheet.species.LegalStatusWrapper,
-                 java.util.Vector,
                  ro.finsiel.eunis.jrfTables.*,
                  java.util.List,
                  ro.finsiel.eunis.search.UniqueVector,
-                 ro.finsiel.eunis.search.species.SpeciesSearchUtility,
                  ro.finsiel.eunis.WebContentManagement"%>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   // Request parameters.
   boolean expanded = Utilities.checkedStringToBoolean(request.getParameter("expanded"), false);
   Integer idSpecies = Utilities.checkedStringToInt(request.getParameter("idSpecies"), new Integer(0));
@@ -56,13 +55,12 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-    <script language="JavaScript" type="text/javascript" src="script/sort-table.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/header.js"></script>
-    <title><%=contentManagement.getContent("species_factsheet-geo-legal_title", false )%> <%=factsheet.getSpeciesObject().getScientificName()%></title>
+    <title><%=cm.cms("species_factsheet-geo-legal_title")%> <%=factsheet.getSpeciesObject().getScientificName()%></title>
   </head>
   <body>
     <strong>
-      <%=contentManagement.getContent("species_factsheet-geo-legal_01")%>
+      <%=cm.cmsText("species_factsheet-geo-legal_01")%>
       <%=Utilities.treatURLSpecialCharacters(factsheet.getSpeciesObject().getScientificName())%>
     </strong>
     <br />
@@ -89,7 +87,7 @@
       <tr>
         <td>
           <strong>
-            <%=contentManagement.getContent("species_factsheet-geo-legal_02")%>:
+            <%=cm.cmsText("species_factsheet-geo-legal_02")%>:
           </strong>
           &nbsp;
           <%=Utilities.treatURLSpecialCharacters(title)%>
@@ -98,18 +96,20 @@
       <tr>
         <td>
           <strong>
-            <%=contentManagement.getContent("species_factsheet-geo-legal_03")%>:
+            <%=cm.cmsText("species_factsheet-geo-legal_03")%>:
           </strong>
           &nbsp;
-          <a title="URL" href="<%=Utilities.treatURLSpecialCharacters(URL)%>"><%=Utilities.treatURLSpecialCharacters(URL)%></a>
+          <a title="<%=cm.cms("species_factsheet-geo-legal_09_Title")%>" href="<%=Utilities.treatURLSpecialCharacters(URL)%>"><%=Utilities.treatURLSpecialCharacters(URL)%></a>
+          <%=cm.cmsTitle("species_factsheet-geo-legal_09_Title")%>
         </td>
       </tr>
       <tr>
         <td>
           <br />
-          <img alt="Map image. Provided by EEA" src="<%=filename%>" title="Map image. Provided by EEA" border="0" />
+          <img alt="<%=cm.cms("map_image_eea")%>" src="<%=filename%>" title="<%=cm.cms("map_image_eea")%>" border="0" />
+          <%=cm.cmsTitle("map_image_eea")%>
           <p>
-            <em>&amp;&quot;<%=contentManagement.getContent("species_factsheet-geo-legal_04")%>.&amp;&quot;</em>
+            <em>&quot;<%=cm.cmsText("species_factsheet-geo-legal_04")%>.&quot;</em>
           </p>
         </td>
       </tr>
@@ -118,28 +118,25 @@
     }
 %>
     <br />
-    <table summary="List of countries" width="640" border="0" cellspacing="0" cellpadding="0"  id="legalevent">
-      <tr style="background-color:#DDDDDD">
-        <th class="resultHeader">
-          <a title="Sort by Country" href="javascript:sortTable(3, 0, 'legalevent', false);">
+    <table summary="<%=cm.cms("species_factsheet-geo-legal_11_Sum")%>" width="640" border="0" cellspacing="0" cellpadding="0" id="legalevent" class="sortable">
+      <tr>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
           <strong>
-            <%=contentManagement.getContent("species_factsheet-geo-legal_05")%>
+            <%=cm.cmsText("species_factsheet-geo-legal_05")%>
           </strong>
-          </a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th class="resultHeader">
-          <a title="Sort by Date of event" href="javascript:sortTable(3, 1, 'legalevent', false);">
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
           <strong>
-            <%=contentManagement.getContent("species_factsheet-geo-legal_06")%>
+            <%=cm.cmsText("species_factsheet-geo-legal_06")%>
           </strong>
-          </a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th class="resultHeader">
-          <a title="Sort by event" href="javascript:sortTable(3, 2, 'legalevent', false);">
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
           <strong>
-            <%=contentManagement.getContent("species_factsheet-geo-legal_07")%>
+            <%=cm.cmsText("species_factsheet-geo-legal_07")%>
           </strong>
-          </a>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
 <%
@@ -170,9 +167,18 @@
 %>
     </table>
     <p style="text-align:left">
-    <label for="button1" class="noshow"><%=contentManagement.getContent("species_factsheet-geo-legal_08", false )%></label>    
-      <input id="button1" title="Close window" type="button" value="<%=contentManagement.getContent("species_factsheet-geo-legal_08", false )%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
-      <%=contentManagement.writeEditTag( "species_factsheet-geo-legal_08" )%>
+    <label for="button1" class="noshow"><%=cm.cms("close_window")%></label>
+      <input id="button1" title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
+      <%=cm.cmsLabel("close_window")%>
+      <%=cm.cmsTitle("close_window")%>
+      <%=cm.cmsInput("close_btn")%>
     </p>
+
+<%=cm.br()%>
+<%=cm.cmsMsg("species_factsheet-geo-legal_title")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_factsheet-geo-legal_11_Sum")%>
+<%=cm.br()%>
+
   </body>
 </html>

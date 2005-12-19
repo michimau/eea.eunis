@@ -11,7 +11,7 @@ import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.species.internationalthreatstatus.InternationalThreatStatusDomain;
 import ro.finsiel.eunis.jrfTables.species.internationalthreatstatus.InternationalThreatStatusPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.JavaSorter;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
@@ -21,23 +21,26 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
-
+/**
+ * TSV and XML report generation.
+ */
 public class TSVSpeciesThreatInternational extends AbstractTSVReport {
   /**
-   * Form bean used for search
+   * Form bean used for search.
    */
   private AbstractFormBean formBean = null;
 
   /**
-   * Normal constructor
-   *
+   * Constructor.
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
+   * @param showInvalidatedSpecies Show invalidated species
    */
   public TSVSpeciesThreatInternational( String sessionID, AbstractFormBean formBean, boolean showInvalidatedSpecies ) {
     super( "SpeciesThreatInternationalReport_" + sessionID + ".tsv" );
     this.formBean = formBean;
     this.filename = "SpeciesThreatInternationalReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "SpeciesThreatInternationalReport_" + sessionID + ".xml" );
     // Init the data factory
 
     if ( null != formBean )
@@ -53,16 +56,16 @@ public class TSVSpeciesThreatInternational extends AbstractTSVReport {
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader() {
+  public List<String> createHeader() {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     headers.addElement( "Status" );
     headers.addElement( "Group" );
     headers.addElement( "Scientific name" );
@@ -89,12 +92,13 @@ public class TSVSpeciesThreatInternational extends AbstractTSVReport {
         return;
       }
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
         List resultSet = dataFactory.getPage( _currPage );
         for ( int i = 0; i < resultSet.size(); i++ )
         {
-          Vector aRow = new Vector();
+          Vector<String> aRow = new Vector<String>();
           String cellStatus;
           String cellGroup;
           String cellScientificName;
@@ -111,6 +115,7 @@ public class TSVSpeciesThreatInternational extends AbstractTSVReport {
           aRow.addElement( cellScientificName );
           // Vernacular names (multiple rows)
           Vector vernNamesList = SpeciesSearchUtility.findVernacularNames( cellIdVernacularSearch );
+          String xmlVernacularNames = "";
           if ( vernNamesList.size() > 0 )
           {
             Vector sortVernList = new JavaSorter().sort( vernNamesList, JavaSorter.SORT_ALPHABETICAL );
@@ -131,7 +136,7 @@ public class TSVSpeciesThreatInternational extends AbstractTSVReport {
               }
               else
               {
-                Vector anotherRow = new Vector();
+                Vector<String> anotherRow = new Vector<String>();
                 anotherRow.addElement( "" );
                 anotherRow.addElement( "" );
                 anotherRow.addElement( "" );
@@ -141,7 +146,7 @@ public class TSVSpeciesThreatInternational extends AbstractTSVReport {
                 anotherRow.addElement( aVernName.getName() );
                 writeRow( anotherRow );
               }
-
+              xmlVernacularNames += "<name language=\"" + aVernName.getLanguage() + "\">" + aVernName.getName() + "</name>";
             }
             if ( !atLeastALine )
             {
@@ -153,6 +158,14 @@ public class TSVSpeciesThreatInternational extends AbstractTSVReport {
             aRow.addElement( "-" );
             writeRow( aRow );
           }
+
+          // XML Report
+          Vector<String> xmlrow = new Vector<String>();
+          xmlrow.addElement( cellStatus );
+          xmlrow.addElement( cellGroup );
+          xmlrow.addElement( cellScientificName );
+          xmlrow.addElement( xmlVernacularNames );
+          xmlreport.writeRow( xmlrow );
         }
       }
     }

@@ -4,19 +4,20 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : "Sites neighborhood" function - Display sites which are in specified range of a selected site.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.search.sites.SitesSearchUtility,
                  java.util.List,
                  ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.jrfTables.Chm62edtSitesPersist,
-                 java.util.ArrayList,
                  ro.finsiel.eunis.jrfTables.Chm62edtSitesDomain,
                  ro.finsiel.eunis.search.sites.neighborhood.NeighborhoodPaginator,
                  ro.finsiel.eunis.jrfTables.sites.neighborhood.NeighborhoodDomain,
                  java.util.Vector,
                  ro.finsiel.eunis.search.AbstractSortCriteria,
-                 ro.finsiel.eunis.jrfTables.sites.names.NameDomain,
-                 ro.finsiel.eunis.search.AbstractSearchCriteria,
                  ro.finsiel.eunis.search.sites.neighborhood.NeighborhoodDetailSortCriteria,
                  ro.finsiel.eunis.search.CountryUtil"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
@@ -27,84 +28,116 @@
       <jsp:setProperty name="formBean" property="*"/>
     </jsp:useBean>
     <jsp:include page="header-page.jsp" />
-    <%
-    // Web content manager used in this page.
-      WebContentManagement contentManagement = SessionManager.getWebContent();
-    %>
-    <title><%=application.getInitParameter("PAGE_TITLE")%><%=contentManagement.getContent("sites_neighborhood-detail_title", false )%></title>
+    <script type="text/javascript" language="javascript">
+      <!--
+      function openlink( URL )
+      {
+        eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=0,resizable=yes, location=0,width=450,height=280,left=490,top=0');");
+      }
+      //-->
+    </script>
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
+    <title>
+      <%=application.getInitParameter("PAGE_TITLE")%>
+      <%=cm.cms("sites_neighborhood-detail_title")%>
+    </title>
   </head>
-  <%
-    String idSite = request.getParameter("idsite");
-    String countryCode = request.getParameter("countryCode");
-    countryCode = CountryUtil.areaNameEn2ISO2L(countryCode);// Translate it into CODE (ISO)
-    float radius = Utilities.checkedStringToFloat(request.getParameter("radius"), 0.0F);
-    int currentPage = Utilities.checkedStringToInt(request.getParameter("currentPage"), 0);
-    if (currentPage < 0) currentPage = 0;
-    int pageSize = Utilities.checkedStringToInt(request.getParameter("pageSize"), 10);
-    List sites = new ArrayList();
+<%
+  String idSite = request.getParameter("idsite");
+  String countryCode = request.getParameter("countryCode");
+  countryCode = CountryUtil.areaNameEn2ISO2L(countryCode);// Translate it into CODE (ISO)
+  float radius = Utilities.checkedStringToFloat(request.getParameter("radius"), 0.0F);
+  int currentPage = Utilities.checkedStringToInt(request.getParameter("currentPage"), 0);
+  if (currentPage < 0) currentPage = 0;
+  int pageSize = Utilities.checkedStringToInt(request.getParameter("pageSize"), 10);
+  List sites;
 
-    Vector hiddenParams = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
-    hiddenParams.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
-    hiddenParams.addElement("ascendency");    /*   is overriden & also pageSize is set to default           */
-    hiddenParams.addElement("criteriaSearch");/*   to page "0" aka first page. */
-    hiddenParams.addElement("pageSize");
+  Vector hiddenParams = new Vector();
+  hiddenParams.addElement("sort");
+  hiddenParams.addElement("ascendency");
+  hiddenParams.addElement("criteriaSearch");
+  hiddenParams.addElement("pageSize");
 
-    StringBuffer toFORMParam = Utilities.writeFormParameter("idsite", idSite);
-    toFORMParam.append(Utilities.writeFormParameter("radius", radius));
-    toFORMParam.append(Utilities.writeFormParameter("countryCode", countryCode));
-    toFORMParam.append(formBean.toFORMParam(hiddenParams));
+  StringBuffer toFORMParam = Utilities.writeFormParameter("idsite", idSite);
+  toFORMParam.append(Utilities.writeFormParameter("radius", radius));
+  toFORMParam.append(Utilities.writeFormParameter("countryCode", countryCode));
+  toFORMParam.append(formBean.toFORMParam(hiddenParams));
 
-    // Initialize URL and FORM parameters, passed to links and forms from page.
-    // Also add this page specific fields to the URL/FORM fields written on links/forms.
-    String toURLParam = "idsite=" + idSite;
-    toURLParam += Utilities.writeURLParameter("radius", radius);
-    toURLParam += Utilities.writeURLParameter("pageSize", pageSize);
-    toURLParam += Utilities.writeURLParameter("countryCode", countryCode);
-    toURLParam += formBean.toURLParam(hiddenParams);
+  // Initialize URL and FORM parameters, passed to links and forms from page.
+  // Also add this page specific fields to the URL/FORM fields written on links/forms.
+  String toURLParam = "idsite=" + idSite;
+  toURLParam += Utilities.writeURLParameter("radius", radius);
+  toURLParam += Utilities.writeURLParameter("pageSize", pageSize);
+  toURLParam += Utilities.writeURLParameter("countryCode", countryCode);
+  toURLParam += formBean.toURLParam(hiddenParams);
 
-    // Try to find the site with ID passed on the request.
-    Chm62edtSitesPersist mainSite = null;
-    sites = new Chm62edtSitesDomain().findWhere("ID_SITE='" + idSite + "'");
-    String pageName = "sites-neighborhood-detail.jsp";
-    int guid = 0;
-    // This is the paginator for the results.
-    NeighborhoodPaginator paginator = null;
-    float originX = 0;
-    float originY = 0;
-    int pagesCount = 0;
-    mainSite = (Chm62edtSitesPersist)sites.get(0);
-    // Compute circle's center
-    originX = Utilities.checkedStringToFloat(mainSite.getLongitude(), 0);
-    originY = Utilities.checkedStringToFloat(mainSite.getLatitude(), 0);
-    paginator = new NeighborhoodPaginator(new NeighborhoodDomain(mainSite.getIdSite(), radius, originX, originY, formBean.toSortCriteriaDetailsPage()));
-    paginator.setPageSize(pageSize);
+  // Try to find the site with ID passed on the request.
+  Chm62edtSitesPersist mainSite;
+  sites = new Chm62edtSitesDomain().findWhere("ID_SITE='" + idSite + "'");
+  String pageName = "sites-neighborhood-detail.jsp";
+  int guid = 0;
+  // This is the paginator for the results.
+  NeighborhoodPaginator paginator;
+  float originX;
+  float originY;
+  mainSite = (Chm62edtSitesPersist)sites.get(0);
+  // Compute circle's center
+  originX = Utilities.checkedStringToFloat(mainSite.getLongitude(), 0);
+  originY = Utilities.checkedStringToFloat(mainSite.getLatitude(), 0);
+  paginator = new NeighborhoodPaginator(new NeighborhoodDomain(mainSite.getIdSite(), radius, originX, originY, formBean.toSortCriteriaDetailsPage()));
+
+  paginator.setPageSize( pageSize );
+  int pagesCount = 0;
+  try
+  {
+    pagesCount = paginator.countPages();
+    sites = paginator.getPage(currentPage);
+  } catch (Exception e) {
+    e.printStackTrace();
+  }
+%>
+    <body>
+      <div id="content">
+<%
+  if (sites.size() > 0)
+  {
+    String ids = "";
+    int maxSitesPerMap = Utilities.checkedStringToInt( application.getInitParameter( "MAX_SITES_PER_MAP" ), 2000 );
+    NeighborhoodPaginator mapPaginator = new NeighborhoodPaginator(new NeighborhoodDomain(mainSite.getIdSite(), radius, originX, originY, formBean.toSortCriteriaDetailsPage()));
     try
     {
-      sites = paginator.getPage(currentPage);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    pagesCount = paginator.countPages();
-
-    if (sites.size() > 0)
-    {
-      String ids = "";
-      int maxSitesPerMap = Utilities.checkedStringToInt( application.getInitParameter( "MAX_SITES_PER_MAP" ), 2000 );
-      if ( sites.size() < maxSitesPerMap )
+      mapPaginator.setPageSize( mapPaginator.countResults() );
+      List mapSites = mapPaginator.getPage(0);
+      if ( mapSites.size() < maxSitesPerMap )
       {
-        for (int i = 0; i < sites.size(); i++)
+        int i;
+        for (i = 0; i < mapSites.size(); i++)
         {
-          Chm62edtSitesPersist site = (Chm62edtSitesPersist)sites.get(i);
+          Chm62edtSitesPersist site = (Chm62edtSitesPersist)mapSites.get(i);
           ids += "'" + site.getIdSite() + "'";
-          if ( i < sites.size() - 1 ) ids += ",";
+          if ( i < mapSites.size() - 1 ) ids += ",";
         }
       }
-  %>
-  <body>
-    <div id="content">
+    }
+    catch( Exception ex )
+    {
+      ex.printStackTrace();
+    }
+    Vector reportFields = new Vector();
+    reportFields.addElement("sort");
+    reportFields.addElement("ascendency");
+    reportFields.addElement("criteriaSearch");
+    reportFields.addElement("criteriaSearch");
+    reportFields.addElement("oper");
+    reportFields.addElement("criteriaType");
+    String downloadLink = "javascript:openTSVDownload('reports/sites/tsv-sites-neighborhood.jsp?" + formBean.toURLParam(reportFields) + "&idsite=" + idSite + "&radius=" + radius +  "')";
+%>
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="Home#index.jsp,Sites#sites.jsp,Neighborhood#sites-neighborhood.jsp,Neighborhoods"/>
+        <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_neighborhood_location#sites-neighborhood.jsp,sites_neighborhood_detail_location"/>
         <jsp:param name="helpLink" value="sites-help.jsp"/>
+        <jsp:param name="downloadLink" value="<%=downloadLink%>"/>
         <jsp:param name="mapLink" value="show"/>
       </jsp:include>
 <%
@@ -117,19 +150,19 @@
     return;
   }
 %>
-      <h5>
-        Site neighborhood
-      </h5>
+      <h1>
+        <%=cm.cmsText("sites_neighborhood_detail_pageheader")%>
+      </h1>
       <br />
-      <%=contentManagement.getContent("sites_neighborhood-detail_05")%>
+      <%=cm.cmsText("sites_neighborhood-detail_05")%>
       <strong>
-        <%=paginator.countResults()%>
+      <%=paginator.countResults()%>
       </strong>
-      <%=contentManagement.getContent("sites_neighborhood-detail_06")%>
+      <%=cm.cmsText("sites_neighborhood-detail_06")%>
       <strong>
         <%=radius%>
       </strong>
-      <%=contentManagement.getContent("sites_neighborhood-detail_07")%>
+      <%=cm.cmsText("sites_neighborhood-detail_07")%>
       <strong>
         <%=mainSite.getName()%>
       </strong>
@@ -141,8 +174,11 @@
       <br />
       <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
         <input type="hidden" name="sites" value="<%=ids%>" />
-        <label for="showMapGIS" class="noshow">Show map</label>
-        <input type="submit" id="showMapGIS" name="Show map" value="Show map" title="Show map" class="inputTextField" />
+        <label for="showMapGIS" class="noshow"><%=cm.cms("show_map")%></label>
+        <input type="submit" id="showMapGIS" name="Show map" value="<%=cm.cms("show_map")%>" title="<%=cm.cms("show_map")%>" class="inputTextField" />
+        <%=cm.cmsLabel("show_map")%>
+        <%=cm.cmsTitle("show_map")%>
+        <%=cm.cmsInput("show_map")%>
       </form>
 <%
   }
@@ -176,29 +212,32 @@
   AbstractSortCriteria sortLong = formBean.lookupSortCriteria(NeighborhoodDetailSortCriteria.SORT_LONG);
 %>
       <a name="dataTable"></a>
-      <table summary="Search results" width="100%" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+      <table summary="<%=cm.cms("search_results")%>" width="100%" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
         <tr>
           <th class="resultHeader" nowrap="nowrap">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSourceDB)%><%=contentManagement.getContent("sites_neighborhood-detail_08")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("sites_neighborhood-detail_08")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>#dataTable"><%=Utilities.getSortImageTag(sortName)%><%=contentManagement.getContent("sites_neighborhood-detail_09")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>#dataTable"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("sites_neighborhood-detail_09")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th class="resultHeader" align="right" nowrap="nowrap" style="text-align : right;">
-            <%=contentManagement.getContent("sites_neighborhood-detail_10")%>
+            <%=cm.cmsText("sites_neighborhood-detail_10")%>
           </th>
-          <th class="resultHeader" align="center" nowrap="nowrap"  style="text-align : center;">
-            <%=contentManagement.getContent("sites_neighborhood-detail_11")%>
+          <th class="resultHeader" nowrap="nowrap" style="text-align : center;">
+            <%=cm.cmsText("sites_neighborhood-detail_11")%>
           </th>
-          <th class="resultHeader" align="center" nowrap="nowrap" style="text-align : center;">
-            <%=contentManagement.getContent("sites_neighborhood-detail_12")%>
+          <th class="resultHeader" nowrap="nowrap" style="text-align : center;">
+            <%=cm.cmsText("sites_neighborhood-detail_12")%>
           </th>
           <th class="resultHeader" align="right" nowrap="nowrap" style="text-align : right;">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSize)%><%=contentManagement.getContent("sites_neighborhood-detail_13")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("sites_neighborhood-detail_13")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
 <%
-    String bgcolor = "";
+    String bgcolor;
     for (int i = 0; i < sites.size(); i++)
     {
       Chm62edtSitesPersist site = (Chm62edtSitesPersist)sites.get(i);
@@ -211,7 +250,8 @@
             </strong>
           </td>
           <td>
-            <a title="Site factsheet" href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=site.getName()%></a>
+            <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=site.getName()%></a>
+            <%=cm.cmsTitle("open_site_factsheet")%>
           </td>
           <td align="right" nowrap="nowrap">
             <%=Utilities.formatArea("" + SitesSearchUtility.distanceBetweenSites(mainSite, site), 4, 3, "&nbsp;")%>
@@ -231,28 +271,55 @@
 %>
         <tr>
           <th class="resultHeader" nowrap="nowrap">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSourceDB)%><%=contentManagement.getContent("sites_neighborhood-detail_08")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("sites_neighborhood-detail_08")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th class="resultHeader">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>#dataTable"><%=Utilities.getSortImageTag(sortName)%><%=contentManagement.getContent("sites_neighborhood-detail_09")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>#dataTable"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("sites_neighborhood-detail_09")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th class="resultHeader" align="right" nowrap="nowrap" style="text-align : right;">
-            <%=contentManagement.getContent("sites_neighborhood-detail_10")%>
+            <%=cm.cmsText("sites_neighborhood-detail_10")%>
           </th>
-          <th class="resultHeader" align="center" nowrap="nowrap"  style="text-align : center;">
-            <%=contentManagement.getContent("sites_neighborhood-detail_11")%>
+          <th class="resultHeader" nowrap="nowrap"  style="text-align : center;">
+            <%=cm.cmsText("sites_neighborhood-detail_11")%>
           </th>
           <th class="resultHeader" align="center" nowrap="nowrap" style="text-align : center;">
-            <%=contentManagement.getContent("sites_neighborhood-detail_12")%>
+            <%=cm.cmsText("sites_neighborhood-detail_12")%>
           </th>
-          <th class="resultHeader" align="right" nowrap="nowrap" style="text-align : right;">
-            <a title="Sort results by this column" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSize)%><%=contentManagement.getContent("sites_neighborhood-detail_13")%></a>
+          <th class="resultHeader" nowrap="nowrap" style="text-align : right;">
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("sites_neighborhood-detail_13")%></a>
+            <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
       </table>
 <%
   }
-    %>
+  else
+  {
+%>
+      <jsp:include page="header-dynamic.jsp">
+        <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_neighborhood_location#sites-neighborhood.jsp,sites_neighborhood_detail_location"/>
+        <jsp:param name="helpLink" value="sites-help.jsp"/>
+        <jsp:param name="mapLink" value="show"/>
+      </jsp:include>
+        <h1>
+          <%=cm.cmsText("sites_neighborhood_detail_pageheader")%>
+        </h1>
+
+        <br />
+        <%=cm.cms("sites_neighborhood_detail_nosites")%> <%=mainSite.getName()%>.
+        <br />
+        <%=cm.cms("sites_neighborhood_searchradius")%> <%=radius%> km.
+        <br />
+        <br />
+<%
+  }
+%>
+
+      <%=cm.cmsMsg("sites_neighborhood-detail_title")%>
+      <%=cm.br()%>
+      <%=cm.cmsMsg("search_results")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="sites-neighborhood-detail.jsp" />
       </jsp:include>

@@ -11,7 +11,7 @@ import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.sites.designation_code.DesignationDomain;
 import ro.finsiel.eunis.jrfTables.sites.designation_code.DesignationPersist;
 import ro.finsiel.eunis.reports.AbstractTSVReport;
-import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.reports.XMLReport;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.search.sites.designation_code.DesignationBean;
@@ -22,15 +22,18 @@ import java.util.List;
 import java.util.Vector;
 
 
+/**
+ * TSV and XML report generation.
+ */
 public class TSVDesignatedSitesReport extends AbstractTSVReport
 {
   /**
-   * Form bean used for search
+   * Form bean used for search.
    */
   private DesignationBean formBean = null;
 
   /**
-   * Normal constructor
+   * Normal constructor.
    *
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
@@ -40,6 +43,7 @@ public class TSVDesignatedSitesReport extends AbstractTSVReport
     super( "DesignatedSitesReport_" + sessionID + ".tsv" );
     this.formBean = ( DesignationBean ) formBean;
     this.filename = "DesignatedSitesReport_" + sessionID + ".tsv";
+    xmlreport = new XMLReport( "DesignatedSitesReport_" + sessionID + ".xml" );
     // Init the data factory
     if ( null != formBean )
     {
@@ -64,17 +68,17 @@ public class TSVDesignatedSitesReport extends AbstractTSVReport
   }
 
   /**
-   * Create the table headers
+   * Create the table headers.
    *
    * @return An array with the columns headers of the table
    */
-  public List createHeader()
+  public List<String> createHeader()
   {
     if ( null == formBean )
     {
-      return new Vector();
+      return new Vector<String>();
     }
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
     // Source database
     headers.addElement( "Source data set" );
     // Country
@@ -113,6 +117,7 @@ public class TSVDesignatedSitesReport extends AbstractTSVReport
       }
       // Write table header
       writeRow( createHeader() );
+      xmlreport.writeRow( createHeader() );
       // Write data page by page
       for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
       {
@@ -128,7 +133,7 @@ public class TSVDesignatedSitesReport extends AbstractTSVReport
             designations = SitesSearchUtility.siteDesignationsAsCommaSeparatedString( site.getIdDesign(), site.getGeoscope() );
           }
 
-          Vector aRow = new Vector();
+          Vector<String> aRow = new Vector<String>();
           // Source database
           aRow.addElement( SitesSearchUtility.translateSourceDB( site.getSourceDB() ) );
           //Country
@@ -145,6 +150,7 @@ public class TSVDesignatedSitesReport extends AbstractTSVReport
           // Year
           aRow.addElement( SitesSearchUtility.parseDesignationYear( site.getDesignationDate(), site.getSourceDB() ) );
           writeRow( aRow );
+          xmlreport.writeRow( createHeader() );
         }
       }
     }

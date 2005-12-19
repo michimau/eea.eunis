@@ -4,12 +4,15 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : "Sites coordinates" function - Popup for list of values in search page.
 --%>
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   // Web content manager used in this page.
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   String callback = request.getParameter("callback");
   String type = request.getParameter("type");
   if (null == type) type = "world";
@@ -26,7 +29,7 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <title>
-      <%=contentManagement.getContent("sites_coordinates-choice_title", false )%>
+      <%=cm.cms("sites_coordinates-choice_title")%>
     </title>
     <style type="text/css">
       body {
@@ -138,10 +141,13 @@
   </head>
   <body onload="JavaScript:initMap();">
     <div id="map">
-      <input alt="Select coordinates on map" title="Use the mouse to drag a rectangle on the map" id="bkgnd" type="image" name="mapImage" src="<%=imgPath%>" border="1" width="800" height="400" onmousemove="javascript:display_coordinates();" onmouseout="javascript:stop_display();" />
+      <input alt="<%=cm.cms("sites_coordinates_choice_map_alt")%>" title="<%=cm.cms("sites_coordinates_choice_map_title")%>" id="bkgnd" type="image" name="mapImage" src="<%=imgPath%>" border="1" width="800" height="400" onmousemove="javascript:display_coordinates();" onmouseout="javascript:stop_display();" />
+      <%=cm.cmsAlt("sites_coordinates_choice_map_alt")%>
+      <%=cm.cmsTitle("sites_coordinates_choice_map_title")%>
       <div id="box" class="noshow">
         <div class="noshow"></div>
       </div>
     </div>
+    <%=cm.cmsMsg("sites_coordinates-choice_title")%>
   </body>
 </html>

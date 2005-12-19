@@ -4,21 +4,24 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Pick references, show habitats' function - Popup for list of values in search page.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page contentType="text/html" %>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement, ro.finsiel.eunis.jrfTables.habitats.habitatsByReferences.RefDomain, ro.finsiel.eunis.jrfTables.habitats.references.HabitatsBooksPersist,
                 ro.finsiel.eunis.search.Utilities,
                 ro.finsiel.eunis.search.habitats.habitatsByReferences.ReferencesForHabitats,
                 java.util.List" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
   <%
-    WebContentManagement contentManagement = SessionManager.getWebContent();
+    WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
-    <%=contentManagement.getContent("habitats_references-choice_title", false)%>
+    <%=cm.cms("habitats_references-choice_title")%>
   </title>
   <script language="JavaScript" type="text/javascript">
   <!--
@@ -33,12 +36,6 @@
      if (fromWhere == "editor") window.opener.document.eunis.editor.value=val;
      if (fromWhere == "publisher") window.opener.document.eunis.publisher.value=val;
      window.close();
-   }
-
-   function editContent( idPage )
-   {
-     var url = "web-content-inline-editor.jsp?idPage=" + idPage;
-     window.open( url ,'', "width=540,height=500,status=0,scrollbars=0,toolbar=0,resizable=1,location=0");
    }
  // -->
   </script>
@@ -142,7 +139,7 @@
 <body>
 <%
   if(results != null && results.size() > 0) {
-    out.print(Utilities.getTextMaxLimitForPopup(contentManagement, (results == null ? 0 : results.size())));
+    out.print(Utilities.getTextMaxLimitForPopup(cm, (results == null ? 0 : results.size())));
   }
 %>
 <%
@@ -155,21 +152,21 @@
       if(request.getParameter("fromWhere").equalsIgnoreCase("date")) listOfWhat = "years dates";
     }
 %>
-<h6>
-  List of <%=listOfWhat%> references <%=forWhat.equalsIgnoreCase("") ? "" : "with following characteristics"%>:
+<h2>
+  <%=cm.cmsText("list_of")%> <%=listOfWhat%> <%=cm.cms("references")%> <%=forWhat.equalsIgnoreCase("") ? "" : cm.cmsText("with_following_characteristics")%>:
   <br />
   <%=forWhat%>
-</h6>
+</h2>
 <br />
 <br />
 <%
   }
 %>
 <div id="tab">
-<table summary="List of values" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+<table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
   <tr>
     <th>
-      List of values
+     <%=cm.cmsText("list_of_values")%>
     </th>
   </tr>
   <%
@@ -186,7 +183,8 @@
   %>
   <tr>
     <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <a title="Click link to select the value" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getsource()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getsource()))%></a>
+      <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getsource()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getsource()))%></a>
+      <%=cm.cmsTitle("click_link_to_select_value")%>
     </td>
   </tr>
   <%
@@ -197,7 +195,8 @@
   %>
   <tr>
     <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <a title="Click link to select the value" href="javascript:setLine('<%=Utilities.formatReferencesDate(n.getcreated())%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatReferencesDate(n.getcreated())%></a>
+      <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.formatReferencesDate(n.getcreated())%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatReferencesDate(n.getcreated())%></a>
+      <%=cm.cmsTitle("click_link_to_select_value")%>
     </td>
   </tr>
   <%
@@ -208,7 +207,8 @@
   %>
   <tr>
     <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <a title="Click link to select the value" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.gettitle()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.gettitle()))%></a>
+      <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.gettitle()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.gettitle()))%></a>
+      <%=cm.cmsTitle("click_link_to_select_value")%>
     </td>
   </tr>
   <%
@@ -219,7 +219,8 @@
   %>
   <tr>
     <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <a title="Click link to select the value" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.geteditor()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.geteditor()))%></a>
+      <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.geteditor()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.geteditor()))%></a>
+      <%=cm.cmsTitle("click_link_to_select_value")%>
     </td>
   </tr>
   <%
@@ -229,7 +230,8 @@
   %>
   <tr>
     <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <a title="Click link to select the value" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getpublisher()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getpublisher()))%></a>
+      <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getpublisher()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getpublisher()))%></a>
+      <%=cm.cmsTitle("click_link_to_select_value")%>
     </td>
   </tr>
   <%
@@ -240,8 +242,7 @@
   <tr>
     <td>
       <strong>
-        <%=contentManagement.getContent("habitats_references-choice_01")%> <%=request.getParameter("fromWhere")%>
-        .
+        <%=cm.cmsText("habitats_references-choice_01")%> <%=request.getParameter("fromWhere")%>.
       </strong>
     </td>
   </tr>
@@ -252,7 +253,7 @@
   <tr>
     <td>
       <strong>
-        <%=contentManagement.getContent("habitats_references-choice_02")%>.
+        <%=cm.cmsText("habitats_references-choice_02")%>.
       </strong>
     </td>
   </tr>
@@ -265,9 +266,13 @@
   // out.print(Utilities.getTextMaxLimitForPopup((results == null ? 0 : results.size())));
 %>
 <form action="">
-  <label for="button" class="noshow">Close window</label>
-  <input title="Close window" type="button" value="<%=contentManagement.getContent("habitats_references-choice_03", false )%>" onclick="javascript:window.close()" id="button" name="button" class="inputTextField" />
+  <label for="button" class="noshow"><%=cm.cms("close_window")%></label>
+  <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("habitats_references-choice_03")%>" onclick="javascript:window.close()" id="button" name="button" class="inputTextField" />
+  <%=cm.cmsLabel("close_window")%>
+  <%=cm.cmsInput("habitats_references-choice_03")%>
 </form>
-<%=contentManagement.writeEditTag("habitats_references-choice_03")%>
+<%=cm.cms("habitats_references-choice_title")%>
+<%=cm.br()%>
+<%=cm.cmsTitle("list_of_values")%>
 </body>
 </html>

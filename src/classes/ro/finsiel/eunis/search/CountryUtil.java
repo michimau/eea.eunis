@@ -330,7 +330,7 @@ public class CountryUtil {
     if (null == name) return findAllCountries();
     try
     {
-      ret = new Chm62edtCountryDomain().findWhereOrderBy("AREA_NAME_EN LIKE '%" + name + "%' AND (ISO_2L<>'' AND ISO_2L<>'null' AND ISO_2L IS NOT NULL AND SELECTION <> 0)", "AREA_NAME_EN");
+      ret = new Chm62edtCountryDomain().findCustom("SELECT * FROM CHM62EDT_COUNTRY WHERE AREA_NAME_EN LIKE '%" + name + "%' AND (ISO_2L<>'' AND ISO_2L<>'null' AND ISO_2L IS NOT NULL AND SELECTION <> 0) GROUP BY AREA_NAME_EN ORDER BY AREA_NAME_EN");
     } catch (Exception _ex) {
       _ex.printStackTrace(System.err);
       ret = new Vector();

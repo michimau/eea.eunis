@@ -4,19 +4,22 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : In this page are saved combined search criteria .
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@page contentType="text/html"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@page import="ro.finsiel.eunis.search.combined.SaveCombinedSearchCriteria,
                 ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
     <%
-      WebContentManagement contentManagement = SessionManager.getWebContent();
+      WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title>
-      <%=contentManagement.getContent("generic_save-search_title", false )%>
+      <%=cm.cms("generic_save-search_title")%>
     </title>
      <%
        // Set IdSession variable
@@ -31,7 +34,7 @@
 
        if( NatureObject == null || NatureObject.length()==0 || NatureObject.equalsIgnoreCase("undefined") )
        {
-         System.out.println("No nature object found - Default to Species");
+         System.out.println("No nature object found in save criteria!");
          NatureObject="";
        }
      %>
@@ -188,20 +191,21 @@
 %>
         <tr bgcolor="#EEEEEE">
           <td>
-            <h6>
-              <%=contentManagement.getContent("generic_save-search_01")%>
-            </h6>
+            <h2>
+              <%=cm.cmsText("generic_save-search_01")%>
+            </h2>
           </td>
         </tr>
         <tr>
           <td>
-            <%=contentManagement.getContent("generic_save-search_02")%>
+            <%=cm.cmsText("generic_save-search_02")%>
           </td>
         </tr>
         <tr>
           <td>
-            <label for="description" class="noshow">Description</label>
-            <textarea title="Description" name="description" id="description" cols="70" rows="5" class="inputTextField"><%=descr%></textarea>
+            <label for="description" class="noshow"><%=cm.cms("save_criteria_description")%></label>
+            <textarea title="<%=cm.cms("save_criteria_description")%>" name="description" id="description" cols="70" rows="5" class="inputTextField"><%=descr%></textarea>
+            <%=cm.cmsLabel("save_criteria_description")%>
           </td>
         </tr>
         <tr>
@@ -209,9 +213,9 @@
             <img alt="" src="images/mini/bulletb.gif" width="6" height="6" />
             &nbsp;
             <strong>
-            <%=contentManagement.getContent("generic_save-search_03")%>
+            <%=cm.cmsText("generic_save-search_03")%>
             </strong>
-            <%=contentManagement.getContent("generic_save-search_04")%>
+            <%=cm.cmsText("generic_save-search_04")%>
           </td>
         </tr>
 <%
@@ -221,11 +225,11 @@
             String saveOperationResult = "";
             if ( saveWithSuccess )
             {
-              saveOperationResult = contentManagement.getContent("generic_save-search_05");
+              saveOperationResult = cm.cmsText("generic_save-search_05");
             }
             else
             {
-              saveOperationResult = contentManagement.getContent("generic_save-search_06");
+              saveOperationResult = cm.cmsText("generic_save-search_06");
             }
 %>
             <tr>
@@ -245,18 +249,24 @@
               if (null == request.getParameter("description"))
               {
 %>
-              <label for="Submit" class="noshow">Save</label>
-              <input title="Save" type="submit" name="Submit" id="Submit" value="<%=contentManagement.getContent("generic_save-search_07")%>" class="inputTextField" />
-              <label for="Reset" class="noshow">Reset values</label>
-              <input title="Reset values" type="reset" name="Reset" id="Reset" value="<%=contentManagement.getContent("generic_save-search_08")%>" class="inputTextField" />
+              <label for="Submit" class="noshow"><%=cm.cms("save_btn")%></label>
+              <input title="<%=cm.cms("save_btn")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("generic_save-search_07")%>" class="inputTextField" />
+              <%=cm.cmsLabel("save_btn")%>
+              <%=cm.cmsInput("generic_save-search_07")%>
+              <label for="Reset" class="noshow"><%=cm.cms("reset_btn")%></label>
+              <input title="<%=cm.cms("reset_btn")%>" type="reset" name="Reset" id="Reset" value="<%=cm.cms("generic_save-search_08")%>" class="inputTextField" />
+              <%=cm.cmsLabel("reset_btn")%>
+              <%=cm.cmsInput("generic_save-search_08")%>
 <%
               }
 %>
-            <label for="Close" class="noshow">Close window</label>
-            <input type="button" title="Close window" name="Close" id="Close" value="<%=contentManagement.getContent("generic_save-search_09")%>" onclick="javascript:closeWindow('<%=request.getParameter("fromWhere")%>')" class="inputTextField" />
+            <label for="Close" class="noshow"><%=cm.cms("close_window")%></label>
+            <input type="button" title="<%=cm.cms("close_window")%>" name="Close" id="Close" value="<%=cm.cms("generic_save-search_09")%>" onclick="javascript:closeWindow('<%=request.getParameter("fromWhere")%>')" class="inputTextField" /><%=cm.cmsInput("generic_save-search_09")%>
+            <%=cm.cmsLabel("close_window")%>
           </td>
         </tr>
     </table>
   </form>
+  <%=cm.cmsMsg("generic_save-search_title")%>
   </body>
 </html>

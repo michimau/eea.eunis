@@ -221,15 +221,27 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
     return sql.toString();
   }
 
+  /**
+   * Getter.
+   * @return scientificName
+   */
   public String getScientificName()
   {
     return scientificName;
   }
 
+  /**
+   * Getter.
+   * @return relationOp
+   */
   public Integer getRelationOp() {
     return relationOp;
   }
 
+  /**
+   * Getter.
+   * @return isMainCriteria
+   */
   public boolean isMainCriteria()
   {
     return isMainCriteria;

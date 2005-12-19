@@ -4,16 +4,17 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Popup page for refine criteria in sites search result pages
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.search.Utilities,
-                 ro.finsiel.eunis.search.sites.names.NameSearchCriteria,
                  ro.finsiel.eunis.search.CountryUtil,
                  java.util.List,
                  java.util.Iterator,
                  ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist,
-                 ro.finsiel.eunis.search.sites.size.SizeSearchCriteria,
                  ro.finsiel.eunis.search.sites.SitesSearchCriteria,
                  ro.finsiel.eunis.WebContentManagement"%>
-<%@ page contentType="text/html"%>
 <%-- This is the helper displayed when user presses the question icon on the "Refine your search" in Sites module --%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -21,12 +22,12 @@
   <head>
 <%
   // Web content manager used in this page.
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   // What type of information this tip should display, for example Source data set, country etc.
   int criteria = Utilities.checkedStringToInt(request.getParameter( "criteria" ), -1);
 %>
     <title>
-      <%=contentManagement.getContent("sites_refine-helper_title", false )%>
+      <%=cm.cms("sites_refine-helper_title")%>
     </title>
     <jsp:include page="header-page.jsp" />
     <script language="JavaScript" type="text/javascript">
@@ -44,41 +45,48 @@
   if ( criteria == SitesSearchCriteria.CRITERIA_SOURCE_DB.intValue() )
   {
 %>
-      <%=contentManagement.getContent("sites_refine-helper_01")%>
-    <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+      <%=cm.cmsText("sites_refine-helper_01")%>
+    <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
       <tr>
         <td bgcolor="#EEEEEE">
-          <a title="Click link to select the value" href="javascript:setLine('CDDA National')"><%=contentManagement.getContent("sites_refine-helper_02")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('CDDA National')"><%=cm.cmsText("sites_refine-helper_02")%></a>
+          <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
       <tr>
         <td>
-          <a title="Click link to select the value" href="javascript:setLine('CDDA International')"><%=contentManagement.getContent("sites_refine-helper_03")%></a>
-        </td>
-      </tr>
-      <tr>
-        <td bgcolor="#EEEEEE">
-          <a title="Click link to select the value" href="javascript:setLine('Corine biotopes')"><%=contentManagement.getContent("sites_refine-helper_04")%></a>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a title="Click link to select the value" href="javascript:setLine('Biogenetic reserve')"><%=contentManagement.getContent("sites_refine-helper_05")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('CDDA International')"><%=cm.cmsText("sites_refine-helper_03")%></a>
+          <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
       <tr>
         <td bgcolor="#EEEEEE">
-          <a title="Click link to select the value" href="javascript:setLine('European diploma')"><%=contentManagement.getContent("sites_refine-helper_06")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Corine biotopes')"><%=cm.cmsText("sites_refine-helper_04")%></a>
+          <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
       <tr>
         <td>
-          <a title="Click link to select the value" href="javascript:setLine('Natura 2000')"><%=contentManagement.getContent("sites_refine-helper_07")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Biogenetic reserve')"><%=cm.cmsText("sites_refine-helper_05")%></a>
+          <%=cm.cmsTitle("click_link_to_select_value")%>
+        </td>
+      </tr>
+      <tr>
+        <td bgcolor="#EEEEEE">
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('European diploma')"><%=cm.cmsText("sites_refine-helper_06")%></a>
+          <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
       <tr>
         <td>
-          <a title="Click link to select the value" href="javascript:setLine('Emerald')">Emerald</a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Natura 2000')"><%=cm.cmsText("sites_refine-helper_07")%></a>
+          <%=cm.cmsTitle("click_link_to_select_value")%>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Emerald')"><%=cm.cmsText("sites_refine_emerald")%></a>
+          <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
     </table>
@@ -91,8 +99,8 @@
     int i = 0;
     Iterator regionsIt = list.iterator();
 %>
-    <%=contentManagement.getContent("sites_refine-helper_08")%>
-    <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+    <%=cm.cmsText("sites_refine-helper_08")%>
+    <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
     while ( regionsIt.hasNext() )
     {
@@ -101,7 +109,8 @@
 %>
       <tr>
         <td bgcolor="<%=color%>">
-          <a title="Click link to select the value" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(country.getAreaNameEnglish())%>')"><%=country.getAreaNameEnglish()%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(country.getAreaNameEnglish())%>')"><%=country.getAreaNameEnglish()%></a>
+          <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
 <%
@@ -117,8 +126,8 @@
     int i = 0;
     Iterator regionsIt = list.iterator();
 %>
-      <%=contentManagement.getContent("sites_refine-helper_08")%>
-    <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+      <%=cm.cmsText("sites_refine-helper_08")%>
+    <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
     while (regionsIt.hasNext())
     {
@@ -127,7 +136,8 @@
 %>
       <tr>
         <td bgcolor="<%=color%>">
-          <a title="Click link to select the value" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(country.getAreaNameEnglish())%>')"><%=country.getAreaNameEnglish()%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(country.getAreaNameEnglish())%>')"><%=country.getAreaNameEnglish()%></a>
+          <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
 <%
@@ -139,7 +149,12 @@
 %>
     <br />
     <form action="">
-      <input title="Close window" type="button" value="Close" onclick="javascript:window.close()" name="button" class="inputTextField" />
+      <label for="button2" class="noshow"><%=cm.cms("close_window_label")%></label>
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
+      <%=cm.cmsLabel("close_window_label")%>
+      <%=cm.cmsTitle("close_window_title")%>
+      <%=cm.cmsInput("close_window_value")%>
     </form>
+    <%=cm.cmsMsg("sites_refine-helper_title")%>
   </body>
 </html>

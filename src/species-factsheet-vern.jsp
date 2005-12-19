@@ -4,6 +4,10 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Species factsheet - vernacular names.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtReportsPersist,java.util.*,
                  ro.finsiel.eunis.search.species.SpeciesSearchUtility,
                  ro.finsiel.eunis.search.Utilities,
@@ -23,17 +27,20 @@
   if ( !results.isEmpty() )
   {
 %>
-    <div style="width : 740px; background-color : #CCCCCC; font-weight : bold;">Vernacular names</div>
-    <table summary="Vernacular names" width="100%" border="1" cellspacing="1" cellpadding="0"  id="vernNames" style="border-collapse:collapse">
-      <tr style="background-color:#DDDDDD">
-        <th class="resultHeaderForFactsheet">
-          <a title="Sort by Vernacular name" href="javascript:sortTable(3,0, 'vernNames', false);"><%=cm.getContent("species_factsheet-vern_02")%></a>
+    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_factsheet-vern_08")%></div>
+    <table summary="<%=cm.cms("species_factsheet-vern_08_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0"  id="vernNames" class="sortable">
+      <tr>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-vern_02")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th class="resultHeaderForFactsheet">
-          <a title="Sort by Language" href="javascript:sortTable(3,1, 'vernNames', false);"><%=cm.getContent("species_factsheet-vern_03")%></a>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-vern_03")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th class="resultHeaderForFactsheet">
-          <a title="Sort by Reference" href="javascript:sortTable(3,2, 'vernNames', false);"><%=cm.getContent("species_factsheet-vern_04")%></a>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_factsheet-vern_04")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
 <%
@@ -88,5 +95,7 @@
 <%
   }
 %>
+<%=cm.br()%>
+<%=cm.cmsMsg("species_factsheet-vern_08_Sum")%>
 <br />
 <br />

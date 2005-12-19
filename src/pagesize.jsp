@@ -4,7 +4,13 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Change number of results per page
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.search.Utilities"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
+<jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   /* PREAMBLE - This page represents the form to change the number of results displayed per page */
   // INPUT VARIABLES. This must exist in your including JSP !!! If you DO NOT, compilation error would occurr. I think
@@ -24,15 +30,21 @@
   String toURLParamSize = request.getParameter("toFORMParam");
 
   int maxResultsPerPage = Utilities.checkedStringToInt( application.getInitParameter( "MAX_RESULTS_PER_PAGE" ), 250 );
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
 <br />
 <form name="changePageSize<%=guidPageSize%>" method="get" action="<%=pageNameSize%>" onsubmit="if (checkRange()) return true; return false;">
   <label for="pageSize">
-    Results displayed per page&nbsp;(max. <%=maxResultsPerPage%>)
+    <%=cm.cms("pagesize_results_label")%>&nbsp;(max. <%=maxResultsPerPage%>)
   </label>
-  <input title="Results displayed per page" class="inputTextFieldCenter" name="pageSize" id="pageSize" type="text" size="3" value="<%=pageSizeSize%>" />
-  <label for="changePageSizeButton" class="noshow">Change</label>
-  <input id="changePageSizeButton" title="Change" type="submit" name="Go" value="Change" class="inputTextField" />
+  <input title="<%=cm.cms("pagesize_results_title")%>" class="inputTextFieldCenter" name="pageSize" id="pageSize" type="text" size="3" value="<%=pageSizeSize%>" />
+  <%=cm.cmsLabel("pagesize_results_label")%>
+  <%=cm.cmsTitle("pagesize_results_title")%>
+  <label for="changePageSizeButton" class="noshow"><%=cm.cms("pagesize_change_label")%></label>
+  <input id="changePageSizeButton" title="<%=cm.cms("pagesize_change_title")%>" type="submit" name="Go" value="<%=cm.cms("pagesize_change_value")%>" class="inputTextField" />
+  <%=cm.cmsLabel("pagesize_change_label")%>
+  <%=cm.cmsTitle("pagesize_change_title")%>
+  <%=cm.cmsInput("pagesize_change_value")%>
   <%=toURLParamSize%>
   <script language="JavaScript" type="text/javascript">
     <!--
@@ -41,12 +53,16 @@
       var currPageSize = parseInt(document.changePageSize<%=guidPageSize%>.pageSize.value);
       if (currPageSize > <%=maxResultsPerPage%>)
       {
-        alert("Max. results displayed per page is set to <%=maxResultsPerPage%>");
+        alert("<%=cm.cms("pagesize_max_results")%> <%=maxResultsPerPage%>");
         return false;
       }
       return true;
     }
     // -->
   </script>
-  <noscript>Your browser does not support JavaScript!</noscript>
+
+  <%=cm.br()%>
+  <%=cm.br()%> 
+  <%=cm.cmsMsg("pagesize_max_results")%>
+  <%=cm.br()%>
 </form>

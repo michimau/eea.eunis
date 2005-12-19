@@ -4,6 +4,10 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'Habitats legal instruments' function - display links to all habitat searches.
 --%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.exceptions.InitializationException,
                  ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet,
@@ -16,7 +20,7 @@
   // Mini factsheet shows only the uppermost part of the factsheet with generic information.
   HabitatsFactsheet factsheet = null;
   factsheet = new HabitatsFactsheet(idHabitat);
-  WebContentManagement contentManagement = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   Vector legals = null;
   try {
     legals = factsheet.getHabitatLegalInfo();
@@ -26,20 +30,26 @@
   // Habitat legal information.
   if((factsheet.isEunis() && !legals.isEmpty())) {
 %>
-<div style="width : 740px; background-color : #CCCCCC; font-weight : bold;"><%=contentManagement.getContent("habitats_factsheet_27")%></div>
-<table summary="Habitat type legal instruments" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; " id="legal">
-  <tr bgcolor="#DDDDDD">
-    <th class="resultHeader" width="30%">
-      <a title="Sort table by this column" href="javascript:sortTable(3, 0, 'legal', false);">
-        <strong><%=contentManagement.getContent("habitats_factsheet_28")%></strong></a>
+<div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitats_factsheet_27")%></div>
+<table summary="<%=cm.cms("habitat_legal_instruments")%>" width="100%" border="0" cellspacing="0" cellpadding="0" id="legal" class="sortable">
+  <tr>
+    <th width="30%" title="<%=cm.cms("sort_results_on_this_column")%>">
+      <strong>
+        <%=cm.cmsText("habitats_factsheet_28")%>
+        <%=cm.cmsTitle("sort_results_on_this_column")%>
+      </strong>
     </th>
-    <th class="resultHeader" width="50%">
-      <a title="Sort table by this column" href="javascript:sortTable(3, 1, 'legal', false);">
-        <strong><%=contentManagement.getContent("habitats_factsheet_29")%></strong></a>
+    <th width="50%" title="<%=cm.cms("sort_results_on_this_column")%>">
+      <strong>
+        <%=cm.cmsText("habitats_factsheet_29")%>
+        <%=cm.cmsTitle("sort_results_on_this_column")%>
+      </strong>
     </th>
-    <th class="resultHeader" width="20%">
-      <a title="Sort table by this column" href="javascript:sortTable(3, 2, 'legal', false);">
-        <strong><%=contentManagement.getContent("habitats_factsheet_30")%></strong></a>
+    <th width="20%" title="<%=cm.cms("sort_results_on_this_column")%>">
+      <strong>
+        <%=cm.cmsText("habitats_factsheet_30")%>
+        <%=cm.cmsTitle("sort_results_on_this_column")%>
+      </strong>
     </th>
   </tr>
   <%
@@ -55,6 +65,8 @@
     }
   %>
 </table>
+<%=cm.br()%>
+<%=cm.cmsMsg("habitat_legal_instruments")%>
 <br />
 <%
   }

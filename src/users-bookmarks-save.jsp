@@ -4,9 +4,14 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Users bookmarks save.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.utilities.SQLUtilities,
                  ro.finsiel.eunis.search.Utilities"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   String SQL_DRV = application.getInitParameter("JDBC_DRV");
@@ -32,8 +37,10 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-    <title>Save bookmark</title>
-    <script language="JavaScript" src="script/utils.js" type="text/javascript"></script>
+    <%
+        WebContentManagement cm = SessionManager.getWebContent();
+    %>
+    <title><%=cm.cms("users_bookmarks_save_title")%></title>
     <script type="text/javascript" language="javascript">
       <!--
         function validateForm()
@@ -41,7 +48,7 @@
           var desc = document.saveBookmark.description.value;
           if ( desc == "" )
           {
-            alert( "Please enter description for bookmark");
+            alert( "<%=cm.cms("users_bookmarks_save_01")%>");
             return false;
           }
           return true;
@@ -53,24 +60,34 @@
     <form name="saveBookmark" method="post" action="users-bookmarks-save.jsp" onsubmit="javascript: return validateForm();">
       <input type="hidden" name="action" value="saveBookmark" />
       <input type="hidden" name="bookmarkURL" value="<%=bookmarkURL%>" />
-      Bookmark URL:
+      <%=cm.cmsText("users_bookmarks_save_02")%>:
       <span style="background-color : #EEEEEE">
         <%=bookmarkURL%>
       </span>
       <br />
       <br />
       <label for="description">
-      Enter description for bookmark:
+      <%=cm.cmsText("users_bookmarks_save_03")%>:
       </label>
       <br />
-      <textarea title="Description" name="description" id="description" rows="6" cols="60"  class="inputTextField"></textarea>
+      <textarea title="<%=cm.cms("description")%>" name="description" id="description" rows="6" cols="60"  class="inputTextField"></textarea>
+      <%=cm.cmsTitle("description")%>
       <br />
-      <label for="input1" class="noshow">Save</label>
-      <input title="Save" id="input1" type="submit" name="Save" value="Save" class="inputTextField" />
-      <label for="input2" class="noshow">Reset</label>
-      <input title="Reset" id="input2" type="reset" name="Reset" value="Reset" class="inputTextField" />
-      <label for="input3" class="noshow">Close</label>
-      <input title="Close" id="input3" type="button" name="Close" value="Close" class="inputTextField" onClick="window.close();" />
+      <label for="input1" class="noshow"><%=cm.cms("save")%></label>
+      <input title="<%=cm.cms("save")%>" id="input1" type="submit" name="Save" value="<%=cm.cms("save_btn")%>" class="inputTextField" />
+      <%=cm.cmsLabel("save")%>
+      <%=cm.cmsTitle("save")%>
+      <%=cm.cmsInput("save_btn")%>
+      <label for="input2" class="noshow"><%=cm.cms("reset")%></label>
+      <input title="<%=cm.cms("reset")%>" id="input2" type="reset" name="Reset" value="<%=cm.cms("reset_btn")%>" class="inputTextField" />
+      <%=cm.cmsLabel("reset")%>
+      <%=cm.cmsTitle("reset")%>
+      <%=cm.cmsInput("reset_btn")%>
+      <label for="input3" class="noshow"><%=cm.cms("close")%></label>
+      <input title="<%=cm.cms("close")%>" id="input3" type="button" name="Close" value="<%=cm.cms("close_btn")%>" class="inputTextField" onClick="window.close();" />
+      <%=cm.cmsLabel("close")%>
+      <%=cm.cmsTitle("close")%>
+      <%=cm.cmsInput("close_btn")%>
     </form>
 <%
   if ( action.equalsIgnoreCase( "saveBookmark" ) )
@@ -82,23 +99,32 @@
           if ( result )
           {
 %>
-            alert( "Bookmark successfully saved.");
+            alert( "<%=cm.cms("users_bookmarks_save_04")%>");
 <%
           }
           else
           {
 %>
-            alert( "An error occurred, possibly because bookmark already exits." );
+            alert( "<%=cm.cms("users_bookmarks_save_05")%>" );
 <%
           }
 %>
           this.close();
         //-->
       </script>
-      <noscript>Your browser does not support JavaScript!</noscript>
 <%
   }
-
 %>
+
+<%=cm.br()%>
+<%=cm.cmsMsg("users_bookmarks_save_title")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_bookmarks_save_01")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_bookmarks_save_04")%>
+<%=cm.br()%>
+<%=cm.cmsMsg("users_bookmarks_save_05")%>
+<%=cm.br()%>
+
   </body>
 </html>

@@ -31,7 +31,6 @@ public class UsersRightsDomain extends AbstractDomain {
     this.addColumnSpec(new StringColumnSpec("FIRST_NAME", "getFierstName", "setFirstName", DEFAULT_TO_EMPTY_STRING));
     this.addColumnSpec(new StringColumnSpec("LAST_NAME", "getLastName", "setLastName", DEFAULT_TO_EMPTY_STRING));
     this.addColumnSpec(new StringColumnSpec("EMAIL", "getEMail", "setEMail", DEFAULT_TO_EMPTY_STRING));
-    this.addColumnSpec(new IntegerColumnSpec("FONTSIZE", "getFontsize", "setFontsize", null, REQUIRED));
     this.addColumnSpec(new IntegerColumnSpec("THEME_INDEX", "getThemeIndex", "setThemeIndex", null, REQUIRED));
 
     JoinTable usersRoles = new JoinTable("EUNIS_USERS_ROLES B", "USERNAME", "USERNAME");

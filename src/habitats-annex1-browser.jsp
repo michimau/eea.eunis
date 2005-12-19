@@ -4,11 +4,14 @@
   - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Display tree of the Annex I habitats.
 --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page contentType="text/html" %>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement, ro.finsiel.eunis.jrfTables.Chm62edtHabitatPersist" %>
 <%@ page import="java.util.Iterator" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
@@ -57,25 +60,27 @@
     //-->
   </script>
   <%
-    WebContentManagement contentManagement = SessionManager.getWebContent();
+    WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=contentManagement.getContent("habitats_annex1-browser_title", false)%>
+    <%=cm.cms("habitats_annex1-browser_title")%>
   </title>
   <%
     int mx = 0;
   %>
 </head>
 
-<body bgcolor="#ffffff">
+<body>
+  <div id="outline">
+  <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="Home#index.jsp,Habitat types#habitats.jsp,ANNEX I habitat type hierarchical view" />
+  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitats_annex1_tree_location" />
 </jsp:include>
-<h5>
-  <%=contentManagement.getContent("habitats_annex1-browser_01")%>
-</h5>
+<h1>
+  <%=cm.cmsText("habitats_annex1-browser_01")%>
+</h1>
 <table summary="layout" width="100%" border="0">
 <tr>
 <td>
@@ -87,25 +92,28 @@
       mx = tree1.maxLevel(request.getParameter("habCode2000").substring(0, 1));
   %>
   <form name="setings" action="habitats-annex1-browser.jsp" method="post">
-    <label for="depth" class="noshow"><%=contentManagement.getContent("habitats_annex1-browser_03")%>:</label>
-    <select title="Level" name="depth" id="depth" onchange="MM_jumpMenu('parent',this,0)" class="inputTextField">
+    <label for="depth" class="noshow"><%=cm.cms("habitats_annex1-browser_03")%>:</label>
+    <select title="<%=cm.cms("habitats_annex1-browser_03")%>" name="depth" id="depth" onchange="MM_jumpMenu('parent',this,0)" class="inputTextField">
       <option value="habitats-annex1-browser.jsp" <%=(request.getParameter("level")==null ? "selected=\"selected\"" : "")%>>
-        <%=contentManagement.getContent("habitats_annex1-browser_02", false)%>
+        <%=cm.cms("habitats_annex1-browser_02")%>
       </option>
       <%
       // Display the levels
       for (int ii = 2; ii <= mx; ii++) {
       %>
-        <option value="habitats-annex1-browser.jsp?level=<%=ii%>&amp;habCode2000=<%=habCode2000%>" <%=(request.getParameter("level") != null && request.getParameter("level").equals((new Integer(ii)).toString())) ? "selected=\"selected\"" : ""%>><%=contentManagement.getContent("habitats_annex1-browser_04", false)%>&nbsp;<%=ii%></option>
+        <option value="habitats-annex1-browser.jsp?level=<%=ii%>&amp;habCode2000=<%=habCode2000%>" <%=(request.getParameter("level") != null && request.getParameter("level").equals((new Integer(ii)).toString())) ? "selected=\"selected\"" : ""%>><%=cm.cms("habitats_annex1-browser_04")%>&nbsp;<%=ii%></option>
       <%
       }
       %>
     </select>
+    <%=cm.cmsLabel("habitats_annex1-browser_03")%>
+    <%=cm.cmsInput("habitats_annex1-browser_02")%>
+    <%=cm.cmsInput("habitats_annex1-browser_04")%>
   </form>
   <%
     }
   %>
-  <table border="0" summary="layout" width="100%" title="Habit types on root level">
+  <table border="0" summary="layout" width="100%" title="<%=cm.cms("habitat_types_on_root_level")%>">
     <%
       // If the short factsheet of habitat is not open
       if (habID == null) {
@@ -123,9 +131,10 @@
               Chm62edtHabitatPersist h = (Chm62edtHabitatPersist) it.next();
         %>
              <li>
-               <a title="Expand data for the habitat type" href="habitats-annex1-browser.jsp?habCode2000=<%=h.getCode2000()%>">
+               <a title="<%=cm.cms("expand_data_for_habitat")%>" href="habitats-annex1-browser.jsp?habCode2000=<%=h.getCode2000()%>">
                <%=h.getCode2000()%> : <%=h.getScientificName()%>
                </a>
+               <%=cm.cmsTitle("expand_data_for_habitat")%>
              </li>
         <%
           }
@@ -165,7 +174,6 @@
           createTree(<%=level%>, level1, Tree2, 0<%=(habID==null)?",0":","+treeBean.getOpenNode()%>, 'habitats-annex1-browser.jsp');
                     //-->
           </script>
-          <noscript>Your browser does not support JavaScript!</noscript>
         </div>
       </td>
     </tr>
@@ -178,9 +186,8 @@
       <td>
         <br />
         <br />
-        <a title="Open habitat type factsheet" href="habitats-factsheet.jsp?idHabitat=<%=habID%>">Open full factsheet</a>
+        <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habID%>"><%=cm.cmsText("open_habitat_factsheet")%></a>
         <br />
-        <script language="JavaScript" type="text/javascript" src="script/sort-table.js"></script>
         <jsp:include page="habitats-factsheet-general.jsp">
           <jsp:param name="idHabitat" value="<%=habID%>" />
         </jsp:include>
@@ -193,9 +200,15 @@
 </td>
 </tr>
 </table>
+  <%=cm.cmsMsg("habitats_annex1-browser_title")%>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("habitat_types_on_root_level")%>
+  <%=cm.br()%>
   <jsp:include page="footer.jsp">
     <jsp:param name="page_name" value="habitats-annex1-browser.jsp" />
   </jsp:include>
+  </div>
+  </div>
   </div>
 </body>
 </html>

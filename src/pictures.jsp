@@ -4,24 +4,21 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Display pictures in factsheet
 --%>
-<%@page contentType="text/html"%>
-<%@ page import="java.util.Enumeration,
-                 java.sql.Connection,
-                 java.sql.PreparedStatement,
-                 java.sql.DriverManager,
-                 java.sql.ResultSet,
-                 ro.finsiel.eunis.jrfTables.*,
-                 ro.finsiel.eunis.search.Utilities,
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+  request.setCharacterEncoding( "UTF-8");
+%>
+<%@ page import="ro.finsiel.eunis.jrfTables.*,
                  java.util.List,
                  java.util.Iterator,
-                 ro.finsiel.eunis.admin.EUNISUploadServlet,
-                 ro.finsiel.eunis.factsheet.PicturesHelper"%>
+                 ro.finsiel.eunis.factsheet.PicturesHelper"%><%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
   <jsp:include page="header-page.jsp" />
 <%
+  WebContentManagement cm = SessionManager.getWebContent();
   String IdObject = request.getParameter("idobject");
   if(IdObject == null || IdObject.length()==0)
   {
@@ -123,8 +120,8 @@
         function nextImage(place) {
           var new_image = getNextImage();
           document[place].src = new_image;
-          document.all.picture_name.innerText=nameArray[ImageNum];
-          document.all.picture_description.innerText=descriptionArray[ImageNum];
+          document.getElementById('picture_name').innerHTML=nameArray[ImageNum];
+          document.getElementById('picture_description').innerHTML=descriptionArray[ImageNum];
         }
 
         function getNextImage() {
@@ -136,8 +133,8 @@
         function prevImage(place) {
           var new_image = getPrevImage();
           document[place].src = new_image;
-          document.all.picture_name.innerText=nameArray[ImageNum];
-          document.all.picture_description.innerText=descriptionArray[ImageNum];
+          document.getElementById('picture_name').innerHTML=nameArray[ImageNum];
+          document.getElementById('picture_description').innerHTML=descriptionArray[ImageNum];
         }
 
         function getPrevImage()
@@ -152,23 +149,25 @@
       //-->
     </script>
     <title>
-      Images of <%=scientificName%>
+      <%=cm.cms("pictures_page_title")%> <%=scientificName%>
     </title>
   </head>
   <body>
+    <div id="outline">
+    <div id="alignment">
     <div id="content">
-      <div id="picture_name" style="width : 740px; text-align:center; font-weight:bold;">
+      <div id="picture_name" style="width : 100%; text-align:center; font-weight:bold;">
         <%=scientificName%>
       </div>
-      <div id="picture_description" style="width : 740px; text-align:center; font-weight:bold;">
+      <div id="picture_description" style="width : 100%; text-align:center; font-weight:bold;">
         <%=firstdescription%>
       </div>
-      <div id="navRow" style="width : 740px; text-align : center;">
-        <a href="javascript:prevImage('rImage')">« Previous</a>
+      <div id="navRow" style="width : 100%; text-align : center;">
+        <a href="javascript:prevImage('rImage')"><%=cm.cmsText("pictures_previous")%></a>
         &nbsp;&nbsp;
-        <a href="javascript:nextImage('rImage')">Next »</a>
+        <a href="javascript:nextImage('rImage')"><%=cm.cmsText("pictures_next")%></a>
       </div>
-      <div style="width : 740px; text-align : center;">
+      <div style="width : 100%; text-align : center;">
         <img alt="<%=firstdescription%>" id="image" name="rImage" src="<%=dirBase + firstimage%>" border="1" />
       </div>
       <script language="JavaScript" type="text/javascript">
@@ -187,29 +186,37 @@
   {
 %>
     <title>
-      Images of <%=scientificName%>
+      <%=cm.cms("pictures_page_title")%> <%=scientificName%>
     </title>
   </head>
   <body>
+    <div id="outline">
+    <div id="alignment">
     <div id="content">
-    We are sorry, but no pictures are available for <strong>
-      <%=scientificName%>
-    </strong>
+      <%=cm.cmsText("pictures_none")%>
+      <strong>
+        <%=scientificName%>
+      </strong>
+      <br />
 <%
   }
 %>
-  <a href="javascript:window.close()">Close</a>
+      <label for="button2" class="noshow"><%=cm.cms("close_window_label")%></label>
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
+      <%=cm.cmsLabel("close_window_label")%>
+      <%=cm.cmsTitle("close_window_title")%>
+      <%=cm.cmsInput("close_window_value")%>
   <br />
 <%
   if (SessionManager.isAuthenticated())
   {
 %>
-  <a href="pictures-upload.jsp?idobject=<%=IdObject%>&amp;natureobjecttype=<%=NatureObjectType%>&amp;operation=upload">Upload new picture</a><br />
-  <a href="javascript:deletePicture();">Delete picture</a><br />
+  <a href="pictures-upload.jsp?idobject=<%=IdObject%>&amp;natureobjecttype=<%=NatureObjectType%>&amp;operation=upload"><%=cm.cmsText("pictures_uploadnew")%></a><br />
+  <a href="javascript:deletePicture();"><%=cm.cmsText("pictures_delete")%></a><br />
   <script type="text/javascript" language="javascript">
     <!--
     function deletePicture() {
-      if (confirm('Are you sure you want to delete this picture?')) {
+      if (confirm('<%=cm.cms("pictures_confirm")%>')) {
         var imgURI = document.getElementById("image").src;
         var uriElements = imgURI.split("/");
         var scientificName = uriElements[uriElements.length - 1];
@@ -230,10 +237,14 @@
   else
   {
 %>
-  If you were logged in, you could also add / delete pictures.
+    <%=cm.cmsText("pictures_login")%>
 <%
   }
 %>
+      <%=cm.cmsMsg("pictures_page_title")%>
+      <%=cm.cmsMsg("pictures_confirm")%>
+    </div>
+    </div>
     </div>
   </body>
 </html>

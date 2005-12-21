@@ -285,13 +285,13 @@
         <%=cm.cms("web_content_editor_19")%>:
         <br />
         <label for="text" class="noshow"><%=cm.cms("web_content_editor_21")%></label>
-        <textarea id="text" name="text" rows="5" cols="80" class="inputTextField" title="<%=cm.cms("web_content_editor_21")%>" ><%=contentText%></textarea>
+        <textarea id="text" name="text" rows="10" cols="80" class="inputTextField" title="<%=cm.cms("web_content_editor_21")%>" ><%=contentText%></textarea>
         <br />
         <%=cm.cms("web_content_editor_20")%>:
         <br />
         <label for="description" class="noshow"><%=cm.cms("web_content_editor_33")%></label>
         <textarea rows="3" id="description" name="description" cols="80" class="inputTextField" title="<%=cm.cms("web_content_editor_33")%>"><%=descriptionText%></textarea>
-        <%=cm.cms("web_content_editor_22")%>
+        <%--<%=cm.cmsTitle("web_content_editor_33")%>--%>
         <br />
         <br />
         <label for="maxLength"><%=cm.cms("web_content_editor_23")%>:</label> <input type="text" id="maxLength" name="maxLength" value="<%=maxLength%>" class="inputTextField" size="4" style="text-align : right;" title="<%=cm.cms("web_content_editor_24")%>" />

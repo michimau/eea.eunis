@@ -3,9 +3,7 @@ package ro.finsiel.eunis.reports;
 import ro.finsiel.eunis.search.AbstractPaginator;
 import ro.finsiel.eunis.search.Utilities;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Properties;
 
@@ -35,11 +33,11 @@ public class XMLReport {
   /**
    * EOL - END OF LINE \r\n.
    */
-  protected static final byte[] EOL = new String( "\r\n" ).getBytes();
+  protected static final String EOL = "\r\n";
   /**
    * Basic I/O data stream constructed around the file object.
    */
-  protected BufferedOutputStream fileStream = null;
+  protected PrintWriter fileStream = null;
   /**
    * Path to the file.
    */
@@ -65,9 +63,9 @@ public class XMLReport {
     {
       Properties p = ro.finsiel.eunis.OSEnvironment.getEnvVars();
       BASE_FILENAME = p.getProperty( "TOMCAT_HOME" ) + "/webapps/eunis/temp/";
-      fileStream = new BufferedOutputStream( new FileOutputStream( new File( BASE_FILENAME + filename ) ) );
-      fileStream.write( "<?xml version=\"1.0\" encoding=\"windows-1252\"?>\n".getBytes() );
-      fileStream.write( "<results>".getBytes() );
+      fileStream = new PrintWriter( BASE_FILENAME + filename );
+      fileStream.write( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" );
+      fileStream.write( "<results>" );
       this.filename = filename;
     }
     catch ( Exception ex )
@@ -91,10 +89,9 @@ public class XMLReport {
       {
         return;
       }
-      fileStream.write( TAG_ROW.getBytes() );
-      for ( int i = 0; i < row.size(); i++ )
+      fileStream.write( TAG_ROW );
+      for ( String _data : row )
       {
-        String _data = row.get( i );
         String cell = TAG_CELL;
         if ( null != _data )
         {
@@ -105,10 +102,10 @@ public class XMLReport {
           cell += STR_NULL;
         }
         cell += TAG_CELLEND;
-        fileStream.write( cell.getBytes() );
+        fileStream.write( cell );
         fileStream.write( EOL );
       }
-      fileStream.write( TAG_ROWEND.getBytes() );
+      fileStream.write( TAG_ROWEND );
       fileStream.write( EOL );
     }
     catch ( Exception ex )
@@ -125,7 +122,7 @@ public class XMLReport {
     {
       try
       {
-        fileStream.write( "</results>".getBytes() );
+        fileStream.write( "</results>" );
         fileStream.flush();
         fileStream.close();
       }

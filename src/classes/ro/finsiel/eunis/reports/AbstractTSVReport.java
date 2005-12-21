@@ -18,11 +18,11 @@ public abstract class AbstractTSVReport implements Serializable {
   /** Directory where file will be written. */
   protected static String BASE_FILENAME = "webapps/eunis/temp/";
   /** EOL - END OF LINE \r\n .*/
-  protected static final byte[] EOL = new String("\r\n").getBytes();
+  protected static final String EOL = "\r\n";
   /** TAB - Separator for two rows of the table. */
-  protected static final byte[] TAB = new String("\t").getBytes();
+  protected static final String TAB = "\t";
   /** Basic I/O data stream constructed around the file object. */
-  protected BufferedOutputStream fileStream = null;
+  protected PrintWriter fileStream = null;
   /** Path to the file. */
   protected String filename = null;
 
@@ -44,7 +44,7 @@ public abstract class AbstractTSVReport implements Serializable {
     try {
       Properties p = ro.finsiel.eunis.OSEnvironment.getEnvVars();
       BASE_FILENAME = p.getProperty("TOMCAT_HOME") + "/webapps/eunis/temp/";
-      fileStream = new BufferedOutputStream(new FileOutputStream(new File(BASE_FILENAME + filename)));
+      fileStream = new PrintWriter( BASE_FILENAME + filename );
     } catch (Exception _ex) {
       _ex.printStackTrace();
     }
@@ -80,9 +80,9 @@ public abstract class AbstractTSVReport implements Serializable {
     for (int i = 0; i < data.size(); i++) {
       String _data = (String) data.get(i);
       if (null != _data) {
-        fileStream.write(_data.getBytes());
+        fileStream.write(_data );
       } else {
-        fileStream.write(new String("null").getBytes());
+        fileStream.write( "null" );
       }
       if (i < data.size() - 1) fileStream.write(TAB);
     }

@@ -31,6 +31,7 @@ Input parameters  on REQUEST:
 <jsp:include page="header-static.jsp"/>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
+  String domain = application.getInitParameter( "DOMAIN_NAME" );
   WebContentManagement cm = SessionManager.getWebContent();
   // Request parameters.
   String dynHeaderLocation = request.getParameter("location");
@@ -48,7 +49,7 @@ Input parameters  on REQUEST:
 <table summary="layout" border="0" cellpadding="0" cellspacing="0" width="100%" style="text-align : left;">
   <tr>
     <td width="60%">
-      <img alt="<%=cm.cms( "header_current_location_alt" )%>" src="images/path.gif" width="20" height="16" align="middle" /><%=cm.cmsAlt("header_current_location_alt")%>
+      <img alt="<%=cm.cms( "header_current_location_alt" )%>" src="<%=domain%>/images/path.gif" width="20" height="16" align="middle" /><%=cm.cmsAlt("header_current_location_alt")%>
 <%
         for (int i = 0; i < backtrailObjects.size(); i++)
         {
@@ -71,7 +72,7 @@ Input parameters  on REQUEST:
       {
 %>
         <td width="7%" align="right">
-          <a class="breadcrumbtrail" href="<%=dynHeaderHelpLink%>" title="<%=cm.cms( "header_help_title" )%>"><%=cm.cmsText( "header_help" )%></a>
+          <a class="breadcrumbtrail" href="<%=domain%>/<%=dynHeaderHelpLink%>" title="<%=cm.cms( "header_help_title" )%>"><%=cm.cmsText( "header_help" )%></a>
           <%=cm.cmsTitle( "header_help_title" )%>
         </td>
 <%

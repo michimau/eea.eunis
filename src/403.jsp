@@ -38,7 +38,7 @@
     <br />
     <br />
     <strong>
-      Resource not found.
+      Access forbidden.
     </strong>
     <br />
     <jsp:include page="footer.jsp">

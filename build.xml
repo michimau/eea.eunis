@@ -206,19 +206,17 @@
     <copy todir="${deployDir}/gis">
       <fileset dir="${srcDir}/gis"/>
     </copy>
-    <!--
+
     <copy tofile="${deployDir}/WEB-INF/classes/jrf.properties.${timeStamp}" file="3rdparty/conf/jrf.properties"/>
     <copy tofile="${deployDir}/WEB-INF/classes/log4j.properties.${timeStamp}" file="3rdparty/conf/log4j.properties"/>
-    -->
-    <copy tofile="${deployDir}/WEB-INF/classes/jrf.properties" file="3rdparty/conf/jrf.properties"/>
-    <copy tofile="${deployDir}/WEB-INF/classes/log4j.properties" file="3rdparty/conf/log4j.properties"/>
-    <!-- Copy downloadable files (one by one because we do not want to fail the build process if file does not exists) -->
-    <copy file="downloads/eunis.zip" tofile="${deployDir}/downloads/eunis.zip" failonerror="false"/>
-    <!-- Copy the web.xml deployment descriptor -->
-    <!--
     <copy file="${confDir}/web.xml" tofile="${deployDir}/WEB-INF/web.xml.${timeStamp}"/>
-    -->
-    <copy file="${confDir}/web.xml" tofile="${deployDir}/WEB-INF/web.xml"/>
+
+    <!--<copy tofile="${deployDir}/WEB-INF/classes/jrf.properties" file="3rdparty/conf/jrf.properties"/>-->
+    <!--<copy tofile="${deployDir}/WEB-INF/classes/log4j.properties" file="3rdparty/conf/log4j.properties"/>-->
+    <!--<copy file="${confDir}/web.xml" tofile="${deployDir}/WEB-INF/web.xml"/>-->
+
+    <!-- Copy downloadable files (one by one because we do not want to fail the build process if file does not exists) -->
+    <!--<copy file="downloads/eunis.zip" tofile="${deployDir}/downloads/eunis.zip" failonerror="false"/>-->
 
     <echo message=""/>
     <echo message=""/>

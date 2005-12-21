@@ -37,10 +37,9 @@
     <%=cm.cmsTitle("error_send_feedback")%>
     <br />
     <br />
-    <strong>
-      Resource not found.
-    </strong>
+    <%=cm.cmsText("generic_404_04")%>
     <br />
+    <%=cm.cmsMsg("generic_404_title")%>
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="404.jsp" />
     </jsp:include>

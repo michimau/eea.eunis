@@ -297,7 +297,6 @@ public class JRFProperties {
       return null;
     }
     String result = p.getProperty(key);
-    System.out.println( key + "=" + result );
     if (result != null && result.length() > 0) {
       return result;
     }

@@ -27,7 +27,7 @@
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-  Utilities.dumpRequestParams( request );
+  //Utilities.dumpRequestParams( request );
   FileUtils.dumpToFile( request.getParameter("englishName").toString(), false );
   FileUtils.dumpToFile( java.net.URLDecoder.decode( request.getParameter("englishName").toString(), "UTF-8" ), false );
   boolean noSoundex = Utilities.checkedStringToBoolean( formBean.getNoSoundex(), false );

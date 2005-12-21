@@ -14,7 +14,7 @@
   request.setCharacterEncoding( "UTF-8");
 %>
 <%
-  Utilities.dumpRequestParams( request );
+  //Utilities.dumpRequestParams( request );
   String op = Utilities.formatString( request.getParameter( "operation"), "" );
   String email = Utilities.formatString( request.getParameter( "email"), "" );
   String csvfilename = Utilities.formatString( request.getParameter( "tsvfilename"), "" );

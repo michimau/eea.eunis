@@ -10,6 +10,8 @@
 %>
 <%@ page import="ro.finsiel.eunis.reports.AbstractTSVReport,
                  ro.finsiel.eunis.reports.sites.names.TSVNamesReport"%><%@ page import="ro.finsiel.eunis.search.Utilities"%>
+<%@ page import="java.util.Enumeration"%>
+<%@ page import="java.util.Properties"%>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.names.NameBean" scope="request">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>

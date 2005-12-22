@@ -4,6 +4,8 @@ import ro.finsiel.eunis.search.AbstractPaginator;
 import ro.finsiel.eunis.search.Utilities;
 
 import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Properties;
 
@@ -63,7 +65,7 @@ public class XMLReport {
     {
       Properties p = ro.finsiel.eunis.OSEnvironment.getEnvVars();
       BASE_FILENAME = p.getProperty( "TOMCAT_HOME" ) + "/webapps/eunis/temp/";
-      fileStream = new PrintWriter( BASE_FILENAME + filename );
+      fileStream = new PrintWriter( new OutputStreamWriter( new FileOutputStream( BASE_FILENAME + filename ), "UTF-8" ) );
       fileStream.write( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" );
       fileStream.write( "<results>" );
       this.filename = filename;

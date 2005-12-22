@@ -10,7 +10,6 @@
 %>
 <meta name="area" content="Science, Biological Diversity, Biodiversity, Species, Habitat types, Sites" />
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<!--<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />-->
 
 <meta name="description" content="European nature information system web site, EUNIS database, Biological Diversity, European Environment, Species, Habitat types, Sites, Designations" />
 <meta name="keywords" content="European, Nature, Information, EUNIS, Database, Biological, Diversity, Environment, Species, Habitat types, Sites, Designations" />

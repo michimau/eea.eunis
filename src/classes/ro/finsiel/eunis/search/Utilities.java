@@ -468,15 +468,6 @@ public final class Utilities {
     {
       return urlString;
     }
-    //paramValue = treatURLSpecialCharacters(paramValue);
-    try
-    {
-      paramValue = java.net.URLEncoder.encode( paramValue, "UTF-8" );
-    }
-    catch ( Exception ex )
-    {
-      paramValue = treatURLSpecialCharacters( paramValue );
-    }
     urlString.append( "&amp;" );
     urlString.append( paramName );
     urlString.append( "=" );

@@ -97,20 +97,6 @@
 String descr = (request.getParameter("description") == null ? "" : request.getParameter("description"));
 %>
   <body>
-  <%
-    Enumeration en  = request.getParameterNames();
-    while( en.hasMoreElements() )
-    {
-      String name = ( String )en.nextElement();
-      String val = java.net.URLDecoder.decode( request.getParameter( name ), "UTF-8" );
-
-%>
-      <%=name%>=<%=val%>
-      <br />
-  <%
-    }
-  %>
-
       <form name="eunis" method="post" action="save-criteria-search.jsp">
         <input type="hidden" name="saveCriteria" value="true" class="inputTextField" />
         <input type="hidden" name="numberCriteria" value="<%=java.net.URLDecoder.decode( request.getParameter("numberCriteria"), "UTF-8" )%>" />

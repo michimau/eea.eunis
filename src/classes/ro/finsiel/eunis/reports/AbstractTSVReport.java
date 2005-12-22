@@ -44,7 +44,7 @@ public abstract class AbstractTSVReport implements Serializable {
     try {
       Properties p = ro.finsiel.eunis.OSEnvironment.getEnvVars();
       BASE_FILENAME = p.getProperty("TOMCAT_HOME") + "/webapps/eunis/temp/";
-      fileStream = new PrintWriter( BASE_FILENAME + filename );
+      fileStream = new PrintWriter( new OutputStreamWriter( new FileOutputStream( BASE_FILENAME + filename ), "UTF-8" ) );
     } catch (Exception _ex) {
       _ex.printStackTrace();
     }

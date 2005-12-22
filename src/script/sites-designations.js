@@ -5,23 +5,23 @@ function check(noCriteria) {
   if(noCriteria == 0) {
     var Name = trim(document.criteriaSearch.criteriaSearch.value);
     if (Name == "") {
-      alert("WARNING: Empty selection is not allowed. Please fill the field.");
+      alert(sites_designations0);
       return false;
     } else return true;
   } else {
       var isSomeoneEmpty = 0;
       for (i=0;i<=noCriteria;i++) if (trim(document.criteriaSearch.criteriaSearch[i].value) == "") isSomeoneEmpty = 1;
       if (isSomeoneEmpty == 1) {
-        alert("WARNING: Empty selection is not allowed. Please fill the field.");
+        alert(sites_designations0);
         return false;
       } else return true;
     }
   }
 
-
-  function openlink(URL) {
-  eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=0,resizable=yes, location=0,width=450,height=280,left=490,top=0');");
-}
+  function openlink(URL)
+  {
+    open( URL, "wndReport", "scrollbars=yes,toolbar=0,resizable=yes, location=0,width=450,height=280,left=490,top=0");
+  }
 
 function choicepren2(URL)
 {

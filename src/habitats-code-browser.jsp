@@ -10,24 +10,26 @@
 %>
 <%@ page import="ro.finsiel.eunis.jrfTables.*, ro.finsiel.eunis.WebContentManagement" %>
 <%@ page import="java.util.*"%>
+<%@ page import="ro.finsiel.eunis.search.Utilities"%>
+<%@ page import="ro.finsiel.eunis.search.habitats.HabitatEUNISTree"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
-  <jsp:useBean id="treeeunis" scope="session" class="ro.finsiel.eunis.search.habitats.HabitatEUNISTree" />
   <jsp:useBean id="treeBean1" class="ro.finsiel.eunis.formBeans.HabitatTreeBean" scope="request">
     <jsp:setProperty name="treeBean1" property="*" />
   </jsp:useBean>
   <link rel="StyleSheet" href="css/tree.css" type="text/css" />
   <script language="JavaScript" type="text/javascript" src="script/tree.js"></script>
   <%
-    // Request parameters
-    String habCode, habID, openNode;
-    habCode=treeBean1.getHabCode();
-    habID=treeBean1.getHabID();
-    openNode = treeBean1.getOpenNode();
-    int level = (null == request.getParameter("level")) ? 2 : Integer.parseInt(request.getParameter("level"));
+    int level = Utilities.checkedStringToInt ( request.getParameter("level"), 2 );
+    String fromFactsheet = Utilities.formatString( request.getParameter("fromFactsheet"), "" );
+    String habCode = treeBean1.getHabCode();
+    String habID=treeBean1.getHabID();
+    String openNode = treeBean1.getOpenNode();
+
+    HabitatEUNISTree treeeunis = new HabitatEUNISTree();
   %>
   <script language="JavaScript" type="text/javascript">
   <!--
@@ -40,22 +42,28 @@
         // nodeId | parentNodeId | nodeName | nodeUrl | hasChild | isLastSibling | childId,childiD ...
 <%
         // If this jsp was used by habitat factsheet
-        if(request.getParameter("fromFactsheet") != null && request.getParameter("fromFactsheet").equalsIgnoreCase("yes"))
+        if( fromFactsheet.equalsIgnoreCase( "yes" ) )
         {
           treeeunis.maxlevel=7;
           // EUNIS_HABITAT_CODE of first parent habitat( in tree hierarchy) of habitat with EUNIS_HABITAT_CODE = Code
-          String forIt = (request.getParameter("Code") == null ? "0" : request.getParameter("Code").substring(0,1));
+          String code = "0";
+          if( request.getParameter("Code") != null )
+          {
+            code = request.getParameter("Code").substring( 0, 1 );
+          }
           treeeunis.setFactsheetIdHabitat(habID);
-          treeeunis.getTree("Tree2",2,forIt);
+          treeeunis.getTree("Tree2",2,code);
 %>
           <%=treeeunis.tree.toString()%>
           var level1 = "<%=treeeunis.level1%>";
 <%
           openNode = treeeunis.getFactsheetOpenNode();
         }
+
         // Set the tree string for habitat with EUNIS_HABITAT_CODE = habCode, and display it
         if (habCode != null && habID == null)
         {
+
           treeeunis.maxlevel=7;
           treeeunis.getTree("Tree2",2,habCode);
 %>
@@ -63,9 +71,11 @@
           var level1 = "<%=treeeunis.level1%>";
 <%
         }
+
         // Tree string is already set, so it is displayed; for habID != null is dispayed the short factshhet for the habitat
         if (habCode == null && habID != null )
         {
+          treeeunis.getTree( "Tree2" );
 %>
           <%=treeeunis.tree.toString()%>
           var level1 = "<%=treeeunis.level1%>";
@@ -75,6 +85,7 @@
     //-->
   </script>
   <%
+
     WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
@@ -95,12 +106,12 @@
 <%
   // Get max level
   int mx=0;
-  if (habCode!=null)
+  if ( habCode != null )
   {
     mx = new Chm62edtHabitatDomain().maxlevel("ID_HABITAT>=1 and ID_HABITAT<10000 AND EUNIS_HABITAT_CODE LIKE '"+habCode+"%'").intValue();
   }
   // The level list is displayed only when habCode != null
-  if (request.getParameter("habCode") != null)
+  if ( habCode != null)
   {
 %>
 <form name="setings" action="habitats-code-browser.jsp" method="post">

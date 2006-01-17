@@ -171,14 +171,10 @@
             </div>
 
             <div style="width : 100%; text-align : right;">
-              <label for="Reset" class="noshow"><%=cm.cms("reset_btn")%></label>
               <input title="<%=cm.cms("reset_btn")%>" type="reset" value="<%=cm.cms("generic_glossary_16")%>" name="Reset" id="Reset" class="inputTextField" />
                <%=cm.cmsInput( "generic_glossary_16" )%>
-              <%=cm.cmsLabel("reset_btn")%>
-              <label for="Submit" class="noshow"><%=cm.cms("search_btn")%></label>
               <input title="<%=cm.cms("search_btn")%>" type="submit" value="<%=cm.cms("generic_glossary_17")%>" name="Submit" id="Submit" class="inputTextField" />
               <%=cm.cmsInput( "generic_glossary_17" )%>
-              <%=cm.cmsLabel("search_btn")%>
             </div>
           </td>
         </tr>

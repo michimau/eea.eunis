@@ -286,15 +286,11 @@
         <label for="yearMax" class="noshow"><%=cm.cms("maximum_designation_year")%></label>
         <input id="yearMax" name="yearMax" type="text" maxlength="4" size="4" class="inputTextField" title="<%=cm.cms("maximum_designation_year")%>" value="<%=yearMax%>" />
         <div class="submit_buttons">
-          <label for="reset" class="noshow"><%=cm.cms("reset_btn_label")%></label>
           <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset_btn_value")%>" class="inputTextField" title="<%=cm.cms("reset_btn_title")%>" />
-          <%=cm.cmsLabel("reset_btn_label")%>
           <%=cm.cmsTitle("reset_btn_title")%>
           <%=cm.cmsInput("reset_btn_value")%>
 
-          <label for="submit2" class="noshow"><%=cm.cms("search_btn_label")%></label>
           <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=cm.cms("search_btn_value")%>" title="<%=cm.cms("search_btn_title")%>" />
-          <%=cm.cmsLabel("search_btn_label")%>
           <%=cm.cmsTitle("search_btn_title")%>
           <%=cm.cmsInput("search_btn_value")%>
         </div>

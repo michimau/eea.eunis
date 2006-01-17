@@ -187,11 +187,9 @@
         </tr>
         <tr>
           <td width="40%" align="right">
-            <label for="Reset" class="noshow"><%=cm.cms("reset_btn")%></label>
             <input title="<%=cm.cms("reset_btn")%>" type="reset" value="<%=cm.cms("habitats_species_22")%>" name="Reset" id="Reset" class="inputTextField" />
             <%=cm.cmsTitle("reset_btn")%>
             <%=cm.cmsInput("habitats_species_22")%>
-            <label for="submit2" class="noshow"><%=cm.cms("search_btn")%></label>
             <input title="<%=cm.cms("search_btn")%>" type="submit" value="<%=cm.cms("habitats_species_23")%>" name="submit2" id="submit2" class="inputTextField" />
             <%=cm.cmsTitle("search_btn")%>
             <%=cm.cmsInput("habitats_species_23")%>

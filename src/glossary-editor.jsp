@@ -209,13 +209,9 @@
         </tr>
         <tr>
           <td>
-            <label for="reset" class="noshow"><%=cm.cms("reset_btn")%></label>
             <input title="<%=cm.cms("reset_btn")%>" type="reset" name="reset" id="reset" value="<%=cm.cms("reset_btn")%>" class="inputTextField" />
-            <%=cm.cmsLabel("reset_btn")%>
             &nbsp;&nbsp;&nbsp;
-            <label for="save" class="noshow"><%=cm.cms("save_btn")%></label>
             <input title="<%=cm.cms("save_btn")%>" type="submit" name="save" id="save" value="<%=cm.cms("save_btn")%>" class="inputTextField" />
-            <%=cm.cmsLabel("save_btn")%>
             &nbsp;&nbsp;&nbsp;
           </td>
         </tr>
@@ -342,13 +338,9 @@
         </tr>
         <tr>
           <td>
-            <label for="reset2" class="noshow"><%=cm.cms("reset_btn")%></label>
             <input title="<%=cm.cms("reset_btn")%>" type="reset" name="reset" id="reset2" value="Reset" class="inputTextField" />
-            <%=cm.cmsLabel("reset_btn")%>
             &nbsp;&nbsp;&nbsp;
-            <label for="save2" class="noshow"><%=cm.cms("save_btn")%></label>
             <input title="<%=cm.cms("save_btn")%>" type="submit" name="save" id="save2" value="Save" class="inputTextField" />
-            <%=cm.cmsLabel("save_btn")%>
             &nbsp;&nbsp;&nbsp;
           </td>
         </tr>

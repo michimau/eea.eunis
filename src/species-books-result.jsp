@@ -196,12 +196,8 @@
                 <input id="criteriaSearch" title="<%=cm.cms("species_books-result_18_Title")%>" alt="<%=cm.cms("species_books-result_18_Title")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
                 <%=cm.cmsLabel("species_books-result_18_Label")%>
                 <%=cm.cmsTitle("species_books-result_18_Title")%>
-                <label for="button1" class="noshow">
-                 <%=cm.cms("species_books-result_13_Title")%>
-                </label>
                 <input id="button1" class="inputTextField" type="submit" name="Submit" title="<%=cm.cms("species_books-result_13_Title")%>"
                        value="<%=cm.cms("species_books-result_13")%>" />
-                <%=cm.cmsLabel("species_books-result_13_Title")%>
                 <%=cm.cmsTitle("species_books-result_13_Title")%>
                 <%=cm.cmsInput("species_books-result_13")%>
             </form>

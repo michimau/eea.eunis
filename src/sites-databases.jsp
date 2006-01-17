@@ -99,23 +99,19 @@
       <%=cm.cmsText("sites_databases_02")%>
     </td>
     <td>
-      <label for="checkAll" class="noshow"><%=cm.cms("check_all_btn_label")%></label>
       <input type="button" id="checkAll" name="checkAll"
              title="<%=cm.cms("check_all_btn_title")%>" value="<%=cm.cms("check_all_btn_value")%>"
              onclick="javascript:setSelection('true');"
              onkeypress="javascript:setSelection('true');"
              class="inputTextField" />
-      <%=cm.cmsLabel("check_all_btn_label")%>
       <%=cm.cmsTitle("check_all_btn_title")%>
       <%=cm.cmsInput("check_all_btn_value")%>
       &nbsp;
-      <label for="checkNone" class="noshow"><%=cm.cms("check_none_btn_label")%></label>
       <input type="button" id="checkNone" name="checkNone"
              title="<%=cm.cms("check_none_btn_title")%>" value="<%=cm.cms("check_none_btn_value")%>"
              onclick="javascript:setSelection('false');"
              onkeypress="javascript:setSelection('false');"
              class="inputTextField" />
-      <%=cm.cmsLabel("check_none_btn_label")%>
       <%=cm.cmsTitle("check_none_btn_title")%>
       <%=cm.cmsInput("check_none_btn_value")%>
     </td>

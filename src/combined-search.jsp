@@ -979,15 +979,12 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
     <br />
     <% } %>
     <br />
-    <label for="Save" class="noshow"><%=cm.cms("save_btn")%></label>
     <input type="button" class="inputTextField" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save_btn")%>" />
     <%=cm.cmsTitle("save_btn")%>
     &nbsp;&nbsp;&nbsp;
-    <label for="Search" class="noshow"><%=cm.cms("search_btn")%></label>
     <input type="submit" class="inputTextField" value="Search" id="Search" name="Search" title="<%=cm.cms("search_btn")%>" />
     <%=cm.cmsTitle("search_btn")%>
     &nbsp;&nbsp;&nbsp;
-    <label for="Reset" class="noshow"><%=cm.cms("reset_btn")%></label>
     <input type="button" class="inputTextField" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cms("reset_btn")%>" />
     <%=cm.cmsTitle("reset_btn")%>
     <%
@@ -1177,7 +1174,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
       <%
       if(NatureObject.equalsIgnoreCase("Species")) {
         %>
-        <label for="NextPageSpecies" class="noshow"><%=cm.cms("combined_proceed_to_next_page")%></label>
         <input type="submit" id="NextPageSpecies" name="Proceed to next page" title="<%=cm.cms("combined_proceed_to_next_page")%>" value="<%=cm.cms("combined_proceed_to_next_page")%>" class="inputTextField" />
         <%=cm.cmsInput("combined_proceed_to_next_page")%>
         <%
@@ -1186,7 +1182,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
       <%
       if(NatureObject.equalsIgnoreCase("Habitat")) {
         %>
-        <label for="NextPageHabitat" class="noshow"><%=cm.cms("combined_proceed_to_next_page")%></label>
         <input type="submit" id="NextPageHabitat" name="Proceed to next page" title="<%=cm.cms("combined_proceed_to_next_page")%>" value="<%=cm.cms("combined_proceed_to_next_page")%>" class="inputTextField" />
         <%=cm.cmsInput("combined_proceed_to_next_page")%>
         <%
@@ -1195,7 +1190,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
       <%
       if(NatureObject.equalsIgnoreCase("Sites")) {
         %>
-        <label for="NextPageSites" class="noshow"><%=cm.cms("combined_proceed_to_next_page")%></label>
         <input type="submit" id="NextPageSites" name="Proceed to next page" title="<%=cm.cms("combined_proceed_to_next_page")%>" value="<%=cm.cms("combined_proceed_to_next_page")%>" class="inputTextField" />
         <%=cm.cmsInput("combined_proceed_to_next_page")%>
         <input type="hidden" name="sourcedbcriteria" value="<%=sourcedbcriteria.replaceAll("'","")%>" />
@@ -1237,7 +1231,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
       <%
       if(NatureObject.equalsIgnoreCase("Species")) {
         %>
-        <label for="NextPageSpecies2" class="noshow"><%=cm.cms("combined_proceed_to_next_page_sites")%></label>
         <input type="submit" id="NextPageSpecies2" name="Proceed to next page" title="<%=cm.cms("combined_proceed_to_next_page_sites")%>" value="<%=cm.cms("combined_proceed_to_next_page_sites")%>" class="inputTextField" />
         <%=cm.cmsInput("combined_proceed_to_next_page_sites")%>
         <%
@@ -1246,7 +1239,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
       <%
       if(NatureObject.equalsIgnoreCase("Habitat")) {
         %>
-        <label for="NextPageHabitat2" class="noshow"><%=cm.cms("combined_proceed_to_next_page_species")%></label>
         <input type="submit" id="NextPageHabitat2" name="Proceed to next page" title="<%=cm.cms("combined_proceed_to_next_page_species")%>" value="<%=cm.cms("combined_proceed_to_next_page_species")%>" class="inputTextField" />
         <%=cm.cmsInput("combined_proceed_to_next_page_species")%>
         <%
@@ -1255,7 +1247,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
       <%
       if(NatureObject.equalsIgnoreCase("Sites")) {
         %>
-        <label for="NextPageSites2" class="noshow"><%=cm.cms("combined_proceed_to_next_page_habitats")%></label>
         <input type="submit" id="NextPageSites2" name="Proceed to next page" title="<%=cm.cms("combined_proceed_to_next_page_habitats")%>" value="<%=cm.cms("combined_proceed_to_next_page_habitats")%>" class="inputTextField" />
         <%=cm.cmsInput("combined_proceed_to_next_page_habitats")%>
         <input type="hidden" name="sourcedbcriteria" value="<%=sourcedbcriteria.replaceAll("'","")%>" />
@@ -1307,7 +1298,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
     <tr>
       <td>
         <form name="saveCriteriaSearch" action="combined-search-save-criteria.jsp" method="post">
-          <label for="SaveCriteria" class="noshow"><%=cm.cms("combined_save_criteria")%></label>
           <input type="button" name="Save Criteria" title="<%=cm.cms("combined_save_criteria")%>" id="SaveCriteria" value="<%=cm.cms("combined_save_criteria")%>" class="inputTextField" onclick="javascript:SaveCriteriaFunction('<%=NatureObject%>');" />
           <%=cm.cmsTitle("combined_save_criteria")%>
           <input type="hidden" name="idsession" value="<%=IdSession%>" />

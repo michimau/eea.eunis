@@ -91,14 +91,12 @@
         <%=cm.cmsInput("species_main_03_Value")%>
         <%=cm.cmsAlt("species_main_03_Alt")%>
         <%=cm.cmsTitle("species_main_03_Title")%>
-        <label for="search" class="noshow"><%=cm.cms("species_main_btnSearch_Label")%></label>
         <input id="search" type="submit"
                value="<%=cm.cms("species_main_btnSearch_Value")%>"
                name="Submit"
                class="inputTextField"
                alt="<%=cm.cms("species_main_btnSearch_Alt")%>" title="<%=cm.cms("species_main_btnSearch_Title")%>"
                />
-        <%=cm.cmsLabel("species_main_btnSearch_Label")%>
         <%=cm.cmsInput("species_main_btnSearch_Value")%>
         <%=cm.cmsAlt("species_main_btnSearch_Alt")%>
         <%=cm.cmsTitle("species_main_btnSearch_Title")%>

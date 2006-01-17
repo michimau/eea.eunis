@@ -128,11 +128,9 @@
 %>
     <br />
     <form action="">
-       <label for="button" class="noshow"><%=cm.cms("species_names-choice_btnClose_Title")%></label>
-       <input title="<%=cm.cms("species_names-choice_btnClose_Title")%>" id="button" type="button" value="<%=cm.cms("species_names-choice_btnClose")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
-       <%=cm.cmsLabel("species_names-choice_btnClose_Title")%>
-       <%=cm.cmsTitle("species_names-choice_btnClose_Title")%>
-       <%=cm.cmsInput("species_names-choice_btnClose")%>
+      <input title="<%=cm.cms("species_names-choice_btnClose_Title")%>" id="button" type="button" value="<%=cm.cms("species_names-choice_btnClose")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
+      <%=cm.cmsTitle("species_names-choice_btnClose_Title")%>
+      <%=cm.cmsInput("species_names-choice_btnClose")%>
     </form>
   <%=cm.br()%>
   <%=cm.cmsMsg("species_names-choice_pageTitle")%>

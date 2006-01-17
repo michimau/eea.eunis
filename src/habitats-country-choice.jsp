@@ -143,9 +143,7 @@ function setCountry(val) {
 </div>
 <%=Utilities.getTextMaxLimitForPopup(cm, results.size())%>
 <form action="">
-  <label for="button" class="noshow"><%=cm.cms("close_window")%></label>
   <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("habitats_country-choice_01")%>" onclick="javascript:window.close()" name="button" id="button" class="inputTextField" />
-  <%=cm.cmsLabel("close_window")%>
 </form>
 <%=cm.cmsInput("habitats_country-choice_01")%>
 <%=cm.br()%>

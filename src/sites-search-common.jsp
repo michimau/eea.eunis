@@ -146,25 +146,21 @@ The following fields are declared below:
       <%=cm.cmsText("sites_search-common_02")%>
     </td>
     <td align="right">
-      <label for="checkAll" class="noshow"><%=cm.cms("check_all_btn_label")%></label>
       <input id="checkAll" type="button" name="checkAll"
              value="<%=cm.cms("check_all_btn_value")%>"
              onkeypress="javascript:setSelection('true');"
              onclick="javascript:setSelection('true');"
              class="inputTextField"
              title="<%=cm.cms("check_all_btn_title")%>" />
-      <%=cm.cmsLabel("check_all_btn_label")%>
       <%=cm.cmsTitle("check_all_btn_title")%>
       <%=cm.cmsInput("check_all_btn_value")%>
       &nbsp;
-      <label for="checkNone" class="noshow"><%=cm.cms("check_none_btn_label")%></label>
       <input id="checkNone" type="button" name="checkNone"
              value="<%=cm.cms("check_none_btn_value")%>"
              onkeypress="javascript:setSelection('false');"
              onclick="javascript:setSelection('false');"
              class="inputTextField"
              title="<%=cm.cms("check_none_btn_title")%>" />
-      <%=cm.cmsLabel("check_none_btn_label")%>
       <%=cm.cmsTitle("check_none_btn_title")%>
       <%=cm.cmsInput("check_none_btn_value")%>
     </td>

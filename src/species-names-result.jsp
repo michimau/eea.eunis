@@ -350,11 +350,7 @@
                   <input id="criteriaSearch" title="<%=cm.cms("species_names-result_03_Title")%>" alt="<%=cm.cms("species_names-result_03_Title")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
                   <%=cm.cmsLabel("species_names-result_03_Label")%>
                   <%=cm.cmsTitle("species_names-result_03_Title")%>
-                    <label for="refine" class="noshow">
-                      <%=cm.cms("species_names-result_btnSearch_Title")%>
-                    </label>
                   <input id="refine" title="<%=cm.cms("species_names-result_btnSearch_Title")%>" class="inputTextField" type="submit" name="Submit" value="<%=cm.cms("species_names-result_btnSearch")%>" />
-                  <%=cm.cmsLabel("species_names-result_btnSearch_Title")%>
                   <%=cm.cmsTitle("species_names-result_btnSearch_Title")%>
                   <%=cm.cmsInput("species_names-result_btnSearch")%>
                 </form>

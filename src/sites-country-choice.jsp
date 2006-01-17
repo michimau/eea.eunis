@@ -104,9 +104,7 @@
     </div>
     <br />
       <form action="">
-        <label for="button2" class="noshow"><%=cm.cms("close_window_label")%></label>
         <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
-        <%=cm.cmsLabel("close_window_label")%>
         <%=cm.cmsTitle("close_window_title")%>
         <%=cm.cmsInput("close_window_value")%>
       </form>

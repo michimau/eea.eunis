@@ -311,16 +311,12 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
 <tr>
   <td style="text-align:left">
     &nbsp;&nbsp;
-    <label for="input1" class="noshow"><%=cm.cms("submit")%></label>
     <input id="input1" type="submit" value="<%=(users_operation.equalsIgnoreCase("add_rights")?cm.cms("add_right_btn"):cm.cms("update_data"))%>" name="submit" onclick="document.eunis.operation.value='submit';" class="inputTextField"  title="<%=cm.cms("submit")%>" />
-    <%=cm.cmsLabel("submit")%>
     <%=cm.cmsTitle("submit")%>
     <%=cm.cmsInput("add_right_btn")%>
     <%=cm.cmsInput("update_data")%>
     &nbsp;&nbsp;
-    <label for="input2" class="noshow"><%=cm.cms("reset")%></label>
     <input id="input2" type="reset" value="<%=cm.cms("reset_btn")%>" name="Reset" class="inputTextField"  title="<%=cm.cms("reset")%>" />
-    <%=cm.cmsLabel("reset")%>
     <%=cm.cmsTitle("reset")%>
     <%=cm.cmsInput("reset")%>
   </td>

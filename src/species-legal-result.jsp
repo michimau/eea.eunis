@@ -319,11 +319,7 @@
                 <input id="criteriaSearch" title="<%=cm.cms("criteria_value")%>" alt="<%=cm.cms("criteria_value")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
                 <%=cm.cmsLabel("criteria_value")%>
                 <%=cm.cmsTitle("criteria_value")%>
-                  <label for="refine" class="noshow">
-                    <%=cm.cms("search")%>
-                  </label>
                 <input title="<%=cm.cms("search")%>" id="refine" class="inputTextField" type="submit" name="Submit" value="<%=cm.cms("search_btn")%>" />
-                <%=cm.cmsLabel("search")%>
                 <%=cm.cmsTitle("search")%>
                 <%=cm.cmsInput("search_btn")%>
               </form>

@@ -102,21 +102,15 @@
         <%=cm.cmsLabel("pictures_upload_description_label")%>
       </p>
       <p>
-        <label for="reset" class="noshow"><%=cm.cms("pictures_upload_reset_label")%></label>
         <input type="reset" id="reset" title="<%=cm.cms("pictures_upload_reset_title")%>" name="Reset" value="<%=cm.cms("pictures_upload_reset_value")%>" class="inputTextField" />
-        <%=cm.cmsLabel("pictures_upload_reset_label")%>
         <%=cm.cmsTitle("pictures_upload_reset_title")%>
         <%=cm.cmsInput("pictures_upload_reset_value")%>
 
-        <label for="submit" class="noshow"><%=cm.cms("pictures_upload_upload_label")%></label>
         <input type="submit" id="submit" title="<%=cm.cms("pictures_upload_upload_title")%>" name="Submit" value="<%=cm.cms("pictures_upload_upload_value")%>" class="inputTextField" />
-        <%=cm.cmsLabel("pictures_upload_upload_label")%>
         <%=cm.cmsTitle("pictures_upload_upload_title")%>
         <%=cm.cmsInput("pictures_upload_upload_value")%>
 
-        <label for="button0" class="noshow"><%=cm.cms("close_window_label")%></label>
         <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button0" name="button" class="inputTextField" />
-        <%=cm.cmsLabel("close_window_label")%>
         <%=cm.cmsTitle("close_window_title")%>
         <%=cm.cmsInput("close_window_value")%>
       </p>
@@ -185,9 +179,7 @@
     <%=cm.cms("pictures_upload_denied")%>.
     <br />
     <form action="">
-      <label for="button1" class="noshow"><%=cm.cms("close_window_label")%></label>
       <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button1" name="button" class="inputTextField" />
-      <%=cm.cmsLabel("close_window_label")%>
       <%=cm.cmsTitle("close_window_title")%>
       <%=cm.cmsInput("close_window_value")%>
     </form>
@@ -201,9 +193,7 @@
     <br />
     <div style="width : 100%; text-align:left;">
       <form action="">
-        <label for="button2" class="noshow"><%=cm.cms("close_window_label")%></label>
         <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
-        <%=cm.cmsLabel("close_window_label")%>
         <%=cm.cmsTitle("close_window_title")%>
         <%=cm.cmsInput("close_window_value")%>
       </form>

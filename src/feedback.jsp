@@ -346,7 +346,6 @@
           </tr>
         </table>
         <p>
-          <label for="submit" class="noshow"><%=cm.cms("feedback_send")%></label>
           <input title="<%=cm.cms("feedback_send")%>" type="submit" id="submit" value="<%=cm.cms("feedback_send")%>" name="ContactUs" class="inputTextField" />
           <%=cm.cmsInput("feedback_send")%>
         </p>

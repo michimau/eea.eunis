@@ -148,16 +148,12 @@
               </tr>
               <tr>
                 <td style="text-align:right">
-                  <label for="Reset" class="noshow"><%=cm.cms("species_names_btnReset_Msg")%></label>
                   <input id="Reset" type="reset" value="<%=cm.cms("species_names_btnReset")%>"
                     name="Reset" class="inputTextField" title="<%=cm.cms("species_names_btnReset_Title")%>" />
                   <%=cm.cmsInput("species_names_btnReset")%>
                   <%=cm.cmsTitle("species_names_btnReset_Title")%>
-                  <%=cm.cmsLabel("species_names_btnReset_Msg")%>
-                  <label for="Search" class="noshow"><%=cm.cms("species_names_btnSearch_Msg")%></label>
                   <input id="Search" type="submit" value="<%=cm.cms( "species_names_btnSearch" )%>"
                     name="submit" class="inputTextField" title="<%=cm.cms("species_names_btnSearch_Title")%>" />
-                    <%=cm.cmsLabel("species_names_btnSearch_Msg")%>
                     <%=cm.cmsTitle("species_names_btnSearch_Title")%>
                     <%=cm.cmsInput("species_names_btnSearch")%>
                 </td>
@@ -299,12 +295,9 @@
                 </tr>
                 <tr>
                   <td style="text-align:right">
-                    <label for="Reset1" class="noshow"><%=cm.cms("species_names_btnReset_Title")%></label>
                     <input id="Reset1" type="reset" value="<%=cm.cms("species_names_btnReset")%>" name="Reset" class="inputTextField" title="<%=cm.cms("species_names_btnReset_Title")%>" />
-                    <%=cm.cmsLabel("species_names_btnReset_Title")%>
                     <%=cm.cmsInput("species_names_btnReset")%>
                     <%=cm.cmsTitle("species_names_btnReset_Title")%>
-                    <label for="Search1" class="noshow"><%=cm.cms("species_names_btnSearch_Title")%></label>
                     <input id="Search1" type="submit" value="<%=cm.cms("species_names_btnSearch")%>" name="submit" class="inputTextField" title="<%=cm.cms("species_names_btnSearch_Title")%>" />
                     <%=cm.cmsLabel("species_names_btnSearch_Title")%>
                     <%=cm.cmsInput("species_names_btnSearch")%>

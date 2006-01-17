@@ -49,13 +49,12 @@
   sqlUtil.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
 
   String sql = "select FEEDBACK_TYPE, MODULE, COMMENT, NAME, EMAIL, COMPANY, ADDRESS, PHONE, FAX, URL " +
-          " from    EUNIS_FEEDBACK " +
-          " order by RECORD_DATE, FEEDBACK_TYPE, MODULE limit 0,10 ";
+          " from EUNIS_FEEDBACK " +
+          " order by FEEDBACK_TYPE, MODULE limit 0,10 ";
   List feedbacks = sqlUtil.ExecuteSQLReturnList(sql, 10);
 
   if (feedbacks != null && feedbacks.size() > 0)
   {
-
 %>
     <table summary="layout" width="100%" cellspacing="1" cellpadding="1" border="1" style="border-collapse:collapse">
      <tr>

@@ -184,23 +184,17 @@ String descr = (request.getParameter("description") == null ? "" : request.getPa
   if (null==request.getParameter("description"))
   {
 %>
-            <label for="submit" class="noshow"><%=cm.cms("save_btn_label")%></label>
             <input type="submit" id="submit" name="Submit" title="<%=cm.cms("save_btn_title")%>" value="<%=cm.cms("save_btn_value")%>" class="inputTextField" />
-            <%=cm.cmsLabel("save_btn_label")%>
             <%=cm.cmsTitle("save_btn_title")%>
             <%=cm.cmsInput("save_btn_value")%>
 
-            <label for="reset" class="noshow"><%=cm.cms("reset_btn_label")%></label>
             <input type="reset" id="reset" name="Reset" title="<%=cm.cms("reset_btn_title")%>" value="<%=cm.cms("reset_btn_value")%>" class="inputTextField" />
-            <%=cm.cmsLabel("reset_btn_label")%>
             <%=cm.cmsTitle("reset_btn_title")%>
             <%=cm.cmsInput("reset_btn_value")%>
 <%
   }
 %>
-            <label for="close" class="noshow"><%=cm.cms("reset_btn_label")%></label>
             <input type="button" id="close" name="Close" title="<%=cm.cms("close_window_title")%>" value="<%=cm.cms("close_window_value")%>" onclick="javascript:closeWindow('<%=request.getParameter("pageName")%>','<%=request.getParameter("expandSearchCriteria")%>')" class="inputTextField" />
-            <%=cm.cmsLabel("reset_btn_label")%>
             <%=cm.cmsTitle("close_window_title")%>
             <%=cm.cmsInput("close_window_value")%>
           </td>

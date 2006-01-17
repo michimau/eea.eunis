@@ -160,9 +160,7 @@
       <input type="hidden" name="operation" value="delete" />
       <div align="right" style="background-color : #EEEEEE; width : 100%;">
         <strong>
-          <label for="refresh" class="noshow"><%=cm.cms("related_reports_refresh_label")%></label>
           <input type="button" id="refresh" name="Submit" value="<%=cm.cms("related_reports_refresh_value")%>" title="<%=cm.cms("related_reports_refresh_title")%>" onclick="javascript:ReloadPage()" class="inputTextField" />
-          <%=cm.cmsLabel("related_reports_refresh_label")%>
           <%=cm.cmsInput("related_reports_refresh_value")%>
           <%=cm.cmsTitle("related_reports_refresh_title")%>
 
@@ -172,9 +170,7 @@
   if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
   {
 %>
-          <label for="delete" class="noshow"><%=cm.cms("related_reports_delete_label")%></label>
           <input type="submit" id="delete" name="Submit" value="<%=cm.cms("related_reports_delete_value")%>" class="inputTextField" title="<%=cm.cms("related_reports_delete_title")%>" />
-          <%=cm.cmsLabel("related_reports_delete_label")%>
           <%=cm.cmsInput("related_reports_delete_value")%>
           <%=cm.cmsTitle("related_reports_delete_title")%>
 <%

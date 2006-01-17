@@ -58,9 +58,7 @@
   <br />
   <br />
   <form name="clearlog" method="post" action="clear-temporary-data.jsp">
-    <label for="submit" class="noshow"><%=cm.cms("clear_temporary_data_label")%></label>
     <input type="submit" value="<%=cm.cms("clear_temporary_data_btn")%>" title="<%=cm.cms("clear_temporary_data_btn")%>" id="submit" name="submit" class="inputTextField" />
-    <%=cm.cmsLabel("clear_temporary_data_label")%>
     <%=cm.cmsInput("clear_temporary_data_btn")%>
   </form>
 <%

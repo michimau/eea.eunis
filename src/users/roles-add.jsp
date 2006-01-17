@@ -430,26 +430,20 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
       if(users_operation != null && users_operation.equalsIgnoreCase("edit"))
       {
     %>
-    <label for="input1" class="noshow"><%=cm.cms("roles_add_26")%></label>
     <input id="input1" type="submit" value="<%=cm.cms("roles_add_27")%>" name="submit" onclick="document.eunis.operation.value='updateRole';" class="inputTextField"  title="<%=cm.cms("roles_add_26")%>" />
-    <%=cm.cmsLabel("roles_add_26")%>
     <%=cm.cmsTitle("roles_add_26")%>
     <%=cm.cmsInput("roles_add_27")%> &nbsp;&nbsp;
     <%
       } else
       {
     %>
-    <label for="input2" class="noshow"><%=cm.cms("roles_add_28")%></label>
     <input id="input2" type="submit" value="<%=cm.cms("roles_add_29")%>" name="submit" onclick="document.eunis.operation.value='submit';" class="inputTextField"   title="<%=cm.cms("roles_add_28")%>" />
-    <%=cm.cmsLabel("roles_add_28")%>
     <%=cm.cmsTitle("roles_add_28")%>
     <%=cm.cmsInput("roles_add_29")%>&nbsp;&nbsp;
     <%
       }
     %>
-    <label for="input3" class="noshow"><%=cm.cms("reset")%></label>
     <input id="input3" type="reset" value="<%=cm.cms("reset_btn")%>" name="Reset" class="inputTextField"  title="<%=cm.cms("reset")%>" />
-    <%=cm.cmsLabel("reset")%>
     <%=cm.cmsTitle("reset")%>
     <%=cm.cmsInput("reset_btn")%>
   </td>

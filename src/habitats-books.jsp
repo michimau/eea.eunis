@@ -132,11 +132,9 @@
         <tr>
           <td align="right">
             <br />
-            <label for="Reset" class="noshow"><%=cm.cms("reset_btn")%></label>
             <input type="reset" title="Reset fields" value="<%=cm.cms("habitats_books_17")%>" name="Reset" id="Reset" class="inputTextField" />
             <%=cm.cmsTitle("reset_values")%>
             <%=cm.cmsInput("habitats_books_17")%>
-            <label for="submit2" class="noshow"><%=cm.cms("search_btn")%></label>
             <input type="submit" title="<%=cm.cms("search_btn")%>" value="<%=cm.cms("habitats_books_18")%>" name="submit2" id="submit2" class="inputTextField" />
             <%=cm.cmsTitle("search_btn")%>
             <%=cm.cmsInput("habitats_books_18")%>

@@ -80,9 +80,7 @@
           <%=cm.cmsLabel("login_password_label")%>
           <br />
           <br />
-          <label for="submit" class="noshow"><%=cm.cms("login_submit_label")%></label>
           <input class="inputTextField" title="<%=cm.cms("login_submit_title")%>" type="submit" id="submit" name="Submit" value="<%=cm.cms("login_submit_value")%>" />
-          <%=cm.cmsLabel("login_submit_label")%>
           <%=cm.cmsTitle("login_submit_title")%>
           <%=cm.cmsInput("login_submit_value")%>
         </form>

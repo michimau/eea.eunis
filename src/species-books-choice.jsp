@@ -101,9 +101,7 @@
       %>
     <br />
     <form action="">
-      <label for="button1" class="noshow"><%=cm.cms("species_books-choice_03_Title")%></label>
       <input id="button1" title="<%=cm.cms("species_books-choice_03_Title")%>" type="button" value="<%=cm.cms("species_books-choice_03")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
-      <%=cm.cmsLabel("species_books-choice_03_Title")%>
       <%=cm.cmsTitle("species_books-choice_03_Title")%>
       <%=cm.cmsInput("species_books-choice_03")%>
     </form>

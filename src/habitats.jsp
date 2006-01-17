@@ -67,14 +67,12 @@
            onfocus="javascript:document.quick_search.searchString.select();" />
     <%=cm.cmsTitle("habitat_to_search_for")%>
     <%=cm.cmsInput("enter_habitat_name_here")%>
-    <label for="Submit" class="noshow"><%=cm.cms("search")%></label>
     <input type="submit"
            value="<%=cm.cms("habitats_main_btnSearch")%>"
            name="Submit"
            id="Submit"
            class="inputTextField"
            title="Search" />
-    <%=cm.cmsLabel("search")%>
     <%=cm.cmsInput("habitats_main_btnSearch")%>
     <a href="fuzzy-search-help.jsp" title="<%=cm.cms("help_on_fuzzy_search")%>"><img alt="<%=cm.cms("help_on_fuzzy_search")%>" title="<%=cm.cms("help_on_fuzzy_search")%>" src="images/mini/help.jpg" border="0" align="middle" /></a>
     <%=cm.cmsTitle("help_on_fuzzy_search")%>

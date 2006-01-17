@@ -255,10 +255,8 @@
     <%/// These are the dynamic current inputs
       if (requestParser.countItems() < 5) {
     %>
-    <label for="Add" class="noshow"><%=cm.cms("add_criteria")%></label>
     <input title="<%=cm.cms("add_criteria")%>" type="submit" name="Add" id="Add" value="<%=cm.cms("habitats_country_13")%>" onclick="document.eunis.operation.value='add'"
            class="inputTextField" />
-    <%=cm.cmsLabel("add_criteria")%>
     <%=cm.cmsInput("habitats_country_13")%>
     <%
       }
@@ -278,11 +276,9 @@
     <label for="h_<%=i + 1%>region"><strong><%=cm.cmsText("habitats_country_14")%></strong></label>
     <input type="text" name="_<%=i + 1%>region" id="h_<%=i + 1%>region" value="<%=region%>" onfocus="blur()"
            class="inputTextField" title="<%=cm.cms("habitats_country_14")%>" />&nbsp;&nbsp;&nbsp;
-    <label for="h<%=i + 1%>Remove" class="noshow"><%=cm.cms("delete_criteria")%></label>
     <input title="<%=cm.cms("delete_criteria")%>" type="submit" id="h<%=i + 1%>Remove" name="<%=i + 1%>Remove" value="<%=cm.cms("delete_criteria")%>"
            onclick="document.eunis.deleteField.value='<%=i + 1%>';document.eunis.operation.value='delete'"
            class="inputTextField" />
-    <%=cm.cmsLabel("delete_criteria")%>
     <br />
     <%
       }
@@ -319,14 +315,12 @@
 </tr>
 <tr>
   <td width="22%" align="right" colspan="2">
-    <label for="Reset" class="noshow"><%=cm.cms("reset_btn")%></label>
     <input type="reset" value="<%=cm.cms("habitats_country_19")%>" name="Reset" id="Reset"
            onclick="document.eunis.operation.value='search'"
            onkeypress="document.eunis.operation.value='search'"
            class="inputTextField" title="<%=cm.cms("reset_btn")%>" />
     <%=cm.cmsTitle("reset_btn")%>
     <%=cm.cmsInput("habitats_country_19")%>
-    <label for="Search" class="noshow"><%=cm.cms("search_btn")%></label>
     <input type="submit" name="Search" id="Search" value="<%=cm.cms("habitats_country_20")%>"
            onclick="document.eunis.operation.value='reset'"
            onkeypress="document.eunis.operation.value='reset'"

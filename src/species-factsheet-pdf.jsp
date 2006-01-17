@@ -195,12 +195,10 @@ updateText('<%=cm.cms("species_factsheet-pdf_01")%>');
       <%=cm.cmsText( "species_factsheet-pdf_98" )%> <%=factsheet.getIdSpecies()%>
       <br/>
       <br/>
-      <label for="button2" class="noshow"><%=cm.cms( "close_window")%></label>
       <input id="button2" title="<%=cm.cms("close_window")%>" type="button"
        onclick="javascript:window.close();"
        value="<%=cm.cms("close_btn")%>" name="button"
        class="inputTextField"/>
-      <%=cm.cmsLabel( "close_window")%>
       <%=cm.cmsTitle( "close_window")%>
       <%=cm.cmsInput( "close_btn")%>
 <%

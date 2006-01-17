@@ -1230,14 +1230,14 @@ public class UsersUtility {
         con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
         SQL = "INSERT INTO EUNIS_USERS(USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,EMAIL,THEME_INDEX,LOGIN_DATE) " +
-              " VALUES(?,'"+EncryptPassword.encrypt(password)+"',?,?,?,?,?,str_to_date(?,'%d %b %Y %H:%i:%s'))";
+              " VALUES(?,'"+EncryptPassword.encrypt(password)+"',?,?,?,?,str_to_date(?,'%d %b %Y %H:%i:%s'))";
        ps = con.prepareStatement(SQL);
         ps.setString(1, username);
         ps.setString(2, firstname);
         ps.setString(3, lastname);
         ps.setString(4, mail);
-        ps.setInt(6, ThemeManager.THEME_SKY_BLUE);
-        ps.setString(7, (loginDate == null ? null : loginDate.trim()));
+        ps.setInt(5, ThemeManager.THEME_SKY_BLUE);
+        ps.setString(6, (loginDate == null ? null : loginDate.trim()));
 
         ps.execute();
 

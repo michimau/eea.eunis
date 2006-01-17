@@ -185,7 +185,6 @@
         <label for="criteriaSearch" class="noshow"><%=cm.cms("search_value")%></label>
         <input title="<%=cm.cms("search_value")%>" class="inputTextField" name="criteriaSearch" id="criteriaSearch" type="text" size="30" />
         <%=cm.cmsTitle("search_value")%>
-        <label for="Submit" class="noshow"><%=cm.cms("search")%></label>
         <input title="<%=cm.cms("search")%>" class="inputTextField" type="submit" name="Submit" id="Submit" value="<%=cm.cms("habitats_legal-result_13")%>" />
         <%=cm.cms("search")%>
         <%=cm.cmsInput("habitats_legal-result_13")%>

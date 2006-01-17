@@ -201,14 +201,10 @@
             <tr>
               <td colspan="5" style="text-align:right">
                 <br />
-                <label for="Reset" class="noshow"><%=cm.cms("reset")%></label>
                 <input id="Reset" type="reset" value="<%=cm.cms("reset_btn")%>" name="Reset" class="inputTextField" title="<%=cm.cms("reset")%>" />
-                <%=cm.cmsLabel("reset")%>
                 <%=cm.cmsTitle("reset")%>
                 <%=cm.cmsInput("reset_btn")%>
-                <label for="Search" class="noshow"><%=cm.cms("search")%></label>
                 <input id="Search" type="submit" value="<%=cm.cms("search_btn")%>" name="submit" class="inputTextField" title="<%=cm.cms("search")%>" />
-                <%=cm.cmsLabel("search")%>
                 <%=cm.cmsTitle("search")%>
                 <%=cm.cmsInput("search_btn")%>
               </td>

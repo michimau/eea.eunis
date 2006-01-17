@@ -40,9 +40,7 @@
   <input title="<%=cm.cms("pagesize_results_title")%>" class="inputTextFieldCenter" name="pageSize" id="pageSize" type="text" size="3" value="<%=pageSizeSize%>" />
   <%=cm.cmsLabel("pagesize_results_label")%>
   <%=cm.cmsTitle("pagesize_results_title")%>
-  <label for="changePageSizeButton" class="noshow"><%=cm.cms("pagesize_change_label")%></label>
   <input id="changePageSizeButton" title="<%=cm.cms("pagesize_change_title")%>" type="submit" name="Go" value="<%=cm.cms("pagesize_change_value")%>" class="inputTextField" />
-  <%=cm.cmsLabel("pagesize_change_label")%>
   <%=cm.cmsTitle("pagesize_change_title")%>
   <%=cm.cmsInput("pagesize_change_value")%>
   <%=toURLParamSize%>

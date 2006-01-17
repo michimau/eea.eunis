@@ -700,15 +700,12 @@ alert('<%=cm.cms("habitats_advanced_04")%>');
   }
 %>
     <br />
-    <label for="Save" class="noshow"><%=cm.cms("save_btn")%></label>
     <input type="button" class="inputTextField" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save_btn")%>" />
     <%=cm.cmsTitle("save_btn")%>
     &nbsp;&nbsp;&nbsp;
-    <label for="Search" class="noshow"><%=cm.cms("search_btn")%></label>
     <input type="submit" class="inputTextField" value="Search" id="Search" name="Search" title="<%=cm.cms("search_btn")%>" />
     <%=cm.cmsTitle("search_btn")%>
     &nbsp;&nbsp;&nbsp;
-    <label for="Reset" class="noshow"><%=cm.cms("reset_btn")%></label>
     <input type="button" class="inputTextField" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cms("reset_btn")%>" />
     <%=cm.cmsTitle("reset_btn")%>
     <%
@@ -806,9 +803,7 @@ rs.close();
   if (tsas.getResultCount() > 0) {
 %>
 <form name="search" action="select-columns.jsp" method="post">
-  <label for="NextStep" class="noshow"><%=cm.cms("advanced_proceed_to_next_step")%></label>
   <input type="submit" name="Proceed to next step" title="<%=cm.cms("advanced_proceed_to_next_step")%>" id="NextStep" value="<%=cm.cms("habitats_advanced_55")%>" class="inputTextField" />
-  <%=cm.cmsLabel("advanced_proceed_to_next_step")%>
   <%=cm.cmsInput("habitats_advanced_55")%>
   <input type="hidden" name="searchedNatureObject" value="Habitats" />
   <input type="hidden" name="origin" value="Advanced" />
@@ -825,9 +820,7 @@ rs.close();
   <tr>
     <td>
       <form name="saveCriteriaSearch" action="save-species-or-habitats-advanced-search-criteria.jsp" method="post">
-        <label for="SaveCriteria" class="noshow"><%=cm.cms("advanced_save_criteria")%></label>
         <input type="button" name="Save Criteria" title="<%=cm.cms("advanced_save_criteria")%>" id="SaveCriteria" value="<%=cm.cms("habitats_advanced_56")%>" class="inputTextField" onclick="javascript:SaveCriteriaFunction();" />
-        <%=cm.cmsLabel("advanced_save_criteria")%>
         <%=cm.cmsInput("habitats_advanced_56")%>
         <input type="hidden" name="idsession" value="<%=IdSession%>" />
         <input type="hidden" name="natureobject" value="<%=NatureObject%>" />

@@ -236,14 +236,10 @@
           </tr>
         </table>
         <br />
-        <label for="submitApprove" class="noshow"><%=cm.cms("related_reports_approval_approve_label")%></label>
         <input  type="submit" id="submitApprove" name="Submit" title="<%=cm.cms("related_reports_approval_approve_title")%>" value="<%=cm.cms("related_reports_approval_approve_value")%>" class="inputTextField" />
-        <%=cm.cmsLabel("related_reports_approval_approve_label")%>
         <%=cm.cmsTitle("related_reports_approval_approve_title")%>
         <%=cm.cmsInput("related_reports_approval_approve_value")%>
-        <label for="submitDel" class="noshow"><%=cm.cms("related_reports_approval_delete_label")%></label>
         <input type="submit" id="submitDel" name="Submit" title="<%=cm.cms("related_reports_approval_delete_title")%>" value="<%=cm.cms("related_reports_approval_delete_value")%>" class="inputTextField" onclick="return del_files();" />
-        <%=cm.cmsLabel("related_reports_approval_delete_label")%>
         <%=cm.cmsTitle("related_reports_approval_delete_title")%>
         <%=cm.cmsInput("related_reports_approval_delete_value")%>
       </form>

@@ -161,14 +161,10 @@
         </tr>
         <tr>
           <td style="text-align:right" colspan="2">
-            <label for="Reset" class="noshow"><%=cm.cms("species_books_14_Title")%></label>
             <input id="Reset" type="reset" value="<%=cm.cms("species_books_14")%>" name="Reset" class="inputTextField" alt="Reset" title="<%=cm.cms("species_books_14_Title")%>" />
-            <%=cm.cmsLabel("species_books_14_Title")%>
             <%=cm.cmsTitle("species_books_14_Title")%>
             <%=cm.cmsInput("species_books_14")%>
-            <label for="submit" class="noshow"><%=cm.cms("species_books_15_Title")%></label>
             <input id="submit" type="submit" value="<%=cm.cms("species_books_15")%>" name="submit2" class="inputTextField" alt="Search" title="<%=cm.cms("species_books_15_Title")%>" />
-            <%=cm.cmsLabel("species_books_15_Title")%>
             <%=cm.cmsTitle("species_books_15_Title")%>
             <%=cm.cmsInput("species_books_15")%>
           </td>

@@ -612,9 +612,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
 <tr>
   <td style="text-align:left" colspan="2">
    &nbsp;&nbsp;
-   <label for="input1" class="noshow"><%=(users_operation.equalsIgnoreCase("edit_users")?cm.cms("users_edit_43"):cm.cms("users_edit_44"))%></label>
    <input id="input1" type="submit" value="<%=(users_operation.equalsIgnoreCase("edit_users")?cm.cms("users_edit_45"):cm.cms("users_edit_46"))%>" name="submit" onclick="document.eunis.operation.value='submit';" class="inputTextField"  title="<%=(users_operation.equalsIgnoreCase("edit_users")?cm.cms("users_edit_43"):cm.cms("users_edit_44"))%>" />
-   <%=(users_operation.equalsIgnoreCase("edit_users")?cm.cmsLabel("users_edit_43"):cm.cmsLabel("users_edit_44"))%>
    <%=(users_operation.equalsIgnoreCase("edit_users")?cm.cmsTitle("users_edit_43"):cm.cmsTitle("users_edit_44"))%>
    <%=(users_operation.equalsIgnoreCase("edit_users")?cm.cmsInput("users_edit_45"):cm.cmsInput("users_edit_46"))%>
    &nbsp;&nbsp;
@@ -622,9 +620,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
     if(users_operation.equalsIgnoreCase("add_users"))
     {
    %>
-     <label for="input2" class="noshow"><%=cm.cms("reset")%></label>
      <input id="input2" type="reset" value="<%=cm.cms("reset_btn")%>" name="Reset" class="inputTextField"  title="<%=cm.cms("reset")%>" />
-     <%=cm.cmsLabel("reset")%>
      <%=cm.cmsTitle("reset")%>
      <%=cm.cmsInput("reset_btn")%>
   <%

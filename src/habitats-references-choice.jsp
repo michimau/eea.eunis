@@ -266,9 +266,7 @@
   // out.print(Utilities.getTextMaxLimitForPopup((results == null ? 0 : results.size())));
 %>
 <form action="">
-  <label for="button" class="noshow"><%=cm.cms("close_window")%></label>
   <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("habitats_references-choice_03")%>" onclick="javascript:window.close()" id="button" name="button" class="inputTextField" />
-  <%=cm.cmsLabel("close_window")%>
   <%=cm.cmsInput("habitats_references-choice_03")%>
 </form>
 <%=cm.cms("habitats_references-choice_title")%>

@@ -45,9 +45,7 @@
 %>
         <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
           <input type="hidden" name="sites" value="<%=ids%>" />
-          <label for="showMap" class="noshow"><%=cm.cms("show_map")%></label>
           <input id="showMap" type="submit" title="<%=cm.cms("show_map")%>" name="Show map" value="<%=cm.cms("show_map")%>" class="inputTextField" />
-          <%=cm.cmsLabel("show_map")%>
           <%=cm.cmsTitle("show_map")%>
           <%=cm.cmsInput("show_map")%>
         </form>
@@ -144,9 +142,7 @@
             <td width="50%">
               <form name="gis2" action="sites-gis-tool.jsp" target="_blank" method="post">
                 <input type="hidden" name="sites" value="<%=ids%>" />
-                <label for="showMap" class="noshow"><%=cm.cms("show_map")%></label>
                 <input id="showMap2" type="submit" title="<%=cm.cms("show_map")%>" name="Show map" value="<%=cm.cms("show_map")%>" class="inputTextField" />
-                <%=cm.cmsLabel("show_map")%>
                 <%=cm.cmsTitle("show_map")%>
                 <%=cm.cmsInput("show_map")%>
               </form>

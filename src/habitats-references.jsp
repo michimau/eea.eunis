@@ -303,11 +303,9 @@ source[1] = <%=RefDomain.OTHER_INFO%>
 </tr>
 <tr>
   <td align="right">
-    <label for="Reset" class="noshow"><%=cm.cms("reset_btn")%></label>
     <input title="<%=cm.cms("reset_btn")%>" alt="<%=cm.cms("reset_btn")%>" type="reset" value="<%=cm.cms("habitats_references_26")%>" name="Reset" id="Reset" class="inputTextField" />
     <%=cm.cmsTitle("reset_btn")%>
     <%=cm.cmsInput("habitats_references_26")%>
-    <label for="submit2" class="noshow"><%=cm.cms("search_btn")%></label>
     <input title="<%=cm.cms("search_btn")%>" alt="<%=cm.cms("search_btn")%>" type="submit" id="submit2" value="<%=cm.cms("habitats_references_27")%>" name="submit2" class="inputTextField" />
     <%=cm.cmsTitle("search_btn")%>
     <%=cm.cmsInput("habitats_references_27")%>

@@ -83,9 +83,7 @@
         <textarea title="<%=cm.cms("web_content_keys_05")%>" rows="5" cols="50" name="contentData" id="contentData" class="inputTextField" style="font-family:monospace,serif;"></textarea>
         <br />
         <br />
-        <label for="sub1" class="noshow"><%=cm.cms("web_content_keys_06")%>:</label>
         <input title="<%=cm.cms("web_content_keys_06")%>" type="submit" name="submit" id="sub1" value="<%=cm.cms("web_content_keys_07")%>" class="inputTextField" />
-        <%=cm.cmsLabel("web_content_keys_06")%>
         <%=cm.cmsTitle("web_content_keys_06")%>
         <%=cm.cmsInput("web_content_keys_07")%>
       </form>

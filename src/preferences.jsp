@@ -87,9 +87,7 @@
         <%=cm.cmsInput("preferences_theme_cherry")%>
         <%=cm.cmsInput("preferences_theme_bw")%>
         <br />
-        <label for="submit1" class="noshow"><%=cm.cms("preferences_save_label")%></label>
         <input id="submit1" type="submit" name="Submit" value="<%=cm.cms("preferences_save_value")%>" title="<%=cm.cms("preferences_save_title")%>" class="inputTextField" />
-        <%=cm.cmsLabel("preferences_save_label")%>
         <%=cm.cmsTitle("preferences_save_title")%>
         <%=cm.cmsInput("preferences_save_value")%>
       </form>

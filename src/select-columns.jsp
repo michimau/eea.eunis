@@ -255,30 +255,22 @@
 %>
             </td>
             <td width="20%" valign="middle" align="center">
-              <label for="B1" class="noshow"><%=cm.cms("select_columns_add_label")%></label>
               <input type="button" title="<%=cm.cms("select_columns_add_title")%>" value="  <%=cm.cms("select_columns_add_value")%>  " onclick="move(this.form.list1,this.form.displayedColumns)" id="B1" name="B1" class="inputTextField" />
-              <%=cm.cmsLabel("select_columns_add_label")%>
               <%=cm.cmsTitle("select_columns_add_title")%>
               <%=cm.cmsInput("select_columns_add_value")%>
               <br />
               <br />
-              <label for="B2" class="noshow"><%=cm.cms("select_columns_remove_label")%></label>
               <input type="button" title="<%=cm.cms("select_columns_remove_title")%>" value="  <%=cm.cms("select_columns_remove_value")%>  " onclick="move(this.form.displayedColumns,this.form.list1)" id="B2" name="B2" class="inputTextField" />
-              <%=cm.cmsLabel("select_columns_remove_label")%>
               <%=cm.cmsTitle("select_columns_remove_title")%>
               <%=cm.cmsInput("select_columns_remove_value")%>
               <br />
               <br />
-              <label for="B3" class="noshow"><%=cm.cms("select_all_columns_add_label")%></label>
               <input type="button" title="<%=cm.cms("select_all_columns_add_title")%>" value="  <%=cm.cms("select_all_columns_add_value")%>  " onclick="moveAll(this.form.list1, this.form.displayedColumns)" id="B3" name="B3" class="inputTextField" />
-              <%=cm.cmsLabel("select_all_columns_add_label")%>
               <%=cm.cmsTitle("select_all_columns_add_title")%>
               <%=cm.cmsInput("select_all_columns_add_value")%>
               <br />
               <br />
-              <label for="B4" class="noshow"><%=cm.cms("select_all_columns_remove_label")%></label>
               <input type="button" title="<%=cm.cms("select_all_columns_remove_title")%>" value="  <%=cm.cms("select_all_columns_remove_value")%>  " onclick="moveAll(this.form.displayedColumns,this.form.list1)" id="B4" name="B4" class="inputTextField" />
-              <%=cm.cmsLabel("select_all_columns_remove_label")%>
               <%=cm.cmsTitle("select_all_columns_remove_title")%>
               <%=cm.cmsInput("select_all_columns_remove_value")%>
             </td>
@@ -290,9 +282,7 @@
           </tr>
         </table>
         <br />
-        <label for="proceed" class="noshow"><%=cm.cms("select_columns_proceed_label")%></label>
         <input type="submit" title="<%=cm.cms("select_columns_proceed_title")%>" id="proceed" name="Search" value="<%=cm.cms("select_columns_proceed_value")%>" class="inputTextField" />
-        <%=cm.cmsLabel("select_columns_proceed_label")%>
         <%=cm.cmsTitle("select_columns_proceed_title")%>
         <%=cm.cmsInput("select_columns_proceed_value")%>
       </form>

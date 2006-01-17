@@ -885,15 +885,12 @@ if(!skip.equalsIgnoreCase(NatureObject)) {
       <br />
     <% } %>
     <br />
-    <label for="Save" class="noshow"><%=cm.cms("save_btn")%></label>
     <input type="button" class="inputTextField" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save_btn")%>" />
     <%=cm.cmsTitle("save_btn")%>
     &nbsp;&nbsp;&nbsp;
-    <label for="Search" class="noshow"><%=cm.cms("search_btn")%></label>
     <input type="submit" class="inputTextField" value="Search" id="Search" name="Search" title="<%=cm.cms("search_btn")%>" />
     <%=cm.cmsTitle("search_btn")%>
     &nbsp;&nbsp;&nbsp;
-    <label for="Reset" class="noshow"><%=cm.cms("reset_btn")%></label>
     <input type="button" class="inputTextField" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cms("reset_btn")%>" />
     <%=cm.cmsTitle("reset_btn")%>
     <%
@@ -1312,7 +1309,6 @@ if(!skip.equalsIgnoreCase(NatureObject)) {
           <hr width="100%" size="1" align="left" />
           <br /><%=bResults%> <%=FirstNatureObject%> <%=cm.cmsText("generic_combined-search-step3_14")%><br /><br />
           <form name="search" action="select-columns.jsp" method="post">
-            <label for="ProceedResults0" class="noshow"><%=cm.cms("combined_proceed_to_results")%></label>
             <input type="submit" id="ProceedResults0" title="<%=cm.cms("combined_proceed_to_results")%>" name="Proceed to results" value="<%=cm.cms("combined_proceed_to_results")%>" class="inputTextField" />
             <%=cm.cmsInput("combined_proceed_to_results")%>
             <input type="hidden" name="idsession" value="<%=IdSession%>" />
@@ -1466,7 +1462,6 @@ if(!skip.equalsIgnoreCase(NatureObject)) {
         <hr width="100%" size="1" align="left" />
         <br /><%=bResults%> <%=cm.cmsText("generic_combined-search-step3_15")%><br /><br />
         <form name="search" action="select-columns.jsp" method="post">
-          <label for="ProceedResults" class="noshow"><%=cm.cms("combined_proceed_to_results")%></label>
           <input type="submit" name="Proceed to results" id="ProceedResults" title="<%=cm.cms("combined_proceed_to_results")%>" value="<%=cm.cms("combined_proceed_to_results")%>" class="inputTextField" />
           <%=cm.cmsInput("combined_proceed_to_results")%>
           <input type="hidden" name="idsession" value="<%=IdSession%>" />
@@ -1608,7 +1603,6 @@ if(!skip.equalsIgnoreCase(NatureObject)) {
         <hr width="100%" size="1" align="left" />
         <br /><%=bResults%> <%=cm.cmsText("generic_combined-search-step3_17")%><br /><br />
         <form name="search" action="select-columns.jsp" method="post">
-          <label for="ProceedResults2" class="noshow"><%=cm.cms("combined_proceed_to_results")%></label>
           <input type="submit" name="Proceed to results" title="<%=cm.cms("combined_proceed_to_results")%>" value="<%=cm.cms("combined_proceed_to_results")%>" id="ProceedResults2" class="inputTextField" />
           <%=cm.cmsInput("combined_proceed_to_results")%>
           <input type="hidden" name="idsession" value="<%=IdSession%>" />
@@ -1757,7 +1751,6 @@ if(!skip.equalsIgnoreCase(NatureObject)) {
       <hr width="100%" size="1" align="left" />
       <br /><%=bResults%> <%=cm.cmsText("generic_combined-search-step3_19")%><br /><br />
       <form name="search" action="select-columns.jsp" method="post">
-        <label for="ProceedResults3" class="noshow"><%=cm.cms("combined_proceed_to_results")%></label>
         <input type="submit" name="Proceed to results" id="ProceedResults3" title="<%=cm.cms("combined_proceed_to_results")%>" value="<%=cm.cms("combined_proceed_to_results")%>" class="inputTextField" />
         <%=cm.cmsInput("combined_proceed_to_results")%>
         <input type="hidden" name="idsession" value="<%=IdSession%>" />
@@ -1952,7 +1945,6 @@ if(!skip.equalsIgnoreCase(NatureObject)) {
         <hr width="100%" size="1" align="left" />
         <br /><%=bResults%> <%=cm.cmsText("generic_combined-search-step3_15")%><br /><br />
         <form name="search" action="select-columns.jsp" method="post">
-          <label for="ProceedResults4" class="noshow"><%=cm.cms("combined_proceed_to_results")%></label>
           <input type="submit" id="ProceedResults4" title="<%=cm.cms("combined_proceed_to_results")%>" name="Proceed to results" value="<%=cm.cms("combined_proceed_to_results")%>" class="inputTextField" />
           <%=cm.cmsInput("combined_proceed_to_results")%>
           <input type="hidden" name="idsession" value="<%=IdSession%>" />
@@ -2119,7 +2111,6 @@ if(!skip.equalsIgnoreCase(NatureObject)) {
           <hr width="100%" size="1" align="left" />
           <br /><%=bResults%> <%=cm.cmsText("generic_combined-search-step3_17")%><br /><br />
           <form name="search" action="select-columns.jsp" method="post">
-            <label for="ProceedResults5" class="noshow"><%=cm.cms("combined_proceed_to_results")%></label>
             <input type="submit" id="ProceedResults5" title="<%=cm.cms("combined_proceed_to_results")%>" name="Proceed to results" value="<%=cm.cms("combined_proceed_to_results")%>" class="inputTextField" />
             <%=cm.cmsInput("combined_proceed_to_results")%>
             <input type="hidden" name="idsession" value="<%=IdSession%>" />
@@ -2256,7 +2247,6 @@ if(!skip.equalsIgnoreCase(NatureObject)) {
         <hr width="100%" size="1" align="left" />
         <br /><%=bResults%> <%=cm.cmsText("generic_combined-search-step3_19")%><br /><br />
         <form name="search" action="select-columns.jsp" method="post">
-          <label for="ProceedResults6" class="noshow"><%=cm.cms("combined_proceed_to_results")%></label>
           <input type="submit" id="ProceedResults6" title="<%=cm.cms("combined_proceed_to_results")%>" name="Proceed to results" value="<%=cm.cms("combined_proceed_to_results")%>" class="inputTextField" />
           <%=cm.cmsInput("combined_proceed_to_results")%>
           <input type="hidden" name="idsession" value="<%=IdSession%>" />

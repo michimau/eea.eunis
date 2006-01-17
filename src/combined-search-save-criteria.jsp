@@ -249,20 +249,14 @@
               if (null == request.getParameter("description"))
               {
 %>
-              <label for="Submit" class="noshow"><%=cm.cms("save_btn")%></label>
               <input title="<%=cm.cms("save_btn")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("generic_save-search_07")%>" class="inputTextField" />
-              <%=cm.cmsLabel("save_btn")%>
               <%=cm.cmsInput("generic_save-search_07")%>
-              <label for="Reset" class="noshow"><%=cm.cms("reset_btn")%></label>
               <input title="<%=cm.cms("reset_btn")%>" type="reset" name="Reset" id="Reset" value="<%=cm.cms("generic_save-search_08")%>" class="inputTextField" />
-              <%=cm.cmsLabel("reset_btn")%>
               <%=cm.cmsInput("generic_save-search_08")%>
 <%
               }
 %>
-            <label for="Close" class="noshow"><%=cm.cms("close_window")%></label>
             <input type="button" title="<%=cm.cms("close_window")%>" name="Close" id="Close" value="<%=cm.cms("generic_save-search_09")%>" onclick="javascript:closeWindow('<%=request.getParameter("fromWhere")%>')" class="inputTextField" /><%=cm.cmsInput("generic_save-search_09")%>
-            <%=cm.cmsLabel("close_window")%>
           </td>
         </tr>
     </table>

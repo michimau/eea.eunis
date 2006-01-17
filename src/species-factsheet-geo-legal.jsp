@@ -167,9 +167,7 @@
 %>
     </table>
     <p style="text-align:left">
-    <label for="button1" class="noshow"><%=cm.cms("close_window")%></label>
       <input id="button1" title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
-      <%=cm.cmsLabel("close_window")%>
       <%=cm.cmsTitle("close_window")%>
       <%=cm.cmsInput("close_btn")%>
     </p>

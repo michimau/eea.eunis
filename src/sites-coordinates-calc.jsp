@@ -153,15 +153,11 @@
         <br />
         <div style="width : 100%; text-align : right;">
         <br />
-        <label for="reset" class="noshow"><%=cm.cms("sites_coordinates_calc_reset_label")%></label>
         <input id="reset" type="reset" name="Reset" value="<%=cm.cms("sites_coordinates_calc_reset_value")%>" class="inputTextField" title="<%=cm.cms("sites_coordinates_calc_reset_title")%>" />
-        <%=cm.cmsLabel("sites_coordinates_calc_reset_label")%>
         <%=cm.cmsInput("sites_coordinates_calc_reset_value")%>
         <%=cm.cmsTitle("sites_coordinates_calc_reset_title")%>
           &nbsp;
-        <label for="calculate" class="noshow"><%=cm.cms("sites_coordinates_calc_calculate_label")%></label>
         <input id="calculate" type="button" name="calculate" value="<%=cm.cms("sites_coordinates_calc_calculate_value")%>" onclick="javascript:transform(document.converter);" class="inputTextField" title="<%=cm.cms("sites_coordinates_calc_calculate_title")%>" />
-        <%=cm.cmsLabel("sites_coordinates_calc_calculate_label")%>
         <%=cm.cmsInput("sites_coordinates_calc_calculate_value")%>
         <%=cm.cmsTitle("sites_coordinates_calc_calculate_title")%>
         </div>

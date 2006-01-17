@@ -233,9 +233,7 @@
             <%=cm.cmsLabel("filter_label")%>
             <%=cm.cmsTitle("filter_title")%>
 
-            <label for="submit" class="noshow"><%=cm.cms("refine_btn_label")%></label>
             <input class="inputTextField" type="submit" id="submit" name="Submit" value="<%=cm.cms("refine_btn_value")%>" title="<%=cm.cms("refine_btn_title")%>" />
-            <%=cm.cmsLabel("refine_btn_label")%>
             <%=cm.cmsTitle("refine_btn_title")%>
             <%=cm.cmsInput("refine_btn_value")%>
           </form>

@@ -156,9 +156,7 @@
         <textarea id="bookmarkDescrptionEdit" title="<%=cm.cms("users_bookmarks_06")%>" name="bookmarkDescrptionEdit" rows="3" cols="100" class="inputTextField"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(bookmDescription),"&nbsp;")%></textarea>
         <%=cm.cmsTitle("users_bookmarks_06")%>
         <br />
-        <label for="input1" class="noshow"><%=cm.cms("save")%></label>
         <input id="input1" type="button" value="<%=cm.cms("save_btn")%>" name="save" onclick="onClickEditSave()" class="inputTextField" title="<%=cm.cms("save")%>" />
-        <%=cm.cmsLabel("save")%>
         <%=cm.cmsTitle("save")%>
         <%=cm.cmsInput("save_btn")%>
 <%
@@ -331,15 +329,11 @@
 %>
       </table>
       <br />
-      <label for="input2" class="noshow"><%=cm.cms("edit")%></label>
       <input id="input2" type="button" value="<%=cm.cms("edit_btn")%>" name="edit" onclick="onClickEdit()" class="inputTextField" title="<%=cm.cms("edit")%>" />
-      <%=cm.cmsLabel("edit")%>
       <%=cm.cmsTitle("edit")%>
       <%=cm.cmsInput("edit_btn")%>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <label for="input3" class="noshow"><%=cm.cms("delete")%></label>
       <input id="input3" type="button" value="<%=cm.cms("delete_btn")%>" name="delete" onclick="onClickDelete()" class="inputTextField" title="<%=cm.cms("delete")%>" />
-      <%=cm.cmsLabel("delete")%>
       <%=cm.cmsTitle("delete")%>
       <%=cm.cmsInput("delete_btn")%>
 <%

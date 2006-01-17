@@ -115,9 +115,7 @@
         <td width="35%" align="center" valign="middle">
           <label for="currentPage<%=guidNavigator%>"><%=cm.cmsText("navigator_goto_page_label")%>:</label>
           <input title="<%=cm.cms("navigator_goto_page_title")%>" class="inputTextFieldCenter" id="currentPage<%=guidNavigator%>" name="currentPage" type="text" size="3" value="<%=(currentPageNavigator + 1 > pagesCountNavigator) ? currentPageNavigator : currentPageNavigator + 1%>" />
-          <label for="submit<%=guidNavigator%>" class="noshow"><%=cm.cms("navigator_change_page_label")%></label>
           <input title="<%=cm.cms("navigator_change_page_title")%>" class="inputTextField" type="submit" id="submit<%=guidNavigator%>" name="Submit" value="<%=cm.cms("navigator_change_page_value")%>" /><%=toFORMParam%>
-          <%=cm.cmsLabel("navigator_change_page_label")%>
           <%=cm.cmsInput("navigator_change_page_value")%>
         </td>
         <td width="16%" align="right" valign="middle">

@@ -299,11 +299,7 @@
                 <input id="criteriaSearch" title="<%=cm.cms("species_country-result_22_Title")%>" alt="<%=cm.cms("species_country-result_22_Title")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
                 <%=cm.cmsLabel("species_country-result_22_Label")%>
                 <%=cm.cmsTitle("species_country-result_22_Title")%>
-                  <label for="search" class="noshow">
-                    <%=cm.cms("species_country-result_14_Title")%>
-                  </label>
                 <input id="search" title="<%=cm.cms("species_country-result_14_Title")%>" class="inputTextField" type="submit" name="Submit" value="<%=cm.cms("species_country-result_14")%>" />
-                <%=cm.cmsLabel("species_country-result_14_Title")%>
                 <%=cm.cmsTitle("species_country-result_14_Title")%>
                 <%=cm.cmsInput("species_country-result_14")%>
               </form>

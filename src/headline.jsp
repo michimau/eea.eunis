@@ -172,25 +172,13 @@
         <br />
         <br />
         <br />
-        <label for="insert" class="noshow">
-          <%=cm.cms("headline_insert_label")%>
-        </label>
         <input class="inputTextField" type="submit" value="<%=cm.cms("headline_insert")%>" id="insert" name="insert" title="<%=cm.cms("headline_insert_label")%>" />&nbsp;&nbsp;
-        <%=cm.cmsLabel("headline_insert_label")%>
         <%=cm.cmsInput("headline_insert")%>
 
-        <label for="delete" class="noshow">
-          <%=cm.cms("headline_delete_label")%>
-        </label>
         <input class="inputTextField" type="submit" value="<%=cm.cms("headline_delete")%>" id="delete" name="delete" title="<%=cm.cms("headline_delete_label")%>" />&nbsp;&nbsp;
-        <%=cm.cmsLabel("headline_delete_label")%>
         <%=cm.cmsInput("headline_delete")%>
 
-        <label for="deleteall" class="noshow">
-          <%=cm.cms("headline_deleteall_label")%>
-        </label>
         <input class="inputTextField" type="submit" value="<%=cm.cms("headline_deleteall")%>" id="deleteall" name="deleteall" title="<%=cm.cms("headline_deleteall_label")%>" />
-        <%=cm.cmsLabel("headline_deleteall_label")%>
         <%=cm.cmsInput("headline_deleteall")%>
       </form>
 <%

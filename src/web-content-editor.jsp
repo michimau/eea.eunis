@@ -297,13 +297,9 @@
         <label for="maxLength"><%=cm.cms("web_content_editor_23")%>:</label> <input type="text" id="maxLength" name="maxLength" value="<%=maxLength%>" class="inputTextField" size="4" style="text-align : right;" title="<%=cm.cms("web_content_editor_24")%>" />
         <br />
         <br />
-        <label for="save" class="noshow"><%=cm.cms("save_btn")%></label>
         <input type="submit" id="save" name="Save" value="<%=cm.cms("save_btn")%>" title="<%=cm.cms("web_content_editor_25")%>" class="inputTextField" />
-        <label for="delete" class="noshow"><%=cm.cms("delete_btn")%></label>
         <input type="button" id="delete" name="Delete" value="<%=cm.cms("delete_btn")%>" title="<%=cm.cms("web_content_editor_26")%>" class="inputTextField" onclick="javascript:alert( 'TODO' );" />
-        <label for="reset" class="noshow"><%=cm.cms("reset_btn")%></label>
         <input type="reset" id="reset" name="Reset" value="<%=cm.cms("reset_btn")%>" title="<%=cm.cms("web_content_editor_27")%>" class="inputTextField" onclick="javascript:resetOnChange();" />
-        <label for="close" class="noshow"><%=cm.cms("close_btn")%></label>
         <input type="button" id="close" name="Close" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close();" title="<%=cm.cms("web_content_editor_28")%>" class="inputTextField" />
       </form>
 <%

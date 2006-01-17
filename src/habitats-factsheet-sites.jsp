@@ -64,7 +64,6 @@
 
 <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
   <input type="hidden" name="sites" value="<%=ids%>" />
-  <label for="ShowMap" class="noshow"><%=cm.cms("show_map")%></label>
   <input type="submit" name="Show map" id="ShowMap" value="<%=cm.cms("show_map")%>" title="<%=cm.cms("show_map")%>" class="inputTextField" />
   <%=cm.cmsTitle("show_map")%>
 </form>

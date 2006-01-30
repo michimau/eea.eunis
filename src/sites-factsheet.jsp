@@ -15,10 +15,6 @@
                  ro.finsiel.eunis.utilities.SQLUtilities,
                  ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-  <head>
-    <jsp:include page="header-page.jsp" />
 <%
   // Request parameters
   // - idsite - ID of the site
@@ -37,9 +33,16 @@
 
   SQLUtilities sqlc = new SQLUtilities();
   sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
+  <head>
+    <jsp:include page="header-page.jsp">
+      <jsp:param name="metaDescription" value="<%=factsheet.getDescription()%>" />
+    </jsp:include>
+<%
   if(null == factsheet.getIDNatureObject()) {
-  %>
+%>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("sites_factsheet_title")%>

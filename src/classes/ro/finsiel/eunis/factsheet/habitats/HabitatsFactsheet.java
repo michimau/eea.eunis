@@ -13,6 +13,7 @@ import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.SortList;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.factsheet.HabitatsSpeciesWrapper;
+import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
 
 import java.util.Iterator;
 import java.util.List;
@@ -148,6 +149,43 @@ public class HabitatsFactsheet {
     {
       idNatureObject = habitat.getIdNatureObject();
     }
+  }
+
+  /**
+   * Retrieve habitat description in human readable string, english language
+   * @return habitat description as appears in factsheet (Description)
+   */
+  public String getMetaHabitatDescription()
+  {
+    String ret = "";
+    try
+    {
+      ret = getHabitatDescription() + " ";
+    }
+    catch( Exception ex )
+    {
+      ex.printStackTrace();
+    }
+    try
+    {
+      Vector<DescriptionWrapper> descriptions = getDescrOwner();
+      for( DescriptionWrapper description : descriptions )
+      {
+        if(description.getLanguage().equalsIgnoreCase("english"))
+        {
+          if( description.getDescription() != null )
+          {
+            ret += description.getDescription().replaceAll( "\"", "'" );
+          }
+        }
+      }
+    }
+    catch( Exception ex )
+    {
+      ex.printStackTrace();
+    }
+
+    return ret;
   }
 
   /**
@@ -1237,12 +1275,12 @@ public class HabitatsFactsheet {
    * @return Vector of DescriptionWrapper objects.
    * @throws InitializationException if idHabitat was null during object construction.
    */
-  public Vector getDescrOwner() throws InitializationException {
+  public Vector<DescriptionWrapper> getDescrOwner() throws InitializationException {
     if ( null == idHabitat )
     {
       throw new InitializationException( "idHabitat was null. Cannot retrieve information." );
     }
-    Vector results = new Vector();
+    Vector<DescriptionWrapper> results = new Vector<DescriptionWrapper>();
     try
     {
       List list = new Chm62edtHabitatDescriptionDomain().findWhere( "ID_HABITAT='" + idHabitat + "'" );

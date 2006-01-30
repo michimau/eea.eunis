@@ -40,7 +40,6 @@ public class SpeciesSearchUtility {
     Vector ret = new Vector(0);
     if (null == idNatureObject) return new Vector(0);
     try {
-
       //search also on synonyms
       Vector synonyms = new Vector();
       Integer IdNatureObjectSpecie = idNatureObject;

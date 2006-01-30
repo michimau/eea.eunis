@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.jrfTables.*;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.*;
+import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 
 import java.util.List;
 import java.util.Vector;
@@ -67,6 +68,30 @@ public class SiteFactsheet {
    */
   public SiteFactsheet( String idSite ) {
     this.idSite = idSite;
+  }
+
+  public String getDescription()
+  {
+    String ret = "";
+    try
+    {
+      ret = getSiteObject().getName();
+
+      if( getCountry() != null && !getCountry().equalsIgnoreCase( "" ) )
+      {
+        ret += " is located within " + getCountry();
+      }
+      if( getSiteObject().getArea() != null && getSiteObject().getArea().equalsIgnoreCase( "" ) )
+      {
+        ret += ", has a surface of " + getSiteObject().getArea() + " hectares";
+      }
+      ret += " is part of the " + SitesSearchUtility.translateSourceDB( getSiteObject().getSourceDB() ) + " database.";
+    }
+    catch( Exception ex )
+    {
+      ex.printStackTrace();
+    }
+    return ret;
   }
 
   /**

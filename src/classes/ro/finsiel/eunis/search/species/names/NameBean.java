@@ -52,6 +52,8 @@ public class NameBean extends AbstractFormBean {
 
   private String noSoundex = null;
 
+  private String comeFromQuickSearch = null;
+
   /** This method will transform the request parameters used for search back in search objects (AbstractSearchCriteria)
    * in order to use them in searches.
    * @return A list of AbstractSearchCriteria objects used to do the search.
@@ -79,7 +81,10 @@ public class NameBean extends AbstractFormBean {
     }
 
     NameSearchCriteria[] ret = new NameSearchCriteria[criterias.size()];
-    for (int i = 0; i < ret.length; i++) ret[i] = (NameSearchCriteria) criterias.get(i);
+    for ( int i = 0; i < ret.length; i++ )
+    {
+      ret[ i ] = ( NameSearchCriteria ) criterias.get( i );
+    }
     return ret;
   }
 
@@ -88,7 +93,10 @@ public class NameBean extends AbstractFormBean {
    * @return A list of AbstractSearchCriteria objects used to do the sorting
    */
   public AbstractSortCriteria[] toSortCriteria() {
-    if (null == sort || null == ascendency) return new AbstractSortCriteria[0];
+    if ( null == sort || null == ascendency )
+    {
+      return new AbstractSortCriteria[0];
+    }
     AbstractSortCriteria criterias[] = new AbstractSortCriteria[sort.length];
     for (int i = 0; i < sort.length; i++) {
       NameSortCriteria criteria = new NameSortCriteria(
@@ -114,17 +122,51 @@ public class NameBean extends AbstractFormBean {
       AbstractSearchCriteria aSearch = searchCriterias[i];
       url.append(aSearch.toURLParam());
     }
-    if (null != typeForm) url.append(Utilities.writeURLParameter("typeForm", typeForm));
-    if (null != expand) url.append(Utilities.writeURLParameter("expand", expand));
+    if ( null != typeForm )
+    {
+      url.append( Utilities.writeURLParameter( "typeForm", typeForm ) );
+    }
+    if ( null != expand )
+    {
+      url.append( Utilities.writeURLParameter( "expand", expand ) );
+    }
     // Write columns to be displayed
-    if (null != showGroup && showGroup.equalsIgnoreCase("true")) url.append(Utilities.writeURLParameter("showGroup", AbstractFormBean.SHOW.toString()));
-    if (null != showOrder && showOrder.equalsIgnoreCase("true")) url.append(Utilities.writeURLParameter("showOrder", AbstractFormBean.SHOW.toString()));
-    if (null != showFamily && showFamily.equalsIgnoreCase("true")) url.append(Utilities.writeURLParameter("showFamily", AbstractFormBean.SHOW.toString()));
-    if (null != showScientificName && showScientificName.equalsIgnoreCase("true")) url.append(Utilities.writeURLParameter("showScientificName", AbstractFormBean.SHOW.toString()));
-    if (null != showVernacularNames && showVernacularNames.equalsIgnoreCase("true")) url.append(Utilities.writeURLParameter("showVernacularNames", AbstractFormBean.SHOW.toString()));
-    if (null != showValidName && showValidName.equalsIgnoreCase("true")) url.append(Utilities.writeURLParameter("showValidName", AbstractFormBean.SHOW.toString()));
-    if (null != searchSynonyms && searchSynonyms.equalsIgnoreCase("true")) url.append(Utilities.writeURLParameter("searchSynonyms", AbstractFormBean.SHOW.toString()));
-    if (null != searchVernacular && searchVernacular.booleanValue() ) url.append(Utilities.writeURLParameter("searchVernacular", AbstractFormBean.SHOW.toString()));
+    if ( null != showGroup && showGroup.equalsIgnoreCase( "true" ) )
+    {
+      url.append( Utilities.writeURLParameter( "showGroup", AbstractFormBean.SHOW.toString() ) );
+    }
+    if ( null != showOrder && showOrder.equalsIgnoreCase( "true" ) )
+    {
+      url.append( Utilities.writeURLParameter( "showOrder", AbstractFormBean.SHOW.toString() ) );
+    }
+    if ( null != showFamily && showFamily.equalsIgnoreCase( "true" ) )
+    {
+      url.append( Utilities.writeURLParameter( "showFamily", AbstractFormBean.SHOW.toString() ) );
+    }
+    if ( null != showScientificName && showScientificName.equalsIgnoreCase( "true" ) )
+    {
+      url.append( Utilities.writeURLParameter( "showScientificName", AbstractFormBean.SHOW.toString() ) );
+    }
+    if ( null != showVernacularNames && showVernacularNames.equalsIgnoreCase( "true" ) )
+    {
+      url.append( Utilities.writeURLParameter( "showVernacularNames", AbstractFormBean.SHOW.toString() ) );
+    }
+    if ( null != showValidName && showValidName.equalsIgnoreCase( "true" ) )
+    {
+      url.append( Utilities.writeURLParameter( "showValidName", AbstractFormBean.SHOW.toString() ) );
+    }
+    if ( null != searchSynonyms && searchSynonyms.equalsIgnoreCase( "true" ) )
+    {
+      url.append( Utilities.writeURLParameter( "searchSynonyms", AbstractFormBean.SHOW.toString() ) );
+    }
+    if ( null != searchVernacular && searchVernacular.booleanValue() )
+    {
+      url.append( Utilities.writeURLParameter( "searchVernacular", AbstractFormBean.SHOW.toString() ) );
+    }
+    if ( null != comeFromQuickSearch && comeFromQuickSearch.equalsIgnoreCase( "true" ) )
+    {
+      url.append( Utilities.writeURLParameter( "comeFromQuickSearch", AbstractFormBean.SHOW.toString() ) );
+    }
     return url.toString();
   }
 
@@ -144,17 +186,51 @@ public class NameBean extends AbstractFormBean {
         form.append(aSearch.toFORMParam());
       }
     }
-    if (null != typeForm) form.append(Utilities.writeFormParameter("typeForm", typeForm));
-    if (null != expand) form.append(Utilities.writeFormParameter("expand", expand));
+    if ( null != typeForm )
+    {
+      form.append( Utilities.writeFormParameter( "typeForm", typeForm ) );
+    }
+    if ( null != expand )
+    {
+      form.append( Utilities.writeFormParameter( "expand", expand ) );
+    }
     // Column to be displayed
-    if (null != showGroup && showGroup.equalsIgnoreCase("true")) form.append(Utilities.writeFormParameter("showGroup", AbstractFormBean.SHOW.toString()));
-    if (null != showOrder && showOrder.equalsIgnoreCase("true")) form.append(Utilities.writeFormParameter("showOrder", AbstractFormBean.SHOW.toString()));
-    if (null != showFamily && showFamily.equalsIgnoreCase("true")) form.append(Utilities.writeFormParameter("showFamily", AbstractFormBean.SHOW.toString()));
-    if (null != showScientificName && showScientificName.equalsIgnoreCase("true")) form.append(Utilities.writeFormParameter("showScientificName", AbstractFormBean.SHOW.toString()));
-    if (null != showVernacularNames && showVernacularNames.equalsIgnoreCase("true")) form.append(Utilities.writeFormParameter("showVernacularNames", AbstractFormBean.SHOW.toString()));
-    if (null != showValidName && showValidName.equalsIgnoreCase("true")) form.append(Utilities.writeFormParameter("showValidName", AbstractFormBean.SHOW.toString()));
-    if (null != searchSynonyms && searchSynonyms.equalsIgnoreCase("true")) form.append(Utilities.writeFormParameter("searchSynonyms", AbstractFormBean.SHOW.toString()));
-    if (null != searchVernacular && searchVernacular.booleanValue() ) form.append(Utilities.writeFormParameter("searchVernacular", AbstractFormBean.SHOW.toString()));
+    if ( null != showGroup && showGroup.equalsIgnoreCase( "true" ) )
+    {
+      form.append( Utilities.writeFormParameter( "showGroup", AbstractFormBean.SHOW.toString() ) );
+    }
+    if ( null != showOrder && showOrder.equalsIgnoreCase( "true" ) )
+    {
+      form.append( Utilities.writeFormParameter( "showOrder", AbstractFormBean.SHOW.toString() ) );
+    }
+    if ( null != showFamily && showFamily.equalsIgnoreCase( "true" ) )
+    {
+      form.append( Utilities.writeFormParameter( "showFamily", AbstractFormBean.SHOW.toString() ) );
+    }
+    if ( null != showScientificName && showScientificName.equalsIgnoreCase( "true" ) )
+    {
+      form.append( Utilities.writeFormParameter( "showScientificName", AbstractFormBean.SHOW.toString() ) );
+    }
+    if ( null != showVernacularNames && showVernacularNames.equalsIgnoreCase( "true" ) )
+    {
+      form.append( Utilities.writeFormParameter( "showVernacularNames", AbstractFormBean.SHOW.toString() ) );
+    }
+    if ( null != showValidName && showValidName.equalsIgnoreCase( "true" ) )
+    {
+      form.append( Utilities.writeFormParameter( "showValidName", AbstractFormBean.SHOW.toString() ) );
+    }
+    if ( null != searchSynonyms && searchSynonyms.equalsIgnoreCase( "true" ) )
+    {
+      form.append( Utilities.writeFormParameter( "searchSynonyms", AbstractFormBean.SHOW.toString() ) );
+    }
+    if ( null != searchVernacular && searchVernacular.booleanValue() )
+    {
+      form.append( Utilities.writeFormParameter( "searchVernacular", AbstractFormBean.SHOW.toString() ) );
+    }
+    if ( null != comeFromQuickSearch && comeFromQuickSearch.equalsIgnoreCase( "true" ) )
+    {
+      form.append( Utilities.writeFormParameter( "comeFromQuickSearch", AbstractFormBean.SHOW.toString() ) );
+    }
     return form.toString();
   }
 
@@ -444,5 +520,21 @@ public class NameBean extends AbstractFormBean {
   public void setNoSoundex( String noSoundex )
   {
     this.noSoundex = noSoundex;
+  }
+
+  /**
+   * Getter.
+   * @return comeFromQuickSearch
+   */
+  public String getComeFromQuickSearch() {
+    return comeFromQuickSearch;
+  }
+
+  /**
+   * Setter.
+   * @param comeFromQuickSearch New value
+   */
+  public void setComeFromQuickSearch( String comeFromQuickSearch ) {
+    this.comeFromQuickSearch = comeFromQuickSearch;
   }
 }

@@ -21,14 +21,14 @@
       - mini - true/false - Specifies if only shows the most importat parts of factsheet (uppermost part with general info)
 --%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%
   /// INPUT PARAMS: idHabitat
   String idHabitat = request.getParameter("idHabitat");
   int tab = Utilities.checkedStringToInt(request.getParameter("tab"), 0);
 // Mini factsheet shows only the uppermost part of the factsheet with generic information.
   boolean isMini = Utilities.checkedStringToBoolean(request.getParameter("mini"), false);
-  HabitatsFactsheet factsheet = null;
-  factsheet = new HabitatsFactsheet(idHabitat);
+  HabitatsFactsheet factsheet = new HabitatsFactsheet(idHabitat);
   WebContentManagement cm = SessionManager.getWebContent();
 
   String []tabs = {"General information", "Geographical distribution", "Legal instruments", "Habitat types", "Sites", "Species", "Other info"};
@@ -40,9 +40,9 @@
   String SQL_USR = application.getInitParameter("JDBC_USR");
   String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
-if(null == factsheet.getHabitat()) {
+  if(null == factsheet.getHabitat())
+  {
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <title>
@@ -93,7 +93,9 @@ if(null == factsheet.getHabitat()) {
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
-  <jsp:include page="header-page.jsp" />
+  <jsp:include page="header-page.jsp">
+    <jsp:param name="metaDescription" value="<%=factsheet.getMetaHabitatDescription()%>" />
+  </jsp:include>
   <script language="JavaScript" type="text/javascript" src="script/habitats-result.js"></script>
   <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
   <title>

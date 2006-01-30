@@ -48,7 +48,7 @@
   // Coming from form 1
   if (NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm)
   {
-      String cqs =  "" + request.getParameter("comeFromQuickSearch");
+      String cqs = "" + formBean.getComeFromQuickSearch();
       boolean showInvalidatedSpecies = cqs.length() > 0 && !cqs.equalsIgnoreCase( "null" ) || SessionManager.getShowEUNISInvalidatedSpecies();
       paginator = new NamePaginator(new ScientificNameDomain(formBean.toSearchCriteria(),
                                                            formBean.toSortCriteria(),

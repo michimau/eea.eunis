@@ -41,7 +41,7 @@
   <!-- Static part of the page title (JSPs)-->
   <context-param>
     <param-name>PAGE_TITLE</param-name>
-    <param-value>EUNIS Database 2 - EC CHM - </param-value>
+    <param-value>EUNIS2 - </param-value>
     <description>Static part of the pages title</description>
   </context-param>
 

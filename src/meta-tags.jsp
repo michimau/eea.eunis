@@ -1,3 +1,4 @@
+<%@ page import="ro.finsiel.eunis.search.Utilities"%>
 <%--
   - Author(s) : The EUNIS Database Team.
   - Date :
@@ -7,11 +8,14 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
   request.setCharacterEncoding( "UTF-8");
+  String description = Utilities.formatString( request.getParameter( "metaDescription" ),
+    "European nature information system web site, EUNIS database, Biological Diversity, European Environment, Species, Habitat types, Sites, Designations" );
 %>
 <meta name="area" content="Science, Biological Diversity, Biodiversity, Species, Habitat types, Sites" />
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
-<meta name="description" content="European nature information system web site, EUNIS database, Biological Diversity, European Environment, Species, Habitat types, Sites, Designations" />
+<meta name="description" content="<%=description%>" />
+
 <meta name="keywords" content="European, Nature, Information, EUNIS, Database, Biological, Diversity, Environment, Species, Habitat types, Sites, Designations" />
 <meta name="author" content="EEA - European Environment Agency s.r.l." />
 

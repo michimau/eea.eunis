@@ -1,33 +1,27 @@
-  // Error message displayed if not text was entered in text fields.
-  var invalidInputMsg = "Please enter the full name of the country.";
-  var errMinDesignationYear = "Please enter the minimum year in 'YYYY' format, and greater than 999";
-  var errMaxDesignationYear = "Please enter the maximum year in 'YYYY' format, and greater than 999";
-  var errInvalidYearCombination = "Minimum designation year cannot be greater than maximum designation year.";
-
   function validateForm()
   {
     document.eunis.country.value = trim(document.eunis.country.value);
     document.eunis.designation.value = trim(document.eunis.designation.value);
     if (document.eunis.country.value == "")
     {
-      alert(invalidInputMsg);
+      alert(sites_statistical0);
       return false;
     }
     // Validate designation years
     if (document.eunis.yearMin.value != "" && !isYear(document.eunis.yearMin.value))
     {
-      alert(errMinDesignationYear);
+      alert(sites_statistical1);
       return false;
     }
     if (document.eunis.yearMax.value != "" && !isYear(document.eunis.yearMax.value))
     {
-      alert(errMaxDesignationYear);
+      alert(sites_statistical2);
       return false;
     }
     // Check if yearMin is smaller than yearMax
     if ((str2Number(document.eunis.yearMin.value)) > (str2Number(document.eunis.yearMax.value)))
     {
-      alert(errInvalidYearCombination);
+      alert(sites_statistical3);
       return false;
     }
      // Check if country is a valid country
@@ -43,7 +37,7 @@
   {
     var country = document.eunis.country.value
     var URL2 = URL+"&country=" + country;
-    eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=400,height=500,left=490,top=0');");
+    eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=350,height=500,left=490,top=0');");
   }
 
   function openNewPage(URL)

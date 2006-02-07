@@ -35,7 +35,6 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 // Validate the 'Refine your search' form.
 function validateRefineForm(noCriteria)
 {
-  var errMessage = "Please enter the refine criteria correctly.";
   var checkOK = true;
   if( noCriteria == 0 )
   {
@@ -56,7 +55,7 @@ function validateRefineForm(noCriteria)
   }
   if ( !checkOK )
   {
-    alert( errMessage );
+    alert( species_result_enter_criteria_correctly_msg );
   }
   return checkOK;
 }

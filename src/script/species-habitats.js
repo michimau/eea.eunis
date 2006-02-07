@@ -1,12 +1,10 @@
-var errMessageForm = "Search criteria is mandatory.";
-
 function validateForm()
 {
   var  scientificName;
   scientificName = trim(document.eunis.scientificName.value);
   if (scientificName == "")
   {
-    alert(errMessageForm);
+    alert(species_criteria_mandatory_msg);
     return false;
   }
   return true;

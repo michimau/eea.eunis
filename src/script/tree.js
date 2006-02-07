@@ -31,9 +31,9 @@ function createTree(nivel,vName, arrName, startNode, openNode, pageURL) {
 		if(openNode != 0 || openNode != null) setOpenNodes(openNode);
 		if(startNode !=0) {
 			var nodeValues = nodes[getArrayId(startNode)].split("|");
-			document.write("<a title=\"Display data for this node\" href=\"" + nodeValues[3] + "\"><img alt=\"\" src=\"images/tree/folderopen.gif\" align=\"absbottom\" />" + nodeValues[2] + "</a><br />");
+			document.write("<a title=\""+tree_display_msg+"\" href=\"" + nodeValues[3] + "\"><img alt=\"\" src=\"images/tree/folderopen.gif\" align=\"absbottom\" />" + nodeValues[2] + "</a><br />");
 		} else
-		  document.write("<img src=\"images/tree/base.gif\" alt=\"Habitat Classification Categories\" align=\"absbottom\" /><a title=\"Habitat Classification Categories\" href=\""+ pageURL +"\">Habitat Classification Categories</a><br />");
+		  document.write("<img src=\"images/tree/base.gif\" alt=\""+tree_habitat_msg+"\" align=\"absbottom\" /><a title=\""+tree_habitat_msg+"\" href=\""+ pageURL +"\">"+tree_habitat_msg+"</a><br />");
 		var recursedNodes = new Array();
 		addNode(startNode, recursedNodes,nivel);
 	}
@@ -49,8 +49,8 @@ function createTreeSpeciesTaxonomy(taxLevel, taxName, nivel, vName, arrName, sta
 		if (openNode != 0 || openNode != null) setOpenNodes(openNode);
 		if (startNode !=0) {
 			var nodeValues = nodes[getArrayId(startNode)].split("|");
-			document.write("<a title=\"Display data for this node\" href=\"" + nodeValues[3] + "\">" + nodeValues[2] + "</a><br />");
-		} else document.write("<img src=\"images/tree/base.gif\" alt=\"Taxonomic Classification\" align=\"absbottom\"><a title=\"Taxonomic Classification\" href=\"" + pageURL + "\" />Taxonomic Classification for " + taxLevel + " - "+taxName+"</a><br />");
+			document.write("<a title=\""+tree_display_msg+"\" href=\"" + nodeValues[3] + "\">" + nodeValues[2] + "</a><br />");
+		} else document.write("<img src=\"images/tree/base.gif\" alt=\""+tree_taxonomic_msg+"\" align=\"absbottom\"><a title=\""+tree_taxonomic_msg+"\" href=\"" + pageURL + "\" />" + tree_taxonomic_msg + " " + taxLevel + " - "+taxName+"</a><br />");
 		var recursedNodes = new Array();
 		addNode(startNode, recursedNodes,nivel);
 	}
@@ -60,7 +60,7 @@ function createTreeSpeciesTaxonomy(taxLevel, taxName, nivel, vName, arrName, sta
 
 // Returns the position of a node in the array
 function getArrayId(node) {
-	return node-1;
+  return node-1;
 }
 
 
@@ -134,7 +134,8 @@ if(!Array.prototype.pop) {
 	Array.prototype.pop = array_pop;
 }
 
-function addNode(parentNode, recursedNodes,nivel) {
+function addNode(parentNode, recursedNodes,nivel )
+{
   var nodeValues2;
   var childs= new Array();
   var Buffer= "";
@@ -172,30 +173,30 @@ function addNode(parentNode, recursedNodes,nivel) {
 
       if(hcn) {
         if(ls) {
-          Buffer+="<a title=\"Display data for this node\" href=\"javascript:oc(" + nodeValues[0] + ", 1);\"><img id=\"join" + nodeValues[0] + "\" src=\"images/tree/";
+          Buffer+="<a title=\""+tree_display_msg+"\" href=\"javascript:oc(" + nodeValues[0] + ", 1);\"><img id=\"join" + nodeValues[0] + "\" src=\"images/tree/";
           if(branch) {
             if(!ino)
-              Buffer+="minusbottom.gif\" align=\"absbottom\" alt=\"Open/Close node\"></a>";
+              Buffer+="minusbottom.gif\" align=\"absbottom\" alt=\""+tree_open_close_msg+"\"></a>";
             else
-              Buffer+="plusbottom.gif\" align=\"absbottom\" alt=\"Open/Close node\"></a>";
+              Buffer+="plusbottom.gif\" align=\"absbottom\" alt=\""+tree_open_close_msg+"\"></a>";
           } else {
 					 	if(ino)
-					 	  Buffer+="minusbottom.gif\" align=\"absbottom\" alt=\"Open/Close node\"></a>";
+					 	  Buffer+="minusbottom.gif\" align=\"absbottom\" alt=\""+tree_open_close_msg+"\"></a>";
 						else
-						  Buffer+="plusbottom.gif\" align=\"absbottom\" alt=\"Open/Close node\"></a>";
+						  Buffer+="plusbottom.gif\" align=\"absbottom\" alt=\""+tree_open_close_msg+"\"></a>";
           }
         } else {
-          Buffer+="<a title=\"Display data for this node\" href=\"javascript:oc(" + nodeValues[0] + ", 0);\"><img id=\"join" + nodeValues[0] + "\" src=\"images/tree/";
+          Buffer+="<a title=\""+tree_display_msg+"\" href=\"javascript:oc(" + nodeValues[0] + ", 0);\"><img id=\"join" + nodeValues[0] + "\" src=\"images/tree/";
           if(branch) {
             if(!ino)
-              Buffer+="minus.gif\" align=\"absbottom\" alt=\"Open/Close node\" /></a>";
+              Buffer+="minus.gif\" align=\"absbottom\" alt=\""+tree_open_close_msg+"\" /></a>";
             else
-              Buffer+="plus.gif\" align=\"absbottom\" alt=\"Open/Close node\" /></a>";
+              Buffer+="plus.gif\" align=\"absbottom\" alt=\""+tree_open_close_msg+"\" /></a>";
           } else {
 						if(ino)
-						  Buffer+="minus.gif\" align=\"absbottom\" alt=\"Open/Close node\" /></a>";
+						  Buffer+="minus.gif\" align=\"absbottom\" alt=\""+tree_open_close_msg+"\" /></a>";
 						else
-						  Buffer+="plus.gif\" align=\"absbottom\" alt=\"Open/Close node\" /></a>";
+						  Buffer+="plus.gif\" align=\"absbottom\" alt=\""+tree_open_close_msg+"\" /></a>";
           }
         }
       } else {
@@ -205,7 +206,7 @@ function addNode(parentNode, recursedNodes,nivel) {
           Buffer+="<img src=\"images/tree/joinbottom.gif\" align=\"absbottom\" />";
       }
       // Start link
-      Buffer+="<a title=\"Display data for this node\" href=\"" + nodeValues[3] + "#factsheet\">";
+      Buffer+="<a title=\""+tree_display_msg+"\" href=\"" + nodeValues[3] + "#factsheet\">";
       // Write out folder & page icons
       if(hcn) {
         Buffer+="<img id=\"icon" + nodeValues[0] + "\" src=\"images/tree/folder";
@@ -218,9 +219,9 @@ function addNode(parentNode, recursedNodes,nivel) {
 					  Buffer+="open";
 					}
         }
-        Buffer+=".gif\" align=\"absbottom\" alt=\"Folder\" />";
+        Buffer+=".gif\" align=\"absbottom\" />";
       } else {
-        Buffer+="<img id=\"icon" + nodeValues[0] + "\" src=\"images/tree/page.gif\" align=\"absbottom\" alt=\"Page\" />";
+        Buffer+="<img id=\"icon" + nodeValues[0] + "\" src=\"images/tree/page.gif\" align=\"absbottom\" />";
       }
       // Write out node name
       Buffer+=nodeValues[2];

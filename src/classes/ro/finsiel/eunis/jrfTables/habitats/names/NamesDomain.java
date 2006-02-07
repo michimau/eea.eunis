@@ -190,6 +190,7 @@ public class NamesDomain extends AbstractDomain implements Paginable {
       filterSQL.append(aCriteria.toSQL());
     }
     filterSQL.append(" AND IF(TRIM(A.CODE_2000) <> '',RIGHT(A.CODE_2000,2),1) <> IF(TRIM(A.CODE_2000) <> '','00',2) AND IF(TRIM(A.CODE_2000) <> '',LENGTH(A.CODE_2000),1) = IF(TRIM(A.CODE_2000) <> '',4,1) ");
+    //    filterSQL.append(" GROUP BY A.SCIENTIFIC_NAME ");
     filterSQL.append(" GROUP BY A.ID_HABITAT ");
     return filterSQL;
   }

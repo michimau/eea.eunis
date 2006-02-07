@@ -1,4 +1,4 @@
-var errMessageForm = "Please type a few letters from the habitat type name.";
+var errMessageForm = habitat_name_type_msg;
 
 function validateForm()
 {
@@ -20,7 +20,7 @@ function validateForm()
   }
   if (!isSomeoneChecked)
   {
-    alert("Please select the database.");
+    alert(habitat_select_database_msg);
     return false;
   }
   return true;

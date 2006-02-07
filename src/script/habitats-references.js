@@ -96,14 +96,14 @@ function validateForm()
   var publisher = document.eunis.publisher.value;
   if (date == "" && date1 == "" && author == "" && title == "" && editor == "" && publisher == "")
   {
-    return confirm("By leaving all the fields blank the search might take a long time. Are you sure you want to continue?");
+    return confirm(habitat_confirm_msg);
   } else {
     // Validate the form fields
     if (date != "")
     {
       if (!isYear(date))
       {
-        alert("Please enter the minimum year in 'YYYY' format, and greater than 1000");
+        alert(habitat_year_format_msg);
         return false;
       }
     }
@@ -111,7 +111,7 @@ function validateForm()
     {
       if (!isYear(date1))
       {
-        alert("Please enter the maximum year in 'YYYY' format and greater than 1000");
+        alert(habitat_year_format_msg);
         return false;
       }
     }
@@ -122,7 +122,7 @@ function validateForm()
         && document.eunis.date1.value != ""
         && (yearMax < yearMin))
     {
-      alert("Maximum year must be greater or equal with minimum year");
+      alert(habitat_year_minimum_msg);
       return false;
     } else {
       return true;

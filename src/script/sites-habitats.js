@@ -1,5 +1,3 @@
-// Error message displayed if not text was entered in text fields.
-var errMessageForm = "Please type a few letters from habitat type name.";
 function check(noCriteria)
 {
   if(noCriteria == 0)
@@ -7,7 +5,7 @@ function check(noCriteria)
     var Name = trim(document.criteriaSearch.criteriaSearch.value);
     if (Name == "")
     {
-      alert(errMessageForm);
+      alert(sites_habitats0);
       return false;
     } else {
       return true;
@@ -23,7 +21,7 @@ function check(noCriteria)
     }
     if (isSomeoneEmpty == 1)
     {
-      alert(errMessageForm);
+      alert(sites_habitats0);
       return false;
     } else {
       return true;

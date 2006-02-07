@@ -1,12 +1,3 @@
-var errFieldsIncomplete = "Either langitude or latitude fields must be correctly completed.";
-var errInvalidCoord = "Coordinates must be decimal values";
-var errMinLongitudeGreater = "Minimum longitude is greater than the maximum longitude.";
-var errMinLatitudeGreater = "Minimum latitude is greater than the maximum latitude."
-var errMinLongitudeOutOfRange = "Minimum longitude must be between -179.999999 and 179.999999";
-var errMaxLongitudeOutOfRange = "Maximum longitude must be between -179.999999 and 179.999999";
-var errMinLatitudeOutOfRange = "Minimum latitude must be between -89.999999 and 89.999999";
-var errMaxLatitudeOutOfRange = "Maximum latitude must be between -89.999999 and 89.999999";
-
 function chooseCountry(URL)
 {
   var country = document.eunis.country.value
@@ -23,7 +14,7 @@ function validateForm()
 
   if ( ( longMin == "" || longMax == "" ) && ( latMin == "" || latMax == "" ) )
   {
-    alert( errFieldsIncomplete );
+    alert( sites_coordinates0 );
     return false;
   }
 
@@ -33,41 +24,41 @@ function validateForm()
   latMax = parseFloat( document.eunis.latMax.value );
   if ( ( isNaN( longMin ) || isNaN( longMax ) ) && ( isNaN( latMin ) || isNaN( latMax ) ) )
   {
-    alert( errInvalidCoord );
+    alert( sites_coordinates1 );
     return false;
   }
 
   // Check if minimum is smaller than maximum
   if (longMin > longMax)
   {
-    alert( errMinLongitudeGreater );
+    alert( sites_coordinates2 );
     return false;
   }
   if ( latMin > latMax )
   {
-    alert(errMinLatitudeGreater);
+    alert(sites_coordinates3);
     return false;
   }
 
   // Range check
   if ( longMin < -179.99999 || longMin > 179.999999 )
   {
-    alert( errMinLongitudeOutOfRange );
+    alert( sites_coordinates4 );
     return false;
   }
   if ( longMax < -179.99999 || longMax > 179.999999 )
   {
-    alert( errMaxLongitudeOutOfRange );
+    alert( sites_coordinates5 );
     return false;
   }
   if ( latMin < -89.99999 || latMin > 89.999999 )
   {
-    alert( errMinLatitudeOutOfRange );
+    alert( sites_coordinates6 );
     return false;
   }
   if ( latMax < -89.99999 || latMax > 89.999999 )
   {
-    alert( errMaxLatitudeOutOfRange );
+    alert( sites_coordinates7 );
     return false;
   }
    // Check if country is a valid country
@@ -88,7 +79,7 @@ function chooseCoordinates(type)
 function openCalculator()
 {
   var URL = 'sites-coordinates-calc.jsp';
-  eval("page = window.open(URL, '', 'scrollbars=no,toolbar=0, resizable=no, location=0,width=430,height=140,left=400,top=100');");
+  eval("page = window.open(URL, '', 'scrollbars=1,toolbar=0, resizable=no, location=0,width=430,height=160,left=400,top=100');");
 }
 
 function setCoordinatesCallback(minx, miny, maxx, maxy)

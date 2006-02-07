@@ -5,9 +5,9 @@ function popSearch()
   eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=640,height=480,left=200,top=100')");
 }
 
-function editContent( idPage )
+function openContentManager( idPage, type )
 {
-  var url = "web-content-inline-editor.jsp?idPage=" + idPage;
+  var url = "web-content-editor.jsp?idPage=" + idPage + "&type=" + type;
   window.open( url ,'', "width=540,height=500,status=0,scrollbars=1,toolbar=0,resizable=1,location=0");
 }
 
@@ -15,29 +15,11 @@ function changeLanguage()
 {
   try
   {
-    var frm = document.createElement( "FORM" );
-    document.appendChild( frm );
-    frm.method = "POST";
-    frm.action = "index.jsp";
-
-    var op = document.createElement( "INPUT");
-    op.type = "hidden";
-    op.name = "operation"
-    op.value = "changeLanguage";
-    frm.appendChild( op );
-
-    var language_intl = document.getElementById( "language_international" );
-
-    var language = document.createElement( "INPUT");
-    language.type = "hidden";
-    language.name = "language_international"
-    language.value =  language_intl.options[ language_intl.selectedIndex ].value;
-    frm.appendChild( language );
-
+    var frm = document.getElementById("intl_lang");
     frm.submit();
   }
   catch ( e )
   {
-    alert( "An error occurred while changing language.");
+    alert(language_error_msg);
   }
 }

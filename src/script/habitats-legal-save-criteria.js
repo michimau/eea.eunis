@@ -4,9 +4,9 @@ var formFieldOperators = new Array(3);
 var booleans = new Array(3);
 var operators = new Array(3);
 
-attributesNames[0] = "Type";
-attributesNames[1] = "Scientific name";
-attributesNames[2] = "Legal text";
+attributesNames[0] = habitat_type_msg;
+attributesNames[1] = habitat_name_msg;
+attributesNames[2] = habitat_legal_text_msg;
 
 formFieldAttributes[0] = "habitatType";
 formFieldAttributes[1] = "searchString";

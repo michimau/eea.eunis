@@ -1,6 +1,6 @@
 // Error message displayed if not text was entered in text fields.
-var errMessageForm = "Please type a few letters from habitat type name.";
-var noCriteriaMsg = "Please check at least one of 'Habitat type name' / 'English name' / 'Description'";
+var errMessageForm = habitat_name_type_msg;
+var noCriteriaMsg = habitat_check_one__msg;
 
 // Validate form
 function validateForm()

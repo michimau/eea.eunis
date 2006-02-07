@@ -4,13 +4,13 @@ var formFieldOperators = new Array(7);
 var booleans = new Array(7);
 var operators = new Array(7);
 
-attributesNames[0] = "Country/Region";
-attributesNames[1] = "Country/Region";
-attributesNames[2] = "Country/Region";
-attributesNames[3] = "Country/Region";
-attributesNames[4] = "Country/Region";
-attributesNames[5] = "Country/Region";
-attributesNames[6] = "Search database";
+attributesNames[0] = habitat_country_msg;
+attributesNames[1] = habitat_country_msg;
+attributesNames[2] = habitat_country_msg;
+attributesNames[3] = habitat_country_msg;
+attributesNames[4] = habitat_country_msg;
+attributesNames[5] = habitat_country_msg;
+attributesNames[6] = habitat_search_database_msg;
 
 
 formFieldAttributes[0] = "_0country/_0region";

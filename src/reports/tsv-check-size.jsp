@@ -36,9 +36,7 @@
     }
   }
 %>
-      <label for="Yes" class="noshow">Yes, proceed to report generation</label>
       <input type="submit" name="Yes" id="Yes" value="Yes" title="Yes, proceed to report generation" class="inputTextField" />
-      <label for="No" class="noshow">No, abort report generation and close the window</label>
       <input type="button" name="No" id="No" value="No" title="No, abort generation and close the window" onkeypress="javascript:window.close();" onclick="javascript:window.close();" class="inputTextField" />
     </form>
 <%

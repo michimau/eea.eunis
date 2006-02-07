@@ -1,5 +1,5 @@
 // Error message displayed if not text was entered in text fields.
-var invalidInputMsg = "Please type code or part of the code";
+var invalidInputMsg = habitat_code_type_msg;
 
 function validateForm()
 {

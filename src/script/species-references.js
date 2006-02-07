@@ -89,14 +89,14 @@ function validateForm()
   var publisher = document.eunis.publisher.value;
   if (date == "" && date1 == "" && author == "" && title == "" && editor == "" && publisher == "")
   {
-    return confirm("By leaving all the fields blank the search might take a long time. Are you sure you want to continue?");
+    return confirm(species_references_leaving_all_fields_blank_msg);
   } else {
     // Validate the form fields
     if (date != "")
     {
       if (!isYear(date))
       {
-        alert("Please enter the minimum year in 'YYYY' format, and greater than 999");
+        alert(species_reference0);
         return false;
       }
     }
@@ -104,7 +104,7 @@ function validateForm()
     {   
       if (!isYear(document.eunis.date1.value))
       {
-        alert("Please enter the maximum year in 'YYYY' format and greater than 999");
+        alert(species_references_min_year_msg);
         return false;
       }
     }
@@ -115,7 +115,7 @@ function validateForm()
         && document.eunis.date1.value != ""
         && (yearMax < yearMin))
     {
-      alert("Maximum year must be greater or equal with minimum year");
+      alert(species_references_max_greater_min_msg);
       return false;
     } else {
       return true;

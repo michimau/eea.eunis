@@ -5,7 +5,7 @@ var booleans = new Array(2);
 var operators = new Array(2);
 
 attributesNames[0] = "";
-attributesNames[1] = "Search database";
+attributesNames[1] = habitat_search_database_msg;
 
 formFieldAttributes[0] = "scientificName";
 formFieldAttributes[1] = "database";
@@ -13,7 +13,7 @@ formFieldAttributes[1] = "database";
 formFieldOperators[0] = "relationOp";
 formFieldOperators[1] = "";
 
-booleans[0] = "and";
+booleans[0] = and_msg;
 booleans[1] = "";
 
 operators[0] = "";

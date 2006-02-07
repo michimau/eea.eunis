@@ -4,9 +4,9 @@ var formFieldOperators = new Array(3);
 var booleans = new Array(3);
 var operators = new Array(3);
 
-attributesNames[0] = "Search string";
-attributesNames[1] = "Search database";
-attributesNames[2] = "Search by";
+attributesNames[0] = habitat_search_string_msg;
+attributesNames[1] = habitat_search_database_msg;
+attributesNames[2] = habitat_search_by_msg;
 
 formFieldAttributes[0] = "searchString";
 formFieldAttributes[1] = "database";

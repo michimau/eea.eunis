@@ -3,11 +3,35 @@ dark    : #000000
 medium  : #FFFFFF
 light   : #FFFFFF
 **/
+
+/* Sortable tables */
+table.sortable a.sortheader
+{
+  border-collapse : collapse;
+  background-color:black;
+  color:white;
+  font-weight: bold;
+  text-decoration: none;
+  display: block;
+}
+
+a.sortheader:hover
+{
+  background-color:#EEEEEE;
+  color:black;
+  font-weight: bold;
+  text-decoration: none;
+  display: block;
+}
+
+table.sortable span.sortarrow {
+  text-decoration: none;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: small;
   background-color: #FFFFFF;
-  margin-left: 20px;
 }
 
 table {
@@ -158,7 +182,7 @@ a.tab:hover {
 
 a.menu_link:link {
   font-family: verdana, helvetica;
-  font-size: 10px;
+  font-size: x-small;
   font-weight: bold;
   text-decoration: none;
   color: #FFFFFF;
@@ -166,7 +190,7 @@ a.menu_link:link {
 
 a.menu_link:visited {
   font-family: verdana, helvetica;
-  font-size: 10px;
+  font-size: x-small;
   font-weight: bold;
   text-decoration: none;
   color: #FFFFFF;
@@ -174,7 +198,7 @@ a.menu_link:visited {
 
 a.menu_link:active {
   font-family: verdana, helvetica;
-  font-size: 10px;
+  font-size: x-small;
   font-weight: bold;
   text-decoration: none;
   color: #FFFFFF;
@@ -182,7 +206,7 @@ a.menu_link:active {
 
 a.menu_link:hover {
   font-family: verdana, helvetica;
-  font-size: 10px;
+  font-size: x-small;
   font-weight: bold;
   color: #FFFFFF;
   background-color: #000000;
@@ -197,32 +221,32 @@ a.menu_link:hover {
 }
 
 .breadcrumbtrailNormalFont {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Courier New", "Times New Roman", serif;
   font-size: small;
   text-decoration: none;
   color: black;
 }
 
 a.breadcrumbtrail:link {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Courier New", "Times New Roman", serif;
   font-size: small;
   text-decoration: none;
 }
 
 a.breadcrumbtrail:visited {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Courier New", "Times New Roman", serif;
   font-size: small;
   text-decoration: none;
 }
 
 a.breadcrumbtrail:active {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Courier New", "Times New Roman", serif;
   font-size: small;
   text-decoration: none;
 }
 
 a.breadcrumbtrail:hover {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Courier New", "Times New Roman", serif;
   font-size: small;
   text-decoration: underline;
 }
@@ -266,16 +290,31 @@ a.footerLink:hover {
 }
 
 .horizontal_line {
-  width: 740px;
+  width: 100%;
   height: 1px;
   background-color: #000000
 }
 
-h2 {
+h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: medium;
   font-weight: bold;
-  padding: 0px;
+  background-color: white;
+  width: 100%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small;
+  font-weight: bold;
+  background-color: white;
+  width: 100%;
+  font-style: normal;
+  font-variant: normal;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .title, h4 {
@@ -290,7 +329,7 @@ h5 {
   font-size: medium;
   font-weight: bold;
   background-color: white;
-  width: 740px;
+  width: 100%;
   margin-top: 0px;
   margin-bottom: 0px;
 }
@@ -300,7 +339,7 @@ h6 {
   font-size: small;
   font-weight: bold;
   background-color: white;
-  width: 740px;
+  width: 100%;
   font-style: normal;
   font-variant: normal;
   margin-top: 0px;
@@ -310,12 +349,12 @@ h6 {
 .grey_rectangle_bold {
   background-color: #EEEEEE;
   font-weight: bold;
-  width: 740px;
+  width: 100%;
 }
 
 .grey_rectangle {
   background-color: #EEEEEE;
-  width: 740px;
+  width: 100%;
 }
 
 .resultHeader {
@@ -420,7 +459,7 @@ th {
 /* Tabbed menus  */
 #tabbedmenu {
   float: left;
-  width: 740px;
+  width: 100%;
   border-bottom: thin solid #E3E2D3;
   font-size: x-small;
   line-height: normal;
@@ -500,15 +539,31 @@ th {
 }
 
 #rightnav {
-  position: relative;
-  float: left;
-  width: 215px;
+  /*position:relative;
+  float:left;
+  width: 215px;*/
   margin-bottom: 10px;
+}
+
+#outline
+{
+  width : 100%;
+  text-align : center;
+}
+
+#alignment
+{
+  width : 100%;
+  margin-left : auto;
+  margin-right : auto;
+  text-align : center;
 }
 
 #content {
   width : 740px;
   text-align : left;
+  margin-left : auto;
+  margin-right : auto;
 }
 
 #content_index {
@@ -516,10 +571,7 @@ th {
   width: 305px;
   margin-right: 20px;
   margin-bottom: 10px;
-}
-
-#leftnav p, #rightnav p {
-  margin: 0 0 1em 0;
+  text-align : left;
 }
 
 .mainlabel180_1 {
@@ -528,7 +580,7 @@ th {
 	height: 20px;
 	padding-top:5px;
 	vertical-align:middle;
-	background-image: url(../images/top_list.jpg);
+	background-image: url(../images/top_list_bw.jpg);
 	background-repeat: no-repeat;
 	background-position: left top;
 	text-indent: 10px;
@@ -544,12 +596,9 @@ th {
 }
 
 #mainlabel250 {
-  /*background-color: #000000; color: white;*/
  	font-size: small;
 	color: #000000;
 	font-weight: bold;
-	padding: 7px 0px 23px 0px;
-  /*padding-left: 5px;*/
 }
 
 .mainHeader180 {
@@ -569,7 +618,7 @@ th {
 .separator {
   display: block;
   height: 10px;
-  border: 0 0 0 0;
+  border: 0px;
 }
 
 .brClear
@@ -586,14 +635,14 @@ th {
 
 .submit_buttons
 {
-  width : 740px;
+  width : 100%;
   text-align : right;
 }
 
 .coordinates
 {
-  font-family : courier;
-  font-size : 10px;
+  font-family : "Courier New";
+  font-size : small;
 }
 
 .grey_cell {
@@ -601,9 +650,22 @@ th {
 }
 
 #header {
-  width : 740px;
+  width : 100%;
   height : 60px;
-  background-image : url(../images/banner_blue.jpg);
+  overflow:hidden;
+  text-align : right;
+  position:relative;
+  margin:0; padding:0;
+}
+
+#header span {
+  width : 100%;
+  height : 60px;
+  display:block;
+  position: absolute; left:0; top:0;
+  margin:0; padding:0;
+  background-image : url(../images/banner_bw.jpg);
+  background-repeat: no-repeat;
   text-align : right;
 }
 
@@ -612,6 +674,7 @@ th {
   border-color : #AA3247;
   background-color : #000000;
   color : white;
+  text-align : left;
 }
 
 .languageTextField {
@@ -654,6 +717,7 @@ th {
 	background-image: url(../images/round_box_top.gif);
 	background-position: left top;
 	background-repeat: no-repeat;
+        text-align:left;
 }
 #leftnav li {
 	margin-left: 15px;
@@ -708,8 +772,10 @@ th {
 
 .boldUnderline {
     font-weight :bold;
+    color: #000000;
     text-decoration:underline;
 }
+
 #input disabled {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #C0C0C0;
@@ -722,4 +788,26 @@ th {
   background-color: white;
   color: #C0C0C0;
   border: 1px solid #000000;
+}
+
+.footerprint {
+  width : 100%;
+  text-align : center;
+}
+
+.headerstaticprint {
+  width : 100%;
+}
+
+.headerdynamicprint {
+  width : 100%;
+}
+
+.headerlanguageprint {
+}
+
+.headertextprint {
+}
+
+.imageprint {
 }

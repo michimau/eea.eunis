@@ -1,7 +1,3 @@
-// Error message displayed if not text was entered in text fields.
-var invalidInputMsg = "Input field empty is not allowed.";
-
-
 function chooseCountry( URL ) {
   var country = document.eunis.country.value;
   var URL2 = URL + "&country=" + country;
@@ -57,7 +53,7 @@ function choicepren2bis( URL ) {
 function checkform() {
   var searchString = document.eunis.searchString.value;
   if ( searchString == "" ) {
-    alert("WARNING: Empty selection is not allowed. Please fill in the site name field.");
+    alert(sites_names2_1);
     return false;
   }
           else
@@ -114,7 +110,7 @@ function check( noCriteria ) {
   if ( noCriteria == 0 ) {
     var Name = trim(document.criteriaSearch.criteriaSearch.value);
     if ( Name == "" ) {
-      alert("WARNING: Empty selection is not allowed. Please fill the field.");
+      alert(sites_names2_2);
       return false;
     }
     else
@@ -125,7 +121,7 @@ function check( noCriteria ) {
     var isSomeoneEmpty = 0;
     for ( i = 0; i <= noCriteria; i++ ) if ( trim(document.criteriaSearch.criteriaSearch[i].value) == "" ) isSomeoneEmpty = 1;
     if ( isSomeoneEmpty == 1 ) {
-      alert("WARNING: Empty selection is not allowed. Please fill the field.");
+      alert(sites_names2_2);
       return false;
     }
             else
@@ -141,7 +137,7 @@ function openlink( URL ) {
 function checkformHab() {
   var searchString1 = trim(document.eunis.searchString1.value);
   if ( searchString1 == "" ) {
-    alert("WARNING: Empty selection is not allowed. Please fill the fields.");
+    alert(sites_names2_2);
     return false;
   }
   else
@@ -156,7 +152,7 @@ function choiceprec( URL )
 function checkform1( s ) {
   if ( s == "" )
   {
-    alert(invalidInputMsg);
+    alert(sites_names2_0);
     return false;
   }
   return true;

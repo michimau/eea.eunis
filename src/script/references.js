@@ -30,19 +30,19 @@
 
     function setVariablesForMM_jump() {
     u = "";
-    author = trim(document.eunis.author.value);
-    date = trim(document.eunis.date.value);
+    var author = trim(document.eunis.author.value);
+    var date = trim(document.eunis.date.value);
     if (document.eunis.date1!=null) {date1 = trim(document.eunis.date1.value);u = u + "&date1="+ date1;}
 
-    title = trim(document.eunis.title.value);
-    editor = trim(document.eunis.editor.value);
-    publisher = trim(document.eunis.publisher.value);
+    var title = trim(document.eunis.title.value);
+    var editor = trim(document.eunis.editor.value);
+    var publisher = trim(document.eunis.publisher.value);
 
-    relationOpAuthor=escape(document.eunis.relationOpAuthor.value);
-    relOpDate=escape(document.eunis.relOpDate.value);
-    relationOpEditor=escape(document.eunis.relationOpEditor.value);
-    relationOpPublisher=escape(document.eunis.relationOpPublisher.value);
-    relationOpTitle=escape(document.eunis.relationOpTitle.value);
+    var relationOpAuthor=escape(document.eunis.relationOpAuthor.value);
+    var relOpDate=escape(document.eunis.relOpDate.value);
+    var relationOpEditor=escape(document.eunis.relationOpEditor.value);
+    var relationOpPublisher=escape(document.eunis.relationOpPublisher.value);
+    var relationOpTitle=escape(document.eunis.relationOpTitle.value);
 
 
     u = u + "&author="+ author + "&relationOpAuthor=" +relationOpAuthor;
@@ -97,13 +97,13 @@ if(document.eunis.date.value != null && trim(document.eunis.date.value) != "")
       && isYear(document.eunis.date1.value)
       && document.eunis.date.value > document.eunis.date1.value)
         {
-         alert("You must insert a value smaller or equal that "+document.eunis.date1.value);
+         alert(references_date_greater_msg + document.eunis.date1.value);
          document.eunis.date.value="";
          isGoodDate=false;
         }
   } else
   {
-      alert("Your value is not a valid year(yyyy)!");
+      alert(references_year_msg);
       document.eunis.date.value="";
       isGoodDate=false;
   }
@@ -119,13 +119,13 @@ if(document.eunis.date1.value != null && trim(document.eunis.date1.value) != "")
       && isYear(document.eunis.date.value)
       && document.eunis.date.value > document.eunis.date1.value)
       {
-          alert("You must insert a value grather or equal that " + document.eunis.date.value);
+          alert(references_date_greater_msg + document.eunis.date.value);
           document.eunis.date1.value = "";
           isGoodDate = false;
       }
   } else
   {
-      alert("Your value is not a valid year(yyyy)!");
+      alert(references_year_msg);
       document.eunis.date1.value = "";
       isGoodDate = false;
   }

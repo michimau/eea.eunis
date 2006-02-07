@@ -1,14 +1,20 @@
-// Error message displayed if not text was entered in text fields.
-var errMessageForm = "Please enter the refine criteria correctly.";
-
 function validateForm()
 {
   document.eunis.searchString.value = trim(document.eunis.searchString.value);
+  if ( document.eunis.searchString.value == "" )
+  {
+    alert( sites_designated_codes1 );
+    return false;
+  }
   return checkValidSelection();
 }
 
 function openHelper(URL,displayWarning)
 {
+  document.eunis.searchString.value = trim(document.eunis.searchString.value);
+  var searchStr = document.eunis.searchString.value;
+  if(searchStr == null || searchStr == '') alert(sites_designated_codes1);
+  else
   if (checkValidSelection()==true)
   {
     document.eunis.searchString.value = trim(document.eunis.searchString.value);
@@ -50,7 +56,7 @@ function check(noCriteria)
     var Name = trim(document.criteriaSearch.criteriaSearch.value);
     if (Name == "")
     {
-      alert(errMessageForm);
+      alert(sites_designated_codes0);
       return false;
     } else {
       return true;
@@ -66,7 +72,7 @@ function check(noCriteria)
     }
     if (isSomeoneEmpty == 1)
     {
-      alert(errMessageForm);
+      alert(sites_designated_codes0);
       return false;
     } else {
       return true;

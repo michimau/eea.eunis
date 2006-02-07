@@ -1,36 +1,27 @@
-// Error message displayed if not text was entered in text fields.
-var errMessageForm = "Please type a few letters from site name.";
-var errTwoCharacters = "By entering less than two characters the search might take a long time. Are you sure you want to continue ?";
-var errMinDesignationYear = "Please enter the minimum year in 'YYYY' format, and greater than 999";
-var errMaxDesignationYear = "Please enter the maximum year in 'YYYY' format, and greater than 999";
-var errRefineMessage = "Please enter the refine criteria correctly.";
-var errInvalidYearCombination = "Minimum designation year cannot be greater than maximum designation year.";
-
-// Using utils.js
 function validateForm()
 {
   document.eunis.englishName.value = trim(document.eunis.englishName.value);
   if (document.eunis.englishName.value == "" ||
       document.eunis.englishName.value == "Search term" )
   {
-    alert(errMessageForm);
+    alert(sites_names0);
     return false;
   }
     // Validate designation years
   if (document.eunis.yearMin.value != "" && !isYear(document.eunis.yearMin.value))
   {
-    alert(errMinDesignationYear);
+    alert(sites_names2);
     return false;
   }
   if (document.eunis.yearMax.value != "" && !isYear(document.eunis.yearMax.value))
   {
-    alert(errMaxDesignationYear);
+    alert(sites_names3);
     return false;
   }
   // Check if yearMin is smaller than yearMax
   if ((str2Number(document.eunis.yearMin.value)) > (str2Number(document.eunis.yearMax.value)))
   {
-    alert(errInvalidYearCombination);
+    alert(sites_names5);
     return false;
   }
   // Check if country is a valid country
@@ -42,7 +33,7 @@ function validateForm()
   if (document.eunis.englishName.value.length < 2)
   {
     if (false == checkValidSelection()) return false;
-    return confirm(errTwoCharacters);
+    return confirm(sites_names1);
   }
 
   return checkValidSelection(); // from sites-search-common.jsp
@@ -91,7 +82,7 @@ function check(noCriteria)
     var Name = trim(document.criteriaSearch.criteriaSearch.value);
     if (Name == "")
     {
-      alert(errRefineMessage);
+      alert(sites_names4);
       return false;
     } else {
       return true;
@@ -107,7 +98,7 @@ function check(noCriteria)
     }
     if (isSomeoneEmpty == 1)
     {
-      alert(errRefineMessage);
+      alert(sites_names4);
       return false;
     } else {
       return true;

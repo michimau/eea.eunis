@@ -4,13 +4,13 @@ function choiceprel(URL) {
   if (!document.eunis._7searchStringfor.value=="") {
       var searchString=escape(document.eunis._7searchStringfor.value);
         if (criteria=="") {
-          alert('Please select at least one criteria to search after.');
+          alert(species_adv_me_select_at_least_one_criteria_msg);
         } else {
           var URL2= URL + '&searchString=' + searchString + '&criteria=' + criteria + '&oper=' + oper;
           eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,location=0,width=400,height=500,left=490,top=0');");
         }
       } else {
-        alert('Please enter a search criteria');
+        alert(species_adv_me_enter_search_criteria_msg);
       }
   }
 
@@ -73,13 +73,13 @@ switch (i) {
   if (!document.eunis._0searchStringfor.value=="") {
       searchString=escape(document.eunis._0searchStringfor.value);
         if (criteria=="") {
-          alert('Please select at least one criteria to search after.');
+          alert(species_adv_me_select_at_least_one_criteria_msg);
         } else {
           URL2= URL + '&searchString=' + searchString + '&criteria=' + criteria + '&oper=' + oper;
           eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,location=0,width=400,height=500,left=490,top=0');");
         }
       } else {
-        alert('Please enter something to search after');
+        alert(species_adv_me_select_at_least_one_criteria_msg);
       }
 
 
@@ -94,14 +94,14 @@ switch (i) {
       searchString=escape(document.eunis._1searchStringfor.value);
 
         if (criteria=="") {
-          alert('Please select at least one criteria to search after.');
+          alert(species_adv_me_select_at_least_one_criteria_msg);
         } else {
           URL2= URL + '&searchString=' + searchString + '&criteria=' + criteria + '&oper=' + oper;
 
           eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,location=0,width=400,height=500,left=490,top=0');");
         }
       } else {
-        alert('Please enter something to search after');
+        alert(species_adv_me_select_at_least_one_criteria_msg);
       }
 
               break;
@@ -111,13 +111,13 @@ switch (i) {
   if (!document.eunis._2searchStringfor.value=="") {
       searchString=escape(document.eunis._2searchStringfor.value);
         if (criteria=="") {
-          alert('Please select at least one criteria to search after.');
+          alert(species_adv_me_select_at_least_one_criteria_msg);
         } else {
           URL2= URL + '&searchString=' + searchString + '&criteria=' + criteria + '&oper=' + oper;
           eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,location=0,width=400,height=500,left=490,top=0');");
         }
       } else {
-        alert('Please enter something to search after');
+        alert(species_adv_me_select_at_least_one_criteria_msg);
       }
               }
               break;
@@ -127,13 +127,13 @@ switch (i) {
   if (!document.eunis._3searchStringfor.value=="") {
       searchString=escape(document.eunis._3searchStringfor.value);
         if (criteria=="") {
-          alert('Please select at least one criteria to search after.');
+          alert(species_adv_me_select_at_least_one_criteria_msg);
         } else {
           URL2= URL + '&searchString=' + searchString + '&criteria=' + criteria + '&oper=' + oper;
           eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,location=0,width=400,height=500,left=490,top=0');");
         }
       } else {
-        alert('Please enter something to search after');
+        alert(species_adv_me_select_at_least_one_criteria_msg);
       }
               }
               break;
@@ -143,13 +143,13 @@ switch (i) {
   if (!document.eunis._4searchStringfor.value=="") {
       searchString=escape(document.eunis._4searchStringfor.value);
         if (criteria=="") {
-          alert('Please select at least one criteria to search after.');
+          alert(species_adv_me_select_at_least_one_criteria_msg);
         } else {
           URL2= URL + '&searchString=' + searchString + '&criteria=' + criteria + '&oper=' + oper;
           eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,location=0,width=400,height=500,left=490,top=0');");
         }
       } else {
-        alert('Please enter something to search after');
+        alert(species_adv_me_select_at_least_one_criteria_msg);
       }
               }
               break;
@@ -171,12 +171,12 @@ function openlink(URL) {
       if(document.eunis.criteriaD.checked==true) { criteria +=",description"; }
       criteria = escape(criteria);
       if (criteria=="") {
-          alert('Please select at least one criteria to search after.');
+          alert(species_adv_me_select_at_least_one_criteria_msg);
           return false;
       }
       var searchString = document.eunis.searchString.value;
       if (searchString == "") {
-              alert("WARNING: Please enter something to search for.");
+              alert(species_adv_me_select_at_least_one_criteria_msg);
               return false;
       }
       else return true;

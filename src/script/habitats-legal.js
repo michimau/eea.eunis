@@ -1,5 +1,5 @@
 // Error message displayed if not text was entered in text fields.
-var errMessageForm = "Please type a few letters from habitat type name.";
+var errMessageForm = habitat_name_type_msg;
 // Open popup
 function openHelper(URL)
 {

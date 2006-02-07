@@ -387,14 +387,25 @@ public class WebContentManagement implements java.io.Serializable {
       Class.forName( SQL_DRV );
       con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
 
-      ps = con.prepareStatement( "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP )" );
-      ps.setString( 1, idPage );
-      ps.setString( 2, content );
-      ps.setString( 3, description );
-      ps.setString( 4, lang );
-      ps.setShort( 5, contentLength );
-      ps.setString( 6, username );
+      if(lang.equalsIgnoreCase("EN")) {
+        ps = con.prepareStatement( "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE, CONTENT_VALID ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 0 )" );
+        ps.setString( 1, idPage );
+        ps.setString( 2, content );
+        ps.setString( 3, description );
+        ps.setString( 4, lang );
+        ps.setShort( 5, contentLength );
+        ps.setString( 6, username );
+      } else {
+        ps = con.prepareStatement( "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP )" );
+        ps.setString( 1, idPage );
+        ps.setString( 2, content );
+        ps.setString( 3, description );
+        ps.setString( 4, lang );
+        ps.setShort( 5, contentLength );
+        ps.setString( 6, username );
+      }
       ps.executeUpdate();
+
       // Do not reload all language again, just modify the current key.
       // cacheHTMLContent( this.language );
       idPage = idPage.trim();

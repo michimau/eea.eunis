@@ -4,13 +4,13 @@ var formFieldOperators = new Array(7);
 var booleans = new Array(7);
 var operators = new Array(7);
 
-attributesNames[0] = "Author";
-attributesNames[1] = "Year";
-attributesNames[2] = "Title";
-attributesNames[3] = "Editor";
-attributesNames[4] = "Publisher";
-attributesNames[5] = "Search database";
-attributesNames[6] = "Source reference";
+attributesNames[0] = habitat_author_msg;
+attributesNames[1] = habitat_year_msg;
+attributesNames[2] = habitat_title_msg;
+attributesNames[3] = habitat_editor_msg;
+attributesNames[4] = habitat_publisher_msg;
+attributesNames[5] = habitat_search_database_msg;
+attributesNames[6] = habitat_source_reference_msg;
 
 formFieldAttributes[0] = "author";
 formFieldAttributes[1] = "date/date1";
@@ -28,12 +28,12 @@ formFieldOperators[4] = "relationOpPublisher";
 formFieldOperators[5] = "";
 formFieldOperators[6] = "";
 
-booleans[0] = "and";
-booleans[1] = "and";
-booleans[2] = "and";
-booleans[3] = "and";
-booleans[4] = "and";
-booleans[5] = "and";
+booleans[0] = and_msg;
+booleans[1] = and_msg;
+booleans[2] = and_msg;
+booleans[3] = and_msg;
+booleans[4] = and_msg;
+booleans[5] = and_msg;
 booleans[6] = "";
 
 

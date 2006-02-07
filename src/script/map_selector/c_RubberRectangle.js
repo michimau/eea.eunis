@@ -1,6 +1,6 @@
 /*
 
-This class may be used to simulate the rubberbanding behavior used by many windows based applications to capture a portion of the screen and the corresponding device coordinates.  It provides rubberband feedback through drawing a box of the specified color, width, and style between the point at which the mouse is depressed and to which the mouse has moved.  The developer must follow the requirements listed below to make successful use of the class.  
+This class may be used to simulate the rubberbanding behavior used by many windows based applications to capture a portion of the screen and the corresponding device coordinates.  It provides rubberband feedback through drawing a box of the specified color, width, and style between the point at which the mouse is depressed and to which the mouse has moved.  The developer must follow the requirements listed below to make successful use of the class.
 
 1.  This class has only been tested with the Internet Explorer browser version 6.0.  Use of any other browser is not supported.
 

@@ -13,7 +13,7 @@ formFieldAttributes[1] = "NATURA2000,CDDA_NATIONAL,NATURENET,CORINE,CDDA_INTERNA
 formFieldOperators[0] = "relationOp";
 formFieldOperators[1] = "";
 
-booleans[0] = "and";
+booleans[0] = and_msg;
 booleans[1] = "";
 
 operators[0] = "";

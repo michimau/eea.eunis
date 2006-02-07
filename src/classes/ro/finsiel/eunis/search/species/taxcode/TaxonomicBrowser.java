@@ -1,9 +1,12 @@
 package ro.finsiel.eunis.search.species.taxcode;
 
-import java.util.*;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist;
-import ro.finsiel.eunis.search.Utilities;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.Vector;
 
 /**
  * Class used in species-taxonomic-browser.
@@ -97,7 +100,8 @@ public class TaxonomicBrowser {
 
       Iterator it = lTaxcodes.iterator();
       if (it.hasNext()) childs = new StringBuffer();
-      while (it.hasNext()) {
+      while (it.hasNext())
+      {
         Chm62edtTaxcodePersist h = (Chm62edtTaxcodePersist) it.next();
         localTree.append(arrayName);
         localTree.append("[");
@@ -178,7 +182,7 @@ public class TaxonomicBrowser {
   }
 
   /**
-   * List of children for this parent.
+   * List of children for parent node.
    * @param parent parent
    * @return list of children
    */

@@ -4,7 +4,7 @@ function validateQS( natureObject )
   {
     if ( document.species_qs.scientificName.value == "" )
     {
-      alert( "Before searching, please type a few letters from species name." );
+      alert( type_species_msg );
       return false;
     }
   }
@@ -12,7 +12,7 @@ function validateQS( natureObject )
   {
     if ( document.habitats_qs.searchString.value == "" )
     {
-      alert( "Before searching, please type a few letters from habitat name." );
+      alert( type_habitat_msg );
       return false;
     }
   }
@@ -20,7 +20,7 @@ function validateQS( natureObject )
   {
     if ( document.sites_qs.englishName.value == "" )
     {
-      alert( "Before searching, please type a few letters from site name." );
+      alert( type_site_msg );
       return false;
     }
   }

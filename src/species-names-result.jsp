@@ -49,7 +49,7 @@
   if (NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm)
   {
       String cqs = "" + formBean.getComeFromQuickSearch();
-      boolean showInvalidatedSpecies = cqs.length() > 0 && !cqs.equalsIgnoreCase( "null" ) || SessionManager.getShowEUNISInvalidatedSpecies();
+      boolean showInvalidatedSpecies = SessionManager.getShowEUNISInvalidatedSpecies();
       paginator = new NamePaginator(new ScientificNameDomain(formBean.toSearchCriteria(),
                                                            formBean.toSortCriteria(),
                                                            searchSynonyms,

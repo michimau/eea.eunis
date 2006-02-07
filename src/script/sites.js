@@ -6,7 +6,7 @@ function validateQS()
 {
   if( trim ( document.quick_search.englishName.value ) == '' || trim ( document.quick_search.englishName.value ) == 'Enter site name here...')
   {
-    alert('Before searching, please type a few letters from site name.');
+    alert(sites0);
     return false;
   }
   else return true;

@@ -23,8 +23,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <%
-  WebContentManagement cm = SessionManager.getWebContent();
-
   // Get the parameters from request
   String term = request.getParameter("term");
   String idLanguage = request.getParameter("idLanguage");
@@ -188,6 +186,9 @@
 %>
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+    WebContentManagement cm = SessionManager.getWebContent();
+%>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms( "generic_glossary-editor_title")%>

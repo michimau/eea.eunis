@@ -13,12 +13,14 @@ ro.finsiel.eunis.search.Utilities"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   String message = Utilities.formatString( request.getParameter("status"), "" );
-  WebContentManagement cm = SessionManager.getWebContent();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("related_reports_error_page_title")%>

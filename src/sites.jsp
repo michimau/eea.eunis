@@ -14,7 +14,6 @@
                 ro.finsiel.eunis.search.AbstractSortCriteria"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-  WebContentManagement cm = SessionManager.getWebContent();
   int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
   String []tabs = { "sites_tabeasysearch", "sites_tabadvancedsearch", "sites_tabstatisticaldata", "sites_tablinkdownloads", "sites_tabhelp" };
 %>
@@ -22,6 +21,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>" lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <script language="javascript" type="text/javascript" src="script/sites.js"></script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>

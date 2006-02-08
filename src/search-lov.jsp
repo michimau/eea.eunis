@@ -16,7 +16,6 @@
                  ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-  WebContentManagement cm = SessionManager.getWebContent();
   String ctl = request.getParameter("ctl");
   String lov = request.getParameter("lov");
   String natureobject = request.getParameter("natureobject");
@@ -30,6 +29,9 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <title>
       <%=cm.cms("search_lov_page_title")%>
     </title>

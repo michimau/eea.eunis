@@ -28,7 +28,6 @@
 // - term - Used when action is 'delete', specifies TERM column from table
 // - idLanguage - Used when action is 'delete', specifies ID_LANGUAGE column from table.
 // - source - Used when action is 'delete', specifies SOURCE column from table
-  WebContentManagement cm = SessionManager.getWebContent();
 
   // action specifies an operation to do. If null, no action was specified.
   String action = Utilities.formatString(request.getParameter("action"), "");
@@ -119,6 +118,9 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("generic_glossary-table_title")%>

@@ -22,7 +22,6 @@
   /// * themeIndex - Which theme to use
   String action = FormBean.getAction();
   int themeIndex = Utilities.checkedStringToInt(FormBean.getThemeIndex(), 0);
-  WebContentManagement cm = SessionManager.getWebContent();
 
   if ( action.equals( "save" ) )
   {
@@ -36,6 +35,9 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("preferences_page_title")%>

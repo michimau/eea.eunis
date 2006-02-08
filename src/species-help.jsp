@@ -12,12 +12,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-    <%
-        // Web content manager used in this page.
-        WebContentManagement cm = SessionManager.getWebContent();
-    %>
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <title><%=application.getInitParameter("PAGE_TITLE")%><%=cm.cms("species_help_02")%></title>
   </head>
   <body style="background-color:#ffffff">

@@ -15,9 +15,9 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-    <%
+<%
       WebContentManagement cm = SessionManager.getWebContent();
-    %>
+%>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("generic_404_title")%>

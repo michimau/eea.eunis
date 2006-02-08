@@ -17,9 +17,6 @@
 <%@ page import="ro.finsiel.eunis.jrfTables.sites.designations.DesignationsPersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-  // Web content manager used in this page.
-  WebContentManagement cm = SessionManager.getWebContent();
-
   // getSearchString() - String to be searched
   String searchString = Utilities.formatString ( request.getParameter("searchString"), "" );
   Integer relationOp = Utilities.checkedStringToInt(request.getParameter("relationOp"),Utilities.OPERATOR_CONTAINS);
@@ -92,6 +89,9 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <title>
       <%=cm.cms("sites_designations-choice_title")%>
     </title>

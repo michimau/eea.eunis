@@ -12,7 +12,6 @@
                  ro.finsiel.eunis.search.Utilities"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-  WebContentManagement cm = SessionManager.getWebContent();
   boolean success = false;
   String username = request.getParameter( "username" );
   String cmd = Utilities.formatString( request.getParameter( "cmd" ), "" );
@@ -38,6 +37,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>" lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("login_page_title")%>

@@ -56,7 +56,7 @@ public class SpeciesSearchUtility {
       }
 
       synonyms.add(IdNatureObjectSpecie);
-      List lstSynonyms = new Chm62edtSpeciesDomain().findWhere("TYPE_RELATED_SPECIES = 'Syn' and ID_SPECIES_LINK="+IdSpecie);
+      List lstSynonyms = new Chm62edtSpeciesDomain().findWhere("TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK="+IdSpecie);
       if(lstSynonyms.size()>0)
       {
         Iterator it = lstSynonyms.iterator();

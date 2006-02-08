@@ -68,8 +68,6 @@
 
   String tsvLink = "javascript:openTSVDownload('reports/habitats/tsv-habitats-names.jsp?" + formBean.toURLParam(reportFields) + "')";
 
-  WebContentManagement cm = SessionManager.getWebContent();
-
   if (results.isEmpty() && !newName  && !noSoundex) {
     String sname = formBean.getSearchString();
     List list = new Vector();
@@ -94,6 +92,9 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
   <script language="JavaScript" src="script/habitats-result.js" type="text/javascript"></script>
   <script language="JavaScript" type="text/javascript">
   <!--

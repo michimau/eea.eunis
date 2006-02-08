@@ -21,8 +21,6 @@
   String siteid = request.getParameter("idsite");
   int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
   SiteFactsheet factsheet = new SiteFactsheet(siteid);
-  WebContentManagement cm = SessionManager.getWebContent();
-
   List results = null;
   String pdfURL = "javascript:openLink('sites-factsheet-pdf.jsp?idsite=" + siteid + "')";
 
@@ -43,11 +41,14 @@
 <%
   if(null == factsheet.getIDNatureObject()) {
 %>
+    <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("sites_factsheet_title")%>
     </title>
-    <jsp:include page="header-page.jsp" />
   </head>
 
   <body>
@@ -77,6 +78,9 @@
   <%
       return;
     }
+%>
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
 
     <title>

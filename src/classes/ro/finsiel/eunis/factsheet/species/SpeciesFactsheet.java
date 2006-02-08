@@ -336,8 +336,8 @@ public class SpeciesFactsheet {
       Integer IdSpecie = specie.getIdSpecies();
       synonyms.add( IdNatureObjectSpecie );
 
-      List lstSynonyms = new Chm62edtSpeciesDomain().findWhere( "TYPE_RELATED_SPECIES = 'Syn' and ID_SPECIES_LINK=" + IdSpecie );
-      if ( lstSynonyms.size() > 0 )
+      List lstSynonyms = new Chm62edtSpeciesDomain().findWhere("TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK="+IdSpecie);
+      if(lstSynonyms.size()>0)
       {
         Iterator it = lstSynonyms.iterator();
         while ( it.hasNext() )
@@ -411,8 +411,8 @@ public class SpeciesFactsheet {
       Integer IdSpecie = specie.getIdSpecies();
       synonyms.add( IdNatureObjectSpecie );
 
-      List lstSynonyms = new Chm62edtSpeciesDomain().findWhere( "TYPE_RELATED_SPECIES = 'Syn' and ID_SPECIES_LINK=" + IdSpecie );
-      if ( lstSynonyms.size() > 0 )
+      List lstSynonyms = new Chm62edtSpeciesDomain().findWhere("TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK="+IdSpecie);
+      if(lstSynonyms.size()>0)
       {
         Iterator it = lstSynonyms.iterator();
         while ( it.hasNext() )
@@ -688,10 +688,11 @@ public class SpeciesFactsheet {
       Vector synonyms = new Vector();
       Integer IdNatureObjectSpecie = getSpeciesNatureObject().getIdNatureObject();
       Integer IdSpecie = getSpeciesNatureObject().getIdSpecies();
+      //System.out.println("IdNatureObjectSpecie = " + IdNatureObjectSpecie);
       synonyms.add( IdNatureObjectSpecie );
 
-      List lstSynonyms = new Chm62edtSpeciesDomain().findWhere( "TYPE_RELATED_SPECIES = 'Syn' and ID_SPECIES_LINK=" + IdSpecie );
-      if ( lstSynonyms.size() > 0 )
+      List lstSynonyms = new Chm62edtSpeciesDomain().findWhere("TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK="+IdSpecie);
+      if(lstSynonyms.size()>0)
       {
         Iterator it = lstSynonyms.iterator();
         while ( it.hasNext() )
@@ -884,8 +885,8 @@ public class SpeciesFactsheet {
 
       synonyms.add( IdNatureObjectSpecie );
 
-      List lstSynonyms = new Chm62edtSpeciesDomain().findWhere( "TYPE_RELATED_SPECIES = 'Syn' and ID_SPECIES_LINK=" + IdSpecie );
-      if ( lstSynonyms.size() > 0 )
+      List lstSynonyms = new Chm62edtSpeciesDomain().findWhere("TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK="+IdSpecie);
+      if(lstSynonyms.size()>0)
       {
         for ( Object lstSynonym : lstSynonyms )
         {

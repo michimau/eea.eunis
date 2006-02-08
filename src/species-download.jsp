@@ -15,7 +15,6 @@
   <head>
     <jsp:include page="header-page.jsp" />
     <%
-        // Web content manager used in this page.
         WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title><%=application.getInitParameter("PAGE_TITLE")%><%=cm.cms("species_download_title")%></title>

@@ -24,8 +24,6 @@
 
   SpeciesFactsheet factsheet = new SpeciesFactsheet(Utilities.checkedStringToInt(idSpecies, new Integer(0)),
                                                     Utilities.checkedStringToInt(idSpeciesLink, new Integer(0)));
-  WebContentManagement cm = SessionManager.getWebContent();
-
   String description = "";
 %>
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -33,6 +31,9 @@
     <jsp:include page="header-page.jsp">
       <jsp:param name="metaDescription" value="<%=factsheet.getSpeciesDescription()%>" />
     </jsp:include>
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <script language="JavaScript" src="script/species.js" type="text/javascript"></script>
     <script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
     <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
@@ -114,6 +115,8 @@
       for(int i = 0; i < tabs.length; i++) {
         currentTab = "";
         if(tab == i) currentTab = " id=\"currenttab\"";
+
+        //System.out.println("factsheet.getSpeciesNatureObject().getIdNatureObject().toString() = " + factsheet.getSpeciesNatureObject().getIdSpecies().toString());
 
         if(!sqlUtilities.TabPageIsEmpy(factsheet.getSpeciesNatureObject().getIdNatureObject().toString(),"SPECIES",dbtabs[i]))
         {

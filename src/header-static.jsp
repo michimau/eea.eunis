@@ -11,14 +11,16 @@
 <%@ page import="ro.finsiel.eunis.WebContentManagement" %>
 <%@ page import="java.util.List" %>
 <%@ page import="ro.finsiel.eunis.jrfTables.EunisISOLanguagesPersist"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.StringTokenizer"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   String domain = application.getInitParameter( "DOMAIN_NAME" );
-  WebContentManagement cm = SessionManager.getWebContent();
 %>
 <a href="#main_content" style="display:none" title="Skip to main content">Skip to main content</a>
 <div id="header">
 <%
+  WebContentManagement cm = SessionManager.getWebContent();
   List translatedLanguages = cm.getTranslatedLanguages();
 %>
   <%-- span display the banner --%>

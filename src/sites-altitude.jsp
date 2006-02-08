@@ -14,8 +14,6 @@
 <%@ page import="ro.finsiel.eunis.utilities.Accesibility"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-  WebContentManagement cm = SessionManager.getWebContent();
-
   // Request parameters
   String country = (request.getParameter("country")==null?"":request.getParameter("country"));
   String altitude1 = (request.getParameter("altitude1")==null?"":request.getParameter("altitude1"));
@@ -29,6 +27,9 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <script language="JavaScript" type="text/javascript" src="script/sites-altitude.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/sites-altitude-save-criteria.js"></script>

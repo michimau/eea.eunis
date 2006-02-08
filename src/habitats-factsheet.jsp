@@ -29,8 +29,6 @@
 // Mini factsheet shows only the uppermost part of the factsheet with generic information.
   boolean isMini = Utilities.checkedStringToBoolean(request.getParameter("mini"), false);
   HabitatsFactsheet factsheet = new HabitatsFactsheet(idHabitat);
-  WebContentManagement cm = SessionManager.getWebContent();
-
   String []tabs = {"General information", "Geographical distribution", "Legal instruments", "Habitat types", "Sites", "Species", "Other info"};
 
   String []dbtabs = {"GENERAL_INFORMATION", "GEOGRAPHICAL_DISTRIBUTION", "LEGAL_INSTRUMENTS", "HABITATS", "SITES", "SPECIES", "OTHER"};
@@ -46,10 +44,14 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <title>
+    <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <%=application.getInitParameter("PAGE_TITLE")%>
     <%=cm.cms("habitats_factsheet_title")%>
   </title>
-  <jsp:include page="header-page.jsp" />
+
 </head>
 
 <body>
@@ -82,11 +84,6 @@
 <%
     return;
   }
-
-  String habitatType = cm.cmsText("habitats_factsheet_03");
-  if(factsheet.isEunis()) {
-    habitatType = cm.cmsText("habitats_factsheet_02");
-  }
   String printLink = "javascript:openlink('habitats-factsheet-pdf.jsp?idHabitat=" + idHabitat + "')";
   if(!isMini) {
 %>
@@ -96,6 +93,9 @@
   <jsp:include page="header-page.jsp">
     <jsp:param name="metaDescription" value="<%=factsheet.getMetaHabitatDescription()%>" />
   </jsp:include>
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
   <script language="JavaScript" type="text/javascript" src="script/habitats-result.js"></script>
   <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
   <title>
@@ -129,6 +129,11 @@
 <br />
 <img id="loading" alt="<%=cm.cms("loading_data")%>" src="images/loading.gif" />
 <%
+  }
+  WebContentManagement cm = SessionManager.getWebContent();
+  String habitatType = cm.cmsText("habitats_factsheet_03");
+  if(factsheet.isEunis()) {
+    habitatType = cm.cmsText("habitats_factsheet_02");
   }
   String code = "";
   if(factsheet.isEunis()) {

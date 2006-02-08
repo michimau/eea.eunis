@@ -23,7 +23,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
-<jsp:include page="header-page.jsp"/>
+  <jsp:include page="header-page.jsp"/>
   <script language="JavaScript" type="text/javascript" src="script/timer.js"></script>
 <%
   Integer idSpecies = Utilities.checkedStringToInt( request.getParameter( "idSpecies" ), new Integer( 0 ) );
@@ -40,7 +40,6 @@
   <title>
     <%=cm.cms("species_factsheet-pdf_title")%>
   </title>
-  <jsp:include page="header-page.jsp"/>
   <script language="JavaScript" type="text/javascript">
   <!--
   function showLoadingProgress( show )

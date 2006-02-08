@@ -11,7 +11,6 @@
 <%@ page import="ro.finsiel.eunis.WebContentManagement, ro.finsiel.eunis.search.Utilities" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-  WebContentManagement cm = SessionManager.getWebContent();
   // Check if we need to enter 'edit web content' mode
   if(SessionManager.isAuthenticated() && SessionManager.isContent_management_RIGHT() )
   {
@@ -30,11 +29,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
+    <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("services_page_title")%>
     </title>
-    <jsp:include page="header-page.jsp" />
   </head>
   <body>
     <div id="outline">

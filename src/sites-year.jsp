@@ -14,8 +14,6 @@
 <%@ page import="ro.finsiel.eunis.utilities.Accesibility"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-  // Web content manager used in this page.
-  WebContentManagement cm = SessionManager.getWebContent();
   String relationOpParam = request.getParameter("relationOp");
   int relationOp = Utilities.checkedStringToInt(relationOpParam, -1);
 %>
@@ -23,6 +21,9 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/sites-year-save-criteria.js"></script>
     <script language="JavaScript" type="text/JavaScript">

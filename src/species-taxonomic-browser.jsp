@@ -28,7 +28,7 @@
   <jsp:include page="header-page.jsp" />
     <link rel="StyleSheet" href="css/tree.css" type="text/css" />
     <script language="JavaScript" type="text/javascript" src="script/tree.js"></script>
-  <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
+    <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
     <%
       WebContentManagement cm = SessionManager.getWebContent();
     %>

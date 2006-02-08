@@ -38,13 +38,14 @@
     }
   }
   String showDesignations = (request.getParameter("showDesignations")==null ? "false" : request.getParameter("showDesignations"));
-  // Web content manager used in this page.
-  WebContentManagement cm = SessionManager.getWebContent();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <script language="JavaScript" type="text/javascript" src="script/sites-statistical.js"></script>
     <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
     <title>

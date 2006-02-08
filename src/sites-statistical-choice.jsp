@@ -15,7 +15,6 @@
                 ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-  WebContentManagement cm = SessionManager.getWebContent();
   String name = Utilities.formatString( request.getParameter("designation"), "%" );
 //  boolean[] source_db =
 //  {
@@ -42,6 +41,9 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <title>
       <%=cm.cms("sites_statistical-choice_title")%>
     </title>
@@ -109,6 +111,7 @@
   }
   else
   {
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <strong>
       <%=cm.cmsText("sites_statistical-choice_02")%>
@@ -117,6 +120,7 @@
     <br />
 <%
   }
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <form action="">
       <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />

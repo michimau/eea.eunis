@@ -19,10 +19,10 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
-    <%
-        WebContentManagement cm = SessionManager.getWebContent();
-    %>
     <jsp:include page="header-page.jsp" />
+    <%
+      WebContentManagement cm = SessionManager.getWebContent();
+    %>
     <script language="JavaScript" src="script/species-country.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript">

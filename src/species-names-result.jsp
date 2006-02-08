@@ -94,8 +94,6 @@
   int noCriteria = (null == formBean.getCriteriaSearch() ? 0 : formBean.getCriteriaSearch().length);
 
   String downloadLink = "javascript:openTSVDownload('reports/species/tsv-species-names.jsp?" + formBean.toURLParam(reportFields) + "')";
-  WebContentManagement cm = SessionManager.getWebContent();
-
   if ( results.isEmpty() && !newName && !noSoundex )
   {
     String sname;
@@ -135,6 +133,9 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <script language="JavaScript" type="text/javascript" src="script/species-result.js"></script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>

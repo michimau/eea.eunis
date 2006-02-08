@@ -303,7 +303,7 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable
     //filterSQL.append(Utilities.showEUNISInvalidatedSpecies("AND A.VALID_NAME", showEUNISInvalidatedSpecies));
     if ( !showEUNISInvalidatedSpecies )
     {
-      filterSQL.append( " AND ( ( A.VALID_NAME > 0 ) OR ( A.VALID_NAME = 0 AND A.TYPE_RELATED_SPECIES='Syn' ) ) ");
+      filterSQL.append( " AND ( ( A.VALID_NAME > 0 ) OR ( A.VALID_NAME = 0 AND A.TYPE_RELATED_SPECIES='Synonym' ) ) ");
     }
     return filterSQL;
   }

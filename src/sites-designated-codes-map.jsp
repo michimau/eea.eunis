@@ -18,7 +18,6 @@
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-  WebContentManagement cm = SessionManager.getWebContent();
   String coordinates = "";
   boolean[] source = {
       formBean.getDB_NATURA2000() != null,
@@ -58,10 +57,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
+    <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <title>
       <%=cm.cms("sites_designated_codes_map_page_title")%>
     </title>
-    <jsp:include page="header-page.jsp" />
   </head>
   <body style="margin : 0px; padding : 0px;" >
     <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="740" height="552" id="fl_eunis" align="middle">

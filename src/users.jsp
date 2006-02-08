@@ -14,15 +14,14 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
+    <jsp:include page="header-page.jsp" />
 <%
-    // Web content manager used in this page.
-    WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("users_title")%>
     </title>
-    <jsp:include page="header-page.jsp" />
     <style type="text/css">
 
 

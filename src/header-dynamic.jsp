@@ -11,7 +11,8 @@
 <%@page import="ro.finsiel.eunis.backtrail.BacktrailObject,
                  ro.finsiel.eunis.backtrail.BacktrailUtil,
                 java.util.Vector"%>
-<%@ page import="ro.finsiel.eunis.WebContentManagement"%><%@ page import="ro.finsiel.eunis.search.Utilities"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
+<%@ page import="ro.finsiel.eunis.search.Utilities"%>
  <%--
 Input parameters  on REQUEST:
   - SessionManager - to get theme info

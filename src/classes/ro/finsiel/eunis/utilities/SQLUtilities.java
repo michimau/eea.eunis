@@ -492,6 +492,63 @@ public class SQLUtilities {
       if ( rs.next() )
       {
         ret = !rs.getString( TabPageName ).equalsIgnoreCase( "Y" );
+        if(ret && TabPageName.equalsIgnoreCase("LEGAL_INSTRUMENTS"))
+        {
+          //search if we have legal instruments for synonyms
+          String idNatureObjectLink = "";
+          String idSpecies = "";
+
+          SQL = "SELECT ID_SPECIES";
+          SQL += " FROM CHM62EDT_SPECIES";
+          SQL += " WHERE ID_NATURE_OBJECT = " + idNatureObject;
+          //System.out.println("SQL = " + SQL);
+          rs.close();
+          ps.close();
+          ps = con.prepareStatement( SQL );
+          rs = ps.executeQuery();
+          if ( rs.next() )
+          {
+            idSpecies = rs.getString(1);
+            //System.out.println("idSpecies = " + idSpecies);
+            SQL = "SELECT ID_NATURE_OBJECT";
+            SQL += " FROM CHM62EDT_SPECIES";
+            SQL += " WHERE ID_SPECIES_LINK = " + idSpecies;
+            //System.out.println("SQL = " + SQL);
+            rs.close();
+            ps.close();
+            ps = con.prepareStatement( SQL );
+            rs = ps.executeQuery();
+
+            if ( rs.next() )
+            {
+              idNatureObjectLink = rs.getString(1);
+              //System.out.println("idNatureObjectLink = " + idNatureObjectLink);
+              SQL = "SELECT ";
+              SQL += "`" + TabPageName + "`";
+              SQL += " FROM CHM62EDT_TAB_PAGE_" + NatureObjectType.toUpperCase();
+              SQL += " WHERE ID_NATURE_OBJECT=" + idNatureObjectLink;
+
+              rs.close();
+              ps.close();
+              ps = con.prepareStatement( SQL );
+              rs = ps.executeQuery();
+
+              if ( rs.next() )
+              {
+                ret = !rs.getString( TabPageName ).equalsIgnoreCase( "Y" );
+              } else {
+              rs.close();
+              ps.close();
+              }
+            } else {
+              rs.close();
+              ps.close();
+            }
+          } else {
+            rs.close();
+            ps.close();
+          }
+        }
       }
     }
     catch ( Exception e )

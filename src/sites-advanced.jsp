@@ -21,7 +21,6 @@
 <head>
 <jsp:include page="header-page.jsp" />
 <%
-   // Web content manager used in this page.
     WebContentManagement cm = SessionManager.getWebContent();
 %>
 <title>

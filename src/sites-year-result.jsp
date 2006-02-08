@@ -27,9 +27,6 @@
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-  // Web content manager used in this page.
-  WebContentManagement cm = SessionManager.getWebContent();
-
   // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
   // Check columns to be displayed
@@ -88,6 +85,9 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <script language="JavaScript" type="text/javascript" src="script/sites-names.js"></script>
     <script language="JavaScript" type="text/javascript">
       <!--

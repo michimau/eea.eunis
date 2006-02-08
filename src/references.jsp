@@ -13,7 +13,6 @@
                  ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-  WebContentManagement cm = SessionManager.getWebContent();
   String author = (request.getParameter("author")==null?"":request.getParameter("author"));
   String relationOpAuthor = (request.getParameter("relationOpAuthor")==null?Utilities.OPERATOR_CONTAINS.toString():request.getParameter("relationOpAuthor"));
   String date = (request.getParameter("date")==null?"":request.getParameter("date"));
@@ -31,7 +30,10 @@
   <head>
     <%-- Note: Include these three files this order. --%>
     <jsp:include page="header-page.jsp" />
-    <script language="JavaScript" type="text/javascript" src="script/references.js"></script>
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
+      <script language="JavaScript" type="text/javascript" src="script/references.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>

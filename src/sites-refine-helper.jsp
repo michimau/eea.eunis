@@ -21,15 +21,16 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
 <%
-  // Web content manager used in this page.
-  WebContentManagement cm = SessionManager.getWebContent();
   // What type of information this tip should display, for example Source data set, country etc.
   int criteria = Utilities.checkedStringToInt(request.getParameter( "criteria" ), -1);
+%>
+    <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
       <%=cm.cms("sites_refine-helper_title")%>
     </title>
-    <jsp:include page="header-page.jsp" />
     <script language="JavaScript" type="text/javascript">
       <!--
       function setLine(val)

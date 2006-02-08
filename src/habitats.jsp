@@ -20,7 +20,6 @@
   <%
     WebContentManagement cm = SessionManager.getWebContent();
     int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
-
     String []tabs = { cm.cms("habitats_tab_easy_search"), cm.cms("habitats_tab_advanced_search"), cm.cms("habitats_tab_links"), cm.cms("habitats_tab_help") };
   %>
   <title>

@@ -26,13 +26,15 @@
   // List of questions.
   List questions = keyNavigator.findLevelQuestions(level, pageCode);
   String pageName = "habitats-key.jsp";
-  WebContentManagement cm = SessionManager.getWebContent();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <%-- Note: Include these three files this order. --%>
-    <jsp:include page="header-page.jsp" />
+  <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
   <jsp:useBean id="formBean" class="ro.finsiel.eunis.formBeans.HabitatKeyBean" scope="request">
     <jsp:setProperty name="formBean" property="*" />
   </jsp:useBean>

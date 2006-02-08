@@ -15,8 +15,6 @@
 <%@page import="ro.finsiel.eunis.jrfTables.Chm62edtSitesPersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-  // Web content manager used in this page.
-  WebContentManagement cm = SessionManager.getWebContent();
   // getSearchString() - String to be searched
   String searchString = request.getParameter("englishName");
   boolean expandFullNames = Utilities.checkedStringToBoolean(request.getParameter("showAll"), false);
@@ -43,6 +41,9 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <title>
       <%=cm.cms("sites_names-choice_title")%>
     </title>

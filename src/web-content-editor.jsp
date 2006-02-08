@@ -10,14 +10,17 @@
 %>
 <%@ page import="ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.WebContentManagement"%>
-<%@ page import="java.util.List"%><%@ page import="ro.finsiel.eunis.jrfTables.WebContentPersist"%><%@ page import="java.text.SimpleDateFormat"%><%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtLanguagePersist"%><%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
+<%@ page import="ro.finsiel.eunis.jrfTables.WebContentPersist"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtLanguagePersist"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.EunisISOLanguagesPersist"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   //Utilities.dumpRequestParams( request );
   String language = Utilities.formatString( request.getParameter( "language"), SessionManager.getCurrentLanguage() );
-  WebContentManagement cm = SessionManager.getWebContent( language );
   String idPage = Utilities.formatString( request.getParameter( "idPage" ) );
   String type = Utilities.formatString( request.getParameter( "type" ), "msg" );
 
@@ -28,10 +31,13 @@
 %>
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
+  <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent( language );
+%>
     <title>
       <%=cm.cms("web_content_editor_01")%>
     </title>
-    <jsp:include page="header-page.jsp" />
     <script language="javascript" type="text/javascript">
       <!--
       function versionOnChange()

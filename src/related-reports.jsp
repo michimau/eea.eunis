@@ -24,7 +24,6 @@
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-  WebContentManagement cm = SessionManager.getWebContent();
   String uploadDir = application.getInitParameter("TOMCAT_HOME") + "/" + application.getInitParameter("UPLOAD_DIR_FILES");
   String[] deleteFile = FormBean.getFilenames();
   String operation = FormBean.getOperation();
@@ -39,6 +38,9 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
     <%=cm.cms("related_reports_page_title")%>

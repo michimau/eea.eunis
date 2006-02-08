@@ -19,8 +19,6 @@
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-  // Web content manager used in this page.
-  WebContentManagement cm = SessionManager.getWebContent();
   Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
   Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), SpeciesSearchCriteria.SEARCH_SCIENTIFIC_NAME);
   boolean[] source_db = {(request.getParameter("DB_NATURA2000")!=null&&request.getParameter("DB_NATURA2000").equalsIgnoreCase("true")?true:false),(request.getParameter("DB_CORINE")!=null&&request.getParameter("DB_CORINE").equalsIgnoreCase("true")?true:false),(request.getParameter("DB_DIPLOMA")!=null&&request.getParameter("DB_DIPLOMA").equalsIgnoreCase("true")?true:false),(request.getParameter("DB_CDDA_NATIONAL")!=null&&request.getParameter("DB_CDDA_NATIONAL").equalsIgnoreCase("true")?true:false),(request.getParameter("DB_CDDA_INTERNATIONAL")!=null&&request.getParameter("DB_CDDA_INTERNATIONAL").equalsIgnoreCase("true")?true:false),(request.getParameter("DB_BIOGENETIC")!=null&&request.getParameter("DB_BIOGENETIC").equalsIgnoreCase("true")?true:false),false,(request.getParameter("DB_EMERALD")!=null&&request.getParameter("DB_EMERALD").equalsIgnoreCase("true")?true:false)};
@@ -36,6 +34,9 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
     <title>
       <%=cm.cms("sites_species-choice_title")%>
     </title>

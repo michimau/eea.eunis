@@ -581,7 +581,7 @@ th {
 .separator {
   display: block;
   height: 10px;
-  border: 0 0 0 0;
+  border: none;
 }
 
 .brClear

@@ -32,7 +32,6 @@ public final class SessionManager implements java.io.Serializable {
   boolean editContentMode = false;
   boolean advancedEditContentMode = false;
 
-
   /** This is the username for the current session. If user didn't logon, then this field is null */
   private String username = null;
   /** This is the password for the current session. If user didn't logon, then this field is null */
@@ -75,6 +74,8 @@ public final class SessionManager implements java.io.Serializable {
   private boolean digirProviderRunning = false;
 
   private String cacheReportEmailAddress = "";
+
+  boolean languageDetected = false;
 
   static
   {
@@ -726,7 +727,7 @@ public final class SessionManager implements java.io.Serializable {
    */
   public WebContentManagement getWebContent()
   {
-    return getWebContent( currentLanguage );  
+    return getWebContent( currentLanguage );
   }
 
   /**
@@ -949,5 +950,23 @@ public final class SessionManager implements java.io.Serializable {
    */
   public void setCacheReportEmailAddress( String cacheReportEmailAddress ) {
     this.cacheReportEmailAddress = cacheReportEmailAddress;
+  }
+
+  /**
+   * Specifies if language was detected from browser accept-language header
+   * If detected once stop subsequent detections
+   * @return languageDetected status
+   */
+  public boolean isLanguageDetected()
+  {
+    return languageDetected;
+  }
+
+  /**
+   * Setter for languageDetected property
+   * @param languageDetected
+   */
+  public void setLanguageDetected( boolean languageDetected ) {
+    this.languageDetected = languageDetected;
   }
 }

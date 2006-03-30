@@ -152,8 +152,8 @@ public class SimpleDataSource implements javax.sql.ConnectionPoolDataSource,
    * @param poolMax  maximum pool size.
    */
   public void setPoolMax(int poolMax) {
-    //this.poolMax = poolMax;
-    this.poolMax = 2000;
+    this.poolMax = poolMax;
+    System.out.println("pool max size is now " + poolMax);
   }
 
   /**
@@ -464,26 +464,6 @@ public class SimpleDataSource implements javax.sql.ConnectionPoolDataSource,
     // If not, create a new connection.
     ///////////////////////////////////////////////////////////////////////
     synchronized (pooledConnections) {
-      if (pooledConnections.size() >= poolMax) {
-
-          System.out.println("getPooledConnection(" + user + ") called with maximum connections " + (poolMax) + " busy; blocking for 3 seconds to hope for a connection release.");
-
-        pc = checkReadyQueue(true);// true = block for a queue for a connection.
-        if (pc == null)
-        {
-          poolMax += 20;
-          System.out.println("Warning: poolMax increased by 20. Now equals to:" + poolMax);
-          for(int iii=0;iii<pooledConnections.size();iii++)
-          {
-            SimplePooledConnection poolc = (SimplePooledConnection)pooledConnections.get(iii);
-            LOG.warn(poolc.toString() + " .Status:" + poolc.isClosed());
-          }
-          if(poolMax >= 2000)
-          {
-            throw new SQLException("Maximum connections (" + poolMax + ") in use. Unable to provide a connection.");
-          }
-        }
-      }
       if (pooledConnections.size() < poolMax) {
         pc = new SimplePooledConnection(DriverManager.getConnection(i_url, user, password));
         pc.addConnectionEventListener(this);
@@ -491,6 +471,11 @@ public class SimpleDataSource implements javax.sql.ConnectionPoolDataSource,
         System.out.println("getPooledConnection(" + user + "): new connection created; pool size is now " + pooledConnections.size());
         return pc;
       }
+    }
+    pc = checkReadyQueue(true);// true = block for a queue for a connection.
+    if (pc == null)
+    {
+	throw new SQLException("Maximum connections (" + poolMax + ") in use. Unable to provide a connection.");
     }
     return pc;
   }

@@ -26,7 +26,7 @@
     <div id="alignment">
     <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,gis_tool"/>
+      <jsp:param name="location" value="home#index.jsp,gis_tool"/>
       <jsp:param name="helpLink" value="gis-tool-help.jsp"/>
     </jsp:include>
     <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="740" height="552" id="fl_eunis" align="middle">

@@ -24,16 +24,16 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("generic_clear-temporary-data_title")%>
+      <%=cm.cms("clear_temporary_data_btn")%>
     </title>
   </head>
   <body>
-    <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,services_location#services.jsp,clear_temporary_data_location"/>
-    </jsp:include>
     <div id="outline">
     <div id="alignment">
     <div id="content">
+      <jsp:include page="header-dynamic.jsp">
+        <jsp:param name="location" value="home#index.jsp,services#services.jsp,clear_temporary_data_btn"/>
+      </jsp:include>
 <%
     // Check if user has Admin right
     if(!SessionManager.isAdmin())
@@ -41,7 +41,7 @@
 %>
     <%=cm.cmsText("generic_clear-temporary-data_01")%>
     <br />
-    <%=cm.cmsMsg("generic_clear-temporary-data_title")%>
+    <%=cm.cmsMsg("clear_temporary_data_btn")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="clear-temporary-data.jsp"/>
       </jsp:include>
@@ -140,7 +140,7 @@
       <br />
       <%=cm.cmsText("generic_clear-temporary-data_05")%>&nbsp;<strong><%=datacount%></strong>
       <br />
-      <%=cm.cmsMsg("generic_clear-temporary-data_title")%>
+      <%=cm.cmsMsg("clear_temporary_data_btn")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="clear-temporary-data.jsp"/>
       </jsp:include>

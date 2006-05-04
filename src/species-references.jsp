@@ -24,7 +24,7 @@
     %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("species_references_title")%>
+      <%=cm.cms("pick_references_show_species")%>
     </title>
 <%
   // Request parameters
@@ -46,11 +46,11 @@
   <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,pick_references_show_species_location" />
+      <jsp:param name="location" value="home#index.jsp,species#species.jsp,pick_references_show_species_location" />
       <jsp:param name="helpLink" value="species-help.jsp" />
     </jsp:include>
     <h1>
-        <%=cm.cmsText("species_references_01")%>
+        <%=cm.cmsText("pick_references_show_species")%>
     </h1>
     <form name="eunis" method="get" action="species-references-result.jsp" onsubmit="return validateForm();">
       <input type="hidden" name="typeForm" value="<%=ReferencesSearchCriteria.CRITERIA_SCIENTIFIC%>" />
@@ -64,26 +64,26 @@
               <tr>
                 <td style="background-color:#EEEEEE">
                   <strong>
-                    <%=cm.cmsText("species_references_02")%>
+                    <%=cm.cmsText("search_will_provide_2")%>
                   </strong>
                 </td>
               </tr>
               <tr>
                 <td style="background-color:#EEEEEE;text-align:left">
                   <input title="<%=cm.cms("group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" />
-                    <label for="checkbox1"><%=cm.cmsText("species_references_03")%></label>
+                    <label for="checkbox1"><%=cm.cmsText("group")%></label>
                     <%=cm.cmsTitle("group")%>
-                  <input title="<%=cm.cms("order")%>" id="checkbox2" type="checkbox" name="showOrder" value="true" checked="checked" />
-                    <label for="checkbox2"><%=cm.cmsText("species_references_04")%></label>
-                    <%=cm.cmsTitle("order")%>
+                  <input title="<%=cm.cms("order_column")%>" id="checkbox2" type="checkbox" name="showOrder" value="true" checked="checked" />
+                    <label for="checkbox2"><%=cm.cmsText("order_column")%></label>
+                    <%=cm.cmsTitle("order_column")%>
                   <input title="<%=cm.cms("family")%>" id="checkbox3" type="checkbox" name="showFamily" value="true" checked="checked" />
-                    <label for="checkbox3"><%=cm.cmsText("species_references_05")%></label>
+                    <label for="checkbox3"><%=cm.cmsText("family")%></label>
                     <%=cm.cmsTitle("family")%>
                   <input title="<%=cm.cms("scientific_name")%>" id="checkbox4" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" />
-                    <label for="checkbox4"><%=cm.cmsText("species_references_06")%></label>
+                    <label for="checkbox4"><%=cm.cmsText("scientific_name")%></label>
                     <%=cm.cmsTitle("scientific_name")%>
                   <input title="<%=cm.cms("vernacular_name")%>" id="checkbox5" type="checkbox" name="showVernacularName" value="true" />
-                    <label for="checkbox5"><%=cm.cmsText("species_references_07")%></label>
+                    <label for="checkbox5"><%=cm.cmsText("vernacular_name")%></label>
                     <%=cm.cmsTitle("vernacular_name")%>
                 </td>
               </tr>
@@ -100,15 +100,15 @@
                   <%=cm.cmsAlt("field_included")%>
                   &nbsp;
                   <strong>
-                    <label for="author"><%=cm.cmsText("species_references_09")%></label>
+                    <label for="author"><%=cm.cmsText("author")%></label>
                   </strong>
                 </td>
                 <td width="17%">
                   <label for="select1" class="noshow"><%=cm.cms("operator")%></label>
                   <select id="select1" title="<%=cm.cms("operator")%>" name="relationOpAuthor" class="inputTextField">
-                    <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpAuthor == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("species_references_10")%></option>
-                    <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpAuthor == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("species_references_11")%></option>
-                    <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpAuthor == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("species_references_12")%></option>
+                    <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpAuthor == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("is")%></option>
+                    <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpAuthor == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("contains")%></option>
+                    <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpAuthor == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("starts_with")%></option>
                   </select>
                   <%=cm.cmsLabel("operator")%>
                   <%=cm.cmsTitle("operator")%>
@@ -127,14 +127,14 @@
                   <%=cm.cmsAlt("field_included")%>
                   &nbsp;
                   <strong>
-                    <label for="date1"><%=cm.cmsText("species_references_13")%></label>
+                    <label for="date1"><%=cm.cmsText("year")%></label>
                   </strong>
                 </td>
                 <td>
                   <label for="select2" class="noshow"><%=cm.cms("operator")%></label>
                   <select id="select2" title="<%=cm.cms("operator")%>" name="relOpDate" onchange="MM_jumpMenu('parent',this,0)" class="inputTextField">
-                    <option value="species-references.jsp?between=no" <%=(request.getParameter("between")==null?"selected=\"selected\"":(request.getParameter("between").equalsIgnoreCase("yes")?"":"selected=\"selected\""))%>><%=cm.cms("species_references_10")%></option>
-                    <option value="species-references.jsp?between=yes" <%if (request.getParameter("between")!=null && request.getParameter("between").equalsIgnoreCase("yes")){%> selected="selected"<%}%>><%=cm.cms("species_references_15")%></option>
+                    <option value="species-references.jsp?between=no" <%=(request.getParameter("between")==null?"selected=\"selected\"":(request.getParameter("between").equalsIgnoreCase("yes")?"":"selected=\"selected\""))%>><%=cm.cms("is")%></option>
+                    <option value="species-references.jsp?between=yes" <%if (request.getParameter("between")!=null && request.getParameter("between").equalsIgnoreCase("yes")){%> selected="selected"<%}%>><%=cm.cms("between")%></option>
                   </select>
                   <%=cm.cmsLabel("operator")%>
                   <%=cm.cmsTitle("operator")%>
@@ -151,7 +151,7 @@
                     <a title="<%=cm.cms("list_values_link")%>" href="javascript:openHelper('species-references-choice.jsp','date',1)"><img height="18" style="vertical-align:middle" alt="<%=cm.cms("publication_year")%>" src="images/helper/helper.gif" width="11" border="0" /></a>
                     <%=cm.cmsTitle("list_values_link")%>
                     <%=cm.cmsAlt("publication_year")%>
-                    <%=cm.cmsText("species_references_16")%>
+                    <%=cm.cmsText("and")%>
                     <label for="date2" class="noshow"><%=cm.cms("last_date")%></label>
                     <input id="date2" title="<%=cm.cms("last_date")%>" alt="<%=cm.cms("last_date")%>" size="5" name="date1" value="<%=date1%>" class="inputTextField" />
                     <%=cm.cmsLabel("last_date")%>
@@ -191,15 +191,15 @@
                   <%=cm.cmsAlt("field_included")%>
                   &nbsp;
                   <strong>
-                    <label for="title"><%=cm.cmsText("species_references_17")%></label>
+                    <label for="title"><%=cm.cmsText("title")%></label>
                   </strong>
                 </td>
                 <td>
                   <label for="select3" class="noshow"><%=cm.cms("operator")%></label>
                   <select id="select3" title="<%=cm.cms("operator")%>" name="relationOpTitle" class="inputTextField">
-                    <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpTitle == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("species_references_10")%></option>
-                    <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpTitle == Utilities.OPERATOR_CONTAINS.intValue())?"selected=\"selected\"" : ""%>><%=cm.cms("species_references_11")%></option>
-                    <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpTitle == Utilities.OPERATOR_STARTS.intValue())?"selected=\"selected\"" : ""%>><%=cm.cms("species_references_12")%></option>
+                    <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpTitle == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("is")%></option>
+                    <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpTitle == Utilities.OPERATOR_CONTAINS.intValue())?"selected=\"selected\"" : ""%>><%=cm.cms("contains")%></option>
+                    <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpTitle == Utilities.OPERATOR_STARTS.intValue())?"selected=\"selected\"" : ""%>><%=cm.cms("starts_with")%></option>
                   </select>
                   <%=cm.cmsLabel("operator")%>
                   <%=cm.cmsTitle("operator")%>
@@ -219,15 +219,15 @@
                   <%=cm.cmsAlt("field_included")%>
                   &nbsp;
                   <strong>
-                    <label for="editor"><%=cm.cmsText("species_references_14")%></label>
+                    <label for="editor"><%=cm.cmsText("editor")%></label>
                   </strong>
                 </td>
                 <td>
                   <label for="select4" class="noshow"><%=cm.cms("operator")%></label>
                   <select id="select4" title="<%=cm.cms("operator")%>" name="relationOpEditor" class="inputTextField">
-                    <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpEditor == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("species_references_10")%></option>
-                    <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpEditor == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("species_references_11")%></option>
-                    <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpEditor == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("species_references_12")%></option>
+                    <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpEditor == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("is")%></option>
+                    <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpEditor == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("contains")%></option>
+                    <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpEditor == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("starts_with")%></option>
                   </select>
                   <%=cm.cmsLabel("operator")%>
                   <%=cm.cmsTitle("operator")%>
@@ -247,15 +247,15 @@
                   <%=cm.cmsAlt("field_included")%>
                   &nbsp;
                   <strong>
-                    <label for="publisher"><%=cm.cmsText("species_references_18")%></label>
+                    <label for="publisher"><%=cm.cmsText("publisher")%></label>
                   </strong>
                 </td>
                 <td>
                   <label for="select5" class="noshow"><%=cm.cms("operator")%></label>
                   <select id="select5" title="<%=cm.cms("operator")%>" name="relationOpPublisher" class="inputTextField">
-                    <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpPublisher == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("species_references_10")%></option>
-                    <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpPublisher == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("species_references_11")%></option>
-                    <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpPublisher == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("species_references_12")%></option>
+                    <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpPublisher == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("is")%></option>
+                    <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpPublisher == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("contains")%></option>
+                    <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpPublisher == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("starts_with")%></option>
                   </select>
                   <%=cm.cmsLabel("operator")%>
                   <%=cm.cmsTitle("operator")%>
@@ -279,12 +279,12 @@
         </tr>
         <tr>
           <td style="text-align:right">
-            <input id="Reset" type="reset" value="<%=cm.cms("reset_btn")%>" name="Reset" class="inputTextField" title="<%=cm.cms("reset")%>" />
+            <input id="Reset" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="inputTextField" title="<%=cm.cms("reset")%>" />
             <%=cm.cmsTitle("reset")%>
-            <%=cm.cmsInput("reset_btn")%>
-            <input id="Search" type="submit" value="<%=cm.cms("search_btn")%>" name="submit2" class="inputTextField" title="<%=cm.cms("search")%>" />
+            <%=cm.cmsInput("reset")%>
+            <input id="Search" type="submit" value="<%=cm.cms("search")%>" name="submit2" class="inputTextField" title="<%=cm.cms("search")%>" />
             <%=cm.cmsTitle("search")%>
-            <%=cm.cmsInput("search_btn")%>
+            <%=cm.cmsInput("search")%>
           </td>
         </tr>
       </table>
@@ -306,9 +306,9 @@
           </script>
           <br />
           <script language="JavaScript" type="text/javascript" src="script/species-references-save-criteria.js"></script>
-          <%=cm.cmsText("species_references_21")%>:
-          <a title="<%=cm.cms("save_title")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'species-references.jsp','5','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_title")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
-          <%=cm.cmsTitle("save_title")%>
+          <%=cm.cmsText("save_your_criteria")%>:
+          <a title="<%=cm.cms("save_open_link")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'species-references.jsp','5','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_open_link")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
+          <%=cm.cmsTitle("save_open_link")%>
           <%
             // Set Vector for URL string
             Vector show = new Vector();
@@ -332,15 +332,15 @@
       %>
 
 <%=cm.br()%>
-<%=cm.cmsMsg("species_references_title")%>
+<%=cm.cmsMsg("pick_references_show_species")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_references_10")%>
+<%=cm.cmsMsg("is")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_references_11")%>
+<%=cm.cmsMsg("contains")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_references_12")%>
+<%=cm.cmsMsg("starts_with")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_references_15")%>
+<%=cm.cmsMsg("between")%>
 <%=cm.br()%>
 
     <jsp:include page="footer.jsp">

@@ -47,14 +47,14 @@ public class FactsheetTaxcode {
       if (level.equalsIgnoreCase("family"))
       {
         whatCanFind.addElement("family");
-        whatCanFind.addElement("order");
+        whatCanFind.addElement("order_column");
         whatCanFind.addElement("subclass");
         whatCanFind.addElement("class");
         whatCanFind.addElement("phylum");
         whatCanFind.addElement("kingdom");
       }
-      if (level.equalsIgnoreCase("order")) {
-        whatCanFind.addElement("order");
+      if (level.equalsIgnoreCase("order_column")) {
+        whatCanFind.addElement("order_column");
         whatCanFind.addElement("subclass");
         whatCanFind.addElement("class");
         whatCanFind.addElement("phylum");
@@ -145,7 +145,7 @@ public class FactsheetTaxcode {
    */
   public String returnIdOrder() {
     String idOrder = "-1";
-    if (CanFind("order"))
+    if (CanFind("order_column"))
     {
       List l1 = new Vector();
       try
@@ -157,12 +157,12 @@ public class FactsheetTaxcode {
       if (l1 != null && l1.size() > 0)
       {
         Chm62edtTaxcodeAllJoinsPersist t = (Chm62edtTaxcodeAllJoinsPersist) l1.get(0);
-        if (t.getTaxonomicLevel() != null && t.getTaxonomicLevel().equalsIgnoreCase("order")) idOrder = t.getIdTaxcode();
-        if (t.getLevel1() != null && t.getLevel1().equalsIgnoreCase("order")) idOrder = t.getId1();
-        if (t.getLevel2() != null && t.getLevel2().equalsIgnoreCase("order")) idOrder = t.getId2();
-        if (t.getLevel3() != null && t.getLevel3().equalsIgnoreCase("order")) idOrder = t.getId3();
-        if (t.getLevel4() != null && t.getLevel4().equalsIgnoreCase("order")) idOrder = t.getId4();
-        if (t.getLevel5() != null && t.getLevel5().equalsIgnoreCase("order")) idOrder = t.getId5();
+        if (t.getTaxonomicLevel() != null && t.getTaxonomicLevel().equalsIgnoreCase("order_column")) idOrder = t.getIdTaxcode();
+        if (t.getLevel1() != null && t.getLevel1().equalsIgnoreCase("order_column")) idOrder = t.getId1();
+        if (t.getLevel2() != null && t.getLevel2().equalsIgnoreCase("order_column")) idOrder = t.getId2();
+        if (t.getLevel3() != null && t.getLevel3().equalsIgnoreCase("order_column")) idOrder = t.getId3();
+        if (t.getLevel4() != null && t.getLevel4().equalsIgnoreCase("order_column")) idOrder = t.getId4();
+        if (t.getLevel5() != null && t.getLevel5().equalsIgnoreCase("order_column")) idOrder = t.getId5();
       }
     }
     return idOrder;

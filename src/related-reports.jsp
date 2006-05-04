@@ -115,10 +115,10 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,related_reports_location"/>
+        <jsp:param name="location" value="home#index.jsp,related_reports"/>
       </jsp:include>
     <h1>
-      <%=cm.cmsText("related_reports_title")%>
+      <%=cm.cmsText("related_reports")%>
     </h1>
     <br />
     <%=cm.cmsText("related_reports_description")%>.
@@ -162,8 +162,8 @@
       <input type="hidden" name="operation" value="delete" />
       <div align="right" style="background-color : #EEEEEE; width : 100%;">
         <strong>
-          <input type="button" id="refresh" name="Submit" value="<%=cm.cms("related_reports_refresh_value")%>" title="<%=cm.cms("related_reports_refresh_title")%>" onclick="javascript:ReloadPage()" class="inputTextField" />
-          <%=cm.cmsInput("related_reports_refresh_value")%>
+          <input type="button" id="refresh" name="Submit" value="<%=cm.cms("refresh_list")%>" title="<%=cm.cms("related_reports_refresh_title")%>" onclick="javascript:ReloadPage()" class="inputTextField" />
+          <%=cm.cmsInput("refresh_list")%>
           <%=cm.cmsTitle("related_reports_refresh_title")%>
 
 
@@ -172,8 +172,8 @@
   if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
   {
 %>
-          <input type="submit" id="delete" name="Submit" value="<%=cm.cms("related_reports_delete_value")%>" class="inputTextField" title="<%=cm.cms("related_reports_delete_title")%>" />
-          <%=cm.cmsInput("related_reports_delete_value")%>
+          <input type="submit" id="delete" name="Submit" value="<%=cm.cms("delete_selected")%>" class="inputTextField" title="<%=cm.cms("related_reports_delete_title")%>" />
+          <%=cm.cmsInput("delete_selected")%>
           <%=cm.cmsTitle("related_reports_delete_title")%>
 <%
   }
@@ -194,22 +194,22 @@
     }
   %>
           <th class="resultHeader" style="text-align : center;">
-            <%=cm.cmsText("related_reports_valid")%>
+            <%=cm.cmsText("valid")%>
           </th>
           <th class="resultHeader">
-            <%=cm.cmsText("related_reports_description_column")%>
+            <%=cm.cmsText("description")%>
           </th>
           <th class="resultHeader">
-            <%=cm.cmsText("related_reports_filename")%>
+            <%=cm.cmsText("file_name")%>
           </th>
           <th  class="resultHeader" style="text-align:right">
-            <%=cm.cmsText("related_reports_size")%>(kB)
+            <%=cm.cmsText("size")%>(kB)
           </th>
           <th class="resultHeader" style="white-space:nowrap">
             <%=cm.cmsText("related_reports_author")%>
           </th>
           <th class="resultHeader">
-            <%=cm.cmsText("related_reports_date")%>
+            <%=cm.cmsText("date")%>
           </th>
         </tr>
 <%
@@ -226,10 +226,10 @@
       {
  %>
           <td align="center">
-            <label for="filename<%=i%>" class="noshow"><%=cm.cms("related_reports_file_label")%></label>
-            <input title="<%=cm.cms("related_reports_file_title")%>" type="checkbox" id="filename<%=i%>" name="filenames" value="<%=report.getFileName()%>" />
-            <%=cm.cmsLabel("related_reports_file_label")%>
-            <%=cm.cmsTitle("related_reports_file_title")%>
+            <label for="filename<%=i%>" class="noshow"><%=cm.cms("check_box_for_deletion")%></label>
+            <input title="<%=cm.cms("check_box_for_deletion")%>" type="checkbox" id="filename<%=i%>" name="filenames" value="<%=report.getFileName()%>" />
+            <%=cm.cmsLabel("check_box_for_deletion")%>
+            <%=cm.cmsTitle("check_box_for_deletion")%>
           </td>
   <%
       }
@@ -239,17 +239,17 @@
       if(file.exists())
       {
 %>
-            <img src="images/mini/download.gif" title="<%=cm.cms("related_reports_approval_download_title")%>" alt="<%=cm.cms("related_reports_approval_download_alt")%>" />
-            <%=cm.cmsAlt("related_reports_approval_download_alt")%>
-            <%=cm.cmsTitle("related_reports_approval_download_title")%>
+            <img src="images/mini/download.gif" title="<%=cm.cms("file_is_downloadable")%>" alt="<%=cm.cms("file_is_downloadable")%>" />
+            <%=cm.cmsAlt("file_is_downloadable")%>
+            <%=cm.cmsTitle("file_is_downloadable")%>
 <%
       }
       else
       {
 %>
-            <img src="images/mini/downloadu.gif" title="<%=cm.cms("related_reports_approval_downloadu_title")%>" alt="<%=cm.cms("related_reports_approval_downloadu_alt")%>" />
-            <%=cm.cmsAlt("related_reports_approval_downloadu_alt")%>
-            <%=cm.cmsTitle("related_reports_approval_downloadu_title")%>
+            <img src="images/mini/downloadu.gif" title="<%=cm.cms("file_not_available")%>" alt="<%=cm.cms("file_not_available")%>" />
+            <%=cm.cmsAlt("file_not_available")%>
+            <%=cm.cmsTitle("file_not_available")%>
 <%
       }
 %>
@@ -319,22 +319,22 @@
   }
 %>
           <th class="resultHeader" style="text-align : center;">
-            <%=cm.cmsText("related_reports_valid")%>
+            <%=cm.cmsText("valid")%>
           </th>
           <th class="resultHeader">
-            <%=cm.cmsText("related_reports_description_column")%>
+            <%=cm.cmsText("description")%>
           </th>
           <th class="resultHeader">
-            <%=cm.cmsText("related_reports_filename")%>
+            <%=cm.cmsText("file_name")%>
           </th>
           <th  class="resultHeader" style="text-align:right">
-            <%=cm.cmsText("related_reports_size")%>(kB)
+            <%=cm.cmsText("size")%>(kB)
           </th>
           <th class="resultHeader" style="white-space:nowrap">
             <%=cm.cmsText("related_reports_author")%>
           </th>
           <th class="resultHeader">
-            <%=cm.cmsText("related_reports_date")%>
+            <%=cm.cmsText("date")%>
           </th>
         </tr>
       </table>

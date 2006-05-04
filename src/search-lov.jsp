@@ -33,7 +33,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
-      <%=cm.cms("search_lov_page_title")%>
+      <%=cm.cms("list_of_values")%>
     </title>
     <script language="JavaScript" type="text/javascript">
     <!--
@@ -541,10 +541,10 @@
 %>
     <br />
       <form action="">
-        <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
-        <%=cm.cmsTitle("close_window_title")%>
-        <%=cm.cmsInput("close_window_value")%>
+        <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="inputTextField" />
+        <%=cm.cmsTitle("close_window")%>
+        <%=cm.cmsInput("close_btn")%>
       </form>
-    <%=cm.cmsMsg("search_lov_page_title")%>
+    <%=cm.cmsMsg("list_of_values")%>
   </body>
 </html>

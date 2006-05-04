@@ -116,7 +116,7 @@ public class RefDomain extends AbstractDomain implements Paginable {
     habitat.addJoinColumn(new StringJoinColumn("EUNIS_HABITAT_CODE", "eunisCode", "setEunisCode"));
     habitat.addJoinColumn(new StringJoinColumn("CODE_ANNEX1", "annex1Code", "setAnnex1Code"));
     habitat.addJoinColumn(new StringJoinColumn("CODE_2000", "code2000", "setCode2000"));
-    habitat.addJoinColumn(new IntegerJoinColumn("LEVEL", "level", "setLevel"));
+    habitat.addJoinColumn(new IntegerJoinColumn("LEVEL", "generic_index_07", "setLevel"));
     habitat.addJoinColumn(new StringJoinColumn("DESCRIPTION", "description", "setDescription"));
     habitatReferences.addJoinTable(habitat);
   }

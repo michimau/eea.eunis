@@ -135,7 +135,7 @@
     String downloadLink = "javascript:openTSVDownload('reports/sites/tsv-sites-neighborhood.jsp?" + formBean.toURLParam(reportFields) + "&idsite=" + idSite + "&radius=" + radius +  "')";
 %>
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_neighborhood_location#sites-neighborhood.jsp,sites_neighborhood_detail_location"/>
+        <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,sites_neighborhood_location#sites-neighborhood.jsp,sites_neighborhood_detail_location"/>
         <jsp:param name="helpLink" value="sites-help.jsp"/>
         <jsp:param name="downloadLink" value="<%=downloadLink%>"/>
         <jsp:param name="mapLink" value="show"/>
@@ -151,7 +151,7 @@
   }
 %>
       <h1>
-        <%=cm.cmsText("sites_neighborhood_detail_pageheader")%>
+        <%=cm.cmsText("site_neighborhood_1")%>
       </h1>
       <br />
       <%=cm.cmsText("sites_neighborhood-detail_05")%>
@@ -213,24 +213,24 @@
       <table summary="<%=cm.cms("search_results")%>" width="100%" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
         <tr>
           <th class="resultHeader" nowrap="nowrap">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("sites_neighborhood-detail_08")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("source_data_set")%></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>#dataTable"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("sites_neighborhood-detail_09")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>#dataTable"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("site_name")%></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th class="resultHeader" align="right" nowrap="nowrap" style="text-align : right;">
             <%=cm.cmsText("sites_neighborhood-detail_10")%>
           </th>
           <th class="resultHeader" nowrap="nowrap" style="text-align : center;">
-            <%=cm.cmsText("sites_neighborhood-detail_11")%>
+            <%=cm.cmsText("longitude")%>
           </th>
           <th class="resultHeader" nowrap="nowrap" style="text-align : center;">
-            <%=cm.cmsText("sites_neighborhood-detail_12")%>
+            <%=cm.cmsText("latitude")%>
           </th>
           <th class="resultHeader" align="right" nowrap="nowrap" style="text-align : right;">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("sites_neighborhood-detail_13")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("size_ha")%></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
@@ -269,24 +269,24 @@
 %>
         <tr>
           <th class="resultHeader" nowrap="nowrap">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("sites_neighborhood-detail_08")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("source_data_set")%></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>#dataTable"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("sites_neighborhood-detail_09")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>#dataTable"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("site_name")%></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th class="resultHeader" align="right" nowrap="nowrap" style="text-align : right;">
             <%=cm.cmsText("sites_neighborhood-detail_10")%>
           </th>
           <th class="resultHeader" nowrap="nowrap"  style="text-align : center;">
-            <%=cm.cmsText("sites_neighborhood-detail_11")%>
+            <%=cm.cmsText("longitude")%>
           </th>
           <th class="resultHeader" align="center" nowrap="nowrap" style="text-align : center;">
-            <%=cm.cmsText("sites_neighborhood-detail_12")%>
+            <%=cm.cmsText("latitude")%>
           </th>
           <th class="resultHeader" nowrap="nowrap" style="text-align : right;">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("sites_neighborhood-detail_13")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("size_ha")%></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
@@ -297,12 +297,12 @@
   {
 %>
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_neighborhood_location#sites-neighborhood.jsp,sites_neighborhood_detail_location"/>
+        <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,sites_neighborhood_location#sites-neighborhood.jsp,sites_neighborhood_detail_location"/>
         <jsp:param name="helpLink" value="sites-help.jsp"/>
         <jsp:param name="mapLink" value="show"/>
       </jsp:include>
         <h1>
-          <%=cm.cmsText("sites_neighborhood_detail_pageheader")%>
+          <%=cm.cmsText("site_neighborhood_1")%>
         </h1>
 
         <br />

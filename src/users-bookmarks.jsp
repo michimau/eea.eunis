@@ -35,7 +35,7 @@
 %>
     <title>
         <%=application.getInitParameter("PAGE_TITLE")%>
-        <%=cm.cms("users_bookmarks_title")%>
+        <%=cm.cms("user_bookmarks")%>
     </title>
     <script language="JavaScript" type="text/javascript">
     <!--
@@ -97,15 +97,15 @@
    </script>
   </head>
 <%
-  String breadcrumbtrail = "home_location#index.jsp,services_location#services.jsp,user_bookmarks_location";
+  String breadcrumbtrail = "home#index.jsp,services#services.jsp,user_bookmarks";
   String typeAction = Utilities.formatString(request.getParameter( "typeAction" ), "" );
   if ( typeAction.equalsIgnoreCase( "edit" ) || typeAction.equalsIgnoreCase( "editSave" ) )
   {
-    breadcrumbtrail = "home_location#index.jsp,services_location#services.jsp,user_bookmarks_location#users-bookmarks.jsp,user_bookmarks_location_edit";
+    breadcrumbtrail = "home#index.jsp,services#services.jsp,user_bookmarks#users-bookmarks.jsp,edit_bookmark";
   }
   if ( typeAction.equalsIgnoreCase( "delete" ) )
   {
-    breadcrumbtrail = "home_location#index.jsp,services_location#services.jsp,user_bookmarks_location#users-bookmarks.jsp,user_bookmarks_location_delete";
+    breadcrumbtrail = "home#index.jsp,services#services.jsp,user_bookmarks#users-bookmarks.jsp,delete_bookmark";
   }
 %>
   <body>
@@ -137,7 +137,7 @@
         String bookmDescription = (String)((TableColumns)bookmarksEdit.get(0)).getColumnsValues().get(1);
 %>
         <strong class="fontNormal">
-          <%=cm.cmsText("users_bookmarks_04")%>
+          <%=cm.cmsText("edit_bookmark")%>
         </strong>
         <br />
         <br />
@@ -156,9 +156,9 @@
         <textarea id="bookmarkDescrptionEdit" title="<%=cm.cms("users_bookmarks_06")%>" name="bookmarkDescrptionEdit" rows="3" cols="100" class="inputTextField"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(bookmDescription),"&nbsp;")%></textarea>
         <%=cm.cmsTitle("users_bookmarks_06")%>
         <br />
-        <input id="input1" type="button" value="<%=cm.cms("save_btn")%>" name="save" onclick="onClickEditSave()" class="inputTextField" title="<%=cm.cms("save")%>" />
+        <input id="input1" type="button" value="<%=cm.cms("save")%>" name="save" onclick="onClickEditSave()" class="inputTextField" title="<%=cm.cms("save")%>" />
         <%=cm.cmsTitle("save")%>
-        <%=cm.cmsInput("save_btn")%>
+        <%=cm.cmsInput("save")%>
 <%
       }
       else
@@ -180,7 +180,7 @@
  %>
         <br />
         <br />
-        <%=cm.cmsText("users_bookmarks_08")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsText("users_bookmarks_10")%></a>
+        <%=cm.cmsText("users_bookmarks_08")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsText("back")%></a>
         <%=cm.cmsTitle("users_bookmarks_09")%>
 <%
       }
@@ -189,7 +189,7 @@
 %>
         <br />
         <br />
-        <%=cm.cmsText("users_bookmarks_11")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsText("users_bookmarks_10")%></a>
+        <%=cm.cmsText("users_bookmarks_11")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsText("back")%></a>
         <%=cm.cmsTitle("users_bookmarks_09")%>
 <%
       }
@@ -209,10 +209,10 @@
       {
  %>
         <br />
-        <strong class="fontNormal"><%=cm.cmsText("users_bookmarks_12")%></strong>
+        <strong class="fontNormal"><%=cm.cmsText("delete_bookmark")%></strong>
         <br />
         <br />
-        <%=cm.cmsText("users_bookmarks_13")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsText("users_bookmarks_10")%></a>
+        <%=cm.cmsText("users_bookmarks_13")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsText("back")%></a>
         <%=cm.cmsTitle("users_bookmarks_13")%>
 <%
       }
@@ -220,7 +220,7 @@
       {
 %>
         <br />
-        <strong class="fontNormal"><%=cm.cmsText("users_bookmarks_12")%></strong>
+        <strong class="fontNormal"><%=cm.cmsText("delete_bookmark")%></strong>
         <br />
         <br />
         <%=cm.cmsText("users_bookmarks_14")%> <a title="<%=cm.cms("users_bookmarks_15")%>" href="users-bookmarks.jsp"><%=cm.cmsText("users_bookmarks_15")%></a>
@@ -239,10 +239,10 @@
             Sel.
           </td>
           <td>
-            <%=cm.cmsText("users_bookmarks_16")%>
+            <%=cm.cmsText("bookmark")%>
           </td>
           <td>
-            <%=cm.cmsText("users_bookmarks_17")%>
+            <%=cm.cmsText("description")%>
           </td>
         </tr>
 <%
@@ -284,8 +284,8 @@
           {
 %>
             <span>
-              <a title="<%=cm.cms("users_bookmarks_16")%>" href="<%=Utilities.treatURLSpecialCharacters((String)bookmark.getColumnsValues().get(0))%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(bookm),"&nbsp;")%></a>
-              <%=cm.cmsTitle("users_bookmarks_16")%>
+              <a title="<%=cm.cms("bookmark")%>" href="<%=Utilities.treatURLSpecialCharacters((String)bookmark.getColumnsValues().get(0))%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(bookm),"&nbsp;")%></a>
+              <%=cm.cmsTitle("bookmark")%>
             </span>
 <%
           }
@@ -329,13 +329,13 @@
 %>
       </table>
       <br />
-      <input id="input2" type="button" value="<%=cm.cms("edit_btn")%>" name="edit" onclick="onClickEdit()" class="inputTextField" title="<%=cm.cms("edit")%>" />
+      <input id="input2" type="button" value="<%=cm.cms("edit")%>" name="edit" onclick="onClickEdit()" class="inputTextField" title="<%=cm.cms("edit")%>" />
       <%=cm.cmsTitle("edit")%>
-      <%=cm.cmsInput("edit_btn")%>
+      <%=cm.cmsInput("edit")%>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input id="input3" type="button" value="<%=cm.cms("delete_btn")%>" name="delete" onclick="onClickDelete()" class="inputTextField" title="<%=cm.cms("delete")%>" />
+      <input id="input3" type="button" value="<%=cm.cms("delete")%>" name="delete" onclick="onClickDelete()" class="inputTextField" title="<%=cm.cms("delete")%>" />
       <%=cm.cmsTitle("delete")%>
-      <%=cm.cmsInput("delete_btn")%>
+      <%=cm.cmsInput("delete")%>
 <%
       }
       else
@@ -359,7 +359,7 @@
     <br />
 
 <%=cm.br()%>
-<%=cm.cmsMsg("users_bookmarks_title")%>
+<%=cm.cmsMsg("user_bookmarks")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("users_bookmarks_01")%>
 <%=cm.br()%>

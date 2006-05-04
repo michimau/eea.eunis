@@ -24,7 +24,7 @@
   String insert = request.getParameter("insert");
   String delete = request.getParameter("delete");
   String deleteall = request.getParameter("deleteall");
-  String headline = request.getParameter("headline");
+  String headline = request.getParameter("generic_index_07");
   String start_date = request.getParameter("start_date");
   String end_date = request.getParameter("end_date");
   /*
@@ -116,7 +116,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("headline_page_title")%>
+      <%=cm.cms("generic_index_07")%>
     </title>
   </head>
   <body>
@@ -124,7 +124,7 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,services_location#services.jsp,headline_location"/>
+        <jsp:param name="location" value="home#index.jsp,services#services.jsp,headline"/>
       </jsp:include>
 <%
   // If user is authentificated and has this right
@@ -133,9 +133,9 @@
 %>
       <br />
       <strong>
-        <%=cm.cmsText("headline_autherr")%>
+        <%=cm.cmsText("not_authenticated_no_rights")%>
       </strong>
-      <a href="login.jsp" title="Login"><%=cm.cmsText("headline_login")%></a>
+      <a href="login.jsp" title="Login"><%=cm.cmsText("login")%></a>
       <br />
 <%
   }
@@ -147,11 +147,11 @@
       </h1>
       <br />
       <form method="post" name="webcontent" action="headline.jsp">
-        <label for="headline">
+        <label for="generic_index_07">
           <%=cm.cms("current_headline_label")%>:
         </label>
         <br />
-        <textarea rows="10" cols="80" name="headline" id="headline" class="inputTextField"><%=headline%></textarea>
+        <textarea rows="10" cols="80" name="generic_index_07" id="generic_index_07" class="inputTextField"><%=headline%></textarea>
         <%=cm.cmsLabel("current_headline_label")%>
         <br />
         <br />
@@ -175,16 +175,16 @@
         <input class="inputTextField" type="submit" value="<%=cm.cms("headline_insert")%>" id="insert" name="insert" title="<%=cm.cms("headline_insert_label")%>" />&nbsp;&nbsp;
         <%=cm.cmsInput("headline_insert")%>
 
-        <input class="inputTextField" type="submit" value="<%=cm.cms("headline_delete")%>" id="delete" name="delete" title="<%=cm.cms("headline_delete_label")%>" />&nbsp;&nbsp;
-        <%=cm.cmsInput("headline_delete")%>
+        <input class="inputTextField" type="submit" value="<%=cm.cms("delete")%>" id="delete" name="delete" title="<%=cm.cms("delete")%>" />&nbsp;&nbsp;
+        <%=cm.cmsInput("delete")%>
 
-        <input class="inputTextField" type="submit" value="<%=cm.cms("headline_deleteall")%>" id="deleteall" name="deleteall" title="<%=cm.cms("headline_deleteall_label")%>" />
-        <%=cm.cmsInput("headline_deleteall")%>
+        <input class="inputTextField" type="submit" value="<%=cm.cms("delete_all")%>" id="deleteall" name="deleteall" title="<%=cm.cms("delete_all")%>" />
+        <%=cm.cmsInput("delete_all")%>
       </form>
 <%
   }
 %>
-      <%=cm.cmsMsg("headline_page_title")%>
+      <%=cm.cmsMsg("generic_index_07")%>
       <%=cm.br()%>
       <%=cm.cmsMsg("headline_updated")%>
       <%=cm.br()%>

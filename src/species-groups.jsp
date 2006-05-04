@@ -67,11 +67,11 @@
   <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,groups_location" />
+      <jsp:param name="location" value="home#index.jsp,species#species.jsp,groups" />
       <jsp:param name="helpLink" value="species-help.jsp" />
     </jsp:include>
     <h1>
-        <%=cm.cmsText("species_groups_01")%>
+        <%=cm.cmsText("groups")%>
     </h1>
     <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
@@ -86,7 +86,7 @@
             <tr>
               <td style="background-color:#EEEEEE">
                 <strong>
-                  <%=cm.cmsText("species_groups_02")%>
+                  <%=cm.cmsText("search_will_provide_2")%>
                 </strong>
               </td>
             </tr>
@@ -95,9 +95,9 @@
                 <input title="<%=cm.cms("group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" />
                   <%=cm.cmsTitle("group")%>
                   <label for ="checkbox1"><%=cm.cmsText("group")%></label>
-                <input title="<%=cm.cms("order")%>" id="checkbox2" type="checkbox" name="showOrder" value="true" checked="checked" />
-                  <%=cm.cmsTitle("order")%>
-                  <label for ="checkbox2"><%=cm.cmsText("order")%></label>
+                <input title="<%=cm.cms("order_column")%>" id="checkbox2" type="checkbox" name="showOrder" value="true" checked="checked" />
+                  <%=cm.cmsTitle("order_column")%>
+                  <label for ="checkbox2"><%=cm.cmsText("order_column")%></label>
                 <input title="<%=cm.cms("family")%>" id="checkbox3" type="checkbox" name="showFamily" value="true" checked="checked" />
                   <%=cm.cmsTitle("family")%>
                   <label for ="checkbox3"><%=cm.cmsText("family")%></label>
@@ -114,7 +114,7 @@
             <%// Header row for group selection table %>
             <tr>
               <th class="resultHeader" colspan="2" style="text-align:left">
-                <%=cm.cmsText("species_groups_08")%>
+                <%=cm.cmsText("group")%>
               </th>
               <th class="resultHeader" width="167" style="text-align:center">
                 <%=cm.cmsText("species_groups_09")%>
@@ -123,7 +123,7 @@
                 <%=cm.cmsText("species_groups_10")%>
               </th>
               <th class="resultHeader" width="93" style="text-align:center">
-                <%=cm.cmsText("species_groups_11")%>
+                <%=cm.cmsText("select")%>
               </th>
             </tr>
             <jsp:useBean id="GroupSpeciesDomain" class="ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesDomain" scope="page" />
@@ -167,7 +167,7 @@
           %>
             <tr>
               <th class="resultHeader" colspan="2" style="text-align:left">
-                <%=cm.cmsText("species_groups_08")%>
+                <%=cm.cmsText("group")%>
               </th>
               <th class="resultHeader" width="167" style="text-align:center">
                 <%=cm.cmsText("species_groups_09")%>
@@ -176,7 +176,7 @@
                 <%=cm.cmsText("species_groups_10")%>
               </th>
               <th class="resultHeader" width="93" style="text-align:center">
-                <%=cm.cmsText("species_groups_11")%>
+                <%=cm.cmsText("select")%>
               </th>
             </tr>
             <tr>
@@ -201,12 +201,12 @@
             <tr>
               <td colspan="5" style="text-align:right">
                 <br />
-                <input id="Reset" type="reset" value="<%=cm.cms("reset_btn")%>" name="Reset" class="inputTextField" title="<%=cm.cms("reset")%>" />
+                <input id="Reset" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="inputTextField" title="<%=cm.cms("reset")%>" />
                 <%=cm.cmsTitle("reset")%>
-                <%=cm.cmsInput("reset_btn")%>
-                <input id="Search" type="submit" value="<%=cm.cms("search_btn")%>" name="submit" class="inputTextField" title="<%=cm.cms("search")%>" />
+                <%=cm.cmsInput("reset")%>
+                <input id="Search" type="submit" value="<%=cm.cms("search")%>" name="submit" class="inputTextField" title="<%=cm.cms("search")%>" />
                 <%=cm.cmsTitle("search")%>
-                <%=cm.cmsInput("search_btn")%>
+                <%=cm.cmsInput("search")%>
               </td>
             </tr>
           </table>
@@ -230,9 +230,9 @@
           //-->
           </script>
           <br />
-          <%=cm.cmsText("species_groups_15")%>:
-          <a title="<%=cm.cms("save_title")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'species-groups.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_title")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
-          <%=cm.cmsTitle("save_title")%>
+          <%=cm.cmsText("save_your_criteria")%>:
+          <a title="<%=cm.cms("save_open_link")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'species-groups.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_open_link")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
+          <%=cm.cmsTitle("save_open_link")%>
           <%
               // Set Vector for URL string
               Vector show = new Vector();

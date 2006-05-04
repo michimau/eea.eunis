@@ -25,7 +25,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
-      <%=cm.cms("sites_gis_tool_page_title")%>
+      <%=cm.cms("gis_tool_interactive_maps")%>
     </title>
   </head>
   <body style="margin : 0px; padding : 0px;" >

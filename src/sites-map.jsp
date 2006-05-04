@@ -35,10 +35,10 @@
 </script>
 <br />        
 <div style="width : 100%;">
-  <input id="showMap" name="showMap" type="button" value="<%=cm.cms("sites_map_01")%>"
+  <input id="showMap" name="showMap" type="button" value="<%=cm.cms("show_map")%>"
          onclick="javascript:openMap('<%=toURLParam%>');"
          title="<%=cm.cms("sites_map_02")%>" class="inputTextField" />
-  <%=cm.cmsInput("sites_map_01")%>
+  <%=cm.cmsInput("show_map")%>
   <%=cm.cmsTitle("sites_map_02")%>
   <br />
 </div>

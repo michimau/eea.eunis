@@ -19,7 +19,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("howto_page_title")%>
+      <%=cm.cms("how_to_use_eunis_database")%>
     </title>
   </head>
   <body>
@@ -27,11 +27,11 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,how_to_use_location"/>
+        <jsp:param name="location" value="home#index.jsp,how_to_use_eunis_database"/>
       </jsp:include>
       <%=cm.cmsText("generic_howto_01")%>
 
-      <%=cm.cmsMsg("howto_page_title")%>
+      <%=cm.cmsMsg("how_to_use_eunis_database")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="howto.jsp" />
       </jsp:include>

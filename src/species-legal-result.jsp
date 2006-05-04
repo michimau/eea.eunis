@@ -146,12 +146,12 @@
   <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,legal_instruments_location#species-legal.jsp,results_location" />
+      <jsp:param name="location" value="home#index.jsp,species#species.jsp,legal_instruments#species-legal.jsp,results" />
       <jsp:param name="helpLink" value="species-help.jsp" />
       <jsp:param name="downloadLink" value="<%=tsvLink%>" />
     </jsp:include>
     <h1>
-      <%=cm.cmsText("species_legal-result_01")%>
+      <%=cm.cmsText("legal_instruments")%>
     </h1>
     <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
@@ -192,7 +192,7 @@
                     {
                 %>
                       <strong>
-                        <%=cm.cmsText("species_legal-result_any")%>
+                        <%=cm.cmsText("any")%>
                       </strong>
                 <%
                     }else {
@@ -204,7 +204,7 @@
                 <%
                     }
                 %>
-                <%=cm.cmsText("species_legal-result_07")%>
+                <%=cm.cmsText("legal_text")%>
               </td>
             </tr>
           <%
@@ -227,7 +227,7 @@
      }
        %>
        <br />
-      <%=cm.cmsText("species_legal-result_08")%>:
+      <%=cm.cmsText("results_found_1")%>:
       <strong>
           <%=resultsCount%>
       </strong>
@@ -259,7 +259,7 @@
         <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
               <td style="background-color:#EEEEEE">
-                      <%=cm.cmsText("species_legal-result_09")%>
+                      <%=cm.cmsText("refine_your_search")%>
               </td>
           </tr>
           <tr>
@@ -282,7 +282,7 @@
                    {
                %>
                   <option value="<%=LegalSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected">
-                      <%=cm.cms("species_legal-result_10")%>
+                      <%=cm.cms("scientific_name")%>
                   </option>
                   <%
                       }
@@ -290,7 +290,7 @@
                       {
                    %>
                   <option value="<%=LegalSearchCriteria.CRITERIA_GROUP%>" selected="selected">
-                      <%=cm.cms("species_legal-result_11")%>
+                      <%=cm.cms("group")%>
                   </option>
                   <%
                       }
@@ -301,27 +301,27 @@
                 <label for="select2" class="noshow"><%=cm.cms("operator")%></label>
                 <select id="select2" title="<%=cm.cms("operator")%>" name="oper" class="inputTextField">
                   <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                      <%=cm.cms("species_legal-result_12")%>
+                      <%=cm.cms("is")%>
                   </option>
                   <option value="<%=Utilities.OPERATOR_STARTS%>">
-                      <%=cm.cms("species_legal-result_13")%>
+                      <%=cm.cms("starts_with")%>
                   </option>
                   <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                      <%=cm.cms("species_legal-result_14")%>
+                      <%=cm.cms("contains")%>
                   </option>
                 </select>
                 <%=cm.cmsLabel("operator")%>
                 <%=cm.cmsTitle("operator")%>
                 <input type="hidden" name="typeForm" value="<%=LegalSearchCriteria.CRITERIA_SPECIES%>" />
                   <label for="criteriaSearch" class="noshow">
-                    <%=cm.cms("criteria_value")%>
+                    <%=cm.cms("filter_value")%>
                   </label>
-                <input id="criteriaSearch" title="<%=cm.cms("criteria_value")%>" alt="<%=cm.cms("criteria_value")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
-                <%=cm.cmsLabel("criteria_value")%>
-                <%=cm.cmsTitle("criteria_value")%>
-                <input title="<%=cm.cms("search")%>" id="refine" class="inputTextField" type="submit" name="Submit" value="<%=cm.cms("search_btn")%>" />
+                <input id="criteriaSearch" title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
+                <%=cm.cmsLabel("filter_value")%>
+                <%=cm.cmsTitle("filter_value")%>
+                <input title="<%=cm.cms("search")%>" id="refine" class="inputTextField" type="submit" name="Submit" value="<%=cm.cms("search")%>" />
                 <%=cm.cmsTitle("search")%>
-                <%=cm.cmsInput("search_btn")%>
+                <%=cm.cmsInput("search")%>
               </form>
             </td>
           </tr>
@@ -333,7 +333,7 @@
             %>
             <tr>
                 <td style="background-color:#EEEEEE">
-                    <%=cm.cmsText("species_legal-result_15")%>:
+                    <%=cm.cmsText("applied_filters_to_the_results")%>:
                 </td>
             </tr>
             <%
@@ -396,7 +396,7 @@
   {
 %>
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
-              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("species_legal-result_10")%></span></a>
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("scientific_name")%></span></a>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
 <%
@@ -407,7 +407,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      <%=cm.cmsText("species_legal-result_11")%>
+                      <%=cm.cmsText("group")%>
                   </span>
               </strong>
             </th>
@@ -419,7 +419,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      <%=cm.cmsText("species_legal-result_16")%>
+                      <%=cm.cmsText("legal_text")%>
                   </span>
              </strong>
             </th>
@@ -431,7 +431,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      <%=cm.cmsText("species_legal-result_17")%>
+                      <%=cm.cmsText("abbreviation")%>
                   </span>
               </strong>
             </th>
@@ -455,7 +455,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      <%=cm.cmsText("species_legal-result_18")%>
+                      <%=cm.cmsText("url")%>
                   </span>
               </strong>
             </th>
@@ -643,7 +643,7 @@
   {
 %>
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
-              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("species_legal-result_10")%></span></a>
+              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("scientific_name")%></span></a>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
 <%
@@ -654,7 +654,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      <%=cm.cmsText("species_legal-result_11")%>
+                      <%=cm.cmsText("group")%>
                   </span>
               </strong>
             </th>
@@ -666,7 +666,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      <%=cm.cmsText("species_legal-result_16")%>
+                      <%=cm.cmsText("legal_text")%>
                   </span>
              </strong>
             </th>
@@ -678,7 +678,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      <%=cm.cmsText("species_legal-result_17")%>
+                      <%=cm.cmsText("abbreviation")%>
                   </span>
               </strong>
             </th>
@@ -702,7 +702,7 @@
             <th style="text-align:left;vertical-align:top;" class="resultHeader">
               <strong>
                   <span style="color:#FFFFFF">
-                      <%=cm.cmsText("species_legal-result_18")%>
+                      <%=cm.cmsText("url")%>
                   </span>
               </strong>
             </th>
@@ -730,15 +730,15 @@
 <%=cm.br()%>
 <%=cm.cmsMsg("species_legal-result_title")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_legal-result_10")%>
+<%=cm.cmsMsg("scientific_name")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_legal-result_11")%>
+<%=cm.cmsMsg("group")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_legal-result_12")%>
+<%=cm.cmsMsg("is")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_legal-result_13")%>
+<%=cm.cmsMsg("starts_with")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_legal-result_14")%>
+<%=cm.cmsMsg("contains")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("search_results")%>
 <%=cm.br()%>

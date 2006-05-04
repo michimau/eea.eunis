@@ -2507,7 +2507,7 @@ public final class Utilities {
             "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_34" ) + "</td>" +
             "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_26" ) + "</td>" +
             "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_27" ) + "</td>" +
-            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_28" ) + "</td>" +
+            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "total_area_ha" ) + "</td>" +
             "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_29" ) + "</td>" +
             "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_30" ) + "</td>";
 

@@ -123,7 +123,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("generic_glossary-table_title")%>
+      <%=cm.cms("glossary_editor")%>
     </title>
     <script language="JavaScript" type="text/javascript">
     <!--
@@ -144,7 +144,7 @@
   <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,services_location#services.jsp,glossary_editor_location"/>
+      <jsp:param name="location" value="home#index.jsp,services#services.jsp,glossary_editor"/>
     </jsp:include>
     <table summary="layout" width="100%" border="0">
       <tr>
@@ -160,7 +160,7 @@
         <tr>
           <td>
             <strong>
-              <%=cm.cmsText( "generic_glossary-table_03" )%>
+              <%=cm.cmsText( "search_terms" )%>
             </strong>
           </td>
         </tr>
@@ -170,7 +170,7 @@
             <label for="filter" class="noshow"><%=cm.cms("glossary_search_value")%></label>
             <input title="<%=cm.cms("glossary_search_value")%>" type="text" name="filter" id="filter" value="<%=filter%>" size="30" class="inputTextField" />
             <%=cm.cmsLabel("glossary_search_value")%>
-            <input title="<%=cm.cms("search_btn")%>" type="submit" name="search" id="search" value="<%=cm.cms( "generic_glossary-table_05")%>" class="inputTextField" />
+            <input title="<%=cm.cms("search")%>" type="submit" name="search" id="search" value="<%=cm.cms( "generic_glossary-table_05")%>" class="inputTextField" />
             <%=cm.cmsInput( "generic_glossary-table_05")%>
             <%
               if (null != sort && !sort.equalsIgnoreCase(""))
@@ -198,64 +198,64 @@
         <th class="resultHeader" nowrap="nowrap">
           <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=TERM<%=filterURLParam%>">
             <%=sort.equalsIgnoreCase("TERM") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%>
-            <%=cm.cmsText( "generic_glossary-table_07" )%>
+            <%=cm.cmsText( "term" )%>
           </a>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
-            <%=cm.cmsText( "generic_glossary-table_08" )%>
+            <%=cm.cmsText( "language" )%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
           <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=SOURCE<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("SOURCE") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_09" )%>
+            <%=sort.equalsIgnoreCase("SOURCE") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "source" )%>
           </a>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
           <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=DEFINITION<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("DEFINITION") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_10" )%>
+            <%=sort.equalsIgnoreCase("DEFINITION") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "definition" )%>
           </a>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
           <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=LINK_DESCRIPTION<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("LINK_DESCRIPTION") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_11" )%>
+            <%=sort.equalsIgnoreCase("LINK_DESCRIPTION") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "link_description" )%>
           </a>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
           <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=LINK_URL<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("LINK_URL") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_12" )%>
+            <%=sort.equalsIgnoreCase("LINK_URL") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "link" )%>
           </a>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
           <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=REFERENCE<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("REFERENCE") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_13" )%>
+            <%=sort.equalsIgnoreCase("REFERENCE") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "reference" )%>
           </a>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
           <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=DATE_CHANGED<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("DATE_CHANGED") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_14" )%>
+            <%=sort.equalsIgnoreCase("DATE_CHANGED") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "date_changed" )%>
           </a>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th class="resultHeader" style="text-align : center; white-space : nowrap;">
           <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=CURRENT<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("CURRENT") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_15" )%>
+            <%=sort.equalsIgnoreCase("CURRENT") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "current" )%>
           </a>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
           <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=TERM_DOMAIN<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("TERM_DOMAIN") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_16" )%>
+            <%=sort.equalsIgnoreCase("TERM_DOMAIN") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "domain" )%>
           </a>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th class="resultHeader" nowrap="nowrap">
           <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=SEARCH_DOMAIN<%=filterURLParam%>">
-            <%=sort.equalsIgnoreCase("SEARCH_DOMAIN") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "generic_glossary-table_17" )%>
+            <%=sort.equalsIgnoreCase("SEARCH_DOMAIN") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "search_domain" )%>
           </a>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
@@ -380,7 +380,7 @@
 <%
   }
 %>
-    <%=cm.cmsMsg("generic_glossary-table_title")%>
+    <%=cm.cmsMsg("glossary_editor")%>
     <%=cm.br()%>
     <%=cm.cmsMsg( "generic_glossary-table_01")%>
     <jsp:include page="footer.jsp">

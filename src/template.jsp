@@ -26,7 +26,7 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,category_location#category.jsp"/>
+        <jsp:param name="location" value="home#index.jsp,category_location#category.jsp"/>
         <jsp:param name="helpLink" value="help.jsp"/>
       </jsp:include>
       <img alt="Loading image" id="loading" src="images/loading.gif" />

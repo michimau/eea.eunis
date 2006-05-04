@@ -101,7 +101,7 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,related_reports_location#related-reports.jsp,related_reports_approval_location"/>
+        <jsp:param name="location" value="home#index.jsp,related_reports#related-reports.jsp,related_reports_approval_location"/>
       </jsp:include>
       <h1>
         <%=cm.cmsText("related_reports_approval_title")%>
@@ -126,22 +126,22 @@
               <%=cm.cmsText("related_reports_approval_approve")%>
             </th>
             <th class="resultHeader" style="text-align : center;">
-              <%=cm.cmsText("related_reports_approval_valid")%>
+              <%=cm.cmsText("valid")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("related_reports_approval_docdescription")%>
+              <%=cm.cmsText("description")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("related_reports_approval_filename")%>
+              <%=cm.cmsText("file_name")%>
             </th>
             <th class="resultHeader" style="text-align : right;">
-              <%=cm.cmsText("related_reports_approval_size")%>(kB)
+              <%=cm.cmsText("size")%>(kB)
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("related_reports_approval_author")%>
+              <%=cm.cmsText("author")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("related_reports_approval_date")%>
+              <%=cm.cmsText("date")%>
             </th>
           </tr>
 <%
@@ -167,27 +167,27 @@
 %>
           <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
             <td align="center">
-              <label for="filename<%=i%>" class="noshow"><%=cm.cms("related_reports_approval_check_label")%></label>
-              <input title="<%=cm.cms("related_reports_approval_check_title")%>" type="checkbox" id="filename<%=i%>" name="filenames" value="<%=report.getFileName()%>"/>
-              <%=cm.cmsLabel("related_reports_approval_check_label")%>
-              <%=cm.cmsTitle("related_reports_approval_check_title")%>
+              <label for="filename<%=i%>" class="noshow"><%=cm.cms("check_box_for_approval")%></label>
+              <input title="<%=cm.cms("check_box_for_approval")%>" type="checkbox" id="filename<%=i%>" name="filenames" value="<%=report.getFileName()%>"/>
+              <%=cm.cmsLabel("check_box_for_approval")%>
+              <%=cm.cmsTitle("check_box_for_approval")%>
             </td>
             <td align="center">
 <%
             if(file.exists())
             {
 %>
-              <img src="images/mini/download.gif" alt="<%=cm.cms("related_reports_approval_download_alt")%>" title="<%=cm.cms("related_reports_approval_download_title")%>" />
-              <%=cm.cmsAlt("related_reports_approval_download_alt")%>
-              <%=cm.cmsTitle("related_reports_approval_download_title")%>
+              <img src="images/mini/download.gif" alt="<%=cm.cms("file_is_downloadable")%>" title="<%=cm.cms("file_is_downloadable")%>" />
+              <%=cm.cmsAlt("file_is_downloadable")%>
+              <%=cm.cmsTitle("file_is_downloadable")%>
 <%
             }
             else
             {
 %>
-              <img src="images/mini/downloadu.gif" alt="<%=cm.cms("related_reports_approval_downloadu_alt")%>" title="<%=cm.cms("related_reports_approval_downloadu_title")%>" />
-              <%=cm.cmsAlt("related_reports_approval_downloadu_alt")%>
-              <%=cm.cmsTitle("related_reports_approval_downloadu_title")%>
+              <img src="images/mini/downloadu.gif" alt="<%=cm.cms("file_not_available")%>" title="<%=cm.cms("file_not_available")%>" />
+              <%=cm.cmsAlt("file_not_available")%>
+              <%=cm.cmsTitle("file_not_available")%>
 <%
             }
 %>
@@ -218,32 +218,32 @@
               <%=cm.cmsText("related_reports_approval_approve")%>
             </th>
             <th class="resultHeader" style="text-align : center;">
-              <%=cm.cmsText("related_reports_approval_valid")%>
+              <%=cm.cmsText("valid")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("related_reports_approval_docdescription")%>
+              <%=cm.cmsText("description")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("related_reports_approval_filename")%>
+              <%=cm.cmsText("file_name")%>
             </th>
             <th class="resultHeader" style="text-align : right;">
-              <%=cm.cmsText("related_reports_approval_size")%>(kB)
+              <%=cm.cmsText("size")%>(kB)
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("related_reports_approval_author")%>
+              <%=cm.cmsText("author")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("related_reports_approval_date")%>
+              <%=cm.cmsText("date")%>
             </th>
           </tr>
         </table>
         <br />
-        <input  type="submit" id="submitApprove" name="Submit" title="<%=cm.cms("related_reports_approval_approve_title")%>" value="<%=cm.cms("related_reports_approval_approve_value")%>" class="inputTextField" />
-        <%=cm.cmsTitle("related_reports_approval_approve_title")%>
+        <input  type="submit" id="submitApprove" name="Submit" title="<%=cm.cms("approve_checked_files")%>" value="<%=cm.cms("related_reports_approval_approve_value")%>" class="inputTextField" />
+        <%=cm.cmsTitle("approve_checked_files")%>
         <%=cm.cmsInput("related_reports_approval_approve_value")%>
-        <input type="submit" id="submitDel" name="Submit" title="<%=cm.cms("related_reports_approval_delete_title")%>" value="<%=cm.cms("related_reports_approval_delete_value")%>" class="inputTextField" onclick="return del_files();" />
-        <%=cm.cmsTitle("related_reports_approval_delete_title")%>
-        <%=cm.cmsInput("related_reports_approval_delete_value")%>
+        <input type="submit" id="submitDel" name="Submit" title="<%=cm.cms("delete_checked_files")%>" value="<%=cm.cms("delete_selected")%>" class="inputTextField" onclick="return del_files();" />
+        <%=cm.cmsTitle("delete_checked_files")%>
+        <%=cm.cmsInput("delete_selected")%>
       </form>
 <%
     }

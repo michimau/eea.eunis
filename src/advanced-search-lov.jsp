@@ -774,7 +774,7 @@
       rs = ps.executeQuery(SQL);
 
       if(!rs.isBeforeFirst()) {
-        out.println("<strong>"+cm.cms("no_results_were_found")+"</strong>");
+        out.println("<strong>"+cm.cms("no_results_found_1")+"</strong>");
         out.println("<br />");
       } else {
         %>
@@ -846,8 +846,8 @@
 %>
     <br />
     <form action="">
-      <input type="button" title="<%=cm.cms("close_window")%>" value="<%=cm.cms("close_button")%>" onclick="javascript:window.close()" name="btnclose" id="btnclose" class="inputTextField" />
-      <%=cm.cmsInput("close_button")%>
+      <input type="button" title="<%=cm.cms("close_window")%>" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="btnclose" id="btnclose" class="inputTextField" />
+      <%=cm.cmsInput("close_btn")%>
     </form>
     <%=cm.br()%>
     <%=cm.cmsMsg("list_of_values")%>
@@ -858,6 +858,6 @@
     <%=cm.br()%>
     <%=cm.cmsMsg("click_link_to_select_value")%>
     <%=cm.br()%>
-    <%=cm.cmsMsg("no_results_were_found")%>
+    <%=cm.cmsMsg("no_results_found_1")%>
   </body>
 </html>

@@ -28,13 +28,13 @@
   <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,error_page_01"/>
+      <jsp:param name="location" value="home#index.jsp,error_page_01"/>
     </jsp:include>
     <br />
     <br />
     <%=cm.cmsText("generic_404_01")%>
-    <a title="<%=cm.cms("error_send_feedback")%>" href="feedback.jsp"><%=cm.cmsText("generic_404_05")%></a>.
-    <%=cm.cmsTitle("error_send_feedback")%>
+    <a title="<%=cm.cms("send_feedback")%>" href="feedback.jsp"><%=cm.cmsText("feedback")%></a>.
+    <%=cm.cmsTitle("send_feedback")%>
     <br />
     <br />
     <%=cm.cmsText("generic_404_04")%>

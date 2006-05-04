@@ -26,7 +26,7 @@
     <div id="alignment">
     <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,user_tutorials_location"/>
+      <jsp:param name="location" value="home#index.jsp,user_tutorials_location"/>
     </jsp:include>
     <h1><%=cm.cmsText("tutorials_01")%></h1>
     <br />
@@ -36,7 +36,7 @@
     <table width="100%" border="0">
       <tr>
         <td>
-          <strong><%=cm.cmsText("tutorials_02")%></strong>
+          <strong><%=cm.cmsText("species")%></strong>
           <br />
           <ul>
             <li>
@@ -73,7 +73,7 @@
             !-->
           </ul>
           <br />
-          <strong><%=cm.cmsText("tutorials_07")%></strong>
+          <strong><%=cm.cmsText("habitat_types")%></strong>
           <br />
           <ul>
             <li>
@@ -90,20 +90,20 @@
             </li>
           </ul>
           <br />
-          <strong><%=cm.cmsText("tutorials_12")%></strong>
+          <strong><%=cm.cmsText("sites")%></strong>
           <br />
           <ul>
             <li>
               <a href="flash-movie.jsp?tutorial=Search_sites_by_name&amp;title=Search%20sites%20by%20name"><%=cm.cmsText("tutorials_13")%></a>
             </li>
             <li>
-              <a href="flash-movie.jsp?tutorial=Search_sites_by_coordinates&amp;title=Search%20sites%20by%20geographical%20coordinates"><%=cm.cmsText("tutorials_14")%></a>
+              <a href="flash-movie.jsp?tutorial=Search_sites_by_coordinates&amp;title=Search%20sites%20by%20geographical%20coordinates"><%=cm.cmsText("search_by_coordinates")%></a>
             </li>
             <li>
               <a href="flash-movie.jsp?tutorial=Search_sites_by_country&amp;title=Search%20sites%20by%20country"><%=cm.cmsText("tutorials_15")%></a>
             </li>
             <li>
-              <a href="flash-movie.jsp?tutorial=Search_sites_by_size&amp;title=Search%20sites%20by%20size"><%=cm.cmsText("tutorials_16")%></a>
+              <a href="flash-movie.jsp?tutorial=Search_sites_by_size&amp;title=Search%20sites%20by%20size"><%=cm.cmsText("search_by_size")%></a>
             </li>
             <li>
               <a href="flash-movie.jsp?tutorial=Search_sites_by_designation_year&amp;title=Search%20sites%20by%20designation"><%=cm.cmsText("tutorials_17")%></a>
@@ -125,7 +125,7 @@
           <br />
           <ul>
             <li>
-              <a href="gis-tool-help.jsp" title="GIS Tool help"><%=cm.cmsText("tutorials_22")%></a>
+              <a href="gis-tool-help.jsp" title="GIS Tool help"><%=cm.cmsText("gis_help")%></a>
             </li>
             <li>
               <a href="flash-movie.jsp?tutorial=Advanced_Search&amp;title=EUNIS%20Database%20Advanced%20search"><%=cm.cmsText("tutorials_23")%></a>

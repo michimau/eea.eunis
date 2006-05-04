@@ -22,7 +22,7 @@
     WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
-    <%=cm.cms("habitats_books-choice_title")%>
+    <%=cm.cms("list_of_values")%>
   </title>
   <script language="JavaScript" type="text/javascript">
   <!--
@@ -55,7 +55,7 @@
   if(results != null && results.size() > 0) {
 %>
 <h2><%=cm.cmsText("list_of_values_for")%></h2>
-<u><%=cm.cmsText("habitats_books-choice_03")%></u>
+<u><%=cm.cmsText("habitat_type_name")%></u>
 <em><%=Utilities.ReturnStringRelatioOp(Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS))%></em>
 <strong><%=formBean.getScientificName()%></strong>
 <br />
@@ -90,7 +90,7 @@
 } else {
 %>
 <strong>
-  <%=cm.cmsText("habitats_books-choice_01")%>
+  <%=cm.cmsText("no_results_found_1")%>
 </strong>
 <br />
 <br />
@@ -99,10 +99,10 @@
 %>
 <br />
 <form action="">
-  <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("habitats_books-choice_02")%>" onclick="javascript:window.close()" name="button" id="button" class="inputTextField" />
-  <%=cm.cmsInput("habitats_books-choice_02")%>
+  <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" id="button" class="inputTextField" />
+  <%=cm.cmsInput("close_btn")%>
 </form>
-<%=cm.cmsMsg("habitats_books-choice_title")%>
+<%=cm.cmsMsg("list_of_values")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("list_of_values")%>
 <%=cm.br()%>

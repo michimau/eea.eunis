@@ -118,10 +118,10 @@ public class PDFHabitatsFactsheet
       code = factsheet.getEunisHabitatCode();
     }
 
-    String habitatType = cm.cms( "habitats_factsheet_03");
+    String habitatType = cm.cms( "annex_habitat_type");
     if ( factsheet.isEunis() )
     {
-      habitatType = cm.cms( "habitats_factsheet_02");
+      habitatType = cm.cms( "eunis_habitat_type");
     }
 
     Cell cell;
@@ -148,7 +148,7 @@ public class PDFHabitatsFactsheet
     table.setWidths( colWidths );
 
     // Name
-    cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_04"), fontTitle ) );
+    cell = new Cell( new Phrase( cm.cms( "habitat_type"), fontTitle ) );
     cell.setBackgroundColor( new Color( 0xDD, 0xDD, 0xDD ) );
     table.addCell( cell );
 
@@ -172,7 +172,7 @@ public class PDFHabitatsFactsheet
       table.setWidths( colWidths1 );
 
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_10"), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "eunis_habitat_type_code"), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xDD, 0xDD, 0xDD ) );
       table.addCell( cell );
 
@@ -180,7 +180,7 @@ public class PDFHabitatsFactsheet
       cell.setBackgroundColor( new Color( 0xDD, 0xDD, 0xDD ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_11"), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "generic_index_07"), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xDD, 0xDD, 0xDD ) );
       table.addCell( cell );
 
@@ -218,7 +218,7 @@ public class PDFHabitatsFactsheet
       cell.setBackgroundColor( new Color( 0xDD, 0xDD, 0xDD ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_13" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "originally _published_code" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xDD, 0xDD, 0xDD ) );
       table.addCell( cell );
 
@@ -229,12 +229,12 @@ public class PDFHabitatsFactsheet
       cell.setBackgroundColor( new Color( 0xDD, 0xDD, 0xDD ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_14" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "priority" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xDD, 0xDD, 0xDD ) );
       table.addCell( cell );
 
       String priority = factsheet.getPriority() != null && 1 == factsheet.getPriority().shortValue() ?
-          cm.cms( "habitats_factsheet_81" ) : cm.cms( "habitats_factsheet_82" );
+          cm.cms( "yes" ) : cm.cms( "no" );
       cell = new Cell( new Phrase( priority, fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xDD, 0xDD, 0xDD ) );
       table.addCell( cell );
@@ -267,7 +267,7 @@ public class PDFHabitatsFactsheet
         DescriptionWrapper description = ( DescriptionWrapper ) descriptions.get( i );
         if ( description.getLanguage().equalsIgnoreCase( "english" ) )
         {
-          cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_15" ) + "(" + description.getLanguage() + ")", fontTitle ) );
+          cell = new Cell( new Phrase( cm.cms( "description" ) + "(" + description.getLanguage() + ")", fontTitle ) );
           cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
           table.addCell( cell );
 
@@ -288,7 +288,7 @@ public class PDFHabitatsFactsheet
             String textSource = Utilities.formatString( SpeciesFactsheet.getBookAuthorDate( description.getIdDc() ), " " );
             if ( !textSource.equalsIgnoreCase( "" ) )
             {
-              cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_17" ), fontNormal ) );
+              cell = new Cell( new Phrase( cm.cms( "source" ), fontNormal ) );
               cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
               table.addCell( cell );
 
@@ -322,11 +322,11 @@ public class PDFHabitatsFactsheet
       cell.setColspan( 2 );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet-intern_02" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "language" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet-intern_03" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "name" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
@@ -367,19 +367,19 @@ public class PDFHabitatsFactsheet
       cell.setColspan( 4 );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_23" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "classification" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_24" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "code_column" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_25" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "title" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_26" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "relation_type" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
@@ -444,24 +444,24 @@ public class PDFHabitatsFactsheet
       table.setWidths( colWidths1 );
 
       Cell cell;
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_31" ), fontSubtitle ) );
+      cell = new Cell( new Phrase( cm.cms( "geographical_distribution" ), fontSubtitle ) );
       cell.setBackgroundColor( new Color( 0xDD, 0xDD, 0xDD ) );
       cell.setColspan( 4 );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_32" ), fontNormal ) );
+      cell = new Cell( new Phrase( cm.cms( "country" ), fontNormal ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_33" ), fontNormal ) );
+      cell = new Cell( new Phrase( cm.cms( "biogeographic_region" ), fontNormal ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_34" ), fontNormal ) );
+      cell = new Cell( new Phrase( cm.cms( "probability" ), fontNormal ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_35" ), fontNormal ) );
+      cell = new Cell( new Phrase( cm.cms( "comment" ), fontNormal ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
@@ -521,7 +521,7 @@ public class PDFHabitatsFactsheet
       cell.setColspan( 3 );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_28" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "legal_instrument" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
@@ -611,11 +611,11 @@ public class PDFHabitatsFactsheet
         cell.setColspan( 2 );
         table.addCell( cell );
 
-        cell = new Cell( new Phrase( cm.cms( "habitats_factsheet-other_02" ), fontNormalBold ) );
+        cell = new Cell( new Phrase( cm.cms( "name" ), fontNormalBold ) );
         cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
         table.addCell( cell );
 
-        cell = new Cell( new Phrase( cm.cms( "habitats_factsheet-other_03" ), fontNormalBold ) );
+        cell = new Cell( new Phrase( cm.cms( "description" ), fontNormalBold ) );
         cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
         table.addCell( cell );
 
@@ -666,16 +666,16 @@ public class PDFHabitatsFactsheet
       table.setWidths( colWidths1 );
 
       Cell cell;
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_72" ), fontSubtitle ) );
+      cell = new Cell( new Phrase( cm.cms( "habitat_type_syntaxa" ), fontSubtitle ) );
       cell.setBackgroundColor( new Color( 0xDD, 0xDD, 0xDD ) );
       cell.setColspan( 5 );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_73" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "name" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_74" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "relation" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
@@ -683,11 +683,11 @@ public class PDFHabitatsFactsheet
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_76" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "author" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_77" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "references" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
@@ -770,19 +770,19 @@ public class PDFHabitatsFactsheet
       cell.setColspan( 4 );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_68" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "site_code" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_69" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "source_data_set" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_70" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "country" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_71" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "site_name" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
@@ -826,19 +826,19 @@ public class PDFHabitatsFactsheet
       cell.setColspan( 4 );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_68" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "site_code" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_69" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "source_data_set" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_70" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "country" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_71" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "site_name" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
@@ -885,27 +885,27 @@ public class PDFHabitatsFactsheet
       cell.setColspan( 6 );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_38" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "species_scientific_name" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_39" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "biogeographic_region" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_40" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "abundance" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_41" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "frequencies" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_42" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "faithfulness" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_44" ), fontNormalBold ) );
+      cell = new Cell( new Phrase( cm.cms( "comment" ), fontNormalBold ) );
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 

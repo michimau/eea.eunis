@@ -30,7 +30,7 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,services_location#services.jsp,logos_location"/>
+        <jsp:param name="location" value="home#index.jsp,services#services.jsp,logos_location"/>
       </jsp:include>
       <h1>
         <%=cm.cmsText("logos_title")%>

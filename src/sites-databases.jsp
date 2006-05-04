@@ -23,7 +23,7 @@
     if (!document.criteria.NATURA2000.checked && !document.criteria.CDDA_NATIONAL.checked && !document.criteria.NATURENET.checked &&
         !document.criteria.CORINE.checked && !document.criteria.CDDA_INTERNATIONAL.checked && !document.criteria.DIPLOMA.checked &&
         !document.criteria.BIOGENETIC.checked && !document.criteria.EMERALD.checked) {
-            alert('<%=cm.cms("sites_databases_01")%>');
+            alert('<%=cm.cms("please_select_source_data_sets")%>');
             return false;
     }
     return true;
@@ -90,30 +90,30 @@
   String dbCDDAInternational = Utilities.formatString(cm.cmsText("sites_databases_CDDA International"), "CDDA International");
   String dbCorine = Utilities.formatString(cm.cmsText("sites_databases_Corine Biotopes"), "Corine Biotopes");
   String dbBiogenetic = Utilities.formatString(cm.cmsText("sites_databases_Biogenetic Reserve"), "Biogenetic Reserve");
-  String dbEmerald = Utilities.formatString(cm.cmsText("sites_databases_Emerald"), "Emerald");
+  String dbEmerald = Utilities.formatString(cm.cmsText("emerald"), "Emerald");
 %>
 <div style="width : 100%;">
 <table summary="layout" border="1" cellpadding="0" cellspacing="2" style="border-collapse: collapse; border-color : black;" width="100%">
   <tr>
     <td colspan="2">
-      <%=cm.cmsText("sites_databases_02")%>
+      <%=cm.cmsText("select_data_set")%>
     </td>
     <td>
       <input type="button" id="checkAll" name="checkAll"
-             title="<%=cm.cms("check_all_btn_title")%>" value="<%=cm.cms("check_all_btn_value")%>"
+             title="<%=cm.cms("select_all")%>" value="<%=cm.cms("select_all")%>"
              onclick="javascript:setSelection('true');"
              onkeypress="javascript:setSelection('true');"
              class="inputTextField" />
-      <%=cm.cmsTitle("check_all_btn_title")%>
-      <%=cm.cmsInput("check_all_btn_value")%>
+      <%=cm.cmsTitle("select_all")%>
+      <%=cm.cmsInput("select_all")%>
       &nbsp;
       <input type="button" id="checkNone" name="checkNone"
-             title="<%=cm.cms("check_none_btn_title")%>" value="<%=cm.cms("check_none_btn_value")%>"
+             title="<%=cm.cms("select_none")%>" value="<%=cm.cms("select_none")%>"
              onclick="javascript:setSelection('false');"
              onkeypress="javascript:setSelection('false');"
              class="inputTextField" />
-      <%=cm.cmsTitle("check_none_btn_title")%>
-      <%=cm.cmsInput("check_none_btn_value")%>
+      <%=cm.cmsTitle("select_none")%>
+      <%=cm.cmsInput("select_none")%>
     </td>
   </tr>
   <tr>
@@ -154,12 +154,12 @@
       <label for="EMERALD"><%=dbEmerald%></label>
     </td>
     <td width="34%">
-      <a title="<%=cm.cms("sites_databases_03_title")%>" href="sites-download.jsp"><%=cm.cmsText("sites_databases_03")%></a>
+      <a title="<%=cm.cms("sites_databases_03_title")%>" href="sites-download.jsp"><%=cm.cmsText("download_full_data_set")%></a>
       <%=cm.cmsTitle("sites_databases_03_title")%>
     </td>
   </tr>
 </table>
   <%=cm.br()%>
-  <%=cm.cmsMsg("sites_databases_01")%>
+  <%=cm.cmsMsg("please_select_source_data_sets")%>
   <%=cm.br()%>      
 </div>

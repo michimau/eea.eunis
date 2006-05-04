@@ -49,14 +49,14 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("habitats_factsheet_title")%>
+    <%=cm.cms("factsheet_for")%>
   </title>
 
 </head>
 
 <body>
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitat_factsheet_location" />
+  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,factsheet" />
 </jsp:include>
 <table summary="layout" width="100%" border="0">
   <tr>
@@ -73,7 +73,7 @@
   </tr>
 </table>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitats_factsheet_title")%>
+<%=cm.cmsMsg("factsheet_for")%>
 <%=cm.br()%>
 <jsp:include page="footer.jsp">
   <jsp:param name="page_name" value="habitats-factsheet.jsp" />
@@ -100,7 +100,7 @@
   <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("habitats_factsheet_title")%>
+    <%=cm.cms("factsheet_for")%>
     <%=factsheet.getHabitat().getScientificName()%>
   </title>
   <script language="JavaScript" type="text/javascript">
@@ -122,7 +122,7 @@
   <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitat_factsheet_location" />
+  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,factsheet" />
   <jsp:param name="printLink" value="<%=printLink%>" />
 </jsp:include>
 <div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>
@@ -131,9 +131,9 @@
 <%
   }
   WebContentManagement cm = SessionManager.getWebContent();
-  String habitatType = cm.cmsText("habitats_factsheet_03");
+  String habitatType = cm.cmsText("annex_habitat_type");
   if(factsheet.isEunis()) {
-    habitatType = cm.cmsText("habitats_factsheet_02");
+    habitatType = cm.cmsText("eunis_habitat_type");
   }
   String code = "";
   if(factsheet.isEunis()) {
@@ -369,7 +369,7 @@ function otherInfoAll(expand)
 <table summary="layout" width="640" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
   <tr>
     <td>
-      <a title="<%=cm.cms("habitat_open_pictures")%>" href="javascript:openpictures('pictures.jsp?<%=picsURL%>',600,600)"><%=cm.cmsText("habitats_factsheet_78")%></a>
+      <a title="<%=cm.cms("habitat_open_pictures")%>" href="javascript:openpictures('pictures.jsp?<%=picsURL%>',600,600)"><%=cm.cmsText("view_pictures")%></a>
       <%=cm.cmsTitle("habitat_open_pictures")%>
     </td>
   </tr>
@@ -379,8 +379,8 @@ function otherInfoAll(expand)
 %>
 <br />
 <br />
-<a title="<%=cm.cms("habitat_upload_pictures")%>" href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=picsURL%>',600,600)"><%=cm.cmsText("habitats_factsheet_79")%></a>
-<%=cm.cmsTitle("habitat_upload_pictures")%>
+<a title="<%=cm.cms("upload_pictures")%>" href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=picsURL%>',600,600)"><%=cm.cmsText("upload_pictures")%></a>
+<%=cm.cmsTitle("upload_pictures")%>
 <br />
 <br />
 <%
@@ -392,7 +392,7 @@ function otherInfoAll(expand)
   if(!isMini) {
 %>
   <%=cm.br()%>
-  <%=cm.cmsMsg("habitats_factsheet_title")%>
+  <%=cm.cmsMsg("factsheet_for")%>
   <%=cm.br()%>
   <%=cm.cmsMsg("loading_data")%>
   <%=cm.br()%>

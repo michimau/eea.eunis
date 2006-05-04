@@ -30,7 +30,7 @@ var errInvalidRegion = '<%=cm.cms("biogeographic_region_is_not_valid")%>';
 
 function validateForm()
 {
-  var errMessageForm = '<%=cm.cms("type_few_letters_from_site")%>';
+  var errMessageForm = '<%=cm.cms("please_type_letters_from_site_name")%>';
   var errMessageSize = '<%=cm.cms("enter_size_as_number")%>';
   var  scientificName;
   var  database;
@@ -112,7 +112,7 @@ function validateForm()
 </script>
 <title>
   <%=application.getInitParameter("PAGE_TITLE")%>
-  <%=cm.cms("habitats_sites_title")%>
+  <%=cm.cms("pick_sites_show_habitat_types")%>
 </title>
 </head>
 
@@ -121,7 +121,7 @@ function validateForm()
   <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,habitats_sites_location"/>
+  <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,habitats_sites_location"/>
   <jsp:param name="helpLink" value="sites-help.jsp"/>
 </jsp:include>
 <form name="criteria" method="get" onsubmit="return validateForm();" action="habitats-sites-result.jsp">
@@ -135,7 +135,7 @@ function validateForm()
         <tr>
           <td>
             <h1>
-              <%=cm.cmsText("habitats_sites_01")%>
+              <%=cm.cmsText("pick_sites_show_habitat_types")%>
             </h1>
             <%=cm.cmsText("habitats_sites_17")%>
             <br />
@@ -144,23 +144,23 @@ function validateForm()
               <tr>
                 <td bgcolor="#EEEEEE">
                   <strong>
-                    <%=cm.cmsText("habitats_sites_02")%>
+                    <%=cm.cmsText("search_will_provide_1")%>
                   </strong>
                 </td>
               </tr>
               <tr>
                 <td bgcolor="#EEEEEE" valign="middle">
                   <input type="checkbox" name="showCode" id="showCode" value="true" checked="checked" />
-                  <label for="showCode"><%=cm.cmsText("habitats_sites_03")%></label>
+                  <label for="showCode"><%=cm.cmsText("habitat_type_code")%></label>
                   &nbsp;
                   <input type="checkbox" name="showScientificName" id="showScientificName" value="true" checked="checked" disabled="disabled" />
-                  <label for="showScientificName"><%=cm.cmsText("habitats_sites_04")%></label>
+                  <label for="showScientificName"><%=cm.cmsText("habitat_type_name")%></label>
                   &nbsp;
                   <input type="checkbox" name="showScientificName" id="showScientificNameSites" value="true" checked="checked" disabled="disabled" />
-                  <label for="showScientificName"><%=cm.cmsText("habitats_sites_sites")%></label>
+                  <label for="showScientificName"><%=cm.cmsText("sites")%></label>
                   &nbsp;
                   <%--<input type="checkbox" name="showVernacularName" id="showVernacularName" value="true" />--%>
-                  <%--<label for="showVernacularName"><%=contentManagement.cms("habitats_sites_05")%></label>--%>
+                  <%--<label for="showVernacularName"><%=contentManagement.cms("english_name")%></label>--%>
                   <!--&nbsp;-->
                 </td>
               </tr>
@@ -170,33 +170,33 @@ function validateForm()
         <tr>
           <td>
             <div>
-              <img width="11" height="12" align="middle" alt="<%=cm.cms("mandatory_field")%>" src="images/mini/field_mandatory.gif" /><%=cm.cmsTitle("mandatory_field")%>&nbsp;
+              <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("mandatory_field")%>" src="images/mini/field_mandatory.gif" /><%=cm.cmsTitle("mandatory_field")%>&nbsp;
               <label for="searchAttribute" class="noshow"><%=cm.cms("criteria")%></label>
               <select title="<%=cm.cms("criteria")%>" name="searchAttribute" id="searchAttribute" class="inputTextField">
-                <option value="<%=SitesSearchCriteria.SEARCH_NAME%>" selected="selected"><%=cm.cms("habitats_sites_07")%></option>
-                <option value="<%=SitesSearchCriteria.SEARCH_SIZE%>"><%=cm.cms("habitats_sites_08")%></option>
-                <option value="<%=SitesSearchCriteria.SEARCH_COUNTRY%>"><%=cm.cms("habitats_sites_09")%></option>
-                <option value="<%=SitesSearchCriteria.SEARCH_REGION%>"><%=cm.cms("habitats_sites_10")%></option>
+                <option value="<%=SitesSearchCriteria.SEARCH_NAME%>" selected="selected"><%=cm.cms("site_name")%></option>
+                <option value="<%=SitesSearchCriteria.SEARCH_SIZE%>"><%=cm.cms("site_size")%></option>
+                <option value="<%=SitesSearchCriteria.SEARCH_COUNTRY%>"><%=cm.cms("country_name")%></option>
+                <option value="<%=SitesSearchCriteria.SEARCH_REGION%>"><%=cm.cms("biogeographic_region_name")%></option>
               </select>
               <%=cm.cmsLabel("criteria")%>
-              <%=cm.cmsInput("habitats_sites_07")%>
-              <%=cm.cmsInput("habitats_sites_08")%>
-              <%=cm.cmsInput("habitats_sites_09")%>
-              <%=cm.cmsInput("habitats_sites_10")%>
+              <%=cm.cmsInput("site_name")%>
+              <%=cm.cmsInput("site_size")%>
+              <%=cm.cmsInput("country_name")%>
+              <%=cm.cmsInput("biogeographic_region_name")%>
               &nbsp;
               <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
               <select title="<%=cm.cms("operator")%>" name="relationOp" id="relationOp" class="inputTextField">
-                <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("habitats_sites_11")%></option>
-                <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("habitats_sites_12")%></option>
-                <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("habitats_sites_13")%></option>
+                <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
+                <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
+                <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("starts_with")%></option>
               </select>
               <%=cm.cmsLabel("operator")%>
-              <%=cm.cmsInput("habitats_sites_11")%>
-              <%=cm.cmsInput("habitats_sites_12")%>
-              <%=cm.cmsInput("habitats_sites_13")%>
-              <label for="scientificName" class="noshow"><%=cm.cms("search_value")%></label>
-              <input title="<%=cm.cms("search_value")%>" alt="<%=cm.cms("search_value")%>" size="30" name="scientificName" id="scientificName" class="inputTextField" />
-              <%=cm.cmsTitle("search_value")%>
+              <%=cm.cmsInput("contains")%>
+              <%=cm.cmsInput("is")%>
+              <%=cm.cmsInput("starts_with")%>
+              <label for="scientificName" class="noshow"><%=cm.cms("filter_value")%></label>
+              <input title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" size="30" name="scientificName" id="scientificName" class="inputTextField" />
+              <%=cm.cmsTitle("filter_value")%>
               <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-sites-choice.jsp')"><img title="<%=cm.cms("list_of_values")%>" border="0" alt="List of values" src="images/helper/helper.gif" width="11" height="18" /></a><%=cm.cmsTitle("list_of_values")%>
               <br />
             </div>
@@ -204,12 +204,12 @@ function validateForm()
         </tr>
         <tr>
           <td width="40%" align="right">
-            <input title="<%=cm.cms("reset_btn")%>" alt="<%=cm.cms("reset_btn")%>" type="reset" value="<%=cm.cms("habitats_sites_14")%>" name="Reset" id="Reset" class="inputTextField" />
-            <%=cm.cmsTitle("reset_btn")%>
-            <%=cm.cmsInput("habitats_sites_14")%>
-            <input title="<%=cm.cms("search_btn")%>" alt="<%=cm.cms("search_btn")%>" type="submit" value="<%=cm.cms("habitats_sites_15")%>" name="submit2" id="submit2" class="inputTextField" />
-            <%=cm.cmsTitle("search_btn")%>
-            <%=cm.cmsInput("habitats_sites_15")%>
+            <input title="<%=cm.cms("reset")%>" alt="<%=cm.cms("reset")%>" type="reset" value="<%=cm.cms("reset")%>" name="Reset" id="Reset" class="inputTextField" />
+            <%=cm.cmsTitle("reset")%>
+            <%=cm.cmsInput("reset")%>
+            <input title="<%=cm.cms("search")%>" alt="<%=cm.cms("search")%>" type="submit" value="<%=cm.cms("search")%>" name="submit2" id="submit2" class="inputTextField" />
+            <%=cm.cmsTitle("search")%>
+            <%=cm.cmsInput("search")%>
           </td>
         </tr>
         <tr>
@@ -242,8 +242,8 @@ function validateForm()
 <tr>
   <td>
     <script language="JavaScript" src="script/habitats-sites-save-criteria.js" type="text/javascript"></script>
-    <%=cm.cmsText("habitats_sites_16")%>:
-    <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-sites.jsp','2','criteria',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+    <%=cm.cmsText("save_your_criteria")%>:
+    <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-sites.jsp','2','criteria',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
     <%=cm.cmsTitle("save_criteria")%>
   </td>
 </tr>
@@ -274,11 +274,11 @@ function validateForm()
 </table>
 </form>
       <%=cm.br()%>
-      <%=cm.cmsMsg("habitats_sites_title")%>
+      <%=cm.cmsMsg("pick_sites_show_habitat_types")%>
       <%=cm.br()%>
       <%=cm.cmsMsg("biogeographic_region_is_not_valid")%>
       <%=cm.br()%>
-      <%=cm.cmsMsg("type_few_letters_from_site")%>
+      <%=cm.cmsMsg("please_type_letters_from_site_name")%>
       <%=cm.br()%>
       <%=cm.cmsMsg("enter_size_as_number")%>
       <%=cm.br()%>

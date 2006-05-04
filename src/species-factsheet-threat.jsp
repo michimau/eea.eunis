@@ -47,7 +47,7 @@
     if( nationalThreatStatus.size() > 0 )
     {
 %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_factsheet-threat_10")%></div>
+    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("national_threat_status")%></div>
 <%
     int COUNTRIES_PER_MAP = Utilities.checkedStringToInt( application.getInitParameter( "COUNTRIES_PER_MAP" ), 120 );
     // Mapping THREAT STATUS - COLOR
@@ -110,14 +110,14 @@
             <img alt="<%=cm.cms("map_image_eea")%>" src="<%=filename%>" title="<%=cm.cms("map_image_eea")%>" />
             <%=cm.cmsAlt("map_image_eea")%>
             <br />
-            <a title="<%=cm.cms("species_factsheet-threat_11_Title")%>" href="javascript:openNewPage('<%=url + "?" + parameters%>');"><%=cm.cmsText("species_factsheet-threat_11")%></a>
-            <%=cm.cmsTitle("species_factsheet-threat_11_Title")%>
+            <a title="<%=cm.cms("open_new_window")%>" href="javascript:openNewPage('<%=url + "?" + parameters%>');"><%=cm.cmsText("open_new_window")%></a>
+            <%=cm.cmsTitle("open_new_window")%>
 <%
           }
           else
           {
 %>
-            <%=cm.cmsText("species_factsheet-threat_02")%>.
+            <%=cm.cmsText("image_not_available")%>.
 <%
           }
 %>
@@ -145,29 +145,29 @@
 <%
     }
 %>
-      <table summary="<%=cm.cms("species_factsheet-threat_12_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="threat" class="sortable">
+      <table summary="<%=cm.cms("national_threat_status")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="threat" class="sortable">
         <tr>
           <th style="width : 220px;" title="<%=cm.cms("sort_results_on_this_column")%>">
             <strong>
-              <%=cm.cmsText("species_factsheet-threat_04")%>
+              <%=cm.cmsText("country")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </strong>
           </th>
           <th style="width : 120px;" title="<%=cm.cms("sort_results_on_this_column")%>">
             <strong>
-              <%=cm.cmsText("species_factsheet-threat_05")%>
+              <%=cm.cmsText("status")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </strong>
           </th>
           <th style="width : 100px;" title="<%=cm.cms("sort_results_on_this_column")%>">
             <strong>
-              <%=cm.cmsText("species_factsheet-threat_06")%>
+              <%=cm.cmsText("national_threat_code")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </strong>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>" title="<%=cm.cms("sort_results_on_this_column")%>">
             <strong>
-              <%=cm.cmsText("species_factsheet-threat_07")%>
+              <%=cm.cmsText("reference")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </strong>
           </th>
@@ -183,8 +183,8 @@
                 if(Utilities.isCountry(threat.getCountry()))
                 {
             %>
-              <a href="javascript:goToCountryStatistics('<%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>')" title="<%=cm.cms("open_statistical_data")%> <%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>"><%=Utilities.treatURLSpecialCharacters(threat.getCountry())%></a>
-              <%=cm.cmsTitle("open_statistical_data")%>
+              <a href="javascript:goToCountryStatistics('<%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>')" title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>"><%=Utilities.treatURLSpecialCharacters(threat.getCountry())%></a>
+              <%=cm.cmsTitle("open_the_statistical_data_for")%>
             <%
             } else {
             %>
@@ -218,18 +218,18 @@
     {
 %>
       <br />
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_factsheet-threat_13")%></div>
-      <table summary="<%=cm.cms("species_factsheet-threat_13_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="intlthreat" class="sortable">
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("international_threat_status")%></div>
+      <table summary="<%=cm.cms("international_threat_status")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="intlthreat" class="sortable">
         <tr>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
             <strong>
-              <%=cm.cmsText("species_factsheet-conservation_08")%>
+              <%=cm.cmsText("area")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </strong>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>" >
             <strong>
-              <%=cm.cmsText("species_factsheet-conservation_03")%>
+              <%=cm.cmsText("status")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </strong>
           </th>
@@ -241,7 +241,7 @@
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>" >
             <strong>
-              <%=cm.cmsText("species_factsheet-conservation_05")%>
+              <%=cm.cmsText("reference")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </strong>
           </th>
@@ -276,9 +276,9 @@
     }
 %>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_factsheet-threat_12_Sum")%>
+<%=cm.cmsMsg("national_threat_status")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_factsheet-threat_13_Sum")%>
+<%=cm.cmsMsg("international_threat_status")%>
 
 <br />
 <br />

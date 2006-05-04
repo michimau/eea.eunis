@@ -10,7 +10,6 @@
 %>
 <%@ page import="ro.finsiel.eunis.search.species.taxcode.*,
                  ro.finsiel.eunis.search.Utilities,
-                 ro.finsiel.eunis.jrfTables.Chm62edtTaxonomyDomain,
                  ro.finsiel.eunis.search.species.SpeciesSearchUtility,
                  ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain,
                  ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist,
@@ -34,11 +33,11 @@
     %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("habitats_taxonomic-browser_title")%>
+      <%=cm.cms("taxonomic_classification")%>
     </title>
     <%
       TaxonomicBrowser tree = new TaxonomicBrowser();
-      int level = Utilities.checkedStringToInt(request.getParameter("level"), 2);
+      int level = Utilities.checkedStringToInt(request.getParameter("generic_index_07"), 2);
       // Request parameters
       String idTaxonomy, idTaxExpanded;
       idTaxonomy=treeBeantax.getIdTaxonomy();
@@ -46,17 +45,17 @@
 
       //get maxLevel
       String SQL_DRV="";
-            String SQL_URL="";
-            String SQL_USR="";
-            String SQL_PWD="";
+      String SQL_URL="";
+      String SQL_USR="";
+      String SQL_PWD="";
 
-            SQL_DRV = application.getInitParameter("JDBC_DRV");
-            SQL_URL = application.getInitParameter("JDBC_URL");
-            SQL_USR = application.getInitParameter("JDBC_USR");
-            SQL_PWD = application.getInitParameter("JDBC_PWD");
+      SQL_DRV = application.getInitParameter("JDBC_DRV");
+      SQL_URL = application.getInitParameter("JDBC_URL");
+      SQL_USR = application.getInitParameter("JDBC_USR");
+      SQL_PWD = application.getInitParameter("JDBC_PWD");
 
-            SQLUtilities sqlc = new SQLUtilities();
-            sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+      SQLUtilities sqlc = new SQLUtilities();
+      sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
 
       int noLevels = Utilities.checkedStringToInt(sqlc.ExecuteSQL("SELECT count(DISTINCT LEVEL) FROM CHM62EDT_TAXONOMY"),0);
       noLevels--;
@@ -135,12 +134,20 @@
   <div id="content">
   <div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,taxonomic_classification_location#species-taxonomic-browser.jsp" />
+      <jsp:param name="location" value="home#index.jsp,species#species.jsp,taxonomic_classification#species-taxonomic-browser.jsp" />
       <jsp:param name="helpLink" value="species-help.jsp" />
     </jsp:include>
     <h1>
-         <%=cm.cmsText("habitats_taxonomic-browser_01")%>
+      <%=cm.cmsText("habitats_taxonomic-browser_01")%>
     </h1>
+    <noscript>
+      <br />
+      <br />
+      <span style="color: red;">
+        You do not have JavaScript enabled in your browser.
+        Please visit the alternative page: <a href="species-taxonomy.jsp"><%=cm.cmsText("habitats_taxonomic-browser_01")%></a>.
+      </span>
+    </noscript>
     <table summary="layout" width="100%" border="0">
       <tr>
         <td>
@@ -156,19 +163,19 @@
               {
           %>
                 <form name="setings" action="species-taxonomic-browser.jsp" method="post">
-                  <%=cm.cmsText("habitats_taxonomic-browser_04")%>:
+                  <%=cm.cmsText("expand_up_to")%>:
                  <label for="select1" class="noshow"><%=cm.cms("depth")%></label>
                  <select id="select1" title="<%=cm.cms("depth")%>" name="depth" onchange="MM_jumpMenu('parent',this,0)" class="inputTextField">
-                    <option value="species-taxonomic-browser.jsp" <%=(request.getParameter("level")==null)?"selected=\"selected\"":""%> >
-                      <%=cm.cms("habitats_taxonomic-browser_03")%>
+                    <option value="species-taxonomic-browser.jsp" <%=(request.getParameter("generic_index_07")==null)?"selected=\"selected\"":""%> >
+                      <%=cm.cms("please_select_a_level")%>
                     </option>
                     <%
                       // Display the levels
                       for (int ii=2;ii<=mx;ii++)
                       {
                     %>
-                      <option value="species-taxonomic-browser.jsp?level=<%=ii%>&amp;idTaxonomy=<%=idTaxonomy%>" <%=(request.getParameter("level")!=null&&request.getParameter("level").equals((new Integer(ii)).toString())) ? "selected=\"selected\"" : ""%>>
-                        <%=cm.cms("habitats_taxonomic-browser_05")%> <%=ii%>
+                      <option value="species-taxonomic-browser.jsp?level=<%=ii%>&amp;idTaxonomy=<%=idTaxonomy%>" <%=(request.getParameter("generic_index_07")!=null&&request.getParameter("generic_index_07").equals((new Integer(ii)).toString())) ? "selected=\"selected\"" : ""%>>
+                        <%=cm.cms("generic_index_07")%> <%=ii%>
                       </option>
                     <%
                       }
@@ -260,13 +267,13 @@
                   <tr>
                     <th title="<%=cm.cms("sort_results_on_this_column")%>">
                       <strong>
-                        <%=cm.cmsText("habitats_taxonomic-browser_07")%>
+                        <%=cm.cmsText("group_name")%>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </strong>
                     </th>
                     <th title="<%=cm.cms("sort_results_on_this_column")%>">
                       <strong>
-                        <%=cm.cmsText("habitats_taxonomic-browser_08")%>
+                        <%=cm.cmsText("scientific_name")%>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </strong>
                     </th>
@@ -309,11 +316,11 @@
     </table>
 
 <%=cm.br()%>  
-<%=cm.cmsMsg("habitats_taxonomic-browser_title")%>
+<%=cm.cmsMsg("taxonomic_classification")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitats_taxonomic-browser_03")%>
+<%=cm.cmsMsg("please_select_a_level")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitats_taxonomic-browser_05")%>
+<%=cm.cmsMsg("generic_index_07")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("list_species")%>
 <%=cm.br()%>

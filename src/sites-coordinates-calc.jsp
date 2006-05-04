@@ -133,17 +133,17 @@
     <form name="converter" id="converter" action="" method="post">
       <div style="width : 100%">
         <br />
-        <label for="degrees"><%=cm.cmsText("sites_coordinates_calc_degrees")%></label>
-        <input id="degrees" name="degrees" type="text" size="5" class="inputTextField" title="<%=cm.cms("sites_coordinates_calc_degrees_title")%>" />
-        <%=cm.cmsTitle("sites_coordinates_calc_degrees_title")%>
+        <label for="degrees"><%=cm.cmsText("degrees")%></label>
+        <input id="degrees" name="degrees" type="text" size="5" class="inputTextField" title="<%=cm.cms("degrees")%>" />
+        <%=cm.cmsTitle("degrees")%>
         &deg;
-        <label for="minutes"><%=cm.cmsText("sites_coordinates_calc_minutes")%></label>
-        <input id="minutes" name="minutes" type="text" size="5" class="inputTextField" title="<%=cm.cms("sites_coordinates_calc_minutes_title")%>" />
-        <%=cm.cmsTitle("sites_coordinates_calc_minutes_title")%>
+        <label for="minutes"><%=cm.cmsText("minutes")%></label>
+        <input id="minutes" name="minutes" type="text" size="5" class="inputTextField" title="<%=cm.cms("minutes")%>" />
+        <%=cm.cmsTitle("minutes")%>
         '
-        <label for="seconds"><%=cm.cmsText("sites_coordinates_calc_seconds")%></label>
-        <input id="seconds" name="seconds" type="text" size="5" class="inputTextField" title="<%=cm.cms("sites_coordinates_calc_seconds_title")%>" />
-        <%=cm.cmsTitle("sites_coordinates_calc_seconds_title")%>
+        <label for="seconds"><%=cm.cmsText("seconds")%></label>
+        <input id="seconds" name="seconds" type="text" size="5" class="inputTextField" title="<%=cm.cms("seconds")%>" />
+        <%=cm.cmsTitle("seconds")%>
         &quot;
         <br />
         <br />
@@ -153,13 +153,13 @@
         <br />
         <div style="width : 100%; text-align : right;">
         <br />
-        <input id="reset" type="reset" name="Reset" value="<%=cm.cms("sites_coordinates_calc_reset_value")%>" class="inputTextField" title="<%=cm.cms("sites_coordinates_calc_reset_title")%>" />
-        <%=cm.cmsInput("sites_coordinates_calc_reset_value")%>
-        <%=cm.cmsTitle("sites_coordinates_calc_reset_title")%>
+        <input id="reset" type="reset" name="Reset" value="<%=cm.cms("reset")%>" class="inputTextField" title="<%=cm.cms("reset")%>" />
+        <%=cm.cmsInput("reset")%>
+        <%=cm.cmsTitle("reset")%>
           &nbsp;
-        <input id="calculate" type="button" name="calculate" value="<%=cm.cms("sites_coordinates_calc_calculate_value")%>" onclick="javascript:transform(document.converter);" class="inputTextField" title="<%=cm.cms("sites_coordinates_calc_calculate_title")%>" />
+        <input id="calculate" type="button" name="calculate" value="<%=cm.cms("sites_coordinates_calc_calculate_value")%>" onclick="javascript:transform(document.converter);" class="inputTextField" title="<%=cm.cms("calculate")%>" />
         <%=cm.cmsInput("sites_coordinates_calc_calculate_value")%>
-        <%=cm.cmsTitle("sites_coordinates_calc_calculate_title")%>
+        <%=cm.cmsTitle("calculate")%>
         </div>
       </div>
     </form>

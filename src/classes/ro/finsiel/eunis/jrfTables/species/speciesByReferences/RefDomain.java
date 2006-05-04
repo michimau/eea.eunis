@@ -184,7 +184,7 @@ public class RefDomain implements Paginable {
 
             results.addElement(new SpeciesRefWrapper(new Integer(rs.getInt(1)), new Integer(rs.getInt(2)),
                 new Integer(rs.getInt(3)), rs.getString(4), rs.getString(5),
-                getTaxonomicName(rs.getString(7),rs.getString(6), rs.getString(8),"order"),
+                getTaxonomicName(rs.getString(7),rs.getString(6), rs.getString(8),"order_column"),
                 getTaxonomicName(rs.getString(7),rs.getString(6), rs.getString(8),"family")));
           }
         }

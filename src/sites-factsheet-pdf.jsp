@@ -39,7 +39,7 @@
   {
 %>
     <title>
-      <%=cm.cms("sites_factsheet-pdf_title")%>
+      <%=cm.cms("generating_pdf")%>
     </title>
     <script language="JavaScript" type="text/javascript">
       <!--
@@ -73,7 +73,7 @@
   </div>
   <script language="JavaScript" type="text/javascript">
     <!--
-    updateText('<%=cm.cms("sites_factsheet-pdf_01")%>');
+    updateText('<%=cm.cms("generating_pdf_wait")%>');
     //-->
   </script>
 <%
@@ -92,7 +92,7 @@
       report.setHeader( header );
       // IMPORTANT: THESE LINKS SHOULD BE CHANGED TO THEIR ACTUAL SERVER VALUE!!!
       Paragraph f = new Paragraph();
-      f.add( new Phrase( cm.cms( "sites_factsheet-pdf_02" ), FontFactory.getFont( FontFactory.HELVETICA, 8, Font.ITALIC, new Color( 24, 40, 136 ) ) ) );
+      f.add( new Phrase( cm.cms( "source_european_topic_centre" ), FontFactory.getFont( FontFactory.HELVETICA, 8, Font.ITALIC, new Color( 24, 40, 136 ) ) ) );
       f.add( new Phrase( "                                                                                                                                     ", FontFactory.getFont( FontFactory.HELVETICA, 9 ) ) );
       f.add( new Phrase( cm.cms( "sites_factsheet-pdf_03" ) + application.getInitParameter( "LAST_UPDATE" ), FontFactory.getFont( FontFactory.HELVETICA, 8, Font.ITALIC, new Color( 24, 40, 136 ) ) ) );
       f.add( new Phrase( "                                                                                                                                     ", FontFactory.getFont( FontFactory.HELVETICA, 9 ) ) );
@@ -130,14 +130,14 @@
    {
 %>
       showLoadingProgress( false );
-      updateText("<%=cm.cms("sites_factsheet-pdf_109")%>");
+      updateText("<%=cm.cms("error_generating_pdf")%>");
 <%
    }
     else
    {
 %>
       showLoadingProgress( false );
-      updateText("<%=cm.cms("sites_factsheet-pdf_110")%>");
+      updateText("<%=cm.cms("pdf_document_ready")%>");
 <%
    }
 %>
@@ -148,7 +148,7 @@
   if ( !error )
   {
 %>
-    <a target="_blank" href="temp/<%=filename%>" title="<%=cm.cms("download_pdf_file")%>"><%=cm.cmsText("sites_factsheet-pdf_111")%></a>
+    <a target="_blank" href="temp/<%=filename%>" title="<%=cm.cms("download_pdf_file")%>"><%=cm.cmsText("open_pdf_document")%></a>
     <%=cm.cmsTitle("download_pdf_file")%>
 <%
   }
@@ -164,7 +164,7 @@
         }
       //-->
     </script>
-    <%=cm.cmsText("sites_factsheet-pdf_112")%> <a href="javascript:feedback();"><%=cm.cmsText("feedback")%></a>.<%=cm.cmsText("sites_factsheet-pdf_113")%>
+    <%=cm.cmsText("please_let_us_know_about_error")%> <a href="javascript:feedback();"><%=cm.cmsText("feedback")%></a>.<%=cm.cmsText("thank_you")%>
 <%
   }
   }
@@ -175,27 +175,27 @@
   <br />
   <br />
     <form action="">
-      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
-      <%=cm.cmsTitle("close_window_title")%>
-      <%=cm.cmsInput("close_window_value")%>
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="inputTextField" />
+      <%=cm.cmsTitle("close_window")%>
+      <%=cm.cmsInput("close_btn")%>
     </form>
 <%
   }
 %>
   <%=cm.br()%>
-  <%=cm.cmsMsg("sites_factsheet-pdf_title")%>
+  <%=cm.cmsMsg("generating_pdf")%>
   <%=cm.br()%>
-  <%=cm.cmsMsg("sites_factsheet-pdf_01")%>
+  <%=cm.cmsMsg("generating_pdf_wait")%>
   <%=cm.br()%>
-  <%=cm.cmsMsg("sites_factsheet-pdf_02")%>
+  <%=cm.cmsMsg("source_european_topic_centre")%>
   <%=cm.br()%>
   <%=cm.cmsMsg("sites_factsheet-pdf_03")%>
   <%=cm.br()%>
   <%=cm.cmsMsg("sites_factsheet-pdf_04")%>
   <%=cm.br()%>
-  <%=cm.cmsMsg("sites_factsheet-pdf_109")%>
+  <%=cm.cmsMsg("error_generating_pdf")%>
   <%=cm.br()%>
-  <%=cm.cmsMsg("sites_factsheet-pdf_110")%>
+  <%=cm.cmsMsg("pdf_document_ready")%>
   <%=cm.br()%>
   <%=cm.cmsMsg("loading")%>
 </body>

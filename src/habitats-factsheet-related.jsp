@@ -33,18 +33,18 @@
   if(null != syntaxaw && !syntaxaw.isEmpty())
   {
 %>
-<div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitats_factsheet_72")%></div>
-<table summary="<%=cm.cms("habitat_syntaxa")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="syntaxa" class="sortable">
+<div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitat_type_syntaxa")%></div>
+<table summary="<%=cm.cms("habitat_type_syntaxa")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="syntaxa" class="sortable">
   <tr>
     <th width="25%" title="<%=cm.cms("sort_results_on_this_column")%>">
       <strong>
-        <%=cm.cmsText("habitats_factsheet_73")%>
+        <%=cm.cmsText("name")%>
         <%=cm.cmsTitle("sort_results_on_this_column")%>
       </strong>
     </th>
     <th width="6%" title="<%=cm.cms("sort_results_on_this_column")%>">
       <strong>
-        <%=cm.cmsText("habitats_factsheet_74")%>
+        <%=cm.cmsText("relation")%>
         <%=cm.cmsTitle("sort_results_on_this_column")%>
       </strong>
     </th>
@@ -56,12 +56,12 @@
     </th>
     <th width="20%" title="<%=cm.cms("sort_results_on_this_column")%>">
       <strong>
-        <%=cm.cmsText("habitats_factsheet_76")%>
+        <%=cm.cmsText("author")%>
         <%=cm.cmsTitle("sort_results_on_this_column")%>
       </strong>
     </th>
     <th width="14%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <%=cm.cmsText("habitats_factsheet_77")%>
+      <%=cm.cmsText("references")%>
       <%=cm.cmsTitle("sort_results_on_this_column")%>
     </th>
   </tr>
@@ -131,7 +131,7 @@
   %>
 </table>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitat_syntaxa")%>
+<%=cm.cmsMsg("habitat_type_syntaxa")%>
 <%=cm.br()%>
 <%
   }

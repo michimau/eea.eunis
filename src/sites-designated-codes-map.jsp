@@ -62,7 +62,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
-      <%=cm.cms("sites_designated_codes_map_page_title")%>
+      <%=cm.cms("site_by_designation_codes")%>
     </title>
   </head>
   <body style="margin : 0px; padding : 0px;" >
@@ -74,6 +74,6 @@
       <param name="FlashVars"  value="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>&amp;v_sh_sites=<%=sitesIds%>" />
       <embed src="gis/fl_eunis.swf" FLASHVARS="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>&amp;v_sh_sites=<%=sitesIds%>" quality="high" bgcolor="#FFFFFF"  width="740" height="552" name="fl_eunis" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
     </object>
-    <%=cm.cmsMsg("sites_designated_codes_map_page_title")%>
+    <%=cm.cmsMsg("site_by_designation_codes")%>
   </body>
 </html>

@@ -52,20 +52,20 @@
     <div id="alignment">
     <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,glossary_location#glossary.jsp,results_location"/>
+      <jsp:param name="location" value="home#index.jsp,glossary#glossary.jsp,results"/>
     </jsp:include>
     <table summary="layout" width="100%" border="0">
       <tr>
         <td>
           <h1>
-            <%=cm.cmsText("generic_glossary-result_01")%>
+            <%=cm.cmsText("glossary")%>
           </h1>
             <%
               String terms = cm.cms("generic_glossary-result_03");
-              String and1 = cm.cms("generic_glossary-result_04");
+              String and1 = cm.cms("and");
               String definitions = cm.cms("generic_glossary-result_05");
             %>
-            <%=cm.cmsText("generic_glossary-result_02")%>
+            <%=cm.cmsText("you_searched_for")%>
             <%=(useTerms) ? terms : ""%> <%=(useTerms && useDefs) ? " " + and1 + " " : ""%><%=(useDefs) ? " " + definitions + " " : ""%>
             <%=cm.cmsText("generic_glossary-result_06")%>
             '<strong><%=formBean.getSearchString()%></strong>'
@@ -79,7 +79,7 @@
               <table summary="<%=cm.cms("glossary_term_details")%>" style="border-collapse:collapse" width="100%" border="1" cellspacing="0" cellpadding="0">
                 <tr bgcolor="#CCCCCC">
                   <td width="10%">
-                    <%=cm.cmsText("generic_glossary-result_07")%>
+                    <%=cm.cmsText("term")%>
                   </td>
                   <td width="90%">
                     <strong><%=result.getTerm()%></strong>
@@ -89,7 +89,7 @@
                       {
                     %>
                         &nbsp;
-                        [<a title="<%=cm.cms("open_glossary_editor")%>" href="glossary-editor.jsp?term=<%=result.getTerm()%>&amp;idLanguage=<%=result.getIdLanguage()%>&amp;source=<%=result.getSource()%>"><%=cm.cmsText("generic_glossary-result_08")%></a><%=cm.cmsTitle("open_glossary_editor")%>]
+                        [<a title="<%=cm.cms("open_glossary_editor")%>" href="glossary-editor.jsp?term=<%=result.getTerm()%>&amp;idLanguage=<%=result.getIdLanguage()%>&amp;source=<%=result.getSource()%>"><%=cm.cmsText("edit")%></a><%=cm.cmsTitle("open_glossary_editor")%>]
                    <%
                       }
                    %>
@@ -106,7 +106,7 @@
                 </tr>
                 <tr bgcolor="#EEEEEE">
                   <td>
-                    <%=cm.cmsText("generic_glossary-result_09")%>
+                    <%=cm.cmsText("language")%>
                   </td>
                   <td><%=HabitatsSearchUtility.GetLanguage(result.getIdLanguage())%></td>
                 </tr>
@@ -116,7 +116,7 @@
                 %>
                   <tr bgcolor="#EEEEEE">
                     <td>
-                      <%=cm.cmsText("generic_glossary-result_10")%>
+                      <%=cm.cmsText("url")%>
                     </td>
                     <td>
                       <%
@@ -140,7 +140,7 @@
                 %>
                   <tr bgcolor="#EEEEEE">
                     <td>
-                      <%=cm.cmsText("generic_glossary-result_11")%>
+                      <%=cm.cmsText("source")%>
                     </td>
                     <td><%=result.getSource()%></td>
                   </tr>
@@ -175,7 +175,7 @@
 %>
                   <tr bgcolor="#EEEEEE">
                     <td>
-                      <%=cm.cmsText("generic_glossary-result_12")%>
+                      <%=cm.cmsText("reference")%>
                     </td>
                     <td>
 <%
@@ -202,7 +202,7 @@
                 %>
                 <tr bgcolor="#EEEEEE">
                   <td>
-                    <%=cm.cmsText("generic_glossary-result_13")%>
+                    <%=cm.cmsText("definition")%>
                   </td>
                   <td>
                     <%=useDefs ? Utilities.highlightTerm(result.getDefinition(), searchString) : result.getDefinition()%>
@@ -220,7 +220,7 @@
     <%=cm.br()%>
     <%=cm.cmsMsg("generic_glossary-result_03")%>
     <%=cm.br()%>
-    <%=cm.cmsMsg("generic_glossary-result_04")%>
+    <%=cm.cmsMsg("and")%>
     <%=cm.br()%>
     <%=cm.cmsMsg("generic_glossary-result_05")%>
     <%=cm.br()%>

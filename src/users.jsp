@@ -92,7 +92,7 @@ border: 1px solid #000000;background-color: #EEEEEE;
 <div id="alignment">
 <div id="content">
 <jsp:include page="header-dynamic.jsp">
-    <jsp:param name="location" value="home_location#index.jsp,services_location#services.jsp,user_management_location"/>
+    <jsp:param name="location" value="home#index.jsp,services#services.jsp,user_management"/>
 </jsp:include>
 <%
 int tab1 = Utilities.checkedStringToInt( request.getParameter( "tab1" ), 0 );

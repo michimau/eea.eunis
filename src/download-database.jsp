@@ -19,7 +19,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("generic_download-database_title")%>
+      <%=cm.cms("download_database")%>
     </title>
   </head>
   <body>
@@ -27,7 +27,7 @@
     <div id="alignment">
     <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,services_location#services.jsp,download_database_location"/>
+      <jsp:param name="location" value="home#index.jsp,services#services.jsp,download_database"/>
     </jsp:include>
     <h1>
       <%=cm.cmsText("generic_download-database_01")%>
@@ -36,7 +36,7 @@
     <a title="<%=cm.cms("generic_download-database_02")%>" href="downloads/eunis.zip"><%=cm.cmsText("generic_download-database_02")%></a>
     <br />
     <br />
-    <%=cm.cmsMsg("generic_download-database_title")%>
+    <%=cm.cmsMsg("download_database")%>
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="download-database.jsp" />
     </jsp:include>

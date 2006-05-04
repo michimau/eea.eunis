@@ -61,7 +61,7 @@ source[1] = <%=RefDomain.OTHER_INFO%>
   <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitats_references_location" />
+  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,pick_habitat_type_show_references" />
   <jsp:param name="helpLink" value="habitats-help.jsp" />
 </jsp:include>
 <table summary="layout" width="100%" border="0">
@@ -73,7 +73,7 @@ source[1] = <%=RefDomain.OTHER_INFO%>
 <tr>
   <td colspan="2">
     <h1>
-      <%=cm.cmsText("habitats_references_01")%>
+      <%=cm.cmsText("pick_references_show_habitat_types")%>
     </h1>
     <%=cm.cmsText("habitats_references_29")%>
     <br />
@@ -82,23 +82,23 @@ source[1] = <%=RefDomain.OTHER_INFO%>
       <tr>
         <td bgcolor="#EEEEEE">
           <strong>
-            <%=cm.cmsText("habitats_references_02")%>
+            <%=cm.cmsText("search_will_provide")%>
           </strong>
         </td>
       </tr>
       <tr>
         <td bgcolor="#EEEEEE" valign="middle">&nbsp;
           <input type="checkbox" name="showLevel" id="showLevel" value="true" checked="checked" />
-          <label for="showLevel"><%=cm.cmsText("habitats_references_03")%></label>
+          <label for="showLevel"><%=cm.cmsText("generic_index_07")%></label>
           &nbsp;
           <input type="checkbox" name="showCode" id="showCode" value="true" checked="checked" />
-          <label for="showCode"><%=cm.cmsText("habitats_references_04")%></label>
+          <label for="showCode"><%=cm.cmsText("code_column")%></label>
           &nbsp;
           <input type="checkbox" name="showScientificName" id="showScientificName" value="true" checked="checked" disabled="disabled" />
-          <label for="showScientificName"><%=cm.cmsText("habitats_references_05")%></label>
+          <label for="showScientificName"><%=cm.cmsText("scientific_name")%></label>
           &nbsp;
           <input type="checkbox" name="showVernacularName" id="showVernacularName" value="true" />
-          <label for="showVernacularName"><%=cm.cmsText("habitats_references_06")%></label>
+          <label for="showVernacularName"><%=cm.cmsText("english_name")%></label>
           &nbsp;
         </td>
       </tr>
@@ -112,23 +112,23 @@ source[1] = <%=RefDomain.OTHER_INFO%>
   <td colspan="2">
     <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" /><%=cm.cmsTitle("included_field")%>
     &nbsp;
-    <label for="author"><strong><%=cm.cmsText("habitats_references_08")%></strong></label>
+    <label for="author"><strong><%=cm.cmsText("author")%></strong></label>
   </td>
   <td width="17%">
     <label for="relationOpAuthor" class="noshow"><%=cm.cms("operator")%></label>
     <select title="<%=cm.cms("operator")%>" name="relationOpAuthor" id="relationOpAuthor" class="inputTextField">
-      <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpAuthor == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("habitats_references_09")%></option>
-      <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpAuthor == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("habitats_references_10")%></option>
-      <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpAuthor == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("habitats_references_11")%></option>
+      <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpAuthor == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("is")%></option>
+      <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpAuthor == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("contains")%></option>
+      <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpAuthor == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("starts_with")%></option>
     </select>
     <%=cm.cmsLabel("operator")%>
-    <%=cm.cmsInput("habitats_references_09")%>
-    <%=cm.cmsInput("habitats_references_10")%>
-    <%=cm.cmsInput("habitats_references_11")%>
+    <%=cm.cmsInput("is")%>
+    <%=cm.cmsInput("contains")%>
+    <%=cm.cmsInput("starts_with")%>
   </td>
   <td width="69%">
-    <input title="<%=cm.cms("habitats_references_08")%>" size="32" name="author" id="author" value="<%=author%>" class="inputTextField" />
-    <a title="<%=cm.cms("list_of_authors")%>" href="javascript:openHelper('habitats-references-choice.jsp','author',0,database,source)"><img height="18" align="middle" alt="<%=cm.cms("list_of_authors")%>" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_authors")%>
+    <input title="<%=cm.cms("author")%>" size="32" name="author" id="author" value="<%=author%>" class="inputTextField" />
+    <a title="<%=cm.cms("list_of_authors")%>" href="javascript:openHelper('habitats-references-choice.jsp','author',0,database,source)"><img height="18" style="vertical-align:middle" alt="<%=cm.cms("list_of_authors")%>" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_authors")%>
   </td>
 </tr>
 <tr>
@@ -139,11 +139,11 @@ source[1] = <%=RefDomain.OTHER_INFO%>
   // If relOpDate is between
   if (request.getParameter("between") != null && request.getParameter("between").equalsIgnoreCase("yes")) {
   %>
-    <label for="date_between"><strong><%=cm.cmsText("habitats_references_12")%></strong></label>
+    <label for="date_between"><strong><%=cm.cmsText("year")%></strong></label>
   <%
   } else {
   %>
-    <label for="date_normal"><strong><%=cm.cmsText("habitats_references_12")%></strong></label>
+    <label for="date_normal"><strong><%=cm.cmsText("year")%></strong></label>
   <%
   }
   %>
@@ -151,16 +151,16 @@ source[1] = <%=RefDomain.OTHER_INFO%>
   <td>
     <label for="relOpDate" class="noshow"><%=cm.cms("operator")%></label>
     <select title="<%=cm.cms("operator")%>" name="relOpDate" id="relOpDate" onchange="MM_jumpMenu('parent',this,0)" class="inputTextField">
-      <option value="habitats-references.jsp?between=no" <%=(request.getParameter("between") == null ? "selected=\"selected\"" : (request.getParameter("between").equalsIgnoreCase("yes") ? "" : "selected=\"selected\""))%>><%=cm.cms("habitats_references_09")%></option>
+      <option value="habitats-references.jsp?between=no" <%=(request.getParameter("between") == null ? "selected=\"selected\"" : (request.getParameter("between").equalsIgnoreCase("yes") ? "" : "selected=\"selected\""))%>><%=cm.cms("is")%></option>
       <option value="habitats-references.jsp?between=yes"
        <%if (request.getParameter("between") != null && request.getParameter("between").equalsIgnoreCase("yes")) { %>
          selected="selected"
        <% } %>
-       ><%=cm.cms("habitats_references_13")%></option>
+       ><%=cm.cms("between")%></option>
     </select>
     <%=cm.cmsLabel("operator")%>
-    <%=cm.cmsInput("habitats_references_09")%>
-    <%=cm.cmsInput("habitats_references_13")%>
+    <%=cm.cmsInput("is")%>
+    <%=cm.cmsInput("between")%>
   </td>
   <%
     // If relOpDate is between
@@ -169,20 +169,20 @@ source[1] = <%=RefDomain.OTHER_INFO%>
   <td>
     <input title="<%=cm.cms("date")%>" size="5" name="date" id="date_normal" value="<%=date%>" class="inputTextField" /><%=cm.cmsTitle("date")%>
     &nbsp;
-    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','date',1,database,source)"><img alt="<%=cm.cms("list_of_values")%>" height="18" align="middle" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
-    <%=cm.cmsText("habitats_references_14")%>
+    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','date',1,database,source)"><img alt="<%=cm.cms("list_of_values")%>" height="18" style="vertical-align:middle" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
+    <%=cm.cmsText("and")%>
     <input title="<%=cm.cms("date")%>" size="5" name="date1" id="date1" value="<%=date1%>" class="inputTextField" /><%=cm.cmsTitle("date")%>
     &nbsp;
-    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','date',2,database,source)"><img alt="<%=cm.cms("list_of_values")%>" height="18" align="middle" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
+    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','date',2,database,source)"><img alt="<%=cm.cms("list_of_values")%>" height="18" style="vertical-align:middle" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
     &nbsp;&nbsp;&nbsp;&nbsp;
   <%
   } else {
   %>
   <td>
-    <label for="date_between" class="noshow"><strong><%=cm.cms("habitats_references_12")%></strong></label>
-    <input title="<%=cm.cms("habitats_references_12")%>" size="5" name="date" id="date_between" value="<%=date%>" class="inputTextField" />
-    <%=cm.cmsLabel("habitats_references_12")%>
-    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','date',1,database,source)"><img height="18" align="middle" alt="<%=cm.cms("list_of_values")%>" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
+    <label for="date_between" class="noshow"><strong><%=cm.cms("year")%></strong></label>
+    <input title="<%=cm.cms("year")%>" size="5" name="date" id="date_between" value="<%=date%>" class="inputTextField" />
+    <%=cm.cmsLabel("year")%>
+    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','date',1,database,source)"><img height="18" style="vertical-align:middle" alt="<%=cm.cms("list_of_values")%>" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
     &nbsp;&nbsp;&nbsp;&nbsp;
   <%
     }
@@ -197,24 +197,24 @@ source[1] = <%=RefDomain.OTHER_INFO%>
   <td colspan="2">
     <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" /><%=cm.cmsTitle("included_field")%>
     &nbsp;
-    <label for="title"><strong><%=cm.cmsText("habitats_references_15")%></strong>
+    <label for="title"><strong><%=cm.cmsText("title")%></strong>
     </label>
   </td>
   <td>
     <label for="relationOpTitle" class="noshow"><%=cm.cms("operator")%></label>
     <select title="<%=cm.cms("operator")%>" name="relationOpTitle" id="relationOpTitle" class="inputTextField">
-      <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpTitle == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("habitats_references_09")%></option>
-      <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpTitle == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("habitats_references_10")%></option>
-      <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpTitle == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("habitats_references_11")%></option>
+      <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpTitle == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("is")%></option>
+      <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpTitle == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("contains")%></option>
+      <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpTitle == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("starts_with")%></option>
     </select>
     <%=cm.cmsLabel("operator")%>
-    <%=cm.cmsInput("habitats_references_09")%>
-    <%=cm.cmsInput("habitats_references_10")%>
-    <%=cm.cmsInput("habitats_references_11")%>
+    <%=cm.cmsInput("is")%>
+    <%=cm.cmsInput("contains")%>
+    <%=cm.cmsInput("starts_with")%>
   </td>
   <td>
-    <input title="<%=cm.cms("habitats_references_15")%>" size="32" name="title" id="title" value="<%=title%>" class="inputTextField" />
-    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','title',0,database,source)"><img height="18" align="middle" alt="<%=cm.cms("list_of_values")%>" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
+    <input title="<%=cm.cms("title")%>" size="32" name="title" id="title" value="<%=title%>" class="inputTextField" />
+    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','title',0,database,source)"><img height="18" style="vertical-align:middle" alt="<%=cm.cms("list_of_values")%>" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
     &nbsp;&nbsp;&nbsp;&nbsp;
   </td>
 </tr>
@@ -222,46 +222,46 @@ source[1] = <%=RefDomain.OTHER_INFO%>
   <td colspan="2">
     <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" /><%=cm.cmsTitle("included_field")%>
     &nbsp;
-    <label for="editor"><strong><%=cm.cmsText("habitats_references_16")%></strong></label>
+    <label for="editor"><strong><%=cm.cmsText("editor")%></strong></label>
   </td>
   <td>
     <label for="relationOpEditor" class="noshow"><%=cm.cms("operator")%></label>
     <select title="<%=cm.cms("operator")%>" name="relationOpEditor" id="relationOpEditor" class="inputTextField">
-      <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpEditor == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("habitats_references_09")%></option>
-      <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpEditor == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("habitats_references_10")%></option>
-      <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpEditor == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("habitats_references_11")%></option>
+      <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpEditor == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("is")%></option>
+      <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpEditor == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("contains")%></option>
+      <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpEditor == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("starts_with")%></option>
     </select>
     <%=cm.cmsLabel("operator")%>
-    <%=cm.cmsInput("habitats_references_09")%>
-    <%=cm.cmsInput("habitats_references_10")%>
-    <%=cm.cmsInput("habitats_references_11")%>
+    <%=cm.cmsInput("is")%>
+    <%=cm.cmsInput("contains")%>
+    <%=cm.cmsInput("starts_with")%>
   </td>
   <td>
-    <input title="<%=cm.cms("habitats_references_16")%>" size="32" name="editor" id="editor" value="<%=editor%>" class="inputTextField" />
-    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','editor',0,database,source)"><img height="18" align="middle" alt="<%=cm.cms("list_of_values")%>" src="images/helper/helper.gif" width="11" border="0" /><%=cm.cmsTitle("list_of_values")%></a>
+    <input title="<%=cm.cms("editor")%>" size="32" name="editor" id="editor" value="<%=editor%>" class="inputTextField" />
+    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','editor',0,database,source)"><img height="18" style="vertical-align:middle" alt="<%=cm.cms("list_of_values")%>" src="images/helper/helper.gif" width="11" border="0" /><%=cm.cmsTitle("list_of_values")%></a>
   </td>
 </tr>
 <tr>
   <td colspan="2">
     <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" /><%=cm.cmsTitle("included_field")%>
     &nbsp;
-    <label for="publisher"><strong><%=cm.cmsText("habitats_references_18")%></strong></label>
+    <label for="publisher"><strong><%=cm.cmsText("publisher")%></strong></label>
   </td>
   <td>
     <label for="relationOpPublisher" class="noshow"><%=cm.cmsLabel("operator")%></label>
     <select title="<%=cm.cms("operator")%>" name="relationOpPublisher" id="relationOpPublisher" class="inputTextField">
-      <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpPublisher == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("habitats_references_09")%></option>
-      <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpPublisher == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("habitats_references_10")%></option>
-      <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpPublisher == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("habitats_references_11")%></option>
+      <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpPublisher == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("is")%></option>
+      <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpPublisher == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("contains")%></option>
+      <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpPublisher == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("starts_with")%></option>
     </select>
     <%=cm.cmsLabel("operator")%>
-    <%=cm.cmsInput("habitats_references_09")%>
-    <%=cm.cmsInput("habitats_references_10")%>
-    <%=cm.cmsInput("habitats_references_11")%>
+    <%=cm.cmsInput("is")%>
+    <%=cm.cmsInput("contains")%>
+    <%=cm.cmsInput("starts_with")%>
   </td>
   <td>
-    <input title="<%=cm.cms("habitats_references_18")%>" size="32" name="publisher" id="publisher" value="<%=publisher%>" class="inputTextField" />
-    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','publisher',0,database,source)"><img height="18" align="middle" alt="<%=cm.cms("list_of_values")%>" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
+    <input title="<%=cm.cms("publisher")%>" size="32" name="publisher" id="publisher" value="<%=publisher%>" class="inputTextField" />
+    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','publisher',0,database,source)"><img height="18" style="vertical-align:middle" alt="<%=cm.cms("list_of_values")%>" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
   </td>
 </tr>
 </table>
@@ -269,31 +269,31 @@ source[1] = <%=RefDomain.OTHER_INFO%>
 </tr>
 <tr>
   <td bgcolor="#EEEEEE" colspan="3">
-    <%=cm.cmsText("habitats_references_19")%>:&nbsp;
+    <%=cm.cmsText("search_Database")%>:&nbsp;
     <input type="radio" id="database1" name="database" value="<%=RefDomain.SEARCH_EUNIS%>" checked="checked"
            title="<%=cm.cms("search_eunis")%>" />
     <%=cm.cmsTitle("search_eunis")%>
-    <label for="database1"><%=cm.cmsText("habitats_references_20")%></label>
+    <label for="database1"><%=cm.cmsText("eunis_habitat_types")%></label>
     &nbsp;&nbsp;
     <input type="radio" id="database2" name="database" value="<%=RefDomain.SEARCH_ANNEX_I%>"
            title="<%=cm.cms("search_annex1")%>" />
     <%=cm.cmsTitle("search_annex1")%>
-    <label for="database2"><%=cm.cmsText("habitats_references_21")%></label>
+    <label for="database2"><%=cm.cmsText("habitat_directive_annex")%></label>
     &nbsp;&nbsp;
     <input type="radio" id="database3" name="database" value="<%=RefDomain.SEARCH_BOTH%>"
            title="<%=cm.cms("search_both")%>" />
     <%=cm.cmsTitle("search_both")%>
-    <label for="database3"><%=cm.cmsText("habitats_references_22")%></label>
+    <label for="database3"><%=cm.cmsText("both")%></label>
   </td>
 </tr>
 <tr>
   <td bgcolor="#EEEEEE" colspan="3">
     <%=cm.cmsText("habitats_references_23")%>:&nbsp;
     <input id="source1" title="Search source" alt="Search source" type="radio" name="source" value="<%=RefDomain.SOURCE%>" checked="checked" />
-    <label for="source1"><%=cm.cmsText("habitats_references_24")%></label>
+    <label for="source1"><%=cm.cmsText("source")%></label>
     &nbsp;&nbsp;
     <input id="source2" title="Search other information" alt="Search other information" type="radio" name="source" value="<%=RefDomain.OTHER_INFO%>" />
-    <label for="source2"><%=cm.cmsText("habitats_references_25")%></label>
+    <label for="source2"><%=cm.cmsText("other_information")%></label>
   </td>
 </tr>
 <tr>
@@ -303,12 +303,12 @@ source[1] = <%=RefDomain.OTHER_INFO%>
 </tr>
 <tr>
   <td align="right">
-    <input title="<%=cm.cms("reset_btn")%>" alt="<%=cm.cms("reset_btn")%>" type="reset" value="<%=cm.cms("habitats_references_26")%>" name="Reset" id="Reset" class="inputTextField" />
-    <%=cm.cmsTitle("reset_btn")%>
-    <%=cm.cmsInput("habitats_references_26")%>
-    <input title="<%=cm.cms("search_btn")%>" alt="<%=cm.cms("search_btn")%>" type="submit" id="submit2" value="<%=cm.cms("habitats_references_27")%>" name="submit2" class="inputTextField" />
-    <%=cm.cmsTitle("search_btn")%>
-    <%=cm.cmsInput("habitats_references_27")%>
+    <input title="<%=cm.cms("reset")%>" alt="<%=cm.cms("reset")%>" type="reset" value="<%=cm.cms("reset")%>" name="Reset" id="Reset" class="inputTextField" />
+    <%=cm.cmsTitle("reset")%>
+    <%=cm.cmsInput("reset")%>
+    <input title="<%=cm.cms("search")%>" alt="<%=cm.cms("search")%>" type="submit" id="submit2" value="<%=cm.cms("search")%>" name="submit2" class="inputTextField" />
+    <%=cm.cmsTitle("search")%>
+    <%=cm.cmsInput("search")%>
   </td>
 </tr>
 </table>
@@ -338,8 +338,8 @@ source[1] = <%=RefDomain.OTHER_INFO%>
 <tr>
   <td>
     <script language="JavaScript" src="script/habitats-references-save-criteria.js" type="text/javascript"></script>
-    <%=cm.cmsText("habitats_references_28")%>:
-    <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-references.jsp','7','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+    <%=cm.cmsText("save_your_criteria")%>:
+    <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-references.jsp','7','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
     <%=cm.cmsTitle("save_criteria")%>
   </td>
 </tr>

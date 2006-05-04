@@ -72,7 +72,7 @@
 %>
 <title>
   <%=application.getInitParameter("PAGE_TITLE")%>
-  <%=cm.cms("habitats_species_title")%>
+  <%=cm.cms("pick_species_show_habitat_types")%>
 </title>
 </head>
 
@@ -81,7 +81,7 @@
   <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,habitats_species_location" />
+  <jsp:param name="location" value="home#index.jsp,species#species.jsp,habitats_species_location" />
   <jsp:param name="helpLink" value="species-help.jsp" />
 </jsp:include>
 <form name="eunis" method="get" onsubmit="javascript:return validateForm();" action="habitats-species-result.jsp">
@@ -95,7 +95,7 @@
         <tr>
           <td colspan="3">
             <h1>
-              <%=cm.cmsText("habitats_species_01")%>
+              <%=cm.cmsText("pick_species_show_habitat_types")%>
             </h1>
             <%=cm.cmsText("habitats_species_25")%>
             <br />
@@ -104,26 +104,26 @@
               <tr>
                 <td bgcolor="#EEEEEE">
                   <strong>
-                    <%=cm.cmsText("habitats_species_02")%>
+                    <%=cm.cmsText("search_will_provide_2")%>
                   </strong>
                 </td>
               </tr>
               <tr>
                 <td bgcolor="#EEEEEE" valign="middle">&nbsp;
                   <input type="checkbox" name="showLevel" id="showLevel" value="true" checked="checked" />
-                  <label for="showLevel"><%=cm.cmsText("habitats_species_03")%></label>
+                  <label for="showLevel"><%=cm.cmsText("generic_index_07")%></label>
                   &nbsp;
                   <input type="checkbox" name="showCode" id="showCode" value="true" checked="checked" />
-                  <label for="showCode"><%=cm.cmsText("habitats_species_04")%></label>
+                  <label for="showCode"><%=cm.cmsText("code_column")%></label>
                   &nbsp;
                   <input type="checkbox" name="showScientificName" id="showScientificName" value="true" checked="checked" disabled="disabled" />
-                  <label for="showScientificName"><%=cm.cmsText("habitats_species_05")%></label>
+                  <label for="showScientificName"><%=cm.cmsText("habitat_type_name")%></label>
                   &nbsp;
                   <input type="checkbox" name="showVernacularName" id="showVernacularName" value="true" />
-                  <label for="showVernacularName"><%=cm.cmsText("habitats_species_06")%></label>
+                  <label for="showVernacularName"><%=cm.cmsText("habitat_type_english_name")%></label>
                   &nbsp;
                   <input type="checkbox" name="showSpecies" id="showSpecies" value="true" checked="checked" disabled="disabled" />
-                  <label for="showSpecies"><%=cm.cmsText("habitats_species_07")%></label>
+                  <label for="showSpecies"><%=cm.cmsText("species_scientific_name")%></label>
                 </td>
               </tr>
             </table>
@@ -133,48 +133,48 @@
         <tr>
           <td colspan="3">
             <div>
-              <img width="11" height="12" align="middle" alt="<%=cm.cms("mandatory_field")%>" src="images/mini/field_mandatory.gif" /><%=cm.cmsTitle("mandatory_field")%>&nbsp;
+              <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("mandatory_field")%>" src="images/mini/field_mandatory.gif" /><%=cm.cmsTitle("mandatory_field")%>&nbsp;
               <label for="searchAttribute" class="noshow"><%=cm.cms("criteria")%></label>
               <select title="<%=cm.cms("criteria")%>" name="searchAttribute" id="searchAttribute" class="inputTextField">
-                <option value="<%=SpeciesSearchCriteria.SEARCH_SCIENTIFIC_NAME%>" selected="selected"><%=cm.cms("habitats_species_09")%></option>
-                <option value="<%=SpeciesSearchCriteria.SEARCH_GROUP%>"><%=cm.cms("habitats_species_10")%></option>
-                <option value="<%=SpeciesSearchCriteria.SEARCH_VERNACULAR%>"><%=cm.cms("habitats_species_11")%></option>
-                <option value="<%=SpeciesSearchCriteria.SEARCH_LEGAL_INSTRUMENTS%>"><%=cm.cms("habitats_species_12")%></option>
-                <option value="<%=SpeciesSearchCriteria.SEARCH_COUNTRY%>"><%=cm.cms("habitats_species_13")%></option>
-                <option value="<%=SpeciesSearchCriteria.SEARCH_REGION%>"><%=cm.cms("habitats_species_14")%></option>
+                <option value="<%=SpeciesSearchCriteria.SEARCH_SCIENTIFIC_NAME%>" selected="selected"><%=cm.cms("species_scientific_name")%></option>
+                <option value="<%=SpeciesSearchCriteria.SEARCH_GROUP%>"><%=cm.cms("species_group")%></option>
+                <option value="<%=SpeciesSearchCriteria.SEARCH_VERNACULAR%>"><%=cm.cms("species_vernacular_name")%></option>
+                <option value="<%=SpeciesSearchCriteria.SEARCH_LEGAL_INSTRUMENTS%>"><%=cm.cms("legal_instrument_name")%></option>
+                <option value="<%=SpeciesSearchCriteria.SEARCH_COUNTRY%>"><%=cm.cms("country_name")%></option>
+                <option value="<%=SpeciesSearchCriteria.SEARCH_REGION%>"><%=cm.cms("biogeographic_region_name")%></option>
               </select>
               <%=cm.cmsLabel("criteria")%>
-              <%=cm.cmsInput("habitats_species_09")%>
-              <%=cm.cmsInput("habitats_species_10")%>
-              <%=cm.cmsInput("habitats_species_11")%>
-              <%=cm.cmsInput("habitats_species_12")%>
-              <%=cm.cmsInput("habitats_species_13")%>
-              <%=cm.cmsInput("habitats_species_14")%>
+              <%=cm.cmsInput("species_scientific_name")%>
+              <%=cm.cmsInput("species_group")%>
+              <%=cm.cmsInput("species_vernacular_name")%>
+              <%=cm.cmsInput("legal_instrument_name")%>
+              <%=cm.cmsInput("country_name")%>
+              <%=cm.cmsInput("biogeographic_region_name")%>
               &nbsp;
               <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
               <select title="<%=cm.cms("operator")%>" name="relationOp" id="relationOp" class="inputTextField">
-                <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("habitats_species_15")%></option>
-                <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("habitats_species_16")%></option>
-                <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("habitats_species_17")%></option>
+                <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
+                <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
+                <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("starts_with")%></option>
               </select>
               <%=cm.cmsLabel("operator")%>
-              <%=cm.cmsInput("habitats_species_15")%>
-              <%=cm.cmsInput("habitats_species_16")%>
-              <%=cm.cmsInput("habitats_species_17")%>
-              <label for="scientificName" class="noshow"><%=cm.cms("habitat_name")%></label>
-              <input size="30" alt="<%=cm.cms("habitat_name")%>" title="<%=cm.cms("habitat_name")%>" id="scientificName" name="scientificName" class="inputTextField" />
-              <%=cm.cmsTitle("habitat_name")%>
-              <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-species-choice.jsp')"><img alt="<%=cm.cms("list_of_values")%>" align="middle" border="0" src="images/helper/helper.gif" width="11" height="18" /></a><%=cm.cmsTitle("list_of_values")%>
+              <%=cm.cmsInput("contains")%>
+              <%=cm.cmsInput("is")%>
+              <%=cm.cmsInput("starts_with")%>
+              <label for="scientificName" class="noshow"><%=cm.cms("filter_value")%></label>
+              <input size="30" alt="<%=cm.cms("filter_value")%>" title="<%=cm.cms("filter_value")%>" id="scientificName" name="scientificName" class="inputTextField" />
+              <%=cm.cmsTitle("filter_value")%>
+              <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-species-choice.jsp')"><img alt="<%=cm.cms("list_of_values")%>" style="vertical-align:middle" border="0" src="images/helper/helper.gif" width="11" height="18" /></a><%=cm.cmsTitle("list_of_values")%>
               <br />
             </div>
           </td>
         </tr>
         <tr>
           <td bgcolor="#EEEEEE" colspan="3">
-            <%=cm.cmsText("habitats_species_18")%>:&nbsp;
+            <%=cm.cmsText("select_database")%>:&nbsp;
             <input id="database1" alt="<%=cm.cms("search_eunis")%>" title="<%=cm.cms("search_eunis")%>" type="radio" name="database" value="<%=NamesDomain.SEARCH_EUNIS%>" checked="checked" />
             <%=cm.cmsTitle("search_eunis")%>
-            <label for="database1"><%=cm.cmsText("habitats_species_19")%></label>
+            <label for="database1"><%=cm.cmsText("eunis_habitat_type")%></label>
             &nbsp;&nbsp;
             <input id="database2" alt="<%=cm.cms("search_annex1")%>" title="<%=cm.cms("search_annex1")%>" type="radio" name="database" value="<%=NamesDomain.SEARCH_ANNEX_I%>" />
             <%=cm.cmsTitle("search_annex1")%>
@@ -182,17 +182,17 @@
             &nbsp;&nbsp;
             <input id="database3" alt="<%=cm.cms("search_both")%>" title="<%=cm.cms("search_both")%>" type="radio" name="database" value="<%=NamesDomain.SEARCH_BOTH%>" />
             <%=cm.cmsTitle("search_both")%>
-            <label for="database3"><%=cm.cmsText("habitats_species_21")%></label>
+            <label for="database3"><%=cm.cmsText("both")%></label>
           </td>
         </tr>
         <tr>
           <td width="40%" align="right">
-            <input title="<%=cm.cms("reset_btn")%>" type="reset" value="<%=cm.cms("habitats_species_22")%>" name="Reset" id="Reset" class="inputTextField" />
-            <%=cm.cmsTitle("reset_btn")%>
-            <%=cm.cmsInput("habitats_species_22")%>
-            <input title="<%=cm.cms("search_btn")%>" type="submit" value="<%=cm.cms("habitats_species_23")%>" name="submit2" id="submit2" class="inputTextField" />
-            <%=cm.cmsTitle("search_btn")%>
-            <%=cm.cmsInput("habitats_species_23")%>
+            <input title="<%=cm.cms("reset")%>" type="reset" value="<%=cm.cms("reset")%>" name="Reset" id="Reset" class="inputTextField" />
+            <%=cm.cmsTitle("reset")%>
+            <%=cm.cmsInput("reset")%>
+            <input title="<%=cm.cms("search")%>" type="submit" value="<%=cm.cms("search")%>" name="submit2" id="submit2" class="inputTextField" />
+            <%=cm.cmsTitle("search")%>
+            <%=cm.cmsInput("search")%>
           </td>
         </tr>
     </table>
@@ -217,8 +217,8 @@
     </script>
 <br />
     <script language="JavaScript" src="script/habitats-species-save-criteria.js" type="text/javascript"></script>
-    <%=cm.cmsText("habitats_species_24")%>:
-    <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-species.jsp','2','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+    <%=cm.cmsText("save_your_criteria")%>:
+    <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-species.jsp','2','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
     <%=cm.cmsTitle("save_criteria")%>
 <%
   // Set Vector for URL string
@@ -239,7 +239,7 @@
     </jsp:include>
 <%}%>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitats_species_title")%>
+<%=cm.cmsMsg("pick_species_show_habitat_types")%>
 <%=cm.br()%>
 <jsp:include page="footer.jsp">
   <jsp:param name="page_name" value="habitats-species.jsp" />

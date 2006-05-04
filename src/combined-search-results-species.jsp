@@ -71,7 +71,7 @@
 <div id="alignment">
 <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,combined_search_location#combined-search.jsp,results_location" />
+  <jsp:param name="location" value="home#index.jsp,combined_search#combined-search.jsp,results" />
 </jsp:include>
 <table summary="layout" width="100%" border=0 cellspacing="0" cellpadding="0">
 <tr>
@@ -88,7 +88,7 @@
     <%=SessionManager.getCombinednatureobject1()%>
     <%=cm.cmsText("generic_combined-search-results-species_03")%>
     <%=SessionManager.getCombinedexplainedcriteria1()%>
-    <%=cm.cmsText("generic_combined-search-results-species_04")%>
+    <%=cm.cmsText("generic_combined-search-results-habitats_04")%>
   </td>
 </tr>
 <tr>
@@ -104,7 +104,7 @@
     <%=SessionManager.getCombinednatureobject2()%>
     <%=cm.cmsText("generic_combined-search-results-species_03")%>
     <%=SessionManager.getCombinedexplainedcriteria2()%>
-    <%=cm.cmsText("generic_combined-search-results-species_04")%>
+    <%=cm.cmsText("generic_combined-search-results-habitats_04")%>
   </td>
 </tr>
 <tr>
@@ -117,7 +117,7 @@
 %>
 <tr>
   <td bgcolor="#FFFFFF">
-    <%=cm.cmsText("generic_combined-search-results-species_05")%>
+    <%=cm.cmsText("source_data_sets")%>
     <%=SessionManager.getSourcedb()%>
   </td>
 </tr>
@@ -133,7 +133,7 @@
     <%=SessionManager.getCombinednatureobject3()%>
     <%=cm.cmsText("generic_combined-search-results-species_03")%>
     <%=SessionManager.getCombinedexplainedcriteria3()%>
-    <%=cm.cmsText("generic_combined-search-results-species_04")%>
+    <%=cm.cmsText("generic_combined-search-results-habitats_04")%>
   </td>
 </tr>
 <tr>
@@ -146,7 +146,7 @@
 %>
 <tr>
   <td bgcolor="#FFFFFF">
-    <%=cm.cmsText("generic_combined-search-results-species_05")%>
+    <%=cm.cmsText("source_data_sets")%>
     <%=SessionManager.getSourcedb()%>
   </td>
 </tr>
@@ -159,7 +159,7 @@
 %>
 <tr>
   <td bgcolor="#FFFFFF">
-    <%=cm.cmsText("generic_combined-search-results-species_06")%>
+    <%=cm.cmsText("combination_type")%>
     <%=SessionManager.getCombinedcombinationtype()%>
   </td>
 </tr>
@@ -169,9 +169,9 @@
 %>
 <tr>
   <td bgcolor="#FFFFFF">
-    <%=cm.cmsText("generic_combined-search-results-species_06")%>
+    <%=cm.cmsText("combination_type")%>
     <%=SessionManager.getCombinednatureobject1()%>
-    <%=cm.cmsText("generic_combined-search-results-species_07")%>
+    <%=cm.cmsText("related_to")%>
     <%=SessionManager.getCombinednatureobject2()%>
   </td>
 </tr>
@@ -181,9 +181,9 @@
 %>
 <tr>
   <td bgcolor="#FFFFFF">
-    <%=cm.cmsText("generic_combined-search-results-species_06")%>
+    <%=cm.cmsText("combination_type")%>
     <%=SessionManager.getCombinednatureobject1()%>
-    <%=cm.cmsText("generic_combined-search-results-species_07")%>
+    <%=cm.cmsText("related_to")%>
     <%=SessionManager.getCombinednatureobject3()%>
   </td>
 </tr>
@@ -193,7 +193,7 @@
 %>
 </table>
 <br />
-<%=cm.cmsText("generic_combined-search-results-species_08")%>
+<%=cm.cmsText("results_found_1")%>
 <strong><%=resultsCount%></strong>
 <br />
 <%// Prepare parameters for pagesize.jsp
@@ -255,7 +255,7 @@
     if(showGroup) {
   %>
   <th class="resultHeader">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("generic_combined-search-results-species_09")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></a>
     <%=cm.cmsMsg("sort_results_on_this_column")%>
   </th>
   <%
@@ -265,7 +265,7 @@
     if(showOrder) {
   %>
   <th class="resultHeader">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(sortOrder, (null == sortOrder) ? true : false)%>"><%=Utilities.getSortImageTag(sortOrder)%><%=cm.cmsText("generic_combined-search-results-species_10")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(sortOrder, (null == sortOrder) ? true : false)%>"><%=Utilities.getSortImageTag(sortOrder)%><%=cm.cmsText("order_column")%></a>
     <%=cm.cmsMsg("sort_results_on_this_column")%>
   </th>
   <%
@@ -275,7 +275,7 @@
     if(showFamily) {
   %>
   <th class="resultHeader">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(sortFamily, (null == sortFamily) ? true : false)%>"><%=Utilities.getSortImageTag(sortFamily)%><%=cm.cmsText("generic_combined-search-results-species_11")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(sortFamily, (null == sortFamily) ? true : false)%>"><%=Utilities.getSortImageTag(sortFamily)%><%=cm.cmsText("family")%></a>
     <%=cm.cmsMsg("sort_results_on_this_column")%>
   </th>
   <%
@@ -285,7 +285,7 @@
     if(showScientificName) {
   %>
   <th class="resultHeader">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("generic_combined-search-results-species_12")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("scientific_name")%></a>
     <%=cm.cmsMsg("sort_results_on_this_column")%>
   </th>
   <%
@@ -296,7 +296,7 @@
   %>
   <th class="resultHeader">
     <%=Utilities.getSortImageTag(sortSciName)%>
-    <%=cm.cmsText("generic_combined-search-results-species_13")%>
+    <%=cm.cmsText("vernacular_names")%>
   </th>
   <%
     }
@@ -305,7 +305,7 @@
     if(showThreat || showDistribution || showReferences) {
   %>
   <th class="resultHeader" style="text-align : center;">
-    <%=cm.cmsText("generic_combined-search-results-species_14")%>
+    <%=cm.cmsText("other_info")%>
   </th>
   <%
     }
@@ -389,7 +389,7 @@
     if(showGroup) {
   %>
   <th class="resultHeader">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("generic_combined-search-results-species_09")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></a>
     <%=cm.cmsMsg("sort_results_on_this_column")%>
   </th>
   <%
@@ -399,7 +399,7 @@
     if(showOrder) {
   %>
   <th class="resultHeader">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(sortOrder, (null == sortOrder) ? true : false)%>"><%=Utilities.getSortImageTag(sortOrder)%><%=cm.cmsText("generic_combined-search-results-species_10")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(sortOrder, (null == sortOrder) ? true : false)%>"><%=Utilities.getSortImageTag(sortOrder)%><%=cm.cmsText("order_column")%></a>
     <%=cm.cmsMsg("sort_results_on_this_column")%>
   </th>
   <%
@@ -409,7 +409,7 @@
     if(showFamily) {
   %>
   <th class="resultHeader">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(sortFamily, (null == sortFamily) ? true : false)%>"><%=Utilities.getSortImageTag(sortFamily)%><%=cm.cmsText("generic_combined-search-results-species_11")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(sortFamily, (null == sortFamily) ? true : false)%>"><%=Utilities.getSortImageTag(sortFamily)%><%=cm.cmsText("family")%></a>
     <%=cm.cmsMsg("sort_results_on_this_column")%>
   </th>
   <%
@@ -419,7 +419,7 @@
     if(showScientificName) {
   %>
   <th class="resultHeader">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("generic_combined-search-results-species_12")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("scientific_name")%></a>
     <%=cm.cmsMsg("sort_results_on_this_column")%>
   </th>
   <%
@@ -430,7 +430,7 @@
   %>
   <th class="resultHeader">
     <%=Utilities.getSortImageTag(sortSciName)%>
-    <%=cm.cmsText("generic_combined-search-results-species_13")%>
+    <%=cm.cmsText("vernacular_names")%>
   </th>
   <%
     }
@@ -439,7 +439,7 @@
     if(showThreat || showDistribution || showReferences) {
   %>
   <th class="resultHeader" style="text-align : center;">
-    <%=cm.cmsText("generic_combined-search-results-species_14")%>
+    <%=cm.cmsText("other_info")%>
   </th>
   <%
     }
@@ -459,7 +459,7 @@
 </table>
   <%=cm.cmsMsg("generic_combined-search-results-species_title")%>
   <%=cm.br()%>
-  <%=cm.cmsMsg("summary_search_results")%>
+  <%=cm.cmsMsg("search_results")%>
   <%=cm.br()%>
   <%=cm.cmsMsg("vernacular_names")%>
 <jsp:include page="footer.jsp">

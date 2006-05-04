@@ -25,7 +25,7 @@
     WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
-    <%=cm.cms("habitats_code-choice_title")%>
+    <%=cm.cms("list_of_values")%>
   </title>
   <script language="JavaScript" type="text/javascript">
   <!--
@@ -68,7 +68,7 @@
   if(results.isEmpty()) {
 %>
 <strong>
-  <%=cm.cmsText("habitats_code-choice_01")%>
+  <%=cm.cmsText("no_results_found_1")%>
 </strong>
 <br />
 <%
@@ -85,10 +85,10 @@
 %>
 <tr>
   <th>
-    <%=cm.cmsText("habitats_code-choice_02")%>
+    <%=cm.cmsText("eunis_habitat_type_code")%>
   </th>
   <th>
-    <%=cm.cmsText("habitats_code-choice_03")%>
+    <%=cm.cmsText("code_in_other_classifications")%>
   </th>
   <th>
     <%=cm.cms("habitat_type_name")%>
@@ -103,7 +103,7 @@
     <%=cm.cmsText("habitats_code-choice_04")%>
   </th>
   <th>
-    <%=cm.cmsText("habitats_code-choice_05")%>
+    <%=cm.cmsText("code_in_other_classifications")%>
   </th>
   <th>
     <%=cm.cms("habitat_type_name")%>
@@ -115,13 +115,13 @@
 %>
 <tr>
   <th>
-    <%=cm.cmsText("habitats_code-choice_02")%>
+    <%=cm.cmsText("eunis_habitat_type_code")%>
   </th>
   <th>
     <%=cm.cmsText("habitats_code-choice_04")%>
   </th>
   <th>
-    <%=cm.cmsText("habitats_code-choice_05")%>
+    <%=cm.cmsText("code_in_other_classifications")%>
   </th>
   <th>
     <%=cm.cms("habitat_type_name")%>
@@ -134,7 +134,7 @@
 %>
 <tr>
   <th>
-    <%=cm.cmsText("habitats_code-choice_02")%>
+    <%=cm.cmsText("eunis_habitat_type_code")%>
   </th>
   <th>
     <%=cm.cms("habitat_type_name")%>
@@ -158,7 +158,7 @@
 %>
 <tr>
   <th>
-    <%=cm.cmsText("habitats_code-choice_02")%>
+    <%=cm.cmsText("eunis_habitat_type_code")%>
   </th>
   <th>
     <%=cm.cmsText("habitats_code-choice_04")%>
@@ -302,10 +302,10 @@
 %>
 <br />
 <form action="">
-  <input title="<%=cm.cms("close_window")%>" type="button" name="button" id="button" value="<%=cm.cms("habitats_code-choice_06")%>" onclick="javascript:window.close()" class="inputTextField" />
-  <%=cm.cmsInput("habitats_code-choice_06")%>
+  <input title="<%=cm.cms("close_window")%>" type="button" name="button" id="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" class="inputTextField" />
+  <%=cm.cmsInput("close_btn")%>
 </form>
-<%=cm.cmsMsg("habitats_code-choice_title")%>
+<%=cm.cmsMsg("list_of_values")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("only_first_100_values")%>
 <%=cm.br()%>

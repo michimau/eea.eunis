@@ -73,7 +73,7 @@
     String PdfUrl = "javascript:openLink('species-factsheet-pdf.jsp?idSpecies="+factsheet.getIdSpecies()+"&amp;idSpeciesLink="+factsheet.getIdSpeciesLink()+"')";
 %>
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,factsheet_location" />
+      <jsp:param name="location" value="home#index.jsp,species#species.jsp,factsheet" />
       <jsp:param name="printLink" value="<%=PdfUrl%>" />
     </jsp:include>
     <img alt="<%=cm.cms("loading_data")%>" id="loading" src="images/loading.gif" />
@@ -87,14 +87,14 @@
       </div>
       <div id="title2">
         <span style="padding-left : 5px; width : 150px;">
-            <%=cm.cmsText("species_factsheet_sciName")%>:&nbsp;
+            <%=cm.cmsText("scientific_name")%>:&nbsp;
         </span>
         <span style="width : 590px;">
          <%=Utilities.treatURLSpecialCharacters(scientificName)%>
         </span>
         <br />
         <span style="padding-left : 5px; width : 150px;">
-            <%=cm.cmsText("species_factsheet_author")%>:&nbsp;
+            <%=cm.cmsText("author")%>:&nbsp;
         </span>
         <span style="width : 590px;">
           <strong>
@@ -259,7 +259,7 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,factsheet_location" />
+        <jsp:param name="location" value="home#index.jsp,species#species.jsp,factsheet" />
       </jsp:include>
       <br />
       <strong>

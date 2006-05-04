@@ -73,7 +73,7 @@ function openHelper(URL)
   <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitats_code_location" />
+  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,code_column" />
   <jsp:param name="helpLink" value="habitats-help.jsp" />
 </jsp:include>
 <form name="eunis" method="get" onsubmit="javascript: return validateForm();" action="habitats-code-result.jsp">
@@ -89,7 +89,7 @@ function openHelper(URL)
   <tr>
     <td>
       <h1>
-        <%=cm.cmsText("habitats_code_01")%>
+        <%=cm.cmsText("code_classifications")%>
       </h1>
       <%=cm.cmsText("habitats_code_20")%>
       <br />
@@ -98,20 +98,20 @@ function openHelper(URL)
         <tr bgcolor="#EEEEEE">
           <td>
             <strong>
-              <%=cm.cmsText("habitats_code_03")%>
+              <%=cm.cmsText("search_will_provide_2")%>
             </strong>
           </td>
         </tr>
         <tr>
           <td style="white-space:nowrap">
             <input type="checkbox" id="showLevel" name="showLevel" value="true" checked="checked" />
-            <label for="showLevel"><%=cm.cmsText("habitats_code_04")%></label>
+            <label for="showLevel"><%=cm.cmsText("generic_index_07")%></label>
             &nbsp;
             <input type="checkbox" id="showCode" name="showCode" value="true" checked="checked" disabled="disabled" />
-            <label for="showCode"><%=cm.cmsText("habitats_code_05")%></label>
+            <label for="showCode"><%=cm.cmsText("code_column")%></label>
             &nbsp;
             <input type="checkbox" id="showScientificName" name="showScientificName" value="true" checked="checked" disabled="disabled" />
-            <label for="showScientificName"><%=cm.cmsText("habitats_code_07")%></label>
+            <label for="showScientificName"><%=cm.cmsText("scientific_name")%></label>
             &nbsp;
             <input type="checkbox" id="showOtherCodes" name="showOtherCodes" value="true" checked="checked" />
             <label for="showOtherCodes"><%=cm.cmsText("habitats_code_06")%></label>
@@ -160,21 +160,21 @@ function openHelper(URL)
       <%=cm.cmsInput("empty")%>
       <%=cm.cmsInput("current_classification")%>
       <label for="searchString">
-      <strong><%=cm.cmsText("habitats_code_09")%></strong></label>
+      <strong><%=cm.cmsText("code_column")%></strong></label>
       <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
       <select title="Operator" name="relationOp" id="relationOp" class="inputTextField">
-        <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("habitats_code_10")%></option>
-        <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("habitats_code_11")%></option>
-        <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("habitats_code_12")%></option>
+        <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
+        <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
+        <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("starts_with")%></option>
       </select>
       <%=cm.cmsLabel("operator")%>
-      <%=cm.cmsInput("habitats_code_10")%>
-      <%=cm.cmsInput("habitats_code_11")%>
-      <%=cm.cmsInput("habitats_code_12")%>
-      <label for="searchString" class="noshow"><%=cm.cms("search_value")%></label>
-      <input title="<%=cm.cms("search_value")%>" size="20" name="searchString" id="searchString" value="" class="inputTextField" />
-      <%=cm.cmsLabel("search_value")%>
-      <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-code-choice.jsp')"><img alt="<%=cm.cms("list_of_values")%>" border="0" src="images/helper/helper.gif" width="11" height="18" align="middle" /></a>
+      <%=cm.cmsInput("is")%>
+      <%=cm.cmsInput("contains")%>
+      <%=cm.cmsInput("starts_with")%>
+      <label for="searchString" class="noshow"><%=cm.cms("filter_value")%></label>
+      <input title="<%=cm.cms("filter_value")%>" size="20" name="searchString" id="searchString" value="" class="inputTextField" />
+      <%=cm.cmsLabel("filter_value")%>
+      <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-code-choice.jsp')"><img alt="<%=cm.cms("list_of_values")%>" border="0" src="images/helper/helper.gif" width="11" height="18" style="vertical-align:middle" /></a>
       <%=cm.cmsTitle("list_of_values")%>
     </td>
   </tr>
@@ -184,25 +184,25 @@ function openHelper(URL)
       <%=cm.cmsText("habitats_code_13")%>:&nbsp;
       <label for="database" class="noshow"><%=cm.cms("database")%></label>
       <select name="database" id="database" class="inputTextField">
-        <option value="<%=CodeDomain.SEARCH_EUNIS%>"><%=cm.cms("habitats_code_14")%></option>
-        <option value="<%=CodeDomain.SEARCH_ANNEX%>"><%=cm.cms("habitats_code_15")%></option>
-        <option value="<%=CodeDomain.SEARCH_BOTH%>"><%=cm.cms("habitats_code_16")%></option>
+        <option value="<%=CodeDomain.SEARCH_EUNIS%>"><%=cm.cms("eunis_habitat_types")%></option>
+        <option value="<%=CodeDomain.SEARCH_ANNEX%>"><%=cm.cms("habitat_directive_annex_1")%></option>
+        <option value="<%=CodeDomain.SEARCH_BOTH%>"><%=cm.cms("both")%></option>
       </select>
       <%=cm.cmsLabel("database")%>
-      <%=cm.cmsInput("habitats_code_14")%>
-      <%=cm.cmsInput("habitats_code_15")%>
-      <%=cm.cmsInput("habitats_code_16")%>
+      <%=cm.cmsInput("eunis_habitat_types")%>
+      <%=cm.cmsInput("habitat_directive_annex_1")%>
+      <%=cm.cmsInput("both")%>
     </td>
   </tr>
   <tr><td>&nbsp;</td></tr>
   <tr>
     <td align="right">
-      <input title="<%=cm.cms("reset_btn")%>" alt="<%=cm.cms("reset_btn")%>" type="reset" value="<%=cm.cms("habitats_code_17")%>" name="Reset" id="Reset" class="inputTextField" />
-      <%=cm.cmsTitle("reset_btn")%>
-      <%=cm.cmsInput("habitats_code_17")%>
-      <input title="<%=cm.cms("search_btn")%>" alt="<%=cm.cms("search_btn")%>" type="submit" value="<%=cm.cms("habitats_code_18")%>" name="submit2" id="submit2" class="inputTextField" />
-      <%=cm.cmsTitle("search_btn")%>
-      <%=cm.cmsInput("habitats_code_18")%>
+      <input title="<%=cm.cms("reset")%>" alt="<%=cm.cms("reset")%>" type="reset" value="<%=cm.cms("reset")%>" name="Reset" id="Reset" class="inputTextField" />
+      <%=cm.cmsTitle("reset")%>
+      <%=cm.cmsInput("reset")%>
+      <input title="<%=cm.cms("search")%>" alt="<%=cm.cms("search")%>" type="submit" value="<%=cm.cms("search")%>" name="submit2" id="submit2" class="inputTextField" />
+      <%=cm.cmsTitle("search")%>
+      <%=cm.cmsInput("search")%>
     </td>
   </tr>
 </table>
@@ -228,8 +228,8 @@ function openHelper(URL)
     //-->
     </script>
     <script language="JavaScript" src="script/habitats-code-save-criteria.js" type="text/javascript"></script>
-    <%=cm.cmsText("habitats_code_19")%>:
-    <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-code.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save_criteria")%>" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+    <%=cm.cmsText("save_your_criteria")%>:
+    <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-code.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save_criteria")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
     <%=cm.cmsTitle("save_criteria")%>
 <%
   // Set Vector for URL string

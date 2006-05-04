@@ -53,7 +53,7 @@
   <div id="content">
   <div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,digir_location"/>
+  <jsp:param name="location" value="home#index.jsp,digir_location"/>
 </jsp:include>
 <img alt="<%=cm.cms("loading_data")%>" id="loading" src="images/loading.gif" />
 <%

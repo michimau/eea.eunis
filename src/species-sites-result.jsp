@@ -87,13 +87,13 @@
 <div id="alignment">
 <div id="content">
   <jsp:include page="header-dynamic.jsp">
-    <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,pick_sites_show_species_location#species-sites.jsp,results_location" />
+    <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,pick_sites_show_species_location#species-sites.jsp,results" />
     <jsp:param name="helpLink" value="sites-help.jsp" />
     <jsp:param name="downloadLink" value="<%=tsvLink%>" />
   </jsp:include>
 <%--    <jsp:param name="printLink" value="<%=pdfLink%>"/>--%>
   <h1>
-   <%=cm.cmsText("species_sites-result_01")%>
+   <%=cm.cmsText("pick_sites_show_species")%>
   </h1>
   <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
@@ -123,7 +123,7 @@
          return;
      }
        %>
-          <%=cm.cmsText("species_sites-result_03")%>
+          <%=cm.cmsText("results_found_1")%>
           <strong>
              <%=resultsCount%>
           </strong>
@@ -151,7 +151,7 @@
         <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td style="background-color:#EEEEEE">
-                <%=cm.cmsText("species_sites-result_04")%>
+                <%=cm.cmsText("refine_your_search")%>
             </td>
           </tr>
           <tr>
@@ -173,13 +173,13 @@
                   {
               %>
                     <option value="<%=SitesSearchCriteria.CRITERIA_GROUP%>">
-                        <%=cm.cms("species_sites-result_05")%>
+                        <%=cm.cms("group")%>
                     </option>
                   <%
                       }
                   %>
                   <option value="<%=SitesSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected">
-                      <%=cm.cms("species_sites-result_08")%>
+                      <%=cm.cms("species_scientific_name")%>
                   </option>
                 </select>
                 <%=cm.cmsLabel("criteria")%>
@@ -187,24 +187,24 @@
                 <label for="select2" class="noshow"><%=cm.cms("operator")%></label>
                 <select id="select2" title="<%=cm.cms("operator")%>" name="oper" class="inputTextField">
                   <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                      <%=cm.cms("species_sites-result_09")%>
+                      <%=cm.cms("is")%>
                   </option>
                   <option value="<%=Utilities.OPERATOR_STARTS%>">
-                      <%=cm.cms("species_sites-result_10")%>
+                      <%=cm.cms("starts_with")%>
                   </option>
                   <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                      <%=cm.cms("species_sites-result_11")%>
+                      <%=cm.cms("contains")%>
                   </option>
                 </select>
                 <%=cm.cmsLabel("operator")%>
                 <%=cm.cmsTitle("operator")%>
-                <label for="criteriaSearch" class="noshow"><%=cm.cms("criteria_value")%></label>
-                <input id="criteriaSearch" title="<%=cm.cms("criteria_value")%>" alt="<%=cm.cms("criteria_value")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
-                <%=cm.cmsLabel("criteria_value")%>
-                <%=cm.cmsTitle("criteria_value")%>
-                <input id="refine" class="inputTextField" title="<%=cm.cms("search")%>" type="submit" name="Submit" value="<%=cm.cms("search_btn")%>" />
+                <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
+                <input id="criteriaSearch" title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
+                <%=cm.cmsLabel("filter_value")%>
+                <%=cm.cmsTitle("filter_value")%>
+                <input id="refine" class="inputTextField" title="<%=cm.cms("search")%>" type="submit" name="Submit" value="<%=cm.cms("search")%>" />
                 <%=cm.cmsTitle("search")%>
-                <%=cm.cmsInput("search_btn")%>
+                <%=cm.cmsInput("search")%>
               </form>
             </td>
           </tr>
@@ -218,7 +218,7 @@
           %>
             <tr>
                 <td style="background-color:#EEEEEE">
-                    <%=cm.cmsText("species_sites-result_13")%>:
+                    <%=cm.cmsText("applied_filters_to_the_results")%>:
                 </td>
             </tr>
             <%
@@ -287,7 +287,7 @@
         %>
          <tr>
            <td>
-            <a title="<%=cm.cms("show_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("species_sites-result_14")%></a>
+            <a title="<%=cm.cms("show_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("display_vernacular_names")%></a>
             <%=cm.cmsTitle("show_vernacular_list")%>
            </td>
          </tr>
@@ -300,7 +300,7 @@
             {
 %>
               <th style="text-align:left;background-color:<%=SessionManager.getThemeManager().getDarkColor()%>">
-                <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SitesSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("species_sites-result_05")%></span></a>
+                <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SitesSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></span></a>
                 <%=cm.cmsTitle("sort_results_on_this_column")%>
               </th>
 <%
@@ -309,7 +309,7 @@
             {
 %>
               <th style="text-align:left" class="resultHeader">
-                <%=cm.cmsText("species_sites-result_06")%>
+                <%=cm.cmsText("order_column")%>
               </th>
 <%
             }
@@ -317,13 +317,13 @@
             {
 %>
               <th style="text-align:left" class="resultHeader">
-                <%=cm.cmsText("species_sites-result_07")%>
+                <%=cm.cmsText("family")%>
               </th>
 <%
             }
 %>
           <th style="text-align:left" class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SitesSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("species_sites-result_08")%></span></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SitesSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("species_scientific_name")%></span></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <%
@@ -334,9 +334,9 @@
 %>
                 <th style="text-align:center;vertical-align:top;background-color:<%=SessionManager.getThemeManager().getDarkColor()%>">
                   <span style="color:#FFFFFF">
-                    <%=cm.cmsText("species_sites-result_14")%>
+                    <%=cm.cmsText("display_vernacular_names")%>
                     &nbsp;
-                    [<a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><span style="color:#FFFFFF"><%=cm.cmsText("species_sites-result_15")%></span></a><%=cm.cmsTitle("hide_vernacular_list")%>]
+                    [<a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><span style="color:#FFFFFF"><%=cm.cmsText("hide")%></span></a><%=cm.cmsTitle("hide_vernacular_list")%>]
                   </span>
                 </th>
 <%
@@ -494,7 +494,7 @@
             {
 %>
               <th style="text-align:left;background-color:<%=SessionManager.getThemeManager().getDarkColor()%>">
-                <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SitesSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("species_sites-result_05")%></span></a>
+                <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SitesSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></span></a>
                 <%=cm.cmsTitle("sort_results_on_this_column")%>
               </th>
 <%
@@ -503,7 +503,7 @@
             {
 %>
               <th style="text-align:left" class="resultHeader">
-                <%=cm.cmsText("species_sites-result_06")%>
+                <%=cm.cmsText("order_column")%>
               </th>
 <%
             }
@@ -511,13 +511,13 @@
             {
 %>
               <th style="text-align:left" class="resultHeader">
-                <%=cm.cmsText("species_sites-result_07")%>
+                <%=cm.cmsText("family")%>
               </th>
 <%
             }
 %>
           <th style="text-align:left" class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SitesSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("species_sites-result_08")%></span></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SitesSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><span style="color:#FFFFFF"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("species_scientific_name")%></span></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <%
@@ -528,9 +528,9 @@
 %>
                 <th style="text-align:center;vertical-align:top;background-color:<%=SessionManager.getThemeManager().getDarkColor()%>">
                   <span style="color:#FFFFFF">
-                    <%=cm.cmsText("species_sites-result_14")%>
+                    <%=cm.cmsText("display_vernacular_names")%>
                     &nbsp;
-                    [<a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><span style="color:#FFFFFF"><%=cm.cmsText("species_sites-result_15")%></span></a><%=cm.cmsTitle("hide_vernacular_list")%>]
+                    [<a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><span style="color:#FFFFFF"><%=cm.cmsText("hide")%></span></a><%=cm.cmsTitle("hide_vernacular_list")%>]
                   </span>
                 </th>
 <%
@@ -567,15 +567,15 @@
 <%=cm.br()%>
 <%=cm.cmsMsg("species_sites-result_title")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_sites-result_05")%>
+<%=cm.cmsMsg("group")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_sites-result_08")%>
+<%=cm.cmsMsg("species_scientific_name")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_sites-result_09")%>
+<%=cm.cmsMsg("is")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_sites-result_10")%>
+<%=cm.cmsMsg("starts_with")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_sites-result_11")%>
+<%=cm.cmsMsg("contains")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("search")%>
 <%=cm.br()%>

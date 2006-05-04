@@ -69,7 +69,7 @@
 <div id="alignment">
 <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,combined_search_location#combined-search.jsp,results_location"/>
+  <jsp:param name="location" value="home#index.jsp,combined_search#combined-search.jsp,results"/>
 </jsp:include>
 <table width="100%" border=0 cellspacing="0" cellpadding="0">
 <tr>
@@ -86,7 +86,7 @@
     <%=SessionManager.getCombinednatureobject1()%>
     <%=cm.cmsText("generic_combined-search-results-sites_03")%>
     <%=SessionManager.getCombinedexplainedcriteria1()%>
-    <%=cm.cmsText("generic_combined-search-results-sites_04")%>
+    <%=cm.cmsText("generic_combined-search-results-habitats_04")%>
   </td>
 </tr>
 <tr>
@@ -96,7 +96,7 @@
 </tr>
 <tr>
   <td bgcolor="#FFFFFF">
-    <%=cm.cmsText("generic_combined-search-results-sites_05")%>
+    <%=cm.cmsText("source_data_sets")%>
     <%=SessionManager.getSourcedb()%>
   </td>
 </tr>
@@ -108,7 +108,7 @@
     <%=SessionManager.getCombinednatureobject2()%>
     <%=cm.cmsText("generic_combined-search-results-sites_03")%>
     <%=SessionManager.getCombinedexplainedcriteria2()%>
-    <%=cm.cmsText("generic_combined-search-results-sites_04")%>
+    <%=cm.cmsText("generic_combined-search-results-habitats_04")%>
   </td>
 </tr>
 <tr>
@@ -127,7 +127,7 @@
     <%=SessionManager.getCombinednatureobject3()%>
     <%=cm.cmsText("generic_combined-search-results-sites_03")%>
     <%=SessionManager.getCombinedexplainedcriteria3()%>
-    <%=cm.cmsText("generic_combined-search-results-sites_04")%>
+    <%=cm.cmsText("generic_combined-search-results-habitats_04")%>
   </td>
 </tr>
 <tr>
@@ -143,7 +143,7 @@
 %>
 <tr>
   <td bgcolor="#FFFFFF">
-    <%=cm.cmsText("generic_combined-search-results-sites_06")%>
+    <%=cm.cmsText("combination_type")%>
     <%=SessionManager.getCombinedcombinationtype()%>
   </td>
 </tr>
@@ -153,9 +153,9 @@
 %>
 <tr>
   <td bgcolor="#FFFFFF">
-    <%=cm.cmsText("generic_combined-search-results-sites_06")%>
+    <%=cm.cmsText("combination_type")%>
     <%=SessionManager.getCombinednatureobject1()%>
-    <%=cm.cmsText("generic_combined-search-results-sites_07")%>
+    <%=cm.cmsText("related_to")%>
     <%=SessionManager.getCombinednatureobject2()%>
   </td>
 </tr>
@@ -165,9 +165,9 @@
 %>
 <tr>
   <td bgcolor="#FFFFFF">
-    <%=cm.cmsText("generic_combined-search-results-sites_06")%>
+    <%=cm.cmsText("combination_type")%>
     <%=SessionManager.getCombinednatureobject1()%>
-    <%=cm.cmsText("generic_combined-search-results-sites_07")%>
+    <%=cm.cmsText("related_to")%>
     <%=SessionManager.getCombinednatureobject3()%>
   </td>
 </tr>
@@ -185,7 +185,7 @@
   }
 %>
 <P>
-  <%=cm.cmsText("generic_combined-search-results-sites_08")%>
+  <%=cm.cmsText("results_found_1")%>
   <strong>
     <%=resultsCount%>
   </strong>
@@ -263,51 +263,51 @@
 <tr>
   <%if(showSourceDB) {%>
   <th class="resultHeader">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, (null == sortSourceDB) ? true : false)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("generic_combined-search-results-sites_09")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, (null == sortSourceDB) ? true : false)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("source_data_set")%></a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if(showName) {%>
   <th class="resultHeader">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SITE_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSiteName, (null == sortSiteName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSiteName)%><%=cm.cmsText("generic_combined-search-results-sites_10")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SITE_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSiteName, (null == sortSiteName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSiteName)%><%=cm.cmsText("site_name")%></a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if(showDesignationType) {%>
   <th class="resultHeader">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_DESIGNATION_TYPE%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignationType, (null == sortDesignationType) ? true : false)%>"><%=Utilities.getSortImageTag(sortDesignationType)%><%=cm.cmsText("generic_combined-search-results-sites_11")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_DESIGNATION_TYPE%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignationType, (null == sortDesignationType) ? true : false)%>"><%=Utilities.getSortImageTag(sortDesignationType)%><%=cm.cmsText("designation_type")%></a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if(showCountry) {%>
   <th class="resultHeader">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, (null == sortCountry) ? true : false)%>"><%=Utilities.getSortImageTag(sortCountry)%><%=cm.cmsText("generic_combined-search-results-sites_12")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, (null == sortCountry) ? true : false)%>"><%=Utilities.getSortImageTag(sortCountry)%><%=cm.cmsText("country")%></a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if(showDesignationYear) {%>
   <th class="resultHeader" align="right">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_DESIGNATION_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignationYear, (null == sortDesignationYear) ? true : false)%>"><%=Utilities.getSortImageTag(sortDesignationYear)%><%=cm.cmsText("generic_combined-search-results-sites_13")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_DESIGNATION_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignationYear, (null == sortDesignationYear) ? true : false)%>"><%=Utilities.getSortImageTag(sortDesignationYear)%><%=cm.cmsText("designation_year")%></a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if(showCoordinates) {%>
   <th class="resultHeader" style="text-align : center;">
-    <%=cm.cmsText("generic_combined-search-results-sites_14")%>
+    <%=cm.cmsText("longitude")%>
   </th>
   <th class="resultHeader" style="text-align : center;">
-    <%=cm.cmsText("generic_combined-search-results-sites_15")%>
+    <%=cm.cmsText("latitude")%>
   </th>
   <%}%>
   <%if(showSize) {%>
   <th class="resultHeader" align="right" style="text-align : right;">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, (null == sortSize) ? true : false)%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("generic_combined-search-results-sites_16")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, (null == sortSize) ? true : false)%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("size")%></a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if(showLength) {%>
   <th class="resultHeader" align="right">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_LENGTH%>&amp;ascendency=<%=formBean.changeAscendency(sortLength, (null == sortLength) ? true : false)%>"><%=Utilities.getSortImageTag(sortLength)%><%=cm.cmsText("generic_combined-search-results-sites_17")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_LENGTH%>&amp;ascendency=<%=formBean.changeAscendency(sortLength, (null == sortLength) ? true : false)%>"><%=Utilities.getSortImageTag(sortLength)%><%=cm.cmsText("length")%></a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
@@ -433,51 +433,51 @@
 <tr>
   <%if(showSourceDB) {%>
   <th class="resultHeader">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, (null == sortSourceDB) ? true : false)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("generic_combined-search-results-sites_09")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, (null == sortSourceDB) ? true : false)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("source_data_set")%></a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if(showName) {%>
   <th class="resultHeader">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SITE_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSiteName, (null == sortSiteName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSiteName)%><%=cm.cmsText("generic_combined-search-results-sites_10")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SITE_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSiteName, (null == sortSiteName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSiteName)%><%=cm.cmsText("site_name")%></a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if(showDesignationType) {%>
   <th class="resultHeader">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_DESIGNATION_TYPE%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignationType, (null == sortDesignationType) ? true : false)%>"><%=Utilities.getSortImageTag(sortDesignationType)%><%=cm.cmsText("generic_combined-search-results-sites_11")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_DESIGNATION_TYPE%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignationType, (null == sortDesignationType) ? true : false)%>"><%=Utilities.getSortImageTag(sortDesignationType)%><%=cm.cmsText("designation_type")%></a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if(showCountry) {%>
   <th class="resultHeader">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, (null == sortCountry) ? true : false)%>"><%=Utilities.getSortImageTag(sortCountry)%><%=cm.cmsText("generic_combined-search-results-sites_12")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, (null == sortCountry) ? true : false)%>"><%=Utilities.getSortImageTag(sortCountry)%><%=cm.cmsText("country")%></a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if(showDesignationYear) {%>
   <th class="resultHeader" align="right">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_DESIGNATION_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignationYear, (null == sortDesignationYear) ? true : false)%>"><%=Utilities.getSortImageTag(sortDesignationYear)%><%=cm.cmsText("generic_combined-search-results-sites_13")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_DESIGNATION_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignationYear, (null == sortDesignationYear) ? true : false)%>"><%=Utilities.getSortImageTag(sortDesignationYear)%><%=cm.cmsText("designation_year")%></a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if(showCoordinates) {%>
   <th class="resultHeader" style="text-align : center;">
-    <%=cm.cmsText("generic_combined-search-results-sites_14")%>
+    <%=cm.cmsText("longitude")%>
   </th>
   <th class="resultHeader" style="text-align : center;">
-    <%=cm.cmsText("generic_combined-search-results-sites_15")%>
+    <%=cm.cmsText("latitude")%>
   </th>
   <%}%>
   <%if(showSize) {%>
   <th class="resultHeader" align="right" style="text-align : right;">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, (null == sortSize) ? true : false)%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("generic_combined-search-results-sites_16")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, (null == sortSize) ? true : false)%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("size")%></a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if(showLength) {%>
   <th class="resultHeader" align="right">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_LENGTH%>&amp;ascendency=<%=formBean.changeAscendency(sortLength, (null == sortLength) ? true : false)%>"><%=Utilities.getSortImageTag(sortLength)%><%=cm.cmsText("generic_combined-search-results-sites_17")%></a>
+    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_LENGTH%>&amp;ascendency=<%=formBean.changeAscendency(sortLength, (null == sortLength) ? true : false)%>"><%=Utilities.getSortImageTag(sortLength)%><%=cm.cmsText("length")%></a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
@@ -514,7 +514,7 @@
 </table>
   <%=cm.cmsMsg("generic_combined-search-results-sites_title")%>
   <%=cm.br()%>
-  <%=cm.cmsMsg("summary_search_results")%>
+  <%=cm.cmsMsg("search_results")%>
 <jsp:include page="footer.jsp">
   <jsp:param name="page_name" value="combined-search-results-sites.jsp"/>
 </jsp:include>

@@ -24,7 +24,7 @@
     String habCode2000, habID;
     habCode2000 = treeBean.getHabCode2000();
     habID = treeBean.getHabID();
-    int level = (null == request.getParameter("level")) ? 2 : Integer.parseInt(request.getParameter("level"));
+    int level = (null == request.getParameter("generic_index_07")) ? 2 : Integer.parseInt(request.getParameter("generic_index_07"));
   %>
   <link rel="StyleSheet" href="css/tree.css" type="text/css" />
   <script language="JavaScript" type="text/javascript" src="script/tree.js"></script>
@@ -76,11 +76,15 @@
   <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitats_annex1_tree_location" />
+  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,habitats_annex1_tree_location" />
 </jsp:include>
 <h1>
   <%=cm.cmsText("habitats_annex1-browser_01")%>
 </h1>
+<span style="color: red;">
+  You do not have JavaScript enabled in your browser.
+  Please visit the alternative page: <a href="habitats-annex1-tree.jsp"><%=cm.cmsText("habitats_annex1-browser_01")%></a>.
+</span>
 <table summary="layout" width="100%" border="0">
 <tr>
 <td>
@@ -92,23 +96,23 @@
       mx = tree1.maxLevel(request.getParameter("habCode2000").substring(0, 1));
   %>
   <form name="setings" action="habitats-annex1-browser.jsp" method="post">
-    <label for="depth" class="noshow"><%=cm.cms("habitats_annex1-browser_03")%>:</label>
-    <select title="<%=cm.cms("habitats_annex1-browser_03")%>" name="depth" id="depth" onchange="MM_jumpMenu('parent',this,0)" class="inputTextField">
-      <option value="habitats-annex1-browser.jsp" <%=(request.getParameter("level")==null ? "selected=\"selected\"" : "")%>>
-        <%=cm.cms("habitats_annex1-browser_02")%>
+    <label for="depth" class="noshow"><%=cm.cms("expand_up_to")%>:</label>
+    <select title="<%=cm.cms("expand_up_to")%>" name="depth" id="depth" onchange="MM_jumpMenu('parent',this,0)" class="inputTextField">
+      <option value="habitats-annex1-browser.jsp" <%=(request.getParameter("generic_index_07")==null ? "selected=\"selected\"" : "")%>>
+        <%=cm.cms("please_select_a_level")%>
       </option>
       <%
       // Display the levels
       for (int ii = 2; ii <= mx; ii++) {
       %>
-        <option value="habitats-annex1-browser.jsp?level=<%=ii%>&amp;habCode2000=<%=habCode2000%>" <%=(request.getParameter("level") != null && request.getParameter("level").equals((new Integer(ii)).toString())) ? "selected=\"selected\"" : ""%>><%=cm.cms("habitats_annex1-browser_04")%>&nbsp;<%=ii%></option>
+        <option value="habitats-annex1-browser.jsp?level=<%=ii%>&amp;habCode2000=<%=habCode2000%>" <%=(request.getParameter("generic_index_07") != null && request.getParameter("generic_index_07").equals((new Integer(ii)).toString())) ? "selected=\"selected\"" : ""%>><%=cm.cms("generic_index_07")%>&nbsp;<%=ii%></option>
       <%
       }
       %>
     </select>
-    <%=cm.cmsLabel("habitats_annex1-browser_03")%>
-    <%=cm.cmsInput("habitats_annex1-browser_02")%>
-    <%=cm.cmsInput("habitats_annex1-browser_04")%>
+    <%=cm.cmsLabel("expand_up_to")%>
+    <%=cm.cmsInput("please_select_a_level")%>
+    <%=cm.cmsInput("generic_index_07")%>
   </form>
   <%
     }
@@ -131,10 +135,10 @@
               Chm62edtHabitatPersist h = (Chm62edtHabitatPersist) it.next();
         %>
              <li>
-               <a title="<%=cm.cms("expand_data_for_habitat")%>" href="habitats-annex1-browser.jsp?habCode2000=<%=h.getCode2000()%>">
+               <a title="<%=cm.cms("expand_data_for_habitat_type")%>" href="habitats-annex1-browser.jsp?habCode2000=<%=h.getCode2000()%>">
                <%=h.getCode2000()%> : <%=h.getScientificName()%>
                </a>
-               <%=cm.cmsTitle("expand_data_for_habitat")%>
+               <%=cm.cmsTitle("expand_data_for_habitat_type")%>
              </li>
         <%
           }

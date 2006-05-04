@@ -23,12 +23,12 @@ ro.finsiel.eunis.search.Utilities"%>
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("related_reports_error_page_title")%>
+      <%=cm.cms("upload_manager")%>
     </title>
   </head>
   <body>
     <h1>
-      <%=cm.cmsText("related_reports_error_title")%>
+      <%=cm.cmsText("related_reports")%>
     </h1>
     <br />
     <br />
@@ -36,7 +36,7 @@ ro.finsiel.eunis.search.Utilities"%>
       <%=cm.cmsText("related_reports_error_description")%>
     <br />
     <strong>
-      <a href="javascript:history.go(-1);"><%=cm.cmsText("related_reports_error_back")%></a>.
+      <a href="javascript:history.go(-1);"><%=cm.cmsText("back")%></a>.
     </strong>
 <%
   if( !message.equalsIgnoreCase( "" ) )
@@ -47,10 +47,10 @@ ro.finsiel.eunis.search.Utilities"%>
   }
 %>
     <form action="">
-      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_label")%>" title="<%=cm.cms("close_window_label")%>" id="button2" name="button" class="inputTextField" />
-      <%=cm.cmsTitle("close_window_label")%>
-      <%=cm.cmsInput("close_window_label")%>
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="inputTextField" />
+      <%=cm.cmsTitle("close_window")%>
+      <%=cm.cmsInput("close_window")%>
     </form>
-    <%=cm.cmsMsg("related_reports_error_page_title")%>
+    <%=cm.cmsMsg("upload_manager")%>
   </body>
 </html>

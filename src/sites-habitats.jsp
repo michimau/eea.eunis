@@ -87,7 +87,7 @@
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("sites_habitats_title")%>
+      <%=cm.cms("pick_habitat_types_show_sites")%>
     </title>
   </head>
   <body>
@@ -95,13 +95,13 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,sites_habitats_location"/>
+        <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,sites_habitats_location"/>
         <jsp:param name="mapLink" value="show"/>
         <jsp:param name="helpLink" value="sites-help.jsp"/>
       </jsp:include>
       <form name="eunis" method="get" onsubmit="return validateForm();" action="sites-habitats-result.jsp">
         <h1>
-          <%=cm.cmsText("sites_habitats_01")%>
+          <%=cm.cmsText("pick_habitat_type_show_sites")%>
         </h1>
 
         <%=cm.cmsText("sites_habitats_24")%>
@@ -109,83 +109,83 @@
         <br />
         <div class="grey_rectangle">
           <strong>
-            <%=cm.cmsText("search_will_provide_following_information")%>
+            <%=cm.cmsText("search_will_provide")%>
           </strong>
           <br />
-          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_habitats_03")%>" />
-          <label for="showSourceDB"><%=cm.cmsText("sites_habitats_03")%></label>
-          <%=cm.cmsTitle("sites_habitats_03")%>
+          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("source_data_set_2")%>" />
+          <label for="showSourceDB"><%=cm.cmsText("source_data_set_2")%></label>
+          <%=cm.cmsTitle("source_data_set_2")%>
 
-          <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_habitats_04")%>" />
-          <label for="showDesignationTypes"><%=cm.cmsText("sites_habitats_04")%></label>
-          <%=cm.cmsTitle("sites_habitats_04")%>
+          <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("designation_type_1")%>" />
+          <label for="showDesignationTypes"><%=cm.cmsText("designation_type_1")%></label>
+          <%=cm.cmsTitle("designation_type_1")%>
 
-          <input id="showSiteCode" name="showSiteCode" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_habitats_codecolumn")%>" />
-          <label for="showSiteCode"><%=cm.cmsText("sites_habitats_codecolumn")%></label>
-          <%=cm.cmsTitle("sites_habitats_codecolumn")%>
+          <input id="showSiteCode" name="showSiteCode" type="checkbox" value="true" checked="checked" title="<%=cm.cms("site_code")%>" />
+          <label for="showSiteCode"><%=cm.cmsText("site_code")%></label>
+          <%=cm.cmsTitle("site_code")%>
 
-          <input id="showName" name="showName" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=cm.cms("sites_habitats_05")%>" />
-          <label for="showName"><%=cm.cmsText("sites_habitats_05")%></label>
-          <%=cm.cmsTitle("sites_habitats_05")%>
+          <input id="showName" name="showName" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=cm.cms("site_name_1")%>" />
+          <label for="showName"><%=cm.cmsText("site_name_1")%></label>
+          <%=cm.cmsTitle("site_name_1")%>
 
-          <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" title="<%=cm.cms("sites_habitats_06")%>" />
-          <label for="showCoordinates"><%=cm.cmsText("sites_habitats_06")%></label>
-          <%=cm.cmsTitle("sites_habitats_06")%>
+          <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" title="<%=cm.cms("coordinates_1")%>" />
+          <label for="showCoordinates"><%=cm.cmsText("coordinates_1")%></label>
+          <%=cm.cmsTitle("coordinates_1")%>
 
           <input id="showHabitat" name="showHabitat" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=cm.cms("sites_habitats_07")%>" />
           <label for="showHabitat"><%=cm.cmsText("sites_habitats_07")%></label>
           <%=cm.cmsTitle("sites_habitats_07")%>
         </div>
-        <img align="middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
+        <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
         <%=cm.cmsAlt("field_mandatory")%>
         <label for="searchAttribute" class="noshow"><%=cm.cms("search_attribute")%></label>
         <select id="searchAttribute" name="searchAttribute" class="inputTextField" title="<%=cm.cms("search_attribute")%>">
           <option value="<%=HabitatSearchCriteria.SEARCH_NAME%>" selected="selected">
-            <%=cm.cms("sites_habitats_08")%>
+            <%=cm.cms("name_or_description")%>
           </option>
           <option value="<%=HabitatSearchCriteria.SEARCH_CODE%>">
-            <%=cm.cms("sites_habitats_09")%>
+            <%=cm.cms("habitat_type_code")%>
           </option>
           <option value="<%=HabitatSearchCriteria.SEARCH_LEGAL_INSTRUMENTS%>">
-            <%=cm.cms("sites_habitats_10")%>
+            <%=cm.cms("legal_instrument_name")%>
           </option>
           <option value="<%=HabitatSearchCriteria.SEARCH_COUNTRY%>">
-            <%=cm.cms("sites_habitats_11")%>
+            <%=cm.cms("country_name")%>
           </option>
           <option value="<%=HabitatSearchCriteria.SEARCH_REGION%>">
-            <%=cm.cms("sites_habitats_12")%>
+            <%=cm.cms("biogeographic_region_name")%>
           </option>
         </select>
         <%=cm.cmsLabel("search_attribute")%>
         <%=cm.cmsTitle("search_attribute")%>
-        <%=cm.cmsInput("sites_habitats_08")%>
-        <%=cm.cmsInput("sites_habitats_09")%>
-        <%=cm.cmsInput("sites_habitats_10")%>
-        <%=cm.cmsInput("sites_habitats_11")%>
-        <%=cm.cmsInput("sites_habitats_12")%>
+        <%=cm.cmsInput("name_or_description")%>
+        <%=cm.cmsInput("habitat_type_code")%>
+        <%=cm.cmsInput("legal_instrument_name")%>
+        <%=cm.cmsInput("country_name")%>
+        <%=cm.cmsInput("biogeographic_region_name")%>
         &nbsp;
         <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
         <select id="relationOp" name="relationOp" class="inputTextField" title="<%=cm.cms("operator")%>">
           <option value="<%=Utilities.OPERATOR_IS%>">
-            <%=cm.cms("sites_habitats_13")%>
+            <%=cm.cms("is")%>
           </option>
           <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-            <%=cm.cms("sites_habitats_14")%>
+            <%=cm.cms("contains")%>
           </option>
           <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected">
-            <%=cm.cms("sites_habitats_15")%>
+            <%=cm.cms("starts_with")%>
           </option>
         </select>
         <%=cm.cmsLabel("operator")%>
         <%=cm.cmsTitle("operator")%>
-        <%=cm.cmsInput("sites_habitats_13")%>
-        <%=cm.cmsInput("sites_habitats_14")%>
-        <%=cm.cmsInput("sites_habitats_15")%>
+        <%=cm.cmsInput("is")%>
+        <%=cm.cmsInput("contains")%>
+        <%=cm.cmsInput("starts_with")%>
         <label for="searchString" class="noshow"><%=cm.cms("search_string")%></label>
         <input id="searchString" name="searchString" value="" size="32" class="inputTextField" title="<%=cm.cms("search_string")%>" />
         <%=cm.cmsLabel("search_string")%>
         <%=cm.cmsTitle("search_string")%>
-        <a title="<%=cm.cms("helper")%>" href="javascript:openHelper('sites-habitats-choice.jsp');"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" align="middle" /></a>
+        <a title="<%=cm.cms("helper")%>" href="javascript:openHelper('sites-habitats-choice.jsp');"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" style="vertical-align:middle" /></a>
         <%=cm.cmsTitle("helper")%>
         <%=cm.cmsAlt("helper")%>
         <div class="grey_rectangle">
@@ -198,18 +198,18 @@
           <label for="database2"><%=cm.cmsText("sites_habitats_19")%></label>
           <%=cm.cmsTitle("sites_habitats_19")%>
 
-          <input id="database3" name="database" type="radio" value="<%=HabitatDomain.SEARCH_BOTH%>" disabled="disabled" title="<%=cm.cms("sites_habitats_20")%>" />
-          <label for="database3"><%=cm.cmsText("sites_habitats_20")%></label>
-          <%=cm.cmsTitle("sites_habitats_20")%>
+          <input id="database3" name="database" type="radio" value="<%=HabitatDomain.SEARCH_BOTH%>" disabled="disabled" title="<%=cm.cms("both")%>" />
+          <label for="database3"><%=cm.cmsText("both")%></label>
+          <%=cm.cmsTitle("both")%>
         </div>
         <div class="submit_buttons">
-          <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset_btn_value")%>" class="inputTextField" title="<%=cm.cms("reset_btn_title")%>" />
-          <%=cm.cmsTitle("reset_btn_title")%>
-          <%=cm.cmsInput("reset_btn_value")%>
+          <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset")%>" class="inputTextField" title="<%=cm.cms("reset_values")%>" />
+          <%=cm.cmsTitle("reset_values")%>
+          <%=cm.cmsInput("reset")%>
 
-          <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=cm.cms("search_btn_value")%>" title="<%=cm.cms("search_btn_title")%>" />
-          <%=cm.cmsTitle("search_btn_title")%>
-          <%=cm.cmsInput("search_btn_value")%>
+          <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=cm.cms("search")%>" title="<%=cm.cms("search")%>" />
+          <%=cm.cmsTitle("search")%>
+          <%=cm.cmsInput("search")%>
         </div>
       </form>
 <%
@@ -230,8 +230,8 @@
     String expandSearchCriteria = (request.getParameter("expandSearchCriteria")==null?"no":request.getParameter("expandSearchCriteria"));
 %>
         <br />
-    <%=cm.cmsText("sites_habitats_23")%>
-    <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-habitats.jsp','2','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+    <%=cm.cmsText("save_your_criteria_1")%>
+    <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-habitats.jsp','2','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
     <%=cm.cmsTitle("save")%>
     <%=cm.cmsAlt("save")%>
     <jsp:include page="show-criteria-search.jsp">
@@ -243,7 +243,7 @@
   }
 %>
 
-      <%=cm.cmsMsg("sites_habitats_title")%>
+      <%=cm.cmsMsg("pick_habitat_types_show_sites")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="sites-habitats.jsp" />
       </jsp:include>

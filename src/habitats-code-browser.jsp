@@ -23,7 +23,7 @@
   <link rel="StyleSheet" href="css/tree.css" type="text/css" />
   <script language="JavaScript" type="text/javascript" src="script/tree.js"></script>
   <%
-    int level = Utilities.checkedStringToInt ( request.getParameter("level"), 2 );
+    int level = Utilities.checkedStringToInt ( request.getParameter("generic_index_07"), 2 );
     String fromFactsheet = Utilities.formatString( request.getParameter("fromFactsheet"), "" );
     String habCode = treeBean1.getHabCode();
     String habID=treeBean1.getHabID();
@@ -90,7 +90,7 @@
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("habitats_code-browser_title")%>
+    <%=cm.cms("eunis_habitat_type_hierarchical_view")%>
   </title>
 </head>
 <body>
@@ -98,11 +98,20 @@
   <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,eunis_habitats_tree_location" />
+  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,eunis_habitat_type_hierarchical_view" />
 </jsp:include>
 <h1>
-  <%=cm.cmsText("habitats_code-browser_01")%>
+  <%=cm.cmsText("eunis_habitat_type_hierarchical_view")%>
 </h1>
+<noscript>
+  <br />
+  <br />
+  <span style="color: red;">
+    You do not have JavaScript enabled in your browser.
+    Please visit the alternative page: <a href="habitats-eunis-tree.jsp"><%=cm.cmsText("eunis_habitat_type_hierarchical_view")%></a>.
+  </span>
+</noscript>
+
 <%
   // Get max level
   int mx=0;
@@ -115,21 +124,21 @@
   {
 %>
 <form name="setings" action="habitats-code-browser.jsp" method="post">
-  <label for="depth" class="noshow"><%=cm.cms("habitats_code-browser_05")%>:</label>
-  <select title="<%=cm.cms("habitats_code-browser_05")%>" name="depth" id="depth" onchange="MM_jumpMenu('parent',this,0)" class="inputTextField">
-    <option value="habitats-code-browser.jsp" <%=(request.getParameter("level")==null ? "selected=\"selected\"" : "")%> ><%=cm.cms("habitats_code-browser_03")%></option>
+  <label for="depth" class="noshow"><%=cm.cms("expand_up_to")%>:</label>
+  <select title="<%=cm.cms("expand_up_to")%>" name="depth" id="depth" onchange="MM_jumpMenu('parent',this,0)" class="inputTextField">
+    <option value="habitats-code-browser.jsp" <%=(request.getParameter("generic_index_07")==null ? "selected=\"selected\"" : "")%> ><%=cm.cms("please_select_a_level")%></option>
     <%
       for (int ii=2;ii<=mx;ii++)
       {
     %>
-        <option value="habitats-code-browser.jsp?level=<%=ii%>&amp;habCode=<%=habCode%>" <%=(request.getParameter("level")!=null&&request.getParameter("level").equals((new Integer(ii)).toString())) ? "selected=\"selected\"" : ""%>><%=cm.cms("habitats_code-browser_04")%>&nbsp;<%=ii%></option>
+        <option value="habitats-code-browser.jsp?level=<%=ii%>&amp;habCode=<%=habCode%>" <%=(request.getParameter("generic_index_07")!=null&&request.getParameter("generic_index_07").equals((new Integer(ii)).toString())) ? "selected=\"selected\"" : ""%>><%=cm.cms("generic_index_07")%>&nbsp;<%=ii%></option>
     <%
       }
     %>
   </select>
-  <%=cm.cmsLabel("habitats_code-browser_05")%>
-  <%=cm.cmsInput("habitats_code-browser_03")%>
-  <%=cm.cmsInput("habitats_code-browser_04")%>
+  <%=cm.cmsLabel("expand_up_to")%>
+  <%=cm.cmsInput("please_select_a_level")%>
+  <%=cm.cmsInput("generic_index_07")%>
 </form>
 <%
   }
@@ -219,7 +228,7 @@
   </div>
   </div>
   </div>
-  <%=cm.cmsMsg("habitats_code-browser_title")%>
+  <%=cm.cmsMsg("eunis_habitat_type_hierarchical_view")%>
   <%=cm.br()%>
   <%=cm.cmsMsg("habitat_types")%>
   <%=cm.br()%>

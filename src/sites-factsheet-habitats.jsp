@@ -67,24 +67,24 @@
         if (!habit1Eunis.isEmpty() || !habit1NotEunis.isEmpty())
         {
 %>
-        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_habitats_habwithinsite")%></div>
+        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("ecological_information_habitats_within_site")%></div>
         <strong><%=cm.cmsText("sites_factsheet_114")%></strong>
         <table summary="<%=cm.cms("sites_factsheet_114")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitats1" class="sortable">
           <tr>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_habitats_habwithinsite_code")%>
+              <%=cm.cmsText("code_column")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_115")%>
+              <%=cm.cmsText("english_name")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_116")%>
+              <%=cm.cmsText("cover_percent")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_117")%>
+              <%=cm.cmsText("representativity")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
@@ -92,11 +92,11 @@
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_119")%>
+              <%=cm.cmsText("conservation")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_120")%>
+              <%=cm.cmsText("global")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           </tr>
@@ -250,15 +250,15 @@
         <table summary="<%=cm.cms("sites_factsheet_166")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitats2" class="sortable">
           <tr>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_122")%>
+              <%=cm.cmsText("habitat_type_code")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_167")%>
+              <%=cm.cmsText("habitat_type_english_name")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th style="text-align : right;" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_169")%>
+              <%=cm.cmsText("cover_percent")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           </tr>
@@ -323,12 +323,12 @@
 %>
         <br />
         <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;">
-          <%=cm.cmsText("sites_factsheet_habitats_habitatswithinsite")%>
+          <%=cm.cmsText("ecological_information_habitats_within_site")%>
         </div>
-        <table summary="<%=cm.cms("sites_factsheet_habitats_habitatswithinsite")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitats" class="sortable">
+        <table summary="<%=cm.cms("ecological_information_habitats_within_site")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitats" class="sortable">
           <tr>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_habitats_name")%>
+              <%=cm.cmsText("habitat_type_english_name")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th style="text-align : right;" title="<%=cm.cms("sort_results_on_this_column")%>">
@@ -336,7 +336,7 @@
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_habitats_representativity")%>
+              <%=cm.cmsText("representativity")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th style="text-align : right;" title="<%=cm.cms("sort_results_on_this_column")%>">
@@ -344,11 +344,11 @@
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_habitats_conservation")%>
+              <%=cm.cmsText("conservation")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_habitats_global")%>
+              <%=cm.cmsText("global")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           </tr>
@@ -392,11 +392,11 @@
         {
 %>
         <br />
-        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_habitats_habitatsnoteunis")%></div>
-        <table summary="<%=cm.cms("sites_factsheet_habitats_habitatsnoteunis")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitatsNonEUNIS" style="border-collapse:collapse">
+        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitat_type_not_eunis")%></div>
+        <table summary="<%=cm.cms("habitat_type_not_eunis")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitatsNonEUNIS" style="border-collapse:collapse">
           <tr>
             <th class="resultHeader">
-              <%=cm.cms("sites_factsheet_habitats_habitatscode")%>
+              <%=cm.cms("habitat_type_code")%>
             </th>
           </tr>
 <%

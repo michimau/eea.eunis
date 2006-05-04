@@ -100,31 +100,31 @@
       if (null != searchedDatabase) {
         if (searchedDatabase.equalsIgnoreCase("species")) {
           if (null != origin && origin.equalsIgnoreCase("Advanced")) {
-            location = "home_location#index.jsp,species_location#species.jsp,species_advanced_search_location#species-advanced.jsp,select_columns_location";
+            location = "home#index.jsp,species#species.jsp,advanced_search#species-advanced.jsp,select_columns_location";
             resultsPage = "species-advanced-results.jsp";
           }
           if (null != origin && origin.equalsIgnoreCase("Combined")) {
-            location = "home_location#index.jsp,combined_search_location#combined-search.jsp,select_columns_location";
+            location = "home#index.jsp,combined_search#combined-search.jsp,select_columns_location";
             resultsPage = "combined-search-results-species.jsp";
           }
         }
         if (searchedDatabase.equalsIgnoreCase("habitats")) {
           if (null != origin && origin.equalsIgnoreCase("Advanced")) {
-            location = "home_location#index.jsp,habitats_location#habitats.jsp,habitats_advanced_search#habitats-advanced.jsp,select_columns_location";
+            location = "home#index.jsp,habitat_types#habitats.jsp,habitats_advanced_search#habitats-advanced.jsp,select_columns_location";
             resultsPage = "habitats-advanced-results.jsp";
           }
           if (null != origin && origin.equalsIgnoreCase("Combined")) {
-            location = "home_location#index.jsp,combined_search_location#combined-search.jsp,select_columns_location";
+            location = "home#index.jsp,combined_search#combined-search.jsp,select_columns_location";
             resultsPage = "combined-search-results-habitats.jsp";
           }
         }
         if (searchedDatabase.equalsIgnoreCase("sites")) {
           if (null != origin && origin.equalsIgnoreCase("Advanced")) {
-            location = "home_location#index.jsp,sites_location#sites.jsp,sites_advanced_search_location#sites-advanced.jsp,select_columns_location";
+            location = "home#index.jsp,sites#sites.jsp,advanced_search#sites-advanced.jsp,select_columns_location";
             resultsPage = "sites-advanced-results.jsp";
           }
           if (null != origin && origin.equalsIgnoreCase("Combined")) {
-            location = "home_location#index.jsp,combined_search_location#combined-search.jsp,select_columns_location";
+            location = "home#index.jsp,combined_search#combined-search.jsp,select_columns_location";
             resultsPage = "combined-search-results-sites.jsp";
           }
         }
@@ -179,37 +179,37 @@
   if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("species"))
   {
 %>
-                <option value="showGroup"><%=cm.cms("select_columns_showGroup")%></option>
-                <option value="showOrder"><%=cm.cms("select_columns_showOrder")%></option>
-                <option value="showFamily"><%=cm.cms("select_columns_showFamily")%></option>
-                <option value="showScientificName"><%=cm.cms("select_columns_showScientificName")%></option>
-                <option value="showVernacularName"><%=cm.cms("select_columns_showVernacularName")%></option>
+                <option value="showGroup"><%=cm.cms("group")%></option>
+                <option value="showOrder"><%=cm.cms("order_column")%></option>
+                <option value="showFamily"><%=cm.cms("family")%></option>
+                <option value="showScientificName"><%=cm.cms("scientific_name")%></option>
+                <option value="showVernacularName"><%=cm.cms("vernacular_names")%></option>
 <%
   }
   if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("habitats"))
   {
 %>
-                <option value="showLevel"><%=cm.cms("select_columns_showLevel")%></option>
-                <option value="showEUNISCode"><%=cm.cms("select_columns_showEUNISCode")%></option>
-                <option value="showANNEXCode"><%=cm.cms("select_columns_showANNEXCode")%></option>
-                <option value="showScientificName"><%=cm.cms("select_columns_showScientificNameHab")%></option>
-                <option value="showPriority"><%=cm.cms("select_columns_showPriority")%></option>
+                <option value="showLevel"><%=cm.cms("generic_index_07")%></option>
+                <option value="showEUNISCode"><%=cm.cms("eunis_code")%></option>
+                <option value="showANNEXCode"><%=cm.cms("annex_code")%></option>
+                <option value="showScientificName"><%=cm.cms("name")%></option>
+                <option value="showPriority"><%=cm.cms("priority")%></option>
 <%
   }
   if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("sites"))
   {
 %>
-                <option value="showSourceDB"><%=cm.cms("select_columns_showSourceDB")%></option>
-                <option value="showCountry"><%=cm.cms("select_columns_showCountry")%></option>
-                <option value="showDesignationType"><%=cm.cms("select_columns_showDesignationType")%></option>
-                <option value="showName"><%=cm.cms("select_columns_showName")%></option>
-                <option value="showCoordinates"><%=cm.cms("select_columns_showCoordinates")%></option>
-                <option value="showSize"><%=cm.cms("select_columns_showSize")%></option>
-                <option value="showDesignationYear"><%=cm.cms("select_columns_showDesignationYear")%></option>
-                <option value="showLength"><%=cm.cms("select_columns_showLength")%></option>
-                <option value="showMinAltitude"><%=cm.cms("select_columns_showMinAltitude")%></option>
-                <option value="showMaxAltitude"><%=cm.cms("select_columns_showMaxAltitude")%></option>
-                <option value="showMeanAltitude"><%=cm.cms("select_columns_showMeanAltitude")%></option>
+                <option value="showSourceDB"><%=cm.cms("source_data_set")%></option>
+                <option value="showCountry"><%=cm.cms("country")%></option>
+                <option value="showDesignationType"><%=cm.cms("designation_type")%></option>
+                <option value="showName"><%=cm.cms("site_name")%></option>
+                <option value="showCoordinates"><%=cm.cms("coordinates")%></option>
+                <option value="showSize"><%=cm.cms("size")%></option>
+                <option value="showDesignationYear"><%=cm.cms("designation_year")%></option>
+                <option value="showLength"><%=cm.cms("length")%></option>
+                <option value="showMinAltitude"><%=cm.cms("min_altitude")%></option>
+                <option value="showMaxAltitude"><%=cm.cms("max_altitude")%></option>
+                <option value="showMeanAltitude"><%=cm.cms("mean_altitude")%></option>
 <%
   }
 %>
@@ -219,37 +219,37 @@
   if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("species"))
   {
 %>
-              <%=cm.cmsInput("select_columns_showGroup")%>
-              <%=cm.cmsInput("select_columns_showOrder")%>
-              <%=cm.cmsInput("select_columns_showFamily")%>
-              <%=cm.cmsInput("select_columns_showScientificName")%>
-              <%=cm.cmsInput("select_columns_showVernacularName")%>
-              <%=cm.cmsInput("select_columns_showPriority")%>
+              <%=cm.cmsInput("group")%>
+              <%=cm.cmsInput("order_column")%>
+              <%=cm.cmsInput("family")%>
+              <%=cm.cmsInput("scientific_name")%>
+              <%=cm.cmsInput("vernacular_names")%>
+              <%=cm.cmsInput("priority")%>
 <%
   }
   if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("habitats"))
   {
 %>
-              <%=cm.cmsInput("select_columns_showLevel")%>
-              <%=cm.cmsInput("select_columns_showEUNISCode")%>
-              <%=cm.cmsInput("select_columns_showANNEXCode")%>
-              <%=cm.cmsInput("select_columns_showScientificNameHab")%>
+              <%=cm.cmsInput("generic_index_07")%>
+              <%=cm.cmsInput("eunis_code")%>
+              <%=cm.cmsInput("annex_code")%>
+              <%=cm.cmsInput("name")%>
 <%
   }
   if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("sites"))
   {
 %>
-              <%=cm.cmsInput("select_columns_showSourceDB")%>
-              <%=cm.cmsInput("select_columns_showCountry")%>
-              <%=cm.cmsInput("select_columns_showDesignationType")%>
-              <%=cm.cmsInput("select_columns_showName")%>
-              <%=cm.cmsInput("select_columns_showCoordinates")%>
-              <%=cm.cmsInput("select_columns_showSize")%>
-              <%=cm.cmsInput("select_columns_showDesignationYear")%>
-              <%=cm.cmsInput("select_columns_showLength")%>
-              <%=cm.cmsInput("select_columns_showMinAltitude")%>
-              <%=cm.cmsInput("select_columns_showMaxAltitude")%>
-              <%=cm.cmsInput("select_columns_showMeanAltitude")%>
+              <%=cm.cmsInput("source_data_set")%>
+              <%=cm.cmsInput("country")%>
+              <%=cm.cmsInput("designation_type")%>
+              <%=cm.cmsInput("site_name")%>
+              <%=cm.cmsInput("coordinates")%>
+              <%=cm.cmsInput("size")%>
+              <%=cm.cmsInput("designation_year")%>
+              <%=cm.cmsInput("length")%>
+              <%=cm.cmsInput("min_altitude")%>
+              <%=cm.cmsInput("max_altitude")%>
+              <%=cm.cmsInput("mean_altitude")%>
 <%
   }
 %>
@@ -265,13 +265,13 @@
               <%=cm.cmsInput("select_columns_remove_value")%>
               <br />
               <br />
-              <input type="button" title="<%=cm.cms("select_all_columns_add_title")%>" value="  <%=cm.cms("select_all_columns_add_value")%>  " onclick="moveAll(this.form.list1, this.form.displayedColumns)" id="B3" name="B3" class="inputTextField" />
-              <%=cm.cmsTitle("select_all_columns_add_title")%>
+              <input type="button" title="<%=cm.cms("select_all_columns")%>" value="  <%=cm.cms("select_all_columns_add_value")%>  " onclick="moveAll(this.form.list1, this.form.displayedColumns)" id="B3" name="B3" class="inputTextField" />
+              <%=cm.cmsTitle("select_all_columns")%>
               <%=cm.cmsInput("select_all_columns_add_value")%>
               <br />
               <br />
-              <input type="button" title="<%=cm.cms("select_all_columns_remove_title")%>" value="  <%=cm.cms("select_all_columns_remove_value")%>  " onclick="moveAll(this.form.displayedColumns,this.form.list1)" id="B4" name="B4" class="inputTextField" />
-              <%=cm.cmsTitle("select_all_columns_remove_title")%>
+              <input type="button" title="<%=cm.cms("remove_all_columns")%>" value="  <%=cm.cms("select_all_columns_remove_value")%>  " onclick="moveAll(this.form.displayedColumns,this.form.list1)" id="B4" name="B4" class="inputTextField" />
+              <%=cm.cmsTitle("remove_all_columns")%>
               <%=cm.cmsInput("select_all_columns_remove_value")%>
             </td>
             <td width="40%">
@@ -282,9 +282,9 @@
           </tr>
         </table>
         <br />
-        <input type="submit" title="<%=cm.cms("select_columns_proceed_title")%>" id="proceed" name="Search" value="<%=cm.cms("select_columns_proceed_value")%>" class="inputTextField" />
+        <input type="submit" title="<%=cm.cms("select_columns_proceed_title")%>" id="proceed" name="Search" value="<%=cm.cms("proceed_to_results")%>" class="inputTextField" />
         <%=cm.cmsTitle("select_columns_proceed_title")%>
-        <%=cm.cmsInput("select_columns_proceed_value")%>
+        <%=cm.cmsInput("proceed_to_results")%>
       </form>
 
       <%=cm.cmsMsg("select_columns_page_title")%>

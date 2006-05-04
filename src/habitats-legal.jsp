@@ -31,7 +31,7 @@
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("habitats_legal_title")%>
+    <%=cm.cms("habitat_type_legal_instruments")%>
   </title>
 </head>
 
@@ -40,14 +40,14 @@
   <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitats_legal_location" />
+  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,legal_instruments" />
   <jsp:param name="helpLink" value="habitats-help.jsp" />
 </jsp:include>
 <table summary="layout" width="100%" border="0">
 <tr>
 <td>
 <h1>
-  <%=cm.cmsText("habitats_legal_01")%>
+  <%=cm.cmsText("legal_instruments")%>
 </h1>
 <%=cm.cmsText("habitats_legal_17")%>
 <br />
@@ -60,23 +60,23 @@
   <tr>
     <td bgcolor="#EEEEEE">
       <strong>
-        <%=cm.cmsText("habitats_legal_02")%>
+        <%=cm.cmsText("search_will_provide_2")%>
       </strong>
     </td>
   </tr>
   <tr>
     <td bgcolor="#EEEEEE">
       <input title="Show level" type="checkbox" id="showLevel" name="showLevel" value="true" checked="checked" />
-      <label for="showLevel"><%=cm.cmsText("habitats_legal_03")%></label>
+      <label for="showLevel"><%=cm.cmsText("generic_index_07")%></label>
       &nbsp;
       <input title="Show code" type="checkbox" name="showCode" id="showCode" value="true" checked="checked" />
-      <label for="showCode"><%=cm.cmsText("habitats_legal_04")%></label>
+      <label for="showCode"><%=cm.cmsText("code_column")%></label>
       &nbsp;
       <input title="Show name" type="checkbox" name="showScientificName" id="showScientificName" value="true" checked="checked" disabled="disabled" />
-      <label for="showScientificName"><%=cm.cmsText("habitats_legal_05")%></label>
+      <label for="showScientificName"><%=cm.cmsText("habitat_type_name")%></label>
       &nbsp;
       <input title="Show legal text" type="checkbox" name="showLegalText" id="showLegalText" value="true" checked="checked" />
-      <label for="showLegalText"><%=cm.cmsText("habitats_legal_06")%></label>
+      <label for="showLegalText"><%=cm.cmsText("legal_text")%></label>
       &nbsp;
     </td>
   </tr>
@@ -85,11 +85,11 @@
   <tr>
     <td valign="bottom" colspan="2">
       <p>
-        <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" align="middle" /><%=cm.cmsTitle("included_field")%>
+        <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" style="vertical-align:middle" /><%=cm.cmsTitle("included_field")%>
         &nbsp;
         <label for="habitatType">
         <strong>
-          <%=cm.cmsText("habitats_legal_08")%>
+          <%=cm.cmsText("habitat_type")%>
         </strong>
         </label>
       </p>
@@ -112,14 +112,14 @@
     </td>
     <td width="6%" align="right">
       <strong>
-        <%=cm.cmsText("habitats_legal_10")%>
+        <%=cm.cmsText("and")%>
       </strong>
     </td>
   </tr>
   <tr valign="middle">
     <td colspan="2">
       <br />
-      <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" align="middle" /><%=cm.cmsTitle("included_field")%>
+      <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" style="vertical-align:middle" /><%=cm.cmsTitle("included_field")%>
       &nbsp;
       <label for="searchString"><strong><%=cm.cmsText("habitats_legal_11")%></strong></label>
     </td>
@@ -128,27 +128,27 @@
       <input title="<%=cm.cms("habitats_legal_11")%>" size="30" name="searchString" id="searchString" class="inputTextField" /><%=cm.cmsTitle("habitats_legal_11")%>
       &nbsp;
       <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-legal-choice.jsp');">
-        <img alt="<%=cm.cms("list_of_values")%>" height="18" src="images/helper/helper.gif"  align="middle" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
+        <img alt="<%=cm.cms("list_of_values")%>" height="18" src="images/helper/helper.gif" style="vertical-align:middle" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
     </td>
     <td width="6%" align="right">
       <br />
       <strong>
-        <%=cm.cmsText("habitats_legal_10")%>
+        <%=cm.cmsText("and")%>
       </strong>
     </td>
   </tr>
   <tr valign="middle">
     <td valign="middle" colspan="2">
       <br />
-      <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" align="middle" /><%=cm.cmsTitle("included_field")%>
+      <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" style="vertical-align:middle" /><%=cm.cmsTitle("included_field")%>
       &nbsp;
-      <label for="legalText"><strong><%=cm.cmsText("habitats_legal_12")%></strong></label>
+      <label for="legalText"><strong><%=cm.cmsText("legal_text")%></strong></label>
     </td>
     <td colspan="2">
       <br />
-      <label for="legalText" class="noshow"><%=cm.cms("habitat_legal_text")%></label>
-      <select title="<%=cm.cms("habitat_legal_text")%>" name="legalText" id="legalText" class="inputTextField">
-        <option value="any" selected="selected"><%=cm.cms("habitats_legal_13")%></option>
+      <label for="legalText" class="noshow"><%=cm.cms("legal_text")%></label>
+      <select title="<%=cm.cms("legal_text")%>" name="legalText" id="legalText" class="inputTextField">
+        <option value="any" selected="selected"><%=cm.cms("any_legal_text")%></option>
         <%
           // List of habitats legal instruments.
           it = HabitatsSearchUtility.findLegalTexts().iterator();
@@ -157,19 +157,19 @@
         <option value="<%=element.getClassName()%>"><%=element.getClassName()%></option>
         <%}%>
       </select>
-      <%=cm.cmsLabel("habitat_legal_text")%>
-      <%=cm.cmsInput("habitats_legal_13")%>
+      <%=cm.cmsLabel("legal_text")%>
+      <%=cm.cmsInput("any_legal_text")%>
     </td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td align="right" colspan="5">
-      <input title="<%=cm.cms("reset_btn")%>" type="reset" value="<%=cm.cms("habitats_legal_14")%>" name="Reset" id="Reset" class="inputTextField" />
-      <%=cm.cmsTitle("reset_btn")%>
-      <%=cm.cmsInput("habitats_legal_14")%>
-      <input title="<%=cm.cms("search_btn")%>" type="submit" value="<%=cm.cms("habitats_legal_15")%>" id="submit" name="submit" class="inputTextField" />
-      <%=cm.cmsTitle("search_btn")%>
-      <%=cm.cmsInput("habitats_legal_15")%>
+      <input title="<%=cm.cms("reset")%>" type="reset" value="<%=cm.cms("reset")%>" name="Reset" id="Reset" class="inputTextField" />
+      <%=cm.cmsTitle("reset")%>
+      <%=cm.cmsInput("reset")%>
+      <input title="<%=cm.cms("search")%>" type="submit" value="<%=cm.cms("search")%>" id="submit" name="submit" class="inputTextField" />
+      <%=cm.cmsTitle("search")%>
+      <%=cm.cmsInput("search")%>
     </td>
   </tr>
 </table>
@@ -198,8 +198,8 @@
 <tr>
   <td>
     <script language="JavaScript" src="script/habitats-legal-save-criteria.js" type="text/javascript"></script>
-    <%=cm.cmsText("habitats_legal_16")%>:
-    <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',true,'habitats-legal.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+    <%=cm.cmsText("save_your_criteria")%>:
+    <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',true,'habitats-legal.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
     <%=cm.cmsTitle("save_criteria")%>
   </td>
 </tr>
@@ -226,7 +226,7 @@
 <%}%>
 </table>
       <%=cm.br()%>
-      <%=cm.cmsMsg("habitats_legal_title")%>
+      <%=cm.cmsMsg("habitat_type_legal_instruments")%>
       <%=cm.br()%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="habitats-legal.jsp" />

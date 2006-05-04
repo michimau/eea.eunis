@@ -38,7 +38,7 @@
   {
   %>
   <title>
-    <%=cm.cms("species_factsheet-pdf_title")%>
+    <%=cm.cms("generating_pdf")%>
   </title>
   <script language="JavaScript" type="text/javascript">
   <!--
@@ -70,8 +70,8 @@
     <td id="imgtop"><img alt="<%=cm.cms("species_factsheet-pdf_100_Alt")%>" src="images/progress/top.jpg" width="400" height="178"/><%=cm.cmsAlt("species_factsheet-pdf_100_Alt")%></td>
   </tr>
 </table>
-<img id="loading" src="<%=request.getContextPath()%>/images/loading_tsv.gif" width="200" height="10" alt="<%=cm.cms("species_factsheet-pdf_101_Alt")%>" />
-<%=cm.cmsAlt("species_factsheet-pdf_101_Alt")%>
+<img id="loading" src="<%=request.getContextPath()%>/images/loading_tsv.gif" width="200" height="10" alt="<%=cm.cms("loading_animation")%>" />
+<%=cm.cmsAlt("loading_animation")%>
 <table summary="layout" border="0">
   <tr>
     <td id="status">
@@ -82,7 +82,7 @@
 <% out.flush(); %>
 <script language="JavaScript" type="text/javascript">
 <!--
-updateText('<%=cm.cms("species_factsheet-pdf_01")%>');
+updateText('<%=cm.cms("generating_pdf_wait")%>');
 //-->
 </script>
 <%
@@ -117,7 +117,7 @@ updateText('<%=cm.cms("species_factsheet-pdf_01")%>');
     report.init( linktopdf + filename );
 
     SimpleDateFormat df = new SimpleDateFormat( "yyyy-MM-dd" );
-    report.writeln( cm.cmsText( "species_factsheet-pdf_05" ) + ": " + df.format( new Date() ), FontFactory.getFont( FontFactory.HELVETICA, 8, Font.ITALIC, new Color( 24, 40, 136 ) ) );
+    report.writeln( cm.cmsText( "generated_on" ) + ": " + df.format( new Date() ), FontFactory.getFont( FontFactory.HELVETICA, 8, Font.ITALIC, new Color( 24, 40, 136 ) ) );
 
     String SQL_DRV = application.getInitParameter("JDBC_DRV");
     String SQL_URL = application.getInitParameter("JDBC_URL");
@@ -177,13 +177,13 @@ updateText('<%=cm.cms("species_factsheet-pdf_01")%>');
       }
       //-->
     </script>
-    <%=cm.cmsText( "species_factsheet-pdf_95" )%>
-    <a title="<%=cm.cms("species_factsheet-pdf_103_Title")%>" href="javascript:feedback();"><%=cm.cmsText( "species_factsheet-pdf_96" )%></a>.
-    <%=cm.cmsTitle("species_factsheet-pdf_103_Title")%>
-    <%=cm.cmsText( "species_factsheet-pdf_97" )%>
-    <%=cm.cmsText( "species_factsheet-pdf_95" )%>
-    <a title="Feedback" href="javascript:feedback();"><%=cm.cmsText( "species_factsheet-pdf_96" )%></a>.
-    <%=cm.cmsText( "species_factsheet-pdf_97" )%>
+    <%=cm.cmsText( "please_let_us_know_about_error" )%>
+    <a title="<%=cm.cms("feedback")%>" href="javascript:feedback();"><%=cm.cmsText( "feedback" )%></a>.
+    <%=cm.cmsTitle("feedback")%>
+    <%=cm.cmsText( "thank_you" )%>
+    <%=cm.cmsText( "please_let_us_know_about_error" )%>
+    <a title="Feedback" href="javascript:feedback();"><%=cm.cmsText( "feedback" )%></a>.
+    <%=cm.cmsText( "thank_you" )%>
 <%
     }
     out.flush();
@@ -206,9 +206,9 @@ updateText('<%=cm.cms("species_factsheet-pdf_01")%>');
     </div>
 
 <%=cm.br()%>
-<%=cm.cmsMsg("species_factsheet-pdf_title")%>
+<%=cm.cmsMsg("generating_pdf")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_factsheet-pdf_01")%>
+<%=cm.cmsMsg("generating_pdf_wait")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("species_factsheet-pdf_92")%>
 <%=cm.br()%>

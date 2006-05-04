@@ -34,7 +34,7 @@
 %>
     <%=cm.cmsText("noresults_explanation")%>
     <strong>
-      <a href="javascript:history.go(-1)" title="Go to previous page"><%=cm.cmsText("noresults_back")%></a>
+      <a href="javascript:history.go(-1)" title="Go to previous page"><%=cm.cmsText("back")%></a>
     </strong>
     <%=cm.cmsText("noresults_review_search_criteria")%>.
     <br />

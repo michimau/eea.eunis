@@ -22,7 +22,7 @@
       WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title>
-      <%=cm.cms("species_books-choice_title")%>
+      <%=cm.cms("list_of_values")%>
     </title>
      <script language="JavaScript" type="text/javascript">
     <!--
@@ -60,7 +60,7 @@
   if (results != null && results.size() > 0) {
 %>
 <%=cm.cmsText("species_books-choice_04")%>:
-<u><%=cm.cmsText("species_books-choice_01")%></u>
+<u><%=cm.cmsText("species_scientific_name")%></u>
 <em><%=Utilities.ReturnStringRelatioOp(Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS))%></em>
 <strong><%=formBean.getScientificName()%></strong>
 <br />
@@ -71,7 +71,7 @@
     {
   %>
       <div id="tab">
-      <table summary="<%=cm.cms("species_books-choice_05_Sum")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse; border-color:#111111" width="100%">
+      <table summary="<%=cm.cms("list_species")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse; border-color:#111111" width="100%">
       <%
         // Display results
         for(int i = 0; i < results.size(); i++)
@@ -94,21 +94,21 @@
         } else
           {
       %>
-          <strong><%=cm.cmsText("species_books-choice_02")%>.</strong>
+          <strong><%=cm.cmsText("no_results_found")%>.</strong>
           <br />
       <%
           }
       %>
     <br />
     <form action="">
-      <input id="button1" title="<%=cm.cms("species_books-choice_03_Title")%>" type="button" value="<%=cm.cms("species_books-choice_03")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
-      <%=cm.cmsTitle("species_books-choice_03_Title")%>
-      <%=cm.cmsInput("species_books-choice_03")%>
+      <input id="button1" title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
+      <%=cm.cmsTitle("close_window")%>
+      <%=cm.cmsInput("close_btn")%>
     </form>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_books-choice_title")%>
+<%=cm.cmsMsg("list_of_values")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_books-choice_05_Sum")%>
+<%=cm.cmsMsg("list_species")%>
 <%=cm.br()%>
   </body>
 </html>

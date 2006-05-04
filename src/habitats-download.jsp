@@ -28,7 +28,7 @@
     <div id="alignment">
     <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp, habitats_links_and_downloads_location" />
+      <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,links_and_downloads_2" />
       <jsp:param name="mapLink" value="show" />
     </jsp:include>
     <%=cm.br()%>

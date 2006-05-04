@@ -38,7 +38,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
-      <%=cm.cms("sites_species-choice_title")%>
+      <%=cm.cms("list_of_values")%>
     </title>
     <script language="JavaScript" type="text/javascript">
       <!--
@@ -108,7 +108,7 @@
   {
 %>
     <strong>
-      <%=cm.cmsText("sites_species-choice_01")%>
+      <%=cm.cmsText("no_results_found_1")%>
     </strong>
     <br />
 <%
@@ -116,10 +116,10 @@
 %>
     <br />
     <form action="">
-      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
-      <%=cm.cmsTitle("close_window_title")%>
-      <%=cm.cmsInput("close_window_value")%>
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="inputTextField" />
+      <%=cm.cmsTitle("close_window")%>
+      <%=cm.cmsInput("close_btn")%>
     </form>
-    <%=cm.cmsMsg("sites_species-choice_title")%>
+    <%=cm.cmsMsg("list_of_values")%>
   </body>
 </html>

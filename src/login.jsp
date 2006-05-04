@@ -50,7 +50,7 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,login_location"/>
+        <jsp:param name="location" value="home#index.jsp,login"/>
       </jsp:include>
       <h1>
         <%=cm.cmsText("login_title")%>
@@ -76,15 +76,15 @@
           <%=cm.cmsTitle("login_username_title")%>
           <%=cm.cmsLabel("login_username_label")%>
           <br />
-          <label for="password"><%=cm.cms("login_password_label")%>:</label>
+          <label for="password"><%=cm.cms("password")%>:</label>
           <input class="inputTextField" title="<%=cm.cms("login_password_title")%>" type="password" id="password" name="password" />
           <%=cm.cmsTitle("login_password_title")%>
-          <%=cm.cmsLabel("login_password_label")%>
+          <%=cm.cmsLabel("password")%>
           <br />
           <br />
-          <input class="inputTextField" title="<%=cm.cms("login_submit_title")%>" type="submit" id="submit" name="Submit" value="<%=cm.cms("login_submit_value")%>" />
+          <input class="inputTextField" title="<%=cm.cms("login_submit_title")%>" type="submit" id="submit" name="Submit" value="<%=cm.cms("login")%>" />
           <%=cm.cmsTitle("login_submit_title")%>
-          <%=cm.cmsInput("login_submit_value")%>
+          <%=cm.cmsInput("login")%>
         </form>
 
 <%
@@ -104,8 +104,8 @@
 %>
     <%=cm.cmsText("login_you_successfully_logged")%>
     <strong><%=SessionManager.getUsername()%></strong>.
-    <a title="<%=cm.cms("login_home_title")%>" href="index.jsp"><%=cm.cmsText("login_home")%></a>
-    <%=cm.cmsTitle("login_home_title")%>
+    <a title="<%=cm.cms("home_page")%>" href="index.jsp"><%=cm.cmsText("home")%></a>
+    <%=cm.cmsTitle("home_page")%>
 <%
   }
 %>

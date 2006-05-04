@@ -48,18 +48,18 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,preferences_location"/>
+        <jsp:param name="location" value="home#index.jsp,preferences"/>
       </jsp:include>
       <h1>
-        <%=cm.cmsText("preferences_title")%>
+        <%=cm.cmsText("preferences")%>
       </h1>
       <%=cm.cmsText("generic_preferences_01")%>
       <br />
       <br />
       <form name="preferences" action="preferences.jsp" method="post">
         <input name="action" type="hidden" id="action" value="save" />
-        <label for="themeIndex"><%=cm.cmsText("preferences_theme_label")%></label>
-        <select id="themeIndex" name="themeIndex" title="<%=cm.cms("preferences_theme_title")%>">
+        <label for="themeIndex"><%=cm.cmsText("web_page_theme_color")%></label>
+        <select id="themeIndex" name="themeIndex" title="<%=cm.cms("web_page_theme_color")%>">
           <option value="<%=ThemeManager.THEME_SKY_BLUE%>"
             <%=SessionManager.getThemeManager().getCurrentTheme().equals( ThemeManager.SKY_BLUE ) ? "selected=\"selected\"" : ""%>>
             <%=cm.cms("preferences_theme_sky_blue")%>
@@ -81,17 +81,17 @@
             <%=cm.cms("preferences_theme_bw")%>
           </option>
         </select>
-        <%=cm.cmsLabel("preferences_theme_label")%>
-        <%=cm.cmsTitle("preferences_theme_title")%>
+        <%=cm.cmsLabel("web_page_theme_color")%>
+        <%=cm.cmsTitle("web_page_theme_color")%>
         <%=cm.cmsInput("preferences_theme_sky_blue")%>
         <%=cm.cmsInput("preferences_theme_fresh_orange")%>
         <%=cm.cmsInput("preferences_theme_nature_green")%>
         <%=cm.cmsInput("preferences_theme_cherry")%>
         <%=cm.cmsInput("preferences_theme_bw")%>
         <br />
-        <input id="submit1" type="submit" name="Submit" value="<%=cm.cms("preferences_save_value")%>" title="<%=cm.cms("preferences_save_title")%>" class="inputTextField" />
-        <%=cm.cmsTitle("preferences_save_title")%>
-        <%=cm.cmsInput("preferences_save_value")%>
+        <input id="submit1" type="submit" name="Submit" value="<%=cm.cms("save_preferences")%>" title="<%=cm.cms("save_preferences")%>" class="inputTextField" />
+        <%=cm.cmsTitle("save_preferences")%>
+        <%=cm.cmsInput("save_preferences")%>
       </form>
 
       <%=cm.cmsMsg("preferences_page_title")%>

@@ -72,9 +72,9 @@
         var errSizeIncorrect = "<%=cm.cms("sites_size_02")%>";
         var errSizeIncorrectBoth = "<%=cm.cms("sites_size_03")%>";
         var errInvalidNr = "<%=cm.cms("sites_size_04")%>";
-        var errMinDesignationYear = "<%=cm.cms("sites_size_05")%>";
-        var errMaxDesignationYear = "<%=cm.cms("sites_size_06")%>";
-        var errInvalidYearCombination = "<%=cm.cms("sites_size_07")%>";
+        var errMinDesignationYear = "<%=cm.cms("enter_min_year_in_yyyy")%>";
+        var errMaxDesignationYear = "<%=cm.cms("enter_max_year_in_yyyy")%>";
+        var errInvalidYearCombination = "<%=cm.cms("minimum_designation_year_invalid")%>";
 
         if (eval(document.eunis.relationOp[document.eunis.relationOp.selectedIndex].value) == <%=Utilities.OPERATOR_BETWEEN%>)
         {
@@ -131,7 +131,7 @@
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("sites_size_title")%>
+      <%=cm.cms("site_size")%>
     </title>
   </head>
   <body>
@@ -139,7 +139,7 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_size_location"/>
+        <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,size_area_length"/>
         <jsp:param name="helpLink" value="sites-help.jsp"/>
         <jsp:param name="mapLink" value="show"/>
       </jsp:include>
@@ -155,77 +155,77 @@
         <br />
         <div class="grey_rectangle">
           <strong>
-            <%=cm.cmsText("search_will_provide_following_information")%>
+            <%=cm.cmsText("search_will_provide")%>
           </strong>
           <br />
-          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_size_09")%>" />
-          <label for="showSourceDB"><%=cm.cmsText("sites_size_09")%></label>
-          <%=cm.cmsTitle("sites_size_09")%>
+          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("source_data_set")%>" />
+          <label for="showSourceDB"><%=cm.cmsText("source_data_set")%></label>
+          <%=cm.cmsTitle("source_data_set")%>
 
-          <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_size_10")%>" />
-          <label for="showCountry"><%=cm.cmsText("sites_size_10")%></label>
-          <%=cm.cmsTitle("sites_size_10")%>
+          <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cms("country")%>" />
+          <label for="showCountry"><%=cm.cmsText("country")%></label>
+          <%=cm.cmsTitle("country")%>
 
-          <input id="showName" name="showName" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("sites_size_12")%>" />
-          <label for="showName"><%=cm.cmsText("sites_size_12")%></label>
-          <%=cm.cmsTitle("sites_size_12")%>
+          <input id="showName" name="showName" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("site_name")%>" />
+          <label for="showName"><%=cm.cmsText("site_name")%></label>
+          <%=cm.cmsTitle("site_name")%>
 
-          <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_size_11")%>" />
-          <label for="showDesignationTypes"><%=cm.cmsText("sites_size_11")%></label>
-          <%=cm.cmsTitle("sites_size_11")%>
+          <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("designation_type")%>" />
+          <label for="showDesignationTypes"><%=cm.cmsText("designation_type")%></label>
+          <%=cm.cmsTitle("designation_type")%>
 
-          <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_size_13")%>" />
-          <label for="showCoordinates"><%=cm.cmsText("sites_size_13")%></label>
-          <%=cm.cmsTitle("sites_size_13")%>
+          <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("coordinates")%>" />
+          <label for="showCoordinates"><%=cm.cmsText("coordinates")%></label>
+          <%=cm.cmsTitle("coordinates")%>
 
-          <input id="showSize" name="showSize" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_size_14")%>" />
-          <label for="showSize"><%=cm.cmsText("sites_size_14")%></label>
-          <%=cm.cmsTitle("sites_size_14")%>
+          <input id="showSize" name="showSize" type="checkbox" value="true" checked="checked" title="<%=cm.cms("size")%>" />
+          <label for="showSize"><%=cm.cmsText("size")%></label>
+          <%=cm.cmsTitle("size")%>
 
-          <input id="showLength" name="showLength" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_size_15")%>" />
-          <label for="showLength"><%=cm.cmsText("sites_size_15")%></label>
-          <%=cm.cmsTitle("sites_size_15")%>
+          <input id="showLength" name="showLength" type="checkbox" value="true" checked="checked" title="<%=cm.cms("length")%>" />
+          <label for="showLength"><%=cm.cmsText("length")%></label>
+          <%=cm.cmsTitle("length")%>
 
-          <input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("sites_size_16")%>" />
-          <label for="showDesignationYear"><%=cm.cmsText("sites_size_16")%></label>
-          <%=cm.cmsTitle("sites_size_16")%>
+          <input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("designation_year")%>" />
+          <label for="showDesignationYear"><%=cm.cmsText("designation_year")%></label>
+          <%=cm.cmsTitle("designation_year")%>
         </div>
-        <img align="middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
+        <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
         <%=cm.cmsAlt("field_mandatory")%>
         <label for="searchType" class="noshow"><%=cm.cms("type_of_search")%></label>
         <select id="searchType" name="searchType" class="inputTextField" onchange="adjustUnits(this)" title="<%=cm.cms("type_of_search")%>">
           <option value="<%=SizeSearchCriteria.SEARCH_AREA%>" <%=(SizeSearchCriteria.SEARCH_AREA.intValue() == criteriaSelected) ? "selected=\"selected\"" : ""%>>
-            <%=cm.cms("sites_size_14")%>
+            <%=cm.cms("size")%>
           </option>
           <option value="<%=SizeSearchCriteria.SEARCH_LENGTH%>" <%=(SizeSearchCriteria.SEARCH_LENGTH.intValue() == criteriaSelected) ? "selected=\"selected\"" : ""%>>
-            <%=cm.cms("sites_size_15")%>
+            <%=cm.cms("length")%>
           </option>
         </select>
         <%=cm.cmsLabel("type_of_search")%>
         <%=cm.cmsTitle("type_of_search")%>
-        <%=cm.cmsInput("sites_size_14")%>
-        <%=cm.cmsInput("sites_size_15")%>
+        <%=cm.cmsInput("size")%>
+        <%=cm.cmsInput("length")%>
         <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
         <select id="relationOp" name="relationOp" class="inputTextField" onchange="MM_jumpMenu('parent',this,0)" title="<%=cm.cms("operator")%>">
           <option value="relationOp=<%=Utilities.OPERATOR_IS%>" <%if (relationOp == Utilities.OPERATOR_IS.intValue()) {%>selected="selected"<%}%>>
-            <%=cm.cms("sites_size_18")%>
+            <%=cm.cms("is")%>
           </option>
           <option value="relationOp=<%=Utilities.OPERATOR_BETWEEN%>" <%if (relationOp == Utilities.OPERATOR_BETWEEN.intValue()) {%>selected="selected"<%}%>>
-            <%=cm.cms("sites_size_19")%>
+            <%=cm.cms("between")%>
           </option>
           <option value="relationOp=<%=Utilities.OPERATOR_GREATER_OR_EQUAL%>" <%if (relationOp == Utilities.OPERATOR_GREATER_OR_EQUAL.intValue()) {%>selected="selected"<%}%>>
-            <%=cm.cms("sites_size_20")%>
+            <%=cm.cms("greater_than")%>
           </option>
           <option value="relationOp=<%=Utilities.OPERATOR_SMALLER_OR_EQUAL%>" <%if (relationOp == Utilities.OPERATOR_SMALLER_OR_EQUAL.intValue()) {%>selected="selected"<%}%>>
-            <%=cm.cms("sites_size_21")%>
+            <%=cm.cms("smaller_than")%>
           </option>
         </select>
         <%=cm.cmsLabel("operator")%>
         <%=cm.cmsTitle("operator")%>
-        <%=cm.cmsInput("sites_size_18")%>
-        <%=cm.cmsInput("sites_size_19")%>
-        <%=cm.cmsInput("sites_size_20")%>
-        <%=cm.cmsInput("sites_size_21")%>
+        <%=cm.cmsInput("is")%>
+        <%=cm.cmsInput("between")%>
+        <%=cm.cmsInput("greater_than")%>
+        <%=cm.cmsInput("smaller_than")%>
 <%
   if (relationOp == Utilities.OPERATOR_BETWEEN.intValue())
   {
@@ -259,41 +259,41 @@
   }
 %>
         <br />
-        <img align="middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
+        <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
         <%=cm.cmsAlt("field_optional")%>
         <label for="country">
           <strong>
-            <%=cm.cmsText("sites_size_22")%>
+            <%=cm.cmsText("country_is")%>
           </strong>
         </label>
-        <input id="country" name="country" type="text" size="30" class="inputTextField" title="<%=cm.cms("sites_size_22")%>" value="<%=country%>" />&nbsp;
-        <%=cm.cmsLabel("sites_size_22")%>
-        <%=cm.cmsTitle("sites_size_22")%>
-        <a title="<%=cm.cms("helper")%>" href="javascript:chooseCountry('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" align="middle" /></a>
+        <input id="country" name="country" type="text" size="30" class="inputTextField" title="<%=cm.cms("country_is")%>" value="<%=country%>" />&nbsp;
+        <%=cm.cmsLabel("country_is")%>
+        <%=cm.cmsTitle("country_is")%>
+        <a title="<%=cm.cms("helper")%>" href="javascript:chooseCountry('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" style="vertical-align:middle" /></a>
         <%=cm.cmsTitle("helper")%>
         <%=cm.cmsAlt("helper")%>
         <br />
-        <img align="middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
+        <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
         <%=cm.cmsAlt("field_optional")%>
         <strong>
-          <%=cm.cmsText("sites_size_24")%>
+          <%=cm.cmsText("designation_year_between")%>
         </strong>
         <label for="yearMin" class="noshow"><%=cm.cms("minimum_designation_year")%></label>
         <input id="yearMin" name="yearMin" type="text" maxlength="4" size="4" class="inputTextField" title="<%=cm.cms("minimum_designation_year")%>" value="<%=yearMin%>"/>
         <%=cm.cmsLabel("minimum_designation_year")%>
         <%=cm.cmsTitle("minimum_designation_year")%>
 
-        <%=cm.cmsText("sites_size_25")%>
+        <%=cm.cmsText("and")%>
         <label for="yearMax" class="noshow"><%=cm.cms("maximum_designation_year")%></label>
         <input id="yearMax" name="yearMax" type="text" maxlength="4" size="4" class="inputTextField" title="<%=cm.cms("maximum_designation_year")%>" value="<%=yearMax%>" />
         <div class="submit_buttons">
-          <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset_btn_value")%>" class="inputTextField" title="<%=cm.cms("reset_btn_title")%>" />
-          <%=cm.cmsTitle("reset_btn_title")%>
-          <%=cm.cmsInput("reset_btn_value")%>
+          <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset")%>" class="inputTextField" title="<%=cm.cms("reset_values")%>" />
+          <%=cm.cmsTitle("reset_values")%>
+          <%=cm.cmsInput("reset")%>
 
-          <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=cm.cms("search_btn_value")%>" title="<%=cm.cms("search_btn_title")%>" />
-          <%=cm.cmsTitle("search_btn_title")%>
-          <%=cm.cmsInput("search_btn_value")%>
+          <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=cm.cms("search")%>" title="<%=cm.cms("search")%>" />
+          <%=cm.cmsTitle("search")%>
+          <%=cm.cmsInput("search")%>
         </div>
         <jsp:include page="sites-search-common.jsp" />
       </form>
@@ -303,8 +303,8 @@
 if (SessionManager.isAuthenticated()&&SessionManager.isSave_search_criteria_RIGHT())
 {
 %>
-      <%=cm.cmsText("sites_size_28")%>
-      <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-size.jsp','4','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+      <%=cm.cmsText("save_your_criteria_1")%>
+      <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-size.jsp','4','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
       <%=cm.cmsTitle("save")%>
       <%=cm.cmsAlt("save")%>
 <%
@@ -333,7 +333,7 @@ if (SessionManager.isAuthenticated()&&SessionManager.isSave_search_criteria_RIGH
   }
 %>
 
-      <%=cm.cmsMsg("sites_size_title")%>
+      <%=cm.cmsMsg("site_size")%>
       <%=cm.br()%>
       <%=cm.cmsMsg("sites_size_02")%>
       <%=cm.br()%>
@@ -341,11 +341,11 @@ if (SessionManager.isAuthenticated()&&SessionManager.isSave_search_criteria_RIGH
       <%=cm.br()%>
       <%=cm.cmsMsg("sites_size_04")%>
       <%=cm.br()%>
-      <%=cm.cmsMsg("sites_size_05")%>
+      <%=cm.cmsMsg("enter_min_year_in_yyyy")%>
       <%=cm.br()%>
-      <%=cm.cmsMsg("sites_size_06")%>
+      <%=cm.cmsMsg("enter_max_year_in_yyyy")%>
       <%=cm.br()%>
-      <%=cm.cmsMsg("sites_size_07")%>
+      <%=cm.cmsMsg("minimum_designation_year_invalid")%>
       <%=cm.br()%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="sites-size.jsp" />

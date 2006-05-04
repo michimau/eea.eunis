@@ -67,7 +67,7 @@
       String parameters = "mapType=Standard_B&amp;Q=" + colorURL.getElementsSeparatedByComma() + "&amp;outline=1";
       String filename = mapserverURL + "?" + parameters;
 %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_factsheet-geo_10")%></div>
+    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("geographical_distribution")%></div>
     <table summary="layout" border="0" cellpadding="3" cellspacing="0" width="100%">
       <tr>
         <td>
@@ -75,17 +75,17 @@
       if(colorURL.elements().size() > 0)
       {
 %>
-          <img alt="<%=cm.cms("species_factsheet-geo_03")%>" src="<%=filename%>" title="<%=cm.cms("species_factsheet-geo_03")%>" />
-          <%=cm.cmsAlt("species_factsheet-geo_03")%>
+          <img alt="<%=cm.cms("map_image_eea")%>" src="<%=filename%>" title="<%=cm.cms("map_image_eea")%>" />
+          <%=cm.cmsAlt("map_image_eea")%>
 <%
       }
 %>
           <br />
-          <a title="<%=cm.cms("species_factsheet-geo_11_Title")%>" href="javascript:openLink('<%=mapserverURL + "?" + parameters%>');"><%=cm.cmsText("species_factsheet-geo_11")%></a>
-          <%=cm.cmsTitle("species_factsheet-geo_11_Title")%>
+          <a title="<%=cm.cms("open_new_window")%>" href="javascript:openLink('<%=mapserverURL + "?" + parameters%>');"><%=cm.cmsText("open_new_window")%></a>
+          <%=cm.cmsTitle("open_new_window")%>
         </td>
         <td>
-          <%=cm.cmsText("species_factsheet-geo_02")%>:
+          <%=cm.cmsText("legend")%>:
           <br />
 <%
         Enumeration keys = statusColorPair.keys();
@@ -93,7 +93,7 @@
         {
           String key = (String)keys.nextElement();
 %>
-          <img alt="<%=cm.cms("species_factsheet-geo_03")%>" src="<%=application.getInitParameter("EEA_MAP_SERVER")%>/getLegend.asp?Color=H<%=statusColorPair.get(key)%>" title="<%=cm.cms("species_factsheet-geo_03")%>" /><%=cm.cmsTitle("species_factsheet-geo_03")%>&nbsp;<%=key%>
+          <img alt="<%=cm.cms("map_image_eea")%>" src="<%=application.getInitParameter("EEA_MAP_SERVER")%>/getLegend.asp?Color=H<%=statusColorPair.get(key)%>" title="<%=cm.cms("map_image_eea")%>" /><%=cm.cmsTitle("map_image_eea")%>&nbsp;<%=key%>
           <br />
 <%
         }
@@ -105,22 +105,22 @@
 %>
     </table>
     <br />
-    <table summary="<%=cm.cms("species_factsheet-geo_12_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="geographic" class="sortable">
+    <table summary="<%=cm.cms("geographical_distribution")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="geographic" class="sortable">
       <tr>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
           <%=cm.cmsText("species_factsheet-geo_04")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-geo_05")%>
+          <%=cm.cmsText("biogeographic_region")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-geo_06")%>
+          <%=cm.cmsText("status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
-         <%=cm.cmsText("species_factsheet-geo_07")%>
+         <%=cm.cmsText("reference")%>
          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
@@ -138,8 +138,8 @@
             if(Utilities.isCountry(country))
             {
         %>
-          <a href="javascript:goToCountryStatistics('<%=Utilities.treatURLSpecialCharacters(country)%>')" title="<%=cm.cms("species_factsheet-geo_12_Title")%> <%=Utilities.treatURLSpecialCharacters(country)%>"><%=Utilities.treatURLSpecialCharacters(country)%></a>
-          <%=cm.cmsTitle("species_factsheet-geo_12_Title")%>
+          <a href="javascript:goToCountryStatistics('<%=Utilities.treatURLSpecialCharacters(country)%>')" title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(country)%>"><%=Utilities.treatURLSpecialCharacters(country)%></a>
+          <%=cm.cmsTitle("open_the_statistical_data_for")%>
         <%
             } else {
         %>
@@ -192,7 +192,7 @@
 %>
 
 <%=cm.br()%>
-<%=cm.cmsMsg("species_factsheet-geo_12_Sum")%>
+<%=cm.cmsMsg("geographical_distribution")%>
 
     <br />
     <br />

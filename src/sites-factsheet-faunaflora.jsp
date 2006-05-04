@@ -50,9 +50,9 @@
             SiteFactsheet.TYPE_DIPLOMA == type)) // If some attributes are non-null and site is from these dbs
   {
 %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_61")%></div>
+    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("site_contact_authorities")%></div>
     <%-- Site contact authorities --%>
-    <table summary="<%=cm.cms("sites_factsheet_61")%>" border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse" >
+    <table summary="<%=cm.cms("site_contact_authorities")%>" border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse" >
 <%
     if (SiteFactsheet.TYPE_NATURA2000 == type ||
               SiteFactsheet.TYPE_EMERALD == type ||
@@ -62,7 +62,7 @@
 %>
       <tr bgcolor="#EEEEEE">
         <td width="40%">
-          <%=cm.cmsText("sites_factsheet_62")%>
+          <%=cm.cmsText("respondent")%>
         </td>
         <td width="60%">
           <%=respondent%>
@@ -75,7 +75,7 @@
 %>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=cm.cmsText("sites_factsheet_63")%>
+          <%=cm.cmsText("author")%>
         </td>
         <td>
           <%=author%>
@@ -91,7 +91,7 @@
 %>
       <tr bgcolor="#EEEEEE">
         <td>
-          <%=cm.cmsText("sites_factsheet_64")%>
+          <%=cm.cmsText("manager")%>
         </td>
         <td>
           <%=manager%>
@@ -104,7 +104,7 @@
 %>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=cm.cmsText("sites_factsheet_65")%>
+          <%=cm.cmsText("information")%>
         </td>
         <td>
           <%=information%>
@@ -112,7 +112,7 @@
       </tr>
       <tr bgcolor="#EEEEEE">
         <td>
-          <%=cm.cmsText("sites_factsheet_66")%>
+          <%=cm.cmsText("official_contact_international")%>
         </td>
         <td>
           <%=officialContactInternational%>&nbsp;
@@ -120,7 +120,7 @@
       </tr>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=cm.cmsText("sites_factsheet_67")%>
+          <%=cm.cmsText("official_contact_national")%>
         </td>
         <td>
           <%=officialContactNational%>&nbsp;
@@ -128,7 +128,7 @@
       </tr>
       <tr bgcolor="#EEEEEE">
         <td>
-          <%=cm.cmsText("sites_factsheet_68")%>
+          <%=cm.cmsText("official_contact_regional")%>
         </td>
         <td>
           <%=officialContactRegional%>&nbsp;
@@ -136,7 +136,7 @@
       </tr>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=cm.cmsText("sites_factsheet_69")%>
+          <%=cm.cmsText("official_contact_local")%>
         </td>
         <td>
           <%=officialContactLocal%>&nbsp;
@@ -194,7 +194,7 @@
       <tr>
         <td colspan="2" bgcolor="#DDDDDD">
           <strong>
-            <%=cm.cmsText("sites_factsheet_faunaflora_description")%>
+            <%=cm.cmsText("description")%>
           </strong>
         </td>
       </tr>
@@ -207,7 +207,7 @@
 %>
       <tr bgcolor="#EEEEEE">
         <td width="30%">
-          <%=cm.cmsText("sites_factsheet_70")%>
+          <%=cm.cmsText("general_character_of_site")%>
         </td>
         <td width="70%">
           <%=character%>&nbsp;
@@ -220,7 +220,7 @@
 %>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=cm.cmsText("sites_factsheet_71")%>
+          <%=cm.cmsText("quality")%>
         </td>
         <td>
           <%=quality%>&nbsp;
@@ -228,7 +228,7 @@
       </tr>
       <tr bgcolor="#EEEEEE">
         <td>
-          <%=cm.cmsText("sites_factsheet_72")%>
+          <%=cm.cmsText("vulnerability")%>
         </td>
         <td>
           <%=vulnerability%>&nbsp;
@@ -236,7 +236,7 @@
       </tr>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=cm.cmsText("sites_factsheet_73")%>
+          <%=cm.cmsText("designation")%>
         </td>
         <td>
           <%=designation%>&nbsp;
@@ -244,7 +244,7 @@
       </tr>
       <tr bgcolor="#EEEEEE">
         <td>
-          <%=cm.cmsText("sites_factsheet_74")%>
+          <%=cm.cmsText("owner")%>
         </td>
         <td>
           <%=ownership%>&nbsp;
@@ -252,7 +252,7 @@
       </tr>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=cm.cmsText("sites_factsheet_75")%>
+          <%=cm.cmsText("documentation")%>
         </td>
         <td>
           <%=documentation%>&nbsp;
@@ -265,7 +265,7 @@
 %>
       <tr bgcolor="#EEEEEE">
         <td>
-          <%=cm.cmsText("sites_factsheet_76")%>
+          <%=cm.cmsText("habitat_types")%>
         </td>
         <td>
           <%=characterization%>&nbsp;
@@ -273,7 +273,7 @@
       </tr>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=cm.cmsText("sites_factsheet_77")%>
+          <%=cm.cmsText("flora")%>
         </td>
         <td>
           <%=floraCharacterization%>&nbsp;
@@ -281,7 +281,7 @@
       </tr>
       <tr bgcolor="#EEEEEE">
         <td>
-          <%=cm.cmsText("sites_factsheet_78")%>
+          <%=cm.cmsText("fauna")%>
         </td>
         <td>
           <%=faunaCharacterization%>&nbsp;
@@ -289,7 +289,7 @@
       </tr>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=cm.cmsText("sites_factsheet_79")%>
+          <%=cm.cmsText("potential_vegetation")%>
         </td>
         <td>
           <%=potentialVegetation%>&nbsp;
@@ -302,7 +302,7 @@
 %>
       <tr bgcolor="#EEEEEE">
         <td>
-          <%=cm.cmsText("sites_factsheet_80")%>
+          <%=cm.cmsText("geomorphology")%>
         </td>
         <td>
           <%=geomorphology%>&nbsp;
@@ -310,14 +310,14 @@
       </tr>
       <tr bgcolor="#FFFFFF">
         <td>
-          <%=cm.cmsText("sites_factsheet_81")%>
+          <%=cm.cmsText("educational_interest")%>
         </td>
         <td>
           <%=educationalInterest%>&nbsp;
         </td>
       </tr>
       <tr bgcolor="#EEEEEE">
-        <td><%=cm.cmsText("sites_factsheet_82")%></td>
+        <td><%=cm.cmsText("cultural_heritage")%></td>
         <td><%=culturalHeritage%>&nbsp;</td>
       </tr>
 <%
@@ -326,7 +326,7 @@
   {
 %>
       <tr bgcolor="#FFFFFF">
-        <td><%=cm.cmsText("sites_factsheet_83")%></td>
+        <td><%=cm.cmsText("justification")%></td>
         <td><%=justification%>&nbsp;</td>
       </tr>
 <%
@@ -335,11 +335,11 @@
   {
 %>
       <tr bgcolor="#EEEEEE">
-        <td><%=cm.cmsText("sites_factsheet_84")%></td>
+        <td><%=cm.cmsText("methodology")%></td>
         <td><%=methodology%>&nbsp;</td>
       </tr>
       <tr bgcolor="#FFFFFF">
-        <td><%=cm.cmsText("sites_factsheet_85")%></td>
+        <td><%=cm.cmsText("budget")%></td>
         <td><%=budget%>&nbsp;</td>
       </tr>
 <%
@@ -351,7 +351,7 @@
   {
 %>
       <tr bgcolor="#EEEEEE">
-        <td><%=cm.cmsText("sites_factsheet_86")%></td>
+        <td><%=cm.cmsText("management_plan")%></td>
         <td><%=managementPlan%>&nbsp;</td>
       </tr>
 <%
@@ -360,11 +360,11 @@
   {
 %>
       <tr bgcolor="#FFFFFF">
-        <td><%=cm.cmsText("sites_factsheet_87")%></td>
+        <td><%=cm.cmsText("url_official")%></td>
         <td><a title="Official URL" href="<%=urlOfficial%>"><%=urlOfficial%></a>&nbsp;</td>
       </tr>
       <tr bgcolor="#EEEEEE">
-        <td><%=cm.cmsText("sites_factsheet_88")%></td>
+        <td><%=cm.cmsText("url_interesting")%></td>
         <td><a title="URL interesting" href="<%=urlInteresting%>"><%=urlInteresting%></a>&nbsp;</td>
       </tr>
 <%
@@ -394,23 +394,23 @@
           {
 %>
 
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_89")%></div>
-      <table summary="<%=cm.cms("sites_factsheet_89")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="species" class="sortable">
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("ecological_information_fauna_flora")%></div>
+      <table summary="<%=cm.cms("ecological_information_fauna_flora")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="species" class="sortable">
         <tr>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_90")%>
+            <%=cm.cmsText("species_scientific_name")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_91")%>
+            <%=cm.cmsText("species_group")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_92")%>
+            <%=cm.cmsText("resident")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_93")%>
+            <%=cm.cmsText("breeding")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
@@ -418,7 +418,7 @@
             <%=cm.cmsTitle("sites_factsheet_faunaflora_wintering")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_95")%>
+            <%=cm.cmsText("staging")%>
             <%=cm.cmsTitle("sites_factsheet_faunaflora_annexesofdirectives")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
@@ -426,7 +426,7 @@
             <%=cm.cmsTitle("sites_factsheet_faunaflora_populationstatus")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_97")%>
+            <%=cm.cmsText("species")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
@@ -438,7 +438,7 @@
             <%=cm.cmsTitle("sites_factsheet_faunaflora_conservationstatus")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_100")%>
+            <%=cm.cmsText("isolation")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
@@ -446,7 +446,7 @@
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_102")%>
+            <%=cm.cmsText("species_status")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
@@ -555,11 +555,11 @@
     if (sitesSpecificspecies.size() > 0)
     {
 %>
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_103")%></div>
-      <table summary="<%=cm.cms("sites_factsheet_103")%>" border="1" cellpadding="1" cellspacing="1" width="100%" name="speciesNonEUNIS" id="speciesNonEUNIS" cols="1" style="border-collapse:collapse">
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("other_species_mentioned_in_site")%></div>
+      <table summary="<%=cm.cms("other_species_mentioned_in_site")%>" border="1" cellpadding="1" cellspacing="1" width="100%" name="speciesNonEUNIS" id="speciesNonEUNIS" cols="1" style="border-collapse:collapse">
         <tr>
           <th class="resultHeader">
-            <%=cm.cmsText("sites_factsheet_104")%>
+            <%=cm.cmsText("species_scientific_name")%>
           </th>
         </tr>
 <%
@@ -596,29 +596,29 @@
       {
         Chm62edtReportAttributesPersist attribute;
 %>
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_106")%></div>
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("ecological_information_fauna_flora_mentioned_in_site")%></div>
       <%-- species mentioned in annexes and directives --%>
 <%
     if (!eunisSpeciesListedAnnexesDirectives.isEmpty() || !notEunisSpeciesListedAnnexesDirectives.isEmpty())
     {
 %>
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_97")%></div>
-      <table summary="<%=cm.cms("sites_factsheet_97")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="species1" class="sortable">
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species")%></div>
+      <table summary="<%=cm.cms("species")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="species1" class="sortable">
         <tr>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_107")%>
+            <%=cm.cmsText("species_scientific_name")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_108")%>
+            <%=cm.cmsText("species_group")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_92")%>
+            <%=cm.cmsText("resident")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_93")%>
+            <%=cm.cmsText("breeding")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
@@ -626,7 +626,7 @@
             <%=cm.cmsTitle("sites_factsheet_faunaflora_wintering")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_95")%>
+            <%=cm.cmsText("staging")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
@@ -638,7 +638,7 @@
             <%=cm.cmsTitle("sites_factsheet_faunaflora_populationstatus")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_100")%>
+            <%=cm.cmsText("isolation")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
@@ -801,23 +801,23 @@
     if (!eunisSpeciesOtherMentioned.isEmpty() || !notEunisSpeciesOtherMentioned.isEmpty())
     {
 %>
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_103")%></div>
-      <table summary="<%=cm.cms("sites_factsheet_103")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="species_other" class="sortable">
+      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("other_species_mentioned_in_site")%></div>
+      <table summary="<%=cm.cms("other_species_mentioned_in_site")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="species_other" class="sortable">
         <tr>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_111")%>
+            <%=cm.cmsText("species_group")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_110")%>
+            <%=cm.cmsText("species_name")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_113")%>
+            <%=cm.cmsText("population_size_estimations")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_112")%>
+            <%=cm.cmsText("motivation_for_species_mention")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>

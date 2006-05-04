@@ -59,14 +59,14 @@
   <body>
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,web_content_management_location"/>
+        <jsp:param name="location" value="home#index.jsp,web_content_management_location"/>
         <jsp:param name="helpLink" value="help.jsp"/>
       </jsp:include>
 <%
   if( SessionManager.isAuthenticated() && SessionManager.isContent_management_RIGHT() )
   {
 %>    <h1>
-        <%=cm.cmsText("web_content_keys_02")%>
+        <%=cm.cmsText("web_content_editor")%>
       </h1>
       <br />
       <%=cm.cmsText("web_content_keys_03")%>
@@ -78,14 +78,14 @@
         <br />
         <input title="<%=cm.cms("web_content_keys_04")%>" type="text" size="50" name="idpage" id="idpage" class="inputTextField" style="font-family:monospace,serif;" />
         <br />
-        <label for="contentData"><%=cm.cmsText("web_content_keys_05")%>:</label>
+        <label for="contentData"><%=cm.cmsText("content")%>:</label>
         <br />
-        <textarea title="<%=cm.cms("web_content_keys_05")%>" rows="5" cols="50" name="contentData" id="contentData" class="inputTextField" style="font-family:monospace,serif;"></textarea>
+        <textarea title="<%=cm.cms("content")%>" rows="5" cols="50" name="contentData" id="contentData" class="inputTextField" style="font-family:monospace,serif;"></textarea>
         <br />
         <br />
-        <input title="<%=cm.cms("web_content_keys_06")%>" type="submit" name="submit" id="sub1" value="<%=cm.cms("web_content_keys_07")%>" class="inputTextField" />
-        <%=cm.cmsTitle("web_content_keys_06")%>
-        <%=cm.cmsInput("web_content_keys_07")%>
+        <input title="<%=cm.cms("insert_new_key")%>" type="submit" name="submit" id="sub1" value="<%=cm.cms("insert_new_key")%>" class="inputTextField" />
+        <%=cm.cmsTitle("insert_new_key")%>
+        <%=cm.cmsInput("insert_new_key")%>
       </form>
       <br />
       <br />

@@ -88,18 +88,18 @@
   if (currentPageNavigator > 1)
   {
 %>
-          <a title="<%=cm.cms("navigator_first_title")%>" href="<%=pageNameNavigator + "?" + toURLParam%>&amp;currentPage=0"><img src="images/navigator/<%=jpgFirst%>" width="28" height="28" align="middle" border="0" title="<%=cm.cms("navigator_first_alt")%>" alt="<%=cm.cms("navigator_first_alt")%>" /></a>
-          <%=cm.cmsTitle("navigator_first_title")%>
-          <%=cm.cmsAlt("navigator_first_alt")%>
+          <a title="<%=cm.cms("first_page")%>" href="<%=pageNameNavigator + "?" + toURLParam%>&amp;currentPage=0"><img src="images/navigator/<%=jpgFirst%>" width="28" height="28" style="vertical-align:middle" border="0" title="<%=cm.cms("first_page")%>" alt="<%=cm.cms("first_page")%>" /></a>
+          <%=cm.cmsTitle("first_page")%>
+          <%=cm.cmsAlt("first_page")%>
 <%
   }
   // Show previous page
   if (currentPageNavigator > 0)
   {
 %>
-          <a title="<%=cm.cms("navigator_previous_title")%>" href="<%=pageNameNavigator + "?" + toURLParam%>&amp;currentPage=<%=currentPageNavigator - 1%>"><img src="images/navigator/<%=jpgPrev%>" width="28" height="28" align="middle" border="0" title="<%=cm.cms("navigator_previous_alt")%>" alt="<%=cm.cms("navigator_previous_alt")%>" /></a>
-          <%=cm.cmsTitle("navigator_previous_title")%>
-          <%=cm.cmsAlt("navigator_previous_alt")%>
+          <a title="<%=cm.cms("previous_page")%>" href="<%=pageNameNavigator + "?" + toURLParam%>&amp;currentPage=<%=currentPageNavigator - 1%>"><img src="images/navigator/<%=jpgPrev%>" width="28" height="28" style="vertical-align:middle" border="0" title="<%=cm.cms("previous_page")%>" alt="<%=cm.cms("previous_page")%>" /></a>
+          <%=cm.cmsTitle("previous_page")%>
+          <%=cm.cmsAlt("previous_page")%>
 <%
   }
 %>
@@ -115,8 +115,8 @@
         <td width="35%" align="center" valign="middle">
           <label for="currentPage<%=guidNavigator%>"><%=cm.cmsText("navigator_goto_page_label")%>:</label>
           <input title="<%=cm.cms("navigator_goto_page_title")%>" class="inputTextFieldCenter" id="currentPage<%=guidNavigator%>" name="currentPage" type="text" size="3" value="<%=(currentPageNavigator + 1 > pagesCountNavigator) ? currentPageNavigator : currentPageNavigator + 1%>" />
-          <input title="<%=cm.cms("navigator_change_page_title")%>" class="inputTextField" type="submit" id="submit<%=guidNavigator%>" name="Submit" value="<%=cm.cms("navigator_change_page_value")%>" /><%=toFORMParam%>
-          <%=cm.cmsInput("navigator_change_page_value")%>
+          <input title="<%=cm.cms("change_page")%>" class="inputTextField" type="submit" id="submit<%=guidNavigator%>" name="Submit" value="<%=cm.cms("change_page")%>" /><%=toFORMParam%>
+          <%=cm.cmsInput("change_page")%>
         </td>
         <td width="16%" align="right" valign="middle">
 <%
@@ -124,18 +124,18 @@
   if (currentPageNavigator < pagesCountNavigator - 1)
   {
 %>
-          <a title="<%=cm.cms("navigator_next_page_title")%>" href="<%=pageNameNavigator + "?" + toURLParam%>&amp;currentPage=<%=currentPageNavigator + 1%>"><img src="images/navigator/<%=jpgNext%>" width="28" height="28" align="middle" border="0" title="<%=cm.cms("navigator_next_page_title")%>" alt="<%=cm.cms("navigator_next_page_alt")%>" /></a>
-          <%=cm.cmsTitle("navigator_next_page_title")%>
-          <%=cm.cmsAlt("navigator_next_page_alt")%>
+          <a title="<%=cm.cms("next_page")%>" href="<%=pageNameNavigator + "?" + toURLParam%>&amp;currentPage=<%=currentPageNavigator + 1%>"><img src="images/navigator/<%=jpgNext%>" width="28" height="28" style="vertical-align:middle" border="0" title="<%=cm.cms("next_page")%>" alt="<%=cm.cms("next_page")%>" /></a>
+          <%=cm.cmsTitle("next_page")%>
+          <%=cm.cmsAlt("next_page")%>
 <%
   }
   // Go to the last page
   if (currentPageNavigator < pagesCountNavigator - 2)
   {
 %>
-          <a title="<%=cm.cms("navigator_last_page_title")%>" href="<%=pageNameNavigator + "?" + toURLParam%>&amp;currentPage=<%=pagesCountNavigator - 1%>"><img src="images/navigator/<%=jpgLast%>" width="28" height="28" align="middle" border="0" title="<%=cm.cms("navigator_last_page_title")%>" alt="<%=cm.cms("navigator_last_page_alt")%>" /></a>
-          <%=cm.cmsTitle("navigator_last_page_title")%>
-          <%=cm.cmsAlt("navigator_last_page_alt")%>
+          <a title="<%=cm.cms("last_page")%>" href="<%=pageNameNavigator + "?" + toURLParam%>&amp;currentPage=<%=pagesCountNavigator - 1%>"><img src="images/navigator/<%=jpgLast%>" width="28" height="28" style="vertical-align:middle" border="0" title="<%=cm.cms("last_page")%>" alt="<%=cm.cms("last_page")%>" /></a>
+          <%=cm.cmsTitle("last_page")%>
+          <%=cm.cmsAlt("last_page")%>
 <%
   }
 %>

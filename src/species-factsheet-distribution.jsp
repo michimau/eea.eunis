@@ -79,39 +79,39 @@
       ex.printStackTrace();
     }
 %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_factsheet-distribution_10")%></div>
+    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("grid_distribution")%></div>
 <%
   if ( success )
   {
 %>
-    <img alt="<%=cm.cms("species_factsheet-distribution_11_Title")%>" name = "mmap" src="temp/<%=filename%>" style="vertical-align:middle" title="<%=cm.cms("species_factsheet-distribution_11_Title")%>" />
-    <%=cm.cmsTitle("species_factsheet-distribution_11_Title")%>
+    <img alt="<%=cm.cms("grid_distribution")%>" name = "mmap" src="temp/<%=filename%>" style="vertical-align:middle" title="<%=cm.cms("grid_distribution")%>" />
+    <%=cm.cmsTitle("grid_distribution")%>
     <br />
     <br />
 <%
   }
 %>
-    <table summary="<%=cm.cms("species_factsheet-distribution_12_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="distribution" class="sortable">
+    <table summary="<%=cm.cms("table_of_results")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="distribution" class="sortable">
       <tr style="vertical-align:middle" title="<%=cm.cms("sort_results_on_this_column")%>">
         <th style="text-align:left">
-          <%=cm.cmsText("species_factsheet-distribution_03")%>
-          <%=cm.cmsTitle("species_factsheet-distribution_13_Title")%>
+          <%=cm.cmsText("code_cell")%>
+          <%=cm.cmsTitle("sort_by_column")%>
         </th>
         <th style="text-align:right" title="<%=cm.cms("sort_results_on_this_column")%>">
           <%=cm.cmsText("species_factsheet-distribution_04")%>
-          <%=cm.cmsTitle("species_factsheet-distribution_13_Title")%>
+          <%=cm.cmsTitle("sort_by_column")%>
         </th>
         <th style="text-align:right" title="<%=cm.cms("sort_results_on_this_column")%>">
           <%=cm.cmsText("species_factsheet-distribution_05")%>
-          <%=cm.cmsTitle("species_factsheet-distribution_13_Title")%>
+          <%=cm.cmsTitle("sort_by_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-distribution_06")%>
-          <%=cm.cmsTitle("species_factsheet-distribution_13_Title")%>
+          <%=cm.cmsText("status")%>
+          <%=cm.cmsTitle("sort_by_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-distribution_07")%>
-          <%=cm.cmsTitle("species_factsheet-distribution_13_Title")%>
+          <%=cm.cmsText("reference")%>
+          <%=cm.cmsTitle("sort_by_column")%>
         </th>
       </tr>
 <%
@@ -180,7 +180,7 @@
 %>
 
 <%=cm.br()%>
-<%=cm.cmsMsg("species_factsheet-distribution_12_Sum")%>
+<%=cm.cmsMsg("table_of_results")%>
 
 <br />
 <br />

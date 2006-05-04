@@ -26,7 +26,7 @@
 {
 %>
     <h1>
-      <%=cm.cmsText("users_list_01")%>
+      <%=cm.cmsText("eunis_database_user_management")%>
     </h1>
     <br />
     <h2><%=cm.cmsText("users_list_02")%></h2>
@@ -40,22 +40,22 @@ List usersList = new UserDomain().findCustom("SELECT USERNAME,PASSWORD,FIRST_NAM
 if(usersList != null && usersList.size() > 0)
   {
 %>
-<table summary="<%=cm.cms("users_list_03")%>" width="100%" border="1" cellspacing="0" cellpadding="0">
+<table summary="<%=cm.cms("list_users")%>" width="100%" border="1" cellspacing="0" cellpadding="0">
 <tr  class="dusers" style="text-align:left;font-weight :bold;">
   <td>
-    <%=cm.cmsText("users_list_04")%>
+    <%=cm.cmsText("user_name")%>
   </td>
   <td>
-    <%=cm.cmsText("users_list_05")%>
+    <%=cm.cmsText("first_name")%>
   </td>
   <td>
-    <%=cm.cmsText("users_list_06")%>
+    <%=cm.cmsText("last_name")%>
   </td>
   <td style="text-align:center">
     <%=cm.cmsText("users_list_07")%>
   </td>
   <td>
-    <%=cm.cmsText("users_list_08")%>
+    <%=cm.cmsText("roles")%>
   </td>
 </tr>
 <%
@@ -74,8 +74,8 @@ if(usersList != null && usersList.size() > 0)
     if (!Utilities.formatString(objUser.getUsername(),"&nbsp;").equalsIgnoreCase("&nbsp;"))
     {
   %>
-     <a href="users.jsp?userName=<%=objUser.getUsername()%>&amp;tab1=0&amp;tab2=1" title="<%=cm.cms("users_list_09")%>"><%=Utilities.formatString(objUser.getUsername(),"&nbsp;")%></a>
-     <%=cm.cmsTitle("users_list_09")%>
+     <a href="users.jsp?userName=<%=objUser.getUsername()%>&amp;tab1=0&amp;tab2=1" title="<%=cm.cms("edit_user")%>"><%=Utilities.formatString(objUser.getUsername(),"&nbsp;")%></a>
+     <%=cm.cmsTitle("edit_user")%>
   <%
     } else
     {
@@ -126,12 +126,12 @@ if(usersList != null && usersList.size() > 0)
   } else
   {
 %>
-<strong><%=cm.cmsText("users_list_10")%></strong>
+<strong><%=cm.cmsText("not_authenticated_no_rights")%></strong>
 <br />
 <%
   }
 %>
 
 <%=cm.br()%>
-<%=cm.cmsMsg("users_list_03")%>
+<%=cm.cmsMsg("list_users")%>
 <%=cm.br()%>

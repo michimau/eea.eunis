@@ -19,7 +19,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("news_page_title")%>
+      <%=cm.cms("news")%>
     </title>
   </head>
   <body>
@@ -27,20 +27,20 @@
   <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,news_location"/>
+      <jsp:param name="location" value="home#index.jsp,news_location"/>
     </jsp:include>
     <h1>
       <%=cm.cmsText("news_title")%>
     </h1>
     <%=cm.cmsText("news_description")%>
-    <a title="<%=cm.cms("news_rss_news_title")%>" target="_blank" href="news.xml"><%=cm.cmsText("news_rss_news")%></a>
+    <a title="<%=cm.cms("news_rss_news")%>" target="_blank" href="news.xml"><%=cm.cmsText("news_rss_news")%></a>
     <br />
     <br />
     <%=cm.cmsText("news_main")%>
     <br />
     <br />
 
-    <%=cm.cmsMsg("news_page_title")%>
+    <%=cm.cmsMsg("news")%>
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="news.jsp" />
     </jsp:include>

@@ -80,12 +80,12 @@
 <div id="alignment">
 <div id="content">
 <jsp:include page="header-dynamic.jsp">
-    <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,pick_species_show_references_location#species-books.jsp,results_location"/>
+    <jsp:param name="location" value="home#index.jsp,species#species.jsp,pick_species_show_references_location#species-books.jsp,results"/>
     <jsp:param name="helpLink" value="species-help.jsp"/>
     <jsp:param name="downloadLink" value="<%=tsvLink%>"/>
 </jsp:include>
 <h1>
-    <%=cm.cmsText("species_books-result_01")%>
+    <%=cm.cmsText("pick_species_show_references")%>
 </h1>
 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -117,7 +117,7 @@
      }
        %>
 
-<%=cm.cmsText("species_books-result_03")%>:
+<%=cm.cmsText("results_found_1")%>:
 <strong><%=resultsCount%></strong>
 
 <%// Prepare parameters for pagesize.jsp
@@ -148,7 +148,7 @@
     <tr>
         <td style="background-color:#EEEEEE">
             <strong>
-                <%=cm.cmsText("species_books-result_04")%>
+                <%=cm.cmsText("refine_your_search")%>
             </strong>
         </td>
     </tr>
@@ -156,50 +156,50 @@
         <td style="background-color:#EEEEEE">
             <form name="refineSearch" method="get" onsubmit="return(validateRefineForm(<%=noCriteria%>));" action="">
                 <%=formBean.toFORMParam(filterSearch)%>
-                <label for="select1" class="noshow"><%=cm.cms("species_books-result_16_Label")%></label>
-                <select id="select1" title="<%=cm.cms("species_books-result_16_Title")%>" name="criteriaType" class="inputTextField">
+                <label for="select1" class="noshow"><%=cm.cms("criteria")%></label>
+                <select id="select1" title="<%=cm.cms("criteria")%>" name="criteriaType" class="inputTextField">
                     <option value="<%=ReferencesSearchCriteria.CRITERIA_AUTHOR%>">
-                        <%=cm.cms("species_books-result_05")%>
+                        <%=cm.cms("author")%>
                     </option>
                     <option value="<%=ReferencesSearchCriteria.CRITERIA_DATE%>">
-                        <%=cm.cms("species_books-result_06")%>
+                        <%=cm.cms("date")%>
                     </option>
                     <option value="<%=ReferencesSearchCriteria.CRITERIA_TITLE%>" selected="selected">
-                        <%=cm.cms("species_books-result_07")%>
+                        <%=cm.cms("title")%>
                     </option>
                     <option value="<%=ReferencesSearchCriteria.CRITERIA_EDITOR%>">
-                        <%=cm.cms("species_books-result_08")%>
+                        <%=cm.cms("editor")%>
                     </option>
                     <option value="<%=ReferencesSearchCriteria.CRITERIA_PUBLISHER%>">
-                        <%=cm.cms("species_books-result_09")%>
+                        <%=cm.cms("publisher")%>
                     </option>
                 </select>
-                <%=cm.cmsLabel("species_books-result_16_Label")%>
-                <%=cm.cmsTitle("species_books-result_16_Title")%>
-                <label for="select2" class="noshow"><%=cm.cms("species_books-result_17_Label")%></label>
+                <%=cm.cmsLabel("criteria")%>
+                <%=cm.cmsTitle("criteria")%>
+                <label for="select2" class="noshow"><%=cm.cms("operator")%></label>
                 <select id="select2" title="<%=cm.cms("species_books-result_17_Title")%>" name="oper" class="inputTextField">
                     <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                        <%=cm.cms("species_books-result_10")%>
+                        <%=cm.cms("is")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_STARTS%>">
-                        <%=cm.cms("species_books-result_11")%>
+                        <%=cm.cms("starts_with")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                        <%=cm.cms("species_books-result_12")%>
+                        <%=cm.cms("contains")%>
                     </option>
                 </select>
-                <%=cm.cmsLabel("species_books-result_17_Label")%>
+                <%=cm.cmsLabel("operator")%>
                 <%=cm.cmsTitle("species_books-result_17_Title")%>
                 <label for="criteriaSearch" class="noshow">
-                 <%=cm.cms("species_books-result_18_Label")%>
+                 <%=cm.cms("filter_value")%>
                 </label>
-                <input id="criteriaSearch" title="<%=cm.cms("species_books-result_18_Title")%>" alt="<%=cm.cms("species_books-result_18_Title")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
-                <%=cm.cmsLabel("species_books-result_18_Label")%>
-                <%=cm.cmsTitle("species_books-result_18_Title")%>
-                <input id="button1" class="inputTextField" type="submit" name="Submit" title="<%=cm.cms("species_books-result_13_Title")%>"
-                       value="<%=cm.cms("species_books-result_13")%>" />
-                <%=cm.cmsTitle("species_books-result_13_Title")%>
-                <%=cm.cmsInput("species_books-result_13")%>
+                <input id="criteriaSearch" title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
+                <%=cm.cmsLabel("filter_value")%>
+                <%=cm.cmsTitle("filter_value")%>
+                <input id="button1" class="inputTextField" type="submit" name="Submit" title="<%=cm.cms("search")%>"
+                       value="<%=cm.cms("search")%>" />
+                <%=cm.cmsTitle("search")%>
+                <%=cm.cmsInput("search")%>
             </form>
         </td>
     </tr>
@@ -210,7 +210,7 @@
         {
     %>
     <tr>
-        <td style="background-color:#EEEEEE"><%=cm.cmsText("species_books-result_14")%>:</td>
+        <td style="background-color:#EEEEEE"><%=cm.cmsText("applied_filters_to_the_results")%>:</td>
     </tr>
     <%
         }
@@ -222,11 +222,11 @@
     %>
     <tr>
         <td style="background-color:#CCCCCC;text-align:left">
-            <a title="<%=cm.cms("species_books-result_19_Title")%>"
+            <a title="<%=cm.cms("delete_a_criteria")%>"
                href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img
-                    alt="<%=cm.cms("species_books-result_19_Alt")%>" src="images/mini/delete.jpg" border="0" style="vertical-align:middle"/></a>&nbsp;&nbsp;
-            <%=cm.cmsTitle("species_books-result_19_Title")%>
-            <%=cm.cmsAlt("species_books-result_19_Alt")%>
+                    alt="<%=cm.cms("delete_a_criteria")%>" src="images/mini/delete.jpg" border="0" style="vertical-align:middle"/></a>&nbsp;&nbsp;
+            <%=cm.cmsTitle("delete_a_criteria")%>
+            <%=cm.cmsAlt("delete_a_criteria")%>
             <strong class="linkDarkBg"><%= i + ". " + criteria.toHumanString()%></strong>
         </td>
     </tr>
@@ -268,44 +268,44 @@
 %>
 <tr>
     <th style="text-align:left" class="resultHeader">
-        <a title="<%=cm.cms("species_books-result_21_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor))%>">
+        <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor))%>">
             <span style="color:#FFFFFF">
-                <%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsText("species_books-result_05")%>
+                <%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsText("author")%>
             </span>
         </a>
-        <%=cm.cmsTitle("species_books-result_21_Title")%>
+        <%=cm.cmsTitle("sort_by_column")%>
     </th>
     <th style="text-align:right;" class="resultHeader">
-        <a title="<%=cm.cms("species_books-result_21_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate))%>">
+        <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate))%>">
             <span style="color:#FFFFFF">
-                <%=Utilities.getSortImageTag(sortDate)%><%=cm.cmsText("species_books-result_06")%>
+                <%=Utilities.getSortImageTag(sortDate)%><%=cm.cmsText("date")%>
             </span>
         </a>
-        <%=cm.cmsTitle("species_books-result_21_Title")%>
+        <%=cm.cmsTitle("sort_by_column")%>
     </th>
     <th style="text-align:left;" class="resultHeader">
-        <a title="<%=cm.cms("species_books-result_21_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle))%>">
+        <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle))%>">
             <span style="color:#FFFFFF">
-                <%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsText("species_books-result_07")%>
+                <%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsText("title")%>
             </span>
         </a>
-        <%=cm.cmsTitle("species_books-result_21_Title")%>
+        <%=cm.cmsTitle("sort_by_column")%>
     </th>
     <th style="text-align:left;" class="resultHeader">
-        <a title="<%=cm.cms("species_books-result_21_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor))%>">
+        <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor))%>">
         <span style="color:#FFFFFF">
-            <%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsText("species_books-result_08")%>
+            <%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsText("editor")%>
         </span>
     </a>
-    <%=cm.cmsTitle("species_books-result_21_Title")%>
+    <%=cm.cmsTitle("sort_by_column")%>
     </th>
     <th style="text-align:left;" class="resultHeader">
-        <a title="<%=cm.cms("species_books-result_21_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher))%>">
+        <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher))%>">
         <span style="color:#FFFFFF">
-            <%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsText("species_books-result_09")%>
+            <%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsText("publisher")%>
         </span>
     </a>
-    <%=cm.cmsTitle("species_books-result_21_Title")%>
+    <%=cm.cmsTitle("sort_by_column")%>
     </th>
     <th style="text-align:left;" class="resultHeader">
         <span style="color:#FFFFFF">
@@ -368,7 +368,7 @@
             if (resultsSpecies != null && resultsSpecies.size() > 0)
             {
         %>
-        <table summary="<%=cm.cms("species_books-result_22_Sum")%>" border="1" cellspacing="1" cellpadding="1" style="border-collapse: collapse;">
+        <table summary="<%=cm.cms("list_species")%>" border="1" cellspacing="1" cellpadding="1" style="border-collapse: collapse;">
             <%
                 for (int ii = 0; ii < resultsSpecies.size(); ii++)
                 {
@@ -398,44 +398,44 @@
 %>
 <tr>
     <th style="text-align:left" class="resultHeader">
-        <a title="<%=cm.cms("species_books-result_21_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor))%>">
+        <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor))%>">
             <span style="color:#FFFFFF">
-                <%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsText("species_books-result_05")%>
+                <%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsText("author")%>
             </span>
         </a>
-        <%=cm.cmsTitle("species_books-result_21_Title")%>
+        <%=cm.cmsTitle("sort_by_column")%>
     </th>
     <th style="text-align:right;" class="resultHeader">
-        <a title="<%=cm.cms("species_books-result_21_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate))%>">
+        <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate))%>">
             <span style="color:#FFFFFF">
-                <%=Utilities.getSortImageTag(sortDate)%><%=cm.cmsText("species_books-result_06")%>
+                <%=Utilities.getSortImageTag(sortDate)%><%=cm.cmsText("date")%>
             </span>
         </a>
-        <%=cm.cmsTitle("species_books-result_21_Title")%>
+        <%=cm.cmsTitle("sort_by_column")%>
     </th>
     <th style="text-align:left;" class="resultHeader">
-        <a title="<%=cm.cms("species_books-result_21_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle))%>">
+        <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle))%>">
             <span style="color:#FFFFFF">
-                <%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsText("species_books-result_07")%>
+                <%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsText("title")%>
             </span>
         </a>
-        <%=cm.cmsTitle("species_books-result_21_Title")%>
+        <%=cm.cmsTitle("sort_by_column")%>
     </th>
     <th style="text-align:left;" class="resultHeader">
-        <a title="<%=cm.cms("species_books-result_21_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor))%>">
+        <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor))%>">
         <span style="color:#FFFFFF">
-            <%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsText("species_books-result_08")%>
+            <%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsText("editor")%>
         </span>
     </a>
-    <%=cm.cmsTitle("species_books-result_21_Title")%>
+    <%=cm.cmsTitle("sort_by_column")%>
     </th>
     <th style="text-align:left;" class="resultHeader">
-        <a title="<%=cm.cms("species_books-result_21_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher))%>">
+        <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher))%>">
         <span style="color:#FFFFFF">
-            <%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsText("species_books-result_09")%>
+            <%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsText("publisher")%>
         </span>
     </a>
-    <%=cm.cmsTitle("species_books-result_21_Title")%>
+    <%=cm.cmsTitle("sort_by_column")%>
     </th>
     <th style="text-align:left;" class="resultHeader">
         <span style="color:#FFFFFF">
@@ -459,25 +459,25 @@
 <%=cm.br()%>
 <%=cm.cmsMsg("species_books-result_title")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_books-result_05")%>
+<%=cm.cmsMsg("author")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_books-result_06")%>
+<%=cm.cmsMsg("date")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_books-result_07")%>
+<%=cm.cmsMsg("title")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_books-result_08")%>
+<%=cm.cmsMsg("editor")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_books-result_09")%>
+<%=cm.cmsMsg("publisher")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_books-result_10")%>
+<%=cm.cmsMsg("is")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_books-result_11")%>
+<%=cm.cmsMsg("starts_with")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_books-result_12")%>
+<%=cm.cmsMsg("contains")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("species_books-result_20_Sum")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_books-result_22_Sum")%>
+<%=cm.cmsMsg("list_species")%>
 <%=cm.br()%>
 
 <jsp:include page="footer.jsp">

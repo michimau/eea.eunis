@@ -58,11 +58,11 @@
       WebContentManagement cm = SessionManager.getWebContent();
     %>
     <script language="JavaScript" type="text/javascript" src="script/header.js"></script>
-    <title><%=cm.cms("species_factsheet-geo-legal_title")%> <%=factsheet.getSpeciesObject().getScientificName()%></title>
+    <title><%=cm.cms("geographical_legal_information")%> <%=factsheet.getSpeciesObject().getScientificName()%></title>
   </head>
   <body>
     <strong>
-      <%=cm.cmsText("species_factsheet-geo-legal_01")%>
+      <%=cm.cmsText("geographical_legal_information")%>
       <%=Utilities.treatURLSpecialCharacters(factsheet.getSpeciesObject().getScientificName())%>
     </strong>
     <br />
@@ -89,7 +89,7 @@
       <tr>
         <td>
           <strong>
-            <%=cm.cmsText("species_factsheet-geo-legal_02")%>:
+            <%=cm.cmsText("title")%>:
           </strong>
           &nbsp;
           <%=Utilities.treatURLSpecialCharacters(title)%>
@@ -98,11 +98,11 @@
       <tr>
         <td>
           <strong>
-            <%=cm.cmsText("species_factsheet-geo-legal_03")%>:
+            <%=cm.cmsText("url")%>:
           </strong>
           &nbsp;
-          <a title="<%=cm.cms("species_factsheet-geo-legal_09_Title")%>" href="<%=Utilities.treatURLSpecialCharacters(URL)%>"><%=Utilities.treatURLSpecialCharacters(URL)%></a>
-          <%=cm.cmsTitle("species_factsheet-geo-legal_09_Title")%>
+          <a title="<%=cm.cms("url")%>" href="<%=Utilities.treatURLSpecialCharacters(URL)%>"><%=Utilities.treatURLSpecialCharacters(URL)%></a>
+          <%=cm.cmsTitle("url")%>
         </td>
       </tr>
       <tr>
@@ -124,7 +124,7 @@
       <tr>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
           <strong>
-            <%=cm.cmsText("species_factsheet-geo-legal_05")%>
+            <%=cm.cmsText("country")%>
           </strong>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
@@ -176,7 +176,7 @@
     </p>
 
 <%=cm.br()%>
-<%=cm.cmsMsg("species_factsheet-geo-legal_title")%>
+<%=cm.cmsMsg("geographical_legal_information")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("species_factsheet-geo-legal_11_Sum")%>
 <%=cm.br()%>

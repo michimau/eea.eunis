@@ -22,7 +22,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("sites_neighborhoods_title")%>
+      <%=cm.cms("site_neighborhood_1")%>
     </title>
     <script language="JavaScript" type="text/javascript" src="script/sites-names.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
@@ -38,7 +38,7 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_neighborhood_location"/>
+        <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,sites_neighborhood_location"/>
         <jsp:param name="helpLink" value="sites-help.jsp"/>
         <jsp:param name="mapLink" value="show"/>
       </jsp:include>
@@ -46,7 +46,7 @@
         <input type="hidden" name="showName" value="true" />
         <input type="hidden" name="showDesignationYear" value="true" />
         <h1>
-          <%=cm.cmsText("sites_neighborhoods_01")%>
+          <%=cm.cmsText("site_neighborhood")%>
         </h1>
 
         <%=cm.cmsText("sites_neighborhoods_20")%>
@@ -56,102 +56,102 @@
         <br />
         <div class="grey_rectangle">
           <strong>
-            <%=cm.cmsText("search_will_provide_following_information")%>
+            <%=cm.cmsText("search_will_provide")%>
           </strong>
           <br />
-          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_neighborhoods_03")%>" />
-          <label for="showSourceDB"><%=cm.cmsText("sites_neighborhoods_03")%></label>
-          <%=cm.cmsTitle("sites_neighborhoods_03")%>
+          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("source_data_set_2")%>" />
+          <label for="showSourceDB"><%=cm.cmsText("source_data_set_2")%></label>
+          <%=cm.cmsTitle("source_data_set_2")%>
 
-          <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_neighborhoods_04")%>" />
-          <label for="showCountry"><%=cm.cmsText("sites_neighborhoods_04")%></label>
-          <%=cm.cmsTitle("sites_neighborhoods_04")%>
+          <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cms("country_1")%>" />
+          <label for="showCountry"><%=cm.cmsText("country_1")%></label>
+          <%=cm.cmsTitle("country_1")%>
 
-          <input id="showName" name="showName" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=cm.cms("sites_neighborhoods_06")%>" />
-          <label for="showName"><%=cm.cmsText("sites_neighborhoods_06")%></label>
-          <%=cm.cmsTitle("sites_neighborhoods_06")%>
+          <input id="showName" name="showName" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=cm.cms("site_name")%>" />
+          <label for="showName"><%=cm.cmsText("site_name")%></label>
+          <%=cm.cmsTitle("site_name")%>
 
-          <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_neighborhoods_05")%>" />
-          <label for="showDesignationTypes"><%=cm.cmsText("sites_neighborhoods_05")%></label>
-          <%=cm.cmsTitle("sites_neighborhoods_05")%>
+          <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("designation_type_1")%>" />
+          <label for="showDesignationTypes"><%=cm.cmsText("designation_type_1")%></label>
+          <%=cm.cmsTitle("designation_type_1")%>
 
-          <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_neighborhoods_07")%>" />
-          <label for="showCoordinates"><%=cm.cmsText("sites_neighborhoods_07")%></label>
-          <%=cm.cmsTitle("sites_neighborhoods_07")%>
+          <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("coordinates_1")%>" />
+          <label for="showCoordinates"><%=cm.cmsText("coordinates_1")%></label>
+          <%=cm.cmsTitle("coordinates_1")%>
 
-          <input id="showSize" name="showSize" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_neighborhoods_08")%>" />
-          <label for="showSize"><%=cm.cmsText("sites_neighborhoods_08")%></label>
-          <%=cm.cmsTitle("sites_neighborhoods_08")%>
+          <input id="showSize" name="showSize" type="checkbox" value="true" checked="checked" title="<%=cm.cms("size_1")%>" />
+          <label for="showSize"><%=cm.cmsText("size_1")%></label>
+          <%=cm.cmsTitle("size_1")%>
 
-          <input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("sites_neighborhoods_09")%>" />
-          <label for="showDesignationYear"><%=cm.cmsText("sites_neighborhoods_09")%></label>
-          <%=cm.cmsTitle("sites_neighborhoods_09")%>
+          <input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("designation_year")%>" />
+          <label for="showDesignationYear"><%=cm.cmsText("designation_year")%></label>
+          <%=cm.cmsTitle("designation_year")%>
         </div>
-        <img align="middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
+        <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
         <%=cm.cmsAlt("field_mandatory")%>
         <strong>
-          <%=cm.cmsText("sites_neighborhoods_06")%>
+          <%=cm.cmsText("site_name")%>
         </strong>&nbsp;
         <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
         <select id="relationOp" name="relationOp" class="inputTextField" title="<%=cm.cms("operator")%>">
           <option value="<%=Utilities.OPERATOR_IS%>">
-            <%=cm.cms("sites_neighborhoods_10")%>
+            <%=cm.cms("is")%>
           </option>
           <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-            <%=cm.cms("sites_neighborhoods_11")%>
+            <%=cm.cms("contains")%>
           </option>
           <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected">
-            <%=cm.cms("sites_neighborhoods_12")%>
+            <%=cm.cms("starts_with")%>
           </option>
         </select>
         <%=cm.cmsLabel("operator")%>
         <%=cm.cmsTitle("operator")%>
-        <%=cm.cmsInput("sites_neighborhoods_10")%>
-        <%=cm.cmsInput("sites_neighborhoods_11")%>
-        <%=cm.cmsInput("sites_neighborhoods_12")%>
+        <%=cm.cmsInput("is")%>
+        <%=cm.cmsInput("contains")%>
+        <%=cm.cmsInput("starts_with")%>
 
-        <label for="englishName" class="noshow"><%=cm.cms("sites_neighorhood_sitename")%></label>
-        <input id="englishName" name="englishName" size="32" class="inputTextField" title="<%=cm.cms("sites_neighorhood_sitename")%>" />&nbsp;
-        <%=cm.cmsLabel("sites_neighorhood_sitename")%>
-        <%=cm.cmsTitle("sites_neighorhood_sitename")%>
-        <a title="<%=cm.cms("helper")%>" href="javascript:openHelper('sites-names-choice.jsp');"><img align="middle" width="11" height="18" src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" border="0" /></a>
+        <label for="englishName" class="noshow"><%=cm.cms("site_name")%></label>
+        <input id="englishName" name="englishName" size="32" class="inputTextField" title="<%=cm.cms("site_name")%>" />&nbsp;
+        <%=cm.cmsLabel("site_name")%>
+        <%=cm.cmsTitle("site_name")%>
+        <a title="<%=cm.cms("helper")%>" href="javascript:openHelper('sites-names-choice.jsp');"><img style="vertical-align:middle" width="11" height="18" src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" border="0" /></a>
         <%=cm.cmsTitle("helper")%>
         <%=cm.cmsAlt("helper")%>
         <br />
-        <img align="middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
+        <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
         <%=cm.cmsAlt("field_optional")%>
-        <strong><%=cm.cmsText("sites_neighborhoods_14")%>&nbsp;&nbsp;</strong>
-        <label for="country" class="noshow"><%=cm.cms("sites_neighorhood_countryname")%></label>
-        <input id="country" name="country" type="text" size="30" class="inputTextField" title="<%=cm.cms("sites_neighorhood_countryname")%>" />&nbsp;
-        <%=cm.cmsLabel("sites_neighorhood_countryname")%>
-        <%=cm.cmsTitle("sites_neighorhood_countryname")%>
+        <strong><%=cm.cmsText("country_is")%>&nbsp;&nbsp;</strong>
+        <label for="country" class="noshow"><%=cm.cms("country_name")%></label>
+        <input id="country" name="country" type="text" size="30" class="inputTextField" title="<%=cm.cms("country_name")%>" />&nbsp;
+        <%=cm.cmsLabel("country_name")%>
+        <%=cm.cmsTitle("country_name")%>
         <a title="<%=cm.cms("helper")%>" href="javascript:chooseCountry('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" align="middle" /></a>
         <%=cm.cmsTitle("helper")%>
         <%=cm.cmsAlt("helper")%>
         <br />
-        <img align="middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
+        <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
         <%=cm.cmsAlt("field_optional")%>
         <strong>
-          <%=cm.cmsText("sites_neighborhoods_15")%>&nbsp;
+          <%=cm.cmsText("designation_year_between")%>&nbsp;
         </strong>
         <label for="yearMin" class="noshow"><%=cm.cms("minimum_designation_year")%></label>
         <input id="yearMin" name="yearMin" type="text" maxlength="4" size="4" class="inputTextField" title="<%=cm.cms("minimum_designation_year")%>" />
         <%=cm.cmsLabel("minimum_designation_year")%>
         <%=cm.cmsTitle("minimum_designation_year")%>
 
-        <%=cm.cmsText("sites_neighborhoods_16")%>
+        <%=cm.cmsText("and")%>
         <label for="yearMax" class="noshow"><%=cm.cms("maximum_designation_year")%></label>
         <input id="yearMax" name="yearMax" type="text" maxlength="4" size="4" class="inputTextField" title="<%=cm.cms("maximum_designation_year")%>" />
         <%=cm.cmsLabel("maximum_designation_year")%>
         <%=cm.cmsTitle("maximum_designation_year")%>
         <div class="submit_buttons">
-          <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset_btn_value")%>" class="inputTextField" title="<%=cm.cms("reset_btn_title")%>" />
-          <%=cm.cmsTitle("reset_btn_title")%>
-          <%=cm.cmsInput("reset_btn_value")%>
+          <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset")%>" class="inputTextField" title="<%=cm.cms("reset_values")%>" />
+          <%=cm.cmsTitle("reset_values")%>
+          <%=cm.cmsInput("reset")%>
 
-          <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=cm.cms("search_btn_value")%>" title="<%=cm.cms("search_btn_title")%>" />
-          <%=cm.cmsTitle("search_btn_title")%>
-          <%=cm.cmsInput("search_btn_value")%>
+          <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=cm.cms("search")%>" title="<%=cm.cms("search")%>" />
+          <%=cm.cmsTitle("search")%>
+          <%=cm.cmsInput("search")%>
         </div>
         <jsp:include page="sites-search-common.jsp" />
       </form>
@@ -175,8 +175,8 @@
     String expandSearchCriteria = (request.getParameter("expandSearchCriteria")==null?"no":request.getParameter("expandSearchCriteria"));
 %>
       <br />
-      <%=cm.cmsText("sites_neighborhoods_19")%>
-      <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-neighborhood.jsp','4','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+      <%=cm.cmsText("save_your_criteria_1")%>
+      <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-neighborhood.jsp','4','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
       <%=cm.cmsTitle("save")%>
       <%=cm.cmsAlt("save")%>
       <jsp:include page="show-criteria-search.jsp">
@@ -188,7 +188,7 @@
   }
 %>
 
-      <%=cm.cmsMsg("sites_neighborhoods_title")%>
+      <%=cm.cmsMsg("site_neighborhood_1")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="sites-neighborhood.jsp" />
       </jsp:include>

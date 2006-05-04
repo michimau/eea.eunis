@@ -53,23 +53,23 @@
       <table summary="<%=cm.cms("sites_factsheet_123")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="relations" class="sortable">
         <tr>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_124")%>
+            <%=cm.cmsText("id_site")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_125")%>
+            <%=cm.cmsText("scientific_name")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_126")%>
+            <%=cm.cmsText("within_databases")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_127")%>
+            <%=cm.cmsText("type")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_128")%>
+            <%=cm.cmsText("overlap_percent")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
@@ -156,11 +156,11 @@
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_related_sitecode")%>
+            <%=cm.cmsText("site_code")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_related_sitename")%>
+            <%=cm.cmsText("site_name")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
@@ -202,11 +202,11 @@
       <table summary="<%=cm.cms("sites_factsheet_related_corinesites")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="relationsNatura2000sitesCorine" class="sortable">
         <tr>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_related_sitecode1")%>
+            <%=cm.cmsText("site_code")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_related_sitename1")%>
+            <%=cm.cmsText("site_name")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">

@@ -27,27 +27,27 @@
         <tr>
           <td width="183">
             <strong>
-              <%=cm.cmsText( "generic_glossary-references_02" )%>
+              <%=cm.cmsText( "title" )%>
             </strong>
           </td>
           <td width="122">
             <strong>
-              <%=cm.cmsText( "generic_glossary-references_03" )%>
+              <%=cm.cmsText( "author" )%>
             </strong>
           </td>
           <td width="126">
             <strong>
-              <%=cm.cmsText( "generic_glossary-references_04" )%>
+              <%=cm.cmsText( "editor" )%>
             </strong>
           </td>
           <td width="219">
             <strong>
-              <%=cm.cmsText( "generic_glossary-references_05" )%>
+              <%=cm.cmsText( "publisher" )%>
             </strong>
           </td>
           <td width="84" align="center">
             <strong>
-              <%=cm.cmsText( "generic_glossary-references_06" )%>
+              <%=cm.cmsText( "published" )%>
             </strong>
           </td>
         </tr>

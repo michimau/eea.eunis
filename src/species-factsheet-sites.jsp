@@ -57,25 +57,25 @@
           <tr>
             <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
               <strong>
-                <%=cm.cmsText("species_factsheet_sitescode")%>
+                <%=cm.cmsText("site_code")%>
                 <%=cm.cmsTitle("sort_results_on_this_column")%>
               </strong>
             </th>
             <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
               <strong>
-                <%=cm.cmsText("species_factsheet_sitessource")%>
+                <%=cm.cmsText("source_data_set")%>
                 <%=cm.cmsTitle("sort_results_on_this_column")%>
               </strong>
             </th>
             <th width="20%" title="<%=cm.cms("sort_results_on_this_column")%>">
               <strong>
-                <%=cm.cmsText("species_factsheet_sitescountry")%>
+                <%=cm.cmsText("country")%>
                 <%=cm.cmsTitle("sort_results_on_this_column")%>
               </strong>
             </th>
             <th width="50%" title="<%=cm.cms("sort_results_on_this_column")%>">
               <strong>
-                <%=cm.cmsText("species_factsheet_sitesname")%>
+                <%=cm.cmsText("site_name")%>
                 <%=cm.cmsTitle("sort_results_on_this_column")%>
               </strong>
             </th>
@@ -93,8 +93,8 @@
             if(Utilities.isCountry(site.getAreaNameEn()))
             {
         %>
-          <a href="javascript:goToSpeciesStatistics('<%=Utilities.treatURLSpecialCharacters(site.getAreaNameEn())%>')" title="<%=cm.cms("open_statistical_data")%> <%=Utilities.treatURLSpecialCharacters(site.getAreaNameEn())%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getAreaNameEn()))%></a>
-          <%=cm.cmsTitle("open_statistical_data")%>
+          <a href="javascript:goToSpeciesStatistics('<%=Utilities.treatURLSpecialCharacters(site.getAreaNameEn())%>')" title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(site.getAreaNameEn())%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getAreaNameEn()))%></a>
+          <%=cm.cmsTitle("open_the_statistical_data_for")%>
         <%
             } else {
         %>
@@ -158,25 +158,25 @@
           <tr>
             <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
               <strong>
-                <%=cm.cmsText("species_factsheet_sites_03")%>
+                <%=cm.cmsText("site_code")%>
                 <%=cm.cmsTitle("sort_results_on_this_column")%>
               </strong>
             </th>
             <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>" >
               <strong>
-                <%=cm.cmsText("species_factsheet_sitessource")%>
+                <%=cm.cmsText("source_data_set")%>
                 <%=cm.cmsTitle("sort_results_on_this_column")%>
               </strong>
             </th>
             <th width="20%" title="<%=cm.cms("sort_results_on_this_column")%>">
               <strong>
-                <%=cm.cmsText("species_factsheet_sitescountry")%>
+                <%=cm.cmsText("country")%>
                 <%=cm.cmsTitle("sort_results_on_this_column")%>
               </strong>
             </th>
             <th width="50%" title="<%=cm.cms("sort_results_on_this_column")%>">
               <strong>
-                <%=cm.cmsText("species_factsheet_sitesname")%>
+                <%=cm.cmsText("site_name")%>
                 <%=cm.cmsTitle("sort_results_on_this_column")%>
               </strong>
             </th>
@@ -194,8 +194,8 @@
             if(Utilities.isCountry(site.getAreaNameEn()))
             {
         %>
-          <a href="javascript:goToSpeciesStatistics('<%=Utilities.treatURLSpecialCharacters(site.getAreaNameEn())%>')" title="<%=cm.cms("species_factsheet-geo_12_Title")%> <%=Utilities.treatURLSpecialCharacters(site.getAreaNameEn())%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getAreaNameEn()))%></a>
-          <%=cm.cmsTitle("species_factsheet-geo_12_Title")%>
+          <a href="javascript:goToSpeciesStatistics('<%=Utilities.treatURLSpecialCharacters(site.getAreaNameEn())%>')" title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(site.getAreaNameEn())%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getAreaNameEn()))%></a>
+          <%=cm.cmsTitle("open_the_statistical_data_for")%>
         <%
             } else {
         %>

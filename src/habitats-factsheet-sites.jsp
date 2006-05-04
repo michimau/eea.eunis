@@ -76,25 +76,25 @@
   <tr valign="middle">
     <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
       <strong>
-        <%=cm.cmsText("habitats_factsheet_68")%>
+        <%=cm.cmsText("site_code")%>
         <%=cm.cmsTitle("sort_results_on_this_column")%>
       </strong>
     </th>
     <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
       <strong>
-        <%=cm.cmsText("habitats_factsheet_69")%>
+        <%=cm.cmsText("source_data_set")%>
         <%=cm.cmsTitle("sort_results_on_this_column")%>
       </strong>
     </th>
     <th width="20%" title="<%=cm.cms("sort_results_on_this_column")%>">
       <strong>
-        <%=cm.cmsText("habitats_factsheet_70")%>
+        <%=cm.cmsText("country")%>
         <%=cm.cmsTitle("sort_results_on_this_column")%>
       </strong>
     </th>
     <th width="50%" title="<%=cm.cms("sort_results_on_this_column")%>">
       <strong>
-        <%=cm.cmsText("habitats_factsheet_71")%>
+        <%=cm.cmsText("site_name")%>
         <%=cm.cmsTitle("sort_results_on_this_column")%>
       </strong>
     </th>
@@ -131,25 +131,25 @@
   <tr>
     <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
       <strong>
-        <%=cm.cmsText("habitats_factsheet_68")%>
+        <%=cm.cmsText("site_code")%>
         <%=cm.cmsTitle("sort_results_on_this_column")%>
       </strong>
     </th>
     <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
       <strong>
-        <%=cm.cmsText("habitats_factsheet_69")%>
+        <%=cm.cmsText("source_data_set")%>
         <%=cm.cmsTitle("sort_results_on_this_column")%>
       </strong>
     </th>
     <th width="20%" title="<%=cm.cms("sort_results_on_this_column")%>">
       <strong>
-        <%=cm.cmsText("habitats_factsheet_70")%>
+        <%=cm.cmsText("country")%>
         <%=cm.cmsTitle("sort_results_on_this_column")%>
       </strong>
     </th>
     <th width="50%" title="<%=cm.cms("sort_results_on_this_column")%>">
       <strong>
-        <%=cm.cmsText("habitats_factsheet_71")%>
+        <%=cm.cmsText("site_name")%>
         <%=cm.cmsTitle("sort_results_on_this_column")%>
       </strong>
     </th>

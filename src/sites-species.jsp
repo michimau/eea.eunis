@@ -88,7 +88,7 @@
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("sites_species_title")%>
+      <%=cm.cms("pick_species_show_sites")%>
     </title>
   </head>
   <body>
@@ -96,105 +96,105 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,sites_species_location"/>
+        <jsp:param name="location" value="home#index.jsp,species#species.jsp,sites_species_location"/>
         <jsp:param name="helpLink" value="species-help.jsp"/>
         <jsp:param name="mapLink" value="show"/>
       </jsp:include>
       <form name="eunis" method="get" onsubmit="return(validateForm());" action="sites-species-result.jsp">
         <input type="hidden" name="source" value="sitename" />
         <h1>
-          <%=cm.cmsText("sites_species_01")%>
+          <%=cm.cmsText("pick_species_show_sites")%>
         </h1>
         <%=cm.cmsText("sites_species_22")%>
         <br />
         <br />
         <div class="grey_rectangle">
           <strong>
-            <%=cm.cmsText("search_will_provide_following_information")%>
+            <%=cm.cmsText("search_will_provide")%>
           </strong>
           <br />
-          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_species_04")%>" />
-          <label for="showSourceDB"><%=cm.cmsText("sites_species_04")%></label>
-          <%=cm.cmsTitle("sites_species_04")%>
+          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("source_data_set")%>" />
+          <label for="showSourceDB"><%=cm.cmsText("source_data_set")%></label>
+          <%=cm.cmsTitle("source_data_set")%>
 
-          <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_species_05")%>" />
-          <label for="showDesignationTypes"><%=cm.cmsText("sites_species_05")%></label>
-          <%=cm.cmsTitle("sites_species_05")%>
+          <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("designation_type")%>" />
+          <label for="showDesignationTypes"><%=cm.cmsText("designation_type")%></label>
+          <%=cm.cmsTitle("designation_type")%>
 
-          <input id="showName" name="showName" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=cm.cms("sites_species_06")%>" />
-          <label for="showName"><%=cm.cmsText("sites_species_06")%></label>
-          <%=cm.cmsTitle("sites_species_06")%>
+          <input id="showName" name="showName" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=cm.cms("site_name")%>" />
+          <label for="showName"><%=cm.cmsText("site_name")%></label>
+          <%=cm.cmsTitle("site_name")%>
 
-          <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" title="<%=cm.cms("sites_species_07")%>" />
-          <label for="showCoordinates"><%=cm.cmsText("sites_species_07")%></label>
-          <%=cm.cmsTitle("sites_species_07")%>
+          <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" title="<%=cm.cms("coordinates")%>" />
+          <label for="showCoordinates"><%=cm.cmsText("coordinates")%></label>
+          <%=cm.cmsTitle("coordinates")%>
 
-          <input id="showSpecies" name="showSpecies" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=cm.cms("sites_species_08")%>" />
-          <label for="showSpecies"><%=cm.cmsText("sites_species_08")%></label>
-          <%=cm.cmsTitle("sites_species_08")%>
+          <input id="showSpecies" name="showSpecies" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=cm.cms("species_scientific_name")%>" />
+          <label for="showSpecies"><%=cm.cmsText("species_scientific_name")%></label>
+          <%=cm.cmsTitle("species_scientific_name")%>
         </div>
-        <img align="middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
+        <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
         <%=cm.cmsAlt("field_mandatory")%>
-        <label for="searchAttribute" class="noshow"><%=cm.cms("criteria_type_label")%></label>
-        <select id="searchAttribute" name="searchAttribute" class="inputTextField" title="<%=cm.cms("criteria_type_title")%>">
+        <label for="searchAttribute" class="noshow"><%=cm.cms("criteria")%></label>
+        <select id="searchAttribute" name="searchAttribute" class="inputTextField" title="<%=cm.cms("criteria")%>">
           <option value="<%=SpeciesSearchCriteria.SEARCH_SCIENTIFIC_NAME%>" selected="selected">
-            <%=cm.cms("sites_species_09")%>
+            <%=cm.cms("species_scientific_name")%>
           </option>
           <option value="<%=SpeciesSearchCriteria.SEARCH_GROUP%>">
-            <%=cm.cms("sites_species_10")%>
+            <%=cm.cms("species_group")%>
           </option>
           <option value="<%=SpeciesSearchCriteria.SEARCH_VERNACULAR%>">
-            <%=cm.cms("sites_species_11")%>
+            <%=cm.cms("species_vernacular_name")%>
           </option>
           <option value="<%=SpeciesSearchCriteria.SEARCH_LEGAL_INSTRUMENTS%>">
-            <%=cm.cms("sites_species_12")%>
+            <%=cm.cms("legal_instrument_name")%>
           </option>
           <option value="<%=SpeciesSearchCriteria.SEARCH_COUNTRY%>">
-            <%=cm.cms("sites_species_13")%>
+            <%=cm.cms("country_name")%>
           </option>
           <option value="<%=SpeciesSearchCriteria.SEARCH_REGION%>">
-            <%=cm.cms("sites_species_14")%>
+            <%=cm.cms("biogeographic_region_name")%>
           </option>
         </select>
-        <%=cm.cmsTitle("criteria_type_title")%>
-        <%=cm.cmsLabel("criteria_type_label")%>
-        <%=cm.cmsInput("sites_species_09")%>
-        <%=cm.cmsInput("sites_species_10")%>
-        <%=cm.cmsInput("sites_species_11")%>
-        <%=cm.cmsInput("sites_species_12")%>
-        <%=cm.cmsInput("sites_species_13")%>
-        <%=cm.cmsInput("sites_species_14")%>
+        <%=cm.cmsTitle("criteria")%>
+        <%=cm.cmsLabel("criteria")%>
+        <%=cm.cmsInput("species_scientific_name")%>
+        <%=cm.cmsInput("species_group")%>
+        <%=cm.cmsInput("species_vernacular_name")%>
+        <%=cm.cmsInput("legal_instrument_name")%>
+        <%=cm.cmsInput("country_name")%>
+        <%=cm.cmsInput("biogeographic_region_name")%>
         &nbsp;
         <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
         <select id="relationOp" name="relationOp" class="inputTextField" title="<%=cm.cms("operator")%>">
           <option value="<%=Utilities.OPERATOR_IS%>">
-            <%=cm.cms("sites_species_15")%>
+            <%=cm.cms("is")%>
           </option>
           <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-            <%=cm.cms("sites_species_16")%>
+            <%=cm.cms("contains")%>
           </option>
           <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected">
-            <%=cm.cms("sites_species_17")%>
+            <%=cm.cms("starts_with")%>
           </option>
         </select>
         <%=cm.cmsLabel("operator")%>
         <%=cm.cmsTitle("operator")%>
-        <%=cm.cmsInput("sites_species_15")%>
-        <%=cm.cmsInput("sites_species_16")%>
-        <%=cm.cmsInput("sites_species_17")%>
+        <%=cm.cmsInput("is")%>
+        <%=cm.cmsInput("contains")%>
+        <%=cm.cmsInput("starts_with")%>
         <label for="searchString" class="noshow"><%=cm.cms("search_string")%></label>
         <input id="searchString" name="searchString" value="" size="32" class="inputTextField" title="<%=cm.cms("search_string")%>" />
         <%=cm.cmsLabel("search_string")%>
         <%=cm.cmsTitle("search_string")%>
-        <a title="<%=cm.cms("helper")%>" href="javascript:openHelper('sites-species-choice.jsp')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" align="middle" /></a>
+        <a title="<%=cm.cms("helper")%>" href="javascript:openHelper('sites-species-choice.jsp')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" style="vertical-align:middle" /></a>
         <div class="submit_buttons">
-          <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset_btn_value")%>" class="inputTextField" title="<%=cm.cms("reset_btn_title")%>" />
-          <%=cm.cmsTitle("reset_btn_title")%>
-          <%=cm.cmsInput("reset_btn_value")%>
+          <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset")%>" class="inputTextField" title="<%=cm.cms("reset_values")%>" />
+          <%=cm.cmsTitle("reset_values")%>
+          <%=cm.cmsInput("reset")%>
 
-          <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=cm.cms("search_btn_value")%>" title="<%=cm.cms("search_btn_title")%>" />
-          <%=cm.cmsTitle("search_btn_title")%>
-          <%=cm.cmsInput("search_btn_value")%>
+          <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=cm.cms("search")%>" title="<%=cm.cms("search")%>" />
+          <%=cm.cmsTitle("search")%>
+          <%=cm.cmsInput("search")%>
         </div>
         <jsp:include page="sites-search-common.jsp" />
       </form>
@@ -204,8 +204,8 @@
   {
 %>
       <br />
-      <%=cm.cmsText("sites_species_21")%>
-      <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-species.jsp','2','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+      <%=cm.cmsText("save_your_criteria_1")%>
+      <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-species.jsp','2','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
       <%=cm.cmsTitle("save")%>
       <%=cm.cmsAlt("save")%>
 <%
@@ -231,7 +231,7 @@
   }
 %>
 
-      <%=cm.cmsMsg("sites_species_title")%>
+      <%=cm.cmsMsg("pick_species_show_sites")%>
       <%=cm.br()%>
       <%=cm.cmsMsg("sites_species_02")%>
       <jsp:include page="footer.jsp">

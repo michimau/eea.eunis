@@ -22,7 +22,7 @@
     <%
       WebContentManagement cm = SessionManager.getWebContent();
     %>
-    <title><%=cm.cmsText("species_habitats-choice_title")%></title>
+    <title><%=cm.cmsText("list_of_values")%></title>
   <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.habitats.HabitateBean" scope="request">
     <jsp:setProperty name="formBean" property="*"/>
   </jsp:useBean>
@@ -60,7 +60,7 @@
       {
         HabitateSearchCriteria habitatSearch = new HabitateSearchCriteria(searchAttribute,formBean.getScientificName(),relationOp);
     %>
-        <h2><%=cm.cmsText("list_values_for")%></h2>
+        <h2><%=cm.cmsText("list_of_values_for")%></h2>
         <u><%=habitatSearch.getHumanMappings().get(searchAttribute)%></u>
     <%
         if (null != formBean.getScientificName() && null != relationOp)
@@ -74,7 +74,7 @@
         <br />
         <br />
         <div id="tab">
-        <table summary="<%=cm.cms("list_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+        <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
         <%
           String rowBgColor = "";
           String value = "";
@@ -101,7 +101,7 @@
       else
         {
     %>
-       <strong><%=cm.cmsText("species_habitats-choice_01")%>.</strong> <br />
+       <strong><%=cm.cmsText("no_results_found")%>.</strong> <br />
      <%
         }
      %>
@@ -113,7 +113,7 @@
       </form>
 
   <%=cm.br()%>
-  <%=cm.cmsMsg("list_values")%>
+  <%=cm.cmsMsg("list_of_values")%>
   <%=cm.br()%>
 
   </body>

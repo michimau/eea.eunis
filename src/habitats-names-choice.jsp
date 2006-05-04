@@ -24,7 +24,7 @@
     WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
-    <%=cm.cms("habitats_names-choice_title")%>
+    <%=cm.cms("list_of_values")%>
   </title>
   <script language="JavaScript" type="text/javascript">
   <!--
@@ -73,7 +73,7 @@
   if(results.isEmpty()) {
 %>
 <strong>
-  <%=cm.cmsText("habitats_names-choice_02")%>
+  <%=cm.cmsText("no_results_found_1")%>
 </strong>
 <br />
 <br />
@@ -103,10 +103,10 @@
     }
   %>
 <form action="">
-  <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("habitats_names-choice_03")%>" onclick="javascript:window.close()" name="button" id="button" class="inputTextField" />
-  <%=cm.cmsInput("habitats_names-choice_03")%>
+  <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" id="button" class="inputTextField" />
+  <%=cm.cmsInput("close_btn")%>
 </form>
-<%=cm.cms("habitats_names-choice_title")%>
+<%=cm.cms("list_of_values")%>
 <%=cm.br()%>
 <%=cm.cmsTitle("list_of_values")%>
 </body>

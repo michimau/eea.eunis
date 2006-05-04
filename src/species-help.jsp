@@ -24,7 +24,7 @@
   <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,help_on_eunis_database_species_location" />
+      <jsp:param name="location" value="home#index.jsp,help_on_eunis_database_species_location" />
     </jsp:include>
     <%
       String paragraph01 = cm.cmsText("species_help_01");

@@ -35,14 +35,14 @@
 <br />
 <form name="changePageSize<%=guidPageSize%>" method="get" action="<%=pageNameSize%>" onsubmit="if (checkRange()) return true; return false;">
   <label for="pageSize">
-    <%=cm.cms("pagesize_results_label")%>&nbsp;(max. <%=maxResultsPerPage%>)
+    <%=cm.cms("results_per_page")%>&nbsp;(max. <%=maxResultsPerPage%>)
   </label>
-  <input title="<%=cm.cms("pagesize_results_title")%>" class="inputTextFieldCenter" name="pageSize" id="pageSize" type="text" size="3" value="<%=pageSizeSize%>" />
-  <%=cm.cmsLabel("pagesize_results_label")%>
-  <%=cm.cmsTitle("pagesize_results_title")%>
-  <input id="changePageSizeButton" title="<%=cm.cms("pagesize_change_title")%>" type="submit" name="Go" value="<%=cm.cms("pagesize_change_value")%>" class="inputTextField" />
-  <%=cm.cmsTitle("pagesize_change_title")%>
-  <%=cm.cmsInput("pagesize_change_value")%>
+  <input title="<%=cm.cms("results_per_page")%>" class="inputTextFieldCenter" name="pageSize" id="pageSize" type="text" size="3" value="<%=pageSizeSize%>" />
+  <%=cm.cmsLabel("results_per_page")%>
+  <%=cm.cmsTitle("results_per_page")%>
+  <input id="changePageSizeButton" title="<%=cm.cms("change")%>" type="submit" name="Go" value="<%=cm.cms("change")%>" class="inputTextField" />
+  <%=cm.cmsTitle("change")%>
+  <%=cm.cmsInput("change")%>
   <%=toURLParamSize%>
   <script language="JavaScript" type="text/javascript">
     <!--

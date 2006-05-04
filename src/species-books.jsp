@@ -78,7 +78,7 @@
 <div id="alignment">
 <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,pick_species_show_references_location"/>
+  <jsp:param name="location" value="home#index.jsp,species#species.jsp,pick_species_show_references_location"/>
   <jsp:param name="helpLink" value="species-help.jsp"/>
 </jsp:include>
 <table width="100%" border="0" summary="layout">
@@ -90,7 +90,7 @@
         <tr>
           <td colspan="2">
             <h1>
-              <%=cm.cmsText("species_books_01")%>
+              <%=cm.cmsText("pick_species_show_references")%>
             </h1>
             <%=cm.cmsText("species_books_17")%>
             <br />
@@ -99,26 +99,26 @@
               <tr>
                 <td style="background-color:#EEEEEE">
                   <strong>
-                    <%=cm.cmsText("species_books_03")%>
+                    <%=cm.cmsText("search_will_provide_2")%>
                   </strong>
                 </td>
               </tr>
               <tr>
                 <td style="background-color:#EEEEEE">
                   <input title="<%=cm.cms("species_books_04_Title")%>" alt="<%=cm.cms("species_books_04_Title")%>" id="checkbox1" name="checkbox1" type="checkbox" value="show" checked="checked" disabled="disabled" />
-                  <label for="checkbox1"><%=cm.cmsText("species_books_04")%></label>
+                  <label for="checkbox1"><%=cm.cmsText("author")%></label>
                   <%=cm.cmsTitle("species_books_04_Title")%>
                   <input title="<%=cm.cms("species_books_05_Title")%>" alt="<%=cm.cms("species_books_04_Title")%>" id="checkbox2" name="checkbox2" type="checkbox" value="show" checked="checked" disabled="disabled" />
-                  <label for="checkbox2"><%=cm.cmsText("species_books_05")%></label>
+                  <label for="checkbox2"><%=cm.cmsText("date")%></label>
                    <%=cm.cmsTitle("species_books_05_Title")%>
                   <input title="<%=cm.cms("species_books_06_Title")%>" alt="<%=cm.cms("species_books_04_Title")%>" id="checkbox3" name="checkbox3" type="checkbox" value="show" checked="checked" disabled="disabled" />
-                  <label for="checkbox3"><%=cm.cmsText("species_books_06")%></label>
+                  <label for="checkbox3"><%=cm.cmsText("title")%></label>
                   <%=cm.cmsTitle("species_books_06_Title")%>
                   <input title="<%=cm.cms("species_books_07_Title")%>" alt="<%=cm.cms("species_books_04_Title")%>" id="checkbox4" name="checkbox4" type="checkbox" value="show" checked="checked" disabled="disabled" />
-                  <label for="checkbox4"><%=cm.cmsText("species_books_07")%></label>
+                  <label for="checkbox4"><%=cm.cmsText("editor")%></label>
                   <%=cm.cmsTitle("species_books_07_Title")%>
                   <input title="<%=cm.cms("species_books_08_Title")%>" alt="<%=cm.cms("species_books_04_Title")%>" id="checkbox5" name="checkbox5" type="checkbox" value="show" checked="checked" disabled="disabled" />
-                  <label for="checkbox5"><%=cm.cmsText("species_books_08")%></label>
+                  <label for="checkbox5"><%=cm.cmsText("publisher")%></label>
                   <%=cm.cmsTitle("species_books_08_Title")%>
                 </td>
               </tr>
@@ -132,26 +132,26 @@
         </tr>
         <tr>
           <td colspan="2">
-            <img width="11" height="12" style="vertical-align : middle" alt="<%=cm.cms("species_books_18_Alt")%>" title="<%=cm.cms("species_books_18_Alt")%>" src="images/mini/field_mandatory.gif" />
-            <%=cm.cmsAlt("species_books_18_Alt")%>
+            <img width="11" height="12" style="vertical-align : middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
+            <%=cm.cmsAlt("field_mandatory")%>
             &nbsp;
             <strong>
-              <label for="scientificName"><%=cm.cmsText("species_books_09")%></label>
+              <label for="scientificName"><%=cm.cmsText("species_scientific_name")%></label>
             </strong>
-            <label for="select1" class="noshow"><%=cm.cms("species_books_19_Label")%></label>
-            <select id="select1" title="<%=cm.cms("species_books_19_Title")%>" name="relationOp" class="inputTextField">
+            <label for="select1" class="noshow"><%=cm.cms("relation_type")%></label>
+            <select id="select1" title="<%=cm.cms("relation_type")%>" name="relationOp" class="inputTextField">
               <option value="<%=Utilities.OPERATOR_IS%>">
-                  <%=cm.cms("species_books_10")%>
+                  <%=cm.cms("is")%>
               </option>
               <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                  <%=cm.cms("species_books_11")%>
+                  <%=cm.cms("contains")%>
               </option>
               <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected">
-                  <%=cm.cms("species_books_12")%>
+                  <%=cm.cms("starts_with")%>
               </option>
             </select>
-            <%=cm.cmsLabel("species_books_19_Label")%>
-            <%=cm.cmsTitle("species_books_19_Title")%>
+            <%=cm.cmsLabel("relation_type")%>
+            <%=cm.cmsTitle("relation_type")%>
             <input id="scientificName" alt="<%=cm.cms("species_books_09_Alt")%>" title="<%=cm.cms("species_books_09_Alt")%>" size="32" name="scientificName" value="" class="inputTextField" />
             <%=cm.cmsAlt("species_books_09_Alt")%>
             <a title="<%=cm.cms("species_books_13_Title")%>" href="javascript:openHelper('species-books-choice.jsp?')"><img alt="<%=cm.cms("species_books_13")%>" style="vertical-align : middle" title="<%=cm.cms("species_books_13")%>" src="images/helper/helper.gif" border="0" /></a>
@@ -161,12 +161,12 @@
         </tr>
         <tr>
           <td style="text-align:right" colspan="2">
-            <input id="Reset" type="reset" value="<%=cm.cms("species_books_14")%>" name="Reset" class="inputTextField" alt="Reset" title="<%=cm.cms("species_books_14_Title")%>" />
-            <%=cm.cmsTitle("species_books_14_Title")%>
-            <%=cm.cmsInput("species_books_14")%>
-            <input id="submit" type="submit" value="<%=cm.cms("species_books_15")%>" name="submit2" class="inputTextField" alt="Search" title="<%=cm.cms("species_books_15_Title")%>" />
-            <%=cm.cmsTitle("species_books_15_Title")%>
-            <%=cm.cmsInput("species_books_15")%>
+            <input id="Reset" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="inputTextField" alt="Reset" title="<%=cm.cms("reset")%>" />
+            <%=cm.cmsTitle("reset")%>
+            <%=cm.cmsInput("reset")%>
+            <input id="submit" type="submit" value="<%=cm.cms("search")%>" name="submit2" class="inputTextField" alt="Search" title="<%=cm.cms("search")%>" />
+            <%=cm.cmsTitle("search")%>
+            <%=cm.cmsInput("search")%>
           </td>
         </tr>
       </table>
@@ -180,7 +180,7 @@
 <tr><td>&nbsp;</td></tr>
 <tr style="background-color:#EEEEEE">
   <td>
-    <%=cm.cmsText("species_books_16")%>:
+    <%=cm.cmsText("save_your_criteria")%>:
     <a title="<%=cm.cms("species_books_20_Title")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'species-books.jsp','1','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');">
       <img border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" alt="<%=cm.cms("species_books_20_Alt")%>" />
     </a>
@@ -213,11 +213,11 @@
 <%=cm.br()%>
 <%=cm.cmsMsg("species_books_title")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_books_10")%>
+<%=cm.cmsMsg("is")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_books_11")%>
+<%=cm.cmsMsg("contains")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_books_12")%>
+<%=cm.cmsMsg("starts_with")%>
 <%=cm.br()%>
 
 <jsp:include page="footer.jsp">

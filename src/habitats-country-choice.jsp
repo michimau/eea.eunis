@@ -24,7 +24,7 @@
     WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
-    <%=cm.cms("habitats_country-choice_title")%>
+    <%=cm.cms("list_of_values")%>
   </title>
     <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.country.CountryBean" scope="request">
       <jsp:setProperty name="formBean" property="*" />
@@ -143,11 +143,11 @@ function setCountry(val) {
 </div>
 <%=Utilities.getTextMaxLimitForPopup(cm, results.size())%>
 <form action="">
-  <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("habitats_country-choice_01")%>" onclick="javascript:window.close()" name="button" id="button" class="inputTextField" />
+  <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" id="button" class="inputTextField" />
 </form>
-<%=cm.cmsInput("habitats_country-choice_01")%>
+<%=cm.cmsInput("close_btn")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitats_country-choice_title")%>
+<%=cm.cmsMsg("list_of_values")%>
 <%=cm.br()%>
 <%=cm.cmsTitle("list_of_values")%>
 <%=cm.br()%>

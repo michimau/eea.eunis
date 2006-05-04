@@ -38,7 +38,7 @@
     </title>
     <script language="JavaScript" type="text/javascript">
       <!--
-        var errRefineMessage = "<%=cm.cms("species_groups-result_02")%>.";
+        var errRefineMessage = "<%=cm.cms("enter_refine_criteria_correctly")%>.";
         // Used in refine search ; check if criteria are empty
         function checkRefineSearch(noCriteria)
         {
@@ -125,13 +125,13 @@
   <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,groups_location#species-groups.jsp,results_location" />
+      <jsp:param name="location" value="home#index.jsp,species#species.jsp,groups#species-groups.jsp,results" />
       <jsp:param name="helpLink" value="species-help.jsp" />
       <jsp:param name="downloadLink" value="<%=downloadLink%>" />
     </jsp:include>
 <%--      <jsp:param name="printLink" value="<%=printLink%>"/>--%>
     <h1>
-     <%=cm.cmsText("species_groups-result_01")%>
+     <%=cm.cmsText("species_group")%>
     </h1>
     <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
@@ -162,7 +162,7 @@
      }
        %>
         <br />
-        <%=cm.cmsText("species_groups-result_04")%>:
+        <%=cm.cmsText("results_found_1")%>:
         <strong>
           <%=resultsCount%>
         </strong>
@@ -197,7 +197,7 @@
           <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td style="background-color:#EEEEEE">
-                    <%=cm.cmsText("species_groups-result_05")%>
+                    <%=cm.cmsText("refine_your_search")%>
               </td>
             </tr>
             <tr>
@@ -212,7 +212,7 @@
                  {
 %>
                     <option value="<%=GroupSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected">
-                      <%=cm.cms("species_groups-result_08")%>
+                      <%=cm.cms("scientific_name")%>
                     </option>
 <%
                  }
@@ -223,26 +223,26 @@
                   <label for="select2" class="noshow"><%=cm.cms("operator")%></label>
                   <select id="select2" title="<%=cm.cms("operator")%>" name="oper" class="inputTextField">
                     <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                        <%=cm.cms("species_groups-result_09")%>
+                        <%=cm.cms("is")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_STARTS%>">
-                        <%=cm.cms("species_groups-result_10")%>
+                        <%=cm.cms("starts_with")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                        <%=cm.cms("species_groups-result_11")%>
+                        <%=cm.cms("contains")%>
                     </option>
                   </select>
                   <%=cm.cmsLabel("operator")%>
                   <%=cm.cmsTitle("operator")%>
                   <label for="criteriaSearch" class="noshow">
-                   <%=cm.cms("criteria_value")%>
+                   <%=cm.cms("filter_value")%>
                   </label>
-                  <input id="criteriaSearch"  title="<%=cm.cms("criteria_value")%>" alt="<%=cm.cms("criteria_value")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
-                  <%=cm.cmsLabel("criteria_value")%>
-                  <%=cm.cmsTitle("criteria_value")%>
-                  <input id="refine" title="<%=cm.cms("search")%>" class="inputTextField" type="submit" name="Submit" value="<%=cm.cms("species_groups-result_12")%>" />
+                  <input id="criteriaSearch"  title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
+                  <%=cm.cmsLabel("filter_value")%>
+                  <%=cm.cmsTitle("filter_value")%>
+                  <input id="refine" title="<%=cm.cms("search")%>" class="inputTextField" type="submit" name="Submit" value="<%=cm.cms("search")%>" />
                   <%=cm.cmsTitle("search")%>
-                  <%=cm.cmsInput("species_groups-result_12")%>
+                  <%=cm.cmsInput("search")%>
                 </form>
               </td>
             </tr>
@@ -254,7 +254,7 @@
 %>
               <tr>
                 <td style="background-color:#EEEEEE">
-                  <%=cm.cmsText("species_groups-result_13")%>:
+                  <%=cm.cmsText("applied_filters_to_the_results")%>:
                 </td>
               </tr>
 <%
@@ -313,7 +313,7 @@
           if (showVernacularNames && !isExpanded)
           {
 %>
-            <a title="<%=cm.cms("show_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("species_groups-result_14")%></a>
+            <a title="<%=cm.cms("show_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("display_vernacular_names_in_results")%></a>
             <%=cm.cmsTitle("show_vernacular_list")%>
 <%
           }
@@ -339,7 +339,7 @@
               {
 %>
               <th style="text-align:left" class="resultHeader">
-                <%=cm.cmsText("species_groups-result_18")%>
+                <%=cm.cmsText("group")%>
               </th>
 <%
               }
@@ -347,7 +347,7 @@
               {
 %>
               <th style="text-align:left" class="resultHeader">
-                <%=cm.cmsText("species_groups-result_06")%>
+                <%=cm.cmsText("order_column")%>
               </th>
 <%
               }
@@ -355,7 +355,7 @@
               {
 %>
               <th style="text-align:left" class="resultHeader">
-                <%=cm.cmsText("species_groups-result_07")%>
+                <%=cm.cmsText("family")%>
               </th>
 <%
               }
@@ -363,7 +363,7 @@
               {
 %>
               <th style="text-align:left" class="resultHeader">
-                <a title="<%=cm.cms("sort_results_on_this_column")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=GroupSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("species_groups-result_08")%></a>
+                <a title="<%=cm.cms("sort_results_on_this_column")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=GroupSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("scientific_name")%></a>
                 <%=cm.cmsTitle("sort_results_on_this_column")%>
               </th>
 <%
@@ -372,8 +372,8 @@
               {
 %>
               <th style="text-align:left" class="resultHeader">
-                <%=cm.cmsText("species_groups-result_15")%>
-                [<a title="<%=cm.cms("hide_vernacular_list")%>" class="resultHeaderLink" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("species_groups-result_16")%></a>]
+                <%=cm.cmsText("vernacular_names")%>
+                [<a title="<%=cm.cms("hide_vernacular_list")%>" class="resultHeaderLink" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("hide")%></a>]
                 <%=cm.cmsTitle("hide_vernacular_list")%>
               </th>
 <%
@@ -471,7 +471,7 @@
               {
 %>
               <th style="text-align:left" class="resultHeader">
-                <%=cm.cmsText("species_groups-result_18")%>
+                <%=cm.cmsText("group")%>
               </th>
 <%
               }
@@ -479,7 +479,7 @@
               {
 %>
               <th style="text-align:left" class="resultHeader">
-                <%=cm.cmsText("species_groups-result_06")%>
+                <%=cm.cmsText("order_column")%>
               </th>
 <%
               }
@@ -487,7 +487,7 @@
               {
 %>
               <th style="text-align:left" class="resultHeader">
-                <%=cm.cmsText("species_groups-result_07")%>
+                <%=cm.cmsText("family")%>
               </th>
 <%
               }
@@ -495,7 +495,7 @@
               {
 %>
               <th style="text-align:left" class="resultHeader">
-                <a title="<%=cm.cms("sort_results_on_this_column")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=GroupSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("species_groups-result_08")%></a>
+                <a title="<%=cm.cms("sort_results_on_this_column")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=GroupSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("scientific_name")%></a>
                 <%=cm.cmsTitle("sort_results_on_this_column")%>
               </th>
 <%
@@ -504,8 +504,8 @@
               {
 %>
               <th style="text-align:left" class="resultHeader">
-                <%=cm.cmsText("species_groups-result_15")%>
-                [<a title="<%=cm.cms("hide_vernacular_list")%>" class="resultHeaderLink" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("species_groups-result_16")%></a>]
+                <%=cm.cmsText("vernacular_names")%>
+                [<a title="<%=cm.cms("hide_vernacular_list")%>" class="resultHeaderLink" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("hide")%></a>]
                 <%=cm.cmsTitle("hide_vernacular_list")%>
               </th>
 <%
@@ -528,15 +528,15 @@
 <%=cm.br()%>
 <%=cm.cmsMsg("species_groups-result_title")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_groups-result_02")%>
+<%=cm.cmsMsg("enter_refine_criteria_correctly")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_groups-result_08")%>
+<%=cm.cmsMsg("scientific_name")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_groups-result_09")%>
+<%=cm.cmsMsg("is")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_groups-result_10")%>
+<%=cm.cmsMsg("starts_with")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_groups-result_11")%>
+<%=cm.cmsMsg("contains")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("search_results")%>
 <%=cm.br()%>

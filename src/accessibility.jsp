@@ -19,7 +19,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("accessibility_statement_header")%>
+      <%=cm.cms("accessibility_statement")%>
     </title>
   </head>
 
@@ -28,15 +28,15 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,accessibility_statement" />
+        <jsp:param name="location" value="home#index.jsp,accessibility_statement" />
       </jsp:include>
       <h1>
-      <%=cm.cmsText("accessibility_statement_header")%>
+      <%=cm.cmsText("accessibility_statement")%>
       </h1>
       <br />
       <%=cm.cmsText("accessibility_01")%>
       <%=cm.br()%>
-      <%=cm.cmsMsg("accessibility_statement_header")%>
+      <%=cm.cmsMsg("accessibility_statement")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="accessibility.jsp" />
       </jsp:include>

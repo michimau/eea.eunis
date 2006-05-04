@@ -24,7 +24,7 @@
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("generic_feedback_title")%>
+    <%=cm.cms("feedback")%>
   </title>
   <script language="JavaScript" type="text/javascript">
     <!--
@@ -164,10 +164,10 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,feedback_location" />
+        <jsp:param name="location" value="home#index.jsp,feedback" />
       </jsp:include>
       <h1>
-        <%=cm.cmsText("generic_feedback_01")%>
+        <%=cm.cmsText("thank_you")%>
       </h1>
       <br />
         <%=cm.cmsText("generic_feedback_02")%>
@@ -184,7 +184,7 @@
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="feedback.jsp" />
       </jsp:include>
-      <%=cm.cmsMsg("generic_feedback_title")%>
+      <%=cm.cmsMsg("feedback")%>
     </div>
     </div>
     </div>
@@ -206,7 +206,7 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,feedback_location" />
+        <jsp:param name="location" value="home#index.jsp,feedback" />
       </jsp:include>
       <h1>
         <%=cm.cmsText("generic_feedback_04")%>
@@ -263,7 +263,7 @@
                   <%=cm.cms("generic_feedback_13")%>
                 </option>
                 <option value="EUNIS Habitats" <%=(module.equalsIgnoreCase("EUNIS Habitats") ? "selected=\"selected\"" : "")%>>
-                  <%=cm.cms("generic_feedback_14")%>
+                  <%=cm.cms("eunis_habitat_types")%>
                 </option>
                 <option value="EUNIS Sites" <%=(module.equalsIgnoreCase("EUNIS Sites") ? "selected=\"selected\"" : "")%>>
                   <%=cm.cms("generic_feedback_15")%>
@@ -272,16 +272,16 @@
                   <%=cm.cms("generic_feedback_16")%>
                 </option>
                 <option value="Database" <%=(module.equalsIgnoreCase("Database") ? "selected=\"selected\"" : "")%>>
-                  <%=cm.cms("generic_feedback_17")%>
+                  <%=cm.cms("database")%>
                 </option>
               </select>
               <%=cm.cmsLabel("feedback_module")%>
               <%=cm.cmsInput("generic_feedback_12")%>
               <%=cm.cmsInput("generic_feedback_13")%>
-              <%=cm.cmsInput("generic_feedback_14")%>
+              <%=cm.cmsInput("eunis_habitat_types")%>
               <%=cm.cmsInput("generic_feedback_15")%>
               <%=cm.cmsInput("generic_feedback_16")%>
-              <%=cm.cmsInput("generic_feedback_17")%>
+              <%=cm.cmsInput("database")%>
             </td>
           </tr>
           <tr>
@@ -346,11 +346,11 @@
           </tr>
         </table>
         <p>
-          <input title="<%=cm.cms("feedback_send")%>" type="submit" id="submit" value="<%=cm.cms("feedback_send")%>" name="ContactUs" class="inputTextField" />
-          <%=cm.cmsInput("feedback_send")%>
+          <input title="<%=cm.cms("send_feedback")%>" type="submit" id="submit" value="<%=cm.cms("send_feedback")%>" name="ContactUs" class="inputTextField" />
+          <%=cm.cmsInput("send_feedback")%>
         </p>
       </form>
-      <%=cm.cmsMsg("generic_feedback_title")%>
+      <%=cm.cmsMsg("feedback")%>
       <%=cm.br()%>
       <%=cm.cmsMsg("generic_feedback_27")%>
       <jsp:include page="footer.jsp">

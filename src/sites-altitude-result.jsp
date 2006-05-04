@@ -169,16 +169,16 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_altitude_location#sites-altitude.jsp,results_location"/>
+        <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,altitude#sites-altitude.jsp,results"/>
         <jsp:param name="helpLink" value="sites-help.jsp"/>
         <jsp:param name="mapLink" value="show"/>
         <jsp:param name="downloadLink" value="<%=downloadLink%>"/>
       </jsp:include>
       <%--      <jsp:param name="printLink" value="<%=printLink%>"/>--%>
       <h1>
-        <%=cm.cmsText("sites_altitude-result_01")%>
+        <%=cm.cmsText("site_altitude")%>
       </h1>
-      <%=cm.cmsText("sites_altitude-result_02")%> <%=formBean.getMainSearchCriteria().toHumanString()%>
+      <%=cm.cmsText("you_searched_sites_which")%> <%=formBean.getMainSearchCriteria().toHumanString()%>
 <%
           if (results.isEmpty())
           {
@@ -196,7 +196,7 @@
            }
 %>
       <br />
-      <%=cm.cmsText("sites_altitude-result_04")%> <strong><%=resultsCount%></strong><br />
+      <%=cm.cmsText("results_found_1")%> <strong><%=resultsCount%></strong><br />
 <%
   Vector mapFields = new Vector();
   mapFields.addElement("criteriaSearch");
@@ -243,18 +243,18 @@
 %>
       <br class="brClear" />
       <div class="grey_rectangle_bold">
-        <%=cm.cmsText("sites_altitude-result_05")%>
+        <%=cm.cmsText("refine_your_search")%>
         <br />
         <form title="refine search results" name="criteriaSearch" method="get" onsubmit="return(check(<%=noCriteria%>));" action="">
         <%=formBean.toFORMParam(filterSearch)%>
-          <label for="criteriaType0" class="noshow"><%=cm.cms("criteria_type_label")%></label>
-          <select id="criteriaType0" name="criteriaType" class="inputTextField" onchange="changeCriteria()" title="<%=cm.cms("criteria_type_title")%>">
+          <label for="criteriaType0" class="noshow"><%=cm.cms("criteria")%></label>
+          <select id="criteriaType0" name="criteriaType" class="inputTextField" onchange="changeCriteria()" title="<%=cm.cms("criteria")%>">
 <%
   if (showSourceDB)
   {
 %>
             <option value="<%=AltitudeSearchCriteria.CRITERIA_SOURCE_DB%>">
-              <%=cm.cms("sites_altitude-result_06")%>
+              <%=cm.cms("database_source")%>
             </option>
 <%
   }
@@ -262,7 +262,7 @@
   {
 %>
             <option value="<%=AltitudeSearchCriteria.CRITERIA_ENGLISH_NAME%>">
-              <%=cm.cms("sites_altitude-result_07")%>
+              <%=cm.cms("name")%>
             </option>
 <%
   }
@@ -270,13 +270,13 @@
   {
 %>
             <option value="<%=AltitudeSearchCriteria.CRITERIA_ALTITUDE_MEAN%>">
-              <%=cm.cms("sites_altitude-result_08")%>
+              <%=cm.cms("mean_altitude_m")%>
             </option>
             <option value="<%=AltitudeSearchCriteria.CRITERIA_ALTITUDE_MIN%>">
-              <%=cm.cms("sites_altitude-result_09")%>
+              <%=cm.cms("minimum_altitude")%>
             </option>
             <option value="<%=AltitudeSearchCriteria.CRITERIA_ALTITUDE_MAX%>">
-              <%=cm.cms("sites_altitude-result_10")%>
+              <%=cm.cms("maximum_altitude_m")%>
             </option>
 <%
   }
@@ -284,43 +284,43 @@
   {
 %>
             <option value="<%=AltitudeSearchCriteria.CRITERIA_COUNTRY%>">
-              <%=cm.cms("sites_altitude-result_11")%>
+              <%=cm.cms("country")%>
             </option>
 <%
   }
 %>
           </select>
-          <%=cm.cmsLabel("criteria_type_label")%>
-          <%=cm.cmsTitle("criteria_type_title")%>
-          <%=cm.cmsInput("sites_designations-result_09")%>
-          <%=cm.cmsInput("sites_altitude-result_07")%>
-          <%=cm.cmsInput("sites_altitude-result_08")%>
-          <%=cm.cmsInput("sites_altitude-result_09")%>
-          <%=cm.cmsInput("sites_altitude-result_10")%>
-          <%=cm.cmsInput("sites_altitude-result_11")%>
+          <%=cm.cmsLabel("criteria")%>
+          <%=cm.cmsTitle("criteria")%>
+          <%=cm.cmsInput("country")%>
+          <%=cm.cmsInput("name")%>
+          <%=cm.cmsInput("mean_altitude_m")%>
+          <%=cm.cmsInput("minimum_altitude")%>
+          <%=cm.cmsInput("maximum_altitude_m")%>
+          <%=cm.cmsInput("country")%>
 
-          <label for="oper0" class="noshow"><%=cm.cms("operator_label")%></label>
-          <select id="oper0" name="oper" class="inputTextField" title="<%=cm.cms("operator_title")%>">
+          <label for="oper0" class="noshow"><%=cm.cms("operator")%></label>
+          <select id="oper0" name="oper" class="inputTextField" title="<%=cm.cms("operator")%>">
             <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-              <%=cm.cms("sites_altitude-result_12")%>
+              <%=cm.cms("is")%>
             </option>
           </select>
-          <%=cm.cmsLabel("operator_label")%>
-          <%=cm.cmsTitle("operator_title")%>
-          <%=cm.cmsInput("sites_altitude-result_12")%>
+          <%=cm.cmsLabel("operator")%>
+          <%=cm.cmsTitle("operator")%>
+          <%=cm.cmsInput("is")%>
 
-          <label for="criteriaSearch0" class="noshow"><%=cm.cms("filter_label")%></label>
-          <input id="criteriaSearch0" name="criteriaSearch" type="text" size="30" class="inputTextField" title="<%=cm.cms("filter_title")%>" />
-          <%=cm.cmsLabel("filter_label")%>
-          <%=cm.cmsTitle("filter_title")%>
+          <label for="criteriaSearch0" class="noshow"><%=cm.cms("filter_value")%></label>
+          <input id="criteriaSearch0" name="criteriaSearch" type="text" size="30" class="inputTextField" title="<%=cm.cms("filter_value")%>" />
+          <%=cm.cmsLabel("filter_value")%>
+          <%=cm.cmsTitle("filter_value")%>
 
-          <a title="<%=cm.cms("refine_lov_title")%>" href="javascript:openRefineHint()" name="binocular" id="binocular"><img src="images/helper/helper.gif" alt="<%=cm.cms("refine_lov_alt")%>" border="0" width="11" height="18" align="middle" /></a>
-          <%=cm.cmsTitle("refine_lov_title")%>
-          <%=cm.cmsAlt("refine_lov_alt")%>
+          <a title="<%=cm.cms("list_of_values")%>" href="javascript:openRefineHint()" name="binocular" id="binocular"><img src="images/helper/helper.gif" alt="<%=cm.cms("list_of_values")%>" border="0" width="11" height="18" style="vertical-align:middle" /></a>
+          <%=cm.cmsTitle("list_of_values")%>
+          <%=cm.cmsAlt("list_of_values")%>
 
-          <input id="submit" name="Submit" type="submit" value="<%=cm.cms("refine_btn_value")%>" class="inputTextField" title="<%=cm.cms("refine_btn_title")%>" />
-          <%=cm.cmsTitle("refine_btn_title")%>
-          <%=cm.cmsInput("refine_btn_value")%>
+          <input id="submit" name="Submit" type="submit" value="<%=cm.cms("search")%>" class="inputTextField" title="<%=cm.cms("search")%>" />
+          <%=cm.cmsTitle("search")%>
+          <%=cm.cmsInput("search")%>
         </form>
         <%-- This is the code which shows the search filters --%>
 <%
@@ -328,7 +328,7 @@
   if (criterias.length > 1)
   {
 %>
-        <%=cm.cmsText("sites_altitude-result_14")%>
+        <%=cm.cmsText("applied_filters_to_the_results_1")%>
         <br />
 <%
   }
@@ -338,9 +338,9 @@
     if (null != criteria && null != formBean.getCriteriaSearch())
     {
 %>
-        <a title="<%=cm.cms("removefilter_title")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img src="images/mini/delete.jpg" alt="<%=cm.cms("removefilter_alt")%>" border="0" align="middle" /></a>
+        <a title="<%=cm.cms("removefilter_title")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img src="images/mini/delete.jpg" alt="<%=cm.cms("delete")%>" border="0" style="vertical-align:middle" /></a>
         <%=cm.cmsTitle("removefilter_title")%>
-        <%=cm.cmsAlt("removefilter_alt")%>
+        <%=cm.cmsAlt("delete")%>
         <strong>
           <%= i + ". " + criteria.toHumanString()%>
         </strong>
@@ -391,7 +391,7 @@
   {
 %>
           <th class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency( sortSourceDB, null == sortSourceDB )%>"><%=Utilities.getSortImageTag( sortSourceDB )%><%=cm.cmsText("sites_altitude-result_15")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency( sortSourceDB, null == sortSourceDB )%>"><%=Utilities.getSortImageTag( sortSourceDB )%><%=cm.cmsText("source_data_set")%></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
@@ -400,14 +400,14 @@
   {
 %>
           <th class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency( sortCountry, null == sortCountry )%>"><%=Utilities.getSortImageTag( sortCountry )%><%=cm.cmsText("sites_altitude-result_11")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency( sortCountry, null == sortCountry )%>"><%=Utilities.getSortImageTag( sortCountry )%><%=cm.cmsText("country")%></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
 %>
           <th class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency( sortName, null == sortName )%>"><%=Utilities.getSortImageTag( sortName )%><%=cm.cmsText("sites_altitude-result_16")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency( sortName, null == sortName )%>"><%=Utilities.getSortImageTag( sortName )%><%=cm.cmsText("site_name")%></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
@@ -415,7 +415,7 @@
   {
 %>
           <th class="resultHeader">
-            <%=cm.cmsText("sites_altitude-result_17")%>
+            <%=cm.cmsText("designation_type")%>
           </th>
 <%
   }
@@ -423,16 +423,16 @@
   {
 %>
           <th class="resultHeader" style="text-align : center; white-space:nowrap;">
-            <%=cm.cmsText("sites_altitude-result_18")%>
+            <%=cm.cmsText("longitude")%>
           </th>
           <th class="resultHeader" style="text-align : center; white-space:nowrap;">
-            <%=cm.cmsText("sites_altitude-result_19")%>
+            <%=cm.cmsText("latitude")%>
           </th>
 <%
   }
 %>
           <th class="resultHeader" style="text-align : right;">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_ALTITUDE_MEAN%>&amp;ascendency=<%=formBean.changeAscendency(sortAltitudeMean, sortAltitudeMean == null )%>"><%=Utilities.getSortImageTag(sortAltitudeMean)%><%=cm.cmsText("sites_altitude-result_08")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_ALTITUDE_MEAN%>&amp;ascendency=<%=formBean.changeAscendency(sortAltitudeMean, sortAltitudeMean == null )%>"><%=Utilities.getSortImageTag(sortAltitudeMean)%><%=cm.cmsText("mean_altitude_m")%></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th class="resultHeader" style="text-align : right;">
@@ -448,7 +448,7 @@
   {
 %>
           <th class="resultHeader" style="text-align : right">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, sortYear == null )%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsText("sites_altitude-result_22")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, sortYear == null )%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsText("designation_year")%></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
@@ -545,7 +545,7 @@
   {
 %>
           <th class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency( sortSourceDB, null == sortSourceDB )%>"><%=Utilities.getSortImageTag( sortSourceDB )%><%=cm.cmsText("sites_altitude-result_15")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency( sortSourceDB, null == sortSourceDB )%>"><%=Utilities.getSortImageTag( sortSourceDB )%><%=cm.cmsText("source_data_set")%></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
@@ -554,14 +554,14 @@
   {
 %>
           <th class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency( sortCountry, null == sortCountry )%>"><%=Utilities.getSortImageTag( sortCountry )%><%=cm.cmsText("sites_altitude-result_11")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency( sortCountry, null == sortCountry )%>"><%=Utilities.getSortImageTag( sortCountry )%><%=cm.cmsText("country")%></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
   }
 %>
           <th class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency( sortName, null == sortName )%>"><%=Utilities.getSortImageTag( sortName )%><%=cm.cmsText("sites_altitude-result_16")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency( sortName, null == sortName )%>"><%=Utilities.getSortImageTag( sortName )%><%=cm.cmsText("site_name")%></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%
@@ -569,7 +569,7 @@
   {
 %>
           <th class="resultHeader">
-            <%=cm.cmsText("sites_altitude-result_17")%>
+            <%=cm.cmsText("designation_type")%>
           </th>
 <%
   }
@@ -577,16 +577,16 @@
   {
 %>
           <th class="resultHeader" style="text-align : center; white-space:nowrap;">
-            <%=cm.cmsText("sites_altitude-result_18")%>
+            <%=cm.cmsText("longitude")%>
           </th>
           <th class="resultHeader" style="text-align : center; white-space:nowrap;">
-            <%=cm.cmsText("sites_altitude-result_19")%>
+            <%=cm.cmsText("latitude")%>
           </th>
 <%
   }
 %>
           <th class="resultHeader" style="text-align : right;">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_ALTITUDE_MEAN%>&amp;ascendency=<%=formBean.changeAscendency(sortAltitudeMean, sortAltitudeMean == null )%>"><%=Utilities.getSortImageTag(sortAltitudeMean)%><%=cm.cmsText("sites_altitude-result_08")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_ALTITUDE_MEAN%>&amp;ascendency=<%=formBean.changeAscendency(sortAltitudeMean, sortAltitudeMean == null )%>"><%=Utilities.getSortImageTag(sortAltitudeMean)%><%=cm.cmsText("mean_altitude_m")%></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th class="resultHeader" style="text-align : right;">
@@ -602,7 +602,7 @@
   {
 %>
           <th class="resultHeader" style="text-align : right;">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, sortYear == null )%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsText("sites_altitude-result_22")%></a>
+            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AltitudeSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, sortYear == null )%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsText("designation_year")%></a>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
 <%

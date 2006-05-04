@@ -29,43 +29,43 @@
   if ( habitats.size() > 0 )
   {
 %>
-        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_factsheet_habitats")%></div>
-        <table summary="<%=cm.cms("open_statistical_data")%>" width="100%" border="1" cellspacing="1" cellpadding="0"  id="habitats" class="sortable">
+        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitat_type_populated_by_species")%></div>
+        <table summary="<%=cm.cms("open_the_statistical_data_for")%>" width="100%" border="1" cellspacing="1" cellpadding="0"  id="habitats" class="sortable">
           <tr style="background-color:#DDDDDD;text-align:center">
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("species_factsheet_habitatsEUNISCode")%>
+              <%=cm.cmsText("eunis_code")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("species_factsheet_habitatsANNEXCode")%>
+              <%=cm.cmsText("annex_code")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("species_factsheet_habitatsHabitatName")%>
+              <%=cm.cmsText("habitat_type_name")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("species_factsheet_habitatRegion")%>
+              <%=cm.cmsText("biogeographic_region")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("species_factsheet_habitatAbundance")%>
+              <%=cm.cmsText("abundance")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("species_factsheet_habitaFrequencies")%>
+              <%=cm.cmsText("frequencies")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("species_factsheet_habitatFaithfulness")%>
+              <%=cm.cmsText("faithfulness")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("species_factsheet_habitatSpeciesStatus")%>
+              <%=cm.cmsText("species_status")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("species_factsheet_habitatComments")%>
+              <%=cm.cmsText("comment")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           </tr>
@@ -113,7 +113,7 @@
 %>
 
 <%=cm.br()%>
-<%=cm.cmsMsg("open_statistical_data")%>
+<%=cm.cmsMsg("open_the_statistical_data_for")%>
 
 <br />
 <br />

@@ -35,7 +35,7 @@ The following request parameters are available as input:
           <tr bgcolor="#DDDDDD">
           <td>
             <strong>
-              <%=cm.cmsText("habitats_popup-legal_01")%>
+              <%=cm.cmsText("legal_instrument")%>
             </strong>
           </td>
           </tr>
@@ -63,8 +63,8 @@ The following request parameters are available as input:
 %>
     </table>
     <form action="">
-      <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("habitats_popup-legal_03")%>" onclick="javascript:window.close()" id="button" name="button" class="inputTextField" />
-      <%=cm.cmsInput("habitats_popup-legal_03")%>
+      <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" id="button" name="button" class="inputTextField" />
+      <%=cm.cmsInput("close_btn")%>
     </form>
     <%=cm.cms("habitats_popup-legal_title")%>
   </body>

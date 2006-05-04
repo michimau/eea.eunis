@@ -24,7 +24,7 @@
 %>
 <title>
   <%=application.getInitParameter("PAGE_TITLE")%>
-  <%=request.getParameter("natureobject")!=null?request.getParameter("natureobject"):""%> <%=cm.cms("species_advanced_title")%>
+  <%=request.getParameter("natureobject")!=null?request.getParameter("natureobject"):""%> <%=cm.cms("advanced_search")%>
 </title>
 <script language="JavaScript" type="text/javascript">
 <!--
@@ -101,7 +101,7 @@
   function disableSaveButton() {
     document.criteria.Save.disabled=true;
     document.criteria.Search.disabled=false;
-    document.getElementById("status").innerHTML="<span style=\"color:red;\"><%=cm.cms("your_criteria_has_been_saved")%></span>"
+    document.getElementById("status").innerHTML="<span style=\"color:red;\"><%=cm.cms("criteria_saved")%></span>"
   }
 
   function submitAttributeForm(attribute, idnode) {
@@ -262,7 +262,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
   <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,species_advanced_search_location"/>
+      <jsp:param name="location" value="home#index.jsp,species#species.jsp,advanced_search"/>
     </jsp:include>
     <h1><%=cm.cmsText("species_advanced_01")%></h1>
     <%=cm.cmsText("species_advanced_02")%>
@@ -271,7 +271,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
     <table summary="layout" border="0">
       <tr>
         <td id="status">
-          <%=cm.cmsText("species_advanced_03")%>
+          <%=cm.cmsText("specify_the_search_criteria")%>
         </td>
       </tr>
     </table>
@@ -518,11 +518,11 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
         <%
       }
 
-      String cmsCriteria = cm.cms("advanced_criteria");
+      String cmsCriteria = cm.cms("criteria");
       String cmsAttribute = cm.cms("advanced_attribute");
-      String cmsOperator = cm.cms("advanced_operator");
-      String cmsAll = cm.cms("advanced_all");
-      String cmsAny = cm.cms("advanced_any");
+      String cmsOperator = cm.cms("operator");
+      String cmsAll = cm.cms("all");
+      String cmsAny = cm.cms("any");
       String cmsFollowingCriteria = cm.cms("of_following_criteria_are_met");
 
       if (!NodeType.equalsIgnoreCase("Criteria")) {
@@ -550,50 +550,50 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
 
         if(NatureObject.equalsIgnoreCase("Species")) {
           if(val.equalsIgnoreCase("ScientificName")) { selected=" selected=\"selected\""; } else { selected=""; }
-          out.println("<option"+selected+" value=\"ScientificName\">"+cm.cms("species_advanced_10")+"</option>");
+          out.println("<option"+selected+" value=\"ScientificName\">"+cm.cms("scientific_name")+"</option>");
           if(val.equalsIgnoreCase("VernacularName")) { selected=" selected=\"selected\""; } else { selected=""; }
-          out.println("<option"+selected+" value=\"VernacularName\">"+cm.cms("species_advanced_11")+"</option>");
+          out.println("<option"+selected+" value=\"VernacularName\">"+cm.cms("vernacular_name")+"</option>");
           if(val.equalsIgnoreCase("Group")) { selected=" selected=\"selected\""; } else { selected=""; }
-          out.println("<option"+selected+" value=\"Group\">"+cm.cms("species_advanced_12")+"</option>");
+          out.println("<option"+selected+" value=\"Group\">"+cm.cms("group")+"</option>");
           if(val.equalsIgnoreCase("ThreatStatus")) { selected=" selected=\"selected\""; } else { selected=""; }
-          out.println("<option"+selected+" value=\"ThreatStatus\">"+cm.cms("species_advanced_13")+"</option>");
+          out.println("<option"+selected+" value=\"ThreatStatus\">"+cm.cms("threat_status")+"</option>");
           if(val.equalsIgnoreCase("InternationalThreatStatus")) { selected=" selected=\"selected\""; } else { selected=""; }
-          out.println("<option"+selected+" value=\"InternationalThreatStatus\">"+cm.cms("species_advanced_14")+"</option>");
+          out.println("<option"+selected+" value=\"InternationalThreatStatus\">"+cm.cms("international_threat_status")+"</option>");
           if(val.equalsIgnoreCase("Country")) { selected=" selected=\"selected\""; } else { selected=""; }
-          out.println("<option"+selected+" value=\"Country\">"+cm.cms("species_advanced_15")+"</option>");
+          out.println("<option"+selected+" value=\"Country\">"+cm.cms("country")+"</option>");
           if(val.equalsIgnoreCase("Biogeoregion")) { selected=" selected=\"selected\""; } else { selected=""; }
-          out.println("<option"+selected+" value=\"Biogeoregion\">"+cm.cms("species_advanced_16")+"</option>");
+          out.println("<option"+selected+" value=\"Biogeoregion\">"+cm.cms("biogeoregion")+"</option>");
           if(val.equalsIgnoreCase("Author")) { selected=" selected=\"selected\""; } else { selected=""; }
-          out.println("<option"+selected+" value=\"Author\">"+cm.cms("species_advanced_17")+"</option>");
+          out.println("<option"+selected+" value=\"Author\">"+cm.cms("reference_author")+"</option>");
           if(val.equalsIgnoreCase("Title")) { selected=" selected=\"selected\""; } else { selected=""; }
-          out.println("<option"+selected+" value=\"Title\">"+cm.cms("species_advanced_18")+"</option>");
+          out.println("<option"+selected+" value=\"Title\">"+cm.cms("reference_title")+"</option>");
           if(val.equalsIgnoreCase("LegalInstrument")) { selected=" selected=\"selected\""; } else { selected=""; }
           out.println("<option"+selected+" value=\"LegalInstrument\">"+cm.cms("species_advanced_19")+"</option>");
           if(val.equalsIgnoreCase("Taxonomy")) { selected=" selected=\"selected\""; } else { selected=""; }
-          out.println("<option"+selected+" value=\"Taxonomy\">"+cm.cms("species_advanced_20")+"</option>");
+          out.println("<option"+selected+" value=\"Taxonomy\">"+cm.cms("taxonomy")+"</option>");
           if(val.equalsIgnoreCase("Abundance")) { selected=" selected=\"selected\""; } else { selected=""; }
-          out.println("<option"+selected+" value=\"Abundance\">"+cm.cms("species_advanced_21")+"</option>");
+          out.println("<option"+selected+" value=\"Abundance\">"+cm.cms("abundance")+"</option>");
           if(val.equalsIgnoreCase("Trend")) { selected=" selected=\"selected\""; } else { selected=""; }
-          out.println("<option"+selected+" value=\"Trend\">"+cm.cms("species_advanced_22")+"</option>");
+          out.println("<option"+selected+" value=\"Trend\">"+cm.cms("trend")+"</option>");
           if(val.equalsIgnoreCase("DistributionStatus")) { selected=" selected=\"selected\""; } else { selected=""; }
-          out.println("<option"+selected+" value=\"DistributionStatus\">"+cm.cms("species_advanced_23")+"</option>");
+          out.println("<option"+selected+" value=\"DistributionStatus\">"+cm.cms("distribution_status")+"</option>");
         }
         out.println("</select>");
         %>
-        <%=cm.cmsInput("species_advanced_10")%>
-        <%=cm.cmsInput("species_advanced_11")%>
-        <%=cm.cmsInput("species_advanced_12")%>
-        <%=cm.cmsInput("species_advanced_13")%>
-        <%=cm.cmsInput("species_advanced_14")%>
-        <%=cm.cmsInput("species_advanced_15")%>
-        <%=cm.cmsInput("species_advanced_16")%>
-        <%=cm.cmsInput("species_advanced_17")%>
-        <%=cm.cmsInput("species_advanced_18")%>
+        <%=cm.cmsInput("scientific_name")%>
+        <%=cm.cmsInput("vernacular_name")%>
+        <%=cm.cmsInput("group")%>
+        <%=cm.cmsInput("threat_status")%>
+        <%=cm.cmsInput("international_threat_status")%>
+        <%=cm.cmsInput("country")%>
+        <%=cm.cmsInput("biogeoregion")%>
+        <%=cm.cmsInput("reference_author")%>
+        <%=cm.cmsInput("reference_title")%>
         <%=cm.cmsInput("species_advanced_19")%>
-        <%=cm.cmsInput("species_advanced_20")%>
-        <%=cm.cmsInput("species_advanced_21")%>
-        <%=cm.cmsInput("species_advanced_22")%>
-        <%=cm.cmsInput("species_advanced_23")%>
+        <%=cm.cmsInput("taxonomy")%>
+        <%=cm.cmsInput("abundance")%>
+        <%=cm.cmsInput("trend")%>
+        <%=cm.cmsInput("distribution_status")%>
         <%
         out.println("&nbsp;");
 
@@ -603,18 +603,18 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
         out.println("<select name=\"Operator" + IdNode + "\" class=\"inputTextField\" onchange=\"submitOperatorForm(this,'" + IdNode + "','" + IdSession + "','" + NatureObject + "')\" title=\""+cmsOperator+"\" id=\"Operator" + IdNode + "\">");
 
         if(val.equalsIgnoreCase("Equal")) { selected=" selected=\"selected\""; } else { selected=""; }
-        out.println("<option"+selected+" value=\"Equal\">"+cm.cms("species_advanced_30")+"</option>");
+        out.println("<option"+selected+" value=\"Equal\">"+cm.cms("equal")+"</option>");
         if(val.equalsIgnoreCase("Contains")) { selected=" selected=\"selected\""; } else { selected=""; }
-        out.println("<option"+selected+" value=\"Contains\">"+cm.cms("species_advanced_31")+"</option>");
+        out.println("<option"+selected+" value=\"Contains\">"+cm.cms("contains")+"</option>");
         if(val.equalsIgnoreCase("Between")) { selected=" selected=\"selected\""; } else { selected=""; }
-        out.println("<option"+selected+" value=\"Between\">"+cm.cms("species_advanced_32")+"</option>");
+        out.println("<option"+selected+" value=\"Between\">"+cm.cms("between")+"</option>");
         if(val.equalsIgnoreCase("Regex")) { selected=" selected=\"selected\""; } else { selected=""; }
         out.println("<option"+selected+" value=\"Regex\">Regex</option>");
         out.println("</select>");
         %>
-        <%=cm.cmsInput("species_advanced_30")%>
-        <%=cm.cmsInput("species_advanced_31")%>
-        <%=cm.cmsInput("species_advanced_32")%>
+        <%=cm.cmsInput("equal")%>
+        <%=cm.cmsInput("contains")%>
+        <%=cm.cmsInput("between")%>
         <%
         out.println("&nbsp;");
 
@@ -627,7 +627,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
         <a title="<%=cm.cms("list_of_values")%>" href="javascript:choice('First_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="first_binocular"  onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cms("list_of_values")%>" /></a>
         <%
         if(rs.getString("OPERATOR").equalsIgnoreCase("Between")) {
-          out.println(cm.cmsText("species_advanced_and"));
+          out.println(cm.cmsText("and"));
           val=rs.getString("LAST_VALUE");
           currentValue = val;
           %>
@@ -644,14 +644,14 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
     }
     %>
     <br />
-    <input type="button" class="inputTextField" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save_btn")%>" />
-    <%=cm.cmsTitle("save_btn")%>
+    <input type="button" class="inputTextField" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save")%>" />
+    <%=cm.cmsTitle("save")%>
     &nbsp;&nbsp;&nbsp;
-    <input type="submit" class="inputTextField" value="Search" id="Search" name="Search" title="<%=cm.cms("search_btn")%>" />
-    <%=cm.cmsTitle("search_btn")%>
+    <input type="submit" class="inputTextField" value="Search" id="Search" name="Search" title="<%=cm.cms("search")%>" />
+    <%=cm.cmsTitle("search")%>
     &nbsp;&nbsp;&nbsp;
-    <input type="button" class="inputTextField" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cms("reset_btn")%>" />
-    <%=cm.cmsTitle("reset_btn")%>
+    <input type="button" class="inputTextField" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cms("reset")%>" />
+    <%=cm.cmsTitle("reset")%>
     <%
   } else {
     %>
@@ -663,12 +663,12 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
   %>
   </form>
   <br />
-  <strong><%=cm.cmsText("sites_advanced_note_time")%></strong>
+  <strong><%=cm.cmsText("advanced_search_might_take_long_time")%></strong>
   <br />
   <%
 
   String criteria=tas.createCriteria(IdSession,NatureObject);
-  out.println(cm.cms("sites_advanced_calculated_criteria"));
+  out.println(cm.cms("calculated_criteria"));
   explainedcriteria=criteria.replace('#',' ').replace('[','(').replace(']',')').replaceAll("AND","<strong>AND</strong>").replaceAll("OR","<strong>OR</strong>");
   out.println(explainedcriteria);
 
@@ -696,7 +696,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
         interpretedcriteria=tsas.InterpretCriteria(node,IdSession,NatureObject);
         //add criteria to the list of criteria passed to the results page
         listcriteria+=node+": "+interpretedcriteria+"<br />";
-        out.println(cm.cmsText("advanced_searching_for") + " " + interpretedcriteria+"...");
+        out.println(cm.cmsText("searching_for") + " " + interpretedcriteria+"...");
         out.flush();
         intermediatefilter=tsas.BuildFilter(node,IdSession,NatureObject);
         out.println(cm.cmsText("advanced_found") + " <strong>"+tsas.getResultCount() + "</strong>");
@@ -741,8 +741,8 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
     if (tsas.getResultCount() > 0) {
     %>
     <form name="search" action="select-columns.jsp" method="post">
-      <input type="submit" id="NextStep" name="<%=cm.cms("advanced_proceed_to_next_step")%>" value="<%=cm.cms("species_advanced_40")%>" title="<%=cm.cms("advanced_proceed_to_next_step")%>" class="inputTextField" />
-      <%=cm.cmsInput("species_advanced_40")%>
+      <input type="submit" id="NextStep" name="<%=cm.cms("proceed_to_next_step")%>" value="<%=cm.cms("proceed_to_next_step")%>" title="<%=cm.cms("proceed_to_next_step")%>" class="inputTextField" />
+      <%=cm.cmsInput("proceed_to_next_step")%>
       <input type="hidden" name="searchedNatureObject" value="Species" />
       <input type="hidden" name="origin" value="Advanced" />
       <input type="hidden" name="explainedcriteria" value="<%=explainedcriteria%>" />
@@ -759,9 +759,9 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
     <tr>
       <td>
         <form name="saveCriteriaSearch" action="save-species-or-habitats-advanced-search-criteria.jsp" method="post">
-          <label for="SaveCriteria" class="noshow"><%=cm.cms("advanced_save_criteria")%></label>
-          <input type="button" id="SaveCriteria" name="Save Criteria" title="<%=cm.cms("advanced_save_criteria")%>" value="<%=cm.cms("species_advanced_55")%>" class="inputTextField" onClick="javascript:SaveCriteriaFunction();" />
-          <%=cm.cmsInput("species_advanced_55")%>
+          <label for="SaveCriteria" class="noshow"><%=cm.cms("save_criteria")%></label>
+          <input type="button" id="SaveCriteria" name="Save Criteria" title="<%=cm.cms("save_criteria")%>" value="<%=cm.cms("save_criteria")%>" class="inputTextField" onClick="javascript:SaveCriteriaFunction();" />
+          <%=cm.cmsInput("save_criteria")%>
           <input type="hidden" name="idsession" value="<%=IdSession%>" />
           <input type="hidden" name="natureobject" value="<%=NatureObject%>" />
           <input type="hidden" name="username" value="<%=SessionManager.getUsername()%>" />
@@ -776,7 +776,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
     <%
     } else {
     %>
-       <br /><%=cm.cmsText("advanced_no_results")%><br />
+       <br /><%=cm.cmsText("no_results")%><br />
     <%
     }
   }
@@ -791,12 +791,12 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
     <table summary="layout" width="100%" border="0">
       <tr>
         <td>
-          <img border="0" alt="<%=cm.cms("advanced_expand_collapse")%>" align="middle" src="images/mini/<%=(exp.equals("yes")?"collapse.gif":"expand.gif")%>"><a title="<%=cm.cms("advanced_expand_collapse")%>" href="species-advanced.jsp?expandCriterias=<%=(exp.equals("yes")?"no":"yes")%>"><%=(exp.equalsIgnoreCase("yes") ? cm.cms("advanced_hide") : cm.cms("advanced_show"))%> <%=cm.cmsText("advanced_saved_search_criteria")%></a>
+          <img border="0" alt="<%=cm.cms("advanced_expand_collapse")%>" style="vertical-align:middle" src="images/mini/<%=(exp.equals("yes")?"collapse.gif":"expand.gif")%>"><a title="<%=cm.cms("advanced_expand_collapse")%>" href="species-advanced.jsp?expandCriterias=<%=(exp.equals("yes")?"no":"yes")%>"><%=(exp.equalsIgnoreCase("yes") ? cm.cms("hide") : cm.cms("show"))%> <%=cm.cmsText("saved_search_criteria")%></a>
           <%=cm.cmsTitle("advanced_expand_collapse")%>
-          <%=cm.cmsTitle("advanced_hide")%>
-          <%=cm.cmsTitle("advanced_show")%>
-          <%=cm.cmsTitle("advanced_hide")%>
-          <%=cm.cmsTitle("advanced_show")%>
+          <%=cm.cmsTitle("hide")%>
+          <%=cm.cmsTitle("show")%>
+          <%=cm.cmsTitle("hide")%>
+          <%=cm.cmsTitle("show")%>
         </td>
       </tr>
     </table>
@@ -830,15 +830,15 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
   }
 %>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_advanced_title")%>
+<%=cm.cmsMsg("advanced_search")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("press_save_to_save_criteria")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("your_criteria_has_been_saved")%>
+<%=cm.cmsMsg("criteria_saved")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("previous_values_was_restored")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_advanced_search_location")%>
+<%=cm.cmsMsg("advanced_search")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("error_deleting_root")%>
 <%=cm.br()%>
@@ -846,15 +846,15 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
 <%=cm.br()%>
 <%=cm.cmsMsg("error_deleting_branch")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("advanced_criteria")%>
+<%=cm.cmsMsg("criteria")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("advanced_attribute")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("advanced_operator")%>
+<%=cm.cmsMsg("operator")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("advanced_all")%>
+<%=cm.cmsMsg("all")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("advanced_any")%>
+<%=cm.cmsMsg("any")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("of_following_criteria_are_met")%>
     <jsp:include page="footer.jsp">

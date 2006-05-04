@@ -23,7 +23,7 @@
       WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title>
-      <%=cm.cms("species_legal-choice_title")%>
+      <%=cm.cms("list_of_values")%>
     </title>
     <%// use form bean here%>
     <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.legal.LegalBean" scope="page">
@@ -70,14 +70,14 @@
         if (results != null && !results.isEmpty())
         {
       %>
-          <h2><%=cm.cmsText("list_values_for")%></h2>
-          <u><%=cm.cmsText("species_legal-choice_01")%></u>
+          <h2><%=cm.cmsText("list_of_values_for")%></h2>
+          <u><%=cm.cmsText("species_scientific_name")%></u>
           <em><%=Utilities.ReturnStringRelatioOp(Utilities.OPERATOR_CONTAINS)%></em>
           <strong><%=formBean.getScientificName()%></strong>
           <br />
           <br />
           <div id="tab">
-          <table summary="<%=cm.cms("list_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+          <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
           <%
             if (typeForm == LegalSearchCriteria.CRITERIA_SPECIES.intValue())
             {
@@ -106,7 +106,7 @@
          } else
         {
       %>
-       <strong><%=cm.cmsText("species_legal-choice_02")%>.</strong>
+       <strong><%=cm.cmsText("no_results_found")%>.</strong>
        <br />
        <br />
      <%
@@ -114,15 +114,15 @@
      %>
     <br />
     <form action="">
-      <input id="button" title="<%=cm.cms("close")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
-      <%=cm.cmsTitle("close")%>
+      <input id="button" title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
+      <%=cm.cmsTitle("close_window")%>
       <%=cm.cmsInput("close_btn")%>
     </form>
 
 <%=cm.br()%>
-<%=cm.cmsMsg("species_legal-choice_title")%>
+<%=cm.cmsMsg("list_of_values")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("list_values")%>
+<%=cm.cmsMsg("list_of_values")%>
 <%=cm.br()%>
 
   </body>

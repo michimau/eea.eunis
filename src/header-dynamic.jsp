@@ -50,7 +50,7 @@ Input parameters  on REQUEST:
 <table summary="layout" border="0" cellpadding="0" cellspacing="0" width="100%" style="text-align : left;">
   <tr>
     <td width="60%">
-      <img alt="<%=cm.cms( "header_current_location_alt" )%>" src="<%=domain%>/images/path.gif" width="20" height="16" align="middle" /><%=cm.cmsAlt("header_current_location_alt")%>
+      <img alt="<%=cm.cms( "header_current_location_alt" )%>" src="<%=domain%>/images/path.gif" width="20" height="16" style="vertical-align:middle" /><%=cm.cmsAlt("header_current_location_alt")%>
 <%
         for (int i = 0; i < backtrailObjects.size(); i++)
         {
@@ -73,7 +73,7 @@ Input parameters  on REQUEST:
       {
 %>
         <td width="7%" align="right">
-          <a class="breadcrumbtrail" href="<%=domain%>/<%=dynHeaderHelpLink%>" title="<%=cm.cms( "header_help_title" )%>"><%=cm.cmsText( "header_help" )%></a>
+          <a class="breadcrumbtrail" href="<%=domain%>/<%=dynHeaderHelpLink%>" title="<%=cm.cms( "header_help_title" )%>"><%=cm.cmsText( "help" )%></a>
           <%=cm.cmsTitle( "header_help_title" )%>
         </td>
 <%
@@ -109,7 +109,7 @@ Input parameters  on REQUEST:
       {
 %>
         <td width="100%" align="right">
-          <a class="breadcrumbtrail" href="<%=dynHeaderDownloadLink%>" title="<%=cm.cms( "header_download_tsv_title" )%>"><img alt="<%=cm.cms( "header_download_alt" )%>" src="images/mini/download.gif" width="16" height="16" border="0" align="middle" /></a>
+          <a class="breadcrumbtrail" href="<%=dynHeaderDownloadLink%>" title="<%=cm.cms( "header_download_tsv_title" )%>"><img alt="<%=cm.cms( "header_download_alt" )%>" src="images/mini/download.gif" width="16" height="16" border="0" style="vertical-align:middle" /></a>
           <%=cm.cmsTitle( "header_download_tsv_title" )%><%=cm.cmsAlt( "header_download_alt" )%>
           <a class="breadcrumbtrail" href="<%=dynHeaderDownloadLink%>" title="<%=cm.cms( "header_download_tsv_title" )%>"><%=cm.cmsText( "header_download_tsv" )%></a>
           <%=cm.cmsTitle( "header_download_tsv_title" )%>

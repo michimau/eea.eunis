@@ -28,7 +28,7 @@
   <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,how_to_use_eunis_habitats_location" />
+      <jsp:param name="location" value="home#index.jsp,how_to_use_eunis_habitats_location" />
     </jsp:include>
     <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>

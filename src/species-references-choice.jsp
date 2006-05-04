@@ -23,7 +23,7 @@
       WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title>
-      <%=cm.cms("species_references-choice_title")%>
+      <%=cm.cms("list_of_values")%>
     </title>
     <script language="JavaScript" type="text/javascript">
     <!--
@@ -175,10 +175,10 @@
     }
 %>
     <h2>
-      <%=cm.cmsText("species_references-choice_02")%>&nbsp;<%=listOfWhat%>&nbsp;for
+      <%=cm.cmsText("list_of")%>&nbsp;<%=listOfWhat%>&nbsp;for
     </h2>
     <strong>
-      <%=cm.cmsText("species_references-choice_03")%>
+      <%=cm.cmsText("references")%>
       <%=forWhat.equalsIgnoreCase("") ? "" : "with following characteristics"%>&nbsp;:
     </strong>
     <br />
@@ -198,7 +198,7 @@
           {
       %>
           <strong>
-            <%=cm.cmsText("species_references-choice_04")%> <%=request.getParameter("fromWhere")%>.
+            <%=cm.cmsText("no_details_recorded")%> <%=request.getParameter("fromWhere")%>.
           </strong>
           <br />
       <%
@@ -207,7 +207,7 @@
           {
       %>
             <div id="tab">
-            <table summary="<%=cm.cms("list_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+            <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
              <tr>
               <th class="resultHeader">
                 <%=cm.cmsText("values")%>
@@ -238,7 +238,7 @@
       {
  %>
               <strong>
-                <%=cm.cmsText("species_references-choice_05")%>.
+                <%=cm.cmsText("no_results_found")%>.
               </strong>
               <br />
        <%
@@ -247,15 +247,15 @@
 
    <br />
    <form action="">
-    <input id="button" title="<%=cm.cms("close")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
-    <%=cm.cmsTitle("close")%>
+    <input id="button" title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
+    <%=cm.cmsTitle("close_window")%>
     <%=cm.cmsInput("close_btn")%>
    </form>
 
 <%=cm.br()%>
-<%=cm.cmsMsg("species_references-choice_title")%>
+<%=cm.cmsMsg("list_of_values")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("list_values")%>
+<%=cm.cmsMsg("list_of_values")%>
 <%=cm.br()%>
 
   </body>

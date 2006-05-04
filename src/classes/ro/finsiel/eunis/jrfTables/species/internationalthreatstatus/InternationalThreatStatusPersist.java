@@ -254,7 +254,7 @@ public class InternationalThreatStatusPersist extends PersistentObject {
   public String getTaxonomicNameOrder() {
     String level = this.getTaxonomyLevel();
 
-    if(level != null && level.equalsIgnoreCase("order"))
+    if(level != null && level.equalsIgnoreCase("order_column"))
        return this.getTaxonomyName();
     else
     {
@@ -268,7 +268,7 @@ public class InternationalThreatStatusPersist extends PersistentObject {
           String classification_id = sts.nextToken();
           String classification_level = sts.nextToken();
           String classification_name = sts.nextToken();
-          if(classification_level != null && classification_level.equalsIgnoreCase("order")) {result = classification_name;break;}
+          if(classification_level != null && classification_level.equalsIgnoreCase("order_column")) {result = classification_name;break;}
         }
 
       return result;

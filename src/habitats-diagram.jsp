@@ -73,7 +73,7 @@
 <%=cm.cmsText("habitats_diagram_02")%>: <%=habitat.getScientificName()%>(
 <strong><%=eunisCode%></strong>)
 -
-<%=cm.cmsText("habitats_diagram_04")%>:<strong><%=habitat.getHabLevel()%></strong>
+<%=cm.cmsText("generic_index_07")%>:<strong><%=habitat.getHabLevel()%></strong>
 <br />
 <%=cm.cmsText("habitats_diagram_03")%>.
 <br />
@@ -90,7 +90,7 @@
     </td>
     <td width="43">
       &nbsp;
-      <a title="<%=cm.cms("open_diagram")%>" href="habitats-diagram.jsp?habCode=<%=habitat.getEunisHabitatCode().substring(0, 1)%>"><img alt="Open diagram" src="images/mini/diagram_in.png" align="middle" width="20" height="20" border="0" /></a>
+      <a title="<%=cm.cms("open_diagram")%>" href="habitats-diagram.jsp?habCode=<%=habitat.getEunisHabitatCode().substring(0, 1)%>"><img alt="Open diagram" src="images/mini/diagram_in.png" style="vertical-align:middle" width="20" height="20" border="0" /></a>
       <%=cm.cmsTitle("open_diagram")%>
       <br />
     </td>
@@ -109,7 +109,7 @@
     </td>
     <td width="43">
       &nbsp;
-      <a title="<%=cm.cms("open_diagram")%>" href="habitats-diagram.jsp?habCode=<%=habitat.getEunisHabitatCode().substring(0, 2)%>"><img alt="<%=cm.cms("open_diagram")%>" src="images/mini/diagram_in.png" align="middle" width="20" height="20" border="0" /></a>
+      <a title="<%=cm.cms("open_diagram")%>" href="habitats-diagram.jsp?habCode=<%=habitat.getEunisHabitatCode().substring(0, 2)%>"><img alt="<%=cm.cms("open_diagram")%>" src="images/mini/diagram_in.png" style="vertical-align:middle" width="20" height="20" border="0" /></a>
       <%=cm.cmsTitle("open_diagram")%>
       <br />
     </td>

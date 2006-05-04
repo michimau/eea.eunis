@@ -19,7 +19,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("introduction_page_title")%>
+      <%=cm.cms("introduction_to_eunis")%>
     </title>
   </head>
   <body>
@@ -27,11 +27,11 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,introduction_location"/>
+        <jsp:param name="location" value="home#index.jsp,introduction_to_eunis"/>
       </jsp:include>
       <%=cm.cmsText("generic_introduction_01")%>
 
-      <%=cm.cmsMsg("introduction_page_title")%>
+      <%=cm.cmsMsg("introduction_to_eunis")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="introduction.jsp" />
       </jsp:include>

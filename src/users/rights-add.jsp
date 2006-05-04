@@ -134,7 +134,7 @@
   if(SQL_DRV == null || SQL_URL==null || SQL_USR == null || SQL_PWD==null )
   {
 %>
-    <%=cm.cmsText("rights_add_03")%>
+    <%=cm.cmsText("error_web_xml_missing_required_values")%>
 <%
     return;
   }
@@ -223,7 +223,7 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
 }
 %>
      <h1>
-       <%=cm.cmsText("rights_add_10")%>
+       <%=cm.cmsText("eunis_database_user_management")%>
      </h1>
      <br />
      <h2>
@@ -280,11 +280,11 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
    %>
      <tr>
        <td>
-       &nbsp;&nbsp;<label for="rightName2"><%=cm.cmsText("rights_add_14")%></label>
+       &nbsp;&nbsp;<label for="rightName2"><%=cm.cmsText("righ_name")%></label>
        </td>
        <td>
-         <input class="inputTextField" title="<%=cm.cms("rights_add_14")%>" alt="<%=cm.cms("rights_add_14")%>" type="text" id="rightName2" name="rightName" size="50" value="" onchange="RightExist();" />
-         <%=cm.cmsTitle("rights_add_14")%>
+         <input class="inputTextField" title="<%=cm.cms("righ_name")%>" alt="<%=cm.cms("righ_name")%>" type="text" id="rightName2" name="rightName" size="50" value="" onchange="RightExist();" />
+         <%=cm.cmsTitle("righ_name")%>
        </td>
      </tr>
    <%
@@ -311,12 +311,12 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
 <tr>
   <td style="text-align:left">
     &nbsp;&nbsp;
-    <input id="input1" type="submit" value="<%=(users_operation.equalsIgnoreCase("add_rights")?cm.cms("add_right_btn"):cm.cms("update_data"))%>" name="submit" onclick="document.eunis.operation.value='submit';" class="inputTextField"  title="<%=cm.cms("submit")%>" />
+    <input id="input1" type="submit" value="<%=(users_operation.equalsIgnoreCase("add_rights")?cm.cms("add_right"):cm.cms("update_data"))%>" name="submit" onclick="document.eunis.operation.value='submit';" class="inputTextField"  title="<%=cm.cms("submit")%>" />
     <%=cm.cmsTitle("submit")%>
-    <%=cm.cmsInput("add_right_btn")%>
+    <%=cm.cmsInput("add_right")%>
     <%=cm.cmsInput("update_data")%>
     &nbsp;&nbsp;
-    <input id="input2" type="reset" value="<%=cm.cms("reset_btn")%>" name="Reset" class="inputTextField"  title="<%=cm.cms("reset")%>" />
+    <input id="input2" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="inputTextField"  title="<%=cm.cms("reset")%>" />
     <%=cm.cmsTitle("reset")%>
     <%=cm.cmsInput("reset")%>
   </td>
@@ -352,7 +352,7 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
   } else
   {
 %>
-<strong><%=cm.cmsText("rights_add_15")%></strong>
+<strong><%=cm.cmsText("not_authenticated_no_rights_1")%></strong>
 <br />
 <%
   }

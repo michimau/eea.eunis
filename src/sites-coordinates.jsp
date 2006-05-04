@@ -37,7 +37,7 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_coordinates_location"/>
+        <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,coordinates"/>
         <jsp:param name="helpLink" value="sites-help.jsp"/>
         <jsp:param name="mapLink" value="show"/>
       </jsp:include>
@@ -51,49 +51,49 @@
         <br />
         <div class="grey_rectangle">
           <strong>
-            <%=cm.cmsText("search_will_provide_following_information")%>
+            <%=cm.cmsText("search_will_provide")%>
           </strong>
           <br />
-          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_coordinates_03")%>" />
-          <label for="showSourceDB"><%=cm.cmsText("sites_coordinates_03")%></label>
-          <%=cm.cmsTitle("sites_coordinates_03")%>
+          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("source_data_set_1")%>" />
+          <label for="showSourceDB"><%=cm.cmsText("source_data_set_1")%></label>
+          <%=cm.cmsTitle("source_data_set_1")%>
 
-          <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_coordinates_04")%>" />
-          <label for="showCountry"><%=cm.cmsText("sites_coordinates_04")%></label>
-          <%=cm.cmsTitle("sites_coordinates_04")%>
+          <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cms("country_1")%>" />
+          <label for="showCountry"><%=cm.cmsText("country_1")%></label>
+          <%=cm.cmsTitle("country_1")%>
 
-          <input id="showName" name="showName" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("sites_coordinates_06")%>" />
-          <label for="showName"><%=cm.cmsText("sites_coordinates_06")%></label>
-          <%=cm.cmsTitle("sites_coordinates_06")%>
+          <input id="showName" name="showName" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("site_name_1")%>" />
+          <label for="showName"><%=cm.cmsText("site_name_1")%></label>
+          <%=cm.cmsTitle("site_name_1")%>
 
-          <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_coordinates_05")%>" />
-          <label for="showDesignationTypes"><%=cm.cmsText("sites_coordinates_05")%></label>
-          <%=cm.cmsTitle("sites_coordinates_05")%>
+          <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("designation_type_1")%>" />
+          <label for="showDesignationTypes"><%=cm.cmsText("designation_type_1")%></label>
+          <%=cm.cmsTitle("designation_type_1")%>
 
-          <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_coordinates_07")%>" />
-          <label for="showCoordinates"><%=cm.cmsText("sites_coordinates_07")%></label>
-          <%=cm.cmsTitle("sites_coordinates_07")%>
+          <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("coordinates_1")%>" />
+          <label for="showCoordinates"><%=cm.cmsText("coordinates_1")%></label>
+          <%=cm.cmsTitle("coordinates_1")%>
 
-          <input id="showSize" name="showSize" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_coordinates_08")%>" />
-          <label for="showSize"><%=cm.cmsText("sites_coordinates_08")%></label>
-          <%=cm.cmsTitle("sites_coordinates_08")%>
+          <input id="showSize" name="showSize" type="checkbox" value="true" checked="checked" title="<%=cm.cms("size_1")%>" />
+          <label for="showSize"><%=cm.cmsText("size_1")%></label>
+          <%=cm.cmsTitle("size_1")%>
 
-          <input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("sites_coordinates_09")%>" />
-          <label for="showDesignationYear"><%=cm.cmsText("sites_coordinates_09")%></label>
-          <%=cm.cmsTitle("sites_coordinates_09")%>
+          <input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("designation_year")%>" />
+          <label for="showDesignationYear"><%=cm.cmsText("designation_year")%></label>
+          <%=cm.cmsTitle("designation_year")%>
         </div>
-        <img align="middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
+        <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
         <%=cm.cmsAlt("field_included")%>
         <strong>
-          <%=cm.cmsText("sites_coordinates_11")%>
+          <%=cm.cmsText("longitude")%>
         </strong>
-        <%=cm.cmsText("sites_coordinates_12")%>
+        <%=cm.cmsText("between")%>
         <label for="longMin" class="noshow"><%=cm.cms("sites_coordinates_minlongitude")%></label>
         <input id="longMin" name="longMin" type="text" class="inputTextField" title="<%=cm.cms("sites_coordinates_minlongitude")%>" />
         <%=cm.cmsLabel("sites_coordinates_minlongitude")%>
         <%=cm.cmsTitle("sites_coordinates_minlongitude")%>
 
-        <%=cm.cmsText("sites_coordinates_13")%>
+        <%=cm.cmsText("and")%>
         <label for="longMax" class="noshow"><%=cm.cms("sites_coordinates_maxlongitude")%></label>
         <input id="longMax" name="longMax" type="text" class="inputTextField" title="<%=cm.cms("sites_coordinates_maxlongitude")%>" />&nbsp;
         <script type="text/javascript" language="Javascript">
@@ -112,19 +112,19 @@
         <%=cm.cmsTitle("calculator")%>
         <%=cm.cmsAlt("calculator")%>
         <br />
-        <img align="middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
+        <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
         <%=cm.cmsTitle("field_included")%>
         <%=cm.cmsAlt("field_included")%>
         <strong>
-          <%=cm.cmsText("sites_coordinates_14")%>
+          <%=cm.cmsText("latitude")%>
         </strong>
-        <%=cm.cmsText("sites_coordinates_12")%>
+        <%=cm.cmsText("between")%>
         <label for="latMin" class="noshow"><%=cm.cms("sites_coordinates_minlatitude")%></label>
         <input id="latMin" name="latMin" type="text" class="inputTextField" title="<%=cm.cms("sites_coordinates_minlatitude")%>" />
         <%=cm.cmsTitle("sites_coordinates_minlatitude")%>
         <%=cm.cmsLabel("sites_coordinates_minlatitude")%>
 
-        <%=cm.cmsText("sites_coordinates_13")%>
+        <%=cm.cmsText("and")%>
         <label for="latMax" class="noshow"><%=cm.cms("sites_coordinates_maxlatitude")%></label>
         <input id="latMax" name="latMax" type="text" class="inputTextField" title="<%=cm.cms("sites_coordinates_maxlatitude")%>" />
         <%=cm.cmsLabel("sites_coordinates_maxlatitude")%>
@@ -142,30 +142,30 @@
         </script>
         <!--<a href="javascript:chooseCoordinates('europe');"><img src="images/mini/europe.gif" alt="Open europe map.<%=Accesibility.getText( "generic.popup" )%>" title="Open europe map.<%=Accesibility.getText( "generic.popup" )%>" width="16" height="16" border="0" align="middle" /></a>-->
         &nbsp;
-        <a href="javascript:openCalculator();"><img src="images/mini/calculator.gif" alt="<%=cm.cms("calculator")%>" title="<%=cm.cms("calculator")%>" width="11" height="15" border="0" align="middle" /></a>
+        <a href="javascript:openCalculator();"><img src="images/mini/calculator.gif" alt="<%=cm.cms("calculator")%>" title="<%=cm.cms("calculator")%>" width="11" height="15" border="0" style="vertical-align:middle" /></a>
         <%=cm.cmsTitle("calculator")%>
         <%=cm.cmsAlt("calculator")%>
         <br />
-        <img align="middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
+        <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
         <%=cm.cmsAlt("field_optional")%>
         <label for="country">
           <strong>
-            <%=cm.cmsText("sites_coordinates_countryname")%>
+            <%=cm.cmsText("country_name")%>
           </strong>
         </label>
-        <input name="country" type="text" id="country" class="inputTextField" title="<%=cm.cms("sites_coordinates_countryname")%>" />&nbsp;
-        <%=cm.cmsTitle("sites_coordinates_countryname")%>
-        <a title="<%=cm.cms("helper")%>" href="javascript:chooseCountry('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" align="middle" /></a>
+        <input name="country" type="text" id="country" class="inputTextField" title="<%=cm.cms("country_name")%>" />&nbsp;
+        <%=cm.cmsTitle("country_name")%>
+        <a title="<%=cm.cms("helper")%>" href="javascript:chooseCountry('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" style="vertical-align:middle" /></a>
         <%=cm.cmsTitle("helper")%>
         <%=cm.cmsAlt("helper")%>
         <div class="submit_buttons">
-          <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset_btn_value")%>" class="inputTextField" title="<%=cm.cms("reset_btn_title")%>" />
-          <%=cm.cmsTitle("reset_btn_title")%>
-          <%=cm.cmsInput("reset_btn_value")%>
+          <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset")%>" class="inputTextField" title="<%=cm.cms("reset_values")%>" />
+          <%=cm.cmsTitle("reset_values")%>
+          <%=cm.cmsInput("reset")%>
 
-          <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=cm.cms("search_btn_value")%>" title="<%=cm.cms("search_btn_title")%>" />
-          <%=cm.cmsTitle("search_btn_title")%>
-          <%=cm.cmsInput("search_btn_value")%>
+          <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=cm.cms("search")%>" title="<%=cm.cms("search")%>" />
+          <%=cm.cmsTitle("search")%>
+          <%=cm.cmsInput("search")%>
         </div>
         <jsp:include page="sites-search-common.jsp" />
       </form>
@@ -189,8 +189,8 @@
     String expandSearchCriteria = (request.getParameter("expandSearchCriteria")==null?"no":request.getParameter("expandSearchCriteria"));
 %>
       <br />
-      <%=cm.cmsText("sites_coordinates_17")%>
-      <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-coordinates.jsp','4','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+      <%=cm.cmsText("save_your_criteria_1")%>
+      <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-coordinates.jsp','4','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
       <%=cm.cmsTitle("save")%>
       <%=cm.cmsAlt("save")%>
       <jsp:include page="show-criteria-search.jsp">

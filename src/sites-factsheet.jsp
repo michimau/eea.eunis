@@ -53,7 +53,7 @@
 
   <body>
   <jsp:include page="header-dynamic.jsp">
-    <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_factsheet_location" />
+    <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,factsheet" />
   </jsp:include>
   <table summary="layout" width="100%" border="0">
     <tr>
@@ -125,14 +125,14 @@
     <div id="content">
     <div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_factsheet_location" />
+      <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,factsheet" />
       <jsp:param name="printLink" value="<%=pdfURL%>"/>
       <jsp:param name="mapLink" value="show"/>
     </jsp:include>
 <%
   String []tabs = { "sites_factsheet_tab_general_informations", "sites_factsheet_tab_fauna_flora",
-    "sites_factsheet_tab_designations", "sites_factsheet_tab_habitats", "sites_factsheet_tab_sites",
-    "sites_factsheet_tab_other" };
+    "designation_information", "habitat_types", "sites_factsheet_tab_sites",
+    "other_info" };
 
   String []dbtabs = { "GENERAL_INFORMATION", "FAUNA_FLORA", "DESIGNATION", "HABITATS", "SITES", "OTHER" };
 
@@ -151,7 +151,7 @@
       <%
         String sdb = SitesSearchUtility.translateSourceDB(factsheet.getSiteObject().getSourceDB());
       %>
-      <strong><%=cm.cmsText("sites_factsheet_01")%> <%=sdb%> <%=cm.cmsText("sites_factsheet_02")%></strong>
+      <strong><%=cm.cmsText("facthseet_filled_with_data_from")%> <%=sdb%> <%=cm.cmsText("sites_factsheet_02")%></strong>
       </strong>
     </div>
     <br />
@@ -239,7 +239,7 @@
       <br />
       <br />
       <div style="width : 100%;">
-        <a title="<%=cm.cms("sites_factsheet_openpictures")%>" href="javascript:openpictures('pictures.jsp?<%=url%>',600,600)"><%=cm.cmsText("sites_factsheet_163")%></a>
+        <a title="<%=cm.cms("sites_factsheet_openpictures")%>" href="javascript:openpictures('pictures.jsp?<%=url%>',600,600)"><%=cm.cmsText("view_pictures")%></a>
         <%=cm.cmsTitle("sites_factsheet_openpictures")%>
       </div>
 <%
@@ -250,7 +250,7 @@
       <br />
       <br />
       <div style="width : 100%;">
-        <a title="<%=cm.cms("sites_factsheet_openpictures")%>" href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=url%>',600,600)"><%=cm.cmsText("sites_factsheet_164")%></a>
+        <a title="<%=cm.cms("sites_factsheet_openpictures")%>" href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=url%>',600,600)"><%=cm.cmsText("upload_pictures")%></a>
         <%=cm.cmsTitle("sites_factsheet_openpictures")%>
       </div>
 <%
@@ -261,7 +261,7 @@
 %>
     <br />
     <br />
-    <%=cm.cmsText( "sites_factsheet_164" )%>
+    <%=cm.cmsText( "upload_pictures" )%>
     <br />
 <%
   }

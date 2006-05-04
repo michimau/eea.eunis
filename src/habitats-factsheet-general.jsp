@@ -30,7 +30,7 @@
   <table summary="layout" width="100%" border="0" cellspacing="1" cellpadding="0" style="border-collapse: collapse;">
     <tr bgcolor="#CCCCCC" valign="middle">
       <td width="15%">
-        <%=cm.cmsText("habitats_factsheet_04")%>
+        <%=cm.cmsText("english_name")%>
       </td>
       <td width="40%">
         <strong>
@@ -86,7 +86,7 @@
 %>
     <tr bgcolor="#EEEEEE">
       <td width="30%">
-        <%=cm.cmsText("habitats_factsheet_10")%>
+        <%=cm.cmsText("eunis_habitat_type_code")%>
       </td>
       <td width="40%">
         &nbsp;
@@ -95,7 +95,7 @@
         </strong>
       </td>
       <td width="15%" bgcolor="#DDDDDD" align="right">
-        <%=cm.cmsText("habitats_factsheet_11")%>
+        <%=cm.cmsText("generic_index_07")%>
       </td>
       <td width="15%" bgcolor="#DDDDDD">
         &nbsp;
@@ -124,7 +124,7 @@
     </tr>
     <tr bgcolor="#EEEEEE">
       <td>
-        <%=cm.cmsText("habitats_factsheet_13")%>
+        <%=cm.cmsText("originally _published_code")%>
       </td>
       <td>
         <strong>
@@ -133,13 +133,13 @@
         </strong>
       </td>
       <td bgcolor="#DDDDDD" align="right">
-        <%=cm.cmsText("habitats_factsheet_14")%>
+        <%=cm.cmsText("priority")%>
         &nbsp;
       </td>
       <td bgcolor="#DDDDDD">
         <strong>
           &nbsp;
-          <%=(factsheet.getPriority() != null && 1 == factsheet.getPriority().shortValue() ? cm.cmsText("habitats_factsheet_81") :  cm.cmsText("habitats_factsheet_82"))%>
+          <%=(factsheet.getPriority() != null && 1 == factsheet.getPriority().shortValue() ? cm.cmsText("yes") :  cm.cmsText("no"))%>
           &nbsp;
         </strong>
       </td>
@@ -167,7 +167,7 @@
     <tr>
       <td bgcolor="#DDDDDD">
         <strong>
-          <%=cm.cmsText("habitats_factsheet_15")%>
+          <%=cm.cmsText("description")%>
           (
             <%=description.getLanguage()%>
           )
@@ -206,7 +206,7 @@
           <tr>
             <td bgcolor="#DDDDDD">
               <strong>
-                <%=cm.cmsText("habitats_factsheet_17")%>:
+                <%=cm.cmsText("source")%>:
               </strong>
             </td>
           </tr>
@@ -240,12 +240,12 @@
       <tr bgcolor="#DDDDDD">
         <th class="resultHeader">
           <strong>
-            <%=cm.cmsText("habitats_factsheet-intern_02")%>
+            <%=cm.cmsText("language")%>
           </strong>
         </th>
         <th class="resultHeader">
           <strong>
-            <%=cm.cmsText("habitats_factsheet-intern_03")%>
+            <%=cm.cmsText("name")%>
           </strong>
         </th>
       </tr>
@@ -284,25 +284,25 @@
       <tr bgcolor="#DDDDDD">
         <th width="30%" title="<%=cm.cms("sort_results_on_this_column")%>">
           <strong>
-            <%=cm.cmsText("habitats_factsheet_23")%>
+            <%=cm.cmsText("classification")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </strong>
         </th>
         <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
           <strong>
-            <%=cm.cmsText("habitats_factsheet_24")%>
+            <%=cm.cmsText("code_column")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </strong>
         </th>
         <th width="40%" title="<%=cm.cms("sort_results_on_this_column")%>">
           <strong>
-            <%=cm.cmsText("habitats_factsheet_25")%>
+            <%=cm.cmsText("title")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </strong>
         </th>
         <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
           <strong>
-            <%=cm.cmsText("habitats_factsheet_26")%>
+            <%=cm.cmsText("relation_type")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </strong>
         </th>

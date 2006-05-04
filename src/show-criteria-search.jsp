@@ -42,10 +42,10 @@ if( SessionManager.isAuthenticated() && SessionManager.isSave_search_criteria_RI
   if( criterias != null && criterias.size() > 0 )
   {
 %>
-    <img alt="<%=cm.cms("show_criteria_search_expand")%>" border="0" align="middle" src="images/mini/<%=(expandSearchCriteria.equals("yes") ? "collapse.gif" : "expand.gif")%>" />
+    <img alt="<%=cm.cms("show_criteria_search_expand")%>" border="0" style="vertical-align:middle" src="images/mini/<%=(expandSearchCriteria.equals("yes") ? "collapse.gif" : "expand.gif")%>" />
     <%=cm.cmsAlt("show_criteria_search_expand")%>
     &nbsp;
-    <a title="<%=cm.cms("show_criteria_search_expand")%>" href="<%=pageName%>?expandSearchCriteria=<%=(expandSearchCriteria.equals("yes") ? "no" : "yes")%>"><%=(expandSearchCriteria.equalsIgnoreCase("yes") ? cm.cms( "show_criteria_search_hide" ) :cm.cms( "show_criteria_search_show"))%> <%=cm.cmsText("show_criteria_search_saved_criteria")%></a>
+    <a title="<%=cm.cms("show_criteria_search_expand")%>" href="<%=pageName%>?expandSearchCriteria=<%=(expandSearchCriteria.equals("yes") ? "no" : "yes")%>"><%=(expandSearchCriteria.equalsIgnoreCase("yes") ? cm.cms( "hide" ) :cm.cms( "show"))%> <%=cm.cmsText("saved_criteria")%></a>
     <%=cm.cmsTitle("show_criteria_search_expand")%>
 
 <%
@@ -67,10 +67,10 @@ if( SessionManager.isAuthenticated() && SessionManager.isSave_search_criteria_RI
          }
 %>
     <br />
-    <a title="<%=cm.cms("show_criteria_search_delete")%>" href="javascript:setFormAndSubmit('<%=SessionManager.getUsername()%>','<%=pageName%>','<%=criteria.getNameCriteria()%>');"><img alt="<%=cm.cms("show_criteria_search_delete")%>" src="images/mini/delete.jpg" border="0" align="middle" /></a>
+    <a title="<%=cm.cms("show_criteria_search_delete")%>" href="javascript:setFormAndSubmit('<%=SessionManager.getUsername()%>','<%=pageName%>','<%=criteria.getNameCriteria()%>');"><img alt="<%=cm.cms("show_criteria_search_delete")%>" src="images/mini/delete.jpg" border="0" style="vertical-align:middle" /></a>
     <%=cm.cmsTitle("show_criteria_search_delete")%>
     &nbsp;
-    <a title="<%=cm.cms("show_criteria_saved_criteria")%>" href="<%=url%>"><%=description%></a>
+    <a title="<%=cm.cms("saved_criteria")%>" href="<%=url%>"><%=description%></a>
 <%
       }
     }
@@ -79,7 +79,7 @@ if( SessionManager.isAuthenticated() && SessionManager.isSave_search_criteria_RI
 %>
 <br />
 <%=cm.br()%>
-<%=cm.cmsMsg( "show_criteria_search_hide" )%>
+<%=cm.cmsMsg( "hide" )%>
 <%=cm.br()%>
-<%=cm.cmsMsg( "show_criteria_search_show")%>
+<%=cm.cmsMsg( "show")%>
 <%=cm.br()%>

@@ -19,7 +19,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("gis_help_title")%>
+      <%=cm.cms("gis_help")%>
     </title>
   </head>
   <body>
@@ -27,11 +27,11 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,gis_location"/>
+        <jsp:param name="location" value="home#index.jsp,gis_help"/>
       </jsp:include>
       <%=cm.cmsText("gis_tool_help_01")%>
       <%=cm.br()%>
-      <%=cm.cmsMsg("gis_help_title")%>
+      <%=cm.cmsMsg("gis_help")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="about.jsp" />
       </jsp:include>

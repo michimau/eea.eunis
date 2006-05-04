@@ -20,7 +20,7 @@
   // idQuestionLink
   // level - It defaults to level 1
   // pageCode - see KeyNavigation.findQuestionAnswers for details
-  int level = Utilities.checkedStringToInt(request.getParameter("level"), 1);
+  int level = Utilities.checkedStringToInt(request.getParameter("generic_index_07"), 1);
   String pageCode = request.getParameter("pageCode");
   KeyNavigation keyNavigator = new KeyNavigation();
   // List of questions.
@@ -79,11 +79,11 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitats_key_navigation_location" />
+        <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,habitat_type_key_navigation" />
         <jsp:param name="helpLink" value="habitats-help.jsp" />
       </jsp:include>
       <h1>
-        <%=cm.cmsText("habitats_key_01")%>
+        <%=cm.cmsText("habitat_type_key_navigation")%>
       </h1>
       <%=cm.cmsText("habitats_key_help_01")%>
       <ul>
@@ -110,13 +110,13 @@
       <br />
       <br />
       <strong>
-        <%=cm.cmsText("habitats_key_02")%> : (<%=(null == pageCode) ? cm.cmsText("all") : pageCode%> )<%=question.getPageName()%>
+        <%=cm.cmsText("category_location")%> : (<%=(null == pageCode) ? cm.cmsText("all") : pageCode%> )<%=question.getPageName()%>
       </strong>
       <br />
       <strong>
         <%=cm.cmsText("habitats_key_03")%> :
       </strong>
-      <a href="javascript:openDiagram('habitats-diagram.jsp?habCode=<%=pageCode%>','','toolbar=yes,scrollbars=yes,resizable=yes,width=880,height=640')" title="Open diagram"><img alt="<%=cm.cms("show_habitat_diagram")%>" src="images/mini/diagram_out.png" width="20" height="20" border="0" align="middle" /></a>
+      <a href="javascript:openDiagram('habitats-diagram.jsp?habCode=<%=pageCode%>','','toolbar=yes,scrollbars=yes,resizable=yes,width=880,height=640')" title="Open diagram"><img alt="<%=cm.cms("show_habitat_diagram")%>" src="images/mini/diagram_out.png" width="20" height="20" border="0" style="vertical-align:middle" /></a>
       <%=cm.cmsTitle("show_habitat_diagram")%>
       <br />
       <br />
@@ -138,7 +138,7 @@
       <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="3" id="DD<%=question.getIDQuestion()%>" style="background-color : #EEEEEE">
         <tr>
           <td>
-            <%=cm.cmsText("habitats_key_04")%>
+            <%=cm.cmsText("question")%>
             <strong>
               <%=keyNavigator.fixQuestionID(question.getIDQuestion())%>
             </strong>
@@ -196,7 +196,7 @@
 %>
                     <%=correctedAnswer%>
                   </strong>
-                  <a title="<%=cm.cms("answer")%>" href="habitats-factsheet.jsp?idHabitat=<%=answer.getIDHabitatLink()%>"><img title="<%=cm.cms("answer")%>" alt="Answer" src="images/mini/sheet.gif" border="0" align="middle" /></a>
+                  <a title="<%=cm.cms("answer")%>" href="habitats-factsheet.jsp?idHabitat=<%=answer.getIDHabitatLink()%>"><img title="<%=cm.cms("answer")%>" alt="Answer" src="images/mini/sheet.gif" border="0" style="vertical-align:middle" /></a>
                   <%=cm.cmsTitle("answer")%>
 <%
           if (level > 0 && level < 3)
@@ -206,7 +206,7 @@
               <%--Ok, we are on the proper level, so we show the link to the next pagelevel (level + 1) --%>
                   [
                   <a href="<%=pageName+"?level=" + (level + 1) + "&amp;idQuestionLink=" + answer.getIDQuestionLink()%>&amp;pageCode=<%=additionalInfo%>"
-                     title="<%=str%> <%=answer.getAdditionalInfo()%>"><img alt="<%=str%> <%=answer.getAdditionalInfo()%>" src="images/mini/navigate.gif" border="0" align="middle" /></a>
+                     title="<%=str%> <%=answer.getAdditionalInfo()%>"><img alt="<%=str%> <%=answer.getAdditionalInfo()%>" src="images/mini/navigate.gif" border="0" style="vertical-align:middle" /></a>
                   <%=answer.getAdditionalInfo()%>
                   ]
 <%
@@ -234,7 +234,7 @@
                   </strong>
                   (<a onclick="javascript:changeColor('DD<%=answer.getIDQuestionLink()%>','DD<%=answer.getIDQuestion()%>');"
                     href="#<%=answer.getIDQuestionLink()%>"
-                    title="<%=str%><%=keyNavigator.fixQuestionID(answer.getIDQuestionLink())%>"><img alt="<%=cm.cms("question")%>" src="images/mini/navigate.gif" border="0" align="middle" /></a>
+                    title="<%=str%><%=keyNavigator.fixQuestionID(answer.getIDQuestionLink())%>"><img alt="<%=cm.cms("question")%>" src="images/mini/navigate.gif" border="0" style="vertical-align:middle" /></a>
                   <%=cm.cmsTitle("question")%>
                   <strong>
                     <%=keyNavigator.fixQuestionID(answer.getIDQuestionLink())%>

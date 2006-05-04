@@ -25,27 +25,27 @@
   if ( list.size() > 0 )
   {
   %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_factsheet-trends_12")%></div>
-    <table summary="<%=cm.cms("species_factsheet-trends_12_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="trends" class="sortable">
+    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("trends")%></div>
+    <table summary="<%=cm.cms("trends")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="trends" class="sortable">
       <tr>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" >
-          <%=cm.cmsText("species_factsheet-trends_02")%>
+          <%=cm.cmsText("country")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" >
-          <%=cm.cmsText("species_factsheet-trends_03")%>
+          <%=cm.cmsText("biogeographic_region")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-align:right" title="<%=cm.cms("sort_results_on_this_column")%>" >
-          <%=cm.cmsText("species_factsheet-trends_04")%>
+          <%=cm.cmsText("start_period")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-align:right" title="<%=cm.cms("sort_results_on_this_column")%>" >
-          <%=cm.cmsText("species_factsheet-trends_05")%>
+          <%=cm.cmsText("end_period")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" >
-          <%=cm.cmsText("species_factsheet-trends_06")%>
+          <%=cm.cmsText("status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" >
@@ -53,11 +53,11 @@
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" >
-          <%=cm.cmsText("species_factsheet-trends_08")%>
+          <%=cm.cmsText("quality")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" >
-          <%=cm.cmsText("species_factsheet-trends_09")%>
+          <%=cm.cmsText("reference")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
@@ -72,8 +72,8 @@
             if(Utilities.isCountry(aRow.getCountry()))
             {
         %>
-          <a href="javascript:goToSpeciesStatistics('<%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>')" title="<%=cm.cms("open_statistical_data")%> <%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>"><%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%></a>
-          <%=cm.cmsTitle("open_statistical_data")%>
+          <a href="javascript:goToSpeciesStatistics('<%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>')" title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>"><%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%></a>
+          <%=cm.cmsTitle("open_the_statistical_data_for")%>
         <%
             } else {
         %>
@@ -132,6 +132,6 @@
   }
 %>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_factsheet-trends_12_Sum")%>
+<%=cm.cmsMsg("trends")%>
 <br />
 <br />

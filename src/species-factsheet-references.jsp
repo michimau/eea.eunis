@@ -124,26 +124,26 @@
     <table summary="<%=cm.cms("species_factsheet-references_09_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0"  id="references" class="sortable">
       <tr>
         <th width="25%" title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-references_02")%>
+          <%=cm.cmsText("title")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th width="25%" title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-references_03")%>
+          <%=cm.cmsText("author")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-references_04")%>
+          <%=cm.cmsText("editor")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th width="15%" style="text-align:right" title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-references_05")%>
+          <%=cm.cmsText("date")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
 <%--        <td width="10%" align="center">--%>
-<%--          <%=cm.cmsText("species_factsheet-references_06")%>--%>
+<%--          <%=cm.cmsText("published")%>--%>
 <%--        </td>--%>
         <th width="10%">
-          <%=cm.cmsText("species_factsheet-references_07")%>
+          <%=cm.cmsText("source")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>

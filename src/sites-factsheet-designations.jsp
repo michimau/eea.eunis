@@ -39,19 +39,19 @@
       <table border="1" cellpadding="1" cellspacing="1" width="100%" id="relationsNatura2000Natura20002" style="border-collapse:collapse" summary="<%=cm.cms("sites_factsheet_designations_national")%>" class="sortable">
         <tr>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_designations_code")%>
+            <%=cm.cmsText("designation_code")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_designations_name")%>
+            <%=cm.cmsText("designation_name")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_designations_category")%>
+            <%=cm.cmsText("category_location")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_designations_cover")%>
+            <%=cm.cmsText("cover_percent")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
@@ -107,15 +107,15 @@
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_designations_designationname")%>
+            <%=cm.cmsText("designation_name")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_designations_areascategory")%>
+            <%=cm.cmsText("category_location")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_designations_areasoverlap")%>
+            <%=cm.cmsText("overlap_percent")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">

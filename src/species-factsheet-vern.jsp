@@ -27,19 +27,19 @@
   if ( !results.isEmpty() )
   {
 %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_factsheet-vern_08")%></div>
-    <table summary="<%=cm.cms("species_factsheet-vern_08_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0"  id="vernNames" class="sortable">
+    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("vernacular_names")%></div>
+    <table summary="<%=cm.cms("vernacular_names")%>" width="100%" border="1" cellspacing="1" cellpadding="0"  id="vernNames" class="sortable">
       <tr>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-vern_02")%>
+          <%=cm.cmsText("vernacular_name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-vern_03")%>
+          <%=cm.cmsText("language")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-vern_04")%>
+          <%=cm.cmsText("reference")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
@@ -96,6 +96,6 @@
   }
 %>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_factsheet-vern_08_Sum")%>
+<%=cm.cmsMsg("vernacular_names")%>
 <br />
 <br />

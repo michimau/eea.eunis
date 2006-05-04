@@ -125,7 +125,7 @@
         {
               if(group != null && groupName != null)
               {
-                 alert('<%=cm.cms("species_threat-international_25")%>');
+                 alert('<%=cm.cms("please_select_a_country")%>');
                   var g = document.createElement("input");
                   g.type= "hidden";
                   g.name = "idGroup";
@@ -138,7 +138,7 @@
                   gn.value = groupName;
                   document.eunis.appendChild( gn );
               }
-              else alert('<%=cm.cms("species_threat-international_26")%>');
+              else alert('<%=cm.cms("please_select_a_group")%>');
               document.eunis.action = 'species-threat-international.jsp';
               document.eunis.submit();
 
@@ -152,7 +152,7 @@
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("species_threat-international_title")%>
+      <%=cm.cms("species_international_threat_status")%>
     </title>
 </head>
 <%
@@ -193,11 +193,11 @@
   <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,international_threat_status_location" />
+      <jsp:param name="location" value="home#index.jsp,species#species.jsp,international_threat_status" />
       <jsp:param name="helpLink" value="species-help.jsp" />
     </jsp:include>
     <h1>
-        <%=cm.cmsText("species_threat-international_01")%>
+        <%=cm.cmsText("international_threat_status")%>
     </h1>
     <table summary="layout" width="100%" border="0">
       <tr>
@@ -210,26 +210,26 @@
             <tr>
               <td style="background-color:#EEEEEE">
                 <strong>
-                  <%=cm.cmsText("species_threat-international_02")%>
+                  <%=cm.cmsText("search_will_provide_2")%>
                 </strong>
               </td>
             </tr>
               <tr>
                 <td style="background-color:#EEEEEE">
                   <input title="<%=cm.cms("group")%>" id="checkbox2" type="checkbox" name="showGroup" value="true" <%=(showGroup ? "checked=\"checked\"" : "")%> />
-                    <label for="checkbox2"><%=cm.cmsText("species_threat-international_03")%></label>
+                    <label for="checkbox2"><%=cm.cmsText("group")%></label>
                     <%=cm.cmsTitle("group")%>
                   <input title="<%=cm.cms("geographic_region")%>" id="checkbox5" type="checkbox" name="showGeo" value="true" <%=(showGeo ? "checked=\"checked\"" : "")%> />
-                    <label for="checkbox5"><%=cm.cmsText("species_threat-international_08")%></label>
+                    <label for="checkbox5"><%=cm.cmsText("geographical_region")%></label>
                     <%=cm.cmsTitle("geographic_region")%>
                   <input title="<%=cm.cms("status")%>" id="checkbox1" type="checkbox" name="showStatus" value="true" <%=(showStatus ? "checked=\"checked\"" : "")%> />
-                    <label for="checkbox1"><%=cm.cmsText("species_threat-international_status")%></label>
+                    <label for="checkbox1"><%=cm.cmsText("threat_status")%></label>
                     <%=cm.cmsTitle("status")%>
                   <input title="<%=cm.cms("scientific_name")%>" id="checkbox3" type="checkbox" name="true" value="true" disabled="disabled" checked="checked" />
-                    <label for="checkbox3"><%=cm.cmsText("species_threat-international_06")%></label>
+                    <label for="checkbox3"><%=cm.cmsText("scientific_name")%></label>
                     <%=cm.cmsTitle("scientific_name")%>
                   <input title="<%=cm.cms("vernacular_name")%>" id="checkbox4" type="checkbox" name="showVernacularNames" value="true" <%=(showVernacularNames ? "checked=\"checked\"" : "")%> />
-                    <label for="checkbox4"><%=cm.cmsText("species_threat-international_07")%></label>
+                    <label for="checkbox4"><%=cm.cmsText("vernacular_names")%></label>
                     <%=cm.cmsTitle("vernacular_name")%>
                 </td>
               </tr>
@@ -241,8 +241,8 @@
           <table summary="layout" cellspacing="1" cellpadding="0" border="0" width="100%" style="text-align:left">
             <tr>
               <td style="vertical-align:middle">
-                <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("species_threat-international_11")%>" title="<%=cm.cms("species_threat-international_11")%>" src="images/mini/field_mandatory.gif" />
-                <%=cm.cmsAlt("species_threat-international_11")%>
+                <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
+                <%=cm.cmsAlt("field_mandatory")%>
                 <%
                   if (null == group)
                   {
@@ -252,10 +252,10 @@
                     <select title="<%=cm.cms("group_name")%>" name="Group" id="Group" onchange="MM_jumpMenuInternational('parent',this,0)"
                             class="inputTextField">
                       <option value="species-threat-international.jsp">
-                        <%=cm.cms("species_threat-international_12")%>
+                        <%=cm.cms("please_select_a_group")%>
                       </option>
                       <option value="species-threat-international.jsp?idGroup=-1&amp;groupName=any">
-                        <%=cm.cms("species_threat-international_13")%>
+                        <%=cm.cms("any_group")%>
                       </option>
                     <%
                       // List of groups species
@@ -286,16 +286,16 @@
                     if (anyGroupSelected) {
                 %>
                     <strong> <% //any group%>
-                      <%=cm.cmsText("species_threat-international_13")%>
+                      <%=cm.cmsText("any_group")%>
                     </strong>
 
                     <br />
                     &nbsp;
                     <strong>   <% //and%>
-                      <%=cm.cmsText("species_threat-international_14")%>
+                      <%=cm.cmsText("and")%>
                     </strong>
                     &nbsp;  <% //area%>
-                    <%=cm.cmsText("species_threat-international_19")%>
+                    <%=cm.cmsText("area")%>
                   <%
                     } else {
                       String groupNameDispayed = (-1 == groupName.lastIndexOf("Mosses") ? groupName : "Mosses & Liverworts");
@@ -307,10 +307,10 @@
                       <br />
                         &nbsp;
                       <strong>
-                        <%=cm.cmsText("species_threat-international_14")%>
+                        <%=cm.cmsText("and")%>
                       </strong>
                       &nbsp;
-                      <%=cm.cmsText("species_threat-international_19")%>
+                      <%=cm.cmsText("area")%>
                   <%
                     }
                   %>
@@ -370,16 +370,16 @@
                     if (anyGroupSelected) {
                 %>
                     <strong>
-                      <%=cm.cmsText("species_threat-international_13")%>
+                      <%=cm.cmsText("any_group")%>
                     </strong>
 
                     <br />
                     &nbsp;
                     <strong>
-                      <%=cm.cmsText("species_threat-international_14")%>
+                      <%=cm.cmsText("and")%>
                     </strong>
                     &nbsp;
-                    <%=cm.cmsText("species_threat-international_19")%>
+                    <%=cm.cmsText("area")%>
                   <%
                     } else {
                       String groupNameDispayed = (-1 == groupName.lastIndexOf("Mosses") ? groupName : "Mosses & Liverworts");
@@ -391,10 +391,10 @@
                       <br />
                         &nbsp;
                       <strong>
-                        <%=cm.cmsText("species_threat-international_14")%>
+                        <%=cm.cmsText("and")%>
                       </strong>
                       &nbsp;
-                      <%=cm.cmsText("species_threat-international_19")%>
+                      <%=cm.cmsText("area")%>
                   <%
                     }
                   %>
@@ -408,19 +408,19 @@
                      <br />
 
                      <strong>
-                     <%=cm.cmsText("species_threat-international_14")%>
+                     <%=cm.cmsText("and")%>
                      </strong>
                      &nbsp;  <% //threat status%>
-                    <%=cm.cmsText("species_threat-international_15")%>
+                    <%=cm.cmsText("threat_status")%>
                     &nbsp;
                     <label for="Status" class="noshow"><%=cm.cms("status")%></label>
                     <select title="<%=cm.cms("status")%>" name="Status" id="Status" onchange="MM_jumpMenuInternational('parent',this,0)"
                             class="inputTextField">
                       <option value="species-threat-international.jsp?idGroup=<%=group%>&amp;groupName=<%=groupName%>&amp;countryName=<%=countryName%>&amp;idCountry=<%=country%>" selected="selected">
-                        <%=cm.cms("species_threat-international_16")%>
+                        <%=cm.cms("please_select_a_threat_status")%>
                       </option>
                       <option value="species-threat-international-result.jsp?idGroup=<%=group%>&amp;groupName=<%=groupName%>&amp;countryName=<%=countryName%>&amp;idCountry=<%=country%>&amp;idConservation=-1&amp;statusName=any">
-                        <%=cm.cms("species_threat-international_17")%>
+                        <%=cm.cms("any_threat_status")%>
                       </option>
                     <%
                     if (!anyGroupSelected)
@@ -472,7 +472,6 @@
                     <td>&nbsp; <br />
                       <input title="<%=cm.cms("save_criteria")%>" id="saveCriteria" type="checkbox" name="saveCriteria" value="true" <%=isSaveCriteriaChecked%> /> <%=cm.cmsTitle("save_criteria")%>
                         <label for="saveCriteria"><%=cm.cmsText("species_threat-international_10")%></label>
-                        &nbsp;
                         <a title="<%=cm.cms("save_criteria")%>" href="javascript:checkSaveCriteria()"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                         <%=cm.cmsTitle("save_criteria")%>
                     </td>
@@ -519,21 +518,21 @@
 <%=cm.br()%>
 <%=cm.cmsMsg("save_alert")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_threat-international_25")%>
+<%=cm.cmsMsg("please_select_a_country")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_threat-international_26")%>
+<%=cm.cmsMsg("please_select_a_group")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_threat-international_title")%>
+<%=cm.cmsMsg("species_international_threat_status")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_threat-international_12")%>
+<%=cm.cmsMsg("please_select_a_group")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_threat-international_13")%>
+<%=cm.cmsMsg("any_group")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("species_threat-international_18")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_threat-international_16")%>
+<%=cm.cmsMsg("please_select_a_threat_status")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_threat-international_17")%>
+<%=cm.cmsMsg("any_threat_status")%>
 <%=cm.br()%>
 
     <jsp:include page="footer.jsp">

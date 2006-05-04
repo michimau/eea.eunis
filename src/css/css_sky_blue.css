@@ -24,6 +24,15 @@ a.sortheader:hover
   display: block;
 }
 
+.sortable TH a:hover
+{
+  background-color:#EEEEEE;
+  color:black;
+  font-weight: bold;
+  text-decoration: none;
+  display: block;
+}
+
 table.sortable span.sortarrow
 {
   text-decoration: none;
@@ -187,6 +196,7 @@ a.menu_link:link {
   font-size: x-small;
   font-weight: bold;
   text-decoration: none;
+  text-transform: uppercase;
   color: #FFFFFF;
 }
 
@@ -195,6 +205,7 @@ a.menu_link:visited {
   font-size: x-small;
   font-weight: bold;
   text-decoration: none;
+  text-transform: uppercase;
   color: #FFFFFF;
 }
 
@@ -203,6 +214,7 @@ a.menu_link:active {
   font-size: x-small;
   font-weight: bold;
   text-decoration: none;
+  text-transform: uppercase;
   color: #FFFFFF;
 }
 
@@ -213,6 +225,7 @@ a.menu_link:hover {
   color: #FFFFFF;
   background-color: #006CAD;
   text-decoration: underline;
+  text-transform: uppercase;
 }
 
 .menu_text {

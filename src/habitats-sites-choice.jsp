@@ -21,7 +21,7 @@
     WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
-    <%=cm.cms("habitats_sites-choice_title")%>
+    <%=cm.cms("list_of_values")%>
   </title>
   <%// Get form parameters here%>
   <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.sites.SitesBean" scope="request">
@@ -101,7 +101,7 @@
   } else {
   %>
   <strong>
-    <%=cm.cmsText("habitats_sites-choice_01")%>
+    <%=cm.cmsText("no_results_found_1")%>
   </strong>
   <br />
   <%
@@ -110,10 +110,10 @@
   <br />
 
   <form action="">
-    <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("habitats_sites-choice_02")%>" onclick="javascript:window.close()" id="button" name="button" class="inputTextField" />
-    <%=cm.cmsInput("habitats_sites-choice_02")%>
+    <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" id="button" name="button" class="inputTextField" />
+    <%=cm.cmsInput("close_btn")%>
   </form>
-<%=cm.cms("habitats_sites-choice_title")%>
+<%=cm.cms("list_of_values")%>
 <%=cm.br()%>
 <%=cm.cmsTitle("list_of_values")%>
 </body>

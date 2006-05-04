@@ -38,7 +38,7 @@
     url = colorURL.getElementsSeparatedByComma();
     url2 = colorURL2.getElementsSeparatedByComma();
 %>
-<div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitats_factsheet_31")%></div>
+<div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("geographical_distribution")%></div>
 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse">
   <tr>
     <td>
@@ -52,19 +52,19 @@
 <table summary="<%=cm.cms("habitat_distribution")%>" width="100%" border="0" cellspacing="0" cellpadding="0" id="distribution" class="sortable">
   <tr>
     <th title="<%=cm.cms("sort_results_on_this_column")%>">
-      <%=cm.cmsText("habitats_factsheet_32")%>
+      <%=cm.cmsText("country")%>
       <%=cm.cmsTitle("sort_results_on_this_column")%>
     </th>
     <th title="<%=cm.cms("sort_results_on_this_column")%>">
-      <%=cm.cmsText("habitats_factsheet_33")%>
+      <%=cm.cmsText("biogeographic_region")%>
       <%=cm.cmsTitle("sort_results_on_this_column")%>
     </th>
     <th title="<%=cm.cms("sort_results_on_this_column")%>">
-      <%=cm.cmsText("habitats_factsheet_34")%>
+      <%=cm.cmsText("probability")%>
       <%=cm.cmsTitle("sort_results_on_this_column")%>
     </th>
     <th title="<%=cm.cms("sort_results_on_this_column")%>">
-      <%=cm.cmsText("habitats_factsheet_35")%>
+      <%=cm.cmsText("comment")%>
       <%=cm.cmsTitle("sort_results_on_this_column")%>
     </th>
   </tr>

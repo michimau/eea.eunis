@@ -19,7 +19,7 @@
       WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title>
-      <%=cm.cms("generic_save-search_title")%>
+      <%=cm.cms("save_criteria")%>
     </title>
      <%
        // Set IdSession variable
@@ -203,9 +203,9 @@
         </tr>
         <tr>
           <td>
-            <label for="description" class="noshow"><%=cm.cms("save_criteria_description")%></label>
-            <textarea title="<%=cm.cms("save_criteria_description")%>" name="description" id="description" cols="70" rows="5" class="inputTextField"><%=descr%></textarea>
-            <%=cm.cmsLabel("save_criteria_description")%>
+            <label for="description" class="noshow"><%=cm.cms("description")%></label>
+            <textarea title="<%=cm.cms("description")%>" name="description" id="description" cols="70" rows="5" class="inputTextField"><%=descr%></textarea>
+            <%=cm.cmsLabel("description")%>
           </td>
         </tr>
         <tr>
@@ -249,18 +249,18 @@
               if (null == request.getParameter("description"))
               {
 %>
-              <input title="<%=cm.cms("save_btn")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("generic_save-search_07")%>" class="inputTextField" />
-              <%=cm.cmsInput("generic_save-search_07")%>
-              <input title="<%=cm.cms("reset_btn")%>" type="reset" name="Reset" id="Reset" value="<%=cm.cms("generic_save-search_08")%>" class="inputTextField" />
-              <%=cm.cmsInput("generic_save-search_08")%>
+              <input title="<%=cm.cms("save")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("save")%>" class="inputTextField" />
+              <%=cm.cmsInput("save")%>
+              <input title="<%=cm.cms("reset")%>" type="reset" name="Reset" id="Reset" value="<%=cm.cms("reset")%>" class="inputTextField" />
+              <%=cm.cmsInput("reset")%>
 <%
               }
 %>
-            <input type="button" title="<%=cm.cms("close_window")%>" name="Close" id="Close" value="<%=cm.cms("generic_save-search_09")%>" onclick="javascript:closeWindow('<%=request.getParameter("fromWhere")%>')" class="inputTextField" /><%=cm.cmsInput("generic_save-search_09")%>
+            <input type="button" title="<%=cm.cms("close_window")%>" name="Close" id="Close" value="<%=cm.cms("close_btn")%>" onclick="javascript:closeWindow('<%=request.getParameter("fromWhere")%>')" class="inputTextField" /><%=cm.cmsInput("close_btn")%>
           </td>
         </tr>
     </table>
   </form>
-  <%=cm.cmsMsg("generic_save-search_title")%>
+  <%=cm.cmsMsg("save_criteria")%>
   </body>
 </html>

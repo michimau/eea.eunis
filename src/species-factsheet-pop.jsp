@@ -26,36 +26,36 @@
   if (list.size() > 0)
   {
 %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_factsheet-pop_11")%></div>
+    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("population")%></div>
     <table summary="<%=cm.cms("species_factsheet-pop_12_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="populations" class="sortable">
       <tr>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-pop_02")%>
+          <%=cm.cmsText("country")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-pop_03")%>
+          <%=cm.cmsText("biogeographic_region")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
           <span style="color:#006CAD">  
-            <%=cm.cmsText("species_factsheet-pop_04")%>
+            <%=cm.cmsText("min_max")%>
           </span>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-pop_05")%>
+          <%=cm.cmsText("date")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-pop_06")%>
+          <%=cm.cmsText("status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-pop_07")%>
+          <%=cm.cmsText("quality")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet-pop_08")%>
+          <%=cm.cmsText("reference")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
@@ -76,8 +76,8 @@
             if(Utilities.isCountry(aRow.getCountry()))
             {
         %>
-          <a href="javascript:goToSpeciesStatistics('<%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>')" title="<%=cm.cms("species_factsheet-geo_12_Title")%> <%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>"><%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%></a>
-          <%=cm.cmsTitle("species_factsheet-geo_12_Title")%>
+          <a href="javascript:goToSpeciesStatistics('<%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>')" title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>"><%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%></a>
+          <%=cm.cmsTitle("open_the_statistical_data_for")%>
         <%
             } else {
         %>

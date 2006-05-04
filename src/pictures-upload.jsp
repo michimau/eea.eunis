@@ -104,17 +104,17 @@
         <%=cm.cmsLabel("pictures_upload_description_label")%>
       </p>
       <p>
-        <input type="reset" id="reset" title="<%=cm.cms("pictures_upload_reset_title")%>" name="Reset" value="<%=cm.cms("pictures_upload_reset_value")%>" class="inputTextField" />
-        <%=cm.cmsTitle("pictures_upload_reset_title")%>
-        <%=cm.cmsInput("pictures_upload_reset_value")%>
+        <input type="reset" id="reset" title="<%=cm.cms("reset_values")%>" name="Reset" value="<%=cm.cms("reset")%>" class="inputTextField" />
+        <%=cm.cmsTitle("reset_values")%>
+        <%=cm.cmsInput("reset")%>
 
-        <input type="submit" id="submit" title="<%=cm.cms("pictures_upload_upload_title")%>" name="Submit" value="<%=cm.cms("pictures_upload_upload_value")%>" class="inputTextField" />
-        <%=cm.cmsTitle("pictures_upload_upload_title")%>
-        <%=cm.cmsInput("pictures_upload_upload_value")%>
+        <input type="submit" id="submit" title="<%=cm.cms("upload")%>" name="Submit" value="<%=cm.cms("upload")%>" class="inputTextField" />
+        <%=cm.cmsTitle("upload")%>
+        <%=cm.cmsInput("upload")%>
 
-        <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button0" name="button" class="inputTextField" />
-        <%=cm.cmsTitle("close_window_title")%>
-        <%=cm.cmsInput("close_window_value")%>
+        <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button0" name="button" class="inputTextField" />
+        <%=cm.cmsTitle("close_window")%>
+        <%=cm.cmsInput("close_btn")%>
       </p>
     </form>
 <%
@@ -181,9 +181,9 @@
     <%=cm.cms("pictures_upload_denied")%>.
     <br />
     <form action="">
-      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button1" name="button" class="inputTextField" />
-      <%=cm.cmsTitle("close_window_title")%>
-      <%=cm.cmsInput("close_window_value")%>
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button1" name="button" class="inputTextField" />
+      <%=cm.cmsTitle("close_window")%>
+      <%=cm.cmsInput("close_btn")%>
     </form>
 <%
     }
@@ -195,9 +195,9 @@
     <br />
     <div style="width : 100%; text-align:left;">
       <form action="">
-        <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
-        <%=cm.cmsTitle("close_window_title")%>
-        <%=cm.cmsInput("close_window_value")%>
+        <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="inputTextField" />
+        <%=cm.cmsTitle("close_window")%>
+        <%=cm.cmsInput("close_btn")%>
       </form>
     </div>
 <%

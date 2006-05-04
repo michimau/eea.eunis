@@ -40,7 +40,7 @@
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("sites_altitude_title")%>
+      <%=cm.cms("site_altitude")%>
     </title>
   </head>
   <body>
@@ -48,51 +48,51 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_altitude_location"/>
+        <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,altitude"/>
         <jsp:param name="helpLink" value="sites-help.jsp"/>
         <jsp:param name="mapLink" value="show"/>
       </jsp:include>
       <form name="eunis" method="get" onsubmit="return validateForm();" action="sites-altitude-result.jsp">
         <input type="hidden" name="source" value="sitename" />
         <h1>
-          <%=cm.cmsText("sites_altitude_01")%>
+          <%=cm.cmsText("site_altitude")%>
         </h1>
         <%=cm.cmsText("sites_altitude_20")%>
         <br />
         <br />
         <div class="grey_rectangle">
           <strong>
-            <%=cm.cmsText("search_will_provide_following_information")%>
+            <%=cm.cmsText("search_will_provide")%>
           </strong>
           <br />
-          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_altitude_03")%>" />
-          <label for="showSourceDB"><%=cm.cmsText("sites_altitude_03")%></label>
-          <%=cm.cmsTitle("sites_altitude_03")%>
+          <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("source_data_set_1")%>" />
+          <label for="showSourceDB"><%=cm.cmsText("source_data_set_1")%></label>
+          <%=cm.cmsTitle("source_data_set_1")%>
 
-          <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_altitude_04")%>" />
-          <label for="showCountry"><%=cm.cmsText("sites_altitude_04")%></label>
-          <%=cm.cmsTitle("sites_altitude_04")%>
+          <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cms("country_1")%>" />
+          <label for="showCountry"><%=cm.cmsText("country_1")%></label>
+          <%=cm.cmsTitle("country_1")%>
 
-          <input id="showName" name="showName" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("sites_altitude_06")%>" />
-          <label for="showName"><%=cm.cmsText("sites_altitude_06")%></label>
-          <%=cm.cmsTitle("sites_altitude_06")%>
+          <input id="showName" name="showName" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("site_name_1")%>" />
+          <label for="showName"><%=cm.cmsText("site_name_1")%></label>
+          <%=cm.cmsTitle("site_name_1")%>
 
-          <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_altitude_05")%>" />
-          <label for="showDesignationTypes"><%=cm.cmsText("sites_altitude_05")%></label>
-          <%=cm.cmsTitle("sites_altitude_05")%>
+          <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("designation_type_1")%>" />
+          <label for="showDesignationTypes"><%=cm.cmsText("designation_type_1")%></label>
+          <%=cm.cmsTitle("designation_type_1")%>
 
-          <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_altitude_07")%>" />
-          <label for="showCoordinates"><%=cm.cmsText("sites_altitude_07")%></label>
-          <%=cm.cmsTitle("sites_altitude_07")%>
+          <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("coordinates_1")%>" />
+          <label for="showCoordinates"><%=cm.cmsText("coordinates_1")%></label>
+          <%=cm.cmsTitle("coordinates_1")%>
 
           <input id="showAltitude" name="showAltitude" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_altitude_08")%>" />
           <label for="showAltitude"><%=cm.cmsText("sites_altitude_08")%></label>
           <%=cm.cmsTitle("sites_altitude_08")%>
         </div>
-        <img align="middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
+        <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
         <%=cm.cmsAlt("field_included")%>
         <strong>
-          <%=cm.cmsText("sites_altitude_10")%>
+          <%=cm.cmsText("mean_altitude_m")%>
         </strong>
         <label for="relOp" class="noshow"><%=cm.cms("operator")%></label>
         <select id="relOp" name="relOp" onchange="MM_jumpMenuAlt('parent',this,0)" class="inputTextField" title="<%=cm.cms("operator")%>">
@@ -105,7 +105,7 @@
   }
 %>
           <option value="sites-altitude.jsp?between=no&amp;no=1&amp;between2=<%=request.getParameter("between2")%>&amp;no2=<%=request.getParameter("no2")%>&amp;between3=<%=request.getParameter("between3")%>&amp;no3=<%=request.getParameter("no3")%>" <%=selected%>>
-            <%=cm.cms("sites_altitude_11")%>
+            <%=cm.cms("is")%>
           </option>
 <%
   selected = "";
@@ -115,7 +115,7 @@
   }
 %>
           <option value="sites-altitude.jsp?between=yes&amp;no=2&amp;between2=<%=request.getParameter("between2")%>&amp;no2=<%=request.getParameter("no2")%>&amp;between3=<%=request.getParameter("between3")%>&amp;no3=<%=request.getParameter("no3")%>" <%=selected%>>
-            <%=cm.cms("sites_altitude_12")%>
+            <%=cm.cms("between")%>
           </option>
 <%
   selected = "";
@@ -125,7 +125,7 @@
   }
 %>
           <option value="sites-altitude.jsp?between=no&amp;no=3&amp;between2=<%=request.getParameter("between2")%>&amp;no2=<%=request.getParameter("no2")%>&amp;between3=<%=request.getParameter("between3")%>&amp;no3=<%=request.getParameter("no3")%>" <%=selected%>>
-            <%=cm.cms("sites_altitude_13")%>
+            <%=cm.cms("greater_than")%>
           </option>
 <%
   selected = "";
@@ -135,15 +135,15 @@
   }
 %>
           <option value="sites-altitude.jsp?between=no&amp;no=4&amp;between2=<%=request.getParameter("between2")%>&amp;no2=<%=request.getParameter("no2")%>&amp;between3=<%=request.getParameter("between3")%>&amp;no3=<%=request.getParameter("no3")%>" <%=selected%>>
-            <%=cm.cms("sites_altitude_14")%>
+            <%=cm.cms("smaller_than")%>
           </option>
         </select>
         <%=cm.cmsLabel("operator")%>
         <%=cm.cmsTitle("operator")%>
-        <%=cm.cmsInput("sites_altitude_11")%>
-        <%=cm.cmsInput("sites_altitude_12")%>
-        <%=cm.cmsInput("sites_altitude_13")%>
-        <%=cm.cmsInput("sites_altitude_14")%>
+        <%=cm.cmsInput("is")%>
+        <%=cm.cmsInput("between")%>
+        <%=cm.cmsInput("greater_than")%>
+        <%=cm.cmsInput("smaller_than")%>
 <%
   // request.getParameter("between") is true if operator for Mean Altitude is "between"
   // no = 1 if operator is "is"
@@ -167,10 +167,10 @@
   else
   {
 %>
-        <label for="altitude1" class="noshow"><%=cm.cms("sites_altitude_mean")%></label>
-        <input id="altitude1" name="altitude1" value="<%=altitude1%>" size="5" class="inputTextField" title="<%=cm.cms("sites_altitude_mean")%>" />
-        <%=cm.cmsLabel("sites_altitude_mean")%>
-        <%=cm.cmsTitle("sites_altitude_mean")%>
+        <label for="altitude1" class="noshow"><%=cm.cms("mean_altitude")%></label>
+        <input id="altitude1" name="altitude1" value="<%=altitude1%>" size="5" class="inputTextField" title="<%=cm.cms("mean_altitude")%>" />
+        <%=cm.cmsLabel("mean_altitude")%>
+        <%=cm.cmsTitle("mean_altitude")%>
 <%
   }
   Integer valAl=Utilities.checkedStringToInt(request.getParameter("no"),new Integer(1));
@@ -181,11 +181,11 @@
   if(valAl.compareTo(new Integer(4))==0) valAltitude = Utilities.OPERATOR_SMALLER_OR_EQUAL;
 %>
         <br />
-        <img align="middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
+        <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
         <%=cm.cmsTitle("field_included")%>
         <%=cm.cmsAlt("field_included")%>
         <strong>
-          <%=cm.cmsText("sites_altitude_16")%>
+          <%=cm.cmsText("minimum_altitude")%>
         </strong>
 <%
   selected = "";
@@ -198,7 +198,7 @@
         <label for="relOp2" class="noshow"><%=cm.cms("operator")%></label>
         <select id="relOp2" name="relOp2" onchange="MM_jumpMenuAlt('parent',this,0)" class="inputTextField" title="<%=cm.cms("operator")%>">
           <option value="sites-altitude.jsp?between2=no&amp;no2=1&amp;between=<%=request.getParameter("between")%>&amp;no=<%=request.getParameter("no")%>&amp;between3=<%=request.getParameter("between3")%>&amp;no3=<%=request.getParameter("no3")%>" <%=selected%>>
-            <%=cm.cms("sites_altitude_11")%>
+            <%=cm.cms("is")%>
           </option>
 <%
   selected = "";
@@ -208,7 +208,7 @@
   }
 %>
           <option value="sites-altitude.jsp?between2=yes&amp;no2=2&amp;between=<%=request.getParameter("between")%>&amp;no=<%=request.getParameter("no")%>&amp;between3=<%=request.getParameter("between3")%>&amp;no3=<%=request.getParameter("no3")%>" <%=selected%>>
-            <%=cm.cms("sites_altitude_12")%>
+            <%=cm.cms("between")%>
           </option>
 <%
   selected = "";
@@ -218,7 +218,7 @@
   }
 %>
           <option value="sites-altitude.jsp?between2=no&amp;no2=3&amp;between=<%=request.getParameter("between")%>&amp;no=<%=request.getParameter("no")%>&amp;between3=<%=request.getParameter("between3")%>&amp;no3=<%=request.getParameter("no3")%>" <%=selected%>>
-            <%=cm.cms("sites_altitude_13")%>
+            <%=cm.cms("greater_than")%>
           </option>
 <%
   selected = "";
@@ -228,15 +228,15 @@
   }
 %>
           <option value="sites-altitude.jsp?between2=no&amp;no2=4&amp;between=<%=request.getParameter("between")%>&amp;no=<%=request.getParameter("no")%>&amp;between3=<%=request.getParameter("between3")%>&amp;no3=<%=request.getParameter("no3")%>" <%=selected%>>
-            <%=cm.cms("sites_altitude_14")%>
+            <%=cm.cms("smaller_than")%>
           </option>
         </select>
         <%=cm.cmsLabel("operator")%>
         <%=cm.cmsTitle("operator")%>
-        <%=cm.cmsInput("sites_altitude_11")%>
-        <%=cm.cmsInput("sites_altitude_12")%>
-        <%=cm.cmsInput("sites_altitude_13")%>
-        <%=cm.cmsInput("sites_altitude_14")%>
+        <%=cm.cmsInput("is")%>
+        <%=cm.cmsInput("between")%>
+        <%=cm.cmsInput("greater_than")%>
+        <%=cm.cmsInput("smaller_than")%>
 <%
   // request.getParameter("between2") is true if operator for Minimum Altitude is "between"
   // no2 = 1 if operator is "is"
@@ -260,10 +260,10 @@
   else
   {
 %>
-        <label for="altitude21" class="noshow"><%=cm.cms("sites_altitude_min")%></label>
-        <input id="altitude21" name="altitude21" value="<%=altitude21%>" size="5" class="inputTextField" title="<%=cm.cms("sites_altitude_min")%>" />
-        <%=cm.cmsLabel("sites_altitude_min")%>
-        <%=cm.cmsTitle("sites_altitude_min")%>
+        <label for="altitude21" class="noshow"><%=cm.cms("min_altitude")%></label>
+        <input id="altitude21" name="altitude21" value="<%=altitude21%>" size="5" class="inputTextField" title="<%=cm.cms("min_altitude")%>" />
+        <%=cm.cmsLabel("min_altitude")%>
+        <%=cm.cmsTitle("min_altitude")%>
 <%
   }
   Integer valAl2=Utilities.checkedStringToInt(request.getParameter("no2"),new Integer(1));
@@ -274,11 +274,11 @@
   if(valAl2.compareTo(new Integer(4))==0) valAltitude2 = Utilities.OPERATOR_SMALLER_OR_EQUAL;
 %>
         <br />
-        <img align="middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
+        <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
         <%=cm.cmsTitle("field_included")%>
         <%=cm.cmsAlt("field_included")%>
         <strong>
-          <%=cm.cmsText("sites_altitude_17")%>
+          <%=cm.cmsText("maximum_altitude_m")%>
         </strong>
 <%
   selected = "";
@@ -291,7 +291,7 @@
         <label for="relOp3" class="noshow"><%=cm.cms("operator")%></label>
         <select id="relOp3" name="relOp3" onchange="MM_jumpMenuAlt('parent',this,0)" class="inputTextField" title="<%=cm.cms("operator")%>">
           <option value="sites-altitude.jsp?between3=no&amp;no3=1&amp;between=<%=request.getParameter("between")%>&amp;no=<%=request.getParameter("no")%>&amp;between2=<%=request.getParameter("between2")%>&amp;no2=<%=request.getParameter("no2")%>" <%=selected%>>
-            <%=cm.cms("sites_altitude_11")%>
+            <%=cm.cms("is")%>
           </option>
 <%
   selected = "";
@@ -301,7 +301,7 @@
   }
 %>
           <option value="sites-altitude.jsp?between3=yes&amp;no3=2&amp;between=<%=request.getParameter("between")%>&amp;no=<%=request.getParameter("no")%>&amp;between2=<%=request.getParameter("between2")%>&amp;no2=<%=request.getParameter("no2")%>" <%=selected%>>
-            <%=cm.cms("sites_altitude_12")%>
+            <%=cm.cms("between")%>
           </option>
 <%
   selected = "";
@@ -311,7 +311,7 @@
   }
 %>
           <option value="sites-altitude.jsp?between3=no&amp;no3=3&amp;between=<%=request.getParameter("between")%>&amp;no=<%=request.getParameter("no")%>&amp;between2=<%=request.getParameter("between2")%>&amp;no2=<%=request.getParameter("no2")%>" <%=selected%>>
-            <%=cm.cms("sites_altitude_13")%>
+            <%=cm.cms("greater_than")%>
           </option>
 <%
   selected = "";
@@ -321,15 +321,15 @@
   }
 %>
           <option value="sites-altitude.jsp?between3=no&amp;no3=4&amp;between=<%=request.getParameter("between")%>&amp;no=<%=request.getParameter("no")%>&amp;between2=<%=request.getParameter("between2")%>&amp;no2=<%=request.getParameter("no2")%>" <%=selected%>>
-            <%=cm.cms("sites_altitude_14")%>
+            <%=cm.cms("smaller_than")%>
           </option>
         </select>
         <%=cm.cmsLabel("operator")%>
         <%=cm.cmsTitle("operator")%>
-        <%=cm.cmsInput("sites_altitude_11")%>
-        <%=cm.cmsInput("sites_altitude_12")%>
-        <%=cm.cmsInput("sites_altitude_13")%>
-        <%=cm.cmsInput("sites_altitude_14")%>
+        <%=cm.cmsInput("is")%>
+        <%=cm.cmsInput("between")%>
+        <%=cm.cmsInput("greater_than")%>
+        <%=cm.cmsInput("smaller_than")%>
 
 <%
   // request.getParameter("between3") is true if operator for Maximum Altitude is "between"
@@ -354,10 +354,10 @@
   else
   {
 %>
-        <label for="altitude31" class="noshow"><%=cm.cms("sites_altitude_max")%></label>
-        <input id="altitude31" name="altitude31" value="<%=altitude31%>" size="5" class="inputTextField" title="<%=cm.cms("sites_altitude_max")%>" />
-        <%=cm.cmsLabel("sites_altitude_max")%>
-        <%=cm.cmsTitle("sites_altitude_max")%>
+        <label for="altitude31" class="noshow"><%=cm.cms("max_altitude")%></label>
+        <input id="altitude31" name="altitude31" value="<%=altitude31%>" size="5" class="inputTextField" title="<%=cm.cms("max_altitude")%>" />
+        <%=cm.cmsLabel("max_altitude")%>
+        <%=cm.cmsTitle("max_altitude")%>
 <%
   }
   Integer valAl3=Utilities.checkedStringToInt(request.getParameter("no3"),new Integer(1));
@@ -368,26 +368,26 @@
   if(valAl3.compareTo(new Integer(4))==0) valAltitude3 = Utilities.OPERATOR_SMALLER_OR_EQUAL;
 %>
         <br />
-        <img align="middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
+        <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
         <%=cm.cmsAlt("field_optional")%>
 
-        <label for="country"><strong><%=cm.cmsText("sites_altitude_18")%></strong></label>
-        <input id="country" name="country" type="text" size="30" value="<%=country%>" class="inputTextField" title="<%=cm.cms("sites_altitude_18")%>" />
-        <%=cm.cmsLabel("sites_altitude_18")%>
-        <%=cm.cmsTitle("sites_altitude_18")%>
+        <label for="country"><strong><%=cm.cmsText("country_is")%></strong></label>
+        <input id="country" name="country" type="text" size="30" value="<%=country%>" class="inputTextField" title="<%=cm.cms("country_is")%>" />
+        <%=cm.cmsLabel("country_is")%>
+        <%=cm.cmsTitle("country_is")%>
 
-        <a title="<%=cm.cms("helper")%>" href="javascript:chooseCountry('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" align="middle" /></a>
+        <a title="<%=cm.cms("helper")%>" href="javascript:chooseCountry('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" style="vertical-align:middle" /></a>
         <input type="hidden" name="relationOp" value="<%=valAltitude%>" />
         <input type="hidden" name="relationOp2" value="<%=valAltitude2%>" />
         <input type="hidden" name="relationOp3" value="<%=valAltitude3%>" />
         <div class="submit_buttons">
-          <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset_btn_value")%>" class="inputTextField" title="<%=cm.cms("reset_btn_title")%>" />
-          <%=cm.cmsTitle("reset_btn_title")%>
-          <%=cm.cmsInput("reset_btn_value")%>
+          <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset")%>" class="inputTextField" title="<%=cm.cms("reset_values")%>" />
+          <%=cm.cmsTitle("reset_values")%>
+          <%=cm.cmsInput("reset")%>
 
-          <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=cm.cms("search_btn_value")%>" title="<%=cm.cms("search_btn_title")%>" />
-          <%=cm.cmsTitle("search_btn_title")%>
-          <%=cm.cmsInput("search_btn_value")%>
+          <input id="submit2" name="submit2" type="submit" class="inputTextField" value="<%=cm.cms("search")%>" title="<%=cm.cms("search")%>" />
+          <%=cm.cmsTitle("search")%>
+          <%=cm.cmsInput("search")%>
         </div>
         <jsp:include page="sites-search-common.jsp" />
      </form>
@@ -397,8 +397,8 @@
   {
 %>
         <br />
-        <%=cm.cmsText("sites_altitude_savecriteria")%>:
-        <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-altitude.jsp','5','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+        <%=cm.cmsText("save_your_criteria")%>:
+        <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-altitude.jsp','5','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
         <%=cm.cmsTitle("save")%>
         <%=cm.cmsAlt("save")%>
 <%
@@ -424,7 +424,7 @@
 <%
   }
 %>
-      <%=cm.cmsMsg("sites_altitude_title")%>
+      <%=cm.cmsMsg("site_altitude")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="sites-altitude.jsp" />
       </jsp:include>

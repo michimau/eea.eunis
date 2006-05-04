@@ -30,18 +30,18 @@
   if (legals.size() > 0)
   {
 %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_factsheet_legalInstruments")%></div>
+    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("legal_instruments")%></div>
     <table summary="<%=cm.cms("species_factsheet_legalInstruments_01_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0"  id="legalInstr" class="sortable">
       <tr style="background-color:#DDDDDD">
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
           <strong>
-            <%=cm.cmsText("species_factsheet_legalInstrumentsDetailedRef")%>
+            <%=cm.cmsText("detailed_reference")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </strong>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
           <strong>
-            <%=cm.cmsText("species_factsheet_legalInstrumentsText")%>
+            <%=cm.cmsText("legal_text")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </strong>
         </th>
@@ -49,7 +49,7 @@
           <%=cm.cmsText("species_factsheet_legalInstruments_02")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("species_factsheet_legalInstrumentsURL")%>
+          <%=cm.cmsText("url")%>
         </th>
         <th style="text-align:center" title="<%=cm.cms("sort_results_on_this_column")%>">
           <%=cm.cmsText("species_factsheet_legalInstrumentsGeoImplem")%>

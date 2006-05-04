@@ -36,11 +36,11 @@
   <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,synonyms_location" />
+      <jsp:param name="location" value="home#index.jsp,species#species.jsp,synonyms" />
       <jsp:param name="helpLink" value="species-help.jsp" />
     </jsp:include>
     <h1>
-         <%=cm.cmsText("species_synonyms_01")%>
+         <%=cm.cmsText("synonyms")%>
     </h1>
     <table summary="layout" width="100%" border="0" cellpadding="0" cellspacing="0">
       <tr>
@@ -57,14 +57,14 @@
                     <tr>
                       <td style="background-color:#EEEEEE">
                         <strong>
-                          <%=cm.cmsText("species_synonyms_03")%>
+                          <%=cm.cmsText("search_will_provide_2")%>
                         </strong>
                       </td>
                     </tr>
                     <tr>
                       <td style="background-color:#EEEEEE">
                         <input title="<%=cm.cms("group")%>" id="checkbox1" name="checkbox1" type="checkbox" value="show" checked="checked" disabled="disabled" />
-                          <label for="checkbox1"><%=cm.cmsText("species_synonyms_04")%></label>
+                          <label for="checkbox1"><%=cm.cmsText("group")%></label>
                           <%=cm.cmsTitle("group")%>
                         <input title="<%=cm.cms("synonym")%>" id="checkbox2" name="checkbox2" type="checkbox" value="show" checked="checked" disabled="disabled" />
                           <label for="checkbox2"><%=cm.cmsText("species_synonyms_07")%></label>
@@ -88,12 +88,12 @@
                   <%=cm.cmsAlt("field_optional")%>
                   &nbsp;
                   <strong>
-                    <%=cm.cmsText("species_synonyms_09")%>
+                    <%=cm.cmsText("group_name")%>
                   </strong>
                   <label for="select1" class="noshow"><%=cm.cms("group_name")%></label>
                   <select id="select1" title="<%=cm.cms("group_name")%>" name="groupName" class="inputTextField">
                     <option value="0" selected="selected">
-                      <%=cm.cms("species_synonyms_10")%>
+                      <%=cm.cms("any_group")%>
                     </option>
                 <%
                   // List of group species
@@ -113,7 +113,7 @@
                   <%=cm.cmsTitle("group_name")%>
                   &nbsp;&nbsp;&nbsp;
                   <strong>
-                    <%=cm.cmsText("species_synonyms_11")%>
+                    <%=cm.cmsText("and")%>
                   </strong>
                 </td>
               </tr>
@@ -123,13 +123,13 @@
                   <%=cm.cmsTitle("field_mandatory")%>
                   &nbsp;
                   <strong>
-                    <label for="scientificName"><%=cm.cmsText("species_synonyms_12")%></label>
+                    <label for="scientificName"><%=cm.cmsText("species_scientific_name")%></label>
                   </strong>
                   <label for="select2" class="noshow"><%=cm.cms("operator")%></label>
                   <select id="select2" title="<%=cm.cms("operator")%>" name="relationOp" class="inputTextField">
-                    <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("species_synonyms_13")%></option>
-                    <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("species_synonyms_14")%></option>
-                    <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected" ><%=cm.cms("species_synonyms_15")%></option>
+                    <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
+                    <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
+                    <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected" ><%=cm.cms("starts_with")%></option>
                   </select>
                   <%=cm.cmsLabel("operator")%>
                   <%=cm.cmsTitle("operator")%>
@@ -143,12 +143,12 @@
               </tr>
               <tr>
                 <td style="text-align:right">
-                  <input id="Reset" type="reset" value="<%=cm.cms("reset_btn")%>" name="Reset" class="inputTextField" title="<%=cm.cms("reset")%>" />
+                  <input id="Reset" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="inputTextField" title="<%=cm.cms("reset")%>" />
                   <%=cm.cmsTitle("reset")%>
-                  <%=cm.cmsInput("reset_btn")%>
-                  <input id="Search" type="submit" value="<%=cm.cms("search_btn")%>" name="submit2" class="inputTextField" title="<%=cm.cms("search")%>" />
+                  <%=cm.cmsInput("reset")%>
+                  <input id="Search" type="submit" value="<%=cm.cms("search")%>" name="submit2" class="inputTextField" title="<%=cm.cms("search")%>" />
                   <%=cm.cmsTitle("search")%>
-                  <%=cm.cmsInput("search_btn")%>
+                  <%=cm.cmsInput("search")%>
                 </td>
               </tr>
           </table>
@@ -173,9 +173,9 @@
           </script>
           <br />
           <script language="JavaScript" type="text/javascript" src="script/species-synonyms-save-criteria.js"></script>
-          <%=cm.cmsText("species_synonyms_19")%>:
-          <a title="<%=cm.cms("save_title")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'species-synonyms.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_title")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
-          <%=cm.cmsTitle("save_title")%>
+          <%=cm.cmsText("save_your_criteria")%>:
+          <a title="<%=cm.cms("save_open_link")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'species-synonyms.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_open_link")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
+          <%=cm.cmsTitle("save_open_link")%>
           <%
               // Set Vector for URL string
               Vector show = new Vector();
@@ -196,13 +196,13 @@
 <%=cm.br()%>
 <%=cm.cmsMsg("species_synonyms_02")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_synonyms_10")%>
+<%=cm.cmsMsg("any_group")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_synonyms_13")%>
+<%=cm.cmsMsg("is")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_synonyms_14")%>
+<%=cm.cmsMsg("contains")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_synonyms_15")%>
+<%=cm.cmsMsg("starts_with")%>
 <%=cm.br()%>
 
     <jsp:include page="footer.jsp">

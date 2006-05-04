@@ -25,7 +25,7 @@
       WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title>
-      <%=cm.cms("species_sites-choice_title")%>
+      <%=cm.cms("list_of_values")%>
     </title>
     <%// Get form parameters here%>
     <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.sites.SitesBean" scope="request">
@@ -65,7 +65,7 @@
         {
           SitesSearchCriteria sitesSearch = new SitesSearchCriteria(searchAttribute,formBean.getScientificName(),relationOp);
       %>
-          <h2><%=cm.cmsText("list_values_for")%></h2>
+          <h2><%=cm.cmsText("list_of_values_for")%></h2>
           <u><%=sitesSearch.getHumanMappings().get(searchAttribute)%></u>
       <%
           if (null != formBean.getScientificName() && null != relationOp)
@@ -83,7 +83,7 @@
         <br />
         <br />
         <div id="tab">
-        <table summary="<%=cm.cms("list_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+        <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
         <%
           String rowBgColor = "";
           String value = "";
@@ -119,7 +119,7 @@
         {
  %>
         <strong>
-          <%=cm.cmsText("species_sites-choice_01")%>.
+          <%=cm.cmsText("no_results_found")%>.
         </strong>
         <br />
      <%
@@ -127,15 +127,15 @@
      %>
       <br />
       <form action="">
-        <input id="button" title="<%=cm.cms("close")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
-        <%=cm.cmsTitle("close")%>
+        <input id="button" title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
+        <%=cm.cmsTitle("close_window")%>
         <%=cm.cmsInput("close_btn")%>
       </form>
 
 <%=cm.br()%>
-<%=cm.cmsMsg("species_sites-choice_title")%>
+<%=cm.cmsMsg("list_of_values")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("list_values")%>
+<%=cm.cmsMsg("list_of_values")%>
 <%=cm.br()%>
 
   </body>

@@ -100,7 +100,7 @@
   <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitats_references_location#habitats-references.jsp,results_location" />
+  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,pick_habitat_type_show_references#habitats-references.jsp,results" />
   <jsp:param name="helpLink" value="habitats-help.jsp" />
   <jsp:param name="downloadLink" value="<%=tsvLink%>" />
 </jsp:include>
@@ -117,7 +117,7 @@
   %>
   <tr>
     <td>
-      <%=cm.cmsText("habitats_references-result_02")%>
+      <%=cm.cmsText("you_searched_for")%>
       <strong><%=Utilities.getSourceHabitat(database, RefDomain.SEARCH_ANNEX_I.intValue(), RefDomain.SEARCH_BOTH.intValue())%></strong>
       <%=cm.cmsText("habitats_references-result_03")%>
       (
@@ -125,11 +125,11 @@
         <%
           if (0 == source.compareTo(RefDomain.SOURCE)) {
         %>
-        <%=cm.cmsText("habitats_references-result_04")%>
+        <%=cm.cmsText("source")%>
         <%
         } else {
         %>
-        <%=cm.cmsText("habitats_references-result_05")%>
+        <%=cm.cmsText("other_information")%>
         <%
           }
         %>
@@ -138,7 +138,7 @@
         if (mainCriteria.toHumanString().length() > 0) {
       %>
       (
-      <%=cm.cmsText("habitats_references-result_06")%>
+      <%=cm.cmsText("with")%>
       <strong>
         <%=mainCriteria.toHumanString()%>
       </strong>
@@ -146,7 +146,7 @@
       <%
         }
       %>
-      <%=cm.cmsText("habitats_references-result_07")%>
+      <%=cm.cmsText("are_recorded_in_the_database")%>
     </td>
   </tr>
 </table>
@@ -165,7 +165,7 @@
        return;
    }
 %>
-<%=cm.cmsText("habitats_references-result_08")%>:&nbsp;<strong><%=resultsCount%></strong>
+<%=cm.cmsText("results_found_1")%>:&nbsp;<strong><%=resultsCount%></strong>
 <%
   // Prepare parameters for pagesize.jsp
   Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
@@ -198,7 +198,7 @@
   <tr>
     <td bgcolor="#EEEEEE">
       <strong>
-        <%=cm.cmsText("habitats_references-result_09")%>
+        <%=cm.cmsText("refine_your_search")%>
       </strong>
     </td>
   </tr>
@@ -211,55 +211,55 @@
           <%
             if (showCode && 0 == database.compareTo(RefDomain.SEARCH_EUNIS)) {
           %>
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_CODE_EUNIS%>"><%=cm.cms("habitats_references-result_10")%></option>
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_CODE_EUNIS%>"><%=cm.cms("eunis_code")%></option>
           <%
             }
             if (showCode && 0 == database.compareTo(RefDomain.SEARCH_ANNEX_I)) {
           %>
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_CODE_ANNEX%>"><%=cm.cms("habitats_references-result_11")%></option>
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_CODE_ANNEX%>"><%=cm.cms("annex_code")%></option>
           <%
             }
             if (showCode && 0 == database.compareTo(RefDomain.SEARCH_BOTH)) {
           %>
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_CODE_EUNIS%>"><%=cm.cms("habitats_references-result_10")%></option>
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_CODE_ANNEX%>"><%=cm.cms("habitats_references-result_11")%></option>
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_CODE_EUNIS%>"><%=cm.cms("eunis_code")%></option>
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_CODE_ANNEX%>"><%=cm.cms("annex_code")%></option>
           <%
             }
             if (showLevel && formBean.getDatabase().equalsIgnoreCase(RefDomain.SEARCH_EUNIS.toString())) {
           %>
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_LEVEL%>"><%=cm.cms("habitats_references-result_12")%></option>
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_LEVEL%>"><%=cm.cms("generic_index_07")%></option>
           <%
             }
             if (showVernacularName) {
           %>
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_NAME%>"><%=cm.cms("habitats_references-result_13")%></option>
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_NAME%>"><%=cm.cms("english_name")%></option>
           <%
             }
           %>
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected"><%=cm.cms("habitats_references-result_14")%></option>
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected"><%=cm.cms("habitat_type_name")%></option>
         </select>
         <%=cm.cms("Criteria")%>
-        <%=cm.cmsInput("habitats_references-result_10")%>
-        <%=cm.cmsInput("habitats_references-result_11")%>
-        <%=cm.cmsInput("habitats_references-result_12")%>
-        <%=cm.cmsInput("habitats_references-result_13")%>
-        <%=cm.cmsInput("habitats_references-result_14")%>
+        <%=cm.cmsInput("eunis_code")%>
+        <%=cm.cmsInput("annex_code")%>
+        <%=cm.cmsInput("generic_index_07")%>
+        <%=cm.cmsInput("english_name")%>
+        <%=cm.cmsInput("habitat_type_name")%>
         <label for="oper" class="noshow"><%=cm.cms("operator")%></label>
         <select title="<%=cm.cms("operator")%>" name="oper" id="oper" class="inputTextField">
-          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("habitats_references-result_15")%></option>
-          <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("habitats_references-result_16")%></option>
-          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("habitats_references-result_17")%></option>
+          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("is")%></option>
+          <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("starts_with")%></option>
+          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
         </select>
         <%=cm.cms("operator")%>
-        <%=cm.cmsInput("habitats_references-result_15")%>
-        <%=cm.cmsInput("habitats_references-result_16")%>
-        <%=cm.cmsInput("habitats_references-result_17")%>
-        <label for="criteriaSearch" class="noshow"><%=cm.cms("search_value")%></label>
-        <input title="<%=cm.cms("search_value")%>" class="inputTextField" name="criteriaSearch" id="criteriaSearch" type="text" size="30" />
-        <%=cm.cmsTitle("search_value")%>
-        <input title="<%=cm.cms("search")%>" class="inputTextField" type="submit" name="Submit" id="Submit" value="<%=cm.cms("habitats_references-result_18")%>" />
+        <%=cm.cmsInput("is")%>
+        <%=cm.cmsInput("starts_with")%>
+        <%=cm.cmsInput("contains")%>
+        <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
+        <input title="<%=cm.cms("filter_value")%>" class="inputTextField" name="criteriaSearch" id="criteriaSearch" type="text" size="30" />
+        <%=cm.cmsTitle("filter_value")%>
+        <input title="<%=cm.cms("search")%>" class="inputTextField" type="submit" name="Submit" id="Submit" value="<%=cm.cms("search")%>" />
         <%=cm.cmsTitle("search")%>
-        <%=cm.cmsInput("habitats_references-result_18")%>
+        <%=cm.cmsInput("search")%>
       </form>
     </td>
   </tr>
@@ -270,7 +270,7 @@
   %>
   <tr>
     <td bgcolor="#EEEEEE">
-      <%=cm.cmsText("habitats_references-result_19")%>:
+      <%=cm.cmsText("applied_filters_to_the_results")%>:
     </td>
   </tr>
   <%
@@ -281,7 +281,7 @@
   %>
   <tr>
     <td bgcolor="#CCCCCC">
-      <a title="<%=cm.cms("delete_filter")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img alt="<%=cm.cms("delete_filter")%>" src="images/mini/delete.jpg" border="0" align="middle" /></a>
+      <a title="<%=cm.cms("delete_filter")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img alt="<%=cm.cms("delete_filter")%>" src="images/mini/delete.jpg" border="0" style="vertical-align:middle" /></a>
       <%=cm.cmsTitle("delete_filter")%>&nbsp;&nbsp;
       <strong class="linkDarkBg"><%= i + ". " + criteria.toHumanString()%></strong>
     </td>
@@ -337,7 +337,7 @@
   %>
   <th class="resultHeader" width="56">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(levelCrit, (null == levelCrit))%>">
-      <%=Utilities.getSortImageTag(levelCrit)%><%=cm.cmsText("habitats_references-result_12")%>
+      <%=Utilities.getSortImageTag(levelCrit)%><%=cm.cmsText("generic_index_07")%>
     </a>
   <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
@@ -348,13 +348,13 @@
   %>
   <th class="resultHeader" width="30">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(eunisCodeCrit, (null == eunisCodeCrit))%>">
-      <%=Utilities.getSortImageTag(eunisCodeCrit)%><%=cm.cmsText("habitats_references-result_10")%>
+      <%=Utilities.getSortImageTag(eunisCodeCrit)%><%=cm.cmsText("eunis_code")%>
     </a>
   <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <th class="resultHeader" width="30">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_ANNEX_CODE%>&amp;ascendency=<%=formBean.changeAscendency(annexCodeCrit, (null == annexCodeCrit))%>">
-      <%=Utilities.getSortImageTag(annexCodeCrit)%><%=cm.cmsText("habitats_references-result_11")%>
+      <%=Utilities.getSortImageTag(annexCodeCrit)%><%=cm.cmsText("annex_code")%>
     </a>
   <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
@@ -364,7 +364,7 @@
   %>
   <th class="resultHeader" width="30">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(eunisCodeCrit, (null == eunisCodeCrit))%>">
-      <%=Utilities.getSortImageTag(eunisCodeCrit)%><%=cm.cmsText("habitats_references-result_10")%>
+      <%=Utilities.getSortImageTag(eunisCodeCrit)%><%=cm.cmsText("eunis_code")%>
     </a>
   <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
@@ -374,7 +374,7 @@
   %>
   <th title="<%=cm.cms("sort_results_on_this_column")%>" class="resultHeader" width="30">
     <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_ANNEX_CODE%>&amp;ascendency=<%=formBean.changeAscendency(annexCodeCrit, (null == annexCodeCrit))%>">
-      <%=Utilities.getSortImageTag(annexCodeCrit)%><%=cm.cmsText("habitats_references-result_11")%>
+      <%=Utilities.getSortImageTag(annexCodeCrit)%><%=cm.cmsText("annex_code")%>
     </a>
   <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
@@ -384,7 +384,7 @@
   %>
   <th class="resultHeader" width="261">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit))%>">
-      <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitats_references-result_14")%>
+      <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitat_type_name")%>
     </a>
   <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
@@ -393,7 +393,7 @@
   %>
   <th class="resultHeader" width="166">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_VERNACULAR_NAME%>&amp;ascendency=<%=formBean.changeAscendency(nameCrit, (null == nameCrit))%>">
-      <%=Utilities.getSortImageTag(nameCrit)%><%=cm.cmsText("habitats_references-result_13")%>
+      <%=Utilities.getSortImageTag(nameCrit)%><%=cm.cmsText("english_name")%>
     </a>
   <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
@@ -486,7 +486,7 @@
   %>
   <th class="resultHeader" width="56">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(levelCrit, (null == levelCrit))%>">
-      <%=Utilities.getSortImageTag(levelCrit)%><%=cm.cmsText("habitats_references-result_12")%>
+      <%=Utilities.getSortImageTag(levelCrit)%><%=cm.cmsText("generic_index_07")%>
     </a>
   <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
@@ -497,13 +497,13 @@
   %>
   <th class="resultHeader" width="30">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(eunisCodeCrit, (null == eunisCodeCrit))%>">
-      <%=Utilities.getSortImageTag(eunisCodeCrit)%><%=cm.cmsText("habitats_references-result_10")%>
+      <%=Utilities.getSortImageTag(eunisCodeCrit)%><%=cm.cmsText("eunis_code")%>
     </a>
   <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <th class="resultHeader" width="30">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_ANNEX_CODE%>&amp;ascendency=<%=formBean.changeAscendency(annexCodeCrit, (null == annexCodeCrit))%>">
-      <%=Utilities.getSortImageTag(annexCodeCrit)%><%=cm.cmsText("habitats_references-result_11")%>
+      <%=Utilities.getSortImageTag(annexCodeCrit)%><%=cm.cmsText("annex_code")%>
     </a>
   <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
@@ -513,7 +513,7 @@
   %>
   <th class="resultHeader" width="30">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(eunisCodeCrit, (null == eunisCodeCrit))%>">
-      <%=Utilities.getSortImageTag(eunisCodeCrit)%><%=cm.cmsText("habitats_references-result_10")%>
+      <%=Utilities.getSortImageTag(eunisCodeCrit)%><%=cm.cmsText("eunis_code")%>
     </a>
   <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
@@ -523,7 +523,7 @@
   %>
   <th title="<%=cm.cms("sort_results_on_this_column")%>" class="resultHeader" width="30">
     <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_ANNEX_CODE%>&amp;ascendency=<%=formBean.changeAscendency(annexCodeCrit, (null == annexCodeCrit))%>">
-      <%=Utilities.getSortImageTag(annexCodeCrit)%><%=cm.cmsText("habitats_references-result_11")%>
+      <%=Utilities.getSortImageTag(annexCodeCrit)%><%=cm.cmsText("annex_code")%>
     </a>
   <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
@@ -533,7 +533,7 @@
   %>
   <th class="resultHeader" width="261">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit))%>">
-      <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitats_references-result_14")%>
+      <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitat_type_name")%>
     </a>
   <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
@@ -542,7 +542,7 @@
   %>
   <th class="resultHeader" width="166">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_VERNACULAR_NAME%>&amp;ascendency=<%=formBean.changeAscendency(nameCrit, (null == nameCrit))%>">
-      <%=Utilities.getSortImageTag(nameCrit)%><%=cm.cmsText("habitats_references-result_13")%>
+      <%=Utilities.getSortImageTag(nameCrit)%><%=cm.cmsText("english_name")%>
     </a>
   <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>

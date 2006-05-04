@@ -31,11 +31,11 @@
   if((factsheet.isEunis() && !legals.isEmpty())) {
 %>
 <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitats_factsheet_27")%></div>
-<table summary="<%=cm.cms("habitat_legal_instruments")%>" width="100%" border="0" cellspacing="0" cellpadding="0" id="legal" class="sortable">
+<table summary="<%=cm.cms("habitat_type_legal_instruments")%>" width="100%" border="0" cellspacing="0" cellpadding="0" id="legal" class="sortable">
   <tr>
     <th width="30%" title="<%=cm.cms("sort_results_on_this_column")%>">
       <strong>
-        <%=cm.cmsText("habitats_factsheet_28")%>
+        <%=cm.cmsText("legal_instrument")%>
         <%=cm.cmsTitle("sort_results_on_this_column")%>
       </strong>
     </th>
@@ -66,7 +66,7 @@
   %>
 </table>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitat_legal_instruments")%>
+<%=cm.cmsMsg("habitat_type_legal_instruments")%>
 <br />
 <%
   }

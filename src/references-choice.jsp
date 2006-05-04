@@ -23,7 +23,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
-      <%=cm.cms("references_choice_page_title")%>
+      <%=cm.cms("list_of_values")%>
     </title>
     <script language="JavaScript" type="text/javascript">
     <!--
@@ -166,12 +166,12 @@
     }
 %>
     <h2>
-      <%=cm.getText("species_references-choice_02")%>
+      <%=cm.getText("list_of")%>
       <%=listOfWhat%>
-      <%=cm.cmsText("references_choice_for")%>
+      <%=cm.cmsText("for")%>
     </h2>
     <strong>
-      <%=cm.cmsText("species_references-choice_03")%>
+      <%=cm.cmsText("references")%>
       <%=forWhat.equalsIgnoreCase("") ? "" : "with following characteristics"%>&nbsp;:
     </strong>
     <br />
@@ -189,7 +189,7 @@
     {
 %>
       <strong>
-        <%=cm.cmsText("species_references-choice_04")%> <%=request.getParameter("fromWhere")%>.
+        <%=cm.cmsText("no_details_recorded")%> <%=request.getParameter("fromWhere")%>.
       </strong>
       <br />
 <%
@@ -200,7 +200,7 @@
       <div id="tab">
       <table summary="List of values" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
         <th class="resultHeader">
-          <%=cm.cmsText("references_choice_values")%>
+          <%=cm.cmsText("values")%>
         </th>
 <%
       for(int i =0;i<results.size();i++)
@@ -226,7 +226,7 @@
   {
  %>
     <strong>
-      <%=cm.cmsText("species_references-choice_05")%>.
+      <%=cm.cmsText("no_results_found")%>.
     </strong>
     <br />
 <%
@@ -234,10 +234,10 @@
 %>
     <br />
     <form action="">
-      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button1" name="button" class="inputTextField" />
-      <%=cm.cmsTitle("close_window_title")%>
-      <%=cm.cmsInput("close_window_value")%>
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button1" name="button" class="inputTextField" />
+      <%=cm.cmsTitle("close_window")%>
+      <%=cm.cmsInput("close_btn")%>
     </form>
-    <%=cm.cmsMsg("references_choice_page_title")%>
+    <%=cm.cmsMsg("list_of_values")%>
   </body>
 </html>

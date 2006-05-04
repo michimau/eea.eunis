@@ -45,7 +45,7 @@
     </title>
     <script language="JavaScript" type="text/javascript">
       <!--
-        var errRefineMessage = "<%=cm.cms("species_country-result_02")%>.";
+        var errRefineMessage = "<%=cm.cms("enter_refine_criteria_correctly")%>.";
         // Used in refine search ; check if criteria are empty
         function checkRefineSearch(noCriteria)
         {
@@ -186,7 +186,7 @@
   <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,country_biogeographic_region_location#species-country.jsp,results_location"/>
+      <jsp:param name="location" value="home#index.jsp,species#species.jsp,country_biogeographic_region_location#species-country.jsp,results"/>
       <jsp:param name="helpLink" value="species-help.jsp"/>
       <jsp:param name="downloadLink" value="<%=tsvLink%>"/>
     </jsp:include>
@@ -223,7 +223,7 @@
      }
        %>
         <br />
-        <%=cm.cmsText("species_country-result_05")%>: <strong><%=resultsCount%></strong>
+        <%=cm.cmsText("results_found_1")%>: <strong><%=resultsCount%></strong>
         <%// Prepare parameters for pagesize.jsp
           Vector pageSizeFormFields = new Vector(); /*  These fields are used by pagesize.jsp, included below.    */
           pageSizeFormFields.addElement("country"); /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
@@ -258,7 +258,7 @@
           <tr>
             <td style="background-color:#EEEEEE">
               <strong>
-                <%=cm.cmsText("species_country-result_06")%>
+                <%=cm.cmsText("refine_your_search")%>
               </strong>
             </td>
           </tr>
@@ -266,42 +266,42 @@
             <td style="background-color:#EEEEEE">
               <form name="resultSearch" method="get" onsubmit="return(checkRefineSearch(<%=noCriteria%>));" action="">
               <%=formBean.toFORMParam(filterSearch)%>
-                <label for="select1" class="noshow"><%=cm.cms("species_country-result_20_Label")%></label>
-                <select id="select1" title="<%=cm.cms("species_country-result_20_Title")%>" name="criteriaType" class="inputTextField">
+                <label for="select1" class="noshow"><%=cm.cms("criteria")%></label>
+                <select id="select1" title="<%=cm.cms("criteria")%>" name="criteriaType" class="inputTextField">
                   <option value="<%=CountrySearchCriteria.CRITERIA_GROUP%>">
-                      <%=cm.cms("species_country-result_07")%>
+                      <%=cm.cms("group")%>
                   </option>
-<%--                  <option value="<%=CountrySearchCriteria.CRITERIA_ORDER%>"><%=cm.cms("species_country-result_08")%></option>--%>
-<%--                  <option value="<%=CountrySearchCriteria.CRITERIA_FAMILY%>"><%=cm.cms("species_country-result_09")%></option>--%>
+<%--                  <option value="<%=CountrySearchCriteria.CRITERIA_ORDER%>"><%=cm.cms("order_column")%></option>--%>
+<%--                  <option value="<%=CountrySearchCriteria.CRITERIA_FAMILY%>"><%=cm.cms("family")%></option>--%>
                   <option value="<%=CountrySearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected">
-                      <%=cm.cms("species_country-result_10")%>
+                      <%=cm.cms("scientific_name")%>
                   </option>
                 </select>
-                <%=cm.cmsLabel("species_country-result_20_Label")%>
-                <%=cm.cmsTitle("species_country-result_20_Title")%>
-                <label for="select2" class="noshow"><%=cm.cms("species_country-result_21_Label")%></label>
-                <select id="select2" title="<%=cm.cms("species_country-result_21_Title")%>" name="oper" class="inputTextField">
+                <%=cm.cmsLabel("criteria")%>
+                <%=cm.cmsTitle("criteria")%>
+                <label for="select2" class="noshow"><%=cm.cms("operator")%></label>
+                <select id="select2" title="<%=cm.cms("operator")%>" name="oper" class="inputTextField">
                   <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                      <%=cm.cms("species_country-result_11")%>
+                      <%=cm.cms("is")%>
                   </option>
                   <option value="<%=Utilities.OPERATOR_STARTS%>">
-                      <%=cm.cms("species_country-result_12")%>
+                      <%=cm.cms("starts_with")%>
                   </option>
                   <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                      <%=cm.cms("species_country-result_13")%>
+                      <%=cm.cms("contains")%>
                   </option>
                 </select>
-                <%=cm.cmsLabel("species_country-result_21_Label")%>
-                <%=cm.cmsTitle("species_country-result_21_Title")%>
+                <%=cm.cmsLabel("operator")%>
+                <%=cm.cmsTitle("operator")%>
                 <label for="criteriaSearch" class="noshow">
-                  <%=cm.cms("species_country-result_22_Label")%>
+                  <%=cm.cms("filter_value")%>
                 </label>
-                <input id="criteriaSearch" title="<%=cm.cms("species_country-result_22_Title")%>" alt="<%=cm.cms("species_country-result_22_Title")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
-                <%=cm.cmsLabel("species_country-result_22_Label")%>
-                <%=cm.cmsTitle("species_country-result_22_Title")%>
-                <input id="search" title="<%=cm.cms("species_country-result_14_Title")%>" class="inputTextField" type="submit" name="Submit" value="<%=cm.cms("species_country-result_14")%>" />
-                <%=cm.cmsTitle("species_country-result_14_Title")%>
-                <%=cm.cmsInput("species_country-result_14")%>
+                <input id="criteriaSearch" title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
+                <%=cm.cmsLabel("filter_value")%>
+                <%=cm.cmsTitle("filter_value")%>
+                <input id="search" title="<%=cm.cms("search")%>" class="inputTextField" type="submit" name="Submit" value="<%=cm.cms("search")%>" />
+                <%=cm.cmsTitle("search")%>
+                <%=cm.cmsInput("search")%>
               </form>
             </td>
           </tr>
@@ -313,7 +313,7 @@
           %>
             <tr>
                 <td style="background-color:#EEEEEE">
-                    <%=cm.cmsText("species_country-result_15")%>:
+                    <%=cm.cmsText("applied_filters_to_the_results")%>:
                 </td>
            </tr>
             <%
@@ -326,8 +326,8 @@
             %>
               <tr>
                   <td style="background-color:#CCCCCC;text-align:left">
-                      <a title="<%=cm.cms("species_country-result_23_Title")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img alt="<%=cm.cms("species_country-result_23_Title")%>" src="images/mini/delete.jpg" border="0" style="vertical-align:middle" /></a>
-                      <%=cm.cmsTitle("species_country-result_23_Title")%>
+                      <a title="<%=cm.cms("delete_criteria")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img alt="<%=cm.cms("delete_criteria")%>" src="images/mini/delete.jpg" border="0" style="vertical-align:middle" /></a>
+                      <%=cm.cmsTitle("delete_criteria")%>
                       &nbsp;&nbsp;
                       <strong class="linkDarkBg"><%= i + ". " + criteria.toHumanString()%></strong>
                   </td>
@@ -372,7 +372,7 @@
           if (!isExpanded)
           {
         %>
-             <a title="<%=cm.cms("species_country-result_24_Title")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("species_country-result_16")%></a>
+             <a title="<%=cm.cms("species_country-result_24_Title")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("display_vernacular_names_in_results")%></a>
              <%=cm.cmsTitle("species_country-result_24_Title")%>
         <%
           }
@@ -397,32 +397,32 @@
         %>
         <tr>
           <th style="text-align:left" class="resultHeader">
-            <a title="<%=cm.cms("species_country-result_26_Title")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(groupCrit, (null == groupCrit))%>"><%=Utilities.getSortImageTag(groupCrit)%>
-                <%=cm.cmsText("species_country-result_07")%>
+            <a title="<%=cm.cms("sort_by_column")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(groupCrit, (null == groupCrit))%>"><%=Utilities.getSortImageTag(groupCrit)%>
+                <%=cm.cmsText("group")%>
             </a>
-            <%=cm.cmsTitle("species_country-result_26_Title")%>
+            <%=cm.cmsTitle("sort_by_column")%>
           </th>
           <th style="text-align:left" class="resultHeader">
-            <strong><%=cm.cmsText("species_country-result_27")%></strong>
+            <strong><%=cm.cmsText("country")%></strong>
           </th>
           <th style="text-align:left" class="resultHeader">
-            <strong><%=cm.cmsText("species_country-result_28")%></strong>
+            <strong><%=cm.cmsText("biogeoregion")%></strong>
           </th>
           <th style="text-align:left" class="resultHeader">
-            <a title="<%=cm.cms("species_country-result_26_Title")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit)) %>"><%=Utilities.getSortImageTag(sciNameCrit)%>
-                <%=cm.cmsText("species_country-result_10")%>
+            <a title="<%=cm.cms("sort_by_column")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit)) %>"><%=Utilities.getSortImageTag(sciNameCrit)%>
+                <%=cm.cmsText("scientific_name")%>
             </a>
-            <%=cm.cmsTitle("species_country-result_26_Title")%>
+            <%=cm.cmsTitle("sort_by_column")%>
           </th>
 <%
             if (isExpanded)
             {
 %>
           <th style="text-align:left" class="resultHeader">
-            <%=cm.cmsText("species_country-result_17")%>
+            <%=cm.cmsText("vernacular_names")%>
             &nbsp;
             [<a title="<%=cm.cms("species_country-result_17_Title")%>" class="resultHeaderLink" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>">
-              <%=cm.cmsText("species_country-result_18")%>
+              <%=cm.cmsText("hide")%>
           </a>
           <%=cm.cmsTitle("species_country-result_17_Title")%>]
           </th>
@@ -643,38 +643,38 @@
 %>
         <tr>
           <th style="text-align:left" class="resultHeader">
-            <a title="<%=cm.cms("species_country-result_26_Title")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(groupCrit, (null == groupCrit))%>"><%=Utilities.getSortImageTag(groupCrit)%>
-                <%=cm.cmsText("species_country-result_07")%>
+            <a title="<%=cm.cms("sort_by_column")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(groupCrit, (null == groupCrit))%>"><%=Utilities.getSortImageTag(groupCrit)%>
+                <%=cm.cmsText("group")%>
             </a>
-            <%=cm.cmsTitle("species_country-result_26_Title")%>
+            <%=cm.cmsTitle("sort_by_column")%>
           </th>
 <%--          <th class="resultHeader">--%>
-<%--            <a class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(orderCrit, (null == orderCrit) ? true : false)%>"><%=Utilities.getSortImageTag(orderCrit)%><%=cm.cms("species_country-result_08")%></a>--%>
+<%--            <a class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(orderCrit, (null == orderCrit) ? true : false)%>"><%=Utilities.getSortImageTag(orderCrit)%><%=cm.cms("order_column")%></a>--%>
 <%--          </th>--%>
 <%--          <th class="resultHeader">--%>
-<%--            <a class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(familyCrit, (null == familyCrit) ? true : false)%>"><%=Utilities.getSortImageTag(familyCrit)%><%=cm.cms("species_country-result_09")%></a>--%>
+<%--            <a class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(familyCrit, (null == familyCrit) ? true : false)%>"><%=Utilities.getSortImageTag(familyCrit)%><%=cm.cms("family")%></a>--%>
 <%--          </th>--%>
           <th style="text-align:left" class="resultHeader">
-            <strong><%=cm.cmsText("species_country-result_27")%></strong>
+            <strong><%=cm.cmsText("country")%></strong>
           </th>
           <th style="text-align:left" class="resultHeader">
-            <strong><%=cm.cmsText("species_country-result_28")%></strong>
+            <strong><%=cm.cmsText("biogeoregion")%></strong>
           </th>
           <th style="text-align:left" class="resultHeader">
-            <a title="<%=cm.cms("species_country-result_26_Title")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit)) %>"><%=Utilities.getSortImageTag(sciNameCrit)%>
-                <%=cm.cmsText("species_country-result_10")%>
+            <a title="<%=cm.cms("sort_by_column")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit)) %>"><%=Utilities.getSortImageTag(sciNameCrit)%>
+                <%=cm.cmsText("scientific_name")%>
             </a>
-            <%=cm.cmsTitle("species_country-result_26_Title")%>
+            <%=cm.cmsTitle("sort_by_column")%>
           </th>
 <%
             if (isExpanded)
             {
 %>
           <th style="text-align:left" class="resultHeader">
-            <%=cm.cmsText("species_country-result_17")%>
+            <%=cm.cmsText("vernacular_names")%>
             &nbsp;
             [<a title="<%=cm.cms("species_country-result_17_Title")%>" class="resultHeaderLink" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>">
-              <%=cm.cmsText("species_country-result_18")%>
+              <%=cm.cmsText("hide")%>
           </a>
           <%=cm.cmsTitle("species_country-result_17_Title")%>]
           </th>
@@ -699,19 +699,19 @@
 <%=cm.br()%>
 <%=cm.cmsMsg("species_country-result_title")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_country-result_02")%>
+<%=cm.cmsMsg("enter_refine_criteria_correctly")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_country-result_07")%>
+<%=cm.cmsMsg("group")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_country-result_10")%>
+<%=cm.cmsMsg("scientific_name")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_country-result_11")%>
+<%=cm.cmsMsg("is")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_country-result_12")%>
+<%=cm.cmsMsg("starts_with")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_country-result_13")%>
+<%=cm.cmsMsg("contains")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_country-result_25_Sum")%>
+<%=cm.cmsMsg("table_of_results")%>
 <%=cm.br()%>
 
     <jsp:include page="footer.jsp">

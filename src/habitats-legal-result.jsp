@@ -80,14 +80,14 @@
   <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitats_legal_location#habitats-legal.jsp,results_location" />
+  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,legal_instruments#habitats-legal.jsp,results" />
   <jsp:param name="helpLink" value="habitats-help.jsp" />
   <jsp:param name="downloadLink" value="<%=tsvLink%>" />
 </jsp:include>
 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td>
-<h1><%=cm.cmsText("habitats_legal-result_01")%></h1>
+<h1><%=cm.cmsText("legal_instruments")%></h1>
   <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
     <%LegalSearchCriteria mainSearch = (LegalSearchCriteria) formBean.getMainSearchCriteria();%>
     <%String realSearch = (null != formBean.getSearchString() && formBean.getSearchString().equalsIgnoreCase("%")) ? "" : " for which " + mainSearch.toHumanString();
@@ -99,7 +99,7 @@
         <%=realSearch%>
         <%=cm.cmsText("habitats_legal-result_03")%>
         '<%=formBean.getLegalText()%>'
-        <%=cm.cmsText("habitats_legal-result_04")%>
+        <%=cm.cmsText("legal_text")%>
       </strong>
       </td>
     </tr>
@@ -120,7 +120,7 @@
            return;
        }
 %>
-<%=cm.cmsText("habitats_legal-result_05")%>:&nbsp;<strong><%=resultsCount%></strong>
+<%=cm.cmsText("results_found_1")%>:&nbsp;<strong><%=resultsCount%></strong>
 <%// Prepare parameters for pagesize.jsp
   Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
   pageSizeFormFields.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
@@ -151,7 +151,7 @@
   <tr>
     <td bgcolor="#EEEEEE">
       <strong>
-        <%=cm.cmsText("habitats_legal-result_06")%>
+        <%=cm.cmsText("refine_your_search")%>
       </strong>
     </td>
   </tr>
@@ -162,32 +162,32 @@
         <label for="criteriaType" class="noshow"><%=cm.cms("Criteria")%></label>
         <select title="Criteria" name="criteriaType" id="criteriaType" class="inputTextField">
           <%if (showCode) {%>
-          <option value="<%=LegalSearchCriteria.CRITERIA_EUNIS_CODE%>"><%=cm.cms("habitats_legal-result_07")%></option><%}%>
+          <option value="<%=LegalSearchCriteria.CRITERIA_EUNIS_CODE%>"><%=cm.cms("eunis_code")%></option><%}%>
           <%if (showScientificName) {%>
-          <option value="<%=LegalSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected"><%=cm.cms("habitats_legal-result_08")%></option><%}%>
+          <option value="<%=LegalSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected"><%=cm.cms("habitat_type_name")%></option><%}%>
           <%if (showLegalText) {%>
-          <option value="<%=LegalSearchCriteria.CRITERIA_LEGAL_TEXT%>"><%=cm.cms("habitats_legal-result_09")%></option><%}%>
+          <option value="<%=LegalSearchCriteria.CRITERIA_LEGAL_TEXT%>"><%=cm.cms("legal_text")%></option><%}%>
         </select>
         <%=cm.cmsMsg("Criteria")%>
-        <%=cm.cmsInput("habitats_legal-result_07")%>
-        <%=cm.cmsInput("habitats_legal-result_08")%>
-        <%=cm.cmsInput("habitats_legal-result_09")%>
+        <%=cm.cmsInput("eunis_code")%>
+        <%=cm.cmsInput("habitat_type_name")%>
+        <%=cm.cmsInput("legal_text")%>
         <label for="oper" class="noshow"><%=cm.cms("Criteria")%></label>
         <select title="Operator" name="oper" id="oper" class="inputTextField">
-          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("habitats_legal-result_10")%></option>
-          <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("habitats_legal-result_11")%></option>
-          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("habitats_legal-result_12")%></option>
+          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("is")%></option>
+          <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("starts_with")%></option>
+          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
         </select>
         <%=cm.cmsLabel("Criteria")%>
-        <%=cm.cmsInput("habitats_legal-result_10")%>
-        <%=cm.cmsInput("habitats_legal-result_11")%>
-        <%=cm.cmsInput("habitats_legal-result_12")%>
-        <label for="criteriaSearch" class="noshow"><%=cm.cms("search_value")%></label>
-        <input title="<%=cm.cms("search_value")%>" class="inputTextField" name="criteriaSearch" id="criteriaSearch" type="text" size="30" />
-        <%=cm.cmsTitle("search_value")%>
-        <input title="<%=cm.cms("search")%>" class="inputTextField" type="submit" name="Submit" id="Submit" value="<%=cm.cms("habitats_legal-result_13")%>" />
+        <%=cm.cmsInput("is")%>
+        <%=cm.cmsInput("starts_with")%>
+        <%=cm.cmsInput("contains")%>
+        <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
+        <input title="<%=cm.cms("filter_value")%>" class="inputTextField" name="criteriaSearch" id="criteriaSearch" type="text" size="30" />
+        <%=cm.cmsTitle("filter_value")%>
+        <input title="<%=cm.cms("search")%>" class="inputTextField" type="submit" name="Submit" id="Submit" value="<%=cm.cms("search")%>" />
         <%=cm.cms("search")%>
-        <%=cm.cmsInput("habitats_legal-result_13")%>
+        <%=cm.cmsInput("search")%>
       </form>
     </td>
   </tr>
@@ -210,7 +210,7 @@
   <tr>
     <td bgcolor="#EEEEEE">
       <a title="<%=cm.cms("delete_filter")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>">
-        <img src="images/mini/delete.jpg" alt="<%=cm.cms("delete_filter")%>" border="0" align="middle" />
+        <img src="images/mini/delete.jpg" alt="<%=cm.cms("delete_filter")%>" border="0" style="vertical-align:middle" />
       </a>
       <%=cm.cms("delete_filter")%>&nbsp;&nbsp;
       <strong class="linkDarkBg"><%= i + ". " + criteria.toHumanString()%></strong>
@@ -258,14 +258,14 @@
 <tr>
   <th class="resultHeader" width="20%">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(sortLevel, (null == sortLevel) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortLevel)%><%=cm.cmsText("habitats_legal-result_15")%>
+      <%=Utilities.getSortImageTag(sortLevel)%><%=cm.cmsText("generic_index_07")%>
     </a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%if (showCode) {%>
   <th class="resultHeader" valign="top" width="10%">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(codeCrit, (null == codeCrit) ? true : false)%>">
-      <%=Utilities.getSortImageTag(codeCrit)%><%=cm.cmsText("habitats_legal-result_07")%>
+      <%=Utilities.getSortImageTag(codeCrit)%><%=cm.cmsText("eunis_code")%>
     </a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
@@ -273,14 +273,14 @@
   <%if (showScientificName) {%>
   <th class="resultHeader" valign="top" width="29%">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitats_legal-result_08")%>
+      <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitat_type_name")%>
     </a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if (showLegalText) {%>
   <th class="resultHeader" valign="top" width="20%">
-    <%=cm.cmsText("habitats_legal-result_09")%>
+    <%=cm.cmsText("legal_text")%>
   </th>
   <%}%>
 </tr>
@@ -341,14 +341,14 @@
 <tr>
   <th class="resultHeader" width="20%">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(sortLevel, (null == sortLevel) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortLevel)%><%=cm.cmsText("habitats_legal-result_15")%>
+      <%=Utilities.getSortImageTag(sortLevel)%><%=cm.cmsText("generic_index_07")%>
     </a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%if (showCode) {%>
   <th class="resultHeader" valign="top" width="10%">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(codeCrit, (null == codeCrit) ? true : false)%>">
-      <%=Utilities.getSortImageTag(codeCrit)%><%=cm.cmsText("habitats_legal-result_07")%>
+      <%=Utilities.getSortImageTag(codeCrit)%><%=cm.cmsText("eunis_code")%>
     </a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
@@ -356,14 +356,14 @@
   <%if (showScientificName) {%>
   <th class="resultHeader" valign="top" width="29%">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitats_legal-result_08")%>
+      <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitat_type_name")%>
     </a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <%}%>
   <%if (showLegalText) {%>
   <th class="resultHeader" valign="top" width="20%">
-    <%=cm.cmsText("habitats_legal-result_09")%>
+    <%=cm.cmsText("legal_text")%>
   </th>
   <%}%>
 </tr>

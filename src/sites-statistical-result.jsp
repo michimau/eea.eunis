@@ -59,7 +59,7 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_statistical_location#sites-statistical.jsp,results_location"/>
+        <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,statistical_data#sites-statistical.jsp,results"/>
         <jsp:param name="mapLink" value="show"/>
       </jsp:include>
       <img id="loading" alt="Loading" title="Loading" src="images/loading.gif" />
@@ -75,9 +75,9 @@
         <%=formBean.toHumanString()%>
       </strong>
       <br />
-      <img src="<%=application.getInitParameter("EEA_MAP_SERVER")%>/getmap.asp?Q=<%=sbCCodes.toString().toUpperCase()%>&amp;outline=1" alt="<%=cm.cms("sites_statistical-result_02")%>" title="<%=cm.cms("sites_statistical-result_02")%>" />
-      <%=cm.cmsTitle("sites_statistical-result_02")%>
-      <%=cm.cmsAlt("sites_statistical-result_02")%>
+      <img src="<%=application.getInitParameter("EEA_MAP_SERVER")%>/getmap.asp?Q=<%=sbCCodes.toString().toUpperCase()%>&amp;outline=1" alt="<%=cm.cms("map_image_eea")%>" title="<%=cm.cms("map_image_eea")%>" />
+      <%=cm.cmsTitle("map_image_eea")%>
+      <%=cm.cmsAlt("map_image_eea")%>
       <br />
       <%
         Long nrSites = formBean.computeNumberOfSites();
@@ -193,10 +193,10 @@
       <strong>
         <%=cm.cmsText("sites_statistical-result_15")%>
       </strong>
-      <table id="rsTable2" border="1" cellpadding="1" cellspacing="1" width="100%" summary="<%=cm.cms("sites_statistical_biogeographicregions")%>" class="sortable">
+      <table id="rsTable2" border="1" cellpadding="1" cellspacing="1" width="100%" summary="<%=cm.cms("biogeographic_regions")%>" class="sortable">
         <tr>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_statistical-result_16")%>
+            <%=cm.cmsText("biogeographic_region_name")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th style="text-align : right;" title="<%=cm.cms("sort_results_on_this_column")%>">
@@ -264,7 +264,7 @@
       <table border="1" cellpadding="1" cellspacing="1" width="100%" id="rsTable" summary="<%=cm.cms("sites_statistical_result_designations")%>" class="sortable">
         <tr>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_statistical-result_18")%>
+            <%=cm.cmsText("source_data_set")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
@@ -280,7 +280,7 @@
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_statistical-result_22")%>
+            <%=cm.cmsText("category_location")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
@@ -288,7 +288,7 @@
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
           <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_statistical-result_24")%>
+            <%=cm.cmsText("total_area_ha")%>
             <%=cm.cmsTitle("sort_results_on_this_column")%>
           </th>
         </tr>
@@ -527,10 +527,10 @@
   if(result != null && result.size()>0)
   {
 %>
-      <table border="1" cellpadding="1" cellspacing="1" style="border-collapse: collapse" width="100%" id="rsTableNew" summary="<%=cm.cms("sites_statistical_result_sites")%>">
+      <table border="1" cellpadding="1" cellspacing="1" style="border-collapse: collapse" width="100%" id="rsTableNew" summary="<%=cm.cms("sites")%>">
         <tr>
           <th class="resultHeader">
-            <%=cm.cmsText("sites_statistical-result_18")%>
+            <%=cm.cmsText("source_data_set")%>
           </th>
 <%
      for(int i=0;i<result.size();i++)
@@ -553,11 +553,11 @@
 
       <%=cm.cmsMsg("sites_statistical-result_title")%>
       <%=cm.br()%>
-      <%=cm.cmsMsg("sites_statistical_biogeographicregions")%>
+      <%=cm.cmsMsg("biogeographic_regions")%>
       <%=cm.br()%>
       <%=cm.cmsMsg("sites_statistical_result_designations")%>
       <%=cm.br()%>
-      <%=cm.cmsMsg("sites_statistical_result_sites")%>
+      <%=cm.cmsMsg("sites")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="sites-statistical-result.jsp" />
       </jsp:include>

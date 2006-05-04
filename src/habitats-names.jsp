@@ -53,7 +53,7 @@
   <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitats_names_location" />
+  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,names" />
   <jsp:param name="helpLink" value="habitats-help.jsp" />
 </jsp:include>
 <form name="eunis" method="get" onsubmit="javascript: return validateForm();" action="habitats-names-result.jsp">
@@ -66,7 +66,7 @@
   <tr>
     <td>
       <h1>
-        <%=cm.cmsText("habitats_names_01")%>
+        <%=cm.cmsText("names_and_descriptions")%>
       </h1>
       <%=cm.cmsText("habitats_names_23")%>
       <br />
@@ -75,20 +75,20 @@
         <tr>
           <td bgcolor="#EEEEEE">
             <strong>
-              <%=cm.cmsText("habitats_names_02")%>
+              <%=cm.cmsText("search_will_provide_2")%>
             </strong>
           </td>
         </tr>
         <tr>
           <td bgcolor="#EEEEEE" valign="middle">
             <input type="checkbox" id="showLevel" name="showLevel" value="true" checked="checked" />
-            <label for="showLevel"><%=cm.cmsText("habitats_names_03")%></label>
+            <label for="showLevel"><%=cm.cmsText("generic_index_07")%></label>
             <input type="checkbox" name="showCode" id="showCode" value="true" checked="checked" />
-            <label for="showCode"><%=cm.cmsText("habitats_names_04")%></label>
+            <label for="showCode"><%=cm.cmsText("code_column")%></label>
             <input type="checkbox" name="showScientificName" id="showScientificName" value="true" checked="checked" disabled="disabled" />
-            <label for="showScientificName"><%=cm.cmsText("habitats_names_05")%></label>
+            <label for="showScientificName"><%=cm.cmsText("habitat_type_name")%></label>
             <input type="checkbox" name="showVernacularName" id="showVernacularName" value="true" />
-            <label for="showVernacularName"><%=cm.cmsText("habitats_names_06")%></label>
+            <label for="showVernacularName"><%=cm.cmsText("habitat_type_english_name")%></label>
           </td>
         </tr>
       </table>
@@ -96,40 +96,40 @@
   </tr>
   <tr>
     <td colspan="3">
-      <img alt="<%=cm.cms("mandatory_field")%>" src="images/mini/field_mandatory.gif" align="middle" /><%=cm.cmsTitle("mandatory_field")%>&nbsp;
-      <label for="searchString" class="fontBold"><%=cm.cmsText("habitats_names_22")%></label>
+      <img alt="<%=cm.cms("mandatory_field")%>" src="images/mini/field_mandatory.gif" style="vertical-align:middle" /><%=cm.cmsTitle("mandatory_field")%>&nbsp;
+      <label for="searchString" class="fontBold"><%=cm.cmsText("name_description")%></label>
       <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
       <select title="<%=cm.cms("operator")%>" name="relationOp" id="relationOp" class="inputTextField">
-        <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("habitats_names_08")%></option>
-        <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("habitats_names_09")%></option>
-        <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("habitats_names_10")%></option>
+        <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
+        <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
+        <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("starts_with")%></option>
       </select>
       <%=cm.cmsLabel("operator")%>
-      <%=cm.cmsInput("habitats_names_08")%>
-      <%=cm.cmsInput("habitats_names_09")%>
-      <%=cm.cmsInput("habitats_names_10")%>
-      <label for="searchString" class="noshow"><%=cm.cms("search_value")%></label>
-      <input type="text" size="30" name="searchString" id="searchString" class="inputTextField" title="<%=cm.cms("search_value")%>" /><%=cm.cmsTitle("search_value")%>&nbsp;
-      <a href="javascript:openHelper('habitats-names-choice.jsp')" title="<%=cm.cms("list_of_values")%>"><img alt="<%=cm.cms("list_of_values")%>" title="<%=cm.cms("list_of_values")%>" border="0" src="images/helper/helper.gif" width="11" height="18" align="middle" /></a><%=cm.cmsTitle("list_of_values")%>
+      <%=cm.cmsInput("contains")%>
+      <%=cm.cmsInput("is")%>
+      <%=cm.cmsInput("starts_with")%>
+      <label for="searchString" class="noshow"><%=cm.cms("filter_value")%></label>
+      <input type="text" size="30" name="searchString" id="searchString" class="inputTextField" title="<%=cm.cms("filter_value")%>" /><%=cm.cmsTitle("filter_value")%>&nbsp;
+      <a href="javascript:openHelper('habitats-names-choice.jsp')" title="<%=cm.cms("list_of_values")%>"><img alt="<%=cm.cms("list_of_values")%>" title="<%=cm.cms("list_of_values")%>" border="0" src="images/helper/helper.gif" width="11" height="18" style="vertical-align:middle" /></a><%=cm.cmsTitle("list_of_values")%>
     </td>
   </tr>
   <tr>
     <td bgcolor="#EEEEEE">
-      <%=cm.cmsText("habitats_names_11")%>:&nbsp;
+      <%=cm.cmsText("select_database")%>:&nbsp;
       <input type="radio" id="database1" name="database" value="<%=NamesDomain.SEARCH_EUNIS%>" checked="checked"
              title="<%=cm.cms("search_eunis")%>" />
       <%=cm.cmsTitle("search_eunis")%>
-      <label for="database1"><%=cm.cmsText("habitats_names_12")%></label>
+      <label for="database1"><%=cm.cmsText("eunis_habitat_types")%></label>
       &nbsp;&nbsp;
       <input type="radio" id="database2" name="database" value="<%=NamesDomain.SEARCH_ANNEX_I%>"
              title="<%=cm.cms("search_annex1")%>" />
       <%=cm.cmsTitle("search_annex1")%>
-      <label for="database2"><%=cm.cmsText("habitats_names_13")%></label>
+      <label for="database2"><%=cm.cmsText("habitat_directive_annex")%></label>
       &nbsp;&nbsp;
       <input type="radio" id="database3" name="database" value="<%=NamesDomain.SEARCH_BOTH%>"
              title="<%=cm.cms("search_both")%>" />
       <%=cm.cmsTitle("search_both")%>
-      <label for="database3"><%=cm.cmsText("habitats_names_14")%></label>
+      <label for="database3"><%=cm.cmsText("both")%></label>
     </td>
   </tr>
   <tr>
@@ -146,12 +146,12 @@
   </tr>
   <tr>
     <td align="right">
-      <input title="<%=cm.cms("reset_btn")%>" type="reset" value="<%=cm.cms("habitats_names_19")%>" name="Reset" id="Reset" class="inputTextField" />
-      <%=cm.cmsTitle("reset_btn")%>
-      <%=cm.cmsInput("habitats_names_19")%>
-      <input title="<%=cm.cms("search_btn")%>" type="submit" value="<%=cm.cms("habitats_names_20")%>" name="action" id="action" class="inputTextField" />
-      <%=cm.cmsTitle("search_btn")%>
-      <%=cm.cmsInput("habitats_names_20")%>
+      <input title="<%=cm.cms("reset")%>" type="reset" value="<%=cm.cms("reset")%>" name="Reset" id="Reset" class="inputTextField" />
+      <%=cm.cmsTitle("reset")%>
+      <%=cm.cmsInput("reset")%>
+      <input title="<%=cm.cms("search")%>" type="submit" value="<%=cm.cms("search")%>" name="action" id="action" class="inputTextField" />
+      <%=cm.cmsTitle("search")%>
+      <%=cm.cmsInput("search")%>
     </td>
   </tr>
 </table>
@@ -173,8 +173,8 @@
     //-->
     </script>
     <script language="JavaScript" src="script/habitats-names-save-criteria.js" type="text/javascript"></script>
-    <%=cm.cmsText("habitats_names_21")%>:
-    <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-names.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" title="Save" border="0" src="images/save.jpg" width="21" height="19" align="middle" /></a>
+    <%=cm.cmsText("save_your_criteria")%>:
+    <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-names.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" title="Save" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
     <%=cm.cmsTitle("save_criteria")%>
 <%
   // Set Vector for URL string

@@ -51,7 +51,7 @@
   <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,species_statistics_location" />
+      <jsp:param name="location" value="home#index.jsp,species#species.jsp,species_statistics" />
       <jsp:param name="helpLink" value="species-help.jsp" />
     </jsp:include>
     <img alt="Loading" id="loading" src="images/loading.gif" />
@@ -327,7 +327,7 @@
        } else {
    %>
        <br />
-       <span style="color:red"><%=cm.cmsText("no_data_country")%> <%=countryName%> <%=cm.cmsText("level")%>!</span>
+       <span style="color:red"><%=cm.cmsText("no_data_country")%> <%=countryName%> <%=cm.cmsText("generic_index_07")%>!</span>
        <br />
    <%
            }

@@ -28,7 +28,7 @@
     <div id="alignment">
     <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,about_EUNIS_database"/>
+      <jsp:param name="location" value="home#index.jsp,about_EUNIS_database"/>
     </jsp:include>
     <%=cm.cmsText("generic_about_01")%>
     <%=cm.br()%>

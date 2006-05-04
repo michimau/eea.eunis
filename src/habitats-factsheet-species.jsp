@@ -28,42 +28,42 @@
     if (!species.isEmpty())
     {
 %>
-  <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitats_factsheet_37")%></div>
+  <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_characteristics_for_habitat_type")%></div>
   <table summary="<%=cm.cms("habitat_species")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="species" class="sortable">
     <tr valign="middle">
       <th height="17" title="<%=cm.cms("sort_results_on_this_column")%>">
         <strong>
-          <%=cm.cmsText("habitats_factsheet_38")%>
+          <%=cm.cmsText("species_scientific_name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </strong>
       </th>
       <th height="17" title="<%=cm.cms("sort_results_on_this_column")%>">
         <strong>
-          <%=cm.cmsText("habitats_factsheet_39")%>
+          <%=cm.cmsText("biogeographic_region")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </strong>
       </th>
       <th height="17" title="<%=cm.cms("sort_results_on_this_column")%>">
         <strong>
-          <%=cm.cmsText("habitats_factsheet_40")%>
+          <%=cm.cmsText("abundance")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </strong>
       </th>
       <th height="17" title="<%=cm.cms("sort_results_on_this_column")%>">
         <strong>
-          <%=cm.cmsText("habitats_factsheet_41")%>
+          <%=cm.cmsText("frequencies")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </strong>
       </th>
       <th height="17" title="<%=cm.cms("sort_results_on_this_column")%>">
         <strong>
-          <%=cm.cmsText("habitats_factsheet_42")%>
+          <%=cm.cmsText("faithfulness")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </strong>
       </th>
       <th height="17" title="<%=cm.cms("sort_results_on_this_column")%>">
         <strong>
-          <%=cm.cmsText("habitats_factsheet_44")%>
+          <%=cm.cmsText("comment")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </strong>
       </th>

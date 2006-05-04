@@ -29,7 +29,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
-      <%=cm.cms("sites_refine-helper_title")%>
+      <%=cm.cms("list_of_values")%>
     </title>
     <script language="JavaScript" type="text/javascript">
       <!--
@@ -50,43 +50,43 @@
     <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
       <tr>
         <td bgcolor="#EEEEEE">
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('CDDA National')"><%=cm.cmsText("sites_refine-helper_02")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('CDDA National')"><%=cm.cmsText("cdda_national")%></a>
           <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
       <tr>
         <td>
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('CDDA International')"><%=cm.cmsText("sites_refine-helper_03")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('CDDA International')"><%=cm.cmsText("cdda_international")%></a>
           <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
       <tr>
         <td bgcolor="#EEEEEE">
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Corine biotopes')"><%=cm.cmsText("sites_refine-helper_04")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Corine biotopes')"><%=cm.cmsText("corine_biotopes")%></a>
           <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
       <tr>
         <td>
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Biogenetic reserve')"><%=cm.cmsText("sites_refine-helper_05")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Biogenetic reserve')"><%=cm.cmsText("biogenetic_reserve")%></a>
           <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
       <tr>
         <td bgcolor="#EEEEEE">
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('European diploma')"><%=cm.cmsText("sites_refine-helper_06")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('European diploma')"><%=cm.cmsText("european_diploma")%></a>
           <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
       <tr>
         <td>
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Natura 2000')"><%=cm.cmsText("sites_refine-helper_07")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Natura 2000')"><%=cm.cmsText("natura_2000")%></a>
           <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
       <tr>
         <td>
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Emerald')"><%=cm.cmsText("sites_refine_emerald")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Emerald')"><%=cm.cmsText("emerald")%></a>
           <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
@@ -150,10 +150,10 @@
 %>
     <br />
     <form action="">
-      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
-      <%=cm.cmsTitle("close_window_title")%>
-      <%=cm.cmsInput("close_window_value")%>
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="inputTextField" />
+      <%=cm.cmsTitle("close_window")%>
+      <%=cm.cmsInput("close_btn")%>
     </form>
-    <%=cm.cmsMsg("sites_refine-helper_title")%>
+    <%=cm.cmsMsg("list_of_values")%>
   </body>
 </html>

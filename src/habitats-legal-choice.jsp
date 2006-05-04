@@ -24,7 +24,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
   <title>
-    <%=cm.cms("habitats_legal-choice_title")%>
+    <%=cm.cms("list_of_values")%>
   </title>
   <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.legal.LegalBean" scope="request">
     <jsp:setProperty name="formBean" property="*"/>
@@ -67,7 +67,7 @@
   if(results.size() <= 0) {
 %>
 <strong>
-  <%=cm.cmsText("habitats_legal-choice_01")%>
+  <%=cm.cmsText("no_results_found_1")%>
 </strong>
 <br />
 <br />
@@ -101,10 +101,10 @@
   }
 %>
 <form action="">
-  <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("habitats_legal-choice_02")%>" onclick="javascript:window.close()" id="button2" name="button2" class="inputTextField" />
-  <%=cm.cmsInput("habitats_legal-choice_02")%>
+  <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" id="button2" name="button2" class="inputTextField" />
+  <%=cm.cmsInput("close_btn")%>
 </form>
-<%=cm.cmsMsg("habitats_legal-choice_title")%>
+<%=cm.cmsMsg("list_of_values")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("list_of_values")%>
 <%=cm.br()%>

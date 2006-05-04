@@ -45,7 +45,7 @@
 
 <title>
   <%=application.getInitParameter("PAGE_TITLE")%>
-  <%=cm.cms("generic_glossary_title")%>
+  <%=cm.cms("glossary")%>
 </title>
 <%
   // This parameter is optional. Possible values can be: species,habitats or sites.
@@ -57,7 +57,7 @@
   <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,glossary_location"/>
+  <jsp:param name="location" value="home#index.jsp,glossary"/>
 </jsp:include>
 <table summary="layout" width="100%" border="0">
   <tr>
@@ -73,7 +73,7 @@
   }
 %>
       <h1>
-        <%=cm.cmsText("generic_glossary_01")%>
+        <%=cm.cmsText("glossary")%>
       </h1>
       <%=cm.cmsText("generic_glossary_18")%>
       <br />
@@ -123,58 +123,58 @@
         <tr>
           <td bgcolor="#EEEEEE">
             <strong>
-              <%=cm.cmsText("generic_glossary_04")%>
+              <%=cm.cmsText("search_will_provide_2")%>
             </strong>
           </td>
         </tr>
         <tr bgcolor="#EEEEEE">
           <td nowrap="nowrap">
             <input type="checkbox" name="showTerm" id="showTerm" value="true" checked="checked" disabled="disabled" />
-            <label for="showTerm"><%=cm.cmsText( "generic_glossary_05" )%></label>
+            <label for="showTerm"><%=cm.cmsText( "term" )%></label>
             &nbsp;
             <input type="checkbox" name="showDefinition" id="showDefinition" value="true" checked="checked" disabled="disabled" />
-            <label for="showDefinition"><%=cm.cmsText( "generic_glossary_06" )%></label>
+            <label for="showDefinition"><%=cm.cmsText( "definition" )%></label>
             &nbsp;
             <input type="checkbox" name="showReference" id="showReference" value="true" checked="checked" />
-            <label for="showReference"><%=cm.cmsText( "generic_glossary_07" )%></label>
+            <label for="showReference"><%=cm.cmsText( "reference" )%></label>
             &nbsp;
             <input type="checkbox" name="showSource" id="showSource" value="true" checked="checked" />
-            <label for="showSource"><%=cm.cmsText( "generic_glossary_08" )%></label>
+            <label for="showSource"><%=cm.cmsText( "source" )%></label>
             &nbsp;
             <input type="checkbox" name="showURL" id="showURL" value="true" checked="checked" />
-            <label for="showURL"><%=cm.cmsText( "generic_glossary_09" )%></label>
+            <label for="showURL"><%=cm.cmsText( "url" )%></label>
           </td>
         </tr>
         <tr>
           <td>
             <br />
-            <img width="11" height="12" align="middle" alt="Mandatory field" title="This field is mandatory" src="images/mini/field_mandatory.gif" />
+            <img width="11" height="12" style="vertical-align:middle" alt="Mandatory field" title="This field is mandatory" src="images/mini/field_mandatory.gif" />
             <strong>
-              <%=cm.cmsText( "generic_glossary_10" )%>
+              <%=cm.cmsText( "term" )%>
             </strong>
-            <label for="operand" class="noshow"><%=cm.cms("glossary_operator")%></label>
+            <label for="operand" class="noshow"><%=cm.cms("operator")%></label>
             <select title="Operator" name="operand" id="operand" class="inputTextField">
-              <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("generic_glossary_11")%></option>
-              <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("generic_glossary_12")%></option>
-              <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("generic_glossary_13")%></option>
+              <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
+              <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
+              <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("starts_with")%></option>
             </select>
-            <%=cm.cmsLabel("glossary_operator")%>
+            <%=cm.cmsLabel("operator")%>
             <label for="searchString" class="noshow"><%=cm.cms("glossary_search_value")%></label>
             <input title="Search value" size="20" name="searchString" id="searchString" value="" class="inputTextField" />
             <%=cm.cmsInput("glossary_search_value")%>
             <div style="width : 100%; background-color : #EEEEEE">
               <input name="searchTerms" id="searchTerms" type="checkbox" value="true" checked="checked" />
-              <label for="searchTerms"><%=cm.cmsText( "generic_glossary_14" )%></label>
+              <label for="searchTerms"><%=cm.cmsText( "search_terms" )%></label>
               &nbsp;&nbsp;
               <input name="searchDefinitions" id="searchDefinitions" type="checkbox" value="true" checked="checked" />
               <label for="searchDefinitions"><%=cm.cmsText( "generic_glossary_15" )%></label>
             </div>
 
             <div style="width : 100%; text-align : right;">
-              <input title="<%=cm.cms("reset_btn")%>" type="reset" value="<%=cm.cms("generic_glossary_16")%>" name="Reset" id="Reset" class="inputTextField" />
-               <%=cm.cmsInput( "generic_glossary_16" )%>
-              <input title="<%=cm.cms("search_btn")%>" type="submit" value="<%=cm.cms("generic_glossary_17")%>" name="Submit" id="Submit" class="inputTextField" />
-              <%=cm.cmsInput( "generic_glossary_17" )%>
+              <input title="<%=cm.cms("reset")%>" type="reset" value="<%=cm.cms("reset")%>" name="Reset" id="Reset" class="inputTextField" />
+               <%=cm.cmsInput( "reset" )%>
+              <input title="<%=cm.cms("search")%>" type="submit" value="<%=cm.cms("search")%>" name="Submit" id="Submit" class="inputTextField" />
+              <%=cm.cmsInput( "search" )%>
             </div>
           </td>
         </tr>
@@ -190,7 +190,7 @@
 <%=cm.br()%>
 <%=cm.cmsMsg("generic_glossary_03")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("generic_glossary_title")%>
+<%=cm.cmsMsg("glossary")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("glossary_note")%>
 <%=cm.br()%>
@@ -200,11 +200,11 @@
 <%=cm.br()%>
 <%=cm.cmsMsg("glossary_note_sites")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("generic_glossary_11")%>
+<%=cm.cmsMsg("is")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("generic_glossary_12")%>
+<%=cm.cmsMsg("contains")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("generic_glossary_13")%>
+<%=cm.cmsMsg("starts_with")%>
 <jsp:include page="footer.jsp">
   <jsp:param name="page_name" value="glossary.jsp" />
 </jsp:include>

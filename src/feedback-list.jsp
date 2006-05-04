@@ -24,7 +24,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("feedback_list_title")%>
+      <%=cm.cms("feedback_list")%>
     </title>
 
   </head>
@@ -34,10 +34,10 @@
 <div id="alignment">
 <div id="content">
 <jsp:include page="header-dynamic.jsp">
-    <jsp:param name="location" value="home_location#index.jsp,services_location#services.jsp,feedback_list_location"/>
+    <jsp:param name="location" value="home#index.jsp,services#services.jsp,feedback_list"/>
 </jsp:include>
 
-   <h1><%=cm.cmsText("feedback_list_01")%></h1>
+   <h1><%=cm.cmsText("feedback_list")%></h1>
    <br />
 <%
   String SQL_DRV = application.getInitParameter("JDBC_DRV");
@@ -59,16 +59,16 @@
     <table summary="layout" width="100%" cellspacing="1" cellpadding="1" border="1" style="border-collapse:collapse">
      <tr>
        <th>
-         <%=cm.cmsText("feedback_list_02")%>
+         <%=cm.cmsText("feedback_type")%>
        </th>
          <th>
            <%=cm.cmsText("feedback_list_03")%>
          </th>
          <th>
-           <%=cm.cmsText("feedback_list_04")%>
+           <%=cm.cmsText("comment")%>
          </th>
          <th>
-           <%=cm.cmsText("feedback_list_05")%>
+           <%=cm.cmsText("description")%>
          </th>
      </tr>
 
@@ -91,13 +91,13 @@
            <%=Utilities.formatString(feedback.get(2),"&nbsp;")%>
          </td>
          <td>
-          <strong><%=cm.cmsText("feedback_list_06")%> : </strong> <%=Utilities.formatString(feedback.get(3)," - ")%> <br />
+          <strong><%=cm.cmsText("name")%> : </strong> <%=Utilities.formatString(feedback.get(3)," - ")%> <br />
           <strong><%=cm.cmsText("feedback_list_07")%> : </strong> <%=Utilities.formatString(feedback.get(4)," - ")%> <br />
           <strong><%=cm.cmsText("feedback_list_08")%> : </strong> <%=Utilities.formatString(feedback.get(5)," - ")%> <br />
           <strong><%=cm.cmsText("feedback_list_09")%> : </strong> <%=Utilities.formatString(feedback.get(6)," - ")%> <br />
           <strong><%=cm.cmsText("feedback_list_10")%> : </strong> <%=Utilities.formatString(feedback.get(7)," - ")%> <br />
           <strong><%=cm.cmsText("feedback_list_11")%> : </strong> <%=Utilities.formatString(feedback.get(8)," - ")%> <br />
-          <strong><%=cm.cmsText("feedback_list_12")%> :  </strong> <%=Utilities.formatString(feedback.get(9)," - ")%>
+          <strong><%=cm.cmsText("url")%> :  </strong> <%=Utilities.formatString(feedback.get(9)," - ")%>
          </td>
      </tr>
 <%
@@ -115,7 +115,7 @@
     }
 %>
     <%=cm.br()%>
-    <%=cm.cmsMsg("feedback_list_title")%>
+    <%=cm.cmsMsg("feedback_list")%>
     <%=cm.br()%>
 
     <jsp:include page="footer.jsp">

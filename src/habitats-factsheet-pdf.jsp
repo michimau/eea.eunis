@@ -49,7 +49,7 @@
       //-->
     </script>
     <title>
-      <%=cm.cms("habitats_factsheet-pdf_title")%>
+      <%=cm.cms("generating_pdf")%>
     </title>
   </head>
   <body>
@@ -63,13 +63,13 @@
     </div>
     <script language="JavaScript" type="text/javascript">
       <!--
-        updateText( "<%=cm.cms("habitats_factsheet-pdf_01")%>" );
+        updateText( "<%=cm.cms("generating_pdf_wait")%>" );
       //-->
     </script>
 <%
-  cm.cmsMsg("habitats_factsheet-pdf_04");
+  cm.cmsMsg("source_european_topic_centre");
   cm.cmsMsg("habitats_factsheet-pdf_05");
-  cm.cmsMsg("habitats_factsheet-pdf_06");
+  cm.cmsMsg("generated_on");
 
   String idHabitat = request.getParameter("idHabitat");
   pdfReport report = new pdfReport();
@@ -91,7 +91,7 @@
       report.setHeader(h);
       // IMPORTANT: THESE LINKS SHOULD BE CHANGED TO THEIR ACTUAL SERVER VALUE!!!
       Paragraph f = new Paragraph();
-      f.add(new Phrase(cm.cms("habitats_factsheet-pdf_04"),FontFactory.getFont(FontFactory.HELVETICA, 8, Font.ITALIC, new Color(24, 40, 136))));
+      f.add(new Phrase(cm.cms("source_european_topic_centre"),FontFactory.getFont(FontFactory.HELVETICA, 8, Font.ITALIC, new Color(24, 40, 136))));
       f.add(new Phrase("                                                                                                                                     ",FontFactory.getFont(FontFactory.HELVETICA, 9)));
       f.add(new Phrase(cm.cms("habitats_factsheet-pdf_05") + ": " + application.getInitParameter("LAST_UPDATE"),FontFactory.getFont(FontFactory.HELVETICA, 8, Font.ITALIC, new Color(24, 40, 136))));
       f.add(new Phrase("                                                                                                                                                                                                                                                          ", FontFactory.getFont(FontFactory.HELVETICA, 9)));
@@ -99,7 +99,7 @@
       report.init(linktopdf + filename);
 
       SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-      report.writeln(cm.cms("habitats_factsheet-pdf_06") + ": " + df.format(new Date()),FontFactory.getFont(FontFactory.HELVETICA, 8, Font.ITALIC, new Color(24, 40, 136)));
+      report.writeln(cm.cms("generated_on") + ": " + df.format(new Date()),FontFactory.getFont(FontFactory.HELVETICA, 8, Font.ITALIC, new Color(24, 40, 136)));
 
       PDFHabitatsFactsheet pdfFactsheet = new PDFHabitatsFactsheet( idHabitat, report, cm );
       pdfFactsheet.generateFactsheet();
@@ -121,14 +121,14 @@
      {
 %>
       showLoadingProgress( false );
-      updateText('<%=cm.cms("habitats_factsheet-pdf_54")%>');
+      updateText('<%=cm.cms("error_generating_pdf")%>');
 <%
      }
       else
      {
 %>
       showLoadingProgress( false );
-      updateText('<%=cm.cms("habitats_factsheet-pdf_55")%>');
+      updateText('<%=cm.cms("pdf_document_ready")%>');
 <%
      }
 %>
@@ -137,15 +137,15 @@
 <%
     out.flush();
 %>
-    <%=cm.cmsMsg("habitats_factsheet-pdf_54")%>
+    <%=cm.cmsMsg("error_generating_pdf")%>
     <%=cm.br()%>
-    <%=cm.cmsMsg("habitats_factsheet-pdf_55")%>
+    <%=cm.cmsMsg("pdf_document_ready")%>
     <%=cm.br()%>
 <%
     if(!error)
     {
 %>
-  <a target="_blank" href="temp/<%=filename%>"><%=cm.cmsText("habitats_factsheet-pdf_56")%></a>
+  <a target="_blank" href="temp/<%=filename%>"><%=cm.cmsText("open_pdf_document")%></a>
 <%
     }
     else
@@ -160,9 +160,9 @@
       }
       //-->
     </script>
-    <%=cm.cmsText("habitats_factsheet-pdf_57")%>
-    <a href="javascript:feedback();"><%=cm.cmsText("habitats_factsheet-pdf_58")%></a>.
-    <%=cm.cmsText("habitats_factsheet-pdf_59")%>
+    <%=cm.cmsText("please_let_us_know_about_error")%>
+    <a href="javascript:feedback();"><%=cm.cmsText("feedback")%></a>.
+    <%=cm.cmsText("thank_you")%>
 <%
     }
     out.flush();
@@ -175,20 +175,20 @@
     </p>
     <br />
     <br />
-    <input type="button" onclick="javascript:window.close();" value="<%=cm.cms("habitats_factsheet-pdf_61")%>" name="button" class="inputTextField">
-    <%=cm.cmsInput("habitats_factsheet-pdf_61")%>
+    <input type="button" onclick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" name="button" class="inputTextField">
+    <%=cm.cmsInput("close_btn")%>
 <%
   }
 %>
     <%=cm.br()%>
-    <%=cm.cmsMsg("habitats_factsheet-pdf_title")%>
+    <%=cm.cmsMsg("generating_pdf")%>
     <%=cm.br()%>
-    <%=cm.cmsMsg("habitats_factsheet-pdf_04")%>
+    <%=cm.cmsMsg("source_european_topic_centre")%>
     <%=cm.br()%>
     <%=cm.cmsMsg("habitats_factsheet-pdf_05")%>
     <%=cm.br()%>
-    <%=cm.cmsMsg("habitats_factsheet-pdf_06")%>
+    <%=cm.cmsMsg("generated_on")%>
     <%=cm.br()%>
-    <%=cm.cmsMsg("habitats_factsheet-pdf_01")%>
+    <%=cm.cmsMsg("generating_pdf_wait")%>
   </body>
 </html>

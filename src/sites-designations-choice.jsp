@@ -93,7 +93,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
-      <%=cm.cms("sites_designations-choice_title")%>
+      <%=cm.cms("list_of_values")%>
     </title>
     <script language="JavaScript" type="text/javascript">
       <!--
@@ -125,7 +125,7 @@
     {
 %>
     <u>
-      <%=cm.cms("sites_designations-choice_01")%>
+      <%=cm.cms("designation_name")%>
     </u>
     <em>
       <%=Utilities.ReturnStringRelatioOp(relationOp)%>
@@ -163,18 +163,18 @@
   {
 %>
     <strong>
-      <%=cm.cmsText("sites_designations-choice_02")%>
+      <%=cm.cmsText("no_results_found_1")%>
     </strong>
 <%
   }
 %>
     <br />
     <form action="">
-      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window_value")%>" title="<%=cm.cms("close_window_title")%>" id="button2" name="button" class="inputTextField" />
-      <%=cm.cmsTitle("close_window_title")%>
-      <%=cm.cmsInput("close_window_value")%>
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="inputTextField" />
+      <%=cm.cmsTitle("close_window")%>
+      <%=cm.cmsInput("close_btn")%>
     </form>
-    <%=cm.cmsMsg("sites_designations-choice_title")%>
+    <%=cm.cmsMsg("list_of_values")%>
     <%=cm.br()%>
     <%=cm.cmsMsg("list_of_values")%>
   </body>

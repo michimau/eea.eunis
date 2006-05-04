@@ -44,23 +44,23 @@
     {
 %>
         <br />
-        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_129")%></div>
-        <table summary="<%=cm.cms("sites_factsheet_129")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="human1" style="border-collapse:collapse">
+        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("human_activities")%></div>
+        <table summary="<%=cm.cms("human_activities")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="human1" style="border-collapse:collapse">
           <tr>
             <th class="resultHeader">
-              <%=cm.cmsText("sites_factsheet_130")%>
+              <%=cm.cmsText("activity")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("sites_factsheet_131")%>
+              <%=cm.cmsText("inside_outside")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("sites_factsheet_132")%>
+              <%=cm.cmsText("intensity")%>
             </th>
             <th class="resultHeader" style="text-align : right;">
-              <%=cm.cmsText("sites_factsheet_116")%>
+              <%=cm.cmsText("cover_percent")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("sites_factsheet_133")%>
+              <%=cm.cmsText("influence")%>
             </th>
           </tr>
 <%
@@ -136,31 +136,31 @@
     {
 %>
         <br />
-        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_129")%></div>
-        <table summary="<%=cm.cms("sites_factsheet_129")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="human" class="sortable">
+        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("human_activities")%></div>
+        <table summary="<%=cm.cms("human_activities")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="human" class="sortable">
           <tr>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
               <%=cm.cmsText("sites_factsheet_other_activitycode")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_other_description")%>
+              <%=cm.cmsText("description")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_other_location")%>
+              <%=cm.cmsText("location")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_other_intensity")%>
+              <%=cm.cmsText("intensity")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th style="text-align : right;" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cms("sites_factsheet_other_cover")%>
+              <%=cm.cms("cover_percent")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
             <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cms("sites_factsheet_other_influence")%>
+              <%=cm.cms("influence")%>
               <%=cm.cmsTitle("sort_results_on_this_column")%>
             </th>
           </tr>
@@ -250,20 +250,20 @@
     {
 %>
         <br />
-        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_134")%></div>
-        <table summary="<%=cm.cms("sites_factsheet_134")%>" border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse">
+        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("reference_to_maps")%></div>
+        <table summary="<%=cm.cms("reference_to_maps")%>" border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse">
           <tr>
             <th class="resultHeader">
-              <%=cm.cmsText("sites_factsheet_135")%>
+              <%=cm.cmsText("number")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("sites_factsheet_136")%>
+              <%=cm.cmsText("scale")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("sites_factsheet_137")%>
+              <%=cm.cmsText("projection")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("sites_factsheet_138")%>
+              <%=cm.cmsText("details")%>
             </th>
           </tr>
           <tr>
@@ -308,26 +308,26 @@
     {
 %>
         <br />
-        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_139")%></div>
-        <table summary="<%=cm.cms("sites_factsheet_139")%>" border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse">
+        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("reference_to_photos")%></div>
+        <table summary="<%=cm.cms("reference_to_photos")%>" border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse">
           <tr>
             <th class="resultHeader">
-                <%=cm.cmsText("sites_factsheet_127")%>
+                <%=cm.cmsText("type")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("sites_factsheet_135")%>
+              <%=cm.cmsText("number")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("sites_factsheet_140")%>
+              <%=cm.cmsText("location")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("sites_factsheet_141")%>
+              <%=cm.cmsText("description")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("sites_factsheet_142")%>
+              <%=cm.cmsText("date")%>
             </th>
             <th class="resultHeader">
-              <%=cm.cmsText("sites_factsheet_143")%>
+              <%=cm.cmsText("author")%>
             </th>
           </tr>
           <tr bgcolor="#EEEEEE">
@@ -371,7 +371,7 @@
 %>
           <tr bgcolor="#EEEEEE">
             <td>
-              <%=cm.cmsText("sites_factsheet_145")%>
+              <%=cm.cmsText("iucn_management")%>
             </td>
             <td>
               <%=Utilities.formatString(category)%>&nbsp;
@@ -384,7 +384,7 @@
 %>
           <tr bgcolor="#FFFFFF">
             <td>
-              <%=cm.cmsText("sites_factsheet_146")%>
+              <%=cm.cmsText("site_typology")%>
             </td>
             <td>
               <%=Utilities.formatString(typology)%>&nbsp;
@@ -397,7 +397,7 @@
 %>
           <tr bgcolor="#EEEEEE">
             <td>
-              <%=cm.cmsText("sites_factsheet_147")%>
+              <%=cm.cmsText("reference_document_number")%>
             </td>
             <td>
               <%=referenceDocNumber%>&nbsp;
@@ -405,7 +405,7 @@
           </tr>
           <tr bgcolor="#FFFFFF">
             <td>
-              <%=cm.cmsText("sites_factsheet_148")%>
+              <%=cm.cmsText("reference_document_source")%>
             </td>
             <td>
               <%=referenceDocSource%>&nbsp;
@@ -424,8 +424,8 @@
     ex.printStackTrace();
   }
 %>
-<%=cm.cmsMsg("sites_factsheet_129")%>
+<%=cm.cmsMsg("human_activities")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("sites_factsheet_134")%>
+<%=cm.cmsMsg("reference_to_maps")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("sites_factsheet_139")%>
+<%=cm.cmsMsg("reference_to_photos")%>

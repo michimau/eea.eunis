@@ -26,7 +26,7 @@
   <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,help_on_easy_search_location"/>
+      <jsp:param name="location" value="home#index.jsp,help_on_easy_search_location"/>
     </jsp:include>
     <%=cm.cmsText("generic_easy-help_01")%>
     <%=cm.br()%>

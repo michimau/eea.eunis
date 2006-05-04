@@ -27,7 +27,7 @@
     <div id="alignment">
     <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,sites_indicators_location" />
+      <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,indicators" />
       <jsp:param name="mapLink" value="show" />
     </jsp:include>
     <%=cm.cmsText("sites-indicators_01")%>

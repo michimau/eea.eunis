@@ -73,14 +73,14 @@
       <textarea title="<%=cm.cms("description")%>" name="description" id="description" rows="6" cols="60"  class="inputTextField"></textarea>
       <%=cm.cmsTitle("description")%>
       <br />      
-      <input title="<%=cm.cms("save")%>" id="input1" type="submit" name="Save" value="<%=cm.cms("save_btn")%>" class="inputTextField" />
+      <input title="<%=cm.cms("save")%>" id="input1" type="submit" name="Save" value="<%=cm.cms("save")%>" class="inputTextField" />
       <%=cm.cmsTitle("save")%>
-      <%=cm.cmsInput("save_btn")%>
-      <input title="<%=cm.cms("reset")%>" id="input2" type="reset" name="Reset" value="<%=cm.cms("reset_btn")%>" class="inputTextField" />
+      <%=cm.cmsInput("save")%>
+      <input title="<%=cm.cms("reset")%>" id="input2" type="reset" name="Reset" value="<%=cm.cms("reset")%>" class="inputTextField" />
       <%=cm.cmsTitle("reset")%>
-      <%=cm.cmsInput("reset_btn")%>
-      <input title="<%=cm.cms("close")%>" id="input3" type="button" name="Close" value="<%=cm.cms("close_btn")%>" class="inputTextField" onClick="window.close();" />
-      <%=cm.cmsTitle("close")%>
+      <%=cm.cmsInput("reset")%>
+      <input title="<%=cm.cms("close_window")%>" id="input3" type="button" name="Close" value="<%=cm.cms("close_btn")%>" class="inputTextField" onClick="window.close();" />
+      <%=cm.cmsTitle("close_window")%>
       <%=cm.cmsInput("close_btn")%>
     </form>
 <%

@@ -191,14 +191,14 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms( "generic_glossary-editor_title")%>
+      <%=cm.cms( "glossary_editor")%>
     </title>
   <body>
     <div id="outline">
     <div id="alignment">
     <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,services_location#services.jsp,glossary_editor_location#glossary-table.jsp,edit_glossary_location"/>
+      <jsp:param name="location" value="home#index.jsp,services#services.jsp,glossary_editor#glossary-table.jsp,edit_glossary_location"/>
     </jsp:include>
     <form name="addTerm" method="post" action="glossary-editor.jsp">
       <input type="hidden" name="action" value="save" />
@@ -210,9 +210,9 @@
         </tr>
         <tr>
           <td>
-            <input title="<%=cm.cms("reset_btn")%>" type="reset" name="reset" id="reset" value="<%=cm.cms("reset_btn")%>" class="inputTextField" />
+            <input title="<%=cm.cms("reset")%>" type="reset" name="reset" id="reset" value="<%=cm.cms("reset")%>" class="inputTextField" />
             &nbsp;&nbsp;&nbsp;
-            <input title="<%=cm.cms("save_btn")%>" type="submit" name="save" id="save" value="<%=cm.cms("save_btn")%>" class="inputTextField" />
+            <input title="<%=cm.cms("save")%>" type="submit" name="save" id="save" value="<%=cm.cms("save")%>" class="inputTextField" />
             &nbsp;&nbsp;&nbsp;
           </td>
         </tr>
@@ -221,19 +221,19 @@
             <table summary="layout" width="600" border="1" cellpadding="2" cellspacing="0" style="border-collapse:collapse" bgcolor="#EEEEEE">
               <tr bgcolor ="#EEEEEE">
                 <td width="200">
-                  <label for="term"><%=cm.cmsText("glossary_term")%></label>
+                  <label for="term"><%=cm.cmsText("term")%></label>
                 </td>
                 <td>
-                  <input type="text" title="<%=cm.cms("glossary_term")%>" name="term" id="term" size="50" value="<%=Utilities.formatString(termPersist.getTerm(), "")%>" class="inputTextField" />
+                  <input type="text" title="<%=cm.cms("term")%>" name="term" id="term" size="50" value="<%=Utilities.formatString(termPersist.getTerm(), "")%>" class="inputTextField" />
                 </td>
               </tr>
               <tr bgcolor ="#FFFFFF">
                 <td>
-                  <%=cm.cmsText( "generic_glossary-editor_02" )%>
+                  <%=cm.cmsText( "language" )%>
                 </td>
                 <td>
-                  <label for="idLanguage" class="noshow"><%=cm.cms("glossary_language")%></label>
-                  <select title="<%=cm.cms("glossary_language")%>" name="idLanguage" id="idLanguage" class="inputTextField">
+                  <label for="idLanguage" class="noshow"><%=cm.cms("language")%></label>
+                  <select title="<%=cm.cms("language")%>" name="idLanguage" id="idLanguage" class="inputTextField">
                     <%
                       for (int i = 0; i < languages.size(); i++)
                       {
@@ -246,68 +246,68 @@
                       }
                     %>
                   </select>
-                  <%=cm.cmsLabel("glossary_language")%>
+                  <%=cm.cmsLabel("language")%>
                 </td>
               </tr>
               <tr bgcolor="#EEEEEE">
                 <td>
-                  <label for="source"><%=cm.cmsText( "generic_glossary-editor_03" )%></label>
+                  <label for="source"><%=cm.cmsText( "source" )%></label>
                 </td>
                 <td>
-                  <input title="<%=cm.cms( "generic_glossary-editor_03" )%>" type="text" name="source" id="source" value="<%=Utilities.formatString(termPersist.getSource(), "")%>" size="50" class="inputTextField" />
-                </td>
-              </tr>
-              <tr bgcolor ="#FFFFFF">
-                <td>
-                  <label for="definition"><%=cm.cmsText( "generic_glossary-editor_04" )%></label>
-                </td>
-                <td>
-                  <textarea title="<%=cm.cms( "generic_glossary-editor_04" )%>" name="definition" id="definition" rows="5" cols="80" class="inputTextField"><%=Utilities.formatString(termPersist.getDefinition(), "")%></textarea>
-                </td>
-              </tr>
-              <tr bgcolor ="#EEEEEE">
-                <td>
-                  <label for="linkDescription"><%=cm.cmsText( "generic_glossary-editor_05" )%></label>
-                </td>
-                <td>
-                  <input title="<%=cm.cms( "generic_glossary-editor_05" )%>" type="text" name="linkDescription" id="linkDescription" value="<%=Utilities.formatString(termPersist.getLinkDescription(), "")%>" size="50" class="inputTextField" />
+                  <input title="<%=cm.cms( "source" )%>" type="text" name="source" id="source" value="<%=Utilities.formatString(termPersist.getSource(), "")%>" size="50" class="inputTextField" />
                 </td>
               </tr>
               <tr bgcolor ="#FFFFFF">
                 <td>
-                  <label for="link"><%=cm.cmsText( "generic_glossary-editor_06" )%></label>
+                  <label for="definition"><%=cm.cmsText( "definition" )%></label>
                 </td>
                 <td>
-                  <input title="<%=cm.cms( "generic_glossary-editor_06" )%>" type="text" name="link" id="link" value="<%=Utilities.formatString(termPersist.getLinkUrl(), "")%>" size="50" class="inputTextField" />
+                  <textarea title="<%=cm.cms( "definition" )%>" name="definition" id="definition" rows="5" cols="80" class="inputTextField"><%=Utilities.formatString(termPersist.getDefinition(), "")%></textarea>
                 </td>
               </tr>
               <tr bgcolor ="#EEEEEE">
                 <td>
-                  <label for="reference"><%=cm.cmsText( "generic_glossary-editor_07" )%></label>
+                  <label for="linkDescription"><%=cm.cmsText( "link_description" )%></label>
                 </td>
                 <td>
-                  <input title="<%=cm.cms( "generic_glossary-editor_07" )%>" type="text" name="reference" id="reference" value="<%=Utilities.formatString(termPersist.getReference(), "")%>" size="50" class="inputTextField" />
+                  <input title="<%=cm.cms( "link_description" )%>" type="text" name="linkDescription" id="linkDescription" value="<%=Utilities.formatString(termPersist.getLinkDescription(), "")%>" size="50" class="inputTextField" />
                 </td>
               </tr>
               <tr bgcolor ="#FFFFFF">
                 <td>
-                  <label for="dateChanged"><%=cm.cmsText( "generic_glossary-editor_08" )%></label>
+                  <label for="link"><%=cm.cmsText( "link" )%></label>
                 </td>
                 <td>
-                  <input title="<%=cm.cms( "generic_glossary-editor_08" )%>" type="text" name="dateChanged" id="dateChanged" value="<%=Utilities.formatString(termPersist.getDateChanged(), "")%>" size="50" class="inputTextField" />
-                </td>
-              </tr>
-              <tr bgcolor ="#EEEEEE">
-                <td>
-                  <label for="current"><%=cm.cmsText( "generic_glossary-editor_09" )%></label>
-                </td>
-                <td>
-                  <input title="<%=cm.cms( "generic_glossary-editor_09" )%>" type="checkbox" name="current" id="current" <%=(current) ? "checked=\"checked\"" : ""%> />
+                  <input title="<%=cm.cms( "link" )%>" type="text" name="link" id="link" value="<%=Utilities.formatString(termPersist.getLinkUrl(), "")%>" size="50" class="inputTextField" />
                 </td>
               </tr>
               <tr bgcolor ="#EEEEEE">
                 <td>
-                  <%=cm.cmsText( "generic_glossary-editor_10" )%>
+                  <label for="reference"><%=cm.cmsText( "reference" )%></label>
+                </td>
+                <td>
+                  <input title="<%=cm.cms( "reference" )%>" type="text" name="reference" id="reference" value="<%=Utilities.formatString(termPersist.getReference(), "")%>" size="50" class="inputTextField" />
+                </td>
+              </tr>
+              <tr bgcolor ="#FFFFFF">
+                <td>
+                  <label for="dateChanged"><%=cm.cmsText( "date_changed" )%></label>
+                </td>
+                <td>
+                  <input title="<%=cm.cms( "date_changed" )%>" type="text" name="dateChanged" id="dateChanged" value="<%=Utilities.formatString(termPersist.getDateChanged(), "")%>" size="50" class="inputTextField" />
+                </td>
+              </tr>
+              <tr bgcolor ="#EEEEEE">
+                <td>
+                  <label for="current"><%=cm.cmsText( "current" )%></label>
+                </td>
+                <td>
+                  <input title="<%=cm.cms( "current" )%>" type="checkbox" name="current" id="current" <%=(current) ? "checked=\"checked\"" : ""%> />
+                </td>
+              </tr>
+              <tr bgcolor ="#EEEEEE">
+                <td>
+                  <%=cm.cmsText( "domain" )%>
                 </td>
                 <td>
                   <label for="SPECIES" class="noshow"><%=cm.cms("glossary_species")%></label>
@@ -323,15 +323,15 @@
               </tr>
               <tr bgcolor ="#FFFFFF">
                 <td>
-                  <%=cm.cmsText( "generic_glossary-editor_11" )%>
+                  <%=cm.cmsText( "search_domain" )%>
                 </td>
                 <td>
-                  <label for="EASY" class="noshow"><%=cm.cms("glossary_easy")%></label>
-                  <input title="<%=cm.cms("glossary_easy")%>" type="checkbox" name="EASY" id="EASY" <%=searchDomain.lastIndexOf("EASY") >= 0 ? "checked" : ""%> /><%=cm.cmsText("glossary_easy")%><br />
-                  <%=cm.cmsLabel("glossary_easy")%>
-                  <label for="ADVANCED" class="noshow"><%=cm.cms("glossary_advanced")%></label>
-                  <input title="<%=cm.cms("glossary_advanced")%>" type="checkbox" name="ADVANCED" id="ADVANCED" <%=searchDomain.lastIndexOf("EASY") >= 0 ? "checked" : ""%> /><%=cm.cmsText("glossary_advanced")%><br />
-                  <%=cm.cmsLabel("glossary_advanced")%>
+                  <label for="EASY" class="noshow"><%=cm.cms("easy_search")%></label>
+                  <input title="<%=cm.cms("easy_search")%>" type="checkbox" name="EASY" id="EASY" <%=searchDomain.lastIndexOf("EASY") >= 0 ? "checked" : ""%> /><%=cm.cmsText("easy_search")%><br />
+                  <%=cm.cmsLabel("easy_search")%>
+                  <label for="ADVANCED" class="noshow"><%=cm.cms("advanced_search")%></label>
+                  <input title="<%=cm.cms("advanced_search")%>" type="checkbox" name="ADVANCED" id="ADVANCED" <%=searchDomain.lastIndexOf("EASY") >= 0 ? "checked" : ""%> /><%=cm.cmsText("advanced_search")%><br />
+                  <%=cm.cmsLabel("advanced_search")%>
                 </td>
               </tr>
             </table>
@@ -339,15 +339,15 @@
         </tr>
         <tr>
           <td>
-            <input title="<%=cm.cms("reset_btn")%>" type="reset" name="reset" id="reset2" value="Reset" class="inputTextField" />
+            <input title="<%=cm.cms("reset")%>" type="reset" name="reset" id="reset2" value="Reset" class="inputTextField" />
             &nbsp;&nbsp;&nbsp;
-            <input title="<%=cm.cms("save_btn")%>" type="submit" name="save" id="save2" value="Save" class="inputTextField" />
+            <input title="<%=cm.cms("save")%>" type="submit" name="save" id="save2" value="Save" class="inputTextField" />
             &nbsp;&nbsp;&nbsp;
           </td>
         </tr>
       </table>
     </form>
-    <%=cm.cmsMsg( "generic_glossary-editor_title")%>
+    <%=cm.cmsMsg( "glossary_editor")%>
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="glossary-editor.jsp" />
     </jsp:include>

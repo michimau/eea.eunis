@@ -138,7 +138,7 @@
   <script language="JavaScript" src="script/index.js" type="text/javascript"></script>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms( "generic_index_title" )%>
+    <%=cm.cms( "welcome_to_eunis_database" )%>
   </title>
   </head>
   <body>
@@ -146,34 +146,34 @@
     <div id="bodydiv2">
       <div id="container">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location"/>
+      <jsp:param name="location" value="home"/>
     </jsp:include>
-    <%=cm.cmsText("headline")%>
+    <%=cm.cmsText("generic_index_07")%>
       <div id="leftnav">
         <div class="mainlabel180_1">
           <strong>
-          <%=cm.cmsText( "generic_index_01" )%>
+          <%=cm.cmsText( "general_information" )%>
           </strong>
         </div>
         <ul>
           <li>
-            <a title="<%=cm.cms("generic_index_02_title")%>" href="introduction.jsp"><%=cm.cmsText( "generic_index_02" )%></a><%=cm.cmsTitle("generic_index_02")%>
+            <a title="<%=cm.cms("introduction_to_eunis")%>" href="introduction.jsp"><%=cm.cmsText( "introduction" )%></a><%=cm.cmsTitle("introduction")%>
           </li>
           <li>
-            <a title="<%=cm.cms("generic_index_03_title")%>" href="about.jsp"><%=cm.cmsText( "generic_index_03" )%></a><%=cm.cmsTitle("generic_index_03_title")%>
+            <a title="<%=cm.cms("about_eunis_database")%>" href="about.jsp"><%=cm.cmsText( "generic_about_title" )%></a><%=cm.cmsTitle("about_eunis_database")%>
           </li>
           <li>
             <a title="<%=cm.cms("generic_index_04_title")%>" href="howto.jsp"><%=cm.cmsText( "generic_index_04" )%></a><%=cm.cmsTitle("generic_index_04_title")%>
           </li>
           <li>
-            <a title="<%=cm.cms("generic_index_05_title")%>" href="eunis-map.jsp"><%=cm.cmsText( "generic_index_05" )%></a><%=cm.cmsTitle("generic_index_05_title")%>
+            <a title="<%=cm.cms("web_site_map")%>" href="eunis-map.jsp"><%=cm.cmsText( "web_site_map" )%></a><%=cm.cmsTitle("web_site_map")%>
           </li>
           <li>
-            <img src="images/mini/help.jpg" border="0" width="13" height="16" align="middle" alt="<%=cm.cms("generic_index_tutorials_alt")%>" /><%=cm.cmsAlt("generic_index_tutorials_alt")%>
-            <a title="<%=cm.cms("generic_index_tutorials_title")%>" href="tutorials.jsp"><%=cm.cmsText( "generic_index_tutorials" )%></a><%=cm.cmsTitle("generic_index_tutorials_title")%>
+            <img src="images/mini/help.jpg" border="0" width="13" height="16" style="vertical-align:middle" alt="<%=cm.cms("generic_index_tutorials_alt")%>" /><%=cm.cmsAlt("generic_index_tutorials_alt")%>
+            <a title="<%=cm.cms("generic_index_tutorials_title")%>" href="tutorials.jsp"><%=cm.cmsText( "index_tutorials" )%></a><%=cm.cmsTitle("generic_index_tutorials_title")%>
           </li>
           <li>
-            <a title="<%=cm.cms("generic_index_news_title")%>" href="news.jsp"><%=cm.cmsText( "generic_index_news" )%></a><%=cm.cmsTitle("generic_index_news_title")%>
+            <a title="<%=cm.cms("generic_index_news_title")%>" href="news.jsp"><%=cm.cmsText( "news" )%></a><%=cm.cmsTitle("generic_index_news_title")%>
           </li>
         </ul>
         <div class="between"></div>
@@ -188,7 +188,7 @@
   {
 %>
           <li>
-            <a href="index.jsp?operation=logout" title="<%=cm.cms("generic_index_08_title")%>"><%=cm.cmsText( "generic_index_08" )%></a><%=cm.cmsTitle("generic_index_08_title")%>
+            <a href="index.jsp?operation=logout" title="<%=cm.cms("logout")%>"><%=cm.cmsText( "logout" )%></a><%=cm.cmsTitle("logout")%>
             (<strong><%=SessionManager.getUsername()%></strong>)
           </li>
 <%
@@ -197,20 +197,20 @@
   {
 %>
           <li>
-            <a href="login.jsp" title="<%=cm.cms("generic_index_11_title")%>"><%=cm.cmsText( "generic_index_11" )%></a><%=cm.cmsTitle("generic_index_11_title")%>
+            <a href="login.jsp" title="<%=cm.cms("login")%>"><%=cm.cmsText( "login" )%></a><%=cm.cmsTitle("login")%>
           </li>
 <%
   }
 %>
           <li>
-            <a title="<%=cm.cms("generic_index_09_title")%>" href="services.jsp"><%=cm.cmsText( "generic_index_09" )%></a><%=cm.cmsTitle("generic_index_09_title")%>
+            <a title="<%=cm.cms("generic_index_09_title")%>" href="services.jsp"><%=cm.cmsText( "services" )%></a><%=cm.cmsTitle("generic_index_09_title")%>
             <br />
-            <%=cm.cmsText( "generic_index_10" )%>
+            <%=cm.cmsText( "generic_index_07" )%>
           </li>
           <li>
-            <a title="<%=cm.cms("generic_index_13_title")%>" href="preferences.jsp"><%=cm.cmsText("generic_index_13")%></a><%=cm.cmsTitle("generic_index_13_title")%>
+            <a title="<%=cm.cms("user_preferences")%>" href="preferences.jsp"><%=cm.cmsText("user_preferences")%></a><%=cm.cmsTitle("user_preferences")%>
             <br />
-            <%=cm.cmsText("generic_index_14")%>
+            <%=cm.cmsText("generic_index_07")%>
           </li>
         </ul>
         <div class="between"></div>
@@ -237,19 +237,19 @@
           <input type="hidden" name="sort" value="<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>" />
           <input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
           <div class="search_style">
-            <label for="scientificName" class="noshow"><%=cm.cms("index_species_name_label")%></label>
+            <label for="scientificName" class="noshow"><%=cm.cms("species_name")%></label>
             <input title="Species name" id="scientificName" name="scientificName" class="textInputColorMain" size="24" />
-            <%=cm.cmsLabel("index_species_name_label")%>
-            <label for="search_species" class="noshow"><%=cm.cms("index_search_species_label")%></label>
-            <input id="search_species" name="search_species" type="image" title="<%=cm.cms("index_search_species_title")%>" src="images/<%=magnifyIMG%>" alt="<%=cm.cms("index_search_species_alt")%>" align="top" style="margin-top:1px;" />
-            <%=cm.cmsLabel("index_search_species_label")%>
-            <%=cm.cmsTitle("index_search_species_title")%>
-            <%=cm.cmsAlt("index_search_species_alt")%>
+            <%=cm.cmsLabel("species_name")%>
+            <label for="search_species" class="noshow"><%=cm.cms("search_species")%></label>
+            <input id="search_species" name="search_species" type="image" title="<%=cm.cms("search_species")%>" src="images/<%=magnifyIMG%>" alt="<%=cm.cms("search_species")%>" align="top" style="margin-top:1px;" />
+            <%=cm.cmsLabel("search_species")%>
+            <%=cm.cmsTitle("search_species")%>
+            <%=cm.cmsAlt("search_species")%>
           </div>
-          <!--<a title="Go to Species module" href="species.jsp"><%=cm.cmsText( "generic_index_15" )%></a>&nbsp;-->
-          <strong><%=cm.cmsText( "generic_index_15" )%></strong>&nbsp;
+          <!--<a title="Go to Species module" href="species.jsp"><%=cm.cmsText( "species" )%></a>&nbsp;-->
+          <strong><%=cm.cmsText( "species" )%></strong>&nbsp;
           <br /><br />
-          <a title="<%=cm.cms("index_species_search_tools_title")%>" href="species.jsp"><%=cm.cmsText("index_species_search_tools")%></a><%=cm.cmsTitle("index_species_search_tools_title")%>
+          <a title="<%=cm.cms("index_species_search_tools_title")%>" href="species.jsp"><%=cm.cmsText("search_tools")%></a><%=cm.cmsTitle("index_species_search_tools_title")%>
           <div class="search_details">
             <%=cm.cmsText( "generic_index_16" )%>
           </div>
@@ -266,24 +266,24 @@
           <input type="hidden" name="useVernacular" value="true" />
           <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
           <div class="search_style">
-            <label for="searchString" class="noshow"><%=cm.cms("index_habitat_type_name_label")%></label>
-            <input title="<%=cm.cms("index_habitat_type_name_title")%>" id="searchString" name="searchString" class="textInputColorMain" size="24" />
-            <%=cm.cmsLabel("index_habitat_type_name_label")%>
-            <%=cm.cmsTitle("index_habitat_type_name_title")%>
+            <label for="searchString" class="noshow"><%=cm.cms("habitat_type_name")%></label>
+            <input title="<%=cm.cms("habitat_type_name")%>" id="searchString" name="searchString" class="textInputColorMain" size="24" />
+            <%=cm.cmsLabel("habitat_type_name")%>
+            <%=cm.cmsTitle("habitat_type_name")%>
 
-            <label for="search_habitat_types" class="noshow"><%=cm.cms("index_search_habitats_label")%></label>
-            <input type="image" src="images/<%=magnifyIMG%>" id="search_habitat_types" name="search_habitat_types" alt="<%=cm.cms("index_search_habitats_alt")%>" title="<%=cm.cms("index_search_habitats_title")%>" align="top" style="margin-top:1px;" />
-            <%=cm.cmsLabel("index_search_habitats_label")%>
-            <%=cm.cmsAlt("index_search_habitats_alt")%>
-            <%=cm.cmsTitle("index_search_habitats_title")%>
+            <label for="search_habitat_types" class="noshow"><%=cm.cms("search_habitat_type")%></label>
+            <input type="image" src="images/<%=magnifyIMG%>" id="search_habitat_types" name="search_habitat_types" alt="<%=cm.cms("search_habitat_type")%>" title="<%=cm.cms("search_habitat_type")%>" align="top" style="margin-top:1px;" />
+            <%=cm.cmsLabel("search_habitat_type")%>
+            <%=cm.cmsAlt("search_habitat_type")%>
+            <%=cm.cmsTitle("search_habitat_type")%>
           </div>
-          <!--<a href="habitats.jsp" title="Go to Habitat types module"><%=cm.cmsText( "generic_index_17" )%></a>&nbsp;-->
-          <strong><%=cm.cmsText( "generic_index_17" )%></strong>&nbsp;
+          <!--<a href="habitats.jsp" title="Go to Habitat types module"><%=cm.cmsText( "habitat_types" )%></a>&nbsp;-->
+          <strong><%=cm.cmsText( "habitat_types" )%></strong>&nbsp;
           <br /><br />
-          <a title="<%=cm.cms("index_habitats_search_tools_title")%>" href="habitats.jsp"><%=cm.cms("index_habitats_search_tools")%></a>
+          <a title="<%=cm.cms("index_habitats_search_tools_title")%>" href="habitats.jsp"><%=cm.cms("search_tools")%></a>
           <%=cm.cmsTitle("index_habitats_search_tools_title")%>
           <div class="search_details">
-            <%=cm.cmsText( "generic_index_18" )%>
+            <%=cm.cmsText( "information_about_habitats" )%>
           </div>
         </form>
         <span class="separator"></span>
@@ -307,42 +307,42 @@
           <input type="hidden" name="DB_EMERALD" value="ON" />
           <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
           <div class="search_style">
-            <label for="englishName" class="noshow"><%=cm.cms("index_site_name_label")%></label>
-            <input title="<%=cm.cms("index_site_name_title")%>" id="englishName" name="englishName" class="textInputColorMain" size="24" />
-            <%=cm.cmsLabel("index_site_name_label")%>
-            <%=cm.cmsTitle("index_site_name_title")%>
+            <label for="englishName" class="noshow"><%=cm.cms("site_name")%></label>
+            <input title="<%=cm.cms("site_name")%>" id="englishName" name="englishName" class="textInputColorMain" size="24" />
+            <%=cm.cmsLabel("site_name")%>
+            <%=cm.cmsTitle("site_name")%>
             <label for="search_sites" class="noshow"><%=cm.cms("index_search_sites_label")%></label>
             <input type="image" id="search_sites" name="search_sites" alt="Search sites" title="Search sites" src="images/<%=magnifyIMG%>" align="top" style="margin-top:1px;" />
             <%=cm.cmsLabel("index_search_sites_label")%>
           </div>
-          <!--<a href="sites.jsp" title="Go to Sites module"><%=cm.cmsText( "generic_index_19" )%></a>&nbsp;-->
-          <strong><%=cm.cmsText( "generic_index_19" )%></strong>&nbsp;
+          <!--<a href="sites.jsp" title="Go to Sites module"><%=cm.cmsText( "sites" )%></a>&nbsp;-->
+          <strong><%=cm.cmsText( "sites" )%></strong>&nbsp;
           <br /><br />
-          <a title="<%=cm.cms("index_sites_search_tools_title")%>" href="sites.jsp"><%=cm.cms("index_sites_search_tools")%></a>
+          <a title="<%=cm.cms("index_sites_search_tools_title")%>" href="sites.jsp"><%=cm.cms("search_tools")%></a>
           <%=cm.cmsTitle("index_sites_search_tools_title")%>
           <div class="search_details" style="margin-bottom: 40px;">
-            <%=cm.cmsText( "generic_index_20" )%>
+            <%=cm.cmsText( "information_collected_from_various_databases" )%>
           </div>
         </form>
         <a href="combined-search.jsp" title="<%=cm.cms("generic_index_21_title")%>"><%=cm.cmsText( "generic_index_21" )%></a>
         <%=cm.cmsTitle("generic_index_21_title")%>
         <div class="search_details" style="margin-bottom: 40px;">
-          <%=cm.cmsText( "generic_index_22" )%>
+          <%=cm.cmsText( "advanced_crosssearch_tool_linking_species_habitats_sites" )%>
         </div>
-        <a href="gis-tool.jsp" title="<%=cm.cms("generic_index_27_title")%>"><%=cm.cmsText( "generic_index_27" )%></a>
-        <%=cm.cmsTitle("generic_index_27_title")%>
+        <a href="gis-tool.jsp" title="<%=cm.cms("gis_tool_interactive_maps")%>"><%=cm.cmsText( "generic_index_27" )%></a>
+        <%=cm.cmsTitle("gis_tool_interactive_maps")%>
         &nbsp;
-        <a href="gis-tool.jsp" title="<%=cm.cms("index_gis_tool_title")%>"><img src="images/<%=compassIMG%>" width="29" height="29" style="width : 29px; height : 29px; border : 0px; vertical-align : middle;" alt="<%=cm.cms("index_gis_tool_title")%>" title="<%=cm.cms("index_gis_tool_title")%>" /></a>
-        <%=cm.cmsTitle("index_gis_tool_title")%>
+        <a href="gis-tool.jsp" title="<%=cm.cms("gis_tool_interactive_maps")%>"><img src="images/<%=compassIMG%>" width="29" height="29" style="width : 29px; height : 29px; border : 0px; vertical-align : middle;" alt="<%=cm.cms("gis_tool_interactive_maps")%>" title="<%=cm.cms("gis_tool_interactive_maps")%>" /></a>
+        <%=cm.cmsTitle("gis_tool_interactive_maps")%>
         <br />
         <%=cm.cms("generic_index_maps")%>
       </div>
       <div id="rightnav">
         <div class="imageprint">
-          <img height="350" width="216" title="" alt="<%=cm.cms("index_photo_alt")%>" src="images/intros/<%=Utilities.getIntroImage( application )%>" align="middle" />
+          <img height="350" width="216" title="" alt="<%=cm.cms("index_photo_alt")%>" src="images/intros/<%=Utilities.getIntroImage( application )%>" style="vertical-align:middle" />
         </div>
       </div>
-      <%=cm.cmsMsg("generic_index_title")%>
+      <%=cm.cmsMsg("welcome_to_eunis_database")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="index.jsp" />
       </jsp:include>

@@ -130,7 +130,7 @@
     <div id="content">
     <div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,sites_location#sites.jsp,designation_factsheet_location"/>
+      <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,designation_factsheet_location"/>
     </jsp:include>
     <img alt="<%=cm.cms("loading_data")%>" id="loading" src="images/loading.gif" />
     <br />
@@ -151,7 +151,7 @@
             <tr align="center">
               <td>
                 <h1>
-                  <%=cm.cmsText( "sites_designations-factsheet_01" )%> : <%=fromWho%>
+                  <%=cm.cmsText( "designation_type" )%> : <%=fromWho%>
                 </h1>
               </td>
             </tr>
@@ -161,14 +161,14 @@
             <tr bgcolor="#CCCCCC">
               <td colspan="2">
                 <strong>
-                  <%=cm.cmsText( "sites_designations-factsheet_03" )%>
+                  <%=cm.cmsText( "general_information" )%>
                 </strong>
               </td>
             </tr>
             <%--Code--%>
             <tr bgcolor="#EEEEEE">
               <td width="30%">
-                <%=cm.cmsText( "sites_designations-factsheet_04" )%>
+                <%=cm.cmsText( "code_column" )%>
               </td>
               <td width="70%">
                 &nbsp;
@@ -180,7 +180,7 @@
             <!--Source data set-->
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=cm.cmsText( "sites_designations-factsheet_05" )%>
+                <%=cm.cmsText( "source_data_set" )%>
               </td>
               <td>
                 &nbsp;
@@ -206,7 +206,7 @@
                    if(Utilities.isCountry(country))
                    {
                 %>
-                <a href="javascript:goToCountryStatistics('<%=country%>')" title="<%=cm.cms("open_statistical_data_for")%> <%=country%>"><strong><%=country%></strong></a><%=cm.cmsTitle("open_statistical_data_for")%>&nbsp;
+                <a href="javascript:goToCountryStatistics('<%=country%>')" title="<%=cm.cms("open_the_statistical_data_for")%> <%=country%>"><strong><%=country%></strong></a><%=cm.cmsTitle("open_the_statistical_data_for")%>&nbsp;
                 <%
                    } else {
                 %>
@@ -294,7 +294,7 @@
             </tr>
             <tr bgcolor="#EEEEEE">
               <td>
-                <%=cm.cmsText( "sites_designations-factsheet_13" )%>
+                <%=cm.cmsText( "total_area_ha" )%>
               </td>
               <td>
                 &nbsp;
@@ -371,13 +371,13 @@
             <tr bgcolor="#CCCCCC">
               <td colspan="2">
                 <strong>
-                  <%=cm.cmsText( "sites_designations-factsheet_19" )%>
+                  <%=cm.cmsText( "references" )%>
                 </strong>
               </td>
             </tr>
             <tr bgcolor="#EEEEEE">
               <td width="161">
-                <%=cm.cmsText( "sites_designations-factsheet_20" )%>
+                <%=cm.cmsText( "source" )%>
               </td>
               <td width="579">
                 &nbsp;
@@ -580,7 +580,7 @@
 <%
   }
 %>
-                <table summary="<%=cm.cms("designation_factsheet_sites")%>" width="100%" border="0" cellspacing="0" cellpadding="0" id="sitesx" class="sortable">
+                <table summary="<%=cm.cms("sites")%>" width="100%" border="0" cellspacing="0" cellpadding="0" id="sitesx" class="sortable">
                   <tr>
                     <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
                       <strong>
@@ -590,7 +590,7 @@
                     </th>
                     <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
                       <strong>
-                        <%=cm.cmsText( "sites_designations-factsheet_05" )%>
+                        <%=cm.cmsText( "source_data_set" )%>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </strong>
                     </th>
@@ -602,7 +602,7 @@
                     </th>
                     <th class="resultHeader" width="50%">
                       <strong>
-                        <%=cm.cmsText( "sites_designations-factsheet_29" )%>
+                        <%=cm.cmsText( "site_name" )%>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </strong>
                     </th>
@@ -680,7 +680,7 @@
     <%=cm.br()%>
     <%=cm.cmsMsg("loading_data")%>
     <%=cm.br()%>
-    <%=cm.cmsMsg("designation_factsheet_sites")%>
+    <%=cm.cmsMsg("sites")%>
     <%=cm.br()%>
     <jsp:include page="footer.jsp">
       <jsp:param name="page_name" value="designations-factsheet.jsp" />

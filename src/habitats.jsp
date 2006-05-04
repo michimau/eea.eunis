@@ -20,11 +20,11 @@
   <%
     WebContentManagement cm = SessionManager.getWebContent();
     int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
-    String []tabs = { cm.cms("habitats_tab_easy_search"), cm.cms("habitats_tab_advanced_search"), cm.cms("habitats_tab_links"), cm.cms("habitats_tab_help") };
+    String []tabs = { cm.cms("easy_search"), cm.cms("advanced_search"), cm.cms("links_and_downloads"), cm.cms("help") };
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("habitats_main_title")%>
+    <%=cm.cms("habitat_type_search")%>
   </title>
 </head>
 
@@ -33,14 +33,14 @@
   <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,habitats_location" />
+  <jsp:param name="location" value="home#index.jsp,habitat_types" />
 </jsp:include>
 <div id="loading" class="dynamic_content">
 <%=cm.cms("loading_data")%>
 </div>
 <div style="width : 100%;">
   <h1 align="center">
-    <%=cm.cmsText("habitats_main_habitatsSearch")%>
+    <%=cm.cmsText("habitat_type_search")%>
   </h1>
   <h2 align="center">
     <%=cm.cmsText("habitats_main_description")%>
@@ -67,14 +67,14 @@
     <%=cm.cmsTitle("habitat_to_search_for")%>
     <%=cm.cmsInput("enter_habitat_name_here")%>
     <input type="submit"
-           value="<%=cm.cms("habitats_main_btnSearch")%>"
+           value="<%=cm.cms("search")%>"
            name="Submit"
            id="Submit"
            class="inputTextField"
            title="Search" />
-    <%=cm.cmsInput("habitats_main_btnSearch")%>
-    <a href="fuzzy-search-help.jsp" title="<%=cm.cms("help_on_fuzzy_search")%>"><img alt="<%=cm.cms("help_on_fuzzy_search")%>" title="<%=cm.cms("help_on_fuzzy_search")%>" src="images/mini/help.jpg" border="0" align="middle" /></a>
-    <%=cm.cmsTitle("help_on_fuzzy_search")%>
+    <%=cm.cmsInput("search")%>
+    <a href="fuzzy-search-help.jsp" title="<%=cm.cms("help_fuzzy_search")%>"><img alt="<%=cm.cms("help_fuzzy_search")%>" title="<%=cm.cms("help_fuzzy_search")%>" src="images/mini/help.jpg" border="0" style="vertical-align:middle" /></a>
+    <%=cm.cmsTitle("help_fuzzy_search")%>
   </form>
 <br />
 </div>
@@ -120,8 +120,8 @@
 </tr>
 <tr bgcolor="#EEEEEE">
   <td width="40%" style="white-space:nowrap">
-    <img alt="<%=cm.cms("habitats_main_names")%>" src="images/mini/bulletb.gif" width="6" height="6" align="middle" /><%=cm.cmsTitle("habitats_main_names")%>
-    <a title="<%=cm.cms("habitats_main_namesDesc")%>" href="habitats-names.jsp"><strong><%=cm.cmsText("habitats_main_names")%></strong></a>
+    <img alt="<%=cm.cms("names_and_descriptions")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("names_and_descriptions")%>
+    <a title="<%=cm.cms("habitats_main_namesDesc")%>" href="habitats-names.jsp"><strong><%=cm.cmsText("names_and_descriptions")%></strong></a>
     <%=cm.cmsTitle("habitats_main_namesDesc")%>
   </td>
   <td width="60%">
@@ -130,8 +130,8 @@
 </tr>
 <tr bgcolor="#FFFFFF">
   <td style="white-space:nowrap">
-    <img alt="<%=cm.cms("habitats_main_legal")%>" src="images/mini/bulletb.gif" width="6" height="6" align="middle" /><%=cm.cmsTitle("habitats_main_legal")%>
-    <a title="<%=cm.cms("habitats_main_legalDesc")%>"  href="habitats-legal.jsp"><strong><%=cm.cmsText("habitats_main_legal")%></strong></a>
+    <img alt="<%=cm.cms("legal_instruments")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("legal_instruments")%>
+    <a title="<%=cm.cms("habitats_main_legalDesc")%>"  href="habitats-legal.jsp"><strong><%=cm.cmsText("legal_instruments")%></strong></a>
     <%=cm.cmsTitle("habitats_main_legalDesc")%>
   </td>
   <td>
@@ -140,8 +140,8 @@
 </tr>
 <tr bgcolor="#EEEEEE">
   <td style="white-space:nowrap">
-    <img alt="<%=cm.cms("habitats_main_country")%>" src="images/mini/bulletb.gif" width="6" height="6" align="middle" /><%=cm.cmsTitle("habitats_main_country")%>
-    <a title="<%=cm.cms("habitats_main_countryDesc")%>"  href="habitats-country.jsp"><strong><%=cm.cmsText("habitats_main_country")%></strong></a>
+    <img alt="<%=cm.cms("country_biogeographic_region_location")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("country_biogeographic_region_location")%>
+    <a title="<%=cm.cms("habitats_main_countryDesc")%>"  href="habitats-country.jsp"><strong><%=cm.cmsText("country_biogeographic_region_location")%></strong></a>
     <%=cm.cmsTitle("habitats_main_countryDesc")%>
   </td>
   <td>
@@ -150,8 +150,8 @@
 </tr>
 <tr bgcolor="#FFFFFF">
   <td style="white-space:nowrap">
-    <img alt="<%=cm.cms("habitats_main_code")%>" src="images/mini/bulletb.gif" width="6" height="6" align="middle" /><%=cm.cmsTitle("habitats_main_code")%>
-    <a title="<%=cm.cms("habitats_main_codeDesc")%>"  href="habitats-code.jsp"><strong><%=cm.cmsText("habitats_main_code")%></strong></a>
+    <img alt="<%=cm.cms("code_classifications")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("code_classifications")%>
+    <a title="<%=cm.cms("habitats_main_codeDesc")%>"  href="habitats-code.jsp"><strong><%=cm.cmsText("code_classifications")%></strong></a>
     <%=cm.cmsTitle("habitats_main_codeDesc")%>
   </td>
   <td>
@@ -160,8 +160,8 @@
 </tr>
 <tr bgcolor="#EEEEEE">
   <td style="white-space:nowrap">
-    <img alt="<%=cm.cms("habitats_main_showSpecies")%>" src="images/mini/bulletb.gif" width="6" height="6" align="middle" /><%=cm.cmsTitle("habitats_main_showSpecies")%>
-    <a title="<%=cm.cms("habitats_main_showSpeciesDesc")%>"  href="species-habitats.jsp"><strong><%=cm.cmsText("habitats_main_showSpecies")%></strong></a>
+    <img alt="<%=cm.cms("pick_habitat_types_show_species")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("pick_habitat_types_show_species")%>
+    <a title="<%=cm.cms("habitats_main_showSpeciesDesc")%>"  href="species-habitats.jsp"><strong><%=cm.cmsText("pick_habitat_types_show_species")%></strong></a>
     <%=cm.cmsTitle("habitats_main_showSpeciesDesc")%>
   </td>
   <td>
@@ -170,8 +170,8 @@
 </tr>
 <tr bgcolor="#FFFFFF">
   <td style="white-space:nowrap">
-    <img alt="<%=cm.cms("habitats_main_showSites")%>" src="images/mini/bulletb.gif" width="6" height="6" align="middle" /><%=cm.cmsTitle("habitats_main_showSites")%>
-    <a title="<%=cm.cms("habitats_main_showSitesDesc")%>"  href="sites-habitats.jsp"><strong><%=cm.cmsText("habitats_main_showSites")%></strong></a>
+    <img alt="<%=cm.cms("pick_habitat_types_show_sites")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("pick_habitat_types_show_sites")%>
+    <a title="<%=cm.cms("habitats_main_showSitesDesc")%>"  href="sites-habitats.jsp"><strong><%=cm.cmsText("pick_habitat_types_show_sites")%></strong></a>
     <%=cm.cmsTitle("habitats_main_showSitesDesc")%>
   </td>
   <td>
@@ -180,7 +180,7 @@
 </tr>
 <tr bgcolor="#EEEEEE">
   <td style="white-space:nowrap">
-    <img alt="<%=cm.cms("habitats_main_showReferences")%>" src="images/mini/bulletb.gif" width="6" height="6" align="middle" /><%=cm.cmsTitle("habitats_main_showReferences")%>
+    <img alt="<%=cm.cms("habitats_main_showReferences")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_showReferences")%>
     <a title="<%=cm.cms("habitats_main_showReferencesDesc")%>"  href="habitats-books.jsp"><strong><%=cm.cmsText("habitats_main_showReferences")%></strong></a>
     <%=cm.cmsTitle("habitats_main_showReferencesDesc")%>
   </td>
@@ -190,8 +190,8 @@
 </tr>
 <tr bgcolor="#FFFFFF">
   <td style="white-space:nowrap">
-    <img alt="<%=cm.cms("habitats_main_showHabitats")%>" src="images/mini/bulletb.gif" width="6" height="6" align="middle" /><%=cm.cmsTitle("habitats_main_showHabitats")%>
-    <a title="<%=cm.cms("habitats_main_showHabitatsDesc")%>"  href="habitats-references.jsp"><strong><%=cm.cmsText("habitats_main_showHabitats")%></strong></a>
+    <img alt="<%=cm.cms("pick_references_show_habitat_types")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("pick_references_show_habitat_types")%>
+    <a title="<%=cm.cms("habitats_main_showHabitatsDesc")%>"  href="habitats-references.jsp"><strong><%=cm.cmsText("pick_references_show_habitat_types")%></strong></a>
     <%=cm.cmsTitle("habitats_main_showHabitatsDesc")%>
   </td>
   <td>
@@ -200,7 +200,7 @@
 </tr>
 <tr bgcolor="#EEEEEE">
   <td style="white-space:nowrap">
-    <img alt="<%=cm.cms("habitats_main_key")%>" src="images/mini/bulletb.gif" width="6" height="6" align="middle" /><%=cm.cmsTitle("habitats_main_key")%>
+    <img alt="<%=cm.cms("habitats_main_key")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_key")%>
     <a title="<%=cm.cms("habitats_main_keyDesc")%>"  href="habitats-key.jsp"><strong><%=cm.cmsText("habitats_main_key")%></strong></a>
     <%=cm.cmsTitle("habitats_main_keyDesc")%>
   </td>
@@ -210,7 +210,7 @@
 </tr>
 <tr bgcolor="#FFFFFF">
   <td style="white-space:nowrap">
-    <img alt="<%=cm.cms("habitats_main_EUNIShierarchy")%>" src="images/mini/bulletb.gif" width="6" height="6" align="middle" /><%=cm.cmsTitle("habitats_main_EUNIShierarchy")%>
+    <img alt="<%=cm.cms("habitats_main_EUNIShierarchy")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_EUNIShierarchy")%>
     <a title="<%=cm.cms("habitats_main_EUNIShierarchyDesc")%>"  href="habitats-code-browser.jsp"><strong><%=cm.cmsText("habitats_main_EUNIShierarchy")%></strong></a>
     <%=cm.cmsTitle("habitats_main_EUNIShierarchyDesc")%>
   </td>
@@ -220,7 +220,7 @@
 </tr>
 <tr bgcolor="#EEEEEE">
   <td style="white-space:nowrap">
-    <img alt="<%=cm.cms("habitats_main_ANNEXhierarchy")%>" src="images/mini/bulletb.gif" width="6" height="6" align="middle" /><%=cm.cmsTitle("habitats_main_ANNEXhierarchy")%>
+    <img alt="<%=cm.cms("habitats_main_ANNEXhierarchy")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_ANNEXhierarchy")%>
     <a title="<%=cm.cms("habitats_main_ANNEXhierarchyDesc")%>"  href="habitats-annex1-browser.jsp"><strong><%=cm.cmsText("habitats_main_ANNEXhierarchy")%></strong></a>
     <%=cm.cmsTitle("habitats_main_ANNEXhierarchyDesc")%>
   </td>
@@ -252,7 +252,7 @@
     </tr>
     <tr bgcolor="#EEEEEE">
       <td width="40%" style="white-space:nowrap">
-        <img alt="" src="images/mini/bulletb.gif" width="6" height="6" align="middle" />
+        <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
         <a title="<%=cm.cms("habitats_main_advSearchSearchDesc")%>"  href="habitats-advanced.jsp?natureobject=Habitat"><strong><%=cm.cmsText("advanced_search")%></strong></a>
         <%=cm.cmsTitle("habitats_main_advSearchSearchDesc")%>
       </td>
@@ -262,8 +262,8 @@
     </tr>
     <tr bgcolor="#FFFFFF">
       <td style="white-space:nowrap">
-        <img alt="<%=cm.cms("habitats_main_advSearchHelp")%>" src="images/mini/bulletb.gif" width="6" height="6" align="middle" /><%=cm.cmsTitle("habitats_main_advSearchHelp")%>
-        <a title="<%=cm.cms("habitats_main_advSearchHelpDesc")%>"  href="advanced-help.jsp"><strong><%=cm.cmsText("habitats_main_advSearchHelp")%></strong></a>
+        <img alt="<%=cm.cms("how_to_use_advanced_search")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("how_to_use_advanced_search")%>
+        <a title="<%=cm.cms("habitats_main_advSearchHelpDesc")%>"  href="advanced-help.jsp"><strong><%=cm.cmsText("how_to_use_advanced_search")%></strong></a>
         <%=cm.cmsTitle("habitats_main_advSearchHelpDesc")%>
       </td>
       <td>
@@ -286,7 +286,7 @@
   <table summary="Links and downloads" cellspacing="1" cellpadding="3" width="100%" border="0">
     <tr>
       <th width="40%">
-        <%=cm.cmsText("habitats_links_to_data_downloads")%>
+        <%=cm.cmsText("links_to_data_downloads")%>
       </th>
       <th width="60%">
         <%=cm.cmsText("description")%>
@@ -294,17 +294,17 @@
     </tr>
     <tr bgcolor="#EEEEEE">
       <td width="40%">
-        <img alt="<%=cm.cms("links_and_downloads_page_link")%>" src="images/mini/bulletb.gif" width="6" height="6" align="middle" /><%=cm.cmsTitle("links_and_downloads_page_link")%>
-        <a title="<%=cm.cms("links_and_downloads_page_link")%>"  href="habitats-download.jsp"><strong><%=cm.cmsText("links_and_downloads_page_link")%></strong></a>
-        <%=cm.cmsTitle("links_and_downloads_page_link")%>
+        <img alt="<%=cm.cms("links_and_downloads_2")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("links_and_downloads_2")%>
+        <a title="<%=cm.cms("links_and_downloads_2")%>"  href="habitats-download.jsp"><strong><%=cm.cmsText("links_and_downloads_2")%></strong></a>
+        <%=cm.cmsTitle("links_and_downloads_2")%>
       </td>
       <td width="60%">
-        <%=cm.cmsText("links_and_downloads_page_link")%>
+        <%=cm.cmsText("links_and_downloads_2")%>
       </td>
     </tr>
     <tr bgcolor="#FFFFFF">
       <td style="white-space:nowrap">
-        <img alt="Habitat type indicators" src="images/mini/bulletb.gif" width="6" height="6" align="middle" />
+        <img alt="Habitat type indicators" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
           <%=cm.cmsText("habitats_main_indicators")%>
       </td>
       <td>
@@ -319,7 +319,7 @@
 %>
   <span style="text-align : center; width : 640px;">
           <span class="fontNormal">
-            <%=cm.cmsText("habitats_main_helpDesc") %>
+            <%=cm.cmsText("general_information_on_eunis") %>
           </span>
         </span>
   <br />
@@ -327,7 +327,7 @@
   <table summary="Help" cellspacing="1" cellpadding="3" width="100%" border="0" class="fontNormal">
     <tr bgcolor="#EEEEEE">
       <th width="40%" style="white-space:nowrap">
-        <%=cm.cmsText("habitats_links_to_help")%>
+        <%=cm.cmsText("links_to_online_help")%>
       </th>
       <th width="60%">
         <%=cm.cmsText("description")%>
@@ -335,7 +335,7 @@
     </tr>
     <tr bgcolor="#EEEEEE">
       <td width="40%" style="white-space:nowrap">
-        <img alt="<%=cm.cms("habitats_main_easyHelp")%>" src="images/mini/bulletb.gif" width="6" height="6" align="middle" /><%=cm.cmsTitle("habitats_main_easyHelp")%>
+        <img alt="<%=cm.cms("habitats_main_easyHelp")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_easyHelp")%>
         <a title="<%=cm.cms("habitats_main_easyHelpDesc")%>"  href="easy-help.jsp"><strong><%=cm.cmsText("habitats_main_easyHelp")%></strong></a>
         <%=cm.cmsTitle("habitats_main_easyHelpDesc")%>
       </td>
@@ -345,8 +345,8 @@
     </tr>
     <tr bgcolor="#FFFFFF">
       <td style="white-space:nowrap">
-        <img alt="<%=cm.cms("habitats_main_glossary")%>" src="images/mini/bulletb.gif" width="6" height="6" align="middle" /><%=cm.cmsTitle("habitats_main_glossary")%>
-        <a title="<%=cm.cms("habitats_main_glossaryDesc")%>"  href="glossary.jsp?module=habitat"><strong><%=cm.cmsText("habitats_main_glossary")%></strong></a>
+        <img alt="<%=cm.cms("glossary")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("glossary")%>
+        <a title="<%=cm.cms("habitats_main_glossaryDesc")%>"  href="glossary.jsp?module=habitat"><strong><%=cm.cmsText("glossary")%></strong></a>
         <%=cm.cmsTitle("habitats_main_glossaryDesc")%>
       </td>
       <td>
@@ -355,8 +355,8 @@
     </tr>
     <tr bgcolor="#EEEEEE">
       <td style="white-space:nowrap">
-        <img alt="<%=cm.cms("habitats_main_howTo")%>" src="images/mini/bulletb.gif" width="6" height="6" align="middle" /><%=cm.cmsTitle("habitats_main_howTo")%>
-        <a title="<%=cm.cms("habitats_main_howToDesc")%>"  href="habitats-help.jsp"><strong><%=cm.cmsText("habitats_main_howTo")%></strong></a>
+        <img alt="<%=cm.cms("how_to_use")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("how_to_use")%>
+        <a title="<%=cm.cms("habitats_main_howToDesc")%>"  href="habitats-help.jsp"><strong><%=cm.cmsText("how_to_use")%></strong></a>
         <%=cm.cmsTitle("habitats_main_howToDesc")%>
       </td>
       <td>
@@ -368,19 +368,19 @@
   }
 %>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitats_main_title")%>
+<%=cm.cmsMsg("habitat_type_search")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("easy_searches")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("advanced_searches")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitats_tab_easy_search")%>
+<%=cm.cmsMsg("easy_search")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitats_tab_advanced_search")%>
+<%=cm.cmsMsg("advanced_search")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitats_tab_links")%>
+<%=cm.cmsMsg("links_and_downloads")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitats_tab_help")%>
+<%=cm.cmsMsg("help")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("loading_data")%>
 <%=cm.br()%>

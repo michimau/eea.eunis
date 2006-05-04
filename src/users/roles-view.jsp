@@ -26,7 +26,7 @@
 {
 %>
 <h1>
-  <%=cm.cmsText("roles_view_01")%>
+  <%=cm.cmsText("eunis_database_user_management")%>
 </h1>
 <br />
 <h2>
@@ -48,7 +48,7 @@
   if(SQL_DRV == null || SQL_URL==null || SQL_USR == null || SQL_PWD==null )
   {
 %>
-    <%=cm.cmsText("roles_view_03")%>
+    <%=cm.cmsText("error_web_xml_missing_required_values")%>
 <%
     return;
   }
@@ -75,7 +75,7 @@ if(roles != null && roles.size() > 0)
   <tr>
     <td style="text-align:left">
      <strong>
-      <%=cm.cmsText("roles_view_04")%>
+      <%=cm.cmsText("righ_name")%>
      </strong>
     </td>
   <%
@@ -86,10 +86,10 @@ if(roles != null && roles.size() > 0)
   %>
     <td style="text-align:center" <%=tooltip%>>
       <strong>
-      <a href="users.jsp?tab1=1&amp;tab2=1&amp;roleName=<%=role.getRoleName()%>" title="<%=cm.cms("roles_view_05")%>">
+      <a href="users.jsp?tab1=1&amp;tab2=1&amp;roleName=<%=role.getRoleName()%>" title="<%=cm.cms("edit_role")%>">
         <%=UsersUtility.getNameNice(role.getRoleName())%>
       </a>
-      <%=cm.cmsTitle("roles_view_05")%>
+      <%=cm.cmsTitle("edit_role")%>
       </strong>    
     </td>
   <%
@@ -106,10 +106,10 @@ if(roles != null && roles.size() > 0)
   %>
   <tr>
     <td style="text-align:left" <%=tooltip%>>
-      <a href="users.jsp?tab1=1&amp;tab2=3&amp;rightName=<%=right.getRightName()%>" title="<%=cm.cms("roles_view_06")%>">
+      <a href="users.jsp?tab1=1&amp;tab2=3&amp;rightName=<%=right.getRightName()%>" title="<%=cm.cms("edit_right")%>">
        <%=UsersUtility.getNameNice(right.getRightName())%>
       </a>
-      <%=cm.cmsTitle("roles_view_06")%>
+      <%=cm.cmsTitle("edit_right")%>
     </td>
   <%
      for(int i=0;i<roles.size();i++)
@@ -117,10 +117,10 @@ if(roles != null && roles.size() > 0)
         RolesPersist role = (RolesPersist)roles.get(i);
     %>
     <td style="text-align:center">
-       <label for="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" class="noshow"><%=cm.cms("roles_view_07")%></label>
-       <input id="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" title="<%=cm.cms("roles_view_07")%>" alt="<%=cm.cms("roles_view_07")%>" name="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" type="checkbox" value="checkbox" <%=(UsersUtility.ObjectIsInVector(UsersUtility.getRolesRightsName(role.getRoleName()),right.getRightName())?"checked=\"checked\"":"")%> disabled="disabled" />
-       <%=cm.cmsLabel("roles_view_07")%>
-       <%=cm.cmsTitle("roles_view_07")%>
+       <label for="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" class="noshow"><%=cm.cms("choose_a_right")%></label>
+       <input id="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" title="<%=cm.cms("choose_a_right")%>" alt="<%=cm.cms("choose_a_right")%>" name="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" type="checkbox" value="checkbox" <%=(UsersUtility.ObjectIsInVector(UsersUtility.getRolesRightsName(role.getRoleName()),right.getRightName())?"checked=\"checked\"":"")%> disabled="disabled" />
+       <%=cm.cmsLabel("choose_a_right")%>
+       <%=cm.cmsTitle("choose_a_right")%>
     </td>
   <%
     }
@@ -140,7 +140,7 @@ if(roles != null && roles.size() > 0)
 } else
   {
 %>
-  <strong><%=cm.cmsText("roles_view_08")%></strong>
+  <strong><%=cm.cmsText("not_authenticated_no_rights_1")%></strong>
 <br />
 <%
   }

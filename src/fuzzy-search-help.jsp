@@ -27,10 +27,10 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp, help_on_fuzzy_search_location"/>
+        <jsp:param name="location" value="home#index.jsp,help_fuzzy_search"/>
         <jsp:param name="mapLink" value="show"/>
       </jsp:include>
-      <h1><%=cm.cmsText("help_on_fuzzy_search")%></h1>
+      <h1><%=cm.cmsText("help_fuzzy_search")%></h1>
       <br />
       <a href="javascript:history.go(-1);" title="<%=cm.cms("return_to_previous_page")%>"><%=cm.cmsText("back")%></a><%=cm.cmsTitle("return_to_previous_page")%>
       <br />

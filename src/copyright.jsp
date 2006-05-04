@@ -31,19 +31,19 @@
   <div id="alignment">
   <div id="content">
   <jsp:include page="header-dynamic.jsp">
-    <jsp:param name="location" value="home_location#index.jsp,copyright_and_disclaimer_title"/>
+    <jsp:param name="location" value="home#index.jsp,copyright_and_disclaimer_title"/>
   </jsp:include>
   <%=cm.cmsText("generic_copyright_01")%>
-  <table summary="<%=cm.cms("copyright_references")%>" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%">
+  <table summary="<%=cm.cms("references")%>" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%">
   <tr>
     <th width="40%" class="resultHeader">
-      <%=cm.cmsText("copyright_author")%>
+      <%=cm.cmsText("author")%>
     </th>
     <th width="50%" class="resultHeader">
-      <%=cm.cmsText("copyright_title")%>
+      <%=cm.cmsText("title")%>
     </th>
     <th width="10%" class="resultHeader" align="center">
-      <%=cm.cmsText("copyright_publication_date")%>
+      <%=cm.cmsText("publication_date")%>
     </th>
   </tr>
   <%
@@ -98,19 +98,19 @@
   %>
   <tr>
     <th width="40%" class="resultHeader">
-      <%=cm.cmsText("copyright_author")%>
+      <%=cm.cmsText("author")%>
     </th>
     <th width="50%" class="resultHeader">
-      <%=cm.cmsText("copyright_title")%>
+      <%=cm.cmsText("title")%>
     </th>
     <th width="10%" class="resultHeader" style="text-align : center;">
-      <%=cm.cmsText("copyright_publication_date")%>
+      <%=cm.cmsText("publication_date")%>
     </th>
   </tr>
 </table>
   <%=cm.cmsMsg("copyright_and_disclaimer_title")%>
   <%=cm.br()%>
-  <%=cm.cmsMsg("copyright_references")%>
+  <%=cm.cmsMsg("references")%>
   <%=cm.br()%>
   <jsp:include page="footer.jsp">
     <jsp:param name="page_name" value="copyright.jsp"/>

@@ -30,7 +30,7 @@
       Integer typeForm = Utilities.checkedStringToInt(formBean.getTypeForm(), NameSearchCriteria.CRITERIA_SCIENTIFIC);
     %>
     <title>
-      <%=cm.cms("species_names-choice_pageTitle")%>
+      <%=cm.cms("list_of_values")%>
     </title>
       <script language="JavaScript" src="script/header.js" type="text/javascript"></script> 
       <script language="JavaScript" type="text/javascript">
@@ -67,23 +67,23 @@
   {
 %>
           <strong>
-            <%=cm.cmsText("species_names-choice_notResults")%>.
+            <%=cm.cmsText("no_results_found")%>.
           </strong>
           <br />
 <%
   }
   else
   {
-%>    <h2><%=cm.cmsText("species_names-choice_01_Text")%></h2>
+%>    <h2><%=cm.cmsText("list_of_values_for")%></h2>
       <u>
-        <%=cm.cmsText("species_names-choice_criteria")%>
+        <%=cm.cmsText("species_vernacular_name")%>
       </u>
       <em><%=Utilities.ReturnStringRelatioOp(oper)%></em>
       <strong><%=formBean.getVernacularName()%></strong>
       <br />
       <br />
       <div id="tab">
-      <table summary="<%=cm.cms("species_names-choice_02_Sum")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+      <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
     Iterator it = species.iterator();
     int i = 0;
@@ -100,8 +100,8 @@
 %>
               <tr style="background-color:<%=bgColor%>">
                 <td>
-                  <a title="<%=cm.cms("species_names-choice_03_Title")%>" href="javascript:setLine('<%=((Chm62edtReportAttributesPersist)specie).getValue()%>');"><%=((Chm62edtReportAttributesPersist)specie).getValue()%></a>
-                  <%=cm.cmsTitle("species_names-choice_03_Title")%>
+                  <a title="<%=cm.cms("choose_this_value")%>" href="javascript:setLine('<%=((Chm62edtReportAttributesPersist)specie).getValue()%>');"><%=((Chm62edtReportAttributesPersist)specie).getValue()%></a>
+                  <%=cm.cmsTitle("choose_this_value")%>
                 </td>
               </tr>
 <%
@@ -111,8 +111,8 @@
 %>
               <tr style="background-color:<%=bgColor%>">
                   <td>
-                      <a title="<%=cm.cms("species_names-choice_03_Title")%>" href="javascript:setLine('<%=((VernacularNamesPersist)specie).getValue()%>');"><%=((VernacularNamesPersist)specie).getValue()%></a>
-                      <%=cm.cmsTitle("species_names-choice_03_Title")%>
+                      <a title="<%=cm.cms("choose_this_value")%>" href="javascript:setLine('<%=((VernacularNamesPersist)specie).getValue()%>');"><%=((VernacularNamesPersist)specie).getValue()%></a>
+                      <%=cm.cmsTitle("choose_this_value")%>
                   </td>
               </tr>
 <%
@@ -128,14 +128,14 @@
 %>
     <br />
     <form action="">
-      <input title="<%=cm.cms("species_names-choice_btnClose_Title")%>" id="button" type="button" value="<%=cm.cms("species_names-choice_btnClose")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
-      <%=cm.cmsTitle("species_names-choice_btnClose_Title")%>
-      <%=cm.cmsInput("species_names-choice_btnClose")%>
+      <input title="<%=cm.cms("close_window")%>" id="button" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
+      <%=cm.cmsTitle("close_window")%>
+      <%=cm.cmsInput("close_btn")%>
     </form>
   <%=cm.br()%>
-  <%=cm.cmsMsg("species_names-choice_pageTitle")%>
+  <%=cm.cmsMsg("list_of_values")%>
   <%=cm.br()%>
-  <%=cm.cmsMsg("species_names-choice_02_Sum")%>
+  <%=cm.cmsMsg("list_of_values")%>
   <%=cm.br()%>
   </body>
 </html>

@@ -45,10 +45,10 @@ Notes:
 <table summary="<%=cm.cms("habitat_other_information")%>" border="1" cellspacing="0" width="90%" id="table<%=infoID%>" style="border-collapse : collapse;">
   <tr bgcolor="#DDDDDD">
     <th class="resultHeader" width="25%">
-       <%=cm.cmsText("habitats_factsheet-other_02")%>
+       <%=cm.cmsText("name")%>
     </th>
     <th class="resultHeader" width="75%">
-      <%=cm.cmsText("habitats_factsheet-other_03")%>
+      <%=cm.cmsText("description")%>
     </th>
   </tr>
   <%

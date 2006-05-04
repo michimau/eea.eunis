@@ -79,14 +79,14 @@
   <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitats_references_location#habitats-books.jsp,results_location" />
+  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,pick_habitat_type_show_references#habitats-books.jsp,results" />
   <jsp:param name="helpLink" value="habitats-help.jsp" />
   <jsp:param name="downloadLink" value="<%=tsvLink%>" />
 </jsp:include>
 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td>
-<h1><%=cm.cmsText("habitats_books-result_01")%></h1>
+<h1><%=cm.cmsText("pick_habitat_type_show_references")%></h1>
 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
   <%
     // Set search description
@@ -115,7 +115,7 @@
                return;
            }
        %>
-<%=cm.cmsText("habitats_books-result_04")%>:&nbsp;<strong><%=resultsCount%></strong>
+<%=cm.cmsText("results_found_1")%>:&nbsp;<strong><%=resultsCount%></strong>
 <%
   // Prepare parameters for pagesize.jsp
   Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
@@ -142,7 +142,7 @@
   <tr>
     <td bgcolor="#EEEEEE">
       <strong>
-        <%=cm.cmsText("habitats_books-result_05")%>
+        <%=cm.cmsText("refine_your_search")%>
       </strong>
     </td>
   </tr>
@@ -152,34 +152,34 @@
         <%=formBean.toFORMParam(filterSearch)%>
         <label for="criteriaType" class="noshow"><%=cm.cms("Criteria")%></label>
         <select title="<%=cm.cms("Criteria")%>" name="criteriaType" id="criteriaType" class="inputTextField">
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_AUTHOR%>"><%=cm.cms("habitats_books-result_06")%></option>
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_DATE%>"><%=cm.cms("habitats_books-result_07")%></option>
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_TITLE%>" selected="selected"><%=cm.cms("habitats_books-result_08")%></option>
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_EDITOR%>"><%=cm.cms("habitats_books-result_09")%></option>
-          <option value="<%=ReferencesSearchCriteria.CRITERIA_PUBLISHER%>"><%=cm.cms("habitats_books-result_10")%></option>
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_AUTHOR%>"><%=cm.cms("author")%></option>
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_DATE%>"><%=cm.cms("date")%></option>
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_TITLE%>" selected="selected"><%=cm.cms("title")%></option>
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_EDITOR%>"><%=cm.cms("editor")%></option>
+          <option value="<%=ReferencesSearchCriteria.CRITERIA_PUBLISHER%>"><%=cm.cms("publisher")%></option>
         </select>
         <%=cm.cmsLabel("criteria")%>
-        <%=cm.cmsInput("habitats_books-result_06")%>
-        <%=cm.cmsInput("habitats_books-result_07")%>
-        <%=cm.cmsInput("habitats_books-result_08")%>
-        <%=cm.cmsInput("habitats_books-result_09")%>
-        <%=cm.cmsInput("habitats_books-result_10")%>
+        <%=cm.cmsInput("author")%>
+        <%=cm.cmsInput("date")%>
+        <%=cm.cmsInput("title")%>
+        <%=cm.cmsInput("editor")%>
+        <%=cm.cmsInput("publisher")%>
         <label for="oper" class="noshow"><%=cm.cms("operator")%></label>
         <select title="<%=cm.cms("operator")%>" name="oper" id="oper" class="inputTextField">
-          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("habitats_books-result_11")%></option>
-          <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("habitats_books-result_12")%></option>
-          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("habitats_books-result_13")%></option>
+          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("is")%></option>
+          <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("starts_with")%></option>
+          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
         </select>
         <%=cm.cmsLabel("operator")%>
-        <%=cm.cmsInput("habitats_books-result_11")%>
-        <%=cm.cmsInput("habitats_books-result_12")%>
-        <%=cm.cmsInput("habitats_books-result_13")%>
-        <label for="criteriaSearch" class="noshow"><%=cm.cms("search_value")%></label>
-        <input title="<%=cm.cms("search_value")%>" type="text" name="criteriaSearch" id="criteriaSearch" size="30" class="inputTextField" />
-        <%=cm.cmsTitle("search_value")%>
-        <input title="<%=cm.cms("search")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("habitats_books-result_14")%>" class="inputTextField" />
+        <%=cm.cmsInput("is")%>
+        <%=cm.cmsInput("starts_with")%>
+        <%=cm.cmsInput("contains")%>
+        <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
+        <input title="<%=cm.cms("filter_value")%>" type="text" name="criteriaSearch" id="criteriaSearch" size="30" class="inputTextField" />
+        <%=cm.cmsTitle("filter_value")%>
+        <input title="<%=cm.cms("search")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("search")%>" class="inputTextField" />
         <%=cm.cmsTitle("search")%>
-        <%=cm.cmsInput("habitats_books-result_14")%>
+        <%=cm.cmsInput("search")%>
       </form>
     </td>
   </tr>
@@ -190,7 +190,7 @@
   %>
   <tr>
     <td bgcolor="#EEEEEE">
-      <%=cm.cmsText("habitats_books-result_15")%>:
+      <%=cm.cmsText("applied_filters_to_the_results")%>:
     </td>
   </tr>
   <%
@@ -202,7 +202,7 @@
   <tr>
     <td bgcolor="#CCCCCC">
       <a <%=cm.cms("delete_filter")%> href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>">
-        <img src="images/mini/delete.jpg" alt="<%=cm.cms("delete_filter")%>" border="0" align="middle" />
+        <img src="images/mini/delete.jpg" alt="<%=cm.cms("delete_filter")%>" border="0" style="vertical-align:middle" />
       </a>
       <%=cm.cmsTitle("delete_filter")%>&nbsp;&nbsp;
       <strong class="linkDarkBg"><%= i + ". " + criteria.toHumanString()%></strong>
@@ -252,39 +252,39 @@
 <tr>
   <th class="resultHeader" width="16%">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsText("habitats_books-result_06")%>
+      <%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsText("author")%>
     </a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <th class="resultHeader" width="7%" style="text-align : center;">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortDate)%><%=cm.cmsText("habitats_books-result_07")%>
+      <%=Utilities.getSortImageTag(sortDate)%><%=cm.cmsText("date")%>
     </a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <th title="<%=cm.cms("sort_results_on_this_column")%>" class="resultHeader" width="19%">
     <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle))%>">
-      <%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsText("habitats_books-result_08")%>
+      <%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsText("title")%>
     </a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <th class="resultHeader" width="19%">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsText("habitats_books-result_09")%>
+      <%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsText("editor")%>
     </a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <th class="resultHeader" width="20%">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsText("habitats_books-result_10")%>
+      <%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsText("publisher")%>
     </a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <th class="resultHeader" width="15%" style="text-align : center;">
-    <%=cm.cmsText("habitats_books-result_16")%>
+    <%=cm.cmsText("source_type")%>
   </th>
   <th class="resultHeader" width="20%" style="text-align : center;">
-    <%=cm.cmsText("habitats_books-result_17")%>
+    <%=cm.cmsText("habitat_types_1")%>
   </th>
 </tr>
 <%
@@ -356,39 +356,39 @@
 <tr>
   <th class="resultHeader" width="16%">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsText("habitats_books-result_06")%>
+      <%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsText("author")%>
     </a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <th class="resultHeader" width="7%" style="text-align : center;">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortDate)%><%=cm.cmsText("habitats_books-result_07")%>
+      <%=Utilities.getSortImageTag(sortDate)%><%=cm.cmsText("date")%>
     </a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <th class="resultHeader" width="19%">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle))%>">
-      <%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsText("habitats_books-result_08")%>
+      <%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsText("title")%>
     </a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <th class="resultHeader" width="19%">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsText("habitats_books-result_09")%>
+      <%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsText("editor")%>
     </a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <th class="resultHeader" width="20%">
     <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsText("habitats_books-result_10")%>
+      <%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsText("publisher")%>
     </a>
     <%=cm.cmsTitle("sort_results_on_this_column")%>
   </th>
   <th class="resultHeader" width="15%" style="text-align : center;">
-    <%=cm.cmsText("habitats_books-result_16")%>
+    <%=cm.cmsText("source_type")%>
   </th>
   <th class="resultHeader" width="20%" style="text-align : center;">
-    <%=cm.cmsText("habitats_books-result_17")%>
+    <%=cm.cmsText("habitat_types_1")%>
   </th>
 </tr>
 </table>

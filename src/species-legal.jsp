@@ -197,7 +197,7 @@
             }
             if(fromWhere == '1')
             {
-              if(trim(document.eunis2.groupName.value) == '') alert('<%=cm.cms("please_select_group")%>');
+              if(trim(document.eunis2.groupName.value) == '') alert('<%=cm.cms("please_select_a_group")%>');
               document.eunis2.action = 'species-legal.jsp';
               document.eunis2.submit();
             }
@@ -231,7 +231,7 @@
   <div id="alignment">
   <div id="content">
     <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home_location#index.jsp,species_location#species.jsp,legal_instruments_location" />
+      <jsp:param name="location" value="home#index.jsp,species#species.jsp,legal_instruments" />
       <jsp:param name="helpLink" value="species-help.jsp" />
     </jsp:include>
     <table summary="layout" width="100%" border="0">
@@ -250,7 +250,7 @@
             <tr>
               <td style="background-color:#EEEEEE">
                 <strong>
-                  <%=cm.cmsText("species_legal_17")%>
+                  <%=cm.cmsText("search_will_provide_2")%>
                 </strong>
               </td>
             </tr>
@@ -276,22 +276,22 @@
   }
 %>
                 <input title="<%=cm.cms("scientific_name")%>" id="checkbox1" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" />
-                  <label for="checkbox1"><%=cm.cmsText("species_legal_18")%></label>
+                  <label for="checkbox1"><%=cm.cmsText("scientific_name")%></label>
                   <%=cm.cmsTitle("scientific_name")%>
                 <input title="<%=cm.cms("group")%>" id="checkbox2" type="checkbox" name="showGroup" value="true" <%=ckShowGroup ? "checked=\"checked\"" : ""%> />
-                  <label for="checkbox2"><%=cm.cmsText("species_legal_19")%></label>
+                  <label for="checkbox2"><%=cm.cmsText("group")%></label>
                   <%=cm.cmsTitle("group")%>
                 <input title="<%=cm.cms("legal_text")%>" id="checkbox3" type="checkbox" name="showLegalText" value="true" <%=ckShowLegalText ? "checked=\"checked\"" : ""%> />
-                  <label for="checkbox3"><%=cm.cmsText("species_legal_20")%></label>
+                  <label for="checkbox3"><%=cm.cmsText("legal_text")%></label>
                   <%=cm.cmsTitle("legal_text")%>
                 <input title="<%=cm.cms("abbreviation")%>" id="checkbox4" type="checkbox" name="showAbbreviation" value="true" <%=ckShowAbbreviation ? "checked=\"checked\"" : ""%> />
-                  <label for="checkbox4"><%=cm.cmsText("species_legal_21")%></label>
+                  <label for="checkbox4"><%=cm.cmsText("abbreviation")%></label>
                   <%=cm.cmsTitle("abbreviation")%>
                 <input title="<%=cm.cms("comment")%>" id="checkbox5" type="checkbox" name="showComment" value="true" <%=ckShowComment ? "checked=\"checked\"" : ""%> />
                   <label for="checkbox5"><%=cm.cmsText("comment")%></label>
                   <%=cm.cmsTitle("comment")%>
                 <input title="<%=cm.cms("url")%>" id="checkbox6" type="checkbox" name="showURL" value="true" <%=ckShowURL ? "checked=\"checked\"" : ""%> />
-                  <label for="checkbox6"><%=cm.cmsText("species_legal_22")%></label>
+                  <label for="checkbox6"><%=cm.cmsText("url")%></label>
                   <%=cm.cmsTitle("url")%>
               </td>
             </tr>
@@ -302,14 +302,14 @@
                 <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
                 <%=cm.cmsAlt("field_mandatory")%>
                 <strong>
-                  <%=cm.cmsText("species_legal_23")%>
+                  <%=cm.cmsText("group")%>
                 </strong>
               </td>
               <td style="vertical-align:bottom" colspan="2">
                 <label for="select1" class="noshow"><%=cm.cms("group_name")%></label>
                 <select id="select1" title="<%=cm.cms("group_name")%>" name="groupName" onchange="groupNameChanged();" class="inputTextField">
-                  <option value="" <%if (LegalSearchCriteria.CRITERIA_LEGAL.toString().equals(request.getParameter("typeForm")) && null == groupID) {%>selected="selected"<%}%>><%=cm.cms("species_legal_24")%></option>
-                  <option value="any" <%if (LegalSearchCriteria.CRITERIA_LEGAL.toString().equals(request.getParameter("typeForm")) && null != groupID && groupID.equalsIgnoreCase("any")){%>selected="selected"<%}%>><%=cm.cms("species_legal_25")%></option>
+                  <option value="" <%if (LegalSearchCriteria.CRITERIA_LEGAL.toString().equals(request.getParameter("typeForm")) && null == groupID) {%>selected="selected"<%}%>><%=cm.cms("please_select_a_group")%></option>
+                  <option value="any" <%if (LegalSearchCriteria.CRITERIA_LEGAL.toString().equals(request.getParameter("typeForm")) && null != groupID && groupID.equalsIgnoreCase("any")){%>selected="selected"<%}%>><%=cm.cms("any_group")%></option>
                   <% // Find all groups
                   List speciesNames2 = GroupspeciesDomain.findOrderBy("ID_GROUP_SPECIES");
                   Iterator it2 = speciesNames2.iterator();
@@ -328,7 +328,7 @@
                    if ( !groupID.equalsIgnoreCase( "" ) )
                    {
               %>
-              <td style="vertical-align:bottom">&nbsp;&nbsp;<strong><%=cm.cmsText("species_legal_26")%></strong></td>
+              <td style="vertical-align:bottom">&nbsp;&nbsp;<strong><%=cm.cmsText("and")%></strong></td>
               <%
                   } else
                   {
@@ -349,7 +349,7 @@
                 <br />
                 <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
                 <%=cm.cmsAlt("field_mandatory")%>
-                <strong><%=cm.cmsText("species_legal_27")%></strong>
+                <strong><%=cm.cmsText("legal_text")%></strong>
               </td>
               <%
               } else
@@ -410,11 +410,10 @@
                     <td colspan="5">&nbsp;
                      <br />
                       <input title="<%=cm.cms("save_criteria")%>" id="saveCriteria1" type="checkbox" name="saveCriteria" value="true" <%=sv%> />
-                      <label for="saveCriteria1"><%=cm.cmsText("species_legal_08")%></label>
+                      <label for="saveCriteria1"><%=cm.cmsText("save_your_criteria_1")%></label>
                       <%=cm.cmsTitle("save_criteria")%>
-                      &nbsp;
-                      <a title="<%=cm.cms("save_title")%>" href="javascript:checkSaveCriteria(1)"><img alt="<%=cm.cms("save_title")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
-                      <%=cm.cmsTitle("save_title")%>
+                      <a title="<%=cm.cms("save_open_link")%>" href="javascript:checkSaveCriteria(1)"><img alt="<%=cm.cms("save_open_link")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
+                      <%=cm.cmsTitle("save_open_link")%>
                     </td>
                   </tr>
             <%
@@ -444,29 +443,29 @@
               <tr>
                 <td style="background-color:#EEEEEE">
                   <strong>
-                    <%=cm.cmsText("species_legal_02")%>:
+                    <%=cm.cmsText("search_will_provide")%>:
                   </strong>
                 </td>
               </tr>
               <tr>
                 <td style="background-color:#EEEEEE">
                   <input title="<%=cm.cms("scientific_name")%>" id="checkbox11" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" />
-                    <label for="checkbox11"><%=cm.cmsText("species_legal_03")%></label>
+                    <label for="checkbox11"><%=cm.cmsText("scientific_name")%></label>
                     <%=cm.cmsTitle("scientific_name")%>
                   <input title="<%=cm.cms("group")%>" id="checkbox12" type="checkbox" name="showGroup" value="true" checked="checked" />
-                    <label for="checkbox12"><%=cm.cmsText("species_legal_04")%></label>
+                    <label for="checkbox12"><%=cm.cmsText("group")%></label>
                     <%=cm.cmsTitle("group")%>
                   <input title="<%=cm.cms("legal_text")%>" id="checkbox13" type="checkbox" name="showLegalText" value="true" checked="checked" />
-                    <label for="checkbox13"><%=cm.cmsText("species_legal_05")%></label>
+                    <label for="checkbox13"><%=cm.cmsText("legal_text")%></label>
                     <%=cm.cmsTitle("legal_text")%>
                   <input title="<%=cm.cms("abbreviation")%>" id="checkbox14" type="checkbox" name="showAbbreviation" value="true" checked="checked" />
-                    <label for="checkbox14"><%=cm.cmsText("species_legal_06")%></label>
+                    <label for="checkbox14"><%=cm.cmsText("abbreviation")%></label>
                     <%=cm.cmsTitle("abbreviation")%>
                   <input title="<%=cm.cms("comment")%>" id="checkbox15" type="checkbox" name="showComment" value="true" checked="checked" />
                     <label for="checkbox15"><%=cm.cmsText("comment")%></label>
                     <%=cm.cmsTitle("comment")%>
                   <input title="<%=cm.cms("url")%>" id="checkbox16" type="checkbox" name="showURL" value="true" checked="checked" />
-                    <label for="checkbox16"><%=cm.cmsText("species_legal_07")%></label>
+                    <label for="checkbox16"><%=cm.cmsText("url")%></label>
                     <%=cm.cmsTitle("url")%>
                 </td>
               </tr>
@@ -480,13 +479,13 @@
                 <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_included.gif" />
                 <%=cm.cmsTitle("field_optional")%>
                 <strong>
-                    <%=cm.cmsText("species_legal_04")%>
+                    <%=cm.cmsText("group")%>
                 </strong>
               </td>
               <td style="vertical-align:bottom" colspan="2">
                 <label for="select2" class="noshow"><%=cm.cms("group_name")%></label>
                 <select id="select2" title="<%=cm.cms("group_name")%>" name="groupName" onchange="setGroupName(this)" class="inputTextField">
-                  <option value="any" <%=(LegalSearchCriteria.CRITERIA_SPECIES.toString().equals(request.getParameter("typeForm")) && request.getParameter("groupName") == null ? "selected=\"selected\"" : "")%>><%=cm.cms("species_legal_09")%></option>
+                  <option value="any" <%=(LegalSearchCriteria.CRITERIA_SPECIES.toString().equals(request.getParameter("typeForm")) && request.getParameter("groupName") == null ? "selected=\"selected\"" : "")%>><%=cm.cms("any_group")%></option>
                   <%
                     // List of species group names
                     List speciesNames = GroupspeciesDomain.findOrderBy("ID_GROUP_SPECIES");
@@ -505,17 +504,17 @@
               <td>
                 &nbsp;
                 <strong>
-                  <%=cm.cmsText("species_legal_10")%>
+                  <%=cm.cmsText("and")%>
                 </strong>
               </td>
             </tr>
             <tr>
               <td colspan="2">
                 <br />
-                <img alt="<%=cm.cms("species_legal_11")%>" width="11" height="12" style="vertical-align:middle" title="<%=cm.cms("species_legal_11")%>" src="images/mini/field_mandatory.gif" />
-                <%=cm.cmsAlt("species_legal_11")%>
+                <img alt="<%=cm.cms("field_mandatory")%>" width="11" height="12" style="vertical-align:middle" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
+                <%=cm.cmsAlt("field_mandatory")%>
                 <strong>
-                  <label for ="scientificName"><%=cm.cmsText("species_legal_12")%></label>
+                  <label for ="scientificName"><%=cm.cmsText("scientific_name")%></label>
                 </strong>
               </td>
               <td style="vertical-align:bottom" colspan="3">
@@ -535,12 +534,11 @@
                     <input title="<%=cm.cms("save_criteria")%>" id="saveCriteria2" type="checkbox" name="saveCriteria" value="true" <%=sv%> />
                     <%=cm.cmsTitle("save_criteria")%>
                       <label for="saveCriteria2">
-                          <%=cm.cmsText("species_legal_08")%>
+                          <%=cm.cmsText("save_your_criteria_1")%>
                       </label>
-                    &nbsp;
-                    <a title="<%=cm.cms("save_title")%>" href="javascript:checkSaveCriteria(2)"><img alt="<%=cm.cms("save_title")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
-                    <%=cm.cmsTitle("save_title")%>
-                    <%=cm.cmsAlt("save_title")%>
+                    <a title="<%=cm.cms("save_open_link")%>" href="javascript:checkSaveCriteria(2)"><img alt="<%=cm.cms("save_open_link")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
+                    <%=cm.cmsTitle("save_open_link")%>
+                    <%=cm.cmsAlt("save_open_link")%>
                   </td>
                 </tr>
             <%
@@ -548,12 +546,12 @@
             %>
             <tr>
               <td style="text-align:right" colspan="5">
-                <input id="Reset" type="reset" value="<%=cm.cms("reset_btn")%>" name="Reset" class="inputTextField" title="<%=cm.cms("reset")%>" />
+                <input id="Reset" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="inputTextField" title="<%=cm.cms("reset")%>" />
                 <%=cm.cmsTitle("reset")%>
-                <%=cm.cmsInput("reset_btn")%>
-                <input id="Search" type="submit" value="<%=cm.cms("search_btn")%>" name="submit2"  class="inputTextField" title="<%=cm.cms("search")%>" />
+                <%=cm.cmsInput("reset")%>
+                <input id="Search" type="submit" value="<%=cm.cms("search")%>" name="submit2"  class="inputTextField" title="<%=cm.cms("search")%>" />
                 <%=cm.cmsTitle("search")%>
-                <%=cm.cmsInput("search_btn")%>
+                <%=cm.cmsInput("search")%>
               </td>
             </tr>
           </table>
@@ -593,19 +591,19 @@
 <%=cm.br()%>
 <%=cm.cmsMsg("save_alert")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("please_select_group")%>
+<%=cm.cmsMsg("please_select_a_group")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("species_legal_title")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_legal_24")%>
+<%=cm.cmsMsg("please_select_a_group")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_legal_25")%>
+<%=cm.cmsMsg("any_group")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("species_legal_28")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("any_legal_text")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("species_legal_09")%>
+<%=cm.cmsMsg("any_group")%>
 <%=cm.br()%>
 
     <jsp:include page="footer.jsp">

@@ -43,7 +43,7 @@
     <div id="alignment">
     <div id="content">
       <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home_location#index.jsp,services_location"/>
+        <jsp:param name="location" value="home#index.jsp,services"/>
       </jsp:include>
       <h1>
         <%=cm.cmsText("services_title")%>
@@ -55,7 +55,7 @@
             &nbsp;
           </th>
           <th>
-            <%=cm.cmsText("services_servicetitle")%>
+            <%=cm.cmsText("services")%>
           </th>
         </tr>
 <%
@@ -64,12 +64,12 @@
 %>
         <tr>
           <td align="center">
-            <a href="users.jsp" title="<%=cm.cms("services_userslink_title")%>"><img alt="<%=cm.cms("services_userslink_alt")%>" src="images/users.gif" width="81" height="43" border="0" title="<%=cm.cms("services_userslink_title")%>" /></a>
-            <%=cm.cmsAlt("services_userslink_alt")%><%=cm.cmsTitle("services_userslink_title")%>
+            <a href="users.jsp" title="<%=cm.cms("user_management")%>"><img alt="<%=cm.cms("user_management")%>" src="images/users.gif" width="81" height="43" border="0" title="<%=cm.cms("user_management")%>" /></a>
+            <%=cm.cmsAlt("user_management")%><%=cm.cmsTitle("user_management")%>
           </td>
           <td>
-            <a href="users.jsp" title="<%=cm.cms("services_userslink_title")%>"><%=cm.cmsText("services_userslink")%></a>
-            <%=cm.cmsTitle("services_userslink_title")%>
+            <a href="users.jsp" title="<%=cm.cms("user_management")%>"><%=cm.cmsText("services_userslink")%></a>
+            <%=cm.cmsTitle("user_management")%>
           </td>
         </tr>
 <%
@@ -77,12 +77,12 @@
 %>
         <tr>
           <td align="center">
-            <a href="logos.jsp" title="<%=cm.cms("services_logoslink_title")%>"><img alt="<%=cm.cms("services_logoslink_alt")%>" src="images/logos.gif" width="81" height="43" border="0" title="<%=cm.cms("services_logoslink_title")%>" /></a>
-            <%=cm.cmsAlt("services_logoslink_alt")%><%=cm.cmsTitle("services_logoslink_title")%>
+            <a href="logos.jsp" title="<%=cm.cms("eunis_database_logos")%>"><img alt="<%=cm.cms("eunis_database_logos")%>" src="images/logos.gif" width="81" height="43" border="0" title="<%=cm.cms("eunis_database_logos")%>" /></a>
+            <%=cm.cmsAlt("eunis_database_logos")%><%=cm.cmsTitle("eunis_database_logos")%>
           </td>
           <td>
-            <a href="logos.jsp" title="<%=cm.cms("services_logoslink_title")%>"><%=cm.cmsText("services_logoslink")%></a>
-            <%=cm.cmsTitle("services_logoslink_title")%>
+            <a href="logos.jsp" title="<%=cm.cms("eunis_database_logos")%>"><%=cm.cmsText("services_logoslink")%></a>
+            <%=cm.cmsTitle("eunis_database_logos")%>
           </td>
         </tr>
 <%
@@ -91,12 +91,12 @@
 %>
         <tr>
           <td align="center">
-            <a href="users-bookmarks.jsp" title="<%=cm.cms("services_bookmarkslink_title")%>"><img alt="<%=cm.cms("services_bookmarkslink_alt")%>" src="images/bookmarks.gif" width="81" height="43" border="0" title="<%=cm.cms("services_bookmarkslink_title")%>" /></a>
-            <%=cm.cmsAlt("services_bookmarkslink_alt")%><%=cm.cmsTitle("services_bookmarkslink_title")%>
+            <a href="users-bookmarks.jsp" title="<%=cm.cms("user_bookmarks")%>"><img alt="<%=cm.cms("services_bookmarkslink_alt")%>" src="images/bookmarks.gif" width="81" height="43" border="0" title="<%=cm.cms("user_bookmarks")%>" /></a>
+            <%=cm.cmsAlt("services_bookmarkslink_alt")%><%=cm.cmsTitle("user_bookmarks")%>
           </td>
           <td>
-            <a href="users-bookmarks.jsp" title="<%=cm.cms("services_bookmarkslink_title")%>"><%=cm.cmsText("services_bookmarkslink")%></a>
-            <%=cm.cmsTitle("services_bookmarkslink_title")%>
+            <a href="users-bookmarks.jsp" title="<%=cm.cms("user_bookmarks")%>"><%=cm.cmsText("services_bookmarkslink")%></a>
+            <%=cm.cmsTitle("user_bookmarks")%>
           </td>
         </tr>
 <%
@@ -106,8 +106,8 @@
 %>
         <!--<tr>-->
           <!--<td align="center">-->
-            <!--<a href="headline.jsp" title="<%=cm.cms("services_headlinelink_title")%>"><img alt="<%=cm.cms("services_headlinelink_alt")%>" src="images/headlines.gif" width="81" height="43" border="0" title="<%=cm.cms("services_headlinelink_title")%>" /></a>-->
-            <%--<%=cm.cmsAlt("services_headlinelink_alt")%><%=cm.cmsTitle("services_headlinelink_title")%>--%>
+            <!--<a href="headline.jsp" title="<%=cm.cms("services_headlinelink_title")%>"><img alt="<%=cm.cms("services_headlinelink")%>" src="images/headlines.gif" width="81" height="43" border="0" title="<%=cm.cms("services_headlinelink_title")%>" /></a>-->
+            <%--<%=cm.cmsAlt("services_headlinelink")%><%=cm.cmsTitle("services_headlinelink_title")%>--%>
           <!--</td>-->
           <!--<td>-->
             <!--<a href="headline.jsp" title="<%=cm.cms("services_headlinelink_title")%>"><%=cm.cmsText("services_headlinelink")%></a>-->
@@ -121,12 +121,12 @@
 %>
         <tr>
           <td align="center">
-            <a href="glossary-table.jsp" title="<%=cm.cms("services_glossarylink_title")%>"><img alt="<%=cm.cms("services_glossarylink_alt")%>" src="images/glossary.gif" width="81" height="43" border="0" title="<%=cm.cms("services_glossarylink_title")%>" /></a>
-            <%=cm.cmsAlt("services_glossarylink_alt")%><%=cm.cmsTitle("services_glossarylink_title")%>
+            <a href="glossary-table.jsp" title="<%=cm.cms("edit_glossary_of_terms")%>"><img alt="<%=cm.cms("edit_glossary_of_terms")%>" src="images/glossary.gif" width="81" height="43" border="0" title="<%=cm.cms("edit_glossary_of_terms")%>" /></a>
+            <%=cm.cmsAlt("edit_glossary_of_terms")%><%=cm.cmsTitle("edit_glossary_of_terms")%>
           </td>
           <td>
-            <a href="glossary-table.jsp" title="<%=cm.cms("services_glossarylink_title")%>"><%=cm.cmsText("services_glossarylink")%></a>
-            <%=cm.cmsTitle("services_glossarylink_title")%>
+            <a href="glossary-table.jsp" title="<%=cm.cms("edit_glossary_of_terms")%>"><%=cm.cmsText("edit_glossary_of_terms")%></a>
+            <%=cm.cmsTitle("edit_glossary_of_terms")%>
           </td>
         </tr>
 <%
@@ -136,12 +136,12 @@
 %>
        <tr>
           <td align="center">
-            <a href="feedback-list.jsp" title="<%=cm.cms("services_feedbacklink_title")%>"><img alt="<%=cm.cms("services_feedbacklink_title")%>" src="images/glossary.gif" width="81" height="43" border="0" title="<%=cm.cms("services_feedbacklink_title")%>" /></a>
-            <%=cm.cmsAlt("services_feedbacklink_title")%><%=cm.cmsTitle("services_feedbacklink_title")%>
+            <a href="feedback-list.jsp" title="<%=cm.cms("feedback_list")%>"><img alt="<%=cm.cms("feedback_list")%>" src="images/glossary.gif" width="81" height="43" border="0" title="<%=cm.cms("feedback_list")%>" /></a>
+            <%=cm.cmsAlt("feedback_list")%><%=cm.cmsTitle("feedback_list")%>
           </td>
           <td>
-           <a href="feedback-list.jsp" title="<%=cm.cms("services_feedbacklink_title")%>"><%=cm.cmsText("services_feedbacklink")%></a>
-            <%=cm.cmsTitle("services_feedbacklink_title")%><%=cm.cmsTitle("services_feedbacklink_title")%>
+           <a href="feedback-list.jsp" title="<%=cm.cms("feedback_list")%>"><%=cm.cmsText("feedback_list")%></a>
+            <%=cm.cmsTitle("feedback_list")%><%=cm.cmsTitle("feedback_list")%>
          </td>
         </tr>
 <%
@@ -151,12 +151,12 @@
 %>
         <tr>
           <td align="center">
-            <a href="download-database.jsp" title="<%=cm.cms("services_access_title")%>"><img alt="<%=cm.cms("services_access_alt")%>" src="images/access.gif" width="81" height="43" border="0" title="<%=cm.cms("services_access_title")%>" /></a>
-            <%=cm.cmsAlt("services_access_alt")%><%=cm.cmsTitle("services_access_title")%>
+            <a href="download-database.jsp" title="<%=cm.cms("services_access")%>"><img alt="<%=cm.cms("services_access")%>" src="images/access.gif" width="81" height="43" border="0" title="<%=cm.cms("services_access")%>" /></a>
+            <%=cm.cmsAlt("services_access")%><%=cm.cmsTitle("services_access")%>
           </td>
           <td>
-            <a href="download-database.jsp" title="<%=cm.cms("services_access_title")%>"><%=cm.cmsText("services_access")%></a>
-            <%=cm.cmsTitle("services_access_title")%>
+            <a href="download-database.jsp" title="<%=cm.cms("services_access")%>"><%=cm.cmsText("services_access")%></a>
+            <%=cm.cmsTitle("services_access")%>
           </td>
         </tr>
 <%
@@ -166,12 +166,12 @@
 %>
         <tr>
           <td align="center">
-            <a href="clear-temporary-data.jsp" title="<%=cm.cms("services_cleartemp_title")%>"><img alt="<%=cm.cms("services_cleartemp_alt")%>" src="images/clean.gif" width="81" height="43" border="0" title="<%=cm.cms("services_cleartemp_title")%>" /></a>
-            <%=cm.cmsAlt("services_cleartemp_title")%>
+            <a href="clear-temporary-data.jsp" title="<%=cm.cms("services_cleartemp")%>"><img alt="<%=cm.cms("services_cleartemp")%>" src="images/clean.gif" width="81" height="43" border="0" title="<%=cm.cms("services_cleartemp")%>" /></a>
+            <%=cm.cmsAlt("services_cleartemp")%>
           </td>
           <td>
-            <a href="clear-temporary-data.jsp" title="<%=cm.cms("services_cleartemp_title")%>"><%=cm.cmsText("services_cleartemp")%></a>
-            <%=cm.cmsTitle("services_cleartemp_title")%>
+            <a href="clear-temporary-data.jsp" title="<%=cm.cms("services_cleartemp")%>"><%=cm.cmsText("services_cleartemp")%></a>
+            <%=cm.cmsTitle("services_cleartemp")%>
           </td>
         </tr>
 <%
@@ -181,11 +181,11 @@
 %>
         <tr>
           <td align="center">
-            <a href="services.jsp?action=reloadlanguage" title="<%=cm.cms("services_refresh_title")%>"><img alt="<%=cm.cms("services_refresh_alt")%>" src="images/language.gif" width="81" height="43" border="0" title="<%=cm.cms("services_refresh_title")%>" /></a>
-            <%=cm.cmsAlt("services_refresh_alt")%>
+            <a href="services.jsp?action=reloadlanguage" title="<%=cm.cms("services_refresh_title")%>"><img alt="<%=cm.cms("refresh_language")%>" src="images/language.gif" width="81" height="43" border="0" title="<%=cm.cms("services_refresh_title")%>" /></a>
+            <%=cm.cmsAlt("refresh_language")%>
           </td>
           <td>
-            <a href="services.jsp?action=reloadlanguage" title="<%=cm.cms("services_refresh_title")%>"><%=cm.cmsText("services_refresh")%></a>
+            <a href="services.jsp?action=reloadlanguage" title="<%=cm.cms("services_refresh_title")%>"><%=cm.cmsText("refresh_language")%></a>
             <%=cm.cmsTitle("services_refresh_title")%>
           </td>
         </tr>
@@ -195,8 +195,8 @@
 %>
         <tr>
           <td align="center">
-            <a href="services.jsp?editContent=true" title="<%=cm.cms("services_inline_activate_title")%>"><img alt="<%=cm.cms("services_inline_activate_alt")%>" src="images/webcontent-inline.gif" width="81" height="43" border="0" title="<%=cm.cms("services_inline_activate_title")%>" /></a>
-            <%=cm.cmsAlt("services_inline_activate_alt")%>
+            <a href="services.jsp?editContent=true" title="<%=cm.cms("services_inline_activate_title")%>"><img alt="<%=cm.cms("edit_mode_allwos_editing_html_attributes")%>" src="images/webcontent-inline.gif" width="81" height="43" border="0" title="<%=cm.cms("services_inline_activate_title")%>" /></a>
+            <%=cm.cmsAlt("edit_mode_allwos_editing_html_attributes")%>
           </td>
           <td>
             <a href="services.jsp?editContent=true" title="<%=cm.cms("services_inline_activate_title")%>"><%=cm.cmsText("services_inline_activate")%></a>
@@ -210,12 +210,12 @@
 %>
         <tr>
           <td align="center">
-            <a href="services.jsp?editContent=false" title="<%=cm.cms("services_inline_dezactivate_title")%>"><img alt="<%=cm.cms("services_inline_dezactivate_alt")%>" src="images/webcontent-inline.gif" width="81" height="43" border="0" title="<%=cm.cms("services_inline_dezactivate_title")%>" /></a>
-            <%=cm.cmsAlt("services_inline_dezactivate_title")%>
+            <a href="services.jsp?editContent=false" title="<%=cm.cms("services_inline_dezactivate_alt")%>"><img alt="<%=cm.cms("services_inline_dezactivate_alt")%>" src="images/webcontent-inline.gif" width="81" height="43" border="0" title="<%=cm.cms("services_inline_dezactivate_alt")%>" /></a>
+            <%=cm.cmsAlt("services_inline_dezactivate_alt")%>
           </td>
           <td>
-            <a href="services.jsp?editContent=false" title="<%=cm.cms("services_inline_dezactivate_title")%>"><%=cm.cmsText("services_inline_dezactivate")%></a>
-            <%=cm.cmsTitle("services_inline_dezactivate_title")%>
+            <a href="services.jsp?editContent=false" title="<%=cm.cms("services_inline_dezactivate_alt")%>"><%=cm.cmsText("services_inline_dezactivate")%></a>
+            <%=cm.cmsTitle("services_inline_dezactivate_alt")%>
           </td>
         </tr>
 <%
@@ -225,12 +225,12 @@
 %>
         <tr>
           <td align="center">
-            <a href="services.jsp?advancedEditContent=true" title="<%=cm.cms("services_inline_advactivate_title")%>"><img alt="<%=cm.cms("services_inline_activate_alt")%>" src="images/webcontent-inline.gif" width="81" height="43" border="0" title="<%=cm.cms("services_inline_advactivate_title")%>" /></a>
+            <a href="services.jsp?advancedEditContent=true" title="<%=cm.cms("edit_mode_allwos_editing_html_attributes")%>"><img alt="<%=cm.cms("edit_mode_allwos_editing_html_attributes")%>" src="images/webcontent-inline.gif" width="81" height="43" border="0" title="<%=cm.cms("edit_mode_allwos_editing_html_attributes")%>" /></a>
             <%=cm.cmsAlt("services_inline_advactivate_alt")%>
           </td>
           <td>
-            <a href="services.jsp?advancedEditContent=true" title="<%=cm.cms("services_inline_advactivate_title")%>"><%=cm.cmsText("services_inline_advactivate")%></a>
-            <%=cm.cmsTitle("services_inline_advactivate_title")%>
+            <a href="services.jsp?advancedEditContent=true" title="<%=cm.cms("edit_mode_allwos_editing_html_attributes")%>"><%=cm.cmsText("services_inline_advactivate")%></a>
+            <%=cm.cmsTitle("edit_mode_allwos_editing_html_attributes")%>
           </td>
         </tr>
 <%
@@ -254,7 +254,7 @@
 %>
       </table>
 
-      <%=cm.cmsMsg("services_refresh")%>
+      <%=cm.cmsMsg("refresh_language")%>
       <jsp:include page="footer.jsp">
         <jsp:param name="page_name" value="services.jsp"/>
       </jsp:include>
@@ -266,7 +266,7 @@
 %>
       <script language="JavaScript" type="text/javascript">
       <!--
-        alert('<%=cm.cms("services_refresh")%>');
+        alert('<%=cm.cms("refresh_language")%>');
       //-->
       </script>
 <%

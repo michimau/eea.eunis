@@ -49,7 +49,7 @@
   if ( isAuthenticated )
   {
 %>
-  <a href="javascript:saveBookmark();" class="footerLink" title="<%=cm.cms("footer_bookmark_title")%>"><%=cm.cmsText("footer_bookmark")%></a>
+  <a href="javascript:saveBookmark();" class="footerLink" title="<%=cm.cms("footer_bookmark_title")%>"><%=cm.cmsText("bookmark")%></a>
   <%=cm.cmsTitle("footer_bookmark_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 <%
@@ -63,20 +63,20 @@
   <%=cm.cmsTitle("footer_contact_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="news.jsp" class="footerLink" title="<%=cm.cms("footer_news_title")%>"><%=cm.cmsText("footer_news")%></a>
+  <a href="news.jsp" class="footerLink" title="<%=cm.cms("footer_news_title")%>"><%=cm.cmsText("news")%></a>
   <%=cm.cmsTitle("footer_news_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="feedback.jsp" title="<%=cm.cms("footer_feedback_title")%>" class="footerLink"><%=cm.cmsText("footer_feedback")%></a>
+  <a href="feedback.jsp" title="<%=cm.cms("footer_feedback_title")%>" class="footerLink"><%=cm.cmsText("feedback")%></a>
   <%=cm.cmsTitle("footer_feedback_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="copyright.jsp" title="<%=cm.cms("footer_copyright_title")%>" class="footerLink"><%=cm.cmsText("footer_copyright")%></a>
+  <a href="copyright.jsp" title="<%=cm.cms("footer_copyright_title")%>" class="footerLink"><%=cm.cmsText("copyright_and_disclaimer_title")%></a>
   <%=cm.cmsTitle("footer_copyright_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="accessibility.jsp" title="<%=cm.cms("footer_accessibility_title")%>" class="footerLink" accesskey="0"><%=cm.cmsText("footer_accessibility")%></a>
-  <%=cm.cmsTitle("footer_accessibility_title")%>
+  <a href="accessibility.jsp" title="<%=cm.cms("accessibility_statement")%>" class="footerLink" accesskey="0"><%=cm.cmsText("footer_accessibility")%></a>
+  <%=cm.cmsTitle("accessibility_statement")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 </div>
 <jsp:include page="digir_check.jsp" />

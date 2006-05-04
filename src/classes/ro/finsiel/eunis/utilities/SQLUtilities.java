@@ -162,6 +162,53 @@ public class SQLUtilities {
    * @param SQL SQL.
    * @return First column.
    */
+  public ArrayList<String> SQL2Array( String SQL ) {
+
+    if ( SQL == null || SQL.trim().length() <= 0 )
+    {
+      return null;
+    }
+
+    ArrayList<String> result = new ArrayList<String>();
+
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    try
+    {
+      Class.forName( SQL_DRV );
+      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+
+      ps = con.prepareStatement( SQL );
+      rs = ps.executeQuery();
+
+      while ( rs.next() )
+      {
+        result.add(rs.getString( 1 ));
+      }
+
+      closeAll( con, ps, rs );
+    }
+    catch ( Exception e )
+    {
+      e.printStackTrace();
+      return null;
+    }
+    finally
+    {
+      closeAll( con, ps, rs );
+    }
+
+    return result;
+  }
+
+  /**
+   * Executes a SELECT sql and returns the first value.
+   *
+   * @param SQL SQL.
+   * @return First column.
+   */
   public String ExecuteSQL( String SQL ) {
 
     if ( SQL == null || SQL.trim().length() <= 0 )
@@ -169,6 +216,8 @@ public class SQLUtilities {
       return "";
     }
 
+    //System.out.println("SQL = " + SQL);
+    
     String result = "";
 
     Connection con = null;
@@ -586,4 +635,110 @@ public class SQLUtilities {
       ex.printStackTrace();
     }
   }
+
+  public boolean DesignationHasSites(String idDesignation, String idGeoscope) {
+    boolean result = false;
+
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    String strSQL = "SELECT SOURCE_DB, COUNT(*) AS RECORD_COUNT";
+    strSQL = strSQL + " FROM `chm62edt_sites`";
+    strSQL = strSQL + " INNER JOIN `chm62edt_designations` ON (`chm62edt_sites`.ID_DESIGNATION = `chm62edt_designations`.ID_DESIGNATION AND `chm62edt_sites`.ID_GEOSCOPE = `chm62edt_designations`.ID_GEOSCOPE)";
+    strSQL = strSQL + " WHERE `chm62edt_sites`.ID_DESIGNATION = '" + idDesignation + "'";
+    strSQL = strSQL + " AND `chm62edt_sites`.ID_GEOSCOPE = " + idGeoscope;
+    strSQL = strSQL + " GROUP BY `chm62edt_sites`.ID_DESIGNATION, `chm62edt_sites`.ID_GEOSCOPE";
+    strSQL = strSQL + " ORDER BY SOURCE_DB ASC";
+
+    try
+    {
+      Class.forName( SQL_DRV );
+      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+
+      ps = con.prepareStatement( strSQL );
+      rs = ps.executeQuery();
+
+      if ( rs.next() )
+      {
+        result = true;
+      }
+      con.close();
+    }
+    catch ( Exception ex )
+    {
+      ex.printStackTrace();
+    }
+
+    return result;
+  }
+
+  public boolean EunisHabitatHasChilds(String idCode) {
+    boolean result = false;
+
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    String strSQL = "SELECT ID_HABITAT";
+    strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+    strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+idCode+"%'";
+    strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)>"+idCode.length();
+
+    try
+    {
+      Class.forName( SQL_DRV );
+      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+
+      ps = con.prepareStatement( strSQL );
+      rs = ps.executeQuery();
+
+      if ( rs.next() )
+      {
+        result = true;
+      }
+      con.close();
+    }
+    catch ( Exception ex )
+    {
+      ex.printStackTrace();
+    }
+
+    return result;
+  }
+
+  public boolean Annex1HabitatHasChilds(String idCode, String idCodeParent) {
+    boolean result = false;
+
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    String strSQL = "SELECT ID_HABITAT";
+    strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+    strSQL = strSQL + " WHERE CODE_2000 LIKE '"+idCode+"%'";
+    strSQL = strSQL + " AND CODE_2000<>'"+idCodeParent+"'";
+
+    try
+    {
+      Class.forName( SQL_DRV );
+      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+
+      ps = con.prepareStatement( strSQL );
+      rs = ps.executeQuery();
+
+      if ( rs.next() )
+      {
+        result = true;
+      }
+      con.close();
+    }
+    catch ( Exception ex )
+    {
+      ex.printStackTrace();
+    }
+
+    return result;
+  }
+
 }

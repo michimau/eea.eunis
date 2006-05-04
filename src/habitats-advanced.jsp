@@ -25,7 +25,7 @@
 %>
 <title>
   <%=application.getInitParameter("PAGE_TITLE")%>
-  <%=request.getParameter("natureobject") != null ? request.getParameter("natureobject") : ""%><%=cm.cms("habitats_advanced_title")%>
+  <%=request.getParameter("natureobject") != null ? request.getParameter("natureobject") : ""%><%=cm.cms("advanced_search")%>
 </title>
 <script language="JavaScript" type="text/javascript">
 <!--
@@ -101,7 +101,7 @@
   function disableSaveButton() {
     document.criteria.Save.disabled=true;
     document.criteria.Search.disabled=false;
-    document.getElementById("status").innerHTML="<span style=\"color:red;\"><%=cm.cms("your_criteria_has_been_saved")%></span>"
+    document.getElementById("status").innerHTML="<span style=\"color:red;\"><%=cm.cms("criteria_saved")%></span>"
   }
 
   function submitAttributeForm(attribute, idnode) {
@@ -266,7 +266,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
   <div id="alignment">
   <div id="content">
 <jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home_location#index.jsp,habitats_location#habitats.jsp,habitats_advanced_search_location" />
+  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,advanced_search" />
   <jsp:param name="helpLink" value="habitats-help.jsp" />
 </jsp:include>
 <%=cm.cmsText("habitats_advanced_01")%>
@@ -351,7 +351,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
 %>
 <script language="JavaScript" type="text/javascript">
 <!--
-alert('<%=cm.cms("habitats_advanced_04")%>');
+alert('<%=cm.cms("error_deleting_root")%>');
 //-->
 </script>
 <%
@@ -379,7 +379,7 @@ alert('<%=cm.cms("habitats_advanced_04")%>');
       %>
       <script language="JavaScript" type="text/javascript">
       <!--
-      alert('<%=cm.cms("habitats_advanced_05")%>');
+      alert('<%=cm.cms("error_adding_branch")%>');
       //-->
       </script>
       <%
@@ -393,7 +393,7 @@ alert('<%=cm.cms("habitats_advanced_04")%>');
       %>
       <script language="JavaScript" type="text/javascript">
       <!--
-      alert('<%=cm.cms("habitats_advanced_06")%>');
+      alert('<%=cm.cms("error_deleting_branch")%>');
       //-->
       </script>
       <%
@@ -407,7 +407,7 @@ alert('<%=cm.cms("habitats_advanced_04")%>');
       %>
       <script language="JavaScript" type="text/javascript">
       <!--
-      alert('<%=cm.cms("habitats_advanced_07")%>');
+      alert('<%=cm.cms("error_compsing_branch_1")%>');
       //-->
       </script>
       <%
@@ -523,11 +523,11 @@ alert('<%=cm.cms("habitats_advanced_04")%>');
         <%
       }
 
-  String cmsCriteria = cm.cms("advanced_criteria");
+  String cmsCriteria = cm.cms("criteria");
   String cmsAttribute = cm.cms("advanced_attribute");
-  String cmsOperator = cm.cms("advanced_operator");
-  String cmsAll = cm.cms("advanced_all");
-  String cmsAny = cm.cms("advanced_any");
+  String cmsOperator = cm.cms("operator");
+  String cmsAll = cm.cms("all");
+  String cmsAny = cm.cms("any");
   String cmsFollowingCriteria = cm.cms("of_following_criteria_are_met");
 
   if (!NodeType.equalsIgnoreCase("Criteria")) {
@@ -555,79 +555,79 @@ alert('<%=cm.cms("habitats_advanced_04")%>');
 
     if (NatureObject.equalsIgnoreCase("Habitat")) {
       if (val.equalsIgnoreCase("ScientificName")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"ScientificName\">" + cm.cms("habitats_advanced_14") + "</option>");
+      out.println("<option" + selected + " value=\"ScientificName\">" + cm.cms("name") + "</option>");
       if (val.equalsIgnoreCase("Code")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Code\">" + cm.cms("habitats_advanced_15") + "</option>");
+      out.println("<option" + selected + " value=\"Code\">" + cm.cms("code_eunis_annex") + "</option>");
       if (val.equalsIgnoreCase("LegalInstruments")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"LegalInstruments\">" + cm.cms("habitats_advanced_16") + "</option>");
+      out.println("<option" + selected + " value=\"LegalInstruments\">" + cm.cms("legal_instruments") + "</option>");
       if (val.equalsIgnoreCase("SourceDatabase")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"SourceDatabase\">" + cm.cms("habitats_advanced_17") + "</option>");
+      out.println("<option" + selected + " value=\"SourceDatabase\">" + cm.cms("source_database") + "</option>");
       if (val.equalsIgnoreCase("Country")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Country\">" + cm.cms("habitats_advanced_18") + "</option>");
+      out.println("<option" + selected + " value=\"Country\">" + cm.cms("country") + "</option>");
       if (val.equalsIgnoreCase("Biogeoregion")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Biogeoregion\">" + cm.cms("habitats_advanced_19") + "</option>");
+      out.println("<option" + selected + " value=\"Biogeoregion\">" + cm.cms("biogeographic_region") + "</option>");
       if (val.equalsIgnoreCase("Author")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Author\">" + cm.cms("habitats_advanced_20") + "</option>");
+      out.println("<option" + selected + " value=\"Author\">" + cm.cms("reference_author") + "</option>");
       if (val.equalsIgnoreCase("Title")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Title\">" + cm.cms("habitats_advanced_21") + "</option>");
+      out.println("<option" + selected + " value=\"Title\">" + cm.cms("reference_title") + "</option>");
       if (val.equalsIgnoreCase("Altitude")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Altitude\">" + cm.cms("habitats_advanced_22") + "</option>");
+      out.println("<option" + selected + " value=\"Altitude\">" + cm.cms("altitude") + "</option>");
       if (val.equalsIgnoreCase("Chemistry")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Chemistry\">" + cm.cms("habitats_advanced_23") + "</option>");
+      out.println("<option" + selected + " value=\"Chemistry\">" + cm.cms("chemistry") + "</option>");
       if (val.equalsIgnoreCase("Climate")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Climate\">" + cm.cms("habitats_advanced_24") + "</option>");
+      out.println("<option" + selected + " value=\"Climate\">" + cm.cms("climate") + "</option>");
       if (val.equalsIgnoreCase("Cover")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Cover\">" + cm.cms("habitats_advanced_25") + "</option>");
+      out.println("<option" + selected + " value=\"Cover\">" + cm.cms("cover") + "</option>");
       if (val.equalsIgnoreCase("Depth")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Depth\">" + cm.cms("habitats_advanced_26") + "</option>");
+      out.println("<option" + selected + " value=\"Depth\">" + cm.cms("depth") + "</option>");
       if (val.equalsIgnoreCase("Geomorph")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Geomorph\">" + cm.cms("habitats_advanced_27") + "</option>");
+      out.println("<option" + selected + " value=\"Geomorph\">" + cm.cms("geomorph") + "</option>");
       if (val.equalsIgnoreCase("Humidity")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Humidity\">" + cm.cms("habitats_advanced_28") + "</option>");
+      out.println("<option" + selected + " value=\"Humidity\">" + cm.cms("humidity") + "</option>");
       if (val.equalsIgnoreCase("LifeForm")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"LifeForm\">" + cm.cms("habitats_advanced_29") + "</option>");
+      out.println("<option" + selected + " value=\"LifeForm\">" + cm.cms("life_form") + "</option>");
       if (val.equalsIgnoreCase("LightIntensity")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"LightIntensity\">" + cm.cms("habitats_advanced_30") + "</option>");
+      out.println("<option" + selected + " value=\"LightIntensity\">" + cm.cms("light_intensity") + "</option>");
       if (val.equalsIgnoreCase("Salinity")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Salinity\">" + cm.cms("habitats_advanced_32") + "</option>");
+      out.println("<option" + selected + " value=\"Salinity\">" + cm.cms("salinity") + "</option>");
       if (val.equalsIgnoreCase("Spatial")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Spatial\">" + cm.cms("habitats_advanced_33") + "</option>");
+      out.println("<option" + selected + " value=\"Spatial\">" + cm.cms("spatial") + "</option>");
       if (val.equalsIgnoreCase("Substrate")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Substrate\">" + cm.cms("habitats_advanced_34") + "</option>");
+      out.println("<option" + selected + " value=\"Substrate\">" + cm.cms("substrate") + "</option>");
       if (val.equalsIgnoreCase("Temporal")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Temporal\">" + cm.cms("habitats_advanced_35") + "</option>");
+      out.println("<option" + selected + " value=\"Temporal\">" + cm.cms("temporal") + "</option>");
       if (val.equalsIgnoreCase("Water")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Water\">" + cm.cms("habitats_advanced_37") + "</option>");
+      out.println("<option" + selected + " value=\"Water\">" + cm.cms("water") + "</option>");
       if (val.equalsIgnoreCase("Usage")) { selected = " selected=\"selected\""; } else { selected = ""; }
-      out.println("<option" + selected + " value=\"Usage\">" + cm.cms("habitats_advanced_38") + "</option>");
+      out.println("<option" + selected + " value=\"Usage\">" + cm.cms("usage") + "</option>");
     }
     out.println("</select>");
     %>
-    <%=cm.cmsInput("habitats_advanced_14")%>
-    <%=cm.cmsInput("habitats_advanced_15")%>
-    <%=cm.cmsInput("habitats_advanced_16")%>
-    <%=cm.cmsInput("habitats_advanced_17")%>
-    <%=cm.cmsInput("habitats_advanced_18")%>
-    <%=cm.cmsInput("habitats_advanced_19")%>
-    <%=cm.cmsInput("habitats_advanced_20")%>
-    <%=cm.cmsInput("habitats_advanced_21")%>
-    <%=cm.cmsInput("habitats_advanced_22")%>
-    <%=cm.cmsInput("habitats_advanced_23")%>
-    <%=cm.cmsInput("habitats_advanced_24")%>
-    <%=cm.cmsInput("habitats_advanced_25")%>
-    <%=cm.cmsInput("habitats_advanced_26")%>
-    <%=cm.cmsInput("habitats_advanced_27")%>
-    <%=cm.cmsInput("habitats_advanced_28")%>
-    <%=cm.cmsInput("habitats_advanced_29")%>
-    <%=cm.cmsInput("habitats_advanced_30")%>
-    <%=cm.cmsInput("habitats_advanced_31")%>
-    <%=cm.cmsInput("habitats_advanced_32")%>
-    <%=cm.cmsInput("habitats_advanced_33")%>
-    <%=cm.cmsInput("habitats_advanced_34")%>
-    <%=cm.cmsInput("habitats_advanced_35")%>
-    <%=cm.cmsInput("habitats_advanced_36")%>
-    <%=cm.cmsInput("habitats_advanced_37")%>
-    <%=cm.cmsInput("habitats_advanced_38")%>
+    <%=cm.cmsInput("name")%>
+    <%=cm.cmsInput("code_eunis_annex")%>
+    <%=cm.cmsInput("legal_instruments")%>
+    <%=cm.cmsInput("source_database")%>
+    <%=cm.cmsInput("country")%>
+    <%=cm.cmsInput("biogeographic_region")%>
+    <%=cm.cmsInput("reference_author")%>
+    <%=cm.cmsInput("reference_title")%>
+    <%=cm.cmsInput("altitude")%>
+    <%=cm.cmsInput("chemistry")%>
+    <%=cm.cmsInput("climate")%>
+    <%=cm.cmsInput("cover")%>
+    <%=cm.cmsInput("depth")%>
+    <%=cm.cmsInput("geomorph")%>
+    <%=cm.cmsInput("humidity")%>
+    <%=cm.cmsInput("life_form")%>
+    <%=cm.cmsInput("light_intensity")%>
+    <%=cm.cmsInput("marine")%>
+    <%=cm.cmsInput("salinity")%>
+    <%=cm.cmsInput("spatial")%>
+    <%=cm.cmsInput("substrate")%>
+    <%=cm.cmsInput("temporal")%>
+    <%=cm.cmsInput("tidal")%>
+    <%=cm.cmsInput("water")%>
+    <%=cm.cmsInput("usage")%>
     <%
     out.println("&nbsp;");
 
@@ -641,14 +641,14 @@ alert('<%=cm.cms("habitats_advanced_04")%>');
     } else {
       selected = "";
     }
-    out.println("<option" + selected + " value=\"Equal\">" + cm.cms("habitats_advanced_39") + "</option>");
+    out.println("<option" + selected + " value=\"Equal\">" + cm.cms("equal") + "</option>");
 
     if (val.equalsIgnoreCase("Contains")) {
       selected = " selected=\"selected\"";
     } else {
       selected = "";
     }
-    out.println("<option" + selected + " value=\"Contains\">" + cm.cms("habitats_advanced_40") + "</option>");
+    out.println("<option" + selected + " value=\"Contains\">" + cm.cms("contains") + "</option>");
 
     if (val.equalsIgnoreCase("Between")) {
       selected = " selected=\"selected\"";
@@ -656,7 +656,7 @@ alert('<%=cm.cms("habitats_advanced_04")%>');
       selected = "";
     }
     if (!rs.getString("ATTRIBUTE").equalsIgnoreCase("LegalInstruments")) {
-      out.println("<option" + selected + " value=\"Between\">" + cm.cms("habitats_advanced_41") + "</option>");
+      out.println("<option" + selected + " value=\"Between\">" + cm.cms("between") + "</option>");
     }
 
     if (val.equalsIgnoreCase("Regex")) {
@@ -668,9 +668,9 @@ alert('<%=cm.cms("habitats_advanced_04")%>');
 
     out.println("</select>");
     %>
-    <%=cm.cmsInput("habitats_advanced_39")%>
-    <%=cm.cmsInput("habitats_advanced_40")%>
-    <%=cm.cmsInput("habitats_advanced_41")%>
+    <%=cm.cmsInput("equal")%>
+    <%=cm.cmsInput("contains")%>
+    <%=cm.cmsInput("between")%>
     <%
     out.println("&nbsp;");
 
@@ -683,7 +683,7 @@ alert('<%=cm.cms("habitats_advanced_04")%>');
 <a title="<%=cm.cms("list_of_values")%>" href="javascript:choice('First_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="first_binocular" onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cms("list_of_values")%>" /></a>
 <%
   if (rs.getString("OPERATOR").equalsIgnoreCase("Between")) {
-    out.println(cm.cmsText("habitats_advanced_43"));
+    out.println(cm.cmsText("and"));
     val = rs.getString("LAST_VALUE");
     currentValue = val;
 %>
@@ -700,14 +700,14 @@ alert('<%=cm.cms("habitats_advanced_04")%>');
   }
 %>
     <br />
-    <input type="button" class="inputTextField" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save_btn")%>" />
-    <%=cm.cmsTitle("save_btn")%>
+    <input type="button" class="inputTextField" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save")%>" />
+    <%=cm.cmsTitle("save")%>
     &nbsp;&nbsp;&nbsp;
-    <input type="submit" class="inputTextField" value="Search" id="Search" name="Search" title="<%=cm.cms("search_btn")%>" />
-    <%=cm.cmsTitle("search_btn")%>
+    <input type="submit" class="inputTextField" value="Search" id="Search" name="Search" title="<%=cm.cms("search")%>" />
+    <%=cm.cmsTitle("search")%>
     &nbsp;&nbsp;&nbsp;
-    <input type="button" class="inputTextField" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cms("reset_btn")%>" />
-    <%=cm.cmsTitle("reset_btn")%>
+    <input type="button" class="inputTextField" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cms("reset")%>" />
+    <%=cm.cmsTitle("reset")%>
     <%
 } else {
     %>
@@ -720,7 +720,7 @@ rs.close();
 </form>
 <br />
 <strong>
-  <%=cm.cmsText("habitats_advanced_49")%>
+  <%=cm.cmsText("advanced_search_might_take_long_time")%>
 </strong>
 <br />
 <%
@@ -753,7 +753,7 @@ rs.close();
         node = criteria.substring(pos_start + 1, pos_end);
         interpretedcriteria = tsas.InterpretCriteria(node, IdSession, NatureObject);
         listcriteria += node + ": " + interpretedcriteria + "<br />";
-        out.println(cm.cmsText("advanced_searching_for") + " " + interpretedcriteria + "...");
+        out.println(cm.cmsText("searching_for") + " " + interpretedcriteria + "...");
         out.flush();
         intermediatefilter = tsas.BuildFilter(node, IdSession, NatureObject);
         out.println(cm.cmsText("advanced_found") + " <strong>" + tsas.getResultCount() + "</strong>");
@@ -803,8 +803,8 @@ rs.close();
   if (tsas.getResultCount() > 0) {
 %>
 <form name="search" action="select-columns.jsp" method="post">
-  <input type="submit" name="Proceed to next step" title="<%=cm.cms("advanced_proceed_to_next_step")%>" id="NextStep" value="<%=cm.cms("habitats_advanced_55")%>" class="inputTextField" />
-  <%=cm.cmsInput("habitats_advanced_55")%>
+  <input type="submit" name="Proceed to next step" title="<%=cm.cms("proceed_to_next_step")%>" id="NextStep" value="<%=cm.cms("proceed_to_next_step")%>" class="inputTextField" />
+  <%=cm.cmsInput("proceed_to_next_step")%>
   <input type="hidden" name="searchedNatureObject" value="Habitats" />
   <input type="hidden" name="origin" value="Advanced" />
   <input type="hidden" name="explainedcriteria" value="<%=explainedcriteria%>" />
@@ -820,7 +820,7 @@ rs.close();
   <tr>
     <td>
       <form name="saveCriteriaSearch" action="save-species-or-habitats-advanced-search-criteria.jsp" method="post">
-        <input type="button" name="Save Criteria" title="<%=cm.cms("advanced_save_criteria")%>" id="SaveCriteria" value="<%=cm.cms("habitats_advanced_56")%>" class="inputTextField" onclick="javascript:SaveCriteriaFunction();" />
+        <input type="button" name="Save Criteria" title="<%=cm.cms("save_criteria")%>" id="SaveCriteria" value="<%=cm.cms("habitats_advanced_56")%>" class="inputTextField" onclick="javascript:SaveCriteriaFunction();" />
         <%=cm.cmsInput("habitats_advanced_56")%>
         <input type="hidden" name="idsession" value="<%=IdSession%>" />
         <input type="hidden" name="natureobject" value="<%=NatureObject%>" />
@@ -837,7 +837,7 @@ rs.close();
 } else {
 %>
 <br />
-<%=cm.cmsText("habitats_advanced_57")%>
+<%=cm.cmsText("no_results")%>
 <br />
 <%
     }
@@ -853,9 +853,9 @@ rs.close();
   <table summary="layout" width="100%" border="0">
     <tr>
       <td>
-        <img alt="<%=cm.cms("advanced_expand_collapse")%>" border="0" align="middle" src="images/mini/<%=(exp.equals("yes")?"collapse.gif":"expand.gif")%>" /><a title="<%=cm.cms("advanced_expand_collapse")%>" href="habitats-advanced.jsp?expandCriterias=<%=(exp.equals("yes")?"no":"yes")%>"><%=(exp.equalsIgnoreCase("yes") ? cm.cms("habitats_advanced_59") : cm.cms("habitats_advanced_60"))%> <%=cm.cmsText("habitats_advanced_58")%></a>
+        <img alt="<%=cm.cms("advanced_expand_collapse")%>" border="0" style="vertical-align:middle" src="images/mini/<%=(exp.equals("yes")?"collapse.gif":"expand.gif")%>" /><a title="<%=cm.cms("advanced_expand_collapse")%>" href="habitats-advanced.jsp?expandCriterias=<%=(exp.equals("yes")?"no":"yes")%>"><%=(exp.equalsIgnoreCase("yes") ? cm.cms("hide") : cm.cms("habitats_advanced_60"))%> <%=cm.cmsText("generic_index_07")%></a>
         <%=cm.cmsTitle("advanced_expand_collapse")%>
-        <%=cm.cmsTitle("habitats_advanced_59")%>
+        <%=cm.cmsTitle("hide")%>
         <%=cm.cmsTitle("habitats_advanced_60")%>
       </td>
     </tr>
@@ -890,31 +890,31 @@ rs.close();
 }
 %>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitats_advanced_title")%>
+<%=cm.cmsMsg("advanced_search")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("press_save_to_save_criteria")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("your_criteria_has_been_saved")%>
+<%=cm.cmsMsg("criteria_saved")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("previous_values_was_restored")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitats_advanced_search_location")%>
+<%=cm.cmsMsg("advanced_search")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitats_advanced_04")%>
+<%=cm.cmsMsg("error_deleting_root")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitats_advanced_05")%>
+<%=cm.cmsMsg("error_adding_branch")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("habitats_advanced_06")%>
+<%=cm.cmsMsg("error_deleting_branch")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("advanced_criteria")%>
+<%=cm.cmsMsg("criteria")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("advanced_attribute")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("advanced_operator")%>
+<%=cm.cmsMsg("operator")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("advanced_all")%>
+<%=cm.cmsMsg("all")%>
 <%=cm.br()%>
-<%=cm.cmsMsg("advanced_any")%>
+<%=cm.cmsMsg("any")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("of_following_criteria_are_met")%>
 <%=cm.br()%>

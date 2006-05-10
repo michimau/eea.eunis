@@ -69,7 +69,7 @@
       spec_group = rs.getString("COMMON_NAME");
       spec_group = spec_group.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&apos;");
 
-      out.print("<skos:Concept rdf:about=\""+"http://eunis.eea.eu.int/species/"+spec_id+"\">" + "\n");
+      out.print("<skos:Concept rdf:about=\""+"http://eunis.eea.europa.eu/species/"+spec_id+"\">" + "\n");
 
       out.print("  <skos:prefLabel xml:lang=\"la\">" + "\n");
       out.print("    " + spec_scientific_name + "\n");

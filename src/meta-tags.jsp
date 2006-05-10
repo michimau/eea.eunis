@@ -28,7 +28,7 @@
 <meta name="DC.Creator.CorporateName" content="EEA - European Environment Agency" />
 <link rel="SCHEMA.dc" href="http://purl.org/metadata/dublin_core_elements#creator" />
 
-<meta name="DC.Creator.CorporateName.Address" content="eunis@eea.eu.int" />
+<meta name="DC.Creator.CorporateName.Address" content="eunis@eea.europa.eu" />
 <link rel="SCHEMA.dc" href="http://purl.org/metadata/dublin_core_elements#creator" />
 
 <meta name="DC.Subject" content="Biological Diversity" />
@@ -64,7 +64,7 @@
 <meta name="DC.Publisher" content="European Environment Agency" />
 <link rel="SCHEMA.dc" href="http://purl.org/metadata/dublin_core_elements#publisher" />
 
-<meta name="DC.Publisher.Address" content="eunis@eea.eu.int" />
+<meta name="DC.Publisher.Address" content="eunis@eea.europa.eu" />
 <link rel="SCHEMA.dc" href="http://purl.org/metadata/dublin_core_elements#publisher" />
 
 <meta name="DC.Date" scheme="ISO8601" content="2005-01-01" />
@@ -77,7 +77,7 @@
 <link rel="SCHEMA.dc" href="http://purl.org/metadata/dublin_core_elements#format" />
 <link rel="SCHEMA.imt" href="http://sunsite.auc.dk/RFC/rfc/rfc2046.html" />
 
-<meta name="DC.Identifier" content="http://eunis.eea.eu.int" />
+<meta name="DC.Identifier" content="http://eunis.eea.europa.eu" />
 <link rel="SCHEMA.dc" href="http://purl.org/metadata/dublin_core_elements#identifier" />
 
 <meta name="DC.Date.X-MetadataLastModified" scheme="ISO8601" content="2005-08-25" />

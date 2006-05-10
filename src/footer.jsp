@@ -55,7 +55,7 @@
 <%
   }
 %>
-  <a href="http://biodiversity-chm.eea.eu.int/information/database/" title="<%=cm.cms("footer_related_databases_title")%>" class="footerLink"><%=cm.cmsText("footer_related_databases")%></a>
+  <a href="http://biodiversity-chm.eea.europa.eu/information/database/" title="<%=cm.cms("footer_related_databases_title")%>" class="footerLink"><%=cm.cmsText("footer_related_databases")%></a>
   <%=cm.cmsTitle("footer_related_databases_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 

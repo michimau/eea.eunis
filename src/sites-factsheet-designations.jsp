@@ -86,7 +86,7 @@
     }
     //Third table should be called "Relation with designated areas" and should display information
     // from desigr table decoded with desig-x table.
-    //Columns should then be des_site with link to "http://eunis.eea.eu.int/sites-names.jsp" prefilled with site name
+    //Columns should then be des_site with link to "http://eunis.eea.europa.eu/sites-names.jsp" prefilled with site name
     // and data sets CDDA National, European Diploma, CDDA International and Biogenetic Reserve selected,
     // descript with a link to Site module designation fact sheet (should always exist),
     // category, overlap and overlap_p.

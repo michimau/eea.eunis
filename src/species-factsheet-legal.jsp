@@ -107,7 +107,7 @@
 %>
         </td>
         <td align="center">
-          <a title="<%=cm.cms("species_factsheet_legalInstruments_04_Title")%>" target="_blank" href="http://rod.eionet.eu.int/rorabrowse.jsv?mode=A&amp;country=-1&amp;GO=GO&amp;env_issue=-1&amp;client=-1"><img alt="<%=cm.cms("species_factsheet_legalInstruments_04_Title")%>" src="images/eea.jpg" border="0" /></a>
+          <a title="<%=cm.cms("species_factsheet_legalInstruments_04_Title")%>" target="_blank" href="http://rod.eionet.europa.eu/rorabrowse.jsv?mode=A&amp;country=-1&amp;GO=GO&amp;env_issue=-1&amp;client=-1"><img alt="<%=cm.cms("species_factsheet_legalInstruments_04_Title")%>" src="images/eea.jpg" border="0" /></a>
           <%=cm.cmsTitle("species_factsheet_legalInstruments_04_Title")%>
         </td>
       </tr>

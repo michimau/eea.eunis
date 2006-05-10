@@ -28,7 +28,7 @@
     <!--
     function popIndicators(URL)
     {
-        //URL = "http://themes.eea.eu.int/Environmental_issues/biodiversity/indicators/";
+        //URL = "http://themes.eea.europa.eu/Environmental_issues/biodiversity/indicators/";
         eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=700,height=500,left=200,top=100')");
     }
     function validateQuickSearch()
@@ -452,7 +452,7 @@
         <tr style="background-color:#EEEEEE">
           <td style="white-space: nowrap">
             <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("browse")%>" />
-            <a href="http://biodiversity-chm.eea.eu.int/search_html" title="<%=cm.cms("generic_information_tools_on_species")%>">
+            <a href="http://biodiversity-chm.eea.europa.eu/search_html" title="<%=cm.cms("generic_information_tools_on_species")%>">
                 <strong><%=cm.cmsText("browse")%></strong></a>
             <%=cm.cmsTitle("generic_information_tools_on_species")%>
             <%=cm.cmsAlt("browse")%>

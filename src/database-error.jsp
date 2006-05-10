@@ -21,8 +21,8 @@ We apologize for any inconvenience and thank you for your understanding!
 Please come back later.
 <br />
 <br />
-You can always contact us at: <a title="Send email to EUNIS team" href="mailto:eunis@eea.eu.int">
-eunis@eea.eu.int</a>
+You can always contact us at: <a title="Send email to EUNIS team" href="mailto:eunis@eea.europa.eu">
+eunis@eea.europa.eu</a>
 <br />
 </body>
 </html>

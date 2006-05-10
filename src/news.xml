@@ -2,33 +2,33 @@
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>EUNIS Database v2</title>
-        <link>http://eunis.eea.eu.int/eunis/</link>
-        <description>EUNIS Database v2 is the next version of EUNIS Database (the current version is available at http://eunis.eea.eu.int).</description>
+        <link>http://eunis.eea.europa.eu/eunis/</link>
+        <description>EUNIS Database v2 is the next version of EUNIS Database (the current version is available at http://eunis.eea.europa.eu).</description>
         <language>en-us</language>
         <item>
             <title>Version 2.0 was released</title>
-            <link>http://eunis.eea.eu.int</link>
+            <link>http://eunis.eea.europa.eu</link>
             <description>Version 2.0 was released</description>
             <dc:creator>EEA - European Environment Agency</dc:creator>
             <dc:date>2005-12-23</dc:date>
         </item>
         <item>
             <title>EUNIS Tools</title>
-            <link>http://eunis.eea.eu.int</link>
+            <link>http://eunis.eea.europa.eu</link>
             <description>EUNIS Tools were updated to support this release (Installation kit, Database Tool, XLIFF Multilanguage Tool etc.)</description>
             <dc:creator>EEA - European Environment Agency</dc:creator>
             <dc:date>2005-12-23</dc:date>
         </item>
         <item>
             <title>EUNIS DiGIR Provider</title>
-            <link>http://eunis.eea.eu.int/digir.jsp</link>
+            <link>http://eunis.eea.europa.eu/digir.jsp</link>
             <description>The DiGIR Provider was updated - More than 1.500.000 records provided by EUNIS 2</description>
             <dc:creator>EEA - European Environment Agency</dc:creator>
           <dc:date>2005-12-23</dc:date>
         </item>
         <item>
             <title>EUNIS documentation</title>
-            <link>http://eunis.eea.eu.int</link>
+            <link>http://eunis.eea.europa.eu</link>
             <description>The EUNIS 2 documentation was updated for this release</description>
             <dc:creator>EEA - European Environment Agency</dc:creator>
           <dc:date>2005-12-23</dc:date>

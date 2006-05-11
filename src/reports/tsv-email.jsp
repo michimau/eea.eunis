@@ -2,6 +2,7 @@
 <%@ page import="ro.finsiel.eunis.SendMail"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.io.File"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <%--
   Created by IntelliJ IDEA.
   User: cromanescu
@@ -40,10 +41,15 @@
   }
 %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
-    <title>E-Mail report</title>
+    <title>
+      <%=cm.cms( "email_report")%>
+    </title>
     <jsp:include page="../header-page.jsp" />
   </head>
   <body>
@@ -52,7 +58,6 @@
   if ( op.equalsIgnoreCase( "email" ) )
   {
     SessionManager.setCacheReportEmailAddress( email );
-    System.out.println( "attachments.size() = " + attachments.size() );
     SendMail.sendMail(
       email,
       "EUNIS Database generated reports",
@@ -64,18 +69,18 @@
       attachments
     );
 %>
-    The files in report has been sent to the supplied e-mail address.
-
+    <br />
+    <%=cm.cmsText("report_sent_by_mail")%>.
 <%
   }
   else
   {
 %>
-    This page was accessed in a wrong way.
+    <%=cm.cmsText("page_accessed_wrong")%>.
 <%
   }
 %>
   <br />
-  <a href="javascript:history.go(-1);">Back</a>
+  <a href="javascript:history.go(-1);"><%=cm.cms("back")%></a>
   </body>
 </html>

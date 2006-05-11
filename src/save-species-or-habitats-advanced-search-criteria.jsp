@@ -121,9 +121,9 @@
         </tr>
         <tr>
           <td>
-            <label for="description" class="noshow"><%=cm.cms("save_species_or_habitats_advanced_search_criteria_description_label")%></label>
+            <label for="description" class="noshow"><%=cm.cms("save_search")%></label>
             <textarea id="description" name="description" cols="70" rows="5" style="width : 300px; height: 80px;" class="inputTextField"><%=descr%></textarea>
-            <%=cm.cmsLabel("save_species_or_habitats_advanced_search_criteria_description_label")%>
+            <%=cm.cmsLabel("save_search")%>
           </td>
         </tr>
         <tr>

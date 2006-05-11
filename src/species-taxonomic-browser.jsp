@@ -144,8 +144,8 @@
       <br />
       <br />
       <span style="color: red;">
-        You do not have JavaScript enabled in your browser.
-        Please visit the alternative page: <a href="species-taxonomy.jsp"><%=cm.cmsText("habitats_taxonomic-browser_01")%></a>.
+        <%=cm.cms("no_javascript_alternative_page")%>:
+        <a href="species-taxonomy.jsp"><%=cm.cmsText("habitats_taxonomic-browser_01")%></a>.
       </span>
     </noscript>
     <table summary="layout" width="100%" border="0">

@@ -107,8 +107,8 @@
   <br />
   <br />
   <span style="color: red;">
-    You do not have JavaScript enabled in your browser.
-    Please visit the alternative page: <a href="habitats-eunis-tree.jsp"><%=cm.cmsText("eunis_habitat_type_hierarchical_view")%></a>.
+    <%=cm.cms("no_javascript_alternative_page")%>:
+    <a href="habitats-eunis-tree.jsp"><%=cm.cmsText("eunis_habitat_type_hierarchical_view")%></a>.
   </span>
 </noscript>
 

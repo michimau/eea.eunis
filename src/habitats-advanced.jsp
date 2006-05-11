@@ -820,8 +820,8 @@ rs.close();
   <tr>
     <td>
       <form name="saveCriteriaSearch" action="save-species-or-habitats-advanced-search-criteria.jsp" method="post">
-        <input type="button" name="Save Criteria" title="<%=cm.cms("save_criteria")%>" id="SaveCriteria" value="<%=cm.cms("habitats_advanced_56")%>" class="inputTextField" onclick="javascript:SaveCriteriaFunction();" />
-        <%=cm.cmsInput("habitats_advanced_56")%>
+        <input type="button" name="Save Criteria" title="<%=cm.cms("save_criteria")%>" id="SaveCriteria" value="<%=cm.cms("save_search")%>" class="inputTextField" onclick="javascript:SaveCriteriaFunction();" />
+        <%=cm.cmsInput("save_search")%>
         <input type="hidden" name="idsession" value="<%=IdSession%>" />
         <input type="hidden" name="natureobject" value="<%=NatureObject%>" />
         <input type="hidden" name="username" value="<%=SessionManager.getUsername()%>" />

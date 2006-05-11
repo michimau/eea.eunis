@@ -101,23 +101,23 @@ String descr = (request.getParameter("description") == null ? "" : request.getPa
   <body>
       <form name="eunis" method="post" action="save-criteria-search.jsp">
         <input type="hidden" name="saveCriteria" value="true" class="inputTextField" />
-        <input type="hidden" name="numberCriteria" value="<%=java.net.URLDecoder.decode( request.getParameter("numberCriteria"), "UTF-8" )%>" />
-        <input type="hidden" name="pageName" value="<%=java.net.URLDecoder.decode( request.getParameter("pageName"), "UTF-8" )%>" />
-        <input type="hidden" name="expandSearchCriteria" value="<%=java.net.URLDecoder.decode( request.getParameter("expandSearchCriteria"), "UTF-8" )%>" />
-        <input type="hidden" name="database1" value="<%=java.net.URLDecoder.decode( request.getParameter("database1"), "UTF-8" )%>" />
-        <input type="hidden" name="database2" value="<%=java.net.URLDecoder.decode( request.getParameter("database2"), "UTF-8" )%>" />
-        <input type="hidden" name="database3" value="<%=java.net.URLDecoder.decode( request.getParameter("database3"), "UTF-8" )%>" />
+        <input type="hidden" name="numberCriteria" value="<%=java.net.URLDecoder.decode( Utilities.formatString( request.getParameter("numberCriteria") ), "UTF-8" )%>" />
+        <input type="hidden" name="pageName" value="<%=java.net.URLDecoder.decode( Utilities.formatString( request.getParameter("pageName") ), "UTF-8" )%>" />
+        <input type="hidden" name="expandSearchCriteria" value="<%=java.net.URLDecoder.decode( Utilities.formatString( request.getParameter("expandSearchCriteria") ), "UTF-8" )%>" />
+        <input type="hidden" name="database1" value="<%=java.net.URLDecoder.decode( Utilities.formatString( request.getParameter("database1") ), "UTF-8" )%>" />
+        <input type="hidden" name="database2" value="<%=java.net.URLDecoder.decode( Utilities.formatString( request.getParameter("database2") ), "UTF-8" )%>" />
+        <input type="hidden" name="database3" value="<%=java.net.URLDecoder.decode( Utilities.formatString( request.getParameter("database3") ), "UTF-8" )%>" />
         <%
           for (int i=0;i<number;i++)
           {
         %>
-          <input type="hidden" name="_<%=i%>attributesNames" value="<%=java.net.URLDecoder.decode( request.getParameter("_"+i+"attributesNames"), "UTF-8" )%>" />
-          <input type="hidden" name="_<%=i%>formFieldAttributes" value="<%=java.net.URLDecoder.decode( request.getParameter("_"+i+"formFieldAttributes"), "UTF-8" )%>" />
-          <input type="hidden" name="_<%=i%>formFieldOperators" value="<%=java.net.URLDecoder.decode( request.getParameter("_"+i+"formFieldOperators"), "UTF-8" )%>" />
-          <input type="hidden" name="_<%=i%>booleans" value="<%=java.net.URLDecoder.decode( request.getParameter("_"+i+"booleans"), "UTF-8" )%>" />
-          <input type="hidden" name="_<%=i%>operators" value="<%=java.net.URLDecoder.decode( request.getParameter("_"+i+"operators"), "UTF-8" )%>" />
-          <input type="hidden" name="_<%=i%>firstValues" value="<%=Utilities.treatURLSpecialCharacters( java.net.URLDecoder.decode( request.getParameter("_"+i+"firstValues"), "UTF-8" ) )%>" />
-          <input type="hidden" name="_<%=i%>lastValues" value="<%=Utilities.treatURLSpecialCharacters( java.net.URLDecoder.decode( request.getParameter("_"+i+"lastValues"), "UTF-8" ) )%>" />
+          <input type="hidden" name="_<%=i%>attributesNames" value="<%=java.net.URLDecoder.decode( Utilities.formatString( request.getParameter("_"+i+"attributesNames") ), "UTF-8" )%>" />
+          <input type="hidden" name="_<%=i%>formFieldAttributes" value="<%=java.net.URLDecoder.decode( Utilities.formatString( request.getParameter("_"+i+"formFieldAttributes") ), "UTF-8" )%>" />
+          <input type="hidden" name="_<%=i%>formFieldOperators" value="<%=java.net.URLDecoder.decode( Utilities.formatString( request.getParameter("_"+i+"formFieldOperators") ), "UTF-8" )%>" />
+          <input type="hidden" name="_<%=i%>booleans" value="<%=java.net.URLDecoder.decode( Utilities.formatString( request.getParameter("_"+i+"booleans") ), "UTF-8" )%>" />
+          <input type="hidden" name="_<%=i%>operators" value="<%=java.net.URLDecoder.decode( Utilities.formatString( request.getParameter("_"+i+"operators") ), "UTF-8" )%>" />
+          <input type="hidden" name="_<%=i%>firstValues" value="<%=Utilities.treatURLSpecialCharacters( java.net.URLDecoder.decode( Utilities.formatString( request.getParameter("_"+i+"firstValues") ), "UTF-8" ) )%>" />
+          <input type="hidden" name="_<%=i%>lastValues" value="<%=Utilities.treatURLSpecialCharacters( java.net.URLDecoder.decode( Utilities.formatString( request.getParameter("_"+i+"lastValues") ), "UTF-8" ) )%>" />
         <%
           }
 %>

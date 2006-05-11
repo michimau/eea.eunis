@@ -237,8 +237,8 @@
         <tr>
           <td>
             <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" /><%=cm.cmsAlt("field_mandatory")%>&nbsp;
-            <label for="select1" class="noshow"><%=cm.cms("search_attribute")%></label>
-            <select id="select1" title="<%=cm.cms("search_attribute")%>" name="searchAttribute" onchange="changeCriteria()" class="inputTextField">
+            <label for="searchAttribute" class="noshow"><%=cm.cms("search_attribute")%></label>
+            <select id="searchAttribute" title="<%=cm.cms("search_attribute")%>" name="searchAttribute" onchange="changeCriteria()" class="inputTextField">
               <option value="<%=SitesSearchCriteria.SEARCH_NAME%>" selected="selected"><%=cm.cms("site_name")%></option>
               <option value="<%=SitesSearchCriteria.SEARCH_SIZE%>"><%=cm.cms("site_size")%></option>
               <option value="<%=SitesSearchCriteria.SEARCH_LENGTH%>"><%=cm.cms("species_sites_10")%></option>

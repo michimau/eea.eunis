@@ -204,7 +204,7 @@
         <tr>
           <td>
             <label for="description" class="noshow"><%=cm.cms("description")%></label>
-            <textarea title="<%=cm.cms("description")%>" name="description" id="description" cols="70" rows="5" class="inputTextField"><%=descr%></textarea>
+            <textarea title="<%=cm.cms("description")%>" name="description" id="description" cols="40" rows="5" class="inputTextField"><%=descr%></textarea>
             <%=cm.cmsLabel("description")%>
           </td>
         </tr>

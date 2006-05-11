@@ -1298,8 +1298,8 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
     <tr>
       <td>
         <form name="saveCriteriaSearch" action="combined-search-save-criteria.jsp" method="post">
-          <input type="button" name="Save Criteria" title="<%=cm.cms("combined_save_criteria")%>" id="SaveCriteria" value="<%=cm.cms("combined_save_criteria")%>" class="inputTextField" onclick="javascript:SaveCriteriaFunction('<%=NatureObject%>');" />
-          <%=cm.cmsTitle("combined_save_criteria")%>
+          <input type="button" name="Save Criteria" title="<%=cm.cms("save_criteria")%>" id="SaveCriteria" value="<%=cm.cms("save_criteria")%>" class="inputTextField" onclick="javascript:SaveCriteriaFunction('<%=NatureObject%>');" />
+          <%=cm.cmsTitle("save_criteria")%>
           <input type="hidden" name="idsession" value="<%=IdSession%>" />
           <input type="hidden" name="natureobject" value="<%=NatureObject%>" />
           <input type="hidden" name="username" value="<%=SessionManager.getUsername()%>" />
@@ -1330,7 +1330,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
     <table summary="layout" width="100%" border="0">
       <tr>
         <td>
-          <img alt="<%=cm.cms("advanced_expand_collapse")%>" border="0" style="vertical-align:middle" src="images/mini/<%=(exp.equals("yes")?"collapse.gif":"expand.gif")%>" /><a title="Expand-Collapse" href="combined-search.jsp?expandCriterias=<%=(exp.equals("yes")?"no":"yes")%>&amp;action=keep&amp;idsession=<%=IdSession%>&amp;natureobject=<%=NatureObject%>"><%=(exp.equalsIgnoreCase("yes") ? cm.cms("hide") : cm.cms("hide"))%><%=cm.cmsText("generic_combined-search-step1_95")%></a>
+          <img alt="<%=cm.cms("advanced_expand_collapse")%>" border="0" style="vertical-align:middle" src="images/mini/<%=(exp.equals("yes")?"collapse.gif":"expand.gif")%>" /><a title="Expand-Collapse" href="combined-search.jsp?expandCriterias=<%=(exp.equals("yes")?"no":"yes")%>&amp;action=keep&amp;idsession=<%=IdSession%>&amp;natureobject=<%=NatureObject%>"><%=(exp.equalsIgnoreCase("yes") ? cm.cms("hide") : cm.cms("show"))%><%=cm.cmsText("generic_combined-search-step1_95")%></a>
           <%=cm.cmsTitle("advanced_expand_collapse")%>
           <%=cm.cmsTitle("hide")%>
           <%=cm.cmsTitle("show")%>

@@ -81,10 +81,14 @@
 <h1>
   <%=cm.cmsText("habitats_annex1-browser_01")%>
 </h1>
-<span style="color: red;">
-  You do not have JavaScript enabled in your browser.
-  Please visit the alternative page: <a href="habitats-annex1-tree.jsp"><%=cm.cmsText("habitats_annex1-browser_01")%></a>.
-</span>
+<noscript>
+  <br />
+  <br />
+  <span style="color: red;">
+    <%=cm.cms("no_javascript_alternative_page")%>:
+    <a href="habitats-eunis-tree.jsp"><%=cm.cmsText("eunis_habitat_type_hierarchical_view")%></a>.
+  </span>
+</noscript>
 <table summary="layout" width="100%" border="0">
 <tr>
 <td>

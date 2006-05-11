@@ -842,8 +842,8 @@ rs.close();
     <tr>
       <td>
         <form name="saveCriteriaSearch" action="save-sites-advanced-search-criteria.jsp" method="post">
-          <input type="button" id="SaveCriteria" title="<%=cm.cms("save_criteria")%>" name="SaveCriteria" value="<%=cm.cms("sites_advanced_55")%>" class="inputTextField" onclick="SaveCriteriaFunction()" />
-          <%=cm.cmsInput("sites_advanced_55")%>
+          <input type="button" id="SaveCriteria" title="<%=cm.cms("save_criteria")%>" name="SaveCriteria" value="<%=cm.cms("save_criteria")%>" class="inputTextField" onclick="SaveCriteriaFunction()" />
+          <%=cm.cmsInput("save_criteria")%>
           <input type="hidden" name="idsession" value="<%=IdSession%>" />
           <input type="hidden" name="natureobject" value="<%=NatureObject%>" />
           <input type="hidden" name="username" value="<%=SessionManager.getUsername()%>" />

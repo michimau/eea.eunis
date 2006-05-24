@@ -75,7 +75,7 @@
       spec_group = spec_group.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&apos;");
 
       concept = root.addElement("skos:Concept");
-      concept.Attribute.add("rdf:about","http://eunis.eea.europa.eu/species/"+spec_id);
+      concept.Attribute.add("rdf:about","http://eunis.eea.eu.int/species/"+spec_id);
 
       ro.finsiel.eunis.myXML preflabel  = concept.addElement("skos:prefLabel",spec_scientific_name);
       preflabel.Attribute.add("xml:lang","la");
@@ -112,7 +112,7 @@
       rsNames.close();
       psNames.close();
 
-      ro.finsiel.eunis.myXML definition  = concept.addElement("skos:altLabel",spec_scientific_name + " belongs to the " + spec_group + " group.");
+      ro.finsiel.eunis.myXML definition  = concept.addElement("skos:definition",spec_scientific_name + " belongs to the " + spec_group + " group.");
       definition.Attribute.add("xml:lang","en");
     }
 

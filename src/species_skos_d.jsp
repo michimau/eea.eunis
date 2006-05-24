@@ -10,10 +10,10 @@
   String size = request.getParameter("size");
   if(size==null || size.length()==0) {
     size="1";
-    return;
   }
   int nr = new Integer(size).intValue();
   if(nr==0) {
+    nr=10;
   }
 
   String SQL_DRV = application.getInitParameter("JDBC_DRV");
@@ -69,7 +69,7 @@
       spec_group = rs.getString("COMMON_NAME");
       spec_group = spec_group.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&apos;");
 
-      out.print("<skos:Concept rdf:about=\""+"http://eunis.eea.europa.eu/species/"+spec_id+"\">" + "\n");
+      out.print("<skos:Concept rdf:about=\""+"http://eunis.eea.eu.int/species/"+spec_id+"\">" + "\n");
 
       out.print("  <skos:prefLabel xml:lang=\"la\">" + "\n");
       out.print("    " + spec_scientific_name + "\n");
@@ -111,9 +111,9 @@
       rsNames.close();
       psNames.close();
 
-      out.print("  <skos:altLabel xml:lang=\"en\">" + "\n");
+      out.print("  <skos:definition xml:lang=\"en\">" + "\n");
       out.print("    " + spec_scientific_name + " belongs to the " + spec_group + " group." + "\n");
-      out.print("  </skos:altLabel>" + "\n");
+      out.print("  </skos:definition>" + "\n");
 
       out.print("</skos:Concept>" + "\n");
     }

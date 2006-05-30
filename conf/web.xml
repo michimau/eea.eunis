@@ -189,7 +189,7 @@
 
   <context-param>
     <param-name>EEA_MAP_SERVER</param-name>
-    <param-value>http://map.eea.eu.int</param-value>
+    <param-value>http://map.eea.europa.eu</param-value>
     <description>Address of the EEA map server</description>
   </context-param>
 

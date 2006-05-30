@@ -24,8 +24,10 @@
   java.sql.Connection con = null;
   java.sql.Statement ps = null;
   java.sql.Statement psNames = null;
+  java.sql.Statement psGeo = null;
   java.sql.ResultSet rs = null;
   java.sql.ResultSet rsNames = null;
+  java.sql.ResultSet rsGeo = null;
 
   try
   {
@@ -112,7 +114,44 @@
       rsNames.close();
       psNames.close();
 
-      ro.finsiel.eunis.myXML definition  = concept.addElement("skos:definition",spec_scientific_name + " belongs to the " + spec_group + " group.");
+      //insert geographical distribution
+      String strSQLGeo = "SELECT DISTINCT CHM62EDT_COUNTRY.AREA_NAME_EN";
+      strSQLGeo = strSQLGeo + " FROM CHM62EDT_REPORTS, CHM62EDT_REPORT_TYPE, CHM62EDT_COUNTRY, CHM62EDT_SPECIES_STATUS, CHM62EDT_SPECIES";
+      strSQLGeo = strSQLGeo + " WHERE CHM62EDT_REPORTS.ID_REPORT_TYPE = CHM62EDT_REPORT_TYPE.ID_REPORT_TYPE";
+      strSQLGeo = strSQLGeo + " AND CHM62EDT_REPORTS.ID_GEOSCOPE = CHM62EDT_COUNTRY.ID_GEOSCOPE";
+      strSQLGeo = strSQLGeo + " AND CHM62EDT_REPORT_TYPE.LOOKUP_TYPE = 'SPECIES_STATUS'";
+      strSQLGeo = strSQLGeo + " AND CHM62EDT_REPORT_TYPE.ID_LOOKUP = CHM62EDT_SPECIES_STATUS.ID_SPECIES_STATUS";
+      strSQLGeo = strSQLGeo + " AND CHM62EDT_COUNTRY.AREA_NAME_EN NOT LIKE 'ospar%'";
+      strSQLGeo = strSQLGeo + " AND CHM62EDT_COUNTRY.AREA_NAME_EN IS NOT NULL";
+      strSQLGeo = strSQLGeo + " AND CHM62EDT_REPORTS.ID_NATURE_OBJECT = CHM62EDT_SPECIES.ID_NATURE_OBJECT";
+      strSQLGeo = strSQLGeo + " AND CHM62EDT_SPECIES.ID_SPECIES = " + spec_id;
+      strSQLGeo = strSQLGeo + " ORDER BY CHM62EDT_COUNTRY.AREA_NAME_EN ASC";
+
+      psGeo = con.createStatement();
+      rsGeo = psGeo.executeQuery(strSQLGeo);
+
+      String geo_distribution = " It is geographically distrubuted among the following countries/areas: ";
+      boolean geo_found = false;
+      while(rsGeo.next()) {
+        geo_found = true;
+        geo_distribution += rsGeo.getString("AREA_NAME_EN");
+        if(!rsGeo.isLast()) {
+          geo_distribution += ", ";
+        }
+      }
+      geo_distribution += ".";
+
+      rsGeo.close();
+      psGeo.close();
+
+      ro.finsiel.eunis.myXML definition;
+      
+      if(geo_found) {
+        definition  = concept.addElement("skos:definition", spec_scientific_name + " belongs to the " + spec_group + " group." + geo_distribution);
+      } else {
+        definition  = concept.addElement("skos:definition", spec_scientific_name + " belongs to the " + spec_group + " group.");
+      }
+
       definition.Attribute.add("xml:lang","en");
     }
 

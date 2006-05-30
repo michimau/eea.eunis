@@ -12,7 +12,6 @@
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.factsheet.species.SpeciesFactsheet,
                  ro.finsiel.eunis.factsheet.species.GeographicalStatusWrapper,
-                 ro.finsiel.eunis.jrfTables.Chm62edtSpeciesStatusPersist,
                  ro.finsiel.eunis.search.UniqueVector,
                  ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.factsheet.species.ThreatColor"%>

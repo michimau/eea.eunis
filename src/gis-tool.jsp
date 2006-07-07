@@ -22,28 +22,76 @@
     </title>
   </head>
   <body>
-    <div id="outline">
-    <div id="alignment">
-    <div id="content">
-    <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home#index.jsp,gis_tool"/>
-      <jsp:param name="helpLink" value="gis-tool-help.jsp"/>
-    </jsp:include>
-    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="740" height="552" id="fl_eunis" align="middle">
-      <param name="allowScriptAccess" value="sameDomain" />
-      <param name="movie" value="gis/fl_eunis.swf" />
-      <param name="quality" value="high" />
-      <param name="bgcolor" value="#FFFFFF" />
-      <param name="FlashVars"  value="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_sh_sites=none&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>" />
-      <embed src="gis/fl_eunis.swf" flashvars="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_sh_sites=none&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>" quality="high" bgcolor="#FFFFFF"  width="740" height="552" name="fl_eunis" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
-    </object>
-    <%=cm.br()%>
-    <%=cm.cmsMsg("gis_title")%>
-    <jsp:include page="footer.jsp">
-      <jsp:param name="page_name" value="gis-tool-help.jsp" />
-    </jsp:include>
-    </div>
-    </div>
+    <div id="visual-portal-wrapper">
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
+      <!-- The wrapper div. It contains the three columns. -->
+      <div id="portal-columns">
+        <!-- start of the main and left columns -->
+        <div id="visual-column-wrapper">
+          <!-- start of main content block -->
+          <div id="portal-column-content">
+            <div id="content">
+              <div class="documentContent" id="region-content">
+                <a name="documentContent"></a>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure">Document Actions</h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="Print this page"
+                            title="Print this page" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="Toggle full screen mode"
+                             title="Toggle full screen mode" /></a>
+                    </li>
+                  </ul>
+                </div>
+                <br clear="all" />
+<!-- MAIN CONTENT -->
+                <jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="home#index.jsp,gis_tool"/>
+                  <jsp:param name="helpLink" value="gis-tool-help.jsp"/>
+                </jsp:include>
+                <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="740" height="552" id="fl_eunis" align="middle">
+                  <param name="allowScriptAccess" value="sameDomain" />
+                  <param name="movie" value="gis/fl_eunis.swf" />
+                  <param name="quality" value="high" />
+                  <param name="bgcolor" value="#FFFFFF" />
+                  <param name="FlashVars"  value="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_sh_sites=none&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>" />
+                  <embed src="gis/fl_eunis.swf" flashvars="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_sh_sites=none&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>" quality="high" bgcolor="#FFFFFF"  width="740" height="552" name="fl_eunis" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                </object>
+                <%=cm.br()%>
+                <%=cm.cmsMsg("gis_title")%>
+                <jsp:include page="footer.jsp">
+                  <jsp:param name="page_name" value="gis-tool-help.jsp" />
+                </jsp:include>
+<!-- END MAIN CONTENT -->
+              </div>
+            </div>
+          </div>
+          <!-- end of main content block -->
+          <!-- start of the left (by default at least) column -->
+          <div id="portal-column-one">
+            <div class="visualPadding">
+              <jsp:include page="inc_column_left.jsp" />
+            </div>
+          </div>
+          <!-- end of the left (by default at least) column -->
+        </div>
+        <!-- end of the main and left columns -->
+        <!-- start of right (by default at least) column -->
+        <div id="portal-column-two">
+          <div class="visualPadding">
+            <jsp:include page="inc_column_right.jsp" />
+          </div>
+        </div>
+        <!-- end of the right (by default at least) column -->
+        <div class="visualClear"><!-- --></div>
+      </div>
+      <!-- end column wrapper -->
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
     </div>
   </body>
 </html>

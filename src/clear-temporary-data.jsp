@@ -28,124 +28,167 @@
     </title>
   </head>
   <body>
-    <div id="outline">
-    <div id="alignment">
-    <div id="content">
-      <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home#index.jsp,services#services.jsp,clear_temporary_data_btn"/>
-      </jsp:include>
-<%
-    // Check if user has Admin right
-    if(!SessionManager.isAdmin())
-    {
-%>
-    <%=cm.cmsText("generic_clear-temporary-data_01")%>
-    <br />
-    <%=cm.cmsMsg("clear_temporary_data_btn")%>
-      <jsp:include page="footer.jsp">
-        <jsp:param name="page_name" value="clear-temporary-data.jsp"/>
-      </jsp:include>
-    </div>
-    </div>
-    </div>
-  </body>
-</html>
-<%
-    return;
-  }
-%>
-  <%=cm.cmsText("generic_clear-temporary-data_02")%>
-  <br />
-  <br />
-  <form name="clearlog" method="post" action="clear-temporary-data.jsp">
-    <input type="submit" value="<%=cm.cms("clear_temporary_data_btn")%>" title="<%=cm.cms("clear_temporary_data_btn")%>" id="submit" name="submit" class="inputTextField" />
-    <%=cm.cmsInput("clear_temporary_data_btn")%>
-  </form>
-<%
-  String SQL_DRV = application.getInitParameter("JDBC_DRV");
-  String SQL_URL = application.getInitParameter("JDBC_URL");
-  String SQL_USR = application.getInitParameter("JDBC_USR");
-  String SQL_PWD = application.getInitParameter("JDBC_PWD");
-  // If some of them is null, the wanted database operation isn't made
-
-  if(request.getParameter("submit") != null) {
-    if(request.getParameter("submit").equalsIgnoreCase(cm.cms("clear_temporary_data_btn"))) {
-      boolean result = false;
-      try {
-        // Delete all session data
-        result = ro.finsiel.eunis.search.Utilities.ClearAllSessionsData(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-        if(!result) {
-          %>
-          <%=cm.cmsText("generic_clear-temporary-data_03")%>
-          <br />
+    <div id="visual-portal-wrapper">
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
+      <!-- The wrapper div. It contains the three columns. -->
+      <div id="portal-columns">
+        <!-- start of the main and left columns -->
+        <div id="visual-column-wrapper">
+          <!-- start of main content block -->
+          <div id="portal-column-content">
+            <div id="content">
+              <div class="documentContent" id="region-content">
+                <a name="documentContent"></a>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure">Document Actions</h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="Print this page"
+                            title="Print this page" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="Toggle full screen mode"
+                             title="Toggle full screen mode" /></a>
+                    </li>
+                  </ul>
+                </div>
+                <br clear="all" />
+<!-- MAIN CONTENT -->
+                <jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="home#index.jsp,services#services.jsp,clear_temporary_data_btn"/>
+                </jsp:include>
           <%
-          } else {
+              // Check if user has Admin right
+              if(!SessionManager.isAdmin())
+              {
           %>
-          <%=cm.cmsText("generic_clear-temporary-data_04")%>
-          <br />
+              <%=cm.cmsText("generic_clear-temporary-data_01")%>
+              <br />
+              <%=cm.cmsMsg("clear_temporary_data_btn")%>
+                <jsp:include page="footer.jsp">
+                  <jsp:param name="page_name" value="clear-temporary-data.jsp"/>
+                </jsp:include>
           <%
-        }
-      }
-      catch(Exception e) {
-        e.printStackTrace();
-        return;
-      }
-    }
-  }
+              return;
+            }
+          %>
+            <%=cm.cmsText("generic_clear-temporary-data_02")%>
+            <br />
+            <br />
+            <form name="clearlog" method="post" action="clear-temporary-data.jsp">
+              <input type="submit" value="<%=cm.cms("clear_temporary_data_btn")%>" title="<%=cm.cms("clear_temporary_data_btn")%>" id="submit" name="submit" class="searchButton" />
+              <%=cm.cmsInput("clear_temporary_data_btn")%>
+            </form>
+          <%
+            String SQL_DRV = application.getInitParameter("JDBC_DRV");
+            String SQL_URL = application.getInitParameter("JDBC_URL");
+            String SQL_USR = application.getInitParameter("JDBC_USR");
+            String SQL_PWD = application.getInitParameter("JDBC_PWD");
+            // If some of them is null, the wanted database operation isn't made
 
-  Connection con = null;
-  PreparedStatement ps = null;
-  ResultSet rs = null;
+            if(request.getParameter("submit") != null) {
+              if(request.getParameter("submit").equalsIgnoreCase(cm.cms("clear_temporary_data_btn"))) {
+                boolean result = false;
+                try {
+                  // Delete all session data
+                  result = ro.finsiel.eunis.search.Utilities.ClearAllSessionsData(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+                  if(!result) {
+                    %>
+                    <%=cm.cmsText("generic_clear-temporary-data_03")%>
+                    <br />
+                    <%
+                    } else {
+                    %>
+                    <%=cm.cmsText("generic_clear-temporary-data_04")%>
+                    <br />
+                    <%
+                  }
+                }
+                catch(Exception e) {
+                  e.printStackTrace();
+                  return;
+                }
+              }
+            }
 
-  try {
-    Class.forName(SQL_DRV);
-    con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+            Connection con = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
 
-    String SQL = "";
-    // Find total number of rows containing temporary data detected in database
-    SQL = "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_RESULTS ";
-    SQL += " UNION ";
-    SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_RESULTS ";
-    SQL += " UNION ";
-    SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_TEMP ";
-    SQL += " UNION ";
-    SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_CRITERIA ";
-    SQL += " UNION ";
-    SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP ";
-    SQL += " UNION ";
-    SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_RESULTS ";
-    SQL += " UNION ";
-    SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_RESULTS ";
-    SQL += " UNION ";
-    SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_TEMP ";
-    SQL += " UNION ";
-    SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_CRITERIA ";
-    SQL += " UNION ";
-    SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_CRITERIA_TEMP ";
+            try {
+              Class.forName(SQL_DRV);
+              con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-    ps = con.prepareStatement(SQL);
-    rs = ps.executeQuery();
-    if(rs.next()) {
-      datacount = rs.getString(1);
-    }
-    rs.close();
-    ps.close();
-    con.close();
-  }
-  catch(Exception e) {
-    e.printStackTrace();
-    return;
-  }
-%>
-      <br />
-      <%=cm.cmsText("generic_clear-temporary-data_05")%>&nbsp;<strong><%=datacount%></strong>
-      <br />
-      <%=cm.cmsMsg("clear_temporary_data_btn")%>
-      <jsp:include page="footer.jsp">
-        <jsp:param name="page_name" value="clear-temporary-data.jsp"/>
-      </jsp:include>
-    </div>
-    </div>
+              String SQL = "";
+              // Find total number of rows containing temporary data detected in database
+              SQL = "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_RESULTS ";
+              SQL += " UNION ";
+              SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_RESULTS ";
+              SQL += " UNION ";
+              SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_TEMP ";
+              SQL += " UNION ";
+              SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_CRITERIA ";
+              SQL += " UNION ";
+              SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP ";
+              SQL += " UNION ";
+              SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_RESULTS ";
+              SQL += " UNION ";
+              SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_RESULTS ";
+              SQL += " UNION ";
+              SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_TEMP ";
+              SQL += " UNION ";
+              SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_CRITERIA ";
+              SQL += " UNION ";
+              SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_CRITERIA_TEMP ";
+
+              ps = con.prepareStatement(SQL);
+              rs = ps.executeQuery();
+              if(rs.next()) {
+                datacount = rs.getString(1);
+              }
+              rs.close();
+              ps.close();
+              con.close();
+            }
+            catch(Exception e) {
+              e.printStackTrace();
+              return;
+            }
+          %>
+                <br />
+                <%=cm.cmsText("generic_clear-temporary-data_05")%>&nbsp;<strong><%=datacount%></strong>
+                <br />
+                <%=cm.cmsMsg("clear_temporary_data_btn")%>
+                <jsp:include page="footer.jsp">
+                  <jsp:param name="page_name" value="clear-temporary-data.jsp"/>
+                </jsp:include>
+<!-- END MAIN CONTENT -->
+              </div>
+            </div>
+          </div>
+          <!-- end of main content block -->
+          <!-- start of the left (by default at least) column -->
+          <div id="portal-column-one">
+            <div class="visualPadding">
+              <jsp:include page="inc_column_left.jsp" />
+            </div>
+          </div>
+          <!-- end of the left (by default at least) column -->
+        </div>
+        <!-- end of the main and left columns -->
+        <!-- start of right (by default at least) column -->
+        <div id="portal-column-two">
+          <div class="visualPadding">
+            <jsp:include page="inc_column_right.jsp" />
+          </div>
+        </div>
+        <!-- end of the right (by default at least) column -->
+        <div class="visualClear"><!-- --></div>
+      </div>
+      <!-- end column wrapper -->
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
     </div>
   </body>
 </html>

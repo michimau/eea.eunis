@@ -61,7 +61,7 @@
       <input type="hidden" name="action" value="saveBookmark" />
       <input type="hidden" name="bookmarkURL" value="<%=bookmarkURL%>" />
       <%=cm.cmsText("users_bookmarks_save_02")%>:
-      <span style="background-color : #EEEEEE">
+      <span class="zebraeven">
         <%=bookmarkURL%>
       </span>
       <br />
@@ -70,16 +70,16 @@
       <%=cm.cmsText("users_bookmarks_save_03")%>:
       </label>
       <br />
-      <textarea title="<%=cm.cms("description")%>" name="description" id="description" rows="6" cols="60"  class="inputTextField"></textarea>
+      <textarea title="<%=cm.cms("description")%>" name="description" id="description" rows="6" cols="60"></textarea>
       <%=cm.cmsTitle("description")%>
       <br />      
-      <input title="<%=cm.cms("save")%>" id="input1" type="submit" name="Save" value="<%=cm.cms("save")%>" class="inputTextField" />
+      <input title="<%=cm.cms("save")%>" id="input1" type="submit" name="Save" value="<%=cm.cms("save")%>" class="searchButton" />
       <%=cm.cmsTitle("save")%>
       <%=cm.cmsInput("save")%>
-      <input title="<%=cm.cms("reset")%>" id="input2" type="reset" name="Reset" value="<%=cm.cms("reset")%>" class="inputTextField" />
+      <input title="<%=cm.cms("reset")%>" id="input2" type="reset" name="Reset" value="<%=cm.cms("reset")%>" class="standardButton" />
       <%=cm.cmsTitle("reset")%>
       <%=cm.cmsInput("reset")%>
-      <input title="<%=cm.cms("close_window")%>" id="input3" type="button" name="Close" value="<%=cm.cms("close_btn")%>" class="inputTextField" onClick="window.close();" />
+      <input title="<%=cm.cms("close_window")%>" id="input3" type="button" name="Close" value="<%=cm.cms("close_btn")%>" class="standardButton" onClick="window.close();" />
       <%=cm.cmsTitle("close_window")%>
       <%=cm.cmsInput("close_btn")%>
     </form>

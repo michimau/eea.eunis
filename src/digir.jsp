@@ -46,162 +46,209 @@
     <%=cm.cms("digir_title")%>
   </title>
 </head>
+  <body>
+    <div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>
+    <div id="visual-portal-wrapper">
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
+      <!-- The wrapper div. It contains the three columns. -->
+      <div id="portal-columns">
+        <!-- start of the main and left columns -->
+        <div id="visual-column-wrapper">
+          <!-- start of main content block -->
+          <div id="portal-column-content">
+            <div id="content">
+              <div class="documentContent" id="region-content">
+                <a name="documentContent"></a>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure">Document Actions</h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="Print this page"
+                            title="Print this page" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="Toggle full screen mode"
+                             title="Toggle full screen mode" /></a>
+                    </li>
+                  </ul>
+                </div>
+                <br clear="all" />
+<!-- MAIN CONTENT -->
+                <jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="home#index.jsp,digir_location"/>
+                </jsp:include>
+                <img alt="<%=cm.cms("loading_data")%>" id="loading" src="images/loading.gif" />
+                <%
+                  out.flush();
+                %>
+                <table summary="layout" width="100%" border="0">
+                 <tr>
+                  <td>
+                    <h1><%=cm.cmsText("digir_01")%></h1>
+                    <br />
+                    <p><%=cm.cmsText("digir_02")%>
+                    </p>
+                    <span style="font-weight:bold"><%=cm.cmsText("digir_03")%></span>
+                <%
+                      int nTotalSpecies = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sTotalSpecies),0);
+                      int nDistinctSpecies = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sDistinctSpecies),0);
+                      int nSpeciesWithCountry = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sSpeciesWithCountry),0);
+                      int nSpeciesWithLatLong = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sSpeciesWithLatLong),0);
+                      int nSpeciesFromHabitats = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sSpeciesFromHabitats),0);
+                      int nSpeciesFromSites = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sSpeciesFromSites),0);
+                      String DateLastModified = sqlc.ExecuteSQL(sDateLastModified);
 
-<body>
-  <div id="outline">
-  <div id="alignment">
-  <div id="content">
-  <div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>
-<jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home#index.jsp,digir_location"/>
-</jsp:include>
-<img alt="<%=cm.cms("loading_data")%>" id="loading" src="images/loading.gif" />
-<%
-  out.flush();
-%>
-<table summary="layout" width="100%" border="0">
- <tr>
-  <td>
-    <h1><%=cm.cmsText("digir_01")%></h1>
-    <br />
-    <p><%=cm.cmsText("digir_02")%>
-    </p>
-    <span style="font-weight:bold"><%=cm.cmsText("digir_03")%></span>
-<%
-      int nTotalSpecies = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sTotalSpecies),0);
-      int nDistinctSpecies = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sDistinctSpecies),0);
-      int nSpeciesWithCountry = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sSpeciesWithCountry),0);
-      int nSpeciesWithLatLong = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sSpeciesWithLatLong),0);
-      int nSpeciesFromHabitats = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sSpeciesFromHabitats),0);
-      int nSpeciesFromSites = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sSpeciesFromSites),0);
-      String DateLastModified = sqlc.ExecuteSQL(sDateLastModified);
-
-      if(nTotalSpecies != 0) {
-%>
-    <table summary="layout" width="100%" border="1" style="border-collapse:collapse">
-      <tr bgcolor="#EEEEEE">
-        <td width="50%">
-          <%=cm.cmsText("digir_total_rows")%>
-        </td>
-        <td width="50%">
-          <%=nTotalSpecies%>
-        </td>
-      </tr>
-      <tr bgcolor="#FFFFFF">
-        <td>
-          <%=cm.cmsText("digir_distinct_species")%>
-        </td>
-        <td>
-          <%=nDistinctSpecies%>
-        </td>
-      </tr>
-      <tr bgcolor="#EEEEEE">
-        <td>
-          <%=cm.cmsText("digir_species_country")%>
-        </td>
-        <td>
-          <%=nSpeciesWithCountry%>
-        </td>
-      </tr>
-      <tr bgcolor="#FFFFFF">
-        <td>
-          <%=cm.cmsText("digir_species_latlong")%>
-        </td>
-        <td>
-          <%=nSpeciesWithLatLong%>
-        </td>
-      </tr>
-      <tr bgcolor="#EEEEEE">
-        <td>
-          <%=cm.cmsText("digir_species_habitats")%>
-        </td>
-        <td>
-          <%=nSpeciesFromHabitats%>
-        </td>
-      </tr>
-      <tr bgcolor="#FFFFFF">
-        <td>
-          <%=cm.cmsText("digir_species_sites")%>
-        </td>
-        <td>
-          <%=nSpeciesFromSites%>
-        </td>
-      </tr>
-      <tr bgcolor="#EEEEEE">
-        <td>
-          <%=cm.cmsText("digir_last_update")%>
-        </td>
-        <td>
-          <%=DateLastModified%>
-        </td>
-      </tr>
-    </table>
-<%
-  } else {
-%>
-    <br />
-    <!--The DiGIR database is empty or the connection could not be established!-->
-    <!--<br />-->
-    <%=cm.cmsText("digir_statistics_are_not_available")%>
-    <br />
-    <br />
-<%
-  }
-%>
-    <br />
-    <span style="font-weight:bold"><%=cm.cmsText("digir_other_information")%></span>
-    <table summary="layout" width="100%" border="1" style="border-collapse:collapse">
-      <tr bgcolor="#EEEEEE">
-        <td width="50%">
-          <%=cm.cmsText("digir_provider_url")%>
-        </td>
-        <td width="50%">
-          <a href="<%=sEndpointURL%>"><%=sEndpointURL%></a>
-        </td>
-      </tr>
-      <tr bgcolor="#FFFFFF">
-        <td>
-          <%=cm.cmsText("digir_provider_endpoint")%>
-        </td>
-        <td>
-          <a href="<%=sDigirURL%>"><%=sDigirURL%></a>
-        </td>
-      </tr>
-      <tr bgcolor="#EEEEEE">
-        <td>
-          <%=cm.cmsText("digir_institution_code")%>
-        </td>
-        <td>
-          <%=sInstitutionCode%>
-        </td>
-      </tr>
-      <tr bgcolor="#FFFFFF">
-        <td>
-          <%=cm.cmsText("digir_collection_code")%>
-        </td>
-        <td>
-          <%=sCollectionCode%>
-        </td>
-      </tr>
-    </table>
-    </td>
-  </tr>
-</table>
+                      if(nTotalSpecies != 0) {
+                %>
+                    <table summary="layout" width="90%" class="datatable">
+                      <tr>
+                        <td width="50%">
+                          <%=cm.cmsText("digir_total_rows")%>
+                        </td>
+                        <td width="50%">
+                          <%=nTotalSpecies%>
+                        </td>
+                      </tr>
+                      <tr class="zebraeven">
+                        <td>
+                          <%=cm.cmsText("digir_distinct_species")%>
+                        </td>
+                        <td>
+                          <%=nDistinctSpecies%>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <%=cm.cmsText("digir_species_country")%>
+                        </td>
+                        <td>
+                          <%=nSpeciesWithCountry%>
+                        </td>
+                      </tr>
+                      <tr class="zebraeven">
+                        <td>
+                          <%=cm.cmsText("digir_species_latlong")%>
+                        </td>
+                        <td>
+                          <%=nSpeciesWithLatLong%>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <%=cm.cmsText("digir_species_habitats")%>
+                        </td>
+                        <td>
+                          <%=nSpeciesFromHabitats%>
+                        </td>
+                      </tr>
+                      <tr class="zebraeven">
+                        <td>
+                          <%=cm.cmsText("digir_species_sites")%>
+                        </td>
+                        <td>
+                          <%=nSpeciesFromSites%>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <%=cm.cmsText("digir_last_update")%>
+                        </td>
+                        <td>
+                          <%=DateLastModified%>
+                        </td>
+                      </tr>
+                    </table>
+                <%
+                  } else {
+                %>
+                    <br />
+                    <!--The DiGIR database is empty or the connection could not be established!-->
+                    <!--<br />-->
+                    <%=cm.cmsText("digir_statistics_are_not_available")%>
+                    <br />
+                    <br />
+                <%
+                  }
+                %>
+                    <br />
+                    <span style="font-weight:bold"><%=cm.cmsText("digir_other_information")%></span>
+                    <table summary="layout" class="datatable">
+                      <tr>
+                        <td width="50%">
+                          <%=cm.cmsText("digir_provider_url")%>
+                        </td>
+                        <td width="50%">
+                          <a href="<%=sEndpointURL%>"><%=sEndpointURL%></a>
+                        </td>
+                      </tr>
+                      <tr class="zebraeven">
+                        <td>
+                          <%=cm.cmsText("digir_provider_endpoint")%>
+                        </td>
+                        <td>
+                          <a href="<%=sDigirURL%>"><%=sDigirURL%></a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <%=cm.cmsText("digir_institution_code")%>
+                        </td>
+                        <td>
+                          <%=sInstitutionCode%>
+                        </td>
+                      </tr>
+                      <tr class="zebraeven">
+                        <td>
+                          <%=cm.cmsText("digir_collection_code")%>
+                        </td>
+                        <td>
+                          <%=sCollectionCode%>
+                        </td>
+                      </tr>
+                    </table>
+                    </td>
+                  </tr>
+                </table>
+                <%=cm.br()%>
+                <%=cm.cmsMsg("digir_title")%>
+                <%=cm.br()%>
+                <%=cm.cmsMsg("loading_data")%>
+                <%=cm.br()%>
+                <%=cm.cmsMsg("digir_location")%>
+                <jsp:include page="footer.jsp">
+                  <jsp:param name="page_name" value="digir.jsp" />
+                </jsp:include>
+<!-- END MAIN CONTENT -->
+              </div>
+            </div>
+          </div>
+          <!-- end of main content block -->
+          <!-- start of the left (by default at least) column -->
+          <div id="portal-column-one">
+            <div class="visualPadding">
+              <jsp:include page="inc_column_left.jsp" />
+            </div>
+          </div>
+          <!-- end of the left (by default at least) column -->
+        </div>
+        <!-- end of the main and left columns -->
+        <!-- start of right (by default at least) column -->
+        <div id="portal-column-two">
+          <div class="visualPadding">
+            <jsp:include page="inc_column_right.jsp" />
+          </div>
+        </div>
+        <!-- end of the right (by default at least) column -->
+        <div class="visualClear"><!-- --></div>
+      </div>
+      <!-- end column wrapper -->
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
+    </div>
     <script language="JavaScript" type="text/javascript">
       var load = document.getElementById( "loading" );
       load.style.display="none";
     </script>
-    <%=cm.br()%>
-    <%=cm.cmsMsg("digir_title")%>
-    <%=cm.br()%>
-    <%=cm.cmsMsg("loading_data")%>
-    <%=cm.br()%>
-    <%=cm.cmsMsg("digir_location")%>
-    <jsp:include page="footer.jsp">
-      <jsp:param name="page_name" value="digir.jsp" />
-    </jsp:include>
-    </div>
-    </div>
-    </div>
-</body>
+  </body>
 </html>

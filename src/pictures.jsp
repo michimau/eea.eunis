@@ -148,88 +148,84 @@
         }
       //-->
     </script>
+<%
+  }
+%>
     <title>
       <%=cm.cms("pictures_page_title")%> <%=scientificName%>
     </title>
   </head>
   <body>
-    <div id="outline">
-    <div id="alignment">
-    <div id="content">
-      <div id="picture_name" style="width : 100%; text-align:center; font-weight:bold;">
-        <%=scientificName%>
-      </div>
-      <div id="picture_description" style="width : 100%; text-align:center; font-weight:bold;">
-        <%=firstdescription%>
-      </div>
-      <div id="navRow" style="width : 100%; text-align : center;">
-        <a href="javascript:prevImage('rImage')"><%=cm.cmsText("pictures_previous")%></a>
-        &nbsp;&nbsp;
-        <a href="javascript:nextImage('rImage')"><%=cm.cmsText("pictures_next")%></a>
-      </div>
-      <div style="width : 100%; text-align : center;">
-        <img alt="<%=firstdescription%>" id="image" name="rImage" src="<%=dirBase + firstimage%>" border="1" />
-      </div>
-      <script language="JavaScript" type="text/javascript">
-        <!--
-          // Hide the Next and Previous links if there is only one picture
-          if (imageArray.length < 2) {
-            if(document.getElementById) {
-              document.getElementById("navRow").style.visibility = "hidden";
-            }
+<%
+  if(null != pictures && pictures.size() > 0)
+  {
+%>
+    <div id="picture_name" style="width : 100%; text-align:center; font-weight:bold;">
+      <%=scientificName%>
+    </div>
+    <div id="picture_description" style="width : 100%; text-align:center; font-weight:bold;">
+      <%=firstdescription%>
+    </div>
+    <div id="navRow" style="width : 100%; text-align : center;">
+      <a href="javascript:prevImage('rImage')"><%=cm.cmsText("pictures_previous")%></a>
+      &nbsp;&nbsp;
+      <a href="javascript:nextImage('rImage')"><%=cm.cmsText("pictures_next")%></a>
+    </div>
+    <div style="width : 100%; text-align : center;">
+      <img alt="<%=firstdescription%>" id="image" name="rImage" src="<%=dirBase + firstimage%>" border="1" />
+    </div>
+    <script language="JavaScript" type="text/javascript">
+      <!--
+        // Hide the Next and Previous links if there is only one picture
+        if (imageArray.length < 2) {
+          if(document.getElementById) {
+            document.getElementById("navRow").style.visibility = "hidden";
           }
-        //-->
-      </script>
+        }
+      //-->
+    </script>
 <%
   }
   else
   {
 %>
-    <title>
-      <%=cm.cms("pictures_page_title")%> <%=scientificName%>
-    </title>
-  </head>
-  <body>
-    <div id="outline">
-    <div id="alignment">
-    <div id="content">
-      <%=cm.cmsText("pictures_none")%>
-      <strong>
-        <%=scientificName%>
-      </strong>
-      <br />
+    <%=cm.cmsText("pictures_none")%>
+    <strong>
+      <%=scientificName%>
+    </strong>
+    <br />
 <%
   }
 %>
-      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="inputTextField" />
-      <%=cm.cmsTitle("close_window")%>
-      <%=cm.cmsInput("close_btn")%>
-  <br />
+    <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="standardButton" />
+    <%=cm.cmsTitle("close_window")%>
+    <%=cm.cmsInput("close_btn")%>
+    <br />
 <%
   if (SessionManager.isAuthenticated())
   {
 %>
-  <a href="pictures-upload.jsp?idobject=<%=IdObject%>&amp;natureobjecttype=<%=NatureObjectType%>&amp;operation=upload"><%=cm.cmsText("pictures_uploadnew")%></a><br />
-  <a href="javascript:deletePicture();"><%=cm.cmsText("pictures_delete")%></a><br />
-  <script type="text/javascript" language="javascript">
-    <!--
-    function deletePicture() {
-      if (confirm('<%=cm.cms("pictures_confirm")%>')) {
-        var imgURI = document.getElementById("image").src;
-        var uriElements = imgURI.split("/");
-        var scientificName = uriElements[uriElements.length - 1];
-        document.deletePicture.filename.value = scientificName;
-        document.deletePicture.submit();
+    <a href="pictures-upload.jsp?idobject=<%=IdObject%>&amp;natureobjecttype=<%=NatureObjectType%>&amp;operation=upload"><%=cm.cmsText("pictures_uploadnew")%></a><br />
+    <a href="javascript:deletePicture();"><%=cm.cmsText("pictures_delete")%></a><br />
+    <script type="text/javascript" language="javascript">
+      <!--
+      function deletePicture() {
+        if (confirm('<%=cm.cms("pictures_confirm")%>')) {
+          var imgURI = document.getElementById("image").src;
+          var uriElements = imgURI.split("/");
+          var scientificName = uriElements[uriElements.length - 1];
+          document.deletePicture.filename.value = scientificName;
+          document.deletePicture.submit();
+        }
       }
-    }
-    //-->
-  </script>
-  <form name="deletePicture" method="post" action="pictures-upload.jsp">
-    <input type="hidden" name="idobject" value="<%=IdObject%>" />
-    <input type="hidden" name="natureobjecttype" value="<%=NatureObjectType%>" />
-    <input type="hidden" name="filename" value="" />
-    <input type="hidden" name="operation" value="delete" />
-  </form>
+      //-->
+    </script>
+    <form name="deletePicture" method="post" action="pictures-upload.jsp">
+      <input type="hidden" name="idobject" value="<%=IdObject%>" />
+      <input type="hidden" name="natureobjecttype" value="<%=NatureObjectType%>" />
+      <input type="hidden" name="filename" value="" />
+      <input type="hidden" name="operation" value="delete" />
+    </form>
 <%
   }
   else
@@ -239,10 +235,7 @@
 <%
   }
 %>
-      <%=cm.cmsMsg("pictures_page_title")%>
-      <%=cm.cmsMsg("pictures_confirm")%>
-    </div>
-    </div>
-    </div>
+    <%=cm.cmsMsg("pictures_page_title")%>
+    <%=cm.cmsMsg("pictures_confirm")%>
   </body>
 </html>

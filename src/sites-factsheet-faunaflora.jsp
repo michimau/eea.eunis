@@ -15,7 +15,7 @@
                  ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesPersist,
                  ro.finsiel.eunis.jrfTables.sites.factsheet.SitesSpeciesReportAttributesPersist,
                  ro.finsiel.eunis.WebContentManagement,
-                 ro.finsiel.eunis.utilities.SQLUtilities"%>
+                 ro.finsiel.eunis.utilities.SQLUtilities, ro.finsiel.eunis.search.Utilities"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   String siteid = request.getParameter("idsite");
@@ -50,9 +50,11 @@
             SiteFactsheet.TYPE_DIPLOMA == type)) // If some attributes are non-null and site is from these dbs
   {
 %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("site_contact_authorities")%></div>
+    <h2>
+      <%=cm.cmsText("site_contact_authorities")%>
+    </h2>
     <%-- Site contact authorities --%>
-    <table summary="<%=cm.cms("site_contact_authorities")%>" border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse" >
+    <table summary="<%=cm.cms("site_contact_authorities")%>" width="90%" class="datatable">
 <%
     if (SiteFactsheet.TYPE_NATURA2000 == type ||
               SiteFactsheet.TYPE_EMERALD == type ||
@@ -60,7 +62,7 @@
               SiteFactsheet.TYPE_BIOGENETIC == type)
     {
 %>
-      <tr bgcolor="#EEEEEE">
+      <tr class="zebraeven">
         <td width="40%">
           <%=cm.cmsText("respondent")%>
         </td>
@@ -73,7 +75,7 @@
     if (SiteFactsheet.TYPE_BIOGENETIC == type)
     {
 %>
-      <tr bgcolor="#FFFFFF">
+      <tr>
         <td>
           <%=cm.cmsText("author")%>
         </td>
@@ -89,7 +91,7 @@
             SiteFactsheet.TYPE_BIOGENETIC == type)
     {
 %>
-      <tr bgcolor="#EEEEEE">
+      <tr class="zebraeven">
         <td>
           <%=cm.cmsText("manager")%>
         </td>
@@ -102,7 +104,7 @@
     if (SiteFactsheet.TYPE_DIPLOMA == type)
     {
 %>
-      <tr bgcolor="#FFFFFF">
+      <tr class="zebraeven">
         <td>
           <%=cm.cmsText("information")%>
         </td>
@@ -110,7 +112,7 @@
           <%=information%>
         </td>
       </tr>
-      <tr bgcolor="#EEEEEE">
+      <tr>
         <td>
           <%=cm.cmsText("official_contact_international")%>
         </td>
@@ -118,7 +120,7 @@
           <%=officialContactInternational%>&nbsp;
         </td>
       </tr>
-      <tr bgcolor="#FFFFFF">
+      <tr class="zebraeven">
         <td>
           <%=cm.cmsText("official_contact_national")%>
         </td>
@@ -126,7 +128,7 @@
           <%=officialContactNational%>&nbsp;
         </td>
       </tr>
-      <tr bgcolor="#EEEEEE">
+      <tr>
         <td>
           <%=cm.cmsText("official_contact_regional")%>
         </td>
@@ -134,7 +136,7 @@
           <%=officialContactRegional%>&nbsp;
         </td>
       </tr>
-      <tr bgcolor="#FFFFFF">
+      <tr class="zebraeven">
         <td>
           <%=cm.cmsText("official_contact_local")%>
         </td>
@@ -190,14 +192,10 @@
   {
 %>
     <%-- Description --%>
-    <table border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse" >
-      <tr>
-        <td colspan="2" bgcolor="#DDDDDD">
-          <strong>
-            <%=cm.cmsText("description")%>
-          </strong>
-        </td>
-      </tr>
+    <h2>
+      <%=cm.cmsText("description")%>
+    </h2>
+    <table width="90%" class="datatable">
 <%
   if (SiteFactsheet.TYPE_NATURA2000 == type ||
           SiteFactsheet.TYPE_EMERALD == type ||
@@ -205,7 +203,7 @@
           SiteFactsheet.TYPE_CORINE == type)
   {
 %>
-      <tr bgcolor="#EEEEEE">
+      <tr class="zebraeven">
         <td width="30%">
           <%=cm.cmsText("general_character_of_site")%>
         </td>
@@ -218,7 +216,7 @@
   if (SiteFactsheet.TYPE_CDDA_NATIONAL != type && SiteFactsheet.TYPE_CDDA_INTERNATIONAL != type)
   {
 %>
-      <tr bgcolor="#FFFFFF">
+      <tr>
         <td>
           <%=cm.cmsText("quality")%>
         </td>
@@ -226,7 +224,7 @@
           <%=quality%>&nbsp;
         </td>
       </tr>
-      <tr bgcolor="#EEEEEE">
+      <tr class="zebraeven">
         <td>
           <%=cm.cmsText("vulnerability")%>
         </td>
@@ -234,7 +232,7 @@
           <%=vulnerability%>&nbsp;
         </td>
       </tr>
-      <tr bgcolor="#FFFFFF">
+      <tr>
         <td>
           <%=cm.cmsText("designation")%>
         </td>
@@ -242,7 +240,7 @@
           <%=designation%>&nbsp;
         </td>
       </tr>
-      <tr bgcolor="#EEEEEE">
+      <tr class="zebraeven">
         <td>
           <%=cm.cmsText("owner")%>
         </td>
@@ -250,7 +248,7 @@
           <%=ownership%>&nbsp;
         </td>
       </tr>
-      <tr bgcolor="#FFFFFF">
+      <tr>
         <td>
           <%=cm.cmsText("documentation")%>
         </td>
@@ -263,7 +261,7 @@
   if (SiteFactsheet.TYPE_BIOGENETIC == type || SiteFactsheet.TYPE_DIPLOMA == type)
   {
 %>
-      <tr bgcolor="#EEEEEE">
+      <tr class="zebraeven">
         <td>
           <%=cm.cmsText("habitat_types")%>
         </td>
@@ -271,7 +269,7 @@
           <%=characterization%>&nbsp;
         </td>
       </tr>
-      <tr bgcolor="#FFFFFF">
+      <tr>
         <td>
           <%=cm.cmsText("flora")%>
         </td>
@@ -279,7 +277,7 @@
           <%=floraCharacterization%>&nbsp;
         </td>
       </tr>
-      <tr bgcolor="#EEEEEE">
+      <tr class="zebraeven">
         <td>
           <%=cm.cmsText("fauna")%>
         </td>
@@ -287,7 +285,7 @@
           <%=faunaCharacterization%>&nbsp;
         </td>
       </tr>
-      <tr bgcolor="#FFFFFF">
+      <tr>
         <td>
           <%=cm.cmsText("potential_vegetation")%>
         </td>
@@ -300,7 +298,7 @@
   if (SiteFactsheet.TYPE_DIPLOMA == type)
   {
 %>
-      <tr bgcolor="#EEEEEE">
+      <tr class="zebraeven">
         <td>
           <%=cm.cmsText("geomorphology")%>
         </td>
@@ -308,7 +306,7 @@
           <%=geomorphology%>&nbsp;
         </td>
       </tr>
-      <tr bgcolor="#FFFFFF">
+      <tr>
         <td>
           <%=cm.cmsText("educational_interest")%>
         </td>
@@ -316,7 +314,7 @@
           <%=educationalInterest%>&nbsp;
         </td>
       </tr>
-      <tr bgcolor="#EEEEEE">
+      <tr class="zebraeven">
         <td><%=cm.cmsText("cultural_heritage")%></td>
         <td><%=culturalHeritage%>&nbsp;</td>
       </tr>
@@ -325,7 +323,7 @@
   if (SiteFactsheet.TYPE_DIPLOMA == type || SiteFactsheet.TYPE_CORINE == type)
   {
 %>
-      <tr bgcolor="#FFFFFF">
+      <tr>
         <td><%=cm.cmsText("justification")%></td>
         <td><%=justification%>&nbsp;</td>
       </tr>
@@ -334,11 +332,11 @@
   if (SiteFactsheet.TYPE_DIPLOMA == type)
   {
 %>
-      <tr bgcolor="#EEEEEE">
+      <tr class="zebraeven">
         <td><%=cm.cmsText("methodology")%></td>
         <td><%=methodology%>&nbsp;</td>
       </tr>
-      <tr bgcolor="#FFFFFF">
+      <tr>
         <td><%=cm.cmsText("budget")%></td>
         <td><%=budget%>&nbsp;</td>
       </tr>
@@ -350,7 +348,7 @@
           SiteFactsheet.TYPE_BIOGENETIC == type)
   {
 %>
-      <tr bgcolor="#EEEEEE">
+      <tr class="zebraeven">
         <td><%=cm.cmsText("management_plan")%></td>
         <td><%=managementPlan%>&nbsp;</td>
       </tr>
@@ -359,11 +357,11 @@
   if (SiteFactsheet.TYPE_DIPLOMA == type || SiteFactsheet.TYPE_CDDA_INTERNATIONAL == type)
   {
 %>
-      <tr bgcolor="#FFFFFF">
+      <tr>
         <td><%=cm.cmsText("url_official")%></td>
         <td><a title="Official URL" href="<%=urlOfficial%>"><%=urlOfficial%></a>&nbsp;</td>
       </tr>
-      <tr bgcolor="#EEEEEE">
+      <tr class="zebraeven">
         <td><%=cm.cmsText("url_interesting")%></td>
         <td><a title="URL interesting" href="<%=urlInteresting%>"><%=urlInteresting%></a>&nbsp;</td>
       </tr>
@@ -394,112 +392,118 @@
           {
 %>
 
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("ecological_information_fauna_flora")%></div>
-      <table summary="<%=cm.cms("ecological_information_fauna_flora")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="species" class="sortable">
-        <tr>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("species_scientific_name")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("species_group")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("resident")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("breeding")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_94")%>
-            <%=cm.cmsTitle("sites_factsheet_faunaflora_wintering")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("staging")%>
-            <%=cm.cmsTitle("sites_factsheet_faunaflora_annexesofdirectives")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_96")%>
-            <%=cm.cmsTitle("sites_factsheet_faunaflora_populationstatus")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("species")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_98")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_99")%>
-            <%=cm.cmsTitle("sites_factsheet_faunaflora_conservationstatus")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("isolation")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_101")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("species_status")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-        </tr>
+  <h2>
+    <%=cm.cmsText("ecological_information_fauna_flora")%>
+  </h2>
+  <table summary="<%=cm.cms("ecological_information_fauna_flora")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cmsText("species_scientific_name")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("species_group")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("resident")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("breeding")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("sites_factsheet_94")%>
+          <%=cm.cmsTitle("sites_factsheet_faunaflora_wintering")%>
+        </th>
+        <th>
+          <%=cm.cmsText("staging")%>
+          <%=cm.cmsTitle("sites_factsheet_faunaflora_annexesofdirectives")%>
+        </th>
+        <th>
+          <%=cm.cmsText("sites_factsheet_96")%>
+          <%=cm.cmsTitle("sites_factsheet_faunaflora_populationstatus")%>
+        </th>
+        <th>
+          <%=cm.cmsText("species")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("sites_factsheet_98")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("sites_factsheet_99")%>
+          <%=cm.cmsTitle("sites_factsheet_faunaflora_conservationstatus")%>
+        </th>
+        <th>
+          <%=cm.cmsText("isolation")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("sites_factsheet_101")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("species_status")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
           for (int i = 0; i < species.size(); i++)
           {
+            String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
             SiteSpeciesPersist specie = (SiteSpeciesPersist)species.get(i);
             String attrValue;
 %>
-        <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-          <td>
-            <a title="<%=cm.cms("open_site_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getSpeciesScientificName()%></a>
-            <%=cm.cmsTitle("open_site_factsheet")%>
-          </td>
-          <td align="center">
-            <%=specie.getSpeciesCommonName()%>
-          </td>
-          <td align="center">
-            <%attribute = factsheet.findSiteAttributes("BREEDING",specie.getIdReportAttributes());%>
-            <%=(null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""%>
-          </td>
-          <td align="center">
-            <%attribute = factsheet.findSiteAttributes("RESIDENT",specie.getIdReportAttributes());%>
-            <%=(null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : ""%>
-          </td>
-          <td align="center">
-            <%attribute = factsheet.findSiteAttributes("WINTERING",specie.getIdReportAttributes());%>
-            <%=(null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : ""%>
-          </td>
-          <td align="center">
-            <%attribute = factsheet.findSiteAttributes("STAGING",specie.getIdReportAttributes());%>
-            <%=(null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : ""%>
-          </td>
-          <td align="center">
-            <%attribute = factsheet.findSiteAttributes("POPULATION", specie.getIdReportAttributes());%>
-            <%=(null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : ""%>
-          </td>
-          <td align="center">
-            <%attribute = factsheet.findSiteAttributes("MIGRATION", specie.getIdReportAttributes());%>
-            <%=(null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : ""%>
-          </td>
-          <td align="center">
-            <%attribute = factsheet.findSiteAttributes("NESTING", specie.getIdReportAttributes());%>
-            <%=(null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : ""%>
-          </td>
-          <td align="center">
+      <tr<%=cssClass%>>
+        <td>
+          <a title="<%=cm.cms("open_site_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getSpeciesScientificName()%></a>
+          <%=cm.cmsTitle("open_site_factsheet")%>
+        </td>
+        <td align="center">
+          <%=specie.getSpeciesCommonName()%>
+        </td>
+        <td align="center">
+          <%attribute = factsheet.findSiteAttributes("BREEDING",specie.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatString( attribute.getValue(), "&nbsp;" ) : "&nbsp;"%>
+        </td>
+        <td align="center">
+          <%attribute = factsheet.findSiteAttributes("RESIDENT",specie.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatString( attribute.getValue(), "&nbsp;" ) : "&nbsp;"%>
+        </td>
+        <td align="center">
+          <%attribute = factsheet.findSiteAttributes("WINTERING",specie.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatString( attribute.getValue(), "&nbsp;" ) : "&nbsp;"%>
+        </td>
+        <td align="center">
+          <%attribute = factsheet.findSiteAttributes("STAGING",specie.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatString( attribute.getValue(), "&nbsp;" ) : "&nbsp;"%>
+        </td>
+        <td align="center">
+          <%attribute = factsheet.findSiteAttributes("POPULATION", specie.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatString( attribute.getValue(), "&nbsp;" ) : "&nbsp;"%>
+        </td>
+        <td align="center">
+          <%attribute = factsheet.findSiteAttributes("MIGRATION", specie.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatString( attribute.getValue(), "&nbsp;" ) : "&nbsp;"%>
+        </td>
+        <td align="center">
+          <%attribute = factsheet.findSiteAttributes("NESTING", specie.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatString( attribute.getValue(), "&nbsp;" ) : "&nbsp;"%>
+        </td>
+        <td align="center">
 <%
             attribute = factsheet.findSiteAttributes("CONSERVATION", specie.getIdReportAttributes());
             if ( attribute != null && attribute.getValue() != null && attribute.getValue().length() > 0 )
             {
               attrValue = sqlc.ExecuteSQL( "SELECT NAME FROM CHM62EDT_NATURA2000_CONSERVATION_CODE WHERE ID_CONSERVATION_CODE='" + attribute.getValue() + "'" );
 %>
-              <span class="boldUnderline" title="<%=attrValue%>"><%=attribute.getValue()%></span>
+          <span class="boldUnderline" title="<%=attrValue%>"><%=attribute.getValue()%></span>
 <%
             } else {
 %>
@@ -507,15 +511,15 @@
 <%
             }
 %>
-          </td>
-          <td align="center">
+        </td>
+        <td align="center">
 <%
             attribute = factsheet.findSiteAttributes("ISOLATION",specie.getIdReportAttributes());
             if ( attribute != null && attribute.getValue() != null && attribute.getValue().length() > 0 )
             {
               attrValue = sqlc.ExecuteSQL( "SELECT NAME FROM CHM62EDT_ISOLATION WHERE ID_ISOLATION='" + attribute.getValue() + "'" );
 %>
-              <span class="boldUnderline" title="<%=attrValue%>"><%=attribute.getValue()%></span>
+          <span class="boldUnderline" title="<%=attrValue%>"><%=attribute.getValue()%></span>
 <%
             } else {
 %>
@@ -523,62 +527,70 @@
 <%
             }
 %>
-          </td>
-          <td align="center">
+        </td>
+        <td align="center">
 <%
             attribute = factsheet.findSiteAttributes("GLOBAL", specie.getIdReportAttributes());
             if ( attribute != null && attribute.getValue() != null && attribute.getValue().length() > 0 )
             {
               attrValue = sqlc.ExecuteSQL( "SELECT NAME FROM CHM62EDT_GLOBAL WHERE ID_GLOBAL='" + attribute.getValue() + "'" );
 %>
-              <span class="boldUnderline" title="<%=attrValue%>"><%=attribute.getValue()%></span>
+          <span class="boldUnderline" title="<%=attrValue%>"><%=attribute.getValue()%></span>
 <%
             } else {
 %>
-              &nbsp;
+          &nbsp;
 <%
             }
 %>
-          </td>
-          <td align="center">
-            <%attribute = factsheet.findSiteAttributes("SPECIES_STATUS", specie.getIdReportAttributes());%>
-            <%=(null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : ""%>
-          </td>
-        </tr>
+        </td>
+        <td align="center">
+          <%attribute = factsheet.findSiteAttributes("SPECIES_STATUS", specie.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatString( attribute.getValue(), "&nbsp;" ) : "&nbsp;"%>
+        </td>
+      </tr>
 <%
           }
 %>
-      </table>
-      <br />
+    </tbody>
+  </table>
+  <br />
 <%
-          }
-    if (sitesSpecificspecies.size() > 0)
+      }
+      if (sitesSpecificspecies.size() > 0)
     {
 %>
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("other_species_mentioned_in_site")%></div>
-      <table summary="<%=cm.cms("other_species_mentioned_in_site")%>" border="1" cellpadding="1" cellspacing="1" width="100%" name="speciesNonEUNIS" id="speciesNonEUNIS" cols="1" style="border-collapse:collapse">
-        <tr>
-          <th class="resultHeader">
-            <%=cm.cmsText("species_scientific_name")%>
-          </th>
-        </tr>
+  <h2>
+    <%=cm.cmsText("other_species_mentioned_in_site")%>
+  </h2>
+  <table summary="<%=cm.cms("other_species_mentioned_in_site")%>" width="90%" class="listing">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cmsText("species_scientific_name")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
           // Here I get the species which are only specific to site
           for (int i = 0; i < sitesSpecificspecies.size(); i++)
           {
+            String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
             Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist)sitesSpecificspecies.get(i);
 %>
-            <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-              <td>
-                <a title="<%=cm.cms("sites_factsheet_105")%>" href="javascript:openGooglePics('http://www.google.com/search?q=<%=specie.getValue()%>')"><%=specie.getValue()%></a>
-                <%=cm.cmsTitle("sites_factsheet_105")%>
-              </td>
-            </tr>
+      <tr<%=cssClass%>>
+        <td>
+          <a title="<%=cm.cms("sites_factsheet_105")%>" href="javascript:openGooglePics('http://www.google.com/search?q=<%=specie.getValue()%>')"><%=specie.getValue()%></a>
+          <%=cm.cmsTitle("sites_factsheet_105")%>
+        </td>
+      </tr>
 <%
           }
 %>
-      </table>
-      <br />
+    </tbody>
+  </table>
+  <br />
 <%
          }
        }
@@ -596,120 +608,128 @@
       {
         Chm62edtReportAttributesPersist attribute;
 %>
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("ecological_information_fauna_flora_mentioned_in_site")%></div>
-      <%-- species mentioned in annexes and directives --%>
+  <h2>
+    <%=cm.cmsText("ecological_information_fauna_flora_mentioned_in_site")%>
+  </h2>
+  <%-- species mentioned in annexes and directives --%>
 <%
-    if (!eunisSpeciesListedAnnexesDirectives.isEmpty() || !notEunisSpeciesListedAnnexesDirectives.isEmpty())
-    {
+        if (!eunisSpeciesListedAnnexesDirectives.isEmpty() || !notEunisSpeciesListedAnnexesDirectives.isEmpty())
+        {
 %>
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species")%></div>
-      <table summary="<%=cm.cms("species")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="species1" class="sortable">
-        <tr>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("species_scientific_name")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("species_group")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("resident")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("breeding")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_94")%>
-            <%=cm.cmsTitle("sites_factsheet_faunaflora_wintering")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("staging")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_99")%>
-            <%=cm.cmsTitle("sites_factsheet_faunaflora_conservationstatus")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_96")%>
-            <%=cm.cmsTitle("sites_factsheet_faunaflora_populationstatus")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("isolation")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : center;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_101")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-        </tr>
+  <h3>
+    <%=cm.cmsText("species")%>
+  </h3>
+  <table summary="<%=cm.cms("species")%>" width="90%" class="listing">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cmsText("species_scientific_name")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("species_group")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("resident")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("breeding")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("sites_factsheet_94")%>
+          <%=cm.cmsTitle("sites_factsheet_faunaflora_wintering")%>
+        </th>
+        <th>
+          <%=cm.cmsText("staging")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("sites_factsheet_99")%>
+          <%=cm.cmsTitle("sites_factsheet_faunaflora_conservationstatus")%>
+        </th>
+        <th>
+          <%=cm.cmsText("sites_factsheet_96")%>
+          <%=cm.cmsTitle("sites_factsheet_faunaflora_populationstatus")%>
+        </th>
+        <th>
+          <%=cm.cmsText("isolation")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("sites_factsheet_101")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
     if (!eunisSpeciesListedAnnexesDirectives.isEmpty())
     {
       for (int i = 0; i < eunisSpeciesListedAnnexesDirectives.size(); i++)
       {
+        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
         SitesSpeciesReportAttributesPersist specie = (SitesSpeciesReportAttributesPersist)eunisSpeciesListedAnnexesDirectives.get(i);
 %>
-        <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-          <td>
-            <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getSpeciesScientificName()%></a>
-            <%=cm.cmsTitle("open_species_factsheet")%>
-          </td>
-          <td>
-            <%=specie.getSpeciesCommonName()%>
-          </td>
-          <td align="center">
-            <%attribute = factsheet.findSiteAttributes("RESIDENT",specie.getIdReportAttributes());%>
-            <%=(null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : ""%>
-          </td>
-          <td align="center">
-            <%attribute = factsheet.findSiteAttributes("BREEDING",specie.getIdReportAttributes());%>
-            <%=(null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""%>
-          </td>
-          <td align="center">
-            <%attribute = factsheet.findSiteAttributes("WINTERING",specie.getIdReportAttributes());%>
-            <%=(null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : ""%>
-          </td>
-          <td align="center">
-            <%attribute = factsheet.findSiteAttributes("STAGING",specie.getIdReportAttributes());%>
-            <%=(null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : ""%>
-          </td>
-          <%attribute = factsheet.findSiteAttributes("CONSERVATION", specie.getIdReportAttributes());%>
-          <%String conserv = (null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : "";%>
-          <td align="center">
-<%--                        <span title="<%=factsheet.findConservNatura2000(conserv)%>" alt="<%=factsheet.findConservNatura2000(conserv)%>">--%>
+      <tr<%=cssClass%>>
+        <td>
+          <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getSpeciesScientificName()%></a>
+          <%=cm.cmsTitle("open_species_factsheet")%>
+        </td>
+        <td>
+          <%=specie.getSpeciesCommonName()%>
+        </td>
+        <td align="center">
+          <%attribute = factsheet.findSiteAttributes("RESIDENT",specie.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatString( attribute.getValue(), "&nbsp;" ) : "&nbsp;"%>
+        </td>
+        <td align="center">
+          <%attribute = factsheet.findSiteAttributes("BREEDING",specie.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatString( attribute.getValue(), "&nbsp;" ) : "&nbsp;"%>
+        </td>
+        <td align="center">
+          <%attribute = factsheet.findSiteAttributes("WINTERING",specie.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatString( attribute.getValue(), "&nbsp;" ) : "&nbsp;"%>
+        </td>
+        <td align="center">
+          <%attribute = factsheet.findSiteAttributes("STAGING",specie.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatString( attribute.getValue(), "&nbsp;" ) : "&nbsp;"%>
+        </td>
+        <%attribute = factsheet.findSiteAttributes("CONSERVATION", specie.getIdReportAttributes());%>
+        <%String conserv = ( null != attribute ) ? Utilities.formatString( attribute.getValue(), "&nbsp;" ) : "&nbsp;";%>
+        <td align="center">
+  <%--                        <span title="<%=factsheet.findConservNatura2000(conserv)%>" alt="<%=factsheet.findConservNatura2000(conserv)%>">--%>
           <span onmouseover="showtooltipWithMsgAndTitle('<%=factsheet.findConservNatura2000(conserv)%>','Conservation')" onmouseout="hidetooltip()">
-            <a href="#" onclick="return false;"><%=conserv%></a>
-          </span>
-          </td>
-          <%attribute = factsheet.findSiteAttributes("POPULATION", specie.getIdReportAttributes());%>
-          <%String population = (null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : "";%>
-          <td align="center">
-<%--                        <span title="<%=factsheet.findPopulation(population)%>" alt="<%=factsheet.findPopulation(population)%>">--%>
+          <a href="#" onclick="return false;"><%=conserv%></a>
+        </span>
+        </td>
+        <%attribute = factsheet.findSiteAttributes("POPULATION", specie.getIdReportAttributes());%>
+        <%String population = ( null != attribute ) ? Utilities.formatString( attribute.getValue(), "&nbsp;" ) : "&nbsp;";%>
+        <td align="center">
+  <%--                        <span title="<%=factsheet.findPopulation(population)%>" alt="<%=factsheet.findPopulation(population)%>">--%>
           <span onmouseover="showtooltipWithMsgAndTitle('<%=factsheet.findPopulation(population)%>','Population')" onmouseout="hidetooltip()">
             <a href="#" onclick="return false;"><%=population%></a>
           </span>
-          </td>
-          <%attribute = factsheet.findSiteAttributes("ISOLATION",specie.getIdReportAttributes());%>
-          <%String isolation = (null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : "";%>
-          <td align="center">
-<%--                        <span title="<%=factsheet.findIsolation(isolation)%>" alt="<%=factsheet.findIsolation(isolation)%>">--%>
+        </td>
+        <%attribute = factsheet.findSiteAttributes("ISOLATION",specie.getIdReportAttributes());%>
+        <%String isolation = ( null != attribute ) ? Utilities.formatString( attribute.getValue(), "&nbsp;" ) : "&nbsp;";%>
+        <td align="center">
+  <%--                        <span title="<%=factsheet.findIsolation(isolation)%>" alt="<%=factsheet.findIsolation(isolation)%>">--%>
           <span onmouseover="showtooltipWithMsgAndTitle('<%=factsheet.findIsolation(isolation)%>','Isolation')" onmouseout="hidetooltip()">
             <a href="#" onclick="return false;"><%=isolation%></a>
           </span>
-          </td>
-          <%attribute = factsheet.findSiteAttributes("GLOBAL", specie.getIdReportAttributes());%>
-          <%String global = (null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : "";%>
-          <td align="center">
+        </td>
+        <%attribute = factsheet.findSiteAttributes("GLOBAL", specie.getIdReportAttributes());%>
+        <%String global = ( null != attribute ) ? Utilities.formatString( attribute.getValue(), "&nbsp;" ) : "&nbsp;";%>
+        <td align="center">
           <span onmouseover="showtooltipWithMsgAndTitle('<%=factsheet.findGlobal(global)%>','Global status')" onmouseout="hidetooltip()">
-<%--                        <span title="<%=factsheet.findGlobal(global)%>" alt="<%=factsheet.findGlobal(global)%>">--%>
-            <a title="Global status" href="#" onclick="return false;"><%=global%></a>
-           </span>
-          </td>
-        </tr>
+  <%--                        <span title="<%=factsheet.findGlobal(global)%>" alt="<%=factsheet.findGlobal(global)%>">--%>
+          <a title="Global status" href="#" onclick="return false;"><%=global%></a>
+         </span>
+        </td>
+      </tr>
 <%
         }
          }
@@ -719,6 +739,7 @@
 
         for (int i = 0; i < notEunisSpeciesListedAnnexesDirectives.size(); i++)
         {
+          String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
           Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist)notEunisSpeciesListedAnnexesDirectives.get(i);
           String specName = specie.getName();
           specName = (specName == null ? "" : specName.substring(specName.lastIndexOf("_")+1));
@@ -731,68 +752,69 @@
               :(groupName.equalsIgnoreCase("plant") ? "Flowering Plants" : "")))))));
 
 %>
-        <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-          <td>
-            <%=specName%>
-          </td>
-          <td align="center">
-            <%=groupName%>
-          </td>
-          <td align="center">
-            <%attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("RESIDENT_"+specName);%>
-            <%=(null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : ""%>
-          </td>
-          <td align="center">
-            <%attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("BREEDING_"+specName);%>
-            <%=(null != attribute2) ? ((null !=attribute2.getValue()) ? attribute2.getValue() : "") : ""%>
-          </td>
-          <td align="center">
-            <%attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("WINTERING_"+specName);%>
-            <%=(null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : ""%>
-          </td>
-          <td align="center">
-            <%attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("STAGING_"+specName);%>
-            <%=(null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : ""%>
-          </td>
-          <%attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("CONSERVATION_"+specName);%>
-          <%String conserv = (null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : "";%>
-          <td align="center">
-          <span onmouseover="showtooltipWithMsgAndTitle('<%=factsheet.findConservNatura2000(conserv)%>','Conservation')" onmouseout="hidetooltip()">
-<%--                        <span title="<%=factsheet.findConservNatura2000(conserv)%>" alt="<%=factsheet.findConservNatura2000(conserv)%>">--%>
-            <a href="#" onclick="return false;"><%=conserv%></a>
-          </span>
-          </td>
-          <%attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("POPULATION_"+specName);%>
-          <%String population = (null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : "";%>
-          <td align="center">
-          <span onmouseover="showtooltipWithMsgAndTitle('<%=factsheet.findPopulation(population)%>','Population')" onmouseout="hidetooltip()">
-<%--                        <span title="<%=factsheet.findPopulation(population)%>" alt="<%=factsheet.findPopulation(population)%>">--%>
-            <a href="#" onclick="return false;"><%=population%></a>
-          </span>
-          </td>
-          <%attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("ISOLATION_"+specName);%>
-          <%String isolation = (null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : "";%>
-          <td align="center">
-          <span onmouseover="showtooltipWithMsgAndTitle('<%=factsheet.findIsolation(isolation)%>','Isolation')" onmouseout="hidetooltip()">
-<%--                        <span title="<%=factsheet.findIsolation(isolation)%>" alt="<%=factsheet.findIsolation(isolation)%>">--%>
-            <a href="#" onclick="return false;"><%=isolation%></a>
-          </span>
-          </td>
-          <%attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("GLOBAL_"+specName);%>
-          <%String global = (null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : "";%>
-          <td align="center">
-          <span onmouseover="showtooltipWithMsgAndTitle('<%=factsheet.findGlobal(global)%>','Global status')" onmouseout="hidetooltip()">
-<%--                        <span title="<%=factsheet.findGlobal(global)%>" alt="<%=factsheet.findGlobal(global)%>">--%>
-            <a href="#" onclick="return false;"><%=global%></a>
-           </span>
-          </td>
-        </tr>
+      <tr<%=cssClass%>>
+        <td>
+          <%=specName%>
+        </td>
+        <td align="center">
+          <%=groupName%>
+        </td>
+        <td align="center">
+          <%attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("RESIDENT_"+specName);%>
+          <%=(null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : ""%>
+        </td>
+        <td align="center">
+          <%attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("BREEDING_"+specName);%>
+          <%=(null != attribute2) ? ((null !=attribute2.getValue()) ? attribute2.getValue() : "") : ""%>
+        </td>
+        <td align="center">
+          <%attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("WINTERING_"+specName);%>
+          <%=(null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : ""%>
+        </td>
+        <td align="center">
+          <%attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("STAGING_"+specName);%>
+          <%=(null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : ""%>
+        </td>
+        <%attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("CONSERVATION_"+specName);%>
+        <%String conserv = (null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : "";%>
+        <td align="center">
+        <span onmouseover="showtooltipWithMsgAndTitle('<%=factsheet.findConservNatura2000(conserv)%>','Conservation')" onmouseout="hidetooltip()">
+  <%--                        <span title="<%=factsheet.findConservNatura2000(conserv)%>" alt="<%=factsheet.findConservNatura2000(conserv)%>">--%>
+          <a href="#" onclick="return false;"><%=conserv%></a>
+        </span>
+        </td>
+        <%attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("POPULATION_"+specName);%>
+        <%String population = (null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : "";%>
+        <td align="center">
+        <span onmouseover="showtooltipWithMsgAndTitle('<%=factsheet.findPopulation(population)%>','Population')" onmouseout="hidetooltip()">
+  <%--                        <span title="<%=factsheet.findPopulation(population)%>" alt="<%=factsheet.findPopulation(population)%>">--%>
+          <a href="#" onclick="return false;"><%=population%></a>
+        </span>
+        </td>
+        <%attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("ISOLATION_"+specName);%>
+        <%String isolation = (null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : "";%>
+        <td align="center">
+        <span onmouseover="showtooltipWithMsgAndTitle('<%=factsheet.findIsolation(isolation)%>','Isolation')" onmouseout="hidetooltip()">
+  <%--                        <span title="<%=factsheet.findIsolation(isolation)%>" alt="<%=factsheet.findIsolation(isolation)%>">--%>
+          <a href="#" onclick="return false;"><%=isolation%></a>
+        </span>
+        </td>
+        <%attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("GLOBAL_"+specName);%>
+        <%String global = (null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : "";%>
+        <td align="center">
+        <span onmouseover="showtooltipWithMsgAndTitle('<%=factsheet.findGlobal(global)%>','Global status')" onmouseout="hidetooltip()">
+  <%--                        <span title="<%=factsheet.findGlobal(global)%>" alt="<%=factsheet.findGlobal(global)%>">--%>
+          <a href="#" onclick="return false;"><%=global%></a>
+         </span>
+        </td>
+      </tr>
 <%
                   }
                    }
 %>
-      </table>
-      <br />
+    </tbody>
+  </table>
+  <br />
 <%
     }
 %>
@@ -801,57 +823,63 @@
     if (!eunisSpeciesOtherMentioned.isEmpty() || !notEunisSpeciesOtherMentioned.isEmpty())
     {
 %>
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("other_species_mentioned_in_site")%></div>
-      <table summary="<%=cm.cms("other_species_mentioned_in_site")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="species_other" class="sortable">
-        <tr>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("species_group")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("species_name")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("population_size_estimations")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("motivation_for_species_mention")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-        </tr>
+  <h3>
+    <%=cm.cmsText("other_species_mentioned_in_site")%>
+  </h3>
+  <table summary="<%=cm.cms("other_species_mentioned_in_site")%>" width="0%" class="listing">
+    <thead>
+      <tr>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_group")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("species_name")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("population_size_estimations")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("motivation_for_species_mention")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
       if (!eunisSpeciesOtherMentioned.isEmpty())
       {
       for (int i = 0; i < eunisSpeciesOtherMentioned.size(); i++)
       {
+        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
         SitesSpeciesReportAttributesPersist specie = (SitesSpeciesReportAttributesPersist)eunisSpeciesOtherMentioned.get(i);
 %>
-        <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-          <td>
-            <%=specie.getSpeciesCommonName()%>
-          </td>
-          <td>
-           <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getSpeciesScientificName()%></a>
-           <%=cm.cmsTitle("open_species_factsheet")%>
-          </td>
-          <td>
-            <%attribute = factsheet.findSiteAttributes("OTHER_POPULATION",specie.getIdReportAttributes());%>
-            <%=(null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : ""%>
-          </td>
-          <td>
-            <%
-                attribute = factsheet.findSiteAttributes("OTHER_MOTIVATION",specie.getIdReportAttributes());
-                String attVal = "";
-                if(!"".equals((null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""))
-                  attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_NATURA2000_MOTIVATION_CODE WHERE ID_MOTIVATION_CODE ='"+attribute.getValue()+"'");
-            %>
-           <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Motivation for species mention')" onmouseout="hidetooltip()">
-             <a href="#" onclick="return false;"><%=(null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""%></a>
-           </span>
-          </td>
-        </tr>
+      <tr<%=cssClass%>>
+        <td>
+          <%=specie.getSpeciesCommonName()%>
+        </td>
+        <td>
+         <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getSpeciesScientificName()%></a>
+         <%=cm.cmsTitle("open_species_factsheet")%>
+        </td>
+        <td>
+          <%attribute = factsheet.findSiteAttributes("OTHER_POPULATION",specie.getIdReportAttributes());%>
+          <%=(null != attribute) ? ((null != attribute.getValue()) ? attribute.getValue() : "") : ""%>
+        </td>
+        <td>
+          <%
+              attribute = factsheet.findSiteAttributes("OTHER_MOTIVATION",specie.getIdReportAttributes());
+              String attVal = "";
+              if(!"".equals((null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""))
+                attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_NATURA2000_MOTIVATION_CODE WHERE ID_MOTIVATION_CODE ='"+attribute.getValue()+"'");
+          %>
+         <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Motivation for species mention')" onmouseout="hidetooltip()">
+           <a href="#" onclick="return false;"><%=(null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""%></a>
+         </span>
+        </td>
+      </tr>
 <%
         }
       }
@@ -860,6 +888,7 @@
         Chm62edtSitesAttributesPersist  attribute2 = null;
       for (int i = 0; i < notEunisSpeciesOtherMentioned.size(); i++)
       {
+        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
         Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist)notEunisSpeciesOtherMentioned.get(i);
         String specName = specie.getName();
         specName = (specName == null ? "" : specName.substring(specName.lastIndexOf("_")+1));
@@ -874,38 +903,37 @@
             :(groupName.equalsIgnoreCase("F") ? "Flowering"
             :(groupName.equalsIgnoreCase("R") ? "Reptiles" : "")))))))));
 %>
-        <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-          <td>
-            <%=groupName%>
-          </td>
-          <td>
-           <%=specName%>
-          </td>
-          <td>
-            <%attribute2 = factsheet.findNotEunisSpeciesOtherMentionedAttributes("POPULATION_"+specName);%>
-            <%=(null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : ""%>
-          </td>
-          <td>
-            <%
-                attribute2 = factsheet.findNotEunisSpeciesOtherMentionedAttributes("MOTIVATION_"+specName);
-                String attVal = "";
-                if(!"".equals((null != attribute2) ? ((null !=attribute2.getValue()) ? attribute2.getValue() : "") : ""))
-                  attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_NATURA2000_MOTIVATION_CODE WHERE ID_MOTIVATION_CODE ='"+attribute2.getValue()+"'");
-            %>
-            <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Motivation for species mention')" onmouseout="hidetooltip()">
-              <a href="#" onclick="return false;"><%=(null != attribute2) ? ((null !=attribute2.getValue()) ? attribute2.getValue() : "") : ""%></a>
-            </span>
-          </td>
-        </tr>
+      <tr<%=cssClass%>>
+        <td>
+          <%=groupName%>
+        </td>
+        <td>
+         <%=specName%>
+        </td>
+        <td>
+          <%attribute2 = factsheet.findNotEunisSpeciesOtherMentionedAttributes("POPULATION_"+specName);%>
+          <%=(null != attribute2) ? ((null != attribute2.getValue()) ? attribute2.getValue() : "") : ""%>
+        </td>
+        <td>
+          <%
+              attribute2 = factsheet.findNotEunisSpeciesOtherMentionedAttributes("MOTIVATION_"+specName);
+              String attVal = "";
+              if(!"".equals((null != attribute2) ? ((null !=attribute2.getValue()) ? attribute2.getValue() : "") : ""))
+                attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_NATURA2000_MOTIVATION_CODE WHERE ID_MOTIVATION_CODE ='"+attribute2.getValue()+"'");
+          %>
+          <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Motivation for species mention')" onmouseout="hidetooltip()">
+            <a href="#" onclick="return false;"><%=(null != attribute2) ? ((null !=attribute2.getValue()) ? attribute2.getValue() : "") : ""%></a>
+          </span>
+        </td>
+      </tr>
 <%
         }
       }
 %>
-      </table>
-      <br />
+    </table>
+    <br />
 <%
     }
-      }
-    }
-
+  }
+}
 %>

@@ -22,7 +22,9 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   // List of geographical status information.
-  Vector v = SpeciesFactsheet.getBioRegionIterator(FormBean.getIdNatureObject());
+  Integer idNatureObject = new Integer( Utilities.checkedStringToInt( FormBean.getIdNatureObject(), 0 ) );
+  Integer idSpecies = new Integer( Utilities.checkedStringToInt( FormBean.getIdSpecies(), 0 ) );
+  Vector v = SpeciesFactsheet.getBioRegionIterator(idNatureObject, idSpecies );
   if( v.size() > 0 )
   {
     // Display map
@@ -59,33 +61,32 @@
     int COUNTRIES_PER_MAP = Utilities.checkedStringToInt( application.getInitParameter( "COUNTRIES_PER_MAP" ), 120 );
     if ( addedCountries.size() < COUNTRIES_PER_MAP )
     {
-      String proxy = application.getInitParameter("PROXY_URL");
-      int port = ro.finsiel.eunis.search.Utilities.checkedStringToInt(application.getInitParameter("PROXY_PORT"),0);
-      String extension=application.getInitParameter("EEA_MAP_SERVER_EXTENSION"); //default image type for maps
       String mapserverURL = application.getInitParameter("EEA_MAP_SERVER") + "/getmap.asp";
       String parameters = "mapType=Standard_B&amp;Q=" + colorURL.getElementsSeparatedByComma() + "&amp;outline=1";
       String filename = mapserverURL + "?" + parameters;
 %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("geographical_distribution")%></div>
-    <table summary="layout" border="0" cellpadding="3" cellspacing="0" width="100%">
-      <tr>
-        <td>
+  <h2>
+    <%=cm.cmsText("geographical_distribution")%>
+  </h2>
+  <table summary="layout" border="0" cellpadding="3" cellspacing="0" width="90%">
+    <tr>
+      <td>
 <%
       if(colorURL.elements().size() > 0)
       {
 %>
-          <img alt="<%=cm.cms("map_image_eea")%>" src="<%=filename%>" title="<%=cm.cms("map_image_eea")%>" />
-          <%=cm.cmsAlt("map_image_eea")%>
+        <img alt="<%=cm.cms("map_image_eea")%>" src="<%=filename%>" title="<%=cm.cms("map_image_eea")%>" />
+        <%=cm.cmsAlt("map_image_eea")%>
 <%
       }
 %>
-          <br />
-          <a title="<%=cm.cms("open_new_window")%>" href="javascript:openLink('<%=mapserverURL + "?" + parameters%>');"><%=cm.cmsText("open_new_window")%></a>
-          <%=cm.cmsTitle("open_new_window")%>
-        </td>
-        <td>
-          <%=cm.cmsText("legend")%>:
-          <br />
+        <br />
+        <a title="<%=cm.cms("open_new_window")%>" href="javascript:openLink('<%=mapserverURL + "?" + parameters%>');"><%=cm.cmsText("open_new_window")%></a>
+        <%=cm.cmsTitle("open_new_window")%>
+      </td>
+      <td>
+        <%=cm.cmsText("legend")%>:
+        <br />
 <%
         Enumeration keys = statusColorPair.keys();
         while (keys.hasMoreElements())
@@ -97,32 +98,35 @@
 <%
         }
 %>
-        </td>
-      </tr>
+      </td>
+    </tr>
 <%
     }
 %>
-    </table>
-    <br />
-    <table summary="<%=cm.cms("geographical_distribution")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="geographic" class="sortable">
+  </table>
+  <br />
+  <table summary="<%=cm.cms("geographical_distribution")%>" class="listing" width="90%">
+    <thead>
       <tr>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("species_factsheet-geo_04")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("biogeographic_region")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
          <%=cm.cmsText("reference")%>
          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
+    </thead>
+    <tbody>
 <%
     for (int i = 0; i < v.size(); i++)
     {
@@ -131,7 +135,7 @@
       String reference = Utilities.getReferencesByIdDc(aRow.getReference());
       Vector authorURL = Utilities.getAuthorAndUrlByIdDc(aRow.getReference());
 %>
-      <tr style="background-color:<%=( 0 == ( i % 2 ) ) ? "#EEEEEE" : "#FFFFFF"%>">
+      <tr>
         <td>
         <%
             if(Utilities.isCountry(country))
@@ -156,7 +160,7 @@
           <%=Utilities.treatURLSpecialCharacters(aRow.getStatus())%>&nbsp;
         </td>
 <%
-        if ( !( ( String )authorURL.get( 1 ) ).toString().equalsIgnoreCase( "" ) )
+        if ( !authorURL.get( 1 ).toString().equalsIgnoreCase( "" ) )
         {
 %>
         <td width="25%">
@@ -185,13 +189,12 @@
 <%
     }
 %>
-    </table>
+    </tbody>
+  </table>
 <%
   }
 %>
-
-<%=cm.br()%>
-<%=cm.cmsMsg("geographical_distribution")%>
-
-    <br />
-    <br />
+  <%=cm.br()%>
+  <%=cm.cmsMsg("geographical_distribution")%>
+  <br />
+  <br />

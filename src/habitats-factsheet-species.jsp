@@ -18,7 +18,7 @@
   String idHabitat = request.getParameter("idHabitat");
   // Mini factsheet shows only the uppermost part of the factsheet with generic information.
   //boolean isMini = Utilities.checkedStringToBoolean( request.getParameter( "mini" ), false );
-  HabitatsFactsheet factsheet = null;
+  HabitatsFactsheet factsheet;
   factsheet = new HabitatsFactsheet(idHabitat);
   WebContentManagement cm = SessionManager.getWebContent();
   try
@@ -28,74 +28,73 @@
     if (!species.isEmpty())
     {
 %>
-  <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_characteristics_for_habitat_type")%></div>
-  <table summary="<%=cm.cms("habitat_species")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="species" class="sortable">
-    <tr valign="middle">
-      <th height="17" title="<%=cm.cms("sort_results_on_this_column")%>">
-        <strong>
+  <h2>
+    <%=cm.cmsText("species_characteristics_for_habitat_type")%>
+  </h2>
+  <table summary="<%=cm.cms("habitat_species")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
           <%=cm.cmsText("species_scientific_name")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
-        </strong>
-      </th>
-      <th height="17" title="<%=cm.cms("sort_results_on_this_column")%>">
-        <strong>
+        </th>
+        <th>
           <%=cm.cmsText("biogeographic_region")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
-        </strong>
-      </th>
-      <th height="17" title="<%=cm.cms("sort_results_on_this_column")%>">
-        <strong>
+        </th>
+        <th>
           <%=cm.cmsText("abundance")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
-        </strong>
-      </th>
-      <th height="17" title="<%=cm.cms("sort_results_on_this_column")%>">
-        <strong>
+        </th>
+        <th>
           <%=cm.cmsText("frequencies")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
-        </strong>
-      </th>
-      <th height="17" title="<%=cm.cms("sort_results_on_this_column")%>">
-        <strong>
+        </th>
+        <th>
           <%=cm.cmsText("faithfulness")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
-        </strong>
-      </th>
-      <th height="17" title="<%=cm.cms("sort_results_on_this_column")%>">
-        <strong>
+        </th>
+        <th>
           <%=cm.cmsText("comment")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
-        </strong>
-      </th>
-    </tr>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
-            for (int i = 0; i < species.size(); i++)
-            {
-              HabitatsSpeciesWrapper wrapper = (HabitatsSpeciesWrapper) species.get(i);
+      for (int i = 0; i < species.size(); i++)
+      {
+        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+        HabitatsSpeciesWrapper wrapper = (HabitatsSpeciesWrapper) species.get(i);
 %>
-              <tr bgcolor="<%=(0 == (i % 2) ?  "#EEEEEE" : "#FFFFFF")%>" valign="middle">
-                <td>
-                  <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=wrapper.getIdSpecies()%>&amp;idSpeciesLink=<%=wrapper.getIdSpeciesLink()%>"><%=Utilities.formatString(wrapper.getSpeciesName())%></a>
-                  <%=cm.cmsTitle("open_species_factsheet")%>
-                </td>
-                <td><%=Utilities.formatString(wrapper.getGeoscope())%></td>
-                <td><%=Utilities.formatString(wrapper.getAbundance())%></td>
-                <td><%=Utilities.formatString(wrapper.getFrequencies())%></td>
-                <td><%=Utilities.formatString(wrapper.getFaithfulness())%></td>
-                <td><%=Utilities.formatString(wrapper.getComment())%></td>
-              </tr>
+      <tr<%=cssClass%>>
+        <td>
+          <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=wrapper.getIdSpecies()%>&amp;idSpeciesLink=<%=wrapper.getIdSpeciesLink()%>"><%=Utilities.formatString(wrapper.getSpeciesName())%></a>
+          <%=cm.cmsTitle("open_species_factsheet")%>
+        </td>
+        <td>
+          <%=Utilities.formatString(wrapper.getGeoscope())%>
+        </td>
+        <td>
+          <%=Utilities.formatString(wrapper.getAbundance())%>
+        </td>
+        <td>
+          <%=Utilities.formatString(wrapper.getFrequencies())%>
+        </td>
+        <td>
+          <%=Utilities.formatString(wrapper.getFaithfulness())%>
+        </td>
+        <td>
+          <%=Utilities.formatString(wrapper.getComment())%>
+        </td>
+      </tr>
 <%
-            }
+      }
 %>
-        </table>
+    </tbody>
+  </table>
         <%=cm.br()%>
         <%=cm.cmsMsg("habitat_species")%>
         <%=cm.br()%>
 <%
-      }
     }
-    catch (Exception ex)
-    {
+  }
+  catch (Exception ex)
+  {
           ex.printStackTrace();
-    }
+  }
 %>

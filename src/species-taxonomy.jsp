@@ -65,186 +65,231 @@
     </title>
   </head>
   <body>
-    <div id="outline">
-    <div id="alignment">
-    <div id="content">
-      <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home#index.jsp,species#species.jsp,taxonomic_classification#species-taxonomy.jsp" />
-      </jsp:include>
-      <h1>
-        <%=cm.cmsText("habitats_taxonomic-browser_01")%>
-      </h1>
-      <br />
-      <%=cm.cmsText("habitats_taxonomic-browser_02")%>
-      <ul>
-<%
-        if( !idTaxonomy.equalsIgnoreCase( "" ) )
-        {
-          //get all myTree link
-          ArrayList myTree = new ArrayList();
-          boolean treeDone = false;
-          int i, j;
-          String currentIdTaxonomy = idTaxonomy;
-          myTree.add(0, currentIdTaxonomy);
+    <div id="visual-portal-wrapper">
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
+      <!-- The wrapper div. It contains the three columns. -->
+      <div id="portal-columns">
+        <!-- start of the main and left columns -->
+        <div id="visual-column-wrapper">
+          <!-- start of main content block -->
+          <div id="portal-column-content">
+            <div id="content">
+              <div class="documentContent" id="region-content">
+                <a name="documentContent"></a>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure">Document Actions</h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="Print this page"
+                            title="Print this page" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="Toggle full screen mode"
+                             title="Toggle full screen mode" /></a>
+                    </li>
+                  </ul>
+                </div>
+                <br clear="all" />
+<!-- MAIN CONTENT -->
+                <jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="home#index.jsp,species#species.jsp,taxonomic_classification#species-taxonomy.jsp" />
+                </jsp:include>
+                <h1>
+                  <%=cm.cmsText("habitats_taxonomic-browser_01")%>
+                </h1>
+                <br />
+                <%=cm.cmsText("habitats_taxonomic-browser_02")%>
+                <ul>
+          <%
+                  if( !idTaxonomy.equalsIgnoreCase( "" ) )
+                  {
+                    //get all myTree link
+                    ArrayList myTree = new ArrayList();
+                    boolean treeDone = false;
+                    int i, j;
+                    String currentIdTaxonomy = idTaxonomy;
+                    myTree.add(0, currentIdTaxonomy);
 
-          while(!treeDone) {
-            for(i = 0; i<IdTax.size();i++) {
-              treeDone = true;
-              if(IdTax.get(i).toString().equalsIgnoreCase(currentIdTaxonomy)) {
-                if(!IdTaxParent.get(i).toString().equalsIgnoreCase(currentIdTaxonomy)) {
-                  currentIdTaxonomy = IdTaxParent.get(i).toString();
-                  myTree.add(0, currentIdTaxonomy);
-                  treeDone = false;
-                  break;
-                } else {
-                  treeDone = true;
-                  break;
-                }
-              }
-            }
-            if(i == IdTax.size()-1 && !treeDone) treeDone = true;
-          }
+                    while(!treeDone) {
+                      for(i = 0; i<IdTax.size();i++) {
+                        treeDone = true;
+                        if(IdTax.get(i).toString().equalsIgnoreCase(currentIdTaxonomy)) {
+                          if(!IdTaxParent.get(i).toString().equalsIgnoreCase(currentIdTaxonomy)) {
+                            currentIdTaxonomy = IdTaxParent.get(i).toString();
+                            myTree.add(0, currentIdTaxonomy);
+                            treeDone = false;
+                            break;
+                          } else {
+                            treeDone = true;
+                            break;
+                          }
+                        }
+                      }
+                      if(i == IdTax.size()-1 && !treeDone) treeDone = true;
+                    }
 
-          int selectedTaxRoot = new Integer(myTree.get(0).toString()).intValue();
+                    int selectedTaxRoot = new Integer(myTree.get(0).toString()).intValue();
 
-          for(i=0;i<IdTaxParent.size();i++) {
-            String idParent = IdTaxParent.get(i).toString();
-            if(idParent.equalsIgnoreCase(idTaxonomy)) {
-              if(!IdTax.get(i).toString().equalsIgnoreCase(idTaxonomy)) {
-                myTree.add(IdTax.get(i).toString());
-              }
-            }
-          }
-          if(selectedTaxRoot == 47)
-          {
-%>
-            <a href="species-taxonomy.jsp?idTaxonomy=46"><%=TaxName46%></a>
-            <br />
-<%
-          }
-          if(selectedTaxRoot == 48)
-          {
-            %>
-            <a href="species-taxonomy.jsp?idTaxonomy=46"><%=TaxName46%></a>
-            <br />
-            <a href="species-taxonomy.jsp?idTaxonomy=47"><%=TaxName47%></a>
-            <br />
-<%
-          }
-          if(selectedTaxRoot == 3001)
-          {
-%>
-            <a href="species-taxonomy.jsp?idTaxonomy=46"><%=TaxName46%></a>
-            <br />
-            <a href="species-taxonomy.jsp?idTaxonomy=47"><%=TaxName47%></a>
-            <br />
-            <a href="species-taxonomy.jsp?idTaxonomy=3001"><%=TaxName48%></a>
-            <br />
-<%
-          }
-
-          for(j = 0; j< myTree.size(); j++)
-          {
-            for(i = 0; i<IdTax.size();i++)
-            {
-              if(IdTax.get(i).toString().equalsIgnoreCase(myTree.get(j).toString())) {
-                String trimLink = o.get(i).toString().replace("&nbsp;","");
-                int cnt = (o.get(i).toString().indexOf(trimLink)+1)/18;
-                String TaxName = sqlc.ExecuteSQL(TaxonomyTree.TaxName(trimLink));
-                boolean hasChilds = !sqlc.ExecuteSQL("SELECT COUNT(*) FROM CHM62EDT_TAXONOMY WHERE ID_TAXONOMY_PARENT="+trimLink).equalsIgnoreCase("0");
-                if(hasChilds)
-                {
-%>
-                  <%=TaxonomyTree.nbsp(cnt)%><a href="species-taxonomy.jsp?idTaxonomy=<%=trimLink%>"><%=TaxName%></a>
-<%
-                }
-                else
-                {
-                  SpeciesList=sqlc.SQL2Array("SELECT CONCAT('<a href=\"species-factsheet.jsp?idSpecies=',ID_SPECIES,'&idSpeciesLink=',ID_SPECIES_LINK,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+idTaxonomy);
-%>
-                  <%=TaxonomyTree.nbsp(cnt)%><%=TaxName%>
-<%
-                  if(SpeciesList.size()>0) {
-                    for(i=0;i<SpeciesList.size();i++)
+                    for(i=0;i<IdTaxParent.size();i++) {
+                      String idParent = IdTaxParent.get(i).toString();
+                      if(idParent.equalsIgnoreCase(idTaxonomy)) {
+                        if(!IdTax.get(i).toString().equalsIgnoreCase(idTaxonomy)) {
+                          myTree.add(IdTax.get(i).toString());
+                        }
+                      }
+                    }
+                    if(selectedTaxRoot == 47)
                     {
-%>
-                    <br />
-                    <%=TaxonomyTree.nbsp(cnt+1)+SpeciesList.get(i)%>
-<%
+          %>
+                      <a href="species-taxonomy.jsp?idTaxonomy=46"><%=TaxName46%></a>
+                      <br />
+          <%
+                    }
+                    if(selectedTaxRoot == 48)
+                    {
+                      %>
+                      <a href="species-taxonomy.jsp?idTaxonomy=46"><%=TaxName46%></a>
+                      <br />
+                      <a href="species-taxonomy.jsp?idTaxonomy=47"><%=TaxName47%></a>
+                      <br />
+          <%
+                    }
+                    if(selectedTaxRoot == 3001)
+                    {
+          %>
+                      <a href="species-taxonomy.jsp?idTaxonomy=46"><%=TaxName46%></a>
+                      <br />
+                      <a href="species-taxonomy.jsp?idTaxonomy=47"><%=TaxName47%></a>
+                      <br />
+                      <a href="species-taxonomy.jsp?idTaxonomy=3001"><%=TaxName48%></a>
+                      <br />
+          <%
+                    }
+
+                    for(j = 0; j< myTree.size(); j++)
+                    {
+                      for(i = 0; i<IdTax.size();i++)
+                      {
+                        if(IdTax.get(i).toString().equalsIgnoreCase(myTree.get(j).toString())) {
+                          String trimLink = o.get(i).toString().replace("&nbsp;","");
+                          int cnt = (o.get(i).toString().indexOf(trimLink)+1)/18;
+                          String TaxName = sqlc.ExecuteSQL(TaxonomyTree.TaxName(trimLink));
+                          boolean hasChilds = !sqlc.ExecuteSQL("SELECT COUNT(*) FROM CHM62EDT_TAXONOMY WHERE ID_TAXONOMY_PARENT="+trimLink).equalsIgnoreCase("0");
+                          if(hasChilds)
+                          {
+          %>
+                            <%=TaxonomyTree.nbsp(cnt)%><a href="species-taxonomy.jsp?idTaxonomy=<%=trimLink%>"><%=TaxName%></a>
+          <%
+                          }
+                          else
+                          {
+                            SpeciesList=sqlc.SQL2Array("SELECT CONCAT('<a href=\"species-factsheet.jsp?idSpecies=',ID_SPECIES,'&idSpeciesLink=',ID_SPECIES_LINK,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+idTaxonomy);
+          %>
+                            <%=TaxonomyTree.nbsp(cnt)%><%=TaxName%>
+          <%
+                            if(SpeciesList.size()>0) {
+                              for(i=0;i<SpeciesList.size();i++)
+                              {
+          %>
+                              <br />
+                              <%=TaxonomyTree.nbsp(cnt+1)+SpeciesList.get(i)%>
+          <%
+                              }
+                            }
+                            else
+                            {
+                              SpeciesList=sqlc.SQL2Array("SELECT CONCAT('<a href=\"species-factsheet.jsp?idSpecies=',ID_SPECIES,'&idSpeciesLink=',ID_SPECIES_LINK,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+trimLink);
+                              if(SpeciesList.size()>0) {
+                                for(i=0;i<SpeciesList.size();i++) {
+          %>
+                                <br />
+                                <%=TaxonomyTree.nbsp(cnt+2)+SpeciesList.get(i)%>
+          <%
+                                }
+                              }
+                            }
+                          }
+          %>
+                          <br />
+          <%
+                          break;
+                        }
+                      }
+                    }
+                    if(selectedTaxRoot == 46)
+                    {
+          %>
+                      <a href="species-taxonomy.jsp?idTaxonomy=47"><%=TaxName47%></a>
+                      <br />
+                      <a href="species-taxonomy.jsp?idTaxonomy=48"><%=TaxName48%></a>
+                      <br />
+                      <a href="species-taxonomy.jsp?idTaxonomy=3001"><%=TaxName3001%></a>
+                      <br />
+          <%
+                    }
+                    if(selectedTaxRoot == 47)
+                    {
+          %>
+                      <a href="species-taxonomy.jsp?idTaxonomy=48"><%=TaxName48%></a>
+                      <br />
+                      <a href="species-taxonomy.jsp?idTaxonomy=3001"><%=TaxName3001%></a>
+                      <br />
+          <%
+                    }
+                    if(selectedTaxRoot == 48)
+                    {
+          %>
+                      <a href="species-taxonomy.jsp?idTaxonomy=3001"><%=TaxName3001%></a>
+                      <br />
+          <%
                     }
                   }
                   else
                   {
-                    SpeciesList=sqlc.SQL2Array("SELECT CONCAT('<a href=\"species-factsheet.jsp?idSpecies=',ID_SPECIES,'&idSpeciesLink=',ID_SPECIES_LINK,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+trimLink);
-                    if(SpeciesList.size()>0) {
-                      for(i=0;i<SpeciesList.size();i++) {
-%>
-                      <br />
-                      <%=TaxonomyTree.nbsp(cnt+2)+SpeciesList.get(i)%>
-<%
-                      }
-                    }
+          %>
+                    <a href="species-taxonomy.jsp?idTaxonomy=46"><%=TaxName46%></a>
+                    <br />
+                    <a href="species-taxonomy.jsp?idTaxonomy=47"><%=TaxName47%></a>
+                    <br />
+                    <a href="species-taxonomy.jsp?idTaxonomy=48"><%=TaxName48%></a>
+                    <br />
+                    <a href="species-taxonomy.jsp?idTaxonomy=3001"><%=TaxName3001%></a>
+                    <br />
+          <%
                   }
-                }
-%>
-                <br />
-<%
-                break;
-              }
-            }
-          }
-          if(selectedTaxRoot == 46)
-          {
-%>
-            <a href="species-taxonomy.jsp?idTaxonomy=47"><%=TaxName47%></a>
-            <br />
-            <a href="species-taxonomy.jsp?idTaxonomy=48"><%=TaxName48%></a>
-            <br />
-            <a href="species-taxonomy.jsp?idTaxonomy=3001"><%=TaxName3001%></a>
-            <br />
-<%
-          }
-          if(selectedTaxRoot == 47)
-          {
-%>
-            <a href="species-taxonomy.jsp?idTaxonomy=48"><%=TaxName48%></a>
-            <br />
-            <a href="species-taxonomy.jsp?idTaxonomy=3001"><%=TaxName3001%></a>
-            <br />
-<%
-          }
-          if(selectedTaxRoot == 48)
-          {
-%>
-            <a href="species-taxonomy.jsp?idTaxonomy=3001"><%=TaxName3001%></a>
-            <br />
-<%
-          }
-        }
-        else
-        {
-%>
-          <a href="species-taxonomy.jsp?idTaxonomy=46"><%=TaxName46%></a>
-          <br />
-          <a href="species-taxonomy.jsp?idTaxonomy=47"><%=TaxName47%></a>
-          <br />
-          <a href="species-taxonomy.jsp?idTaxonomy=48"><%=TaxName48%></a>
-          <br />
-          <a href="species-taxonomy.jsp?idTaxonomy=3001"><%=TaxName3001%></a>
-          <br />
-<%
-        }
-%>
-      </ul>
+          %>
+                </ul>
 
-      <jsp:include page="footer.jsp">
-        <jsp:param name="page_name" value="species-taxonomy.jsp" />
-      </jsp:include>
-    </div>
-    </div>
+                <jsp:include page="footer.jsp">
+                  <jsp:param name="page_name" value="species-taxonomy.jsp" />
+                </jsp:include>
+<!-- END MAIN CONTENT -->
+              </div>
+            </div>
+          </div>
+          <!-- end of main content block -->
+          <!-- start of the left (by default at least) column -->
+          <div id="portal-column-one">
+            <div class="visualPadding">
+              <jsp:include page="inc_column_left.jsp" />
+            </div>
+          </div>
+          <!-- end of the left (by default at least) column -->
+        </div>
+        <!-- end of the main and left columns -->
+        <!-- start of right (by default at least) column -->
+        <div id="portal-column-two">
+          <div class="visualPadding">
+            <jsp:include page="inc_column_right.jsp" />
+          </div>
+        </div>
+        <!-- end of the right (by default at least) column -->
+        <div class="visualClear"><!-- --></div>
+      </div>
+      <!-- end column wrapper -->
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
     </div>
   </body>
 </html>
-<%
-  out.flush();
-%>

@@ -302,7 +302,7 @@
 %>
 <br />
 <form action="">
-  <input title="<%=cm.cms("close_window")%>" type="button" name="button" id="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" class="inputTextField" />
+  <input title="<%=cm.cms("close_window")%>" type="button" name="button" id="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" class="standardButton" />
   <%=cm.cmsInput("close_btn")%>
 </form>
 <%=cm.cmsMsg("list_of_values")%>

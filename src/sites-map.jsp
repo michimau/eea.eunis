@@ -37,7 +37,7 @@
 <div style="width : 100%;">
   <input id="showMap" name="showMap" type="button" value="<%=cm.cms("show_map")%>"
          onclick="javascript:openMap('<%=toURLParam%>');"
-         title="<%=cm.cms("sites_map_02")%>" class="inputTextField" />
+         title="<%=cm.cms("sites_map_02")%>" class="standardButton" />
   <%=cm.cmsInput("show_map")%>
   <%=cm.cmsTitle("sites_map_02")%>
   <br />

@@ -103,7 +103,7 @@
              title="<%=cm.cms("select_all")%>" value="<%=cm.cms("select_all")%>"
              onclick="javascript:setSelection('true');"
              onkeypress="javascript:setSelection('true');"
-             class="inputTextField" />
+             class="standardButton" />
       <%=cm.cmsTitle("select_all")%>
       <%=cm.cmsInput("select_all")%>
       &nbsp;
@@ -111,7 +111,7 @@
              title="<%=cm.cms("select_none")%>" value="<%=cm.cms("select_none")%>"
              onclick="javascript:setSelection('false');"
              onkeypress="javascript:setSelection('false');"
-             class="inputTextField" />
+             class="standardButton" />
       <%=cm.cmsTitle("select_none")%>
       <%=cm.cmsInput("select_none")%>
     </td>

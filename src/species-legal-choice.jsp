@@ -77,7 +77,7 @@
           <br />
           <br />
           <div id="tab">
-          <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+          <table summary="<%=cm.cms("list_of_values")%>" class="datatable">
           <%
             if (typeForm == LegalSearchCriteria.CRITERIA_SPECIES.intValue())
             {
@@ -85,9 +85,10 @@
               // Display results.
               while (it.hasNext())
               {
+                String cssClass = i++ % 2 == 0 ? "" : " class=\"zebraeven\"";
               String speciesName = (String)((TableColumns)it.next()).getColumnsValues().get(0);
           %>
-            <tr style="background-color:<%=(0 == (i++ % 2) ? "#EEEEEE" : "#FFFFFF")%>">
+            <tr<%=cssClass%>>
              <td>
                <a title="<%=cm.cms("choose_this_value")%>" href="javascript:setScientificName('<%=speciesName%>');">
                  <%=speciesName%>
@@ -114,7 +115,7 @@
      %>
     <br />
     <form action="">
-      <input id="button" title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" class="inputTextField" />
+      <input id="button" title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" class="standardButton" />
       <%=cm.cmsTitle("close_window")%>
       <%=cm.cmsInput("close_btn")%>
     </form>

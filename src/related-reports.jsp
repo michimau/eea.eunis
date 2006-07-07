@@ -45,12 +45,6 @@
     <%=application.getInitParameter("PAGE_TITLE")%>
     <%=cm.cms("related_reports_page_title")%>
   </title>
-  <style type="text/css">
-    .tableBorder
-    {
-      border: 1px solid #000000;
-    }
-  </style>
   <script language="JavaScript" type="text/JavaScript">
   <!--
     function MM_callJS(jsStr) { //v2.0
@@ -111,249 +105,298 @@
   </script>
 </head>
   <body>
-    <div id="outline">
-    <div id="alignment">
-    <div id="content">
-      <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home#index.jsp,related_reports"/>
-      </jsp:include>
-    <h1>
-      <%=cm.cmsText("related_reports")%>
-    </h1>
-    <br />
-    <%=cm.cmsText("related_reports_description")%>.
-<%
-  // If there are documents pending, display this to the user who has such right, to know this.
-  if(RelatedReportsUtil.listPendingReports().size() > 0 && SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
-  {
-%>
-    <br />
-    <%=cm.cmsText("related_reports_pendingnotice")%> <a title="<%=cm.cms("related_reports_pendinglink_title")%>" href="related-reports-approval.jsp"><%=cm.cmsText("related_reports_pendinglink")%></a>.
-    <%=cm.cmsTitle("related_reports_pendinglink_title")%>
-    <br />
-<%
-  }
-  if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
-  {
-%>
-    <br />
+    <div id="visual-portal-wrapper">
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
+      <!-- The wrapper div. It contains the three columns. -->
+      <div id="portal-columns">
+        <!-- start of the main and left columns -->
+        <div id="visual-column-wrapper">
+          <!-- start of main content block -->
+          <div id="portal-column-content">
+            <div id="content">
+              <div class="documentContent" id="region-content">
+                <a name="documentContent"></a>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure">Document Actions</h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="Print this page"
+                            title="Print this page" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="Toggle full screen mode"
+                             title="Toggle full screen mode" /></a>
+                    </li>
+                  </ul>
+                </div>
+                <br clear="all" />
+<!-- MAIN CONTENT -->
+                <jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="home#index.jsp,related_reports"/>
+                </jsp:include>
+              <h1>
+                <%=cm.cmsText("related_reports")%>
+              </h1>
+              <br />
+              <%=cm.cmsText("related_reports_description")%>.
+          <%
+            // If there are documents pending, display this to the user who has such right, to know this.
+            if(RelatedReportsUtil.listPendingReports().size() > 0 && SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
+            {
+          %>
+              <br />
+              <%=cm.cmsText("related_reports_pendingnotice")%> <a title="<%=cm.cms("related_reports_pendinglink_title")%>" href="related-reports-approval.jsp"><%=cm.cmsText("related_reports_pendinglink")%></a>.
+              <%=cm.cmsTitle("related_reports_pendinglink_title")%>
+              <br />
+          <%
+            }
+            if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
+            {
+          %>
+              <br />
 
-    <a title="<%=cm.cms("related_reports_uploadlink_title")%>" href="javascript:openUpload();"><%=cm.cmsText("related_reports_uploadlink")%></a>
-    <%=cm.cmsTitle("related_reports_uploadlink_title")%>
-    <br />
-<%
-  }
-  List approvedReportsList = RelatedReportsUtil.listApprovedReports();
-  // Filter only approved documents.
-  if(approvedReportsList.size() == 0)
-  {
-%>
-    <br />
-    <strong>
-      <%=cm.cmsText("related_reports_nodocs")%>.
-    </strong>
-    <br />
-<%
-  }
-  else
-  {
-%>
-    <form name="upload" action="related-reports.jsp" method="post" onsubmit="javascript:return del_files();">
-      <input type="hidden" name="operation" value="delete" />
-      <div align="right" style="background-color : #EEEEEE; width : 100%;">
-        <strong>
-          <input type="button" id="refresh" name="Submit" value="<%=cm.cms("refresh_list")%>" title="<%=cm.cms("related_reports_refresh_title")%>" onclick="javascript:ReloadPage()" class="inputTextField" />
-          <%=cm.cmsInput("refresh_list")%>
-          <%=cm.cmsTitle("related_reports_refresh_title")%>
+              <a title="<%=cm.cms("related_reports_uploadlink_title")%>" href="javascript:openUpload();"><%=cm.cmsText("related_reports_uploadlink")%></a>
+              <%=cm.cmsTitle("related_reports_uploadlink_title")%>
+              <br />
+          <%
+            }
+            List approvedReportsList = RelatedReportsUtil.listApprovedReports();
+            // Filter only approved documents.
+            if(approvedReportsList.size() == 0)
+            {
+          %>
+              <br />
+              <strong>
+                <%=cm.cmsText("related_reports_nodocs")%>.
+              </strong>
+              <br />
+          <%
+            }
+            else
+            {
+          %>
+              <form name="upload" action="related-reports.jsp" method="post" onsubmit="javascript:return del_files();">
+                <input type="hidden" name="operation" value="delete" />
+                <div align="right" style="background-color : #EEEEEE; width : 100%;">
+                  <strong>
+                    <input type="button" id="refresh" name="Submit" value="<%=cm.cms("refresh_list")%>"
+                           title="<%=cm.cms("related_reports_refresh_title")%>" onclick="javascript:ReloadPage()" class="standardButton" />
+                    <%=cm.cmsInput("refresh_list")%>
+                    <%=cm.cmsTitle("related_reports_refresh_title")%>
 
 
 
-<%
-  if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
-  {
-%>
-          <input type="submit" id="delete" name="Submit" value="<%=cm.cms("delete_selected")%>" class="inputTextField" title="<%=cm.cms("related_reports_delete_title")%>" />
-          <%=cm.cmsInput("delete_selected")%>
-          <%=cm.cmsTitle("related_reports_delete_title")%>
-<%
-  }
-%>
-        </strong>
+          <%
+            if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
+            {
+          %>
+                    <input type="submit" id="delete" name="Submit" value="<%=cm.cms("delete_selected")%>" class="searchButton" title="<%=cm.cms("related_reports_delete_title")%>" />
+                    <%=cm.cmsInput("delete_selected")%>
+                    <%=cm.cmsTitle("related_reports_delete_title")%>
+          <%
+            }
+          %>
+                  </strong>
+                </div>
+                <br />
+                <table width="100%" border="0" cellspacing="0" cellpadding="4" summary="Uploaded files" id="upload1" class="listing">
+                  <tr>
+          <%
+            if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
+            {
+          %>
+                    <th style="text-align : center;">
+                      &nbsp;
+                    </th>
+            <%
+              }
+            %>
+                    <th>
+                      <%=cm.cmsText("valid")%>
+                    </th>
+                    <th>
+                      <%=cm.cmsText("description")%>
+                    </th>
+                    <th>
+                      <%=cm.cmsText("file_name")%>
+                    </th>
+                    <th>
+                      <%=cm.cmsText("size")%>(kB)
+                    </th>
+                    <th style="white-space:nowrap">
+                      <%=cm.cmsText("related_reports_author")%>
+                    </th>
+                    <th>
+                      <%=cm.cmsText("date")%>
+                    </th>
+                  </tr>
+          <%
+            for(int i = 0; i < approvedReportsList.size(); i++)
+            {
+              EunisRelatedReportsPersist report = (EunisRelatedReportsPersist) approvedReportsList.get(i);
+              if(null != report)
+              {
+                File file = new File(application.getInitParameter("TOMCAT_HOME") + "/webapps/eunis/upload/" + report.getFileName());
+          %>
+                  <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
+          <%
+                if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
+                {
+           %>
+                    <td align="center">
+                      <label for="filename<%=i%>" class="noshow"><%=cm.cms("check_box_for_deletion")%></label>
+                      <input title="<%=cm.cms("check_box_for_deletion")%>" type="checkbox" id="filename<%=i%>" name="filenames" value="<%=report.getFileName()%>" />
+                      <%=cm.cmsLabel("check_box_for_deletion")%>
+                      <%=cm.cmsTitle("check_box_for_deletion")%>
+                    </td>
+            <%
+                }
+            %>
+                    <td align="center">
+          <%
+                if(file.exists())
+                {
+          %>
+                      <img src="images/mini/download.gif" title="<%=cm.cms("file_is_downloadable")%>" alt="<%=cm.cms("file_is_downloadable")%>" />
+                      <%=cm.cmsAlt("file_is_downloadable")%>
+                      <%=cm.cmsTitle("file_is_downloadable")%>
+          <%
+                }
+                else
+                {
+          %>
+                      <img src="images/mini/downloadu.gif" title="<%=cm.cms("file_not_available")%>" alt="<%=cm.cms("file_not_available")%>" />
+                      <%=cm.cmsAlt("file_not_available")%>
+                      <%=cm.cmsTitle("file_not_available")%>
+          <%
+                }
+          %>
+                    </td>
+                    <td>
+                      <%=report.getReportName()%>&nbsp;
+                    </td>
+                    <td>
+                      <a title="Link to document" href="upload/<%=report.getFileName()%>"><%=file.getName()%></a>
+                    </td>
+                    <td>
+          <%
+                long size = file.getAbsoluteFile().length();
+                if(size > 0)
+                {
+          %>
+                      <%=size / 1024%>
+          <%
+                }
+                else
+                {
+          %>
+                      0/n.a.
+          <%
+                }
+          %>
+                    </td>
+                    <td style="white-space:nowrap">
+          <%
+                // Find the author's e-mail address in the EUNIS_USERS table.
+                UserPersist user = UsersUtility.getUserByUserName(report.getRecordAuthor());
+                String eMail = "";
+                if(null != user) {
+                  eMail = Utilities.formatString(user.getEMail(), "");
+                  if(!eMail.equalsIgnoreCase("")) {
+                    eMail = " <a href=\"mailto:" + eMail.replaceAll("@", "&#64") + "\"><img src=\"images/mini/email.gif\" border=\"0\" valign=\"absmiddle\"></a>";
+                  }
+                }
+          %>
+                      <%=report.getRecordAuthor() + eMail%>
+                    </td>
+                    <td>
+          <%
+                  SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                  try {
+                    out.print(df.format(new Date(report.getRecordDate().getTime())));
+                  } catch(Exception ex) {
+                    out.print("<span color=\"red\">n/a</span>");
+                    ex.printStackTrace();
+                  }
+          %>
+                    </td>
+                  </tr>
+          <%
+              }
+            }
+          %>
+                  <tr bgcolor="#CCCCCC">
+          <%
+            if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
+            {
+          %>
+                    <th>
+                      &nbsp;
+                    </th>
+          <%
+            }
+          %>
+                    <th>
+                      <%=cm.cmsText("valid")%>
+                    </th>
+                    <th>
+                      <%=cm.cmsText("description")%>
+                    </th>
+                    <th>
+                      <%=cm.cmsText("file_name")%>
+                    </th>
+                    <th>
+                      <%=cm.cmsText("size")%>(kB)
+                    </th>
+                    <th style="white-space:nowrap">
+                      <%=cm.cmsText("related_reports_author")%>
+                    </th>
+                    <th>
+                      <%=cm.cmsText("date")%>
+                    </th>
+                  </tr>
+                </table>
+              </form>
+          <%
+            }
+          %>
+                <%=cm.cmsMsg("related_reports_page_title")%>
+                <%=cm.br()%>
+                <%=cm.cmsMsg("related_reports_approval_delete1file")%>
+                <%=cm.br()%>
+                <%=cm.cmsMsg("related_reports_approval_deletefiles")%>
+                <%=cm.br()%>
+                <%=cm.cmsMsg("related_reports_approval_files")%>
+                <jsp:include page="footer.jsp">
+                  <jsp:param name="page_name" value="related-reports.jsp"/>
+                </jsp:include>
+<!-- END MAIN CONTENT -->
+              </div>
+            </div>
+          </div>
+          <!-- end of main content block -->
+          <!-- start of the left (by default at least) column -->
+          <div id="portal-column-one">
+            <div class="visualPadding">
+              <jsp:include page="inc_column_left.jsp" />
+            </div>
+          </div>
+          <!-- end of the left (by default at least) column -->
+        </div>
+        <!-- end of the main and left columns -->
+        <!-- start of right (by default at least) column -->
+        <div id="portal-column-two">
+          <div class="visualPadding">
+            <jsp:include page="inc_column_right.jsp" />
+          </div>
+        </div>
+        <!-- end of the right (by default at least) column -->
+        <div class="visualClear"><!-- --></div>
       </div>
-      <br />
-      <table width="100%" border="0" cellspacing="0" cellpadding="4" class="tableBorder" summary="Uploaded files">
-        <tr>
-<%
-  if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
-  {
-%>
-          <th style="text-align : center;">
-            &nbsp;
-          </th>
-  <%
-    }
-  %>
-          <th class="resultHeader" style="text-align : center;">
-            <%=cm.cmsText("valid")%>
-          </th>
-          <th class="resultHeader">
-            <%=cm.cmsText("description")%>
-          </th>
-          <th class="resultHeader">
-            <%=cm.cmsText("file_name")%>
-          </th>
-          <th  class="resultHeader" style="text-align:right">
-            <%=cm.cmsText("size")%>(kB)
-          </th>
-          <th class="resultHeader" style="white-space:nowrap">
-            <%=cm.cmsText("related_reports_author")%>
-          </th>
-          <th class="resultHeader">
-            <%=cm.cmsText("date")%>
-          </th>
-        </tr>
-<%
-  for(int i = 0; i < approvedReportsList.size(); i++)
-  {
-    EunisRelatedReportsPersist report = (EunisRelatedReportsPersist) approvedReportsList.get(i);
-    if(null != report)
-    {
-      File file = new File(application.getInitParameter("TOMCAT_HOME") + "/webapps/eunis/upload/" + report.getFileName());
-%>
-        <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-<%
-      if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
-      {
- %>
-          <td align="center">
-            <label for="filename<%=i%>" class="noshow"><%=cm.cms("check_box_for_deletion")%></label>
-            <input title="<%=cm.cms("check_box_for_deletion")%>" type="checkbox" id="filename<%=i%>" name="filenames" value="<%=report.getFileName()%>" />
-            <%=cm.cmsLabel("check_box_for_deletion")%>
-            <%=cm.cmsTitle("check_box_for_deletion")%>
-          </td>
-  <%
-      }
-  %>
-          <td align="center">
-<%
-      if(file.exists())
-      {
-%>
-            <img src="images/mini/download.gif" title="<%=cm.cms("file_is_downloadable")%>" alt="<%=cm.cms("file_is_downloadable")%>" />
-            <%=cm.cmsAlt("file_is_downloadable")%>
-            <%=cm.cmsTitle("file_is_downloadable")%>
-<%
-      }
-      else
-      {
-%>
-            <img src="images/mini/downloadu.gif" title="<%=cm.cms("file_not_available")%>" alt="<%=cm.cms("file_not_available")%>" />
-            <%=cm.cmsAlt("file_not_available")%>
-            <%=cm.cmsTitle("file_not_available")%>
-<%
-      }
-%>
-          </td>
-          <td>
-            <%=report.getReportName()%>&nbsp;
-          </td>
-          <td>
-            <a title="Link to document" href="upload/<%=report.getFileName()%>"><%=file.getName()%></a>
-          </td>
-          <td style="text-align:right">
-<%
-      long size = file.getAbsoluteFile().length();
-      if(size > 0)
-      {
-%>
-            <%=size / 1024%>
-<%
-      }
-      else
-      {
-%>
-            0/n.a.
-<%
-      }
-%>
-          </td>
-          <td style="white-space:nowrap">
-<%
-      // Find the author's e-mail address in the EUNIS_USERS table.
-      UserPersist user = UsersUtility.getUserByUserName(report.getRecordAuthor());
-      String eMail = "";
-      if(null != user) {
-        eMail = Utilities.formatString(user.getEMail(), "");
-        if(!eMail.equalsIgnoreCase("")) {
-          eMail = " <a href=\"mailto:" + eMail.replaceAll("@", "&#64") + "\"><img src=\"images/mini/email.gif\" border=\"0\" valign=\"absmiddle\"></a>";
-        }
-      }
-%>
-            <%=report.getRecordAuthor() + eMail%>
-          </td>
-          <td>
-<%
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-          out.print(df.format(new Date(report.getRecordDate().getTime())));
-        } catch(Exception ex) {
-          out.print("<span color=\"red\">n/a</span>");
-          ex.printStackTrace();
-        }
-%>
-          </td>
-        </tr>
-<%
-    }
-  }
-%>
-        <tr bgcolor="#CCCCCC">
-<%
-  if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
-  {
-%>
-          <th style="text-align : center;">
-            &nbsp;
-          </th>
-<%
-  }
-%>
-          <th class="resultHeader" style="text-align : center;">
-            <%=cm.cmsText("valid")%>
-          </th>
-          <th class="resultHeader">
-            <%=cm.cmsText("description")%>
-          </th>
-          <th class="resultHeader">
-            <%=cm.cmsText("file_name")%>
-          </th>
-          <th  class="resultHeader" style="text-align:right">
-            <%=cm.cmsText("size")%>(kB)
-          </th>
-          <th class="resultHeader" style="white-space:nowrap">
-            <%=cm.cmsText("related_reports_author")%>
-          </th>
-          <th class="resultHeader">
-            <%=cm.cmsText("date")%>
-          </th>
-        </tr>
-      </table>
-    </form>
-<%
-  }
-%>
-      <%=cm.cmsMsg("related_reports_page_title")%>
-      <%=cm.br()%>
-      <%=cm.cmsMsg("related_reports_approval_delete1file")%>
-      <%=cm.br()%>
-      <%=cm.cmsMsg("related_reports_approval_deletefiles")%>
-      <%=cm.br()%>
-      <%=cm.cmsMsg("related_reports_approval_files")%>
-      <jsp:include page="footer.jsp">
-        <jsp:param name="page_name" value="related-reports.jsp"/>
-      </jsp:include>
-    </div>
-    </div>
+      <!-- end column wrapper -->
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
     </div>
   </body>
 </html>

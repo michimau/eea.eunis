@@ -1,477 +1,68 @@
-/**
+/*
 dark    : #006CAD
 medium  : #6DABD0
 light   : #B8D6E8
-**/
-
-/* Sortable tables */
-table.sortable a.sortheader
+*/
+#eunistrail
 {
-  border-collapse : collapse;
-  background-color:#006CAD;
-  color:white;
-  font-weight: bold;
-  text-decoration: none;
-  display: block;
-}
-
-a.sortheader:hover
-{
-  background-color:#EEEEEE;
-  color:black;
-  font-weight: bold;
-  text-decoration: none;
-  display: block;
-}
-
-.sortable TH a:hover
-{
-  background-color:#EEEEEE;
-  color:black;
-  font-weight: bold;
-  text-decoration: none;
-  display: block;
-}
-
-table.sortable span.sortarrow
-{
-  text-decoration: none;
-}
-
-body
-{
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: small;
-  background-color: #FFFFFF;
-}
-
-table {
-  font-family: arial, sans-serif;
-  font-size: small;
-}
-
-form {
-  margin: 0px;
-}
-
-.fontSmall {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: x-small;
-}
-
-.fontNormal {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: small;
-}
-
-.fontMedium {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: medium;
-}
-
-.fontLarge {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: large;
-}
-
-.fontBold {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: small;
-  font-weight: bold;
-}
-
-.textVersion {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: x-small;
-  color: #006CAD;
-}
-
-.inputTextField {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: white;
-  color: #006CAD;
-  border: 1px solid #006CAD;
-}
-
-.inputTextFieldInlineEditor
-{
-  font-family: "Courier New", serif;
-  background-color: white;
-  color: #006CAD;
-  border: 1px solid #006CAD;
-}
-
-.inputTextField200 {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: white;
-  color: #006CAD;
-  border: 1px solid #006CAD;
-  width: 200px;
-}
-
-.textInputColorMain {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 10px;
-  background-color: white;
-  color: #006CAD;
-  border: 1px solid #006CAD;
-  width: 150px;
-}
-
-.inputTextFieldCenter {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: white;
-  border: 1px solid #006CAD;
-  text-align: center;
-  color: #006CAD;
-
-}
-
-.bottomCellLine {
-  border-bottom-width: 1px;
-  border-top-style: none;
-  border-right-style: none;
-  border-bottom-style: solid;
-  border-left-style: none;
-  border-bottom-color: #AAAAAA;
-}
-
-a:link {
-  color: #006CAD;
-  text-decoration: underline;
-  font-size: small;
-}
-
-a:visited {
-  color: #006CAD;
-  text-decoration: underline;
-  font-size: small;
-}
-
-a:active {
-  color: #006CAD;
-  text-decoration: underline;
-  font-size: small;
-}
-
-a:hover {
-  color: #FFFFFF;
-  background-color: #006CAD;
-  font-size: small;
-}
-
-a.tab:link {
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #FFFFFF;
-  text-decoration: none;
-  text-align: center;
-}
-
-a.tab:visited {
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #FFFFFF;
-  text-decoration: none;
-  text-align: center;
-}
-
-a.tab:active {
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #FFFFFF;
-  text-decoration: none;
-  text-align: center;
-}
-
-a.tab:hover {
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #FFFFFF;
-  text-align: center;
-}
-
-a.menu_link:link {
-  font-family: verdana, helvetica;
-  font-size: x-small;
-  font-weight: bold;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: #FFFFFF;
-}
-
-a.menu_link:visited {
-  font-family: verdana, helvetica;
-  font-size: x-small;
-  font-weight: bold;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: #FFFFFF;
-}
-
-a.menu_link:active {
-  font-family: verdana, helvetica;
-  font-size: x-small;
-  font-weight: bold;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: #FFFFFF;
-}
-
-a.menu_link:hover {
-  font-family: verdana, helvetica;
-  font-size: x-small;
-  font-weight: bold;
-  color: #FFFFFF;
-  background-color: #006CAD;
-  text-decoration: underline;
-  text-transform: uppercase;
-}
-
-.menu_text {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 10px;
-  font-weight: bold;
-  color: #FFFFFF;
-}
-
-.breadcrumbtrailNormalFont {
   font-family: "Courier New", "Times New Roman", serif;
   font-size: small;
   text-decoration: none;
   color: black;
 }
 
-a.breadcrumbtrail:link {
-  font-family: "Courier New", "Times New Roman", serif;
-  font-size: small;
-  text-decoration: none;
-}
-
-a.breadcrumbtrail:visited {
-  font-family: "Courier New", "Times New Roman", serif;
-  font-size: small;
-  text-decoration: none;
-}
-
-a.breadcrumbtrail:active {
-  font-family: "Courier New", "Times New Roman", serif;
-  font-size: small;
-  text-decoration: none;
-}
-
-a.breadcrumbtrail:hover {
-  font-family: "Courier New", "Times New Roman", serif;
-  font-size: small;
-  text-decoration: underline;
-}
-
-.footer_text {
-  font-size: small;
-}
-
-a.footerLink:link {
+.textVersion
+{
   font-family: Arial, Helvetica, sans-serif;
-  text-decoration: none;
-  font-weight: normal;
-  font-size: small;
+  font-size: x-small;
+/*
+  color: #006CAD;
+*/
 }
 
-a.footerLink:visited {
+.inputTextFieldCenter
+{
   font-family: Arial, Helvetica, sans-serif;
-  text-decoration: none;
-  font-weight: normal;
-  font-size: small;
-}
-
-a.footerLink:active {
-  font-family: Arial, Helvetica, sans-serif;
-  text-decoration: none;
-  font-weight: normal;
-  font-size: small;
-}
-
-a.footerLink:hover {
-  font-family: Arial, Helvetica, sans-serif;
-  text-decoration: underline;
-  font-weight: normal;
-  font-size: small;
-}
-
-.dynamic_content {
-  font-family: Arial, Helvetica, sans-serif;
-  color: red;
-  display: block;
-}
-
-.horizontal_line {
-  width: 100%;
-  height: 1px;
-  background-color: #006CAD
-}
-
-h1 {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: medium;
-  font-weight: bold;
   background-color: white;
-  width: 100%;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  text-align: center;
+/*
+  color: #006CAD;
+  border: 1px solid #006CAD;
+*/
+  border: 1px solid;
 }
 
-h2 {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: small;
-  font-weight: bold;
-  background-color: white;
+.horizontal_line
+{
   width: 100%;
-  font-style: normal;
-  font-variant: normal;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.title, h4 {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: large;
-  font-weight: bold;
+  height: 2px;
   margin: 0px;
+  padding: 0px;
+  background-color: black;
+  color: black;
 }
 
-h5 {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: medium;
-  font-weight: bold;
-  background-color: white;
-  width: 100%;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-h6 {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: small;
-  font-weight: bold;
-  background-color: white;
-  width: 100%;
-  font-style: normal;
-  font-variant: normal;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.grey_rectangle_bold {
+.grey_rectangle_bold
+{
   background-color: #EEEEEE;
   font-weight: bold;
   width: 100%;
 }
 
-.grey_rectangle {
+.grey_rectangle
+{
   background-color: #EEEEEE;
   width: 100%;
 }
 
-.resultHeader {
-  color: white;
-  background-color: #006CAD;
-  padding-left: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
-.resultHeaderForFactsheet {
-  color: white;
-  padding-left: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
-.resultHeader a:link {
-  color: white;
-  text-decoration: none;
-}
-
-.resultHeader a:visited {
-  color: white;
-  text-decoration: none;
-}
-
-.resultHeader a:active {
-  color: white;
-  text-decoration: none;
-}
-
-.resultHeader a:hover {
-  color: white;
-  text-decoration: underline;
-}
-
-.resultCell {
-  padding-left: 5px;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  padding-right: 2px;
-}
-
-a.announcement:link {
-  font-size: medium;
-  color: #339900;
-  background-color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-a.announcement:active {
-  font-size: medium;
-  color: #339900;
-  background-color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-a.announcement:visited {
-  font-size: medium;
-  color: #339900;
-  background-color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-a.announcement:hover {
-  font-size: medium;
-  color: #339900;
-  background-color: white;
-  text-decoration: underline;
-  font-weight: bold;
-}
-
-th {
-  text-align: left;
-  color: white;
-  background-color: #006CAD;
-}
-
-.editContent {
+.editContent
+{
   border: 1px solid red;
 }
 
-.mainHeader180 {
-  background-color: #006CAD;
-  color: white;
-  padding-left: 5px;
-  width: 180px;
-}
-
-.mainHeader300 {
-  background-color: #006CAD;
-  color: white;
-  padding-left: 5px;
-  width: 300px;
-}
-
 /* Tabbed menus  */
-#tabbedmenu {
+#tabbedmenu
+{
   float: left;
   width: 100%;
   border-bottom: thin solid #E3E2D3;
@@ -479,14 +70,16 @@ th {
   line-height: normal;
 }
 
-#tabbedmenu ul {
+#tabbedmenu ul
+{
   margin: 0;
   padding: 2px 2px 0;
   list-style: none;
   list-style-image: none;
 }
 
-#tabbedmenu li {
+#tabbedmenu li
+{
   float: left;
   background: url( "../images/mini/tableft.gif" ) no-repeat left top;
   margin: 0;
@@ -494,7 +87,8 @@ th {
   white-space: nowrap;
 }
 
-#tabbedmenu a {
+#tabbedmenu a
+{
   display: block;
   text-decoration: none;
   font-weight: normal;
@@ -503,141 +97,33 @@ th {
   padding: 5px 15px 2px 3px;
 }
 
-#tabbedmenu #currenttab {
+#tabbedmenu #currenttab
+{
   background-image: url( "../images/mini/tableft_on.gif" );
 }
 
-#tabbedmenu #currenttab a {
+#tabbedmenu #currenttab a
+{
   text-decoration: none;
   font-weight: bold;
   background-image: url( "../images/mini/tabright_on.gif" );
   padding-bottom: 2px;
 }
 
-#tabbedmenu #currenttab span {
-  display: block;
-  text-decoration: none;
-  font-weight: normal;
-  background: url( "../images/mini/tabright_on.gif" ) no-repeat right top;
-  padding: 5px 15px 2px 3px;
-}
-
-.indexQS {
+.indexQS
+{
   font-family: Arial, Helvetica, sans-serif;
   font-size: 11px;
   background-color: white;
-  color: #006CAD;
+/*  color: #006CAD; */
   border: 1px solid #000000;
 }
 
-#tab {
+#tab
+{
   width: 300px;
   height: 300px;
   overflow: auto;
-}
-
-#container {
-  width: 740px;
-  margin: 0px;
-  background-color: white;
-  color: #000000;
-  line-height: 100%;
-}
-
-#leftnav {
-  float: left;
-  width: 175px;
-  margin-right: 20px;
-  background-color: #F3F8F9;
-  margin-bottom: 10px;
-}
-
-#rightnav {
-/*
-  position:relative;
-  float:left;
-  width: 215px;
-*/
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-#outline
-{
-  width : 100%;
-  text-align : center;
-  padding : 0px;
-}
-
-#alignment
-{
-  width : 100%;
-  margin-left : auto;
-  margin-right : auto;
-  text-align : center;
-}
-
-#content {
-  width : 740px;
-  text-align : left;
-  margin-left : auto;
-  margin-right : auto;
-}
-
-#content_index {
-  float: left;
-  width: 305px;
-  margin-right: 20px;
-  margin-bottom: 10px;
-  text-align : left;
-}
-
-.mainlabel180_1 {
-	background-color: #006CAD;
-	color: white;
-	height: 20px;
-	padding-top:5px;
-	vertical-align:middle;
-	background-image: url(../images/top_list.jpg);
-	background-repeat: no-repeat;
-	background-position: left top;
-	text-indent: 10px;
-}
-
-#mainlabel180_2 {
-  background-color: #006CAD;
-  color: white;
-  padding-left: 5px;
-  height: 20px;
-  padding-top:5px;
-  vertical-align:middle;
-}
-
-#mainlabel250 {
-  padding-bottom : 10px;
-  font-size: small;
-	color: #006CAD;
-	font-weight: bold;
-}
-
-.mainHeader180 {
-  background-color: #006CAD;
-  color: white;
-  padding-left: 5px;
-  width: 180px;
-}
-
-.mainHeader300 {
-  background-color: #006CAD;
-  color: white;
-  padding-left: 5px;
-  width: 300px;
-}
-
-.separator {
-  display: block;
-  height: 10px;
-  border: 0px;
 }
 
 .brClear
@@ -660,15 +146,12 @@ th {
 
 .coordinates
 {
-  font-family : "Courier New";
+  font-family : "Courier New", serif;
   font-size : small;
 }
 
-.grey_cell {
-  background-color: #EEEEEE;
-}
-
-#header {
+#header
+{
   width : 100%;
   height : 60px;
   overflow:hidden;
@@ -677,7 +160,8 @@ th {
   margin:0; padding:0;
 }
 
-#header span {
+#header span
+{
   width : 100%;
   height : 60px;
   display:block;
@@ -688,15 +172,8 @@ th {
   text-align : right;
 }
 
-.main_menu {
-  border-collapse: collapse;
-  border-color : #6DABD0;
-  background-color : #006CAD;
-  color : white;
-  text-align : left;
-}
-
-.languageTextField {
+.languageTextField
+{
   font-family: arial, sans-serif;
   background-color: #FFFFFF;
   color: black;
@@ -705,53 +182,8 @@ th {
   top : 38px;
 }
 
-#bodydiv
+.search_details
 {
-  width: 100%;
-  text-align: center;
-}
-
-#bodydiv2
-{
-  width: 740px;
-  text-align: left;
-}
-
-/* */
-.between {
-	width: 100%;
-	background-color: white;
-	height: 15px;
-	background-image: url(../images/round_box_bottom.gif);
-	background-repeat: no-repeat;
-	background-position: left top;
-}
-
-#leftnav ul {
-	width: 100%;
-	margin:0;
-	padding: 10px 0;
-	list-style:none;
-	border-top: 2px solid white;
-	background-image: url(../images/round_box_top.gif);
-	background-position: left top;
-	background-repeat: no-repeat;
-        text-align:left;
-}
-#leftnav li {
-	margin-left: 15px;
-	margin-bottom: 5px;
-	margin-top: 10px;
-	line-height: 1.3em;
-}
-
-.search_style {
-	float: right;
-	text-align: right;
-	vertical-align: middle;
-}
-
-.search_details {
 	font-family: Arial, Helvetica, sans-serif;
 	clear: both;
 	width: 100%;
@@ -760,73 +192,38 @@ th {
 	font-size: 95%;
 }
 
-#footer ul {
-	display: inline;
-	margin:0;
-	padding: 0;
-	list-style: none;
-	text-align: center;
-
-}
-
-#footer li {
-	display: inline;
-	margin:0;
-	padding: 0 4px;
-	list-style: none;
-}
-
-.footer_line {
-	height: 21px;
-	text-align:center;
-}
-
-.grey_cell {
-  background-color: #EEEEEE;
-}
-
-.noshow {
+.noshow
+{
   display : none;
 }
 
-.boldUnderline {
+.boldUnderline
+{
     font-weight :bold;
     color: #000000;
     text-decoration:underline;
 }
 
-#input disabled {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #C0C0C0;
-  color: #000000;
-  border: 1px solid #006CAD;
-}
-
-.inputTextField[disabled] {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: white;
-  color: #C0C0C0;
-  border: 1px solid #006CAD;
-}
-
-.footerprint {
+.footerprint
+{
   width : 100%;
   text-align : center;
 }
 
-.headerstaticprint {
+.headerstaticprint
+{
   width : 100%;
 }
 
-.headerdynamicprint {
+.headerdynamicprint
+{
   width : 100%;
 }
 
-.headerlanguageprint {
+.headerlanguageprint
+{
 }
 
-.headertextprint {
-}
-
-.imageprint {
+.headertextprint
+{
 }

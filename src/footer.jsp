@@ -30,7 +30,7 @@
   }
   boolean isAuthenticated = SessionManager.isAuthenticated();
 %>
-<br class="brClear" />
+<br clear="all" />
 <script language="javascript" type="text/javascript">
   function saveBookmark()
   {
@@ -39,8 +39,8 @@
   }
 </script>
 <div  class="footerprint">
-<div class="horizontal_line"><img alt="" src="images/pixel.gif" width="100%" height="1" /></div>
-<br />
+  <hr class="horizontal_line" />
+  <br />
   <%=cm.cmsText("footer_eunis_database")%>
   <br />
   <%=cm.cmsText("footer_eunis_content")%>
@@ -49,34 +49,34 @@
   if ( isAuthenticated )
   {
 %>
-  <a href="javascript:saveBookmark();" class="footerLink" title="<%=cm.cms("footer_bookmark_title")%>"><%=cm.cmsText("bookmark")%></a>
+  <a href="javascript:saveBookmark();" title="<%=cm.cms("footer_bookmark_title")%>"><%=cm.cmsText("bookmark")%></a>
   <%=cm.cmsTitle("footer_bookmark_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 <%
   }
 %>
-  <a href="http://biodiversity-chm.eea.europa.eu/information/database/" title="<%=cm.cms("footer_related_databases_title")%>" class="footerLink"><%=cm.cmsText("footer_related_databases")%></a>
+  <a href="http://biodiversity-chm.eea.europa.eu/information/database/" title="<%=cm.cms("footer_related_databases_title")%>"><%=cm.cmsText("footer_related_databases")%></a>
   <%=cm.cmsTitle("footer_related_databases_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="mailto:<%=application.getInitParameter("EMAIL_FEEDBACK")%>" accesskey="9" title="<%=cm.cms("footer_contact_title")%>" class="footerLink"><%=cm.cmsText("footer_contact")%></a>
+  <a href="mailto:<%=application.getInitParameter("EMAIL_FEEDBACK")%>" accesskey="9" title="<%=cm.cms("footer_contact_title")%>"><%=cm.cmsText("footer_contact")%></a>
   <%=cm.cmsTitle("footer_contact_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="news.jsp" class="footerLink" title="<%=cm.cms("footer_news_title")%>"><%=cm.cmsText("news")%></a>
+  <a href="news.jsp" title="<%=cm.cms("footer_news_title")%>"><%=cm.cmsText("news")%></a>
   <%=cm.cmsTitle("footer_news_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="feedback.jsp" title="<%=cm.cms("footer_feedback_title")%>" class="footerLink"><%=cm.cmsText("feedback")%></a>
+  <a href="feedback.jsp" title="<%=cm.cms("footer_feedback_title")%>"><%=cm.cmsText("feedback")%></a>
   <%=cm.cmsTitle("footer_feedback_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="copyright.jsp" title="<%=cm.cms("footer_copyright_title")%>" class="footerLink"><%=cm.cmsText("copyright_and_disclaimer_title")%></a>
+  <a href="copyright.jsp" title="<%=cm.cms("footer_copyright_title")%>"><%=cm.cmsText("copyright_and_disclaimer_title")%></a>
   <%=cm.cmsTitle("footer_copyright_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="accessibility.jsp" title="<%=cm.cms("accessibility_statement")%>" class="footerLink" accesskey="0"><%=cm.cmsText("footer_accessibility")%></a>
+  <a href="accessibility.jsp" title="<%=cm.cms("accessibility_statement")%>" accesskey="0"><%=cm.cmsText("footer_accessibility")%></a>
   <%=cm.cmsTitle("accessibility_statement")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 </div>
-<jsp:include page="digir_check.jsp" />
+<%--<jsp:include page="digir_check.jsp" />--%>

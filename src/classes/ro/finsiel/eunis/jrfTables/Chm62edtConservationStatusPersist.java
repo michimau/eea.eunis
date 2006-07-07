@@ -16,6 +16,8 @@ public class Chm62edtConservationStatusPersist extends PersistentObject {
   private String name = null;
   private Date i_redBookDate = null;
   private Integer i_idConsStatusLink = null;
+  private String populationConcerned = null;
+
 
   /**
    * Creates an new Chm62edtConservationStatusPersist object.
@@ -142,5 +144,15 @@ public class Chm62edtConservationStatusPersist extends PersistentObject {
   public void setRedBookDate(Date redBookDate) {
     i_redBookDate = redBookDate;
     this.markModifiedPersistentState();
+  }
+
+  public String getPopulationConcerned()
+  {
+    return populationConcerned;
+  }
+
+  public void setPopulationConcerned( String populationConcerned )
+  {
+    this.populationConcerned = populationConcerned;
   }
 }

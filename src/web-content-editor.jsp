@@ -228,11 +228,11 @@
         <br />
         <br />
         <label for="idPage"><%=cm.cms("web_content_editor_12")%> : </label>
-        <input id="idPage" name="idPage" type="text" value="<%=idPage%>" size="50" class="inputTextField" title="<%=cm.cms("web_content_editor_12")%>" />
+        <input id="idPage" name="idPage" type="text" value="<%=idPage%>" size="50" title="<%=cm.cms("web_content_editor_12")%>" />
         <br />
         <br />
         <label for="language"><%=cm.cms("language")%> : </label>
-        <select title="<%=cm.cms("web_content_editor_14")%>" id="language" name="language" class="inputTextField" onchange="javascript:languageOnChange();">
+        <select title="<%=cm.cms("web_content_editor_14")%>" id="language" name="language" onchange="javascript:languageOnChange();">
 <%
     for ( int i = 0; i < languages.size(); i++ )
     {
@@ -256,7 +256,7 @@
   {
 %>
         <label for="version1" class="noshow"><%=cm.cms("no_version_available")%></label>
-        <select title="<%=cm.cms("no_version_available")%>" id="version1" name="version" class="inputTextField" onchange="javascript:versionOnChange();" disabled="disabled">
+        <select title="<%=cm.cms("no_version_available")%>" id="version1" name="version" onchange="javascript:versionOnChange();" disabled="disabled">
           <option value=""><%=cm.cms("no_version_available")%></option>
         </select>
 <%
@@ -265,7 +265,7 @@
   {
 %>
         <label for="version" class="noshow"><%=cm.cms("web_content_editor_18")%></label>
-        <select title="<%=cm.cms("web_content_editor_18")%>" id="version" name="version" class="inputTextField" onchange="javascript:versionOnChange();">
+        <select title="<%=cm.cms("web_content_editor_18")%>" id="version" name="version" onchange="javascript:versionOnChange();">
 <%
     for( int i = 0; i < versions.size(); i++ )
     {
@@ -291,22 +291,22 @@
         <%=cm.cms("web_content_editor_19")%>:
         <br />
         <label for="text" class="noshow"><%=cm.cms("web_content_editor_21")%></label>
-        <textarea id="text" name="text" rows="10" cols="80" class="inputTextField" title="<%=cm.cms("web_content_editor_21")%>" ><%=contentText%></textarea>
+        <textarea id="text" name="text" rows="10" cols="80" title="<%=cm.cms("web_content_editor_21")%>" ><%=contentText%></textarea>
         <br />
         <%=cm.cms("web_content_editor_20")%>:
         <br />
         <label for="description" class="noshow"><%=cm.cms("description_of_the_text")%></label>
-        <textarea rows="3" id="description" name="description" cols="80" class="inputTextField" title="<%=cm.cms("description_of_the_text")%>"><%=descriptionText%></textarea>
+        <textarea rows="3" id="description" name="description" cols="80" title="<%=cm.cms("description_of_the_text")%>"><%=descriptionText%></textarea>
         <%--<%=cm.cmsTitle("description_of_the_text")%>--%>
         <br />
         <br />
-        <label for="maxLength"><%=cm.cms("web_content_editor_23")%>:</label> <input type="text" id="maxLength" name="maxLength" value="<%=maxLength%>" class="inputTextField" size="4" style="text-align : right;" title="<%=cm.cms("web_content_editor_24")%>" />
+        <label for="maxLength"><%=cm.cms("web_content_editor_23")%>:</label> <input type="text" id="maxLength" name="maxLength" value="<%=maxLength%>" size="4" style="text-align : right;" title="<%=cm.cms("web_content_editor_24")%>" />
         <br />
         <br />
-        <input type="submit" id="save" name="Save" value="<%=cm.cms("save")%>" title="<%=cm.cms("web_content_editor_25")%>" class="inputTextField" />
-        <input type="button" id="delete" name="Delete" value="<%=cm.cms("delete")%>" title="<%=cm.cms("web_content_editor_26")%>" class="inputTextField" onclick="javascript:alert( 'TODO' );" />
-        <input type="reset" id="reset" name="Reset" value="<%=cm.cms("reset")%>" title="<%=cm.cms("web_content_editor_27")%>" class="inputTextField" onclick="javascript:resetOnChange();" />
-        <input type="button" id="close_window" name="Close" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close();" title="<%=cm.cms("web_content_editor_28")%>" class="inputTextField" />
+        <input type="submit" id="save" name="Save" value="<%=cm.cms("save")%>" title="<%=cm.cms("web_content_editor_25")%>" class="searchButton" />
+        <input type="button" id="delete" name="Delete" value="<%=cm.cms("delete")%>" title="<%=cm.cms("web_content_editor_26")%>" class="standardButton" onclick="javascript:alert( 'TODO' );" />
+        <input type="reset" id="reset" name="Reset" value="<%=cm.cms("reset")%>" title="<%=cm.cms("web_content_editor_27")%>" class="standardButton" onclick="javascript:resetOnChange();" />
+        <input type="button" id="close_window" name="Close" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close();" title="<%=cm.cms("web_content_editor_28")%>" class="standardButton" />
       </form>
 <%
   if( save )

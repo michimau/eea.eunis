@@ -20,57 +20,72 @@
                  java.util.Iterator" %>
 <%@ page import="java.util.List" %><%@ page import="java.util.Vector" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.code.CodeBean" scope="page">
+  <jsp:setProperty name="formBean" property="*" />
+</jsp:useBean>
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+  if (null != formBean.getRemoveFilterIndex()) {
+    formBean.prepareFilterCriterias();
+  }
+  boolean showExpanded = Utilities.checkedStringToBoolean(request.getParameter("expanded"),false);
+  boolean showLevel = Utilities.checkedStringToBoolean(formBean.getShowLevel(), CodeBean.HIDE);
+  boolean showCode = Utilities.checkedStringToBoolean(formBean.getShowCode(), CodeBean.HIDE);
+  boolean showScientificName = Utilities.checkedStringToBoolean(formBean.getShowScientificName(), CodeBean.HIDE);
+  boolean showOtherCodes = Utilities.checkedStringToBoolean(formBean.getShowOtherCodes(), CodeBean.HIDE);
+  String searchedClassification = formBean.getClassificationCode();
+  //boolean showEnglishName = Utilities.checkedStringToBoolean(formBean.getShowEnglishName(), CodeBean.HIDE);
+  // Set number criteria for the search result
+  int noCriteria = (null == formBean.getCriteriaSearch() ? 0 : formBean.getCriteriaSearch().length);
+
+  Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
+
+  int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
+  Integer database = Utilities.checkedStringToInt(formBean.getDatabase(), CodeDomain.SEARCH_EUNIS);
+  // The main paginator
+  CodePaginator paginator = new CodePaginator(new CodeDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), database));
+  paginator.setSortCriteria(formBean.toSortCriteria());
+  paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
+  currentPage = paginator.setCurrentPage(currentPage);// Compute *REAL* current page (adjusted if user messes up)
+  int resultsCount = paginator.countResults();
+  final String pageName = "habitats-code-result.jsp";
+  int pagesCount = paginator.countPages();// This is used in @page include...
+  int guid = 0;// This is used in @page include...
+  // Now extract the results for the current page.
+  List results = paginator.getPage(currentPage);
+
+  // Prepare parameters for tsvlink
+  Vector reportFields = new Vector();
+  reportFields.addElement("sort");
+  reportFields.addElement("ascendency");
+  reportFields.addElement("criteriaSearch");
+  reportFields.addElement("criteriaSearch");
+  reportFields.addElement("oper");
+  reportFields.addElement("criteriaType");
+
+  //String tsvLink = "javascript:openlink('reports/habitats/tsv-habitats-code.jsp?" + formBean.toURLParam(reportFields) + "')";
+  String tsvLink = "javascript:openTSVDownload('reports/habitats/tsv-habitats-code.jsp?" + formBean.toURLParam(reportFields) + "')";
+  String location = "home#index.jsp,habitat_types#habitats.jsp,code_column#habitats-code.jsp,results";
+  if (results.isEmpty())
+  {
+    boolean fromRefine = false;
+    if(formBean != null && formBean.getCriteriaSearch() != null && formBean.getCriteriaSearch().length > 0)
+    {
+      fromRefine = true;
+    }
+ %>
+  <jsp:forward page="emptyresults.jsp">
+    <jsp:param name="location" value="<%=location%>" />
+    <jsp:param name="fromRefine" value="<%=fromRefine%>" />
+  </jsp:forward>
+<%
+  }
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
   <script language="JavaScript" src="script/habitats-result.js" type="text/javascript"></script>
-  <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.code.CodeBean" scope="page">
-    <jsp:setProperty name="formBean" property="*" />
-  </jsp:useBean>
-  <%
-    WebContentManagement cm = SessionManager.getWebContent();
-    if (null != formBean.getRemoveFilterIndex()) {
-      formBean.prepareFilterCriterias();
-    }
-    boolean showExpanded = Utilities.checkedStringToBoolean(request.getParameter("expanded"),false);
-    boolean showLevel = Utilities.checkedStringToBoolean(formBean.getShowLevel(), CodeBean.HIDE);
-    boolean showCode = Utilities.checkedStringToBoolean(formBean.getShowCode(), CodeBean.HIDE);
-    boolean showScientificName = Utilities.checkedStringToBoolean(formBean.getShowScientificName(), CodeBean.HIDE);
-    boolean showOtherCodes = Utilities.checkedStringToBoolean(formBean.getShowOtherCodes(), CodeBean.HIDE);
-    String searchedClassification = formBean.getClassificationCode();
-    //boolean showEnglishName = Utilities.checkedStringToBoolean(formBean.getShowEnglishName(), CodeBean.HIDE);
-    // Set number criteria for the search result
-    int noCriteria = (null == formBean.getCriteriaSearch() ? 0 : formBean.getCriteriaSearch().length);
-
-    Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
-
-    int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
-    Integer database = Utilities.checkedStringToInt(formBean.getDatabase(), CodeDomain.SEARCH_EUNIS);
-    // The main paginator
-    CodePaginator paginator = new CodePaginator(new CodeDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), database));
-    paginator.setSortCriteria(formBean.toSortCriteria());
-    paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
-    currentPage = paginator.setCurrentPage(currentPage);// Compute *REAL* current page (adjusted if user messes up)
-    int resultsCount = paginator.countResults();
-    final String pageName = "habitats-code-result.jsp";
-    int pagesCount = paginator.countPages();// This is used in @page include...
-    int guid = 0;// This is used in @page include...
-    // Now extract the results for the current page.
-    List results = paginator.getPage(currentPage);
-
-    // Prepare parameters for tsvlink
-    Vector reportFields = new Vector();
-    reportFields.addElement("sort");
-    reportFields.addElement("ascendency");
-    reportFields.addElement("criteriaSearch");
-    reportFields.addElement("criteriaSearch");
-    reportFields.addElement("oper");
-    reportFields.addElement("criteriaType");
-
-    //String tsvLink = "javascript:openlink('reports/habitats/tsv-habitats-code.jsp?" + formBean.toURLParam(reportFields) + "')";
-    String tsvLink = "javascript:openTSVDownload('reports/habitats/tsv-habitats-code.jsp?" + formBean.toURLParam(reportFields) + "')";
-  %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
     <%=cm.cms("habitats_code-result_title")%>
@@ -82,477 +97,537 @@
   }
   //-->
   </script>
-</head>
+  </head>
+  <body>
+    <div id="visual-portal-wrapper">
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
+      <!-- The wrapper div. It contains the three columns. -->
+      <div id="portal-columns">
+        <!-- start of the main and left columns -->
+        <div id="visual-column-wrapper">
+          <!-- start of main content block -->
+          <div id="portal-column-content">
+            <div id="content">
+              <div class="documentContent" id="region-content">
+                <a name="documentContent"></a>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure">Document Actions</h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="Print this page"
+                            title="Print this page" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="Toggle full screen mode"
+                             title="Toggle full screen mode" /></a>
+                    </li>
+                  </ul>
+                </div>
+                <br clear="all" />
+<!-- MAIN CONTENT -->
+                <jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="<%=location%>" />
+                  <jsp:param name="helpLink" value="habitats-help.jsp" />
+                  <jsp:param name="downloadLink" value="<%=tsvLink%>" />
+                </jsp:include>
+                <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                <td>
+                <h1>
+                  <%=cm.cmsText("code_classifications")%>
+                </h1>
+                <%-- Here are the main search criterias displayed to the user --%>
+                <%AbstractSearchCriteria mainCriteria = formBean.getMainSearchCriteria();%>
+                <table width="100%" summary="layout" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td>
+                      <%=cm.cmsText("you_searched_for")%>
+                      <strong>
+                        <%=Utilities.getSourceHabitat(database, CodeDomain.SEARCH_ANNEX.intValue(), CodeDomain.SEARCH_BOTH.intValue())%>
+                      </strong>
+                      <%=cm.cmsText("habitats_code-result_03")%>
+                      <strong>
+                        <%=mainCriteria.toHumanString()%> <strong><%=cm.cmsText("in_the_classification")%> <%=HabitatsSearchUtility.getClassificationName(formBean.getClassificationCode())%></strong>
+                      </strong>
+                    </td>
+                  </tr>
+                </table>
+                <%=cm.cmsText("results_found_1")%>: <strong><%=resultsCount%></strong>
+                <%// Prepare parameters for pagesize.jsp
+                  Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
+                  pageSizeFormFields.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
+                  pageSizeFormFields.addElement("ascendency");    /*   is overriden & also pageSize is set to default           */
+                  pageSizeFormFields.addElement("criteriaSearch");/*   to page '0' aka first page. */
+                  pageSizeFormFields.addElement("oper");
+                  pageSizeFormFields.addElement("criteriaType");
+                  pageSizeFormFields.addElement("expand");
+                %>
+                <jsp:include page="pagesize.jsp">
+                  <jsp:param name="guid" value="<%=guid%>" />
+                  <jsp:param name="pageName" value="<%=pageName%>" />
+                  <jsp:param name="pageSize" value="<%=formBean.getPageSize()%>" />
+                  <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(pageSizeFormFields)%>" />
+                </jsp:include>
+                <%// Prepare the form parameters.
+                  Vector filterSearch = new Vector();
+                  filterSearch.addElement("sort");
+                  filterSearch.addElement("ascendency");
+                  filterSearch.addElement("criteriaSearch");
+                  filterSearch.addElement("oper");
+                  filterSearch.addElement("criteriaType");
+                  filterSearch.addElement("pageSize");
+                  filterSearch.addElement("expand");
+                %>
+                <br />
+                <table width="100%" border="0" summary="layout" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td bgcolor="#EEEEEE">
+                      <strong>
+                        <%=cm.cmsText("refine_your_search")%>
+                      </strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td bgcolor="#EEEEEE">
+                      <form name="resultSearch" method="get" onsubmit="return(checkHabitats(<%=noCriteria%>));" action="habitats-code-result.jsp">
+                        <%=formBean.toFORMParam(filterSearch)%>
+                        <label for="criteriaType" class="noshow"><%=cm.cms("criteria")%></label>
+                        <select title="<%=cm.cms("criteria")%>" id="criteriaType" name="criteriaType">
+                          <%
+                            if (showCode && 0 == database.compareTo(CodeDomain.SEARCH_EUNIS)) {
+                          %>
+                          <option value="<%=CodeSearchCriteria.CRITERIA_EUNIS_CODE%>"><%=cm.cms("eunis_code")%></option>
+                          <%
+                            }
+                          %>
+                          <%
+                            if (showCode && 0 == database.compareTo(CodeDomain.SEARCH_ANNEX)) {
+                          %>
+                          <option value="<%=CodeSearchCriteria.CRITERIA_ANNEX_CODE%>"><%=cm.cms("annex_code")%></option>
+                          <%
+                            }
+                          %>
+                          <%
+                            if (showCode && 0 == database.compareTo(CodeDomain.SEARCH_BOTH)) {
+                          %>
+                          <option value="<%=CodeSearchCriteria.CRITERIA_EUNIS_CODE%>"><%=cm.cms("eunis_code")%></option>
+                          <option value="<%=CodeSearchCriteria.CRITERIA_ANNEX_CODE%>"><%=cm.cms("annex_code")%></option>
+                          <%
+                            }
+                          %>
+                          <%
+                            if (0 == database.compareTo(CodeDomain.SEARCH_EUNIS) && showLevel) {
+                          %>
+                          <option value="<%=CodeSearchCriteria.CRITERIA_LEVEL%>"><%=cm.cms("generic_index_07")%></option>
+                          <%
+                            }
+                          %>
+                          <%
+                            if (showScientificName) {
+                          %>
+                          <option value="<%=CodeSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected"><%=cm.cms("habitat_type_name")%></option>
+                          <%
+                            }
+                          %>
+                        </select>
+                        <%=cm.cmsLabel("criteria")%>
+                        <%=cm.cmsInput("eunis_code")%>
+                        <%=cm.cmsInput("annex_code")%>
+                        <%=cm.cmsInput("generic_index_07")%>
+                        <label for="oper" class="noshow"><%=cm.cms("operator")%></label>
+                        <select title="<%=cm.cms("operator")%>" name="oper" id="oper">
+                          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("is")%></option>
+                          <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("starts_with")%></option>
+                          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
+                        </select>
+                        <%=cm.cmsLabel("operator")%>
+                        <%=cm.cmsInput("is")%>
+                        <%=cm.cmsInput("starts_with")%>
+                        <%=cm.cmsInput("contains")%>
+                        <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
+                        <input title="<%=cm.cms("filter_value")%>" name="criteriaSearch" id="criteriaSearch" type="text" size="30" />
+                        <%=cm.cmsLabel("filter_value")%>
+                        <input title="Search" class="searchButton" type="submit" name="Submit" id="Submit" value="<%=cm.cms("search")%>" />
+                        <%=cm.cmsInput("search")%>
+                      </form>
+                    </td>
+                  </tr>
+                    <%-- This is the code which shows the search filters --%>
+                    <%ro.finsiel.eunis.search.AbstractSearchCriteria[] criterias = formBean.toSearchCriteria();%>
+                    <%
+                      if (criterias.length > 1) {
+                    %>
+                  <tr>
+                    <td bgcolor="#EEEEEE">
+                      <%=cm.cmsText("applied_filters_to_the_results")%>:
+                    </td>
+                  </tr>
+                  <%
+                    }
+                  %>
+                  <%for (int i = criterias.length - 1; i > 0; i--) {%>
+                  <%AbstractSearchCriteria criteria = criterias[i];%>
+                  <%if (null != criteria && null != formBean.getCriteriaSearch()) {%>
+                  <tr>
+                    <td bgcolor="#CCCCCC">
+                      <a title="Delete filter" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>">
+                        <img alt="Delete filter" src="images/mini/delete.jpg" border="0" style="vertical-align:middle" />
+                      </a>
+                      &nbsp;&nbsp;
+                      <strong class="linkDarkBg"><%= i + ". " + criteria.toHumanString()%></strong>
+                    </td>
+                  </tr>
+                  <%}%>
+                  <%}%>
+                </table>
+                <%
+                  // Prepare parameters for navigator.jsp
+                  Vector navigatorFormFields = new Vector();  /*  The following fields are used by paginator.jsp, included below.      */
+                  navigatorFormFields.addElement("pageSize"); /* NOTE* that I didn't add here currentPage since it is overriden in the */
+                  navigatorFormFields.addElement("sort");     /* <form name='..."> in the navigator.jsp!                               */
+                  navigatorFormFields.addElement("ascendency");
+                  navigatorFormFields.addElement("criteriaSearch");
+                  navigatorFormFields.addElement("oper");
+                  navigatorFormFields.addElement("criteriaType");
+                  navigatorFormFields.addElement("expand");
+                %>
+                <jsp:include page="navigator.jsp">
+                  <jsp:param name="pagesCount" value="<%=pagesCount%>" />
+                  <jsp:param name="pageName" value="<%=pageName%>" />
+                  <jsp:param name="guid" value="<%=guid%>" />
+                  <jsp:param name="currentPage" value="<%=formBean.getCurrentPage()%>" />
+                  <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>" />
+                  <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>" />
+                </jsp:include>
 
-<body>
-  <div id="outline">
-  <div id="alignment">
-  <div id="content">
-<jsp:include page="header-dynamic.jsp">
-  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,code_column#habitats-code.jsp,results" />
-  <jsp:param name="helpLink" value="habitats-help.jsp" />
-  <jsp:param name="downloadLink" value="<%=tsvLink%>" />
-</jsp:include>
-<table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td>
-<h1>
-  <%=cm.cmsText("code_classifications")%>
-</h1>
-<%-- Here are the main search criterias displayed to the user --%>
-<%AbstractSearchCriteria mainCriteria = formBean.getMainSearchCriteria();%>
-<table width="100%" summary="layout" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td>
-      <%=cm.cmsText("you_searched_for")%>
-      <strong>
-        <%=Utilities.getSourceHabitat(database, CodeDomain.SEARCH_ANNEX.intValue(), CodeDomain.SEARCH_BOTH.intValue())%>
-      </strong>
-      <%=cm.cmsText("habitats_code-result_03")%>
-      <strong>
-        <%=mainCriteria.toHumanString()%> <strong><%=cm.cmsText("in_the_classification")%> <%=HabitatsSearchUtility.getClassificationName(formBean.getClassificationCode())%></strong>
-      </strong>
-    </td>
-  </tr>
-</table>
- <%
-    if (results.isEmpty())
-    {
-       boolean fromRefine = false;
-       if(formBean != null && formBean.getCriteriaSearch() != null && formBean.getCriteriaSearch().length > 0)
-         fromRefine = true;
-
-%>
-
-       <jsp:include page="noresults.jsp" >
-         <jsp:param name="fromRefine" value="<%=fromRefine%>" />
-       </jsp:include>
- <%
-         return;
-     }
- %>
-<%=cm.cmsText("results_found_1")%>: <strong><%=resultsCount%></strong>
-<%// Prepare parameters for pagesize.jsp
-  Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
-  pageSizeFormFields.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
-  pageSizeFormFields.addElement("ascendency");    /*   is overriden & also pageSize is set to default           */
-  pageSizeFormFields.addElement("criteriaSearch");/*   to page '0' aka first page. */
-  pageSizeFormFields.addElement("oper");
-  pageSizeFormFields.addElement("criteriaType");
-  pageSizeFormFields.addElement("expand");
-%>
-<jsp:include page="pagesize.jsp">
-  <jsp:param name="guid" value="<%=guid%>" />
-  <jsp:param name="pageName" value="<%=pageName%>" />
-  <jsp:param name="pageSize" value="<%=formBean.getPageSize()%>" />
-  <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(pageSizeFormFields)%>" />
-</jsp:include>
-<%// Prepare the form parameters.
-  Vector filterSearch = new Vector();
-  filterSearch.addElement("sort");
-  filterSearch.addElement("ascendency");
-  filterSearch.addElement("criteriaSearch");
-  filterSearch.addElement("oper");
-  filterSearch.addElement("criteriaType");
-  filterSearch.addElement("pageSize");
-  filterSearch.addElement("expand");
-%>
-<br />
-<table width="100%" border="0" summary="layout" cellspacing="0" cellpadding="0">
-  <tr>
-    <td bgcolor="#EEEEEE">
-      <strong>
-        <%=cm.cmsText("refine_your_search")%>
-      </strong>
-    </td>
-  </tr>
-  <tr>
-    <td bgcolor="#EEEEEE">
-      <form name="resultSearch" method="get" onsubmit="return(checkHabitats(<%=noCriteria%>));" action="habitats-code-result.jsp">
-        <%=formBean.toFORMParam(filterSearch)%>
-        <label for="criteriaType" class="noshow"><%=cm.cms("criteria")%></label>
-        <select title="<%=cm.cms("criteria")%>" id="criteriaType" name="criteriaType" class="inputTextField">
-          <%
-            if (showCode && 0 == database.compareTo(CodeDomain.SEARCH_EUNIS)) {
-          %>
-          <option value="<%=CodeSearchCriteria.CRITERIA_EUNIS_CODE%>"><%=cm.cms("eunis_code")%></option>
-          <%
-            }
-          %>
-          <%
-            if (showCode && 0 == database.compareTo(CodeDomain.SEARCH_ANNEX)) {
-          %>
-          <option value="<%=CodeSearchCriteria.CRITERIA_ANNEX_CODE%>"><%=cm.cms("annex_code")%></option>
-          <%
-            }
-          %>
-          <%
-            if (showCode && 0 == database.compareTo(CodeDomain.SEARCH_BOTH)) {
-          %>
-          <option value="<%=CodeSearchCriteria.CRITERIA_EUNIS_CODE%>"><%=cm.cms("eunis_code")%></option>
-          <option value="<%=CodeSearchCriteria.CRITERIA_ANNEX_CODE%>"><%=cm.cms("annex_code")%></option>
-          <%
-            }
-          %>
-          <%
-            if (0 == database.compareTo(CodeDomain.SEARCH_EUNIS) && showLevel) {
-          %>
-          <option value="<%=CodeSearchCriteria.CRITERIA_LEVEL%>"><%=cm.cms("generic_index_07")%></option>
-          <%
-            }
-          %>
-          <%
-            if (showScientificName) {
-          %>
-          <option value="<%=CodeSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected"><%=cm.cms("habitat_type_name")%></option>
-          <%
-            }
-          %>
-        </select>
-        <%=cm.cmsLabel("criteria")%>
-        <%=cm.cmsInput("eunis_code")%>
-        <%=cm.cmsInput("annex_code")%>
-        <%=cm.cmsInput("generic_index_07")%>
-        <label for="oper" class="noshow"><%=cm.cms("operator")%></label>
-        <select title="<%=cm.cms("operator")%>" name="oper" id="oper" class="inputTextField">
-          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("is")%></option>
-          <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("starts_with")%></option>
-          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
-        </select>
-        <%=cm.cmsLabel("operator")%>
-        <%=cm.cmsInput("is")%>
-        <%=cm.cmsInput("starts_with")%>
-        <%=cm.cmsInput("contains")%>
-        <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
-        <input title="<%=cm.cms("filter_value")%>" class="inputTextField" name="criteriaSearch" id="criteriaSearch" type="text" size="30" />
-        <%=cm.cmsLabel("filter_value")%>
-        <input title="Search" class="inputTextField" type="submit" name="Submit" id="Submit" value="<%=cm.cms("search")%>" />
-        <%=cm.cmsInput("search")%>
-      </form>
-    </td>
-  </tr>
-    <%-- This is the code which shows the search filters --%>
-    <%ro.finsiel.eunis.search.AbstractSearchCriteria[] criterias = formBean.toSearchCriteria();%>
-    <%
-      if (criterias.length > 1) {
-    %>
-  <tr>
-    <td bgcolor="#EEEEEE">
-      <%=cm.cmsText("applied_filters_to_the_results")%>:
-    </td>
-  </tr>
-  <%
-    }
-  %>
-  <%for (int i = criterias.length - 1; i > 0; i--) {%>
-  <%AbstractSearchCriteria criteria = criterias[i];%>
-  <%if (null != criteria && null != formBean.getCriteriaSearch()) {%>
-  <tr>
-    <td bgcolor="#CCCCCC">
-      <a title="Delete filter" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>">
-        <img alt="Delete filter" src="images/mini/delete.jpg" border="0" style="vertical-align:middle" />
-      </a>
-      &nbsp;&nbsp;
-      <strong class="linkDarkBg"><%= i + ". " + criteria.toHumanString()%></strong>
-    </td>
-  </tr>
-  <%}%>
-  <%}%>
-</table>
-<%
-  // Prepare parameters for navigator.jsp
-  Vector navigatorFormFields = new Vector();  /*  The following fields are used by paginator.jsp, included below.      */
-  navigatorFormFields.addElement("pageSize"); /* NOTE* that I didn't add here currentPage since it is overriden in the */
-  navigatorFormFields.addElement("sort");     /* <form name='..."> in the navigator.jsp!                               */
-  navigatorFormFields.addElement("ascendency");
-  navigatorFormFields.addElement("criteriaSearch");
-  navigatorFormFields.addElement("oper");
-  navigatorFormFields.addElement("criteriaType");
-  navigatorFormFields.addElement("expand");
-%>
-<jsp:include page="navigator.jsp">
-  <jsp:param name="pagesCount" value="<%=pagesCount%>" />
-  <jsp:param name="pageName" value="<%=pageName%>" />
-  <jsp:param name="guid" value="<%=guid%>" />
-  <jsp:param name="currentPage" value="<%=formBean.getCurrentPage()%>" />
-  <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>" />
-  <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>" />
-</jsp:include>
-
-<%
+                <%
 // Expand/Collapse other classifications
-    Vector expand = new Vector();
-    expand.addElement("sort");
-    expand.addElement("ascendency");
-    expand.addElement("criteriaSearch");
-    expand.addElement("oper");
-    expand.addElement("criteriaType");
-    expand.addElement("pageSize");
-    expand.addElement("currentPage");
-    String expandURL = formBean.toURLParam(expand);
+                    Vector expand = new Vector();
+                    expand.addElement("sort");
+                    expand.addElement("ascendency");
+                    expand.addElement("criteriaSearch");
+                    expand.addElement("oper");
+                    expand.addElement("criteriaType");
+                    expand.addElement("pageSize");
+                    expand.addElement("currentPage");
+                    String expandURL = formBean.toURLParam(expand);
 
-  if (showOtherCodes && !showExpanded)
-  {
-%>
-   <a title="<%=cm.cms("show_habitats_codes_in_other_classifications")%>" href="<%=pageName + "?expanded=" + !showExpanded + expandURL%>"><%=cm.cmsText("show_habitats_codes_in_other_classifications")%></a>
-<%
-  }
-%>
-<table summary="<%=cm.cms("search_results")%>" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse">
-<%
-  // Compute the sort criteria
-  Vector sortURLFields = new Vector();      /* Used for sorting */
-  sortURLFields.addElement("pageSize");
-  sortURLFields.addElement("criteriaSearch");
-  sortURLFields.addElement("oper");
-  sortURLFields.addElement("criteriaType");
-  sortURLFields.addElement("currentPage");
-  sortURLFields.addElement("expand");
-  String urlSortString = formBean.toURLParam(sortURLFields);
-  AbstractSortCriteria levelCrit = formBean.lookupSortCriteria(CodeSortCriteria.SORT_LEVEL);
-  AbstractSortCriteria sciNameCrit = formBean.lookupSortCriteria(CodeSortCriteria.SORT_SCIENTIFIC_NAME);
-  AbstractSortCriteria eunisCodeCrit = formBean.lookupSortCriteria(CodeSortCriteria.SORT_EUNIS_CODE);
-  AbstractSortCriteria annexCodeCrit = formBean.lookupSortCriteria(CodeSortCriteria.SORT_ANNEX_CODE);
-%>
-<tr>
-  <%
-    if (0 == database.compareTo(CodeDomain.SEARCH_EUNIS) && showLevel) {
-  %>
-  <th class="resultHeader" width="56">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(levelCrit, (null == levelCrit) ? true : false)%>">
-      <%=Utilities.getSortImageTag(levelCrit)%><%=cm.cmsText("generic_index_07")%>
-    </a>
-  <%=cm.cmsTitle("sort_results_on_this_column")%>
-  </th>
-  <%
-    }
-  %>
-  <%
-    if (showCode) {
-  %>
-  <th class="resultHeader" width="30">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(eunisCodeCrit, (null == eunisCodeCrit) ? true : false)%>">
-      <%=Utilities.getSortImageTag(eunisCodeCrit)%><%=cm.cmsText("eunis_code")%>
-    </a>
-  <%=cm.cmsTitle("sort_results_on_this_column")%>
-  </th>
-  <th class="resultHeader" width="30">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_ANNEX_CODE%>&amp;ascendency=<%=formBean.changeAscendency(annexCodeCrit, (null == annexCodeCrit) ? true : false)%>">
-      <%=Utilities.getSortImageTag(annexCodeCrit)%><%=cm.cmsText("annex_code")%>
-    </a>
-  <%=cm.cmsTitle("sort_results_on_this_column")%>
-  </th>
-  <%
-    }
-  %>
-  <%
-    if (showScientificName) {
-  %>
-  <th class="resultHeader" width="180">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitat_type_name")%>
-    </a>
-  <%=cm.cmsTitle("sort_results_on_this_column")%>
-  </th>
-  <%
-    }
-  %>
-  <%
-    if (showOtherCodes) {
-  %>
-  <th class="resultHeader" style="text-align : center;" width="361">
+                  if (showOtherCodes && !showExpanded)
+                  {
+                %>
+                   <a title="<%=cm.cms("show_habitats_codes_in_other_classifications")%>" href="<%=pageName + "?expanded=" + !showExpanded + expandURL%>"><%=cm.cmsText("show_habitats_codes_in_other_classifications")%></a>
+                <%
+                  }
+                  // Compute the sort criteria
+                  Vector sortURLFields = new Vector();      /* Used for sorting */
+                  sortURLFields.addElement("pageSize");
+                  sortURLFields.addElement("criteriaSearch");
+                  sortURLFields.addElement("oper");
+                  sortURLFields.addElement("criteriaType");
+                  sortURLFields.addElement("currentPage");
+                  sortURLFields.addElement("expand");
+                  String urlSortString = formBean.toURLParam(sortURLFields);
+                  AbstractSortCriteria levelCrit = formBean.lookupSortCriteria(CodeSortCriteria.SORT_LEVEL);
+                  AbstractSortCriteria sciNameCrit = formBean.lookupSortCriteria(CodeSortCriteria.SORT_SCIENTIFIC_NAME);
+                  AbstractSortCriteria eunisCodeCrit = formBean.lookupSortCriteria(CodeSortCriteria.SORT_EUNIS_CODE);
+                  AbstractSortCriteria annexCodeCrit = formBean.lookupSortCriteria(CodeSortCriteria.SORT_ANNEX_CODE);
+                %>
+                <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                  <thead>
+                    <tr>
+                  <%
+                    if (0 == database.compareTo(CodeDomain.SEARCH_EUNIS) && showLevel)
+                    {
+                  %>
+                      <th scope="col">
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(levelCrit, (null == levelCrit) ? true : false)%>">
+                          <%=Utilities.getSortImageTag(levelCrit)%><%=cm.cmsText("generic_index_07")%>
+                        </a>
+                      <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </th>
+                  <%
+                    }
+                  %>
+                  <%
+                    if (showCode)
+                    {
+                  %>
+                      <th scope="col">
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(eunisCodeCrit, (null == eunisCodeCrit) ? true : false)%>">
+                          <%=Utilities.getSortImageTag(eunisCodeCrit)%><%=cm.cmsText("eunis_code")%>
+                        </a>
+                      <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </th>
+                      <th scope="col" width="30">
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_ANNEX_CODE%>&amp;ascendency=<%=formBean.changeAscendency(annexCodeCrit, (null == annexCodeCrit) ? true : false)%>">
+                          <%=Utilities.getSortImageTag(annexCodeCrit)%><%=cm.cmsText("annex_code")%>
+                        </a>
+                      <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </th>
+                  <%
+                    }
+                  %>
+                  <%
+                    if (showScientificName)
+                    {
+                  %>
+                      <th scope="col">
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>">
+                          <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitat_type_name")%>
+                        </a>
+                      <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </th>
+                  <%
+                    }
+                  %>
+                  <%
+                    if (showOtherCodes)
+                    {
+                  %>
+                      <th scope="col" style="text-align : center;" width="361">
+                        <%=cm.cmsText("habitats_code-result_15")%>
+                  <%
+                        if(showExpanded)
+                        {
+                  %>
+                        <br />
+                        [<a title="<%=cm.cms("show_habitats_codes_in_other_classifications")%>" href="<%=pageName + "?expanded=" + !showExpanded + expandURL%>"><%=cm.cmsText("hide_other_classifications")%></a>]
+                        <%=cm.cmsTitle("show_habitats_codes_in_other_classifications")%>
+                  <%
+                        }
+                  %>
+                      </th>
+                  <%
+                    }
+                  %>
+                    </tr>
+                  </thead>
+                  <tbody>
+                <%
+                  int i = 0;
+                  Iterator it = results.iterator();
+                  while (it.hasNext())
+                  {
+                    String cssClass = i++ % 2 == 0 ? " class=\"zebraeven\"" : "";
+                    CodePersist habitat = (CodePersist) it.next();
+                    int level = habitat.getHabLevel().intValue();
+                    String eunisCode = habitat.getEunisHabitatCode();
+                    //String annexCode = habitat.getCodeAnnex1();
+                    String annexCode = habitat.getCode2000();
+                    int idHabitat = Utilities.checkedStringToInt(habitat.getIdHabitat(), -1);
+                    boolean isEUNIS = idHabitat <= 10000;
+                    if (isEUNIS) {
+                      annexCode = "&nbsp;";
+                    } else {
+                      eunisCode = "&nbsp;";
+                    }
+                %>
+                    <tr<%=cssClass%>>
+                  <%
+                        if (0 == database.compareTo(CodeDomain.SEARCH_EUNIS) && showLevel)
+                        {
+                      %>
+                      <td style="white-space:nowrap">
+                      <%for (int iter = 0; iter < level; iter++) {%>
+                        <img title="" src="images/mini/lev_blank.gif" alt="" style="vertical-align:middle" />
+                      <%}%>
+                      <%=level%>
+                      </td>
+                      <%}%>
+                      <%if (showCode)
+                      {
+                      %>
+                      <td>
+                        <%=eunisCode%>
+                      </td>
+                      <td>
+                        <%=annexCode%>
+                      </td>
+                    <%
+                      }
+                    %>
+                    <%
+                      if (showScientificName)
+                      {
+                    %>
+                      <td>
+                        <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
+                        <%=cm.cmsTitle("open_habitat_factsheet")%>
+                      </td>
+                  <%}%>
+                  <%
+                    if (showOtherCodes) {
+                      List otherClassifications = HabitatsSearchUtility.findOtherClassifications(idHabitat, relationOp, formBean.getSearchString());
+                  %>
+                      <td>
+                        <table summary="layout" width="100%" border="1" cellspacing="0" cellpadding="0">
+                      <%
+                        int jj = 0;
+                        for (int j = 0; j < otherClassifications.size(); j++) {
+                          String bgColor1 = (0 == (jj++ % 2)) ? "#EEEEEE" : "#FFFFFF";
+                          OtherClassWrapper classification = (OtherClassWrapper) otherClassifications.get(j);
 
-      <%=cm.cmsText("habitats_code-result_15")%>
-  <%
-     if(showExpanded) {
-  %>
-     <br />
-     [<a title="<%=cm.cms("show_habitats_codes_in_other_classifications")%>" href="<%=pageName + "?expanded=" + !showExpanded + expandURL%>"><%=cm.cmsText("hide_other_classifications")%></a>]
-      <%=cm.cmsTitle("show_habitats_codes_in_other_classifications")%>
-  <%
-      }
-  %>
-  </th>
-  <%
-    }
-  %>
-</tr>
-<%
-  int i = 0;
-  Iterator it = results.iterator();
-  while (it.hasNext()) {
-    CodePersist habitat = (CodePersist) it.next();
-    String bgColor = (0 == (i++ % 2)) ? "#EEEEEE" : "#FFFFFF";
-    int level = habitat.getHabLevel().intValue();
-    String eunisCode = habitat.getEunisHabitatCode();
-    //String annexCode = habitat.getCodeAnnex1();
-    String annexCode = habitat.getCode2000();
-    int idHabitat = Utilities.checkedStringToInt(habitat.getIdHabitat(), -1);
-    boolean isEUNIS = idHabitat <= 10000;
-    if (isEUNIS) {
-      annexCode = "&nbsp;";
-    } else {
-      eunisCode = "&nbsp;";
-    }
-%>
-<tr>
-  <%if (0 == database.compareTo(CodeDomain.SEARCH_EUNIS) && showLevel) {%>
-  <td class="resultCell" style="background-color : <%=bgColor%>; white-space:nowrap">
-    <%for (int iter = 0; iter < level; iter++) {%>
-    <img title="" src="images/mini/lev_blank.gif" alt="" style="vertical-align:middle" />
-    <%}%>
-    <%=level%>
-  </td>
-  <%}%>
-  <%if (showCode) {%>
-  <td class="resultCell" style="background-color : <%=bgColor%>">
-    <%=eunisCode%>
-  </td>
-  <td class="resultCell" style="background-color : <%=bgColor%>">
-    <%=annexCode%>
-  </td>
-  <%}%>
-  <%if (showScientificName) {%>
-  <td class="resultCell" style="background-color : <%=bgColor%>">
-    <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
-    <%=cm.cmsTitle("open_habitat_factsheet")%>
-  </td>
-  <%}%>
-  <%
-    if (showOtherCodes) {
-      List otherClassifications = HabitatsSearchUtility.findOtherClassifications(idHabitat, relationOp, formBean.getSearchString());
-  %>
-  <td class="resultCell" style="background-color : <%=bgColor%>">
-    <table summary="layout" width="100%" border="1" cellspacing="0" cellpadding="0">
-      <%
-        int jj = 0;
-        for (int j = 0; j < otherClassifications.size(); j++) {
-          String bgColor1 = (0 == (jj++ % 2)) ? "#EEEEEE" : "#FFFFFF";
-          OtherClassWrapper classification = (OtherClassWrapper) otherClassifications.get(j);
+                          if(!showExpanded) {
+                            if(!classification.getClassificationCode().equalsIgnoreCase(searchedClassification)) {
+                              continue;
+                            }
+                          }
+                         String beginStrong = "";
+                         String endStrong = "";
 
-          if(!showExpanded) {
-            if(!classification.getClassificationCode().equalsIgnoreCase(searchedClassification)) {
-              continue;
-            }
-          }
-         String beginStrong = "";
-         String endStrong = "";
-
-         if(showExpanded && classification.getClassificationCode().equalsIgnoreCase(searchedClassification))
-         {
-            beginStrong = "<strong>";
-            endStrong = "</strong>";
-         }
-      %>
-        <tr style="background-color:<%=bgColor1%>">
-          <td><%=beginStrong%><%=classification.getCode()%><%=endStrong%></td>
-          <td><%=beginStrong%><%=classification.getClassificatioName()%><%=endStrong%></td>
-          <td><%=beginStrong%><%=classification.getRelationDecoded()%><%=endStrong%></td>
-        </tr>
-        <tr style="background-color:<%=bgColor1%>">
-         <td colspan="3" style="text-align:left">
-            <%=beginStrong%><%=Utilities.formatString(classification.getTitle(),"&nbsp;")%><%=endStrong%>
-         </td>
-        </tr>
-      <%
-        }
-      %>
-    </table>
-  </td>
-  <%
-    }
-  %>
-</tr>
-<%
-  }
-%>
-<tr>
-  <%
-    if (0 == database.compareTo(CodeDomain.SEARCH_EUNIS) && showLevel) {
-  %>
-  <th class="resultHeader" width="56">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(levelCrit, (null == levelCrit) ? true : false)%>">
-      <%=Utilities.getSortImageTag(levelCrit)%><%=cm.cmsText("generic_index_07")%>
-    </a>
-  <%=cm.cmsTitle("sort_results_on_this_column")%>
-  </th>
-  <%
-    }
-  %>
-  <%
-    if (showCode) {
-  %>
-  <th class="resultHeader" width="30">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(eunisCodeCrit, (null == eunisCodeCrit) ? true : false)%>">
-      <%=Utilities.getSortImageTag(eunisCodeCrit)%><%=cm.cmsText("eunis_code")%>
-    </a>
-  <%=cm.cmsTitle("sort_results_on_this_column")%>
-  </th>
-  <th class="resultHeader" width="30">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_ANNEX_CODE%>&amp;ascendency=<%=formBean.changeAscendency(annexCodeCrit, (null == annexCodeCrit) ? true : false)%>">
-      <%=Utilities.getSortImageTag(annexCodeCrit)%><%=cm.cmsText("annex_code")%>
-    </a>
-  <%=cm.cmsTitle("sort_results_on_this_column")%>
-  </th>
-  <%
-    }
-  %>
-  <%
-    if (showScientificName) {
-  %>
-  <th class="resultHeader" width="180">
-    <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>">
-      <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitat_type_name")%>
-    </a>
-  <%=cm.cmsTitle("sort_results_on_this_column")%>
-  </th>
-  <%
-    }
-  %>
-  <%
-    if (showOtherCodes) {
-  %>
-  <th class="resultHeader" style="text-align : center;" width="361">
-
-      <%=cm.cmsText("habitats_code-result_15")%>
-  <%
-     if(showExpanded) {
-  %>
-     <br />
-     [<a title="<%=cm.cms("show_habitats_codes_in_other_classifications")%>" href="<%=pageName + "?expanded=" + !showExpanded + expandURL%>"><%=cm.cmsText("hide_other_classifications")%></a>]
-      <%=cm.cmsTitle("show_habitats_codes_in_other_classifications")%>
-  <%
-      }
-  %>
-  </th>
-  <%
-    }
-  %>
-</tr>
-</table>
-</td>
-</tr>
-<tr>
-  <td>
-    <jsp:include page="navigator.jsp">
-      <jsp:param name="pagesCount" value="<%=pagesCount%>" />
-      <jsp:param name="pageName" value="<%=pageName%>" />
-      <jsp:param name="guid" value="<%=guid + 1%>" />
-      <jsp:param name="currentPage" value="<%=formBean.getCurrentPage()%>" />
-      <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>" />
-      <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>" />
-    </jsp:include>
-  </td>
-</tr>
-</table>
-  <%=cm.br()%>
-  <%=cm.cmsMsg("habitats_code-result_title")%>
-  <%=cm.br()%>
-<jsp:include page="footer.jsp">
-  <jsp:param name="page_name" value="habitats-code-result.jsp" />
-</jsp:include>
-  </div>
-  </div>
-  </div>
-</body>
+                         if(showExpanded && classification.getClassificationCode().equalsIgnoreCase(searchedClassification))
+                         {
+                            beginStrong = "<strong>";
+                            endStrong = "</strong>";
+                         }
+                      %>
+                          <tr style="background-color:<%=bgColor1%>">
+                            <td>
+                              <%=beginStrong%><%=classification.getCode()%><%=endStrong%>
+                            </td>
+                            <td>
+                              <%=beginStrong%><%=classification.getClassificatioName()%><%=endStrong%>
+                            </td>
+                            <td>
+                              <%=beginStrong%><%=classification.getRelationDecoded()%><%=endStrong%>
+                            </td>
+                          </tr>
+                          <tr style="background-color:<%=bgColor1%>">
+                            <td colspan="3" style="text-align:left">
+                              <%=beginStrong%><%=Utilities.formatString(classification.getTitle(),"&nbsp;")%><%=endStrong%>
+                            </td>
+                          </tr>
+                      <%
+                        }
+                      %>
+                        </table>
+                      </td>
+                  <%
+                    }
+                  %>
+                    </tr>
+                <%
+                  }
+                %>
+                  </tbody>
+                  <thead>
+                    <tr>
+                  <%
+                    if (0 == database.compareTo(CodeDomain.SEARCH_EUNIS) && showLevel)
+                    {
+                  %>
+                      <th scope="col">
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(levelCrit, (null == levelCrit) ? true : false)%>">
+                          <%=Utilities.getSortImageTag(levelCrit)%><%=cm.cmsText("generic_index_07")%>
+                        </a>
+                      <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </th>
+                  <%
+                    }
+                  %>
+                  <%
+                    if (showCode)
+                    {
+                  %>
+                      <th scope="col">
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(eunisCodeCrit, (null == eunisCodeCrit) ? true : false)%>">
+                          <%=Utilities.getSortImageTag(eunisCodeCrit)%><%=cm.cmsText("eunis_code")%>
+                        </a>
+                      <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </th>
+                      <th scope="col" width="30">
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_ANNEX_CODE%>&amp;ascendency=<%=formBean.changeAscendency(annexCodeCrit, (null == annexCodeCrit) ? true : false)%>">
+                          <%=Utilities.getSortImageTag(annexCodeCrit)%><%=cm.cmsText("annex_code")%>
+                        </a>
+                      <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </th>
+                  <%
+                    }
+                  %>
+                  <%
+                    if (showScientificName)
+                    {
+                  %>
+                      <th scope="col">
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>">
+                          <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitat_type_name")%>
+                        </a>
+                      <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </th>
+                  <%
+                    }
+                  %>
+                  <%
+                    if (showOtherCodes)
+                    {
+                  %>
+                      <th scope="col" style="text-align : center;" width="361">
+                        <%=cm.cmsText("habitats_code-result_15")%>
+                  <%
+                        if(showExpanded)
+                        {
+                  %>
+                        <br />
+                        [<a title="<%=cm.cms("show_habitats_codes_in_other_classifications")%>" href="<%=pageName + "?expanded=" + !showExpanded + expandURL%>"><%=cm.cmsText("hide_other_classifications")%></a>]
+                        <%=cm.cmsTitle("show_habitats_codes_in_other_classifications")%>
+                  <%
+                        }
+                  %>
+                      </th>
+                  <%
+                    }
+                  %>
+                    </tr>
+                  </thead>
+                </table>
+                </td>
+                </tr>
+                <tr>
+                  <td>
+                    <jsp:include page="navigator.jsp">
+                      <jsp:param name="pagesCount" value="<%=pagesCount%>" />
+                      <jsp:param name="pageName" value="<%=pageName%>" />
+                      <jsp:param name="guid" value="<%=guid + 1%>" />
+                      <jsp:param name="currentPage" value="<%=formBean.getCurrentPage()%>" />
+                      <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>" />
+                      <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>" />
+                    </jsp:include>
+                  </td>
+                </tr>
+                </table>
+                  <%=cm.br()%>
+                  <%=cm.cmsMsg("habitats_code-result_title")%>
+                  <%=cm.br()%>
+                <jsp:include page="footer.jsp">
+                  <jsp:param name="page_name" value="habitats-code-result.jsp" />
+                </jsp:include>
+<!-- END MAIN CONTENT -->
+              </div>
+            </div>
+          </div>
+          <!-- end of main content block -->
+          <!-- start of the left (by default at least) column -->
+          <div id="portal-column-one">
+            <div class="visualPadding">
+              <jsp:include page="inc_column_left.jsp" />
+            </div>
+          </div>
+          <!-- end of the left (by default at least) column -->
+        </div>
+        <!-- end of the main and left columns -->
+        <!-- start of right (by default at least) column -->
+        <div id="portal-column-two">
+          <div class="visualPadding">
+            <jsp:include page="inc_column_right.jsp" />
+          </div>
+        </div>
+        <!-- end of the right (by default at least) column -->
+        <div class="visualClear"><!-- --></div>
+      </div>
+      <!-- end column wrapper -->
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
+    </div>
+  </body>
 </html>

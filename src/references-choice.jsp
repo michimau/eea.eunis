@@ -199,9 +199,11 @@
 %>
       <div id="tab">
       <table summary="List of values" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
-        <th class="resultHeader">
-          <%=cm.cmsText("values")%>
-        </th>
+        <tr>
+          <th>
+            <%=cm.cmsText("values")%>
+          </th>
+        </tr>
 <%
       for(int i =0;i<results.size();i++)
       {
@@ -234,7 +236,7 @@
 %>
     <br />
     <form action="">
-      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button1" name="button" class="inputTextField" />
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button1" name="button" class="standardButton" />
       <%=cm.cmsTitle("close_window")%>
       <%=cm.cmsInput("close_btn")%>
     </form>

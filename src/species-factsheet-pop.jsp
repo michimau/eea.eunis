@@ -26,105 +26,112 @@
   if (list.size() > 0)
   {
 %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("population")%></div>
-    <table summary="<%=cm.cms("species_factsheet-pop_12_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="populations" class="sortable">
+  <h2>
+    <%=cm.cmsText("population")%>
+  </h2>
+  <table summary="<%=cm.cms("species_factsheet-pop_12_Sum")%>" class="listing" width="90%">
+    <thead>
       <tr>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("country")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("biogeographic_region")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <span style="color:#006CAD">  
+        <th>
+          <span style="color:#006CAD">
             <%=cm.cmsText("min_max")%>
           </span>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("date")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("quality")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("reference")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
+    </thead>
+    <tbody>
 <%
-      String bgColor;
       String reference;
       Vector authorURL;
       for (int i = 0; i < list.size(); i++)
       {
+        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
         FactSheetPopulationWrapper aRow = (FactSheetPopulationWrapper)list.get(i);
-        bgColor = ( 0 == ( i % 2 ) ? "#EEEEEE" : "#FFFFFF" );
         reference = Utilities.getReferencesByIdDc( aRow.getReference() );
         authorURL = Utilities.getAuthorAndUrlByIdDc( aRow.getReference() );
 %>
-      <tr style="background-color:<%=bgColor%>">
+      <tr<%=cssClass%>>
         <td>
-        <%
-            if(Utilities.isCountry(aRow.getCountry()))
-            {
-        %>
-          <a href="javascript:goToSpeciesStatistics('<%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>')" title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>"><%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%></a>
+<%
+        if(Utilities.isCountry(aRow.getCountry()))
+        {
+%>
+          <a href="javascript:goToSpeciesStatistics('<%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>')"
+             title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>"><%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%></a>
           <%=cm.cmsTitle("open_the_statistical_data_for")%>
-        <%
-            } else {
-        %>
-             <%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>
-        <%
-             }
-        %>
-            &nbsp;
-          </td>
-          <td>
-            <%=Utilities.treatURLSpecialCharacters(aRow.getBioregion())%>&nbsp;
-          </td>
-          <td>
-            <%=aRow.getMin()%>/<%=aRow.getMax()%>(<%=aRow.getUnits()%>)&nbsp;
-          </td>
-          <td>
-            <%=aRow.getDate()%>&nbsp;
-          </td>
-          <td>
-            <%=Utilities.treatURLSpecialCharacters(aRow.getStatus())%>&nbsp;
-          </td>
-          <td>
-            <%=Utilities.treatURLSpecialCharacters(aRow.getQuality())%>&nbsp;
-          </td>
+<%
+        }
+        else
+        {
+%>
+         <%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>
+<%
+        }
+%>
+          &nbsp;
+        </td>
+        <td>
+          <%=Utilities.treatURLSpecialCharacters(aRow.getBioregion())%>&nbsp;
+        </td>
+        <td>
+          <%=aRow.getMin()%>/<%=aRow.getMax()%>(<%=aRow.getUnits()%>)&nbsp;
+        </td>
+        <td>
+          <%=aRow.getDate()%>&nbsp;
+        </td>
+        <td>
+          <%=Utilities.treatURLSpecialCharacters(aRow.getStatus())%>&nbsp;
+        </td>
+        <td>
+          <%=Utilities.treatURLSpecialCharacters(aRow.getQuality())%>&nbsp;
+        </td>
 <%
           if (!authorURL.get(1).toString().equalsIgnoreCase(""))
           {
 %>
-          <td width="25%" style="text-align:left">
-            <span onmouseover="return showtooltip('<%=reference%>')" onmouseout="hidetooltip()">
-              <span class="boldUnderline">
-                <a href="<%=Utilities.treatURLSpecialCharacters((String)authorURL.get(1))%>"><%=Utilities.treatURLSpecialCharacters((String)authorURL.get(0))%></a>
-              </span>
+        <td width="25%" style="text-align:left">
+          <span onmouseover="return showtooltip('<%=reference%>')" onmouseout="hidetooltip()">
+            <span class="boldUnderline">
+              <a href="<%=Utilities.treatURLSpecialCharacters((String)authorURL.get(1))%>"><%=Utilities.treatURLSpecialCharacters((String)authorURL.get(0))%></a>
             </span>
-          </td>
+          </span>
+        </td>
 <%
           }
           else
           {
 %>
-          <td width="25%" style="text-align:left">
-            <span onmouseover="return showtooltip('<%=reference%>')" onmouseout="hidetooltip()">
-            <span class="boldUnderline">
-              <%=Utilities.treatURLSpecialCharacters((String)authorURL.get(0))%>
-            </span>
-            </span>
-          </td>
+        <td width="25%" style="text-align:left">
+          <span onmouseover="return showtooltip('<%=reference%>')" onmouseout="hidetooltip()">
+          <span class="boldUnderline">
+            <%=Utilities.treatURLSpecialCharacters((String)authorURL.get(0))%>
+          </span>
+          </span>
+        </td>
 <%
           }
 %>
@@ -132,7 +139,8 @@
 <%
       }
 %>
-    </table>
+    </tbody>
+  </table>
 <%
   }
 %>

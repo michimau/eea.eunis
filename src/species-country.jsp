@@ -118,226 +118,274 @@
   String onChange = (SessionManager.getUsername()!=null?"onchange=\"MM_jumpMenuCountry('parent',this,0)\"":"onchange=\"MM_jumpMenu('parent',this,0)\"");
 %>
   <body onload="onLoadFunction()">
-  <div id="outline">
-  <div id="alignment">
-  <div id="content">
-  <jsp:include page="header-dynamic.jsp">
-    <jsp:param name="location" value="home#index.jsp,species#species.jsp,country_biogeographic_region_location"/>
-  </jsp:include>
-  <h1>
-      <%=cm.cmsText("country_biogeographic_region")%>
-  </h1>
-  <table summary="layout" width="100%" border="0">
-    <tr>
-      <td>
-      <form name="eunis" action="species-country-result.jsp" method="post">
-        <%=cm.cmsText("species_country_18")%>
-        <br />
-        <br />
-        <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td style="background-color:#EEEEEE">
-              <strong><%=cm.cmsText("search_will_provide_2")%></strong>
-            </td>
-          </tr>
-          <tr>
-            <td style="background-color:#EEEEEE">
-              <input id="checkbox1" title="<%=cm.cms("group")%>" alt="<%=cm.cms("group")%>" type="checkbox" name="showGroup" value="true" disabled="disabled" checked="checked" />
-                <label for="checkbox1"><%=cm.cmsText("group")%></label>
-                <%=cm.cmsTitle("group")%>
-              <input id="checkbox2" title="<%=cm.cms("scientific_name")%>" alt="<%=cm.cms("scientific_name")%>" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" />
-                <label for="checkbox2"><%=cm.cmsText("scientific_name")%></label>
-                <%=cm.cmsTitle("scientific_name")%>
-              <input id="checkbox3" title="<%=cm.cms("vernacular_names")%>" alt="<%=cm.cms("vernacular_names")%>" type="checkbox" name="showVernacularNames" value="true" checked="checked" />
-                <label for="checkbox3"><%=cm.cmsText("vernacular_names")%></label>
-                <%=cm.cmsTitle("vernacular_names")%>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <br />
-            </td>
-          </tr>
-        </table>
-          <table summary="layout" cellspacing="0" cellpadding="0" border="0" width="100%" style="text-align:left;">
-            <tr>
-              <td style="vertical-align:middle">
-                  <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
-                  <%=cm.cmsAlt("field_mandatory")%>
-                <%
-                  if (null == country)
-                  {// If country is null then display the country selection texbox
-                %>
-                  <label for="Country" class="noshow"><%=cm.cms("country")%></label>
-                  <select title="<%=cm.cms("country")%>" name="Country" id="Country" <%=onChange%> class="inputTextField">
-                    <option value="species-country.jsp">
-                        <%=cm.cms("please_select_a_country")%>
-                    </option>
-                    <option value="species-country.jsp?country=any&amp;countryName=any">
-                        <%=cm.cms("species_country_12")%>
-                    </option><%// *Any* country%>
-                    <%
-                      // Fill in the countries
-                    Iterator countriesIt = speciesCountryUtil.findCountriesForRegion("any");
-                    CountryWrapper aCountry = null;
-                    while (countriesIt.hasNext())
-                    {
-                      aCountry = (CountryWrapper)countriesIt.next();
-                      if(!aCountry.getName().equalsIgnoreCase("Europe") && !aCountry.getName().equalsIgnoreCase("World"))
-                      {
-                    %>
-                      <option value="species-country.jsp?country=<%=aCountry.getCode()%>&amp;countryName=<%=aCountry.getName()%>">
-                          <%=aCountry.getName()%>
-                      </option><%// *A* country %>
-                    <%
-                      }
-                    }
-                    %>
-                  </select>
-                  <%=cm.cmsLabel("country")%>
-                  <%=cm.cmsTitle("country")%>
-                <%
-                } else
-                { // or else put out the selected country and let the user select the region.
-                    if (anyCountrySelected)
-                    {
-                  %>
-                    <strong><%=cm.cmsText("species_country_12")%></strong>
-                    &nbsp;
-                    <strong><%=cm.cmsText("and")%></strong>&nbsp;
-                    <%=cm.cmsText("biogeographic_region")%>
-                  <%
-                  } else
-                  {
-                  %>
-                    <strong><%=speciesCountryUtil.countryCode2Name(country)%></strong>&nbsp;<strong><%=cm.cmsText("and")%>
-                    </strong>&nbsp;<%=cm.cmsText("biogeographic_region")%>
-                  <%
-                    }
-                  %>
-                  <label for="Region" class="noshow"><%=cm.cms("region")%></label>
-                  <select title="<%=cm.cms("region")%>" name="Region" id="Region" <%=onChange%>  class="inputTextField">
-                    <option value="species-country.jsp?country=<%=country%>&amp;countryName=<%=countryName%>" selected="selected">
-                        <%=cm.cms("species_country_15")%>
-                    </option>
-                    <%
-                      // If user selected 'any' country do not let it select also 'any' region
-                      if (!anyCountrySelected)
-                      {
-                        // *A* COUNTRY AND *ANY* BIOGEOREGION
-                      %>
-                      <option value="species-country-result.jsp?country=<%=speciesCountryUtil.findCountryIdGeoscope((Object)country)%>&amp;countryName=<%=countryName%>&amp;region=any&amp;regionName=any">
-                          <%=cm.cms("species_country_16")%>
-                      </option>
-                    <%
-                      }
-                      // Fill in the regions
-                    Iterator regionsIt = speciesCountryUtil.findRegionsFromCountry(country);
-                    RegionWrapper aRegion = null;
-                    while (regionsIt.hasNext())
-                    {
-                      aRegion = (RegionWrapper)regionsIt.next();
-                      if(!aRegion.getName().equalsIgnoreCase("Biogeographic region not detailled in original data set")) {
-                        if (anyCountrySelected)
-                        {
-                          // *ANY* COUNTRY AND *A* BIOGEOREGION
-                        %>
-                        <option value="species-country-result.jsp?countryName=<%=countryName%>&amp;country=<%=speciesCountryUtil.findCountryIdGeoscope((Object)country)%>&amp;regionName=<%=aRegion.getName()%>&amp;region=<%=speciesCountryUtil.findRegionIdGeoscope(aRegion.getName())%>">
-                            <%=aRegion.getName()%>
-                        </option>
-                      <%
-                      } else
-                      {
-                          // *A* COUNTRY AND *A* REGION
-                        %>
-                        <option value="species-country-result.jsp?countryName=<%=countryName%>&amp;country=<%=speciesCountryUtil.findCountryIdGeoscope((Object)country)%>&amp;regionName=<%=aRegion.getName()%>&amp;region=<%=speciesCountryUtil.findRegionIdGeoscope(aRegion.getName())%>">
-                            <%=aRegion.getName()%>
-                        </option>
-                      <%
-                        }
-                      }
-                    }
-                    %>
-                  </select>
-                  <%=cm.cmsLabel("region")%>
-                  <%=cm.cmsTitle("region")%>
-                <%
-                  }
-                %>
-              </td>
-            </tr>
-            <tr><td>&nbsp;</td></tr>
-            <%
-              if (SessionManager.isAuthenticated() && SessionManager.isSave_search_criteria_RIGHT())
-              {
-            %>
-              <tr>
-                <td>
-                  <input id="saveCriteriaCheckbox" title="<%=cm.cms("save_criteria")%>" alt="<%=cm.cms("save_criteria")%>" type="checkbox" name="saveCriteria" value="true" <%=gr%> /><label for="saveCriteriaCheckbox"><%=cm.cmsText("save_your_criteria_1")%></label>
-                  <%=cm.cmsTitle("save_criteria")%>
-                  <a title="<%=cm.cms("save_criteria")%>" href="javascript:checkSaveCriteria()"><img alt="<%=cm.cms("save")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
-                  <%=cm.cmsTitle("save_criteria")%>
-                  <%=cm.cmsAlt("save")%>
-                </td>
-              </tr>
-              <tr><td>&nbsp;</td></tr>
-            <%
-              }
-            %>
-            <tr><td colspan="2" style="text-align:center"><strong><%=cm.cmsText("species_country_17")%></strong></td></tr>
-          </table>
-      </form>
-      </td>
-    </tr>
-          <%
-            // Expand saved searches list for this jsp page
-            if (SessionManager.isAuthenticated() && SessionManager.isSave_search_criteria_RIGHT())
-            {
-              // Set Vector for URL string
-              Vector show = new Vector();
-              show.addElement("showGroup");
+    <div id="visual-portal-wrapper">
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
+      <!-- The wrapper div. It contains the three columns. -->
+      <div id="portal-columns">
+        <!-- start of the main and left columns -->
+        <div id="visual-column-wrapper">
+          <!-- start of main content block -->
+          <div id="portal-column-content">
+            <div id="content">
+              <div class="documentContent" id="region-content">
+                <a name="documentContent"></a>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure">Document Actions</h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="Print this page"
+                            title="Print this page" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="Toggle full screen mode"
+                             title="Toggle full screen mode" /></a>
+                    </li>
+                  </ul>
+                </div>
+                <br clear="all" />
+<!-- MAIN CONTENT -->
+                <jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="home#index.jsp,species#species.jsp,country_biogeographic_region_location"/>
+                </jsp:include>
+                <h1>
+                    <%=cm.cmsText("country_biogeographic_region")%>
+                </h1>
+                <table summary="layout" width="100%" border="0">
+                  <tr>
+                    <td>
+                    <form name="eunis" action="species-country-result.jsp" method="post">
+                      <%=cm.cmsText("species_country_18")%>
+                      <br />
+                      <br />
+                      <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="background-color:#EEEEEE">
+                            <strong><%=cm.cmsText("search_will_provide_2")%></strong>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="background-color:#EEEEEE">
+                            <input id="checkbox1" title="<%=cm.cms("group")%>" alt="<%=cm.cms("group")%>" type="checkbox" name="showGroup" value="true" disabled="disabled" checked="checked" />
+                              <label for="checkbox1"><%=cm.cmsText("group")%></label>
+                              <%=cm.cmsTitle("group")%>
+                            <input id="checkbox2" title="<%=cm.cms("scientific_name")%>" alt="<%=cm.cms("scientific_name")%>" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" />
+                              <label for="checkbox2"><%=cm.cmsText("scientific_name")%></label>
+                              <%=cm.cmsTitle("scientific_name")%>
+                            <input id="checkbox3" title="<%=cm.cms("vernacular_names")%>" alt="<%=cm.cms("vernacular_names")%>" type="checkbox" name="showVernacularNames" value="true" checked="checked" />
+                              <label for="checkbox3"><%=cm.cmsText("vernacular_names")%></label>
+                              <%=cm.cmsTitle("vernacular_names")%>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <br />
+                          </td>
+                        </tr>
+                      </table>
+                        <table summary="layout" cellspacing="0" cellpadding="0" border="0" width="100%" style="text-align:left;">
+                          <tr>
+                            <td style="vertical-align:middle">
+                                <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
+                                <%=cm.cmsAlt("field_mandatory")%>
+                              <%
+                                if (null == country)
+                                {// If country is null then display the country selection texbox
+                              %>
+                                <label for="Country" class="noshow"><%=cm.cms("country")%></label>
+                                <select title="<%=cm.cms("country")%>" name="Country" id="Country" <%=onChange%>>
+                                  <option value="species-country.jsp">
+                                      <%=cm.cms("please_select_a_country")%>
+                                  </option>
+                                  <option value="species-country.jsp?country=any&amp;countryName=any">
+                                      <%=cm.cms("species_country_12")%>
+                                  </option><%// *Any* country%>
+                                  <%
+                                    // Fill in the countries
+                                  Iterator countriesIt = speciesCountryUtil.findCountriesForRegion("any");
+                                  CountryWrapper aCountry = null;
+                                  while (countriesIt.hasNext())
+                                  {
+                                    aCountry = (CountryWrapper)countriesIt.next();
+                                    if(!aCountry.getName().equalsIgnoreCase("Europe") && !aCountry.getName().equalsIgnoreCase("World"))
+                                    {
+                                  %>
+                                    <option value="species-country.jsp?country=<%=aCountry.getCode()%>&amp;countryName=<%=aCountry.getName()%>">
+                                        <%=aCountry.getName()%>
+                                    </option><%// *A* country %>
+                                  <%
+                                    }
+                                  }
+                                  %>
+                                </select>
+                                <%=cm.cmsLabel("country")%>
+                                <%=cm.cmsTitle("country")%>
+                              <%
+                              } else
+                              { // or else put out the selected country and let the user select the region.
+                                  if (anyCountrySelected)
+                                  {
+                                %>
+                                  <strong><%=cm.cmsText("species_country_12")%></strong>
+                                  &nbsp;
+                                  <strong><%=cm.cmsText("and")%></strong>&nbsp;
+                                  <%=cm.cmsText("biogeographic_region")%>
+                                <%
+                                } else
+                                {
+                                %>
+                                  <strong><%=speciesCountryUtil.countryCode2Name(country)%></strong>&nbsp;<strong><%=cm.cmsText("and")%>
+                                  </strong>&nbsp;<%=cm.cmsText("biogeographic_region")%>
+                                <%
+                                  }
+                                %>
+                                <label for="Region" class="noshow"><%=cm.cms("region")%></label>
+                                <select title="<%=cm.cms("region")%>" name="Region" id="Region" <%=onChange%>>
+                                  <option value="species-country.jsp?country=<%=country%>&amp;countryName=<%=countryName%>" selected="selected">
+                                      <%=cm.cms("species_country_15")%>
+                                  </option>
+                                  <%
+                                    // If user selected 'any' country do not let it select also 'any' region
+                                    if (!anyCountrySelected)
+                                    {
+                                      // *A* COUNTRY AND *ANY* BIOGEOREGION
+                                    %>
+                                    <option value="species-country-result.jsp?country=<%=speciesCountryUtil.findCountryIdGeoscope((Object)country)%>&amp;countryName=<%=countryName%>&amp;region=any&amp;regionName=any">
+                                        <%=cm.cms("species_country_16")%>
+                                    </option>
+                                  <%
+                                    }
+                                    // Fill in the regions
+                                  Iterator regionsIt = speciesCountryUtil.findRegionsFromCountry(country);
+                                  RegionWrapper aRegion = null;
+                                  while (regionsIt.hasNext())
+                                  {
+                                    aRegion = (RegionWrapper)regionsIt.next();
+                                    if(!aRegion.getName().equalsIgnoreCase("Biogeographic region not detailled in original data set")) {
+                                      if (anyCountrySelected)
+                                      {
+                                        // *ANY* COUNTRY AND *A* BIOGEOREGION
+                                      %>
+                                      <option value="species-country-result.jsp?countryName=<%=countryName%>&amp;country=<%=speciesCountryUtil.findCountryIdGeoscope((Object)country)%>&amp;regionName=<%=aRegion.getName()%>&amp;region=<%=speciesCountryUtil.findRegionIdGeoscope(aRegion.getName())%>">
+                                          <%=aRegion.getName()%>
+                                      </option>
+                                    <%
+                                    } else
+                                    {
+                                        // *A* COUNTRY AND *A* REGION
+                                      %>
+                                      <option value="species-country-result.jsp?countryName=<%=countryName%>&amp;country=<%=speciesCountryUtil.findCountryIdGeoscope((Object)country)%>&amp;regionName=<%=aRegion.getName()%>&amp;region=<%=speciesCountryUtil.findRegionIdGeoscope(aRegion.getName())%>">
+                                          <%=aRegion.getName()%>
+                                      </option>
+                                    <%
+                                      }
+                                    }
+                                  }
+                                  %>
+                                </select>
+                                <%=cm.cmsLabel("region")%>
+                                <%=cm.cmsTitle("region")%>
+                              <%
+                                }
+                              %>
+                            </td>
+                          </tr>
+                          <tr><td>&nbsp;</td></tr>
+                          <%
+                            if (SessionManager.isAuthenticated() && SessionManager.isSave_search_criteria_RIGHT())
+                            {
+                          %>
+                            <tr>
+                              <td>
+                                <input id="saveCriteriaCheckbox" title="<%=cm.cms("save_criteria")%>" alt="<%=cm.cms("save_criteria")%>" type="checkbox" name="saveCriteria" value="true" <%=gr%> /><label for="saveCriteriaCheckbox"><%=cm.cmsText("save_your_criteria_1")%></label>
+                                <%=cm.cmsTitle("save_criteria")%>
+                                <a title="<%=cm.cms("save_criteria")%>" href="javascript:checkSaveCriteria()"><img alt="<%=cm.cms("save")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
+                                <%=cm.cmsTitle("save_criteria")%>
+                                <%=cm.cmsAlt("save")%>
+                              </td>
+                            </tr>
+                            <tr><td>&nbsp;</td></tr>
+                          <%
+                            }
+                          %>
+                          <tr><td colspan="2" style="text-align:center"><strong><%=cm.cmsText("species_country_17")%></strong></td></tr>
+                        </table>
+                    </form>
+                    </td>
+                  </tr>
+                        <%
+                          // Expand saved searches list for this jsp page
+                          if (SessionManager.isAuthenticated() && SessionManager.isSave_search_criteria_RIGHT())
+                          {
+                            // Set Vector for URL string
+                            Vector show = new Vector();
+                            show.addElement("showGroup");
 //              show.addElement("showFamily");
 //              show.addElement("showOrder");
-              show.addElement("showScientificName");
-              show.addElement("showVernacularNames");
-              String pageName = "species-country.jsp";
-              String pageNameResult = "species-country-result.jsp?"+Utilities.writeURLCriteriaSave(show) + "&amp;expand=true";
-              // Expand or not save criterias list
-              String expandSearchCriteria = (request.getParameter("expandSearchCriteria")==null?"no":request.getParameter("expandSearchCriteria"));
-          %>
-         <tr><td>
-         <jsp:include page="show-criteria-search.jsp">
-           <jsp:param name="pageName" value="<%=pageName%>" />
-           <jsp:param name="pageNameResult" value="<%=pageNameResult%>" />
-           <jsp:param name="expandSearchCriteria" value="<%=expandSearchCriteria%>" />
-         </jsp:include>
-         </td></tr>
-        <%
-          }
-        %>
-    </table>
+                            show.addElement("showScientificName");
+                            show.addElement("showVernacularNames");
+                            String pageName = "species-country.jsp";
+                            String pageNameResult = "species-country-result.jsp?"+Utilities.writeURLCriteriaSave(show) + "&amp;expand=true";
+                            // Expand or not save criterias list
+                            String expandSearchCriteria = (request.getParameter("expandSearchCriteria")==null?"no":request.getParameter("expandSearchCriteria"));
+                        %>
+                       <tr><td>
+                       <jsp:include page="show-criteria-search.jsp">
+                         <jsp:param name="pageName" value="<%=pageName%>" />
+                         <jsp:param name="pageNameResult" value="<%=pageNameResult%>" />
+                         <jsp:param name="expandSearchCriteria" value="<%=expandSearchCriteria%>" />
+                       </jsp:include>
+                       </td></tr>
+                      <%
+                        }
+                      %>
+                  </table>
 
-<%=cm.br()%>
-<%=cm.cmsMsg("save_alert")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("please_select_a_country")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("species_country_02")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("please_select_a_country")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("species_country_12")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("species_country_15")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("species_country_16")%>
-<%=cm.br()%>
+              <%=cm.br()%>
+              <%=cm.cmsMsg("save_alert")%>
+              <%=cm.br()%>
+              <%=cm.cmsMsg("please_select_a_country")%>
+              <%=cm.br()%>
+              <%=cm.cmsMsg("species_country_02")%>
+              <%=cm.br()%>
+              <%=cm.cmsMsg("please_select_a_country")%>
+              <%=cm.br()%>
+              <%=cm.cmsMsg("species_country_12")%>
+              <%=cm.br()%>
+              <%=cm.cmsMsg("species_country_15")%>
+              <%=cm.br()%>
+              <%=cm.cmsMsg("species_country_16")%>
+              <%=cm.br()%>
 
-    <jsp:include page="footer.jsp">
-      <jsp:param name="page_name" value="species-country.jsp" />
-    </jsp:include>
-  </div>
-  </div>
-  </div>
+                  <jsp:include page="footer.jsp">
+                    <jsp:param name="page_name" value="species-country.jsp" />
+                  </jsp:include>
+<!-- END MAIN CONTENT -->
+              </div>
+            </div>
+          </div>
+          <!-- end of main content block -->
+          <!-- start of the left (by default at least) column -->
+          <div id="portal-column-one">
+            <div class="visualPadding">
+              <jsp:include page="inc_column_left.jsp" />
+            </div>
+          </div>
+          <!-- end of the left (by default at least) column -->
+        </div>
+        <!-- end of the main and left columns -->
+        <!-- start of right (by default at least) column -->
+        <div id="portal-column-two">
+          <div class="visualPadding">
+            <jsp:include page="inc_column_right.jsp" />
+          </div>
+        </div>
+        <!-- end of the right (by default at least) column -->
+        <div class="visualClear"><!-- --></div>
+      </div>
+      <!-- end column wrapper -->
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
+    </div>
   </body>
 </html>

@@ -51,7 +51,7 @@
   <input type="hidden" name="uploadType" value="file" /><br />
 
   <label for="filename"><%=cm.cmsText("related_reports_upload_filetoupload_label")%>:</label><br />
-  <input title="<%=cm.cms("related_reports_upload_filetoupload_title")%>" id="filename" name="filename" type="file" size="50" class="inputTextField" /><br />
+  <input title="<%=cm.cms("related_reports_upload_filetoupload_title")%>" id="filename" name="filename" type="file" size="50" /><br />
   <%=cm.cmsTitle("related_reports_upload_filetoupload_title")%>
   <%=cm.cmsText("related_reports_upload_filetoupload_description")%>
   <br />
@@ -60,20 +60,20 @@
   <p>
     <label for="description"><%=cm.cmsText("document_description")%>:</label>
     <br />
-    <textarea title="<%=cm.cms("document_description")%>" id="description" name="description" cols="60" rows="5" class="inputTextField"><%=cm.cms("related_reports_upload_description_value")%></textarea>
+    <textarea title="<%=cm.cms("document_description")%>" id="description" name="description" cols="60" rows="5"><%=cm.cms("related_reports_upload_description_value")%></textarea>
     <%=cm.cmsTitle("document_description")%>
     <%=cm.cmsInput("related_reports_upload_description_value")%>
   </p>
   <p>
-    <input title="<%=cm.cms("reset_values")%>" type="reset" name="Reset" id="Reset" value="<%=cm.cms("reset")%>" class="inputTextField" />
+    <input title="<%=cm.cms("reset_values")%>" type="reset" name="Reset" id="Reset" value="<%=cm.cms("reset")%>" class="standardButton" />
     <%=cm.cmsTitle("reset_values")%>
     <%=cm.cmsInput("reset")%>
 
-    <input title="<%=cm.cms("upload_document")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("upload")%>" class="inputTextField" />
+    <input title="<%=cm.cms("upload_document")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("upload")%>" class="searchButton" />
     <%=cm.cmsTitle("upload_document")%>
     <%=cm.cmsInput("upload")%>
 
-    <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="inputTextField" />
+    <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="standardButton" />
     <%=cm.cmsTitle("close_window")%>
     <%=cm.cmsInput("close_window")%>
   </p>
@@ -105,7 +105,7 @@ else
   <%=cm.cmsText("related_reports_upload_unauthorized")%>.
   <br />
   <form action="">
-    <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window")%>" title="<%=cm.cms("close_window")%>" id="button1" name="button" class="inputTextField" />
+    <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window")%>" title="<%=cm.cms("close_window")%>" id="button1" name="button" class="standardButton" />
     <%=cm.cmsTitle("close_window")%>
     <%=cm.cmsInput("close_window")%>
   </form>

@@ -24,6 +24,9 @@
     val="";
   }
   String oper = request.getParameter("oper");
+  System.out.println( "oper=" + oper );
+  System.out.println( "lov=" + lov );
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -100,53 +103,83 @@
      lov.equalsIgnoreCase("Temporal") ||
      lov.equalsIgnoreCase("Tidal")) {
 
-   if(oper.equalsIgnoreCase("Equal")) {
+   if(oper.equalsIgnoreCase("Equal"))
+   {
      SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_"+lov.toUpperCase()+" WHERE NAME='"+ val + "' ORDER BY ID_"+lov.toUpperCase();
-   } else {
-     if(oper.equalsIgnoreCase("Contains")) {
+   }
+   else
+   {
+     if(oper.equalsIgnoreCase("Contains"))
+     {
        SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_"+lov.toUpperCase()+" WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_"+lov.toUpperCase();
-     } else {
-       if(oper.equalsIgnoreCase("Between")) {
+     }
+     else
+     {
+       if(oper.equalsIgnoreCase("Between"))
+       {
          SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_"+lov.toUpperCase()+" WHERE NAME LIKE '%"+ val + "%' ORDER BY ID_"+lov.toUpperCase();
-       } else {
+       }
+       else
+       {
          SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_"+lov.toUpperCase()+" ORDER BY ID_"+lov.toUpperCase();
        }
      }
    }
   }
 
-  if(lov.equalsIgnoreCase("InternationalThreatStatus")) {
-    if(oper.equalsIgnoreCase("Equal")) {
+  if(lov.equalsIgnoreCase("InternationalThreatStatus"))
+  {
+    if(oper.equalsIgnoreCase("Equal"))
+    {
       SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_CONSERVATION_STATUS WHERE NAME='"+ val + "' ORDER BY NAME";
-    } else {
-      if(oper.equalsIgnoreCase("Contains")) {
+    }
+    else
+    {
+      if(oper.equalsIgnoreCase("Contains"))
+      {
         SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_CONSERVATION_STATUS WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
-      } else {
-        if(oper.equalsIgnoreCase("Between")) {
+      }
+      else
+      {
+        if(oper.equalsIgnoreCase("Between"))
+        {
           SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_CONSERVATION_STATUS WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
-        } else {
+        }
+        else
+        {
           SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_CONSERVATION_STATUS ORDER BY NAME";
         }
       }
     }
   }
-  if(lov.equalsIgnoreCase("ThreatStatus")) {
-    if(oper.equalsIgnoreCase("Equal")) {
+  if(lov.equalsIgnoreCase("ThreatStatus"))
+  {
+    if(oper.equalsIgnoreCase("Equal"))
+    {
       SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_CONSERVATION_STATUS WHERE NAME='"+ val + "' ORDER BY NAME";
-    } else {
-      if(oper.equalsIgnoreCase("Contains")) {
+    }
+    else
+    {
+      if(oper.equalsIgnoreCase("Contains"))
+      {
         SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_CONSERVATION_STATUS WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
-      } else {
-        if(oper.equalsIgnoreCase("Between")) {
+      }
+      else
+      {
+        if(oper.equalsIgnoreCase("Between"))
+        {
           SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_CONSERVATION_STATUS WHERE NAME LIKE '%"+ val + "%' ORDER BY NAME";
-        } else {
+        }
+        else
+        {
           SQL="SELECT DISTINCT NAME, DESCRIPTION FROM CHM62EDT_CONSERVATION_STATUS ORDER BY NAME";
         }
       }
     }
   }
 
-  if(lov.equalsIgnoreCase("LegalInstruments")) {
+  if(lov.equalsIgnoreCase("LegalInstruments"))
+  {
     if(oper.equalsIgnoreCase("Equal")) {
       SQL="SELECT DISTINCT LEGAL_INSTRUMENT_ABBREV,LEGAL_INSTRUMENT FROM CHM62EDT_HABITAT_DESIGNATED_CODES WHERE LEGAL_INSTRUMENT_ABBREV='"+ val + "' ORDER BY LEGAL_INSTRUMENT_ABBREV";
     } else {
@@ -323,38 +356,46 @@
     }
   }
 
-  if(lov.equalsIgnoreCase("ScientificName")) {
-    if(natureobject.equalsIgnoreCase("Species")) {
+  if(lov.equalsIgnoreCase("ScientificName"))
+  {
+    if(natureobject.equalsIgnoreCase("Species"))
+    {
       SQL="SELECT DISTINCT SCIENTIFIC_NAME,ID_SPECIES FROM CHM62EDT_SPECIES";
       SQL+=" WHERE SCIENTIFIC_NAME LIKE '%"+val+"%'";
       SQL+=" ORDER BY SCIENTIFIC_NAME";
       SQL+=" LIMIT 0,100";
-      if(oper.equalsIgnoreCase("Equal")) {
+      if( oper.equalsIgnoreCase( cm.cms("species_names_02_Msg") ) )
+      {
         SQL="SELECT DISTINCT SCIENTIFIC_NAME,ID_SPECIES FROM CHM62EDT_SPECIES";
         SQL+=" WHERE SCIENTIFIC_NAME = '"+val+"'";
         SQL+=" ORDER BY SCIENTIFIC_NAME";
         SQL+=" LIMIT 0,100";
       }
-      if(oper.equalsIgnoreCase("Contains")) {
+      if( oper.equalsIgnoreCase( cm.cms("contains") ) )
+      {
         SQL="SELECT DISTINCT SCIENTIFIC_NAME,ID_SPECIES FROM CHM62EDT_SPECIES";
         SQL+=" WHERE SCIENTIFIC_NAME LIKE '%"+val+"%'";
         SQL+=" ORDER BY SCIENTIFIC_NAME";
         SQL+=" LIMIT 0,100";
       }
-      if(oper.equalsIgnoreCase("Starts")) {
+      if( oper.equalsIgnoreCase( cm.cms("starts_with") ) )
+      {
         SQL="SELECT DISTINCT SCIENTIFIC_NAME,ID_SPECIES FROM CHM62EDT_SPECIES";
         SQL+=" WHERE SCIENTIFIC_NAME LIKE '"+val+"%'";
         SQL+=" ORDER BY SCIENTIFIC_NAME";
         SQL+=" LIMIT 0,100";
       }
-      if(oper.equalsIgnoreCase("Between")) {
+      if(oper.equalsIgnoreCase("Between"))
+      {
         SQL="SELECT DISTINCT SCIENTIFIC_NAME,ID_SPECIES FROM CHM62EDT_SPECIES";
         SQL+=" WHERE SCIENTIFIC_NAME LIKE '%"+val+"%'";
         SQL+=" ORDER BY SCIENTIFIC_NAME";
         SQL+=" LIMIT 0,100";
       }
     }
-    if(natureobject.equalsIgnoreCase("Habitat")) {
+
+    if(natureobject.equalsIgnoreCase("Habitat"))
+    {
 
       String isGoodHabitat = " IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',RIGHT(CHM62EDT_HABITAT.CODE_2000,2),1) <> IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '','00',2) AND IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',LENGTH(CHM62EDT_HABITAT.CODE_2000),1) = IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',4,1) ";
       SQL="SELECT DISTINCT SCIENTIFIC_NAME,ID_HABITAT FROM CHM62EDT_HABITAT";
@@ -382,7 +423,8 @@
     }
   }
 
-  if(lov.equalsIgnoreCase("Name")) {
+  if(lov.equalsIgnoreCase("Name"))
+  {
     if(natureobject.equalsIgnoreCase("Sites")) {
       SQL="SELECT DISTINCT NAME,ID_SITE FROM CHM62EDT_SITES";
       SQL+=" WHERE NAME LIKE '%"+val+"%'";
@@ -409,7 +451,8 @@
     }
   }
 
-  if(lov.equalsIgnoreCase("VernacularName")){
+  if(lov.equalsIgnoreCase("VernacularName"))
+  {
     SQL="SELECT DISTINCT CHM62EDT_REPORT_ATTRIBUTES.VALUE FROM CHM62EDT_REPORTS ";
     SQL+=" INNER JOIN `CHM62EDT_SPECIES` ON (`CHM62EDT_REPORTS`.`ID_NATURE_OBJECT` = `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`)";
     SQL+=" INNER JOIN `CHM62EDT_REPORT_ATTRIBUTES` ON (`CHM62EDT_REPORTS`.`ID_REPORT_ATTRIBUTES` = `CHM62EDT_REPORT_ATTRIBUTES`.`ID_REPORT_ATTRIBUTES`)";
@@ -541,7 +584,7 @@
 %>
     <br />
       <form action="">
-        <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="inputTextField" />
+        <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="standardButton" />
         <%=cm.cmsTitle("close_window")%>
         <%=cm.cmsInput("close_btn")%>
       </form>

@@ -429,7 +429,7 @@ public final class PDFSpeciesFactsheet
    */
   private void getGeographicalDistribution() throws Exception
   {
-    Vector v = SpeciesFactsheet.getBioRegionIterator( idNatureObject.toString() );
+    Vector v = SpeciesFactsheet.getBioRegionIterator( idNatureObject, idSpecies );
     if ( v.size() > 0 )
     {
       Table table = new Table( 4 );
@@ -1121,7 +1121,7 @@ public final class PDFSpeciesFactsheet
    */
   private void getTrends() throws Exception
   {
-    Vector list = SpeciesFactsheet.getTrends( idNatureObject.toString() );
+    Vector list = SpeciesFactsheet.getTrends( idNatureObject, idSpecies );
     if ( list.size() > 0 )
     {
       Table table = new Table( 8 );

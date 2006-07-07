@@ -791,21 +791,22 @@
         <br />
         <br />
         <div id="tab">
-        <table summary="layout" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
-        <tr>
-          <th class="resultHeader">
-            Value
-          </th>
-          <th class="resultHeader">
-            Code
-          </th>
-        </tr>
-        <%
+        <table summary="layout" class="datatable">
+          <tr>
+            <th>
+              Value
+            </th>
+            <th>
+              Code
+            </th>
+          </tr>
+<%
         int cnt = 0;
-        while(rs.next()) {
-          cnt++;
-          %>
-          <tr bgcolor="<%=(0 == (cnt % 2) ? "#EEEEEE" : "#FFFFFF")%>">
+        while(rs.next())
+        {
+          String cssClass = cnt++ % 2 == 0 ? "" : " class=\"zebraeven\"";
+%>
+          <tr<%=cssClass%>>
             <td>
             <%
             out.println("<a title=\"" + cm.cms("click_link_to_select_value") + "\" href=\"javascript:setValue('"+rs.getString(1)+"')\">"+rs.getString(1)+"</a>");
@@ -846,7 +847,7 @@
 %>
     <br />
     <form action="">
-      <input type="button" title="<%=cm.cms("close_window")%>" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="btnclose" id="btnclose" class="inputTextField" />
+      <input type="button" title="<%=cm.cms("close_window")%>" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="btnclose" id="btnclose" class="standardButton" />
       <%=cm.cmsInput("close_btn")%>
     </form>
     <%=cm.br()%>

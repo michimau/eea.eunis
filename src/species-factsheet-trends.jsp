@@ -19,54 +19,61 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   WebContentManagement cm = SessionManager.getWebContent();
-  String idNatureObj = FormBean.getIdNatureObject();
   // List of trends information for species.
-  Vector list = SpeciesFactsheet.getTrends(idNatureObj);
+  Integer idNatureObject = new Integer( Utilities.checkedStringToInt( FormBean.getIdNatureObject(), 0 ) );
+  Integer idSpecies = new Integer( Utilities.checkedStringToInt( FormBean.getIdSpecies(), 0 ) );
+  Vector list = SpeciesFactsheet.getTrends(idNatureObject, idSpecies );
   if ( list.size() > 0 )
   {
   %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("trends")%></div>
-    <table summary="<%=cm.cms("trends")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="trends" class="sortable">
+  <h2>
+    <%=cm.cmsText("trends")%>
+  </h2>
+  <table summary="<%=cm.cms("trends")%>" class="listing" width="90%">
+    <thead>
       <tr>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" >
+        <th>
           <%=cm.cmsText("country")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" >
+        <th>
           <%=cm.cmsText("biogeographic_region")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align:right" title="<%=cm.cms("sort_results_on_this_column")%>" >
+        <th style="text-align:right">
           <%=cm.cmsText("start_period")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align:right" title="<%=cm.cms("sort_results_on_this_column")%>" >
+        <th style="text-align:right">
           <%=cm.cmsText("end_period")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" >
+        <th>
           <%=cm.cmsText("status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" >
+        <th>
           <%=cm.cmsText("species_factsheet-trends_07")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" >
+        <th>
           <%=cm.cmsText("quality")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" >
+        <th>
           <%=cm.cmsText("reference")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
+    </thead>
+    <tbody>
 <%
       for (int i = 0; i < list.size(); i++)
       {
+        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
         FactSheetTrendsWrapper aRow = (FactSheetTrendsWrapper)list.get(i);
 %>
-      <tr style="background-color:<%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>">
+      <tr<%=cssClass%>>
         <td width="81">
         <%
             if(Utilities.isCountry(aRow.getCountry()))
@@ -127,7 +134,8 @@
 <%
       }
 %>
-    </table>
+    </tbody>
+  </table>
 <%
   }
 %>

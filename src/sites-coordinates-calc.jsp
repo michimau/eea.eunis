@@ -134,30 +134,30 @@
       <div style="width : 100%">
         <br />
         <label for="degrees"><%=cm.cmsText("degrees")%></label>
-        <input id="degrees" name="degrees" type="text" size="5" class="inputTextField" title="<%=cm.cms("degrees")%>" />
+        <input id="degrees" name="degrees" type="text" size="5" title="<%=cm.cms("degrees")%>" />
         <%=cm.cmsTitle("degrees")%>
         &deg;
         <label for="minutes"><%=cm.cmsText("minutes")%></label>
-        <input id="minutes" name="minutes" type="text" size="5" class="inputTextField" title="<%=cm.cms("minutes")%>" />
+        <input id="minutes" name="minutes" type="text" size="5" title="<%=cm.cms("minutes")%>" />
         <%=cm.cmsTitle("minutes")%>
         '
         <label for="seconds"><%=cm.cmsText("seconds")%></label>
-        <input id="seconds" name="seconds" type="text" size="5" class="inputTextField" title="<%=cm.cms("seconds")%>" />
+        <input id="seconds" name="seconds" type="text" size="5" title="<%=cm.cms("seconds")%>" />
         <%=cm.cmsTitle("seconds")%>
         &quot;
         <br />
         <br />
         <label for="decimal"><%=cm.cmsText("sites_coordinates-calc_05")%></label>
-        <input name="decimal" id="decimal" type="text" size="20" class="inputTextField" title="<%=cm.cms("sites_coordinates-calc_05_title")%>" />
+        <input name="decimal" id="decimal" type="text" size="20" title="<%=cm.cms("sites_coordinates-calc_05_title")%>" />
         <%=cm.cmsTitle("sites_coordinates-calc_05_title")%>
         <br />
         <div style="width : 100%; text-align : right;">
         <br />
-        <input id="reset" type="reset" name="Reset" value="<%=cm.cms("reset")%>" class="inputTextField" title="<%=cm.cms("reset")%>" />
+        <input id="reset" type="reset" name="Reset" value="<%=cm.cms("reset")%>" class="standardButton" title="<%=cm.cms("reset")%>" />
         <%=cm.cmsInput("reset")%>
         <%=cm.cmsTitle("reset")%>
           &nbsp;
-        <input id="calculate" type="button" name="calculate" value="<%=cm.cms("sites_coordinates_calc_calculate_value")%>" onclick="javascript:transform(document.converter);" class="inputTextField" title="<%=cm.cms("calculate")%>" />
+        <input id="calculate" type="button" name="calculate" value="<%=cm.cms("sites_coordinates_calc_calculate_value")%>" onclick="javascript:transform(document.converter);" class="searchButton" title="<%=cm.cms("calculate")%>" />
         <%=cm.cmsInput("sites_coordinates_calc_calculate_value")%>
         <%=cm.cmsTitle("calculate")%>
         </div>

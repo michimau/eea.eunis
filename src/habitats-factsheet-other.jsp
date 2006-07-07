@@ -35,52 +35,55 @@ Notes:
   HabitatsFactsheet factsheet = new HabitatsFactsheet(idHabitat);
   // List of other information about habitat.
   List results = null;
-  try {
+  try
+  {
     results = factsheet.getOtherInfo(infoID);
-  } catch(InitializationException e) {
+  }
+  catch(InitializationException e)
+  {
     e.printStackTrace();
   }
-  if(!results.isEmpty()) {
+  if( results != null && !results.isEmpty() )
+  {
 %>
-<table summary="<%=cm.cms("habitat_other_information")%>" border="1" cellspacing="0" width="90%" id="table<%=infoID%>" style="border-collapse : collapse;">
-  <tr bgcolor="#DDDDDD">
-    <th class="resultHeader" width="25%">
-       <%=cm.cmsText("name")%>
-    </th>
-    <th class="resultHeader" width="75%">
-      <%=cm.cmsText("description")%>
-    </th>
-  </tr>
-  <%
+  <table summary="<%=cm.cms("habitat_other_information")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th width="25%">
+           <%=cm.cmsText("name")%>
+        </th>
+        <th width="75%">
+          <%=cm.cmsText("description")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+<%
     // Display results.
-    for(int i = 0; i < results.size(); i++) {
+    for(int i = 0; i < results.size(); i++)
+    {
       HabitatOtherInfo obj = (HabitatOtherInfo) results.get(i);
       String name = (null == obj.getName()) ? "n/a" : obj.getName();
       String description = (null == obj.getDescription()) ? "n/a" : obj.getDescription();
-  %>
-  <tr bgcolor="#EEEEEE">
-    <td>
-      <%
-        String _name = name;
-        _name = _name.replaceAll("<","&lt;").replaceAll(">","&gt;");
-      %>
-      <%=_name%>&nbsp;
-    </td>
-    <td>
-      <%
-        String _description = description;
-        _description = _description.replaceAll("<","&lt;").replaceAll(">","&gt;");
-      %>
-      <%=_description%>&nbsp;
-    </td>
-  </tr>
-  <%
+      String _name = Utilities.formatString( name.replaceAll("<","&lt;").replaceAll(">","&gt;"), "&nbsp;" );
+      String _description = Utilities.formatString( description.replaceAll("<","&lt;").replaceAll(">","&gt;"), "&nbsp;" );
+%>
+      <tr>
+        <td>
+          <%=_name%>
+        </td>
+        <td>
+          <%=_description%>
+        </td>
+      </tr>
+<%
     }
-  %>
-</table>
-<%=cm.br()%>
-<%=cm.cmsMsg("habitat_other_information")%>
-<br />
+%>
+    </tbody>
+  </table>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("habitat_other_information")%>
+  <br />
 <%
   }
 %>

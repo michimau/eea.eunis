@@ -197,7 +197,7 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
       <input id="button2" title="<%=cm.cms("close_window")%>" type="button"
        onclick="javascript:window.close();"
        value="<%=cm.cms("close_btn")%>" name="button"
-       class="inputTextField"/>
+       class="standardButton"/>
       <%=cm.cmsTitle( "close_window")%>
       <%=cm.cmsInput( "close_btn")%>
 <%

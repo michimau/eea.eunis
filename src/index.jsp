@@ -142,212 +142,166 @@
   </title>
   </head>
   <body>
-    <center>
-    <div id="bodydiv2">
-      <div id="container">
-    <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home"/>
-    </jsp:include>
-    <%=cm.cmsText("generic_index_07")%>
-      <div id="leftnav">
-        <div class="mainlabel180_1">
-          <strong>
-          <%=cm.cmsText( "general_information" )%>
-          </strong>
-        </div>
-        <ul>
-          <li>
-            <a title="<%=cm.cms("introduction_to_eunis")%>" href="introduction.jsp"><%=cm.cmsText( "introduction" )%></a><%=cm.cmsTitle("introduction")%>
-          </li>
-          <li>
-            <a title="<%=cm.cms("about_eunis_database")%>" href="about.jsp"><%=cm.cmsText( "generic_about_title" )%></a><%=cm.cmsTitle("about_eunis_database")%>
-          </li>
-          <li>
-            <a title="<%=cm.cms("generic_index_04_title")%>" href="howto.jsp"><%=cm.cmsText( "generic_index_04" )%></a><%=cm.cmsTitle("generic_index_04_title")%>
-          </li>
-          <li>
-            <a title="<%=cm.cms("web_site_map")%>" href="eunis-map.jsp"><%=cm.cmsText( "web_site_map" )%></a><%=cm.cmsTitle("web_site_map")%>
-          </li>
-          <li>
-            <img src="images/mini/help.jpg" border="0" width="13" height="16" style="vertical-align:middle" alt="<%=cm.cms("generic_index_tutorials_alt")%>" /><%=cm.cmsAlt("generic_index_tutorials_alt")%>
-            <a title="<%=cm.cms("generic_index_tutorials_title")%>" href="tutorials.jsp"><%=cm.cmsText( "index_tutorials" )%></a><%=cm.cmsTitle("generic_index_tutorials_title")%>
-          </li>
-          <li>
-            <a title="<%=cm.cms("generic_index_news_title")%>" href="news.jsp"><%=cm.cmsText( "news" )%></a><%=cm.cmsTitle("generic_index_news_title")%>
-          </li>
-        </ul>
-        <div class="between"></div>
-        <div class="mainlabel180_1">
-          <strong>
-            <%=cm.cmsText("user_preferences")%>
-          </strong>
-        </div>
-       <ul>
-<%
-  if ( SessionManager.isAuthenticated() )
-  {
-%>
-          <li>
-            <a href="index.jsp?operation=logout" title="<%=cm.cms("logout")%>"><%=cm.cmsText( "logout" )%></a><%=cm.cmsTitle("logout")%>
-            (<strong><%=SessionManager.getUsername()%></strong>)
-          </li>
-<%
-  }
-  else
-  {
-%>
-          <li>
-            <a href="login.jsp" title="<%=cm.cms("login")%>"><%=cm.cmsText( "login" )%></a><%=cm.cmsTitle("login")%>
-          </li>
-<%
-  }
-%>
-          <li>
-            <a title="<%=cm.cms("generic_index_09_title")%>" href="services.jsp"><%=cm.cmsText( "services" )%></a><%=cm.cmsTitle("generic_index_09_title")%>
-            <br />
-            <%=cm.cmsText( "generic_index_07" )%>
-          </li>
-          <li>
-            <a title="<%=cm.cms("user_preferences")%>" href="preferences.jsp"><%=cm.cmsText("user_preferences")%></a><%=cm.cmsTitle("user_preferences")%>
-            <br />
-            <%=cm.cmsText("generic_index_07")%>
-          </li>
-        </ul>
-        <div class="between"></div>
-      </div>
-      <div id="content_index">
-        <div id="mainlabel250">
-          <strong>
-            <%=cm.cmsText( "generic_index_06" )%>
-          </strong>
-          <br />
-        </div>
-        <form name="species_qs" action="species-names-result.jsp" method="post" onsubmit="return validateQS( 'species' ); ">
-          <input type="hidden" name="comeFromQuickSearch" value="true" />
-          <input type="hidden" name="showGroup" value="true" />
-          <input type="hidden" name="showOrder" value="true" />
-          <input type="hidden" name="showFamily" value="true" />
-          <input type="hidden" name="showScientificName" value="true" />
-          <input type="hidden" name="showVernacularNames" value="true" />
-          <input type="hidden" name="showValidName" value="true" />
-          <input type="hidden" name="showOtherInfo" value="true" />
-          <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
-          <input type="hidden" name="searchVernacular" value="true" />
-          <input type="hidden" name="searchSynonyms" value="true" />
-          <input type="hidden" name="sort" value="<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>" />
-          <input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
-          <div class="search_style">
-            <label for="scientificName" class="noshow"><%=cm.cms("species_name")%></label>
-            <input title="Species name" id="scientificName" name="scientificName" class="textInputColorMain" size="24" />
-            <%=cm.cmsLabel("species_name")%>
-            <label for="search_species" class="noshow"><%=cm.cms("search_species")%></label>
-            <input id="search_species" name="search_species" type="image" title="<%=cm.cms("search_species")%>" src="images/<%=magnifyIMG%>" alt="<%=cm.cms("search_species")%>" align="top" style="margin-top:1px;" />
-            <%=cm.cmsLabel("search_species")%>
-            <%=cm.cmsTitle("search_species")%>
-            <%=cm.cmsAlt("search_species")%>
-          </div>
-          <!--<a title="Go to Species module" href="species.jsp"><%=cm.cmsText( "species" )%></a>&nbsp;-->
-          <strong><%=cm.cmsText( "species" )%></strong>&nbsp;
-          <br /><br />
-          <a title="<%=cm.cms("index_species_search_tools_title")%>" href="species.jsp"><%=cm.cmsText("search_tools")%></a><%=cm.cmsTitle("index_species_search_tools_title")%>
-          <div class="search_details">
-            <%=cm.cmsText( "generic_index_16" )%>
-          </div>
-        </form>
-        <span class="separator"></span>
-        <form name="habitats_qs" action="habitats-names-result.jsp" method="post" onsubmit="return validateQS( 'habitats' );">
-          <input type="hidden" name="showLevel" value="true" />
-          <input type="hidden" name="showCode" value="true" />
-          <input type="hidden" name="showScientificName" value="true" />
-          <input type="hidden" name="showVernacularName" value="true" />
-          <input type="hidden" name="showOtherInfo" value="true" />
-          <input type="hidden" name="database" value="<%=NamesDomain.SEARCH_BOTH%>" />
-          <input type="hidden" name="useScientific" value="true" />
-          <input type="hidden" name="useVernacular" value="true" />
-          <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
-          <div class="search_style">
-            <label for="searchString" class="noshow"><%=cm.cms("habitat_type_name")%></label>
-            <input title="<%=cm.cms("habitat_type_name")%>" id="searchString" name="searchString" class="textInputColorMain" size="24" />
-            <%=cm.cmsLabel("habitat_type_name")%>
-            <%=cm.cmsTitle("habitat_type_name")%>
+    <div id="visual-portal-wrapper">
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
+      <!-- The wrapper div. It contains the three columns. -->
+      <div id="portal-columns">
+        <!-- start of the main and left columns -->
+        <div id="visual-column-wrapper">
+          <!-- start of main content block -->
+          <div id="portal-column-content">
+            <div id="content">
+              <div class="documentContent" id="region-content">
+<!-- MAIN CONTENT -->
+                <jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value=""/>
+                </jsp:include>
+                <%=cm.cmsText("generic_index_07")%>
+                <h1>
+                  <%=cm.cmsText( "generic_index_06" )%>
+                </h1>
+                <br />
+                <form name="species_qs" action="species-names-result.jsp" method="post" onsubmit="return validateQS( 'species' ); ">
+                  <input type="hidden" name="comeFromQuickSearch" value="true" />
+                  <input type="hidden" name="showGroup" value="true" />
+                  <input type="hidden" name="showOrder" value="true" />
+                  <input type="hidden" name="showFamily" value="true" />
+                  <input type="hidden" name="showScientificName" value="true" />
+                  <input type="hidden" name="showVernacularNames" value="true" />
+                  <input type="hidden" name="showValidName" value="true" />
+                  <input type="hidden" name="showOtherInfo" value="true" />
+                  <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
+                  <input type="hidden" name="searchVernacular" value="true" />
+                  <input type="hidden" name="searchSynonyms" value="true" />
+                  <input type="hidden" name="sort" value="<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>" />
+                  <input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
 
-            <label for="search_habitat_types" class="noshow"><%=cm.cms("search_habitat_type")%></label>
-            <input type="image" src="images/<%=magnifyIMG%>" id="search_habitat_types" name="search_habitat_types" alt="<%=cm.cms("search_habitat_type")%>" title="<%=cm.cms("search_habitat_type")%>" align="top" style="margin-top:1px;" />
-            <%=cm.cmsLabel("search_habitat_type")%>
-            <%=cm.cmsAlt("search_habitat_type")%>
-            <%=cm.cmsTitle("search_habitat_type")%>
+                  <label for="scientificName" class="noshow">
+                    <%=cm.cms("species_name")%>
+                  </label>
+                  <strong>
+                    <%=cm.cmsText( "species" )%>
+                  </strong>&nbsp;
+                  <input title="Species name" id="scientificName" name="scientificName" size="24" />
+                  <input id="search_species" type="submit" name="submit" value="<%=cm.cms("search")%>" class="searchButton" />
+                  <%=cm.cmsLabel("species_name")%>
+
+                  <label for="search_species" class="noshow"><%=cm.cms("search_species")%></label>
+                  <br />
+                  <a title="<%=cm.cms("index_species_search_tools_title")%>" href="species.jsp"><%=cm.cmsText("search_tools")%></a><%=cm.cmsTitle("index_species_search_tools_title")%>
+                  <div class="search_details">
+                    <%=cm.cmsText( "generic_index_16" )%>
+                  </div>
+                </form>
+                <br />
+                <form name="habitats_qs" action="habitats-names-result.jsp" method="post" onsubmit="return validateQS( 'habitats' );">
+                  <input type="hidden" name="showLevel" value="true" />
+                  <input type="hidden" name="showCode" value="true" />
+                  <input type="hidden" name="showScientificName" value="true" />
+                  <input type="hidden" name="showVernacularName" value="true" />
+                  <input type="hidden" name="showOtherInfo" value="true" />
+                  <input type="hidden" name="database" value="<%=NamesDomain.SEARCH_BOTH%>" />
+                  <input type="hidden" name="useScientific" value="true" />
+                  <input type="hidden" name="useVernacular" value="true" />
+                  <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
+                  <label for="searchString" class="noshow">
+                    <%=cm.cms("habitat_type_name")%>
+                  </label>
+                  <strong>
+                    <%=cm.cmsText( "habitat_types" )%>
+                  </strong>&nbsp;
+                  <input title="<%=cm.cms("habitat_type_name")%>" id="searchString" name="searchString" size="24" />
+                  <%=cm.cmsLabel("habitat_type_name")%>
+                  <%=cm.cmsTitle("habitat_type_name")%>
+                  <input id="search_habitat_types" type="submit" name="submit" value="<%=cm.cms("search")%>" class="searchButton" />
+
+                  <label for="search_habitat_types" class="noshow"><%=cm.cms("search_habitat_type")%></label>
+                  <br />
+                  <a title="<%=cm.cms("index_habitats_search_tools_title")%>" href="habitats.jsp"><%=cm.cms("search_tools")%></a>
+                  <%=cm.cmsTitle("index_habitats_search_tools_title")%>
+                  <div class="search_details">
+                    <%=cm.cmsText( "information_about_habitats" )%>
+                  </div>
+                </form>
+                <br />
+                <form name="sites_qs" action="sites-names-result.jsp" method="post" onsubmit="return validateQS( 'sites' );">
+                  <input type="hidden" name="showSourceDB" value="true" />
+                  <input type="hidden" name="showCountry" value="true" />
+                  <input type="hidden" name="showDesignationTypes" value="true" />
+                  <input type="hidden" name="showName" value="true" />
+                  <input type="hidden" name="showCoordinates" value="true" />
+                  <input type="hidden" name="showSize" value="true" />
+                  <input type="hidden" name="showDesignationYear" value="true" />
+                  <input type="hidden" name="sort" value="<%=ro.finsiel.eunis.search.sites.names.NameSortCriteria.SORT_NAME%>" />
+                  <input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
+                  <input type="hidden" name="DB_NATURA2000" value="ON" />
+                  <input type="hidden" name="DB_CDDA_NATIONAL" value="ON" />
+                  <input type="hidden" name="DB_CDDA_NATIONAL" value="ON" />
+                  <input type="hidden" name="DB_DIPLOMA" value="ON" />
+                  <input type="hidden" name="DB_CDDA_INTERNATIONAL" value="ON" />
+                  <input type="hidden" name="DB_CORINE" value="ON" />
+                  <input type="hidden" name="DB_BIOGENETIC" value="ON" />
+                  <input type="hidden" name="DB_EMERALD" value="ON" />
+                  <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
+                  <label for="englishName" class="noshow">
+                    <%=cm.cms("site_name")%>
+                  </label>
+                  <strong>
+                    <%=cm.cmsText( "sites" )%>
+                  </strong>&nbsp;
+                  <input title="<%=cm.cms("site_name")%>" id="englishName" name="englishName" size="24" />
+                  <%=cm.cmsLabel("site_name")%>
+                  <%=cm.cmsTitle("site_name")%>
+                  <input id="search_sites" type="submit" name="submit" value="<%=cm.cms("search")%>" class="searchButton" />
+                  <br />
+                  <a title="<%=cm.cms("index_sites_search_tools_title")%>" href="sites.jsp"><%=cm.cms("search_tools")%></a>
+                  <%=cm.cmsTitle("index_sites_search_tools_title")%>
+                  <div class="search_details" style="margin-bottom: 20px;">
+                    <%=cm.cmsText( "information_collected_from_various_databases" )%>
+                  </div>
+                </form>
+                <a href="combined-search.jsp" title="<%=cm.cms("generic_index_21_title")%>"><%=cm.cmsText( "generic_index_21" )%></a>
+                <%=cm.cmsTitle("generic_index_21_title")%>
+                <div class="search_details" style="margin-bottom: 20px;">
+                  <%=cm.cmsText( "advanced_crosssearch_tool_linking_species_habitats_sites" )%>
+                </div>
+                <a href="gis-tool.jsp" title="<%=cm.cms("gis_tool_interactive_maps")%>"><%=cm.cmsText( "generic_index_27" )%></a>
+                <%=cm.cmsTitle("gis_tool_interactive_maps")%>
+                &nbsp;
+                <a href="gis-tool.jsp" title="<%=cm.cms("gis_tool_interactive_maps")%>"><img src="images/<%=compassIMG%>" width="29" height="29" style="width : 29px; height : 29px; border : 0px; vertical-align : middle;" alt="<%=cm.cms("gis_tool_interactive_maps")%>" title="<%=cm.cms("gis_tool_interactive_maps")%>" /></a>
+                <%=cm.cmsTitle("gis_tool_interactive_maps")%>
+                <br />
+                <%=cm.cms("generic_index_maps")%>
+                <%=cm.cmsMsg("welcome_to_eunis_database")%>
+                <br />
+                <jsp:include page="footer.jsp">
+                  <jsp:param name="page_name" value="index.jsp" />
+                </jsp:include>
+<!-- END MAIN CONTENT -->
+              </div>
+            </div>
           </div>
-          <!--<a href="habitats.jsp" title="Go to Habitat types module"><%=cm.cmsText( "habitat_types" )%></a>&nbsp;-->
-          <strong><%=cm.cmsText( "habitat_types" )%></strong>&nbsp;
-          <br /><br />
-          <a title="<%=cm.cms("index_habitats_search_tools_title")%>" href="habitats.jsp"><%=cm.cms("search_tools")%></a>
-          <%=cm.cmsTitle("index_habitats_search_tools_title")%>
-          <div class="search_details">
-            <%=cm.cmsText( "information_about_habitats" )%>
+          <!-- end of main content block -->
+          <!-- start of the left (by default at least) column -->
+          <div id="portal-column-one">
+            <div class="visualPadding">
+              <jsp:include page="inc_column_left.jsp" />
+            </div>
           </div>
-        </form>
-        <span class="separator"></span>
-        <form name="sites_qs" action="sites-names-result.jsp" method="post" onsubmit="return validateQS( 'sites' );">
-          <input type="hidden" name="showSourceDB" value="true" />
-          <input type="hidden" name="showCountry" value="true" />
-          <input type="hidden" name="showDesignationTypes" value="true" />
-          <input type="hidden" name="showName" value="true" />
-          <input type="hidden" name="showCoordinates" value="true" />
-          <input type="hidden" name="showSize" value="true" />
-          <input type="hidden" name="showDesignationYear" value="true" />
-          <input type="hidden" name="sort" value="<%=ro.finsiel.eunis.search.sites.names.NameSortCriteria.SORT_NAME%>" />
-          <input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
-          <input type="hidden" name="DB_NATURA2000" value="ON" />
-          <input type="hidden" name="DB_CDDA_NATIONAL" value="ON" />
-          <input type="hidden" name="DB_CDDA_NATIONAL" value="ON" />
-          <input type="hidden" name="DB_DIPLOMA" value="ON" />
-          <input type="hidden" name="DB_CDDA_INTERNATIONAL" value="ON" />
-          <input type="hidden" name="DB_CORINE" value="ON" />
-          <input type="hidden" name="DB_BIOGENETIC" value="ON" />
-          <input type="hidden" name="DB_EMERALD" value="ON" />
-          <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
-          <div class="search_style">
-            <label for="englishName" class="noshow"><%=cm.cms("site_name")%></label>
-            <input title="<%=cm.cms("site_name")%>" id="englishName" name="englishName" class="textInputColorMain" size="24" />
-            <%=cm.cmsLabel("site_name")%>
-            <%=cm.cmsTitle("site_name")%>
-            <label for="search_sites" class="noshow"><%=cm.cms("index_search_sites_label")%></label>
-            <input type="image" id="search_sites" name="search_sites" alt="Search sites" title="Search sites" src="images/<%=magnifyIMG%>" align="top" style="margin-top:1px;" />
-            <%=cm.cmsLabel("index_search_sites_label")%>
-          </div>
-          <!--<a href="sites.jsp" title="Go to Sites module"><%=cm.cmsText( "sites" )%></a>&nbsp;-->
-          <strong><%=cm.cmsText( "sites" )%></strong>&nbsp;
-          <br /><br />
-          <a title="<%=cm.cms("index_sites_search_tools_title")%>" href="sites.jsp"><%=cm.cms("search_tools")%></a>
-          <%=cm.cmsTitle("index_sites_search_tools_title")%>
-          <div class="search_details" style="margin-bottom: 40px;">
-            <%=cm.cmsText( "information_collected_from_various_databases" )%>
-          </div>
-        </form>
-        <a href="combined-search.jsp" title="<%=cm.cms("generic_index_21_title")%>"><%=cm.cmsText( "generic_index_21" )%></a>
-        <%=cm.cmsTitle("generic_index_21_title")%>
-        <div class="search_details" style="margin-bottom: 40px;">
-          <%=cm.cmsText( "advanced_crosssearch_tool_linking_species_habitats_sites" )%>
+          <!-- end of the left (by default at least) column -->
         </div>
-        <a href="gis-tool.jsp" title="<%=cm.cms("gis_tool_interactive_maps")%>"><%=cm.cmsText( "generic_index_27" )%></a>
-        <%=cm.cmsTitle("gis_tool_interactive_maps")%>
-        &nbsp;
-        <a href="gis-tool.jsp" title="<%=cm.cms("gis_tool_interactive_maps")%>"><img src="images/<%=compassIMG%>" width="29" height="29" style="width : 29px; height : 29px; border : 0px; vertical-align : middle;" alt="<%=cm.cms("gis_tool_interactive_maps")%>" title="<%=cm.cms("gis_tool_interactive_maps")%>" /></a>
-        <%=cm.cmsTitle("gis_tool_interactive_maps")%>
-        <br />
-        <%=cm.cms("generic_index_maps")%>
-      </div>
-      <div id="rightnav">
-        <div class="imageprint">
-          <img height="350" width="216" title="" alt="<%=cm.cms("index_photo_alt")%>" src="images/intros/<%=Utilities.getIntroImage( application )%>" style="vertical-align:middle" />
+        <!-- end of the main and left columns -->
+        <!-- start of right (by default at least) column -->
+        <div id="portal-column-two">
+          <div class="visualPadding">
+            <jsp:include page="inc_column_right.jsp" />
+          </div>
         </div>
+        <!-- end of the right (by default at least) column -->
+        <div class="visualClear"><!-- --></div>
       </div>
-      <%=cm.cmsMsg("welcome_to_eunis_database")%>
-      <jsp:include page="footer.jsp">
-        <jsp:param name="page_name" value="index.jsp" />
-      </jsp:include>
-        </div>
-      </div>
-    </center>
+      <!-- end column wrapper -->
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
+    </div>
   </body>
 </html>

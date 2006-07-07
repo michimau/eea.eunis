@@ -72,411 +72,452 @@
   reportFields.addElement("oper");
   reportFields.addElement("criteriaType");
 
+  WebContentManagement cm = SessionManager.getWebContent();
   String tsvLink = "javascript:openTSVDownload('reports/sites/tsv-sites-species.jsp?" + formBean.toURLParam(reportFields) + "')";
+  String location = "home#index.jsp,species#species.jsp,sites_species_location#sites-species.jsp,results";
+  if (results.isEmpty())
+  {
+    boolean fromRefine = formBean.getCriteriaSearch() != null && formBean.getCriteriaSearch().length > 0;
+%>
+      <jsp:forward page="emptyresults.jsp">
+        <jsp:param name="location" value="<%=location%>" />
+        <jsp:param name="fromRefine" value="<%=fromRefine%>" />
+      </jsp:forward>
+<%
+  }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-<%
-  WebContentManagement cm = SessionManager.getWebContent();
-%>
     <script language="JavaScript" type="text/javascript" src="script/sites-names.js"></script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("sites_species-result_title")%></title>
   </head>
   <body>
-    <div id="outline">
-    <div id="alignment">
-    <div id="content">
-      <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home#index.jsp,species#species.jsp,sites_species_location#sites-species.jsp,results"/>
-        <jsp:param name="downloadLink" value="<%=tsvLink%>"/>
-        <jsp:param name="mapLink" value="show"/>
-      </jsp:include>
-      <h1>
-        <%=cm.cmsText("pick_species_show_sites")%>
-      </h1>
+    <div id="visual-portal-wrapper">
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
+      <!-- The wrapper div. It contains the three columns. -->
+      <div id="portal-columns">
+        <!-- start of the main and left columns -->
+        <div id="visual-column-wrapper">
+          <!-- start of main content block -->
+          <div id="portal-column-content">
+            <div id="content">
+              <div class="documentContent" id="region-content">
+                <a name="documentContent"></a>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure">Document Actions</h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="Print this page"
+                            title="Print this page" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="Toggle full screen mode"
+                             title="Toggle full screen mode" /></a>
+                    </li>
+                  </ul>
+                </div>
+                <br clear="all" />
+<!-- MAIN CONTENT -->
+                <jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="<%=location%>"/>
+                  <jsp:param name="downloadLink" value="<%=tsvLink%>"/>
+                  <jsp:param name="mapLink" value="show"/>
+                </jsp:include>
+                <h1>
+                  <%=cm.cmsText("pick_species_show_sites")%>
+                </h1>
 
-      <%=cm.cmsText("sites_species-result_02")%> <strong><%=(formBean.getMainSearchCriteria()).toHumanString()%></strong>.
-<%
-    if (results.isEmpty())
-    {
-       boolean fromRefine = false;
-       if(formBean != null && formBean.getCriteriaSearch() != null && formBean.getCriteriaSearch().length > 0)
-         fromRefine = true;
+                <%=cm.cmsText("sites_species-result_02")%> <strong><%=(formBean.getMainSearchCriteria()).toHumanString()%></strong>.
+                <br />
+                <%=cm.cmsText("results_found_1")%>:
+                <strong>
+                  <%=resultsCount%>
+                </strong>
+                <br />
+          <%
+            // Prepare parameters for pagesize.jsp
+            Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
+            pageSizeFormFields.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
+            pageSizeFormFields.addElement("ascendency");    /*   is overriden & also pageSize is set to default           */
+            pageSizeFormFields.addElement("criteriaSearch");/*   to page "0" aka first page. */
+          %>
+                <jsp:include page="pagesize.jsp">
+                  <jsp:param name="guid" value="<%=guid%>"/>
+                  <jsp:param name="pageName" value="<%=pageName%>"/>
+                  <jsp:param name="pageSize" value="<%=formBean.getPageSize()%>"/>
+                  <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(pageSizeFormFields)%>"/>
+                </jsp:include>
+          <%
+            // Prepare the form parameters.
+            Vector filterSearch = new Vector();
+            filterSearch.addElement("sort");
+            filterSearch.addElement("ascendency");
+            filterSearch.addElement("criteriaSearch");
+            filterSearch.addElement("pageSize");
+          %>
+                <br />
+                <div class="grey_rectangle">
+                  <strong>
+                    <%=cm.cmsText("refine_your_search")%>
+                  </strong>
+                  <form title="refine search results" name="criteriaSearch" method="get" onsubmit="return(check(<%=noCriteria%>));" action="">
+                    <%=formBean.toFORMParam(filterSearch)%>
+                    <label for="criteriaType" class="noshow"><%=cm.cms("criteria")%></label>
+                    <select id="criteriaType" name="criteriaType" title="<%=cm.cms("criteria")%>">
+          <%
+            if (showSourceDB)
+            {
+          %>
+                      <option value="<%=SpeciesSearchCriteria.CRITERIA_SOURCE_DB%>">
+                        <%=cm.cms("database_source")%>
+                      </option>
+          <%
+             }
+             if (showName)
+             {
+          %>
+                      <option value="<%=SpeciesSearchCriteria.CRITERIA_ENGLISH_NAME%>">
+                        <%=cm.cms("site_name")%>
+                      </option>
+          <%
+              }
+          %>
+                    </select>
+                    <%=cm.cmsLabel("criteria")%>
+                    <%=cm.cmsTitle("criteria")%>
+                    <%=cm.cmsInput("database_source")%>
+                    <%=cm.cmsInput("site_name")%>
 
-      %>
-       <br />
-       <jsp:include page="noresults.jsp" >
-         <jsp:param name="fromRefine" value="<%=fromRefine%>" />
-       </jsp:include>
-       <%
-         return;
-     }
-       %>
-      <br />
-      <%=cm.cmsText("results_found_1")%>:
-      <strong>
-        <%=resultsCount%>
-      </strong>
-      <br />
-<%
-  // Prepare parameters for pagesize.jsp
-  Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
-  pageSizeFormFields.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
-  pageSizeFormFields.addElement("ascendency");    /*   is overriden & also pageSize is set to default           */
-  pageSizeFormFields.addElement("criteriaSearch");/*   to page "0" aka first page. */
-%>
-      <jsp:include page="pagesize.jsp">
-        <jsp:param name="guid" value="<%=guid%>"/>
-        <jsp:param name="pageName" value="<%=pageName%>"/>
-        <jsp:param name="pageSize" value="<%=formBean.getPageSize()%>"/>
-        <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(pageSizeFormFields)%>"/>
-      </jsp:include>
-<%
-  // Prepare the form parameters.
-  Vector filterSearch = new Vector();
-  filterSearch.addElement("sort");
-  filterSearch.addElement("ascendency");
-  filterSearch.addElement("criteriaSearch");
-  filterSearch.addElement("pageSize");
-%>
-      <br />
-      <div class="grey_rectangle">
-        <strong>
-          <%=cm.cmsText("refine_your_search")%>
-        </strong>
-        <form title="refine search results" name="criteriaSearch" method="get" onsubmit="return(check(<%=noCriteria%>));" action="">
-          <%=formBean.toFORMParam(filterSearch)%>
-          <label for="criteriaType" class="noshow"><%=cm.cms("criteria")%></label>
-          <select id="criteriaType" name="criteriaType" class="inputTextField" title="<%=cm.cms("criteria")%>">
-<%
-  if (showSourceDB)
-  {
-%>
-            <option value="<%=SpeciesSearchCriteria.CRITERIA_SOURCE_DB%>">
-              <%=cm.cms("database_source")%>
-            </option>
-<%
-   }
-   if (showName)
-   {
-%>
-            <option value="<%=SpeciesSearchCriteria.CRITERIA_ENGLISH_NAME%>">
-              <%=cm.cms("site_name")%>
-            </option>
-<%
-    }
-%>
-          </select>
-          <%=cm.cmsLabel("criteria")%>
-          <%=cm.cmsTitle("criteria")%>
-          <%=cm.cmsInput("database_source")%>
-          <%=cm.cmsInput("site_name")%>
+                    <label for="oper" class="noshow"><%=cm.cms("operator")%></label>
+                    <select id="oper" name="oper" title="<%=cm.cms("operator")%>">
+                      <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("is")%></option>
+                      <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("starts_with")%></option>
+                      <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
+                    </select>
+                    <%=cm.cmsLabel("operator")%>
+                    <%=cm.cmsInput("is")%>
+                    <%=cm.cmsInput("starts_with")%>
+                    <%=cm.cmsInput("contains")%>
 
-          <label for="oper" class="noshow"><%=cm.cms("operator")%></label>
-          <select id="oper" name="oper" class="inputTextField" title="<%=cm.cms("operator")%>">
-            <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("is")%></option>
-            <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("starts_with")%></option>
-            <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
-          </select>
-          <%=cm.cmsLabel("operator")%>
-          <%=cm.cmsInput("is")%>
-          <%=cm.cmsInput("starts_with")%>
-          <%=cm.cmsInput("contains")%>
+                    <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
+                    <input id="criteriaSearch" name="criteriaSearch" type="text" size="30" title="<%=cm.cms("filter_value")%>" />
+                    <%=cm.cmsLabel("filter_value")%>
+                    <%=cm.cmsTitle("filter_value")%>
 
-          <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
-          <input id="criteriaSearch" name="criteriaSearch" type="text" size="30" class="inputTextField" title="<%=cm.cms("filter_value")%>" />
-          <%=cm.cmsLabel("filter_value")%>
-          <%=cm.cmsTitle("filter_value")%>
-
-          <input id="submit" name="Submit" type="submit" value="<%=cm.cms("search")%>" class="inputTextField" title="<%=cm.cms("search")%>" />
-          <%=cm.cmsTitle("search")%>
-          <%=cm.cmsInput("search")%>
-        </form>
-<%
-  ro.finsiel.eunis.search.AbstractSearchCriteria[] criterias = formBean.toSearchCriteria();
-  if (criterias.length > 1)
-  {
-%>
-        <%=cm.cmsText("applied_filters_to_the_results_1")%>
-        <br />
-<%
-  }
-  for (int i = criterias.length - 1; i > 0; i--)
-  {
-    AbstractSearchCriteria criteria = criterias[i];
-    if (null != criteria && null != formBean.getCriteriaSearch())
-    {
-%>
-        <a title="<%=cm.cms("removefilter_title")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img src="images/mini/delete.jpg" alt="<%=cm.cms("delete")%>" border="0" style="vertical-align:middle" /></a>
-        <%=cm.cmsTitle("removefilter_title")%>
-        <%=cm.cmsAlt("delete")%>
-        <strong><%= i + ". " + criteria.toHumanString()%></strong>
-        <br />
-<%
-    }
-  }
-%>
-      </div>
-      <br />
-<%
-  // Prepare parameters for navigator.jsp
-  Vector navigatorFormFields = new Vector();  /*  The following fields are used by paginator.jsp, included below.      */
-  navigatorFormFields.addElement("pageSize"); /* NOTE* that I didn't add here currentPage since it is overriden in the */
-  navigatorFormFields.addElement("sort");     /* <form name="..."> in the navigator.jsp!                               */
-  navigatorFormFields.addElement("ascendency");
-  navigatorFormFields.addElement("criteriaSearch");
-%>
-      <jsp:include page="navigator.jsp">
-        <jsp:param name="pagesCount" value="<%=pagesCount%>"/>
-        <jsp:param name="pageName" value="<%=pageName%>"/>
-        <jsp:param name="guid" value="<%=guid%>"/>
-        <jsp:param name="currentPage" value="<%=formBean.getCurrentPage()%>"/>
-        <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>"/>
-        <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>"/>
-      </jsp:include>
-<%
-  // Compute the sort criteria
-  Vector sortURLFields = new Vector();      /* Used for sorting */
-  sortURLFields.addElement("pageSize");
-  sortURLFields.addElement("criteriaSearch");
-  String urlSortString = formBean.toURLParam(sortURLFields);
-  AbstractSortCriteria sortSourceDB = formBean.lookupSortCriteria(SpeciesSortCriteria.SORT_SOURCE_DB);
-  AbstractSortCriteria sortName = formBean.lookupSortCriteria(SpeciesSortCriteria.SORT_NAME);
-  //AbstractSortCriteria sortDesignType = formBean.lookupSortCriteria(SpeciesSortCriteria.SORT_DESIGNATION);
-  //AbstractSortCriteria sortSpecies = formBean.lookupSortCriteria(SpeciesSortCriteria.SORT_SPECIES);
-  AbstractSortCriteria sortLat = formBean.lookupSortCriteria(SpeciesSortCriteria.SORT_LAT);
-  AbstractSortCriteria sortLong = formBean.lookupSortCriteria(SpeciesSortCriteria.SORT_LONG);
-%>
-      <table summary="<%=cm.cms("search_results")%>" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse">
-        <tr>
-<%
-  if (showSourceDB)
-  {
-%>
-          <th class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SpeciesSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("source_data_set")%></a>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-<%
-  }
-  if (showDesignType)
-  {
-%>
-          <th class="resultHeader">
-            <%=cm.cmsText("designation_type")%>
-          </th>
-<%
-  }
-  if (showName)
-  {
-%>
-          <th class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SpeciesSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("site_name")%></a>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-<%
-  }
-  if (showCoord)
-  {
-%>
-          <th class="resultHeader" style="text-align : center; white-space:nowrap;">
-            <%=cm.cmsText("longitude")%>
-          </th>
-          <th class="resultHeader" style="text-align : center; white-space:nowrap;">
-            <%=cm.cmsText("latitude")%>
-          </th>
-<%
-  }
-  if (showSpecies)
-  {
-%>
-          <th width="13%" class="resultHeader">
-            <%=cm.cmsText("species_name")%>
-          </th>
-<%
-  }
-%>
-        </tr>
-<%
-  Iterator it = results.iterator();
-  int i = 0; String bgColor;
-  while (it.hasNext())
-  {
-    bgColor = (0 == (i++) % 2) ? "#EEEEEE" : "#FFFFFF";
-    SpeciesPersist site = (SpeciesPersist)it.next();
-%>
-        <tr>
-<%
-  if (showSourceDB)
-  {
-%>
-          <td class="resultCell" style="background-color : <%=bgColor%>;">
-            <strong>
-              <%=Utilities.formatString(SitesSearchUtility.translateSourceDB(site.getSourceDB()))%>
-            </strong>
-          </td>
-<%
-  }
-  if (showDesignType)
-  {
-%>
-          <td class="resultCell" style="background-color : <%=bgColor%>;">
-            <jsp:include page="sites-designations-detail.jsp">
-              <jsp:param name="idDesignation" value="<%=site.getIdDesignation()%>"/>
-              <jsp:param name="idGeoscope" value="<%=site.getIdGeoscope()%>"/>
-              <jsp:param name="sourceDB" value="<%=site.getSourceDB()%>"/>
-              <jsp:param name="bgcolor" value="<%=bgColor%>"/>
-              <jsp:param name="idSite" value="<%=site.getIdSite()%>"/>
-            </jsp:include>
-          </td>
-<%
-  }
-  if (showName)
-  {
-%>
-          <td class="resultCell" style="background-color : <%=bgColor%>;">
-            <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=Utilities.formatString(site.getName())%></a>
-            <%=cm.cmsTitle("open_site_factsheet")%>
-          </td>
-<%
-  }
-  if (showCoord)
-  {
-%>
-          <td class="resultCell" style="background-color : <%=bgColor%>; white-space : nowrap; text-align : center;">
-            <%=SitesSearchUtility.formatCoordinates(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec())%>&nbsp;
-          </td>
-          <td class="resultCell" style="background-color : <%=bgColor%>; white-space : nowrap; text-align : center;">
-            <%=SitesSearchUtility.formatCoordinates(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec())%>&nbsp;
-          </td>
-<%
-  }
-  if (showSpecies)
-  {
-%>
-          <td class="resultCell" style="background-color : <%=bgColor%>;">
-<%
+                    <input id="submit" name="Submit" type="submit" value="<%=cm.cms("search")%>" class="searchButton" title="<%=cm.cms("search")%>" />
+                    <%=cm.cmsTitle("search")%>
+                    <%=cm.cmsInput("search")%>
+                  </form>
+          <%
+            ro.finsiel.eunis.search.AbstractSearchCriteria[] criterias = formBean.toSearchCriteria();
+            if (criterias.length > 1)
+            {
+          %>
+                  <%=cm.cmsText("applied_filters_to_the_results_1")%>
+                  <br />
+          <%
+            }
+            for (int i = criterias.length - 1; i > 0; i--)
+            {
+              AbstractSearchCriteria criteria = criterias[i];
+              if (null != criteria && null != formBean.getCriteriaSearch())
+              {
+          %>
+                  <a title="<%=cm.cms("removefilter_title")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img src="images/mini/delete.jpg" alt="<%=cm.cms("delete")%>" border="0" style="vertical-align:middle" /></a>
+                  <%=cm.cmsTitle("removefilter_title")%>
+                  <%=cm.cmsAlt("delete")%>
+                  <strong><%= i + ". " + criteria.toHumanString()%></strong>
+                  <br />
+          <%
+              }
+            }
+          %>
+                </div>
+                <br />
+          <%
+            // Prepare parameters for navigator.jsp
+            Vector navigatorFormFields = new Vector();  /*  The following fields are used by paginator.jsp, included below.      */
+            navigatorFormFields.addElement("pageSize"); /* NOTE* that I didn't add here currentPage since it is overriden in the */
+            navigatorFormFields.addElement("sort");     /* <form name="..."> in the navigator.jsp!                               */
+            navigatorFormFields.addElement("ascendency");
+            navigatorFormFields.addElement("criteriaSearch");
+          %>
+                <jsp:include page="navigator.jsp">
+                  <jsp:param name="pagesCount" value="<%=pagesCount%>"/>
+                  <jsp:param name="pageName" value="<%=pageName%>"/>
+                  <jsp:param name="guid" value="<%=guid%>"/>
+                  <jsp:param name="currentPage" value="<%=formBean.getCurrentPage()%>"/>
+                  <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>"/>
+                  <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>"/>
+                </jsp:include>
+          <%
+            // Compute the sort criteria
+            Vector sortURLFields = new Vector();      /* Used for sorting */
+            sortURLFields.addElement("pageSize");
+            sortURLFields.addElement("criteriaSearch");
+            String urlSortString = formBean.toURLParam(sortURLFields);
+            AbstractSortCriteria sortSourceDB = formBean.lookupSortCriteria(SpeciesSortCriteria.SORT_SOURCE_DB);
+            AbstractSortCriteria sortName = formBean.lookupSortCriteria(SpeciesSortCriteria.SORT_NAME);
+            //AbstractSortCriteria sortDesignType = formBean.lookupSortCriteria(SpeciesSortCriteria.SORT_DESIGNATION);
+            //AbstractSortCriteria sortSpecies = formBean.lookupSortCriteria(SpeciesSortCriteria.SORT_SPECIES);
+            AbstractSortCriteria sortLat = formBean.lookupSortCriteria(SpeciesSortCriteria.SORT_LAT);
+            AbstractSortCriteria sortLong = formBean.lookupSortCriteria(SpeciesSortCriteria.SORT_LONG);
+          %>
+                <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                  <thead>
+                    <tr>
+          <%
+            if (showSourceDB)
+            {
+          %>
+                      <th scope="col">
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SpeciesSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("source_data_set")%></a>
+                        <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </th>
+          <%
+            }
+            if (showDesignType)
+            {
+          %>
+                      <th scope="col">
+                        <%=cm.cmsText("designation_type")%>
+                      </th>
+          <%
+            }
+            if (showName)
+            {
+          %>
+                      <th scope="col">
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SpeciesSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("site_name")%></a>
+                        <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </th>
+          <%
+            }
+            if (showCoord)
+            {
+          %>
+                      <th scope="col" style="text-align : center; white-space:nowrap;">
+                        <%=cm.cmsText("longitude")%>
+                      </th>
+                      <th scope="col" style="text-align : center; white-space:nowrap;">
+                        <%=cm.cmsText("latitude")%>
+                      </th>
+          <%
+            }
+            if (showSpecies)
+            {
+          %>
+                      <th scope="col">
+                        <%=cm.cmsText("species_name")%>
+                      </th>
+          <%
+            }
+          %>
+                    </tr>
+                  </thead>
+                  <tbody>
+          <%
+            Iterator it = results.iterator();
+            int i = 0;
+            while (it.hasNext())
+            {
+              String cssClass = i++ % 2 == 0 ? " class=\"zebraeven\"" : "";
+              SpeciesPersist site = (SpeciesPersist)it.next();
+          %>
+                  <tr<%=cssClass%>>
+          <%
+            if (showSourceDB)
+            {
+          %>
+                    <td>
+                      <%=Utilities.formatString(SitesSearchUtility.translateSourceDB(site.getSourceDB()))%>
+                    </td>
+          <%
+            }
+            if (showDesignType)
+            {
+          %>
+                    <td>
+                      <jsp:include page="sites-designations-detail.jsp">
+                        <jsp:param name="idDesignation" value="<%=site.getIdDesignation()%>"/>
+                        <jsp:param name="idGeoscope" value="<%=site.getIdGeoscope()%>"/>
+                        <jsp:param name="sourceDB" value="<%=site.getSourceDB()%>"/>
+                        <jsp:param name="idSite" value="<%=site.getIdSite()%>"/>
+                      </jsp:include>
+                    </td>
+          <%
+            }
+            if (showName)
+            {
+          %>
+                    <td>
+                      <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=Utilities.formatString(site.getName())%></a>
+                      <%=cm.cmsTitle("open_site_factsheet")%>
+                    </td>
+          <%
+            }
+            if (showCoord)
+            {
+          %>
+                    <td style="white-space : nowrap; text-align : center;">
+                      <%=SitesSearchUtility.formatCoordinates(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec())%>&nbsp;
+                    </td>
+                    <td style="white-space : nowrap; text-align : center;">
+                      <%=SitesSearchUtility.formatCoordinates(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec())%>&nbsp;
+                    </td>
+          <%
+            }
+            if (showSpecies)
+            {
+          %>
+                    <td>
+          <%
 //  Vector speciesURLFields = new Vector();
 //  speciesURLFields.addElement("criteriaSearch");
 //  String searchURL = formBean.toURLParam(speciesURLFields) + "&idNatureObject=" + site.getIdNatureObject();
-    Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
-    Integer idNatureObject = site.getIdNatureObject();
-    // List of species attributes.
-    List resultsSpecies = new SpeciesDomain().findSpeciesFromSite(new SpeciesSearchCriteria(searchAttribute,
-                                                                                formBean.getSearchString(),
-                                                                                relationOp),
-                                                                         SessionManager.getShowEUNISInvalidatedSpecies(),
-                                                                         idNatureObject,
-                                                                         searchAttribute, source);
-    if (resultsSpecies != null && resultsSpecies.size() > 0)
-    {
-%>
-            <table border="1" cellspacing="1" cellpadding="1" style="border-collapse: collapse" summary="<%=cm.cms("species_from_site")%>">
-<%
-      for(int ii=0;ii<resultsSpecies.size();ii++)
-      {
-        TableColumns tableColumns = (TableColumns) resultsSpecies.get(ii);
-        String scientificName = (String)tableColumns.getColumnsValues().get(0);
-        Integer idSpecies = (Integer)tableColumns.getColumnsValues().get(1);
-        Integer idSpeciesLink = (Integer)tableColumns.getColumnsValues().get(2);
-%>
-              <tr>
-                <td>
-                  <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=idSpecies%>&amp;idSpeciesLink=<%=idSpeciesLink%>"><%=scientificName%></a>
-                  <%=cm.cmsTitle("open_species_factsheet")%>
-                </td>
-              </tr>
-<%
-      }
-%>
-            </table>
-<%
-  }
-%>
-          </td>
-<%
-  }
-%>
-        </tr>
-<%
-  }
-%>
-        <tr>
-<%
-  if (showSourceDB)
-  {
-%>
-          <th class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SpeciesSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("source_data_set")%></a>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-<%
-  }
-  if (showDesignType)
-  {
-%>
-          <th class="resultHeader">
-            <%=cm.cmsText("designation_type")%>
-          </th>
-<%
-  }
-  if (showName)
-  {
-%>
-          <th class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SpeciesSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("site_name")%></a>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-<%
-  }
-  if (showCoord)
-  {
-%>
-          <th class="resultHeader" style="text-align : center; white-space:nowrap;">
-            <%=cm.cmsText("longitude")%>
-          </th>
-          <th class="resultHeader" style="text-align : center; white-space:nowrap;">
-            <%=cm.cmsText("latitude")%>
-          </th>
-<%
-  }
-  if (showSpecies)
-  {
-%>
-          <th width="13%" class="resultHeader">
-            <%=cm.cmsText("species_name")%>
-          </th>
-<%
-  }
-%>
-        </tr>
-      </table>
-      <jsp:include page="navigator.jsp">
-        <jsp:param name="pagesCount" value="<%=pagesCount%>"/>
-        <jsp:param name="pageName" value="<%=pageName%>"/>
-        <jsp:param name="guid" value="<%=guid + 1%>"/>
-        <jsp:param name="currentPage" value="<%=formBean.getCurrentPage()%>"/>
-        <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>"/>
-        <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>"/>
-      </jsp:include>
+              Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
+              Integer idNatureObject = site.getIdNatureObject();
+              // List of species attributes.
+              List resultsSpecies = new SpeciesDomain().findSpeciesFromSite(new SpeciesSearchCriteria(searchAttribute,
+                                                                                          formBean.getSearchString(),
+                                                                                          relationOp),
+                                                                                   SessionManager.getShowEUNISInvalidatedSpecies(),
+                                                                                   idNatureObject,
+                                                                                   searchAttribute, source);
+              if (resultsSpecies != null && resultsSpecies.size() > 0)
+              {
+          %>
+                      <table summary="<%=cm.cms("species_from_site")%>">
+          <%
+                for(int ii=0;ii<resultsSpecies.size();ii++)
+                {
+                  TableColumns tableColumns = (TableColumns) resultsSpecies.get(ii);
+                  String scientificName = (String)tableColumns.getColumnsValues().get(0);
+                  Integer idSpecies = (Integer)tableColumns.getColumnsValues().get(1);
+                  Integer idSpeciesLink = (Integer)tableColumns.getColumnsValues().get(2);
+          %>
+                        <tr>
+                          <td>
+                            <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=idSpecies%>&amp;idSpeciesLink=<%=idSpeciesLink%>"><%=scientificName%></a>
+                            <%=cm.cmsTitle("open_species_factsheet")%>
+                          </td>
+                        </tr>
+          <%
+                }
+          %>
+                      </table>
+          <%
+            }
+          %>
+                    </td>
+          <%
+            }
+          %>
+                  </tr>
+          <%
+            }
+          %>
+                </tbody>
+                <thead>
+                  <tr>
+          <%
+            if (showSourceDB)
+            {
+          %>
+                    <th scope="col">
+                      <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SpeciesSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("source_data_set")%></a>
+                      <%=cm.cmsTitle("sort_results_on_this_column")%>
+                    </th>
+          <%
+            }
+            if (showDesignType)
+            {
+          %>
+                    <th scope="col">
+                      <%=cm.cmsText("designation_type")%>
+                    </th>
+          <%
+            }
+            if (showName)
+            {
+          %>
+                    <th scope="col">
+                      <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SpeciesSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("site_name")%></a>
+                      <%=cm.cmsTitle("sort_results_on_this_column")%>
+                    </th>
+          <%
+            }
+            if (showCoord)
+            {
+          %>
+                    <th scope="col" style="text-align : center; white-space:nowrap;">
+                      <%=cm.cmsText("longitude")%>
+                    </th>
+                    <th scope="col" style="text-align : center; white-space:nowrap;">
+                      <%=cm.cmsText("latitude")%>
+                    </th>
+          <%
+            }
+            if (showSpecies)
+            {
+          %>
+                      <th scope="col">
+                        <%=cm.cmsText("species_name")%>
+                      </th>
+          <%
+            }
+          %>
+                    </tr>
+                  </thead>
+                </table>
+                <jsp:include page="navigator.jsp">
+                  <jsp:param name="pagesCount" value="<%=pagesCount%>"/>
+                  <jsp:param name="pageName" value="<%=pageName%>"/>
+                  <jsp:param name="guid" value="<%=guid + 1%>"/>
+                  <jsp:param name="currentPage" value="<%=formBean.getCurrentPage()%>"/>
+                  <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>"/>
+                  <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>"/>
+                </jsp:include>
 
-      <%=cm.cmsMsg("sites_species-result_title")%>
-      <%=cm.br()%>
-      <%=cm.cmsMsg("search_results")%>
-      <%=cm.br()%>
-      <%=cm.cmsMsg("species_from_site")%>
-      <jsp:include page="footer.jsp">
-        <jsp:param name="page_name" value="sites-species-result.jsp" />
-      </jsp:include>
-    </div>
-    </div>
+                <%=cm.cmsMsg("sites_species-result_title")%>
+                <%=cm.br()%>
+                <%=cm.cmsMsg("search_results")%>
+                <%=cm.br()%>
+                <%=cm.cmsMsg("species_from_site")%>
+                <jsp:include page="footer.jsp">
+                  <jsp:param name="page_name" value="sites-species-result.jsp" />
+                </jsp:include>
+<!-- END MAIN CONTENT -->
+              </div>
+            </div>
+          </div>
+          <!-- end of main content block -->
+          <!-- start of the left (by default at least) column -->
+          <div id="portal-column-one">
+            <div class="visualPadding">
+              <jsp:include page="inc_column_left.jsp" />
+            </div>
+          </div>
+          <!-- end of the left (by default at least) column -->
+        </div>
+        <!-- end of the main and left columns -->
+        <!-- start of right (by default at least) column -->
+        <div id="portal-column-two">
+          <div class="visualPadding">
+            <jsp:include page="inc_column_right.jsp" />
+          </div>
+        </div>
+        <!-- end of the right (by default at least) column -->
+        <div class="visualClear"><!-- --></div>
+      </div>
+      <!-- end column wrapper -->
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
     </div>
   </body>
 </html>
-<%
-//  System.out.println("search took:" + Utilities.stopTimer());
-%>

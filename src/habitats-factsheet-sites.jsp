@@ -23,8 +23,8 @@
   HabitatsFactsheet factsheet = null;
   factsheet = new HabitatsFactsheet(idHabitat);
   WebContentManagement cm = SessionManager.getWebContent();
-  try {
-
+  try
+  {
     String isGoodHabitat = " IF(TRIM(A.CODE_2000) <> '',RIGHT(A.CODE_2000,2),1) <> IF(TRIM(A.CODE_2000) <> '','00',2) AND IF(TRIM(A.CODE_2000) <> '',LENGTH(A.CODE_2000),1) = IF(TRIM(A.CODE_2000) <> '',4,1) ";
     // Sites for which this habitat is recorded.
     List sites = new SitesByNatureObjectDomain().findCustom("SELECT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN " +
@@ -55,130 +55,134 @@
       int maxSitesPerMap = Utilities.checkedStringToInt( application.getInitParameter( "MAX_SITES_PER_MAP" ), 2000 );
       if ( sites.size() < maxSitesPerMap )
       {
-        for(int i = 0; i < sites.size(); i++) {
+        for(int i = 0; i < sites.size(); i++)
+        {
           SitesByNatureObjectPersist site = (SitesByNatureObjectPersist) sites.get(i);
           ids += "'" + site.getIDSite() + "'";
           if(i < sites.size() - 1) ids += ",";
         }
 %>
 
-<form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
-  <input type="hidden" name="sites" value="<%=ids%>" />
-  <input type="submit" name="Show map" id="ShowMap" value="<%=cm.cms("show_map")%>" title="<%=cm.cms("show_map")%>" class="inputTextField" />
-  <%=cm.cmsTitle("show_map")%>
-</form>
+  <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
+    <input type="hidden" name="sites" value="<%=ids%>" />
+    <input type="submit" name="Show map" id="ShowMap" value="<%=cm.cms("show_map")%>" title="<%=cm.cms("show_map")%>" class="standardButton" />
+    <%=cm.cmsTitle("show_map")%>
+  </form>
 <%
       }
 %>
-<br />
-<div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitats_factsheet_sitesForHabitatRecorded")%></div>
-<table summary="<%=cm.cms("habitat_sites")%>" width="100%" border="0" cellspacing="0" cellpadding="0" id="sites" class="sortable">
-  <tr valign="middle">
-    <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <strong>
-        <%=cm.cmsText("site_code")%>
-        <%=cm.cmsTitle("sort_results_on_this_column")%>
-      </strong>
-    </th>
-    <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <strong>
-        <%=cm.cmsText("source_data_set")%>
-        <%=cm.cmsTitle("sort_results_on_this_column")%>
-      </strong>
-    </th>
-    <th width="20%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <strong>
-        <%=cm.cmsText("country")%>
-        <%=cm.cmsTitle("sort_results_on_this_column")%>
-      </strong>
-    </th>
-    <th width="50%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <strong>
-        <%=cm.cmsText("site_name")%>
-        <%=cm.cmsTitle("sort_results_on_this_column")%>
-      </strong>
-    </th>
-  </tr>
-  <%
-    // List of sites for which this habitat is recorded.
-    for(int i = 0; i < sites.size(); i++) {
-      SitesByNatureObjectPersist site = (SitesByNatureObjectPersist) sites.get(i);
-  %>
-  <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-    <td><%=Utilities.formatString(site.getIDSite())%></td>
-    <td><strong><%=Utilities.formatString(SitesSearchUtility.translateSourceDB(site.getSourceDB()))%></strong></td>
-    <td><%=Utilities.formatString(site.getAreaNameEn())%></td>
-    <%
-    String SiteName = Utilities.formatString(site.getName());
-    SiteName = SiteName.replaceAll("&","&amp;");
-    %>
-    <td>
-      <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIDSite()%>"><%=SiteName%></a>
-      <%=cm.cmsTitle("open_site_factsheet")%>
-    </td>
-  </tr>
-  <%
-    }
-  %>
-</table>
-<%=cm.cmsMsg("habitat_sites")%>
+  <br />
+  <h2>
+    <%=cm.cmsText("habitats_factsheet_sitesForHabitatRecorded")%>
+  </h2>
+  <table summary="<%=cm.cms("habitat_sites")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th width="15%">
+          <%=cm.cmsText("site_code")%>
+        </th>
+        <th width="15%">
+          <%=cm.cmsText("source_data_set")%>
+        </th>
+        <th width="20%">
+          <%=cm.cmsText("country")%>
+        </th>
+        <th width="50%">
+          <%=cm.cmsText("site_name")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
-  if(null != sitesForSubtypes && !sitesForSubtypes.isEmpty()) {
+      // List of sites for which this habitat is recorded.
+      for(int i = 0; i < sites.size(); i++)
+      {
+        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+        SitesByNatureObjectPersist site = (SitesByNatureObjectPersist) sites.get(i);
+        String SiteName = Utilities.formatString(site.getName());
+        SiteName = SiteName.replaceAll("&","&amp;");
 %>
-<br />
-<div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitats_factsheet_sitesForSubtypes")%></div>
-<table summary="<%=cm.cms("habitat_related_sites")%>" width="100%" border="0" cellspacing="0" cellpadding="0" id="sites2" class="sortable">
-  <tr>
-    <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <strong>
-        <%=cm.cmsText("site_code")%>
-        <%=cm.cmsTitle("sort_results_on_this_column")%>
-      </strong>
-    </th>
-    <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <strong>
-        <%=cm.cmsText("source_data_set")%>
-        <%=cm.cmsTitle("sort_results_on_this_column")%>
-      </strong>
-    </th>
-    <th width="20%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <strong>
-        <%=cm.cmsText("country")%>
-        <%=cm.cmsTitle("sort_results_on_this_column")%>
-      </strong>
-    </th>
-    <th width="50%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <strong>
-        <%=cm.cmsText("site_name")%>
-        <%=cm.cmsTitle("sort_results_on_this_column")%>
-      </strong>
-    </th>
-  </tr>
-  <%
-    // List of sites for habitat subtypes
-    for(int i = 0; i < sitesForSubtypes.size(); i++) {
-      SitesByNatureObjectPersist site = (SitesByNatureObjectPersist) sitesForSubtypes.get(i);
-  %>
-  <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-    <td><%=Utilities.formatString(site.getIDSite())%></td>
-    <td><%=Utilities.formatString(SitesSearchUtility.translateSourceDB(site.getSourceDB()))%></td>
-    <td><%=Utilities.formatString(site.getAreaNameEn())%></td>
-    <%
-    String SiteName = Utilities.formatString(site.getName());
-    SiteName = SiteName.replaceAll("&","&amp;");
-    %>
-    <td>
-      <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIDSite()%>"><%=SiteName%></a>
-      <%=cm.cmsTitle("open_site_factsheet")%>
-    </td>
-  </tr>
-  <%
-    }
-  %>
-</table>
-<%=cm.br()%>
-<%=cm.cmsMsg("habitat_related_sites")%>
-<%=cm.br()%>
+    <tr<%=cssClass%>>
+      <td>
+        <%=Utilities.formatString(site.getIDSite())%>
+      </td>
+      <td>
+        <strong>
+          <%=Utilities.formatString(SitesSearchUtility.translateSourceDB(site.getSourceDB()))%>
+        </strong>
+      </td>
+      <td>
+        <%=Utilities.formatString(site.getAreaNameEn())%>
+      </td>
+      <td>
+        <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIDSite()%>"><%=SiteName%></a>
+        <%=cm.cmsTitle("open_site_factsheet")%>
+      </td>
+    </tr>
+<%
+      }
+%>
+    </tbody>
+  </table>
+  <%=cm.cmsMsg("habitat_sites")%>
+<%
+      if(null != sitesForSubtypes && !sitesForSubtypes.isEmpty())
+      {
+%>
+  <br />
+  <h2>
+    <%=cm.cmsText("habitats_factsheet_sitesForSubtypes")%>
+  </h2>
+  <table summary="<%=cm.cms("habitat_related_sites")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th width="15%">
+          <%=cm.cmsText("site_code")%>
+        </th>
+        <th width="15%">
+          <%=cm.cmsText("source_data_set")%>
+        </th>
+        <th width="20%">
+          <%=cm.cmsText("country")%>
+        </th>
+        <th width="50%">
+          <%=cm.cmsText("site_name")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+<%
+        // List of sites for habitat subtypes
+        for(int i = 0; i < sitesForSubtypes.size(); i++)
+        {
+          String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+          SitesByNatureObjectPersist site = (SitesByNatureObjectPersist) sitesForSubtypes.get(i);
+          String SiteName = Utilities.formatString(site.getName());
+          SiteName = SiteName.replaceAll("&","&amp;");
+%>
+      <tr<%=cssClass%>>
+        <td>
+          <%=Utilities.formatString(site.getIDSite())%>
+        </td>
+        <td>
+          <%=Utilities.formatString(SitesSearchUtility.translateSourceDB(site.getSourceDB()))%>
+        </td>
+        <td>
+          <%=Utilities.formatString(site.getAreaNameEn())%>
+        </td>
+        <td>
+          <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIDSite()%>"><%=SiteName%></a>
+          <%=cm.cmsTitle("open_site_factsheet")%>
+        </td>
+      </tr>
+<%
+        }
+%>
+    </tbody>
+  </table>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("habitat_related_sites")%>
+  <%=cm.br()%>
 <%
       }
     }

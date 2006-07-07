@@ -295,7 +295,7 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
           &nbsp;&nbsp;<label for="roleName"><%=cm.cmsText("roles_add_17")%></label>
           </td>
           <td>
-           <select id="roleName" name="roleName" class="inputTextField" style="border-width:1px" onchange="MM_jumpMenuRoles('parent',this,0,'<%=tab1%>','<%=tab2%>')"  title="<%=cm.cms("roles_add_18")%>">
+           <select id="roleName" name="roleName" style="border-width:1px" onchange="MM_jumpMenuRoles('parent',this,0,'<%=tab1%>','<%=tab2%>')"  title="<%=cm.cms("roles_add_18")%>">
            <option value="selectRoleName" selected="selected"><%=cm.cms("roles_add_19")%></option>
             <%
             try
@@ -330,7 +330,7 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
           &nbsp;&nbsp;<label for="roleName1"><%=cm.cmsText("role_name")%>(*):</label>
           </td>
           <td>
-           &nbsp;<input class="inputTextField" title="<%=cm.cms("role_name")%>" alt="<%=cm.cms("role_name")%>" type="text" id="roleName1" name="roleName" size="50" value="" onchange="RoleExist();" />
+           &nbsp;<input title="<%=cm.cms("role_name")%>" alt="<%=cm.cms("role_name")%>" type="text" id="roleName1" name="roleName" size="50" value="" onchange="RoleExist();" />
            <%=cm.cmsTitle("role_name")%>
           </td>
         </tr>
@@ -351,7 +351,7 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
           &nbsp;&nbsp;<label for="newRoleName"><%=cm.cmsText("role_name")%>:</label>&nbsp;
           </td>
           <td>
-           <input class="inputTextField" title="<%=cm.cms("role_name")%>" alt="<%=cm.cms("role_name")%>" type="text" id="newRoleName" name="newRoleName" size ="50" value="<%=name%>" onchange="NewRoleExist();" />
+           <input title="<%=cm.cms("role_name")%>" alt="<%=cm.cms("role_name")%>" type="text" id="newRoleName" name="newRoleName" size ="50" value="<%=name%>" onchange="NewRoleExist();" />
            <%=cm.cmsTitle("role_name")%>
           </td>
         </tr>
@@ -363,7 +363,7 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
           &nbsp;&nbsp;<label for="description"><%=cm.cmsText("description")%>:</label>
           </td>
           <td>
-          <textarea title="<%=cm.cms("description")%>" id="description" name="description" cols="50" rows="5" class="inputTextField"><%=description%></textarea>
+          <textarea title="<%=cm.cms("description")%>" id="description" name="description" cols="50" rows="5"><%=description%></textarea>
           <%=cm.cmsTitle("description")%>
           </td>
         </tr>
@@ -430,20 +430,20 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
       if(users_operation != null && users_operation.equalsIgnoreCase("edit"))
       {
     %>
-    <input id="input1" type="submit" value="<%=cm.cms("edit_role")%>" name="submit" onclick="document.eunis.operation.value='updateRole';" class="inputTextField"  title="<%=cm.cms("edit_role")%>" />
+    <input id="input1" type="submit" value="<%=cm.cms("edit_role")%>" name="submit" onclick="document.eunis.operation.value='updateRole';" title="<%=cm.cms("edit_role")%>" />
     <%=cm.cmsTitle("edit_role")%>
     <%=cm.cmsInput("edit_role")%> &nbsp;&nbsp;
     <%
       } else
       {
     %>
-    <input id="input2" type="submit" value="<%=cm.cms("add_role")%>" name="submit" onclick="document.eunis.operation.value='submit';" class="inputTextField"   title="<%=cm.cms("add_role")%>" />
+    <input id="input2" type="submit" value="<%=cm.cms("add_role")%>" name="submit" onclick="document.eunis.operation.value='submit';" title="<%=cm.cms("add_role")%>" />
     <%=cm.cmsTitle("add_role")%>
     <%=cm.cmsInput("add_role")%>&nbsp;&nbsp;
     <%
       }
     %>
-    <input id="input3" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="inputTextField"  title="<%=cm.cms("reset")%>" />
+    <input id="input3" type="reset" value="<%=cm.cms("reset")%>" name="Reset" title="<%=cm.cms("reset")%>" />
     <%=cm.cmsTitle("reset")%>
     <%=cm.cmsInput("reset")%>
   </td>

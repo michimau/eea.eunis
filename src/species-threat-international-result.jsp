@@ -19,14 +19,10 @@
                  ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.search.save_criteria.SetVectorsForSaveCriteria"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.internationalthreatstatus.InternationalthreatstatusBean" scope="request">
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
-<jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
-<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-  <head>
-  <jsp:include page="header-page.jsp" />
-  <script language="JavaScript" type="text/javascript" src="script/species-result.js"></script>
 <%
    String idGroup = (formBean.getIdGroup() == null ? "" : formBean.getIdGroup());
    // If user has right to save this search and he want to save it
@@ -116,504 +112,545 @@
   reportFields.addElement("oper");
   reportFields.addElement("criteriaType");
   String tsvLink = "javascript:openTSVDownload('reports/species/tsv-species-threat-international.jsp?" + formBean.toURLParam(reportFields) + "')";
+  WebContentManagement cm = SessionManager.getWebContent();
+  String location = "home#index.jsp,species#species.jsp,international_threat_status#species-threat-international.jsp,results";
+  if (results.isEmpty())
+  {
+    boolean fromRefine = formBean.getCriteriaSearch() != null && formBean.getCriteriaSearch().length > 0;
 %>
-    <%
-      WebContentManagement cm = SessionManager.getWebContent();
-    %>
+      <jsp:forward page="emptyresults.jsp">
+        <jsp:param name="location" value="<%=location%>" />
+        <jsp:param name="fromRefine" value="<%=fromRefine%>" />
+      </jsp:forward>
+<%
+  }
+%>
+<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
+  <head>
+  <jsp:include page="header-page.jsp" />
+  <script language="JavaScript" type="text/javascript" src="script/species-result.js"></script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("species_threat-international-result_title")%>
     </title>
   </head>
-  <body style="background-color:#ffffff">
-  <div id="outline">
-  <div id="alignment">
-  <div id="content">
-    <jsp:include page="header-dynamic.jsp">
-      <jsp:param name="location" value="home#index.jsp,species#species.jsp,international_threat_status#species-threat-international.jsp,results" />
-      <jsp:param name="helpLink" value="species-help.jsp" />
-      <jsp:param name="downloadLink" value="<%=tsvLink%>" />
-    </jsp:include>
-<%--      <jsp:param name="printLink" value="<%=pdfLink%>"/>--%>
+  <body>
+    <div id="visual-portal-wrapper">
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
+      <!-- The wrapper div. It contains the three columns. -->
+      <div id="portal-columns">
+        <!-- start of the main and left columns -->
+        <div id="visual-column-wrapper">
+          <!-- start of main content block -->
+          <div id="portal-column-content">
+            <div id="content">
+              <div class="documentContent" id="region-content">
+                <a name="documentContent"></a>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure">Document Actions</h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="Print this page"
+                            title="Print this page" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="Toggle full screen mode"
+                             title="Toggle full screen mode" /></a>
+                    </li>
+                  </ul>
+                </div>
+                <br clear="all" />
+<!-- MAIN CONTENT -->
+                <jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="<%=location%>" />
+                  <jsp:param name="helpLink" value="species-help.jsp" />
+                  <jsp:param name="downloadLink" value="<%=tsvLink%>" />
+                </jsp:include>
+            <%--      <jsp:param name="printLink" value="<%=pdfLink%>"/>--%>
 
-    <h1>
-      <%=cm.cmsText("species_international_threat_status")%>
-    </h1>
-    <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td>
-            <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
-               <% // Description of this search
-                 String descr = formBean.getStringMain();
-               %>
-              <tr>
-                <td>
-                  <%=cm.cmsText("species_threat-international-result_02")%>
-                  <strong>
-                  <%=Utilities.treatURLAmp(descr)%>
-                  </strong>    
-                </td>
-              </tr>
-            </table>
-<%
-    if (results.isEmpty())
-    {
-       boolean fromRefine = false;
-       if(formBean != null && formBean.getCriteriaSearch() != null && formBean.getCriteriaSearch().length > 0)
-         fromRefine = true;
+                <h1>
+                  <%=cm.cmsText("species_international_threat_status")%>
+                </h1>
+                <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td>
+                        <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
+                           <% // Description of this search
+                             String descr = formBean.getStringMain();
+                           %>
+                          <tr>
+                            <td>
+                              <%=cm.cmsText("species_threat-international-result_02")%>
+                              <strong>
+                              <%=Utilities.treatURLAmp(descr)%>
+                              </strong>
+                            </td>
+                          </tr>
+                        </table>
+                      <br />
+                      <%=cm.cmsText("results_found_1")%>: <strong><%=resultsCount%></strong>
+                      <%
+                        // Prepare parameters for pagesize.jsp
+                        Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
+                        pageSizeFormFields.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
+                        pageSizeFormFields.addElement("ascendency");    /*   is overriden & also pageSize is set to default           */
+                        pageSizeFormFields.addElement("criteriaSearch");/*   to page '0' aka first page. */
+                      %>
+                      <jsp:include page="pagesize.jsp">
+                        <jsp:param name="guid" value="<%=guid%>" />
+                        <jsp:param name="pageName" value="<%=pageName%>" />
+                        <jsp:param name="pageSize" value="<%=formBean.getPageSize()%>" />
+                        <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(pageSizeFormFields)%>" />
+                      </jsp:include>
+            <%
+                    // Prepare the form parameters.
+                    Vector filterSearch = new Vector();
+                    filterSearch.addElement("sort");
+                    filterSearch.addElement("ascendency");
+                    filterSearch.addElement("criteriaSearch");
+                    filterSearch.addElement("pageSize");
+            %>
+                    <br />
+                    <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#EEEEEE">
+                      <tr>
+                        <td>
+                            <%=cm.cmsText("refine_your_search")%>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <form name="refineSearch" method="get" onsubmit="return(validateRefineForm(<%=noCriteria%>));" action="" >
+                          <%=formBean.toFORMParam(filterSearch)%>
+                            <label for="select1" class="noshow"><%=cm.cms("criteria")%></label>
+                              <%
+                                  if (!showGroup || !idGroup.equalsIgnoreCase("-1"))
+                                  {
+                              %>
+                                    <input type="hidden" name="criteriaType" value="<%=InternationalthreatstatusSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" />
+                              <%
+                                  }
+                              %>
 
-      %>
-       <jsp:include page="noresults.jsp" >
-         <jsp:param name="fromRefine" value="<%=fromRefine%>" />
-       </jsp:include>
-       <%
-         return;
-     }
-       %>
-          <br />
-          <%=cm.cmsText("results_found_1")%>: <strong><%=resultsCount%></strong>
-          <%
-            // Prepare parameters for pagesize.jsp
-            Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
-            pageSizeFormFields.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
-            pageSizeFormFields.addElement("ascendency");    /*   is overriden & also pageSize is set to default           */
-            pageSizeFormFields.addElement("criteriaSearch");/*   to page '0' aka first page. */
-          %>
-          <jsp:include page="pagesize.jsp">
-            <jsp:param name="guid" value="<%=guid%>" />
-            <jsp:param name="pageName" value="<%=pageName%>" />
-            <jsp:param name="pageSize" value="<%=formBean.getPageSize()%>" />
-            <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(pageSizeFormFields)%>" />
-          </jsp:include>
-<%
-        // Prepare the form parameters.
-        Vector filterSearch = new Vector();
-        filterSearch.addElement("sort");
-        filterSearch.addElement("ascendency");
-        filterSearch.addElement("criteriaSearch");
-        filterSearch.addElement("pageSize");
-%>
-        <br />
-        <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td style="background-color:#EEEEEE">
-                <%=cm.cmsText("refine_your_search")%>
-            </td>
-          </tr>
-          <tr>
-            <td style="background-color:#EEEEEE">
-              <form name="refineSearch" method="get" onsubmit="return(validateRefineForm(<%=noCriteria%>));" action="" >
-              <%=formBean.toFORMParam(filterSearch)%>
-                <label for="select1" class="noshow"><%=cm.cms("criteria")%></label>
-                  <%
-                      if (!showGroup || !idGroup.equalsIgnoreCase("-1"))
-                      {
-                  %>
-                        <input type="hidden" name="criteriaType" value="<%=InternationalthreatstatusSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" />
-                  <%
-                      }
-                  %>
-
-                <select id="select1" title="<%=cm.cms("criteria")%>" name="criteriaType" class="inputTextField" <%=(showGroup && idGroup.equalsIgnoreCase("-1") ? "" : "disabled=\"disabled\"")%>>
-                  <%
-                      if (showGroup && idGroup.equalsIgnoreCase("-1"))
-                      {
-                  %>
-                    <option value="<%=InternationalthreatstatusSearchCriteria.CRITERIA_GROUP%>">
-                        <%=cm.cms("group")%>
-                    </option>
-                    <%
+                            <select id="select1" title="<%=cm.cms("criteria")%>" name="criteriaType" <%=(showGroup && idGroup.equalsIgnoreCase("-1") ? "" : "disabled=\"disabled\"")%>>
+                              <%
+                                  if (showGroup && idGroup.equalsIgnoreCase("-1"))
+                                  {
+                              %>
+                                <option value="<%=InternationalthreatstatusSearchCriteria.CRITERIA_GROUP%>">
+                                    <%=cm.cms("group")%>
+                                </option>
+                                <%
+                                    }
+                              %>
+                              <option value="<%=InternationalthreatstatusSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected">
+                                  <%=cm.cms("scientific_name")%>
+                              </option>
+                            </select>
+                            <%=cm.cmsLabel("criteria")%>
+                            <%=cm.cmsTitle("criteria")%>
+                            <label for="select2" class="noshow"><%=cm.cms("operator")%></label>
+                            <select id="select2" title="<%=cm.cms("operator")%>" name="oper">
+                              <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
+                                  <%=cm.cms("is")%>
+                              </option>
+                              <option value="<%=Utilities.OPERATOR_STARTS%>">
+                                  <%=cm.cms("starts_with")%>
+                              </option>
+                              <option value="<%=Utilities.OPERATOR_CONTAINS%>">
+                                  <%=cm.cms("contains")%>
+                              </option>
+                            </select>
+                            <%=cm.cmsLabel("operator")%>
+                            <%=cm.cmsTitle("operator")%>
+                            <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
+                            <input id="criteriaSearch" title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" name="criteriaSearch" type="text" size="30" />
+                            <%=cm.cmsLabel("filter_value")%>
+                            <%=cm.cmsTitle("filter_value")%>
+                            <input id="refine" title="<%=cm.cms("search")%>" class="searchButton" type="submit" name="Submit" value="<%=cm.cms("search")%>" />
+                            <%=cm.cmsTitle("search")%>
+                            <%=cm.cmsInput("search")%>
+                          </form>
+                        </td>
+                      </tr>
+                      <%-- This is the code which shows the search filters --%>
+                      <%
+                        ro.finsiel.eunis.search.AbstractSearchCriteria[] criterias = formBean.toSearchCriteria();
+                      %>
+                      <%
+                        if (criterias.length > 1)
+                        {
+                      %>
+                      <tr>
+                        <td>
+                          <%=cm.cmsText("applied_filters_to_the_results")%>:
+                        </td>
+                      </tr>
+                     <%
                         }
+                        for (int i = criterias.length - 1; i > 0; i--)
+                        {
+                          AbstractSearchCriteria criteria = criterias[i];
+                          if (null != criteria && null != formBean.getCriteriaSearch())
+                          {
+                        %>
+                          <tr>
+                            <td>
+                              <a title="<%=cm.cms("delete_criteria")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img alt="<%=cm.cms("delete_criteria")%>" src="images/mini/delete.jpg" border="0" style="vertical-align:middle" /></a><%=cm.cmsTitle("delete_criteria")%>&nbsp;&nbsp;<strong class="linkDarkBg"><%= i + ". " + criteria.toHumanString()%></strong>
+                            </td>
+                          </tr>
+                        <%
+                          }
+                        }
+                      %>
+                  </table>
+                  <br />
+                  <%
+                    // Prepare parameters for navigator.jsp
+                    Vector navigatorFormFields = new Vector();  /*  The following fields are used by paginator.jsp, included below.      */
+                    navigatorFormFields.addElement("pageSize"); /* NOTE* that I didn't add here currentPage since it is overriden in the */
+                    navigatorFormFields.addElement("sort");     /* <form name='..."> in the navigator.jsp!                               */
+                    navigatorFormFields.addElement("ascendency");
+                    navigatorFormFields.addElement("criteriaSearch");
                   %>
-                  <option value="<%=InternationalthreatstatusSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected">
-                      <%=cm.cms("scientific_name")%>
-                  </option>
-                </select>
-                <%=cm.cmsLabel("criteria")%>
-                <%=cm.cmsTitle("criteria")%>
-                <label for="select2" class="noshow"><%=cm.cms("operator")%></label>
-                <select id="select2" title="<%=cm.cms("operator")%>" name="oper" class="inputTextField">
-                  <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                      <%=cm.cms("is")%>
-                  </option>
-                  <option value="<%=Utilities.OPERATOR_STARTS%>">
-                      <%=cm.cms("starts_with")%>
-                  </option>
-                  <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                      <%=cm.cms("contains")%>
-                  </option>
-                </select>
-                <%=cm.cmsLabel("operator")%>
-                <%=cm.cmsTitle("operator")%>
-                <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
-                <input id="criteriaSearch" title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" class="inputTextField" name="criteriaSearch" type="text" size="30" />
-                <%=cm.cmsLabel("filter_value")%>
-                <%=cm.cmsTitle("filter_value")%>
-                <input id="refine" title="<%=cm.cms("search")%>" class="inputTextField" type="submit" name="Submit" value="<%=cm.cms("search")%>" />
-                <%=cm.cmsTitle("search")%>
-                <%=cm.cmsInput("search")%>
-              </form>
-            </td>
-          </tr>
-          <%-- This is the code which shows the search filters --%>
-          <%
-            ro.finsiel.eunis.search.AbstractSearchCriteria[] criterias = formBean.toSearchCriteria();
-          %>
-          <%
-            if (criterias.length > 1)
-            {
-          %>
-          <tr>
-            <td style="background-color:#EEEEEE">
-              <%=cm.cmsText("applied_filters_to_the_results")%>:
-            </td>
-          </tr>
-         <%
-            }
-            for (int i = criterias.length - 1; i > 0; i--)
-            {
-              AbstractSearchCriteria criteria = criterias[i];
-              if (null != criteria && null != formBean.getCriteriaSearch())
+                  <jsp:include page="navigator.jsp">
+                    <jsp:param name="pagesCount" value="<%=pagesCount%>" />
+                    <jsp:param name="pageName" value="<%=pageName%>" />
+                    <jsp:param name="guid" value="<%=guid%>" />
+                    <jsp:param name="currentPage" value="<%=formBean.getCurrentPage()%>" />
+                    <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>" />
+                    <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>" />
+                  </jsp:include>
+                  <br />
+            <%
+              // Compute the sort criteria
+              Vector sortURLFields = new Vector();      /* Used for sorting */
+              sortURLFields.addElement( "pageSize" );
+              sortURLFields.addElement( "criteriaSearch" );
+              String urlSortString = formBean.toURLParam( sortURLFields );
+              AbstractSortCriteria sortGroup = formBean.lookupSortCriteria( InternationalthreatstatusSortCriteria.SORT_GROUP );
+              AbstractSortCriteria sortOrder = formBean.lookupSortCriteria( InternationalthreatstatusSortCriteria.SORT_ORDER );
+              AbstractSortCriteria sortFamily = formBean.lookupSortCriteria( InternationalthreatstatusSortCriteria.SORT_FAMILY );
+              AbstractSortCriteria sortSciName = formBean.lookupSortCriteria( InternationalthreatstatusSortCriteria.SORT_SCIENTIFIC_NAME );
+
+              // Expand/Collapse vernacular names
+              Vector expand = new Vector();
+              expand.addElement( "sort" );
+              expand.addElement( "ascendency" );
+              expand.addElement( "criteriaSearch" );
+              expand.addElement( "oper" );
+              expand.addElement( "criteriaType" );
+              expand.addElement( "pageSize" );
+              expand.addElement( "currentPage" );
+              String expandURL = formBean.toURLParam( expand );
+              boolean isExpanded = ( null != formBean.getExpand() ) && ( formBean.getExpand().equalsIgnoreCase( "true" ) );
+              if ( showVernacularNames && !isExpanded )
               {
             %>
-              <tr>
-                <td style="background-color:#CCCCCC;text-align:left">
-                  <a title="<%=cm.cms("delete_criteria")%>" href="<%= pageName%>?<%=formBean.toURLParam(filterSearch)%>&amp;removeFilterIndex=<%=i%>"><img alt="<%=cm.cms("delete_criteria")%>" src="images/mini/delete.jpg" border="0" style="vertical-align:middle" /></a><%=cm.cmsTitle("delete_criteria")%>&nbsp;&nbsp;<strong class="linkDarkBg"><%= i + ". " + criteria.toHumanString()%></strong>
-                </td>
-              </tr>
+                    <a title="<%=cm.cms("show_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("display_vernacular_names_in_results")%></a>
+                    <%=cm.cmsTitle("show_vernacular_list")%>
             <%
-              }
-            }
-          %>
-      </table>
-      <br />
-      <%
-        // Prepare parameters for navigator.jsp
-        Vector navigatorFormFields = new Vector();  /*  The following fields are used by paginator.jsp, included below.      */
-        navigatorFormFields.addElement("pageSize"); /* NOTE* that I didn't add here currentPage since it is overriden in the */
-        navigatorFormFields.addElement("sort");     /* <form name='..."> in the navigator.jsp!                               */
-        navigatorFormFields.addElement("ascendency");
-        navigatorFormFields.addElement("criteriaSearch");
-      %>
-      <jsp:include page="navigator.jsp">
-        <jsp:param name="pagesCount" value="<%=pagesCount%>" />
-        <jsp:param name="pageName" value="<%=pageName%>" />
-        <jsp:param name="guid" value="<%=guid%>" />
-        <jsp:param name="currentPage" value="<%=formBean.getCurrentPage()%>" />
-        <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>" />
-        <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>" />
-      </jsp:include>
-      <br />
-<%
-      // Compute the sort criteria
-      Vector sortURLFields = new Vector();      /* Used for sorting */
-      sortURLFields.addElement("pageSize");
-      sortURLFields.addElement("criteriaSearch");
-      String urlSortString = formBean.toURLParam(sortURLFields);
-      AbstractSortCriteria sortGroup = formBean.lookupSortCriteria(InternationalthreatstatusSortCriteria.SORT_GROUP);
-      AbstractSortCriteria sortOrder = formBean.lookupSortCriteria(InternationalthreatstatusSortCriteria.SORT_ORDER);
-      AbstractSortCriteria sortFamily = formBean.lookupSortCriteria(InternationalthreatstatusSortCriteria.SORT_FAMILY);
-      AbstractSortCriteria sortSciName = formBean.lookupSortCriteria(InternationalthreatstatusSortCriteria.SORT_SCIENTIFIC_NAME);
-
-      // Expand/Collapse vernacular names
-      Vector expand = new Vector();
-      expand.addElement("sort");
-      expand.addElement("ascendency");
-      expand.addElement("criteriaSearch");
-      expand.addElement("oper");
-      expand.addElement("criteriaType");
-      expand.addElement("pageSize");
-      expand.addElement("currentPage");
-      String expandURL = formBean.toURLParam(expand);
-      boolean isExpanded = (null == formBean.getExpand()) ? false : (formBean.getExpand().equalsIgnoreCase("true")) ? true : false;
-      if (showVernacularNames && !isExpanded)
-      {
-%>
-        <a title="<%=cm.cms("show_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("display_vernacular_names_in_results")%></a>
-        <%=cm.cmsTitle("show_vernacular_list")%>
-<%
-      }
-%>
-      <table summary="<%=cm.cms("search_results")%>" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse">
-        <tr>
-<%
-      if (showGroup && idGroup.equalsIgnoreCase("-1"))
-        {
-%>
-          <th style="text-align:left" class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=InternationalthreatstatusSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></a>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-<%
-        } else {
-%>
-        <th style="text-align:left" class="resultHeader">
-          <%=cm.cmsText("group")%>
-        </th>
-<%
-        }
-        if (showGeo)
-        {
-%>
-          <th style="text-align:left" class="resultHeader">
-            <strong>
-                <%=cm.cmsText("geographical_region")%>
-            </strong>
-          </th>
-<%
-        }
-        if (showStatus)
-        {
-%>
-          <th style="text-align:left" class="resultHeader">
-            <strong>
-                <%=cm.cmsText("threat_status")%>
-            </strong>
-          </th>
-<%
-        }
-        if (showOrder)
-        {
-%>
-          <th style="text-align:left" class="resultHeader">
-            <%=cm.cmsText("order_column")%>
-          </th>
-<%
-        }
-        if (showFamily)
-        {
-%>
-          <th style="text-align:left" class="resultHeader">
-            <%=cm.cmsText("family")%>
-          </th>
-<%
-        }
-%>
-          <th style="text-align:left" class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=InternationalthreatstatusSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("scientific_name")%></a>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-<%
-        if (isExpanded && showVernacularNames)
-        {
-%>
-          <th style="text-align:left" class="resultHeader">
-            <%=cm.cmsText("vernacular_names")%>
-            &nbsp;
-            [<a title="<%=cm.cms("hide_vernacular_list")%>" class="resultHeaderLink" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("hide")%></a><%=cm.cmsTitle("hide_vernacular_list")%>]
-          </th>
-<%
-        }
-%>
-        </tr>
-<%
-      if ( null != results )
-      {
-        Iterator it = results.iterator();
-        int col = 0;
-        while (it.hasNext())
-        {
-          String bgColor = col++ % 2 == 0 ? "#EEEEEE" : "#FFFFFF";
-          InternationalThreatStatusPersist specie = (InternationalThreatStatusPersist)it.next();
-          Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
-          // Sort this vernacular names in alphabetical order
-          Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);
-%>
-        <tr>
-<%
-         if (showGroup)
-          {
-%>
-          <td class="resultCell" style="background-color : <%=bgColor%>">
-            <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(specie.getCommonName()),"&nbsp;")%>
-          </td>
-<%
-          }
-    if (showGeo)
-    {
-%>
-          <td class="resultCell" style="background-color : <%=bgColor%>">
-            <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(specie.getAreaNameEn()),"&nbsp;")%>
-          </td>
-<%
-    }
-
-          if (showStatus)
-          {
-%>
-          <td class="resultCell" style="background-color : <%=bgColor%>">
-            <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(specie.getDefAbrev()),"&nbsp;")%>
-          </td>
-<%
-          }
-          if (showOrder)
-          {
-%>
-          <td class="resultCell" style="background-color : <%=bgColor%>">
-            <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(specie.getTaxonomicNameOrder()),"&nbsp;")%>
-          </td>
-<%
-          }
-          if (showFamily)
-          {
-%>
-          <td class="resultCell" style="background-color : <%=bgColor%>">
-            <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(specie.getTaxonomicNameFamily()),"&nbsp;")%>
-          </td>
-<%
-          }
-%>
-          <td class="resultCell" style="background-color : <%=bgColor%>">
-            <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScName())%></a><%=cm.cmsTitle("open_species_factsheet")%>&nbsp;
-          </td>
-<%
-          if (isExpanded && showVernacularNames)
-          {
-%>
-          <td class="resultCell" style="background-color : <%=bgColor%>">
-            <table summary="<%=cm.cms("list_vernacular")%>" width="100%" border="0" cellspacing="0" cellpadding="0" style="text-align:center">
-<%               if(sortVernList == null || sortVernList.size()<=0)
+                  }
+            %>
+                  <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                    <thead>
+                      <tr>
+            <%
+                  if (showGroup && idGroup.equalsIgnoreCase("-1"))
+                    {
+            %>
+                        <th scope="col">
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=InternationalthreatstatusSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></a>
+                          <%=cm.cmsTitle("sort_results_on_this_column")%>
+                        </th>
+            <%
+                    } else {
+            %>
+                        <th scope="col">
+                          <%=cm.cmsText("group")%>
+                        </th>
+            <%
+                    }
+                    if (showGeo)
+                    {
+            %>
+                        <th scope="col">
+                          <%=cm.cmsText("geographical_region")%>
+                        </th>
+            <%
+                    }
+                    if (showStatus)
+                    {
+            %>
+                        <th scope="col">
+                          <%=cm.cmsText("threat_status")%>
+                        </th>
+            <%
+                    }
+                    if (showOrder)
+                    {
+            %>
+                        <th scope="col">
+                          <%=cm.cmsText("order_column")%>
+                        </th>
+            <%
+                    }
+                    if (showFamily)
+                    {
+            %>
+                        <th scope="col">
+                          <%=cm.cmsText("family")%>
+                        </th>
+            <%
+                    }
+            %>
+                        <th scope="col">
+                          <a style="display:inline;" title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=InternationalthreatstatusSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("scientific_name")%></a>
+                          <%=cm.cmsTitle("sort_results_on_this_column")%>
+                        </th>
+            <%
+                    if (isExpanded && showVernacularNames)
+                    {
+            %>
+                        <th scope="col">
+                          <a style="display:inline;" title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("vernacular_names")%> [<%=cm.cmsText("hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
+                        </th>
+            <%
+                    }
+            %>
+                    </tr>
+                  </thead>
+                  <tbody>
+            <%
+                  if ( null != results )
                   {
+                    Iterator it = results.iterator();
+                    int col = 0;
+                    while (it.hasNext())
+                    {
+                      String cssClass = col++ % 2 == 0 ? " class=\"zebraeven\"" : "";
+                      InternationalThreatStatusPersist specie = (InternationalThreatStatusPersist)it.next();
+                      Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
+                      // Sort this vernacular names in alphabetical order
+                      Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);
+            %>
+                    <tr<%=cssClass%>>
+            <%
+                     if (showGroup)
+                      {
+            %>
+                      <td>
+                        <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(specie.getCommonName()),"&nbsp;")%>
+                      </td>
+            <%
+                      }
+                if (showGeo)
+                {
+            %>
+                      <td>
+                        <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(specie.getAreaNameEn()),"&nbsp;")%>
+                      </td>
+            <%
+                }
+
+                      if (showStatus)
+                      {
+            %>
+                      <td>
+                        <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(specie.getDefAbrev()),"&nbsp;")%>
+                      </td>
+            <%
+                      }
+                      if (showOrder)
+                      {
+            %>
+                      <td>
+                        <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(specie.getTaxonomicNameOrder()),"&nbsp;")%>
+                      </td>
+            <%
+                      }
+                      if (showFamily)
+                      {
+            %>
+                      <td>
+                        <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(specie.getTaxonomicNameFamily()),"&nbsp;")%>
+                      </td>
+            <%
+                      }
+            %>
+                      <td>
+                        <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScName())%></a><%=cm.cmsTitle("open_species_factsheet")%>&nbsp;
+                      </td>
+            <%
+                      if (isExpanded && showVernacularNames)
+                      {
+            %>
+                      <td>
+                        <table summary="<%=cm.cms("list_vernacular")%>" width="100%" border="0" cellspacing="0" cellpadding="0" style="text-align:center">
+            <%               if(sortVernList == null || sortVernList.size()<=0)
+                              {
+            %>
+                             <tr><td>&nbsp;</td></tr>
+            <%
+                    } else
+                    {
+                        for (int i = 0; i < sortVernList.size(); i++)
+                        {
+                           VernacularNameWrapper aVernName = (VernacularNameWrapper)sortVernList.get(i);
+                           String bgColor1 = (0 == i % 2) ? "#EEEEEE" : "#FFFFFF";
+            %>
+                          <tr style="text-align:left">
+                            <td style="white-space: nowrap;background-color:<%=bgColor1%>;text-align:left" width="50%">
+                              <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(aVernName.getLanguage()),"&nbsp;")%>
+                            </td>
+                            <td style="white-space: nowrap;background-color:<%=bgColor1%>;text-align:left" width="50%">
+                              <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(aVernName.getName()),"&nbsp;")%>
+                            </td>
+                          </tr>
+            <%
+                        }
+                }
+            %>
+                        </table>
+                      </td>
+            <%
+                      }
+            %>
+                    </tr>
+            <%
+                    }
 %>
-                 <tr><td>&nbsp;</td></tr>
-<%
-        } else
-        {
-            for (int i = 0; i < sortVernList.size(); i++)
-            {
-               VernacularNameWrapper aVernName = (VernacularNameWrapper)sortVernList.get(i);
-               String bgColor1 = (0 == i % 2) ? "#EEEEEE" : "#FFFFFF";
-%>
-              <tr style="text-align:left">
-                <td style="white-space: nowrap;background-color:<%=bgColor1%>;text-align:left" width="50%">
-                  <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(aVernName.getLanguage()),"&nbsp;")%>
-                </td>
-                <td style="white-space: nowrap;background-color:<%=bgColor1%>;text-align:left" width="50%">
-                  <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(aVernName.getName()),"&nbsp;")%>
+                  </tbody>
+            <%
+                  }
+            %>
+                  <thead>
+                    <tr>
+
+            <%
+                  if (showGroup && idGroup.equalsIgnoreCase("-1"))
+                    {
+            %>
+                      <th scope="col">
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=InternationalthreatstatusSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></a>
+                        <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </th>
+            <%
+                    } else {
+            %>
+                    <th scope="col">
+                      <%=cm.cmsText("group")%>
+                    </th>
+            <%
+                    }
+                    if (showGeo)
+                    {
+            %>
+                      <th scope="col">
+                        <%=cm.cmsText("geographical_region")%>
+                      </th>
+            <%
+                    }
+                    if (showStatus)
+                    {
+            %>
+                      <th scope="col">
+                        <%=cm.cmsText("threat_status")%>
+                      </th>
+            <%
+                    }
+                    if (showOrder)
+                    {
+            %>
+                      <th scope="col">
+                        <%=cm.cmsText("order_column")%>
+                      </th>
+            <%
+                    }
+                    if (showFamily)
+                    {
+            %>
+                      <th scope="col">
+                        <%=cm.cmsText("family")%>
+                      </th>
+            <%
+                    }
+            %>
+                      <th scope="col">
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=InternationalthreatstatusSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("scientific_name")%></a>
+                        <%=cm.cmsTitle("sort_results_on_this_column")%>
+                      </th>
+            <%
+                    if (isExpanded && showVernacularNames)
+                    {
+            %>
+                      <th scope="col">
+                        <a style="display:inline;" title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("vernacular_names")%> [<%=cm.cmsText("hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
+                      </th>
+            <%
+                    }
+            %>
+                      </tr>
+                    </thead>
+                  </table>
+                  <jsp:include page="navigator.jsp">
+                    <jsp:param name="pagesCount" value="<%=pagesCount%>" />
+                    <jsp:param name="pageName" value="<%=pageName%>" />
+                    <jsp:param name="guid" value="<%=guid + 1%>" />
+                    <jsp:param name="currentPage" value="<%=formBean.getCurrentPage()%>" />
+                    <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>" />
+                    <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>" />
+                  </jsp:include>
                 </td>
               </tr>
-<%
-            }
-    }
-%>
-            </table>
-          </td>
-<%
-          }
-%>
-        </tr>
-<%
-        }
-      }
-%>
-      <tr>
-<%
-      if (showGroup && idGroup.equalsIgnoreCase("-1"))
-        {
-%>
-          <th style="text-align:left" class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=InternationalthreatstatusSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></a>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-<%
-        } else {
-%>
-        <th style="text-align:left" class="resultHeader">
-          <%=cm.cmsText("group")%>
-        </th>
-<%
-        }
-        if (showGeo)
-        {
-%>
-          <th style="text-align:left" class="resultHeader">
-            <strong>
-                <%=cm.cmsText("geographical_region")%>
-            </strong>
-          </th>
-<%
-        }
-        if (showStatus)
-        {
-%>
-          <th style="text-align:left" class="resultHeader">
-            <strong>
-                <%=cm.cmsText("threat_status")%>
-            </strong>
-          </th>
-<%
-        }
-        if (showOrder)
-        {
-%>
-          <th style="text-align:left" class="resultHeader">
-            <%=cm.cmsText("order_column")%>
-          </th>
-<%
-        }
-        if (showFamily)
-        {
-%>
-          <th style="text-align:left" class="resultHeader">
-            <%=cm.cmsText("family")%>
-          </th>
-<%
-        }
-%>
-          <th style="text-align:left" class="resultHeader">
-            <a title="<%=cm.cms("sort_results_on_this_column")%>" class="resultHeaderLink" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=InternationalthreatstatusSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("scientific_name")%></a>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-<%
-        if (isExpanded && showVernacularNames)
-        {
-%>
-          <th style="text-align:left" class="resultHeader">
-            <%=cm.cmsText("vernacular_names")%>
-            &nbsp;
-            [<a title="<%=cm.cms("hide_vernacular_list")%>" class="resultHeaderLink" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("hide")%></a><%=cm.cmsTitle("hide_vernacular_list")%>]
-          </th>
-<%
-        }
-%>
-        </tr>
-      </table>
-      <jsp:include page="navigator.jsp">
-        <jsp:param name="pagesCount" value="<%=pagesCount%>" />
-        <jsp:param name="pageName" value="<%=pageName%>" />
-        <jsp:param name="guid" value="<%=guid + 1%>" />
-        <jsp:param name="currentPage" value="<%=formBean.getCurrentPage()%>" />
-        <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>" />
-        <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>" />
-      </jsp:include>
-    </td>
-  </tr>
-  </table>
+              </table>
 
-<%=cm.br()%>
-<%=cm.cmsMsg("species_threat-international-result_title")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("group")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("scientific_name")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("is")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("starts_with")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("contains")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("search_results")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("list_vernacular")%>
-<%=cm.br()%>
-
-
-  <jsp:include page="footer.jsp">
-    <jsp:param name="page_name" value="species-threat-international-result.jsp" />
-  </jsp:include>
-  </div>
-  </div>
-  </div>
+            <%=cm.br()%>
+            <%=cm.cmsMsg("species_threat-international-result_title")%>
+            <%=cm.br()%>
+            <%=cm.cmsMsg("group")%>
+            <%=cm.br()%>
+            <%=cm.cmsMsg("scientific_name")%>
+            <%=cm.br()%>
+            <%=cm.cmsMsg("is")%>
+            <%=cm.br()%>
+            <%=cm.cmsMsg("starts_with")%>
+            <%=cm.br()%>
+            <%=cm.cmsMsg("contains")%>
+            <%=cm.br()%>
+            <%=cm.cmsMsg("search_results")%>
+            <%=cm.br()%>
+            <%=cm.cmsMsg("list_vernacular")%>
+            <%=cm.br()%>
+              <jsp:include page="footer.jsp">
+                <jsp:param name="page_name" value="species-threat-international-result.jsp" />
+              </jsp:include>
+<!-- END MAIN CONTENT -->
+              </div>
+            </div>
+          </div>
+          <!-- end of main content block -->
+          <!-- start of the left (by default at least) column -->
+          <div id="portal-column-one">
+            <div class="visualPadding">
+              <jsp:include page="inc_column_left.jsp" />
+            </div>
+          </div>
+          <!-- end of the left (by default at least) column -->
+        </div>
+        <!-- end of the main and left columns -->
+        <!-- start of right (by default at least) column -->
+        <div id="portal-column-two">
+          <div class="visualPadding">
+            <jsp:include page="inc_column_right.jsp" />
+          </div>
+        </div>
+        <!-- end of the right (by default at least) column -->
+        <div class="visualClear"><!-- --></div>
+      </div>
+      <!-- end column wrapper -->
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
+    </div>
   </body>
 </html>

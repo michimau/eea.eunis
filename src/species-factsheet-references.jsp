@@ -8,16 +8,8 @@
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtReportsPersist,java.util.*,
-                 ro.finsiel.eunis.jrfTables.Chm62edtReportsDcSourcePersist,
-                 java.text.SimpleDateFormat,
-                 ro.finsiel.eunis.jrfTables.species.factsheet.NatureObjectDcSourcePersist,
-                 ro.finsiel.eunis.search.Utilities,
-                 ro.finsiel.eunis.factsheet.species.SpeciesFactsheet,
-                 ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist,
+<%@ page import="ro.finsiel.eunis.search.Utilities,
                  java.sql.*,
-                 java.util.Date,
-                 ro.finsiel.eunis.admin.FileUtils,
                  ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="FormBean" class="ro.finsiel.eunis.formBeans.SpeciesFactSheetBean" scope="page">
   <jsp:setProperty name="FormBean" property="*"/>
@@ -105,37 +97,35 @@
   try
   {
     // Set the database connection parameters
-    String SQL_DRV="";
-    String SQL_URL="";
-    String SQL_USR="";
-    String SQL_PWD="";
-
-    SQL_DRV = application.getInitParameter("JDBC_DRV");
-    SQL_URL = application.getInitParameter("JDBC_URL");
-    SQL_USR = application.getInitParameter("JDBC_USR");
-    SQL_PWD = application.getInitParameter("JDBC_PWD");
+    String SQL_DRV = application.getInitParameter("JDBC_DRV");
+    String SQL_URL = application.getInitParameter("JDBC_URL");
+    String SQL_USR = application.getInitParameter("JDBC_USR");
+    String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
     Class.forName(SQL_DRV);
     Connection con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
     Statement ps = con.createStatement();
     ResultSet rs = ps.executeQuery(sql);
 %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;">References</div>
-    <table summary="<%=cm.cms("species_factsheet-references_09_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0"  id="references" class="sortable">
+  <h2>
+    <%=cm.getText( "references" )%>
+  </h2>
+  <table summary="<%=cm.cms("species_factsheet-references_09_Sum")%>" class="listing" width="90%">
+    <thead>
       <tr>
-        <th width="25%" title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th width="25%">
           <%=cm.cmsText("title")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="25%" title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th width="25%">
           <%=cm.cmsText("author")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th width="15%">
           <%=cm.cmsText("editor")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="15%" style="text-align:right" title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th width="15%" style="text-align:right">
           <%=cm.cmsText("date")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
@@ -147,18 +137,21 @@
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
+    </thead>
+    <tbody>
 <%
     int i = 0;
-    String source = "";
-    String author = "";
-    String editor = "";
-    String date = "";
-    String title = "";
-    //String publisher = "";
+    String source;
+    String author;
+    String editor;
+    String date;
+    String title;
+    //String publisher;
     rs.beforeFirst();
     // Display results.
     while(rs.next())
     {
+      String cssClass = i++ % 2 == 0 ? "" : " class=\"zebraeven\"";
       if(rs.getString(1) == null) source="&nbsp;"; else source=ro.finsiel.eunis.search.Utilities.FormatDatabaseFieldName(rs.getString(1));
       if(rs.getString(2) == null) author="&nbsp;"; else author=rs.getString(2);
       if(rs.getString(3) == null) editor="&nbsp;"; else editor=rs.getString(3);
@@ -172,7 +165,7 @@
       //if(rs.getString(6) == null) publisher="&nbsp;"; else publisher=rs.getString(6);
 
 %>
-      <tr style="background-color:<%=(0 == (i++ % 2)) ? "#FFFFFF" : "#EEEEEE"%>">
+      <tr<%=cssClass%>>
         <td>
           <%=Utilities.treatURLSpecialCharacters(title)%>
         </td>
@@ -195,7 +188,8 @@
 <%
     }
 %>
-    </table>
+    </tbody>
+  </table>
 <%
     ps.close();
     rs.close();

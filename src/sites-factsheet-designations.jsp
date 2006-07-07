@@ -35,55 +35,62 @@
     if (sitesDesigc.size() > 0 )
     {
 %>
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_designations_national")%></div>
-      <table border="1" cellpadding="1" cellspacing="1" width="100%" id="relationsNatura2000Natura20002" style="border-collapse:collapse" summary="<%=cm.cms("sites_factsheet_designations_national")%>" class="sortable">
-        <tr>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("designation_code")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("designation_name")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("category_location")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("cover_percent")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-        </tr>
+  <h2>
+    <%=cm.cmsText("sites_factsheet_designations_national")%>
+  </h2>
+  <table summary="<%=cm.cms("sites_factsheet_designations_national")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("designation_code")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("designation_name")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("category_location")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
+          <%=cm.cmsText("cover_percent")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
-      for (int i = 0; i < sitesDesigc.size(); i++)
-      {
-        DesignationsSitesRelatedDesignationsPersist desig = (DesignationsSitesRelatedDesignationsPersist)sitesDesigc.get(i);
+  for (int i = 0; i < sitesDesigc.size(); i++)
+  {
+    String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+    DesignationsSitesRelatedDesignationsPersist desig = (DesignationsSitesRelatedDesignationsPersist)sitesDesigc.get(i);
 %>
-        <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-          <td>
-            <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescription()%></a>&nbsp;
-            <%=cm.cmsTitle("open_designation_factsheet")%>
-          </td>
-          <td>
-            <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescriptionEn()%></a>
-            <%=cm.cmsTitle("open_designation_factsheet")%>
-          </td>
-          <td>
-            <%=Utilities.formatString(desig.getNationalCategory())%>
-            &nbsp;
-          </td>
-          <td style="text-align : right">
-            <%=Utilities.formatDecimal(desig.getOverlap(), 2 )%>&nbsp;
-          </td>
-        </tr>
+      <tr<%=cssClass%>>
+        <td>
+          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescription()%></a>&nbsp;
+          <%=cm.cmsTitle("open_designation_factsheet")%>
+        </td>
+        <td>
+          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescriptionEn()%></a>
+          <%=cm.cmsTitle("open_designation_factsheet")%>
+        </td>
+        <td>
+          <%=Utilities.formatString(desig.getNationalCategory())%>
+          &nbsp;
+        </td>
+        <td style="text-align : right">
+          <%=Utilities.formatDecimal(desig.getOverlap(), 2 )%>&nbsp;
+        </td>
+      </tr>
 <%
       }
 %>
-      </table>
-      <br />
+    </tbody>
+  </table>
+  <br />
 <%
-    }
+  }
     //Third table should be called "Relation with designated areas" and should display information
     // from desigr table decoded with desig-x table.
     //Columns should then be des_site with link to "http://eunis.eea.europa.eu/sites-names.jsp" prefilled with site name
@@ -99,53 +106,59 @@
      if (sitesDesigr.size() > 0 )
      {
 %>
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cms("sites_factsheet_designations_areas")%></div>
-      <table border="1" cellpadding="1" cellspacing="1" width="100%" id="relationsNatura2000Natura20003" summary="<%=cm.cms("sites_factsheet_designations_areas")%>" class="sortable">
-        <tr>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_designations_designatedsite")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("designation_name")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("category_location")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("overlap_percent")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_designations_areasoverlapp")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-        </tr>
+  <h2>
+    <%=cm.cms("sites_factsheet_designations_areas")%>
+  </h2>
+  <table summary="<%=cm.cms("sites_factsheet_designations_areas")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cmsText("sites_factsheet_designations_designatedsite")%>
+        </th>
+        <th>
+          <%=cm.cmsText("designation_name")%>
+        </th>
+        <th>
+          <%=cm.cmsText("category_location")%>
+        </th>
+        <th style="text-align : right">
+          <%=cm.cmsText("overlap_percent")%>
+        </th>
+        <th style="text-align : right">
+          <%=cm.cmsText("sites_factsheet_designations_areasoverlapp")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
-        for (int i = 0; i < sitesDesigr.size(); i++)
-        {
-          DesignationsSitesRelatedDesignationsPersist desig = (DesignationsSitesRelatedDesignationsPersist)sitesDesigr.get(i);
+      for (int i = 0; i < sitesDesigr.size(); i++)
+      {
+        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+        DesignationsSitesRelatedDesignationsPersist desig = (DesignationsSitesRelatedDesignationsPersist)sitesDesigr.get(i);
 %>
-        <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-          <td>
-            <a title="<%=cm.cms("search_site_by_name")%>" href="sites-names.jsp?siteNameFromFactsheet=<%=desig.getDesignatedSite()%>"><%=Utilities.formatString(desig.getDesignatedSite())%></a>&nbsp;
-            <%=cm.cmsTitle("search_site_by_name")%>
-          </td>
-          <td><%=Utilities.formatString(desig.getDescriptionEn(),"")%>&nbsp;</td>
-          <td><%=Utilities.formatString(desig.getNationalCategory())%>&nbsp;</td>
-          <td style="text-align : right">
-            <%=Utilities.formatDecimal(desig.getOverlap(), 2 )%>&nbsp;
-          </td>
-          <td style="text-align : right">
-            <%=Utilities.formatString(desig.getOverlapType())%>&nbsp;
-          </td>
-        </tr>
+      <tr<%=cssClass%>>
+        <td>
+          <a title="<%=cm.cms("search_site_by_name")%>" href="sites-names.jsp?siteNameFromFactsheet=<%=desig.getDesignatedSite()%>"><%=Utilities.formatString(desig.getDesignatedSite())%></a>&nbsp;
+          <%=cm.cmsTitle("search_site_by_name")%>
+        </td>
+        <td>
+          <%=Utilities.formatString(desig.getDescriptionEn(),"&nbsp;")%>
+        </td>
+        <td>
+          <%=Utilities.formatString(desig.getNationalCategory(), "&nbsp;")%>
+        </td>
+        <td style="text-align : right">
+          <%=Utilities.formatString(Utilities.formatDecimal(desig.getOverlap(), 2), "&nbsp;")%>
+        </td>
+        <td style="text-align : right">
+          <%=Utilities.formatString(desig.getOverlapType(), "&nbsp;")%>
+        </td>
+      </tr>
 <%
-        }
+      }
 %>
-      </table>
+    </tbody>
+  </table>
 <%
     }
   }

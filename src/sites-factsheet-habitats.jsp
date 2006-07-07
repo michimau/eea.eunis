@@ -32,286 +32,293 @@
   SQLUtilities sqlc = new SQLUtilities();
   sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
 
-    List habit1Eunis = new ArrayList();
-    List habit1NotEunis = new ArrayList();
-    List habits2Eunis = new ArrayList();
-    List habits2NotEunis = new ArrayList();
+  List habit1Eunis = new ArrayList();
+  List habit1NotEunis = new ArrayList();
+  List habits2Eunis = new ArrayList();
+  List habits2NotEunis = new ArrayList();
 
-    List habitats = new ArrayList();
-    List sitesSpecificHabitats = new ArrayList();
+  List habitats = new ArrayList();
+  List sitesSpecificHabitats = new ArrayList();
 
-    if( type == SiteFactsheet.TYPE_NATURA2000 || type == SiteFactsheet.TYPE_EMERALD )
-    {
-      habit1Eunis = factsheet.findHabit1Eunis();
-      habit1NotEunis = factsheet.findHabit1NotEunis();
-      habits2Eunis = factsheet.findHabit2Eunis();
-      habits2NotEunis = factsheet.findHabit2NotEunis();
-    }
-    else
-    {
-      habitats = factsheet.findSitesHabitatsByIDNatureObject();
-      sitesSpecificHabitats = factsheet.findSitesSpecificHabitats();
-    }
+  if( type == SiteFactsheet.TYPE_NATURA2000 || type == SiteFactsheet.TYPE_EMERALD )
+  {
+    habit1Eunis = factsheet.findHabit1Eunis();
+    habit1NotEunis = factsheet.findHabit1NotEunis();
+    habits2Eunis = factsheet.findHabit2Eunis();
+    habits2NotEunis = factsheet.findHabit2NotEunis();
+  }
+  else
+  {
+    habitats = factsheet.findSitesHabitatsByIDNatureObject();
+    sitesSpecificHabitats = factsheet.findSitesSpecificHabitats();
+  }
 
-    if( ( SiteFactsheet.TYPE_NATURA2000 == type || type == SiteFactsheet.TYPE_EMERALD && ( !habit1Eunis.isEmpty() || !habit1NotEunis.isEmpty() || !habits2Eunis.isEmpty() || !habits2NotEunis.isEmpty() ) )
-          || ( !habitats.isEmpty() || !sitesSpecificHabitats.isEmpty() ) )
-    {
-      // List of habitats related to site
+  if( ( SiteFactsheet.TYPE_NATURA2000 == type || type == SiteFactsheet.TYPE_EMERALD && ( !habit1Eunis.isEmpty() || !habit1NotEunis.isEmpty() || !habits2Eunis.isEmpty() || !habits2NotEunis.isEmpty() ) )
+        || ( !habitats.isEmpty() || !sitesSpecificHabitats.isEmpty() ) )
+  {
+        // List of habitats related to site
     if( SiteFactsheet.TYPE_NATURA2000 == type || type == SiteFactsheet.TYPE_EMERALD &&
             ( !habit1Eunis.isEmpty() || !habit1NotEunis.isEmpty() || !habits2Eunis.isEmpty() || !habits2NotEunis.isEmpty() ) )
     {
       Chm62edtReportAttributesPersist attribute;
-%>
-<%
 
-        if (!habit1Eunis.isEmpty() || !habit1NotEunis.isEmpty())
-        {
+      if (!habit1Eunis.isEmpty() || !habit1NotEunis.isEmpty())
+      {
 %>
-        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("ecological_information_habitats_within_site")%></div>
-        <strong><%=cm.cmsText("sites_factsheet_114")%></strong>
-        <table summary="<%=cm.cms("sites_factsheet_114")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitats1" class="sortable">
-          <tr>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("code_column")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("english_name")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("cover_percent")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("representativity")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_118")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("conservation")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("global")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-          </tr>
-          <%
-          if (!habit1Eunis.isEmpty())
+  <h2>
+    <%=cm.cmsText("ecological_information_habitats_within_site")%>
+  </h2>
+  <h3>
+    <%=cm.cmsText("sites_factsheet_114")%>
+  </h3>
+  <table summary="<%=cm.cms("sites_factsheet_114")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cmsText("code_column")%>
+        </th>
+        <th style="text-align : right">
+          <%=cm.cmsText("english_name")%>
+        </th>
+        <th style="text-align : right">
+          <%=cm.cmsText("cover_percent")%>
+        </th>
+        <th style="text-align : right">
+          <%=cm.cmsText("representativity")%>
+        </th>
+        <th>
+          <%=cm.cmsText("sites_factsheet_118")%>
+        </th>
+        <th>
+          <%=cm.cmsText("conservation")%>
+        </th>
+        <th>
+          <%=cm.cmsText("global")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+<%
+        if (!habit1Eunis.isEmpty())
+        {
+          for (int i = 0; i < habit1Eunis.size(); i++)
           {
-            //System.out.println("habit1Eunis = " + habit1Eunis.size());
-            for (int i = 0; i < habit1Eunis.size(); i++)
-            {
-              SiteHabitatsPersist habitat = (SiteHabitatsPersist)habit1Eunis.get(i);%>
-              <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-                <td>
-                  <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getIdHabitat()%></a>
-                  <%=cm.cmsTitle("open_habitat_factsheet")%>
-                </td>
-                <td>
-                  <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getHabitatDescription()%></a>
-                  <%=cm.cmsTitle("open_habitat_factsheet")%>
-                </td>
-              <td style="text-align:right">
-                <%attribute = factsheet.findSiteAttributes("COVER", habitat.getIdReportAttributes());%>
-                <%=(null != attribute) ? Utilities.formatDecimal( attribute.getValue(), 2 ) : "&nbsp;"%>
-              </td>
-              <td>
-              <%
-                attribute = factsheet.findSiteAttributes("REPRESENTATIVITY", habitat.getIdReportAttributes());
-                String attVal = "";
-                if(!"".equals((null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""))
-                  attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_REPRESENTATIVITY WHERE ID_REPRESENTATIVITY ='"+attribute.getValue()+"'");
-               %>
-               <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Representativity')" onmouseout="hidetooltip()">
-                 <a href="#" onclick="return false;"><%=(null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""%></a>
-               </span>
-              </td>
-              <td  style="text-align:right">
-                <%
-                attribute = factsheet.findSiteAttributes("RELATIVE_SURFACE", habitat.getIdReportAttributes());
-                attVal = "";
-                if(!"".equals((null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""))
-                  attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_RELATIVE_SURFACE WHERE ID_RELATIVE_SURFACE ='"+attribute.getValue()+"'");
-               %>
-               <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Relative surface')" onmouseout="hidetooltip()">
-                 <a href="#" onclick="return false;"><%=(null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""%></a>
-               </span>
-              </td>
-              <td>
-               <%
-                attribute = factsheet.findSiteAttributes("CONSERVATION", habitat.getIdReportAttributes());
-                attVal = "";
-                if(!"".equals((null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""))
-                  attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_NATURA2000_CONSERVATION_CODE WHERE ID_CONSERVATION_CODE ='"+attribute.getValue()+"'");
-               %>
-               <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Conservation')" onmouseout="hidetooltip()">
-                 <a href="#" onclick="return false;"><%=(null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""%></a>
-               </span>
-              </td>
-              <td>
-              <%
-                attribute = factsheet.findSiteAttributes("GLOBAL", habitat.getIdReportAttributes());
-                attVal = "";
-                if(!"".equals((null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""))
-                  attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_GLOBAL WHERE ID_GLOBAL ='"+attribute.getValue()+"'");
-               %>
-               <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Global')" onmouseout="hidetooltip()">
-                 <a href="#" onclick="return false;"><%=(null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""%></a>
-               </span>
-              </td>
-            </tr>
-          <%
-            }
+            String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+            SiteHabitatsPersist habitat = (SiteHabitatsPersist)habit1Eunis.get(i);
+%>
+      <tr<%=cssClass%>>
+        <td>
+          <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getIdHabitat()%></a>
+          <%=cm.cmsTitle("open_habitat_factsheet")%>
+        </td>
+        <td>
+          <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getHabitatDescription()%></a>
+          <%=cm.cmsTitle("open_habitat_factsheet")%>
+        </td>
+        <td style="text-align:right">
+          <%attribute = factsheet.findSiteAttributes("COVER", habitat.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatDecimal( attribute.getValue(), 2 ) : "&nbsp;"%>
+        </td>
+        <td>
+<%
+            attribute = factsheet.findSiteAttributes("REPRESENTATIVITY", habitat.getIdReportAttributes());
+            String attVal = "";
+            if(!"".equals((null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""))
+              attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_REPRESENTATIVITY WHERE ID_REPRESENTATIVITY ='"+attribute.getValue()+"'");
+%>
+         <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Representativity')" onmouseout="hidetooltip()">
+           <a href="#" onclick="return false;"><%=(null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""%></a>
+         </span>
+        </td>
+        <td  style="text-align:right">
+<%
+            attribute = factsheet.findSiteAttributes("RELATIVE_SURFACE", habitat.getIdReportAttributes());
+            attVal = "";
+            if(!"".equals((null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""))
+              attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_RELATIVE_SURFACE WHERE ID_RELATIVE_SURFACE ='"+attribute.getValue()+"'");
+%>
+         <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Relative surface')" onmouseout="hidetooltip()">
+           <a href="#" onclick="return false;"><%=(null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""%></a>
+         </span>
+        </td>
+        <td>
+<%
+            attribute = factsheet.findSiteAttributes("CONSERVATION", habitat.getIdReportAttributes());
+            attVal = "";
+            if(!"".equals((null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""))
+              attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_NATURA2000_CONSERVATION_CODE WHERE ID_CONSERVATION_CODE ='"+attribute.getValue()+"'");
+%>
+         <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Conservation')" onmouseout="hidetooltip()">
+           <a href="#" onclick="return false;"><%=(null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""%></a>
+         </span>
+        </td>
+        <td>
+<%
+            attribute = factsheet.findSiteAttributes("GLOBAL", habitat.getIdReportAttributes());
+            attVal = "";
+            if(!"".equals((null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""))
+              attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_GLOBAL WHERE ID_GLOBAL ='"+attribute.getValue()+"'");
+%>
+         <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Global')" onmouseout="hidetooltip()">
+           <a href="#" onclick="return false;"><%=(null != attribute) ? ((null !=attribute.getValue()) ? attribute.getValue() : "") : ""%></a>
+         </span>
+        </td>
+      </tr>
+<%
           }
-          if (!habit1NotEunis.isEmpty())
+        }
+        if (!habit1NotEunis.isEmpty())
+        {
+          Chm62edtSitesAttributesPersist attribute2;
+          for (int i = 0; i < habit1NotEunis.size(); i++)
           {
-            Chm62edtSitesAttributesPersist attribute2;
-            for (int i = 0; i < habit1NotEunis.size(); i++)
-            {
-              Chm62edtSitesAttributesPersist habitat = (Chm62edtSitesAttributesPersist)habit1NotEunis.get(i);
-              String habCode = habitat.getName();
-              habCode = (habCode == null ? "" : habCode.substring(habCode.lastIndexOf("_")+1));
-          %>
-              <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-                <td>
-                  <%=habCode%>
-                </td>
-                <td>
-                  <%attribute2 = factsheet.findHabit1NotEunisAttributes("NAME_EN_"+habCode);%>
-                  <%=(null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""%>&nbsp;
-                </td>
-              <td  style="text-align:right">
-                <%attribute2 = factsheet.findHabit1NotEunisAttributes("COVER_"+habCode);%>
-                <%=(null != attribute2) ? Utilities.formatDecimal(attribute2.getValue(), 2) : "&nbsp;"%>
-              </td>
-              <td>
-              <%
-                attribute2 = factsheet.findHabit1NotEunisAttributes("REPRESENTATIVITY_"+habCode);
-                String attVal = "";
-                if(!"".equals((null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""))
-                  attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_REPRESENTATIVITY WHERE ID_REPRESENTATIVITY ='"+attribute2.getValue()+"'");
-               %>
-               <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Representativity')" onmouseout="hidetooltip()">
-                 <a href="#" onclick="return false;"><%=(null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""%></a>
-               </span>
-              </td>
-              <td style="text-align:right">
-                <%
-                attribute2 = factsheet.findHabit1NotEunisAttributes("RELATIVE_SURFACE_"+habCode);
-                attVal = "";
-                if(!"".equals((null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""))
-                  attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_RELATIVE_SURFACE WHERE ID_RELATIVE_SURFACE ='"+attribute2.getValue()+"'");
-               %>
-               <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Relative surface')" onmouseout="hidetooltip()">
-                 <a href="#" onclick="return false;"><%=(null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""%></a>
-               </span>
-              </td>
-              <td>
-              <%
-                attribute2 = factsheet.findHabit1NotEunisAttributes("CONSERVATION_"+habCode);
-                attVal = "";
-                if(!"".equals((null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""))
-                  attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_NATURA2000_CONSERVATION_CODE WHERE ID_CONSERVATION_CODE ='"+attribute2.getValue()+"'");
-               %>
-               <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Conservation')" onmouseout="hidetooltip()">
-                 <a href="#" onclick="return false;"><%=(null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""%></a>
-               </span>
-              </td>
-              <td>
-              <%
-                attribute2 = factsheet.findHabit1NotEunisAttributes("GLOBAL_"+habCode);
-                attVal = "";
-                if(!"".equals((null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""))
-                  attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_GLOBAL WHERE ID_GLOBAL ='"+attribute2.getValue()+"'");
-               %>
-               <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Global')" onmouseout="hidetooltip()">
-                 <a href="#" onclick="return false;"><%=(null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""%></a>
-               </span>
-              </td>
-            </tr>
-          <%
-            }
-             }
-          %>
-        </table>
-        <br />
+            String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+            Chm62edtSitesAttributesPersist habitat = (Chm62edtSitesAttributesPersist)habit1NotEunis.get(i);
+            String habCode = habitat.getName();
+            habCode = (habCode == null ? "" : habCode.substring(habCode.lastIndexOf("_")+1));
+%>
+      <tr<%=cssClass%>>
+        <td>
+          <%=habCode%>
+        </td>
+        <td>
+          <%attribute2 = factsheet.findHabit1NotEunisAttributes("NAME_EN_"+habCode);%>
+          <%=(null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""%>&nbsp;
+        </td>
+        <td  style="text-align:right">
+          <%attribute2 = factsheet.findHabit1NotEunisAttributes("COVER_"+habCode);%>
+          <%=(null != attribute2) ? Utilities.formatDecimal(attribute2.getValue(), 2) : "&nbsp;"%>
+        </td>
+        <td>
+<%
+            attribute2 = factsheet.findHabit1NotEunisAttributes("REPRESENTATIVITY_"+habCode);
+            String attVal = "";
+            if(!"".equals((null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""))
+              attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_REPRESENTATIVITY WHERE ID_REPRESENTATIVITY ='"+attribute2.getValue()+"'");
+%>
+         <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Representativity')" onmouseout="hidetooltip()">
+           <a href="#" onclick="return false;"><%=(null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""%></a>
+         </span>
+        </td>
+        <td style="text-align:right">
+<%
+            attribute2 = factsheet.findHabit1NotEunisAttributes("RELATIVE_SURFACE_"+habCode);
+            attVal = "";
+            if(!"".equals((null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""))
+              attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_RELATIVE_SURFACE WHERE ID_RELATIVE_SURFACE ='"+attribute2.getValue()+"'");
+%>
+         <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Relative surface')" onmouseout="hidetooltip()">
+           <a href="#" onclick="return false;"><%=(null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""%></a>
+         </span>
+        </td>
+        <td>
+<%
+            attribute2 = factsheet.findHabit1NotEunisAttributes("CONSERVATION_"+habCode);
+            attVal = "";
+            if(!"".equals((null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""))
+              attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_NATURA2000_CONSERVATION_CODE WHERE ID_CONSERVATION_CODE ='"+attribute2.getValue()+"'");
+%>
+         <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Conservation')" onmouseout="hidetooltip()">
+           <a href="#" onclick="return false;"><%=(null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""%></a>
+         </span>
+        </td>
+        <td>
+<%
+            attribute2 = factsheet.findHabit1NotEunisAttributes("GLOBAL_"+habCode);
+            attVal = "";
+            if(!"".equals((null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""))
+              attVal = sqlc.ExecuteSQL("SELECT NAME FROM CHM62EDT_GLOBAL WHERE ID_GLOBAL ='"+attribute2.getValue()+"'");
+%>
+         <span onmouseover="showtooltipWithMsgAndTitle('<%=attVal%>','Global')" onmouseout="hidetooltip()">
+           <a href="#" onclick="return false;"><%=(null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""%></a>
+         </span>
+        </td>
+      </tr>
 <%
         }
-        if (!habits2Eunis.isEmpty() || !habits2NotEunis.isEmpty())
+      }
+%>
+    </tbody>
+  </table>
+  <br />
+<%
+      }
+      if (!habits2Eunis.isEmpty() || !habits2NotEunis.isEmpty())
+      {
+%>
+  <br />
+  <h3>
+    <%=cm.cmsText("sites_factsheet_166")%>
+  </h3>
+  <table summary="<%=cm.cms("sites_factsheet_166")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cmsText("habitat_type_code")%>
+        </th>
+        <th>
+          <%=cm.cmsText("habitat_type_english_name")%>
+        </th>
+        <th style="text-align : right;">
+          <%=cm.cmsText("cover_percent")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+<%
+        if (!habits2Eunis.isEmpty())
         {
-%>
-        <br />
-        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("sites_factsheet_166")%></div>
-        <table summary="<%=cm.cms("sites_factsheet_166")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitats2" class="sortable">
-          <tr>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("habitat_type_code")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("habitat_type_english_name")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th style="text-align : right;" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("cover_percent")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-          </tr>
-<%
-          if (!habits2Eunis.isEmpty())
+          for (int i = 0; i < habits2Eunis.size(); i++)
           {
-            for (int i = 0; i < habits2Eunis.size(); i++)
-            {
-              SiteHabitatsPersist habitat = (SiteHabitatsPersist)habits2Eunis.get(i);
+            String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+            SiteHabitatsPersist habitat = (SiteHabitatsPersist)habits2Eunis.get(i);
 %>
-                <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-                    <td>
-                     <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getIdHabitat()%></a>
-                     <%=cm.cmsTitle("open_habitat_factsheet")%>
-                   </td>
-                    <td>
-                      <%String val = habitat.getHabitatDescription();%>
-                      <%=(null != val) ? Utilities.formatString(val) : ""%>&nbsp;
-                    </td>
-                    <td align="right">
-                      <%attribute = factsheet.findSiteAttributes("COVER", habitat.getIdReportAttributes());%>
-                      <%=(null != attribute) ? Utilities.formatDecimal(attribute.getValue(), 2) : "&nbsp;"%>
-                    </td>
-                  </tr>
+      <tr<%=cssClass%>>
+        <td>
+         <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getIdHabitat()%></a>
+         <%=cm.cmsTitle("open_habitat_factsheet")%>
+       </td>
+        <td>
+          <%String val = habitat.getHabitatDescription();%>
+          <%=(null != val) ? Utilities.formatString(val) : ""%>&nbsp;
+        </td>
+        <td align="right">
+          <%attribute = factsheet.findSiteAttributes("COVER", habitat.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatDecimal(attribute.getValue(), 2) : "&nbsp;"%>
+        </td>
+      </tr>
 <%
-            }
           }
-          if (!habits2NotEunis.isEmpty())
+        }
+        if (!habits2NotEunis.isEmpty())
+        {
+          Chm62edtSitesAttributesPersist attribute2;
+          for (int i = 0; i < habits2NotEunis.size(); i++)
           {
-            Chm62edtSitesAttributesPersist attribute2;
-            for (int i = 0; i < habits2NotEunis.size(); i++)
-            {
-              Chm62edtSitesAttributesPersist habitat = (Chm62edtSitesAttributesPersist)habits2NotEunis.get(i);
-              String habCode = habitat.getName();
-              habCode = (habCode == null ? "" : habCode.substring(habCode.lastIndexOf("_")+1));
+            Chm62edtSitesAttributesPersist habitat = (Chm62edtSitesAttributesPersist)habits2NotEunis.get(i);
+            String habCode = habitat.getName();
+            habCode = (habCode == null ? "" : habCode.substring(habCode.lastIndexOf("_")+1));
 %>
-                <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-                    <td><%=habCode%></td>
-                    <td>
-                      <%attribute2 = factsheet.findHabit2NotEunisAttributes("NAME_EN_"+habCode);%>
-                      <%=(null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""%>&nbsp;
-                    </td>
-                    <td align="right">
-                      <%attribute2 = factsheet.findHabit2NotEunisAttributes("COVER_"+habCode);%>
-                      <%=(null != attribute2) ? Utilities.formatDecimal(attribute2.getValue(), 2) : ""%>&nbsp;
-                    </td>
-                  </tr>
+      <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
+        <td>
+          <%=habCode%>
+        </td>
+        <td>
+          <%attribute2 = factsheet.findHabit2NotEunisAttributes("NAME_EN_"+habCode);%>
+          <%=(null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""%>&nbsp;
+        </td>
+        <td style="text-align:right;">
+          <%attribute2 = factsheet.findHabit2NotEunisAttributes("COVER_"+habCode);%>
+          <%=(null != attribute2) ? Utilities.formatDecimal(attribute2.getValue(), 2) : ""%>&nbsp;
+        </td>
+      </tr>
 <%
-            }
           }
+        }
 %>
-        </table>
-        <br />
+    </tbody>
+  </table>
+  <br />
 <%
       }
     }
@@ -321,96 +328,105 @@
       if (!habitats.isEmpty() || !sitesSpecificHabitats.isEmpty())
       {
 %>
-        <br />
-        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;">
-          <%=cm.cmsText("ecological_information_habitats_within_site")%>
-        </div>
-        <table summary="<%=cm.cms("ecological_information_habitats_within_site")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitats" class="sortable">
-          <tr>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("habitat_type_english_name")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th style="text-align : right;" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_habitats_cover")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("representativity")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th style="text-align : right;" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("sites_factsheet_habitats_surface")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("conservation")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("global")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-          </tr>
+  <br />
+  <h3>
+    <%=cm.cmsText("ecological_information_habitats_within_site")%>
+  </h3>
+  <table summary="<%=cm.cms("ecological_information_habitats_within_site")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cmsText("habitat_type_english_name")%>
+        </th>
+        <th style="text-align : right;">
+          <%=cm.cmsText("sites_factsheet_habitats_cover")%>
+        </th>
+        <th>
+          <%=cm.cmsText("representativity")%>
+        </th>
+        <th style="text-align : right;">
+          <%=cm.cmsText("sites_factsheet_habitats_surface")%>
+        </th>
+        <th>
+          <%=cm.cmsText("conservation")%>
+        </th>
+        <th>
+          <%=cm.cmsText("global")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
         Chm62edtReportAttributesPersist attribute;
         for (int i = 0; i < habitats.size(); i++)
         {
-          SiteHabitatsPersist habitat = (SiteHabitatsPersist)habitats.get(i);%>
-          <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-            <td>
-              <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getHabitatDescription()%></a>&nbsp;
-              <%=cm.cmsTitle("open_habitat_factsheet")%>
-            </td>
-            <td  style="text-align:right">
-              <%attribute = factsheet.findSiteAttributes("COVER", habitat.getIdReportAttributes());%>
-              <%=(null != attribute) ? Utilities.formatDecimal( attribute.getValue(), 2) : "&nbsp;"%>
-            </td>
-            <td>
-              <%attribute = factsheet.findSiteAttributes("REPRESENTATIVITY", habitat.getIdReportAttributes());%>
-              <%=(null != attribute) ? Utilities.formatString(attribute.getValue()) : "&nbsp;"%>
-            </td>
-            <td  style="text-align:right">
-              <%attribute = factsheet.findSiteAttributes("SURFACE", habitat.getIdReportAttributes());%>
-              <%=(null != attribute) ? Utilities.formatString(attribute.getValue()) : "&nbsp;"%>
-            </td>
-            <td>
-              <%attribute = factsheet.findSiteAttributes("CONSERVATION", habitat.getIdReportAttributes());%>
-              <%=(null != attribute) ? Utilities.formatString(attribute.getValue()) : "&nbsp;"%>
-            </td>
-            <td>
-              <%attribute = factsheet.findSiteAttributes("GLOBAL", habitat.getIdReportAttributes());%>
-              <%=(null != attribute) ? Utilities.formatString(attribute.getValue()) : "&nbsp;"%>
-            </td>
-          </tr>
+          String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+          SiteHabitatsPersist habitat = (SiteHabitatsPersist)habitats.get(i);
+%>
+      <tr<%=cssClass%>>
+        <td>
+          <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getHabitatDescription()%></a>&nbsp;
+          <%=cm.cmsTitle("open_habitat_factsheet")%>
+        </td>
+        <td  style="text-align:right">
+          <%attribute = factsheet.findSiteAttributes("COVER", habitat.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatDecimal( attribute.getValue(), 2) : "&nbsp;"%>
+        </td>
+        <td>
+          <%attribute = factsheet.findSiteAttributes("REPRESENTATIVITY", habitat.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatString(attribute.getValue()) : "&nbsp;"%>
+        </td>
+        <td  style="text-align:right">
+          <%attribute = factsheet.findSiteAttributes("SURFACE", habitat.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatString(attribute.getValue()) : "&nbsp;"%>
+        </td>
+        <td>
+          <%attribute = factsheet.findSiteAttributes("CONSERVATION", habitat.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatString(attribute.getValue()) : "&nbsp;"%>
+        </td>
+        <td>
+          <%attribute = factsheet.findSiteAttributes("GLOBAL", habitat.getIdReportAttributes());%>
+          <%=(null != attribute) ? Utilities.formatString(attribute.getValue()) : "&nbsp;"%>
+        </td>
+      </tr>
 <%
         }
 %>
-        </table>
+    </tbody>
+  </table>
 <%
         if (sitesSpecificHabitats.size() > 0)
         {
 %>
-        <br />
-        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitat_type_not_eunis")%></div>
-        <table summary="<%=cm.cms("habitat_type_not_eunis")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="habitatsNonEUNIS" style="border-collapse:collapse">
-          <tr>
-            <th class="resultHeader">
-              <%=cm.cms("habitat_type_code")%>
-            </th>
-          </tr>
+  <br />
+  <h3>
+    <%=cm.cmsText("habitat_type_not_eunis")%>
+  </h3>
+  <table summary="<%=cm.cms("habitat_type_not_eunis")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cms("habitat_type_code")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
           for (int i = 0; i < sitesSpecificHabitats.size(); i++)
           {
-              Chm62edtSitesAttributesPersist habitat = (Chm62edtSitesAttributesPersist)sitesSpecificHabitats.get(i);
+            String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+            Chm62edtSitesAttributesPersist habitat = (Chm62edtSitesAttributesPersist)sitesSpecificHabitats.get(i);
 %>
-          <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-            <td><%=habitat.getValue()%></td>
-          </tr>
+      <tr<%=cssClass%>>
+        <td>
+          <%=habitat.getValue()%>
+        </td>
+      </tr>
 <%
           }
 %>
-        </table>
+    </tbody>
+  </table>
 <%
         }
       }

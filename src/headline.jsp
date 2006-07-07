@@ -120,82 +120,130 @@
     </title>
   </head>
   <body>
-    <div id="outline">
-    <div id="alignment">
-    <div id="content">
-      <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home#index.jsp,services#services.jsp,headline"/>
-      </jsp:include>
-<%
-  // If user is authentificated and has this right
-  if(!authorised)
-  {
-%>
-      <br />
-      <strong>
-        <%=cm.cmsText("not_authenticated_no_rights")%>
-      </strong>
-      <a href="login.jsp" title="Login"><%=cm.cmsText("login")%></a>
-      <br />
-<%
-  }
-  else
-  {
-%>
-      <h1>
-        <%=cm.cmsText("headline_title")%>
-      </h1>
-      <br />
-      <form method="post" name="webcontent" action="headline.jsp">
-        <label for="generic_index_07">
-          <%=cm.cms("current_headline_label")%>:
-        </label>
-        <br />
-        <textarea rows="10" cols="80" name="generic_index_07" id="generic_index_07" class="inputTextField"><%=headline%></textarea>
-        <%=cm.cmsLabel("current_headline_label")%>
-        <br />
-        <br />
-        <label for="start_date">
-          <%=cm.cms("headline_start_date")%>:
-        </label>
-        <input type="text" name="start_date" id="start_date" size="12" value="<%=start_date%>" class="inputTextField" title="<%=cm.cms("headline_start_date")%>" />
-        <%=cm.cmsLabel("headline_start_date")%>
-        (yyyy-MM-dd)
-        <br />
-        <br />
-        <label for="end_date">
-          <%=cm.cms("headline_end_date")%>:
-        </label>
-        <input class="inputTextField" type="text" name="end_date" id="end_date" size="12" value="<%=end_date%>" title="<%=cm.cms("headline_end_date")%>" />
-        <%=cm.cmsLabel("headline_end_date")%>
-        (yyyy-MM-dd)
-        <br />
-        <br />
-        <br />
-        <input class="inputTextField" type="submit" value="<%=cm.cms("headline_insert")%>" id="insert" name="insert" title="<%=cm.cms("headline_insert_label")%>" />&nbsp;&nbsp;
-        <%=cm.cmsInput("headline_insert")%>
+    <div id="visual-portal-wrapper">
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
+      <!-- The wrapper div. It contains the three columns. -->
+      <div id="portal-columns">
+        <!-- start of the main and left columns -->
+        <div id="visual-column-wrapper">
+          <!-- start of main content block -->
+          <div id="portal-column-content">
+            <div id="content">
+              <div class="documentContent" id="region-content">
+                <a name="documentContent"></a>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure">Document Actions</h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="Print this page"
+                            title="Print this page" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="Toggle full screen mode"
+                             title="Toggle full screen mode" /></a>
+                    </li>
+                  </ul>
+                </div>
+                <br clear="all" />
+<!-- MAIN CONTENT -->
+                <jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="home#index.jsp,services#services.jsp,headline"/>
+                </jsp:include>
+          <%
+            // If user is authentificated and has this right
+            if(!authorised)
+            {
+          %>
+                <br />
+                <strong>
+                  <%=cm.cmsText("not_authenticated_no_rights")%>
+                </strong>
+                <a href="login.jsp" title="Login"><%=cm.cmsText("login")%></a>
+                <br />
+          <%
+            }
+            else
+            {
+          %>
+                <h1>
+                  <%=cm.cmsText("headline_title")%>
+                </h1>
+                <br />
+                <form method="post" name="webcontent" action="headline.jsp">
+                  <label for="generic_index_07">
+                    <%=cm.cms("current_headline_label")%>:
+                  </label>
+                  <br />
+                  <textarea rows="10" cols="80" name="generic_index_07" id="generic_index_07"><%=headline%></textarea>
+                  <%=cm.cmsLabel("current_headline_label")%>
+                  <br />
+                  <br />
+                  <label for="start_date">
+                    <%=cm.cms("headline_start_date")%>:
+                  </label>
+                  <input type="text" name="start_date" id="start_date" size="12" value="<%=start_date%>" title="<%=cm.cms("headline_start_date")%>" />
+                  <%=cm.cmsLabel("headline_start_date")%>
+                  (yyyy-MM-dd)
+                  <br />
+                  <br />
+                  <label for="end_date">
+                    <%=cm.cms("headline_end_date")%>:
+                  </label>
+                  <input type="text" name="end_date" id="end_date" size="12" value="<%=end_date%>" title="<%=cm.cms("headline_end_date")%>" />
+                  <%=cm.cmsLabel("headline_end_date")%>
+                  (yyyy-MM-dd)
+                  <br />
+                  <br />
+                  <br />
+                  <input class="searchButton" type="submit" value="<%=cm.cms("headline_insert")%>" id="insert" name="insert" title="<%=cm.cms("headline_insert_label")%>" />&nbsp;&nbsp;
+                  <%=cm.cmsInput("headline_insert")%>
 
-        <input class="inputTextField" type="submit" value="<%=cm.cms("delete")%>" id="delete" name="delete" title="<%=cm.cms("delete")%>" />&nbsp;&nbsp;
-        <%=cm.cmsInput("delete")%>
+                  <input class="searchButton" type="submit" value="<%=cm.cms("delete")%>" id="delete" name="delete" title="<%=cm.cms("delete")%>" />&nbsp;&nbsp;
+                  <%=cm.cmsInput("delete")%>
 
-        <input class="inputTextField" type="submit" value="<%=cm.cms("delete_all")%>" id="deleteall" name="deleteall" title="<%=cm.cms("delete_all")%>" />
-        <%=cm.cmsInput("delete_all")%>
-      </form>
-<%
-  }
-%>
-      <%=cm.cmsMsg("generic_index_07")%>
-      <%=cm.br()%>
-      <%=cm.cmsMsg("headline_updated")%>
-      <%=cm.br()%>
-      <%=cm.cmsMsg("headline_deleted")%>
-      <%=cm.br()%>
-      <%=cm.cmsMsg("headlines_deleted_all")%>
-      <jsp:include page="footer.jsp">
-        <jsp:param name="page_name" value="template.jsp"/>
-      </jsp:include>
-    </div>
-    </div>
+                  <input class="searchButton" type="submit" value="<%=cm.cms("delete_all")%>" id="deleteall" name="deleteall" title="<%=cm.cms("delete_all")%>" />
+                  <%=cm.cmsInput("delete_all")%>
+                </form>
+          <%
+            }
+          %>
+                <%=cm.cmsMsg("generic_index_07")%>
+                <%=cm.br()%>
+                <%=cm.cmsMsg("headline_updated")%>
+                <%=cm.br()%>
+                <%=cm.cmsMsg("headline_deleted")%>
+                <%=cm.br()%>
+                <%=cm.cmsMsg("headlines_deleted_all")%>
+                <jsp:include page="footer.jsp">
+                  <jsp:param name="page_name" value="template.jsp"/>
+                </jsp:include>
+<!-- END MAIN CONTENT -->
+              </div>
+            </div>
+          </div>
+          <!-- end of main content block -->
+          <!-- start of the left (by default at least) column -->
+          <div id="portal-column-one">
+            <div class="visualPadding">
+              <jsp:include page="inc_column_left.jsp" />
+            </div>
+          </div>
+          <!-- end of the left (by default at least) column -->
+        </div>
+        <!-- end of the main and left columns -->
+        <!-- start of right (by default at least) column -->
+        <div id="portal-column-two">
+          <div class="visualPadding">
+            <jsp:include page="inc_column_right.jsp" />
+          </div>
+        </div>
+        <!-- end of the right (by default at least) column -->
+        <div class="visualClear"><!-- --></div>
+      </div>
+      <!-- end column wrapper -->
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
     </div>
   </body>
 </html>

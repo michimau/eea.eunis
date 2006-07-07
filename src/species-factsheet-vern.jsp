@@ -8,12 +8,11 @@
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtReportsPersist,java.util.*,
+<%@ page import="java.util.*,
                  ro.finsiel.eunis.search.species.SpeciesSearchUtility,
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.search.species.VernacularNameWrapper,
-                 ro.finsiel.eunis.WebContentManagement,
-                 ro.finsiel.eunis.factsheet.species.SpeciesFactsheet"%>
+                 ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="FormBean" class="ro.finsiel.eunis.formBeans.SpeciesFactSheetBean" scope="page">
   <jsp:setProperty name="FormBean" property="*"/>
 </jsp:useBean>
@@ -27,32 +26,36 @@
   if ( !results.isEmpty() )
   {
 %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("vernacular_names")%></div>
-    <table summary="<%=cm.cms("vernacular_names")%>" width="100%" border="1" cellspacing="1" cellpadding="0"  id="vernNames" class="sortable">
+  <h2>
+    <%=cm.cmsText("vernacular_names")%>
+  </h2>
+  <table summary="<%=cm.cms("vernacular_names")%>" class="listing" width="90%">
+    <thead>
       <tr>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("vernacular_name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("language")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("reference")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
+    </thead>
+    <tbody>
 <%
     int i = 0;
-    String bgColor;
     while (it.hasNext())
     {
-      bgColor  = ( 0 == ( i++ % 2 ) ) ? "#FFFFFF" : "#EEEEEE";
+      String cssClass = i++ % 2 == 0 ? "" : " class=\"zebraeven\"";
       VernacularNameWrapper vName = ( ( VernacularNameWrapper ) it.next() );
       String reference = ( vName.getIdDc() == null ? "-1" : vName.getIdDc().toString() );
 %>
-      <tr style="background-color:<%=bgColor%>">
+      <tr<%=cssClass%>>
         <td>
           <%=Utilities.treatURLSpecialCharacters(vName.getName())%>
         </td>
@@ -91,11 +94,12 @@
 <%
     }
 %>
-    </table>
+    </tbody>
+  </table>
 <%
   }
 %>
 <%=cm.br()%>
 <%=cm.cmsMsg("vernacular_names")%>
-<br />
-<br />
+  <br />
+  <br />

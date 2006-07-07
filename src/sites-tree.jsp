@@ -30,166 +30,211 @@
     </title>
   </head>
   <body>
-    <div id="outline">
-    <div id="alignment">
-    <div id="content">
-      <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,sites_tree_browser"/>
-        <jsp:param name="helpLink" value="help.jsp"/>
-      </jsp:include>
-      <h1>
-        <%=cm.cmsText("sites_tree_browser")%>
-      </h1>
-      <br/>
-      <%=cm.cmsText("sites_tree_browser_explanation")%>
-      <br/>
-<%
-  String idSource = Utilities.formatString( request.getParameter( "idSource" ), "" );
-  String idDesignation = Utilities.formatString( request.getParameter( "idDesignation" ), "" );
-  String idGeoscope = Utilities.formatString( request.getParameter( "idGeoscope" ), "" );
+    <div id="visual-portal-wrapper">
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
+      <!-- The wrapper div. It contains the three columns. -->
+      <div id="portal-columns">
+        <!-- start of the main and left columns -->
+        <div id="visual-column-wrapper">
+          <!-- start of main content block -->
+          <div id="portal-column-content">
+            <div id="content">
+              <div class="documentContent" id="region-content">
+                <a name="documentContent"></a>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure">Document Actions</h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="Print this page"
+                            title="Print this page" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="Toggle full screen mode"
+                             title="Toggle full screen mode" /></a>
+                    </li>
+                  </ul>
+                </div>
+                <br clear="all" />
+<!-- MAIN CONTENT -->
+                <jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,sites_tree_browser"/>
+                  <jsp:param name="helpLink" value="help.jsp"/>
+                </jsp:include>
+                <h1>
+                  <%=cm.cmsText("sites_tree_browser")%>
+                </h1>
+                <br/>
+                <%=cm.cmsText("sites_tree_browser_explanation")%>
+                <br/>
+          <%
+            String idSource = Utilities.formatString( request.getParameter( "idSource" ), "" );
+            String idDesignation = Utilities.formatString( request.getParameter( "idDesignation" ), "" );
+            String idGeoscope = Utilities.formatString( request.getParameter( "idGeoscope" ), "" );
 
-  String SQL_DRV = application.getInitParameter("JDBC_DRV");
-  String SQL_URL = application.getInitParameter("JDBC_URL");
-  String SQL_USR = application.getInitParameter("JDBC_USR");
-  String SQL_PWD = application.getInitParameter("JDBC_PWD");
+            String SQL_DRV = application.getInitParameter("JDBC_DRV");
+            String SQL_URL = application.getInitParameter("JDBC_URL");
+            String SQL_USR = application.getInitParameter("JDBC_USR");
+            String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
-  SQLUtilities sqlc = new SQLUtilities();
-  sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+            SQLUtilities sqlc = new SQLUtilities();
+            sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
 
-  String strSQL = "";
+            String strSQL = "";
 
-  Connection con = null;
-  PreparedStatement ps = null;
-  ResultSet rs = null;
-  PreparedStatement ps2 = null;
-  ResultSet rs2 = null;
-  PreparedStatement ps3 = null;
-  ResultSet rs3 = null;
+            Connection con = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            PreparedStatement ps2 = null;
+            ResultSet rs2 = null;
+            PreparedStatement ps3 = null;
+            ResultSet rs3 = null;
 
-  strSQL = "SELECT ID_DESIGNATION, CHM62EDT_DESIGNATIONS.ID_GEOSCOPE, DESCRIPTION, AREA_NAME_EN";
-  strSQL = strSQL + " FROM CHM62EDT_DESIGNATIONS, CHM62EDT_COUNTRY";
-  strSQL = strSQL + " WHERE CHM62EDT_DESIGNATIONS.ID_GEOSCOPE = CHM62EDT_COUNTRY.ID_GEOSCOPE";
-  strSQL = strSQL + " AND LENGTH(DESCRIPTION)>0";
-  strSQL = strSQL + " ORDER BY DESCRIPTION ASC";
+            strSQL = "SELECT ID_DESIGNATION, CHM62EDT_DESIGNATIONS.ID_GEOSCOPE, DESCRIPTION, AREA_NAME_EN";
+            strSQL = strSQL + " FROM CHM62EDT_DESIGNATIONS, CHM62EDT_COUNTRY";
+            strSQL = strSQL + " WHERE CHM62EDT_DESIGNATIONS.ID_GEOSCOPE = CHM62EDT_COUNTRY.ID_GEOSCOPE";
+            strSQL = strSQL + " AND LENGTH(DESCRIPTION)>0";
+            strSQL = strSQL + " ORDER BY DESCRIPTION ASC";
 
-  try
-  {
-    Class.forName( SQL_DRV );
-    con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
-
-    ps = con.prepareStatement( strSQL );
-    rs = ps.executeQuery();
-%>
-    <ul>
-<%
-      while ( rs.next() )
-      {
-%>
-      <li>
-<%      if(sqlc.DesignationHasSites(rs.getString("ID_DESIGNATION"),rs.getString("ID_GEOSCOPE"))) {
-%>
-        <a title="<%=rs.getString("DESCRIPTION")%>" href="sites-tree.jsp?idDesignation=<%=rs.getString("ID_DESIGNATION")%>&idGeoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=rs.getString("DESCRIPTION")%> (<%=rs.getString("AREA_NAME_EN")%>)</a>
-        &nbsp;
-        [<a title="<%=rs.getString("DESCRIPTION")%>" href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=cm.cmsText("open_designation_factsheet")%></a>]
-<%
-        //now check if we expand source databases
-
-        if(idDesignation.length()>0 && idGeoscope.length()>0) {
-          if(rs.getString("ID_DESIGNATION").equalsIgnoreCase(idDesignation) && rs.getString("ID_GEOSCOPE").equalsIgnoreCase(idGeoscope))  {
-            // we calculate and display count of sites group by source database
-
-            strSQL = "SELECT SOURCE_DB, COUNT(*) AS RECORD_COUNT";
-            strSQL = strSQL + " FROM `chm62edt_sites`";
-            strSQL = strSQL + " INNER JOIN `chm62edt_designations` ON (`chm62edt_sites`.ID_DESIGNATION = `chm62edt_designations`.ID_DESIGNATION AND `chm62edt_sites`.ID_GEOSCOPE = `chm62edt_designations`.ID_GEOSCOPE)";
-            strSQL = strSQL + " WHERE `chm62edt_sites`.ID_DESIGNATION = '" + idDesignation + "'";
-            strSQL = strSQL + " AND `chm62edt_sites`.ID_GEOSCOPE = " + idGeoscope;
-            strSQL = strSQL + " GROUP BY `chm62edt_sites`.ID_DESIGNATION, `chm62edt_sites`.ID_GEOSCOPE";
-            strSQL = strSQL + " ORDER BY SOURCE_DB ASC";
-
-            ps2 = con.prepareStatement( strSQL );
-            rs2 = ps2.executeQuery();
-%>
-            <ul>
-<%
-            while ( rs2.next() )
+            try
             {
-%>
-            <li>
-              <a name="position"></a><a title="<%=SitesSearchUtility.translateSourceDB(rs2.getString("SOURCE_DB"))%>" href="sites-tree.jsp?idDesignation=<%=rs.getString("ID_DESIGNATION")%>&idGeoscope=<%=rs.getString("ID_GEOSCOPE")%>&idSource=<%=rs2.getString("SOURCE_DB")%>#position"><%=SitesSearchUtility.translateSourceDB(rs2.getString("SOURCE_DB"))%> (<%=rs2.getString("RECORD_COUNT")%> records.)</a>
-<%
-              //we check to see if we need to display sites
-              if(idSource.length()>0) {
-                strSQL = "SELECT ID_SITE, NAME";
-                strSQL = strSQL + " FROM `chm62edt_sites`";
-                strSQL = strSQL + " WHERE `chm62edt_sites`.ID_DESIGNATION = '" + idDesignation + "'";
-                strSQL = strSQL + " AND `chm62edt_sites`.ID_GEOSCOPE = " + idGeoscope;
-                strSQL = strSQL + " AND `chm62edt_sites`.SOURCE_DB = '" + idSource + "'";
-                strSQL = strSQL + " ORDER BY NAME ASC";
+              Class.forName( SQL_DRV );
+              con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
 
-                ps3 = con.prepareStatement( strSQL );
-                rs3 = ps3.executeQuery();
-%>
-                <ul>
-<%
-                while ( rs3.next() )
+              ps = con.prepareStatement( strSQL );
+              rs = ps.executeQuery();
+          %>
+              <ul>
+          <%
+                while ( rs.next() )
                 {
-%>
-                  <li>
-                    <a title="<%=rs3.getString("NAME")%>" href="sites-factsheet.jsp?idsite=<%=rs3.getString("ID_SITE")%>"><%=rs3.getString("NAME")%></a>
-                  <li/>
-<%              }
+          %>
+                <li>
+          <%      if(sqlc.DesignationHasSites(rs.getString("ID_DESIGNATION"),rs.getString("ID_GEOSCOPE"))) {
+          %>
+                  <a title="<%=rs.getString("DESCRIPTION")%>" href="sites-tree.jsp?idDesignation=<%=rs.getString("ID_DESIGNATION")%>&idGeoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=rs.getString("DESCRIPTION")%> (<%=rs.getString("AREA_NAME_EN")%>)</a>
+                  &nbsp;
+                  [<a title="<%=rs.getString("DESCRIPTION")%>" href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=cm.cmsText("open_designation_factsheet")%></a>]
+          <%
+                  //now check if we expand source databases
 
-%>
-                </ul>
-<%
-                rs3.close();
-                ps3.close();
-              }
-%>
-            </li>
-<%
+                  if(idDesignation.length()>0 && idGeoscope.length()>0) {
+                    if(rs.getString("ID_DESIGNATION").equalsIgnoreCase(idDesignation) && rs.getString("ID_GEOSCOPE").equalsIgnoreCase(idGeoscope))  {
+                      // we calculate and display count of sites group by source database
+
+                      strSQL = "SELECT SOURCE_DB, COUNT(*) AS RECORD_COUNT";
+                      strSQL = strSQL + " FROM `chm62edt_sites`";
+                      strSQL = strSQL + " INNER JOIN `chm62edt_designations` ON (`chm62edt_sites`.ID_DESIGNATION = `chm62edt_designations`.ID_DESIGNATION AND `chm62edt_sites`.ID_GEOSCOPE = `chm62edt_designations`.ID_GEOSCOPE)";
+                      strSQL = strSQL + " WHERE `chm62edt_sites`.ID_DESIGNATION = '" + idDesignation + "'";
+                      strSQL = strSQL + " AND `chm62edt_sites`.ID_GEOSCOPE = " + idGeoscope;
+                      strSQL = strSQL + " GROUP BY `chm62edt_sites`.ID_DESIGNATION, `chm62edt_sites`.ID_GEOSCOPE";
+                      strSQL = strSQL + " ORDER BY SOURCE_DB ASC";
+
+                      ps2 = con.prepareStatement( strSQL );
+                      rs2 = ps2.executeQuery();
+          %>
+                      <ul>
+          <%
+                      while ( rs2.next() )
+                      {
+          %>
+                      <li>
+                        <a name="position"></a><a title="<%=SitesSearchUtility.translateSourceDB(rs2.getString("SOURCE_DB"))%>" href="sites-tree.jsp?idDesignation=<%=rs.getString("ID_DESIGNATION")%>&idGeoscope=<%=rs.getString("ID_GEOSCOPE")%>&idSource=<%=rs2.getString("SOURCE_DB")%>#position"><%=SitesSearchUtility.translateSourceDB(rs2.getString("SOURCE_DB"))%> (<%=rs2.getString("RECORD_COUNT")%> records.)</a>
+          <%
+                        //we check to see if we need to display sites
+                        if(idSource.length()>0) {
+                          strSQL = "SELECT ID_SITE, NAME";
+                          strSQL = strSQL + " FROM `chm62edt_sites`";
+                          strSQL = strSQL + " WHERE `chm62edt_sites`.ID_DESIGNATION = '" + idDesignation + "'";
+                          strSQL = strSQL + " AND `chm62edt_sites`.ID_GEOSCOPE = " + idGeoscope;
+                          strSQL = strSQL + " AND `chm62edt_sites`.SOURCE_DB = '" + idSource + "'";
+                          strSQL = strSQL + " ORDER BY NAME ASC";
+
+                          ps3 = con.prepareStatement( strSQL );
+                          rs3 = ps3.executeQuery();
+          %>
+                          <ul>
+          <%
+                          while ( rs3.next() )
+                          {
+          %>
+                            <li>
+                              <a title="<%=rs3.getString("NAME")%>" href="sites-factsheet.jsp?idsite=<%=rs3.getString("ID_SITE")%>"><%=rs3.getString("NAME")%></a>
+                            <li/>
+          <%              }
+
+          %>
+                          </ul>
+          <%
+                          rs3.close();
+                          ps3.close();
+                        }
+          %>
+                      </li>
+          <%
+                      }
+          %>
+                      </ul>
+          <%
+                      rs2.close();
+                      ps2.close();
+                    }
+                  }
+          %>
+                </li>
+          <%
+                } else {
+          %>
+                <%=rs.getString("DESCRIPTION")%>
+                &nbsp;
+                [<a title="<%=rs.getString("DESCRIPTION")%>" href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=cm.cmsText("open_designation_factsheet")%></a>]
+          <%
+                }
             }
-%>
-            </ul>
-<%
-            rs2.close();
-            ps2.close();
-          }
-        }
-%>
-      </li>
-<%
-      } else {
-%>
-      <%=rs.getString("DESCRIPTION")%>
-      &nbsp;
-      [<a title="<%=rs.getString("DESCRIPTION")%>" href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=cm.cmsText("open_designation_factsheet")%></a>]
-<%
-      }
-  }
-%>
-    </ul>
-<%
-    rs.close();
-    ps.close();
-    con.close();
-  }
-  catch ( Exception e )
-  {
-    e.printStackTrace();
-    return;
-  }
+          %>
+              </ul>
+          <%
+              rs.close();
+              ps.close();
+              con.close();
+            }
+            catch ( Exception e )
+            {
+              e.printStackTrace();
+              return;
+            }
 
-%>
-      <br/>
-      <jsp:include page="footer.jsp">
-        <jsp:param name="page_name" value="sites-tree.jsp" />
-      </jsp:include>
-    </div>
-    </div>
+          %>
+                <br/>
+                <jsp:include page="footer.jsp">
+                  <jsp:param name="page_name" value="sites-tree.jsp" />
+                </jsp:include>
+<!-- END MAIN CONTENT -->
+              </div>
+            </div>
+          </div>
+          <!-- end of main content block -->
+          <!-- start of the left (by default at least) column -->
+          <div id="portal-column-one">
+            <div class="visualPadding">
+              <jsp:include page="inc_column_left.jsp" />
+            </div>
+          </div>
+          <!-- end of the left (by default at least) column -->
+        </div>
+        <!-- end of the main and left columns -->
+        <!-- start of right (by default at least) column -->
+        <div id="portal-column-two">
+          <div class="visualPadding">
+            <jsp:include page="inc_column_right.jsp" />
+          </div>
+        </div>
+        <!-- end of the right (by default at least) column -->
+        <div class="visualClear"><!-- --></div>
+      </div>
+      <!-- end column wrapper -->
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
     </div>
   </body>
 </html>
-<%
-  out.flush();
-%>

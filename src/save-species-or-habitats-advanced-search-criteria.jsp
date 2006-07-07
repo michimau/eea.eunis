@@ -83,7 +83,7 @@
 %>
   <body>
     <form name="eunis" method="post" action="save-species-or-habitats-advanced-search-criteria.jsp">
-      <input type="hidden" name="saveThisCriteria" value = "true" class="inputTextField" />
+      <input type="hidden" name="saveThisCriteria" value = "true" />
 <%
   if(request.getParameter("fromWhere") != null)
   {
@@ -122,7 +122,7 @@
         <tr>
           <td>
             <label for="description" class="noshow"><%=cm.cms("save_search")%></label>
-            <textarea id="description" name="description" cols="70" rows="5" style="width : 300px; height: 80px;" class="inputTextField"><%=descr%></textarea>
+            <textarea id="description" name="description" cols="70" rows="5" style="width : 300px; height: 80px;"><%=descr%></textarea>
             <%=cm.cmsLabel("save_search")%>
           </td>
         </tr>
@@ -166,17 +166,17 @@
   if (null == request.getParameter("description"))
   {
 %>
-            <input type="submit" id="submit" name="Submit" title="<%=cm.cms("save")%>" value="<%=cm.cms("save")%>" class="inputTextField" />
+            <input type="submit" id="submit" name="Submit" title="<%=cm.cms("save")%>" value="<%=cm.cms("save")%>" class="searchButton" />
             <%=cm.cmsTitle("save")%>
             <%=cm.cmsInput("save")%>
 
-            <input type="reset" id="reset" name="Reset" title="<%=cm.cms("reset_values")%>" value="<%=cm.cms("reset")%>" class="inputTextField" />
+            <input type="reset" id="reset" name="Reset" title="<%=cm.cms("reset_values")%>" value="<%=cm.cms("reset")%>" class="standardButton" />
             <%=cm.cmsTitle("reset_values")%>
             <%=cm.cmsInput("reset")%>
 <%
   }
 %>
-            <input type="button" id="close_window" name="Close" title="<%=cm.cms("close_window")%>" value="<%=cm.cms("close_btn")%>" onclick="javascript:closeWindow('<%=request.getParameter("fromWhere")%>','yes')" class="inputTextField" />
+            <input type="button" id="close_window" name="Close" title="<%=cm.cms("close_window")%>" value="<%=cm.cms("close_btn")%>" onclick="javascript:closeWindow('<%=request.getParameter("fromWhere")%>','yes')" class="standardButton" />
             <%=cm.cmsTitle("close_window")%>
             <%=cm.cmsInput("close_btn")%>
           </td>

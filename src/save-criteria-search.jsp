@@ -100,7 +100,7 @@ String descr = (request.getParameter("description") == null ? "" : request.getPa
 %>
   <body>
       <form name="eunis" method="post" action="save-criteria-search.jsp">
-        <input type="hidden" name="saveCriteria" value="true" class="inputTextField" />
+        <input type="hidden" name="saveCriteria" value="true" />
         <input type="hidden" name="numberCriteria" value="<%=java.net.URLDecoder.decode( Utilities.formatString( request.getParameter("numberCriteria") ), "UTF-8" )%>" />
         <input type="hidden" name="pageName" value="<%=java.net.URLDecoder.decode( Utilities.formatString( request.getParameter("pageName") ), "UTF-8" )%>" />
         <input type="hidden" name="expandSearchCriteria" value="<%=java.net.URLDecoder.decode( Utilities.formatString( request.getParameter("expandSearchCriteria") ), "UTF-8" )%>" />
@@ -141,7 +141,7 @@ String descr = (request.getParameter("description") == null ? "" : request.getPa
           <tr>
             <td>
               <label for="description" class="noshow"><%=cm.cms("description")%></label>
-              <textarea id="description" name="description" cols="70" rows="5" style="width : 300px; height: 80px;" class="inputTextField"><%=descr%></textarea>
+              <textarea id="description" name="description" cols="70" rows="5" style="width : 300px; height: 80px;"><%=descr%></textarea>
               <%=cm.cmsLabel("description")%>
             </td>
           </tr>
@@ -186,17 +186,17 @@ String descr = (request.getParameter("description") == null ? "" : request.getPa
   if (null==request.getParameter("description"))
   {
 %>
-            <input type="submit" id="submit" name="Submit" title="<%=cm.cms("save")%>" value="<%=cm.cms("save")%>" class="inputTextField" />
+            <input type="submit" id="submit" name="Submit" title="<%=cm.cms("save")%>" value="<%=cm.cms("save")%>" class="searchButton" />
             <%=cm.cmsTitle("save")%>
             <%=cm.cmsInput("save")%>
 
-            <input type="reset" id="reset" name="Reset" title="<%=cm.cms("reset_values")%>" value="<%=cm.cms("reset")%>" class="inputTextField" />
+            <input type="reset" id="reset" name="Reset" title="<%=cm.cms("reset_values")%>" value="<%=cm.cms("reset")%>" class="standardButton" />
             <%=cm.cmsTitle("reset_values")%>
             <%=cm.cmsInput("reset")%>
 <%
   }
 %>
-            <input type="button" id="close_window" name="Close" title="<%=cm.cms("close_window")%>" value="<%=cm.cms("close_btn")%>" onclick="javascript:closeWindow('<%=request.getParameter("pageName")%>','<%=request.getParameter("expandSearchCriteria")%>')" class="inputTextField" />
+            <input type="button" id="close_window" name="Close" title="<%=cm.cms("close_window")%>" value="<%=cm.cms("close_btn")%>" onclick="javascript:closeWindow('<%=request.getParameter("pageName")%>','<%=request.getParameter("expandSearchCriteria")%>')" class="standardButton" />
             <%=cm.cmsTitle("close_window")%>
             <%=cm.cmsInput("close_btn")%>
           </td>

@@ -29,91 +29,96 @@
   if ( habitats.size() > 0 )
   {
 %>
-        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitat_type_populated_by_species")%></div>
-        <table summary="<%=cm.cms("open_the_statistical_data_for")%>" width="100%" border="1" cellspacing="1" cellpadding="0"  id="habitats" class="sortable">
-          <tr style="background-color:#DDDDDD;text-align:center">
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("eunis_code")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("annex_code")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("habitat_type_name")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("biogeographic_region")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("abundance")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("frequencies")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("faithfulness")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("species_status")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-            <th title="<%=cm.cms("sort_results_on_this_column")%>">
-              <%=cm.cmsText("comment")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </th>
-          </tr>
+  <h2>
+    <%=cm.cmsText("habitat_type_populated_by_species")%>
+  </h2>
+  <table summary="<%=cm.cms("open_the_statistical_data_for")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cmsText("eunis_code")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("annex_code")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("habitat_type_name")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("biogeographic_region")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("abundance")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("frequencies")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("faithfulness")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("species_status")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("comment")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
-          for (int i = 0; i < habitats.size(); i++)
-          {
-            SpeciesHabitatWrapper habitat = (SpeciesHabitatWrapper)habitats.get(i);
+    for (int i = 0; i < habitats.size(); i++)
+    {
+      String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+      SpeciesHabitatWrapper habitat = (SpeciesHabitatWrapper)habitats.get(i);
 %>
-          <tr style="background-color:#EEEEEE">
-            <td>
-              <%=Utilities.formatString(habitat.getEunisHabitatcode())%>
-            </td>
-            <td>
-              <%=Utilities.formatString(habitat.getAnnexICode())%>
-            </td>
-            <td>
-              <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getHabitatName()))%></a>
-              <%=cm.cmsTitle("open_habitat_factsheet")%>
-            </td>
-            <td>
-              <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getGeoscope()))%>
-            </td>
-            <td>
-              <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getAbundance()))%>
-            </td>
-            <td>
-              <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getFrequencies()))%>
-            </td>
-            <td>
-              <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getFaithfulness()))%>
-            </td>
-            <td>
-              <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getSpeciesStatus()))%>
-            </td>
-            <td>
-              <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getComment()))%>
-            </td>
-          </tr>
+      <tr<%=cssClass%>>
+        <td>
+          <%=Utilities.formatString(habitat.getEunisHabitatcode())%>
+        </td>
+        <td>
+          <%=Utilities.formatString(habitat.getAnnexICode())%>
+        </td>
+        <td>
+          <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getHabitatName()))%></a>
+          <%=cm.cmsTitle("open_habitat_factsheet")%>
+        </td>
+        <td>
+          <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getGeoscope()))%>
+        </td>
+        <td>
+          <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getAbundance()))%>
+        </td>
+        <td>
+          <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getFrequencies()))%>
+        </td>
+        <td>
+          <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getFaithfulness()))%>
+        </td>
+        <td>
+          <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getSpeciesStatus()))%>
+        </td>
+        <td>
+          <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getComment()))%>
+        </td>
+      </tr>
 <%
-          }
+    }
 %>
-        </table>
+    </tbody>
+  </table>
 <%
-      }
+  }
 %>
-
-<%=cm.br()%>
-<%=cm.cmsMsg("open_the_statistical_data_for")%>
-
-<br />
-<br />
+  <%=cm.br()%>
+  <%=cm.cmsMsg("open_the_statistical_data_for")%>
+  <br />
+  <br />

@@ -30,44 +30,47 @@
   // Habitat legal information.
   if((factsheet.isEunis() && !legals.isEmpty())) {
 %>
-<div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitats_factsheet_27")%></div>
-<table summary="<%=cm.cms("habitat_type_legal_instruments")%>" width="100%" border="0" cellspacing="0" cellpadding="0" id="legal" class="sortable">
-  <tr>
-    <th width="30%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <strong>
+<h2>
+  <%=cm.cmsText("habitats_factsheet_27")%>
+</h2>
+<table summary="<%=cm.cms("habitat_type_legal_instruments")%>" class="listing" width="90%">
+  <thead>
+    <tr>
+      <th width="30%">
         <%=cm.cmsText("legal_instrument")%>
-        <%=cm.cmsTitle("sort_results_on_this_column")%>
-      </strong>
-    </th>
-    <th width="50%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <strong>
+      </th>
+      <th width="50%">
         <%=cm.cmsText("habitats_factsheet_29")%>
-        <%=cm.cmsTitle("sort_results_on_this_column")%>
-      </strong>
-    </th>
-    <th width="20%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <strong>
+      </th>
+      <th width="20%">
         <%=cm.cmsText("habitats_factsheet_30")%>
-        <%=cm.cmsTitle("sort_results_on_this_column")%>
-      </strong>
-    </th>
-  </tr>
-  <%
-    for(int i = 0; i < legals.size(); i++) {
-      HabitatLegalPersist legal = (HabitatLegalPersist) legals.get(i);
-  %>
-  <tr>
-    <td bgcolor="#EEEEEE" width="30%"><%=legal.getLegalName()%></td>
-    <td bgcolor="#EEEEEE" width="50%"><%=legal.getTitle()%></td>
-    <td bgcolor="#EEEEEE" width="20%"><%=legal.getCode()%></td>
-  </tr>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+<%
+  for(int i = 0; i < legals.size(); i++)
+  {
+    HabitatLegalPersist legal = (HabitatLegalPersist) legals.get(i);
+%>
+    <tr>
+      <td>
+        <%=legal.getLegalName()%>
+      </td>
+      <td>
+        <%=legal.getTitle()%>
+      </td>
+      <td>
+        <%=legal.getCode()%>
+      </td>
+    </tr>
   <%
     }
   %>
-</table>
-<%=cm.br()%>
-<%=cm.cmsMsg("habitat_type_legal_instruments")%>
-<br />
+    </tbody>
+  </table>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("habitat_type_legal_instruments")%>
 <%
   }
 %>

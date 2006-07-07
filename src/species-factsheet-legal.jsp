@@ -10,7 +10,6 @@
 %>
 <%@ page import="ro.finsiel.eunis.factsheet.species.SpeciesFactsheet,
                  ro.finsiel.eunis.search.Utilities,
-                 ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist,
                  ro.finsiel.eunis.WebContentManagement,
                  java.util.Vector,
                  ro.finsiel.eunis.factsheet.species.LegalStatusWrapper"%>
@@ -30,41 +29,43 @@
   if (legals.size() > 0)
   {
 %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("legal_instruments")%></div>
-    <table summary="<%=cm.cms("species_factsheet_legalInstruments_01_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0"  id="legalInstr" class="sortable">
-      <tr style="background-color:#DDDDDD">
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <strong>
-            <%=cm.cmsText("detailed_reference")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </strong>
+  <h2>
+    <%=cm.cmsText("legal_instruments")%>
+  </h2>
+  <table summary="<%=cm.cms("species_factsheet_legalInstruments_01_Sum")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cmsText("detailed_reference")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <strong>
-            <%=cm.cmsText("legal_text")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </strong>
+        <th>
+          <%=cm.cmsText("legal_text")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align:left" title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("species_factsheet_legalInstruments_02")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("url")%>
         </th>
-        <th style="text-align:center" title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("species_factsheet_legalInstrumentsGeoImplem")%>
         </th>
-        <th style="text-align:center" title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("species_factsheet_legalInstrumentsObligations")%>
         </th>
       </tr>
+    </thead>
+    <tbody>
 <%
-  for (int i = 0; i < legals.size(); i++)
-  {
-    LegalStatusWrapper legal = (LegalStatusWrapper)legals.get(i);
+    for (int i = 0; i < legals.size(); i++)
+    {
+      String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+      LegalStatusWrapper legal = (LegalStatusWrapper)legals.get(i);
 %>
 <%--          <tr bgcolor="<%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>">--%>
-      <tr style="background-color:<%=(0 == (i % 2)) ? "#EEEEEE" : "#EEEEEE"%>">
+      <tr<%=cssClass%>>
         <td>
           <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getDetailedReference()))%>
         </td>
@@ -76,34 +77,35 @@
         </td>
         <td>
 <%
-              if(null != legal.getUrl().replaceAll("#",""))
-              {
-                String sFormattedURL = Utilities.formatString(legal.getUrl()).replaceAll("#","");
-                if(sFormattedURL.length()>30) {
-                  sFormattedURL = sFormattedURL.substring(0,30) + "...";
-                }
+      if(null != legal.getUrl().replaceAll("#",""))
+      {
+        String sFormattedURL = Utilities.formatString(legal.getUrl()).replaceAll("#","");
+        if(sFormattedURL.length()>30)
+        {
+          sFormattedURL = sFormattedURL.substring(0,30) + "...";
+        }
 %>
-              <a href="<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getUrl())).replaceAll("#","")%>" title="<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getUrl())).replaceAll("#","")%>"><%=sFormattedURL%></a>
+          <a href="<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getUrl())).replaceAll("#","")%>" title="<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getUrl())).replaceAll("#","")%>"><%=sFormattedURL%></a>
 <%
-              }
+      }
 %>
-                      &nbsp;
-            </td>
-            <td align="center">
+          &nbsp;
+        </td>
+        <td align="center">
 <%
-              if(!legal.getReference().equalsIgnoreCase("10333"))
-              {
+      if(!legal.getReference().equalsIgnoreCase("10333"))
+      {
 %>
-              <a title="<%=cm.cms("species_factsheet_legalInstruments_03_Title")%>" href="javascript:MM_openBrWindow('species-factsheet-geo-legal.jsp?country=<%=Utilities.treatURLSpecialCharacters(legal.getArea())%>&amp;idSpecies=<%=factsheet.getIdSpecies()%>&amp;idSpeciesLink=<%=factsheet.getIdSpeciesLink()%>&amp;URL=<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getUrl())).replaceAll("#","")%>&amp;Title=<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getLegalText()))%>&amp;refs=<%=Utilities.treatURLSpecialCharacters(legal.getReference())%>&amp;mapnumber=<%=i%>','','scrollbars=yes,resizable=yes,width=760,height=480')"><img alt="<%=cm.cms("species_factsheet_legalInstruments_03_Title")%>" src="images/mini/globe.gif" border="0" /></a>
-              <%=cm.cmsTitle("species_factsheet_legalInstruments_03_Title")%>
+          <a title="<%=cm.cms("species_factsheet_legalInstruments_03_Title")%>" href="javascript:MM_openBrWindow('species-factsheet-geo-legal.jsp?country=<%=Utilities.treatURLSpecialCharacters(legal.getArea())%>&amp;idSpecies=<%=factsheet.getIdSpecies()%>&amp;idSpeciesLink=<%=factsheet.getIdSpeciesLink()%>&amp;URL=<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getUrl())).replaceAll("#","")%>&amp;Title=<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getLegalText()))%>&amp;refs=<%=Utilities.treatURLSpecialCharacters(legal.getReference())%>&amp;mapnumber=<%=i%>','','scrollbars=yes,resizable=yes,width=760,height=480')"><img alt="<%=cm.cms("species_factsheet_legalInstruments_03_Title")%>" src="images/mini/globe.gif" border="0" /></a>
+          <%=cm.cmsTitle("species_factsheet_legalInstruments_03_Title")%>
 <%
-              }
-              else
-              {
+      }
+      else
+      {
 %>
-              <%=cm.cmsText("species_factsheet_notApplicable")%>
+          <%=cm.cmsText("species_factsheet_notApplicable")%>
 <%
-              }
+      }
 %>
         </td>
         <td align="center">
@@ -112,9 +114,10 @@
         </td>
       </tr>
 <%
-            }
+    }
 %>
-        </table>
+    </tbody>
+  </table>
 <%
   }
 %>

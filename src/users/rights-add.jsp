@@ -249,7 +249,7 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
       &nbsp;&nbsp;<label for="rightName1"><%=cm.cmsText("rights_add_11")%></label>
       </td>
       <td>
-       <select id="rightName1" name="rightName" class="inputTextField" style="border-width:1px" onchange="MM_jumpMenuRights('parent',this,0,'<%=tab1%>','<%=tab2%>')"  title="<%=cm.cms("rights_add_12")%>">
+       <select id="rightName1" name="rightName" style="border-width:1px" onchange="MM_jumpMenuRights('parent',this,0,'<%=tab1%>','<%=tab2%>')"  title="<%=cm.cms("rights_add_12")%>">
         <option value="selectRightName" selected="selected"><%=cm.cms("rights_add_11")%></option>
         <%
            try
@@ -283,7 +283,7 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
        &nbsp;&nbsp;<label for="rightName2"><%=cm.cmsText("righ_name")%></label>
        </td>
        <td>
-         <input class="inputTextField" title="<%=cm.cms("righ_name")%>" alt="<%=cm.cms("righ_name")%>" type="text" id="rightName2" name="rightName" size="50" value="" onchange="RightExist();" />
+         <input title="<%=cm.cms("righ_name")%>" alt="<%=cm.cms("righ_name")%>" type="text" id="rightName2" name="rightName" size="50" value="" onchange="RightExist();" />
          <%=cm.cmsTitle("righ_name")%>
        </td>
      </tr>
@@ -300,7 +300,7 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
         &nbsp;&nbsp;<label for="description"><%=cm.cmsText("description")%></label>
         </td>
         <td>
-          <textarea title="<%=cm.cms("description")%>" id="description" name="description" cols="70" rows="5"  class="inputTextField"><%=description%></textarea>
+          <textarea title="<%=cm.cms("description")%>" id="description" name="description" cols="70" rows="5"><%=description%></textarea>
           <%=cm.cmsTitle("description")%>
         </td>
       </tr>
@@ -311,12 +311,12 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
 <tr>
   <td style="text-align:left">
     &nbsp;&nbsp;
-    <input id="input1" type="submit" value="<%=(users_operation.equalsIgnoreCase("add_rights")?cm.cms("add_right"):cm.cms("update_data"))%>" name="submit" onclick="document.eunis.operation.value='submit';" class="inputTextField"  title="<%=cm.cms("submit")%>" />
+    <input id="input1" type="submit" value="<%=(users_operation.equalsIgnoreCase("add_rights")?cm.cms("add_right"):cm.cms("update_data"))%>" name="submit" onclick="document.eunis.operation.value='submit';" title="<%=cm.cms("submit")%>" />
     <%=cm.cmsTitle("submit")%>
     <%=cm.cmsInput("add_right")%>
     <%=cm.cmsInput("update_data")%>
     &nbsp;&nbsp;
-    <input id="input2" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="inputTextField"  title="<%=cm.cms("reset")%>" />
+    <input id="input2" type="reset" value="<%=cm.cms("reset")%>" name="Reset" title="<%=cm.cms("reset")%>" />
     <%=cm.cmsTitle("reset")%>
     <%=cm.cmsInput("reset")%>
   </td>

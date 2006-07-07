@@ -23,34 +23,27 @@
   if (l1.size() > 0)
   {
 %>
-      <table summary="layout" width="100%" border="1" cellspacing="1" cellpadding="0" style="border-collapse : collapse; background-color : #DDDDDD;">
-        <tr>
-          <td width="183">
-            <strong>
+      <table class="listing" width="100%">
+        <thead>
+          <tr>
+            <th>
               <%=cm.cmsText( "title" )%>
-            </strong>
-          </td>
-          <td width="122">
-            <strong>
+            </th>
+            <th>
               <%=cm.cmsText( "author" )%>
-            </strong>
-          </td>
-          <td width="126">
-            <strong>
+            </th>
+            <th>
               <%=cm.cmsText( "editor" )%>
-            </strong>
-          </td>
-          <td width="219">
-            <strong>
+            </th>
+            <th>
               <%=cm.cmsText( "publisher" )%>
-            </strong>
-          </td>
-          <td width="84" align="center">
-            <strong>
+            </th>
+            <th>
               <%=cm.cmsText( "published" )%>
-            </strong>
-          </td>
-        </tr>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
 <%
     for (int i = 0; i < l1.size(); i++)
     {
@@ -64,39 +57,40 @@
       if((editor+title+publisher+source).trim().length()>0)
       {
 %>
-        <tr>
-          <td>
-            <%=title%>
-          </td>
-          <td>
-            <%=source%>
-          </td>
-          <td>
-            <%=editor%>
-          </td>
-          <td>
-            <%=publisher%>
-          </td>
+          <tr>
+            <td>
+              <%=Utilities.formatString( title, "&nbsp;" )%>
+            </td>
+            <td>
+              <%=Utilities.formatString( source, "&nbsp;" )%>
+            </td>
+            <td>
+              <%=Utilities.formatString( editor, "&nbsp;" )%>
+            </td>
+            <td>
+              <%=Utilities.formatString( publisher, "&nbsp;" )%>
+            </td>
 <%
         if (null!=aRef.getCreated())
         {
-          String dt = Utilities.formatReferencesDate(aRef.getCreated());
+          String dt = Utilities.formatString( Utilities.formatReferencesDate(aRef.getCreated()), "&nbsp;" );
 %>
-          <td align="center">
-            <%=dt%>
-          </td>
+            <td>
+              <%=dt%>
+            </td>
 <%
         }
         else
         {
 %>
-          <td align="center">
-            &nbsp;
-          </td>
+            <td>
+              &nbsp;
+            </td>
 <%
         }
 %>
-        </tr>
+          </tr>
+        </tbody>
       </table>
 <%
       }

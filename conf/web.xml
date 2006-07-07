@@ -41,7 +41,7 @@
   <!-- Static part of the page title (JSPs)-->
   <context-param>
     <param-name>PAGE_TITLE</param-name>
-    <param-value>EUNIS2 - </param-value>
+    <param-value>EUNIS - </param-value>
     <description>Static part of the pages title</description>
   </context-param>
 

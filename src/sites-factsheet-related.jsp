@@ -37,84 +37,83 @@
           if ( i < sites.size() - 1 ) ids += ",";
         }
 %>
-      <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
-        <input type="hidden" name="sites" value="<%=ids%>" />
-        <input type="submit" name="Show map" value="<%=cm.cms("show_map")%>" title="<%=cm.cms("show_map")%>" class="inputTextField" />
-        <%=cm.cmsInput("show_map")%>
-        <%=cm.cmsTitle("show_map")%>
-      </form>
+  <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
+    <input type="hidden" name="sites" value="<%=ids%>" />
+    <input type="submit" name="Show map" value="<%=cm.cms("show_map")%>" title="<%=cm.cms("show_map")%>" class="searchButton" />
+    <%=cm.cmsInput("show_map")%>
+    <%=cm.cmsTitle("show_map")%>
+  </form>
 <%
       }
 %>
-      <br />
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;">
-        <%=cm.cmsText("sites_factsheet_123")%>
-      </div>
-      <table summary="<%=cm.cms("sites_factsheet_123")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="relations" class="sortable">
-        <tr>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("id_site")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("scientific_name")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("within_databases")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("type")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th style="text-align : right" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("overlap_percent")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-        </tr>
+  <h2>
+    <%=cm.cmsText("sites_factsheet_123")%>
+  </h2>
+  <table summary="<%=cm.cms("sites_factsheet_123")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cmsText("id_site")%>
+        </th>
+        <th>
+          <%=cm.cmsText("scientific_name")%>
+        </th>
+        <th>
+          <%=cm.cmsText("within_databases")%>
+        </th>
+        <th>
+          <%=cm.cmsText("type")%>
+        </th>
+        <th style="text-align : right">
+          <%=cm.cmsText("overlap_percent")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
       String checkURL = "<img src=\"images/mini/check.gif\" alt=\"Check\" align=\"middle\" />";
       for (int i = 0; i < sites.size(); i++)
       {
+        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
         SiteRelationsPersist site = (SiteRelationsPersist)sites.get(i);
         boolean withinProject = site.getWithinProject() != null && site.getWithinProject().intValue() == 1;
 %>
-        <tr bgcolor="<%=0 == i % 2 ? "#EEEEEE" : "#FFFFFF"%>">
-          <td>
-            <%=Utilities.formatString( site.getIdSiteLink(), "&nbsp;" )%>
-          </td>
-          <td>
+      <tr<%=cssClass%>>
+        <td>
+          <%=Utilities.formatString( site.getIdSiteLink(), "&nbsp;" )%>
+        </td>
+        <td>
 <%
         if ( site.getIdSiteLink() != null )
         {
 %>
-            <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
-            <%=cm.cmsTitle("open_site_factsheet")%>
+          <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
+          <%=cm.cmsTitle("open_site_factsheet")%>
 <%
         }
         else
         {
 %>
-            &nbsp;
+          &nbsp;
 <%
         }
 %>
-          </td>
-          <td>
-            <%=withinProject ? checkURL : "&nbsp;"%>
-          </td>
-          <td>
-            <%=Utilities.formatString( site.getRelationType(), "&nbsp;" )%>
-          </td>
-          <td align="right">
-            <%=Utilities.formatString( site.getOverlap(), "&nbsp;" )%>
-          </td>
-        </tr>
+        </td>
+        <td>
+          <%=withinProject ? checkURL : "&nbsp;"%>
+        </td>
+        <td>
+          <%=Utilities.formatString( site.getRelationType(), "&nbsp;" )%>
+        </td>
+        <td align="right">
+          <%=Utilities.formatString( site.getOverlap(), "&nbsp;" )%>
+        </td>
+      </tr>
 <%
       }
 %>
-      </table>
+    <tbody>
+  </table>
 <%
     }
   }
@@ -136,55 +135,57 @@
           if ( i < sitesNatura200.size() - 1 ) ids += ",";
         }
 %>
-      <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
-        <input type="hidden" name="sites" value="<%=ids%>" />
-        <input type="submit" name="Show map" value="<%=cm.cms("show_map")%>" title="<%=cm.cms("show_map")%>" class="inputTextField" />
-        <%=cm.cmsInput("show_map")%>
-        <%=cm.cmsTitle("show_map")%>
-      </form>
+  <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
+    <input type="hidden" name="sites" value="<%=ids%>" />
+    <input type="submit" name="Show map" value="<%=cm.cms("show_map")%>" title="<%=cm.cms("show_map")%>" class="searchButton" />
+    <%=cm.cmsInput("show_map")%>
+    <%=cm.cmsTitle("show_map")%>
+  </form>
 <%
       }
 %>
-      <br />
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;">
-        <%=cm.cmsText("sites_factsheet_related_natura2000")%>
-      </div>
-      <table summary="<%=cm.cms("sites_factsheet_related_natura2000")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="relationsNatura2000Natura2000" class="sortable">
-        <tr>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_related_relationtype")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("site_code")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("site_name")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-        </tr>
+  <br />
+  <h2>
+    <%=cm.cmsText("sites_factsheet_related_natura2000")%>
+  </h2>
+  <table summary="<%=cm.cms("sites_factsheet_related_natura2000")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cmsText("sites_factsheet_related_relationtype")%>
+        </th>
+        <th>
+          <%=cm.cmsText("site_code")%>
+        </th>
+        <th>
+          <%=cm.cmsText("site_name")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
       for (int i = 0; i < sitesNatura200.size(); i++)
       {
+        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
         SiteRelationsPersist site = (SiteRelationsPersist)sitesNatura200.get(i);
 %>
-        <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-          <td>
-            <%=site.getRelationName()%>&nbsp;</td>
-          <td>
-            <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getIdSiteLink()%></a>
-            <%=cm.cmsTitle("open_site_factsheet")%>
-          </td>
-          <td>
-            <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
-            <%=cm.cmsTitle("open_site_factsheet")%>
-          </td>
-        </tr>
+      <tr<%=cssClass%>>
+        <td>
+          <%=site.getRelationName()%>&nbsp;</td>
+        <td>
+          <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getIdSiteLink()%></a>
+          <%=cm.cmsTitle("open_site_factsheet")%>
+        </td>
+        <td>
+          <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
+        <%=cm.cmsTitle("open_site_factsheet")%>
+        </td>
+      </tr>
 <%
       }
 %>
-      </table>
+    </tbody>
+  </table>
 <%
     }
     //Fourth table should be called "Relation with Corine biotope sites"
@@ -196,53 +197,54 @@
     if (sitesCorine.size() > 0 )
     {
 %>
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;">
-        <%=cm.cmsText("sites_factsheet_related_corinesites")%>
-      </div>
-      <table summary="<%=cm.cms("sites_factsheet_related_corinesites")%>" border="1" cellpadding="1" cellspacing="1" width="100%" id="relationsNatura2000sitesCorine" class="sortable">
-        <tr>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("site_code")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("site_name")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_related_overlap")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <%=cm.cmsText("sites_factsheet_related_overlapp")%>
-            <%=cm.cmsTitle("sort_results_on_this_column")%>
-          </th>
-        </tr>
+  <h2>
+    <%=cm.cmsText("sites_factsheet_related_corinesites")%>
+  </h2>
+  <table summary="<%=cm.cms("sites_factsheet_related_corinesites")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cmsText("site_code")%>
+        </th>
+        <th>
+          <%=cm.cmsText("site_name")%>
+        </th>
+        <th>
+          <%=cm.cmsText("sites_factsheet_related_overlap")%>
+        </th>
+        <th>
+          <%=cm.cmsText("sites_factsheet_related_overlapp")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
       for (int i = 0; i < sitesCorine.size(); i++)
       {
+        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
         SiteRelationsPersist site = (SiteRelationsPersist)sitesCorine.get(i);
 %>
-        <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-          <td>
-            <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getIdSiteLink()%></a>
-            <%=cm.cmsTitle("open_site_factsheet")%>
-          </td>
-          <td>
-            <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
-            <%=cm.cmsTitle("open_site_factsheet")%>
-          </td>
-          <td>
-            <%=site.getRelationType()%>
-          </td>
-          <td>
-            <%=Utilities.formatDecimal( site.getOverlap(), 2 )%>
-          </td>
-        </tr>
+      <tr<%=cssClass%>>
+        <td>
+          <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getIdSiteLink()%></a>
+          <%=cm.cmsTitle("open_site_factsheet")%>
+        </td>
+        <td>
+          <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
+          <%=cm.cmsTitle("open_site_factsheet")%>
+        </td>
+        <td>
+          <%=site.getRelationType()%>
+        </td>
+        <td>
+          <%=Utilities.formatDecimal( site.getOverlap(), 2 )%>
+        </td>
+      </tr>
 <%
       }
 %>
-      </table>
+    </tbody>
+  </table>
 <%
     }
   }

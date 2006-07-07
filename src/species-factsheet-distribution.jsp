@@ -13,7 +13,7 @@
                    ro.finsiel.eunis.jrfTables.species.factsheet.ReportsDistributionStatusPersist,
                    java.util.List,
                    ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.ImageProcessing,java.awt.*,
-                   java.io.File,java.util.Date"%>
+                   java.util.Date"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   try
@@ -36,12 +36,11 @@
 
     System.out.println( "outputFilename = " + outputFilename );
     System.out.println( "inputFilename = " + inputFilename );
-    boolean success = false;
+    boolean success;
     try
     {
       ImageProcessing img = new ImageProcessing( inputFilename, outputFilename );
       img.init();
-      String scientificName = request.getParameter("name");
       for (int i = 0; i < d.size(); i += 2)
       {
         ReportsDistributionStatusPersist dis;
@@ -52,8 +51,8 @@
           {
             double longitude = dis.getLongitude().doubleValue();
             double latitude = dis.getLatitude().doubleValue();
-            int x = 0;
-            int y = 0;
+            int x;
+            int y;
   //          WEST – 15
   //          EAST +44
   //          NORTH +73
@@ -79,7 +78,9 @@
       ex.printStackTrace();
     }
 %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("grid_distribution")%></div>
+  <h2>
+    <%=cm.cmsText("grid_distribution")%>
+  </h2>
 <%
   if ( success )
   {
@@ -91,38 +92,42 @@
 <%
   }
 %>
-    <table summary="<%=cm.cms("table_of_results")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="distribution" class="sortable">
-      <tr style="vertical-align:middle" title="<%=cm.cms("sort_results_on_this_column")%>">
-        <th style="text-align:left">
+  <table summary="<%=cm.cms("table_of_results")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
           <%=cm.cmsText("code_cell")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
-        <th style="text-align:right" title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th style="text-align:right">
           <%=cm.cmsText("species_factsheet-distribution_04")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
-        <th style="text-align:right" title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th style="text-align:right">
           <%=cm.cmsText("species_factsheet-distribution_05")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("status")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th>
           <%=cm.cmsText("reference")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
       </tr>
+    </thead>
+    <tbody>
 <%
-      String GridName="";
+      String GridName;
       String GridLongitude="";
       String GridLatitude="";
-      String GridStatus="";
-      String GridIdDc="";
+      String GridStatus;
+      String GridIdDc;
       // Display results.
       for (int i = 0; i < d.size(); i += 2)
       {
+        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
         ReportsDistributionStatusPersist dis;
         dis = (ReportsDistributionStatusPersist) d.get(i);
         GridName = dis.getIdLookupGrid();
@@ -135,8 +140,8 @@
           GridLatitude=dis.getLatitude().toString();
         }
 %>
-      <tr style="background-color:<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-        <td style="text-align:left">
+      <tr<%=cssClass%>>
+        <td>
           <%=Utilities.treatURLSpecialCharacters(GridName)%>
         </td>
         <td style="text-align:right">
@@ -174,18 +179,20 @@
 <%
       }
 %>
-    </table>
+    </tbody>
+  </table>
 <%
   }
 %>
 
-<%=cm.br()%>
-<%=cm.cmsMsg("table_of_results")%>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("table_of_results")%>
 
-<br />
-<br />
+  <br />
+  <br />
 <%
-  }catch( Exception ex )
+  }
+  catch( Exception ex )
   {
     ex.printStackTrace();
   }

@@ -12,7 +12,7 @@
                  ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet,
                  ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatCountryPersist,
                  ro.finsiel.eunis.search.UniqueVector" %>
-<%@ page import="java.util.List"%>
+<%@ page import="java.util.List, ro.finsiel.eunis.search.Utilities"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   String idHabitat = request.getParameter("idHabitat");
@@ -38,58 +38,67 @@
     url = colorURL.getElementsSeparatedByComma();
     url2 = colorURL2.getElementsSeparatedByComma();
 %>
-<div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("geographical_distribution")%></div>
-<table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse">
-  <tr>
-    <td>
-      <jsp:include page="habitats-factsheet-geo.jsp">
-        <jsp:param name="url" value="<%=url%>" />
-        <jsp:param name="url2" value="<%=url2%>" />
-      </jsp:include>
-    </td>
-  </tr>
-</table>
-<table summary="<%=cm.cms("habitat_distribution")%>" width="100%" border="0" cellspacing="0" cellpadding="0" id="distribution" class="sortable">
-  <tr>
-    <th title="<%=cm.cms("sort_results_on_this_column")%>">
-      <%=cm.cmsText("country")%>
-      <%=cm.cmsTitle("sort_results_on_this_column")%>
-    </th>
-    <th title="<%=cm.cms("sort_results_on_this_column")%>">
-      <%=cm.cmsText("biogeographic_region")%>
-      <%=cm.cmsTitle("sort_results_on_this_column")%>
-    </th>
-    <th title="<%=cm.cms("sort_results_on_this_column")%>">
-      <%=cm.cmsText("probability")%>
-      <%=cm.cmsTitle("sort_results_on_this_column")%>
-    </th>
-    <th title="<%=cm.cms("sort_results_on_this_column")%>">
-      <%=cm.cmsText("comment")%>
-      <%=cm.cmsTitle("sort_results_on_this_column")%>
-    </th>
-  </tr>
+  <h2>
+    <%=cm.cmsText("geographical_distribution")%>
+  </h2>
+  <table summary="layout" width="90%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        <jsp:include page="habitats-factsheet-geo.jsp">
+          <jsp:param name="url" value="<%=url%>" />
+          <jsp:param name="url2" value="<%=url2%>" />
+        </jsp:include>
+      </td>
+    </tr>
+  </table>
+  <table summary="<%=cm.cms("habitat_distribution")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cmsText("country")%>
+        </th>
+        <th>
+          <%=cm.cmsText("biogeographic_region")%>
+        </th>
+        <th>
+          <%=cm.cmsText("probability")%>
+        </th>
+        <th>
+          <%=cm.cmsText("comment")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
   <%
-    for(int i = 0; i < results.size(); i++)
+    for ( int i = 0; i < results.size(); i++ )
     {
-      HabitatCountryPersist country = (HabitatCountryPersist) results.get(i);
+      String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+      HabitatCountryPersist country = ( HabitatCountryPersist )results.get( i );
+      String _comment = HabitatsFactsheet.getProbabilityAndCommentForHabitatGeoscope( country.getIdReportAttributes() ).get( 1 ).toString();
+      _comment = Utilities.formatString( _comment.replaceAll( "<", "&lt;" ).replaceAll( ">", "&gt;" ), "&nbsp;" );
   %>
-  <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-    <td><%=country.getAreaNameEn()%></td>
-    <td><%=country.getBiogeoregionName()%></td>
-    <td><%=HabitatsFactsheet.getProbabilityAndCommentForHabitatGeoscope(country.getIdReportAttributes()).get(0)%></td>
-    <%
-      String _comment = HabitatsFactsheet.getProbabilityAndCommentForHabitatGeoscope(country.getIdReportAttributes()).get(1).toString();
-      _comment = _comment.replaceAll("<","&lt;").replaceAll(">","&gt;");
-    %>
-    <td><%=_comment%></td>
-  </tr>
-  <%
+      <tr<%=cssClass%>>
+        <td>
+          <%=country.getAreaNameEn()%>
+        </td>
+        <td>
+          <%=country.getBiogeoregionName()%>
+        </td>
+        <td>
+          <%=HabitatsFactsheet.getProbabilityAndCommentForHabitatGeoscope(country.getIdReportAttributes()).get(0)%>
+        </td>
+        <td>
+          <%=_comment%>
+        </td>
+      </tr>
+<%
     }
-  %>
-</table>
-<%=cm.br()%>
-<%=cm.cmsMsg("habitat_distribution")%>
-<%=cm.br()%>
+%>
+    </tbody>
+  </table>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("habitat_distribution")%>
+  <%=cm.br()%>
 <%
   }
 %>

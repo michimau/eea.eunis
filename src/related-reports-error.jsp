@@ -47,7 +47,7 @@ ro.finsiel.eunis.search.Utilities"%>
   }
 %>
     <form action="">
-      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="inputTextField" />
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="standardButton" />
       <%=cm.cmsTitle("close_window")%>
       <%=cm.cmsInput("close_window")%>
     </form>

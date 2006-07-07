@@ -175,7 +175,7 @@
     </p>
     <br />
     <br />
-    <input type="button" onclick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" name="button" class="inputTextField">
+    <input type="button" onclick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" name="button" class="standardButton">
     <%=cm.cmsInput("close_btn")%>
 <%
   }

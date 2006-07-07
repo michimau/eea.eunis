@@ -441,7 +441,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
      &nbsp;&nbsp;<label for="userName"><%=cm.cmsText("users_edit_28")%></label>
      </td>
      <td>
-       <select id="userName" name="userName" class="inputTextField" style="border-width : 1px" onchange="MM_jumpMenu('parent',this,0,'<%=tab1%>','<%=tab2%>')"  title="<%=cm.cms("users_edit_29")%>">
+       <select id="userName" name="userName" style="border-width : 1px" onchange="MM_jumpMenu('parent',this,0,'<%=tab1%>','<%=tab2%>')"  title="<%=cm.cms("users_edit_29")%>">
             <option value="selectUserName" selected="selected"><%=cm.cms("users_edit_30")%></option>
             <%
                try
@@ -478,7 +478,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
        &nbsp;&nbsp;<label for="userName1"><%=cm.cmsText("user_name")%>(*):</label>
     </td>
     <td>
-     &nbsp;&nbsp;&nbsp;<input class="inputTextField" title="<%=cm.cms("user_name")%>" alt="<%=cm.cms("user_name")%>" type="text" name="userName" id="userName1" size="50" value="" onchange="UserExist();" />
+     &nbsp;&nbsp;&nbsp;<input title="<%=cm.cms("user_name")%>" alt="<%=cm.cms("user_name")%>" type="text" name="userName" id="userName1" size="50" value="" onchange="UserExist();" />
      <%=cm.cmsTitle("user_name")%>
     </td>
   </tr>
@@ -499,7 +499,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
         &nbsp;&nbsp;<label for="newUserName"><%=cm.cmsText("user_name")%>:</label>
       </td>
       <td>
-       <input class="inputTextField" title="<%=cm.cms("user_name")%>" alt="<%=cm.cms("user_name")%>" type="text" name="newUserName" id="newUserName" size="50" value="<%=name%>" onchange="newUserNameExist();" />
+       <input title="<%=cm.cms("user_name")%>" alt="<%=cm.cms("user_name")%>" type="text" name="newUserName" id="newUserName" size="50" value="<%=name%>" onchange="newUserNameExist();" />
        <%=cm.cmsTitle("user_name")%>
       </td>
     </tr>
@@ -511,7 +511,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
         &nbsp;&nbsp;<label for="firstName"><%=cm.cmsText("first_name")%>:</label>
       </td>
       <td>
-        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input class="inputTextField" title="<%=cm.cms("first_name")%>" alt="<%=cm.cms("first_name")%>" type="text" id="firstName" name="firstName" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?firstName:"")%>" />
+        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input title="<%=cm.cms("first_name")%>" alt="<%=cm.cms("first_name")%>" type="text" id="firstName" name="firstName" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?firstName:"")%>" />
         <%=cm.cmsTitle("first_name")%>
       </td>
     </tr>
@@ -520,7 +520,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
        &nbsp;&nbsp;<label for="lastName"><%=cm.cmsText("last_name")%>:</label>
       </td>
       <td>
-        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input class="inputTextField" title="<%=cm.cms("last_name")%>" alt="<%=cm.cms("last_name")%>" type="text" id="lastName" name="lastName" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?lastName:"")%>" />
+        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input title="<%=cm.cms("last_name")%>" alt="<%=cm.cms("last_name")%>" type="text" id="lastName" name="lastName" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?lastName:"")%>" />
         <%=cm.cmsTitle("last_name")%>
       </td>
     </tr>
@@ -529,7 +529,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
       &nbsp;&nbsp;<label for="mail"><%=cm.cmsText("users_edit_37")%>:</label>
       </td>
       <td>
-        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input class="inputTextField" title="<%=cm.cms("users_edit_37")%>" alt="<%=cm.cms("users_edit_37")%>" type="text" id="mail" name="mail" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?mail:"")%>" />
+        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input title="<%=cm.cms("users_edit_37")%>" alt="<%=cm.cms("users_edit_37")%>" type="text" id="mail" name="mail" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?mail:"")%>" />
         <%=cm.cmsTitle("users_edit_37")%>
       </td>
     </tr>
@@ -538,7 +538,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
         &nbsp;&nbsp;<label for="password1"><%=cm.cmsText("password")%><%=(users_operation.equalsIgnoreCase("add_users")?"(*)":"")%>:</label>
       </td>
       <td>
-        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input class="inputTextField" title="<%=cm.cms("password")%>" alt="<%=cm.cms("password")%>" type="text" id="password1" name="password1" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?password:"")%>" />
+        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input title="<%=cm.cms("password")%>" alt="<%=cm.cms("password")%>" type="text" id="password1" name="password1" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?password:"")%>" />
         <%=cm.cmsTitle("password")%>
       </td>
     </tr>
@@ -547,7 +547,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
         &nbsp;&nbsp;<label for="password2"><%=cm.cmsText("users_edit_39")%><%=(users_operation.equalsIgnoreCase("add_users")?"(*)":"")%>:</label>
       </td>
       <td>
-        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input class="inputTextField" title="<%=cm.cms("users_edit_39")%>" alt="<%=cm.cms("users_edit_39")%>" type="text" id="password2" name="password2" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?password:"")%>" />
+        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input title="<%=cm.cms("users_edit_39")%>" alt="<%=cm.cms("users_edit_39")%>" type="text" id="password2" name="password2" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?password:"")%>" />
         <%=cm.cmsTitle("users_edit_39")%>
       </td>
     </tr>
@@ -612,7 +612,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
 <tr>
   <td style="text-align:left" colspan="2">
    &nbsp;&nbsp;
-   <input id="input1" type="submit" value="<%=(users_operation.equalsIgnoreCase("edit_users")?cm.cms("update_data"):cm.cms("add_user"))%>" name="submit" onclick="document.eunis.operation.value='submit';" class="inputTextField"  title="<%=(users_operation.equalsIgnoreCase("edit_users")?cm.cms("update_data"):cm.cms("add_user"))%>" />
+   <input id="input1" type="submit" value="<%=(users_operation.equalsIgnoreCase("edit_users")?cm.cms("update_data"):cm.cms("add_user"))%>" name="submit" onclick="document.eunis.operation.value='submit';" title="<%=(users_operation.equalsIgnoreCase("edit_users")?cm.cms("update_data"):cm.cms("add_user"))%>" />
    <%=(users_operation.equalsIgnoreCase("edit_users")?cm.cmsTitle("update_data"):cm.cmsTitle("add_user"))%>
    <%=(users_operation.equalsIgnoreCase("edit_users")?cm.cmsInput("update_data"):cm.cmsInput("add_user"))%>
    &nbsp;&nbsp;
@@ -620,7 +620,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
     if(users_operation.equalsIgnoreCase("add_users"))
     {
    %>
-     <input id="input2" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="inputTextField"  title="<%=cm.cms("reset")%>" />
+     <input id="input2" type="reset" value="<%=cm.cms("reset")%>" name="Reset" title="<%=cm.cms("reset")%>" />
      <%=cm.cmsTitle("reset")%>
      <%=cm.cmsInput("reset")%>
   <%

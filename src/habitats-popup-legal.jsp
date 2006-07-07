@@ -63,7 +63,7 @@ The following request parameters are available as input:
 %>
     </table>
     <form action="">
-      <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" id="button" name="button" class="inputTextField" />
+      <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" id="button" name="button" class="standardButton" />
       <%=cm.cmsInput("close_btn")%>
     </form>
     <%=cm.cms("habitats_popup-legal_title")%>

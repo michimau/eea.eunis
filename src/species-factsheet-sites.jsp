@@ -23,11 +23,7 @@
   String idSpeciesLink = request.getParameter("idSpeciesLink");
   SpeciesFactsheet factsheet = new SpeciesFactsheet(Utilities.checkedStringToInt(idSpecies, new Integer(0)),
           Utilities.checkedStringToInt(idSpeciesLink, new Integer(0)));
-  boolean expand = Utilities.checkedStringToBoolean(request.getParameter("expand"), false);
   WebContentManagement cm = SessionManager.getWebContent();
-
-  int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
-
   // List of sites related to species.
   List sites = factsheet.getSitesForSpecies();
   if (sites.size() > 0)
@@ -43,52 +39,54 @@
         if ( i < sites.size() - 1 ) ids += ",";
       }
 %>
-        <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
-          <input type="hidden" name="sites" value="<%=ids%>" />
-          <input id="showMap" type="submit" title="<%=cm.cms("show_map")%>" name="Show map" value="<%=cm.cms("show_map")%>" class="inputTextField" />
-          <%=cm.cmsTitle("show_map")%>
-          <%=cm.cmsInput("show_map")%>
-        </form>
+  <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
+    <input type="hidden" name="sites" value="<%=ids%>" />
+    <input id="showMap" type="submit" title="<%=cm.cms("show_map")%>" name="Show map" value="<%=cm.cms("show_map")%>" class="standardButton" />
+    <%=cm.cmsTitle("show_map")%>
+    <%=cm.cmsInput("show_map")%>
+  </form>
 <%
     }
 %>
-        <br />
-        <table summary="<%=cm.cms("species_factsheet_sites_01_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="sites" class="sortable">
-          <tr>
-            <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <strong>
-                <%=cm.cmsText("site_code")%>
-                <%=cm.cmsTitle("sort_results_on_this_column")%>
-              </strong>
-            </th>
-            <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <strong>
-                <%=cm.cmsText("source_data_set")%>
-                <%=cm.cmsTitle("sort_results_on_this_column")%>
-              </strong>
-            </th>
-            <th width="20%" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <strong>
-                <%=cm.cmsText("country")%>
-                <%=cm.cmsTitle("sort_results_on_this_column")%>
-              </strong>
-            </th>
-            <th width="50%" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <strong>
-                <%=cm.cmsText("site_name")%>
-                <%=cm.cmsTitle("sort_results_on_this_column")%>
-              </strong>
-            </th>
-          </tr>
+  <br />
+  <table summary="<%=cm.cms("species_factsheet_sites_01_Sum")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cmsText("site_code")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("source_data_set")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("country")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("site_name")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
-          for (int i = 0; i < sites.size(); i++)
-          {
-            SitesByNatureObjectPersist site = (SitesByNatureObjectPersist)sites.get(i);
+    for (int i = 0; i < sites.size(); i++)
+    {
+      String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+      SitesByNatureObjectPersist site = (SitesByNatureObjectPersist)sites.get(i);
 %>
-          <tr style="background-color:<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-            <td><%=Utilities.formatString(site.getIDSite())%></td>
-            <td><strong><%=Utilities.formatString(SitesSearchUtility.translateSourceDB(site.getSourceDB()))%></strong></td>
-            <td>
+      <tr<%=cssClass%>>
+        <td>
+          <%=Utilities.formatString(site.getIDSite())%>
+        </td>
+        <td>
+          <strong>
+            <%=Utilities.formatString(SitesSearchUtility.translateSourceDB(site.getSourceDB()))%>
+          </strong>
+        </td>
+        <td>
         <%
             if(Utilities.isCountry(site.getAreaNameEn()))
             {
@@ -102,24 +100,25 @@
         <%
              }
         %>
-            </td>
-            <td>
-                <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIDSite()%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getName()))%></a>
-                <%=cm.cmsTitle("open_site_factsheet")%>
-            </td>
-          </tr>
+        </td>
+        <td>
+          <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIDSite()%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getName()))%></a>
+          <%=cm.cmsTitle("open_site_factsheet")%>
+        </td>
+      </tr>
 <%
-           if( i%10 == 0) {
+           if( i%10 == 0)
+           {
             out.flush();
            }
          }
 %>
-        </table>
-        <br />
-        <br />
+    <tbody>
+  </table>
+  <br />
+  <br />
 <%
       }
-
   // List of sites related to subspecies.
   List sites2 = factsheet.getSitesForSubpecies();
   if (sites2.size() > 0)
@@ -135,61 +134,59 @@
         if ( i < sites.size() - 1 ) ids += ",";
       }
 %>
-        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("species_factsheet_sites_02")%></div>
-        <br />
-        <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="50%">
-              <form name="gis2" action="sites-gis-tool.jsp" target="_blank" method="post">
-                <input type="hidden" name="sites" value="<%=ids%>" />
-                <input id="showMap2" type="submit" title="<%=cm.cms("show_map")%>" name="Show map" value="<%=cm.cms("show_map")%>" class="inputTextField" />
-                <%=cm.cmsTitle("show_map")%>
-                <%=cm.cmsInput("show_map")%>
-              </form>
-            </td>
-          </tr>
-        </table>
-        <br />
-        <br />
+  <h2>
+    <%=cm.cmsText("species_factsheet_sites_02")%>
+  </h2>
+  <br />
+  <form name="gis2" action="sites-gis-tool.jsp" target="_blank" method="post">
+    <input type="hidden" name="sites" value="<%=ids%>" />
+    <input id="showMap2" type="submit" title="<%=cm.cms("show_map")%>" name="Show map" value="<%=cm.cms("show_map")%>" class="standardButton" />
+    <%=cm.cmsTitle("show_map")%>
+    <%=cm.cmsInput("show_map")%>
+  </form>
+  <br />
+  <br />
 <%
     }
 %>
-       <table summary="<%=cm.cms("species_factsheet_sites_02_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0"  id="sites2" class="sortable">
-          <tr>
-            <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <strong>
-                <%=cm.cmsText("site_code")%>
-                <%=cm.cmsTitle("sort_results_on_this_column")%>
-              </strong>
-            </th>
-            <th width="15%" title="<%=cm.cms("sort_results_on_this_column")%>" >
-              <strong>
-                <%=cm.cmsText("source_data_set")%>
-                <%=cm.cmsTitle("sort_results_on_this_column")%>
-              </strong>
-            </th>
-            <th width="20%" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <strong>
-                <%=cm.cmsText("country")%>
-                <%=cm.cmsTitle("sort_results_on_this_column")%>
-              </strong>
-            </th>
-            <th width="50%" title="<%=cm.cms("sort_results_on_this_column")%>">
-              <strong>
-                <%=cm.cmsText("site_name")%>
-                <%=cm.cmsTitle("sort_results_on_this_column")%>
-              </strong>
-            </th>
-          </tr>
+  <table summary="<%=cm.cms("species_factsheet_sites_02_Sum")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th width="15%">
+          <%=cm.cmsText("site_code")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th width="15%">
+          <%=cm.cmsText("source_data_set")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th width="20%">
+          <%=cm.cmsText("country")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th width="50%">
+          <%=cm.cmsText("site_name")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
-          for (int i = 0; i < sites2.size(); i++)
-          {
-            SitesByNatureObjectPersist site = (SitesByNatureObjectPersist)sites2.get(i);
+  for (int i = 0; i < sites2.size(); i++)
+  {
+    String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+    SitesByNatureObjectPersist site = (SitesByNatureObjectPersist)sites2.get(i);
 %>
-          <tr style="background-color:<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-            <td><%=Utilities.formatString(site.getIDSite())%></td>
-            <td><strong><%=Utilities.formatString(SitesSearchUtility.translateSourceDB(site.getSourceDB()))%></strong></td>
-            <td>
+      <tr<%=cssClass%>>
+        <td>
+          <%=Utilities.formatString(site.getIDSite())%>
+        </td>
+        <td>
+          <strong>
+            <%=Utilities.formatString(SitesSearchUtility.translateSourceDB(site.getSourceDB()))%>
+          </strong>
+        </td>
+        <td>
         <%
             if(Utilities.isCountry(site.getAreaNameEn()))
             {
@@ -203,16 +200,17 @@
         <%
              }
         %>
-            </td>
-            <td>
-                <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIDSite()%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getName()))%></a>
-                <%=cm.cmsTitle("open_site_factsheet")%>
-            </td>
-          </tr>
+        </td>
+        <td>
+          <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIDSite()%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getName()))%></a>
+          <%=cm.cmsTitle("open_site_factsheet")%>
+        </td>
+      </tr>
 <%
           }
 %>
-        </table>
+    </tbody>
+  </table>
 <%
       }
 %>

@@ -46,81 +46,129 @@
     </title>
   </head>
   <body>
-    <div id="outline">
-    <div id="alignment">
-    <div id="content">
-      <jsp:include page="header-dynamic.jsp">
-        <jsp:param name="location" value="home#index.jsp,login"/>
-      </jsp:include>
-      <h1>
-        <%=cm.cmsText("login_title")%>
-      </h1>
-      <br />
-      <div style="text-align : center; width : 100%">
-<%
-  if ( !success )
-  {
-%>
-        <form name="login" method="post" action="login.jsp">
-          <input type="hidden" name="cmd" value="login" />
-<%
-      if( ref != null )
-      {
-%>
-          <input type="hidden" name="ref" value="<%=ref%>" />
-<%
-      }
-%>
-          <label for="username"><%=cm.cms("login_username_label")%>:</label>
-          <input class="inputTextField" title="<%=cm.cms("login_username_title")%>" type="text" id="username" name="username" value="<%=(null != username) ? username : ""%>" />
-          <%=cm.cmsTitle("login_username_title")%>
-          <%=cm.cmsLabel("login_username_label")%>
-          <br />
-          <label for="password"><%=cm.cms("password")%>:</label>
-          <input class="inputTextField" title="<%=cm.cms("login_password_title")%>" type="password" id="password" name="password" />
-          <%=cm.cmsTitle("login_password_title")%>
-          <%=cm.cmsLabel("password")%>
-          <br />
-          <br />
-          <input class="inputTextField" title="<%=cm.cms("login_submit_title")%>" type="submit" id="submit" name="Submit" value="<%=cm.cms("login")%>" />
-          <%=cm.cmsTitle("login_submit_title")%>
-          <%=cm.cmsInput("login")%>
-        </form>
+    <div id="visual-portal-wrapper">
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
+      <!-- The wrapper div. It contains the three columns. -->
+      <div id="portal-columns">
+        <!-- start of the main and left columns -->
+        <div id="visual-column-wrapper">
+          <!-- start of main content block -->
+          <div id="portal-column-content">
+            <div id="content">
+              <div class="documentContent" id="region-content">
+                <a name="documentContent"></a>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure">Document Actions</h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="Print this page"
+                            title="Print this page" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="Toggle full screen mode"
+                             title="Toggle full screen mode" /></a>
+                    </li>
+                  </ul>
+                </div>
+                <br clear="all" />
+<!-- MAIN CONTENT -->
+                <jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="home#index.jsp,login"/>
+                </jsp:include>
+                <h1>
+                  <%=cm.cmsText("login_title")%>
+                </h1>
+                <br />
+                <div style="text-align : center; width : 100%">
+          <%
+            if ( !success )
+            {
+          %>
+                  <form name="login" method="post" action="login.jsp">
+                    <input type="hidden" name="cmd" value="login" />
+          <%
+                if( ref != null )
+                {
+          %>
+                    <input type="hidden" name="ref" value="<%=ref%>" />
+          <%
+                }
+          %>
+                    <label for="username"><%=cm.cms("login_username_label")%>:</label>
+                    <input title="<%=cm.cms("login_username_title")%>" type="text" id="username" name="username" value="<%=(null != username) ? username : ""%>" />
+                    <%=cm.cmsTitle("login_username_title")%>
+                    <%=cm.cmsLabel("login_username_label")%>
+                    <br />
+                    <label for="password"><%=cm.cms("password")%>:</label>
+                    <input title="<%=cm.cms("login_password_title")%>" type="password" id="password" name="password" />
+                    <%=cm.cmsTitle("login_password_title")%>
+                    <%=cm.cmsLabel("password")%>
+                    <br />
+                    <br />
+                    <input class="searchButton" title="<%=cm.cms("login_submit_title")%>" type="submit" id="submit" name="Submit" value="<%=cm.cms("login")%>" />
+                    <%=cm.cmsTitle("login_submit_title")%>
+                    <%=cm.cmsInput("login")%>
+                  </form>
 
-<%
-    if ( cmd.equalsIgnoreCase( "login" ) && !success )
-    {
-%>
-    <script type="text/javascript" language="Javascript">
-      <!--
-        alert( "<%=cm.cms("login_invalid")%>." );
-      //-->
-    </script>
-<%
-    }
-  }
-  else
-  {
-%>
-    <%=cm.cmsText("login_you_successfully_logged")%>
-    <strong><%=SessionManager.getUsername()%></strong>.
-    <a title="<%=cm.cms("home_page")%>" href="index.jsp"><%=cm.cmsText("home")%></a>
-    <%=cm.cmsTitle("home_page")%>
-<%
-  }
-%>
+          <%
+              if ( cmd.equalsIgnoreCase( "login" ) && !success )
+              {
+          %>
+              <script type="text/javascript" language="Javascript">
+                <!--
+                  alert( "<%=cm.cms("login_invalid")%>." );
+                //-->
+              </script>
+          <%
+              }
+            }
+            else
+            {
+          %>
+              <%=cm.cmsText("login_you_successfully_logged")%>
+              <strong><%=SessionManager.getUsername()%></strong>.
+              <a title="<%=cm.cms("home_page")%>" href="index.jsp"><%=cm.cmsText("home")%></a>
+              <%=cm.cmsTitle("home_page")%>
+          <%
+            }
+          %>
+                </div>
+              <br />
+              <%=cm.cmsText("habitats_login-help_01")%>
+
+              <%=cm.cmsMsg("login_page_title")%>
+              <%=cm.br()%>
+              <%=cm.cmsMsg("login_invalid")%>
+              <jsp:include page="footer.jsp">
+                <jsp:param name="page_name" value="index.jsp" />
+              </jsp:include>
+<!-- END MAIN CONTENT -->
+              </div>
+            </div>
+          </div>
+          <!-- end of main content block -->
+          <!-- start of the left (by default at least) column -->
+          <div id="portal-column-one">
+            <div class="visualPadding">
+              <jsp:include page="inc_column_left.jsp" />
+            </div>
+          </div>
+          <!-- end of the left (by default at least) column -->
+        </div>
+        <!-- end of the main and left columns -->
+        <!-- start of right (by default at least) column -->
+        <div id="portal-column-two">
+          <div class="visualPadding">
+            <jsp:include page="inc_column_right.jsp" />
+          </div>
+        </div>
+        <!-- end of the right (by default at least) column -->
+        <div class="visualClear"><!-- --></div>
       </div>
-    <br />
-    <%=cm.cmsText("habitats_login-help_01")%>
-
-    <%=cm.cmsMsg("login_page_title")%>
-    <%=cm.br()%>
-    <%=cm.cmsMsg("login_invalid")%>
-    <jsp:include page="footer.jsp">
-      <jsp:param name="page_name" value="index.jsp" />
-    </jsp:include>
-    </div>
-    </div>
+      <!-- end column wrapper -->
+      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
     </div>
   </body>
 </html>

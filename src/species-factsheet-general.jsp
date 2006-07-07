@@ -45,20 +45,20 @@
   //String genusName = (scientificName.indexOf(" ")>=0? scientificName.substring(0,scientificName.indexOf(" ")) : scientificName);
   String genusName = specie.getGenus();
   String authorDate = SpeciesFactsheet.getBookAuthorDate(factsheet.getTaxcodeObject().IdDcTaxcode());
+  String kingdomname="";
 %>
-  <table summary="layout" width="100%" border="0" cellspacing="1" cellpadding="0">
-    <tr style="background-color:#CCCCCC">
-      <td colspan="2">
-        <strong>
+  <table summary="layout" class="datatable" width="90%">
+    <thead>
+      <tr>
+        <th colspan="2">
           <%=cm.cmsText("species_factsheet_taxonomicInformation")%>
-        </strong>
-      </td>
-      <td style="text-align:center">
-        <strong>
+        </th>
+        <th>
           <%=cm.cmsText("reference")%>
-        </strong>
-      </td>
-    </tr>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
     List list = new Vector();
     try
@@ -67,55 +67,62 @@
     } catch (Exception ex) {
       ex.printStackTrace();
     }
-    String kingdomname="";
+
     if (list != null && list.size() > 0)
     {
       Chm62edtTaxcodePersist t = (Chm62edtTaxcodePersist) list.get(0);
       String str = t.getTaxonomyTree();
       //System.out.println("str = " + str);
       StringTokenizer st = new StringTokenizer(str,",");
+      int i = 0;
       while(st.hasMoreTokens())
       {
+        String cssClass = i++ % 2 == 0 ? "" : " class=\"zebraeven\"";
         StringTokenizer sts = new StringTokenizer(st.nextToken(),"*");
         String classification_id = sts.nextToken();
         String classification_level = sts.nextToken();
         String classification_name = sts.nextToken();
-        %>
-        <tr style="background-color:#EEEEEE">
-          <td width="20%">
-            <%=classification_level%>
-          </td>
-          <td width="40%">
-            <strong>
-              <%=classification_name%>
-            </strong>
-          </td>
-          <%
-          if(classification_level.equalsIgnoreCase("kingdom"))
-          {
-            kingdomname=classification_name;
-          %>
-            <td rowspan="<%=st.countTokens()+2%>" style="text-align:center"><strong><%=Utilities.treatURLSpecialCharacters(authorDate)%></strong></td>
-          <%
-          }
-          %>
-        </tr>
-        <%
+%>
+      <tr<%=cssClass%>>
+        <td width="20%">
+          <%=classification_level%>
+        </td>
+        <td width="40%">
+          <strong>
+            <%=classification_name%>
+          </strong>
+        </td>
+<%
+        if(classification_level.equalsIgnoreCase("kingdom"))
+        {
+          kingdomname=classification_name;
+%>
+        <td rowspan="<%=st.countTokens()+2%>" style="text-align:center; background-color:#EEEEEE; vertical-align:middle;">
+          <strong>
+            <%=Utilities.treatURLSpecialCharacters(authorDate)%>
+          </strong>
+        </td>
+<%
+        }
+%>
+      </tr>
+<%
       }
     }
-    %>
-    <tr style="background-color:#EEEEEE">
-      <td width="20%">
-        <%=cm.cmsText("genus")%>
-      </td>
-      <td width="40%">
-        <strong>
-          <%=genusName%>
-        </strong>
-      </td>
-    </tr>
+%>
+      <tr class="zebraeven">
+        <td width="20%">
+          <%=cm.cmsText("genus")%>
+        </td>
+        <td width="40%">
+          <strong>
+            <%=genusName%>
+          </strong>
+        </td>
+      </tr>
+    </tbody>
   </table>
-  <table summary="layout" width="100%" border="0" cellspacing="5" cellpadding="5">
+  <table summary="layout" width="90%" border="0" cellspacing="5" cellpadding="5">
     <tr>
       <td width="20%" style="text-align : left; vertical-align : middle">
         <a title="<%=cm.cms("species_factsheet_02_Title")%>" href="javascript:openGooglePics('http://images.google.com/images?q=<%=Utilities.treatURLSpecialCharacters(scientificName)%>')"><%=cm.cmsText("pictures_on_google")%></a>
@@ -145,7 +152,7 @@
     if( kingdomname.equalsIgnoreCase( "Animalia" ) ) kingdomname = "Animals";
     if( kingdomname.equalsIgnoreCase( "Plantae" ) ) kingdomname = "Plants";
     if( kingdomname.equalsIgnoreCase( "Fungi" ) ) kingdomname = "Mushrooms";
-      
+
       int pos = -1;
       pos = sn.indexOf( " " );
       if( pos >= 0 )
@@ -175,7 +182,11 @@
         for (int i=0;i<consStatus.size();i++)
         {
           NationalThreatWrapper threat = (NationalThreatWrapper)consStatus.get(i);
-          if(threat.getReference() != null && threat.getReference().indexOf("IUCN")>=0) {isGood = true;break;}
+          if(threat.getReference() != null && threat.getReference().indexOf("IUCN")>=0)
+          {
+            isGood = true;
+            break;
+          }
         }
       }
       if( isGood )
@@ -247,79 +258,77 @@ if(kingdomname.equalsIgnoreCase("Animals"))
     </td>
     </tr>
   </table>
-  <table summary="layout" width="100%" border="0" cellspacing="1" cellpadding="0">
-    <tr style="background-color:#DDDDDD">
-      <td colspan="2">
-        <strong>
-          <%=cm.cmsText("source")%>
-        </strong>
-      </td>
-    </tr>
+  <h2>
+    <%=cm.cmsText("source")%>
+  </h2>
+  <table summary="layout" class="datatable" width="90%">
+    <tbody>
 <%
     PublicationWrapper book = factsheet.getSpeciesBook();
 %>
-    <tr style="background-color:#EEEEEE">
-      <td width="18%">
-        <%=cm.cmsText("title")%>:
-      </td>
-      <td width="70%">
-        <strong>
-          <%=Utilities.treatURLSpecialCharacters(book.getTitle())%>
-        </strong>
-      </td>
-    </tr>
-    <tr style="background-color:#EEEEEE">
-      <td>
-        <%=cm.cmsText("author")%>:
-      </td>
-      <td>
-        <strong>
-          <%=Utilities.treatURLSpecialCharacters(book.getAuthor())%>
-        </strong>
-      </td>
-    </tr>
-    <tr style="background-color:#EEEEEE">
-      <td>
-        <%=cm.cmsText("publisher")%>:
-      </td>
-      <td>
-        <strong>
-          <%=Utilities.treatURLSpecialCharacters(book.getPublisher())%>
-        </strong>
-      </td>
-    </tr>
-    <tr style="background-color:#EEEEEE">
-      <td>
-        <%=cm.cmsText("publication_date")%>:
-      </td>
-      <td>
-        <strong>
-          <%=book.getDate()%>
-        </strong>
-      </td>
-    </tr>
-    <tr style="background-color:#EEEEEE">
-      <td>
-        <%=cm.cmsText("url")%>:
-      </td>
-      <td>
+      <tr>
+        <td width="18%">
+          <%=cm.cmsText("title")%>:
+        </td>
+        <td width="70%">
+          <strong>
+            <%=Utilities.treatURLSpecialCharacters(book.getTitle())%>
+          </strong>
+        </td>
+      </tr>
+      <tr class="zebraeven">
+        <td>
+          <%=cm.cmsText("author")%>:
+        </td>
+        <td>
+          <strong>
+            <%=Utilities.treatURLSpecialCharacters(book.getAuthor())%>
+          </strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%=cm.cmsText("publisher")%>:
+        </td>
+        <td>
+          <strong>
+            <%=Utilities.treatURLSpecialCharacters(book.getPublisher())%>
+          </strong>
+        </td>
+      </tr>
+      <tr class="zebraeven">
+        <td>
+          <%=cm.cmsText("publication_date")%>:
+        </td>
+        <td>
+          <strong>
+            <%=book.getDate()%>
+          </strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%=cm.cmsText("url")%>:
+        </td>
+        <td>
 <%
       if(book.getURL().length()>0)
       {
 %>
-        <a title="<%=cm.cms("species_factsheet_14_Title")%>" target="_blank" href="<%=Utilities.treatURLSpecialCharacters(book.getURL().replaceAll("#",""))%>"><%=Utilities.treatURLSpecialCharacters(book.getURL().replaceAll("#",""))%></a>
-        <%=cm.cmsTitle("species_factsheet_14_Title")%>
+          <a title="<%=cm.cms("species_factsheet_14_Title")%>" target="_blank" href="<%=Utilities.treatURLSpecialCharacters(book.getURL().replaceAll("#",""))%>"><%=Utilities.treatURLSpecialCharacters(book.getURL().replaceAll("#",""))%></a>
+          <%=cm.cmsTitle("species_factsheet_14_Title")%>
 <%
       }
       else
       {
 %>
-        &nbsp;
+          &nbsp;
 <%
       }
 %>
-      </td>
-    </tr>
+        </td>
+      </tr>
+    </tbody>
   </table>
 <%
   // Synonyms list.
@@ -328,61 +337,56 @@ if(kingdomname.equalsIgnoreCase("Animals"))
   {
 %>
   <br />
-  <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr style="background-color:#CCCCCC">
-      <td>
-        <strong>
-          <%=cm.cmsText("synonyms")%>
-        </strong>
-      </td>
-    </tr>
-  </table>
-  <table summary="<%=cm.cms("species_factsheet_10_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="synTable" class="sortable">
-    <tr>
-      <th width="40%" style="text-align:left;background-color:#DDDDDD">
-        <strong>
+  <h2>
+    <%=cm.cmsText("synonyms")%>
+  </h2>
+  <table summary="<%=cm.cms("species_factsheet_10_Sum")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th width="40%" style="text-align:left;">
           <%=cm.cmsText("scientific_name")%>
           <%=cm.cmsTitle("sort_by_column")%>
-        </strong>
-      </th>
-      <th width="60%" style="text-align:left;background-color:#DDDDDD">
-        <strong>
+        </th>
+        <th width="60%" style="text-align:left;">
           <%=cm.cmsText("author")%>
           <%=cm.cmsTitle("sort_by_column")%>
-        </strong>
-      </th>
-    </tr>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
     for ( int i = 0; i < synonyms.size(); i++ )
     {
+      String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
       SpeciesNatureObjectPersist synonym = (SpeciesNatureObjectPersist)synonyms.get(i);%>
-      <tr style="background-color:<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-        <td width="40%">
+    <tr <%=cssClass%>>
+      <td>
 <%
-        if(synonym.getIdSpecies().intValue() == Utilities.checkedStringToInt(factsheet.getIdSpecies().toString(), 0))
-        {
+      if(synonym.getIdSpecies().intValue() == Utilities.checkedStringToInt(factsheet.getIdSpecies().toString(), 0))
+      {
 %>
-          <strong style="color : #C30000; font-style : italic; ">
-            <%=Utilities.treatURLSpecialCharacters(synonym.getScientificName())%>
-          </strong>
-<%
-        }
-        else
-        {
-%>
+        <strong style="color : #C30000; font-style : italic; ">
           <%=Utilities.treatURLSpecialCharacters(synonym.getScientificName())%>
+        </strong>
 <%
-        }
+      }
+      else
+      {
+%>
+        <%=Utilities.treatURLSpecialCharacters(synonym.getScientificName())%>
+<%
+      }
 %>
         </td>
-        <td width="30%">
+        <td>
           <%=Utilities.treatURLSpecialCharacters(synonym.getAuthor())%>
         </td>
       </tr>
 <%
     }
 %>
- </table>
+    </tbody>
+  </table>
 <%
   }
 %>
@@ -393,53 +397,50 @@ if(kingdomname.equalsIgnoreCase("Animals"))
   {
 %>
   <br />
-  <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr style="background-color:#CCCCCC">
-      <td>
-        <strong>
-          <%=cm.cmsText("valid_subspecies_europe")%>
-        </strong>
-      </td>
-    </tr>
-  </table>
-  <table summary="<%=cm.cms("species_factsheet_11_Sum")%>" width="100%" border="1" cellspacing="1" cellpadding="0"  id="validSubspec" class="sortable">
-    <tr style="background-color:#DDDDDD">
-      <th width="40%" style="background-color:#DDDDDD" title="<%=cm.cms("sort_results_on_this_column")%>">
-        <strong>
+  <h2>
+    <%=cm.cmsText("valid_subspecies_europe")%>
+  </h2>
+  <table summary="<%=cm.cms("species_factsheet_11_Sum")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th width="40%">
           <%=cm.cmsText("scientific_name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
-        </strong>
-      </th>
-      <th width="60%" style="background-color:#DDDDDD" title="<%=cm.cms("sort_results_on_this_column")%>">
-        <%=cm.cmsText("source")%>
-        <%=cm.cmsTitle("sort_results_on_this_column")%>
-      </th>
-    </tr>
+        </th>
+        <th width="60%">
+          <%=cm.cmsText("source")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
     for (int i = 0; i < subSpecies.size(); i++)
     {
+      String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
       SpeciesNatureObjectPersist species = (SpeciesNatureObjectPersist)subSpecies.get(i);
 %>
-    <tr style="background-color:<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <td>
-        <span style="font-style : italic;">
-          <%=Utilities.treatURLSpecialCharacters(species.getScientificName())%>
-        </span>
-        <%=Utilities.treatURLSpecialCharacters(species.getAuthor())%>
-      </td>
-      <td>
-        <%=Utilities.treatURLSpecialCharacters(SpeciesFactsheet.getBookAuthorDate(species.getIdDublinCore()))%>
-      </td>
-    </tr>
+      <tr <%=cssClass%>>
+        <td>
+          <span style="font-style : italic;">
+            <%=Utilities.treatURLSpecialCharacters(species.getScientificName())%>
+          </span>
+          <%=Utilities.treatURLSpecialCharacters(species.getAuthor())%>
+        </td>
+        <td>
+          <%=Utilities.treatURLSpecialCharacters(SpeciesFactsheet.getBookAuthorDate(species.getIdDublinCore()))%>
+        </td>
+      </tr>
 <%
     }
 %>
+    </tbody>
   </table>
 <%
 }
 %>
-<br />
-<br />
+  <br />
+  <br />
 <%
   // Species pictures
       List listPictures = factsheet.getPicturesForSpecies();
@@ -448,27 +449,15 @@ if(kingdomname.equalsIgnoreCase("Animals"))
       if(null != listPictures && listPictures.size() > 0)
       {
 %>
-        <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td style="text-align:left">
-              <a title="<%=cm.cms("species_factsheet_12_Title")%>" href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)"><%=cm.cmsText("view_pictures")%></a>
-              <%=cm.cmsTitle("species_factsheet_12_Title")%>
-            </td>
-          </tr>
-        </table>
+  <a title="<%=cm.cms("species_factsheet_12_Title")%>" href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)"><%=cm.cmsText("view_pictures")%></a>
+  <%=cm.cmsTitle("species_factsheet_12_Title")%>
 <%
       }
       else if ( SessionManager.isAuthenticated() )
       {
 %>
-        <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td style="text-align:left">
-              <a title="<%=cm.cms("species_factsheet_13_Title")%>" href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=urlPic%>',600,600)"><%=cm.cmsText("upload_pictures")%></a>
-              <%=cm.cmsTitle("species_factsheet_13_Title")%>
-            </td>
-          </tr>
-        </table>
+      <a title="<%=cm.cms("species_factsheet_13_Title")%>" href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=urlPic%>',600,600)"><%=cm.cmsText("upload_pictures")%></a>
+        <%=cm.cmsTitle("species_factsheet_13_Title")%>
 <%
       }
 %>
@@ -476,5 +465,5 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 <%=cm.cmsMsg("species_factsheet_10_Sum")%>
 <%=cm.br()%>
 <%=cm.cmsMsg("species_factsheet_11_Sum")%>
-      <br />
-      <br />
+  <br />
+  <br />

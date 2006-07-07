@@ -27,68 +27,71 @@
   WebContentManagement cm = SessionManager.getWebContent();
   int type = factsheet.getType();
 %>
-        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("site_identification")%></div>
-        <table summary="layout" border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse" >
-          <tr bgcolor="#FFFFFF">
-            <td width="50%">
-              <%-- Code in database --%>
-              <strong>
-                <%=SitesSearchUtility.translateSourceDB(factsheet.getSiteObject().getSourceDB())%>
-              </strong>
-              <%=cm.cmsText("code_in_database")%>
-            </td>
-            <td width="50%">
-              <strong>
-                <%=factsheet.getIDSite()%>
-              </strong>
-            </td>
-          </tr>
-          <tr bgcolor="#EEEEEE">
-            <%-- Surface area --%>
-            <td>
-              <%=cm.cmsText("surface_area_ha")%>
-            </td>
-            <td>
-              <%=Utilities.formatArea(factsheet.getSiteObject().getArea(), 0, 2, "&nbsp;", null)%>&nbsp;
-            </td>
-          </tr>
+  <h2>
+    <%=cm.cmsText("site_identification")%>
+  </h2>
+  <table summary="layout" class="datatable" width="90%">
+    <tbody>
+      <tr>
+        <td width="50%">
+          <%-- Code in database --%>
+          <strong>
+            <%=SitesSearchUtility.translateSourceDB(factsheet.getSiteObject().getSourceDB())%>
+          </strong>
+          <%=cm.cmsText("code_in_database")%>
+        </td>
+        <td width="50%">
+          <strong>
+            <%=factsheet.getIDSite()%>
+          </strong>
+        </td>
+      </tr>
+      <tr class="zebraeven">
+        <%-- Surface area --%>
+        <td>
+          <%=cm.cmsText("surface_area_ha")%>
+        </td>
+        <td>
+          <%=Utilities.formatArea(factsheet.getSiteObject().getArea(), 0, 2, "&nbsp;", null)%>&nbsp;
+        </td>
+      </tr>
 <%
       if (SiteFactsheet.TYPE_NATURA2000 == type || SiteFactsheet.TYPE_EMERALD == type || SiteFactsheet.TYPE_BIOGENETIC == type)
       {
         if (factsheet.getSiteObject().getLength() != null)
         {
 %>
-          <tr bgcolor="#EEEEEE">
-            <%-- Length --%>
-            <td>
-              <%=cm.cmsText("sites_factsheet_06")%>
-            </td>
-            <td>
-              <%=factsheet.getSiteObject().getLength()%>&nbsp;
-            </td>
-          </tr>
+      <tr>
+        <%-- Length --%>
+        <td>
+          <%=cm.cmsText("sites_factsheet_06")%>
+        </td>
+        <td>
+          <%=factsheet.getSiteObject().getLength()%>&nbsp;
+        </td>
+      </tr>
 <%
           }
         }
 %>
-          <tr bgcolor="#FFFFFF">
-            <%-- Complex name --%>
-            <td>
-              <%=cm.cmsText("complex_name")%>
-            </td>
-            <td>
-              <%=factsheet.getSiteObject().getComplexName()%>
-            </td>
-          </tr>
-          <tr bgcolor="#EEEEEE">
-            <%-- District name --%>
-            <td>
-              <%=cm.cmsText("district_name")%>
-            </td>
-            <td>
-              <%=factsheet.getSiteObject().getDistrictName()%>
-            </td>
-          </tr>
+      <tr class="zebraeven">
+        <%-- Complex name --%>
+        <td>
+          <%=cm.cmsText("complex_name")%>
+        </td>
+        <td>
+          <%=factsheet.getSiteObject().getComplexName()%>
+        </td>
+      </tr>
+      <tr>
+        <%-- District name --%>
+        <td>
+          <%=cm.cmsText("district_name")%>
+        </td>
+        <td>
+          <%=factsheet.getSiteObject().getDistrictName()%>
+        </td>
+      </tr>
 <%
       if (SiteFactsheet.TYPE_CDDA_NATIONAL != type && SiteFactsheet.TYPE_CDDA_INTERNATIONAL != type)
       {
@@ -158,399 +161,406 @@
           }
         }
 %>
-          <tr bgcolor="#FFFFFF">
-            <%-- Date form compilation date --%>
-            <td>
-              <%=cm.cmsText("date_form_compilation_date")%> <%=dateformatCompilationDate%>
-            </td>
-            <td>
-              <%=SiteFactsheet.TYPE_NATURA2000 != type ? factsheet.getSiteObject().getCompilationDate() : Utilities.formatDate(Utilities.stringToTimeStamp(factsheet.getSiteObject().getCompilationDate(),dateformatCompilationDate2),"MMM yyyy") + (factsheet.getSiteObject().getCompilationDate() == null || factsheet.getSiteObject().getCompilationDate().trim().length()<=0 ? "" :" (" + cm.cmsText("sites_factsheet_170") + " " + factsheet.getSiteObject().getCompilationDate() + ")")%>
-            </td>
-          </tr>
-          <tr bgcolor="#EEEEEE">
-            <%-- Date form update--%>
-            <td>
-              <%=cm.cmsText("date_form_update")%> <%=dateformatUpdateDate%>
-            </td>
-            <td>
-              <%=SiteFactsheet.TYPE_NATURA2000 != type ? factsheet.getSiteObject().getUpdateDate() : Utilities.formatDate(Utilities.stringToTimeStamp(factsheet.getSiteObject().getUpdateDate(),dateformatUpdateDate2),"MMM yyyy") + (factsheet.getSiteObject().getUpdateDate() == null || factsheet.getSiteObject().getUpdateDate().trim().length()<=0 ? "" : " (" + cm.cmsText("sites_factsheet_170") + " " + factsheet.getSiteObject().getUpdateDate() + ")")%>
-            </td>
-          </tr>
+      <tr class="zebraeven">
+        <%-- Date form compilation date --%>
+        <td>
+          <%=cm.cmsText("date_form_compilation_date")%> <%=dateformatCompilationDate%>
+        </td>
+        <td>
+          <%=SiteFactsheet.TYPE_NATURA2000 != type ? factsheet.getSiteObject().getCompilationDate() : Utilities.formatDate(Utilities.stringToTimeStamp(factsheet.getSiteObject().getCompilationDate(),dateformatCompilationDate2),"MMM yyyy") + (factsheet.getSiteObject().getCompilationDate() == null || factsheet.getSiteObject().getCompilationDate().trim().length()<=0 ? "" :" (" + cm.cmsText("sites_factsheet_170") + " " + factsheet.getSiteObject().getCompilationDate() + ")")%>
+        </td>
+      </tr>
+      <tr>
+        <%-- Date form update--%>
+        <td>
+          <%=cm.cmsText("date_form_update")%> <%=dateformatUpdateDate%>
+        </td>
+        <td>
+          <%=SiteFactsheet.TYPE_NATURA2000 != type ? factsheet.getSiteObject().getUpdateDate() : Utilities.formatDate(Utilities.stringToTimeStamp(factsheet.getSiteObject().getUpdateDate(),dateformatUpdateDate2),"MMM yyyy") + (factsheet.getSiteObject().getUpdateDate() == null || factsheet.getSiteObject().getUpdateDate().trim().length()<=0 ? "" : " (" + cm.cmsText("sites_factsheet_170") + " " + factsheet.getSiteObject().getUpdateDate() + ")")%>
+        </td>
+      </tr>
 <%
       }
       if ( SiteFactsheet.TYPE_CDDA_NATIONAL != type && SiteFactsheet.TYPE_CDDA_INTERNATIONAL != type && SiteFactsheet.TYPE_CORINE != type )
       {
 %>
-          <tr bgcolor="#FFFFFF">
-            <%-- Date proposed --%>
-            <td>
-              <%=cm.cmsText("date_proposed")%>
-            </td>
-            <td>
-              <%=SiteFactsheet.TYPE_NATURA2000 != type ? factsheet.getSiteObject().getProposedDate() : Utilities.formatDate(Utilities.stringToTimeStamp(factsheet.getSiteObject().getProposedDate(),"yyyyMM"),"MMM yyyy") + (factsheet.getSiteObject().getProposedDate() == null || factsheet.getSiteObject().getProposedDate().trim().length()<=0 ? "" :" (" + cm.cmsText("sites_factsheet_170") + " " + factsheet.getSiteObject().getProposedDate() + ")")%>
-            </td>
-          </tr>
+      <tr class="zebraeven">
+        <%-- Date proposed --%>
+        <td>
+          <%=cm.cmsText("date_proposed")%>
+        </td>
+        <td>
+          <%=SiteFactsheet.TYPE_NATURA2000 != type ? factsheet.getSiteObject().getProposedDate() : Utilities.formatDate(Utilities.stringToTimeStamp(factsheet.getSiteObject().getProposedDate(),"yyyyMM"),"MMM yyyy") + (factsheet.getSiteObject().getProposedDate() == null || factsheet.getSiteObject().getProposedDate().trim().length()<=0 ? "" :" (" + cm.cmsText("sites_factsheet_170") + " " + factsheet.getSiteObject().getProposedDate() + ")")%>
+        </td>
+      </tr>
 <%
       }
       if (SiteFactsheet.TYPE_NATURA2000 == type || SiteFactsheet.TYPE_DIPLOMA == type || type == SiteFactsheet.TYPE_EMERALD )
       {
 %>
-          <tr bgcolor="#EEEEEE">
-            <%-- Date confirmed --%>
-            <td>
-              <%=cm.cmsText("date_confirmed")%>
-            </td>
-            <td>
-              <%=SiteFactsheet.TYPE_NATURA2000 != type ? factsheet.getSiteObject().getConfirmedDate() : Utilities.formatDate(Utilities.stringToTimeStamp(factsheet.getSiteObject().getConfirmedDate(),"yyyyMM"),"MMM yyyy") + (factsheet.getSiteObject().getConfirmedDate() == null || factsheet.getSiteObject().getConfirmedDate().trim().length()<=0 ? "" :" (" + cm.cmsText("sites_factsheet_170") + " " + factsheet.getSiteObject().getConfirmedDate() + ")")%>
-            </td>
-          </tr>
+      <tr>
+        <%-- Date confirmed --%>
+        <td>
+          <%=cm.cmsText("date_confirmed")%>
+        </td>
+        <td>
+          <%=SiteFactsheet.TYPE_NATURA2000 != type ? factsheet.getSiteObject().getConfirmedDate() : Utilities.formatDate(Utilities.stringToTimeStamp(factsheet.getSiteObject().getConfirmedDate(),"yyyyMM"),"MMM yyyy") + (factsheet.getSiteObject().getConfirmedDate() == null || factsheet.getSiteObject().getConfirmedDate().trim().length()<=0 ? "" :" (" + cm.cmsText("sites_factsheet_170") + " " + factsheet.getSiteObject().getConfirmedDate() + ")")%>
+        </td>
+      </tr>
 <%
       }
       if (SiteFactsheet.TYPE_DIPLOMA == type)
       {
 %>
-          <tr bgcolor="#FFFFFF">
-            <%-- Date first designation --%>
-            <td>
-              <%=cm.cmsText("date_first_designation")%>
-            </td>
-            <td>
-              <%=factsheet.getDateFirstDesignation()%>
-            </td>
-          </tr>
+      <tr class="zebraeven">
+        <%-- Date first designation --%>
+        <td>
+          <%=cm.cmsText("date_first_designation")%>
+        </td>
+        <td>
+          <%=factsheet.getDateFirstDesignation()%>
+        </td>
+      </tr>
 <%
       }
       if (SiteFactsheet.TYPE_CORINE != type)
       {
 %>
-          <tr bgcolor="#EEEEEE">
-            <%-- Site designation date --%>
-            <td>
-              <%=cm.cmsText("site_designation_date")%>
-            </td>
-            <td>
-              <%
-                String spaDate = factsheet.getSiteObject().getSpaDate();
-                String sacDate = factsheet.getSiteObject().getSacDate();
-                String designationDate = factsheet.getSiteObject().getDesignationDate();
-                if (null != spaDate && spaDate.length() > 0) out.print(spaDate + ",");
-                if (null != sacDate && sacDate.length() > 0) out.print(sacDate + "/");
-                if (null != designationDate && designationDate.length() > 0) out.print(designationDate);
-              %>
-            </td>
-          </tr>
+      <tr>
+        <%-- Site designation date --%>
+        <td>
+          <%=cm.cmsText("site_designation_date")%>
+        </td>
+        <td>
+        <%
+          String spaDate = factsheet.getSiteObject().getSpaDate();
+          String sacDate = factsheet.getSiteObject().getSacDate();
+          String designationDate = factsheet.getSiteObject().getDesignationDate();
+          if (null != spaDate && spaDate.length() > 0) out.print(spaDate + ",");
+          if (null != sacDate && sacDate.length() > 0) out.print(sacDate + "/");
+          if (null != designationDate && designationDate.length() > 0) out.print(designationDate);
+        %>
+        </td>
+      </tr>
 <%
       }
 %>
-        </table>
-        <br />
+    </tbody>
+  </table>
+  <br />
 <%
       // Site designations
       List designations = SitesSearchUtility.findDesignationsForSitesFactsheet(factsheet.getSiteObject().getIdSite());
       if (designations != null && designations.size()>0)
       {
 %>
-        <%-- Designation information --%>
-        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("designation_information")%></div>
-        <table summary="<%=cm.cms("designation_information")%>" border="1" style="border-collapse:collapse" cellpadding="1" cellspacing="1" width="100%" bgcolor="#EEEEEE">
-          <tr bgcolor="#DDDDDD">
-            <td>
-              <%=cm.cmsText("source_data_set")%>
-            </td>
-            <td>
-              <%=cm.cmsText("designation_code")%>
-            </td>
-            <td>
-              <%=cm.cmsText("designation_name_original")%>
-            </td>
-            <td>
-              <%=cm.cmsText("designation_name_english")%>
-            </td>
-<%
-          if (SiteFactsheet.TYPE_CORINE != type)
-          {
-%>
-            <td>
-              <%=cm.cmsText("designation_name_french")%>
-            </td>
-<%
-          }
-%>
-          </tr>
-<%
-      String SiteType = factsheet.getSiteType();
-      if (SiteFactsheet.TYPE_NATURA2000 != type || !SiteType.equalsIgnoreCase("C"))
-//      if (SiteFactsheet.TYPE_NATURA2000 != type || SiteType.equalsIgnoreCase("C"))
-      {
-          SitesDesignationsPersist designation = (SitesDesignationsPersist) designations.get(0);
-%>
-          <tr>
-            <td>
-              <%=designation.getDataSource()%>
-            </td>
-            <td>
-              <%=Utilities.formatString(designation.getIdDesignation(),"&nbsp;")%>
-            </td>
-            <td>
-            <%
-                if(designation.getDescription() != null && designation.getDescription().trim().length() > 0)
-                {
-            %>
-              <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=original&amp;idDesign=<%=designation.getIdDesignation()%>&amp;geoscope=<%=designation.getIdGeoscope()%>"><%=designation.getDescription()%></a>
-              <%=cm.cmsTitle("open_designation_factsheet")%>
-                <%
-                 }
-                 else
-                 {
-                %>
-                   &nbsp;
-                <%
-                    }
-                %>
-            </td>
-            <td>
-            <%
-                if(designation.getDescriptionEn() != null && designation.getDescriptionEn().trim().length() > 0)
-                {
-            %>
-              <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=designation.getIdDesignation()%>&amp;geoscope=<%=designation.getIdGeoscope()%>"><%=designation.getDescriptionEn()%></a>
-              <%=cm.cmsTitle("open_designation_factsheet")%>
-                <%
-                } else
-                {
-                %>
-                  &nbsp;
-                <%
-                   }
-                %>
-            </td>
+  <%-- Designation information --%>
+  <h2>
+    <%=cm.cmsText("designation_information")%>
+  </h2>
+  <table summary="<%=cm.cms("designation_information")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cmsText("source_data_set")%>
+        </th>
+        <th>
+          <%=cm.cmsText("designation_code")%>
+        </th>
+        <th>
+          <%=cm.cmsText("designation_name_original")%>
+        </th>
+        <th>
+          <%=cm.cmsText("designation_name_english")%>
+        </th>
 <%
         if (SiteFactsheet.TYPE_CORINE != type)
         {
 %>
-            <td>
-            <%
-                if(designation.getDescriptionFr() != null && designation.getDescriptionFr().trim().length() > 0)
-                {
-            %>
-              <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=fr&amp;idDesign=<%=designation.getIdDesignation()%>&amp;geoscope=<%=designation.getIdGeoscope()%>"><%=designation.getDescriptionFr()%></a>
-              <%=cm.cmsTitle("open_designation_factsheet")%>
-<%
-                } else
-                {
-%>
-                  &nbsp;
-<%
-                   }
-%>
-            </td>
+        <th>
+          <%=cm.cmsText("designation_name_french")%>
+        </th>
 <%
         }
 %>
-          </tr>
+      </tr>
+    </thead>
+    <tbody>
 <%
-      } else {
-        //NATURA 2000 site and type C
-        List desigs = new Chm62edtDesignationsDomain().findWhere("ID_DESIGNATION='INBD' OR ID_DESIGNATION='INHD'");
-        for(int i=0;i<desigs.size();i++) {
-          Chm62edtDesignationsPersist desig = (Chm62edtDesignationsPersist) desigs.get(i);
+        String SiteType = factsheet.getSiteType();
+        if (SiteFactsheet.TYPE_NATURA2000 != type || !SiteType.equalsIgnoreCase("C"))
+        {
+          SitesDesignationsPersist designation = (SitesDesignationsPersist) designations.get(0);
 %>
-          <tr>
-            <td>
-              <%=desig.getOriginalDataSource()%>
-            </td>
-            <td>
-              <%=Utilities.formatString(desig.getIdDesignation(),"&nbsp;")%>
-            </td>
-            <td>
-            <%
-                if(desig.getDescription() != null && desig.getDescription().trim().length() > 0)
-                {
-            %>
-              <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=original&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescription()%></a>
-              <%=cm.cmsTitle("open_designation_factsheet")%>
-                <%
-                 }
-                 else
-                 {
-                %>
-                   &nbsp;
-                <%
-                 }
-                %>
-            </td>
-            <td>
-            <%
-                if(desig.getDescriptionEn() != null && desig.getDescriptionEn().trim().length() > 0)
-                {
-            %>
-              <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescriptionEn()%></a>
-              <%=cm.cmsTitle("open_designation_factsheet")%>
-                <%
-                } else
-                {
-                %>
-                  &nbsp;
-                <%
-                 }
-                %>
-            </td>
-            <td>
-            <%
-                if(desig.getDescriptionFr() != null && desig.getDescriptionFr().trim().length() > 0)
-                {
-            %>
-              <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=fr&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescriptionFr()%></a>
-              <%=cm.cmsTitle("open_designation_factsheet")%>
+      <tr class="zebraeven">
+        <td>
+          <%=designation.getDataSource()%>
+        </td>
+        <td>
+          <%=Utilities.formatString(designation.getIdDesignation(),"&nbsp;")%>
+        </td>
+        <td>
 <%
-                } else
-                {
-%>
-                  &nbsp;
-<%
-                }
-%>
-            </td>
-          </tr>
-<%
-        }
-      }
-%>
-        </table>
-<%
-    }
-%>
-        <br />
-        <br />
-        <table summary="layout" border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse" bgcolor="#EEEEEE">
-          <tr>
-            <%-- Project ID --%>
-            <td width="15%">
-              <%=cm.cmsText("project_id")%>
-            </td>
-            <td>
-              &nbsp;
-            </td>
-          </tr>
-          <tr>
-            <%-- Project title --%>
-            <td width="15%">
-              <%=cm.cmsText("project_title")%>
-            </td>
-            <td>
-              &nbsp;
-            </td>
-          </tr>
-        </table>
-        <br />
-        <a name="monitoring"></a>
-        <table summary="layout" border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse">
-          <tr bgcolor="#EEEEEE">
-            <%-- Monitoring activities --%>
-            <td>
-              <strong>
-                <%=cm.cmsText("sites_factsheet_24")%>
-              </strong>
-            </td>
-          </tr>
-          <tr bgcolor="#EEEEEE">
-            <td>
-              <textarea rows="1" cols="80" class="inputTextField"></textarea>
-            </td>
-          </tr>
-        </table>
-        <br />
-        <br />
-        <table summary="Link to other providers" width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="50%">
-              <a title="<%=cm.cms("google_pictures")%>" href="javascript:openGooglePics('http://images.google.com/images?q=<%=factsheet.getSiteObject().getName()%>')"><%=cm.cmsText("pictures_on_google")%></a>
-            </td>
-            <td width="50%" align="right">
-<%
-              if ( SiteFactsheet.TYPE_CDDA_INTERNATIONAL == type || SiteFactsheet.TYPE_CDDA_NATIONAL == type )
-              {
-                String level = "nat";
-                if ( SiteFactsheet.TYPE_CDDA_INTERNATIONAL == type )
-                {
-                  level = "int";
-                }
-%>
-                <a title="<%=cm.cms("wcmc_link")%>" href="javascript:openunepwcmc('http://sea.unep-wcmc.org/wdbpa/sitedetails.cfm?siteid=<%=factsheet.getSiteObject().getIdSite()%>&amp;level=<%=level%>')"><%=cm.cmsText("unep_link")%></a>
-<%
-              }
-              else
-              {
-%>
-                &nbsp;
-<%
-              }
-%>
-            </td>
-          </tr>
-        </table>
-        <br />
-<%
-        String country = Utilities.formatString(factsheet.getCountry()).trim();
-        String parentCountry = Utilities.formatString(factsheet.getParentCountry()).trim();
-%>
-        <%-- Location information --%>
-        <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("location_information")%></div>
-        <table summary="<%=cm.cms("location_information")%>" border="1" cellpadding="1" cellspacing="0" width="100%" style="border-collapse:collapse" >
-          <tr>
-            <td colspan="2">
-              <%=cm.cmsText("country")%>
-            </td>
-<%--              <td><a href="sites-statistical-result.jsp?country=<%=country%>&amp;DB_NATURA2000=true&amp;DB_CDDA_NATIONAL=true&amp;DB_NATURE_NET=true&amp;DB_DIPLOMA=true&amp;DB_CDDA_INTERNATIONAL=true&amp;DB_CORINE=true&amp;DB_BIOGENETIC=true&amp;DB_EMERALD=true" title="Open the statistical data for <%=country%>"><%=country%></a></td>--%>
-            <td>
-            <%
-                if(Utilities.isCountry(country))
-                { 
-            %>
-              <a href="javascript:goToCountryStatistics('<%=country%>')" title="<%=cm.cms("open_the_statistical_data_for")%> <%=country%>"><%=Utilities.formatString(country,"")%></a>
-                <%
-                } else {
-                %>
-                 <%=Utilities.formatString(country,"")%>
-                <%
-                 }
-                %>
-            </td>
-<%
-          if (!country.equalsIgnoreCase(parentCountry))
+          if(designation.getDescription() != null && designation.getDescription().trim().length() > 0)
           {
 %>
-            <td colspan="2">
-              <%=cm.cmsText("parent_country")%>
-            </td>
-            <td>
-              <%=parentCountry%>
-            </td>
+          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=original&amp;idDesign=<%=designation.getIdDesignation()%>&amp;geoscope=<%=designation.getIdGeoscope()%>"><%=designation.getDescription()%></a>
+          <%=cm.cmsTitle("open_designation_factsheet")%>
 <%
           }
           else
           {
 %>
-            <td colspan="2">
-              &nbsp;
-            </td>
-            <td>
-              &nbsp;
-            </td>
+               &nbsp;
 <%
           }
 %>
-          </tr>
+        </td>
+        <td>
 <%
-        if (SiteFactsheet.TYPE_CDDA_INTERNATIONAL != type)
-        {
-          List regionCodes = factsheet.findAdministrativeRegionCodes();
+          if(designation.getDescriptionEn() != null && designation.getDescriptionEn().trim().length() > 0)
+          {
 %>
-          <tr bgcolor="#EEEEEE">
-            <td colspan="2">
-              <%=cm.cmsText("sites_factsheet_30")%>
-            </td>
-            <td colspan="4">
+          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=designation.getIdDesignation()%>&amp;geoscope=<%=designation.getIdGeoscope()%>"><%=designation.getDescriptionEn()%></a>
+          <%=cm.cmsTitle("open_designation_factsheet")%>
+<%
+          }
+          else
+          {
+%>
+              &nbsp;
+<%
+          }
+%>
+        </td>
+<%
+          if (SiteFactsheet.TYPE_CORINE != type)
+          {
+%>
+        <td>
+<%
+            if(designation.getDescriptionFr() != null && designation.getDescriptionFr().trim().length() > 0)
+            {
+%>
+          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=fr&amp;idDesign=<%=designation.getIdDesignation()%>&amp;geoscope=<%=designation.getIdGeoscope()%>"><%=designation.getDescriptionFr()%></a>
+          <%=cm.cmsTitle("open_designation_factsheet")%>
+<%
+            }
+            else
+            {
+%>
+          &nbsp;
+<%
+            }
+%>
+        </td>
+<%
+          }
+%>
+      </tr>
+<%
+        }
+        else
+        {
+          //NATURA 2000 site and type C
+          List desigs = new Chm62edtDesignationsDomain().findWhere("ID_DESIGNATION='INBD' OR ID_DESIGNATION='INHD'");
+          for(int i=0;i<desigs.size();i++)
+          {
+            Chm62edtDesignationsPersist desig = (Chm62edtDesignationsPersist) desigs.get(i);
+%>
+      <tr>
+        <td>
+          <%=desig.getOriginalDataSource()%>
+        </td>
+        <td>
+          <%=Utilities.formatString(desig.getIdDesignation(),"&nbsp;")%>
+        </td>
+        <td>
+<%
+          if(desig.getDescription() != null && desig.getDescription().trim().length() > 0)
+          {
+%>
+          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=original&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescription()%></a>
+          <%=cm.cmsTitle("open_designation_factsheet")%>
+<%
+           }
+           else
+           {
+%>
+          &nbsp;
+<%
+           }
+%>
+        </td>
+        <td>
+<%
+          if(desig.getDescriptionEn() != null && desig.getDescriptionEn().trim().length() > 0)
+          {
+%>
+            <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescriptionEn()%></a>
+            <%=cm.cmsTitle("open_designation_factsheet")%>
+<%
+          }
+          else
+          {
+%>
+            &nbsp;
+<%
+          }
+%>
+        </td>
+        <td>
+<%
+          if(desig.getDescriptionFr() != null && desig.getDescriptionFr().trim().length() > 0)
+          {
+%>
+          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=fr&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescriptionFr()%></a>
+          <%=cm.cmsTitle("open_designation_factsheet")%>
+<%
+          }
+          else
+          {
+%>
+          &nbsp;
+<%
+          }
+%>
+        </td>
+      </tr>
+  <%
+          }
+        }
+  %>
+    </tbody>
+  </table>
+  <%
+      }
+  %>
+  <br />
+  <table summary="layout" class="datatable" width="90%">
+    <tr class="zebraeven">
+      <%-- Project ID --%>
+      <td width="15%">
+        <%=cm.cmsText("project_id")%>
+      </td>
+      <td>
+        &nbsp;
+      </td>
+    </tr>
+    <tr class="zebraeven">
+      <%-- Project title --%>
+      <td>
+        <%=cm.cmsText("project_title")%>
+      </td>
+      <td>
+        &nbsp;
+      </td>
+    </tr>
+  </table>
+  <br />
+  <a name="monitoring"></a>
+  <h2>
+    <%=cm.cmsText("sites_factsheet_24")%>
+  </h2>
+  <br />
+  <%-- Monitoring activities --%>
+  <textarea rows="1" cols="80"></textarea>
+  <br />
+  <br />
+  <table summary="Link to other providers" width="90%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="50%">
+        <a title="<%=cm.cms("google_pictures")%>" href="javascript:openGooglePics('http://images.google.com/images?q=<%=factsheet.getSiteObject().getName()%>')"><%=cm.cmsText("pictures_on_google")%></a>
+      </td>
+      <td width="50%" align="right">
+<%
+      if ( SiteFactsheet.TYPE_CDDA_INTERNATIONAL == type || SiteFactsheet.TYPE_CDDA_NATIONAL == type )
+      {
+        String level = "nat";
+        if ( SiteFactsheet.TYPE_CDDA_INTERNATIONAL == type )
+        {
+          level = "int";
+        }
+%>
+        <a title="<%=cm.cms("wcmc_link")%>" href="javascript:openunepwcmc('http://sea.unep-wcmc.org/wdbpa/sitedetails.cfm?siteid=<%=factsheet.getSiteObject().getIdSite()%>&amp;level=<%=level%>')"><%=cm.cmsText("unep_link")%></a>
+<%
+      }
+      else
+      {
+%>
+        &nbsp;
+<%
+      }
+%>
+      </td>
+    </tr>
+  </table>
+  <br />
+<%
+      String country = Utilities.formatString(factsheet.getCountry()).trim();
+      String parentCountry = Utilities.formatString(factsheet.getParentCountry()).trim();
+%>
+  <%-- Location information --%>
+  <h2>
+    <%=cm.cmsText("location_information")%>
+  </h2>
+  <table summary="<%=cm.cms("location_information")%>" class="datatable" width="90%">
+    <tr>
+      <td colspan="2">
+        <%=cm.cmsText("country")%>
+      </td>
+<%--              <td><a href="sites-statistical-result.jsp?country=<%=country%>&amp;DB_NATURA2000=true&amp;DB_CDDA_NATIONAL=true&amp;DB_NATURE_NET=true&amp;DB_DIPLOMA=true&amp;DB_CDDA_INTERNATIONAL=true&amp;DB_CORINE=true&amp;DB_BIOGENETIC=true&amp;DB_EMERALD=true" title="Open the statistical data for <%=country%>"><%=country%></a></td>--%>
+      <td>
+<%
+      if(Utilities.isCountry(country))
+      {
+%>
+        <a href="javascript:goToCountryStatistics('<%=country%>')" title="<%=cm.cms("open_the_statistical_data_for")%> <%=country%>"><%=Utilities.formatString(country,"")%></a>
+<%
+      }
+      else
+      {
+%>
+        <%=Utilities.formatString(country,"")%>
+<%
+      }
+%>
+      </td>
+<%
+      if (!country.equalsIgnoreCase(parentCountry))
+      {
+%>
+      <td colspan="2">
+        <%=cm.cmsText("parent_country")%>
+      </td>
+      <td>
+        <%=parentCountry%>
+      </td>
+<%
+      }
+      else
+      {
+%>
+      <td colspan="2">
+        &nbsp;
+      </td>
+      <td>
+        &nbsp;
+      </td>
+<%
+          }
+%>
+    </tr>
+<%
+          if (SiteFactsheet.TYPE_CDDA_INTERNATIONAL != type)
+          {
+            List regionCodes = factsheet.findAdministrativeRegionCodes();
+%>
+    <tr class="zebraeven">
+      <td colspan="2">
+        <%=cm.cmsText("sites_factsheet_30")%>
+      </td>
+      <td colspan="4">
 <%
             if(regionCodes.size()>0)
             {
@@ -558,7 +568,7 @@
               {
                 RegionsCodesPersist region = (RegionsCodesPersist)regionCodes.get(i);
 %>
-                NUTS code <%=Utilities.formatString(region.getRegionCode())%>, <%=Utilities.formatString(region.getRegionName())%>, cover:<%=Utilities.formatString(region.getRegionCover())%>%
+        NUTS code <%=Utilities.formatString(region.getRegionCode())%>, <%=Utilities.formatString(region.getRegionName())%>, cover:<%=Utilities.formatString(region.getRegionCover())%>%
 <%
                   if (regionCodes.size() > 1 && i < regionCodes.size() - 1)
                   {
@@ -567,8 +577,8 @@
               }
             }
 %>
-            </td>
-          </tr>
+      </td>
+    </tr>
 <%
         }
         // Site biogeographical regions
@@ -598,225 +608,225 @@
                   steppic)
           {
 %>
-          <tr>
-            <td colspan="6">
-              <table border="1" cellpadding="1" cellspacing="1" width="100%" style="border-collapse:collapse">
-                <tr bgcolor="#EEEEEE">
-                  <td colspan="12">
-                    <%=cm.cmsText("sites_factsheet_149")%>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <%=cm.cmsText("biogeographic_region")%>
-                  </td>
-                  <td>
-                    <%=cm.cmsText("sites_factsheet_152")%>
-                  </td>
-                  <td>
-                    <%=cm.cmsText("sites_factsheet_153")%>
-                  </td>
-                  <td>
-                    <%=cm.cmsText("sites_factsheet_154")%>
-                  </td>
-                  <td>
-                    <%=cm.cmsText("sites_factsheet_155")%>
-                  </td>
-                  <td>
-                    <%=cm.cmsText("sites_factsheet_156")%>
-                  </td>
-                  <td>
-                    <%=cm.cmsText("sites_factsheet_157")%>
-                  </td>
-                  <td>
-                    <%=cm.cmsText("sites_factsheet_158")%>
-                  </td>
-                  <td>
-                    <%=cm.cmsText("sites_factsheet_159")%>
-                  </td>
-                  <td>
-                    <%=cm.cmsText("sites_factsheet_160")%>
-                  </td>
-                  <td>
-                    <%=cm.cmsText("sites_factsheet_161")%>
-                  </td>
-                  <td>
-                    <%=cm.cmsText("sites_factsheet_162")%>
-                  </td>
-                </tr>
-                <tr bgcolor="#EEEEEE">
-                  <td>
-                    <%=cm.cmsText("sites_factsheet_151")%>
-                  </td>
-                  <td>
-                    <%
-                      if( alpine )
-                      {
-                    %>
-                        <img alt="<%=cm.cms("present_alpine_regions")%>" src="images/mini/check.gif" style="vertical-align:middle" />
-                        <%=cm.cmsAlt("present_alpine_regions")%>
-                    <%
-                      }
-                      else
-                      {
-                        out.print( "&nbsp;" );
-                      }
-                    %>
-                  </td>
-                  <td>
-                    <%
-                      if( anatol )
-                      {
-                    %>
-                        <img alt="<%=cm.cms("present_anatolian_regions")%>" src="images/mini/check.gif" style="vertical-align:middle" />
-                        <%=cm.cmsAlt("present_anatolian_regions")%>
-                    <%
-                      }
-                      else
-                      {
-                        out.print( "&nbsp;" );
-                      }
-                    %>
-                  </td>
-                  <td>
-                    <%
-                      if( arctic )
-                      {
-                    %>
-                        <img alt="<%=cm.cms("present_arctic_region")%>" src="images/mini/check.gif" style="vertical-align:middle" />
-                        <%=cm.cmsAlt("present_arctic_region")%>
-                    <%
-                      }
-                      else
-                      {
-                        out.print( "&nbsp;" );
-                      }
-                    %>
-                  </td>
-                  <td>
-                    <%
-                      if( atlantic )
-                      {
-                    %>
-                        <img alt="<%=cm.cms("present_atlantic_region")%>" src="images/mini/check.gif" style="vertical-align:middle" />
-                        <%=cm.cmsAlt("present_atlantic_region")%>
-                    <%
-                      }
-                      else
-                      {
-                        out.print( "&nbsp;" );
-                      }
-                    %>
-                  </td>
-                  <td>
-                    <%
-                      if( boreal )
-                      {
-                    %>
-                        <img alt="<%=cm.cms("present_boreal_region")%>" src="images/mini/check.gif" style="vertical-align:middle" />
-                        <%=cm.cmsAlt("present_boreal_region")%>
-                    <%
-                      }
-                      else
-                      {
-                        out.print( "&nbsp;" );
-                      }
-                    %>
-                  </td>
-                  <td>
-                    <%
-                      if( continent )
-                      {
-                    %>
-                        <img alt="<%=cm.cms("present_continental_regions")%>" src="images/mini/check.gif" style="vertical-align:middle" />
-                        <%=cm.cmsAlt("present_continental_regions")%>
-                    <%
-                      }
-                      else
-                      {
-                        out.print( "&nbsp;" );
-                      }
-                    %>
-                  </td>
-                  <td>
-                    <%
-                      if( macarones )
-                      {
-                    %>
-                        <img alt="<%=cm.cms("present_macaronesian_region")%>" src="images/mini/check.gif" style="vertical-align:middle" />
-                        <%=cm.cmsAlt("present_macaronesian_region")%>
-                    <%
-                      }
-                      else
-                      {
-                        out.print( "&nbsp;" );
-                      }
-                    %>
-                  </td>
-                  <td>
-                    <%
-                      if( mediterranean )
-                      {
-                    %>
-                        <img alt="<%=cm.cms("present_mediterranean_region")%>" src="images/mini/check.gif" style="vertical-align:middle" />
-                        <%=cm.cmsAlt("present_mediterranean_region")%>
-                    <%
-                      }
-                      else
-                      {
-                        out.print( "&nbsp;" );
-                      }
-                    %>
-                  </td>
-                  <td>
-                    <%
-                      if( pannonic )
-                      {
-                    %>
-                        <img alt="<%=cm.cms("present_pannonian_region")%>" src="images/mini/check.gif" style="vertical-align:middle" />
-                        <%=cm.cmsAlt("present_pannonian_region")%>
-                    <%
-                      }
-                      else
-                      {
-                        out.print( "&nbsp;" );
-                      }
-                    %>
-                  </td>
-                  <td>
-                    <%
-                      if( pontic )
-                      {
-                    %>
-                        <img alt="<%=cm.cms("present_blacksea_region")%>" src="images/mini/check.gif" style="vertical-align:middle" />
-                        <%=cm.cmsAlt("present_blacksea_region")%>
-                    <%
-                      }
-                      else
-                      {
-                        out.print( "&nbsp;" );
-                      }
-                    %>
-                  </td>
-                  <td>
-                    <%
-                      if( steppic )
-                      {
-                    %>
-                        <img alt="<%=cm.cms("present_steppic_region")%>" src="images/mini/check.gif" style="vertical-align:middle" />
-                        <%=cm.cmsAlt("present_steppic_region")%>
-                    <%
-                      }
-                      else
-                      {
-                        out.print( "&nbsp;" );
-                      }
-                    %>
-                  </td>
-                </tr>
-              </table>
+    <tr>
+      <td colspan="6">
+        <table border="1" cellpadding="1" cellspacing="1" width="90%" style="border-collapse:collapse">
+          <tr bgcolor="#EEEEEE">
+            <td colspan="12">
+              <%=cm.cmsText("sites_factsheet_149")%>
             </td>
           </tr>
+          <tr>
+            <td>
+              <%=cm.cmsText("biogeographic_region")%>
+            </td>
+            <td>
+              <%=cm.cmsText("sites_factsheet_152")%>
+            </td>
+            <td>
+              <%=cm.cmsText("sites_factsheet_153")%>
+            </td>
+            <td>
+              <%=cm.cmsText("sites_factsheet_154")%>
+            </td>
+            <td>
+              <%=cm.cmsText("sites_factsheet_155")%>
+            </td>
+            <td>
+              <%=cm.cmsText("sites_factsheet_156")%>
+            </td>
+            <td>
+              <%=cm.cmsText("sites_factsheet_157")%>
+            </td>
+            <td>
+              <%=cm.cmsText("sites_factsheet_158")%>
+            </td>
+            <td>
+              <%=cm.cmsText("sites_factsheet_159")%>
+            </td>
+            <td>
+              <%=cm.cmsText("sites_factsheet_160")%>
+            </td>
+            <td>
+              <%=cm.cmsText("sites_factsheet_161")%>
+            </td>
+            <td>
+              <%=cm.cmsText("sites_factsheet_162")%>
+            </td>
+          </tr>
+          <tr bgcolor="#EEEEEE">
+            <td>
+              <%=cm.cmsText("sites_factsheet_151")%>
+            </td>
+            <td>
+<%
+            if( alpine )
+            {
+%>
+              <img alt="<%=cm.cms("present_alpine_regions")%>" src="images/mini/check.gif" style="vertical-align:middle" />
+              <%=cm.cmsAlt("present_alpine_regions")%>
+<%
+            }
+            else
+            {
+              out.print( "&nbsp;" );
+            }
+%>
+            </td>
+            <td>
+<%
+            if( anatol )
+            {
+%>
+              <img alt="<%=cm.cms("present_anatolian_regions")%>" src="images/mini/check.gif" style="vertical-align:middle" />
+              <%=cm.cmsAlt("present_anatolian_regions")%>
+<%
+            }
+            else
+            {
+              out.print( "&nbsp;" );
+            }
+%>
+            </td>
+            <td>
+<%
+            if( arctic )
+            {
+%>
+              <img alt="<%=cm.cms("present_arctic_region")%>" src="images/mini/check.gif" style="vertical-align:middle" />
+              <%=cm.cmsAlt("present_arctic_region")%>
+<%
+            }
+            else
+            {
+              out.print( "&nbsp;" );
+            }
+%>
+            </td>
+            <td>
+<%
+            if( atlantic )
+            {
+%>
+              <img alt="<%=cm.cms("present_atlantic_region")%>" src="images/mini/check.gif" style="vertical-align:middle" />
+              <%=cm.cmsAlt("present_atlantic_region")%>
+<%
+            }
+            else
+            {
+              out.print( "&nbsp;" );
+            }
+%>
+            </td>
+            <td>
+<%
+            if( boreal )
+            {
+%>
+              <img alt="<%=cm.cms("present_boreal_region")%>" src="images/mini/check.gif" style="vertical-align:middle" />
+              <%=cm.cmsAlt("present_boreal_region")%>
+<%
+            }
+            else
+            {
+              out.print( "&nbsp;" );
+            }
+%>
+            </td>
+            <td>
+<%
+            if( continent )
+            {
+%>
+              <img alt="<%=cm.cms("present_continental_regions")%>" src="images/mini/check.gif" style="vertical-align:middle" />
+              <%=cm.cmsAlt("present_continental_regions")%>
+<%
+            }
+            else
+            {
+              out.print( "&nbsp;" );
+            }
+%>
+            </td>
+            <td>
+<%
+            if( macarones )
+            {
+%>
+              <img alt="<%=cm.cms("present_macaronesian_region")%>" src="images/mini/check.gif" style="vertical-align:middle" />
+              <%=cm.cmsAlt("present_macaronesian_region")%>
+<%
+            }
+            else
+            {
+              out.print( "&nbsp;" );
+            }
+%>
+            </td>
+            <td>
+<%
+            if( mediterranean )
+            {
+%>
+              <img alt="<%=cm.cms("present_mediterranean_region")%>" src="images/mini/check.gif" style="vertical-align:middle" />
+              <%=cm.cmsAlt("present_mediterranean_region")%>
+<%
+            }
+            else
+            {
+              out.print( "&nbsp;" );
+            }
+%>
+            </td>
+            <td>
+<%
+            if( pannonic )
+            {
+%>
+              <img alt="<%=cm.cms("present_pannonian_region")%>" src="images/mini/check.gif" style="vertical-align:middle" />
+              <%=cm.cmsAlt("present_pannonian_region")%>
+<%
+            }
+            else
+            {
+              out.print( "&nbsp;" );
+            }
+%>
+            </td>
+            <td>
+<%
+            if( pontic )
+            {
+%>
+              <img alt="<%=cm.cms("present_blacksea_region")%>" src="images/mini/check.gif" style="vertical-align:middle" />
+              <%=cm.cmsAlt("present_blacksea_region")%>
+<%
+            }
+            else
+            {
+              out.print( "&nbsp;" );
+            }
+%>
+            </td>
+            <td>
+<%
+            if( steppic )
+            {
+%>
+              <img alt="<%=cm.cms("present_steppic_region")%>" src="images/mini/check.gif" style="vertical-align:middle" />
+              <%=cm.cmsAlt("present_steppic_region")%>
+<%
+            }
+            else
+            {
+              out.print( "&nbsp;" );
+            }
+%>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
 <%
           }
         }
@@ -830,110 +840,110 @@
           if (altMean != null && altMean.equalsIgnoreCase("-99")) altMean = "";
         }
 %>
-          <tr>
-            <td>
-              <%=cm.cmsText("minimum_altitude")%>
-            </td>
-            <td>
-            <%=Utilities.formatString(altMin)%>
-            </td>
-            <td>
-              <%=cm.cmsText("mean_altitude_m")%>
-            </td>
-            <td>
-              <%=Utilities.formatString(altMean)%>
-            </td>
-            <td>
-              <%=cm.cmsText("maximum_altitude_m")%>
-            </td>
-            <td>
-              <%=Utilities.formatString(altMax)%>
-            </td>
-          </tr>
+    <tr class="zebraeven">
+      <td>
+        <%=cm.cmsText("minimum_altitude")%>
+      </td>
+      <td>
+      <%=Utilities.formatString(altMin)%>
+      </td>
+      <td>
+        <%=cm.cmsText("mean_altitude_m")%>
+      </td>
+      <td>
+        <%=Utilities.formatString(altMean)%>
+      </td>
+      <td>
+        <%=cm.cmsText("maximum_altitude_m")%>
+      </td>
+      <td>
+        <%=Utilities.formatString(altMax)%>
+      </td>
+    </tr>
 <%
-      String longitude;
-      String latitude;
-      if ( SiteFactsheet.TYPE_CORINE != type )
-      {
-        latitude = SitesSearchUtility.formatCoordinates(factsheet.getSiteObject().getLatNS(),
-                factsheet.getSiteObject().getLatDeg(),
-                factsheet.getSiteObject().getLatMin(),
-                factsheet.getSiteObject().getLatSec());
-        longitude = SitesSearchUtility.formatCoordinates(factsheet.getSiteObject().getLongEW(),
-                factsheet.getSiteObject().getLongDeg(),
-                factsheet.getSiteObject().getLongMin(),
-                factsheet.getSiteObject().getLongSec());
-      }
-      else
-      {
-        latitude = SitesSearchUtility.formatCoordinates("N", factsheet.getSiteObject().getLatDeg(),
-                factsheet.getSiteObject().getLatMin(),
-                factsheet.getSiteObject().getLatSec());
-        longitude = SitesSearchUtility.formatCoordinates(factsheet.getSiteObject().getLongEW(),
-                factsheet.getSiteObject().getLongDeg(),
-                factsheet.getSiteObject().getLongMin(),
-                factsheet.getSiteObject().getLongSec());
-      }
+        String longitude;
+        String latitude;
+        if ( SiteFactsheet.TYPE_CORINE != type )
+        {
+          latitude = SitesSearchUtility.formatCoordinates(factsheet.getSiteObject().getLatNS(),
+                  factsheet.getSiteObject().getLatDeg(),
+                  factsheet.getSiteObject().getLatMin(),
+                  factsheet.getSiteObject().getLatSec());
+          longitude = SitesSearchUtility.formatCoordinates(factsheet.getSiteObject().getLongEW(),
+                  factsheet.getSiteObject().getLongDeg(),
+                  factsheet.getSiteObject().getLongMin(),
+                  factsheet.getSiteObject().getLongSec());
+        }
+        else
+        {
+          latitude = SitesSearchUtility.formatCoordinates("N", factsheet.getSiteObject().getLatDeg(),
+                  factsheet.getSiteObject().getLatMin(),
+                  factsheet.getSiteObject().getLatSec());
+          longitude = SitesSearchUtility.formatCoordinates(factsheet.getSiteObject().getLongEW(),
+                  factsheet.getSiteObject().getLongDeg(),
+                  factsheet.getSiteObject().getLongMin(),
+                  factsheet.getSiteObject().getLongSec());
+        }
 %>
-          <tr bgcolor="#EEEEEE">
-            <td>
-              <%=cm.cmsText("longitude")%>
-            </td>
-            <td>
-              <%=longitude%>
-            </td>
-            <td>
-              <%=cm.cmsText("latitude")%>
-            </td>
-            <td colspan="3">
-              <%=latitude%>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%=cm.cmsText("sites_factsheet_36")%>
-            </td>
-            <td colspan="2">
-              <%=Utilities.formatArea(factsheet.getSiteObject().getLongitude(), 0, 6, null)%>
-            </td>
-            <td>
-              <%=cm.cmsText("sites_factsheet_37")%>
-            </td>
-            <td colspan="2">
-              <%=Utilities.formatArea(factsheet.getSiteObject().getLatitude(), 0, 6, null)%>
-            </td>
-          </tr>
+    <tr>
+      <td>
+        <%=cm.cmsText("longitude")%>
+      </td>
+      <td>
+        <%=longitude%>
+      </td>
+      <td>
+        <%=cm.cmsText("latitude")%>
+      </td>
+      <td colspan="3">
+        <%=latitude%>
+      </td>
+    </tr>
+    <tr class="zebraeven">
+      <td>
+        <%=cm.cmsText("sites_factsheet_36")%>
+      </td>
+      <td colspan="2">
+        <%=Utilities.formatArea(factsheet.getSiteObject().getLongitude(), 0, 6, null)%>
+      </td>
+      <td>
+        <%=cm.cmsText("sites_factsheet_37")%>
+      </td>
+      <td colspan="2">
+        <%=Utilities.formatArea(factsheet.getSiteObject().getLatitude(), 0, 6, null)%>
+      </td>
+    </tr>
 <%
       if ( SiteFactsheet.TYPE_DIPLOMA == type || SiteFactsheet.TYPE_BIOGENETIC == type || SiteFactsheet.TYPE_CORINE == type )
       {
         List results = factsheet.getBiogeoregion();
 %>
-          <tr bgcolor="#EEEEEE">
-            <td colspan="2"><%=cm.cmsText("biogeographic_regions")%></td>
-            <td colspan="4">
+    <tr class="zebraeven">
+      <td colspan="2"><%=cm.cmsText("biogeographic_regions")%></td>
+      <td colspan="4">
 <%
         for (int i = 0; i < results.size(); i++)
         {
           Chm62edtSitesAttributesPersist persist = (Chm62edtSitesAttributesPersist) results.get(i);
 %>
-              <%=persist.getValue()%>
-              <br />
+        <%=persist.getValue()%>
+        <br />
 <%
         }
 %>
-            </td>
-          </tr>
+      </td>
+    </tr>
 <%
       }
 %>
-        </table>
+  </table>
 <%
       String longitudeURL = factsheet.getSiteObject().getLongitude();
       String latitudeURL = factsheet.getSiteObject().getLatitude();
       if (null != longitudeURL && null != latitudeURL)
       {
 %>
-        <br />
+  <br />
 <%
         String sitesCoordinates = "";
         Chm62edtSitesPersist site = factsheet.getSiteObject();
@@ -969,62 +979,62 @@
         int port = ro.finsiel.eunis.search.Utilities.checkedStringToInt(application.getInitParameter("PROXY_PORT"),0);
         String filename = urlPic + "?" + parameters;
 %>
-        <table summary="layout" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse">
-          <tr>
-            <td width="50%">
-              <a name="map"></a>
-              <img name="mmap" alt="<%=cm.cms("site_location_on_map")%>" title="<%=cm.cms("site_location_on_map")%>" src="<%=filename%>" width="345" height="300" style="vertical-align:middle" />
-              <%=cm.cmsAlt("site_location_on_map")%>
-              <%=cm.cmsTitle("site_location_on_map")%>
-              <br />
-            </td>
-            <td width="50%" style="padding-left : 20px;">
-              <strong>
-                <%=cm.cmsText("change_map_type")%>
-              </strong>
-              <br />
-              <br />
-              <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Standard#map" title="<%=cm.cms("change_map_to_standard")%>"><%=cm.cmsText("standard_europe" )%></a>
-              <%=cm.cmsTitle("change_map_to_standard")%>
-              <br />
-              <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Standard_B#map" title="<%=cm.cms("change_map_to_standard_boundaries")%>"><%=cm.cmsText("standard_europe_boundaries" )%></a>
-              <%=cm.cmsTitle("change_map_to_standard_boundaries")%>
-              <br />
-              <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Europe#map" title="<%=cm.cms("change_map_to_europe")%>"><%=cm.cmsText("europe" )%></a>
-              <%=cm.cmsTitle("change_map_to_europe")%>
-              <br />
-              <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Europe_B#map" title="<%=cm.cms("change_map_to_europe_boundaries")%>"><%=cm.cmsText("europe_boundaries" )%></a>
-              <%=cm.cmsTitle("change_map_to_europe_boundaries")%>
-              <br />
-              <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=World#map" title="<%=cm.cms("change_map_to_world")%>"><%=cm.cmsText("world" )%></a>
-              <%=cm.cmsTitle("change_map_to_world")%>
-              <br />
-              <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=World_B#map" title="<%=cm.cms("change_map_to_world_boundaries")%>"><%=cm.cmsText("world_boundaries" )%></a>
-              <%=cm.cmsTitle("change_map_to_world_boundaries")%>
-              <br />
-              <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Biogeographic#map" title="<%=cm.cms("change_map_to_biogeographic")%>"><%=cm.cmsText("biogeographic" )%></a>
-              <%=cm.cmsTitle("change_map_to_biogeographic")%>
-              <br />
-              <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Biogeographic_B#map" title="<%=cm.cms("change_map_to_biogeographic_boundaries")%>"><%=cm.cmsText("biogeographic_boundaries" )%></a>
-              <%=cm.cmsTitle("change_map_to_biogeographic_boundaries")%>
-              <br />
-              <br />
-              <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=<%=mapType%>&amp;Zoom=2#map" title="<%=cm.cms("zoom_in_map")%>"><%=cm.cmsText("zoom_in" )%></a>
-              <%=cm.cmsTitle("zoom_in_map")%>
-              <br />
-              <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=<%=mapType%>&amp;Zoom=0#map" title="<%=cm.cms("zoom_out_map")%>"><%=cm.cmsText("zoom_out" )%></a>
-              <%=cm.cmsTitle("zoom_out_map")%>
-              <br />
-            </td>
-          </tr>
-        </table>
+  <table summary="layout" border="0" cellpadding="0" cellspacing="0" width="90%" style="border-collapse:collapse">
+    <tr>
+      <td width="50%">
+        <a name="map"></a>
+        <img name="mmap" alt="<%=cm.cms("site_location_on_map")%>" title="<%=cm.cms("site_location_on_map")%>" src="<%=filename%>" width="345" height="300" style="vertical-align:middle" />
+        <%=cm.cmsAlt("site_location_on_map")%>
+        <%=cm.cmsTitle("site_location_on_map")%>
         <br />
-        <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
-          <input type="hidden" name="sites" value="'<%=site.getIdSite()%>'" />
-          <input id="showMap" type="submit" title="<%=cm.cms("show_map")%>" name="Show map" value="<%=cm.cms("show_map")%>" class="inputTextField" />
-          <%=cm.cmsTitle("show_map")%>
-          <%=cm.cmsInput("show_map")%>
-        </form>
+      </td>
+      <td width="50%" style="padding-left : 20px;">
+        <strong>
+          <%=cm.cmsText("change_map_type")%>
+        </strong>
+        <br />
+        <br />
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Standard#map" title="<%=cm.cms("change_map_to_standard")%>"><%=cm.cmsText("standard_europe" )%></a>
+        <%=cm.cmsTitle("change_map_to_standard")%>
+        <br />
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Standard_B#map" title="<%=cm.cms("change_map_to_standard_boundaries")%>"><%=cm.cmsText("standard_europe_boundaries" )%></a>
+        <%=cm.cmsTitle("change_map_to_standard_boundaries")%>
+        <br />
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Europe#map" title="<%=cm.cms("change_map_to_europe")%>"><%=cm.cmsText("europe" )%></a>
+        <%=cm.cmsTitle("change_map_to_europe")%>
+        <br />
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Europe_B#map" title="<%=cm.cms("change_map_to_europe_boundaries")%>"><%=cm.cmsText("europe_boundaries" )%></a>
+        <%=cm.cmsTitle("change_map_to_europe_boundaries")%>
+        <br />
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=World#map" title="<%=cm.cms("change_map_to_world")%>"><%=cm.cmsText("world" )%></a>
+        <%=cm.cmsTitle("change_map_to_world")%>
+        <br />
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=World_B#map" title="<%=cm.cms("change_map_to_world_boundaries")%>"><%=cm.cmsText("world_boundaries" )%></a>
+        <%=cm.cmsTitle("change_map_to_world_boundaries")%>
+        <br />
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Biogeographic#map" title="<%=cm.cms("change_map_to_biogeographic")%>"><%=cm.cmsText("biogeographic" )%></a>
+        <%=cm.cmsTitle("change_map_to_biogeographic")%>
+        <br />
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Biogeographic_B#map" title="<%=cm.cms("change_map_to_biogeographic_boundaries")%>"><%=cm.cmsText("biogeographic_boundaries" )%></a>
+        <%=cm.cmsTitle("change_map_to_biogeographic_boundaries")%>
+        <br />
+        <br />
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=<%=mapType%>&amp;Zoom=2#map" title="<%=cm.cms("zoom_in_map")%>"><%=cm.cmsText("zoom_in" )%></a>
+        <%=cm.cmsTitle("zoom_in_map")%>
+        <br />
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=<%=mapType%>&amp;Zoom=0#map" title="<%=cm.cms("zoom_out_map")%>"><%=cm.cmsText("zoom_out" )%></a>
+        <%=cm.cmsTitle("zoom_out_map")%>
+        <br />
+      </td>
+    </tr>
+  </table>
+  <br />
+  <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
+    <input type="hidden" name="sites" value="'<%=site.getIdSite()%>'" />
+    <input id="showMap" type="submit" title="<%=cm.cms("show_map")%>" name="Show map" value="<%=cm.cms("show_map")%>" class="standardButton" />
+    <%=cm.cmsTitle("show_map")%>
+    <%=cm.cmsInput("show_map")%>
+  </form>
 <%
     }
 %>

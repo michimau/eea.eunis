@@ -111,7 +111,7 @@
   %>
   <body>
   <form name="eunis" method="post" action="combined-search-save-criteria.jsp">
-   <input type="hidden" name="saveThisCriteria" value="true" class="inputTextField" />
+   <input type="hidden" name="saveThisCriteria" value="true" />
 <%
    if(request.getParameter("fromWhere") != null)
    {
@@ -204,7 +204,7 @@
         <tr>
           <td>
             <label for="description" class="noshow"><%=cm.cms("description")%></label>
-            <textarea title="<%=cm.cms("description")%>" name="description" id="description" cols="40" rows="5" class="inputTextField"><%=descr%></textarea>
+            <textarea title="<%=cm.cms("description")%>" name="description" id="description" cols="40" rows="5"><%=descr%></textarea>
             <%=cm.cmsLabel("description")%>
           </td>
         </tr>
@@ -249,14 +249,14 @@
               if (null == request.getParameter("description"))
               {
 %>
-              <input title="<%=cm.cms("save")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("save")%>" class="inputTextField" />
+              <input title="<%=cm.cms("save")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("save")%>" class="searchButton" />
               <%=cm.cmsInput("save")%>
-              <input title="<%=cm.cms("reset")%>" type="reset" name="Reset" id="Reset" value="<%=cm.cms("reset")%>" class="inputTextField" />
+              <input title="<%=cm.cms("reset")%>" type="reset" name="Reset" id="Reset" value="<%=cm.cms("reset")%>" class="standardButton" />
               <%=cm.cmsInput("reset")%>
 <%
               }
 %>
-            <input type="button" title="<%=cm.cms("close_window")%>" name="Close" id="Close" value="<%=cm.cms("close_btn")%>" onclick="javascript:closeWindow('<%=request.getParameter("fromWhere")%>')" class="inputTextField" /><%=cm.cmsInput("close_btn")%>
+            <input type="button" title="<%=cm.cms("close_window")%>" name="Close" id="Close" value="<%=cm.cms("close_btn")%>" onclick="javascript:closeWindow('<%=request.getParameter("fromWhere")%>')" class="standardButton" /><%=cm.cmsInput("close_btn")%>
           </td>
         </tr>
     </table>

@@ -150,16 +150,15 @@ The following fields are declared below:
              value="<%=cm.cms("select_all")%>"
              onkeypress="javascript:setSelection('true');"
              onclick="javascript:setSelection('true');"
-             class="inputTextField"
+             class="standardButton"
              title="<%=cm.cms("select_all")%>" />
       <%=cm.cmsTitle("select_all")%>
       <%=cm.cmsInput("select_all")%>
-      &nbsp;
       <input id="checkNone" type="button" name="checkNone"
              value="<%=cm.cms("select_none")%>"
              onkeypress="javascript:setSelection('false');"
              onclick="javascript:setSelection('false');"
-             class="inputTextField"
+             class="standardButton"
              title="<%=cm.cms("select_none")%>" />
       <%=cm.cmsTitle("select_none")%>
       <%=cm.cmsInput("select_none")%>

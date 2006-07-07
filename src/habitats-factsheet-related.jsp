@@ -33,106 +33,110 @@
   if(null != syntaxaw && !syntaxaw.isEmpty())
   {
 %>
-<div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("habitat_type_syntaxa")%></div>
-<table summary="<%=cm.cms("habitat_type_syntaxa")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="syntaxa" class="sortable">
-  <tr>
-    <th width="25%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <strong>
-        <%=cm.cmsText("name")%>
-        <%=cm.cmsTitle("sort_results_on_this_column")%>
-      </strong>
-    </th>
-    <th width="6%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <strong>
-        <%=cm.cmsText("relation")%>
-        <%=cm.cmsTitle("sort_results_on_this_column")%>
-      </strong>
-    </th>
-    <th width="30%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <strong>
-        <%=cm.cmsText("habitats_factsheet_75")%>
-        <%=cm.cmsTitle("sort_results_on_this_column")%>
-      </strong>
-    </th>
-    <th width="20%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <strong>
-        <%=cm.cmsText("author")%>
-        <%=cm.cmsTitle("sort_results_on_this_column")%>
-      </strong>
-    </th>
-    <th width="14%" title="<%=cm.cms("sort_results_on_this_column")%>">
-      <%=cm.cmsText("references")%>
-      <%=cm.cmsTitle("sort_results_on_this_column")%>
-    </th>
-  </tr>
+  <h2>
+  <%=cm.cmsText("habitat_type_syntaxa")%>
+  </h2>
+  <table summary="<%=cm.cms("habitat_type_syntaxa")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th width="25%">
+          <%=cm.cmsText("name")%>
+        </th>
+        <th width="6%">
+          <%=cm.cmsText("relation")%>
+        </th>
+        <th width="30%">
+          <%=cm.cmsText("habitats_factsheet_75")%>
+        </th>
+        <th width="20%">
+          <%=cm.cmsText("author")%>
+        </th>
+        <th width="14%">
+          <%=cm.cmsText("references")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
   <%
     String IdDc = "";
-    for(int i = 0; i < syntaxaw.size(); i++) {
+    for(int i = 0; i < syntaxaw.size(); i++)
+    {
+      String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
       SyntaxaWrapper syntaxa = (SyntaxaWrapper) syntaxaw.get(i);
   %>
-  <tr bgcolor="<%=(0 == (i % 2) ?  "#EEEEEE" : "#FFFFFF")%>">
-    <td>
-      <%=syntaxa.getName()%>
-    </td>
-    <td>
-      <%=HabitatsFactsheet.mapHabitatsRelations(syntaxa.getRelation())%>
-    </td>
-    <td>
-      <%=syntaxa.getSourceAbbrev()%>
-    </td>
-    <td>
-      <%=syntaxa.getAuthor()%></td>
-    <%
-      if(syntaxa.getIdDc() != null) {
+      <tr<%=cssClass%>>
+        <td>
+          <%=syntaxa.getName()%>
+        </td>
+        <td>
+          <%=HabitatsFactsheet.mapHabitatsRelations(syntaxa.getRelation())%>
+        </td>
+        <td>
+          <%=syntaxa.getSourceAbbrev()%>
+        </td>
+        <td>
+          <%=syntaxa.getAuthor()%>
+        </td>
+<%
+      if(syntaxa.getIdDc() != null)
+      {
         IdDc = syntaxa.getIdDc().toString();
       }
-      if(!Utilities.getAuthorAndUrlByIdDc(IdDc).get(1).toString().equalsIgnoreCase("")) {
-        if(!IdDc.equalsIgnoreCase("0")) {
+      if(!Utilities.getAuthorAndUrlByIdDc(IdDc).get(1).toString().equalsIgnoreCase(""))
+      {
+        if(!IdDc.equalsIgnoreCase("0"))
+        {
     %>
-    <td onmouseover="return showtooltip('<%=Utilities.getReferencesByIdDc(IdDc)%>')" onmouseout="hidetooltip()">
-      <span class="boldUnderline">
-        <a title="<%=cm.cms("habitat_syntaxa_author")%>" href="<%=Utilities.getAuthorAndUrlByIdDc(IdDc).get(1)%>"><%=Utilities.getAuthorAndUrlByIdDc(IdDc).get(0)%></a>
-        <%=cm.cmsTitle("habitat_syntaxa_author")%>
-      </span>
-    </td>
-    <%
-    } else {
+        <td onmouseover="return showtooltip('<%=Utilities.getReferencesByIdDc(IdDc)%>')" onmouseout="hidetooltip()">
+          <span class="boldUnderline">
+            <a title="<%=cm.cms("habitat_syntaxa_author")%>" href="<%=Utilities.getAuthorAndUrlByIdDc(IdDc).get(1)%>"><%=Utilities.getAuthorAndUrlByIdDc(IdDc).get(0)%></a>
+            <%=cm.cmsTitle("habitat_syntaxa_author")%>
+          </span>
+        </td>
+<%
+        }
+        else
+        {
     %>
-    <td>
-      &nbsp;
-    </td>
-    <%
-      }
-    } else {
-      if(!IdDc.equalsIgnoreCase("0")) {
-    %>
-    <td onmouseover="return showtooltip('<%=Utilities.getReferencesByIdDc(IdDc)%>')" onmouseout="hidetooltip()">
-      <%
-         String AuthorURL = Utilities.getAuthorAndUrlByIdDc(IdDc).get(0).toString();
-         AuthorURL = AuthorURL.replaceAll("&","&amp;");
-      %>
-      <span class="boldUnderline">
-      <%=AuthorURL%>
-      </span>    
-    </td>
-    <%
-    } else {
-    %>
-    <td>
-      &nbsp;
-    </td>
-    <%
+        <td>
+          &nbsp;
+        </td>
+<%
         }
       }
-    %>
-  </tr>
-  <%
+      else
+      {
+        if(!IdDc.equalsIgnoreCase("0"))
+        {
+          String AuthorURL = Utilities.getAuthorAndUrlByIdDc(IdDc).get(0).toString();
+          AuthorURL = AuthorURL.replaceAll("&","&amp;");
+%>
+        <td onmouseover="return showtooltip('<%=Utilities.getReferencesByIdDc(IdDc)%>')" onmouseout="hidetooltip()">
+          <span class="boldUnderline">
+            <%=AuthorURL%>
+          </span>
+        </td>
+<%
+        }
+        else
+        {
+%>
+        <td>
+          &nbsp;
+        </td>
+<%
+        }
+      }
+%>
+      </tr>
+<%
     }
-  %>
-</table>
-<%=cm.br()%>
-<%=cm.cmsMsg("habitat_type_syntaxa")%>
-<%=cm.br()%>
+%>
+    </tbody>
+  </table>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("habitat_type_syntaxa")%>
+  <%=cm.br()%>
 <%
   }
 %>

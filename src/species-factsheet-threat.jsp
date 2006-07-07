@@ -14,9 +14,6 @@
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.search.UniqueVector,
                  ro.finsiel.eunis.factsheet.species.ThreatColor,
-                 java.net.URL,
-                 java.net.HttpURLConnection,
-                 java.io.*,
                  ro.finsiel.eunis.factsheet.species.SpeciesFactsheet,
                  ro.finsiel.eunis.factsheet.species.NationalThreatWrapper,
                 ro.finsiel.eunis.WebContentManagement"%>
@@ -25,29 +22,47 @@
   </jsp:useBean>
   <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-    WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 
-    Integer idSpecies=Utilities.checkedStringToInt( request.getParameter("idSpecies"), new Integer("-1") );
-    SpeciesFactsheet factsheet = new SpeciesFactsheet( idSpecies, idSpecies );
-    String scientificName = factsheet.getSpeciesObject().getScientificName();
+  Integer idSpecies=Utilities.checkedStringToInt( request.getParameter("idSpecies"), new Integer("-1") );
+  SpeciesFactsheet factsheet = new SpeciesFactsheet( idSpecies, idSpecies );
+  //String scientificName = factsheet.getSpeciesObject().getScientificName();
 
-    // National threat status
-    List nationalThreatStatus = factsheet.getNationalThreatStatus( factsheet.getSpeciesObject() );
+  // National threat status
+  List nationalThreatStatus = new ArrayList();
+  try
+  {
+    nationalThreatStatus = factsheet.getNationalThreatStatus( factsheet.getSpeciesObject() );
+  }
+  catch( Exception ex )
+  {
+    ex.printStackTrace();
+  }
 
-    // List of species international threat status.
-    List consStatus = factsheet.getConservationStatus(factsheet.getSpeciesObject());
+  // List of species international threat status.
+  List consStatus = new ArrayList();
+  try
+  {
+    consStatus = factsheet.getConservationStatus(factsheet.getSpeciesObject());
+  }
+  catch( Exception ex )
+  {
+    ex.printStackTrace();
+  }
 
-    for ( int i = 0; i < nationalThreatStatus.size(); i++ )
-    {
-      NationalThreatWrapper threat = ( NationalThreatWrapper )nationalThreatStatus.get(i);
-      Chm62edtCountryPersist country = new Chm62edtCountryPersist();
-      country.setAreaNameEnglish(threat.getCountry());
-      country.setIso2l(threat.getIso2L());
-    }
-    if( nationalThreatStatus.size() > 0 )
-    {
+  for ( int i = 0; i < nationalThreatStatus.size(); i++ )
+  {
+    NationalThreatWrapper threat = ( NationalThreatWrapper )nationalThreatStatus.get(i);
+    Chm62edtCountryPersist country = new Chm62edtCountryPersist();
+    country.setAreaNameEnglish(threat.getCountry());
+    country.setIso2l(threat.getIso2L());
+  }
+  if( nationalThreatStatus.size() > 0 )
+  {
 %>
-    <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("national_threat_status")%></div>
+  <h2>
+    <%=cm.cmsText("national_threat_status")%>
+  </h2>
 <%
     int COUNTRIES_PER_MAP = Utilities.checkedStringToInt( application.getInitParameter( "COUNTRIES_PER_MAP" ), 120 );
     // Mapping THREAT STATUS - COLOR
@@ -100,116 +115,117 @@
       int port = ro.finsiel.eunis.search.Utilities.checkedStringToInt(application.getInitParameter("PROXY_PORT"),0);
       String filename = url + "?" + parameters;
 %>
-      <table summary="layout" border="0" cellpadding="3" cellspacing="0" width="100%">
-        <tr>
-          <td>
+  <table summary="layout" border="0" cellpadding="3" cellspacing="0" width="90%">
+    <tr>
+      <td>
 <%
           if(filename.length() > 0)
           {
 %>
-            <img alt="<%=cm.cms("map_image_eea")%>" src="<%=filename%>" title="<%=cm.cms("map_image_eea")%>" />
-            <%=cm.cmsAlt("map_image_eea")%>
-            <br />
-            <a title="<%=cm.cms("open_new_window")%>" href="javascript:openNewPage('<%=url + "?" + parameters%>');"><%=cm.cmsText("open_new_window")%></a>
-            <%=cm.cmsTitle("open_new_window")%>
+        <img alt="<%=cm.cms("map_image_eea")%>" src="<%=filename%>" title="<%=cm.cms("map_image_eea")%>" />
+        <%=cm.cmsAlt("map_image_eea")%>
+        <br />
+        <a title="<%=cm.cms("open_new_window")%>" href="javascript:openNewPage('<%=url + "?" + parameters%>');"><%=cm.cmsText("open_new_window")%></a>
+        <%=cm.cmsTitle("open_new_window")%>
 <%
           }
           else
           {
 %>
-            <%=cm.cmsText("image_not_available")%>.
+        <%=cm.cmsText("image_not_available")%>.
 <%
           }
 %>
-          </td>
-          <td style="padding-left : 20px;">
-            <%=cm.cmsText("legend")%>:
-            <br />
+      </td>
+      <td style="padding-left : 20px;">
+        <%=cm.cmsText("legend")%>:
+        <br />
 <%
           Enumeration keys = threatsColors.keys();
           while ( keys.hasMoreElements() )
           {
             String key = ( String )keys.nextElement();
 %>
-            <img alt="<%=cm.cms("map_legend_eea")%>" src="<%=application.getInitParameter("EEA_MAP_SERVER")%>/getLegend.asp?Color=H<%=threatsColors.get(key)%>" title="<%=cm.cms("map_legend_eea")%>" /><%=cm.cmsAlt("map_legend_eea")%>&nbsp;<%=key%>
-            <br />
+        <img alt="<%=cm.cms("map_legend_eea")%>" src="<%=application.getInitParameter("EEA_MAP_SERVER")%>/getLegend.asp?Color=H<%=threatsColors.get(key)%>" title="<%=cm.cms("map_legend_eea")%>" /><%=cm.cmsAlt("map_legend_eea")%>&nbsp;<%=key%>
+        <br />
 <%
           }
 %>
-            <p>
-              <%=cm.cmsText("species_factsheet-threat_03")%>
-            </p>
-          </td>
-        </tr>
-      </table>
+        <p>
+          <%=cm.cmsText("species_factsheet-threat_03")%>
+        </p>
+      </td>
+    </tr>
+  </table>
 <%
     }
 %>
-      <table summary="<%=cm.cms("national_threat_status")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="threat" class="sortable">
-        <tr>
-          <th style="width : 220px;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <strong>
-              <%=cm.cmsText("country")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </strong>
-          </th>
-          <th style="width : 120px;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <strong>
-              <%=cm.cmsText("status")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </strong>
-          </th>
-          <th style="width : 100px;" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <strong>
-              <%=cm.cmsText("national_threat_code")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </strong>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>" title="<%=cm.cms("sort_results_on_this_column")%>">
-            <strong>
-              <%=cm.cmsText("reference")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </strong>
-          </th>
-        </tr>
+  <table summary="<%=cm.cms("national_threat_status")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th style="width : 220px;">
+          <%=cm.cmsText("country")%>
+        </th>
+        <th style="width : 120px;">
+          <%=cm.cmsText("status")%>
+        </th>
+        <th style="width : 100px;">
+          <%=cm.cmsText("national_threat_code")%>
+        </th>
+        <th>
+          Population concerned
+        </th>
+        <th>
+          <%=cm.cmsText("reference")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
   for (int i = 0; i < nationalThreatStatus.size(); i++)
   {
+    String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
     NationalThreatWrapper threat = (NationalThreatWrapper)nationalThreatStatus.get(i);
 %>
-        <tr style="background-color:<%=((0 == i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-          <td>
-            <%
-                if(Utilities.isCountry(threat.getCountry()))
-                {
-            %>
-              <a href="javascript:goToCountryStatistics('<%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>')" title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>"><%=Utilities.treatURLSpecialCharacters(threat.getCountry())%></a>
-              <%=cm.cmsTitle("open_the_statistical_data_for")%>
-            <%
-            } else {
-            %>
-             <%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>
-            <%
-             }
-            %>
-              &nbsp;
-          </td>
-          <td>
-            <%=Utilities.treatURLSpecialCharacters(threat.getStatus())%>
-          </td>
-          <td>
+      <tr<%=cssClass%>>
+        <td>
+<%
+    if(Utilities.isCountry(threat.getCountry()))
+    {
+%>
+          <a href="javascript:goToCountryStatistics('<%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>')" title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>"><%=Utilities.treatURLSpecialCharacters(threat.getCountry())%></a>
+          <%=cm.cmsTitle("open_the_statistical_data_for")%>
+<%
+    }
+    else
+    {
+%>
+         <%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>
+<%
+    }
+%>
+          &nbsp;
+        </td>
+        <td>
+          <%=Utilities.treatURLSpecialCharacters(threat.getStatus())%>
+        </td>
+        <td>
           <span class="boldUnderline" title="<%=factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode()).replaceAll("'"," ").replaceAll("\""," ")%>">
             <%=threat.getThreatCode()%>
           </span>
-          </td>
-          <td>
-            <%=Utilities.treatURLSpecialCharacters(threat.getReference())%>
-          </td>
-        </tr>
+        </td>
+        <td>
+          <%=Utilities.formatString( threat.getPopulationConcerned() )%>
+        </td>
+        <td>
+          <%=Utilities.treatURLSpecialCharacters(threat.getReference())%>
+        </td>
+      </tr>
         <%
           }
         %>
-      </table>
+    </tbody>
+  </table>
 <%
     }
 
@@ -217,68 +233,66 @@
     if( consStatus.size() > 0 )
     {
 %>
-      <br />
-      <div style="width : 100%; background-color : #CCCCCC; font-weight : bold;"><%=cm.cmsText("international_threat_status")%></div>
-      <table summary="<%=cm.cms("international_threat_status")%>" width="100%" border="1" cellspacing="1" cellpadding="0" id="intlthreat" class="sortable">
-        <tr>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>">
-            <strong>
-              <%=cm.cmsText("area")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </strong>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>" >
-            <strong>
-              <%=cm.cmsText("status")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </strong>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>" >
-            <strong>
-              <%=cm.cmsText("species_factsheet-conservation_09")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </strong>
-          </th>
-          <th title="<%=cm.cms("sort_results_on_this_column")%>" >
-            <strong>
-              <%=cm.cmsText("reference")%>
-              <%=cm.cmsTitle("sort_results_on_this_column")%>
-            </strong>
-          </th>
-        </tr>
+  <br />
+  <h2>
+    <%=cm.cmsText("international_threat_status")%>
+  </h2>
+  <table summary="<%=cm.cms("international_threat_status")%>" class="listing" width="90%">
+    <thead>
+      <tr>
+        <th>
+          <%=cm.cmsText("area")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("status")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("species_factsheet-conservation_09")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+        <th>
+          <%=cm.cmsText("reference")%>
+          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 <%
        // Display results.
       for (int i = 0; i < consStatus.size(); i++)
       {
+        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
         NationalThreatWrapper threat = (NationalThreatWrapper)consStatus.get(i);
 %>
-        <tr style="background-color:<%=((0 == i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
-          <td>
-            <%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>
-          </td>
-          <td>
-            <%=Utilities.treatURLSpecialCharacters(threat.getStatus())%>
-          </td>
-          <td>
-          <span class="boldUnderline" title="<%=factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode()).replaceAll("'"," ").replaceAll("\""," ")%>">
-            <%=threat.getThreatCode()%>
-          </span>
-          </td>
-          <td>
-            <%=Utilities.treatURLSpecialCharacters(threat.getReference())%>
-          </td>
-        </tr>
+      <tr<%=cssClass%>>
+        <td>
+          <%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>
+        </td>
+        <td>
+          <%=Utilities.treatURLSpecialCharacters(threat.getStatus())%>
+        </td>
+        <td>
+        <span class="boldUnderline" title="<%=factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode()).replaceAll("'"," ").replaceAll("\""," ")%>">
+          <%=threat.getThreatCode()%>
+        </span>
+        </td>
+        <td>
+          <%=Utilities.treatURLSpecialCharacters(threat.getReference())%>
+        </td>
+      </tr>
 <%
           }
 %>
-      </table>
+    </tbody>
+  </table>
 <%
     }
 %>
-<%=cm.br()%>
-<%=cm.cmsMsg("national_threat_status")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("international_threat_status")%>
-
-<br />
-<br />
+  <%=cm.br()%>
+  <%=cm.cmsMsg("national_threat_status")%>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("international_threat_status")%>
+  <br />
+  <br />

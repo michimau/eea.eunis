@@ -37,6 +37,12 @@
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("services_page_title")%>
     </title>
+    <style type="text/css">
+      #services td
+      {
+        vertical-align: middle;
+      }
+    </style>
   </head>
   <body>
     <div id="visual-portal-wrapper">
@@ -74,7 +80,8 @@
                   <%=cm.cmsText("services_title")%>
                 </h1>
                 <br />
-                <table width="100%" border="1" style="border-collapse:collapse" summary="layout">
+                <table width="90%" summary="layout" class="listing" id="services">
+<%--
                   <tr>
                     <th align="center">
                       &nbsp;
@@ -83,11 +90,16 @@
                       <%=cm.cmsText("services")%>
                     </th>
                   </tr>
-          <%
-            if( SessionManager.isAuthenticated() && ( SessionManager.isUser_management_RIGHT() || SessionManager.isRole_management_RIGHT() ) )
-            {
-          %>
-                  <tr>
+--%>
+<%
+  int color = 0;
+  String cssClass = "";
+  if( SessionManager.isAuthenticated() && ( SessionManager.isUser_management_RIGHT() || SessionManager.isRole_management_RIGHT() ) )
+  {
+    //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
+
+%>
+                  <tr <%=cssClass%>>
                     <td align="center">
                       <a href="users.jsp" title="<%=cm.cms("user_management")%>"><img alt="<%=cm.cms("user_management")%>" src="images/users.gif" width="81" height="43" border="0" title="<%=cm.cms("user_management")%>" /></a>
                       <%=cm.cmsAlt("user_management")%><%=cm.cmsTitle("user_management")%>
@@ -97,10 +109,11 @@
                       <%=cm.cmsTitle("user_management")%>
                     </td>
                   </tr>
-          <%
-            }
-          %>
-                  <tr>
+<%
+  }
+  //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
+%>
+                  <tr <%=cssClass%>>
                     <td align="center">
                       <a href="logos.jsp" title="<%=cm.cms("eunis_database_logos")%>"><img alt="<%=cm.cms("eunis_database_logos")%>" src="images/logos.gif" width="81" height="43" border="0" title="<%=cm.cms("eunis_database_logos")%>" /></a>
                       <%=cm.cmsAlt("eunis_database_logos")%><%=cm.cmsTitle("eunis_database_logos")%>
@@ -110,11 +123,12 @@
                       <%=cm.cmsTitle("eunis_database_logos")%>
                     </td>
                   </tr>
-          <%
-            if( SessionManager.isAuthenticated() )
-            {
-          %>
-                  <tr>
+<%
+  if( SessionManager.isAuthenticated() )
+  {
+    //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
+%>
+                  <tr <%=cssClass%>>
                     <td align="center">
                       <a href="users-bookmarks.jsp" title="<%=cm.cms("user_bookmarks")%>"><img alt="<%=cm.cms("services_bookmarkslink_alt")%>" src="images/bookmarks.gif" width="81" height="43" border="0" title="<%=cm.cms("user_bookmarks")%>" /></a>
                       <%=cm.cmsAlt("services_bookmarkslink_alt")%><%=cm.cmsTitle("user_bookmarks")%>
@@ -124,27 +138,31 @@
                       <%=cm.cmsTitle("user_bookmarks")%>
                     </td>
                   </tr>
-          <%
-            }
-            if( SessionManager.isContent_management_RIGHT() )
-            {
-          %>
-                  <!--<tr>-->
-                    <!--<td align="center">-->
-                      <!--<a href="headline.jsp" title="<%=cm.cms("services_headlinelink_title")%>"><img alt="<%=cm.cms("services_headlinelink")%>" src="images/headlines.gif" width="81" height="43" border="0" title="<%=cm.cms("services_headlinelink_title")%>" /></a>-->
-                      <%--<%=cm.cmsAlt("services_headlinelink")%><%=cm.cmsTitle("services_headlinelink_title")%>--%>
-                    <!--</td>-->
-                    <!--<td>-->
-                      <!--<a href="headline.jsp" title="<%=cm.cms("services_headlinelink_title")%>"><%=cm.cmsText("services_headlinelink")%></a>-->
-                      <%--<%=cm.cmsTitle("services_headlinelink_title")%>--%>
-                    <!--</td>-->
-                  <!--</tr>-->
-          <%
-            }
-            if( SessionManager.isEdit_glossary() )
-            {
-          %>
-                  <tr>
+<%
+  }
+  if( SessionManager.isContent_management_RIGHT() )
+  {
+    //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
+%>
+<%--
+                  <tr <%=cssClass%>>
+                    <td align="center">
+                      <a href="headline.jsp" title="<%=cm.cms("services_headlinelink_title")%>"><img alt="<%=cm.cms("services_headlinelink")%>" src="images/headlines.gif" width="81" height="43" border="0" title="<%=cm.cms("services_headlinelink_title")%>" /></a>
+                      <%=cm.cmsAlt("services_headlinelink")%><%=cm.cmsTitle("services_headlinelink_title")%>
+                    </td>
+                    <td>
+                      <a href="headline.jsp" title="<%=cm.cms("services_headlinelink_title")%>"><%=cm.cmsText("services_headlinelink")%></a>
+                      <%=cm.cmsTitle("services_headlinelink_title")%>
+                    </td>
+                  </tr>
+--%>
+<%
+  }
+  if( SessionManager.isEdit_glossary() )
+  {
+    //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
+%>
+                  <tr <%=cssClass%>>
                     <td align="center">
                       <a href="glossary-table.jsp" title="<%=cm.cms("edit_glossary_of_terms")%>"><img alt="<%=cm.cms("edit_glossary_of_terms")%>" src="images/glossary.gif" width="81" height="43" border="0" title="<%=cm.cms("edit_glossary_of_terms")%>" /></a>
                       <%=cm.cmsAlt("edit_glossary_of_terms")%><%=cm.cmsTitle("edit_glossary_of_terms")%>
@@ -154,12 +172,13 @@
                       <%=cm.cmsTitle("edit_glossary_of_terms")%>
                     </td>
                   </tr>
-          <%
-            }
-            if( SessionManager.isAdmin() )
-            {
-          %>
-                 <tr>
+<%
+  }
+  if( SessionManager.isAdmin() )
+  {
+    //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
+%>
+                  <tr <%=cssClass%>>
                     <td align="center">
                       <a href="feedback-list.jsp" title="<%=cm.cms("feedback_list")%>"><img alt="<%=cm.cms("feedback_list")%>" src="images/glossary.gif" width="81" height="43" border="0" title="<%=cm.cms("feedback_list")%>" /></a>
                       <%=cm.cmsAlt("feedback_list")%><%=cm.cmsTitle("feedback_list")%>
@@ -169,12 +188,13 @@
                       <%=cm.cmsTitle("feedback_list")%><%=cm.cmsTitle("feedback_list")%>
                    </td>
                   </tr>
-          <%
-            }
-            if( SessionManager.isAuthenticated() )
-            {
-          %>
-                  <tr>
+<%
+  }
+  if( SessionManager.isAuthenticated() )
+  {
+    //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
+%>
+                  <tr <%=cssClass%>>
                     <td align="center">
                       <a href="download-database.jsp" title="<%=cm.cms("services_access")%>"><img alt="<%=cm.cms("services_access")%>" src="images/access.gif" width="81" height="43" border="0" title="<%=cm.cms("services_access")%>" /></a>
                       <%=cm.cmsAlt("services_access")%><%=cm.cmsTitle("services_access")%>
@@ -184,12 +204,13 @@
                       <%=cm.cmsTitle("services_access")%>
                     </td>
                   </tr>
-          <%
-            }
-            if(SessionManager.isAdmin())
-            {
-          %>
-                  <tr>
+<%
+  }
+  if(SessionManager.isAdmin())
+  {
+    //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
+%>
+                  <tr <%=cssClass%>>
                     <td align="center">
                       <a href="clear-temporary-data.jsp" title="<%=cm.cms("services_cleartemp")%>"><img alt="<%=cm.cms("services_cleartemp")%>" src="images/clean.gif" width="81" height="43" border="0" title="<%=cm.cms("services_cleartemp")%>" /></a>
                       <%=cm.cmsAlt("services_cleartemp")%>
@@ -199,12 +220,13 @@
                       <%=cm.cmsTitle("services_cleartemp")%>
                     </td>
                   </tr>
-          <%
-            }
-            if ( SessionManager.isContent_management_RIGHT() )
-            {
-          %>
-                  <tr>
+<%
+  }
+  if ( SessionManager.isContent_management_RIGHT() )
+  {
+    //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
+%>
+                  <tr <%=cssClass%>>
                     <td align="center">
                       <a href="services.jsp?action=reloadlanguage" title="<%=cm.cms("services_refresh_title")%>"><img alt="<%=cm.cms("refresh_language")%>" src="images/language.gif" width="81" height="43" border="0" title="<%=cm.cms("services_refresh_title")%>" /></a>
                       <%=cm.cmsAlt("refresh_language")%>
@@ -214,11 +236,12 @@
                       <%=cm.cmsTitle("services_refresh_title")%>
                     </td>
                   </tr>
-          <%
-              if ( !SessionManager.getWebContent().isEditMode() )
-              {
-          %>
-                  <tr>
+<%
+    if ( !SessionManager.getWebContent().isEditMode() )
+    {
+      //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
+%>
+                  <tr <%=cssClass%>>
                     <td align="center">
                       <a href="services.jsp?editContent=true" title="<%=cm.cms("services_inline_activate_title")%>"><img alt="<%=cm.cms("edit_mode_allwos_editing_html_attributes")%>" src="images/webcontent-inline.gif" width="81" height="43" border="0" title="<%=cm.cms("services_inline_activate_title")%>" /></a>
                       <%=cm.cmsAlt("edit_mode_allwos_editing_html_attributes")%>
@@ -228,12 +251,13 @@
                       <%=cm.cmsTitle("services_inline_activate_title")%>
                     </td>
                   </tr>
-          <%
-              }
-              else
-              {
-          %>
-                  <tr>
+<%
+    }
+    else
+    {
+      //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
+%>
+                  <tr <%=cssClass%>>
                     <td align="center">
                       <a href="services.jsp?editContent=false" title="<%=cm.cms("services_inline_dezactivate_alt")%>"><img alt="<%=cm.cms("services_inline_dezactivate_alt")%>" src="images/webcontent-inline.gif" width="81" height="43" border="0" title="<%=cm.cms("services_inline_dezactivate_alt")%>" /></a>
                       <%=cm.cmsAlt("services_inline_dezactivate_alt")%>
@@ -243,12 +267,13 @@
                       <%=cm.cmsTitle("services_inline_dezactivate_alt")%>
                     </td>
                   </tr>
-          <%
-              }
-              if ( !SessionManager.getWebContent().isAdvancedEditMode() )
-              {
-          %>
-                  <tr>
+<%
+    }
+    if ( !SessionManager.getWebContent().isAdvancedEditMode() )
+    {
+      //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
+%>
+                  <tr <%=cssClass%>>
                     <td align="center">
                       <a href="services.jsp?advancedEditContent=true" title="<%=cm.cms("edit_mode_allwos_editing_html_attributes")%>"><img alt="<%=cm.cms("edit_mode_allwos_editing_html_attributes")%>" src="images/webcontent-inline.gif" width="81" height="43" border="0" title="<%=cm.cms("edit_mode_allwos_editing_html_attributes")%>" /></a>
                       <%=cm.cmsAlt("services_inline_advactivate_alt")%>
@@ -258,12 +283,13 @@
                       <%=cm.cmsTitle("edit_mode_allwos_editing_html_attributes")%>
                     </td>
                   </tr>
-          <%
-              }
-              else
-              {
-          %>
-                  <tr>
+<%
+    }
+    else
+    {
+      //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
+%>
+                  <tr <%=cssClass%>>
                     <td align="center">
                       <a href="services.jsp?advancedEditContent=false" title="<%=cm.cms("services_inline_advdezactivate_title")%>"><img alt="<%=cm.cms("services_inline_advdezactivate_alt")%>" src="images/webcontent-inline.gif" width="81" height="43" border="0" title="<%=cm.cms("services_inline_advdezactivate_title")%>" /></a>
                       <%=cm.cmsAlt("services_inline_advdezactivate_title")%>
@@ -273,30 +299,30 @@
                       <%=cm.cmsTitle("services_inline_advdezactivate_title")%>
                     </td>
                   </tr>
-          <%
-              }
-            }
-          %>
+<%
+    }
+  }
+%>
                 </table>
 
                 <%=cm.cmsMsg("refresh_language")%>
                 <jsp:include page="footer.jsp">
                   <jsp:param name="page_name" value="services.jsp"/>
                 </jsp:include>
-          <%
-            String action = Utilities.formatString( request.getParameter("action") );
-            if( action.equals("reloadlanguage") )
-            {
+<%
+  String action = Utilities.formatString( request.getParameter("action") );
+  if( action.equals("reloadlanguage") )
+  {
               SessionManager.getWebContent().reloadLanguageData();
-          %>
+%>
                 <script language="JavaScript" type="text/javascript">
                 <!--
                   alert('<%=cm.cms("refresh_language")%>');
                 //-->
                 </script>
-          <%
-            }
-          %>
+<%
+  }
+%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

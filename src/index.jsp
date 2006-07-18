@@ -151,6 +151,23 @@
           <!-- start of main content block -->
           <div id="portal-column-content">
             <div id="content">
+              <a name="documentContent"></a>
+              <div class="documentActions">
+                <h5 class="hiddenStructure">Document Actions</h5>
+                <ul>
+                  <li>
+                    <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                          alt="Print this page"
+                          title="Print this page" /></a>
+                  </li>
+                  <li>
+                    <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                           alt="Toggle full screen mode"
+                           title="Toggle full screen mode" /></a>
+                  </li>
+                </ul>
+              </div>
+              <br clear="all" />
               <div class="documentContent" id="region-content">
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">

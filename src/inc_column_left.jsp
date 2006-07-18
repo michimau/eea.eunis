@@ -116,11 +116,13 @@
         <a class="menuItem" title="<%=cm.cms("generic_index_09_title")%>" href="services.jsp">&raquo; <%=cm.cmsText( "services" )%></a><%=cm.cmsTitle("generic_index_09_title")%>
         <%=cm.cmsText( "generic_index_07" )%>
       </li>
+<!--
       <li>
         <a class="menuItem" title="<%=cm.cms("user_preferences")%>" href="preferences.jsp">&raquo; <%=cm.cmsText("user_preferences")%></a><%=cm.cmsTitle("user_preferences")%>
         <br />
         <%=cm.cmsText("generic_index_07")%>
       </li>
+-->      
     </ul>
   </dd>
 </dl>

@@ -133,23 +133,22 @@
                 ps2 = con.prepareStatement( strSQL );
                 rs2 = ps2.executeQuery();
 
-          %>
+%>
                 <ul>
-          <%
+<%
                 while(rs2.next())
                 {
+%>
+                  <li>
+<%
                   if(sqlc.Annex1HabitatHasChilds(rs2.getString("CODE_2000").substring(0,rs2.getString("CODE_2000").length()-2),rs2.getString("CODE_2000"))) {
-          %>
-                  <li>
+%>
                     <a title="<%=rs2.getString("SCIENTIFIC_NAME")%>" href="habitats-annex1-tree.jsp?idCode=<%=rs2.getString("CODE_2000")%>"><%=rs2.getString("CODE_2000")%> : <%=rs2.getString("SCIENTIFIC_NAME")%></a><br/>
-                  </li>
-          <%
+<%
                   } else {
-          %>
-                  <li>
+%>
                     <a title="<%=rs2.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs2.getString("ID_HABITAT")%>"><%=rs2.getString("CODE_2000")%> : <%=rs2.getString("SCIENTIFIC_NAME")%></a><br/>
-                  </li>
-          <%
+<%
                   }
 
                    if(idCode.length()>=2 && idCode.indexOf(rs2.getString("CODE_2000"))>=0) {
@@ -162,23 +161,22 @@
                      ps4 = con.prepareStatement( strSQL );
                      rs4 = ps4.executeQuery();
 
-          %>
+%>
                      <ul>
-          <%
+<%
                      while(rs4.next())
                      {
-                       if(sqlc.Annex1HabitatHasChilds(rs4.getString("CODE_2000").substring(0,rs4.getString("CODE_2000").length()-1),rs4.getString("CODE_2000"))) {
-          %>
-                        <li>
-                          <a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats-annex1-tree.jsp?idCode=<%=rs4.getString("CODE_2000")%>"><%=rs4.getString("CODE_2000")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a><br/>
-                        </li>
-          <%
-                       } else {
-          %>
+%>
                        <li>
+<%
+                       if(sqlc.Annex1HabitatHasChilds(rs4.getString("CODE_2000").substring(0,rs4.getString("CODE_2000").length()-1),rs4.getString("CODE_2000"))) {
+%>
+                          <a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats-annex1-tree.jsp?idCode=<%=rs4.getString("CODE_2000")%>"><%=rs4.getString("CODE_2000")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a><br/>
+<%
+                       } else {
+%>
                          <a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs4.getString("ID_HABITAT")%>"><%=rs4.getString("CODE_2000")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a><br/>
-                       </li>
-          <%
+<%
                        }
                        if(idCode.length()>=4 && idCode.indexOf(rs4.getString("CODE_2000"))>=0) {
                          strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, CODE_2000";
@@ -190,37 +188,42 @@
                          ps5 = con.prepareStatement( strSQL );
                          rs5 = ps5.executeQuery();
 
-          %>
+%>
                          <ul>
-          <%
+<%
                          while(rs5.next())
                          {
-          %>
+%>
                            <li>
                              <a title="<%=rs5.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs5.getString("ID_HABITAT")%>"><%=rs5.getString("CODE_2000")%> : <%=rs5.getString("SCIENTIFIC_NAME")%></a><br/>
                            </li>
-          <%
+<%
                          }
-          %>
+%>
                          </ul>
-          <%
+<%
 
                          rs5.close();
                          ps5.close();
                        }
-
+%>
+                       </li>
+<%
                      }
-          %>
+%>
                      </ul>
-          <%
+<%
 
                      rs4.close();
                      ps4.close();
                    }
+%>
+              </li>
+<%
                 }
-          %>
+%>
             </ul>
-          <%
+<%
 
                 rs2.close();
                 ps2.close();
@@ -234,7 +237,7 @@
               return;
             }
 
-          %>
+%>
                 <br/>
                 <jsp:include page="footer.jsp">
                   <jsp:param name="page_name" value="habitats-annex1-tree.jsp" />

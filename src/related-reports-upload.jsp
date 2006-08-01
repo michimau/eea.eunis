@@ -73,7 +73,7 @@
     <%=cm.cmsTitle("upload_document")%>
     <%=cm.cmsInput("upload")%>
 
-    <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="standardButton" />
+    <input type="button" onclick="javascript:window.close();" value="<%=cm.cms("close_window")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="standardButton" />
     <%=cm.cmsTitle("close_window")%>
     <%=cm.cmsInput("close_window")%>
   </p>
@@ -105,7 +105,7 @@ else
   <%=cm.cmsText("related_reports_upload_unauthorized")%>.
   <br />
   <form action="">
-    <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_window")%>" title="<%=cm.cms("close_window")%>" id="button1" name="button" class="standardButton" />
+    <input type="button" onclick="javascript:window.close();" value="<%=cm.cms("close_window")%>" title="<%=cm.cms("close_window")%>" id="button1" name="button" class="standardButton" />
     <%=cm.cmsTitle("close_window")%>
     <%=cm.cmsInput("close_window")%>
   </form>

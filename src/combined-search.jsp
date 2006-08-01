@@ -485,15 +485,40 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       <jsp:include page="footer.jsp">
                         <jsp:param name="page_name" value="combined-search.jsp" />
                       </jsp:include>
-                      <%out.println("</div>");%>
-                      <%out.println("</body>");%>
-                      <%out.println("</html>");%>
-                      <%
+                <!-- END MAIN CONTENT -->
+                              </div>
+                            </div>
+                          </div>
+                          <!-- end of main content block -->
+                          <!-- start of the left (by default at least) column -->
+                          <div id="portal-column-one">
+                            <div class="visualPadding">
+                              <jsp:include page="inc_column_left.jsp" />
+                            </div>
+                          </div>
+                          <!-- end of the left (by default at least) column -->
+                        </div>
+                        <!-- end of the main and left columns -->
+                        <!-- start of right (by default at least) column -->
+                        <div id="portal-column-two">
+                          <div class="visualPadding">
+                            <jsp:include page="inc_column_right.jsp" />
+                          </div>
+                        </div>
+                        <!-- end of the right (by default at least) column -->
+                        <div class="visualClear"><!-- --></div>
+                      </div>
+                      <!-- end column wrapper -->
+                      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
+                    </div>
+                  </body>
+                </html>
+<%
                       return;
                     }
                   }
                 }
-                %>
+%>
               <form method="post" action="combined-search.jsp" name="criteria">
               <strong>
                 <%=cm.cmsText("generic_combined-search-step1_04")%>

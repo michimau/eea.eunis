@@ -16,24 +16,23 @@
 <%@ page import="ro.finsiel.eunis.WebContentManagement" %>
 <%@ page import="java.sql.*" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-<head>
-  <jsp:include page="header-page.jsp" />
 <%
   WebContentManagement cm = SessionManager.getWebContent();
 %>
-<title>
-  <%=application.getInitParameter("PAGE_TITLE")%>
-  <%=request.getParameter("previousnatureobject") != null ? request.getParameter("previousnatureobject") : ""%>
-  <%=cm.cms("combined_search")%>
-</title>
-<script language="JavaScript" type="text/javascript">
-<!--
-  var current_selected = "";
-//-->
-</script>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
+  <head>
+    <jsp:include page="header-page.jsp" />
+    <title>
+      <%=application.getInitParameter("PAGE_TITLE")%>
+      <%=request.getParameter("previousnatureobject") != null ? request.getParameter("previousnatureobject") : ""%>
+      <%=cm.cms("combined_search")%>
+    </title>
+    <script language="JavaScript" type="text/javascript">
+    <!--
+      var current_selected = "";
+    //-->
+    </script>
 <script language="JavaScript" type="text/javascript">
 <!--
   function MM_jumpMenu(targ,selObj,restore){ //v3.0
@@ -236,8 +235,8 @@
 //-->
 </script>
 
-</head>
-<body>
+  </head>
+  <body>
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
       <!-- The wrapper div. It contains the three columns. -->

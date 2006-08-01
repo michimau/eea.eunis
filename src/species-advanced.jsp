@@ -273,14 +273,10 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                   <h5 class="hiddenStructure">Document Actions</h5>
                   <ul>
                     <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="Print this page"
-                            title="Print this page" /></a>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif" alt="Print this page" title="Print this page" /></a>
                     </li>
                     <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="Toggle full screen mode"
-                             title="Toggle full screen mode" /></a>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif" alt="Toggle full screen mode" title="Toggle full screen mode" /></a>
                     </li>
                   </ul>
                 </div>
@@ -647,7 +643,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     currentValue = val;
                     %>
                     <label for="First_Value<%=IdNode%>" class="noshow"><%=cm.cms("list_of_values")%></label>
-                    <input type="text" title="<%=cm.cms("list_of_values")%>" name="First_Value<%=IdNode%>" id="First_Value<%=IdNode%>" size="25" value="<%=val%>" onBlur="submitFirstValueForm(this,'<%=IdNode%>','<%=IdSession%>','<%=NatureObject%>');" onfocus="saveFirstValue(this)" onkeyup="textChanged(event)" />
+                    <input type="text" title="<%=cm.cms("list_of_values")%>" name="First_Value<%=IdNode%>" id="First_Value<%=IdNode%>" size="25" value="<%=val%>" onblur="submitFirstValueForm(this,'<%=IdNode%>','<%=IdSession%>','<%=NatureObject%>');" onfocus="saveFirstValue(this)" onkeyup="textChanged(event)" />
                     <%=cm.cmsTitle("list_of_values")%>
                     <a title="<%=cm.cms("list_of_values")%>" href="javascript:choice('First_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="first_binocular"  onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cms("list_of_values")%>" /></a>
                     <%
@@ -657,7 +653,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       currentValue = val;
                       %>
                       <label for="Last_Value<%=IdNode%>" class="noshow"><%=cm.cms("list_of_values")%></label>
-                      <input type="text" title="<%=cm.cms("list_of_values")%>" name="Last_Value<%=IdNode%>" id="Last_Value<%=IdNode%>" size="25" value="<%=val%>" onBlur="submitLastValueForm(this,'<%=IdNode%>','<%=IdSession%>','<%=NatureObject%>')" onfocus="saveLastValue(this)" onkeyup="textChanged(event)" />
+                      <input type="text" title="<%=cm.cms("list_of_values")%>" name="Last_Value<%=IdNode%>" id="Last_Value<%=IdNode%>" size="25" value="<%=val%>" onblur="submitLastValueForm(this,'<%=IdNode%>','<%=IdSession%>','<%=NatureObject%>')" onfocus="saveLastValue(this)" onkeyup="textChanged(event)" />
                       <%=cm.cmsTitle("list_of_values")%>
                       <a title="<%=cm.cms("list_of_values")%>" href="javascript:choice('Last_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="last_binocular"  onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cms("list_of_values")%>" /></a>
                       <%
@@ -817,7 +813,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 <table summary="layout" width="100%" border="0">
                   <tr>
                     <td>
-                      <img border="0" alt="<%=cm.cms("advanced_expand_collapse")%>" style="vertical-align:middle" src="images/mini/<%=(exp.equals("yes")?"collapse.gif":"expand.gif")%>"><a title="<%=cm.cms("advanced_expand_collapse")%>" href="species-advanced.jsp?expandCriterias=<%=(exp.equals("yes")?"no":"yes")%>"><%=(exp.equalsIgnoreCase("yes") ? cm.cms("hide") : cm.cms("show"))%> <%=cm.cmsText("saved_search_criteria")%></a>
+                      <img border="0" alt="<%=cm.cms("advanced_expand_collapse")%>" style="vertical-align:middle" src="images/mini/<%=(exp.equals("yes")?"collapse.gif":"expand.gif")%>" /><a title="<%=cm.cms("advanced_expand_collapse")%>" href="species-advanced.jsp?expandCriterias=<%=(exp.equals("yes")?"no":"yes")%>"><%=(exp.equalsIgnoreCase("yes") ? cm.cms("hide") : cm.cms("show"))%> <%=cm.cmsText("saved_search_criteria")%></a>
                       <%=cm.cmsTitle("advanced_expand_collapse")%>
                       <%=cm.cmsTitle("hide")%>
                       <%=cm.cmsTitle("show")%>

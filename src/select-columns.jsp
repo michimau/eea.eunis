@@ -200,30 +200,30 @@
                           </label>
                           <br />
                           <select id="list1" size="10" name="list1" style="width : 300px;">
-            <%
-              if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("species"))
-              {
-            %>
+<%
+  if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("species"))
+  {
+%>
                             <option value="showGroup"><%=cm.cms("group")%></option>
                             <option value="showOrder"><%=cm.cms("order_column")%></option>
                             <option value="showFamily"><%=cm.cms("family")%></option>
                             <option value="showScientificName"><%=cm.cms("scientific_name")%></option>
                             <option value="showVernacularName"><%=cm.cms("vernacular_names")%></option>
-            <%
-              }
-              if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("habitats"))
-              {
-            %>
+<%
+  }
+  if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("habitats"))
+  {
+%>
                             <option value="showLevel"><%=cm.cms("generic_index_07")%></option>
                             <option value="showEUNISCode"><%=cm.cms("eunis_code")%></option>
                             <option value="showANNEXCode"><%=cm.cms("annex_code")%></option>
                             <option value="showScientificName"><%=cm.cms("name")%></option>
                             <option value="showPriority"><%=cm.cms("priority")%></option>
-            <%
-              }
-              if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("sites"))
-              {
-            %>
+<%
+  }
+  if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("sites"))
+  {
+%>
                             <option value="showSourceDB"><%=cm.cms("source_data_set")%></option>
                             <option value="showCountry"><%=cm.cms("country")%></option>
                             <option value="showDesignationType"><%=cm.cms("designation_type")%></option>
@@ -235,35 +235,35 @@
                             <option value="showMinAltitude"><%=cm.cms("min_altitude")%></option>
                             <option value="showMaxAltitude"><%=cm.cms("max_altitude")%></option>
                             <option value="showMeanAltitude"><%=cm.cms("mean_altitude")%></option>
-            <%
-              }
-            %>
+<%
+  }
+%>
                           </select>
                           <%=cm.cmsLabel("select_columns_available_label")%>
-            <%
-              if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("species"))
-              {
-            %>
+<%
+  if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("species"))
+  {
+%>
                           <%=cm.cmsInput("group")%>
                           <%=cm.cmsInput("order_column")%>
                           <%=cm.cmsInput("family")%>
                           <%=cm.cmsInput("scientific_name")%>
                           <%=cm.cmsInput("vernacular_names")%>
                           <%=cm.cmsInput("priority")%>
-            <%
-              }
-              if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("habitats"))
-              {
-            %>
+<%
+  }
+  if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("habitats"))
+  {
+%>
                           <%=cm.cmsInput("generic_index_07")%>
                           <%=cm.cmsInput("eunis_code")%>
                           <%=cm.cmsInput("annex_code")%>
                           <%=cm.cmsInput("name")%>
-            <%
-              }
-              if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("sites"))
-              {
-            %>
+<%
+  }
+  if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("sites"))
+  {
+%>
                           <%=cm.cmsInput("source_data_set")%>
                           <%=cm.cmsInput("country")%>
                           <%=cm.cmsInput("designation_type")%>
@@ -275,9 +275,9 @@
                           <%=cm.cmsInput("min_altitude")%>
                           <%=cm.cmsInput("max_altitude")%>
                           <%=cm.cmsInput("mean_altitude")%>
-            <%
-              }
-            %>
+<%
+  }
+%>
                         </td>
                         <td width="20%" valign="middle" align="center">
                           <input type="button" title="<%=cm.cms("select_columns_add_title")%>"

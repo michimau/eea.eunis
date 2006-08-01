@@ -300,7 +300,6 @@
                   <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>"/>
                 </jsp:include>
                 <br />
-                <table summary="<%=cm.cms("search_results")%>" border="1" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse">
           <%
             // Compute the sort criteria
             Vector sortURLFields = new Vector();      /* Used for sorting */
@@ -512,26 +511,18 @@
             int speciesResultSize = (null == speciesResults ? 0 : speciesResults.size());
                 if(speciesResultSize>0)
                 {
-          %>
-                      <table border="0" cellspacing="0" cellpadding="0">
-          <%
                   for(int i=0;i<speciesResultSize;i++)
                   {
                     List speciesData = (List)speciesResults.get(i);
                     String speciesName = (String)speciesData.get(1);
                     String speciesId = (String)speciesData.get(0);
           %>
-                        <tr>
-                          <td bgcolor="<%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>" style="text-align : left;">
+                        <div style="background-color: <%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>">
                             <a title="<%=cm.cms("open_species_factsheet")%>" href="javascript:openlink('species-factsheet.jsp?idSpecies=<%=speciesId%>')"><%=speciesName%></a>
                             <%=cm.cmsTitle("open_species_factsheet")%>
-                          </td>
-                        </tr>
+                        </div>
           <%
                   }
-          %>
-                        </table>
-          <%
                 }
                 else
                 {
@@ -548,26 +539,18 @@
                 int habitatsResultSize = (null == habitatsResults ? 0 : habitatsResults.size());
                 if(habitatsResultSize>0)
                 {
-          %>
-                      <table border="0" cellspacing="0" cellpadding="0">
-          <%
                   for(int i=0;i<habitatsResultSize;i++)
                   {
                     List habitatsData = (List)habitatsResults.get(i);
                     String habitatsName = (String)habitatsData.get(1);
                     String habitatsId = (String)habitatsData.get(0);
           %>
-                        <tr>
-                          <td bgcolor="<%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>" style="text-align : left;">
-                            <a title="<%=cm.cms("open_habitat_factsheet")%>" href="javascript:openlink('habitats-factsheet.jsp?idHabitat=<%=habitatsId%>')"><%=habitatsName%></a>
-                            <%=cm.cmsTitle("open_habitat_factsheet")%>
-                          </td>
-                        </tr>
+                      <div style="background-color: <%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>">
+                        <a title="<%=cm.cms("open_habitat_factsheet")%>" href="javascript:openlink('habitats-factsheet.jsp?idHabitat=<%=habitatsId%>')"><%=habitatsName%></a>
+                        <%=cm.cmsTitle("open_habitat_factsheet")%>
+                      </div>
           <%
                   }
-          %>
-                      </table>
-          <%
                 }
                 else
                 {

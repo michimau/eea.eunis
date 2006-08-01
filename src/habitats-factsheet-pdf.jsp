@@ -54,7 +54,7 @@
   </head>
   <body>
     <div id="imgtop">
-      <img alt="" src="images/progress/top.jpg" width="400" height="178">
+      <img alt="" src="images/progress/top.jpg" width="400" height="178" />
     </div>
     <img id="loading" src="<%=request.getContextPath()%>/images/loading_tsv.gif" width="200" height="10" alt="<%=cm.cms("loading_animation")%>" />
     <%=cm.cmsTitle("loading_animation")%>

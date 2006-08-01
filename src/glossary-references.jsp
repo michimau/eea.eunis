@@ -13,7 +13,6 @@
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   // id - ID_DC from CHM62EDT_GLOSSARY table

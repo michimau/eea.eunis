@@ -12,7 +12,7 @@
                  java.util.Iterator,
                  java.util.List,
                  ro.finsiel.eunis.jrfTables.Chm62edtReferencesPersist,
-                 ro.finsiel.eunis.WebContentManagement" %>
+                 ro.finsiel.eunis.WebContentManagement, ro.finsiel.eunis.search.Utilities" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -112,11 +112,11 @@
                 %>
                 <tr<%=cssClass%>>
                   <td id="A<%=cnt%>1">
-                    <a title="<%=cm.cms("copyright_search_for_author")%>" target="_blank" href="http://www.google.com/search?hl=en&amp;lr=&amp;ie=UTF-8&amp;oe=UTF-8&amp;q=<%=nl.getAuthor()%>"><%=nl.getAuthor()%></a>
+                    <a title="<%=cm.cms("copyright_search_for_author")%>" target="_blank" href="http://www.google.com/search?hl=en&amp;lr=&amp;ie=UTF-8&amp;oe=UTF-8&amp;q=<%=Utilities.treatURLSpecialCharacters( nl.getAuthor() )%>"><%=Utilities.treatURLSpecialCharacters( nl.getAuthor() )%></a>
                     <%=cm.cmsTitle("copyright_search_for_author")%>
                   </td>
                   <td>
-                    <%=nl.getTitle()%>
+                    <%=Utilities.treatURLSpecialCharacters( nl.getTitle() )%>
                   </td>
                   <td style="text-align: center;">
                     <%=nl.getPublicationDate()%>

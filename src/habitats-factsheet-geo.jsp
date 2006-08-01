@@ -98,7 +98,7 @@ WebContentManagement cm = SessionManager.getWebContent();
 <table summary="layout" border="0">
   <tr>
     <td valign="middle" align="center" width="345" height="300" rowspan="8">
-      <img alt="<%=cm.cms("habitat_distribution_map")%>" id="eeamap" style="width: 345px" src="javascript:map_refresh();" style="vertical-align:middle" border="0" name="eeamap" />
+      <img alt="<%=cm.cms("habitat_distribution_map")%>" id="eeamap" style="width: 345px; vertical-align:middle;" src="javascript:map_refresh();" border="0" name="eeamap" />
       <%=cm.cmsTitle("habitat_distribution_map")%>
     </td>
     <td valign="middle" align="center" width="35" colspan="2" height="40">

@@ -424,7 +424,7 @@
                       <%=cm.cmsText("find_species_used_in_indicators")%>
                     </td>
                   </tr>
-                <tbody>
+                </tbody>
               </table>
           <%
             }

@@ -118,39 +118,39 @@
   </tr>
   <tr>
     <td width="33%">
-      <input type="checkbox" id="NATURA2000" title="NATURA2000" name="NATURA2000" value="<%=NATURA2000%>"  checked="<%=NATURA2000%>" />
+      <input type="checkbox" id="NATURA2000" title="NATURA2000" name="NATURA2000" value="<%=NATURA2000%>"  checked="checked" />
       <label for="NATURA2000"><%=dbNatura2000%></label>
     </td>
     <td width="33%">
-      <input type="checkbox" id="CDDA_NATIONAL" title="CDDA_NATIONAL" name="CDDA_NATIONAL" value="<%=CDDA_NATIONAL%>"  checked="<%=CDDA_NATIONAL%>" />
+      <input type="checkbox" id="CDDA_NATIONAL" title="CDDA_NATIONAL" name="CDDA_NATIONAL" value="<%=CDDA_NATIONAL%>" checked="checked" />
       <label for="CDDA_NATIONAL"><%=dbCDDANational%></label>
     </td>
     <td width="34%">
-      <input type="checkbox" id="NATURENET" title="NATURENET" name="NATURENET" value="<%=NATURENET%>" checked="<%=NATURENET%>" disabled="disabled" />
+      <input type="checkbox" id="NATURENET" title="NATURENET" name="NATURENET" value="<%=NATURENET%>" checked="checked" disabled="disabled" />
       <label for="NATURENET"><%=dbNatureNet%></label>
     </td>
   </tr>
   <tr>
     <td width="33%">
-      <input type="checkbox" id="DIPLOMA" title="DIPLOMA" name="DIPLOMA" value="<%=DIPLOMA%>" checked="<%=DIPLOMA%>" />
+      <input type="checkbox" id="DIPLOMA" title="DIPLOMA" name="DIPLOMA" value="<%=DIPLOMA%>" checked="checked" />
       <label for="DIPLOMA"><%=dbDiploma%></label>
     </td>
     <td width="33%">
-      <input type="checkbox" id="CDDA_INTERNATIONAL" title="CDDA_INTERNATIONAL" name="CDDA_INTERNATIONAL" value="<%=CDDA_INTERNATIONAL%>" checked="<%=CDDA_INTERNATIONAL%>" />
+      <input type="checkbox" id="CDDA_INTERNATIONAL" title="CDDA_INTERNATIONAL" name="CDDA_INTERNATIONAL" value="<%=CDDA_INTERNATIONAL%>" checked="checked" />
       <label for="CDDA_INTERNATIONAL"><%=dbCDDAInternational%></label>
     </td>
     <td width="34%">
-      <input type="checkbox" id="CORINE" title="CORINE" name="CORINE" value="<%=CORINE%>" checked="<%=CORINE%>" <%=enableCorine%> />
+      <input type="checkbox" id="CORINE" title="CORINE" name="CORINE" value="<%=CORINE%>" checked="checked" <%=enableCorine%> />
       <label for="CORINE"><%=dbCorine%></label>
     </td>
   </tr>
   <tr>
     <td width="33%">
-      <input type="checkbox" id="BIOGENETIC" title="BIOGENETIC" name="BIOGENETIC" value="<%=BIOGENETIC%>" checked="<%=BIOGENETIC%>" />
+      <input type="checkbox" id="BIOGENETIC" title="BIOGENETIC" name="BIOGENETIC" value="<%=BIOGENETIC%>" checked="checked" />
       <label for="BIOGENETIC"><%=dbBiogenetic%></label>
     </td>
     <td width="33%">
-      <input type="checkbox" id="EMERALD" title="EMERALD" name="EMERALD" value="<%=EMERALD%>" checked="<%=EMERALD%>" />
+      <input type="checkbox" id="EMERALD" title="EMERALD" name="EMERALD" value="<%=EMERALD%>" checked="checked" />
       <label for="EMERALD"><%=dbEmerald%></label>
     </td>
     <td width="34%">

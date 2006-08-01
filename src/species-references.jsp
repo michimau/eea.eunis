@@ -152,7 +152,22 @@
                               <%=cm.cmsAlt("field_included")%>
                               &nbsp;
                               <strong>
+<%
+  if (request.getParameter("between")!=null && request.getParameter("between").equalsIgnoreCase("yes"))
+  {
+
+
+%>
                                 <label for="date1"><%=cm.cmsText("year")%></label>
+<%
+  }
+  else
+  {
+%>
+                                <label for="date3"><%=cm.cmsText("year")%></label>
+<%
+  }
+%>
                               </strong>
                             </td>
                             <td>

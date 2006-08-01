@@ -56,7 +56,8 @@
     String oper = request.getParameter("oper");
     //System.out.println("oper = " + oper);
     //System.out.println("val = " + val);
-    if(oper.equalsIgnoreCase("Equal") && val.equalsIgnoreCase("")) {
+    if(oper.equalsIgnoreCase("Equal") && val.equalsIgnoreCase(""))
+    {
       oper="Contains";
       val="%";
     }

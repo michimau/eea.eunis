@@ -116,7 +116,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("generic_index_07")%>
+      <%=cm.cmsText("headline_title")%>
     </title>
   </head>
   <body>

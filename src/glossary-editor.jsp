@@ -193,6 +193,7 @@
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms( "glossary_editor")%>
     </title>
+  </head>
   <body>
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>

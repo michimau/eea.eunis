@@ -14,7 +14,6 @@
                 ro.finsiel.eunis.search.habitats.HabitatsSearchUtility,
                 ro.finsiel.eunis.WebContentManagement,
                 ro.finsiel.eunis.formBeans.AbstractFormBean"%>
-<%@ page import="java.util.ArrayList"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.DcIndexDcSourceDomain"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.DcIndexDcSourcePersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />

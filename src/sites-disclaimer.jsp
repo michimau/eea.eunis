@@ -52,7 +52,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,sites_disclaimer_location"/>
+                  <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,sites_disclaimer_location"/>
                   <jsp:param name="mapLink" value="show"/>
                 </jsp:include>
                 <%=cm.cmsText("sites_disclaimer_01")%>

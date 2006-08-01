@@ -164,11 +164,11 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                   // If relOpDate is between
                   if (request.getParameter("between") != null && request.getParameter("between").equalsIgnoreCase("yes")) {
                   %>
-                    <label for="date_between"><strong><%=cm.cmsText("year")%></strong></label>
+                    <label for="date_normal"><strong><%=cm.cmsText("year")%></strong></label>
                   <%
                   } else {
                   %>
-                    <label for="date_normal"><strong><%=cm.cmsText("year")%></strong></label>
+                    <label for="date_between"><strong><%=cm.cmsText("year")%></strong></label>
                   <%
                   }
                   %>

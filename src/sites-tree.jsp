@@ -113,9 +113,9 @@
                 <li>
           <%      if(sqlc.DesignationHasSites(rs.getString("ID_DESIGNATION"),rs.getString("ID_GEOSCOPE"))) {
           %>
-                  <a title="<%=rs.getString("DESCRIPTION")%>" href="sites-tree.jsp?idDesignation=<%=rs.getString("ID_DESIGNATION")%>&idGeoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=rs.getString("DESCRIPTION")%> (<%=rs.getString("AREA_NAME_EN")%>)</a>
+                  <a title="<%=rs.getString("DESCRIPTION")%>" href="sites-tree.jsp?idDesignation=<%=rs.getString("ID_DESIGNATION")%>&amp;idGeoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=rs.getString("DESCRIPTION")%> (<%=rs.getString("AREA_NAME_EN")%>)</a>
                   &nbsp;
-                  [<a title="<%=rs.getString("DESCRIPTION")%>" href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=cm.cmsText("open_designation_factsheet")%></a>]
+                  [<a title="<%=rs.getString("DESCRIPTION")%>" href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&amp;geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=cm.cmsText("open_designation_factsheet")%></a>]
           <%
                   //now check if we expand source databases
 
@@ -140,7 +140,7 @@
                       {
           %>
                       <li>
-                        <a name="position"></a><a title="<%=SitesSearchUtility.translateSourceDB(rs2.getString("SOURCE_DB"))%>" href="sites-tree.jsp?idDesignation=<%=rs.getString("ID_DESIGNATION")%>&idGeoscope=<%=rs.getString("ID_GEOSCOPE")%>&idSource=<%=rs2.getString("SOURCE_DB")%>#position"><%=SitesSearchUtility.translateSourceDB(rs2.getString("SOURCE_DB"))%> (<%=rs2.getString("RECORD_COUNT")%> records.)</a>
+                        <a name="position"></a><a title="<%=SitesSearchUtility.translateSourceDB(rs2.getString("SOURCE_DB"))%>" href="sites-tree.jsp?idDesignation=<%=rs.getString("ID_DESIGNATION")%>&amp;idGeoscope=<%=rs.getString("ID_GEOSCOPE")%>&amp;idSource=<%=rs2.getString("SOURCE_DB")%>#position"><%=SitesSearchUtility.translateSourceDB(rs2.getString("SOURCE_DB"))%> (<%=rs2.getString("RECORD_COUNT")%> records.)</a>
           <%
                         //we check to see if we need to display sites
                         if(idSource.length()>0) {
@@ -161,7 +161,7 @@
           %>
                             <li>
                               <a title="<%=rs3.getString("NAME")%>" href="sites-factsheet.jsp?idsite=<%=rs3.getString("ID_SITE")%>"><%=rs3.getString("NAME")%></a>
-                            <li/>
+                            </li>
           <%              }
 
           %>
@@ -181,16 +181,16 @@
                       ps2.close();
                     }
                   }
-          %>
-                </li>
-          <%
                 } else {
           %>
                 <%=rs.getString("DESCRIPTION")%>
                 &nbsp;
-                [<a title="<%=rs.getString("DESCRIPTION")%>" href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=cm.cmsText("open_designation_factsheet")%></a>]
-          <%
+                [<a title="<%=rs.getString("DESCRIPTION")%>" href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&amp;geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=cm.cmsText("open_designation_factsheet")%></a>]
+<%
                 }
+%>
+                </li>
+<%
             }
           %>
               </ul>

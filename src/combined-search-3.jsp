@@ -25,16 +25,11 @@
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=request.getParameter("firstnatureobject")!=null?request.getParameter("firstnatureobject"):""%>
-      <%=cm.cms("generic_combined-search-step3_01")%>
+      <%=cm.cms("combined_search")%>
     </title>
 <script language="JavaScript" type="text/javascript">
 <!--
   var current_selected="";
--->
-</script>
-
-<script language="JavaScript" type="text/javascript">
-<!--
   function MM_jumpMenu(targ,selObj,restore){ //v3.0
     eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
     if (restore) selObj.selectedIndex=0;

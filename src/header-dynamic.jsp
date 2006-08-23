@@ -46,17 +46,23 @@ Input parameters  on REQUEST:
   // Get the backtrail from string (order of objects is preserved).
   Vector backtrailObjects = BacktrailUtil.parseBacktrailString( dynHeaderLocation, cm );
 %>
-<div id="eunistrail">
+<div id="portal-breadcrumbs">
   <div style="width: 100%; padding: 0px; margin: 0px; display:table-cell;">
+    <%=cm.cmsText( "you_are_here" )%>
 <%
   for (int i = 0; i < backtrailObjects.size(); i++)
   {
     BacktrailObject backtrailObject = ( BacktrailObject ) backtrailObjects.elementAt(i);
-    if (i > 0)
+    if( i < backtrailObjects.size() - 1 )
     {
-      out.print( "<span style=\"margin-left: 2px; margin-right: 2px;\">&raquo;</span>" );
+      backtrailObject.setCssStyle( "breadcrumbitem" );
+    }
+    else
+    {
+      backtrailObject.setCssStyle( "breadcrumbitemlast" );
     }
     out.print( backtrailObject.toURLString() );
+    out.print( "&nbsp;" );
   }
 %>
   </div>

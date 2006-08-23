@@ -87,7 +87,14 @@ public class BacktrailObject {
   public String toURLString() {
     if (null == url)
     {
-      return name;
+      if( cssStyle == null )
+      {
+        return name;
+      }
+      else
+      {
+        return "<span class=\"" + cssStyle + "\">" + name + "</span>";
+      }
     }
     else
     {
@@ -97,7 +104,7 @@ public class BacktrailObject {
       }
       else
       {
-        return "<a href=\"" + url + "\">" + name + "</a>";
+        return "<a href=\"" + url + "\" class=\"" + cssStyle + "\" >" + name + "</a>";
       }
     }
   }

@@ -200,10 +200,8 @@
                     <%=cm.cmsText( "species" )%>
                   </strong>&nbsp;
                   <input title="Species name" id="scientificName" name="scientificName" size="24" />
-                  <input id="search_species" type="submit" name="submit" value="<%=cm.cms("search")%>" class="searchButton" />
+                  <input id="search_species" type="submit" name="submit" value="<%=cm.cms("search")%>" class="searchButton" title="<%=cm.cms("search_species")%>" />
                   <%=cm.cmsLabel("species_name")%>
-
-                  <label for="search_species" class="noshow"><%=cm.cms("search_species")%></label>
                   <br />
                   <a title="<%=cm.cms("index_species_search_tools_title")%>" href="species.jsp"><%=cm.cmsText("search_tools")%></a><%=cm.cmsTitle("index_species_search_tools_title")%>
                   <div class="search_details">
@@ -230,9 +228,7 @@
                   <input title="<%=cm.cms("habitat_type_name")%>" id="searchString" name="searchString" size="24" />
                   <%=cm.cmsLabel("habitat_type_name")%>
                   <%=cm.cmsTitle("habitat_type_name")%>
-                  <input id="search_habitat_types" type="submit" name="submit" value="<%=cm.cms("search")%>" class="searchButton" />
-
-                  <label for="search_habitat_types" class="noshow"><%=cm.cms("search_habitat_type")%></label>
+                  <input id="search_habitat_types" type="submit" name="submit" value="<%=cm.cms("search")%>" class="searchButton" title="<%=cm.cms("search_habitat_type")%>" />
                   <br />
                   <a title="<%=cm.cms("index_habitats_search_tools_title")%>" href="habitats.jsp"><%=cm.cms("search_tools")%></a>
                   <%=cm.cmsTitle("index_habitats_search_tools_title")%>
@@ -269,7 +265,8 @@
                   <input title="<%=cm.cms("site_name")%>" id="englishName" name="englishName" size="24" />
                   <%=cm.cmsLabel("site_name")%>
                   <%=cm.cmsTitle("site_name")%>
-                  <input id="search_sites" type="submit" name="submit" value="<%=cm.cms("search")%>" class="searchButton" />
+                  <input id="search_sites" type="submit" name="submit" value="<%=cm.cms("search")%>" class="searchButton" title="<%=cm.cms( "index_search_sites_label" )%>" />
+                  <%=cm.cmsTitle( "index_search_sites_label" )%>
                   <br />
                   <a title="<%=cm.cms("index_sites_search_tools_title")%>" href="sites.jsp"><%=cm.cms("search_tools")%></a>
                   <%=cm.cmsTitle("index_sites_search_tools_title")%>
@@ -311,7 +308,9 @@
         <!-- start of right (by default at least) column -->
         <div id="portal-column-two">
           <div class="visualPadding">
-            <jsp:include page="inc_column_right.jsp" />
+            <jsp:include page="inc_column_right.jsp">
+              <jsp:param name="showImg" value="true" />
+            </jsp:include>
           </div>
         </div>
         <!-- end of the right (by default at least) column -->

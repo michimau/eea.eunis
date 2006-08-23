@@ -24,18 +24,6 @@
         <a class="menuItem" href="index.jsp" accesskey="1" title="<%=cm.cms("home_page")%>">&raquo; <%=cm.cmsText("home")%></a><%=cm.cmsTitle("home_page")%>
       </li>
       <li class="">
-        <a class="menuItem" href="login.jsp" accesskey="l" title="<%=cm.cms("generic_header-static_login_title")%>">&raquo; <%=cm.cmsText("login")%></a><%=cm.cmsTitle("generic_header-static_login_title")%>
-      </li>
-      <li class="">
-        <a class="menuItem" id="digir_url_link" href="digir.jsp" title="<%=cm.cms("generic_header-static_digir_title")%>">&raquo; <%=cm.cmsText("generic_header-static_digir")%></a><%=cm.cmsTitle("generic_header-static_digir_title")%>
-      </li>
-      <li class="">
-        <a class="menuItem" href="references.jsp" accesskey="r" title="<%=cm.cms("generic_header-static_references_title")%>">&raquo; <%=cm.cmsText("references")%></a><%=cm.cmsTitle("generic_header-static_references_title")%>
-      </li>
-      <li class="">
-        <a class="menuItem" href="related-reports.jsp" accesskey="p" title="<%=cm.cms("generic_header-static_reports_title")%>">&raquo; <%=cm.cmsText("related_reports")%></a><%=cm.cmsTitle("generic_header-static_reports_title")%>
-      </li>
-      <li class="">
         <a class="menuItem" href="species.jsp" accesskey="s" title="<%=cm.cms("generic_header-static_species_title")%>">&raquo; <%=cm.cmsText("species")%></a><%=cm.cmsTitle("generic_header-static_species_title")%>
       </li>
       <li class="">
@@ -48,16 +36,19 @@
         <a class="menuItem" href="combined-search.jsp" accesskey="c" title="<%=cm.cms("generic_header-static_combined_title")%>">&raquo; <%=cm.cmsText("combined_search")%></a><%=cm.cmsTitle("generic_header-static_combined_title")%>
       </li>
       <li class="">
-        <a class="menuItem" href="glossary.jsp" accesskey="g" title="<%=cm.cms("generic_header-static_glossary_title")%>">&raquo; <%=cm.cmsText("glossary")%></a><%=cm.cmsTitle("generic_header-static_glossary_title")%>
-      </li>
-      <li class="">
-        <a class="menuItem" href="eunis-map.jsp" accesskey="3" title="<%=cm.cms("generic_header-static_sitemap_title")%>">&raquo; <%=cm.cmsText("web_site_map")%></a><%=cm.cmsTitle("generic_header-static_sitemap_title")%>
-      </li>
-      <li class="">
         <a class="menuItem" href="gis-tool.jsp" accesskey="u" title="<%=cm.cms("generic_header-static_gistool_title")%>">&raquo; <%=cm.cmsText("generic_header-static_gistool")%></a><%=cm.cmsTitle("generic_header-static_gistool_title")%>
       </li>
       <li class="">
-        <a class="menuItem" href="about.jsp" accesskey="b" title="<%=cm.cms("generic_header-static_about_title")%>">&raquo; <%=cm.cmsText("generic_about_title")%></a><%=cm.cmsTitle("generic_header-static_about_title")%>
+        <a class="menuItem" href="glossary.jsp" accesskey="g" title="<%=cm.cms("generic_header-static_glossary_title")%>">&raquo; <%=cm.cmsText("glossary")%></a><%=cm.cmsTitle("generic_header-static_glossary_title")%>
+      </li>
+      <li class="">
+        <a class="menuItem" href="references.jsp" accesskey="r" title="<%=cm.cms("generic_header-static_references_title")%>">&raquo; <%=cm.cmsText("references")%></a><%=cm.cmsTitle("generic_header-static_references_title")%>
+      </li>
+      <li class="">
+        <a class="menuItem" id="digir_url_link" href="digir.jsp" title="<%=cm.cms("generic_header-static_digir_title")%>">&raquo; <%=cm.cmsText("generic_header-static_digir")%></a><%=cm.cmsTitle("generic_header-static_digir_title")%>
+      </li>
+      <li class="">
+        <a class="menuItem" href="related-reports.jsp" accesskey="p" title="<%=cm.cms("generic_header-static_reports_title")%>">&raquo; <%=cm.cmsText("related_reports")%></a><%=cm.cmsTitle("generic_header-static_reports_title")%>
       </li>
     </ul>
   </dd>
@@ -71,13 +62,13 @@
         <a class="menuItem" title="<%=cm.cms("introduction_to_eunis")%>" href="introduction.jsp">&raquo; <%=cm.cmsText( "introduction" )%></a><%=cm.cmsTitle("introduction")%>
       </li>
       <li class="">
-        <a class="menuItem" title="<%=cm.cms("about_eunis_database")%>" href="about.jsp">&raquo; <%=cm.cmsText( "generic_about_title" )%></a><%=cm.cmsTitle("about_eunis_database")%>
+        <a class="menuItem" title="<%=cm.cms("about_eunis_database")%>" href="about.jsp" accesskey="b">&raquo; <%=cm.cmsText( "generic_about_title" )%></a><%=cm.cmsTitle("about_eunis_database")%>
       </li>
       <li class="">
         <a class="menuItem" title="<%=cm.cms("generic_index_04_title")%>" href="howto.jsp">&raquo; <%=cm.cmsText( "generic_index_04" )%></a><%=cm.cmsTitle("generic_index_04_title")%>
       </li>
       <li class="">
-        <a class="menuItem" title="<%=cm.cms("web_site_map")%>" href="eunis-map.jsp">&raquo; <%=cm.cmsText( "web_site_map" )%></a><%=cm.cmsTitle("web_site_map")%>
+        <a class="menuItem" title="<%=cm.cms("web_site_map")%>" href="eunis-map.jsp" accesskey="3">&raquo; <%=cm.cmsText( "web_site_map" )%></a><%=cm.cmsTitle("web_site_map")%>
       </li>
       <li class="">
         <a class="menuItem" title="<%=cm.cms("generic_index_tutorials_title")%>" href="tutorials.jsp">&raquo; <%=cm.cmsText( "index_tutorials" )%></a><%=cm.cmsTitle("generic_index_tutorials_title")%>
@@ -116,13 +107,6 @@
         <a class="menuItem" title="<%=cm.cms("generic_index_09_title")%>" href="services.jsp">&raquo; <%=cm.cmsText( "services" )%></a><%=cm.cmsTitle("generic_index_09_title")%>
         <%=cm.cmsText( "generic_index_07" )%>
       </li>
-<!--
-      <li>
-        <a class="menuItem" title="<%=cm.cms("user_preferences")%>" href="preferences.jsp">&raquo; <%=cm.cmsText("user_preferences")%></a><%=cm.cmsTitle("user_preferences")%>
-        <br />
-        <%=cm.cmsText("generic_index_07")%>
-      </li>
--->      
     </ul>
   </dd>
 </dl>

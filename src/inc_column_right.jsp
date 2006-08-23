@@ -6,7 +6,14 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   WebContentManagement cm = SessionManager.getWebContent();
+  boolean showImg = Utilities.checkedStringToBoolean( request.getParameter( "showImg" ), false );
+
+  if( showImg )
+  {
 %>
 <div class="thumbnail-right">
   <img height="350" width="216" title="" alt="<%=cm.cms("index_photo_alt")%>" src="images/intros/<%=Utilities.getIntroImage( application )%>" />
 </div>
+<%
+  }
+%>

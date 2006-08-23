@@ -37,7 +37,7 @@
     </title>
     <%
       TaxonomicBrowser tree = new TaxonomicBrowser();
-      int level = Utilities.checkedStringToInt(request.getParameter("generic_index_07"), 2);
+      int level = Utilities.checkedStringToInt(request.getParameter("level"), 2);
       // Request parameters
       String idTaxonomy, idTaxExpanded;
       idTaxonomy=treeBeantax.getIdTaxonomy();
@@ -191,7 +191,7 @@
                               <%=cm.cmsText("expand_up_to")%>:
                              <label for="select1" class="noshow"><%=cm.cms("depth")%></label>
                              <select id="select1" title="<%=cm.cms("depth")%>" name="depth" onchange="MM_jumpMenu('parent',this,0)">
-                                <option value="species-taxonomic-browser.jsp" <%=(request.getParameter("generic_index_07")==null)?"selected=\"selected\"":""%> >
+                                <option value="species-taxonomic-browser.jsp" <%=(request.getParameter("level")==null)?"selected=\"selected\"":""%> >
                                   <%=cm.cms("please_select_a_level")%>
                                 </option>
                                 <%
@@ -199,8 +199,8 @@
                                   for (int ii=2;ii<=mx;ii++)
                                   {
                                 %>
-                                  <option value="species-taxonomic-browser.jsp?level=<%=ii%>&amp;idTaxonomy=<%=idTaxonomy%>" <%=(request.getParameter("generic_index_07")!=null&&request.getParameter("generic_index_07").equals((new Integer(ii)).toString())) ? "selected=\"selected\"" : ""%>>
-                                    <%=cm.cms("generic_index_07")%> <%=ii%>
+                                  <option value="species-taxonomic-browser.jsp?level=<%=ii%>&amp;idTaxonomy=<%=idTaxonomy%>" <%=(request.getParameter("level")!=null&&request.getParameter("level").equals((new Integer(ii)).toString())) ? "selected=\"selected\"" : ""%>>
+                                    <%=cm.cms("level")%> <%=ii%>
                                   </option>
                                 <%
                                   }
@@ -346,7 +346,7 @@
             <%=cm.br()%>
             <%=cm.cmsMsg("please_select_a_level")%>
             <%=cm.br()%>
-            <%=cm.cmsMsg("generic_index_07")%>
+            <%=cm.cmsMsg("level")%>
             <%=cm.br()%>
             <%=cm.cmsMsg("list_species")%>
             <%=cm.br()%>

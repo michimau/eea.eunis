@@ -24,7 +24,7 @@
     String habCode2000, habID;
     habCode2000 = treeBean.getHabCode2000();
     habID = treeBean.getHabID();
-    int level = (null == request.getParameter("generic_index_07")) ? 2 : Integer.parseInt(request.getParameter("generic_index_07"));
+    int level = (null == request.getParameter("level")) ? 2 : Integer.parseInt(request.getParameter("level"));
   %>
   <link rel="StyleSheet" href="css/tree.css" type="text/css" />
   <script language="JavaScript" type="text/javascript" src="script/tree.js"></script>
@@ -126,21 +126,21 @@
                   <form name="setings" action="habitats-annex1-browser.jsp" method="post">
                     <label for="depth" class="noshow"><%=cm.cms("expand_up_to")%>:</label>
                     <select title="<%=cm.cms("expand_up_to")%>" name="depth" id="depth" onchange="MM_jumpMenu('parent',this,0)">
-                      <option value="habitats-annex1-browser.jsp" <%=(request.getParameter("generic_index_07")==null ? "selected=\"selected\"" : "")%>>
+                      <option value="habitats-annex1-browser.jsp" <%=(request.getParameter("level")==null ? "selected=\"selected\"" : "")%>>
                         <%=cm.cms("please_select_a_level")%>
                       </option>
                       <%
                       // Display the levels
                       for (int ii = 2; ii <= mx; ii++) {
                       %>
-                        <option value="habitats-annex1-browser.jsp?level=<%=ii%>&amp;habCode2000=<%=habCode2000%>" <%=(request.getParameter("generic_index_07") != null && request.getParameter("generic_index_07").equals((new Integer(ii)).toString())) ? "selected=\"selected\"" : ""%>><%=cm.cms("generic_index_07")%>&nbsp;<%=ii%></option>
+                        <option value="habitats-annex1-browser.jsp?level=<%=ii%>&amp;habCode2000=<%=habCode2000%>" <%=(request.getParameter("level") != null && request.getParameter("level").equals((new Integer(ii)).toString())) ? "selected=\"selected\"" : ""%>><%=cm.cms("level")%>&nbsp;<%=ii%></option>
                       <%
                       }
                       %>
                     </select>
                     <%=cm.cmsLabel("expand_up_to")%>
                     <%=cm.cmsInput("please_select_a_level")%>
-                    <%=cm.cmsInput("generic_index_07")%>
+                    <%=cm.cmsInput("level")%>
                   </form>
                   <%
                     }

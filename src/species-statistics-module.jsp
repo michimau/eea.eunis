@@ -352,7 +352,7 @@
                    } else {
                %>
                    <br />
-                   <span style="color:red"><%=cm.cmsText("no_data_country")%> <%=countryName%> <%=cm.cmsText("generic_index_07")%>!</span>
+                   <span style="color:red"><%=cm.cmsText("no_data_country")%> <%=countryName%>!</span>
                    <br />
                <%
                        }

@@ -24,7 +24,7 @@
   String insert = request.getParameter("insert");
   String delete = request.getParameter("delete");
   String deleteall = request.getParameter("deleteall");
-  String headline = request.getParameter("generic_index_07");
+  String headline = request.getParameter("headline");
   String start_date = request.getParameter("start_date");
   String end_date = request.getParameter("end_date");
   /*
@@ -37,6 +37,9 @@
 
   System.out.println("==============================================");
   */
+  try
+  {
+
   String SQL_DRV = application.getInitParameter("JDBC_DRV");
   String SQL_URL = application.getInitParameter("JDBC_URL");
   String SQL_USR = application.getInitParameter("JDBC_USR");
@@ -64,24 +67,17 @@
       String sContent = "insert into eunis_headlines(content,start_date,end_date) values('" + headline + "','" + start_date + "','" + end_date + "')";
       //System.out.println("sContent = " + sContent);
       sqlc.ExecuteDirectSQL(sContent);
-      %>
-      <script language="JavaScript" type="text/javascript">
-      <!--
-        alert('<%=cm.cms( "headline_updated" )%>');
-      //-->
-      </script>
-      <%
       String URL = "headline.jsp";
       response.sendRedirect(URL);
       return;
     }
 
-    if(null != delete && delete.equalsIgnoreCase("delete")) {
+    if(null != delete && delete.equalsIgnoreCase("delete"))
+    {
       String sContent = "delete from eunis_headlines where content='" + headline + "' and start_date='" + start_date + "' and end_date='" + end_date + "'";
       //System.out.println("sContent = " + sContent);
       sqlc.ExecuteDirectSQL(sContent);
-
-      %>
+%>
       <script language="JavaScript" type="text/javascript">
       <!--
         alert('<%=cm.cms("headline_deleted")%>');
@@ -112,6 +108,8 @@
       return;
     }
   }
+        }
+        catch( Exception e ) {e.printStackTrace( ); }
   boolean authorised = SessionManager.isAuthenticated() && SessionManager.isContent_management_RIGHT();
 %>
     <title>
@@ -172,11 +170,11 @@
                 </h1>
                 <br />
                 <form method="post" name="webcontent" action="headline.jsp">
-                  <label for="generic_index_07">
+                  <label for="headline">
                     <%=cm.cms("current_headline_label")%>:
                   </label>
                   <br />
-                  <textarea rows="10" cols="80" name="generic_index_07" id="generic_index_07"><%=headline%></textarea>
+                  <textarea rows="10" cols="80" name="headline" id="headline"><%=headline%></textarea>
                   <%=cm.cmsLabel("current_headline_label")%>
                   <br />
                   <br />
@@ -209,7 +207,6 @@
           <%
             }
           %>
-                <%=cm.cmsMsg("generic_index_07")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("headline_updated")%>
                 <%=cm.br()%>

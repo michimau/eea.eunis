@@ -171,9 +171,8 @@
               <div class="documentContent" id="region-content">
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value=""/>
+                  <jsp:param name="location" value="home"/>
                 </jsp:include>
-                <%=cm.cmsText("generic_index_07")%>
                 <h1>
                   <%=cm.cmsText( "generic_index_06" )%>
                 </h1>

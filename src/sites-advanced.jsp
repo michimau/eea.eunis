@@ -355,8 +355,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
               <h1><%=cm.cmsText("sites_advanced_02")%></h1>
               <%=cm.cmsText("sites_advanced_03")%>
               <br />
-              <%=cm.cmsText("generic_index_07")%>
-              <br />
               <table summary="layout" border="0">
                 <tr><td id="status"><%=cm.cmsText("specify_the_search_criteria")%></td></tr>
               </table>

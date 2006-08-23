@@ -104,8 +104,7 @@
   }
 %>
       <li>
-        <a class="menuItem" title="<%=cm.cms("generic_index_09_title")%>" href="services.jsp">&raquo; <%=cm.cmsText( "services" )%></a><%=cm.cmsTitle("generic_index_09_title")%>
-        <%=cm.cmsText( "generic_index_07" )%>
+        <a class="menuItem" title="<%=cm.cms("generic_index_09_title")%>" href="services.jsp">&raquo; <%=cm.cmsText( "services" )%></a><%=cm.cmsTitle("generic_index_09_title")%>        
       </li>
     </ul>
   </dd>

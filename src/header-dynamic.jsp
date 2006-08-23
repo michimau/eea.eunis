@@ -46,8 +46,8 @@ Input parameters  on REQUEST:
   // Get the backtrail from string (order of objects is preserved).
   Vector backtrailObjects = BacktrailUtil.parseBacktrailString( dynHeaderLocation, cm );
 %>
-<div id="portal-breadcrumbs">
-  <div style="width: 100%; padding: 0px; margin: 0px; display:table-cell;">
+<div style="width: 100%; padding: 0px; margin: 0px;">
+  <div id="portal-breadcrumbs" style="display:table-cell;">
     <%=cm.cmsText( "you_are_here" )%>
 <%
   for (int i = 0; i < backtrailObjects.size(); i++)
@@ -70,7 +70,7 @@ Input parameters  on REQUEST:
   if (null != dynHeaderPrintLink || null != dynHeaderDownloadLink || null != dynHeaderHelpLink)
   {
 %>
-  <div style="width: 100%; text-align:right;">
+  <div style="margin: 0px; padding: 0px; float:right;">
 <%
     if (null != dynHeaderPrintLink)
     {

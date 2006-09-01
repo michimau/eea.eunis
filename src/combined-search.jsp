@@ -336,7 +336,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
 %>
 <body>
     <div id="visual-portal-wrapper">
-      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
+      <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_SERVER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
       <div id="portal-columns">
         <!-- start of the main and left columns -->
@@ -509,7 +509,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                         <div class="visualClear"><!-- --></div>
                       </div>
                       <!-- end column wrapper -->
-                      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
+                      <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_SERVER" ) )%>
                     </div>
                   </body>
                 </html>
@@ -1481,7 +1481,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
         <div class="visualClear"><!-- --></div>
       </div>
       <!-- end column wrapper -->
-      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
+      <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_SERVER" ) )%>
     </div>
   </body>
 </html>

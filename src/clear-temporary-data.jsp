@@ -29,7 +29,7 @@
   </head>
   <body>
     <div id="visual-portal-wrapper">
-      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
+      <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_SERVER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
       <div id="portal-columns">
         <!-- start of the main and left columns -->
@@ -59,108 +59,121 @@
                 <jsp:include page="header-dynamic.jsp">
                   <jsp:param name="location" value="home#index.jsp,services#services.jsp,clear_temporary_data_btn"/>
                 </jsp:include>
-          <%
-              // Check if user has Admin right
-              if(!SessionManager.isAdmin())
-              {
-          %>
-              <%=cm.cmsText("generic_clear-temporary-data_01")%>
-              <br />
-              <%=cm.cmsMsg("clear_temporary_data_btn")%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="clear-temporary-data.jsp"/>
-                </jsp:include>
-          <%
-              return;
-            }
-          %>
-            <%=cm.cmsText("generic_clear-temporary-data_02")%>
-            <br />
-            <br />
-            <form name="clearlog" method="post" action="clear-temporary-data.jsp">
-              <input type="submit" value="<%=cm.cms("clear_temporary_data_btn")%>" title="<%=cm.cms("clear_temporary_data_btn")%>" id="submit" name="submit" class="searchButton" />
-              <%=cm.cmsInput("clear_temporary_data_btn")%>
-            </form>
-          <%
-            String SQL_DRV = application.getInitParameter("JDBC_DRV");
-            String SQL_URL = application.getInitParameter("JDBC_URL");
-            String SQL_USR = application.getInitParameter("JDBC_USR");
-            String SQL_PWD = application.getInitParameter("JDBC_PWD");
-            // If some of them is null, the wanted database operation isn't made
+<%
+  // Check if user has Admin right
+  if(!SessionManager.isAdmin())
+  {
+%>
+                <h1>
+                  <%=cm.cmsText( "clear_temporary_data_btn" )%>
+                </h1>
+                <%=cm.cmsText("generic_clear-temporary-data_01")%>
+                <br />
+                <%=cm.cmsMsg("clear_temporary_data_btn")%>
+<%
+  }
+  else
+  {
+%>
+                <%=cm.cmsText("generic_clear-temporary-data_02")%>
+                <br />
+                <br />
+                <form name="clearlog" method="post" action="clear-temporary-data.jsp">
+                  <input type="submit" value="<%=cm.cms("clear_temporary_data_btn")%>" title="<%=cm.cms("clear_temporary_data_btn")%>" id="submit" name="submit" class="searchButton" />
+                  <%=cm.cmsInput("clear_temporary_data_btn")%>
+                </form>
+<%
+    String SQL_DRV = application.getInitParameter("JDBC_DRV");
+    String SQL_URL = application.getInitParameter("JDBC_URL");
+    String SQL_USR = application.getInitParameter("JDBC_USR");
+    String SQL_PWD = application.getInitParameter("JDBC_PWD");
+    // If some of them is null, the wanted database operation isn't made
 
-            if(request.getParameter("submit") != null) {
-              if(request.getParameter("submit").equalsIgnoreCase(cm.cms("clear_temporary_data_btn"))) {
-                boolean result = false;
-                try {
-                  // Delete all session data
-                  result = ro.finsiel.eunis.search.Utilities.ClearAllSessionsData(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-                  if(!result) {
-                    %>
-                    <%=cm.cmsText("generic_clear-temporary-data_03")%>
-                    <br />
-                    <%
-                    } else {
-                    %>
-                    <%=cm.cmsText("generic_clear-temporary-data_04")%>
-                    <br />
-                    <%
-                  }
-                }
-                catch(Exception e) {
-                  e.printStackTrace();
-                  return;
-                }
-              }
-            }
+    if(request.getParameter("submit") != null)
+    {
+      if(request.getParameter("submit").equalsIgnoreCase(cm.cms("clear_temporary_data_btn")))
+      {
+        boolean result;
+        try
+        {
+          // Delete all session data
+          result = ro.finsiel.eunis.search.Utilities.ClearAllSessionsData(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+          if(!result)
+          {
+%>
+                <%=cm.cmsText("generic_clear-temporary-data_03")%>
+                <br />
+<%
+          }
+          else
+          {
+%>
+                <%=cm.cmsText("generic_clear-temporary-data_04")%>
+                <br />
+<%
+          }
+        }
+        catch(Exception e)
+        {
+          e.printStackTrace();
+          return;
+        }
+      }
+    }
+    Connection con;
+    PreparedStatement ps;
+    ResultSet rs;
 
-            Connection con = null;
-            PreparedStatement ps = null;
-            ResultSet rs = null;
+    try
+    {
+      Class.forName(SQL_DRV);
+      con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            try {
-              Class.forName(SQL_DRV);
-              con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+      String SQL;
+      // Find total number of rows containing temporary data detected in database
+      SQL = "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_RESULTS ";
+      SQL += " UNION ";
+      SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_RESULTS ";
+      SQL += " UNION ";
+      SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_TEMP ";
+      SQL += " UNION ";
+      SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_CRITERIA ";
+      SQL += " UNION ";
+      SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP ";
+      SQL += " UNION ";
+      SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_RESULTS ";
+      SQL += " UNION ";
+      SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_RESULTS ";
+      SQL += " UNION ";
+      SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_TEMP ";
+      SQL += " UNION ";
+      SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_CRITERIA ";
+      SQL += " UNION ";
+      SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_CRITERIA_TEMP ";
 
-              String SQL = "";
-              // Find total number of rows containing temporary data detected in database
-              SQL = "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_RESULTS ";
-              SQL += " UNION ";
-              SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_RESULTS ";
-              SQL += " UNION ";
-              SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_TEMP ";
-              SQL += " UNION ";
-              SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_CRITERIA ";
-              SQL += " UNION ";
-              SQL += "SELECT COUNT(*) FROM EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP ";
-              SQL += " UNION ";
-              SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_RESULTS ";
-              SQL += " UNION ";
-              SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_RESULTS ";
-              SQL += " UNION ";
-              SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_TEMP ";
-              SQL += " UNION ";
-              SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_CRITERIA ";
-              SQL += " UNION ";
-              SQL += "SELECT COUNT(*) FROM EUNIS_COMBINED_SEARCH_CRITERIA_TEMP ";
-
-              ps = con.prepareStatement(SQL);
-              rs = ps.executeQuery();
-              if(rs.next()) {
-                datacount = rs.getString(1);
-              }
-              rs.close();
-              ps.close();
-              con.close();
-            }
-            catch(Exception e) {
-              e.printStackTrace();
-              return;
-            }
-          %>
+      ps = con.prepareStatement(SQL);
+      rs = ps.executeQuery();
+      if(rs.next())
+      {
+        datacount = rs.getString(1);
+      }
+      rs.close();
+      ps.close();
+      con.close();
+    }
+    catch(Exception e)
+    {
+      e.printStackTrace();
+      return;
+    }
+%>
                 <br />
                 <%=cm.cmsText("generic_clear-temporary-data_05")%>&nbsp;<strong><%=datacount%></strong>
                 <br />
                 <%=cm.cmsMsg("clear_temporary_data_btn")%>
+<%
+  }
+%>
                 <jsp:include page="footer.jsp">
                   <jsp:param name="page_name" value="clear-temporary-data.jsp"/>
                 </jsp:include>
@@ -188,7 +201,7 @@
         <div class="visualClear"><!-- --></div>
       </div>
       <!-- end column wrapper -->
-      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
+      <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_SERVER" ) )%>
     </div>
   </body>
 </html>

@@ -54,53 +54,67 @@ public class ScientificNamePersist extends PersistentObject {
   }
 
   /** Getter for a database field */
-  public String getTaxonomicNameOrder() {
+  public String getTaxonomicNameOrder()
+  {
+    String ret = "";
     String level = this.getTaxonomyLevel();
-
-    if(level != null && level.equalsIgnoreCase("order_column"))
-       return this.getTaxonomyName();
+    if( level != null && level.equalsIgnoreCase( "order_column" ) )
+    {
+       ret = this.getTaxonomyName();
+    }
     else
     {
-      String result = "";
       String str = this.getTaxonomyTree();
-
-      StringTokenizer st = new StringTokenizer(str,",");
+      if( str != null )
+      {
+        StringTokenizer st = new StringTokenizer( str, "," );
         while(st.hasMoreTokens())
         {
-          StringTokenizer sts = new StringTokenizer(st.nextToken(),"*");
+          StringTokenizer sts = new StringTokenizer( st.nextToken(), "*" );
           String classification_id = sts.nextToken();
           String classification_level = sts.nextToken();
           String classification_name = sts.nextToken();
-          if(classification_level != null && classification_level.equalsIgnoreCase("order_column")) {result = classification_name;break;}
+          if( classification_level != null && classification_level.equalsIgnoreCase( "order_column" ) )
+          {
+            ret = classification_name;
+            break;
+          }
         }
-
-      return result;
+      }
     }
+    return ret;
   }
 
   /** Getter for a database field */
-  public String getTaxonomicNameFamily() {
+  public String getTaxonomicNameFamily()
+  {
+    String ret = "";
     String level = this.getTaxonomyLevel();
-
-    if(level != null && level.equalsIgnoreCase("family"))
-       return this.getTaxonomyName();
+    if( level != null && level.equalsIgnoreCase( "family" ) )
+    {
+       ret = this.getTaxonomyName();
+    }
     else
     {
-      String result = "";
       String str = this.getTaxonomyTree();
-
-      StringTokenizer st = new StringTokenizer(str,",");
+      if( str != null )
+      {
+        StringTokenizer st = new StringTokenizer(str, "," );
         while(st.hasMoreTokens())
         {
           StringTokenizer sts = new StringTokenizer(st.nextToken(),"*");
           String classification_id = sts.nextToken();
           String classification_level = sts.nextToken();
           String classification_name = sts.nextToken();
-          if(classification_level != null && classification_level.equalsIgnoreCase("family")) {result = classification_name;break;}
+          if( classification_level != null && classification_level.equalsIgnoreCase( "family" ) )
+          {
+            ret = classification_name;
+            break;
+          }
         }
-
-      return result;
+      }
     }
+    return ret;
   }
 
   /** Getter for a database field */

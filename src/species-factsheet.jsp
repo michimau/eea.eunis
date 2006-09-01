@@ -62,7 +62,7 @@
   <body>
     <div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>
     <div id="visual-portal-wrapper">
-      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getHeader?site=eunis" )%>
+      <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_SERVER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
       <div id="portal-columns">
         <!-- start of the main and left columns -->
@@ -359,7 +359,7 @@
         <div class="visualClear"><!-- --></div>
       </div>
       <!-- end column wrapper -->
-      <%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getFooter?site=eunis" )%>
+      <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_SERVER" ) )%>
     </div>
     <script language="JavaScript" type="text/javascript">
     <!--

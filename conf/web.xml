@@ -45,6 +45,13 @@
     <description>Static part of the pages title</description>
   </context-param>
 
+  <!-- Templates server -->
+  <context-param>
+    <param-name>TEMPLATES_SERVER</param-name>
+    <param-value>http://webservices.eea.europa.eu/templates/getHeader?site=eunis</param-value>
+    <description>Location of the EEA template server</description>
+  </context-param>
+
   <!-- Feedback e-mail address -->
   <context-param>
     <param-name>EMAIL_FEEDBACK</param-name>

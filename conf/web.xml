@@ -47,8 +47,13 @@
 
   <!-- Templates server -->
   <context-param>
-    <param-name>TEMPLATES_SERVER</param-name>
+    <param-name>TEMPLATES_HEADER</param-name>
     <param-value>http://webservices.eea.europa.eu/templates/getHeader?site=eunis</param-value>
+    <description>Location of the EEA template server</description>
+  </context-param>
+  <context-param>
+    <param-name>TEMPLATES_FOOTER</param-name>
+    <param-value>http://webservices.eea.europa.eu/templates/getFooter?site=eunis</param-value>
     <description>Location of the EEA template server</description>
   </context-param>
 

@@ -23,7 +23,7 @@
   </head>
   <body>
     <div id="visual-portal-wrapper">
-      <%=Utilities.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_SERVER" ) )%>
+      <%=Utilities.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
       <div id="portal-columns">
         <!-- start of the main and left columns -->
@@ -96,7 +96,7 @@
         <div class="visualClear"><!-- --></div>
       </div>
       <!-- end column wrapper -->
-      <%=Utilities.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_SERVER" ) )%>
+      <%=Utilities.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_FOOTER" ) )%>
     </div>
   </body>
 </html>

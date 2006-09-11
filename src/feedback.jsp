@@ -7,38 +7,6 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
   request.setCharacterEncoding( "UTF-8");
-%>
-<%@ page import="java.util.Date,
-                 java.sql.Connection,
-                 java.sql.DriverManager,
-                 java.sql.Statement,
-                 java.sql.ResultSet,
-                 ro.finsiel.eunis.WebContentManagement, ro.finsiel.eunis.search.Utilities" %>
-<jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-<head>
-  <jsp:include page="header-page.jsp" />
-  <%
-    WebContentManagement cm = SessionManager.getWebContent();
-  %>
-  <title>
-    <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("feedback")%>
-  </title>
-  <script language="JavaScript" type="text/javascript">
-    <!--
-  function testform() {
-    if (document.feed.comment.value=="" || document.feed.comment.value=="Enter your comments here... ") {
-      alert('<%=cm.cms("generic_feedback_27")%>');
-      return false;
-    }
-    return true;
-    }
-  //-->
-  </script>
-</head>
-<%
   // Request parameters
   // operation - if operation is feedback then save the request form data to database.
   String operation = Utilities.formatString( request.getParameter( "operation" ) );
@@ -56,13 +24,13 @@
   if ( operation.equalsIgnoreCase( "feedback" ) )
   {
     // Parameter request
-    String comment = request.getParameter( "comment" );
-    String name = request.getParameter( "name" );
-    String email = request.getParameter( "email" );
-    String organization = request.getParameter( "organization" );
+    String comment = Utilities.formatString( request.getParameter( "comment" ) );
+    String name = Utilities.formatString( request.getParameter( "name" ) );
+    String email = Utilities.formatString( request.getParameter( "email" ) );
+    String organization = Utilities.formatString( request.getParameter( "organization" ) );
     String address = "";
-    String telephone = request.getParameter( "telephone" );
-    String fax = request.getParameter( "fax" );
+    String telephone = Utilities.formatString( request.getParameter( "telephone" ) );
+    String fax = Utilities.formatString( request.getParameter( "fax" ) );
 
     try
     {
@@ -172,6 +140,36 @@
   }
 
 %>
+<%@ page import="java.util.Date,
+                 java.sql.Connection,
+                 java.sql.DriverManager,
+                 java.sql.Statement,
+                 java.sql.ResultSet,
+                 ro.finsiel.eunis.WebContentManagement, ro.finsiel.eunis.search.Utilities" %>
+<jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
+  <head>
+    <jsp:include page="header-page.jsp" />
+    <%
+      WebContentManagement cm = SessionManager.getWebContent();
+    %>
+    <title>
+      <%=application.getInitParameter("PAGE_TITLE")%>
+      <%=cm.cms("feedback")%>
+    </title>
+    <script language="JavaScript" type="text/javascript">
+      <!--
+    function testform() {
+      if (document.feed.comment.value=="" || document.feed.comment.value=="Enter your comments here... ") {
+        alert('<%=cm.cms("generic_feedback_27")%>');
+        return false;
+      }
+      return true;
+      }
+    //-->
+    </script>
+  </head>
   <body>
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>

@@ -50,19 +50,19 @@
   <table summary="<%=cm.cms("human_activities")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("activity")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("inside_outside")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("intensity")%>
         </th>
-        <th style="text-align : right;">
+        <th style="text-align : right; text-transform: capitalize;">
           <%=cm.cmsText("cover_percent")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("influence")%>
         </th>
       </tr>
@@ -149,22 +149,22 @@
   <table summary="<%=cm.cms("human_activities")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("sites_factsheet_other_activitycode")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("description")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("location")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("intensity")%>
         </th>
-        <th style="text-align : right;">
+        <th style="text-transform: capitalize; text-align: right;">
           <%=cm.cms("cover_percent")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cms("influence")%>
         </th>
       </tr>
@@ -264,16 +264,16 @@
   <table summary="<%=cm.cms("reference_to_maps")%>" class="datatable" width="90%">
     <thead>
       <tr>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("number")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("scale")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("projection")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("details")%>
         </th>
       </tr>
@@ -328,22 +328,22 @@
   <table summary="<%=cm.cms("reference_to_photos")%>" class="datatable" width="90%">
     <thead>
       <tr>
-        <th>
-            <%=cm.cmsText("type")%>
+        <th style="text-transform: capitalize; text-align: left;">
+          <%=cm.cmsText("type")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("number")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("location")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("description")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("date")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("author")%>
         </th>
       </tr>

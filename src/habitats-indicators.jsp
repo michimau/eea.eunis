@@ -16,6 +16,7 @@
     <jsp:include page="header-page.jsp" />
 <%
   WebContentManagement cm = SessionManager.getWebContent();
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>&nbsp;<%=cm.cms("habitats_indicators")%>
@@ -25,7 +26,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -51,7 +52,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,habitats#habitats.jsp,indicators" />
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitats#habitats.jsp,indicators" />
                   <jsp:param name="mapLink" value="show" />
                 </jsp:include>
                 <h1>
@@ -61,9 +62,6 @@
                 <br />
                 <%=cm.cmsMsg("habitats_indicators_11")%>
                 <%=cm.br()%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="species-indicators.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -72,7 +70,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="habitats-indicators.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

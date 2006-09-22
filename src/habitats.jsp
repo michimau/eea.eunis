@@ -18,6 +18,7 @@
   <jsp:include page="header-page.jsp" />
   <%
     WebContentManagement cm = SessionManager.getWebContent();
+    String eeaHome = application.getInitParameter( "EEA_HOME" );
     int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
     String []tabs = { cm.cms("easy_search"), cm.cms("advanced_search"), cm.cms("links_and_downloads"), cm.cms("help") };
   %>
@@ -30,7 +31,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -56,7 +57,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,habitat_types" />
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types" />
                 </jsp:include>
                 <div id="loading">
                 <%=cm.cms("loading_data")%>
@@ -406,9 +407,6 @@
                 <%=cm.br()%>
                 <%=cm.cmsMsg("loading_data")%>
                 <%=cm.br()%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="habitats.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -417,7 +415,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="habitats.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

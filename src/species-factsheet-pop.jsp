@@ -32,32 +32,32 @@
   <table summary="<%=cm.cms("species_factsheet-pop_12_Sum")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("country")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("biogeographic_region")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize;">
           <span style="color:#006CAD">
             <%=cm.cmsText("min_max")%>
           </span>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: right;">
           <%=cm.cmsText("date")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("quality")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("reference")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>

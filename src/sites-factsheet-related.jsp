@@ -52,19 +52,19 @@
   <table summary="<%=cm.cms("sites_factsheet_123")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("id_site")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("scientific_name")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("within_databases")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("type")%>
         </th>
-        <th style="text-align : right">
+        <th style="text-transform: capitalize; text-align: right;">
           <%=cm.cmsText("overlap_percent")%>
         </th>
       </tr>
@@ -151,13 +151,13 @@
   <table summary="<%=cm.cms("sites_factsheet_related_natura2000")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("sites_factsheet_related_relationtype")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("site_code")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("site_name")%>
         </th>
       </tr>
@@ -203,16 +203,16 @@
   <table summary="<%=cm.cms("sites_factsheet_related_corinesites")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("site_code")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("site_name")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("sites_factsheet_related_overlap")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("sites_factsheet_related_overlapp")%>
         </th>
       </tr>

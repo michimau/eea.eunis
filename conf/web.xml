@@ -48,7 +48,7 @@
   <!-- Templates server -->
   <context-param>
     <param-name>TEMPLATES_HEADER</param-name>
-    <param-value>http://webservices.eea.europa.eu/templates/getHeader?site=eunis</param-value>
+    <param-value>http://webservices.eea.europa.eu/templates/getHeader?site=default</param-value>
     <description>Location of the EEA template server</description>
   </context-param>
   <context-param>
@@ -203,6 +203,12 @@
     <param-name>EEA_MAP_SERVER</param-name>
     <param-value>http://map.eea.europa.eu</param-value>
     <description>Address of the EEA map server</description>
+  </context-param>
+  
+  <context-param>
+    <param-name>EEA_HOME</param-name>
+    <param-value>http://www.eea.europa.eu/</param-value>
+    <description>Address of the EEA server</description>
   </context-param>
 
   <context-param>

@@ -163,19 +163,19 @@
   <table summary="<%=cm.cms("national_threat_status")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th style="width : 220px;">
+        <th style="width : 220px; text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("country")%>
         </th>
-        <th style="width : 120px;">
+        <th style="width : 120px; text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("status")%>
         </th>
-        <th style="width : 100px;">
+        <th style="width : 100px; text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("national_threat_code")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           Population concerned
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("reference")%>
         </th>
       </tr>
@@ -240,19 +240,19 @@
   <table summary="<%=cm.cms("international_threat_status")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("area")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("species_factsheet-conservation_09")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("reference")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>

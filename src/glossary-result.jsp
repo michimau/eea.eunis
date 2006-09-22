@@ -35,7 +35,8 @@
   List results = Utilities.findGlossaryTerms(searchString, operand, useTerms, useDefs, module);
 
   WebContentManagement cm = SessionManager.getWebContent();
-  String location = "home#index.jsp,glossary#glossary.jsp,results";
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String location = "eea#" + eeaHome + ",home#index.jsp,glossary#glossary.jsp,results";
   if (results.isEmpty())
   {
 %>
@@ -59,7 +60,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -261,9 +262,6 @@
                 <%=cm.cmsMsg("generic_glossary-result_05")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("glossary_term_details")%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="glossary-result.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -272,7 +270,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="glossary-result.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

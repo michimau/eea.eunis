@@ -343,11 +343,11 @@ if(kingdomname.equalsIgnoreCase("Animals"))
   <table summary="<%=cm.cms("species_factsheet_10_Sum")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th width="40%" style="text-align:left;">
+        <th width="40%" style="text-align:left;text-transform: capitalize;">
           <%=cm.cmsText("scientific_name")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
-        <th width="60%" style="text-align:left;">
+        <th width="60%" style="text-align:left;text-transform: capitalize;">
           <%=cm.cmsText("author")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
@@ -403,11 +403,11 @@ if(kingdomname.equalsIgnoreCase("Animals"))
   <table summary="<%=cm.cms("species_factsheet_11_Sum")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th width="40%">
+        <th width="40%" style="text-transform: capitalize;">
           <%=cm.cmsText("scientific_name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="60%">
+        <th width="60%" style="text-transform: capitalize;">
           <%=cm.cmsText("source")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>

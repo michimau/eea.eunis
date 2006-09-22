@@ -21,9 +21,10 @@
     <jsp:include page="header-page.jsp" />
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
     <script language="JavaScript" src="script/species-habitats-save-criteria.js" type="text/javascript"></script>
-    <%
-        WebContentManagement cm = SessionManager.getWebContent();
-    %>
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
+%>
     <script language="JavaScript" type="text/javascript">
     <!--
      var errInvalidRegion = '<%=cm.cms("biogeographic_region_is_not_valid")%>';
@@ -101,7 +102,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -127,7 +128,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,pick_habitat_type_show_species_location" />
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types#habitats.jsp,pick_habitat_type_show_species_location" />
                   <jsp:param name="helpLink" value="habitats-help.jsp" />
                 </jsp:include>
                   <h1>
@@ -289,10 +290,6 @@
             <%=cm.br()%>
             <%=cm.cmsMsg("starts_with")%>
             <%=cm.br()%>
-
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="species-habitats.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -301,7 +298,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="species-habitats.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

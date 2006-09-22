@@ -109,10 +109,6 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
     report.setHeader( header );
     Paragraph footer = new Paragraph();
     footer.add( new Phrase( cm.cmsText( "species_factsheet-pdf_03" ), FontFactory.getFont( FontFactory.HELVETICA, 8, Font.ITALIC, new Color( 24, 40, 136 ) ) ) );
-    footer.add( new Phrase( " ", FontFactory.getFont( FontFactory.HELVETICA, 9 ) ) );
-    footer.add( new Phrase( cm.cmsText( "species_factsheet-pdf_04" ) + ": " + application.getInitParameter( "LAST_UPDATE" ),
-            FontFactory.getFont( FontFactory.HELVETICA, 8, Font.ITALIC, new Color( 24, 40, 136 ) ) ) );
-    footer.add( new Phrase( " ", FontFactory.getFont( FontFactory.HELVETICA, 9 ) ) );
     report.setFooter( footer );
     report.init( linktopdf + filename );
 

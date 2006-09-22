@@ -23,6 +23,7 @@
   SiteFactsheet factsheet = new SiteFactsheet(siteid);
   WebContentManagement cm = SessionManager.getWebContent();
   String pdfURL = "javascript:openLink('sites-factsheet-pdf.jsp?idsite=" + siteid + "')";
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
 
   String SQL_DRV = application.getInitParameter("JDBC_DRV");
   String SQL_URL = application.getInitParameter("JDBC_URL");
@@ -89,7 +90,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -119,7 +120,7 @@
   {
 %>
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,factsheet" />
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,sites#sites.jsp,factsheet" />
                   <jsp:param name="printLink" value="<%=pdfURL%>"/>
                   <jsp:param name="mapLink" value="show"/>
                 </jsp:include>
@@ -281,7 +282,7 @@
   {
 %>
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,factsheet" />
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,sites#sites.jsp,factsheet" />
                 </jsp:include>
 
                 <br />
@@ -295,9 +296,6 @@
 <%
   }
 %>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="sites-factsheet.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -306,7 +304,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="sites-factsheet.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

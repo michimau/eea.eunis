@@ -23,6 +23,7 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
   /// INPUT PARAMS: idHabitat
   String idHabitat = request.getParameter("idHabitat");
   int tab = Utilities.checkedStringToInt(request.getParameter("tab"), 0);
@@ -75,7 +76,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -105,7 +106,7 @@
   {
 %>
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,factsheet" />
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types#habitats.jsp,factsheet" />
                 </jsp:include>
                 <div style="width: 100%;">
                   <br />
@@ -120,9 +121,6 @@
                 <%=cm.br()%>
                 <%=cm.cmsMsg("factsheet_for")%>
                 <%=cm.br()%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="habitats-factsheet.jsp" />
-                </jsp:include>
 <%
   }
   else
@@ -132,7 +130,7 @@
     {
 %>
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,factsheet" />
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types#habitats.jsp,factsheet" />
                   <jsp:param name="printLink" value="<%=printLink%>" />
                 </jsp:include>
                 <img id="loading" alt="<%=cm.cms("loading_data")%>" src="images/loading.gif" />
@@ -404,9 +402,6 @@
                 <%=cm.br()%>
                 <%=cm.cmsMsg("error_expanding_node")%>
                 <%=cm.br()%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="habitats-factsheet.jsp" />
-                </jsp:include>
 <%
     }
   }
@@ -419,7 +414,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="habitats-factsheet.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

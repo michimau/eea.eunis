@@ -27,6 +27,7 @@
   String uploadDir = application.getInitParameter("TOMCAT_HOME") + "/" + application.getInitParameter("UPLOAD_DIR_FILES");
   String[] deleteFile = FormBean.getFilenames();
   String operation = FormBean.getOperation();
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
 
   // Delete the specified files from server
   if(null != operation && operation.equalsIgnoreCase("delete") && null != deleteFile)
@@ -108,7 +109,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -134,7 +135,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,related_reports"/>
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,related_reports"/>
                 </jsp:include>
               <h1>
                 <%=cm.cmsText("related_reports")%>
@@ -369,9 +370,6 @@
                 <%=cm.cmsMsg("related_reports_approval_deletefiles")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("related_reports_approval_files")%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="related-reports.jsp"/>
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -380,7 +378,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="related-reports.jsp"/>
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

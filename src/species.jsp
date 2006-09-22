@@ -21,6 +21,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
   int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
   String []tabs = { cm.cms("easy_search"), cm.cms("advanced_search"), cm.cms("statistical_data"), cm.cms("links_and_downloads"), cm.cms("help") };
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
 %>
     <script language="JavaScript" type="text/javascript">
     <!--
@@ -49,7 +50,7 @@
   <div id="visual-portal-wrapper">
     <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
     <!-- The wrapper div. It contains the three columns. -->
-    <div id="portal-columns">
+    <div id="portal-columns" class="visualColumnHideTwo">
       <!-- start of the main and left columns -->
       <div id="visual-column-wrapper">
         <!-- start of main content block -->
@@ -61,21 +62,17 @@
                 <h5 class="hiddenStructure">Document Actions</h5>
                 <ul>
                   <li>
-                    <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                          alt="Print this page"
-                          title="Print this page" /></a>
+                    <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif" alt="Print this page" title="Print this page" id="icon-print" /></a>
                   </li>
                   <li>
-                    <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                           alt="Toggle full screen mode"
-                           title="Toggle full screen mode" /></a>
+                    <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif" alt="Toggle full screen mode" title="Toggle full screen mode" id="icon-full_screen" /></a>
                   </li>
                 </ul>
               </div>
               <br clear="all" />
 <!-- MAIN CONTENT -->
               <jsp:include page="header-dynamic.jsp">
-                <jsp:param name="location" value="home#index.jsp,species"/>
+                <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,species"/>
               </jsp:include>
               <img id="loading" alt="<%=cm.cms("loading_progress")%>" title="<%=cm.cms("loading_progress")%>" src="images/loading.gif" />
               <div style="text-align : center; width : 90%;">
@@ -522,9 +519,6 @@
           <%=cm.br()%>
           <%=cm.cmsMsg("help")%>
           <%=cm.br()%>
-                <jsp:include page="footer.jsp">
-                    <jsp:param name="page_name" value="species.jsp"/>
-                </jsp:include>
                 <script language="javascript" type="text/javascript">
                 <!--
                 try
@@ -545,7 +539,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="species.jsp"/>
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

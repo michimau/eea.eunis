@@ -19,9 +19,10 @@
   <head>
   <jsp:include page="header-page.jsp" />
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
-    <%
-        WebContentManagement cm = SessionManager.getWebContent();
-    %>
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
+%>
     <script language="JavaScript" type="text/javascript">
       <!--
 
@@ -187,7 +188,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -213,7 +214,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,pick_sites_show_species_location" />
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,sites#sites.jsp,pick_sites_show_species_location" />
                 </jsp:include>
                 <h1>
                    <%=cm.cmsText("pick_sites_show_species")%>
@@ -387,11 +388,6 @@
             <%=cm.br()%>
             <%=cm.cmsMsg("starts_with")%>
             <%=cm.br()%>
-
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="species-sites.jsp" />
-                </jsp:include>
-
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -400,7 +396,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="species-sites.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

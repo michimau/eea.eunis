@@ -23,6 +23,7 @@
     <script language="JavaScript" src="script/save-criteria.js" type="text/javascript"></script>
 <%
   WebContentManagement cm = SessionManager.getWebContent();
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
 %>
 <title>
   <%=application.getInitParameter("PAGE_TITLE")%>
@@ -71,7 +72,7 @@ function openHelper(URL)
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -97,7 +98,7 @@ function openHelper(URL)
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,code_column" />
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types#habitats.jsp,code_column" />
                   <jsp:param name="helpLink" value="habitats-help.jsp" />
                 </jsp:include>
                 <form name="eunis" method="get" onsubmit="javascript: return validateForm();" action="habitats-code-result.jsp">
@@ -278,9 +279,6 @@ function openHelper(URL)
                   <%=cm.br()%>
                   <%=cm.cmsMsg("habitats_code_02")%>
                   <%=cm.br()%>
-                    <jsp:include page="footer.jsp">
-                      <jsp:param name="page_name" value="habitats-code.jsp" />
-                    </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -289,7 +287,9 @@ function openHelper(URL)
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="habitats-code.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

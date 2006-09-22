@@ -71,7 +71,8 @@
 
   String tsvLink = "javascript:openTSVDownload('reports/habitats/tsv-habitats-references.jsp?" + formBean.toURLParam(reportFields) + "')";
   WebContentManagement cm = SessionManager.getWebContent();
-  String location = "home#index.jsp,habitat_types#habitats.jsp,pick_habitat_type_show_references#habitats-references.jsp,results";
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String location = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,pick_habitat_type_show_references#habitats-references.jsp,results";
   if (results.isEmpty())
   {
     boolean fromRefine = formBean.getCriteriaSearch() != null && formBean.getCriteriaSearch().length > 0;
@@ -108,7 +109,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -572,9 +573,6 @@
                 <%=cm.br()%>
                 <%=cm.cmsMsg("search_results")%>
                 <%=cm.br()%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="habitats-references-result.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -583,7 +581,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="habitats-references-result.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

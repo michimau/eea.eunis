@@ -15,6 +15,7 @@
 <%@ page import="ro.finsiel.eunis.utilities.Accesibility"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
   String relationOpParam = request.getParameter("relationOp");
   int relationOp = Utilities.checkedStringToInt(relationOpParam, -1);
   int criteriaSelected = Utilities.checkedStringToInt(request.getParameter("criteria"), SizeSearchCriteria.CRITERIA_AREA.intValue());
@@ -138,7 +139,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -164,7 +165,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,size_area_length"/>
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,sites#sites.jsp,size_area_length"/>
                   <jsp:param name="helpLink" value="sites-help.jsp"/>
                   <jsp:param name="mapLink" value="show"/>
                 </jsp:include>
@@ -372,9 +373,6 @@
                 <%=cm.br()%>
                 <%=cm.cmsMsg("minimum_designation_year_invalid")%>
                 <%=cm.br()%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="sites-size.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -383,7 +381,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="sites-size.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

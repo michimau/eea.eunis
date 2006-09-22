@@ -113,26 +113,26 @@
   <table summary="<%=cm.cms("species_factsheet-references_09_Sum")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th width="25%">
+        <th width="25%" style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("title")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="25%">
+        <th width="25%" style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("author")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="15%">
+        <th width="15%" style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("editor")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="15%" style="text-align:right">
+        <th width="15%" style="text-transform: capitalize; text-align:right">
           <%=cm.cmsText("date")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
 <%--        <td width="10%" align="center">--%>
 <%--          <%=cm.cmsText("published")%>--%>
 <%--        </td>--%>
-        <th width="10%">
+        <th width="10%" style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("source")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>

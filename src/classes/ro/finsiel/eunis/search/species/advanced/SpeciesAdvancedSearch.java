@@ -517,7 +517,7 @@ public class SpeciesAdvancedSearch {
           speciesSQL = "SELECT DISTINCT `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`";
           speciesSQL += " FROM `CHM62EDT_REPORTS`";
           speciesSQL += " INNER JOIN `CHM62EDT_SPECIES` ON (`CHM62EDT_REPORTS`.`ID_NATURE_OBJECT` = `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`)";
-          speciesSQL += " INNER JOIN `CHM62EDT_BIOGEOREGION` ON (`CHM62EDT_REPORTS`.`ID_GEOSCOPE` = `CHM62EDT_BIOGEOREGION`.`ID_GEOSCOPE`)";
+          speciesSQL += " INNER JOIN `CHM62EDT_BIOGEOREGION` ON (`CHM62EDT_REPORTS`.`ID_GEOSCOPE_LINK` = `CHM62EDT_BIOGEOREGION`.`ID_GEOSCOPE`)";
           if (sOperand.equalsIgnoreCase("Between")) {
             sOperand = "Equal";
           }

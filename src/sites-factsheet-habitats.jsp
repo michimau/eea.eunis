@@ -74,25 +74,25 @@
   <table summary="<%=cm.cms("sites_factsheet_114")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("code_column")%>
         </th>
-        <th style="text-align : right">
+        <th style="text-align : right; text-transform: capitalize;">
           <%=cm.cmsText("english_name")%>
         </th>
-        <th style="text-align : right">
+        <th style="text-align : right; text-transform: capitalize;">
           <%=cm.cmsText("cover_percent")%>
         </th>
-        <th style="text-align : right">
+        <th style="text-align : right; text-transform: capitalize;">
           <%=cm.cmsText("representativity")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("sites_factsheet_118")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("conservation")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("global")%>
         </th>
       </tr>
@@ -253,13 +253,13 @@
   <table summary="<%=cm.cms("sites_factsheet_166")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("habitat_type_code")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("habitat_type_english_name")%>
         </th>
-        <th style="text-align : right;">
+        <th style="text-align : right; text-transform: capitalize;">
           <%=cm.cmsText("cover_percent")%>
         </th>
       </tr>
@@ -335,22 +335,22 @@
   <table summary="<%=cm.cms("ecological_information_habitats_within_site")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("habitat_type_english_name")%>
         </th>
-        <th style="text-align : right;">
+        <th style="text-align : right; text-transform: capitalize;">
           <%=cm.cmsText("sites_factsheet_habitats_cover")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("representativity")%>
         </th>
-        <th style="text-align : right;">
+        <th style="text-align : right; text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("sites_factsheet_habitats_surface")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("conservation")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("global")%>
         </th>
       </tr>
@@ -405,7 +405,7 @@
   <table summary="<%=cm.cms("habitat_type_not_eunis")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cms("habitat_type_code")%>
         </th>
       </tr>

@@ -92,9 +92,6 @@
       // IMPORTANT: THESE LINKS SHOULD BE CHANGED TO THEIR ACTUAL SERVER VALUE!!!
       Paragraph f = new Paragraph();
       f.add(new Phrase(cm.cms("source_european_topic_centre"),FontFactory.getFont(FontFactory.HELVETICA, 8, Font.ITALIC, new Color(24, 40, 136))));
-      f.add(new Phrase("                                                                                                                                     ",FontFactory.getFont(FontFactory.HELVETICA, 9)));
-      f.add(new Phrase(cm.cms("habitats_factsheet-pdf_05") + ": " + application.getInitParameter("LAST_UPDATE"),FontFactory.getFont(FontFactory.HELVETICA, 8, Font.ITALIC, new Color(24, 40, 136))));
-      f.add(new Phrase("                                                                                                                                                                                                                                                          ", FontFactory.getFont(FontFactory.HELVETICA, 9)));
       report.setFooter(f);
       report.init(linktopdf + filename);
 

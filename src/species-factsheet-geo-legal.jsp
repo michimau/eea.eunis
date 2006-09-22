@@ -122,22 +122,16 @@
     <br />
     <table summary="<%=cm.cms("species_factsheet-geo-legal_11_Sum")%>" width="640" border="0" cellspacing="0" cellpadding="0" id="legalevent" class="sortable">
       <tr>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <strong>
-            <%=cm.cmsText("country")%>
-          </strong>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; font-weight: bold; text-align: left;">
+          <%=cm.cmsText("country")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <strong>
-            <%=cm.cmsText("species_factsheet-geo-legal_06")%>
-          </strong>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; font-weight: bold; text-align: left;">
+          <%=cm.cmsText("species_factsheet-geo-legal_06")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
-          <strong>
-            <%=cm.cmsText("species_factsheet-geo-legal_07")%>
-          </strong>
+        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; font-weight: bold; text-align: left;">
+          <%=cm.cmsText("species_factsheet-geo-legal_07")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>

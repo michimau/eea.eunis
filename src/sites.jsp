@@ -14,6 +14,7 @@
                 ro.finsiel.eunis.search.AbstractSortCriteria"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
   int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
   String []tabs = { "easy_search", "advanced_search", "statistical_data", "links_and_downloads", "help" };
 %>
@@ -34,7 +35,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -60,7 +61,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,sites"/>
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,sites"/>
                   <jsp:param name="mapLink" value="show"/>
                 </jsp:include>
                 <img id="loading" alt="Loading progress" title="Loading progress" src="images/loading.gif" width="250" height="45" />
@@ -567,9 +568,6 @@
                 <%=cm.cmsMsg("sites_main_linksDesc")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("general_information_on_eunis")%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="sites.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -578,7 +576,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="sites.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

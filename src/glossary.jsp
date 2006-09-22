@@ -18,6 +18,7 @@
   <jsp:include page="header-page.jsp" />
 <%
   WebContentManagement cm = SessionManager.getWebContent();
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
 %>
 <script language="JavaScript" type="text/javascript">
 <!--
@@ -56,7 +57,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -82,7 +83,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,glossary"/>
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,glossary"/>
                 </jsp:include>
                 <table summary="layout" width="100%" border="0">
                   <tr>
@@ -230,9 +231,6 @@
                 <%=cm.cmsMsg("contains")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("starts_with")%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="glossary.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -241,7 +239,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="glossary.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

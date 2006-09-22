@@ -108,19 +108,19 @@
   <table summary="<%=cm.cms("geographical_distribution")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("species_factsheet-geo_04")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("biogeographic_region")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
          <%=cm.cmsText("reference")%>
          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>

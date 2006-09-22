@@ -9,6 +9,7 @@
   request.setCharacterEncoding( "UTF-8");
   // Request parameters
   // operation - if operation is feedback then save the request form data to database.
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
   String operation = Utilities.formatString( request.getParameter( "operation" ) );
   String referer = Utilities.formatString( request.getHeader( "referer" ) );
   String url = Utilities.formatString( request.getParameter( "url" ) );
@@ -174,7 +175,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -207,7 +208,7 @@
 
 
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,feedback" />
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,feedback" />
                 </jsp:include>
                 <h1>
                   <%=cm.cmsText("thank_you")%>
@@ -224,9 +225,6 @@
                 <%=bodyHTML%>
                 <br />
                 <br />
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="feedback.jsp" />
-                </jsp:include>
                 <%=cm.cmsMsg("feedback")%>
 <%
   }
@@ -234,7 +232,7 @@
   {
 %>
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,feedback" />
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,feedback" />
                 </jsp:include>
                 <h1>
                   <%=cm.cmsText("generic_feedback_04")%>
@@ -381,9 +379,6 @@
                 <%=cm.cmsMsg("feedback")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("generic_feedback_27")%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="feedback.jsp" />
-                </jsp:include>
 <%
   }
 %>
@@ -395,7 +390,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="feedback.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

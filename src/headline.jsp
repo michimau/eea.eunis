@@ -16,6 +16,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
 <%
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
   WebContentManagement cm = SessionManager.getWebContent();
   /*
   System.out.println("==============================================");
@@ -121,7 +122,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -147,7 +148,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,services#services.jsp,headline"/>
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,services#services.jsp,headline"/>
                 </jsp:include>
           <%
             // If user is authentificated and has this right
@@ -213,9 +214,6 @@
                 <%=cm.cmsMsg("headline_deleted")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("headlines_deleted_all")%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="template.jsp"/>
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -224,7 +222,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="headline.jsp"/>
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

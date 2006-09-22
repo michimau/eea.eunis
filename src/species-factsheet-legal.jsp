@@ -35,24 +35,24 @@
   <table summary="<%=cm.cms("species_factsheet_legalInstruments_01_Sum")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("detailed_reference")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("legal_text")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("species_factsheet_legalInstruments_02")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("url")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize;">
           <%=cm.cmsText("species_factsheet_legalInstrumentsGeoImplem")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize;">
           <%=cm.cmsText("species_factsheet_legalInstrumentsObligations")%>
         </th>
       </tr>

@@ -16,6 +16,7 @@
   <jsp:include page="header-page.jsp" />
   <%
     WebContentManagement cm = SessionManager.getWebContent();
+    String eeaHome = application.getInitParameter( "EEA_HOME" );
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
@@ -26,7 +27,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -52,7 +53,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,help_fuzzy_search"/>
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,help_fuzzy_search"/>
                   <jsp:param name="mapLink" value="show"/>
                 </jsp:include>
                 <h1><%=cm.cmsText("help_fuzzy_search")%></h1>
@@ -71,9 +72,6 @@
                 <a href="javascript:history.go(-1);" title="<%=cm.cms("return_to_previous_page")%>"><%=cm.cms("back")%></a>
                 <br />
                 <%=cm.cmsMsg("sites_help_title")%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="sites-help.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -82,7 +80,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="fuzzy-search-help.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

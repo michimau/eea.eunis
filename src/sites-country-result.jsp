@@ -81,7 +81,8 @@
   reportFields.addElement("criteriaType");
 
   String downloadLink = "javascript:openTSVDownload('reports/sites/tsv-sites-country.jsp?" + formBean.toURLParam(reportFields) + "')";
-  String location = "home#index.jsp,sites#sites.jsp,country#sites-country.jsp,results";
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String location = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,country#sites-country.jsp,results";
   WebContentManagement cm = SessionManager.getWebContent();
   if (results.isEmpty())
   {
@@ -157,7 +158,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -595,9 +596,6 @@
                 <%=cm.cmsMsg("greater")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("smaller")%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="sites-country-result.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -606,7 +604,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="sites-country-result.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

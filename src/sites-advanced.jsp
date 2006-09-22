@@ -295,6 +295,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
 </script>
 
 <%
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
   String IdSession = request.getParameter("idsession");
   String NatureObject = request.getParameter("natureobject");
   if(IdSession == null || IdSession.length()==0 || IdSession.equalsIgnoreCase("undefined")) {
@@ -323,7 +324,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -349,7 +350,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,sites#sites.jsp,advanced_search"/>
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,sites#sites.jsp,advanced_search"/>
                   <jsp:param name="mapLink" value="show"/>
                 </jsp:include>
               <h1><%=cm.cmsText("sites_advanced_02")%></h1>
@@ -979,9 +980,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
             <%=cm.br()%>
             <%=cm.cmsMsg("error_deleting_branch")%>
             <%=cm.br()%>
-              <jsp:include page="footer.jsp">
-                <jsp:param name="page_name" value="sites-advanced.jsp" />
-              </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -990,7 +988,9 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="sites-advanced.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

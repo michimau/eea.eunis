@@ -21,6 +21,7 @@
   <jsp:include page="header-page.jsp" />
   <%
     WebContentManagement cm = SessionManager.getWebContent();
+    String eeaHome = application.getInitParameter( "EEA_HOME" );
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
@@ -338,7 +339,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -364,7 +365,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,combined_search#combined-search.jsp,combined_search_location_1" />
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,combined_search#combined-search.jsp,combined_search_location_1" />
                   <jsp:param name="helpLink" value="combined-help.jsp"/>
                 </jsp:include>
                 <%=cm.cmsText("generic_combined-search-step1_01")%>
@@ -482,9 +483,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       <%=cm.br()%>
                       <%=cm.cmsMsg("generic_combined-search-step1_09")%>
                       <%=cm.br()%>
-                      <jsp:include page="footer.jsp">
-                        <jsp:param name="page_name" value="combined-search.jsp" />
-                      </jsp:include>
                 <!-- END MAIN CONTENT -->
                               </div>
                             </div>
@@ -1454,9 +1452,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
               <%=cm.br()%>
               <%=cm.cmsMsg("error_deleting_branch")%>
               <%=cm.br()%>
-                  <jsp:include page="footer.jsp">
-                    <jsp:param name="page_name" value="combined-search.jsp" />
-                  </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -1465,7 +1460,9 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="combined-search.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

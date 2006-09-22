@@ -21,6 +21,7 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
   String operation = Utilities.formatString( request.getParameter("operation"), "" );
   if( operation.equalsIgnoreCase( "changeLanguage" ) )
   {
@@ -171,9 +172,9 @@
               <div class="documentContent" id="region-content">
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home"/>
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp"/>
                 </jsp:include>
-                <h1>
+                <h1 align="center">
                   <%=cm.cmsText( "generic_index_06" )%>
                 </h1>
                 <br />
@@ -287,9 +288,6 @@
                 <%=cm.cms("generic_index_maps")%>
                 <%=cm.cmsMsg("welcome_to_eunis_database")%>
                 <br />
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="index.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -298,7 +296,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="index.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

@@ -52,19 +52,19 @@
   <table summary="<%=cm.cms("species_factsheet_sites_01_Sum")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("site_code")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("source_data_set")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("country")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("site_name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
@@ -152,19 +152,19 @@
   <table summary="<%=cm.cms("species_factsheet_sites_02_Sum")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th width="15%">
+        <th width="15%" style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("site_code")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="15%">
+        <th width="15%" style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("source_data_set")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="20%">
+        <th width="20%" style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("country")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="50%">
+        <th width="50%" style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsText("site_name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>

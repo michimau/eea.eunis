@@ -40,6 +40,7 @@
   String sCollectionCode = "EUNIS";
   String sDigirURL = application.getInitParameter( "DIGIR_URL" );
   String sEndpointURL = application.getInitParameter( "DIGIR_SERVICE" );
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
 %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
@@ -51,7 +52,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -77,7 +78,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,digir_location"/>
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,digir_location"/>
                 </jsp:include>
                 <img alt="<%=cm.cms("loading_data")%>" id="loading" src="images/loading.gif" />
                 <%
@@ -217,9 +218,6 @@
                 <%=cm.cmsMsg("loading_data")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("digir_location")%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="digir.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -228,7 +226,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="digir.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

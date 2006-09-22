@@ -12,6 +12,7 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   String domainPrefix = Utilities.formatString( application.getInitParameter( "DOMAIN_NAME" ), "http://eunis.eea.europa.eu" );
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -29,7 +30,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -55,7 +56,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,services#services.jsp,logos_location"/>
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,services#services.jsp,logos_location"/>
                 </jsp:include>
                 <h1>
                   <%=cm.cmsText("logos_title")%>
@@ -256,9 +257,6 @@
                   </tr>
                 </table>
                 <%=cm.cmsMsg("logos_page_title")%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="logos.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -267,7 +265,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="logos.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

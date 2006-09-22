@@ -97,22 +97,23 @@
    </script>
   </head>
 <%
-  String breadcrumbtrail = "home#index.jsp,services#services.jsp,user_bookmarks";
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String breadcrumbtrail = "eea#" + eeaHome + ",home#index.jsp,services#services.jsp,user_bookmarks";
   String typeAction = Utilities.formatString(request.getParameter( "typeAction" ), "" );
   if ( typeAction.equalsIgnoreCase( "edit" ) || typeAction.equalsIgnoreCase( "editSave" ) )
   {
-    breadcrumbtrail = "home#index.jsp,services#services.jsp,user_bookmarks#users-bookmarks.jsp,edit_bookmark";
+    breadcrumbtrail = "eea#" + eeaHome + ",home#index.jsp,services#services.jsp,user_bookmarks#users-bookmarks.jsp,edit_bookmark";
   }
   if ( typeAction.equalsIgnoreCase( "delete" ) )
   {
-    breadcrumbtrail = "home#index.jsp,services#services.jsp,user_bookmarks#users-bookmarks.jsp,delete_bookmark";
+    breadcrumbtrail = "eea#" + eeaHome + ",home#index.jsp,services#services.jsp,user_bookmarks#users-bookmarks.jsp,delete_bookmark";
   }
 %>
   <body>
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -396,10 +397,6 @@
             <%=cm.br()%>
             <%=cm.cmsMsg("users_bookmarks_02")%>
             <%=cm.br()%>
-
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="users-bookmarks.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -408,7 +405,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="users-bookmarks.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

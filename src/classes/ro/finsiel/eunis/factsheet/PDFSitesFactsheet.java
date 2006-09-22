@@ -1577,9 +1577,9 @@ public class PDFSitesFactsheet
         }
       }
 
-      report.writeln( contentManagement.cms( "minimum_altitude") + ":" + Utilities.formatString( altMin ), fontNormal );
-      report.writeln( contentManagement.cms( "mean_altitude_m") + ":" + Utilities.formatString( altMean ), fontNormal );
-      report.writeln( contentManagement.cms( "maximum_altitude_m") + ":" + Utilities.formatString( altMax ), fontNormal );
+      report.writeln( contentManagement.cms( "minimum_altitude") + ": " + Utilities.formatString( altMin ), fontNormal );
+      report.writeln( contentManagement.cms( "mean_altitude_m") + ": " + Utilities.formatString( altMean ), fontNormal );
+      report.writeln( contentManagement.cms( "maximum_altitude_m") + ": " + Utilities.formatString( altMax ), fontNormal );
 
       // Coordinates
       String longitude;
@@ -1606,11 +1606,11 @@ public class PDFSitesFactsheet
             factsheet.getSiteObject().getLongSec() );
       }
 
-      report.writeln( contentManagement.cms( "longitude") + ":" + longitude, fontNormal );
-      report.writeln( contentManagement.cms( "latitude") + ":" + latitude, fontNormal );
+      report.writeln( contentManagement.cms( "longitude") + ": " + longitude, fontNormal );
+      report.writeln( contentManagement.cms( "latitude") + ": " + latitude, fontNormal );
       report.writeln( " ", fontNormal );
-      report.writeln( contentManagement.cms( "sites_factsheet_36") + ":" + Utilities.formatAreaPDF( factsheet.getSiteObject().getLongitude(), 0, 6, null ), fontNormal );
-      report.writeln( contentManagement.cms( "sites_factsheet_37") + ":" + Utilities.formatAreaPDF( factsheet.getSiteObject().getLatitude(), 0, 6, null ), fontNormal );
+      report.writeln( contentManagement.cms( "sites_factsheet_36") + ": " + Utilities.formatAreaPDF( factsheet.getSiteObject().getLongitude(), 0, 6, null ), fontNormal );
+      report.writeln( contentManagement.cms( "sites_factsheet_37") + ": " + Utilities.formatAreaPDF( factsheet.getSiteObject().getLatitude(), 0, 6, null ), fontNormal );
 
 
       if ( SiteFactsheet.TYPE_DIPLOMA == type || SiteFactsheet.TYPE_BIOGENETIC == type || SiteFactsheet.TYPE_CORINE == type )

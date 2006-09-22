@@ -18,47 +18,47 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-    <%
-      WebContentManagement cm = SessionManager.getWebContent();
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String idTaxonomy = Utilities.formatString( request.getParameter( "idTaxonomy" ), "" ).trim();
 
-      String idTaxonomy = Utilities.formatString( request.getParameter( "idTaxonomy" ), "" ).trim();
+  //get maxLevel
+  String SQL_DRV = application.getInitParameter("JDBC_DRV");
+  String SQL_URL = application.getInitParameter("JDBC_URL");
+  String SQL_USR = application.getInitParameter("JDBC_USR");
+  String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
-      //get maxLevel
-      String SQL_DRV = application.getInitParameter("JDBC_DRV");
-      String SQL_URL = application.getInitParameter("JDBC_URL");
-      String SQL_USR = application.getInitParameter("JDBC_USR");
-      String SQL_PWD = application.getInitParameter("JDBC_PWD");
+  SQLUtilities sqlc = new SQLUtilities();
+  sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
 
-      SQLUtilities sqlc = new SQLUtilities();
-      sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+  ArrayList IdTax;
+  ArrayList IdTaxParent;
+  ArrayList TaxTree;
+  ArrayList o;
 
-      ArrayList IdTax;
-      ArrayList IdTaxParent;
-      ArrayList TaxTree;
-      ArrayList o;
+  IdTax = sqlc.SQL2Array("SELECT ID_TAXONOMY FROM CHM62EDT_TAXONOMY ORDER BY ID_TAXONOMY");
+  IdTaxParent = sqlc.SQL2Array("SELECT ID_TAXONOMY_PARENT FROM CHM62EDT_TAXONOMY ORDER BY ID_TAXONOMY");
+  TaxTree = sqlc.SQL2Array("SELECT TAXONOMY_TREE FROM CHM62EDT_TAXONOMY ORDER BY ID_TAXONOMY");
 
-      IdTax = sqlc.SQL2Array("SELECT ID_TAXONOMY FROM CHM62EDT_TAXONOMY ORDER BY ID_TAXONOMY");
-      IdTaxParent = sqlc.SQL2Array("SELECT ID_TAXONOMY_PARENT FROM CHM62EDT_TAXONOMY ORDER BY ID_TAXONOMY");
-      TaxTree = sqlc.SQL2Array("SELECT TAXONOMY_TREE FROM CHM62EDT_TAXONOMY ORDER BY ID_TAXONOMY");
+  String TaxName46 = sqlc.ExecuteSQL(TaxonomyTree.TaxName("46"));
+  String TaxName47 = sqlc.ExecuteSQL(TaxonomyTree.TaxName("47"));
+  String TaxName48 = sqlc.ExecuteSQL(TaxonomyTree.TaxName("48"));
+  String TaxName3001 = sqlc.ExecuteSQL(TaxonomyTree.TaxName("3001"));
 
-      String TaxName46 = sqlc.ExecuteSQL(TaxonomyTree.TaxName("46"));
-      String TaxName47 = sqlc.ExecuteSQL(TaxonomyTree.TaxName("47"));
-      String TaxName48 = sqlc.ExecuteSQL(TaxonomyTree.TaxName("48"));
-      String TaxName3001 = sqlc.ExecuteSQL(TaxonomyTree.TaxName("3001"));
-
-      o = new ArrayList(IdTax.size());
-      ArrayList SpeciesList;
-      for(int i = 0; i<IdTax.size();i++) {
-        if(!IdTax.get(i).toString().equalsIgnoreCase("46") &&
-          !IdTax.get(i).toString().equalsIgnoreCase("47") &&
-            !IdTax.get(i).toString().equalsIgnoreCase("48") &&
-              !IdTax.get(i).toString().equalsIgnoreCase("3001")) {
-          o.add(TaxonomyTree.nbsp(TaxonomyTree.tokensCount(TaxTree.get(i).toString()))+IdTax.get(i));
-        } else {
-          o.add(IdTax.get(i));
-        }
-      }
-    %>
+  o = new ArrayList(IdTax.size());
+  ArrayList SpeciesList;
+  for(int i = 0; i<IdTax.size();i++) {
+    if(!IdTax.get(i).toString().equalsIgnoreCase("46") &&
+      !IdTax.get(i).toString().equalsIgnoreCase("47") &&
+        !IdTax.get(i).toString().equalsIgnoreCase("48") &&
+          !IdTax.get(i).toString().equalsIgnoreCase("3001")) {
+      o.add(TaxonomyTree.nbsp(TaxonomyTree.tokensCount(TaxTree.get(i).toString()))+IdTax.get(i));
+    } else {
+      o.add(IdTax.get(i));
+    }
+  }
+%>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("taxonomic_classification")%>
@@ -68,7 +68,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -94,7 +94,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,species#species.jsp,taxonomic_classification#species-taxonomy.jsp" />
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,species#species.jsp,taxonomic_classification#species-taxonomy.jsp" />
                 </jsp:include>
                 <h1>
                   <%=cm.cmsText("habitats_taxonomic-browser_01")%>
@@ -261,10 +261,6 @@
                   }
           %>
                 </ul>
-
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="species-taxonomy.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -273,7 +269,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="species-taxonomy.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

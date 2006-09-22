@@ -24,6 +24,7 @@
 
   SpeciesFactsheet factsheet = new SpeciesFactsheet(Utilities.checkedStringToInt(idSpecies, new Integer(0)),
                                                     Utilities.checkedStringToInt(idSpeciesLink, new Integer(0)));
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
 %>
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
@@ -64,7 +65,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -131,7 +132,7 @@
                   String PdfUrl = "javascript:openLink('species-factsheet-pdf.jsp?idSpecies="+factsheet.getIdSpecies()+"&amp;idSpeciesLink="+factsheet.getIdSpeciesLink()+"')";
 %>
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,species#species.jsp,factsheet" />
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,species#species.jsp,factsheet" />
                   <jsp:param name="printLink" value="<%=PdfUrl%>" />
                 </jsp:include>
                 <img alt="<%=cm.cms("loading_data")%>" id="loading" src="images/loading.gif" />
@@ -293,7 +294,7 @@
   {
 %>
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="home#index.jsp,species#species.jsp,factsheet" />
+                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,species#species.jsp,factsheet" />
                 </jsp:include>
                 <br />
                 <strong>
@@ -332,9 +333,6 @@
                 <%=cm.br()%>
                 <%=cm.cmsMsg("loading_data")%>
                 <%=cm.br()%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="species-factsheet.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -343,7 +341,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="species-factsheet.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

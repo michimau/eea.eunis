@@ -36,13 +36,13 @@
 <table summary="<%=cm.cms("habitat_type_legal_instruments")%>" class="listing" width="90%">
   <thead>
     <tr>
-      <th width="30%">
+      <th width="30%" style="text-transform: capitalize; text-align: left;">
         <%=cm.cmsText("legal_instrument")%>
       </th>
-      <th width="50%">
+      <th width="50%" style="text-transform: capitalize; text-align: left;">
         <%=cm.cmsText("habitats_factsheet_29")%>
       </th>
-      <th width="20%">
+      <th width="20%" style="text-transform: capitalize; text-align: left;">
         <%=cm.cmsText("habitats_factsheet_30")%>
       </th>
     </tr>

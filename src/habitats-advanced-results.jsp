@@ -62,7 +62,8 @@
   reportFields.addElement("oper");
   reportFields.addElement("criteriaType");
   String tsvLink = "javascript:openTSVDownload('reports/habitats/tsv-habitats-advanced.jsp?" + formBean.toURLParam(reportFields) + "')";
-  String location = "home#index.jsp,habitat_types#habitats.jsp,advanced_search#habitats-advanced.jsp,results";
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String location = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,advanced_search#habitats-advanced.jsp,results";
   if (results.isEmpty())
   {
 %>
@@ -86,7 +87,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -406,9 +407,6 @@
                 </table>
                   <%=cm.cmsMsg("habitats_advanced-results_title")%>
                   <%=cm.br()%>
-                <jsp:include page="footer.jsp">
-                  <jsp:param name="page_name" value="habitats-advanced-results.jsp" />
-                </jsp:include>
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -417,7 +415,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="habitats-advanced-results.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

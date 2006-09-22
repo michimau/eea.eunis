@@ -228,11 +228,11 @@ public final class PDFSpeciesFactsheet
     cell.setHorizontalAlignment( Cell.ALIGN_CENTER );
     table.addCell( cell );
 
-    cell = new Cell( new Phrase( contentManagement.cms( "scientific_name" ) + ":" + scientificName, fontNormal ) );
+    cell = new Cell( new Phrase( contentManagement.cms( "scientific_name" ) + ": " + scientificName, fontNormal ) );
     cell.setBackgroundColor( new Color( 0xDD, 0xDD, 0xDD ) );
     table.addCell( cell );
 
-    cell = new Cell( new Phrase( contentManagement.cms( "author" ) + ":" + Utilities.formatString( factsheet.getSpeciesNatureObject().getAuthor() ), fontNormal ) );
+    cell = new Cell( new Phrase( contentManagement.cms( "author" ) + ": " + Utilities.formatString( factsheet.getSpeciesNatureObject().getAuthor() ), fontNormal ) );
     cell.setBackgroundColor( new Color( 0xDD, 0xDD, 0xDD ) );
     table.addCell( cell );
 

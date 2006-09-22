@@ -19,6 +19,7 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   WebContentManagement cm = SessionManager.getWebContent();
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
 %>
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
@@ -32,7 +33,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -58,7 +59,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                   <jsp:include page="header-dynamic.jsp">
-                    <jsp:param name="location" value="home#index.jsp,habitat_types#habitats.jsp,eunis_habitat_type_hierarchical_view" />
+                    <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types#habitats.jsp,eunis_habitat_type_hierarchical_view" />
                   </jsp:include>
                   <h1>
                     <%=cm.cmsText("eunis_habitat_type_hierarchical_view")%>
@@ -315,10 +316,6 @@
 
             %>
                   <br/>
-                  <jsp:include page="footer.jsp">
-                    <jsp:param name="page_name" value="habitats-eunis-tree.jsp" />
-                  </jsp:include>
-
 <!-- END MAIN CONTENT -->
               </div>
             </div>
@@ -327,7 +324,9 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp" />
+              <jsp:include page="inc_column_left.jsp">
+                <jsp:param name="page_name" value="habitats-eunis-tree.jsp" />
+              </jsp:include>
             </div>
           </div>
           <!-- end of the left (by default at least) column -->

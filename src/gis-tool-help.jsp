@@ -17,6 +17,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,gis_help";
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
@@ -53,7 +54,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,gis_help"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <%=cm.cmsText("gis_tool_help_01")%>
                 <%=cm.br()%>

@@ -30,6 +30,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,species_statistics";
 
   String SQL_DRV = application.getInitParameter("JDBC_DRV");
   String SQL_URL = application.getInitParameter("JDBC_URL");
@@ -76,7 +77,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,species#species.jsp,species_statistics" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                   <jsp:param name="helpLink" value="species-help.jsp" />
                 </jsp:include>
                 <img alt="Loading" id="loading" src="images/loading.gif" />

@@ -101,6 +101,7 @@
     <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
 <%
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,designation_factsheet_location";
   try
   {
   // Request parameters
@@ -156,7 +157,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,sites#sites.jsp,designation_factsheet_location"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <img alt="<%=cm.cms("loading_data")%>" id="loading" src="images/loading.gif" />
                 <br />

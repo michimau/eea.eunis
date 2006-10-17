@@ -25,6 +25,7 @@
 <%
   // Get the parameters from request
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,services#services.jsp,glossary_editor#glossary-table.jsp,edit_glossary_location";
   String term = request.getParameter("term");
   String idLanguage = request.getParameter("idLanguage");
   String source = request.getParameter("source");
@@ -225,7 +226,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,services#services.jsp,glossary_editor#glossary-table.jsp,edit_glossary_location"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
 <%
   if( SessionManager.isAuthenticated() && SessionManager.isEdit_glossary() )

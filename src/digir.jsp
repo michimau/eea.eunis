@@ -41,6 +41,7 @@
   String sDigirURL = application.getInitParameter( "DIGIR_URL" );
   String sEndpointURL = application.getInitParameter( "DIGIR_SERVICE" );
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,digir_location";
 %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
@@ -78,7 +79,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,digir_location"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <img alt="<%=cm.cms("loading_data")%>" id="loading" src="images/loading.gif" />
                 <%

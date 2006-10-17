@@ -29,6 +29,7 @@
     String habID=treeBean1.getHabID();
     String openNode = treeBean1.getOpenNode();
     String eeaHome = application.getInitParameter( "EEA_HOME" );
+    String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,eunis_habitat_type_hierarchical_view";
     HabitatEUNISTree treeeunis = new HabitatEUNISTree();
   %>
   <script language="JavaScript" type="text/javascript">
@@ -123,7 +124,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types#habitats.jsp,eunis_habitat_type_hierarchical_view" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                 </jsp:include>
                 <h1>
                   <%=cm.cmsText("eunis_habitat_type_hierarchical_view")%>

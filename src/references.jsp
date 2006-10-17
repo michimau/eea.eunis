@@ -25,6 +25,7 @@
   String publisher = (request.getParameter("publisher")==null?"":request.getParameter("publisher"));
   String relationOpPublisher = (request.getParameter("relationOpPublisher")==null?Utilities.OPERATOR_CONTAINS.toString():request.getParameter("relationOpPublisher"));
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,references";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -71,7 +72,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,references"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                   <form name="eunis" method="post" action="references-result.jsp" onsubmit="return(checkformForDate());">
                     <input type="hidden" name="typeForm" value="<%=ReferencesSearchCriteria.CRITERIA_AUTHOR%>" />

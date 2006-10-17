@@ -18,6 +18,7 @@
                   java.util.Vector" %>
 <%
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,habitats_country_location";
   int operation = 0;
   if (null != request.getParameter("Add")) {
     operation = 1; // for add operation
@@ -204,7 +205,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types#habitats.jsp,habitats_country_location" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                   <jsp:param name="helpLink" value="habitats-help.jsp" />
                 </jsp:include>
                 <table width="100%" border="0" summary="layout">

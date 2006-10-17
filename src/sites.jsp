@@ -15,6 +15,7 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,sites";
   int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
   String []tabs = { "easy_search", "advanced_search", "statistical_data", "links_and_downloads", "help" };
 %>
@@ -61,7 +62,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,sites"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                   <jsp:param name="mapLink" value="show"/>
                 </jsp:include>
                 <img id="loading" alt="Loading progress" title="Loading progress" src="images/loading.gif" width="250" height="45" />

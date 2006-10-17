@@ -26,6 +26,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,legal_instruments";
 %>
     <script language="JavaScript" type="text/javascript">
       <!--
@@ -257,7 +258,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,species#species.jsp,legal_instruments" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                   <jsp:param name="helpLink" value="species-help.jsp" />
                 </jsp:include>
                 <table summary="layout" width="100%" border="0">

@@ -23,6 +23,7 @@
   String altitude31 = (request.getParameter("altitude31")==null?"":request.getParameter("altitude31"));
   String altitude32 = (request.getParameter("altitude32")==null?"":request.getParameter("altitude32"));
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,altitude";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -74,7 +75,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,sites#sites.jsp,altitude"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                   <jsp:param name="helpLink" value="sites-help.jsp"/>
                   <jsp:param name="mapLink" value="show"/>
                 </jsp:include>

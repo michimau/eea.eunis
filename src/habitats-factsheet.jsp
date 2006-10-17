@@ -24,6 +24,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,factsheet";
   /// INPUT PARAMS: idHabitat
   String idHabitat = request.getParameter("idHabitat");
   int tab = Utilities.checkedStringToInt(request.getParameter("tab"), 0);
@@ -106,7 +107,7 @@
   {
 %>
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types#habitats.jsp,factsheet" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                 </jsp:include>
                 <div style="width: 100%;">
                   <br />
@@ -130,7 +131,7 @@
     {
 %>
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types#habitats.jsp,factsheet" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                   <jsp:param name="printLink" value="<%=printLink%>" />
                 </jsp:include>
                 <img id="loading" alt="<%=cm.cms("loading_data")%>" src="images/loading.gif" />

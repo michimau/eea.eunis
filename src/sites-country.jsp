@@ -20,6 +20,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,country";
 %>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/sites-country.js"></script>
@@ -83,7 +84,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,sites#sites.jsp,country"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                   <jsp:param name="helpLink" value="sites-help.jsp"/>
                   <jsp:param name="mapLink" value="show"/>
                 </jsp:include>

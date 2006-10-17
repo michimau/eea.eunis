@@ -23,6 +23,7 @@
     <%
       WebContentManagement cm = SessionManager.getWebContent();
       String eeaHome = application.getInitParameter( "EEA_HOME" );
+      String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,country_biogeographic_region_location";
     %>
     <script language="JavaScript" src="script/species-country.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
@@ -148,7 +149,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,species#species.jsp,country_biogeographic_region_location"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <h1>
                     <%=cm.cmsText("country_biogeographic_region")%>

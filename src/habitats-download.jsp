@@ -18,6 +18,7 @@
     // Web content manager used in this page.
     WebContentManagement cm = SessionManager.getWebContent();
     String eeaHome = application.getInitParameter( "EEA_HOME" );
+    String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,links_and_downloads_2";
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
@@ -54,7 +55,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types#habitats.jsp,links_and_downloads_2" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                   <jsp:param name="mapLink" value="show" />
                 </jsp:include>
                 <%=cm.br()%>

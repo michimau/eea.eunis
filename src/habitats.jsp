@@ -19,6 +19,7 @@
   <%
     WebContentManagement cm = SessionManager.getWebContent();
     String eeaHome = application.getInitParameter( "EEA_HOME" );
+    String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types";
     int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
     String []tabs = { cm.cms("easy_search"), cm.cms("advanced_search"), cm.cms("links_and_downloads"), cm.cms("help") };
   %>
@@ -57,7 +58,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                 </jsp:include>
                 <div id="loading">
                 <%=cm.cms("loading_data")%>

@@ -17,6 +17,7 @@
   <%
     WebContentManagement cm = SessionManager.getWebContent();
     String eeaHome = application.getInitParameter( "EEA_HOME" );
+    String btrail = "eea#" + eeaHome + ",home#index.jsp,help_fuzzy_search";
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
@@ -53,7 +54,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,help_fuzzy_search"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                   <jsp:param name="mapLink" value="show"/>
                 </jsp:include>
                 <h1><%=cm.cmsText("help_fuzzy_search")%></h1>

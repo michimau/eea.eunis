@@ -80,6 +80,7 @@
   }
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String location = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,sites_neighborhood_location#sites-neighborhood.jsp,sites_neighborhood_detail_location";
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,sites_neighborhood_location#sites-neighborhood.jsp,sites_neighborhood_detail_location";
   if (sites.isEmpty())
   {
 %>
@@ -329,7 +330,7 @@
                   {
                 %>
                       <jsp:include page="header-dynamic.jsp">
-                        <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,sites#sites.jsp,sites_neighborhood_location#sites-neighborhood.jsp,sites_neighborhood_detail_location"/>
+                        <jsp:param name="location" value="<%=btrail%>"/>
                         <jsp:param name="helpLink" value="sites-help.jsp"/>
                         <jsp:param name="mapLink" value="show"/>
                       </jsp:include>

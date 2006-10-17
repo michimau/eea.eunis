@@ -17,6 +17,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,help_on_eunis_database_species_location";
 %>
     <title><%=application.getInitParameter("PAGE_TITLE")%><%=cm.cms("species_help_02")%></title>
   </head>
@@ -50,7 +51,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,species#species.jsp,help_on_eunis_database_species_location" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                 </jsp:include>
                 <%
                   String paragraph01 = cm.cmsText("species_help_01");

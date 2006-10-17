@@ -13,6 +13,7 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,login";
   boolean success = false;
   String username = request.getParameter( "username" );
   String cmd = Utilities.formatString( request.getParameter( "cmd" ), "" );
@@ -76,7 +77,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,login"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <h1>
                   <%=cm.cmsText("login_title")%>

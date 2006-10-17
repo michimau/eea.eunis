@@ -10,6 +10,7 @@
   // Request parameters
   // operation - if operation is feedback then save the request form data to database.
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,feedback";
   String operation = Utilities.formatString( request.getParameter( "operation" ) );
   String referer = Utilities.formatString( request.getHeader( "referer" ) );
   String url = Utilities.formatString( request.getParameter( "url" ) );
@@ -208,7 +209,7 @@
 
 
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,feedback" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                 </jsp:include>
                 <h1>
                   <%=cm.cmsText("thank_you")%>
@@ -232,7 +233,7 @@
   {
 %>
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,feedback" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                 </jsp:include>
                 <h1>
                   <%=cm.cmsText("generic_feedback_04")%>

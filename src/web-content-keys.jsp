@@ -17,6 +17,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,web_content_management_location";
   String operation = Utilities.formatString( request.getParameter( "operation" ), "" );
   boolean result = false;
   if ( operation.equalsIgnoreCase( "add" ) )
@@ -86,7 +87,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,web_content_management_location"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
           <%
             if( SessionManager.isAuthenticated() && SessionManager.isContent_management_RIGHT() )

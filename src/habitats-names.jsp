@@ -26,6 +26,7 @@
   <script language="JavaScript" src="script/save-criteria.js" type="text/javascript"></script>
   <%
     String eeaHome = application.getInitParameter( "EEA_HOME" );
+    String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,names";
     String action = formBean.getAction();
     boolean doAdd = false;
     // Add criteria.
@@ -78,7 +79,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types#habitats.jsp,names" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                   <jsp:param name="helpLink" value="habitats-help.jsp" />
                 </jsp:include>
                 <form name="eunis" method="get" onsubmit="javascript: return validateForm();" action="habitats-names-result.jsp">

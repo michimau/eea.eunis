@@ -22,6 +22,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
   String datacount = "0";
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,services#services.jsp,clear_temporary_data_btn";
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
@@ -58,7 +59,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,services#services.jsp,clear_temporary_data_btn"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
 <%
   // Check if user has Admin right

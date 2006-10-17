@@ -23,6 +23,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,advanced_search";
 %>
 <title>
   <%=application.getInitParameter("PAGE_TITLE")%>
@@ -291,7 +292,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types#habitats.jsp,advanced_search" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                   <jsp:param name="helpLink" value="habitats-help.jsp" />
                 </jsp:include>
                 <%=cm.cmsText("habitats_advanced_01")%>

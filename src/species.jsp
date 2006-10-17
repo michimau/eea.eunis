@@ -22,6 +22,7 @@
   int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
   String []tabs = { cm.cms("easy_search"), cm.cms("advanced_search"), cm.cms("statistical_data"), cm.cms("links_and_downloads"), cm.cms("help") };
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,species";
 %>
     <script language="JavaScript" type="text/javascript">
     <!--
@@ -72,7 +73,7 @@
               <br clear="all" />
 <!-- MAIN CONTENT -->
               <jsp:include page="header-dynamic.jsp">
-                <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,species"/>
+                <jsp:param name="location" value="<%=btrail%>"/>
               </jsp:include>
               <img id="loading" alt="<%=cm.cms("loading_progress")%>" title="<%=cm.cms("loading_progress")%>" src="images/loading.gif" />
               <div style="text-align : center; width : 90%;">

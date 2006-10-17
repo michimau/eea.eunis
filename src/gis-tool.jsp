@@ -16,6 +16,7 @@
   <%
     WebContentManagement cm = SessionManager.getWebContent();
     String eeaHome = application.getInitParameter( "EEA_HOME" );
+    String btrail = "eea#" + eeaHome + ",home#index.jsp,gis_tool";
   %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
@@ -52,7 +53,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,gis_tool"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                   <jsp:param name="helpLink" value="gis-tool-help.jsp"/>
                 </jsp:include>
                 <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="740" height="552" id="fl_eunis" align="middle">

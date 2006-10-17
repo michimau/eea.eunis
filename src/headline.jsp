@@ -17,6 +17,7 @@
     <jsp:include page="header-page.jsp" />
 <%
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,services#services.jsp,headline";
   WebContentManagement cm = SessionManager.getWebContent();
   /*
   System.out.println("==============================================");
@@ -148,7 +149,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,services#services.jsp,headline"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
           <%
             // If user is authentificated and has this right

@@ -26,6 +26,7 @@
     habID = treeBean.getHabID();
     int level = (null == request.getParameter("level")) ? 2 : Integer.parseInt(request.getParameter("level"));
     String eeaHome = application.getInitParameter( "EEA_HOME" );
+    String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,habitats_annex1_tree_location";
   %>
   <link rel="StyleSheet" href="css/tree.css" type="text/css" />
   <script language="JavaScript" type="text/javascript" src="script/tree.js"></script>
@@ -101,7 +102,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types#habitats.jsp,habitats_annex1_tree_location" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                 </jsp:include>
                 <h1>
                   <%=cm.cmsText("habitats_annex1-browser_01")%>

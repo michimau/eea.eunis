@@ -23,6 +23,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,pick_habitat_type_show_references";
 %>
 <title>
   <%=application.getInitParameter("PAGE_TITLE")%>
@@ -87,7 +88,7 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types#habitats.jsp,pick_habitat_type_show_references" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                   <jsp:param name="helpLink" value="habitats-help.jsp" />
                 </jsp:include>
                 <table summary="layout" width="100%" border="0">

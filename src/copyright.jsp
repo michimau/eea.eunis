@@ -21,6 +21,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,copyright_and_disclaimer_title";
 %>
   <title><%=application.getInitParameter("PAGE_TITLE")%>
     <%=cm.cms("copyright_and_disclaimer_title")%>
@@ -57,7 +58,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,copyright_and_disclaimer_title"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <%=cm.cmsText("generic_copyright_01")%>
                 <table summary="<%=cm.cms("references")%>" class="datatable">

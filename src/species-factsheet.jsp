@@ -25,6 +25,7 @@
   SpeciesFactsheet factsheet = new SpeciesFactsheet(Utilities.checkedStringToInt(idSpecies, new Integer(0)),
                                                     Utilities.checkedStringToInt(idSpeciesLink, new Integer(0)));
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,factsheet";
 %>
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
@@ -132,7 +133,7 @@
                   String PdfUrl = "javascript:openLink('species-factsheet-pdf.jsp?idSpecies="+factsheet.getIdSpecies()+"&amp;idSpeciesLink="+factsheet.getIdSpeciesLink()+"')";
 %>
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,species#species.jsp,factsheet" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                   <jsp:param name="printLink" value="<%=PdfUrl%>" />
                 </jsp:include>
                 <img alt="<%=cm.cms("loading_data")%>" id="loading" src="images/loading.gif" />
@@ -294,7 +295,7 @@
   {
 %>
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,species#species.jsp,factsheet" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                 </jsp:include>
                 <br />
                 <strong>

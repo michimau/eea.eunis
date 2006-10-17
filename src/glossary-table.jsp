@@ -31,6 +31,7 @@
 
   // action specifies an operation to do. If null, no action was specified.
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,services#services.jsp,glossary_editor";
   String action = Utilities.formatString(request.getParameter("action"), "");
   String filter = Utilities.formatString(request.getParameter("filter"), "");
   String sort =  Utilities.formatString(request.getParameter("sort"), "");
@@ -168,7 +169,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,services#services.jsp,glossary_editor"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <h1>
                   <%=cm.cmsText( "generic_glossary-table_02" )%>

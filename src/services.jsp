@@ -12,6 +12,7 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,services";
   // Check if we need to enter 'edit web content' mode
   if(SessionManager.isAuthenticated() && SessionManager.isContent_management_RIGHT() )
   {
@@ -75,7 +76,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,services"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <h1>
                   <%=cm.cmsText("services_title")%>

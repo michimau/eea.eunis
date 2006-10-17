@@ -22,6 +22,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp";
   String operation = Utilities.formatString( request.getParameter("operation"), "" );
   if( operation.equalsIgnoreCase( "changeLanguage" ) )
   {
@@ -172,7 +173,7 @@
               <div class="documentContent" id="region-content">
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <h1 align="center">
                   <%=cm.cmsText( "generic_index_06" )%>

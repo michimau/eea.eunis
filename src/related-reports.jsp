@@ -28,6 +28,7 @@
   String[] deleteFile = FormBean.getFilenames();
   String operation = FormBean.getOperation();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,related_reports";
 
   // Delete the specified files from server
   if(null != operation && operation.equalsIgnoreCase("delete") && null != deleteFile)
@@ -135,7 +136,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,related_reports"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
               <h1>
                 <%=cm.cmsText("related_reports")%>

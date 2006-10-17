@@ -24,6 +24,7 @@
 <%
   String uploadDir = application.getInitParameter( "TOMCAT_HOME" ) + "/" + application.getInitParameter("UPLOAD_DIR_FILES");
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,related_reports#related-reports.jsp,related_reports_approval_location";
   String operation = FormBean.getOperation();
   String[] files = FormBean.getFilenames();
   if(null != operation && operation.equalsIgnoreCase("delete")) // Delete the files
@@ -127,7 +128,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,related_reports#related-reports.jsp,related_reports_approval_location"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <h1>
                   <%=cm.cmsText("related_reports_approval_title")%>

@@ -17,6 +17,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,how_to_use_eunis_database";
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
@@ -53,7 +54,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,how_to_use_eunis_database"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <%=cm.cmsText("generic_howto_01")%>
 

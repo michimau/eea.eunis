@@ -20,6 +20,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,Sites#sites.jsp,sites_designated_codes_location";
 %>
     <script language="JavaScript" type="text/javascript" src="script/sites-designated-codes.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
@@ -59,7 +60,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,Sites#sites.jsp,sites_designated_codes_location"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                   <jsp:param name="helpLink" value="species-help.jsp"/>
                 </jsp:include>
                 <form name="eunis" method="get" onsubmit="javascript: return validateForm();" action="sites-designated-codes-result.jsp">

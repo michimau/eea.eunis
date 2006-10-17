@@ -24,6 +24,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
   String pdfURL = "javascript:openLink('sites-factsheet-pdf.jsp?idsite=" + siteid + "')";
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,factsheet";
 
   String SQL_DRV = application.getInitParameter("JDBC_DRV");
   String SQL_URL = application.getInitParameter("JDBC_URL");
@@ -120,7 +121,7 @@
   {
 %>
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,sites#sites.jsp,factsheet" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                   <jsp:param name="printLink" value="<%=pdfURL%>"/>
                   <jsp:param name="mapLink" value="show"/>
                 </jsp:include>
@@ -282,7 +283,7 @@
   {
 %>
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,sites#sites.jsp,factsheet" />
+                  <jsp:param name="location" value="<%=btrail%>" />
                 </jsp:include>
 
                 <br />

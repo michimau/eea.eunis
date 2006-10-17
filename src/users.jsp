@@ -18,6 +18,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,services#services.jsp,user_management";
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
@@ -117,7 +118,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                    <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,services#services.jsp,user_management"/>
+                    <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <%
                 int tab1 = Utilities.checkedStringToInt( request.getParameter( "tab1" ), 0 );

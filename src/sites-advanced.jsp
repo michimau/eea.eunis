@@ -296,6 +296,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
 
 <%
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,advanced_search";
   String IdSession = request.getParameter("idsession");
   String NatureObject = request.getParameter("natureobject");
   if(IdSession == null || IdSession.length()==0 || IdSession.equalsIgnoreCase("undefined")) {
@@ -350,7 +351,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,sites#sites.jsp,advanced_search"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                   <jsp:param name="mapLink" value="show"/>
                 </jsp:include>
               <h1><%=cm.cmsText("sites_advanced_02")%></h1>

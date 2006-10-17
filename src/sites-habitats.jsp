@@ -22,6 +22,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,sites_habitats_location";
 %>
     <script language="JavaScript" type="text/javascript" src="script/sites-habitats.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
@@ -121,7 +122,7 @@
                 <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="eea#<%=eeaHome%>,home#index.jsp,habitat_types#habitats.jsp,sites_habitats_location"/>
+                  <jsp:param name="location" value="<%=btrail%>"/>
                   <jsp:param name="mapLink" value="show"/>
                   <jsp:param name="helpLink" value="sites-help.jsp"/>
                 </jsp:include>

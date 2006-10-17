@@ -53,7 +53,7 @@
   </context-param>
   <context-param>
     <param-name>TEMPLATES_FOOTER</param-name>
-    <param-value>http://webservices.eea.europa.eu/templates/getFooter?site=eunis</param-value>
+    <param-value>http://webservices.eea.europa.eu/templates/getFooter?site=default</param-value>
     <description>Location of the EEA template server</description>
   </context-param>
 

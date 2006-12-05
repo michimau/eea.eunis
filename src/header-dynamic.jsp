@@ -38,6 +38,7 @@ Input parameters  on REQUEST:
   String dynHeaderLocation = request.getParameter("location");
   String dynHeaderHelpLink = request.getParameter("helpLink");
   String dynHeaderPrintLink = request.getParameter("printLink");
+  String dynHeaderGoogleLink = request.getParameter("kmlLink");
   String dynHeaderDownloadLink = Utilities.formatString( request.getParameter("downloadLink"), "null" );
   if ( dynHeaderDownloadLink.equalsIgnoreCase( "null" ) )
   {
@@ -67,7 +68,7 @@ Input parameters  on REQUEST:
 %>
   </div>
 <%
-  if (null != dynHeaderPrintLink || null != dynHeaderDownloadLink || null != dynHeaderHelpLink)
+  if (null != dynHeaderPrintLink || null != dynHeaderDownloadLink || null != dynHeaderHelpLink || null != dynHeaderGoogleLink)
   {
 %>
   <div style="margin: 0px; padding: 0px; float:right;">
@@ -77,6 +78,13 @@ Input parameters  on REQUEST:
 %>
           <a href="<%=dynHeaderPrintLink%>" title="<%=cm.cms( "header_download_pdf_title" )%>"><%=cm.cmsText( "header_download_pdf" )%></a>
           <%=cm.cmsTitle( "header_download_pdf_title" )%>
+<%
+    }
+    if (null != dynHeaderGoogleLink)
+    {
+%>
+          <br/><a href="<%=dynHeaderGoogleLink%>" title="<%=cm.cms( "header_download_kml_title" )%>"><%=cm.cmsText( "header_download_kml" )%></a>
+          <%=cm.cmsTitle( "header_download_kml_title" )%>
 <%
     }
     if (null != dynHeaderDownloadLink)

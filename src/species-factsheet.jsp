@@ -131,10 +131,12 @@
                   String SQL_USR = application.getInitParameter("JDBC_USR");
                   String SQL_PWD = application.getInitParameter("JDBC_PWD");
                   String PdfUrl = "javascript:openLink('species-factsheet-pdf.jsp?idSpecies="+factsheet.getIdSpecies()+"&amp;idSpeciesLink="+factsheet.getIdSpeciesLink()+"')";
+                  String kmlUrl = "species-factsheet-distribution-kml.jsp?idSpecies="+factsheet.getIdSpecies()+"&amp;idSpeciesLink="+factsheet.getIdSpeciesLink();
 %>
                 <jsp:include page="header-dynamic.jsp">
                   <jsp:param name="location" value="<%=btrail%>" />
                   <jsp:param name="printLink" value="<%=PdfUrl%>" />
+                  <jsp:param name="kmlLink" value="<%=kmlUrl%>" />
                 </jsp:include>
                 <img alt="<%=cm.cms("loading_data")%>" id="loading" src="images/loading.gif" />
                 <div style="width: 100%; text-align: center;">

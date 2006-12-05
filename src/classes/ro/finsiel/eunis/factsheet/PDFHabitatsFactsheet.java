@@ -880,7 +880,7 @@ public class PDFHabitatsFactsheet
       table.setWidths( colWidths1 );
       Cell cell;
 
-      cell = new Cell( new Phrase( cm.cms( "habitats_factsheet_sitesForHabitatRecorded" ), fontSubtitle ) );
+      cell = new Cell( new Phrase( cm.cms( "species_characteristics_for_habitat_type" ), fontSubtitle ) );
       cell.setBackgroundColor( new Color( 0xDD, 0xDD, 0xDD ) );
       cell.setColspan( 6 );
       table.addCell( cell );

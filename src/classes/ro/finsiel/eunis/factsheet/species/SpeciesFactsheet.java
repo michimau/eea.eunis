@@ -187,9 +187,12 @@ public class SpeciesFactsheet {
     try
     {
       countriesList = SpeciesFactsheet.getPopulation( getSpeciesObject().getIdNatureObject().toString() );
+      int c = 1;
       for( FactSheetPopulationWrapper pop : countriesList )
       {
         countries += pop.getCountry();
+        if(c != countriesList.size()) countries += ", ";
+        c++;
       }
     }
     catch( Exception ex )

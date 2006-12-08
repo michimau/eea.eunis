@@ -132,12 +132,22 @@
                   String SQL_PWD = application.getInitParameter("JDBC_PWD");
                   String PdfUrl = "javascript:openLink('species-factsheet-pdf.jsp?idSpecies="+factsheet.getIdSpecies()+"&amp;idSpeciesLink="+factsheet.getIdSpeciesLink()+"')";
                   String kmlUrl = "species-factsheet-distribution-kml.jsp?idSpecies="+factsheet.getIdSpecies()+"&amp;idSpeciesLink="+factsheet.getIdSpeciesLink();
-%>
+				
+                  
+                SQLUtilities sqlUtilities = new SQLUtilities();
+                sqlUtilities.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+                if(!sqlUtilities.TabPageIsEmpy(factsheet.getSpeciesNatureObject().getIdNatureObject().toString(),"SPECIES","GRID_DISTRIBUTION")){%>
                 <jsp:include page="header-dynamic.jsp">
                   <jsp:param name="location" value="<%=btrail%>" />
                   <jsp:param name="printLink" value="<%=PdfUrl%>" />
                   <jsp:param name="kmlLink" value="<%=kmlUrl%>" />
                 </jsp:include>
+                <% } else { %>
+                <jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="<%=btrail%>" />
+                  <jsp:param name="printLink" value="<%=PdfUrl%>" />
+                </jsp:include>
+                <% } %>
                 <img alt="<%=cm.cms("loading_data")%>" id="loading" src="images/loading.gif" />
                 <div style="width: 100%; text-align: center;">
                   <h1>
@@ -153,9 +163,7 @@
                 <div id="tabbedmenu">
                   <ul>
               <%
-                SQLUtilities sqlUtilities = new SQLUtilities();
-                sqlUtilities.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-
+                
                 String currentTab;
                 for(int i = 0; i < tabs.length; i++) {
                   currentTab = "";

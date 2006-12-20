@@ -3,10 +3,10 @@
 <!-- (c) 2002 EEA - European Environment Agency. All right reserved. -->
 <web-app>
   <!-- Application name -->
-  <display-name>EUNIS Database 2</display-name>
+  <display-name>EUNIS Database</display-name>
 
   <!-- Short description -->
-  <description>EUNIS Database 2</description>
+  <description>EUNIS Database</description>
 
   <!--
     Context initialization parameters which can be retrieved from servlets or JSP by calling
@@ -16,19 +16,19 @@
  -->
   <context-param>
     <param-name>DOMAIN_NAME</param-name>
-    <param-value>>http://eunis.eea.eu.int</param-value>
+    <param-value>>http://eunis.eea.europa.eu</param-value>
     <description>Domain where application is installed</description>
   </context-param>
 
   <context-param>
     <param-name>DIGIR_URL</param-name>
-    <param-value>http://eunis.eea.eu.int:8980/digir/</param-value>
+    <param-value>http://eunis.eea.europa.eu:8980/digir/</param-value>
     <description>DiGIR provider</description>
   </context-param>
 
   <context-param>
     <param-name>DIGIR_SERVICE</param-name>
-    <param-value>http://eunis.eea.eu.int:8980/digir/DiGIR.php</param-value>
+    <param-value>http://eunis.eea.europa.eu:8980/digir/DiGIR.php</param-value>
     <description>XML for the DiGIR service</description>
   </context-param>
 
@@ -60,7 +60,7 @@
   <!-- Feedback e-mail address -->
   <context-param>
     <param-name>EMAIL_FEEDBACK</param-name>
-    <param-value>eunis@eea.eu.int</param-value>
+    <param-value>eunis@eea.europa.eu</param-value>
     <description>Mail address where feedback is sent</description>
   </context-param>
 
@@ -307,6 +307,11 @@
   <session-config>
     <session-timeout>60</session-timeout>
   </session-config>
+
+  <mime-mapping>
+    <extension>kml</extension>
+    <mime-type>application/vnd.google-earth.kml+xml</mime-type>
+  </mime-mapping>
 
   <!-- List of known index pages -->
   <welcome-file-list>

@@ -85,6 +85,7 @@
         <include name="ro/finsiel/eunis/formBeans/**/*.class"/>
         <include name="ro/finsiel/eunis/related_reports/**/*.class"/>
         <include name="ro/finsiel/eunis/*.class"/>
+	<include name="ro/finsiel/captcha/*.class"/>
       </fileset>
     </jar>
     <jar jarfile="${deployLibDir}/eunis-search.jar">

@@ -16,6 +16,7 @@
   String url = Utilities.formatString( request.getParameter( "url" ) );
   String feedbackType = Utilities.formatString( request.getParameter( "feedbackType" ) );
   String module = Utilities.formatString( request.getParameter( "module" ) );
+  Boolean isResponseCorrect =Boolean.FALSE;
   if ( !url.equalsIgnoreCase( "" ) )
   {
     referer = url;
@@ -33,111 +34,120 @@
     String address = "";
     String telephone = Utilities.formatString( request.getParameter( "telephone" ) );
     String fax = Utilities.formatString( request.getParameter( "fax" ) );
-
-    try
-    {
-      // Set the database connection parameters
-      String SQL_DRV = application.getInitParameter( "JDBC_DRV" );
-      String SQL_URL = application.getInitParameter( "JDBC_URL" );
-      String SQL_USR = application.getInitParameter( "JDBC_USR" );
-      String SQL_PWD = application.getInitParameter( "JDBC_PWD" );
-
-      Class.forName( SQL_DRV );
-      Connection con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
-      Statement ps = con.createStatement();
-      String sql;
-      String idFeedback;
-      sql = "SELECT MAX(ID_FEEDBACK)+1 FROM EUNIS_FEEDBACK";// Find the last PK and increment it.
-      ResultSet rs = ps.executeQuery( sql );
-      rs.next();
-      idFeedback = rs.getString( 1 );
-      rs.close();
-      if ( idFeedback == null )
-      {
-        idFeedback = "1";
-      }
-      sql = "";
-      sql += " INSERT INTO EUNIS_FEEDBACK(ID_FEEDBACK,FEEDBACK_TYPE,MODULE,COMMENT,NAME,EMAIL,COMPANY,ADDRESS,PHONE,FAX,URL)";
-      sql += " VALUES(";
-      sql += idFeedback + ",";
-      sql += "'" + feedbackType.replaceAll( "'", "" ) + "',";
-      sql += "'" + module.replaceAll( "'", "" ) + "',";
-      sql += "'" + comment.replaceAll( "'", "" ) + "',";
-      sql += "'" + name.replaceAll( "'", "" ) + "',";
-      sql += "'" + email.replaceAll( "'", "" ) + "',";
-      sql += "'" + organization.replaceAll( "'", "" ) + "',";
-      sql += "'" + address.replaceAll( "'", "" ) + "',";
-      sql += "'" + telephone.replaceAll( "'", "" ) + "',";
-      sql += "'" + fax.replaceAll( "'", "" ) + "',";
-      sql += "'" + url.replaceAll( "'", "" ) + "'";
-      sql += ")";
-      ps.execute( sql );
-
-      ps.close();
-      con.close();
-      String recipient = application.getInitParameter( "EMAIL_FEEDBACK" );
-      // Set body string
-      String body = "";
-      body += "\n";
-      body += "Module: " + module;
-      body += "\n";
-      body += "Page URL: " + url;
-      body += "\n\n";
-      body += "Content: " + comment;
-      body += "\n\n";
-      body += "Author: " + name;
-      body += "\n";
-      body += "Organization: " + organization;
-      body += "\n";
-      body += "Address: " + address;
-      body += "\n";
-      body += "Email: " + email;
-      body += "\n";
-      body += "Telephone: " + telephone;
-      body += "\n";
-      body += "Fax: " + fax;
-      body += "\n";
-      body += "\n\n";
-      body += "Date: " + new Date().toString();
-      //Set bodyHTML string
-      bodyHTML += "<br />";
-      bodyHTML += "Module: " + module;
-      bodyHTML += "<br />";
-      bodyHTML += "Page URL: " + url;
-      bodyHTML += "<br /><br />";
-      bodyHTML += "Content: " + comment;
-      bodyHTML += "<br /><br />";
-      bodyHTML += "Author: " + name;
-      bodyHTML += "<br />";
-      bodyHTML += "Organization: " + organization;
-      bodyHTML += "<br />";
-      bodyHTML += "Address: " + address;
-      bodyHTML += "<br />";
-      bodyHTML += "Email: " + email;
-      bodyHTML += "<br />";
-      bodyHTML += "Telephone: " + telephone;
-      bodyHTML += "<br />";
-      bodyHTML += "Fax: " + fax;
-      bodyHTML += "<br />";
-      bodyHTML += "<br />";
-      bodyHTML += "Date: " + new Date().toString();
-      bodyHTML += "<br />";
-      // Send feddback
-      ro.finsiel.eunis.SendMail.sendMail(
-              recipient,
-              feedbackType,
-              body,
-              application.getInitParameter( "SMTP_SERVER" ),
-              application.getInitParameter( "SMTP_USERNAME" ),
-              application.getInitParameter( "SMTP_PASSWORD" ),
-              application.getInitParameter( "SMTP_SENDER" ),
-              null // no attachments
-      );
-    }
-    catch ( Exception _ex )
-    {
-      _ex.printStackTrace( System.err );
-      throw new ServletException( _ex.getMessage() );
+    String cap = Utilities.formatString( request.getParameter( "j_captcha_response" ) );
+    
+    String captchaId = request.getSession().getId();
+    
+    isResponseCorrect = CaptchaServiceSingleton.getInstance().validateResponseForID(captchaId, cap);
+    
+    if(isResponseCorrect){
+	    try
+	    {
+	      // Set the database connection parameters
+	      String SQL_DRV = application.getInitParameter( "JDBC_DRV" );
+	      String SQL_URL = application.getInitParameter( "JDBC_URL" );
+	      String SQL_USR = application.getInitParameter( "JDBC_USR" );
+	      String SQL_PWD = application.getInitParameter( "JDBC_PWD" );
+	
+	      Class.forName( SQL_DRV );
+	      Connection con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+	      Statement ps = con.createStatement();
+	      String sql;
+	      String idFeedback;
+	      sql = "SELECT MAX(ID_FEEDBACK)+1 FROM EUNIS_FEEDBACK";// Find the last PK and increment it.
+	      ResultSet rs = ps.executeQuery( sql );
+	      rs.next();
+	      idFeedback = rs.getString( 1 );
+	      rs.close();
+	      if ( idFeedback == null )
+	      {
+	        idFeedback = "1";
+	      }
+	      sql = "";
+	      sql += " INSERT INTO EUNIS_FEEDBACK(ID_FEEDBACK,FEEDBACK_TYPE,MODULE,COMMENT,NAME,EMAIL,COMPANY,ADDRESS,PHONE,FAX,URL)";
+	      sql += " VALUES(";
+	      sql += idFeedback + ",";
+	      sql += "'" + feedbackType.replaceAll( "'", "" ) + "',";
+	      sql += "'" + module.replaceAll( "'", "" ) + "',";
+	      sql += "'" + comment.replaceAll( "'", "" ) + "',";
+	      sql += "'" + name.replaceAll( "'", "" ) + "',";
+	      sql += "'" + email.replaceAll( "'", "" ) + "',";
+	      sql += "'" + organization.replaceAll( "'", "" ) + "',";
+	      sql += "'" + address.replaceAll( "'", "" ) + "',";
+	      sql += "'" + telephone.replaceAll( "'", "" ) + "',";
+	      sql += "'" + fax.replaceAll( "'", "" ) + "',";
+	      sql += "'" + url.replaceAll( "'", "" ) + "'";
+	      sql += ")";
+	      ps.execute( sql );
+	
+	      ps.close();
+	      con.close();
+	      String recipient = application.getInitParameter( "EMAIL_FEEDBACK" );
+	      // Set body string
+	      String body = "";
+	      body += "\n";
+	      body += "Module: " + module;
+	      body += "\n";
+	      body += "Page URL: " + url;
+	      body += "\n\n";
+	      body += "Content: " + comment;
+	      body += "\n\n";
+	      body += "Author: " + name;
+	      body += "\n";
+	      body += "Organization: " + organization;
+	      body += "\n";
+	      body += "Address: " + address;
+	      body += "\n";
+	      body += "Email: " + email;
+	      body += "\n";
+	      body += "Telephone: " + telephone;
+	      body += "\n";
+	      body += "Fax: " + fax;
+	      body += "\n";
+	      body += "\n\n";
+	      body += "Date: " + new Date().toString();
+	      //Set bodyHTML string
+	      bodyHTML += "<br />";
+	      bodyHTML += "Module: " + module;
+	      bodyHTML += "<br />";
+	      bodyHTML += "Page URL: " + url;
+	      bodyHTML += "<br /><br />";
+	      bodyHTML += "Content: " + comment;
+	      bodyHTML += "<br /><br />";
+	      bodyHTML += "Author: " + name;
+	      bodyHTML += "<br />";
+	      bodyHTML += "Organization: " + organization;
+	      bodyHTML += "<br />";
+	      bodyHTML += "Address: " + address;
+	      bodyHTML += "<br />";
+	      bodyHTML += "Email: " + email;
+	      bodyHTML += "<br />";
+	      bodyHTML += "Telephone: " + telephone;
+	      bodyHTML += "<br />";
+	      bodyHTML += "Fax: " + fax;
+	      bodyHTML += "<br />";
+	      bodyHTML += "<br />";
+	      bodyHTML += "Date: " + new Date().toString();
+	      bodyHTML += "<br />";
+	      // Send feddback
+	      ro.finsiel.eunis.SendMail.sendMail(
+	              recipient,
+	              feedbackType,
+	              body,
+	              application.getInitParameter( "SMTP_SERVER" ),
+	              application.getInitParameter( "SMTP_USERNAME" ),
+	              application.getInitParameter( "SMTP_PASSWORD" ),
+	              application.getInitParameter( "SMTP_SENDER" ),
+	              null // no attachments
+	      );
+	    }
+	    catch ( Exception _ex )
+	    {
+	      _ex.printStackTrace( System.err );
+	      throw new ServletException( _ex.getMessage() );
+	    }
+    } else {
+	    bodyHTML += "Captcha verification failed!";
     }
   }
 
@@ -147,6 +157,7 @@
                  java.sql.DriverManager,
                  java.sql.Statement,
                  java.sql.ResultSet,
+                 ro.finsiel.captcha.CaptchaServiceSingleton,
                  ro.finsiel.eunis.WebContentManagement, ro.finsiel.eunis.search.Utilities" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -206,6 +217,7 @@
 <%
   if ( operation.equalsIgnoreCase( "feedback" ) )
   {
+	  if (isResponseCorrect) {
 %>
 
 
@@ -221,6 +233,7 @@
                   <%=cm.cmsText("generic_feedback_03")%>
                 </strong>
                 <br />
+<% } %>
                 <br />
                 <%=bodyHTML%>
                 <br />
@@ -231,9 +244,6 @@
   else
   {
 %>
-                <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>" />
-                </jsp:include>
                 <h1>
                   <%=cm.cmsText("generic_feedback_04")%>
                 </h1>
@@ -369,6 +379,15 @@
                       <td>
                         <input title="Fax" name="fax" type="text" id="fax" size="40" />
                       </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                    		<label for="j_captcha_response"><%=cm.cmsText("generic_feedback_28")%></label>
+                    	</td>
+                    	<td>
+                    		<img src="/eunis/jcaptcha"><br/>
+							<input type="text" name="j_captcha_response" value="">
+                    	</td>
                     </tr>
                   </table>
                   <p>

@@ -34,6 +34,10 @@
           <div id="portal-column-content">
             <div id="content">
               <div class="documentContent" id="region-content">
+              	<jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="<%=btrail%>"/>
+                  <jsp:param name="helpLink" value="help.jsp"/>
+                </jsp:include>
                 <a name="documentContent"></a>
                 <div class="documentActions">
                   <h5 class="hiddenStructure">Document Actions</h5>
@@ -50,12 +54,7 @@
                     </li>
                   </ul>
                 </div>
-                <br clear="all" />
 <!-- MAIN CONTENT -->
-                <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>"/>
-                  <jsp:param name="helpLink" value="help.jsp"/>
-                </jsp:include>
                 <img alt="Loading image" id="loading" src="images/loading.gif" />
                 <h1>Heading of level 1 - Page title</h1>
                 <div class="documentDescription">

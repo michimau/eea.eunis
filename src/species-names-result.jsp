@@ -163,6 +163,11 @@
           <div id="portal-column-content">
             <div id="content">
               <div class="documentContent" id="region-content">
+              	<jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="<%=location%>" />
+                  <jsp:param name="helpLink" value="species-help.jsp" />
+                  <jsp:param name="downloadLink" value="<%=downloadLink%>" />
+                </jsp:include>
                 <a name="documentContent"></a>
                 <div class="documentActions">
                   <h5 class="hiddenStructure">Document Actions</h5>
@@ -179,13 +184,7 @@
                     </li>
                   </ul>
                 </div>
-                <br clear="all" />
 <!-- MAIN CONTENT -->
-                <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=location%>" />
-                  <jsp:param name="helpLink" value="species-help.jsp" />
-                  <jsp:param name="downloadLink" value="<%=downloadLink%>" />
-                </jsp:include>
                 <h1>
                    <%
                       if(newName) {

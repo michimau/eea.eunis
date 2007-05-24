@@ -103,6 +103,11 @@
           <div id="portal-column-content">
             <div id="content">
               <div class="documentContent" id="region-content">
+              	<jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="<%=btrail%>"/>
+                  <jsp:param name="mapLink" value="show"/>
+                  <jsp:param name="helpLink" value="sites-help.jsp"/>
+                </jsp:include>
                 <a name="documentContent"></a>
                 <div class="documentActions">
                   <h5 class="hiddenStructure">Document Actions</h5>
@@ -119,13 +124,7 @@
                     </li>
                   </ul>
                 </div>
-                <br clear="all" />
 <!-- MAIN CONTENT -->
-                <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>"/>
-                  <jsp:param name="mapLink" value="show"/>
-                  <jsp:param name="helpLink" value="sites-help.jsp"/>
-                </jsp:include>
                 <form name="eunis" method="get" onsubmit="return validateForm();" action="sites-habitats-result.jsp">
                   <h1>
                     <%=cm.cmsText("pick_habitat_type_show_sites")%>

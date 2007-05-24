@@ -1,8 +1,4 @@
 <%@ page import="ro.finsiel.eunis.search.Utilities" %>
-<%@page contentType="text/html;charset=UTF-8"%>
-<%
-  request.setCharacterEncoding( "UTF-8");
-%>
 <%--
   - Author(s)   : The EUNIS Database Team.
   - Date        :
@@ -48,7 +44,6 @@
                     </li>
                   </ul>
                 </div>
-                <br clear="all" />
 <!-- MAIN CONTENT -->
                 <h1>
                   Database connection error

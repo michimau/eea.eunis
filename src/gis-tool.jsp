@@ -29,7 +29,7 @@
       <!-- The wrapper div. It contains the three columns. -->
       <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
-        <div id="visual-column-wrapper">
+        <div id="visual-column-wrapper-gis-tool">
           <!-- start of main content block -->
           <div id="portal-column-content">
             <div id="content">
@@ -50,7 +50,6 @@
                     </li>
                   </ul>
                 </div>
-                <br clear="all" />
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
                   <jsp:param name="location" value="<%=btrail%>"/>

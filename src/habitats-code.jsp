@@ -80,6 +80,10 @@ function openHelper(URL)
           <div id="portal-column-content">
             <div id="content">
               <div class="documentContent" id="region-content">
+              	<jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="<%=btrail%>" />
+                  <jsp:param name="helpLink" value="habitats-help.jsp" />
+                </jsp:include>
                 <a name="documentContent"></a>
                 <div class="documentActions">
                   <h5 class="hiddenStructure">Document Actions</h5>
@@ -96,12 +100,7 @@ function openHelper(URL)
                     </li>
                   </ul>
                 </div>
-                <br clear="all" />
 <!-- MAIN CONTENT -->
-                <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>" />
-                  <jsp:param name="helpLink" value="habitats-help.jsp" />
-                </jsp:include>
                 <form name="eunis" method="get" onsubmit="javascript: return validateForm();" action="habitats-code-result.jsp">
                 <input type="hidden" value="true" name="clearsubs" />
                 <input type="hidden" name="sortCriteria" value="code" />

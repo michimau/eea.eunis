@@ -98,6 +98,11 @@
           <div id="portal-column-content">
             <div id="content">
               <div class="documentContent" id="region-content">
+              	<jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="<%=btrail%>" />
+                  <jsp:param name="printLink" value="<%=pdfURL%>"/>
+                  <jsp:param name="mapLink" value="show"/>
+                </jsp:include>
                 <a name="documentContent"></a>
                 <div class="documentActions">
                   <h5 class="hiddenStructure">Document Actions</h5>
@@ -114,17 +119,11 @@
                     </li>
                   </ul>
                 </div>
-                <br clear="all" />
 <!-- MAIN CONTENT -->
 <%
   if(null != factsheet.getIDNatureObject())
   {
 %>
-                <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>" />
-                  <jsp:param name="printLink" value="<%=pdfURL%>"/>
-                  <jsp:param name="mapLink" value="show"/>
-                </jsp:include>
 <%
     String []tabs = {
             "sites_factsheet_tab_general_informations",

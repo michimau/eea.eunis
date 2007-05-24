@@ -28,13 +28,16 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns" class="visualColumnHideTwo"> class="visualColumnHideTwo">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
           <div id="portal-column-content">
             <div id="content">
               <div class="documentContent" id="region-content">
+              	<jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="<%=btrail%>" />
+                </jsp:include>
                 <a name="documentContent"></a>
                 <div class="documentActions">
                   <h5 class="hiddenStructure">Document Actions</h5>
@@ -51,11 +54,7 @@
                     </li>
                   </ul>
                 </div>
-                <br clear="all" />
 <!-- MAIN CONTENT -->
-                <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>" />
-                </jsp:include>
                 <h1>
                 <%=cm.cmsText("accessibility_statement")%>
                 </h1>

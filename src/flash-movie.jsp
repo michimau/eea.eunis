@@ -49,7 +49,6 @@
                     </li>
                   </ul>
                 </div>
-                <br clear="all" />
 <!-- MAIN CONTENT -->
                 <div style="text-align:center;width:100%;height:100%">
                 <div style="width:800px; height:600px">

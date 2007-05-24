@@ -281,6 +281,12 @@
     <servlet-name>habitats</servlet-name>
     <jsp-file>/habitats.jsp</jsp-file>
   </servlet>
+  
+  <servlet>
+        <servlet-name>jcaptcha</servlet-name>
+        <servlet-class>ro.finsiel.captcha.ImageCaptchaServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+  </servlet>
 
   <!-- Map servlet to URL -->
   <servlet-mapping>
@@ -301,6 +307,11 @@
   <servlet-mapping>
     <servlet-name>habitats</servlet-name>
     <url-pattern>/habitats</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+        <servlet-name>jcaptcha</servlet-name>
+        <url-pattern>/jcaptcha</url-pattern>
   </servlet-mapping>
 
   <!-- Session expiration in minutes -->

@@ -40,7 +40,7 @@
     
     isResponseCorrect = CaptchaServiceSingleton.getInstance().validateResponseForID(captchaId, cap);
     
-    if(isResponseCorrect){
+    if(isResponseCorrect.booleanValue()){
 	    try
 	    {
 	      // Set the database connection parameters
@@ -385,7 +385,7 @@
                     		<label for="j_captcha_response"><%=cm.cmsText("generic_feedback_28")%></label>
                     	</td>
                     	<td>
-                    		<img src="/eunis/jcaptcha"><br/>
+                    		<img src="/jcaptcha"><br/>
 							<input type="text" name="j_captcha_response" value="">
                     	</td>
                     </tr>

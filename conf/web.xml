@@ -16,7 +16,7 @@
  -->
   <context-param>
     <param-name>DOMAIN_NAME</param-name>
-    <param-value>>http://eunis.eea.europa.eu</param-value>
+    <param-value>http://eunis.eea.europa.eu</param-value>
     <description>Domain where application is installed</description>
   </context-param>
 
@@ -159,7 +159,7 @@
   <!-- Last modification date -->
   <context-param>
     <param-name>LAST_UPDATE</param-name>
-    <param-value>20 October 2006</param-value>
+    <param-value>27 October 2006</param-value>
     <description>Date of last modification for the web site</description>
   </context-param>
 
@@ -204,7 +204,7 @@
     <param-value>http://map.eea.europa.eu</param-value>
     <description>Address of the EEA map server</description>
   </context-param>
-  
+
   <context-param>
     <param-name>EEA_HOME</param-name>
     <param-value>http://www.eea.europa.eu/</param-value>
@@ -281,7 +281,7 @@
     <servlet-name>habitats</servlet-name>
     <jsp-file>/habitats.jsp</jsp-file>
   </servlet>
-  
+
   <servlet>
         <servlet-name>jcaptcha</servlet-name>
         <servlet-class>ro.finsiel.captcha.ImageCaptchaServlet</servlet-class>
@@ -308,7 +308,7 @@
     <servlet-name>habitats</servlet-name>
     <url-pattern>/habitats</url-pattern>
   </servlet-mapping>
-  
+
   <servlet-mapping>
         <servlet-name>jcaptcha</servlet-name>
         <url-pattern>/jcaptcha</url-pattern>
@@ -328,7 +328,7 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  
+
   <!--Error handling page-->
   <error-page>
     <error-code>403</error-code>

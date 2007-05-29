@@ -146,8 +146,6 @@
 	      _ex.printStackTrace( System.err );
 	      throw new ServletException( _ex.getMessage() );
 	    }
-    } else {
-	    bodyHTML += "Captcha verification failed!";
     }
   }
 
@@ -171,7 +169,7 @@
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("feedback")%>
     </title>
-    <script language="JavaScript" type="text/javascript">
+    <script type="text/javascript">
       <!--
     function testform() {
       if (document.feed.comment.value=="" || document.feed.comment.value=="Enter your comments here... ") {
@@ -217,7 +215,7 @@
 <%
   if ( operation.equalsIgnoreCase( "feedback" ) )
   {
-	  if (isResponseCorrect) {
+	  if (isResponseCorrect.booleanValue()) {
 %>
 
 
@@ -233,6 +231,10 @@
                   <%=cm.cmsText("generic_feedback_03")%>
                 </strong>
                 <br />
+<% } else { %>
+                <h1>
+                  <%=cm.cmsText("captcha_verification_failed")%>
+                </h1>
 <% } %>
                 <br />
                 <%=bodyHTML%>
@@ -385,8 +387,8 @@
                     		<label for="j_captcha_response"><%=cm.cmsText("generic_feedback_28")%></label>
                     	</td>
                     	<td>
-                    		<img src="/jcaptcha"><br/>
-							<input type="text" name="j_captcha_response" value="">
+                    		<img src="jcaptcha" /><br/>
+							<input type="text" id="j_captcha_response" name="j_captcha_response" value="" />
                     	</td>
                     </tr>
                   </table>

@@ -256,8 +256,10 @@
                 <form name="feed" action="feedback.jsp" method="post" onsubmit="javascript: return testform();">
                   <input type="hidden" name="operation" value="feedback" />
                   <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <col style="width:40%"/>
+                    <col style="width:60%"/>
                     <tr>
-                      <td width="40%">
+                      <td>
                         <strong>
                           <%=cm.cmsText("generic_feedback_06")%>
                         </strong>
@@ -290,7 +292,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td width="40%"><strong><%=cm.cmsText("feedback_module")%></strong></td>
+                      <td><strong><%=cm.cmsText("feedback_module")%></strong></td>
                       <td>
                         <label for="select" class="noshow"><%=cm.cms("feedback_module")%></label>
                         <select title="<%=cm.cms("feedback_module")%>" name="module" id="select">
@@ -323,13 +325,13 @@
                       </td>
                     </tr>
                     <tr>
-                      <td width="99">
+                      <td>
                         <strong>
                           <label for="url"><%=cm.cmsText("feedback_url")%></label>
                         </strong>
                       </td>
                       <td>
-                        <input title="<%=cm.cms("feedback_url")%>" name="url" type="text" id="url" size="80" value="<%=referer%>" />
+                        <input name="url" type="text" id="url" size="80" value="<%=referer%>" />
                       </td>
                     </tr>
                   </table>
@@ -342,12 +344,14 @@
                   <br />
                   <%=cm.cmsText("generic_feedback_20")%>
                   <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <col style="width:40%"/>
+                    <col style="width:60%"/>
                     <tr>
-                      <td width="99">
+                      <td>
                         <label for="name"><%=cm.cmsText("generic_feedback_21")%></label>
                       </td>
-                      <td width="635">
-                        <input title="<%=cm.cms("generic_feedback_21")%>" name="name" type="text" id="name" size="40" />
+                      <td>
+                        <input name="name" type="text" id="name" size="40" />
                       </td>
                     </tr>
                     <tr>
@@ -355,7 +359,7 @@
                         <label for="email"><%=cm.cmsText("generic_feedback_22")%></label>
                       </td>
                       <td>
-                        <input title="<%=cm.cms("generic_feedback_22")%>" name="email" type="text" id="email" size="40" />
+                        <input name="email" type="text" id="email" size="40" />
                       </td>
                     </tr>
                     <tr>
@@ -363,7 +367,7 @@
                         <label for="organization"><%=cm.cmsText("generic_feedback_23")%></label>
                       </td>
                       <td>
-                        <input title="<%=cm.cms("generic_feedback_23")%>" name="organization" type="text" id="organization" size="40" />
+                        <input name="organization" type="text" id="organization" size="40" />
                       </td>
                     </tr>
                     <tr>
@@ -371,7 +375,7 @@
                         <label for="telephone"><%=cm.cmsText("generic_feedback_25")%></label>
                       </td>
                       <td>
-                        <input title="<%=cm.cms("generic_feedback_25")%>" name="telephone" type="text" id="telephone" size="40" />
+                        <input name="telephone" type="text" id="telephone" size="40" />
                       </td>
                     </tr>
                     <tr>
@@ -379,7 +383,7 @@
                         <label for="fax"><%=cm.cmsText("generic_feedback_26")%></label>
                       </td>
                       <td>
-                        <input title="Fax" name="fax" type="text" id="fax" size="40" />
+                        <input name="fax" type="text" id="fax" size="40" />
                       </td>
                     </tr>
                     <tr>
@@ -387,13 +391,13 @@
                     		<label for="j_captcha_response"><%=cm.cmsText("generic_feedback_28")%></label>
                     	</td>
                     	<td>
-                    		<img src="jcaptcha" /><br/>
-							<input type="text" id="j_captcha_response" name="j_captcha_response" value="" />
+                    		<img src="jcaptcha" alt="picture with text" /><br/>
+                                <input type="text" id="j_captcha_response" name="j_captcha_response" value="" />
                     	</td>
                     </tr>
                   </table>
                   <p>
-                    <input title="<%=cm.cms("send_feedback")%>" type="submit" id="submit" value="<%=cm.cms("send_feedback")%>" name="ContactUs" class="searchButton" />
+                    <input type="submit" id="submit" value="<%=cm.cms("send_feedback")%>" name="ContactUs" class="searchButton" />
                     <%=cm.cmsInput("send_feedback")%>
                   </p>
                 </form>

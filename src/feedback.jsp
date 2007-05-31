@@ -289,9 +289,8 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><strong><%=cm.cmsText("feedback_module")%></strong></td>
+                      <td><label for="select"><%=cm.cms("feedback_module")%></label></td>
                       <td>
-                        <label for="select" class="noshow"><%=cm.cms("feedback_module")%></label>
                         <select title="<%=cm.cms("feedback_module")%>" name="module" id="select">
                           <option value="Not specified" <%=(module.equalsIgnoreCase("Not specified") ? "selected=\"selected\"" : "")%>>
                             <%=cm.cms("generic_feedback_12")%>
@@ -323,20 +322,16 @@
                     </tr>
                     <tr>
                       <td>
-                        <strong>
-                          <label for="url"><%=cm.cmsText("feedback_url")%></label>
-                        </strong>
-                      </td>
+                        <label for="url"><%=cm.cmsText("feedback_url")%></label>
+                       </td>
                       <td>
                         <input name="url" type="text" id="url" size="80" value="<%=referer%>" />
                       </td>
                     </tr>
                   </table>
                   <br />
-                  <strong>
-                    <label for="comment"><%=cm.cmsText("generic_feedback_18")%></label>
-                  </strong>
-                  <textarea title="<%=cm.cms("generic_feedback_18")%>" name="comment" id="comment" rows="8" cols="50">Enter your comments here... </textarea>
+                  <label for="comment"><%=cm.cmsText("generic_feedback_18")%></label>
+                   <textarea title="<%=cm.cms("generic_feedback_18")%>" name="comment" id="comment" rows="8" cols="50">Enter your comments here... </textarea>
                   <br />
                   <br />
                   <%=cm.cmsText("generic_feedback_20")%>

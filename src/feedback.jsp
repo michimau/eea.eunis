@@ -260,12 +260,9 @@
                     <col style="width:60%"/>
                     <tr>
                       <td>
-                        <strong>
-                          <%=cm.cmsText("generic_feedback_06")%>
-                        </strong>
+                        <label for="feedbackType"><%=cm.cmsText("generic_feedback_06")%></label>
                       </td>
                       <td>
-                        <label for="feedbackType" class="noshow"><%=cm.cms("feedback_type")%></label>
                         <select title="<%=cm.cms("feedback_type")%>" size="1" name="feedbackType" id="feedbackType">
                           <option value="Proposal to add value" <%=(feedbackType.equalsIgnoreCase("Proposal to add value") ? "selected=\"selected\"" : "")%>>
                             <%=cm.cms("generic_feedback_07")%>

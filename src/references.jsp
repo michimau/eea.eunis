@@ -120,10 +120,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_included")%>
                     &nbsp;
-                    <strong>
-                      <%=cm.cmsText("author")%>
-                    </strong>
-                    <label for="relationOpAuthor" class="noshow"><%=cm.cms("operator")%></label>
+                    <label for="relationOpAuthor"><%=cm.cmsText("author")%></label>
                     <select id="relationOpAuthor" name="relationOpAuthor">
                       <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpAuthor.equalsIgnoreCase(Utilities.OPERATOR_IS.toString())?"selected=\"selected\"":"")%>>
                         <%=cm.cms( "is")%>
@@ -148,10 +145,7 @@
                     <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
                     <%=cm.cmsAlt("field_included")%>
                     &nbsp;
-                    <strong>
-                      <%=cm.cmsText("year")%>
-                    </strong>
-                    <label for="relOpDate" class="noshow"><%=cm.cms("operator")%></label>
+                    <label for="relOpDate"><%=cm.cmsText("year")%></label>
                     <select id="relOpDate" name="relOpDate" onchange="MM_jumpMenu('parent',this,0)">
                       <option value="references.jsp?between=no" <%=(request.getParameter("between")==null?"selected=\"selected\"":(request.getParameter("between").equalsIgnoreCase("yes")?"":"selected=\"selected\""))%>>
                         <%=cm.cms("is")%>
@@ -195,10 +189,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_included")%>
                   &nbsp;
-                  <strong>
-                    <%=cm.cmsText("title")%>
-                  </strong>
-                  <label for="relationOpTitle" class="noshow"><%=cm.cms("operator")%></label>
+                  <label for="relationOpTitle"><%=cm.cmsText("title")%></label>
                   <select id="relationOpTitle" name="relationOpTitle">
                     <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpTitle.equalsIgnoreCase(Utilities.OPERATOR_IS.toString())?"selected=\"selected\"":"")%>>
                       <%=cm.cms("is")%>
@@ -224,10 +215,7 @@
                   <br />
                   <img src="images/mini/field_included.gif" alt="Field is optional" title="Field is optional" />
                   &nbsp;
-                  <strong>
-                    <%=cm.cmsText("editor")%>
-                  </strong>
-                  <label for="relationOpEditor" class="noshow"><%=cm.cms("operator")%></label>
+                  <label for="relationOpEditor"><%=cm.cmsText("editor")%></label>
                   <select id="relationOpEditor" name="relationOpEditor">
                     <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpEditor.equalsIgnoreCase(Utilities.OPERATOR_IS.toString())?"selected=\"selected\"":"")%>>
                       <%=cm.cms("is")%>
@@ -254,10 +242,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_included")%>
                   &nbsp;
-                  <strong>
-                    <%=cm.cmsText("publisher")%>
-                  </strong>
-                  <label for="relationOpPublisher" class="noshow"><%=cm.cms("operator")%></label>
+                  <label for="relationOpPublisher"><%=cm.cmsText("publisher")%></label>
                   <select id="relationOpPublisher" name="relationOpPublisher">
                     <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpPublisher.equalsIgnoreCase(Utilities.OPERATOR_IS.toString())?"selected=\"selected\"":"")%>>
                       <%=cm.cms("is")%>

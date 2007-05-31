@@ -232,7 +232,6 @@
                       <%=cm.cmsInput("title")%>
                       <%=cm.cmsInput("author")%>
 
-                      <label for="oper" class="noshow"><%=cm.cms("operator")%></label>
                       <select id="oper" name="oper">
                         <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
                           <%=cm.cms("is")%>

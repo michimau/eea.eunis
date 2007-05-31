@@ -134,10 +134,7 @@
                   </div>
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_mandatory")%>
-                  <strong>
-                    <%=cm.cmsText("site_name")%>
-                  </strong>
-                  <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
+                  <label for="relationOp"><%=cm.cmsText("site_name")%></label>
                   <select id="relationOp" name="relationOp" title="<%=cm.cms("operator")%>">
                     <option value="<%=Utilities.OPERATOR_IS%>">
                       <%=cm.cms("is")%>
@@ -166,10 +163,7 @@
                   <br />
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_optional")%>
-                  <strong>
-                    <%=cm.cmsText("sites_names_11")%>
-                  </strong>
-                  <label for="country" class="noshow"><%=cm.cms("country")%></label>
+                  <label for="country"><%=cm.cmsText("sites_names_11")%></label>
                   <input id="country" name="country" type="text" size="30" title="<%=cm.cms("country")%>" />
                   <%=cm.cmsLabel("country")%>
                   <%=cm.cmsTitle("country")%>

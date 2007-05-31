@@ -134,10 +134,7 @@
                               <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
                               <%=cm.cmsAlt("field_mandatory")%>
                               <%=cm.cmsTitle("field_mandatory")%>
-                              <strong>
-                                <label for="scientificName"><%=cm.cmsText("scientific_name")%></label>
-                              </strong>
-                              <label for="select1" class="noshow"><%=cm.cms("operator")%></label>
+                              <label for="scientificName"><%=cm.cmsText("scientific_name")%></label>
                               <select id="select1" title="<%=cm.cms("operator")%>" name="relationOp">
                                 <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
                                 <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
@@ -244,10 +241,7 @@
                                 <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
                                 <%=cm.cmsAlt("field_mandatory")%>
                                 <%=cm.cmsTitle("field_mandatory")%>
-                                <strong>
-                                  <label for="vernacularName"><%=cm.cmsText("vernacular_name")%></label>
-                                </strong>
-                                <label for="select2" class="noshow"><%=cm.cms("operator")%></label>
+                                <label for="vernacularName"><%=cm.cmsText("vernacular_name")%></label>
                                 <select id="select2" title="<%=cm.cms("operator")%>" size="1" name="relationOp">
                                   <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
                                   <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>

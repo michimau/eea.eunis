@@ -130,9 +130,7 @@
                   <%=cm.cmsAlt("field_mandatory")%>
                   &nbsp;
                   <label for="country">
-                    <strong>
                       <%=cm.cmsText("country_is")%>
-                    </strong>
                     &nbsp;
                   </label>
                   <input id="country" name="country" type="text" size="30" title="<%=cm.cms("country_is")%>" />

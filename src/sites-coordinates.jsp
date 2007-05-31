@@ -110,11 +110,8 @@
                   </div>
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_included")%>
-                  <strong>
-                    <%=cm.cmsText("longitude")%>
-                  </strong>
+                  <label for="longMin"><%=cm.cmsText("longitude")%></label>
                   <%=cm.cmsText("between")%>
-                  <label for="longMin" class="noshow"><%=cm.cms("sites_coordinates_minlongitude")%></label>
                   <input id="longMin" name="longMin" type="text" title="<%=cm.cms("sites_coordinates_minlongitude")%>" />
                   <%=cm.cmsLabel("sites_coordinates_minlongitude")%>
                   <%=cm.cmsTitle("sites_coordinates_minlongitude")%>
@@ -141,11 +138,8 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
                   <%=cm.cmsTitle("field_included")%>
                   <%=cm.cmsAlt("field_included")%>
-                  <strong>
-                    <%=cm.cmsText("latitude")%>
-                  </strong>
+                  <label for="latMin"><%=cm.cmsText("latitude")%></label>
                   <%=cm.cmsText("between")%>
-                  <label for="latMin" class="noshow"><%=cm.cms("sites_coordinates_minlatitude")%></label>
                   <input id="latMin" name="latMin" type="text" title="<%=cm.cms("sites_coordinates_minlatitude")%>" />
                   <%=cm.cmsTitle("sites_coordinates_minlatitude")%>
                   <%=cm.cmsLabel("sites_coordinates_minlatitude")%>
@@ -175,9 +169,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_optional")%>
                   <label for="country">
-                    <strong>
                       <%=cm.cmsText("country_name")%>
-                    </strong>
                   </label>
                   <input name="country" type="text" id="country" title="<%=cm.cms("country_name")%>" />&nbsp;
                   <%=cm.cmsTitle("country_name")%>

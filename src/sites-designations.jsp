@@ -103,10 +103,7 @@
                   </div>
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_mandatory")%>
-                  <strong>
-                    <%=cm.cmsText("original_english_french_designation_name")%>
-                  </strong>
-                  <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
+                  <label for="relationOp"><%=cm.cmsText("original_english_french_designation_name")%></label>
                   <select id="relationOp" name="relationOp" title="<%=cm.cms("operator")%>">
                     <option value="<%=Utilities.OPERATOR_IS%>">
                       <%=cm.cms("is")%>
@@ -135,9 +132,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_optional")%>
                   <label for="category">
-                    <strong>
                       <%=cm.cmsText("designation_category")%>
-                    </strong>
                   </label>
                   <select id="category" name="category" title="<%=cm.cms("designation_category")%>">
                     <option value="A"><%=cm.cms("sites_designations_cata")%></option>

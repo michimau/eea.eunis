@@ -175,10 +175,7 @@
                           <td>
                             <br />
                             <img width="11" height="12" style="vertical-align:middle" alt="Mandatory field" title="This field is mandatory" src="images/mini/field_mandatory.gif" />
-                            <strong>
-                              <%=cm.cmsText( "term" )%>
-                            </strong>
-                            <label for="operand" class="noshow"><%=cm.cms("operator")%></label>
+                            <label for="searchString"><%=cm.cmsText( "term" )%></label>
                             <select title="Operator" name="operand" id="operand">
                               <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
                               <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>

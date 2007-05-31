@@ -274,7 +274,6 @@
                         <%=cm.cmsLabel("search_attribute")%>
                         <%=cm.cmsTitle("search_attribute")%>
                           &nbsp;
-                        <label for="select2" class="noshow"><%=cm.cms("operator")%></label>
                         <select id="select2" title="<%=cm.cms("operator")%>" name="relationOp">
                           <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
                           <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>

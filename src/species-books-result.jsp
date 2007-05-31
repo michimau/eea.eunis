@@ -195,7 +195,6 @@
                                 </select>
                                 <%=cm.cmsLabel("criteria")%>
                                 <%=cm.cmsTitle("criteria")%>
-                                <label for="select2" class="noshow"><%=cm.cms("operator")%></label>
                                 <select id="select2" title="<%=cm.cms("species_books-result_17_Title")%>" name="oper">
                                     <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
                                         <%=cm.cms("is")%>

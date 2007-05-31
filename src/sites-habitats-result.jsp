@@ -213,7 +213,6 @@
                     <%=cm.cmsInput("site_name")%>
                     <%=cm.cmsInput("habitat_type_name")%>
 
-                    <label for="oper" class="noshow"><%=cm.cms("operator")%></label>
                     <select id="oper" name="oper" title="<%=cm.cms("operator")%>">
                       <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("is")%></option>
                       <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("starts_with")%></option>

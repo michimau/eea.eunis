@@ -209,7 +209,6 @@ function validateForm()
                               <%=cm.cmsInput("country_name")%>
                               <%=cm.cmsInput("biogeographic_region_name")%>
                               &nbsp;
-                              <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
                               <select title="<%=cm.cms("operator")%>" name="relationOp" id="relationOp">
                                 <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
                                 <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>

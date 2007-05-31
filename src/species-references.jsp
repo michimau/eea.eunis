@@ -125,12 +125,9 @@
                               <img alt="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" />
                               <%=cm.cmsAlt("field_included")%>
                               &nbsp;
-                              <strong>
-                                <label for="author"><%=cm.cmsText("author")%></label>
-                              </strong>
+                              <label for="author"><%=cm.cmsText("author")%></label>
                             </td>
                             <td width="17%">
-                              <label for="select1" class="noshow"><%=cm.cms("operator")%></label>
                               <select id="select1" title="<%=cm.cms("operator")%>" name="relationOpAuthor">
                                 <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpAuthor == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("is")%></option>
                                 <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpAuthor == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("contains")%></option>
@@ -152,7 +149,6 @@
                               <img alt="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" />
                               <%=cm.cmsAlt("field_included")%>
                               &nbsp;
-                              <strong>
 <%
   if (request.getParameter("between")!=null && request.getParameter("between").equalsIgnoreCase("yes"))
   {
@@ -169,10 +165,8 @@
 <%
   }
 %>
-                              </strong>
                             </td>
                             <td>
-                              <label for="select2" class="noshow"><%=cm.cms("operator")%></label>
                               <select id="select2" title="<%=cm.cms("operator")%>" name="relOpDate" onchange="MM_jumpMenu('parent',this,0)">
                                 <option value="species-references.jsp?between=no" <%=(request.getParameter("between")==null?"selected=\"selected\"":(request.getParameter("between").equalsIgnoreCase("yes")?"":"selected=\"selected\""))%>><%=cm.cms("is")%></option>
                                 <option value="species-references.jsp?between=yes" <%if (request.getParameter("between")!=null && request.getParameter("between").equalsIgnoreCase("yes")){%> selected="selected"<%}%>><%=cm.cms("between")%></option>
@@ -231,12 +225,9 @@
                               <img alt="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" />
                               <%=cm.cmsAlt("field_included")%>
                               &nbsp;
-                              <strong>
-                                <label for="title"><%=cm.cmsText("title")%></label>
-                              </strong>
+                              <label for="title"><%=cm.cmsText("title")%></label>
                             </td>
                             <td>
-                              <label for="select3" class="noshow"><%=cm.cms("operator")%></label>
                               <select id="select3" title="<%=cm.cms("operator")%>" name="relationOpTitle">
                                 <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpTitle == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("is")%></option>
                                 <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpTitle == Utilities.OPERATOR_CONTAINS.intValue())?"selected=\"selected\"" : ""%>><%=cm.cms("contains")%></option>
@@ -259,12 +250,9 @@
                               <img alt="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" />
                               <%=cm.cmsAlt("field_included")%>
                               &nbsp;
-                              <strong>
-                                <label for="editor"><%=cm.cmsText("editor")%></label>
-                              </strong>
+                              <label for="editor"><%=cm.cmsText("editor")%></label>
                             </td>
                             <td>
-                              <label for="select4" class="noshow"><%=cm.cms("operator")%></label>
                               <select id="select4" title="<%=cm.cms("operator")%>" name="relationOpEditor">
                                 <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpEditor == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("is")%></option>
                                 <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpEditor == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("contains")%></option>
@@ -287,12 +275,9 @@
                               <img alt="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" />
                               <%=cm.cmsAlt("field_included")%>
                               &nbsp;
-                              <strong>
-                                <label for="publisher"><%=cm.cmsText("publisher")%></label>
-                              </strong>
+                              <label for="publisher"><%=cm.cmsText("publisher")%></label>
                             </td>
                             <td>
-                              <label for="select5" class="noshow"><%=cm.cms("operator")%></label>
                               <select id="select5" title="<%=cm.cms("operator")%>" name="relationOpPublisher">
                                 <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpPublisher == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("is")%></option>
                                 <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpPublisher == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("contains")%></option>

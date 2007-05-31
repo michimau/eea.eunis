@@ -117,10 +117,7 @@
                   </div>
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_included")%>
-                  <strong>
-                    <%=cm.cmsText("mean_altitude_m")%>
-                  </strong>
-                  <label for="relOp" class="noshow"><%=cm.cms("operator")%></label>
+                  <label for="relOp"><%=cm.cmsText("mean_altitude_m")%></label>
                   <select id="relOp" name="relOp" onchange="MM_jumpMenuAlt('parent',this,0)" title="<%=cm.cms("operator")%>">
           <%
             String selected = "";
@@ -210,9 +207,6 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
                   <%=cm.cmsTitle("field_included")%>
                   <%=cm.cmsAlt("field_included")%>
-                  <strong>
-                    <%=cm.cmsText("minimum_altitude")%>
-                  </strong>
           <%
             selected = "";
             String no2 = Utilities.formatString( request.getParameter( "no2" ), "" );
@@ -221,7 +215,7 @@
               selected = "selected=\"selected\"";
             }
           %>
-                  <label for="relOp2" class="noshow"><%=cm.cms("operator")%></label>
+                  <label for="relOp2"><%=cm.cmsText("minimum_altitude")%></label>
                   <select id="relOp2" name="relOp2" onchange="MM_jumpMenuAlt('parent',this,0)" title="<%=cm.cms("operator")%>">
                     <option value="sites-altitude.jsp?between2=no&amp;no2=1&amp;between=<%=request.getParameter("between")%>&amp;no=<%=request.getParameter("no")%>&amp;between3=<%=request.getParameter("between3")%>&amp;no3=<%=request.getParameter("no3")%>" <%=selected%>>
                       <%=cm.cms("is")%>
@@ -303,9 +297,6 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
                   <%=cm.cmsTitle("field_included")%>
                   <%=cm.cmsAlt("field_included")%>
-                  <strong>
-                    <%=cm.cmsText("maximum_altitude_m")%>
-                  </strong>
           <%
             selected = "";
             String no3 = Utilities.formatString( request.getParameter( "no3" ), "" );
@@ -314,7 +305,7 @@
               selected = "selected=\"selected\"";
             }
           %>
-                  <label for="relOp3" class="noshow"><%=cm.cms("operator")%></label>
+                  <label for="relOp3"><%=cm.cmsText("maximum_altitude_m")%></label>
                   <select id="relOp3" name="relOp3" onchange="MM_jumpMenuAlt('parent',this,0)" title="<%=cm.cms("operator")%>">
                     <option value="sites-altitude.jsp?between3=no&amp;no3=1&amp;between=<%=request.getParameter("between")%>&amp;no=<%=request.getParameter("no")%>&amp;between2=<%=request.getParameter("between2")%>&amp;no2=<%=request.getParameter("no2")%>" <%=selected%>>
                       <%=cm.cms("is")%>
@@ -397,7 +388,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_optional")%>
 
-                  <label for="country"><strong><%=cm.cmsText("country_is")%></strong></label>
+                  <label for="country"><%=cm.cmsText("country_is")%></label>
                   <input id="country" name="country" type="text" size="30" value="<%=country%>" title="<%=cm.cms("country_is")%>" />
                   <%=cm.cmsLabel("country_is")%>
                   <%=cm.cmsTitle("country_is")%>

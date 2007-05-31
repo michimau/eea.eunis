@@ -209,12 +209,9 @@
 			              						<input type="hidden" name="sort" value="<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>" />
 			              						<input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
 			
-												<label for="scientificName" class="noshow">
-			                						<%=cm.cms("species_name")%>
-			              						</label>
-			              						<strong>
+												<label for="scientificName">
 			                						<%=cm.cmsText( "species" )%>
-			              						</strong>&nbsp;
+			              						</label>&nbsp;
 			              						<input title="Species name" id="scientificName" name="scientificName" size="24" />
 			              						<input id="search_species" type="submit" name="submit" value="<%=cm.cms("search")%>" class="searchButton" title="<%=cm.cms("search_species")%>" />
 			              						<%=cm.cmsLabel("species_name")%>
@@ -235,12 +232,9 @@
 			              						<input type="hidden" name="useScientific" value="true" />
 			              						<input type="hidden" name="useVernacular" value="true" />
 			              						<input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
-			              						<label for="searchString" class="noshow">
-			                						<%=cm.cms("habitat_type_name")%>
-			              						</label>	
-			              						<strong>
+			              						<label for="searchString">
 			                						<%=cm.cmsText( "habitat_types" )%>
-			              						</strong>&nbsp;
+			              						</label>&nbsp;
 			              						<input title="<%=cm.cms("habitat_type_name")%>" id="searchString" name="searchString" size="24" />
 			              						<%=cm.cmsLabel("habitat_type_name")%>
 			              						<%=cm.cmsTitle("habitat_type_name")%>
@@ -272,12 +266,9 @@
 			              						<input type="hidden" name="DB_BIOGENETIC" value="ON" />
 			              						<input type="hidden" name="DB_EMERALD" value="ON" />
 			              						<input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
-			              						<label for="englishName" class="noshow">
-			                						<%=cm.cms("site_name")%>
-			              						</label>	
-			              						<strong>
+			              						<label for="englishName">
 			                						<%=cm.cmsText( "sites" )%>
-			              						</strong>&nbsp;
+			              						</label>&nbsp;
 			              						<input title="<%=cm.cms("site_name")%>" id="englishName" name="englishName" size="24" />
 			              						<%=cm.cmsLabel("site_name")%>
 			              						<%=cm.cmsTitle("site_name")%>

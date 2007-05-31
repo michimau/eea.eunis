@@ -120,7 +120,6 @@
                           <td>
                             <img alt="Mandatory" src="images/mini/field_mandatory.gif" style="vertical-align:middle" />
                             <label for="scientificName"><strong><%=cm.cmsText("habitat_type_name")%></strong></label>
-                            <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
                             <select name="relationOp" id="relationOp" title="Operator">
                               <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
                               <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>

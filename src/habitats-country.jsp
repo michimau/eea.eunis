@@ -267,11 +267,11 @@
                       if (null == region0) region0 = "";
                     %>
                     <img title="<%=cm.cms("included_field")%>" alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" style="vertical-align:middle" /><%=cm.cmsTitle("included_field")%>&nbsp;
-                    <label for="h_0country"><strong><%=cm.cmsText("country")%></strong></label>
+                    <label for="h_0country"><%=cm.cmsText("country")%></label>
                     <input type="text" name="_0country" id="h_0country" value="<%=country0%>" onblur="return false;" title="<%=cm.cms("country")%>" />&nbsp;
                     <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-country-choice.jsp?field=_0country&amp;whichclicked=0')">
                       <img alt="<%=cm.cms("list_of_values")%>" src="images/helper/helper.gif" width="11" height="18" border="0" style="vertical-align:middle" /></a><%=cm.cmsTitle("list_of_values")%>
-                    <label for="h_0region"><strong><%=cm.cmsText("habitats_country_12")%></strong></label>
+                    <label for="h_0region"><%=cm.cmsText("habitats_country_12")%></label>
                     <input type="text" name="_0region" id="h_0region" value="<%=region0%>" onblur="return false;" title="<%=cm.cms("habitats_country_12")%>" />&nbsp;
                     <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-country-choice.jsp?field=_0region&amp;whichclicked=1')">
                       <img src="images/helper/helper.gif" alt="<%=cm.cms("list_of_values")%>" width="11" height="18" border="0" style="vertical-align:middle" /></a><%=cm.cmsTitle("list_of_values")%>
@@ -293,9 +293,9 @@
                         String region = requestParser.getRegion(i);
                     %>
                     <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" style="vertical-align:middle" /><%=cm.cmsTitle("included_field")%>&nbsp;
-                    <label for="h_<%=i + 1%>country"><strong><%=cm.cmsText("country")%></strong></label>
+                    <label for="h_<%=i + 1%>country"><%=cm.cmsText("country")%></label>
                     <input type="text" name="_<%=i + 1%>country" id="h_<%=i + 1%>country" value="<%=country%>" onfocus="blur()" title="<%=cm.cms("country")%>" />&nbsp;&nbsp;&nbsp;
-                    <label for="h_<%=i + 1%>region"><strong><%=cm.cmsText("habitats_country_14")%></strong></label>
+                    <label for="h_<%=i + 1%>region"><%=cm.cmsText("habitats_country_14")%></label>
                     <input type="text" name="_<%=i + 1%>region" id="h_<%=i + 1%>region" value="<%=region%>" onfocus="blur()" title="<%=cm.cms("habitats_country_14")%>" />&nbsp;&nbsp;&nbsp;
                     <input title="<%=cm.cms("delete_criteria")%>" type="submit" id="h<%=i + 1%>Remove" name="<%=i + 1%>Remove" value="<%=cm.cms("delete_criteria")%>"
                            onclick="document.eunis.deleteField.value='<%=i + 1%>';document.eunis.operation.value='delete'"

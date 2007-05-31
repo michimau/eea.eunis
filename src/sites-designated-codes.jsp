@@ -104,10 +104,7 @@
                   <%=cm.cmsTitle("designation_year")%>
                 </div>
                 <img style="vertical-align:middle" alt="<%=Accesibility.getText( "generic.criteria.mandatory")%>" title="<%=Accesibility.getText( "generic.criteria.mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
-                <strong>
-                  <%=cm.cmsText("original_english_french_designation_name")%>
-                </strong>
-                <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
+                <label for="relationOp"><%=cm.cmsText("original_english_french_designation_name")%></label>
                 <select id="relationOp" name="relationOp" title="<%=cm.cms("operator")%>">
                   <option value="<%=Utilities.OPERATOR_IS%>">
                     <%=cm.cms("is")%>
@@ -136,9 +133,7 @@
                 <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                 <%=cm.cmsAlt("field_optional")%>
                 <label for="category">
-                  <strong>
                     <%=cm.cmsText("designation_category")%>
-                  </strong>
                 </label>
                 <select id="category" name="category" title="Designation category">
                     <option value="A"><%=cm.cms("sites_designations_cata")%></option>

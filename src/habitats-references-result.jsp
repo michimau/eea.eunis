@@ -263,7 +263,6 @@
                         <%=cm.cmsInput("generic_index_07")%>
                         <%=cm.cmsInput("english_name")%>
                         <%=cm.cmsInput("habitat_type_name")%>
-                        <label for="oper" class="noshow"><%=cm.cms("operator")%></label>
                         <select title="<%=cm.cms("operator")%>" name="oper" id="oper">
                           <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("is")%></option>
                           <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("starts_with")%></option>

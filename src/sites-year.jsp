@@ -195,10 +195,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_mandatory")%>
 
-                  <strong>
-                    <%=cm.cmsText("year")%>
-                  </strong>
-                  <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
+                  <label for="relationOp"><%=cm.cmsText("year")%></label>
                   <select id="relationOp" name="relationOp" onchange="MM_jumpMenu('parent',this,0)" title="<%=cm.cms("operator")%>">
                     <option value="sites-year.jsp?relationOp=<%=Utilities.OPERATOR_IS%>" <%if (relationOp == Utilities.OPERATOR_IS.intValue()) {%>selected="selected"<%}%>>
                       <%=cm.cms("is")%>
@@ -244,9 +241,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_optional")%>
                   <label for="country">
-                    <strong>
                       <%=cm.cmsText("country_is")%>
-                    </strong>
                   </label>
                   <input id="country" name="country" type="text" size="30" title="<%=cm.cms("country_is")%>" />
                   <%=cm.cmsTitle("country_is")%>

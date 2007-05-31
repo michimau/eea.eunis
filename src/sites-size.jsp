@@ -231,7 +231,6 @@
                   <%=cm.cmsTitle("type_of_search")%>
                   <%=cm.cmsInput("size")%>
                   <%=cm.cmsInput("length")%>
-                  <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
                   <select id="relationOp" name="relationOp" onchange="MM_jumpMenu('parent',this,0)" title="<%=cm.cms("operator")%>">
                     <option value="relationOp=<%=Utilities.OPERATOR_IS%>" <%if (relationOp == Utilities.OPERATOR_IS.intValue()) {%>selected="selected"<%}%>>
                       <%=cm.cms("is")%>
@@ -288,9 +287,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_optional")%>
                   <label for="country">
-                    <strong>
                       <%=cm.cmsText("country_is")%>
-                    </strong>
                   </label>
                   <input id="country" name="country" type="text" size="30" title="<%=cm.cms("country_is")%>" value="<%=country%>" />&nbsp;
                   <%=cm.cmsLabel("country_is")%>
@@ -301,10 +298,7 @@
                   <br />
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_optional")%>
-                  <strong>
-                    <%=cm.cmsText("designation_year_between")%>
-                  </strong>
-                  <label for="yearMin" class="noshow"><%=cm.cms("minimum_designation_year")%></label>
+                  <label for="yearMin"><%=cm.cmsText("designation_year_between")%></label>
                   <input id="yearMin" name="yearMin" type="text" maxlength="4" size="4" title="<%=cm.cms("minimum_designation_year")%>" value="<%=yearMin%>"/>
                   <%=cm.cmsLabel("minimum_designation_year")%>
                   <%=cm.cmsTitle("minimum_designation_year")%>

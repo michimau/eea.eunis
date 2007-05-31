@@ -74,9 +74,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_mandatory")%>
                   <label for="country">
-                    <strong>
                       <%=cm.cmsText("country_is")%>
-                    </strong>
                   </label>
                   <input id="country" name="country" type="text" title="<%=cm.cms("country_is")%>" />&nbsp;
                   <a title="<%=cm.cms("helper")%>" href="javascript:openHelperCountry('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" style="vertical-align:middle" /></a>
@@ -87,9 +85,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_optional")%>
                   <label for="designation">
-                    <strong>
                       <%=cm.cmsText("sites_statistical_05")%>
-                    </strong>
                   </label>
                   <input id="designation" name="designation" type="text" size="30" title="<%=cm.cms("sites_statistical_05")%>" />
                   <%=cm.cmsTitle("sites_statistical_05")%>
@@ -102,9 +98,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_optional")%>
                   <label for="designationCat">
-                    <strong>
                       <%=cm.cmsText("sites_statistical_06")%>
-                    </strong>
                   </label>
                   <select id="designationCat" name="designationCat" title="<%=cm.cms("sites_statistical_06")%>">
                     <option value="any" selected="selected"><%=cm.cms("any")%></option>

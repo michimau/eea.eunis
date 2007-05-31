@@ -122,12 +122,9 @@
                   <tr>
                     <td colspan="3">
                       <img alt="<%=cm.cms("mandatory_field")%>" src="images/mini/field_mandatory.gif" style="vertical-align:middle" /><%=cm.cmsTitle("mandatory_field")%>&nbsp;
-                      <strong>
                         <label for="searchString">
                           <%=cm.cmsText("name_description")%>
                         </label>
-                      </strong>
-                      <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
                       <select title="<%=cm.cms("operator")%>" name="relationOp" id="relationOp">
                         <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
                         <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>

@@ -191,7 +191,6 @@
                   <%=cm.cmsInput("country_name")%>
                   <%=cm.cmsInput("biogeographic_region_name")%>
                   &nbsp;
-                  <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
                   <select id="relationOp" name="relationOp" title="<%=cm.cms("operator")%>">
                     <option value="<%=Utilities.OPERATOR_IS%>">
                       <%=cm.cms("is")%>

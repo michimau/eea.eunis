@@ -161,9 +161,7 @@
                             <img width="11" height="12" style="vertical-align : middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
                             <%=cm.cmsAlt("field_mandatory")%>
                             &nbsp;
-                            <strong>
-                              <label for="scientificName"><%=cm.cmsText("species_scientific_name")%></label>
-                            </strong>
+                            <label for="scientificName"><%=cm.cmsText("species_scientific_name")%></label>
                             <label for="select1" class="noshow"><%=cm.cms("relation_type")%></label>
                             <select id="select1" title="<%=cm.cms("relation_type")%>" name="relationOp">
                               <option value="<%=Utilities.OPERATOR_IS%>">

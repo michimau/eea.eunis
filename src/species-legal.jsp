@@ -539,9 +539,7 @@
                             <br />
                             <img alt="<%=cm.cms("field_mandatory")%>" width="11" height="12" style="vertical-align:middle" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
                             <%=cm.cmsAlt("field_mandatory")%>
-                            <strong>
                               <label for ="scientificName"><%=cm.cmsText("scientific_name")%></label>
-                            </strong>
                           </td>
                           <td style="vertical-align:bottom" colspan="3">
                             <input id="scientificName" alt="<%=cm.cms("scientific_name")%>" size="43" name="scientificName" title="<%=cm.cms("scientific_name")%>" value="<%=(request.getParameter("scientificName") == null ? "" : request.getParameter("scientificName"))%>" /><%=cm.cmsTitle("scientific_name")%>&nbsp;

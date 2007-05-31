@@ -113,9 +113,7 @@
                         <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" style="vertical-align:middle" /><%=cm.cmsTitle("included_field")%>
                         &nbsp;
                         <label for="habitatType">
-                        <strong>
                           <%=cm.cmsText("habitat_type")%>
-                        </strong>
                         </label>
                       </p>
                     </td>
@@ -146,7 +144,7 @@
                       <br />
                       <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" style="vertical-align:middle" /><%=cm.cmsTitle("included_field")%>
                       &nbsp;
-                      <label for="searchString"><strong><%=cm.cmsText("habitats_legal_11")%></strong></label>
+                      <label for="searchString"><%=cm.cmsText("habitats_legal_11")%></label>
                     </td>
                     <td colspan="2">
                       <br />
@@ -167,7 +165,7 @@
                       <br />
                       <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" style="vertical-align:middle" /><%=cm.cmsTitle("included_field")%>
                       &nbsp;
-                      <label for="legalText"><strong><%=cm.cmsText("legal_text")%></strong></label>
+                      <label for="legalText"><%=cm.cmsText("legal_text")%></label>
                     </td>
                     <td colspan="2">
                       <br />

@@ -251,7 +251,6 @@
                     <%=cm.cmsInput("french_designation_name")%>
                     <%=cm.cmsInput("country")%>
 
-                    <label for="oper0" class="noshow"><%=cm.cms("operator")%></label>
                     <select id="oper0" name="oper" title="<%=cm.cms("operator")%>">
                       <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
                         <%=cm.cms("is")%>

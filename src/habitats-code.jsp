@@ -185,8 +185,7 @@ function openHelper(URL)
                       <%=cm.cmsInput("empty")%>
                       <%=cm.cmsInput("current_classification")%>
                       <label for="searchString">
-                      <strong><%=cm.cmsText("code_column")%></strong></label>
-                      <label for="relationOp" class="noshow"><%=cm.cms("operator")%></label>
+                      <%=cm.cmsText("code_column")%></label>
                       <select title="Operator" name="relationOp" id="relationOp">
                         <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
                         <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>

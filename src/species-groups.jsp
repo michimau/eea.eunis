@@ -170,7 +170,7 @@
                               </td>
                               <td>
                                 <label for="radio_<%=ii%>">
-                                  <strong><%=(group.getCommonName() != null ? group.getCommonName().replaceAll("&","&amp;") : "&nbsp;")%></strong>
+                                  <%=(group.getCommonName() != null ? group.getCommonName().replaceAll("&","&amp;") : "&nbsp;")%>
                                 </label>
                               </td>
                               <td style="text-align:right">

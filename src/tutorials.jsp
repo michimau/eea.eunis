@@ -59,7 +59,7 @@
                 <%=cm.cmsText("tutorials_main")%>
                 <br />
                 <br />
-                  <h4><%=cm.cmsText("species")%></h4>
+                  <h2><%=cm.cmsText("species")%></h2>
                   <ul>
                     <li>
                       <a href="flash-movie.jsp?tutorial=Search_species_by_name&amp;title=Search%20Species%20by%20name"><%=cm.cmsText("tutorials_03")%></a>
@@ -95,7 +95,7 @@
                     !-->
                   </ul>
                   <br />
-                  <h4><%=cm.cmsText("habitat_types")%></h4>
+                  <h2><%=cm.cmsText("habitat_types")%></h2>
                   <ul>
                     <li>
                       <a href="flash-movie.jsp?tutorial=Search_habitat_types_by_name&amp;title=Search%20habitat%20types%20by%20name"><%=cm.cmsText("tutorials_08")%></a>
@@ -111,7 +111,7 @@
                     </li>
                   </ul>
                   <br />
-                  <h4><%=cm.cmsText("sites")%></h4>
+                  <h2><%=cm.cmsText("sites")%></h2>
                   <ul>
                     <li>
                       <a href="flash-movie.jsp?tutorial=Search_sites_by_name&amp;title=Search%20sites%20by%20name"><%=cm.cmsText("tutorials_13")%></a>
@@ -133,14 +133,14 @@
                     </li>
                   </ul>
                   <br />
-                  <h4><%=cm.cmsText("tutorials_19")%></h4>
+                  <h2><%=cm.cmsText("tutorials_19")%></h2>
                   <ul>
                     <li>
                       <a href="flash-movie.jsp?tutorial=General_Usage&amp;title=EUNIS%20Database%20general%20usage"><%=cm.cmsText("tutorials_20")%></a>
                     </li>
                   </ul>
                   <br />
-                  <h4><%=cm.cmsText("tutorials_21")%></h4>
+                  <h2><%=cm.cmsText("tutorials_21")%></h2>
                   <ul>
                     <li>
                       <a href="gis-tool-help.jsp" title="GIS Tool help"><%=cm.cmsText("gis_help")%></a>

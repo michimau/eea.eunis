@@ -20,12 +20,12 @@
   <head>
     <jsp:include page="header-page.jsp" />
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
        function MM_jumpMenuCountry(targ,selObj,restore){ //v3.0
          eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
          if (restore) selObj.selectedIndex=0;
 }
-    //-->
+    //]]>
     </script>
 <%
   WebContentManagement cm = SessionManager.getWebContent();
@@ -364,10 +364,10 @@
 
 
                 <script language="JavaScript" type="text/javascript">
-                 <!--
+                 //<![CDATA[
                   var load = document.getElementById( "loading" );
                   load.style.display="none";
-                 //-->
+                 //]]>
                 </script>
 
                 <%=cm.br()%>

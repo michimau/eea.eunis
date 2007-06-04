@@ -38,7 +38,7 @@
         <%=cm.cms("user_bookmarks")%>
     </title>
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
         function onClickEdit() {
            var listSize = <%=listSize%>;
            var isSomethinkChecked = false;
@@ -92,7 +92,7 @@
             document.eunis.submit();
           }
         }
-      //-->
+      //]]>
 
    </script>
   </head>

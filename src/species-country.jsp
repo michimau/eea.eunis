@@ -28,7 +28,7 @@
     <script language="JavaScript" src="script/species-country.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
         function onLoadFunction() {
             <%
               if (SessionManager.isAuthenticated()&&SessionManager.isSave_search_criteria_RIGHT())
@@ -101,7 +101,7 @@
             }
             %>
 
-   //-->
+   //]]>
     </script>
     <title><%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("species_country_02")%>

@@ -314,9 +314,9 @@
               SessionManager.getWebContent().reloadLanguageData();
 %>
                 <script language="JavaScript" type="text/javascript">
-                <!--
+                //<![CDATA[
                   alert('<%=cm.cms("refresh_language")%>');
-                //-->
+                //]]>
                 </script>
 <%
   }

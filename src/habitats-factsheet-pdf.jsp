@@ -28,7 +28,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
       function showLoadingProgress( show )
       {
         var img = document.getElementById( "loading" );
@@ -46,7 +46,7 @@
       {
         document.getElementById("status").innerHTML=txt;
       }
-      //-->
+      //]]>
     </script>
     <title>
       <%=cm.cms("generating_pdf")%>
@@ -62,9 +62,9 @@
       &nbsp;
     </div>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         updateText( "<%=cm.cms("generating_pdf_wait")%>" );
-      //-->
+      //]]>
     </script>
 <%
   cm.cmsMsg("source_european_topic_centre");
@@ -112,7 +112,7 @@
     }
 %>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
 <%
      if ( error )
      {
@@ -129,7 +129,7 @@
 <%
      }
 %>
-      //-->
+      //]]>
     </script>
 <%
     out.flush();
@@ -149,13 +149,13 @@
     {
 %>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
       function feedback()
       {
         window.opener.location.href="feedback.jsp?feedbackType=Software%20bugs&module=EUNIS%20Habitats&url=Habitat%20PDF%20factsheet%20generation%20failed for habitat '<%=Utilities.removeQuotes(factsheet.getHabitatDescription())%>' with ID=<%=idHabitat%>.";
         this.close();
       }
-      //-->
+      //]]>
     </script>
     <%=cm.cmsText("please_let_us_know_about_error")%>
     <a href="javascript:feedback();"><%=cm.cmsText("feedback")%></a>.

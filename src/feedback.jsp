@@ -170,7 +170,7 @@
       <%=cm.cms("feedback")%>
     </title>
     <script type="text/javascript">
-      <!--
+      //<![CDATA[
     function testform() {
       if (document.feed.comment.value=="" || document.feed.comment.value=="Enter your comments here... ") {
         alert('<%=cm.cms("generic_feedback_27")%>');
@@ -178,7 +178,7 @@
       }
       return true;
       }
-    //-->
+    //]]>
     </script>
   </head>
   <body>

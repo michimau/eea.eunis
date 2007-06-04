@@ -17,7 +17,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
 <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
 
   function checkValidSelection() {
     if (!document.criteria.NATURA2000.checked && !document.criteria.CDDA_NATIONAL.checked && !document.criteria.NATURENET.checked &&
@@ -62,7 +62,7 @@
     }
   }
 
-  //-->
+  //]]>
 </script>
 <%
   String CORINE = "";

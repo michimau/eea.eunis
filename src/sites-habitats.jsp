@@ -28,7 +28,7 @@
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/sites-habitats-save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
     var errInvalidRegion = "Biogeographic regions is not valid, please use helper to find biogeographic regions";
     function validateForm()
     {
@@ -85,7 +85,7 @@
         eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=400,height=500,left=490,top=0');");
       }
     }
-    //-->
+    //]]>
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>

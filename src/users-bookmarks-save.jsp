@@ -42,7 +42,7 @@
     %>
     <title><%=cm.cms("users_bookmarks_save_title")%></title>
     <script type="text/javascript" language="javascript">
-      <!--
+      //<![CDATA[
         function validateForm()
         {
           var desc = document.saveBookmark.description.value;
@@ -53,7 +53,7 @@
           }
           return true;
         }
-      //-->
+      //]]>
     </script>
   </head>
   <body>
@@ -88,7 +88,7 @@
   {
 %>
       <script language="JavaScript" type="text/javascript">
-        <!--
+        //<![CDATA[
 <%
           if ( result )
           {
@@ -104,7 +104,7 @@
           }
 %>
           this.close();
-        //-->
+        //]]>
       </script>
 <%
   }

@@ -31,12 +31,12 @@
       <%=cm.cms("combined_search")%>
     </title>
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
       var current_selected = "";
-    //-->
+    //]]>
     </script>
 <script language="JavaScript" type="text/javascript">
-<!--
+//<![CDATA[
   function MM_jumpMenu(targ,selObj,restore){ //v3.0
     eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
     if (restore) selObj.selectedIndex=0;
@@ -234,7 +234,7 @@
     document.criteria.action.value=action;
     document.criteria.submit();
   }
-//-->
+//]]>
 </script>
 
   </head>

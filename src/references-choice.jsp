@@ -26,7 +26,7 @@
       <%=cm.cms("list_of_values")%>
     </title>
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
       function setLine(val,fromWhere,dateVal) {
        if (fromWhere == "author") window.opener.document.eunis.author.value=val;
         if (fromWhere == "date") {
@@ -39,7 +39,7 @@
         if (fromWhere == "publisher") window.opener.document.eunis.publisher.value=val;
         window.close();
       }
-    // -->
+    //]]>
     </script>
   </head>
   <body>

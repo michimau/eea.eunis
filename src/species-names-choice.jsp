@@ -34,13 +34,13 @@
     </title>
       <script language="JavaScript" src="script/header.js" type="text/javascript"></script> 
       <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
            function setLine(val) {
           <%if (typeForm.intValue() == SpeciesSearchUtility.CRITERIA_SCIENTIFIC_NAME.intValue()) {%>window.opener.document.eunis1.scientificName.value=val;<%}%>
           <%if (typeForm.intValue() == SpeciesSearchUtility.CRITERIA_VERNACULAR_NAME.intValue()) {%>window.opener.document.eunis2.vernacularName.value=val;<%}%>
               window.close();
            }
-      // -->
+      //]]>
       </script>
   </head>
   <%// Get form parameters here%>

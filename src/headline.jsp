@@ -81,9 +81,9 @@
       sqlc.ExecuteDirectSQL(sContent);
 %>
       <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         alert('<%=cm.cms("headline_deleted")%>');
-      //-->
+      //]]>
       </script>
       <%
 
@@ -99,9 +99,9 @@
 
       %>
       <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         alert('<%=cm.cms("headlines_deleted_all")%>');
-      //-->
+      //]]>
       </script>
       <%
 

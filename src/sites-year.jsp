@@ -29,7 +29,7 @@
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/sites-year-save-criteria.js"></script>
     <script language="JavaScript" type="text/JavaScript">
-    <!--
+    //<![CDATA[
      var countryListString = "<%=Utilities.getCountryListString()%>";
 
       function MM_jumpMenu(targ,selObj,restore){ //v3.0
@@ -109,7 +109,7 @@
   }
 %>
       }
-    //-->
+    //]]>
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>

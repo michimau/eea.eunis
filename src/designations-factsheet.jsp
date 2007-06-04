@@ -24,7 +24,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
     function MM_openBrWindow(theURL,winName,features) { //v2.0
       window.open(theURL,winName,features);
     }
@@ -96,7 +96,7 @@
 
     frm.submit();
 }
-    //-->
+    //]]>
     </script>
     <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
 <%
@@ -678,12 +678,12 @@
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_FOOTER" ) )%>
     </div>
     <script language="javascript" type="text/javascript">
-    <!--
+    //<![CDATA[
     try {
     var ctrl_loading = document.getElementById( "loading" );
     ctrl_loading.style.display = "none"; }
     catch ( e ) { }
-    //-->
+    //]]>
     </script>
   </body>
 </html>

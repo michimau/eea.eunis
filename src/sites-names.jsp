@@ -31,7 +31,7 @@
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/sites-names-save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
       var countryListString = "<%=Utilities.getCountryListString()%>";
       function functionOnLoad()
       {
@@ -47,7 +47,7 @@
           document.eunis.DB_NATURA2000.checked = true;
         }
       }
-      //-->
+      //]]>
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>

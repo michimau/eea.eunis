@@ -25,7 +25,7 @@
     <%=cm.cms("upload_manager")%>
   </title>
   <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
     function validateForm() {
       if (document.uploadFile.filename.value == "")
       {
@@ -39,7 +39,7 @@
       }
       return true;
     }
-  //-->
+  //]]>
   </script>
 </head>
 
@@ -93,9 +93,9 @@
     <%=cm.cmsText("related_reports_upload_pending")%>.
   </strong>
 <script language="JavaScript" type="text/javascript">
-<!--
+//<![CDATA[
   window.opener.location.href='related-reports.jsp';
-//-->
+//]]>
 </script>
 <%
 }

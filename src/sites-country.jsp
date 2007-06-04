@@ -26,7 +26,7 @@
     <script language="JavaScript" type="text/javascript" src="script/sites-country.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/sites-country-save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         function validateForm()
         {
           var errMessageForm = "<%=cm.cms("sites_country_02")%>";
@@ -47,7 +47,7 @@
           }
           return checkValidSelection(); // from sites-search-common.jsp
         }
-      //-->
+      //]]>
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>

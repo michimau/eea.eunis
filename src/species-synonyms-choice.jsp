@@ -27,12 +27,12 @@
       <%=cm.cms("list_of_values")%>
     </title>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         function setLine(val) {
           window.opener.document.eunis.scientificName.value=val;
           window.close();
         }
-      // -->
+      //]]>
   </script>
   </head>
   <%// Get form parameters here%>

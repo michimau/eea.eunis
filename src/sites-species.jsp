@@ -26,7 +26,7 @@
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/sites-species-save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         function validateForm()
         {
           document.eunis.searchString.value = trim(document.eunis.searchString.value);
@@ -86,7 +86,7 @@
           }
           }
         }
-      //-->
+      //]]>
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>

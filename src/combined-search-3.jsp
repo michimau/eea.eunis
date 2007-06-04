@@ -30,7 +30,7 @@
       <%=cm.cms("combined_search")%>
     </title>
 <script language="JavaScript" type="text/javascript">
-<!--
+//<![CDATA[
   var current_selected="";
   function MM_jumpMenu(targ,selObj,restore){ //v3.0
     eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
@@ -230,7 +230,7 @@
    document.criteria.action.value=action;
     document.criteria.submit();
   }
-//-->
+//]]>
 </script>
 
   </head>
@@ -437,9 +437,9 @@
                     System.out.println("Error deleting root!");
                     %>
                       <script language="JavaScript" type="text/javascript">
-                      <!--
+                      //<![CDATA[
                         alert('<%=cm.cms("error_deleting_root")%>');
-                      //-->
+                      //]]>
                       </script>
                     <%
                   }
@@ -464,9 +464,9 @@
                    System.out.println("Error adding branch!");
                    %>
                      <script language="JavaScript" type="text/javascript">
-                     <!--
+                     //<![CDATA[
                        alert('<%=cm.cms("error_adding_branch")%>');
-                     //-->
+                     //]]>
                      </script>
                    <%
                   }
@@ -478,9 +478,9 @@
                    System.out.println("Error deleting branch!");
                    %>
                      <script language="JavaScript" type="text/javascript">
-                     <!--
+                     //<![CDATA[
                        alert('<%=cm.cms("error_deleting_branch")%>');
-                     //-->
+                     //]]>
                      </script>
                    <%
                   }
@@ -492,9 +492,9 @@
                    System.out.println("Error composing branch!");
                    %>
                      <script language="JavaScript" type="text/javascript">
-                     <!--
+                     //<![CDATA[
                        alert('<%=cm.cms("error_composing_branch")%>');
-                     //-->
+                     //]]>
                      </script>
                    <%
                   }

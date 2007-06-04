@@ -28,13 +28,13 @@
     <jsp:setProperty name="formBean" property="*"/>
   </jsp:useBean>
   <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
     function setLine(val)
     {
       window.opener.document.criteria.scientificName.value=val;
       window.close();
     }
-  // -->
+  //]]>
   </script>
   <%
     Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);

@@ -30,13 +30,13 @@
     </title>
     <script language="JavaScript" src="script/header.js" type="text/javascript"></script>  
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         function closeWindow(where,exp)
         {
           window.opener.location.href=where+'?expandSearchCriteria='+exp;
           self.close();
         }
-      // -->
+      //]]>
     </script>
   </head>
 <%

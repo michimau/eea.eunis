@@ -26,9 +26,9 @@
     <script type="text/javascript" language="Javascript" src="script/save-criteria.js"></script>
     <script type="text/javascript" language="Javascript" src="script/sites-coordinates-save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
      var countryListString = "<%=Utilities.getCountryListString()%>";
-        //-->
+        //]]>
     </script>
     <title>
       <%=cm.cms("sites_coordinates_title")%>

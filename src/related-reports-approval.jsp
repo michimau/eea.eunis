@@ -48,7 +48,7 @@
     <%=cm.cms("related_reports_approval_page_title")%>
   </title>
   <script language="JavaScript" type="text/JavaScript">
-  <!--
+  //<![CDATA[
     function MM_callJS(jsStr) { //v2.0
       return eval(jsStr)
     }
@@ -95,7 +95,7 @@
           return ok;
        }
     }
-  //-->
+  //]]>
   </script>
   </head>
   <body>

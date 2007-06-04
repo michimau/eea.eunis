@@ -596,10 +596,10 @@
                       out.flush();
                 %>
                   <script language="JavaScript" type="text/javascript">
-                  <!--
+                  //<![CDATA[
                     var load = document.getElementById( "loading" );
                     load.style.display="none";
-                  //-->
+                  //]]>
                   </script>
 <!-- END MAIN CONTENT -->
               </div>

@@ -80,7 +80,7 @@
   <%=cm.cms("habitats_country_title")%>
 </title>
 <script language="JavaScript" type="text/javascript">
-<!--
+//<![CDATA[
   // Error message displayed if not text was entered in text fields.
   var errMessageForm = "<%=cm.cms("habitats_country_02")%>";
 
@@ -172,7 +172,7 @@
     }
     return true;
   }
-//-->
+//]]>
 </script>
 </head>
   <body>
@@ -372,14 +372,14 @@
                   <td>
                     &nbsp;
                     <script type="text/javascript" language="JavaScript">
-                    <!--
+                    //<![CDATA[
                       // values of this constants from specific class Domain
                       var source1='';
                       var source2='';
                       var database1='<%=CountryDomain.SEARCH_EUNIS%>';
                        var database2='<%=CountryDomain.SEARCH_ANNEX_I%>';
                        var database3='<%=CountryDomain.SEARCH_BOTH%>';
-                    //-->
+                    //]]>
                     </script>
                   </td>
                 </tr>

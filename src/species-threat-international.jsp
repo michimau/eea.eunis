@@ -28,7 +28,7 @@
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,international_threat_status";
 %>
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
         function onLoadFunction() {
             <%
               if (SessionManager.isAuthenticated()&&SessionManager.isSave_search_criteria_RIGHT())
@@ -150,7 +150,7 @@
             }
             %>
 
-   //-->
+   //]]>
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>

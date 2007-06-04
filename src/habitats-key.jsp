@@ -45,7 +45,7 @@
     <%=cm.cms("habitats_key_title")%>
   </title>
   <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
     function MM_jumpMenu(targ,selObj,restore){ //v3.0
       eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
       if (restore) selObj.selectedIndex=0;
@@ -72,7 +72,7 @@
       }
       catch ( e ) {};
     }
-  //-->
+  //]]>
   </script>
   </head>
   <body>
@@ -286,9 +286,9 @@
             {
           %>
               <script type="text/javascript" language="javascript">
-              <!--
+              //<![CDATA[
                 changeColor( "<%=idFirstQuestion%>", null );
-              //-->
+              //]]>
               </script>
           <%
             }

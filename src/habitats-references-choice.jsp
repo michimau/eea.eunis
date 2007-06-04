@@ -24,7 +24,7 @@
     <%=cm.cms("list_of_values")%>
   </title>
   <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
    function setLine(val,fromWhere,witchDateUse) {
     if (fromWhere == "author") window.opener.document.eunis.author.value=val;
      if (fromWhere == "date") {
@@ -37,7 +37,7 @@
      if (fromWhere == "publisher") window.opener.document.eunis.publisher.value=val;
      window.close();
    }
- // -->
+ //]]>
   </script>
 </head>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.habitatsByReferences.ReferencesBean" scope="request">

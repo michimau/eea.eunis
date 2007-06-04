@@ -29,7 +29,7 @@
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,legal_instruments";
 %>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         function setGroupName(selObj)
         {
           document.eunis.grName.value=selObj.options[selObj.selectedIndex].name;
@@ -209,7 +209,7 @@
             }
             %>
 
-      //-->
+      //]]>
     </script>
 <%
   // REQUEST PARAMETERS (facultative)

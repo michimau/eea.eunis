@@ -27,7 +27,7 @@
 %>
   <script language="JavaScript" src="script/save-criteria.js" type="text/javascript"></script>
   <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
 var errInvalidRegion = '<%=cm.cms("biogeographic_region_is_not_valid")%>';
 
 function validateForm()
@@ -110,7 +110,7 @@ function validateForm()
     }
   }
 
-//-->
+//]]>
 </script>
 <title>
   <%=application.getInitParameter("PAGE_TITLE")%>
@@ -252,14 +252,14 @@ function validateForm()
                   <td>
                     &nbsp;
                     <script type="text/javascript" language="JavaScript">
-                    <!--
+                    //<![CDATA[
                      // values of source and database constants from specific class Domain(here are all '')
                      var source1='';
                      var source2='';
                      var database1='';
                      var database2='';
                      var database3='';
-                    //-->
+                    //]]>
                     </script>
                   </td>
                 </tr>

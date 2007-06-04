@@ -33,7 +33,7 @@
     HabitatEUNISTree treeeunis = new HabitatEUNISTree();
   %>
   <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
         function MM_jumpMenu(targ,selObj,restore)
         {
           eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
@@ -83,7 +83,7 @@
 <%
         }
 %>
-    //-->
+    //]]>
   </script>
   <%
 
@@ -210,9 +210,9 @@
                     <td>
                       <div id="tree">
                         <script type="text/javascript" language="javascript">
-                        <!--
+                        //<![CDATA[
                         createTree(<%=level%>, level1, Tree2, 0<%=(habID==null)?",0":","+openNode%>, "habitats-code-browser.jsp");
-                              //-->
+                              //]]>
                         </script>
                       </div>
                     </td>

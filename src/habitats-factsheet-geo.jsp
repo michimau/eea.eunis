@@ -19,7 +19,7 @@ WebContentManagement cm = SessionManager.getWebContent();
   String url2 = Utilities.formatString(request.getParameter("url2"));
 %>
 <script language="javascript" type="text/javascript">
-<!--
+//<![CDATA[
     var map_const;
     var quer;
     var shade;
@@ -93,7 +93,7 @@ WebContentManagement cm = SessionManager.getWebContent();
       shade = shade_legend;
       map_refresh();
     }
-  //-->
+  //]]>
 </script>
 <table summary="layout" border="0">
   <tr>

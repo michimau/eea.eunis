@@ -321,14 +321,14 @@
                     {
                   %>
                       <script type="text/javascript" language="JavaScript">
-                        <!--
+                        //<![CDATA[
                           // values of source and database constants from specific class Domain(only in habitat searches, so here are all '')
                           var source1='';
                           var source2='';
                           var database1='';
                           var database2='';
                           var database3='';
-                        //-->
+                        //]]>
                       </script>
                       <br />
                       <script language="JavaScript" type="text/javascript" src="script/species-references-save-criteria.js"></script>

@@ -39,7 +39,7 @@
        }
      %>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         //Close this window and open another window with some parameters
         function closeWindow(where)
         {
@@ -47,7 +47,7 @@
           window.opener.location.href=where;
           self.close();
         }
-      // -->
+      //]]>
     </script>
   </head>
   <%

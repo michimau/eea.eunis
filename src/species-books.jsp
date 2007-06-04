@@ -25,7 +25,7 @@
   %>
   <script language="JavaScript" src="script/species-books-save-criteria.js" type="text/javascript"></script>
   <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
       var errMessageForm = "<%=cm.cms("species_books_02")%>.";
       function openHelper(URL)
       {
@@ -51,7 +51,7 @@
         }
         return true;
       }
-    //-->
+    //]]>
   </script>
 <%
   // Save search criteria
@@ -59,14 +59,14 @@
   {
 %>
 <script type="text/javascript" language="JavaScript">
-<!--
+//<![CDATA[
  // values of source and database constants from specific class Domain(only in habitat searches, so here are all '')
  var source1='';
  var source2='';
  var database1='';
  var database2='';
  var database3='';
-//-->
+//]]>
 </script>
 <%
   }

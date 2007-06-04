@@ -31,7 +31,7 @@
   <link rel="StyleSheet" href="css/tree.css" type="text/css" />
   <script language="JavaScript" type="text/javascript" src="script/tree.js"></script>
   <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
   function MM_jumpMenu(targ,selObj,restore){ //v3.0
     eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
     if (restore) selObj.selectedIndex=0;
@@ -59,7 +59,7 @@
       <%
         }
       %>
-    //-->
+    //]]>
   </script>
   <%
     WebContentManagement cm = SessionManager.getWebContent();
@@ -203,9 +203,9 @@
                       <td>
                         <div id="tree">
                           <script type="text/javascript" language="javascript">
-                          <!--
+                          //<![CDATA[
                           createTree(<%=level%>, level1, Tree2, 0<%=(habID==null)?",0":","+treeBean.getOpenNode()%>, 'habitats-annex1-browser.jsp');
-                                    //-->
+                                    //]]>
                           </script>
                         </div>
                       </td>

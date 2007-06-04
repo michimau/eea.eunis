@@ -30,13 +30,13 @@
     <jsp:setProperty name="formBean" property="*"/>
   </jsp:useBean>
   <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
    function setLine(val)
    {
      window.opener.document.eunis.searchString.value=val;
      window.close();
    }
- // -->
+ //]]>
   </script>
   <%
     String searchString = formBean.getSearchString();

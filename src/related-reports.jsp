@@ -48,7 +48,7 @@
     <%=cm.cms("related_reports_page_title")%>
   </title>
   <script language="JavaScript" type="text/JavaScript">
-  <!--
+  //<![CDATA[
     function MM_callJS(jsStr) { //v2.0
       return eval(jsStr)
     }
@@ -103,7 +103,7 @@
       var vertPos = centerVert(height);
       window.open("related-reports-upload.jsp", "", "left=" + horizPos + ", top=" + vertPos + ", width=" + width + ", height=" + height + ", status=0, scrollbars=0, toolbar=0, resizable=1, location=0");
     }
-  //-->
+  //]]>
   </script>
 </head>
   <body>

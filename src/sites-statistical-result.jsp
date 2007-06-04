@@ -625,7 +625,7 @@
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_FOOTER" ) )%>
     </div>
     <script language="javascript" type="text/javascript">
-      <!--
+      //<![CDATA[
         try
         {
           var ctrl_loading = document.getElementById( "loading" );
@@ -634,7 +634,7 @@
         catch ( e )
         {
         }
-        //-->
+        //]]>
       </script>
   </body>
 </html>

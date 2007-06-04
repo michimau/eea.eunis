@@ -39,12 +39,12 @@
       <%=cm.cms("list_of_values")%>
     </title>
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
       function setValue(v) {
         window.opener.<%=ctl%>.value=v;
         window.close();
       }
-    // -->
+    //]]>
     </script>
   </head>
   <body>

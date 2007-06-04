@@ -144,7 +144,7 @@
     </table>
   </form>
   <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
       function decrement<%=guidNavigator%>() {
         var res<%=guidNavigator%> = parseInt(document.changePage<%=guidNavigator%>.currentPage.value);
         // Adjust the page so that we don't overflow.
@@ -154,7 +154,7 @@
         }
         document.changePage<%=guidNavigator%>.currentPage.value = res<%=guidNavigator%> - 1;
       }
-    // -->
+    //]]>
   </script>
 <%
   }

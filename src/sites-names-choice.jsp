@@ -48,14 +48,14 @@
       <%=cm.cms("list_of_values")%>
     </title>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
       function setLine(val) {
         var str = new String( val );
         str = str.replace("QUOTE", "'");
         window.opener.document.eunis.englishName.value=str;
         window.close();
       }
-    // -->
+    //]]>
     </script>
   </head>
   <body>

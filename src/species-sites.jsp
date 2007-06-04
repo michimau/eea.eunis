@@ -25,7 +25,7 @@
   String btrail = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,pick_sites_show_species_location";
 %>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
 
       var errInvalidRegion = '<%=cm.cms("biogeographic_region_is_not_valid")%>';
         // Change the operator list according to criteria selected element from criteria type list
@@ -178,7 +178,7 @@
           URL2 += Db2Url();
           eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,resizable=no,location=0,width=400,height=500,left=500,top=0');");
         }
-      //-->
+      //]]>
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
@@ -315,14 +315,14 @@
                       %>
                           <br />
                           <script type="text/javascript" language="JavaScript">
-                          <!--
+                          //<![CDATA[
                           // values of source and database constants from specific class Domain(only in habitat searches, so here are all '')
                           var source1='';
                           var source2='';
                           var database1='';
                           var database2='';
                           var database3='';
-                         //-->
+                         //]]>
                          </script>
                           <%=cm.cmsText("biogeographic_region_is_not_valid")%>:
                           <a title="<%=cm.cms("save_open_link")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'species-sites.jsp','2','criteria',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_open_link")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>

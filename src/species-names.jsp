@@ -29,7 +29,7 @@
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,species_names_location";
 %>
     <script type="text/javascript" language="JavaScript">
-    <!--
+    //<![CDATA[
       function openHelper1(ctl, lov, natureobject, oper) {
         var cur_ctl = eval(ctl);
         cur_ctl.value = trim(cur_ctl.value);
@@ -49,7 +49,7 @@
           eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=400,height=500,left=490,top=0');");
         }
       }
-    //-->
+    //]]>
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
@@ -171,13 +171,13 @@
                         {
                       %>
                                  <script type="text/javascript" language="JavaScript">
-                                    <!--
+                                    //<![CDATA[
                                       var source1='';
                                       var source2='';
                                       var database1='';
                                       var database2='';
                                       var database3='';
-                                    //-->
+                                    //]]>
                                     </script>
                                     <br />
                             <script language="JavaScript" type="text/javascript" src="script/species-names-save-criteria.js"></script>
@@ -303,14 +303,14 @@
                               {
                       %>
                                  <script type="text/javascript" language="JavaScript">
-                                 <!--
+                                 //<![CDATA[
                                    // values of source and database constants from specific class Domain(only in habitat searches, so here are all '')
                                    var source1='';
                                    var source2='';
                                    var database1='';
                                    var database2='';
                                    var database3='';
-                                //-->
+                                //]]>
                                 </script>
                                 <br />
                                 <script language="JavaScript" type="text/javascript" src="script/species-names-vernacular-save-criteria.js"></script>

@@ -207,14 +207,14 @@
                   <td>
                     &nbsp;
                     <script type="text/javascript" language="JavaScript">
-                    <!--
+                    //<![CDATA[
                      // values of this constants from specific class Domain
                      var source1='';
                      var source2='';
                      var database1='';
                      var database2='';
                      var database3='';
-                    //-->
+                    //]]>
                     </script>
                   </td>
                 </tr>

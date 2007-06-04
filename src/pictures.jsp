@@ -24,9 +24,9 @@
   {
 %>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         window.close();
-      //-->
+      //]]>
     </script>
 <%
   }
@@ -35,9 +35,9 @@
   {
 %>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         window.close();
-      //-->
+      //]]>
     </script>
 <%
   }
@@ -47,9 +47,9 @@
   {
 %>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
           alert("<%=message%>");
-      //-->
+      //]]>
     </script>
 <%
   }
@@ -80,7 +80,7 @@
     Iterator it = pictures.iterator();
 %>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         var image_dir = ""
         var ImageNum = 0;
         imageArray = new Array();
@@ -146,7 +146,7 @@
           var new_image = get_ImageItemLocation(imageArray[ImageNum]);
           return(new_image);
         }
-      //-->
+      //]]>
     </script>
 <%
   }
@@ -175,14 +175,14 @@
       <img alt="<%=firstdescription%>" id="image" name="rImage" src="<%=dirBase + firstimage%>" border="1" />
     </div>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         // Hide the Next and Previous links if there is only one picture
         if (imageArray.length < 2) {
           if(document.getElementById) {
             document.getElementById("navRow").style.visibility = "hidden";
           }
         }
-      //-->
+      //]]>
     </script>
 <%
   }
@@ -208,7 +208,7 @@
     <a href="pictures-upload.jsp?idobject=<%=IdObject%>&amp;natureobjecttype=<%=NatureObjectType%>&amp;operation=upload"><%=cm.cmsText("pictures_uploadnew")%></a><br />
     <a href="javascript:deletePicture();"><%=cm.cmsText("pictures_delete")%></a><br />
     <script type="text/javascript" language="javascript">
-      <!--
+      //<![CDATA[
       function deletePicture() {
         if (confirm('<%=cm.cms("pictures_confirm")%>')) {
           var imgURI = document.getElementById("image").src;
@@ -218,7 +218,7 @@
           document.deletePicture.submit();
         }
       }
-      //-->
+      //]]>
     </script>
     <form name="deletePicture" method="post" action="pictures-upload.jsp">
       <input type="hidden" name="idobject" value="<%=IdObject%>" />

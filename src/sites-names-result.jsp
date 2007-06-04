@@ -130,7 +130,7 @@
     <jsp:include page="header-page.jsp" />
     <script language="JavaScript" type="text/javascript" src="script/sites-names.js"></script>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         // Change the operator list according to criteria selected element from criteria type list
         function changeCriteria() {
           var criteriaType = document.getElementById("criteriaType0").options[document.getElementById("criteriaType0").selectedIndex].value;
@@ -184,7 +184,7 @@
             document.getElementById("binocular").style.visibility = "hidden";
           }
         }
-      //-->
+      //]]>
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>

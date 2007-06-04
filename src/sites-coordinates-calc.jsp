@@ -22,7 +22,7 @@
       <%=cm.cms("sites_coordinates-calc_title")%>
     </title>
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
       function transform(form) {
         if (0 != form.decimal.value.length) {
           if (0 == form.degrees.value.length) {
@@ -126,7 +126,7 @@
         return str;
       }
 
-    //-->
+    //]]>
     </script>
   </head>
   <body>

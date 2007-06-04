@@ -39,7 +39,7 @@
       <%=cm.cms("web_content_editor")%>
     </title>
     <script language="javascript" type="text/javascript">
-      <!--
+      //<![CDATA[
       function versionOnChange()
       {
         var frm = document.createElement("form");
@@ -132,7 +132,7 @@
 
         frm.submit();
       }
-      //-->
+      //]]>
     </script>
   </head>
   <body>

@@ -27,7 +27,7 @@
   String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,pick_habitat_type_show_species_location";
 %>
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
      var errInvalidRegion = '<%=cm.cms("biogeographic_region_is_not_valid")%>';
       var errInvalidCountry = '<%=cm.cms("species_habitats_27")%>';
     function openHelper(URL)
@@ -92,7 +92,7 @@
      }
       return true;
     }
-    //-->
+    //]]>
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
@@ -229,14 +229,14 @@
               {
             %>
                        <script type="text/javascript" language="JavaScript">
-                       <!--
+                       //<![CDATA[
                        // values of source and database constants from specific class Domain
                        var source1='';
                        var source2='';
                        var database1='<%=ScientificNameDomain.SEARCH_EUNIS%>';
                        var database2='<%=ScientificNameDomain.SEARCH_ANNEX_I%>';
                        var database3='<%=ScientificNameDomain.SEARCH_BOTH%>';
-                      //-->
+                      //]]>
                       </script>
                       <br />
                       <%=cm.cmsText("save_your_criteria")%>:

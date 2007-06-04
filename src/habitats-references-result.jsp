@@ -90,7 +90,7 @@
   <jsp:include page="header-page.jsp" />
   <script language="JavaScript" src="script/species-result.js" type="text/javascript"></script>
   <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
     function MM_openBrWindow(theURL,winName,features) { //v2.0
       window.open(theURL,winName,features);
     }
@@ -98,7 +98,7 @@
       function openPopup(theURL,winName,features) {
         window.open(theURL,winName,features);
     }
-  //-->
+  //]]>
   </script>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>

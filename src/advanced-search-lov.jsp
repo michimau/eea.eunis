@@ -69,7 +69,7 @@
   %>
 
   <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
     function setValue(v) {
       window.opener.setCurrentSelected("");
       window.opener.document.criteria['<%=ctl%>'].focus();
@@ -77,7 +77,7 @@
       window.opener.document.criteria['<%=ctl%>'].blur();
       window.close();
     }
-  // -->
+  //]]>
   </script>
   </head>
   <body>

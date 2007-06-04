@@ -30,7 +30,7 @@
       <jsp:setProperty name="formBean" property="*"/>
     </jsp:useBean>
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
       function setScientificName(val) {
         window.opener.document.eunis.scientificName.value=val;
         window.close();
@@ -39,7 +39,7 @@
         window.opener.document.eunis2.legalText.value=val;
         window.close();
       }
-    // -->
+    //]]>
     </script>
   <%
     boolean expandFullNames = Utilities.checkedStringToBoolean(request.getParameter("showAll"), false);

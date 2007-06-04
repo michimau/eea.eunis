@@ -178,14 +178,14 @@
                   <br />
                     &nbsp;
                   <script type="text/javascript" language="JavaScript">
-                  <!--
+                  //<![CDATA[
                   // values of this constants from specific class Domain
                   var source1='';
                   var source2='';
                   var database1='<%=HabitatsBooksDomain.SEARCH_EUNIS%>';
                   var database2='<%=HabitatsBooksDomain.SEARCH_ANNEX_I%>';
                   var database3='<%=HabitatsBooksDomain.SEARCH_BOTH%>';
-                  //-->
+                  //]]>
                   </script>
                 <script language="JavaScript" src="script/habitats-books-save-criteria.js" type="text/javascript"></script>
                     <%=cm.cmsText("save_your_criteria")%>:

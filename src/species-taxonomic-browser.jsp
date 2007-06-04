@@ -73,7 +73,7 @@
 
     %>
     <script language="JavaScript" type="text/JavaScript">
-      <!--
+      //<![CDATA[
         function MM_goToURL() { //v3.0
           var i, args=MM_goToURL.arguments; document.MM_returnValue = false;
           for (i=0; i<(args.length-1); i+=2) eval(args[i]+".location='"+args[i+1]+"'");
@@ -127,7 +127,7 @@
  <%
    //System.out.println("tree="+(tree.tree == null ? "" : tree.tree.toString())+"+++++++++++++=");
         %>
-    //-->
+    //]]>
     </script>
   </head>
   <body>
@@ -256,9 +256,9 @@
                             <td>
                               <div id="tree">
                                 <script language="JavaScript" type="text/javascript">
-                                <!--
+                                //<![CDATA[
                                   createTreeSpeciesTaxonomy('<%=taxLevel%>','<%=taxName%>',<%=level%>,level1,Tree1,0,<%=(idTaxExpanded==null)?"0":treeBeantax.getOpenNode()%>, "species-taxonomic-browser.jsp");
-                                //-->
+                                //]]>
                                 </script>
                               </div>
                             </td>

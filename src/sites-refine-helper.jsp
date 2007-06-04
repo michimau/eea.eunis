@@ -32,13 +32,13 @@
       <%=cm.cms("list_of_values")%>
     </title>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
       function setLine(val)
       {
         var control = eval(window.opener.document.getElementById("criteriaSearch0")).value = val;
         window.close();
       }
-      //-->
+      //]]>
     </script>
   </head>
   <body>

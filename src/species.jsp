@@ -25,7 +25,7 @@
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species";
 %>
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
     function popIndicators(URL)
     {
         //URL = "http://themes.eea.europa.eu/Environmental_issues/biodiversity/indicators/";
@@ -40,7 +40,7 @@
         }
         else return true;
     }
-    //-->
+    //]]>
     </script>
     <title>
         <%=application.getInitParameter("PAGE_TITLE")%>
@@ -522,7 +522,7 @@
           <%=cm.cmsMsg("help")%>
           <%=cm.br()%>
                 <script language="javascript" type="text/javascript">
-                <!--
+                //<![CDATA[
                 try
                 {
                     var ctrl_loading = document.getElementById("loading");
@@ -531,7 +531,7 @@
                 catch (e)
                 {
                 }
-                //-->
+                //]]>
                 </script>
 <!-- END MAIN CONTENT -->
               </div>

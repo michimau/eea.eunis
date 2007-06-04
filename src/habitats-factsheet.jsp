@@ -60,7 +60,7 @@
   </title>
   <script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
   <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
   function openpictures( URL, width, height )
   {
     eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=0,resizable=yes, location=0,width="+width+",height="+height+",left=100,top=0');");
@@ -69,7 +69,7 @@
   {
     eval("page = window.open(URL, '', 'scrollbars=no,toolbar=0,resizable=yes, location=0,width=380,height=350');");
   }
-  //-->
+  //]]>
   </script>
 </head>
 <body>

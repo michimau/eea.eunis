@@ -45,7 +45,7 @@
   <%=cm.cmsInput("change")%>
   <%=toURLParamSize%>
   <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
     function checkRange()
     {
       var currPageSize = parseInt(document.changePageSize<%=guidPageSize%>.pageSize.value);
@@ -56,7 +56,7 @@
       }
       return true;
     }
-    // -->
+    //]]>
   </script>
 
   <%=cm.br()%>

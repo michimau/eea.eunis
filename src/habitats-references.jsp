@@ -30,7 +30,7 @@
   <%=cm.cms("habitats_references_title")%>
 </title>
 <script type="text/javascript" language="JavaScript">
-<!--
+//<![CDATA[
 var database = new Array (3);
 var source = new Array (2);
 
@@ -41,7 +41,7 @@ database[2] = <%=RefDomain.SEARCH_BOTH%>
 
 source[0] = <%=RefDomain.SOURCE%>
 source[1] = <%=RefDomain.OTHER_INFO%>
-//-->
+//]]>
 </script>
 <%
   // Request parameters
@@ -346,14 +346,14 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                   <td>
                     &nbsp;
                     <script type="text/javascript" language="JavaScript">
-                    <!--
+                    //<![CDATA[
                     // values of this constants from specific class Domain
                     var source1='<%=RefDomain.SOURCE%>';
                     var source2='<%=RefDomain.OTHER_INFO%>';
                     var database1='<%=RefDomain.SEARCH_EUNIS%>';
                     var database2='<%=RefDomain.SEARCH_ANNEX_I%>';
                     var database3='<%=RefDomain.SEARCH_BOTH%>';
-                    //-->
+                    //]]>
                     </script>
                   </td>
                 </tr>

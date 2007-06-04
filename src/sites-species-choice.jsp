@@ -41,12 +41,12 @@
       <%=cm.cms("list_of_values")%>
     </title>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
       function setLine(val) {
         window.opener.document.eunis.searchString.value = val;
         window.close();
       }
-      // -->
+      //]]>
     </script>
   </head>
   <body>

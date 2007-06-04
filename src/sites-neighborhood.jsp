@@ -30,9 +30,9 @@
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/sites-neighborhood-save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
       var countryListString = "<%=Utilities.getCountryListString()%>";
-      //-->
+      //]]>
     </script>
   </head>
   <body>

@@ -92,11 +92,11 @@
     <%=cm.cms("habitats_code-result_title")%>
   </title>
   <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
   function MM_openBrWindow(theURL,winName,features) { //v2.0
     window.open(theURL,winName,features);
   }
-  //-->
+  //]]>
   </script>
   </head>
   <body>

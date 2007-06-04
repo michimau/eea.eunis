@@ -126,7 +126,7 @@
       <%=cm.cms("glossary_editor")%>
     </title>
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
       function deleteEntry(index)
       {
         if ( confirm( "<%=cm.cms( "generic_glossary-table_01")%>" ) )
@@ -136,7 +136,7 @@
           return true;
         }
       }
-    //-->
+    //]]>
     </script>
 </head>
 <body>

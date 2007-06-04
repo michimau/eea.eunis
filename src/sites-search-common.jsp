@@ -26,7 +26,7 @@
   String dbEmerald = Utilities.formatString(cm.cms("emerald"), "Emerald");
 %>
 <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
   function choiceprec(URL) {
     eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=0,location=0,width=400,height=500,left=490,top=0');");
   }
@@ -117,7 +117,7 @@ function isNumber1(s)
     }
   }
 
-  //-->
+  //]]>
 </script>
 <%--
 This site is common to all searches from SITES part of the site.

@@ -35,7 +35,7 @@
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/sites-size-save-criteria.js"></script>
     <script language="JavaScript" type="text/JavaScript">
-    <!--
+    //<![CDATA[
         function MM_jumpMenu(targ, selObj, restore){
           var searchType = document.eunis.searchType.options[document.eunis.searchType.selectedIndex].value;
           var country = document.eunis.country.value;
@@ -129,7 +129,7 @@
        }
         return checkValidSelection(); // from sites-search-common.jsp
       }
-      //-->
+      //]]>
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>

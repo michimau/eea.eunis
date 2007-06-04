@@ -42,7 +42,7 @@
       <%=cm.cms("generating_pdf")%>
     </title>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
       function showLoadingProgress( show )
       {
         var img = document.getElementById( "loading" );
@@ -60,7 +60,7 @@
       {
         document.getElementById("status").innerHTML=txt;
       }
-      //-->
+      //]]>
     </script>
   </head>
 <body>
@@ -72,9 +72,9 @@
     &nbsp;
   </div>
   <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
     updateText('<%=cm.cms("generating_pdf_wait")%>');
-    //-->
+    //]]>
   </script>
 <%
   out.flush();
@@ -121,7 +121,7 @@
   out.flush();
 %>
 <script language="JavaScript" type="text/javascript">
-<!--
+//<![CDATA[
 <%
    if ( error )
    {
@@ -138,7 +138,7 @@
 <%
    }
 %>
-//-->
+//]]>
 </script>
 <%
   out.flush();
@@ -153,13 +153,13 @@
   {
 %>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         function feedback()
         {
           window.opener.location.href="feedback.jsp?feedbackType=Software%20bugs&module=EUNIS%20Sites&url=Site%20PDF%20factsheet%20generation%20failed for site '<%=Utilities.removeQuotes(factsheet.getSiteObject().getName())%>' with ID=<%=siteid%>%>.";
           this.close();
         }
-      //-->
+      //]]>
     </script>
     <%=cm.cmsText("please_let_us_know_about_error")%> <a href="javascript:feedback();"><%=cm.cmsText("feedback")%></a>.<%=cm.cmsText("thank_you")%>
 <%

@@ -23,7 +23,7 @@
       <%=cm.cms("select_columns_page_title")%>
     </title>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         function move(fbox,tbox) {
           for(var i=0; i<fbox.options.length; i++) {
             if(fbox.options[i].selected && fbox.options[i].value != "") {
@@ -81,7 +81,7 @@
           }
           document.eunis.showColumns.value = showColumns;
         }
-      // -->
+      //]]>
     </script>
     <jsp:useBean id="formBean" class="ro.finsiel.eunis.formBeans.CombinedSearchBean" scope="page">
       <jsp:setProperty name="formBean" property="*"/>

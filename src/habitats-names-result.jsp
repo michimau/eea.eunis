@@ -110,11 +110,11 @@
 %>
   <script language="JavaScript" src="script/habitats-result.js" type="text/javascript"></script>
   <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
     function openPopup(theURL,winName,features) { //v2.0
       window.open(theURL,winName,features);
     }
-  //-->
+  //]]>
   </script>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>

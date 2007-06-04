@@ -118,9 +118,9 @@
               {
           %>
               <script type="text/javascript" language="Javascript">
-                <!--
+                //<![CDATA[
                   alert( "<%=cm.cms("login_invalid")%>." );
-                //-->
+                //]]>
               </script>
           <%
               }

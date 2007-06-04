@@ -41,7 +41,7 @@
     <%=cm.cms("generating_pdf")%>
   </title>
   <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
   function showLoadingProgress( show )
   {
     var img = document.getElementById( "loading" );
@@ -59,7 +59,7 @@
   {
     document.getElementById("status").innerHTML=txt;
   }
-  //-->
+  //]]>
   </script>
 </head>
 
@@ -81,9 +81,9 @@
 </table>
 <% out.flush(); %>
 <script language="JavaScript" type="text/javascript">
-<!--
+//<![CDATA[
 updateText('<%=cm.cms("generating_pdf_wait")%>');
-//-->
+//]]>
 </script>
 <%
   pdfReport report = new pdfReport();
@@ -133,7 +133,7 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
   out.flush();
 %>
 <script language="JavaScript" type="text/javascript">
-<!--
+//<![CDATA[
 <%
    if ( error )
    {
@@ -150,7 +150,7 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
 <%
    }
 %>
-      //-->
+      //]]>
     </script>
 <%
     out.flush();
@@ -165,13 +165,13 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
     {
 %>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
       function feedback()
       {
         window.opener.location.href="feedback.jsp?feedbackType=Software%20bugs&module=EUNIS%20Species&url=Species%20PDF%20factsheet%20generation%20failed for species <%=Utilities.treatURLSpecialCharacters(Utilities.removeQuotes( factsheet.getSpeciesObject().getScientificName() ))%> with ID=<%=factsheet.getIdSpecies()%>, ID_link=<%=factsheet.getIdSpeciesLink()%>%>.";
         this.close();
       }
-      //-->
+      //]]>
     </script>
     <%=cm.cmsText( "please_let_us_know_about_error" )%>
     <a title="<%=cm.cms("feedback")%>" href="javascript:feedback();"><%=cm.cmsText( "feedback" )%></a>.

@@ -19,14 +19,14 @@
   <input type ="hidden" name="criteriaName" value="" />
 </form>
 <script language="JavaScript" type="text/javascript">
-<!--
+//<![CDATA[
 function setFormAndSubmit(userName,pageName,criteriaName) {
       document.saveForm.userName.value = userName;
       document.saveForm.pageName.value = pageName;
       document.saveForm.criteriaName.value = criteriaName;
       document.saveForm.submit();
    }
-//-->
+//]]>
 </script>
 <%
   WebContentManagement cm = SessionManager.getWebContent();

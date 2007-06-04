@@ -25,13 +25,13 @@
     WebContentManagement cm = SessionManager.getWebContent();
 %>
 <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
   function openMap(searchCriteria)
   {
     URL = "<%=mapName%>?" + searchCriteria ;
     eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=0, resizable=yes,location=0,width=800,height=600,left=30,top=20');");
   }
-  //-->
+  //]]>
 </script>
 <br />        
 <div style="width : 100%;">

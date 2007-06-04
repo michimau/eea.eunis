@@ -92,7 +92,7 @@
       <%=cm.cms("species_groups-result_title")%>
     </title>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         var errRefineMessage = "<%=cm.cms("enter_refine_criteria_correctly")%>.";
         // Used in refine search ; check if criteria are empty
         function checkRefineSearch(noCriteria)
@@ -125,7 +125,7 @@
             }
           }
         }
-       //-->
+       //]]>
     </script>
   </head>
   <body>

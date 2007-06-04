@@ -23,12 +23,12 @@
     </title>
 
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
      function closeWindow(where){
        window.opener.location.href=where;
        self.close();
       }
-    // -->
+    //]]>
     </script>
   </head>
 <%

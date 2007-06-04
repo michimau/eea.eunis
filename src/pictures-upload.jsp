@@ -43,7 +43,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         function validateForm() {
           if (document.uploadPicture.filename.value == "") {
             alert("<%=cm.cms("pictures_upload_click_browse")%>");
@@ -55,7 +55,7 @@
           }
           return true;
         }
-      //-->
+      //]]>
     </script>
       <title>
         <%=cm.cms("pictures_upload_page_title")%>
@@ -155,7 +155,7 @@
 %>
     <%-- Delete the picture --%>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
 <%
       if (ret)
       {
@@ -171,7 +171,7 @@
       }
 %>
       this.location.href="pictures.jsp?idobject=<%=IDObject%>&natureobjecttype=<%=NatureObjectType%>";
-      //-->
+      //]]>
     </script>
 <%
     }

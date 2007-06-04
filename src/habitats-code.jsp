@@ -31,7 +31,7 @@
   <%=cm.cms("habitats_code_title")%>
 </title>
 <script language="JavaScript" type="text/javascript">
-<!--
+//<![CDATA[
 // Open popup for first form
 function openHelper(URL)
 {
@@ -66,7 +66,7 @@ function openHelper(URL)
       eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,location=0,width=400,height=500,left=490,top=0');");
     }
   }
-//-->
+//]]>
 </script>
 </head>
   <body>
@@ -242,14 +242,14 @@ function openHelper(URL)
                     <br />
                     &nbsp;
                     <script type="text/javascript" language="JavaScript">
-                    <!--
+                    //<![CDATA[
                     // values of this constants from specific class Domain
                     var source1='';
                     var source2='';
                     var database1='<%=CodeDomain.SEARCH_EUNIS%>';
                     var database2='<%=CodeDomain.SEARCH_ANNEX%>';
                     var database3='<%=CodeDomain.SEARCH_BOTH%>';
-                    //-->
+                    //]]>
                     </script>
                     <script language="JavaScript" src="script/habitats-code-save-criteria.js" type="text/javascript"></script>
                     <%=cm.cmsText("save_your_criteria")%>:

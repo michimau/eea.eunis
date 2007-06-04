@@ -25,7 +25,7 @@
   <script language="JavaScript" src="script/species-habitats.js" type="text/javascript"></script>
   <script language="JavaScript" src="script/save-criteria.js" type="text/javascript"></script>
   <script language="JavaScript" type="text/javascript">
-  <!--
+  //<![CDATA[
   function validateForm()
   {
     document.eunis.scientificName.value = trim(document.eunis.scientificName.value);
@@ -65,7 +65,7 @@
       eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,resizable=no,location=0,width=400,height=500,left=500,top=0');");
   }
 }
-//-->
+//]]>
 </script>
 <%
   WebContentManagement cm = SessionManager.getWebContent();
@@ -231,14 +231,14 @@
                 %>
                     &nbsp;
                     <script type="text/javascript" language="JavaScript">
-                    <!--
+                    //<![CDATA[
                     // values of this constants from specific class Domain
                     var source1='';
                     var source2='';
                     var database1='<%=NamesDomain.SEARCH_EUNIS%>';
                     var database2='<%=NamesDomain.SEARCH_ANNEX_I%>';
                     var database3='<%=NamesDomain.SEARCH_BOTH%>';
-                    //-->
+                    //]]>
                     </script>
                 <br />
                     <script language="JavaScript" src="script/habitats-species-save-criteria.js" type="text/javascript"></script>

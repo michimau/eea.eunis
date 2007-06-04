@@ -30,12 +30,12 @@
   <%=request.getParameter("natureobject") != null ? request.getParameter("natureobject") : ""%><%=cm.cms("advanced_search")%>
 </title>
 <script language="JavaScript" type="text/javascript">
-<!--
+//<![CDATA[
   var current_selected="";
--->
+//]]>
 </script>
 <script language="JavaScript" type="text/javascript">
-<!--
+//<![CDATA[
   function MM_jumpMenu(targ,selObj,restore){ //v3.0
     eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
     if (restore) selObj.selectedIndex=0;
@@ -236,7 +236,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
 
       document.deleteSaveCriteria.submit();
    }
-//-->
+//]]>
 </script>
 
 <%
@@ -375,9 +375,9 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       System.out.println("Error deleting root!");
                 %>
                 <script language="JavaScript" type="text/javascript">
-                <!--
+                //<![CDATA[
                 alert('<%=cm.cms("error_deleting_root")%>');
-                //-->
+                //]]>
                 </script>
                 <%
                     }
@@ -403,9 +403,9 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       System.out.println("Error adding branch!");
                       %>
                       <script language="JavaScript" type="text/javascript">
-                      <!--
+                      //<![CDATA[
                       alert('<%=cm.cms("error_adding_branch")%>');
-                      //-->
+                      //]]>
                       </script>
                       <%
                     }
@@ -417,9 +417,9 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       System.out.println("Error deleting branch!");
                       %>
                       <script language="JavaScript" type="text/javascript">
-                      <!--
+                      //<![CDATA[
                       alert('<%=cm.cms("error_deleting_branch")%>');
-                      //-->
+                      //]]>
                       </script>
                       <%
                     }
@@ -431,9 +431,9 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       System.out.println("Error composing branch!");
                       %>
                       <script language="JavaScript" type="text/javascript">
-                      <!--
+                      //<![CDATA[
                       alert('<%=cm.cms("error_compsing_branch_1")%>');
-                      //-->
+                      //]]>
                       </script>
                       <%
                     }

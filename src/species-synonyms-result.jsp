@@ -79,7 +79,7 @@
     <jsp:include page="header-page.jsp" />
     <script language="JavaScript" type="text/javascript" src="script/species-result.js"></script>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
         var errRefineMessage = "<%=cm.cms("species_synonyms-result_15")%>";
         // Used in refine search ; check if criteria are empty
         function checkRefineSearch(noCriteria)
@@ -112,7 +112,7 @@
             }
           }
         }
-       //-->
+       //]]>
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>

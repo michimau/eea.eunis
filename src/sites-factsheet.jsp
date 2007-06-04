@@ -58,7 +58,7 @@
     <script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
     <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
       function openWindow(theURL,winName,features)
       {
         window.open(theURL,winName,features);
@@ -83,7 +83,7 @@
       {
         eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=yes,resizable=yes, location=yes,width="+screen.width+",height="+screen.height+",left=0,top=0');");
       }
-    //-->
+    //]]>
     </script>
   </head>
   <body>
@@ -325,7 +325,7 @@
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_FOOTER" ) )%>
     </div>
     <script language="JavaScript" type="text/javascript">
-      <!--
+      //<![CDATA[
       try
       {
         var ctrl_loading = document.getElementById( "loading" );
@@ -334,7 +334,7 @@
       catch ( e )
       {
       }
-      //-->
+      //]]>
     </script>
   </body>
 </html>

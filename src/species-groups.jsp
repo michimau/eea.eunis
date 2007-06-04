@@ -27,7 +27,7 @@
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,groups";
 %>
     <script language="JavaScript" type="text/javascript">
-    <!--
+    //<![CDATA[
       function validateForm() {
         var invalidSelectMsg = "<%=cm.cms("species_groups_18")%>";
         var len = document.eunis.groupID.length;
@@ -57,7 +57,7 @@
       {
         document.eunis.groupName.value=group;
       }
-    //-->
+    //]]>
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
@@ -239,14 +239,14 @@
                         {
                       %>
                        <script type="text/javascript" language="JavaScript">
-                       <!--
+                       //<![CDATA[
                        // values of source and database constants from specific class Domain(only in habitat searches, so here are all '')
                        var source1='';
                        var source2='';
                        var database1='';
                        var database2='';
                        var database3='';
-                      //-->
+                      //]]>
                       </script>
                       <br />
                       <%=cm.cmsText("save_your_criteria")%>:

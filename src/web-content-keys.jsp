@@ -39,7 +39,7 @@
   }
 %>
     <script type="text/javascript" language="javascript">
-      <!--
+      //<![CDATA[
       function validateForm()
       {
         var idpage = document.getElementById( "idpage" );
@@ -51,7 +51,7 @@
         }
         return true;
       }
-      //-->
+      //]]>
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>

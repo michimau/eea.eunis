@@ -22,7 +22,7 @@
   String btrail = "eea#" + eeaHome + ",home#index.jsp,glossary";
 %>
 <script language="JavaScript" type="text/javascript">
-<!--
+//<![CDATA[
   function validateForm()
   {
   searchString = document.eunis.searchString.value;
@@ -42,7 +42,7 @@
   }
   return true;
 }
-//-->
+//]]>
 </script>
 
 <title>

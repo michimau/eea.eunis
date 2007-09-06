@@ -91,7 +91,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns" class="visualColumnHideTwo">
+      <div id="portal-columns">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -100,8 +100,6 @@
               <div class="documentContent" id="region-content">
               	<jsp:include page="header-dynamic.jsp">
                   <jsp:param name="location" value="<%=btrail%>" />
-                  <jsp:param name="printLink" value="<%=pdfURL%>"/>
-                  <jsp:param name="mapLink" value="show"/>
                 </jsp:include>
                 <a name="documentContent"></a>
                 <div class="documentActions">
@@ -315,7 +313,10 @@
         <!-- start of right (by default at least) column -->
         <div id="portal-column-two">
           <div class="visualPadding">
-            <jsp:include page="inc_column_right.jsp" />
+              	<jsp:include page="right-dynamic.jsp">
+                  <jsp:param name="printLink" value="<%=pdfURL%>"/>
+                  <jsp:param name="mapLink" value="show"/>
+                </jsp:include>
           </div>
         </div>
         <!-- end of the right (by default at least) column -->

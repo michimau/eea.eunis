@@ -100,7 +100,7 @@
     <jsp:include page="header-page.jsp" />
     <script language="JavaScript" type="text/javascript" src="script/sites-names.js"></script>
       <script language="JavaScript" type="text/javascript">
-      //<![CDATA[
+      <!--
         // Change the operator list according to criteria selected element from criteria type list
         function changeCriteria() {
           var criteriaType = document.getElementById("criteriaType0").options[document.getElementById("criteriaType0").selectedIndex].value;
@@ -147,7 +147,7 @@
             document.getElementById("binocular").style.visibility = "hidden";
           }
         }
-      //]]>
+      //-->
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
@@ -158,7 +158,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns" class="visualColumnHideTwo">
+      <div id="portal-columns">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -167,9 +167,6 @@
               <div class="documentContent" id="region-content">
               	<jsp:include page="header-dynamic.jsp">
                   <jsp:param name="location" value="<%=location%>"/>
-                  <jsp:param name="helpLink" value="sites-help.jsp"/>
-                  <jsp:param name="mapLink" value="show"/>
-                  <jsp:param name="downloadLink" value="<%=downloadLink%>"/>
                 </jsp:include>
                 <a name="documentContent"></a>
                 <div class="documentActions">
@@ -218,6 +215,8 @@
                 break;
               };
             }
+          %>
+          <%
 
             // Prepare parameters for pagesize.jsp
             Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
@@ -272,6 +271,7 @@
                     <%=cm.cmsInput("database_source")%>
                     <%=cm.cmsInput("name")%>
 
+                    <label for="oper0" class="noshow"><%=cm.cms("operator")%></label>
                     <select id="oper0" name="oper" title="<%=cm.cms("operator")%>">
                       <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
                         <%=cm.cms("is")%>
@@ -613,7 +613,12 @@
         <!-- start of right (by default at least) column -->
         <div id="portal-column-two">
           <div class="visualPadding">
-            <jsp:include page="inc_column_right.jsp" />
+              	<jsp:include page="right-dynamic.jsp">
+                  <jsp:param name="location" value="<%=location%>"/>
+                  <jsp:param name="helpLink" value="sites-help.jsp"/>
+                  <jsp:param name="mapLink" value="show"/>
+                  <jsp:param name="downloadLink" value="<%=downloadLink%>"/>
+                </jsp:include>
           </div>
         </div>
         <!-- end of the right (by default at least) column -->

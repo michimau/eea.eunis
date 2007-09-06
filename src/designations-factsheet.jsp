@@ -175,11 +175,9 @@
     }
 %>
                 <!--General information-->
-                <div style="width: 100%; text-align: center;">
                   <h1>
                     <%=cm.cmsText( "designation_type" )%> : <%=fromWho%>
                   </h1>
-                </div>
                 <h2>
                   <%=cm.cmsText( "general_information" )%>
                 </h2>

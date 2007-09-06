@@ -129,10 +129,6 @@
     if(!isMini)
     {
 %>
-                <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>" />
-                  <jsp:param name="printLink" value="<%=printLink%>" />
-                </jsp:include>
                 <img id="loading" alt="<%=cm.cms("loading_data")%>" src="images/loading.gif" />
 <%
     }

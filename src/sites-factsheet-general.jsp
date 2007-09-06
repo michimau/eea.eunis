@@ -458,6 +458,7 @@
     </tr>
   </table>
   <br />
+<!--
   <a name="monitoring"></a>
   <h2>
     <%=cm.cmsText("sites_factsheet_24")%>
@@ -467,6 +468,7 @@
   <textarea rows="1" cols="80"></textarea>
   <br />
   <br />
+-->
   <table summary="Link to other providers" width="90%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td width="50%">

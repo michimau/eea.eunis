@@ -32,7 +32,7 @@
   <h2>
     <%=cm.cmsText("legal_instruments")%>
   </h2>
-  <table summary="<%=cm.cms("species_factsheet_legalInstruments_01_Sum")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("species_factsheet_legalInstruments_01_Sum")%>" class="listing">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">

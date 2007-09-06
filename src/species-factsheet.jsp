@@ -26,6 +26,13 @@
                                                     Utilities.checkedStringToInt(idSpeciesLink, new Integer(0)));
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,factsheet";
+                  String SQL_DRV = application.getInitParameter("JDBC_DRV");
+                  String SQL_URL = application.getInitParameter("JDBC_URL");
+                  String SQL_USR = application.getInitParameter("JDBC_USR");
+                  String SQL_PWD = application.getInitParameter("JDBC_PWD");
+
+                SQLUtilities sqlUtilities = new SQLUtilities();
+                sqlUtilities.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
 %>
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
@@ -66,13 +73,16 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns" class="visualColumnHideTwo">
+      <div id="portal-columns">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
           <div id="portal-column-content">
             <div id="content">
               <div class="documentContent" id="region-content">
+                <jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="<%=btrail%>" />
+                </jsp:include>
                 <a name="documentContent"></a>
                 <div class="documentActions">
                   <h5 class="hiddenStructure">Document Actions</h5>
@@ -126,28 +136,7 @@
                           "SITES"
                   };
 
-                  String SQL_DRV = application.getInitParameter("JDBC_DRV");
-                  String SQL_URL = application.getInitParameter("JDBC_URL");
-                  String SQL_USR = application.getInitParameter("JDBC_USR");
-                  String SQL_PWD = application.getInitParameter("JDBC_PWD");
-                  String PdfUrl = "javascript:openLink('species-factsheet-pdf.jsp?idSpecies="+factsheet.getIdSpecies()+"&amp;idSpeciesLink="+factsheet.getIdSpeciesLink()+"')";
-                  String kmlUrl = "species-factsheet-distribution-kml.jsp?idSpecies="+factsheet.getIdSpecies()+"&amp;idSpeciesLink="+factsheet.getIdSpeciesLink();
-				
-                  
-                SQLUtilities sqlUtilities = new SQLUtilities();
-                sqlUtilities.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-                if(!sqlUtilities.TabPageIsEmpy(factsheet.getSpeciesNatureObject().getIdNatureObject().toString(),"SPECIES","GRID_DISTRIBUTION")){%>
-                <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>" />
-                  <jsp:param name="printLink" value="<%=PdfUrl%>" />
-                  <jsp:param name="kmlLink" value="<%=kmlUrl%>" />
-                </jsp:include>
-                <% } else { %>
-                <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>" />
-                  <jsp:param name="printLink" value="<%=PdfUrl%>" />
-                </jsp:include>
-                <% } %>
+                %>
                 <img alt="<%=cm.cms("loading_data")%>" id="loading" src="images/loading.gif" />
                 <div style="width: 100%; text-align: center;">
                   <h1>
@@ -363,7 +352,20 @@
         <!-- start of right (by default at least) column -->
         <div id="portal-column-two">
           <div class="visualPadding">
-            <jsp:include page="inc_column_right.jsp" />
+		<%
+                  String PdfUrl = "javascript:openLink('species-factsheet-pdf.jsp?idSpecies="+factsheet.getIdSpecies()+"&amp;idSpeciesLink="+factsheet.getIdSpeciesLink()+"')";
+                  String kmlUrl = "species-factsheet-distribution-kml.jsp?idSpecies="+factsheet.getIdSpecies()+"&amp;idSpeciesLink="+factsheet.getIdSpeciesLink();
+
+                if(!sqlUtilities.TabPageIsEmpy(factsheet.getSpeciesNatureObject().getIdNatureObject().toString(),"SPECIES","GRID_DISTRIBUTION")){%>
+                <jsp:include page="right-dynamic.jsp">
+                  <jsp:param name="printLink" value="<%=PdfUrl%>" />
+                  <jsp:param name="kmlLink" value="<%=kmlUrl%>" />
+                </jsp:include>
+                <% } else { %>
+                <jsp:include page="right-dynamic.jsp">
+                  <jsp:param name="printLink" value="<%=PdfUrl%>" />
+                </jsp:include>
+                <% } %>
           </div>
         </div>
         <!-- end of the right (by default at least) column -->

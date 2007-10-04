@@ -409,13 +409,6 @@ source[1] = <%=RefDomain.OTHER_INFO%>
           <!-- end of the left (by default at least) column -->
         </div>
         <!-- end of the main and left columns -->
-        <!-- start of right (by default at least) column -->
-        <div id="portal-column-two">
-          <div class="visualPadding">
-            <jsp:include page="inc_column_right.jsp" />
-          </div>
-        </div>
-        <!-- end of the right (by default at least) column -->
         <div class="visualClear"><!-- --></div>
       </div>
       <!-- end column wrapper -->

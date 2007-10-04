@@ -47,12 +47,11 @@ Input parameters  on REQUEST:
   // Get the backtrail from string (order of objects is preserved).
   Vector backtrailObjects = BacktrailUtil.parseBacktrailString( dynHeaderLocation, cm );
 %>
-<div style="width: 100%; padding: 0px; margin: 0px;">
-  <div id="portal-breadcrumbs" style="display:table-cell;">
-    <%=cm.cmsText( "you_are_here" )%>
+  <div id="portal-breadcrumbs">
 <%
   for (int i = 0; i < backtrailObjects.size(); i++)
   {
+    out.print( "<span dir='ltr'>" );
     BacktrailObject backtrailObject = ( BacktrailObject ) backtrailObjects.elementAt(i);
     if( i < backtrailObjects.size() - 1 )
     {
@@ -63,7 +62,7 @@ Input parameters  on REQUEST:
       backtrailObject.setCssStyle( "breadcrumbitemlast" );
     }
     out.print( backtrailObject.toURLString() );
-    out.print( "&nbsp;" );
+    out.print( "</span>" );
   }
 %>
   </div>
@@ -109,6 +108,6 @@ Input parameters  on REQUEST:
 <%
   }
 %>
-</div>
+
 <a name="main_content" title="<%=cm.cms("header_main_content")%>" accesskey="2"><img alt="" src="images/pixel.gif" width="1" height="1" /></a>
 <%=cm.cmsTitle("header_main_content")%>

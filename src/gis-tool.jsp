@@ -58,6 +58,7 @@
                 <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="740" height="552" id="fl_eunis" align="middle">
                   <param name="allowScriptAccess" value="sameDomain" />
                   <param name="movie" value="gis/fl_eunis.swf" />
+                  <param value="opaque" name="wmode" />
                   <param name="quality" value="high" />
                   <param name="bgcolor" value="#FFFFFF" />
                   <param name="FlashVars"  value="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_sh_sites=none&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>" />

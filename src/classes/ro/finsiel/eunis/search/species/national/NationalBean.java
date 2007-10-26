@@ -140,7 +140,7 @@ public class NationalBean extends AbstractFormBean {
       {
         result += " any";
       }
-      if ( countryName != null )
+      if ( countryName != null && !countryName.equals("any"))
       {
         result += " in " + countryName;
       }

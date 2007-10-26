@@ -108,14 +108,12 @@ public class NationalSearchCriteria extends AbstractSearchCriteria {
     StringBuffer sql = new StringBuffer();
 
     if (null != groupName && null != statusName && null != countryName) {
-      if (!groupName.equalsIgnoreCase("any")) sql.append("D.common_name='" + groupName + "'");
+      if (!groupName.equalsIgnoreCase("any")) sql.append(" AND D.common_name='" + groupName + "'");
       if (!countryName.equalsIgnoreCase("any")) {
-        if (sql.length() > 0) sql.append(" AND ");
-        sql.append("F.area_name_en='" + countryName + "'");
+        sql.append(" AND F.area_name_en='" + countryName + "'");
       }
       if (!statusName.equalsIgnoreCase("any")) {
-        if (sql.length() > 0) sql.append(" AND ");
-        sql.append("H.NAME='" + statusName + "'");
+        sql.append(" AND H.NAME='" + statusName + "'");
       }
     }
 

@@ -15,6 +15,8 @@ public class NationalThreatStatusForGroupSpecies {
   private Vector CountriesForAGroup = new Vector();
   private Vector ThreatStatusForAnyGroupAndACountry = new Vector();
   private Vector ThreatStatusForAGroupAndACountry = new Vector();
+  private Vector ThreatStatusForAnyGroupAndAnyCountry = new Vector();
+  private Vector ThreatStatusForAGroupAndAnyCountry = new Vector();
   private String idGroup = null;
   private String idCountry = null;
 
@@ -131,6 +133,56 @@ public class NationalThreatStatusForGroupSpecies {
     }
     ThreatStatusForAGroupAndACountry = results;
   }
+  
+  /**
+   * Used to obtain threat status list for pair (any group species, any country).
+   */
+  public void setThreatStatusForAnyGroupAndAnyCountry() {
+    Vector results = new Vector();
+    try {
+      List listPersistentObject = new NationalThreatStatusDomain().findWhere("F.ISO_2L<>'' " +
+              "AND F.ISO_2L<>'null' " +
+              "AND F.ISO_2L IS NOT NULL " +
+              "AND F.SELECTION <> 0 " +
+              "AND G.LOOKUP_TYPE = 'CONSERVATION_STATUS' " +
+              "GROUP BY H.NAME");
+
+      if (listPersistentObject != null && listPersistentObject.size() > 0) {
+        for (int i = 0; i < listPersistentObject.size(); i++) {
+          NationalThreatStatusPersist obj = (NationalThreatStatusPersist) listPersistentObject.get(i);
+          results.addElement(obj);
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    ThreatStatusForAnyGroupAndAnyCountry = results;
+  }
+
+  /**
+   * Used to obtain threat status list for pair ( group species, any country).
+   */
+  public void setThreatStatusForAGroupAndAnyCountry() {
+    Vector results = new Vector();
+    try {
+      List listPersistentObject = new NationalThreatStatusDomain().findWhere("F.ISO_2L<>'' " +
+              "AND F.ISO_2L<>'null' " +
+              "AND F.ISO_2L IS NOT NULL " +
+              "AND F.SELECTION <> 0 " +
+              "AND G.LOOKUP_TYPE = 'CONSERVATION_STATUS' " +
+              "AND D.ID_GROUP_SPECIES='" + idGroup + "' GROUP BY H.NAME");
+
+      if (listPersistentObject != null && listPersistentObject.size() > 0) {
+        for (int i = 0; i < listPersistentObject.size(); i++) {
+          NationalThreatStatusPersist obj = (NationalThreatStatusPersist) listPersistentObject.get(i);
+          results.addElement(obj);
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    ThreatStatusForAGroupAndAnyCountry = results;
+  }
 
   /**
    * Getter for CountriesForAnyGroup property.
@@ -163,4 +215,20 @@ public class NationalThreatStatusForGroupSpecies {
  public Vector getThreatStatusForAGroupAndACountry() {
     return ThreatStatusForAGroupAndACountry;
   }
+ 
+ /**
+  * Getter for ThreatStatusForAnyGroupAndAnyCountry property.
+  * @return ThreatStatusForAnyGroupAndAnyCountry.
+  */
+ public Vector getThreatStatusForAnyGroupAndAnyCountry() {
+   return ThreatStatusForAnyGroupAndAnyCountry;
+ }
+
+ /**
+  * Getter for ThreatStatusForAGroupAndAnyCountry property.
+  * @return ThreatStatusForAGroupAndAnyCountry.
+  */
+ public Vector getThreatStatusForAGroupAndAnyCountry() {
+   return ThreatStatusForAGroupAndAnyCountry;
+ }
 }

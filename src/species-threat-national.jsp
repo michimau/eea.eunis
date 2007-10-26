@@ -171,6 +171,7 @@
   String groupName = request.getParameter("groupName");
   String countryName = request.getParameter("countryName");
   final boolean anyGroupSelected = (null != groupName) ? groupName.equalsIgnoreCase("any") : false;
+  final boolean anyCountrySelected = (null != countryName) ? countryName.equalsIgnoreCase("any") : false;
 
 
   boolean showGroup = false;
@@ -343,6 +344,9 @@
                                     <option value="species-threat-national.jsp?idGroup=<%=group%>&amp;groupName=<%=groupName%>" selected="selected">
                                       <%=cm.cms("please_select_a_country")%>
                                     </option>
+                                    <option value="species-threat-national.jsp?groupName=<%=groupName%>&amp;idGroup=<%=group%>&amp;countryName=any&amp;idCountry=-1">
+                                      <%=cm.cms("any_country")%>
+                                    </option>
                                     <%
                                     NationalThreatStatusForGroupSpecies a = new NationalThreatStatusForGroupSpecies(group,"-1");
                                     a.setCountriesForAnyGroup();
@@ -433,9 +437,13 @@
                                       NationalThreatStatusForGroupSpecies a = new NationalThreatStatusForGroupSpecies(group,country);
                                       a.setThreatStatusForAnyGroupAndACountry();
                                       a.setThreatStatusForAGroupAndACountry();
+                                      a.setThreatStatusForAnyGroupAndAnyCountry();
+                                      a.setThreatStatusForAGroupAndAnyCountry();
                                       Vector ThreatStatusForAnyGroupAndACountry = a.getThreatStatusForAnyGroupAndACountry();
                                       Vector ThreatStatusForAGroupAndACountry = a.getThreatStatusForAGroupAndACountry();
-                                      if (!anyGroupSelected)
+                                      Vector ThreatStatusForAnyGroupAndAnyCountry = a.getThreatStatusForAnyGroupAndAnyCountry();
+                                      Vector ThreatStatusForAGroupAndAnyCountry = a.getThreatStatusForAGroupAndAnyCountry();
+                                      if (!anyGroupSelected && !anyCountrySelected)
                                       {
                                         if (ThreatStatusForAGroupAndACountry != null && ThreatStatusForAGroupAndACountry.size() > 0)
                                         {
@@ -449,7 +457,7 @@
                                           }
                                         }
                                       }
-                                      else
+                                      else if (anyGroupSelected && !anyCountrySelected)
                                       {
                                         if (ThreatStatusForAnyGroupAndACountry != null && ThreatStatusForAnyGroupAndACountry.size() > 0)
                                         {
@@ -458,6 +466,34 @@
                                     %>
                                             <option value="species-threat-national-result.jsp?idCountry=<%=country%>&amp;countryName=<%=countryName%>&amp;groupName=<%=groupName%>&amp;idGroup=<%=group%>&amp;statusName=<%=((NationalThreatStatusPersist)ThreatStatusForAnyGroupAndACountry.get(i)).getDefAbrev()%>&amp;idConservation=<%=((NationalThreatStatusPersist)ThreatStatusForAnyGroupAndACountry.get(i)).getIdCons()%>">
                                               <%=((NationalThreatStatusPersist)ThreatStatusForAnyGroupAndACountry.get(i)).getDefAbrev()%>
+                                            </option>
+                                    <%
+                                          }
+                                        }
+                                      }
+                                      else if (!anyGroupSelected && anyCountrySelected)
+                                      {
+                                        if (ThreatStatusForAGroupAndAnyCountry != null && ThreatStatusForAGroupAndAnyCountry.size() > 0)
+                                        {
+                                          for (int i=0;i<ThreatStatusForAGroupAndAnyCountry.size();i++)
+                                          {
+                                    %>
+                                            <option value="species-threat-national-result.jsp?countryName=any&amp;groupName=<%=groupName%>&amp;idGroup=<%=group%>&amp;statusName=<%=((NationalThreatStatusPersist)ThreatStatusForAGroupAndAnyCountry.get(i)).getDefAbrev()%>&amp;idConservation=<%=((NationalThreatStatusPersist)ThreatStatusForAGroupAndAnyCountry.get(i)).getIdCons()%>">
+                                              <%=((NationalThreatStatusPersist)ThreatStatusForAGroupAndAnyCountry.get(i)).getDefAbrev()%>
+                                            </option>
+                                    <%
+                                          }
+                                        }
+                                      }
+                                      else if (anyGroupSelected && anyCountrySelected)
+                                      {
+                                        if (ThreatStatusForAnyGroupAndAnyCountry != null && ThreatStatusForAnyGroupAndAnyCountry.size() > 0)
+                                        {
+                                          for (int i=0;i<ThreatStatusForAnyGroupAndAnyCountry.size();i++)
+                                          {
+                                    %>
+                                            <option value="species-threat-national-result.jsp?countryName=any&amp;groupName=<%=groupName%>&amp;idGroup=<%=group%>&amp;statusName=<%=((NationalThreatStatusPersist)ThreatStatusForAnyGroupAndAnyCountry.get(i)).getDefAbrev()%>&amp;idConservation=<%=((NationalThreatStatusPersist)ThreatStatusForAnyGroupAndAnyCountry.get(i)).getIdCons()%>">
+                                              <%=((NationalThreatStatusPersist)ThreatStatusForAnyGroupAndAnyCountry.get(i)).getDefAbrev()%>
                                             </option>
                                     <%
                                           }
@@ -561,6 +597,13 @@
           <!-- end of the left (by default at least) column -->
         </div>
         <!-- end of the main and left columns -->
+        <!-- start of right (by default at least) column -->
+        <div id="portal-column-two">
+          <div class="visualPadding">
+            <jsp:include page="inc_column_right.jsp" />
+          </div>
+        </div>
+        <!-- end of the right (by default at least) column -->
         <div class="visualClear"><!-- --></div>
       </div>
       <!-- end column wrapper -->

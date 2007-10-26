@@ -25,6 +25,7 @@ import ro.finsiel.eunis.exceptions.InitializationException;
 
 import java.util.List;
 
+
 /**
  *
  * @version $Revision: 1.1.1.1 $ $Date: 2003/12/09 08:35:17 $
@@ -139,7 +140,7 @@ public class NationalThreatStatusDomain extends AbstractDomain implements Pagina
 
     filterSQL.append(_prepareWhereSearch());
 
-    filterSQL.append(" GROUP BY C.ID_NATURE_OBJECT ");
+    //filterSQL.append(" GROUP BY C.ID_NATURE_OBJECT ");
 
     // Add the ORDER BY clause to do the sorting
     if (sortCriteria.length > 0) {
@@ -212,7 +213,6 @@ public class NationalThreatStatusDomain extends AbstractDomain implements Pagina
 
 
     for (int i = 0; i < searchCriteria.length; i++) {
-      filterSQL.append(" AND ");
       NationalSearchCriteria aCriteria = (NationalSearchCriteria) searchCriteria[i]; // upcast
       filterSQL.append(aCriteria.toSQL());
     }
@@ -252,6 +252,5 @@ public class NationalThreatStatusDomain extends AbstractDomain implements Pagina
       return filterSQL;
     }
   }
-
 
 }

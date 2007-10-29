@@ -137,7 +137,7 @@ public class TSVHabitatCodeReport extends AbstractTSVReport
                 if ( 0 == database.compareTo( CodeDomain.SEARCH_BOTH ) )
                 {
                   aRow.addElement( habitat.getEunisHabitatCode() );
-                  aRow.addElement( habitat.getCodeAnnex1() );
+                  aRow.addElement( habitat.getCode2000() );
                 }
                 if ( 0 == database.compareTo( CodeDomain.SEARCH_EUNIS ) )
                 {
@@ -145,7 +145,7 @@ public class TSVHabitatCodeReport extends AbstractTSVReport
                 }
                 if ( 0 == database.compareTo( CodeDomain.SEARCH_ANNEX ) )
                 {
-                  aRow.addElement( habitat.getCodeAnnex1() );
+                  aRow.addElement( habitat.getCode2000() );
                 }
                 // Scientific name
                 aRow.addElement( habitat.getScientificName() );
@@ -195,7 +195,7 @@ public class TSVHabitatCodeReport extends AbstractTSVReport
             if ( 0 == database.compareTo( CodeDomain.SEARCH_BOTH ) )
             {
               aRow.addElement( habitat.getEunisHabitatCode() );
-              aRow.addElement( habitat.getCodeAnnex1() );
+              aRow.addElement( habitat.getCode2000() );
             }
             if ( 0 == database.compareTo( CodeDomain.SEARCH_EUNIS ) )
             {
@@ -203,7 +203,7 @@ public class TSVHabitatCodeReport extends AbstractTSVReport
             }
             if ( 0 == database.compareTo( CodeDomain.SEARCH_ANNEX ) )
             {
-              aRow.addElement( habitat.getCodeAnnex1() );
+              aRow.addElement( habitat.getCode2000() );
             }
             // Scientific name
             aRow.addElement( habitat.getScientificName() );
@@ -223,7 +223,7 @@ public class TSVHabitatCodeReport extends AbstractTSVReport
           if ( 0 == database.compareTo( CodeDomain.SEARCH_BOTH ) )
           {
             aRow.addElement( habitat.getEunisHabitatCode() );
-            aRow.addElement( habitat.getCodeAnnex1() );
+            aRow.addElement( habitat.getCode2000() );
           }
           if ( 0 == database.compareTo( CodeDomain.SEARCH_EUNIS ) )
           {
@@ -231,7 +231,7 @@ public class TSVHabitatCodeReport extends AbstractTSVReport
           }
           if ( 0 == database.compareTo( CodeDomain.SEARCH_ANNEX ) )
           {
-            aRow.addElement( habitat.getCodeAnnex1() );
+            aRow.addElement( habitat.getCode2000() );
           }
           // Scientific name
           aRow.addElement( habitat.getScientificName() );

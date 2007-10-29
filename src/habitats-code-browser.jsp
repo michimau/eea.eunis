@@ -188,7 +188,7 @@
                           {
                             Chm62edtHabitatPersist h= (Chm62edtHabitatPersist) it.next();%>
                             <li>
-                              <a title="<%=cm.cms("expand_data_for_habitat_type")%>" href="habitats-code-browser.jsp?habCode=<%=h.getEunisHabitatCode()%>#factsheet"><%=h.getEunisHabitatCode()%> : <%=h.getScientificName()%></a>
+                              <a href="habitats-code-browser.jsp?habCode=<%=h.getEunisHabitatCode()%>#factsheet"><%=h.getEunisHabitatCode()%> : <%=h.getScientificName()%></a>
                               <%=cm.cmsTitle("expand_data_for_habitat_type")%>
                             </li>
                       <%

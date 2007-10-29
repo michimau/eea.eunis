@@ -20,7 +20,7 @@
   // idQuestionLink
   // level - It defaults to level 1
   // pageCode - see KeyNavigation.findQuestionAnswers for details
-  int level = Utilities.checkedStringToInt(request.getParameter("generic_index_07"), 1);
+  int level = Utilities.checkedStringToInt(request.getParameter("level"), 1);
   String pageCode = request.getParameter("pageCode");
   KeyNavigation keyNavigator = new KeyNavigation();
   // List of questions.

@@ -66,6 +66,8 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
     Vector<String> headers = new Vector<String>();
     // Group
     headers.addElement( "Group" );
+    // Country
+    headers.addElement( "Country" );
     // Scientific name
     headers.addElement( "Scientific name" );
     // Vernacular names (multiple rows)
@@ -114,8 +116,10 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
                 Vector<String> aRow = new Vector<String>();
                 // Group
                 aRow.addElement( specie.getCommonName() );
+                // Country
+                aRow.addElement( specie.getCountry() );
                 // Scientific name
-                aRow.addElement( specie.getScientificName() );
+                aRow.addElement( specie.getScName() );
                 // Vernacular name
                 aRow.addElement( vernacularName );
                 writeRow( aRow );
@@ -124,6 +128,8 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
               {
                 Vector<String> aRow = new Vector<String>();
                 // Group
+                aRow.addElement( "" );
+                // Country
                 aRow.addElement( "" );
                 // Scientific name
                 aRow.addElement( "" );
@@ -139,15 +145,18 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
             Vector<String> aRow = new Vector<String>();
             // Group
             aRow.addElement( specie.getCommonName() );
+            // Country
+            aRow.addElement( specie.getCountry() );
             // Scientific name
-            aRow.addElement( specie.getScientificName() );
+            aRow.addElement( specie.getScName() );
             // Vernacular name
             aRow.addElement( "-" );
             writeRow( aRow );
           }
           Vector<String> aRow = new Vector<String>();
           aRow.addElement( specie.getCommonName() );
-          aRow.addElement( specie.getScientificName() );
+          aRow.addElement( specie.getCountry() );
+          aRow.addElement( specie.getScName() );
           aRow.addElement( xmlVernacularNames );
           xmlreport.writeRow( aRow );
         }

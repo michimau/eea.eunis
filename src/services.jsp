@@ -95,7 +95,7 @@
 <%
   int color = 0;
   String cssClass = "";
-  if( SessionManager.isAuthenticated() && ( SessionManager.isUser_management_RIGHT() || SessionManager.isRole_management_RIGHT() ) )
+  if( SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT() )
   {
     //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
 
@@ -108,6 +108,21 @@
                     <td>
                       <a href="users.jsp" title="<%=cm.cms("user_management")%>"><%=cm.cmsText("services_userslink")%></a>
                       <%=cm.cmsTitle("user_management")%>
+                    </td>
+                  </tr>
+<%
+  }
+  if( SessionManager.isAuthenticated() && SessionManager.isRole_management_RIGHT() )
+  {
+%>
+				  <tr <%=cssClass%>>
+                    <td align="center">
+                      <a href="roles.jsp" title="<%=cm.cms("role_management")%>"><img alt="<%=cm.cms("role_management")%>" src="images/roles.gif" width="81" height="43" border="0" title="<%=cm.cms("role_management")%>" /></a>
+                      <%=cm.cmsAlt("role_management")%><%=cm.cmsTitle("role_management")%>
+                    </td>
+                    <td>
+                      <a href="roles.jsp" title="<%=cm.cms("role_management")%>"><%=cm.cmsText("services_roleslink")%></a>
+                      <%=cm.cmsTitle("role_management")%>
                     </td>
                   </tr>
 <%

@@ -119,16 +119,16 @@
                   </ul>
                 </div>
                 <h1>
-				   <%=cm.cmsText("eunis_database_user_management")%>
+				     <%=cm.cmsText("eunis_database_role_management")%>
 				</h1>
 				<br />
 <!-- MAIN CONTENT -->
                 <%
                 int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
-                String []tabs = { cm.cms("list_users"),cm.cms("edit_user"),cm.cms("add_user")};
+                String []tabs = { cm.cms("list_roles"),cm.cms("edit_role"),cm.cms("add_role"),cm.cms("edit_right"),cm.cms("add_right")};
                 %>
-                        <div id="tabbedmenu">
-                        <ul>
+				<div id="tabbedmenu">
+					<ul>
                         <%
                             String currentTab = "";
 
@@ -138,58 +138,94 @@
 
                               %>
                                 <li<%=currentTab%>>
-                                  <a title="<%=cm.cms("show")%> <%=tabs[i]%>" href="users.jsp?tab=<%=i%>"><%=tabs[ i ]%></a>
+                                  <a title="<%=cm.cms("show")%> <%=tabs[i]%>" href="roles.jsp?tab=<%=i%>"><%=tabs[ i ]%></a>
                                 </li>
                               <%
                             }
                         %>
-                        </ul>
-                        </div>
-                      <br /><br />
+					</ul>
+				</div>
+				<br /><br />
                          <%
-                            // if was selected 'edit_users' cell from the seccond line do this
-                           // if(tab.equalsIgnoreCase("edit_users"))
-                            if ( tab == 1)
-                            {
-                              String userName = (request.getParameter("userName")==null?"":request.getParameter("userName"));
-                              String operation = (request.getParameter("operation")==null?"":request.getParameter("operation"));
-                             %>
-                             <jsp:include page="users/users-edit.jsp">
-                                 <jsp:param name="users_operation" value="edit_users"/>
-                                 <jsp:param name="userName" value="<%=userName%>"/>
-                                 <jsp:param name="operation" value="<%=operation%>"/>
-                                 <jsp:param name="tab" value="<%=tab%>"/>
-                             </jsp:include>
-                            <%
-                            }
-
-                     // if was selected 'add_users' cell from the seccond line do this
-                     //if(tab.equalsIgnoreCase("add_users"))
+                     // if was selected 'add_roles' cell from the seccond line do this
+                     //if(tab2.equalsIgnoreCase("add_roles"))
                      if ( tab == 2)
                      {
-                        String userName = (request.getParameter("userName")==null?"":request.getParameter("userName"));
+                        String roleName = (request.getParameter("roleName")==null?"":request.getParameter("roleName"));
                         String operation = (request.getParameter("operation")==null?"":request.getParameter("operation"));
                     %>
-                     <jsp:include page="users/users-edit.jsp">
-                         <jsp:param name="users_operation" value="add_users"/>
+                     <jsp:include page="users/roles-add.jsp">
+                         <jsp:param name="users_operation" value="add"/>
+                         <jsp:param name="roleName" value="<%=roleName%>"/>
+                         <jsp:param name="operation" value="<%=operation%>"/>
+                         <jsp:param name="tab" value="<%=tab%>"/>
+                     </jsp:include>
+                     <%
+                     }
+
+                      // if was selected 'edit_roles' cell from the seccond line do this
+                      //if(tab2.equalsIgnoreCase("edit_roles"))
+                      if (tab == 1)
+                      {
+                        String roleName = (request.getParameter("roleName")==null?"":request.getParameter("roleName"));
+                        String operation = (request.getParameter("operation")==null?"":request.getParameter("operation"));
+                      %>
+                     <jsp:include page="users/roles-add.jsp">
+                         <jsp:param name="users_operation" value="edit"/>
+                         <jsp:param name="roleName" value="<%=roleName%>"/>
+                         <jsp:param name="operation" value="<%=operation%>"/>
+                         <jsp:param name="tab" value="<%=tab%>"/>
+                     </jsp:include>
+                     <%
+                      }
+
+                      // if was selected 'view_roles' cell from the seccond line do this
+                      //if(tab2.equalsIgnoreCase("view_roles"))
+                       if ( tab == 0)
+                      {
+                        String userName = (request.getParameter("userName")==null?"":request.getParameter("userName"));
+                        String operation = (request.getParameter("operation")==null?"":request.getParameter("operation"));
+                     %>
+                     <jsp:include page="users/roles-view.jsp">
                          <jsp:param name="userName" value="<%=userName%>"/>
                          <jsp:param name="operation" value="<%=operation%>"/>
                          <jsp:param name="tab" value="<%=tab%>"/>
                      </jsp:include>
-                   <%
-                     }
+                     <%
+                      }
 
-                     // if was selected 'view_users' cell from the seccond line do this
-                     //if(tab.equalsIgnoreCase("view_users"))
-                     if ( tab == 0)
-                     {
-                   %>
-                     <jsp:include page="users/users-list.jsp">
+                      // if was selected 'add_rights' cell from the seccond line do this
+                      //if(tab2.equalsIgnoreCase("add_rights"))
+                       if ( tab == 4)
+                      {
+                        String rightName = (request.getParameter("rightName")==null?"":request.getParameter("rightName"));
+                        String operation = (request.getParameter("operation")==null?"":request.getParameter("operation"));
+                      %>
+                     <jsp:include page="users/rights-add.jsp">
+                         <jsp:param name="users_operation" value="add_rights"/>
+                         <jsp:param name="rightName" value="<%=rightName%>"/>
+                         <jsp:param name="operation" value="<%=operation%>"/>
                          <jsp:param name="tab" value="<%=tab%>"/>
                      </jsp:include>
-                   <%
-                     }
-                   %>
+                     <%
+                      }
+
+                      // if was selected 'edit_rights' cell from the seccond line do this
+                      //if(tab2.equalsIgnoreCase("edit_rights"))
+                       if ( tab == 3)
+                      {
+                        String rightName = (request.getParameter("rightName")==null?"":request.getParameter("rightName"));
+                        String operation = (request.getParameter("operation")==null?"":request.getParameter("operation"));
+                      %>
+                     <jsp:include page="users/rights-add.jsp">
+                         <jsp:param name="users_operation" value="edit_rights"/>
+                         <jsp:param name="rightName" value="<%=rightName%>"/>
+                         <jsp:param name="operation" value="<%=operation%>"/>
+                         <jsp:param name="tab" value="<%=tab%>"/>
+                     </jsp:include>
+                     <%
+                      }
+                     %>
 
                 <%=cm.br()%>
                 <%=cm.cmsMsg("users_title")%>
@@ -225,7 +261,7 @@
           <div id="portal-column-one">
             <div class="visualPadding">
               <jsp:include page="inc_column_left.jsp">
-                <jsp:param name="page_name" value="users.jsp" />
+                <jsp:param name="page_name" value="roles.jsp" />
               </jsp:include>
             </div>
           </div>

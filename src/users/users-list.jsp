@@ -25,10 +25,6 @@
   if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
 {
 %>
-    <h1>
-      <%=cm.cmsText("eunis_database_user_management")%>
-    </h1>
-    <br />
     <h2><%=cm.cmsText("users_list_02")%></h2>
     <br />
 <%
@@ -74,7 +70,7 @@ if(usersList != null && usersList.size() > 0)
     if (!Utilities.formatString(objUser.getUsername(),"&nbsp;").equalsIgnoreCase("&nbsp;"))
     {
   %>
-     <a href="users.jsp?userName=<%=objUser.getUsername()%>&amp;tab1=0&amp;tab2=1" title="<%=cm.cms("edit_user")%>"><%=Utilities.formatString(objUser.getUsername(),"&nbsp;")%></a>
+     <a href="users.jsp?userName=<%=objUser.getUsername()%>&amp;tab=1" title="<%=cm.cms("edit_user")%>"><%=Utilities.formatString(objUser.getUsername(),"&nbsp;")%></a>
      <%=cm.cmsTitle("edit_user")%>
   <%
     } else

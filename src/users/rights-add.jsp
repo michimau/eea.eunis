@@ -29,8 +29,7 @@
   // Request parameters
   String users_operation = (request.getParameter("users_operation") == null ? "edit_rights" : request.getParameter("users_operation"));
 
-  String tab1 = (request.getParameter("tab1") == null ? "users" : request.getParameter("tab1"));
-  String tab2 = (request.getParameter("tab2")==null ? (request.getParameter("tab1") == null ? "view_users" : (request.getParameter("tab1").equalsIgnoreCase("users") ? "view_users" : "view_roles")) : request.getParameter("tab2"));
+  String tab = (request.getParameter("tab")==null?"view_roles":request.getParameter("tab"));
 
   try
   {
@@ -113,7 +112,7 @@
          && trim(document.eunis.rightName.value) != 'selectRightName')
          {
          rightName = escape(trim(document.eunis.rightName.value));
-         document.location="users.jsp?operation=delete&rightName="+rightName+"&tab1=<%=tab1%>&tab2=<%=tab2%>";
+         document.location="roles.jsp?operation=delete&rightName="+rightName+"&tab=<%=tab%>";
          }
       }
       //-->
@@ -222,18 +221,13 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
   description = (UsersUtility.getRightsObject(rightName) == null ? "" : (UsersUtility.getRightsObject(rightName)).getDescription());
 }
 %>
-     <h1>
-       <%=cm.cmsText("eunis_database_user_management")%>
-     </h1>
-     <br />
      <h2>
         <%=(users_operation.equalsIgnoreCase("add_rights")?cm.cms("add"):cm.cms("edit"))%> rights
      </h2>
      <br />
 
-<form name="eunis" method="post" action="users.jsp" onsubmit="<%=onSubmit%>">
-<input type="hidden" name="tab1" value="<%=tab1%>" />
-<input type="hidden" name="tab2" value="<%=tab2%>" />
+<form name="eunis" method="post" action="roles.jsp" onsubmit="<%=onSubmit%>">
+<input type="hidden" name="tab" value="<%=tab%>" />
 <input type="hidden" name="operation" value="" />
 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="tableBorder">
 <tr><td>&nbsp;</td></tr>
@@ -249,7 +243,7 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
       &nbsp;&nbsp;<label for="rightName1"><%=cm.cmsText("rights_add_11")%></label>
       </td>
       <td>
-       <select id="rightName1" name="rightName" style="border-width:1px" onchange="MM_jumpMenuRights('parent',this,0,'<%=tab1%>','<%=tab2%>')"  title="<%=cm.cms("rights_add_12")%>">
+       <select id="rightName1" name="rightName" style="border-width:1px" onchange="MM_jumpMenuRights('parent',this,0,'<%=tab%>')"  title="<%=cm.cms("rights_add_12")%>">
         <option value="selectRightName" selected="selected"><%=cm.cms("rights_add_11")%></option>
         <%
            try

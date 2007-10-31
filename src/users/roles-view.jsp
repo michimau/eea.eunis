@@ -25,10 +25,6 @@
   if(SessionManager.isAuthenticated() && SessionManager.isRole_management_RIGHT())
 {
 %>
-<h1>
-  <%=cm.cmsText("eunis_database_user_management")%>
-</h1>
-<br />
 <h2>
    <%=cm.cmsText("roles_view_02")%>
 </h2>
@@ -53,13 +49,11 @@
     return;
   }
 // Request parameters
-String tab1 = (request.getParameter("tab1")==null?"users":request.getParameter("tab1"));
-String tab2 = (request.getParameter("tab2")==null?(request.getParameter("tab1")==null?"view_users":(request.getParameter("tab1").equalsIgnoreCase("users")?"view_users":"view_roles")):request.getParameter("tab2"));
+String tab = (request.getParameter("tab")==null?"view_roles":request.getParameter("tab"));
 
 %>
-<form name="eunis" method="post" action="users.jsp">
- <input type="hidden" name="tab1" value="<%=tab1%>" />
- <input type="hidden" name="tab2" value="<%=tab2%>" />
+<form name="eunis" method="post" action="roles.jsp">
+ <input type="hidden" name="tab" value="<%=tab%>" />
  <input type="hidden" name="operation" value="" />
  <input type="hidden" name="deleteWho" value="" />
 <%
@@ -73,25 +67,21 @@ if(roles != null && roles.size() > 0)
 %>
   <table summary="layout" width="100%" border="1" style="border-collapse: collapse">
   <tr>
-    <td style="text-align:left">
-     <strong>
+    <th id="Name_column_header" style="text-align:left">
       <%=cm.cmsText("righ_name")%>
-     </strong>
-    </td>
+    </th>
   <%
      for(int i=0;i<roles.size();i++)
      {
       RolesPersist role = (RolesPersist)roles.get(i);
       String tooltip = (role.getDescription() != null && !role.getDescription().trim().equalsIgnoreCase("")  ? "  title=\""+(role.getDescription())+"\" ":"");
   %>
-    <td style="text-align:center" <%=tooltip%>>
-      <strong>
-      <a href="users.jsp?tab1=1&amp;tab2=1&amp;roleName=<%=role.getRoleName()%>" title="<%=cm.cms("edit_role")%>">
+    <th id="<%=role.getRoleName()%>_column_header" style="text-align:center" <%=tooltip%>>
+      <a href="roles.jsp?tab=1&amp;roleName=<%=role.getRoleName()%>" title="<%=cm.cms("edit_role")%>">
         <%=UsersUtility.getNameNice(role.getRoleName())%>
       </a>
       <%=cm.cmsTitle("edit_role")%>
-      </strong>    
-    </td>
+    </th>
   <%
      }
   %>
@@ -105,22 +95,19 @@ if(roles != null && roles.size() > 0)
          String tooltip = (right.getDescription() != null && !right.getDescription().trim().equalsIgnoreCase("")  ? " title=\""+(right.getDescription())+"\" " : "");
   %>
   <tr>
-    <td style="text-align:left" <%=tooltip%>>
-      <a href="users.jsp?tab1=1&amp;tab2=3&amp;rightName=<%=right.getRightName()%>" title="<%=cm.cms("edit_right")%>">
+    <th id="<%=right.getRightName()%>_row_header" style="text-align:left" <%=tooltip%>>
+      <a href="roles.jsp?tab=3&amp;rightName=<%=right.getRightName()%>" title="<%=cm.cms("edit_right")%>">
        <%=UsersUtility.getNameNice(right.getRightName())%>
       </a>
       <%=cm.cmsTitle("edit_right")%>
-    </td>
+    </th>
   <%
      for(int i=0;i<roles.size();i++)
      {
         RolesPersist role = (RolesPersist)roles.get(i);
     %>
-    <td style="text-align:center">
-       <label for="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" class="noshow"><%=cm.cms("choose_a_right")%></label>
-       <input id="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" title="<%=cm.cms("choose_a_right")%>" alt="<%=cm.cms("choose_a_right")%>" name="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" type="checkbox" value="checkbox" <%=(UsersUtility.ObjectIsInVector(UsersUtility.getRolesRightsName(role.getRoleName()),right.getRightName())?"checked=\"checked\"":"")%> disabled="disabled" />
-       <%=cm.cmsLabel("choose_a_right")%>
-       <%=cm.cmsTitle("choose_a_right")%>
+    <td headers="<%=role.getRoleName()%>_right <%=right.getRightName()%>" style="text-align:center">
+       <input id="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" name="<%=role.getRoleName()%>_rightxxx_<%=right.getRightName()%>" type="checkbox" value="checkbox" <%=(UsersUtility.ObjectIsInVector(UsersUtility.getRolesRightsName(role.getRoleName()),right.getRightName())?"checked=\"checked\"":"")%> disabled="disabled" />
     </td>
   <%
     }

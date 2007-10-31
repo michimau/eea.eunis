@@ -27,8 +27,7 @@
   if(SessionManager.isAuthenticated() && SessionManager.isRole_management_RIGHT())
 {
   // Request parameters
-  String tab1 = (request.getParameter("tab1")==null?"users":request.getParameter("tab1"));
-  String tab2 = (request.getParameter("tab2")==null?(request.getParameter("tab1")==null?"view_users":(request.getParameter("tab1").equalsIgnoreCase("users")?"view_users":"view_roles")):request.getParameter("tab2"));
+  String tab = (request.getParameter("tab")==null?"view_roles":request.getParameter("tab"));
 
   try
   {
@@ -138,7 +137,7 @@
             }
       else {
                  roleName = escape(trim(document.eunis.roleName.value));
-                 document.location="users.jsp?operation=delete&roleName="+roleName+"&tab1=<%=tab1%>&tab2=<%=tab2%>";
+                 document.location="roles.jsp?operation=delete&roleName="+roleName+"&tab=<%=tab%>";
            }
       }
       //-->
@@ -267,18 +266,13 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
  }
 %>
 
-   <h1>
-     <%=cm.cmsText("eunis_database_user_management")%>
-   </h1>
-   <br />
    <h2>
        <%=(users_operation != null && users_operation.equalsIgnoreCase("edit")?cm.cmsText("edit"):cm.cmsText("add"))%> <%=cm.cmsText("roles")%>
    </h2>
    <br />
 
-<form name="eunis" method="post" action="users.jsp" <%=onSubmit%>>
-<input type="hidden" name="tab1" value="<%=tab1%>" />
-<input type="hidden" name="tab2" value="<%=tab2%>" />
+<form name="eunis" method="post" action="roles.jsp" <%=onSubmit%>>
+<input type="hidden" name="tab" value="<%=tab%>" />
 <input type="hidden" name="operation" value="" />
 
 <table  summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="tableBorder">
@@ -295,7 +289,7 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
           &nbsp;&nbsp;<label for="roleName"><%=cm.cmsText("roles_add_17")%></label>
           </td>
           <td>
-           <select id="roleName" name="roleName" style="border-width:1px" onchange="MM_jumpMenuRoles('parent',this,0,'<%=tab1%>','<%=tab2%>')"  title="<%=cm.cms("roles_add_18")%>">
+           <select id="roleName" name="roleName" style="border-width:1px" onchange="MM_jumpMenuRoles('parent',this,0,'<%=tab%>')"  title="<%=cm.cms("roles_add_18")%>">
            <option value="selectRoleName" selected="selected"><%=cm.cms("roles_add_19")%></option>
             <%
             try

@@ -28,10 +28,8 @@
 // If user is authentificated and has this right
 if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
 {
-  // Set what cell from first line was selected
-  String tab1 = (request.getParameter("tab1")==null?"users":request.getParameter("tab1"));
   // Set what cell from second line was selected
-  String tab2 = (request.getParameter("tab2")==null?(request.getParameter("tab1")==null?"view_users":(request.getParameter("tab1").equalsIgnoreCase("users")?"view_users":"view_roles")):request.getParameter("tab2"));
+  String tab = (request.getParameter("tab")==null?"view_users":request.getParameter("tab"));
 
  try
 {
@@ -176,7 +174,7 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
              else
                {
                  userName = escape(trim(document.eunis.userName.value));
-                 document.location="users.jsp?operation=delete&userName="+userName+"&tab1=<%=tab1%>&tab2=<%=tab2%>";
+                 document.location="users.jsp?operation=delete&userName="+userName+"&tab=<%=tab%>";
                }
            }
       }
@@ -402,10 +400,6 @@ if(user != null) password = (user.getPassword()==null?"":user.getPassword());
 if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
 %>
 
-<h1>
-   <%=cm.cmsText("eunis_database_user_management")%>
-</h1>
-<br />
 <h2>
    <%=cm.cmsText("users_edit_27")%>
 </h2>
@@ -425,8 +419,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
 <tr>
 <td>
 <form name="eunis" method="post" action="users.jsp" onsubmit="<%=onSubmit%>">
-<input type="hidden" name="tab1" value="<%=tab1%>" />
-<input type="hidden" name="tab2" value="<%=tab2%>" />
+<input type="hidden" name="tab" value="<%=tab%>" />
 <input type="hidden" name="operation" value="" />
 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -441,7 +434,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
      &nbsp;&nbsp;<label for="userName"><%=cm.cmsText("users_edit_28")%></label>
      </td>
      <td>
-       <select id="userName" name="userName" style="border-width : 1px" onchange="MM_jumpMenu('parent',this,0,'<%=tab1%>','<%=tab2%>')"  title="<%=cm.cms("users_edit_29")%>">
+       <select id="userName" name="userName" style="border-width : 1px" onchange="MM_jumpMenu('parent',this,0,'<%=tab%>')"  title="<%=cm.cms("users_edit_29")%>">
             <option value="selectUserName" selected="selected"><%=cm.cms("users_edit_30")%></option>
             <%
                try

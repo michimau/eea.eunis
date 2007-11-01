@@ -48,12 +48,17 @@
                              alt="Toggle full screen mode"
                              title="Toggle full screen mode" /></a>
                     </li>
+                    <li>
+                      <a href="gis-tool-help.jsp"><img src="images/help_icon.gif"
+                             alt="<%=cm.cms( "header_help_title" )%>"
+                             title="<%=cm.cms( "header_help_title" )%>" /></a>
+            				<%=cm.cmsTitle( "header_help_title" )%>
+                    </li>
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
                 <jsp:include page="header-dynamic.jsp">
                   <jsp:param name="location" value="<%=btrail%>"/>
-                  <jsp:param name="helpLink" value="gis-tool-help.jsp"/>
                 </jsp:include>
                 <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="740" height="552" id="fl_eunis" align="middle">
                   <param name="allowScriptAccess" value="sameDomain" />

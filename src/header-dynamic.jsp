@@ -38,7 +38,6 @@ Input parameters  on REQUEST:
   String dynHeaderLocation = request.getParameter("location");
   String dynHeaderHelpLink = request.getParameter("helpLink");
   String dynHeaderPrintLink = request.getParameter("printLink");
-  String dynHeaderGoogleLink = request.getParameter("kmlLink");
   String dynHeaderDownloadLink = Utilities.formatString( request.getParameter("downloadLink"), "null" );
   if ( dynHeaderDownloadLink.equalsIgnoreCase( "null" ) )
   {
@@ -67,7 +66,7 @@ Input parameters  on REQUEST:
 %>
   </div>
 <%
-  if (null != dynHeaderPrintLink || null != dynHeaderDownloadLink || null != dynHeaderHelpLink || null != dynHeaderGoogleLink)
+  if (null != dynHeaderPrintLink || null != dynHeaderDownloadLink || null != dynHeaderHelpLink)
   {
 %>
   <div style="margin: 0px; padding: 0px; float:right;">
@@ -79,13 +78,6 @@ Input parameters  on REQUEST:
           <%=cm.cmsTitle( "header_download_pdf_title" )%>
 <%
     }
-    if (null != dynHeaderGoogleLink)
-    {
-%>
-          <br/><a href="<%=dynHeaderGoogleLink%>" title="<%=cm.cms( "header_download_kml_title" )%>"><%=cm.cmsText( "header_download_kml" )%></a>
-          <%=cm.cmsTitle( "header_download_kml_title" )%>
-<%
-    }
     if (null != dynHeaderDownloadLink)
     {
 %>
@@ -93,14 +85,6 @@ Input parameters  on REQUEST:
             <%=cm.cmsTitle( "header_download_tsv_title" )%><%=cm.cmsAlt( "header_download_alt" )%>
             <a href="<%=dynHeaderDownloadLink%>" title="<%=cm.cms( "header_download_tsv_title" )%>"><%=cm.cmsText( "header_download_tsv" )%></a>
             <%=cm.cmsTitle( "header_download_tsv_title" )%>
-<%
-    }
-    if (null != dynHeaderHelpLink)
-    {
-%>
-
-            <a href="<%=domain%>/<%=dynHeaderHelpLink%>" title="<%=cm.cms( "header_help_title" )%>"><%=cm.cmsText( "help" )%></a>
-            <%=cm.cmsTitle( "header_help_title" )%>
 <%
     }
 %>

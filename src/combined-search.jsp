@@ -349,7 +349,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
               <div class="documentContent" id="region-content">
               	<jsp:include page="header-dynamic.jsp">
                   <jsp:param name="location" value="<%=btrail%>" />
-                  <jsp:param name="helpLink" value="combined-help.jsp"/>
                 </jsp:include>
                 <a name="documentContent"></a>
                 <div class="documentActions">
@@ -364,6 +363,12 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
                              alt="Toggle full screen mode"
                              title="Toggle full screen mode" /></a>
+                    </li>
+                    <li>
+                      <a href="combined-help.jsp"><img src="images/help_icon.gif"
+                             alt="<%=cm.cms( "header_help_title" )%>"
+                             title="<%=cm.cms( "header_help_title" )%>" /></a>
+            				<%=cm.cmsTitle( "header_help_title" )%>
                     </li>
                   </ul>
                 </div>

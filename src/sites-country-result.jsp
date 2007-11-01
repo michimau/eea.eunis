@@ -182,6 +182,12 @@
                              alt="Toggle full screen mode"
                              title="Toggle full screen mode" /></a>
                     </li>
+                    <li>
+                      <a href="sites-help.jsp"><img src="images/help_icon.gif"
+                             alt="<%=cm.cms( "header_help_title" )%>"
+                             title="<%=cm.cms( "header_help_title" )%>" /></a>
+            				<%=cm.cmsTitle( "header_help_title" )%>
+                    </li>
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
@@ -615,7 +621,6 @@
           <div class="visualPadding">
               	<jsp:include page="right-dynamic.jsp">
                   <jsp:param name="location" value="<%=location%>"/>
-                  <jsp:param name="helpLink" value="sites-help.jsp"/>
                   <jsp:param name="mapLink" value="show"/>
                   <jsp:param name="downloadLink" value="<%=downloadLink%>"/>
                 </jsp:include>

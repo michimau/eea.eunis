@@ -11,6 +11,7 @@
 
   <property name="3rdpartyDir" value="3rdparty" description="3rd party libraries dir" />
   <property name="srcDir" value="src" description="Source directory" />
+  <property name="kmlDir" value="kml" description="Google Earth files directory" />
   <property name="classesSrcDir" value="src/classes" description="Java classes dir" />
 
   <property name="buildDir" value= "build"/>
@@ -49,6 +50,7 @@
     <mkdir dir="${deployDir}/images/sites"/>
     <mkdir dir="${deployDir}/gis"/>
     <mkdir dir="${deployDir}/tutorials"/>
+    <mkdir dir="${deployDir}/kml"/>
 
     <!-- Used only for JSP Compiler -->
     <!--
@@ -191,6 +193,10 @@
     <copy todir="${deployDir}/script">
       <fileset dir="${srcDir}/script"/>
     </copy>
+    <!-- Copy Google Earth files -->
+    <copy todir="${deployDir}/kml">
+      <fileset dir="${kmlDir}"/>
+    </copy>
     <!-- Copy tutorial files -->
     <copy todir="${deployDir}/tutorials">
       <fileset dir="${srcDir}/tutorials">
@@ -293,6 +299,7 @@
     <delete dir="${deployDir}/sql" verbose="false" failonerror="false" includeemptydirs="true" />
     <delete dir="${deployDir}/users" verbose="false" failonerror="false" includeemptydirs="true" />
     <delete dir="${deployDir}/gis" verbose="false" failonerror="false" includeemptydirs="true" />
+    <delete dir="${deployDir}/kml" verbose="false" failonerror="false" includeemptydirs="true" />
     <delete dir="${deployDir}/WEB-INF" verbose="false" failonerror="false" includeemptydirs="true" />
     <delete verbose="false" failonerror="false" includeemptydirs="true">
       <fileset dir="${deployDir}" >

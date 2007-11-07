@@ -33,6 +33,8 @@
 
                 SQLUtilities sqlUtilities = new SQLUtilities();
                 sqlUtilities.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+  
+  String PdfUrl = "javascript:openLink('species-factsheet-pdf.jsp?idSpecies="+factsheet.getIdSpecies()+"&amp;idSpeciesLink="+factsheet.getIdSpeciesLink()+"')";
 %>
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
@@ -73,7 +75,7 @@
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -96,6 +98,11 @@
                       <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
                              alt="Toggle full screen mode"
                              title="Toggle full screen mode" /></a>
+                    </li>
+                    <li>
+                      <a href="<%=PdfUrl%>"><img src="images/pdf.png"
+                             alt="<%=cm.cms( "header_download_pdf_title" )%>"
+                             title="<%=cm.cms( "header_download_pdf_title" )%>" /></a>
                     </li>
                   </ul>
                 </div>
@@ -240,11 +247,13 @@
                   }
                   if ( tab == 6 )
                   {
+	                  String kmlUrl = "species-factsheet-distribution-kml.jsp?idSpecies="+factsheet.getIdSpecies()+"&amp;idSpeciesLink="+factsheet.getIdSpeciesLink();
               %>
                 <%-- Grid distribution --%>
                 <jsp:include page="species-factsheet-distribution.jsp">
                   <jsp:param name="name" value="<%=scientificName%>" />
                   <jsp:param name="idNatureObject" value="<%=specie.getIdNatureObject()%>" />
+                  <jsp:param name="kmlUrl" value="<%=kmlUrl%>" />
                 </jsp:include>
               <%
                   }
@@ -349,26 +358,6 @@
           <!-- end of the left (by default at least) column -->
         </div>
         <!-- end of the main and left columns -->
-        <!-- start of right (by default at least) column -->
-        <div id="portal-column-two">
-          <div class="visualPadding">
-		<%
-                  String PdfUrl = "javascript:openLink('species-factsheet-pdf.jsp?idSpecies="+factsheet.getIdSpecies()+"&amp;idSpeciesLink="+factsheet.getIdSpeciesLink()+"')";
-                  String kmlUrl = "species-factsheet-distribution-kml.jsp?idSpecies="+factsheet.getIdSpecies()+"&amp;idSpeciesLink="+factsheet.getIdSpeciesLink();
-
-                if(!sqlUtilities.TabPageIsEmpy(factsheet.getSpeciesNatureObject().getIdNatureObject().toString(),"SPECIES","GRID_DISTRIBUTION")){%>
-                <jsp:include page="right-dynamic.jsp">
-                  <jsp:param name="printLink" value="<%=PdfUrl%>" />
-                  <jsp:param name="kmlLink" value="<%=kmlUrl%>" />
-                </jsp:include>
-                <% } else { %>
-                <jsp:include page="right-dynamic.jsp">
-                  <jsp:param name="printLink" value="<%=PdfUrl%>" />
-                </jsp:include>
-                <% } %>
-          </div>
-        </div>
-        <!-- end of the right (by default at least) column -->
         <div class="visualClear"><!-- --></div>
       </div>
       <!-- end column wrapper -->

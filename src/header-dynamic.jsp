@@ -36,7 +36,6 @@ Input parameters  on REQUEST:
   WebContentManagement cm = SessionManager.getWebContent();
   // Request parameters.
   String dynHeaderLocation = request.getParameter("location");
-  String dynHeaderHelpLink = request.getParameter("helpLink");
   String dynHeaderPrintLink = request.getParameter("printLink");
   String dynHeaderDownloadLink = Utilities.formatString( request.getParameter("downloadLink"), "null" );
   if ( dynHeaderDownloadLink.equalsIgnoreCase( "null" ) )
@@ -66,7 +65,7 @@ Input parameters  on REQUEST:
 %>
   </div>
 <%
-  if (null != dynHeaderPrintLink || null != dynHeaderDownloadLink || null != dynHeaderHelpLink)
+  if (null != dynHeaderPrintLink || null != dynHeaderDownloadLink)
   {
 %>
   <div style="margin: 0px; padding: 0px; float:right;">

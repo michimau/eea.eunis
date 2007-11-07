@@ -7,7 +7,7 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
   request.setCharacterEncoding( "UTF-8");
-%>
+%> 
 <%@ page import="ro.finsiel.eunis.WebContentManagement,
                  ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet,
                  ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain,
@@ -72,9 +72,19 @@
       }
 %>
   <br />
-  <h2>
-    <%=cm.cmsText("habitats_factsheet_sitesForHabitatRecorded")%>
-  </h2>
+  <table width="100%" border="0">
+  	<tr>
+  		<td>
+  			<h2>
+			    <%=cm.cmsText("habitats_factsheet_sitesForHabitatRecorded")%>
+   		    </h2>
+  		</td>
+  		<td align="right" valign="top">
+			<a href="habitats-factsheet-sites-kml.jsp?idHabitat=<%=idHabitat%>" title="<%=cm.cms( "header_download_kml_title" )%>"><%=cm.cmsText( "header_habitat_sites_kml" )%></a>
+      		<%=cm.cmsTitle( "header_download_kml_title" )%>
+		</td>
+  	</tr>
+  </table>
   <table summary="<%=cm.cms("habitat_sites")%>" class="listing" width="90%">
     <thead>
       <tr>

@@ -24,6 +24,8 @@
   // name - Name of the species
   WebContentManagement cm = SessionManager.getWebContent();
   Integer idNatureObj = Utilities.checkedStringToInt(request.getParameter("idNatureObject"),new Integer(0));
+  
+  String kmlUrl = request.getParameter("kmlUrl");
 
   DistributionWrapper dist = new DistributionWrapper(idNatureObj);
   // Get species distribution
@@ -85,8 +87,18 @@
   if ( success )
   {
 %>
-    <img alt="<%=cm.cms("grid_distribution")%>" name = "mmap" src="temp/<%=filename%>" style="vertical-align:middle" title="<%=cm.cms("grid_distribution")%>" />
-    <%=cm.cmsTitle("grid_distribution")%>
+	<table width="90%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+			    <img alt="<%=cm.cms("grid_distribution")%>" name = "mmap" src="temp/<%=filename%>" style="vertical-align:middle" title="<%=cm.cms("grid_distribution")%>" />
+			    <%=cm.cmsTitle("grid_distribution")%>
+			</td>
+			<td align="right" valign="top">
+				<a href="<%=kmlUrl%>" title="<%=cm.cms( "header_download_kml_title" )%>"><%=cm.cmsText( "header_download_kml" )%></a>
+          		<%=cm.cmsTitle( "header_download_kml_title" )%>
+			</td>
+    </tr>
+    </table>
     <br />
     <br />
 <%

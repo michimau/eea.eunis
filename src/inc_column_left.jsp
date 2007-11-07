@@ -68,6 +68,9 @@
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" href="related-reports.jsp" accesskey="p" title="<%=cm.cms("generic_header-static_reports_title")%>"><%=cm.cmsText("related_reports")%></a><%=cm.cmsTitle("generic_header-static_reports_title")%>
       </li>
+      <li class="navTreeItem visualNoMarker">
+        <a class="navItemLevel1" href="introduction_to_google_earth.jsp" accesskey="l" title="<%=cm.cms("google_earth_network_link_title")%>"><%=cm.cmsText("google_earth_network_link")%></a><%=cm.cmsTitle("google_earth_network_link_title")%>
+      </li>
     </ul>
     <span class="portletBottomLeft"></span>
     <span class="portletBottomRight"></span>

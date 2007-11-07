@@ -29,7 +29,7 @@
 	<IconStyle>
 		<scale>1.0</scale>
 		<Icon>
-			<href>root://icons/palette-4.png</href>
+			<href>http://eunis.eea.europa.eu/images/ge_icon.png</href>
 			<x>32</x>
 			<y>128</y>
 			<w>32</w>

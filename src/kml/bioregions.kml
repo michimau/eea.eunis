@@ -1,5 +1,6 @@
-		<Folder>
-			<name>European Biogeographical Regions:</name>
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.0">
+<Document>
 			<Placemark>
 				<name>Alpine</name>
 				<description>
@@ -5051,4 +5052,5 @@
 
 				</MultiGeometry>
 			</Placemark>
-		</Folder>
+</Document>
+</kml>

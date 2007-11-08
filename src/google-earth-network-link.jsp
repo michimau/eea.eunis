@@ -14,7 +14,14 @@
 				java.util.List,
 				java.util.Iterator"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
-	<jsp:include page="kml/bioregions.kml" />
+	<NetworkLink>
+		<name>European Biogeographical Regions:</name>
+	    	<visibility>1</visibility>
+	    	<Url>
+			<href>http://eunis.eea.europa.eu/kml/bioregions.kml</href>
+		</Url>
+	</NetworkLink>
+
     <%
   	List species = new HasGridDistTabDomain().findAll();
   	Iterator it = species.iterator(); %>

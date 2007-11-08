@@ -11,7 +11,7 @@
 
   <property name="3rdpartyDir" value="3rdparty" description="3rd party libraries dir" />
   <property name="srcDir" value="src" description="Source directory" />
-  <property name="kmlDir" value="kml" description="Google Earth files directory" />
+  <property name="kmlDir" value="src/kml" description="Google Earth files directory" />
   <property name="classesSrcDir" value="src/classes" description="Java classes dir" />
 
   <property name="buildDir" value= "build"/>

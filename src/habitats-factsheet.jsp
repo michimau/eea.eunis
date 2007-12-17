@@ -88,21 +88,6 @@
                   <jsp:param name="location" value="<%=btrail%>" />
                 </jsp:include>
                 <a name="documentContent"></a>
-                <div class="documentActions">
-                  <h5 class="hiddenStructure">Document Actions</h5>
-                  <ul>
-                    <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="Print this page"
-                            title="Print this page" /></a>
-                    </li>
-                    <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="Toggle full screen mode"
-                             title="Toggle full screen mode" /></a>
-                    </li>
-                  </ul>
-                </div>
 <!-- MAIN CONTENT -->
 <%
   if(null == factsheet.getHabitat())
@@ -147,17 +132,30 @@
       code = factsheet.getCode2000();
     }
                 %>
-                <div style="width : 100%; text-align : center;">
-                  <h1>
+                  <h1 class="documentFirstHeading">
                     <%=factsheet.getHabitatScientificName()%>
                   </h1>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure">Document Actions</h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="Print this page"
+                            title="Print this page" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="Toggle full screen mode"
+                             title="Toggle full screen mode" /></a>
+                    </li>
+                  </ul>
+                </div>
 <%--
                   <strong>
                     ( <%=habitatType%> - <%=code%> )
                   </strong>
 --%>                  
-                </div>
-                <br />
+                
 <%
     if(!isMini)
     {

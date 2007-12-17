@@ -17,7 +17,7 @@
 <%
   String domain = application.getInitParameter( "DOMAIN_NAME" );
 %>
-<a href="#main_content" style="display:none" title="Skip to main content">Skip to main content</a>
+<a href="#documentContent" style="display:none">Skip to document content</a>
 <div id="header">
 <%
   WebContentManagement cm = SessionManager.getWebContent();

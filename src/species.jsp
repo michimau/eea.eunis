@@ -77,15 +77,14 @@
               </div>
 <!-- MAIN CONTENT -->
               <img id="loading" alt="<%=cm.cms("loading_progress")%>" title="<%=cm.cms("loading_progress")%>" src="images/loading.gif" />
-              <div style="text-align : center; width : 90%;">
-                <h1>
+                <h1 class="documentFirstHeading">
                   <%=cm.cmsText( "species_main_speciesSearch" )%>
                 </h1>
-                <h2>
+
+              <div class="documentDescription">
                  <%=cm.cmsText( "species_main_description" )%>
-                </h2>
               </div>
-              <br />
+
               <div id="qs" style="padding-left : 10px; width : 90%; vertical-align : middle;text-align:center">
                 <form name="search" action="species-names-result.jsp" method="get" onsubmit="return validateQuickSearch(); ">
                   <input type="hidden" name="comeFromQuickSearch" value="true" />

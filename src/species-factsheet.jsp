@@ -86,27 +86,6 @@
                   <jsp:param name="location" value="<%=btrail%>" />
                 </jsp:include>
                 <a name="documentContent"></a>
-                <div class="documentActions">
-                  <h5 class="hiddenStructure">Document Actions</h5>
-                  <ul>
-                    <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="Print this page"
-                            title="Print this page" /></a>
-                    </li>
-                    <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="Toggle full screen mode"
-                             title="Toggle full screen mode" /></a>
-                    </li>
-                    <li>
-                      <a href="<%=PdfUrl%>"><img src="images/pdf.png"
-                             alt="<%=cm.cms( "header_download_pdf_title" )%>"
-                             title="<%=cm.cms( "header_download_pdf_title" )%>" /></a>
-                    </li>
-                  </ul>
-                </div>
-                <br clear="all" />
 <!-- MAIN CONTENT -->
 <%
   if ( factsheet.exists() )
@@ -145,12 +124,30 @@
 
                 %>
                 <img alt="<%=cm.cms("loading_data")%>" id="loading" src="images/loading.gif" />
-                <div style="width: 100%; text-align: center;">
-                  <h1>
+                  <h1 class="documentFirstHeading">
                     <%=Utilities.treatURLSpecialCharacters(scientificName)%>
                   </h1>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure">Document Actions</h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="Print this page"
+                            title="Print this page" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="Toggle full screen mode"
+                             title="Toggle full screen mode" /></a>
+                    </li>
+                    <li>
+                      <a href="<%=PdfUrl%>"><img src="images/pdf.png"
+                             alt="<%=cm.cms( "header_download_pdf_title" )%>"
+                             title="<%=cm.cms( "header_download_pdf_title" )%>" /></a>
+                    </li>
+                  </ul>
                 </div>
-                <br />
+                <br clear="all" />
                 <%=cm.cmsText("scientific_name")%>: <%=Utilities.treatURLSpecialCharacters(scientificName)%>
                 <br />
                 <%=cm.cmsText("author")%>:<strong><%=Utilities.treatURLSpecialCharacters(factsheet.getSpeciesNatureObject().getAuthor())%></strong>

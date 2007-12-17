@@ -91,6 +91,3 @@ Input parameters  on REQUEST:
 <%
   }
 %>
-
-<a name="main_content" title="<%=cm.cms("header_main_content")%>" accesskey="2"><img alt="" src="images/pixel.gif" width="1" height="1" /></a>
-<%=cm.cmsTitle("header_main_content")%>

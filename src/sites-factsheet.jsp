@@ -102,21 +102,6 @@
                   <jsp:param name="location" value="<%=btrail%>" />
                 </jsp:include>
                 <a name="documentContent"></a>
-                <div class="documentActions">
-                  <h5 class="hiddenStructure">Document Actions</h5>
-                  <ul>
-                    <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="Print this page"
-                            title="Print this page" /></a>
-                    </li>
-                    <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="Toggle full screen mode"
-                             title="Toggle full screen mode" /></a>
-                    </li>
-                  </ul>
-                </div>
 <!-- MAIN CONTENT -->
 <%
   if(null != factsheet.getIDNatureObject())
@@ -145,14 +130,26 @@
       String sdb = SitesSearchUtility.translateSourceDB(factsheet.getSiteObject().getSourceDB());
 %>
                 <img id="loading" src="images/loading.gif" alt="<%=cm.cms("loading")%>" title="<%=cm.cms("loading")%>" />
-                <div style="width: 100%; text-align: center;">
-                  <h1>
+                  <h1  class="documentFirstHeading">
                     <%=factsheet.getSiteObject().getName()%>
                   </h1>
-                  <br />
-                  <strong>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure">Document Actions</h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="Print this page"
+                            title="Print this page" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="Toggle full screen mode"
+                             title="Toggle full screen mode" /></a>
+                    </li>
+                  </ul>
+                </div>
+                  <div class="documentDescription">
                     <%=cm.cmsText("facthseet_filled_with_data_from")%> <%=sdb%> <%=cm.cmsText("sites_factsheet_02")%>
-                  </strong>
                 </div>
                 <div id="tabbedmenu">
                   <ul>

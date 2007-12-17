@@ -62,15 +62,13 @@
                 <div id="loading">
                 <%=cm.cms("loading_data")%>
                 </div>
-                <div style="width : 90%;">
-                  <h1 align="center">
+                  <h1 class="documentFirstHeading">
                     <%=cm.cmsText("habitat_type_search")%>
                   </h1>
-                  <h2 align="center">
+                  <div class="documentDescription">
                     <%=cm.cmsText("habitats_main_description")%>
-                  </h2>
-                </div>
-                <br />
+                  </div>
+
                 <div id="qs" align="center" style="padding-left : 10px; width : 90%; vertical-align : middle;">
                   <form name="quick_search" action="habitats-names-result.jsp" method="post" onsubmit="javascript:if(trim(document.quick_search.searchString.value) == '' || trim(document.quick_search.searchString.value) == 'Enter habitat name here...') {alert('Before searching, please type a few letters from habitat name.');return false;} else return true; ">
                     <input type="hidden" name="showLevel" value="true" />

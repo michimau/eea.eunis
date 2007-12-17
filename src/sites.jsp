@@ -65,12 +65,12 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <img id="loading" alt="Loading progress" title="Loading progress" src="images/loading.gif" width="250" height="45" />
-                <h1 align="center">
+                <h1 class="documentFirstHeading">
                   <%=cm.cmsText("sites_main_sitesSearch")%>
                 </h1>
-                <h2 align="center">
+                <div class="documentDescription">
                   <%=cm.cmsText("sites_main_description")%>
-                </h2>
+                </div>
                 <div style="text-align : center; padding-left : 10px; width : 730px; vertical-align : middle; color : black;">
                   <br />
                   <form name="quick_search" id="quick_search" action="sites-names-result.jsp" method="post" onsubmit="return validateQS();">

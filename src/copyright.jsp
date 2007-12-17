@@ -60,16 +60,19 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <%=cm.cmsText("generic_copyright_01")%>
-                <table summary="<%=cm.cms("references")%>" class="datatable">
+                <table class="datatable" style="table-layout:fixed">
+		  <col style="width:40%"/>
+		  <col style="width:50%"/>
+		  <col style="width:10%"/>
                   <thead>
                     <tr>
-                      <th width="40%">
+                      <th>
                         <%=cm.cmsText("author")%>
                       </th>
-                      <th width="50%">
+                      <th>
                         <%=cm.cmsText("title")%>
                       </th>
-                      <th width="10%" style="text-align: center;">
+                      <th style="text-align: center;">
                         <%=cm.cmsText("publication_date")%>
                       </th>
                     </tr>
@@ -113,8 +116,7 @@
                 %>
                 <tr<%=cssClass%>>
                   <td id="A<%=cnt%>1">
-                    <a title="<%=cm.cms("copyright_search_for_author")%>" target="_blank" href="http://www.google.com/search?hl=en&amp;lr=&amp;ie=UTF-8&amp;oe=UTF-8&amp;q=<%=Utilities.treatURLSpecialCharacters( nl.getAuthor() )%>"><%=Utilities.treatURLSpecialCharacters( nl.getAuthor() )%></a>
-                    <%=cm.cmsTitle("copyright_search_for_author")%>
+<%=Utilities.treatURLSpecialCharacters( nl.getAuthor() )%>
                   </td>
                   <td>
                     <%=Utilities.treatURLSpecialCharacters( nl.getTitle() )%>
@@ -132,19 +134,6 @@
                   }
                 %>
                 </tbody>
-                <thead>
-                  <tr>
-                    <th>
-                      <%=cm.cmsText("author")%>
-                    </th>
-                    <th>
-                      <%=cm.cmsText("title")%>
-                    </th>
-                    <th style="text-align : center;">
-                      <%=cm.cmsText("publication_date")%>
-                    </th>
-                  </tr>
-                </thead>
               </table>
                 <%=cm.cmsMsg("copyright_and_disclaimer_title")%>
                 <%=cm.br()%>

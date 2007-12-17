@@ -58,11 +58,9 @@
         <div id="portal-column-content">
           <div id="content">
             <div class="documentContent" id="region-content">
-              <div id="portal-breadcrumbs">
-				<jsp:include page="header-dynamic.jsp">
-						<jsp:param name="location" value="<%=btrail%>"/>
-				</jsp:include>
-			  </div>
+		<jsp:include page="header-dynamic.jsp">
+			<jsp:param name="location" value="<%=btrail%>"/>
+		</jsp:include>
               <a name="documentContent"></a>
               <div class="documentActions">
                 <h5 class="hiddenStructure">Document Actions</h5>

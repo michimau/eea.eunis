@@ -142,7 +142,7 @@
     		<%=application.getInitParameter("PAGE_TITLE")%>
     		<%=cm.cms( "welcome_to_eunis_database" )%>
   		</title>
-  		<style>
+  		<style type="text/css">
 			#portal-column-content #content {
 			    margin-right: 0 ! important;
 			}
@@ -159,11 +159,9 @@
       				<div id="portal-column-content">
         				<div id="content" class="">
 	        				<div class="documentContent panels" id="region-content">
-	        					<div id="portal-breadcrumbs">
-	        						<jsp:include page="header-dynamic.jsp">
+							<jsp:include page="header-dynamic.jsp">
 	              						<jsp:param name="location" value="<%=btrail%>"/>
 	            					</jsp:include>
-	        					</div>
 	          					<a name="documentContent"></a>
 	          					<div>
 		          					<div class="documentActions">

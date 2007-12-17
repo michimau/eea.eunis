@@ -16,6 +16,7 @@
                  ro.finsiel.eunis.factsheet.species.NationalThreatWrapper,
                  ro.finsiel.eunis.search.species.factsheet.PublicationWrapper,
                  java.util.Vector,
+                 java.net.URLEncoder,
                  ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain,
                  ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist,
                  java.util.StringTokenizer"%>
@@ -132,9 +133,10 @@
 <%
       String gbifLink = specie.getScientificName();
       gbifLink = gbifLink.replaceAll( "\\.", "" );
-      gbifLink = gbifLink.replaceAll( " ", "\\." );
+      gbifLink = URLEncoder.encode(gbifLink,"UTF-8");
+//      gbifLink = gbifLink.replaceAll( " ", "\\." );
 %>
-        <a title="<%=cm.cms("species_factsheet_03_Title")%>" href="javascript:openGBIF('http://<%=gbifLink%>.gbif.name', 600, 600 );"><%=cm.cmsText("species_factsheet_03")%></a>
+        <a title="<%=cm.cms("species_factsheet_03_Title")%>" href="javascript:openGBIF('http://data.gbif.org/species/<%=gbifLink%>', 600, 600 );"><%=cm.cmsText("species_factsheet_03")%></a>
         <%=cm.cmsTitle("species_factsheet_03_Title")%>
       </td>
       <td width="20%" style="text-align : left; vertical-align : middle">

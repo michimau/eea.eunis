@@ -105,7 +105,8 @@
                           cm.cms("threat_status"),
                           cm.cms("legal_instruments"),
                           cm.cms("habitat_types"),
-                          cm.cms("sites")
+                          cm.cms("sites"),
+                          cm.cms("gbif")
                   };
 
                   String []dbtabs = {
@@ -119,7 +120,8 @@
                           "THREAT_STATUS",
                           "LEGAL_INSTRUMENTS",
                           "HABITATS",
-                          "SITES"
+                          "SITES",
+                          "GBIF"
                   };
 
                 %>
@@ -295,6 +297,17 @@
                 </jsp:include>
 <%
                   }
+                  if ( tab == 11 )
+                  {
+              %>
+                <%-- GBIF observations --%>
+                <jsp:include page="species-factsheet-gbif.jsp">
+                  <jsp:param name="scientificName" value="<%=scientificName%>" />
+                  <jsp:param name="idSpecies" value="<%=idSpecies%>" />
+                  <jsp:param name="idSpeciesLink" value="<%=idSpeciesLink%>" />
+                </jsp:include>
+<%
+                  }
   }
   else
   {
@@ -332,6 +345,8 @@
                 <%=cm.cmsMsg("habitat_types")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("sites")%>
+                <%=cm.br()%>
+                <%=cm.cmsMsg("gbif")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("species_factsheet_title")%>
                 <%=cm.br()%>

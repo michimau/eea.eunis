@@ -2329,22 +2329,6 @@ public final class Utilities {
   }
 
   /**
-   *
-   * @param str String to be parsed
-   * @return Processed string.
-   */
-  public static String treatSpacesInScientificName( String str ) {
-    if ( str == null )
-    {
-      return "";
-    }
-    String result = str;
-    result = result.replaceAll( " ", "%20" );
-
-    return result;
-  }
-  
-  /**
    * Replace characters having special meaning inside HTML tags
    * with their escaped equivalents, using character entities.
    *

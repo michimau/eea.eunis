@@ -187,7 +187,7 @@
 
   <!-- JDBC URL DIGIR-->
   <context-param>
-    <param-name>JDBC_URL</param-name>
+    <param-name>JDBC_URL_DIGIR</param-name>
     <param-value>jdbc:mysql://localhost/digir?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</param-value>
     <description>JDBC URL to database</description>
   </context-param>

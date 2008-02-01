@@ -56,21 +56,8 @@
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
-                <h1><%=cm.cmsText("help_fuzzy_search")%></h1>
-                <br />
-                <a href="javascript:history.go(-1);" title="<%=cm.cms("return_to_previous_page")%>"><%=cm.cmsText("back")%></a><%=cm.cmsTitle("return_to_previous_page")%>
-                <br />
-                <br />
-                <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td>
                       <%=cm.cmsText("help_on_fuzzy_search_01")%>
-                    </td>
-                  </tr>
-                </table>
-                <br />
-                <a href="javascript:history.go(-1);" title="<%=cm.cms("return_to_previous_page")%>"><%=cm.cms("back")%></a>
-                <br />
+                
                 <%=cm.cmsMsg("sites_help_title")%>
 <!-- END MAIN CONTENT -->
               </div>

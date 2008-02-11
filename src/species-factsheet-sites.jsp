@@ -49,7 +49,11 @@
     }
 %>
   <br />
-  <table summary="<%=cm.cms("species_factsheet_sites_01_Sum")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("species_factsheet_sites_01_Sum")%>" class="listing" style="table-layout:fixed">
+    <col style="width: 8em"/>
+    <col style="width: 12em"/>
+    <col style="width: 12em"/>
+    <col style="width: 40em"/>
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
@@ -82,9 +86,7 @@
           <%=Utilities.formatString(site.getIDSite())%>
         </td>
         <td>
-          <strong>
             <%=Utilities.formatString(SitesSearchUtility.translateSourceDB(site.getSourceDB()))%>
-          </strong>
         </td>
         <td>
         <%

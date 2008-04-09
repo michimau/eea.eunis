@@ -43,7 +43,7 @@
   }
   else
   {
-    pageTitle = cm.cmsText("sites_factsheet_error") + "'" + factsheet.getIDSite() + "'";
+    pageTitle = cm.cmsPhrase("No data found in the database for the site with ID = ") + "'" + factsheet.getIDSite() + "'";
   }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -149,7 +149,7 @@
                   </ul>
                 </div>
                   <div class="documentDescription">
-                    <%=cm.cmsText("facthseet_filled_with_data_from")%> <%=sdb%> <%=cm.cmsText("sites_factsheet_02")%>
+                    <%=cm.cmsPhrase("Factsheet filled with data from")%> <%=sdb%> <%=cm.cmsPhrase("data set")%>
                 </div>
                 <div id="tabbedmenu">
                   <ul>
@@ -234,7 +234,7 @@
                 <br />
                 <br />
                 <div style="width : 100%;">
-                  <a title="<%=cm.cms("sites_factsheet_openpictures")%>" href="javascript:openpictures('pictures.jsp?<%=url%>',600,600)"><%=cm.cmsText("view_pictures")%></a>
+                  <a title="<%=cm.cms("sites_factsheet_openpictures")%>" href="javascript:openpictures('pictures.jsp?<%=url%>',600,600)"><%=cm.cmsPhrase("View pictures")%></a>
                   <%=cm.cmsTitle("sites_factsheet_openpictures")%>
                 </div>
 <%
@@ -245,7 +245,7 @@
                 <br />
                 <br />
                 <div style="width : 100%;">
-                  <a title="<%=cm.cms("sites_factsheet_openpictures")%>" href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=url%>',600,600)"><%=cm.cmsText("upload_pictures")%></a>
+                  <a title="<%=cm.cms("sites_factsheet_openpictures")%>" href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=url%>',600,600)"><%=cm.cmsPhrase("Upload pictures")%></a>
                   <%=cm.cmsTitle("sites_factsheet_openpictures")%>
                 </div>
 <%
@@ -256,7 +256,7 @@
 %>
                 <br />
                 <br />
-                <%=cm.cmsText( "upload_pictures" )%>
+                <%=cm.cmsPhrase( "Upload pictures" )%>
                 <br />
 <%
     }
@@ -283,7 +283,7 @@
                 <br />
                 <br />
                 <p>
-                <%=cm.cmsText("sites_factsheet_error")%>
+                <%=cm.cmsPhrase("No data found in the database for the site with ID = ")%>
                 <strong>'<%=factsheet.getIDSite()%>'</strong>
                 </p>
                 <br />

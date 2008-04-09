@@ -353,11 +353,11 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
-              <h1><%=cm.cmsText("sites_advanced_02")%></h1>
-              <%=cm.cmsText("sites_advanced_03")%>
+              <h1><%=cm.cmsPhrase("Sites advanced search")%></h1>
+              <%=cm.cmsPhrase("Search sites using complex filtering capabilities")%>
               <br />
               <table summary="layout" border="0">
-                <tr><td id="status"><%=cm.cmsText("specify_the_search_criteria")%></td></tr>
+                <tr><td id="status"><%=cm.cmsPhrase("Specify the search criteria:")%></td></tr>
               </table>
             <%
               String listcriteria="";
@@ -729,7 +729,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     <a title="<%=cm.cms("list_of_values")%>" href="javascript:choice('First_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="first_binocular"  onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img src="images/helper/helper.gif" alt="<%=cm.cms("list_of_values")%>" title="<%=cm.cms("list_of_values")%>" width="11" height="18" border="0" style="vertical-align:middle" /></a>
                     <%
                     if(rs.getString("OPERATOR").equalsIgnoreCase("Between")) {
-                      out.println(cm.cmsText("and"));
+                      out.println(cm.cmsPhrase("and"));
                       val=rs.getString("LAST_VALUE");
                       currentValue = val;
                       %>
@@ -759,7 +759,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 <%
             } else {
                 %>
-                <a title="<%=cm.cms("add_root")%>" href="javascript:submitButtonForm('addroot','0');"><img border="0" src="images/mini/add.gif" width="13" height="13" title="<%=cm.cms("add_root")%>" alt="<%=cm.cms("add_root")%>" /></a>&nbsp;<%=cm.cmsText("add_root")%>
+                <a title="<%=cm.cms("add_root")%>" href="javascript:submitButtonForm('addroot','0');"><img border="0" src="images/mini/add.gif" width="13" height="13" title="<%=cm.cms("add_root")%>" alt="<%=cm.cms("add_root")%>" /></a>&nbsp;<%=cm.cmsPhrase("Add root criterion")%>
                 <%
             }
 
@@ -768,12 +768,12 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
               %>
               </form>
               <br />
-              <strong><%=cm.cmsText("advanced_search_might_take_long_time")%></strong>
+              <strong><%=cm.cmsPhrase("Note: Advanced search might take a long time")%></strong>
               <br />
               <%
 
               String criteria=tas.createCriteria(IdSession,NatureObject);
-              out.println(cm.cmsText("calculated_criteria"));
+              out.println(cm.cmsPhrase("Calculated search criteria expression:"));
               explainedcriteria=criteria.replace('#',' ').replace('[','(').replace(']',')').replaceAll("AND","<strong>AND</strong>").replaceAll("OR","<strong>OR</strong>");
               out.println(explainedcriteria);
 
@@ -801,12 +801,12 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     node=criteria.substring(pos_start+1,pos_end);
                     interpretedcriteria=tsas.InterpretCriteria(node,IdSession,NatureObject);
                     listcriteria+=node+": "+interpretedcriteria+"<br />";
-                    out.println(cm.cmsText("searching_for") + " " + interpretedcriteria + "...");
+                    out.println(cm.cmsPhrase("Searching for: {0}...",interpretedcriteria));
                     out.flush();
                     intermediatefilter=tsas.BuildFilter(node,IdSession,NatureObject);
-                    out.println(cm.cmsText("advanced_found") + "&nbsp;<strong>"+tsas.getResultCount() + "</strong>");
+                    out.println(cm.cmsPhrase("found: <strong>{0}</strong>",tsas.getResultCount()));
                     if(tsas.getResultCount()>=SQL_LIMIT) {
-                      out.println("<br />&nbsp;&nbsp;(" + cm.cmsText("advanced_only_first") + " "+SQL_LIMIT + " " + cm.cmsText("advanced_were_retrieved") + ")");
+                      out.println("<br />&nbsp;&nbsp;(" + cm.cmsPhrase("Only first") + " "+SQL_LIMIT + " " + cm.cmsPhrase("results were retrieved - this can lead to partial,incomplete or no combined search results at all - you should refine this criteria") + ")");
                     }
                     out.println("<br />");
                     out.flush();
@@ -836,7 +836,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
 
                 str="SELECT ID_NATURE_OBJECT FROM CHM62EDT_"+NatureObject.toUpperCase()+" WHERE ("+str+")";
                 String query = tsas.ExecuteFilterSQL(str,"");
-                out.println("<br /><strong>" + cm.cmsText("sites_advanced_10") + "&nbsp;" + tsas.getResultCount() + "</strong><br />");
+                out.println("<br /><strong>" + cm.cmsPhrase("Total sites matching your combined criteria found in database:") + "&nbsp;" + tsas.getResultCount() + "</strong><br />");
                 out.flush();
 
                 if (tsas.getResultCount() > 0) {
@@ -883,7 +883,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 } else {
                 %>
                 <br />
-                <%=cm.cmsText("no_results")%>
+                <%=cm.cmsPhrase("No results were found matching your combined criteria.")%>
                 <br />
                 <%
                 }
@@ -899,7 +899,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 <table summary="layout" width="100%" border="0">
                   <tr>
                     <td>
-                      <img alt="<%=cm.cms("advanced_expand_collapse")%>" border="0" style="vertical-align:middle" src="images/mini/<%=(exp.equals("yes")?"collapse.gif":"expand.gif")%>" /><a title="<%=cm.cms("advanced_expand_collapse")%>" href="sites-advanced.jsp?expandCriterias=<%=(exp.equals("yes")?"no":"yes")%>"><%=(exp.equalsIgnoreCase("yes") ? cm.cms("hide") : cm.cms("show"))%> <%=cm.cmsText("saved_search_criteria")%></a>
+                      <img alt="<%=cm.cms("advanced_expand_collapse")%>" border="0" style="vertical-align:middle" src="images/mini/<%=(exp.equals("yes")?"collapse.gif":"expand.gif")%>" /><a title="<%=cm.cms("advanced_expand_collapse")%>" href="sites-advanced.jsp?expandCriterias=<%=(exp.equals("yes")?"no":"yes")%>"><%=(exp.equalsIgnoreCase("yes") ? cm.cms("hide") : cm.cms("show"))%> <%=cm.cmsPhrase("Saved search criteria")%></a>
                       <%=cm.cmsTitle("advanced_expand_collapse")%>
                       <%=cm.cmsTitle("hide")%>
                       <%=cm.cmsTitle("show")%>

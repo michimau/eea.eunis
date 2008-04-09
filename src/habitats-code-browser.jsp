@@ -126,14 +126,14 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("eunis_habitat_type_hierarchical_view")%>
+                  <%=cm.cmsPhrase("EUNIS habitat type hierarchical view")%>
                 </h1>
                 <noscript>
                   <br />
                   <br />
                   <span style="color: red;">
                     <%=cm.cms("no_javascript_alternative_page")%>:
-                    <a href="habitats-eunis-tree.jsp"><%=cm.cmsText("eunis_habitat_type_hierarchical_view")%></a>.
+                    <a href="habitats-eunis-tree.jsp"><%=cm.cmsPhrase("EUNIS habitat type hierarchical view")%></a>.
                   </span>
                 </noscript>
 
@@ -223,7 +223,7 @@
                   <tr>
                     <td>
                       <%
-                        cm.cmsText("habitats_code-browser_02");
+                        cm.cmsPhrase("<strong>Warning:</strong> Expanding a node with many children might take some time to process.");
                       %>
                     </td>
                   </tr>
@@ -236,7 +236,7 @@
                     <td>
                       <br />
                       <br />
-                      <a href="habitats-factsheet.jsp?idHabitat=<%=habID%>"><%=cm.cmsText("open_habitat_factsheet")%></a>
+                      <a href="habitats-factsheet.jsp?idHabitat=<%=habID%>"><%=cm.cmsPhrase("Open habitat type factsheet")%></a>
                       <br />
                       <jsp:include page="habitats-factsheet-general.jsp">
                         <jsp:param name="idHabitat" value="<%=habID%>" />

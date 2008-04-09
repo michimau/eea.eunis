@@ -66,7 +66,7 @@
       String filename = mapserverURL + "?" + parameters;
 %>
   <h2>
-    <%=cm.cmsText("geographical_distribution")%>
+    <%=cm.cmsPhrase("Geographical distribution")%>
   </h2>
   <table summary="layout" border="0" cellpadding="3" cellspacing="0" width="90%">
     <tr>
@@ -81,11 +81,11 @@
       }
 %>
         <br />
-        <a title="<%=cm.cms("open_new_window")%>" href="javascript:openLink('<%=mapserverURL + "?" + parameters%>');"><%=cm.cmsText("open_new_window")%></a>
+        <a title="<%=cm.cms("open_new_window")%>" href="javascript:openLink('<%=mapserverURL + "?" + parameters%>');"><%=cm.cmsPhrase("Open map in new window")%></a>
         <%=cm.cmsTitle("open_new_window")%>
       </td>
       <td>
-        <%=cm.cmsText("legend")%>:
+        <%=cm.cmsPhrase("Legend")%>:
         <br />
 <%
         Enumeration keys = statusColorPair.keys();
@@ -109,19 +109,19 @@
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("species_factsheet-geo_04")%>
+          <%=cm.cmsPhrase("Country/Area")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("biogeographic_region")%>
+          <%=cm.cmsPhrase("Biogeographic region")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("status")%>
+          <%=cm.cmsPhrase("Status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-         <%=cm.cmsText("reference")%>
+         <%=cm.cmsPhrase("Reference")%>
          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>

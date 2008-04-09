@@ -77,50 +77,50 @@
                   <input type="hidden" name="showName" value="true" />
                   <input type="hidden" name="showDesignationYear" value="true" />
                   <h1>
-                    <%=cm.cmsText("site_neighborhood")%>
+                    <%=cm.cmsPhrase("Site neighborhood")%>
                   </h1>
 
-                  <%=cm.cmsText("sites_neighborhoods_20")%>
+                  <%=cm.cmsPhrase("Search neighboring sites")%>
                   <br />
-                  <%=cm.cmsText("sites_neighborhoods_21")%>
+                  <%=cm.cmsPhrase("(ex. Site around site named <strong>Bluntautal</strong> from <strong>Austria</strong>) ")%>
                   <br />
                   <br />
                   <div class="grey_rectangle">
                     <strong>
-                      <%=cm.cmsText("search_will_provide")%>
+                      <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed)")%>
                     </strong>
                     <br />
                     <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("source_data_set_2")%>" />
-                    <label for="showSourceDB"><%=cm.cmsText("source_data_set_2")%></label>
+                    <label for="showSourceDB"><%=cm.cmsPhrase("Source data set&nbsp;")%></label>
                     <%=cm.cmsTitle("source_data_set_2")%>
 
                     <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cms("country_1")%>" />
-                    <label for="showCountry"><%=cm.cmsText("country_1")%></label>
+                    <label for="showCountry"><%=cm.cmsPhrase("Country &nbsp;")%></label>
                     <%=cm.cmsTitle("country_1")%>
 
                     <input id="showName" name="showName" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=cm.cms("site_name")%>" />
-                    <label for="showName"><%=cm.cmsText("site_name")%></label>
+                    <label for="showName"><%=cm.cmsPhrase("Site name")%></label>
                     <%=cm.cmsTitle("site_name")%>
 
                     <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("designation_type_1")%>" />
-                    <label for="showDesignationTypes"><%=cm.cmsText("designation_type_1")%></label>
+                    <label for="showDesignationTypes"><%=cm.cmsPhrase("Designation type &nbsp;")%></label>
                     <%=cm.cmsTitle("designation_type_1")%>
 
                     <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("coordinates_1")%>" />
-                    <label for="showCoordinates"><%=cm.cmsText("coordinates_1")%></label>
+                    <label for="showCoordinates"><%=cm.cmsPhrase("Coordinates &nbsp;")%></label>
                     <%=cm.cmsTitle("coordinates_1")%>
 
                     <input id="showSize" name="showSize" type="checkbox" value="true" checked="checked" title="<%=cm.cms("size_1")%>" />
-                    <label for="showSize"><%=cm.cmsText("size_1")%></label>
+                    <label for="showSize"><%=cm.cmsPhrase("Size &nbsp;")%></label>
                     <%=cm.cmsTitle("size_1")%>
 
                     <input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("designation_year")%>" />
-                    <label for="showDesignationYear"><%=cm.cmsText("designation_year")%></label>
+                    <label for="showDesignationYear"><%=cm.cmsPhrase("Designation year")%></label>
                     <%=cm.cmsTitle("designation_year")%>
                   </div>
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_mandatory")%>
-                  <label for="relationOp"><%=cm.cmsText("site_name")%></label>&nbsp;
+                  <label for="relationOp"><%=cm.cmsPhrase("Site name")%></label>&nbsp;
                   <select id="relationOp" name="relationOp" title="<%=cm.cms("operator")%>">
                     <option value="<%=Utilities.OPERATOR_IS%>">
                       <%=cm.cms("is")%>
@@ -148,7 +148,7 @@
                   <br />
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_optional")%>
-                  <label for="country"><%=cm.cmsText("country_is")%>&nbsp;&nbsp;</label>
+                  <label for="country"><%=cm.cmsPhrase("Country is")%>&nbsp;&nbsp;</label>
                   <input id="country" name="country" type="text" size="30" title="<%=cm.cms("country_name")%>" />&nbsp;
                   <%=cm.cmsLabel("country_name")%>
                   <%=cm.cmsTitle("country_name")%>
@@ -158,12 +158,12 @@
                   <br />
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_optional")%>
-                  <label for="yearMin"><%=cm.cmsText("designation_year_between")%>&nbsp;</label>
+                  <label for="yearMin"><%=cm.cmsPhrase("Designation year between")%>&nbsp;</label>
                   <input id="yearMin" name="yearMin" type="text" maxlength="4" size="4" title="<%=cm.cms("minimum_designation_year")%>" />
                   <%=cm.cmsLabel("minimum_designation_year")%>
                   <%=cm.cmsTitle("minimum_designation_year")%>
 
-                  <%=cm.cmsText("and")%>
+                  <%=cm.cmsPhrase("and")%>
                   <label for="yearMax" class="noshow"><%=cm.cms("maximum_designation_year")%></label>
                   <input id="yearMax" name="yearMax" type="text" maxlength="4" size="4" title="<%=cm.cms("maximum_designation_year")%>" />
                   <%=cm.cmsLabel("maximum_designation_year")%>
@@ -199,7 +199,7 @@
               String expandSearchCriteria = (request.getParameter("expandSearchCriteria")==null?"no":request.getParameter("expandSearchCriteria"));
           %>
                 <br />
-                <%=cm.cmsText("save_your_criteria_1")%>
+                <%=cm.cmsPhrase("Save your criteria:")%>
                 <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-neighborhood.jsp','4','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                 <%=cm.cmsTitle("save")%>
                 <%=cm.cmsAlt("save")%>

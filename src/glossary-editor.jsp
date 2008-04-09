@@ -236,7 +236,7 @@
                   <table width="100%" border="0" summary="layout">
                     <tr>
                       <td>
-                        <%=cm.cmsText("generic_glossary-editor_01")%>
+                        <%=cm.cmsPhrase("<h1>Insert new / Modify glossary term</h1>")%>
                       </td>
                     </tr>
                     <tr>
@@ -252,7 +252,7 @@
                         <table summary="layout" width="90%" class="datatable">
                           <tr>
                             <td width="200">
-                              <label for="term"><%=cm.cmsText("term")%></label>
+                              <label for="term"><%=cm.cmsPhrase("Term")%></label>
                             </td>
                             <td>
                               <input type="text" title="<%=cm.cms("term")%>" name="term" id="term" size="50" value="<%=Utilities.formatString(termPersist.getTerm(), "")%>" />
@@ -260,7 +260,7 @@
                           </tr>
                           <tr class="zebraeven">
                             <td>
-                              <%=cm.cmsText( "language" )%>
+                              <%=cm.cmsPhrase( "Language" )%>
                             </td>
                             <td>
                               <label for="idLanguage" class="noshow"><%=cm.cms("language")%></label>
@@ -282,7 +282,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <label for="source"><%=cm.cmsText( "source" )%></label>
+                              <label for="source"><%=cm.cmsPhrase( "Source" )%></label>
                             </td>
                             <td>
                               <input title="<%=cm.cms( "source" )%>" type="text" name="source" id="source" value="<%=Utilities.formatString(termPersist.getSource(), "")%>" size="50" />
@@ -290,7 +290,7 @@
                           </tr>
                           <tr class="zebraeven">
                             <td>
-                              <label for="definition"><%=cm.cmsText( "definition" )%></label>
+                              <label for="definition"><%=cm.cmsPhrase( "Definition" )%></label>
                             </td>
                             <td>
                               <textarea title="<%=cm.cms( "definition" )%>" name="definition" id="definition" rows="5" cols="80"><%=Utilities.formatString(termPersist.getDefinition(), "")%></textarea>
@@ -298,7 +298,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <label for="linkDescription"><%=cm.cmsText( "link_description" )%></label>
+                              <label for="linkDescription"><%=cm.cmsPhrase( "Link description" )%></label>
                             </td>
                             <td>
                               <input title="<%=cm.cms( "link_description" )%>" type="text" name="linkDescription" id="linkDescription" value="<%=Utilities.formatString(termPersist.getLinkDescription(), "")%>" size="50" />
@@ -306,7 +306,7 @@
                           </tr>
                           <tr class="zebraeven">
                             <td>
-                              <label for="link"><%=cm.cmsText( "link" )%></label>
+                              <label for="link"><%=cm.cmsPhrase( "Link" )%></label>
                             </td>
                             <td>
                               <input title="<%=cm.cms( "link" )%>" type="text" name="link" id="link" value="<%=Utilities.formatString(termPersist.getLinkUrl(), "")%>" size="50" />
@@ -314,7 +314,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <label for="reference"><%=cm.cmsText( "reference" )%></label>
+                              <label for="reference"><%=cm.cmsPhrase( "Reference" )%></label>
                             </td>
                             <td>
                               <input title="<%=cm.cms( "reference" )%>" type="text" name="reference" id="reference" value="<%=Utilities.formatString(termPersist.getReference(), "")%>" size="50" />
@@ -322,7 +322,7 @@
                           </tr>
                           <tr class="zebraeven">
                             <td>
-                              <label for="dateChanged"><%=cm.cmsText( "date_changed" )%></label>
+                              <label for="dateChanged"><%=cm.cmsPhrase( "Date changed" )%></label>
                             </td>
                             <td>
                               <input title="<%=cm.cms( "date_changed" )%>" type="text" name="dateChanged" id="dateChanged" value="<%=Utilities.formatString(termPersist.getDateChanged(), "")%>" size="50" />
@@ -330,7 +330,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <label for="current"><%=cm.cmsText( "current" )%></label>
+                              <label for="current"><%=cm.cmsPhrase( "Current" )%></label>
                             </td>
                             <td>
                               <input title="<%=cm.cms( "current" )%>" type="checkbox" name="current" id="current" <%=(current) ? "checked=\"checked\"" : ""%> />
@@ -338,30 +338,30 @@
                           </tr>
                           <tr class="zebraeven">
                             <td>
-                              <%=cm.cmsText( "domain" )%>
+                              <%=cm.cmsPhrase( "Domain" )%>
                             </td>
                             <td>
                               <label for="SPECIES" class="noshow"><%=cm.cms("glossary_species")%></label>
-                              <input title="<%=cm.cms("glossary_species")%>" type="checkbox" name="SPECIES" id="SPECIES" <%=termDomain.lastIndexOf("SPECIES") >= 0 ? "checked=\"checked\"" : ""%> /><%=cm.cmsText("glossary_species")%><br />
+                              <input title="<%=cm.cms("glossary_species")%>" type="checkbox" name="SPECIES" id="SPECIES" <%=termDomain.lastIndexOf("SPECIES") >= 0 ? "checked=\"checked\"" : ""%> /><%=cm.cmsPhrase("Species domain")%><br />
                               <%=cm.cmsLabel("glossary_species")%>
                               <label for="HABITAT" class="noshow"><%=cm.cms("glossary_habitats")%></label>
-                              <input title="<%=cm.cms("glossary_habitats")%>" type="checkbox" name="HABITAT" id="HABITAT" <%=termDomain.lastIndexOf("HABITAT") >= 0 ? "checked=\"checked\"" : ""%> /><%=cm.cmsText("glossary_habitats")%><br />
+                              <input title="<%=cm.cms("glossary_habitats")%>" type="checkbox" name="HABITAT" id="HABITAT" <%=termDomain.lastIndexOf("HABITAT") >= 0 ? "checked=\"checked\"" : ""%> /><%=cm.cmsPhrase("Habitat types domain")%><br />
                               <%=cm.cmsLabel("glossary_habitats")%>
                               <label for="SITE" class="noshow"><%=cm.cms("glossary_sites")%></label>
-                              <input title="<%=cm.cms("glossary_sites")%>" type="checkbox" name="SITE" id="SITE" <%=termDomain.lastIndexOf("SITE") >= 0 ? "checked=\"checked\"" : ""%> /><%=cm.cmsText("glossary_sites")%><br />
+                              <input title="<%=cm.cms("glossary_sites")%>" type="checkbox" name="SITE" id="SITE" <%=termDomain.lastIndexOf("SITE") >= 0 ? "checked=\"checked\"" : ""%> /><%=cm.cmsPhrase("Sites domain")%><br />
                               <%=cm.cmsLabel("glossary_sites")%>
                             </td>
                           </tr>
                           <tr>
                             <td>
-                              <%=cm.cmsText( "search_domain" )%>
+                              <%=cm.cmsPhrase( "Search domain" )%>
                             </td>
                             <td>
                               <label for="EASY" class="noshow"><%=cm.cms("easy_search")%></label>
-                              <input title="<%=cm.cms("easy_search")%>" type="checkbox" name="EASY" id="EASY" <%=searchDomain.lastIndexOf("EASY") >= 0 ? "checked" : ""%> /><%=cm.cmsText("easy_search")%><br />
+                              <input title="<%=cm.cms("easy_search")%>" type="checkbox" name="EASY" id="EASY" <%=searchDomain.lastIndexOf("EASY") >= 0 ? "checked" : ""%> /><%=cm.cmsPhrase("Easy search")%><br />
                               <%=cm.cmsLabel("easy_search")%>
                               <label for="ADVANCED" class="noshow"><%=cm.cms("advanced_search")%></label>
-                              <input title="<%=cm.cms("advanced_search")%>" type="checkbox" name="ADVANCED" id="ADVANCED" <%=searchDomain.lastIndexOf("EASY") >= 0 ? "checked" : ""%> /><%=cm.cmsText("advanced_search")%><br />
+                              <input title="<%=cm.cms("advanced_search")%>" type="checkbox" name="ADVANCED" id="ADVANCED" <%=searchDomain.lastIndexOf("EASY") >= 0 ? "checked" : ""%> /><%=cm.cmsPhrase("Advanced Search")%><br />
                               <%=cm.cmsLabel("advanced_search")%>
                             </td>
                           </tr>
@@ -386,7 +386,7 @@
 %>
                 <br />
                 <br />
-                <span style="color : red"><%=cm.cmsText("users_bookmarks_20")%></span>
+                <span style="color : red"><%=cm.cmsPhrase("You must be authenticated and have the proper right to access this page.")%></span>
                 <br />
                 <br />
 <%

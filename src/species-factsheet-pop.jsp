@@ -27,38 +27,38 @@
   {
 %>
   <h2>
-    <%=cm.cmsText("population")%>
+    <%=cm.cmsPhrase("Population")%>
   </h2>
   <table summary="<%=cm.cms("species_factsheet-pop_12_Sum")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("country")%>
+          <%=cm.cmsPhrase("Country")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("biogeographic_region")%>
+          <%=cm.cmsPhrase("Biogeographic region")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize;">
           <span style="color:#006CAD">
-            <%=cm.cmsText("min_max")%>
+            <%=cm.cmsPhrase("Min / Max (Units)")%>
           </span>
         </th>
         <th style="text-transform: capitalize; text-align: right;">
-          <%=cm.cmsText("date")%>
+          <%=cm.cmsPhrase("Date")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("status")%>
+          <%=cm.cmsPhrase("Status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("quality")%>
+          <%=cm.cmsPhrase("Quality")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("reference")%>
+          <%=cm.cmsPhrase("Reference")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>

@@ -221,36 +221,36 @@
 
 
                 <h1>
-                  <%=cm.cmsText("thank_you")%>
+                  <%=cm.cmsPhrase("Thank you!")%>
                 </h1>
                 <br />
-                  <%=cm.cmsText("generic_feedback_02")%>
+                  <%=cm.cmsPhrase("Your feedback has been sent to EUNIS.")%>
                 <br />
                 <br />
                 <strong>
-                  <%=cm.cmsText("generic_feedback_03")%>
+                  <%=cm.cmsPhrase("Email content:")%>
                 </strong>
                 <br />
 <% } else { %>
                 <h1>
-                  <%=cm.cmsText("captcha_verification_failed")%>
+                  <%=cm.cmsPhrase("Captcha Verification Failed")%>
                 </h1>
 <% } %>
                 <br />
                 <%=bodyHTML%>
                 <br />
                 <br />
-                <%=cm.cmsMsg("feedback")%>
+                <%=cm.cmsMsg("EUNIS Feedback")%>
 <%
   }
   else
   {
 %>
                 <h1>
-                  <%=cm.cmsText("generic_feedback_04")%>
+                  <%=cm.cmsPhrase("User Feedback")%>
                 </h1>
                 <br />
-                <%=cm.cmsText("generic_feedback_05")%>
+                <%=cm.cmsPhrase("<strong>Dear visitor,</strong> in order to improve EUNIS Database we welcome your comments and suggestions.")%>
                 <br />
                 <br />
                 <form name="feed" action="feedback.jsp" method="post" onsubmit="javascript: return testform();">
@@ -260,7 +260,7 @@
                     <col style="width:60%"/>
                     <tr>
                       <td>
-                        <label for="feedbackType"><%=cm.cmsText("generic_feedback_06")%></label>
+                        <label for="feedbackType"><%=cm.cmsPhrase("Type of feedback:")%></label>
                       </td>
                       <td>
                         <select title="<%=cm.cms("feedback_type")%>" size="1" name="feedbackType" id="feedbackType">
@@ -322,7 +322,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <label for="url"><%=cm.cmsText("feedback_url")%></label>
+                        <label for="url"><%=cm.cmsPhrase("URL:")%></label>
                        </td>
                       <td>
                         <input name="url" type="text" id="url" size="80" value="<%=referer%>" />
@@ -330,17 +330,17 @@
                     </tr>
                   </table>
                   <br />
-                  <label for="comment"><%=cm.cmsText("generic_feedback_18")%></label>
+                  <label for="comment"><%=cm.cmsPhrase("Comments:")%></label>
                    <textarea title="<%=cm.cms("generic_feedback_18")%>" name="comment" id="comment" rows="8" cols="50">Enter your comments here... </textarea>
                   <br />
                   <br />
-                  <%=cm.cmsText("generic_feedback_20")%>
+                  <%=cm.cmsPhrase("The following section is optional, but necessary if you would like a response from us.<br />")%>
                   <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
                     <col style="width:40%"/>
                     <col style="width:60%"/>
                     <tr>
                       <td>
-                        <label for="name"><%=cm.cmsText("generic_feedback_21")%></label>
+                        <label for="name"><%=cm.cmsPhrase("Name:")%></label>
                       </td>
                       <td>
                         <input name="name" type="text" id="name" size="40" />
@@ -348,7 +348,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <label for="email"><%=cm.cmsText("generic_feedback_22")%></label>
+                        <label for="email"><%=cm.cmsPhrase("Email address:")%></label>
                       </td>
                       <td>
                         <input name="email" type="text" id="email" size="40" />
@@ -356,7 +356,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <label for="organization"><%=cm.cmsText("generic_feedback_23")%></label>
+                        <label for="organization"><%=cm.cmsPhrase("Organization:")%></label>
                       </td>
                       <td>
                         <input name="organization" type="text" id="organization" size="40" />
@@ -364,7 +364,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <label for="telephone"><%=cm.cmsText("generic_feedback_25")%></label>
+                        <label for="telephone"><%=cm.cmsPhrase("Telephone:")%></label>
                       </td>
                       <td>
                         <input name="telephone" type="text" id="telephone" size="40" />
@@ -372,7 +372,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <label for="fax"><%=cm.cmsText("generic_feedback_26")%></label>
+                        <label for="fax"><%=cm.cmsPhrase("Fax:")%></label>
                       </td>
                       <td>
                         <input name="fax" type="text" id="fax" size="40" />
@@ -380,7 +380,7 @@
                     </tr>
                     <tr>
                     	<td>
-                    		<label for="j_captcha_response"><%=cm.cmsText("generic_feedback_28")%></label>
+                    		<label for="j_captcha_response"><%=cm.cmsPhrase("Captcha")%></label>
                     	</td>
                     	<td>
                     		<img src="jcaptcha" alt="picture with text" /><br/>

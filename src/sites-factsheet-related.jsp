@@ -47,25 +47,25 @@
       }
 %>
   <h2>
-    <%=cm.cmsText("sites_factsheet_123")%>
+    <%=cm.cmsPhrase("Relationships")%>
   </h2>
   <table summary="<%=cm.cms("sites_factsheet_123")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("id_site")%>
+          <%=cm.cmsPhrase("ID Site")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("scientific_name")%>
+          <%=cm.cmsPhrase("Scientific name")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("within_databases")%>
+          <%=cm.cmsPhrase("Within databases")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("type")%>
+          <%=cm.cmsPhrase("Type")%>
         </th>
         <th style="text-transform: capitalize; text-align: right;">
-          <%=cm.cmsText("overlap_percent")%>
+          <%=cm.cmsPhrase("Overlap(%)")%>
         </th>
       </tr>
     </thead>
@@ -146,19 +146,19 @@
 %>
   <br />
   <h2>
-    <%=cm.cmsText("sites_factsheet_related_natura2000")%>
+    <%=cm.cmsPhrase("Relation with other Natura 2000 sites")%>
   </h2>
   <table summary="<%=cm.cms("sites_factsheet_related_natura2000")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("sites_factsheet_related_relationtype")%>
+          <%=cm.cmsPhrase("Type of relation")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("site_code")%>
+          <%=cm.cmsPhrase("Site code")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("site_name")%>
+          <%=cm.cmsPhrase("Site name")%>
         </th>
       </tr>
     </thead>
@@ -198,22 +198,22 @@
     {
 %>
   <h2>
-    <%=cm.cmsText("sites_factsheet_related_corinesites")%>
+    <%=cm.cmsPhrase("Relation with Corine biotope sites")%>
   </h2>
   <table summary="<%=cm.cms("sites_factsheet_related_corinesites")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("site_code")%>
+          <%=cm.cmsPhrase("Site code")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("site_name")%>
+          <%=cm.cmsPhrase("Site name")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("sites_factsheet_related_overlap")%>
+          <%=cm.cmsPhrase("Overlap")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("sites_factsheet_related_overlapp")%>
+          <%=cm.cmsPhrase("Overlap P")%>
         </th>
       </tr>
     </thead>

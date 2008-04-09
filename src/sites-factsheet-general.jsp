@@ -28,7 +28,7 @@
   int type = factsheet.getType();
 %>
   <h2>
-    <%=cm.cmsText("site_identification")%>
+    <%=cm.cmsPhrase("Site identification")%>
   </h2>
   <table summary="layout" class="datatable" width="90%">
     <tbody>
@@ -38,7 +38,7 @@
           <strong>
             <%=SitesSearchUtility.translateSourceDB(factsheet.getSiteObject().getSourceDB())%>
           </strong>
-          <%=cm.cmsText("code_in_database")%>
+          <%=cm.cmsPhrase("code in database")%>
         </td>
         <td width="50%">
           <strong>
@@ -49,7 +49,7 @@
       <tr class="zebraeven">
         <%-- Surface area --%>
         <td>
-          <%=cm.cmsText("surface_area_ha")%>
+          <%=cm.cmsPhrase("Surface area (ha)")%>
         </td>
         <td>
           <%=Utilities.formatArea(factsheet.getSiteObject().getArea(), 0, 2, "&nbsp;", null)%>&nbsp;
@@ -64,7 +64,7 @@
       <tr>
         <%-- Length --%>
         <td>
-          <%=cm.cmsText("sites_factsheet_06")%>
+          <%=cm.cmsPhrase("Length (m)")%>
         </td>
         <td>
           <%=factsheet.getSiteObject().getLength()%>&nbsp;
@@ -77,7 +77,7 @@
       <tr class="zebraeven">
         <%-- Complex name --%>
         <td>
-          <%=cm.cmsText("complex_name")%>
+          <%=cm.cmsPhrase("Complex name")%>
         </td>
         <td>
           <%=factsheet.getSiteObject().getComplexName()%>
@@ -86,7 +86,7 @@
       <tr>
         <%-- District name --%>
         <td>
-          <%=cm.cmsText("district_name")%>
+          <%=cm.cmsPhrase("District name")%>
         </td>
         <td>
           <%=factsheet.getSiteObject().getDistrictName()%>
@@ -164,19 +164,19 @@
       <tr class="zebraeven">
         <%-- Date form compilation date --%>
         <td>
-          <%=cm.cmsText("date_form_compilation_date")%> <%=dateformatCompilationDate%>
+          <%=cm.cmsPhrase("Date form compilation date")%> <%=dateformatCompilationDate%>
         </td>
         <td>
-          <%=SiteFactsheet.TYPE_NATURA2000 != type ? factsheet.getSiteObject().getCompilationDate() : Utilities.formatDate(Utilities.stringToTimeStamp(factsheet.getSiteObject().getCompilationDate(),dateformatCompilationDate2),"MMM yyyy") + (factsheet.getSiteObject().getCompilationDate() == null || factsheet.getSiteObject().getCompilationDate().trim().length()<=0 ? "" :" (" + cm.cmsText("sites_factsheet_170") + " " + factsheet.getSiteObject().getCompilationDate() + ")")%>
+          <%=SiteFactsheet.TYPE_NATURA2000 != type ? factsheet.getSiteObject().getCompilationDate() : Utilities.formatDate(Utilities.stringToTimeStamp(factsheet.getSiteObject().getCompilationDate(),dateformatCompilationDate2),"MMM yyyy") + (factsheet.getSiteObject().getCompilationDate() == null || factsheet.getSiteObject().getCompilationDate().trim().length()<=0 ? "" :" (" + cm.cmsPhrase("entered in original database as") + " " + factsheet.getSiteObject().getCompilationDate() + ")")%>
         </td>
       </tr>
       <tr>
         <%-- Date form update--%>
         <td>
-          <%=cm.cmsText("date_form_update")%> <%=dateformatUpdateDate%>
+          <%=cm.cmsPhrase("Date form update")%> <%=dateformatUpdateDate%>
         </td>
         <td>
-          <%=SiteFactsheet.TYPE_NATURA2000 != type ? factsheet.getSiteObject().getUpdateDate() : Utilities.formatDate(Utilities.stringToTimeStamp(factsheet.getSiteObject().getUpdateDate(),dateformatUpdateDate2),"MMM yyyy") + (factsheet.getSiteObject().getUpdateDate() == null || factsheet.getSiteObject().getUpdateDate().trim().length()<=0 ? "" : " (" + cm.cmsText("sites_factsheet_170") + " " + factsheet.getSiteObject().getUpdateDate() + ")")%>
+          <%=SiteFactsheet.TYPE_NATURA2000 != type ? factsheet.getSiteObject().getUpdateDate() : Utilities.formatDate(Utilities.stringToTimeStamp(factsheet.getSiteObject().getUpdateDate(),dateformatUpdateDate2),"MMM yyyy") + (factsheet.getSiteObject().getUpdateDate() == null || factsheet.getSiteObject().getUpdateDate().trim().length()<=0 ? "" : " (" + cm.cmsPhrase("entered in original database as") + " " + factsheet.getSiteObject().getUpdateDate() + ")")%>
         </td>
       </tr>
 <%
@@ -187,10 +187,10 @@
       <tr class="zebraeven">
         <%-- Date proposed --%>
         <td>
-          <%=cm.cmsText("date_proposed")%>
+          <%=cm.cmsPhrase("Date proposed")%>
         </td>
         <td>
-          <%=SiteFactsheet.TYPE_NATURA2000 != type ? factsheet.getSiteObject().getProposedDate() : Utilities.formatDate(Utilities.stringToTimeStamp(factsheet.getSiteObject().getProposedDate(),"yyyyMM"),"MMM yyyy") + (factsheet.getSiteObject().getProposedDate() == null || factsheet.getSiteObject().getProposedDate().trim().length()<=0 ? "" :" (" + cm.cmsText("sites_factsheet_170") + " " + factsheet.getSiteObject().getProposedDate() + ")")%>
+          <%=SiteFactsheet.TYPE_NATURA2000 != type ? factsheet.getSiteObject().getProposedDate() : Utilities.formatDate(Utilities.stringToTimeStamp(factsheet.getSiteObject().getProposedDate(),"yyyyMM"),"MMM yyyy") + (factsheet.getSiteObject().getProposedDate() == null || factsheet.getSiteObject().getProposedDate().trim().length()<=0 ? "" :" (" + cm.cmsPhrase("entered in original database as") + " " + factsheet.getSiteObject().getProposedDate() + ")")%>
         </td>
       </tr>
 <%
@@ -201,10 +201,10 @@
       <tr>
         <%-- Date confirmed --%>
         <td>
-          <%=cm.cmsText("date_confirmed")%>
+          <%=cm.cmsPhrase("Date confirmed")%>
         </td>
         <td>
-          <%=SiteFactsheet.TYPE_NATURA2000 != type ? factsheet.getSiteObject().getConfirmedDate() : Utilities.formatDate(Utilities.stringToTimeStamp(factsheet.getSiteObject().getConfirmedDate(),"yyyyMM"),"MMM yyyy") + (factsheet.getSiteObject().getConfirmedDate() == null || factsheet.getSiteObject().getConfirmedDate().trim().length()<=0 ? "" :" (" + cm.cmsText("sites_factsheet_170") + " " + factsheet.getSiteObject().getConfirmedDate() + ")")%>
+          <%=SiteFactsheet.TYPE_NATURA2000 != type ? factsheet.getSiteObject().getConfirmedDate() : Utilities.formatDate(Utilities.stringToTimeStamp(factsheet.getSiteObject().getConfirmedDate(),"yyyyMM"),"MMM yyyy") + (factsheet.getSiteObject().getConfirmedDate() == null || factsheet.getSiteObject().getConfirmedDate().trim().length()<=0 ? "" :" (" + cm.cmsPhrase("entered in original database as") + " " + factsheet.getSiteObject().getConfirmedDate() + ")")%>
         </td>
       </tr>
 <%
@@ -215,7 +215,7 @@
       <tr class="zebraeven">
         <%-- Date first designation --%>
         <td>
-          <%=cm.cmsText("date_first_designation")%>
+          <%=cm.cmsPhrase("Date first designation")%>
         </td>
         <td>
           <%=factsheet.getDateFirstDesignation()%>
@@ -229,7 +229,7 @@
       <tr>
         <%-- Site designation date --%>
         <td>
-          <%=cm.cmsText("site_designation_date")%>
+          <%=cm.cmsPhrase("Site designation date")%>
         </td>
         <td>
         <%
@@ -256,29 +256,29 @@
 %>
   <%-- Designation information --%>
   <h2>
-    <%=cm.cmsText("designation_information")%>
+    <%=cm.cmsPhrase("Designation information")%>
   </h2>
   <table summary="<%=cm.cms("designation_information")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("source_data_set")%>
+          <%=cm.cmsPhrase("Source data set")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("designation_code")%>
+          <%=cm.cmsPhrase("Designation code")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("designation_name_original")%>
+          <%=cm.cmsPhrase("Designation name (Original)")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("designation_name_english")%>
+          <%=cm.cmsPhrase("Designation name (English)")%>
         </th>
 <%
         if (SiteFactsheet.TYPE_CORINE != type)
         {
 %>
         <th>
-          <%=cm.cmsText("designation_name_french")%>
+          <%=cm.cmsPhrase("Designation name (French)")%>
         </th>
 <%
         }
@@ -441,7 +441,7 @@
     <tr class="zebraeven">
       <%-- Project ID --%>
       <td width="15%">
-        <%=cm.cmsText("project_id")%>
+        <%=cm.cmsPhrase("Project ID:")%>
       </td>
       <td>
         &nbsp;
@@ -450,7 +450,7 @@
     <tr class="zebraeven">
       <%-- Project title --%>
       <td>
-        <%=cm.cmsText("project_title")%>
+        <%=cm.cmsPhrase("Project title:")%>
       </td>
       <td>
         &nbsp;
@@ -461,7 +461,7 @@
 <!--
   <a name="monitoring"></a>
   <h2>
-    <%=cm.cmsText("sites_factsheet_24")%>
+    <%=cm.cmsPhrase("sites_factsheet_24")%>
   </h2>
   <br />
   <%-- Monitoring activities --%>
@@ -472,7 +472,7 @@
   <table summary="Link to other providers" width="90%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td width="50%">
-        <a title="<%=cm.cms("google_pictures")%>" href="javascript:openGooglePics('http://images.google.com/images?q=<%=factsheet.getSiteObject().getName()%>')"><%=cm.cmsText("pictures_on_google")%></a>
+        <a title="<%=cm.cms("google_pictures")%>" href="javascript:openGooglePics('http://images.google.com/images?q=<%=factsheet.getSiteObject().getName()%>')"><%=cm.cmsPhrase("Pictures on Google")%></a>
       </td>
       <td width="50%" align="right">
 <%
@@ -484,7 +484,7 @@
           level = "int";
         }
 %>
-        <a title="<%=cm.cms("wcmc_link")%>" href="javascript:openunepwcmc('http://sea.unep-wcmc.org/wdbpa/sitedetails.cfm?siteid=<%=factsheet.getSiteObject().getIdSite()%>&amp;level=<%=level%>')"><%=cm.cmsText("unep_link")%></a>
+        <a title="<%=cm.cms("wcmc_link")%>" href="javascript:openunepwcmc('http://sea.unep-wcmc.org/wdbpa/sitedetails.cfm?siteid=<%=factsheet.getSiteObject().getIdSite()%>&amp;level=<%=level%>')"><%=cm.cmsPhrase("UNEP-WCMC link")%></a>
 <%
       }
       else
@@ -504,12 +504,12 @@
 %>
   <%-- Location information --%>
   <h2>
-    <%=cm.cmsText("location_information")%>
+    <%=cm.cmsPhrase("Location information")%>
   </h2>
   <table summary="<%=cm.cms("location_information")%>" class="datatable" width="90%">
     <tr>
       <td colspan="2">
-        <%=cm.cmsText("country")%>
+        <%=cm.cmsPhrase("Country")%>
       </td>
 <%--              <td><a href="sites-statistical-result.jsp?country=<%=country%>&amp;DB_NATURA2000=true&amp;DB_CDDA_NATIONAL=true&amp;DB_NATURE_NET=true&amp;DB_DIPLOMA=true&amp;DB_CDDA_INTERNATIONAL=true&amp;DB_CORINE=true&amp;DB_BIOGENETIC=true&amp;DB_EMERALD=true" title="Open the statistical data for <%=country%>"><%=country%></a></td>--%>
       <td>
@@ -533,7 +533,7 @@
       {
 %>
       <td colspan="2">
-        <%=cm.cmsText("parent_country")%>
+        <%=cm.cmsPhrase("Parent country")%>
       </td>
       <td>
         <%=parentCountry%>
@@ -560,7 +560,7 @@
 %>
     <tr class="zebraeven">
       <td colspan="2">
-        <%=cm.cmsText("sites_factsheet_30")%>
+        <%=cm.cmsPhrase("Regional administrative codes")%>
       </td>
       <td colspan="4">
 <%
@@ -615,50 +615,50 @@
         <table border="1" cellpadding="1" cellspacing="1" width="90%" style="border-collapse:collapse">
           <tr bgcolor="#EEEEEE">
             <td colspan="12">
-              <%=cm.cmsText("sites_factsheet_149")%>
+              <%=cm.cmsPhrase("Site biogeographic regions")%>
             </td>
           </tr>
           <tr>
             <td>
-              <%=cm.cmsText("biogeographic_region")%>
+              <%=cm.cmsPhrase("Biogeographic region")%>
             </td>
             <td>
-              <%=cm.cmsText("sites_factsheet_152")%>
+              <%=cm.cmsPhrase("Alpine")%>
             </td>
             <td>
-              <%=cm.cmsText("sites_factsheet_153")%>
+              <%=cm.cmsPhrase("Anatolian")%>
             </td>
             <td>
-              <%=cm.cmsText("sites_factsheet_154")%>
+              <%=cm.cmsPhrase("Arctic")%>
             </td>
             <td>
-              <%=cm.cmsText("sites_factsheet_155")%>
+              <%=cm.cmsPhrase("Atlantic")%>
             </td>
             <td>
-              <%=cm.cmsText("sites_factsheet_156")%>
+              <%=cm.cmsPhrase("Boreal")%>
             </td>
             <td>
-              <%=cm.cmsText("sites_factsheet_157")%>
+              <%=cm.cmsPhrase("Continental")%>
             </td>
             <td>
-              <%=cm.cmsText("sites_factsheet_158")%>
+              <%=cm.cmsPhrase("Macaronesia")%>
             </td>
             <td>
-              <%=cm.cmsText("sites_factsheet_159")%>
+              <%=cm.cmsPhrase("Mediterranean")%>
             </td>
             <td>
-              <%=cm.cmsText("sites_factsheet_160")%>
+              <%=cm.cmsPhrase("Pannonian")%>
             </td>
             <td>
-              <%=cm.cmsText("sites_factsheet_161")%>
+              <%=cm.cmsPhrase("Black Sea")%>
             </td>
             <td>
-              <%=cm.cmsText("sites_factsheet_162")%>
+              <%=cm.cmsPhrase("Steppic")%>
             </td>
           </tr>
           <tr bgcolor="#EEEEEE">
             <td>
-              <%=cm.cmsText("sites_factsheet_151")%>
+              <%=cm.cmsPhrase("Presence")%>
             </td>
             <td>
 <%
@@ -844,19 +844,19 @@
 %>
     <tr class="zebraeven">
       <td>
-        <%=cm.cmsText("minimum_altitude")%>
+        <%=cm.cmsPhrase("Minimum Altitude(m)")%>
       </td>
       <td>
       <%=Utilities.formatString(altMin)%>
       </td>
       <td>
-        <%=cm.cmsText("mean_altitude_m")%>
+        <%=cm.cmsPhrase("Mean Altitude(m)")%>
       </td>
       <td>
         <%=Utilities.formatString(altMean)%>
       </td>
       <td>
-        <%=cm.cmsText("maximum_altitude_m")%>
+        <%=cm.cmsPhrase("Maximum Altitude(m)")%>
       </td>
       <td>
         <%=Utilities.formatString(altMax)%>
@@ -889,13 +889,13 @@
 %>
     <tr>
       <td>
-        <%=cm.cmsText("longitude")%>
+        <%=cm.cmsPhrase("Longitude")%>
       </td>
       <td>
         <%=longitude%>
       </td>
       <td>
-        <%=cm.cmsText("latitude")%>
+        <%=cm.cmsPhrase("Latitude")%>
       </td>
       <td colspan="3">
         <%=latitude%>
@@ -903,13 +903,13 @@
     </tr>
     <tr class="zebraeven">
       <td>
-        <%=cm.cmsText("sites_factsheet_36")%>
+        <%=cm.cmsPhrase("Longitude (decimal deg.)")%>
       </td>
       <td colspan="2">
         <%=Utilities.formatArea(factsheet.getSiteObject().getLongitude(), 0, 6, null)%>
       </td>
       <td>
-        <%=cm.cmsText("sites_factsheet_37")%>
+        <%=cm.cmsPhrase("Latitude (decimal deg.)")%>
       </td>
       <td colspan="2">
         <%=Utilities.formatArea(factsheet.getSiteObject().getLatitude(), 0, 6, null)%>
@@ -921,7 +921,7 @@
         List results = factsheet.getBiogeoregion();
 %>
     <tr class="zebraeven">
-      <td colspan="2"><%=cm.cmsText("biogeographic_regions")%></td>
+      <td colspan="2"><%=cm.cmsPhrase("Biogeographic regions")%></td>
       <td colspan="4">
 <%
         for (int i = 0; i < results.size(); i++)
@@ -992,39 +992,39 @@
       </td>
       <td width="50%" style="padding-left : 20px;">
         <strong>
-          <%=cm.cmsText("change_map_type")%>
+          <%=cm.cmsPhrase("Change map type")%>
         </strong>
         <br />
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Standard#map" title="<%=cm.cms("change_map_to_standard")%>"><%=cm.cmsText("standard_europe" )%></a>
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Standard#map" title="<%=cm.cms("change_map_to_standard")%>"><%=cm.cmsPhrase("Standard (Europe)" )%></a>
         <%=cm.cmsTitle("change_map_to_standard")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Standard_B#map" title="<%=cm.cms("change_map_to_standard_boundaries")%>"><%=cm.cmsText("standard_europe_boundaries" )%></a>
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Standard_B#map" title="<%=cm.cms("change_map_to_standard_boundaries")%>"><%=cm.cmsPhrase("Standard (Europe) - Boundaries" )%></a>
         <%=cm.cmsTitle("change_map_to_standard_boundaries")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Europe#map" title="<%=cm.cms("change_map_to_europe")%>"><%=cm.cmsText("europe" )%></a>
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Europe#map" title="<%=cm.cms("change_map_to_europe")%>"><%=cm.cmsPhrase("Europe" )%></a>
         <%=cm.cmsTitle("change_map_to_europe")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Europe_B#map" title="<%=cm.cms("change_map_to_europe_boundaries")%>"><%=cm.cmsText("europe_boundaries" )%></a>
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Europe_B#map" title="<%=cm.cms("change_map_to_europe_boundaries")%>"><%=cm.cmsPhrase("Europe - Boundaries" )%></a>
         <%=cm.cmsTitle("change_map_to_europe_boundaries")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=World#map" title="<%=cm.cms("change_map_to_world")%>"><%=cm.cmsText("world" )%></a>
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=World#map" title="<%=cm.cms("change_map_to_world")%>"><%=cm.cmsPhrase("World" )%></a>
         <%=cm.cmsTitle("change_map_to_world")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=World_B#map" title="<%=cm.cms("change_map_to_world_boundaries")%>"><%=cm.cmsText("world_boundaries" )%></a>
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=World_B#map" title="<%=cm.cms("change_map_to_world_boundaries")%>"><%=cm.cmsPhrase("World - Boundaries" )%></a>
         <%=cm.cmsTitle("change_map_to_world_boundaries")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Biogeographic#map" title="<%=cm.cms("change_map_to_biogeographic")%>"><%=cm.cmsText("biogeographic" )%></a>
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Biogeographic#map" title="<%=cm.cms("change_map_to_biogeographic")%>"><%=cm.cmsPhrase("Biogeographic" )%></a>
         <%=cm.cmsTitle("change_map_to_biogeographic")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Biogeographic_B#map" title="<%=cm.cms("change_map_to_biogeographic_boundaries")%>"><%=cm.cmsText("biogeographic_boundaries" )%></a>
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Biogeographic_B#map" title="<%=cm.cms("change_map_to_biogeographic_boundaries")%>"><%=cm.cmsPhrase("Biogeographic - Boundaries" )%></a>
         <%=cm.cmsTitle("change_map_to_biogeographic_boundaries")%>
         <br />
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=<%=mapType%>&amp;Zoom=2#map" title="<%=cm.cms("zoom_in_map")%>"><%=cm.cmsText("zoom_in" )%></a>
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=<%=mapType%>&amp;Zoom=2#map" title="<%=cm.cms("zoom_in_map")%>"><%=cm.cmsPhrase("Zoom in" )%></a>
         <%=cm.cmsTitle("zoom_in_map")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=<%=mapType%>&amp;Zoom=0#map" title="<%=cm.cms("zoom_out_map")%>"><%=cm.cmsText("zoom_out" )%></a>
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=<%=mapType%>&amp;Zoom=0#map" title="<%=cm.cms("zoom_out_map")%>"><%=cm.cmsPhrase("Zoom out" )%></a>
         <%=cm.cmsTitle("zoom_out_map")%>
         <br />
       </td>

@@ -56,10 +56,10 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("generic_download-database_01")%>
+                  <%=cm.cmsPhrase("Download EUNIS Database")%>
                 </h1>
                 <br />
-                <a title="<%=cm.cms("generic_download-database_02")%>" href="downloads/eunis.zip"><%=cm.cmsText("generic_download-database_02")%></a>
+                <a title="<%=cm.cms("generic_download-database_02")%>" href="downloads/eunis.zip"><%=cm.cmsPhrase("Download zipped .mdb (Microsoft Access) file")%></a>
                 <br />
                 <br />
                 <%=cm.cmsMsg("download_database")%>

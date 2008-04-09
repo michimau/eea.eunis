@@ -70,12 +70,12 @@
 %>
 <br />
 <br />
-<%=cm.cmsText("habitats_diagram_02")%>: <%=habitat.getScientificName()%>(
+<%=cm.cmsPhrase("Requested habitat type")%>: <%=habitat.getScientificName()%>(
 <strong><%=eunisCode%></strong>)
 -
-<%=cm.cmsText("generic_index_07")%>:<strong><%=habitat.getHabLevel()%></strong>
+<%=cm.cmsPhrase("Level")%>:<strong><%=habitat.getHabLevel()%></strong>
 <br />
-<%=cm.cmsText("habitats_diagram_03")%>.
+<%=cm.cmsPhrase("Diagrams exist for habitat type level <strong>1</strong> or <strong>2</strong>")%>.
 <br />
 <table summary="layout" width="500" border="0" cellpadding="0" cellspacing="0" bgcolor="#EEEEEE">
   <%
@@ -83,7 +83,7 @@
   %>
   <tr>
     <td width="417">
-      &nbsp;<%=cm.cmsText("habitats_diagram_05")%>:
+      &nbsp;<%=cm.cmsPhrase("Link to level 1 parent habitat type")%>:
     </td>
     <td width="40">
       &nbsp;<%=habitat.getEunisHabitatCode().substring(0, 1)%>
@@ -102,7 +102,7 @@
   %>
   <tr>
     <td width="417">
-      &nbsp;<%=cm.cmsText("habitats_diagram_06")%>:
+      &nbsp;<%=cm.cmsPhrase("Link to level 2 parent habitat type")%>:
     </td>
     <td width="40">
       &nbsp;<%=habitat.getEunisHabitatCode().substring(0, 2)%>

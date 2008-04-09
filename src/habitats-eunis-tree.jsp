@@ -62,7 +62,7 @@
                 </div>
 <!-- MAIN CONTENT -->
                   <h1>
-                    <%=cm.cmsText("eunis_habitat_type_hierarchical_view")%>
+                    <%=cm.cmsPhrase("EUNIS habitat type hierarchical view")%>
                   </h1>
                   <br/>
             <%

@@ -104,14 +104,14 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("habitats_annex1-browser_01")%>
+                  <%=cm.cmsPhrase("Habitat Annex I Directive hierarchical view: (higher levels are for grouping only)")%>
                 </h1>
                 <noscript>
                   <br />
                   <br />
                   <span style="color: red;">
                     <%=cm.cms("no_javascript_alternative_page")%>:
-                    <a href="habitats-eunis-tree.jsp"><%=cm.cmsText("eunis_habitat_type_hierarchical_view")%></a>.
+                    <a href="habitats-eunis-tree.jsp"><%=cm.cmsPhrase("EUNIS habitat type hierarchical view")%></a>.
                   </span>
                 </noscript>
                 <table summary="layout" width="100%" border="0">
@@ -219,7 +219,7 @@
                       <td>
                         <br />
                         <br />
-                        <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habID%>"><%=cm.cmsText("open_habitat_factsheet")%></a>
+                        <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habID%>"><%=cm.cmsPhrase("Open habitat type factsheet")%></a>
                         <br />
                         <jsp:include page="habitats-factsheet-general.jsp">
                           <jsp:param name="idHabitat" value="<%=habID%>" />

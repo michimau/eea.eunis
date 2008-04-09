@@ -109,11 +109,11 @@
 %>
         <td width="35%" align="center" valign="middle">
           <strong>
-            <%=cm.cmsText("navigator_current_page")%>: <%=(currentPageNavigator + 1 > pagesCountNavigator) ? currentPageNavigator : currentPageNavigator + 1%> / <%=pagesCountNavigator%>
+            <%=cm.cmsPhrase("Current page")%>: <%=(currentPageNavigator + 1 > pagesCountNavigator) ? currentPageNavigator : currentPageNavigator + 1%> / <%=pagesCountNavigator%>
           </strong>
         </td>
         <td width="35%" align="center" valign="middle">
-          <label for="currentPage<%=guidNavigator%>"><%=cm.cmsText("navigator_goto_page_label")%>:</label>
+          <label for="currentPage<%=guidNavigator%>"><%=cm.cmsPhrase("Go to page")%>:</label>
           <input title="<%=cm.cms("navigator_goto_page_title")%>" class="inputTextFieldCenter" id="currentPage<%=guidNavigator%>" name="currentPage" type="text" size="3" value="<%=(currentPageNavigator + 1 > pagesCountNavigator) ? currentPageNavigator : currentPageNavigator + 1%>" />
           <input title="<%=cm.cms("change_page")%>" class="searchButton" type="submit" id="submit<%=guidNavigator%>" name="Submit" value="<%=cm.cms("change_page")%>" /><%=toFORMParam%>
           <%=cm.cmsInput("change_page")%>

@@ -119,7 +119,7 @@ function openHelper(URL)
                   <tr>
                     <td>
                       <h1>
-                        <%=cm.cmsText("code_classifications")%>
+                        <%=cm.cmsPhrase("Code/Classifications")%>
                       </h1>
                       <%=cm.cmsText("habitats_code_20")%>
                       <br />
@@ -128,23 +128,23 @@ function openHelper(URL)
                         <tr bgcolor="#EEEEEE">
                           <td>
                             <strong>
-                              <%=cm.cmsText("search_will_provide_2")%>
+                              <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed):")%>
                             </strong>
                           </td>
                         </tr>
                         <tr>
                           <td style="white-space:nowrap">
                             <input type="checkbox" id="showLevel" name="showLevel" value="true" checked="checked" />
-                            <label for="showLevel"><%=cm.cmsText("generic_index_07")%></label>
+                            <label for="showLevel"><%=cm.cmsPhrase("Level")%></label>
                             &nbsp;
                             <input type="checkbox" id="showCode" name="showCode" value="true" checked="checked" disabled="disabled" />
-                            <label for="showCode"><%=cm.cmsText("code_column")%></label>
+                            <label for="showCode"><%=cm.cmsPhrase("Code")%></label>
                             &nbsp;
                             <input type="checkbox" id="showScientificName" name="showScientificName" value="true" checked="checked" disabled="disabled" />
-                            <label for="showScientificName"><%=cm.cmsText("scientific_name")%></label>
+                            <label for="showScientificName"><%=cm.cmsPhrase("Scientific name")%></label>
                             &nbsp;
                             <input type="checkbox" id="showOtherCodes" name="showOtherCodes" value="true" checked="checked" />
-                            <label for="showOtherCodes"><%=cm.cmsText("habitats_code_06")%></label>
+                            <label for="showOtherCodes"><%=cm.cmsPhrase("Relationship with other habitat types")%></label>
                             &nbsp;
                           </td>
                         </tr>
@@ -190,7 +190,7 @@ function openHelper(URL)
                       <%=cm.cmsInput("empty")%>
                       <%=cm.cmsInput("current_classification")%>
                       <label for="searchString">
-                      <%=cm.cmsText("code_column")%></label>
+                      <%=cm.cmsPhrase("Code")%></label>
                       <select title="Operator" name="relationOp" id="relationOp">
                         <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
                         <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
@@ -207,10 +207,10 @@ function openHelper(URL)
                       <%=cm.cmsTitle("list_of_values")%>
                     </td>
                   </tr>
-                  <tr><td><strong><%=cm.cmsText("in_relation_with_habitats_from")%></strong><br /></td></tr>
+                  <tr><td><strong><%=cm.cmsPhrase("in relation with habitat types from:")%></strong><br /></td></tr>
                   <tr>
                     <td bgcolor="#EEEEEE">
-                      <%=cm.cmsText("habitats_code_13")%>:&nbsp;
+                      <%=cm.cmsPhrase("in relation with")%>:&nbsp;
                       <label for="database" class="noshow"><%=cm.cms("database")%></label>
                       <select name="database" id="database">
                         <option value="<%=CodeDomain.SEARCH_EUNIS%>"><%=cm.cms("eunis_habitat_types")%></option>
@@ -257,7 +257,7 @@ function openHelper(URL)
                     //]]>
                     </script>
                     <script language="JavaScript" src="script/habitats-code-save-criteria.js" type="text/javascript"></script>
-                    <%=cm.cmsText("save_your_criteria")%>:
+                    <%=cm.cmsPhrase("Save your criteria")%>:
                     <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-code.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save_criteria")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                     <%=cm.cmsTitle("save_criteria")%>
                 <%

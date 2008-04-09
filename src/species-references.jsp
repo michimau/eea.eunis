@@ -81,40 +81,40 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("pick_references_show_species")%>
+                  <%=cm.cmsPhrase("Pick references, show species")%>
                 </h1>
                 <form name="eunis" method="get" action="species-references-result.jsp" onsubmit="return validateForm();">
                   <input type="hidden" name="typeForm" value="<%=ReferencesSearchCriteria.CRITERIA_SCIENTIFIC%>" />
                   <table summary="layout" width="100%" border="0">
                     <tr>
                       <td colspan="2">
-                        <%=cm.cmsText("species_references_22")%>
+                        <%=cm.cmsPhrase("References of species selected by references<br />(ex.: all the references recorded in <strong>1978</strong>)")%>
                         <br />
                         <br />
                         <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#EEEEEE">
                           <tr>
                             <td>
                               <strong>
-                                <%=cm.cmsText("search_will_provide_2")%>
+                                <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed):")%>
                               </strong>
                             </td>
                           </tr>
                           <tr>
                             <td>
                               <input title="<%=cm.cms("group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" />
-                                <label for="checkbox1"><%=cm.cmsText("group")%></label>
+                                <label for="checkbox1"><%=cm.cmsPhrase("Group")%></label>
                                 <%=cm.cmsTitle("group")%>
                               <input title="<%=cm.cms("order_column")%>" id="checkbox2" type="checkbox" name="showOrder" value="true" checked="checked" />
-                                <label for="checkbox2"><%=cm.cmsText("order_column")%></label>
+                                <label for="checkbox2"><%=cm.cmsPhrase("Order")%></label>
                                 <%=cm.cmsTitle("order_column")%>
                               <input title="<%=cm.cms("family")%>" id="checkbox3" type="checkbox" name="showFamily" value="true" checked="checked" />
-                                <label for="checkbox3"><%=cm.cmsText("family")%></label>
+                                <label for="checkbox3"><%=cm.cmsPhrase("Family")%></label>
                                 <%=cm.cmsTitle("family")%>
                               <input title="<%=cm.cms("scientific_name")%>" id="checkbox4" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" />
-                                <label for="checkbox4"><%=cm.cmsText("scientific_name")%></label>
+                                <label for="checkbox4"><%=cm.cmsPhrase("Scientific name")%></label>
                                 <%=cm.cmsTitle("scientific_name")%>
                               <input title="<%=cm.cms("vernacular_name")%>" id="checkbox5" type="checkbox" name="showVernacularName" value="true" />
-                                <label for="checkbox5"><%=cm.cmsText("vernacular_name")%></label>
+                                <label for="checkbox5"><%=cm.cmsPhrase("Vernacular Name")%></label>
                                 <%=cm.cmsTitle("vernacular_name")%>
                             </td>
                           </tr>
@@ -130,7 +130,7 @@
                               <img alt="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" />
                               <%=cm.cmsAlt("field_included")%>
                               &nbsp;
-                              <label for="author"><%=cm.cmsText("author")%></label>
+                              <label for="author"><%=cm.cmsPhrase("Author")%></label>
                             </td>
                             <td width="17%">
                               <select id="select1" title="<%=cm.cms("operator")%>" name="relationOpAuthor">
@@ -160,13 +160,13 @@
 
 
 %>
-                                <label for="date1"><%=cm.cmsText("year")%></label>
+                                <label for="date1"><%=cm.cmsPhrase("Year")%></label>
 <%
   }
   else
   {
 %>
-                                <label for="date3"><%=cm.cmsText("year")%></label>
+                                <label for="date3"><%=cm.cmsPhrase("Year")%></label>
 <%
   }
 %>
@@ -191,7 +191,7 @@
                                 <a title="<%=cm.cms("list_values_link")%>" href="javascript:openHelper('species-references-choice.jsp','date',1)"><img height="18" style="vertical-align:middle" alt="<%=cm.cms("publication_year")%>" src="images/helper/helper.gif" width="11" border="0" /></a>
                                 <%=cm.cmsTitle("list_values_link")%>
                                 <%=cm.cmsAlt("publication_year")%>
-                                <%=cm.cmsText("and")%>
+                                <%=cm.cmsPhrase("and")%>
                                 <label for="date2" class="noshow"><%=cm.cms("last_date")%></label>
                                 <input id="date2" title="<%=cm.cms("last_date")%>" alt="<%=cm.cms("last_date")%>" size="5" name="date1" value="<%=date1%>" />
                                 <%=cm.cmsLabel("last_date")%>
@@ -230,7 +230,7 @@
                               <img alt="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" />
                               <%=cm.cmsAlt("field_included")%>
                               &nbsp;
-                              <label for="title"><%=cm.cmsText("title")%></label>
+                              <label for="title"><%=cm.cmsPhrase("Title")%></label>
                             </td>
                             <td>
                               <select id="select3" title="<%=cm.cms("operator")%>" name="relationOpTitle">
@@ -255,7 +255,7 @@
                               <img alt="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" />
                               <%=cm.cmsAlt("field_included")%>
                               &nbsp;
-                              <label for="editor"><%=cm.cmsText("editor")%></label>
+                              <label for="editor"><%=cm.cmsPhrase("Editor")%></label>
                             </td>
                             <td>
                               <select id="select4" title="<%=cm.cms("operator")%>" name="relationOpEditor">
@@ -280,7 +280,7 @@
                               <img alt="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" />
                               <%=cm.cmsAlt("field_included")%>
                               &nbsp;
-                              <label for="publisher"><%=cm.cmsText("publisher")%></label>
+                              <label for="publisher"><%=cm.cmsPhrase("Publisher")%></label>
                             </td>
                             <td>
                               <select id="select5" title="<%=cm.cms("operator")%>" name="relationOpPublisher">
@@ -337,7 +337,7 @@
                       </script>
                       <br />
                       <script language="JavaScript" type="text/javascript" src="script/species-references-save-criteria.js"></script>
-                      <%=cm.cmsText("save_your_criteria")%>:
+                      <%=cm.cmsPhrase("Save your criteria")%>:
                       <a title="<%=cm.cms("save_open_link")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'species-references.jsp','5','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_open_link")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                       <%=cm.cmsTitle("save_open_link")%>
                       <%

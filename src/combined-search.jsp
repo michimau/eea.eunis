@@ -373,13 +373,13 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
-                <%=cm.cmsText("generic_combined-search-step1_01")%>
+                <%=cm.cmsPhrase("<h1>Combined search</h1>Search information using multiple characteristics")%>
                 <br />
                 <br />
                 <table summary="layout" border="0">
                   <tr>
                     <td id="status">
-                      <%=cm.cmsText("specify_the_search_criteria")%>
+                      <%=cm.cmsPhrase("Specify the search criteria:")%>
                     </td>
                   </tr>
                 </table>
@@ -517,9 +517,9 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
 %>
               <form method="post" action="combined-search.jsp" name="criteria">
               <strong>
-                <%=cm.cmsText("generic_combined-search-step1_04")%>
+                <%=cm.cmsPhrase("Step 1.")%>
               </strong>
-              <%=cm.cmsText("generic_combined-search-step1_05")%>
+              <%=cm.cmsPhrase("Search for:")%>
               <label for="natureobject" class="noshow"><%=cm.cms("combined_nature_object_type")%></label>
               <select title="<%=cm.cms("combined_nature_object_type")%>" size="1" name="natureobject" id="natureobject" onchange="javascript:changeNatureObject('<%=request.getParameter("action")%>')">
                 <option <%=NatureObject.equalsIgnoreCase("Species")?"selected=\"selected\"":""%> value="Species">
@@ -536,7 +536,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
               <%=cm.cmsInput("species")%>
               <%=cm.cmsInput("habitat_types")%>
               <%=cm.cmsInput("sites")%>
-              <%=cm.cmsText("generic_combined-search-step1_11")%>
+              <%=cm.cmsPhrase("matching the following criteria:")%>
               <br />
               <hr width="100%" size="1" align="left" />
               <br />
@@ -1003,7 +1003,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     <a title="<%=cm.cms("list_of_values")%>" href="javascript:choice('First_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="first_binocular" onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cms("list_of_values")%>" /></a>
               <%
                       if (rs.getString("OPERATOR").equalsIgnoreCase("Between")) {
-                        out.println(cm.cmsText("and"));
+                        out.println(cm.cmsPhrase("and"));
                         val = rs.getString("LAST_VALUE");
                         currentValue = val;
               %>
@@ -1036,7 +1036,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                   <%
               } else {
                   %>
-                  <a title="<%=cm.cms("add_root")%>" href="javascript:submitButtonForm('addroot','0');"><img border="0" src="images/mini/add.gif" width="13" height="13" title="<%=cm.cms("add_root")%>" alt="<%=cm.cms("add_root")%>" /></a>&nbsp;<%=cm.cmsText("add_root")%>
+                  <a title="<%=cm.cms("add_root")%>" href="javascript:submitButtonForm('addroot','0');"><img border="0" src="images/mini/add.gif" width="13" height="13" title="<%=cm.cms("add_root")%>" alt="<%=cm.cms("add_root")%>" /></a>&nbsp;<%=cm.cmsPhrase("Add root criterion")%>
                   <%
               }
                 rs.close();
@@ -1044,12 +1044,12 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 </form>
                 <br />
                 <strong>
-                  <%=cm.cmsText("combined_search_might_take_long_time")%>
+                  <%=cm.cmsPhrase("Note: Combined search might take a long time")%>
                 </strong>
                 <br />
                 <%
                 String criteria=tas.createCriteria(IdSession,NatureObject);
-                out.println(cm.cmsText("calculated_criteria"));
+                out.println(cm.cmsPhrase("Calculated search criteria expression:"));
                 combinedexplainedcriteria1=criteria.replace('#',' ').replace('[','(').replace(']',')').replaceAll("AND","<strong>AND</strong>").replaceAll("OR","<strong>OR</strong>");
                 out.println(combinedexplainedcriteria1);
 
@@ -1077,12 +1077,12 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       node=criteria.substring(pos_start+1,pos_end);
                       interpretedcriteria=tsas.InterpretCriteria(node,IdSession,NatureObject);
                       combinedlistcriteria1+= node + ": "+interpretedcriteria+"<br />";
-                      out.println(cm.cmsText("searching_for") + " " + interpretedcriteria+"...");
+                      out.println(cm.cmsPhrase("Searching for: {0}...",interpretedcriteria));
                       out.flush();
                       intermediatefilter=tsas.BuildFilter(node,IdSession,NatureObject);
-                      out.println(cm.cmsText("advanced_found") + "&nbsp;<strong>"+tsas.getResultCount() + "</strong>");
+                      out.println(cm.cmsPhrase("found: <strong>{0}</strong>",tsas.getResultCount()));
                       if(tsas.getResultCount()>=SQL_LIMIT) {
-                        String str = cm.cmsText("generic_combined-search-step2_13");
+                        String str = cm.cmsPhrase("<br />&nbsp;&nbsp;(Only the first SQL_LIMIT results were retrieved - this can lead to partial,incomplete or no combined search results at all - you should refine this criteria)");
                         if(str != null) {
                           str = str.replaceAll("SQL_LIMIT", "" + SQL_LIMIT);
                           out.println(str);
@@ -1117,12 +1117,12 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       node=criteria.substring(pos_start+1,pos_end);
                       interpretedcriteria=tsas.InterpretCriteria(node,IdSession,NatureObject);
                       combinedlistcriteria1+=node+": "+interpretedcriteria+"<br />";
-                      out.println(cm.cmsText("searching_for") + " " + interpretedcriteria+"...");
+                      out.println(cm.cmsPhrase("Searching for: {0}...",interpretedcriteria));
                       out.flush();
                       intermediatefilter=tsas.BuildFilter(node,IdSession,NatureObject);
-                      out.println(cm.cmsText("advanced_found") + " <strong>"+tsas.getResultCount() + "</strong>");
+                      out.println(cm.cmsPhrase("found: <strong>{0}</strong>",tsas.getResultCount()));
                       if(tsas.getResultCount()>=SQL_LIMIT) {
-                        String str = cm.cmsText("generic_combined-search-step2_13");
+                        String str = cm.cmsPhrase("<br />&nbsp;&nbsp;(Only the first SQL_LIMIT results were retrieved - this can lead to partial,incomplete or no combined search results at all - you should refine this criteria)");
                         if(str != null) {
                           str = str.replaceAll("SQL_LIMIT", "" + SQL_LIMIT);
                           out.println(str);
@@ -1158,12 +1158,12 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       node=criteria.substring(pos_start+1,pos_end);
                       interpretedcriteria=tsas.InterpretCriteria(node,IdSession,NatureObject);
                       combinedlistcriteria1+=node+": "+interpretedcriteria+"<br />";
-                      out.println(cm.cmsText("searching_for") + " " + interpretedcriteria + "...");
+                      out.println(cm.cmsPhrase("Searching for: {0}...",interpretedcriteria));
                       out.flush();
                       intermediatefilter=tsas.BuildFilter(node,IdSession,NatureObject);
-                      out.println(cm.cmsText("advanced_found") + " <strong>"+tsas.getResultCount() + "</strong>");
+                      out.println(cm.cmsPhrase("found: <strong>{0}</strong>",tsas.getResultCount()));
                       if(tsas.getResultCount()>=SQL_LIMIT) {
-                        String str = cm.cmsText("generic_combined-search-step2_13");
+                        String str = cm.cmsPhrase("<br />&nbsp;&nbsp;(Only the first SQL_LIMIT results were retrieved - this can lead to partial,incomplete or no combined search results at all - you should refine this criteria)");
                         if(str != null) {
                           str = str.replaceAll("SQL_LIMIT", "" + SQL_LIMIT);
                           out.println(str);
@@ -1205,7 +1205,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     str="SELECT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ("+str+")";
                   }
                   String query = tsas.ExecuteFilterSQL(str,"");
-                  out.println("<br /><strong>" + cm.cmsText("combined_total_matches") + "&nbsp;" + tsas.getResultCount() + "</strong><br /><br />");
+                  out.println("<br /><strong>" + cm.cmsPhrase("Total matches found in database:") + "&nbsp;" + tsas.getResultCount() + "</strong><br /><br />");
                   out.flush();
 
                   if (tsas.getResultCount() > 0) {
@@ -1372,7 +1372,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                   } else {
                   %>
                      <br />
-                     <%=cm.cmsText("no_results")%>
+                     <%=cm.cmsPhrase("No results were found matching your combined criteria.")%>
                      <br />
                   <%
                   }
@@ -1387,7 +1387,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                   <table summary="layout" width="100%" border="0">
                     <tr>
                       <td>
-                        <img alt="<%=cm.cms("advanced_expand_collapse")%>" border="0" style="vertical-align:middle" src="images/mini/<%=(exp.equals("yes")?"collapse.gif":"expand.gif")%>" /><a title="Expand-Collapse" href="combined-search.jsp?expandCriterias=<%=(exp.equals("yes")?"no":"yes")%>&amp;action=keep&amp;idsession=<%=IdSession%>&amp;natureobject=<%=NatureObject%>"><%=(exp.equalsIgnoreCase("yes") ? cm.cms("hide") : cm.cms("show"))%><%=cm.cmsText("generic_combined-search-step1_95")%></a>
+                        <img alt="<%=cm.cms("advanced_expand_collapse")%>" border="0" style="vertical-align:middle" src="images/mini/<%=(exp.equals("yes")?"collapse.gif":"expand.gif")%>" /><a title="Expand-Collapse" href="combined-search.jsp?expandCriterias=<%=(exp.equals("yes")?"no":"yes")%>&amp;action=keep&amp;idsession=<%=IdSession%>&amp;natureobject=<%=NatureObject%>"><%=(exp.equalsIgnoreCase("yes") ? cm.cms("hide") : cm.cms("show"))%><%=cm.cmsPhrase("&nbsp;saved search criteria")%></a>
                         <%=cm.cmsTitle("advanced_expand_collapse")%>
                         <%=cm.cmsTitle("hide")%>
                         <%=cm.cmsTitle("show")%>

@@ -181,18 +181,18 @@
                     String downloadLink = "javascript:openTSVDownload('reports/sites/tsv-sites-neighborhood.jsp?" + formBean.toURLParam(reportFields) + "&idsite=" + idSite + "&radius=" + radius +  "')";
                 %>
                       <h1>
-                        <%=cm.cmsText("site_neighborhood_1")%>
+                        <%=cm.cmsPhrase("Site neighborhood")%>
                       </h1>
                       <br />
-                      <%=cm.cmsText("sites_neighborhood-detail_05")%>
+                      <%=cm.cmsPhrase("Found")%>
                       <strong>
                       <%=paginator.countResults()%>
                       </strong>
-                      <%=cm.cmsText("sites_neighborhood-detail_06")%>
+                      <%=cm.cmsPhrase("site(s) in the range of aprox.")%>
                       <strong>
                         <%=radius%>
                       </strong>
-                      <%=cm.cmsText("sites_neighborhood-detail_07")%>
+                      <%=cm.cmsPhrase("km of &nbsp;site&nbsp;")%>
                       <strong>
                         <%=mainSite.getName()%>
                       </strong>
@@ -244,25 +244,25 @@
                         <thead>
                           <tr>
                             <th scope="col" nowrap="nowrap">
-                              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("source_data_set")%></a>
+                              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsPhrase("Source data set")%></a>
                               <%=cm.cmsTitle("sort_results_on_this_column")%>
                             </th>
                             <th scope="col" nowrap="nowrap">
-                              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>#dataTable"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("site_name")%></a>
+                              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>#dataTable"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsPhrase("Site name")%></a>
                               <%=cm.cmsTitle("sort_results_on_this_column")%>
                             </th>
                             <th scope="col" nowrap="nowrap" nowrap="nowrap" style="text-align : right;">
-                              <%=cm.cmsText("sites_neighborhood-detail_10")%>
+                              <%=cm.cmsPhrase("&nbsp;Distance (km)")%>
                             </th>
                             <th scope="col" nowrap="nowrap" style="text-align : center;">
 
-                              <%=cm.cmsText("longitude")%>
+                              <%=cm.cmsPhrase("Longitude")%>
                             </th>
                             <th scope="col" nowrap="nowrap" style="text-align : center;">
-                              <%=cm.cmsText("latitude")%>
+                              <%=cm.cmsPhrase("Latitude")%>
                             </th>
                             <th scope="col" align="right" nowrap="nowrap" style="text-align : right;">
-                              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("size_ha")%></a>
+                              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsPhrase("Size(ha)")%></a>
                               <%=cm.cmsTitle("sort_results_on_this_column")%>
                             </th>
                           </tr>
@@ -304,25 +304,25 @@
                         <thead>
                           <tr>
                             <th scope="col" nowrap="nowrap">
-                              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("source_data_set")%></a>
+                              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsPhrase("Source data set")%></a>
                               <%=cm.cmsTitle("sort_results_on_this_column")%>
                             </th>
                             <th scope="col" nowrap="nowrap">
-                              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>#dataTable"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("site_name")%></a>
+                              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>#dataTable"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsPhrase("Site name")%></a>
                               <%=cm.cmsTitle("sort_results_on_this_column")%>
                             </th>
                             <th scope="col" nowrap="nowrap" nowrap="nowrap" style="text-align : right;">
-                              <%=cm.cmsText("sites_neighborhood-detail_10")%>
+                              <%=cm.cmsPhrase("&nbsp;Distance (km)")%>
                             </th>
                             <th scope="col" nowrap="nowrap" style="text-align : center;">
 
-                              <%=cm.cmsText("longitude")%>
+                              <%=cm.cmsPhrase("Longitude")%>
                             </th>
                             <th scope="col" nowrap="nowrap" style="text-align : center;">
-                              <%=cm.cmsText("latitude")%>
+                              <%=cm.cmsPhrase("Latitude")%>
                             </th>
                             <th scope="col" align="right" nowrap="nowrap" style="text-align : right;">
-                              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("size_ha")%></a>
+                              <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NeighborhoodDetailSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>#dataTable"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsPhrase("Size(ha)")%></a>
                               <%=cm.cmsTitle("sort_results_on_this_column")%>
                             </th>
                           </tr>
@@ -338,7 +338,7 @@
                         <jsp:param name="mapLink" value="show"/>
                       </jsp:include>
                         <h1>
-                          <%=cm.cmsText("site_neighborhood_1")%>
+                          <%=cm.cmsPhrase("Site neighborhood")%>
                         </h1>
 
                         <br />

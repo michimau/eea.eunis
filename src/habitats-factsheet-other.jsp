@@ -50,10 +50,10 @@ Notes:
     <thead>
       <tr>
         <th width="25%" style="text-transform: capitalize; text-align: left;">
-           <%=cm.cmsText("name")%>
+           <%=cm.cmsPhrase("Name")%>
         </th>
         <th width="75%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("description")%>
+          <%=cm.cmsPhrase("Description")%>
         </th>
       </tr>
     </thead>

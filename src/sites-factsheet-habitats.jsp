@@ -66,34 +66,34 @@
       {
 %>
   <h2>
-    <%=cm.cmsText("ecological_information_habitats_within_site")%>
+    <%=cm.cmsPhrase("Ecological information: Habitats within site")%>
   </h2>
   <h3>
-    <%=cm.cmsText("sites_factsheet_114")%>
+    <%=cm.cmsPhrase("Habitats listed in Directive")%>
   </h3>
   <table summary="<%=cm.cms("sites_factsheet_114")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("code_column")%>
+          <%=cm.cmsPhrase("Code")%>
         </th>
         <th style="text-align : right; text-transform: capitalize;">
-          <%=cm.cmsText("english_name")%>
+          <%=cm.cmsPhrase("English name")%>
         </th>
         <th style="text-align : right; text-transform: capitalize;">
-          <%=cm.cmsText("cover_percent")%>
+          <%=cm.cmsPhrase("Cover(%)")%>
         </th>
         <th style="text-align : right; text-transform: capitalize;">
-          <%=cm.cmsText("representativity")%>
+          <%=cm.cmsPhrase("Representativity")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("sites_factsheet_118")%>
+          <%=cm.cmsPhrase("Relative surface")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("conservation")%>
+          <%=cm.cmsPhrase("Conservation")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("global")%>
+          <%=cm.cmsPhrase("Global")%>
         </th>
       </tr>
     </thead>
@@ -248,19 +248,19 @@
 %>
   <br />
   <h3>
-    <%=cm.cmsText("sites_factsheet_166")%>
+    <%=cm.cmsPhrase("Other habitat types mentioned in site")%>
   </h3>
   <table summary="<%=cm.cms("sites_factsheet_166")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("habitat_type_code")%>
+          <%=cm.cmsPhrase("Habitat type code")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("habitat_type_english_name")%>
+          <%=cm.cmsPhrase("Habitat type english name")%>
         </th>
         <th style="text-align : right; text-transform: capitalize;">
-          <%=cm.cmsText("cover_percent")%>
+          <%=cm.cmsPhrase("Cover(%)")%>
         </th>
       </tr>
     </thead>
@@ -330,28 +330,28 @@
 %>
   <br />
   <h3>
-    <%=cm.cmsText("ecological_information_habitats_within_site")%>
+    <%=cm.cmsPhrase("Ecological information: Habitats within site")%>
   </h3>
   <table summary="<%=cm.cms("ecological_information_habitats_within_site")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("habitat_type_english_name")%>
+          <%=cm.cmsPhrase("Habitat type english name")%>
         </th>
         <th style="text-align : right; text-transform: capitalize;">
-          <%=cm.cmsText("sites_factsheet_habitats_cover")%>
+          <%=cm.cmsPhrase("Cover (%)")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("representativity")%>
+          <%=cm.cmsPhrase("Representativity")%>
         </th>
         <th style="text-align : right; text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("sites_factsheet_habitats_surface")%>
+          <%=cm.cmsPhrase("Surface (ha)")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("conservation")%>
+          <%=cm.cmsPhrase("Conservation")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("global")%>
+          <%=cm.cmsPhrase("Global")%>
         </th>
       </tr>
     </thead>
@@ -400,7 +400,7 @@
 %>
   <br />
   <h3>
-    <%=cm.cmsText("habitat_type_not_eunis")%>
+    <%=cm.cmsPhrase("Habitat types not in EUNIS")%>
   </h3>
   <table summary="<%=cm.cms("habitat_type_not_eunis")%>" class="listing" width="90%">
     <thead>

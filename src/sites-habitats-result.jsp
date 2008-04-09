@@ -140,14 +140,14 @@
 <!-- MAIN CONTENT -->
             <%--    <jsp:param name="printLink" value="<%=pdfLink%>"/>--%>
                 <h1>
-                  <%=cm.cmsText("pick_habitat_type_show_sites")%>
+                  <%=cm.cmsPhrase("Pick habitat type, show sites")%>
                 </h1>
-                <%=cm.cmsText("sites_habitats-result_02")%>
+                <%=cm.cmsPhrase("You searched for sites containing")%>
                 <%=Utilities.getSourceHabitat(database, HabitatDomain.SEARCH_ANNEX_I.intValue(), HabitatDomain.SEARCH_BOTH.intValue())%>
-                <%=cm.cmsText("sites_habitats-result_03")%> <strong><%=formBean.getMainSearchCriteria().toHumanString()%>.</strong>
+                <%=cm.cmsPhrase("habitat types with the following characteristic: ")%> <strong><%=formBean.getMainSearchCriteria().toHumanString()%>.</strong>
                 <br />
                 <br />
-                <%=cm.cmsText("results_found_1")%>
+                <%=cm.cmsPhrase("Results found")%>
                 <strong>
                   <%=resultsCount%>
                 </strong>
@@ -175,7 +175,7 @@
             %>
                 <br />
                 <div class="grey_rectangle">
-                  <%=cm.cmsText("refine_your_search")%>
+                  <%=cm.cmsPhrase("Refine your search")%>
                   <form title="refine search results" name="criteriaSearch" method="get" onsubmit="return(check(<%=noCriteria%>));" action="">
                     <%=formBean.toFORMParam(filterSearch)%>
                     <label for="criteriaType" class="noshow"><%=cm.cms("criteria")%></label>
@@ -238,7 +238,7 @@
               if (criterias.length > 1)
               {
             %>
-                  <%=cm.cmsText("applied_filters_to_the_results_1")%>
+                  <%=cm.cmsPhrase("Applied filters to the results:")%>
                   <br />
             <%
               }
@@ -299,7 +299,7 @@
               {
             %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=HabitatSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("source_data_set")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=HabitatSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsPhrase("Source data set")%></a>
                           <%=cm.cmsTitle("sort_results_on_this_column")%>
                         </th>
             <%
@@ -308,7 +308,7 @@
               {
             %>
                         <th scope="col">
-                          <%=cm.cmsText("designation_type")%>
+                          <%=cm.cmsPhrase("Designation type")%>
                         </th>
             <%
               }
@@ -316,7 +316,7 @@
               {
             %>
                         <th scope="col">
-                          <%=cm.cmsText("site_code")%>
+                          <%=cm.cmsPhrase("Site code")%>
                         </th>
             <%
               }
@@ -324,7 +324,7 @@
               {
             %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=HabitatSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("site_name")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=HabitatSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsPhrase("Site name")%></a>
                           <%=cm.cmsTitle("sort_results_on_this_column")%>
                         </th>
             <%
@@ -333,10 +333,10 @@
               {
             %>
                         <th scope="col" style="text-align : center; white-space:nowrap;">
-                          <%=cm.cmsText("longitude")%>
+                          <%=cm.cmsPhrase("Longitude")%>
                         </th>
                         <th scope="col" style="text-align : center; white-space:nowrap;">
-                          <%=cm.cmsText("latitude")%>
+                          <%=cm.cmsPhrase("Latitude")%>
                         </th>
             <%
               }
@@ -344,7 +344,7 @@
               {
             %>
                         <th scope="col">
-                          <%=cm.cmsText("habitat_types_1")%>
+                          <%=cm.cmsPhrase("Habitat type(s)")%>
                         </th>
             <%
               }
@@ -477,7 +477,7 @@
               {
             %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=HabitatSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("source_data_set")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=HabitatSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, null == sortSourceDB)%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsPhrase("Source data set")%></a>
                           <%=cm.cmsTitle("sort_results_on_this_column")%>
                         </th>
             <%
@@ -486,7 +486,7 @@
               {
             %>
                         <th scope="col">
-                          <%=cm.cmsText("designation_type")%>
+                          <%=cm.cmsPhrase("Designation type")%>
                         </th>
             <%
               }
@@ -494,7 +494,7 @@
               {
             %>
                         <th scope="col">
-                          <%=cm.cmsText("site_code")%>
+                          <%=cm.cmsPhrase("Site code")%>
                         </th>
             <%
               }
@@ -502,7 +502,7 @@
               {
             %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=HabitatSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("site_name")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=HabitatSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, null == sortName)%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsPhrase("Site name")%></a>
                           <%=cm.cmsTitle("sort_results_on_this_column")%>
                         </th>
             <%
@@ -511,10 +511,10 @@
               {
             %>
                         <th scope="col" style="text-align : center; white-space:nowrap;">
-                          <%=cm.cmsText("longitude")%>
+                          <%=cm.cmsPhrase("Longitude")%>
                         </th>
                         <th scope="col" style="text-align : center; white-space:nowrap;">
-                          <%=cm.cmsText("latitude")%>
+                          <%=cm.cmsPhrase("Latitude")%>
                         </th>
             <%
               }
@@ -522,7 +522,7 @@
               {
             %>
                         <th scope="col">
-                          <%=cm.cmsText("habitat_types_1")%>
+                          <%=cm.cmsPhrase("Habitat type(s)")%>
                         </th>
             <%
               }

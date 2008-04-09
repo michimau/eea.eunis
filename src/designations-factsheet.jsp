@@ -176,16 +176,16 @@
 %>
                 <!--General information-->
                   <h1>
-                    <%=cm.cmsText( "designation_type" )%> : <%=fromWho%>
+                    <%=cm.cmsPhrase( "Designation type" )%> : <%=fromWho%>
                   </h1>
                 <h2>
-                  <%=cm.cmsText( "general_information" )%>
+                  <%=cm.cmsPhrase( "General information" )%>
                 </h2>
                 <table class="datatable" width="90%">
                   <%--Code--%>
                   <tr>
                     <td width="30%">
-                      <%=cm.cmsText( "code_column" )%>
+                      <%=cm.cmsPhrase( "Code" )%>
                     </td>
                     <td width="70%">
                       <strong>
@@ -196,7 +196,7 @@
                   <!--Source data set-->
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText( "source_data_set" )%>
+                      <%=cm.cmsPhrase( "Source data set" )%>
                     </td>
                     <td>
                       <strong>
@@ -206,7 +206,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText( "sites_designations-factsheet_06" )%>
+                      <%=cm.cmsPhrase( "Geographical coverage" )%>
                     </td>
                     <td>
 <%
@@ -230,7 +230,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText( "sites_designations-factsheet_07" )%>
+                      <%=cm.cmsPhrase( "Designation name in original language" )%>
                     </td>
                     <td>
                       &nbsp;
@@ -241,7 +241,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText( "sites_designations-factsheet_08" )%>
+                      <%=cm.cmsPhrase( "Designation name in English" )%>
                     </td>
                     <td>
                       &nbsp;
@@ -252,7 +252,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText( "sites_designations-factsheet_09" )%>
+                      <%=cm.cmsPhrase( "Designation name in French" )%>
                     </td>
                     <td>
                       &nbsp;
@@ -263,7 +263,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText( "sites_designations-factsheet_10" )%>
+                      <%=cm.cmsPhrase( "Designation abbreviation" )%>
                     </td>
                     <td>
                       &nbsp;
@@ -272,7 +272,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText( "sites_designations-factsheet_11" )%>
+                      <%=cm.cmsPhrase( "CDDA sites" )%>
                     </td>
 <%
         // Are CDDA sites or not
@@ -297,7 +297,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText( "sites_designations-factsheet_12" )%>
+                      <%=cm.cmsPhrase( "Area reference (ha)" )%>
                     </td>
                     <td>
                       &nbsp;
@@ -306,7 +306,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText( "total_area_ha" )%>
+                      <%=cm.cmsPhrase( "Total area(ha)" )%>
                     </td>
                     <td>
                       &nbsp;
@@ -322,12 +322,12 @@
         {
 %>
                 <h2>
-                  <%=cm.cmsText( "sites_designations-factsheet_14" )%>
+                  <%=cm.cmsPhrase( "National information" )%>
                 </h2>
                 <table summary="layout" class="datatable" width="90%">
                   <tr>
                     <td width="30%">
-                      <%=cm.cmsText( "sites_designations-factsheet_15" )%>
+                      <%=cm.cmsPhrase( "National Law" )%>
                     </td>
                     <td width="70%">
                       <%=Utilities.formatString(factsheet.getNationalLaw(), "&nbsp;")%>
@@ -335,7 +335,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText( "sites_designations-factsheet_16" )%>
+                      <%=cm.cmsPhrase( "National Category" )%>
                     </td>
                     <td>
                       <%=Utilities.formatString(factsheet.getNationalCategory(), "&nbsp;")%>
@@ -343,7 +343,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText( "sites_designations-factsheet_17" )%>
+                      <%=cm.cmsPhrase( "Reference for National Law" )%>
                     </td>
                     <td>
                       &nbsp;
@@ -352,7 +352,7 @@
                   </tr>
                    <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText( "sites_designations-factsheet_18" )%>
+                      <%=cm.cmsPhrase( "National Law Agency" )%>
                     </td>
                     <td>
                       <%=Utilities.formatString(factsheet.getNationalLawAgency(), "&nbsp;")%>
@@ -371,12 +371,12 @@
         {
 %>
                 <h2>
-                  <%=cm.cmsText( "references" )%>
+                  <%=cm.cmsPhrase( "References" )%>
                 </h2>
                 <table summary="layout" class="datatable" width="90%">
                   <tr>
                     <td width="30%">
-                      <%=cm.cmsText( "source" )%>
+                      <%=cm.cmsPhrase( "Source" )%>
                     </td>
                     <td width="70%">
                       <%=Utilities.formatString(factsheet.getDataSource(), "&nbsp;")%>
@@ -384,7 +384,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText( "sites_designations-factsheet_21" )%>
+                      <%=cm.cmsPhrase( "Number of reference" )%>
                     </td>
                     <td>
                       <%=Utilities.formatString(factsheet.getReferenceNumber(), "&nbsp;")%>
@@ -392,7 +392,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText( "sites_designations-factsheet_22" )%>
+                      <%=cm.cmsPhrase( "Reference date" )%>
                     </td>
                     <td>
                       &nbsp;
@@ -401,7 +401,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText( "sites_designations-factsheet_23" )%>
+                      <%=cm.cmsPhrase( "Remark" )%>
                     </td>
                     <td>
                       <%=Utilities.formatString(factsheet.getRemark(), "&nbsp;")%>
@@ -409,7 +409,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText( "sites_designations-factsheet_24" )%>
+                      <%=cm.cmsPhrase( "Source remark" )%>
                     </td>
                     <td>
                       <%=Utilities.formatString(factsheet.getRemarkSource(), "&nbsp;")%>
@@ -471,12 +471,12 @@
             publisher = Utilities.formatString( Utilities.FormatDatabaseFieldName( rs.getString( 5 ) ), "&nbsp;" );
 %>
                 <h2>
-                  <%=cm.cmsText("designation_factsheet_references")%>
+                  <%=cm.cmsPhrase("Designation references")%>
                 </h2>
                 <table summary="layout" class="datatable" width="90%">
                   <tr>
                     <td width="30%">
-                      <%=cm.cmsText("designation_factsheet_author")%>
+                      <%=cm.cmsPhrase("Author:")%>
                     </td>
                     <td width="70%">
                       <%=author%>
@@ -484,7 +484,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText("designation_factsheet_editor")%>
+                      <%=cm.cmsPhrase("Editor:")%>
                     </td>
                     <td>
                       <%=editor%>
@@ -492,7 +492,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText("designation_factsheet_date")%>
+                      <%=cm.cmsPhrase("Date:")%>
                     </td>
                     <td>
                       <%=date%>
@@ -500,7 +500,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText("designation_factsheet_title")%>
+                      <%=cm.cmsPhrase("Title:")%>
                     </td>
                     <td>
                       <%=title%>
@@ -508,7 +508,7 @@
                   </tr>
                   <tr>
                     <td width="20%">
-                      <%=cm.cmsText("designation_factsheet_publisher")%>
+                      <%=cm.cmsPhrase("Publisher:")%>
                     </td>
                     <td width="80%">
                       <%=publisher%>
@@ -537,7 +537,7 @@
           {
 %>
                 <h2>
-                  <%=cm.cmsText( "sites_designations-factsheet_25" )%>
+                  <%=cm.cmsPhrase( "Related sites for this designation" )%>
                 </h2>
 <%
             String ids = "";
@@ -562,16 +562,16 @@
                   <thead>
                     <tr>
                       <th scope="col">
-                        <%=cm.cmsText( "sites_designations-factsheet_28" )%>
+                        <%=cm.cmsPhrase( "Site code (in source data set)" )%>
                       </th>
                       <th scope="col">
-                        <%=cm.cmsText( "source_data_set" )%>
+                        <%=cm.cmsPhrase( "Source data set" )%>
                       </th>
                       <th scope="col">
-                        <%=cm.cmsText( "sites_designations-factsheet_06" )%>
+                        <%=cm.cmsPhrase( "Geographical coverage" )%>
                       </th>
                       <th scope="col">
-                        <%=cm.cmsText( "site_name" )%>
+                        <%=cm.cmsPhrase( "Site name" )%>
                       </th>
                     </tr>
                   </thead>
@@ -610,7 +610,7 @@
 %>
                 <br />
                 <strong>
-                  <%=cm.cmsText( "sites_designations-factsheet_30" )%>
+                  <%=cm.cmsPhrase( "This designation has not related sites." )%>
                 </strong>
 <%
             }
@@ -618,12 +618,12 @@
           else
           {
 %>
-                <a title="<%=cm.cms("show_sites_in_page")%>" href="designations-factsheet.jsp?showSites=true&amp;fromWhere=<%=fromWhere%>&amp;idDesign=<%=id%>&amp;geoscope=<%=geoscope%>"><%=cm.cmsText( "sites_designations-factsheet_31" )%></a>
+                <a title="<%=cm.cms("show_sites_in_page")%>" href="designations-factsheet.jsp?showSites=true&amp;fromWhere=<%=fromWhere%>&amp;idDesign=<%=id%>&amp;geoscope=<%=geoscope%>"><%=cm.cmsPhrase( "Show sites for this designation type" )%></a>
                 <%=cm.cmsTitle("show_sites_in_page")%>
                 <br />
                 <br />
                 <strong>
-                  <%=cm.cmsText( "sites_designations-factsheet_32" )%>
+                  <%=cm.cmsPhrase( "Warning: This might take a long time." )%>
                 </strong>
 <%
           }
@@ -634,7 +634,7 @@
                 <br />
                 <br />
                 <strong>
-                  <%=cm.cmsText( "sites_designations-factsheet_33")%>
+                  <%=cm.cmsPhrase( "The requested designation does not exists. ")%>
                 </strong>
                 <br />
                 <br />

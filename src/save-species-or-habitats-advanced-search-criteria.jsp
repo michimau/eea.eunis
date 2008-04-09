@@ -19,7 +19,7 @@
       WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title>
-      <%=cm.cmsText("save_criteria")%>
+      <%=cm.cmsPhrase("Save criteria")%>
     </title>
     <script language="JavaScript" type="text/javascript">
       //<![CDATA[
@@ -110,13 +110,13 @@
         <tr bgcolor="#EEEEEE">
           <td>
             <strong>
-              <%=cm.cmsText("generic_save-search_01")%>
+              <%=cm.cmsPhrase("Save search criteria:")%>
             </strong>
           </td>
         </tr>
         <tr>
           <td>
-            <%=cm.cmsText("generic_save-search_02")%>
+            <%=cm.cmsPhrase("Please enter few words to describe this criteria for later reference")%>
           </td>
         </tr>
         <tr>
@@ -133,9 +133,9 @@
             <%=cm.cmsTitle("bullet_alt")%>
             &nbsp;
             <strong>
-              <%=cm.cmsText("generic_save-search_03")%>
+              <%=cm.cmsPhrase("Remark:")%>
             </strong>
-            <%=cm.cmsText("generic_save-search_04")%>
+            <%=cm.cmsPhrase("By leaving this field empty, a default description (based on your selections) will be associated with this criteria.")%>
           </td>
         </tr>
 <%
@@ -145,11 +145,11 @@
     String saveOperationResult;
     if ( saveWithSuccess )
     {
-      saveOperationResult = cm.cmsText( "search_criteria_saved") + ".";
+      saveOperationResult = cm.cmsPhrase( "Your search criteria was saved") + ".";
     }
     else
     {
-      saveOperationResult = cm.cmsText( "criteria_not_saved" ) + ".";
+      saveOperationResult = cm.cmsPhrase( "Your search criteria could not be saved" ) + ".";
     }
 %>
         <tr>

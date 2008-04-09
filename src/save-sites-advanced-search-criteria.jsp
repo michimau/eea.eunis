@@ -183,13 +183,13 @@
         <tr bgcolor="#EEEEEE">
           <td>
             <strong>
-              <%=cm.cmsText("generic_save-search_01")%>
+              <%=cm.cmsPhrase("ave search criteria:")%>
             </strong>
           </td>
         </tr>
         <tr>
           <td>
-            <%=cm.cmsText("generic_save-search_02")%>
+            <%=cm.cmsPhrase("Please enter few words to describe this criteria for later reference")%>
           </td>
         </tr>
         <tr>
@@ -206,9 +206,9 @@
             <%=cm.cmsTitle("bullet_alt")%>
             &nbsp;
             <strong>
-            <%=cm.cmsText("generic_save-search_03")%>
+            <%=cm.cmsPhrase("Remark:")%>
             </strong>
-            <%=cm.cmsText("generic_save-search_04")%>
+            <%=cm.cmsPhrase("By leaving this field empty, a default description (based on your selections) will be associated with this criteria.")%>
           </td>
         </tr>
 <%

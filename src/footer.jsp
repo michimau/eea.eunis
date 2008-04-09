@@ -49,33 +49,33 @@
   if ( isAuthenticated )
   {
 %>
-  <a href="javascript:saveBookmark();" title="<%=cm.cms("footer_bookmark_title")%>"><%=cm.cmsText("bookmark")%></a>
-  <%=cm.cmsTitle("footer_bookmark_title")%>
+  <a href="javascript:saveBookmark();" title="<%=cm.cms("footer_bookmark_title")%>"><%=cm.cmsPhrase("Bookmark")%></a>
+  <%=cm.cmsTitle("Bookmark this page")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 <%
   }
 %>
-  <a href="http://biodiversity-chm.eea.europa.eu/information/database/" title="<%=cm.cms("footer_related_databases_title")%>"><%=cm.cmsText("footer_related_databases")%></a>
+  <a href="http://biodiversity-chm.eea.europa.eu/information/database/" title="<%=cm.cms("footer_related_databases_title")%>"><%=cm.cmsPhrase("Related databases")%></a>
   <%=cm.cmsTitle("footer_related_databases_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="mailto:<%=application.getInitParameter("EMAIL_FEEDBACK")%>" accesskey="9" title="<%=cm.cms("footer_contact_title")%>"><%=cm.cmsText("footer_contact")%></a>
+  <a href="mailto:<%=application.getInitParameter("EMAIL_FEEDBACK")%>" accesskey="9" title="<%=cm.cms("footer_contact_title")%>"><%=cm.cmsPhrase("Contact EUNIS")%></a>
   <%=cm.cmsTitle("footer_contact_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="news.jsp" title="<%=cm.cms("footer_news_title")%>"><%=cm.cmsText("news")%></a>
+  <a href="news.jsp" title="<%=cm.cms("footer_news_title")%>"><%=cm.cmsPhrase("EUNIS News")%></a>
   <%=cm.cmsTitle("footer_news_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="feedback.jsp" title="<%=cm.cms("footer_feedback_title")%>"><%=cm.cmsText("feedback")%></a>
+  <a href="feedback.jsp" title="<%=cm.cms("footer_feedback_title")%>"><%=cm.cmsPhrase("EUNIS Feedback")%></a>
   <%=cm.cmsTitle("footer_feedback_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="copyright.jsp" title="<%=cm.cms("footer_copyright_title")%>"><%=cm.cmsText("copyright_and_disclaimer_title")%></a>
+  <a href="copyright.jsp" title="<%=cm.cms("footer_copyright_title")%>"><%=cm.cmsPhrase("EUNIS Copyright and Disclaimer")%></a>
   <%=cm.cmsTitle("footer_copyright_title")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 
-  <a href="accessibility.jsp" title="<%=cm.cms("accessibility_statement")%>" accesskey="0"><%=cm.cmsText("footer_accessibility")%></a>
+  <a href="accessibility.jsp" title="<%=cm.cms("accessibility_statement")%>" accesskey="0"><%=cm.cmsPhrase("Eunis Accessibility statement")%></a>
   <%=cm.cmsTitle("accessibility_statement")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 </div>

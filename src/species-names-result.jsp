@@ -194,21 +194,21 @@
                    <%
                       if(newName) {
                       %>
-                        <%=cm.cmsText("species_names-result_mainTitleSN")%>
+                        <%=cm.cmsPhrase("Search by name results")%>
                       <%
                       } else
                       {
                         if (NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm)
                           {
                        %>
-                             <%=cm.cmsText("species_names-result_mainTitleSN")%>
+                             <%=cm.cmsPhrase("Search by name results")%>
                        <%
                           }
                           // Coming from form 2
                           if (NameSearchCriteria.CRITERIA_VERNACULAR.intValue() == typeForm)
                           {
                         %>
-                             <%=cm.cmsText("vernacular_names")%>
+                             <%=cm.cmsPhrase("Vernacular names")%>
                         <%
                           }
                       }
@@ -227,21 +227,21 @@
                       {
                         if(!formBean.getOldName().equalsIgnoreCase(formBean.getScientificName())) {
               %>
-                         <%=cm.cmsText("species_names-result_descriptionSearchN1")%>
+                         <%=cm.cmsPhrase("No match was found for ")%>
                          <strong><%=Utilities.treatURLSpecialCharacters(formBean.getOldName())%></strong>.&nbsp;
-                         <%=cm.cmsText("species_names-result_descriptionSearchN2")%>
+                         <%=cm.cmsPhrase("The closest phonetic match we found is: ")%>
                          <strong><%=Utilities.treatURLSpecialCharacters(formBean.getScientificName())%></strong>
               <%
                         } else {
               %>
-                         <%=cm.cmsText("species_names-result_descriptionSearchN2")%>
+                         <%=cm.cmsPhrase("The closest phonetic match we found is: ")%>
                          <strong><%=Utilities.treatURLSpecialCharacters(formBean.getScientificName())%></strong>
               <%
                         }
                       } else
                       {
             %>
-                         <%=cm.cmsText("species_names-result_descriptionSearchSN1")%>
+                         <%=cm.cmsPhrase("No match was found for ")%>
                          <strong>
             <%
                         String searchCriteria = "";
@@ -272,7 +272,7 @@
                         if ( formBean.getLanguage() != null )
                         {
             %>
-                           <%=cm.cmsText("species_names-result_descriptionSearchSN2")%>
+                           <%=cm.cmsPhrase("The closest phonetic match we found is: ")%>
                            <strong><%=formBean.getLanguage()%></strong>
             <%
                         }
@@ -284,7 +284,7 @@
                       </table>
                       <br />
                       <br />
-                        <%=cm.cmsText("results_found_1")%>:
+                        <%=cm.cmsPhrase("Results found")%>:
                         <strong>
                             <%=resultsCount%>
                         </strong>
@@ -315,7 +315,7 @@
                         <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#EEEEEE">
                         <tr>
                           <td>
-                              <%=cm.cmsText("refine_your_search")%>
+                              <%=cm.cmsPhrase("Refine your search")%>
                           </td>
                         </tr>
                         <tr>
@@ -388,7 +388,7 @@
             %>
                           <tr>
                             <td>
-                              <%=cm.cmsText("applied_filters_to_the_results")%>:
+                              <%=cm.cmsPhrase("Applied filters to the results")%>:
                             </td>
                           </tr>
             <%
@@ -462,7 +462,7 @@
                         if (showVernacularNames && !isExpanded)
                         {
                       %>
-                          <a title="<%=cm.cms("show_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("display_vernacular_names_in_results")%></a>
+                          <a title="<%=cm.cms("show_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display vernacular names in results table")%></a>
                           <%=cm.cmsTitle("show_vernacular_list")%>
                       <%
                         }
@@ -475,7 +475,7 @@
                         {
             %>
                           <th class="sorted" scope="col">
-                            <a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></a>
+                            <a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
                             <%=cm.cmsTitle("species_names-result_07_Title")%>
                           </th>
             <%
@@ -484,7 +484,7 @@
                         {
             %>
                           <th scope="col">
-                                <%=cm.cmsText("order_column")%>
+                                <%=cm.cmsPhrase("Order")%>
                           </th>
             <%
                         }
@@ -492,7 +492,7 @@
                         {
             %>
                           <th scope="col">
-                            <%=cm.cmsText("family")%>
+                            <%=cm.cmsPhrase("Family")%>
                           </th>
             <%
                         }
@@ -500,7 +500,7 @@
                         {
             %>
                           <th scope="col">
-                            <a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("scientific_name")%></a>
+                            <a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Scientific name")%></a>
                             <%=cm.cmsTitle("species_names-result_07_Title")%>
                           </th>
             <%
@@ -509,7 +509,7 @@
                         {
             %>
                           <th scope="col">
-                            <a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_VALID_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortValidName, (null == sortValidName) ? true : false)%>"><%=Utilities.getSortImageTag(sortValidName)%><%=cm.cmsText("valid_name")%></a>
+                            <a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_VALID_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortValidName, (null == sortValidName) ? true : false)%>"><%=Utilities.getSortImageTag(sortValidName)%><%=cm.cmsPhrase("Valid name")%></a>
                             <%=cm.cmsTitle("species_names-result_07_Title")%>
                           </th>
             <%
@@ -518,7 +518,7 @@
                         {
             %>
                           <th scope="col">
-                            <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("vernacular_names")%>[<%=cm.cmsText("hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
+                            <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
                           </th>
             <%
                         }
@@ -940,7 +940,7 @@
                         {
             %>
                           <th scope="col">
-                            <a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></a>
+                            <a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
                             <%=cm.cmsTitle("species_names-result_07_Title")%>
                           </th>
             <%
@@ -949,7 +949,7 @@
                         {
             %>
                           <th scope="col">
-                                <%=cm.cmsText("order_column")%>
+                                <%=cm.cmsPhrase("Order")%>
                           </th>
             <%
                         }
@@ -957,7 +957,7 @@
                         {
             %>
                           <th scope="col">
-                            <%=cm.cmsText("family")%>
+                            <%=cm.cmsPhrase("Family")%>
                           </th>
             <%
                         }
@@ -965,7 +965,7 @@
                         {
             %>
                           <th scope="col">
-                            <a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("scientific_name")%></a>
+                            <a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Scientific name")%></a>
                             <%=cm.cmsTitle("species_names-result_07_Title")%>
                           </th>
             <%
@@ -974,7 +974,7 @@
                         {
             %>
                           <th scope="col">
-                            <a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_VALID_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortValidName, (null == sortValidName) ? true : false)%>"><%=Utilities.getSortImageTag(sortValidName)%><%=cm.cmsText("valid_name")%></a>
+                            <a title="<%=cm.cms("species_names-result_07_Title")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NameSortCriteria.SORT_VALID_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortValidName, (null == sortValidName) ? true : false)%>"><%=Utilities.getSortImageTag(sortValidName)%><%=cm.cmsPhrase("Valid name")%></a>
                             <%=cm.cmsTitle("species_names-result_07_Title")%>
                           </th>
             <%
@@ -983,7 +983,7 @@
                         {
             %>
                           <th scope="col">
-                            <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("vernacular_names")%>[<%=cm.cmsText("hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
+                            <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
                           </th>
             <%
                         }

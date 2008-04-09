@@ -59,20 +59,20 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("logos_title")%>
+                  <%=cm.cmsPhrase("EUNIS Logo")%>
                 </h1>
                 <br />
-                <%=cm.cmsText("logos_description")%>
+                <%=cm.cmsPhrase("Please use the provided logos to link from your website to EUNIS Database.<br />In order to use them, save the images using right-click and use the link from the text box <br /> or<br /> link directly to our website by using the link provided on third column. <br />")%>
                 <table width="100%" summary="Logos">
                   <tr>
                     <th>
-                      <%=cm.cmsText("logos_header_image")%>
+                      <%=cm.cmsPhrase("Image")%>
                     </th>
                     <th>
-                      <%=cm.cmsText("logos_header_local")%>
+                      <%=cm.cmsPhrase("Local link (Save image to your site )")%>
                     </th>
                     <th>
-                      <%=cm.cmsText("logos_header_website")%>
+                      <%=cm.cmsPhrase("Direct link to website ( Picture on EUNIS website )")%>
                     </th>
                   </tr>
                   <tr>

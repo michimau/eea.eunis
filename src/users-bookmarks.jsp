@@ -144,7 +144,7 @@
               if(SessionManager.isAuthenticated())
               {
             %>
-                <h1><%=cm.cmsText("users_bookmarks_03")%></h1>
+                <h1><%=cm.cmsPhrase("EUNIS Database User Bookmarks")%></h1>
                 <form name="eunis" method="post" action="users-bookmarks.jsp">
                   <input type ="hidden" name="typeAction" value="<%=request.getParameter("typeAction")%>" />
                   <input type ="hidden" name="bookmarkNameHidden" value="<%=request.getParameter("bookmarkNameHidden")%>" />
@@ -161,11 +161,11 @@
                     String bookmName = (String)((TableColumns)bookmarksEdit.get(0)).getColumnsValues().get(0);
                     String bookmDescription = (String)((TableColumns)bookmarksEdit.get(0)).getColumnsValues().get(1);
             %>
-                    <%=cm.cmsText("edit_bookmark")%>
+                    <%=cm.cmsPhrase("Edit bookmark")%>
                     <br />
                     <br />
                     <label for="bookmarkNameEdit">
-                    <%=cm.cmsText("users_bookmarks_05")%>:
+                    <%=cm.cmsPhrase("Bookmark name")%>:
                     </label>
                     <br />
                     <textarea id="bookmarkNameEdit" title="<%=cm.cms("users_bookmarks_05")%>" name="bookmarkNameEdit" rows="3" cols="100"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(bookmName),"&nbsp;")%></textarea>
@@ -173,7 +173,7 @@
                     <br />
                     <br />
                     <label for="bookmarkDescrptionEdit">
-                    <%=cm.cmsText("users_bookmarks_06")%>:
+                    <%=cm.cmsPhrase("Bookmark description")%>:
                     </label>
                     <br />
                     <textarea id="bookmarkDescrptionEdit" title="<%=cm.cms("users_bookmarks_06")%>" name="bookmarkDescrptionEdit" rows="3" cols="100"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(bookmDescription),"&nbsp;")%></textarea>
@@ -187,7 +187,7 @@
                   else
                   {
             %>
-                    <%=cm.cmsText("users_bookmarks_07")%>
+                    <%=cm.cmsPhrase("This bookmark does not exist.")%>
             <%
                   }
                 }
@@ -203,7 +203,7 @@
              %>
                     <br />
                     <br />
-                    <%=cm.cmsText("users_bookmarks_08")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsText("back")%></a>
+                    <%=cm.cmsPhrase("Bookmark has been successfully updated.")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsPhrase("Back")%></a>
                     <%=cm.cmsTitle("users_bookmarks_09")%>
             <%
                   }
@@ -212,7 +212,7 @@
             %>
                     <br />
                     <br />
-                    <%=cm.cmsText("users_bookmarks_11")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsText("back")%></a>
+                    <%=cm.cmsPhrase("An error occurred while updating the bookmark.")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsPhrase("Back")%></a>
                     <%=cm.cmsTitle("users_bookmarks_09")%>
             <%
                   }
@@ -233,11 +233,11 @@
              %>
                     <br />
                     <strong>
-                      <%=cm.cmsText("delete_bookmark")%>
+                      <%=cm.cmsPhrase("Delete bookmark")%>
                     </strong>
                     <br />
                     <br />
-                    <%=cm.cmsText("users_bookmarks_13")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsText("back")%></a>
+                    <%=cm.cmsPhrase("Bookmark has been successfully deleted.")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsPhrase("Back")%></a>
                     <%=cm.cmsTitle("users_bookmarks_13")%>
             <%
                   }
@@ -246,11 +246,11 @@
             %>
                     <br />
                     <strong>
-                      <%=cm.cmsText("delete_bookmark")%>
+                      <%=cm.cmsPhrase("Delete bookmark")%>
                     </strong>
                     <br />
                     <br />
-                    <%=cm.cmsText("users_bookmarks_14")%> <a title="<%=cm.cms("users_bookmarks_15")%>" href="users-bookmarks.jsp"><%=cm.cmsText("users_bookmarks_15")%></a>
+                    <%=cm.cmsPhrase("An error occurred while deleting the bookmark.")%> <a title="<%=cm.cms("users_bookmarks_15")%>" href="users-bookmarks.jsp"><%=cm.cmsPhrase("Bookmarks list")%></a>
                     <%=cm.cmsTitle("users_bookmarks_15")%>
             <%
                   }
@@ -266,10 +266,10 @@
                         Sel.
                       </td>
                       <td>
-                        <%=cm.cmsText("bookmark")%>
+                        <%=cm.cmsPhrase("Bookmark")%>
                       </td>
                       <td>
-                        <%=cm.cmsText("description")%>
+                        <%=cm.cmsPhrase("Description")%>
                       </td>
                     </tr>
             <%
@@ -368,7 +368,7 @@
                   else
                   {
             %>
-                   <span style="color:red"><%=cm.cmsText("users_bookmarks_19")%></span>
+                   <span style="color:red"><%=cm.cmsPhrase("There are no saved bookmarks.")%></span>
             <%
                   }
                 }
@@ -381,7 +381,7 @@
             %>
                 <br />
                 <br />
-                <span style="color : red"><%=cm.cmsText("users_bookmarks_20")%></span>
+                <span style="color : red"><%=cm.cmsPhrase("You must be authenticated and have the proper right to access this page.")%></span>
                 <br />
                 <br />
             <%

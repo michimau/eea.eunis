@@ -228,12 +228,12 @@
               </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                    <%=cm.cmsText("international_threat_status")%>
+                    <%=cm.cmsPhrase("International Threat Status")%>
                 </h1>
                 <table summary="layout" width="100%" border="0">
                   <tr>
                     <td>
-                      <%=cm.cmsText("species_threat-international_20")%>
+                      <%=cm.cmsPhrase("Search species threatened at international level <br />(ex.: search birds from <strong>Europe</strong> which are marked as <strong>declining</strong>)")%>
                       <br />
                       <br />
                       <form name="eunis" method="post" action="species-threat-international-result.jsp">
@@ -241,26 +241,26 @@
                         <tr>
                           <td>
                             <strong>
-                              <%=cm.cmsText("search_will_provide_2")%>
+                              <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed):")%>
                             </strong>
                           </td>
                         </tr>
                         <tr>
                           <td>
                             <input title="<%=cm.cms("group")%>" id="checkbox2" type="checkbox" name="showGroup" value="true" <%=(showGroup ? "checked=\"checked\"" : "")%> />
-                              <label for="checkbox2"><%=cm.cmsText("group")%></label>
+                              <label for="checkbox2"><%=cm.cmsPhrase("Group")%></label>
                               <%=cm.cmsTitle("group")%>
                             <input title="<%=cm.cms("geographic_region")%>" id="checkbox5" type="checkbox" name="showGeo" value="true" <%=(showGeo ? "checked=\"checked\"" : "")%> />
-                              <label for="checkbox5"><%=cm.cmsText("geographical_region")%></label>
+                              <label for="checkbox5"><%=cm.cmsPhrase("Geographical region")%></label>
                               <%=cm.cmsTitle("geographic_region")%>
                             <input title="<%=cm.cms("status")%>" id="checkbox1" type="checkbox" name="showStatus" value="true" <%=(showStatus ? "checked=\"checked\"" : "")%> />
-                              <label for="checkbox1"><%=cm.cmsText("threat_status")%></label>
+                              <label for="checkbox1"><%=cm.cmsPhrase("Threat Status")%></label>
                               <%=cm.cmsTitle("status")%>
                             <input title="<%=cm.cms("scientific_name")%>" id="checkbox3" type="checkbox" name="true" value="true" disabled="disabled" checked="checked" />
-                              <label for="checkbox3"><%=cm.cmsText("scientific_name")%></label>
+                              <label for="checkbox3"><%=cm.cmsPhrase("Scientific name")%></label>
                               <%=cm.cmsTitle("scientific_name")%>
                             <input title="<%=cm.cms("vernacular_name")%>" id="checkbox4" type="checkbox" name="showVernacularNames" value="true" <%=(showVernacularNames ? "checked=\"checked\"" : "")%> />
-                              <label for="checkbox4"><%=cm.cmsText("vernacular_names")%></label>
+                              <label for="checkbox4"><%=cm.cmsPhrase("Vernacular names")%></label>
                               <%=cm.cmsTitle("vernacular_name")%>
                           </td>
                         </tr>
@@ -313,16 +313,16 @@
                                 if (anyGroupSelected) {
                             %>
                                 <strong> <% //any group%>
-                                  <%=cm.cmsText("any_group")%>
+                                  <%=cm.cmsPhrase("Any group")%>
                                 </strong>
 
                                 <br />
                                 &nbsp;
                                 <strong>   <% //and%>
-                                  <%=cm.cmsText("and")%>
+                                  <%=cm.cmsPhrase("and")%>
                                 </strong>
                                 &nbsp;  <% //area%>
-                                <%=cm.cmsText("area")%>
+                                <%=cm.cmsPhrase("Area")%>
                               <%
                                 } else {
                                   String groupNameDispayed = (-1 == groupName.lastIndexOf("Mosses") ? groupName : "Mosses & Liverworts");
@@ -334,10 +334,10 @@
                                   <br />
                                     &nbsp;
                                   <strong>
-                                    <%=cm.cmsText("and")%>
+                                    <%=cm.cmsPhrase("and")%>
                                   </strong>
                                   &nbsp;
-                                  <%=cm.cmsText("area")%>
+                                  <%=cm.cmsPhrase("Area")%>
                               <%
                                 }
                               %>
@@ -396,16 +396,16 @@
                                 if (anyGroupSelected) {
                             %>
                                 <strong>
-                                  <%=cm.cmsText("any_group")%>
+                                  <%=cm.cmsPhrase("Any group")%>
                                 </strong>
 
                                 <br />
                                 &nbsp;
                                 <strong>
-                                  <%=cm.cmsText("and")%>
+                                  <%=cm.cmsPhrase("and")%>
                                 </strong>
                                 &nbsp;
-                                <%=cm.cmsText("area")%>
+                                <%=cm.cmsPhrase("Area")%>
                               <%
                                 } else {
                                   String groupNameDispayed = (-1 == groupName.lastIndexOf("Mosses") ? groupName : "Mosses & Liverworts");
@@ -417,10 +417,10 @@
                                   <br />
                                     &nbsp;
                                   <strong>
-                                    <%=cm.cmsText("and")%>
+                                    <%=cm.cmsPhrase("and")%>
                                   </strong>
                                   &nbsp;
-                                  <%=cm.cmsText("area")%>
+                                  <%=cm.cmsPhrase("Area")%>
                               <%
                                 }
                               %>
@@ -434,10 +434,10 @@
                                  <br />
 
                                  <strong>
-                                 <%=cm.cmsText("and")%>
+                                 <%=cm.cmsPhrase("and")%>
                                  </strong>
                                  &nbsp;  <% //threat status%>
-                                <%=cm.cmsText("threat_status")%>
+                                <%=cm.cmsPhrase("Threat Status")%>
                                 &nbsp;
                                 <label for="Status" class="noshow"><%=cm.cms("status")%></label>
                                 <select title="<%=cm.cms("status")%>" name="Status" id="Status" onchange="MM_jumpMenuInternational('parent',this,0)">
@@ -496,7 +496,7 @@
                               <tr>
                                 <td>&nbsp; <br />
                                   <input title="<%=cm.cms("save_criteria")%>" id="saveCriteria" type="checkbox" name="saveCriteria" value="true" <%=isSaveCriteriaChecked%> /> <%=cm.cmsTitle("save_criteria")%>
-                                    <label for="saveCriteria"><%=cm.cmsText("species_threat-international_10")%></label>
+                                    <label for="saveCriteria"><%=cm.cmsPhrase("Save this criteria")%></label>
                                     <a title="<%=cm.cms("save_criteria")%>" href="javascript:checkSaveCriteria()"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                                     <%=cm.cmsTitle("save_criteria")%>
                                 </td>

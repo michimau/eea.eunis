@@ -169,20 +169,20 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("habitats_taxonomic-browser_01")%>
+                  <%=cm.cmsPhrase("Species taxonomic classification")%>
                 </h1>
                 <noscript>
                   <br />
                   <br />
                   <span style="color: red;">
                     <%=cm.cms("no_javascript_alternative_page")%>:
-                    <a href="species-taxonomy.jsp"><%=cm.cmsText("habitats_taxonomic-browser_01")%></a>.
+                    <a href="species-taxonomy.jsp"><%=cm.cmsPhrase("Species taxonomic classification")%></a>.
                   </span>
                 </noscript>
                 <table summary="layout" width="100%" border="0">
                   <tr>
                     <td>
-                      <%=cm.cmsText("habitats_taxonomic-browser_02")%>
+                      <%=cm.cmsPhrase("Taxonomic tree view of species<br /><br /><strong>Warning: Expanding a branch with many species (Animalia) will take a longer time</strong>")%>
                       <br />
                       <br />
                       <%
@@ -194,7 +194,7 @@
                           {
                       %>
                             <form name="setings" action="species-taxonomic-browser.jsp" method="post">
-                              <%=cm.cmsText("expand_up_to")%>:
+                              <%=cm.cmsPhrase("Expand up to")%>:
                              <label for="select1" class="noshow"><%=cm.cms("depth")%></label>
                              <select id="select1" title="<%=cm.cms("depth")%>" name="depth" onchange="MM_jumpMenu('parent',this,0)">
                                 <option value="species-taxonomic-browser.jsp" <%=(request.getParameter("level")==null)?"selected=\"selected\"":""%> >
@@ -288,7 +288,7 @@
                          <tr style="background-color:#CCCCCC">
                           <td>
                             <strong>
-                              <%=cm.cmsText("habitats_taxonomic-browser_06")%>
+                              <%=cm.cmsPhrase("Species related (only for finals taxonomies)")%>
                             </strong>
                           </td>
                         </tr>
@@ -298,13 +298,13 @@
                               <tr>
                                 <th title="<%=cm.cms("sort_results_on_this_column")%>">
                                   <strong>
-                                    <%=cm.cmsText("group_name")%>
+                                    <%=cm.cmsPhrase("Group name")%>
                                     <%=cm.cmsTitle("sort_results_on_this_column")%>
                                   </strong>
                                 </th>
                                 <th title="<%=cm.cms("sort_results_on_this_column")%>">
                                   <strong>
-                                    <%=cm.cmsText("scientific_name")%>
+                                    <%=cm.cmsPhrase("Scientific name")%>
                                     <%=cm.cmsTitle("sort_results_on_this_column")%>
                                   </strong>
                                 </th>
@@ -337,7 +337,7 @@
             %>
                               <tr>
                               <td>
-                              <span style="color : red;"><%=cm.cmsText("habitats_taxonomic-browser_09")%>.</span>
+                              <span style="color : red;"><%=cm.cmsPhrase("There are no species in database related to selected category")%>.</span>
                               </td>
                               </tr>
             <%

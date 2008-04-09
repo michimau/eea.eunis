@@ -271,13 +271,13 @@
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
-                  <%=cm.cmsText("generic_combined-search-step3_01")%>
+                  <%=cm.cmsPhrase("<h1>Combined search</h1>Search information using multiple characteristics")%>
                   <br />
                   <br />
                   <table summary="layout" border="0">
                     <tr>
                       <td id="status">
-                        <%=cm.cmsText("specify_the_search_criteria")%>
+                        <%=cm.cmsPhrase("Specify the search criteria:")%>
                       </td>
                     </tr>
                   </table>
@@ -351,21 +351,21 @@
               if(!skip.equalsIgnoreCase(NatureObject)) {
               %>
               <form method="post" action="combined-search-3.jsp" name="criteria">
-              <strong><%=cm.cmsText("combined_step_3")%></strong>
+              <strong><%=cm.cmsPhrase("Step 3.")%></strong>
               <%
                 if(FirstNatureObject.equalsIgnoreCase("Species")) {
                   %>
-                  <%=cm.cmsText("generic_combined-search-step3_03")%>
+                  <%=cm.cmsPhrase("Species will be related to Sites meeting the following criteria:")%>
                   <%
                 }
                 if(FirstNatureObject.equalsIgnoreCase("Habitat")) {
                   %>
-                  <%=cm.cmsText("generic_combined-search-step3_04")%>
+                  <%=cm.cmsPhrase("Habitat types will be related to Species meeting the following criteria:")%>
                   <%
                 }
                 if(FirstNatureObject.equalsIgnoreCase("Sites")) {
                   %>
-                  <%=cm.cmsText("generic_combined-search-step3_05")%>
+                  <%=cm.cmsPhrase("Sites will be related to Habitat types meeting the following criteria:")%>
                   <%
                 }
               %>
@@ -837,7 +837,7 @@
                     <a title="<%=cm.cms("list_of_values")%>" href="javascript:choice('First_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="first_binocular" onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cms("list_of_values")%>" /></a>
               <%
                       if (rs.getString("OPERATOR").equalsIgnoreCase("Between")) {
-                        out.println(cm.cmsText("and"));
+                        out.println(cm.cmsPhrase("and"));
                         val = rs.getString("LAST_VALUE");
                         currentValue = val;
               %>
@@ -861,7 +861,7 @@
 
                   <% if(skip == null || skip.equalsIgnoreCase("")) { %>
                     <br />
-                    <%=cm.cmsText("combined_specify_relation")%>
+                    <%=cm.cmsPhrase("Please specify the relation between Species, Habitat types and Sites:")%>
                     <br />
                     <select title="<%=cm.cms("combined_search_type")%>" name="SearchType" id="SearchType">
                     <% if(FirstNatureObject.equalsIgnoreCase("Species")) { %>
@@ -922,7 +922,7 @@
                   <%
               } else {
                 %>
-                  <a title="<%=cm.cms("add_root")%>" href="javascript:submitButtonForm('addroot','0');"><img border="0" src="images/mini/add.gif" width="13" height="13" title="<%=cm.cms("add_root")%>" alt="<%=cm.cms("add_root")%>" /></a>&nbsp;<%=cm.cmsText("add_root")%>
+                  <a title="<%=cm.cms("add_root")%>" href="javascript:submitButtonForm('addroot','0');"><img border="0" src="images/mini/add.gif" width="13" height="13" title="<%=cm.cms("add_root")%>" alt="<%=cm.cms("add_root")%>" /></a>&nbsp;<%=cm.cmsPhrase("Add root criterion")%>
                 <%
               }
                 rs.close();
@@ -930,12 +930,12 @@
               </form>
                 <br />
                 <strong>
-                  <%=cm.cmsText("combined_search_might_take_long_time")%>
+                  <%=cm.cmsPhrase("Note: Combined search might take a long time")%>
                 </strong>
                 <br />
                 <%
                 String criteria=tas.createCriteria(IdSession,NatureObject);
-                out.println(cm.cmsText("calculated_criteria"));
+                out.println(cm.cmsPhrase("Calculated search criteria expression:"));
                 combinedexplainedcriteria3=criteria.replace('#',' ').replace('[','(').replace(']',')').replaceAll("AND","<strong>AND</strong>").replaceAll("OR","<strong>OR</strong>");
                 out.println(combinedexplainedcriteria3);
 
@@ -963,12 +963,12 @@
                       node=criteria.substring(pos_start+1,pos_end);
                       interpretedcriteria=tsas.InterpretCriteria(node,IdSession,NatureObject);
                       combinedlistcriteria3+=node+": "+interpretedcriteria+"<br />";
-                      out.println(cm.cmsText("searching_for") + " " + interpretedcriteria+"...");
+                      out.println(cm.cmsPhrase("Searching for: {0}...",interpretedcriteria));
                       out.flush();
                       intermediatefilter=tsas.BuildFilter(node,IdSession,NatureObject);
-                      out.println(cm.cmsText("advanced_found") + " <strong>"+tsas.getResultCount() + "</strong>");
+                      out.println(cm.cmsPhrase("found: <strong>{0}</strong>",tsas.getResultCount()));
                       if(tsas.getResultCount()>=SQL_LIMIT) {
-                          String str = cm.cmsText("generic_combined-search-step3_13");
+                          String str = cm.cmsPhrase("<br />&nbsp;&nbsp;(Only the first SQL_LIMIT results were retrieved - this can lead to partial,incomplete or no combined search results at all - you should refine this criteria)");
                           if ( str != null )
                           {
                             str = str.replaceAll( "SQL_LIMIT", "" + SQL_LIMIT );
@@ -1004,12 +1004,12 @@
                       node=criteria.substring(pos_start+1,pos_end);
                       interpretedcriteria=tsas.InterpretCriteria(node,IdSession,NatureObject);
                       combinedlistcriteria3+=node+": "+interpretedcriteria+"<br />";
-                      out.println(cm.cmsText("searching_for") + " " + interpretedcriteria+"...");
+                      out.println(cm.cmsPhrase("Searching for: {0}...",interpretedcriteria));
                       out.flush();
                       intermediatefilter=tsas.BuildFilter(node,IdSession,NatureObject);
-                      out.println(cm.cmsText("advanced_found") + " <strong>"+tsas.getResultCount() + "</strong>");
+                      out.println(cm.cmsPhrase("found: <strong>{0}</strong>",tsas.getResultCount()));
                       if(tsas.getResultCount()>=SQL_LIMIT) {
-                          String str = cm.cmsText("generic_combined-search-step3_13");
+                          String str = cm.cmsPhrase("<br />&nbsp;&nbsp;(Only the first SQL_LIMIT results were retrieved - this can lead to partial,incomplete or no combined search results at all - you should refine this criteria)");
                           if ( str != null )
                           {
                             str = str.replaceAll( "SQL_LIMIT", "" + SQL_LIMIT );
@@ -1046,12 +1046,12 @@
                       node=criteria.substring(pos_start+1,pos_end);
                       interpretedcriteria=tsas.InterpretCriteria(node,IdSession,NatureObject);
                       combinedlistcriteria3+=node+": "+interpretedcriteria+"<br />";
-                      out.println(cm.cmsText("searching_for") + " " + interpretedcriteria + "...");
+                      out.println(cm.cmsPhrase("Searching for: {0}...",interpretedcriteria));
                       out.flush();
                       intermediatefilter=tsas.BuildFilter(node,IdSession,NatureObject);
-                      out.println(cm.cmsText("advanced_found") + " <strong>"+tsas.getResultCount() + "</strong>");
+                      out.println(cm.cmsPhrase("found: <strong>{0}</strong>",tsas.getResultCount()));
                       if(tsas.getResultCount()>=SQL_LIMIT) {
-                          String str = cm.cmsText("generic_combined-search-step3_13");
+                          String str = cm.cmsPhrase("<br />&nbsp;&nbsp;(Only the first SQL_LIMIT results were retrieved - this can lead to partial,incomplete or no combined search results at all - you should refine this criteria)");
                           if ( str != null )
                           {
                             str = str.replaceAll( "SQL_LIMIT", "" + SQL_LIMIT );
@@ -1094,7 +1094,7 @@
                     str="SELECT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ("+str+")";
                   }
                   String query = tsas.ExecuteFilterSQL(str,"");
-                  out.println("<br /><strong>" + cm.cmsText("combined_total_matches") + "&nbsp;" + tsas.getResultCount() + "</strong><br /><br />");
+                  out.println("<br /><strong>" + cm.cmsPhrase("Total matches found in database:") + "&nbsp;" + tsas.getResultCount() + "</strong><br /><br />");
                   out.flush();
 
                   if (tsas.getResultCount() > 0) {
@@ -1333,7 +1333,7 @@
                       if(bResults > 0) {
                       %>
                         <hr width="100%" size="1" align="left" />
-                        <br /><%=bResults%> <%=FirstNatureObject%> <%=cm.cmsText("generic_combined-search-step3_14")%><br /><br />
+                        <br /><%=bResults%> <%=FirstNatureObject%> <%=cm.cmsPhrase("matching the combination of criteria were found.")%><br /><br />
                         <form name="search" action="select-columns.jsp" method="post">
                           <input type="submit" id="ProceedResults0" title="<%=cm.cms("proceed_to_results")%>"
                                  name="Proceed to results" value="<%=cm.cms("proceed_to_results")%>" class="searchButton" />
@@ -1348,7 +1348,7 @@
                           <input type="hidden" name="sourcedbcriteria" value="<%=sourcedbcriteria.replaceAll("'","")%>" />
                         </form>
                       <%} else {%>
-                        <br /><%=cm.cmsText("no")%>&nbsp;<%=FirstNatureObject%> <%=cm.cmsText("generic_combined-search-step3_14")%><br />
+                        <br /><%=cm.cmsPhrase("no")%>&nbsp;<%=FirstNatureObject%> <%=cm.cmsPhrase("matching the combination of criteria were found.")%><br />
                       <%
                       }
                       out.println("</div>");
@@ -1481,7 +1481,7 @@
                     if(bResults > 0) {
                       %>
                       <hr width="100%" size="1" align="left" />
-                      <br /><%=bResults%> <%=cm.cmsText("generic_combined-search-step3_15")%><br /><br />
+                      <br /><%=bResults%> <%=cm.cmsPhrase("species matching the combination of criteria were found.")%><br /><br />
                       <form name="search" action="select-columns.jsp" method="post">
                         <input type="submit" name="Proceed to results" id="ProceedResults" title="<%=cm.cms("proceed_to_results")%>"
                                value="<%=cm.cms("proceed_to_results")%>" class="searchButton" />
@@ -1497,7 +1497,7 @@
                       </form>
                       <%} else {%>
                       <br />
-                      <%=cm.cmsText("generic_combined-search-step3_16")%>
+                      <%=cm.cmsPhrase("No species matching the combination of criteria were found.")%>
                       <br />
                       <%
                     }
@@ -1623,7 +1623,7 @@
                     if(bResults > 0) {
                       %>
                       <hr width="100%" size="1" align="left" />
-                      <br /><%=bResults%> <%=cm.cmsText("generic_combined-search-step3_17")%><br /><br />
+                      <br /><%=bResults%> <%=cm.cmsPhrase("habitat types matching the combination of criteria were found.")%><br /><br />
                       <form name="search" action="select-columns.jsp" method="post">
                         <input type="submit" name="Proceed to results" title="<%=cm.cms("proceed_to_results")%>"
                                value="<%=cm.cms("proceed_to_results")%>" id="ProceedResults2" class="searchButton" />
@@ -1641,7 +1641,7 @@
                     } else {
                       %>
                       <br />
-                      <%=cm.cmsText("generic_combined-search-step3_18")%>
+                      <%=cm.cmsPhrase("No habitat types matching the combination of criteria were found.")%>
                       <br />
                       <%
                     }
@@ -1772,7 +1772,7 @@
                     if(bResults > 0) {
                     %>
                     <hr width="100%" size="1" align="left" />
-                    <br /><%=bResults%> <%=cm.cmsText("generic_combined-search-step3_19")%><br /><br />
+                    <br /><%=bResults%> <%=cm.cmsPhrase("sites matching the combination of criteria were found.")%><br /><br />
                     <form name="search" action="select-columns.jsp" method="post">
                       <input type="submit" name="Proceed to results" id="ProceedResults3" title="<%=cm.cms("proceed_to_results")%>"
                              value="<%=cm.cms("proceed_to_results")%>" class="searchButton" />
@@ -1790,14 +1790,14 @@
                     } else {
                     %>
                     <br />
-                    <%=cm.cmsText("no_sites_found")%>
+                    <%=cm.cmsPhrase("No sites matching the combination of criteria were found.")%>
                     <br />
                     <%
                     }
                   }
                 } else { %>
                    <br />
-                     <%=cm.cmsText("no_results_found_1")%>
+                     <%=cm.cmsPhrase("No results were found.")%>
                    <br />
                 <% }
                 }
@@ -1967,7 +1967,7 @@
                   if(bResults > 0) {
                       %>
                       <hr width="100%" size="1" align="left" />
-                      <br /><%=bResults%> <%=cm.cmsText("generic_combined-search-step3_15")%><br /><br />
+                      <br /><%=bResults%> <%=cm.cmsPhrase("species matching the combination of criteria were found.")%><br /><br />
                       <form name="search" action="select-columns.jsp" method="post">
                         <input type="submit" id="ProceedResults4" title="<%=cm.cms("proceed_to_results")%>" name="Proceed to results"
                                value="<%=cm.cms("proceed_to_results")%>" class="searchButton" />
@@ -1983,7 +1983,7 @@
                       </form>
                       <%} else {%>
                       <br />
-                      <%=cm.cmsText("generic_combined-search-step3_16")%>
+                      <%=cm.cmsPhrase("No species matching the combination of criteria were found.")%>
                       <br />
                       <%
                   }
@@ -2134,7 +2134,7 @@
                   if(bResults > 0) {
                         %>
                         <hr width="100%" size="1" align="left" />
-                        <br /><%=bResults%> <%=cm.cmsText("generic_combined-search-step3_17")%><br /><br />
+                        <br /><%=bResults%> <%=cm.cmsPhrase("habitat types matching the combination of criteria were found.")%><br /><br />
                         <form name="search" action="select-columns.jsp" method="post">
                           <input type="submit" id="ProceedResults5" title="<%=cm.cms("proceed_to_results")%>"
                                  name="Proceed to results" value="<%=cm.cms("proceed_to_results")%>" class="searchButton" />
@@ -2152,7 +2152,7 @@
                   } else {
                         %>
                         <br />
-                          <%=cm.cmsText("generic_combined-search-step3_18")%>
+                          <%=cm.cmsPhrase("No habitat types matching the combination of criteria were found.")%>
                         <br />
                         <%
                   }
@@ -2271,7 +2271,7 @@
                   if(bResults > 0) {
                       %>
                       <hr width="100%" size="1" align="left" />
-                      <br /><%=bResults%> <%=cm.cmsText("generic_combined-search-step3_19")%><br /><br />
+                      <br /><%=bResults%> <%=cm.cmsPhrase("sites matching the combination of criteria were found.")%><br /><br />
                       <form name="search" action="select-columns.jsp" method="post">
                         <input type="submit" id="ProceedResults6" title="<%=cm.cms("proceed_to_results")%>"
                                name="Proceed to results" value="<%=cm.cms("proceed_to_results")%>" class="searchButton" />
@@ -2289,7 +2289,7 @@
                   } else {
                       %>
                       <br />
-                      <%=cm.cmsText("no_sites_found")%>
+                      <%=cm.cmsPhrase("No sites matching the combination of criteria were found.")%>
                       <br />
                       <%
                   }

@@ -70,10 +70,10 @@
     {
 %>
     <p>
-      <%=cm.cmsText("pictures_upload_description")%> <strong><%=scientificName%></strong>.
+      <%=cm.cmsPhrase("This page allows to upload new pictures for")%> <strong><%=scientificName%></strong>.
     </p>
     <p>
-      <%=cm.cmsText("pictures_upload_browse")%>.
+      <%=cm.cmsPhrase("Please click browse and select the picture from your computer")%>.
       <br />
     </p>
     <%
@@ -97,7 +97,7 @@
         <%=cm.cmsLabel("pictures_upload_filename_label")%>
       </p>
       <p>
-        <%=cm.cmsText("pictures_upload_pictures_description")%>
+        <%=cm.cmsPhrase("Picture description (max 255 characters)")%>
         <br />
         <label for="description" class="noshow"><%=cm.cms("pictures_upload_description_label")%></label>
         <textarea id="description" name="description" cols="60" rows="5" title="<%=cm.cms("pictures_upload_description_label")%>"></textarea>

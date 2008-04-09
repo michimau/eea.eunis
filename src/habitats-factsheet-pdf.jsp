@@ -142,7 +142,7 @@
     if(!error)
     {
 %>
-  <a target="_blank" href="temp/<%=filename%>"><%=cm.cmsText("open_pdf_document")%></a>
+  <a target="_blank" href="temp/<%=filename%>"><%=cm.cmsPhrase("Open PDF document")%></a>
 <%
     }
     else
@@ -157,9 +157,9 @@
       }
       //]]>
     </script>
-    <%=cm.cmsText("please_let_us_know_about_error")%>
-    <a href="javascript:feedback();"><%=cm.cmsText("feedback")%></a>.
-    <%=cm.cmsText("thank_you")%>
+    <%=cm.cmsPhrase("Please let us know about this error by sending an")%>
+    <a href="javascript:feedback();"><%=cm.cmsPhrase("EUNIS Feedback")%></a>.
+    <%=cm.cmsPhrase("Thank you!")%>
 <%
     }
     out.flush();
@@ -168,7 +168,7 @@
   {
 %>
     <p>
-      <%=cm.cmsText("habitats_factsheet-pdf_60")%> (ID=<strong><%=idHabitat%></strong>).
+      <%=cm.cmsPhrase("Sorry, no habitat type has been found in database")%> (ID=<strong><%=idHabitat%></strong>).
     </p>
     <br />
     <br />

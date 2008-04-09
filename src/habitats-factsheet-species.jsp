@@ -29,28 +29,28 @@
     {
 %>
   <h2>
-    <%=cm.cmsText("species_characteristics_for_habitat_type")%>
+    <%=cm.cmsPhrase("Species characteristics for habitat type")%>
   </h2>
   <table summary="<%=cm.cms("habitat_species")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("species_scientific_name")%>
+          <%=cm.cmsPhrase("Species scientific name")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("biogeographic_region")%>
+          <%=cm.cmsPhrase("Biogeographic region")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("abundance")%>
+          <%=cm.cmsPhrase("Abundance")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("frequencies")%>
+          <%=cm.cmsPhrase("Frequencies")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("faithfulness")%>
+          <%=cm.cmsPhrase("Faithfulness")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("comment")%>
+          <%=cm.cmsPhrase("Comment")%>
         </th>
       </tr>
     </thead>

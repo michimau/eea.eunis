@@ -171,7 +171,7 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText( "generic_glossary-table_02" )%>
+                  <%=cm.cmsPhrase( "Glossary editor" )%>
                 </h1>
 <%
   if( SessionManager.isAuthenticated() && SessionManager.isEdit_glossary() )
@@ -179,7 +179,7 @@
 %>
                 <br />
                 <form action="" name="filter" method="post">
-                  <%=cm.cmsText( "generic_glossary-table_04" )%>
+                  <%=cm.cmsPhrase( "Term contains:" )%>
                   <label for="filter" class="noshow"><%=cm.cms("glossary_search_value")%></label>
                   <input title="<%=cm.cms("glossary_search_value")%>" type="text" name="filter" id="filter" value="<%=filter%>" size="30" />
                   <%=cm.cmsLabel("glossary_search_value")%>
@@ -195,7 +195,7 @@
 %>
                 </form>
                 <br />
-                <a title="<%=cm.cms("open_glossary_editor")%>" href="glossary-editor.jsp"><%=cm.cmsText( "generic_glossary-table_06" )%></a><%=cm.cmsTitle("open_glossary_editor")%>
+                <a title="<%=cm.cms("open_glossary_editor")%>" href="glossary-editor.jsp"><%=cm.cmsPhrase( "Add new glossary term" )%></a><%=cm.cmsTitle("open_glossary_editor")%>
 <%
                 if (rows.size() > 0)
                 {
@@ -207,39 +207,39 @@
                         &nbsp;
                       </th>
                       <th scope="col">
-                        <a href="glossary-table.jsp?sort=TERM<%=filterURLParam%>"><%=sort.equalsIgnoreCase("TERM") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "term" )%></a>
+                        <a href="glossary-table.jsp?sort=TERM<%=filterURLParam%>"><%=sort.equalsIgnoreCase("TERM") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsPhrase( "Term" )%></a>
                       </th>
                       <th scope="col">
-                          <%=cm.cmsText( "language" )%>
+                          <%=cm.cmsPhrase( "Language" )%>
                       </th>
                       <th scope="col">
-                        <a href="glossary-table.jsp?sort=SOURCE<%=filterURLParam%>"><%=sort.equalsIgnoreCase("SOURCE") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "source" )%></a>
+                        <a href="glossary-table.jsp?sort=SOURCE<%=filterURLParam%>"><%=sort.equalsIgnoreCase("SOURCE") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsPhrase( "Source" )%></a>
                       </th>
                       <th scope="col">
-                        <a href="glossary-table.jsp?sort=DEFINITION<%=filterURLParam%>"><%=sort.equalsIgnoreCase("DEFINITION") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "definition" )%></a>
+                        <a href="glossary-table.jsp?sort=DEFINITION<%=filterURLParam%>"><%=sort.equalsIgnoreCase("DEFINITION") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsPhrase( "Definition" )%></a>
                       </th>
 <%--
                       <th scope="col">
-                        <a href="glossary-table.jsp?sort=LINK_DESCRIPTION<%=filterURLParam%>"><%=sort.equalsIgnoreCase("LINK_DESCRIPTION") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "link_description" )%></a>
+                        <a href="glossary-table.jsp?sort=LINK_DESCRIPTION<%=filterURLParam%>"><%=sort.equalsIgnoreCase("LINK_DESCRIPTION") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsPhrase( "Link description" )%></a>
                       </th>
                       <th scope="col">
-                        <a href="glossary-table.jsp?sort=LINK_URL<%=filterURLParam%>"><%=sort.equalsIgnoreCase("LINK_URL") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "link" )%></a>
+                        <a href="glossary-table.jsp?sort=LINK_URL<%=filterURLParam%>"><%=sort.equalsIgnoreCase("LINK_URL") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsPhrase( "Link" )%></a>
                       </th>
 --%>
                       <th scope="col">
-                        <a href="glossary-table.jsp?sort=REFERENCE<%=filterURLParam%>"><%=sort.equalsIgnoreCase("REFERENCE") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "reference" )%></a>
+                        <a href="glossary-table.jsp?sort=REFERENCE<%=filterURLParam%>"><%=sort.equalsIgnoreCase("REFERENCE") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsPhrase( "Reference" )%></a>
                       </th>
                       <th scope="col">
-                        <a href="glossary-table.jsp?sort=DATE_CHANGED<%=filterURLParam%>"><%=sort.equalsIgnoreCase("DATE_CHANGED") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "date_changed" )%></a>
+                        <a href="glossary-table.jsp?sort=DATE_CHANGED<%=filterURLParam%>"><%=sort.equalsIgnoreCase("DATE_CHANGED") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsPhrase( "Date changed" )%></a>
                       </th>
                       <th scope="col" style="text-align : center; white-space : nowrap;">
-                        <a href="glossary-table.jsp?sort=CURRENT<%=filterURLParam%>"><%=sort.equalsIgnoreCase("CURRENT") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "current" )%></a>
+                        <a href="glossary-table.jsp?sort=CURRENT<%=filterURLParam%>"><%=sort.equalsIgnoreCase("CURRENT") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsPhrase( "Current" )%></a>
                       </th>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=TERM_DOMAIN<%=filterURLParam%>"><%=sort.equalsIgnoreCase("TERM_DOMAIN") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "domain" )%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=TERM_DOMAIN<%=filterURLParam%>"><%=sort.equalsIgnoreCase("TERM_DOMAIN") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsPhrase( "Domain" )%></a>
                       </th>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=SEARCH_DOMAIN<%=filterURLParam%>"><%=sort.equalsIgnoreCase("SEARCH_DOMAIN") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsText( "search_domain" )%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="glossary-table.jsp?sort=SEARCH_DOMAIN<%=filterURLParam%>"><%=sort.equalsIgnoreCase("SEARCH_DOMAIN") ? Utilities.getSortImageTag(AbstractSortCriteria.ASCENDENCY_ASC).toString() : ""%><%=cm.cmsPhrase( "Search domain" )%></a>
                       </th>
                     </tr>
                   </thead>
@@ -381,7 +381,7 @@
 %>
                 <br />
                 <br />
-                <span style="color : red"><%=cm.cmsText("users_bookmarks_20")%></span>
+                <span style="color : red"><%=cm.cmsPhrase("You must be authenticated and have the proper right to access this page.")%></span>
                 <br />
                 <br />
 <%

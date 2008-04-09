@@ -30,30 +30,30 @@
   {
 %>
   <h2>
-    <%=cm.cmsText("legal_instruments")%>
+    <%=cm.cmsPhrase("Legal Instruments")%>
   </h2>
   <table summary="<%=cm.cms("species_factsheet_legalInstruments_01_Sum")%>" class="listing">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("detailed_reference")%>
+          <%=cm.cmsPhrase("Detailed reference")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("legal_text")%>
+          <%=cm.cmsPhrase("legal text")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("species_factsheet_legalInstruments_02")%>
+          <%=cm.cmsPhrase("Comments")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("url")%>
+          <%=cm.cmsPhrase("Url")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("species_factsheet_legalInstrumentsGeoImplem")%>
+          <%=cm.cmsPhrase("Geographical implementation")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("species_factsheet_legalInstrumentsObligations")%>
+          <%=cm.cmsPhrase("Reporting obligations")%>
         </th>
       </tr>
     </thead>
@@ -103,7 +103,7 @@
       else
       {
 %>
-          <%=cm.cmsText("species_factsheet_notApplicable")%>
+          <%=cm.cmsPhrase("Not applicable. See Bonn Agreement or Memorandum.")%>
 <%
       }
 %>

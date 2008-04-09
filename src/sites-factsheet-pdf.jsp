@@ -145,7 +145,7 @@
   if ( !error )
   {
 %>
-    <a target="_blank" href="temp/<%=filename%>" title="<%=cm.cms("download_pdf_file")%>"><%=cm.cmsText("open_pdf_document")%></a>
+    <a target="_blank" href="temp/<%=filename%>" title="<%=cm.cms("download_pdf_file")%>"><%=cm.cmsPhrase("Open PDF document")%></a>
     <%=cm.cmsTitle("download_pdf_file")%>
 <%
   }
@@ -161,14 +161,14 @@
         }
       //]]>
     </script>
-    <%=cm.cmsText("please_let_us_know_about_error")%> <a href="javascript:feedback();"><%=cm.cmsText("feedback")%></a>.<%=cm.cmsText("thank_you")%>
+    <%=cm.cmsPhrase("Please let us know about this error by sending an")%> <a href="javascript:feedback();"><%=cm.cmsPhrase("EUNIS Feedback")%></a>.<%=cm.cmsPhrase("Thank you!")%>
 <%
   }
   }
   else
   {
 %>
-  <%=cm.cmsText("sites_factsheet-pdf_114")%> ID=<strong><%=siteid%></strong> <%=cm.cmsText("sites_factsheet-pdf_115")%>
+  <%=cm.cmsPhrase("Sorry, no site matching")%> ID=<strong><%=siteid%></strong> <%=cm.cmsPhrase("has been found in database.")%>
   <br />
   <br />
     <form action="">

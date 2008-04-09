@@ -16,10 +16,10 @@
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String location = "eea#" + eeaHome + "," + Utilities.formatString( request.getParameter( "location" ) );
   boolean fromRefine = Utilities.checkedStringToBoolean( request.getParameter("fromRefine"), false );
-  String titlePage = cm.cmsText("noresults_search");
+  String titlePage = cm.cmsPhrase("No results found for this search");
   if( fromRefine )
   {
-    titlePage = cm.cmsText("noresults_refine");
+    titlePage = cm.cmsPhrase("No results found for refine search");
   }
 %>
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -63,11 +63,11 @@
                 <h1>
                   <%=titlePage%>
                 </h1>
-                <%=cm.cmsText("noresults_explanation")%>
+                <%=cm.cmsPhrase("<br /><br />The input rules were probably too restrictive, please try a more generic approach.<br /><br />Please go")%>
                 <strong>
-                  <a href="javascript:history.go(-1)" title="Go to previous page"><%=cm.cmsText("back")%></a>
+                  <a href="javascript:history.go(-1)" title="Go to previous page"><%=cm.cmsPhrase("Back")%></a>
                 </strong>
-                <%=cm.cmsText("noresults_review_search_criteria")%>.
+                <%=cm.cmsPhrase("and review the search criteria")%>.
                 <br />
                 <br />
                 <br />

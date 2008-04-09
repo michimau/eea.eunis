@@ -275,12 +275,12 @@
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
-                <%=cm.cmsText("generic_combined-search-step2_01")%>
+                <%=cm.cmsPhrase("<h1>Combined search</h1>Search information using multiple characteristics<br />")%>
                 <br />
                 <table summary="layout" border="0">
                   <tr>
                     <td id="status">
-                      <%=cm.cmsText("specify_the_search_criteria")%>
+                      <%=cm.cmsPhrase("Specify the search criteria:")%>
                     </td>
                   </tr>
                 </table>
@@ -334,21 +334,21 @@
                   sourcedbcriteria = SourceDB;
                 %>
                 <form method="post" action="combined-search-2.jsp" name="criteria">
-                <strong><%=cm.cmsText("step_2")%></strong>
+                <strong><%=cm.cmsPhrase("Step 2.")%></strong>
                 <%
                   if(PreviousNatureObject.equalsIgnoreCase("Species")) {
                 %>
-                <%=cm.cmsText("generic_combined-search-step2_03")%>
+                <%=cm.cmsPhrase("Species will be related to habitat types meeting the following criteria:")%>
                 <%
                   }
                   if(PreviousNatureObject.equalsIgnoreCase("Habitat")) {
                 %>
-                <%=cm.cmsText("generic_combined-search-step2_04")%>
+                <%=cm.cmsPhrase("Habitat types will be related to Sites meeting the following criteria:")%>
                 <%
                   }
                   if(PreviousNatureObject.equalsIgnoreCase("Sites")) {
                 %>
-                <%=cm.cmsText("generic_combined-search-step2_05")%>
+                <%=cm.cmsPhrase("Sites will be related to Species meeting the following criteria:")%>
                 <%
                   }
                 %>
@@ -829,7 +829,7 @@
                     <a title="<%=cm.cms("list_of_values")%>" href="javascript:choice('First_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="first_binocular" onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cms("list_of_values")%>" /></a>
                 <%
                     if (rs.getString("OPERATOR").equalsIgnoreCase("Between")) {
-                      out.println(cm.cmsText("and"));
+                      out.println(cm.cmsPhrase("and"));
                       val = rs.getString("LAST_VALUE");
                       currentValue = val;
                 %>
@@ -864,7 +864,7 @@
                 <%
                 } else {
                 %>
-                  <a title="<%=cm.cms("add_root")%>" href="javascript:submitButtonForm('addroot','0');"><img border="0" src="images/mini/add.gif" width="13" height="13" title="<%=cm.cms("add_root")%>" alt="<%=cm.cms("add_root")%>" /></a>&nbsp;<%=cm.cmsText("add_root")%>
+                  <a title="<%=cm.cms("add_root")%>" href="javascript:submitButtonForm('addroot','0');"><img border="0" src="images/mini/add.gif" width="13" height="13" title="<%=cm.cms("add_root")%>" alt="<%=cm.cms("add_root")%>" /></a>&nbsp;<%=cm.cmsPhrase("Add root criterion")%>
                 <%
                 }
                   rs.close();
@@ -872,12 +872,12 @@
                 </form>
                 <br />
                 <strong>
-                  <%=cm.cmsText("combined_search_might_take_long_time")%>
+                  <%=cm.cmsPhrase("Note: Combined search might take a long time")%>
                 </strong>
                 <br />
                 <%
                   String criteria = tas.createCriteria(IdSession, NatureObject);
-                  out.println(cm.cmsText("calculated_criteria"));
+                  out.println(cm.cmsPhrase("Calculated search criteria expression:"));
                   combinedexplainedcriteria2 = criteria.replace('#', ' ').replace('[', '(').replace(']', ')').replaceAll("AND", "<strong>AND</strong>").replaceAll("OR", "<strong>OR</strong>");
                   out.println(combinedexplainedcriteria2);
 
@@ -905,12 +905,12 @@
                         node = criteria.substring(pos_start + 1, pos_end);
                         interpretedcriteria = tsas.InterpretCriteria(node, IdSession, NatureObject);
                         combinedlistcriteria2 += node + ": " + interpretedcriteria + "<br />";
-                        out.println(cm.cmsText("searching_for") + " " + interpretedcriteria + "...");
+                        out.println(cm.cmsPhrase("Searching for: {0}...",interpretedcriteria));
                         out.flush();
                         intermediatefilter = tsas.BuildFilter(node, IdSession, NatureObject);
-                        out.println(cm.cmsText("advanced_found") + " <strong>" + tsas.getResultCount() + "</strong>");
+                        out.println(cm.cmsPhrase("found: <strong>{0}</strong>",tsas.getResultCount()));
                         if(tsas.getResultCount() >= SQL_LIMIT) {
-                          String str = cm.cmsText("generic_combined-search-step2_13");
+                          String str = cm.cmsPhrase("<br />&nbsp;&nbsp;(Only the first SQL_LIMIT results were retrieved - this can lead to partial,incomplete or no combined search results at all - you should refine the search criteria)");
                           if(str != null) {
                             str = str.replaceAll("SQL_LIMIT", "" + SQL_LIMIT);
                             out.println(str);
@@ -945,12 +945,12 @@
                         node = criteria.substring(pos_start + 1, pos_end);
                         interpretedcriteria = tsas.InterpretCriteria(node, IdSession, NatureObject);
                         combinedlistcriteria2 += node + ": " + interpretedcriteria + "<br />";
-                        out.println(cm.cmsText("searching_for") + " " + interpretedcriteria + "...");
+                        out.println(cm.cmsPhrase("Searching for: {0}...",interpretedcriteria));
                         out.flush();
                         intermediatefilter = tsas.BuildFilter(node, IdSession, NatureObject);
-                        out.println(cm.cmsText("advanced_found") + " <strong>" + tsas.getResultCount() + "</strong>");
+                        out.println(cm.cmsPhrase("found: <strong>{0}</strong>",tsas.getResultCount()));
                         if(tsas.getResultCount() >= SQL_LIMIT) {
-                          String str = cm.cmsText("generic_combined-search-step2_13");
+                          String str = cm.cmsPhrase("<br />&nbsp;&nbsp;(Only the first SQL_LIMIT results were retrieved - this can lead to partial,incomplete or no combined search results at all - you should refine the search criteria)");
                           if(str != null) {
                             str = str.replaceAll("SQL_LIMIT", "" + SQL_LIMIT);
                             out.println(str);
@@ -986,12 +986,12 @@
                         node = criteria.substring(pos_start + 1, pos_end);
                         interpretedcriteria = tsas.InterpretCriteria(node, IdSession, NatureObject);
                         combinedlistcriteria2 += node + ": " + interpretedcriteria + "<br />";
-                        out.println(cm.cmsText("searching_for") + " " + interpretedcriteria + "...");
+                        out.println(cm.cmsPhrase("Searching for: {0}...",interpretedcriteria));
                         out.flush();
                         intermediatefilter = tsas.BuildFilter(node, IdSession, NatureObject);
-                        out.println(cm.cmsText("advanced_found") + " <strong>" + tsas.getResultCount() + "</strong>");
+                        out.println(cm.cmsPhrase("found: <strong>{0}</strong>",tsas.getResultCount()));
                         if(tsas.getResultCount() >= SQL_LIMIT) {
-                          String str = cm.cmsText("generic_combined-search-step2_13");
+                          String str = cm.cmsPhrase("<br />&nbsp;&nbsp;(Only the first SQL_LIMIT results were retrieved - this can lead to partial,incomplete or no combined search results at all - you should refine the search criteria)");
                           if(str != null) {
                             str = str.replaceAll("SQL_LIMIT", "" + SQL_LIMIT);
                             out.println(str);
@@ -1035,7 +1035,7 @@
                       str = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE (" + str + ")";
                     }
                     String query = tsas.ExecuteFilterSQL(str, "");
-                    out.println("<br /><strong>" + cm.cmsText("combined_total_matches") + "&nbsp;" + tsas.getResultCount() + "</strong><br /><br />");
+                    out.println("<br /><strong>" + cm.cmsPhrase("Total matches found in database:") + "&nbsp;" + tsas.getResultCount() + "</strong><br /><br />");
                     out.flush();
 
                     if(tsas.getResultCount() > 0) {
@@ -1170,7 +1170,7 @@
                 <%--    end modify--%>
                 <%} else { %>
                 <br />
-                <%=cm.cmsText("no_results")%>
+                <%=cm.cmsPhrase("No results were found matching your combined criteria.")%>
                 <br />
                 <% }
                 }

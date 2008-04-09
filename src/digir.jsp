@@ -87,11 +87,11 @@
                 <table summary="layout" width="100%" border="0">
                  <tr>
                   <td>
-                    <h1><%=cm.cmsText("digir_01")%></h1>
+                    <h1><%=cm.cmsPhrase("EUNIS Database DiGIR Provider Statistics")%></h1>
                     <br />
                     <p><%=cm.cmsText("digir_02")%>
                     </p>
-                    <span style="font-weight:bold"><%=cm.cmsText("digir_03")%></span>
+                    <span style="font-weight:bold"><%=cm.cmsPhrase("Statistical data regarding the EUNIS DiGIR Provider:")%></span>
                 <%
                       int nTotalSpecies = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sTotalSpecies),0);
                       int nDistinctSpecies = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sDistinctSpecies),0);
@@ -106,7 +106,7 @@
                     <table summary="layout" width="90%" class="datatable">
                       <tr>
                         <td width="50%">
-                          <%=cm.cmsText("digir_total_rows")%>
+                          <%=cm.cmsPhrase("Total rows:")%>
                         </td>
                         <td width="50%">
                           <%=nTotalSpecies%>
@@ -114,7 +114,7 @@
                       </tr>
                       <tr class="zebraeven">
                         <td>
-                          <%=cm.cmsText("digir_distinct_species")%>
+                          <%=cm.cmsPhrase("Distinct Species:")%>
                         </td>
                         <td>
                           <%=nDistinctSpecies%>
@@ -122,7 +122,7 @@
                       </tr>
                       <tr>
                         <td>
-                          <%=cm.cmsText("digir_species_country")%>
+                          <%=cm.cmsPhrase("Species with country:")%>
                         </td>
                         <td>
                           <%=nSpeciesWithCountry%>
@@ -130,7 +130,7 @@
                       </tr>
                       <tr class="zebraeven">
                         <td>
-                          <%=cm.cmsText("digir_species_latlong")%>
+                          <%=cm.cmsPhrase("Species with lat./long.:")%>
                         </td>
                         <td>
                           <%=nSpeciesWithLatLong%>
@@ -138,7 +138,7 @@
                       </tr>
                       <tr>
                         <td>
-                          <%=cm.cmsText("digir_species_habitats")%>
+                          <%=cm.cmsPhrase("Species from habitat types:")%>
                         </td>
                         <td>
                           <%=nSpeciesFromHabitats%>
@@ -146,7 +146,7 @@
                       </tr>
                       <tr class="zebraeven">
                         <td>
-                          <%=cm.cmsText("digir_species_sites")%>
+                          <%=cm.cmsPhrase("Species from sites:")%>
                         </td>
                         <td>
                           <%=nSpeciesFromSites%>
@@ -154,7 +154,7 @@
                       </tr>
                       <tr>
                         <td>
-                          <%=cm.cmsText("digir_last_update")%>
+                          <%=cm.cmsPhrase("Last update:")%>
                         </td>
                         <td>
                           <%=DateLastModified%>
@@ -167,18 +167,18 @@
                     <br />
                     <!--The DiGIR database is empty or the connection could not be established!-->
                     <!--<br />-->
-                    <%=cm.cmsText("digir_statistics_are_not_available")%>
+                    <%=cm.cmsPhrase("The statistics are not available. Please try later.")%>
                     <br />
                     <br />
                 <%
                   }
                 %>
                     <br />
-                    <span style="font-weight:bold"><%=cm.cmsText("digir_other_information")%></span>
+                    <span style="font-weight:bold"><%=cm.cmsPhrase("Other information:")%></span>
                     <table summary="layout" class="datatable">
                       <tr>
                         <td width="50%">
-                          <%=cm.cmsText("digir_provider_url")%>
+                          <%=cm.cmsPhrase("Provider URL:")%>
                         </td>
                         <td width="50%">
                           <a href="<%=sEndpointURL%>"><%=sEndpointURL%></a>
@@ -186,7 +186,7 @@
                       </tr>
                       <tr class="zebraeven">
                         <td>
-                          <%=cm.cmsText("digir_provider_endpoint")%>
+                          <%=cm.cmsPhrase("Provider endpoint:")%>
                         </td>
                         <td>
                           <a href="<%=sDigirURL%>"><%=sDigirURL%></a>
@@ -194,7 +194,7 @@
                       </tr>
                       <tr>
                         <td>
-                          <%=cm.cmsText("digir_institution_code")%>
+                          <%=cm.cmsPhrase("Institution code:")%>
                         </td>
                         <td>
                           <%=sInstitutionCode%>
@@ -202,7 +202,7 @@
                       </tr>
                       <tr class="zebraeven">
                         <td>
-                          <%=cm.cmsText("digir_collection_code")%>
+                          <%=cm.cmsPhrase("Collection code:")%>
                         </td>
                         <td>
                           <%=sCollectionCode%>

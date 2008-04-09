@@ -66,10 +66,10 @@
 <!-- MAIN CONTENT -->
                 <img id="loading" alt="Loading progress" title="Loading progress" src="images/loading.gif" width="250" height="45" />
                 <h1 class="documentFirstHeading">
-                  <%=cm.cmsText("sites_main_sitesSearch")%>
+                  <%=cm.cmsPhrase("SITES SEARCH")%>
                 </h1>
                 <div class="documentDescription">
-                  <%=cm.cmsText("sites_main_description")%>
+                  <%=cm.cmsPhrase("Access information about sites of interest for biodiversity and nature protection")%>
                 </div>
                 <div style="text-align : center; padding-left : 10px; width : 730px; vertical-align : middle; color : black;">
                   <br />
@@ -141,10 +141,10 @@
                       <thead>
                         <tr>
                           <th>
-                           <%=cm.cmsText("links_to_easy_searches")%>
+                           <%=cm.cmsPhrase("Links to easy searches")%>
                           </th>
                           <th>
-                           <%=cm.cmsText("description")%>
+                           <%=cm.cmsPhrase("Description")%>
                           </th>
                         </tr>
                       </thead>
@@ -156,13 +156,13 @@
                             <%=cm.cmsAlt("bullet_alt")%>
                             <a title="<%=cm.cms("name")%>" href="sites-names.jsp">
                               <strong>
-                                <%=cm.cmsText("name")%>
+                                <%=cm.cmsPhrase("Name")%>
                               </strong>
                             </a>
                             <%=cm.cmsTitle("name")%>
                           </td>
                           <td>
-                            <%=cm.cmsText("name")%>
+                            <%=cm.cmsPhrase("Name")%>
                           </td>
                         </tr>
                         <tr class="zebraeven">
@@ -172,13 +172,13 @@
                             <%=cm.cmsAlt("bullet_alt")%>
                             <a title="<%=cm.cms("search_by_size")%>" href="sites-size.jsp">
                               <strong>
-                                <%=cm.cmsText("size_area_length")%>
+                                <%=cm.cmsPhrase("Size (Area/Length)")%>
                               </strong>
                             </a>
                             <%=cm.cmsTitle("search_by_size")%>
                           </td>
                           <td>
-                            <%=cm.cmsText("search_by_size")%>
+                            <%=cm.cmsPhrase("Search sites by size")%>
                           </td>
                         </tr>
                         <tr>
@@ -188,13 +188,13 @@
                             <%=cm.cmsAlt("bullet_alt")%>
                             <a title="<%=cm.cms("search_by_coordinates")%>" href="sites-coordinates.jsp">
                               <strong>
-                                <%=cm.cmsText("coordinates")%>
+                                <%=cm.cmsPhrase("Coordinates")%>
                               </strong>
                             </a>
                             <%=cm.cmsTitle("search_by_coordinates")%>
                           </td>
                           <td>
-                            <%=cm.cmsText("search_by_coordinates")%>
+                            <%=cm.cmsPhrase("Search sites by geographical coordinates")%>
                           </td>
                         </tr>
                         <tr class="zebraeven">
@@ -204,13 +204,13 @@
                             <%=cm.cmsAlt("bullet_alt")%>
                             <a title="<%=cm.cms("sites_main_countryDesc")%>" href="sites-country.jsp">
                               <strong>
-                                <%=cm.cmsText("country")%>
+                                <%=cm.cmsPhrase("Country")%>
                               </strong>
                             </a>
                             <%=cm.cmsTitle("sites_main_countryDesc")%>
                           </td>
                           <td>
-                            <%=cm.cmsText("sites_main_countryDesc")%>
+                            <%=cm.cmsPhrase("Search sites by country location")%>
                           </td>
                         </tr>
                         <tr>
@@ -220,13 +220,13 @@
                             <%=cm.cmsAlt("bullet_alt")%>
                             <a title="<%=cm.cms("sites_main_altitudeDesc")%>" href="sites-altitude.jsp">
                               <strong>
-                                <%=cm.cmsText("altitude")%>
+                                <%=cm.cmsPhrase("Altitude")%>
                               </strong>
                             </a>
                             <%=cm.cmsTitle("sites_main_altitudeDesc")%>
                           </td>
                           <td>
-                            <%=cm.cmsText("sites_main_altitudeDesc")%>
+                            <%=cm.cmsPhrase("Search sites by characterizing altitude")%>
                           </td>
                         </tr>
                         <tr class="zebraeven">
@@ -236,13 +236,13 @@
                             <%=cm.cmsAlt("bullet_alt")%>
                             <a title="<%=cm.cms("sites_main_designationDesc")%>" href="sites-year.jsp">
                               <strong>
-                                <%=cm.cmsText("designation_year")%>
+                                <%=cm.cmsPhrase("Designation year")%>
                               </strong>
                             </a>
                             <%=cm.cmsTitle("sites_main_designationDesc")%>
                           </td>
                           <td>
-                            <%=cm.cmsText("sites_main_designationDesc")%>
+                            <%=cm.cmsPhrase("Search sites by the year of designation")%>
                           </td>
                         </tr>
                         <tr>
@@ -252,7 +252,7 @@
                             <%=cm.cmsAlt("bullet_alt")%>
                             <a title="<%=cm.cms("sites_main_showSpeciesDesc")%>" href="species-sites.jsp">
                               <strong>
-                                <%=cm.cmsText("pick_sites_show_species")%>
+                                <%=cm.cmsPhrase("Pick sites, show species")%>
                               </strong>
                             </a>
                             <%=cm.cmsTitle("sites_main_showSpeciesDesc")%>
@@ -268,13 +268,13 @@
                             <%=cm.cmsAlt("bullet_alt")%>
                             <a title="<%=cm.cms("sites_main_showHabitatsDesc")%>" href="habitats-sites.jsp">
                               <strong>
-                                <%=cm.cmsText("pick_sites_show_habitat_types")%>
+                                <%=cm.cmsPhrase("Pick sites, show habitat types")%>
                               </strong>
                             </a>
                             <%=cm.cmsTitle("sites_main_showHabitatsDesc")%>
                           </td>
                           <td>
-                            <%=cm.cmsText("sites_main_showHabitatsDesc")%>
+                            <%=cm.cmsPhrase("Identify habitat types located within sites")%>
                           </td>
                         </tr>
                         <tr>
@@ -284,13 +284,13 @@
                             <%=cm.cmsAlt("bullet_alt")%>
                             <a title="<%=cm.cms("sites_main_showSitesDesc")%>" href="sites-designated-codes.jsp">
                               <strong>
-                                <%=cm.cmsText("pick_designation_types_show_sites")%>
+                                <%=cm.cmsPhrase("Pick designation types, show sites")%>
                               </strong>
                             </a>
                             <%=cm.cmsTitle("sites_main_showSitesDesc")%>
                           </td>
                           <td>
-                            <%=cm.cmsText("sites_main_showSitesDesc")%>
+                            <%=cm.cmsPhrase("Search sites by legal instruments ")%>
                           </td>
                         </tr>
                         <tr class="zebraeven">
@@ -300,13 +300,13 @@
                             <%=cm.cmsAlt("bullet_alt")%>
                             <a title="<%=cm.cms("sites_main_designationTypesDesc")%>" href="sites-designations.jsp">
                               <strong>
-                                <%=cm.cmsText("designation_types")%>
+                                <%=cm.cmsPhrase("Designation types")%>
                               </strong>
                             </a>
                             <%=cm.cmsTitle("sites_main_designationTypesDesc")%>
                           </td>
                           <td>
-                            <%=cm.cmsText("sites_main_designationTypesDesc")%>
+                            <%=cm.cmsPhrase("Search designation types")%>
                           </td>
                         </tr>
                         <tr>
@@ -316,13 +316,13 @@
                             <%=cm.cmsAlt("bullet_alt")%>
                             <a title="<%=cm.cms("sites_main_neighborhoodDesc")%>" href="sites-neighborhood.jsp">
                               <strong>
-                                <%=cm.cmsText("site_neighborhood_1")%>
+                                <%=cm.cmsPhrase("Site neighborhood")%>
                               </strong>
                             </a>
                             <%=cm.cmsTitle("sites_main_neighborhoodDesc")%>
                           </td>
                           <td abbr="Site neighborhood">
-                            <%=cm.cmsText("sites_main_neighborhoodDesc")%>
+                            <%=cm.cmsPhrase("Search neighboring sites within a range of a specified site")%>
                           </td>
                         </tr>
                         <tr class="zebraeven">
@@ -332,12 +332,12 @@
                               <%=cm.cmsAlt("bullet_alt")%>
                             <a title="<%=cm.cms("sites_tree_browser")%>" href="sites-tree.jsp">
                               <strong>
-                                <%=cm.cmsText("sites_tree_browser")%>
+                                <%=cm.cmsPhrase("Sites tree browser")%>
                               </strong>
                             </a>
                           </td>
                           <td>
-                            <%=cm.cmsText("sites_tree_browser_description")%>
+                            <%=cm.cmsPhrase("Sites tree browser")%>
                           </td>
                         </tr>
                       </tbody>
@@ -352,10 +352,10 @@
                       <thead>
                         <tr>
                           <th>
-                            <%=cm.cmsText("links_to_advanced_searches")%>
+                            <%=cm.cmsPhrase("Links to advanced searches")%>
                           </th>
                           <th>
-                            <%=cm.cmsText("description")%>
+                            <%=cm.cmsPhrase("Description")%>
                           </th>
                         </tr>
                       </thead>
@@ -367,13 +367,13 @@
                             <%=cm.cmsAlt("bullet_alt")%>
                             <a title="<%=cm.cms("sites_main_advSearchSearchDesc")%>" href="sites-advanced.jsp?natureobject=Sites">
                               <strong>
-                                <%=cm.cmsText("advanced_search")%>
+                                <%=cm.cmsPhrase("Advanced Search")%>
                               </strong>
                             </a>
                             <%=cm.cmsTitle("sites_main_advSearchSearchDesc")%>
                           </td>
                           <td>
-                            <%=cm.cmsText("sites_main_advSearchSearchDesc")%>
+                            <%=cm.cmsPhrase("Search sites information using more complex filtering capabilities")%>
                           </td>
                         </tr>
                         <tr class="zebraeven">
@@ -383,13 +383,13 @@
                             <%=cm.cmsAlt("bullet_alt")%>
                             <a title="<%=cm.cms("sites_main_advHowToDesc")%>" href="advanced-help.jsp">
                               <strong>
-                                <%=cm.cmsText("how_to_use_advanced_search")%>
+                                <%=cm.cmsPhrase("How to use Advanced search")%>
                               </strong>
                             </a>
                             <%=cm.cmsTitle("sites_main_advHowToDesc")%>
                           </td>
                           <td>
-                            <%=cm.cmsText("sites_main_advHowToDesc")%>
+                            <%=cm.cmsPhrase("Help on sites Advanced Search")%>
                           </td>
                         </tr>
                       </tbody>
@@ -404,10 +404,10 @@
                       <thead>
                         <tr>
                           <th>
-                            <%=cm.cmsText("links_to_statistical_data")%>
+                            <%=cm.cmsPhrase("Links to statistical data")%>
                           </th>
                           <th>
-                            <%=cm.cmsText("description")%>
+                            <%=cm.cmsPhrase("Description")%>
                           </th>
                         </tr>
                       </thead>
@@ -419,13 +419,13 @@
                             <%=cm.cmsAlt("bullet_alt")%>
                             <a title="<%=cm.cms("sites_main_numberDesc")%>" href="sites-statistical.jsp">
                               <strong>
-                                <%=cm.cmsText("sites_main_number")%>
+                                <%=cm.cmsPhrase("Number/Total area")%>
                               </strong>
                             </a>
                             <%=cm.cmsTitle("sites_main_numberDesc")%>
                           </td>
                           <td>
-                            <%=cm.cmsText("sites_main_numberDesc")%>
+                            <%=cm.cmsPhrase("Find statistical data about sites")%>
                           </td>
                         </tr>
                       </tbody>
@@ -440,10 +440,10 @@
                       <thead>
                         <tr>
                           <th>
-                            <%=cm.cmsText("links_and_downloads_1")%>
+                            <%=cm.cmsPhrase("Links &amp; downloads")%>
                           </th>
                           <th>
-                            <%=cm.cmsText("description")%>
+                            <%=cm.cmsPhrase("Description")%>
                           </th>
                         </tr>
                       </thead>
@@ -455,13 +455,13 @@
                             <%=cm.cmsAlt("bullet_alt")%>
                             <a title="<%=cm.cms("sites_main_linksDownloadsDesc")%>" href="sites-download.jsp">
                               <strong>
-                                <%=cm.cmsText("links_and_downloads_2")%>
+                                <%=cm.cmsPhrase("Links and Downloads")%>
                               </strong>
                             </a>
                             <%=cm.cmsTitle("sites_main_linksDownloadsDesc")%>
                           </td>
                           <td>
-                            <%=cm.cmsText("sites_main_linksDownloadsDesc")%>
+                            <%=cm.cmsPhrase("Download full data set, visit data providers etc.")%>
                           </td>
                         </tr>
                         <tr class="zebraeven">
@@ -472,7 +472,7 @@
                             <%=cm.cmsText("sites_main_indicators")%>
                           </td>
                           <td>
-                            <%=cm.cmsText("sites_main_indicatorsDesc")%>
+                            <%=cm.cmsPhrase("Find sites used in indicators")%>
                           </td>
                         </tr>
                       </tbody>
@@ -487,10 +487,10 @@
                   <thead>
                     <tr>
                       <th>
-                        <%=cm.cmsText("links_to_online_help")%>
+                        <%=cm.cmsPhrase("Links to online help")%>
                       </th>
                       <th>
-                        <%=cm.cmsText("description")%>
+                        <%=cm.cmsPhrase("Description")%>
                       </th>
                     </tr>
                   </thead>
@@ -502,13 +502,13 @@
                         <%=cm.cmsAlt("bullet_alt")%>
                         <a title="<%=cm.cms("how_to_use_easy_search")%>" href="easy-help.jsp">
                           <strong>
-                            <%=cm.cmsText("how_to_use_easy_search")%>
+                            <%=cm.cmsPhrase("How to use Easy search")%>
                           </strong>
                         </a>
                         <%=cm.cmsTitle("how_to_use_easy_search")%>
                       </td>
                       <td>
-                        <%=cm.cmsText("sites_main_howToDesc")%>
+                        <%=cm.cmsPhrase("Help on sites <strong>Easy Searches</strong>")%>
                       </td>
                     </tr>
                     <tr class="zebraeven">
@@ -518,13 +518,13 @@
                         <%=cm.cmsAlt("bullet_alt")%>
                         <a title="<%=cm.cms("sites_main_glossaryDesc")%>" href="glossary.jsp?module=sites">
                           <strong>
-                            <%=cm.cmsText("glossary")%>
+                            <%=cm.cmsPhrase("Glossary")%>
                           </strong>
                         </a>
                         <%=cm.cmsTitle("sites_main_glossaryDesc")%>
                       </td>
                       <td>
-                        <%=cm.cmsText("sites_main_glossaryDesc")%>
+                        <%=cm.cmsPhrase("Glossary of the terms used in EUNIS Database sites module")%>
                       </td>
                     </tr>
                     <tr>
@@ -534,13 +534,13 @@
                         <%=cm.cmsAlt("bullet_alt")%>
                         <a title="<%=cm.cms("sites_main_sitesHowToDesc")%>" href="sites-help.jsp">
                           <strong>
-                            <%=cm.cmsText("how_to_use")%>
+                            <%=cm.cmsPhrase("How to use")%>
                           </strong>
                         </a>
                         <%=cm.cmsTitle("sites_main_sitesHowToDesc")%>
                       </td>
                       <td>
-                        <%=cm.cmsText("sites_main_sitesHowToDesc")%>
+                        <%=cm.cmsPhrase("Sites online help")%>
                       </td>
                     </tr>
                   </tbody>

@@ -34,25 +34,25 @@
   {
 %>
   <h2>
-  <%=cm.cmsText("habitat_type_syntaxa")%>
+  <%=cm.cmsPhrase("Habitat type syntaxa")%>
   </h2>
   <table summary="<%=cm.cms("habitat_type_syntaxa")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th width="25%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("name")%>
+          <%=cm.cmsPhrase("Name")%>
         </th>
         <th width="6%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("relation")%>
+          <%=cm.cmsPhrase("Relation")%>
         </th>
         <th width="30%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("habitats_factsheet_75")%>
+          <%=cm.cmsPhrase("Source (abbreviated)")%>
         </th>
         <th width="20%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("author")%>
+          <%=cm.cmsPhrase("Author")%>
         </th>
         <th width="14%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("references")%>
+          <%=cm.cmsPhrase("References")%>
         </th>
       </tr>
     </thead>

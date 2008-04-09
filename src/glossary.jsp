@@ -99,9 +99,9 @@
                   }
                 %>
                       <h1>
-                        <%=cm.cmsText("glossary")%>
+                        <%=cm.cmsPhrase("Glossary")%>
                       </h1>
-                      <%=cm.cmsText("generic_glossary_18")%>
+                      <%=cm.cmsPhrase("Search for specific terms used in this web site<br />(ex.: terms containing <strong>alpine</strong>)")%>
                       <br />
                 <%
                       // Fix the paragraph header (If search in a particular module, show this to the user)
@@ -139,7 +139,7 @@
                       if (no <= 0) {
                 %>
                      <br /> <br />
-                     <%=cm.cmsText("glossary_no_data_available")%>
+                     <%=cm.cmsPhrase("No data is available for glossary at this time.")%>
                 <%
                 } else {
                 %>
@@ -149,33 +149,33 @@
                         <tr>
                           <td bgcolor="#EEEEEE">
                             <strong>
-                              <%=cm.cmsText("search_will_provide_2")%>
+                              <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed):")%>
                             </strong>
                           </td>
                         </tr>
                         <tr bgcolor="#EEEEEE">
                           <td nowrap="nowrap">
                             <input type="checkbox" name="showTerm" id="showTerm" value="true" checked="checked" disabled="disabled" />
-                            <label for="showTerm"><%=cm.cmsText( "term" )%></label>
+                            <label for="showTerm"><%=cm.cmsPhrase( "Term" )%></label>
                             &nbsp;
                             <input type="checkbox" name="showDefinition" id="showDefinition" value="true" checked="checked" disabled="disabled" />
-                            <label for="showDefinition"><%=cm.cmsText( "definition" )%></label>
+                            <label for="showDefinition"><%=cm.cmsPhrase( "Definition" )%></label>
                             &nbsp;
                             <input type="checkbox" name="showReference" id="showReference" value="true" checked="checked" />
-                            <label for="showReference"><%=cm.cmsText( "reference" )%></label>
+                            <label for="showReference"><%=cm.cmsPhrase( "Reference" )%></label>
                             &nbsp;
                             <input type="checkbox" name="showSource" id="showSource" value="true" checked="checked" />
-                            <label for="showSource"><%=cm.cmsText( "source" )%></label>
+                            <label for="showSource"><%=cm.cmsPhrase( "Source" )%></label>
                             &nbsp;
                             <input type="checkbox" name="showURL" id="showURL" value="true" checked="checked" />
-                            <label for="showURL"><%=cm.cmsText( "url" )%></label>
+                            <label for="showURL"><%=cm.cmsPhrase( "Url" )%></label>
                           </td>
                         </tr>
                         <tr>
                           <td>
                             <br />
                             <img width="11" height="12" style="vertical-align:middle" alt="Mandatory field" title="This field is mandatory" src="images/mini/field_mandatory.gif" />
-                            <label for="searchString"><%=cm.cmsText( "term" )%></label>
+                            <label for="searchString"><%=cm.cmsPhrase( "Term" )%></label>
                             <select title="Operator" name="operand" id="operand">
                               <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
                               <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
@@ -187,10 +187,10 @@
                             <%=cm.cmsInput("glossary_search_value")%>
                             <div style="width : 100%; background-color : #EEEEEE">
                               <input name="searchTerms" id="searchTerms" type="checkbox" value="true" checked="checked" />
-                              <label for="searchTerms"><%=cm.cmsText( "search_terms" )%></label>
+                              <label for="searchTerms"><%=cm.cmsPhrase( "Search terms" )%></label>
                               &nbsp;&nbsp;
                               <input name="searchDefinitions" id="searchDefinitions" type="checkbox" value="true" checked="checked" />
-                              <label for="searchDefinitions"><%=cm.cmsText( "generic_glossary_15" )%></label>
+                              <label for="searchDefinitions"><%=cm.cmsPhrase( "Search definitions" )%></label>
                             </div>
 
                             <div style="width : 100%; text-align : right;">

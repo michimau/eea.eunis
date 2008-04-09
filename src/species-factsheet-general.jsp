@@ -52,10 +52,10 @@
     <thead>
       <tr>
         <th colspan="2">
-          <%=cm.cmsText("species_factsheet_taxonomicInformation")%>
+          <%=cm.cmsPhrase("Taxonomic information")%>
         </th>
         <th>
-          <%=cm.cmsText("reference")%>
+          <%=cm.cmsPhrase("Reference")%>
         </th>
       </tr>
     </thead>
@@ -113,7 +113,7 @@
 %>
       <tr class="zebraeven">
         <td width="20%">
-          <%=cm.cmsText("genus")%>
+          <%=cm.cmsPhrase("Genus")%>
         </td>
         <td width="40%">
           <strong>
@@ -126,7 +126,7 @@
   <table summary="layout" width="90%" border="0" cellspacing="5" cellpadding="5">
     <tr>
       <td width="20%" style="text-align : left; vertical-align : middle">
-        <a title="<%=cm.cms("species_factsheet_02_Title")%>" href="javascript:openGooglePics('http://images.google.com/images?q=<%=Utilities.treatURLSpecialCharacters(scientificName)%>')"><%=cm.cmsText("pictures_on_google")%></a>
+        <a title="<%=cm.cms("species_factsheet_02_Title")%>" href="javascript:openGooglePics('http://images.google.com/images?q=<%=Utilities.treatURLSpecialCharacters(scientificName)%>')"><%=cm.cmsPhrase("Pictures on Google")%></a>
         <%=cm.cmsTitle("species_factsheet_02_Title")%>
       </td>
       <td width="20%" style="text-align : left; vertical-align : middle">
@@ -136,7 +136,7 @@
       gbifLink = URLEncoder.encode(gbifLink,"UTF-8");
 //      gbifLink = gbifLink.replaceAll( " ", "\\." );
 %>
-        <a title="<%=cm.cms("species_factsheet_03_Title")%>" href="javascript:openGBIF('http://data.gbif.org/species/<%=gbifLink%>', 600, 600 );"><%=cm.cmsText("species_factsheet_03")%></a>
+        <a title="<%=cm.cms("species_factsheet_03_Title")%>" href="javascript:openGBIF('http://data.gbif.org/species/<%=gbifLink%>', 600, 600 );"><%=cm.cmsPhrase("GBIF link")%></a>
         <%=cm.cmsTitle("species_factsheet_03_Title")%>
       </td>
       <td width="20%" style="text-align : left; vertical-align : middle">
@@ -163,7 +163,7 @@
         genus=sn.substring(0, pos);
         spname=sn.substring(pos+1);
 %>
-        <a title="<%=cm.cms("species_factsheet_04_Title")%>" href="javascript:openunepwcmc('http://sea.unep-wcmc.org/isdb/species.cfm?source=<%=kingdomname%>&amp;genus=<%=genus%>&amp;species=<%=Utilities.treatURLSpecialCharacters(spname)%>')"><%=cm.cmsText("unep_link")%></a>
+        <a title="<%=cm.cms("species_factsheet_04_Title")%>" href="javascript:openunepwcmc('http://sea.unep-wcmc.org/isdb/species.cfm?source=<%=kingdomname%>&amp;genus=<%=genus%>&amp;species=<%=Utilities.treatURLSpecialCharacters(spname)%>')"><%=cm.cmsPhrase("UNEP-WCMC link")%></a>
         <%=cm.cmsTitle("species_factsheet_04_Title")%>
 <%
       }
@@ -196,7 +196,7 @@
         String scientificNameURL = scientificName.replace(' ','+');
 %>
       <td width="20%" style="text-align : left; vertical-align : middle">
-        <a title="<%=cm.cms("species_factsheet_05_Title")%>" href="javascript:openNewPage('http://www.redlist.org/search/search.php?freetext=<%=scientificNameURL%>&amp;modifier=phrase&amp;criteria=wholedb&amp;taxa_species=1&amp;redlistCategory%5B%5D=allex&amp;redlistAssessyear%5B%5D=all&amp;country%5B%5D=all&amp;aquatic%5B%5D=all&amp;regions%5B%5D=all&amp;habitats%5B%5D=all&amp;threats%5B%5D=all');"><%=cm.cmsText("species_factsheet_05")%></a>
+        <a title="<%=cm.cms("species_factsheet_05_Title")%>" href="javascript:openNewPage('http://www.redlist.org/search/search.php?freetext=<%=scientificNameURL%>&amp;modifier=phrase&amp;criteria=wholedb&amp;taxa_species=1&amp;redlistCategory%5B%5D=allex&amp;redlistAssessyear%5B%5D=all&amp;country%5B%5D=all&amp;aquatic%5B%5D=all&amp;regions%5B%5D=all&amp;habitats%5B%5D=all&amp;threats%5B%5D=all');"><%=cm.cmsPhrase("Redlist link")%></a>
         <%=cm.cmsTitle("species_factsheet_05_Title")%>
       </td>
 <%
@@ -207,7 +207,7 @@
         String speciesName = (scientificName.trim().indexOf(" ")>=0? scientificName.trim().substring(scientificName.indexOf(" ") + 1) : scientificName);
 %>
       <td width="20%" style="text-align : left; vertical-align : middle">
-        <a title="<%=cm.cms("species_factsheet_06_Title")%>" href="javascript:openNewPage('http://www.fishbase.org/Summary/SpeciesSummary.cfm?genusname=<%=genusName%>&amp;speciesname=<%=Utilities.treatURLSpecialCharacters(speciesName)%>');"><%=cm.cmsText("species_factsheet_06")%></a>
+        <a title="<%=cm.cms("species_factsheet_06_Title")%>" href="javascript:openNewPage('http://www.fishbase.org/Summary/SpeciesSummary.cfm?genusname=<%=genusName%>&amp;speciesname=<%=Utilities.treatURLSpecialCharacters(speciesName)%>');"><%=cm.cmsPhrase("Fishbase link")%></a>
         <%=cm.cmsTitle("species_factsheet_06_Title")%>
       </td>
 <%
@@ -217,15 +217,15 @@
     </tr>
     <tr>
       <td width="20%" style="text-align : left; vertical-align : middle">
-        <a title="<%=cm.cms("species_factsheet_07_Title")%>" href="javascript:openNewPage('http://www.scirus.com/srsapp/search?q=%22<%=Utilities.treatURLSpecialCharacters(scientificName)%>%22&amp;ds=web&amp;g=s&amp;t=all')"><%=cm.cmsText("species_factsheet_07")%></a>
+        <a title="<%=cm.cms("species_factsheet_07_Title")%>" href="javascript:openNewPage('http://www.scirus.com/srsapp/search?q=%22<%=Utilities.treatURLSpecialCharacters(scientificName)%>%22&amp;ds=web&amp;g=s&amp;t=all')"><%=cm.cmsPhrase("SCIRUS")%></a>
         <%=cm.cmsTitle("species_factsheet_07_Title")%>
       </td>
       <td width="20%" style="text-align : left; vertical-align : middle">
-        <a title="<%=cm.cms("species_factsheet_08_Title")%>" href="javascript:openNewPage('http://www.biologybrowser.org/cgi-bin/search/hyperseek.cgi?Terms=<%=Utilities.treatURLSpecialCharacters(scientificName)%>')"><%=cm.cmsText("species_factsheet_08")%></a>
+        <a title="<%=cm.cms("species_factsheet_08_Title")%>" href="javascript:openNewPage('http://www.biologybrowser.org/cgi-bin/search/hyperseek.cgi?Terms=<%=Utilities.treatURLSpecialCharacters(scientificName)%>')"><%=cm.cmsPhrase("Biology Browser")%></a>
         <%=cm.cmsTitle("species_factsheet_08_Title")%>
       </td>
       <td width="20%" style="text-align : left; vertical-align : middle">
-        <a title="<%=cm.cms("species_factsheet_09_Title")%>" href="javascript:openNewPage('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?doptcmdl=ExternalLink&amp;cmd=Search&amp;db=taxonomy&amp;term=<%=Utilities.treatURLSpecialCharacters(scientificName)%>')"><%=cm.cmsText("species_factsheet_09")%></a>
+        <a title="<%=cm.cms("species_factsheet_09_Title")%>" href="javascript:openNewPage('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?doptcmdl=ExternalLink&amp;cmd=Search&amp;db=taxonomy&amp;term=<%=Utilities.treatURLSpecialCharacters(scientificName)%>')"><%=cm.cmsPhrase("NCBI Taxonomy browser")%></a>
         <%=cm.cmsTitle("species_factsheet_09_Title")%>
       </td>
       <td width="20%" style="text-align : left; vertical-align : middle">
@@ -241,7 +241,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
         genus=sn.substring(0, pos).trim();
         spname=sn.substring(pos+1).trim();
 %>
-        <a title="<%=cm.cms("species_factsheet_21_Title")%>" href="javascript:openNewPage('http://www.faunaeur.org/index.php?show_what=search%20results&amp;genus= <%=genus%> &amp;species= <%=spname%>')"><%=cm.cmsText("species_factsheet_21")%></a>
+        <a title="<%=cm.cms("species_factsheet_21_Title")%>" href="javascript:openNewPage('http://www.faunaeur.org/index.php?show_what=search%20results&amp;genus= <%=genus%> &amp;species= <%=spname%>')"><%=cm.cmsPhrase("Fauna Europaea")%></a>
         <%=cm.cmsTitle("species_factsheet_21_Title")%>
 <%
       }
@@ -261,7 +261,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
     </tr>
   </table>
   <h2>
-    <%=cm.cmsText("source")%>
+    <%=cm.cmsPhrase("Source")%>
   </h2>
   <table summary="layout" class="datatable" width="90%">
     <tbody>
@@ -270,7 +270,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 %>
       <tr>
         <td width="18%">
-          <%=cm.cmsText("title")%>:
+          <%=cm.cmsPhrase("Title")%>:
         </td>
         <td width="70%">
           <strong>
@@ -280,7 +280,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
       </tr>
       <tr class="zebraeven">
         <td>
-          <%=cm.cmsText("author")%>:
+          <%=cm.cmsPhrase("Author")%>:
         </td>
         <td>
           <strong>
@@ -290,7 +290,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
       </tr>
       <tr>
         <td>
-          <%=cm.cmsText("publisher")%>:
+          <%=cm.cmsPhrase("Publisher")%>:
         </td>
         <td>
           <strong>
@@ -300,7 +300,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
       </tr>
       <tr class="zebraeven">
         <td>
-          <%=cm.cmsText("publication_date")%>:
+          <%=cm.cmsPhrase("Publication date")%>:
         </td>
         <td>
           <strong>
@@ -310,7 +310,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
       </tr>
       <tr>
         <td>
-          <%=cm.cmsText("url")%>:
+          <%=cm.cmsPhrase("Url")%>:
         </td>
         <td>
 <%
@@ -340,17 +340,17 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 %>
   <br />
   <h2>
-    <%=cm.cmsText("synonyms")%>
+    <%=cm.cmsPhrase("Synonyms")%>
   </h2>
   <table summary="<%=cm.cms("species_factsheet_10_Sum")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th width="40%" style="text-align:left;text-transform: capitalize;">
-          <%=cm.cmsText("scientific_name")%>
+          <%=cm.cmsPhrase("Scientific name")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
         <th width="60%" style="text-align:left;text-transform: capitalize;">
-          <%=cm.cmsText("author")%>
+          <%=cm.cmsPhrase("Author")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
       </tr>
@@ -400,17 +400,17 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 %>
   <br />
   <h2>
-    <%=cm.cmsText("valid_subspecies_europe")%>
+    <%=cm.cmsPhrase("Valid subspecies in Europe")%>
   </h2>
   <table summary="<%=cm.cms("species_factsheet_11_Sum")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th width="40%" style="text-transform: capitalize;">
-          <%=cm.cmsText("scientific_name")%>
+          <%=cm.cmsPhrase("Scientific name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th width="60%" style="text-transform: capitalize;">
-          <%=cm.cmsText("source")%>
+          <%=cm.cmsPhrase("Source")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
@@ -451,14 +451,14 @@ if(kingdomname.equalsIgnoreCase("Animals"))
       if(null != listPictures && listPictures.size() > 0)
       {
 %>
-  <a title="<%=cm.cms("species_factsheet_12_Title")%>" href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)"><%=cm.cmsText("view_pictures")%></a>
+  <a title="<%=cm.cms("species_factsheet_12_Title")%>" href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)"><%=cm.cmsPhrase("View pictures")%></a>
   <%=cm.cmsTitle("species_factsheet_12_Title")%>
 <%
       }
       else if ( SessionManager.isAuthenticated() )
       {
 %>
-      <a title="<%=cm.cms("species_factsheet_13_Title")%>" href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=urlPic%>',600,600)"><%=cm.cmsText("upload_pictures")%></a>
+      <a title="<%=cm.cms("species_factsheet_13_Title")%>" href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=urlPic%>',600,600)"><%=cm.cmsPhrase("Upload pictures")%></a>
         <%=cm.cmsTitle("species_factsheet_13_Title")%>
 <%
       }

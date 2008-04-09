@@ -65,7 +65,7 @@
         {
           SitesSearchCriteria sitesSearch = new SitesSearchCriteria(searchAttribute,formBean.getScientificName(),relationOp);
       %>
-          <h2><%=cm.cmsText("list_of_values_for")%></h2>
+          <h2><%=cm.cmsPhrase("List of values for:")%></h2>
           <u><%=sitesSearch.getHumanMappings().get(searchAttribute)%></u>
       <%
           if (null != formBean.getScientificName() && null != relationOp)
@@ -118,7 +118,7 @@
         {
  %>
         <strong>
-          <%=cm.cmsText("no_results_found")%>.
+          <%=cm.cmsPhrase("No results were found")%>.
         </strong>
         <br />
      <%

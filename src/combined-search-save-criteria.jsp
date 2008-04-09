@@ -192,13 +192,13 @@
         <tr bgcolor="#EEEEEE">
           <td>
             <h2>
-              <%=cm.cmsText("generic_save-search_01")%>
+              <%=cm.cmsPhrase("Save search criteria:")%>
             </h2>
           </td>
         </tr>
         <tr>
           <td>
-            <%=cm.cmsText("generic_save-search_02")%>
+            <%=cm.cmsPhrase("Please enter few words to describe this criteria for later reference")%>
           </td>
         </tr>
         <tr>
@@ -213,9 +213,9 @@
             <img alt="" src="images/mini/bulletb.gif" width="6" height="6" />
             &nbsp;
             <strong>
-            <%=cm.cmsText("generic_save-search_03")%>
+            <%=cm.cmsPhrase("Remark:")%>
             </strong>
-            <%=cm.cmsText("generic_save-search_04")%>
+            <%=cm.cmsPhrase("By leaving this field empty, a default description (based on your selections) will be associated with this criteria.")%>
           </td>
         </tr>
 <%
@@ -225,11 +225,11 @@
             String saveOperationResult = "";
             if ( saveWithSuccess )
             {
-              saveOperationResult = cm.cmsText("generic_save-search_05");
+              saveOperationResult = cm.cmsPhrase("Your search criteria was saved in database.");
             }
             else
             {
-              saveOperationResult = cm.cmsText("generic_save-search_06");
+              saveOperationResult = cm.cmsPhrase("Your search criterion wasn't saved in database. Please try again!");
             }
 %>
             <tr>

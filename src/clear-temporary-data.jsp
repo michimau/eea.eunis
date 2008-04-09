@@ -66,9 +66,9 @@
   {
 %>
                 <h1>
-                  <%=cm.cmsText( "clear_temporary_data_btn" )%>
+                  <%=cm.cmsPhrase( "Clear temporary data" )%>
                 </h1>
-                <%=cm.cmsText("generic_clear-temporary-data_01")%>
+                <%=cm.cmsPhrase("You do not have Administrator rights, which are required to perform this operation.<br />Please login as Administrator first.")%>
                 <br />
                 <%=cm.cmsMsg("clear_temporary_data_btn")%>
 <%
@@ -102,14 +102,14 @@
           if(!result)
           {
 %>
-                <%=cm.cmsText("generic_clear-temporary-data_03")%>
+                <%=cm.cmsPhrase("The temporary data could not be deleted.")%>
                 <br />
 <%
           }
           else
           {
 %>
-                <%=cm.cmsText("generic_clear-temporary-data_04")%>
+                <%=cm.cmsPhrase("The temporary data has been deleted.")%>
                 <br />
 <%
           }
@@ -169,7 +169,7 @@
     }
 %>
                 <br />
-                <%=cm.cmsText("generic_clear-temporary-data_05")%>&nbsp;<strong><%=datacount%></strong>
+                <%=cm.cmsPhrase("Total number of rows containing temporary data detected in the database:")%>&nbsp;<strong><%=datacount%></strong>
                 <br />
                 <%=cm.cmsMsg("clear_temporary_data_btn")%>
 <%

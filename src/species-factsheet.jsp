@@ -61,7 +61,7 @@
   {
 %>
     <title>
-      <%=cm.cmsText("species_factsheet_nodata")%>.
+      <%=cm.cmsPhrase("We are sorry, the requested species does not exists")%>.
     </title>
 <%
   }
@@ -150,9 +150,9 @@
                   </ul>
                 </div>
                 <br clear="all" />
-                <%=cm.cmsText("scientific_name")%>: <%=Utilities.treatURLSpecialCharacters(scientificName)%>
+                <%=cm.cmsPhrase("Scientific name")%>: <%=Utilities.treatURLSpecialCharacters(scientificName)%>
                 <br />
-                <%=cm.cmsText("author")%>:<strong><%=Utilities.treatURLSpecialCharacters(factsheet.getSpeciesNatureObject().getAuthor())%></strong>
+                <%=cm.cmsPhrase("Author")%>:<strong><%=Utilities.treatURLSpecialCharacters(factsheet.getSpeciesNatureObject().getAuthor())%></strong>
                 <br />
                 <br />
                 <div id="tabbedmenu">
@@ -317,7 +317,7 @@
                 </jsp:include>
                 <br />
                 <strong>
-                  <%=cm.cmsText("species_factsheet_nodata")%>.
+                  <%=cm.cmsPhrase("We are sorry, the requested species does not exists")%>.
                 </strong>
                 <br />
 <%

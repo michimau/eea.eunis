@@ -54,8 +54,8 @@
   // On can display the title of this popup, if exist results
   if(results != null && results.size() > 0) {
 %>
-<h2><%=cm.cmsText("list_of_values_for")%></h2>
-<u><%=cm.cmsText("habitat_type_name")%></u>
+<h2><%=cm.cmsPhrase("List of values for:")%></h2>
+<u><%=cm.cmsPhrase("Habitat type name")%></u>
 <em><%=Utilities.ReturnStringRelatioOp(Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS))%></em>
 <strong><%=formBean.getScientificName()%></strong>
 <br />
@@ -69,7 +69,7 @@
   <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
     <tr>
       <th>
-        <%=cm.cmsText("search_results")%>
+        <%=cm.cmsPhrase("Search results")%>
       </th>
     </tr>
     <%  for(int i = 0; i < results.size(); i++) {
@@ -90,7 +90,7 @@
 } else {
 %>
 <strong>
-  <%=cm.cmsText("no_results_found_1")%>
+  <%=cm.cmsPhrase("No results were found.")%>
 </strong>
 <br />
 <br />

@@ -102,12 +102,12 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                    <%=cm.cmsText("groups")%>
+                    <%=cm.cmsPhrase("Groups")%>
                 </h1>
                 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
                     <td>
-                      <%=cm.cmsText("species_groups_16")%>
+                      <%=cm.cmsPhrase("Species and subspecies by main groups<br />(ex.: search species and subspecies belonging to <strong>invertebrates</strong> group)")%>
                       <br />
                       <br />
                     <form name="eunis" onsubmit="return validateForm()" method="get" action="species-groups-result.jsp">
@@ -117,7 +117,7 @@
                         <tr>
                           <td>
                             <strong>
-                              <%=cm.cmsText("search_will_provide_2")%>
+                              <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed):")%>
                             </strong>
                           </td>
                         </tr>
@@ -125,35 +125,35 @@
                           <td>
                             <input title="<%=cm.cms("group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" />
                               <%=cm.cmsTitle("group")%>
-                              <label for ="checkbox1"><%=cm.cmsText("group")%></label>
+                              <label for ="checkbox1"><%=cm.cmsPhrase("Group")%></label>
                             <input title="<%=cm.cms("order_column")%>" id="checkbox2" type="checkbox" name="showOrder" value="true" checked="checked" />
                               <%=cm.cmsTitle("order_column")%>
-                              <label for ="checkbox2"><%=cm.cmsText("order_column")%></label>
+                              <label for ="checkbox2"><%=cm.cmsPhrase("Order")%></label>
                             <input title="<%=cm.cms("family")%>" id="checkbox3" type="checkbox" name="showFamily" value="true" checked="checked" />
                               <%=cm.cmsTitle("family")%>
-                              <label for ="checkbox3"><%=cm.cmsText("family")%></label>
+                              <label for ="checkbox3"><%=cm.cmsPhrase("Family")%></label>
                             <input title="<%=cm.cms("scientific_name")%>" id="checkbox4" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" />
                               <%=cm.cmsTitle("scientific_name")%>
-                              <label for ="checkbox4"><%=cm.cmsText("scientific_name")%></label>
+                              <label for ="checkbox4"><%=cm.cmsPhrase("Scientific name")%></label>
                               <input title="<%=cm.cms("vernacular_name")%>" id="checkbox5" type="checkbox" name="showVernacularNames" value="true" />
                               <%=cm.cmsTitle("vernacular_name")%>
-                              <label for ="checkbox5"><%=cm.cmsText("vernacular_name")%></label>
+                              <label for ="checkbox5"><%=cm.cmsPhrase("Vernacular Name")%></label>
                           </td>
                         </tr>
                       </table>
                       <table summary="<%=cm.cms("species_groups_19_Sum")%>" class="datatable" >
                         <tr>
                           <th colspan="2">
-                            <%=cm.cmsText("group")%>
+                            <%=cm.cmsPhrase("Group")%>
                           </th>
                           <th style="text-align:right">
-                            <%=cm.cmsText("species_groups_09")%>
+                            <%=cm.cmsPhrase("Number of scientific species names")%>
                           </th>
                           <th style="text-align:right">
-                            <%=cm.cmsText("species_groups_10")%>
+                            <%=cm.cmsPhrase("Actual number of taxa")%>
                           </th>
                           <th style="text-align:center">
-                            <%=cm.cmsText("select")%>
+                            <%=cm.cmsPhrase("Select")%>
                           </th>
                         </tr>
                         <jsp:useBean id="GroupSpeciesDomain" class="ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesDomain" scope="page" />
@@ -196,29 +196,29 @@
                       %>
                         <tr>
                           <th colspan="2">
-                            <%=cm.cmsText("group")%>
+                            <%=cm.cmsPhrase("Group")%>
                           </th>
                           <th style="text-align:right;">
-                            <%=cm.cmsText("species_groups_09")%>
+                            <%=cm.cmsPhrase("Number of scientific species names")%>
                           </th>
                           <th style="text-align:right;">
-                            <%=cm.cmsText("species_groups_10")%>
+                            <%=cm.cmsPhrase("Actual number of taxa")%>
                           </th>
                           <th style="text-align:center">
-                            <%=cm.cmsText("select")%>
+                            <%=cm.cmsPhrase("Select")%>
                           </th>
                         </tr>
                         <tr>
                           <td colspan="5" style="text-align:center">
                             <input type="hidden" name="groupName" />
-                            <%=cm.cmsText("species_groups_12")%>
+                            <%=cm.cmsPhrase("<strong>WARNING:</strong>Getting results for a group with many species can take a longer time.")%>
                             <br />
                           </td>
                         </tr>
                         <tr>
                           <td colspan="5" style="text-align:center">
                             <strong>
-                            <%=cm.cmsText("species_groups_Note")%>
+                            <%=cm.cmsPhrase("* - The number of actual species retrieved by the Search might be different, depending on your user rights")%>
                             </strong>
                           </td>
                         </tr>
@@ -254,7 +254,7 @@
                       //]]>
                       </script>
                       <br />
-                      <%=cm.cmsText("save_your_criteria")%>:
+                      <%=cm.cmsPhrase("Save your criteria")%>:
                       <a title="<%=cm.cms("save_open_link")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'species-groups.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_open_link")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                       <%=cm.cmsTitle("save_open_link")%>
                       <%

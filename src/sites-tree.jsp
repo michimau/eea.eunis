@@ -69,10 +69,10 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("sites_tree_browser")%>
+                  <%=cm.cmsPhrase("Sites tree browser")%>
                 </h1>
                 <br/>
-                <%=cm.cmsText("sites_tree_browser_explanation")%>
+                <%=cm.cmsPhrase("Sites groupped by Designations in EUNIS Database")%>
                 <br/>
           <%
             String idSource = Utilities.formatString( request.getParameter( "idSource" ), "" );
@@ -121,7 +121,7 @@
           %>
                   <a title="<%=rs.getString("DESCRIPTION")%>" href="sites-tree.jsp?idDesignation=<%=rs.getString("ID_DESIGNATION")%>&amp;idGeoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=rs.getString("DESCRIPTION")%> (<%=rs.getString("AREA_NAME_EN")%>)</a>
                   &nbsp;
-                  [<a title="<%=rs.getString("DESCRIPTION")%>" href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&amp;geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=cm.cmsText("open_designation_factsheet")%></a>]
+                  [<a title="<%=rs.getString("DESCRIPTION")%>" href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&amp;geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=cm.cmsPhrase("Open designation factsheet")%></a>]
           <%
                   //now check if we expand source databases
 
@@ -191,7 +191,7 @@
           %>
                 <%=rs.getString("DESCRIPTION")%>
                 &nbsp;
-                [<a title="<%=rs.getString("DESCRIPTION")%>" href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&amp;geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=cm.cmsText("open_designation_factsheet")%></a>]
+                [<a title="<%=rs.getString("DESCRIPTION")%>" href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&amp;geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=cm.cmsPhrase("Open designation factsheet")%></a>]
 <%
                 }
 %>

@@ -167,9 +167,9 @@
       <%=firstdescription%>
     </div>
     <div id="navRow" style="width : 100%; text-align : center;">
-      <a href="javascript:prevImage('rImage')"><%=cm.cmsText("pictures_previous")%></a>
+      <a href="javascript:prevImage('rImage')"><%=cm.cmsPhrase("< Previous")%></a>
       &nbsp;&nbsp;
-      <a href="javascript:nextImage('rImage')"><%=cm.cmsText("pictures_next")%></a>
+      <a href="javascript:nextImage('rImage')"><%=cm.cmsPhrase("Next >")%></a>
     </div>
     <div style="width : 100%; text-align : center;">
       <img alt="<%=firstdescription%>" id="image" name="rImage" src="<%=dirBase + firstimage%>" border="1" />
@@ -189,7 +189,7 @@
   else
   {
 %>
-    <%=cm.cmsText("pictures_none")%>
+    <%=cm.cmsPhrase("We are sorry, but no pictures are available for")%>
     <strong>
       <%=scientificName%>
     </strong>
@@ -205,8 +205,8 @@
   if (SessionManager.isAuthenticated())
   {
 %>
-    <a href="pictures-upload.jsp?idobject=<%=IdObject%>&amp;natureobjecttype=<%=NatureObjectType%>&amp;operation=upload"><%=cm.cmsText("pictures_uploadnew")%></a><br />
-    <a href="javascript:deletePicture();"><%=cm.cmsText("pictures_delete")%></a><br />
+    <a href="pictures-upload.jsp?idobject=<%=IdObject%>&amp;natureobjecttype=<%=NatureObjectType%>&amp;operation=upload"><%=cm.cmsPhrase("Upload new picture")%></a><br />
+    <a href="javascript:deletePicture();"><%=cm.cmsPhrase("Delete picture")%></a><br />
     <script type="text/javascript" language="javascript">
       //<![CDATA[
       function deletePicture() {
@@ -231,7 +231,7 @@
   else
   {
 %>
-    <%=cm.cmsText("pictures_login")%>
+    <%=cm.cmsPhrase("If you were logged in, you could also add / delete pictures.")%>
 <%
   }
 %>

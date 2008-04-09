@@ -31,19 +31,19 @@
   if((factsheet.isEunis() && !legals.isEmpty())) {
 %>
 <h2>
-  <%=cm.cmsText("habitats_factsheet_27")%>
+  <%=cm.cmsPhrase("Code in legal instrument")%>
 </h2>
 <table summary="<%=cm.cms("habitat_type_legal_instruments")%>" class="listing" width="90%">
   <thead>
     <tr>
       <th width="30%" style="text-transform: capitalize; text-align: left;">
-        <%=cm.cmsText("legal_instrument")%>
+        <%=cm.cmsPhrase("Legal Instrument")%>
       </th>
       <th width="50%" style="text-transform: capitalize; text-align: left;">
-        <%=cm.cmsText("habitats_factsheet_29")%>
+        <%=cm.cmsPhrase("Habitat type legal name")%>
       </th>
       <th width="20%" style="text-transform: capitalize; text-align: left;">
-        <%=cm.cmsText("habitats_factsheet_30")%>
+        <%=cm.cmsPhrase("Habitat type legal code")%>
       </th>
     </tr>
   </thead>

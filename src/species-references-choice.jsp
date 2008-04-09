@@ -175,10 +175,10 @@
     }
 %>
     <h2>
-      <%=cm.cmsText("list_of")%>&nbsp;<%=listOfWhat%>&nbsp;for
+      <%=cm.cmsPhrase("List of")%>&nbsp;<%=listOfWhat%>&nbsp;for
     </h2>
     <strong>
-      <%=cm.cmsText("references")%>
+      <%=cm.cmsPhrase("References")%>
       <%=forWhat.equalsIgnoreCase("") ? "" : "with following characteristics"%>&nbsp;:
     </strong>
     <br />
@@ -198,7 +198,7 @@
           {
       %>
           <strong>
-            <%=cm.cmsText("no_details_recorded")%> <%=request.getParameter("fromWhere")%>.
+            <%=cm.cmsPhrase("No details are recorded for")%> <%=request.getParameter("fromWhere")%>.
           </strong>
           <br />
       <%
@@ -210,7 +210,7 @@
             <table summary="<%=cm.cms("list_of_values")%>" class="datatable">
               <tr>
                 <th>
-                  <%=cm.cmsText("values")%>
+                  <%=cm.cmsPhrase("Values")%>
                 </th>
               </tr>
       <%
@@ -239,7 +239,7 @@
       {
  %>
               <strong>
-                <%=cm.cmsText("no_results_found")%>.
+                <%=cm.cmsPhrase("No results were found")%>.
               </strong>
               <br />
        <%

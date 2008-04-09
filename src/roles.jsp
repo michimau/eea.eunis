@@ -119,7 +119,7 @@
                   </ul>
                 </div>
                 <h1>
-				     <%=cm.cmsText("eunis_database_role_management")%>
+				     <%=cm.cmsPhrase("EUNIS Database Role Management")%>
 				</h1>
 				<br />
 <!-- MAIN CONTENT -->

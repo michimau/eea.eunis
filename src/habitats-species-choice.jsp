@@ -104,7 +104,7 @@
   } else {
   %>
   <strong>
-    <%=cm.cmsText("no_results_found")%>
+    <%=cm.cmsPhrase("No results were found")%>
   </strong>
   <br />
   <%

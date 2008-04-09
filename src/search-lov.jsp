@@ -574,7 +574,7 @@
   } else {
 %>
     <strong>
-      <%=cm.cmsText("search_lov_novalues")%>.
+      <%=cm.cmsPhrase("No list of values available")%>.
     </strong>
     <br />
 <%

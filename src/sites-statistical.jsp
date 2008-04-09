@@ -79,7 +79,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_mandatory")%>
                   <label for="country">
-                      <%=cm.cmsText("country_is")%>
+                      <%=cm.cmsPhrase("Country is")%>
                   </label>
                   <input id="country" name="country" type="text" title="<%=cm.cms("country_is")%>" />&nbsp;
                   <a title="<%=cm.cms("helper")%>" href="javascript:openHelperCountry('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" style="vertical-align:middle" /></a>
@@ -90,7 +90,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_optional")%>
                   <label for="designation">
-                      <%=cm.cmsText("sites_statistical_05")%>
+                      <%=cm.cmsPhrase("Designation name contains")%>
                   </label>
                   <input id="designation" name="designation" type="text" size="30" title="<%=cm.cms("sites_statistical_05")%>" />
                   <%=cm.cmsTitle("sites_statistical_05")%>
@@ -103,7 +103,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_optional")%>
                   <label for="designationCat">
-                      <%=cm.cmsText("sites_statistical_06")%>
+                      <%=cm.cmsPhrase("Designation category is")%>
                   </label>
                   <select id="designationCat" name="designationCat" title="<%=cm.cms("sites_statistical_06")%>">
                     <option value="any" selected="selected"><%=cm.cms("any")%></option>
@@ -120,12 +120,12 @@
                   <br />
                   <img style="vertical-align:middle" alt="<%=Accesibility.getText( "generic.criteria.optional" )%>" title="<%=Accesibility.getText( "generic.criteria.optional" )%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <strong>
-                    <%=cm.cmsText("sites_statistical_08")%>&nbsp;
+                    <%=cm.cmsPhrase("Designation year is between")%>&nbsp;
                     <label for="yearMin" class="noshow"><%=cm.cms("minimum_designation_year")%></label>
                     <input id="yearMin" name="yearMin" type="text" size="4" title="<%=cm.cms("minimum_designation_year")%>" />
                     <%=cm.cmsLabel("minimum_designation_year")%>
 
-                    <%=cm.cmsText("and")%>
+                    <%=cm.cmsPhrase("and")%>
                     <label for="yearMax" class="noshow"><%=cm.cms("maximum_designation_year")%></label>
                     <input id="yearMax" name="yearMax" type="text" size="4" title="<%=cm.cms("maximum_designation_year")%>" />
                     <%=cm.cmsLabel("maximum_designation_year")%>
@@ -147,7 +147,7 @@
             {
            %>
                 <br />
-                <%=cm.cmsText("save_your_criteria_1")%>
+                <%=cm.cmsPhrase("Save your criteria:")%>
                 <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-statistical.jsp','5','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                 <%=cm.cmsTitle("save")%>
                 <%=cm.cmsAlt("save")%>

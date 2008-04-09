@@ -83,20 +83,20 @@
   if(request.getParameter("EMERALD") != null) EMERALD="checked";
   //EMERALD = null; // Disable EMERALD for now
 
-  String dbNatura2000 = Utilities.formatString(cm.cmsText("sites_databases_Natura 2000"), "Natura 2000");
-  String dbCDDANational = Utilities.formatString(cm.cmsText("sites_databases_CDDA National"), "CDDA National");
-  String dbNatureNet = Utilities.formatString(cm.cmsText("sites_databases_Nature Net"), "Nature Net");
-  String dbDiploma = Utilities.formatString(cm.cmsText("sites_databases_European Diploma"), "European Diploma");
-  String dbCDDAInternational = Utilities.formatString(cm.cmsText("sites_databases_CDDA International"), "CDDA International");
-  String dbCorine = Utilities.formatString(cm.cmsText("sites_databases_Corine Biotopes"), "Corine Biotopes");
-  String dbBiogenetic = Utilities.formatString(cm.cmsText("sites_databases_Biogenetic Reserve"), "Biogenetic Reserve");
-  String dbEmerald = Utilities.formatString(cm.cmsText("emerald"), "Emerald");
+  String dbNatura2000 = Utilities.formatString(cm.cmsPhrase("Natura 2000 (v.1.0)"), "Natura 2000");
+  String dbCDDANational = Utilities.formatString(cm.cmsPhrase("CDDA National (v.1.0)"), "CDDA National");
+  String dbNatureNet = Utilities.formatString(cm.cmsPhrase("Nature Net (v.1.0)"), "Nature Net");
+  String dbDiploma = Utilities.formatString(cm.cmsPhrase("European Diploma (v.1.0)"), "European Diploma");
+  String dbCDDAInternational = Utilities.formatString(cm.cmsPhrase("CDDA International (v.1.0)"), "CDDA International");
+  String dbCorine = Utilities.formatString(cm.cmsPhrase("Corine Biotopes (v.1.0)"), "Corine Biotopes");
+  String dbBiogenetic = Utilities.formatString(cm.cmsPhrase("Biogenetic Reserve (v.1.0) "), "Biogenetic Reserve");
+  String dbEmerald = Utilities.formatString(cm.cmsPhrase("Emerald"), "Emerald");
 %>
 <div style="width : 100%;">
 <table summary="layout" border="1" cellpadding="0" cellspacing="2" style="border-collapse: collapse; border-color : black;" width="100%">
   <tr>
     <td colspan="2">
-      <%=cm.cmsText("select_data_set")%>
+      <%=cm.cmsPhrase("Select data set:")%>
     </td>
     <td>
       <input type="button" id="checkAll" name="checkAll"
@@ -154,7 +154,7 @@
       <label for="EMERALD"><%=dbEmerald%></label>
     </td>
     <td width="34%">
-      <a title="<%=cm.cms("sites_databases_03_title")%>" href="sites-download.jsp"><%=cm.cmsText("download_full_data_set")%></a>
+      <a title="<%=cm.cms("sites_databases_03_title")%>" href="sites-download.jsp"><%=cm.cmsPhrase("Download full data set")%></a>
       <%=cm.cmsTitle("sites_databases_03_title")%>
     </td>
   </tr>

@@ -149,7 +149,7 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("sites_designated-codes-result_01")%>
+                  <%=cm.cmsPhrase("Sites by designation types")%>
                 </h1>
                 <%=((DesignationSearchCriteria)formBean.getMainSearchCriteria()).toHumanStringMain()%>
                 <br />
@@ -201,7 +201,7 @@
           %>
                 <br />
                 <div class="grey_rectangle">
-                  <%=cm.cmsText("refine_your_search")%>
+                  <%=cm.cmsPhrase("Refine your search")%>
                   <form title="refine search results" name="criteriaSearch" method="get" onsubmit="return(check(<%=noCriteria%>));" action="">
                     <%=formBean.toFORMParam(filterSearch)%>
                     <label for="criteriaType0" class="noshow"><%=cm.cms("criteria")%></label>
@@ -291,7 +291,7 @@
             if (criterias.length > 1)
             {
           %>
-                  <%=cm.cmsText("applied_filters_to_the_results_1")%>
+                  <%=cm.cmsPhrase("Applied filters to the results:")%>
                   <br />
           <%
             }
@@ -349,7 +349,7 @@
             {
           %>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("source_data_set")%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsPhrase("Source data set")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
           <%
@@ -358,7 +358,7 @@
             {
           %>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, sortCountry == null )%>"><%=Utilities.getSortImageTag(sortCountry)%><%=cm.cmsText("country")%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, sortCountry == null )%>"><%=Utilities.getSortImageTag(sortCountry)%><%=cm.cmsPhrase("Country")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
           <%
@@ -367,7 +367,7 @@
             {
           %>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("site_name")%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsPhrase("Site name")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
           <%
@@ -376,7 +376,7 @@
             {
           %>
                       <th scope="col">
-                        <%=cm.cmsText("designation_name")%>
+                        <%=cm.cmsPhrase("Designation name")%>
                       </th>
           <%
             }
@@ -384,10 +384,10 @@
             {
           %>
                       <th scope="col" style="text-align : center; white-space:nowrap;">
-                        <%=cm.cmsText("longitude")%>
+                        <%=cm.cmsPhrase("Longitude")%>
                       </th>
                       <th scope="col" style="text-align : center; white-space:nowrap;">
-                        <%=cm.cmsText("latitude")%>
+                        <%=cm.cmsPhrase("Latitude")%>
                       </th>
           <%
             }
@@ -395,7 +395,7 @@
             {
           %>
                       <th scope="col" style="text-align : right;">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("size_ha")%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsPhrase("Size(ha)")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
           <%
@@ -404,7 +404,7 @@
             {
           %>
                       <th scope="col" style="text-align : right;">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, sortYear == null )%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsText("designation_year")%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, sortYear == null )%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsPhrase("Designation year")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
           <%
@@ -504,7 +504,7 @@
             {
           %>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsText("source_data_set")%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_SOURCE_DB%>&amp;ascendency=<%=formBean.changeAscendency(sortSourceDB, sortSourceDB == null )%>"><%=Utilities.getSortImageTag(sortSourceDB)%><%=cm.cmsPhrase("Source data set")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
           <%
@@ -513,7 +513,7 @@
             {
           %>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, sortCountry == null )%>"><%=Utilities.getSortImageTag(sortCountry)%><%=cm.cmsText("country")%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_COUNTRY%>&amp;ascendency=<%=formBean.changeAscendency(sortCountry, sortCountry == null )%>"><%=Utilities.getSortImageTag(sortCountry)%><%=cm.cmsPhrase("Country")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
           <%
@@ -522,7 +522,7 @@
             {
           %>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsText("site_name")%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortName, sortName == null )%>"><%=Utilities.getSortImageTag(sortName)%><%=cm.cmsPhrase("Site name")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
           <%
@@ -531,7 +531,7 @@
             {
           %>
                       <th scope="col">
-                        <%=cm.cmsText("designation_name")%>
+                        <%=cm.cmsPhrase("Designation name")%>
                       </th>
           <%
             }
@@ -539,10 +539,10 @@
             {
           %>
                       <th scope="col" style="text-align : center; white-space:nowrap;">
-                        <%=cm.cmsText("longitude")%>
+                        <%=cm.cmsPhrase("Longitude")%>
                       </th>
                       <th scope="col" style="text-align : center; white-space:nowrap;">
-                        <%=cm.cmsText("latitude")%>
+                        <%=cm.cmsPhrase("Latitude")%>
                       </th>
           <%
             }
@@ -550,7 +550,7 @@
             {
           %>
                       <th scope="col" style="text-align : right;">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsText("size_ha")%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_SIZE%>&amp;ascendency=<%=formBean.changeAscendency(sortSize, sortSize == null )%>"><%=Utilities.getSortImageTag(sortSize)%><%=cm.cmsPhrase("Size(ha)")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
           <%
@@ -559,7 +559,7 @@
             {
           %>
                       <th scope="col" style="text-align : right;">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, sortYear == null )%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsText("designation_year")%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationSortCriteria.SORT_YEAR%>&amp;ascendency=<%=formBean.changeAscendency(sortYear, sortYear == null )%>"><%=Utilities.getSortImageTag(sortYear)%><%=cm.cmsPhrase("Designation year")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
           <%

@@ -73,7 +73,7 @@ Input parameters  on REQUEST:
     if (null != dynHeaderPrintLink)
     {
 %>
-          <a href="<%=dynHeaderPrintLink%>" title="<%=cm.cms( "header_download_pdf_title" )%>"><%=cm.cmsText( "header_download_pdf" )%></a>
+          <a href="<%=dynHeaderPrintLink%>" title="<%=cm.cms( "header_download_pdf_title" )%>"><%=cm.cmsPhrase( "Downloadable PDF" )%></a>
           <%=cm.cmsTitle( "header_download_pdf_title" )%>
 <%
     }
@@ -82,7 +82,7 @@ Input parameters  on REQUEST:
 %>
             <a href="<%=dynHeaderDownloadLink%>" title="<%=cm.cms( "header_download_tsv_title" )%>"><img alt="<%=cm.cms( "header_download_alt" )%>" src="images/mini/download.gif" width="16" height="16" border="0" style="vertical-align:middle" /></a>
             <%=cm.cmsTitle( "header_download_tsv_title" )%><%=cm.cmsAlt( "header_download_alt" )%>
-            <a href="<%=dynHeaderDownloadLink%>" title="<%=cm.cms( "header_download_tsv_title" )%>"><%=cm.cmsText( "header_download_tsv" )%></a>
+            <a href="<%=dynHeaderDownloadLink%>" title="<%=cm.cms( "header_download_tsv_title" )%>"><%=cm.cmsPhrase( "Download results" )%></a>
             <%=cm.cmsTitle( "header_download_tsv_title" )%>
 <%
     }

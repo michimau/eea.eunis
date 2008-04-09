@@ -68,13 +68,13 @@
   if(results.isEmpty()) {
 %>
 <strong>
-  <%=cm.cmsText("no_results_found_1")%>
+  <%=cm.cmsPhrase("No results were found.")%>
 </strong>
 <br />
 <%
 } else {
 %>
-<h2><%=cm.cmsText("list_of_values")%></h2>
+<h2><%=cm.cmsPhrase("List of values")%></h2>
 
 <div id="tab">
 <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
@@ -85,10 +85,10 @@
 %>
 <tr>
   <th>
-    <%=cm.cmsText("eunis_habitat_type_code")%>
+    <%=cm.cmsPhrase("EUNIS habitat type code")%>
   </th>
   <th>
-    <%=cm.cmsText("code_in_other_classifications")%>
+    <%=cm.cmsPhrase("Code in other classifications")%>
   </th>
   <th>
     <%=cm.cms("habitat_type_name")%>
@@ -100,13 +100,13 @@
 %>
 <tr>
   <th>
-    <%=cm.cmsText("habitats_code-choice_04")%>
+    <%=cm.cmsPhrase("Habitat ANNEX I directive code")%>
   </th>
   <th>
-    <%=cm.cmsText("code_in_other_classifications")%>
+    <%=cm.cmsPhrase("Code in other classifications")%>
   </th>
   <th>
-    <%=cm.cms("habitat_type_name")%>
+    <%=cm.cms("Habitat type name")%>
   </th>
 </tr>
 <%
@@ -115,16 +115,16 @@
 %>
 <tr>
   <th>
-    <%=cm.cmsText("eunis_habitat_type_code")%>
+    <%=cm.cmsPhrase("EUNIS habitat type code")%>
   </th>
   <th>
-    <%=cm.cmsText("habitats_code-choice_04")%>
+    <%=cm.cmsPhrase("Habitat ANNEX I directive code")%>
   </th>
   <th>
-    <%=cm.cmsText("code_in_other_classifications")%>
+    <%=cm.cmsPhrase("Code in other classifications")%>
   </th>
   <th>
-    <%=cm.cms("habitat_type_name")%>
+    <%=cm.cms("Habitat type name")%>
   </th>
 </tr>
 <%
@@ -134,10 +134,10 @@
 %>
 <tr>
   <th>
-    <%=cm.cmsText("eunis_habitat_type_code")%>
+    <%=cm.cmsPhrase("EUNIS habitat type code")%>
   </th>
   <th>
-    <%=cm.cms("habitat_type_name")%>
+    <%=cm.cms("Habitat type name")%>
   </th>
 </tr>
 <%
@@ -146,10 +146,10 @@
 %>
 <tr>
   <th>
-    <%=cm.cmsText("habitats_code-choice_04")%>
+    <%=cm.cmsPhrase("Habitat ANNEX I directive code")%>
   </th>
   <th>
-    <%=cm.cms("habitat_type_name")%>
+    <%=cm.cms("Habitat type name")%>
   </th>
 </tr>
 <%
@@ -158,13 +158,13 @@
 %>
 <tr>
   <th>
-    <%=cm.cmsText("eunis_habitat_type_code")%>
+    <%=cm.cmsPhrase("EUNIS habitat type code")%>
   </th>
   <th>
-    <%=cm.cmsText("habitats_code-choice_04")%>
+    <%=cm.cmsPhrase("Habitat ANNEX I directive code")%>
   </th>
   <th>
-    <%=cm.cms("habitat_type_name")%>
+    <%=cm.cms("Habitat type name")%>
   </th>
 </tr>
 <%

@@ -45,7 +45,7 @@
 %>
     <%=Utilities.getTextMaxLimitForPopup(cm, list.size() )%>
     <h2>
-      <%=cm.cmsText("list_of_values_for")%>:
+      <%=cm.cmsPhrase("List of values for:")%>:
     </h2>
 <%
     if ( _country.equalsIgnoreCase( "" ) )
@@ -58,7 +58,7 @@
     {
 %>
     <u>
-      <%=cm.cmsText("country_name")%>
+      <%=cm.cmsPhrase("Country name")%>
     </u>
     <em>
       <%=Utilities.ReturnStringRelatioOp( Utilities.OPERATOR_CONTAINS )%>
@@ -96,7 +96,7 @@
   {
 %>
     <strong>
-      <%=cm.cmsText("no_results_found_1")%>
+      <%=cm.cmsPhrase("No results were found.")%>
     </strong>
     <br />
     <br />

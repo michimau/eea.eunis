@@ -58,21 +58,21 @@ Input parameters  on REQUEST:
     {
 %>
 
-            <li><a href="<%=domain%>/<%=dynHeaderHelpLink%>" title="<%=cm.cms( "header_help_title" )%>"><%=cm.cmsText( "help" )%></a>
+            <li><a href="<%=domain%>/<%=dynHeaderHelpLink%>" title="<%=cm.cms( "header_help_title" )%>"><%=cm.cmsPhrase( "Help" )%></a>
             <%=cm.cmsTitle( "header_help_title" )%></li>
 <%
     }
     if (null != dynHeaderPrintLink)
     {
 %>
-          <li><a href="<%=dynHeaderPrintLink%>" title="<%=cm.cms( "header_download_pdf_title" )%>"><%=cm.cmsText( "header_download_pdf" )%></a>
+          <li><a href="<%=dynHeaderPrintLink%>" title="<%=cm.cms( "header_download_pdf_title" )%>"><%=cm.cmsPhrase( "Downloadable PDF" )%></a>
           <%=cm.cmsTitle( "header_download_pdf_title" )%></li>
 <%
     }
     if (null != dynHeaderGoogleLink)
     {
 %>
-          <li><a href="<%=dynHeaderGoogleLink%>" title="<%=cm.cms( "header_download_kml_title" )%>"><%=cm.cmsText( "header_download_kml" )%></a>
+          <li><a href="<%=dynHeaderGoogleLink%>" title="<%=cm.cms( "header_download_kml_title" )%>"><%=cm.cmsPhrase( "Downloadable KML" )%></a>
           <%=cm.cmsTitle( "header_download_kml_title" )%></li>
 <%
     }
@@ -81,7 +81,7 @@ Input parameters  on REQUEST:
 %>
             <li><a href="<%=dynHeaderDownloadLink%>" title="<%=cm.cms( "header_download_tsv_title" )%>"><img alt="<%=cm.cms( "header_download_alt" )%>" src="images/mini/download.gif" width="16" height="16" border="0" style="vertical-align:middle" /></a>
             <%=cm.cmsTitle( "header_download_tsv_title" )%><%=cm.cmsAlt( "header_download_alt" )%>
-            <a href="<%=dynHeaderDownloadLink%>" title="<%=cm.cms( "header_download_tsv_title" )%>"><%=cm.cmsText( "header_download_tsv" )%></a>
+            <a href="<%=dynHeaderDownloadLink%>" title="<%=cm.cms( "header_download_tsv_title" )%>"><%=cm.cmsPhrase( "Download results" )%></a>
             <%=cm.cmsTitle( "header_download_tsv_title" )%></li>
 <%
     }

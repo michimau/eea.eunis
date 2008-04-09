@@ -61,7 +61,7 @@
   {
 %>
   <h2>
-    <%=cm.cmsText("national_threat_status")%>
+    <%=cm.cmsPhrase("National threat status")%>
   </h2>
 <%
     int COUNTRIES_PER_MAP = Utilities.checkedStringToInt( application.getInitParameter( "COUNTRIES_PER_MAP" ), 120 );
@@ -125,20 +125,20 @@
         <img alt="<%=cm.cms("map_image_eea")%>" src="<%=filename%>" title="<%=cm.cms("map_image_eea")%>" />
         <%=cm.cmsAlt("map_image_eea")%>
         <br />
-        <a title="<%=cm.cms("open_new_window")%>" href="javascript:openNewPage('<%=url + "?" + parameters%>');"><%=cm.cmsText("open_new_window")%></a>
+        <a title="<%=cm.cms("open_new_window")%>" href="javascript:openNewPage('<%=url + "?" + parameters%>');"><%=cm.cmsPhrase("Open map in new window")%></a>
         <%=cm.cmsTitle("open_new_window")%>
 <%
           }
           else
           {
 %>
-        <%=cm.cmsText("image_not_available")%>.
+        <%=cm.cmsPhrase("Image not available")%>.
 <%
           }
 %>
       </td>
       <td style="padding-left : 20px;">
-        <%=cm.cmsText("legend")%>:
+        <%=cm.cmsPhrase("Legend")%>:
         <br />
 <%
           Enumeration keys = threatsColors.keys();
@@ -152,7 +152,7 @@
           }
 %>
         <p>
-          <%=cm.cmsText("species_factsheet-threat_03")%>
+          <%=cm.cmsPhrase("Map legend is based on the most recent information available,<br />additional older information is shown in table only.")%>
         </p>
       </td>
     </tr>
@@ -164,19 +164,19 @@
     <thead>
       <tr>
         <th style="width : 220px; text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("country")%>
+          <%=cm.cmsPhrase("Country")%>
         </th>
         <th style="width : 120px; text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("status")%>
+          <%=cm.cmsPhrase("Status")%>
         </th>
         <th style="width : 100px; text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("national_threat_code")%>
+          <%=cm.cmsPhrase("National threat code")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
           Population concerned
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("reference")%>
+          <%=cm.cmsPhrase("Reference")%>
         </th>
       </tr>
     </thead>
@@ -235,25 +235,25 @@
 %>
   <br />
   <h2>
-    <%=cm.cmsText("international_threat_status")%>
+    <%=cm.cmsPhrase("International Threat Status")%>
   </h2>
   <table summary="<%=cm.cms("international_threat_status")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("area")%>
+          <%=cm.cmsPhrase("Area")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("status")%>
+          <%=cm.cmsPhrase("Status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("species_factsheet-conservation_09")%>
+          <%=cm.cmsPhrase("International threat code")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("reference")%>
+          <%=cm.cmsPhrase("Reference")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>

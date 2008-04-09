@@ -63,7 +63,7 @@
                 </div>
 <!-- MAIN CONTENT -->
 
-                   <h1><%=cm.cmsText("feedback_list")%></h1>
+                   <h1><%=cm.cmsPhrase("Feedback list")%></h1>
                    <br />
                 <%
                   String SQL_DRV = application.getInitParameter("JDBC_DRV");
@@ -85,16 +85,16 @@
                     <table summary="layout" width="100%" cellspacing="1" cellpadding="1" border="1" style="border-collapse:collapse">
                      <tr>
                        <th>
-                         <%=cm.cmsText("feedback_type")%>
+                         <%=cm.cmsPhrase("Feedback type")%>
                        </th>
                          <th>
-                           <%=cm.cmsText("feedback_list_03")%>
+                           <%=cm.cmsPhrase("Module")%>
                          </th>
                          <th>
-                           <%=cm.cmsText("comment")%>
+                           <%=cm.cmsPhrase("Comment")%>
                          </th>
                          <th>
-                           <%=cm.cmsText("description")%>
+                           <%=cm.cmsPhrase("Description")%>
                          </th>
                      </tr>
 
@@ -117,13 +117,13 @@
                            <%=Utilities.formatString(feedback.get(2),"&nbsp;")%>
                          </td>
                          <td>
-                          <strong><%=cm.cmsText("name")%> : </strong> <%=Utilities.formatString(feedback.get(3)," - ")%> <br />
-                          <strong><%=cm.cmsText("feedback_list_07")%> : </strong> <%=Utilities.formatString(feedback.get(4)," - ")%> <br />
-                          <strong><%=cm.cmsText("feedback_list_08")%> : </strong> <%=Utilities.formatString(feedback.get(5)," - ")%> <br />
-                          <strong><%=cm.cmsText("feedback_list_09")%> : </strong> <%=Utilities.formatString(feedback.get(6)," - ")%> <br />
-                          <strong><%=cm.cmsText("feedback_list_10")%> : </strong> <%=Utilities.formatString(feedback.get(7)," - ")%> <br />
-                          <strong><%=cm.cmsText("feedback_list_11")%> : </strong> <%=Utilities.formatString(feedback.get(8)," - ")%> <br />
-                          <strong><%=cm.cmsText("url")%> :  </strong> <%=Utilities.formatString(feedback.get(9)," - ")%>
+                          <strong><%=cm.cmsPhrase("Name")%> : </strong> <%=Utilities.formatString(feedback.get(3)," - ")%> <br />
+                          <strong><%=cm.cmsPhrase("Email")%> : </strong> <%=Utilities.formatString(feedback.get(4)," - ")%> <br />
+                          <strong><%=cm.cmsPhrase("Company")%> : </strong> <%=Utilities.formatString(feedback.get(5)," - ")%> <br />
+                          <strong><%=cm.cmsPhrase("Address")%> : </strong> <%=Utilities.formatString(feedback.get(6)," - ")%> <br />
+                          <strong><%=cm.cmsPhrase("Phone")%> : </strong> <%=Utilities.formatString(feedback.get(7)," - ")%> <br />
+                          <strong><%=cm.cmsPhrase("Fax")%> : </strong> <%=Utilities.formatString(feedback.get(8)," - ")%> <br />
+                          <strong><%=cm.cmsPhrase("Url")%> :  </strong> <%=Utilities.formatString(feedback.get(9)," - ")%>
                          </td>
                      </tr>
                 <%
@@ -135,7 +135,7 @@
                     {
                 %>
                    <br />
-                   <strong> <%=cm.cmsText("feedback_list_13")%> </strong>
+                   <strong> <%=cm.cmsPhrase("No feedbacks yet.")%> </strong>
                    <br />
                 <%
                     }

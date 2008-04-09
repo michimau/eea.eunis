@@ -159,7 +159,7 @@
 <!-- MAIN CONTENT -->
             <%--      <jsp:param name="printLink" value="<%=pdfLink%>"/>--%>
                 <h1>
-                      <%=cm.cmsText("species_synonyms-result_01")%>
+                      <%=cm.cmsPhrase("Synonyms search results")%>
                 </h1>
                 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
@@ -179,7 +179,7 @@
             %>
                           <tr>
                             <td>
-                              <%=cm.cmsText("species_synonyms-result_02")%>
+                              <%=cm.cmsPhrase("You searched synonyms for species with scientific name")%>
                               <strong>
                                   <%=Utilities.treatURLAmp(descr.toString())%>
                               </strong>
@@ -188,7 +188,7 @@
                           </tr>
                         </table>
                         <br />
-                        <%=cm.cmsText("results_found_1")%>: <strong><%=resultsCount%></strong>
+                        <%=cm.cmsPhrase("Results found")%>: <strong><%=resultsCount%></strong>
             <%// Prepare parameters for pagesize.jsp
                         Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
                         pageSizeFormFields.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
@@ -213,7 +213,7 @@
                       <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#EEEEEE">
                         <tr>
                           <td>
-                              <%=cm.cmsText("refine_your_search")%>
+                              <%=cm.cmsPhrase("Refine your search")%>
                           </td>
                         </tr>
                         <tr>
@@ -286,7 +286,7 @@
             %>
                             <tr>
                               <td>
-                                <%=cm.cmsText("applied_filters_to_the_results")%>:
+                                <%=cm.cmsPhrase("Applied filters to the results")%>:
                               </td>
                             </tr>
             <%
@@ -341,23 +341,23 @@
             if (formBean.getGroupName().equals("0"))
                 {
             %>
-                            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></a>
+                            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
                             <%=cm.cmsTitle("sort_results_on_this_column")%>
             <%
                 }else
                 {
             %>
-                            <%=cm.cmsText("group")%>
+                            <%=cm.cmsPhrase("Group")%>
             <%
                 }
             %>
                           </th>
                           <th scope="col">
-                            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("synonym")%></a>
+                            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Synonym")%></a>
                             <%=cm.cmsTitle("sort_results_on_this_column")%>
                           </th>
                           <th scope="col">
-                            <%=cm.cmsText("species_scientific_name")%>
+                            <%=cm.cmsPhrase("Species scientific name")%>
                           </th>
                         </tr>
                       </thead>
@@ -425,23 +425,23 @@
             if (formBean.getGroupName().equals("0"))
                 {
             %>
-                            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></a>
+                            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
                             <%=cm.cmsTitle("sort_results_on_this_column")%>
             <%
                 }else
                 {
             %>
-                            <%=cm.cmsText("group")%>
+                            <%=cm.cmsPhrase("Group")%>
             <%
                 }
             %>
                           </th>
                           <th scope="col">
-                            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("synonym")%></a>
+                            <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=SynonymsSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Synonym")%></a>
                             <%=cm.cmsTitle("sort_results_on_this_column")%>
                           </th>
                           <th scope="col">
-                            <%=cm.cmsText("species_scientific_name")%>
+                            <%=cm.cmsPhrase("Species scientific name")%>
                           </th>
                         </tr>
                       </thead>

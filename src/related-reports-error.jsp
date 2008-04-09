@@ -28,15 +28,15 @@ ro.finsiel.eunis.search.Utilities"%>
   </head>
   <body>
     <h1>
-      <%=cm.cmsText("related_reports")%>
+      <%=cm.cmsPhrase("Related reports")%>
     </h1>
     <br />
     <br />
     <br />
-      <%=cm.cmsText("related_reports_error_description")%>
+      <%=cm.cmsPhrase("There was an error while trying to upload the document.")%>
     <br />
     <strong>
-      <a href="javascript:history.go(-1);"><%=cm.cmsText("back")%></a>.
+      <a href="javascript:history.go(-1);"><%=cm.cmsPhrase("Back")%></a>.
     </strong>
 <%
   if( !message.equalsIgnoreCase( "" ) )

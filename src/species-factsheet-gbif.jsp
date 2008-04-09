@@ -17,11 +17,15 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
   <h2>
-    <%=cm.cmsText("gbif")%>
+    <%=cm.cmsPhrase("GBIF observations")%>
   </h2>
   <div id="myMap">
-    <p>If GBIF has no information about this species, you will only see this text.</p>
-    <p><noscript>Webbrowsers without Javascript can go directly to <a href="http://data.gbif.org/species/<%=scientificName%>">GBIF's page on <%=request.getParameter("scientificName")%></a>.</noscript></p>
+    <p><%=cm.cmsPhrase("If GBIF has no information about this species, you will only see this text.")%></p>
+    <p>
+    	<noscript>
+    		<%=cm.cmsPhrase("Webbrowsers without Javascript can go directly to <a href=\"http://data.gbif.org/species/{0}\">GBIF's page on {1}</a>.", scientificName, request.getParameter("scientificName"))%>
+    	</noscript>
+    </p>
   </div>
   <script type="text/javascript">
     function populateMap(obj) {

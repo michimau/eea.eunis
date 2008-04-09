@@ -62,7 +62,7 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("habitats_annex1-browser_01")%>
+                  <%=cm.cmsPhrase("Habitat Annex I Directive hierarchical view: (higher levels are for grouping only)")%>
                 </h1>
                 <br/>
           <%

@@ -59,8 +59,8 @@
   // On can display the title of this popup, if exist results
   if (results != null && results.size() > 0) {
 %>
-<%=cm.cmsText("species_books-choice_04")%>:
-<u><%=cm.cmsText("species_scientific_name")%></u>
+<%=cm.cmsPhrase("List of values for")%>:
+<u><%=cm.cmsPhrase("Species scientific name")%></u>
 <em><%=Utilities.ReturnStringRelatioOp(Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS))%></em>
 <strong><%=formBean.getScientificName()%></strong>
 <br />
@@ -94,7 +94,7 @@
         } else
           {
       %>
-          <strong><%=cm.cmsText("no_results_found")%>.</strong>
+          <strong><%=cm.cmsPhrase("No results were found")%>.</strong>
           <br />
       <%
           }

@@ -96,29 +96,29 @@
                   <tr>
                     <td>
                       <h1>
-                        <%=cm.cmsText("names_and_descriptions")%>
+                        <%=cm.cmsPhrase("Names and Descriptions")%>
                       </h1>
-                      <%=cm.cmsText("habitats_names_23")%>
+                      <%=cm.cmsPhrase("Search habitat types by name or description<br />(ex.: habitat type name contains <strong>marine</strong>)")%>
                       <br />
                       <br />
                       <table width="100%" border="0" cellspacing="0" cellpadding="0" summary="layout">
                         <tr>
                           <td bgcolor="#EEEEEE">
                             <strong>
-                              <%=cm.cmsText("search_will_provide_2")%>
+                              <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed):")%>
                             </strong>
                           </td>
                         </tr>
                         <tr>
                           <td bgcolor="#EEEEEE" valign="middle">
                             <input type="checkbox" id="showLevel" name="showLevel" value="true" checked="checked" />
-                            <label for="showLevel"><%=cm.cmsText("generic_index_07")%></label>
+                            <label for="showLevel"><%=cm.cmsPhrase("Level")%></label>
                             <input type="checkbox" name="showCode" id="showCode" value="true" checked="checked" />
-                            <label for="showCode"><%=cm.cmsText("code_column")%></label>
+                            <label for="showCode"><%=cm.cmsPhrase("Code")%></label>
                             <input type="checkbox" name="showScientificName" id="showScientificName" value="true" checked="checked" disabled="disabled" />
-                            <label for="showScientificName"><%=cm.cmsText("habitat_type_name")%></label>
+                            <label for="showScientificName"><%=cm.cmsPhrase("Habitat type name")%></label>
                             <input type="checkbox" name="showVernacularName" id="showVernacularName" value="true" />
-                            <label for="showVernacularName"><%=cm.cmsText("habitat_type_english_name")%></label>
+                            <label for="showVernacularName"><%=cm.cmsPhrase("Habitat type english name")%></label>
                           </td>
                         </tr>
                       </table>
@@ -128,7 +128,7 @@
                     <td colspan="3">
                       <img alt="<%=cm.cms("mandatory_field")%>" src="images/mini/field_mandatory.gif" style="vertical-align:middle" /><%=cm.cmsTitle("mandatory_field")%>&nbsp;
                         <label for="searchString">
-                          <%=cm.cmsText("name_description")%>
+                          <%=cm.cmsPhrase("Name(Description)")%>
                         </label>
                       <select title="<%=cm.cms("operator")%>" name="relationOp" id="relationOp">
                         <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
@@ -146,32 +146,32 @@
                   </tr>
                   <tr>
                     <td bgcolor="#EEEEEE">
-                      <%=cm.cmsText("select_database")%>:&nbsp;
+                      <%=cm.cmsPhrase("Select database")%>:&nbsp;
                       <input type="radio" id="database1" name="database" value="<%=NamesDomain.SEARCH_EUNIS%>" checked="checked"
                              title="<%=cm.cms("search_eunis")%>" />
                       <%=cm.cmsTitle("search_eunis")%>
-                      <label for="database1"><%=cm.cmsText("eunis_habitat_types")%></label>
+                      <label for="database1"><%=cm.cmsPhrase("EUNIS Habitat types")%></label>
                       &nbsp;&nbsp;
                       <input type="radio" id="database2" name="database" value="<%=NamesDomain.SEARCH_ANNEX_I%>"
                              title="<%=cm.cms("search_annex1")%>" />
                       <%=cm.cmsTitle("search_annex1")%>
-                      <label for="database2"><%=cm.cmsText("habitat_directive_annex")%></label>
+                      <label for="database2"><%=cm.cmsPhrase("Habitats Directive Annex I ")%></label>
                       &nbsp;&nbsp;
                       <input type="radio" id="database3" name="database" value="<%=NamesDomain.SEARCH_BOTH%>"
                              title="<%=cm.cms("search_both")%>" />
                       <%=cm.cmsTitle("search_both")%>
-                      <label for="database3"><%=cm.cmsText("both")%></label>
+                      <label for="database3"><%=cm.cmsPhrase("Both")%></label>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText("habitats_names_15")%>:
+                      <%=cm.cmsPhrase("Search in")%>:
                       <input type="checkbox" name="useScientific" id="useScientific" value="true" checked="checked" />
-                      <label for="useScientific"><%=cm.cmsText("habitats_names_16")%></label>
+                      <label for="useScientific"><%=cm.cmsPhrase("Habitat type names")%></label>
                       <input type="checkbox" name="useVernacular" id="useVernacular" value="true" checked="checked" />
-                      <label for="useVernacular"><%=cm.cmsText("habitats_names_17")%></label>
+                      <label for="useVernacular"><%=cm.cmsPhrase("English names")%></label>
                       <input type="checkbox" name="useDescription" id="useDescription" value="true" />
-                      <label for="useDescription"><%=cm.cmsText("habitats_names_18")%></label>
+                      <label for="useDescription"><%=cm.cmsPhrase("Descriptions")%></label>
                       &nbsp;
                     </td>
                   </tr>
@@ -204,7 +204,7 @@
                     //]]>
                     </script>
                     <script language="JavaScript" src="script/habitats-names-save-criteria.js" type="text/javascript"></script>
-                    <%=cm.cmsText("save_your_criteria")%>:
+                    <%=cm.cmsPhrase("Save your criteria")%>:
                     <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-names.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" title="Save" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                     <%=cm.cmsTitle("save_criteria")%>
                 <%

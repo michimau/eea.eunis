@@ -81,7 +81,7 @@
     }
 %>
   <h2>
-    <%=cm.cmsText("grid_distribution")%>
+    <%=cm.cmsPhrase("Grid distribution")%>
   </h2>
 <%
   if ( success )
@@ -94,7 +94,7 @@
 			    <%=cm.cmsTitle("grid_distribution")%>
 			</td>
 			<td align="right" valign="top">
-				<a href="<%=kmlUrl%>" title="<%=cm.cms( "header_download_kml_title" )%>"><%=cm.cmsText( "header_download_kml" )%></a>
+				<a href="<%=kmlUrl%>" title="<%=cm.cms( "header_download_kml_title" )%>"><%=cm.cmsPhrase( "header_download_kml" )%></a>
           		<%=cm.cmsTitle( "header_download_kml_title" )%>
 			</td>
     </tr>
@@ -108,23 +108,23 @@
     <thead>
       <tr>
         <th>
-          <%=cm.cmsText("code_cell")%>
+          <%=cm.cmsPhrase("Code cell")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
         <th style="text-align:right">
-          <%=cm.cmsText("species_factsheet-distribution_04")%>
+          <%=cm.cmsPhrase("Latitude (dec. deg)")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
         <th style="text-align:right">
-          <%=cm.cmsText("species_factsheet-distribution_05")%>
+          <%=cm.cmsPhrase("Longitude (dec. deg.)")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
         <th>
-          <%=cm.cmsText("status")%>
+          <%=cm.cmsPhrase("Status")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
         <th>
-          <%=cm.cmsText("reference")%>
+          <%=cm.cmsPhrase("Reference")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
       </tr>

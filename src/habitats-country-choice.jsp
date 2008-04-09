@@ -105,8 +105,8 @@ function setCountry(val) {
 </head>
 
 <body>
-<h2><%=cm.cmsText("list_of_values_for")%></h2>
-<u><%=(0 == whichclicked ? cm.cmsText("country_names") : cm.cmsText("region_names"))%></u>
+<h2><%=cm.cmsText("List of values for:")%></h2>
+<u><%=(0 == whichclicked ? cm.cmsText("Country names") : cm.cmsText("Region names"))%></u>
 <br />
 <br />
 

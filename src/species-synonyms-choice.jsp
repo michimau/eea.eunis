@@ -71,9 +71,9 @@
       if (results != null && !results.isEmpty())
       {
     %>
-        <h2><%=cm.cmsText("list_of_values_for")%></h2>
+        <h2><%=cm.cmsPhrase("List of values for:")%></h2>
         <u>
-          <%=cm.cmsText("species_scientific_name")%>
+          <%=cm.cmsPhrase("Species scientific name")%>
         </u>
         <em>
             <%=Utilities.ReturnStringRelatioOp(Utilities.checkedStringToInt(formBean.getRelationOp(),Utilities.OPERATOR_CONTAINS))%>
@@ -106,7 +106,7 @@
       } else
       {
     %>
-        <strong><%=cm.cmsText("no_results_found")%>.</strong>
+        <strong><%=cm.cmsPhrase("No results were found")%>.</strong>
         <br />
         <br />
     <%

@@ -133,21 +133,21 @@
     <form name="converter" id="converter" action="" method="post">
       <div style="width : 100%">
         <br />
-        <label for="degrees"><%=cm.cmsText("degrees")%></label>
+        <label for="degrees"><%=cm.cmsPhrase("Degrees")%></label>
         <input id="degrees" name="degrees" type="text" size="5" title="<%=cm.cms("degrees")%>" />
         <%=cm.cmsTitle("degrees")%>
         &deg;
-        <label for="minutes"><%=cm.cmsText("minutes")%></label>
+        <label for="minutes"><%=cm.cmsPhrase("Minutes")%></label>
         <input id="minutes" name="minutes" type="text" size="5" title="<%=cm.cms("minutes")%>" />
         <%=cm.cmsTitle("minutes")%>
         '
-        <label for="seconds"><%=cm.cmsText("seconds")%></label>
+        <label for="seconds"><%=cm.cmsPhrase("Seconds")%></label>
         <input id="seconds" name="seconds" type="text" size="5" title="<%=cm.cms("seconds")%>" />
         <%=cm.cmsTitle("seconds")%>
         &quot;
         <br />
         <br />
-        <label for="decimal"><%=cm.cmsText("sites_coordinates-calc_05")%></label>
+        <label for="decimal"><%=cm.cmsPhrase("Decimal degrees:")%></label>
         <input name="decimal" id="decimal" type="text" size="20" title="<%=cm.cms("sites_coordinates-calc_05_title")%>" />
         <%=cm.cmsTitle("sites_coordinates-calc_05_title")%>
         <br />

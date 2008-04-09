@@ -151,31 +151,31 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                    <%=cm.cmsText("country_biogeographic_region")%>
+                    <%=cm.cmsPhrase("Country / Biogeographic region")%>
                 </h1>
                 <table summary="layout" width="100%" border="0">
                   <tr>
                     <td>
                     <form name="eunis" action="species-country-result.jsp" method="post">
-                      <%=cm.cmsText("species_country_18")%>
+                      <%=cm.cmsPhrase("Species present in a country and a biogeographic region<br/>(ex.: search for species present within <strong>continental</strong> biogeographic region of <strong>Denmark</strong>)")%>
                       <br />
                       <br />
                       <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                           <td style="background-color:#EEEEEE">
-                            <strong><%=cm.cmsText("search_will_provide_2")%></strong>
+                            <strong><%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed):")%></strong>
                           </td>
                         </tr>
                         <tr>
                           <td style="background-color:#EEEEEE">
                             <input id="checkbox1" title="<%=cm.cms("group")%>" alt="<%=cm.cms("group")%>" type="checkbox" name="showGroup" value="true" disabled="disabled" checked="checked" />
-                              <label for="checkbox1"><%=cm.cmsText("group")%></label>
+                              <label for="checkbox1"><%=cm.cmsPhrase("Group")%></label>
                               <%=cm.cmsTitle("group")%>
                             <input id="checkbox2" title="<%=cm.cms("scientific_name")%>" alt="<%=cm.cms("scientific_name")%>" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" />
-                              <label for="checkbox2"><%=cm.cmsText("scientific_name")%></label>
+                              <label for="checkbox2"><%=cm.cmsPhrase("Scientific name")%></label>
                               <%=cm.cmsTitle("scientific_name")%>
                             <input id="checkbox3" title="<%=cm.cms("vernacular_names")%>" alt="<%=cm.cms("vernacular_names")%>" type="checkbox" name="showVernacularNames" value="true" checked="checked" />
-                              <label for="checkbox3"><%=cm.cmsText("vernacular_names")%></label>
+                              <label for="checkbox3"><%=cm.cmsPhrase("Vernacular names")%></label>
                               <%=cm.cmsTitle("vernacular_names")%>
                           </td>
                         </tr>
@@ -228,16 +228,16 @@
                                   if (anyCountrySelected)
                                   {
                                 %>
-                                  <strong><%=cm.cmsText("species_country_12")%></strong>
+                                  <strong><%=cm.cmsPhrase("Any country")%></strong>
                                   &nbsp;
-                                  <strong><%=cm.cmsText("and")%></strong>&nbsp;
-                                  <%=cm.cmsText("biogeographic_region")%>
+                                  <strong><%=cm.cmsPhrase("and")%></strong>&nbsp;
+                                  <%=cm.cmsPhrase("Country / Biogeographic region")%>
                                 <%
                                 } else
                                 {
                                 %>
-                                  <strong><%=speciesCountryUtil.countryCode2Name(country)%></strong>&nbsp;<strong><%=cm.cmsText("and")%>
-                                  </strong>&nbsp;<%=cm.cmsText("biogeographic_region")%>
+                                  <strong><%=speciesCountryUtil.countryCode2Name(country)%></strong>&nbsp;<strong><%=cm.cmsPhrase("and")%>
+                                  </strong>&nbsp;<%=cm.cmsPhrase("Biogeographic region")%>
                                 <%
                                   }
                                 %>
@@ -299,7 +299,7 @@
                           %>
                             <tr>
                               <td>
-                                <input id="saveCriteriaCheckbox" title="<%=cm.cms("save_criteria")%>" alt="<%=cm.cms("save_criteria")%>" type="checkbox" name="saveCriteria" value="true" <%=gr%> /><label for="saveCriteriaCheckbox"><%=cm.cmsText("save_your_criteria_1")%></label>
+                                <input id="saveCriteriaCheckbox" title="<%=cm.cms("save_criteria")%>" alt="<%=cm.cms("save_criteria")%>" type="checkbox" name="saveCriteria" value="true" <%=gr%> /><label for="saveCriteriaCheckbox"><%=cm.cmsPhrase("Save your criteria:")%></label>
                                 <%=cm.cmsTitle("save_criteria")%>
                                 <a title="<%=cm.cms("save_criteria")%>" href="javascript:checkSaveCriteria()"><img alt="<%=cm.cms("save")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                                 <%=cm.cmsTitle("save_criteria")%>
@@ -310,7 +310,7 @@
                           <%
                             }
                           %>
-                          <tr><td colspan="2" style="text-align:center"><strong><%=cm.cmsText("species_country_17")%></strong></td></tr>
+                          <tr><td colspan="2" style="text-align:center"><strong><%=cm.cmsPhrase("Disclaimer: Databases does not contain data for all countries")%></strong></td></tr>
                         </table>
                     </form>
                     </td>

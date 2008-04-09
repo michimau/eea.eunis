@@ -56,10 +56,10 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("news_title")%>
+                  <%=cm.cmsPhrase("Site News")%>
                 </h1>
-                <%=cm.cmsText("news_description")%>
-                <a title="<%=cm.cms("news_rss_news")%>" target="_blank" href="news.xml"><%=cm.cmsText("news_rss_news")%></a>
+                <%=cm.cmsPhrase("Use the following link to get latest news from EUNIS Database in RSS format:")%>
+                <a title="<%=cm.cms("news_rss_news")%>" target="_blank" href="news.xml"><%=cm.cmsPhrase("RSS News")%></a>
                 <br />
                 <br />
                 <%=cm.cmsText("news_main")%>

@@ -215,6 +215,7 @@
     </copy>
 
     <copy tofile="${deployDir}/WEB-INF/classes/jrf.properties.${timeStamp}" file="3rdparty/conf/jrf.properties"/>
+    <copy tofile="${deployDir}/WEB-INF/classes/new_texts.txt" file="3rdparty/new_texts.txt"/>
     <copy tofile="${deployDir}/WEB-INF/classes/log4j.properties.${timeStamp}" file="3rdparty/conf/log4j.properties"/>
     <copy file="${confDir}/web.xml" tofile="${deployDir}/WEB-INF/web.xml.${timeStamp}"/>
 

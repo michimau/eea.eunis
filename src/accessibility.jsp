@@ -56,7 +56,7 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                <%=cm.cmsText("accessibility_statement")%>
+                <%=cm.cmsPhrase("Accessibility statement")%>
                 </h1>
                 <br />
                 <%=cm.cmsText("accessibility_01")%>

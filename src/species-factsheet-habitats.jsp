@@ -30,45 +30,45 @@
   {
 %>
   <h2>
-    <%=cm.cmsText("habitat_type_populated_by_species")%>
+    <%=cm.cmsPhrase("Habitat types populated by species")%>
   </h2>
   <table summary="<%=cm.cms("open_the_statistical_data_for")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("eunis_code")%>
+          <%=cm.cmsPhrase("EUNIS Code")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("annex_code")%>
+          <%=cm.cmsPhrase("ANNEX I Code")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("habitat_type_name")%>
+          <%=cm.cmsPhrase("Habitat type name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("biogeographic_region")%>
+          <%=cm.cmsPhrase("Biogeographic region")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("abundance")%>
+          <%=cm.cmsPhrase("Abundance")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("frequencies")%>
+          <%=cm.cmsPhrase("Frequencies")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("faithfulness")%>
+          <%=cm.cmsPhrase("Faithfulness")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("species_status")%>
+          <%=cm.cmsPhrase("Species status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("comment")%>
+          <%=cm.cmsPhrase("Comment")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>

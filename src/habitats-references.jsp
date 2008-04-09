@@ -104,32 +104,32 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                 <tr>
                   <td colspan="2">
                     <h1>
-                      <%=cm.cmsText("pick_references_show_habitat_types")%>
+                      <%=cm.cmsPhrase("Pick references, show habitat types")%>
                     </h1>
-                    <%=cm.cmsText("habitats_references_29")%>
+                    <%=cm.cmsPhrase("Search publications which refer to habitat types<br />(ex.: Books or articles published by <strong>Helsinki Commission</strong>)")%>
                     <br />
                     <br />
                     <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
                       <tr>
                         <td bgcolor="#EEEEEE">
                           <strong>
-                            <%=cm.cmsText("search_will_provide")%>
+                            <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed)")%>
                           </strong>
                         </td>
                       </tr>
                       <tr>
                         <td bgcolor="#EEEEEE" valign="middle">&nbsp;
                           <input type="checkbox" name="showLevel" id="showLevel" value="true" checked="checked" />
-                          <label for="showLevel"><%=cm.cmsText("generic_index_07")%></label>
+                          <label for="showLevel"><%=cm.cmsPhrase("Level")%></label>
                           &nbsp;
                           <input type="checkbox" name="showCode" id="showCode" value="true" checked="checked" />
-                          <label for="showCode"><%=cm.cmsText("code_column")%></label>
+                          <label for="showCode"><%=cm.cmsPhrase("Code")%></label>
                           &nbsp;
                           <input type="checkbox" name="showScientificName" id="showScientificName" value="true" checked="checked" disabled="disabled" />
-                          <label for="showScientificName"><%=cm.cmsText("scientific_name")%></label>
+                          <label for="showScientificName"><%=cm.cmsPhrase("Scientific name")%></label>
                           &nbsp;
                           <input type="checkbox" name="showVernacularName" id="showVernacularName" value="true" />
-                          <label for="showVernacularName"><%=cm.cmsText("english_name")%></label>
+                          <label for="showVernacularName"><%=cm.cmsPhrase("English name")%></label>
                           &nbsp;
                         </td>
                       </tr>
@@ -143,7 +143,7 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                   <td colspan="2">
                     <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" /><%=cm.cmsTitle("included_field")%>
                     &nbsp;
-                    <label for="author"><%=cm.cmsText("author")%></label>
+                    <label for="author"><%=cm.cmsPhrase("Author")%></label>
                   </td>
                   <td width="17%">
                     <select title="<%=cm.cms("operator")%>" name="relationOpAuthor" id="relationOpAuthor">
@@ -169,11 +169,11 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                   // If relOpDate is between
                   if (request.getParameter("between") != null && request.getParameter("between").equalsIgnoreCase("yes")) {
                   %>
-                    <label for="date_normal"><%=cm.cmsText("year")%></label>
+                    <label for="date_normal"><%=cm.cmsPhrase("Year")%></label>
                   <%
                   } else {
                   %>
-                    <label for="date_between"><%=cm.cmsText("year")%></label>
+                    <label for="date_between"><%=cm.cmsPhrase("Year")%></label>
                   <%
                   }
                   %>
@@ -199,7 +199,7 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                     <input title="<%=cm.cms("date")%>" size="5" name="date" id="date_normal" value="<%=date%>" /><%=cm.cmsTitle("date")%>
                     &nbsp;
                     <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','date',1,database,source)"><img alt="<%=cm.cms("list_of_values")%>" height="18" style="vertical-align:middle" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
-                    <%=cm.cmsText("and")%>
+                    <%=cm.cmsPhrase("and")%>
                     <input title="<%=cm.cms("date")%>" size="5" name="date1" id="date1" value="<%=date1%>" /><%=cm.cmsTitle("date")%>
                     &nbsp;
                     <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','date',2,database,source)"><img alt="<%=cm.cms("list_of_values")%>" height="18" style="vertical-align:middle" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
@@ -226,7 +226,7 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                   <td colspan="2">
                     <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" /><%=cm.cmsTitle("included_field")%>
                     &nbsp;
-                    <label for="title"><%=cm.cmsText("title")%>
+                    <label for="title"><%=cm.cmsPhrase("Title")%>
                     </label>
                   </td>
                   <td>
@@ -250,7 +250,7 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                   <td colspan="2">
                     <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" /><%=cm.cmsTitle("included_field")%>
                     &nbsp;
-                    <label for="editor"><%=cm.cmsText("editor")%></label>
+                    <label for="editor"><%=cm.cmsPhrase("Editor")%></label>
                   </td>
                   <td>
                     <select title="<%=cm.cms("operator")%>" name="relationOpEditor" id="relationOpEditor">
@@ -272,7 +272,7 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                   <td colspan="2">
                     <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" /><%=cm.cmsTitle("included_field")%>
                     &nbsp;
-                    <label for="publisher"><%=cm.cmsText("publisher")%></label>
+                    <label for="publisher"><%=cm.cmsPhrase("Publisher")%></label>
                   </td>
                   <td>
                     <label for="relationOpPublisher" class="noshow"><%=cm.cmsLabel("operator")%></label>
@@ -296,31 +296,31 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                 </tr>
                 <tr>
                   <td bgcolor="#EEEEEE" colspan="3">
-                    <%=cm.cmsText("search_Database")%>:&nbsp;
+                    <%=cm.cmsPhrase("Search database")%>:&nbsp;
                     <input type="radio" id="database1" name="database" value="<%=RefDomain.SEARCH_EUNIS%>" checked="checked"
                            title="<%=cm.cms("search_eunis")%>" />
                     <%=cm.cmsTitle("search_eunis")%>
-                    <label for="database1"><%=cm.cmsText("eunis_habitat_types")%></label>
+                    <label for="database1"><%=cm.cmsPhrase("EUNIS Habitat types")%></label>
                     &nbsp;&nbsp;
                     <input type="radio" id="database2" name="database" value="<%=RefDomain.SEARCH_ANNEX_I%>"
                            title="<%=cm.cms("search_annex1")%>" />
                     <%=cm.cmsTitle("search_annex1")%>
-                    <label for="database2"><%=cm.cmsText("habitat_directive_annex")%></label>
+                    <label for="database2"><%=cm.cmsPhrase("Habitats Directive Annex I ")%></label>
                     &nbsp;&nbsp;
                     <input type="radio" id="database3" name="database" value="<%=RefDomain.SEARCH_BOTH%>"
                            title="<%=cm.cms("search_both")%>" />
                     <%=cm.cmsTitle("search_both")%>
-                    <label for="database3"><%=cm.cmsText("both")%></label>
+                    <label for="database3"><%=cm.cmsPhrase("Both")%></label>
                   </td>
                 </tr>
                 <tr>
                   <td bgcolor="#EEEEEE" colspan="3">
-                    <%=cm.cmsText("habitats_references_23")%>:&nbsp;
+                    <%=cm.cmsPhrase("Source reference")%>:&nbsp;
                     <input id="source1" title="Search source" alt="Search source" type="radio" name="source" value="<%=RefDomain.SOURCE%>" checked="checked" />
-                    <label for="source1"><%=cm.cmsText("source")%></label>
+                    <label for="source1"><%=cm.cmsPhrase("Source")%></label>
                     &nbsp;&nbsp;
                     <input id="source2" title="Search other information" alt="Search other information" type="radio" name="source" value="<%=RefDomain.OTHER_INFO%>" />
-                    <label for="source2"><%=cm.cmsText("other_information")%></label>
+                    <label for="source2"><%=cm.cmsPhrase("Other information")%></label>
                   </td>
                 </tr>
                 <tr>
@@ -365,7 +365,7 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                 <tr>
                   <td>
                     <script language="JavaScript" src="script/habitats-references-save-criteria.js" type="text/javascript"></script>
-                    <%=cm.cmsText("save_your_criteria")%>:
+                    <%=cm.cmsPhrase("Save your criteria")%>:
                     <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-references.jsp','7','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                     <%=cm.cmsTitle("save_criteria")%>
                   </td>

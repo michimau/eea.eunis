@@ -45,7 +45,7 @@ if( SessionManager.isAuthenticated() && SessionManager.isSave_search_criteria_RI
     <img alt="<%=cm.cms("show_criteria_search_expand")%>" border="0" style="vertical-align:middle" src="images/mini/<%=(expandSearchCriteria.equals("yes") ? "collapse.gif" : "expand.gif")%>" />
     <%=cm.cmsAlt("show_criteria_search_expand")%>
     &nbsp;
-    <a title="<%=cm.cms("show_criteria_search_expand")%>" href="<%=pageName%>?expandSearchCriteria=<%=(expandSearchCriteria.equals("yes") ? "no" : "yes")%>"><%=(expandSearchCriteria.equalsIgnoreCase("yes") ? cm.cms( "hide" ) :cm.cms( "show"))%> <%=cm.cmsText("saved_criteria")%></a>
+    <a title="<%=cm.cms("show_criteria_search_expand")%>" href="<%=pageName%>?expandSearchCriteria=<%=(expandSearchCriteria.equals("yes") ? "no" : "yes")%>"><%=(expandSearchCriteria.equalsIgnoreCase("yes") ? cm.cms( "hide" ) :cm.cms( "show"))%> <%=cm.cmsPhrase("Saved criteria")%></a>
     <%=cm.cmsTitle("show_criteria_search_expand")%>
 
 <%

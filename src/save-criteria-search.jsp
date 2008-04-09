@@ -26,7 +26,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
-      <%=cm.cmsText("save_criteria")%>
+      <%=cm.cmsPhrase("Save criteria")%>
     </title>
     <script language="JavaScript" src="script/header.js" type="text/javascript"></script>  
     <script language="JavaScript" type="text/javascript">
@@ -129,13 +129,13 @@ String descr = (request.getParameter("description") == null ? "" : request.getPa
           <tr bgcolor="#EEEEEE">
             <td>
               <strong>
-                <%=cm.cmsText("generic_save-search_01")%>
+                <%=cm.cmsPhrase("Save search criteria:")%>
               </strong>
             </td>
           </tr>
           <tr>
             <td>
-              <%=cm.cmsText("generic_save-search_02")%>
+              <%=cm.cmsPhrase("Please enter few words to describe this criteria for later reference")%>
             </td>
           </tr>
           <tr>
@@ -152,9 +152,9 @@ String descr = (request.getParameter("description") == null ? "" : request.getPa
               <%=cm.cmsTitle("bullet_alt")%>
               &nbsp;
               <strong>
-                <%=cm.cmsText("generic_save-search_03")%>
+                <%=cm.cmsPhrase("Remark:")%>
               </strong>
-              <%=cm.cmsText("generic_save-search_04")%>
+              <%=cm.cmsPhrase("By leaving this field empty, a default description (based on your selections) will be associated with this criteria.")%>
             </td>
           </tr>
 <%
@@ -164,11 +164,11 @@ String descr = (request.getParameter("description") == null ? "" : request.getPa
     String saveOperationResult = "";
     if ( saveWithSuccess )
     {
-      saveOperationResult = cm.cmsText("generic_save-search_05");
+      saveOperationResult = cm.cmsPhrase("Your search criteria was saved in database.");
     }
     else
     {
-      saveOperationResult = cm.cmsText("generic_save-search_06");
+      saveOperationResult = cm.cmsPhrase("Your search criterion wasn''t saved in database. Please try again!");
     }
 %>
           <tr>

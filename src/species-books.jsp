@@ -121,35 +121,35 @@
                         <tr>
                           <td colspan="2">
                             <h1>
-                              <%=cm.cmsText("pick_species_show_references")%>
+                              <%=cm.cmsPhrase("Pick species, show references")%>
                             </h1>
-                            <%=cm.cmsText("species_books_17")%>
+                            <%=cm.cmsPhrase("Find books, articles which refers to species<br />(ex.: documents which refers the <strong>salmo trutta</strong> fish)")%>
                             <br />
                             <br />
                             <table width="100%" border="0" cellspacing="0" cellpadding="0" summary="layout">
                               <tr>
                                 <td style="background-color:#EEEEEE">
                                   <strong>
-                                    <%=cm.cmsText("search_will_provide_2")%>
+                                    <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed):")%>
                                   </strong>
                                 </td>
                               </tr>
                               <tr>
                                 <td style="background-color:#EEEEEE">
                                   <input title="<%=cm.cms("species_books_04_Title")%>" alt="<%=cm.cms("species_books_04_Title")%>" id="checkbox1" name="checkbox1" type="checkbox" value="show" checked="checked" disabled="disabled" />
-                                  <label for="checkbox1"><%=cm.cmsText("author")%></label>
+                                  <label for="checkbox1"><%=cm.cmsPhrase("Author")%></label>
                                   <%=cm.cmsTitle("species_books_04_Title")%>
                                   <input title="<%=cm.cms("species_books_05_Title")%>" alt="<%=cm.cms("species_books_04_Title")%>" id="checkbox2" name="checkbox2" type="checkbox" value="show" checked="checked" disabled="disabled" />
-                                  <label for="checkbox2"><%=cm.cmsText("date")%></label>
+                                  <label for="checkbox2"><%=cm.cmsPhrase("Date")%></label>
                                    <%=cm.cmsTitle("species_books_05_Title")%>
                                   <input title="<%=cm.cms("species_books_06_Title")%>" alt="<%=cm.cms("species_books_04_Title")%>" id="checkbox3" name="checkbox3" type="checkbox" value="show" checked="checked" disabled="disabled" />
-                                  <label for="checkbox3"><%=cm.cmsText("title")%></label>
+                                  <label for="checkbox3"><%=cm.cmsPhrase("Title")%></label>
                                   <%=cm.cmsTitle("species_books_06_Title")%>
                                   <input title="<%=cm.cms("species_books_07_Title")%>" alt="<%=cm.cms("species_books_04_Title")%>" id="checkbox4" name="checkbox4" type="checkbox" value="show" checked="checked" disabled="disabled" />
-                                  <label for="checkbox4"><%=cm.cmsText("editor")%></label>
+                                  <label for="checkbox4"><%=cm.cmsPhrase("Editor")%></label>
                                   <%=cm.cmsTitle("species_books_07_Title")%>
                                   <input title="<%=cm.cms("species_books_08_Title")%>" alt="<%=cm.cms("species_books_04_Title")%>" id="checkbox5" name="checkbox5" type="checkbox" value="show" checked="checked" disabled="disabled" />
-                                  <label for="checkbox5"><%=cm.cmsText("publisher")%></label>
+                                  <label for="checkbox5"><%=cm.cmsPhrase("Publisher")%></label>
                                   <%=cm.cmsTitle("species_books_08_Title")%>
                                 </td>
                               </tr>
@@ -166,7 +166,7 @@
                             <img width="11" height="12" style="vertical-align : middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
                             <%=cm.cmsAlt("field_mandatory")%>
                             &nbsp;
-                            <label for="scientificName"><%=cm.cmsText("species_scientific_name")%></label>
+                            <label for="scientificName"><%=cm.cmsPhrase("Species scientific name")%></label>
                             <label for="select1" class="noshow"><%=cm.cms("relation_type")%></label>
                             <select id="select1" title="<%=cm.cms("relation_type")%>" name="relationOp">
                               <option value="<%=Utilities.OPERATOR_IS%>">
@@ -209,7 +209,7 @@
                 <tr><td>&nbsp;</td></tr>
                 <tr style="background-color:#EEEEEE">
                   <td>
-                    <%=cm.cmsText("save_your_criteria")%>:
+                    <%=cm.cmsPhrase("Save your criteria")%>:
                     <a title="<%=cm.cms("species_books_20_Title")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'species-books.jsp','1','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');">
                       <img border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" alt="<%=cm.cms("species_books_20_Alt")%>" />
                     </a>

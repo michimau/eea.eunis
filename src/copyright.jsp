@@ -67,13 +67,13 @@
                   <thead>
                     <tr>
                       <th>
-                        <%=cm.cmsText("author")%>
+                        <%=cm.cmsPhrase("Author")%>
                       </th>
                       <th>
-                        <%=cm.cmsText("title")%>
+                        <%=cm.cmsPhrase("Title")%>
                       </th>
                       <th style="text-align: center;">
-                        <%=cm.cmsText("publication_date")%>
+                        <%=cm.cmsPhrase("Publication date")%>
                       </th>
                     </tr>
                   </thead>

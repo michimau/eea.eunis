@@ -76,51 +76,51 @@
                   <form name="eunis" method="post" action="references-result.jsp" onsubmit="return(checkformForDate());">
                     <input type="hidden" name="typeForm" value="<%=ReferencesSearchCriteria.CRITERIA_AUTHOR%>" />
                     <h1>
-                      <%=cm.cmsText("references")%>
+                      <%=cm.cmsPhrase("References")%>
                     </h1>
-                    <%=cm.cmsText("references_references_19")%>
+                    <%=cm.cmsPhrase("Search references<br />(ex.: search for books written by <strong>JENSEN, P. et al.</strong>)")%>
                     <br />
                     <br />
                     <div class="grey_rectangle">
                       <strong>
-                        <%=cm.cmsText("search_will_provide")%>
+                        <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed)")%>
                       </strong>
                       <br />
                       <input type="checkbox" id="showAuthor" name="showAuthor" value="true" checked="checked" disabled="disabled" />
                       <label for="showAuthor">
-                        <%=cm.cmsText("author")%>
+                        <%=cm.cmsPhrase("Author")%>
                       </label>
 
                       <input type="checkbox" id="showYear" name="showYear" value="true" checked="checked" />
                       <label for="showYear">
-                        <%=cm.cmsText("year")%>
+                        <%=cm.cmsPhrase("Year")%>
                       </label>
 
                       <input type="checkbox" id="showTitle" name="showTitle" value="true" checked="checked" />
                       <label for="showTitle">
-                        <%=cm.cmsText("title")%>
+                        <%=cm.cmsPhrase("Title")%>
                       </label>
 
                       <input type="checkbox" id="showEditor" name="showEditor" value="true" checked="checked" />
                       <label for="showEditor">
-                        <%=cm.cmsText("editor")%>
+                        <%=cm.cmsPhrase("Editor")%>
                       </label>
 
                       <input type="checkbox" id="showPublisher" name="showPublisher" value="true" checked="checked" />
                       <label for="showPublisher">
-                        <%=cm.cmsText("publisher")%>
+                        <%=cm.cmsPhrase("Publisher")%>
                       </label>
 
                       <input type="checkbox" id="showURL" name="showURL" value="true" />
                       <label for="showURL">
-                        <%=cm.cmsText("url")%>
+                        <%=cm.cmsPhrase("Url")%>
                       </label>
                     </div>
                     <br />
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_included")%>
                     &nbsp;
-                    <label for="relationOpAuthor"><%=cm.cmsText("author")%></label>
+                    <label for="relationOpAuthor"><%=cm.cmsPhrase("Author")%></label>
                     <select id="relationOpAuthor" name="relationOpAuthor">
                       <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpAuthor.equalsIgnoreCase(Utilities.OPERATOR_IS.toString())?"selected=\"selected\"":"")%>>
                         <%=cm.cms( "is")%>
@@ -145,7 +145,7 @@
                     <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
                     <%=cm.cmsAlt("field_included")%>
                     &nbsp;
-                    <label for="relOpDate"><%=cm.cmsText("year")%></label>
+                    <label for="relOpDate"><%=cm.cmsPhrase("Year")%></label>
                     <select id="relOpDate" name="relOpDate" onchange="MM_jumpMenu('parent',this,0)">
                       <option value="references.jsp?between=no" <%=(request.getParameter("between")==null?"selected=\"selected\"":(request.getParameter("between").equalsIgnoreCase("yes")?"":"selected=\"selected\""))%>>
                         <%=cm.cms("is")%>
@@ -164,7 +164,7 @@
                     <label for="date" class="noshow">Start year</label>
                     <input size="5" id="date" name="date" value="<%=date%>" onchange="goodDate1();" />&nbsp;
                     <a href="javascript:choiceprenref('references-choice.jsp','date',1)"><img height="18" style="vertical-align:middle" alt="List of years ..." src="images/helper/helper.gif" width="11" border="0" /></a>
-                    <%=cm.cmsText("and")%>
+                    <%=cm.cmsPhrase("and")%>
                     <label for="date1" class="noshow">End year</label>
                     <input size="5" id="date1" name="date1" value="<%=date1%>" onchange="goodDate2();" />&nbsp;
                     <a href="javascript:choiceprenref('references-choice.jsp','date',2)"><img height="18" style="vertical-align:middle" alt="List of years ..." src="images/helper/helper.gif" width="11" border="0" /></a>
@@ -189,7 +189,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_included")%>
                   &nbsp;
-                  <label for="relationOpTitle"><%=cm.cmsText("title")%></label>
+                  <label for="relationOpTitle"><%=cm.cmsPhrase("Title")%></label>
                   <select id="relationOpTitle" name="relationOpTitle">
                     <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpTitle.equalsIgnoreCase(Utilities.OPERATOR_IS.toString())?"selected=\"selected\"":"")%>>
                       <%=cm.cms("is")%>
@@ -215,7 +215,7 @@
                   <br />
                   <img src="images/mini/field_included.gif" alt="Field is optional" title="Field is optional" />
                   &nbsp;
-                  <label for="relationOpEditor"><%=cm.cmsText("editor")%></label>
+                  <label for="relationOpEditor"><%=cm.cmsPhrase("Editor")%></label>
                   <select id="relationOpEditor" name="relationOpEditor">
                     <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpEditor.equalsIgnoreCase(Utilities.OPERATOR_IS.toString())?"selected=\"selected\"":"")%>>
                       <%=cm.cms("is")%>
@@ -242,7 +242,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_included")%>
                   &nbsp;
-                  <label for="relationOpPublisher"><%=cm.cmsText("publisher")%></label>
+                  <label for="relationOpPublisher"><%=cm.cmsPhrase("Publisher")%></label>
                   <select id="relationOpPublisher" name="relationOpPublisher">
                     <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpPublisher.equalsIgnoreCase(Utilities.OPERATOR_IS.toString())?"selected=\"selected\"":"")%>>
                       <%=cm.cms("is")%>

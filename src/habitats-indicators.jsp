@@ -56,7 +56,7 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("habitats_indicators")%>
+                  <%=cm.cmsPhrase("Habitats Indicators")%>
                 </h1>
                 <br />
                 <br />

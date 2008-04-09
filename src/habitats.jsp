@@ -63,10 +63,10 @@
                 <%=cm.cms("loading_data")%>
                 </div>
                   <h1 class="documentFirstHeading">
-                    <%=cm.cmsText("habitat_type_search")%>
+                    <%=cm.cmsPhrase("HABITAT TYPES SEARCH")%>
                   </h1>
                   <div class="documentDescription">
-                    <%=cm.cmsText("habitats_main_description")%>
+                    <%=cm.cmsPhrase("Find information about habitat types of interest for biodiversity and nature protection")%>
                   </div>
 
                 <div id="qs" align="center" style="padding-left : 10px; width : 90%; vertical-align : middle;">
@@ -80,7 +80,7 @@
                     <input type="hidden" name="useScientific" value="true" />
                     <input type="hidden" name="useVernacular" value="true" />
                     <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_STARTS%>" />
-                    <label for="searchString"><%=cm.cmsText("quick_search_habitats_01")%></label>
+                    <label for="searchString"><%=cm.cmsPhrase("Search habitat types with names starting with:")%></label>
                     <input id="searchString" type="text"
                            size="30" name="searchString" title="<%=cm.cms("habitat_to_search_for")%>"
                            value="<%=cm.cms("enter_habitat_name_here")%>"
@@ -125,15 +125,15 @@
                 %>
                 <table summary="<%=cm.cms("easy_searches")%>" class="datatable" width="90%">
                   <caption>
-                    <%=cm.cmsText("habitats_main_easySearchesDesc") %>
+                    <%=cm.cmsPhrase("A set of predefined functions to search the database") %>
                   </caption>
                   <thead>
                     <tr>
                       <th width="40%" style="white-space:nowrap">
-                        <%=cm.cmsText("links_to_easy_searches")%>
+                        <%=cm.cmsPhrase("Links to easy searches")%>
                       </th>
                       <th width="60%">
-                        <%=cm.cmsText("description")%>
+                        <%=cm.cmsPhrase("Description")%>
                       </th>
                     </tr>
                   </thead>
@@ -141,111 +141,111 @@
                     <tr>
                       <td width="40%" style="white-space:nowrap">
                         <img alt="<%=cm.cms("names_and_descriptions")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("names_and_descriptions")%>
-                        <a title="<%=cm.cms("habitats_main_namesDesc")%>" href="habitats-names.jsp"><strong><%=cm.cmsText("names_and_descriptions")%></strong></a>
+                        <a title="<%=cm.cms("habitats_main_namesDesc")%>" href="habitats-names.jsp"><strong><%=cm.cmsPhrase("Names and Descriptions")%></strong></a>
                         <%=cm.cmsTitle("habitats_main_namesDesc")%>
                       </td>
                       <td width="60%">
-                        <%=cm.cmsText("habitats_main_namesDesc")%>
+                        <%=cm.cmsPhrase("Search habitat types by name or description")%>
                       </td>
                     </tr>
                     <tr class="zebraeven">
                       <td style="white-space:nowrap">
                         <img alt="<%=cm.cms("legal_instruments")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("legal_instruments")%>
-                        <a title="<%=cm.cms("habitats_main_legalDesc")%>"  href="habitats-legal.jsp"><strong><%=cm.cmsText("legal_instruments")%></strong></a>
+                        <a title="<%=cm.cms("habitats_main_legalDesc")%>"  href="habitats-legal.jsp"><strong><%=cm.cmsPhrase("Legal Instruments")%></strong></a>
                         <%=cm.cmsTitle("habitats_main_legalDesc")%>
                       </td>
                       <td>
-                        <%=cm.cmsText("habitats_main_legalDesc")%>
+                        <%=cm.cmsPhrase("Search EUNIS habitat types under legal designation at European level")%>
                       </td>
                     </tr>
                     <tr>
                       <td style="white-space:nowrap">
                         <img alt="<%=cm.cms("country_biogeographic_region_location")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("country_biogeographic_region_location")%>
-                        <a title="<%=cm.cms("habitats_main_countryDesc")%>"  href="habitats-country.jsp"><strong><%=cm.cmsText("country_biogeographic_region_location")%></strong></a>
+                        <a title="<%=cm.cms("habitats_main_countryDesc")%>"  href="habitats-country.jsp"><strong><%=cm.cmsPhrase("Country/Biogeographic region")%></strong></a>
                         <%=cm.cmsTitle("habitats_main_countryDesc")%>
                       </td>
                       <td>
-                        <%=cm.cmsText("habitats_main_countryDesc")%>
+                        <%=cm.cmsPhrase("Find habitat types located within a country and/or biogeographic region")%>
                       </td>
                     </tr>
                     <tr class="zebraeven">
                       <td style="white-space:nowrap">
                         <img alt="<%=cm.cms("code_classifications")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("code_classifications")%>
-                        <a title="<%=cm.cms("habitats_main_codeDesc")%>"  href="habitats-code.jsp"><strong><%=cm.cmsText("code_classifications")%></strong></a>
+                        <a title="<%=cm.cms("habitats_main_codeDesc")%>"  href="habitats-code.jsp"><strong><%=cm.cmsPhrase("Code/Classifications")%></strong></a>
                         <%=cm.cmsTitle("habitats_main_codeDesc")%>
                       </td>
                       <td>
-                        <%=cm.cmsText("habitats_main_codeDesc")%>
+                        <%=cm.cmsPhrase("Find habitat types by their relations with one of the linked classifications")%>
                       </td>
                     </tr>
                     <tr>
                       <td style="white-space:nowrap">
                         <img alt="<%=cm.cms("pick_habitat_types_show_species")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("pick_habitat_types_show_species")%>
-                        <a title="<%=cm.cms("habitats_main_showSpeciesDesc")%>"  href="species-habitats.jsp"><strong><%=cm.cmsText("pick_habitat_types_show_species")%></strong></a>
+                        <a title="<%=cm.cms("habitats_main_showSpeciesDesc")%>"  href="species-habitats.jsp"><strong><%=cm.cmsPhrase("Pick habitat types, show species")%></strong></a>
                         <%=cm.cmsTitle("habitats_main_showSpeciesDesc")%>
                       </td>
                       <td>
-                        <%=cm.cmsText("habitats_main_showSpeciesDesc")%>
+                        <%=cm.cmsPhrase("Find species characterising a specific habitat type")%>
                       </td>
                     </tr>
                     <tr class="zebraeven">
                       <td style="white-space:nowrap">
                         <img alt="<%=cm.cms("pick_habitat_types_show_sites")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("pick_habitat_types_show_sites")%>
-                        <a title="<%=cm.cms("habitats_main_showSitesDesc")%>"  href="sites-habitats.jsp"><strong><%=cm.cmsText("pick_habitat_types_show_sites")%></strong></a>
+                        <a title="<%=cm.cms("habitats_main_showSitesDesc")%>"  href="sites-habitats.jsp"><strong><%=cm.cmsPhrase("Pick habitat types, show sites")%></strong></a>
                         <%=cm.cmsTitle("habitats_main_showSitesDesc")%>
                       </td>
                       <td>
-                        <%=cm.cmsText("habitats_main_showSitesDesc")%>
+                        <%=cm.cmsPhrase("Find sites containing a particular habitat type")%>
                       </td>
                     </tr>
                     <tr>
                       <td style="white-space:nowrap">
                         <img alt="<%=cm.cms("habitats_main_showReferences")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_showReferences")%>
-                        <a title="<%=cm.cms("habitats_main_showReferencesDesc")%>"  href="habitats-books.jsp"><strong><%=cm.cmsText("habitats_main_showReferences")%></strong></a>
+                        <a title="<%=cm.cms("habitats_main_showReferencesDesc")%>"  href="habitats-books.jsp"><strong><%=cm.cmsPhrase("Pick habitat types, show references")%></strong></a>
                         <%=cm.cmsTitle("habitats_main_showReferencesDesc")%>
                       </td>
                       <td>
-                        <%=cm.cmsText("habitats_main_showReferencesDesc")%>
+                        <%=cm.cmsPhrase("Find books, articles which refer to a habitat type")%>
                       </td>
                     </tr>
                     <tr class="zebraeven">
                       <td style="white-space:nowrap">
                         <img alt="<%=cm.cms("pick_references_show_habitat_types")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("pick_references_show_habitat_types")%>
-                        <a title="<%=cm.cms("habitats_main_showHabitatsDesc")%>"  href="habitats-references.jsp"><strong><%=cm.cmsText("pick_references_show_habitat_types")%></strong></a>
+                        <a title="<%=cm.cms("habitats_main_showHabitatsDesc")%>"  href="habitats-references.jsp"><strong><%=cm.cmsPhrase("Pick references, show habitat types")%></strong></a>
                         <%=cm.cmsTitle("habitats_main_showHabitatsDesc")%>
                       </td>
                       <td>
-                        <%=cm.cmsText("habitats_main_showHabitatsDesc")%>
+                        <%=cm.cmsPhrase("Find habitat types referred by books, articles etc.")%>
                       </td>
                     </tr>
                     <tr>
                       <td style="white-space:nowrap">
                         <img alt="<%=cm.cms("habitats_main_key")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_key")%>
-                        <a title="<%=cm.cms("habitats_main_keyDesc")%>"  href="habitats-key.jsp"><strong><%=cm.cmsText("habitats_main_key")%></strong></a>
+                        <a title="<%=cm.cms("habitats_main_keyDesc")%>"  href="habitats-key.jsp"><strong><%=cm.cmsPhrase("Key navigation")%></strong></a>
                         <%=cm.cmsTitle("habitats_main_keyDesc")%>
                       </td>
                       <td>
-                        <%=cm.cmsText("habitats_main_keyDesc")%>
+                        <%=cm.cmsPhrase("Identify a habitat type following questions and graphical schemas")%>
                       </td>
                     </tr>
                     <tr class="zebraeven">
                       <td style="white-space:nowrap">
                         <img alt="<%=cm.cms("habitats_main_EUNIShierarchy")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_EUNIShierarchy")%>
-                        <a title="<%=cm.cms("habitats_main_EUNIShierarchyDesc")%>"  href="habitats-code-browser.jsp"><strong><%=cm.cmsText("habitats_main_EUNIShierarchy")%></strong></a>
+                        <a title="<%=cm.cms("habitats_main_EUNIShierarchyDesc")%>"  href="habitats-code-browser.jsp"><strong><%=cm.cmsPhrase("EUNIS habitat types hierarchical view")%></strong></a>
                         <%=cm.cmsTitle("habitats_main_EUNIShierarchyDesc")%>
                       </td>
                       <td>
-                        <%=cm.cmsText("habitats_main_EUNIShierarchyDesc")%>
+                        <%=cm.cmsPhrase("Hierarchical visualisation of EUNIS habitat types classification")%>
                       </td>
                     </tr>
                     <tr>
                       <td style="white-space:nowrap">
                         <img alt="<%=cm.cms("habitats_main_ANNEXhierarchy")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_ANNEXhierarchy")%>
-                        <a title="<%=cm.cms("habitats_main_ANNEXhierarchyDesc")%>"  href="habitats-annex1-browser.jsp"><strong><%=cm.cmsText("habitats_main_ANNEXhierarchy")%></strong></a>
+                        <a title="<%=cm.cms("habitats_main_ANNEXhierarchyDesc")%>"  href="habitats-annex1-browser.jsp"><strong><%=cm.cmsPhrase("ANNEX I habitat types hierarchical view")%></strong></a>
                         <%=cm.cmsTitle("habitats_main_ANNEXhierarchyDesc")%>
                       </td>
                       <td>
-                        <%=cm.cmsText("habitats_main_ANNEXhierarchyDesc")%>
+                        <%=cm.cmsPhrase("Hierarchical visualisation of ANNEX I habitat types classification")%>
                       </td>
                     </tr>
                   </tbody>
@@ -257,15 +257,15 @@
                 %>
                   <table summary="<%=cm.cms("advanced_searches")%>" width="90%" class="datatable">
                     <caption>
-                      <%=cm.cmsText("habitats_main_advSearchDesc") %>
+                      <%=cm.cmsPhrase("Search habitat type information using more complex filtering capabilities") %>
                     </caption>
                     <thead>
                       <tr>
                         <th width="40%" style="white-space:nowrap">
-                          <%=cm.cmsText("links_to_advanced_searches")%>
+                          <%=cm.cmsPhrase("Links to advanced searches")%>
                         </th>
                         <th width="60%">
-                          <%=cm.cmsText("description")%>
+                          <%=cm.cmsPhrase("Description")%>
                         </th>
                       </tr>
                     </thead>
@@ -273,21 +273,21 @@
                       <tr>
                         <td width="40%" style="white-space:nowrap">
                           <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                          <a title="<%=cm.cms("habitats_main_advSearchSearchDesc")%>"  href="habitats-advanced.jsp?natureobject=Habitat"><strong><%=cm.cmsText("advanced_search")%></strong></a>
+                          <a title="<%=cm.cms("habitats_main_advSearchSearchDesc")%>"  href="habitats-advanced.jsp?natureobject=Habitat"><strong><%=cm.cmsPhrase("Advanced Search")%></strong></a>
                           <%=cm.cmsTitle("habitats_main_advSearchSearchDesc")%>
                         </td>
                         <td width="60%">
-                          <%=cm.cmsText("habitats_main_advSearchSearchDesc")%>
+                          <%=cm.cmsPhrase("Search habitat types information using more complex filtering capabilities")%>
                         </td>
                       </tr>
                       <tr class="zebraeven">
                         <td style="white-space:nowrap">
                           <img alt="<%=cm.cms("how_to_use_advanced_search")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("how_to_use_advanced_search")%>
-                          <a title="<%=cm.cms("habitats_main_advSearchHelpDesc")%>"  href="advanced-help.jsp"><strong><%=cm.cmsText("how_to_use_advanced_search")%></strong></a>
+                          <a title="<%=cm.cms("habitats_main_advSearchHelpDesc")%>"  href="advanced-help.jsp"><strong><%=cm.cmsPhrase("How to use Advanced search")%></strong></a>
                           <%=cm.cmsTitle("habitats_main_advSearchHelpDesc")%>
                         </td>
                         <td>
-                          <%=cm.cmsText("habitats_main_advSearchHelpDesc")%>
+                          <%=cm.cmsPhrase("Help on habitat types <strong>Advanced Search</strong>")%>
                         </td>
                       </tr>
                     </tbody>
@@ -299,15 +299,15 @@
                 %>
                   <table summary="Links and downloads" class="datatable" width="90%">
                     <caption>
-                      <%=cm.cmsText("habitats_links_and_downloads_tab")%>
+                      <%=cm.cmsPhrase("Habitat types links and downloads")%>
                     </caption>
                     <thead>
                       <tr>
                         <th width="40%">
-                          <%=cm.cmsText("links_to_data_downloads")%>
+                          <%=cm.cmsPhrase("Links to data downloads")%>
                         </th>
                         <th width="60%">
-                          <%=cm.cmsText("description")%>
+                          <%=cm.cmsPhrase("Description")%>
                         </th>
                       </tr>
                     </thead>
@@ -315,20 +315,20 @@
                       <tr>
                         <td width="40%">
                           <img alt="<%=cm.cms("links_and_downloads_2")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("links_and_downloads_2")%>
-                          <a title="<%=cm.cms("links_and_downloads_2")%>"  href="habitats-download.jsp"><strong><%=cm.cmsText("links_and_downloads_2")%></strong></a>
+                          <a title="<%=cm.cms("links_and_downloads_2")%>"  href="habitats-download.jsp"><strong><%=cm.cmsPhrase("Links and Downloads")%></strong></a>
                           <%=cm.cmsTitle("links_and_downloads_2")%>
                         </td>
                         <td width="60%">
-                          <%=cm.cmsText("links_and_downloads_2")%>
+                          <%=cm.cmsPhrase("Links and Downloads")%>
                         </td>
                       </tr>
                       <tr class="zebraeven">
                         <td style="white-space:nowrap">
                           <img alt="Habitat type indicators" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsText("habitats_main_indicators")%>
+                            <%=cm.cmsPhrase("<a title=\"Open Indicators in a new window\" href=\"habitats-indicators.jsp\"><strong>Habitat types indicators</strong></a>")%>
                         </td>
                         <td>
-                          <%=cm.cmsText("habitats_main_indicatorsDesc")%>
+                          <%=cm.cmsPhrase("Find habitat types used in indicators")%>
                         </td>
                       </tr>
                     </tbody>
@@ -340,15 +340,15 @@
                 %>
                   <table summary="Help" class="datatable" width="90%">
                     <caption>
-                      <%=cm.cmsText("general_information_on_eunis") %>
+                      <%=cm.cmsPhrase("General information on EUNIS application") %>
                     </caption>
                     <thead>
                       <tr>
                         <th width="40%" style="white-space:nowrap">
-                          <%=cm.cmsText("links_to_online_help")%>
+                          <%=cm.cmsPhrase("Links to online help")%>
                         </th>
                         <th width="60%">
-                          <%=cm.cmsText("description")%>
+                          <%=cm.cmsPhrase("Description")%>
                         </th>
                       </tr>
                     </thead>
@@ -356,31 +356,31 @@
                       <tr>
                         <td width="40%" style="white-space:nowrap">
                           <img alt="<%=cm.cms("habitats_main_easyHelp")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_easyHelp")%>
-                          <a title="<%=cm.cms("habitats_main_easyHelpDesc")%>"  href="easy-help.jsp"><strong><%=cm.cmsText("habitats_main_easyHelp")%></strong></a>
+                          <a title="<%=cm.cms("habitats_main_easyHelpDesc")%>"  href="easy-help.jsp"><strong><%=cm.cmsPhrase("How to use Easy searches")%></strong></a>
                           <%=cm.cmsTitle("habitats_main_easyHelpDesc")%>
                         </td>
                         <td width="60%">
-                          <%=cm.cmsText("habitats_main_easyHelpDesc")%>
+                          <%=cm.cmsPhrase("Help on habitat types <strong>Easy Searches</strong>")%>
                         </td>
                       </tr>
                       <tr class="zebraeven">
                         <td style="white-space:nowrap">
                           <img alt="<%=cm.cms("glossary")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("glossary")%>
-                          <a title="<%=cm.cms("habitats_main_glossaryDesc")%>"  href="glossary.jsp?module=habitat"><strong><%=cm.cmsText("glossary")%></strong></a>
+                          <a title="<%=cm.cms("habitats_main_glossaryDesc")%>"  href="glossary.jsp?module=habitat"><strong><%=cm.cmsPhrase("Glossary")%></strong></a>
                           <%=cm.cmsTitle("habitats_main_glossaryDesc")%>
                         </td>
                         <td>
-                          <%=cm.cmsText("habitats_main_glossaryDesc")%>
+                          <%=cm.cmsPhrase("Glossary of terms used in EUNIS Database habitat types module")%>
                         </td>
                       </tr>
                       <tr>
                         <td style="white-space:nowrap">
                           <img alt="<%=cm.cms("how_to_use")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("how_to_use")%>
-                          <a title="<%=cm.cms("habitats_main_howToDesc")%>"  href="habitats-help.jsp"><strong><%=cm.cmsText("how_to_use")%></strong></a>
+                          <a title="<%=cm.cms("habitats_main_howToDesc")%>"  href="habitats-help.jsp"><strong><%=cm.cmsPhrase("How to use")%></strong></a>
                           <%=cm.cmsTitle("habitats_main_howToDesc")%>
                         </td>
                         <td>
-                          <%=cm.cmsText("habitats_main_howToDesc")%>
+                          <%=cm.cmsPhrase("Help on EUNIS Database habitat types module search tools")%>
                         </td>
                       </tr>
                     </tbody>

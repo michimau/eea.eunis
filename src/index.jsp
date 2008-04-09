@@ -180,7 +180,7 @@
 		            					</ul>
 		          					</div>
 		          					<h1 class="documentFirstHeading">
-		              					<%=cm.cmsText( "generic_index_06" )%>
+		              					<%=cm.cmsPhrase( "Welcome to EUNIS biodiversity database - find species, habitats and sites across Europe" )%>
 		          					</h1>
 		          					<div class="visualClear"><!--&nbsp; --></div>
 		          					<div style="position: relative;">
@@ -208,15 +208,15 @@
 			              						<input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
 			
 												<label for="scientificName">
-			                						<%=cm.cmsText( "species" )%>
+			                						<%=cm.cmsPhrase( "Species" )%>
 			              						</label>&nbsp;
 			              						<input title="Species name" id="scientificName" name="scientificName" size="24" />
 			              						<input id="search_species" type="submit" name="submit" value="<%=cm.cms("search")%>" class="searchButton" title="<%=cm.cms("search_species")%>" />
 			              						<%=cm.cmsLabel("species_name")%>
 			              						<br />
-			              						<a title="<%=cm.cms("index_species_search_tools_title")%>" href="species.jsp"><%=cm.cmsText("search_tools")%></a><%=cm.cmsTitle("index_species_search_tools_title")%>
+			              						<a title="<%=cm.cms("index_species_search_tools_title")%>" href="species.jsp"><%=cm.cmsPhrase("Search tools")%></a><%=cm.cmsTitle("index_species_search_tools_title")%>
 			              						<div class="search_details">
-			                						<%=cm.cmsText( "generic_index_16" )%>
+			                						<%=cm.cmsPhrase( "Information about species and subspecies in Europe." )%>
 			              						</div>
 			            					</form>
 			            					<br />
@@ -231,7 +231,7 @@
 			              						<input type="hidden" name="useVernacular" value="true" />
 			              						<input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
 			              						<label for="searchString">
-			                						<%=cm.cmsText( "habitat_types" )%>
+			                						<%=cm.cmsPhrase( "Habitat types" )%>
 			              						</label>&nbsp;
 			              						<input title="<%=cm.cms("habitat_type_name")%>" id="searchString" name="searchString" size="24" />
 			              						<%=cm.cmsLabel("habitat_type_name")%>
@@ -241,7 +241,7 @@
 			              						<a title="<%=cm.cms("index_habitats_search_tools_title")%>" href="habitats.jsp"><%=cm.cms("search_tools")%></a>
 			              						<%=cm.cmsTitle("index_habitats_search_tools_title")%>
 			              						<div class="search_details">
-			                						<%=cm.cmsText( "information_about_habitats" )%>
+			                						<%=cm.cmsPhrase( "Information about the EUNIS habitat types classification and Habitats Directive Annex I habitats " )%>
 			              						</div>
 			            					</form>
 			            					<br />
@@ -265,7 +265,7 @@
 			              						<input type="hidden" name="DB_EMERALD" value="ON" />
 			              						<input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
 			              						<label for="englishName">
-			                						<%=cm.cmsText( "sites" )%>
+			                						<%=cm.cmsPhrase( "Sites" )%>
 			              						</label>&nbsp;
 			              						<input title="<%=cm.cms("site_name")%>" id="englishName" name="englishName" size="24" />
 			              						<%=cm.cmsLabel("site_name")%>
@@ -276,15 +276,15 @@
 			              						<a title="<%=cm.cms("index_sites_search_tools_title")%>" href="sites.jsp"><%=cm.cms("search_tools")%></a>
 			              						<%=cm.cmsTitle("index_sites_search_tools_title")%>
 			              						<div class="search_details" style="margin-bottom: 20px;">
-			                						<%=cm.cmsText( "information_collected_from_various_databases" )%>
+			                						<%=cm.cmsPhrase( "Information collected from various databases regarding sites" )%>
 			              						</div>
 			            					</form>
-			            					<a href="combined-search.jsp" title="<%=cm.cms("generic_index_21_title")%>"><%=cm.cmsText( "generic_index_21" )%></a>
+			            					<a href="combined-search.jsp" title="<%=cm.cms("generic_index_21_title")%>"><%=cm.cmsPhrase( "<strong>Combined search</strong>" )%></a>
 			            					<%=cm.cmsTitle("generic_index_21_title")%>
 			            					<div class="search_details" style="margin-bottom: 20px;">
-			              						<%=cm.cmsText( "advanced_crosssearch_tool_linking_species_habitats_sites" )%>
+			              						<%=cm.cmsPhrase( "Advanced cross-search tool, linking species, habitat types and sites" )%>
 			            					</div>
-			            					<a href="gis-tool.jsp" title="<%=cm.cms("gis_tool_interactive_maps")%>"><%=cm.cmsText( "generic_index_27" )%></a>
+			            					<a href="gis-tool.jsp" title="<%=cm.cms("gis_tool_interactive_maps")%>"><%=cm.cmsPhrase( "<strong>Interactive Maps</strong>" )%></a>
 			            					<%=cm.cmsTitle("gis_tool_interactive_maps")%>
 			            					&nbsp;
 			            					<a href="gis-tool.jsp" title="<%=cm.cms("gis_tool_interactive_maps")%>"><img src="images/<%=compassIMG%>" width="29" height="29" style="width : 29px; height : 29px; border : 0px; vertical-align : middle;" alt="<%=cm.cms("gis_tool_interactive_maps")%>" title="<%=cm.cms("gis_tool_interactive_maps")%>" /></a>

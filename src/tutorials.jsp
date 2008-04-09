@@ -54,24 +54,24 @@
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
-                <h1><%=cm.cmsText("tutorials_01")%></h1>
+                <h1><%=cm.cmsPhrase("EUNIS Database Learning tutorials")%></h1>
                 <br />
                 <%=cm.cmsText("tutorials_main")%>
                 <br />
                 <br />
-                  <h2><%=cm.cmsText("species")%></h2>
+                  <h2><%=cm.cmsPhrase("Species")%></h2>
                   <ul>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Search_species_by_name&amp;title=Search%20Species%20by%20name"><%=cm.cmsText("tutorials_03")%></a>
+                      <a href="flash-movie.jsp?tutorial=Search_species_by_name&amp;title=Search%20Species%20by%20name"><%=cm.cmsPhrase("Search species by name")%></a>
                     </li>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Search_species_by_country_biogeographic_region&amp;title=Search%20species%20by%20country/biogeoregion"><%=cm.cmsText("tutorials_04")%></a>
+                      <a href="flash-movie.jsp?tutorial=Search_species_by_country_biogeographic_region&amp;title=Search%20species%20by%20country/biogeoregion"><%=cm.cmsPhrase("Search species by country/biogeoregion")%></a>
                     </li>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Search_species_by_groups&amp;title=Search%20species%20by%20group"><%=cm.cmsText("tutorials_05")%></a>
+                      <a href="flash-movie.jsp?tutorial=Search_species_by_groups&amp;title=Search%20species%20by%20group"><%=cm.cmsPhrase("Search species by group")%></a>
                     </li>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Search_species_by_synonyms&amp;title=Search%20Species%20by%20synonyms"><%=cm.cmsText("tutorials_06")%></a>
+                      <a href="flash-movie.jsp?tutorial=Search_species_by_synonyms&amp;title=Search%20Species%20by%20synonyms"><%=cm.cmsPhrase("Search species by synonyms")%></a>
                     </li>
                     <!--
                     <li>
@@ -95,61 +95,61 @@
                     !-->
                   </ul>
                   <br />
-                  <h2><%=cm.cmsText("habitat_types")%></h2>
+                  <h2><%=cm.cmsPhrase("Habitat types")%></h2>
                   <ul>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Search_habitat_types_by_name&amp;title=Search%20habitat%20types%20by%20name"><%=cm.cmsText("tutorials_08")%></a>
+                      <a href="flash-movie.jsp?tutorial=Search_habitat_types_by_name&amp;title=Search%20habitat%20types%20by%20name"><%=cm.cmsPhrase("Search habitat types by name")%></a>
                     </li>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Search_habitat_types_by_code_classification&amp;title=Search%20habitat%20types%20by%20code%20classification"><%=cm.cmsText("tutorials_09")%></a>
+                      <a href="flash-movie.jsp?tutorial=Search_habitat_types_by_code_classification&amp;title=Search%20habitat%20types%20by%20code%20classification"><%=cm.cmsPhrase("Search habitat types by code classification")%></a>
                     </li>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Search_habitat_types_by_country_region&amp;title=Search%20habitat%20types%20by%20country/biogeoregion"><%=cm.cmsText("tutorials_10")%></a>
+                      <a href="flash-movie.jsp?tutorial=Search_habitat_types_by_country_region&amp;title=Search%20habitat%20types%20by%20country/biogeoregion"><%=cm.cmsPhrase("Search habitat types by country/biogeoregion")%></a>
                     </li>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Search_habitat_types_by_legal_instruments&amp;title=Search%20habitat%20types%20by%20legal%20instruments"><%=cm.cmsText("tutorials_11")%></a>
+                      <a href="flash-movie.jsp?tutorial=Search_habitat_types_by_legal_instruments&amp;title=Search%20habitat%20types%20by%20legal%20instruments"><%=cm.cmsPhrase("Search habitat types by legal instruments")%></a>
                     </li>
                   </ul>
                   <br />
-                  <h2><%=cm.cmsText("sites")%></h2>
+                  <h2><%=cm.cmsPhrase("Sites")%></h2>
                   <ul>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Search_sites_by_name&amp;title=Search%20sites%20by%20name"><%=cm.cmsText("tutorials_13")%></a>
+                      <a href="flash-movie.jsp?tutorial=Search_sites_by_name&amp;title=Search%20sites%20by%20name"><%=cm.cmsPhrase("Search sites by name")%></a>
                     </li>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Search_sites_by_coordinates&amp;title=Search%20sites%20by%20geographical%20coordinates"><%=cm.cmsText("search_by_coordinates")%></a>
+                      <a href="flash-movie.jsp?tutorial=Search_sites_by_coordinates&amp;title=Search%20sites%20by%20geographical%20coordinates"><%=cm.cmsPhrase("Search sites by geographical coordinates")%></a>
                     </li>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Search_sites_by_country&amp;title=Search%20sites%20by%20country"><%=cm.cmsText("tutorials_15")%></a>
+                      <a href="flash-movie.jsp?tutorial=Search_sites_by_country&amp;title=Search%20sites%20by%20country"><%=cm.cmsPhrase("Search sites by country")%></a>
                     </li>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Search_sites_by_size&amp;title=Search%20sites%20by%20size"><%=cm.cmsText("search_by_size")%></a>
+                      <a href="flash-movie.jsp?tutorial=Search_sites_by_size&amp;title=Search%20sites%20by%20size"><%=cm.cmsPhrase("Search sites by size")%></a>
                     </li>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Search_sites_by_designation_year&amp;title=Search%20sites%20by%20designation"><%=cm.cmsText("tutorials_17")%></a>
+                      <a href="flash-movie.jsp?tutorial=Search_sites_by_designation_year&amp;title=Search%20sites%20by%20designation"><%=cm.cmsPhrase("Search sites by designation")%></a>
                     </li>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Search_sites_by_altitude&amp;title=Search%20sites%20by%20altitude"><%=cm.cmsText("tutorials_18")%></a>
+                      <a href="flash-movie.jsp?tutorial=Search_sites_by_altitude&amp;title=Search%20sites%20by%20altitude"><%=cm.cmsPhrase("Search sites by altitude")%></a>
                     </li>
                   </ul>
                   <br />
-                  <h2><%=cm.cmsText("tutorials_19")%></h2>
+                  <h2><%=cm.cmsPhrase("General usage")%></h2>
                   <ul>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=General_Usage&amp;title=EUNIS%20Database%20general%20usage"><%=cm.cmsText("tutorials_20")%></a>
+                      <a href="flash-movie.jsp?tutorial=General_Usage&amp;title=EUNIS%20Database%20general%20usage"><%=cm.cmsPhrase("EUNIS Database general usage")%></a>
                     </li>
                   </ul>
                   <br />
-                  <h2><%=cm.cmsText("tutorials_21")%></h2>
+                  <h2><%=cm.cmsPhrase("Advanced usage")%></h2>
                   <ul>
                     <li>
-                      <a href="gis-tool-help.jsp" title="GIS Tool help"><%=cm.cmsText("gis_help")%></a>
+                      <a href="gis-tool-help.jsp" title="GIS Tool help"><%=cm.cmsPhrase("GIS Tool Help")%></a>
                     </li>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Advanced_Search&amp;title=EUNIS%20Database%20Advanced%20search"><%=cm.cmsText("tutorials_23")%></a>
+                      <a href="flash-movie.jsp?tutorial=Advanced_Search&amp;title=EUNIS%20Database%20Advanced%20search"><%=cm.cmsPhrase("EUNIS Database Advanced search")%></a>
                     </li>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Combined_Search&amp;title=EUNIS%20Database%20Combined%20search"><%=cm.cmsText("tutorials_24")%></a>
+                      <a href="flash-movie.jsp?tutorial=Combined_Search&amp;title=EUNIS%20Database%20Combined%20search"><%=cm.cmsPhrase("EUNIS Database Combined search")%></a>
                     </li>
                   </ul>
 <!-- END MAIN CONTENT -->

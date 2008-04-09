@@ -77,7 +77,7 @@
                 <tr>
                 <td>
                 <h1>
-                  <%=cm.cmsText("legal_instruments")%>
+                  <%=cm.cmsPhrase("Legal Instruments")%>
                 </h1>
                 <%=cm.cmsText("habitats_legal_17")%>
                 <br />
@@ -90,23 +90,23 @@
                   <tr>
                     <td bgcolor="#EEEEEE">
                       <strong>
-                        <%=cm.cmsText("search_will_provide_2")%>
+                        <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed):")%>
                       </strong>
                     </td>
                   </tr>
                   <tr>
                     <td bgcolor="#EEEEEE">
                       <input title="Show level" type="checkbox" id="showLevel" name="showLevel" value="true" checked="checked" />
-                      <label for="showLevel"><%=cm.cmsText("generic_index_07")%></label>
+                      <label for="showLevel"><%=cm.cmsPhrase("Level")%></label>
                       &nbsp;
                       <input title="Show code" type="checkbox" name="showCode" id="showCode" value="true" checked="checked" />
-                      <label for="showCode"><%=cm.cmsText("code_column")%></label>
+                      <label for="showCode"><%=cm.cmsPhrase("Code")%></label>
                       &nbsp;
                       <input title="Show name" type="checkbox" name="showScientificName" id="showScientificName" value="true" checked="checked" disabled="disabled" />
-                      <label for="showScientificName"><%=cm.cmsText("habitat_type_name")%></label>
+                      <label for="showScientificName"><%=cm.cmsPhrase("Habitat type name")%></label>
                       &nbsp;
                       <input title="Show legal text" type="checkbox" name="showLegalText" id="showLegalText" value="true" checked="checked" />
-                      <label for="showLegalText"><%=cm.cmsText("legal_text")%></label>
+                      <label for="showLegalText"><%=cm.cmsPhrase("legal text")%></label>
                       &nbsp;
                     </td>
                   </tr>
@@ -118,7 +118,7 @@
                         <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" style="vertical-align:middle" /><%=cm.cmsTitle("included_field")%>
                         &nbsp;
                         <label for="habitatType">
-                          <%=cm.cmsText("habitat_type")%>
+                          <%=cm.cmsPhrase("Habitat type")%>
                         </label>
                       </p>
                     </td>
@@ -140,7 +140,7 @@
                     </td>
                     <td width="6%" align="right">
                       <strong>
-                        <%=cm.cmsText("and")%>
+                        <%=cm.cmsPhrase("and")%>
                       </strong>
                     </td>
                   </tr>
@@ -149,7 +149,7 @@
                       <br />
                       <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" style="vertical-align:middle" /><%=cm.cmsTitle("included_field")%>
                       &nbsp;
-                      <label for="searchString"><%=cm.cmsText("habitats_legal_11")%></label>
+                      <label for="searchString"><%=cm.cmsPhrase("Habitat type name contains")%></label>
                     </td>
                     <td colspan="2">
                       <br />
@@ -161,7 +161,7 @@
                     <td width="6%" align="right">
                       <br />
                       <strong>
-                        <%=cm.cmsText("and")%>
+                        <%=cm.cmsPhrase("and")%>
                       </strong>
                     </td>
                   </tr>
@@ -170,7 +170,7 @@
                       <br />
                       <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" style="vertical-align:middle" /><%=cm.cmsTitle("included_field")%>
                       &nbsp;
-                      <label for="legalText"><%=cm.cmsText("legal_text")%></label>
+                      <label for="legalText"><%=cm.cmsPhrase("legal text")%></label>
                     </td>
                     <td colspan="2">
                       <br />
@@ -226,7 +226,7 @@
                 <tr>
                   <td>
                     <script language="JavaScript" src="script/habitats-legal-save-criteria.js" type="text/javascript"></script>
-                    <%=cm.cmsText("save_your_criteria")%>:
+                    <%=cm.cmsPhrase("Save your criteria")%>:
                     <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',true,'habitats-legal.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                     <%=cm.cmsTitle("save_criteria")%>
                   </td>

@@ -76,11 +76,11 @@
   	<tr>
   		<td>
   			<h2>
-			    <%=cm.cmsText("habitats_factsheet_sitesForHabitatRecorded")%>
+			    <%=cm.cmsPhrase("Sites for which this habitat type is recorded")%>
    		    </h2>
   		</td>
   		<td align="right" valign="top">
-			<a href="habitats-factsheet-sites-kml.jsp?idHabitat=<%=idHabitat%>" title="<%=cm.cms( "header_download_kml_title" )%>"><%=cm.cmsText( "header_habitat_sites_kml" )%></a>
+			<a href="habitats-factsheet-sites-kml.jsp?idHabitat=<%=idHabitat%>" title="<%=cm.cms( "header_download_kml_title" )%>"><%=cm.cmsPhrase( "See sites in Google Earth (KML file, pre-requires Google Earth installed) " )%></a>
       		<%=cm.cmsTitle( "header_download_kml_title" )%>
 		</td>
   	</tr>
@@ -89,16 +89,16 @@
     <thead>
       <tr>
         <th width="15%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("site_code")%>
+          <%=cm.cmsPhrase("Site code")%>
         </th>
         <th width="15%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("source_data_set")%>
+          <%=cm.cmsPhrase("Source data set")%>
         </th>
         <th width="20%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("country")%>
+          <%=cm.cmsPhrase("Country")%>
         </th>
         <th width="50%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("site_name")%>
+          <%=cm.cmsPhrase("Site name")%>
         </th>
       </tr>
     </thead>
@@ -141,22 +141,22 @@
 %>
   <br />
   <h2>
-    <%=cm.cmsText("habitats_factsheet_sitesForSubtypes")%>
+    <%=cm.cmsPhrase("Sites for habitat subtypes")%>
   </h2>
   <table summary="<%=cm.cms("habitat_related_sites")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th width="15%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("site_code")%>
+          <%=cm.cmsPhrase("Site code")%>
         </th>
         <th width="15%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("source_data_set")%>
+          <%=cm.cmsPhrase("Source data set")%>
         </th>
         <th width="20%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("country")%>
+          <%=cm.cmsPhrase("Country")%>
         </th>
         <th width="50%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("site_name")%>
+          <%=cm.cmsPhrase("Site name")%>
         </th>
       </tr>
     </thead>

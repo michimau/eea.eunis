@@ -67,16 +67,16 @@
   {
 %>
           <strong>
-            <%=cm.cmsText("no_results_found")%>.
+            <%=cm.cmsPhrase("No results were found")%>.
           </strong>
           <br />
 <%
   }
   else
   {
-%>    <h2><%=cm.cmsText("list_of_values_for")%></h2>
+%>    <h2><%=cm.cmsPhrase("List of values for:")%></h2>
       <u>
-        <%=cm.cmsText("species_vernacular_name")%>
+        <%=cm.cmsPhrase("Species vernacular name")%>
       </u>
       <em><%=Utilities.ReturnStringRelatioOp(oper)%></em>
       <strong><%=formBean.getVernacularName()%></strong>

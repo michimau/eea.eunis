@@ -143,7 +143,7 @@ The following fields are declared below:
 <table width="100%" border="1" cellpadding="0" cellspacing="2" style="border-collapse: collapse" summary="layout">
   <tr>
     <td colspan="2">
-      <%=cm.cmsText("select_data_set")%>
+      <%=cm.cmsPhrase("Select data set:")%>
     </td>
     <td align="right">
       <input id="checkAll" type="button" name="checkAll"
@@ -167,50 +167,50 @@ The following fields are declared below:
   <tr>
     <td width="33%">
       <input type="checkbox" name="DB_NATURA2000" id="DB_NATURA2000" value="ON" title="<%=cm.cms("natura_2000")%>" />
-      <label for="DB_NATURA2000"><%=cm.cmsText("natura_2000")%></label>
+      <label for="DB_NATURA2000"><%=cm.cmsPhrase("Natura 2000")%></label>
       <%=cm.cmsTitle("natura_2000")%>
     </td>
     <td width="33%">
       <input type="checkbox" name="DB_CDDA_NATIONAL" id="DB_CDDA_NATIONAL" value="ON" title="<%=cm.cms("cdda_national")%>" />
-      <label for="DB_CDDA_NATIONAL"><%=cm.cmsText("cdda_national")%></label>
+      <label for="DB_CDDA_NATIONAL"><%=cm.cmsPhrase("CDDA National")%></label>
       <%=cm.cmsTitle("cdda_national")%>
     </td>
     <td width="34%">
       <input type="checkbox" name="DB_NATURE_NET" id="DB_NATURE_NET" value="ON" disabled="disabled" title="<%=cm.cms("sites_databases_Nature_Net")%>" />
-      <label for="DB_NATURE_NET"><%=cm.cmsText("sites_databases_Nature_Net")%></label>
+      <label for="DB_NATURE_NET"><%=cm.cmsPhrase("Nature Net")%></label>
       <%=cm.cmsTitle("sites_databases_Nature_Net")%>
     </td>
   </tr>
   <tr>
     <td width="33%">
       <input type="checkbox" name="DB_DIPLOMA" id="DB_DIPLOMA" value="ON" title="<%=cm.cms("european_diploma")%>" />
-      <label for="DB_DIPLOMA"><%=cm.cmsText("european_diploma")%></label>
+      <label for="DB_DIPLOMA"><%=cm.cmsPhrase("European Diploma")%></label>
       <%=cm.cmsTitle("european_diploma")%>
     </td>
     <td width="33%">
       <input type="checkbox" name="DB_CDDA_INTERNATIONAL" id="DB_CDDA_INTERNATIONAL" value="ON" title="<%=cm.cms("cdda_international")%>" />
-      <label for="DB_CDDA_INTERNATIONAL"><%=cm.cmsText("cdda_international")%></label>
+      <label for="DB_CDDA_INTERNATIONAL"><%=cm.cmsPhrase("CDDA International")%></label>
       <%=cm.cmsTitle("cdda_international")%>
     </td>
     <td width="34%">
       <input type="checkbox" name="DB_CORINE" id="DB_CORINE" value="ON" <%=enableCorine%> title="<%=cm.cms("corine_biotopes")%>" />
-      <label for="DB_CORINE"><%=cm.cmsText("corine_biotopes")%></label>
+      <label for="DB_CORINE"><%=cm.cmsPhrase("Corine Biotopes")%></label>
       <%=cm.cmsTitle("corine_biotopes")%>
     </td>
   </tr>
   <tr>
     <td width="33%">
       <input type="checkbox" name="DB_BIOGENETIC" id="DB_BIOGENETIC" value="ON" title="<%=cm.cms("biogenetic_reserve")%>" />
-      <label for="DB_BIOGENETIC"><%=cm.cmsText("biogenetic_reserve")%></label>
+      <label for="DB_BIOGENETIC"><%=cm.cmsPhrase("Biogenetic Reserve")%></label>
       <%=cm.cmsTitle("biogenetic_reserve")%>
     </td>
     <td width="33%">
       <input type="checkbox" name="DB_EMERALD" id="DB_EMERALD" value="ON" title="<%=cm.cms("emerald")%>" />
-      <label for="DB_EMERALD"><%=cm.cmsText("emerald")%></label>
+      <label for="DB_EMERALD"><%=cm.cmsPhrase("Emerald")%></label>
       <%=cm.cmsTitle("emerald")%>
     </td>
     <td width="34%">
-      <a title="<%=cm.cms("sites_databases_03_title")%>" href="sites-download.jsp"><%=cm.cmsText("download_full_data_set")%></a>
+      <a title="<%=cm.cms("sites_databases_03_title")%>" href="sites-download.jsp"><%=cm.cmsPhrase("Download full data set")%></a>
       <%=cm.cmsTitle("sites_databases_03_title")%>
     </td>
   </tr>

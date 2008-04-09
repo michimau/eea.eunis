@@ -60,14 +60,14 @@
     <form name="saveBookmark" method="post" action="users-bookmarks-save.jsp" onsubmit="javascript: return validateForm();">
       <input type="hidden" name="action" value="saveBookmark" />
       <input type="hidden" name="bookmarkURL" value="<%=bookmarkURL%>" />
-      <%=cm.cmsText("users_bookmarks_save_02")%>:
+      <%=cm.cmsPhrase("Bookmark URL")%>:
       <span class="zebraeven">
         <%=bookmarkURL%>
       </span>
       <br />
       <br />
       <label for="description">
-      <%=cm.cmsText("users_bookmarks_save_03")%>:
+      <%=cm.cmsPhrase("Enter description for bookmark")%>:
       </label>
       <br />
       <textarea title="<%=cm.cms("description")%>" name="description" id="description" rows="6" cols="60"></textarea>

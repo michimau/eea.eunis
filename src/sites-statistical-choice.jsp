@@ -58,7 +58,7 @@
   </head>
   <body>
     <h2>
-      <%=cm.cmsText("list_of_values_for")%>:
+      <%=cm.cmsPhrase("List of values for:")%>:
     </h2>
 <%
   if ( name.equalsIgnoreCase( "%" ) )
@@ -71,7 +71,7 @@
   {
 %>
     <u>
-      <%=cm.cmsText("designation_name")%>
+      <%=cm.cmsPhrase("Designation name")%>
     </u>
     <em>
       <%=Utilities.ReturnStringRelatioOp(Utilities.OPERATOR_CONTAINS)%>
@@ -114,7 +114,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
     <strong>
-      <%=cm.cmsText("no_results_found_1")%>
+      <%=cm.cmsPhrase("No results were found.")%>
     </strong>
     <br />
     <br />

@@ -71,7 +71,7 @@
                 </div>
 <!-- MAIN CONTENT -->
                   <h1>
-                    <%=cm.cmsText("synonyms")%>
+                    <%=cm.cmsPhrase("Synonyms")%>
                   </h1>
                   <table summary="layout" width="100%" border="0" cellpadding="0" cellspacing="0">
                     <tr>
@@ -81,27 +81,27 @@
                           <table summary="layout" width="100%" border="0" style="text-align:left" cellpadding="0" cellspacing="0">
                             <tr>
                               <td>
-                                <%=cm.cmsText("species_synonyms_20")%>
+                                <%=cm.cmsPhrase("Search EUNIS Database for species synonyms<br />(ex.: search <strong>mammals</strong> group for <strong>vulpes vulpes</strong>)")%>
                                 <br />
                                 <br />
                                 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#EEEEEE">
                                   <tr>
                                     <td>
                                       <strong>
-                                        <%=cm.cmsText("search_will_provide_2")%>
+                                        <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed):")%>
                                       </strong>
                                     </td>
                                   </tr>
                                   <tr>
                                     <td>
                                       <input title="<%=cm.cms("group")%>" id="checkbox1" name="checkbox1" type="checkbox" value="show" checked="checked" disabled="disabled" />
-                                        <label for="checkbox1"><%=cm.cmsText("group")%></label>
+                                        <label for="checkbox1"><%=cm.cmsPhrase("Group")%></label>
                                         <%=cm.cmsTitle("group")%>
                                       <input title="<%=cm.cms("synonym")%>" id="checkbox2" name="checkbox2" type="checkbox" value="show" checked="checked" disabled="disabled" />
-                                        <label for="checkbox2"><%=cm.cmsText("species_synonyms_07")%></label>
+                                        <label for="checkbox2"><%=cm.cmsPhrase("Synonym name")%></label>
                                         <%=cm.cmsTitle("synonym")%>
                                       <input title="<%=cm.cms("species")%>" id="checkbox3" name="checkbox3" type="checkbox" value="show" checked="checked" disabled="disabled" />
-                                        <label for="checkbox3"><%=cm.cmsText("species")%></label>
+                                        <label for="checkbox3"><%=cm.cmsPhrase("Species")%></label>
                                         <%=cm.cmsTitle("species")%>
                                     </td>
                                   </tr>
@@ -115,7 +115,7 @@
                                 <%=cm.cmsAlt("field_optional")%>
                                 &nbsp;
                                 <strong>
-                                  <%=cm.cmsText("group_name")%>
+                                  <%=cm.cmsPhrase("Group name")%>
                                 </strong>
                                 <label for="select1" class="noshow"><%=cm.cms("group_name")%></label>
                                 <select id="select1" title="<%=cm.cms("group_name")%>" name="groupName">
@@ -140,7 +140,7 @@
                                 <%=cm.cmsTitle("group_name")%>
                                 &nbsp;&nbsp;&nbsp;
                                 <strong>
-                                  <%=cm.cmsText("and")%>
+                                  <%=cm.cmsPhrase("and")%>
                                 </strong>
                               </td>
                             </tr>
@@ -149,7 +149,7 @@
                                 <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
                                 <%=cm.cmsTitle("field_mandatory")%>
                                 &nbsp;
-                                <label for="scientificName"><%=cm.cmsText("species_scientific_name")%></label>
+                                <label for="scientificName"><%=cm.cmsPhrase("Species scientific name")%></label>
                                 <select id="select2" title="<%=cm.cms("operator")%>" name="relationOp">
                                   <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
                                   <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
@@ -197,7 +197,7 @@
                         </script>
                         <br />
                         <script language="JavaScript" type="text/javascript" src="script/species-synonyms-save-criteria.js"></script>
-                        <%=cm.cmsText("save_your_criteria")%>:
+                        <%=cm.cmsPhrase("Save your criteria")%>:
                         <a title="<%=cm.cms("save_open_link")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'species-synonyms.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_open_link")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                         <%=cm.cmsTitle("save_open_link")%>
                         <%

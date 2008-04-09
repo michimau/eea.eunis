@@ -103,20 +103,20 @@
                   <tr>
                     <td>
                       <h1>
-                        <%=cm.cmsText("generic_combined-search-results-species_01")%>
+                        <%=cm.cmsPhrase("<h1>Species combined search results</h1><br />Search details:<br />")%>
                       </h1>
                       <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                           <td>
-                            <strong><%=cm.cmsText("generic_combined-search-results-species_02")%></strong>
+                            <strong><%=cm.cmsPhrase("You searched species using combined search criteria")%></strong>
                           </td>
                         </tr>
                         <tr>
                           <td bgcolor="#FFFFFF">
                             <%=SessionManager.getCombinednatureobject1()%>
-                            <%=cm.cmsText("generic_combined-search-results-species_03")%>
+                            <%=cm.cmsPhrase("combination used:")%>
                             <%=SessionManager.getCombinedexplainedcriteria1()%>
-                            <%=cm.cmsText("generic_combined-search-results-habitats_04")%>
+                            <%=cm.cmsPhrase(", where:")%>
                           </td>
                         </tr>
                         <tr>
@@ -130,9 +130,9 @@
                         <tr>
                           <td bgcolor="#FFFFFF">
                             <%=SessionManager.getCombinednatureobject2()%>
-                            <%=cm.cmsText("generic_combined-search-results-species_03")%>
+                            <%=cm.cmsPhrase("combination used:")%>
                             <%=SessionManager.getCombinedexplainedcriteria2()%>
-                            <%=cm.cmsText("generic_combined-search-results-habitats_04")%>
+                            <%=cm.cmsPhrase(", where:")%>
                           </td>
                         </tr>
                         <tr>
@@ -145,7 +145,7 @@
                 %>
                         <tr>
                           <td bgcolor="#FFFFFF">
-                            <%=cm.cmsText("source_data_sets")%>
+                            <%=cm.cmsPhrase("Source data sets:")%>
                             <%=SessionManager.getSourcedb()%>
                           </td>
                         </tr>
@@ -159,9 +159,9 @@
                         <tr>
                           <td bgcolor="#FFFFFF">
                             <%=SessionManager.getCombinednatureobject3()%>
-                            <%=cm.cmsText("generic_combined-search-results-species_03")%>
+                            <%=cm.cmsPhrase("combination used:")%>
                             <%=SessionManager.getCombinedexplainedcriteria3()%>
-                            <%=cm.cmsText("generic_combined-search-results-habitats_04")%>
+                            <%=cm.cmsPhrase(", where:")%>
                           </td>
                         </tr>
                         <tr>
@@ -174,7 +174,7 @@
                 %>
                         <tr>
                           <td bgcolor="#FFFFFF">
-                            <%=cm.cmsText("source_data_sets")%>
+                            <%=cm.cmsPhrase("Source data sets:")%>
                             <%=SessionManager.getSourcedb()%>
                           </td>
                         </tr>
@@ -187,7 +187,7 @@
                 %>
                         <tr>
                           <td bgcolor="#FFFFFF">
-                            <%=cm.cmsText("combination_type")%>
+                            <%=cm.cmsPhrase("Combination type: ")%>
                             <%=SessionManager.getCombinedcombinationtype()%>
                           </td>
                         </tr>
@@ -197,9 +197,9 @@
                 %>
                         <tr>
                           <td bgcolor="#FFFFFF">
-                            <%=cm.cmsText("combination_type")%>
+                            <%=cm.cmsPhrase("Combination type: ")%>
                             <%=SessionManager.getCombinednatureobject1()%>
-                            <%=cm.cmsText("related_to")%>
+                            <%=cm.cmsPhrase(" related to ")%>
                             <%=SessionManager.getCombinednatureobject2()%>
                           </td>
                         </tr>
@@ -209,9 +209,9 @@
                 %>
                         <tr>
                           <td bgcolor="#FFFFFF">
-                            <%=cm.cmsText("combination_type")%>
+                            <%=cm.cmsPhrase("Combination type: ")%>
                             <%=SessionManager.getCombinednatureobject1()%>
-                            <%=cm.cmsText("related_to")%>
+                            <%=cm.cmsPhrase(" related to ")%>
                             <%=SessionManager.getCombinednatureobject3()%>
                           </td>
                         </tr>
@@ -221,7 +221,7 @@
                 %>
                       </table>
                       <br />
-                      <%=cm.cmsText("results_found_1")%>
+                      
                       <strong><%=resultsCount%></strong>
                       <br />
                 <%// Prepare parameters for pagesize.jsp
@@ -284,7 +284,7 @@
                           {
                         %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
                           <%=cm.cmsMsg("sort_results_on_this_column")%>
                         </th>
                         <%
@@ -295,7 +295,7 @@
                           {
                         %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(sortOrder, (null == sortOrder) ? true : false)%>"><%=Utilities.getSortImageTag(sortOrder)%><%=cm.cmsText("order_column")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(sortOrder, (null == sortOrder) ? true : false)%>"><%=Utilities.getSortImageTag(sortOrder)%><%=cm.cmsPhrase("Order")%></a>
                           <%=cm.cmsMsg("sort_results_on_this_column")%>
                         </th>
                         <%
@@ -306,7 +306,7 @@
                           {
                         %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(sortFamily, (null == sortFamily) ? true : false)%>"><%=Utilities.getSortImageTag(sortFamily)%><%=cm.cmsText("family")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(sortFamily, (null == sortFamily) ? true : false)%>"><%=Utilities.getSortImageTag(sortFamily)%><%=cm.cmsPhrase("Family")%></a>
                           <%=cm.cmsMsg("sort_results_on_this_column")%>
                         </th>
                         <%
@@ -317,7 +317,7 @@
                           {
                         %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("scientific_name")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Scientific name")%></a>
                           <%=cm.cmsMsg("sort_results_on_this_column")%>
                         </th>
                         <%
@@ -329,7 +329,7 @@
                         %>
                         <th scope="col">
                           <%=Utilities.getSortImageTag(sortSciName)%>
-                          <%=cm.cmsText("vernacular_names")%>
+                          <%=cm.cmsPhrase("Vernacular names")%>
                         </th>
                         <%
                           }
@@ -338,7 +338,7 @@
                           if(showThreat || showDistribution || showReferences) {
                         %>
                         <th scope="col" style="text-align : center;">
-                          <%=cm.cmsText("other_info")%>
+                          <%=cm.cmsPhrase("Other Info")%>
                         </th>
                         <%
                           }
@@ -470,7 +470,7 @@
                           {
                         %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
                           <%=cm.cmsMsg("sort_results_on_this_column")%>
                         </th>
                         <%
@@ -481,7 +481,7 @@
                           {
                         %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(sortOrder, (null == sortOrder) ? true : false)%>"><%=Utilities.getSortImageTag(sortOrder)%><%=cm.cmsText("order_column")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_ORDER%>&amp;ascendency=<%=formBean.changeAscendency(sortOrder, (null == sortOrder) ? true : false)%>"><%=Utilities.getSortImageTag(sortOrder)%><%=cm.cmsPhrase("Order")%></a>
                           <%=cm.cmsMsg("sort_results_on_this_column")%>
                         </th>
                         <%
@@ -492,7 +492,7 @@
                           {
                         %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(sortFamily, (null == sortFamily) ? true : false)%>"><%=Utilities.getSortImageTag(sortFamily)%><%=cm.cmsText("family")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(sortFamily, (null == sortFamily) ? true : false)%>"><%=Utilities.getSortImageTag(sortFamily)%><%=cm.cmsPhrase("Family")%></a>
                           <%=cm.cmsMsg("sort_results_on_this_column")%>
                         </th>
                         <%
@@ -503,7 +503,7 @@
                           {
                         %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("scientific_name")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=AdvancedSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Scientific name")%></a>
                           <%=cm.cmsMsg("sort_results_on_this_column")%>
                         </th>
                         <%
@@ -515,7 +515,7 @@
                         %>
                         <th scope="col">
                           <%=Utilities.getSortImageTag(sortSciName)%>
-                          <%=cm.cmsText("vernacular_names")%>
+                          <%=cm.cmsPhrase("Vernacular names")%>
                         </th>
                         <%
                           }
@@ -524,7 +524,7 @@
                           if(showThreat || showDistribution || showReferences) {
                         %>
                         <th scope="col" style="text-align : center;">
-                          <%=cm.cmsText("other_info")%>
+                          <%=cm.cmsPhrase("Other Info")%>
                         </th>
                         <%
                           }

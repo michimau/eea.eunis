@@ -50,15 +50,15 @@
 <form action="<%=application.getInitParameter("DOMAIN_NAME")%>/fileupload" method="post" enctype="multipart/form-data" name="uploadFile" onsubmit="return validateForm();">
   <input type="hidden" name="uploadType" value="file" /><br />
 
-  <label for="filename"><%=cm.cmsText("related_reports_upload_filetoupload_label")%>:</label><br />
+  <label for="filename"><%=cm.cmsPhrase("File to upload")%>:</label><br />
   <input title="<%=cm.cms("related_reports_upload_filetoupload_title")%>" id="filename" name="filename" type="file" size="50" /><br />
   <%=cm.cmsTitle("related_reports_upload_filetoupload_title")%>
-  <%=cm.cmsText("related_reports_upload_filetoupload_description")%>
+  <%=cm.cmsPhrase("Press <strong>Browse</strong> to select a file from your computer or <strong>Close</strong> to finish.")%>
   <br />
-  <%=cm.cmsText("related_reports_upload_filetoupload_notice")%> <strong><%=maxSize%> MB</strong>.
+  <%=cm.cmsPhrase("Please notice that file size is limited to")%> <strong><%=maxSize%> MB</strong>.
   <br />
   <p>
-    <label for="description"><%=cm.cmsText("document_description")%>:</label>
+    <label for="description"><%=cm.cmsPhrase("Document description")%>:</label>
     <br />
     <textarea title="<%=cm.cms("document_description")%>" id="description" name="description" cols="60" rows="5"><%=cm.cms("related_reports_upload_description_value")%></textarea>
     <%=cm.cmsTitle("document_description")%>
@@ -90,7 +90,7 @@
   }
 %>
   <strong>
-    <%=cm.cmsText("related_reports_upload_pending")%>.
+    <%=cm.cmsPhrase("Uploaded documents are not made available for download, until they are approved by an EUNIS Database administrator")%>.
   </strong>
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
@@ -102,7 +102,7 @@
 else
 {
 %>
-  <%=cm.cmsText("related_reports_upload_unauthorized")%>.
+  <%=cm.cmsPhrase("You must be logged in and have the proper rights in order to access this page")%>.
   <br />
   <form action="">
     <input type="button" onclick="javascript:window.close();" value="<%=cm.cms("close_window")%>" title="<%=cm.cms("close_window")%>" id="button1" name="button" class="standardButton" />

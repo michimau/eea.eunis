@@ -114,26 +114,26 @@
     <thead>
       <tr>
         <th width="25%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("title")%>
+          <%=cm.cmsPhrase("Title")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th width="25%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("author")%>
+          <%=cm.cmsPhrase("Author")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th width="15%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("editor")%>
+          <%=cm.cmsPhrase("Editor")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th width="15%" style="text-transform: capitalize; text-align:right">
-          <%=cm.cmsText("date")%>
+          <%=cm.cmsPhrase("Date")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
 <%--        <td width="10%" align="center">--%>
-<%--          <%=cm.cmsText("published")%>--%>
+<%--          <%=cm.cmsPhrase("Published")%>--%>
 <%--        </td>--%>
         <th width="10%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("source")%>
+          <%=cm.cmsPhrase("Source")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>

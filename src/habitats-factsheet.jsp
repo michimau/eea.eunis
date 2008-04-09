@@ -97,7 +97,7 @@
                   <br />
                   <br />
                   <p>
-                    <%=cm.cmsText("habitats_factsheet_01")%>
+                    <%=cm.cmsPhrase("Sorry, no habitat type has been found in the database with Habitat type ID=")%>
                     <strong>'<%=idHabitat%>'</strong>
                   </p>
                   <br />
@@ -117,10 +117,10 @@
                 <img id="loading" alt="<%=cm.cms("loading_data")%>" src="images/loading.gif" />
 <%
     }
-    String habitatType = cm.cmsText("annex_habitat_type");
+    String habitatType = cm.cmsPhrase("Annex I Habitat type");
     if(factsheet.isEunis())
     {
-      habitatType = cm.cmsText("eunis_habitat_type");
+      habitatType = cm.cmsPhrase("EUNIS Habitat type");
     }
     String code = "";
     if(factsheet.isEunis())
@@ -341,7 +341,7 @@
           else
           {
 %>
-                      <a title="<%=cm.cms("habitat_other_information")%>" href="javascript:otherInfo(<%=dictionaryType%>)"><%=title%></a><%=cm.cmsTitle("habitat_other_information")%> (<%=noElements%> <%=cm.cmsText("records")%>)
+                      <a title="<%=cm.cms("habitat_other_information")%>" href="javascript:otherInfo(<%=dictionaryType%>)"><%=title%></a><%=cm.cmsTitle("habitat_other_information")%> (<%=noElements%> <%=cm.cmsPhrase("records")%>)
 
                       <div id="otherInfo<%=dictionaryType%>" style="padding-left : 25px; display : none;">
                         <jsp:include page="habitats-factsheet-other.jsp">
@@ -370,7 +370,7 @@
     if(null != list && list.size() > 0)
     {
 %>
-                <a title="<%=cm.cms("habitat_open_pictures")%>" href="javascript:openpictures('pictures.jsp?<%=picsURL%>',600,600)"><%=cm.cmsText("view_pictures")%></a>
+                <a title="<%=cm.cms("habitat_open_pictures")%>" href="javascript:openpictures('pictures.jsp?<%=picsURL%>',600,600)"><%=cm.cmsPhrase("View pictures")%></a>
                 <%=cm.cmsTitle("habitat_open_pictures")%>
 <%
     }
@@ -379,7 +379,7 @@
 %>
                 <br />
                 <br />
-                <a title="<%=cm.cms("upload_pictures")%>" href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=picsURL%>',600,600)"><%=cm.cmsText("upload_pictures")%></a>
+                <a title="<%=cm.cms("upload_pictures")%>" href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=picsURL%>',600,600)"><%=cm.cmsPhrase("Upload pictures")%></a>
                 <%=cm.cmsTitle("upload_pictures")%>
                 <br />
                 <br />

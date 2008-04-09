@@ -63,11 +63,11 @@
   {
   // If full details are show on page
   %>
-  <h2><%=cm.cmsText("systemcheck_02")%></h2>
+  <h2><%=cm.cmsPhrase("Eunis status")%></h2>
   <table border="1" style="Font-family:Arial;Font-size:12px" summary="Eunis status">
   <tr>
    <td>
-    <%=cm.cmsText("systemcheck_03")%>:
+    <%=cm.cmsPhrase("Tomcat status")%>:
    </td>
    <td>
     OK
@@ -75,7 +75,7 @@
   </tr>
   <tr>
    <td>
-    <%=cm.cmsText("systemcheck_04")%>:
+    <%=cm.cmsPhrase("MySQL status")%>:
    </td>
    <td>
     OK

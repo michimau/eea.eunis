@@ -57,19 +57,19 @@
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("site_code")%>
+          <%=cm.cmsPhrase("Site code")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("source_data_set")%>
+          <%=cm.cmsPhrase("Source data set")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("country")%>
+          <%=cm.cmsPhrase("Country")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("site_name")%>
+          <%=cm.cmsPhrase("Site name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
@@ -137,7 +137,7 @@
       }
 %>
   <h2>
-    <%=cm.cmsText("species_factsheet_sites_02")%>
+    <%=cm.cmsPhrase("Sites for subtaxa of this taxon")%>
   </h2>
   <br />
   <form name="gis2" action="sites-gis-tool.jsp" target="_blank" method="post">
@@ -155,19 +155,19 @@
     <thead>
       <tr>
         <th width="15%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("site_code")%>
+          <%=cm.cmsPhrase("Site code")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th width="15%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("source_data_set")%>
+          <%=cm.cmsPhrase("Source data set")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th width="20%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("country")%>
+          <%=cm.cmsPhrase("Country")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th width="50%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("site_name")%>
+          <%=cm.cmsPhrase("Site name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>

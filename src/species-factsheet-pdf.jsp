@@ -108,12 +108,12 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
   {
     report.setHeader( header );
     Paragraph footer = new Paragraph();
-    footer.add( new Phrase( cm.cmsText( "species_factsheet-pdf_03" ), FontFactory.getFont( FontFactory.HELVETICA, 8, Font.ITALIC, new Color( 24, 40, 136 ) ) ) );
+    footer.add( new Phrase( cm.cmsPhrase( "Source: European Topic Centre on Biological Diversity" ), FontFactory.getFont( FontFactory.HELVETICA, 8, Font.ITALIC, new Color( 24, 40, 136 ) ) ) );
     report.setFooter( footer );
     report.init( linktopdf + filename );
 
     SimpleDateFormat df = new SimpleDateFormat( "yyyy-MM-dd" );
-    report.writeln( cm.cmsText( "generated_on" ) + ": " + df.format( new Date() ), FontFactory.getFont( FontFactory.HELVETICA, 8, Font.ITALIC, new Color( 24, 40, 136 ) ) );
+    report.writeln( cm.cmsPhrase( "Generated on" ) + ": " + df.format( new Date() ), FontFactory.getFont( FontFactory.HELVETICA, 8, Font.ITALIC, new Color( 24, 40, 136 ) ) );
 
     String SQL_DRV = application.getInitParameter("JDBC_DRV");
     String SQL_URL = application.getInitParameter("JDBC_URL");
@@ -157,7 +157,7 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
     if ( !error )
     {
 %>
-    <a title="<%=cm.cms("species_factsheet-pdf_102_Title")%>" target="_blank" href="temp/<%=filename%>"><%=cm.cmsText( "species_factsheet-pdf_94" )%></a>
+    <a title="<%=cm.cms("species_factsheet-pdf_102_Title")%>" target="_blank" href="temp/<%=filename%>"><%=cm.cmsPhrase( "Open PDF report" )%></a>
     <%=cm.cmsTitle("species_factsheet-pdf_102_Title")%>
 <%
     }
@@ -173,13 +173,13 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
       }
       //]]>
     </script>
-    <%=cm.cmsText( "please_let_us_know_about_error" )%>
-    <a title="<%=cm.cms("feedback")%>" href="javascript:feedback();"><%=cm.cmsText( "feedback" )%></a>.
+    <%=cm.cmsPhrase( "Please let us know about this error by sending an" )%>
+    <a title="<%=cm.cms("feedback")%>" href="javascript:feedback();"><%=cm.cmsPhrase( "EUNIS Feedback" )%></a>.
     <%=cm.cmsTitle("feedback")%>
-    <%=cm.cmsText( "thank_you" )%>
-    <%=cm.cmsText( "please_let_us_know_about_error" )%>
-    <a title="Feedback" href="javascript:feedback();"><%=cm.cmsText( "feedback" )%></a>.
-    <%=cm.cmsText( "thank_you" )%>
+    <%=cm.cmsPhrase( "Thank you!" )%>
+    <%=cm.cmsPhrase( "Please let us know about this error by sending an" )%>
+    <a title="Feedback" href="javascript:feedback();"><%=cm.cmsPhrase( "EUNIS Feedback" )%></a>.
+    <%=cm.cmsPhrase( "Thank you!" )%>
 <%
     }
     out.flush();
@@ -187,7 +187,7 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
   else
   {
 %>
-      <%=cm.cmsText( "species_factsheet-pdf_98" )%> <%=factsheet.getIdSpecies()%>
+      <%=cm.cmsPhrase( "Sorry, no species matching has been found in database with ID:" )%> <%=factsheet.getIdSpecies()%>
       <br/>
       <br/>
       <input id="button2" title="<%=cm.cms("close_window")%>" type="button"

@@ -1,0 +1,1049 @@
+GBIF observations|gbif
+EUNIS Feedback|feedback
+We appologize for the inconvenience.<br />The EUNIS team.|generic_404_04
+Accessibility statement|accessibility_statement
+List of values|list_of_values
+(Warning: Only the first 100 values are retrieved from the database)|warning_first_100_values
+Clear temporary data|clear_temporary_data_btn
+You do not have Administrator rights, which are required to perform this operation.<br />Please login as Administrator first.|generic_clear-temporary-data_01
+The temporary data could not be deleted.|generic_clear-temporary-data_03
+The temporary data has been deleted.|generic_clear-temporary-data_04
+Total number of rows containing temporary data detected in the database:|generic_clear-temporary-data_05
+<h1>Combined search</h1>Search information using multiple characteristics<br />|generic_combined-search-step2_01
+Specify the search criteria:|specify_the_search_criteria
+Step 2.|step_2
+Species will be related to habitat types meeting the following criteria:|generic_combined-search-step2_03
+Habitat types will be related to Sites meeting the following criteria:|generic_combined-search-step2_04
+Sites will be related to Species meeting the following criteria:|generic_combined-search-step2_05
+Add root criterion|add_root
+Note: Combined search might take a long time|combined_search_might_take_long_time
+Calculated search criteria expression:|calculated_criteria
+Searching for: {0}...|searching_for
+found: <strong>{0}</strong>|advanced_found
+<br />&nbsp;&nbsp;(Only the first SQL_LIMIT results were retrieved - this can lead to partial,incomplete or no combined search results at all - you should refine the search criteria)|generic_combined-search-step2_13
+Total matches found in database:|combined_total_matches
+No results were found matching your combined criteria.|no_results
+<h1>Combined search</h1>Search information using multiple characteristics|generic_combined-search-step3_01
+Step 3.|combined_step_3
+Species will be related to Sites meeting the following criteria:|generic_combined-search-step3_03
+Habitat types will be related to Species meeting the following criteria:|generic_combined-search-step3_04
+Sites will be related to Habitat types meeting the following criteria:|generic_combined-search-step3_05
+Please specify the relation between Species, Habitat types and Sites:|combined_specify_relation
+<br />&nbsp;&nbsp;(Only the first SQL_LIMIT results were retrieved - this can lead to partial,incomplete or no combined search results at all - you should refine this criteria)|generic_combined-search-step3_13
+matching the combination of criteria were found.|generic_combined-search-step3_14
+species matching the combination of criteria were found.|generic_combined-search-step3_15
+No species matching the combination of criteria were found.|generic_combined-search-step3_16
+habitat types matching the combination of criteria were found.|generic_combined-search-step3_17
+No habitat types matching the combination of criteria were found.|generic_combined-search-step3_18
+sites matching the combination of criteria were found.|generic_combined-search-step3_19
+No sites matching the combination of criteria were found.|no_sites_found
+No results were found.|no_results_found_1
+<h1>Combined search</h1>Search information using multiple characteristics|generic_combined-search-step1_01
+Step 1.|generic_combined-search-step1_04
+Search for:|generic_combined-search-step1_05
+matching the following criteria:|generic_combined-search-step1_11
+&nbsp;saved search criteria|generic_combined-search-step1_95
+<h1>Habitat types combined search results</h1><br />You searched for habitat types<br />|generic_combined-search-results-habitats_01
+You searched habitat types using combined search criteria|generic_combined-search-results-habitats_02
+ combination used:&nbsp;|generic_combined-search-results-habitats_03
+, where:|generic_combined-search-results-habitats_04
+Source data sets:|source_data_sets
+Source data set|source_data_set
+Combination type: |combination_type
+ related to |related_to
+Level|generic_index_07
+EUNIS Code|eunis_code
+ANNEX I Code|annex_code
+Name|name
+English name|english_name
+<h1>Sites combined search results</h1><br />You searched for sites<br />|generic_combined-search-results-sites_01
+You searched sites using combined search criteria|generic_combined-search-results-sites_02
+ combination used: |generic_combined-search-results-sites_03
+Results found|results_found_1
+Site name|site_name
+Designation type|designation_type
+Country|country
+Designation year|designation_year
+Size|size
+Length|length
+Min. altitude|generic_combined-search-results-sites_18
+Max. altitude|generic_combined-search-results-sites_19
+Mean altiude|generic_combined-search-results-sites_20
+Longitude|longitude
+Latitude|latitude
+<h1>Species combined search results</h1><br />Search details:<br />|generic_combined-search-results-species_01
+You searched species using combined search criteria|generic_combined-search-results-species_02
+combination used:|generic_combined-search-results-species_03
+Group|group
+Order|order_column
+Family|family
+Scientific name|scientific_name
+Vernacular names|vernacular_names
+Other Info|other_info
+Save search criteria:|generic_save-search_01
+Please enter few words to describe this criteria for later reference|generic_save-search_02
+Remark:|generic_save-search_03
+By leaving this field empty, a default description (based on your selections) will be associated with this criteria.|generic_save-search_04
+Your search criteria was saved in database.|generic_save-search_05
+Your search criterion wasn''t saved in database. Please try again!|generic_save-search_06
+Author|author
+Title|title
+Publication date|publication_date
+General information|general_information
+Code|code_column
+Geographical coverage|sites_designations-factsheet_06
+Designation name in original language|sites_designations-factsheet_07
+Designation name in English|sites_designations-factsheet_08
+Designation name in French|sites_designations-factsheet_09
+Designation abbreviation|sites_designations-factsheet_10
+CDDA sites|sites_designations-factsheet_11
+Area reference (ha)|sites_designations-factsheet_12
+Total area(ha)|total_area_ha
+National information|sites_designations-factsheet_14
+National Law|sites_designations-factsheet_15
+National Category|sites_designations-factsheet_16
+Reference for National Law|sites_designations-factsheet_17
+National Law Agency|sites_designations-factsheet_18
+Number of reference|sites_designations-factsheet_21
+Reference date|sites_designations-factsheet_22
+Remark|sites_designations-factsheet_23
+Source remark|sites_designations-factsheet_24
+Related sites for this designation|sites_designations-factsheet_25
+Site code (in source data set)|sites_designations-factsheet_28
+This designation has not related sites.|sites_designations-factsheet_30
+Show sites for this designation type|sites_designations-factsheet_31
+Warning: This might take a long time.|sites_designations-factsheet_32
+The requested designation does not exists. |sites_designations-factsheet_33
+References|references
+Source|source
+Designation references|designation_factsheet_references
+Author:|designation_factsheet_author
+Editor:|designation_factsheet_editor
+Date:|designation_factsheet_date
+Title:|designation_factsheet_title
+Publisher:|designation_factsheet_publisher
+EUNIS Database DiGIR Provider Statistics|digir_01
+Statistical data regarding the EUNIS DiGIR Provider:|digir_03
+Total rows:|digir_total_rows
+Distinct Species:|digir_distinct_species
+Species with country:|digir_species_country
+Species with lat./long.:|digir_species_latlong
+Species from habitat types:|digir_species_habitats
+Species from sites:|digir_species_sites
+Last update:|digir_last_update
+The statistics are not available. Please try later.|digir_statistics_are_not_available
+Provider URL:|digir_provider_url
+Provider endpoint:|digir_provider_endpoint
+Institution code:|digir_institution_code
+Collection code:|digir_collection_code
+Other information:|digir_other_information
+Download EUNIS Database|generic_download-database_01
+Download zipped .mdb (Microsoft Access) file|generic_download-database_02
+No results found for this search|noresults_search
+No results found for refine search|noresults_refine
+<br /><br />The input rules were probably too restrictive, please try a more generic approach.<br /><br />Please go|noresults_explanation
+and review the search criteria|noresults_review_search_criteria
+Back|back
+Thank you!|thank_you
+Your feedback has been sent to EUNIS.|generic_feedback_02
+Email content:|generic_feedback_03
+Captcha Verification Failed|captcha_verification_failed
+User Feedback|generic_feedback_04
+<strong>Dear visitor,</strong> in order to improve EUNIS Database we welcome your comments and suggestions.|generic_feedback_05
+Type of feedback:|generic_feedback_06
+URL:|feedback_url
+Comments:|generic_feedback_18
+The following section is optional, but necessary if you would like a response from us.<br />|generic_feedback_20
+Name:|generic_feedback_21
+Email address:|generic_feedback_22
+Organization:|generic_feedback_23
+Telephone:|generic_feedback_25
+Fax:|generic_feedback_26
+Captcha|generic_feedback_28
+Feedback list|feedback_list
+Feedback type|feedback_type
+Module|feedback_list_03
+Comment|comment
+Description|description
+Email|feedback_list_07
+Company|feedback_list_08
+Address|feedback_list_09
+Phone|feedback_list_10
+Fax|feedback_list_11
+Url|url
+No feedbacks yet.|feedback_list_13
+Bookmark this page|footer_bookmark_title
+Related databases|footer_related_databases
+Contact EUNIS|footer_contact
+EUNIS News|news
+EUNIS Copyright and Disclaimer|copyright_and_disclaimer_title
+Eunis Accessibility statement|footer_accessibility
+Bookmark|bookmark
+Glossary|glossary
+Search for specific terms used in this web site<br />(ex.: terms containing <strong>alpine</strong>)|generic_glossary_18
+No data is available for glossary at this time.|glossary_no_data_available
+Search will provide the following information (checked fields will be displayed):|search_will_provide_2
+Term|term
+Definition|definition
+Reference|reference
+Search terms|search_terms
+Search definitions|generic_glossary_15
+<h1>Insert new / Modify glossary term</h1>|generic_glossary-editor_01
+Language|language
+Link description|link_description
+Link|link
+Date changed|date_changed
+Current|current
+Domain|domain
+Species domain|glossary_species
+Habitat types domain|glossary_habitats
+Sites domain|glossary_sites
+Search domain|search_domain
+Easy search|easy_search
+Advanced Search|advanced_search
+You must be authenticated and have the proper right to access this page.|users_bookmarks_20
+Editor|editor
+Publisher|publisher
+Published|published
+No other information available.|generic_glossary-references_07
+You searched for|you_searched_for
+that contains|generic_glossary-result_06
+Edit|edit
+Glossary editor|generic_glossary-table_02
+Term contains:|generic_glossary-table_04
+Add new glossary term|generic_glossary-table_06
+HABITAT TYPES SEARCH|habitat_type_search
+Find information about habitat types of interest for biodiversity and nature protection|habitats_main_description
+Search habitat types with names starting with:|quick_search_habitats_01
+A set of predefined functions to search the database|habitats_main_easySearchesDesc
+Links to easy searches|links_to_easy_searches
+Names and Descriptions|names_and_descriptions
+Search habitat types by name or description|habitats_main_namesDesc
+Legal Instruments|legal_instruments
+Search EUNIS habitat types under legal designation at European level|habitats_main_legalDesc
+Country/Biogeographic region|country_biogeographic_region_location
+Find habitat types located within a country and/or biogeographic region|habitats_main_countryDesc
+Code/Classifications|code_classifications
+Find habitat types by their relations with one of the linked classifications|habitats_main_codeDesc
+Pick habitat types, show species|pick_habitat_types_show_species
+Find species characterising a specific habitat type|habitats_main_showSpeciesDesc
+Pick habitat types, show sites|pick_habitat_types_show_sites
+Find sites containing a particular habitat type|habitats_main_showSitesDesc
+Pick habitat types, show references|habitats_main_showReferences
+Find books, articles which refer to a habitat type|habitats_main_showReferencesDesc
+Pick references, show habitat types|pick_references_show_habitat_types
+Find habitat types referred by books, articles etc.|habitats_main_showHabitatsDesc
+Key navigation|habitats_main_key
+Identify a habitat type following questions and graphical schemas|habitats_main_keyDesc
+EUNIS habitat types hierarchical view|habitats_main_EUNIShierarchy
+Hierarchical visualisation of EUNIS habitat types classification|habitats_main_EUNIShierarchyDesc
+ANNEX I habitat types hierarchical view|habitats_main_ANNEXhierarchy
+Hierarchical visualisation of ANNEX I habitat types classification|habitats_main_ANNEXhierarchyDesc
+Search habitat type information using more complex filtering capabilities|habitats_main_advSearchDesc
+Links to advanced searches|links_to_advanced_searches
+Search habitat types information using more complex filtering capabilities|habitats_main_advSearchSearchDesc
+How to use Advanced search|how_to_use_advanced_search
+Help on habitat types <strong>Advanced Search</strong>|habitats_main_advSearchHelpDesc
+Habitat types links and downloads|habitats_links_and_downloads_tab
+Links to data downloads|links_to_data_downloads
+Links and Downloads|links_and_downloads_2
+<a title="Open Indicators in a new window" href="habitats-indicators.jsp"><strong>Habitat types indicators</strong></a>|habitats_main_indicators
+Find habitat types used in indicators|habitats_main_indicatorsDesc
+General information on EUNIS application|general_information_on_eunis
+Links to online help|links_to_online_help
+How to use Easy searches|habitats_main_easyHelp
+Help on habitat types <strong>Easy Searches</strong>|habitats_main_easyHelpDesc
+Glossary of terms used in EUNIS Database habitat types module|habitats_main_glossaryDesc
+How to use|how_to_use
+Help on EUNIS Database habitat types module search tools|habitats_main_howToDesc
+<h1>Habitat types advanced search</h1>Search habitat types information using multiple characteristics<br />|habitats_advanced_01
+Specify the search criteria|habitats_advanced_03
+Note: Advanced search might take a long time|advanced_search_might_take_long_time
+Calculated Search criteria expression|habitats_advanced_50
+Only first|advanced_only_first
+results were retrieved - this can lead to partial,incomplete or no combined search results at all - you should refine this criteria|advanced_were_retrieved
+Total habitat types matching your combined criteria found in database|habitats_advanced_54
+<h1>Habitats advanced search results</h1>|habitats_advanced-results_01
+You searched for habitat types using advanced search criteria|habitats_advanced-results_02
+Criteria combination used|habitats_advanced-results_03
+where|habitats_advanced-results_04
+Habitat type name|habitat_type_name
+Habitat Annex I Directive hierarchical view: (higher levels are for grouping only)|habitats_annex1-browser_01
+EUNIS habitat type hierarchical view|eunis_habitat_type_hierarchical_view
+Open habitat type factsheet|open_habitat_factsheet
+Pick habitat type, show references|pick_habitat_type_show_references
+Find books, articles which refer to a habitat type<br />(ex.: books, articles on <strong>Alpide acidocline [Rhododendron] heaths</strong> habitat type)|habitats_books_20
+Search will provide the following information (checked fields will be displayed)|search_will_provide
+Date|date
+Source type|source_type
+Habitat types|habitat_types
+Habitat type name|habitat_type_name
+Search database|search_Database
+EUNIS Habitat types|eunis_habitat_types
+Habitats Directive Annex I |habitat_directive_annex
+Both|both
+Save your criteria|save_your_criteria
+List of values for:|list_of_values_for
+Habitat type name|habitat_type_name
+Search results|search_results
+You searched for references for|habitats_books-result_02
+habitat types with|habitats_books-result_03
+Refine your search|refine_your_search
+Applied filters to the results|applied_filters_to_the_results
+Habitat type(s)|habitat_types_1
+Relationship with other habitat types|habitats_code_06
+in relation with habitat types from:|in_relation_with_habitats_from
+in relation with|habitats_code_13
+<strong>Warning:</strong> Expanding a node with many children might take some time to process.|habitats_code-browser_02
+Open habitat type factsheet|open_habitat_factsheet
+EUNIS habitat type code|eunis_habitat_type_code
+Code in other classifications|code_in_other_classifications
+Habitat ANNEX I directive code|habitats_code-choice_04
+habitat types related to habitat types having|habitats_code-result_03
+in the classification:|in_the_classification
+Display in results habitat types informations in all classifications|show_habitats_codes_in_other_classifications
+Other codes<br />(Code | Classification | Relation)|habitats_code-result_15
+Hide other classifications|hide_other_classifications
+Biogeographic region|biogeographic_region
+AND/OR Biogeographic region|habitats_country_12
+AND Biogeographic region|habitats_country_14
+Select database|select_database
+Habitats Directive Annex I|habitat_directive_annex_1
+Disclaimer: Databases might not contain data for all countries and biogeographic regions|habitats_country_21
+Country names|country_names
+Region names|region_names
+Country / Biogeographic region|country_biogeographic_region
+Habitat type english name|habitat_type_english_name
+Requested habitat type|habitats_diagram_02
+Diagrams exist for habitat type level <strong>1</strong> or <strong>2</strong>|habitats_diagram_03
+Link to level 1 parent habitat type|habitats_diagram_05
+Link to level 2 parent habitat type|habitats_diagram_06
+<h1>Links and Downloads for habitat types</h1><br />No data is available for download at this time.<br />|habitats_download_01
+Sorry, no habitat type has been found in the database with Habitat type ID=|habitats_factsheet_01
+Annex I Habitat type|annex_habitat_type
+EUNIS Habitat type|eunis_habitat_type
+View pictures|view_pictures
+Upload pictures|upload_pictures
+NATURA 2000 habitat type code|habitats_factsheet_12
+Originally published code|originally _published_code
+Priority|priority
+Yes|yes
+Additional note|habitats_factsheet_16
+Name in other languages|habitats_name_in_other_languages
+Relationships with other classifications|habitats_factsheet_22
+Classification|classification
+Relation type|relation_type
+Geographical distribution|geographical_distribution
+Probability|probability
+Code in legal instrument|habitats_factsheet_27
+Legal Instrument|legal_instrument
+Habitat type legal name|habitats_factsheet_29
+Habitat type legal code|habitats_factsheet_30
+Open PDF document|open_pdf_document
+Please let us know about this error by sending an|please_let_us_know_about_error
+Sorry, no habitat type has been found in database|habitats_factsheet-pdf_60
+Habitat type syntaxa|habitat_type_syntaxa
+Relation|relation
+Source (abbreviated)|habitats_factsheet_75
+Sites for which this habitat type is recorded|habitats_factsheet_sitesForHabitatRecorded
+See sites in Google Earth (KML file, pre-requires Google Earth installed) |header_habitat_sites_kml
+Site code|site_code
+Sites for habitat subtypes|habitats_factsheet_sitesForSubtypes
+Species characteristics for habitat type|species_characteristics_for_habitat_type
+Species scientific name|species_scientific_name
+Abundance|abundance
+Frequencies|frequencies
+Faithfulness|faithfulness
+Habitats Indicators|habitats_indicators
+Habitat types key navigation|habitat_type_key_navigation
+002 ) - Leading to question named '002'|leading_to_002
+G ] - Leading to another questions subset of level G|leading_to_G
+E6 ] - Links directly to factsheet for E6|leading_to_E6
+Additionally the diagram may be used for reference.|the_diagram_may_be_used_for_references
+category|category_location
+All|all
+Diagram|habitats_key_03
+Question|question
+Answers:|answers
+legal text|legal_text
+Habitat type|habitat_type
+Habitat type name contains|habitats_legal_11
+You searched for <strong>EUNIS</strong> habitat types from|habitats_legal-result_02
+, protected by |habitats_legal-result_03
+Criterias applied: (Click on item to go back to that stage)|habitats_legal-result_14
+Search habitat types by name or description<br />(ex.: habitat type name contains <strong>marine</strong>)|habitats_names_23
+Name(Description)|name_description
+Search in|habitats_names_15
+Habitat type names|habitats_names_16
+English names|habitats_names_17
+Descriptions|habitats_names_18
+Habitat name or description|habitats_names-choice_01
+habitat types for which|habitats_names-result_03
+Search publications which refer to habitat types<br />(ex.: Books or articles published by <strong>Helsinki Commission</strong>)|habitats_references_29
+Year|year
+Search database|search_Database
+Source reference|habitats_references_23
+Other information|other_information
+List of|list_of
+with following characteristics|with_following_characteristics
+No details are recorded for|no_details_recorded
+No results were found|no_results_found
+Books, articles|habitats_references-result_01
+habitat types for which the selected references |habitats_references-result_03
+starts with|starts_with
+are recorded in the database|are_recorded_in_the_database
+Pick sites, show habitat types|pick_sites_show_habitat_types
+Identify habitats located within sites<br />(ex.: search all habitat types located within site named <strong>AAMSVEEN</strong>)|habitats_sites_17
+Search will provide the following information (checked fields will be displayed), as provided in the original database:|search_will_provide_1
+Habitat type code|habitat_type_code
+Sites|sites
+Pick species, show habitat types|pick_species_show_habitat_types
+Search for habitat types for which the selected species are found in the database<br />(ex.: scientific name is <strong>Acer pseudoplatanus</strong>)|habitats_species_25
+Habitat ANNEX I directive|habitats_species_20
+Characteristic species in a habitat|habitats_species-result_01
+You searched|you_searched
+habitat types which contains species with the following characteristics|habitats_species-result_03
+EUNIS habitat code|habitats_species-result_06
+Downloadable PDF|header_download_pdf
+Download results|header_download_tsv
+EUNIS|home
+EUNIS Login|login
+DiGIR Provider|generic_header-static_digir
+Related reports|related_reports
+GOOGLE|generic_header-static_google
+Species|species
+Habitats|habitats
+Combined search|combined_search
+EUNIS Sitemap|web_site_map
+Interactive Maps|generic_header-static_gistool
+About EUNIS|generic_about_title
+Edit Headlines|headline_title
+You can''t do this because you are not authentificated or you don''t haven enough rights!|not_authenticated_no_rights
+Google Earth network link|google_earth_network_link
+Introduction|introduction
+How to|generic_index_04
+Tutorials|index_tutorials
+User preferences|user_preferences
+Logout|logout
+Services|services
+Welcome to EUNIS biodiversity database - find species, habitats and sites across Europe|generic_index_06
+Search tools|search_tools
+Information about species and subspecies in Europe.|generic_index_16
+Information about the EUNIS habitat types classification and Habitats Directive Annex I habitats |information_about_habitats
+Information collected from various databases regarding sites|information_collected_from_various_databases
+<strong>Combined search</strong>|generic_index_21
+Advanced cross-search tool, linking species, habitat types and sites|advanced_crosssearch_tool_linking_species_habitats_sites
+<strong>Interactive Maps</strong>|generic_index_27
+EUNIS Database Login|login_title
+You successfully logged as|login_you_successfully_logged
+Login into EUNIS Database|login_page_title
+EUNIS Logo|logos_title
+Please use the provided logos to link from your website to EUNIS Database.<br />In order to use them, save the images using right-click and use the link from the text box <br /> or<br /> link directly to our website by using the link provided on third column. <br />|logos_description
+Image|logos_header_image
+Local link (Save image to your site )|logos_header_local
+Direct link to website ( Picture on EUNIS website )|logos_header_website
+Current page|navigator_current_page
+Go to page|navigator_goto_page_label
+Site News|news_title
+Use the following link to get latest news from EUNIS Database in RSS format:|news_description
+RSS News|news_rss_news
+< Previous|pictures_previous
+Next >|pictures_next
+We are sorry, but no pictures are available for|pictures_none
+Upload new picture|pictures_uploadnew
+Delete picture|pictures_delete
+If you were logged in, you could also add / delete pictures.|pictures_login
+This page allows to upload new pictures for|pictures_upload_description
+Please click browse and select the picture from your computer|pictures_upload_browse
+Picture description (max 255 characters)|pictures_upload_pictures_description
+Search references<br />(ex.: search for books written by <strong>JENSEN, P. et al.</strong>)|references_references_19
+Values|values
+You searched references recorded in the database|references_references-result_02
+for which|references_references-result_03
+Applied filters to the results:|applied_filters_to_the_results_1
+From this page you can download additional reports related to biodiversity|related_reports_description
+Please note that some documents are uploaded and pending to be|related_reports_pendingnotice
+approved|related_reports_pendinglink
+Upload new document|related_reports_uploadlink
+No documents available for download at this time|related_reports_nodocs
+Valid|valid
+File name|file_name
+Uploaded by|related_reports_author
+Related reports approval|related_reports_approval_title
+Please note that this files are not available for download until they are approved.<br />Below is the list of documents uploaded by users which are pending for approval.|related_reports_approval_description
+Approve|related_reports_approval_approve
+No documents are pending for approval at this time|related_reports_approval_nonepending
+You are not authorized to use the functionality of this page|related_reports_approval_unauthorized
+There was an error while trying to upload the document.|related_reports_error_description
+File to upload|related_reports_upload_filetoupload_label
+Press <strong>Browse</strong> to select a file from your computer or <strong>Close</strong> to finish.|related_reports_upload_filetoupload_description
+Please notice that file size is limited to|related_reports_upload_filetoupload_notice
+Document description|document_description
+Uploaded documents are not made available for download, until they are approved by an EUNIS Database administrator|related_reports_upload_pending
+You must be logged in and have the proper rights in order to access this page|related_reports_upload_unauthorized
+Help|help
+EUNIS Database Role Management|eunis_database_role_management
+Save criteria|save_criteria
+Your search criteria was saved|search_criteria_saved
+Your search criteria could not be saved|criteria_not_saved
+No list of values available|search_lov_novalues
+Available columns which can be displayed|select_columns_available_label
+Columns to be displayed in results page|select_columns_selected_label
+EUNIS Database Services|services_title
+Add, update and delete users|services_userslink
+Add, update and delete users roles|services_roleslink
+Download EUNIS Database logos|services_logoslink
+List, update and delete your bookmarks|services_bookmarkslink
+Edit EUNIS Database headline|services_headlinelink
+Edit the glossary of terms|edit_glossary_of_terms
+Download database in Microsoft Access format|services_access
+Clear temporary data from the database|services_cleartemp
+Refresh language|refresh_language
+Activate inline editor for web content|services_inline_activate
+Dezactivate inline editor|services_inline_dezactivate
+Activate advanced inline editor|services_inline_advactivate
+Dezctivate advanced inline editor|services_inline_advdezactivate
+Saved criteria|saved_criteria
+SITES SEARCH|sites_main_sitesSearch
+Access information about sites of interest for biodiversity and nature protection|sites_main_description
+Size (Area/Length)|size_area_length
+Search sites by size|search_by_size
+Coordinates|coordinates
+Search sites by geographical coordinates|search_by_coordinates
+Search sites by country location|sites_main_countryDesc
+Altitude|altitude
+Search sites by characterizing altitude|sites_main_altitudeDesc
+Designation year|designation_year
+Search sites by the year of designation|sites_main_designationDesc
+Pick sites, show species|pick_sites_show_species
+Pick sites, show habitat types|pick_sites_show_habitat_types
+Identify habitat types located within sites|sites_main_showHabitatsDesc
+Pick designation types, show sites|pick_designation_types_show_sites
+Search sites by legal instruments |sites_main_showSitesDesc
+Designation types|designation_types
+Search designation types|sites_main_designationTypesDesc
+Site neighborhood|site_neighborhood_1
+Search neighboring sites within a range of a specified site|sites_main_neighborhoodDesc
+Sites tree browser|sites_tree_browser
+Search sites information using more complex filtering capabilities|sites_main_advSearchSearchDesc
+Help on sites Advanced Search|sites_main_advHowToDesc
+Links to statistical data|links_to_statistical_data
+Number/Total area|sites_main_number
+Find statistical data about sites|sites_main_numberDesc
+Links &amp; downloads|links_and_downloads_1
+Links and Downloads|links_and_downloads_2
+Download full data set, visit data providers etc.|sites_main_linksDownloadsDesc
+Find sites used in indicators|sites_main_indicatorsDesc
+Links to online help|links_to_online_help
+How to use Easy search|how_to_use_easy_search
+Help on sites <strong>Easy Searches</strong>|sites_main_howToDesc
+Glossary of the terms used in EUNIS Database sites module|sites_main_glossaryDesc
+Sites online help|sites_main_sitesHowToDesc
+Sites advanced search|sites_advanced_02
+Search sites using complex filtering capabilities|sites_advanced_03
+Total sites matching your combined criteria found in database:|sites_advanced_10
+Saved search criteria|saved_search_criteria
+Sites advanced search results|sites_advanced_results
+You searched sites using advanced search criteria|sites_advanced-results_03
+Criteria combination used:|criteria_combination_used
+Source data set&nbsp;|source_data_set_2
+Size(ha)|size_ha
+Length(m)|length_m
+Min. altitude(m)|min_altitude_m
+Max. altitude(m)|max_altitude_m
+Mean altiude(m)|mean_altitude_m_1
+Respondent|respondent
+Site altitude|site_altitude
+Search sites by characterizing altitude<br />(ex.: sites located with a <strong> mean altitude between  10 and 14</strong>)|sites_altitude_20
+Source data set &nbsp;|source_data_set_1
+Country &nbsp;|country_1
+Site name &nbsp;|site_name_1
+Designation type &nbsp;|designation_type_1
+Coordinates &nbsp;|coordinates_1
+Altitude &nbsp;|sites_altitude_08
+Mean Altitude(m)|mean_altitude_m
+Minimum Altitude(m)|minimum_altitude
+Maximum Altitude(m)|maximum_altitude_m
+Country is|country_is
+You searched sites for which|you_searched_sites_which
+Min Altitude(m)|sites_altitude-result_20
+Max Altitude(m)|sites_altitude-result_21
+Save your criteria:|save_your_criteria_1
+Size &nbsp;|size_1
+Site coordinates|sites_coordinates_01
+Between|between
+Degrees|degrees
+Minutes|minutes
+Seconds|seconds
+Decimal degrees:|sites_coordinates-calc_05
+Sites coordinates|sites_coordinates-result_01
+You searched sites for which &nbsp;|sites_coordinates-result_02
+(dec. deg.)|sites_coordinates-result_03
+Area(ha)|area_ha
+Site country|site_country
+Search sites by geographical location<br />(ex.: Sites located in <strong>Romania</strong>)|sites_country_16
+Country name|country_name
+Sites country|sites_country-result_01
+You searched sites in|sites_country-result_07
+Natura 2000 (v.1.0)|sites_databases_Natura 2000
+CDDA National (v.1.0)|sites_databases_CDDA National
+Nature Net (v.1.0)|sites_databases_Nature Net
+European Diploma (v.1.0)|sites_databases_European Diploma
+CDDA International (v.1.0)|sites_databases_CDDA International
+Corine Biotopes (v.1.0)|sites_databases_Corine Biotopes
+Biogenetic Reserve (v.1.0) |sites_databases_Biogenetic Reserve
+Emerald|emerald
+Select data set:|select_data_set
+Download full data set|download_full_data_set
+Search sites by legal instruments<br />(ex.: designations with <strong>forest</strong> in their name, <strong>A</strong> as category, from all source data sets)|sites_designated-codes_21
+Designation type category&nbsp;|sites_designated-codes_05
+Original/English/French Designation name|original_english_french_designation_name
+Designation category|designation_category
+Sites by designation types|sites_designated-codes-result_01
+Designation name &nbsp;|sites_designations_04
+English designation name &nbsp;|sites_designations_05
+French designation name &nbsp;|sites_designations_06
+Designation abbreviation |sites_designations_08
+Sites designations types|sites_designations-result_01
+English designation name|english_designation_name
+Designation name|designation_name
+French designation name|french_designation_name
+Abbreviation|abbreviation
+No data found in the database for the site with ID = |sites_factsheet_error
+Factsheet filled with data from|facthseet_filled_with_data_from
+data set|sites_factsheet_02
+National and/or International Designation of Natura 2000 site|sites_factsheet_designations_national
+Designation code|designation_code
+Cover(%)|cover_percent
+Designated site|sites_factsheet_designations_designatedsite
+Overlap(%)|overlap_percent
+Overlap P(%)|sites_factsheet_designations_areasoverlapp
+Site contact authorities|site_contact_authorities
+Information|information
+Official contact international|official_contact_international
+Official contact national|official_contact_national
+Official contact regional|official_contact_regional
+Official contact local|official_contact_local
+General character of the site|general_character_of_site
+Quality|quality
+Vulnerability|vulnerability
+Designation|designation
+Owner|owner
+Documentation|documentation
+Flora|flora
+Fauna|fauna
+Potential vegetation|potential_vegetation
+Educational interest|educational_interest
+Geomorphology|geomorphology
+Cultural heritage|cultural_heritage
+Justification|justification
+Methodology|methodology
+Budget|budget
+Management plan|management_plan
+URL official|url_official
+URL interesting|url_interesting
+Ecological information: Fauna and Flora|ecological_information_fauna_flora
+Species group|species_group
+Resident|resident
+Breeding|breeding
+Winter.|sites_factsheet_94
+Staging|staging
+Popul.|sites_factsheet_96
+Nesting|sites_factsheet_98
+Conserv.|sites_factsheet_99
+Isolation|isolation
+Global status|sites_factsheet_101
+Species status|species_status
+Other species mentioned in site|other_species_mentioned_in_site
+Ecological information: Fauna and Flora mentioned in site|ecological_information_fauna_flora_mentioned_in_site
+Species name|species_name
+Population size estimations|population_size_estimations
+Motivation for species mention|motivation_for_species_mention
+Site identification|site_identification
+code in database|code_in_database
+Surface area (ha)|surface_area_ha
+Length (m)|sites_factsheet_06
+Complex name|complex_name
+District name|district_name
+Date form compilation date|date_form_compilation_date
+entered in original database as|sites_factsheet_170
+Date form update|date_form_update
+Date proposed|date_proposed
+Date confirmed|date_confirmed
+Date first designation|date_first_designation
+Site designation date|site_designation_date
+Designation information|designation_information
+Designation name (Original)|designation_name_original
+Designation name (English)|designation_name_english
+Designation name (French)|designation_name_french
+Project ID:|project_id
+Project title:|project_title
+Pictures on Google|pictures_on_google
+UNEP-WCMC link|unep_link
+Location information|location_information
+Parent country|parent_country
+Regional administrative codes|sites_factsheet_30
+Site biogeographic regions|sites_factsheet_149
+Alpine|sites_factsheet_152
+Anatolian|sites_factsheet_153
+Arctic|sites_factsheet_154
+Atlantic|sites_factsheet_155
+Boreal|sites_factsheet_156
+Continental|sites_factsheet_157
+Macaronesia|sites_factsheet_158
+Mediterranean|sites_factsheet_159
+Pannonian|sites_factsheet_160
+Black Sea|sites_factsheet_161
+Steppic|sites_factsheet_162
+Presence|sites_factsheet_151
+Longitude (decimal deg.)|sites_factsheet_36
+Latitude (decimal deg.)|sites_factsheet_37
+Biogeographic regions|biogeographic_regions
+Change map type|change_map_type
+Standard (Europe)|standard_europe
+Standard (Europe) - Boundaries|standard_europe_boundaries
+Europe|europe
+Europe - Boundaries|europe_boundaries
+World|world
+World - Boundaries|world_boundaries
+Biogeographic|biogeographic
+Biogeographic - Boundaries|biogeographic_boundaries
+Zoom in|zoom_in
+Zoom out|zoom_out
+Ecological information: Habitats within site|ecological_information_habitats_within_site
+Habitats listed in Directive|sites_factsheet_114
+Representativity|representativity
+Relative surface|sites_factsheet_118
+Conservation|conservation
+Global|global
+Other habitat types mentioned in site|sites_factsheet_166
+Cover (%)|sites_factsheet_habitats_cover
+Surface (ha)|sites_factsheet_habitats_surface
+Habitat types not in EUNIS|habitat_type_not_eunis
+Human Activities|human_activities
+Activity|activity
+Inside/Outside|inside_outside
+Intensity|intensity
+Influence|influence
+Activity code|sites_factsheet_other_activitycode
+Location|location
+References to Maps|reference_to_maps
+Number|number
+Scale|scale
+Projection|projection
+Details|details
+References to photos|reference_to_photos
+Type|type
+Other project specific fields|sites_factsheet_144
+IUCN management category|iucn_management
+Site typology|site_typology
+Reference document number|reference_document_number
+Reference document source|reference_document_source
+Sorry, no site matching|sites_factsheet-pdf_114
+has been found in database.|sites_factsheet-pdf_115
+Relationships|sites_factsheet_123
+ID Site|id_site
+Within databases|within_databases
+Relation with other Natura 2000 sites|sites_factsheet_related_natura2000
+Type of relation|sites_factsheet_related_relationtype
+Relation with Corine biotope sites|sites_factsheet_related_corinesites
+Overlap|sites_factsheet_related_overlap
+Overlap P|sites_factsheet_related_overlapp
+Pick habitat type, show sites|pick_habitat_type_show_sites
+Find sites containing a particular habitat type<br />(ex.: EUNIS habitat types <strong>Mires, bogs and fens</strong>)|sites_habitats_24
+Habitat types&nbsp;|sites_habitats_07
+Select database: &nbsp;|sites_habitats_17
+EUNIS habitat types|sites_habitats_18
+Habitat type Directive Annex I|sites_habitats_19
+You searched for sites containing|sites_habitats-result_02
+habitat types with the following characteristic: |sites_habitats-result_03
+Search sites by name<br />(ex.: Site name contains <strong>moor</strong>)|sites_names_21
+Country is&nbsp;&nbsp;|sites_names_11
+Designation year between&nbsp;|sites_names_12
+Site neighborhood|site_neighborhood
+Search neighboring sites|sites_neighborhoods_20
+(ex. Site around site named <strong>Bluntautal</strong> from <strong>Austria</strong>) |sites_neighborhoods_21
+Designation year between|designation_year_between
+Site neighborhood|site_neighborhood_1
+Found|sites_neighborhood-detail_05
+site(s) in the range of aprox.|sites_neighborhood-detail_06
+km of &nbsp;site&nbsp;|sites_neighborhood-detail_07
+&nbsp;Distance (km)|sites_neighborhood-detail_10
+Please enter search radius&nbsp;|sites_neighborhood-result_03
+[Km] and click on the site name to see neighboring sites.|sites_neighborhood-result_04
+Possible values for source data sets are:|sites_refine-helper_01
+CDDA National|cdda_national
+CDDA International|cdda_international
+Corine Biotopes|corine_biotopes
+Biogenetic Reserve|biogenetic_reserve
+European Diploma|european_diploma
+Natura 2000|natura_2000
+Possible values for country are:|sites_refine-helper_08
+Nature Net|sites_databases_Nature_Net
+Site size (Area/Length)|sites_size_01
+Search sites by size<br />(ex.: size between <strong>23</strong> and <strong>34</strong> ha)|sites_size_29
+Sites size|sites_size-result_01
+Pick species, show sites|pick_species_show_sites
+Search sites with species <br />(ex.: sites which are related to <strong>Acrocephalus paludicola</strong>)|sites_species_22
+You searched sites related to species with |sites_species-result_02
+Designation name contains|sites_statistical_05
+Designation category is|sites_statistical_06
+Designation year is between|sites_statistical_08
+Number / Total area|sites_statistical_result_totalarea
+Statistical data for sites from:|sites_statistical-result_01
+Total number of sites:|sites_statistical-result_03
+Country information|sites_statistical-result_04
+Original country name:|sites_statistical-result_05
+ISO Three Letter Code:|sites_statistical-result_06
+English country name:|sites_statistical-result_07
+ISO Numeric Code:|sites_statistical-result_08
+French country name:|sites_statistical-result_09
+Capital:|sites_statistical-result_10
+EUNIS area code:|sites_statistical-result_11
+Surface(km2):|sites_statistical-result_12
+ISO Two Letter Code:|sites_statistical-result_13
+Population number:|sites_statistical-result_14
+Biogeographic regions:|sites_statistical-result_15
+Biogeographic region name|biogeographic_region_name
+Percentage(%)|sites_statistical-result_17
+Designation type name|sites_statistical-result_19
+English designation type name|sites_statistical-result_20
+French designation type name|sites_statistical-result_21
+Total number of sites|sites_statistical-result_23
+This country has no designation types|sites_statistical_result_nodesignations
+Show sites designation types  from this country|sites_statistical-result_32
+Warning: Expanding data might take a long time.|sites_statistical-result_31
+Show species for this country|sites_statistical-result_35
+Show habitat types for this country|sites_statistical-result_36
+Sites groupped by Designations in EUNIS Database|sites_tree_browser_explanation
+Open designation factsheet|open_designation_factsheet
+Site designation year|site_designation_year
+Search sites by the year of designation<br />(ex. sites with designation year between 1990 and 1995)|sites_year_27
+You searched sites with designation year|sites_year-result_06
+SPECIES SEARCH|species_main_speciesSearch
+Search species with names starting with:|search_species_with_name_starting
+A set of predefined &nbsp;functions to search the database|predefined_functions_to_search_database
+Names|names
+Search species by scientific name (in Latin) or by vernacular name (popular name)|search_by_latin_or_vernacular
+Species &amp; subspecies by Group (Invertebrates, Mammals etc.)|species_subspecies_by_group
+Synonyms|synonyms
+Identify synonym names for species|identify_synonym_names_for_species
+Country/Biogeographic region|country_biogeographic_region_location
+Find species located within a country and/or a biogeographic region|find_species_located_in_country_region
+International Threat Status|international_threat_status
+Species threatened at international level|species_threatened_at_international_level
+National threat status|national_threat_status
+Species threatened at country level|species_threatened_at_country_level
+Species protected by legal texts at European level|species_protected_by_legal_texts
+Find habitat types characterized by a particular species|find_habitat_types_characterized_by_species
+Find sites characterized by a particular species|find_sites_types_characterized_by_species
+Pick species, show references|pick_species_show_references
+Find books, articles which refers to species|find_books_articles
+Pick references, show species|pick_references_show_species
+Find species referred by books, articles etc.|fins_species_reffered_by_books
+Taxonomic classification|taxonomic_classification
+Taxonomic classification for species|taxonomic_classification_for_species
+A flexible search tool to build your own query|flexible_search_tool_to_build_your_own_query
+Search species information using more complex filtering capabilities|search_using_complex_filtering
+Help on species <strong>Advanced Search</strong>|species_main_advSearchHelpDesc
+A search tool to build aggregated data|search_tool_to_build_aggregated_data
+Statistical data|statistical_data
+Find statistical data about species|fins_statistical_data_about_species
+Species links and downloads|species_main_14_Txt
+Find species used in indicators|find_species_used_in_indicators
+Help on species <strong>Easy Searches</strong>|species_main_easyHelpDesc
+Glossary of the terms used in EUNIS Database species module|species_main_glossaryDesc
+Browse|browse
+Generic information tools on Species diversity|generic_information_tools_on_species
+Help on EUNIS Database species module search tools|species_main_howToDesc
+Species advanced search|species_advanced_01
+Search species information using multiple characteristics|species_advanced_02
+Total species matching your combined criteria found in database:|species_advanced_50
+Find books, articles which refers to species<br />(ex.: documents which refers the <strong>salmo trutta</strong> fish)|species_books_17
+List of values for|species_books-choice_04
+You searched references for species with|species_books-result_02
+Species name(s)|species_books-result_15
+Species present in a country and a biogeographic region<br/>(ex.: search for species present within <strong>continental</strong> biogeographic region of <strong>Denmark</strong>)|species_country_18
+Any country|species_country_12
+Disclaimer: Databases does not contain data for all countries|species_country_17
+Country / Biogeoregion|species_country-result_01
+You searched species located in biogeographic region:|species_country-result_03
+from|species_country-result_04
+Display vernacular names in results table|display_vernacular_names_in_results
+Biogeoregion|biogeoregion
+Hide|hide
+Species links and downloads|species_download_title
+No data is available for download at this time.<br />|species_download_01
+We are sorry, the requested species does not exists|species_factsheet_nodata
+Grid distribution|grid_distribution
+Code cell|code_cell
+Latitude (dec. deg)|species_factsheet-distribution_04
+Longitude (dec. deg.)|species_factsheet-distribution_05
+Status|status
+Taxonomic information|species_factsheet_taxonomicInformation
+Genus|genus
+GBIF link|species_factsheet_03
+Redlist link|species_factsheet_05
+Fishbase link|species_factsheet_06
+SCIRUS|species_factsheet_07
+Biology Browser|species_factsheet_08
+NCBI Taxonomy browser|species_factsheet_09
+Fauna Europaea|species_factsheet_21
+Valid subspecies in Europe|valid_subspecies_europe
+Open map in new window|open_new_window
+Legend|legend
+Country/Area|species_factsheet-geo_04
+Geographical legal information for|geographical_legal_information
+EUNIS provides only European geographical implementation of International Legal texts. Countries which are signatory but outside Pan-Europe are not shown or mentioned|species_factsheet-geo-legal_04
+Date of event (yyyy-MM-dd)|species_factsheet-geo-legal_06
+Event|species_factsheet-geo-legal_07
+Habitat types populated by species|habitat_type_populated_by_species
+Detailed reference|detailed_reference
+Comments|species_factsheet_legalInstruments_02
+Geographical implementation|species_factsheet_legalInstrumentsGeoImplem
+Reporting obligations|species_factsheet_legalInstrumentsObligations
+Not applicable. See Bonn Agreement or Memorandum.|species_factsheet_notApplicable
+Source: European Topic Centre on Biological Diversity|species_factsheet-pdf_03
+Generated on|generated_on
+Open PDF report|species_factsheet-pdf_94
+Sorry, no species matching has been found in database with ID:|species_factsheet-pdf_98
+Min / Max (Units)|min_max
+Population|population
+Sites for subtaxa of this taxon|species_factsheet_sites_02
+Image not available|image_not_available
+Map legend is based on the most recent information available,<br />additional older information is shown in table only.|species_factsheet-threat_03
+National threat code|national_threat_code
+Area|area
+International threat code|species_factsheet-conservation_09
+Trends|trends
+Start Period|start_period
+End period|end_period
+Tendence|species_factsheet-trends_07
+Vernacular Name|vernacular_name
+Groups|groups
+Species and subspecies by main groups<br />(ex.: search species and subspecies belonging to <strong>invertebrates</strong> group)|species_groups_16
+Number of scientific species names|species_groups_09
+Actual number of taxa|species_groups_10
+Select|select
+<strong>WARNING:</strong>Getting results for a group with many species can take a longer time.|species_groups_12
+* - The number of actual species retrieved by the Search might be different, depending on your user rights|species_groups_Note
+You searched species from group|species_groups-result_03
+Pick habitat type, show species|species_habitats_01
+Identify species located within a specific habitat type<br />(ex.: species located within the <strong>marine habitat</strong>)|species_habitats_25
+Warning: This search might take a long time.|might_take_long_time
+Pick habitat, show species|species_habitats-result_01
+You searched for species in habitat types with|species_habitats-result_02
+Display vernacular names|display_vernacular_names
+Species referenced by international legal instruments|species_legal_16
+(ex.: search <strong>Mammals</strong> referenced by the <strong>ANNEX II - Bern Convention legal text</strong>)|species_legal_30
+International Legal Instruments|species_legal_01
+Legal texts by selected species<br />(ex.: search legal information mentioning <strong>Alopex lagopus</strong> from <strong>Mammals</strong> group)|species_legal_29
+You searched legal instruments for|species_legal-result_02
+group and <strong>scientific name</strong> contains|species_legal-result_03
+You searched species from|species_legal-result_04
+group, referenced by|species_legal-result_05
+Any|any
+Annex/Appendix|species_legal-result_06
+Classification, distribution and threat status of species selected by scientific name <br />(ex.: search all species having <strong>acrocephalus</strong> in their scientific name)|species_names_searchExample1
+Valid name|valid_name
+Search in synonyms|search_synonyms
+Classification, distribution and threat status of species selected by vernacular name<br />(ex.: search for species with popular name <strong>red fox</strong>)|species_names_searchExample2
+Kingdom|kingdom
+in|species_names_in
+Species vernacular name|species_vernacular_name
+Search by name results|species_names-result_mainTitleSN
+Search by name results|species_names-result_mainTitleSN
+No match was found for |species_names-result_descriptionSearchN1
+The closest phonetic match we found is: |species_names-result_descriptionSearchN2
+References of species selected by references<br />(ex.: all the references recorded in <strong>1978</strong>)|species_references_22
+You searched species for which the selected references|species_references-result_02
+Display vernacular names in results list|species_references-result_16
+Please type a few letters from site name.|please_type_letters_from_site_name
+Please enter size as a numerical value.|enter_size_as_number
+Biogeographic regions is not valid, please use helper to find biogeographic regions|biogeographic_region_is_not_valid
+You searched species from sites with the following characteristic(s)|species_sites-result_02
+Site(s) name(s)|species_sites-result_16
+Species Statistics|species_statistics
+Statistical data at EUNIS Database level:|statistical_data_EUNIS
+Number of distinct species:|number_distinct_species
+Number of species names:|number_species_names
+Number of vernacular names:|number_vernacular_names
+Number of languages concerned in vernacular names search:|number_languages
+Number of species having international legal status:|number_international_status
+Number of international legal instruments:|number_international_instruments
+Number of species having conservation status at international level:|number_international_conservation
+Number of species having conservation status at national level:|number_national_conservation
+Number of countries concerned in conservation status at national level search:|number_countries_conservation
+Number of species having geographical distribution:|number_geo
+Number of species having grid distribution:|number_grid
+No data was found at Eunis Database level!|no_data_eunis
+If you want statistical data at country level,|if_want
+please choose a country:|please_choose
+Statistical data for|statistical_data_for
+No data was found for|no_data_country
+Search EUNIS Database for species synonyms<br />(ex.: search <strong>mammals</strong> group for <strong>vulpes vulpes</strong>)|species_synonyms_20
+Synonym name|species_synonyms_07
+Group name|group_name
+Synonyms search results|species_synonyms-result_01
+You searched synonyms for species with scientific name|species_synonyms-result_02
+Synonym|synonym
+Species taxonomic classification|habitats_taxonomic-browser_01
+Taxonomic tree view of species<br /><br /><strong>Warning: Expanding a branch with many species (Animalia) will take a longer time</strong>|habitats_taxonomic-browser_02
+Expand up to|expand_up_to
+Species related (only for finals taxonomies)|habitats_taxonomic-browser_06
+There are no species in database related to selected category|habitats_taxonomic-browser_09
+Search species threatened at international level <br />(ex.: search birds from <strong>Europe</strong> which are marked as <strong>declining</strong>)|species_threat-international_20
+Geographical region|geographical_region
+Threat Status|threat_status
+Any group|any_group
+Save this criteria|species_threat-international_10
+Species international threat status|species_international_threat_status
+You searched species with threat international status|species_threat-international-result_02
+Species threatened at country level<br />(ex.: search for <strong>birds</strong> from <strong>Poland</strong> which are marked as <strong>critically endangered</strong>)|species_threat-national_21
+Disclaimer: Database does not contain data for all countries|species_threat-national_20
+Species threatened at national level|species_threat-national-result_01
+You searched species with threat national level:|species_threat-national-result_02
+Eunis status|systemcheck_02
+Tomcat status|systemcheck_03
+MySQL status|systemcheck_04
+EUNIS Database Learning tutorials|tutorials_01
+Search species by name|tutorials_03
+Search species by country/biogeoregion|tutorials_04
+Search species by group|tutorials_05
+Search species by synonyms|tutorials_06
+Search habitat types by name|tutorials_08
+Search habitat types by code classification|tutorials_09
+Search habitat types by country/biogeoregion|tutorials_10
+Search habitat types by legal instruments|tutorials_11
+Search sites by name|tutorials_13
+Search sites by country|tutorials_15
+Search sites by designation|tutorials_17
+Search sites by altitude|tutorials_18
+General usage|tutorials_19
+EUNIS Database general usage|tutorials_20
+Advanced usage|tutorials_21
+GIS Tool Help|gis_help
+EUNIS Database Advanced search|tutorials_23
+EUNIS Database Combined search|tutorials_24
+EUNIS Database User Management|eunis_database_user_management
+EUNIS Database User Bookmarks|users_bookmarks_03
+Edit bookmark|edit_bookmark
+Bookmark name|users_bookmarks_05
+Bookmark description|users_bookmarks_06
+This bookmark does not exist.|users_bookmarks_07
+Bookmark has been successfully updated.|users_bookmarks_08
+An error occurred while updating the bookmark.|users_bookmarks_11
+Delete bookmark|delete_bookmark
+Bookmark has been successfully deleted.|users_bookmarks_13
+An error occurred while deleting the bookmark.|users_bookmarks_14
+Bookmarks list|users_bookmarks_15
+There are no saved bookmarks.|users_bookmarks_19
+You must be authenticated and have the proper right to access this page.|users_bookmarks_20
+Bookmark URL|users_bookmarks_save_02
+Enter description for bookmark|users_bookmarks_save_03
+Web content editor|web_content_editor
+Use this page to add new content to the database.|web_content_keys_03
+Id page|web_content_keys_04
+Content|content
+You do not have the proper privileges to access the functionality of this page.|web_content_keys_10
+Webbrowsers without Javascript can go directly to <a href="http://data.gbif.org/species/{0}">GBIF's page on {1}</a>.|Webbrowsers without Javascript can go directly to <a href="http://data.gbif.org/species/{0}">GBIF's page on {1}</a>.

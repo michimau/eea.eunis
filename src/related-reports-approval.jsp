@@ -130,7 +130,7 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("related_reports_approval_title")%>
+                  <%=cm.cmsPhrase("Related reports approval")%>
                 </h1>
           <%
             if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
@@ -138,7 +138,7 @@
               List pendingReportsList = RelatedReportsUtil.listPendingReports();
           %>
                 <br />
-                <%=cm.cmsText("related_reports_approval_description")%>
+                <%=cm.cmsPhrase("Please note that this files are not available for download until they are approved.<br />Below is the list of documents uploaded by users which are pending for approval.")%>
                 <br />
           <%
               if(pendingReportsList.size() > 0)
@@ -150,25 +150,25 @@
                     <thead>
                       <tr>
                         <th>
-                          <%=cm.cmsText("related_reports_approval_approve")%>
+                          <%=cm.cmsPhrase("Approve")%>
                         </th>
                         <th>
-                          <%=cm.cmsText("valid")%>
+                          <%=cm.cmsPhrase("Valid")%>
                         </th>
                         <th>
-                          <%=cm.cmsText("description")%>
+                          <%=cm.cmsPhrase("Description")%>
                         </th>
                         <th>
-                          <%=cm.cmsText("file_name")%>
+                          <%=cm.cmsPhrase("File name")%>
                         </th>
                         <th style="text-align : right;">
-                          <%=cm.cmsText("size")%>(kB)
+                          <%=cm.cmsPhrase("Size")%>(kB)
                         </th>
                         <th>
-                          <%=cm.cmsText("author")%>
+                          <%=cm.cmsPhrase("Author")%>
                         </th>
                         <th>
-                          <%=cm.cmsText("date")%>
+                          <%=cm.cmsPhrase("Date")%>
                         </th>
                       </tr>
                     </thead>
@@ -247,25 +247,25 @@
                     <thead>
                       <tr>
                         <th>
-                          <%=cm.cmsText("related_reports_approval_approve")%>
+                          <%=cm.cmsPhrase("Approve")%>
                         </th>
                         <th>
-                          <%=cm.cmsText("valid")%>
+                          <%=cm.cmsPhrase("Valid")%>
                         </th>
                         <th>
-                          <%=cm.cmsText("description")%>
+                          <%=cm.cmsPhrase("Description")%>
                         </th>
                         <th>
-                          <%=cm.cmsText("file_name")%>
+                          <%=cm.cmsPhrase("File name")%>
                         </th>
                         <th style="text-align : right;">
-                          <%=cm.cmsText("size")%>(kB)
+                          <%=cm.cmsPhrase("Size")%>(kB)
                         </th>
                         <th>
-                          <%=cm.cmsText("author")%>
+                          <%=cm.cmsPhrase("Author")%>
                         </th>
                         <th>
-                          <%=cm.cmsText("date")%>
+                          <%=cm.cmsPhrase("Date")%>
                         </th>
                       </tr>
                     </thead>
@@ -287,7 +287,7 @@
           %>
                 <br />
                 <strong>
-                  <%=cm.cmsText("related_reports_approval_nonepending")%>.
+                  <%=cm.cmsPhrase("No documents are pending for approval at this time")%>.
                 </strong>
                 <br />
           <%
@@ -298,7 +298,7 @@
               // User is not authorized to see this page
           %>
                 <br />
-                <%=cm.cmsText("related_reports_approval_unauthorized")%>.
+                <%=cm.cmsPhrase("You are not authorized to use the functionality of this page")%>.
                 <br />
           <%
             }

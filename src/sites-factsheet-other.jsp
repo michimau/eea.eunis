@@ -45,25 +45,25 @@
 %>
   <br />
   <h2>
-    <%=cm.cmsText("human_activities")%>
+    <%=cm.cmsPhrase("Human Activities")%>
   </h2>
   <table summary="<%=cm.cms("human_activities")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("activity")%>
+          <%=cm.cmsPhrase("Activity")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("inside_outside")%>
+          <%=cm.cmsPhrase("Inside/Outside")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("intensity")%>
+          <%=cm.cmsPhrase("Intensity")%>
         </th>
         <th style="text-align : right; text-transform: capitalize;">
-          <%=cm.cmsText("cover_percent")%>
+          <%=cm.cmsPhrase("Cover(%)")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("influence")%>
+          <%=cm.cmsPhrase("Influence")%>
         </th>
       </tr>
     </thead>
@@ -144,22 +144,22 @@
 %>
   <br />
   <h2>
-    <%=cm.cmsText("human_activities")%>
+    <%=cm.cmsPhrase("Human Activities")%>
   </h2>
   <table summary="<%=cm.cms("human_activities")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("sites_factsheet_other_activitycode")%>
+          <%=cm.cmsPhrase("Activity code")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("description")%>
+          <%=cm.cmsPhrase("Description")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("location")%>
+          <%=cm.cmsPhrase("Location")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("intensity")%>
+          <%=cm.cmsPhrase("Intensity")%>
         </th>
         <th style="text-transform: capitalize; text-align: right;">
           <%=cm.cms("cover_percent")%>
@@ -259,22 +259,22 @@
 %>
   <br />
   <h2>
-    <%=cm.cmsText("reference_to_maps")%>
+    <%=cm.cmsPhrase("References to Maps")%>
   </h2>
   <table summary="<%=cm.cms("reference_to_maps")%>" class="datatable" width="90%">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("number")%>
+          <%=cm.cmsPhrase("Number")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("scale")%>
+          <%=cm.cmsPhrase("Scale")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("projection")%>
+          <%=cm.cmsPhrase("Projection")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("details")%>
+          <%=cm.cmsPhrase("Details")%>
         </th>
       </tr>
     </thead>
@@ -323,28 +323,28 @@
 %>
   <br />
   <h2>
-    <%=cm.cmsText("reference_to_photos")%>
+    <%=cm.cmsPhrase("References to photos")%>
   </h2>
   <table summary="<%=cm.cms("reference_to_photos")%>" class="datatable" width="90%">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("type")%>
+          <%=cm.cmsPhrase("Type")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("number")%>
+          <%=cm.cmsPhrase("Number")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("location")%>
+          <%=cm.cmsPhrase("Location")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("description")%>
+          <%=cm.cmsPhrase("Description")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("date")%>
+          <%=cm.cmsPhrase("Date")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("author")%>
+          <%=cm.cmsPhrase("Author")%>
         </th>
       </tr>
     </thead>
@@ -389,7 +389,7 @@
 %>
   <br />
   <h2>
-    <%=cm.cmsText("sites_factsheet_144")%>
+    <%=cm.cmsPhrase("Other project specific fields")%>
   </h2>
   <table class="datatable" width="90%">
     <tbody>
@@ -399,7 +399,7 @@
 %>
       <tr class="zebraeven">
         <td>
-          <%=cm.cmsText("iucn_management")%>
+          <%=cm.cmsPhrase("IUCN management category")%>
         </td>
         <td>
           <%=Utilities.formatString(category)%>&nbsp;
@@ -412,7 +412,7 @@
 %>
       <tr>
         <td>
-          <%=cm.cmsText("site_typology")%>
+          <%=cm.cmsPhrase("Site typology")%>
         </td>
         <td>
           <%=Utilities.formatString(typology)%>&nbsp;
@@ -425,7 +425,7 @@
 %>
       <tr class="zebraeven">
         <td>
-          <%=cm.cmsText("reference_document_number")%>
+          <%=cm.cmsPhrase("Reference document number")%>
         </td>
         <td>
           <%=referenceDocNumber%>&nbsp;
@@ -433,7 +433,7 @@
       </tr>
       <tr>
         <td>
-          <%=cm.cmsText("reference_document_source")%>
+          <%=cm.cmsPhrase("Reference document source")%>
         </td>
         <td>
           <%=referenceDocSource%>&nbsp;

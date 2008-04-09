@@ -94,9 +94,9 @@
 <!-- MAIN CONTENT -->
                 <img id="loading" alt="Loading" title="Loading" src="images/loading.gif" />
                 <h1>
-                  <%=cm.cmsText("sites_statistical_result_totalarea")%>
+                  <%=cm.cmsPhrase("Number / Total area")%>
                 </h1>
-                <%=cm.cmsText("sites_statistical-result_01")%>
+                <%=cm.cmsPhrase("Statistical data for sites from:")%>
                 <strong>
                   <%=formBean.toHumanString()%>
                 </strong>
@@ -112,15 +112,15 @@
                     nrSites = new Long( 0 );
                   }
                 %>
-                <%=cm.cmsText("sites_statistical-result_03")%>&nbsp;&nbsp;<%=nrSites%>
+                <%=cm.cmsPhrase("Total number of sites:")%>&nbsp;&nbsp;<%=nrSites%>
                 <br /><br />
                 <strong>
-                  <%=cm.cmsText("sites_statistical-result_04")%>
+                  <%=cm.cmsPhrase("Country information")%>
                 </strong>
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" summary="Country information">
                   <tr>
                     <td width="221">
-                      <%=cm.cmsText("sites_statistical-result_05")%>
+                      <%=cm.cmsPhrase("Original country name:")%>
                     </td>
                     <td width="158">
                       <strong>
@@ -128,7 +128,7 @@
                       </strong>
                     </td>
                     <td width="221">
-                      <%=cm.cmsText("sites_statistical-result_06")%>
+                      <%=cm.cmsPhrase("ISO Three Letter Code:")%>
                     </td>
                     <td width="158">
                       <strong>
@@ -138,7 +138,7 @@
                   </tr>
                   <tr>
                     <td width="221">
-                      <%=cm.cmsText("sites_statistical-result_07")%>
+                      <%=cm.cmsPhrase("English country name:")%>
                     </td>
                     <td width="158">
                       <strong>
@@ -146,7 +146,7 @@
                       </strong>
                     </td>
                     <td width="221">
-                      <%=cm.cmsText("sites_statistical-result_08")%>
+                      <%=cm.cmsPhrase("ISO Numeric Code:")%>
                     </td>
                     <td width="158">
                       <strong>
@@ -156,7 +156,7 @@
                   </tr>
                   <tr>
                     <td width="221">
-                      <%=cm.cmsText("sites_statistical-result_09")%>
+                      <%=cm.cmsPhrase("French country name:")%>
                     </td>
                     <td width="158">
                       <strong>
@@ -164,7 +164,7 @@
                       </strong>
                     </td>
                     <td width="221">
-                      <%=cm.cmsText("sites_statistical-result_10")%>
+                      <%=cm.cmsPhrase("Capital:")%>
                     </td>
                     <td width="158">
                       <strong>
@@ -174,7 +174,7 @@
                   </tr>
                   <tr>
                     <td width="221">
-                      <%=cm.cmsText("sites_statistical-result_11")%>
+                      <%=cm.cmsPhrase("EUNIS area code:")%>
                     </td>
                     <td width="158">
                       <strong>
@@ -182,7 +182,7 @@
                       </strong>
                     </td>
                     <td width="202">
-                      <%=cm.cmsText("sites_statistical-result_12")%>
+                      <%=cm.cmsPhrase("Surface(km2):")%>
                     </td>
                     <td width="151">
                       <strong>
@@ -192,7 +192,7 @@
                   </tr>
                   <tr>
                     <td width="221">
-                      <%=cm.cmsText("sites_statistical-result_13")%>
+                      <%=cm.cmsPhrase("ISO Two Letter Code:")%>
                     </td>
                     <td width="158">
                       <strong>
@@ -200,7 +200,7 @@
                       </strong>
                     </td>
                     <td width="202">
-                      <%=cm.cmsText("sites_statistical-result_14")%>
+                      <%=cm.cmsPhrase("Population number:")%>
                     </td>
                     <td width="151">
                       <strong>
@@ -217,17 +217,17 @@
              {
            %>
                 <strong>
-                  <%=cm.cmsText("sites_statistical-result_15")%>
+                  <%=cm.cmsPhrase("Biogeographic regions:")%>
                 </strong>
                 <table summary="<%=cm.cms("biogeographic_regions")%>" class="listing">
                   <thead>
                     <tr>
                       <th title="<%=cm.cms("sort_results_on_this_column")%>">
-                        <%=cm.cmsText("biogeographic_region_name")%>
+                        <%=cm.cmsPhrase("Biogeographic region name")%>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th style="text-align : right;" title="<%=cm.cms("sort_results_on_this_column")%>">
-                        <%=cm.cmsText("sites_statistical-result_17")%>
+                        <%=cm.cmsPhrase("Percentage(%)")%>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                     </tr>
@@ -295,31 +295,31 @@
                   <thead>
                     <tr>
                       <th title="<%=cm.cms("sort_results_on_this_column")%>">
-                        <%=cm.cmsText("source_data_set")%>
+                        <%=cm.cmsPhrase("Source data set")%>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th title="<%=cm.cms("sort_results_on_this_column")%>">
-                        <%=cm.cmsText("sites_statistical-result_19")%>
+                        <%=cm.cmsPhrase("Designation type name")%>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th title="<%=cm.cms("sort_results_on_this_column")%>">
-                        <%=cm.cmsText("sites_statistical-result_20")%>
+                        <%=cm.cmsPhrase("English designation type name")%>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th title="<%=cm.cms("sort_results_on_this_column")%>">
-                        <%=cm.cmsText("sites_statistical-result_21")%>
+                        <%=cm.cmsPhrase("French designation type name")%>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th title="<%=cm.cms("sort_results_on_this_column")%>">
-                        <%=cm.cmsText("category_location")%>
+                        <%=cm.cmsPhrase("category")%>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th title="<%=cm.cms("sort_results_on_this_column")%>">
-                        <%=cm.cmsText("sites_statistical-result_23")%>
+                        <%=cm.cmsPhrase("Total number of sites")%>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th title="<%=cm.cms("sort_results_on_this_column")%>">
-                        <%=cm.cmsText("total_area_ha")%>
+                        <%=cm.cmsPhrase("Total area(ha)")%>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                     </tr>
@@ -414,7 +414,7 @@
           %>
                 <br />
                 <strong>
-                  <%=cm.cmsText("sites_statistical_result_nodesignations")%>.
+                  <%=cm.cmsPhrase("This country has no designation types")%>.
                 </strong>
           <%
               }
@@ -423,11 +423,11 @@
             {
           %>
                 <br />
-                <a title="<%=cm.cms( "sites_statistical-result_32")%>" href="sites-statistical-result.jsp?showDesignations=true&amp;yearMin=<%=formBean.getYearMin()%>&amp;yearMax=<%=formBean.getYearMax()%>&amp;designationCat=<%=formBean.getDesignationCat()%>&amp;designation=<%=formBean.getDesignation()%>&amp;country=<%=countryName%>&amp;DB_NATURA2000=<%=request.getParameter("DB_NATURA2000")%>&amp;DB_CORINE=<%=request.getParameter("DB_CORINE")%>&amp;DB_DIPLOMA=<%=request.getParameter("DB_DIPLOMA")%>&amp;DB_CDDA_NATIONAL=<%=request.getParameter("DB_CDDA_NATIONAL")%>&amp;DB_BIOGENETIC=<%=request.getParameter("DB_BIOGENETIC")%>&amp;DB_EMERALD=<%=request.getParameter("DB_EMERALD")%>&amp;DB_CDDA_INTERNATIONAL=<%=request.getParameter("DB_CDDA_INTERNATIONAL")%>"><%=cm.cmsText( "sites_statistical-result_32")%></a>
+                <a title="<%=cm.cms( "sites_statistical-result_32")%>" href="sites-statistical-result.jsp?showDesignations=true&amp;yearMin=<%=formBean.getYearMin()%>&amp;yearMax=<%=formBean.getYearMax()%>&amp;designationCat=<%=formBean.getDesignationCat()%>&amp;designation=<%=formBean.getDesignation()%>&amp;country=<%=countryName%>&amp;DB_NATURA2000=<%=request.getParameter("DB_NATURA2000")%>&amp;DB_CORINE=<%=request.getParameter("DB_CORINE")%>&amp;DB_DIPLOMA=<%=request.getParameter("DB_DIPLOMA")%>&amp;DB_CDDA_NATIONAL=<%=request.getParameter("DB_CDDA_NATIONAL")%>&amp;DB_BIOGENETIC=<%=request.getParameter("DB_BIOGENETIC")%>&amp;DB_EMERALD=<%=request.getParameter("DB_EMERALD")%>&amp;DB_CDDA_INTERNATIONAL=<%=request.getParameter("DB_CDDA_INTERNATIONAL")%>"><%=cm.cmsPhrase( "Show sites designation types  from this country")%></a>
                 <%=cm.cmsTitle("sites_statistical-result_32")%>
                 <br />
                 <strong>
-                  <%=cm.cmsText( "sites_statistical-result_31")%>
+                  <%=cm.cmsPhrase( "Warning: Expanding data might take a long time.")%>
                 </strong>
           <%
             }
@@ -463,18 +463,18 @@
             {
           %>
              <br />
-             <%=cm.cmsText( "sites_statistical-result_35")%> : <%=noSpecies%>
+             <%=cm.cmsPhrase( "Show species for this country")%> : <%=noSpecies%>
           <%
             }
             else
             {
           %>
                   <br />
-                  <a title="<%=cm.cms("sites_statistical_result_species")%>" href="javascript:openNewPage('species-country-result.jsp?country=<%=country.getIdCountry()%>&amp;countryName=<%=countryName%>&amp;region=any&amp;regionName=any')"><%=cm.cmsText( "sites_statistical-result_35")%>(<%=noSpecies%> species)</a>
+                  <a title="<%=cm.cms("sites_statistical_result_species")%>" href="javascript:openNewPage('species-country-result.jsp?country=<%=country.getIdCountry()%>&amp;countryName=<%=countryName%>&amp;region=any&amp;regionName=any')"><%=cm.cmsPhrase( "Show species for this country")%>(<%=noSpecies%> species)</a>
                   <%=cm.cmsTitle("sites_statistical_result_species")%>
                   <br />
                   <strong>
-                    <%=cm.cmsText( "sites_statistical-result_31")%>
+                    <%=cm.cmsPhrase( "Warning: Expanding data might take a long time.")%>
                   </strong>
           <%
             }
@@ -492,7 +492,7 @@
             {
           %>
                   <br />
-                  <%=cm.cmsText( "sites_statistical-result_36")%>: <%=noHabitats%>
+                  <%=cm.cmsPhrase( "Show habitat types for this country")%>: <%=noHabitats%>
           <%
             }
             else
@@ -500,11 +500,11 @@
           %>
                 <br />
                 <br />
-                <a title="<%=cm.cms("sites_statistical_result_habitats")%>" href="javascript:openNewPage('habitats-country-result.jsp?database=2&amp;showScientificName=true&amp;showVernacularName=true&amp;country=<%=countryName%>&amp;region=')"><%=cm.cmsText( "sites_statistical-result_36")%>(<%=noHabitats%> habitat types)</a>
+                <a title="<%=cm.cms("sites_statistical_result_habitats")%>" href="javascript:openNewPage('habitats-country-result.jsp?database=2&amp;showScientificName=true&amp;showVernacularName=true&amp;country=<%=countryName%>&amp;region=')"><%=cm.cmsPhrase( "Show habitat types for this country")%>(<%=noHabitats%> habitat types)</a>
                 <%=cm.cmsTitle("sites_statistical_result_habitats")%>
                 <br />
                 <strong>
-                  <%=cm.cmsText( "sites_statistical-result_31")%>
+                  <%=cm.cmsPhrase( "Warning: Expanding data might take a long time.")%>
                 </strong>
           <%
             }
@@ -565,7 +565,7 @@
                   <thead>
                   <tr>
                     <th>
-                      <%=cm.cmsText("source_data_set")%>
+                      <%=cm.cmsPhrase("Source data set")%>
                     </th>
           <%
                for(int i=0;i<result.size();i++)

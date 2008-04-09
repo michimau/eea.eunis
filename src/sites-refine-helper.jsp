@@ -46,47 +46,47 @@
   if ( criteria == SitesSearchCriteria.CRITERIA_SOURCE_DB.intValue() )
   {
 %>
-      <%=cm.cmsText("sites_refine-helper_01")%>
+      <%=cm.cmsPhrase("Possible values for source data sets are:")%>
     <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
       <tr>
         <td bgcolor="#EEEEEE">
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('CDDA National')"><%=cm.cmsText("cdda_national")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('CDDA National')"><%=cm.cmsPhrase("CDDA National")%></a>
           <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
       <tr>
         <td>
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('CDDA International')"><%=cm.cmsText("cdda_international")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('CDDA International')"><%=cm.cmsPhrase("CDDA International")%></a>
           <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
       <tr>
         <td bgcolor="#EEEEEE">
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Corine biotopes')"><%=cm.cmsText("corine_biotopes")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Corine biotopes')"><%=cm.cmsPhrase("Corine Biotopes")%></a>
           <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
       <tr>
         <td>
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Biogenetic reserve')"><%=cm.cmsText("biogenetic_reserve")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Biogenetic reserve')"><%=cm.cmsPhrase("Biogenetic Reserve")%></a>
           <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
       <tr>
         <td bgcolor="#EEEEEE">
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('European diploma')"><%=cm.cmsText("european_diploma")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('European diploma')"><%=cm.cmsPhrase("European Diploma")%></a>
           <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
       <tr>
         <td>
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Natura 2000')"><%=cm.cmsText("natura_2000")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Natura 2000')"><%=cm.cmsPhrase("Natura 2000")%></a>
           <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
       <tr>
         <td>
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Emerald')"><%=cm.cmsText("emerald")%></a>
+          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Emerald')"><%=cm.cmsPhrase("Emerald")%></a>
           <%=cm.cmsTitle("click_link_to_select_value")%>
         </td>
       </tr>
@@ -100,7 +100,7 @@
     int i = 0;
     Iterator regionsIt = list.iterator();
 %>
-    <%=cm.cmsText("sites_refine-helper_08")%>
+    <%=cm.cmsPhrase("Possible values for country are:")%>
     <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
     while ( regionsIt.hasNext() )
@@ -127,7 +127,7 @@
     int i = 0;
     Iterator regionsIt = list.iterator();
 %>
-      <%=cm.cmsText("sites_refine-helper_08")%>
+      <%=cm.cmsPhrase("Possible values for country are:")%>
     <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
     while (regionsIt.hasNext())

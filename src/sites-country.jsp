@@ -96,46 +96,46 @@
                   <input type="hidden" name="showName" value="true" />
                   <input type="hidden" name="countryName" />
                   <h1>
-                    <%=cm.cmsText("site_country")%>
+                    <%=cm.cmsPhrase("Site country")%>
                   </h1>
 
-                  <%=cm.cmsText("sites_country_16")%>
+                  <%=cm.cmsPhrase("Search sites by geographical location<br />(ex.: Sites located in <strong>Romania</strong>)")%>
                   <br />
                   <br />
                   <div class="grey_rectangle">
                     <strong>
-                      <%=cm.cmsText("search_will_provide")%>
+                      <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed)")%>
                     </strong>
                     <br />
                     <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("source_data_set_2")%>" />
-                    <label for="showSourceDB"><%=cm.cmsText("source_data_set_2")%></label>
+                    <label for="showSourceDB"><%=cm.cmsPhrase("Source data set&nbsp;")%></label>
                     <%=cm.cmsTitle("source_data_set_2")%>
 
                     <input id="showName" name="showName" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=cm.cms("site_name_1")%>" />
-                    <label for="showName"><%=cm.cmsText("site_name_1")%></label>
+                    <label for="showName"><%=cm.cmsPhrase("Site name &nbsp;")%></label>
                     <%=cm.cmsTitle("site_name_1")%>
 
                     <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("designation_type_1")%>" />
-                    <label for="showDesignationTypes"><%=cm.cmsText("designation_type_1")%></label>
+                    <label for="showDesignationTypes"><%=cm.cmsPhrase("Designation type &nbsp;")%></label>
                     <%=cm.cmsTitle("designation_type_1")%>
 
                     <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("coordinates_1")%>" />
-                    <label for="showCoordinates"><%=cm.cmsText("coordinates_1")%></label>
+                    <label for="showCoordinates"><%=cm.cmsPhrase("Coordinates &nbsp;")%></label>
                     <%=cm.cmsTitle("coordinates_1")%>
 
                     <input id="showSize" name="showSize" type="checkbox" value="true" checked="checked" title="<%=cm.cms("size_1")%>" />
-                    <label for="showSize"><%=cm.cmsText("size_1")%></label>
+                    <label for="showSize"><%=cm.cmsPhrase("Size &nbsp;")%></label>
                     <%=cm.cmsTitle("size_1")%>
 
                     <input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("designation_year")%>" />
-                    <label for="showDesignationYear"><%=cm.cmsText("designation_year")%></label>
+                    <label for="showDesignationYear"><%=cm.cmsPhrase("Designation year")%></label>
                     <%=cm.cmsTitle("designation_year")%>
                   </div>
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_mandatory")%>
                   &nbsp;
                   <label for="country">
-                      <%=cm.cmsText("country_is")%>
+                      <%=cm.cmsPhrase("Country is")%>
                     &nbsp;
                   </label>
                   <input id="country" name="country" type="text" size="30" title="<%=cm.cms("country_is")%>" />
@@ -176,7 +176,7 @@
               String expandSearchCriteria = (request.getParameter("expandSearchCriteria")==null?"no":request.getParameter("expandSearchCriteria"));
           %>
                 <br />
-              <%=cm.cmsText("save_your_criteria_1")%>
+              <%=cm.cmsPhrase("Save your criteria:")%>
               <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-country.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
               <%=cm.cmsTitle("save")%>
               <%=cm.cmsAlt("save")%>

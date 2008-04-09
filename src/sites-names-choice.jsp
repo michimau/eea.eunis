@@ -69,10 +69,10 @@
   {
 %>
     <h2>
-      <%=cm.cmsText("list_of_values_for")%>:
+      <%=cm.cmsPhrase("List of values for:")%>:
     </h2>
     <u>
-      <%=cm.cmsText("site_name")%>
+      <%=cm.cmsPhrase("Site name")%>
     </u>
     <em>
       <%=Utilities.ReturnStringRelatioOp(operand)%>
@@ -108,7 +108,7 @@
   {
 %>
       <strong>
-        <%=cm.cmsText("no_results_found_1")%></strong>
+        <%=cm.cmsPhrase("No results were found.")%></strong>
       <br />
       <br />
 <%

@@ -134,34 +134,34 @@
                 <form name="eunis" method="get" onsubmit="return(validateForm());" action="sites-species-result.jsp">
                   <input type="hidden" name="source" value="sitename" />
                   <h1>
-                    <%=cm.cmsText("pick_species_show_sites")%>
+                    <%=cm.cmsPhrase("Pick species, show sites")%>
                   </h1>
-                  <%=cm.cmsText("sites_species_22")%>
+                  <%=cm.cmsPhrase("Search sites with species <br />(ex.: sites which are related to <strong>Acrocephalus paludicola</strong>)")%>
                   <br />
                   <br />
                   <div class="grey_rectangle">
                     <strong>
-                      <%=cm.cmsText("search_will_provide")%>
+                      <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed)")%>
                     </strong>
                     <br />
                     <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("source_data_set")%>" />
-                    <label for="showSourceDB"><%=cm.cmsText("source_data_set")%></label>
+                    <label for="showSourceDB"><%=cm.cmsPhrase("Source data set")%></label>
                     <%=cm.cmsTitle("source_data_set")%>
 
                     <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("designation_type")%>" />
-                    <label for="showDesignationTypes"><%=cm.cmsText("designation_type")%></label>
+                    <label for="showDesignationTypes"><%=cm.cmsPhrase("Designation type")%></label>
                     <%=cm.cmsTitle("designation_type")%>
 
                     <input id="showName" name="showName" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=cm.cms("site_name")%>" />
-                    <label for="showName"><%=cm.cmsText("site_name")%></label>
+                    <label for="showName"><%=cm.cmsPhrase("Site name")%></label>
                     <%=cm.cmsTitle("site_name")%>
 
                     <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" title="<%=cm.cms("coordinates")%>" />
-                    <label for="showCoordinates"><%=cm.cmsText("coordinates")%></label>
+                    <label for="showCoordinates"><%=cm.cmsPhrase("Coordinates")%></label>
                     <%=cm.cmsTitle("coordinates")%>
 
                     <input id="showSpecies" name="showSpecies" type="checkbox" disabled="disabled" value="true" checked="checked" title="<%=cm.cms("species_scientific_name")%>" />
-                    <label for="showSpecies"><%=cm.cmsText("species_scientific_name")%></label>
+                    <label for="showSpecies"><%=cm.cmsPhrase("Species scientific name")%></label>
                     <%=cm.cmsTitle("species_scientific_name")%>
                   </div>
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
@@ -234,7 +234,7 @@
             {
           %>
                 <br />
-                <%=cm.cmsText("save_your_criteria_1")%>
+                <%=cm.cmsPhrase("Save your criteria:")%>
                 <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-species.jsp','2','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                 <%=cm.cmsTitle("save")%>
                 <%=cm.cmsAlt("save")%>

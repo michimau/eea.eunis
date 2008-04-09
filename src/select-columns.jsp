@@ -196,7 +196,7 @@
                       <tr>
                         <td width="40%">
                           <label for="list1">
-                            <%=cm.cmsText("select_columns_available_label")%>:
+                            <%=cm.cmsPhrase("Available columns which can be displayed")%>:
                           </label>
                           <br />
                           <select id="list1" size="10" name="list1" style="width : 300px;">
@@ -308,7 +308,7 @@
                           <%=cm.cmsInput("select_all_columns_remove_value")%>
                         </td>
                         <td width="40%">
-                          <label for="displayedColumns"><%=cm.cmsText("select_columns_selected_label")%>:</label>
+                          <label for="displayedColumns"><%=cm.cmsPhrase("Columns to be displayed in results page")%>:</label>
                           <br />
                           <select style="width : 300px" id="displayedColumns" size="10" name="displayedColumns"></select>
                         </td>

@@ -57,7 +57,7 @@
     SpeciesSearchCriteria speciesSearch = new SpeciesSearchCriteria(searchAttribute,formBean.getSearchString(),relationOp);
 %>
     <h2>
-      <%=cm.cmsText("list_of_values_for")%>:
+      <%=cm.cmsPhrase("List of values for:")%>:
     </h2>
     <u>
       <%=speciesSearch.getHumanMappings().get(searchAttribute)%>
@@ -108,7 +108,7 @@
   {
 %>
     <strong>
-      <%=cm.cmsText("no_results_found_1")%>
+      <%=cm.cmsPhrase("No results were found.")%>
     </strong>
     <br />
 <%

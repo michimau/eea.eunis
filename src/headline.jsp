@@ -116,7 +116,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cmsText("headline_title")%>
+      <%=cm.cmsPhrase("Edit Headlines")%>
     </title>
   </head>
   <body>
@@ -157,9 +157,9 @@
           %>
                 <br />
                 <strong>
-                  <%=cm.cmsText("not_authenticated_no_rights")%>
+                  <%=cm.cmsPhrase("You can't do this because you are not authentificated or you don't haven enough rights!")%>
                 </strong>
-                <a href="login.jsp" title="Login"><%=cm.cmsText("login")%></a>
+                <a href="login.jsp" title="Login"><%=cm.cmsPhrase("EUNIS Login")%></a>
                 <br />
           <%
             }
@@ -167,7 +167,7 @@
             {
           %>
                 <h1>
-                  <%=cm.cmsText("headline_title")%>
+                  <%=cm.cmsPhrase("Edit Headlines")%>
                 </h1>
                 <br />
                 <form method="post" name="webcontent" action="headline.jsp">

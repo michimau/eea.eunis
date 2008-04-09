@@ -92,19 +92,19 @@
             if( SessionManager.isAuthenticated() && SessionManager.isContent_management_RIGHT() )
             {
           %>    <h1>
-                  <%=cm.cmsText("web_content_editor")%>
+                  <%=cm.cmsPhrase("Web content editor")%>
                 </h1>
                 <br />
-                <%=cm.cmsText("web_content_keys_03")%>
+                <%=cm.cmsPhrase("Use this page to add new content to the database.")%>
                 <br />
                 <br />
                 <form name="contentManage" action="web-content-keys.jsp" method="POST" onsubmit="javascript: return validateForm();">
                   <input type="hidden" name="operation" value="add">
-                  <label for="idpage"><%=cm.cmsText("web_content_keys_04")%>:</label>
+                  <label for="idpage"><%=cm.cmsPhrase("Id page")%>:</label>
                   <br />
                   <input title="<%=cm.cms("web_content_keys_04")%>" type="text" size="50" name="idpage" id="idpage" style="font-family:monospace,serif;" />
                   <br />
-                  <label for="contentData"><%=cm.cmsText("content")%>:</label>
+                  <label for="contentData"><%=cm.cmsPhrase("Content")%>:</label>
                   <br />
                   <textarea title="<%=cm.cms("content")%>" rows="5" cols="50" name="contentData" id="contentData" style="font-family:monospace,serif;"></textarea>
                   <br />
@@ -131,7 +131,7 @@
           %>
                   <br />
                   <br />
-                  <%=cm.cmsText("web_content_keys_10")%>
+                  <%=cm.cmsPhrase("You do not have the proper privileges to access the functionality of this page.")%>
                   <br />
                   <br />
           <%

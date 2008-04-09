@@ -26,19 +26,19 @@
         <thead>
           <tr>
             <th>
-              <%=cm.cmsText( "title" )%>
+              <%=cm.cmsPhrase( "Title" )%>
             </th>
             <th>
-              <%=cm.cmsText( "author" )%>
+              <%=cm.cmsPhrase( "Author" )%>
             </th>
             <th>
-              <%=cm.cmsText( "editor" )%>
+              <%=cm.cmsPhrase( "Editor" )%>
             </th>
             <th>
-              <%=cm.cmsText( "publisher" )%>
+              <%=cm.cmsPhrase( "Publisher" )%>
             </th>
             <th>
-              <%=cm.cmsText( "published" )%>
+              <%=cm.cmsPhrase( "Published" )%>
             </th>
           </tr>
         </thead>
@@ -97,7 +97,7 @@
       {
 %>
       <br />
-        <%=cm.cmsText( "generic_glossary-references_07" )%>
+        <%=cm.cmsPhrase( "No other information available." )%>
       <br />
 <%
       }

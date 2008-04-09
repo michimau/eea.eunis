@@ -779,10 +779,10 @@
         out.println("<br />");
       } else {
         %>
-        <h2><%=cm.cmsText("list_of_values")%>:</h2>
+        <h2><%=cm.cmsPhrase("List of values")%>:</h2>
         <br />
         <strong>
-        <%=cm.cmsText("warning_first_100_values")%>
+        <%=cm.cmsPhrase("(Warning: Only the first 100 values are retrieved from the database)")%>
         </strong>
         <br />
         <br />

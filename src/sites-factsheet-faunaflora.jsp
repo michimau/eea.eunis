@@ -51,7 +51,7 @@
   {
 %>
     <h2>
-      <%=cm.cmsText("site_contact_authorities")%>
+      <%=cm.cmsPhrase("Site contact authorities")%>
     </h2>
     <%-- Site contact authorities --%>
     <table summary="<%=cm.cms("site_contact_authorities")%>" width="90%" class="datatable">
@@ -64,7 +64,7 @@
 %>
       <tr class="zebraeven">
         <td width="40%">
-          <%=cm.cmsText("respondent")%>
+          <%=cm.cmsPhrase("Respondent")%>
         </td>
         <td width="60%">
           <%=respondent%>
@@ -77,7 +77,7 @@
 %>
       <tr>
         <td>
-          <%=cm.cmsText("author")%>
+          <%=cm.cmsPhrase("Author")%>
         </td>
         <td>
           <%=author%>
@@ -93,7 +93,7 @@
 %>
       <tr class="zebraeven">
         <td>
-          <%=cm.cmsText("manager")%>
+          <%=cm.cmsPhrase("Manager")%>
         </td>
         <td>
           <%=manager%>
@@ -106,7 +106,7 @@
 %>
       <tr class="zebraeven">
         <td>
-          <%=cm.cmsText("information")%>
+          <%=cm.cmsPhrase("Information")%>
         </td>
         <td>
           <%=information%>
@@ -114,7 +114,7 @@
       </tr>
       <tr>
         <td>
-          <%=cm.cmsText("official_contact_international")%>
+          <%=cm.cmsPhrase("Official contact international")%>
         </td>
         <td>
           <%=officialContactInternational%>&nbsp;
@@ -122,7 +122,7 @@
       </tr>
       <tr class="zebraeven">
         <td>
-          <%=cm.cmsText("official_contact_national")%>
+          <%=cm.cmsPhrase("Official contact national")%>
         </td>
         <td>
           <%=officialContactNational%>&nbsp;
@@ -130,7 +130,7 @@
       </tr>
       <tr>
         <td>
-          <%=cm.cmsText("official_contact_regional")%>
+          <%=cm.cmsPhrase("Official contact regional")%>
         </td>
         <td>
           <%=officialContactRegional%>&nbsp;
@@ -138,7 +138,7 @@
       </tr>
       <tr class="zebraeven">
         <td>
-          <%=cm.cmsText("official_contact_local")%>
+          <%=cm.cmsPhrase("Official contact local")%>
         </td>
         <td>
           <%=officialContactLocal%>&nbsp;
@@ -193,7 +193,7 @@
 %>
     <%-- Description --%>
     <h2>
-      <%=cm.cmsText("description")%>
+      <%=cm.cmsPhrase("Description")%>
     </h2>
     <table width="90%" class="datatable">
 <%
@@ -205,7 +205,7 @@
 %>
       <tr class="zebraeven">
         <td width="30%">
-          <%=cm.cmsText("general_character_of_site")%>
+          <%=cm.cmsPhrase("General character of the site")%>
         </td>
         <td width="70%">
           <%=character%>&nbsp;
@@ -218,7 +218,7 @@
 %>
       <tr>
         <td>
-          <%=cm.cmsText("quality")%>
+          <%=cm.cmsPhrase("Quality")%>
         </td>
         <td>
           <%=quality%>&nbsp;
@@ -226,7 +226,7 @@
       </tr>
       <tr class="zebraeven">
         <td>
-          <%=cm.cmsText("vulnerability")%>
+          <%=cm.cmsPhrase("Vulnerability")%>
         </td>
         <td>
           <%=vulnerability%>&nbsp;
@@ -234,7 +234,7 @@
       </tr>
       <tr>
         <td>
-          <%=cm.cmsText("designation")%>
+          <%=cm.cmsPhrase("Designation")%>
         </td>
         <td>
           <%=designation%>&nbsp;
@@ -242,7 +242,7 @@
       </tr>
       <tr class="zebraeven">
         <td>
-          <%=cm.cmsText("owner")%>
+          <%=cm.cmsPhrase("Owner")%>
         </td>
         <td>
           <%=ownership%>&nbsp;
@@ -250,7 +250,7 @@
       </tr>
       <tr>
         <td>
-          <%=cm.cmsText("documentation")%>
+          <%=cm.cmsPhrase("documentation")%>
         </td>
         <td>
           <%=documentation%>&nbsp;
@@ -263,7 +263,7 @@
 %>
       <tr class="zebraeven">
         <td>
-          <%=cm.cmsText("habitat_types")%>
+          <%=cm.cmsPhrase("Habitat types")%>
         </td>
         <td>
           <%=characterization%>&nbsp;
@@ -271,7 +271,7 @@
       </tr>
       <tr>
         <td>
-          <%=cm.cmsText("flora")%>
+          <%=cm.cmsPhrase("Flora")%>
         </td>
         <td>
           <%=floraCharacterization%>&nbsp;
@@ -279,7 +279,7 @@
       </tr>
       <tr class="zebraeven">
         <td>
-          <%=cm.cmsText("fauna")%>
+          <%=cm.cmsPhrase("Fauna")%>
         </td>
         <td>
           <%=faunaCharacterization%>&nbsp;
@@ -287,7 +287,7 @@
       </tr>
       <tr>
         <td>
-          <%=cm.cmsText("potential_vegetation")%>
+          <%=cm.cmsPhrase("Potential vegetation")%>
         </td>
         <td>
           <%=potentialVegetation%>&nbsp;
@@ -300,7 +300,7 @@
 %>
       <tr class="zebraeven">
         <td>
-          <%=cm.cmsText("geomorphology")%>
+          <%=cm.cmsPhrase("Geomorphology")%>
         </td>
         <td>
           <%=geomorphology%>&nbsp;
@@ -308,14 +308,14 @@
       </tr>
       <tr>
         <td>
-          <%=cm.cmsText("educational_interest")%>
+          <%=cm.cmsPhrase("Educational interest")%>
         </td>
         <td>
           <%=educationalInterest%>&nbsp;
         </td>
       </tr>
       <tr class="zebraeven">
-        <td><%=cm.cmsText("cultural_heritage")%></td>
+        <td><%=cm.cmsPhrase("Cultural heritage")%></td>
         <td><%=culturalHeritage%>&nbsp;</td>
       </tr>
 <%
@@ -324,7 +324,7 @@
   {
 %>
       <tr>
-        <td><%=cm.cmsText("justification")%></td>
+        <td><%=cm.cmsPhrase("Justification")%></td>
         <td><%=justification%>&nbsp;</td>
       </tr>
 <%
@@ -333,11 +333,11 @@
   {
 %>
       <tr class="zebraeven">
-        <td><%=cm.cmsText("methodology")%></td>
+        <td><%=cm.cmsPhrase("Methodology")%></td>
         <td><%=methodology%>&nbsp;</td>
       </tr>
       <tr>
-        <td><%=cm.cmsText("budget")%></td>
+        <td><%=cm.cmsPhrase("Budget")%></td>
         <td><%=budget%>&nbsp;</td>
       </tr>
 <%
@@ -349,7 +349,7 @@
   {
 %>
       <tr class="zebraeven">
-        <td><%=cm.cmsText("management_plan")%></td>
+        <td><%=cm.cmsPhrase("Management plan")%></td>
         <td><%=managementPlan%>&nbsp;</td>
       </tr>
 <%
@@ -358,11 +358,11 @@
   {
 %>
       <tr>
-        <td><%=cm.cmsText("url_official")%></td>
+        <td><%=cm.cmsPhrase("URL official")%></td>
         <td><a title="Official URL" href="<%=urlOfficial%>"><%=urlOfficial%></a>&nbsp;</td>
       </tr>
       <tr class="zebraeven">
-        <td><%=cm.cmsText("url_interesting")%></td>
+        <td><%=cm.cmsPhrase("URL interesting")%></td>
         <td><a title="URL interesting" href="<%=urlInteresting%>"><%=urlInteresting%></a>&nbsp;</td>
       </tr>
 <%
@@ -393,61 +393,61 @@
 %>
 
   <h2>
-    <%=cm.cmsText("ecological_information_fauna_flora")%>
+    <%=cm.cmsPhrase("Ecological information: Fauna and Flora")%>
   </h2>
   <table summary="<%=cm.cms("ecological_information_fauna_flora")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("species_scientific_name")%>
+          <%=cm.cmsPhrase("Species scientific name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("species_group")%>
+          <%=cm.cmsPhrase("Species group")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("resident")%>
+          <%=cm.cmsPhrase("Resident")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("breeding")%>
+          <%=cm.cmsPhrase("Breeding")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("sites_factsheet_94")%>
+          <%=cm.cmsPhrase("Winter.")%>
           <%=cm.cmsTitle("sites_factsheet_faunaflora_wintering")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("staging")%>
+          <%=cm.cmsPhrase("Staging")%>
           <%=cm.cmsTitle("sites_factsheet_faunaflora_annexesofdirectives")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("sites_factsheet_96")%>
+          <%=cm.cmsPhrase("Popul.")%>
           <%=cm.cmsTitle("sites_factsheet_faunaflora_populationstatus")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("species")%>
+          <%=cm.cmsPhrase("Species")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("sites_factsheet_98")%>
+          <%=cm.cmsPhrase("Nesting")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("sites_factsheet_99")%>
+          <%=cm.cmsPhrase("Conserv.")%>
           <%=cm.cmsTitle("sites_factsheet_faunaflora_conservationstatus")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("isolation")%>
+          <%=cm.cmsPhrase("Isolation")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("sites_factsheet_101")%>
+          <%=cm.cmsPhrase("Global status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("species_status")%>
+          <%=cm.cmsPhrase("Species status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
@@ -561,13 +561,13 @@
     {
 %>
   <h2>
-    <%=cm.cmsText("other_species_mentioned_in_site")%>
+    <%=cm.cmsPhrase("Other species mentioned in site")%>
   </h2>
   <table summary="<%=cm.cms("other_species_mentioned_in_site")%>" width="90%" class="listing">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("species_scientific_name")%>
+          <%=cm.cmsPhrase("Species scientific name")%>
         </th>
       </tr>
     </thead>
@@ -609,7 +609,7 @@
         Chm62edtReportAttributesPersist attribute;
 %>
   <h2>
-    <%=cm.cmsText("ecological_information_fauna_flora_mentioned_in_site")%>
+    <%=cm.cmsPhrase("Ecological information: Fauna and Flora mentioned in site")%>
   </h2>
   <%-- species mentioned in annexes and directives --%>
 <%
@@ -617,49 +617,49 @@
         {
 %>
   <h3>
-    <%=cm.cmsText("species")%>
+    <%=cm.cmsPhrase("Species")%>
   </h3>
   <table summary="<%=cm.cms("species")%>" width="90%" class="listing">
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("species_scientific_name")%>
+          <%=cm.cmsPhrase("Species scientific name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("species_group")%>
+          <%=cm.cmsPhrase("Species group")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("resident")%>
+          <%=cm.cmsPhrase("Resident")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("breeding")%>
+          <%=cm.cmsPhrase("Breeding")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("sites_factsheet_94")%>
+          <%=cm.cmsPhrase("Winter.")%>
           <%=cm.cmsTitle("sites_factsheet_faunaflora_wintering")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("staging")%>
+          <%=cm.cmsPhrase("Staging")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("sites_factsheet_99")%>
+          <%=cm.cmsPhrase("Conserv.")%>
           <%=cm.cmsTitle("sites_factsheet_faunaflora_conservationstatus")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("sites_factsheet_96")%>
+          <%=cm.cmsPhrase("Popul.")%>
           <%=cm.cmsTitle("sites_factsheet_faunaflora_populationstatus")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("isolation")%>
+          <%=cm.cmsPhrase("Isolation")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-transform: capitalize;">
-          <%=cm.cmsText("sites_factsheet_101")%>
+          <%=cm.cmsPhrase("Global status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
@@ -824,25 +824,25 @@
     {
 %>
   <h3>
-    <%=cm.cmsText("other_species_mentioned_in_site")%>
+    <%=cm.cmsPhrase("Other species mentioned in site")%>
   </h3>
   <table summary="<%=cm.cms("other_species_mentioned_in_site")%>" width="0%" class="listing">
     <thead>
       <tr>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("species_group")%>
+          <%=cm.cmsPhrase("Species group")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("species_name")%>
+          <%=cm.cmsPhrase("Species name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize;">
-          <%=cm.cmsText("population_size_estimations")%>
+          <%=cm.cmsPhrase("Population size estimations")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize;">
-          <%=cm.cmsText("motivation_for_species_mention")%>
+          <%=cm.cmsPhrase("Motivation for species mention")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>

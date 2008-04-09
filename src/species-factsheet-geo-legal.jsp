@@ -62,7 +62,7 @@
   </head>
   <body>
     <strong>
-      <%=cm.cmsText("geographical_legal_information")%>
+      <%=cm.cmsPhrase("Geographical legal information for")%>
       <%=Utilities.treatURLSpecialCharacters(factsheet.getSpeciesObject().getScientificName())%>
     </strong>
     <br />
@@ -89,7 +89,7 @@
       <tr>
         <td>
           <strong>
-            <%=cm.cmsText("title")%>:
+            <%=cm.cmsPhrase("Title")%>:
           </strong>
           &nbsp;
           <%=Utilities.treatURLSpecialCharacters(title)%>
@@ -98,7 +98,7 @@
       <tr>
         <td>
           <strong>
-            <%=cm.cmsText("url")%>:
+            <%=cm.cmsPhrase("Url")%>:
           </strong>
           &nbsp;
           <a title="<%=cm.cms("url")%>" href="<%=Utilities.treatURLSpecialCharacters(URL)%>"><%=Utilities.treatURLSpecialCharacters(URL)%></a>
@@ -111,7 +111,7 @@
           <img alt="<%=cm.cms("map_image_eea")%>" src="<%=filename%>" title="<%=cm.cms("map_image_eea")%>" border="0" />
           <%=cm.cmsTitle("map_image_eea")%>
           <p>
-            <em>&quot;<%=cm.cmsText("species_factsheet-geo-legal_04")%>.&quot;</em>
+            <em>&quot;<%=cm.cmsPhrase("EUNIS provides only European geographical implementation of International Legal texts. Countries which are signatory but outside Pan-Europe are not shown or mentioned")%>.&quot;</em>
           </p>
         </td>
       </tr>
@@ -123,15 +123,15 @@
     <table summary="<%=cm.cms("species_factsheet-geo-legal_11_Sum")%>" width="640" border="0" cellspacing="0" cellpadding="0" id="legalevent" class="sortable">
       <tr>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; font-weight: bold; text-align: left;">
-          <%=cm.cmsText("country")%>
+          <%=cm.cmsPhrase("Country")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; font-weight: bold; text-align: left;">
-          <%=cm.cmsText("species_factsheet-geo-legal_06")%>
+          <%=cm.cmsPhrase("Date of event (yyyy-MM-dd)")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; font-weight: bold; text-align: left;">
-          <%=cm.cmsText("species_factsheet-geo-legal_07")%>
+          <%=cm.cmsPhrase("Event")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>

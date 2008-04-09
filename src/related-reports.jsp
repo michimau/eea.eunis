@@ -138,17 +138,17 @@
                 </div>
 <!-- MAIN CONTENT -->
               <h1>
-                <%=cm.cmsText("related_reports")%>
+                <%=cm.cmsPhrase("Related reports")%>
               </h1>
               <br />
-              <%=cm.cmsText("related_reports_description")%>.
+              <%=cm.cmsPhrase("From this page you can download additional reports related to biodiversity")%>.
           <%
             // If there are documents pending, display this to the user who has such right, to know this.
             if(RelatedReportsUtil.listPendingReports().size() > 0 && SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
             {
           %>
               <br />
-              <%=cm.cmsText("related_reports_pendingnotice")%> <a title="<%=cm.cms("related_reports_pendinglink_title")%>" href="related-reports-approval.jsp"><%=cm.cmsText("related_reports_pendinglink")%></a>.
+              <%=cm.cmsPhrase("Please note that some documents are uploaded and pending to be")%> <a title="<%=cm.cms("related_reports_pendinglink_title")%>" href="related-reports-approval.jsp"><%=cm.cmsPhrase("approved")%></a>.
               <%=cm.cmsTitle("related_reports_pendinglink_title")%>
               <br />
           <%
@@ -158,7 +158,7 @@
           %>
               <br />
 
-              <a title="<%=cm.cms("related_reports_uploadlink_title")%>" href="javascript:openUpload();"><%=cm.cmsText("related_reports_uploadlink")%></a>
+              <a title="<%=cm.cms("related_reports_uploadlink_title")%>" href="javascript:openUpload();"><%=cm.cmsPhrase("Upload new document")%></a>
               <%=cm.cmsTitle("related_reports_uploadlink_title")%>
               <br />
           <%
@@ -170,7 +170,7 @@
           %>
               <br />
               <strong>
-                <%=cm.cmsText("related_reports_nodocs")%>.
+                <%=cm.cmsPhrase("No documents available for download at this time")%>.
               </strong>
               <br />
           <%
@@ -215,22 +215,22 @@
               }
             %>
                     <th>
-                      <%=cm.cmsText("valid")%>
+                      <%=cm.cmsPhrase("Valid")%>
                     </th>
                     <th>
-                      <%=cm.cmsText("description")%>
+                      <%=cm.cmsPhrase("Description")%>
                     </th>
                     <th>
-                      <%=cm.cmsText("file_name")%>
+                      <%=cm.cmsPhrase("File name")%>
                     </th>
                     <th>
-                      <%=cm.cmsText("size")%>(kB)
+                      <%=cm.cmsPhrase("Size")%>(kB)
                     </th>
                     <th style="white-space:nowrap">
-                      <%=cm.cmsText("related_reports_author")%>
+                      <%=cm.cmsPhrase("Uploaded by")%>
                     </th>
                     <th>
-                      <%=cm.cmsText("date")%>
+                      <%=cm.cmsPhrase("Date")%>
                     </th>
                   </tr>
           <%
@@ -340,22 +340,22 @@
             }
           %>
                     <th>
-                      <%=cm.cmsText("valid")%>
+                      <%=cm.cmsPhrase("valid")%>
                     </th>
                     <th>
-                      <%=cm.cmsText("description")%>
+                      <%=cm.cmsPhrase("description")%>
                     </th>
                     <th>
-                      <%=cm.cmsText("file_name")%>
+                      <%=cm.cmsPhrase("file_name")%>
                     </th>
                     <th>
-                      <%=cm.cmsText("size")%>(kB)
+                      <%=cm.cmsPhrase("size")%>(kB)
                     </th>
                     <th style="white-space:nowrap">
-                      <%=cm.cmsText("related_reports_author")%>
+                      <%=cm.cmsPhrase("related_reports_author")%>
                     </th>
                     <th>
-                      <%=cm.cmsText("date")%>
+                      <%=cm.cmsPhrase("date")%>
                     </th>
                   </tr>
                 </table>

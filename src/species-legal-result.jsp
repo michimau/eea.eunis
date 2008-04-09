@@ -192,7 +192,7 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("legal_instruments")%>
+                  <%=cm.cmsPhrase("Legal Instruments")%>
                 </h1>
                 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
@@ -205,11 +205,11 @@
                       %>
                         <tr>
                           <td>
-                            <%=cm.cmsText("species_legal-result_02")%>
+                            <%=cm.cmsPhrase("You searched legal instruments for")%>
                             <strong>
                                 <%=Utilities.treatURLAmp(groupCommonName)%>
                             </strong>
-                            <%=cm.cmsText("species_legal-result_03")%>:
+                            <%=cm.cmsPhrase("group and <strong>scientific name</strong> contains")%>:
                             <strong>
                                 <%=Utilities.treatURLAmp(formBean.getScientificName())%>
                             </strong>
@@ -223,29 +223,29 @@
                       %>
                         <tr>
                           <td>
-                            <%=cm.cmsText("species_legal-result_04")%>
+                            <%=cm.cmsPhrase("You searched species from")%>
                             <strong>
                                 <%=Utilities.treatURLAmp(groupCommonName)%>
                             </strong>
-                            <%=cm.cmsText("species_legal-result_05")%>:
+                            <%=cm.cmsPhrase("group, referenced by")%>:
                             <%
                                 if("any".equalsIgnoreCase(formBean.getAnnex()) && "any".equalsIgnoreCase(formBean.getLegalText()))
                                 {
                             %>
                                   <strong>
-                                    <%=cm.cmsText("any")%>
+                                    <%=cm.cmsPhrase("Any")%>
                                   </strong>
                             <%
                                 }else {
                             %>
                             <strong>
-                                <%=cm.cmsText("species_legal-result_06")%>
+                                <%=cm.cmsPhrase("Annex/Appendix")%>
                                 <%=Utilities.treatURLAmp(formBean.getAnnex())%> - <%=Utilities.treatURLAmp(formBean.getLegalText())%>
                             </strong>
                             <%
                                 }
                             %>
-                            <%=cm.cmsText("legal_text")%>
+                            <%=cm.cmsPhrase("legal text")%>
                           </td>
                         </tr>
                       <%
@@ -253,7 +253,7 @@
                       %>
                       </table>
                    <br />
-                  <%=cm.cmsText("results_found_1")%>:
+                  <%=cm.cmsPhrase("Results found")%>:
                   <strong>
                       <%=resultsCount%>
                   </strong>
@@ -285,7 +285,7 @@
                     <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#EEEEEE">
                       <tr>
                         <td>
-                          <%=cm.cmsText("refine_your_search")%>
+                          <%=cm.cmsPhrase("Refine your search")%>
                         </td>
                       </tr>
                       <tr>
@@ -358,7 +358,7 @@
                         %>
                         <tr>
                           <td>
-                            <%=cm.cmsText("applied_filters_to_the_results")%>:
+                            <%=cm.cmsPhrase("Applied filters to the results")%>:
                           </td>
                         </tr>
                         <%
@@ -422,7 +422,7 @@
               {
             %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("scientific_name")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsPhrase("Scientific name")%></a>
                           <%=cm.cmsTitle("sort_results_on_this_column")%>
                         </th>
             <%
@@ -431,7 +431,7 @@
               {
             %>
                         <th scope="col">
-                          <%=cm.cmsText("group")%>
+                          <%=cm.cmsPhrase("Group")%>
                         </th>
             <%
               }
@@ -439,7 +439,7 @@
               {
             %>
                         <th scope="col">
-                          <%=cm.cmsText("legal_text")%>
+                          <%=cm.cmsPhrase("legal text")%>
                         </th>
             <%
               }
@@ -447,7 +447,7 @@
               {
             %>
                         <th scope="col">
-                          <%=cm.cmsText("abbreviation")%>
+                          <%=cm.cmsPhrase("Abbreviation")%>
                         </th>
             <%
               }
@@ -455,7 +455,7 @@
               {
             %>
                         <th scope="col">
-                          <%=cm.cmsText("comment")%>
+                          <%=cm.cmsPhrase("Comment")%>
                         </th>
             <%
               }
@@ -463,7 +463,7 @@
               {
             %>
                         <th scope="col">
-                          <%=cm.cmsText("url")%>
+                          <%=cm.cmsPhrase("Url")%>
                         </th>
             <%
               }
@@ -652,7 +652,7 @@
               {
             %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("scientific_name")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsPhrase("Scientific name")%></a>
                           <%=cm.cmsTitle("sort_results_on_this_column")%>
                         </th>
             <%
@@ -661,7 +661,7 @@
               {
             %>
                         <th scope="col">
-                          <%=cm.cmsText("group")%>
+                          <%=cm.cmsPhrase("Group")%>
                         </th>
             <%
               }
@@ -669,7 +669,7 @@
               {
             %>
                         <th scope="col">
-                          <%=cm.cmsText("legal_text")%>
+                          <%=cm.cmsPhrase("legal text")%>
                         </th>
             <%
               }
@@ -677,7 +677,7 @@
               {
             %>
                         <th scope="col">
-                          <%=cm.cmsText("abbreviation")%>
+                          <%=cm.cmsPhrase("Abbreviation")%>
                         </th>
             <%
               }
@@ -685,7 +685,7 @@
               {
             %>
                         <th scope="col">
-                          <%=cm.cmsText("comment")%>
+                          <%=cm.cmsPhrase("Comment")%>
                         </th>
             <%
               }
@@ -693,7 +693,7 @@
               {
             %>
                         <th scope="col">
-                          <%=cm.cmsText("url")%>
+                          <%=cm.cmsPhrase("Url")%>
                         </th>
             <%
               }

@@ -97,10 +97,10 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("habitats_taxonomic-browser_01")%>
+                  <%=cm.cmsPhrase("Species taxonomic classification")%>
                 </h1>
                 <br />
-                <%=cm.cmsText("habitats_taxonomic-browser_02")%>
+                <%=cm.cmsPhrase("Taxonomic tree view of species<br /><br /><strong>Warning: Expanding a branch with many species (Animalia) will take a longer time</strong>")%>
                 <ul>
           <%
                   if( !idTaxonomy.equalsIgnoreCase( "" ) )

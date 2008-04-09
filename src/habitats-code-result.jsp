@@ -141,25 +141,25 @@
                 <tr>
                 <td>
                 <h1>
-                  <%=cm.cmsText("code_classifications")%>
+                  <%=cm.cmsPhrase("Code/Classifications")%>
                 </h1>
                 <%-- Here are the main search criterias displayed to the user --%>
                 <%AbstractSearchCriteria mainCriteria = formBean.getMainSearchCriteria();%>
                 <table width="100%" summary="layout" border="0" cellspacing="0" cellpadding="0">
                   <tr>
                     <td>
-                      <%=cm.cmsText("you_searched_for")%>
+                      <%=cm.cmsPhrase("You searched for")%>
                       <strong>
                         <%=Utilities.getSourceHabitat(database, CodeDomain.SEARCH_ANNEX.intValue(), CodeDomain.SEARCH_BOTH.intValue())%>
                       </strong>
-                      <%=cm.cmsText("habitats_code-result_03")%>
+                      <%=cm.cmsPhrase("habitat types related to habitat types having")%>
                       <strong>
-                        <%=mainCriteria.toHumanString()%> <strong><%=cm.cmsText("in_the_classification")%> <%=HabitatsSearchUtility.getClassificationName(formBean.getClassificationCode())%></strong>
+                        <%=mainCriteria.toHumanString()%> <strong><%=cm.cmsPhrase("in the classification:")%> <%=HabitatsSearchUtility.getClassificationName(formBean.getClassificationCode())%></strong>
                       </strong>
                     </td>
                   </tr>
                 </table>
-                <%=cm.cmsText("results_found_1")%>: <strong><%=resultsCount%></strong>
+                <%=cm.cmsPhrase("Results found")%>: <strong><%=resultsCount%></strong>
                 <%// Prepare parameters for pagesize.jsp
                   Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
                   pageSizeFormFields.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
@@ -190,7 +190,7 @@
                   <tr>
                     <td bgcolor="#EEEEEE">
                       <strong>
-                        <%=cm.cmsText("refine_your_search")%>
+                        <%=cm.cmsPhrase("Refine your search")%>
                       </strong>
                     </td>
                   </tr>
@@ -265,7 +265,7 @@
                     %>
                   <tr>
                     <td bgcolor="#EEEEEE">
-                      <%=cm.cmsText("applied_filters_to_the_results")%>:
+                      <%=cm.cmsPhrase("Applied filters to the results")%>:
                     </td>
                   </tr>
                   <%
@@ -321,7 +321,7 @@
                   if (showOtherCodes && !showExpanded)
                   {
                 %>
-                   <a title="<%=cm.cms("show_habitats_codes_in_other_classifications")%>" href="<%=pageName + "?expanded=" + !showExpanded + expandURL%>"><%=cm.cmsText("show_habitats_codes_in_other_classifications")%></a>
+                   <a title="<%=cm.cms("show_habitats_codes_in_other_classifications")%>" href="<%=pageName + "?expanded=" + !showExpanded + expandURL%>"><%=cm.cmsPhrase("Display in results habitat types informations in all classifications")%></a>
                 <%
                   }
                   // Compute the sort criteria
@@ -347,7 +347,7 @@
                   %>
                       <th scope="col">
                         <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(levelCrit, (null == levelCrit) ? true : false)%>">
-                          <%=Utilities.getSortImageTag(levelCrit)%><%=cm.cmsText("generic_index_07")%>
+                          <%=Utilities.getSortImageTag(levelCrit)%><%=cm.cmsPhrase("Level")%>
                         </a>
                       <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
@@ -360,13 +360,13 @@
                   %>
                       <th scope="col">
                         <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(eunisCodeCrit, (null == eunisCodeCrit) ? true : false)%>">
-                          <%=Utilities.getSortImageTag(eunisCodeCrit)%><%=cm.cmsText("eunis_code")%>
+                          <%=Utilities.getSortImageTag(eunisCodeCrit)%><%=cm.cmsPhrase("EUNIS Code")%>
                         </a>
                       <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th scope="col" width="30">
                         <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_ANNEX_CODE%>&amp;ascendency=<%=formBean.changeAscendency(annexCodeCrit, (null == annexCodeCrit) ? true : false)%>">
-                          <%=Utilities.getSortImageTag(annexCodeCrit)%><%=cm.cmsText("annex_code")%>
+                          <%=Utilities.getSortImageTag(annexCodeCrit)%><%=cm.cmsPhrase("ANNEX I Code")%>
                         </a>
                       <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
@@ -379,7 +379,7 @@
                   %>
                       <th scope="col">
                         <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>">
-                          <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitat_type_name")%>
+                          <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsPhrase("Habitat type name")%>
                         </a>
                       <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
@@ -391,13 +391,13 @@
                     {
                   %>
                       <th scope="col" style="text-align : center;" width="361">
-                        <%=cm.cmsText("habitats_code-result_15")%>
+                        <%=cm.cmsPhrase("Other codes<br />(Code | Classification | Relation)")%>
                   <%
                         if(showExpanded)
                         {
                   %>
                         <br />
-                        [<a title="<%=cm.cms("show_habitats_codes_in_other_classifications")%>" href="<%=pageName + "?expanded=" + !showExpanded + expandURL%>"><%=cm.cmsText("hide_other_classifications")%></a>]
+                        [<a title="<%=cm.cms("show_habitats_codes_in_other_classifications")%>" href="<%=pageName + "?expanded=" + !showExpanded + expandURL%>"><%=cm.cmsPhrase("Hide other classifications")%></a>]
                         <%=cm.cmsTitle("show_habitats_codes_in_other_classifications")%>
                   <%
                         }
@@ -524,7 +524,7 @@
                   %>
                       <th scope="col">
                         <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(levelCrit, (null == levelCrit) ? true : false)%>">
-                          <%=Utilities.getSortImageTag(levelCrit)%><%=cm.cmsText("generic_index_07")%>
+                          <%=Utilities.getSortImageTag(levelCrit)%><%=cm.cmsPhrase("Level")%>
                         </a>
                       <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
@@ -537,13 +537,13 @@
                   %>
                       <th scope="col">
                         <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(eunisCodeCrit, (null == eunisCodeCrit) ? true : false)%>">
-                          <%=Utilities.getSortImageTag(eunisCodeCrit)%><%=cm.cmsText("eunis_code")%>
+                          <%=Utilities.getSortImageTag(eunisCodeCrit)%><%=cm.cmsPhrase("EUNIS Code")%>
                         </a>
                       <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th scope="col" width="30">
                         <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_ANNEX_CODE%>&amp;ascendency=<%=formBean.changeAscendency(annexCodeCrit, (null == annexCodeCrit) ? true : false)%>">
-                          <%=Utilities.getSortImageTag(annexCodeCrit)%><%=cm.cmsText("annex_code")%>
+                          <%=Utilities.getSortImageTag(annexCodeCrit)%><%=cm.cmsPhrase("ANNEX I Code")%>
                         </a>
                       <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
@@ -556,7 +556,7 @@
                   %>
                       <th scope="col">
                         <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CodeSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>">
-                          <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitat_type_name")%>
+                          <%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsPhrase("Habitat type name")%>
                         </a>
                       <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
@@ -568,13 +568,13 @@
                     {
                   %>
                       <th scope="col" style="text-align : center;" width="361">
-                        <%=cm.cmsText("habitats_code-result_15")%>
+                        <%=cm.cmsPhrase("Other codes<br />(Code | Classification | Relation)")%>
                   <%
                         if(showExpanded)
                         {
                   %>
                         <br />
-                        [<a title="<%=cm.cms("show_habitats_codes_in_other_classifications")%>" href="<%=pageName + "?expanded=" + !showExpanded + expandURL%>"><%=cm.cmsText("hide_other_classifications")%></a>]
+                        [<a title="<%=cm.cms("show_habitats_codes_in_other_classifications")%>" href="<%=pageName + "?expanded=" + !showExpanded + expandURL%>"><%=cm.cmsPhrase("Hide other classifications")%></a>]
                         <%=cm.cmsTitle("show_habitats_codes_in_other_classifications")%>
                   <%
                         }

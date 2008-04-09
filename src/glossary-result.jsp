@@ -88,16 +88,16 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("glossary")%>
+                  <%=cm.cmsPhrase("Glossary")%>
                 </h1>
 <%
                 String terms = cm.cms("generic_glossary-result_03");
                 String and1 = cm.cms("and");
                 String definitions = cm.cms("generic_glossary-result_05");
 %>
-                <%=cm.cmsText("you_searched_for")%>
+                <%=cm.cmsPhrase("You searched for")%>
                 <%=(useTerms) ? terms : ""%> <%=(useTerms && useDefs) ? " " + and1 + " " : ""%><%=(useDefs) ? " " + definitions + " " : ""%>
-                <%=cm.cmsText("generic_glossary-result_06")%>
+                <%=cm.cmsPhrase("that contains")%>
                 '<strong><%=formBean.getSearchString()%></strong>'
                 <br />
                 <br />
@@ -109,7 +109,7 @@
                 <table summary="<%=cm.cms("glossary_term_details")%>" class="datatable" width="90%">
                   <tr>
                     <td width="">
-                      <%=cm.cmsText("term")%>
+                      <%=cm.cmsPhrase("Term")%>
                     </td>
                     <td width="90%">
                       <strong>
@@ -121,7 +121,7 @@
     {
 %>
                       &nbsp;
-                      [<a title="<%=cm.cms("open_glossary_editor")%>" href="glossary-editor.jsp?term=<%=result.getTerm()%>&amp;idLanguage=<%=result.getIdLanguage()%>&amp;source=<%=result.getSource()%>"><%=cm.cmsText("edit")%></a><%=cm.cmsTitle("open_glossary_editor")%>]
+                      [<a title="<%=cm.cms("open_glossary_editor")%>" href="glossary-editor.jsp?term=<%=result.getTerm()%>&amp;idLanguage=<%=result.getIdLanguage()%>&amp;source=<%=result.getSource()%>"><%=cm.cmsPhrase("Edit")%></a><%=cm.cmsTitle("open_glossary_editor")%>]
 <%
     }
 %>
@@ -138,7 +138,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText("language")%>
+                      <%=cm.cmsPhrase("Language")%>
                     </td>
                     <td>
                       <%=HabitatsSearchUtility.GetLanguage(result.getIdLanguage())%>
@@ -151,7 +151,7 @@
 %>
                   <tr>
                     <td>
-                      <%=cm.cmsText("url")%>
+                      <%=cm.cmsPhrase("Url")%>
                     </td>
                     <td>
 <%
@@ -178,7 +178,7 @@
 %>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText("source")%>
+                      <%=cm.cmsPhrase("Source")%>
                     </td>
                     <td>
                       <%=result.getSource()%>
@@ -215,7 +215,7 @@
 %>
                   <tr>
                     <td>
-                      <%=cm.cmsText("reference")%>
+                      <%=cm.cmsPhrase("Reference")%>
                     </td>
                     <td>
 <%
@@ -241,7 +241,7 @@
 %>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText("definition")%>
+                      <%=cm.cmsPhrase("Definition")%>
                     </td>
                     <td>
                       <%=useDefs ? Utilities.highlightTerm(result.getDefinition(), searchString) : result.getDefinition()%>

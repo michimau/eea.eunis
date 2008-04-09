@@ -79,7 +79,7 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("login_title")%>
+                  <%=cm.cmsPhrase("EUNIS Database Login")%>
                 </h1>
                 <br />
                 <div style="text-align : center; width : 100%">
@@ -128,9 +128,9 @@
             else
             {
           %>
-              <%=cm.cmsText("login_you_successfully_logged")%>
+              <%=cm.cmsPhrase("You successfully logged as")%>
               <strong><%=SessionManager.getUsername()%></strong>.
-              <a title="<%=cm.cms("home_page")%>" href="index.jsp"><%=cm.cmsText("home")%></a>
+              <a title="<%=cm.cms("home_page")%>" href="index.jsp"><%=cm.cmsPhrase("EUNIS")%></a>
               <%=cm.cmsTitle("home_page")%>
           <%
             }
@@ -139,7 +139,7 @@
               <br />
               <%=cm.cmsText("habitats_login-help_01")%>
 
-              <%=cm.cmsMsg("login_page_title")%>
+              <%=cm.cmsMsg("Login into EUNIS Database")%>
               <%=cm.br()%>
               <%=cm.cmsMsg("login_invalid")%>
 <!-- END MAIN CONTENT -->

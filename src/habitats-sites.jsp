@@ -165,29 +165,29 @@ function validateForm()
                         <tr>
                           <td>
                             <h1>
-                              <%=cm.cmsText("pick_sites_show_habitat_types")%>
+                              <%=cm.cmsPhrase("Pick sites, show habitat types")%>
                             </h1>
-                            <%=cm.cmsText("habitats_sites_17")%>
+                            <%=cm.cmsPhrase("Identify habitats located within sites<br />(ex.: search all habitat types located within site named <strong>AAMSVEEN</strong>)")%>
                             <br />
                             <br />
                             <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
                               <tr>
                                 <td bgcolor="#EEEEEE">
                                   <strong>
-                                    <%=cm.cmsText("search_will_provide_1")%>
+                                    <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed), as provided in the original database:")%>
                                   </strong>
                                 </td>
                               </tr>
                               <tr>
                                 <td bgcolor="#EEEEEE" valign="middle">
                                   <input type="checkbox" name="showCode" id="showCode" value="true" checked="checked" />
-                                  <label for="showCode"><%=cm.cmsText("habitat_type_code")%></label>
+                                  <label for="showCode"><%=cm.cmsPhrase("Habitat type code")%></label>
                                   &nbsp;
                                   <input type="checkbox" name="showScientificName" id="showScientificName" value="true" checked="checked" disabled="disabled" />
-                                  <label for="showScientificName"><%=cm.cmsText("habitat_type_name")%></label>
+                                  <label for="showScientificName"><%=cm.cmsPhrase("Habitat type name")%></label>
                                   &nbsp;
                                   <input type="checkbox" name="showScientificName" id="showScientificNameSites" value="true" checked="checked" disabled="disabled" />
-                                  <label for="showScientificName"><%=cm.cmsText("sites")%></label>
+                                  <label for="showScientificName"><%=cm.cmsPhrase("Sites")%></label>
                                   &nbsp;
                                   <%--<input type="checkbox" name="showVernacularName" id="showVernacularName" value="true" />--%>
                                   <%--<label for="showVernacularName"><%=contentManagement.cms("english_name")%></label>--%>
@@ -271,7 +271,7 @@ function validateForm()
                 <tr>
                   <td>
                     <script language="JavaScript" src="script/habitats-sites-save-criteria.js" type="text/javascript"></script>
-                    <%=cm.cmsText("save_your_criteria")%>:
+                    <%=cm.cmsPhrase("Save your criteria")%>:
                     <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-sites.jsp','2','criteria',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                     <%=cm.cmsTitle("save_criteria")%>
                   </td>

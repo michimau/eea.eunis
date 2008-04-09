@@ -1,13 +1,18 @@
 package ro.finsiel.eunis;
 
 import ro.finsiel.eunis.jrfTables.*;
+import ro.finsiel.eunis.search.Utilities;
 
+import java.security.GeneralSecurityException;
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
+import java.text.MessageFormat;
 import java.util.*;
 import java.net.URL;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
@@ -72,12 +77,34 @@ public class WebContentManagement implements java.io.Serializable {
   }
 
   public String cmsText( String idPage ) {
-    String ret = getText( idPage );
+	String ret = Utilities.replace(idPage, "'", "''");
+    ret = getText( ret );
     if ( editMode )
     {
       ret += "<a title=\"Edit this text\" href=\"javascript:openContentManager('" + idPage + "', 'text');\"><img src=\"images/edit-content.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
     }
     return ret;
+  }
+  
+  public String cmsPhrase( String idPage ) {
+	String ret = Utilities.replace(idPage, "'", "\'");
+    ret = getTextByMD5( ret );
+    if ( editMode )
+    {
+      ret += "<a title=\"Edit this text\" href=\"javascript:openContentManager('" + idPage + "', 'text');\"><img src=\"images/edit-content.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
+    }
+    return ret;
+  }
+  
+  public String cmsPhrase( String idPage, Object... arguments ) {
+	  	String ret = Utilities.replace(idPage, "'", "\'");  
+	  	ret = getTextByMD5( ret );
+	    ret = MessageFormat.format(ret, arguments);
+	    if ( editMode )
+	    {
+	      ret += "<a title=\"Edit this text\" href=\"javascript:openContentManager('" + idPage + "', 'text');\"><img src=\"images/edit-content.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
+	    }
+	    return ret;
   }
 
   public String cmsMsg( String idPage ) {
@@ -224,6 +251,86 @@ public class WebContentManagement implements java.io.Serializable {
       }
     }
     return ret;
+  }
+  
+  public String getTextByMD5( String idPage )
+  {
+    if ( idPage == null )
+    {
+      return "";
+    }
+    String ret = idPage;
+    idPage = idPage.trim();
+    if ( htmlContent.containsKey( idPage ) )
+    {
+      final WebContentPersist text = htmlContent.get( idPage );
+      if ( null != text )
+      {
+        if ( text.getContent() != null )
+        {
+          ret = text.getContent().trim();
+        }
+        else
+        {
+          ret = idPage;
+        }
+      }
+      else
+      {
+        System.out.println( "Warning:" + WebContentManagement.class.getName() + "::getText(" + idPage + "): Page not found in cache." );
+      }
+    }
+    else
+    {
+      String md5 = digestHexDec(idPage, "MD5");	
+      List<WebContentPersist> dbKeyList = null;
+   	  dbKeyList = new WebContentDomain().findWhereOrderBy( "ID_PAGE='" + md5 + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ", "RECORD_DATE DESC" );
+      if ( !dbKeyList.isEmpty() )
+      {
+        htmlContent.put( idPage, dbKeyList.get( 0 ) );
+        ret = dbKeyList.get( 0 ).getContent();
+      }
+      else
+      {
+        System.out.println( "Warning:" + WebContentManagement.class.getName() + "::getText(" + idPage + "): Page not found in cache and database." );
+      }
+    }
+    return ret;
+  }
+  
+  /**
+   * A method for creating a unique Hexa-Decimal digest of a String message.
+   *
+   * @param   src         String to be digested.
+   * @param   algosrithm  Digesting algorithm (please see Java
+   *                      documentation for allowable values).
+   * @return              A unique String-typed Hexa-Decimal digest of the input message.
+   */
+  public static String digestHexDec(String src, String algorithm) {
+      
+      byte[] srcBytes = src.getBytes();
+      byte[] dstBytes = new byte[16];
+      StringBuffer buf = new StringBuffer();
+      
+      try{
+      MessageDigest md = MessageDigest.getInstance(algorithm);
+      md.update(srcBytes);
+      dstBytes = md.digest();
+      md.reset();
+      
+      
+      for (int i=0; i<dstBytes.length; i++){
+          Byte byteWrapper = new Byte(dstBytes[i]);
+          int k = byteWrapper.intValue();
+          String s = Integer.toHexString(byteWrapper.intValue());
+          if (s.length() == 1) s = "0" + s;
+          buf.append(s.substring(s.length() - 2));
+      }
+      } catch (GeneralSecurityException e) {
+    	  e.printStackTrace();
+      }
+      
+      return buf.toString();
   }
 
   public String getDescription( String idPage )
@@ -391,9 +498,9 @@ public class WebContentManagement implements java.io.Serializable {
     {
       Class.forName( SQL_DRV );
       con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
-
+      
       if(lang.equalsIgnoreCase("EN")) {
-        ps = con.prepareStatement( "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE, CONTENT_VALID ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 0 )" );
+   		ps = con.prepareStatement( "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE, CONTENT_VALID ) VALUES ( MD5(?), ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 0 )" );
         ps.setString( 1, idPage );
         ps.setString( 2, content );
         ps.setString( 3, description );
@@ -401,7 +508,7 @@ public class WebContentManagement implements java.io.Serializable {
         ps.setShort( 5, contentLength );
         ps.setString( 6, username );
       } else {
-        ps = con.prepareStatement( "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP )" );
+   		ps = con.prepareStatement( "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE ) VALUES ( MD5(?), ?, ?, ?, ?, ?, CURRENT_TIMESTAMP )" );
         ps.setString( 1, idPage );
         ps.setString( 2, content );
         ps.setString( 3, description );
@@ -472,8 +579,9 @@ public class WebContentManagement implements java.io.Serializable {
     {
       Class.forName( SQL_DRV );
       con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+      
+   	  ps = con.prepareStatement( "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, RECORD_AUTHOR, RECORD_DATE ) VALUES ( MD5(?), ?, ?, ?, ?, CURRENT_TIMESTAMP )" );
 
-      ps = con.prepareStatement( "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, RECORD_AUTHOR, RECORD_DATE ) VALUES ( ?, ?, ?, ?, ?, CURRENT_TIMESTAMP )" );
       ps.setString( 1, idPage );
       ps.setString( 2, content );
       ps.setString( 3, description );
@@ -700,5 +808,75 @@ public class WebContentManagement implements java.io.Serializable {
     }
     return ret;
   }
+  
+  public boolean importNewTexts(String description,
+          						String lang,
+          						String username,
+          						String SQL_DRV, 
+          						String SQL_URL, 
+          						String SQL_USR, 
+          						String SQL_PWD) {
+		Connection con = null;
+	    PreparedStatement ps = null;
+	    BufferedReader input = null;
+	    String DATA_FILE_NAME = "new_texts.txt";
+	    try
+	    {
+	    	Class.forName( SQL_DRV );
+	    	con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+	    	
+			InputStream is = this.getClass().getClassLoader().getResourceAsStream(DATA_FILE_NAME);
+			input = new BufferedReader(new InputStreamReader(is));
+			String line = null;
+			
+			List<String> new_ids = new ArrayList<String>(); 
+			
+	        while (( line = input.readLine()) != null){
+	        	StringTokenizer st = new StringTokenizer(line, "|");
+	        	if(st != null && st.countTokens() == 2){
+	        		String text = st.nextToken();
+	        		if(!new_ids.contains(text)){
+				   		ps = con.prepareStatement( "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, RECORD_AUTHOR, RECORD_DATE ) VALUES ( MD5(?), ?, ?, ?, ?, CURRENT_TIMESTAMP )" );
+				        ps.setString( 1, text );
+				        ps.setString( 2, text );
+				        ps.setString( 3, description );
+				        ps.setString( 4, lang );
+				        ps.setString( 5, username );
+			
+				        ps.executeUpdate();
+				        new_ids.add(text);
+	        		}
+		        }
+	        }
+	        return true;
+	    }
+	    catch ( Exception e )
+	    {
+	      e.printStackTrace();
+	      return false;
+	    }
+	    finally
+	    {
+	      try
+	      {
+	        if ( ps != null )
+	        {
+	          ps.close();
+	        }
+	        if ( con != null )
+	        {
+	          con.close();
+	        }
+	        if(input != null){
+	        	input.close();
+	        }
+	      }
+	      catch ( Exception ex )
+	      {
+	        ex.printStackTrace();
+	      }
+	    }
+
+	}
 }
 

@@ -39,7 +39,7 @@
     url2 = colorURL2.getElementsSeparatedByComma();
 %>
   <h2>
-    <%=cm.cmsText("geographical_distribution")%>
+    <%=cm.cmsPhrase("Geographical distribution")%>
   </h2>
   <table summary="layout" width="90%" border="0" cellspacing="0" cellpadding="0">
     <tr>
@@ -55,16 +55,16 @@
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("country")%>
+          <%=cm.cmsPhrase("Country")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("biogeographic_region")%>
+          <%=cm.cmsPhrase("Biogeographic region")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("probability")%>
+          <%=cm.cmsPhrase("Probability")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("comment")%>
+          <%=cm.cmsPhrase("Comment")%>
         </th>
       </tr>
     </thead>

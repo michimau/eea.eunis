@@ -58,7 +58,7 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <%=cm.br()%>
-                <%=cm.cmsText("habitats_download_01")%>
+                <%=cm.cmsText("<h1>Links and Downloads for habitat types</h1><br />No data is available for download at this time.<br />")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("links_and_downloads_for_habitats")%>
                 <%=cm.br()%>

@@ -231,7 +231,7 @@
 <!-- MAIN CONTENT -->
             <%--      <jsp:param name="printLink" value="<%=pdfLink%>"/>--%>
                 <h1>
-                    <%=cm.cmsText("species_country-result_01")%>
+                    <%=cm.cmsPhrase("Country / Biogeoregion")%>
                 </h1>
                <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
@@ -239,15 +239,15 @@
                     <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
                       <tr>
                         <td>
-                          <%=cm.cmsText("species_country-result_03")%>
+                          <%=cm.cmsPhrase("You searched species located in biogeographic region:")%>
                           <strong><%=Utilities.treatURLAmp(formBean.getRegionName())%></strong>
-                          <%=cm.cmsText("species_country-result_04")%>
+                          <%=cm.cmsPhrase("from")%>
                           <strong><%=Utilities.treatURLAmp(formBean.getCountryName())%></strong>
                         </td>
                       </tr>
                     </table>
                     <br />
-                    <%=cm.cmsText("results_found_1")%>: <strong><%=resultsCount%></strong>
+                    <%=cm.cmsPhrase("Results found")%>: <strong><%=resultsCount%></strong>
                     <%// Prepare parameters for pagesize.jsp
                       Vector pageSizeFormFields = new Vector(); /*  These fields are used by pagesize.jsp, included below.    */
                       pageSizeFormFields.addElement("country"); /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
@@ -282,7 +282,7 @@
                       <tr>
                         <td style="background-color:#EEEEEE">
                           <strong>
-                            <%=cm.cmsText("refine_your_search")%>
+                            <%=cm.cmsPhrase("Refine your search")%>
                           </strong>
                         </td>
                       </tr>
@@ -336,7 +336,7 @@
                       %>
                         <tr>
                             <td style="background-color:#EEEEEE">
-                                <%=cm.cmsText("applied_filters_to_the_results")%>:
+                                <%=cm.cmsPhrase("Applied filters to the results:")%>:
                             </td>
                        </tr>
                         <%
@@ -395,7 +395,7 @@
                       if (!isExpanded)
                       {
                     %>
-                         <a title="<%=cm.cms("species_country-result_24_Title")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("display_vernacular_names_in_results")%></a>
+                         <a title="<%=cm.cms("species_country-result_24_Title")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display vernacular names in results table")%></a>
                          <%=cm.cmsTitle("species_country-result_24_Title")%>
                     <%
                       }
@@ -421,18 +421,18 @@
                         <tr>
                           <th scope="col">
                             <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(groupCrit, (null == groupCrit))%>"><%=Utilities.getSortImageTag(groupCrit)%>
-                                <%=cm.cmsText("group")%>
+                                <%=cm.cmsPhrase("Group")%>
                             </a>
                             <%=cm.cmsTitle("sort_by_column")%>
                           </th>
                           <th scope="col">
-                            <%=cm.cmsText("country")%>
+                            <%=cm.cmsPhrase("Country")%>
                           </th>
                           <th scope="col">
-                            <%=cm.cmsText("biogeoregion")%>
+                            <%=cm.cmsPhrase("Biogeoregion")%>
                           </th>
                           <th scope="col">
-                            <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit)) %>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("scientific_name")%></a>
+                            <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit)) %>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsPhrase("Scientific name")%></a>
                             <%=cm.cmsTitle("sort_by_column")%>
                           </th>
             <%
@@ -440,7 +440,7 @@
                         {
             %>
                           <th scope="col">
-                            <a title="<%=cm.cms("species_country-result_17_Title")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("vernacular_names")%>[<%=cm.cmsText("hide")%>]</a>
+                            <a title="<%=cm.cms("species_country-result_17_Title")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a>
                             <%=cm.cmsTitle("species_country-result_17_Title")%>
                           </th>
             <%
@@ -665,7 +665,7 @@
                       <tr>
                         <th scope="col">
                           <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(groupCrit, (null == groupCrit))%>"><%=Utilities.getSortImageTag(groupCrit)%>
-                              <%=cm.cmsText("group")%>
+                              <%=cm.cmsPhrase("Group")%>
                           </a>
                           <%=cm.cmsTitle("sort_by_column")%>
                         </th>
@@ -676,13 +676,13 @@
             <%--            <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_FAMILY%>&amp;ascendency=<%=formBean.changeAscendency(familyCrit, (null == familyCrit) ? true : false)%>"><%=Utilities.getSortImageTag(familyCrit)%><%=cm.cms("family")%></a>--%>
             <%--          </th>--%>
                         <th scope="col">
-                          <%=cm.cmsText("country")%>
+                          <%=cm.cmsPhrase("Country")%>
                         </th>
                         <th scope="col">
-                          <%=cm.cmsText("biogeoregion")%>
+                          <%=cm.cmsPhrase("Biogeoregion")%>
                         </th>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit)) %>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("scientific_name")%></a>
+                          <a title="<%=cm.cms("sort_by_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=CountrySortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit)) %>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsPhrase("Scientific name")%></a>
                           <%=cm.cmsTitle("sort_by_column")%>
                         </th>
             <%
@@ -690,7 +690,7 @@
                         {
             %>
                         <th scope="col">
-                          <a title="<%=cm.cms("species_country-result_17_Title")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("vernacular_names")%>[<%=cm.cmsText("hide")%>]</a>
+                          <a title="<%=cm.cms("species_country-result_17_Title")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a>
                           <%=cm.cmsTitle("species_country-result_17_Title")%>]
                         </th>
             <%

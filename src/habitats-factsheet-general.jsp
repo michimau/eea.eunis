@@ -31,7 +31,7 @@
     <tbody>
       <tr>
         <td width="15%">
-          <%=cm.cmsText("english_name")%>
+          <%=cm.cmsPhrase("English name")%>
         </td>
         <td width="40%">
           <strong>
@@ -89,7 +89,7 @@
 %>
       <tr>
         <td width="30%">
-          <%=cm.cmsText("eunis_habitat_type_code")%>
+          <%=cm.cmsPhrase("EUNIS habitat type code")%>
         </td>
         <td width="40%">
           &nbsp;
@@ -98,7 +98,7 @@
           </strong>
         </td>
         <td width="15%" bgcolor="#DDDDDD" align="right">
-          <%=cm.cmsText("generic_index_07")%>
+          <%=cm.cmsPhrase("Level")%>
         </td>
         <td width="15%" bgcolor="#DDDDDD">
           &nbsp;
@@ -114,7 +114,7 @@
 %>
       <tr>
         <td width="30%">
-          <%=cm.cmsText("habitats_factsheet_12")%>
+          <%=cm.cmsPhrase("NATURA 2000 habitat type code")%>
         </td>
         <td width="70%" colspan="3">
           &nbsp;
@@ -125,7 +125,7 @@
       </tr>
       <tr>
         <td>
-          <%=cm.cmsText("originally _published_code")%>
+          <%=cm.cmsPhrase("Originally published code")%>
         </td>
         <td>
           <strong>
@@ -134,13 +134,13 @@
           </strong>
         </td>
         <td style="text-align: right;">
-          <%=cm.cmsText("priority")%>
+          <%=cm.cmsPhrase("Priority")%>
           &nbsp;
         </td>
         <td>
           <strong>
             &nbsp;
-            <%=(factsheet.getPriority() != null && 1 == factsheet.getPriority().shortValue() ? cm.cmsText("yes") :  cm.cmsText("no"))%>
+            <%=(factsheet.getPriority() != null && 1 == factsheet.getPriority().shortValue() ? cm.cmsPhrase("Yes") :  cm.cmsPhrase("no"))%>
             &nbsp;
           </strong>
         </td>
@@ -167,7 +167,7 @@
 %>
   <br />
   <h2>
-    <%=cm.cmsText("description")%> ( <%=description.getLanguage()%> )
+    <%=cm.cmsPhrase("Description")%> ( <%=description.getLanguage()%> )
   </h2>
   <p>
     <%=description.getDescription()%>
@@ -177,7 +177,7 @@
       {
 %>
     <h3>
-      <%=cm.cmsText("habitats_factsheet_16")%>
+      <%=cm.cmsPhrase("Additional note")%>
     </h3>
     <p>
       <%=description.getOwnerText()%>
@@ -193,7 +193,7 @@
           _source = _source.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
 %>
       <h3>
-        <%=cm.cmsText("source")%>:
+        <%=cm.cmsPhrase("Source")%>:
       </h3>
       <p>
         <%=_source%>
@@ -211,16 +211,16 @@
 %>
     <br />
     <h2>
-      <%=cm.cmsText("habitats_name_in_other_languages")%>
+      <%=cm.cmsPhrase("Name in other languages")%>
     </h2>
     <table summary="<%=cm.cms("habitats_name_in_other_languages")%>" class="listing" width="90%">
       <thead>
         <tr>
           <th style="text-transform: capitalize; text-align: left;">
-            <%=cm.cmsText("language")%>
+            <%=cm.cmsPhrase("Language")%>
           </th>
           <th style="text-transform: capitalize; text-align: left;">
-            <%=cm.cmsText("name")%>
+            <%=cm.cmsPhrase("Name")%>
           </th>
         </tr>
       </thead>
@@ -258,22 +258,22 @@
 %>
     <br />
     <h2>
-      <%=cm.cmsText("habitats_factsheet_22")%>
+      <%=cm.cmsPhrase("Relationships with other classifications")%>
     </h2>
     <table summary="<%=cm.cms("habitats_factsheet_22")%>" class="listing" width="90%">
       <thead>
       <tr>
         <th width="30%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("classification")%>
+          <%=cm.cmsPhrase("Classification")%>
         </th>
         <th width="15%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("code_column")%>
+          <%=cm.cmsPhrase("Code")%>
         </th>
         <th width="40%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("title")%>
+          <%=cm.cmsPhrase("Title")%>
         </th>
         <th width="15%" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("relation_type")%>
+          <%=cm.cmsPhrase("relation_type")%>
         </th>
       </tr>
     </thead>

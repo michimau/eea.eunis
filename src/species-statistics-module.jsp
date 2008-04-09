@@ -89,14 +89,14 @@
               out.flush();
             %>
             <h1>
-            <%=cm.cmsText("species_statistics")%>
+            <%=cm.cmsPhrase("Species Statistics")%>
             </h1>
             <%
               out.flush();
             %>
                 <br />
                 <strong>
-                <%=cm.cmsText("statistical_data_EUNIS")%>
+                <%=cm.cmsPhrase("Statistical data at EUNIS Database level:")%>
                 </strong>
                   <br /><br/>
             <%
@@ -126,7 +126,7 @@
                 <table summary="layout" width="90%" class="datatable">
                   <tr>
                     <td width="80%">
-                     <%=cm.cmsText("number_distinct_species")%>
+                     <%=cm.cmsPhrase("Number of distinct species:")%>
                     </td>
                     <td width="20%">
                       <%=nDistinctSpecies%>
@@ -134,7 +134,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText("number_species_names")%>
+                      <%=cm.cmsPhrase("Number of species names:")%>
                     </td>
                     <td>
                       <%=nSpeciesNames%>
@@ -142,7 +142,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText("number_vernacular_names")%>
+                      <%=cm.cmsPhrase("Number of vernacular names:")%>
                     </td>
                     <td>
                       <%=nVernacularNames%>
@@ -150,7 +150,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                     <%=cm.cmsText("number_languages")%>
+                     <%=cm.cmsPhrase("Number of languages concerned in vernacular names search:")%>
                     </td>
                     <td>
                       <%=nLanguages%>
@@ -158,7 +158,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText("number_international_status")%>
+                      <%=cm.cmsPhrase("Number of species having international legal status:")%>
                     </td>
                     <td>
                       <%=nInternationalLegalStatus%>
@@ -166,7 +166,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText("number_international_instruments")%>
+                      <%=cm.cmsPhrase("Number of international legal instruments:")%>
                     </td>
                     <td>
                       <%=nInternationalLegalInstruments%>
@@ -174,7 +174,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText("number_international_conservation")%>
+                      <%=cm.cmsPhrase("Number of species having conservation status at international level:")%>
                     </td>
                     <td>
                       <%=nInternationalConservationStatus%>
@@ -182,7 +182,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText("number_national_conservation")%>
+                      <%=cm.cmsPhrase("Number of species having conservation status at national level:")%>
                     </td>
                     <td>
                       <%=nNationalConservationStatus%>
@@ -190,7 +190,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText("number_countries_conservation")%>
+                      <%=cm.cmsPhrase("Number of countries concerned in conservation status at national level search:")%>
                     </td>
                     <td>
                       <%=nNationalConservationStatusCountries%>
@@ -198,7 +198,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText("number_geo")%>
+                      <%=cm.cmsPhrase("Number of species having geographical distribution:")%>
                     </td>
                     <td>
                       <%=nGeographicalDistribution%>
@@ -206,7 +206,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText("number_grid")%>
+                      <%=cm.cmsPhrase("Number of species having grid distribution:")%>
                     </td>
                     <td>
                       <%=nGridDistribution%>
@@ -217,7 +217,7 @@
                 } else
                 {
             %>
-                <span style="color:red"><%=cm.cmsText("no_data_eunis")%></span>
+                <span style="color:red"><%=cm.cmsPhrase("No data was found at Eunis Database level!")%></span>
             <%
                 }
               out.flush();
@@ -230,9 +230,9 @@
 
                 <br /><br />
                 <strong>
-                <%=cm.cmsText("if_want")%>
+                <%=cm.cmsPhrase("If you want statistical data at country level,")%>
                 <br />
-                <%=cm.cmsText("please_choose")%> &nbsp;&nbsp;
+                <%=cm.cmsPhrase("please choose a country:")%> &nbsp;&nbsp;
                 </strong>
                 <label for="Country" class="noshow"><%=cm.cms("country")%></label>
                 <select title="<%=cm.cms("country")%>" name="Country" id="Country" onchange="MM_jumpMenuCountry('parent',this,0)">
@@ -276,12 +276,12 @@
                      String nGridDistributionByCountry = (String)((TableColumns) listOfStatisticsForACountry.get(0)).getColumnsValues().get(8);
                 %>
                   <br /> <br />
-                  <h2><%=cm.cmsText("statistical_data_for")%>&nbsp;<span style="font-style: italic"><%=countryName%></span>:</h2>
+                  <h2><%=cm.cmsPhrase("Statistical data for")%>&nbsp;<span style="font-style: italic"><%=countryName%></span>:</h2>
                   <br />
                 <table summary="<%=cm.cms("statistical_data_country")%>" width="90%" class="datatable">
                   <tr>
                     <td width="80%">
-                      <%=cm.cmsText("number_distinct_species")%>
+                      <%=cm.cmsPhrase("Number of distinct species:")%>
                     </td>
                     <td width="20%">
                       <%=nDistinctSpeciesByCountry%>
@@ -289,7 +289,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText("number_species_names")%>
+                      <%=cm.cmsPhrase("Number of species names:")%>
                     </td>
                     <td>
                       <%=nSpeciesNamesByCountry%>
@@ -297,7 +297,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText("number_vernacular_names")%>
+                      <%=cm.cmsPhrase("Number of vernacular names:")%>
                     </td>
                     <td>
                       <%=nVernacularNamesByCountry%>
@@ -305,7 +305,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText("number_languages")%>
+                      <%=cm.cmsPhrase("Number of languages concerned in vernacular names search:")%>
                     </td>
                     <td>
                       <%=nLanguagesByCountry%>
@@ -313,7 +313,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText("number_international_status")%>
+                      <%=cm.cmsPhrase("Number of species having international legal status:")%>
                     </td>
                     <td>
                       <%=nInternationalLegalStatusByCountry%>
@@ -321,7 +321,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText("number_international_instruments")%>
+                      <%=cm.cmsPhrase("Number of international legal instruments:")%>
                     </td>
                     <td>
                       <%=nInternationalLegalInstrumentsByCountry%>
@@ -329,7 +329,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText("number_national_conservation")%>
+                      <%=cm.cmsPhrase("Number of species having conservation status at international level:")%>
                     </td>
                     <td>
                       <%=nNationalConservationStatusByCountry%>
@@ -337,7 +337,7 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsText("number_geo")%>
+                      <%=cm.cmsPhrase("Number of species having geographical distribution:")%>
                     </td>
                     <td>
                       <%=nGeographicalDistributionByCountry%>
@@ -345,7 +345,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsText("number_grid")%>
+                      <%=cm.cmsPhrase("Number of species having grid distribution:")%>
                     </td>
                     <td>
                       <%=nGridDistributionByCountry%>
@@ -357,7 +357,7 @@
                    } else {
                %>
                    <br />
-                   <span style="color:red"><%=cm.cmsText("no_data_country")%> <%=countryName%>!</span>
+                   <span style="color:red"><%=cm.cmsPhrase("No data was found for")%> <%=countryName%>!</span>
                    <br />
                <%
                        }

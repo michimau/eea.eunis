@@ -172,7 +172,7 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsText("species_threat-national-result_01")%>
+                  <%=cm.cmsPhrase("Species threatened at national level")%>
                 </h1>
                 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
@@ -181,7 +181,7 @@
                            <%String descr = formBean.getStringMain();%>
                           <tr>
                             <td>
-                              <%=cm.cmsText("species_threat-national-result_02")%>
+                              <%=cm.cmsPhrase("You searched species with threat national level:")%>
                               <strong>
                                 <%=Utilities.treatURLAmp(descr)%>
                               </strong>
@@ -189,7 +189,7 @@
                           </tr>
                         </table>
                         <br />
-                        <%=cm.cmsText("results_found_1")%>:
+                        <%=cm.cmsPhrase("Results found")%>:
                         <strong>
                             <%=resultsCount%>
                         </strong>
@@ -218,7 +218,7 @@
                     <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #EEEEEE" >
                       <tr>
                         <td>
-                            <%=cm.cmsText("refine_your_search")%>
+                            <%=cm.cmsPhrase("Refine your search")%>
                         </td>
                       </tr>
                       <tr>
@@ -284,7 +284,7 @@
                       %>
                       <tr>
                         <td style="background-color:#EEEEEE">
-                          <%=cm.cmsText("applied_filters_to_the_results")%>:
+                          <%=cm.cmsPhrase("Applied filters to the results")%>:
                         </td>
                       </tr>
                       <%
@@ -347,7 +347,7 @@
                     if (showVernacularNames && !isExpanded)
                     {
                     %>
-                      <a title="<%=cm.cms("show_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("display_vernacular_names_in_results")%></a>
+                      <a title="<%=cm.cms("show_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display vernacular names in results table")%></a>
                       <%=cm.cmsTitle("show_vernacular_list")%>
                     <%
                         }
@@ -360,14 +360,14 @@
                           {
                       %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NationalSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NationalSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
                           <%=cm.cmsTitle("sort_results_on_this_column")%>
                         </th>
                       <%
                           } else {
                       %>
                         <th scope="col">
-                          <%=cm.cmsText("group")%>
+                          <%=cm.cmsPhrase("Group")%>
                         </th>
                       <%
                           }
@@ -375,7 +375,7 @@
                          {
                       %>
                         <th scope="col">
-                          <%=cm.cmsText("country")%>
+                          <%=cm.cmsPhrase("Country")%>
                         </th>
                       <%
                           }
@@ -383,13 +383,13 @@
                           {
                       %>
                         <th scope="col">
-                         <%=cm.cmsText("threat_status")%>
+                         <%=cm.cmsPhrase("Threat Status")%>
                         </th>
                       <%
                            }
                       %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NationalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("scientific_name")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NationalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Scientific name")%></a>
                           <%=cm.cmsTitle("sort_results_on_this_column")%>
                         </th>
                       <%
@@ -397,7 +397,7 @@
                         {
                       %>
                         <th scope="col">
-                          <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("vernacular_names")%>[<%=cm.cmsText("hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
+                          <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
                         </th>
                       <%
                         }
@@ -497,14 +497,14 @@
                           {
                       %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NationalSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsText("group")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NationalSortCriteria.SORT_GROUP%>&amp;ascendency=<%=formBean.changeAscendency(sortGroup, (null == sortGroup) ? true : false)%>"><%=Utilities.getSortImageTag(sortGroup)%><%=cm.cmsPhrase("Group")%></a>
                           <%=cm.cmsTitle("sort_results_on_this_column")%>
                         </th>
                       <%
                           } else {
                       %>
                         <th scope="col">
-                          <%=cm.cmsText("group")%>
+                          <%=cm.cmsPhrase("Group")%>
                         </th>
                       <%
                           }
@@ -512,7 +512,7 @@
                          {
                       %>
                         <th scope="col">
-                          <%=cm.cmsText("country")%>
+                          <%=cm.cmsPhrase("Country")%>
                         </th>
                       <%
                           }
@@ -520,13 +520,13 @@
                           {
                       %>
                         <th scope="col">
-                          <%=cm.cmsText("threat_status")%>
+                          <%=cm.cmsPhrase("Threat Status")%>
                         </th>
                       <%
                            }
                       %>
                         <th scope="col">
-                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NationalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsText("scientific_name")%></a>
+                          <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=NationalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sortSciName, (null == sortSciName) ? true : false)%>"><%=Utilities.getSortImageTag(sortSciName)%><%=cm.cmsPhrase("Scientific name")%></a>
                           <%=cm.cmsTitle("sort_results_on_this_column")%>
                         </th>
                       <%
@@ -534,7 +534,7 @@
                         {
                       %>
                         <th scope="col">
-                          <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsText("vernacular_names")%>[<%=cm.cmsText("hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
+                          <a title="<%=cm.cms("hide_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Vernacular names")%>[<%=cm.cmsPhrase("Hide")%>]</a><%=cm.cmsTitle("hide_vernacular_list")%>
                         </th>
                       <%
                         }

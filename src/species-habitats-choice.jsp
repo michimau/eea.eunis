@@ -22,7 +22,7 @@
     <%
       WebContentManagement cm = SessionManager.getWebContent();
     %>
-    <title><%=cm.cmsText("list_of_values")%></title>
+    <title><%=cm.cmsPhrase("List of values")%></title>
   <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.habitats.HabitateBean" scope="request">
     <jsp:setProperty name="formBean" property="*"/>
   </jsp:useBean>
@@ -60,7 +60,7 @@
       {
         HabitateSearchCriteria habitatSearch = new HabitateSearchCriteria(searchAttribute,formBean.getScientificName(),relationOp);
     %>
-        <h2><%=cm.cmsText("list_of_values_for")%></h2>
+        <h2><%=cm.cmsPhrase("List of values for:")%></h2>
         <u><%=habitatSearch.getHumanMappings().get(searchAttribute)%></u>
     <%
         if (null != formBean.getScientificName() && null != relationOp)
@@ -101,7 +101,7 @@
       else
         {
     %>
-       <strong><%=cm.cmsText("no_results_found")%>.</strong> <br />
+       <strong><%=cm.cmsPhrase("No results were found")%>.</strong> <br />
      <%
         }
      %>

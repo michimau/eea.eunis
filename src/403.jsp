@@ -60,7 +60,7 @@
                 <br />
                 <br />
                 <%=cm.cmsText("generic_404_01")%>
-                <a title="<%=cm.cms("send_feedback")%>" href="feedback.jsp"><%=cm.cmsText("feedback")%></a>.
+                <a title="<%=cm.cms("send_feedback")%>" href="feedback.jsp"><%=cm.cmsPhrase("EUNIS Feedback")%></a>.
                 <%=cm.cmsTitle("send_feedback")%>
                 <br />
                 <br />

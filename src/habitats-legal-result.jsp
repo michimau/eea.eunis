@@ -129,24 +129,24 @@
                 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                 <td>
-                <h1><%=cm.cmsText("legal_instruments")%></h1>
+                <h1><%=cm.cmsPhrase("Legal Instruments")%></h1>
                   <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
                     <%LegalSearchCriteria mainSearch = (LegalSearchCriteria) formBean.getMainSearchCriteria();%>
                     <%String realSearch = (null != formBean.getSearchString() && formBean.getSearchString().equalsIgnoreCase("%")) ? "" : " for which " + mainSearch.toHumanString();
                       String scientName = HabitatsSearchUtility.getHabitatLevelName(formBean.getHabitatType());%>
                     <tr>
                       <td>
-                        <%=cm.cmsText("habitats_legal-result_02")%>
+                        <%=cm.cmsPhrase("You searched for <strong>EUNIS</strong> habitat types from")%>
                         '<strong><%=scientName%>'
                         <%=realSearch%>
-                        <%=cm.cmsText("habitats_legal-result_03")%>
+                        <%=cm.cmsPhrase(", protected by ")%>
                         '<%=formBean.getLegalText()%>'
-                        <%=cm.cmsText("legal_text")%>
+                        <%=cm.cmsPhrase("legal text")%>
                       </strong>
                       </td>
                     </tr>
                   </table>
-                <%=cm.cmsText("results_found_1")%>:&nbsp;<strong><%=resultsCount%></strong>
+                <%=cm.cmsPhrase("Results found")%>:&nbsp;<strong><%=resultsCount%></strong>
                 <%// Prepare parameters for pagesize.jsp
                   Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
                   pageSizeFormFields.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */
@@ -177,7 +177,7 @@
                   <tr>
                     <td bgcolor="#EEEEEE">
                       <strong>
-                        <%=cm.cmsText("refine_your_search")%>
+                        <%=cm.cmsPhrase("Refine your search")%>
                       </strong>
                     </td>
                   </tr>
@@ -224,7 +224,7 @@
                   %>
                   <tr>
                     <td bgcolor="#EEEEEE">
-                      <%=cm.cmsText("habitats_legal-result_14")%>
+                      <%=cm.cmsPhrase("Criterias applied: (Click on item to go back to that stage)")%>
                     </td>
                   </tr>
                   <%
@@ -285,7 +285,7 @@
                   <thead>
                     <tr>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(sortLevel, (null == sortLevel) ? true : false)%>"><%=Utilities.getSortImageTag(sortLevel)%><%=cm.cmsText("generic_index_07")%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(sortLevel, (null == sortLevel) ? true : false)%>"><%=Utilities.getSortImageTag(sortLevel)%><%=cm.cmsPhrase("Level")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <%
@@ -293,7 +293,7 @@
                         {
                       %>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(codeCrit, (null == codeCrit) ? true : false)%>"><%=Utilities.getSortImageTag(codeCrit)%><%=cm.cmsText("eunis_code")%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(codeCrit, (null == codeCrit) ? true : false)%>"><%=Utilities.getSortImageTag(codeCrit)%><%=cm.cmsPhrase("EUNIS Code")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <%
@@ -301,13 +301,13 @@
                       %>
                       <%if (showScientificName) {%>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitat_type_name")%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsPhrase("Habitat type name")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <%}%>
                       <%if (showLegalText) {%>
                       <th scope="col">
-                        <%=cm.cmsText("legal_text")%>
+                        <%=cm.cmsPhrase("legal text")%>
                       </th>
                       <%}%>
                     </tr>
@@ -372,7 +372,7 @@
                   <thead>
                     <tr>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(sortLevel, (null == sortLevel) ? true : false)%>"><%=Utilities.getSortImageTag(sortLevel)%><%=cm.cmsText("generic_index_07")%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_LEVEL%>&amp;ascendency=<%=formBean.changeAscendency(sortLevel, (null == sortLevel) ? true : false)%>"><%=Utilities.getSortImageTag(sortLevel)%><%=cm.cmsPhrase("Level")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <%
@@ -380,7 +380,7 @@
                         {
                       %>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(codeCrit, (null == codeCrit) ? true : false)%>"><%=Utilities.getSortImageTag(codeCrit)%><%=cm.cmsText("eunis_code")%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_EUNIS_CODE%>&amp;ascendency=<%=formBean.changeAscendency(codeCrit, (null == codeCrit) ? true : false)%>"><%=Utilities.getSortImageTag(codeCrit)%><%=cm.cmsPhrase("EUNIS Code")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <%
@@ -388,13 +388,13 @@
                       %>
                       <%if (showScientificName) {%>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsText("habitat_type_name")%></a>
+                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=LegalSortCriteria.SORT_SCIENTIFIC_NAME%>&amp;ascendency=<%=formBean.changeAscendency(sciNameCrit, (null == sciNameCrit) ? true : false)%>"><%=Utilities.getSortImageTag(sciNameCrit)%><%=cm.cmsPhrase("Habitat type name")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <%}%>
                       <%if (showLegalText) {%>
                       <th scope="col">
-                        <%=cm.cmsText("legal_text")%>
+                        <%=cm.cmsPhrase("legal text")%>
                       </th>
                       <%}%>
                     </tr>

@@ -62,8 +62,8 @@
 <%
   if(results != null && results.size() > 0) {
 %>
-<h2><%=cm.cmsText("list_of_values_for")%></h2>
-<u><%=cm.cmsText("habitats_names-choice_01")%></u>
+<h2><%=cm.cmsPhrase("List of values for:")%></h2>
+<u><%=cm.cmsPhrase("Habitat name or description")%></u>
 <em><%=Utilities.ReturnStringRelatioOp(relationOp)%></em>
 <strong><%=searchString%></strong>
 <br />
@@ -73,7 +73,7 @@
   if(results.isEmpty()) {
 %>
 <strong>
-  <%=cm.cmsText("no_results_found_1")%>
+  <%=cm.cmsPhrase("No results were found.")%>
 </strong>
 <br />
 <br />

@@ -36,25 +36,25 @@
     {
 %>
   <h2>
-    <%=cm.cmsText("sites_factsheet_designations_national")%>
+    <%=cm.cmsPhrase("National and/or International Designation of Natura 2000 site")%>
   </h2>
   <table summary="<%=cm.cms("sites_factsheet_designations_national")%>" class="listing" width="90%">
     <thead>
       <tr>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("designation_code")%>
+          <%=cm.cmsPhrase("Designation code")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("designation_name")%>
+          <%=cm.cmsPhrase("Designation name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("category_location")%>
+          <%=cm.cmsPhrase("category")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-align : right; text-transform: capitalize;" title="<%=cm.cms("sort_results_on_this_column")%>">
-          <%=cm.cmsText("cover_percent")%>
+          <%=cm.cmsPhrase("Cover(%)")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
@@ -113,19 +113,19 @@
     <thead>
       <tr>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("sites_factsheet_designations_designatedsite")%>
+          <%=cm.cmsPhrase("Designated site")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("designation_name")%>
+          <%=cm.cmsPhrase("Designation name")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          <%=cm.cmsText("category_location")%>
+          <%=cm.cmsPhrase("category")%>
         </th>
         <th style="text-align : right; text-transform: capitalize;">
-          <%=cm.cmsText("overlap_percent")%>
+          <%=cm.cmsPhrase("Overlap(%)")%>
         </th>
         <th style="text-align : right; text-transform: capitalize;">
-          <%=cm.cmsText("sites_factsheet_designations_areasoverlapp")%>
+          <%=cm.cmsPhrase("Overlap P(%)")%>
         </th>
       </tr>
     </thead>

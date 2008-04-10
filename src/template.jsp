@@ -34,17 +34,17 @@
               <div class="documentContent" id="region-content">
                 <a name="documentContent"></a>
                 <div class="documentActions">
-                  <h5 class="hiddenStructure">Document Actions</h5>
+                  <h5 class="hiddenStructure"><%=cm.cms("Document Actions")%></h5><%=cm.cmsTitle( "Document Actions" )%>
                   <ul>
                     <li>
                       <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="Print this page"
-                            title="Print this page" /></a>
+                            alt="<%=cm.cms("Print this page")%>"
+                            title="<%=cm.cms("Print this page")%>" /></a><%=cm.cmsTitle( "Print this page" )%>
                     </li>
                     <li>
                       <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="Toggle full screen mode"
-                             title="Toggle full screen mode" /></a>
+                             alt="<%=cm.cms("Toggle full screen mode")%>"
+                             title="<%=cm.cms("Toggle full screen mode")%>" /></a><%=cm.cmsTitle( "Toggle full screen mode" )%>
                     </li>
                   </ul>
                 </div>

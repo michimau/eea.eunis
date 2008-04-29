@@ -2224,7 +2224,7 @@ public final class Utilities {
   }
 
   /**
-   * Replace strange characters (', ",`, ‘, \u0027) from a string with empty space.
+   * Replace strange characters (', ",`, ï¿½, \u0027) from a string with empty space.
    *
    * @param str String to be processed.
    * @return Processed string.
@@ -2241,7 +2241,7 @@ public final class Utilities {
     char ch = ( char ) 39;
     char chspace = ( char ) 32;
 
-    str = str.replaceAll( "\"", replacement ).replaceAll( "'", replacement ).replaceAll( "\"", replacement ).replaceAll( "´", replacement ).replaceAll( "`", replacement ).replaceAll( "‘", replacement ).replaceAll( "'", replacement ).replaceAll( "\u0027", replacement );
+    str = str.replaceAll( "\"", replacement ).replaceAll( "'", replacement ).replaceAll( "\"", replacement ).replaceAll( "ï¿½", replacement ).replaceAll( "`", replacement ).replaceAll( "ï¿½", replacement ).replaceAll( "'", replacement ).replaceAll( "\u0027", replacement );
     str = str.replace( ch, chspace );
 
     return str;
@@ -2743,4 +2743,46 @@ public final class Utilities {
     }
     return ret;
   }
+  
+  	//Utility methods for habitats-eunis-tree START
+  
+  	public static String removeFromExpanded(String expand, String idCurrent) {
+		StringBuffer ret = new StringBuffer();
+		String[] st = expand.split(",");
+		for (int i=0; i<st.length; i++){
+			String id = st[i];
+			if(!id.startsWith(idCurrent)){
+				ret.append(id);
+				ret.append(",");
+			}
+		}
+		if(ret.length()>0){
+			int index = ret.lastIndexOf(",");
+			ret.deleteCharAt(index);
+		}
+		return ret.toString();
+	}
+	
+	public static String addToExpanded(String expand, String idCurrent) {
+		StringBuffer ret = new StringBuffer(expand);
+		if(expand.length() > 0){
+			ret.append(",");
+		}
+		ret.append(idCurrent);
+		return ret.toString();
+	}
+	
+	public static boolean expandContains(String expand, String idCurrent) {
+		boolean ret = false;
+		String[] st = expand.split(",");
+		for (int i=0; i<st.length; i++){
+			String id = st[i];
+			if(id.equals(idCurrent)){
+				ret = true;
+			}
+		}
+		return ret;
+	}
+	
+	//Utility methods for habitats-eunis-tree END
 }

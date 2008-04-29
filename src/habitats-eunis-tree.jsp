@@ -25,6 +25,7 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
+    <link rel="StyleSheet" href="css/tree.css" type="text/css" />
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("eunis_habitat_type_hierarchical_view")%>
@@ -66,7 +67,7 @@
                   </h1>
                   <br/>
             <%
-              String idCode = Utilities.formatString( request.getParameter( "idCode" ), "" );
+              String expand = Utilities.formatString( request.getParameter( "expand" ), "" );
 
               String SQL_DRV = application.getInitParameter("JDBC_DRV");
               String SQL_URL = application.getInitParameter("JDBC_URL");
@@ -107,13 +108,217 @@
                 ps = con.prepareStatement( strSQL );
                 rs = ps.executeQuery();
             %>
-                <ul>
+                <ul class="tree">
             <%
                 while(rs.next())
                 {
             %>
                   <li>
-                    <a title="<%=rs.getString("SCIENTIFIC_NAME")%>" href="habitats-eunis-tree.jsp?idCode=<%=rs.getString("EUNIS_HABITAT_CODE")%>"><%=rs.getString("EUNIS_HABITAT_CODE")%> : <%=rs.getString("SCIENTIFIC_NAME")%></a><br/>
+                  	<% if(Utilities.expandContains(expand,rs.getString("EUNIS_HABITAT_CODE"))){ %>
+                      <a title="Hide sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
+                    <% } else { %>
+                      <a title="Show sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.addToExpanded(expand,rs.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
+                    <% } %>
+                    <a title="<%=rs.getString("SCIENTIFIC_NAME")%>" href="habitats-eunis-tree.jsp?expand=<%=Utilities.addToExpanded(expand,rs.getString("EUNIS_HABITAT_CODE"))%>"><%=rs.getString("EUNIS_HABITAT_CODE")%> : <%=rs.getString("SCIENTIFIC_NAME")%></a><br/>
+                    <%
+                    	if(expand.length()>0 && Utilities.expandContains(expand,rs.getString("EUNIS_HABITAT_CODE"))) {
+		                  strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
+		                  strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+		                  strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+rs.getString("EUNIS_HABITAT_CODE").substring(0,1)+"%'";
+		                  strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)=2";
+		                  strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
+		
+		                  ps2 = con.prepareStatement( strSQL );
+		                  rs2 = ps2.executeQuery();
+		
+		            %>
+		                  <ul class="tree">
+		            <%
+		                  while(rs2.next())
+		                  {
+		                    if(sqlc.EunisHabitatHasChilds(rs2.getString("EUNIS_HABITAT_CODE"))) {
+		            %>
+		                    <li>
+		                    <% if(Utilities.expandContains(expand,rs2.getString("EUNIS_HABITAT_CODE"))){ %>
+		                      <a title="Hide sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs2.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
+		                    <% } else { %>
+		                      <a title="Show sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.addToExpanded(expand,rs2.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
+		                    <% } %>
+		                      <a title="<%=rs2.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs2.getString("ID_HABITAT")%>"><%=rs2.getString("EUNIS_HABITAT_CODE")%> : <%=rs2.getString("SCIENTIFIC_NAME")%></a><br/>
+		                    </li>
+		            <%
+		                    } else {
+		            %>
+		                    <li>
+		                      <img src="images/img_bullet.gif" alt="<%=rs2.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs2.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs2.getString("ID_HABITAT")%>"><%=rs2.getString("EUNIS_HABITAT_CODE")%> : <%=rs2.getString("SCIENTIFIC_NAME")%></a><br/>
+		                    </li>
+		            <%
+		                    }
+		
+		                     if(expand.length()>0 && Utilities.expandContains(expand,rs2.getString("EUNIS_HABITAT_CODE"))) {
+		                       strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
+		                       strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+		                       strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+rs2.getString("EUNIS_HABITAT_CODE").substring(0,2)+"%'";
+		                       strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)=4";
+		                       strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
+		
+		                       ps4 = con.prepareStatement( strSQL );
+		                       rs4 = ps4.executeQuery();
+		
+		            %>
+		                       <ul class="tree">
+		            <%
+		                       while(rs4.next())
+		                       {
+		                         if(sqlc.EunisHabitatHasChilds(rs4.getString("EUNIS_HABITAT_CODE"))) {
+		            %>
+		                         <li>
+		                         	<% if(Utilities.expandContains(expand,rs4.getString("EUNIS_HABITAT_CODE"))){ %>
+				                      <a title="Hide sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs4.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
+				                    <% } else { %>
+				                      <a title="Show sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.addToExpanded(expand,rs4.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
+				                    <% } %>
+		                            <a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs4.getString("ID_HABITAT")%>"><%=rs4.getString("EUNIS_HABITAT_CODE")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a>
+		                         </li>
+		            <%
+		                         } else {
+		            %>
+		                         <li>
+		                           <img src="images/img_bullet.gif" alt="<%=rs4.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs4.getString("ID_HABITAT")%>"><%=rs4.getString("EUNIS_HABITAT_CODE")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a>
+		                         </li>
+		            <%
+		                         }
+		
+		                         if(expand.length()>0 && Utilities.expandContains(expand,rs4.getString("EUNIS_HABITAT_CODE"))) {
+		                           strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
+		                           strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+		                           strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+rs4.getString("EUNIS_HABITAT_CODE").substring(0,4)+"%'";
+		                           strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)=5";
+		                           strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
+		
+		                           ps5 = con.prepareStatement( strSQL );
+		                           rs5 = ps5.executeQuery();
+		
+		            %>
+		                           <ul class="tree">
+		            <%
+		                           while(rs5.next())
+		                           {
+		                             if(sqlc.EunisHabitatHasChilds(rs5.getString("EUNIS_HABITAT_CODE"))) {
+		            %>				
+		                            <li>
+		                            	<% if(Utilities.expandContains(expand,rs5.getString("EUNIS_HABITAT_CODE"))){ %>
+					                      <a title="Hide sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs5.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
+					                    <% } else { %>
+					                      <a title="Show sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.addToExpanded(expand,rs5.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
+					                    <% } %>
+		                              	<a title="<%=rs5.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs5.getString("ID_HABITAT")%>"><%=rs5.getString("EUNIS_HABITAT_CODE")%> : <%=rs5.getString("SCIENTIFIC_NAME")%></a>
+		                            </li>
+		            <%
+		                             } else {
+		            %>
+		                            <li>
+		                              <img src="images/img_bullet.gif" alt="<%=rs5.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs5.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs5.getString("ID_HABITAT")%>"><%=rs5.getString("EUNIS_HABITAT_CODE")%> : <%=rs5.getString("SCIENTIFIC_NAME")%></a>
+		                            </li>
+		            <%
+		                             }
+		                             if(expand.length()>0 && Utilities.expandContains(expand,rs5.getString("EUNIS_HABITAT_CODE"))) {
+		                               strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
+		                               strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+		                               strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+rs5.getString("EUNIS_HABITAT_CODE").substring(0,5)+"%'";
+		                               strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)=6";
+		                               strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
+		
+		                               ps6 = con.prepareStatement( strSQL );
+		                               rs6 = ps6.executeQuery();
+		
+		            %>
+		                               <ul class="tree">
+		            <%
+		                               while(rs6.next())
+		                               {
+		                                 if(sqlc.EunisHabitatHasChilds(rs6.getString("EUNIS_HABITAT_CODE"))) {
+		            %>
+		                                 <li>
+		                                 	<% if(Utilities.expandContains(expand,rs6.getString("EUNIS_HABITAT_CODE"))){ %>
+						                      <a title="Hide sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs6.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
+						                    <% } else { %>
+						                      <a title="Show sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.addToExpanded(expand,rs6.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
+						                    <% } %>
+											<a title="<%=rs6.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs6.getString("ID_HABITAT")%>"><%=rs6.getString("EUNIS_HABITAT_CODE")%> : <%=rs6.getString("SCIENTIFIC_NAME")%></a>
+		                                 </li>
+		            <%
+		                                 } else {
+		            %>
+		                                 <li>
+		                                   <img src="images/img_bullet.gif" alt="<%=rs6.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs6.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs6.getString("ID_HABITAT")%>"><%=rs6.getString("EUNIS_HABITAT_CODE")%> : <%=rs6.getString("SCIENTIFIC_NAME")%></a>
+		                                 </li>
+		            <%
+		                                 }
+		                                 if(expand.length()>0 && Utilities.expandContains(expand,rs6.getString("EUNIS_HABITAT_CODE"))) {
+		                                   strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
+		                                   strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+		                                   strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+rs6.getString("EUNIS_HABITAT_CODE").substring(0,6)+"%'";
+		                                   strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)=7";
+		                                   strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
+		
+		                                   ps7 = con.prepareStatement( strSQL );
+		                                   rs7 = ps7.executeQuery();
+		
+		            %>
+		                                   <ul class="tree">
+		            <%
+		                                   while(rs7.next())
+		                                   {
+		            %>
+		                                     <li>
+		                                       <img src="images/img_bullet.gif" alt="<%=rs7.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs7.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs7.getString("ID_HABITAT")%>"><%=rs7.getString("EUNIS_HABITAT_CODE")%> : <%=rs7.getString("SCIENTIFIC_NAME")%></a><br/>
+		                                     </li>
+		            <%
+		                                   }
+		
+		            %>
+		                                   </ul>
+		            <%
+		                                   rs7.close();
+		                                   ps7.close();
+		                                 }
+		
+		                               }
+		            %>
+		                               </ul>
+		            <%
+		
+		                               rs6.close();
+		                               ps6.close();
+		                             }
+		                           }
+		
+		            %>
+		                           </ul>
+		            <%
+		                           rs5.close();
+		                           ps5.close();
+		                         }
+		
+		                       }
+		
+		            %>
+		                       </ul>
+		            <%
+		                       rs4.close();
+		                       ps4.close();
+		                     }
+		                  }
+		
+		            %>
+		                  </ul>
+		            <%
+		                  rs2.close();
+		                  ps2.close();
+		
+		                }
+                    %>
                   </li>
             <%
                 }
@@ -127,184 +332,6 @@
                 out.println("<br/><br/>");
 
                 //we begin to display the tree
-
-                if(idCode.length()>0) {
-                  strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
-                  strSQL = strSQL + " FROM CHM62EDT_HABITAT";
-                  strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+idCode.substring(0,1)+"%'";
-                  strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)=2";
-                  strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
-
-                  ps2 = con.prepareStatement( strSQL );
-                  rs2 = ps2.executeQuery();
-
-            %>
-                  <ul>
-            <%
-                  while(rs2.next())
-                  {
-                    if(sqlc.EunisHabitatHasChilds(rs2.getString("EUNIS_HABITAT_CODE"))) {
-            %>
-                    <li>
-                      <a title="<%=rs2.getString("SCIENTIFIC_NAME")%>" href="habitats-eunis-tree.jsp?idCode=<%=rs2.getString("EUNIS_HABITAT_CODE")%>"><%=rs2.getString("EUNIS_HABITAT_CODE")%> : <%=rs2.getString("SCIENTIFIC_NAME")%></a><br/>
-                    </li>
-            <%
-                    } else {
-            %>
-                    <li>
-                      <a title="<%=rs2.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs2.getString("ID_HABITAT")%>"><%=rs2.getString("EUNIS_HABITAT_CODE")%> : <%=rs2.getString("SCIENTIFIC_NAME")%></a><br/>
-                    </li>
-            <%
-                    }
-
-                     if(idCode.length()>=2 && idCode.indexOf(rs2.getString("EUNIS_HABITAT_CODE"))>=0) {
-                       strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
-                       strSQL = strSQL + " FROM CHM62EDT_HABITAT";
-                       strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+idCode.substring(0,2)+"%'";
-                       strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)=4";
-                       strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
-
-                       ps4 = con.prepareStatement( strSQL );
-                       rs4 = ps4.executeQuery();
-
-            %>
-                       <ul>
-            <%
-                       while(rs4.next())
-                       {
-                         if(sqlc.EunisHabitatHasChilds(rs4.getString("EUNIS_HABITAT_CODE"))) {
-            %>
-                         <li>
-                           <a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats-eunis-tree.jsp?idCode=<%=rs4.getString("EUNIS_HABITAT_CODE")%>"><%=rs4.getString("EUNIS_HABITAT_CODE")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a><br/>
-                         </li>
-            <%
-                         } else {
-            %>
-                         <li>
-                           <a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs4.getString("ID_HABITAT")%>"><%=rs4.getString("EUNIS_HABITAT_CODE")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a><br/>
-                         </li>
-            <%
-                         }
-
-                         if(idCode.length()>=4 && idCode.indexOf(rs4.getString("EUNIS_HABITAT_CODE"))>=0) {
-                           strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
-                           strSQL = strSQL + " FROM CHM62EDT_HABITAT";
-                           strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+idCode.substring(0,4)+"%'";
-                           strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)=5";
-                           strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
-
-                           ps5 = con.prepareStatement( strSQL );
-                           rs5 = ps5.executeQuery();
-
-            %>
-                           <ul>
-            <%
-                           while(rs5.next())
-                           {
-                             if(sqlc.EunisHabitatHasChilds(rs5.getString("EUNIS_HABITAT_CODE"))) {
-            %>
-                            <li>
-                              <a title="<%=rs5.getString("SCIENTIFIC_NAME")%>" href="habitats-eunis-tree.jsp?idCode=<%=rs5.getString("EUNIS_HABITAT_CODE")%>"><%=rs5.getString("EUNIS_HABITAT_CODE")%> : <%=rs5.getString("SCIENTIFIC_NAME")%></a><br/>
-                            </li>
-            <%
-                             } else {
-            %>
-                            <li>
-                              <a title="<%=rs5.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs5.getString("ID_HABITAT")%>"><%=rs5.getString("EUNIS_HABITAT_CODE")%> : <%=rs5.getString("SCIENTIFIC_NAME")%></a><br/>
-                            </li>
-            <%
-                             }
-                             if(idCode.length()>=5 && idCode.indexOf(rs5.getString("EUNIS_HABITAT_CODE"))>=0) {
-                               strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
-                               strSQL = strSQL + " FROM CHM62EDT_HABITAT";
-                               strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+idCode.substring(0,5)+"%'";
-                               strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)=6";
-                               strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
-
-                               ps6 = con.prepareStatement( strSQL );
-                               rs6 = ps6.executeQuery();
-
-            %>
-                               <ul>
-            <%
-                               while(rs6.next())
-                               {
-                                 if(sqlc.EunisHabitatHasChilds(rs6.getString("EUNIS_HABITAT_CODE"))) {
-            %>
-                                 <li>
-                                   <a title="<%=rs6.getString("SCIENTIFIC_NAME")%>" href="habitats-eunis-tree.jsp?idCode=<%=rs6.getString("EUNIS_HABITAT_CODE")%>"><%=rs6.getString("EUNIS_HABITAT_CODE")%> : <%=rs6.getString("SCIENTIFIC_NAME")%></a><br/>
-                                 </li>
-            <%
-                                 } else {
-            %>
-                                 <li>
-                                   <a title="<%=rs6.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs6.getString("ID_HABITAT")%>"><%=rs6.getString("EUNIS_HABITAT_CODE")%> : <%=rs6.getString("SCIENTIFIC_NAME")%></a><br/>
-                                 </li>
-            <%
-                                 }
-                                 if(idCode.length()>=6 && idCode.indexOf(rs5.getString("EUNIS_HABITAT_CODE"))>=0) {
-                                   strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
-                                   strSQL = strSQL + " FROM CHM62EDT_HABITAT";
-                                   strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+idCode.substring(0,6)+"%'";
-                                   strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)=7";
-                                   strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
-
-                                   ps7 = con.prepareStatement( strSQL );
-                                   rs7 = ps7.executeQuery();
-
-            %>
-                                   <ul>
-            <%
-                                   while(rs7.next())
-                                   {
-            %>
-                                     <li>
-                                       <a title="<%=rs7.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs7.getString("ID_HABITAT")%>"><%=rs7.getString("EUNIS_HABITAT_CODE")%> : <%=rs7.getString("SCIENTIFIC_NAME")%></a><br/>
-                                     </li>
-            <%
-                                   }
-
-            %>
-                                   </ul>
-            <%
-                                   rs7.close();
-                                   ps7.close();
-                                 }
-
-                               }
-            %>
-                               </ul>
-            <%
-
-                               rs6.close();
-                               ps6.close();
-                             }
-                           }
-
-            %>
-                           </ul>
-            <%
-                           rs5.close();
-                           ps5.close();
-                         }
-
-                       }
-
-            %>
-                       </ul>
-            <%
-                       rs4.close();
-                       ps4.close();
-                     }
-                  }
-
-            %>
-                  </ul>
-            <%
-                  rs2.close();
-                  ps2.close();
-
-                }
 
                 con.close();
               }

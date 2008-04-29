@@ -18,3 +18,10 @@
 	width: 19px;
 	height: 16px;
 }
+
+ul.tree {
+	margin: 1em 0;
+	list-style-image: none;
+	list-style: none;
+	padding-left: 2em;
+}

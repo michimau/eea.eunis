@@ -1,77 +1,36 @@
 <%--
   - Author(s)   : The EUNIS Database Team.
   - Date        :
-  - Copyright   : (c) 2002-2005 EEA - European Environment Agency.
-  - Description : Display tree of the Annex I habitats.
+  - Copyright   : (c) 2002-2006 EEA - European Environment Agency.
+  - Description : Annex I habitat types tree
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-  request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");  
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement, ro.finsiel.eunis.jrfTables.Chm62edtHabitatPersist" %>
-<%@ page import="java.util.Iterator" %>
-<jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<%@ page import="ro.finsiel.eunis.WebContentManagement"%>
+<%@ page import="ro.finsiel.eunis.search.Utilities"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.sql.PreparedStatement"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page import="java.sql.DriverManager"%>
+<%@ page import="ro.finsiel.eunis.utilities.SQLUtilities"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+<%
+  WebContentManagement cm = SessionManager.getWebContent();
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,habitats_annex1_tree_location";
+%>
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-<head>
-  <jsp:include page="header-page.jsp" />
-  <jsp:useBean id="tree1" scope="session" class="ro.finsiel.eunis.search.habitats.HabitatAnnex1Tree" />
-  <jsp:useBean id="treeBean" class="ro.finsiel.eunis.formBeans.HabitatAnnex1TreeBean" scope="request">
-    <jsp:setProperty name="treeBean" property="*" />
-  </jsp:useBean>
-  <%
-    // Request parameters
-    String habCode2000, habID;
-    habCode2000 = treeBean.getHabCode2000();
-    habID = treeBean.getHabID();
-    int level = (null == request.getParameter("level")) ? 2 : Integer.parseInt(request.getParameter("level"));
-    String eeaHome = application.getInitParameter( "EEA_HOME" );
-    String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,habitats_annex1_tree_location";
-  %>
-  <link rel="StyleSheet" href="css/tree.css" type="text/css" />
-  <script language="JavaScript" type="text/javascript" src="script/tree.js"></script>
-  <script language="JavaScript" type="text/javascript">
-  //<![CDATA[
-  function MM_jumpMenu(targ,selObj,restore){ //v3.0
-    eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
-    if (restore) selObj.selectedIndex=0;
-  }
-
-  var Tree2 = new Array;
-  // nodeId | parentNodeId | nodeName | nodeUrl | hasChild | isLastSibling | childId,childiD ...
-  <%
-        // Set the tree string for habitat with CODE_2000 = habCode2000, and display it
-        if (habCode2000 != null && habID == null)
-        {
-          tree1.maxlevel=4;
-          tree1.getTree("Tree2",2,habCode2000);
-      %>
-          <%=tree1.tree.toString()%>
-          var level1 = "<%=tree1.level1%>";
-      <%
-        }
-        // Tree string is already set, so it is displayed; for habID != null is dispayed the short factshhet for the habitat
-        if (habCode2000==null && habID != null )
-        {
-      %>
-        <%=tree1.tree.toString()%>
-        var level1 = "<%=tree1.level1%>";
-      <%
-        }
-      %>
-    //]]>
-  </script>
-  <%
-    WebContentManagement cm = SessionManager.getWebContent();
-  %>
-  <title>
-    <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("habitats_annex1-browser_title")%>
-  </title>
-  <%
-    int mx = 0;
-  %>
-</head>
+  <head>
+    <jsp:include page="header-page.jsp" />
+    <link rel="StyleSheet" href="css/tree.css" type="text/css" />
+    <title>
+      <%=application.getInitParameter("PAGE_TITLE")%>
+      <%=cm.cms("habitats_annex1-browser_title")%>
+    </title>
+  </head>
   <body>
     <div id="visual-portal-wrapper">
       <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
@@ -106,137 +65,197 @@
                 <h1>
                   <%=cm.cmsPhrase("Habitat Annex I Directive hierarchical view: (higher levels are for grouping only)")%>
                 </h1>
-                <noscript>
-                  <br />
-                  <br />
-                  <span style="color: red;">
-                    <%=cm.cms("no_javascript_alternative_page")%>:
-                    <a href="habitats-code-browser.jsp"><%=cm.cmsPhrase("EUNIS habitat type hierarchical view")%></a>.
-                  </span>
-                </noscript>
-                <table summary="layout" width="100%" border="0">
-                <tr>
-                <td>
-                  <%
-                    // The level list is displayed only when habCode2000 != null
-                    if (request.getParameter("habCode2000") != null)
-                    {
-                      // Set the max level of three for this habitat(with CODE_2000 = habCode2000)
-                      mx = tree1.maxLevel(request.getParameter("habCode2000").substring(0, 1));
-                  %>
-                  <form name="setings" action="habitats-annex1-browser.jsp" method="post">
-                    <label for="depth" class="noshow"><%=cm.cms("expand_up_to")%>:</label>
-                    <select title="<%=cm.cms("expand_up_to")%>" name="depth" id="depth" onchange="MM_jumpMenu('parent',this,0)">
-                      <option value="habitats-annex1-browser.jsp" <%=(request.getParameter("level")==null ? "selected=\"selected\"" : "")%>>
-                        <%=cm.cms("please_select_a_level")%>
-                      </option>
-                      <%
-                      // Display the levels
-                      for (int ii = 2; ii <= mx; ii++) {
-                      %>
-                        <option value="habitats-annex1-browser.jsp?level=<%=ii%>&amp;habCode2000=<%=habCode2000%>" <%=(request.getParameter("level") != null && request.getParameter("level").equals((new Integer(ii)).toString())) ? "selected=\"selected\"" : ""%>><%=cm.cms("level")%>&nbsp;<%=ii%></option>
-                      <%
-                      }
-                      %>
-                    </select>
-                    <%=cm.cmsLabel("expand_up_to")%>
-                    <%=cm.cmsInput("please_select_a_level")%>
-                    <%=cm.cmsInput("level")%>
-                  </form>
-                  <%
-                    }
-                  %>
-                  <table border="0" summary="layout" width="100%" title="<%=cm.cms("habitat_types_on_root_level")%>">
-                    <%
-                      // If the short factsheet of habitat is not open
-                      if (habID == null) {
-                    %>
-                    <tr>
-                      <td>
-                        <%
-                          // List annex1 habitats from first level
-                          Iterator it = tree1.getIterator();
-                          if (it.hasNext()) {
-                          %>
-                            <ul>
-                          <%
-                            while (it.hasNext()) {
-                              Chm62edtHabitatPersist h = (Chm62edtHabitatPersist) it.next();
-                        %>
-                             <li>
-                               <a title="<%=cm.cms("expand_data_for_habitat_type")%>" href="habitats-annex1-browser.jsp?habCode2000=<%=h.getCode2000()%>">
-                               <%=h.getCode2000()%> : <%=h.getScientificName()%>
-                               </a>
-                               <%=cm.cmsTitle("expand_data_for_habitat_type")%>
-                             </li>
-                        <%
-                          }
-                          %>
-                            </ul>
-                          <%
+                <br/>
+          <%
+            String expand = Utilities.formatString( request.getParameter( "expand" ), "" );
 
-                        } else {
-                        %>
-                        <!--
-                        <LI><a href="habitats-annex1-browser.jsp?habCode2000=1000">1. Opean sea and tidal areas</a>
-                        <LI><a href="habitats-annex1-browser.jsp?habCode2000=1000">1. Opean sea and tidal areas</a>
-                        <LI><a href="habitats-annex1-browser.jsp?habCode2000=2000">2. Coastal sand dunes and inland dunes</a>
-                        <LI><a href="habitats-annex1-browser.jsp?habCode2000=3000">3. Freshwater habitat type</a>
-                        <LI><a href="habitats-annex1-browser.jsp?habCode2000=4000">4. Temperate heath and scrub</a>
-                        <LI><a href="habitats-annex1-browser.jsp?habCode2000=5000">5. Sclerophyllous scrub (Matoral)</a>
-                        <LI><a href="habitats-annex1-browser.jsp?habCode2000=6000">6. natural and semi-natural grassland formations</a>
-                        <LI><a href="habitats-annex1-browser.jsp?habCode2000=7000">7. Raised bogs and mires and fens</a>
-                        <LI><a href="habitats-annex1-browser.jsp?habCode2000=8000">8. Rocky habitat type and caves</a>
-                        <LI><a href="habitats-annex1-browser.jsp?habCode2000=9000">9. Forests</a>
-                        -->
-                        <%
-                          }
-                        %>
-                      </td>
-                    </tr>
-                    <%
-                      }
-                      // If tree string was displayed, it must be displayed nice
-                      if (habCode2000 != null || habID != null) {
-                    %>
-                    <tr>
-                      <td>
-                        <div id="tree">
-                          <script type="text/javascript" language="javascript">
-                          //<![CDATA[
-                          createTree(<%=level%>, level1, Tree2, 0<%=(habID==null)?",0":","+treeBean.getOpenNode()%>, 'habitats-annex1-browser.jsp');
-                                    //]]>
-                          </script>
-                        </div>
-                      </td>
-                    </tr>
-                    <%
-                      }
-                      // If habID != null, the short factsheet of the habitat with ID_HABITAT = habID is displyed
-                      if (habID != null) {
-                    %>
-                    <tr>
-                      <td>
-                        <br />
-                        <br />
-                        <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habID%>"><%=cm.cmsPhrase("Open habitat type factsheet")%></a>
-                        <br />
-                        <jsp:include page="habitats-factsheet-general.jsp">
-                          <jsp:param name="idHabitat" value="<%=habID%>" />
-                        </jsp:include>
-                      </td>
-                    </tr>
-                    <%
-                      }
-                    %>
-                  </table>
-                </td>
-                </tr>
-                </table>
-                  <%=cm.cmsMsg("habitats_annex1-browser_title")%>
-                  <%=cm.br()%>
-                  <%=cm.cmsMsg("habitat_types_on_root_level")%>
-                  <%=cm.br()%>
+            String SQL_DRV = application.getInitParameter("JDBC_DRV");
+            String SQL_URL = application.getInitParameter("JDBC_URL");
+            String SQL_USR = application.getInitParameter("JDBC_USR");
+            String SQL_PWD = application.getInitParameter("JDBC_PWD");
+
+            SQLUtilities sqlc = new SQLUtilities();
+            sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+
+            String strSQL = "";
+
+            Connection con = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            PreparedStatement ps2 = null;
+            ResultSet rs2 = null;
+            PreparedStatement ps4 = null;
+            ResultSet rs4 = null;
+            PreparedStatement ps5 = null;
+            ResultSet rs5 = null;
+
+            try
+            {
+              Class.forName( SQL_DRV );
+              con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+
+              //we display root nodes
+              strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, CODE_2000";
+              strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+              strSQL = strSQL + " WHERE LENGTH(CODE_2000)=1";
+              strSQL = strSQL + " AND CODE_2000<>'-'";
+              strSQL = strSQL + " ORDER BY CODE_2000 ASC";
+
+              ps = con.prepareStatement( strSQL );
+              rs = ps.executeQuery();
+
+          %>
+              <ul class="tree">
+          <%
+              while(rs.next())
+              {
+          %>
+                <li>
+                  <% if(Utilities.expandContains(expand,rs.getString("CODE_2000").substring(0,1))){ %>
+	                <a title="Hide sublevel habitat types" id="level_<%=rs.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs.getString("CODE_2000").substring(0,1))%>#level_<%=rs.getString("CODE_2000")%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
+                  <% } else { %>
+                    <a title="Show sublevel habitat types" id="level_<%=rs.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs.getString("CODE_2000").substring(0,1))%>#level_<%=rs.getString("CODE_2000")%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
+                  <% } %>
+                  <a title="<%=rs.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs.getString("ID_HABITAT")%>"><%=rs.getString("CODE_2000")%> : <%=rs.getString("SCIENTIFIC_NAME")%></a><br/>
+                  <%
+                  //we begin to display the tree
+	              if(expand.length()>0 && Utilities.expandContains(expand,rs.getString("CODE_2000").substring(0,1))) {
+	                strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, CODE_2000";
+	                strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+	                strSQL = strSQL + " WHERE CODE_2000 LIKE '"+rs.getString("CODE_2000").substring(0,1)+"%00'";
+	                strSQL = strSQL + " ORDER BY CODE_2000 ASC";
+	
+	                ps2 = con.prepareStatement( strSQL );
+	                rs2 = ps2.executeQuery();
+	
+	%>
+	                <ul class="tree">
+	<%
+	                while(rs2.next())
+	                {
+	%>
+	                  <li>
+	<%
+	                  if(sqlc.Annex1HabitatHasChilds(rs2.getString("CODE_2000").substring(0,rs2.getString("CODE_2000").length()-2),rs2.getString("CODE_2000"))) {
+	%>					<% if(Utilities.expandContains(expand,rs2.getString("CODE_2000").substring(0,2))){ %>
+		                  <a title="Hide sublevel habitat types" id="level_<%=rs2.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs2.getString("CODE_2000").substring(0,2))%>#level_<%=rs2.getString("CODE_2000")%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
+	                    <% } else { %>
+	                      <a title="Show sublevel habitat types" id="level_<%=rs2.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs2.getString("CODE_2000").substring(0,2))%>#level_<%=rs2.getString("CODE_2000")%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
+	                    <% } %>
+	                    <a title="<%=rs2.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs2.getString("ID_HABITAT")%>"><%=rs2.getString("CODE_2000")%> : <%=rs2.getString("SCIENTIFIC_NAME")%></a><br/>
+	<%
+	                  } else {
+	%>
+	                    <img src="images/img_bullet.gif" alt="<%=rs2.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs2.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs2.getString("ID_HABITAT")%>"><%=rs2.getString("CODE_2000")%> : <%=rs2.getString("SCIENTIFIC_NAME")%></a><br/>
+	<%
+	                  }
+	
+	                   if(expand.length()>0 && Utilities.expandContains(expand,rs2.getString("CODE_2000").substring(0,2))) {
+	                     strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, CODE_2000";
+	                     strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+	                     strSQL = strSQL + " WHERE CODE_2000 LIKE '"+rs2.getString("CODE_2000").substring(0,2)+"%0'";
+	                     strSQL = strSQL + " AND CODE_2000 NOT LIKE '"+rs2.getString("CODE_2000").substring(0,2)+"%00'";
+	                     strSQL = strSQL + " ORDER BY CODE_2000 ASC";
+	
+	                     ps4 = con.prepareStatement( strSQL );
+	                     rs4 = ps4.executeQuery();
+	
+	%>
+	                     <ul class="tree">
+	<%
+	                     while(rs4.next())
+	                     {
+	%>
+	                       <li>
+	<%
+	                       if(sqlc.Annex1HabitatHasChilds(rs4.getString("CODE_2000").substring(0,rs4.getString("CODE_2000").length()-1),rs4.getString("CODE_2000"))) {
+	%>						  <% if(Utilities.expandContains(expand,rs4.getString("CODE_2000").substring(0,4))){ %>
+			                    <a title="Hide sublevel habitat types" id="level_<%=rs4.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs4.getString("CODE_2000").substring(0,4))%>#level_<%=rs4.getString("CODE_2000")%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
+		                      <% } else { %>
+		                        <a title="Show sublevel habitat types" id="level_<%=rs4.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs4.getString("CODE_2000").substring(0,4))%>#level_<%=rs4.getString("CODE_2000")%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
+		                      <% } %>
+	                          <a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs4.getString("ID_HABITAT")%>"><%=rs4.getString("CODE_2000")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a><br/>
+	<%
+	                       } else {
+	%>
+	                         <img src="images/img_bullet.gif" alt="<%=rs4.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs4.getString("ID_HABITAT")%>"><%=rs4.getString("CODE_2000")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a><br/>
+	<%
+	                       }
+	                       if(expand.length()>0 && Utilities.expandContains(expand,rs4.getString("CODE_2000").substring(0,4))) {
+	                         strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, CODE_2000";
+	                         strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+	                         strSQL = strSQL + " WHERE CODE_2000 LIKE '"+rs4.getString("CODE_2000").substring(0,4)+"%'";
+	                         strSQL = strSQL + " AND CODE_2000 NOT LIKE '"+rs4.getString("CODE_2000").substring(0,4)+"%0'";
+	                         strSQL = strSQL + " ORDER BY CODE_2000 ASC";
+	
+	                         ps5 = con.prepareStatement( strSQL );
+	                         rs5 = ps5.executeQuery();
+	
+	%>
+	                         <ul class="tree">
+	<%
+	                         while(rs5.next())
+	                         {
+	%>
+	                           <li>
+	                             <img src="images/img_bullet.gif" alt="<%=rs4.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs5.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs5.getString("ID_HABITAT")%>"><%=rs5.getString("CODE_2000")%> : <%=rs5.getString("SCIENTIFIC_NAME")%></a><br/>
+	                           </li>
+	<%
+	                         }
+	%>
+	                         </ul>
+	<%
+	
+	                         rs5.close();
+	                         ps5.close();
+	                       }
+	%>
+	                       </li>
+	<%
+	                     }
+	%>
+	                     </ul>
+	<%
+	
+	                     rs4.close();
+	                     ps4.close();
+	                   }
+	%>
+	              </li>
+	<%
+	                }
+	%>
+	            </ul>
+	<%
+	
+	                rs2.close();
+	                ps2.close();
+	              }
+                  %>
+                </li>
+          <%
+              }
+          %>
+              </ul>
+          <%
+
+              rs.close();
+              ps.close();
+
+              out.println("<br/><br/>");
+
+              
+
+              con.close();
+            }
+            catch ( Exception e )
+            {
+              e.printStackTrace();
+              return;
+            }
+
+%>
+                <br/>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

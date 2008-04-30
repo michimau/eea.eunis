@@ -115,9 +115,9 @@
             %>
                   <li>
                   	<% if(Utilities.expandContains(expand,rs.getString("EUNIS_HABITAT_CODE"))){ %>
-                      <a title="Hide sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
+                      <a title="Hide sublevel habitat types" id="level_<%=rs.getString("EUNIS_HABITAT_CODE")%>" href="habitats-eunis-tree.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
                     <% } else { %>
-                      <a title="Show sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.addToExpanded(expand,rs.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
+                      <a title="Show sublevel habitat types" id="level_<%=rs.getString("EUNIS_HABITAT_CODE")%>" href="habitats-eunis-tree.jsp?expand=<%=Utilities.addToExpanded(expand,rs.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
                     <% } %>
                     <a title="<%=rs.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs.getString("ID_HABITAT")%>"><%=rs.getString("EUNIS_HABITAT_CODE")%> : <%=rs.getString("SCIENTIFIC_NAME")%></a><br/>
                     <%
@@ -140,9 +140,9 @@
 		            %>
 		                    <li>
 		                    <% if(Utilities.expandContains(expand,rs2.getString("EUNIS_HABITAT_CODE"))){ %>
-		                      <a title="Hide sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs2.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
+		                      <a title="Hide sublevel habitat types" id="level_<%=rs2.getString("EUNIS_HABITAT_CODE")%>" href="habitats-eunis-tree.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs2.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs2.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
 		                    <% } else { %>
-		                      <a title="Show sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.addToExpanded(expand,rs2.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
+		                      <a title="Show sublevel habitat types" id="level_<%=rs2.getString("EUNIS_HABITAT_CODE")%>" href="habitats-eunis-tree.jsp?expand=<%=Utilities.addToExpanded(expand,rs2.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs2.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
 		                    <% } %>
 		                      <a title="<%=rs2.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs2.getString("ID_HABITAT")%>"><%=rs2.getString("EUNIS_HABITAT_CODE")%> : <%=rs2.getString("SCIENTIFIC_NAME")%></a><br/>
 		                    
@@ -174,9 +174,9 @@
 		            %>
 		                         <li>
 		                         	<% if(Utilities.expandContains(expand,rs4.getString("EUNIS_HABITAT_CODE"))){ %>
-				                      <a title="Hide sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs4.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
+				                      <a title="Hide sublevel habitat types" id="level_<%=rs4.getString("EUNIS_HABITAT_CODE")%>" href="habitats-eunis-tree.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs4.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs4.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
 				                    <% } else { %>
-				                      <a title="Show sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.addToExpanded(expand,rs4.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
+				                      <a title="Show sublevel habitat types" id="level_<%=rs4.getString("EUNIS_HABITAT_CODE")%>" href="habitats-eunis-tree.jsp?expand=<%=Utilities.addToExpanded(expand,rs4.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs4.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
 				                    <% } %>
 		                            <a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs4.getString("ID_HABITAT")%>"><%=rs4.getString("EUNIS_HABITAT_CODE")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a>
 		                         
@@ -208,9 +208,9 @@
 		            %>				
 		                            <li>
 		                            	<% if(Utilities.expandContains(expand,rs5.getString("EUNIS_HABITAT_CODE"))){ %>
-					                      <a title="Hide sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs5.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
+					                      <a title="Hide sublevel habitat types" id="level_<%=rs5.getString("EUNIS_HABITAT_CODE")%>" href="habitats-eunis-tree.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs5.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs5.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
 					                    <% } else { %>
-					                      <a title="Show sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.addToExpanded(expand,rs5.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
+					                      <a title="Show sublevel habitat types" id="level_<%=rs5.getString("EUNIS_HABITAT_CODE")%>" href="habitats-eunis-tree.jsp?expand=<%=Utilities.addToExpanded(expand,rs5.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs5.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
 					                    <% } %>
 		                              	<a title="<%=rs5.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs5.getString("ID_HABITAT")%>"><%=rs5.getString("EUNIS_HABITAT_CODE")%> : <%=rs5.getString("SCIENTIFIC_NAME")%></a>
 		                            
@@ -241,9 +241,9 @@
 		            %>
 		                                 <li>
 		                                 	<% if(Utilities.expandContains(expand,rs6.getString("EUNIS_HABITAT_CODE"))){ %>
-						                      <a title="Hide sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs6.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
+						                      <a title="Hide sublevel habitat types" id="level_<%=rs6.getString("EUNIS_HABITAT_CODE")%>" href="habitats-eunis-tree.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs6.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs6.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_minus.gif" alt="Hide sublevel habitat types"/></a>
 						                    <% } else { %>
-						                      <a title="Show sublevel habitat types" href="habitats-eunis-tree.jsp?expand=<%=Utilities.addToExpanded(expand,rs6.getString("EUNIS_HABITAT_CODE"))%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
+						                      <a title="Show sublevel habitat types" id="level_<%=rs6.getString("EUNIS_HABITAT_CODE")%>" href="habitats-eunis-tree.jsp?expand=<%=Utilities.addToExpanded(expand,rs6.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs6.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_plus.gif" alt="Show sublevel habitat types"/></a>
 						                    <% } %>
 											<a title="<%=rs6.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs6.getString("ID_HABITAT")%>"><%=rs6.getString("EUNIS_HABITAT_CODE")%> : <%=rs6.getString("SCIENTIFIC_NAME")%></a>
 		                                 

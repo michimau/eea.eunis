@@ -111,7 +111,7 @@
                   <br />
                   <span style="color: red;">
                     <%=cm.cms("no_javascript_alternative_page")%>:
-                    <a href="habitats-eunis-tree.jsp"><%=cm.cmsPhrase("EUNIS habitat type hierarchical view")%></a>.
+                    <a href="habitats-code-browser.jsp"><%=cm.cmsPhrase("EUNIS habitat type hierarchical view")%></a>.
                   </span>
                 </noscript>
                 <table summary="layout" width="100%" border="0">

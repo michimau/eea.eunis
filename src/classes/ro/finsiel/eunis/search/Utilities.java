@@ -2841,7 +2841,8 @@ public final class Utilities {
 				while(rs.next()){
 					ret += "<li>"+newLine;
 					boolean hasChilds = !sqlc.ExecuteSQL("SELECT COUNT(*) FROM CHM62EDT_TAXONOMY WHERE ID_TAXONOMY_PARENT="+rs.getString("ID")).equalsIgnoreCase("0");
-    				if(hasChilds){
+					boolean hasChildSpecies = !sqlc.ExecuteSQL("SELECT COUNT(*) FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+rs.getString("ID")).equalsIgnoreCase("0");
+    				if(hasChilds || hasChildSpecies){
 						if(Utilities.expandContains(expand,rs.getString("ID"))){
 							ret += "<a title=\"Hide sublevel species\" id=\"level_"+rs.getString("ID")+"\" href=\"species-taxonomic-tree.jsp?expand="+removeSpecieFromExpanded(expand,rs.getString("ID"))+"#level_"+rs.getString("ID")+"\"><img src=\"images/img_minus.gif\" alt=\"Hide sublevel species\"/></a>"+newLine;
                   		} else {
@@ -2850,20 +2851,17 @@ public final class Utilities {
           				ret += "&nbsp;"+rs.getString("TITLE")+newLine;
     				} else {
     					ret += "<img src=\"images/img_bullet.gif\" alt=\""+rs.getString("TITLE")+"\"/>&nbsp;"+rs.getString("TITLE")+newLine;
-    					ArrayList SpeciesList = sqlc.SQL2Array("SELECT CONCAT('<a href=\"species-factsheet.jsp?idSpecies=',ID_SPECIES,'&amp;idSpeciesLink=',ID_SPECIES_LINK,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+id);
+    				}
+    				if(hasChildSpecies && (expand.length()>0 && Utilities.expandContains(expand,rs.getString("ID")))){
+    					ArrayList SpeciesList = sqlc.SQL2Array("SELECT CONCAT('<a href=\"species-factsheet.jsp?idSpecies=',ID_SPECIES,'&amp;idSpeciesLink=',ID_SPECIES_LINK,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+rs.getString("ID"));
     					if(SpeciesList.size()>0) {
+    						ret += "<ul class=\"tree\">"+newLine;
                   			for(int i=0;i<SpeciesList.size();i++){
+                  				ret += "<li>"+newLine;
 								ret += "<img src=\"images/img_bullet.gif\">&nbsp;"+SpeciesList.get(i)+newLine;
+								ret += "</li>"+newLine;
                   			}
-                		} else {
-                  			SpeciesList=sqlc.SQL2Array("SELECT CONCAT('<a href=\"species-factsheet.jsp?idSpecies=',ID_SPECIES,'&amp;idSpeciesLink=',ID_SPECIES_LINK,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+rs.getString("ID"));
-                  			if(SpeciesList.size()>0) {
-                  				ret += "<ul class=\"tree\">"+newLine;
-                    			for(int i=0;i<SpeciesList.size();i++) {
-									ret += "<li>"+SpeciesList.get(i)+"</li>"+newLine;
-                    			}
-                    			ret += "</ul>"+newLine;
-                  			}
+                  			ret += "</ul>"+newLine;
                 		}
     				}
     				if(expand.length()>0 && Utilities.expandContains(expand,rs.getString("ID"))) {

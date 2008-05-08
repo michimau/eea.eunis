@@ -14,6 +14,11 @@ import ro.finsiel.eunis.utilities.TableColumns;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -2744,7 +2749,7 @@ public final class Utilities {
     return ret;
   }
   
-  	//Utility methods for habitats-eunis-tree START
+  	//Utility methods for habitats-eunis-browser, species-taxonomic-browser.jsp, habitats-annex1-browser.jsp START
   
   	public static String removeFromExpanded(String expand, String idCurrent) {
 		StringBuffer ret = new StringBuffer();
@@ -2752,6 +2757,23 @@ public final class Utilities {
 		for (int i=0; i<st.length; i++){
 			String id = st[i];
 			if(!id.startsWith(idCurrent)){
+				ret.append(id);
+				ret.append(",");
+			}
+		}
+		if(ret.length()>0){
+			int index = ret.lastIndexOf(",");
+			ret.deleteCharAt(index);
+		}
+		return ret.toString();
+	}
+
+  	public static String removeSpecieFromExpanded(String expand, String idCurrent) {
+		StringBuffer ret = new StringBuffer();
+		String[] st = expand.split(",");
+		for (int i=0; i<st.length; i++){
+			String id = st[i];
+			if(!id.equals(idCurrent)){
 				ret.append(id);
 				ret.append(",");
 			}
@@ -2784,5 +2806,87 @@ public final class Utilities {
 		return ret;
 	}
 	
-	//Utility methods for habitats-eunis-tree END
+	//Method that generates tree for species-taxonomic-browser.jsp
+	public static String generateSpeciesTaxonomicTree(String id, String expand, boolean isRoot, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+		
+		String ret = "";
+		String strSQL = "";
+		String newLine = "\n";
+		
+		
+		SQLUtilities sqlc = new SQLUtilities();
+        sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+	
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+	
+		try {
+			Class.forName( SQL_DRV );
+			con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+	
+			//we display root nodes
+			strSQL = "SELECT CONCAT('(',LEVEL,')',' ',NAME) AS TITLE, ID_TAXONOMY AS ID";
+			strSQL = strSQL + " FROM CHM62EDT_TAXONOMY";
+			if(isRoot){
+				strSQL = strSQL + " WHERE ID_TAXONOMY=46 OR ID_TAXONOMY=47 OR ID_TAXONOMY=48 OR ID_TAXONOMY=3001";
+			} else {
+				strSQL = strSQL + " WHERE ID_TAXONOMY_PARENT="+id+" AND ID_TAXONOMY != "+id;
+			}
+	
+			ps = con.prepareStatement( strSQL );
+			rs = ps.executeQuery();
+			
+				ret += "<ul class=\"tree\">"+newLine;
+				while(rs.next()){
+					ret += "<li>"+newLine;
+					boolean hasChilds = !sqlc.ExecuteSQL("SELECT COUNT(*) FROM CHM62EDT_TAXONOMY WHERE ID_TAXONOMY_PARENT="+rs.getString("ID")).equalsIgnoreCase("0");
+    				if(hasChilds){
+						if(Utilities.expandContains(expand,rs.getString("ID"))){
+							ret += "<a title=\"Hide sublevel species\" id=\"level_"+rs.getString("ID")+"\" href=\"species-taxonomic-tree.jsp?expand="+removeSpecieFromExpanded(expand,rs.getString("ID"))+"#level_"+rs.getString("ID")+"\"><img src=\"images/img_minus.gif\" alt=\"Hide sublevel species\"/></a>"+newLine;
+                  		} else {
+                  			ret += "<a title=\"Show sublevel species\" id=\"level_"+rs.getString("ID")+"\" href=\"species-taxonomic-tree.jsp?expand="+addToExpanded(expand,rs.getString("ID"))+"#level_"+rs.getString("ID")+"\"><img src=\"images/img_plus.gif\" alt=\"Show sublevel species\"/></a>"+newLine;
+                  		}
+          				ret += "&nbsp;"+rs.getString("TITLE")+newLine;
+    				} else {
+    					ret += "<img src=\"images/img_bullet.gif\" alt=\""+rs.getString("TITLE")+"\"/>&nbsp;"+rs.getString("TITLE")+newLine;
+    					ArrayList SpeciesList = sqlc.SQL2Array("SELECT CONCAT('<a href=\"species-factsheet.jsp?idSpecies=',ID_SPECIES,'&amp;idSpeciesLink=',ID_SPECIES_LINK,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+id);
+    					if(SpeciesList.size()>0) {
+                  			for(int i=0;i<SpeciesList.size();i++){
+								ret += "<img src=\"images/img_bullet.gif\">&nbsp;"+SpeciesList.get(i)+newLine;
+                  			}
+                		} else {
+                  			SpeciesList=sqlc.SQL2Array("SELECT CONCAT('<a href=\"species-factsheet.jsp?idSpecies=',ID_SPECIES,'&amp;idSpeciesLink=',ID_SPECIES_LINK,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+rs.getString("ID"));
+                  			if(SpeciesList.size()>0) {
+                  				ret += "<ul class=\"tree\">"+newLine;
+                    			for(int i=0;i<SpeciesList.size();i++) {
+									ret += "<li>"+SpeciesList.get(i)+"</li>"+newLine;
+                    			}
+                    			ret += "</ul>"+newLine;
+                  			}
+                		}
+    				}
+    				if(expand.length()>0 && Utilities.expandContains(expand,rs.getString("ID"))) {
+    					
+	          			ret += generateSpeciesTaxonomicTree(rs.getString("ID"), expand, false, SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+          			}
+
+          			ret += "</li>"+newLine;
+
+      			}
+
+				ret += "</ul>"+newLine;
+
+      		rs.close();
+	        ps.close();
+	
+			con.close();
+			
+		} catch ( Exception e ) {
+			e.printStackTrace();
+		}
+		return ret;
+	}
+	
+	//Utility methods for habitats-eunis-browser, species-taxonomic-browser.jsp, habitats-annex1-browser.jsp END
 }

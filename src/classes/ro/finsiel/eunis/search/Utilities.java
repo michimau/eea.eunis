@@ -2807,24 +2807,17 @@ public final class Utilities {
 	}
 	
 	//Method that generates tree for species-taxonomic-browser.jsp
-	public static String generateSpeciesTaxonomicTree(String id, String expand, boolean isRoot, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
+	public static String generateSpeciesTaxonomicTree(String id, String expand, boolean isRoot, Connection con, SQLUtilities sqlc) {
 		
 		String ret = "";
 		String strSQL = "";
 		String newLine = "\n";
 		
-		
-		SQLUtilities sqlc = new SQLUtilities();
-        sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-	
-		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 	
 		try {
-			Class.forName( SQL_DRV );
-			con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
-	
+			
 			//we display root nodes
 			strSQL = "SELECT CONCAT('(',LEVEL,')',' ',NAME) AS TITLE, ID_TAXONOMY AS ID";
 			strSQL = strSQL + " FROM CHM62EDT_TAXONOMY";
@@ -2840,10 +2833,13 @@ public final class Utilities {
 				ret += "<ul class=\"tree\">"+newLine;
 				while(rs.next()){
 					ret += "<li>"+newLine;
-					boolean hasChilds = !sqlc.ExecuteSQL("SELECT COUNT(*) FROM CHM62EDT_TAXONOMY WHERE ID_TAXONOMY_PARENT="+rs.getString("ID")).equalsIgnoreCase("0");
-					boolean hasChildSpecies = !sqlc.ExecuteSQL("SELECT COUNT(*) FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+rs.getString("ID")).equalsIgnoreCase("0");
+					boolean hasChilds = sqlc.SpeciesHasChildTaxonomies(rs.getString("ID"));
+					boolean hasChildSpecies = false;
+					if(!hasChilds){
+						hasChildSpecies = sqlc.SpeciesHasChildSpecies(rs.getString("ID"));
+					}
     				if(hasChilds || hasChildSpecies){
-						if(Utilities.expandContains(expand,rs.getString("ID"))){
+						if(expandContains(expand,rs.getString("ID"))){
 							ret += "<a title=\"Hide sublevel species\" id=\"level_"+rs.getString("ID")+"\" href=\"species-taxonomic-tree.jsp?expand="+removeSpecieFromExpanded(expand,rs.getString("ID"))+"#level_"+rs.getString("ID")+"\"><img src=\"images/img_minus.gif\" alt=\"Hide sublevel species\"/></a>"+newLine;
                   		} else {
                   			ret += "<a title=\"Show sublevel species\" id=\"level_"+rs.getString("ID")+"\" href=\"species-taxonomic-tree.jsp?expand="+addToExpanded(expand,rs.getString("ID"))+"#level_"+rs.getString("ID")+"\"><img src=\"images/img_plus.gif\" alt=\"Show sublevel species\"/></a>"+newLine;
@@ -2852,7 +2848,7 @@ public final class Utilities {
     				} else {
     					ret += "<img src=\"images/img_bullet.gif\" alt=\""+rs.getString("TITLE")+"\"/>&nbsp;"+rs.getString("TITLE")+newLine;
     				}
-    				if(hasChildSpecies && (expand.length()>0 && Utilities.expandContains(expand,rs.getString("ID")))){
+    				if(expand.length()>0 && expandContains(expand,rs.getString("ID"))){
     					ArrayList SpeciesList = sqlc.SQL2Array("SELECT CONCAT('<a href=\"species-factsheet.jsp?idSpecies=',ID_SPECIES,'&amp;idSpeciesLink=',ID_SPECIES_LINK,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+rs.getString("ID"));
     					if(SpeciesList.size()>0) {
     						ret += "<ul class=\"tree\">"+newLine;
@@ -2864,9 +2860,9 @@ public final class Utilities {
                   			ret += "</ul>"+newLine;
                 		}
     				}
-    				if(expand.length()>0 && Utilities.expandContains(expand,rs.getString("ID"))) {
+    				if(expand.length()>0 && expandContains(expand,rs.getString("ID"))) {
     					
-	          			ret += generateSpeciesTaxonomicTree(rs.getString("ID"), expand, false, SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+	          			ret += generateSpeciesTaxonomicTree(rs.getString("ID"), expand, false, con, sqlc);
           			}
 
           			ret += "</li>"+newLine;
@@ -2877,8 +2873,6 @@ public final class Utilities {
 
       		rs.close();
 	        ps.close();
-	
-			con.close();
 			
 		} catch ( Exception e ) {
 			e.printStackTrace();

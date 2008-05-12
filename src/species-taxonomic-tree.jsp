@@ -83,9 +83,29 @@
 	            String SQL_URL = application.getInitParameter("JDBC_URL");
 	            String SQL_USR = application.getInitParameter("JDBC_USR");
 	            String SQL_PWD = application.getInitParameter("JDBC_PWD");
+	            
+	            SQLUtilities sqlc = new SQLUtilities();
+        		sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+        		
+        		Connection con = null;
+	            
+	            try
+            	{
+	            	Class.forName( SQL_DRV );
+              		con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
 	            %>
 	
-	            <%=Utilities.generateSpeciesTaxonomicTree("null", expand, true, SQL_DRV, SQL_URL, SQL_USR, SQL_PWD)%>
+	            	<%=Utilities.generateSpeciesTaxonomicTree("", expand, true, con, sqlc)%>
+	            
+	            <%
+	            	con.close();	
+            	}
+            	catch ( Exception e )
+            	{
+              		e.printStackTrace();
+              		return;
+            	}
+	            %>
 
 <!-- END MAIN CONTENT -->
               </div>

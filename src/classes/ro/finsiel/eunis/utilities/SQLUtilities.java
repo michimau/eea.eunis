@@ -740,5 +740,72 @@ public class SQLUtilities {
 
     return result;
   }
+  
+  public boolean SpeciesHasChildTaxonomies(String idCode) {
+	    boolean result = false;
+
+	    Connection con = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+
+	    String strSQL = "SELECT ID_TAXONOMY";
+	    strSQL = strSQL + " FROM CHM62EDT_TAXONOMY";
+	    strSQL = strSQL + " WHERE ID_TAXONOMY_PARENT = '"+idCode+"'";
+	    strSQL = strSQL + " AND ID_TAXONOMY<>'"+idCode+"'";
+
+	    try
+	    {
+	      Class.forName( SQL_DRV );
+	      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+
+	      ps = con.prepareStatement( strSQL );
+	      rs = ps.executeQuery();
+
+	      if ( rs.next() )
+	      {
+	        result = true;
+	      }
+	      con.close();
+	    }
+	    catch ( Exception ex )
+	    {
+	      ex.printStackTrace();
+	    }
+
+	    return result;
+  }
+  
+  public boolean SpeciesHasChildSpecies(String idCode) {
+	    boolean result = false;
+
+	    Connection con = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+
+	    String strSQL = "SELECT ID_SPECIES";
+	    strSQL = strSQL + " FROM CHM62EDT_SPECIES";
+	    strSQL = strSQL + " WHERE ID_TAXONOMY = '"+idCode+"'";
+
+	    try
+	    {
+	      Class.forName( SQL_DRV );
+	      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+
+	      ps = con.prepareStatement( strSQL );
+	      rs = ps.executeQuery();
+
+	      if ( rs.next() )
+	      {
+	        result = true;
+	      }
+	      con.close();
+	    }
+	    catch ( Exception ex )
+	    {
+	      ex.printStackTrace();
+	    }
+
+	    return result;
+  }
 
 }

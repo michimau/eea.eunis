@@ -2807,7 +2807,7 @@ public final class Utilities {
 	}
 	
 	//Method that generates tree for species-taxonomic-browser.jsp
-	public static String generateSpeciesTaxonomicTree(String id, String expand, boolean isRoot, Connection con, SQLUtilities sqlc) {
+	public static String generateSpeciesTaxonomicTree(String id, String expand, boolean isRoot, Connection con, SQLUtilities sqlc, WebContentManagement cm) {
 		
 		String ret = "";
 		String strSQL = "";
@@ -2840,9 +2840,9 @@ public final class Utilities {
 					}
     				if(hasChilds || hasChildSpecies){
 						if(expandContains(expand,rs.getString("ID"))){
-							ret += "<a title=\"Hide sublevel species\" id=\"level_"+rs.getString("ID")+"\" href=\"species-taxonomic-tree.jsp?expand="+removeSpecieFromExpanded(expand,rs.getString("ID"))+"#level_"+rs.getString("ID")+"\"><img src=\"images/img_minus.gif\" alt=\"Hide sublevel species\"/></a>"+newLine;
+							ret += "<a title=\""+cm.cms("Hide sublevels")+"\" id=\"level_"+rs.getString("ID")+"\" href=\"species-taxonomic-browser.jsp?expand="+removeSpecieFromExpanded(expand,rs.getString("ID"))+"#level_"+rs.getString("ID")+"\"><img src=\"images/img_minus.gif\" alt=\""+cm.cms("Hide sublevels")+"\"/></a>"+newLine;
                   		} else {
-                  			ret += "<a title=\"Show sublevel species\" id=\"level_"+rs.getString("ID")+"\" href=\"species-taxonomic-tree.jsp?expand="+addToExpanded(expand,rs.getString("ID"))+"#level_"+rs.getString("ID")+"\"><img src=\"images/img_plus.gif\" alt=\"Show sublevel species\"/></a>"+newLine;
+                  			ret += "<a title=\""+cm.cms("Show sublevels")+"\" id=\"level_"+rs.getString("ID")+"\" href=\"species-taxonomic-browser.jsp?expand="+addToExpanded(expand,rs.getString("ID"))+"#level_"+rs.getString("ID")+"\"><img src=\"images/img_plus.gif\" alt=\""+cm.cms("Show sublevels")+"\"/></a>"+newLine;
                   		}
           				ret += "&nbsp;"+rs.getString("TITLE")+newLine;
     				} else {
@@ -2862,7 +2862,7 @@ public final class Utilities {
     				}
     				if(expand.length()>0 && expandContains(expand,rs.getString("ID"))) {
     					
-	          			ret += generateSpeciesTaxonomicTree(rs.getString("ID"), expand, false, con, sqlc);
+	          			ret += generateSpeciesTaxonomicTree(rs.getString("ID"), expand, false, con, sqlc, cm);
           			}
 
           			ret += "</li>"+newLine;

@@ -103,6 +103,9 @@
 
               ps = con.prepareStatement( strSQL );
               rs = ps.executeQuery();
+              
+              String hide = cm.cms("Hide sublevel habitat types");
+              String show = cm.cms("Show sublevel habitat types");
 
           %>
               <ul class="tree">
@@ -112,9 +115,9 @@
           %>
                 <li>
                   <% if(Utilities.expandContains(expand,rs.getString("CODE_2000").substring(0,1))){ %>
-	                <a title="<%=cm.cms("Hide sublevel habitat types")%>" id="level_<%=rs.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs.getString("CODE_2000").substring(0,1))%>#level_<%=rs.getString("CODE_2000")%>"><img src="images/img_minus.gif" alt="<%=cm.cms("Hide sublevel habitat types")%>"/></a>
+	                <a title="<%=hide%>" id="level_<%=rs.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs.getString("CODE_2000").substring(0,1))%>#level_<%=rs.getString("CODE_2000")%>"><img src="images/img_minus.gif" alt="<%=hide%>"/></a>
                   <% } else { %>
-                    <a title="<%=cm.cms("Show sublevel habitat types")%>" id="level_<%=rs.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs.getString("CODE_2000").substring(0,1))%>#level_<%=rs.getString("CODE_2000")%>"><img src="images/img_plus.gif" alt="<%=cm.cms("Show sublevel habitat types")%>"/></a>
+                    <a title="<%=show%>" id="level_<%=rs.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs.getString("CODE_2000").substring(0,1))%>#level_<%=rs.getString("CODE_2000")%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
                   <% } %>
                   <a title="<%=rs.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs.getString("ID_HABITAT")%>"><%=rs.getString("CODE_2000")%> : <%=rs.getString("SCIENTIFIC_NAME")%></a><br/>
                   <%
@@ -138,9 +141,9 @@
 	<%
 	                  if(sqlc.Annex1HabitatHasChilds(rs2.getString("CODE_2000").substring(0,rs2.getString("CODE_2000").length()-2),rs2.getString("CODE_2000"))) {
 	%>					<% if(Utilities.expandContains(expand,rs2.getString("CODE_2000").substring(0,2))){ %>
-		                  <a title="<%=cm.cms("Hide sublevel habitat types")%>" id="level_<%=rs2.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs2.getString("CODE_2000").substring(0,2))%>#level_<%=rs2.getString("CODE_2000")%>"><img src="images/img_minus.gif" alt="<%=cm.cms("Hide sublevel habitat types")%>"/></a>
+		                  <a title="<%=hide%>" id="level_<%=rs2.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs2.getString("CODE_2000").substring(0,2))%>#level_<%=rs2.getString("CODE_2000")%>"><img src="images/img_minus.gif" alt="<%=hide%>"/></a>
 	                    <% } else { %>
-	                      <a title="<%=cm.cms("Show sublevel habitat types")%>" id="level_<%=rs2.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs2.getString("CODE_2000").substring(0,2))%>#level_<%=rs2.getString("CODE_2000")%>"><img src="images/img_plus.gif" alt="<%=cm.cms("Show sublevel habitat types")%>"/></a>
+	                      <a title="<%=show%>" id="level_<%=rs2.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs2.getString("CODE_2000").substring(0,2))%>#level_<%=rs2.getString("CODE_2000")%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
 	                    <% } %>
 	                    <a title="<%=rs2.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs2.getString("ID_HABITAT")%>"><%=rs2.getString("CODE_2000")%> : <%=rs2.getString("SCIENTIFIC_NAME")%></a><br/>
 	<%
@@ -170,9 +173,9 @@
 	<%
 	                       if(sqlc.Annex1HabitatHasChilds(rs4.getString("CODE_2000").substring(0,rs4.getString("CODE_2000").length()-1),rs4.getString("CODE_2000"))) {
 	%>						  <% if(Utilities.expandContains(expand,rs4.getString("CODE_2000").substring(0,4))){ %>
-			                    <a title="<%=cm.cms("Hide sublevel habitat types")%>" id="level_<%=rs4.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs4.getString("CODE_2000").substring(0,4))%>#level_<%=rs4.getString("CODE_2000")%>"><img src="images/img_minus.gif" alt="<%=cm.cms("Hide sublevel habitat types")%>"/></a>
+			                    <a title="<%=hide%>" id="level_<%=rs4.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs4.getString("CODE_2000").substring(0,4))%>#level_<%=rs4.getString("CODE_2000")%>"><img src="images/img_minus.gif" alt="<%=hide%>"/></a>
 		                      <% } else { %>
-		                        <a title="<%=cm.cms("Show sublevel habitat types")%>" id="level_<%=rs4.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs4.getString("CODE_2000").substring(0,4))%>#level_<%=rs4.getString("CODE_2000")%>"><img src="images/img_plus.gif" alt="<%=cm.cms("Show sublevel habitat types")%>"/></a>
+		                        <a title="<%=show%>" id="level_<%=rs4.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs4.getString("CODE_2000").substring(0,4))%>#level_<%=rs4.getString("CODE_2000")%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
 		                      <% } %>
 	                          <a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs4.getString("ID_HABITAT")%>"><%=rs4.getString("CODE_2000")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a><br/>
 	<%

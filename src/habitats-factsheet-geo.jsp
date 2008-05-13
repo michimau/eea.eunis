@@ -28,6 +28,10 @@ WebContentManagement cm = SessionManager.getWebContent();
     map_const = "Standard_b";
     quer = "<%=url2%>"
     shade = 'heat7';
+    
+    function init() {
+	  map_refresh();
+    }
 
     function map_refresh()
     {
@@ -55,7 +59,7 @@ WebContentManagement cm = SessionManager.getWebContent();
       }
       document.eeamap.src = "<%=application.getInitParameter("EEA_MAP_SERVER")%>/getmap.asp?coordsys=LL&size=W345H300&ImageQuality=100&Q=" + quer + "&PredefShade=" + shade + "&maptype=" + map_const
     }
-
+    
     function biog_onclick() {
       map_const = "Biogeographic"
       map_refresh();
@@ -93,12 +97,14 @@ WebContentManagement cm = SessionManager.getWebContent();
       shade = shade_legend;
       map_refresh();
     }
+    
+    window.onload = init;
   //]]>
 </script>
 <table summary="layout" border="0">
   <tr>
     <td valign="middle" align="center" width="345" height="300" rowspan="8">
-      <img alt="<%=cm.cms("habitat_distribution_map")%>" id="eeamap" style="width: 345px; vertical-align:middle;" src="javascript:map_refresh();" border="0" name="eeamap" />
+      <img alt="<%=cm.cms("habitat_distribution_map")%>" id="eeamap" style="width: 345px; vertical-align:middle;" src="" border="0" name="eeamap" />
       <%=cm.cmsTitle("habitat_distribution_map")%>
     </td>
     <td valign="middle" align="center" width="35" colspan="2" height="40">

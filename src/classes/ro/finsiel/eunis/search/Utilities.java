@@ -2829,6 +2829,8 @@ public final class Utilities {
 	
 			ps = con.prepareStatement( strSQL );
 			rs = ps.executeQuery();
+			String hide = cm.cms("Hide sublevels");
+			String show = cm.cms("Show sublevels");
 			
 				ret += "<ul class=\"tree\">"+newLine;
 				while(rs.next()){
@@ -2840,9 +2842,9 @@ public final class Utilities {
 					}
     				if(hasChilds || hasChildSpecies){
 						if(expandContains(expand,rs.getString("ID"))){
-							ret += "<a title=\""+cm.cms("Hide sublevels")+"\" id=\"level_"+rs.getString("ID")+"\" href=\"species-taxonomic-browser.jsp?expand="+removeSpecieFromExpanded(expand,rs.getString("ID"))+"#level_"+rs.getString("ID")+"\"><img src=\"images/img_minus.gif\" alt=\""+cm.cms("Hide sublevels")+"\"/></a>"+newLine;
+							ret += "<a title=\""+hide+"\" id=\"level_"+rs.getString("ID")+"\" href=\"species-taxonomic-browser.jsp?expand="+removeSpecieFromExpanded(expand,rs.getString("ID"))+"#level_"+rs.getString("ID")+"\"><img src=\"images/img_minus.gif\" alt=\""+hide+"\"/></a>"+newLine;
                   		} else {
-                  			ret += "<a title=\""+cm.cms("Show sublevels")+"\" id=\"level_"+rs.getString("ID")+"\" href=\"species-taxonomic-browser.jsp?expand="+addToExpanded(expand,rs.getString("ID"))+"#level_"+rs.getString("ID")+"\"><img src=\"images/img_plus.gif\" alt=\""+cm.cms("Show sublevels")+"\"/></a>"+newLine;
+                  			ret += "<a title=\""+show+"\" id=\"level_"+rs.getString("ID")+"\" href=\"species-taxonomic-browser.jsp?expand="+addToExpanded(expand,rs.getString("ID"))+"#level_"+rs.getString("ID")+"\"><img src=\"images/img_plus.gif\" alt=\""+show+"\"/></a>"+newLine;
                   		}
           				ret += "&nbsp;"+rs.getString("TITLE")+newLine;
     				} else {

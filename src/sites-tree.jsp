@@ -69,11 +69,11 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  <%=cm.cmsPhrase("Sites tree browser")%>
+                  <%=cm.cmsPhrase("Sites browser")%>
                 </h1>
-                <br/>
-                <%=cm.cmsPhrase("Sites groupped by Designations in EUNIS Database")%>
-                <br/>
+                <p class="documentDescription">
+                <%=cm.cmsPhrase("Sites grouped by description")%>
+                </p>
           <%
             String idSource = Utilities.formatString( request.getParameter( "idSource" ), "" );
             String idDesignation = Utilities.formatString( request.getParameter( "idDesignation" ), "" );
@@ -101,7 +101,7 @@
             strSQL = strSQL + " FROM CHM62EDT_DESIGNATIONS, CHM62EDT_COUNTRY";
             strSQL = strSQL + " WHERE CHM62EDT_DESIGNATIONS.ID_GEOSCOPE = CHM62EDT_COUNTRY.ID_GEOSCOPE";
             strSQL = strSQL + " AND LENGTH(DESCRIPTION)>0";
-            strSQL = strSQL + " ORDER BY DESCRIPTION ASC";
+            strSQL = strSQL + " ORDER BY DESCRIPTION ASC, AREA_NAME_EN ASC";
 
             try
             {
@@ -117,11 +117,11 @@
                 {
           %>
                 <li>
-          <%      if(sqlc.DesignationHasSites(rs.getString("ID_DESIGNATION"),rs.getString("ID_GEOSCOPE"))) {
+          <%      if(1 == 0 && sqlc.DesignationHasSites(rs.getString("ID_DESIGNATION"),rs.getString("ID_GEOSCOPE"))) {
           %>
-                  <a title="<%=rs.getString("DESCRIPTION")%>" href="sites-tree.jsp?idDesignation=<%=rs.getString("ID_DESIGNATION")%>&amp;idGeoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=rs.getString("DESCRIPTION")%> (<%=rs.getString("AREA_NAME_EN")%>)</a>
+                  <a href="sites-tree.jsp?idDesignation=<%=rs.getString("ID_DESIGNATION")%>&amp;idGeoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=rs.getString("DESCRIPTION")%> (<%=rs.getString("AREA_NAME_EN")%>)</a>
                   &nbsp;
-                  [<a title="<%=rs.getString("DESCRIPTION")%>" href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&amp;geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=cm.cmsPhrase("Open designation factsheet")%></a>]
+                  [<a href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&amp;geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=cm.cmsPhrase("Open designation factsheet")%></a>]
           <%
                   //now check if we expand source databases
 
@@ -189,9 +189,7 @@
                   }
                 } else {
           %>
-                <%=rs.getString("DESCRIPTION")%>
-                &nbsp;
-                [<a title="<%=rs.getString("DESCRIPTION")%>" href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&amp;geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=cm.cmsPhrase("Open designation factsheet")%></a>]
+                <a href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&amp;geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=rs.getString("DESCRIPTION")%></a> <%=rs.getString("AREA_NAME_EN")%> (<%=rs.getString("ID_DESIGNATION")%>)
 <%
                 }
 %>

@@ -181,6 +181,9 @@
           <div id="portal-column-content">
             <div id="content">
               <div class="documentContent" id="region-content">
+                <%
+                  String downloadLink = "javascript:openTSVDownload('reports/sites/tsv-sites-size.jsp?" + formBean.toURLParam(reportFields) + "')";
+                %>
               	<jsp:include page="header-dynamic.jsp">
                         <jsp:param name="location" value="<%=location%>"/>
                         <jsp:param name="mapLink" value="show"/>
@@ -209,9 +212,6 @@
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
-                <%
-                  String downloadLink = "javascript:openTSVDownload('reports/sites/tsv-sites-size.jsp?" + formBean.toURLParam(reportFields) + "')";
-                %>
                       <h1>
                         <%=cm.cmsPhrase("Sites size")%>
                       </h1>

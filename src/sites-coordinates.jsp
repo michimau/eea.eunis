@@ -99,6 +99,7 @@
                   <label for="longMax" class="noshow"><%=cm.cms("sites_coordinates_maxlongitude")%></label>
                   <input id="longMax" name="longMax" type="text" title="<%=cm.cms("sites_coordinates_maxlongitude")%>" />&nbsp;
                   <script type="text/javascript" language="Javascript">
+      //<![CDATA[
                     IE  = (document.all && true);
                     IE5 = (document.getElementById && IE);
                     if (IE5)
@@ -107,6 +108,7 @@
                       document.write('<img src="images/mini/globe.gif" alt="Open world map in a popup window" title="Open world map" width="16" height="16" border="0" align="middle" />');
                       document.write('</a>');
                     }
+        //]]>
                   </script>
                   <!--<a href="javascript:chooseCoordinates('world');"><img src="images/mini/globe.gif" alt="Open world map.<%=Accesibility.getText( "generic.popup" )%>" title="Open world map.<%=Accesibility.getText( "generic.popup" )%>" width="16" height="16" border="0" align="middle" /></a>-->
                   &nbsp;
@@ -130,6 +132,7 @@
                   <%=cm.cmsTitle("sites_coordinates_maxlatitude")%>
                   &nbsp;
                   <script type="text/javascript" language="Javascript">
+      //<![CDATA[
                     IE  = (document.all && true);
                     IE5 = (document.getElementById && IE);
                     if (IE5)
@@ -138,6 +141,7 @@
                       document.write('<img src="images/mini/europe.gif" alt="Open Europe map in a popup window" title="Open Europe map" width="16" height="16" border="0" align="middle" />');
                       document.write('</a>');
                     }
+        //]]>
                   </script>
                   <!--<a href="javascript:chooseCoordinates('europe');"><img src="images/mini/europe.gif" alt="Open europe map.<%=Accesibility.getText( "generic.popup" )%>" title="Open europe map.<%=Accesibility.getText( "generic.popup" )%>" width="16" height="16" border="0" align="middle" /></a>-->
                   &nbsp;

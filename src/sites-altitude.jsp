@@ -88,38 +88,17 @@
                   <h1>
                     <%=cm.cmsPhrase("Site altitude")%>
                   </h1>
+                  <p>
                   <%=cm.cmsPhrase("Search sites by characterizing altitude<br />(ex.: sites located with a <strong> mean altitude between  10 and 14</strong>)")%>
-                  <br />
-                  <br />
-                  <div class="grey_rectangle">
-                    <strong>
-                      <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed)")%>
-                    </strong>
-                    <br />
-                    <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("source_data_set_1")%>" />
-                    <label for="showSourceDB"><%=cm.cmsPhrase("Source data set &nbsp;")%></label>
-                    <%=cm.cmsTitle("source_data_set_1")%>
+                  </p>
+                  <fieldset class="large">
+                  <legend><%=cm.cmsPhrase("Search in")%></legend>
+                  <jsp:include page="sites-search-common.jsp" />
+                  </fieldset>
 
-                    <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cms("country_1")%>" />
-                    <label for="showCountry"><%=cm.cmsPhrase("Country &nbsp;")%></label>
-                    <%=cm.cmsTitle("country_1")%>
+                  <fieldset class="large">
+                  <legend><%=cm.cmsPhrase("Search what")%></legend>
 
-                    <input id="showName" name="showName" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("site_name_1")%>" />
-                    <label for="showName"><%=cm.cmsPhrase("Site name &nbsp;")%></label>
-                    <%=cm.cmsTitle("site_name_1")%>
-
-                    <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("designation_type_1")%>" />
-                    <label for="showDesignationTypes"><%=cm.cmsPhrase("Designation type &nbsp;")%></label>
-                    <%=cm.cmsTitle("designation_type_1")%>
-
-                    <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("coordinates_1")%>" />
-                    <label for="showCoordinates"><%=cm.cmsPhrase("Coordinates &nbsp;")%></label>
-                    <%=cm.cmsTitle("coordinates_1")%>
-
-                    <input id="showAltitude" name="showAltitude" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_altitude_08")%>" />
-                    <label for="showAltitude"><%=cm.cmsPhrase("Altitude &nbsp;")%></label>
-                    <%=cm.cmsTitle("sites_altitude_08")%>
-                  </div>
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_included")%>
                   <label for="relOp"><%=cm.cmsPhrase("Mean Altitude(m)")%></label>
@@ -402,6 +381,39 @@
                   <input type="hidden" name="relationOp" value="<%=valAltitude%>" />
                   <input type="hidden" name="relationOp2" value="<%=valAltitude2%>" />
                   <input type="hidden" name="relationOp3" value="<%=valAltitude3%>" />
+                  </fieldset>
+
+                  <fieldset class="large">
+                    <legend><%=cm.cmsPhrase("Output fields")%></legend>
+                    <strong>
+                      <%=cm.cmsPhrase("Search shall provide the following information (checked fields will be displayed)")%>
+                    </strong>
+                    <br />
+                    <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("source_data_set_1")%>" />
+                    <label for="showSourceDB"><%=cm.cmsPhrase("Source data set &nbsp;")%></label>
+                    <%=cm.cmsTitle("source_data_set_1")%>
+
+                    <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cms("country_1")%>" />
+                    <label for="showCountry"><%=cm.cmsPhrase("Country &nbsp;")%></label>
+                    <%=cm.cmsTitle("country_1")%>
+
+                    <input id="showName" name="showName" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("site_name_1")%>" />
+                    <label for="showName"><%=cm.cmsPhrase("Site name &nbsp;")%></label>
+                    <%=cm.cmsTitle("site_name_1")%>
+
+                    <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("designation_type_1")%>" />
+                    <label for="showDesignationTypes"><%=cm.cmsPhrase("Designation type &nbsp;")%></label>
+                    <%=cm.cmsTitle("designation_type_1")%>
+
+                    <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("coordinates_1")%>" />
+                    <label for="showCoordinates"><%=cm.cmsPhrase("Coordinates &nbsp;")%></label>
+                    <%=cm.cmsTitle("coordinates_1")%>
+
+                    <input id="showAltitude" name="showAltitude" type="checkbox" value="true" checked="checked" title="<%=cm.cms("sites_altitude_08")%>" />
+                    <label for="showAltitude"><%=cm.cmsPhrase("Altitude &nbsp;")%></label>
+                    <%=cm.cmsTitle("sites_altitude_08")%>
+                  </fieldset>
+
                   <div class="submit_buttons">
                     <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset")%>" class="standardButton" title="<%=cm.cms("reset_values")%>" />
                     <%=cm.cmsTitle("reset_values")%>
@@ -411,7 +423,6 @@
                     <%=cm.cmsTitle("search")%>
                     <%=cm.cmsInput("search")%>
                   </div>
-                  <jsp:include page="sites-search-common.jsp" />
                </form>
           <%
             // Save search criteria

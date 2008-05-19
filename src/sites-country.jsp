@@ -98,13 +98,37 @@
                   <h1>
                     <%=cm.cmsPhrase("Site country")%>
                   </h1>
-
+                  <p>
                   <%=cm.cmsPhrase("Search sites by geographical location<br />(ex.: Sites located in <strong>Romania</strong>)")%>
-                  <br />
-                  <br />
-                  <div class="grey_rectangle">
+                  </p>
+
+                  <fieldset class="large">
+                  <legend><%=cm.cmsPhrase("Search in")%></legend>
+                  <jsp:include page="sites-search-common.jsp" />
+                  </fieldset>
+
+                  <fieldset class="large">
+                  <legend><%=cm.cmsPhrase("Search what")%></legend>
+                  <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
+                  <%=cm.cmsAlt("field_mandatory")%>
+                  &nbsp;
+                  <label for="country">
+                      <%=cm.cmsPhrase("Country is")%>
+                    &nbsp;
+                  </label>
+                  <input id="country" name="country" type="text" size="30" title="<%=cm.cms("country_is")%>" />
+                  <%=cm.cmsLabel("country_is")%>
+                  <%=cm.cmsTitle("country_is")%>
+                  &nbsp;
+                  <a title="<%=cm.cms("helper")%>" href="javascript:chooseCountry('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" style="vertical-align:middle" /></a>
+                  <%=cm.cmsTitle("helper")%>
+                  <%=cm.cmsAlt("helper")%>
+                  </fieldset>
+
+                  <fieldset class="large">
+                    <legend><%=cm.cmsPhrase("Output fields")%></legend>
                     <strong>
-                      <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed)")%>
+                      <%=cm.cmsPhrase("Search shall provide the following information (checked fields will be displayed)")%>
                     </strong>
                     <br />
                     <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("source_data_set_2")%>" />
@@ -130,21 +154,7 @@
                     <input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("designation_year")%>" />
                     <label for="showDesignationYear"><%=cm.cmsPhrase("Designation year")%></label>
                     <%=cm.cmsTitle("designation_year")%>
-                  </div>
-                  <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
-                  <%=cm.cmsAlt("field_mandatory")%>
-                  &nbsp;
-                  <label for="country">
-                      <%=cm.cmsPhrase("Country is")%>
-                    &nbsp;
-                  </label>
-                  <input id="country" name="country" type="text" size="30" title="<%=cm.cms("country_is")%>" />
-                  <%=cm.cmsLabel("country_is")%>
-                  <%=cm.cmsTitle("country_is")%>
-                  &nbsp;
-                  <a title="<%=cm.cms("helper")%>" href="javascript:chooseCountry('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" style="vertical-align:middle" /></a>
-                  <%=cm.cmsTitle("helper")%>
-                  <%=cm.cmsAlt("helper")%>
+                  </fieldset>
 
                   <div class="submit_buttons">
                     <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset")%>" class="standardButton" title="<%=cm.cms("reset_values")%>" />
@@ -155,7 +165,6 @@
                     <%=cm.cmsTitle("search")%>
                     <%=cm.cmsInput("search")%>
                   </div>
-                  <jsp:include page="sites-search-common.jsp" />
                 </form>
           <%
             // Save search criteria

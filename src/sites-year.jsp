@@ -159,44 +159,17 @@
                   <h1>
                     <%=cm.cmsPhrase("Site designation year")%>
                   </h1>
-                  <br />
+                  <p>
                   <%=cm.cmsPhrase("Search sites by the year of designation<br />(ex. sites with designation year between 1990 and 1995)")%>
-                  <br />
-                  <br />
-                  <div class="grey_rectangle">
-                    <strong>
-                      <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed)")%>
-                    </strong>
-                    <br />
-                    <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("source_data_set")%>" />
-                    <label for="showSourceDB"><%=cm.cmsPhrase("Source data set")%></label>
-                    <%=cm.cmsTitle("source_data_set")%>
+                  </p>
 
-                    <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cms("country")%>" />
-                    <label for="showCountry"><%=cm.cmsPhrase("Country")%></label>
-                    <%=cm.cmsTitle("country")%>
+                  <fieldset class="large">
+                  <legend><%=cm.cmsPhrase("Search in")%></legend>
+                  <jsp:include page="sites-search-common.jsp" />
+                  </fieldset>
 
-                    <input id="showName" name="showName" type="checkbox" value="true" disabled="disabled" checked="checked" title="<%=cm.cms("site_name")%>" />
-                    <label for="showName"><%=cm.cmsPhrase("Site name")%></label>
-                    <%=cm.cmsTitle("site_name")%>
-
-                    <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("designation_type")%>" />
-                    <label for="showDesignationTypes"><%=cm.cmsPhrase("Designation type")%></label>
-                    <%=cm.cmsTitle("designation_type")%>
-
-                    <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("coordinates")%>" />
-                    <label for="showCoordinates"><%=cm.cmsPhrase("Coordinates")%></label>
-                    <%=cm.cmsTitle("coordinates")%>
-
-                    <input id="showSize" name="showSize" type="checkbox" value="true" checked="checked" title="<%=cm.cms("size")%>" />
-                    <label for="showSize"><%=cm.cmsPhrase("Size")%></label>
-                    <%=cm.cmsTitle("size")%>
-
-                    <input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("designation_year")%>" />
-                    <label for="showDesignationYear"><%=cm.cmsPhrase("Designation year")%></label>
-                    <%=cm.cmsTitle("designation_year")%>
-                  </div>
-                  <br />
+                  <fieldset class="large">
+                  <legend><%=cm.cmsPhrase("Search what")%></legend>
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_mandatory")%>
 
@@ -254,8 +227,43 @@
                   <a title="<%=cm.cms("helper")%>" href="javascript:choiceprec('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" width="11" height="18" border="0" style="vertical-align:middle" /></a>
                   <%=cm.cmsTitle("helper")%>
                   <%=cm.cmsAlt("helper")%>
-                  <br />
-                  <br />
+                  </fieldset>
+
+                  <fieldset class="large">
+                    <legend><%=cm.cmsPhrase("Output fields")%></legend>
+                    <strong>
+                      <%=cm.cmsPhrase("Search shall provide the following information (checked fields will be displayed)")%>
+                    </strong>
+                    <br />
+                    <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("source_data_set")%>" />
+                    <label for="showSourceDB"><%=cm.cmsPhrase("Source data set")%></label>
+                    <%=cm.cmsTitle("source_data_set")%>
+
+                    <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cms("country")%>" />
+                    <label for="showCountry"><%=cm.cmsPhrase("Country")%></label>
+                    <%=cm.cmsTitle("country")%>
+
+                    <input id="showName" name="showName" type="checkbox" value="true" disabled="disabled" checked="checked" title="<%=cm.cms("site_name")%>" />
+                    <label for="showName"><%=cm.cmsPhrase("Site name")%></label>
+                    <%=cm.cmsTitle("site_name")%>
+
+                    <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("designation_type")%>" />
+                    <label for="showDesignationTypes"><%=cm.cmsPhrase("Designation type")%></label>
+                    <%=cm.cmsTitle("designation_type")%>
+
+                    <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("coordinates")%>" />
+                    <label for="showCoordinates"><%=cm.cmsPhrase("Coordinates")%></label>
+                    <%=cm.cmsTitle("coordinates")%>
+
+                    <input id="showSize" name="showSize" type="checkbox" value="true" checked="checked" title="<%=cm.cms("size")%>" />
+                    <label for="showSize"><%=cm.cmsPhrase("Size")%></label>
+                    <%=cm.cmsTitle("size")%>
+
+                    <input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("designation_year")%>" />
+                    <label for="showDesignationYear"><%=cm.cmsPhrase("Designation year")%></label>
+                    <%=cm.cmsTitle("designation_year")%>
+                  </fieldset>
+
                   <div class="submit_buttons">
                     <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset")%>" class="standardButton" title="<%=cm.cms("reset_values")%>" />
                     <%=cm.cmsTitle("reset_values")%>
@@ -265,7 +273,6 @@
                     <%=cm.cmsTitle("search")%>
                     <%=cm.cmsInput("search")%>
                   </div>
-                  <jsp:include page="sites-search-common.jsp" />
                 </form>
           <%
             // Save search criteria

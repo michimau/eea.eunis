@@ -158,48 +158,20 @@ function validateForm()
                 <input type="hidden" name="showScientificName" value="true" />
                 <input type="hidden" name="sort" value="<%=SitesSortCriteria.SORT_EUNIS_CODE%>" />
                 <input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
-                <table width="100%" border="0">
-                <tr>
-                  <td>
-                    <table summary="layout" width="100%" border="0">
-                        <tr>
-                          <td>
-                            <h1>
-                              <%=cm.cmsPhrase("Pick sites, show habitat types")%>
-                            </h1>
-                            <%=cm.cmsPhrase("Identify habitats located within sites<br />(ex.: search all habitat types located within site named <strong>AAMSVEEN</strong>)")%>
-                            <br />
-                            <br />
-                            <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
-                              <tr>
-                                <td bgcolor="#EEEEEE">
-                                  <strong>
-                                    <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed), as provided in the original database:")%>
-                                  </strong>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td bgcolor="#EEEEEE" valign="middle">
-                                  <input type="checkbox" name="showCode" id="showCode" value="true" checked="checked" />
-                                  <label for="showCode"><%=cm.cmsPhrase("Habitat type code")%></label>
-                                  &nbsp;
-                                  <input type="checkbox" name="showScientificName" id="showScientificName" value="true" checked="checked" disabled="disabled" />
-                                  <label for="showScientificName"><%=cm.cmsPhrase("Habitat type name")%></label>
-                                  &nbsp;
-                                  <input type="checkbox" name="showScientificName" id="showScientificNameSites" value="true" checked="checked" disabled="disabled" />
-                                  <label for="showScientificName"><%=cm.cmsPhrase("Sites")%></label>
-                                  &nbsp;
-                                  <%--<input type="checkbox" name="showVernacularName" id="showVernacularName" value="true" />--%>
-                                  <%--<label for="showVernacularName"><%=contentManagement.cms("english_name")%></label>--%>
-                                  <!--&nbsp;-->
-                                </td>
-                              </tr>
-                            </table>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div>
+                  <h1>
+                    <%=cm.cmsPhrase("Pick sites, show habitat types")%>
+                  </h1>
+                  <p>
+                  <%=cm.cmsPhrase("Identify habitats located within sites<br />(ex.: search all habitat types located within site named <strong>AAMSVEEN</strong>)")%>
+                  </p>
+                  <fieldset class="large">
+                  <legend><%=cm.cmsPhrase("Search in")%></legend>
+                    <jsp:include page="sites-databases.jsp"/>
+                  </fieldset>
+
+                  <fieldset class="large">
+                  <legend><%=cm.cmsPhrase("Search what")%></legend>
+
                               <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("mandatory_field")%>" src="images/mini/field_mandatory.gif" /><%=cm.cmsTitle("mandatory_field")%>&nbsp;
                               <label for="searchAttribute" class="noshow"><%=cm.cms("criteria")%></label>
                               <select title="<%=cm.cms("criteria")%>" name="searchAttribute" id="searchAttribute">
@@ -227,32 +199,41 @@ function validateForm()
                               <input title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" size="30" name="scientificName" id="scientificName" />
                               <%=cm.cmsTitle("filter_value")%>
                               <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-sites-choice.jsp')"><img title="<%=cm.cms("list_of_values")%>" border="0" alt="List of values" src="images/helper/helper.gif" width="11" height="18" /></a><%=cm.cmsTitle("list_of_values")%>
-                              <br />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td width="40%" align="right">
+                  </fieldset>
+
+                  <fieldset class="large">
+                    <legend><%=cm.cmsPhrase("Output fields")%></legend>
+                                  <strong>
+                                    <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed), as provided in the original database:")%>
+                                  </strong>
+                    <br/>
+                                  <input type="checkbox" name="showCode" id="showCode" value="true" checked="checked" />
+                                  <label for="showCode"><%=cm.cmsPhrase("Habitat type code")%></label>
+                                  &nbsp;
+                                  <input type="checkbox" name="showScientificName" id="showScientificName" value="true" checked="checked" disabled="disabled" />
+                                  <label for="showScientificName"><%=cm.cmsPhrase("Habitat type name")%></label>
+                                  &nbsp;
+                                  <input type="checkbox" name="showScientificName" id="showScientificNameSites" value="true" checked="checked" disabled="disabled" />
+                                  <label for="showScientificName"><%=cm.cmsPhrase("Sites")%></label>
+                                  &nbsp;
+                                  <%--<input type="checkbox" name="showVernacularName" id="showVernacularName" value="true" />--%>
+                                  <%--<label for="showVernacularName"><%=contentManagement.cms("english_name")%></label>--%>
+                                  <!--&nbsp;-->
+                  </fieldset>
+
+                         <div class="submit_buttons"> 
                             <input title="<%=cm.cms("reset")%>" alt="<%=cm.cms("reset")%>" type="reset" value="<%=cm.cms("reset")%>" name="Reset" id="Reset" class="standardButton" />
                             <%=cm.cmsTitle("reset")%>
                             <%=cm.cmsInput("reset")%>
                             <input title="<%=cm.cms("search")%>" alt="<%=cm.cms("search")%>" type="submit" value="<%=cm.cms("search")%>" name="submit2" id="submit2" class="searchButton" />
                             <%=cm.cmsTitle("search")%>
                             <%=cm.cmsInput("search")%>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <jsp:include page="sites-databases.jsp"/>
-                          </td>
-                        </tr>
-                    </table>
-                  </td>
-                </tr>
+                </div>
                 <%
                   // Save search criteria
                   if(SessionManager.isAuthenticated() && SessionManager.isSave_search_criteria_RIGHT()) {
                 %>
+                <table>
                 <tr>
                   <td>
                     &nbsp;
@@ -299,8 +280,8 @@ function validateForm()
                     </jsp:include>
                   </td>
                 </tr>
-                <%}%>
                 </table>
+                <%}%>
                 </form>
                       <%=cm.br()%>
                       <%=cm.cmsMsg("pick_sites_show_habitat_types")%>

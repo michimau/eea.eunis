@@ -219,49 +219,18 @@
                 <h1>
                    <%=cm.cmsPhrase("Pick sites, show species")%>
                 </h1>
-                <form name="criteria" method="get" onsubmit="javascript: return validateForm();" action="species-sites-result.jsp">
-                <table summary="layout" width="100%" border="0">
-                    <tr>
-                      <td colspan="2">
+                <p>
                         <%=cm.cmsPhrase("Please type a few letters from site name.")%>
-                        <br />
-                        <br />
-                        <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#EEEEEE">
-                          <tr>
-                            <td>
-                              <strong>
-                                <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed), as provided in the original database:")%>
-                              </strong>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <input title="<%=cm.cms("group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" />
-                              <label for="checkbox1"><%=cm.cmsPhrase("Group")%></label>
-                              <%=cm.cmsTitle("group")%>
+                </p>
+                <form name="criteria" method="get" onsubmit="javascript: return validateForm();" action="species-sites-result.jsp">
+                  <fieldset class="large">
+                  <legend><%=cm.cmsPhrase("Search in")%></legend>
+                       <jsp:include page="sites-databases.jsp" />
+                  </fieldset>
 
-                              <input title="<%=cm.cms("order_column")%>" id="checkbox2" type="checkbox" name="showOrder" value="true" checked="checked" />
-                              <label for="checkbox2"><%=cm.cmsPhrase("Order")%></label>
-                               <%=cm.cmsTitle("order_column")%>
+                  <fieldset class="large">
+                  <legend><%=cm.cmsPhrase("Search what")%></legend>
 
-                              <input title="<%=cm.cms("family")%>" id="checkbox3" type="checkbox" name="showFamily" value="true" checked="checked" />
-                              <label for="checkbox3"><%=cm.cmsPhrase("Family")%></label>
-                              <%=cm.cmsTitle("family")%>
-
-                              <input title="<%=cm.cms("scientific_name")%>" id="checkbox5" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" />
-                              <label for="checkbox5"><%=cm.cmsPhrase("Species scientific name")%></label>
-                              <%=cm.cmsTitle("scientific_name")%>
-
-                              <input title="<%=cm.cms("sites")%>" id="checkbox4" type="checkbox" name="showSites" value="true" checked="checked" />
-                              <label for="checkbox4"><%=cm.cmsPhrase("Please enter size as a numerical value.")%></label>
-                              <%=cm.cmsTitle("sites")%>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
                         <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" /><%=cm.cmsAlt("field_mandatory")%>&nbsp;
                         <label for="searchAttribute" class="noshow"><%=cm.cms("search_attribute")%></label>
                         <select id="searchAttribute" title="<%=cm.cms("search_attribute")%>" name="searchAttribute" onchange="changeCriteria()">
@@ -288,24 +257,43 @@
                         <%=cm.cmsTitle("filter_value")%>
                         <a title="<%=cm.cms("list_values_link")%>" href="javascript:openHelper('species-sites-choice.jsp')"><img alt="<%=cm.cms("list_values_link")%>" height="18" src="images/helper/helper.gif" width="11" border="0" title="<%=cm.cms("list_values_link")%>" /></a>
                         <%=cm.cmsTitle("list_values_link")%>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="text-align:right">
+                  </fieldset>
+
+                  <fieldset class="large">
+                    <legend><%=cm.cmsPhrase("Output fields")%></legend>
+                    <strong>
+                      <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed), as provided in the original database:")%>
+                    </strong>
+                    <br/>
+                              <input title="<%=cm.cms("group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" />
+                              <label for="checkbox1"><%=cm.cmsPhrase("Group")%></label>
+                              <%=cm.cmsTitle("group")%>
+
+                              <input title="<%=cm.cms("order_column")%>" id="checkbox2" type="checkbox" name="showOrder" value="true" checked="checked" />
+                              <label for="checkbox2"><%=cm.cmsPhrase("Order")%></label>
+                               <%=cm.cmsTitle("order_column")%>
+
+                              <input title="<%=cm.cms("family")%>" id="checkbox3" type="checkbox" name="showFamily" value="true" checked="checked" />
+                              <label for="checkbox3"><%=cm.cmsPhrase("Family")%></label>
+                              <%=cm.cmsTitle("family")%>
+
+                              <input title="<%=cm.cms("scientific_name")%>" id="checkbox5" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" />
+                              <label for="checkbox5"><%=cm.cmsPhrase("Species scientific name")%></label>
+                              <%=cm.cmsTitle("scientific_name")%>
+
+                              <input title="<%=cm.cms("sites")%>" id="checkbox4" type="checkbox" name="showSites" value="true" checked="checked" />
+                              <label for="checkbox4"><%=cm.cmsPhrase("Please enter size as a numerical value.")%></label>
+                              <%=cm.cmsTitle("sites")%>
+                      </fieldset>
+
+                      <div class="submit_buttons">
                         <input id="Reset" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="standardButton" title="<%=cm.cms("reset")%>" />
                         <%=cm.cmsTitle("reset")%>
                         <%=cm.cmsInput("reset")%>
                         <input id="Search" type="submit" value="<%=cm.cms("search")%>" name="submit2" class="searchButton" title="<%=cm.cms("search")%>" />
                         <%=cm.cmsTitle("search")%>
                         <%=cm.cmsInput("search")%>
-                      </td>
-                   </tr>
-                   <tr>
-                     <td>
-                       <jsp:include page="sites-databases.jsp" />
-                     </td>
-                   </tr>
-                </table>
+                      </div>
                 </form>
 
                       <%

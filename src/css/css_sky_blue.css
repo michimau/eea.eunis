@@ -227,3 +227,16 @@ light   : #B8D6E8
 .headertextprint
 {
 }
+
+fieldset.large
+{
+  padding: .5em;
+  margin: .5em 0;
+}
+
+fieldset.large legend
+{
+  padding: .25em;
+  font-weight: bold;
+  background-color: #f0f0f0;
+}

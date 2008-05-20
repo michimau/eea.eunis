@@ -15,6 +15,7 @@
   <property name="classesSrcDir" value="src/classes" description="Java classes dir" />
 
   <property name="buildDir" value= "build"/>
+  <property name="test" value="test"/>
 
   <property name="deployDir" location="${tomcat}/webapps/eunis" description="Path to where application will be deployed" />
   <property name="deployLibDir" value="${tomcat}/webapps/eunis/WEB-INF/lib"/>
@@ -279,6 +280,48 @@
       <link href="http://developer.java.sun.com/developer/products/xml/docs/api/"/>
     </javadoc>
   </target>
+  
+  <!-- define classpath for unit tests -->
+        <path id="classpath.compile-tests">
+                <pathelement location="${buildDir}"/>
+                <fileset dir="${test}/lib">
+                        <include name="*.jar"/>
+                </fileset>
+                <path refid="app_classpath"/>
+        </path>
+	
+	<!-- compile target for compiling unit tests, expects classes-under-test compiled, refers to pre-defined paths -->
+        <target name="compile-tests" depends="compile">
+                <javac srcdir="${test}/src" destdir="${test}/build" source="1.5" target="1.5" debug="on">
+                        <classpath refid="classpath.compile-tests"/>
+                </javac>
+        </target>
+	
+	<!-- define classpath to be used by JUnit -->
+        <path id="classpath.test">
+                <pathelement location="${buildDir}"/>
+                <pathelement path="${test}/build"/>
+                <fileset dir="${test}/lib">
+                        <include name="**/*.jar"/>
+                </fileset>
+        </path>
+	
+	<!-- define src files to be included and/or excluded when JUnit searches for test cases -->
+        <fileset id="fileset.test" dir="${test}/src">
+                <include name="**/*Test.java"/>
+        </fileset>
+	
+	<!-- test target, refers to pre-defined paths and filesets -->
+        <target name="test" depends="compile-tests" description="Runs all found unit tests">
+                <junit haltonfailure="yes" failureproperty="unittestFailed" showoutput="yes" printsummary="yes">
+                        <classpath refid="classpath.test" />
+                        <formatter type="brief" usefile="false"/>
+                        <batchtest fork="yes">
+                                <fileset refid="fileset.test"/>
+                        </batchtest>
+                </junit>
+                <fail if="unittestFailed" message="One or more unit tests failed."/>
+        </target>
 
   <target name="clean" depends="init" description="Clean all files resulted from the build process, including DISTRIBUTION!">
     <echo message="Cleaning project's build directory: ${buildDir}" />

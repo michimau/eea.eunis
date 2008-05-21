@@ -18,6 +18,8 @@
 <%@ page import="java.sql.ResultSet"%>
 <%@ page import="java.sql.DriverManager"%>
 <%@ page import="java.sql.Statement"%>
+<%@ page import="ro.finsiel.eunis.utilities.SQLUtilities"%>
+
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -108,6 +110,14 @@
   String id = (request.getParameter("idDesign") == null ? null : request.getParameter("idDesign"));
   String geoscope = (request.getParameter("geoscope") == null ? null : request.getParameter("geoscope"));
   boolean showSites = Utilities.checkedStringToBoolean( request.getParameter( "showSites" ), false );
+  
+  String SQL_DRV = application.getInitParameter("JDBC_DRV");
+  String SQL_URL = application.getInitParameter("JDBC_URL");
+  String SQL_USR = application.getInitParameter("JDBC_USR");
+  String SQL_PWD = application.getInitParameter("JDBC_PWD");
+
+  SQLUtilities sqlc = new SQLUtilities();
+  sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
 
   WebContentManagement cm = SessionManager.getWebContent();
 
@@ -442,11 +452,6 @@
           sql+="    WHERE";
           sql+="      `CHM62EDT_DESIGNATIONS`.ID_DESIGNATION = '"+ factsheet.getIdDesignation() + "'";
           sql+="    AND `CHM62EDT_DESIGNATIONS`.`ID_GEOSCOPE` = " + factsheet.getIdGeoscope();
-          // Set the database connection parameters
-          String SQL_DRV = application.getInitParameter("JDBC_DRV");
-          String SQL_URL = application.getInitParameter("JDBC_URL");
-          String SQL_USR = application.getInitParameter("JDBC_USR");
-          String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
           Class.forName(SQL_DRV);
           con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
@@ -617,6 +622,7 @@
           }
           else
           {
+	          if(sqlc.DesignationHasSites(id,geoscope)) {
 %>
                 <a title="<%=cm.cms("show_sites_in_page")%>" href="designations-factsheet.jsp?showSites=true&amp;fromWhere=<%=fromWhere%>&amp;idDesign=<%=id%>&amp;geoscope=<%=geoscope%>"><%=cm.cmsPhrase( "Show sites for this designation type" )%></a>
                 <%=cm.cmsTitle("show_sites_in_page")%>
@@ -626,6 +632,7 @@
                   <%=cm.cmsPhrase( "Warning: This might take a long time." )%>
                 </strong>
 <%
+			  }
           }
         }
         else

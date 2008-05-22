@@ -118,13 +118,10 @@
           %>
                 <li>
                 <a href="designations-factsheet.jsp?idDesign=<%=rs.getString("ID_DESIGNATION")%>&amp;geoscope=<%=rs.getString("ID_GEOSCOPE")%>#position"><%=rs.getString("DESCRIPTION")%></a> <%=rs.getString("AREA_NAME_EN")%> (<%=rs.getString("ID_DESIGNATION")%>)
+                </li>
 <%
                 }
 %>
-                </li>
-<%
-            }
-          %>
               </ul>
           <%
               rs.close();
@@ -138,7 +135,6 @@
             }
 
           %>
-                <br/>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

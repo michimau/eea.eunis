@@ -137,7 +137,7 @@
 
                       <div></div>
                   <input name="search" value="" size="30" maxlength="50" tabindex="1" type="text">
-                      <input value="Search" class="searchButton" id="Submit2" name="Submit2" tabindex="2" type="submit">
+                      <input value="Search" class="submitSearchButton" id="Submit2" name="Submit2" tabindex="2" type="submit">
                     </div>
 
                 </form>

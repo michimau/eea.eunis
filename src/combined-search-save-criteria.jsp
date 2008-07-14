@@ -249,7 +249,7 @@
               if (null == request.getParameter("description"))
               {
 %>
-              <input title="<%=cm.cms("save")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("save")%>" class="searchButton" />
+              <input title="<%=cm.cms("save")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("save")%>" class="submitSearchButton" />
               <%=cm.cmsInput("save")%>
               <input title="<%=cm.cms("reset")%>" type="reset" name="Reset" id="Reset" value="<%=cm.cms("reset")%>" class="standardButton" />
               <%=cm.cmsInput("reset")%>

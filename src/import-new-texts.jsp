@@ -91,7 +91,7 @@
                 <br />
                 <form name="contentManage" action="import-new-texts.jsp" method="POST" onsubmit="javascript: return validateForm();">
                   <input type="hidden" name="operation" value="upload">
-                  <input title="Upload" type="submit" name="submit" id="sub1" value="Upload" class="searchButton" />
+                  <input title="Upload" type="submit" name="submit" id="sub1" value="Upload" class="submitSearchButton" />
                 </form>
                 <br />
                 <br />

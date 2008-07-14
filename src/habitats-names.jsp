@@ -180,7 +180,7 @@
                       <input title="<%=cm.cms("reset")%>" type="reset" value="<%=cm.cms("reset")%>" name="Reset" id="Reset" class="standardButton" />
                       <%=cm.cmsTitle("reset")%>
                       <%=cm.cmsInput("reset")%>
-                      <input title="<%=cm.cms("search")%>" type="submit" value="<%=cm.cms("search")%>" name="action" id="action" class="searchButton" />
+                      <input title="<%=cm.cms("search")%>" type="submit" value="<%=cm.cms("search")%>" name="action" id="action" class="submitSearchButton" />
                       <%=cm.cmsTitle("search")%>
                       <%=cm.cmsInput("search")%>
                     </td>

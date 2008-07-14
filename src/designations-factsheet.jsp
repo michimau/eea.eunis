@@ -558,7 +558,7 @@
 %>
                 <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
                   <input type="hidden" name="sites" value="<%=ids%>" />
-                  <input id="showMap" type="submit" title="<%=cm.cms("show_map")%>" name="Show map" value="<%=cm.cms("show_map")%>" class="searchButton" />
+                  <input id="showMap" type="submit" title="<%=cm.cms("show_map")%>" name="Show map" value="<%=cm.cms("show_map")%>" class="submitSearchButton" />
                 </form>
 <%
               }

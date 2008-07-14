@@ -39,7 +39,7 @@
 %>
   <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
     <input type="hidden" name="sites" value="<%=ids%>" />
-    <input type="submit" name="Show map" value="<%=cm.cms("show_map")%>" title="<%=cm.cms("show_map")%>" class="searchButton" />
+    <input type="submit" name="Show map" value="<%=cm.cms("show_map")%>" title="<%=cm.cms("show_map")%>" class="submitSearchButton" />
     <%=cm.cmsInput("show_map")%>
     <%=cm.cmsTitle("show_map")%>
   </form>
@@ -137,7 +137,7 @@
 %>
   <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
     <input type="hidden" name="sites" value="<%=ids%>" />
-    <input type="submit" name="Show map" value="<%=cm.cms("show_map")%>" title="<%=cm.cms("show_map")%>" class="searchButton" />
+    <input type="submit" name="Show map" value="<%=cm.cms("show_map")%>" title="<%=cm.cms("show_map")%>" class="submitSearchButton" />
     <%=cm.cmsInput("show_map")%>
     <%=cm.cmsTitle("show_map")%>
   </form>

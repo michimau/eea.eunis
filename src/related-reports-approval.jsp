@@ -272,11 +272,11 @@
                   </table>
                   <br />
                   <input  type="submit" id="submitApprove" name="Submit" title="<%=cm.cms("approve_checked_files")%>"
-                          value="<%=cm.cms("related_reports_approval_approve_value")%>" class="searchButton" />
+                          value="<%=cm.cms("related_reports_approval_approve_value")%>" class="submitSearchButton" />
                   <%=cm.cmsTitle("approve_checked_files")%>
                   <%=cm.cmsInput("related_reports_approval_approve_value")%>
                   <input type="submit" id="submitDel" name="Submit" title="<%=cm.cms("delete_checked_files")%>"
-                         value="<%=cm.cms("delete_selected")%>" class="searchButton" onclick="return del_files();" />
+                         value="<%=cm.cms("delete_selected")%>" class="submitSearchButton" onclick="return del_files();" />
                   <%=cm.cmsTitle("delete_checked_files")%>
                   <%=cm.cmsInput("delete_selected")%>
                 </form>

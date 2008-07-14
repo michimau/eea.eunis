@@ -228,7 +228,7 @@
                             <input id="Reset" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="standardButton" title="<%=cm.cms("reset")%>" />
                             <%=cm.cmsTitle("reset")%>
                             <%=cm.cmsInput("reset")%>
-                            <input id="Search" type="submit" value="<%=cm.cms("search")%>" name="submit" class="searchButton" title="<%=cm.cms("search")%>" />
+                            <input id="Search" type="submit" value="<%=cm.cms("search")%>" name="submit" class="submitSearchButton" title="<%=cm.cms("search")%>" />
                             <%=cm.cmsTitle("search")%>
                             <%=cm.cmsInput("search")%>
                           </td>

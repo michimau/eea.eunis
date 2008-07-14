@@ -196,13 +196,13 @@
                   <br />
                   <br />
                   <br />
-                  <input class="searchButton" type="submit" value="<%=cm.cms("headline_insert")%>" id="insert" name="insert" title="<%=cm.cms("headline_insert_label")%>" />&nbsp;&nbsp;
+                  <input class="submitSearchButton" type="submit" value="<%=cm.cms("headline_insert")%>" id="insert" name="insert" title="<%=cm.cms("headline_insert_label")%>" />&nbsp;&nbsp;
                   <%=cm.cmsInput("headline_insert")%>
 
-                  <input class="searchButton" type="submit" value="<%=cm.cms("delete")%>" id="delete" name="delete" title="<%=cm.cms("delete")%>" />&nbsp;&nbsp;
+                  <input class="submitSearchButton" type="submit" value="<%=cm.cms("delete")%>" id="delete" name="delete" title="<%=cm.cms("delete")%>" />&nbsp;&nbsp;
                   <%=cm.cmsInput("delete")%>
 
-                  <input class="searchButton" type="submit" value="<%=cm.cms("delete_all")%>" id="deleteall" name="deleteall" title="<%=cm.cms("delete_all")%>" />
+                  <input class="submitSearchButton" type="submit" value="<%=cm.cms("delete_all")%>" id="deleteall" name="deleteall" title="<%=cm.cms("delete_all")%>" />
                   <%=cm.cmsInput("delete_all")%>
                 </form>
           <%

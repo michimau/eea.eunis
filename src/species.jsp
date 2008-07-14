@@ -117,7 +117,7 @@
                   <input id="search" type="submit"
                          value="<%=cm.cms("search")%>"
                          name="Submit"
-                         class="searchButton"
+                         class="submitSearchButton"
                          alt="<%=cm.cms("execute_search")%>" title="<%=cm.cms("execute_search")%>"
                          />
                   <%=cm.cmsInput("search")%>

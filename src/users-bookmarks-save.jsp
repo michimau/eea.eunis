@@ -73,7 +73,7 @@
       <textarea title="<%=cm.cms("description")%>" name="description" id="description" rows="6" cols="60"></textarea>
       <%=cm.cmsTitle("description")%>
       <br />      
-      <input title="<%=cm.cms("save")%>" id="input1" type="submit" name="Save" value="<%=cm.cms("save")%>" class="searchButton" />
+      <input title="<%=cm.cms("save")%>" id="input1" type="submit" name="Save" value="<%=cm.cms("save")%>" class="saveButton" />
       <%=cm.cmsTitle("save")%>
       <%=cm.cmsInput("save")%>
       <input title="<%=cm.cms("reset")%>" id="input2" type="reset" name="Reset" value="<%=cm.cms("reset")%>" class="standardButton" />

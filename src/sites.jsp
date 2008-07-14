@@ -103,7 +103,7 @@
                     <%=cm.cmsLabel("quick_search_sites_01")%>
                     <%=cm.cmsTitle("sites_entersitename")%>
                     <%=cm.cmsInput("sites_entersitename")%>
-                    <input type="submit" value="<%=cm.cms( "search")%>" name="Submit" class="searchButton" title="<%=cm.cms( "search")%>" />
+                    <input type="submit" value="<%=cm.cms( "search")%>" name="Submit" class="submitSearchButton" title="<%=cm.cms( "search")%>" />
                     <%=cm.cmsInput("search")%>
                     <%=cm.cmsTitle("search")%>
                     <a href="fuzzy-search-help.jsp" title="<%=cm.cms("help_fuzzy_search")%>"><img alt="<%=cm.cms("help")%>" src="images/mini/help.jpg" border="0" style="vertical-align:middle" /></a>

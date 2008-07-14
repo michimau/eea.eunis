@@ -211,7 +211,7 @@
 			                						<%=cm.cmsPhrase( "Species" )%>
 			              						</label>&nbsp;
 			              						<input title="Species name" id="scientificName" name="scientificName" size="24" />
-			              						<input id="search_species" type="submit" name="submit" value="<%=cm.cms("search")%>" class="searchButton" title="<%=cm.cms("search_species")%>" />
+			              						<input id="search_species" type="submit" name="submit" value="<%=cm.cms("search")%>" class="submitSearchButton" title="<%=cm.cms("search_species")%>" />
 			              						<%=cm.cmsLabel("species_name")%>
 			              						<br />
 			              						<a title="<%=cm.cms("index_species_search_tools_title")%>" href="species.jsp"><%=cm.cmsPhrase("Search tools")%></a><%=cm.cmsTitle("index_species_search_tools_title")%>
@@ -236,7 +236,7 @@
 			              						<input title="<%=cm.cms("habitat_type_name")%>" id="searchString" name="searchString" size="24" />
 			              						<%=cm.cmsLabel("habitat_type_name")%>
 			              						<%=cm.cmsTitle("habitat_type_name")%>
-			              						<input id="search_habitat_types" type="submit" name="submit" value="<%=cm.cms("search")%>" class="searchButton" title="<%=cm.cms("search_habitat_type")%>" />
+			              						<input id="search_habitat_types" type="submit" name="submit" value="<%=cm.cms("search")%>" class="submitSearchButton" title="<%=cm.cms("search_habitat_type")%>" />
 			              						<br />	
 			              						<a title="<%=cm.cms("index_habitats_search_tools_title")%>" href="habitats.jsp"><%=cm.cms("search_tools")%></a>
 			              						<%=cm.cmsTitle("index_habitats_search_tools_title")%>
@@ -270,7 +270,7 @@
 			              						<input title="<%=cm.cms("site_name")%>" id="englishName" name="englishName" size="24" />
 			              						<%=cm.cmsLabel("site_name")%>
 			              						<%=cm.cmsTitle("site_name")%>
-			              						<input id="search_sites" type="submit" name="submit" value="<%=cm.cms("search")%>" class="searchButton" title="<%=cm.cms( "index_search_sites_label" )%>" />
+			              						<input id="search_sites" type="submit" name="submit" value="<%=cm.cms("search")%>" class="submitSearchButton" title="<%=cm.cms( "index_search_sites_label" )%>" />
 			              						<%=cm.cmsTitle( "index_search_sites_label" )%>
 			              						<br />
 			              						<a title="<%=cm.cms("index_sites_search_tools_title")%>" href="sites.jsp"><%=cm.cms("search_tools")%></a>

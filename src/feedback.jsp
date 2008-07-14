@@ -389,7 +389,7 @@
                     </tr>
                   </table>
                   <p>
-                    <input type="submit" id="submit" value="<%=cm.cms("send_feedback")%>" name="ContactUs" class="searchButton" />
+                    <input type="submit" id="submit" value="<%=cm.cms("send_feedback")%>" name="ContactUs" class="submitSearchButton" />
                     <%=cm.cmsInput("send_feedback")%>
                   </p>
                 </form>

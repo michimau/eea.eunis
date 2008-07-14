@@ -40,7 +40,7 @@
   <input title="<%=cm.cms("results_per_page")%>" class="inputTextFieldCenter" name="pageSize" id="pageSize" type="text" size="3" value="<%=pageSizeSize%>" />
   <%=cm.cmsLabel("results_per_page")%>
   <%=cm.cmsTitle("results_per_page")%>
-  <input id="changePageSizeButton" title="<%=cm.cms("change")%>" type="submit" name="Go" value="<%=cm.cms("change")%>" class="searchButton" />
+  <input id="changePageSizeButton" title="<%=cm.cms("change")%>" type="submit" name="Go" value="<%=cm.cms("change")%>" class="submitSearchButton" />
   <%=cm.cmsTitle("change")%>
   <%=cm.cmsInput("change")%>
   <%=toURLParamSize%>

@@ -243,7 +243,7 @@
                       <td>
                         <input title="<%=cm.cms("reset")%>" type="reset" name="reset" id="reset" value="<%=cm.cms("reset")%>" class="standardButton" />
                         &nbsp;&nbsp;&nbsp;
-                        <input title="<%=cm.cms("save")%>" type="submit" name="save" id="save" value="<%=cm.cms("save")%>" class="searchButton" />
+                        <input title="<%=cm.cms("save")%>" type="submit" name="save" id="save" value="<%=cm.cms("save")%>" class="submitSearchButton" />
                         &nbsp;&nbsp;&nbsp;
                       </td>
                     </tr>
@@ -372,7 +372,7 @@
                       <td>
                         <input title="<%=cm.cms("reset")%>" type="reset" name="reset" id="reset2" value="Reset" class="standardButton" />
                         &nbsp;&nbsp;&nbsp;
-                        <input title="<%=cm.cms("save")%>" type="submit" name="save" id="save2" value="Save" class="searchButton" />
+                        <input title="<%=cm.cms("save")%>" type="submit" name="save" id="save2" value="Save" class="submitSearchButton" />
                         &nbsp;&nbsp;&nbsp;
                       </td>
                     </tr>

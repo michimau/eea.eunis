@@ -316,7 +316,7 @@
                     </table>
                     <br />
                     <input type="submit" title="<%=cm.cms("select_columns_proceed_title")%>" id="proceed" name="Search" value="<%=cm.cms("proceed_to_results")%>"
-                           class="searchButton" />
+                           class="submitSearchButton" />
                     <%=cm.cmsTitle("select_columns_proceed_title")%>
                     <%=cm.cmsInput("proceed_to_results")%>
                   </form>

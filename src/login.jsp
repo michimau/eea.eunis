@@ -108,7 +108,7 @@
                     <%=cm.cmsLabel("password")%>
                     <br />
                     <br />
-                    <input class="searchButton" title="<%=cm.cms("login_submit_title")%>" type="submit" id="submit" name="Submit" value="<%=cm.cms("login")%>" />
+                    <input class="submitSearchButton" title="<%=cm.cms("login_submit_title")%>" type="submit" id="submit" name="Submit" value="<%=cm.cms("login")%>" />
                     <%=cm.cmsTitle("login_submit_title")%>
                     <%=cm.cmsInput("login")%>
                   </form>

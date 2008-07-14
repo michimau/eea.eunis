@@ -303,7 +303,7 @@
         <label for="maxLength"><%=cm.cms("web_content_editor_23")%>:</label> <input type="text" id="maxLength" name="maxLength" value="<%=maxLength%>" size="4" style="text-align : right;" title="<%=cm.cms("web_content_editor_24")%>" />
         <br />
         <br />
-        <input type="submit" id="save" name="Save" value="<%=cm.cms("save")%>" title="<%=cm.cms("web_content_editor_25")%>" class="searchButton" />
+        <input type="submit" id="save" name="Save" value="<%=cm.cms("save")%>" title="<%=cm.cms("web_content_editor_25")%>" class="saveButton" />
         <input type="button" id="delete" name="Delete" value="<%=cm.cms("delete")%>" title="<%=cm.cms("web_content_editor_26")%>" class="standardButton" onclick="javascript:alert( 'TODO' );" />
         <input type="reset" id="reset" name="Reset" value="<%=cm.cms("reset")%>" title="<%=cm.cms("web_content_editor_27")%>" class="standardButton" onclick="javascript:resetOnChange();" />
         <input type="button" id="close_window" name="Close" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close();" title="<%=cm.cms("web_content_editor_28")%>" class="standardButton" />

@@ -109,7 +109,7 @@
                   <textarea title="<%=cm.cms("content")%>" rows="5" cols="50" name="contentData" id="contentData" style="font-family:monospace,serif;"></textarea>
                   <br />
                   <br />
-                  <input title="<%=cm.cms("insert_new_key")%>" type="submit" name="submit" id="sub1" value="<%=cm.cms("insert_new_key")%>" class="searchButton" />
+                  <input title="<%=cm.cms("insert_new_key")%>" type="submit" name="submit" id="sub1" value="<%=cm.cms("insert_new_key")%>" class="submitSearchButton" />
                   <%=cm.cmsTitle("insert_new_key")%>
                   <%=cm.cmsInput("insert_new_key")%>
                 </form>

@@ -911,10 +911,10 @@
                     <br />
                   <% } %>
                   <br />
-                  <input type="button" class="standardButton" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save")%>" />
+                  <input type="button" class="saveButton" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save")%>" />
                   <%=cm.cmsTitle("save")%>
                   &nbsp;&nbsp;&nbsp;
-                  <input type="submit" class="searchButton" value="Search" id="Search" name="Search" title="<%=cm.cms("search")%>" />
+                  <input type="submit" class="submitSearchButton" value="Search" id="Search" name="Search" title="<%=cm.cms("search")%>" />
                   <%=cm.cmsTitle("search")%>
                   &nbsp;&nbsp;&nbsp;
                   <input type="button" class="standardButton" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cms("reset")%>" />
@@ -1336,7 +1336,7 @@
                         <br /><%=bResults%> <%=FirstNatureObject%> <%=cm.cmsPhrase("matching the combination of criteria were found.")%><br /><br />
                         <form name="search" action="select-columns.jsp" method="post">
                           <input type="submit" id="ProceedResults0" title="<%=cm.cms("proceed_to_results")%>"
-                                 name="Proceed to results" value="<%=cm.cms("proceed_to_results")%>" class="searchButton" />
+                                 name="Proceed to results" value="<%=cm.cms("proceed_to_results")%>" class="submitSearchButton" />
                           <%=cm.cmsInput("proceed_to_results")%>
                           <input type="hidden" name="idsession" value="<%=IdSession%>" />
                           <input type="hidden" name="searchedNatureObject" value="<%=FirstNatureObject%>" />
@@ -1484,7 +1484,7 @@
                       <br /><%=bResults%> <%=cm.cmsPhrase("species matching the combination of criteria were found.")%><br /><br />
                       <form name="search" action="select-columns.jsp" method="post">
                         <input type="submit" name="Proceed to results" id="ProceedResults" title="<%=cm.cms("proceed_to_results")%>"
-                               value="<%=cm.cms("proceed_to_results")%>" class="searchButton" />
+                               value="<%=cm.cms("proceed_to_results")%>" class="submitSearchButton" />
                         <%=cm.cmsInput("proceed_to_results")%>
                         <input type="hidden" name="idsession" value="<%=IdSession%>" />
                         <input type="hidden" name="searchedNatureObject" value="Species" />
@@ -1626,7 +1626,7 @@
                       <br /><%=bResults%> <%=cm.cmsPhrase("habitat types matching the combination of criteria were found.")%><br /><br />
                       <form name="search" action="select-columns.jsp" method="post">
                         <input type="submit" name="Proceed to results" title="<%=cm.cms("proceed_to_results")%>"
-                               value="<%=cm.cms("proceed_to_results")%>" id="ProceedResults2" class="searchButton" />
+                               value="<%=cm.cms("proceed_to_results")%>" id="ProceedResults2" class="submitSearchButton" />
                         <%=cm.cmsInput("proceed_to_results")%>
                         <input type="hidden" name="idsession" value="<%=IdSession%>" />
                         <input type="hidden" name="searchedNatureObject" value="Habitats" />
@@ -1775,7 +1775,7 @@
                     <br /><%=bResults%> <%=cm.cmsPhrase("sites matching the combination of criteria were found.")%><br /><br />
                     <form name="search" action="select-columns.jsp" method="post">
                       <input type="submit" name="Proceed to results" id="ProceedResults3" title="<%=cm.cms("proceed_to_results")%>"
-                             value="<%=cm.cms("proceed_to_results")%>" class="searchButton" />
+                             value="<%=cm.cms("proceed_to_results")%>" class="submitSearchButton" />
                       <%=cm.cmsInput("proceed_to_results")%>
                       <input type="hidden" name="idsession" value="<%=IdSession%>" />
                       <input type="hidden" name="searchedNatureObject" value="Sites" />
@@ -1970,7 +1970,7 @@
                       <br /><%=bResults%> <%=cm.cmsPhrase("species matching the combination of criteria were found.")%><br /><br />
                       <form name="search" action="select-columns.jsp" method="post">
                         <input type="submit" id="ProceedResults4" title="<%=cm.cms("proceed_to_results")%>" name="Proceed to results"
-                               value="<%=cm.cms("proceed_to_results")%>" class="searchButton" />
+                               value="<%=cm.cms("proceed_to_results")%>" class="submitSearchButton" />
                         <%=cm.cmsInput("proceed_to_results")%>
                         <input type="hidden" name="idsession" value="<%=IdSession%>" />
                         <input type="hidden" name="searchedNatureObject" value="Species" />
@@ -2137,7 +2137,7 @@
                         <br /><%=bResults%> <%=cm.cmsPhrase("habitat types matching the combination of criteria were found.")%><br /><br />
                         <form name="search" action="select-columns.jsp" method="post">
                           <input type="submit" id="ProceedResults5" title="<%=cm.cms("proceed_to_results")%>"
-                                 name="Proceed to results" value="<%=cm.cms("proceed_to_results")%>" class="searchButton" />
+                                 name="Proceed to results" value="<%=cm.cms("proceed_to_results")%>" class="submitSearchButton" />
                           <%=cm.cmsInput("proceed_to_results")%>
                           <input type="hidden" name="idsession" value="<%=IdSession%>" />
                           <input type="hidden" name="searchedNatureObject" value="Habitats" />
@@ -2274,7 +2274,7 @@
                       <br /><%=bResults%> <%=cm.cmsPhrase("sites matching the combination of criteria were found.")%><br /><br />
                       <form name="search" action="select-columns.jsp" method="post">
                         <input type="submit" id="ProceedResults6" title="<%=cm.cms("proceed_to_results")%>"
-                               name="Proceed to results" value="<%=cm.cms("proceed_to_results")%>" class="searchButton" />
+                               name="Proceed to results" value="<%=cm.cms("proceed_to_results")%>" class="submitSearchButton" />
                         <%=cm.cmsInput("proceed_to_results")%>
                         <input type="hidden" name="idsession" value="<%=IdSession%>" />
                         <input type="hidden" name="searchedNatureObject" value="Sites" />

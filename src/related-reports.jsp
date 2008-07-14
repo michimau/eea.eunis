@@ -193,7 +193,7 @@
             if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
             {
           %>
-                    <input type="submit" id="delete" name="Submit" value="<%=cm.cms("delete_selected")%>" class="searchButton" title="<%=cm.cms("related_reports_delete_title")%>" />
+                    <input type="submit" id="delete" name="Submit" value="<%=cm.cms("delete_selected")%>" class="submitSearchButton" title="<%=cm.cms("related_reports_delete_title")%>" />
                     <%=cm.cmsInput("delete_selected")%>
                     <%=cm.cmsTitle("related_reports_delete_title")%>
           <%

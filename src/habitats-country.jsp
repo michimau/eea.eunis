@@ -350,7 +350,7 @@
                     <input type="submit" name="Search" id="Search" value="<%=cm.cms("search")%>"
                            onclick="document.eunis.operation.value='reset'"
                            onkeypress="document.eunis.operation.value='reset'"
-                           class="searchButton" title="<%=cm.cms("search")%>" />
+                           class="submitSearchButton" title="<%=cm.cms("search")%>" />
                     <%=cm.cmsTitle("search")%>
                     <%=cm.cmsInput("search")%>
                   </td>

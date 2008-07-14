@@ -322,7 +322,7 @@
                             <input id="criteriaSearch" title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" name="criteriaSearch" type="text" size="30" />
                             <%=cm.cmsLabel("filter_value")%>
                             <%=cm.cmsTitle("filter_value")%>
-                            <input id="search" title="<%=cm.cms("search")%>" class="searchButton" type="submit" name="Submit" value="<%=cm.cms("search")%>" />
+                            <input id="search" title="<%=cm.cms("search")%>" class="submitSearchButton" type="submit" name="Submit" value="<%=cm.cms("search")%>" />
                             <%=cm.cmsTitle("search")%>
                             <%=cm.cmsInput("search")%>
                           </form>

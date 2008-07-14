@@ -91,7 +91,7 @@
                            value="<%=cm.cms("search")%>"
                            name="Submit"
                            id="Submit"
-                           class="searchButton"
+                           class="submitSearchButton"
                            title="Search" />
                     <%=cm.cmsInput("search")%>
                     <a href="fuzzy-search-help.jsp" title="<%=cm.cms("help_fuzzy_search")%>"><img alt="<%=cm.cms("help_fuzzy_search")%>" title="<%=cm.cms("help_fuzzy_search")%>" src="images/mini/help.jpg" border="0" style="vertical-align:middle" /></a>

@@ -1025,10 +1025,10 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                   <br />
                   <% } %>
                   <br />
-                  <input type="button" class="standardButton" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save")%>" />
+                  <input type="button" class="saveButton" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save")%>" />
                   <%=cm.cmsTitle("save")%>
                   &nbsp;&nbsp;&nbsp;
-                  <input type="submit" class="searchButton" value="Search" id="Search" name="Search" title="<%=cm.cms("search")%>" />
+                  <input type="submit" class="submitSearchButton" value="Search" id="Search" name="Search" title="<%=cm.cms("search")%>" />
                   <%=cm.cmsTitle("search")%>
                   &nbsp;&nbsp;&nbsp;
                   <input type="button" class="standardButton" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cms("reset")%>" />
@@ -1354,7 +1354,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     <td>
                       <form name="saveCriteriaSearch" action="combined-search-save-criteria.jsp" method="post">
                         <input type="button" name="Save Criteria" title="<%=cm.cms("save_criteria")%>"
-                               id="SaveCriteria" value="<%=cm.cms("save_criteria")%>" class="searchButton"
+                               id="SaveCriteria" value="<%=cm.cms("save_criteria")%>" class="submitSearchButton"
                                onclick="javascript:SaveCriteriaFunction('<%=NatureObject%>');" />
                         <%=cm.cmsTitle("save_criteria")%>
                         <input type="hidden" name="idsession" value="<%=IdSession%>" />

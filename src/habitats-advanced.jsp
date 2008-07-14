@@ -730,10 +730,10 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                   }
                 %>
                     <br />
-                    <input type="button" class="standardButton" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save")%>" />
+                    <input type="button" class="saveButton" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save")%>" />
                     <%=cm.cmsTitle("save")%>
                     &nbsp;&nbsp;&nbsp;
-                    <input type="submit" class="searchButton" value="Search" id="Search" name="Search" title="<%=cm.cms("search")%>" />
+                    <input type="submit" class="submitSearchButton" value="Search" id="Search" name="Search" title="<%=cm.cms("search")%>" />
                     <%=cm.cmsTitle("search")%>
                     &nbsp;&nbsp;&nbsp;
                     <input type="button" class="standardButton" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cms("reset")%>" />
@@ -834,7 +834,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 %>
                 <form name="search" action="select-columns.jsp" method="post">
                   <input type="submit" name="Proceed to next step" title="<%=cm.cms("proceed_to_next_step")%>" id="NextStep"
-                         value="<%=cm.cms("proceed_to_next_step")%>" class="searchButton" />
+                         value="<%=cm.cms("proceed_to_next_step")%>" class="submitSearchButton" />
                   <%=cm.cmsInput("proceed_to_next_step")%>
                   <input type="hidden" name="searchedNatureObject" value="Habitats" />
                   <input type="hidden" name="origin" value="Advanced" />
@@ -851,7 +851,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                   <tr>
                     <td>
                       <form name="saveCriteriaSearch" action="save-species-or-habitats-advanced-search-criteria.jsp" method="post">
-                        <input type="button" name="Save Criteria" title="<%=cm.cms("save_criteria")%>" id="SaveCriteria" value="<%=cm.cms("save_search")%>" class="searchButton" onclick="javascript:SaveCriteriaFunction();" />
+                        <input type="button" name="Save Criteria" title="<%=cm.cms("save_criteria")%>" id="SaveCriteria" value="<%=cm.cms("save_search")%>" class="submitSearchButton" onclick="javascript:SaveCriteriaFunction();" />
                         <%=cm.cmsInput("save_search")%>
                         <input type="hidden" name="idsession" value="<%=IdSession%>" />
                         <input type="hidden" name="natureobject" value="<%=NatureObject%>" />

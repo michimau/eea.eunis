@@ -853,10 +853,10 @@
                 <br />
                 <% } %>
                 <br />
-                  <input type="button" class="standardButton" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save")%>" />
+                  <input type="button" class="saveButton" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save")%>" />
                   <%=cm.cmsTitle("save")%>
                   &nbsp;&nbsp;&nbsp;
-                  <input type="submit" class="searchButton" value="Search" id="Search" name="Search" title="<%=cm.cms("search")%>" />
+                  <input type="submit" class="submitSearchButton" value="Search" id="Search" name="Search" title="<%=cm.cms("search")%>" />
                   <%=cm.cmsTitle("search")%>
                   &nbsp;&nbsp;&nbsp;
                   <input type="button" class="standardButton" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cms("reset")%>" />
@@ -1052,7 +1052,7 @@
                     if(NatureObject.equalsIgnoreCase("Species")) {
                   %>
                   <input type="submit" name="Proceed to next page" title="<%=cm.cms("combined_proceed_to_next_page")%>"
-                         id="NextPageSpecies" value="<%=cm.cms("combined_proceed_to_next_page")%>" class="searchButton" />
+                         id="NextPageSpecies" value="<%=cm.cms("combined_proceed_to_next_page")%>" class="submitSearchButton" />
                   <%=cm.cmsInput("combined_proceed_to_next_page")%>
                   <%
                     }
@@ -1061,7 +1061,7 @@
                     if(NatureObject.equalsIgnoreCase("Habitat")) {
                   %>
                   <input type="submit" title="<%=cm.cms("combined_proceed_to_next_page")%>" name="Proceed to next page"
-                         id="NextPageHabitat" value="<%=cm.cms("combined_proceed_to_next_page")%>" class="searchButton" />
+                         id="NextPageHabitat" value="<%=cm.cms("combined_proceed_to_next_page")%>" class="submitSearchButton" />
                   <%=cm.cmsInput("combined_proceed_to_next_page")%>
                   <%
                     }
@@ -1070,7 +1070,7 @@
                     if(NatureObject.equalsIgnoreCase("Sites")) {
                   %>
                   <input type="submit" title="<%=cm.cms("combined_proceed_to_next_page")%>" name="Proceed to next page"
-                         id="NextPageSites" value="<%=cm.cms("combined_proceed_to_next_page")%>" class="searchButton" />
+                         id="NextPageSites" value="<%=cm.cms("combined_proceed_to_next_page")%>" class="submitSearchButton" />
                   <%=cm.cmsInput("combined_proceed_to_next_page")%>
                   <input type="hidden" name="sourcedbcriteria" value="<%=sourcedbcriteria.replaceAll("'","")%>" />
                   <%
@@ -1112,7 +1112,7 @@
                     if(NatureObject.equalsIgnoreCase("Species")) {
                   %>
                   <input type="submit" name="Proceed to next page" title="<%=cm.cms("combined_proceed_to_next_page_sites")%>"
-                         id="NextPageSpecies2" value="<%=cm.cms("combined_proceed_to_next_page_sites")%>" class="searchButton" />
+                         id="NextPageSpecies2" value="<%=cm.cms("combined_proceed_to_next_page_sites")%>" class="submitSearchButton" />
                   <%=cm.cmsInput("combined_proceed_to_next_page_sites")%>
                   <%
                     }
@@ -1121,7 +1121,7 @@
                     if(NatureObject.equalsIgnoreCase("Habitat")) {
                   %>
                   <input type="submit" name="Proceed to next page" title="<%=cm.cms("combined_proceed_to_next_page_species")%>"
-                         id="NextPageHabitat2" value="<%=cm.cms("combined_proceed_to_next_page_species")%>" class="searchButton" />
+                         id="NextPageHabitat2" value="<%=cm.cms("combined_proceed_to_next_page_species")%>" class="submitSearchButton" />
                   <%=cm.cmsInput("combined_proceed_to_next_page_species")%>
                   <%
                     }
@@ -1130,7 +1130,7 @@
                     if(NatureObject.equalsIgnoreCase("Sites")) {
                   %>
                   <input type="submit" name="Proceed to next page" title="<%=cm.cms("combined_proceed_to_next_page_habitats")%>"
-                         id="NextPageSites2" value="<%=cm.cms("combined_proceed_to_next_page_habitats")%>" class="searchButton" />
+                         id="NextPageSites2" value="<%=cm.cms("combined_proceed_to_next_page_habitats")%>" class="submitSearchButton" />
                   <%=cm.cmsInput("combined_proceed_to_next_page_habitats")%>
                   <input type="hidden" name="sourcedbcriteria" value="<%=sourcedbcriteria.replaceAll("'","")%>" />
                   <%

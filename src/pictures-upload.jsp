@@ -108,7 +108,7 @@
         <%=cm.cmsTitle("reset_values")%>
         <%=cm.cmsInput("reset")%>
 
-        <input type="submit" id="submit" title="<%=cm.cms("upload")%>" name="Submit" value="<%=cm.cms("upload")%>" class="searchButton" />
+        <input type="submit" id="submit" title="<%=cm.cms("upload")%>" name="Submit" value="<%=cm.cms("upload")%>" class="submitSearchButton" />
         <%=cm.cmsTitle("upload")%>
         <%=cm.cmsInput("upload")%>
 

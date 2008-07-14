@@ -179,7 +179,7 @@
                     <textarea id="bookmarkDescrptionEdit" title="<%=cm.cms("users_bookmarks_06")%>" name="bookmarkDescrptionEdit" rows="3" cols="100"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(bookmDescription),"&nbsp;")%></textarea>
                     <%=cm.cmsTitle("users_bookmarks_06")%>
                     <br />
-                    <input id="input1" type="button" value="<%=cm.cms("save")%>" name="save" onclick="onClickEditSave()" class="searchButton" title="<%=cm.cms("save")%>" />
+                    <input id="input1" type="button" value="<%=cm.cms("save")%>" name="save" onclick="onClickEditSave()" class="saveButton" title="<%=cm.cms("save")%>" />
                     <%=cm.cmsTitle("save")%>
                     <%=cm.cmsInput("save")%>
             <%

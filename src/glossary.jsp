@@ -196,7 +196,7 @@
                             <div style="width : 100%; text-align : right;">
                               <input title="<%=cm.cms("reset")%>" type="reset" value="<%=cm.cms("reset")%>" name="Reset" id="Reset" class="standardButton" />
                                <%=cm.cmsInput( "reset" )%>
-                              <input title="<%=cm.cms("search")%>" type="submit" value="<%=cm.cms("search")%>" name="Submit" id="Submit" class="searchButton" />
+                              <input title="<%=cm.cms("search")%>" type="submit" value="<%=cm.cms("search")%>" name="Submit" id="Submit" class="submitSearchButton" />
                               <%=cm.cmsInput( "search" )%>
                             </div>
                           </td>

@@ -321,7 +321,7 @@
                     <%=cm.cmsTitle("list_of_values")%>
                     <%=cm.cmsAlt("list_of_values")%>
 
-                    <input id="submit" name="Submit" type="submit" value="<%=cm.cms("search")%>" class="searchButton" title="<%=cm.cms("search")%>" />
+                    <input id="submit" name="Submit" type="submit" value="<%=cm.cms("search")%>" class="submitSearchButton" title="<%=cm.cms("search")%>" />
                     <%=cm.cmsTitle("search")%>
                     <%=cm.cmsInput("search")%>
                   </form>

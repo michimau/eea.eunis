@@ -202,7 +202,7 @@
                         <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
                         <input title="<%=cm.cms("filter_value")%>" type="text" name="criteriaSearch" id="criteriaSearch" size="30" />
                         <%=cm.cmsTitle("filter_value")%>
-                        <input title="<%=cm.cms("search")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("search")%>" class="searchButton" />
+                        <input title="<%=cm.cms("search")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("search")%>" class="submitSearchButton" />
                         <%=cm.cmsTitle("search")%>
                         <%=cm.cmsInput("search")%>
                       </form>

@@ -458,7 +458,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
        </select>
        <%=cm.cmsTitle("users_edit_29")%>
        &nbsp;&nbsp;&nbsp;
-      <a title="<%=cm.cms("delete_user")%>" href="javascript:deleteUser('<%=SessionManager.getUsername()%>');"><%=cm.cmsText("delete_user")%></a>
+      <a href="javascript:deleteUser('<%=SessionManager.getUsername()%>');"><%=cm.cmsText("delete_user")%></a>
       <%=cm.cmsTitle("delete_user")%>
     </td>
   </tr>

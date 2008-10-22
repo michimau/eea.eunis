@@ -138,7 +138,7 @@
 
                               %>
                                 <li<%=currentTab%>>
-                                  <a title="<%=cm.cms("show")%> <%=tabs[i]%>" href="users.jsp?tab=<%=i%>"><%=tabs[ i ]%></a>
+                                  <a href="users.jsp?tab=<%=i%>"><%=tabs[ i ]%></a>
                                 </li>
                               <%
                             }

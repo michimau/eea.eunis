@@ -311,7 +311,7 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
            </select>
            <%=cm.cmsTitle("roles_add_18")%>
            &nbsp;&nbsp;&nbsp;
-           <a title="<%=cm.cms("roles_add_20")%>" href="javascript:deleteRole();"><%=cm.cmsText("roles_add_20")%></a>
+           <a href="javascript:deleteRole();"><%=cm.cmsText("roles_add_20")%></a>
            <%=cm.cmsTitle("roles_add_20")%>
           </td>
         </tr>

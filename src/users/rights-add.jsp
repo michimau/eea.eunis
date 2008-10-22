@@ -264,7 +264,7 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
        </select>
        <%=cm.cmsTitle("rights_add_12")%>
        &nbsp;&nbsp;&nbsp;
-       <a title="<%=cm.cms("rights_add_13")%>" href="javascript:deleteRight();"><%=cm.cmsText("rights_add_13")%></a>
+       <a href="javascript:deleteRight();"><%=cm.cmsText("rights_add_13")%></a>
        <%=cm.cmsTitle("rights_add_13")%>
       </td>
     </tr>

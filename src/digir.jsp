@@ -84,14 +84,11 @@
                 <%
                   out.flush();
                 %>
-                <table summary="layout" width="100%" border="0">
-                 <tr>
-                  <td>
                     <h1><%=cm.cmsPhrase("EUNIS Database DiGIR Provider Statistics")%></h1>
-                    <br />
-                    <p><%=cm.cmsText("digir_02")%>
-                    </p>
-                    <span style="font-weight:bold"><%=cm.cmsPhrase("Statistical data regarding the EUNIS DiGIR Provider:")%></span>
+                    
+                   <%=cm.cmsText("digir_02")%>
+
+                    <h2><%=cm.cmsPhrase("Statistical data regarding the EUNIS DiGIR Provider:")%></h2>
                 <%
                       int nTotalSpecies = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sTotalSpecies),0);
                       int nDistinctSpecies = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sDistinctSpecies),0);
@@ -103,12 +100,14 @@
 
                       if(nTotalSpecies != 0) {
                 %>
-                    <table summary="layout" width="90%" class="datatable">
+                    <table width="90%" class="datatable">
+                      <col style="width:50%"/>
+                      <col style="width:50%"/>
                       <tr>
-                        <td width="50%">
+                        <td>
                           <%=cm.cmsPhrase("Total rows:")%>
                         </td>
-                        <td width="50%">
+                        <td>
                           <%=nTotalSpecies%>
                         </td>
                       </tr>
@@ -164,23 +163,23 @@
                 <%
                   } else {
                 %>
-                    <br />
+                    <p>
                     <!--The DiGIR database is empty or the connection could not be established!-->
                     <!--<br />-->
                     <%=cm.cmsPhrase("The statistics are not available. Please try later.")%>
-                    <br />
-                    <br />
+                    </p>
                 <%
                   }
                 %>
-                    <br />
-                    <span style="font-weight:bold"><%=cm.cmsPhrase("Other information:")%></span>
-                    <table summary="layout" class="datatable">
+                    <h2><%=cm.cmsPhrase("Other information:")%></h2>
+                    <table class="datatable">
+                      <col style="width:50%"/>
+                      <col style="width:50%"/>
                       <tr>
-                        <td width="50%">
+                        <td>
                           <%=cm.cmsPhrase("Provider URL:")%>
                         </td>
-                        <td width="50%">
+                        <td>
                           <a href="<%=sEndpointURL%>"><%=sEndpointURL%></a>
                         </td>
                       </tr>

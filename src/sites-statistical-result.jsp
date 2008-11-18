@@ -62,7 +62,7 @@
   </head>
   <body>
     <div id="visual-portal-wrapper">
-      <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_HEADER" ) )%>
+      <jsp:include page="header.jsp" />
       <!-- The wrapper div. It contains the three columns. -->
       <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
@@ -615,7 +615,7 @@
         <div class="visualClear"><!-- --></div>
       </div>
       <!-- end column wrapper -->
-      <%=cm.readContentFromURL( request.getSession().getServletContext().getInitParameter( "TEMPLATES_FOOTER" ) )%>
+      <jsp:include page="footer-static.jsp" />
     </div>
     <script language="javascript" type="text/javascript">
       //<![CDATA[

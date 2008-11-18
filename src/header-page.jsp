@@ -89,4 +89,5 @@
   }
 %>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/print.css" media="print" />
-<%=cm.readContentFromURL( "http://webservices.eea.europa.eu/templates/getRequiredHead?site=eunis" )%>
+    
+<jsp:include page="required-head.jsp" />

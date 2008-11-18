@@ -51,6 +51,13 @@
     <param-value>http://webservices.eea.europa.eu/templates/getHeader?site=default</param-value>
     <description>Location of the EEA template server</description>
   </context-param>
+  
+  <context-param>
+    <param-name>TEMPLATES_REQUIRED_HEAD</param-name>
+    <param-value>http://webservices.eea.europa.eu/templates/getRequiredHead?site=eunis</param-value>
+    <description>Location of the EEA template server</description>
+  </context-param>
+  
   <context-param>
     <param-name>TEMPLATES_FOOTER</param-name>
     <param-value>http://webservices.eea.europa.eu/templates/getFooter?site=default</param-value>
@@ -100,6 +107,13 @@
     <param-name>TEMPLATE_HEADER_LOCATION</param-name>
     <param-value>/webapps/eunis/header.jsp</param-value>
     <description>Platform dependent variable which specifies header location</description>
+  </context-param>
+  
+  <!-- Template required head file location -->
+  <context-param>
+    <param-name>TEMPLATE_REQUIRED_HEAD_LOCATION</param-name>
+    <param-value>/webapps/eunis/required-head.jsp</param-value>
+    <description>Platform dependent variable which specifies required head location</description>
   </context-param>
   
   <!-- Template footer file location -->

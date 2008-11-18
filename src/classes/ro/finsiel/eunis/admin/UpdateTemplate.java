@@ -32,11 +32,16 @@ public class UpdateTemplate extends HttpServlet {
        	String headerText = wm.readContentFromURL(headerUrl);
        	String headerFileName = baseDir + getServletContext().getInitParameter("TEMPLATE_HEADER_LOCATION");
        	
+       	String reqHeaderUrl = getServletContext().getInitParameter("TEMPLATES_REQUIRED_HEAD");
+       	String reqHeaderText = wm.readContentFromURL(reqHeaderUrl);
+       	String reqHeaderFileName = baseDir + getServletContext().getInitParameter("TEMPLATE_REQUIRED_HEAD_LOCATION");
+       	
        	String footerUrl = getServletContext().getInitParameter("TEMPLATES_FOOTER");
        	String footerText = wm.readContentFromURL(footerUrl);
        	String footerFileName = baseDir + getServletContext().getInitParameter("TEMPLATE_FOOTER_LOCATION");
        	
        	writeFile(headerFileName, headerText);
+       	writeFile(reqHeaderFileName, reqHeaderText);
        	writeFile(footerFileName, footerText);       	
         
         res.sendRedirect("templateUpdated.jsp");

@@ -296,6 +296,11 @@
     <servlet-class>ro.finsiel.eunis.admin.EUNISUploadServlet</servlet-class>
     <load-on-startup>0</load-on-startup>
   </servlet>
+  
+  <servlet>
+    <servlet-name>datatester</servlet-name>
+    <servlet-class>ro.finsiel.eunis.dataimport.DataImportTester</servlet-class>
+  </servlet>
 
   <servlet>
     <servlet-name>species</servlet-name>
@@ -327,6 +332,11 @@
   <servlet-mapping>
     <servlet-name>upload</servlet-name>
     <url-pattern>/fileupload</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>datatester</servlet-name>
+    <url-pattern>/datatester</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>

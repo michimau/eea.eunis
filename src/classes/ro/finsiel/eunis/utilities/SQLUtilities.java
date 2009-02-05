@@ -1,11 +1,17 @@
 package ro.finsiel.eunis.utilities;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import ro.finsiel.eunis.dataimport.ColumnDTO;
 
 
 /**
@@ -806,6 +812,83 @@ public class SQLUtilities {
 	    }
 
 	    return result;
+  }
+  
+  public List<String> getAllChm62edtTableNames() {
+	    
+	  	List<String> ret = new ArrayList<String>();
+	    Connection con = null;
+
+	    try
+	    {
+	      Class.forName( SQL_DRV );
+	      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+
+	      DatabaseMetaData meta = con.getMetaData(); 
+	      ResultSet rs = meta.getTables(null, null, null, new String[]{"TABLE"});; 
+	      
+	      while (rs.next()) { 
+	    	  String tableName = rs.getString("TABLE_NAME"); 
+	    	  if(tableName != null && tableName.startsWith("chm62edt"))
+	    		  ret.add(tableName);
+	      } 
+	      
+	      con.close();
+	    }
+	    catch ( Exception ex )
+	    {
+	      ex.printStackTrace();
+	    }
+
+	    return ret;
+  }
+  
+  public HashMap<String, ColumnDTO> getTableInfo(String tableName) {
+	    
+	    Connection con = null;
+	    HashMap<String, ColumnDTO> columns = new HashMap<String, ColumnDTO>();
+	    
+	    try
+	    {
+	      Class.forName( SQL_DRV );
+	      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+	      
+	      Statement st = con.createStatement();
+	      ResultSet rs = st.executeQuery("SELECT * FROM "+tableName);
+	      ResultSetMetaData rsMeta = rs.getMetaData();
+	      
+	      int numberOfColumns = rsMeta.getColumnCount();
+
+          for (int x = 1; x <= numberOfColumns; x++) {
+        	  String columnName = rsMeta.getColumnName(x);
+        	  int columnType = rsMeta.getColumnType(x);
+        	  int size = rsMeta.getColumnDisplaySize(x);
+        	  int precision = rsMeta.getPrecision(x);
+        	  int scale = rsMeta.getScale(x);
+        	  boolean isSigned = rsMeta.isSigned(x);
+        	  int isNullable = rsMeta.isNullable(x);
+      	    
+        	  ColumnDTO column = new ColumnDTO();
+        	  column.setColumnName(columnName);
+        	  column.setColumnType(columnType);
+        	  column.setColumnSize(size);
+        	  column.setPrecision(precision);
+        	  column.setScale(scale);
+        	  column.setSigned(isSigned);
+        	  column.setNullable(isNullable);
+      		
+        	  columns.put(columnName.toLowerCase(),column);	                	    
+          }
+	      
+          st.close();
+	      con.close();
+	    }
+	    catch ( Exception ex )
+	    {
+	      ex.printStackTrace();
+	    }
+
+	    return columns;
   }
 
 }

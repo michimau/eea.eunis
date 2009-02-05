@@ -44,7 +44,8 @@
                 
                     
                     
-                        <style type="text/css"><!-- @import url(http://www.eea.europa.eu/portal_css/EEADesign2006/ploneStyles0777.css); --></style>
+                        <style type="text/css"><!-- @import url(http://www.eea.europa.eu/portal_css/EEADesign2006/ploneStyles8464.css); --></style>
+
                     
                     
                 

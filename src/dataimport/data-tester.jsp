@@ -13,6 +13,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
+<%
+  String domainName = application.getInitParameter( "DOMAIN_NAME" );
+%>
+  <base href="<%=domainName%>/"/><!--[if lt IE 7]></base><![endif]-->
     <jsp:include page="../header-page.jsp" />
 <%
   WebContentManagement cm = SessionManager.getWebContent();
@@ -57,7 +61,11 @@
                 <h1>
                   Data Import Tester
                 </h1>
-                <form name="eunis" method="post" action="<%=application.getInitParameter("DOMAIN_NAME")%>/datatester" enctype="multipart/form-data">
+                <p class="documentDescription">
+                The purpose of this page is to test the XML formatted Oracle dumps from the EUNIS maintainer.
+                It will not overwrite data.
+                </p>
+                <form name="eunis" method="post" action="<%=domainName%>/datatester" enctype="multipart/form-data">
 	                <label for="table">Table</label>
 	                <select id="table" name="table" title="Table names">
 	                	<option value=""></option>
@@ -104,6 +112,7 @@
 		         		%>
 		         			<b><%=success%></b>
 		         		<%
+			        	request.getSession().removeAttribute("success");
 	         		}
 	            }
 	            %>

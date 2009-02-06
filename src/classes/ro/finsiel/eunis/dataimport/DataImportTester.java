@@ -65,7 +65,7 @@ public class DataImportTester extends HttpServlet {
         String SQL_PWD = request.getSession().getServletContext().getInitParameter("JDBC_PWD");
         
 		String table = "";
-		// Initilize the default settings
+		// Initialise the default settings
 	    try
 	    {
 	      BASE_DIR = getServletContext().getInitParameter( "TOMCAT_HOME" );
@@ -80,15 +80,15 @@ public class DataImportTester extends HttpServlet {
 	    upload.setSizeMax(MAX_FILE_SIZE);
 	    upload.setRepositoryPath(TEMP_DIR);
 	    
-	    try {
-	    	items = upload.parseRequest(request);
-	    } catch (FileUploadException ex) {
-	    	ex.printStackTrace();
-	    	errors.add(ex.getMessage());
-	    	response.sendRedirect("dataimport/data-tester.jsp");
-	    }
-	    
 	    if (isMultipart) {
+			try {
+				items = upload.parseRequest(request);
+			} catch (FileUploadException ex) {
+				ex.printStackTrace();
+				errors.add(ex.getMessage());
+				response.sendRedirect("dataimport/data-tester.jsp");
+			}
+
 	    	for (int i = 0; i < items.size(); i++) {
 	            FileItem item = (FileItem) items.get(i);
 	            if(item.isFormField()){
@@ -117,7 +117,7 @@ public class DataImportTester extends HttpServlet {
 	                		errors.add("First element has to be ROWSET");
 
 	                	NodeList rowNodes = rootElement.getChildNodes();
-	                	if(rowNodes.getLength() > 0) {                  
+	                	if(rowNodes.getLength() > 0) {
 	            		    for(int k = 0 ; k<rowNodes.getLength() ; k++) {
 	            		    	Node rowElem = rowNodes.item(k);
 	            		    	if(rowElem.getNodeType() == ELEMENT_NODE){
@@ -148,15 +148,15 @@ public class DataImportTester extends HttpServlet {
 	    	    	} catch (Exception _ex) {
 	    	    		_ex.printStackTrace();
 	    	    		errors.add(_ex.getMessage());
-	    	    	}	    	    	
+	    	    	}
 	            }
 	    	}
-	    }
 	    
-	    if(errors != null && errors.size() > 0)
-	    	session.setAttribute("errors", errors);
-	    else
-	    	session.setAttribute("success", "Sucessfully tested! No errors found.");
+			if(errors != null && errors.size() > 0)
+				session.setAttribute("errors", errors);
+			else
+				session.setAttribute("success", "Successfully tested! No errors found.");
+	    }
 	    
 	    response.sendRedirect("dataimport/data-tester.jsp");
 	}

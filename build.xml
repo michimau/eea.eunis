@@ -84,6 +84,7 @@
         <include name="ro/finsiel/eunis/admin/**/*.class"/>
         <include name="ro/finsiel/eunis/auth/**/*.class"/>
         <include name="ro/finsiel/eunis/backtrail/**/*.class"/>
+        <include name="ro/finsiel/eunis/dataimport/**/*.class"/>	
         <include name="ro/finsiel/eunis/session/**/*.class"/>
         <include name="ro/finsiel/eunis/formBeans/**/*.class"/>
         <include name="ro/finsiel/eunis/related_reports/**/*.class"/>

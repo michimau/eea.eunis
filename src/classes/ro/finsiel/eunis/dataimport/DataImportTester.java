@@ -102,7 +102,7 @@ public class DataImportTester extends HttpServlet {
 	                }
 	            } else {
 	                try {
-	                	File xmlFile = new File("xmlFile");
+	                	File xmlFile = new File(TEMP_DIR + "/xmlFile");
 	                	item.write(xmlFile);
 	                	
 	                	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

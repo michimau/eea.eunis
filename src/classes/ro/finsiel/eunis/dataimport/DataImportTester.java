@@ -48,6 +48,8 @@ public class DataImportTester extends HttpServlet {
 	/** Files with size smaller than this are written directly to disk, others through TEMP_DIR first. */
 	private static int MAX_MEM_TRESHOLD = 4096;// Files smaller than 4k are directly written to disk
 	
+	private static List<String> errors = null;
+	
 	/**	
 	* Overrides public method doPost of javax.servlet.http.HttpServlet.
 	* @param request Request object
@@ -55,7 +57,7 @@ public class DataImportTester extends HttpServlet {
 	*/
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession(false);
-		List<String> errors = new ArrayList<String>();
+		errors = new ArrayList<String>();
 		
 		String SQL_DRV = request.getSession().getServletContext().getInitParameter("JDBC_DRV");
 		String SQL_URL = request.getSession().getServletContext().getInitParameter("JDBC_URL");
@@ -83,7 +85,7 @@ public class DataImportTester extends HttpServlet {
 	    } catch (FileUploadException ex) {
 	    	ex.printStackTrace();
 	    	errors.add(ex.getMessage());
-	    	response.sendRedirect("data-tester.jsp");
+	    	response.sendRedirect("dataimport/data-tester.jsp");
 	    }
 	    
 	    if (isMultipart) {
@@ -121,7 +123,7 @@ public class DataImportTester extends HttpServlet {
 	            		    	if(rowElem.getNodeType() == ELEMENT_NODE){
 	            		    		String rowElemName = rowElem.getNodeName();
 	            		    		if(!rowElemName.equals("") && !rowElemName.equals("ROW"))
-	        	                		errors.add("Second level element has to be ROW");
+	            		    			errors = addError(errors, "Second level element has to be ROW");
 	            		    	}
 	            		    }
 	                	}
@@ -133,9 +135,7 @@ public class DataImportTester extends HttpServlet {
 	                	NodeList nodeLst = doc.getElementsByTagName("ROW");
 	                	for (int s = 0; s < nodeLst.getLength(); s++) {
 	                		Node rowNode = nodeLst.item(s);
-	                		List<String> testErrors = checkNodes(rowNode, columns);
-	                		if(testErrors != null && testErrors.size() > 0)
-	                			errors.addAll(testErrors);
+	                		checkNodes(rowNode, columns);
 	                	}
 	                	
 	                	//uploadedStream.close();
@@ -158,12 +158,10 @@ public class DataImportTester extends HttpServlet {
 	    else
 	    	session.setAttribute("success", "Sucessfully tested! No errors found.");
 	    
-	    response.sendRedirect("data-tester.jsp");
+	    response.sendRedirect("dataimport/data-tester.jsp");
 	}
 	
-	static List<String> checkNodes(Node node, HashMap<String, ColumnDTO> columns) {
-		
-		List<String> errors = new ArrayList<String>();
+	static void checkNodes(Node node, HashMap<String, ColumnDTO> columns) {
 		
 	    String elemName = "";
 	    String value = "";
@@ -188,57 +186,48 @@ public class DataImportTester extends HttpServlet {
 			    			boolean isSigned = column.isSigned();
 			    			
 			    			if(columnType == Types.INTEGER || columnType == Types.SMALLINT || columnType == Types.TINYINT || columnType == Types.BIGINT || columnType == Types.NUMERIC){
-			    				if(!isInteger(value) && !isLong(value)){
-			    					errors.add("Element '"+elemName+"' value has to be a number between "+getRange(columnType, isSigned)+"!<br/>Current value: "+value);
-			    				} else {
-			    					List<String> intErrors = checkIntSize(value, columnType, isSigned, elemName);
-			    					if(intErrors != null && intErrors.size() > 0)
-				    					errors.addAll(intErrors);
-			    				}		    					
+			    				if(!isInteger(value) && !isLong(value))
+			    					errors = addError(errors, "Element '"+elemName+"' value has to be a number between "+getRange(columnType, isSigned)+"!<br/>Current value: "+value);
+			    				else
+			    					checkIntSize(value, columnType, isSigned, elemName);
 			    			} else if (columnType == Types.DOUBLE){
-			    				if(!isDouble(value)){
-			    					errors.add("Element '"+elemName+"' value has to be a number!<br/>Current value: "+value);
-			    				} else {
-			    					List<String> decErrors = checkDecimalNumber(value, column.getPrecision(), column.getScale(), elemName);
-			    					if(decErrors != null && decErrors.size() > 0)
-				    					errors.addAll(decErrors);
-			    				}		    				
+			    				if(!isDouble(value))
+			    					errors = addError(errors, "Element '"+elemName+"' value has to be a number!<br/>Current value: "+value);
+			    				else
+			    					checkDecimalNumber(value, column.getPrecision(), column.getScale(), elemName);
 			    			} else if (columnType == Types.FLOAT || columnType == Types.REAL){
-			    				if(!isFloat(value)){
-			    					errors.add("Element '"+elemName+"' value has to be a number!<br/>Current value: "+value);
-			    				} else {
-			    					List<String> decErrors = checkDecimalNumber(value, column.getPrecision(), column.getScale(), elemName);
-			    					if(decErrors != null && decErrors.size() > 0)
-				    					errors.addAll(decErrors);
-			    				}
+			    				if(!isFloat(value))
+			    					errors = addError(errors, "Element '"+elemName+"' value has to be a number!<br/>Current value: "+value);
+			    				else
+			    					checkDecimalNumber(value, column.getPrecision(), column.getScale(), elemName);
 			    			} else if (columnType == Types.DECIMAL){
-			    				if(!isDouble(value)){
-			    					errors.add("Element '"+elemName+"' value has to be a number!<br/>Current value: "+value);
-				    			} else {
-			    					List<String> decErrors = checkDecimalNumber(value, column.getPrecision(), column.getScale(), elemName);
-			    					if(decErrors != null && decErrors.size() > 0)
-				    					errors.addAll(decErrors);
-			    				}
+			    				if(!isDouble(value))
+			    					errors = addError(errors, "Element '"+elemName+"' value has to be a number!<br/>Current value: "+value);
+				    			else
+			    					checkDecimalNumber(value, column.getPrecision(), column.getScale(), elemName);
 			    			} else if (columnType == Types.VARCHAR || columnType == Types.CHAR || columnType == Types.LONGVARCHAR){
 			    				if(value != null && value.length() > size)
-			    					errors.add("Element '"+elemName+"' value is too long for mysql column '"+columnName+"'!<br/>Current value: "+value);
+			    					errors = addError(errors, "Element '"+elemName+"' value (length: "+value.length()+") is too long for mysql column '"+columnName+"' (length: "+size+")!<br/>Current value: "+threeDots(value,50));
 			    			} else if (columnType == Types.DATE){
 			    				if(!isDate(value))
-			    					errors.add("Element '"+elemName+"' value has to be in date format (YYYY-MM-DD)!<br/>Current value: "+value);
+			    					errors = addError(errors, "Element '"+elemName+"' value has to be in date format (YYYY-MM-DD)!<br/>Current value: "+value);
 			    			}
 		    			}
 		    		} else {
-		    			errors.add("There is no such column in mysql database: "+elemName+"<br/>Columns in mysql table are: "+getColumnNames(columns));
+		    			errors = addError(errors, "There is no such column in mysql database: "+elemName+"<br/>Columns in mysql table are: "+getColumnNames(columns));
 		    		}
-		    		//System.out.println("<"+elemName+">"+value+"</"+elemName+">");
 		    	}
-		    	
 		    }
 	    }       
-	    return errors;
 	}
 	
-	public static boolean isInteger(String s){
+	private static List<String> addError(List<String> errors, String error){
+		if(!errors.contains(error))
+			errors.add(error);
+		return errors;
+	}
+	
+	private static boolean isInteger(String s){
     	boolean ret = true;
     	try {    
     		new Integer(s).intValue(); 
@@ -248,7 +237,7 @@ public class DataImportTester extends HttpServlet {
     	return ret;
     }
 	
-	public static boolean isLong(String s){
+	private static boolean isLong(String s){
     	boolean ret = true;
     	try {    
     		new Long(s).longValue(); 
@@ -258,7 +247,7 @@ public class DataImportTester extends HttpServlet {
     	return ret;
     }
 	
-	public static boolean isFloat(String s){
+	private static boolean isFloat(String s){
     	boolean ret = true;
     	try {    
     		new Float(s).floatValue(); 
@@ -268,7 +257,7 @@ public class DataImportTester extends HttpServlet {
     	return ret;
     }
 	
-	public static boolean isDouble(String s){
+	private static boolean isDouble(String s){
     	boolean ret = true;
     	try {    
     		new Double(s).doubleValue(); 
@@ -278,7 +267,7 @@ public class DataImportTester extends HttpServlet {
     	return ret;
     }
 	
-	public static boolean isDate(String s){
+	private static boolean isDate(String s){
     	boolean ret = true;
     	String formatStr = "yyyy-MM-dd";
     	SimpleDateFormat df = new SimpleDateFormat(formatStr);		
@@ -292,57 +281,54 @@ public class DataImportTester extends HttpServlet {
     	return ret;
     }
 	
-	public static List<String> checkIntSize(String nr, int columnType, boolean signed, String elemName){
-    	
-		List<String> errors = new ArrayList<String>();
+	private static void checkIntSize(String nr, int columnType, boolean signed, String elemName){
     	
     	if(!signed){
     		if(columnType == Types.TINYINT){
     			int intVal = new Integer(nr).intValue();
     			if(intVal < 0 || intVal > 255)
-    				errors.add("Element '"+elemName+"': number has to be between "+getRange(columnType, signed)+"!<br/>Current value: "+nr);
+    				errors = addError(errors, "Element '"+elemName+"': number has to be between "+getRange(columnType, signed)+"!<br/>Current value: "+nr);
     		} else if(columnType == Types.SMALLINT) {
     			int intVal = new Integer(nr).intValue();
     			if(intVal < 0 || intVal > 65535)
-    				errors.add("Element '"+elemName+"': number has to be between "+getRange(columnType, signed)+"!<br/>Current value: "+nr);
+    				errors = addError(errors, "Element '"+elemName+"': number has to be between "+getRange(columnType, signed)+"!<br/>Current value: "+nr);
     		} else if(columnType == Types.INTEGER){
     			long longVal = new Long(nr).longValue();
     			long max = new Long("4294967295").longValue();
         		if(longVal < 0 || longVal > max)
-        			errors.add("Element '"+elemName+"': number has to be between "+getRange(columnType, signed)+"!<br/>Current value: "+nr);
+        			errors = addError(errors, "Element '"+elemName+"': number has to be between "+getRange(columnType, signed)+"!<br/>Current value: "+nr);
     		} else if(columnType == Types.BIGINT){
     			long longVal = new Long(nr).longValue();
     			long max = new Long("18446744073709551615").longValue();
         		if(longVal < 0 || longVal > max)
-        			errors.add("Element '"+elemName+"': number has to be between "+getRange(columnType, signed)+"!<br/>Current value: "+nr);
+        			errors = addError(errors, "Element '"+elemName+"': number has to be between "+getRange(columnType, signed)+"!<br/>Current value: "+nr);
     		}
     	} else {
     		if(columnType == Types.TINYINT){
     			int intVal = new Integer(nr).intValue();
     			if(intVal < -128 || intVal > 127)
-    				errors.add("Element '"+elemName+"': number has to be between "+getRange(columnType, signed)+"!<br/>Current value: "+nr);
+    				errors = addError(errors, "Element '"+elemName+"': number has to be between "+getRange(columnType, signed)+"!<br/>Current value: "+nr);
     		} else if(columnType == Types.SMALLINT) {
     			int intVal = new Integer(nr).intValue();
     			if(intVal < -32768 || intVal > 32767)
-    				errors.add("Element '"+elemName+"': number has to be between "+getRange(columnType, signed)+"!<br/>Current value: "+nr);
+    				errors = addError(errors, "Element '"+elemName+"': number has to be between "+getRange(columnType, signed)+"!<br/>Current value: "+nr);
     		} else if(columnType == Types.INTEGER){
     			long longVal = new Long(nr).longValue();
     			long min = new Long("-2147483648").longValue();
     			long max = new Long("2147483647").longValue();
         		if(longVal < min || longVal > max)
-        			errors.add("Element '"+elemName+"': number has to be between "+getRange(columnType, signed)+"!<br/>Current value: "+nr);
+        			errors = addError(errors, "Element '"+elemName+"': number has to be between "+getRange(columnType, signed)+"!<br/>Current value: "+nr);
     		} else if(columnType == Types.BIGINT){
     			long longVal = new Long(nr).longValue();
     			long min = new Long("-9223372036854775808").longValue();
     			long max = new Long("9223372036854775807").longValue();
         		if(longVal < min || longVal > max)
-        			errors.add("Element '"+elemName+"': number has to be between "+getRange(columnType, signed)+"!<br/>Current value: "+nr);
+        			errors = addError(errors, "Element '"+elemName+"': number has to be between "+getRange(columnType, signed)+"!<br/>Current value: "+nr);
     		}
     	}    	
-    	return errors;
     }
 	
-	public static String getRange(int type, boolean signed) {
+	private static String getRange(int type, boolean signed) {
 		String ret = "";
 		if(!signed){
 			if(type == Types.TINYINT)
@@ -366,9 +352,8 @@ public class DataImportTester extends HttpServlet {
 		return ret;
 	}
 	
-	public static List<String> checkDecimalNumber(String nr, int precision, int scale, String elemName){
+	private static void checkDecimalNumber(String nr, int precision, int scale, String elemName){
     	
-		List<String> errors = new ArrayList<String>();
 		String nr_precision = "";
 		String nr_scale = "";
 		StringTokenizer st = new StringTokenizer(nr,".");
@@ -381,12 +366,10 @@ public class DataImportTester extends HttpServlet {
 			nr_precision = nr_precision.substring(1);
 		
 		if(nr_precision.length() > precision)
-			errors.add("Element '"+elemName+"': Too many digits before decimal point. Has to be less than "+precision+" digits!<br/>Current value: "+nr_precision);
+			errors = addError(errors, "Element '"+elemName+"': Too many digits before decimal point. Has to be less than "+precision+" digits!<br/>Current value: "+nr_precision);
 		
 		if(nr_scale.length() > scale)
-			errors.add("Element '"+elemName+"': Too many digits after decimal point. Has to be less than "+scale+" digits!<br/>Current value: "+nr_scale);
-		
-		return errors;
+			errors = addError(errors, "Element '"+elemName+"': Too many digits after decimal point. Has to be less than "+scale+" digits!<br/>Current value: "+nr_scale);
 		
 	}
 	
@@ -404,6 +387,20 @@ public class DataImportTester extends HttpServlet {
     		k++;
     	}
     	return ret;
+	}
+	
+	private static String threeDots(String s, int len){
+		
+		if (len<=0) return s;
+		if (s==null || s.length()==0) return s;
+		
+		if (s.length()>len){
+			StringBuffer buf = new StringBuffer(s.substring(0,len));
+			buf.append("...");
+			return buf.toString();
+		}
+		else
+			return s;
 	}
 
 }

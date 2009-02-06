@@ -13,7 +13,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
-    <jsp:include page="header-page.jsp" />
+    <jsp:include page="../header-page.jsp" />
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
@@ -25,7 +25,7 @@
   </head>
   <body>
     <div id="visual-portal-wrapper">
-      <jsp:include page="header.jsp" />
+      <jsp:include page="../header.jsp" />
       <!-- The wrapper div. It contains the three columns. -->
       <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
@@ -34,7 +34,7 @@
           <div id="portal-column-content">
             <div id="content">
               <div class="documentContent" id="region-content">
-              	<jsp:include page="header-dynamic.jsp">
+              	<jsp:include page="../header-dynamic.jsp">
                   <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <a name="documentContent"></a>
@@ -115,7 +115,7 @@
           <!-- start of the left (by default at least) column -->
           <div id="portal-column-one">
             <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp">
+              <jsp:include page="../inc_column_left.jsp">
                 <jsp:param name="page_name" value="news.jsp" />
               </jsp:include>
             </div>
@@ -126,7 +126,7 @@
         <div class="visualClear"><!-- --></div>
       </div>
       <!-- end column wrapper -->
-      <jsp:include page="footer-static.jsp" />
+      <jsp:include page="../footer-static.jsp" />
     </div>
   </body>
 </html>

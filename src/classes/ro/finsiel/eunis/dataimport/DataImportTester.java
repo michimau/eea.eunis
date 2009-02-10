@@ -366,10 +366,10 @@ public class DataImportTester extends HttpServlet {
 			nr_precision = nr_precision.substring(1);
 		
 		if(nr_precision.length() > precision)
-			errors = addError(errors, "Element '"+elemName+"': Too many digits before decimal point. Has to be less than "+precision+" digits!<br/>Current value: "+nr_precision);
+			errors = addError(errors, "Element '"+elemName+"': Too many digits before decimal point. Has to be less than "+precision+" digits!<br/>Current value: "+nr);
 		
 		if(nr_scale.length() > scale)
-			errors = addError(errors, "Element '"+elemName+"': Too many digits after decimal point. Has to be less than "+scale+" digits!<br/>Current value: "+nr_scale);
+			errors = addError(errors, "Element '"+elemName+"': Too many digits after decimal point. Has to be less than "+scale+" digits!<br/>Current value: "+nr);
 		
 	}
 	

@@ -9,6 +9,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import ro.finsiel.eunis.dataimport.ColumnDTO;
@@ -414,7 +415,7 @@ public class SQLUtilities {
       con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
 
       ps = con.prepareStatement( "DELETE FROM " + tableName
-        + " WHERE 1=1" + ( whereCondition == null && whereCondition.trim().length() <= 0 ? "" : " AND " + whereCondition ) );
+        + " WHERE 1=1" + ( whereCondition == null || whereCondition.trim().length() <= 0 ? "" : " AND " + whereCondition ) );
       ps.execute();
     }
     catch ( Exception e )
@@ -507,6 +508,56 @@ public class SQLUtilities {
     {
       e.printStackTrace();
       result = false;
+    }
+    finally
+    {
+      closeAll( con, ps, null );
+    }
+    return result;
+  }
+  
+  /**
+   * Execute INSERT statement
+   *
+   * @param tableName    table name
+   * @param tableColumns columns
+   * @return operation status
+   */
+  public boolean ExecuteMultipleInsert( String tableName, List<TableColumns> tableRows ) throws Exception {
+
+    if ( tableName == null || tableName.trim().length() <= 0 || tableRows == null || tableRows.size() <= 0)
+    {
+      return false;
+    }
+
+    boolean result = true;
+
+    Connection con = null;
+    PreparedStatement ps = null;
+
+    try
+    {
+      Class.forName( SQL_DRV );
+      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+      
+      for(Iterator<TableColumns> it = tableRows.iterator(); it.hasNext();){
+    	  
+    	  TableColumns tableColumns = it.next();
+    	  String namesList = "";
+    	  String valuesList = "";
+    	  
+    	  for ( int i = 0; i < tableColumns.getColumnsNames().size(); i++ ){
+    		  namesList += ( String ) tableColumns.getColumnsNames().get( i ) + ( i < tableColumns.getColumnsNames().size() - 1 ? "," : "" );
+    		  valuesList += "'" + ( String ) tableColumns.getColumnsValues().get( i ) + "'" + ( i < tableColumns.getColumnsNames().size() - 1 ? "," : "" );
+    	  }
+
+    	  ps = con.prepareStatement( "INSERT INTO " + tableName + " ( " + namesList + " ) values ( " + valuesList + " ) " );
+    	  ps.execute();
+      }
+    }
+    catch ( Exception e )
+    {
+    	throw(e);
     }
     finally
     {

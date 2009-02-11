@@ -941,5 +941,47 @@ public class SQLUtilities {
 
 	    return columns;
   }
+  
+  public String getTableContentAsXML(String tableName) {
+	    
+	  Connection con = null;
+	  StringBuilder ret = new StringBuilder();
+	  
+	  String nl = "\n";
+	    
+	  try {
+		  Class.forName( SQL_DRV );
+	      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+	      
+	      Statement st = con.createStatement();
+	      ResultSet rs = st.executeQuery("SELECT * FROM "+tableName);
+	      ResultSetMetaData rsMeta = rs.getMetaData();
+	      int numberOfColumns = rsMeta.getColumnCount();
+	      
+	      while ( rs.next() ){
+	    	  ret.append("<ROW>").append(nl);
+		      for (int x = 1; x <= numberOfColumns; x++) {
+		    	  String columnName = rsMeta.getColumnName(x);
+		    	  String value = rs.getString(columnName);
+		    	  if(value == null)
+		    		  value = "NULL";
+		    	  else if(value.equals("") || value.equalsIgnoreCase("NULL"))
+		    		  value = "NULL";
+		    	  
+		    	  ret.append("<").append(columnName).append(">").append(EunisUtil.replaceLtGt(value)).append("</").append(columnName).append(">").append(nl);
+		      }
+		      ret.append("</ROW>").append(nl);
+	      }
+	      
+	      st.close();
+	      con.close();
+	    }
+	    catch ( Exception ex )
+	    {
+	      ex.printStackTrace();
+	    }
+
+	    return ret.toString();
+}
 
 }

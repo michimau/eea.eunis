@@ -306,6 +306,11 @@
     <servlet-name>dataimporter</servlet-name>
     <servlet-class>ro.finsiel.eunis.dataimport.DataImporter</servlet-class>
   </servlet>
+  
+  <servlet>
+    <servlet-name>dataexporter</servlet-name>
+    <servlet-class>ro.finsiel.eunis.dataimport.DataExporter</servlet-class>
+  </servlet>
 
   <servlet>
     <servlet-name>species</servlet-name>
@@ -347,6 +352,11 @@
   <servlet-mapping>
     <servlet-name>dataimporter</servlet-name>
     <url-pattern>/dataimporter</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>dataexporter</servlet-name>
+    <url-pattern>/dataexporter</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>

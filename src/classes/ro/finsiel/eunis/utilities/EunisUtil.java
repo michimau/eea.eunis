@@ -46,4 +46,21 @@ public class EunisUtil {
 
         return retString;
     }
+    
+    public static String replaceLtGt(String in){
+        
+        in = (in != null ? in : "");
+        StringBuffer ret = new StringBuffer();
+        for (int i = 0; i < in.length(); i++) {
+          char c = in.charAt(i);
+          if (c == '<')
+            ret.append("&lt;");
+          else if (c == '>')
+            ret.append("&gt;");
+          else
+            ret.append(c);
+        }
+
+        return ret.toString();
+    }
 }

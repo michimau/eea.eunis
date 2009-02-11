@@ -99,7 +99,7 @@
 		                	<td><input type="checkbox" id="empty" name="empty"/></td>
 		                </tr>
 		                <tr>
-		                	<td align="right" colspan="2"><input type="submit" name="btn" value="Test"/></td>
+		                	<td align="right" colspan="2"><input type="submit" name="btn" value="Import"/></td>
 		                </tr>
 	                </table>
 	            </form>

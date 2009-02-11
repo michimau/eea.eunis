@@ -253,6 +253,22 @@
                     </td>
                   </tr>
 <%
+  }
+  if ( SessionManager.isAdmin() )
+  {
+    //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";
+%>
+                  <tr <%=cssClass%>>
+                    <td align="center">
+                      <a href="refreshtemplate" title="<%=cm.cms("services_refresh_template")%>"><img alt="<%=cm.cms("refresh_template")%>" src="images/webcontent-inline.gif" width="81" height="43" border="0" title="<%=cm.cms("services_refresh_template")%>" /></a>
+                      <%=cm.cmsAlt("refresh_template")%>
+                    </td>
+                    <td>
+                      <a href="refreshtemplate" title="<%=cm.cms("services_refresh_template")%>"><%=cm.cmsPhrase("Refresh template")%></a>
+                      <%=cm.cmsTitle("services_refresh_template")%>
+                    </td>
+                  </tr>
+<%
     if ( !SessionManager.getWebContent().isEditMode() )
     {
       //cssClass = color++ % 2 == 0 ? "class=\"zebraeven\"" : "";

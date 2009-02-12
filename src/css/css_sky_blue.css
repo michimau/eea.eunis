@@ -3,13 +3,15 @@ dark    : #006CAD
 medium  : #6DABD0
 light   : #B8D6E8
 */
-#eunistrail
-{
-  font-family: "Courier New", "Times New Roman", serif;
-  font-size: small;
-  text-decoration: none;
-  color: black;
+@media screen {
+	body {
+		font-size: 80% !important;
+	}
+	table {
+		font-size: 1em !important;
+	}
 }
+
 
 .textVersion
 {

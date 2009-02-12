@@ -4,8 +4,8 @@ medium  : #6DABD0
 light   : #B8D6E8
 */
 @media screen {
-	body {
-		font-size: 80% !important;
+	body .documentContent {
+		font-size: 110% !important;
 	}
 	table {
 		font-size: 1em !important;

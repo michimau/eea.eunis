@@ -21,7 +21,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
-  String btrail = "eea#" + eeaHome + ",home#index.jsp,news_location";
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,data import#dataimport/index.jsp,data exporter";
 %>
     <title>
       Data Export
@@ -61,50 +61,62 @@
                 <h1>
                   Data Export
                 </h1>
-                <p class="documentDescription">
-                The purpose of this page is to export EUNIS database table into XML formatted Oracle dump.
-                </p>
-                <form name="eunis" method="get" action="<%=domainName%>/dataexporter">
-                	<label for="table">Table</label>
-	                <select id="table" name="table" title="Table names">
-	                	<option value=""></option>
-	                <%
-	                	String SQL_DRV = application.getInitParameter("JDBC_DRV");
-	                    String SQL_URL = application.getInitParameter("JDBC_URL");
-	                    String SQL_USR = application.getInitParameter("JDBC_USR");
-	                    String SQL_PWD = application.getInitParameter("JDBC_PWD");
-	
-	                    SQLUtilities sqlc = new SQLUtilities();
-	                    sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-	                    
-	                	List<String> tableNames = sqlc.getAllChm62edtTableNames();
-	                	for(Iterator it = tableNames.iterator(); it.hasNext();){
-		                	String tableName = (String) it.next();%>
-		                	<option value="<%=tableName%>"><%=tableName%></option>
-		                	<%
-	                	}
-	                %>
-	                </select>
-	                <input type="submit" name="btn" value="Export"/>
-	            </form>
-	            <%
-	            List<String> errors = (List<String>)request.getSession().getAttribute("errors");
-	            if(errors != null && errors.size() > 0){%>
-	            	<h2><%=errors.size()%> errors found:</h2>
-	            	<ul>
-	            	<%
-		         	for(int i = 0 ; i<errors.size() ; i++) {
-			         	String error = errors.get(i);
-		         		%>
-		         		<li><%=error%></li>
-		         		<%
-			        }
-			        %>
-			        </ul>
-			        <%
-			        request.getSession().removeAttribute("errors");
-	            }
-	            %>
+                <%
+                if( SessionManager.isAuthenticated() && SessionManager.isImportExportData_RIGHT() ){
+                %>
+	                <p class="documentDescription">
+	                The purpose of this page is to export EUNIS database table into XML formatted Oracle dump.
+	                </p>
+	                <form name="eunis" method="get" action="<%=domainName%>/dataexporter">
+	                	<label for="table">Table</label>
+		                <select id="table" name="table" title="Table names">
+		                	<option value=""></option>
+		                <%
+		                	String SQL_DRV = application.getInitParameter("JDBC_DRV");
+		                    String SQL_URL = application.getInitParameter("JDBC_URL");
+		                    String SQL_USR = application.getInitParameter("JDBC_USR");
+		                    String SQL_PWD = application.getInitParameter("JDBC_PWD");
+		
+		                    SQLUtilities sqlc = new SQLUtilities();
+		                    sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+		                    
+		                	List<String> tableNames = sqlc.getAllChm62edtTableNames();
+		                	for(Iterator it = tableNames.iterator(); it.hasNext();){
+			                	String tableName = (String) it.next();%>
+			                	<option value="<%=tableName%>"><%=tableName%></option>
+			                	<%
+		                	}
+		                %>
+		                </select>
+		                <input type="submit" name="btn" value="Export"/>
+		            </form>
+		            <%
+		            List<String> errors = (List<String>)request.getSession().getAttribute("errors");
+		            if(errors != null && errors.size() > 0){%>
+		            	<h2><%=errors.size()%> errors found:</h2>
+		            	<ul>
+		            	<%
+			         	for(int i = 0 ; i<errors.size() ; i++) {
+				         	String error = errors.get(i);
+			         		%>
+			         		<li><%=error%></li>
+			         		<%
+				        }
+				        %>
+				        </ul>
+				        <%
+				        request.getSession().removeAttribute("errors");
+		            }
+				} else {
+	            	%>
+	            		<br />
+		                <br />
+		                <span style="color : red"><%=cm.cmsPhrase("You must be authenticated and have the proper right to access this page.")%></span>
+		                <br />
+		                <br />
+	            	<%	
+            	}
+                %>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

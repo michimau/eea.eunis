@@ -48,6 +48,7 @@ public final class SessionManager implements java.io.Serializable {
   private boolean services_RIGHT = false;
   private boolean save_search_criteria_RIGHT = false;
   private boolean content_management_RIGHT = false;
+  private boolean import_export_data_RIGHT = false;
   private boolean upload_pictures_RIGHT = false;
   private boolean role_management_RIGHT = false;
   private boolean admin_ROLE = false;
@@ -457,6 +458,7 @@ public final class SessionManager implements java.io.Serializable {
     this.services_RIGHT = false;
     this.save_search_criteria_RIGHT = false;
     this.content_management_RIGHT = false;
+    this.import_export_data_RIGHT = false;
     this.upload_pictures_RIGHT = false;
     this.manage_users = false;
     this.role_management_RIGHT = false;
@@ -549,6 +551,9 @@ public final class SessionManager implements java.io.Serializable {
           }
           if (((String) userRights.get(i)).equalsIgnoreCase("content_management")) {
             content_management_RIGHT = true;
+          }
+          if (((String) userRights.get(i)).equalsIgnoreCase("Import/Export data")) {
+        	  import_export_data_RIGHT = true;
           }
           if (((String) userRights.get(i)).equalsIgnoreCase("user_management")) {
             manage_users = true;
@@ -801,6 +806,14 @@ public final class SessionManager implements java.io.Serializable {
    */
   public boolean isContent_management_RIGHT() {
     return content_management_RIGHT;
+  }
+  
+  /**
+   * Getter for Import/Export Data.
+   * @return True is user has the right to import or export data.
+   */
+  public boolean isImportExportData_RIGHT() {
+    return import_export_data_RIGHT;
   }
 
   /**

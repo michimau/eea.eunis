@@ -21,7 +21,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
-  String btrail = "eea#" + eeaHome + ",home#index.jsp,news_location";
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,data import";
 %>
     <title>
       Data Import

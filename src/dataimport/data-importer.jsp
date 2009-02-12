@@ -21,7 +21,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
-  String btrail = "eea#" + eeaHome + ",home#index.jsp,news_location";
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,data import#dataimport/index.jsp,data importer";
 %>
     <title>
       Data Import
@@ -61,74 +61,86 @@
                 <h1>
                   Data Import
                 </h1>
-                <p class="documentDescription">
-                The purpose of this page is to import the XML formatted Oracle dumps into EUNIS database.
-                </p>
-                <form name="eunis" method="post" action="<%=domainName%>/dataimporter" enctype="multipart/form-data">
-                	<table border="0" width="370">
-	                	<tr>
-	                		<td><label for="table">Table</label></td>
-	                		<td>
-				                <select id="table" name="table" title="Table names">
-				                	<option value=""></option>
-				                <%
-				                	String SQL_DRV = application.getInitParameter("JDBC_DRV");
-				                    String SQL_URL = application.getInitParameter("JDBC_URL");
-				                    String SQL_USR = application.getInitParameter("JDBC_USR");
-				                    String SQL_PWD = application.getInitParameter("JDBC_PWD");
-				
-				                    SQLUtilities sqlc = new SQLUtilities();
-				                    sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-				                    
-				                	List<String> tableNames = sqlc.getAllChm62edtTableNames();
-				                	for(Iterator it = tableNames.iterator(); it.hasNext();){
-					                	String tableName = (String) it.next();%>
-					                	<option value="<%=tableName%>"><%=tableName%></option>
-					                	<%
-				                	}
-				                %>
-				                </select>
-							</td>
-						</tr>
-						<tr>
-		                	<td><label for="file">File</label></td>
-		                	<td><input type="file" id="file" name="file"/></td>
-		                </tr>
-		                <tr>
-		                	<td><label for="empty">Empty the table</label></td>
-		                	<td><input type="checkbox" id="empty" name="empty"/></td>
-		                </tr>
-		                <tr>
-		                	<td align="right" colspan="2"><input type="submit" name="btn" value="Import"/></td>
-		                </tr>
-	                </table>
-	            </form>
-	            <%
-	            List<String> errors = (List<String>)request.getSession().getAttribute("errors");
-	            if(errors != null && errors.size() > 0){%>
-	            	<h2><%=errors.size()%> errors found:</h2>
-	            	<ul>
-	            	<%
-		         	for(int i = 0 ; i<errors.size() ; i++) {
-			         	String error = errors.get(i);
-		         		%>
-		         		<li><%=error%></li>
-		         		<%
-			        }
-			        %>
-			        </ul>
-			        <%
-			        request.getSession().removeAttribute("errors");
-	            } else {
-		         	String success = (String)request.getSession().getAttribute("success");
-		         	if(success != null){
-		         		%>
-		         			<b><%=success%></b>
-		         		<%
-			        	request.getSession().removeAttribute("success");
-	         		}
-	            }
-	            %>
+                <%
+                if( SessionManager.isAuthenticated() && SessionManager.isImportExportData_RIGHT() ){
+                %>
+	                <p class="documentDescription">
+	                The purpose of this page is to import the XML formatted Oracle dumps into EUNIS database.
+	                </p>
+	                <form name="eunis" method="post" action="<%=domainName%>/dataimporter" enctype="multipart/form-data">
+	                	<table border="0" width="370">
+		                	<tr>
+		                		<td><label for="table">Table</label></td>
+		                		<td>
+					                <select id="table" name="table" title="Table names">
+					                	<option value=""></option>
+					                <%
+					                	String SQL_DRV = application.getInitParameter("JDBC_DRV");
+					                    String SQL_URL = application.getInitParameter("JDBC_URL");
+					                    String SQL_USR = application.getInitParameter("JDBC_USR");
+					                    String SQL_PWD = application.getInitParameter("JDBC_PWD");
+					
+					                    SQLUtilities sqlc = new SQLUtilities();
+					                    sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+					                    
+					                	List<String> tableNames = sqlc.getAllChm62edtTableNames();
+					                	for(Iterator it = tableNames.iterator(); it.hasNext();){
+						                	String tableName = (String) it.next();%>
+						                	<option value="<%=tableName%>"><%=tableName%></option>
+						                	<%
+					                	}
+					                %>
+					                </select>
+								</td>
+							</tr>
+							<tr>
+			                	<td><label for="file">File</label></td>
+			                	<td><input type="file" id="file" name="file"/></td>
+			                </tr>
+			                <tr>
+			                	<td><label for="empty">Empty the table</label></td>
+			                	<td><input type="checkbox" id="empty" name="empty"/></td>
+			                </tr>
+			                <tr>
+			                	<td align="right" colspan="2"><input type="submit" name="btn" value="Import"/></td>
+			                </tr>
+		                </table>
+		            </form>
+		            <%
+		            List<String> errors = (List<String>)request.getSession().getAttribute("errors");
+		            if(errors != null && errors.size() > 0){%>
+		            	<h2><%=errors.size()%> errors found:</h2>
+		            	<ul>
+		            	<%
+			         	for(int i = 0 ; i<errors.size() ; i++) {
+				         	String error = errors.get(i);
+			         		%>
+			         		<li><%=error%></li>
+			         		<%
+				        }
+				        %>
+				        </ul>
+				        <%
+				        request.getSession().removeAttribute("errors");
+		            } else {
+			         	String success = (String)request.getSession().getAttribute("success");
+			         	if(success != null){
+			         		%>
+			         			<b><%=success%></b>
+			         		<%
+				        	request.getSession().removeAttribute("success");
+		         		}
+		            }
+            	} else {
+	            	%>
+	            		<br />
+		                <br />
+		                <span style="color : red"><%=cm.cmsPhrase("You must be authenticated and have the proper right to access this page.")%></span>
+		                <br />
+		                <br />
+	            	<%	
+            	}
+                %>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

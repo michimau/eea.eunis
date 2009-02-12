@@ -552,7 +552,7 @@ public final class SessionManager implements java.io.Serializable {
           if (((String) userRights.get(i)).equalsIgnoreCase("content_management")) {
             content_management_RIGHT = true;
           }
-          if (((String) userRights.get(i)).equalsIgnoreCase("Import/Export data")) {
+          if (((String) userRights.get(i)).equalsIgnoreCase("import/export_data")) {
         	  import_export_data_RIGHT = true;
           }
           if (((String) userRights.get(i)).equalsIgnoreCase("user_management")) {

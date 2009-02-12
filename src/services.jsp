@@ -333,6 +333,22 @@
                   </tr>
 <%
     }
+    if( SessionManager.isImportExportData_RIGHT() )
+  	{
+%>
+                  <tr <%=cssClass%>>
+                    <td align="center">
+                      <a href="dataimport" title="<%=cm.cms("data_import")%>"><img alt="<%=cm.cms("data_import")%>" src="images/clean.gif" width="81" height="43" border="0" title="<%=cm.cms("data_import")%>" /></a>
+                      <%=cm.cmsAlt("data_import")%>
+                    </td>
+                    <td>
+                      <a href="dataimport" title="<%=cm.cms("data_import")%>"><%=cm.cmsPhrase("Import/Export XML formatted Oracle dumps into EUNIS database")%></a>
+                      <%=cm.cmsTitle("data_import")%>
+                    </td>
+                  </tr>
+<%
+  	}
+    
   }
 %>
                 </table>

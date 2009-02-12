@@ -32,6 +32,7 @@ import org.xml.sax.SAXException;
 
 import java.sql.Types;
 
+import ro.finsiel.eunis.session.SessionManager;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
 import static org.w3c.dom.Node.ELEMENT_NODE;
@@ -57,106 +58,109 @@ public class DataImportTester extends HttpServlet {
 	*/
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession(false);
-		errors = new ArrayList<String>();
-		
-		String SQL_DRV = request.getSession().getServletContext().getInitParameter("JDBC_DRV");
-		String SQL_URL = request.getSession().getServletContext().getInitParameter("JDBC_URL");
-        String SQL_USR = request.getSession().getServletContext().getInitParameter("JDBC_USR");
-        String SQL_PWD = request.getSession().getServletContext().getInitParameter("JDBC_PWD");
-        
-		String table = "";
-		// Initialise the default settings
-	    try
-	    {
-	      BASE_DIR = getServletContext().getInitParameter( "TOMCAT_HOME" );
-	      TEMP_DIR = BASE_DIR + "/webapps/eunis/temp";
-	    } catch (Exception ex) {
-	      ex.printStackTrace();
-	    }
-	    List items = new ArrayList();
-	    boolean isMultipart = FileUpload.isMultipartContent(request);
-	    DiskFileUpload upload = new DiskFileUpload();
-	    upload.setSizeThreshold(MAX_MEM_TRESHOLD);
-	    upload.setSizeMax(MAX_FILE_SIZE);
-	    upload.setRepositoryPath(TEMP_DIR);
-	    
-	    if (isMultipart) {
-			try {
-				items = upload.parseRequest(request);
-			} catch (FileUploadException ex) {
-				ex.printStackTrace();
-				errors.add(ex.getMessage());
-				response.sendRedirect("dataimport/data-tester.jsp");
-			}
-
-	    	for (int i = 0; i < items.size(); i++) {
-	            FileItem item = (FileItem) items.get(i);
-	            if(item.isFormField()){
-	            	String fieldName = item.getFieldName();
-	                String fieldValue = item.getString();
-	                if (null != fieldName && fieldName.equals("table")) {
-	                	if(null != fieldValue && !fieldValue.equals("")){
-	                		table = fieldValue;
-	                	}else{
-	                		errors.add("Please select table!");
-            	    		break;
-	                	}
-	                }
-	            } else {
-	                try {
-	                	File xmlFile = new File(TEMP_DIR + "/xmlFile");
-	                	item.write(xmlFile);
-	                	
-	                	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-	                	DocumentBuilder db = dbf.newDocumentBuilder();
-	                	Document doc = db.parse(xmlFile);
-	                	doc.getDocumentElement().normalize();
-	                	Node rootElement = doc.getDocumentElement();
-	                	String rootName = rootElement.getNodeName();
-	                	if(rootName == null || !rootName.equals("ROWSET"))
-	                		errors.add("First element has to be ROWSET");
-
-	                	NodeList rowNodes = rootElement.getChildNodes();
-	                	if(rowNodes.getLength() > 0) {
-	            		    for(int k = 0 ; k<rowNodes.getLength() ; k++) {
-	            		    	Node rowElem = rowNodes.item(k);
-	            		    	if(rowElem.getNodeType() == ELEMENT_NODE){
-	            		    		String rowElemName = rowElem.getNodeName();
-	            		    		if(!rowElemName.equals("") && !rowElemName.equals("ROW"))
-	            		    			errors = addError(errors, "Second level element has to be ROW");
-	            		    	}
-	            		    }
-	                	}
-	                	
-	                	SQLUtilities sql = new SQLUtilities();
-	                	sql.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-	                	HashMap<String, ColumnDTO> columns = sql.getTableInfo(table);
-
-	                	NodeList nodeLst = doc.getElementsByTagName("ROW");
-	                	for (int s = 0; s < nodeLst.getLength(); s++) {
-	                		Node rowNode = nodeLst.item(s);
-	                		checkNodes(rowNode, columns);
-	                	}
-	                	
-	                	//uploadedStream.close();
-	    	    	} catch (SAXException _ex) {
-	    	    		_ex.printStackTrace();
-	    	    		errors.add(_ex.getMessage());
-	    	    	} catch (ParserConfigurationException _ex) {
-	    	    		_ex.printStackTrace();
-	    	    		errors.add(_ex.getMessage());
-	    	    	} catch (Exception _ex) {
-	    	    		_ex.printStackTrace();
-	    	    		errors.add(_ex.getMessage());
-	    	    	}
-	            }
-	    	}
-	    
-			if(errors != null && errors.size() > 0)
-				session.setAttribute("errors", errors);
-			else
-				session.setAttribute("success", "Successfully tested! No errors found.");
-	    }
+		SessionManager sessionManager = (SessionManager) session.getAttribute("SessionManager");
+		if (sessionManager.isAuthenticated() && sessionManager.isImportExportData_RIGHT()) {
+			errors = new ArrayList<String>();
+			
+			String SQL_DRV = request.getSession().getServletContext().getInitParameter("JDBC_DRV");
+			String SQL_URL = request.getSession().getServletContext().getInitParameter("JDBC_URL");
+	        String SQL_USR = request.getSession().getServletContext().getInitParameter("JDBC_USR");
+	        String SQL_PWD = request.getSession().getServletContext().getInitParameter("JDBC_PWD");
+	        
+			String table = "";
+			// Initialise the default settings
+		    try
+		    {
+		      BASE_DIR = getServletContext().getInitParameter( "TOMCAT_HOME" );
+		      TEMP_DIR = BASE_DIR + "/webapps/eunis/temp";
+		    } catch (Exception ex) {
+		      ex.printStackTrace();
+		    }
+		    List items = new ArrayList();
+		    boolean isMultipart = FileUpload.isMultipartContent(request);
+		    DiskFileUpload upload = new DiskFileUpload();
+		    upload.setSizeThreshold(MAX_MEM_TRESHOLD);
+		    upload.setSizeMax(MAX_FILE_SIZE);
+		    upload.setRepositoryPath(TEMP_DIR);
+		    
+		    if (isMultipart) {
+				try {
+					items = upload.parseRequest(request);
+				} catch (FileUploadException ex) {
+					ex.printStackTrace();
+					errors.add(ex.getMessage());
+					response.sendRedirect("dataimport/data-tester.jsp");
+				}
+	
+		    	for (int i = 0; i < items.size(); i++) {
+		            FileItem item = (FileItem) items.get(i);
+		            if(item.isFormField()){
+		            	String fieldName = item.getFieldName();
+		                String fieldValue = item.getString();
+		                if (null != fieldName && fieldName.equals("table")) {
+		                	if(null != fieldValue && !fieldValue.equals("")){
+		                		table = fieldValue;
+		                	}else{
+		                		errors.add("Please select table!");
+	            	    		break;
+		                	}
+		                }
+		            } else {
+		                try {
+		                	File xmlFile = new File(TEMP_DIR + "/xmlFile");
+		                	item.write(xmlFile);
+		                	
+		                	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		                	DocumentBuilder db = dbf.newDocumentBuilder();
+		                	Document doc = db.parse(xmlFile);
+		                	doc.getDocumentElement().normalize();
+		                	Node rootElement = doc.getDocumentElement();
+		                	String rootName = rootElement.getNodeName();
+		                	if(rootName == null || !rootName.equals("ROWSET"))
+		                		errors.add("First element has to be ROWSET");
+	
+		                	NodeList rowNodes = rootElement.getChildNodes();
+		                	if(rowNodes.getLength() > 0) {
+		            		    for(int k = 0 ; k<rowNodes.getLength() ; k++) {
+		            		    	Node rowElem = rowNodes.item(k);
+		            		    	if(rowElem.getNodeType() == ELEMENT_NODE){
+		            		    		String rowElemName = rowElem.getNodeName();
+		            		    		if(!rowElemName.equals("") && !rowElemName.equals("ROW"))
+		            		    			errors = addError(errors, "Second level element has to be ROW");
+		            		    	}
+		            		    }
+		                	}
+		                	
+		                	SQLUtilities sql = new SQLUtilities();
+		                	sql.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+		                	HashMap<String, ColumnDTO> columns = sql.getTableInfo(table);
+	
+		                	NodeList nodeLst = doc.getElementsByTagName("ROW");
+		                	for (int s = 0; s < nodeLst.getLength(); s++) {
+		                		Node rowNode = nodeLst.item(s);
+		                		checkNodes(rowNode, columns);
+		                	}
+		                	
+		                	//uploadedStream.close();
+		    	    	} catch (SAXException _ex) {
+		    	    		_ex.printStackTrace();
+		    	    		errors.add(_ex.getMessage());
+		    	    	} catch (ParserConfigurationException _ex) {
+		    	    		_ex.printStackTrace();
+		    	    		errors.add(_ex.getMessage());
+		    	    	} catch (Exception _ex) {
+		    	    		_ex.printStackTrace();
+		    	    		errors.add(_ex.getMessage());
+		    	    	}
+		            }
+		    	}
+		    
+				if(errors != null && errors.size() > 0)
+					session.setAttribute("errors", errors);
+				else
+					session.setAttribute("success", "Successfully tested! No errors found.");
+		    }
+		}
 	    
 	    response.sendRedirect("dataimport/data-tester.jsp");
 	}

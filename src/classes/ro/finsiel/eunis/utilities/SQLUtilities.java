@@ -540,6 +540,7 @@ public class SQLUtilities {
     {
       Class.forName( SQL_DRV );
       con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+      con.setAutoCommit(false);
       
       st = con.createStatement();
       ResultSet rs = st.executeQuery("SELECT * FROM "+tableName);
@@ -581,9 +582,12 @@ public class SQLUtilities {
     	  ps = con.prepareStatement( "INSERT INTO " + tableName + " ( " + namesList + " ) values ( " + valuesList + " ) " );
     	  ps.execute();
       }
+      con.commit();
     }
     catch ( Exception e )
     {
+    	con.rollback(); 
+		con.commit(); 
     	throw(e);
     }
     finally

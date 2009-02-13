@@ -138,7 +138,7 @@ public class DataImporter extends HttpServlet {
 		                		    			if(elemValue.getNodeType() == TEXT_NODE)
 		                		    				value = ((Text)elemValue).getData();
 		                	    		  	}
-		                	    			if(value != null && !value.equals("NULL")){
+		                	    			if(value != null){
 		                		    			nameList.add(elemName);
 		                		    			valueList.add(EunisUtil.replaceTagsImport(value));
 		                	    			}

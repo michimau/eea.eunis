@@ -965,10 +965,9 @@ public class SQLUtilities {
 		    	  String value = rs.getString(columnName);
 		    	  if(value == null)
 		    		  value = "NULL";
-		    	  else if(value.equals("") || value.equalsIgnoreCase("NULL"))
-		    		  value = "NULL";
 		    	  
-		    	  ret.append("<").append(columnName).append(">").append(EunisUtil.replaceTagsExport(value)).append("</").append(columnName).append(">").append(nl);
+		    	  if(!value.equalsIgnoreCase("NULL"))
+		    		  ret.append("<").append(columnName).append(">").append(EunisUtil.replaceTagsExport(value)).append("</").append(columnName).append(">").append(nl);
 		      }
 		      ret.append("</ROW>").append(nl);
 	      }

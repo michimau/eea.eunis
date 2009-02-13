@@ -169,12 +169,15 @@ public class DataImportTester extends HttpServlet {
 		
 	    String elemName = "";
 	    String value = "";
+	    List<String> xmlColumnNames = new ArrayList<String>();
+	    List<String> mysqlColumnNames = getMysqlColumnNames(columns);
 	    NodeList list = node.getChildNodes();       
 	    if(list.getLength() > 0) {                  
 		    for(int i = 0 ; i<list.getLength() ; i++) {
 		    	Node elem = list.item(i);
 		    	if(elem.getNodeType() == ELEMENT_NODE){
 		    		elemName = elem.getNodeName();
+		    		xmlColumnNames.add(elemName);
 		    		NodeList childList = elem.getChildNodes();
 		    		for(int s = 0 ; s<childList.getLength() ; s++) {
 		    			Node elemValue = childList.item(s);
@@ -221,6 +224,22 @@ public class DataImportTester extends HttpServlet {
 		    			errors = addError(errors, "There is no such column in mysql database: "+elemName+"<br/>Columns in mysql table are: "+getColumnNames(columns));
 		    		}
 		    	}
+		    }
+		    
+		    for(Iterator<String> it2=mysqlColumnNames.iterator(); it2.hasNext();){
+		    	  boolean exist = false;  
+	    		  String mysqlColumnName = it2.next();
+	    		  for(Iterator<String> it3=xmlColumnNames.iterator(); it3.hasNext();){
+	    			  String xmlColumnName = it3.next();
+	    			  if(mysqlColumnName.equalsIgnoreCase(xmlColumnName))
+	    				  exist = true;
+	    		  }
+	    		  if(!exist){
+	    			  ColumnDTO col = columns.get(mysqlColumnName.toLowerCase());
+    				  int nullable = col.getNullable();
+    				  if(nullable == 0)
+    					  errors = addError(errors, "Column '"+mysqlColumnName+"' cannot be null ");
+	    		  }
 		    }
 	    }       
 	}
@@ -389,6 +408,18 @@ public class DataImportTester extends HttpServlet {
     		if(k != cols.size())
     			ret = ret + ", ";
     		k++;
+    	}
+    	return ret;
+	}
+	
+	private static List<String> getMysqlColumnNames(HashMap<String, ColumnDTO> columns) {
+    	
+		List<String> ret = new ArrayList<String>();
+		Collection<ColumnDTO> cols = columns.values();
+    	for(Iterator<ColumnDTO> it = cols.iterator(); it.hasNext();){
+    		ColumnDTO column = it.next();
+    		String columnName = column.getColumnName();
+    		ret.add(columnName);
     	}
     	return ret;
 	}

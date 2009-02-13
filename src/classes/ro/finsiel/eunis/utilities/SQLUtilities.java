@@ -534,11 +534,23 @@ public class SQLUtilities {
 
     Connection con = null;
     PreparedStatement ps = null;
+    Statement st = null;
 
     try
     {
       Class.forName( SQL_DRV );
       con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+      
+      st = con.createStatement();
+      ResultSet rs = st.executeQuery("SELECT * FROM "+tableName);
+      ResultSetMetaData rsMeta = rs.getMetaData();
+      
+      List<String> mysqlColumnNames = new ArrayList<String>();
+      int numberOfColumns = rsMeta.getColumnCount();
+      for (int x = 1; x <= numberOfColumns; x++) {
+    	  String columnName = rsMeta.getColumnName(x);
+    	  mysqlColumnNames.add(columnName);
+      }
       
       for(Iterator<TableColumns> it = tableRows.iterator(); it.hasNext();){
     	  
@@ -550,7 +562,22 @@ public class SQLUtilities {
     		  namesList += ( String ) tableColumns.getColumnsNames().get( i ) + ( i < tableColumns.getColumnsNames().size() - 1 ? "," : "" );
     		  valuesList += "'" + ( String ) tableColumns.getColumnsValues().get( i ) + "'" + ( i < tableColumns.getColumnsNames().size() - 1 ? "," : "" );
     	  }
-
+    	  
+    	  List xmlColumnNames = tableColumns.getColumnsNames();
+    	  for(Iterator<String> it2=mysqlColumnNames.iterator(); it2.hasNext();){
+    		  boolean exist = false;
+    		  String mysqlColumnName = it2.next();
+    		  for(Iterator it3=xmlColumnNames.iterator(); it3.hasNext();){
+    			  String xmlColumnName = (String)it3.next();
+    			  if(mysqlColumnName.equalsIgnoreCase(xmlColumnName))
+    				  exist = true;
+    		  }
+    		  if(!exist){
+    			  namesList += ","+mysqlColumnName;
+    			  valuesList += ", NULL";
+    		  }
+    	  }
+    	  
     	  ps = con.prepareStatement( "INSERT INTO " + tableName + " ( " + namesList + " ) values ( " + valuesList + " ) " );
     	  ps.execute();
       }
@@ -561,6 +588,7 @@ public class SQLUtilities {
     }
     finally
     {
+      st.close();      
       closeAll( con, ps, null );
     }
     return result;

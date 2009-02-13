@@ -140,7 +140,7 @@ public class DataImporter extends HttpServlet {
 		                	    		  	}
 		                	    			if(value != null && !value.equals("NULL")){
 		                		    			nameList.add(elemName);
-		                		    			valueList.add(EunisUtil.replaceTags(value));
+		                		    			valueList.add(EunisUtil.replaceTagsImport(value));
 		                	    			}
 		                		    	}
 		                		    }

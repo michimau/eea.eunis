@@ -111,28 +111,34 @@
     <%=cm.getText( "references" )%>
   </h2>
   <table summary="<%=cm.cms("species_factsheet-references_09_Sum")%>" class="listing" width="90%">
+    <col style="width: 30%"/>
+    <col style="width: 25%"/>
+    <col style="width: 25%"/>
+    <col style="width: 5%"/>
+    <%-- <col style="width: 10%"/> --%>
+    <col style="width: 15%"/>
     <thead>
       <tr>
-        <th width="25%" style="text-transform: capitalize; text-align: left;">
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsPhrase("Title")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="25%" style="text-transform: capitalize; text-align: left;">
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsPhrase("Author")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="15%" style="text-transform: capitalize; text-align: left;">
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsPhrase("Editor")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="15%" style="text-transform: capitalize; text-align:right">
+        <th style="text-transform: capitalize; text-align:right">
           <%=cm.cmsPhrase("Date")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
 <%--        <td width="10%" align="center">--%>
 <%--          <%=cm.cmsPhrase("Published")%>--%>
 <%--        </td>--%>
-        <th width="10%" style="text-transform: capitalize; text-align: left;">
+        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsPhrase("Source")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>

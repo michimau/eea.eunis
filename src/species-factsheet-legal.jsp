@@ -16,8 +16,8 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   /// Request parameters:
-  // idSpecies - ID of specie
-  // idSpeciesLink - ID of specie (Link to species base)
+  // idSpecies - ID of species
+  // idSpeciesLink - ID of species (Link to species base)
   String idSpecies = request.getParameter("idSpecies");
   String idSpeciesLink = request.getParameter("idSpeciesLink");
   SpeciesFactsheet factsheet = new SpeciesFactsheet(Utilities.checkedStringToInt(idSpecies, new Integer(0)),
@@ -109,7 +109,7 @@
 %>
         </td>
         <td align="center">
-          <a title="<%=cm.cms("species_factsheet_legalInstruments_04_Title")%>" target="_blank" href="http://rod.eionet.europa.eu/rorabrowse.jsv?mode=A&amp;country=-1&amp;GO=GO&amp;env_issue=-1&amp;client=-1"><img alt="<%=cm.cms("species_factsheet_legalInstruments_04_Title")%>" src="images/eea.jpg" border="0" /></a>
+          <a title="<%=cm.cms("species_factsheet_legalInstruments_04_Title")%>" target="_blank" href="http://rod.eionet.europa.eu/obligations">ROD</a>
           <%=cm.cmsTitle("species_factsheet_legalInstruments_04_Title")%>
         </td>
       </tr>

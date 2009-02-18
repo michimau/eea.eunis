@@ -371,7 +371,7 @@
                                 <label for="criteriaSearch" class="noshow">
                                   <%=cm.cms("criteria")%>
                                 </label>
-                              <input id="criteriaSearch" title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" name="criteriaSearch" type="text" size="30" />
+                              <input id="criteriaSearch" title="<%=cm.cms("filter_value")%>" name="criteriaSearch" type="text" size="30" />
                               <%=cm.cmsLabel("criteria")%>
                               <%=cm.cmsTitle("filter_value")%>
                               <input id="refine" title="<%=cm.cms("search")%>" class="submitSearchButton" type="submit" name="Submit" value="<%=cm.cms("search")%>" />
@@ -570,7 +570,7 @@
                           {
                         %>
                         <td>
-                          <a title="Open species factsheet" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters( specie.getScientificName() )%></a>
+                          <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters( specie.getScientificName() )%></a>
                           <%
                             if ( !specie.getTypeRelatedSpecies().equalsIgnoreCase( "Species" ) )
                             {
@@ -618,6 +618,8 @@
                         <td>
                           <%-- I display the vernacular names within a table inside the cell, DON'T USE ROWSPAN, YOU'L REGRET IT --%>
                           <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <col style="width:30%"/>
+                            <col style="width:70%"/>
                             <%                  if ( sortVernList == null || sortVernList.size() <= 0 )
                             {
                             %>
@@ -638,10 +640,10 @@
                                 }
                             %>
                             <tr>
-                              <td width="30%" style="background-color:<%=bgColor1%>">
+                              <td style="background-color:<%=bgColor1%>">
                                 <%=Utilities.treatURLSpecialCharacters( aVernName.getLanguage() )%>
                               </td>
-                              <td width="70%" style="background-color:<%=bgColor1%>">
+                              <td style="background-color:<%=bgColor1%>">
                                 <%=Utilities.treatURLSpecialCharacters( vernacularName )%>
                               </td>
                             </tr>
@@ -704,7 +706,7 @@
                           {
             %>
                             <td>
-                              <a title="Species factsheet" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScientificName())%></a>
+                              <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScientificName())%></a>
                             </td>
             <%
                           }
@@ -738,6 +740,8 @@
                             <td>
                                <%-- I display the vernacular names within a table inside the cell, DON'T USE ROWSPAN, YOU'L REGRET IT --%>
                               <table summary="List of vernacular names" width="100%" border="0" cellspacing="0" cellpadding="0">
+                               <col style="width:30%"/>
+                               <col style="width:70%"/>
             <%
                               if(sortVernList == null || sortVernList.size()<=0)
                               {
@@ -771,10 +775,10 @@
                               }
             %>
                                 <tr>
-                                  <td width="30%" style="background-color:<%=bgColor1%>">
+                                  <td style="background-color:<%=bgColor1%>">
                                     <%=Utilities.treatURLSpecialCharacters(aVernName.getLanguage())%>
                                   </td>
-                                  <td width="70%" style="background-color:<%=bgColor1%>">
+                                  <td style="background-color:<%=bgColor1%>">
                                     <%=Utilities.treatURLSpecialCharacters(vernacularName)%>
                                   </td>
                                 </tr>

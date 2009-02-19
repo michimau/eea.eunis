@@ -67,7 +67,7 @@ public class DataImporter extends HttpServlet {
 		    try
 		    {
 		      BASE_DIR = getServletContext().getInitParameter( "TOMCAT_HOME" );
-		      TEMP_DIR = BASE_DIR + "/webapps/eunis/temp";
+		      TEMP_DIR = BASE_DIR + "/" + getServletContext().getInitParameter("TEMP_DIR");
 		    } catch (Exception ex) {
 		      ex.printStackTrace();
 		    }

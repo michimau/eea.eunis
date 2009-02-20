@@ -2,8 +2,8 @@ package ro.finsiel.eunis.dataimport;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
@@ -18,6 +18,10 @@ import org.apache.commons.fileupload.DiskFileUpload;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.fileupload.FileUploadException;
+import org.quartz.JobDetail;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerFactory;
+import org.quartz.SimpleTrigger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -51,6 +55,9 @@ public class DataImporter extends HttpServlet {
 	* @param response Response object.
 	*/
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		String retPage = "dataimport/data-importer.jsp";
+		
 		HttpSession session = request.getSession(false);
 		SessionManager sessionManager = (SessionManager) session.getAttribute("SessionManager");
 		if (sessionManager.isAuthenticated() && sessionManager.isImportExportData_RIGHT()) {
@@ -63,6 +70,7 @@ public class DataImporter extends HttpServlet {
 	        
 			String table = "";
 			boolean emptyTable = false;
+			boolean runBackground = false;
 			// Initialise the default settings
 		    try
 		    {
@@ -84,7 +92,7 @@ public class DataImporter extends HttpServlet {
 				} catch (FileUploadException ex) {
 					ex.printStackTrace();
 					errors.add(ex.getMessage());
-					response.sendRedirect("dataimport/data-importer.jsp");
+					response.sendRedirect(retPage);
 				}
 	
 		    	for (int i = 0; i < items.size(); i++) {
@@ -102,6 +110,9 @@ public class DataImporter extends HttpServlet {
 		                } else if(null != fieldName && fieldName.equals("empty")){
 		                	if(null != fieldValue && fieldValue.equals("on"))
 		                		emptyTable = true;
+		                } else if(null != fieldName && fieldName.equals("back")){
+		                	if(null != fieldValue && fieldValue.equals("on"))
+		                		runBackground = true;
 		                }
 		            }
 		    	}
@@ -112,53 +123,79 @@ public class DataImporter extends HttpServlet {
 		                	File xmlFile = new File(TEMP_DIR + "/importXmlFile");
 		                	item.write(xmlFile);
 		                	
-		                	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		                	DocumentBuilder db = dbf.newDocumentBuilder();
-		                	Document doc = db.parse(xmlFile);
-		                	doc.getDocumentElement().normalize();
-		                	
-		                	List<TableColumns> tableRows = new ArrayList<TableColumns>();
-		                	NodeList nodeLst = doc.getElementsByTagName("ROW");
-		                	for (int s = 0; s < nodeLst.getLength(); s++) {
-		                		Node node = nodeLst.item(s);
-		                		String elemName = "";
-		                	    String value = "";
-		                	    List<String> nameList = new ArrayList<String>();
-		                	    List<String> valueList = new ArrayList<String>();
+		                	if(runBackground){
+		                		SchedulerFactory schedFact = new org.quartz.impl.StdSchedulerFactory();
+		                		Scheduler sched = schedFact.getScheduler();
+		                		sched.start();
+
+		                		JobDetail jobDetail = new JobDetail("importJob", null, ImportJob.class);
+		                		jobDetail.getJobDataMap().put("sqlDrv", SQL_DRV);
+		                		jobDetail.getJobDataMap().put("sqlUrl", SQL_URL);
+		                		jobDetail.getJobDataMap().put("sqlUsr", SQL_USR);
+		                		jobDetail.getJobDataMap().put("sqlPwd", SQL_PWD);
+		                		jobDetail.getJobDataMap().put("tmpDir", TEMP_DIR);
+		                		jobDetail.getJobDataMap().put("table", table);
+		                		jobDetail.getJobDataMap().put("emptyTable", emptyTable);
 		                		
-		                		NodeList list = node.getChildNodes();       
-		                	    if(list.getLength() > 0) {                  
-		                		    for(int k = 0 ; k<list.getLength() ; k++) {
-		                		    	Node elem = list.item(k);
-		                		    	if(elem.getNodeType() == ELEMENT_NODE){
-		                		    		elemName = elem.getNodeName();
-		                		    		NodeList childList = elem.getChildNodes();
-		                		    		for(int c = 0 ; c<childList.getLength() ; c++) {
-		                		    			Node elemValue = childList.item(c);
-		                		    			if(elemValue.getNodeType() == TEXT_NODE)
-		                		    				value = ((Text)elemValue).getData();
-		                	    		  	}
-		                	    			if(value != null){
-		                		    			nameList.add(elemName);
-		                		    			valueList.add(EunisUtil.replaceTagsImport(value));
-		                	    			}
-		                		    	}
-		                		    }
-		                	    }
-		                	    TableColumns tableColumns = new TableColumns();
-	                		    tableColumns.setColumnsNames(nameList);
-	                		    tableColumns.setColumnsValues(valueList);
-	                		    
-	                		    tableRows.add(tableColumns);
-		                	}
+		                		ImportJobListener listener = new ImportJobListener();
+		                		jobDetail.addJobListener(listener.getName());
+		                		sched.addJobListener(listener);
+		                		
+		                		SimpleTrigger trigger = new SimpleTrigger(jobDetail.getName(), null, new Date(), null, 0, 0L);
+		                				                		
+		                		sched.scheduleJob(jobDetail, trigger);
+		                		
+		                		retPage = "dataimport/import-log.jsp";
+		                	} else {
+			                	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			                	DocumentBuilder db = dbf.newDocumentBuilder();
+			                	Document doc = db.parse(xmlFile);
+			                	doc.getDocumentElement().normalize();
+			                	
+			                	List<TableColumns> tableRows = new ArrayList<TableColumns>();
+			                	NodeList nodeLst = doc.getElementsByTagName("ROW");
+			                	for (int s = 0; s < nodeLst.getLength(); s++) {
+			                		Node node = nodeLst.item(s);
+			                		String elemName = "";
+			                	    String value = "";
+			                	    List<String> nameList = new ArrayList<String>();
+			                	    List<String> valueList = new ArrayList<String>();
+			                		
+			                		NodeList list = node.getChildNodes();       
+			                	    if(list.getLength() > 0) {                  
+			                		    for(int k = 0 ; k<list.getLength() ; k++) {
+			                		    	Node elem = list.item(k);
+			                		    	if(elem.getNodeType() == ELEMENT_NODE){
+			                		    		elemName = elem.getNodeName();
+			                		    		NodeList childList = elem.getChildNodes();
+			                		    		for(int c = 0 ; c<childList.getLength() ; c++) {
+			                		    			Node elemValue = childList.item(c);
+			                		    			if(elemValue.getNodeType() == TEXT_NODE)
+			                		    				value = ((Text)elemValue).getData();
+			                	    		  	}
+			                	    			if(value != null){
+			                		    			nameList.add(elemName);
+			                		    			valueList.add(EunisUtil.replaceTagsImport(value));
+			                	    			}
+			                		    	}
+			                		    }
+			                	    }
+			                	    TableColumns tableColumns = new TableColumns();
+		                		    tableColumns.setColumnsNames(nameList);
+		                		    tableColumns.setColumnsValues(valueList);
+		                		    
+		                		    tableRows.add(tableColumns);
+			                	}
+			                	
+			                	SQLUtilities sql = new SQLUtilities();
+			                	sql.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+			                	if(emptyTable)
+			                		sql.ExecuteDelete(table, null);
+			                	boolean success = sql.ExecuteMultipleInsert(table, tableRows);
+			                	if(!success)
+			                		errors.add("Data import failed!");
 		                	
-		                	SQLUtilities sql = new SQLUtilities();
-		                	sql.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-		                	if(emptyTable)
-		                		sql.ExecuteDelete(table, null);
-		                	boolean success = sql.ExecuteMultipleInsert(table, tableRows);
-		                	if(!success)
-		                		errors.add("Data import failed!");
+		                	}
 		                	
 		                	//uploadedStream.close();
 		    	    	} catch (SAXException _ex) {
@@ -173,14 +210,15 @@ public class DataImporter extends HttpServlet {
 		    	    	}
 		            }
 		    	}
-		    
-				if(errors != null && errors.size() > 0)
-					session.setAttribute("errors", errors);
-				else
-					session.setAttribute("success", "Successfully imported!");
+		    	if(!runBackground){
+					if(errors != null && errors.size() > 0)
+						session.setAttribute("errors", errors);
+					else
+						session.setAttribute("success", "Successfully imported!");
+		    	}
 		    }
 		}
-		response.sendRedirect("dataimport/data-importer.jsp");
+		response.sendRedirect(retPage);
 	}
 	
 }

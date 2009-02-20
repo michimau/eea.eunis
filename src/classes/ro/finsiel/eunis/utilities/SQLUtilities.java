@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import ro.finsiel.eunis.dataimport.ColumnDTO;
+import ro.finsiel.eunis.dataimport.ImportLogDTO;
 
 
 /**
@@ -587,7 +588,7 @@ public class SQLUtilities {
     catch ( Exception e )
     {
     	con.rollback(); 
-		con.commit(); 
+		con.commit();
     	throw(e);
     }
     finally
@@ -1013,6 +1014,82 @@ public class SQLUtilities {
 	    }
 
 	    return ret.toString();
-}
+  }
+  
+  /**
+   * Execute INSERT statement
+   *
+   * @param message
+   * @return operation status
+   */
+  public boolean addImportLogMessage( String message ) {
+
+    if(message == null)
+    	return false;
+
+    boolean result = true;
+
+    Connection con = null;
+    PreparedStatement ps = null;
+
+    try
+    {
+      Class.forName( SQL_DRV );
+      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+      message = EunisUtil.replaceTagsImport(message);
+      ps = con.prepareStatement( "INSERT INTO EUNIS_IMPORT_LOG (MESSAGE, CUR_TIMESTAMP) values ( '"+message+"', CURRENT_TIMESTAMP() ) " );
+      ps.execute();
+    }
+    catch ( Exception e )
+    {
+      e.printStackTrace();
+      result = false;
+    }
+    finally
+    {
+      closeAll( con, ps, null );
+    }
+    return result;
+  }
+  
+  public List<ImportLogDTO> getImportLogMessages() {
+	    
+	  	List<ImportLogDTO> result = new ArrayList<ImportLogDTO>();
+
+	    Connection con = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+
+	    try
+	    {
+	      Class.forName( SQL_DRV );
+	      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+
+	      ps = con.prepareStatement("SELECT LOG_ID, MESSAGE, CUR_TIMESTAMP FROM EUNIS_IMPORT_LOG ORDER BY LOG_ID DESC LIMIT 100");
+	      rs = ps.executeQuery();
+
+	      while ( rs.next() )
+	      {
+	    	  ImportLogDTO dto = new ImportLogDTO();
+	    	  dto.setId(rs.getString("LOG_ID"));
+	    	  dto.setMessage(rs.getString("MESSAGE"));
+	    	  dto.setTimestamp(rs.getString("CUR_TIMESTAMP"));
+	    	  result.add(dto);
+	      }
+
+	      closeAll( con, ps, rs );
+	    }
+	    catch ( Exception e )
+	    {
+	      e.printStackTrace();
+	      return null;
+	    }
+	    finally
+	    {
+	      closeAll( con, ps, rs );
+	    }
+
+	    return result;
+  }
 
 }

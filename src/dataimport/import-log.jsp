@@ -8,7 +8,7 @@
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.utilities.SQLUtilities,java.util.*"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.utilities.SQLUtilities,java.util.*,ro.finsiel.eunis.dataimport.ImportLogDTO"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -21,10 +21,10 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
-  String btrail = "eea#" + eeaHome + ",home#index.jsp,data import";
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,data import#dataimport/index.jsp,background importer log";
 %>
     <title>
-      Data Import
+      Background Importer Log
     </title>
   </head>
   <body>
@@ -59,26 +59,44 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  Data Import
+                  Background Importer Log
                 </h1>
-                <ul>
-                	<li>
-                		<a href="<%=domainName%>/dataimport/data-tester.jsp">Data tester</a><br/>
-                		The purpose of this page is to test the XML formatted Oracle dumps from the EUNIS maintainer.
-                	</li>
-                	<li>
-                		<a href="<%=domainName%>/dataimport/data-importer.jsp">Data importer</a><br/>
-                		The purpose of this page is to import the XML formatted Oracle dumps into EUNIS database.
-                	</li>
-                	<li>
-                		<a href="<%=domainName%>/dataimport/import-log.jsp">Background importer log</a><br/>
-                		Log messages about background data import
-                	</li>
-                	<li>
-                		<a href="<%=domainName%>/dataimport/data-exporter.jsp">Data exporter</a><br/>
-                		The purpose of this page is to export EUNIS database table into XML formatted Oracle dump.
-                	</li>
-                </ul>
+                <%
+                if( SessionManager.isAuthenticated() && SessionManager.isImportExportData_RIGHT() ){
+                	String SQL_DRV = application.getInitParameter("JDBC_DRV");
+                    String SQL_URL = application.getInitParameter("JDBC_URL");
+                    String SQL_USR = application.getInitParameter("JDBC_USR");
+                    String SQL_PWD = application.getInitParameter("JDBC_PWD");
+
+                    SQLUtilities sqlc = new SQLUtilities();
+                    sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+	                    
+                	List<ImportLogDTO> messages = sqlc.getImportLogMessages();
+                	if(messages != null && messages.size() > 0){%>
+	                	<table class="listing" width="90%">
+	                		<%
+	                		for(Iterator<ImportLogDTO> it = messages.iterator(); it.hasNext();){
+		                		ImportLogDTO message = it.next();%>
+		                		<tr>
+		                			<td><%=message.getTimestamp()%></td>
+		                			<td><%=message.getMessage()%></td>
+		                		</tr>
+		                		<%
+			               	}
+			            	%>
+			            </table> 
+		            <%
+	                }
+		        } else {
+	            	%>
+	            		<br />
+		                <br />
+		                <span style="color : red"><%=cm.cmsPhrase("You must be authenticated and have the proper right to access this page.")%></span>
+		                <br />
+		                <br />
+	            	<%	
+            	}
+                %>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

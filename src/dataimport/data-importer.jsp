@@ -102,6 +102,10 @@
 			                	<td><input type="checkbox" id="empty" name="empty"/></td>
 			                </tr>
 			                <tr>
+			                	<td><label for="back">Run in background</label></td>
+			                	<td><input type="checkbox" id="back" name="back"/></td>
+			                </tr>
+			                <tr>
 			                	<td align="right" colspan="2"><input type="submit" name="btn" value="Import"/></td>
 			                </tr>
 		                </table>

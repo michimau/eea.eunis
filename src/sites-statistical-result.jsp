@@ -239,13 +239,13 @@
               {
                 k++;
                 RegionWrapper region = (RegionWrapper)it.next();
-                String bgcolor = (0 == (k % 2) ? "#FFFFFF" : "#EEEEEE");
+                String bgcolor = (0 == (k % 2) ? "zebraodd" : "zebraeven");
           %>
-                  <tr bgcolor="<%=bgcolor%>">
+                  <tr class="<%=bgcolor%>">
                     <td>
                       <%=Utilities.formatString(region.getName())%>
                     </td>
-                  <td align="right">
+                  <td style="text-align:right">
                     <%=Utilities.formatString(region.getPercentage())%>
                   </td>
                 </tr>
@@ -334,9 +334,9 @@
                   List res = formBean.getValueForDesignations(idSitesList,d.getIdDesignation(),d.getIdGeoscope(),SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
                   //long l1 = new Date().getTime();
                   //System.out.println( "iteration took " +  ( l1 - l ) + " msecs");
-                  String bgcolor = (0 == (i % 2) ? "#FFFFFF" : "#EEEEEE");
+                  String bgcolor = (0 == (i % 2) ? "zebraodd" : "zebraeven");
           %>
-                  <tr>
+                  <tr class="<%=bgcolor%>">
                     <td>
                       <%=(d.getOriginalDataSource() == null || d.getOriginalDataSource().trim().length() <= 0? "n/a" : d.getOriginalDataSource())%>
                     </td>

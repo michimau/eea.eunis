@@ -216,10 +216,10 @@
     <table summary="<%=cm.cms("habitats_name_in_other_languages")%>" class="listing" width="90%">
       <thead>
         <tr>
-          <th style="text-transform: capitalize; text-align: left;">
+          <th style="text-align: left;">
             <%=cm.cmsPhrase("Language")%>
           </th>
-          <th style="text-transform: capitalize; text-align: left;">
+          <th style="text-align: left;">
             <%=cm.cmsPhrase("Name")%>
           </th>
         </tr>
@@ -263,16 +263,16 @@
     <table summary="<%=cm.cms("habitats_factsheet_22")%>" class="listing" width="90%">
       <thead>
       <tr>
-        <th width="30%" style="text-transform: capitalize; text-align: left;">
+        <th width="30%" style="text-align: left;">
           <%=cm.cmsPhrase("Classification")%>
         </th>
-        <th width="15%" style="text-transform: capitalize; text-align: left;">
+        <th width="15%" style="text-align: left;">
           <%=cm.cmsPhrase("Code")%>
         </th>
-        <th width="40%" style="text-transform: capitalize; text-align: left;">
+        <th width="40%" style="text-align: left;">
           <%=cm.cmsPhrase("Title")%>
         </th>
-        <th width="15%" style="text-transform: capitalize; text-align: left;">
+        <th width="15%" style="text-align: left;">
           <%=cm.cmsPhrase("relation_type")%>
         </th>
       </tr>

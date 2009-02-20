@@ -52,19 +52,19 @@
   <table summary="<%=cm.cms("sites_factsheet_123")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("ID Site")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Scientific name")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Within databases")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Type")%>
         </th>
-        <th style="text-transform: capitalize; text-align: right;">
+        <th style="text-align: right;">
           <%=cm.cmsPhrase("Overlap(%)")%>
         </th>
       </tr>
@@ -151,13 +151,13 @@
   <table summary="<%=cm.cms("sites_factsheet_related_natura2000")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Type of relation")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Site code")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Site name")%>
         </th>
       </tr>
@@ -203,16 +203,16 @@
   <table summary="<%=cm.cms("sites_factsheet_related_corinesites")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Site code")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Site name")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Overlap")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Overlap P")%>
         </th>
       </tr>

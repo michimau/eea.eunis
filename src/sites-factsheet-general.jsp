@@ -261,16 +261,16 @@
   <table summary="<%=cm.cms("designation_information")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Source data set")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Designation code")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Designation name (Original)")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Designation name (English)")%>
         </th>
 <%

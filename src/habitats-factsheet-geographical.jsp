@@ -54,16 +54,16 @@
   <table summary="<%=cm.cms("habitat_distribution")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Country")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Biogeographic region")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Probability")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Comment")%>
         </th>
       </tr>

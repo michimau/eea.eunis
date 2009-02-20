@@ -163,16 +163,16 @@
   <table summary="<%=cm.cms("national_threat_status")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th style="width : 220px; text-transform: capitalize; text-align: left;">
+        <th style="width : 220px; text-align: left;">
           <%=cm.cmsPhrase("Country")%>
         </th>
-        <th style="width : 120px; text-transform: capitalize; text-align: left;">
+        <th style="width : 120px; text-align: left;">
           <%=cm.cmsPhrase("Status")%>
         </th>
-        <th style="width : 100px; text-transform: capitalize; text-align: left;">
+        <th style="width : 100px; text-align: left;">
           <%=cm.cmsPhrase("National threat code")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Reference")%>
         </th>
       </tr>
@@ -234,19 +234,19 @@
   <table summary="<%=cm.cms("international_threat_status")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Area")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("International threat code")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Reference")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>

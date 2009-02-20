@@ -35,39 +35,39 @@
   <table summary="<%=cm.cms("open_the_statistical_data_for")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("EUNIS Code")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("ANNEX I Code")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Habitat type name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Biogeographic region")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Abundance")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Frequencies")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Faithfulness")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Species status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Comment")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>

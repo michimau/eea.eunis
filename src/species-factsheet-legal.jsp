@@ -35,24 +35,24 @@
   <table summary="<%=cm.cms("species_factsheet_legalInstruments_01_Sum")%>" class="listing">
     <thead>
       <tr>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Detailed reference")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("legal text")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Comments")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Url")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Geographical implementation")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Reporting obligations")%>
         </th>
       </tr>
@@ -61,11 +61,10 @@
 <%
     for (int i = 0; i < legals.size(); i++)
     {
-      String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+      String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
       LegalStatusWrapper legal = (LegalStatusWrapper)legals.get(i);
 %>
-<%--          <tr bgcolor="<%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>">--%>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
           <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getDetailedReference()))%>
         </td>

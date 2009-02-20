@@ -88,16 +88,16 @@
   <table summary="<%=cm.cms("habitat_sites")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th width="15%" style="text-transform: capitalize; text-align: left;">
+        <th width="15%" style="text-align: left;">
           <%=cm.cmsPhrase("Site code")%>
         </th>
-        <th width="15%" style="text-transform: capitalize; text-align: left;">
+        <th width="15%" style="text-align: left;">
           <%=cm.cmsPhrase("Source data set")%>
         </th>
-        <th width="20%" style="text-transform: capitalize; text-align: left;">
+        <th width="20%" style="text-align: left;">
           <%=cm.cmsPhrase("Country")%>
         </th>
-        <th width="50%" style="text-transform: capitalize; text-align: left;">
+        <th width="50%" style="text-align: left;">
           <%=cm.cmsPhrase("Site name")%>
         </th>
       </tr>
@@ -146,16 +146,16 @@
   <table summary="<%=cm.cms("habitat_related_sites")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th width="15%" style="text-transform: capitalize; text-align: left;">
+        <th width="15%" style="text-align: left;">
           <%=cm.cmsPhrase("Site code")%>
         </th>
-        <th width="15%" style="text-transform: capitalize; text-align: left;">
+        <th width="15%" style="text-align: left;">
           <%=cm.cmsPhrase("Source data set")%>
         </th>
-        <th width="20%" style="text-transform: capitalize; text-align: left;">
+        <th width="20%" style="text-align: left;">
           <%=cm.cmsPhrase("Country")%>
         </th>
-        <th width="50%" style="text-transform: capitalize; text-align: left;">
+        <th width="50%" style="text-align: left;">
           <%=cm.cmsPhrase("Site name")%>
         </th>
       </tr>

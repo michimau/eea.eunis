@@ -39,19 +39,19 @@
   <table summary="<%=cm.cms("habitat_type_syntaxa")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th width="25%" style="text-transform: capitalize; text-align: left;">
+        <th width="25%" style="text-align: left;">
           <%=cm.cmsPhrase("Name")%>
         </th>
-        <th width="6%" style="text-transform: capitalize; text-align: left;">
+        <th width="6%" style="text-align: left;">
           <%=cm.cmsPhrase("Relation")%>
         </th>
-        <th width="30%" style="text-transform: capitalize; text-align: left;">
+        <th width="30%" style="text-align: left;">
           <%=cm.cmsPhrase("Source (abbreviated)")%>
         </th>
-        <th width="20%" style="text-transform: capitalize; text-align: left;">
+        <th width="20%" style="text-align: left;">
           <%=cm.cmsPhrase("Author")%>
         </th>
-        <th width="14%" style="text-transform: capitalize; text-align: left;">
+        <th width="14%" style="text-align: left;">
           <%=cm.cmsPhrase("References")%>
         </th>
       </tr>

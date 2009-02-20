@@ -122,15 +122,15 @@
     <br />
     <table summary="<%=cm.cms("species_factsheet-geo-legal_11_Sum")%>" width="640" border="0" cellspacing="0" cellpadding="0" id="legalevent" class="sortable">
       <tr>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; font-weight: bold; text-align: left;">
+        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="font-weight: bold; text-align: left;">
           <%=cm.cmsPhrase("Country")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; font-weight: bold; text-align: left;">
+        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="font-weight: bold; text-align: left;">
           <%=cm.cmsPhrase("Date of event (yyyy-MM-dd)")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; font-weight: bold; text-align: left;">
+        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="font-weight: bold; text-align: left;">
           <%=cm.cmsPhrase("Event")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>

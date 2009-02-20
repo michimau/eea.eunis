@@ -239,9 +239,9 @@
               EunisRelatedReportsPersist report = (EunisRelatedReportsPersist) approvedReportsList.get(i);
               if(null != report)
               {
-                File file = new File(application.getInitParameter("TOMCAT_HOME") + "/webapps/eunis/upload/" + report.getFileName());
+                File file = new File(application.getInitParameter("TOMCAT_HOME") + "/" + application.getInitParameter("UPLOAD_DIR_FILES") + report.getFileName());
           %>
-                  <tr bgcolor="<%=(0 == (i % 2) ? "#EEEEEE" : "#FFFFFF")%>">
+                  <tr class="<%=(0 == (i % 2) ? "zebraodd" : "zebraeven")%>">
           <%
                 if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
                 {
@@ -328,36 +328,6 @@
               }
             }
           %>
-                  <tr bgcolor="#CCCCCC">
-          <%
-            if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
-            {
-          %>
-                    <th>
-                      &nbsp;
-                    </th>
-          <%
-            }
-          %>
-                    <th>
-                      <%=cm.cmsPhrase("valid")%>
-                    </th>
-                    <th>
-                      <%=cm.cmsPhrase("description")%>
-                    </th>
-                    <th>
-                      <%=cm.cmsPhrase("file_name")%>
-                    </th>
-                    <th>
-                      <%=cm.cmsPhrase("size")%>(kB)
-                    </th>
-                    <th style="white-space:nowrap">
-                      <%=cm.cmsPhrase("related_reports_author")%>
-                    </th>
-                    <th>
-                      <%=cm.cmsPhrase("date")%>
-                    </th>
-                  </tr>
                 </table>
               </form>
           <%

@@ -49,10 +49,10 @@ Notes:
   <table summary="<%=cm.cms("habitat_other_information")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th width="25%" style="text-transform: capitalize; text-align: left;">
+        <th width="25%" style="text-align: left;">
            <%=cm.cmsPhrase("Name")%>
         </th>
-        <th width="75%" style="text-transform: capitalize; text-align: left;">
+        <th width="75%" style="text-align: left;">
           <%=cm.cmsPhrase("Description")%>
         </th>
       </tr>

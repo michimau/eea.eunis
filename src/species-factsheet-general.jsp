@@ -345,11 +345,11 @@ if(kingdomname.equalsIgnoreCase("Animals"))
   <table summary="<%=cm.cms("species_factsheet_10_Sum")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th width="40%" style="text-align:left;text-transform: capitalize;">
+        <th width="40%" style="text-align:left;">
           <%=cm.cmsPhrase("Scientific name")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
-        <th width="60%" style="text-align:left;text-transform: capitalize;">
+        <th width="60%" style="text-align:left;">
           <%=cm.cmsPhrase("Author")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
@@ -403,13 +403,15 @@ if(kingdomname.equalsIgnoreCase("Animals"))
     <%=cm.cmsPhrase("Valid subspecies in Europe")%>
   </h2>
   <table summary="<%=cm.cms("species_factsheet_11_Sum")%>" class="listing" width="90%">
+    <col style="width:40%"/>
+    <col style="width:60%"/>
     <thead>
       <tr>
-        <th width="40%" style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Scientific name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="60%" style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Source")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
@@ -419,10 +421,10 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 <%
     for (int i = 0; i < subSpecies.size(); i++)
     {
-      String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+      String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
       SpeciesNatureObjectPersist species = (SpeciesNatureObjectPersist)subSpecies.get(i);
 %>
-      <tr <%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
           <span style="font-style : italic;">
             <%=Utilities.treatURLSpecialCharacters(species.getScientificName())%>

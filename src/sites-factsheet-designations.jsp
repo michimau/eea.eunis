@@ -41,19 +41,19 @@
   <table summary="<%=cm.cms("sites_factsheet_designations_national")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; text-align: left;">
+        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-align: left;">
           <%=cm.cmsPhrase("Designation code")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; text-align: left;">
+        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-align: left;">
           <%=cm.cmsPhrase("Designation name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; text-align: left;">
+        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-align: left;">
           <%=cm.cmsPhrase("category")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align : right; text-transform: capitalize;" title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th style="text-align : right;" title="<%=cm.cms("sort_results_on_this_column")%>">
           <%=cm.cmsPhrase("Cover(%)")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
@@ -112,19 +112,19 @@
   <table summary="<%=cm.cms("sites_factsheet_designations_areas")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Designated site")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Designation name")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("category")%>
         </th>
-        <th style="text-align : right; text-transform: capitalize;">
+        <th style="text-align : right;">
           <%=cm.cmsPhrase("Overlap(%)")%>
         </th>
-        <th style="text-align : right; text-transform: capitalize;">
+        <th style="text-align : right;">
           <%=cm.cmsPhrase("Overlap P(%)")%>
         </th>
       </tr>

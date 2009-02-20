@@ -398,55 +398,55 @@
   <table summary="<%=cm.cms("ecological_information_fauna_flora")%>" class="listing" width="90%">
     <thead>
       <tr>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Species scientific name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Species group")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Resident")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Breeding")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Winter.")%>
           <%=cm.cmsTitle("sites_factsheet_faunaflora_wintering")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Staging")%>
           <%=cm.cmsTitle("sites_factsheet_faunaflora_annexesofdirectives")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Popul.")%>
           <%=cm.cmsTitle("sites_factsheet_faunaflora_populationstatus")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Species")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Nesting")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Conserv.")%>
           <%=cm.cmsTitle("sites_factsheet_faunaflora_conservationstatus")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Isolation")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Global status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Species status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
@@ -566,7 +566,7 @@
   <table summary="<%=cm.cms("other_species_mentioned_in_site")%>" width="90%" class="listing">
     <thead>
       <tr>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Species scientific name")%>
         </th>
       </tr>
@@ -622,43 +622,43 @@
   <table summary="<%=cm.cms("species")%>" width="90%" class="listing">
     <thead>
       <tr>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Species scientific name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Species group")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Resident")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Breeding")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Winter.")%>
           <%=cm.cmsTitle("sites_factsheet_faunaflora_wintering")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Staging")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Conserv.")%>
           <%=cm.cmsTitle("sites_factsheet_faunaflora_conservationstatus")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Popul.")%>
           <%=cm.cmsTitle("sites_factsheet_faunaflora_populationstatus")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Isolation")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-transform: capitalize;">
+        <th>
           <%=cm.cmsPhrase("Global status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
@@ -829,19 +829,19 @@
   <table summary="<%=cm.cms("other_species_mentioned_in_site")%>" width="0%" class="listing">
     <thead>
       <tr>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; text-align: left;">
+        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-align: left;">
           <%=cm.cmsPhrase("Species group")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize; text-align: left;">
+        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-align: left;">
           <%=cm.cmsPhrase("Species name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize;">
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
           <%=cm.cmsPhrase("Population size estimations")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-transform: capitalize;">
+        <th title="<%=cm.cms("sort_results_on_this_column")%>">
           <%=cm.cmsPhrase("Motivation for species mention")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>

@@ -180,7 +180,7 @@
                     if ( null != report )
                     {
                       String cssClass = i % 2 == 0 ? " class=\"zebraeven\"" : "";
-                      File file = new File( application.getInitParameter( "TOMCAT_HOME" ) + "/webapps/eunis/upload/" + report.getFileName() );
+                      File file = new File( application.getInitParameter( "TOMCAT_HOME" ) + "/" + application.getInitParameter("UPLOAD_DIR_FILES") + report.getFileName() );
                       long size = file.getAbsoluteFile().length();
                       if ( size > 0 ) size /= 1024;
                       // Find the author's e-mail address in the EUNIS_USERS table.

@@ -40,8 +40,8 @@
 
   <context-param>
     <param-name>INSTANCE_HOME</param-name>
-    <param-value>/var/lib/tomcat5/webapps/eunis</param-value>
-    <description>Location of the web application (absolute address)</description>
+    <param-value>/var/lib/tomcat5/webapps/eunis/</param-value>
+    <description>Location of the web application (absolute address, trailing slash is required)</description>
   </context-param>
 
   <!-- Static part of the page title (JSPs)-->

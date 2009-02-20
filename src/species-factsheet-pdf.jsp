@@ -88,11 +88,11 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
 <%
   pdfReport report = new pdfReport();
   out.flush();
-  String linktopdf = application.getInitParameter( "TOMCAT_HOME" ) + "/webapps/eunis/temp/";
+  String linktopdf = application.getInitParameter( "TOMCAT_HOME" ) + "/" + application.getInitParameter( "TEMP_DIR" );
   String filename = "SpeciesFactsheet_" + request.getSession().getId() + ".pdf";
 
   Paragraph header = new Paragraph();
-  String jpegPath = application.getInitParameter( "TOMCAT_HOME" ) + "/webapps/eunis/images/headerpdf.jpg";
+  String jpegPath = application.getInitParameter("INSTANCE_HOME") + "/images/headerpdf.jpg";
 
   try
   {

@@ -33,7 +33,7 @@
   if (null != d && d.size() > 0)
   {
     String filename = request.getSession().getId() + "_" + new Date().getTime() + "_europe.jpg";
-    String inputFilename = application.getInitParameter( "TOMCAT_HOME" ) + "/webapps/eunis/gis/europe-bio.jpg";
+    String inputFilename = application.getInitParameter( "INSTANCE_HOME" ) + "/gis/europe-bio.jpg";
     String outputFilename = application.getInitParameter( "TOMCAT_HOME" ) + "/" + application.getInitParameter( "TEMP_DIR" ) + filename;
 
     System.out.println( "outputFilename = " + outputFilename );

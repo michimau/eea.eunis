@@ -29,7 +29,7 @@
   pdfReport report = new pdfReport();
   // Web content manager used in this page.
   WebContentManagement cm = SessionManager.getWebContent();
-  String linktopdf = application.getInitParameter( "TOMCAT_HOME" ) + "/webapps/eunis/temp/";
+  String linktopdf = application.getInitParameter( "TOMCAT_HOME" ) + "/" + application.getInitParameter( "TEMP_DIR" );
   String filename = "SiteFactsheet_" + request.getSession().getId() + ".pdf";
   /// INPUT PARAMS: idHabitat
   String siteid = request.getParameter("idsite");
@@ -85,7 +85,7 @@
     {
       // Headers and footers
       Paragraph header = new Paragraph();
-      String jpegPath = application.getInitParameter( "TOMCAT_HOME" ) + "/webapps/eunis/images/headerpdf.jpg";
+      String jpegPath = application.getInitParameter("INSTANCE_HOME") + "/images/headerpdf.jpg";
       Image jpeg = Image.getInstance( jpegPath );
       header.add( jpeg );
       header.add( new Phrase( " ", FontFactory.getFont( FontFactory.HELVETICA, 9 ) ) );

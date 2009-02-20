@@ -173,9 +173,6 @@
           <%=cm.cmsPhrase("National threat code")%>
         </th>
         <th style="text-transform: capitalize; text-align: left;">
-          Population concerned
-        </th>
-        <th style="text-transform: capitalize; text-align: left;">
           <%=cm.cmsPhrase("Reference")%>
         </th>
       </tr>
@@ -213,9 +210,6 @@
           <span class="boldUnderline" title="<%=factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode()).replaceAll("'"," ").replaceAll("\""," ")%>">
             <%=threat.getThreatCode()%>
           </span>
-        </td>
-        <td>
-          <%=Utilities.formatString( threat.getPopulationConcerned() )%>
         </td>
         <td>
           <%=Utilities.treatURLSpecialCharacters(threat.getReference())%>

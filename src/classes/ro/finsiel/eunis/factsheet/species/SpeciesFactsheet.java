@@ -431,7 +431,6 @@ public class SpeciesFactsheet {
         {
           Chm62edtConservationStatusPersist consS = ( Chm62edtConservationStatusPersist )list1.get( 0 );
           threat.setStatus( consS.getName() );
-          threat.setPopulationConcerned( consS.getPopulationConcerned() );
           Chm62edtCountryPersist country = ( Chm62edtCountryPersist )list2.get( 0 );
           if ( country.getIso2l() == null || ( country.getIso2l() != null && country.getIso2l().equals( "" ) ) )
           {

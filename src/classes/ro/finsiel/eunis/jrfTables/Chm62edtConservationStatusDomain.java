@@ -37,7 +37,6 @@ public class Chm62edtConservationStatusDomain extends AbstractDomain {
     this.addColumnSpec(new StringColumnSpec("CODE", "getCode", "setCode", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("NAME", "getName", "setName", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("DESCRIPTION", "getDescription", "setDescription", DEFAULT_TO_NULL));
-    this.addColumnSpec(new StringColumnSpec("POPULATION_CONCERNED", "getPopulationConcerned", "setPopulationConcerned", DEFAULT_TO_NULL));
     this.addColumnSpec(new DateColumnSpec("RED_BOOK_DATE", new NullableColumnOption(), "getRedBookDate", "setRedBookDate", DEFAULT_TO_NULL));
     this.addColumnSpec(new IntegerColumnSpec("ID_CONSERVATION_STATUS_LINK", "getIdConsStatusLink", "setIdConsStatusLink", DEFAULT_TO_NULL));
     this.addColumnSpec(new IntegerColumnSpec("ID_DC", "getIdDc", "setIdDc", DEFAULT_TO_NULL));

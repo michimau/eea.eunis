@@ -202,7 +202,7 @@
                   </strong>
                 </div>
                 <br />
-                <table width="100%" border="0" cellspacing="0" cellpadding="4" summary="Uploaded files" id="upload1" class="listing">
+                <table width="100%" border="0" cellspacing="0" cellpadding="4" summary="Uploaded files" id="upload1" class="datatable">
                   <tr>
           <%
             if(SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())

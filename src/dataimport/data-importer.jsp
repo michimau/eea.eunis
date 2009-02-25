@@ -65,10 +65,10 @@
                 if( SessionManager.isAuthenticated() && SessionManager.isImportExportData_RIGHT() ){
                 %>
 	                <p class="documentDescription">
-	                The purpose of this page is to import the XML formatted Oracle dumps into EUNIS database.
+	                The purpose of this page is to import the XML formatted Oracle dumps into the EUNIS database.
 	                </p>
 	                <form name="eunis" method="post" action="<%=domainName%>/dataimporter" enctype="multipart/form-data">
-	                	<table border="0" width="370">
+	                	<table border="0">
 		                	<tr>
 		                		<td><label for="table">Table</label></td>
 		                		<td>
@@ -98,8 +98,8 @@
 			                	<td><input type="file" id="file" name="file"/></td>
 			                </tr>
 			                <tr>
-			                	<td><label for="empty">Empty the table</label></td>
-			                	<td><input type="checkbox" id="empty" name="empty"/></td>
+			                	<td><label for="empty">Empty the table first</label></td>
+			                	<td><input type="checkbox" id="empty" name="empty" checked="checked"/></td>
 			                </tr>
 			                <tr>
 			                	<td><label for="back">Run in background</label></td>

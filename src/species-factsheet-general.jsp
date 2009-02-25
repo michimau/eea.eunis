@@ -364,7 +364,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
     <tr <%=cssClass%>>
       <td>
 <%
-      if(synonym.getIdSpecies().intValue() == Utilities.checkedStringToInt(factsheet.getIdSpecies().toString(), 0))
+      if(synonym.getIdSpecies().intValue() == Utilities.checkedStringToInt(idSpecies, 0))
       {
 %>
         <strong style="color : #C30000; font-style : italic; ">
@@ -426,9 +426,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 %>
       <tr class="<%=cssClass%>">
         <td>
-          <span style="font-style : italic;">
-            <%=Utilities.treatURLSpecialCharacters(species.getScientificName())%>
-          </span>
+          <a style="font-style : italic;" href="species-factsheet.jsp?idSpecies=<%=species.getIdSpecies()%>&amp;idSpeciesLink=<%=species.getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(species.getScientificName())%></a>
           <%=Utilities.treatURLSpecialCharacters(species.getAuthor())%>
         </td>
         <td>

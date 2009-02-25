@@ -216,8 +216,13 @@ public class DataImportTester extends HttpServlet {
 			    				if(value != null && value.length() > size)
 			    					errors = addError(errors, "Element '"+elemName+"' value (length: "+value.length()+") is too long for mysql column '"+columnName+"' (length: "+size+")!<br/>Current value: "+threeDots(value,50));
 			    			} else if (columnType == Types.DATE){
-			    				if(!isDate(value))
-			    					errors = addError(errors, "Element '"+elemName+"' value has to be in date format (YYYY-MM-DD)!<br/>Current value: "+value);
+			    				if(size == 4){
+			    					if(!isYear(value))
+			    						errors = addError(errors, "Element '"+elemName+"' value has to be in year format (YYYY)!<br/>Current value: "+value);
+			    				} else  {
+			    					if(!isDate(value))
+			    						errors = addError(errors, "Element '"+elemName+"' value has to be in date format (YYYY-MM-DD)!<br/>Current value: "+value);
+			    				}
 			    			}
 		    			}
 		    		} else {
@@ -293,6 +298,23 @@ public class DataImportTester extends HttpServlet {
 	private static boolean isDate(String s){
     	boolean ret = true;
     	String formatStr = "yyyy-MM-dd";
+    	SimpleDateFormat df = new SimpleDateFormat(formatStr);		
+    	Date testDate = null;		
+    	try {
+    		testDate = df.parse(s);
+    	} catch (ParseException e){
+    		// invalid date format			
+    		ret =  false;		
+    	}
+    	return ret;
+    }
+	
+	private static boolean isYear(String s){
+		if(s.length() > 4)
+			return false;
+		
+    	boolean ret = true;
+    	String formatStr = "yyyy";
     	SimpleDateFormat df = new SimpleDateFormat(formatStr);		
     	Date testDate = null;		
     	try {

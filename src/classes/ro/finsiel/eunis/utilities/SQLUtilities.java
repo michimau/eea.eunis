@@ -913,7 +913,7 @@ public class SQLUtilities {
 	      
 	      while (rs.next()) { 
 	    	  String tableName = rs.getString("TABLE_NAME"); 
-	    	  if(tableName != null && tableName.startsWith("chm62edt"))
+	    	  if(tableName != null && (tableName.startsWith("chm62edt")||tableName.startsWith("dc_")))
 	    		  ret.add(tableName);
 	      } 
 	      

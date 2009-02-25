@@ -277,7 +277,7 @@ public class WebContentManagement implements java.io.Serializable {
       }
       else
       {
-        System.out.println( "Warning:" + WebContentManagement.class.getName() + "::getText(" + idPage + "): Page not found in cache." );
+        System.out.println( "Warning:" + WebContentManagement.class.getName() + "::getTextByMD5(" + idPage + "): Page not found in cache." );
       }
     }
     else
@@ -289,10 +289,6 @@ public class WebContentManagement implements java.io.Serializable {
       {
         htmlContent.put( idPage, dbKeyList.get( 0 ) );
         ret = dbKeyList.get( 0 ).getContent();
-      }
-      else
-      {
-        System.out.println( "Warning:" + WebContentManagement.class.getName() + "::getText(" + idPage + "): Page not found in cache and database." );
       }
     }
     return ret;

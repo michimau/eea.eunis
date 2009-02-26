@@ -16,7 +16,7 @@
 <%
   String domainName = application.getInitParameter( "DOMAIN_NAME" );
 %>
-  <base href="<%=domainName%>/"/><!--[if lt IE 7]></base><![endif]-->
+  <base href="<%=domainName%>/"/>
     <jsp:include page="../header-page.jsp" />
 <%
   WebContentManagement cm = SessionManager.getWebContent();
@@ -137,11 +137,9 @@
 		            }
             	} else {
 	            	%>
-	            		<br />
-		                <br />
-		                <span style="color : red"><%=cm.cmsPhrase("You must be authenticated and have the proper right to access this page.")%></span>
-		                <br />
-		                <br />
+	            		<div class="error-msg">
+		                <%=cm.cmsPhrase("You must be authenticated and have the proper right to access this page.")%>
+		             </div>
 	            	<%	
             	}
                 %>

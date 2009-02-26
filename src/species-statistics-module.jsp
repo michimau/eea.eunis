@@ -217,7 +217,7 @@
                 } else
                 {
             %>
-                <span style="color:red"><%=cm.cmsPhrase("No data was found at Eunis Database level!")%></span>
+                <div class="advice-msg"><%=cm.cmsPhrase("No data was found at Eunis Database level!")%></div>
             <%
                 }
               out.flush();
@@ -356,9 +356,7 @@
                <%
                    } else {
                %>
-                   <br />
-                   <span style="color:red"><%=cm.cmsPhrase("No data was found for")%> <%=countryName%>!</span>
-                   <br />
+                   <div class="advice-msg"><%=cm.cmsPhrase("No data was found for")%> <%=countryName%>!</div>
                <%
                        }
                    }

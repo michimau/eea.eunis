@@ -16,7 +16,7 @@
 <%
   String domainName = application.getInitParameter( "DOMAIN_NAME" );
 %>
-  <base href="<%=domainName%>/"/><!--[if lt IE 7]></base><![endif]-->
+  <base href="<%=domainName%>/"/>
     <jsp:include page="../header-page.jsp" />
 <%
   WebContentManagement cm = SessionManager.getWebContent();
@@ -73,7 +73,7 @@
 	                    
                 	List<ImportLogDTO> messages = sqlc.getImportLogMessages();
                 	if(messages != null && messages.size() > 0){%>
-	                	<table class="listing" width="90%">
+	                	<table class="datatable" width="90%">
 	                		<%
 	                		for(Iterator<ImportLogDTO> it = messages.iterator(); it.hasNext();){
 		                		ImportLogDTO message = it.next();%>
@@ -89,11 +89,9 @@
 	                }
 		        } else {
 	            	%>
-	            		<br />
-		                <br />
-		                <span style="color : red"><%=cm.cmsPhrase("You must be authenticated and have the proper right to access this page.")%></span>
-		                <br />
-		                <br />
+	            		<div class="error-msg">
+		                <%=cm.cmsPhrase("You must be authenticated and have the proper right to access this page.")%>
+		              </div>
 	            	<%	
             	}
                 %>

@@ -368,7 +368,7 @@
                   else
                   {
             %>
-                   <span style="color:red"><%=cm.cmsPhrase("There are no saved bookmarks.")%></span>
+                   <div class="advice-msg"><%=cm.cmsPhrase("There are no saved bookmarks.")%></div>
             <%
                   }
                 }
@@ -379,11 +379,9 @@
               else
               {
             %>
-                <br />
-                <br />
-                <span style="color : red"><%=cm.cmsPhrase("You must be authenticated and have the proper right to access this page.")%></span>
-                <br />
-                <br />
+                <div class="error-msg">
+                <%=cm.cmsPhrase("You must be authenticated and have the proper right to access this page.")%>
+                </div>
             <%
               }
             %>

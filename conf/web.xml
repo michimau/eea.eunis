@@ -104,7 +104,7 @@
   <!-- Here temp files are stored -->
   <context-param>
     <param-name>TEMP_DIR</param-name>
-    <param-value>webapps/eunis/temp/</param-value>
+    <param-value>temp/</param-value>
     <description>Platform dependent variable which specifies where the temporary files should be created</description>
   </context-param>
   

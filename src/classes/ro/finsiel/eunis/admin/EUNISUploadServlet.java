@@ -34,7 +34,7 @@ public class EUNISUploadServlet extends HttpServlet {
   /** ROOT of the application (relative to $TOMCAT_HOME env. variable.) */
   private static String BASE_DIR = "webapps/eunis";
   /** The temporary dir where parts of the upload are stored temporary (if file size is bigger than memory buffer). */
-  private static String TEMP_DIR = "webapps/eunis/temp";
+  private static String TEMP_DIR = "temp";
   /** Maximum file size allowed to be uploaded to the server. */
   private static int MAX_FILE_SIZE = 104857600; // Default value
   /** Files with size smaller than this are written directly to disk, others through TEMP_DIR first. */
@@ -60,11 +60,11 @@ public class EUNISUploadServlet extends HttpServlet {
     HttpSession session = request.getSession(false);
     sessionManager = (SessionManager) session.getAttribute("SessionManager");
 
-    // Initilize the default settings
+    // Initialise the default settings
     try
     {
       BASE_DIR = getServletContext().getInitParameter( "TOMCAT_HOME" );
-      TEMP_DIR = BASE_DIR + "/" + getServletContext().getInitParameter("TEMP_DIR");
+      TEMP_DIR = getServletContext().getInitParameter( "INSTANCE_HOME" ) + getServletContext().getInitParameter("TEMP_DIR");
     } catch (Exception ex) {
       ex.printStackTrace();
     }

@@ -73,7 +73,7 @@
 
   String idHabitat = request.getParameter("idHabitat");
   pdfReport report = new pdfReport();
-  String linktopdf = application.getInitParameter("TOMCAT_HOME") + "/" + application.getInitParameter( "TEMP_DIR" );
+  String linktopdf = application.getInitParameter("INSTANCE_HOME") + application.getInitParameter( "TEMP_DIR" );
   String filename = "HabitatFactsheet_" + request.getSession().getId() + ".pdf";
   out.flush();
   HabitatsFactsheet factsheet = new HabitatsFactsheet(idHabitat);
@@ -85,7 +85,7 @@
       String typeString = "";
       // Headers and footers
       Paragraph h = new Paragraph();
-      String jpegPath = application.getInitParameter("INSTANCE_HOME") + "/images/headerpdf.jpg";
+      String jpegPath = application.getInitParameter("INSTANCE_HOME") + "images/headerpdf.jpg";
       Image jpeg = Image.getInstance(jpegPath);
       h.add(jpeg);
       report.setHeader(h);

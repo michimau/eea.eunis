@@ -34,8 +34,8 @@ public class CleanupSessionListener implements HttpSessionListener {
   public void sessionDestroyed(javax.servlet.http.HttpSessionEvent httpSessionEvent)
   {
     HttpSession session = httpSessionEvent.getSession();
-    String TEMP_PATH = session.getServletContext().getInitParameter( "TOMCAT_HOME" );
-    TEMP_PATH += "/" + Settings.getSetting("TEMP_DIR");
+    String TEMP_PATH = session.getServletContext().getInitParameter( "INSTANCE_HOME" );
+    TEMP_PATH += Settings.getSetting("TEMP_DIR");
     String sessionID = session.getId();
 
     File tempDir = new File(TEMP_PATH);

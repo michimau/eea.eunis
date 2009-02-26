@@ -29,7 +29,7 @@
   pdfReport report = new pdfReport();
   // Web content manager used in this page.
   WebContentManagement cm = SessionManager.getWebContent();
-  String linktopdf = application.getInitParameter( "TOMCAT_HOME" ) + "/" + application.getInitParameter( "TEMP_DIR" );
+  String linktopdf = application.getInitParameter( "INSTANCE_HOME" ) + application.getInitParameter( "TEMP_DIR" );
   String filename = "SiteFactsheet_" + request.getSession().getId() + ".pdf";
   /// INPUT PARAMS: idHabitat
   String siteid = request.getParameter("idsite");

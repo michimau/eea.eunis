@@ -88,11 +88,11 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
 <%
   pdfReport report = new pdfReport();
   out.flush();
-  String linktopdf = application.getInitParameter( "TOMCAT_HOME" ) + "/" + application.getInitParameter( "TEMP_DIR" );
+  String linktopdf = application.getInitParameter( "INSTANCE_HOME" ) + application.getInitParameter( "TEMP_DIR" );
   String filename = "SpeciesFactsheet_" + request.getSession().getId() + ".pdf";
 
   Paragraph header = new Paragraph();
-  String jpegPath = application.getInitParameter("INSTANCE_HOME") + "/images/headerpdf.jpg";
+  String jpegPath = application.getInitParameter("INSTANCE_HOME") + "images/headerpdf.jpg";
 
   try
   {
@@ -110,7 +110,7 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
     Paragraph footer = new Paragraph();
     footer.add( new Phrase( cm.cmsPhrase( "Source: European Topic Centre on Biological Diversity" ), FontFactory.getFont( FontFactory.HELVETICA, 8, Font.ITALIC, new Color( 24, 40, 136 ) ) ) );
     report.setFooter( footer );
-    report.init( linktopdf + filename );
+    report.init( linktopdf + "/" + filename );
 
     SimpleDateFormat df = new SimpleDateFormat( "yyyy-MM-dd" );
     report.writeln( cm.cmsPhrase( "Generated on" ) + ": " + df.format( new Date() ), FontFactory.getFont( FontFactory.HELVETICA, 8, Font.ITALIC, new Color( 24, 40, 136 ) ) );

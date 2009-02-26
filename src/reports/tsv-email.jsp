@@ -21,7 +21,7 @@
   String csvfilename = Utilities.formatString( request.getParameter( "tsvfilename"), "" );
   String xmlfilename = Utilities.formatString( request.getParameter( "xmlfilename"), "" );
 
-  String TOMCAT_HOME = application.getInitParameter( "TOMCAT_HOME" );
+  String INSTANCE_HOME = application.getInitParameter( "INSTANCE_HOME" );
   String TEMP_DIR = application.getInitParameter( "TEMP_DIR" );
 
   File csvfile;
@@ -31,12 +31,12 @@
   System.out.println( "xmlfilename = " + xmlfilename );
   if ( !csvfilename.equalsIgnoreCase( "" ) )
   {
-    csvfile = new File( TOMCAT_HOME + "/" + TEMP_DIR + csvfilename );
+    csvfile = new File( INSTANCE_HOME + TEMP_DIR + "/" + csvfilename );
     attachments.add( csvfile.getAbsolutePath() );
   }
   if ( !xmlfilename.equalsIgnoreCase( "" ) )
   {
-    xmlfile = new File( TOMCAT_HOME + "/" + TEMP_DIR + xmlfilename );
+    xmlfile = new File( INSTANCE_HOME + TEMP_DIR + "/" + xmlfilename );
     attachments.add( xmlfile.getAbsolutePath() );
   }
 %>

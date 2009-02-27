@@ -39,7 +39,7 @@
           <div id="portal-column-content">
             <div id="content">
               <div class="documentContent" id="region-content">
-              	<jsp:include page="header-dynamic.jsp">
+                <jsp:include page="header-dynamic.jsp">
                   <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <a name="documentContent"></a>
@@ -59,7 +59,9 @@
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
+                <div class="system-msg">
                 <%=cm.cmsPhrase("Template header and footer successfully updated!")%>
+                </div>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

@@ -58,7 +58,7 @@
           <div id="portal-column-content">
             <div id="content">
               <div class="documentContent" id="region-content">
-              	<jsp:include page="header-dynamic.jsp">
+                <jsp:include page="header-dynamic.jsp">
                   <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <a name="documentContent"></a>
@@ -81,13 +81,19 @@
                 <h1>
                   <%=cm.cmsPhrase("EUNIS Database Login")%>
                 </h1>
-                <br />
-                <div style="text-align : center; width : 100%">
           <%
             if ( !success )
             {
+              if ( cmd.equalsIgnoreCase( "login" ) && !success )
+              {
           %>
-                  <form name="login" method="post" action="login.jsp">
+              <div class="error-msg">
+                  <%=cm.cms("login_invalid")%>
+              </div>
+          <%
+              }
+          %>
+                  <form name="login" method="post" action="login.jsp" style="text-align:center; width : 100%">
                     <input type="hidden" name="cmd" value="login" />
           <%
                 if( ref != null )
@@ -112,31 +118,20 @@
                     <%=cm.cmsTitle("login_submit_title")%>
                     <%=cm.cmsInput("login")%>
                   </form>
-
           <%
-              if ( cmd.equalsIgnoreCase( "login" ) && !success )
-              {
-          %>
-              <script type="text/javascript" language="Javascript">
-                //<![CDATA[
-                  alert( "<%=cm.cms("login_invalid")%>." );
-                //]]>
-              </script>
-          <%
-              }
             }
             else
             {
           %>
+             <div class="system-msg">
               <%=cm.cmsPhrase("You successfully logged as")%>
               <strong><%=SessionManager.getUsername()%></strong>.
               <a title="<%=cm.cms("home_page")%>" href="index.jsp"><%=cm.cmsPhrase("EUNIS")%></a>
               <%=cm.cmsTitle("home_page")%>
+             </div>
           <%
             }
           %>
-                </div>
-              <br />
               <%=cm.cmsText("habitats_login-help_01")%>
 
               <%=cm.cmsMsg("Login into EUNIS Database")%>

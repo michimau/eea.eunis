@@ -33,8 +33,9 @@
   if (null != d && d.size() > 0)
   {
     String filename = request.getSession().getId() + "_" + new Date().getTime() + "_europe.jpg";
+    String temp_dir = application.getInitParameter( "TEMP_DIR" );
     String inputFilename = application.getInitParameter( "INSTANCE_HOME" ) + "gis/europe-bio.jpg";
-    String outputFilename = application.getInitParameter( "INSTANCE_HOME" ) + application.getInitParameter( "TEMP_DIR" ) + "/" + filename;
+    String outputFilename = application.getInitParameter( "INSTANCE_HOME" ) + temp_dir + filename;
 
     System.out.println( "outputFilename = " + outputFilename );
     System.out.println( "inputFilename = " + inputFilename );
@@ -90,12 +91,12 @@
 	<table width="90%" border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>
-			    <img alt="<%=cm.cms("grid_distribution")%>" name = "mmap" src="temp/<%=filename%>" style="vertical-align:middle" title="<%=cm.cms("grid_distribution")%>" />
+			    <img alt="<%=cm.cms("grid_distribution")%>" name="mmap" src="<%=temp_dir%><%=filename%>" style="vertical-align:middle" />
 			    <%=cm.cmsTitle("grid_distribution")%>
 			</td>
 			<td align="right" valign="top">
-				<a href="<%=kmlUrl%>" title="<%=cm.cms( "header_download_kml_title" )%>"><%=cm.cmsPhrase( "header_download_kml" )%></a>
-          		<%=cm.cmsTitle( "header_download_kml_title" )%>
+				<a href="<%=kmlUrl%>"><%=cm.cmsPhrase( "header_download_kml" )%></a>
+            <%=cm.cmsTitle( "header_download_kml_title" )%>
 			</td>
     </tr>
     </table>

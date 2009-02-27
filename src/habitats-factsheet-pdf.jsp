@@ -73,7 +73,8 @@
 
   String idHabitat = request.getParameter("idHabitat");
   pdfReport report = new pdfReport();
-  String linktopdf = application.getInitParameter("INSTANCE_HOME") + application.getInitParameter( "TEMP_DIR" );
+  String temp_dir = application.getInitParameter( "TEMP_DIR" );
+  String linktopdf = application.getInitParameter("INSTANCE_HOME") + temp_dir;
   String filename = "HabitatFactsheet_" + request.getSession().getId() + ".pdf";
   out.flush();
   HabitatsFactsheet factsheet = new HabitatsFactsheet(idHabitat);
@@ -142,7 +143,7 @@
     if(!error)
     {
 %>
-  <a target="_blank" href="temp/<%=filename%>"><%=cm.cmsPhrase("Open PDF document")%></a>
+  <a target="_blank" href="<%=temp_dir%><%=filename%>"><%=cm.cmsPhrase("Open PDF document")%></a>
 <%
     }
     else

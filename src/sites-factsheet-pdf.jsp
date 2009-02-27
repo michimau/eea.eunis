@@ -29,7 +29,8 @@
   pdfReport report = new pdfReport();
   // Web content manager used in this page.
   WebContentManagement cm = SessionManager.getWebContent();
-  String linktopdf = application.getInitParameter( "INSTANCE_HOME" ) + application.getInitParameter( "TEMP_DIR" );
+  String temp_dir = application.getInitParameter( "TEMP_DIR" );
+  String linktopdf = application.getInitParameter( "INSTANCE_HOME" ) + temp_dir;
   String filename = "SiteFactsheet_" + request.getSession().getId() + ".pdf";
   /// INPUT PARAMS: idHabitat
   String siteid = request.getParameter("idsite");
@@ -145,7 +146,7 @@
   if ( !error )
   {
 %>
-    <a target="_blank" href="temp/<%=filename%>" title="<%=cm.cms("download_pdf_file")%>"><%=cm.cmsPhrase("Open PDF document")%></a>
+    <a target="_blank" href="<%=temp_dir%><%=filename%>" title="<%=cm.cms("download_pdf_file")%>"><%=cm.cmsPhrase("Open PDF document")%></a>
     <%=cm.cmsTitle("download_pdf_file")%>
 <%
   }

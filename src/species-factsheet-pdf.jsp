@@ -88,7 +88,8 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
 <%
   pdfReport report = new pdfReport();
   out.flush();
-  String linktopdf = application.getInitParameter( "INSTANCE_HOME" ) + application.getInitParameter( "TEMP_DIR" );
+  String temp_dir = application.getInitParameter( "TEMP_DIR" );
+  String linktopdf = application.getInitParameter( "INSTANCE_HOME" ) + temp_dir;
   String filename = "SpeciesFactsheet_" + request.getSession().getId() + ".pdf";
 
   Paragraph header = new Paragraph();
@@ -157,7 +158,7 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
     if ( !error )
     {
 %>
-    <a title="<%=cm.cms("species_factsheet-pdf_102_Title")%>" target="_blank" href="temp/<%=filename%>"><%=cm.cmsPhrase( "Open PDF report" )%></a>
+    <a title="<%=cm.cms("species_factsheet-pdf_102_Title")%>" target="_blank" href="<%=temp_dir%><%=filename%>"><%=cm.cmsPhrase( "Open PDF report" )%></a>
     <%=cm.cmsTitle("species_factsheet-pdf_102_Title")%>
 <%
     }

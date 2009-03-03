@@ -975,6 +975,54 @@ public class SQLUtilities {
 	    return columns;
   }
   
+  public List<ColumnDTO> getTableInfoList(String tableName) {
+	    
+	    Connection con = null;
+	    List<ColumnDTO> columns = new ArrayList<ColumnDTO>();
+	    
+	    try
+	    {
+	      Class.forName( SQL_DRV );
+	      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+	      
+	      Statement st = con.createStatement();
+	      ResultSet rs = st.executeQuery("SELECT * FROM "+tableName);
+	      ResultSetMetaData rsMeta = rs.getMetaData();
+	      
+	      int numberOfColumns = rsMeta.getColumnCount();
+
+        for (int x = 1; x <= numberOfColumns; x++) {
+      	  String columnName = rsMeta.getColumnName(x);
+      	  int columnType = rsMeta.getColumnType(x);
+      	  int size = rsMeta.getColumnDisplaySize(x);
+      	  int precision = rsMeta.getPrecision(x);
+      	  int scale = rsMeta.getScale(x);
+      	  boolean isSigned = rsMeta.isSigned(x);
+      	  int isNullable = rsMeta.isNullable(x);
+    	    
+      	  ColumnDTO column = new ColumnDTO();
+      	  column.setColumnName(columnName);
+      	  column.setColumnType(columnType);
+      	  column.setColumnSize(size);
+      	  column.setPrecision(precision);
+      	  column.setScale(scale);
+      	  column.setSigned(isSigned);
+      	  column.setNullable(isNullable);
+    		
+      	  columns.add(column);	                	    
+        }
+	      
+        st.close();
+	      con.close();
+	    }
+	    catch ( Exception ex )
+	    {
+	      ex.printStackTrace();
+	    }
+
+	    return columns;
+}
+  
   public String getTableContentAsXML(String tableName) {
 	    
 	  Connection con = null;

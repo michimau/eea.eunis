@@ -2819,12 +2819,12 @@ public final class Utilities {
 		try {
 			
 			//we display root nodes
-			strSQL = "SELECT CONCAT('(',LEVEL,')',' ',NAME) AS TITLE, ID_TAXONOMY AS ID";
+			strSQL = "SELECT CONCAT(NAME,' ','(',LEVEL,')') AS TITLE, ID_TAXONOMY AS ID";
 			strSQL = strSQL + " FROM CHM62EDT_TAXONOMY";
 			if(isRoot){
-				strSQL = strSQL + " WHERE ID_TAXONOMY=46 OR ID_TAXONOMY=47 OR ID_TAXONOMY=48 OR ID_TAXONOMY=3001";
+				strSQL = strSQL + " WHERE ID_TAXONOMY=46 OR ID_TAXONOMY=47 OR ID_TAXONOMY=48 OR ID_TAXONOMY=3001 ORDER BY NAME";
 			} else {
-				strSQL = strSQL + " WHERE ID_TAXONOMY_PARENT="+id+" AND ID_TAXONOMY != "+id;
+				strSQL = strSQL + " WHERE ID_TAXONOMY_PARENT="+id+" AND ID_TAXONOMY != "+id+"  ORDER BY NAME";
 			}
 	
 			ps = con.prepareStatement( strSQL );
@@ -2848,15 +2848,15 @@ public final class Utilities {
                   		}
           				ret += "&nbsp;"+rs.getString("TITLE")+newLine;
     				} else {
-    					ret += "<img src=\"images/img_bullet.gif\" alt=\""+rs.getString("TITLE")+"\"/>&nbsp;"+rs.getString("TITLE")+newLine;
+    					ret += "<img src=\"images/img_bullet.gif\" alt=\""+rs.getString("TITLE")+"\"/>&nbsp;&nbsp;"+rs.getString("TITLE")+newLine;
     				}
     				if(expand.length()>0 && expandContains(expand,rs.getString("ID"))){
-    					ArrayList SpeciesList = sqlc.SQL2Array("SELECT CONCAT('<a href=\"species-factsheet.jsp?idSpecies=',ID_SPECIES,'&amp;idSpeciesLink=',ID_SPECIES_LINK,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+rs.getString("ID"));
+    					ArrayList SpeciesList = sqlc.SQL2Array("SELECT CONCAT('<a href=\"species-factsheet.jsp?idSpecies=',ID_SPECIES,'&amp;idSpeciesLink=',ID_SPECIES_LINK,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+rs.getString("ID")+" ORDER BY SCIENTIFIC_NAME");
     					if(SpeciesList.size()>0) {
     						ret += "<ul class=\"tree\">"+newLine;
                   			for(int i=0;i<SpeciesList.size();i++){
                   				ret += "<li>"+newLine;
-								ret += "<img src=\"images/img_bullet.gif\">&nbsp;"+SpeciesList.get(i)+newLine;
+								ret += "<img src=\"images/img_bullet.gif\">&nbsp;&nbsp;"+SpeciesList.get(i)+newLine;
 								ret += "</li>"+newLine;
                   			}
                   			ret += "</ul>"+newLine;

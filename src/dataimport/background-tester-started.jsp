@@ -24,7 +24,7 @@
   String btrail = "eea#" + eeaHome + ",home#index.jsp,data import#dataimport/index.jsp,data tester";
 %>
     <title>
-      Data Import Tester
+      Background Data Tester Started
     </title>
   </head>
   <body>
@@ -59,88 +59,17 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  Data Import Tester
+                  Background Data Tester Started
                 </h1>
                 <%
                 if( SessionManager.isAuthenticated() && SessionManager.isImportExportData_RIGHT() ){
                 %>
-	                <p class="documentDescription">
-	                The purpose of this page is to test the XML formatted Oracle dumps from the EUNIS maintainer.
-	                It will not overwrite data.
-	                </p>
-	                <form name="eunis" method="post" action="<%=domainName%>/datatester" enctype="multipart/form-data">
-	                	<table border="0">
-		                	<tr>
-		                		<td><label for="table">Table</label></td>
-		                		<td>
-					                <select id="table" name="table" title="Table names">
-					                	<option value=""></option>
-					                <%
-					                	String SQL_DRV = application.getInitParameter("JDBC_DRV");
-					                    String SQL_URL = application.getInitParameter("JDBC_URL");
-					                    String SQL_USR = application.getInitParameter("JDBC_USR");
-					                    String SQL_PWD = application.getInitParameter("JDBC_PWD");
-					
-					                    SQLUtilities sqlc = new SQLUtilities();
-					                    sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-					                    
-					                	List<String> tableNames = sqlc.getAllChm62edtTableNames();
-					                	for(Iterator it = tableNames.iterator(); it.hasNext();){
-						                	String tableName = (String) it.next();%>
-						                	<option value="<%=tableName%>"><%=tableName%></option>
-						                	<%
-					                	}
-					                %>
-					                </select>
-								</td>
-							</tr>
-							<tr>
-			                	<td><label for="file">File</label></td>
-			                	<td><input type="file" id="file" name="file"/></td>
-			                </tr>
-			                <tr>
-			                	<td><label for="back">Run in background</label></td>
-			                	<td><input type="checkbox" id="back" name="back"/></td>
-			                </tr>
-			                <tr>
-			                	<td><label for="mail">E-mail</label></td>
-			                	<td><input type="text" id="mail" name="mail"/></td>
-			                </tr>
-			                <tr>
-			                	<td></td>
-			                	<td>Required if "Run in background" is checked. <br/>Specifies the e-mail where any occuring errors will be sent.</td>
-			                </tr>
-			                <tr>
-			                	<td align="right" colspan="2"><input type="submit" name="btn" value="Test"/></td>
-			                </tr>
-		                </table>
-		            </form>
-		            <%
-		            List<String> errors = (List<String>)request.getSession().getAttribute("errors");
-		            if(errors != null && errors.size() > 0){%>
-		            	<h2><%=errors.size()%> errors found:</h2>
-		            	<ul>
-		            	<%
-			         	for(int i = 0 ; i<errors.size() ; i++) {
-				         	String error = errors.get(i);
-			         		%>
-			         		<li><%=error%></li>
-			         		<%
-				        }
-				        %>
-				        </ul>
-				        <%
-				        request.getSession().removeAttribute("errors");
-		            } else {
-			         	String success = (String)request.getSession().getAttribute("success");
-			         	if(success != null){
-			         		%>
-			         			<b><%=success%></b>
-			         		<%
-				        	request.getSession().removeAttribute("success");
-		         		}
-		            }
-		        } else {
+	                <div class="system-msg">
+	                Background data tester started. Any errors found will be sent to the following e-mail: <%=(String)request.getSession().getAttribute("email")%>
+	                <% request.getSession().removeAttribute("email"); %>
+	                </div>
+	                
+		        <%} else {
 	            	%>
 	            		<div class="error-msg">
 		                <%=cm.cmsPhrase("You must be authenticated and have the proper right to access this page.")%>

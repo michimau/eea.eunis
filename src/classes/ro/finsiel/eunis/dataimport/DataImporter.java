@@ -120,7 +120,7 @@ public class DataImporter extends HttpServlet {
 		    		FileItem item = (FileItem) items.get(i);
 		    		if(!item.isFormField()){
 		                try {
-		                	File xmlFile = new File(TEMP_DIR + "/importXmlFile");
+		                	File xmlFile = new File(TEMP_DIR + "importXmlFile");
 		                	item.write(xmlFile);
 		                	
 		                	if(runBackground){

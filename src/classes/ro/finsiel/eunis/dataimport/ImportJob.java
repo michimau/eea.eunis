@@ -33,9 +33,6 @@ public class ImportJob implements Job {
 	
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		
-		String instName = context.getJobDetail().getName();
-		String instGroup = context.getJobDetail().getGroup();
-
 		JobDataMap dataMap = context.getJobDetail().getJobDataMap();
 		
 		String sqlDrv = dataMap.getString("sqlDrv");
@@ -51,7 +48,7 @@ public class ImportJob implements Job {
 		String table = dataMap.getString("table");
 		boolean emptyTable = dataMap.getBoolean("emptyTable");
 		try {
-			File xmlFile = new File(tmpDir + "/importXmlFile");
+			File xmlFile = new File(tmpDir + "importXmlFile");
 			
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 	    	DocumentBuilder db = dbf.newDocumentBuilder();

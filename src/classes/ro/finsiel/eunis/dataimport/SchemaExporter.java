@@ -82,8 +82,12 @@ public class SchemaExporter extends HttpServlet {
 							xsdType = "xsd:short";
 						else if(type == Types.BOOLEAN)
 							xsdType = "xsd:boolean";
-						else if(type == Types.DATE)
-							xsdType = "xsd:date";
+						else if(type == Types.DATE){
+							if(size == 4)
+								xsdType = "xsd:gYear";
+							else
+								xsdType = "xsd:date";
+						}
 						else
 							xsdType = "xsd:string";
 						

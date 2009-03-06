@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -1044,6 +1045,15 @@ public class SQLUtilities {
 		      for (int x = 1; x <= numberOfColumns; x++) {
 		    	  String columnName = rsMeta.getColumnName(x);
 		    	  String value = rs.getString(columnName);
+		    	  int columnType = rsMeta.getColumnType(x);
+	        	  int size = rsMeta.getColumnDisplaySize(x);
+	        	  
+	        	  if(columnType == Types.DATE){
+	        		  if(size == 4){
+	        			  if(value != null && value.length() > 4)
+	        				  value = value.substring(0, 4);
+	        		  }
+	        	  }
 		    	  if(value == null)
 		    		  value = "NULL";
 		    	  

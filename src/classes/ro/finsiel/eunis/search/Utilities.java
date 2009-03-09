@@ -9,6 +9,7 @@ import ro.finsiel.eunis.jrfTables.species.glossary.Chm62edtGlossaryDomain;
 import ro.finsiel.eunis.jrfTables.species.habitats.*;
 import ro.finsiel.eunis.jrfTables.species.references.ReferencesJoinDomain;
 import ro.finsiel.eunis.jrfTables.species.references.ReferencesJoinPersist;
+import ro.finsiel.eunis.search.species.taxcode.TaxonomyDTO;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 import ro.finsiel.eunis.utilities.TableColumns;
 
@@ -16,7 +17,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DateFormat;
@@ -2822,9 +2822,9 @@ public final class Utilities {
 			strSQL = "SELECT CONCAT(NAME,' ','(',LEVEL,')') AS TITLE, ID_TAXONOMY AS ID";
 			strSQL = strSQL + " FROM CHM62EDT_TAXONOMY";
 			if(isRoot){
-				strSQL = strSQL + " WHERE ID_TAXONOMY=46 OR ID_TAXONOMY=47 OR ID_TAXONOMY=48 OR ID_TAXONOMY=3001 ORDER BY NAME";
+				strSQL = strSQL + " WHERE ID_TAXONOMY=46 OR ID_TAXONOMY=47 OR ID_TAXONOMY=48 OR ID_TAXONOMY=3001";
 			} else {
-				strSQL = strSQL + " WHERE ID_TAXONOMY_PARENT="+id+" AND ID_TAXONOMY != "+id+"  ORDER BY NAME";
+				strSQL = strSQL + " WHERE ID_TAXONOMY_PARENT="+id+" AND ID_TAXONOMY != "+id;
 			}
 	
 			ps = con.prepareStatement( strSQL );
@@ -2832,46 +2832,57 @@ public final class Utilities {
 			String hide = cm.cms("Hide sublevels");
 			String show = cm.cms("Show sublevels");
 			
-				ret += "<ul class=\"tree\">"+newLine;
-				while(rs.next()){
-					ret += "<li>"+newLine;
-					boolean hasChilds = sqlc.SpeciesHasChildTaxonomies(rs.getString("ID"));
-					boolean hasChildSpecies = false;
-					if(!hasChilds){
-						hasChildSpecies = sqlc.SpeciesHasChildSpecies(rs.getString("ID"));
-					}
-    				if(hasChilds || hasChildSpecies){
-						if(expandContains(expand,rs.getString("ID"))){
-							ret += "<a title=\""+hide+"\" id=\"level_"+rs.getString("ID")+"\" href=\"species-taxonomic-browser.jsp?expand="+removeSpecieFromExpanded(expand,rs.getString("ID"))+"#level_"+rs.getString("ID")+"\"><img src=\"images/img_minus.gif\" alt=\""+hide+"\"/></a>"+newLine;
-                  		} else {
-                  			ret += "<a title=\""+show+"\" id=\"level_"+rs.getString("ID")+"\" href=\"species-taxonomic-browser.jsp?expand="+addToExpanded(expand,rs.getString("ID"))+"#level_"+rs.getString("ID")+"\"><img src=\"images/img_plus.gif\" alt=\""+show+"\"/></a>"+newLine;
-                  		}
-          				ret += "&nbsp;"+rs.getString("TITLE")+newLine;
-    				} else {
-    					ret += "<img src=\"images/img_bullet.gif\" alt=\""+rs.getString("TITLE")+"\"/>&nbsp;&nbsp;"+rs.getString("TITLE")+newLine;
-    				}
-    				if(expand.length()>0 && expandContains(expand,rs.getString("ID"))){
-    					ArrayList SpeciesList = sqlc.SQL2Array("SELECT CONCAT('<a href=\"species-factsheet.jsp?idSpecies=',ID_SPECIES,'&amp;idSpeciesLink=',ID_SPECIES_LINK,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+rs.getString("ID")+" ORDER BY SCIENTIFIC_NAME");
-    					if(SpeciesList.size()>0) {
-    						ret += "<ul class=\"tree\">"+newLine;
-                  			for(int i=0;i<SpeciesList.size();i++){
-                  				ret += "<li>"+newLine;
-								ret += "<img src=\"images/img_bullet.gif\">&nbsp;&nbsp;"+SpeciesList.get(i)+newLine;
-								ret += "</li>"+newLine;
-                  			}
-                  			ret += "</ul>"+newLine;
-                		}
-    				}
-    				if(expand.length()>0 && expandContains(expand,rs.getString("ID"))) {
-    					
-	          			ret += generateSpeciesTaxonomicTree(rs.getString("ID"), expand, false, con, sqlc, cm);
-          			}
-
-          			ret += "</li>"+newLine;
-
+			List<TaxonomyDTO> list = new ArrayList<TaxonomyDTO>();
+			while(rs.next()){
+				TaxonomyDTO dto = new TaxonomyDTO(rs.getString("TITLE"), rs.getInt("ID"));
+				list.add(dto);
+			}
+			Collections.sort(list);
+			
+			ret += "<ul class=\"tree\">"+newLine;
+			for(TaxonomyDTO tax : list){
+				
+				String taxTitle = tax.getTitle();
+				String taxId = new Integer(tax.getId()).toString();
+				
+				ret += "<li>"+newLine;
+				boolean hasChilds = sqlc.SpeciesHasChildTaxonomies(taxId);
+				boolean hasChildSpecies = false;
+				if(!hasChilds){
+					hasChildSpecies = sqlc.SpeciesHasChildSpecies(taxId);
+				}
+				if(hasChilds || hasChildSpecies){
+					if(expandContains(expand,taxId)){
+						ret += "<a title=\""+hide+"\" id=\"level_"+taxId+"\" href=\"species-taxonomic-browser.jsp?expand="+removeSpecieFromExpanded(expand,taxId)+"#level_"+taxId+"\"><img src=\"images/img_minus.gif\" alt=\""+hide+"\"/></a>"+newLine;
+              		} else {
+              			ret += "<a title=\""+show+"\" id=\"level_"+taxId+"\" href=\"species-taxonomic-browser.jsp?expand="+addToExpanded(expand,taxId)+"#level_"+taxId+"\"><img src=\"images/img_plus.gif\" alt=\""+show+"\"/></a>"+newLine;
+              		}
+      				ret += "&nbsp;"+taxTitle+newLine;
+				} else {
+					ret += "<img src=\"images/img_bullet.gif\" alt=\""+taxTitle+"\"/>&nbsp;&nbsp;"+taxTitle+newLine;
+				}
+				if(expand.length()>0 && expandContains(expand,taxId)){
+					ArrayList SpeciesList = sqlc.SQL2Array("SELECT CONCAT('<a href=\"species-factsheet.jsp?idSpecies=',ID_SPECIES,'&amp;idSpeciesLink=',ID_SPECIES_LINK,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+taxId);
+					Collections.sort(SpeciesList);
+					if(SpeciesList.size()>0) {
+						ret += "<ul class=\"tree\">"+newLine;
+              			for(int i=0;i<SpeciesList.size();i++){
+              				ret += "<li>"+newLine;
+							ret += "<img src=\"images/img_bullet.gif\">&nbsp;&nbsp;"+SpeciesList.get(i)+newLine;
+							ret += "</li>"+newLine;
+              			}
+              			ret += "</ul>"+newLine;
+            		}
+				}
+				if(expand.length()>0 && expandContains(expand,taxId)) {
+					
+          			ret += generateSpeciesTaxonomicTree(taxId, expand, false, con, sqlc, cm);
       			}
 
-				ret += "</ul>"+newLine;
+      			ret += "</li>"+newLine;
+      		}
+
+			ret += "</ul>"+newLine;
 
       		rs.close();
 	        ps.close();

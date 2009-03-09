@@ -9,6 +9,7 @@
   request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.utilities.SQLUtilities,java.util.*"%>
+<%@ page import="ro.finsiel.eunis.jrfTables.users.UserPersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -26,8 +27,29 @@
     <title>
       Data Import Tester
     </title>
+    
+    <script type="text/javascript">
+    	function displayEmail(){	
+	    	var back = document.getElementById("back");	 
+	    	var emailRow = document.getElementById("emailRow");	
+	    	var emailDescRow = document.getElementById("emailDescRow");	
+	    	
+	    	if (back.checked){
+	    		emailRow.style.display = '';	
+	    		emailDescRow.style.display = '';
+    		} else {
+	    		emailRow.style.display = 'none';	
+	    		emailDescRow.style.display = 'none';
+	    	}
+		}
+		
+		function hideEmail(){	
+	    	document.getElementById("emailRow").style.display = 'none';	
+	    	document.getElementById("emailDescRow").style.display = 'none';	
+		}
+	</script>
   </head>
-  <body>
+  <body onLoad="hideEmail()">
     <div id="visual-portal-wrapper">
       <jsp:include page="../header.jsp" />
       <!-- The wrapper div. It contains the three columns. -->
@@ -63,6 +85,11 @@
                 </h1>
                 <%
                 if( SessionManager.isAuthenticated() && SessionManager.isImportExportData_RIGHT() ){
+	                UserPersist usr = SessionManager.getUserPrefs();
+	                String eMail = usr.getEMail();
+	                if(eMail == null){
+	                	eMail = "";
+                	}
                 %>
 	                <p class="documentDescription">
 	                The purpose of this page is to test the XML formatted Oracle dumps from the EUNIS maintainer.
@@ -100,15 +127,15 @@
 			                </tr>
 			                <tr>
 			                	<td><label for="back">Run in background</label></td>
-			                	<td><input type="checkbox" id="back" name="back"/></td>
+			                	<td><input type="checkbox" id="back" name="back" onClick="displayEmail()"/></td>
 			                </tr>
-			                <tr>
+			                <tr id="emailRow">
 			                	<td><label for="mail">E-mail</label></td>
-			                	<td><input type="text" id="mail" name="mail"/></td>
+			                	<td><input type="text" id="mail" name="mail" value="<%=eMail%>"/></td>
 			                </tr>
-			                <tr>
+			                <tr id="emailDescRow">
 			                	<td></td>
-			                	<td>Required if "Run in background" is checked. <br/>Specifies the e-mail where any occuring errors will be sent.</td>
+			                	<td>Specifies the e-mail where any occuring errors will be sent.</td>
 			                </tr>
 			                <tr>
 			                	<td align="right" colspan="2"><input type="submit" name="btn" value="Test"/></td>

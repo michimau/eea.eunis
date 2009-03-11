@@ -1149,5 +1149,53 @@ public class SQLUtilities {
 
 	    return result;
   }
+  
+  public List<String> getUrls() {
+	  List<String> ret = new ArrayList<String>();
+	  
+	  Connection con = null;
+	  PreparedStatement ps = null;
+	  ResultSet rs = null;
+	  
+	  List<String> statements = new ArrayList<String>();
+	  statements.add("SELECT URL FROM DC_SOURCE");
+	  statements.add("SELECT LINK_URL FROM CHM62EDT_GLOSSARY");
+	  statements.add("SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES WHERE VALUE LIKE 'http://%'");
+	  statements.add("SELECT DATA_SOURCE FROM CHM62EDT_DESIGNATIONS WHERE DATA_SOURCE LIKE 'http://%'");
+
+	  try {
+		  Class.forName( SQL_DRV );
+	      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+	      
+	      for(String stmt : statements){
+		      ps = con.prepareStatement(stmt);
+		      rs = ps.executeQuery();
+		      while (rs.next()) {
+		    	  String url = rs.getString(1);
+		    	  if(url != null && url.length() > 0){
+		    		  int space = url.indexOf(" ");
+		    		  if(space != -1)
+		    			  url = url.substring(0, space);
+		    		  
+		    		  int br = url.indexOf("\n");
+		    		  if(br != -1)
+		    			  url = url.substring(0, br);
+		    			  
+		    		  ret.add(url);
+		    	  }
+		      }
+	      }
+
+	      closeAll( con, ps, rs );
+	      
+	  } catch (Exception e) {
+		  e.printStackTrace();
+		  return null;
+	  } finally {
+		  closeAll( con, ps, rs );
+	  }
+	  
+	  return ret;
+  }
 
 }

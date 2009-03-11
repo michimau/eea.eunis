@@ -322,6 +322,11 @@
     <servlet-name>schemaexporter</servlet-name>
     <servlet-class>ro.finsiel.eunis.dataimport.SchemaExporter</servlet-class>
   </servlet>
+  
+  <servlet>
+    <servlet-name>urls</servlet-name>
+    <servlet-class>ro.finsiel.eunis.urls.Urls</servlet-class>
+  </servlet>
 
   <servlet>
     <servlet-name>species</servlet-name>
@@ -353,6 +358,11 @@
   <servlet-mapping>
     <servlet-name>upload</servlet-name>
     <url-pattern>/fileupload</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>urls</servlet-name>
+    <url-pattern>/urls.jsp</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>

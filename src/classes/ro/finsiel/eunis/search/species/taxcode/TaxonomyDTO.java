@@ -16,7 +16,7 @@ public class TaxonomyDTO implements  Comparable<TaxonomyDTO> {
 	}
 	
 	public int compareTo(TaxonomyDTO tax) {
-	    return title.compareTo(((TaxonomyDTO) tax).title);
+	    return title.compareToIgnoreCase(((TaxonomyDTO) tax).title);
 	}
 
 	public String getTitle() {

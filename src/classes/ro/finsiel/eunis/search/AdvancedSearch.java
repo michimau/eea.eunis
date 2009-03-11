@@ -300,7 +300,6 @@ public class AdvancedSearch {
         SQL.append("'" + NatureObject + "',");
         if (SQL.length() > 64000) {
           SQL.append("'" + tokenizer.nextElement().toString().trim() + "')");
-          //ro.finsiel.eunis.admin.FileUtils.dumpToFile(SQL.toString(),false);
           ps.executeUpdate(SQL.toString());
           SQL = new StringBuffer();
           SQL.ensureCapacity(65000);

@@ -65,27 +65,4 @@ public class FileUtils {
     return ret;
   }
 
-  /**
-   * Write debug information withing $TOMCAT_HOME/webapps/eunis/temp.
-   * @param text Data to be written.
-   * @param append Append to existing file or create and write into a new file.
-   * @return True if operation was successfully.
-   */
-  public static boolean dumpToFile(String text, boolean append) {
-    boolean ret = true;
-    try {
-      Properties p = ro.finsiel.eunis.OSEnvironment.getEnvVars();
-      String BASE_FILENAME = p.getProperty("TOMCAT_HOME") + "/webapps/eunis/temp/";
-      //System.out.println("BASE_FILENAME+dump.txt=" + BASE_FILENAME+ "dump.txt");
-      File file = new File(BASE_FILENAME + "dump.txt");
-      /** Basic I/O data stream constructed around the file object */
-      BufferedOutputStream fileStream = new BufferedOutputStream(new FileOutputStream(file, append));
-      fileStream.write(text.getBytes());
-      fileStream.close();
-    } catch (Exception _ex) {
-      _ex.printStackTrace(System.err);
-      ret = false;
-    }
-    return ret;
-  }
 }

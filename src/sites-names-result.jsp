@@ -21,15 +21,12 @@
                  ro.finsiel.eunis.search.sites.SitesSearchCriteria,
                  ro.finsiel.eunis.jrfTables.Chm62edtSoundexPersist,
                  ro.finsiel.eunis.jrfTables.Chm62edtSoundexDomain"%>
-<%@ page import="ro.finsiel.eunis.admin.FileUtils"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.names.NameBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
   //Utilities.dumpRequestParams( request );
-  FileUtils.dumpToFile( request.getParameter("englishName").toString(), false );
-  FileUtils.dumpToFile( java.net.URLDecoder.decode( request.getParameter("englishName").toString(), "UTF-8" ), false );
   boolean noSoundex = Utilities.checkedStringToBoolean( formBean.getNoSoundex(), false );
   // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }

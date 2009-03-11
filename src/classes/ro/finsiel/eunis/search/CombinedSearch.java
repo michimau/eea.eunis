@@ -144,9 +144,7 @@ public class CombinedSearch {
           }
           SQL.append("-1,-1,-1)");
 
-          //ro.finsiel.eunis.admin.FileUtils.dumpToFile(SQL.toString(),false);
           ps.executeUpdate(SQL.toString());
-          //System.out.println(SQL.toString());
 
           SQL = new StringBuffer();
           SQL.ensureCapacity(65000);
@@ -172,9 +170,7 @@ public class CombinedSearch {
         }
       }
       if (SQL.length() > 0) {
-        //ro.finsiel.eunis.admin.FileUtils.dumpToFile(SQL.toString(),false);
         ps.executeUpdate(SQL.toString());
-        //System.out.println(SQL.toString());
       }
 
       SQL = new StringBuffer();

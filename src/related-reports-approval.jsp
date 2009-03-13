@@ -22,7 +22,7 @@
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-  String uploadDir = application.getInitParameter( "TOMCAT_HOME" ) + "/" + application.getInitParameter("UPLOAD_DIR_FILES");
+  String uploadDir = application.getInitParameter( "INSTANCE_HOME" ) + "/" + application.getInitParameter("UPLOAD_DIR_FILES");
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,related_reports#related-reports.jsp,related_reports_approval_location";
   String operation = FormBean.getOperation();
@@ -180,7 +180,7 @@
                     if ( null != report )
                     {
                       String cssClass = i % 2 == 0 ? " class=\"zebraeven\"" : "";
-                      File file = new File( application.getInitParameter( "TOMCAT_HOME" ) + "/" + application.getInitParameter("UPLOAD_DIR_FILES") + report.getFileName() );
+                      File file = new File( application.getInitParameter( "INSTANCE_HOME" ) + "/" + application.getInitParameter("UPLOAD_DIR_FILES") + report.getFileName() );
                       long size = file.getAbsoluteFile().length();
                       if ( size > 0 ) size /= 1024;
                       // Find the author's e-mail address in the EUNIS_USERS table.

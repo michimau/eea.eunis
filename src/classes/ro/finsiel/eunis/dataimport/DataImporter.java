@@ -38,8 +38,8 @@ import static org.w3c.dom.Node.TEXT_NODE;
 
 public class DataImporter extends HttpServlet {
 	
-	/** ROOT of the application (relative to $TOMCAT_HOME env. variable.) */
-	private static String BASE_DIR = "webapps/eunis";
+	/** ROOT of the application (relative to $INSTANCE_HOME env. variable.) */
+	private static String BASE_DIR = "";
 	/** The temporary dir where parts of the upload are stored temporary (if file size is bigger than memory buffer). */
 	private static String TEMP_DIR = "temp";
 	/** Maximum file size allowed to be uploaded to the server. */

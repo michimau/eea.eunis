@@ -131,7 +131,7 @@
     {
       boolean ret = PicturesHelper.deletePicture(IDObject, NatureObjectType, scientificName, filename);
       // Delete picture physically from disk
-      String tomcatHome = application.getInitParameter( "TOMCAT_HOME" );
+      String instanceHome = application.getInitParameter( "INSTANCE_HOME" );
       String baseDir = "";
       if (null != NatureObjectType && NatureObjectType.equalsIgnoreCase("species"))
       {
@@ -145,7 +145,7 @@
       {
         baseDir = application.getInitParameter( "UPLOAD_DIR_PICTURES_HABITATS");
       }
-      String absoluteFilename = tomcatHome + "/" + baseDir + filename;
+      String absoluteFilename = instanceHome + baseDir + filename;
       File absolutFile = new File( absoluteFilename );
       if ( absolutFile.exists() )
       {

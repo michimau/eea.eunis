@@ -132,28 +132,28 @@
   <!-- Upload directory for reports (related reports) -->
   <context-param>
     <param-name>UPLOAD_DIR_FILES</param-name>
-    <param-value>webapps/eunis/upload/</param-value>
+    <param-value>upload/</param-value>
     <description>Upload path for related reports</description>
   </context-param>
 
   <!-- Upload directory for pictures (species) -->
   <context-param>
     <param-name>UPLOAD_DIR_PICTURES_SPECIES</param-name>
-    <param-value>webapps/eunis/images/species/</param-value>
+    <param-value>images/species/</param-value>
     <description>Upload path for images with species</description>
   </context-param>
 
   <!-- Upload directory for pictures (habitats) -->
   <context-param>
     <param-name>UPLOAD_DIR_PICTURES_HABITATS</param-name>
-    <param-value>webapps/eunis/images/habitats/</param-value>
+    <param-value>images/habitats/</param-value>
     <description>Upload path for images with habitats</description>
   </context-param>
 
   <!-- Upload directory for pictures (sites) -->
   <context-param>
     <param-name>UPLOAD_DIR_PICTURES_SITES</param-name>
-    <param-value>webapps/eunis/images/sites/</param-value>
+    <param-value>images/sites/</param-value>
     <description>Upload path for images with sites</description>
   </context-param>
 

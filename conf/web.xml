@@ -111,21 +111,21 @@
   <!-- Template header file location -->
   <context-param>
     <param-name>TEMPLATE_HEADER_LOCATION</param-name>
-    <param-value>/webapps/eunis/header.jsp</param-value>
+    <param-value>header.jsp</param-value>
     <description>Platform dependent variable which specifies header location</description>
   </context-param>
   
   <!-- Template required head file location -->
   <context-param>
     <param-name>TEMPLATE_REQUIRED_HEAD_LOCATION</param-name>
-    <param-value>/webapps/eunis/required-head.jsp</param-value>
+    <param-value>required-head.jsp</param-value>
     <description>Platform dependent variable which specifies required head location</description>
   </context-param>
   
   <!-- Template footer file location -->
   <context-param>
     <param-name>TEMPLATE_FOOTER_LOCATION</param-name>
-    <param-value>/webapps/eunis/footer-static.jsp</param-value>
+    <param-value>footer-static.jsp</param-value>
     <description>Platform dependent variable which specifies footer location</description>
   </context-param>
 

@@ -66,23 +66,39 @@
                    <h1><%=cm.cmsPhrase("Feedback list")%></h1>
                    <br />
                 <%
-                  String SQL_DRV = application.getInitParameter("JDBC_DRV");
-                  String SQL_URL = application.getInitParameter("JDBC_URL");
-                  String SQL_USR = application.getInitParameter("JDBC_USR");
-                  String SQL_PWD = application.getInitParameter("JDBC_PWD");
+				String p = request.getParameter("page");
+                int limit = 10;
+                if(p == null) p = "1";
+      			int mypage=Integer.parseInt(p);
+      			int myEnd = (limit * mypage);
+        		int myBase = (myEnd - limit);
+                
+                String SQL_DRV = application.getInitParameter("JDBC_DRV");
+                String SQL_URL = application.getInitParameter("JDBC_URL");
+                String SQL_USR = application.getInitParameter("JDBC_USR");
+                String SQL_PWD = application.getInitParameter("JDBC_PWD");
 
-                  SQLUtilities sqlUtil = new SQLUtilities();
-                  sqlUtil.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+                SQLUtilities sqlUtil = new SQLUtilities();
+                sqlUtil.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+                
+                String countStr = sqlUtil.ExecuteSQL("SELECT COUNT(FEEDBACK_TYPE) FROM EUNIS_FEEDBACK");
+                int count = Integer.parseInt(countStr);
 
-                  String sql = "select FEEDBACK_TYPE, MODULE, COMMENT, NAME, EMAIL, COMPANY, ADDRESS, PHONE, FAX, URL " +
-                          " from EUNIS_FEEDBACK " +
-                          " order by FEEDBACK_TYPE, MODULE limit 0,10 ";
-                  List feedbacks = sqlUtil.ExecuteSQLReturnList(sql, 10);
+                String sql = "select FEEDBACK_TYPE, MODULE, COMMENT, NAME, EMAIL, COMPANY, ADDRESS, PHONE, FAX, URL " +
+                        " from EUNIS_FEEDBACK " +
+                        " order by FEEDBACK_TYPE, MODULE limit "+myBase+","+limit;
+                        
+                List feedbacks = sqlUtil.ExecuteSQLReturnList(sql, 10);
 
-                  if (feedbacks != null && feedbacks.size() > 0)
-                  {
+                if (feedbacks != null && feedbacks.size() > 0)
+                {
                 %>
                     <table summary="layout" width="100%" cellspacing="1" cellpadding="1" border="1" style="border-collapse:collapse">
+                     <tr>
+                     	<td colspan="4" align="center" height="25">
+                     		<b>Found <%=count%> records. Showing records <%=myBase%> - <%=(myEnd)%></b>
+                     	</td>
+                     </tr>
                      <tr>
                        <th>
                          <%=cm.cmsPhrase("Feedback type")%>
@@ -131,6 +147,43 @@
                 %>
                     </table>
                 <%
+                		if(count > limit){
+	                		%>
+	                			<table summary="layout" width="100%" cellspacing="1" cellpadding="1" style="border-collapse:collapse">
+	                				<tr>
+	                					<%
+	                					if(mypage > 1){
+		                					%>
+		                					<td align="left"><a href="feedback-list.jsp?page=<%=(mypage - 1)%>">previous page</a></td>
+		                					<%	
+	                					}
+	                					%>
+	                					<td align="center" height="25">
+	                					<%
+	                						int i=0;
+	                						int cnt = count;
+					                        while(cnt>0) {
+					                            i++;
+					                            if(i != mypage){ %>
+					                            	<a href="feedback-list.jsp?page=<%=i%>"><%=i%></a>&nbsp;&nbsp;
+					                            <% } else { %>
+					                            	<%=i%>&nbsp;&nbsp;
+					                            <% }
+					                            cnt-=limit;
+					                        }
+	                					%>
+	                					</td>
+	                					<%
+	                					if(count > myEnd){
+		                					%>
+		                					<td align="right"><a href="feedback-list.jsp?page=<%=(mypage + 1)%>">next page</a></td>
+		                					<%	
+	                					}
+	                					%>
+	                				</tr>
+	                			</table>
+	                		<%
+                		}
                     } else
                     {
                 %>

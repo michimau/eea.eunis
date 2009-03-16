@@ -49,19 +49,25 @@ public class UpdateTemplate extends HttpServlet {
 
     private void writeFile(String fileName, String txt) throws ServletException, IOException {
 
-        try {
-            FileOutputStream fos = new FileOutputStream(fileName);
+	if ( txt != "") { // Only if there is something to save
+		try {
+		    FileOutputStream fos = new FileOutputStream(fileName);
 
-            fos.write(new String("<%@page contentType=\"text/html;charset=UTF-8\"%>\n").getBytes());
-            fos.write(txt.getBytes("UTF-8"));
-			
-            if (fos != null) {
-                fos.flush();
-                fos.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+		    fos.write(new String("<%@page contentType=\"text/html;charset=UTF-8\"%>\n").getBytes());
+		    fos.write(txt.getBytes("UTF-8"));
+				
+		    if (fos != null) {
+			fos.flush();
+			fos.close();
+		    }
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+	else
+	{
+		System.out.println( "Warning: no text received for: " + fileName + " when refreshing template");
+	}
 
 }

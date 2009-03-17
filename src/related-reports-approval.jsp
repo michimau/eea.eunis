@@ -285,21 +285,19 @@
               else
               {
           %>
-                <br />
-                <strong>
+                <div class="error-msg">
                   <%=cm.cmsPhrase("No documents are pending for approval at this time")%>.
-                </strong>
-                <br />
+                </div>
           <%
               }
             }
             else
             {
-              // User is not authorized to see this page
+              // User is not authorised to see this page
           %>
-                <br />
-                <%=cm.cmsPhrase("You are not authorized to use the functionality of this page")%>.
-                <br />
+                <div class="error-msg">
+                <%=cm.cmsPhrase("You are not authorised to use the functionality of this page")%>.
+                <div>
           <%
             }
           %>

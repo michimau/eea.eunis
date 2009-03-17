@@ -381,9 +381,9 @@
           SiteFactsheet.TYPE_BIOGENETIC == type ||
           SiteFactsheet.TYPE_CORINE == type)
       {
-        //list of species recognized in EUNIS
+        //list of species recognised in EUNIS
         List species = factsheet.findSitesSpeciesByIDNatureObject();
-        //list of species not recognized in EUNIS
+        //list of species not recognised in EUNIS
         List sitesSpecificspecies = factsheet.findSitesSpecificSpecies();
         if (!species.isEmpty() || !sitesSpecificspecies.isEmpty())
         {

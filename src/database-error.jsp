@@ -48,25 +48,27 @@
                 <h1>
                   Database connection error
                 </h1>
-                <br />
+                <p>
                 The EUNIS MySQL Database could not be opened.
-                <br />
-                <br />
+                </p>
+                <p>
                 This can be a result of a:
+		</p>
                 <ul>
                 <li>Server maintenance operation in progress</li>
                 <li>Database maintenance operation in progress</li>
                 <li>A communication error with the server</li>
                 </ul>
-                <br />
+                <p>
                 We apologize for any inconvenience and thank you for your understanding!
-                <br />
+                </p>
+                <p>
                 Please come back later.
-                <br />
-                <br />
+                </p>
+                <p>
                 You can always contact us at: <a title="Send email to EUNIS team" href="mailto:eunis@eea.europa.eu">
                 eunis@eea.europa.eu</a>
-                <br />
+                </p>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

@@ -251,7 +251,7 @@
                       <%=cm.cmsAlt("pick_species_show_habitat_types")%>
                     </td>
                     <td>
-                      <%=cm.cmsPhrase("Find habitat types characterized by a particular species")%>
+                      <%=cm.cmsPhrase("Find habitat types characterised by a particular species")%>
                     </td>
                   </tr>
                   <tr>

@@ -81,10 +81,10 @@
                       <a href="flash-movie.jsp?tutorial=Search_species_by_legal_instruments&amp;title=Search%20species%20by%20legal%20instruments">Search species by legal instruments</a>
                     </li>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Pick_species_show_habitats&amp;title=Find%20habitat%20types%20characterized%20by%20a%20particular%20species">Find habitat types characterized by a particular species</a>
+                      <a href="flash-movie.jsp?tutorial=Pick_species_show_habitats&amp;title=Find%20habitat%20types%20characterised%20by%20a%20particular%20species">Find habitat types characterised by a particular species</a>
                     </li>
                     <li>
-                      <a href="flash-movie.jsp?tutorial=Pick_species_show_sites&amp;title=Find%20sites%20characterized%20by%20a%20particular%20species">Find sites characterized by a particular species</a>
+                      <a href="flash-movie.jsp?tutorial=Pick_species_show_sites&amp;title=Find%20sites%20characterised%20by%20a%20particular%20species">Find sites characterised by a particular species</a>
                     </li>
                     <li>
                       <a href="flash-movie.jsp?tutorial=Taxonomic_classification&amp;title=Taxonomic%20classification%20for%20species">Taxonomic classification for species</a>

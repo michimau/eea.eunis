@@ -10,6 +10,7 @@
   <property name="java.home" value="${osEnv.JAVA_HOME}" description="Sun JDK home dir. Environment JAVA_HOME must be set." />
 
   <property name="3rdpartyDir" value="3rdparty" description="3rd party libraries dir" />
+  <property name="webappName" value="eunis" description="Name of webapp" />
   <property name="srcDir" value="src" description="Source directory" />
   <property name="kmlDir" value="src/kml" description="Google Earth files directory" />
   <property name="classesSrcDir" value="src/classes" description="Java classes dir" />
@@ -17,8 +18,8 @@
   <property name="buildDir" value= "build"/>
   <property name="test" value="test"/>
 
-  <property name="deployDir" location="${tomcat}/webapps/eunis" description="Path to where application will be deployed" />
-  <property name="deployLibDir" value="${tomcat}/webapps/eunis/WEB-INF/lib"/>
+  <property name="deployDir" location="${tomcat}/webapps/${webappName}" description="Path to where application will be deployed" />
+  <property name="deployLibDir" value="${tomcat}/webapps/${webappName}/WEB-INF/lib"/>
 
   <property name="confDir" location="conf" description="Dir where configuration files are located" />
 

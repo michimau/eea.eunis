@@ -312,9 +312,6 @@
   else
   {
 %>
-                <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>" />
-                </jsp:include>
                 <br />
                 <strong>
                   <%=cm.cmsPhrase("We are sorry, the requested species does not exists")%>.

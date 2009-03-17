@@ -276,9 +276,6 @@
   else
   {
 %>
-                <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>" />
-                </jsp:include>
 
                 <br />
                 <br />

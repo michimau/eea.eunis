@@ -277,14 +277,10 @@
   {
 %>
 
-                <br />
-                <br />
-                <p>
+                <div class="error-msg">
                 <%=cm.cmsPhrase("No data found in the database for the site with ID = ")%>
                 <strong>'<%=factsheet.getIDSite()%>'</strong>
-                </p>
-                <br />
-                <br />
+                </div>
 <%
   }
 %>

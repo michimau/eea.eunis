@@ -155,12 +155,10 @@
             if(!authorised)
             {
           %>
-                <br />
-                <strong>
-                  <%=cm.cmsPhrase("You can't do this because you are not authentificated or you don't haven enough rights!")%>
-                </strong>
+                <div class="error-msg">
+                  <%=cm.cmsPhrase("You can't do this because you are not authentificated or you don't have enough rights!")%>
                 <a href="login.jsp" title="Login"><%=cm.cmsPhrase("EUNIS Login")%></a>
-                <br />
+                </div>
           <%
             }
             else

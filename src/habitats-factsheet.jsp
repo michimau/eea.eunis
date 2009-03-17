@@ -93,15 +93,9 @@
   if(null == factsheet.getHabitat())
   {
 %>
-                <div style="width: 100%;">
-                  <br />
-                  <br />
-                  <p>
+                <div class="error-msg">
                     <%=cm.cmsPhrase("Sorry, no habitat type has been found in the database with Habitat type ID=")%>
                     <strong>'<%=idHabitat%>'</strong>
-                  </p>
-                  <br />
-                  <br />
                 </div>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("factsheet_for")%>

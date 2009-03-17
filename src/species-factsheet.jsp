@@ -61,7 +61,7 @@
   {
 %>
     <title>
-      <%=cm.cmsPhrase("We are sorry, the requested species does not exists")%>.
+      <%=cm.cmsPhrase("We are sorry, the requested species does not exist")%>.
     </title>
 <%
   }
@@ -312,11 +312,9 @@
   else
   {
 %>
-                <br />
-                <strong>
-                  <%=cm.cmsPhrase("We are sorry, the requested species does not exists")%>.
-                </strong>
-                <br />
+                <div class="error-msg">
+                  <%=cm.cmsPhrase("We are sorry, the requested species does not exist")%>.
+                </div>
 <%
   }
 %>

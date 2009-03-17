@@ -68,8 +68,9 @@
                 <h1>
                   <%=cm.cmsPhrase( "Clear temporary data" )%>
                 </h1>
+		<div class="error-msg">
                 <%=cm.cmsPhrase("You do not have Administrator rights, which are required to perform this operation.<br />Please login as Administrator first.")%>
-                <br />
+		</div>
                 <%=cm.cmsMsg("clear_temporary_data_btn")%>
 <%
   }

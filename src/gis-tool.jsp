@@ -33,6 +33,9 @@
           <!-- start of main content block -->
           <div id="portal-column-content">
             <div id="content">
+                <jsp:include page="header-dynamic.jsp">
+                  <jsp:param name="location" value="<%=btrail%>"/>
+                </jsp:include>
               <div class="documentContent" id="region-content">
                 <a name="documentContent"></a>
                 <div class="documentActions">
@@ -57,17 +60,21 @@
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
-                <jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=btrail%>"/>
-                </jsp:include>
-                <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="740" height="552" id="fl_eunis" align="middle">
+                <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+							     	codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0"
+										width="740" height="552" id="fl_eunis" align="middle">
                   <param name="allowScriptAccess" value="sameDomain" />
                   <param name="movie" value="gis/fl_eunis.swf" />
                   <param value="opaque" name="wmode" />
                   <param name="quality" value="high" />
                   <param name="bgcolor" value="#FFFFFF" />
                   <param name="FlashVars"  value="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_sh_sites=none&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>" />
-                  <embed src="gis/fl_eunis.swf" flashvars="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_sh_sites=none&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>" quality="high" bgcolor="#FFFFFF"  width="740" height="552" name="fl_eunis" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                  <embed src="gis/fl_eunis.swf"
+									flashvars="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_sh_sites=none&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>"
+									quality="high" bgcolor="#FFFFFF"
+									width="740" height="552" name="fl_eunis"
+									align="middle" allowScriptAccess="sameDomain"
+									type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
                 </object>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("gis_title")%>

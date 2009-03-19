@@ -30,14 +30,14 @@ ro.finsiel.eunis.search.Utilities"%>
     <h1>
       <%=cm.cmsPhrase("Related reports")%>
     </h1>
-    <br />
-    <br />
-    <br />
+
+    <div class="error-msg">
       <%=cm.cmsPhrase("There was an error while trying to upload the document.")%>
     <br />
     <strong>
       <a href="javascript:history.go(-1);"><%=cm.cmsPhrase("Back")%></a>.
     </strong>
+		</div>
 <%
   if( !message.equalsIgnoreCase( "" ) )
   {

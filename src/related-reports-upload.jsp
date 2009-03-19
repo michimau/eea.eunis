@@ -83,9 +83,9 @@
   if(null != message)
   {
 %>
-<p>
-  <strong><%=message%></strong>
-</p>
+<div class="system-msg">
+  <%=message%>
+</div>
 <%
   }
 %>

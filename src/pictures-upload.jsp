@@ -121,9 +121,9 @@
       if (null != message)
       {
 %>
-    <p>
+    <div class="system-msg">
       <%=message%>
-    </p>
+    </div>
 <%
       }
     }

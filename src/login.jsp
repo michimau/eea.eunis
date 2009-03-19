@@ -126,8 +126,9 @@
              <div class="system-msg">
               <%=cm.cmsPhrase("You successfully logged as")%>
               <strong><%=SessionManager.getUsername()%></strong>.
-              <a title="<%=cm.cms("home_page")%>" href="index.jsp"><%=cm.cmsPhrase("EUNIS")%></a>
-              <%=cm.cmsTitle("home_page")%>
+							<ul>
+              <li><a href="services.jsp"><%=cm.cmsPhrase("Services-page")%></a></li>
+							</ul>
              </div>
           <%
             }

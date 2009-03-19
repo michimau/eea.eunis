@@ -201,18 +201,19 @@
                   if(editOk1 && editOk2)
                   {
              %>
-                    <br />
-                    <br />
+                    <div class="system-msg">
                     <%=cm.cmsPhrase("Bookmark has been successfully updated.")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsPhrase("Back")%></a>
+										</div>
                     <%=cm.cmsTitle("users_bookmarks_09")%>
             <%
                   }
                   else
                   {
             %>
-                    <br />
-                    <br />
-                    <%=cm.cmsPhrase("An error occurred while updating the bookmark.")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsPhrase("Back")%></a>
+                    <div class="error-msg">
+                    <%=cm.cmsPhrase("An error occurred while updating the bookmark.")%>
+										<a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsPhrase("Back")%></a>
+										</div>
                     <%=cm.cmsTitle("users_bookmarks_09")%>
             <%
                   }
@@ -235,22 +236,21 @@
                     <strong>
                       <%=cm.cmsPhrase("Delete bookmark")%>
                     </strong>
-                    <br />
-                    <br />
+                    <div class="system-msg">
                     <%=cm.cmsPhrase("Bookmark has been successfully deleted.")%> <a title="<%=cm.cms("users_bookmarks_09")%>" href="users-bookmarks.jsp"><%=cm.cmsPhrase("Back")%></a>
+										</div>
                     <%=cm.cmsTitle("users_bookmarks_13")%>
             <%
                   }
                   else
                   {
             %>
-                    <br />
                     <strong>
                       <%=cm.cmsPhrase("Delete bookmark")%>
                     </strong>
-                    <br />
-                    <br />
+                    <div class="error-msg">
                     <%=cm.cmsPhrase("An error occurred while deleting the bookmark.")%> <a title="<%=cm.cms("users_bookmarks_15")%>" href="users-bookmarks.jsp"><%=cm.cmsPhrase("Bookmarks list")%></a>
+										</div>
                     <%=cm.cmsTitle("users_bookmarks_15")%>
             <%
                   }

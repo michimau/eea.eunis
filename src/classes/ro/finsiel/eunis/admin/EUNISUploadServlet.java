@@ -177,7 +177,7 @@ public class EUNISUploadServlet extends HttpServlet {
                         ex.printStackTrace();
                         try {
                             response.sendRedirect(
-                                    "related-reports-error.jsp?status=An error ocurred during picture upload (file already exists?)");
+                                    "related-reports-error.jsp?status=An error ocurred during picture upload. "+ex.getMessage());
                         } catch (IOException ioex) {
                             ioex.printStackTrace();
                         }
@@ -254,13 +254,22 @@ public class EUNISUploadServlet extends HttpServlet {
         filename = FileUtils.getRealName(filename);
         String imgName = filename;
 
-        filename = BASE_DIR + uploadDir + filename;
+        String suffix = imgName.substring(imgName.lastIndexOf("."));
+        if(suffix == null || suffix.equals("") || (!suffix.equalsIgnoreCase(".jpg") && !suffix.equalsIgnoreCase(".jpeg") &&
+        		!suffix.equalsIgnoreCase(".gif") && !suffix.equalsIgnoreCase(".png") && !suffix.equalsIgnoreCase(".tif") &&
+        		!suffix.equalsIgnoreCase(".tiff"))){
+             throw new Exception("File has to be in one of the following formats: jpg, jpeg, gif, png, tif, tiff (case-insensitive)");
+        }
+        
+        String fname = UniqueID.getUniqueID() + suffix.toLowerCase();
+
+        filename = BASE_DIR + uploadDir + fname;
         // System.out.println("filename = " + filename);
         File file = new File(filename);
 
         // System.out.println("file = " + file);
         uploadedFileItem.write(file);
-        natureObjectInfo.filename = imgName;
+        natureObjectInfo.filename = fname;
         natureObjectInfo.description = description;
         natureObjectInfo.idObject = idObject;
         natureObjectInfo.natureObjectType = natureObjectType;
@@ -270,7 +279,7 @@ public class EUNISUploadServlet extends HttpServlet {
             Chm62edtNatureObjectPicturePersist pictureObject = new Chm62edtNatureObjectPicturePersist();
 
             pictureObject.setDescription(description);
-            pictureObject.setFileName(imgName);
+            pictureObject.setFileName(fname);
             pictureObject.setIdObject(idObject);
             pictureObject.setName(scientificName);
             pictureObject.setNatureObjectType(natureObjectType);
@@ -281,7 +290,7 @@ public class EUNISUploadServlet extends HttpServlet {
             Chm62edtNatureObjectPicturePersist pictureObject = new Chm62edtNatureObjectPicturePersist();
 
             pictureObject.setDescription(description);
-            pictureObject.setFileName(imgName);
+            pictureObject.setFileName(fname);
             pictureObject.setIdObject(idObject);
             pictureObject.setName(scientificName);
             pictureObject.setNatureObjectType(natureObjectType);
@@ -292,7 +301,7 @@ public class EUNISUploadServlet extends HttpServlet {
             Chm62edtNatureObjectPicturePersist pictureObject = new Chm62edtNatureObjectPicturePersist();
 
             pictureObject.setDescription(description);
-            pictureObject.setFileName(imgName);
+            pictureObject.setFileName(fname);
             pictureObject.setIdObject(idObject);
             pictureObject.setName(scientificName);
             pictureObject.setNatureObjectType(natureObjectType);

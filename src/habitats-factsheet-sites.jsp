@@ -14,7 +14,7 @@
                  ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist,
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.search.sites.SitesSearchUtility" %>
-<%@ page import="java.util.List"%>
+<%@ page import="java.util.*"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   //int tab = Utilities.checkedStringToInt(request.getParameter("tab"), 0);
@@ -23,6 +23,14 @@
   HabitatsFactsheet factsheet = null;
   factsheet = new HabitatsFactsheet(idHabitat);
   WebContentManagement cm = SessionManager.getWebContent();
+  
+  String p = request.getParameter("page");
+  int limit = 50;
+  if(p == null) p = "1";
+  int mypage = Integer.parseInt(p);
+  int myEnd = (limit * mypage);
+  int myBase = (myEnd - limit);
+  
   try
   {
     String isGoodHabitat = " IF(TRIM(A.CODE_2000) <> '',RIGHT(A.CODE_2000,2),1) <> IF(TRIM(A.CODE_2000) <> '','00',2) AND IF(TRIM(A.CODE_2000) <> '',LENGTH(A.CODE_2000),1) = IF(TRIM(A.CODE_2000) <> '',4,1) ";
@@ -36,6 +44,23 @@
       " WHERE   " + isGoodHabitat + " AND A.ID_NATURE_OBJECT =" + factsheet.getHabitat().getIdNatureObject() +
       " AND C.SOURCE_DB <> 'EMERALD'" +
       " GROUP BY C.ID_NATURE_OBJECT");
+      
+    int count = sites.size();
+    
+    int last = myEnd;
+    if(count <= myEnd)
+    	last = count;
+    
+    // Sites for which this habitat is recorded - with paging
+    List sitesSubList = new SitesByNatureObjectDomain().findCustom("SELECT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN " +
+      " FROM CHM62EDT_HABITAT AS A " +
+      " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK " +
+      " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT " +
+      " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT " +
+      " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " +
+      " WHERE   " + isGoodHabitat + " AND A.ID_NATURE_OBJECT =" + factsheet.getHabitat().getIdNatureObject() +
+      " AND C.SOURCE_DB <> 'EMERALD'" +
+      " GROUP BY C.ID_NATURE_OBJECT LIMIT "+myBase+","+limit);
 
     // Sites for habitat subtypes.
     List sitesForSubtypes = new SitesByNatureObjectDomain().findCustom("SELECT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN " +
@@ -87,6 +112,17 @@
   </table>
   <table summary="<%=cm.cms("habitat_sites")%>" class="listing" width="90%">
     <thead>
+    <%
+    if (sitesSubList != null && sitesSubList.size() > 0){
+    %>
+      <tr>
+     	<td colspan="4" align="center" height="25">
+     		<b>Found <%=count%> records. Showing records <%=myBase%> - <%=last%></b>
+     	</td>
+      </tr>
+    <%
+	}
+    %>
       <tr>
         <th width="15%" style="text-align: left;">
           <%=cm.cmsPhrase("Site code")%>
@@ -105,10 +141,10 @@
     <tbody>
 <%
       // List of sites for which this habitat is recorded.
-      for(int i = 0; i < sites.size(); i++)
+      for(int i = 0; i < sitesSubList.size(); i++)
       {
         String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
-        SitesByNatureObjectPersist site = (SitesByNatureObjectPersist) sites.get(i);
+        SitesByNatureObjectPersist site = (SitesByNatureObjectPersist) sitesSubList.get(i);
         String SiteName = Utilities.formatString(site.getName());
         SiteName = SiteName.replaceAll("&","&amp;");
 %>
@@ -131,6 +167,43 @@
     </tr>
 <%
       }
+      if(count > limit){
+	                		%>
+			<table summary="layout" width="90%" cellspacing="1" cellpadding="1" style="border-collapse:collapse">
+				<tr>
+					<%
+					if(mypage > 1){
+    					%>
+    					<td align="left"><a href="habitats-factsheet.jsp?tab=4&amp;idHabitat=<%=idHabitat%>&amp;page=<%=(mypage - 1)%>">previous page</a></td>
+    					<%	
+					}
+					%>
+					<td align="center" height="25">
+					<%
+						int i=0;
+						int cnt = count;
+                        while(cnt>0) {
+                            i++;
+                            if(i != mypage){ %>
+                            	<a href="habitats-factsheet.jsp?tab=4&amp;idHabitat=<%=idHabitat%>&amp;page=<%=i%>"><%=i%></a>&nbsp;&nbsp;
+                            <% } else { %>
+                            	<%=i%>&nbsp;&nbsp;
+                            <% }
+                            cnt-=limit;
+                        }
+					%>
+					</td>
+					<%
+					if(count > myEnd){
+    					%>
+    					<td align="right"><a href="habitats-factsheet.jsp?tab=4&amp;idHabitat=<%=idHabitat%>&amp;page=<%=(mypage + 1)%>">next page</a></td>
+    					<%	
+					}
+					%>
+				</tr>
+			</table>
+		<%
+	}
 %>
     </tbody>
   </table>

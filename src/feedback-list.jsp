@@ -83,6 +83,10 @@
                 
                 String countStr = sqlUtil.ExecuteSQL("SELECT COUNT(FEEDBACK_TYPE) FROM EUNIS_FEEDBACK");
                 int count = Integer.parseInt(countStr);
+                
+                int last = myEnd;
+    			if(count <= myEnd)
+    				last = count;
 
                 String sql = "select FEEDBACK_TYPE, MODULE, COMMENT, NAME, EMAIL, COMPANY, ADDRESS, PHONE, FAX, URL " +
                         " from EUNIS_FEEDBACK " +
@@ -96,7 +100,7 @@
                     <table summary="layout" width="100%" cellspacing="1" cellpadding="1" border="1" style="border-collapse:collapse">
                      <tr>
                      	<td colspan="4" align="center" height="25">
-                     		<b>Found <%=count%> records. Showing records <%=myBase%> - <%=(myEnd)%></b>
+                     		<b>Found <%=count%> records. Showing records <%=myBase%> - <%=last%></b>
                      	</td>
                      </tr>
                      <tr>

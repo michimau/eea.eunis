@@ -1057,7 +1057,7 @@ public class SQLUtilities {
 		    	  if(value == null)
 		    		  value = "NULL";
 		    	  
-		    	  if(!value.equalsIgnoreCase("NULL"))
+		    	  if(!value.equalsIgnoreCase("NULL") && !value.equals(""))
 		    		  ret.append("<").append(columnName).append(">").append(EunisUtil.replaceTagsExport(value)).append("</").append(columnName).append(">").append(nl);
 		      }
 		      ret.append("</ROW>").append(nl);

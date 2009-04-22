@@ -98,56 +98,58 @@ public class Tester {
 		    	if(elem.getNodeType() == ELEMENT_NODE){
 		    		elemName = elem.getNodeName();
 		    		xmlColumnNames.add(elemName);
-		    		NodeList childList = elem.getChildNodes();
-		    		for(int s = 0 ; s<childList.getLength() ; s++) {
-		    			Node elemValue = childList.item(s);
-		    			if(elemValue.getNodeType() == TEXT_NODE)
-		    				value = ((Text)elemValue).getData();
-	    		  	}
-		    		ColumnDTO column = columns.get(elemName.toLowerCase());
-		    		if(column != null){
-		    			if(value != null && !value.equals("NULL")){
-			    			String columnName = column.getColumnName();
-			    			int columnType = column.getColumnType();
-			    			int size = column.getColumnSize();
-			    			boolean isSigned = column.isSigned();
-			    			
-			    			if(columnType == Types.INTEGER || columnType == Types.SMALLINT || columnType == Types.TINYINT || columnType == Types.BIGINT || columnType == Types.NUMERIC){
-			    				if(!isInteger(value) && !isLong(value))
-			    					errors = addError(errors, "Element '"+elemName+"' value has to be a number between "+getRange(columnType, isSigned)+"!<br/>Current value: "+value);
-			    				else
-			    					checkIntSize(value, columnType, isSigned, elemName);
-			    			} else if (columnType == Types.DOUBLE){
-			    				if(!isDouble(value))
-			    					errors = addError(errors, "Element '"+elemName+"' value has to be a number!<br/>Current value: "+value);
-			    				else
-			    					checkDecimalNumber(value, column.getPrecision(), column.getScale(), elemName);
-			    			} else if (columnType == Types.FLOAT || columnType == Types.REAL){
-			    				if(!isFloat(value))
-			    					errors = addError(errors, "Element '"+elemName+"' value has to be a number!<br/>Current value: "+value);
-			    				else
-			    					checkDecimalNumber(value, column.getPrecision(), column.getScale(), elemName);
-			    			} else if (columnType == Types.DECIMAL){
-			    				if(!isDouble(value))
-			    					errors = addError(errors, "Element '"+elemName+"' value has to be a number!<br/>Current value: "+value);
-				    			else
-			    					checkDecimalNumber(value, column.getPrecision(), column.getScale(), elemName);
-			    			} else if (columnType == Types.VARCHAR || columnType == Types.CHAR || columnType == Types.LONGVARCHAR){
-			    				if(value != null && value.length() > size)
-			    					errors = addError(errors, "Element '"+elemName+"' value (length: "+value.length()+") is too long for mysql column '"+columnName+"' (length: "+size+")!<br/>Current value: "+threeDots(value,50));
-			    			} else if (columnType == Types.DATE){
-			    				if(size == 4){
-			    					if(!isYear(value))
-			    						errors = addError(errors, "Element '"+elemName+"' value has to be in year format (YYYY)!<br/>Current value: "+value);
-			    				} else  {
-			    					if(!isDate(value))
-			    						errors = addError(errors, "Element '"+elemName+"' value has to be in date format (YYYY-MM-DD)!<br/>Current value: "+value);
-			    				}
+		    		if(elem.hasChildNodes()){
+			    		NodeList childList = elem.getChildNodes();
+			    		for(int s = 0 ; s<childList.getLength() ; s++) {
+			    			Node elemValue = childList.item(s);
+			    			if(elemValue.getNodeType() == TEXT_NODE)
+			    				value = ((Text)elemValue).getData();
+		    		  	}
+			    		ColumnDTO column = columns.get(elemName.toLowerCase());
+			    		if(column != null){
+			    			if(value != null && !value.equals("NULL") && !value.equals("")){
+				    			String columnName = column.getColumnName();
+				    			int columnType = column.getColumnType();
+				    			int size = column.getColumnSize();
+				    			boolean isSigned = column.isSigned();
+				    			
+				    			if(columnType == Types.INTEGER || columnType == Types.SMALLINT || columnType == Types.TINYINT || columnType == Types.BIGINT || columnType == Types.NUMERIC){
+				    				if(!isInteger(value) && !isLong(value))
+				    					errors = addError(errors, "Element '"+elemName+"' value has to be a number between "+getRange(columnType, isSigned)+"!<br/>Current value: "+value);
+				    				else
+				    					checkIntSize(value, columnType, isSigned, elemName);
+				    			} else if (columnType == Types.DOUBLE){
+				    				if(!isDouble(value))
+				    					errors = addError(errors, "Element '"+elemName+"' value has to be a number!<br/>Current value: "+value);
+				    				else
+				    					checkDecimalNumber(value, column.getPrecision(), column.getScale(), elemName);
+				    			} else if (columnType == Types.FLOAT || columnType == Types.REAL){
+				    				if(!isFloat(value))
+				    					errors = addError(errors, "Element '"+elemName+"' value has to be a number!<br/>Current value: "+value);
+				    				else
+				    					checkDecimalNumber(value, column.getPrecision(), column.getScale(), elemName);
+				    			} else if (columnType == Types.DECIMAL){
+				    				if(!isDouble(value))
+				    					errors = addError(errors, "Element '"+elemName+"' value has to be a number!<br/>Current value: "+value);
+					    			else
+				    					checkDecimalNumber(value, column.getPrecision(), column.getScale(), elemName);
+				    			} else if (columnType == Types.VARCHAR || columnType == Types.CHAR || columnType == Types.LONGVARCHAR){
+				    				if(value != null && value.length() > size)
+				    					errors = addError(errors, "Element '"+elemName+"' value (length: "+value.length()+") is too long for mysql column '"+columnName+"' (length: "+size+")!<br/>Current value: "+threeDots(value,50));
+				    			} else if (columnType == Types.DATE){
+				    				if(size == 4){
+				    					if(!isYear(value))
+				    						errors = addError(errors, "Element '"+elemName+"' value has to be in year format (YYYY)!<br/>Current value: "+value);
+				    				} else  {
+				    					if(!isDate(value))
+				    						errors = addError(errors, "Element '"+elemName+"' value has to be in date format (YYYY-MM-DD)!<br/>Current value: "+value);
+				    				}
+				    			}
 			    			}
-		    			}
-		    		} else {
-		    			errors = addError(errors, "There is no such column in mysql database: "+elemName+"<br/>Columns in mysql table are: "+getColumnNames(columns));
-		    		}
+			    		} else {
+			    			errors = addError(errors, "There is no such column in mysql database: "+elemName+"<br/>Columns in mysql table are: "+getColumnNames(columns));
+			    		}
+			    	}
 		    	}
 		    }
 		    

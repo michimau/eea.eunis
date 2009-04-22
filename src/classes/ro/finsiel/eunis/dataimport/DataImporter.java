@@ -167,16 +167,18 @@ public class DataImporter extends HttpServlet {
 			                		    	Node elem = list.item(k);
 			                		    	if(elem.getNodeType() == ELEMENT_NODE){
 			                		    		elemName = elem.getNodeName();
-			                		    		NodeList childList = elem.getChildNodes();
-			                		    		for(int c = 0 ; c<childList.getLength() ; c++) {
-			                		    			Node elemValue = childList.item(c);
-			                		    			if(elemValue.getNodeType() == TEXT_NODE)
-			                		    				value = ((Text)elemValue).getData();
-			                	    		  	}
-			                	    			if(value != null){
-			                		    			nameList.add(elemName);
-			                		    			valueList.add(EunisUtil.replaceTagsImport(value));
-			                	    			}
+			                		    		if(elem.hasChildNodes()){
+				                		    		NodeList childList = elem.getChildNodes();
+				                		    		for(int c = 0 ; c<childList.getLength() ; c++) {
+				                		    			Node elemValue = childList.item(c);
+				                		    			if(elemValue.getNodeType() == TEXT_NODE)
+				                		    				value = ((Text)elemValue).getData();
+				                	    		  	}
+				                	    			if(value != null){
+				                		    			nameList.add(elemName);
+				                		    			valueList.add(EunisUtil.replaceTagsImport(value));
+				                	    			}
+			                		    		}
 			                		    	}
 			                		    }
 			                	    }

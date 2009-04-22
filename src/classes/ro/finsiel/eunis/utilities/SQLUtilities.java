@@ -562,8 +562,12 @@ public class SQLUtilities {
     	  String valuesList = "";
     	  
     	  for ( int i = 0; i < tableColumns.getColumnsNames().size(); i++ ){
-    		  namesList += ( String ) tableColumns.getColumnsNames().get( i ) + ( i < tableColumns.getColumnsNames().size() - 1 ? "," : "" );
-    		  valuesList += "'" + ( String ) tableColumns.getColumnsValues().get( i ) + "'" + ( i < tableColumns.getColumnsNames().size() - 1 ? "," : "" );
+    		  String columnName = (String) tableColumns.getColumnsNames().get(i);
+    		  if(columnName != null && !columnName.equals(""))
+    			  columnName = "`" + columnName + "`";
+    		  String columnValue = (String) tableColumns.getColumnsValues().get(i);
+    		  namesList += columnName + ( i < tableColumns.getColumnsNames().size() - 1 ? "," : "" );
+    		  valuesList += "'" + columnValue + "'" + ( i < tableColumns.getColumnsNames().size() - 1 ? "," : "" );
     	  }
     	  
     	  List xmlColumnNames = tableColumns.getColumnsNames();
@@ -576,7 +580,7 @@ public class SQLUtilities {
     				  exist = true;
     		  }
     		  if(!exist){
-    			  namesList += ","+mysqlColumnName;
+    			  namesList += ",`"+mysqlColumnName+"`";
     			  valuesList += ", NULL";
     		  }
     	  }

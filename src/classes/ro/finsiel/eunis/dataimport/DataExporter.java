@@ -34,6 +34,7 @@ public class DataExporter extends HttpServlet {
 	        String SQL_PWD = request.getSession().getServletContext().getInitParameter("JDBC_PWD");
 	        
 			String table = request.getParameter("table");
+			String addSchema = request.getParameter("schema");
 			String nl = "\n";
 			
 			try {
@@ -44,7 +45,10 @@ public class DataExporter extends HttpServlet {
 				
 				StringBuilder s = new StringBuilder();
 				s.append("<?xml version=\"1.0\"?>").append(nl);
-				s.append("<ROWSET>").append(nl);
+				if(addSchema != null && addSchema.equals("on"))
+					s.append("<ROWSET>").append(nl);
+				else
+					s.append("<ROWSET xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"http://eunis.eea.europa.eu/schemas/").append(table).append(".xsd\">").append(nl);
 				s.append(content);
 				s.append("</ROWSET>").append(nl);
 				

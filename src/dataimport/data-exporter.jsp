@@ -87,8 +87,10 @@
 			                	<%
 		                	}
 		                %>
-		                </select>
+		                </select><br/>
+		                <input type="checkbox" id="schema" name="schema"/><label for="schema"> - do not add schema identifier</label><br/>
 		                <input type="submit" name="btn" value="Export"/>
+		                
 		            </form>
 		            <%
 		            List<String> errors = (List<String>)request.getSession().getAttribute("errors");

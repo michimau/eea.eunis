@@ -304,6 +304,11 @@
   </servlet>
   
   <servlet>
+    <servlet-name>schemas</servlet-name>
+    <servlet-class>ro.finsiel.eunis.dataimport.Schemas</servlet-class>
+  </servlet>
+  
+  <servlet>
     <servlet-name>datatester</servlet-name>
     <servlet-class>ro.finsiel.eunis.dataimport.DataImportTester</servlet-class>
   </servlet>
@@ -358,6 +363,11 @@
   <servlet-mapping>
     <servlet-name>upload</servlet-name>
     <url-pattern>/fileupload</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+	<servlet-name>schemas</servlet-name>
+	<url-pattern>/schemas/*</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>

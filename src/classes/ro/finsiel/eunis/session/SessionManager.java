@@ -2,6 +2,9 @@ package ro.finsiel.eunis.session;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
+
+import eionet.directory.DirServiceException;
+import eionet.directory.DirectoryService;
 import ro.finsiel.eunis.Settings;
 import ro.finsiel.eunis.WebContentManagement;
 import ro.finsiel.eunis.auth.EncryptPassword;
@@ -379,21 +382,20 @@ public final class SessionManager implements java.io.Serializable {
   public boolean login(String username, String password, HttpServletRequest request) {
     logout();
     // authenticated = false...
-    UserPersist user = findUser(username);
     boolean result = false;
-    if ( null != user )
-    {
-      try
-      {
-        final String encryptedPassword = EncryptPassword.encrypt( password );
-        result = encryptedPassword.equalsIgnoreCase( user.getPassword() );
-      }
-      catch (Exception ex)
-      {
-        ex.printStackTrace();
-      }
-      if ( result )
-      {
+    try{
+    	  DirectoryService.sessionLogin(username, password);
+    	  result = true;
+        //final String encryptedPassword = EncryptPassword.encrypt( password );
+        //result = encryptedPassword.equalsIgnoreCase( user.getPassword() );
+    } catch (DirServiceException ex){
+    	  result = false;
+    	  ex.printStackTrace();
+	} catch (SecurityException ex) {
+    	  result = false;
+    	  ex.printStackTrace();
+	}
+	if(result) {
         this.username = username;
         this.password = password;
         this.authenticated = true;
@@ -407,7 +409,17 @@ public final class SessionManager implements java.io.Serializable {
          try {
             Class.forName(JDBC_DRV);
             Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USR, JDBC_PWD);
-            PreparedStatement ps = conn.prepareStatement("UPDATE EUNIS_USERS SET LOGIN_DATE=? WHERE USERNAME=?");
+            PreparedStatement ps = null;
+            
+            UserPersist user = findUser(username);
+            if(user == null){
+            	ps = conn.prepareStatement("INSERT INTO EUNIS_USERS (USERNAME) VALUES ('"+username+"')");
+            	ps.execute();
+            	ps = conn.prepareStatement("INSERT INTO EUNIS_USERS_ROLES (USERNAME, ROLENAME) VALUES ('"+username+"','Guest')");
+            	ps.execute();
+            }
+            
+            ps = conn.prepareStatement("UPDATE EUNIS_USERS SET LOGIN_DATE=? WHERE USERNAME=?");
             ps.setTimestamp(1, new java.sql.Timestamp(new Date().getTime()));
             ps.setString(2, username);
             ps.execute();
@@ -420,29 +432,26 @@ public final class SessionManager implements java.io.Serializable {
           String ipAddr = request.getRemoteAddr();
           long longTime = new Date().getTime();
           try {
-            Class.forName(JDBC_DRV);
-            Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USR, JDBC_PWD);
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO EUNIS_SESSION_LOG (ID_SESSION, USERNAME, START, END, IP_ADDRESS) VALUES (?, ?, ?, ?, ?)");
-            ps.setString(1, sessionID);
-            ps.setString(2, username);
-            ps.setTimestamp(3, new java.sql.Timestamp(longTime));
-            ps.setTimestamp(4, new java.sql.Timestamp(longTime));
-            ps.setString(5, ipAddr);
-            ps.execute();
+        	  Class.forName(JDBC_DRV);
+        	  Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USR, JDBC_PWD);
+        	  PreparedStatement ps = conn.prepareStatement("INSERT INTO EUNIS_SESSION_LOG (ID_SESSION, USERNAME, START, END, IP_ADDRESS) VALUES (?, ?, ?, ?, ?)");
+        	  ps.setString(1, sessionID);
+        	  ps.setString(2, username);
+        	  ps.setTimestamp(3, new java.sql.Timestamp(longTime));
+        	  ps.setTimestamp(4, new java.sql.Timestamp(longTime));
+        	  ps.setString(5, ipAddr);
+        	  ps.execute();
           } catch (Exception e) {
-            e.printStackTrace();
+        	  e.printStackTrace();
           }
         }
         else
         {
           System.out.println("SessionManager::login(...) - request object was null.");
         }
-      }
-      else
-      {
+	} else {
         System.out.println("Could not log user '" + username + "'. Password does not match.");
-      }
-    }
+	}
     return authenticated;
   }
 
@@ -527,7 +536,6 @@ public final class SessionManager implements java.io.Serializable {
       this.userPrefs = user;
       authenticated = true;
       username = user.getUsername();
-      password = user.getPassword();
       //showEUNISInvalidatedSpecies = Utilities.checkedStringToBoolean(user.getShowInvalidatedSpecies().toString(), false);
       themeManager = new ThemeManager(this);
       themeManager.switchTheme(user.getThemeIndex().intValue());

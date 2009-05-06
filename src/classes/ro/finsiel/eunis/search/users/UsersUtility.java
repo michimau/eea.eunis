@@ -417,7 +417,6 @@ public class UsersUtility {
    * @param firstName user first name
    * @param lastName user last name
    * @param mail user mail
-   * @param password user password
    * @param newUserName  new user name
    * @param request request
    * @param SQL_DRV JDBC driver.
@@ -433,7 +432,6 @@ public class UsersUtility {
                                  String lastName,
                                  String mail,
                                  String loginDate,
-                                 String password,
                                  String newUserName,
                                  HttpServletRequest request,
                                  String SQL_DRV,
@@ -454,7 +452,6 @@ public class UsersUtility {
       updateSQL += " FIRST_NAME=?,";
       updateSQL += " LAST_NAME=?,";
       updateSQL += " EMAIL=?,";
-      updateSQL += " PASSWORD='"+EncryptPassword.encrypt(password)+"',";
       updateSQL += " LOGIN_DATE=str_to_date(?,'%d %b %Y %H:%i:%s')";
       updateSQL += " WHERE USERNAME=?";
       ps = con.prepareStatement(updateSQL);
@@ -720,13 +717,12 @@ public class UsersUtility {
     if (username == null) return null;
     UserPersist result = null;
     try {
-      List users = new UserDomain().findCustom("SELECT USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,LANG,EMAIL," +
+      List users = new UserDomain().findCustom("SELECT USERNAME,FIRST_NAME,LAST_NAME,LANG,EMAIL," +
               " THEME_INDEX,DATE_FORMAT(login_date,'%d %b %Y %H:%i:%s')" +
               " FROM EUNIS_USERS" +
               " WHERE USERNAME='" + username + "'");
       if (users != null && users.size() > 0) {
         result = (UserPersist) users.get(0);
-        result.setPassword(EncryptPassword.decrypt(result.getPassword()));
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -1195,7 +1191,6 @@ public class UsersUtility {
   /**
    * Add users.
    * @param username user name
-   * @param password user password
    * @param firstname user first name
    * @param lastname user last name
    * @param mail user mail
@@ -1208,7 +1203,6 @@ public class UsersUtility {
    * @return true if operation was made with success
    */
   public static boolean addUsers(String username,
-                                 String password,
                                  String firstname,
                                  String lastname,
                                  String mail,
@@ -1229,8 +1223,8 @@ public class UsersUtility {
         Class.forName(SQL_DRV);
         con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-        SQL = "INSERT INTO EUNIS_USERS(USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,EMAIL,THEME_INDEX,LOGIN_DATE) " +
-              " VALUES(?,'"+EncryptPassword.encrypt(password)+"',?,?,?,?,str_to_date(?,'%d %b %Y %H:%i:%s'))";
+        SQL = "INSERT INTO EUNIS_USERS(USERNAME,FIRST_NAME,LAST_NAME,EMAIL,THEME_INDEX,LOGIN_DATE) " +
+              " VALUES(?,?,?,?,?,str_to_date(?,'%d %b %Y %H:%i:%s'))";
        ps = con.prepareStatement(SQL);
         ps.setString(1, username);
         ps.setString(2, firstname);

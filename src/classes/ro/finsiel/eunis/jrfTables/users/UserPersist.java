@@ -28,24 +28,8 @@ public class UserPersist extends PersistentObject {
 
 
   /** Getter for a database field. */
-  public String getPassword() {
-    return i_password;
-  }
-
-
-  /** Getter for a database field. */
   public String getUsername() {
     return i_username;
-  }
-
-
-  /**
-   * Setter for a database field.
-   * @param password
-   **/
-  public void setPassword(String password) {
-    i_password = password;
-    this.markModifiedPersistentState();
   }
 
 

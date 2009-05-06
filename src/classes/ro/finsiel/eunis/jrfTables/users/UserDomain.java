@@ -29,7 +29,6 @@ public class UserDomain extends AbstractDomain {
     // this.setJDBCHelper(JDBCHelperFactory.create());
     this.setTableName("EUNIS_USERS");
     this.addColumnSpec(new StringColumnSpec("USERNAME", "getUsername", "setUsername", DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY));
-    this.addColumnSpec(new StringColumnSpec("PASSWORD", "getPassword", "setPassword", DEFAULT_TO_EMPTY_STRING, REQUIRED));
     this.addColumnSpec(new StringColumnSpec("FIRST_NAME", "getFirstName", "setFirstName", DEFAULT_TO_EMPTY_STRING));
     this.addColumnSpec(new StringColumnSpec("LAST_NAME", "getLastName", "setLastName", DEFAULT_TO_EMPTY_STRING));
     this.addColumnSpec(new StringColumnSpec("LANG", "getLang", "setLang", "en" ));

@@ -34,7 +34,7 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
  try
 {
    // All users list
-   List ListUsers = new UserDomain().findCustom("SELECT USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,LANG,EMAIL, "  +
+   List ListUsers = new UserDomain().findCustom("SELECT USERNAME,FIRST_NAME,LAST_NAME,LANG,EMAIL, "  +
               " THEME_INDEX,DATE_FORMAT(login_date,'%d %b %Y %H:%i:%s') "  +
               " FROM EUNIS_USERS ORDER BY USERNAME ");
    if(ListUsers != null && ListUsers.size() > 0)
@@ -116,19 +116,6 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
             }
 
 
-       if (document.eunis.password1 == null || trim(document.eunis.password1.value)==''
-           || document.eunis.password2 == null || trim(document.eunis.password2.value)=='')
-            {
-             alert("<%=cm.cms("users_edit_05")%>");
-             return false;
-            }
-
-          if (document.eunis.password1.value != document.eunis.password2.value)
-            {
-             alert("<%=cm.cms("insert_password_twice")%>");
-             return false;
-            }
-
           if (newUserNameExist()) return false;
 
        return true;
@@ -137,11 +124,7 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
 
    function validateFormAdd() {
         if( document.eunis.userName == null
-        || document.eunis.password1 == null
-        || document.eunis.password2 == null
-        || trim(document.eunis.userName.value)==''
-        || trim(document.eunis.password1.value)==''
-        || trim(document.eunis.password2.value)=='')
+        || trim(document.eunis.userName.value)=='')
             {
              alert("<%=cm.cms("users_edit_07")%>");
              return false;
@@ -149,11 +132,6 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
 
         if(UserExist()) return false;
 
-        if (document.eunis.password1.value != document.eunis.password2.value)
-            {
-             alert("<%=cm.cms("insert_password_twice")%>");
-             return false;
-            }
 
        return true;
         }
@@ -178,44 +156,6 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
                }
            }
       }
-
-      function insertPassword1(){
-
-        if (!validPassword(document.eunis.password1.value))
-            {
-             document.eunis.password1.value='';
-             return false;
-            }
-       return true;
-      }
-
-      function insertPassword2(){
-
-        if (!validPassword(document.eunis.password2.value))
-            {
-             document.eunis.password2.value='';
-             return false;
-            }
-
-          if (document.eunis.password1.value != document.eunis.password2.value)
-            {
-             alert("<%=cm.cms("insert_password_twice")%>");
-             document.eunis.password2.value='';
-             return false;
-            }
-
-        return true;
-      }
-
-
-    function validPassword(password){
-       if(trim(password)=='')
-         {
-             alert("<%=cm.cms("users_edit_13")%>");
-             return false;
-         }
-       return true;
-    }
 
 
     function validateChooseRoles(rolename) {
@@ -306,14 +246,13 @@ if(users_operation.equalsIgnoreCase("edit_users"))
         String firstName = (request.getParameter("firstName")==null?"":request.getParameter("firstName"));
         String lastName = (request.getParameter("lastName")==null?"":request.getParameter("lastName"));
         String mail = (request.getParameter("mail")==null?"":request.getParameter("mail"));
-        String password = (request.getParameter("password1")==null?"":request.getParameter("password1"));
         //String loginDate = (request.getParameter("loginDate")==null?"":request.getParameter("loginDate"));
         String loginDate = null;
         //System.out.println("----------loginDate="+loginDate+"+");
         // set newUserName to lower case
         String goodNewUserName = request.getParameter("newUserName").toLowerCase();
         // Update user
-        boolean editWithSuccess = UsersUtility.editUser(SessionManager.getUsername(),userName,firstName,lastName,mail,loginDate,password,goodNewUserName,request,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+        boolean editWithSuccess = UsersUtility.editUser(SessionManager.getUsername(),userName,firstName,lastName,mail,loginDate,goodNewUserName,request,SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
         if(editWithSuccess) message = cm.cms("users_edit_17");
         else message = "<span color=\"red\">"+cm.cms("failed_to_update_user")+"</span>";
 
@@ -351,23 +290,17 @@ if(users_operation.equalsIgnoreCase("edit_users"))
       {
         // if userName is a valid name
         if(request.getParameter("userName") != null
-           && !request.getParameter("userName").equalsIgnoreCase("")
-           && request.getParameter("password1") != null
-           && !request.getParameter("password1").equalsIgnoreCase("")
-           && request.getParameter("password2") != null
-           && !request.getParameter("password2").equalsIgnoreCase("")
-           && request.getParameter("password1").equalsIgnoreCase(request.getParameter("password2")))
+           && !request.getParameter("userName").equalsIgnoreCase(""))
         {
           String firstName = (request.getParameter("firstName") == null ? "" : request.getParameter("firstName"));
           String lastName = (request.getParameter("lastName") == null ? "" : request.getParameter("lastName"));
           String mail = (request.getParameter("mail") == null ? "" : request.getParameter("mail"));
-          String password = (request.getParameter("password1") == null ? "" : request.getParameter("password1"));
           //String loginDate = (request.getParameter("loginDate") == null ? "" : request.getParameter("loginDate"));
           String loginDate = null;
           // set userName to lower case
           String goodUserName = request.getParameter("userName").toLowerCase();
            // Add user
-           boolean addUserSuccess = UsersUtility.addUsers(goodUserName,password,firstName,lastName,mail,loginDate,SessionManager.getUsername(),SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+           boolean addUserSuccess = UsersUtility.addUsers(goodUserName,firstName,lastName,mail,loginDate,SessionManager.getUsername(),SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
            boolean addRolesSuccess = false;
            if(addUserSuccess){
              // Add roles for user
@@ -388,7 +321,6 @@ String name = "";
 String firstName = "";
 String lastName = "";
 String mail = "";
-String password = "";
 String loginDate = "";
 // Set fields where a userName was selected at 'edit user' operation
 UserPersist user = UsersUtility.getUserByUserName(userName);
@@ -396,7 +328,6 @@ if(user != null) name = (user.getUsername()==null?"":user.getUsername());
 if(user != null) firstName = (user.getFirstName()==null?"":user.getFirstName());
 if(user != null) lastName = (user.getLastName()==null?"":user.getLastName());
 if(user != null) mail = (user.getEMail()==null?"":user.getEMail());
-if(user != null) password = (user.getPassword()==null?"":user.getPassword());
 if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
 %>
 
@@ -440,7 +371,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
                try
                {
                // Users names list
-               List users = new UserDomain().findCustom("SELECT USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,LANG,EMAIL, "  +
+               List users = new UserDomain().findCustom("SELECT USERNAME,FIRST_NAME,LAST_NAME,LANG,EMAIL, "  +
               " THEME_INDEX,DATE_FORMAT(login_date,'%d %b %Y %H:%i:%s') "  +
               " FROM EUNIS_USERS ORDER BY USERNAME ");
                 if(users != null && users.size() > 0)
@@ -524,24 +455,6 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
       <td>
         <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input title="<%=cm.cms("users_edit_37")%>" alt="<%=cm.cms("users_edit_37")%>" type="text" id="mail" name="mail" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?mail:"")%>" />
         <%=cm.cmsTitle("users_edit_37")%>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        &nbsp;&nbsp;<label for="password1"><%=cm.cmsText("password")%><%=(users_operation.equalsIgnoreCase("add_users")?"(*)":"")%>:</label>
-      </td>
-      <td>
-        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input title="<%=cm.cms("password")%>" alt="<%=cm.cms("password")%>" type="text" id="password1" name="password1" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?password:"")%>" />
-        <%=cm.cmsTitle("password")%>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        &nbsp;&nbsp;<label for="password2"><%=cm.cmsText("users_edit_39")%><%=(users_operation.equalsIgnoreCase("add_users")?"(*)":"")%>:</label>
-      </td>
-      <td>
-        <%=(users_operation.equalsIgnoreCase("add_users")?"&nbsp;&nbsp;&nbsp;":"")%><input title="<%=cm.cms("users_edit_39")%>" alt="<%=cm.cms("users_edit_39")%>" type="text" id="password2" name="password2" size="50" value="<%=(users_operation.equalsIgnoreCase("edit_users")?password:"")%>" />
-        <%=cm.cmsTitle("users_edit_39")%>
       </td>
     </tr>
     </table>

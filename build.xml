@@ -221,6 +221,7 @@
     <copy tofile="${deployDir}/WEB-INF/classes/jrf.properties.${timeStamp}" file="3rdparty/conf/jrf.properties"/>
     <copy tofile="${deployDir}/WEB-INF/classes/new_texts.txt" file="3rdparty/new_texts.txt"/>
     <copy tofile="${deployDir}/WEB-INF/classes/log4j.properties.${timeStamp}" file="3rdparty/conf/log4j.properties"/>
+    <copy tofile="${deployDir}/WEB-INF/classes/eionetdir.properties" file="3rdparty/conf/eionetdir.properties"/>
     <copy file="${confDir}/web.xml" tofile="${deployDir}/WEB-INF/web.xml.${timeStamp}"/>
 
     <!--<copy tofile="${deployDir}/WEB-INF/classes/jrf.properties" file="3rdparty/conf/jrf.properties"/>-->
@@ -236,6 +237,7 @@
     <echo message="Build done. The following configuration files were not overriden:"/>
     <echo message="${deployDir}/WEB-INF/classes/jrf.properties"/>
     <echo message="${deployDir}/WEB-INF/classes/log4j.properties"/>
+    <echo message="${deployDir}/WEB-INF/classes/eionetdir.properties"/>
     <echo message="${deployDir}/WEB-INF/web.xml"/>
     <echo message="You must manually merge old settings to new config files and replace old files."/>
     <echo message="This step is MANDATORY. New files might include new parameters needed by application."/>

@@ -595,8 +595,9 @@ public class SQLUtilities {
     catch ( Exception e )
     {
     	con.rollback(); 
-		con.commit();
-    	result.add(e.getMessage()+"<br/> SQL statement: "+query);
+	con.commit();
+	throw new IllegalArgumentException(e.getMessage() + " for statement: " + query, e);
+//   	result.add(e.getMessage()+"<br/> SQL statement: "+query);
     }
     finally
     {

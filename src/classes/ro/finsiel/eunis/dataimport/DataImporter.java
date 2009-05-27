@@ -2,6 +2,7 @@ package ro.finsiel.eunis.dataimport;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -147,9 +148,11 @@ public class DataImporter extends HttpServlet {
 			                	sql.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
 			                	if(emptyTable)
 			                		sql.ExecuteDelete(table, null);
-			                	boolean success = sql.ExecuteMultipleInsert(table, tableRows);
-			                	if(!success)
+			                	List<String> success = sql.ExecuteMultipleInsert(table, tableRows);
+			                	if(success != null || success.size() > 0){
 			                		errors.add("Data import failed!");
+			                		errors.addAll(success);
+			                	}
 		                	
 		                	}
 		                	
@@ -158,6 +161,9 @@ public class DataImporter extends HttpServlet {
 		    	    		_ex.printStackTrace();
 		    	    		errors.add(_ex.getMessage());
 		    	    	} catch (ParserConfigurationException _ex) {
+		    	    		_ex.printStackTrace();
+		    	    		errors.add(_ex.getMessage());
+		    	    	} catch (SQLException _ex) {
 		    	    		_ex.printStackTrace();
 		    	    		errors.add(_ex.getMessage());
 		    	    	} catch (Exception _ex) {

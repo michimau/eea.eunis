@@ -525,18 +525,19 @@ public class SQLUtilities {
    * @param tableColumns columns
    * @return operation status
    */
-  public boolean ExecuteMultipleInsert( String tableName, List<TableColumns> tableRows ) throws Exception {
+  public List<String> ExecuteMultipleInsert( String tableName, List<TableColumns> tableRows ) throws Exception {
 
     if ( tableName == null || tableName.trim().length() <= 0 || tableRows == null || tableRows.size() <= 0)
     {
-      return false;
+      return null;
     }
 
-    boolean result = true;
+    List<String> result = new ArrayList<String>();
 
     Connection con = null;
     PreparedStatement ps = null;
     Statement st = null;
+    String query = "";
 
     try
     {
@@ -585,7 +586,8 @@ public class SQLUtilities {
     		  }
     	  }
     	  
-    	  ps = con.prepareStatement( "INSERT INTO " + tableName + " ( " + namesList + " ) values ( " + valuesList + " ) " );
+    	  query = "INSERT INTO " + tableName + " ( " + namesList + " ) values ( " + valuesList + " ) ";
+    	  ps = con.prepareStatement(query);
     	  ps.execute();
       }
       con.commit();
@@ -594,7 +596,7 @@ public class SQLUtilities {
     {
     	con.rollback(); 
 		con.commit();
-    	throw(e);
+    	result.add(e.getMessage()+"<br/> SQL statement: "+query);
     }
     finally
     {

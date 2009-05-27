@@ -1,5 +1,6 @@
 package ro.finsiel.eunis.dataimport;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -41,7 +42,10 @@ public class ImportJob implements Job {
 	    	
 	    	if(emptyTable)
 	    		sql.ExecuteDelete(table, null);
-	    	sql.ExecuteMultipleInsert(table, tableRows);
+	    	List<String> success = sql.ExecuteMultipleInsert(table, tableRows);
+	    	if(success != null || success.size() > 0){
+	    		sql.addImportLogMessage("Import error: "+success.get(0));
+        	}
 	    	
 	    	//uploadedStream.close();
 		} catch (SAXException _ex) {
@@ -49,6 +53,10 @@ public class ImportJob implements Job {
 			sql.addImportLogMessage("Import error: "+_ex.getMessage());
 			throw new JobExecutionException(_ex.toString(), _ex);
 		} catch (ParserConfigurationException _ex) {
+			_ex.printStackTrace();
+			sql.addImportLogMessage("Import error: "+_ex.getMessage());
+			throw new JobExecutionException(_ex.toString(), _ex);
+		} catch (SQLException _ex) {
 			_ex.printStackTrace();
 			sql.addImportLogMessage("Import error: "+_ex.getMessage());
 			throw new JobExecutionException(_ex.toString(), _ex);

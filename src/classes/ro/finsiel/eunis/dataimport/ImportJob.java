@@ -37,15 +37,13 @@ public class ImportJob implements Job {
 		String table = dataMap.getString("table");
 		boolean emptyTable = dataMap.getBoolean("emptyTable");
 		try {
-			ImportParser iparser = new ImportParser();
-        	List<TableColumns> tableRows = iparser.getTableRows(tmpDir + "importXmlFile");
-	    	
-	    	if(emptyTable)
+			if(emptyTable)
 	    		sql.ExecuteDelete(table, null);
-	    	List<String> success = sql.ExecuteMultipleInsert(table, tableRows);
-	    	if(success != null || success.size() > 0){
-	    		sql.addImportLogMessage("Import error: "+success.get(0));
-        	}
+			
+			ImportParser iparser = new ImportParser();
+        	iparser.execute(tmpDir + "importXmlFile", table, sqlDrv, sqlUsr, sqlPwd, sqlUrl);
+	    	
+	    	//List<String> success = sql.ExecuteMultipleInsert(table, tableRows);
 	    	
 	    	//uploadedStream.close();
 		} catch (SAXException _ex) {

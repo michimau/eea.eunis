@@ -141,33 +141,38 @@ public class DataImporter extends HttpServlet {
 		                		
 		                		retPage = "dataimport/import-log.jsp";
 		                	} else {
-			                	ImportParser iparser = new ImportParser();
-			                	List<TableColumns> tableRows = iparser.getTableRows(TEMP_DIR + "importXmlFile");
-			                	
-			                	SQLUtilities sql = new SQLUtilities();
+		                		SQLUtilities sql = new SQLUtilities();
 			                	sql.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-			                	if(emptyTable)
+		                		if(emptyTable)
 			                		sql.ExecuteDelete(table, null);
-			                	List<String> success = sql.ExecuteMultipleInsert(table, tableRows);
-			                	if(success != null || success.size() > 0){
+		                		
+			                	ImportParser iparser = new ImportParser();
+			                	iparser.execute(TEMP_DIR + "importXmlFile", table, SQL_DRV, SQL_USR, SQL_PWD, SQL_URL);
+			                	
+			                	//List<String> success = sql.ExecuteMultipleInsert(table, tableRows);
+			                	/*if(success != null || success.size() > 0){
 			                		errors.add("Data import failed!");
 			                		errors.addAll(success);
-			                	}
+			                	}*/
 		                	
 		                	}
 		                	
 		                	//uploadedStream.close();
 		    	    	} catch (SAXException _ex) {
 		    	    		_ex.printStackTrace();
+		    	    		errors.add("Data import failed!");
 		    	    		errors.add(_ex.getMessage());
 		    	    	} catch (ParserConfigurationException _ex) {
 		    	    		_ex.printStackTrace();
+		    	    		errors.add("Data import failed!");
 		    	    		errors.add(_ex.getMessage());
 		    	    	} catch (SQLException _ex) {
 		    	    		_ex.printStackTrace();
+		    	    		errors.add("Data import failed!");
 		    	    		errors.add(_ex.getMessage());
 		    	    	} catch (Exception _ex) {
 		    	    		_ex.printStackTrace();
+		    	    		errors.add("Data import failed!");
 		    	    		errors.add(_ex.getMessage());
 		    	    	}
 		            }

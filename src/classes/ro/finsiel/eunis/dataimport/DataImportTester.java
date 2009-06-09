@@ -32,7 +32,7 @@ public class DataImportTester extends HttpServlet {
 	/** The temporary dir where parts of the upload are stored temporary (if file size is bigger than memory buffer). */
 	private static String TEMP_DIR = "temp";
 	/** Maximum file size allowed to be uploaded to the server. */
-	private static int MAX_FILE_SIZE = 104857600; // Default value
+	private static int MAX_FILE_SIZE = 512 * 1024 * 1024; // Default value
 	/** Files with size smaller than this are written directly to disk, others through TEMP_DIR first. */
 	private static int MAX_MEM_TRESHOLD = 4096;// Files smaller than 4k are directly written to disk
 	

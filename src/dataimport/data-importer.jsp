@@ -112,8 +112,12 @@
 		            </form>
 		            <%
 		            List<String> errors = (List<String>)request.getSession().getAttribute("errors");
-		            if(errors != null && errors.size() > 0){%>
-		            	<h2><%=errors.size()%> errors found:</h2>
+		            if(errors != null && errors.size() > 0){
+			            if(errors.size() > 1){%>		            
+		            		<h2><%=(errors.size() - 1)%> errors found:</h2>
+		            	<%} else { %>
+			            	<h2><%=errors.size()%> errors found:</h2>
+			            <% } %>
 		            	<ul>
 		            	<%
 			         	for(int i = 0 ; i<errors.size() ; i++) {

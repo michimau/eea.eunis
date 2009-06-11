@@ -40,7 +40,7 @@ public class ImportParser extends DefaultHandler {
         	positions = new HashMap<String, Integer>(); 
         } 
         
-        private void parseDocument() { 
+        private void parseDocument() throws SAXException { 
                 
             //get a factory 
             SAXParserFactory spf = SAXParserFactory.newInstance(); 
@@ -53,10 +53,13 @@ public class ImportParser extends DefaultHandler {
             	sp.parse(xmlFile, this); 
             }catch(SAXException se) { 
                     se.printStackTrace(); 
+                    throw new RuntimeException(se.getMessage(), se); 
             }catch(ParserConfigurationException pce) { 
                     pce.printStackTrace(); 
+                    throw new RuntimeException(pce.getMessage(), pce); 
             }catch (IOException ie) { 
                     ie.printStackTrace(); 
+                    throw new RuntimeException(ie.getMessage(), ie); 
             } 
         } 
         

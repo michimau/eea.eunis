@@ -2,6 +2,7 @@ package ro.finsiel.eunis;
 
 import ro.finsiel.eunis.jrfTables.*;
 import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.utilities.EunisUtil;
 
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
@@ -282,7 +283,7 @@ public class WebContentManagement implements java.io.Serializable {
     }
     else
     {
-      String md5 = digestHexDec(idPage, "MD5");	
+      String md5 = EunisUtil.digestHexDec(idPage, "MD5");	
       List<WebContentPersist> dbKeyList = null;
    	  dbKeyList = new WebContentDomain().findWhereOrderBy( "ID_PAGE='" + md5 + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ", "RECORD_DATE DESC" );
       if ( !dbKeyList.isEmpty() )
@@ -292,42 +293,7 @@ public class WebContentManagement implements java.io.Serializable {
       }
     }
     return ret;
-  }
-  
-  /**
-   * A method for creating a unique Hexa-Decimal digest of a String message.
-   *
-   * @param   src         String to be digested.
-   * @param   algosrithm  Digesting algorithm (please see Java
-   *                      documentation for allowable values).
-   * @return              A unique String-typed Hexa-Decimal digest of the input message.
-   */
-  public static String digestHexDec(String src, String algorithm) {
-      
-      byte[] srcBytes = src.getBytes();
-      byte[] dstBytes = new byte[16];
-      StringBuffer buf = new StringBuffer();
-      
-      try{
-      MessageDigest md = MessageDigest.getInstance(algorithm);
-      md.update(srcBytes);
-      dstBytes = md.digest();
-      md.reset();
-      
-      
-      for (int i=0; i<dstBytes.length; i++){
-          Byte byteWrapper = new Byte(dstBytes[i]);
-          int k = byteWrapper.intValue();
-          String s = Integer.toHexString(byteWrapper.intValue());
-          if (s.length() == 1) s = "0" + s;
-          buf.append(s.substring(s.length() - 2));
-      }
-      } catch (GeneralSecurityException e) {
-    	  e.printStackTrace();
-      }
-      
-      return buf.toString();
-  }
+  }  
 
   public String getDescription( String idPage )
   {

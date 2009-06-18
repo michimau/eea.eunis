@@ -1,5 +1,8 @@
 package ro.finsiel.eunis.utilities;
 
+import java.security.GeneralSecurityException;
+import java.security.MessageDigest;
+
 public class EunisUtil {
 	/**
      * 
@@ -65,6 +68,40 @@ public class EunisUtil {
 	        return sb.toString();
         }
         else return "";
+    }
+    
+    /**
+     * A method for creating a unique Hexa-Decimal digest of a String message.
+     *
+     * @param   src         String to be digested.
+     * @param   algosrithm  Digesting algorithm (please see Java
+     *                      documentation for allowable values).
+     * @return              A unique String-typed Hexa-Decimal digest of the input message.
+     */
+    public static String digestHexDec(String src, String algorithm) {
+        
+        byte[] srcBytes = src.getBytes();
+        byte[] dstBytes = new byte[16];
+        StringBuffer buf = new StringBuffer();
+        
+        try{
+        MessageDigest md = MessageDigest.getInstance(algorithm);
+        md.update(srcBytes);
+        dstBytes = md.digest();
+        md.reset();
+        
+        
+        for (int i=0; i<dstBytes.length; i++){
+            Byte byteWrapper = new Byte(dstBytes[i]);
+            String s = Integer.toHexString(byteWrapper.intValue());
+            if (s.length() == 1) s = "0" + s;
+            buf.append(s.substring(s.length() - 2));
+        }
+        } catch (GeneralSecurityException e) {
+      	  e.printStackTrace();
+        }
+        
+        return buf.toString();
     }
     
 }

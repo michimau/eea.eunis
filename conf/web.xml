@@ -319,6 +319,11 @@
   </servlet>
   
   <servlet>
+    <servlet-name>postimport</servlet-name>
+    <servlet-class>ro.finsiel.eunis.dataimport.PostImportScripts</servlet-class>
+  </servlet>
+  
+  <servlet>
     <servlet-name>dataexporter</servlet-name>
     <servlet-class>ro.finsiel.eunis.dataimport.DataExporter</servlet-class>
   </servlet>
@@ -383,6 +388,11 @@
   <servlet-mapping>
     <servlet-name>dataimporter</servlet-name>
     <url-pattern>/dataimporter</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>postimport</servlet-name>
+    <url-pattern>/postimport</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>

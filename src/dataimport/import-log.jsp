@@ -78,7 +78,7 @@
 	                		for(Iterator<ImportLogDTO> it = messages.iterator(); it.hasNext();){
 		                		ImportLogDTO message = it.next();%>
 		                		<tr>
-		                			<td><%=message.getTimestamp()%></td>
+		                			<td nowrap="nowrap"><%=message.getTimestamp()%></td>
 		                			<td><%=message.getMessage()%></td>
 		                		</tr>
 		                		<%

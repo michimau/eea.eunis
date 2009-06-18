@@ -10,7 +10,8 @@
 %>
 <%@ page import="ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.utilities.SQLUtilities,
-                 ro.finsiel.eunis.WebContentManagement" %>
+                 ro.finsiel.eunis.WebContentManagement,
+                 java.util.Hashtable" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -30,12 +31,8 @@
   sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
 
   String sTotalSpecies = "select count(*) from eunis_digir";
-  String sDistinctSpecies = "select count(DISTINCT ScientificName) from eunis_digir";
-  String sSpeciesWithCountry = "select count(*) from eunis_digir where Country is not null";
-  String sSpeciesWithLatLong = "select count(*) from eunis_digir where DecimalLatitude is not null AND  DecimalLongitude is not null";
-  String sSpeciesFromHabitats = "select count(*) from eunis_digir where GlobalUniqueIdentifier LIKE '%SPECHAB%'";
-  String sSpeciesFromSites = "select count(*) from eunis_digir where GlobalUniqueIdentifier LIKE '%SPECSITE%'";
-  String sDateLastModified = "select MAX(DateLastModified) from eunis_digir";
+  String sDigirStatistics = "select DistinctSpecies, SpeciesWithCountry, SpeciesWithLatLong, SpeciesFromHabitats, SpeciesFromSites, DateLastModified from eunis_digir_stats";
+  
   String sInstitutionCode = "EEA";
   String sCollectionCode = "EUNIS";
   String sDigirURL = application.getInitParameter( "DIGIR_URL" );
@@ -91,14 +88,27 @@
                     <h2><%=cm.cmsPhrase("Statistical data regarding the EUNIS DiGIR Provider:")%></h2>
                 <%
                       int nTotalSpecies = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sTotalSpecies),0);
-                      int nDistinctSpecies = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sDistinctSpecies),0);
-                      int nSpeciesWithCountry = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sSpeciesWithCountry),0);
-                      int nSpeciesWithLatLong = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sSpeciesWithLatLong),0);
-                      int nSpeciesFromHabitats = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sSpeciesFromHabitats),0);
-                      int nSpeciesFromSites = Utilities.checkedStringToInt(sqlc.ExecuteSQL(sSpeciesFromSites),0);
-                      String DateLastModified = sqlc.ExecuteSQL(sDateLastModified);
-
+                      
                       if(nTotalSpecies != 0) {
+	                      
+	                      String nDistinctSpecies = "0";
+	                      String nSpeciesWithCountry = "0";
+	                      String nSpeciesWithLatLong = "0";
+	                      String nSpeciesFromHabitats = "0";
+	                      String nSpeciesFromSites = "0";
+	                      String DateLastModified = "";
+                      
+	                      Hashtable<String,String> h = sqlc.getHashtable(sDigirStatistics);
+	                      if(h!= null && h.size() > 0){
+		                      nDistinctSpecies = h.get("DistinctSpecies");
+	                      	  nSpeciesWithCountry = h.get("SpeciesWithCountry");
+	                      	  nSpeciesWithLatLong = h.get("SpeciesWithLatLong");
+	                      	  nSpeciesFromHabitats = h.get("SpeciesFromHabitats");
+	                      	  nSpeciesFromSites = h.get("SpeciesFromSites");
+	                      	  DateLastModified = h.get("DateLastModified");
+	                      }
+
+                      
                 %>
                     <table width="90%" class="datatable">
                       <col style="width:50%"/>

@@ -21,10 +21,10 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
-  String btrail = "eea#" + eeaHome + ",home#index.jsp,data import";
+  String btrail = "eea#" + eeaHome + ",home#index.jsp,data import#dataimport/index.jsp,data importer";
 %>
     <title>
-      Data Import
+      Post Import Scripts
     </title>
   </head>
   <body>
@@ -59,34 +59,84 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <h1>
-                  Data Import
+                  Post Import Scripts
                 </h1>
-                <ul>
-                	<li>
-                		<a href="<%=domainName%>/dataimport/data-tester.jsp">Data tester</a><br/>
-                		The purpose of this page is to test the XML formatted Oracle dumps from the EUNIS maintainer.
-                	</li>
-                	<li>
-                		<a href="<%=domainName%>/dataimport/data-importer.jsp">Data importer</a><br/>
-                		The purpose of this page is to import the XML formatted Oracle dumps into EUNIS database.
-                	</li>
-                	<li>
-                		<a href="<%=domainName%>/dataimport/import-log.jsp">Background actions log</a><br/>
-                		Log messages about background data import and post import scripts
-                	</li>
-                	<li>
-                		<a href="<%=domainName%>/dataimport/data-exporter.jsp">Data exporter</a><br/>
-                		The purpose of this page is to export EUNIS database table into XML formatted Oracle dump.
-                	</li>
-                	<li>
-                		<a href="<%=domainName%>/dataimport/schema-exporter.jsp">Schema exporter</a><br/>
-                		The purpose of this page is to create XML schema from EUNIS database table structure.
-                	</li>
-                	<li>
-                		<a href="<%=domainName%>/dataimport/post-import.jsp">Post import scripts</a><br/>
-                		The purpose of this page is to run database scripts after import!
-                	</li>
-                </ul>
+                <%
+                if( SessionManager.isAuthenticated() && SessionManager.isImportExportData_RIGHT() ){
+                %>
+	                <p class="documentDescription">
+	                The purpose of this page is to run database scripts after import!
+	                </p>
+	                <form name="eunis" method="post" action="<%=domainName%>/postimport">
+	                	<table border="0">
+		                	<tr>
+		                		<td><input type="checkbox" name="sites"/></td>
+		                		<td>
+		                			Replace NULL values in decimal degrees (table: chm62edt_sites)
+								</td>
+							</tr>
+							<tr>
+			                	<td><input type="checkbox" name="empty_digir"/></td>
+			                	<td>Empty digir table</td>
+			                </tr>
+							<tr>
+			                	<td><input type="checkbox" name="digir"/></td>
+			                	<td>Generate digir table<br/>
+			                		<i>May take a long time to complete. It is recommended to check "Run scripts in background" option</i>
+			                	</td>
+			                </tr>
+			                <tr>
+			                	<td><input type="checkbox" name="statistics"/></td>
+			                	<td>Generate digir statistics</td>
+			                </tr>
+			                <tr>
+			                	<td height="10"></td>
+			                	<td></td>
+			                </tr>
+			                <tr>
+			                	<td><input type="checkbox" name="runBackground"/></td>
+			                	<td>Run scripts in background</td>
+			                </tr>
+			                <tr>
+			                	<td align="right" colspan="2"><input type="submit" name="btn" value="Run"/></td>
+			                </tr>
+		                </table>
+		            </form>
+		            <%
+		            List<String> errors = (List<String>)request.getSession().getAttribute("errors");
+		            if(errors != null && errors.size() > 0){
+			            if(errors.size() > 1){%>		            
+			            	<h2><%=errors.size()%> errors found:</h2>
+			            <% } %>
+		            	<ul>
+		            	<%
+			         	for(int i = 0 ; i<errors.size() ; i++) {
+				         	String error = errors.get(i);
+			         		%>
+			         		<li><%=error%></li>
+			         		<%
+				        }
+				        %>
+				        </ul>
+				        <%
+				        request.getSession().removeAttribute("errors");
+		            } else {
+			         	String success = (String)request.getSession().getAttribute("success");
+			         	if(success != null){
+			         		%>
+			         			<b><%=success%></b>
+			         		<%
+				        	request.getSession().removeAttribute("success");
+		         		}
+		            }
+            	} else {
+	            	%>
+	            		<div class="error-msg">
+		                <%=cm.cmsPhrase("You must be authenticated and have the proper right to access this page.")%>
+		             </div>
+	            	<%	
+            	}
+                %>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

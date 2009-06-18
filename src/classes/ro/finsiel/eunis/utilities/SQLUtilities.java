@@ -10,11 +10,13 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
 import ro.finsiel.eunis.dataimport.ColumnDTO;
 import ro.finsiel.eunis.dataimport.ImportLogDTO;
+import ro.finsiel.eunis.search.Utilities;
 
 
 /**
@@ -350,6 +352,40 @@ public class SQLUtilities {
       closeAll( con, ps, rs );
     }
     return result;
+  }
+  
+  public Hashtable<String,String> getHashtable(String sql_stmt) {
+
+	  	Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rset = null;
+
+		Hashtable<String,String> h = null;
+
+		try {
+			Class.forName( SQL_DRV );
+		    con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+			stmt = con.prepareStatement(sql_stmt);
+			rset = stmt.executeQuery(sql_stmt);
+			ResultSetMetaData md = rset.getMetaData();
+
+			int colCnt = md.getColumnCount();
+
+			while (rset.next()) {
+				h = new Hashtable<String,String>();
+				for (int i = 0; i < colCnt; ++i) {
+					String name = md.getColumnName(i + 1);
+					String value = rset.getString(i + 1);
+					if (value == null) value = "";
+					h.put(name, value);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeAll(con, stmt, rset);
+		}
+		return h;
   }
 
   /**
@@ -1203,6 +1239,113 @@ public class SQLUtilities {
 	  }
 	  
 	  return ret;
+  }
+  
+  /**
+   * Execute INSERT statement
+   *
+   */
+  public void runPostImportSitesScript() {
+
+	  Connection con = null;
+	  PreparedStatement ps = null;
+
+	  try
+	  {
+		  Class.forName( SQL_DRV );
+		  con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+		  ps = con.prepareStatement("UPDATE chm62edt_sites SET LATITUDE=-(LAT_DEG+(LAT_MIN*60+LAT_SEC)/3600.000) WHERE LATITUDE IS NULL AND LAT_NS='S' AND LAT_DEG IS NOT NULL");
+		  ps.execute();
+		  ps = con.prepareStatement("UPDATE chm62edt_sites SET LATITUDE=LAT_DEG+(LAT_MIN*60+LAT_SEC)/3600.000 WHERE LATITUDE IS NULL AND LAT_NS='N' AND LAT_DEG is NOT NULL");
+		  ps.execute();
+		  ps = con.prepareStatement("UPDATE chm62edt_sites SET LONGITUDE=-(LONG_DEG+(LONG_MIN*60+LONG_SEC)/3600.000) WHERE LONGITUDE IS NULL AND LONG_EW='W' AND LONG_DEG IS NOT NULL");
+		  ps.execute();
+		  ps = con.prepareStatement("UPDATE chm62edt_sites SET LONGITUDE=LONG_DEG+(LONG_MIN*60+LONG_SEC)/3600.000 WHERE LONGITUDE IS NULL AND LONG_EW='E' AND LONG_DEG IS NOT NULL");
+		  ps.execute();
+	  }
+	  catch ( Exception e )
+	  {
+		  e.printStackTrace();
+	  }
+	  finally
+	  {
+		  closeAll( con, ps, null );
+	  }
+  }
+  
+  /**
+   * Execute DELETE statement
+   *
+   */
+  public void emptyDigiTable() {
+
+	  Connection con = null;
+	  PreparedStatement ps = null;
+
+	  try
+	  {
+		  Class.forName( SQL_DRV );
+		  con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+		  ps = con.prepareStatement("DELETE FROM EUNIS_DIGIR");
+		  ps.executeUpdate();
+		  
+	  }
+	  catch ( Exception e )
+	  {
+		  e.printStackTrace();
+	  }
+	  finally
+	  {
+		  closeAll( con, ps, null );
+	  }
+  }
+  
+  /**
+   * Execute UPDATE statement
+   *
+   */
+  public void generateDigirStatistics() {
+
+	  Connection con = null;
+	  PreparedStatement ps = null;
+	  ResultSet rs = null;
+
+	  try
+	  {
+		  Class.forName( SQL_DRV );
+		  con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+		  
+		  int nTotalSpecies = Utilities.checkedStringToInt(ExecuteSQL("select count(*) from eunis_digir"),0);
+		  int nDistinctSpecies = Utilities.checkedStringToInt(ExecuteSQL("select count(DISTINCT ScientificName) from eunis_digir"),0);
+		  int nSpeciesWithCountry = Utilities.checkedStringToInt(ExecuteSQL("select count(*) from eunis_digir where Country is not null"),0);
+		  int nSpeciesWithLatLong = Utilities.checkedStringToInt(ExecuteSQL("select count(*) from eunis_digir where DecimalLatitude is not null AND  DecimalLongitude is not null"),0);
+		  int nSpeciesFromHabitats = Utilities.checkedStringToInt(ExecuteSQL("select count(*) from eunis_digir where GlobalUniqueIdentifier LIKE '%SPECHAB%'"),0);
+		  int nSpeciesFromSites = Utilities.checkedStringToInt(ExecuteSQL("select count(*) from eunis_digir where GlobalUniqueIdentifier LIKE '%SPECSITE%'"),0);
+          
+          ps = con.prepareStatement("DELETE FROM EUNIS_DIGIR_STATS");
+		  ps.executeUpdate();
+          
+          ps = con.prepareStatement("INSERT INTO EUNIS_DIGIR_STATS (TotalSpecies, DistinctSpecies, SpeciesWithCountry, " +
+          		"SpeciesWithLatLong, SpeciesFromHabitats, SpeciesFromSites, DateLastModified) VALUES (?,?,?,?,?,?,NOW())");
+          
+          ps.setInt(1, nTotalSpecies);
+          ps.setInt(2, nDistinctSpecies);
+          ps.setInt(3, nSpeciesWithCountry);
+          ps.setInt(4, nSpeciesWithLatLong);
+          ps.setInt(5, nSpeciesFromHabitats);
+          ps.setInt(6, nSpeciesFromSites);
+          
+          ps.executeUpdate();
+		  
+	  }
+	  catch ( Exception e )
+	  {
+		  e.printStackTrace();
+	  }
+	  finally
+	  {
+		  closeAll( con, ps, rs );
+	  }
   }
 
 }

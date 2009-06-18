@@ -82,7 +82,7 @@
 							<tr>
 			                	<td><input type="checkbox" name="digir"/></td>
 			                	<td>Generate digir table<br/>
-			                		<i>May take a long time to complete. It is recommended to check "Run scripts in background" option</i>
+			                		<i>May take a long time to complete. It is recommended to also check "Run scripts in background" option</i>
 			                	</td>
 			                </tr>
 			                <tr>

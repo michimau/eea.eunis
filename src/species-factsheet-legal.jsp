@@ -52,9 +52,6 @@
         <th>
           <%=cm.cmsPhrase("Geographical implementation")%>
         </th>
-        <th>
-          <%=cm.cmsPhrase("Reporting obligations")%>
-        </th>
       </tr>
     </thead>
     <tbody>
@@ -79,9 +76,9 @@
       if(null != legal.getUrl().replaceAll("#",""))
       {
         String sFormattedURL = Utilities.formatString(legal.getUrl()).replaceAll("#","");
-        if(sFormattedURL.length()>30)
+        if(sFormattedURL.length()>50)
         {
-          sFormattedURL = sFormattedURL.substring(0,30) + "...";
+          sFormattedURL = sFormattedURL.substring(0,50) + "...";
         }
 %>
           <a href="<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getUrl())).replaceAll("#","")%>" title="<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getUrl())).replaceAll("#","")%>"><%=sFormattedURL%></a>
@@ -106,10 +103,6 @@
 <%
       }
 %>
-        </td>
-        <td align="center">
-          <a title="<%=cm.cms("species_factsheet_legalInstruments_04_Title")%>" target="_blank" href="http://rod.eionet.europa.eu/obligations">ROD</a>
-          <%=cm.cmsTitle("species_factsheet_legalInstruments_04_Title")%>
         </td>
       </tr>
 <%

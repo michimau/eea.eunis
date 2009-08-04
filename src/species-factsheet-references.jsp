@@ -158,28 +158,28 @@
     while(rs.next())
     {
       String cssClass = i++ % 2 == 0 ? "" : " class=\"zebraeven\"";
-      if(rs.getString(1) == null) source="&nbsp;"; else source=ro.finsiel.eunis.search.Utilities.FormatDatabaseFieldName(rs.getString(1));
-      if(rs.getString(2) == null) author="&nbsp;"; else author=rs.getString(2);
-      if(rs.getString(3) == null) editor="&nbsp;"; else editor=rs.getString(3);
+      if(rs.getString(1) == null) source="&nbsp;"; else source=Utilities.treatURLSpecialCharacters(ro.finsiel.eunis.search.Utilities.FormatDatabaseFieldName(rs.getString(1)));
+      if(rs.getString(2) == null) author="&nbsp;"; else author=Utilities.treatURLSpecialCharacters(rs.getString(2));
+      if(rs.getString(3) == null) editor="&nbsp;"; else editor=Utilities.treatURLSpecialCharacters(rs.getString(3));
       if(rs.getString(4) == null || rs.getString(4).equals(""))
       {
         date="&nbsp;";
       } else {
         date = Utilities.formatReferencesDate(rs.getDate(4));
       }
-      if(rs.getString(5) == null) title="&nbsp;"; else title=rs.getString(5);
+      if(rs.getString(5) == null) title="&nbsp;"; else title=Utilities.treatURLSpecialCharacters(rs.getString(5));
       //if(rs.getString(6) == null) publisher="&nbsp;"; else publisher=rs.getString(6);
 
 %>
       <tr<%=cssClass%>>
         <td>
-          <%=Utilities.treatURLSpecialCharacters(title)%>
+          <%=title%>
         </td>
         <td>
-          <%=Utilities.treatURLSpecialCharacters(author)%>
+          <%=author%>
         </td>
         <td>
-          <%=Utilities.treatURLSpecialCharacters(editor)%>
+          <%=editor%>
         </td>
         <td style="text-align:right">
           <%=date%>
@@ -188,7 +188,7 @@
 <%--          <%=publisher%>--%>
 <%--        </td>--%>
         <td>
-          <%=Utilities.treatURLSpecialCharacters(source)%>
+          <%=source%>
         </td>
       </tr>
 <%

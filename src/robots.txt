@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /reports/
+Disallow: /habitats-factsheet-pdf.jsp
+Disallow: /sites-factsheet-pdf.jsp
+Disallow: /species-factsheet-pdf.jsp

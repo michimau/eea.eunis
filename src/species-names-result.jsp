@@ -462,7 +462,7 @@
                         if (showVernacularNames && !isExpanded)
                         {
                       %>
-                          <a title="<%=cm.cms("show_vernacular_list")%>" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display vernacular names in results table")%></a>
+                          <a title="<%=cm.cms("show_vernacular_list")%>" rel="nofollow" href="<%=pageName + "?expand=" + !isExpanded + expandURL%>"><%=cm.cmsPhrase("Display vernacular names in results table")%></a>
                           <%=cm.cmsTitle("show_vernacular_list")%>
                       <%
                         }

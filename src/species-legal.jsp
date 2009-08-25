@@ -79,7 +79,7 @@
           var groupID = document.eunis2.groupName.options[document.eunis2.groupName.selectedIndex].value;
           var groupName = document.eunis2.groupName.options[document.eunis2.groupName.selectedIndex].text;
           var frm = document.createElement( "FORM" );
-          document.appendChild( frm );
+          document.getElementById("main").appendChild( frm );
           frm.method = "get";
           frm.action="species-legal.jsp";
 
@@ -228,7 +228,7 @@
       <%=cm.cms("species_legal_title")%>
     </title>
   </head>
-  <body onload="onLoadFunction()">
+  <body onload="onLoadFunction()" id="main">
     <div id="visual-portal-wrapper">
       <jsp:include page="header.jsp" />
       <!-- The wrapper div. It contains the three columns. -->

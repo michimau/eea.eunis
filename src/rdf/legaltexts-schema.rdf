@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	 xmlns:owl="http://www.w3.org/2002/07/owl#"
+	 xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+	<owl:Ontology rdf:about="">
+		<rdfs:label>Legal texts schema</rdfs:label>
+	</owl:Ontology>
+
+	<rdfs:Class rdf:ID="LegalText">
+		<rdfs:label>Legal Text</rdfs:label>
+	</rdfs:Class>
+
+	<!-- Also known as dataflow -->
+	<rdf:Property rdf:ID="title">
+		<rdfs:label>Title</rdfs:label>
+		<rdfs:domain rdf:resource="#LegalText"/>
+		<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#label"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="alternative">
+		<rdfs:label>Short title</rdfs:label>
+		<rdfs:domain rdf:resource="#LegalText"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="sourceDocument">
+		<rdfs:label>Source</rdfs:label>
+		<rdfs:domain rdf:resource="#LegalText"/>
+	</rdf:Property>
+
+</rdf:RDF>

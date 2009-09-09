@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	 xmlns:owl="http://www.w3.org/2002/07/owl#"
+	 xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+	<owl:Ontology rdf:about="">
+		<rdfs:label>Sites schema</rdfs:label>
+	</owl:Ontology>
+
+	<rdfs:Class rdf:ID="Site">
+		<rdfs:label>EUNIS Site</rdfs:label>
+	</rdfs:Class>
+
+	<!-- Also known as dataflow -->
+	<rdf:Property rdf:ID="name">
+		<rdfs:label>Name</rdfs:label>
+		<rdfs:domain rdf:resource="#Site"/>
+		<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#label"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="character">
+		<rdfs:label>Character</rdfs:label>
+		<rdfs:domain rdf:resource="#Site"/>
+	</rdf:Property>
+
+</rdf:RDF>

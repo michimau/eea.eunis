@@ -91,7 +91,7 @@
     <div id="visual-portal-wrapper">
       <jsp:include page="header.jsp" />
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns">
+       <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -146,6 +146,12 @@
                              alt="<%=cm.cms("Toggle full screen mode")%>"
                              title="<%=cm.cms("Toggle full screen mode")%>" /></a><%=cm.cmsTitle( "Toggle full screen mode" )%>
                     </li>
+                    <li>
+                      <a href="<%=pdfURL%>"><img src="images/pdf.png"
+                             alt="<%=cm.cms( "header_download_pdf_title" )%>"
+                             title="<%=cm.cms( "header_download_pdf_title" )%>" /></a>
+                    </li>
+
                   </ul>
                 </div>
                   <div class="documentDescription">
@@ -304,7 +310,6 @@
         <div id="portal-column-two">
           <div class="visualPadding">
               	<jsp:include page="right-dynamic.jsp">
-                  <jsp:param name="printLink" value="<%=pdfURL%>"/>
                   <jsp:param name="mapLink" value="show"/>
                 </jsp:include>
           </div>

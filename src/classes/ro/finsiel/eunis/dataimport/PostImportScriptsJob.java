@@ -29,6 +29,9 @@ public class PostImportScriptsJob implements Job {
         String empty_digir = dataMap.getString("empty_digir");
         String digir = dataMap.getString("digir");
         String statistics = dataMap.getString("statistics");
+        String spiecesTab = dataMap.getString("spiecesTab");
+        String habitatsTab = dataMap.getString("habitatsTab");
+        String sitesTab = dataMap.getString("sitesTab");
         
 		try {
 			
@@ -46,6 +49,18 @@ public class PostImportScriptsJob implements Job {
     		
     		if(statistics != null && statistics.equals("on"))
     			sql.generateDigirStatistics();
+    		
+    		TabScripts scripts = new TabScripts();
+    		scripts.Init(sqlDrv, sqlUrl, sqlUsr, sqlPwd);
+    		
+    		if(spiecesTab != null && spiecesTab.equals("on"))
+    			scripts.setTabSpecies();
+    		
+    		if(habitatsTab != null && habitatsTab.equals("on"))
+    			scripts.setTabHabitats();
+    		
+    		if(sitesTab != null && sitesTab.equals("on"))
+    			scripts.setTabSites();
 	    	
 		} catch (SQLException _ex) {
 			_ex.printStackTrace();

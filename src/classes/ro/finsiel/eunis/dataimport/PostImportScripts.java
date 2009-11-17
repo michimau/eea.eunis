@@ -35,6 +35,9 @@ public class PostImportScripts extends HttpServlet {
 	        String empty_digir = request.getParameter("empty_digir");
 	        String digir = request.getParameter("digir");
 	        String statistics = request.getParameter("statistics");
+	        String spiecesTab = request.getParameter("spiecesTab");
+	        String habitatsTab = request.getParameter("habitatsTab");
+	        String sitesTab = request.getParameter("sitesTab");
 	        String runBackground = request.getParameter("runBackground");
 	        
         	try{
@@ -53,6 +56,9 @@ public class PostImportScripts extends HttpServlet {
             		jobDetail.getJobDataMap().put("empty_digir", empty_digir);
             		jobDetail.getJobDataMap().put("digir", digir);
             		jobDetail.getJobDataMap().put("statistics", statistics);
+            		jobDetail.getJobDataMap().put("spiecesTab", spiecesTab);
+            		jobDetail.getJobDataMap().put("sitesTab", sitesTab);
+            		jobDetail.getJobDataMap().put("habitatsTab", habitatsTab);
             		
             		PostImportScriptsJobListener listener = new PostImportScriptsJobListener();
             		jobDetail.addJobListener(listener.getName());
@@ -82,6 +88,18 @@ public class PostImportScripts extends HttpServlet {
 	        		
 	        		if(statistics != null && statistics.equals("on"))
 	        			sql.generateDigirStatistics();
+	        		
+	        		TabScripts scripts = new TabScripts();
+	        		scripts.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+	        		
+	        		if(spiecesTab != null && spiecesTab.equals("on"))
+	        			scripts.setTabSpecies();
+	        		
+	        		if(habitatsTab != null && habitatsTab.equals("on"))
+	        			scripts.setTabHabitats();
+	        		
+	        		if(sitesTab != null && sitesTab.equals("on"))
+	        			scripts.setTabSites();
             	}
         		
         	} catch(Exception e){

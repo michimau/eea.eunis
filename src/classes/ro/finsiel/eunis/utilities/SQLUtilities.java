@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
@@ -13,10 +14,33 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
 import ro.finsiel.eunis.dataimport.ColumnDTO;
 import ro.finsiel.eunis.dataimport.ImportLogDTO;
+import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
+import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
+import ro.finsiel.eunis.factsheet.species.GeographicalStatusWrapper;
+import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
+import ro.finsiel.eunis.jrfTables.Chm62edtBiogeoregionDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtCountryDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtHabitatSyntaxaDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtReportsDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtReportsPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesStatusDomain;
+import ro.finsiel.eunis.jrfTables.DesignationsSitesRelatedDesignationsDomain;
+import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalDomain;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.HumanActivityDomain;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsDomain;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteRelationsDomain;
+import ro.finsiel.eunis.jrfTables.species.factsheet.DistributionWrapper;
+import ro.finsiel.eunis.jrfTables.species.factsheet.ReportsDistributionStatusDomain;
+import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTypeSpeciesDomain;
 import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 
 
 /**
@@ -1347,5 +1371,5 @@ public class SQLUtilities {
 		  closeAll( con, ps, rs );
 	  }
   }
-
+  
 }

@@ -90,6 +90,22 @@
 			                	<td>Generate digir statistics</td>
 			                </tr>
 			                <tr>
+			                	<td><input type="checkbox" name="spiecesTab"/></td>
+			                	<td>Generate species tab information<br/>
+			                		<i>May take a long time to complete. It is recommended to also check "Run scripts in background" option</i>
+			                	</td>
+			                </tr>
+			                <tr>
+			                	<td><input type="checkbox" name="habitatsTab"/></td>
+			                	<td>Generate habitats tab information</td>
+			                </tr>
+			                <tr>
+			                	<td><input type="checkbox" name="sitesTab"/></td>
+			                	<td>Generate sites tab information<br/>
+			                		<i>May take a long time to complete. It is recommended to also check "Run scripts in background" option</i>
+			                	</td>
+			                </tr>
+			                <tr>
 			                	<td height="10"></td>
 			                	<td></td>
 			                </tr>

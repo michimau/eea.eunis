@@ -1,9 +1,3 @@
-All the documentation on EUNIS Database has been uploaded, as requested by
-contractual aggreements, on CIRCA
-See:
-http://eea.eionet.eu.int/Members/irc/eionet-circle/chm/library?l=/specific_agreement_1/contractual_documents/cw3_data_management&vm=compact&sb=Title
-
-
 1. How to create Java documentation:
 ------------------------------------
 Run 'ant javadoc' from the command prompt.
@@ -11,16 +5,9 @@ Run 'ant javadoc' from the command prompt.
 
 2.How to install:
 -----------------
+Copy the default.properties to build.properties and edit the values.
 Run 'ant'. This will compile the classes and deploy the application within
-tomcat's webapps directory. If you want to install in an other location you
-change the TOMCAT_HOME environment variable.
-
-Example:
-
-    export TOMCAT_HOME=/home/roug/tomcat
-    mkdir /home/roug/tomcat
-    ant
-
+tomcat's webapps directory.
 
 3.How to use lowercase.sh script:
 ---------------------------------

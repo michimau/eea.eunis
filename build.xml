@@ -5,12 +5,11 @@
 
 <project name="eunis" basedir="." default="deploy">
   <!-- Initialize the environment used inside the script -->
-  <property environment="osEnv"/>
-  <property name="tomcat" value="${osEnv.TOMCAT_HOME}" description="Tomcat home dir(on Linux is where webapps resides). Environment TOMCAT_HOME must be set." />
-  <property name="java.home" value="${osEnv.JAVA_HOME}" description="Sun JDK home dir. Environment JAVA_HOME must be set." />
+  <loadproperties srcFile="build.properties"/>
+  <fail unless="webapp.home"
+         message="Mandatory webapp.home property is missing in build.properties file."/>
 
   <property name="3rdpartyDir" value="3rdparty" description="3rd party libraries dir" />
-  <property name="webappName" value="eunis" description="Name of webapp" />
   <property name="srcDir" value="src" description="Source directory" />
   <property name="kmlDir" value="src/kml" description="Google Earth files directory" />
   <property name="classesSrcDir" value="src/classes" description="Java classes dir" />
@@ -18,8 +17,8 @@
   <property name="buildDir" value= "build"/>
   <property name="test" value="test"/>
 
-  <property name="deployDir" location="${tomcat}/webapps/${webappName}" description="Path to where application will be deployed" />
-  <property name="deployLibDir" value="${tomcat}/webapps/${webappName}/WEB-INF/lib"/>
+  <property name="deployDir" location="${webapp.home}" description="Path to where application will be deployed" />
+  <property name="deployLibDir" value="${webapp.home}/WEB-INF/lib"/>
 
   <property name="confDir" location="conf" description="Dir where configuration files are located" />
 
@@ -35,9 +34,12 @@
   </path>
 
   <target name="init" description="Creates and set up the initial dir structure and sets up environment.">
+    <property name="timeStamp"  value="dist"/>
+<!--
     <tstamp>
       <format property="timeStamp" pattern="d-MMM-yyy_hh-mm" locale="en"/>
     </tstamp>
+-->
     <mkdir dir="${buildDir}" description="Directory where Java classes are compiled"/>
     <mkdir dir="${deployDir}"/>
     <mkdir dir="${deployDir}/downloads"/>
@@ -54,14 +56,6 @@
     <mkdir dir="${deployDir}/tutorials"/>
     <mkdir dir="${deployDir}/kml"/>
 
-    <!-- Used only for JSP Compiler -->
-    <!--
-    <mkdir dir="${buildDir}/jspc"/>
-    <mkdir dir="${buildDir}/jspc/ro"/>
-    <mkdir dir="${buildDir}/jspc/ro/finsiel"/>
-    <mkdir dir="${buildDir}/jspc/ro/finsiel/eunis"/>
-    <mkdir dir="${buildDir}/jspc/ro/finsiel/eunis/servlet"/>
-    -->
   </target>
 
   <target name="compile" depends="init" description="Compile Java classes and build JAR files">
@@ -126,48 +120,6 @@
     </jar>
   </target>
 
-  <target name="compile-jsp" depends="init, compile" description="Compile the JSP files in servlet, generate XML additional descriptor">
-    <!-- Compile the JSPs in servlets -->
-    <!--    <taskdef classname="org.apache.jasper.JspC" name="jasper2">
-    <classpath>
-    <pathelement location="${java.home}/lib/tools.jar"/>
-    <fileset dir="${tomcat}/server/lib">
-    <include name="*.jar"/>
-    </fileset>
-    <fileset dir="${tomcat}/common/lib">
-    <include name="*.jar"/>
-    </fileset>
-    <path refid="app_classpath"/>
-    </classpath>
-    </taskdef>
-    <jasper2 verbose="0"
-    package="ro.finsiel.eunis.servlet"
-    uriroot="${srcDir}"
-    webXmlFragment="${distDir}/WEB-INF/generated_web.xml"
-    outputDir="${buildDir}/jspc/ro/finsiel/eunis/servlet" />
-    <javac srcdir="${buildDir}/jspc" nowarn="true" deprecation="false" debug="true" destdir="${buildDir}/jspc">
-    <classpath>
-    <pathelement location="${java.home}/lib/tools.jar"/>
-    <fileset dir="${tomcat}/server/lib">
-    <include name="*.jar"/>
-    </fileset>
-    <fileset dir="${tomcat}/common/lib">
-    <include name="*.jar"/>
-    </fileset>
-    <fileset dir="${distDir}/WEB-INF/lib">
-    <include name="*.jar"/>
-    </fileset>
-    <path refid="app_classpath"/>
-    </classpath>
-    </javac>
-    <jar jarfile="${distDir}/WEB-INF/lib/jsp-servlets.jar">
-    <fileset dir="${buildDir}/jspc">
-    <include name="**/*.class"/>
-    </fileset>
-    </jar>
-    -->
-  </target>
-
   <!-- Deploy the dist directory into Tomcat -->
   <target name="deploy" depends="compile" description="Deploy the application">
     <!-- Copy the JSP files -->
@@ -218,11 +170,11 @@
       <fileset dir="${srcDir}/gis"/>
     </copy>
 
-    <copy tofile="${deployDir}/WEB-INF/classes/jrf.properties.${timeStamp}" file="3rdparty/conf/jrf.properties"/>
+    <copy tofile="${deployDir}/WEB-INF/classes/jrf.properties.${timeStamp}" file="3rdparty/conf/jrf.properties" overwrite="true"/>
     <copy tofile="${deployDir}/WEB-INF/classes/new_texts.txt" file="3rdparty/new_texts.txt"/>
-    <copy tofile="${deployDir}/WEB-INF/classes/log4j.properties.${timeStamp}" file="3rdparty/conf/log4j.properties"/>
+    <copy tofile="${deployDir}/WEB-INF/classes/log4j.properties.${timeStamp}" file="3rdparty/conf/log4j.properties" overwrite="true"/>
     <copy tofile="${deployDir}/WEB-INF/classes/eionetdir.properties" file="3rdparty/conf/eionetdir.properties"/>
-    <copy file="${confDir}/web.xml" tofile="${deployDir}/WEB-INF/web.xml.${timeStamp}"/>
+    <copy file="${confDir}/web.xml" tofile="${deployDir}/WEB-INF/web.xml.${timeStamp}" overwrite="true"/>
 
     <!--<copy tofile="${deployDir}/WEB-INF/classes/jrf.properties" file="3rdparty/conf/jrf.properties"/>-->
     <!--<copy tofile="${deployDir}/WEB-INF/classes/log4j.properties" file="3rdparty/conf/log4j.properties"/>-->
@@ -241,7 +193,7 @@
     <echo message="${deployDir}/WEB-INF/web.xml"/>
     <echo message="You must manually merge old settings to new config files and replace old files."/>
     <echo message="This step is MANDATORY. New files might include new parameters needed by application."/>
-    <echo message="New files are timestamped with prefix: .${timeStamp}."/>
+    <echo message="New files are marked with suffix: .${timeStamp}."/>
     <echo message="*************************** IMPORTANT! Please READ *******************************"/>
   </target>
 

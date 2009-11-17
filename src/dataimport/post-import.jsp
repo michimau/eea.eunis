@@ -68,55 +68,57 @@
 	                The purpose of this page is to run database scripts after import!
 	                </p>
 	                <form name="eunis" method="post" action="<%=domainName%>/postimport">
+				<fieldset><legend>Scripts</legend>
 	                	<table border="0">
 		                	<tr>
-		                		<td><input type="checkbox" name="sites"/></td>
-		                		<td>
+		                		<td><input type="checkbox" id="sites" name="sites"/></td>
+		                		<td><label for="sites">
 		                			Replace NULL values in decimal degrees (table: chm62edt_sites)
-								</td>
+								</label></td>
 							</tr>
 							<tr>
-			                	<td><input type="checkbox" name="empty_digir"/></td>
-			                	<td>Empty digir table</td>
+			                	<td><input type="checkbox" id="empty_digir" name="empty_digir"/></td>
+			                	<td><label for="empty_digir">Empty digir table</label></td>
 			                </tr>
 							<tr>
-			                	<td><input type="checkbox" name="digir"/></td>
-			                	<td>Generate digir table<br/>
-			                		<i>May take a long time to complete. It is recommended to also check "Run scripts in background" option</i>
-			                	</td>
+			                	<td><input type="checkbox" id="digir" name="digir"/></td>
+			                	<td><label for="digir">Generate digir table<br/>
+			                		<em>May take a long time to complete. It is recommended to also check "Run scripts in background" option</em>
+			                	</label></td>
 			                </tr>
 			                <tr>
-			                	<td><input type="checkbox" name="statistics"/></td>
-			                	<td>Generate digir statistics</td>
+			                	<td><input type="checkbox" id="statistics" name="statistics"/></td>
+			                	<td><label for="statistics">Generate digir statistics</label></td>
 			                </tr>
 			                <tr>
-			                	<td><input type="checkbox" name="spiecesTab"/></td>
-			                	<td>Generate species tab information<br/>
-			                		<i>May take a long time to complete. It is recommended to also check "Run scripts in background" option</i>
-			                	</td>
+			                	<td><input type="checkbox" id="speciesTab" name="spiecesTab"/></td>
+			                	<td><label for="speciesTab">Generate species tab information<br/>
+			                		<em>May take a long time to complete. It is recommended to also check "Run scripts in background" option</em>
+			                	</label></td>
 			                </tr>
 			                <tr>
-			                	<td><input type="checkbox" name="habitatsTab"/></td>
-			                	<td>Generate habitats tab information</td>
+			                	<td><input type="checkbox" id="habitatsTab" name="habitatsTab"/></td>
+			                	<td><label for="habitatsTab">Generate habitats tab information</label></td>
 			                </tr>
 			                <tr>
-			                	<td><input type="checkbox" name="sitesTab"/></td>
-			                	<td>Generate sites tab information<br/>
-			                		<i>May take a long time to complete. It is recommended to also check "Run scripts in background" option</i>
-			                	</td>
+			                	<td><input type="checkbox" id="sitesTab" name="sitesTab"/></td>
+			                	<td><label for="sitesTab">Generate sites tab information<br/>
+			                		<em>May take a long time to complete. It is recommended to also check "Run scripts in background" option</em>
+			                	</label></td>
 			                </tr>
+		                </table>
+				</fieldset>
+				<fieldset><legend>Fore-/background</legend>
+	                	<table border="0">
 			                <tr>
-			                	<td height="10"></td>
-			                	<td></td>
-			                </tr>
-			                <tr>
-			                	<td><input type="checkbox" name="runBackground"/></td>
-			                	<td>Run scripts in background</td>
+			                	<td><input type="checkbox" id="runBackground" name="runBackground"/></td>
+			                	<td><label for="runBackground">Run scripts in background</label></td>
 			                </tr>
 			                <tr>
 			                	<td align="right" colspan="2"><input type="submit" name="btn" value="Run"/></td>
 			                </tr>
 		                </table>
+				</fieldset>
 		            </form>
 		            <%
 		            List<String> errors = (List<String>)request.getSession().getAttribute("errors");

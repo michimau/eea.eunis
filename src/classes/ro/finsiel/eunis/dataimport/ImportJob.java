@@ -1,7 +1,6 @@
 package ro.finsiel.eunis.dataimport;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -12,7 +11,6 @@ import org.quartz.JobExecutionException;
 import org.xml.sax.SAXException;
 
 import ro.finsiel.eunis.utilities.SQLUtilities;
-import ro.finsiel.eunis.utilities.TableColumns;
 
 public class ImportJob implements Job {
 	
@@ -37,8 +35,17 @@ public class ImportJob implements Job {
 		String table = dataMap.getString("table");
 		boolean emptyTable = dataMap.getBoolean("emptyTable");
 		try {
-			if(emptyTable)
-	    		sql.ExecuteDelete(table, null);
+			if(emptyTable){
+    			if(table != null && table.equals("natura2000")){
+    				sql.ExecuteDelete("chm62edt_sites", "SOURCE_DB='NATURA2000'");
+    			} else {
+    				sql.ExecuteDelete(table, null);
+    			}
+    		}
+			
+			if(table != null && table.equals("natura2000")){
+    			table = "chm62edt_sites";
+    		}
 			
 			ImportParser iparser = new ImportParser();
         	iparser.execute(tmpDir + "importXmlFile", table, sqlDrv, sqlUsr, sqlPwd, sqlUrl);

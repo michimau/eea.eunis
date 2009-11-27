@@ -74,6 +74,7 @@
 		                		<td>
 					                <select id="table" name="table" title="Table names">
 					                	<option value=""></option>
+					                	<option value="natura2000">== Natura 2000 sites ==</option>
 					                <%
 					                	String SQL_DRV = application.getInitParameter("JDBC_DRV");
 					                    String SQL_URL = application.getInitParameter("JDBC_URL");

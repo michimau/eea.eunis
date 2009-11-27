@@ -140,8 +140,17 @@ public class DataImporter extends HttpServlet {
 		                	} else {
 		                		SQLUtilities sql = new SQLUtilities();
 			                	sql.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-		                		if(emptyTable)
-			                		sql.ExecuteDelete(table, null);
+		                		if(emptyTable){
+		                			if(table != null && table.equals("natura2000")){
+		                				sql.ExecuteDelete("chm62edt_sites", "SOURCE_DB='NATURA2000'");
+		                			} else {
+		                				sql.ExecuteDelete(table, null);
+		                			}
+		                		}
+		                		
+		                		if(table != null && table.equals("natura2000")){
+		                			table = "chm62edt_sites";
+		                		}		                		
 		                		
 			                	ImportParser iparser = new ImportParser();
 			                	iparser.execute(TEMP_DIR + "importXmlFile", table, SQL_DRV, SQL_USR, SQL_PWD, SQL_URL);

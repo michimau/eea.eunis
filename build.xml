@@ -10,8 +10,10 @@
          message="Mandatory webapp.home property is missing in build.properties file."/>
 
   <property name="3rdpartyDir" value="3rdparty" description="3rd party libraries dir" />
-  <property name="srcDir" value="src" description="Source directory" />
-  <property name="kmlDir" value="src/kml" description="Google Earth files directory" />
+  <property name="srcDir" value="src/main/java" description="Source directory" />
+  <property name="webappDir" value="src/main/webapp" description="Webapp directory" />
+  <property name="resourceDir" value="src/main/resources" description="Resource directory" />
+  <property name="kmlDir" value="src/main/webapp/kml" description="Google Earth files directory" />
   <property name="classesSrcDir" value="src/classes" description="Java classes dir" />
 
   <property name="buildDir" value= "build"/>
@@ -62,18 +64,7 @@
     <javac srcdir="${classesSrcDir}" nowarn="true" deprecation="false" debug="true" destdir="${buildDir}">
       <classpath refid="app_classpath" />
     </javac>
-    <!-- Build the jrf.jar from sources -->
-    <jar jarfile="${deployLibDir}/jrf.jar">
-      <fileset dir="${buildDir}">
-        <include name="net/**/*.class"/>
-      </fileset>
-    </jar>
-    <jar jarfile="${deployLibDir}/jrf-extras.jar">
-      <fileset dir="${buildDir}">
-        <include name="org/exolab/javasource/**/*.class"/>
-        <include name="org/vmguys/**/*.class"/>
-      </fileset>
-    </jar>
+      
     <jar jarfile="${deployLibDir}/eunis-web.jar">
       <fileset dir="${buildDir}">
         <include name="ro/finsiel/eunis/admin/**/*.class"/>
@@ -132,13 +123,13 @@
     </copy>
     <!-- Copy CSS files -->
     <copy todir="${deployDir}/css">
-      <fileset dir="${srcDir}/css">
+      <fileset dir="${webappDir}/css">
         <include name="**/*.css"/>
       </fileset>
     </copy>
     <!-- Copy images -->
     <copy todir="${deployDir}/images">
-      <fileset dir="${srcDir}/images">
+      <fileset dir="${webappDir}/images">
         <include name="**/*.jpg"/>
         <include name="**/*.JPG"/>
         <include name="**/*.gif"/>
@@ -147,7 +138,7 @@
     </copy>
     <!-- Copy JavaScript files -->
     <copy todir="${deployDir}/script">
-      <fileset dir="${srcDir}/script"/>
+      <fileset dir="${webappDir}/script"/>
     </copy>
     <!-- Copy Google Earth files -->
     <copy todir="${deployDir}/kml">
@@ -155,7 +146,7 @@
     </copy>
     <!-- Copy tutorial files -->
     <copy todir="${deployDir}/tutorials">
-      <fileset dir="${srcDir}/tutorials">
+      <fileset dir="${webappDir}/tutorials">
         <include name="**/*.swf"/>
       </fileset>
     </copy>
@@ -167,14 +158,14 @@
       </fileset>
     </copy>
     <copy todir="${deployDir}/gis">
-      <fileset dir="${srcDir}/gis"/>
+      <fileset dir="${webappDir}/gis"/>
     </copy>
 
-    <copy tofile="${deployDir}/WEB-INF/classes/jrf.properties.${timeStamp}" file="3rdparty/conf/jrf.properties" overwrite="true"/>
+    <copy tofile="${deployDir}/WEB-INF/classes/jrf.properties.${timeStamp}" file="${resourceDir}/jrf.properties" overwrite="true"/>
     <copy tofile="${deployDir}/WEB-INF/classes/new_texts.txt" file="3rdparty/new_texts.txt"/>
-    <copy tofile="${deployDir}/WEB-INF/classes/log4j.properties.${timeStamp}" file="3rdparty/conf/log4j.properties" overwrite="true"/>
-    <copy tofile="${deployDir}/WEB-INF/classes/eionetdir.properties" file="3rdparty/conf/eionetdir.properties"/>
-    <copy file="${confDir}/web.xml" tofile="${deployDir}/WEB-INF/web.xml.${timeStamp}" overwrite="true"/>
+    <copy tofile="${deployDir}/WEB-INF/classes/log4j.properties.${timeStamp}" file="${resourceDir}/log4j.properties" overwrite="true"/>
+    <copy tofile="${deployDir}/WEB-INF/classes/eionetdir.properties" file="${resourceDir}/eionetdir.properties"/>
+    <copy file="${webappDir}/WEB-INF/web.xml" tofile="${deployDir}/WEB-INF/web.xml.${timeStamp}" overwrite="true"/>
 
     <!--<copy tofile="${deployDir}/WEB-INF/classes/jrf.properties" file="3rdparty/conf/jrf.properties"/>-->
     <!--<copy tofile="${deployDir}/WEB-INF/classes/log4j.properties" file="3rdparty/conf/log4j.properties"/>-->

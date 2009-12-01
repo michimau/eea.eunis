@@ -6,18 +6,20 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.jrfTables.sites.coordinates.CoordinatesPersist,
                  ro.finsiel.eunis.jrfTables.sites.coordinates.CoordinatesDomain,
                  java.util.List,
-                 ro.finsiel.eunis.search.sites.coordinates.CoordinatesPaginator,,java.util.ArrayList"%>
+                 ro.finsiel.eunis.search.sites.coordinates.CoordinatesPaginator,
+                 ro.finsiel.eunis.WebContentManagement,
+                 java.util.ArrayList"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.coordinates.CoordinatesBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	boolean[] source =
+  boolean[] source =
   {
     formBean.getDB_NATURA2000() != null,
     formBean.getDB_CORINE() != null,
@@ -61,7 +63,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
       <%=cm.cms("sites_coordinates-map_title")%>

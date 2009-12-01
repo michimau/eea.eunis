@@ -6,12 +6,12 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%><%@ page import="ro.finsiel.eunis.search.Utilities"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	String domainPrefix = Utilities.formatString( application.getInitParameter( "DOMAIN_NAME" ), "http://eunis.eea.europa.eu" );
+  String domainPrefix = Utilities.formatString( application.getInitParameter( "DOMAIN_NAME" ), "http://eunis.eea.europa.eu" );
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,services#services.jsp,logos_location";
 %>
@@ -20,7 +20,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>

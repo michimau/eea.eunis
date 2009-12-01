@@ -6,9 +6,10 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.search.Utilities,"%>
+<%@ page import="ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.WebContentManagement"%>
 <%@ page import="java.util.List"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.WebContentPersist"%>
 <%@ page import="java.text.SimpleDateFormat"%>
@@ -18,7 +19,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	//Utilities.dumpRequestParams( request );
+  //Utilities.dumpRequestParams( request );
   String language = Utilities.formatString( request.getParameter( "language"), SessionManager.getCurrentLanguage() );
   String idPage = Utilities.formatString( request.getParameter( "idPage" ) );
   String type = Utilities.formatString( request.getParameter( "type" ), "msg" );
@@ -32,7 +33,7 @@
   <head>
   <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent( language );
+  WebContentManagement cm = SessionManager.getWebContent( language );
 %>
     <title>
       <%=cm.cms("web_content_editor")%>

@@ -6,18 +6,19 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@page import="java.util.List,
                 ro.finsiel.eunis.search.Utilities,
                 ro.finsiel.eunis.jrfTables.sites.habitats.HabitatDomain,
-                ro.finsiel.eunis.search.sites.habitats.HabitatSearchCriteria,"%>
+                ro.finsiel.eunis.search.sites.habitats.HabitatSearchCriteria,
+                ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.habitats.HabitatBean" scope="request">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
+  Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
   Integer database = Utilities.checkedStringToInt(formBean.getDatabase(), HabitatDomain.SEARCH_EUNIS);
   Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), HabitatSearchCriteria.SEARCH_NAME);
 //    boolean[] source_db = {
@@ -44,7 +45,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
       <%=cm.cms("list_of_values")%>

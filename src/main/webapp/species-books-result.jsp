@@ -6,15 +6,21 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="java.util.*,,ro.finsiel.eunis.search.species.references.ReferencesSearchCriteria,ro.finsiel.eunis.search.species.references.ReferencesPaginator,ro.finsiel.eunis.search.species.references.ReferencesSortCriteria,ro.finsiel.eunis.jrfTables.species.references.*,ro.finsiel.eunis.search.*" %>
+<%@ page import="java.util.*,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.species.references.ReferencesSearchCriteria,
+                 ro.finsiel.eunis.search.species.references.ReferencesPaginator,
+                 ro.finsiel.eunis.search.species.references.ReferencesSortCriteria,
+                 ro.finsiel.eunis.jrfTables.species.references.*,
+                 ro.finsiel.eunis.search.*" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.references.ReferencesBean" scope="request">
     <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	// Prepare the search in results (fix)
+  // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) {
       formBean.prepareFilterCriterias();
   }

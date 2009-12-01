@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@page import="java.util.*,
                 com.lowagie.text.*,
@@ -17,7 +17,8 @@
                 ro.finsiel.eunis.factsheet.sites.SiteFactsheet,
                 ro.finsiel.eunis.search.Utilities,
                 java.text.SimpleDateFormat,
-                com.lowagie.text.FontFactory,"%><%@ page import="ro.finsiel.eunis.factsheet.PDFSitesFactsheet"%><%@ page import="ro.finsiel.eunis.reports.pdfReport"%>
+                com.lowagie.text.FontFactory,
+                ro.finsiel.eunis.WebContentManagement"%><%@ page import="ro.finsiel.eunis.factsheet.PDFSitesFactsheet"%><%@ page import="ro.finsiel.eunis.reports.pdfReport"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -25,7 +26,7 @@
     <jsp:include page="header-page.jsp" />
     <script language="JavaScript" type="text/javascript" src="script/timer.js"></script>
 <%
-	pdfReport report = new pdfReport();
+  pdfReport report = new pdfReport();
   // Web content manager used in this page.
   WebContentManagement cm = SessionManager.getWebContent();
   String temp_dir = application.getInitParameter( "TEMP_DIR" );

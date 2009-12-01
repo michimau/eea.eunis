@@ -5,16 +5,17 @@
   - Description : 'Sites related to a site' - part of site's factsheet
 --%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.factsheet.sites.SiteFactsheet,
                  java.util.List,
                  ro.finsiel.eunis.jrfTables.sites.factsheet.SiteRelationsPersist,
-                 ro.finsiel.eunis.search.Utilities,"%>
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%-- Relation with other sites --%>
 <%
-	String siteid = request.getParameter("idsite");
+  String siteid = request.getParameter("idsite");
   SiteFactsheet factsheet = new SiteFactsheet(siteid);
   WebContentManagement cm = SessionManager.getWebContent();
   // Relation with other sites

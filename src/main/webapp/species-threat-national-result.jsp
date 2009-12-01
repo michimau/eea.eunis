@@ -6,15 +6,24 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="java.util.*,,ro.finsiel.eunis.search.species.national.*,ro.finsiel.eunis.search.species.SpeciesSearchUtility,ro.finsiel.eunis.search.*,ro.finsiel.eunis.jrfTables.species.national.NationalThreatStatusDomain,ro.finsiel.eunis.jrfTables.species.national.NationalThreatStatusPersist,ro.finsiel.eunis.search.species.VernacularNameWrapper,ro.finsiel.eunis.search.save_criteria.SetVectorsForSaveCriteria,ro.finsiel.eunis.search.save_criteria.SaveSearchCriteria"%>
+<%@ page import="java.util.*,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.species.national.*,
+                 ro.finsiel.eunis.search.species.SpeciesSearchUtility,
+                 ro.finsiel.eunis.search.*,
+                 ro.finsiel.eunis.jrfTables.species.national.NationalThreatStatusDomain,
+                 ro.finsiel.eunis.jrfTables.species.national.NationalThreatStatusPersist,
+                 ro.finsiel.eunis.search.species.VernacularNameWrapper,
+                 ro.finsiel.eunis.search.save_criteria.SetVectorsForSaveCriteria,
+                 ro.finsiel.eunis.search.save_criteria.SaveSearchCriteria"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.national.NationalBean" scope="request">
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-	String idGroup = (formBean.getIdGroup() == null ? "" : formBean.getIdGroup());
+  String idGroup = (formBean.getIdGroup() == null ? "" : formBean.getIdGroup());
   // If user has right to save this search and he want to save it
   if (SessionManager.isAuthenticated() &&
       SessionManager.isSave_search_criteria_RIGHT() &&

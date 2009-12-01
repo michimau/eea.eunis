@@ -6,16 +6,17 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.search.Utilities,
-                 java.sql.*,"%>
+                 java.sql.*,
+                 ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="FormBean" class="ro.finsiel.eunis.formBeans.SpeciesFactSheetBean" scope="page">
   <jsp:setProperty name="FormBean" property="*"/>
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   String idSpecies = request.getParameter("idSpecies");
    // Set SQL string
   String sql="";

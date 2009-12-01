@@ -6,12 +6,12 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%><%@ page import="ro.finsiel.eunis.search.Utilities"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	String sites = Utilities.formatString( request.getParameter( "sites" ), "" );
+  String sites = Utilities.formatString( request.getParameter( "sites" ), "" );
   if ( sites.equalsIgnoreCase( "") )
   {
     sites = "none";
@@ -22,7 +22,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
       <%=cm.cms("gis_tool_interactive_maps")%>

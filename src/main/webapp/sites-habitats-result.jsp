@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.sites.habitats.HabitatPaginator,
@@ -15,14 +15,17 @@
                  ro.finsiel.eunis.search.sites.SitesSearchUtility,
                  ro.finsiel.eunis.search.sites.habitats.HabitatBean,
                  ro.finsiel.eunis.search.sites.habitats.HabitatSearchCriteria,
-                 ro.finsiel.eunis.search.sites.habitats.HabitatSortCriteria,,ro.finsiel.eunis.search.*,ro.finsiel.eunis.utilities.SQLUtilities"%>
+                 ro.finsiel.eunis.search.sites.habitats.HabitatSortCriteria,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.*,
+                 ro.finsiel.eunis.utilities.SQLUtilities"%>
 <%@ page import="ro.finsiel.eunis.utilities.Accesibility"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.habitats.HabitatBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	// Prepare the search in results (fix)
+  // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
    // Check columns to be displayed
   boolean showSourceDB = Utilities.checkedStringToBoolean(formBean.getShowSourceDB(), HabitatBean.HIDE);

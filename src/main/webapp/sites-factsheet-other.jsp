@@ -6,17 +6,19 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.factsheet.sites.SiteFactsheet,
                  java.util.List,
                  ro.finsiel.eunis.jrfTables.sites.factsheet.HumanActivityPersist,
                  ro.finsiel.eunis.search.Utilities,
-                 ro.finsiel.eunis.jrfTables.sites.factsheet.HumanActivityAttributesPersist,,ro.finsiel.eunis.utilities.SQLUtilities"%>
+                 ro.finsiel.eunis.jrfTables.sites.factsheet.HumanActivityAttributesPersist,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.utilities.SQLUtilities"%>
 <%-- Human activity --%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   try
   {
   String siteid = request.getParameter("idsite");

@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.Utilities,
@@ -18,13 +18,15 @@
                  ro.finsiel.eunis.search.sites.SitesSearchUtility,
                  ro.finsiel.eunis.search.sites.designations.DesignationsBean,
                  ro.finsiel.eunis.search.sites.designations.DesignationsSearchCriteria,
-                 ro.finsiel.eunis.search.sites.designations.DesignationsSortCriteria,,ro.finsiel.eunis.search.AbstractSearchCriteria"%>
+                 ro.finsiel.eunis.search.sites.designations.DesignationsSortCriteria,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.AbstractSearchCriteria"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.designations.DesignationsBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	// Prepare the search in results (fix)
+  // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
   // Check columns to be displayed
   boolean showSourceDB = Utilities.checkedStringToBoolean(formBean.getShowSourceDB(), DesignationsBean.HIDE);

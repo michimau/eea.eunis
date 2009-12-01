@@ -6,17 +6,24 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
-                 ro.finsiel.eunis.search.AbstractPaginator,,ro.finsiel.eunis.search.sites.SitesSearchUtility,ro.finsiel.eunis.search.sites.advanced.DictionaryPaginator,ro.finsiel.eunis.jrfTables.sites.advanced.DictionaryDomain,ro.finsiel.eunis.search.AbstractSortCriteria,ro.finsiel.eunis.search.advanced.AdvancedSortCriteria,ro.finsiel.eunis.search.Utilities"%>
+                 ro.finsiel.eunis.search.AbstractPaginator,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.sites.SitesSearchUtility,
+                 ro.finsiel.eunis.search.sites.advanced.DictionaryPaginator,
+                 ro.finsiel.eunis.jrfTables.sites.advanced.DictionaryDomain,
+                 ro.finsiel.eunis.search.AbstractSortCriteria,
+                 ro.finsiel.eunis.search.advanced.AdvancedSortCriteria,
+                 ro.finsiel.eunis.search.Utilities"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.formBeans.CombinedSearchBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   AbstractPaginator paginator;
   //String searchedDatabase = formBean.getSearchedNatureObject();
   String searchedDatabase = "Sites";

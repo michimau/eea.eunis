@@ -12,10 +12,10 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%
-	//Utilities.dumpRequestParams( request );
+  //Utilities.dumpRequestParams( request );
   String op = Utilities.formatString( request.getParameter( "operation"), "" );
   String email = Utilities.formatString( request.getParameter( "email"), "" );
   String csvfilename = Utilities.formatString( request.getParameter( "tsvfilename"), "" );
@@ -42,7 +42,7 @@
 %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -55,7 +55,7 @@
   <body>
     <img alt="In progress" src="../images/progress/top.jpg" width="400" height="178" />
 <%
-	if ( op.equalsIgnoreCase( "email" ) )
+  if ( op.equalsIgnoreCase( "email" ) )
   {
     SessionManager.setCacheReportEmailAddress( email );
     SendMail.sendMail(

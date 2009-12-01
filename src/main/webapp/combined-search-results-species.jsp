@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.AbstractPaginator,
@@ -17,7 +17,9 @@
                  ro.finsiel.eunis.jrfTables.combined.SpeciesCombinedDomain,
                  ro.finsiel.eunis.jrfTables.combined.SpeciesCombinedPersist,
                  ro.finsiel.eunis.search.Utilities,
-                 ro.finsiel.eunis.search.advanced.AdvancedSortCriteria,,ro.finsiel.eunis.search.AbstractSortCriteria" %>
+                 ro.finsiel.eunis.search.advanced.AdvancedSortCriteria,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.AbstractSortCriteria" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -28,9 +30,9 @@
   <jsp:include page="header-page.jsp" />
   <script language="JavaScript" src="script/species-result.js" type="text/javascript"></script>
   <%
-  	WebContentManagement cm = SessionManager.getWebContent();
-      String eeaHome = application.getInitParameter( "EEA_HOME" );
-      String btrail = "eea#" + eeaHome + ",home#index.jsp,combined_search#combined-search.jsp,results";
+    WebContentManagement cm = SessionManager.getWebContent();
+    String eeaHome = application.getInitParameter( "EEA_HOME" );
+    String btrail = "eea#" + eeaHome + ",home#index.jsp,combined_search#combined-search.jsp,results";
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>

@@ -6,9 +6,25 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="java.util.List,,java.util.Iterator,java.util.Vector,ro.finsiel.eunis.search.species.SpeciesSearchUtility,ro.finsiel.eunis.search.species.VernacularNameWrapper,net.sf.jrf.domain.PersistentObject,ro.finsiel.eunis.search.species.country.CountryPaginator,ro.finsiel.eunis.jrfTables.species.country.CountryRegionDomain,ro.finsiel.eunis.jrfTables.species.country.RegionDomain,ro.finsiel.eunis.jrfTables.species.country.CountryDomain,ro.finsiel.eunis.jrfTables.species.country.CountryRegionPersist,ro.finsiel.eunis.jrfTables.species.country.RegionPersist,ro.finsiel.eunis.jrfTables.species.country.CountryPersist,ro.finsiel.eunis.search.*,ro.finsiel.eunis.search.save_criteria.SaveSearchCriteria,ro.finsiel.eunis.search.save_criteria.SetVectorsForSaveCriteria"%>
+<%@ page import="java.util.List,
+                 ro.finsiel.eunis.WebContentManagement,
+                 java.util.Iterator,
+                 java.util.Vector,
+                 ro.finsiel.eunis.search.species.SpeciesSearchUtility,
+                 ro.finsiel.eunis.search.species.VernacularNameWrapper,
+                 net.sf.jrf.domain.PersistentObject,
+                 ro.finsiel.eunis.search.species.country.CountryPaginator,
+                 ro.finsiel.eunis.jrfTables.species.country.CountryRegionDomain,
+                 ro.finsiel.eunis.jrfTables.species.country.RegionDomain,
+                 ro.finsiel.eunis.jrfTables.species.country.CountryDomain,
+                 ro.finsiel.eunis.jrfTables.species.country.CountryRegionPersist,
+                 ro.finsiel.eunis.jrfTables.species.country.RegionPersist,
+                 ro.finsiel.eunis.jrfTables.species.country.CountryPersist,
+                 ro.finsiel.eunis.search.*,
+                 ro.finsiel.eunis.search.save_criteria.SaveSearchCriteria,
+                 ro.finsiel.eunis.search.save_criteria.SetVectorsForSaveCriteria"%>
 <%@ page import="ro.finsiel.eunis.search.species.country.CountrySearchCriteria"%>
 <%@ page import="ro.finsiel.eunis.search.species.country.CountrySortCriteria"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
@@ -16,7 +32,7 @@
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   // If user has right to save this search and he want to save it
   if (SessionManager.isAuthenticated() &&
       SessionManager.isSave_search_criteria_RIGHT() &&

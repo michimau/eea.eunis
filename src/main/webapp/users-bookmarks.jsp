@@ -6,13 +6,17 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.search.Utilities,,ro.finsiel.eunis.utilities.SQLUtilities,java.util.List,ro.finsiel.eunis.utilities.TableColumns"%>
+<%@ page import="ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.utilities.SQLUtilities,
+                 java.util.List,
+                 ro.finsiel.eunis.utilities.TableColumns"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	String SQL_DRV = application.getInitParameter("JDBC_DRV");
+  String SQL_DRV = application.getInitParameter("JDBC_DRV");
   String SQL_URL = application.getInitParameter("JDBC_URL");
   String SQL_USR = application.getInitParameter("JDBC_USR");
   String SQL_PWD = application.getInitParameter("JDBC_PWD");
@@ -27,7 +31,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
         <%=application.getInitParameter("PAGE_TITLE")%>

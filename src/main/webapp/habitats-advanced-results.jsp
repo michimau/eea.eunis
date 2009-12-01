@@ -6,9 +6,16 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.jrfTables.habitats.advanced.DictionaryDomain,ro.finsiel.eunis.search.AbstractPaginator,ro.finsiel.eunis.search.AbstractSortCriteria,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.advanced.AdvancedSortCriteria,ro.finsiel.eunis.search.habitats.advanced.DictionaryPaginator,java.util.Iterator" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.jrfTables.habitats.advanced.DictionaryDomain,
+                 ro.finsiel.eunis.search.AbstractPaginator,
+                 ro.finsiel.eunis.search.AbstractSortCriteria,
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.search.advanced.AdvancedSortCriteria,
+                 ro.finsiel.eunis.search.habitats.advanced.DictionaryPaginator,
+                 java.util.Iterator" %>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Vector"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
@@ -16,7 +23,7 @@
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   AbstractPaginator paginator;
   // Database where to search. Possible values are: Species, Habitats or Sites
   //String searchedDatabase = formBean.getSearchedNatureObject();

@@ -6,9 +6,17 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.jrfTables.Chm62edtClassCodePersist,ro.finsiel.eunis.jrfTables.Chm62edtHabitatPersist,ro.finsiel.eunis.search.AbstractSortCriteria,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.habitats.HabitatsSearchUtility,ro.finsiel.eunis.search.habitats.legal.LegalSortCriteria,java.util.Iterator,java.util.Vector" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.jrfTables.Chm62edtClassCodePersist,
+                 ro.finsiel.eunis.jrfTables.Chm62edtHabitatPersist,
+                 ro.finsiel.eunis.search.AbstractSortCriteria,
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.search.habitats.HabitatsSearchUtility,
+                 ro.finsiel.eunis.search.habitats.legal.LegalSortCriteria,
+                 java.util.Iterator,
+                 java.util.Vector" %>
 
 <jsp:useBean id="HabitatDomain" class="ro.finsiel.eunis.jrfTables.Chm62edtHabitatDomain" scope="page" />
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
@@ -19,9 +27,9 @@
   <script language="JavaScript" src="script/habitats-legal.js" type="text/javascript"></script>
   <script language="JavaScript" src="script/save-criteria.js" type="text/javascript"></script>
   <%
-  	WebContentManagement cm = SessionManager.getWebContent();
-      String eeaHome = application.getInitParameter( "EEA_HOME" );
-      String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,legal_instruments";
+    WebContentManagement cm = SessionManager.getWebContent();
+    String eeaHome = application.getInitParameter( "EEA_HOME" );
+    String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,legal_instruments";
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>

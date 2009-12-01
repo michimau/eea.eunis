@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.List,
                  ro.finsiel.eunis.jrfTables.users.RolesDomain,
@@ -22,7 +22,7 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 
 <%
-	// Web content manager used in this page.
+    // Web content manager used in this page.
       WebContentManagement cm = SessionManager.getWebContent();
 
 // If user is authentificated and has this right

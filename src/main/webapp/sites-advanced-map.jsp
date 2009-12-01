@@ -6,9 +6,11 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="java.util.List,,java.util.ArrayList"%>
+<%@ page import="java.util.List,
+                 ro.finsiel.eunis.WebContentManagement,
+                 java.util.ArrayList"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.sites.advanced.DictionaryDomain"%>
 <%@ page import="ro.finsiel.eunis.search.AbstractPaginator"%>
 <%@ page import="ro.finsiel.eunis.search.sites.advanced.DictionaryPaginator"%>
@@ -18,7 +20,7 @@
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	AbstractPaginator paginator = new DictionaryPaginator(new DictionaryDomain(request.getSession().getId()));
+  AbstractPaginator paginator = new DictionaryPaginator(new DictionaryDomain(request.getSession().getId()));
   List sites = new ArrayList();
   try
   {
@@ -47,7 +49,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
       <%=cm.cms("sites_advanced-map_title")%>

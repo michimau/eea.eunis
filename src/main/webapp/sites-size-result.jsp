@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.search.sites.size.SizeBean,
                  ro.finsiel.eunis.search.sites.size.SizePaginator,
@@ -15,13 +15,16 @@
                  ro.finsiel.eunis.search.sites.size.SizeSearchCriteria,
                  ro.finsiel.eunis.search.sites.size.SizeSortCriteria,
                  ro.finsiel.eunis.jrfTables.sites.size.SizePersist,
-                 ro.finsiel.eunis.search.sites.SitesSearchUtility,,java.util.Vector,ro.finsiel.eunis.search.*"%>
+                 ro.finsiel.eunis.search.sites.SitesSearchUtility,
+                 ro.finsiel.eunis.WebContentManagement,
+                 java.util.Vector,
+                 ro.finsiel.eunis.search.*"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.size.SizeBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	// Prepare the search in results (fix)
+  // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
   // Check columns to be displayed
   boolean showSourceDB = Utilities.checkedStringToBoolean(formBean.getShowSourceDB(), SizeBean.HIDE);

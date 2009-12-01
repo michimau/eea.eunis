@@ -6,20 +6,23 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.species.sites.*,
                  ro.finsiel.eunis.search.species.SpeciesSearchUtility,
                  ro.finsiel.eunis.search.*,
                  ro.finsiel.eunis.jrfTables.species.sites.SpeciesSitesDomain,
-                 ro.finsiel.eunis.jrfTables.species.sites.SpeciesSitesPersist,,ro.finsiel.eunis.search.species.VernacularNameWrapper,ro.finsiel.eunis.utilities.SQLUtilities"%>
+                 ro.finsiel.eunis.jrfTables.species.sites.SpeciesSitesPersist,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.species.VernacularNameWrapper,
+                 ro.finsiel.eunis.utilities.SQLUtilities"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.sites.SitesBean" scope="request">
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-	//      Utilities.dumpRequestParams(request);
+//      Utilities.dumpRequestParams(request);
   // Check columns to be displayed
   boolean showGroup = Utilities.checkedStringToBoolean(formBean.getShowGroup(), SitesBean.HIDE);
   boolean showOrder = Utilities.checkedStringToBoolean(formBean.getShowOrder(), SitesBean.HIDE);

@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
   // Request parameters
   // operation - if operation is feedback then save the request form data to database.
   String eeaHome = application.getInitParameter( "EEA_HOME" );
@@ -148,6 +148,7 @@
 	    }
     }
   }
+
 %>
 <%@ page import="java.util.Date,
                  java.sql.Connection,

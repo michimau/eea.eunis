@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.WebContentManagement" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
@@ -15,9 +15,9 @@
 <head>
   <jsp:include page="header-page.jsp" />
   <%
-  	WebContentManagement cm = SessionManager.getWebContent();
-      String eeaHome = application.getInitParameter( "EEA_HOME" );
-      String btrail = "eea#" + eeaHome + ",home#index.jsp,how_to_use_eunis_habitats_location";
+    WebContentManagement cm = SessionManager.getWebContent();
+    String eeaHome = application.getInitParameter( "EEA_HOME" );
+    String btrail = "eea#" + eeaHome + ",home#index.jsp,how_to_use_eunis_habitats_location";
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>

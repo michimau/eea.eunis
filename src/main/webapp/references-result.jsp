@@ -6,15 +6,21 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="java.util.*,,ro.finsiel.eunis.search.*,ro.finsiel.eunis.formBeans.ReferencesBean,ro.finsiel.eunis.jrfTables.*,ro.finsiel.eunis.formBeans.ReferencesSortCriteria,ro.finsiel.eunis.formBeans.ReferencesSearchCriteria"%><%@ page import="ro.finsiel.eunis.exceptions.CriteriaMissingException"%>
+<%@ page import="java.util.*,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.*,
+                 ro.finsiel.eunis.formBeans.ReferencesBean,
+                 ro.finsiel.eunis.jrfTables.*,
+                 ro.finsiel.eunis.formBeans.ReferencesSortCriteria,
+                 ro.finsiel.eunis.formBeans.ReferencesSearchCriteria"%><%@ page import="ro.finsiel.eunis.exceptions.CriteriaMissingException"%>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.formBeans.ReferencesBean" scope="request">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	// Set the database connection parameters
+  // Set the database connection parameters
   String SQL_DRV = application.getInitParameter("JDBC_DRV");
   String SQL_URL = application.getInitParameter("JDBC_URL");
   String SQL_USR = application.getInitParameter("JDBC_USR");

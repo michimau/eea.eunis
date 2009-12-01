@@ -11,12 +11,12 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.search.Utilities"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement, ro.finsiel.eunis.search.Utilities"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	int resultsCount = Utilities.checkedStringToInt( request.getParameter( "resultsCount" ), 1 );
+  int resultsCount = Utilities.checkedStringToInt( request.getParameter( "resultsCount" ), 1 );
   int maxSitesPerMap = Utilities.checkedStringToInt( application.getInitParameter( "MAX_SITES_PER_MAP" ), 2000 );
   if ( resultsCount > 0 && resultsCount < maxSitesPerMap )
   {

@@ -6,16 +6,25 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.jrfTables.habitats.code.CodeDomain,ro.finsiel.eunis.jrfTables.habitats.code.CodePersist,ro.finsiel.eunis.search.AbstractPaginator,ro.finsiel.eunis.search.AbstractSearchCriteria,ro.finsiel.eunis.search.AbstractSortCriteria,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.habitats.HabitatsSearchUtility,ro.finsiel.eunis.search.habitats.code.*,java.util.Iterator" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.jrfTables.habitats.code.CodeDomain,
+                 ro.finsiel.eunis.jrfTables.habitats.code.CodePersist,
+                 ro.finsiel.eunis.search.AbstractPaginator,
+                 ro.finsiel.eunis.search.AbstractSearchCriteria,
+                 ro.finsiel.eunis.search.AbstractSortCriteria,
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.search.habitats.HabitatsSearchUtility,
+                 ro.finsiel.eunis.search.habitats.code.*,
+                 java.util.Iterator" %>
 <%@ page import="java.util.List" %><%@ page import="java.util.Vector" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.code.CodeBean" scope="page">
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   if (null != formBean.getRemoveFilterIndex()) {
     formBean.prepareFilterCriterias();
   }
@@ -65,7 +74,7 @@
     {
       fromRefine = true;
     }
-%>
+ %>
   <jsp:forward page="emptyresults.jsp">
     <jsp:param name="location" value="<%=location%>" />
     <jsp:param name="fromRefine" value="<%=fromRefine%>" />

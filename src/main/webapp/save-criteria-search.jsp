@@ -6,23 +6,24 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@page import="java.util.Vector,
                 ro.finsiel.eunis.search.*,
                 ro.finsiel.eunis.search.save_criteria.GroupsFromRequest,
-                ro.finsiel.eunis.search.save_criteria.SaveSearchCriteria,"%>
+                ro.finsiel.eunis.search.save_criteria.SaveSearchCriteria,
+                ro.finsiel.eunis.WebContentManagement"%>
 <%@ page import="java.util.Enumeration"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%
-	request.setCharacterEncoding( "UTF-8" );
+  request.setCharacterEncoding( "UTF-8" );
 %>
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
       <%=cm.cmsPhrase("Save criteria")%>

@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.search.sites.SitesSearchUtility,
                  ro.finsiel.eunis.search.Utilities,
@@ -15,12 +15,13 @@
                  ro.finsiel.eunis.jrfTables.sites.factsheet.SitesDesignationsPersist,
                  ro.finsiel.eunis.jrfTables.sites.factsheet.RegionsCodesPersist,
                  ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesPersist,
-                 ro.finsiel.eunis.jrfTables.Chm62edtSitesPersist,"%>
+                 ro.finsiel.eunis.jrfTables.Chm62edtSitesPersist,
+                 ro.finsiel.eunis.WebContentManagement"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtDesignationsDomain"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	String siteid = request.getParameter("idsite");
+  String siteid = request.getParameter("idsite");
   int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
   SiteFactsheet factsheet = new SiteFactsheet(siteid);
   WebContentManagement cm = SessionManager.getWebContent();

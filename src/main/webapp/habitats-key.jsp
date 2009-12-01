@@ -6,13 +6,17 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.jrfTables.habitats.key.Chm62edtHabitatKeyNavigationPersist,ro.finsiel.eunis.jrfTables.habitats.key.QuestionPersist,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.habitats.key.KeyNavigation" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                ro.finsiel.eunis.jrfTables.habitats.key.Chm62edtHabitatKeyNavigationPersist,
+                ro.finsiel.eunis.jrfTables.habitats.key.QuestionPersist,
+                ro.finsiel.eunis.search.Utilities,
+                ro.finsiel.eunis.search.habitats.key.KeyNavigation" %>
 <%@ page import="java.util.List" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	// Request parameters
+  // Request parameters
   // idQuestionLink
   // level - It defaults to level 1
   // pageCode - see KeyNavigation.findQuestionAnswers for details
@@ -31,7 +35,7 @@
   <%-- Note: Include these three files this order. --%>
   <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
   <jsp:useBean id="formBean" class="ro.finsiel.eunis.formBeans.HabitatKeyBean" scope="request">
     <jsp:setProperty name="formBean" property="*" />

@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.species.names.NameSearchCriteria,
@@ -15,14 +15,18 @@
                  ro.finsiel.eunis.jrfTables.species.names.*,
                  ro.finsiel.eunis.search.species.VernacularNameWrapper,
                  ro.finsiel.eunis.search.species.SpeciesSearchUtility,
-                 ro.finsiel.eunis.search.*,,ro.finsiel.eunis.search.species.names.NameBean,ro.finsiel.eunis.jrfTables.Chm62edtSoundexPersist,ro.finsiel.eunis.jrfTables.Chm62edtSoundexDomain"%>
+                 ro.finsiel.eunis.search.*,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.species.names.NameBean,
+                 ro.finsiel.eunis.jrfTables.Chm62edtSoundexPersist,
+                 ro.finsiel.eunis.jrfTables.Chm62edtSoundexDomain"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.names.NameBean" scope="page">
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-	//Utilities.dumpRequestParams( request );
+  //Utilities.dumpRequestParams( request );
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
   // Check columns to be displayed
   boolean showGroup = Utilities.checkedStringToBoolean(formBean.getShowGroup(), NameBean.HIDE);

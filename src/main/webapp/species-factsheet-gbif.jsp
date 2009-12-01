@@ -6,13 +6,14 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
-                 java.net.URLEncoder,"%>
+                 java.net.URLEncoder,
+                 ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	String scientificName = URLEncoder.encode(request.getParameter("scientificName"),"UTF-8");
+  String scientificName = URLEncoder.encode(request.getParameter("scientificName"),"UTF-8");
   WebContentManagement cm = SessionManager.getWebContent();
 %>
   <h2>

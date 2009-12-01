@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.AbstractPaginator,
@@ -15,7 +15,9 @@
                  ro.finsiel.eunis.jrfTables.combined.SitesCombinedDomain,
                  ro.finsiel.eunis.jrfTables.combined.SitesCombinedPersist,
                  ro.finsiel.eunis.search.Utilities,
-                 ro.finsiel.eunis.search.advanced.AdvancedSortCriteria,,ro.finsiel.eunis.search.AbstractSortCriteria" %>
+                 ro.finsiel.eunis.search.advanced.AdvancedSortCriteria,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.AbstractSortCriteria" %>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist"%>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.formBeans.CombinedSearchBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
@@ -27,7 +29,7 @@
   <jsp:include page="header-page.jsp" />
   <script language="JavaScript" src="script/species-result.js" type="text/javascript"></script>
   <%
-  	WebContentManagement cm = SessionManager.getWebContent();
+    WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>

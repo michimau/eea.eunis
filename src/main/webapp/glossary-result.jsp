@@ -6,12 +6,14 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@page import="ro.finsiel.eunis.search.Utilities,
                 java.util.List,
                 ro.finsiel.eunis.jrfTables.species.glossary.Chm62edtGlossaryPersist,
-                ro.finsiel.eunis.search.habitats.HabitatsSearchUtility,,ro.finsiel.eunis.formBeans.AbstractFormBean"%>
+                ro.finsiel.eunis.search.habitats.HabitatsSearchUtility,
+                ro.finsiel.eunis.WebContentManagement,
+                ro.finsiel.eunis.formBeans.AbstractFormBean"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.DcIndexDcSourceDomain"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.DcIndexDcSourcePersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
@@ -19,7 +21,7 @@
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	//      Utilities.dumpRequestParams(request);
+//      Utilities.dumpRequestParams(request);
   boolean showReference = Utilities.checkedStringToBoolean(formBean.getShowReference(), AbstractFormBean.HIDE);
   boolean showSource = Utilities.checkedStringToBoolean(formBean.getShowSource(), AbstractFormBean.HIDE);
   boolean showURL = Utilities.checkedStringToBoolean(formBean.getShowURL(), AbstractFormBean.HIDE);

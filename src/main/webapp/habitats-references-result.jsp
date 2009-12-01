@@ -6,9 +6,20 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.jrfTables.habitats.habitatsByReferences.RefDomain,ro.finsiel.eunis.jrfTables.habitats.habitatsByReferences.RefPersist,ro.finsiel.eunis.search.AbstractPaginator,ro.finsiel.eunis.search.AbstractSearchCriteria,ro.finsiel.eunis.search.AbstractSortCriteria,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.habitats.habitatsByReferences.ReferencesBean,ro.finsiel.eunis.search.habitats.habitatsByReferences.ReferencesPaginator,ro.finsiel.eunis.search.habitats.habitatsByReferences.ReferencesSearchCriteria,ro.finsiel.eunis.search.habitats.habitatsByReferences.ReferencesSortCriteria,java.util.Iterator" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.jrfTables.habitats.habitatsByReferences.RefDomain,
+                 ro.finsiel.eunis.jrfTables.habitats.habitatsByReferences.RefPersist,
+                 ro.finsiel.eunis.search.AbstractPaginator,
+                 ro.finsiel.eunis.search.AbstractSearchCriteria,
+                 ro.finsiel.eunis.search.AbstractSortCriteria,
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.search.habitats.habitatsByReferences.ReferencesBean,
+                 ro.finsiel.eunis.search.habitats.habitatsByReferences.ReferencesPaginator,
+                 ro.finsiel.eunis.search.habitats.habitatsByReferences.ReferencesSearchCriteria,
+                 ro.finsiel.eunis.search.habitats.habitatsByReferences.ReferencesSortCriteria,
+                 java.util.Iterator" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Vector" %>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.habitatsByReferences.ReferencesBean" scope="request">
@@ -16,7 +27,7 @@
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	// Prepare the search in results (fix)
+  // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex())
   {
     formBean.prepareFilterCriterias();

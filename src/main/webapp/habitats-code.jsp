@@ -6,9 +6,14 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.jrfTables.Chm62edtClassCodePersist,ro.finsiel.eunis.jrfTables.habitats.code.CodeDomain,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.habitats.HabitatsSearchUtility,java.util.Iterator,java.util.Vector"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement, ro.finsiel.eunis.jrfTables.Chm62edtClassCodePersist,
+                ro.finsiel.eunis.jrfTables.habitats.code.CodeDomain,
+                ro.finsiel.eunis.search.Utilities,
+                ro.finsiel.eunis.search.habitats.HabitatsSearchUtility,
+                java.util.Iterator,
+                java.util.Vector"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -17,7 +22,7 @@
     <script language="JavaScript" src="script/habitats-code.js" type="text/javascript"></script>
     <script language="JavaScript" src="script/save-criteria.js" type="text/javascript"></script>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,code_column";
 %>

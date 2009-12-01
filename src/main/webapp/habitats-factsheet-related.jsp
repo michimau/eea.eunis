@@ -6,13 +6,17 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.exceptions.InitializationException,ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet,ro.finsiel.eunis.factsheet.habitats.SyntaxaWrapper,ro.finsiel.eunis.search.Utilities" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.exceptions.InitializationException,
+                 ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet,
+                 ro.finsiel.eunis.factsheet.habitats.SyntaxaWrapper,
+                 ro.finsiel.eunis.search.Utilities" %>
 <%@ page import="java.util.Vector"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	/// INPUT PARAMS: idHabitat
+  /// INPUT PARAMS: idHabitat
   String idHabitat = request.getParameter("idHabitat");
   // Mini factsheet shows only the uppermost part of the factsheet with generic information.
   boolean isMini = Utilities.checkedStringToBoolean(request.getParameter("mini"), false);

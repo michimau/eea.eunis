@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.sites.names.NamePaginator,
@@ -16,13 +16,17 @@
                  ro.finsiel.eunis.search.sites.names.NameBean,
                  ro.finsiel.eunis.search.sites.names.NameSearchCriteria,
                  ro.finsiel.eunis.search.sites.names.NameSortCriteria,
-                 ro.finsiel.eunis.search.*,,ro.finsiel.eunis.search.sites.SitesSearchCriteria,ro.finsiel.eunis.jrfTables.Chm62edtSoundexPersist,ro.finsiel.eunis.jrfTables.Chm62edtSoundexDomain"%>
+                 ro.finsiel.eunis.search.*,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.sites.SitesSearchCriteria,
+                 ro.finsiel.eunis.jrfTables.Chm62edtSoundexPersist,
+                 ro.finsiel.eunis.jrfTables.Chm62edtSoundexDomain"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.names.NameBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	//Utilities.dumpRequestParams( request );
+  //Utilities.dumpRequestParams( request );
   boolean noSoundex = Utilities.checkedStringToBoolean( formBean.getNoSoundex(), false );
   // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }

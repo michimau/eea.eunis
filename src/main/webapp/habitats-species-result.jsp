@@ -6,9 +6,21 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.jrfTables.habitats.species.ScientificNameDomain,ro.finsiel.eunis.jrfTables.habitats.species.ScientificNamePersist,ro.finsiel.eunis.search.AbstractPaginator,ro.finsiel.eunis.search.AbstractSearchCriteria,ro.finsiel.eunis.search.AbstractSortCriteria,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.habitats.species.SpeciesBean,ro.finsiel.eunis.search.habitats.species.SpeciesPaginator,ro.finsiel.eunis.search.habitats.species.SpeciesSearchCriteria,ro.finsiel.eunis.search.habitats.species.SpeciesSortCriteria,ro.finsiel.eunis.utilities.TableColumns,java.util.Iterator" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.jrfTables.habitats.species.ScientificNameDomain,
+                 ro.finsiel.eunis.jrfTables.habitats.species.ScientificNamePersist,
+                 ro.finsiel.eunis.search.AbstractPaginator,
+                 ro.finsiel.eunis.search.AbstractSearchCriteria,
+                 ro.finsiel.eunis.search.AbstractSortCriteria,
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.search.habitats.species.SpeciesBean,
+                 ro.finsiel.eunis.search.habitats.species.SpeciesPaginator,
+                 ro.finsiel.eunis.search.habitats.species.SpeciesSearchCriteria,
+                 ro.finsiel.eunis.search.habitats.species.SpeciesSortCriteria,
+                 ro.finsiel.eunis.utilities.TableColumns,
+                 java.util.Iterator" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Vector" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
@@ -16,7 +28,7 @@
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-	// Prepare the search in results (fix)
+  // Prepare the search in results (fix)
   if(null != formBean.getRemoveFilterIndex()) {
     formBean.prepareFilterCriterias();
   }

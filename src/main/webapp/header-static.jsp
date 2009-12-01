@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.WebContentManagement" %>
 <%@ page import="java.util.List" %>
@@ -15,12 +15,12 @@
 <%@ page import="java.util.StringTokenizer"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	String domain = application.getInitParameter( "DOMAIN_NAME" );
+  String domain = application.getInitParameter( "DOMAIN_NAME" );
 %>
 <a href="#documentContent" style="display:none">Skip to document content</a>
 <div id="header">
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   List translatedLanguages = cm.getTranslatedLanguages();
 %>
   <%-- span display the banner --%>

@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
                  java.sql.Timestamp,
@@ -15,7 +15,11 @@
                  ro.finsiel.eunis.search.species.habitats.HabitateSortCriteria,
                  ro.finsiel.eunis.jrfTables.species.habitats.*,
                  ro.finsiel.eunis.search.species.VernacularNameWrapper,
-                 ro.finsiel.eunis.search.species.SpeciesSearchUtility,,ro.finsiel.eunis.search.*,ro.finsiel.eunis.search.species.habitats.HabitateBean,ro.finsiel.eunis.utilities.SQLUtilities"%>
+                 ro.finsiel.eunis.search.species.SpeciesSearchUtility,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.*,
+                 ro.finsiel.eunis.search.species.habitats.HabitateBean,
+                 ro.finsiel.eunis.utilities.SQLUtilities"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtReportsPersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
@@ -23,7 +27,7 @@
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-	// Requets parameters
+  // Requets parameters
   boolean showGroup = Utilities.checkedStringToBoolean(formBean.getShowGroup(), HabitateBean.HIDE);
   boolean showOrder = Utilities.checkedStringToBoolean(formBean.getShowOrder(), HabitateBean.HIDE);
   boolean showFamily = Utilities.checkedStringToBoolean(formBean.getShowFamily(), HabitateBean.HIDE);

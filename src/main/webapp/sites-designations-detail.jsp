@@ -7,7 +7,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.List,
                  ro.finsiel.eunis.search.sites.SitesSearchUtility,
@@ -16,7 +16,7 @@
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   // This page is used in JSP include to display the designations for a site in results of a search.
   String idSite = request.getParameter("idSite");
   String idDesignation = request.getParameter("idDesignation");

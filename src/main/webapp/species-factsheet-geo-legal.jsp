@@ -6,17 +6,18 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.factsheet.species.SpeciesFactsheet,
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.jrfTables.*,
                  java.util.List,
-                 ro.finsiel.eunis.search.UniqueVector,"%>
+                 ro.finsiel.eunis.search.UniqueVector,
+                 ro.finsiel.eunis.WebContentManagement"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	// Request parameters.
+  // Request parameters.
   boolean expanded = Utilities.checkedStringToBoolean(request.getParameter("expanded"), false);
   Integer idSpecies = Utilities.checkedStringToInt(request.getParameter("idSpecies"), new Integer(0));
   Integer idSpeciesLink = Utilities.checkedStringToInt(request.getParameter("idSpeciesLink"), new Integer(0));
@@ -54,7 +55,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
     <%
-    	WebContentManagement cm = SessionManager.getWebContent();
+      WebContentManagement cm = SessionManager.getWebContent();
     %>
     <script language="JavaScript" type="text/javascript" src="script/header.js"></script>
     <title><%=cm.cms("geographical_legal_information")%> <%=factsheet.getSpeciesObject().getScientificName()%></title>
@@ -67,7 +68,7 @@
     <br />
     <br />
 <%
-	// Map
+    // Map
     UniqueVector countryCodes = new UniqueVector();
     for (int i = 0; i < countries.size(); i++)
     {
@@ -116,7 +117,7 @@
       </tr>
     </table>
 <%
-	}
+    }
 %>
     <br />
     <table summary="<%=cm.cms("species_factsheet-geo-legal_11_Sum")%>" width="640" border="0" cellspacing="0" cellpadding="0" id="legalevent" class="sortable">
@@ -135,7 +136,7 @@
         </th>
       </tr>
 <%
-	// Display results.
+    // Display results.
     if ( !countries.isEmpty() )
     {
       for( int i = 0; i < countries.size(); i++ )
@@ -154,7 +155,7 @@
           </td>
         </tr>
 <%
-	}
+      }
     }
   } catch  (Exception _ex) {
     _ex.printStackTrace();

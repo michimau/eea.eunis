@@ -6,15 +6,28 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.formBeans.AbstractFormBean,ro.finsiel.eunis.jrfTables.habitats.country.CountryDomain,ro.finsiel.eunis.jrfTables.habitats.country.CountryPersist,ro.finsiel.eunis.search.AbstractPaginator,ro.finsiel.eunis.search.AbstractSearchCriteria,ro.finsiel.eunis.search.AbstractSortCriteria,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.habitats.country.CountryPaginator,ro.finsiel.eunis.search.habitats.country.CountrySearchCriteria,ro.finsiel.eunis.search.habitats.country.CountrySortCriteria,java.util.Iterator,java.util.List,java.util.Vector" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.formBeans.AbstractFormBean,
+                 ro.finsiel.eunis.jrfTables.habitats.country.CountryDomain,
+                 ro.finsiel.eunis.jrfTables.habitats.country.CountryPersist,
+                 ro.finsiel.eunis.search.AbstractPaginator,
+                 ro.finsiel.eunis.search.AbstractSearchCriteria,
+                 ro.finsiel.eunis.search.AbstractSortCriteria,
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.search.habitats.country.CountryPaginator,
+                 ro.finsiel.eunis.search.habitats.country.CountrySearchCriteria,
+                 ro.finsiel.eunis.search.habitats.country.CountrySortCriteria,
+                 java.util.Iterator,
+                 java.util.List,
+                 java.util.Vector" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.country.CountryBean" scope="request">
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) {
     formBean.prepareFilterCriterias();

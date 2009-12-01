@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.jrfTables.sites.designation_code.DesignationDomain,
                  ro.finsiel.eunis.jrfTables.sites.designation_code.DesignationPersist,
@@ -18,7 +18,7 @@
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	String coordinates = "";
+  String coordinates = "";
   boolean[] source = {
       formBean.getDB_NATURA2000() != null,
       formBean.getDB_CORINE() != null,
@@ -52,13 +52,14 @@
   {
     sitesIds = "none";
   }
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
       <%=cm.cms("site_by_designation_codes")%>

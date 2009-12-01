@@ -6,9 +6,20 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.jrfTables.Chm62edtSoundexDomain,ro.finsiel.eunis.jrfTables.Chm62edtSoundexPersist,ro.finsiel.eunis.jrfTables.habitats.names.NamesDomain,ro.finsiel.eunis.jrfTables.habitats.names.NamesPersist,ro.finsiel.eunis.search.AbstractPaginator,ro.finsiel.eunis.search.AbstractSearchCriteria,ro.finsiel.eunis.search.AbstractSortCriteria,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.habitats.names.NameBean,ro.finsiel.eunis.search.habitats.names.NamePaginator,ro.finsiel.eunis.search.habitats.names.NameSearchCriteria" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.jrfTables.Chm62edtSoundexDomain,
+                 ro.finsiel.eunis.jrfTables.Chm62edtSoundexPersist,
+                 ro.finsiel.eunis.jrfTables.habitats.names.NamesDomain,
+                 ro.finsiel.eunis.jrfTables.habitats.names.NamesPersist,
+                 ro.finsiel.eunis.search.AbstractPaginator,
+                 ro.finsiel.eunis.search.AbstractSearchCriteria,
+                 ro.finsiel.eunis.search.AbstractSortCriteria,
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.search.habitats.names.NameBean,
+                 ro.finsiel.eunis.search.habitats.names.NamePaginator,
+                 ro.finsiel.eunis.search.habitats.names.NameSearchCriteria" %>
 <%@ page import="ro.finsiel.eunis.search.habitats.names.NameSortCriteria" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.List" %>
@@ -18,7 +29,7 @@
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-	// Prepare the search in results (fix)
+  // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) {
     formBean.prepareFilterCriterias();
   }
@@ -87,7 +98,7 @@
     <jsp:param name="fromRefine" value="<%=fromRefine%>" />
   </jsp:forward>
 <%
-	}
+  }
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -95,7 +106,7 @@
 <head>
   <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
   <script language="JavaScript" src="script/habitats-result.js" type="text/javascript"></script>
   <script language="JavaScript" type="text/javascript">

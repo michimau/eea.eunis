@@ -6,13 +6,14 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.formBeans.ReferencesSearchCriteria,
-                 ro.finsiel.eunis.search.Utilities,"%>
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	String author = (request.getParameter("author")==null?"":request.getParameter("author"));
+  String author = (request.getParameter("author")==null?"":request.getParameter("author"));
   String relationOpAuthor = (request.getParameter("relationOpAuthor")==null?Utilities.OPERATOR_CONTAINS.toString():request.getParameter("relationOpAuthor"));
   String date = (request.getParameter("date")==null?"":request.getParameter("date"));
   String date1 = (request.getParameter("date1")==null?"":request.getParameter("date1"));
@@ -32,7 +33,7 @@
     <%-- Note: Include these three files this order. --%>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
       <script language="JavaScript" type="text/javascript" src="script/references.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>

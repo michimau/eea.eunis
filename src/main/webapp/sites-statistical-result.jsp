@@ -6,11 +6,16 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.Utilities,
-                 ro.finsiel.eunis.search.sites.SitesSearchUtility,,ro.finsiel.eunis.jrfTables.sites.statistics.CountrySitesFactsheetDomain,ro.finsiel.eunis.jrfTables.sites.statistics.CountrySitesFactsheetPersist,ro.finsiel.eunis.search.CountryUtil,ro.finsiel.eunis.search.species.country.RegionWrapper"%>
+                 ro.finsiel.eunis.search.sites.SitesSearchUtility,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.jrfTables.sites.statistics.CountrySitesFactsheetDomain,
+                 ro.finsiel.eunis.jrfTables.sites.statistics.CountrySitesFactsheetPersist,
+                 ro.finsiel.eunis.search.CountryUtil,
+                 ro.finsiel.eunis.search.species.country.RegionWrapper"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.*" %>
 <%@ page import="ro.finsiel.eunis.utilities.SQLUtilities"%>
 <%@ page import="ro.finsiel.eunis.utilities.TableColumns"%>
@@ -19,7 +24,7 @@
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   String countryName = request.getParameter("country");
   Chm62edtCountryPersist country = CountryUtil.findCountry(countryName);
   StringBuffer sbCCodes = new StringBuffer();

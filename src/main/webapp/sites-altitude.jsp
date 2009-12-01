@@ -6,14 +6,15 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.search.Utilities,
-                  java.util.Vector,"%>
+                  java.util.Vector,
+                  ro.finsiel.eunis.WebContentManagement"%>
 <%@ page import="ro.finsiel.eunis.utilities.Accesibility"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	// Request parameters
+  // Request parameters
   String country = (request.getParameter("country")==null?"":request.getParameter("country"));
   String altitude1 = (request.getParameter("altitude1")==null?"":request.getParameter("altitude1"));
   String altitude2 = (request.getParameter("altitude2")==null?"":request.getParameter("altitude2"));
@@ -29,7 +30,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <script language="JavaScript" type="text/javascript" src="script/sites-altitude.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>

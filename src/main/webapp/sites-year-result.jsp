@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.List,
                  java.util.Iterator,
@@ -16,14 +16,18 @@
                  ro.finsiel.eunis.search.sites.year.YearSearchCriteria,
                  ro.finsiel.eunis.search.sites.year.YearSortCriteria,
                  ro.finsiel.eunis.jrfTables.sites.year.YearPersist,
-                 ro.finsiel.eunis.jrfTables.sites.year.YearDomain,,java.util.Vector,ro.finsiel.eunis.search.*,ro.finsiel.eunis.search.sites.SitesSearchCriteria"%>
+                 ro.finsiel.eunis.jrfTables.sites.year.YearDomain,
+                 ro.finsiel.eunis.WebContentManagement,
+                 java.util.Vector,
+                 ro.finsiel.eunis.search.*,
+                 ro.finsiel.eunis.search.sites.SitesSearchCriteria"%>
 <%@ page import="java.util.ArrayList"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.year.YearBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	// Prepare the search in results (fix)
+  // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
   // Check columns to be displayed
   boolean showSourceDB = Utilities.checkedStringToBoolean(formBean.getShowSourceDB(), YearBean.HIDE);

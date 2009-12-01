@@ -6,11 +6,18 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.jrfTables.habitats.country.CountryDomain,ro.finsiel.eunis.search.CountryUtil,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.habitats.country.HabitatCountryUtil,ro.finsiel.eunis.search.species.country.CountryWrapper,ro.finsiel.eunis.search.species.country.RegionWrapper,java.util.Iterator,java.util.Vector" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement, ro.finsiel.eunis.jrfTables.habitats.country.CountryDomain,
+                  ro.finsiel.eunis.search.CountryUtil,
+                  ro.finsiel.eunis.search.Utilities,
+                  ro.finsiel.eunis.search.habitats.country.HabitatCountryUtil,
+                  ro.finsiel.eunis.search.species.country.CountryWrapper,
+                  ro.finsiel.eunis.search.species.country.RegionWrapper,
+                  java.util.Iterator,
+                  java.util.Vector" %>
 <%
-	String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,habitats_country_location";
   int operation = 0;
   if (null != request.getParameter("Add")) {
@@ -66,7 +73,7 @@
 <jsp:include page="header-page.jsp" />
 <script language="JavaScript" src="script/save-criteria.js" type="text/javascript"></script>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
 <title>
   <%=application.getInitParameter("PAGE_TITLE")%>

@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@page import="java.util.List, java.util.Iterator,
                 ro.finsiel.eunis.search.Utilities,
@@ -14,7 +14,9 @@
                 ro.finsiel.eunis.search.species.names.NameSearchCriteria,
                 net.sf.jrf.domain.PersistentObject,
                 ro.finsiel.eunis.jrfTables.*,
-                ro.finsiel.eunis.jrfTables.species.VernacularNamesPersist,,java.util.ArrayList"%>
+                ro.finsiel.eunis.jrfTables.species.VernacularNamesPersist,
+                ro.finsiel.eunis.WebContentManagement,
+                java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -24,8 +26,8 @@
   <head>
     <jsp:include page="header-page.jsp" />
     <%
-    	WebContentManagement cm = SessionManager.getWebContent();
-          Integer typeForm = Utilities.checkedStringToInt(formBean.getTypeForm(), NameSearchCriteria.CRITERIA_SCIENTIFIC);
+      WebContentManagement cm = SessionManager.getWebContent();
+      Integer typeForm = Utilities.checkedStringToInt(formBean.getTypeForm(), NameSearchCriteria.CRITERIA_SCIENTIFIC);
     %>
     <title>
       <%=cm.cms("list_of_values")%>

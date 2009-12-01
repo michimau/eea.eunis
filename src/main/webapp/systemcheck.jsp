@@ -10,7 +10,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.sql.Connection,
                  java.sql.PreparedStatement,
@@ -22,7 +22,7 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+    WebContentManagement cm = SessionManager.getWebContent();
 %>
 <title><%=cm.cms("systemcheck_01")%></title>
 </head>

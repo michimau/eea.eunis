@@ -6,13 +6,14 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.List, ro.finsiel.eunis.search.sites.designations.FactsheetDesignations,
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.search.sites.SitesSearchUtility,
                  ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist,
-                 ro.finsiel.eunis.jrfTables.sites.designation_code.DesignationPersist,"%>
+                 ro.finsiel.eunis.jrfTables.sites.designation_code.DesignationPersist,
+                 ro.finsiel.eunis.WebContentManagement"%>
 <%@ page import="java.sql.Connection"%>
 <%@ page import="java.sql.ResultSet"%>
 <%@ page import="java.sql.DriverManager"%>
@@ -101,7 +102,7 @@
     </script>
     <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
 <%
-	String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,designation_factsheet_location";
   try
   {

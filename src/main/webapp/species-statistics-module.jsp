@@ -6,9 +6,12 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.utilities.SQLUtilities,,java.util.List,ro.finsiel.eunis.utilities.TableColumns"%>
+<%@ page import="ro.finsiel.eunis.utilities.SQLUtilities,
+                 ro.finsiel.eunis.WebContentManagement,
+                 java.util.List,
+                 ro.finsiel.eunis.utilities.TableColumns"%>
 <%@ page import="ro.finsiel.eunis.search.CountryUtil"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
@@ -25,7 +28,7 @@
     //]]>
     </script>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,species_statistics";
 

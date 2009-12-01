@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.Utilities,
@@ -18,14 +18,16 @@
                  ro.finsiel.eunis.search.sites.designation_code.DesignationBean,
                  ro.finsiel.eunis.search.sites.designation_code.DesignationSearchCriteria,
                  ro.finsiel.eunis.search.sites.designation_code.DesignationSortCriteria,
-                 ro.finsiel.eunis.jrfTables.sites.designation_code.DesignationPersist,,ro.finsiel.eunis.search.AbstractSearchCriteria"%>
+                 ro.finsiel.eunis.jrfTables.sites.designation_code.DesignationPersist,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.AbstractSearchCriteria"%>
 <%@ page import="ro.finsiel.eunis.utilities.Accesibility"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.designation_code.DesignationBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	//      Utilities.dumpRequestParams(request);
+//      Utilities.dumpRequestParams(request);
   // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
   // Check columns to be displayed

@@ -6,12 +6,17 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="java.util.Vector,,ro.finsiel.eunis.search.sites.names.NameSortCriteria,ro.finsiel.eunis.utilities.Accesibility,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.AbstractSortCriteria"%>
+<%@ page import="java.util.Vector,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.sites.names.NameSortCriteria,
+                 ro.finsiel.eunis.utilities.Accesibility,
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.search.AbstractSortCriteria"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	String siteNameFromFactsheet = (request.getParameter("siteNameFromFactsheet") == null ? "" : request.getParameter("siteNameFromFactsheet").trim());
+  String siteNameFromFactsheet = (request.getParameter("siteNameFromFactsheet") == null ? "" : request.getParameter("siteNameFromFactsheet").trim());
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,name";
 %>
@@ -20,7 +25,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <script language="JavaScript" type="text/javascript" src="script/sites-names.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>

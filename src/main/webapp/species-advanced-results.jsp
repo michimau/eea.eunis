@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.AbstractPaginator,
@@ -25,7 +25,7 @@
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   AbstractPaginator paginator = null;
   //String searchedDatabase = formBean.getSearchedNatureObject();
   paginator = new DictionaryPaginator(new DictionaryDomain(request.getSession().getId()));

@@ -6,9 +6,17 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.jrfTables.habitats.references.HabitatsBooksDomain,ro.finsiel.eunis.jrfTables.habitats.references.HabitatsBooksPersist,ro.finsiel.eunis.search.AbstractPaginator,ro.finsiel.eunis.search.AbstractSearchCriteria,ro.finsiel.eunis.search.AbstractSortCriteria,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.habitats.references.ReferencesPaginator,ro.finsiel.eunis.search.habitats.references.ReferencesSearchCriteria" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.jrfTables.habitats.references.HabitatsBooksDomain,
+                 ro.finsiel.eunis.jrfTables.habitats.references.HabitatsBooksPersist,
+                 ro.finsiel.eunis.search.AbstractPaginator,
+                 ro.finsiel.eunis.search.AbstractSearchCriteria,
+                 ro.finsiel.eunis.search.AbstractSortCriteria,
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.search.habitats.references.ReferencesPaginator,
+                 ro.finsiel.eunis.search.habitats.references.ReferencesSearchCriteria" %>
 <%@ page import="ro.finsiel.eunis.search.habitats.references.ReferencesSortCriteria" %>
 <%@ page import="ro.finsiel.eunis.utilities.TableColumns" %>
 <%@ page import="java.util.Iterator" %>
@@ -19,7 +27,7 @@
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) {
     formBean.prepareFilterCriterias();

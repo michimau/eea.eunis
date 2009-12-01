@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.sites.SitesSearchUtility,
@@ -14,13 +14,16 @@
                  ro.finsiel.eunis.search.sites.neighborhood.NeighborhoodSearchCriteria,
                  ro.finsiel.eunis.search.sites.neighborhood.NeighborhoodBean,
                  ro.finsiel.eunis.search.sites.neighborhood.NeighborhoodPaginator,
-                 ro.finsiel.eunis.jrfTables.sites.names.NameDomain,,ro.finsiel.eunis.search.sites.neighborhood.NeighborhoodSortCriteria,ro.finsiel.eunis.jrfTables.sites.names.NamePersist"%>
+                 ro.finsiel.eunis.jrfTables.sites.names.NameDomain,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.sites.neighborhood.NeighborhoodSortCriteria,
+                 ro.finsiel.eunis.jrfTables.sites.names.NamePersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.neighborhood.NeighborhoodBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   // Prepare the search in results (fix)
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
   // Check columns to be displayed

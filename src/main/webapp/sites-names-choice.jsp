@@ -6,15 +6,16 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@page import="java.util.List, java.util.Iterator,
-                ro.finsiel.eunis.search.Utilities,"%>
+                ro.finsiel.eunis.search.Utilities,
+                ro.finsiel.eunis.WebContentManagement"%>
 <%@page import="ro.finsiel.eunis.jrfTables.Chm62edtSitesDomain"%>
 <%@page import="ro.finsiel.eunis.jrfTables.Chm62edtSitesPersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	// getSearchString() - String to be searched
+  // getSearchString() - String to be searched
   String searchString = request.getParameter("englishName");
   boolean expandFullNames = Utilities.checkedStringToBoolean(request.getParameter("showAll"), false);
   Integer operand = Utilities.checkedStringToInt(request.getParameter("relationOp"), Utilities.OPERATOR_CONTAINS);
@@ -41,7 +42,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
       <%=cm.cms("list_of_values")%>

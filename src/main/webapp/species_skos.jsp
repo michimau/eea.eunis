@@ -1,4 +1,5 @@
-<%response.setContentType("text/xml;charset=UTF-8");
+<%
+  response.setContentType("text/xml;charset=UTF-8");
 
   String start = request.getParameter("start");
   if(start==null || start.length()==0) {

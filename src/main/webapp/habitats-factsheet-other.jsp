@@ -19,13 +19,17 @@ Notes:
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.exceptions.InitializationException,ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet,ro.finsiel.eunis.jrfTables.HabitatOtherInfo,ro.finsiel.eunis.search.Utilities" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.exceptions.InitializationException,
+                 ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet,
+                 ro.finsiel.eunis.jrfTables.HabitatOtherInfo,
+                 ro.finsiel.eunis.search.Utilities" %>
 <%@ page import="java.util.List"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   String idHabitat = request.getParameter("idHabitat");
   Integer infoID = Utilities.checkedStringToInt(request.getParameter("infoID"), new Integer(-1));
   HabitatsFactsheet factsheet = new HabitatsFactsheet(idHabitat);

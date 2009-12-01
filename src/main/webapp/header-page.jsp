@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.session.ThemeWrapper,
                  ro.finsiel.eunis.session.ThemeManager"%>
@@ -21,7 +21,7 @@
 <script type="text/javascript" language="JavaScript" src="script/header.js"></script>
 <script type="text/javascript" language="JavaScript" src="script/utils.js"></script>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   List translatedLanguages = cm.getTranslatedLanguages();
   if( !SessionManager.isLanguageDetected() )
   {

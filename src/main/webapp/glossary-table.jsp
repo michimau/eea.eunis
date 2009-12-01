@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.List,
                  ro.finsiel.eunis.jrfTables.species.glossary.Chm62edtGlossaryDomain,
@@ -15,10 +15,12 @@
                  java.util.Vector,
                  ro.finsiel.eunis.jrfTables.Chm62edtLanguageDomain,
                  java.util.HashMap,
-                 ro.finsiel.eunis.jrfTables.Chm62edtLanguagePersist,,ro.finsiel.eunis.search.AbstractSortCriteria"%>
+                 ro.finsiel.eunis.jrfTables.Chm62edtLanguagePersist,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.AbstractSortCriteria"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	// REQUEST PARAMETERS
+// REQUEST PARAMETERS
 // - action - specifies something to be done when entering page, for example: delete.
 // - filter - Filter values from table
 // - sort - Used to sort and specifies the name of the column to be sorted by.

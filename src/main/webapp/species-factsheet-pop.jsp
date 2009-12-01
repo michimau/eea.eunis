@@ -6,21 +6,20 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.factsheet.species.FactSheetPopulationWrapper,
                  ro.finsiel.eunis.factsheet.species.SpeciesFactsheet,
-                 ro.finsiel.eunis.search.Utilities,"%>
-<%
-	// Get form parameters here
-%>
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.WebContentManagement"%>
+<%// Get form parameters here%>
 <jsp:useBean id="FormBean" class="ro.finsiel.eunis.formBeans.SpeciesFactSheetBean" scope="page">
   <jsp:setProperty name="FormBean" property="*"/>
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   String idNatureObj = FormBean.getIdNatureObject();
   // List of population information for species
   Vector list = SpeciesFactsheet.getPopulation(idNatureObj);

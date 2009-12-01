@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@page import="java.util.*,
                  ro.finsiel.eunis.jrfTables.*,
@@ -15,13 +15,14 @@
                  ro.finsiel.eunis.search.UniqueVector,
                  ro.finsiel.eunis.factsheet.species.ThreatColor,
                  ro.finsiel.eunis.factsheet.species.SpeciesFactsheet,
-                 ro.finsiel.eunis.factsheet.species.NationalThreatWrapper,"%>
+                 ro.finsiel.eunis.factsheet.species.NationalThreatWrapper,
+                ro.finsiel.eunis.WebContentManagement"%>
   <jsp:useBean id="FormBean" class="ro.finsiel.eunis.formBeans.SpeciesFactSheetBean" scope="page">
     <jsp:setProperty name="FormBean" property="*"/>
   </jsp:useBean>
   <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 
   Integer idSpecies=Utilities.checkedStringToInt( request.getParameter("idSpecies"), new Integer("-1") );
   SpeciesFactsheet factsheet = new SpeciesFactsheet( idSpecies, idSpecies );

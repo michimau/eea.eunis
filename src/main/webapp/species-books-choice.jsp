@@ -6,10 +6,11 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@page import="java.util.List,
-                ro.finsiel.eunis.search.Utilities,"%>
+                ro.finsiel.eunis.search.Utilities,
+                ro.finsiel.eunis.WebContentManagement"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@page import="ro.finsiel.eunis.jrfTables.species.references.SpeciesBooksDomain"%>
 <%@page import="ro.finsiel.eunis.jrfTables.species.references.SpeciesBooksPersist"%><%@ page import="java.util.ArrayList"%>
@@ -18,7 +19,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
     <%
-    	WebContentManagement cm = SessionManager.getWebContent();
+      WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title>
       <%=cm.cms("list_of_values")%>

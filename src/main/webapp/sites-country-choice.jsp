@@ -6,14 +6,15 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@page import="ro.finsiel.eunis.jrfTables.*,java.util.*,
                 ro.finsiel.eunis.search.CountryUtil,
-                ro.finsiel.eunis.search.Utilities,"%>
+                ro.finsiel.eunis.search.Utilities,
+                ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	String field = request.getParameter("field");
+  String field = request.getParameter("field");
   String _country = request.getParameter("country");
   if ( null == _country ) _country = "%";
   List list = CountryUtil.findAllCountriesMatchingName(_country);
@@ -23,7 +24,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
       <%=cm.cms("list_of_values")%>

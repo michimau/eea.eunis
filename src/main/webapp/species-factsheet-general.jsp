@@ -6,14 +6,23 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.factsheet.species.SpeciesFactsheet,
                  ro.finsiel.eunis.search.Utilities,
-                 ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist,,java.util.List,ro.finsiel.eunis.factsheet.species.NationalThreatWrapper,ro.finsiel.eunis.search.species.factsheet.PublicationWrapper,java.util.Vector,java.net.URLEncoder,ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain,ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist,java.util.StringTokenizer"%>
+                 ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist,
+                 ro.finsiel.eunis.WebContentManagement,
+                 java.util.List,
+                 ro.finsiel.eunis.factsheet.species.NationalThreatWrapper,
+                 ro.finsiel.eunis.search.species.factsheet.PublicationWrapper,
+                 java.util.Vector,
+                 java.net.URLEncoder,
+                 ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain,
+                 ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist,
+                 java.util.StringTokenizer"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	/// Request parameters:
+  /// Request parameters:
   // idSpecies - ID of specie
   // idSpeciesLink - ID of specie (Link to species base)
   String idSpecies = request.getParameter("idSpecies");

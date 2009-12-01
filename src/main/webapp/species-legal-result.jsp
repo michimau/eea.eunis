@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@page import="java.util.*,
                 ro.finsiel.eunis.search.species.legal.LegalSearchCriteria,
@@ -17,13 +17,18 @@
                 ro.finsiel.eunis.jrfTables.species.legal.ScientificLegalPersist,
                 ro.finsiel.eunis.jrfTables.species.legal.LegalStatusPersist,
                 ro.finsiel.eunis.search.species.SpeciesSearchUtility,
-                ro.finsiel.eunis.formBeans.AbstractFormBean,,ro.finsiel.eunis.search.*,ro.finsiel.eunis.search.save_criteria.SetVectorsForSaveCriteria,ro.finsiel.eunis.search.save_criteria.SaveSearchCriteria"%>
+                ro.finsiel.eunis.formBeans.AbstractFormBean,
+                ro.finsiel.eunis.WebContentManagement,
+                ro.finsiel.eunis.search.*,
+                ro.finsiel.eunis.search.save_criteria.SetVectorsForSaveCriteria,
+                ro.finsiel.eunis.search.save_criteria.SaveSearchCriteria"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.legal.LegalBean" scope="request">
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-	//Utilities.dumpRequestParams(request);
+
+  //Utilities.dumpRequestParams(request);
 
   // If user has right to save this search and he want to save it
   if (SessionManager.isAuthenticated()

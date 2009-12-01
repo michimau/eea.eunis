@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.jrfTables.save_criteria.CriteriasForUsersDomain,
                  java.util.List,
@@ -29,7 +29,7 @@ function setFormAndSubmit(userName,pageName,criteriaName) {
 //]]>
 </script>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 // If user has this right
 if( SessionManager.isAuthenticated() && SessionManager.isSave_search_criteria_RIGHT() )
 {

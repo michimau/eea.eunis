@@ -6,10 +6,19 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@page import="com.lowagie.text.Font, com.lowagie.text.*,
-                com.lowagie.text.Image,,ro.finsiel.eunis.factsheet.species.SpeciesFactsheet,ro.finsiel.eunis.search.Utilities,java.awt.*,java.text.SimpleDateFormat,java.util.Date,ro.finsiel.eunis.factsheet.PDFSpeciesFactsheet,ro.finsiel.eunis.reports.pdfReport,java.util.Properties"%>
+                com.lowagie.text.Image,
+                ro.finsiel.eunis.WebContentManagement,
+                ro.finsiel.eunis.factsheet.species.SpeciesFactsheet,
+                ro.finsiel.eunis.search.Utilities,
+                java.awt.*,
+                java.text.SimpleDateFormat,
+                java.util.Date,
+                ro.finsiel.eunis.factsheet.PDFSpeciesFactsheet,
+                ro.finsiel.eunis.reports.pdfReport,
+                java.util.Properties"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -17,7 +26,7 @@
   <jsp:include page="header-page.jsp"/>
   <script language="JavaScript" type="text/javascript" src="script/timer.js"></script>
 <%
-	Integer idSpecies = Utilities.checkedStringToInt( request.getParameter( "idSpecies" ), new Integer( 0 ) );
+  Integer idSpecies = Utilities.checkedStringToInt( request.getParameter( "idSpecies" ), new Integer( 0 ) );
   Integer idSpeciesLink = Utilities.checkedStringToInt( request.getParameter( "idSpeciesLink" ), new Integer( 0 ) );
 
   WebContentManagement cm = SessionManager.getWebContent();
@@ -27,7 +36,7 @@
   // Initializations
   if ( null != factsheet.getSpeciesObject() && null != factsheet.getSpeciesNatureObject() )
   {
-%>
+  %>
   <title>
     <%=cm.cms("generating_pdf")%>
   </title>

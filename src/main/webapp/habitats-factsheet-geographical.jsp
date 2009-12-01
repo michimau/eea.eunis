@@ -6,13 +6,16 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet,ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatCountryPersist,ro.finsiel.eunis.search.UniqueVector" %>
-<%@ page import="java.util.List,ro.finsiel.eunis.search.Utilities"%>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet,
+                 ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatCountryPersist,
+                 ro.finsiel.eunis.search.UniqueVector" %>
+<%@ page import="java.util.List, ro.finsiel.eunis.search.Utilities"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	String idHabitat = request.getParameter("idHabitat");
+  String idHabitat = request.getParameter("idHabitat");
   // Mini factsheet shows only the uppermost part of the factsheet with generic information.
   HabitatsFactsheet factsheet = null;
   factsheet = new HabitatsFactsheet(idHabitat);

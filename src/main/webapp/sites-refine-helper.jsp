@@ -6,26 +6,27 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.search.CountryUtil,
                  java.util.List,
                  java.util.Iterator,
                  ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist,
-                 ro.finsiel.eunis.search.sites.SitesSearchCriteria,"%>
+                 ro.finsiel.eunis.search.sites.SitesSearchCriteria,
+                 ro.finsiel.eunis.WebContentManagement"%>
 <%-- This is the helper displayed when user presses the question icon on the "Refine your search" in Sites module --%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
 <%
-	// What type of information this tip should display, for example Source data set, country etc.
+  // What type of information this tip should display, for example Source data set, country etc.
   int criteria = Utilities.checkedStringToInt(request.getParameter( "criteria" ), -1);
 %>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
       <%=cm.cms("list_of_values")%>

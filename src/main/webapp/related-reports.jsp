@@ -6,15 +6,25 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.jrfTables.EunisRelatedReportsPersist,ro.finsiel.eunis.jrfTables.users.UserPersist,ro.finsiel.eunis.related_reports.RelatedReportsUtil,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.users.UsersUtility,java.io.File,java.text.SimpleDateFormat,java.util.Date,java.util.List,java.util.Properties" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.jrfTables.EunisRelatedReportsPersist,
+                 ro.finsiel.eunis.jrfTables.users.UserPersist,
+                 ro.finsiel.eunis.related_reports.RelatedReportsUtil,
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.search.users.UsersUtility,
+                 java.io.File,
+                 java.text.SimpleDateFormat,
+                 java.util.Date,
+                 java.util.List,
+                 java.util.Properties" %>
 <jsp:useBean id="FormBean" class="ro.finsiel.eunis.admin.RelatedReportsBean" scope="request">
   <jsp:setProperty name="FormBean" property="*"/>
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	String uploadDir = application.getInitParameter("INSTANCE_HOME") + application.getInitParameter("UPLOAD_DIR_FILES");
+  String uploadDir = application.getInitParameter("INSTANCE_HOME") + application.getInitParameter("UPLOAD_DIR_FILES");
   String[] deleteFile = FormBean.getFilenames();
   String operation = FormBean.getOperation();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
@@ -31,7 +41,7 @@
 <head>
   <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>

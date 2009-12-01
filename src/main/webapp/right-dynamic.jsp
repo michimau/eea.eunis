@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@page import="ro.finsiel.eunis.backtrail.BacktrailObject,
                  ro.finsiel.eunis.backtrail.BacktrailUtil,
@@ -32,7 +32,7 @@ Input parameters  on REQUEST:
 <%--<jsp:include page="header-static.jsp"/>--%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	String domain = application.getInitParameter( "DOMAIN_NAME" );
+  String domain = application.getInitParameter( "DOMAIN_NAME" );
   WebContentManagement cm = SessionManager.getWebContent();
   // Request parameters.
   String dynHeaderLocation = request.getParameter("location");

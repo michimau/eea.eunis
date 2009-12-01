@@ -6,15 +6,16 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@page import="java.util.List,
                 ro.finsiel.eunis.search.Utilities,
                 ro.finsiel.eunis.search.sites.SitesSearchUtility,
-                ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist,"%>
+                ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist,
+                ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	String name = Utilities.formatString( request.getParameter("designation"), "%" );
+  String name = Utilities.formatString( request.getParameter("designation"), "%" );
 //  boolean[] source_db =
 //  {
 //    request.getParameter( "DB_NATURA2000" ) != null && request.getParameter( "DB_NATURA2000" ).equalsIgnoreCase( "true" ),
@@ -41,7 +42,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
       <%=cm.cms("list_of_values")%>
@@ -60,12 +61,12 @@
       <%=cm.cmsPhrase("List of values for:")%>:
     </h2>
 <%
-	if ( name.equalsIgnoreCase( "%" ) )
+  if ( name.equalsIgnoreCase( "%" ) )
   {
 %>
     <%=cm.cms("sites_designations_choice_alldesignations")%>
 <%
-	}
+  }
   else
   {
 %>
@@ -79,14 +80,14 @@
       <%=name%>
     </strong>
 <%
-	}
+  }
 %>
     <br />
     <br />
     <div id="tab">
       <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
-	for (int i = 0; i < sites.size(); i++)
+    for (int i = 0; i < sites.size(); i++)
     {
       Chm62edtDesignationsPersist designation = (Chm62edtDesignationsPersist)sites.get(i);
       String description = designation.getDescription();
@@ -100,13 +101,13 @@
           </td>
         </tr>
 <%
-	}
+        }
       }
 %>
       </table>
     </div>
 <%
-	out.print(Utilities.getTextWarningForPopup((sites == null ? 0 : sites.size())));
+    out.print(Utilities.getTextWarningForPopup((sites == null ? 0 : sites.size())));
   }
   else
   {
@@ -118,7 +119,7 @@
     <br />
     <br />
 <%
-	}
+  }
   WebContentManagement cm = SessionManager.getWebContent();
 %>
     <form action="">

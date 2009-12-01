@@ -6,14 +6,15 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.search.Utilities,
         ro.finsiel.eunis.session.ThemeWrapper,
-        ro.finsiel.eunis.session.ThemeManager,"%>
+        ro.finsiel.eunis.session.ThemeManager,
+        ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	// INPUT VARIABLES. This must exist in your including JSP !!! If you DO NOT, compilation error would occurr. I think
+  // INPUT VARIABLES. This must exist in your including JSP !!! If you DO NOT, compilation error would occurr. I think
   // this is good since all pages would 'speak same language' so would appear discrepancies. For example all Form Beans
   // will have to be named formBean or this code would not work etc etc etc...you know what I mean :))
   // AbstractFormBean formBean  - The form bean (I use currentPage from it for example)

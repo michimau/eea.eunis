@@ -6,12 +6,13 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.search.Utilities,"%>
+<%@ page import="ro.finsiel.eunis.search.Utilities,
+                ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	boolean showCorine = Utilities.checkedStringToBoolean(request.getParameter("showCorine"), true);
+  boolean showCorine = Utilities.checkedStringToBoolean(request.getParameter("showCorine"), true);
   String enableCorine = ( !showCorine ) ? "disabled=\"disabled\"" : "";
   WebContentManagement cm = SessionManager.getWebContent();
 %>

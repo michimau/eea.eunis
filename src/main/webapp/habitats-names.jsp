@@ -6,9 +6,14 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.jrfTables.habitats.names.NamesDomain,ro.finsiel.eunis.search.AbstractSortCriteria,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.habitats.names.NameSortCriteria,java.util.Vector" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.jrfTables.habitats.names.NamesDomain,
+                 ro.finsiel.eunis.search.AbstractSortCriteria,
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.search.habitats.names.NameSortCriteria,
+                 java.util.Vector" %>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.names.NameBean" scope="page">
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
@@ -20,27 +25,24 @@
   <script language="JavaScript" src="script/habitats-names.js" type="text/javascript"></script>
   <script language="JavaScript" src="script/save-criteria.js" type="text/javascript"></script>
   <%
-  	String eeaHome = application.getInitParameter( "EEA_HOME" );
-      String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,names";
-      String action = formBean.getAction();
-      boolean doAdd = false;
-      // Add criteria.
-      if (null != action && action.equalsIgnoreCase("search")) {
-  %><jsp:forward page="habitats-names-result.jsp" /><%
-  	}
-      if (null != action && action.equalsIgnoreCase("add")) {
-        // Process the request
-        doAdd = true;
-      }
-      // Delete criteria.
-      if (null != action && action.equalsIgnoreCase("delete")) {
-        int deleteIndex = Utilities.checkedStringToInt(formBean.getDeleteIndex(), -1);
-        formBean.removeCriteriaExtra(deleteIndex);
-        doAdd = true;
-      }
-  %>
+    String eeaHome = application.getInitParameter( "EEA_HOME" );
+    String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,names";
+    String action = formBean.getAction();
+    boolean doAdd = false;
+    // Add criteria.
+    if (null != action && action.equalsIgnoreCase("search")) {%><jsp:forward page="habitats-names-result.jsp" /><%}
+    if (null != action && action.equalsIgnoreCase("add")) {
+      // Process the request
+      doAdd = true;
+    }
+    // Delete criteria.
+    if (null != action && action.equalsIgnoreCase("delete")) {
+      int deleteIndex = Utilities.checkedStringToInt(formBean.getDeleteIndex(), -1);
+      formBean.removeCriteriaExtra(deleteIndex);
+      doAdd = true;
+    }%>
   <%
-  	WebContentManagement cm = SessionManager.getWebContent();
+    WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>

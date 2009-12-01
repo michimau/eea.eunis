@@ -6,9 +6,13 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.jrfTables.habitats.names.NamesDomain,ro.finsiel.eunis.search.AbstractSortCriteria,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.species.names.NameSortCriteria,ro.finsiel.eunis.utilities.SQLUtilities" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                ro.finsiel.eunis.jrfTables.habitats.names.NamesDomain,
+                ro.finsiel.eunis.search.AbstractSortCriteria,
+                ro.finsiel.eunis.search.Utilities, ro.finsiel.eunis.search.species.names.NameSortCriteria,
+                ro.finsiel.eunis.utilities.SQLUtilities" %>
 <%@ page import="java.sql.*"%>
 <%@ page import="ro.finsiel.eunis.session.ThemeWrapper"%>
 <%@ page import="ro.finsiel.eunis.session.ThemeManager"%>
@@ -17,7 +21,7 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%
-	String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home";
   String operation = Utilities.formatString( request.getParameter("operation"), "" );
   if( operation.equalsIgnoreCase( "changeLanguage" ) )
@@ -71,7 +75,7 @@
 %>
     <jsp:include page="database-error.jsp" />
 <%
-	return;
+    return;
   } finally
     {
        try
@@ -90,48 +94,48 @@
 		<jsp:include page="header-page.jsp" />
 		<link rel="alternate" type="application/rss+xml" title="EUNIS Database latest news" href="news.xml" />
 		<%
-			WebContentManagement cm = SessionManager.getWebContent();
-				
-				  // If operation is logout.
-				  if( operation.equalsIgnoreCase( "logout" ) )
-				  {
-				    SessionManager.logout();
-				    SessionManager.setUsername(null);
-				    SessionManager.setPassword(null);
-				  }
-				  SQLUtilities sqlc = new SQLUtilities();
-				  sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-				  String sqlHeadline = "select content from eunis_headlines where NOW() between start_date and end_date order by record_date desc";
-				  String headline = sqlc.ExecuteSQL(sqlHeadline);
-				
-				  String magnifyIMG;
-				  String compassIMG;
-				  ThemeWrapper currentTheme = SessionManager.getThemeManager().getCurrentTheme();
-				  if ( currentTheme.equals( ThemeManager.FRESH_ORANGE ) )
-				  {
-				    magnifyIMG = "magnify_orange.gif";
-				    compassIMG = "compass_orange.jpg";
-				  }
-				  else if ( currentTheme.equals( ThemeManager.NATURE_GREEN ) )
-				  {
-				    magnifyIMG = "magnify_green.gif";
-				    compassIMG = "compass_green.jpg";
-				  }
-				  else if ( currentTheme.equals( ThemeManager.CHERRY ) )
-				  {
-				    magnifyIMG = "magnify_cherry.gif";
-				    compassIMG = "compass_cherry.jpg";
-				  }
-				  else if ( currentTheme.equals( ThemeManager.BLACKWHITE ) )
-				  {
-				    magnifyIMG = "magnify_bw.gif";
-				    compassIMG = "compass_bw.jpg";
-				  }
-				  else
-				  {
-				    magnifyIMG = "magnify.gif";
-				    compassIMG = "compass.jpg";
-				  }
+		  WebContentManagement cm = SessionManager.getWebContent();
+		
+		  // If operation is logout.
+		  if( operation.equalsIgnoreCase( "logout" ) )
+		  {
+		    SessionManager.logout();
+		    SessionManager.setUsername(null);
+		    SessionManager.setPassword(null);
+		  }
+		  SQLUtilities sqlc = new SQLUtilities();
+		  sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+		  String sqlHeadline = "select content from eunis_headlines where NOW() between start_date and end_date order by record_date desc";
+		  String headline = sqlc.ExecuteSQL(sqlHeadline);
+		
+		  String magnifyIMG;
+		  String compassIMG;
+		  ThemeWrapper currentTheme = SessionManager.getThemeManager().getCurrentTheme();
+		  if ( currentTheme.equals( ThemeManager.FRESH_ORANGE ) )
+		  {
+		    magnifyIMG = "magnify_orange.gif";
+		    compassIMG = "compass_orange.jpg";
+		  }
+		  else if ( currentTheme.equals( ThemeManager.NATURE_GREEN ) )
+		  {
+		    magnifyIMG = "magnify_green.gif";
+		    compassIMG = "compass_green.jpg";
+		  }
+		  else if ( currentTheme.equals( ThemeManager.CHERRY ) )
+		  {
+		    magnifyIMG = "magnify_cherry.gif";
+		    compassIMG = "compass_cherry.jpg";
+		  }
+		  else if ( currentTheme.equals( ThemeManager.BLACKWHITE ) )
+		  {
+		    magnifyIMG = "magnify_bw.gif";
+		    compassIMG = "compass_bw.jpg";
+		  }
+		  else
+		  {
+		    magnifyIMG = "magnify.gif";
+		    compassIMG = "compass.jpg";
+		  }
 		%>
   		<script language="JavaScript" src="script/index.js" type="text/javascript"></script>
   		<title>

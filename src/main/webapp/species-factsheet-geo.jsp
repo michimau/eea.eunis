@@ -6,19 +6,21 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist,
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.factsheet.species.SpeciesFactsheet,
                  ro.finsiel.eunis.factsheet.species.GeographicalStatusWrapper,
-                 ro.finsiel.eunis.search.UniqueVector,,ro.finsiel.eunis.factsheet.species.ThreatColor"%>
+                 ro.finsiel.eunis.search.UniqueVector,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.factsheet.species.ThreatColor"%>
 <jsp:useBean id="FormBean" class="ro.finsiel.eunis.formBeans.SpeciesFactSheetBean" scope="page">
   <jsp:setProperty name="FormBean" property="*" />
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   // List of geographical status information.
   Integer idNatureObject = new Integer( Utilities.checkedStringToInt( FormBean.getIdNatureObject(), 0 ) );
   Integer idSpecies = new Integer( Utilities.checkedStringToInt( FormBean.getIdSpecies(), 0 ) );

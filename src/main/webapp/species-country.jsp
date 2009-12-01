@@ -6,23 +6,24 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.search.CountryUtil,
                  java.util.Iterator,
                  ro.finsiel.eunis.search.species.country.RegionWrapper,
                  ro.finsiel.eunis.search.species.country.CountryWrapper,
                  ro.finsiel.eunis.search.Utilities,
-                 java.util.Vector,"%>
+                 java.util.Vector,
+                 ro.finsiel.eunis.WebContentManagement"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
     <%
-    	WebContentManagement cm = SessionManager.getWebContent();
-          String eeaHome = application.getInitParameter( "EEA_HOME" );
-          String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,country_biogeographic_region_location";
+      WebContentManagement cm = SessionManager.getWebContent();
+      String eeaHome = application.getInitParameter( "EEA_HOME" );
+      String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,country_biogeographic_region_location";
     %>
     <script language="JavaScript" src="script/species-country.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>

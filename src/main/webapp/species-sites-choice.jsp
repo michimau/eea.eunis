@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@page import="java.util.List, java.util.Iterator, java.util.Vector,
                 ro.finsiel.eunis.search.species.sites.SitesPaginator,
@@ -14,14 +14,15 @@
                 ro.finsiel.eunis.search.Utilities,
                 ro.finsiel.eunis.jrfTables.species.sites.SpeciesSitesPersist,
                 ro.finsiel.eunis.search.species.sites.SitesSearchCriteria,
-                ro.finsiel.eunis.jrfTables.species.sites.SpeciesSitesDomain,"%>
+                ro.finsiel.eunis.jrfTables.species.sites.SpeciesSitesDomain,
+                ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
     <%
-    	WebContentManagement cm = SessionManager.getWebContent();
+      WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title>
       <%=cm.cms("list_of_values")%>

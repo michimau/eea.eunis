@@ -6,9 +6,21 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesDomain,ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesPersist,ro.finsiel.eunis.search.AbstractPaginator,ro.finsiel.eunis.search.AbstractSearchCriteria,ro.finsiel.eunis.search.AbstractSortCriteria,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.habitats.sites.SitesBean,ro.finsiel.eunis.search.habitats.sites.SitesPaginator,ro.finsiel.eunis.search.habitats.sites.SitesSearchCriteria,ro.finsiel.eunis.search.habitats.sites.SitesSortCriteria,ro.finsiel.eunis.utilities.SQLUtilities,java.util.Iterator" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesDomain,
+                 ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesPersist,
+                 ro.finsiel.eunis.search.AbstractPaginator,
+                 ro.finsiel.eunis.search.AbstractSearchCriteria,
+                 ro.finsiel.eunis.search.AbstractSortCriteria,
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.search.habitats.sites.SitesBean,
+                 ro.finsiel.eunis.search.habitats.sites.SitesPaginator,
+                 ro.finsiel.eunis.search.habitats.sites.SitesSearchCriteria,
+                 ro.finsiel.eunis.search.habitats.sites.SitesSortCriteria,
+                 ro.finsiel.eunis.utilities.SQLUtilities,
+                 java.util.Iterator" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Vector" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
@@ -16,7 +28,7 @@
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-	if (null != formBean.getRemoveFilterIndex())
+  if (null != formBean.getRemoveFilterIndex())
   {
     formBean.prepareFilterCriterias();
   }

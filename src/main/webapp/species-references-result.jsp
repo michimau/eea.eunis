@@ -6,16 +6,23 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="java.util.*,,ro.finsiel.eunis.jrfTables.species.speciesByReferences.RefDomain,ro.finsiel.eunis.search.species.speciesByReferences.*,ro.finsiel.eunis.search.species.VernacularNameWrapper,ro.finsiel.eunis.search.species.SpeciesSearchUtility,ro.finsiel.eunis.search.*,ro.finsiel.eunis.search.species.speciesByReferences.ReferencesPaginator"%>
+<%@ page import="java.util.*,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.jrfTables.species.speciesByReferences.RefDomain,
+                 ro.finsiel.eunis.search.species.speciesByReferences.*,
+                 ro.finsiel.eunis.search.species.VernacularNameWrapper,
+                 ro.finsiel.eunis.search.species.SpeciesSearchUtility,
+                 ro.finsiel.eunis.search.*,
+                 ro.finsiel.eunis.search.species.speciesByReferences.ReferencesPaginator"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.*" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.speciesByReferences.ReferencesBean" scope="request">
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-	//System.out.println("author="+formBean.getAuthor());
+  //System.out.println("author="+formBean.getAuthor());
   // Set the database connection parameters
   String SQL_DRV="";
   String SQL_URL="";

@@ -6,23 +6,25 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@page import="ro.finsiel.eunis.search.species.legal.LegalSearchCriteria,
                 ro.finsiel.eunis.search.species.SpeciesSearchUtility,
                 ro.finsiel.eunis.jrfTables.species.legal.ScientificLegalPersist,
                 ro.finsiel.eunis.jrfTables.species.legal.LegalReportsPersist,
-                ro.finsiel.eunis.search.Utilities,,java.util.Vector"%>
+                ro.finsiel.eunis.search.Utilities,
+                ro.finsiel.eunis.WebContentManagement,
+                java.util.Vector"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@page import="ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesPersist"%>
-<%@page import="java.util.List,java.util.Iterator"%>
+<%@page import="java.util.List, java.util.Iterator"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
   <jsp:include page="header-page.jsp" />
     <script language="JavaScript" src="script/species-legal.js" type="text/javascript"></script>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,legal_instruments";
 %>

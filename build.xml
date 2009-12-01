@@ -61,7 +61,7 @@
   </target>
 
   <target name="compile" depends="init" description="Compile Java classes and build JAR files">
-    <javac srcdir="${classesSrcDir}" nowarn="true" deprecation="false" debug="true" destdir="${buildDir}">
+    <javac srcdir="${srcDir}" nowarn="true" deprecation="false" debug="true" destdir="${buildDir}">
       <classpath refid="app_classpath" />
     </javac>
       

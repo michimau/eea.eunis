@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <%@ page import="ro.finsiel.eunis.search.Utilities"%>
@@ -25,7 +25,7 @@
     <script language="JavaScript" type="text/javascript" src="script/tree.js"></script>
     <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,taxonomic_classification#species-taxonomic-browser.jsp";
 %>

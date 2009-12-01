@@ -6,14 +6,14 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.factsheet.PicturesHelper,
                  ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.admin.EUNISUploadServlet"%><%@ page import="java.io.File"%><%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	// Request parameters
+  // Request parameters
   // idobject - ID object (eg. ID_SPECIES / ID_HABITAT / ID_SITE)
   // natureobjecttype - Type of nature object to upload (eg. Species, Habitats, Sites)
   String operation = request.getParameter("operation");
@@ -40,7 +40,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <script language="JavaScript" type="text/javascript">
       //<![CDATA[

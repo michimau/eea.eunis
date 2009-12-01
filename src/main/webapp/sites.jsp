@@ -6,12 +6,15 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.search.Utilities,ro.finsiel.eunis.search.sites.names.NameSortCriteria,ro.finsiel.eunis.search.AbstractSortCriteria"%>
+<%@page import="ro.finsiel.eunis.WebContentManagement,
+                ro.finsiel.eunis.search.Utilities,
+                ro.finsiel.eunis.search.sites.names.NameSortCriteria,
+                ro.finsiel.eunis.search.AbstractSortCriteria"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,sites";
   int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
   String []tabs = { "easy_search", "advanced_search", "statistical_data", "links_and_downloads", "help" };
@@ -21,7 +24,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <script language="javascript" type="text/javascript" src="script/sites.js"></script>
     <title>

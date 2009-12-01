@@ -6,9 +6,11 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.search.CountryUtil,ro.finsiel.eunis.search.Utilities" %>
+<%@ page import="ro.finsiel.eunis.WebContentManagement,
+                ro.finsiel.eunis.search.CountryUtil,
+                ro.finsiel.eunis.search.Utilities" %>
 <%@ page import="ro.finsiel.eunis.utilities.SQLUtilities"%>
 <%@ page import="java.util.List"%>
 <%@ page import="ro.finsiel.eunis.utilities.TableColumns"%>
@@ -19,7 +21,7 @@
 <head>
   <jsp:include page="header-page.jsp" />
   <%
-  	WebContentManagement cm = SessionManager.getWebContent();
+    WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
     <%=cm.cms("list_of_values")%>

@@ -6,13 +6,16 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.factsheet.species.SpeciesFactsheet,
-                 ro.finsiel.eunis.search.Utilities,,java.util.Vector,ro.finsiel.eunis.factsheet.species.LegalStatusWrapper"%>
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.WebContentManagement,
+                 java.util.Vector,
+                 ro.finsiel.eunis.factsheet.species.LegalStatusWrapper"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	/// Request parameters:
+  /// Request parameters:
   // idSpecies - ID of species
   // idSpeciesLink - ID of species (Link to species base)
   String idSpecies = request.getParameter("idSpecies");

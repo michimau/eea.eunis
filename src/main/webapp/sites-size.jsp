@@ -6,14 +6,16 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.search.sites.size.SizeSearchCriteria,
-                 ro.finsiel.eunis.search.Utilities,,java.util.Vector"%>
+                 ro.finsiel.eunis.search.Utilities,
+                 ro.finsiel.eunis.WebContentManagement,
+                 java.util.Vector"%>
 <%@ page import="ro.finsiel.eunis.utilities.Accesibility"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	String eeaHome = application.getInitParameter( "EEA_HOME" );
+  String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,size_area_length";
   String relationOpParam = request.getParameter("relationOp");
   int relationOp = Utilities.checkedStringToInt(relationOpParam, -1);
@@ -27,7 +29,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
 %>
     <script language="JavaScript" type="text/javascript" src="script/sites-size.js"></script>
     <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>

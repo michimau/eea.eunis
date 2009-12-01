@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.AbstractPaginator,
@@ -14,13 +14,15 @@
                  ro.finsiel.eunis.jrfTables.combined.HabitatsCombinedDomain,
                  ro.finsiel.eunis.jrfTables.combined.HabitatsCombinedPersist,
                  ro.finsiel.eunis.search.Utilities,
-                 ro.finsiel.eunis.search.advanced.AdvancedSortCriteria,,ro.finsiel.eunis.search.AbstractSortCriteria" %>
+                 ro.finsiel.eunis.search.advanced.AdvancedSortCriteria,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.AbstractSortCriteria" %>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.formBeans.CombinedSearchBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,combined_search#combined-search.jsp,results";
 %>

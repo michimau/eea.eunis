@@ -6,16 +6,17 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="  ro.finsiel.eunis.search.Utilities,
                    ro.finsiel.eunis.jrfTables.species.factsheet.DistributionWrapper,
                    ro.finsiel.eunis.jrfTables.species.factsheet.ReportsDistributionStatusPersist,
                    java.util.List,
-                   ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.ImageProcessing,java.awt.*,java.util.Date"%>
+                   ro.finsiel.eunis.WebContentManagement,ro.finsiel.eunis.ImageProcessing,java.awt.*,
+                   java.util.Date"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-	try
+  try
   {
   // Input parameters
   // expand - if expand into factsheet or work as a standalone popup window
@@ -55,7 +56,7 @@
             double latitude = dis.getLatitude().doubleValue();
             int x;
             int y;
-  //          WEST ï¿½ 15
+  //          WEST – 15
   //          EAST +44
   //          NORTH +73
   //          SOUTH +34

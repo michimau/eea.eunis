@@ -6,7 +6,7 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="java.util.*,
                  ro.finsiel.eunis.search.sites.altitude.AltitudePaginator,
@@ -16,13 +16,15 @@
                  ro.finsiel.eunis.search.sites.altitude.AltitudeBean,
                  ro.finsiel.eunis.search.sites.altitude.AltitudeSearchCriteria,
                  ro.finsiel.eunis.search.sites.altitude.AltitudeSortCriteria,
-                 ro.finsiel.eunis.search.*,,ro.finsiel.eunis.search.sites.SitesSearchCriteria"%>
+                 ro.finsiel.eunis.search.*,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.search.sites.SitesSearchCriteria"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.altitude.AltitudeBean" scope="page">
   <jsp:setProperty name="formBean" property="*" />
 </jsp:useBean>
 <%
-	// Prepare the search in results
+  // Prepare the search in results
   if (null != formBean.getRemoveFilterIndex()) { formBean.prepareFilterCriterias(); }
  // Check columns to be displayed
   boolean showSourceDB = Utilities.checkedStringToBoolean(formBean.getShowSourceDB(), AltitudeBean.HIDE);

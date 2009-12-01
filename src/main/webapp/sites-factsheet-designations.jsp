@@ -6,16 +6,16 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
-<%@ page import="ro.finsiel.eunis.factsheet.sites.SiteFactsheet,"%>
+<%@ page import="ro.finsiel.eunis.factsheet.sites.SiteFactsheet, ro.finsiel.eunis.WebContentManagement"%>
 <%@ page import="java.util.List"%>
 <%@ page import="ro.finsiel.eunis.search.Utilities"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.DesignationsSitesRelatedDesignationsPersist"%>
 <%@ page import="java.util.Vector"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-	String siteid = request.getParameter("idsite");
+  String siteid = request.getParameter("idsite");
   ro.finsiel.eunis.factsheet.sites.SiteFactsheet factsheet = new SiteFactsheet( siteid );
   WebContentManagement cm = SessionManager.getWebContent();
   int type = factsheet.getType();

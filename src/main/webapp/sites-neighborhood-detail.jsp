@@ -6,17 +6,26 @@
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
-	request.setCharacterEncoding( "UTF-8");
+  request.setCharacterEncoding( "UTF-8");
 %>
 <%@ page import="ro.finsiel.eunis.search.Utilities,
                  ro.finsiel.eunis.search.sites.SitesSearchUtility,
-                 java.util.List,,ro.finsiel.eunis.jrfTables.Chm62edtSitesPersist,ro.finsiel.eunis.jrfTables.Chm62edtSitesDomain,ro.finsiel.eunis.search.sites.neighborhood.NeighborhoodPaginator,ro.finsiel.eunis.jrfTables.sites.neighborhood.NeighborhoodDomain,java.util.Vector,ro.finsiel.eunis.search.AbstractSortCriteria,ro.finsiel.eunis.search.sites.neighborhood.NeighborhoodDetailSortCriteria,ro.finsiel.eunis.search.CountryUtil"%>
+                 java.util.List,
+                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.jrfTables.Chm62edtSitesPersist,
+                 ro.finsiel.eunis.jrfTables.Chm62edtSitesDomain,
+                 ro.finsiel.eunis.search.sites.neighborhood.NeighborhoodPaginator,
+                 ro.finsiel.eunis.jrfTables.sites.neighborhood.NeighborhoodDomain,
+                 java.util.Vector,
+                 ro.finsiel.eunis.search.AbstractSortCriteria,
+                 ro.finsiel.eunis.search.sites.neighborhood.NeighborhoodDetailSortCriteria,
+                 ro.finsiel.eunis.search.CountryUtil"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.neighborhood.NeighborhoodBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
 <%
-	WebContentManagement cm = SessionManager.getWebContent();
+  WebContentManagement cm = SessionManager.getWebContent();
   String idSite = request.getParameter("idsite");
   String countryCode = request.getParameter("countryCode");
   countryCode = CountryUtil.areaNameEn2ISO2L(countryCode);// Translate it into CODE (ISO)

@@ -21,7 +21,7 @@ public class TaxonomyDTOTest extends TestCase {
         // Expect them to be identical
 	public void test_unicode() {
                 TaxonomyDTO l1 = new TaxonomyDTO("Ǿ",1);
-                TaxonomyDTO l2 = new TaxonomyDTO("ǿ",2);
+                TaxonomyDTO l2 = new TaxonomyDTO("Ǿ",2);
 		assertEquals(0, l1.compareTo(l2));
 	}
 

@@ -21,3 +21,19 @@ to correct name (from uppercase - default on Windows to lowercase, as used on Li
     - check if all files are now in lowercase.
     - remove the script from there.
     
+4.How to build using maven:
+---------------------------
+
+a) Be sure to modify resources in {basedir}/src/main/resources/envSpecific/${env} to meet your environment.
+	At build time those resources will be copied to the appropriate locations in the web app, replacing the old ones.
+b) in the project root directory type: 
+   mvn clean install -Denv=live
+   
+   this will take all the needed resources from /src/main/resources/envSpecific/live folder,
+   build the application,
+   install it into the local maven repository under eionet/eunis directory.
+   
+
+   
+   
+   

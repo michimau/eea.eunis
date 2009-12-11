@@ -20,9 +20,9 @@
   // idSpecies - ID of specie
   // idSpeciesLink - ID of specie (Link to species base)
   String idSpecies = request.getParameter("idSpecies");
-  String idSpeciesLink = request.getParameter("idSpeciesLink");
-  SpeciesFactsheet factsheet = new SpeciesFactsheet(Utilities.checkedStringToInt(idSpecies, new Integer(0)),
-          Utilities.checkedStringToInt(idSpeciesLink, new Integer(0)));
+  SpeciesFactsheet factsheet = new SpeciesFactsheet(
+		  Utilities.checkedStringToInt(idSpecies, new Integer(0)),
+		  Utilities.checkedStringToInt(idSpecies, new Integer(0)));
   WebContentManagement cm = SessionManager.getWebContent();
   // List of sites related to species.
   List sites = factsheet.getSitesForSpecies();

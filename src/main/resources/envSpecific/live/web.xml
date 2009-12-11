@@ -512,10 +512,10 @@
 		<error-code>403</error-code>
 		<location>/403.jsp</location>
 	</error-page>
-	<!-- error-page>
+	<error-page>
 		<exception-type>java.lang.Exception</exception-type>
 		<location>/500.jsp</location>
-	</error-page-->
+	</error-page>
 	<error-page>
 		<error-code>404</error-code>
 		<location>/404.jsp</location>

@@ -33,10 +33,12 @@
     <script language="JavaScript" src="script/species.js" type="text/javascript"></script>
     <script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
 <%
+  String metaDescription = "";
   if ( factsheet.exists() )
   {
     SpeciesNatureObjectPersist specie = factsheet.getSpeciesNatureObject();
     String scientificName = specie.getScientificName();
+   	metaDescription = factsheet.getSpeciesDescription();
 %>
     <title>
       <%=cm.cms("species_factsheet_title")%>
@@ -53,9 +55,9 @@
 <%
   }
 %>
-    <jsp:include page="/header-page.jsp">
-      <jsp:param name="metaDescription" value="${actionBean.factsheet.speciesDescription}" />
-    </jsp:include>
+ <jsp:include page="/header-page.jsp">
+     <jsp:param name="metaDescription" value="<%=metaDescription%>" />
+   </jsp:include>
   </head>
   <body>
     <div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>

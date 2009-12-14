@@ -1,5 +1,6 @@
 package eionet.eunis.stripes.actions;
 
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 
 import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
@@ -24,12 +26,6 @@ import eionet.eunis.util.Pair;
 @UrlBinding("/species-factsheet.jsp")
 public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 	
-	private String idSpecies;
-	private int idSpeciesLink;
-	private SpeciesFactsheet factsheet;
-	private String btrail;
-	private int tab;
-	
 	private static final String[] allTypes = new String[]{
 		"GENERAL_INFORMATION",
         "VERNACULAR_NAMES",
@@ -43,16 +39,27 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         "HABITATS",
         "SITES",
         "GBIF" }; 
-	private static final String[] allTabPages = new String[] {
-		"/"
-	};
 	
+	private String idSpecies;
+	private int idSpeciesLink;
+	
+	private SpeciesFactsheet factsheet;
+	private String scientificName = "";
+	private String metaDescription = "";
+	private String author = "";
+	
+	
+	private String btrail;
+	//selected tab
+	private int tab;
+	//tabs to display
 	private List<Pair<Integer,String>> tabsWithData = new LinkedList<Pair<Integer,String>>();
-	private String tabPageFilename;
+	//refered from name
 	private String referedFromName;
+
 	
 	@DefaultHandler
-	public Resolution index() {
+	public Resolution index() throws UnsupportedEncodingException {
 		//sanity checks
 		if(StringUtils.isBlank(idSpecies) && idSpeciesLink == 0) {
 			factsheet = new SpeciesFactsheet(0, 0);
@@ -87,6 +94,13 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 		}
 		
 		if (factsheet.exists()) {
+			//set up some vars used in the presentation layer
+			metaDescription = factsheet.getSpeciesDescription();
+			scientificName = StringEscapeUtils.escapeHtml(
+					factsheet.getSpeciesNatureObject().getScientificName());
+			author  = StringEscapeUtils.escapeHtml(
+					factsheet.getSpeciesNatureObject().getAuthor());
+			
 			SQLUtilities sqlUtil = getContext().getSqlUtilities();
 			for (int i = 0; i< allTypes.length; i++) {
 				if (!sqlUtil.TabPageIsEmpy(factsheet.getSpeciesNatureObject().getIdNatureObject().toString(), "SPECIES", allTypes[i])) {
@@ -96,7 +110,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 		}
 		String eeaHome = getContext().getInitParameter("EEA_HOME");
 		btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,factsheet";
-		tabPageFilename = allTabPages[tab];
 		return new ForwardResolution("/stripes/species-factsheet.layout.jsp");
 	}
 
@@ -154,20 +167,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 	}
 
 	/**
-	 * @return the tabPageFilename
-	 */
-	public String getTabPageFilename() {
-		return tabPageFilename;
-	}
-
-	/**
-	 * @param tabPageFilename the tabPageFilename to set
-	 */
-	public void setTabPageFilename(String tabPageFilename) {
-		this.tabPageFilename = tabPageFilename;
-	}
-
-	/**
 	 * @return the idSpecies
 	 */
 	public String getIdSpecies() {
@@ -200,6 +199,29 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 	 */
 	public void setIdSpeciesLink(int idSpeciesLink) {
 		this.idSpeciesLink = idSpeciesLink;
+	}
+
+
+	/**
+	 * @return the scientificName
+	 */
+	public String getScientificName() {
+		return scientificName;
+	}
+
+
+	/**
+	 * @return the metaDescription
+	 */
+	public String getMetaDescription() {
+		return metaDescription;
+	}
+
+	/**
+	 * @return the author
+	 */
+	public String getAuthor() {
+		return author;
 	}
 
 }

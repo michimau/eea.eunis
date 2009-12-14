@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>EUNIS local JSTL functions library.</description>
+	<display-name>EUNIS JSTL static functions.</display-name>
+	<tlib-version>1.0</tlib-version>
+	<short-name>eunis</short-name>
+	<uri>http://eunis.eea.europa.eu/jstl/functions</uri>
+
+	<function>
+		<description>Wrapper to call factsheet.exists</description>
+		<name>exists</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>boolean exists(ro.finsiel.eunis.factsheet.species.SpeciesFactsheet)</function-signature>
+		<example>
+			${exists(factsheet)}
+		</example>
+	</function>
+	
+	<function>
+		<description>Wrapper to call WebContentManagement.cms</description>
+		<name>cms</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>String cms(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
+		<example>
+			${cms(actionBean.webContent, key)}
+		</example>
+	</function>
+	
+	<function>
+		<description>Wrapper to call WebContentManagement.cmsTitle</description>
+		<name>cmsTitle</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>String cmsTitle(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
+		<example>
+			${cmsTitle(actionBean.webContent, key)}
+		</example>
+	</function>
+
+	<function>
+		<description>Wrapper to call WebContentManagement.cmsPhrase</description>
+		<name>cmsPhrase</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>String cmsPhrase(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
+		<example>
+			${cmsPhrase(actionBean.webContent, key)}
+		</example>
+	</function>
+
+	<function>
+		<description>Wrapper to call WebContentManagement.cmsMessage</description>
+		<name>cmsMsg</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>String cmsMsg(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
+		<example>
+			${cmsMsg(actionBean.webContent, key)}
+		</example>
+	</function>
+	
+	<function>
+		<description>Wrapper to call WebContentManagement.br</description>
+		<name>br</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>String br(ro.finsiel.eunis.WebContentManagement)</function-signature>
+		<example>
+			${br(actionBean.webContent)}
+		</example>
+	</function>
+</taglib>

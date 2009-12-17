@@ -1,14 +1,12 @@
 package ro.finsiel.eunis;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageDecoder;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
-import com.sun.image.codec.jpeg.JPEGEncodeParam;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
+
+import javax.imageio.ImageIO;
 
 /**
  * Class which provides image nanipulation.
@@ -43,14 +41,9 @@ public final class ImageProcessing
   {
     try
     {
-      JPEGImageDecoder img_europe;
-      img_europe = JPEGCodec.createJPEGDecoder( new FileInputStream( inputFilename ) );
-      if ( img_europe != null )
-      {
-        img = img_europe.decodeAsBufferedImage();
+        img = ImageIO.read(new FileInputStream( inputFilename ));
         g = img.getGraphics();
         g.drawImage( img, 0, 0, null );
-      }
     }
     catch( Exception ex )
     {
@@ -65,11 +58,9 @@ public final class ImageProcessing
   {
     try
     {
-      JPEGImageEncoder img_out = JPEGCodec.createJPEGEncoder( new FileOutputStream(outputFilename));
-      JPEGEncodeParam param = img_out.getDefaultJPEGEncodeParam(img);
-      param.setQuality(0.8f,true);
-      img_out.setJPEGEncodeParam(param);
-      img_out.encode( img );
+      File outputfile = new File(outputFilename);
+      ImageIO.write(img, "jpg", outputfile);
+
     }
     catch( Exception ex )
     {

@@ -57,11 +57,11 @@
 	<c:when test="${eunis:exists(actionBean.factsheet)}">
 	
 	<img alt="${eunis:cms(actionBean.contentManagement,'loading_data')}" id="loading" src="images/loading.gif" />
-	  <c:if test="${actionBean.referedFromName != null}">
-	   redirected from <strong>${actionBean.referedFromName }</strong>
-	  </c:if>
 	  <h1 class="documentFirstHeading">
 		${actionBean.scientificName }
+	  <c:if test="${actionBean.referedFromName != null}">
+	   <span class="redirection-msg">&#8213; redirected from <strong>${actionBean.referedFromName }</strong></span>
+	  </c:if>
 	  </h1>
 	<div class="documentActions">
 	  <h5 class="hiddenStructure">${eunis:cms(actionBean.contentManagement, 'Document Actions') }</h5>

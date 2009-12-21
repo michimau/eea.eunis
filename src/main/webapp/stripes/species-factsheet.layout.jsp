@@ -100,13 +100,13 @@
               			<c:when test="${dataTab.id eq actionBean.tab}">
 	              			<li id="currenttab">
 	              				<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${dataTab.value}" 
-	              				href="species-factsheet.jsp?tab=${dataTab.id}&amp;idSpecies=${actionBean.factsheet.idSpecies}&amp;idSpeciesLink=${actionBean.factsheet.idSpeciesLink}">${dataTab.value}</a>
+	              				href="species-factsheet.jsp?tab=${dataTab.id}&amp;idSpecies=${actionBean.factsheet.idSpecies}">${dataTab.value}</a>
 	              			</li>
               			</c:when>
               			<c:otherwise>
               				<li>
 	              				<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${dataTab.value}"
-	              				 href="species-factsheet.jsp?tab=${dataTab.id}&amp;idSpecies=${actionBean.factsheet.idSpecies}&amp;idSpeciesLink=${actionBean.factsheet.idSpeciesLink}">${dataTab.value}</a>
+	              				 href="species-factsheet.jsp?tab=${dataTab.id}&amp;idSpecies=${actionBean.factsheet.idSpecies}">${dataTab.value}</a>
 	              			</li>
               			</c:otherwise>
               		</c:choose>

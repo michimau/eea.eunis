@@ -1,6 +1,5 @@
 package eionet.eunis.stripes.actions;
 
-import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -59,7 +58,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
 	
 	@DefaultHandler
-	public Resolution index() throws UnsupportedEncodingException {
+	public Resolution index(){
 		//sanity checks
 		if(StringUtils.isBlank(idSpecies) && idSpeciesLink == 0) {
 			factsheet = new SpeciesFactsheet(0, 0);

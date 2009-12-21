@@ -159,12 +159,11 @@
 	                </jsp:include>
                 </c:if>
                 <c:if test="${actionBean.tab == 6}">
-                String kmlUrl = "
                 	<%-- Grid distribution --%>
 	                <jsp:include page="/species-factsheet-distribution.jsp">
 	                  <jsp:param name="name" value="${actionBean.scientificName}" />
 	                  <jsp:param name="idNatureObject" value="${actionBean.factsheet.speciesNatureObject.idNatureObject}" />
-	                  <jsp:param name="kmlUrl" value="/species-factsheet-distribution-kml.jsp?idSpecies=${actionBean.factsheet.iSpecies}&amp;idSpeciesLink=${actionBean.factsheet.idSpeciesLink}" />
+	                  <jsp:param name="kmlUrl" value="${pageContext.request.contextPath}/species-factsheet-distribution-kml.jsp?idSpecies=${actionBean.factsheet.idSpecies}&amp;idSpeciesLink=${actionBean.factsheet.idSpeciesLink}" />
 	                </jsp:include>
                 </c:if>
                 <c:if test="${actionBean.tab == 7}">

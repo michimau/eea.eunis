@@ -31,7 +31,7 @@ public class XMLReport {
   /**
    * Directory where file will be written.
    */
-  protected static String BASE_FILENAME = "webapps/eunis/temp/";
+  private String BASE_FILENAME = "webapps/eunis/temp/";
   /**
    * EOL - END OF LINE \r\n.
    */
@@ -64,7 +64,7 @@ public class XMLReport {
     try
     {
       Properties p = ro.finsiel.eunis.OSEnvironment.getEnvVars();
-      BASE_FILENAME = p.getProperty( "TOMCAT_HOME" ) + "/webapps/eunis/temp/";
+      BASE_FILENAME = p.getProperty("INSTANCE_HOME") + "temp/";
       fileStream = new PrintWriter( new OutputStreamWriter( new FileOutputStream( BASE_FILENAME + filename ), "UTF-8" ) );
       fileStream.write( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" );
       fileStream.write( "<results>" );

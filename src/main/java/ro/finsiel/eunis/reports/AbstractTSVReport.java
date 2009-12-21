@@ -16,7 +16,7 @@ public abstract class AbstractTSVReport implements Serializable {
   protected static final int RESULTS_PER_PAGE = 1000;
   // TSV generator dependent fields
   /** Directory where file will be written. */
-  protected static String BASE_FILENAME = "webapps/eunis/temp/";
+  private String BASE_FILENAME = "webapps/eunis/temp/";
   /** EOL - END OF LINE \r\n .*/
   protected static final String EOL = "\r\n";
   /** TAB - Separator for two rows of the table. */
@@ -43,7 +43,7 @@ public abstract class AbstractTSVReport implements Serializable {
   public AbstractTSVReport(String filename) {
     try {
       Properties p = ro.finsiel.eunis.OSEnvironment.getEnvVars();
-      BASE_FILENAME = p.getProperty("TOMCAT_HOME") + "/webapps/eunis/temp/";
+      BASE_FILENAME = p.getProperty("INSTANCE_HOME") + "temp/";
       fileStream = new PrintWriter( new OutputStreamWriter( new FileOutputStream( BASE_FILENAME + filename ), "UTF-8" ) );
     } catch (Exception _ex) {
       _ex.printStackTrace();

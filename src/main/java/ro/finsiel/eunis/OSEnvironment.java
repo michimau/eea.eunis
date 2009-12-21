@@ -1,7 +1,6 @@
 package ro.finsiel.eunis;
 
-import java.io.*;
-import java.util.*;
+import java.util.Properties;
 
 /**
  * Access the environment variables of the Operating System.
@@ -18,6 +17,7 @@ public class OSEnvironment {
 //    Process p = null;
     Properties envVars = new Properties();
     envVars.put("TOMCAT_HOME", Settings.getSetting("TOMCAT_HOME"));
+    envVars.put("INSTANCE_HOME", Settings.getSetting("INSTANCE_HOME"));
 //    Runtime r = Runtime.getRuntime();
 //    String OS = System.getProperty("os.name").toLowerCase();
 //    System.out.println(OS);

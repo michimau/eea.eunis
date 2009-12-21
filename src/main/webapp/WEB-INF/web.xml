@@ -43,7 +43,7 @@
 
 	<context-param>
 		<param-name>INSTANCE_HOME</param-name>
-		<param-value>C:\\tomcat5.5\\webapps\\eunis</param-value>
+		<param-value>C:\\tomcat5.5\\webapps\\eunis\\</param-value>
 		<description>Location of the web application (absolute address,
 			trailing slash is required)</description>
 	</context-param>
@@ -461,6 +461,10 @@
 		<init-param>
 		    <param-name>ActionBeanContext.Class</param-name>
 		    <param-value>eionet.eunis.stripes.EunisActionBeanContext</param-value>
+		</init-param>
+		<init-param>
+		    <param-name>LocalePicker.Locales</param-name>
+		    <param-value>en_US:UTF-8</param-value>
 		</init-param>
 	</filter>
 

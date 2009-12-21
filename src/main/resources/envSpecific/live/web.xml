@@ -43,7 +43,7 @@
 
 	<context-param>
 		<param-name>INSTANCE_HOME</param-name>
-		<param-value>C:\\tomcat5.5\\webapps\\eunis</param-value>
+		<param-value>C:\\tomcat5.5\\webapps\\eunis\\</param-value>
 		<description>Location of the web application (absolute address,
 			trailing slash is required)</description>
 	</context-param>

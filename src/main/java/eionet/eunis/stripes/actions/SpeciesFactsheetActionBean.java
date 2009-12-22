@@ -63,33 +63,28 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 		if(StringUtils.isBlank(idSpecies) && idSpeciesLink == 0) {
 			factsheet = new SpeciesFactsheet(0, 0);
 		}
-		//backwards compatibility
-		else if (StringUtils.isNumeric(idSpecies) && idSpeciesLink > 0) {
-			factsheet = new SpeciesFactsheet(new Integer(idSpecies), new Integer(idSpeciesLink));			
-		} else {
-			int tempIdSpecies = 0;
-			//get idSpecies based on the request param.
-			if (StringUtils.isNumeric(idSpecies)) {
-				tempIdSpecies = new Integer(idSpecies);
-			} else if (!StringUtils.isBlank(idSpecies)) {
-				tempIdSpecies = getContext().getSpeciesFactsheetDao().getIdSpeciesForScientificName(this.idSpecies);
+		int tempIdSpecies = 0;
+		//get idSpecies based on the request param.
+		if (StringUtils.isNumeric(idSpecies)) {
+			tempIdSpecies = new Integer(idSpecies);
+		} else if (!StringUtils.isBlank(idSpecies)) {
+			tempIdSpecies = getContext().getSpeciesFactsheetDao().getIdSpeciesForScientificName(this.idSpecies);
+		}
+		int mainIdSpecies = getContext().getSpeciesFactsheetDao().getCanonicalIdSpecies(tempIdSpecies);
+		//it is not a synonym, check the referer
+		if (mainIdSpecies == tempIdSpecies) {
+			Integer referedFrom = (Integer) getContext().getFromSession("referer");
+			if (referedFrom != null && referedFrom > 0) {
+				getContext().removeFromSession("referer");
+				referedFromName = getContext().getSpeciesFactsheetDao().getScientificName(referedFrom);
 			}
-			int mainIdSpecies = getContext().getSpeciesFactsheetDao().getCanonicalIdSpecies(tempIdSpecies);
-			//it is not a synonym, check the referer
-			if (mainIdSpecies == tempIdSpecies) {
-				Integer referedFrom = (Integer) getContext().getFromSession("referer");
-				if (referedFrom != null && referedFrom > 0) {
-					getContext().removeFromSession("referer");
-					referedFromName = getContext().getSpeciesFactsheetDao().getScientificName(referedFrom);
-				}
-				factsheet = new SpeciesFactsheet(mainIdSpecies, mainIdSpecies);
-			}
-			//it's a synonym for another specie, redirect.
-			else {
-				getContext().addToSession("referer", tempIdSpecies);
-				RedirectResolution redirect = new RedirectResolution(getUrlBinding()).addParameter("idSpecies", mainIdSpecies);
-				return redirect;
-			}
+			factsheet = new SpeciesFactsheet(mainIdSpecies, mainIdSpecies);
+		}
+		//it's a synonym for another specie, redirect.
+		else {
+			getContext().addToSession("referer", tempIdSpecies);
+			RedirectResolution redirect = new RedirectResolution(getUrlBinding()).addParameter("idSpecies", mainIdSpecies);
+			return redirect;
 		}
 		
 		if (factsheet.exists()) {

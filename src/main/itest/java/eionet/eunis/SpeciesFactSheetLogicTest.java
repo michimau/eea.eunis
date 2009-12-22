@@ -75,13 +75,4 @@ public class SpeciesFactSheetLogicTest extends TestCase  {
 		assertTrue(tested instanceof ForwardResolution);
 	}
 	
-	public void testBackwardCompatibility(){
-		//backwards compatibility
-		action.setIdSpecies("951");
-		action.setIdSpeciesLink(1015);
-		tested = action.index();
-		assertTrue(tested instanceof ForwardResolution);
-		
-	}
-
 }

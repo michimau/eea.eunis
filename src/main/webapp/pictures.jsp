@@ -172,7 +172,7 @@
       <a href="javascript:nextImage('rImage')"><%=cm.cmsPhrase("Next >")%></a>
     </div>
     <div style="width : 100%; text-align : center;">
-      <img alt="<%=firstdescription%>" id="image" name="rImage" src="<%=dirBase + firstimage%>" border="1" />
+      <img alt="<%=firstdescription%>" id="image" name="rImage" src="<%=dirBase + firstimage%>" border="1" style="max-width:95%"/>
     </div>
     <script language="JavaScript" type="text/javascript">
       //<![CDATA[

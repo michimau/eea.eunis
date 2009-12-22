@@ -63,7 +63,7 @@ public class RelatedReportsUtil {
     /**
      * This method deletes uploaded files from server. Files are deleted physically from disk and from database also.
      * @param filenames List of String objects with name of the files.
-     * @param uploadDir The directory from the server where files are stored (ex. $INSTANCE_HOME + ${UPLOAD_DIR_FILES}).
+     * @param uploadDir The directory from the server where files are stored (${UPLOAD_DIR_FILES}).
      */
     public static void deleteFiles(String[] filenames, String uploadDir) {
         for (int i = 0; i < filenames.length; i++) {

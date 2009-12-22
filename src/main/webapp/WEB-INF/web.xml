@@ -41,13 +41,6 @@
 		<description>Tomcat installation directory</description>
 	</context-param>
 
-	<context-param>
-		<param-name>INSTANCE_HOME</param-name>
-		<param-value>C:\\tomcat5.5\\webapps\\eunis\\</param-value>
-		<description>Location of the web application (absolute address,
-			trailing slash is required)</description>
-	</context-param>
-
 	<!-- Static part of the page title (JSPs)-->
 	<context-param>
 		<param-name>PAGE_TITLE</param-name>

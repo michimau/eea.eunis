@@ -24,7 +24,7 @@
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-  String uploadDir = application.getInitParameter("INSTANCE_HOME") + application.getInitParameter("UPLOAD_DIR_FILES");
+  String uploadDir = getServletContext().getRealPath("/") + application.getInitParameter("UPLOAD_DIR_FILES");
   String[] deleteFile = FormBean.getFilenames();
   String operation = FormBean.getOperation();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
@@ -239,7 +239,7 @@
               EunisRelatedReportsPersist report = (EunisRelatedReportsPersist) approvedReportsList.get(i);
               if(null != report)
               {
-                File file = new File(application.getInitParameter("INSTANCE_HOME") + application.getInitParameter("UPLOAD_DIR_FILES") + report.getFileName());
+                File file = new File(getServletContext().getRealPath("/") + application.getInitParameter("UPLOAD_DIR_FILES") + report.getFileName());
           %>
                   <tr class="<%=(0 == (i % 2) ? "zebraodd" : "zebraeven")%>">
           <%

@@ -89,11 +89,11 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
   pdfReport report = new pdfReport();
   out.flush();
   String temp_dir = application.getInitParameter( "TEMP_DIR" );
-  String linktopdf = application.getInitParameter( "INSTANCE_HOME" ) + temp_dir;
+  String linktopdf = getServletContext().getRealPath("/") + temp_dir;
   String filename = "SpeciesFactsheet_" + request.getSession().getId() + ".pdf";
 
   Paragraph header = new Paragraph();
-  String jpegPath = application.getInitParameter("INSTANCE_HOME") + "images/headerpdf.jpg";
+  String jpegPath = getServletContext().getRealPath("/") + "images/headerpdf.jpg";
 
   try
   {

@@ -27,7 +27,7 @@ public class UpdateTemplate extends HttpServlet {
 
         WebContentManagement wm = new WebContentManagement();
        	
-        String baseDir = getServletContext().getInitParameter("INSTANCE_HOME");
+        String baseDir = getServletContext().getRealPath("/");
        	
         String headerUrl = getServletContext().getInitParameter("TEMPLATES_HEADER");
         String headerText = wm.readContentFromURL(headerUrl);

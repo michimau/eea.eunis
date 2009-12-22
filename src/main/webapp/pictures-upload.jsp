@@ -131,7 +131,7 @@
     {
       boolean ret = PicturesHelper.deletePicture(IDObject, NatureObjectType, scientificName, filename);
       // Delete picture physically from disk
-      String instanceHome = application.getInitParameter( "INSTANCE_HOME" );
+      String instanceHome = getServletContext().getRealPath("/");
       String baseDir = "";
       if (null != NatureObjectType && NatureObjectType.equalsIgnoreCase("species"))
       {

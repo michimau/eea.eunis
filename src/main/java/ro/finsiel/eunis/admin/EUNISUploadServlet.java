@@ -36,7 +36,6 @@ public class EUNISUploadServlet extends HttpServlet {
     /** Type of upload FILE - documents etc. used in SPECIES/SITES FACTSHEETS part of the web site */
     private static final int UPLOAD_TYPE_PICTURE = 1;
 
-    /** ROOT of the application (relative to $INSTANCE_HOME env. variable.) */
     private static String BASE_DIR = "";
 
     /** The temporary dir where parts of the upload are stored temporary (if file size is bigger than memory buffer). */
@@ -71,8 +70,8 @@ public class EUNISUploadServlet extends HttpServlet {
 
         // Initialise the default settings
         try {
-            BASE_DIR = getServletContext().getInitParameter("INSTANCE_HOME");
-            TEMP_DIR = getServletContext().getInitParameter("INSTANCE_HOME") + getServletContext().getInitParameter("TEMP_DIR");
+            BASE_DIR = getServletContext().getRealPath("/");
+            TEMP_DIR = BASE_DIR + getServletContext().getInitParameter("TEMP_DIR");
         } catch (Exception ex) {
             ex.printStackTrace();
         }

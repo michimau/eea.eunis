@@ -21,7 +21,7 @@
   String csvfilename = Utilities.formatString( request.getParameter( "tsvfilename"), "" );
   String xmlfilename = Utilities.formatString( request.getParameter( "xmlfilename"), "" );
 
-  String INSTANCE_HOME = application.getInitParameter( "INSTANCE_HOME" );
+  String INSTANCE_HOME = getServletContext().getRealPath("/");
   String TEMP_DIR = application.getInitParameter( "TEMP_DIR" );
 
   File csvfile;

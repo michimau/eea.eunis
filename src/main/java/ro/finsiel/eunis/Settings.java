@@ -79,7 +79,7 @@ public class Settings {
       //System.out.println(param  + " = " + servlet.getServletContext().getInitParameter(param));
     }
     SitesSearchUtility.SITES_PER_MAP = Utilities.checkedStringToInt(Settings.getSetting("SITES_PER_MAP"), 300);
-    Settings.setSetting("INSTANCE_HOME", servlet.getServletContext().getInitParameter("INSTANCE_HOME"));
+    Settings.setSetting("INSTANCE_HOME", servlet.getServletContext().getRealPath("/"));
     // Initialize the global settings of Settings object from web.xml
 //    Settings.setSetting("DOMAIN_NAME", servlet.getServletContext().getInitParameter("DOMAIN_NAME"));
 //    Settings.setSetting("PAGE_TITLE", servlet.getServletContext().getInitParameter("PAGE_TITLE"));

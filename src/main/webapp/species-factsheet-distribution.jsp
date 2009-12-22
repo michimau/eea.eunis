@@ -34,8 +34,8 @@
   {
     String filename = request.getSession().getId() + "_" + new Date().getTime() + "_europe.jpg";
     String temp_dir = application.getInitParameter( "TEMP_DIR" );
-    String inputFilename = application.getInitParameter( "INSTANCE_HOME" ) + "gis/europe-bio.jpg";
-    String outputFilename = application.getInitParameter( "INSTANCE_HOME" ) + temp_dir + filename;
+    String inputFilename = getServletContext().getRealPath("/") + "gis/europe-bio.jpg";
+    String outputFilename = getServletContext().getRealPath("/") + temp_dir + filename;
 
     System.out.println( "outputFilename = " + outputFilename );
     System.out.println( "inputFilename = " + inputFilename );
@@ -56,7 +56,7 @@
             double latitude = dis.getLatitude().doubleValue();
             int x;
             int y;
-  //          WEST – 15
+  //          WEST ï¿½ 15
   //          EAST +44
   //          NORTH +73
   //          SOUTH +34

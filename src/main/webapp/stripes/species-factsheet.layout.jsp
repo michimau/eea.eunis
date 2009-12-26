@@ -269,6 +269,14 @@
       catch ( e )
       {
       }
+        // Writes a warning if the page is called as a popup.
+        if ( history.length == 1 && document.referrer != '') {
+            c = document.getElementById('content');
+            w = document.createElement('div');
+            w.className = "note-msg";
+            w.innerHTML = "<strong>Notice</strong> <p>This page was called as a popup. The back button has been disabled by the referring page. Use Alt-F4 to exit.</p>";
+            c.insertBefore(w, c.firstChild);
+        }
       //]]>
     </script>
   </body>

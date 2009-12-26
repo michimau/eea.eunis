@@ -265,6 +265,29 @@ fieldset.large legend
 	border: 1px solid #aaa;;
 	background-color: #f7f7f7;
 }
+.tip-msg, .note-msg,
+.important-msg, .caution-msg, .warning-msg,
+.error-msg {
+	padding: 0.5em 0.5em 0.5em 30px;
+	margin: 0.5em 2em;
+	font-weight: bold;
+}
+.tip-msg strong, .note-msg strong,
+.important-msg strong, .caution-msg strong, .warning-msg strong {
+	font-weight: bold;
+}
+
+.tip-msg p, .note-msg p,
+.important-msg p, .caution-msg p, .warning-msg p {
+	font-weight: normal;
+	margin: 0.2em 0;
+	padding: 0.6em 2px 2px 0px;
+}
+
+.note-msg {
+	border: 1px dashed black;
+	background: url('../images/icon_info_32.gif') 0px 0px no-repeat;
+}
 
 .redirection-msg {
 	font-size: 85%;

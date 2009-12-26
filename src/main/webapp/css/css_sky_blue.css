@@ -268,7 +268,7 @@ fieldset.large legend
 .tip-msg, .note-msg,
 .important-msg, .caution-msg, .warning-msg,
 .error-msg {
-	padding: 0.5em 0.5em 0.5em 30px;
+	padding: 0.5em 0.5em 0.5em 32px;
 	margin: 0.5em 2em;
 	font-weight: bold;
 }
@@ -286,7 +286,7 @@ fieldset.large legend
 
 .note-msg {
 	border: 1px dashed black;
-	background: url('../images/icon_info_32.gif') 0px 0px no-repeat;
+	background: url('../images/icon_info_32.gif') 0px 50% no-repeat;
 }
 
 .redirection-msg {

@@ -1,23 +1,31 @@
 package ro.finsiel.eunis;
 
-import ro.finsiel.eunis.jrfTables.*;
-import ro.finsiel.eunis.search.Utilities;
-import ro.finsiel.eunis.utilities.EunisUtil;
-
-import java.security.GeneralSecurityException;
-import java.security.MessageDigest;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.text.MessageFormat;
-import java.util.*;
-import java.net.URL;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.Vector;
+
+import ro.finsiel.eunis.jrfTables.Chm62edtLanguageDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtLanguagePersist;
+import ro.finsiel.eunis.jrfTables.EunisISOLanguagesDomain;
+import ro.finsiel.eunis.jrfTables.EunisISOLanguagesPersist;
+import ro.finsiel.eunis.jrfTables.WebContentDomain;
+import ro.finsiel.eunis.jrfTables.WebContentPersist;
+import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.utilities.EunisUtil;
 
 /**
  * Mange the content from the WEB_CONTENT table. Used for HTML editing of the web pages.
@@ -233,10 +241,6 @@ public class WebContentManagement implements java.io.Serializable {
           ret = idPage;
         }
       }
-      else
-      {
-        System.out.println( "Warning:" + WebContentManagement.class.getName() + "::getText(" + idPage + "): Page not found in cache." );
-      }
     }
     else
     {
@@ -245,10 +249,6 @@ public class WebContentManagement implements java.io.Serializable {
       {
         htmlContent.put( idPage, dbKeyList.get( 0 ) );
         ret = dbKeyList.get( 0 ).getContent();
-      }
-      else
-      {
-        System.out.println( "Warning:" + WebContentManagement.class.getName() + "::getText(" + idPage + "): Page not found in cache and database." );
       }
     }
     return ret;

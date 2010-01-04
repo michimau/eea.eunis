@@ -1,5 +1,7 @@
 package eionet.eunis.stripes.actions;
 
+import org.apache.log4j.Logger;
+
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.controller.AnnotatedClassActionResolver;
@@ -14,6 +16,7 @@ import eionet.eunis.stripes.EunisActionBeanContext;
  */
 public class AbstractStripesAction implements ActionBean {
 	
+	protected final static Logger logger = Logger.getLogger(ActionBean.class);
 	private EunisActionBeanContext context;
 	
 	/** 

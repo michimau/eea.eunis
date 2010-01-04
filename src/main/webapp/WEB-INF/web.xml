@@ -488,6 +488,10 @@
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/species-factsheet.jsp</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StripesDispatcher</servlet-name>
+		<url-pattern>/rdf/sites/*</url-pattern>
+	</servlet-mapping>
 
 	<!-- Session expiration in minutes -->
 	<session-config>

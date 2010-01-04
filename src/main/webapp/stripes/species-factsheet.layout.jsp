@@ -274,7 +274,7 @@
             c = document.getElementById('content');
             w = document.createElement('div');
             w.className = "note-msg";
-            w.innerHTML = "<strong>Notice</strong> <p>This page was called as a popup. The back button has been disabled by the referring page. Close the window to exit.</p>";
+            w.innerHTML = "<strong>Notice</strong> <p>This page was opened as a new window. The back button has been disabled by the referring page. Close the window to exit.</p>";
             c.insertBefore(w, c.firstChild);
         }
       //]]>

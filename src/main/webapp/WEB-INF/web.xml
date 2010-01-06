@@ -452,6 +452,10 @@
 			<param-value>eionet.eunis.stripes.actions</param-value>
 		</init-param>
 		<init-param>
+		  <param-name>Extension.Packages</param-name>
+		  <param-value>eionet.eunis.stripes.extensions</param-value>
+		</init-param>
+		<init-param>
 		    <param-name>ActionBeanContext.Class</param-name>
 		    <param-value>eionet.eunis.stripes.EunisActionBeanContext</param-value>
 		</init-param>
@@ -490,7 +494,7 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/rdf/sites/*</url-pattern>
+		<url-pattern>/sites-factsheet.jsp</url-pattern>
 	</servlet-mapping>
 
 	<!-- Session expiration in minutes -->

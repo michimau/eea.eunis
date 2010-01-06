@@ -2,6 +2,7 @@ package eionet.eunis.dto;
 
 import java.io.Serializable;
 
+import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
@@ -13,11 +14,20 @@ import org.simpleframework.xml.Root;
  */
 @Root
 public class SiteFactsheetDto implements Serializable {
+	
+	private static final String RDF_URL_MAPPING = "http://eunisimport.eea.europa.eu/sites-factsheet.jsp";
+	
 	/**
 	 * serial.
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@Element(name = "hasDesignation", required = false)
+	private ResourceDto idDesignation;
+	@Element(name = "hasSource", required = false)
+	private ResourceDto idDc;
+	@Element(name = "hasGeoscope", required = false)
+	private ResourceDto idGeoscope;
 	@Element(required = false)
 	private String idSite;
 	@Element(required = false)
@@ -98,6 +108,14 @@ public class SiteFactsheetDto implements Serializable {
 	private String latitude;
 	@Element(required = false)
 	private String sourceDb;
+	
+	/**
+	 * @return the rdfAbout
+	 */
+	@Attribute(name="rdf:about")
+	public String getRdfAbout() {
+		return String.format("%s?idsite=%S", RDF_URL_MAPPING, idSite);
+	}
 	
 	/**
 	 * @return the idsite
@@ -657,6 +675,48 @@ public class SiteFactsheetDto implements Serializable {
 	 */
 	public void setSourceDb(String sourceDb) {
 		this.sourceDb = sourceDb;
+	}
+
+	/**
+	 * @return the idDesignation
+	 */
+	public ResourceDto getIdDesignation() {
+		return idDesignation;
+	}
+
+	/**
+	 * @param idDesignation the idDesignation to set
+	 */
+	public void setIdDesignation(ResourceDto idDesignation) {
+		this.idDesignation = idDesignation;
+	}
+
+	/**
+	 * @return the idGeoscope
+	 */
+	public ResourceDto getIdGeoscope() {
+		return idGeoscope;
+	}
+
+	/**
+	 * @param idGeoscope the idGeoscope to set
+	 */
+	public void setIdGeoscope(ResourceDto idGeoscope) {
+		this.idGeoscope = idGeoscope;
+	}
+
+	/**
+	 * @return the idDc
+	 */
+	public ResourceDto getIdDc() {
+		return idDc;
+	}
+
+	/**
+	 * @param idDc the idDc to set
+	 */
+	public void setIdDc(ResourceDto idDc) {
+		this.idDc = idDc;
 	}
 
 }

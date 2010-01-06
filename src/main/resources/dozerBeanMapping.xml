@@ -12,8 +12,20 @@
     	<b>idSite</b>
     </field>
     <field>
+    	<a>siteObject.idDesignation</a>
+    	<b>idDesignation.id</b>
+    </field>
+    <field>
+    	<a>siteObject.idGeoscope</a>
+    	<b>idGeoscope.id</b>
+    </field>
+    <field>
     	<a>IDNatureObject</a>
     	<b>idNatureObject</b>
+    </field>
+    <field>
+    	<a>idDc</a>
+    	<b>idDc.id</b>
     </field>
     <field>
     	<a>designation</a>

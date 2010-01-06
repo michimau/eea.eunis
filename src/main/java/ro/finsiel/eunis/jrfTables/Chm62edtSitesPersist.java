@@ -18,6 +18,10 @@ public class Chm62edtSitesPersist extends PersistentObject implements Coordinate
    * This is a database field.
    **/
   private String i_idSite = null;
+  
+  private String idDesignation;
+  
+  private Integer idGeoscope;
   /**
    * This is a database field.
    **/
@@ -492,5 +496,37 @@ public class Chm62edtSitesPersist extends PersistentObject implements Coordinate
     i_natura2000 = natura2000;
     this.markModifiedPersistentState();
   }
+
+
+/**
+ * @return the idDesignation
+ */
+public String getIdDesignation() {
+	return idDesignation;
+}
+
+
+/**
+ * @param idDesignation the idDesignation to set
+ */
+public void setIdDesignation(String idDesignation) {
+	this.idDesignation = idDesignation;
+}
+
+
+/**
+ * @return the idGeoscope
+ */
+public Integer getIdGeoscope() {
+	return idGeoscope;
+}
+
+
+/**
+ * @param idGeoscope the idGeoscope to set
+ */
+public void setIdGeoscope(Integer idGeoscope) {
+	this.idGeoscope = idGeoscope;
+}
 
 }

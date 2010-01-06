@@ -69,6 +69,20 @@ public class SiteFactsheet {
   public SiteFactsheet( String idSite ) {
     this.idSite = idSite;
   }
+  
+  public Integer getIdDc() {
+	  try {
+		  Integer pk = getSiteObject().getIdNatureObject();
+		  if (pk == null) {
+			  return null;
+		  }
+		  Chm62edtNatureObjectPersist persist = (Chm62edtNatureObjectPersist) new Chm62edtNatureObjectDomain().find(pk);
+		  return persist.getIdDc();
+	  } catch (Exception warning) {
+		  logger.error(warning);
+	  }
+	  return null;
+  }
 
   public String getDescription()
   {

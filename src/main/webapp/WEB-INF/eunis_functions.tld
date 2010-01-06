@@ -15,7 +15,7 @@
 		<description>Wrapper to call factsheet.exists</description>
 		<name>exists</name>
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>
-		<function-signature>boolean exists(ro.finsiel.eunis.factsheet.species.SpeciesFactsheet)</function-signature>
+		<function-signature>boolean exists(java.lang.Object)</function-signature>
 		<example>
 			${exists(factsheet)}
 		</example>

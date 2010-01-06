@@ -1,7 +1,10 @@
 package eionet.eunis.util;
 
+import java.lang.reflect.Method;
+
+import org.apache.log4j.Logger;
+
 import ro.finsiel.eunis.WebContentManagement;
-import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
 
 /**
  * Collection of eunis JSTL functions.
@@ -11,6 +14,8 @@ import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
  */
 public class JstlFunctions {
 	
+	private static final Logger logger = Logger.getLogger(JstlFunctions.class);
+	
 	
 	/**
 	 * jstl wrapper to factsheet.exists();
@@ -18,8 +23,18 @@ public class JstlFunctions {
 	 * @param factsheet
 	 * @return
 	 */
-	public static boolean exists(SpeciesFactsheet factsheet) {
-		return factsheet != null && factsheet.exists();
+	public static boolean exists(Object suspicious) {
+		try {
+			Method exists = suspicious.getClass().getMethod("exists");
+			boolean result = false;
+			if (exists != null) {
+				result = (Boolean) exists.invoke(suspicious);
+			}
+			return result;
+		} catch (Exception e) {
+			logger.error(e);
+			throw new RuntimeException(e);
+		}
 	}
 	
 	/**

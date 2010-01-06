@@ -81,10 +81,24 @@ public class WebContentManagement implements java.io.Serializable {
     }
   }
 
+  /**
+   * Get the text for a token in the content table
+   * Tokens can't contain apostrophs
+   *
+   * @param idPage
+   */
   public String cms( String idPage ) {
     return getText( idPage );
   }
 
+  /**
+   * Get the text for a token in the content table
+   * Tokens can't contain apostrophs
+   * Not to be used inside HTML attribute values
+   * If we're in edit mode, then show an edit-icon.
+   *
+   * @param idPage
+   */
   public String cmsText( String idPage ) {
 	String ret = Utilities.replace(idPage, "'", "''");
     ret = getText( ret );
@@ -95,6 +109,12 @@ public class WebContentManagement implements java.io.Serializable {
     return ret;
   }
   
+  /**
+   * Look up a longer phrase (potentially HTML) in the content table
+   * It is probably not necessary to escape apostrophs
+   *
+   * @param idPage
+   */
   public String cmsPhrase( String idPage ) {
 	String ret = Utilities.replace(idPage, "'", "\'");
     ret = getTextByMD5( ret );
@@ -241,6 +261,10 @@ public class WebContentManagement implements java.io.Serializable {
           ret = idPage;
         }
       }
+      else
+      {
+        System.out.println( "Warning:" + WebContentManagement.class.getName() + "::getText(" + idPage + "): Page not found in cache." );
+      }
     }
     else
     {
@@ -249,6 +273,10 @@ public class WebContentManagement implements java.io.Serializable {
       {
         htmlContent.put( idPage, dbKeyList.get( 0 ) );
         ret = dbKeyList.get( 0 ).getContent();
+      }
+      else
+      {
+        System.out.println( "Warning:" + WebContentManagement.class.getName() + "::getText(" + idPage + "): Page not found in cache and database." );
       }
     }
     return ret;

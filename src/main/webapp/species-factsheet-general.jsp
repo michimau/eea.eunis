@@ -127,8 +127,7 @@
   <table summary="layout" width="90%" border="0" cellspacing="5" cellpadding="5">
     <tr>
       <td width="20%" style="text-align : left; vertical-align : middle">
-        <a title="<%=cm.cms("species_factsheet_02_Title")%>" href="http://images.google.com/images?q=<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("Pictures on Google")%></a>
-        <%=cm.cmsTitle("species_factsheet_02_Title")%>
+        <a title="<%=cm.cmsPhrase("Pictures of the species on Google")%>" href="http://images.google.com/images?q=<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("Pictures on Google")%></a>
       </td>
       <td width="20%" style="text-align : left; vertical-align : middle">
 <%
@@ -137,8 +136,7 @@
       gbifLink = URLEncoder.encode(gbifLink,"UTF-8");
 //      gbifLink = gbifLink.replaceAll( " ", "\\." );
 %>
-        <a title="<%=cm.cms("species_factsheet_03_Title")%>" href="http://data.gbif.org/species/<%=gbifLink%>"><%=cm.cmsPhrase("GBIF link")%></a>
-        <%=cm.cmsTitle("species_factsheet_03_Title")%>
+        <a title="<%=cm.cmsPhrase("Search species on GBIF")%>" href="http://data.gbif.org/species/<%=gbifLink%>"><%=cm.cmsPhrase("GBIF link")%></a>
       </td>
       <td width="20%" style="text-align : left; vertical-align : middle">
 <%
@@ -164,8 +162,7 @@
         genus=sn.substring(0, pos);
         spname=sn.substring(pos+1);
 %>
-        <a title="<%=cm.cms("species_factsheet_04_Title")%>" href="http://sea.unep-wcmc.org/isdb/species.cfm?source=<%=kingdomname%>&amp;genus=<%=genus%>&amp;species=<%=Utilities.treatURLSpecialCharacters(spname)%>"><%=cm.cmsPhrase("UNEP-WCMC link")%></a>
-        <%=cm.cmsTitle("species_factsheet_04_Title")%>
+        <a title="<%=cm.cmsPhrase("Search species on UNEP-WCMC")%>" href="http://sea.unep-wcmc.org/isdb/species.cfm?source=<%=kingdomname%>&amp;genus=<%=genus%>&amp;species=<%=Utilities.treatURLSpecialCharacters(spname)%>"><%=cm.cmsPhrase("UNEP-WCMC link")%></a>
 <%
       }
       else
@@ -197,8 +194,7 @@
         String scientificNameURL = scientificName.replace(' ','+');
 %>
       <td width="20%" style="text-align : left; vertical-align : middle">
-        <a title="<%=cm.cms("species_factsheet_05_Title")%>" href="http://www.redlist.org/apps/redlist/search/external?text=<%=scientificNameURL%>&amp;mode="><%=cm.cmsPhrase("Redlist link")%></a>
-        <%=cm.cmsTitle("species_factsheet_05_Title")%>
+        <a title="<%=cm.cmsPhrase("Search species on Redlist site")%>" href="http://www.redlist.org/apps/redlist/search/external?text=<%=scientificNameURL%>&amp;mode="><%=cm.cmsPhrase("Redlist link")%></a>
       </td>
 <%
       }
@@ -208,8 +204,7 @@
         String speciesName = (scientificName.trim().indexOf(" ")>=0? scientificName.trim().substring(scientificName.indexOf(" ") + 1) : scientificName);
 %>
       <td width="20%" style="text-align : left; vertical-align : middle">
-        <a title="<%=cm.cms("species_factsheet_06_Title")%>" href="http://www.fishbase.org/Summary/SpeciesSummary.cfm?genusname=<%=genusName%>&amp;speciesname=<%=Utilities.treatURLSpecialCharacters(speciesName)%>"><%=cm.cmsPhrase("Fishbase link")%></a>
-        <%=cm.cmsTitle("species_factsheet_06_Title")%>
+        <a title="<%=cm.cmsPhrase("Search species on Fishbase")%>" href="http://www.fishbase.org/Summary/SpeciesSummary.cfm?genusname=<%=genusName%>&amp;speciesname=<%=Utilities.treatURLSpecialCharacters(speciesName)%>"><%=cm.cmsPhrase("Fishbase link")%></a>
       </td>
 <%
       }
@@ -218,16 +213,13 @@
     </tr>
     <tr>
       <td width="20%" style="text-align : left; vertical-align : middle">
-        <a title="<%=cm.cms("species_factsheet_07_Title")%>" href="http://www.scirus.com/srsapp/search?q=%22<%=Utilities.treatURLSpecialCharacters(scientificName)%>%22&amp;ds=web&amp;g=s&amp;t=all"><%=cm.cmsPhrase("SCIRUS")%></a>
-        <%=cm.cmsTitle("species_factsheet_07_Title")%>
+        <a title="<%=cm.cmsPhrase("Search species on SCIRUS")%>" href="http://www.scirus.com/srsapp/search?q=%22<%=Utilities.treatURLSpecialCharacters(scientificName)%>%22&amp;ds=web&amp;g=s&amp;t=all"><%=cm.cmsPhrase("SCIRUS")%></a>
       </td>
       <td width="20%" style="text-align : left; vertical-align : middle">
-        <a title="<%=cm.cms("species_factsheet_08_Title")%>" href="http://www.biologybrowser.org/search/apachesolr_search/<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("Biology Browser")%></a>
-        <%=cm.cmsTitle("species_factsheet_08_Title")%>
+        <a title="<%=cm.cmsPhrase("Search species on Biology Browser")%>" href="http://www.biologybrowser.org/search/apachesolr_search/<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("Biology Browser")%></a>
       </td>
       <td width="20%" style="text-align : left; vertical-align : middle">
-        <a title="<%=cm.cms("species_factsheet_09_Title")%>" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?doptcmdl=ExternalLink&amp;cmd=Search&amp;db=taxonomy&amp;term=<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("NCBI Taxonomy browser")%></a>
-        <%=cm.cmsTitle("species_factsheet_09_Title")%>
+        <a title="<%=cm.cmsPhrase("Search species on NCBI Taxonomy browser")%>" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?doptcmdl=ExternalLink&amp;cmd=Search&amp;db=taxonomy&amp;term=<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("NCBI Taxonomy browser")%></a>
       </td>
       <td width="20%" style="text-align : left; vertical-align : middle">
 <%
@@ -242,8 +234,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
         genus=sn.substring(0, pos).trim();
         spname=sn.substring(pos+1).trim();
 %>
-        <a title="<%=cm.cms("species_factsheet_21_Title")%>" href="http://www.faunaeur.org/index.php?show_what=search%20results&amp;genus= <%=genus%> &amp;species= <%=spname%>"><%=cm.cmsPhrase("Fauna Europaea")%></a>
-        <%=cm.cmsTitle("species_factsheet_21_Title")%>
+        <a title="<%=cm.cmsPhrase("Search species on Fauna Europaea")%>" href="http://www.faunaeur.org/index.php?show_what=search%20results&amp;genus= <%=genus%> &amp;species= <%=spname%>"><%=cm.cmsPhrase("Fauna Europaea")%></a>
 <%
       }
       else

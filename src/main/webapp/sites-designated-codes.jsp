@@ -45,18 +45,21 @@
                   <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <a name="documentContent"></a>
+                <h1>
+                  <%=cm.cmsPhrase("Pick designation types, show sites")%>
+                </h1>
                 <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cms("Document Actions")%></h5><%=cm.cmsTitle( "Document Actions" )%>
+                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
                   <ul>
                     <li>
                       <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cms("Print this page")%>"
-                            title="<%=cm.cms("Print this page")%>" /></a><%=cm.cmsTitle( "Print this page" )%>
+                            alt="<%=cm.cmsPhrase("Print this page")%>"
+                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
                     </li>
                     <li>
                       <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cms("Toggle full screen mode")%>"
-                             title="<%=cm.cms("Toggle full screen mode")%>" /></a><%=cm.cmsTitle( "Toggle full screen mode" )%>
+                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
+                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
                     </li>
                     <li>
                       <a href="species-help.jsp"><img src="images/help_icon.gif"
@@ -69,9 +72,6 @@
 <!-- MAIN CONTENT -->
                 <form name="eunis" method="get" onsubmit="javascript: return validateForm();" action="sites-designated-codes-result.jsp">
                 <input type="hidden" name="source" value="sitedesignatedname" />
-                <h1>
-                  <%=cm.cmsPhrase("Pick designation types, show sites")%>
-                </h1>
                 <p>
                 <%=cm.cmsPhrase("Search sites by legal instruments<br />(ex.: designations with <strong>forest</strong> in their name, <strong>A</strong> as category, from all source data sets)")%>
                 </p>

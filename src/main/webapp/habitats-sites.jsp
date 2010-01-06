@@ -132,18 +132,21 @@ function validateForm()
                   <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <a name="documentContent"></a>
+                  <h1>
+                    <%=cm.cmsPhrase("Pick sites, show habitat types")%>
+                  </h1>
                 <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cms("Document Actions")%></h5><%=cm.cmsTitle( "Document Actions" )%>
+                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
                   <ul>
                     <li>
                       <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cms("Print this page")%>"
-                            title="<%=cm.cms("Print this page")%>" /></a><%=cm.cmsTitle( "Print this page" )%>
+                            alt="<%=cm.cmsPhrase("Print this page")%>"
+                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
                     </li>
                     <li>
                       <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cms("Toggle full screen mode")%>"
-                             title="<%=cm.cms("Toggle full screen mode")%>" /></a><%=cm.cmsTitle( "Toggle full screen mode" )%>
+                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
+                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
                     </li>
                     <li>
                       <a href="sites-help.jsp"><img src="images/help_icon.gif"
@@ -158,9 +161,6 @@ function validateForm()
                 <input type="hidden" name="showScientificName" value="true" />
                 <input type="hidden" name="sort" value="<%=SitesSortCriteria.SORT_EUNIS_CODE%>" />
                 <input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
-                  <h1>
-                    <%=cm.cmsPhrase("Pick sites, show habitat types")%>
-                  </h1>
                   <p>
                   <%=cm.cmsPhrase("Identify habitats located within sites<br />(ex.: search all habitat types located within site named <strong>AAMSVEEN</strong>)")%>
                   </p>

@@ -124,18 +124,19 @@
                   <jsp:param name="location" value="<%=breadcrumbtrail%>"/>
                 </jsp:include>
                 <a name="documentContent"></a>
+                <h1><%=cm.cmsPhrase("EUNIS Database User Bookmarks")%></h1>
                 <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cms("Document Actions")%></h5><%=cm.cmsTitle( "Document Actions" )%>
+                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
                   <ul>
                     <li>
                       <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cms("Print this page")%>"
-                            title="<%=cm.cms("Print this page")%>" /></a><%=cm.cmsTitle( "Print this page" )%>
+                            alt="<%=cm.cmsPhrase("Print this page")%>"
+                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
                     </li>
                     <li>
                       <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cms("Toggle full screen mode")%>"
-                             title="<%=cm.cms("Toggle full screen mode")%>" /></a><%=cm.cmsTitle( "Toggle full screen mode" )%>
+                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
+                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
                     </li>
                   </ul>
                 </div>
@@ -144,7 +145,6 @@
               if(SessionManager.isAuthenticated())
               {
             %>
-                <h1><%=cm.cmsPhrase("EUNIS Database User Bookmarks")%></h1>
                 <form name="eunis" method="post" action="users-bookmarks.jsp">
                   <input type ="hidden" name="typeAction" value="<%=request.getParameter("typeAction")%>" />
                   <input type ="hidden" name="bookmarkNameHidden" value="<%=request.getParameter("bookmarkNameHidden")%>" />

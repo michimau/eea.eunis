@@ -71,18 +71,21 @@
                 <jsp:param name="location" value="<%=btrail%>" />
               </jsp:include>
                 <a name="documentContent"></a>
+                              <h1>
+                                <%=cm.cmsPhrase("Scientific name")%>
+                              </h1>
                 <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cms("Document Actions")%></h5><%=cm.cmsTitle( "Document Actions" )%>
+                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
                   <ul>
                     <li>
                       <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cms("Print this page")%>"
-                            title="<%=cm.cms("Print this page")%>" /></a><%=cm.cmsTitle( "Print this page" )%>
+                            alt="<%=cm.cmsPhrase("Print this page")%>"
+                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
                     </li>
                     <li>
                       <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cms("Toggle full screen mode")%>"
-                             title="<%=cm.cms("Toggle full screen mode")%>" /></a><%=cm.cmsTitle( "Toggle full screen mode" )%>
+                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
+                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
                     </li>
                     <li>
                       <a href="species-help.jsp"><img src="images/help_icon.gif"
@@ -105,9 +108,6 @@
                         <table summary="layout" width="100%" border="0" style="text-align:left">
                           <tr>
                             <td>
-                              <h1>
-                                <%=cm.cmsPhrase("Scientific name")%>
-                              </h1>
                               <%=cm.cmsPhrase("Classification, distribution and threat status of species selected by scientific name <br />(ex.: search all species having <strong>acrocephalus</strong> in their scientific name)")%>
                               <br />
                               <br />

@@ -168,27 +168,6 @@
                   <jsp:param name="downloadLink" value="<%=downloadLink%>" />
                 </jsp:include>
                 <a name="documentContent"></a>
-                <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cms("Document Actions")%></h5><%=cm.cmsTitle( "Document Actions" )%>
-                  <ul>
-                    <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cms("Print this page")%>"
-                            title="<%=cm.cms("Print this page")%>" /></a><%=cm.cmsTitle( "Print this page" )%>
-                    </li>
-                    <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cms("Toggle full screen mode")%>"
-                             title="<%=cm.cms("Toggle full screen mode")%>" /></a><%=cm.cmsTitle( "Toggle full screen mode" )%>
-                    </li>
-                    <li>
-                      <a href="species-help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cms( "header_help_title" )%>"
-                             title="<%=cm.cms( "header_help_title" )%>" /></a>
-            				<%=cm.cmsTitle( "header_help_title" )%>
-                    </li>
-                  </ul>
-                </div>
 <!-- MAIN CONTENT -->
                 <h1>
                    <%
@@ -214,6 +193,27 @@
                       }
                       %>
                 </h1>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="<%=cm.cmsPhrase("Print this page")%>"
+                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
+                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
+                    </li>
+                    <li>
+                      <a href="species-help.jsp"><img src="images/help_icon.gif"
+                             alt="<%=cm.cms( "header_help_title" )%>"
+                             title="<%=cm.cms( "header_help_title" )%>" /></a>
+            				<%=cm.cmsTitle( "header_help_title" )%>
+                    </li>
+                  </ul>
+                </div>
                 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
                     <td>

@@ -90,26 +90,25 @@
 									<a href="javascript:this.print();">
 										<img
 											src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-											alt="${eunis:cms(actionBean.contentManagement, 'Print this page')}"
-											title="${eunis:cms(actionBean.contentManagement, 'Print this page')}" />
+											alt="${eunis:cmsPhrase(actionBean.contentManagement, 'Print this page')}"
+											title="${eunis:cmsPhrase(actionBean.contentManagement, 'Print this page')}" />
 									</a>
-									${eunis:cmsTitle(actionBean.contentManagement, 'Print this page')}
 								</li>
 								<li>
 									<a href="javascript:toggleFullScreenMode();">
 										<img
 											src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-											alt="${eunis:cms(actionBean.contentManagement, 'Toggle full screen mode')}"
-											title="${eunis:cms(actionBean.contentManagement, 'Toggle full screen mode')}" />
+											alt="${eunis:cmsPhrase(actionBean.contentManagement, 'Toggle full screen mode')}"
+											title="${eunis:cmsPhrase(actionBean.contentManagement, 'Toggle full screen mode')}" />
 									</a>
-									${eunis:cmsTitle(actionBean.contentManagement, 'Toggle full screen mode')}
 								</li>
 								<li>
 									<a href="javascript:openLink('sites-factsheet-pdf.jsp?idsite=${actionBean.idsite}')">
 										<img
 											src="images/pdf.png"
-											alt="${eunis:cms(actionBean.contentManagement, 'header_download_pdf_title')}"
-											title="${eunis:cms(actionBean.contentManagement, 'header_download_pdf_title')}" />
+											alt="${eunis:cmsPhrase(actionBean.contentManagement, 'header_download_pdf_title')}"
+											title="${eunis:cmsPhrase(actionBean.contentManagement, 'header_download_pdf_title')}" />
+									${eunis:cmsTitle(actionBean.contentManagement, 'header_download_pdf_title')}
 									</a>
 								</li>
 							</ul>

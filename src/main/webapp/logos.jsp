@@ -42,27 +42,28 @@
                   <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <a name="documentContent"></a>
-                <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cms("Document Actions")%></h5><%=cm.cmsTitle( "Document Actions" )%>
-                  <ul>
-                    <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cms("Print this page")%>"
-                            title="<%=cm.cms("Print this page")%>" /></a><%=cm.cmsTitle( "Print this page" )%>
-                    </li>
-                    <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cms("Toggle full screen mode")%>"
-                             title="<%=cm.cms("Toggle full screen mode")%>" /></a><%=cm.cmsTitle( "Toggle full screen mode" )%>
-                    </li>
-                  </ul>
-                </div>
 <!-- MAIN CONTENT -->
                 <h1>
                   <%=cm.cmsPhrase("EUNIS Logo")%>
                 </h1>
-                <br />
-                <%=cm.cmsPhrase("Please use the provided logos to link from your website to EUNIS Database.<br />In order to use them, save the images using right-click and use the link from the text box <br /> or<br /> link directly to our website by using the link provided on third column. <br />")%>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="<%=cm.cmsPhrase("Print this page")%>"
+                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
+                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
+                    </li>
+                  </ul>
+                </div>
+                <p>
+                <%=cm.cmsPhrase("Please use the provided logos to link from your website to EUNIS Database.<br />In order to use them, save the images using right-click and use the link from the text box <br /> or<br /> link directly to our website by using the link provided on third column.")%>
+		</p>
                 <table width="100%" summary="Logos">
                   <tr>
                     <th>

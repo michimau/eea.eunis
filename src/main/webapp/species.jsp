@@ -62,26 +62,26 @@
 			<jsp:param name="location" value="<%=btrail%>"/>
 		</jsp:include>
               <a name="documentContent"></a>
+              <img id="loading" alt="<%=cm.cms("loading_progress")%>" title="<%=cm.cms("loading_progress")%>" src="images/loading.gif" />
+                <h1 class="documentFirstHeading">
+                  <%=cm.cmsPhrase( "Species search" )%>
+                </h1>
               <div class="documentActions">
-                <h5 class="hiddenStructure"><%=cm.cms("Document Actions")%></h5><%=cm.cmsTitle( "Document Actions" )%>
+                <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
                 <ul>
                   <li>
                     <a href="javascript:this.print();">
-                    	<img src="http://webservices.eea.europa.eu/templates/print_icon.gif" alt="<%=cm.cms("Print this page")%>" title="<%=cm.cms("Print this page")%>" id="icon-print" /><%=cm.cmsTitle( "Print this page" )%>
+                    	<img src="http://webservices.eea.europa.eu/templates/print_icon.gif" alt="<%=cm.cmsPhrase("Print this page")%>" title="<%=cm.cms("Print this page")%>" id="icon-print" />
                     </a>
                   </li>
                   <li>
                     <a href="javascript:toggleFullScreenMode();">
-                    	<img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif" alt="<%=cm.cms("Toggle full screen mode")%>" title="<%=cm.cms("Toggle full screen mode")%>" id="icon-full_screen" /><%=cm.cmsTitle( "Toggle full screen mode" )%>
+                    	<img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif" alt="<%=cm.cmsPhrase("Toggle full screen mode")%>" title="<%=cm.cms("Toggle full screen mode")%>" id="icon-full_screen" />
                     </a>
                   </li>
                 </ul>
               </div>
 <!-- MAIN CONTENT -->
-              <img id="loading" alt="<%=cm.cms("loading_progress")%>" title="<%=cm.cms("loading_progress")%>" src="images/loading.gif" />
-                <h1 class="documentFirstHeading">
-                  <%=cm.cmsPhrase( "SPECIES SEARCH" )%>
-                </h1>
 
               <div class="documentDescription">
                  <!--%=cm.cmsPhrase( "species_main_description" )%-->

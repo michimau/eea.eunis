@@ -63,18 +63,19 @@
                   <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <a name="documentContent"></a>
+                <h1>Upload new texts</h1>
                 <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cms("Document Actions")%></h5><%=cm.cmsTitle( "Document Actions" )%>
+                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
                   <ul>
                     <li>
                       <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cms("Print this page")%>"
-                            title="<%=cm.cms("Print this page")%>" /></a><%=cm.cmsTitle( "Print this page" )%>
+                            alt="<%=cm.cmsPhrase("Print this page")%>"
+                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
                     </li>
                     <li>
                       <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cms("Toggle full screen mode")%>"
-                             title="<%=cm.cms("Toggle full screen mode")%>" /></a><%=cm.cmsTitle( "Toggle full screen mode" )%>
+                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
+                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
                     </li>
                   </ul>
                 </div>
@@ -82,13 +83,11 @@
           <%
             if( SessionManager.isAuthenticated() && SessionManager.isContent_management_RIGHT() )
             {
-          %>    <h1>
-                  	Upload new texts
-                </h1>
-                <br />
+          %>
+                <p>
                 	Pressing "Upload" button will upload new keys (as MD5 hash sums) from "new-texts.txt" file to EUNIS database.
-                <br />
-                <br />
+                </p>
+
                 <form name="contentManage" action="import-new-texts.jsp" method="POST" onsubmit="javascript: return validateForm();">
                   <input type="hidden" name="operation" value="upload">
                   <input title="Upload" type="submit" name="submit" id="sub1" value="Upload" class="submitSearchButton" />

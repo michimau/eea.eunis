@@ -147,21 +147,6 @@
                   <jsp:param name="location" value="<%=location%>"/>
                 </jsp:include>
                 <a name="documentContent"></a>
-                <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cms("Document Actions")%></h5><%=cm.cmsTitle( "Document Actions" )%>
-                  <ul>
-                    <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cms("Print this page")%>"
-                            title="<%=cm.cms("Print this page")%>" /></a><%=cm.cmsTitle( "Print this page" )%>
-                    </li>
-                    <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cms("Toggle full screen mode")%>"
-                             title="<%=cm.cms("Toggle full screen mode")%>" /></a><%=cm.cmsTitle( "Toggle full screen mode" )%>
-                    </li>
-                  </ul>
-                </div>
 <!-- MAIN CONTENT -->
             <%
               SessionManager.setExplainedcriteria(request.getParameter("explainedcriteria"));
@@ -191,6 +176,21 @@
                     <h1>
                       <%=cm.cms("select_columns_description")%>
                     </h1>
+                <div class="documentActions">
+                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
+                  <ul>
+                    <li>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
+                            alt="<%=cm.cmsPhrase("Print this page")%>"
+                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
+                    </li>
+                    <li>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
+                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
+                    </li>
+                  </ul>
+                </div>
                     <br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" summary="layout">
                       <tr>

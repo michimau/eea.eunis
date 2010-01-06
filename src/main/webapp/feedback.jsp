@@ -196,18 +196,21 @@
                   <jsp:param name="location" value="<%=btrail%>" />
                 </jsp:include>
                 <a name="documentContent"></a>
+                <h1>
+                  <%=cm.cmsPhrase("User feedback")%>
+                </h1>
                 <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cms("Document Actions")%></h5><%=cm.cmsTitle( "Document Actions" )%>
+                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
                   <ul>
                     <li>
                       <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cms("Print this page")%>"
-                            title="<%=cm.cms("Print this page")%>" /></a><%=cm.cmsTitle( "Print this page" )%>
+                            alt="<%=cm.cmsPhrase("Print this page")%>"
+                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
                     </li>
                     <li>
                       <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cms("Toggle full screen mode")%>"
-                             title="<%=cm.cms("Toggle full screen mode")%>" /></a><%=cm.cmsTitle( "Toggle full screen mode" )%>
+                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
+                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
                     </li>
                   </ul>
                 </div>
@@ -220,9 +223,9 @@
 
 
 
-                <h1>
+                <h2>
                   <%=cm.cmsPhrase("Thank you!")%>
-                </h1>
+                </h2>
                 <br />
                   <%=cm.cmsPhrase("Your feedback has been sent to EUNIS.")%>
                 <br />
@@ -232,9 +235,9 @@
                 </strong>
                 <br />
 <% } else { %>
-                <h1>
+                <h2>
                   <%=cm.cmsPhrase("Captcha Verification Failed")%>
-                </h1>
+                </h2>
 <% } %>
                 <br />
                 <%=bodyHTML%>
@@ -246,13 +249,9 @@
   else
   {
 %>
-                <h1>
-                  <%=cm.cmsPhrase("User Feedback")%>
-                </h1>
-                <br />
+                <p>
                 <%=cm.cmsPhrase("<strong>Dear visitor,</strong> in order to improve EUNIS Database we welcome your comments and suggestions.")%>
-                <br />
-                <br />
+                </p>
                 <form name="feed" action="feedback.jsp" method="post" onsubmit="javascript: return testform();">
                   <input type="hidden" name="operation" value="feedback" />
                   <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">

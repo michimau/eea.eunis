@@ -496,6 +496,10 @@
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/sites-factsheet.jsp</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StripesDispatcher</servlet-name>
+		<url-pattern>/documents/*</url-pattern>
+	</servlet-mapping>
 
 	<!-- Session expiration in minutes -->
 	<session-config>

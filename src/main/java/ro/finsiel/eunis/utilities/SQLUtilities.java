@@ -14,33 +14,10 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Vector;
 
 import ro.finsiel.eunis.dataimport.ColumnDTO;
 import ro.finsiel.eunis.dataimport.ImportLogDTO;
-import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
-import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
-import ro.finsiel.eunis.factsheet.species.GeographicalStatusWrapper;
-import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
-import ro.finsiel.eunis.jrfTables.Chm62edtBiogeoregionDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtCountryDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtHabitatSyntaxaDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtReportsDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtReportsPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesStatusDomain;
-import ro.finsiel.eunis.jrfTables.DesignationsSitesRelatedDesignationsDomain;
-import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalDomain;
-import ro.finsiel.eunis.jrfTables.sites.factsheet.HumanActivityDomain;
-import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsDomain;
-import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteRelationsDomain;
-import ro.finsiel.eunis.jrfTables.species.factsheet.DistributionWrapper;
-import ro.finsiel.eunis.jrfTables.species.factsheet.ReportsDistributionStatusDomain;
-import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTypeSpeciesDomain;
 import ro.finsiel.eunis.search.Utilities;
-import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 
 
 /**
@@ -190,6 +167,18 @@ public class SQLUtilities {
 
     return result;
   }
+  
+  public Connection getConnection(){
+	  Connection con = null;
+	  try {
+		  Class.forName( SQL_DRV );
+	      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+	  } catch ( Exception e ) {
+		  e.printStackTrace();
+		  return null;
+	  }
+	  return con;
+  }
 
   /**
    * Executes a SELECT sql and returns the first value.
@@ -325,6 +314,71 @@ public class SQLUtilities {
       }
     }
   }
+  
+	/**
+	 * 
+	 * @param parameterizedSQL
+	 * @param valueMap
+	 * @param conn
+	 * @return
+	 * @throws SQLException
+	 */
+	private PreparedStatement prepareStatement(String parameterizedSQL, List<Object> values, Connection conn) throws SQLException{
+		
+		PreparedStatement pstmt= conn.prepareStatement(parameterizedSQL);
+		for (int i=0; values!=null && i<values.size(); i++){
+			try{
+				String val = (String)values.get(i);
+				if(val != null && val.equals("NULL"))
+					pstmt.setNull(i+1, Types.NULL);
+				else
+					pstmt.setObject(i+1, values.get(i));
+			} catch(ClassCastException e){
+				pstmt.setObject(i+1, values.get(i));
+			}
+		}
+		return pstmt;
+	}
+  
+  /**
+	 * 
+	 * @param parameterizedSQL
+	 * @param values
+	 * @param rsReader
+	 * @param conn
+	 * @throws SQLException
+	 */
+	public void executeQuery(String parameterizedSQL, List<Object> values, ResultSetBaseReader rsReader)
+																											throws SQLException{
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection con = null;
+		try{
+			Class.forName( SQL_DRV );
+		    con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+			
+			pstmt = prepareStatement(parameterizedSQL, values, con);
+			rs = pstmt.executeQuery();
+			if (rs!=null){
+				ResultSetMetaData rsMd = rs.getMetaData();
+				if (rsMd!=null && rsMd.getColumnCount()>0){
+					rsReader.setResultSetMetaData(rsMd);
+					while (rs.next())
+						rsReader.readRow(rs);
+				}
+			}
+		} catch(Exception e){
+			e.printStackTrace();
+		} finally{
+			try{
+				if (con!=null) con.close();
+				if (rs!=null) rs.close();
+				if (pstmt!=null) pstmt.close();
+			}
+			catch (SQLException e){}
+		}
+
+	}
 
   /**
    * Execute an sql.
@@ -772,7 +826,7 @@ public class SQLUtilities {
     //return false;
   }
 
-  private void closeAll( Connection con, PreparedStatement ps, ResultSet rs ) {
+  public void closeAll( Connection con, PreparedStatement ps, ResultSet rs ) {
     try
     {
       if ( rs != null )

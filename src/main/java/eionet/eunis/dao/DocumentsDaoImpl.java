@@ -1,0 +1,125 @@
+package eionet.eunis.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import eionet.eunis.dto.DcSourceDTO;
+import eionet.eunis.dto.DcTitleDTO;
+import eionet.eunis.dto.readers.DcTitleDTOReader;
+
+import ro.finsiel.eunis.utilities.SQLUtilities;
+
+/**
+ * @author Risto Alt
+ * <a href="mailto:risto.alt@tieto.com">contact</a>
+ */
+public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
+
+	public DocumentsDaoImpl(SQLUtilities sqlUtilities) {
+		super(sqlUtilities);
+	}
+	
+	/** 
+	 * @see eionet.eunis.dao.IDocumentsDao#getDocuments()
+	 * {@inheritDoc}
+	 */
+	public List<DcTitleDTO> getDocuments() {
+		
+		List<DcTitleDTO> ret = new ArrayList<DcTitleDTO>();
+
+		String query = "SELECT ID_DC, ID_TITLE, TITLE, ALTERNATIVE FROM DC_INDEX LEFT JOIN DC_TITLE USING (ID_DC)";
+		List<Object> values = new ArrayList<Object>();
+		DcTitleDTOReader rsReader = new DcTitleDTOReader();
+		
+		try{
+			
+			getSqlUtils().executeQuery(query, values, rsReader);
+			ret = rsReader.getResultList();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ret;
+	}
+	
+	/** 
+	 * @see eionet.eunis.dao.IDocumentsDao#getDcTitle(String id)
+	 * {@inheritDoc}
+	 */
+	public DcTitleDTO getDcTitle(String id) {
+		
+		DcTitleDTO doc = new DcTitleDTO();
+		
+		String query = "SELECT * FROM DC_TITLE WHERE ID_DC = ?";
+		Connection con = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		
+		try{
+			
+			con = getSqlUtils().getConnection();
+			preparedStatement = con.prepareStatement(query);
+			preparedStatement.setString(1, id);
+			rs = preparedStatement.executeQuery();
+			while(rs.next()){
+				doc.setIdDoc(rs.getString("ID_DC"));
+				doc.setIdTitle(rs.getString("ID_TITLE"));
+				doc.setTitle(rs.getString("TITLE"));
+				doc.setAlternative(rs.getString("ALTERNATIVE"));
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			getSqlUtils().closeAll(con, preparedStatement, rs);
+		}
+		
+		return doc;
+	}
+	
+	/** 
+	 * @see eionet.eunis.dao.IDocumentsDao#getDcSource(String id)
+	 * {@inheritDoc}
+	 */
+	public DcSourceDTO getDcSource(String id) {
+		
+		DcSourceDTO source = new DcSourceDTO();
+		
+		String query = "SELECT * FROM DC_SOURCE WHERE ID_DC = ?";
+		Connection con = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		
+		try{
+			
+			con = getSqlUtils().getConnection();
+			preparedStatement = con.prepareStatement(query);
+			preparedStatement.setString(1, id);
+			rs = preparedStatement.executeQuery();
+			while(rs.next()){
+				source.setIdDc(rs.getString("ID_DC"));
+				source.setIdSource(rs.getString("ID_SOURCE"));
+				source.setSource(rs.getString("SOURCE"));
+				source.setEditor(rs.getString("EDITOR"));
+				source.setJournalTitle(rs.getString("JOURNAL_TITLE"));
+				source.setBookTitle(rs.getString("BOOK_TITLE"));
+				source.setJournalIssue(rs.getString("JOURNAL_ISSUE"));
+				source.setIsbn(rs.getString("ISBN"));
+				source.setGeoLevel(rs.getString("GEO_LEVEL"));
+				source.setUrl(rs.getString("URL"));
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			getSqlUtils().closeAll(con, preparedStatement, rs);
+		}
+		
+		return source;
+	}
+
+}

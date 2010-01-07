@@ -1,5 +1,7 @@
 package eionet.eunis.stripes;
 
+import eionet.eunis.dao.DocumentsDaoImpl;
+import eionet.eunis.dao.IDocumentsDao;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
 import eionet.eunis.dao.SpeciesFactsheetDaoImpl;
 import ro.finsiel.eunis.session.SessionManager;
@@ -87,6 +89,13 @@ public class EunisActionBeanContext extends ActionBeanContext {
 	 */
 	public ISpeciesFactsheetDao getSpeciesFactsheetDao(){
 		return new SpeciesFactsheetDaoImpl(getSqlUtilities());
+	}
+	
+	/**
+	 * @return docs helper dao
+	 */
+	public IDocumentsDao getDocumentsDao(){
+		return new DocumentsDaoImpl(getSqlUtilities());
 	}
 	
 }

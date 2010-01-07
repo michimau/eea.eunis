@@ -23,8 +23,11 @@ public class DocumentsTableDecorator extends TableDecorator{
 		StringBuilder ret = new StringBuilder();
 		DcTitleDTO doc = (DcTitleDTO) getCurrentRowObject();
 		ret.append("<a href='documents/").append(doc.getIdDoc()).append("'>");
-		if(doc.getTitle() != null && !doc.getTitle().equals(""))
+		if(doc.getTitle() != null && !doc.getTitle().equals("")){
 			ret.append(EunisUtil.replaceTags(doc.getTitle()));
+		} else {
+			ret.append("-no-title-");
+		}
 		ret.append("</a>");
 		
 		return ret.toString();

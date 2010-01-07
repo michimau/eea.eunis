@@ -581,7 +581,7 @@
 %>
       <tr<%=cssClass%>>
         <td>
-          <a title="<%=cm.cms("sites_factsheet_105")%>" href="javascript:openGooglePics('http://www.google.com/search?q=<%=specie.getValue()%>')"><%=specie.getValue()%></a>
+          <a title="<%=cm.cms("sites_factsheet_105")%>" href="http://www.google.com/search?q=<%=specie.getValue()%>"><%=specie.getValue()%></a>
           <%=cm.cmsTitle("sites_factsheet_105")%>
         </td>
       </tr>

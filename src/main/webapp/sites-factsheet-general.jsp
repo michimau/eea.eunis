@@ -472,7 +472,7 @@
   <table summary="Link to other providers" width="90%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td width="50%">
-        <a title="<%=cm.cms("google_pictures")%>" href="javascript:openGooglePics('http://images.google.com/images?q=<%=factsheet.getSiteObject().getName()%>')"><%=cm.cmsPhrase("Pictures on Google")%></a>
+        <a title="<%=cm.cms("google_pictures")%>" href="http://images.google.com/images?q=<%=factsheet.getSiteObject().getName()%>"><%=cm.cmsPhrase("Pictures on Google")%></a>
       </td>
       <td width="50%" align="right">
 <%
@@ -484,7 +484,7 @@
           level = "int";
         }
 %>
-        <a title="<%=cm.cms("wcmc_link")%>" href="javascript:openunepwcmc('http://sea.unep-wcmc.org/wdbpa/sitedetails.cfm?siteid=<%=factsheet.getSiteObject().getIdSite()%>&amp;level=<%=level%>')"><%=cm.cmsPhrase("UNEP-WCMC link")%></a>
+        <a title="<%=cm.cms("wcmc_link")%>" href="http://sea.unep-wcmc.org/wdbpa/sitedetails.cfm?siteid=<%=factsheet.getSiteObject().getIdSite()%>&amp;level=<%=level%>"><%=cm.cmsPhrase("UNEP-WCMC link")%></a>
 <%
       }
       else

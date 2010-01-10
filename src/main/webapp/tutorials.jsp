@@ -56,8 +56,6 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <%=cm.cmsText("tutorials_main")%>
-                <br />
-                <br />
                   <h2><%=cm.cmsPhrase("Species")%></h2>
                   <ul>
                     <li>
@@ -93,7 +91,7 @@
                     </li>
                     !-->
                   </ul>
-                  <br />
+
                   <h2><%=cm.cmsPhrase("Habitat types")%></h2>
                   <ul>
                     <li>
@@ -109,7 +107,7 @@
                       <a href="flash-movie.jsp?tutorial=Search_habitat_types_by_legal_instruments&amp;title=Search%20habitat%20types%20by%20legal%20instruments"><%=cm.cmsPhrase("Search habitat types by legal instruments")%></a>
                     </li>
                   </ul>
-                  <br />
+
                   <h2><%=cm.cmsPhrase("Sites")%></h2>
                   <ul>
                     <li>
@@ -131,14 +129,14 @@
                       <a href="flash-movie.jsp?tutorial=Search_sites_by_altitude&amp;title=Search%20sites%20by%20altitude"><%=cm.cmsPhrase("Search sites by altitude")%></a>
                     </li>
                   </ul>
-                  <br />
+
                   <h2><%=cm.cmsPhrase("General usage")%></h2>
                   <ul>
                     <li>
                       <a href="flash-movie.jsp?tutorial=General_Usage&amp;title=EUNIS%20Database%20general%20usage"><%=cm.cmsPhrase("EUNIS Database general usage")%></a>
                     </li>
                   </ul>
-                  <br />
+
                   <h2><%=cm.cmsPhrase("Advanced usage")%></h2>
                   <ul>
                     <li>

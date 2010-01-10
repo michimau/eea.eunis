@@ -325,7 +325,7 @@
                       <tr class="zebraeven">
                         <td style="white-space:nowrap">
                           <img alt="Habitat type indicators" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsPhrase("<a title=\"Open Indicators in a new window\" href=\"habitats-indicators.jsp\"><strong>Habitat types indicators</strong></a>")%>
+                            <a href="habitats-indicators.jsp"><strong><%=cm.cmsPhrase("Habitat types indicators")%></strong></a>
                         </td>
                         <td>
                           <%=cm.cmsPhrase("Find habitat types used in indicators")%>

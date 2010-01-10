@@ -56,7 +56,7 @@
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
-                <%=cm.cms("generic_introduction_01")%>
+                <%=cm.cmsText("generic_introduction_01")%>
 
                 <%=cm.cmsMsg("introduction_to_eunis")%>
 <!-- END MAIN CONTENT -->

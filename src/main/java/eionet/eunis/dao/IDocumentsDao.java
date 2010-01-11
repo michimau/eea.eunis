@@ -2,6 +2,7 @@ package eionet.eunis.dao;
 
 import java.util.List;
 
+import eionet.eunis.dto.DcObjectDTO;
 import eionet.eunis.dto.DcSourceDTO;
 import eionet.eunis.dto.DcTitleDTO;
 
@@ -33,5 +34,11 @@ public interface IDocumentsDao {
 	 * @return DcSourceDTO
 	 */
 	DcSourceDTO getDcSource(String id);
+	
+	/**
+	 * Returns all Dublin Core elements
+	 * @return list of DcObjectDTO elements
+	 */
+	List<DcObjectDTO> getDcObjects();
 
 }

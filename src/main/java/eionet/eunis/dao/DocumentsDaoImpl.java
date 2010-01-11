@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import eionet.eunis.dto.DcObjectDTO;
 import eionet.eunis.dto.DcSourceDTO;
 import eionet.eunis.dto.DcTitleDTO;
+import eionet.eunis.dto.readers.DcObjectDTOReader;
 import eionet.eunis.dto.readers.DcTitleDTOReader;
 
 import ro.finsiel.eunis.utilities.SQLUtilities;
@@ -120,6 +122,48 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		}
 		
 		return source;
+	}
+	
+	/** 
+	 * @see eionet.eunis.dao.IDocumentsDao#getDcObjects()
+	 * {@inheritDoc}
+	 */
+	public List<DcObjectDTO> getDcObjects() {
+		
+		List<DcObjectDTO> ret = new ArrayList<DcObjectDTO>();
+
+		String query = "SELECT ID_DC, TITLE, SOURCE, URL, CONTRIBUTOR, COVERAGE, CREATOR, CREATED, DESCRIPTION, FORMAT, " +
+				"IDENTIFIER, LANGUAGE, PUBLISHER, RELATION, RIGHTS, SUBJECT, TYPE " +
+				"FROM DC_INDEX " +
+				"LEFT JOIN DC_TITLE USING (ID_DC) " +
+				"LEFT JOIN DC_SOURCE USING (ID_DC) " +
+				"LEFT JOIN DC_CONTRIBUTOR USING (ID_DC) " +
+				"LEFT JOIN DC_CREATOR USING (ID_DC) " +
+				"LEFT JOIN DC_COVERAGE USING (ID_DC) " +
+				"LEFT JOIN DC_DATE USING (ID_DC) " +
+				"LEFT JOIN DC_DESCRIPTION USING (ID_DC) " +
+				"LEFT JOIN DC_FORMAT USING (ID_DC) " +
+				"LEFT JOIN DC_IDENTIFIER USING (ID_DC) " +
+				"LEFT JOIN DC_LANGUAGE USING (ID_DC) " +
+				"LEFT JOIN DC_PUBLISHER USING (ID_DC) " +
+				"LEFT JOIN DC_RELATION USING (ID_DC) " +
+				"LEFT JOIN DC_RIGHTS USING (ID_DC) " +
+				"LEFT JOIN DC_SUBJECT USING (ID_DC) " +
+				"LEFT JOIN DC_TYPE USING (ID_DC)";
+		
+		List<Object> values = new ArrayList<Object>();
+		DcObjectDTOReader rsReader = new DcObjectDTOReader();
+		
+		try{
+			
+			getSqlUtils().executeQuery(query, values, rsReader);
+			ret = rsReader.getResultList();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ret;
 	}
 
 }

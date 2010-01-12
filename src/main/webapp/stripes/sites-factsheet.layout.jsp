@@ -23,6 +23,9 @@
 	<jsp:param name="metaDescription" value="${actionBean.metaDescription}" />
 </jsp:include>
 <title>${actionBean.pageTitle }</title>
+<c:if test="${eunis:exists(actionBean.factsheet)}">
+	<link rel="alternate" type="application/rdf+xml" title="RDF" href="${pageContext.request.contextPath}/sites-factsheet.jsp?idsite=${actionBean.idsite}" />
+</c:if>
 <script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
 <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript">

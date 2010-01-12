@@ -40,5 +40,12 @@ public interface IDocumentsDao {
 	 * @return list of DcObjectDTO elements
 	 */
 	List<DcObjectDTO> getDcObjects();
+	
+	/**
+	 * Returns Dublin Core elements by id
+	 * @param id_dc
+	 * @return DcObjectDTO element
+	 */
+	DcObjectDTO getDcObject(String id);
 
 }

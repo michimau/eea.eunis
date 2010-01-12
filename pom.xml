@@ -81,6 +81,9 @@
 								<copy todir="${webapp.root}" includeEmptyDirs="true" overwrite="true">
 									<fileset dir="target/eunis"/>
 								</copy>
+								<copy todir="${webapp.root}/WEB-INF/" 
+									  overwrite="true" 
+									  file="${basedir}/src/main/resources/envSpecific/${env}/web.xml"/>
 							</tasks>
 						</configuration>
 					</execution>

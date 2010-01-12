@@ -30,7 +30,6 @@ public class SitesFactsheetLogicTest extends TestCase {
 		filterParams.put("Extension.Packages", "eionet.eunis.stripes.extensions");
 		filterParams.put("ActionBeanContext.Class", "eionet.eunis.stripes.EunisActionBeanContext");
 		context.addFilter(StripesFilter.class, "StripesFilter", filterParams);
-
 		// Add the Stripes Dispatcher
 		context.setServlet(DispatcherServlet.class, "StripesDispatcher", null);
 		roundtrip = new MockRoundtrip(context, "/sites-factsheet.jsp");
@@ -56,15 +55,12 @@ public class SitesFactsheetLogicTest extends TestCase {
 	}
 	
 	public void testRdfExport() throws Exception {
-		roundtrip.getRequest().addHeader("accept", "application/rdf+xml");
-		roundtrip.addParameter("idsite", "ES1120004");
-		roundtrip.execute();
-		MockHttpServletResponse fakeResponse = roundtrip.getResponse();
-		assertTrue(fakeResponse.getOutputString().contains("siteFactsheetDto rdf:about=\"http://eunisimport.eea.europa.eu/sites-factsheet.jsp?idSite=ES1120004\""));
+		MockHttpServletResponse fakeResponse = getResponse("application/rdf+xml", "ES1120004");
+		assertTrue(fakeResponse.getOutputString().contains("siteFactsheetDto rdf:about=\"http://eunisimport.eea.europa.eu/sites-factsheet.jsp?idsite=ES1120004\""));
 		assertTrue(fakeResponse.getOutputString().contains("ES1120004"));
 		assertTrue(fakeResponse.getOutputString().contains("hasDesignation rdf:resource=\"http://eunis.eea.europa.eu/designations/IN09\"/>"));
 		assertTrue(fakeResponse.getOutputString().contains("hasGeoscope rdf:resource=\"http://eunis.eea.europa.eu/geoscope/80\"/>"));
-		assertTrue(fakeResponse.getOutputString().contains("hasSource rdf:resource=\"http://eunis.eea.europa.eu/documents/-1\"/>"));
+		assertTrue(!fakeResponse.getOutputString().contains("hasSource rdf:resource"));
 	}
 	
 	public void testIdSiteNotFound() throws Exception {
@@ -79,6 +75,31 @@ public class SitesFactsheetLogicTest extends TestCase {
 		roundtrip.addParameter("idsite", "");
 		roundtrip.execute();
 		assertEquals(404, roundtrip.getResponse().getStatus());
+	}
+	
+	private MockHttpServletResponse getResponse(String acceptHeader, String idsite) throws Exception {
+		roundtrip.getRequest().addHeader("accept", acceptHeader);
+		roundtrip.addParameter("idsite", idsite);
+		roundtrip.execute();
+		return  roundtrip.getResponse();
+	}
+	
+	public void testSiocHeader() throws Exception {
+		MockHttpServletResponse fakeResponse = getResponse("application/rdf+xml, application/x-turtle, */*; q=0.1", "ES1120004");
+		assertTrue(fakeResponse.getOutputString().contains("siteFactsheetDto rdf:about=\"http://eunisimport.eea.europa.eu/sites-factsheet.jsp?idsite=ES1120004\""));
+		assertTrue(fakeResponse.getOutputString().contains("ES1120004"));
+		assertTrue(fakeResponse.getOutputString().contains("hasDesignation rdf:resource=\"http://eunis.eea.europa.eu/designations/IN09\"/>"));
+		assertTrue(fakeResponse.getOutputString().contains("hasGeoscope rdf:resource=\"http://eunis.eea.europa.eu/geoscope/80\"/>"));
+		assertTrue(!fakeResponse.getOutputString().contains("hasSource rdf:resource"));
+	}
+
+	public void testCrHeader() throws Exception {
+		MockHttpServletResponse fakeResponse = getResponse("application/rdf+xml, text/xml, */*", "ES1120004");
+		assertTrue(fakeResponse.getOutputString().contains("siteFactsheetDto rdf:about=\"http://eunisimport.eea.europa.eu/sites-factsheet.jsp?idsite=ES1120004\""));
+		assertTrue(fakeResponse.getOutputString().contains("ES1120004"));
+		assertTrue(fakeResponse.getOutputString().contains("hasDesignation rdf:resource=\"http://eunis.eea.europa.eu/designations/IN09\"/>"));
+		assertTrue(fakeResponse.getOutputString().contains("hasGeoscope rdf:resource=\"http://eunis.eea.europa.eu/geoscope/80\"/>"));
+		assertTrue(!fakeResponse.getOutputString().contains("hasSource rdf:resource"));
 	}
 
 }

@@ -1,5 +1,7 @@
 package eionet.eunis.stripes.extensions;
 
+import org.apache.commons.lang.StringUtils;
+
 import eionet.eunis.stripes.actions.RdfAware;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.controller.ExecutionContext;
@@ -20,7 +22,7 @@ public class RdfFActionBeanInterceptor implements Interceptor {
 	private static final String ACCEPT_RDF_HEADER = "application/rdf+xml";
 
 	public Resolution intercept(ExecutionContext context) throws Exception {
-		if(ACCEPT_RDF_HEADER.equals(context.getActionBeanContext().getRequest().getHeader("accept"))
+		if(StringUtils.contains(context.getActionBeanContext().getRequest().getHeader("accept"),ACCEPT_RDF_HEADER)
 				&& context.getActionBean() instanceof RdfAware) {
 			context.setHandler(context.getActionBean().getClass().getDeclaredMethod(RdfAware.RDF_GENERATING_METHOD));
 		}

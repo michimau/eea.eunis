@@ -57,7 +57,6 @@ public class DocumentsActionBean extends AbstractStripesAction {
 			
 			String acceptHeader = getContext().getRequest().getHeader("accept");
 			String[] accept = acceptHeader.split(",");
-			accept[0] = "application/rdf+xml";
 			if(accept != null && accept.length > 0 && accept[0].equals("application/rdf+xml")){
 				return new StreamingResolution("application/rdf+xml",generateRdf(iddoc));
 			} else {

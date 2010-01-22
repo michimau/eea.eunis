@@ -125,9 +125,8 @@
       </tr>
     </tbody>
   </table>
-  <h2>External links</h2>
+  <h2><%=cm.cmsPhrase("External links")%></h2>
   <div id="linkcollection">
-    <tr>
       <div>
         <a title="<%=cm.cmsPhrase("Pictures of the species on Google")%>" href="http://images.google.com/images?q=<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("Pictures on Google")%></a>
       </div>

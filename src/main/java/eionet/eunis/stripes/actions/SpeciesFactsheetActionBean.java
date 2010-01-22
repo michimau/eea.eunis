@@ -44,11 +44,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 	
 	private SpeciesFactsheet factsheet;
 	private String scientificName = "";
-	private String metaDescription = "";
 	private String author = "";
 	
 	
-	private String btrail;
 	//selected tab
 	private int tab;
 	//tabs to display
@@ -89,7 +87,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 		
 		if (factsheet.exists()) {
 			//set up some vars used in the presentation layer
-			metaDescription = factsheet.getSpeciesDescription();
+			setMetaDescription(factsheet.getSpeciesDescription());
 			scientificName = StringEscapeUtils.escapeHtml(
 					factsheet.getSpeciesNatureObject().getScientificName());
 			author  = StringEscapeUtils.escapeHtml(
@@ -103,7 +101,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 			}
 		}
 		String eeaHome = getContext().getInitParameter("EEA_HOME");
-		btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,factsheet";
+		String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,factsheet";
+		setBtrail(btrail);
 		return new ForwardResolution("/stripes/species-factsheet.layout.jsp");
 	}
 
@@ -120,20 +119,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 	 */
 	public void setFactsheet(SpeciesFactsheet factsheet) {
 		this.factsheet = factsheet;
-	}
-
-	/**
-	 * @return the btrail
-	 */
-	public String getBtrail() {
-		return btrail;
-	}
-
-	/**
-	 * @param btrail the btrail to set
-	 */
-	public void setBtrail(String btrail) {
-		this.btrail = btrail;
 	}
 
 	/**
@@ -203,13 +188,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 		return scientificName;
 	}
 
-
-	/**
-	 * @return the metaDescription
-	 */
-	public String getMetaDescription() {
-		return metaDescription;
-	}
 
 	/**
 	 * @return the author

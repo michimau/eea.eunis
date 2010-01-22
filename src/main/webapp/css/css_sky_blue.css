@@ -253,6 +253,11 @@ fieldset.large legend
 	background: white;
 }
 
+.warning-msg {
+	border: 1px dashed red;
+	background: url('admonitions/warning_ea.gif') 3px 3px no-repeat;
+}
+
 .system-msg {
 	border: 2px dashed black;
 	padding: 0.5em;

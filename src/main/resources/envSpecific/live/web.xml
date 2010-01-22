@@ -463,6 +463,10 @@
 		    <param-name>LocalePicker.Locales</param-name>
 		    <param-value>en_US:UTF-8</param-value>
 		</init-param>
+		<init-param>
+			<param-name>FileUpload.MaximumPostSize</param-name>
+			<param-value>250mb</param-value>
+		</init-param>
 	</filter>
 
 	<filter-mapping>
@@ -499,6 +503,10 @@
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/documents/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StripesDispatcher</servlet-name>
+		<url-pattern>/importlinks</url-pattern>
 	</servlet-mapping>
 
 	<!-- Session expiration in minutes -->

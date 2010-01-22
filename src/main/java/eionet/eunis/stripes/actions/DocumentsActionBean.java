@@ -43,15 +43,13 @@ public class DocumentsActionBean extends AbstractStripesAction {
 	private DcTitleDTO dcTitle;
 	private DcSourceDTO dcSource;
 	
-	private String btrail;
-	
 	@DefaultHandler
 	@DontValidate(ignoreBindingErrors = true)
 	public Resolution defaultAction() {
 		String forwardPage = "/stripes/documents.jsp";
 		
 		String eeaHome = getContext().getInitParameter("EEA_HOME");
-		
+		String btrail = "";
 		if (!StringUtils.isBlank(iddoc)) {
 			forwardPage = "/stripes/document.jsp";
 			
@@ -67,6 +65,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
 					return new ErrorResolution(404);
 				}
 			}
+			setMetaDescription("document");
 		} else {
 			btrail = "eea#" + eeaHome + ",home#index.jsp,documents";
 			
@@ -77,7 +76,9 @@ public class DocumentsActionBean extends AbstractStripesAction {
 			} else {
 				docs = getContext().getDocumentsDao().getDocuments();
 			}
+			setMetaDescription("documents");
 		}
+		setBtrail(btrail);
 				
 		return new ForwardResolution(forwardPage);
 	}
@@ -195,16 +196,6 @@ public class DocumentsActionBean extends AbstractStripesAction {
 
 	public void setDocs(List<DcTitleDTO> docs) {
 		this.docs = docs;
-	}
-
-
-	public String getBtrail() {
-		return btrail;
-	}
-
-
-	public void setBtrail(String btrail) {
-		this.btrail = btrail;
 	}
 
 

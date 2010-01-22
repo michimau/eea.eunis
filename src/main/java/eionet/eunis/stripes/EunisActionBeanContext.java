@@ -17,6 +17,7 @@ import net.sourceforge.stripes.action.ActionBeanContext;
 public class EunisActionBeanContext extends ActionBeanContext {
 
 	private static SQLUtilities sqlUtil;
+	private int severity;
 	
 	/**
 	 * Gets an object from session.
@@ -96,6 +97,14 @@ public class EunisActionBeanContext extends ActionBeanContext {
 	 */
 	public IDocumentsDao getDocumentsDao(){
 		return new DocumentsDaoImpl(getSqlUtilities());
+	}
+	
+	public int getSeverity() {
+		return severity;
+	}
+
+	public void setSeverity(int severity) {
+		this.severity = severity;
 	}
 	
 }

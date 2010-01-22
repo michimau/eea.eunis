@@ -19,7 +19,8 @@
                  java.net.URLEncoder,
                  ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain,
                  ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist,
-                 java.util.StringTokenizer"%>
+                 java.util.StringTokenizer,
+                 eionet.eunis.util.Constants"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   /// Request parameters:
@@ -131,12 +132,13 @@
       </td>
       <td width="20%" style="text-align : left; vertical-align : middle">
 <%
-      String gbifLink = specie.getScientificName();
-      gbifLink = gbifLink.replaceAll( "\\.", "" );
-      gbifLink = URLEncoder.encode(gbifLink,"UTF-8");
+      String gbifLink = factsheet.getLink(specie.getIdNatureObject(),Constants.GBIF_PAGE);//specie.getScientificName();
+      //gbifLink = gbifLink.replaceAll( "\\.", "" );
+      if(gbifLink != null && gbifLink.length() > 0){
 //      gbifLink = gbifLink.replaceAll( " ", "\\." );
 %>
-        <a title="<%=cm.cmsPhrase("Search species on GBIF")%>" href="http://data.gbif.org/species/<%=gbifLink%>"><%=cm.cmsPhrase("GBIF link")%></a>
+        <a title="<%=cm.cmsPhrase("Search species on GBIF")%>" href="<%=gbifLink%>"><%=cm.cmsPhrase("GBIF link")%></a>
+      <% } %>
       </td>
       <td width="20%" style="text-align : left; vertical-align : middle">
 <%
@@ -250,6 +252,48 @@ if(kingdomname.equalsIgnoreCase("Animals"))
     }
 %>
     </td>
+    </tr>
+    <tr>
+    	<td width="20%" style="text-align : left; vertical-align : middle">
+    		<%
+    		String biolibLink = factsheet.getLink(specie.getIdNatureObject(),Constants.BIOLIB_PAGE);
+			if(biolibLink != null && biolibLink.length() > 0){
+    		%>
+        		<a title="<%=cm.cmsPhrase("Biolib Link")%>" href="<%=biolibLink%>"><%=cm.cmsPhrase("Biolib")%></a>
+        	<%
+    		}
+        	%>
+      	</td>
+      	<td width="20%" style="text-align : left; vertical-align : middle">
+    		<%
+    		String bbcLink = factsheet.getLink(specie.getIdNatureObject(),Constants.BBC_PAGE);
+			if(bbcLink != null && bbcLink.length() > 0){
+    		%>
+        		<a title="<%=cm.cmsPhrase("BBC")%>" href="<%=bbcLink%>"><%=cm.cmsPhrase("BBC")%></a>
+        	<%
+    		}
+        	%>
+      	</td>
+      	<td width="20%" style="text-align : left; vertical-align : middle">
+    		<%
+    		String wikiLink = factsheet.getLink(specie.getIdNatureObject(),Constants.WIKIPEDIA_ARTICLE);
+			if(wikiLink != null && wikiLink.length() > 0){
+    		%>
+        		<a title="<%=cm.cmsPhrase("Wikipedia article")%>" href="<%=wikiLink%>"><%=cm.cmsPhrase("Wikipedia article")%></a>
+        	<%
+    		}
+        	%>
+      	</td>
+      	<td width="20%" style="text-align : left; vertical-align : middle">
+    		<%
+    		String wikispeciesLink = factsheet.getLink(specie.getIdNatureObject(),Constants.WIKISPECIES_ARTICLE);
+			if(wikispeciesLink != null && wikispeciesLink.length() > 0){
+    		%>
+        		<a title="<%=cm.cmsPhrase("Wikispecies article")%>" href="<%=wikispeciesLink%>"><%=cm.cmsPhrase("Wikispecies article")%></a>
+        	<%
+    		}
+        	%>
+      	</td>
     </tr>
   </table>
   <h2>

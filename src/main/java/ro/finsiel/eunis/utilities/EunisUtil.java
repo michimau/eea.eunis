@@ -53,6 +53,23 @@ public class EunisUtil {
         return ret.toString();
     }
     
+    public static String replaceBrackets(String in){
+        
+        in = (in != null ? in : "");
+        StringBuffer ret = new StringBuffer();
+        for (int i = 0; i < in.length(); i++) {
+          char c = in.charAt(i);
+          if (c == '{')
+              ret.append("[");
+          else if (c == '}')
+              ret.append("]");
+          else
+            ret.append(c);
+        }
+
+        return ret.toString();
+    }
+    
     public static String replace(String source, String pattern, String replace){
         if (source!=null){
 	        final int len = pattern.length();

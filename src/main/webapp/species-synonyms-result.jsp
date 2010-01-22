@@ -380,8 +380,7 @@
             <%--              <%=Utilities.formatString(specie.getTaxonomicNameFamily(),"&nbsp;")%>--%>
             <%--            </td>--%>
                           <td>
-                            <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpec()%>&amp;idSpeciesLink=<%=specie.getIdSpecLink()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScName())%></a>
-                            <%=cm.cmsTitle("open_species_factsheet")%>
+                            <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpec()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScName())%></a>
                           </td>
                           <td>
                         <%
@@ -400,8 +399,7 @@
                            %>
                               <tr>
                                 <td>
-                                  <a href="species-factsheet.jsp?idSpecies=<%=idSpecies%>&amp;idSpeciesLink=<%=idSpeciesLink%>" title="<%=cm.cms("open_species_factsheet")%>"><%=Utilities.treatURLSpecialCharacters(scientificName)%></a>
-                                  <%=cm.cmsTitle("open_species_factsheet")%>
+                                  <a href="species-factsheet.jsp?idSpecies=<%=idSpecies%>"><%=Utilities.treatURLSpecialCharacters(scientificName)%></a>
                                 </td>
                               </tr>
                            <%

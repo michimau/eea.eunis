@@ -597,7 +597,7 @@
                           {
             %>
                           <td>
-                            <a title="Species factsheet" href="species-factsheet.jsp?idSpecies=<%=((CountryRegionPersist)specie).getIdSpecies()%>&amp;idSpeciesLink=<%=((CountryRegionPersist)specie).getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(((CountryRegionPersist)specie).getScientificName())%></a>
+                            <a href="species-factsheet.jsp?idSpecies=<%=((CountryRegionPersist)specie).getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(((CountryRegionPersist)specie).getScientificName())%></a>
                           </td>
             <%
                           }
@@ -606,7 +606,7 @@
                           {
             %>
                           <td>
-                            <a title="Species factsheet" href="species-factsheet.jsp?idSpecies=<%=((RegionPersist)specie).getIdSpecies()%>&amp;idSpeciesLink=<%=((RegionPersist)specie).getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(((RegionPersist)specie).getScientificName())%></a>
+                            <a href="species-factsheet.jsp?idSpecies=<%=((RegionPersist)specie).getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(((RegionPersist)specie).getScientificName())%></a>
                           </td>
             <%
                           }
@@ -615,7 +615,7 @@
                           {
             %>
                           <td>
-                            <a title="Species factsheet" href="species-factsheet.jsp?idSpecies=<%=((CountryPersist)specie).getIdSpecies()%>&amp;idSpeciesLink=<%=((CountryPersist)specie).getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(((CountryPersist)specie).getScientificName())%></a>
+                            <a href="species-factsheet.jsp?idSpecies=<%=((CountryPersist)specie).getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(((CountryPersist)specie).getScientificName())%></a>
                           </td>
             <%
                           }

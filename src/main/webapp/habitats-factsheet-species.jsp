@@ -63,8 +63,7 @@
 %>
       <tr<%=cssClass%>>
         <td>
-          <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=wrapper.getIdSpecies()%>&amp;idSpeciesLink=<%=wrapper.getIdSpeciesLink()%>"><%=Utilities.formatString(wrapper.getSpeciesName())%></a>
-          <%=cm.cmsTitle("open_species_factsheet")%>
+          <a href="species-factsheet.jsp?idSpecies=<%=wrapper.getIdSpecies()%>"><%=Utilities.formatString(wrapper.getSpeciesName())%></a>
         </td>
         <td>
           <%=Utilities.formatString(wrapper.getGeoscope())%>

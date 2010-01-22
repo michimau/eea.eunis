@@ -297,3 +297,8 @@ fieldset.large legend
 .redirection-msg {
 	font-size: 85%;
 }
+#linkcollection div {
+	width: 23%;
+	padding: 3pt;
+	float:left;
+}

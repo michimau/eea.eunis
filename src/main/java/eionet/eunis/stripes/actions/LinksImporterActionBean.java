@@ -32,6 +32,14 @@ import eionet.eunis.util.Constants;
 public class LinksImporterActionBean extends AbstractStripesAction {
 	
 	private FileBean file;
+	private boolean hasGBIF = false;
+	private boolean hasBiolab = false;
+	private boolean hasBbc = false;
+	private boolean hasWikipedia = false;
+	private boolean hasWikispecies = false;
+	private boolean hasBugGuide = false;
+	
+	private boolean delete = false;
 	
 	@DefaultHandler
 	public Resolution defaultAction() {
@@ -52,6 +60,14 @@ public class LinksImporterActionBean extends AbstractStripesAction {
 			SQLUtilities sqlUtil = getContext().getSqlUtilities();
 			con = sqlUtil.getConnection();
 			RDFHandler rdfHandler = new RDFHandler(con);
+			rdfHandler.setHasGBIF(hasGBIF);
+			rdfHandler.setHasBiolab(hasBiolab);
+			rdfHandler.setHasBbc(hasBbc);
+			rdfHandler.setHasWikipedia(hasWikipedia);
+			rdfHandler.setHasWikispecies(hasWikispecies);
+			rdfHandler.setHasBugGuide(hasBugGuide);
+			if(delete)
+				rdfHandler.deleteOldRecords();
 			
 			if (file != null){
 				inputStream = file.getInputStream();
@@ -133,6 +149,62 @@ public class LinksImporterActionBean extends AbstractStripesAction {
 
 	public void setFile(FileBean file) {
 	    this.file = file;
+	}
+
+	public boolean isHasGBIF() {
+		return hasGBIF;
+	}
+
+	public void setHasGBIF(boolean hasGBIF) {
+		this.hasGBIF = hasGBIF;
+	}
+
+	public boolean isHasBiolab() {
+		return hasBiolab;
+	}
+
+	public void setHasBiolab(boolean hasBiolab) {
+		this.hasBiolab = hasBiolab;
+	}
+
+	public boolean isHasBbc() {
+		return hasBbc;
+	}
+
+	public void setHasBbc(boolean hasBbc) {
+		this.hasBbc = hasBbc;
+	}
+
+	public boolean isHasWikipedia() {
+		return hasWikipedia;
+	}
+
+	public void setHasWikipedia(boolean hasWikipedia) {
+		this.hasWikipedia = hasWikipedia;
+	}
+
+	public boolean isHasWikispecies() {
+		return hasWikispecies;
+	}
+
+	public void setHasWikispecies(boolean hasWikispecies) {
+		this.hasWikispecies = hasWikispecies;
+	}
+
+	public boolean isHasBugGuide() {
+		return hasBugGuide;
+	}
+
+	public void setHasBugGuide(boolean hasBugGuide) {
+		this.hasBugGuide = hasBugGuide;
+	}
+
+	public boolean isDelete() {
+		return delete;
+	}
+
+	public void setDelete(boolean delete) {
+		this.delete = delete;
 	}
 	
 

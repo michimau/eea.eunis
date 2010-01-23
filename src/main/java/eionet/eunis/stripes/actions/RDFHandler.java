@@ -48,6 +48,13 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 	
 	private List<String> errors = null;
 	
+	private boolean hasGBIF = false;
+	private boolean hasBiolab = false;
+	private boolean hasBbc = false;
+	private boolean hasWikipedia = false;
+	private boolean hasWikispecies = false;
+	private boolean hasBugGuide = false;
+	
 		
 	/**
 	 * @throws SQLException 
@@ -56,6 +63,7 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 	public RDFHandler(Connection con) throws SQLException{
 		this.con = con;
 		errors = new ArrayList<String>();
+			
 	}
 	
 	/*
@@ -127,6 +135,9 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 				
 				if(predicate.toString().equals(geo_ns+"hasWikispeciesArticle"))
 					dto.setHasWikispeciesArticle(object);
+				
+				if(predicate.toString().equals(geo_ns+"hasBugGuidePage"))
+					dto.setHasBugGuide(object);
 			}
 			
 		}
@@ -137,13 +148,15 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 	}
 	
 	private String getNatureObjectID(LinkInfoDTO dto) throws SQLException {
-		String natob_id = null;
+		String ret = null;
 		
 		String sciName = dto.getHasCanonicalName();
 		String author = dto.getHasScientificNameAutorship();
+		if(author != null)
+			author = EunisUtil.replaceTagsAuthor(author);
 		
 		if(sciName != null && author != null){
-			String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE SCIENTIFIC_NAME='"+EunisUtil.replaceTagsImport(sciName)+"' AND AUTHOR='"+EunisUtil.replaceTagsImport(author)+"'";
+			String query = "SELECT ID_NATURE_OBJECT, AUTHOR FROM CHM62EDT_SPECIES WHERE SCIENTIFIC_NAME='"+EunisUtil.replaceTagsImport(sciName)+"'";
 			
 			PreparedStatement ps = null;
 		    ResultSet rs = null;
@@ -151,8 +164,18 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 		    try {
 		    	ps = con.prepareStatement(query);
 		    	rs = ps.executeQuery();
-		    	if(rs.next()){
-		    		natob_id = rs.getString(1);
+		    	while(rs.next()){
+		    		String natob_id = rs.getString("ID_NATURE_OBJECT");
+		    		String sql_author = rs.getString("AUTHOR");
+		    		if(sql_author != null)
+		    			sql_author = EunisUtil.replaceTagsAuthor(sql_author);
+		    		if(author != null && sql_author != null && author.equals(sql_author)){
+		    			ret = natob_id;
+		    		} else if(sql_author.contains("&")){
+		    			sql_author = sql_author.replace("&", "and");
+		    			if(author != null && sql_author != null && author.equals(sql_author))
+			    			ret = natob_id;
+		    		}
 		    	}
 		    } catch ( Exception e ) {
 		    	e.printStackTrace();
@@ -165,31 +188,35 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 		    }
 		}
 		
-		return natob_id;
+		return ret;
 	}
 	
 	private void insertReport(LinkInfoDTO dto, String natob_id) throws SQLException {
 		
-    	insertReportAttribute(Constants.GEOSPECIES_IDENTIFIER, dto.getIdentifier(), natob_id);
+    	//insertReportAttribute(Constants.GEOSPECIES_IDENTIFIER, dto.getIdentifier(), natob_id);
     	
-    	if(dto.getHasGBIFPage() != null && !dto.getHasGBIFPage().equals("")){
+    	if(hasGBIF && dto.getHasGBIFPage() != null && !dto.getHasGBIFPage().equals("")){
     		insertReportAttribute(Constants.GBIF_PAGE, dto.getHasGBIFPage(), natob_id);
     	}
     	
-    	if(dto.getHasBioLibPage() != null && !dto.getHasBioLibPage().equals("")){
+    	if(hasBiolab && dto.getHasBioLibPage() != null && !dto.getHasBioLibPage().equals("")){
     		insertReportAttribute(Constants.BIOLIB_PAGE, dto.getHasBioLibPage(), natob_id);
     	}
     	
-    	if(dto.getHasBBCPage() != null && !dto.getHasBBCPage().equals("")){
+    	if(hasBbc && dto.getHasBBCPage() != null && !dto.getHasBBCPage().equals("")){
     		insertReportAttribute(Constants.BBC_PAGE, dto.getHasBBCPage(), natob_id);
     	}
     	
-    	if(dto.getHasWikipediaArticle() != null && !dto.getHasWikipediaArticle().equals("")){
+    	if(hasWikipedia && dto.getHasWikipediaArticle() != null && !dto.getHasWikipediaArticle().equals("")){
     		insertReportAttribute(Constants.WIKIPEDIA_ARTICLE, dto.getHasWikipediaArticle(), natob_id);
     	}
     	
-    	if(dto.getHasWikispeciesArticle() != null && !dto.getHasWikispeciesArticle().equals("")){
+    	if(hasWikispecies && dto.getHasWikispeciesArticle() != null && !dto.getHasWikispeciesArticle().equals("")){
     		insertReportAttribute(Constants.WIKISPECIES_ARTICLE, dto.getHasWikispeciesArticle(), natob_id);
+    	}
+    	
+    	if(hasBugGuide && dto.getHasBugGuide() != null && !dto.getHasBugGuide().equals("")){
+    		insertReportAttribute(Constants.BUG_GUIDE, dto.getHasBugGuide(), natob_id);
     	}
 
 	}
@@ -215,6 +242,45 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 	    	if(ps != null)
 	    		ps.close();
 	    }		
+	}
+	
+	public void deleteOldRecords() throws SQLException {
+		
+		String query = "DELETE FROM CHM62EDT_REPORT_ATTRIBUTES WHERE NAME IN ";
+		StringBuffer whereClause = new StringBuffer("(");
+		if(hasGBIF)
+			whereClause.append("'").append(Constants.GBIF_PAGE).append("'").append(",");
+		if(hasBiolab)
+			whereClause.append("'").append(Constants.BIOLIB_PAGE).append("'").append(",");
+		if(hasBbc)
+			whereClause.append("'").append(Constants.BBC_PAGE).append("'").append(",");
+		if(hasWikipedia)
+			whereClause.append("'").append(Constants.WIKIPEDIA_ARTICLE).append("'").append(",");
+		if(hasWikispecies)
+			whereClause.append("'").append(Constants.WIKISPECIES_ARTICLE).append("'").append(",");
+		if(hasBugGuide)
+			whereClause.append("'").append(Constants.BUG_GUIDE).append("'");
+		
+		if(whereClause.toString().endsWith(","))
+			whereClause.deleteCharAt(whereClause.length()-1);
+		
+		if(whereClause.length() > 1){
+			whereClause.append(")");
+			query = query + whereClause.toString();
+			
+			PreparedStatement ps = null;
+		    try {
+		    	ps = con.prepareStatement(query);
+		    	ps.executeUpdate();
+		    	
+		    } catch ( Exception e ) {
+		    	e.printStackTrace();
+		    	errors.add(e.getMessage());
+		    } finally {
+		    	if(ps != null)
+		    		ps.close();
+		    }		
+		}
 	}
 	
 	/**
@@ -271,5 +337,53 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 	 */
 	public List<String> getErrors() {
 		return errors;
+	}
+
+	public boolean isHasGBIF() {
+		return hasGBIF;
+	}
+
+	public void setHasGBIF(boolean hasGBIF) {
+		this.hasGBIF = hasGBIF;
+	}
+
+	public boolean isHasBiolab() {
+		return hasBiolab;
+	}
+
+	public void setHasBiolab(boolean hasBiolab) {
+		this.hasBiolab = hasBiolab;
+	}
+
+	public boolean isHasBbc() {
+		return hasBbc;
+	}
+
+	public void setHasBbc(boolean hasBbc) {
+		this.hasBbc = hasBbc;
+	}
+
+	public boolean isHasWikipedia() {
+		return hasWikipedia;
+	}
+
+	public void setHasWikipedia(boolean hasWikipedia) {
+		this.hasWikipedia = hasWikipedia;
+	}
+
+	public boolean isHasWikispecies() {
+		return hasWikispecies;
+	}
+
+	public void setHasWikispecies(boolean hasWikispecies) {
+		this.hasWikispecies = hasWikispecies;
+	}
+
+	public boolean isHasBugGuide() {
+		return hasBugGuide;
+	}
+
+	public void setHasBugGuide(boolean hasBugGuide) {
+		this.hasBugGuide = hasBugGuide;
 	}
 }

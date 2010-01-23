@@ -273,6 +273,16 @@ if(kingdomname.equalsIgnoreCase("Animals"))
         	<%
     		}
         	%>
+        	<%
+    		String bugGuideLink = factsheet.getLink(specie.getIdNatureObject(),Constants.BUG_GUIDE);
+			if(bugGuideLink != null && bugGuideLink.length() > 0){
+    		%>
+      	<div>
+        		<a href="<%=bugGuideLink%>"><%=cm.cmsPhrase("Bug Guide")%></a>
+      	</div>
+        	<%
+    		}
+        	%>
   </div> <!-- linkcollection -->
   <h2 style="clear: left">
     <%=cm.cmsPhrase("Source")%>

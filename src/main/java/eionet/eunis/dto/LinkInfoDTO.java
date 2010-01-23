@@ -27,6 +27,8 @@ public class LinkInfoDTO implements Serializable {
 	private String hasBBCPage;
 	private String hasWikipediaArticle;
 	private String hasWikispeciesArticle;
+	private String hasBugGuide;
+	
 	public String getIdentifier() {
 		return identifier;
 	}
@@ -80,6 +82,12 @@ public class LinkInfoDTO implements Serializable {
 	}
 	public void setHasWikispeciesArticle(String hasWikispeciesArticle) {
 		this.hasWikispeciesArticle = hasWikispeciesArticle;
+	}
+	public String getHasBugGuide() {
+		return hasBugGuide;
+	}
+	public void setHasBugGuide(String hasBugGuide) {
+		this.hasBugGuide = hasBugGuide;
 	}
 	
 

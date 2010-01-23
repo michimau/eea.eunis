@@ -15,4 +15,5 @@ public interface Constants {
 	   public static final String BBC_PAGE = "BBC_PAGE";
 	   public static final String WIKIPEDIA_ARTICLE = "WIKIPEDIA_ARTICLE";
 	   public static final String WIKISPECIES_ARTICLE = "WIKISPECIES_ARTICLE";
+	   public static final String BUG_GUIDE = "BUG_GUIDE";
 }

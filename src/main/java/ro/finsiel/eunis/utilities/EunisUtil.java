@@ -53,6 +53,23 @@ public class EunisUtil {
         return ret.toString();
     }
     
+    public static String replaceTagsAuthor(String in){
+		
+		in = in.trim();
+        
+        if(in.startsWith("("))
+        	in = in.substring(1);
+        
+        int index = in.indexOf(",");
+        if(index != -1)
+        	in = in.substring(0, index);
+        
+        if(in.endsWith(")"))
+        	in = in.substring(0, in.length() -1 );
+
+        return in.trim();
+    }
+    
     public static String replaceBrackets(String in){
         
         in = (in != null ? in : "");

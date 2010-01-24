@@ -72,7 +72,7 @@
       author = rs.getString("AUTHOR").replace("&", "&amp;").replace("<", "&lt;");
 
       taxon = root.addElement("dwc:Taxon");
-      taxon.Attribute.add("rdf:about","http://eunis.eea.europa.eu/species-factsheet.jsp?idSpeciesLink="+spec_id);
+      taxon.Attribute.add("rdf:about","http://eunis.eea.europa.eu/species-factsheet.jsp?idSpecies="+spec_id);
 
       taxon.addElement("rdfs:label",spec_scientific_name + ", " + author);
       taxon.addElement("dwc:scientificName",spec_scientific_name);

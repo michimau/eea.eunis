@@ -488,8 +488,7 @@
                           {
             %>
                             <td>
-                              <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScientificName())%></a>
-                              <%=cm.cmsTitle("open_species_factsheet")%>
+                              <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScientificName())%></a>
                             </td>
             <%
                           }
@@ -573,8 +572,7 @@
                           {
             %>
                             <td>
-                              <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScientificName())%></a>
-                              <%=cm.cmsTitle("open_species_factsheet")%>
+                              <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScientificName())%></a>
                             </td>
             <%
                           }

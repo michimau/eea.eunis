@@ -356,8 +356,7 @@
             {
           %>
                     <td>
-                      <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=Utilities.formatString(site.getName())%></a>
-                      <%=cm.cmsTitle("open_site_factsheet")%>
+                      <a href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=Utilities.formatString(site.getName())%></a>
                     </td>
           <%
             }
@@ -399,12 +398,10 @@
                   TableColumns tableColumns = (TableColumns) resultsSpecies.get(ii);
                   String scientificName = (String)tableColumns.getColumnsValues().get(0);
                   Integer idSpecies = (Integer)tableColumns.getColumnsValues().get(1);
-                  Integer idSpeciesLink = (Integer)tableColumns.getColumnsValues().get(2);
           %>
                         <tr>
                           <td>
-                            <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=idSpecies%>&amp;idSpeciesLink=<%=idSpeciesLink%>"><%=scientificName%></a>
-                            <%=cm.cmsTitle("open_species_factsheet")%>
+                            <a href="species-factsheet.jsp?idSpecies=<%=idSpecies%>"><%=scientificName%></a>
                           </td>
                         </tr>
           <%

@@ -529,8 +529,7 @@
             }
           %>
                       <td>
-                        <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=Utilities.formatString( site.getName() )%></a>
-                        <%=cm.cmsTitle("open_site_factsheet")%>
+                        <a href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=Utilities.formatString( site.getName() )%></a>
                       </td>
           <%
             if (showDesignType)

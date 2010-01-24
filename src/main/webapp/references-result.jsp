@@ -517,8 +517,7 @@
                     String speciesId = (String)speciesData.get(0);
           %>
                         <div style="background-color: <%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>">
-                            <a title="<%=cm.cms("open_species_factsheet")%>" href="javascript:openlink('species-factsheet.jsp?idSpecies=<%=speciesId%>')"><%=speciesName%></a>
-                            <%=cm.cmsTitle("open_species_factsheet")%>
+                            <a href="species-factsheet.jsp?idSpecies=<%=speciesId%>"><%=speciesName%></a>
                         </div>
           <%
                   }
@@ -545,8 +544,7 @@
                     String habitatsId = (String)habitatsData.get(0);
           %>
                       <div style="background-color: <%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>">
-                        <a title="<%=cm.cms("open_habitat_factsheet")%>" href="javascript:openlink('habitats-factsheet.jsp?idHabitat=<%=habitatsId%>')"><%=habitatsName%></a>
-                        <%=cm.cmsTitle("open_habitat_factsheet")%>
+                        <a href="habitats-factsheet.jsp?idHabitat=<%=habitatsId%>"><%=habitatsName%></a>
                       </div>
           <%
                   }

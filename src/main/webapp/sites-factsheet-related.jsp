@@ -87,8 +87,7 @@
         if ( site.getIdSiteLink() != null )
         {
 %>
-          <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
-          <%=cm.cmsTitle("open_site_factsheet")%>
+          <a href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
 <%
         }
         else
@@ -173,12 +172,10 @@
         <td>
           <%=site.getRelationName()%>&nbsp;</td>
         <td>
-          <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getIdSiteLink()%></a>
-          <%=cm.cmsTitle("open_site_factsheet")%>
+          <a href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getIdSiteLink()%></a>
         </td>
         <td>
-          <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
-        <%=cm.cmsTitle("open_site_factsheet")%>
+          <a href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
         </td>
       </tr>
 <%
@@ -226,12 +223,10 @@
 %>
       <tr<%=cssClass%>>
         <td>
-          <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getIdSiteLink()%></a>
-          <%=cm.cmsTitle("open_site_factsheet")%>
+          <a href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getIdSiteLink()%></a>
         </td>
         <td>
-          <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
-          <%=cm.cmsTitle("open_site_factsheet")%>
+          <a href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
         </td>
         <td>
           <%=site.getRelationType()%>

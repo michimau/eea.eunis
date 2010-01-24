@@ -376,11 +376,10 @@
                                     SpeciesBooksPersist specie = (SpeciesBooksPersist) resultsSpecies.get(ii);
                                     String scientificName = Utilities.treatURLSpecialCharacters(specie.getName());
                                     Integer idSpecies = specie.getId();
-                                    Integer idSpeciesLink = specie.getIdLink();
                             %>
                           <tr>
                             <td>
-                              <a href="species-factsheet.jsp?idSpecies=<%=idSpecies%>&amp;idSpeciesLink=<%=idSpeciesLink%>" title="<%=cm.cms("species_books-result_23_Title")%>"><%=scientificName%></a>
+                              <a href="species-factsheet.jsp?idSpecies=<%=idSpecies%>" title="<%=cm.cms("species_books-result_23_Title")%>"><%=scientificName%></a>
                               <%=cm.cmsTitle("species_books-result_23_Title")%>
                             </td>
                           </tr>

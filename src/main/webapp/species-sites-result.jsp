@@ -410,7 +410,6 @@
                               %>
                             <td>
                               <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScientificName())%></a>
-                              <%=cm.cmsTitle("open_species_factsheet")%>
                             </td>
                               <%
                                 if (isExpanded && showVernacularNames)
@@ -481,7 +480,7 @@
               %>
                                       <tr>
                                         <td style="text-align:left">
-                                          <a title="<%=cm.cms("open_species_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=idSite%>"><%=siteName%></a><%=cm.cmsTitle("open_species_factsheet")%>&nbsp;(<%=siteSourceDb%>)
+                                          <a href="sites-factsheet.jsp?idsite=<%=idSite%>"><%=siteName%></a>&nbsp;(<%=siteSourceDb%>)
                                         </td>
                                       </tr>
                                       <%

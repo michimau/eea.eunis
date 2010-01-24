@@ -161,8 +161,7 @@
         <%=Utilities.formatString(site.getAreaNameEn())%>
       </td>
       <td>
-        <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIDSite()%>"><%=SiteName%></a>
-        <%=cm.cmsTitle("open_site_factsheet")%>
+        <a href="sites-factsheet.jsp?idsite=<%=site.getIDSite()%>"><%=SiteName%></a>
       </td>
     </tr>
 <%

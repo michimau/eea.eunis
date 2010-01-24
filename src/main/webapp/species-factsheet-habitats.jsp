@@ -18,7 +18,6 @@
 <%
   /// Request parameters:
   // idSpecies - ID of specie
-  // idSpeciesLink - ID of specie (Link to species base)
   String idSpecies = request.getParameter("idSpecies");
   SpeciesFactsheet factsheet = new SpeciesFactsheet(
 		  Utilities.checkedStringToInt(idSpecies, new Integer(0)),
@@ -88,8 +87,7 @@
           <%=Utilities.formatString(habitat.getAnnexICode())%>
         </td>
         <td>
-          <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getHabitatName()))%></a>
-          <%=cm.cmsTitle("open_habitat_factsheet")%>
+          <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getHabitatName()))%></a>
         </td>
         <td>
           <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(habitat.getGeoscope()))%>

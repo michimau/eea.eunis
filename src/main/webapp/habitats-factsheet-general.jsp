@@ -327,8 +327,7 @@
       {
 %>
         <td>
-          <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=otherHab.getIdHabitat()%>"><%=otherHab.getScientificName()%></a>
-          <%=cm.cmsTitle("open_habitat_factsheet")%>
+          <a href="habitats-factsheet.jsp?idHabitat=<%=otherHab.getIdHabitat()%>"><%=otherHab.getScientificName()%></a>
         </td>
 <%
       }

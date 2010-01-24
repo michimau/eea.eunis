@@ -395,7 +395,6 @@
                              TableColumns tableColumns = (TableColumns) resultsSpecies.get(ii);
                              String scientificName = (String)tableColumns.getColumnsValues().get(0);
                              Integer idSpecies = (Integer)tableColumns.getColumnsValues().get(1);
-                             Integer idSpeciesLink = (Integer)tableColumns.getColumnsValues().get(2);
                            %>
                               <tr>
                                 <td>

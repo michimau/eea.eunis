@@ -462,8 +462,7 @@
 %>
       <tr<%=cssClass%>>
         <td>
-          <a title="<%=cm.cms("open_site_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getSpeciesScientificName()%></a>
-          <%=cm.cmsTitle("open_site_factsheet")%>
+          <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=specie.getSpeciesScientificName()%></a>
         </td>
         <td align="center">
           <%=specie.getSpeciesCommonName()%>
@@ -675,8 +674,7 @@
 %>
       <tr<%=cssClass%>>
         <td>
-          <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getSpeciesScientificName()%></a>
-          <%=cm.cmsTitle("open_species_factsheet")%>
+          <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=specie.getSpeciesScientificName()%></a>
         </td>
         <td>
           <%=specie.getSpeciesCommonName()%>
@@ -861,8 +859,7 @@
           <%=specie.getSpeciesCommonName()%>
         </td>
         <td>
-         <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getSpeciesScientificName()%></a>
-         <%=cm.cmsTitle("open_species_factsheet")%>
+         <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=specie.getSpeciesScientificName()%></a>
         </td>
         <td style="text-align: center;">
           <%attribute = factsheet.findSiteAttributes("OTHER_POPULATION",specie.getIdReportAttributes());%>

@@ -438,8 +438,7 @@
                     {
                   %>
                         <td>
-                          <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
-                          <%=cm.cmsTitle("open_habitat_factsheet")%>
+                          <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
                         </td>
                   <%
                     }
@@ -473,7 +472,6 @@
                           TableColumns tableColumns = (TableColumns) resultsSpecies.get(ii);
                           String scientificName = (String) tableColumns.getColumnsValues().get(0);
                           Integer idSpecies = (Integer) tableColumns.getColumnsValues().get(1);
-                          Integer idSpeciesLink = (Integer) tableColumns.getColumnsValues().get(2);
                       %>
                       <tr>
                         <td>

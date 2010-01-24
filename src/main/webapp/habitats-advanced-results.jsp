@@ -298,17 +298,16 @@
                       <%}%>
                       <%if (showScientificName) {%>
                         <td>
-                          <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
-                          <%=cm.cmsMsg("open_habitat_factsheet")%>
+                          <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
                         </td>
                       <%}%>
                       <%if (showEnglishName) {%>
                       <td>
-                        <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getDescription()%></a></td>
+                        <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getDescription()%></a></td>
                       <%}%>
                       <%if (showDescription) {%>
                       <td style="white-space:nowrap">
-                        <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getDescription()%></a></td>
+                        <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getDescription()%></a></td>
                       <%}%>
                       <%if (showPriority) {%>
                       <td style="text-align : center;">

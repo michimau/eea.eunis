@@ -392,8 +392,7 @@
                       {
                     %>
                         <td>
-                          <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getScientificName()%></a>
-                          <%=cm.cmsTitle("open_species_factsheet")%>
+                          <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=specie.getScientificName()%></a>
                         </td>
                     <%
                       }

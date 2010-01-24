@@ -17,7 +17,6 @@
 <%
   /// Request parameters:
   // idSpecies - ID of species
-  // idSpeciesLink - ID of species (Link to species base)
   String idSpecies = request.getParameter("idSpecies");
   SpeciesFactsheet factsheet = new SpeciesFactsheet(
 		  Utilities.checkedStringToInt(idSpecies, new Integer(0)),

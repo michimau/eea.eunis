@@ -420,7 +420,6 @@
                               %>
                           <td>
                             <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScientificName())%></a>
-                            <%=cm.cmsTitle("open_species_factsheet")%>
                           </td>
                               <%
                                   }
@@ -487,8 +486,7 @@
                                 %>
                                 <tr>
                                   <td style="text-align:left">
-                                    <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=idHabitat%>"><%=habitatName%></a>
-                                    <%=cm.cmsTitle("open_habitat_factsheet")%>
+                                    <a href="habitats-factsheet.jsp?idHabitat=<%=idHabitat%>"><%=habitatName%></a>
                                   </td>
                                 </tr>
                                 <%

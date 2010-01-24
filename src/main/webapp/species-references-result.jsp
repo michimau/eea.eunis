@@ -435,7 +435,6 @@
               %>
                         <td>
                           <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(Utilities.formatString(specie.getScientificName(),""))%></a>
-                          <%=cm.cmsTitle("open_species_factsheet")%>
                         </td>
               <%
                if (showVernacularNames && isExpanded)

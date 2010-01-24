@@ -299,7 +299,7 @@
             {
           %>
                   <td>
-                    <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=specie.getScientificName()%></a>
+                    <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=specie.getScientificName()%></a>
                   </td>
           <%
             }

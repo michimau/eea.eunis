@@ -281,8 +281,7 @@
                             </strong>
                           </td>
                           <td>
-                            <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=site.getName()%></a>
-                            <%=cm.cmsTitle("open_site_factsheet")%>
+                            <a href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=site.getName()%></a>
                           </td>
                           <td align="right" nowrap="nowrap">
                             <%=Utilities.formatArea("" + SitesSearchUtility.distanceBetweenSites(mainSite, site), 4, 3, "&nbsp;")%>

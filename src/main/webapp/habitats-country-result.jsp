@@ -478,7 +478,7 @@
                     {
                   %>
                       <td>
-                        <a title="<%=cm.cms("open_habitat_factsheet")%>" href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a><%=cm.cmsTitle("open_habitat_factsheet")%>
+                        <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
                       </td>
                   <%
                     }

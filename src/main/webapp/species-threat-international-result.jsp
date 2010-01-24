@@ -482,7 +482,7 @@
                       }
             %>
                       <td>
-                        <a title="<%=cm.cms("open_species_factsheet")%>" href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>&amp;idSpeciesLink=<%=specie.getIdSpeciesLink()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScName())%></a><%=cm.cmsTitle("open_species_factsheet")%>&nbsp;
+                        <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScName())%></a>
                       </td>
             <%
                       if (isExpanded && showVernacularNames)

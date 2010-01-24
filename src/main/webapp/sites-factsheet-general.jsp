@@ -436,7 +436,6 @@
   <%
       }
   %>
-  <br />
   <table summary="layout" class="datatable" width="90%">
     <tr class="zebraeven">
       <%-- Project ID --%>
@@ -457,24 +456,20 @@
       </td>
     </tr>
   </table>
-  <br />
 <!--
   <a name="monitoring"></a>
   <h2>
     <%=cm.cmsPhrase("sites_factsheet_24")%>
   </h2>
-  <br />
   <%-- Monitoring activities --%>
   <textarea rows="1" cols="80"></textarea>
-  <br />
-  <br />
 -->
-  <table summary="Link to other providers" width="90%" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td width="50%">
+  <h2><%=cm.cmsPhrase("External links")%></h2>
+  <div id="linkcollection">
+
+      <div>
         <a title="<%=cm.cms("google_pictures")%>" href="http://images.google.com/images?q=<%=factsheet.getSiteObject().getName()%>"><%=cm.cmsPhrase("Pictures on Google")%></a>
-      </td>
-      <td width="50%" align="right">
+      </div>
 <%
       if ( SiteFactsheet.TYPE_CDDA_INTERNATIONAL == type || SiteFactsheet.TYPE_CDDA_NATIONAL == type )
       {
@@ -484,35 +479,28 @@
           level = "int";
         }
 %>
+	<div>
         <a title="<%=cm.cms("wcmc_link")%>" href="http://sea.unep-wcmc.org/wdbpa/sitedetails.cfm?siteid=<%=factsheet.getSiteObject().getIdSite()%>&amp;level=<%=level%>"><%=cm.cmsPhrase("UNEP-WCMC link")%></a>
-<%
-      }
-      else
-      {
-%>
-        &nbsp;
+        </div>
 <%
       }
 %>
-      </td>
-    </tr>
-  </table>
-  <br />
+  </div> <!-- linkcollection -->
 <%
       String country = Utilities.formatString(factsheet.getCountry()).trim();
       String parentCountry = Utilities.formatString(factsheet.getParentCountry()).trim();
 %>
   <%-- Location information --%>
-  <h2>
+  <h2 style="clear:left">
     <%=cm.cmsPhrase("Location information")%>
   </h2>
-  <table summary="<%=cm.cms("location_information")%>" class="datatable" width="90%">
+  <table class="datatable" width="90%">
     <tr>
-      <td colspan="2">
+      <td>
         <%=cm.cmsPhrase("Country")%>
       </td>
 <%--              <td><a href="sites-statistical-result.jsp?country=<%=country%>&amp;DB_NATURA2000=true&amp;DB_CDDA_NATIONAL=true&amp;DB_NATURE_NET=true&amp;DB_DIPLOMA=true&amp;DB_CDDA_INTERNATIONAL=true&amp;DB_CORINE=true&amp;DB_BIOGENETIC=true&amp;DB_EMERALD=true" title="Open the statistical data for <%=country%>"><%=country%></a></td>--%>
-      <td>
+      <td colspan="2">
 <%
       if(Utilities.isCountry(country))
       {
@@ -558,11 +546,11 @@
           {
             List regionCodes = factsheet.findAdministrativeRegionCodes();
 %>
-    <tr class="zebraeven">
-      <td colspan="2">
+    <tr>
+      <td>
         <%=cm.cmsPhrase("Regional administrative codes")%>
       </td>
-      <td colspan="4">
+      <td colspan="5">
 <%
             if(regionCodes.size()>0)
             {
@@ -842,7 +830,7 @@
           if (altMean != null && altMean.equalsIgnoreCase("-99")) altMean = "";
         }
 %>
-    <tr class="zebraeven">
+    <tr>
       <td>
         <%=cm.cmsPhrase("Minimum Altitude(m)")%>
       </td>
@@ -901,18 +889,21 @@
         <%=latitude%>
       </td>
     </tr>
-    <tr class="zebraeven">
+    <tr>
       <td>
         <%=cm.cmsPhrase("Longitude (decimal deg.)")%>
       </td>
-      <td colspan="2">
+      <td>
         <%=Utilities.formatArea(factsheet.getSiteObject().getLongitude(), 0, 6, null)%>
       </td>
       <td>
         <%=cm.cmsPhrase("Latitude (decimal deg.)")%>
       </td>
-      <td colspan="2">
+      <td>
         <%=Utilities.formatArea(factsheet.getSiteObject().getLatitude(), 0, 6, null)%>
+      </td>
+      <td colspan="2">
+        <a href="http://maps.google.com/maps?ll=<%=factsheet.getSiteObject().getLatitude()%>,<%=factsheet.getSiteObject().getLongitude()%>&amp;z=13">View in Google Maps</a>
       </td>
     </tr>
 <%
@@ -920,9 +911,9 @@
       {
         List results = factsheet.getBiogeoregion();
 %>
-    <tr class="zebraeven">
-      <td colspan="2"><%=cm.cmsPhrase("Biogeographic regions")%></td>
-      <td colspan="4">
+    <tr>
+      <td><%=cm.cmsPhrase("Biogeographic regions")%></td>
+      <td colspan="5">
 <%
         for (int i = 0; i < results.size(); i++)
         {

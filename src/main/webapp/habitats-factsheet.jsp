@@ -312,7 +312,7 @@
                 <a href="javascript:otherInfoAll(false);" title="Collapse all characteristic information">Collapse All</a>
                 <br />
                 <br />
-                <table summary="layout" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
+                <ul>
 <%
         SQLUtilities sqlUtil = new SQLUtilities();
         sqlUtil.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
@@ -323,8 +323,7 @@
           String SQL = factsheet.getSQLForOtherInfo(dictionaryType);
           String noElements = sqlUtil.ExecuteSQL(SQL);
 %>
-                  <tr bgcolor="<%=(0 == (i % 2) ?  "#fafafa" : "#fafafa")%>">
-                    <td>
+                    <li>
 <%
           if("0".equals(noElements) || "".equals(noElements))
           {
@@ -346,12 +345,11 @@
 <%
           }
 %>
-                    </td>
-                  </tr>
+                    </li>
 <%
         }
 %>
-                </table>
+                </ul>
 <%
       }
     }

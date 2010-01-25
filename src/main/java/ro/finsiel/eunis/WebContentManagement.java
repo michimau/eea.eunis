@@ -117,23 +117,14 @@ public class WebContentManagement implements java.io.Serializable {
    */
   public String cmsPhrase( String idPage ) {
 	String ret = Utilities.replace(idPage, "'", "\'");
-    ret = getTextByMD5( ret );
-    if ( editMode )
-    {
-      ret += "<a title=\"Edit this text\" href=\"javascript:openContentManager('" + idPage + "', 'text');\"><img src=\"images/edit-content.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
-    }
-    return ret;
+	return getTextByMD5( ret );
   }
   
   public String cmsPhrase( String idPage, Object... arguments ) {
-	  	String ret = Utilities.replace(idPage, "'", "\'");  
-	  	ret = getTextByMD5( ret );
-	    ret = MessageFormat.format(ret, arguments);
-	    if ( editMode )
-	    {
-	      ret += "<a title=\"Edit this text\" href=\"javascript:openContentManager('" + idPage + "', 'text');\"><img src=\"images/edit-content.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
-	    }
-	    return ret;
+	String ret = Utilities.replace(idPage, "'", "\'");  
+	ret = getTextByMD5( ret );
+	ret = MessageFormat.format(ret, arguments);
+	return ret;
   }
 
   public String cmsMsg( String idPage ) {

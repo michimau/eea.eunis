@@ -253,11 +253,6 @@ fieldset.large legend
 	background: white;
 }
 
-.warning-msg {
-	border: 1px dashed red;
-	background: url('admonitions/warning_ea.gif') 3px 3px no-repeat;
-}
-
 .system-msg {
 	border: 2px dashed black;
 	padding: 0.5em;
@@ -290,8 +285,12 @@ fieldset.large legend
 }
 
 .note-msg {
-	border: 1px dashed black;
-	background: url('../images/icon_info_32.gif') 0px 50% no-repeat;
+	border: 1px dashed #957070;
+	background: #FFC0C0 url('../images/icon_info_32.gif') 0px 50% no-repeat;
+}
+
+.warning-msg {
+	border: 1px dashed red;
 }
 
 .redirection-msg {

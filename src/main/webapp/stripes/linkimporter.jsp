@@ -7,7 +7,7 @@
 	<stripes:layout-component name="contents">
 
         <h1>Import Links</h1>
-        <stripes:form action="/importlinks" method="post" name="f">
+        <stripes:form action="/dataimporter/importpagelinks" method="post" name="f">
         	<stripes:file name="file"/><br/>
         	<stripes:checkbox name="hasGBIF" id="gbif"/>
         	<stripes:label for="gbif"> - GBIF</stripes:label>
@@ -32,7 +32,7 @@
 			<div id="portal-column-one">
             	<div class="visualPadding">
               		<jsp:include page="/inc_column_left.jsp">
-                		<jsp:param name="page_name" value="importlinks" />
+                		<jsp:param name="page_name" value="dataimporter/importpagelinks" />
               		</jsp:include>
             	</div>
           	</div>

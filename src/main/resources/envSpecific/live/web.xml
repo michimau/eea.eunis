@@ -506,7 +506,11 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/importlinks</url-pattern>
+		<url-pattern>/dataimporter/importpagelinks</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StripesDispatcher</servlet-name>
+		<url-pattern>/dataimporter/matchgeospecies</url-pattern>
 	</servlet-mapping>
 
 	<!-- Session expiration in minutes -->

@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import ro.finsiel.eunis.utilities.EunisUtil;
 import ro.finsiel.eunis.utilities.SQLUtilities;
@@ -18,6 +19,7 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 import com.hp.hpl.jena.rdf.arp.ARP;
 
+import eionet.eunis.dto.ExternalObjectDTO;
 import eionet.eunis.util.Constants;
 
 /**
@@ -26,30 +28,26 @@ import eionet.eunis.util.Constants;
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
-@UrlBinding("/dataimporter/importpagelinks")
-public class LinksImporterActionBean extends AbstractStripesAction {
+@UrlBinding("/dataimporter/matchgeospecies")
+public class ExternalObjectsImporterActionBean extends AbstractStripesAction {
 	
 	private FileBean file;
-	private boolean hasGBIF = false;
-	private boolean hasBiolab = false;
-	private boolean hasBbc = false;
-	private boolean hasWikipedia = false;
-	private boolean hasWikispecies = false;
-	private boolean hasBugGuide = false;
-	
-	private boolean delete = false;
+	private List<ExternalObjectDTO> objects;
+	private Map<String,String> issame;
+
 	
 	@DefaultHandler
 	public Resolution defaultAction() {
-		String forwardPage = "/stripes/linkimporter.jsp";
-		setMetaDescription("Import Links from GeoSpecies");
+		String forwardPage = "/stripes/matchgeospecies.jsp";
+		setMetaDescription("Match geospecies");
+		objects = getContext().getExternalObjectsDao().getMaybeSameObjects();
 		return new ForwardResolution(forwardPage);
 	}
 	
-	public Resolution importLinks() {
+	public Resolution importObjects() {
 		
-		String forwardPage = "/stripes/linkimporter.jsp";
-		setMetaDescription("Import Links from GeoSpecies");
+		String forwardPage = "/stripes/matchgeospecies.jsp";
+		setMetaDescription("Match geospecies");
 		
 		Connection con = null;
 		InputStream inputStream = null;
@@ -57,15 +55,7 @@ public class LinksImporterActionBean extends AbstractStripesAction {
 		try{
 			SQLUtilities sqlUtil = getContext().getSqlUtilities();
 			con = sqlUtil.getConnection();
-			RDFHandler rdfHandler = new RDFHandler(con);
-			rdfHandler.setHasGBIF(hasGBIF);
-			rdfHandler.setHasBiolab(hasBiolab);
-			rdfHandler.setHasBbc(hasBbc);
-			rdfHandler.setHasWikipedia(hasWikipedia);
-			rdfHandler.setHasWikispecies(hasWikispecies);
-			rdfHandler.setHasBugGuide(hasBugGuide);
-			if(delete)
-				rdfHandler.deleteOldRecords();
+			RDFHandlerObjects rdfHandler = new RDFHandlerObjects(con);
 			
 			if (file != null){
 				inputStream = file.getInputStream();
@@ -76,6 +66,8 @@ public class LinksImporterActionBean extends AbstractStripesAction {
 	        arp.getHandlers().setErrorHandler(rdfHandler);
 	        arp.load(inputStream);
 			
+			rdfHandler.endOfFile();
+			
 			List<String> errors = rdfHandler.getErrors();
 			if(errors != null && errors.size() > 0){
 				for(Iterator<String> it = errors.iterator(); it.hasNext(); ){
@@ -85,6 +77,8 @@ public class LinksImporterActionBean extends AbstractStripesAction {
 			}
 			else
 				showMessage("Successfully imported!");
+			
+			objects = getContext().getExternalObjectsDao().getMaybeSameObjects();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -106,6 +100,32 @@ public class LinksImporterActionBean extends AbstractStripesAction {
 		return new ForwardResolution(forwardPage);
 	}
 	
+	public Resolution save() {
+		String forwardPage = "/stripes/matchgeospecies.jsp";
+		setMetaDescription("Match geospecies");
+		if(issame != null){
+			for(Iterator<String> it = issame.keySet().iterator(); it.hasNext();){
+				String key = it.next();
+				String value = issame.get(key);
+				if(key != null && value != null){
+					String val = "";
+					if(value.equals("yes"))
+						val = "issame";
+					else if(value.equals("no"))
+						val = "notsame";
+					
+					getContext().getExternalObjectsDao().updateExternalObject(key, val);
+				}
+			}
+		}
+		showMessage("Successfully updated!");
+		objects = getContext().getExternalObjectsDao().getMaybeSameObjects();			
+		
+		return new ForwardResolution(forwardPage);
+	}
+	
+	
+
 	public FileBean getFile() {
 	    return file;
 	}
@@ -114,61 +134,20 @@ public class LinksImporterActionBean extends AbstractStripesAction {
 	    this.file = file;
 	}
 
-	public boolean isHasGBIF() {
-		return hasGBIF;
+	public List<ExternalObjectDTO> getObjects() {
+		return objects;
 	}
 
-	public void setHasGBIF(boolean hasGBIF) {
-		this.hasGBIF = hasGBIF;
+	public void setObjects(List<ExternalObjectDTO> objects) {
+		this.objects = objects;
 	}
 
-	public boolean isHasBiolab() {
-		return hasBiolab;
+	public Map<String, String> getIssame() {
+		return issame;
 	}
 
-	public void setHasBiolab(boolean hasBiolab) {
-		this.hasBiolab = hasBiolab;
+	public void setIssame(Map<String, String> issame) {
+		this.issame = issame;
 	}
-
-	public boolean isHasBbc() {
-		return hasBbc;
-	}
-
-	public void setHasBbc(boolean hasBbc) {
-		this.hasBbc = hasBbc;
-	}
-
-	public boolean isHasWikipedia() {
-		return hasWikipedia;
-	}
-
-	public void setHasWikipedia(boolean hasWikipedia) {
-		this.hasWikipedia = hasWikipedia;
-	}
-
-	public boolean isHasWikispecies() {
-		return hasWikispecies;
-	}
-
-	public void setHasWikispecies(boolean hasWikispecies) {
-		this.hasWikispecies = hasWikispecies;
-	}
-
-	public boolean isHasBugGuide() {
-		return hasBugGuide;
-	}
-
-	public void setHasBugGuide(boolean hasBugGuide) {
-		this.hasBugGuide = hasBugGuide;
-	}
-
-	public boolean isDelete() {
-		return delete;
-	}
-
-	public void setDelete(boolean delete) {
-		this.delete = delete;
-	}
-	
 
 }

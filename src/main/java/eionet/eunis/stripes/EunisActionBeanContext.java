@@ -1,7 +1,9 @@
 package eionet.eunis.stripes;
 
 import eionet.eunis.dao.DocumentsDaoImpl;
+import eionet.eunis.dao.ExternalObjectsDaoImpl;
 import eionet.eunis.dao.IDocumentsDao;
+import eionet.eunis.dao.IExternalObjectsDao;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
 import eionet.eunis.dao.SpeciesFactsheetDaoImpl;
 import ro.finsiel.eunis.session.SessionManager;
@@ -97,6 +99,13 @@ public class EunisActionBeanContext extends ActionBeanContext {
 	 */
 	public IDocumentsDao getDocumentsDao(){
 		return new DocumentsDaoImpl(getSqlUtilities());
+	}
+	
+	/**
+	 * @return external objects helper dao
+	 */
+	public IExternalObjectsDao getExternalObjectsDao(){
+		return new ExternalObjectsDaoImpl(getSqlUtilities());
 	}
 	
 	public int getSeverity() {

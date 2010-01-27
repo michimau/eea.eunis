@@ -17,9 +17,6 @@ import ro.finsiel.eunis.utilities.EunisUtil;
 import com.hp.hpl.jena.rdf.arp.ALiteral;
 import com.hp.hpl.jena.rdf.arp.AResource;
 import com.hp.hpl.jena.rdf.arp.StatementHandler;
-import com.hp.hpl.jena.vocabulary.RDF;
-
-import eionet.eunis.dto.LinkInfoDTO;
 import eionet.eunis.stripes.extensions.LoadException;
 import eionet.eunis.util.Constants;
 
@@ -42,8 +39,6 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 	/** */
 	private static final String EMPTY_STRING = "";
 	
-	private LinkInfoDTO dto = null;
-	
 	private Connection con = null;
 	
 	private List<String> errors = null;
@@ -54,6 +49,9 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 	private boolean hasWikipedia = false;
 	private boolean hasWikispecies = false;
 	private boolean hasBugGuide = false;
+	
+	private String gsidentifier = null;
+	private String natob_id = null;
 	
 		
 	/**
@@ -97,128 +95,37 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 							String object, String objectLang, boolean litObject, boolean anonObject){
 
 		try{
-			if(predicate.toString().equals(RDF.type.toString()) && object.equals("http://rdf.geospecies.org/ont/geospecies#SpeciesConcept")){
-				if(dto != null){
-					String natob_id = getNatureObjectID(dto);
-					if(natob_id != null && !natob_id.equals("")){
-						insertReport(dto, natob_id);
-					}
-				}
-					
-				dto = new LinkInfoDTO();
-				dto.setIdentifier(subject.toString());
-			}
-			if(dto != null){
-				if(predicate.toString().equals(geo_ns+"hasCanonicalName"))
-					dto.setHasCanonicalName(object);
-				
-				if(predicate.toString().equals(geo_ns+"hasGenusName"))
-					dto.setHasGenusName(object);
-				
-				if(predicate.toString().equals(geo_ns+"hasScientificNameAuthorship"))
-					dto.setHasScientificNameAutorship(object);
-				
-				if(predicate.toString().equals(geo_ns+"hasGBIFPage"))
-					dto.setHasGBIFPage(object);
-				
-				if(predicate.toString().equals(geo_ns+"hasBioLibPage"))
-					dto.setHasBioLibPage(object);
-				
-				if(predicate.toString().equals(geo_ns+"hasBBCPage"))
-					dto.setHasBBCPage(object);
-				
-				if(predicate.toString().equals(geo_ns+"hasBBCPage"))
-					dto.setHasBBCPage(object);
-				
-				if(predicate.toString().equals(geo_ns+"hasWikipediaArticle"))
-					dto.setHasWikipediaArticle(object);
-				
-				if(predicate.toString().equals(geo_ns+"hasWikispeciesArticle"))
-					dto.setHasWikispeciesArticle(object);
-				
-				if(predicate.toString().equals(geo_ns+"hasBugGuidePage"))
-					dto.setHasBugGuide(object);
+			String identifier = subject.toString();
+			if(gsidentifier == null || !identifier.equals(gsidentifier)){
+				natob_id = getNatureObjectID(identifier);
+				gsidentifier = identifier;
 			}
 			
+			if(natob_id != null && !natob_id.equals("")){
+				
+				if(predicate.toString().equals(geo_ns+"hasGBIFPage") && hasGBIF)
+					insertReportAttribute(Constants.GBIF_PAGE, object, natob_id);
+				
+				if(predicate.toString().equals(geo_ns+"hasBioLibPage") && hasBiolab)
+					insertReportAttribute(Constants.BIOLIB_PAGE, object, natob_id);
+				
+				if(predicate.toString().equals(geo_ns+"hasBBCPage") && hasBbc)
+					insertReportAttribute(Constants.BBC_PAGE, object, natob_id);
+				
+				if(predicate.toString().equals(geo_ns+"hasWikipediaArticle") && hasWikipedia)
+					insertReportAttribute(Constants.WIKIPEDIA_ARTICLE, object, natob_id);
+				
+				if(predicate.toString().equals(geo_ns+"hasWikispeciesArticle") && hasWikispecies)
+					insertReportAttribute(Constants.WIKISPECIES_ARTICLE, object, natob_id);
+				
+				if(predicate.toString().equals(geo_ns+"hasBugGuidePage") && hasBugGuide)
+					insertReportAttribute(Constants.BUG_GUIDE, object, natob_id);
+			}			
 		}
 		catch (Exception e){
 			errors.add(e.getMessage());
 			throw new LoadException(e.toString(), e);
 		}
-	}
-	
-	private String getNatureObjectID(LinkInfoDTO dto) throws SQLException {
-		String ret = null;
-		
-		String sciName = dto.getHasCanonicalName();
-		String author = dto.getHasScientificNameAutorship();
-		if(author != null)
-			author = EunisUtil.replaceTagsAuthor(author);
-		
-		if(sciName != null && author != null){
-			String query = "SELECT ID_NATURE_OBJECT, AUTHOR FROM CHM62EDT_SPECIES WHERE SCIENTIFIC_NAME='"+EunisUtil.replaceTagsImport(sciName)+"'";
-			
-			PreparedStatement ps = null;
-		    ResultSet rs = null;
-
-		    try {
-		    	ps = con.prepareStatement(query);
-		    	rs = ps.executeQuery();
-		    	while(rs.next()){
-		    		String natob_id = rs.getString("ID_NATURE_OBJECT");
-		    		String sql_author = rs.getString("AUTHOR");
-		    		if(sql_author != null)
-		    			sql_author = EunisUtil.replaceTagsAuthor(sql_author);
-		    		if(author != null && sql_author != null && author.equals(sql_author)){
-		    			ret = natob_id;
-		    		} else if(sql_author.contains("&")){
-		    			sql_author = sql_author.replace("&", "and");
-		    			if(author != null && sql_author != null && author.equals(sql_author))
-			    			ret = natob_id;
-		    		}
-		    	}
-		    } catch ( Exception e ) {
-		    	e.printStackTrace();
-		    	errors.add(e.getMessage());
-		    } finally {
-		    	if(ps != null)
-		    		ps.close();
-	    		if(rs != null)
-	    			rs.close();
-		    }
-		}
-		
-		return ret;
-	}
-	
-	private void insertReport(LinkInfoDTO dto, String natob_id) throws SQLException {
-		
-    	//insertReportAttribute(Constants.GEOSPECIES_IDENTIFIER, dto.getIdentifier(), natob_id);
-    	
-    	if(hasGBIF && dto.getHasGBIFPage() != null && !dto.getHasGBIFPage().equals("")){
-    		insertReportAttribute(Constants.GBIF_PAGE, dto.getHasGBIFPage(), natob_id);
-    	}
-    	
-    	if(hasBiolab && dto.getHasBioLibPage() != null && !dto.getHasBioLibPage().equals("")){
-    		insertReportAttribute(Constants.BIOLIB_PAGE, dto.getHasBioLibPage(), natob_id);
-    	}
-    	
-    	if(hasBbc && dto.getHasBBCPage() != null && !dto.getHasBBCPage().equals("")){
-    		insertReportAttribute(Constants.BBC_PAGE, dto.getHasBBCPage(), natob_id);
-    	}
-    	
-    	if(hasWikipedia && dto.getHasWikipediaArticle() != null && !dto.getHasWikipediaArticle().equals("")){
-    		insertReportAttribute(Constants.WIKIPEDIA_ARTICLE, dto.getHasWikipediaArticle(), natob_id);
-    	}
-    	
-    	if(hasWikispecies && dto.getHasWikispeciesArticle() != null && !dto.getHasWikispeciesArticle().equals("")){
-    		insertReportAttribute(Constants.WIKISPECIES_ARTICLE, dto.getHasWikispeciesArticle(), natob_id);
-    	}
-    	
-    	if(hasBugGuide && dto.getHasBugGuide() != null && !dto.getHasBugGuide().equals("")){
-    		insertReportAttribute(Constants.BUG_GUIDE, dto.getHasBugGuide(), natob_id);
-    	}
-
 	}
 	
 	private void insertReportAttribute(String name, String value, String natob_id) throws SQLException {
@@ -242,6 +149,33 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 	    	if(ps != null)
 	    		ps.close();
 	    }		
+	}
+	
+	public String getNatureObjectID(String identifier) throws SQLException {
+		
+		String ret = null;
+		
+		String query = "SELECT ID_NATURE_OBJECT FROM externalobjects WHERE RESOURCE='"+identifier+"' AND RELATION='issame'";
+		
+		PreparedStatement ps = null;
+	    ResultSet rs = null;
+
+	    try {
+	    	ps = con.prepareStatement(query);
+	    	rs = ps.executeQuery();
+	    	while(rs.next()){
+	    		ret = rs.getString("ID_NATURE_OBJECT");
+	    	}
+	    } catch ( Exception e ) {
+	    	e.printStackTrace();
+	    	errors.add(e.getMessage());
+	    } finally {
+	    	if(ps != null)
+	    		ps.close();
+    		if(rs != null)
+    			rs.close();
+	    }
+	    return ret;
 	}
 	
 	public void deleteOldRecords() throws SQLException {
@@ -281,21 +215,6 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 		    		ps.close();
 		    }		
 		}
-	}
-	
-	/**
-	 * 
-	 * @throws SQLException
-	 */
-	protected void endOfFile() throws SQLException{
-		
-		if(dto != null){
-			String natob_id = getNatureObjectID(dto);
-			if(natob_id != null && !natob_id.equals("")){
-				insertReport(dto, natob_id);
-			}
-		}		
-		
 	}
 	
 	/*

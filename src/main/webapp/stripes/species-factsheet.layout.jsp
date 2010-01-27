@@ -112,8 +112,8 @@
 		                	<%-- Trends --%>
 			                <jsp:include page="/species-factsheet-trends.jsp">
 			                  <jsp:param name="name" value="${actionBean.scientificName}" />
-			                  <jsp:param name="idNatureObject" value="${actionBean.factsheet.specieNatureObject.idNatureObject}" />
-			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.speciesNatureObject.idSpecie}" />
+			                  <jsp:param name="idNatureObject" value="${actionBean.factsheet.speciesNatureObject.idNatureObject}" />
+			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.speciesNatureObject.idSpecies}" />
 			                </jsp:include>
 		                </c:if>
 		                <c:if test="${actionBean.tab == 5}">

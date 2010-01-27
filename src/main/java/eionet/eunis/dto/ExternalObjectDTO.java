@@ -19,6 +19,8 @@ public class ExternalObjectDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String identifier;
+	private String natureObjectId;
+	private String specieId;
 	private String name;
 	private String nameSql;
 	
@@ -39,5 +41,17 @@ public class ExternalObjectDTO implements Serializable {
 	}
 	public void setNameSql(String nameSql) {
 		this.nameSql = nameSql;
+	}
+	public String getNatureObjectId() {
+		return natureObjectId;
+	}
+	public void setNatureObjectId(String natureObjectId) {
+		this.natureObjectId = natureObjectId;
+	}
+	public String getSpecieId() {
+		return specieId;
+	}
+	public void setSpecieId(String specieId) {
+		this.specieId = specieId;
 	}
 }

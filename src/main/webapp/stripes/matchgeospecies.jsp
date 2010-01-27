@@ -26,14 +26,14 @@
 						<tr>
 							<td><a href="${object.identifier}" target="_blank">${object.identifier}</a></td>
 							<td>${object.name}</td>
-							<td>${object.nameSql}</td>
+							<td><a href="/species_factsheet.jsp?idSpecies=${object.specieId}" target="_blank">${object.nameSql}</a></td>
 							<td>
-								<stripes:label for="issame">issame</stripes:label>
-								<stripes:radio name="issame['${object.identifier}']" id="issame" value="yes"/>
+								<stripes:label for="issame${object.natureObjectId}">issame</stripes:label>
+								<stripes:radio name="issame['${object.identifier}']" id="issame${object.natureObjectId}" value="yes"/>
 							</td>
 							<td>
-								<stripes:label for="notsame">notsame</stripes:label>
-								<stripes:radio name="issame['${object.identifier}']" id="notsame" value="no"/>
+								<stripes:label for="notsame${object.natureObjectId}">notsame</stripes:label>
+								<stripes:radio name="issame['${object.identifier}']" id="notsame${object.natureObjectId}" value="no"/>
 							</td>
 						</tr>
 					</c:forEach>

@@ -28,7 +28,7 @@ public class ExternalObjectsDaoImpl extends BaseDaoImpl implements IExternalObje
 		
 		List<ExternalObjectDTO> ret = new ArrayList<ExternalObjectDTO>();
 
-		String query = "SELECT CONCAT(S.SCIENTIFIC_NAME, ' ', S.AUTHOR) AS SQL_NAME, E.RESOURCE, E.NAME FROM CHM62EDT_SPECIES S, externalobjects E WHERE E.ID_NATURE_OBJECT = S.ID_NATURE_OBJECT AND RELATION = 'maybesame'";
+		String query = "SELECT CONCAT(S.SCIENTIFIC_NAME, ' ', S.AUTHOR) AS SQL_NAME, S.ID_SPECIES, S.ID_NATURE_OBJECT, E.RESOURCE, E.NAME FROM CHM62EDT_SPECIES S, externalobjects E WHERE E.ID_NATURE_OBJECT = S.ID_NATURE_OBJECT AND RELATION = 'maybesame'";
 		Connection con = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
@@ -43,6 +43,8 @@ public class ExternalObjectsDaoImpl extends BaseDaoImpl implements IExternalObje
 				dto.setIdentifier(rs.getString("RESOURCE"));
 				dto.setName(rs.getString("NAME"));
 				dto.setNameSql(rs.getString("SQL_NAME"));
+				dto.setNatureObjectId(rs.getString("ID_NATURE_OBJECT"));
+				dto.setSpecieId(rs.getString("ID_SPECIES"));
 				ret.add(dto);
 			}
 			

@@ -1,11 +1,8 @@
 package ro.finsiel.eunis;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,6 +15,11 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.lang.StringUtils;
+
 import ro.finsiel.eunis.jrfTables.Chm62edtLanguageDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtLanguagePersist;
 import ro.finsiel.eunis.jrfTables.EunisISOLanguagesDomain;
@@ -26,6 +28,7 @@ import ro.finsiel.eunis.jrfTables.WebContentDomain;
 import ro.finsiel.eunis.jrfTables.WebContentPersist;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.utilities.EunisUtil;
+import eionet.eunis.util.Pair;
 
 /**
  * Mange the content from the WEB_CONTENT table. Used for HTML editing of the web pages.
@@ -750,44 +753,31 @@ public class WebContentManagement implements java.io.Serializable {
   {
     this.advancedEditMode = advancedEditMode;
   }
-
-  public String readContentFromURL( String strURL )
-  {
-    String ret = "";
-    if( strURL != null )
-    {
-      BufferedReader in = null;
-      try
-      {
-        URL url = new URL( strURL );
-        in = new BufferedReader( new InputStreamReader( url.openStream(), "UTF-8" ) );
-        String line;
-        while( ( ( line = in.readLine() ) != null ) )
-        {
-          ret += line + "\n";
-        }
-      }
-      catch ( UnsupportedEncodingException e )
-      {
-        e.printStackTrace();
-      }
-      catch( IOException e )
-      {
-        e.printStackTrace();
-      }
-      finally
-      {
-        if ( in != null ) try
-        {
-          in.close();
-        }
-        catch ( IOException e )
-        {
-          e.printStackTrace();
-        }
-      }
-    }
-    return ret;
+ 
+	/**
+	 * Reads the URL and returns the content.
+	 * Pair id - HTTP status code, Pair value - response body.
+	 * 
+	 * @param url url to check.
+	 * @return
+	 */
+	public Pair<Integer,String> readContentFromUrl(String url) {
+	  Pair<Integer, String> result = null;
+	  if (StringUtils.isNotBlank(url)) {
+		  try {
+			  HttpClient client = new HttpClient();
+			  HttpMethod get = new GetMethod(url);
+			  client.executeMethod(get);
+			  result = new Pair<Integer, String>();
+			  result.setId(get.getStatusCode());
+			  if (get.getStatusCode() != 404) {
+				  result.setValue(get.getResponseBodyAsString());
+			  }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	  }
+	  return result;
   }
   
   public boolean importNewTexts(String description,

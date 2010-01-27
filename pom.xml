@@ -103,7 +103,6 @@
 				<directory>${basedir}/src/main/resources/envSpecific/${env}</directory>
 				<filtering>true</filtering>
 				<excludes>
-					<exclude>required-head.jsp</exclude>
 					<exclude>web.xml</exclude>
 				</excludes>
 			</resource>
@@ -113,14 +112,6 @@
 				<targetPath>${basedir}/target/eunis/WEB-INF/</targetPath>
 				<includes>
 					<include>web.xml</include>
-				</includes>
-			</resource>
-			<!-- NOTE!!! this copies required-head.jsp to webapp folder -->
-			<resource>
-				<directory>${basedir}/src/main/resources/envSpecific/${env}</directory>
-				<targetPath>${basedir}/target/eunis/</targetPath>
-				<includes>
-					<include>required-head.jsp</include>
 				</includes>
 			</resource>
 		</resources>
@@ -147,6 +138,11 @@
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 			<version>3.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>commons-httpclient</groupId>
+		    <artifactId>commons-httpclient</artifactId>
+		    <version>3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-fileupload</groupId>

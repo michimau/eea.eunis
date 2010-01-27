@@ -48,25 +48,6 @@
 		<description>Static part of the pages title</description>
 	</context-param>
 
-	<!-- Templates server -->
-	<context-param>
-		<param-name>TEMPLATES_HEADER</param-name>
-		<param-value>http://webservices.eea.europa.eu/templates/getHeader?site=default</param-value>
-		<description>Location of the EEA template server</description>
-	</context-param>
-
-	<context-param>
-		<param-name>TEMPLATES_REQUIRED_HEAD</param-name>
-		<param-value>http://webservices.eea.europa.eu/templates/getRequiredHead?site=eunis</param-value>
-		<description>Location of the EEA template server</description>
-	</context-param>
-
-	<context-param>
-		<param-name>TEMPLATES_FOOTER</param-name>
-		<param-value>http://webservices.eea.europa.eu/templates/getFooter?site=default</param-value>
-		<description>Location of the EEA template server</description>
-	</context-param>
-
 	<!-- Feedback e-mail address -->
 	<context-param>
 		<param-name>EMAIL_FEEDBACK</param-name>
@@ -105,30 +86,6 @@
 		<param-value>temp/</param-value>
 		<description>Platform dependent variable which specifies where the
 			temporary files should be created</description>
-	</context-param>
-
-	<!-- Template header file location -->
-	<context-param>
-		<param-name>TEMPLATE_HEADER_LOCATION</param-name>
-		<param-value>header.jsp</param-value>
-		<description>Platform dependent variable which specifies header
-			location</description>
-	</context-param>
-
-	<!-- Template required head file location -->
-	<context-param>
-		<param-name>TEMPLATE_REQUIRED_HEAD_LOCATION</param-name>
-		<param-value>required-head.jsp</param-value>
-		<description>Platform dependent variable which specifies required head
-			location</description>
-	</context-param>
-
-	<!-- Template footer file location -->
-	<context-param>
-		<param-name>TEMPLATE_FOOTER_LOCATION</param-name>
-		<param-value>footer-static.jsp</param-value>
-		<description>Platform dependent variable which specifies footer
-			location</description>
 	</context-param>
 
 	<!-- Upload directory for reports (related reports) -->
@@ -370,11 +327,6 @@
 		<load-on-startup>0</load-on-startup>
 	</servlet>
 
-	<servlet>
-		<servlet-name>refreshtemplate</servlet-name>
-		<servlet-class>ro.finsiel.eunis.admin.UpdateTemplate</servlet-class>
-	</servlet>
-
 	<!-- Map servlet to URL -->
 	<servlet-mapping>
 		<servlet-name>upload</servlet-name>
@@ -436,12 +388,6 @@
 		<url-pattern>/jcaptcha</url-pattern>
 	</servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>refreshtemplate</servlet-name>
-		<url-pattern>/refreshtemplate</url-pattern>
-	</servlet-mapping>
-	
-	
 	<!-- Stripes filter and its mapping -->
 	<filter>
 		<display-name>Stripes Filter</display-name>
@@ -504,6 +450,11 @@
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/documents/*</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StripesDispatcher</servlet-name>
+		<url-pattern>/refreshtemplate</url-pattern>
+	</servlet-mapping>
+	
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/dataimporter/importpagelinks</url-pattern>

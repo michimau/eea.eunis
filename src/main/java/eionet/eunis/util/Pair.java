@@ -12,6 +12,12 @@ public class Pair <T,T1> {
 	private T1 value;
 	
 	/**
+	 * empty constructor.
+	 */
+	public Pair() {
+		
+	}
+	/**
 	 * @param id
 	 * @param value
 	 */

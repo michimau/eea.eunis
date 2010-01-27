@@ -11,11 +11,37 @@
 		<rdfs:label>EUNIS Site</rdfs:label>
 	</rdfs:Class>
 
-	<!-- Also known as dataflow -->
+	<rdf:Property rdf:ID="id_site">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="id_designation">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="id_geoscope">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="respondent">
+	</rdf:Property>
+
 	<rdf:Property rdf:ID="name">
 		<rdfs:label>Name</rdfs:label>
 		<rdfs:domain rdf:resource="#Site"/>
 		<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#label"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="manager">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="complex_name">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="district_name">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="ownership">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="history">
 	</rdf:Property>
 
 	<rdf:Property rdf:ID="character">
@@ -23,4 +49,69 @@
 		<rdfs:domain rdf:resource="#Site"/>
 	</rdf:Property>
 
+	<rdf:Property rdf:ID="description">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="management_plan">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="iucnat">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="designation_date">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="compilation_date">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="proposed_date">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="confirmed_date">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="update_date">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="spa_date">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="sac_date">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="national_code">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="natura_2000">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="nuts">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="area">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="length">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="alt_mean">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="alt_max">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="alt_min">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="longitude">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="latitude">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="category">
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="source_db">
+	</rdf:Property>
 </rdf:RDF>

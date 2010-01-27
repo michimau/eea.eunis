@@ -262,7 +262,7 @@ fieldset.large legend
 
 .advice-msg {
 	padding: 0.2em;
-	border: 1px solid #aaa;;
+	border: 1px solid #aaa;
 	background-color: #f7f7f7;
 }
 .tip-msg, .note-msg,
@@ -284,18 +284,25 @@ fieldset.large legend
 	padding: 0.6em 2px 2px 0px;
 }
 
+.tip-msg {
+	border: 1px solid #aaa;
+	background: #f7f7f7 url('../images/icon_help_32.gif') 0px 50% no-repeat;
+}
+
 .note-msg {
 	border: 1px dashed #957070;
-	background: #FFC0C0 url('../images/icon_info_32.gif') 0px 50% no-repeat;
+	background: #cddaec url('../images/icon_info_32.gif') 0px 50% no-repeat;
 }
 
 .warning-msg {
-	border: 1px dashed red;
+	border: 2px dashed red;
+	background: #FFFFFF url('../images/icon_warning_32.gif') 0px 50% no-repeat;
 }
 
 .redirection-msg {
 	font-size: 85%;
 }
+
 #linkcollection div {
 	width: 23%;
 	padding: 3pt;

@@ -59,7 +59,7 @@ public class ExternalObjectsDaoImpl extends BaseDaoImpl implements IExternalObje
 	
 	public void updateExternalObject(String identifier, String val) {
 		if(identifier != null && val != null){
-			String query = "UPDATE externalobjects SET RELATION=? WHERE RESOURCE=?";
+			String query = "UPDATE externalobjects SET RELATION=? WHERE RESOURCE=? AND RELATION = 'maybesame'";
 			
 			Connection con = null;
 			PreparedStatement ps = null;

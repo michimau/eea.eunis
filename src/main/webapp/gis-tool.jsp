@@ -62,22 +62,36 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-			codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0"
-			width="740" height="552" id="fl_eunis" align="middle">
+                    codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0"
+                    width="740" height="552" id="fl_eunis">
                   <param name="allowScriptAccess" value="sameDomain" />
                   <param name="movie" value="gis/fl_eunis.swf" />
-                  <param value="opaque" name="wmode" />
+                  <param name="wmode" value="opaque" />
                   <param name="quality" value="high" />
                   <param name="bgcolor" value="#FFFFFF" />
                   <param name="FlashVars"  value="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_sh_sites=none&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>" />
-                  <embed src="gis/fl_eunis.swf"
-									flashvars="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_sh_sites=none&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>"
-									quality="high" bgcolor="#FFFFFF"
-									width="740" height="552" name="fl_eunis"
-									align="middle" allowScriptAccess="sameDomain"
-									type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                  <!--[if !IE]> <-->
+                  <object name="fl_eunis" data="gis/fl_eunis.swf"
+                          width="740" height="552" type="application/x-shockwave-flash">
+                    <param name="quality" value="high" />
+                    <param name="bgcolor" value="#FFFFFF" />
+                    <param name="FlashVars"  value="v_color=<%=SessionManager.getUserPrefs().getThemeIndex()%>&amp;v_sh_sites=none&amp;v_path=<%=application.getInitParameter( "DOMAIN_NAME" )%>" />
+                    <param name="pluginurl" value="http://www.macromedia.com/go/getflashplayer" />
+                    <!--> <![endif]-->
+                    <div style="width:740px; height:552px; overflow:auto">
+                     <h3>Adobe Flash Player needed</h3>
+                     <p>
+                     The interactive GIS tool is built with Adobe Flash Player. If you don't have 
+                     this in your browser, then this tool can't launch.
+                     </p>
+                     <p>
+                     We encourage you to visit all the other pages of the EUNIS website.
+                     </p>
+                    </div>
+                    <!--[if !IE]> <-->
+                  </object>
+                  <!--> <![endif]-->
                 </object>
-                <%=cm.br()%>
                 <%=cm.cmsMsg("gis_title")%>
 <!-- END MAIN CONTENT -->
               </div>

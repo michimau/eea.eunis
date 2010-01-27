@@ -15,18 +15,25 @@
 		<c:if test="${!empty actionBean.objects}">
 			<stripes:form action="/dataimporter/matchgeospecies" method="post" name="f">
 				<table width="100%" border="0" class="listing">
+					<thead>
+						<tr>
+							<th>Identifier</th>
+							<th>GeoSpecies Name</th>
+							<th>EUNIS Name</th>
+							<th colspan="2">Relation</th>
+						</tr>
+					</thead>
+					<tfoot>
 					<tr>
-						<th>Identifier</th>
-						<th>GeoSpecies Name</th>
-						<th>EUNIS Name</th>
-						<th></th>
-						<th></th>
+						<td colspan="5" align="right"><stripes:submit name="save" value="Save"/></td>
 					</tr>
+					</tfoot>
+					<tbody>
 					<c:forEach items="${actionBean.objects}" var="object" varStatus="loop">
 						<tr>
 							<td><a href="${object.identifier}" target="_blank">${object.identifier}</a></td>
 							<td>${object.name}</td>
-							<td><a href="/species_factsheet.jsp?idSpecies=${object.specieId}" target="_blank">${object.nameSql}</a></td>
+							<td><a href="/species-factsheet.jsp?idSpecies=${object.specieId}" target="_blank">${object.nameSql}</a></td>
 							<td>
 								<stripes:label for="issame${object.natureObjectId}">issame</stripes:label>
 								<stripes:radio name="issame['${object.identifier}']" id="issame${object.natureObjectId}" value="yes"/>
@@ -37,9 +44,7 @@
 							</td>
 						</tr>
 					</c:forEach>
-					<tr>
-						<td colspan="5" align="right"><stripes:submit name="save" value="Save"/></td>
-					</tr>
+					</tbody>
 				</table>
 			</stripes:form>
 		</c:if>

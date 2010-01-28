@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID"
 	version="2.4">
-
+	<!-- OLD ENV -->
 	<!-- Application name -->
 	<display-name>EUNIS Database</display-name>
 
@@ -457,11 +457,12 @@
 	
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/dataimporter/importpagelinks</url-pattern>
+		<url-pattern>/dataimport/importpagelinks</url-pattern>
 	</servlet-mapping>
+	
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/dataimporter/matchgeospecies</url-pattern>
+		<url-pattern>/dataimport/matchgeospecies</url-pattern>
 	</servlet-mapping>
 
 	<!-- Session expiration in minutes -->

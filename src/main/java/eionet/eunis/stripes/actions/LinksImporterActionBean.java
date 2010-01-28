@@ -26,7 +26,7 @@ import eionet.eunis.util.Constants;
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
-@UrlBinding("/dataimporter/importpagelinks")
+@UrlBinding("/dataimport/importpagelinks")
 public class LinksImporterActionBean extends AbstractStripesAction {
 	
 	private FileBean file;
@@ -50,58 +50,61 @@ public class LinksImporterActionBean extends AbstractStripesAction {
 		
 		String forwardPage = "/stripes/linkimporter.jsp";
 		setMetaDescription("Import Links from GeoSpecies");
-		
-		Connection con = null;
-		InputStream inputStream = null;
-		
-		try{
-			SQLUtilities sqlUtil = getContext().getSqlUtilities();
-			con = sqlUtil.getConnection();
-			RDFHandler rdfHandler = new RDFHandler(con);
-			rdfHandler.setHasGBIF(hasGBIF);
-			rdfHandler.setHasBiolab(hasBiolab);
-			rdfHandler.setHasBbc(hasBbc);
-			rdfHandler.setHasWikipedia(hasWikipedia);
-			rdfHandler.setHasWikispecies(hasWikispecies);
-			rdfHandler.setHasBugGuide(hasBugGuide);
-			if(delete)
-				rdfHandler.deleteOldRecords();
+		if(getContext().getSessionManager().isAuthenticated() && getContext().getSessionManager().isImportExportData_RIGHT()){
+			Connection con = null;
+			InputStream inputStream = null;
 			
-			if (file != null){
-				inputStream = file.getInputStream();
-			}
-			
-			ARP arp = new ARP();
-	        arp.getHandlers().setStatementHandler(rdfHandler);
-	        arp.getHandlers().setErrorHandler(rdfHandler);
-	        arp.load(inputStream);
-			
-			List<String> errors = rdfHandler.getErrors();
-			if(errors != null && errors.size() > 0){
-				for(Iterator<String> it = errors.iterator(); it.hasNext(); ){
-					String error = EunisUtil.replaceTagsExport(EunisUtil.replaceBrackets(it.next()));
-					handleEunisException(error, Constants.SEVERITY_WARNING);
+			try{
+				SQLUtilities sqlUtil = getContext().getSqlUtilities();
+				con = sqlUtil.getConnection();
+				RDFHandler rdfHandler = new RDFHandler(con);
+				rdfHandler.setHasGBIF(hasGBIF);
+				rdfHandler.setHasBiolab(hasBiolab);
+				rdfHandler.setHasBbc(hasBbc);
+				rdfHandler.setHasWikipedia(hasWikipedia);
+				rdfHandler.setHasWikispecies(hasWikispecies);
+				rdfHandler.setHasBugGuide(hasBugGuide);
+				if(delete)
+					rdfHandler.deleteOldRecords();
+				
+				if (file != null){
+					inputStream = file.getInputStream();
 				}
-			}
-			else
-				showMessage("Successfully imported!");
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			if(file != null){
-				try{
-					file.delete();
-				} catch(IOException ie){
-					ie.printStackTrace();
+				
+				ARP arp = new ARP();
+		        arp.getHandlers().setStatementHandler(rdfHandler);
+		        arp.getHandlers().setErrorHandler(rdfHandler);
+		        arp.load(inputStream);
+				
+				List<String> errors = rdfHandler.getErrors();
+				if(errors != null && errors.size() > 0){
+					for(Iterator<String> it = errors.iterator(); it.hasNext(); ){
+						String error = EunisUtil.replaceTagsExport(EunisUtil.replaceBrackets(it.next()));
+						handleEunisException(error, Constants.SEVERITY_WARNING);
+					}
 				}
+				else
+					showMessage("Successfully imported!");
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(file != null){
+					try{
+						file.delete();
+					} catch(IOException ie){
+						ie.printStackTrace();
+					}
+				}
+				// close input stream
+				if (inputStream!=null){
+					try{ inputStream.close(); } catch (Exception e){ e.printStackTrace();}
+				}
+				// close connection
+				try{ con.close(); } catch (SQLException se) { se.printStackTrace(); }
 			}
-			// close input stream
-			if (inputStream!=null){
-				try{ inputStream.close(); } catch (Exception e){ e.printStackTrace();}
-			}
-			// close connection
-			try{ con.close(); } catch (SQLException se) { se.printStackTrace(); }
+		} else {
+			handleEunisException("You are not logged in or you do not have enough privileges to view this page!", Constants.SEVERITY_WARNING);
 		}
 		return new ForwardResolution(forwardPage);
 	}

@@ -86,6 +86,14 @@
                 		<a href="<%=domainName%>/dataimport/post-import.jsp">Post import scripts</a><br/>
                 		The purpose of this page is to run database scripts after import!
                 	</li>
+                	<li>
+                		<a href="<%=domainName%>/dataimport/matchgeospecies">Match geospecies</a><br/>
+                		The purpose of this page is to import geospecies relations and match some of them manually to EUNIS species.
+                	</li>
+                	<li>
+                		<a href="<%=domainName%>/dataimport/importpagelinks">Import page links</a><br/>
+                		The purpose of this page is to import page links from geospecies database.
+                	</li>
                 </ul>
 <!-- END MAIN CONTENT -->
               </div>

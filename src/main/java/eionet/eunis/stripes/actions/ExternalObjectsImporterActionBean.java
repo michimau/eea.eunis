@@ -28,7 +28,7 @@ import eionet.eunis.util.Constants;
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
-@UrlBinding("/dataimporter/matchgeospecies")
+@UrlBinding("/dataimport/matchgeospecies")
 public class ExternalObjectsImporterActionBean extends AbstractStripesAction {
 	
 	private FileBean file;
@@ -48,54 +48,58 @@ public class ExternalObjectsImporterActionBean extends AbstractStripesAction {
 		
 		String forwardPage = "/stripes/matchgeospecies.jsp";
 		setMetaDescription("Match geospecies");
-		
-		Connection con = null;
-		InputStream inputStream = null;
-		
-		try{
-			SQLUtilities sqlUtil = getContext().getSqlUtilities();
-			con = sqlUtil.getConnection();
-			RDFHandlerObjects rdfHandler = new RDFHandlerObjects(con);
+		if(getContext().getSessionManager().isAuthenticated() && getContext().getSessionManager().isImportExportData_RIGHT()){
 			
-			if (file != null){
-				inputStream = file.getInputStream();
-			}
+			Connection con = null;
+			InputStream inputStream = null;
 			
-			ARP arp = new ARP();
-	        arp.getHandlers().setStatementHandler(rdfHandler);
-	        arp.getHandlers().setErrorHandler(rdfHandler);
-	        arp.load(inputStream);
-			
-			rdfHandler.endOfFile();
-			
-			List<String> errors = rdfHandler.getErrors();
-			if(errors != null && errors.size() > 0){
-				for(Iterator<String> it = errors.iterator(); it.hasNext(); ){
-					String error = EunisUtil.replaceTagsExport(EunisUtil.replaceBrackets(it.next()));
-					handleEunisException(error, Constants.SEVERITY_WARNING);
+			try{
+				SQLUtilities sqlUtil = getContext().getSqlUtilities();
+				con = sqlUtil.getConnection();
+				RDFHandlerObjects rdfHandler = new RDFHandlerObjects(con);
+				
+				if (file != null){
+					inputStream = file.getInputStream();
 				}
-			}
-			else
-				showMessage("Successfully imported!");
-			
-			objects = getContext().getExternalObjectsDao().getMaybeSameObjects();
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			if(file != null){
-				try{
-					file.delete();
-				} catch(IOException ie){
-					ie.printStackTrace();
+				
+				ARP arp = new ARP();
+		        arp.getHandlers().setStatementHandler(rdfHandler);
+		        arp.getHandlers().setErrorHandler(rdfHandler);
+		        arp.load(inputStream);
+				
+				rdfHandler.endOfFile();
+				
+				List<String> errors = rdfHandler.getErrors();
+				if(errors != null && errors.size() > 0){
+					for(Iterator<String> it = errors.iterator(); it.hasNext(); ){
+						String error = EunisUtil.replaceTagsExport(EunisUtil.replaceBrackets(it.next()));
+						handleEunisException(error, Constants.SEVERITY_WARNING);
+					}
 				}
+				else
+					showMessage("Successfully imported!");
+				
+				objects = getContext().getExternalObjectsDao().getMaybeSameObjects();
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(file != null){
+					try{
+						file.delete();
+					} catch(IOException ie){
+						ie.printStackTrace();
+					}
+				}
+				// close input stream
+				if (inputStream!=null){
+					try{ inputStream.close(); } catch (Exception e){ e.printStackTrace();}
+				}
+				// close connection
+				try{ con.close(); } catch (SQLException se) { se.printStackTrace(); }
 			}
-			// close input stream
-			if (inputStream!=null){
-				try{ inputStream.close(); } catch (Exception e){ e.printStackTrace();}
-			}
-			// close connection
-			try{ con.close(); } catch (SQLException se) { se.printStackTrace(); }
+		} else {
+			handleEunisException("You are not logged in or you do not have enough privileges to view this page!", Constants.SEVERITY_WARNING);
 		}
 		return new ForwardResolution(forwardPage);
 	}
@@ -103,24 +107,27 @@ public class ExternalObjectsImporterActionBean extends AbstractStripesAction {
 	public Resolution save() {
 		String forwardPage = "/stripes/matchgeospecies.jsp";
 		setMetaDescription("Match geospecies");
-		if(issame != null){
-			for(Iterator<String> it = issame.keySet().iterator(); it.hasNext();){
-				String key = it.next();
-				String value = issame.get(key);
-				if(key != null && value != null){
-					String val = "";
-					if(value.equals("yes"))
-						val = "issame";
-					else if(value.equals("no"))
-						val = "notsame";
-					
-					getContext().getExternalObjectsDao().updateExternalObject(key, val);
+		if(getContext().getSessionManager().isAuthenticated() && getContext().getSessionManager().isImportExportData_RIGHT()){
+			if(issame != null){
+				for(Iterator<String> it = issame.keySet().iterator(); it.hasNext();){
+					String key = it.next();
+					String value = issame.get(key);
+					if(key != null && value != null){
+						String val = "";
+						if(value.equals("yes"))
+							val = "issame";
+						else if(value.equals("no"))
+							val = "notsame";
+						
+						getContext().getExternalObjectsDao().updateExternalObject(key, val);
+					}
 				}
 			}
+			showMessage("Successfully updated!");
+			objects = getContext().getExternalObjectsDao().getMaybeSameObjects();			
+		} else {
+			handleEunisException("You are not logged in or you do not have enough privileges to view this page!", Constants.SEVERITY_WARNING);
 		}
-		showMessage("Successfully updated!");
-		objects = getContext().getExternalObjectsDao().getMaybeSameObjects();			
-		
 		return new ForwardResolution(forwardPage);
 	}
 	

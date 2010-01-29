@@ -119,7 +119,7 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler{
 		String author = dto.getHasScientificNameAutorship();
 		
 		if(sciName != null && author != null){
-			String query = "SELECT ID_NATURE_OBJECT, AUTHOR FROM CHM62EDT_SPECIES WHERE SCIENTIFIC_NAME='"+EunisUtil.replaceTagsImport(sciName)+"'";
+			String query = "SELECT S1.ID_NATURE_OBJECT, S2.AUTHOR FROM chm62edt_species AS S1, chm62edt_species AS S2 WHERE S1.ID_SPECIES = S2.ID_SPECIES_LINK AND S2.SCIENTIFIC_NAME = '"+EunisUtil.replaceTagsImport(sciName)+"'";
 			
 			PreparedStatement ps = null;
 		    ResultSet rs = null;

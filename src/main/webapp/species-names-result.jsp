@@ -570,7 +570,7 @@
                           {
                         %>
                         <td>
-                          <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters( specie.getScientificName() )%></a>
+                          <a href="species/<%=specie.getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters( specie.getScientificName() )%></a>
                           <%
                             if ( !specie.getTypeRelatedSpecies().equalsIgnoreCase( "Species" ) )
                             {
@@ -706,7 +706,7 @@
                           {
             %>
                             <td>
-                              <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScientificName())%></a>
+                              <a href="species/<%=specie.getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScientificName())%></a>
                             </td>
             <%
                           }
@@ -842,7 +842,7 @@
                               {
             %>
                                 <td>
-                                  <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScientificName())%></a>
+                                  <a href="species/<%=specie.getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScientificName())%></a>
                                 </td>
             <%
                               }

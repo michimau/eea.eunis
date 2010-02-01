@@ -597,7 +597,7 @@
                           {
             %>
                           <td>
-                            <a href="species-factsheet.jsp?idSpecies=<%=((CountryRegionPersist)specie).getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(((CountryRegionPersist)specie).getScientificName())%></a>
+                            <a href="species/<%=((CountryRegionPersist)specie).getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(((CountryRegionPersist)specie).getScientificName())%></a>
                           </td>
             <%
                           }
@@ -606,7 +606,7 @@
                           {
             %>
                           <td>
-                            <a href="species-factsheet.jsp?idSpecies=<%=((RegionPersist)specie).getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(((RegionPersist)specie).getScientificName())%></a>
+                            <a href="species/<%=((RegionPersist)specie).getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(((RegionPersist)specie).getScientificName())%></a>
                           </td>
             <%
                           }
@@ -615,7 +615,7 @@
                           {
             %>
                           <td>
-                            <a href="species-factsheet.jsp?idSpecies=<%=((CountryPersist)specie).getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(((CountryPersist)specie).getScientificName())%></a>
+                            <a href="species/<%=((CountryPersist)specie).getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(((CountryPersist)specie).getScientificName())%></a>
                           </td>
             <%
                           }

@@ -445,7 +445,7 @@
                               %>
                             <td>
                               &nbsp;
-                              <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScName())%></a>
+                              <a href="species/<%=specie.getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScName())%></a>
                             </td>
                             <%
                                 if (isExpanded && showVernacularNames)

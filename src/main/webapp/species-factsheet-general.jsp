@@ -449,7 +449,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 %>
       <tr class="<%=cssClass%>">
         <td>
-          <a style="font-style : italic;" href="species-factsheet.jsp?idSpecies=<%=species.getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(species.getScientificName())%></a>
+          <a style="font-style : italic;" href="species/<%=species.getIdSpecies()%>"><%=Utilities.treatURLSpecialCharacters(species.getScientificName())%></a>
           <%=Utilities.treatURLSpecialCharacters(species.getAuthor())%>
         </td>
         <td>

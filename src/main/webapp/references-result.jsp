@@ -517,7 +517,7 @@
                     String speciesId = (String)speciesData.get(0);
           %>
                         <div style="background-color: <%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>">
-                            <a href="species-factsheet.jsp?idSpecies=<%=speciesId%>"><%=speciesName%></a>
+                            <a href="species/<%=speciesId%>"><%=speciesName%></a>
                         </div>
           <%
                   }

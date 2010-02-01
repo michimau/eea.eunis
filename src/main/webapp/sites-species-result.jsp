@@ -401,7 +401,7 @@
           %>
                         <tr>
                           <td>
-                            <a href="species-factsheet.jsp?idSpecies=<%=idSpecies%>"><%=scientificName%></a>
+                            <a href="species/<%=idSpecies%>"><%=scientificName%></a>
                           </td>
                         </tr>
           <%

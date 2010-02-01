@@ -392,7 +392,7 @@
                       {
                     %>
                         <td>
-                          <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=specie.getScientificName()%></a>
+                          <a href="species/<%=specie.getIdSpecies()%>"><%=specie.getScientificName()%></a>
                         </td>
                     <%
                       }

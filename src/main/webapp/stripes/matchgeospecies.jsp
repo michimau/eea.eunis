@@ -15,6 +15,7 @@
 			</stripes:form>
 			
 			<c:if test="${!empty actionBean.objects}">
+				<p>Mark the species suggestions that are the same species. Max 300 on the page</p>
 				<stripes:form action="/dataimport/matchgeospecies" method="post" name="f">
 					<table width="100%" border="0" class="listing">
 						<thead>
@@ -22,26 +23,30 @@
 								<th>Identifier</th>
 								<th>GeoSpecies Name</th>
 								<th>EUNIS Name</th>
-								<th colspan="2">Relation</th>
+								<th colspan="3">Relation</th>
 							</tr>
 						</thead>
 						<tfoot>
 						<tr>
-							<td colspan="5" align="right"><stripes:submit name="save" value="Save"/></td>
+							<td colspan="6" style="text-align:middle"><stripes:submit name="save" value="Save"/></td>
 						</tr>
 						</tfoot>
 						<tbody>
 						<c:forEach items="${actionBean.objects}" var="object" varStatus="loop">
 							<tr>
-								<td><a href="${object.identifier}" target="_blank">${object.identifier}</a></td>
+								<td><a class="link-plain" href="${object.identifier}" target="_blank">${object.identifier}</a></td>
 								<td>${object.name}</td>
 								<td><a href="${pageContext.request.contextPath}/species-factsheet.jsp?idSpecies=${object.specieId}" target="_blank">${object.nameSql}</a></td>
 								<td>
-									<stripes:label for="issame${object.natureObjectId}">issame</stripes:label>
+									<stripes:label for="maybesame${object.natureObjectId}">Maybe</stripes:label>
+									<stripes:radio checked="true" name="issame['${object.identifier}']" id="maybesame${object.natureObjectId}" value="maybe"/>
+								</td>
+								<td>
+									<stripes:label for="issame${object.natureObjectId}">Same</stripes:label>
 									<stripes:radio name="issame['${object.identifier}']" id="issame${object.natureObjectId}" value="yes"/>
 								</td>
 								<td>
-									<stripes:label for="notsame${object.natureObjectId}">notsame</stripes:label>
+									<stripes:label for="notsame${object.natureObjectId}">No</stripes:label>
 									<stripes:radio name="issame['${object.identifier}']" id="notsame${object.natureObjectId}" value="no"/>
 								</td>
 							</tr>
@@ -52,9 +57,8 @@
 			</c:if>
 		</c:when>
 		<c:otherwise>
-			<div class="warning-msg">
-				<strong>Errors ...</strong>		
-				<p>You are not logged in or you do not have enough privileges to view this page!</p>
+			<div class="error-msg">
+				You are not logged in or you do not have enough privileges to view this page!
 			</div>
 		</c:otherwise>
 	</c:choose>

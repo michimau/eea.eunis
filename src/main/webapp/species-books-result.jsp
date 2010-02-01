@@ -379,7 +379,7 @@
                             %>
                           <tr>
                             <td>
-                              <a href="species-factsheet.jsp?idSpecies=<%=idSpecies%>" title="<%=cm.cms("species_books-result_23_Title")%>"><%=scientificName%></a>
+                              <a href="species/<%=idSpecies%>" title="<%=cm.cms("species_books-result_23_Title")%>"><%=scientificName%></a>
                               <%=cm.cmsTitle("species_books-result_23_Title")%>
                             </td>
                           </tr>

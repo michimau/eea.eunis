@@ -462,7 +462,7 @@
 %>
       <tr<%=cssClass%>>
         <td>
-          <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=specie.getSpeciesScientificName()%></a>
+          <a href="species/<%=specie.getIdSpecies()%>"><%=specie.getSpeciesScientificName()%></a>
         </td>
         <td align="center">
           <%=specie.getSpeciesCommonName()%>
@@ -674,7 +674,7 @@
 %>
       <tr<%=cssClass%>>
         <td>
-          <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=specie.getSpeciesScientificName()%></a>
+          <a href="species/<%=specie.getIdSpecies()%>"><%=specie.getSpeciesScientificName()%></a>
         </td>
         <td>
           <%=specie.getSpeciesCommonName()%>
@@ -859,7 +859,7 @@
           <%=specie.getSpeciesCommonName()%>
         </td>
         <td>
-         <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpecies()%>"><%=specie.getSpeciesScientificName()%></a>
+         <a href="species/<%=specie.getIdSpecies()%>"><%=specie.getSpeciesScientificName()%></a>
         </td>
         <td style="text-align: center;">
           <%attribute = factsheet.findSiteAttributes("OTHER_POPULATION",specie.getIdReportAttributes());%>

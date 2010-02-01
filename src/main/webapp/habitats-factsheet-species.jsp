@@ -63,7 +63,7 @@
 %>
       <tr<%=cssClass%>>
         <td>
-          <a href="species-factsheet.jsp?idSpecies=<%=wrapper.getIdSpecies()%>"><%=Utilities.formatString(wrapper.getSpeciesName())%></a>
+          <a href="species/<%=wrapper.getIdSpecies()%>"><%=Utilities.formatString(wrapper.getSpeciesName())%></a>
         </td>
         <td>
           <%=Utilities.formatString(wrapper.getGeoscope())%>

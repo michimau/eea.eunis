@@ -380,7 +380,7 @@
             <%--              <%=Utilities.formatString(specie.getTaxonomicNameFamily(),"&nbsp;")%>--%>
             <%--            </td>--%>
                           <td>
-                            <a href="species-factsheet.jsp?idSpecies=<%=specie.getIdSpec()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScName())%></a>
+                            <a href="species/<%=specie.getIdSpec()%>"><%=Utilities.treatURLSpecialCharacters(specie.getScName())%></a>
                           </td>
                           <td>
                         <%
@@ -398,7 +398,7 @@
                            %>
                               <tr>
                                 <td>
-                                  <a href="species-factsheet.jsp?idSpecies=<%=idSpecies%>"><%=Utilities.treatURLSpecialCharacters(scientificName)%></a>
+                                  <a href="species/<%=idSpecies%>"><%=Utilities.treatURLSpecialCharacters(scientificName)%></a>
                                 </td>
                               </tr>
                            <%

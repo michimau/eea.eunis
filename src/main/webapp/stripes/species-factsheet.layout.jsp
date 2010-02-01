@@ -64,13 +64,13 @@
 		              			<c:when test="${dataTab.id eq actionBean.tab}">
 			              			<li id="currenttab">
 			              				<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${dataTab.value}" 
-			              				href="species-factsheet.jsp?tab=${dataTab.id}&amp;idSpecies=${actionBean.factsheet.idSpecies}">${dataTab.value}</a>
+			              				href="${pageContext.request.contextPath}/species/${actionBean.factsheet.idSpecies}/${dataTab.id}">${dataTab.value}</a>
 			              			</li>
 		              			</c:when>
 		              			<c:otherwise>
 		              				<li>
 			              				<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${dataTab.value}"
-			              				 href="species-factsheet.jsp?tab=${dataTab.id}&amp;idSpecies=${actionBean.factsheet.idSpecies}">${dataTab.value}</a>
+			              				 href="${pageContext.request.contextPath}/species/${actionBean.factsheet.idSpecies}/${dataTab.id}">${dataTab.value}</a>
 			              			</li>
 		              			</c:otherwise>
 		              		</c:choose>
@@ -79,13 +79,13 @@
 		                </div>
 		                <br style="clear:both;" clear="all" />
 		                <br />
-		                <c:if test="${actionBean.tab == 0}">
+		                <c:if test="${actionBean.tab == 'general'}">
 		                	<%-- General information--%>
 			                <jsp:include page="/species-factsheet-general.jsp">
 			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 1}">
+		                <c:if test="${actionBean.tab == 'vern'}">
 		                	<%-- Vernacular names tab --%>
 			                <jsp:include page="/species-factsheet-vern.jsp">
 			                  <jsp:param name="name" value="${actionBean.scientificName}" />
@@ -93,7 +93,7 @@
 			                  <jsp:param name="idNatureObject" value="${actionBean.factsheet.speciesNatureObject.idNatureObject}" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 2}">
+		                <c:if test="${actionBean.tab == 'geo'}">
 		                	<%-- Geographical distribution --%>
 			                <jsp:include page="/species-factsheet-geo.jsp">
 			                  <jsp:param name="name" value="${actionBean.scientificName}" />
@@ -101,14 +101,14 @@
 			                  <jsp:param name="idNatureObject" value="${actionBean.factsheet.speciesNatureObject.idNatureObject}" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 3}">
+		                <c:if test="${actionBean.tab == 'population'}">
 		                	<%-- Population --%>
 			                <jsp:include page="/species-factsheet-pop.jsp">
 			                  <jsp:param name="name" value="${actionBean.scientificName}" />
 			                  <jsp:param name="idNatureObject" value="${actionBean.factsheet.speciesNatureObject.idNatureObject}" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 4}">
+		                <c:if test="${actionBean.tab == 'trends'}">
 		                	<%-- Trends --%>
 			                <jsp:include page="/species-factsheet-trends.jsp">
 			                  <jsp:param name="name" value="${actionBean.scientificName}" />
@@ -116,13 +116,13 @@
 			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.speciesNatureObject.idSpecies}" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 5}">
+		                <c:if test="${actionBean.tab == 'refs'}">
 		                	<%-- References --%>
 			                <jsp:include page="/species-factsheet-references.jsp">
 			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 6}">
+		                <c:if test="${actionBean.tab == 'grid'}">
 		                	<%-- Grid distribution --%>
 			                <jsp:include page="/species-factsheet-distribution.jsp">
 			                  <jsp:param name="name" value="${actionBean.scientificName}" />
@@ -130,7 +130,7 @@
 			                  <jsp:param name="kmlUrl" value="${pageContext.request.contextPath}/species-factsheet-distribution-kml.jsp?idSpecies=${actionBean.factsheet.idSpecies}&amp;idSpeciesLink=${actionBean.factsheet.idSpeciesLink}" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 7}">
+		                <c:if test="${actionBean.tab == 'threat'}">
 		                	<%-- Threat statis --%>
 			                <jsp:include page="/species-factsheet-threat.jsp">
 			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
@@ -138,25 +138,25 @@
 			                  <jsp:param name="expand" value="true" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 8}">
+		                <c:if test="${actionBean.tab == 'legal'}">
 		                	<%-- Legal instruments --%>
 			                <jsp:include page="/species-factsheet-legal.jsp">
 			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 9}">
+		                <c:if test="${actionBean.tab == 'habitats'}">
 		                	<%-- Related habitats --%>
 			                <jsp:include page="/species-factsheet-habitats.jsp">
 			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 10}">
+		                <c:if test="${actionBean.tab == 'sites'}">
 		                	<%-- Related sites --%>
 			                <jsp:include page="/species-factsheet-sites.jsp">
 			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 11}">
+		                <c:if test="${actionBean.tab == 'gbif'}">
 		                	<%-- GBIF observations --%>
 			                <jsp:include page="/species-factsheet-gbif.jsp">
 			                  <jsp:param name="scientificName" value="${actionBean.scientificName}" />

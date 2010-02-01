@@ -22,22 +22,22 @@ import eionet.eunis.util.Pair;
  * @author Aleksandr Ivanov
  * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
-@UrlBinding("/species-factsheet.jsp")
+@UrlBinding("/species/{idSpecies}/{tab}")
 public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 	
-	private static final String[] allTypes = new String[]{
-		"GENERAL_INFORMATION",
-        "VERNACULAR_NAMES",
-        "GEOGRAPHICAL_DISTRIBUTION",
-        "POPULATION",
-        "TRENDS",
-        "REFERENCES",
-        "GRID_DISTRIBUTION",
-        "THREAT_STATUS",
-        "LEGAL_INSTRUMENTS",
-        "HABITATS",
-        "SITES",
-        "GBIF" }; 
+	private static final String[][] allTypes = new String[][]{
+		{"GENERAL_INFORMATION","general"},
+		{"VERNACULAR_NAMES","vern"},
+		{"GEOGRAPHICAL_DISTRIBUTION","geo"},
+		{"POPULATION","population"},
+		{"TRENDS","trends"},
+		{"REFERENCES","refs"},
+		{"GRID_DISTRIBUTION","grid"},
+		{"THREAT_STATUS","threat"},
+		{"LEGAL_INSTRUMENTS","legal"},
+		{"HABITATS","habitats"},
+		{"SITES","sites"},
+		{"GBIF","gbif"}}; 
 	
 	private String idSpecies;
 	private int idSpeciesLink;
@@ -48,15 +48,20 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 	
 	
 	//selected tab
-	private int tab;
+	private String tab;
 	//tabs to display
-	private List<Pair<Integer,String>> tabsWithData = new LinkedList<Pair<Integer,String>>();
+	private List<Pair<String,String>> tabsWithData = new LinkedList<Pair<String,String>>();
 	//refered from name
 	private String referedFromName;
 
 	
 	@DefaultHandler
 	public Resolution index(){
+		
+		if(tab == null || tab.length() == 0){
+			tab = "general";
+		}
+		
 		//sanity checks
 		if(StringUtils.isBlank(idSpecies) && idSpeciesLink == 0) {
 			factsheet = new SpeciesFactsheet(0, 0);
@@ -95,8 +100,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 			
 			SQLUtilities sqlUtil = getContext().getSqlUtilities();
 			for (int i = 0; i< allTypes.length; i++) {
-				if (!sqlUtil.TabPageIsEmpy(factsheet.getSpeciesNatureObject().getIdNatureObject().toString(), "SPECIES", allTypes[i])) {
-					tabsWithData.add(new Pair<Integer, String>(i, getContentManagement().cms(allTypes[i].toLowerCase())));
+				if (!sqlUtil.TabPageIsEmpy(factsheet.getSpeciesNatureObject().getIdNatureObject().toString(), "SPECIES", allTypes[i][0])) {
+					tabsWithData.add(new Pair<String, String>(allTypes[i][1], getContentManagement().cms(allTypes[i][0].toLowerCase())));
 				}
 			}
 		}
@@ -124,24 +129,21 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 	/**
 	 * @return the currentTab
 	 */
-	public int getTab() {
+	public String getTab() {
 		return tab;
 	}
 
 	/**
 	 * @param currentTab the currentTab to set
 	 */
-	public void setTab(int tab) {
-		if (tab > 11 || tab < 0) {
-			tab = 0;
-		}
+	public void setTab(String tab) {
 		this.tab = tab;
 	}
 
 	/**
 	 * @return the tabsWithData
 	 */
-	public List<Pair<Integer, String>> getTabsWithData() {
+	public List<Pair<String, String>> getTabsWithData() {
 		return tabsWithData;
 	}
 

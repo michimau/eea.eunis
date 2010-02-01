@@ -444,6 +444,10 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
+		<url-pattern>/species/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/sites-factsheet.jsp</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>

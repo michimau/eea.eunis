@@ -27,13 +27,13 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 	
 	private static final String[][] allTypes = new String[][]{
 		{"GENERAL_INFORMATION","general"},
-		{"VERNACULAR_NAMES","vern"},
-		{"GEOGRAPHICAL_DISTRIBUTION","geo"},
+		{"VERNACULAR_NAMES","vernacular"},
+		{"GEOGRAPHICAL_DISTRIBUTION","countries"},
 		{"POPULATION","population"},
 		{"TRENDS","trends"},
-		{"REFERENCES","refs"},
+		{"REFERENCES","references"},
 		{"GRID_DISTRIBUTION","grid"},
-		{"THREAT_STATUS","threat"},
+		{"THREAT_STATUS","threatstatus"},
 		{"LEGAL_INSTRUMENTS","legal"},
 		{"HABITATS","habitats"},
 		{"SITES","sites"},

@@ -16,13 +16,13 @@ public class SpeciesFactsheetRedirectActionBean extends AbstractStripesAction {
 	
 	private static final String[] allTypes = new String[]{
 		"general",
-		"vern",
-		"geo",
+		"vernacular",
+		"countries",
 		"population",
 		"trends",
-		"refs",
+		"references",
 		"grid",
-		"threat",
+		"threatstatus",
 		"legal",
 		"habitats",
 		"sites",

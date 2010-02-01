@@ -85,7 +85,7 @@
 			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 'vern'}">
+		                <c:if test="${actionBean.tab == 'vernacular'}">
 		                	<%-- Vernacular names tab --%>
 			                <jsp:include page="/species-factsheet-vern.jsp">
 			                  <jsp:param name="name" value="${actionBean.scientificName}" />
@@ -93,7 +93,7 @@
 			                  <jsp:param name="idNatureObject" value="${actionBean.factsheet.speciesNatureObject.idNatureObject}" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 'geo'}">
+		                <c:if test="${actionBean.tab == 'countries'}">
 		                	<%-- Geographical distribution --%>
 			                <jsp:include page="/species-factsheet-geo.jsp">
 			                  <jsp:param name="name" value="${actionBean.scientificName}" />
@@ -116,7 +116,7 @@
 			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.speciesNatureObject.idSpecies}" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 'refs'}">
+		                <c:if test="${actionBean.tab == 'references'}">
 		                	<%-- References --%>
 			                <jsp:include page="/species-factsheet-references.jsp">
 			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
@@ -130,7 +130,7 @@
 			                  <jsp:param name="kmlUrl" value="${pageContext.request.contextPath}/species-factsheet-distribution-kml.jsp?idSpecies=${actionBean.factsheet.idSpecies}&amp;idSpeciesLink=${actionBean.factsheet.idSpeciesLink}" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 'threat'}">
+		                <c:if test="${actionBean.tab == 'threatstatus'}">
 		                	<%-- Threat statis --%>
 			                <jsp:include page="/species-factsheet-threat.jsp">
 			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />

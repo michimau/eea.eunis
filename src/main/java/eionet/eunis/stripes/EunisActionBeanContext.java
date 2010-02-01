@@ -171,4 +171,8 @@ public class EunisActionBeanContext extends ActionBeanContext {
 		this.severity = severity;
 	}
 	
+	public String getDomainName() {
+		return getInitParameter("DOMAIN_NAME");	
+	}
+	
 }

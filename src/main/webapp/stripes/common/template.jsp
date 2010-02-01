@@ -12,7 +12,7 @@
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html lang="${actionBean.context.sessionManager.currentLanguage}" xmlns="http://www.w3.org/1999/xhtml" xml:lang="${actionBean.context.sessionManager.currentLanguage}">
 		<head>
-			<base href="http://eunisimport.eea.europa.eu/"/>
+			<base href="${actionBean.context.domainName}/"/>
 			<jsp:include page="/header-page.jsp">
 				<jsp:param name="metaDescription" value="${actionBean.metaDescription}" />
 			</jsp:include>

@@ -356,7 +356,7 @@
             {
           %>
                     <td>
-                      <a href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=Utilities.formatString(site.getName())%></a>
+                      <a href="sites/<%=site.getIdSite()%>"><%=Utilities.formatString(site.getName())%></a>
                     </td>
           <%
             }

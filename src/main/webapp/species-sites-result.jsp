@@ -480,7 +480,7 @@
               %>
                                       <tr>
                                         <td style="text-align:left">
-                                          <a href="sites-factsheet.jsp?idsite=<%=idSite%>"><%=siteName%></a>&nbsp;(<%=siteSourceDb%>)
+                                          <a href="sites/<%=idSite%>"><%=siteName%></a>&nbsp;(<%=siteSourceDb%>)
                                         </td>
                                       </tr>
                                       <%

@@ -161,7 +161,7 @@
         <%=Utilities.formatString(site.getAreaNameEn())%>
       </td>
       <td>
-        <a href="sites-factsheet.jsp?idsite=<%=site.getIDSite()%>"><%=SiteName%></a>
+        <a href="sites/<%=site.getIDSite()%>"><%=SiteName%></a>
       </td>
     </tr>
 <%
@@ -253,7 +253,7 @@
           <%=Utilities.formatString(site.getAreaNameEn())%>
         </td>
         <td>
-          <a title="<%=cm.cms("open_site_factsheet")%>" href="sites-factsheet.jsp?idsite=<%=site.getIDSite()%>"><%=SiteName%></a>
+          <a title="<%=cm.cms("open_site_factsheet")%>" href="sites/<%=site.getIDSite()%>"><%=SiteName%></a>
           <%=cm.cmsTitle("open_site_factsheet")%>
         </td>
       </tr>

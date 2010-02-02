@@ -281,7 +281,7 @@
                             </strong>
                           </td>
                           <td>
-                            <a href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=site.getName()%></a>
+                            <a href="sites/<%=site.getIdSite()%>"><%=site.getName()%></a>
                           </td>
                           <td align="right" nowrap="nowrap">
                             <%=Utilities.formatArea("" + SitesSearchUtility.distanceBetweenSites(mainSite, site), 4, 3, "&nbsp;")%>

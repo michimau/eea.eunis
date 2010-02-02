@@ -452,6 +452,10 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
+		<url-pattern>/sites/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/documents/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>

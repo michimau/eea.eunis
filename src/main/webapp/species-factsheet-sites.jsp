@@ -103,7 +103,7 @@
         %>
         </td>
         <td>
-          <a href="sites-factsheet.jsp?idsite=<%=site.getIDSite()%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getName()))%></a>
+          <a href="sites/<%=site.getIDSite()%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getName()))%></a>
         </td>
       </tr>
 <%
@@ -202,7 +202,7 @@
         %>
         </td>
         <td>
-          <a href="sites-factsheet.jsp?idsite=<%=site.getIDSite()%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getName()))%></a>
+          <a href="sites/<%=site.getIDSite()%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getName()))%></a>
         </td>
       </tr>
 <%

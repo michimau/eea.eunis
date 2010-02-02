@@ -27,7 +27,7 @@ import eionet.eunis.util.Pair;
  * @author Aleksandr Ivanov
  * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
-@UrlBinding("/sites-factsheet.jsp")
+@UrlBinding("/sites/{idsite}/{tab}")
 public class SitesFactsheetActionBean extends AbstractStripesAction implements RdfAware {
 	
 	private static final String HEADER = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n" 
@@ -48,13 +48,13 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
             "other_info"
     };
 
-    private static final String[] dbtabs = {
-            "GENERAL_INFORMATION",
-            "FAUNA_FLORA",
-            "DESIGNATION",
-            "HABITATS",
-            "SITES",
-            "OTHER"
+    private static final String[][] dbtabs = {
+    		{"GENERAL_INFORMATION","general"},
+    		{"FAUNA_FLORA","faunaflora"},
+    		{"DESIGNATION","designations"},
+    		{"HABITATS","habitats"},
+    		{"SITES","sites"},
+    		{"OTHER","other"}
     };
     
     private String btrail;
@@ -66,15 +66,20 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 	private String sdb;
 	
 	//selected tab
-	private int tab;
+	private String tab;
 	//tabs to display
-	private List<Pair<Integer,String>> tabsWithData = new LinkedList<Pair<Integer,String>>();
+	private List<Pair<String,String>> tabsWithData = new LinkedList<Pair<String,String>>();
 	
 	/**
 	 * This action bean only serves RDF through {@link RdfAware}.
 	 */
 	@DefaultHandler
 	public Resolution defaultAction() {
+		
+		if(tab == null || tab.length() == 0){
+			tab = "general";
+		}
+		
 		String eeaHome = getContext().getInitParameter("EEA_HOME");
 		btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,factsheet";
 		factsheet = new SiteFactsheet(idsite);
@@ -92,8 +97,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 		if (factsheet.exists()) {
 	
 			for (int i=0; i < tabs.length; i++) {
-				if(!getContext().getSqlUtilities().TabPageIsEmpy(factsheet.getSiteObject().getIdNatureObject().toString(), "SITES", dbtabs[i])) {
-					tabsWithData.add(new Pair<Integer, String>(i, tabs[i]));
+				if(!getContext().getSqlUtilities().TabPageIsEmpy(factsheet.getSiteObject().getIdNatureObject().toString(), "SITES", dbtabs[i][0])) {
+					tabsWithData.add(new Pair<String, String>(dbtabs[i][1], tabs[i]));
 				}
 			}
 		
@@ -173,7 +178,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 	/**
 	 * @return the dbtabs
 	 */
-	public String[] getDbtabs() {
+	public String[][] getDbtabs() {
 		return dbtabs;
 	}
 
@@ -208,21 +213,21 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 	/**
 	 * @return the tab
 	 */
-	public int getTab() {
+	public String getTab() {
 		return tab;
 	}
 
 	/**
 	 * @param tab the tab to set
 	 */
-	public void setTab(int tab) {
+	public void setTab(String tab) {
 		this.tab = tab;
 	}
 
 	/**
 	 * @return the tabsWithData
 	 */
-	public List<Pair<Integer, String>> getTabsWithData() {
+	public List<Pair<String, String>> getTabsWithData() {
 		return tabsWithData;
 	}
 

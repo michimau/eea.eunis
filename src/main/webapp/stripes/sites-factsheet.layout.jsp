@@ -4,7 +4,7 @@
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle }">
 	<stripes:layout-component name="head">
 		<c:if test="${eunis:exists(actionBean.factsheet)}">
-			<link rel="alternate" type="application/rdf+xml" title="RDF" href="${pageContext.request.contextPath}/sites-factsheet.jsp?idsite=${actionBean.idsite}" />
+			<link rel="alternate" type="application/rdf+xml" title="RDF" href="${pageContext.request.contextPath}/sites/${actionBean.idsite}" />
 		</c:if>
 		<script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
 		<script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
@@ -96,13 +96,13 @@
 										<c:when test="${dataTab.id eq actionBean.tab}">
 											<li id="currenttab"><a
 												title="Open ${eunis:cms(actionBean.contentManagement, dataTab.value)}"
-												href="sites-factsheet.jsp?tab=${dataTab.id}&amp;idsite=${actionBean.idsite}">
+												href="sites/${actionBean.idsite}/${dataTab.id}">
 											${eunis:cms(actionBean.contentManagement, dataTab.value)}</a></li>
 										</c:when>
 										<c:otherwise>
 											<li><a
 												title="Open ${eunis:cms(actionBean.contentManagement, dataTab.value)}"
-												href="sites-factsheet.jsp?tab=${dataTab.id}&amp;idsite=${actionBean.idsite}">
+												href="sites/${actionBean.idsite}/${dataTab.id}">
 											${eunis:cms(actionBean.contentManagement, dataTab.value)}</a></li>
 										</c:otherwise>
 									</c:choose>
@@ -111,32 +111,32 @@
 						</div>
 						<br class="brClear" />
 						<br />
-						<c:if test="${actionBean.tab == 0}">
+						<c:if test="${actionBean.tab == 'general'}">
 							<jsp:include page="/sites-factsheet-general.jsp">
 								<jsp:param name="idsite" value="${actionBean.idsite}" />
 							</jsp:include>
 						</c:if>
-						<c:if test="${actionBean.tab == 1}">
+						<c:if test="${actionBean.tab == 'faunaflora'}">
 							<jsp:include page="/sites-factsheet-faunaflora.jsp">
 								<jsp:param name="idsite" value="${actionBean.idsite}" />
 							</jsp:include>
 						</c:if>
-						<c:if test="${actionBean.tab == 2}">
+						<c:if test="${actionBean.tab == 'designations'}">
 							<jsp:include page="/sites-factsheet-designations.jsp">
 								<jsp:param name="idsite" value="${actionBean.idsite}" />
 							</jsp:include>
 						</c:if>
-						<c:if test="${actionBean.tab == 3}">
+						<c:if test="${actionBean.tab == 'habitats'}">
 							<jsp:include page="/sites-factsheet-habitats.jsp">
 								<jsp:param name="idsite" value="${actionBean.idsite}" />
 							</jsp:include>
 						</c:if>
-						<c:if test="${actionBean.tab == 4}">
+						<c:if test="${actionBean.tab == 'sites'}">
 							<jsp:include page="/sites-factsheet-related.jsp">
 								<jsp:param name="idsite" value="${actionBean.idsite}" />
 							</jsp:include>
 						</c:if>
-						<c:if test="${actionBean.tab == 5}">
+						<c:if test="${actionBean.tab == 'other'}">
 							<jsp:include page="/sites-factsheet-other.jsp">
 								<jsp:param name="idsite" value="${actionBean.idsite}" />
 							</jsp:include></c:if>
@@ -201,7 +201,7 @@
 			<div id="portal-column-one">
 				<div class="visualPadding">
 					<jsp:include page="/inc_column_left.jsp">
-						<jsp:param name="page_name" value="sites-factsheet.jsp" />
+						<jsp:param name="page_name" value="sites" />
 					</jsp:include>
 				</div>
 			</div>

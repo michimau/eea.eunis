@@ -565,7 +565,7 @@
                       %>
                           <tr>
                             <td>
-                              <a href="sites-factsheet.jsp?idsite=<%=idSite%>"><%=siteName%></a> (<%=siteSourceDb%>
+                              <a href="sites/<%=idSite%>"><%=siteName%></a> (<%=siteSourceDb%>
                               )
                             </td>
                           </tr>

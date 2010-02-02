@@ -473,7 +473,7 @@
               }
           %>
                         <td>
-                          <a href="sites-factsheet.jsp?idsite=<%=site.getIdSite()%>"><%=site.getName()%></a>
+                          <a href="sites/<%=site.getIdSite()%>"><%=site.getName()%></a>
                         </td>
           <%
               if ( showDesignType )

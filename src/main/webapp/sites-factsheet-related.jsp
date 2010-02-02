@@ -87,7 +87,7 @@
         if ( site.getIdSiteLink() != null )
         {
 %>
-          <a href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
+          <a href="sites/<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
 <%
         }
         else
@@ -172,10 +172,10 @@
         <td>
           <%=site.getRelationName()%>&nbsp;</td>
         <td>
-          <a href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getIdSiteLink()%></a>
+          <a href="sites/<%=site.getIdSiteLink()%>"><%=site.getIdSiteLink()%></a>
         </td>
         <td>
-          <a href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
+          <a href="sites/<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
         </td>
       </tr>
 <%
@@ -223,10 +223,10 @@
 %>
       <tr<%=cssClass%>>
         <td>
-          <a href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getIdSiteLink()%></a>
+          <a href="sites/<%=site.getIdSiteLink()%>"><%=site.getIdSiteLink()%></a>
         </td>
         <td>
-          <a href="sites-factsheet.jsp?idsite=<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
+          <a href="sites/<%=site.getIdSiteLink()%>"><%=site.getSiteName()%></a>
         </td>
         <td>
           <%=site.getRelationType()%>

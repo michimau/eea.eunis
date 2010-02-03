@@ -136,7 +136,7 @@
 //      gbifLink = gbifLink.replaceAll( " ", "\\." );
 %>
       <div>
-        <a title="<%=cm.cmsPhrase("Search species on GBIF")%>" href="<%=gbifLink%>"><%=cm.cmsPhrase("GBIF link")%></a>
+        <a href="<%=gbifLink%>"><%=cm.cmsPhrase("GBIF page")%></a>
       </div>
       <% } %>
 <%
@@ -163,7 +163,7 @@
         spname=sn.substring(pos+1);
 %>
       <div>
-        <a title="<%=cm.cmsPhrase("Search species on UNEP-WCMC")%>" href="http://sea.unep-wcmc.org/isdb/species.cfm?source=<%=kingdomname%>&amp;genus=<%=genus%>&amp;species=<%=Utilities.treatURLSpecialCharacters(spname)%>"><%=cm.cmsPhrase("UNEP-WCMC link")%></a>
+        <a title="<%=cm.cmsPhrase("Search species on UNEP-WCMC")%>" href="http://sea.unep-wcmc.org/isdb/species.cfm?source=<%=kingdomname%>&amp;genus=<%=genus%>&amp;species=<%=Utilities.treatURLSpecialCharacters(spname)%>"><%=cm.cmsPhrase("UNEP-WCMC search")%></a>
       </div>
 <%
       }
@@ -188,7 +188,7 @@
         String scientificNameURL = scientificName.replace(' ','+');
 %>
       <div>
-        <a title="<%=cm.cmsPhrase("Search species on Redlist site")%>" href="http://www.redlist.org/apps/redlist/search/external?text=<%=scientificNameURL%>&amp;mode="><%=cm.cmsPhrase("Redlist link")%></a>
+        <a title="<%=cm.cmsPhrase("Search species on Redlist site")%>" href="http://www.redlist.org/apps/redlist/search/external?text=<%=scientificNameURL%>&amp;mode="><%=cm.cmsPhrase("Redlist search")%></a>
       </div>
 <%
       }
@@ -198,7 +198,7 @@
         String speciesName = (scientificName.trim().indexOf(" ")>=0? scientificName.trim().substring(scientificName.indexOf(" ") + 1) : scientificName);
 %>
       <div>
-        <a title="<%=cm.cmsPhrase("Search species on Fishbase")%>" href="http://www.fishbase.org/Summary/SpeciesSummary.cfm?genusname=<%=genusName%>&amp;speciesname=<%=Utilities.treatURLSpecialCharacters(speciesName)%>"><%=cm.cmsPhrase("Fishbase link")%></a>
+        <a title="<%=cm.cmsPhrase("Search species on Fishbase")%>" href="http://www.fishbase.org/Summary/SpeciesSummary.cfm?genusname=<%=genusName%>&amp;speciesname=<%=Utilities.treatURLSpecialCharacters(speciesName)%>"><%=cm.cmsPhrase("Fishbase search")%></a>
       </div>
 <%
       }
@@ -211,7 +211,7 @@
         <a title="<%=cm.cmsPhrase("Search species on Biology Browser")%>" href="http://www.biologybrowser.org/search/apachesolr_search/<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("Biology Browser")%></a>
       </div>
       <div>
-        <a title="<%=cm.cmsPhrase("Search species on NCBI Taxonomy browser")%>" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?doptcmdl=ExternalLink&amp;cmd=Search&amp;db=taxonomy&amp;term=<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("NCBI Taxonomy browser")%></a>
+        <a title="<%=cm.cmsPhrase("Search species on NCBI Taxonomy browser")%>" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?doptcmdl=ExternalLink&amp;cmd=Search&amp;db=taxonomy&amp;term=<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("NCBI Taxonomy search")%></a>
       </div>
 <%
 if(kingdomname.equalsIgnoreCase("Animals"))
@@ -237,7 +237,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 			if(biolibLink != null && biolibLink.length() > 0){
     		%>
       <div>
-        		<a href="<%=biolibLink%>"><%=cm.cmsPhrase("Biolib")%></a>
+        		<a href="<%=biolibLink%>"><%=cm.cmsPhrase("Biolib page")%></a>
       	</div>
         	<%
     		}
@@ -247,7 +247,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 			if(bbcLink != null && bbcLink.length() > 0){
     		%>
       <div>
-        		<a href="<%=bbcLink%>"><%=cm.cmsPhrase("BBC")%></a>
+        		<a href="<%=bbcLink%>"><%=cm.cmsPhrase("BBC page")%></a>
       	</div>
         	<%
     		}
@@ -277,7 +277,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 			if(bugGuideLink != null && bugGuideLink.length() > 0){
     		%>
       	<div>
-        		<a href="<%=bugGuideLink%>"><%=cm.cmsPhrase("Bug Guide")%></a>
+        		<a href="<%=bugGuideLink%>"><%=cm.cmsPhrase("Bug Guide page")%></a>
       	</div>
         	<%
     		}

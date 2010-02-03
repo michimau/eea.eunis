@@ -123,7 +123,7 @@
 %>
         <td width="25%" style="text-align:left" onmouseover="return showtooltip('<%=Utilities.getReferencesByIdDc(aRow.getReference())%>')" onmouseout="hidetooltip()">
           <span class="boldUnderline">
-            <%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(aRow.getReference()).get(0))%>
+            <a href="documents/<%=aRow.getReference()%>"><%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(aRow.getReference()).get(0))%></a>
           </span>
         </td>
 <%

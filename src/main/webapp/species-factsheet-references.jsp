@@ -26,7 +26,8 @@
   sql+="      `DC_SOURCE`.`EDITOR`,";
   sql+="      `DC_DATE`.`CREATED`,";
   sql+="      `DC_TITLE`.`TITLE`,";
-  sql+="      `DC_PUBLISHER`.`PUBLISHER`";
+  sql+="      `DC_PUBLISHER`.`PUBLISHER`,";
+  sql+="      `DC_SOURCE`.`ID_DC`";
   sql+="    FROM";
   sql+="      `CHM62EDT_SPECIES`";
   sql+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
@@ -173,7 +174,7 @@
 %>
       <tr<%=cssClass%>>
         <td>
-          <%=title%>
+          <a href="documents/<%=rs.getString(6)%>"><%=title%></a>
         </td>
         <td>
           <%=author%>

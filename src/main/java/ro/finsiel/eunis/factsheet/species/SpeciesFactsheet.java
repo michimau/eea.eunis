@@ -412,6 +412,7 @@ public class SpeciesFactsheet {
             threat.setThreatCode( consS.getCode() );
             int year = Utilities.checkedStringToInt( getBookDate( report.getIdDc() ), 0 );
             threat.setReferenceYear( year );
+            threat.setIdDc(report.getIdDc());
             results.addElement( threat );
           }
         }
@@ -703,6 +704,7 @@ public class SpeciesFactsheet {
           {
             legalStatus.setReference( report.getReference().toString() );
             legalStatus.setRefcd( report.getRefcd().toString() );
+            legalStatus.setIdDc(report.getIdDc());
           }
           else
           {

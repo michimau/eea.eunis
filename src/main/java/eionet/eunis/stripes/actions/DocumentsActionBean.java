@@ -15,9 +15,23 @@ import org.apache.commons.lang.StringUtils;
 
 import ro.finsiel.eunis.utilities.EunisUtil;
 
+import eionet.eunis.dto.DcContributorDTO;
+import eionet.eunis.dto.DcCoverageDTO;
+import eionet.eunis.dto.DcCreatorDTO;
+import eionet.eunis.dto.DcDateDTO;
+import eionet.eunis.dto.DcDescriptionDTO;
+import eionet.eunis.dto.DcFormatDTO;
+import eionet.eunis.dto.DcIdentifierDTO;
+import eionet.eunis.dto.DcIndexDTO;
+import eionet.eunis.dto.DcLanguageDTO;
 import eionet.eunis.dto.DcObjectDTO;
+import eionet.eunis.dto.DcPublisherDTO;
+import eionet.eunis.dto.DcRelationDTO;
+import eionet.eunis.dto.DcRightsDTO;
 import eionet.eunis.dto.DcSourceDTO;
+import eionet.eunis.dto.DcSubjectDTO;
 import eionet.eunis.dto.DcTitleDTO;
+import eionet.eunis.dto.DcTypeDTO;
 
 /**
  * Action bean to handle RDF export.
@@ -42,6 +56,20 @@ public class DocumentsActionBean extends AbstractStripesAction {
 	private List<DcTitleDTO> docs;
 	private DcTitleDTO dcTitle;
 	private DcSourceDTO dcSource;
+	private DcContributorDTO dcContributor;
+	private DcCoverageDTO dcCoverage;
+	private DcCreatorDTO dcCreator;
+	private DcDateDTO dcDate;
+	private DcDescriptionDTO dcDescription;
+	private DcFormatDTO dcFormat;
+	private DcIdentifierDTO dcIdentifier;
+	private DcIndexDTO dcIndex;
+	private DcLanguageDTO dcLanguage;
+	private DcPublisherDTO dcPublisher;
+	private DcRelationDTO dcRelation;
+	private DcRightsDTO dcRights;
+	private DcSubjectDTO dcSubject;
+	private DcTypeDTO dcType;
 	
 	@DefaultHandler
 	@DontValidate(ignoreBindingErrors = true)
@@ -60,7 +88,24 @@ public class DocumentsActionBean extends AbstractStripesAction {
 			} else {
 				dcTitle = getContext().getDocumentsDao().getDcTitle(iddoc);
 				dcSource = getContext().getDocumentsDao().getDcSource(iddoc);
-				btrail = "eea#" + eeaHome + ",home#index.jsp,documents#documents,"+dcTitle.getTitle();
+				dcContributor = getContext().getDocumentsDao().getDcContributor(iddoc);
+				dcCoverage = getContext().getDocumentsDao().getDcCoverage(iddoc);
+				dcCreator = getContext().getDocumentsDao().getDcCreator(iddoc);
+				dcDate = getContext().getDocumentsDao().getDcDate(iddoc);
+				dcDescription = getContext().getDocumentsDao().getDcDescription(iddoc);
+				dcFormat = getContext().getDocumentsDao().getDcFormat(iddoc);
+				dcIdentifier = getContext().getDocumentsDao().getDcIdentifier(iddoc);
+				dcIndex = getContext().getDocumentsDao().getDcIndex(iddoc);
+				dcLanguage = getContext().getDocumentsDao().getDcLanguage(iddoc);
+				dcPublisher = getContext().getDocumentsDao().getDcPublisher(iddoc);
+				dcRelation = getContext().getDocumentsDao().getDcRelation(iddoc);
+				dcRights = getContext().getDocumentsDao().getDcRights(iddoc);
+				dcSubject = getContext().getDocumentsDao().getDcSubject(iddoc);
+				dcType = getContext().getDocumentsDao().getDcType(iddoc);
+				btrail = "eea#" + eeaHome + ",home#index.jsp,documents#documents";
+				if(dcTitle != null){
+					btrail += "," + dcTitle.getTitle();
+				}
 				if(dcTitle == null && dcSource == null){
 					return new ErrorResolution(404);
 				}
@@ -216,6 +261,118 @@ public class DocumentsActionBean extends AbstractStripesAction {
 
 	public void setDcSource(DcSourceDTO dcSource) {
 		this.dcSource = dcSource;
+	}
+
+	public DcContributorDTO getDcContributor() {
+		return dcContributor;
+	}
+
+	public void setDcContributor(DcContributorDTO dcContributor) {
+		this.dcContributor = dcContributor;
+	}
+
+	public DcCoverageDTO getDcCoverage() {
+		return dcCoverage;
+	}
+
+	public void setDcCoverage(DcCoverageDTO dcCoverage) {
+		this.dcCoverage = dcCoverage;
+	}
+
+	public DcCreatorDTO getDcCreator() {
+		return dcCreator;
+	}
+
+	public void setDcCreator(DcCreatorDTO dcCreator) {
+		this.dcCreator = dcCreator;
+	}
+
+	public DcDateDTO getDcDate() {
+		return dcDate;
+	}
+
+	public void setDcDate(DcDateDTO dcDate) {
+		this.dcDate = dcDate;
+	}
+
+	public DcDescriptionDTO getDcDescription() {
+		return dcDescription;
+	}
+
+	public void setDcDescription(DcDescriptionDTO dcDescription) {
+		this.dcDescription = dcDescription;
+	}
+
+	public DcFormatDTO getDcFormat() {
+		return dcFormat;
+	}
+
+	public void setDcFormat(DcFormatDTO dcFormat) {
+		this.dcFormat = dcFormat;
+	}
+
+	public DcIdentifierDTO getDcIdentifier() {
+		return dcIdentifier;
+	}
+
+	public void setDcIdentifier(DcIdentifierDTO dcIdentifier) {
+		this.dcIdentifier = dcIdentifier;
+	}
+
+	public DcIndexDTO getDcIndex() {
+		return dcIndex;
+	}
+
+	public void setDcIndex(DcIndexDTO dcIndex) {
+		this.dcIndex = dcIndex;
+	}
+
+	public DcLanguageDTO getDcLanguage() {
+		return dcLanguage;
+	}
+
+	public void setDcLanguage(DcLanguageDTO dcLanguage) {
+		this.dcLanguage = dcLanguage;
+	}
+
+	public DcPublisherDTO getDcPublisher() {
+		return dcPublisher;
+	}
+
+	public void setDcPublisher(DcPublisherDTO dcPublisher) {
+		this.dcPublisher = dcPublisher;
+	}
+
+	public DcRelationDTO getDcRelation() {
+		return dcRelation;
+	}
+
+	public void setDcRelation(DcRelationDTO dcRelation) {
+		this.dcRelation = dcRelation;
+	}
+
+	public DcRightsDTO getDcRights() {
+		return dcRights;
+	}
+
+	public void setDcRights(DcRightsDTO dcRights) {
+		this.dcRights = dcRights;
+	}
+
+	public DcSubjectDTO getDcSubject() {
+		return dcSubject;
+	}
+
+	public void setDcSubject(DcSubjectDTO dcSubject) {
+		this.dcSubject = dcSubject;
+	}
+
+	public DcTypeDTO getDcType() {
+		return dcType;
+	}
+
+	public void setDcType(DcTypeDTO dcType) {
+		this.dcType = dcType;
 	}
 
 

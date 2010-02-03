@@ -182,7 +182,7 @@
 %>
         <td onmouseover="return showtooltip('<%=Utilities.getReferencesByIdDc(GridIdDc)%>')" onmouseout="hidetooltip()">
           <span class="boldUnderline">
-            <%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(GridIdDc).get(0))%>&nbsp;
+            <a href="documents/<%=GridIdDc%>"><%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(GridIdDc).get(0))%>&nbsp;</a>
           </span>
         </td>
 <%

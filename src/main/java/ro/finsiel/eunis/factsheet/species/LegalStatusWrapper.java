@@ -12,6 +12,7 @@ public class LegalStatusWrapper {
   private String reference = "";
   private String refcd = "";
   private String comments = "";
+  private Integer idDc;
 
 
   /**
@@ -130,4 +131,12 @@ public class LegalStatusWrapper {
   public void setArea(String area) {
     this.area = area;
   }
+
+public Integer getIdDc() {
+	return idDc;
+}
+
+public void setIdDc(Integer idDc) {
+	this.idDc = idDc;
+}
 }

@@ -12,6 +12,7 @@ public class NationalThreatWrapper {
   private Short selection = new Short("0");
   private String threatCode = "";
   private int referenceYear = 0;
+  private Integer idDc;
 
   /**
    * Creates a new NationalThreatWrapper object.
@@ -153,5 +154,13 @@ public class NationalThreatWrapper {
   public void setReferenceYear(int referenceYear) {
     this.referenceYear = referenceYear;
   }
+
+public Integer getIdDc() {
+	return idDc;
+}
+
+public void setIdDc(Integer idDc) {
+	this.idDc = idDc;
+}
 
 }

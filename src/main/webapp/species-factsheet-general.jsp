@@ -138,8 +138,12 @@
       <div>
         <a href="<%=gbifLink%>"><%=cm.cmsPhrase("GBIF page")%></a>
       </div>
-      <% } %>
+      <% } else { %>
+      <div>
+        <a title="<%=cm.cmsPhrase("Search species on GBIF")%>" href="http://data.gbif.org/species/"><%=cm.cmsPhrase("GBIF search")%></a>
+      </div>
 <%
+	  }
       String sn = scientificName;
       sn=sn.replaceAll("sp.","").replaceAll("ssp.","");
       String genus="";

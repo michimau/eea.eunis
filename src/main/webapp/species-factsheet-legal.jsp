@@ -62,7 +62,7 @@
 %>
       <tr class="<%=cssClass%>">
         <td>
-          <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getDetailedReference()))%>
+          <a href="documents/<%=legal.getIdDc()%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getDetailedReference()))%></a>
         </td>
         <td>
           <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getLegalText()))%>

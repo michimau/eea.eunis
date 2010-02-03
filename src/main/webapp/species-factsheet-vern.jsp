@@ -83,7 +83,7 @@
         <td style="text-align:left">
           <span onmouseover="return showtooltip('<%=ref%>')" onmouseout="hidetooltip()">
             <span class="boldUnderline">
-              <%=Utilities.treatURLSpecialCharacters((String)authorURL.get(0))%>
+              <a href="documents/<%=reference%>"><%=Utilities.treatURLSpecialCharacters((String)authorURL.get(0))%></a>
             </span>
           </span>
         </td>

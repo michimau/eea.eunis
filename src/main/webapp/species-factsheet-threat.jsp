@@ -212,7 +212,7 @@
           </span>
         </td>
         <td>
-          <%=Utilities.treatURLSpecialCharacters(threat.getReference())%>
+          <a href="documents/<%=threat.getIdDc()%>"><%=Utilities.treatURLSpecialCharacters(threat.getReference())%></a>
         </td>
       </tr>
         <%
@@ -273,7 +273,7 @@
         </span>
         </td>
         <td>
-          <%=Utilities.treatURLSpecialCharacters(threat.getReference())%>
+          <a href="documents/<%=threat.getIdDc()%>"><%=Utilities.treatURLSpecialCharacters(threat.getReference())%></a>
         </td>
       </tr>
 <%

@@ -104,7 +104,10 @@ public class WebContentManagement implements java.io.Serializable {
    */
   public String cmsText( String idPage ) {
 	String ret = Utilities.replace(idPage, "'", "''");
-    ret = getText( ret );
+	ret = getTextByMD5( ret );
+	if(ret == null)
+		ret = getText( ret );
+    
     if ( editMode )
     {
       ret += "<a title=\"Edit this text\" href=\"javascript:openContentManager('" + idPage + "', 'text');\"><img src=\"images/edit-content.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
@@ -241,9 +244,13 @@ public class WebContentManagement implements java.io.Serializable {
     }
     String ret = idPage;
     idPage = idPage.trim();
-    if ( htmlContent.containsKey( idPage ) )
+    String md5 = EunisUtil.digestHexDec(idPage, "MD5");	
+    if ( htmlContent.containsKey( idPage ) || htmlContent.containsKey( md5 ) )
     {
-      final WebContentPersist text = htmlContent.get( idPage );
+      WebContentPersist text = htmlContent.get( md5 );
+      if(text == null)
+    	  text = htmlContent.get( idPage );
+      
       if ( null != text )
       {
         if ( text.getContent() != null )
@@ -262,7 +269,10 @@ public class WebContentManagement implements java.io.Serializable {
     }
     else
     {
-      final List<WebContentPersist> dbKeyList = new WebContentDomain().findWhereOrderBy( "ID_PAGE='" + idPage + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ", "RECORD_DATE DESC" );
+      List<WebContentPersist> dbKeyList = new WebContentDomain().findWhereOrderBy( "ID_PAGE='" + md5 + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ", "RECORD_DATE DESC" );
+      if(dbKeyList == null)
+    	  dbKeyList = new WebContentDomain().findWhereOrderBy( "ID_PAGE='" + idPage + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ", "RECORD_DATE DESC" );
+      
       if ( !dbKeyList.isEmpty() )
       {
         htmlContent.put( idPage, dbKeyList.get( 0 ) );
@@ -276,46 +286,35 @@ public class WebContentManagement implements java.io.Serializable {
     return ret;
   }
   
-  public String getTextByMD5( String idPage )
-  {
-    if ( idPage == null )
-    {
-      return "";
-    }
-    String ret = idPage;
-    idPage = idPage.trim();
-    if ( htmlContent.containsKey( idPage ) )
-    {
-      final WebContentPersist text = htmlContent.get( idPage );
-      if ( null != text )
-      {
-        if ( text.getContent() != null )
-        {
-          ret = text.getContent().trim();
-        }
-        else
-        {
-          ret = idPage;
-        }
-      }
-      else
-      {
-        System.out.println( "Warning:" + WebContentManagement.class.getName() + "::getTextByMD5(" + idPage + "): Page not found in cache." );
-      }
-    }
-    else
-    {
-      String md5 = EunisUtil.digestHexDec(idPage, "MD5");	
-      List<WebContentPersist> dbKeyList = null;
-   	  dbKeyList = new WebContentDomain().findWhereOrderBy( "ID_PAGE='" + md5 + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ", "RECORD_DATE DESC" );
-      if ( !dbKeyList.isEmpty() )
-      {
-        htmlContent.put( idPage, dbKeyList.get( 0 ) );
-        ret = dbKeyList.get( 0 ).getContent();
-      }
-    }
-    return ret;
-  }  
+	public String getTextByMD5( String idPage ){
+		if ( idPage == null ){
+			return "";
+		}
+		String md5 = EunisUtil.digestHexDec(idPage, "MD5");	
+    
+		String ret = idPage;
+		idPage = idPage.trim();
+		if ( htmlContent.containsKey( md5 ) ){
+			final WebContentPersist text = htmlContent.get( md5 );
+			if ( null != text ){
+				if ( text.getContent() != null ){
+					ret = text.getContent().trim();
+				} else {
+					ret = idPage;
+				}
+			} else {
+				System.out.println( "Warning:" + WebContentManagement.class.getName() + "::getTextByMD5(" + idPage + "): Page not found in cache." );
+			}
+		} else	{
+			List<WebContentPersist> dbKeyList = null;
+			dbKeyList = new WebContentDomain().findWhereOrderBy( "ID_PAGE='" + md5 + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ", "RECORD_DATE DESC" );
+			if ( !dbKeyList.isEmpty() ){
+				htmlContent.put( idPage, dbKeyList.get( 0 ) );
+				ret = dbKeyList.get( 0 ).getContent();
+			}
+		}
+		return ret;
+	}  
 
   public String getDescription( String idPage )
   {
@@ -431,7 +430,10 @@ public class WebContentManagement implements java.io.Serializable {
     List ret = new ArrayList();
     try
     {
-      ret = new WebContentDomain().findWhereOrderBy( "ID_PAGE='" + idPage + "' AND LANG='" + language + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ", "RECORD_DATE DESC" );
+    	String md5 = EunisUtil.digestHexDec(idPage, "MD5");	
+    	ret = new WebContentDomain().findWhereOrderBy( "ID_PAGE='" + md5 + "' AND LANG='" + language + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ", "RECORD_DATE DESC" );
+    	if(ret == null)
+    		ret = new WebContentDomain().findWhereOrderBy( "ID_PAGE='" + idPage + "' AND LANG='" + language + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ", "RECORD_DATE DESC" );
     }
     catch ( Exception ex )
     {
@@ -480,20 +482,22 @@ public class WebContentManagement implements java.io.Serializable {
     PreparedStatement ps = null;
     try
     {
+      String md5 = EunisUtil.digestHexDec(idPage, "MD5");	
+    	
       Class.forName( SQL_DRV );
       con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
       
       if(lang.equalsIgnoreCase("EN")) {
-   		ps = con.prepareStatement( "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE, CONTENT_VALID ) VALUES ( MD5(?), ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 0 )" );
-        ps.setString( 1, idPage );
+   		ps = con.prepareStatement( "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE, CONTENT_VALID ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 0 )" );
+        ps.setString( 1, md5 );
         ps.setString( 2, content );
         ps.setString( 3, description );
         ps.setString( 4, lang );
         ps.setShort( 5, contentLength );
         ps.setString( 6, username );
       } else {
-   		ps = con.prepareStatement( "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE ) VALUES ( MD5(?), ?, ?, ?, ?, ?, CURRENT_TIMESTAMP )" );
-        ps.setString( 1, idPage );
+   		ps = con.prepareStatement( "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP )" );
+        ps.setString( 1, md5 );
         ps.setString( 2, content );
         ps.setString( 3, description );
         ps.setString( 4, lang );
@@ -505,14 +509,14 @@ public class WebContentManagement implements java.io.Serializable {
       // Do not reload all language again, just modify the current key.
       // cacheHTMLContent( this.language );
       idPage = idPage.trim();
-      if ( htmlContent.containsKey( idPage ) )
+      if ( htmlContent.containsKey( md5 ) )
       {
-        WebContentPersist data = htmlContent.get( idPage );
+        WebContentPersist data = htmlContent.get( md5 );
         data.setContent( content );
         data.setDescription( description );
         data.setContentLength( contentLength );
-        htmlContent.remove( idPage );
-        htmlContent.put( idPage, data );
+        htmlContent.remove( md5 );
+        htmlContent.put( md5, data );
       }
       else
       {

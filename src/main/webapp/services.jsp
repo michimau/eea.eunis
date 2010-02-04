@@ -106,8 +106,7 @@
                       <%=cm.cmsAlt("user_management")%><%=cm.cmsTitle("user_management")%>
                     </td>
                     <td>
-                      <a href="users.jsp" title="<%=cm.cms("user_management")%>"><%=cm.cmsPhrase("Add, update and delete users")%></a>
-                      <%=cm.cmsTitle("user_management")%>
+                      <a href="users.jsp"><%=cm.cmsPhrase("Add, update and delete users")%></a>
                     </td>
                   </tr>
 <%
@@ -121,7 +120,7 @@
                       <%=cm.cmsAlt("role_management")%><%=cm.cmsTitle("role_management")%>
                     </td>
                     <td>
-                      <a href="roles.jsp" title="<%=cm.cms("role_management")%>"><%=cm.cmsPhrase("Add, update and delete users roles")%></a>
+                      <a href="roles.jsp"><%=cm.cmsPhrase("Add, update and delete users roles")%></a>
                       <%=cm.cmsTitle("role_management")%>
                     </td>
                   </tr>
@@ -135,8 +134,7 @@
                       <%=cm.cmsAlt("eunis_database_logos")%><%=cm.cmsTitle("eunis_database_logos")%>
                     </td>
                     <td>
-                      <a href="logos.jsp" title="<%=cm.cms("eunis_database_logos")%>"><%=cm.cmsPhrase("Download EUNIS Database logos")%></a>
-                      <%=cm.cmsTitle("eunis_database_logos")%>
+                      <a href="logos.jsp"><%=cm.cmsPhrase("Download EUNIS Database logos")%></a>
                     </td>
                   </tr>
 <%
@@ -150,8 +148,7 @@
                       <%=cm.cmsAlt("services_bookmarkslink_alt")%><%=cm.cmsTitle("user_bookmarks")%>
                     </td>
                     <td>
-                      <a href="users-bookmarks.jsp" title="<%=cm.cms("user_bookmarks")%>"><%=cm.cmsPhrase("List, update and delete your bookmarks")%></a>
-                      <%=cm.cmsTitle("user_bookmarks")%>
+                      <a href="users-bookmarks.jsp"><%=cm.cmsPhrase("List, update and delete your bookmarks")%></a>
                     </td>
                   </tr>
 <%
@@ -167,8 +164,7 @@
                       <%=cm.cmsAlt("services_headlinelink")%><%=cm.cmsTitle("services_headlinelink_title")%>
                     </td>
                     <td>
-                      <a href="headline.jsp" title="<%=cm.cms("services_headlinelink_title")%>"><%=cm.cmsPhrase("Edit EUNIS Database headline")%></a>
-                      <%=cm.cmsTitle("services_headlinelink_title")%>
+                      <a href="headline.jsp"><%=cm.cmsPhrase("Edit EUNIS Database headline")%></a>
                     </td>
                   </tr>
 --%>
@@ -184,7 +180,7 @@
                       <%=cm.cmsAlt("edit_glossary_of_terms")%><%=cm.cmsTitle("edit_glossary_of_terms")%>
                     </td>
                     <td>
-                      <a href="glossary-table.jsp" title="<%=cm.cms("edit_glossary_of_terms")%>"><%=cm.cmsPhrase("Edit the glossary of terms")%></a>
+                      <a href="glossary-table.jsp"><%=cm.cmsPhrase("Edit the glossary of terms")%></a>
                       <%=cm.cmsTitle("edit_glossary_of_terms")%>
                     </td>
                   </tr>
@@ -200,8 +196,7 @@
                       <%=cm.cmsAlt("feedback_list")%><%=cm.cmsTitle("feedback_list")%>
                     </td>
                     <td>
-                     <a href="feedback-list.jsp" title="<%=cm.cms("feedback_list")%>"><%=cm.cmsPhrase("Feedback list")%></a>
-                      <%=cm.cmsTitle("feedback_list")%><%=cm.cmsTitle("feedback_list")%>
+                     <a href="feedback-list.jsp"><%=cm.cmsPhrase("Feedback list")%></a>
                    </td>
                   </tr>
 <%
@@ -216,8 +211,7 @@
                       <%=cm.cmsAlt("services_access")%><%=cm.cmsTitle("services_access")%>
                     </td>
                     <td>
-                      <a href="download-database.jsp" title="<%=cm.cms("services_access")%>"><%=cm.cmsPhrase("Download database in Microsoft Access format")%></a>
-                      <%=cm.cmsTitle("services_access")%>
+                      <a href="download-database.jsp"><%=cm.cmsPhrase("Download database in Microsoft Access format")%></a>
                     </td>
                   </tr>
 <%
@@ -232,8 +226,7 @@
                       <%=cm.cmsAlt("services_cleartemp")%>
                     </td>
                     <td>
-                      <a href="clear-temporary-data.jsp" title="<%=cm.cms("services_cleartemp")%>"><%=cm.cmsPhrase("Clear temporary data from the database")%></a>
-                      <%=cm.cmsTitle("services_cleartemp")%>
+                      <a href="clear-temporary-data.jsp"><%=cm.cmsPhrase("Clear temporary data from the database")%></a>
                     </td>
                   </tr>
 <%
@@ -248,8 +241,7 @@
                       <%=cm.cmsAlt("refresh_language")%>
                     </td>
                     <td>
-                      <a href="services.jsp?action=reloadlanguage" title="<%=cm.cms("services_refresh_title")%>"><%=cm.cmsPhrase("Refresh language")%></a>
-                      <%=cm.cmsTitle("services_refresh_title")%>
+                      <a href="services.jsp?action=reloadlanguage"><%=cm.cmsPhrase("Refresh language")%></a>
                     </td>
                   </tr>
 <%
@@ -264,8 +256,7 @@
                       <%=cm.cmsAlt("refresh_template")%>
                     </td>
                     <td>
-                      <a href="refreshtemplate" title="<%=cm.cms("services_refresh_template")%>"><%=cm.cmsPhrase("Refresh template")%></a>
-                      <%=cm.cmsTitle("services_refresh_template")%>
+                      <a href="refreshtemplate"><%=cm.cmsPhrase("Refresh template")%></a>
                     </td>
                   </tr>
 <%
@@ -279,8 +270,7 @@
                       <%=cm.cmsAlt("edit_mode_allwos_editing_html_attributes")%>
                     </td>
                     <td>
-                      <a href="services.jsp?editContent=true" title="<%=cm.cms("services_inline_activate_title")%>"><%=cm.cmsPhrase("Activate inline editor for web content")%></a>
-                      <%=cm.cmsTitle("services_inline_activate_title")%>
+                      <a href="services.jsp?editContent=true"><%=cm.cmsPhrase("Activate inline editor for web content")%></a>
                     </td>
                   </tr>
 <%
@@ -295,8 +285,7 @@
                       <%=cm.cmsAlt("services_inline_dezactivate_alt")%>
                     </td>
                     <td>
-                      <a href="services.jsp?editContent=false" title="<%=cm.cms("services_inline_dezactivate_alt")%>"><%=cm.cmsPhrase("Dezactivate inline editor")%></a>
-                      <%=cm.cmsTitle("services_inline_dezactivate_alt")%>
+                      <a href="services.jsp?editContent=false"><%=cm.cmsPhrase("Deactivate inline editor")%></a>
                     </td>
                   </tr>
 <%
@@ -311,8 +300,8 @@
                       <%=cm.cmsAlt("services_inline_advactivate_alt")%>
                     </td>
                     <td>
-                      <a href="services.jsp?advancedEditContent=true" title="<%=cm.cms("edit_mode_allwos_editing_html_attributes")%>"><%=cm.cmsPhrase("Activate advanced inline editor")%></a>
-                      <%=cm.cmsTitle("edit_mode_allwos_editing_html_attributes")%>
+                      <a href="services.jsp?advancedEditContent=true"><%=cm.cmsPhrase("Activate advanced inline editor")%></a>
+                      <%=cm.cms("edit_mode_allwos_editing_html_attributes")%>
                     </td>
                   </tr>
 <%
@@ -323,12 +312,11 @@
 %>
                   <tr <%=cssClass%>>
                     <td align="center">
-                      <a href="services.jsp?advancedEditContent=false" title="<%=cm.cms("services_inline_advdezactivate_title")%>"><img alt="<%=cm.cms("services_inline_advdezactivate_alt")%>" src="images/webcontent-inline.gif" width="81" height="43" border="0" title="<%=cm.cms("services_inline_advdezactivate_title")%>" /></a>
-                      <%=cm.cmsAlt("services_inline_advdezactivate_title")%>
+                      <a href="services.jsp?advancedEditContent=false"><img alt="<%=cm.cms("services_inline_advdezactivate_alt")%>" src="images/webcontent-inline.gif" width="81" height="43" border="0" title="<%=cm.cms("services_inline_advdezactivate_title")%>" /></a>
+                      <%=cm.cmsTitle("services_inline_advdezactivate_title")%>
                     </td>
                     <td>
-                      <a href="services.jsp?advancedEditContent=false" title="<%=cm.cms("services_inline_advdezactivate_title")%>"><%=cm.cmsPhrase("Dezctivate advanced inline editor")%></a>
-                      <%=cm.cmsTitle("services_inline_advdezactivate_title")%>
+                      <a href="services.jsp?advancedEditContent=false"><%=cm.cmsPhrase("Deactivate advanced inline editor")%></a>
                     </td>
                   </tr>
 <%
@@ -338,12 +326,10 @@
 %>
                   <tr <%=cssClass%>>
                     <td align="center">
-                      <a href="dataimport" title="<%=cm.cms("data_import")%>"><img alt="<%=cm.cms("data_import")%>" src="images/clean.gif" width="81" height="43" border="0" title="<%=cm.cms("data_import")%>" /></a>
-                      <%=cm.cmsAlt("data_import")%>
+                      <a href="dataimport" title="<%=cm.cmsPhrase("Data import")%>"><img alt="<%=cm.cmsPhrase("Data import")%>" src="images/clean.gif" width="81" height="43" border="0" title="<%=cm.cmsPhrase("Data import")%>" /></a>
                     </td>
                     <td>
-                      <a href="dataimport" title="<%=cm.cms("data_import")%>"><%=cm.cmsPhrase("Import/Export XML formatted Oracle dumps into EUNIS database")%></a>
-                      <%=cm.cmsTitle("data_import")%>
+                      <a href="dataimport"><%=cm.cmsPhrase("Import/Export XML formatted Oracle dumps into EUNIS database")%></a>
                     </td>
                   </tr>
 <%

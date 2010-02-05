@@ -166,28 +166,9 @@
         <td>
           <%=Utilities.treatURLSpecialCharacters(GridStatus)%>
         </td>
-<%
-        if (!Utilities.getAuthorAndUrlByIdDc(GridIdDc).get(1).toString().equalsIgnoreCase(""))
-        {
-%>
         <td>
-          <span class="boldUnderline">
-            <a href="<%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(GridIdDc).get(1))%>"><%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(GridIdDc).get(0))%></a>
-          </span>
+            <a class="link-plain" href="documents/<%=GridIdDc%>"><%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(GridIdDc).get(0))%>&nbsp;</a>
         </td>
-<%
-        }
-        else
-        {
-%>
-        <td>
-          <span class="boldUnderline">
-            <a href="documents/<%=GridIdDc%>"><%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(GridIdDc).get(0))%>&nbsp;</a>
-          </span>
-        </td>
-<%
-        }
-%>
       </tr>
 <%
       }

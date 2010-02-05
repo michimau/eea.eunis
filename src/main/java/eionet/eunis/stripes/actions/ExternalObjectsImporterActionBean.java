@@ -99,6 +99,7 @@ public class ExternalObjectsImporterActionBean extends AbstractStripesAction {
 				try{ con.close(); } catch (SQLException se) { se.printStackTrace(); }
 			}
 		} else {
+			// FIXME: This is not a warning message. It is an ERROR message
 			handleEunisException("You are not logged in or you do not have enough privileges to view this page!", Constants.SEVERITY_WARNING);
 		}
 		return new ForwardResolution(forwardPage);
@@ -114,9 +115,9 @@ public class ExternalObjectsImporterActionBean extends AbstractStripesAction {
 					String value = issame.get(key);
 					if(key != null && value != null){
 						String val = "";
-						if(value.equals("yes"))
+						if(value.equals("yes")) //FIXME: use value.equals("issame") - also in form
 							val = "issame";
-						else if(value.equals("no"))
+						else if(value.equals("no")) //FIXME: use value.equals("notsame") - also in form
 							val = "notsame";
 						
 						getContext().getExternalObjectsDao().updateExternalObject(key, val);
@@ -126,6 +127,7 @@ public class ExternalObjectsImporterActionBean extends AbstractStripesAction {
 			showMessage("Successfully updated!");
 			objects = getContext().getExternalObjectsDao().getMaybeSameObjects();			
 		} else {
+			// FIXME: This is not a warning message. It is an ERROR message
 			handleEunisException("You are not logged in or you do not have enough privileges to view this page!", Constants.SEVERITY_WARNING);
 		}
 		return new ForwardResolution(forwardPage);

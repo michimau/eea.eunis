@@ -159,28 +159,9 @@
         <td>
           <%=Utilities.treatURLSpecialCharacters(aRow.getStatus())%>&nbsp;
         </td>
-<%
-        if ( !authorURL.get( 1 ).toString().equalsIgnoreCase( "" ) )
-        {
-%>
         <td width="25%">
-            <span class="boldUnderline">
-              <a href="<%=Utilities.treatURLSpecialCharacters((String)authorURL.get( 1 ))%>"><%=Utilities.treatURLSpecialCharacters((String)authorURL.get( 0 ))%></a>
-            </span>
-        </td>
-<%
-        }
-        else
-        {
-%>
-        <td width="25%">
-            <span class="boldUnderline">
             	<a href="documents/<%=aRow.getReference()%>"><%=Utilities.treatURLSpecialCharacters((String)authorURL.get( 0 ))%></a>
-            </span>
         </td>
-<%
-        }
-%>
       </tr>
 <%
     }

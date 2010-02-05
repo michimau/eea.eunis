@@ -28,7 +28,7 @@ public class ExternalObjectsDaoImpl extends BaseDaoImpl implements IExternalObje
 		
 		List<ExternalObjectDTO> ret = new ArrayList<ExternalObjectDTO>();
 
-		String query = "SELECT CONCAT(S.SCIENTIFIC_NAME, ' ', S.AUTHOR) AS SQL_NAME, S.ID_SPECIES, S.ID_NATURE_OBJECT, E.RESOURCE, E.NAME FROM CHM62EDT_SPECIES S, externalobjects E WHERE E.ID_NATURE_OBJECT = S.ID_NATURE_OBJECT AND RELATION = 'maybesame'";
+		String query = "SELECT CONCAT(S.SCIENTIFIC_NAME, ' ', S.AUTHOR) AS SQL_NAME, S.ID_SPECIES, S.ID_NATURE_OBJECT, E.RESOURCE, E.NAME FROM CHM62EDT_SPECIES S, externalobjects E WHERE E.ID_NATURE_OBJECT = S.ID_NATURE_OBJECT AND RELATION = 'maybesame' ORDER BY E.RESOURCE LIMIT 300";
 		Connection con = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;

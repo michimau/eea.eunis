@@ -65,27 +65,10 @@
 <%
         String ref = Utilities.getReferencesByIdDc( reference );
         Vector authorURL = Utilities.getAuthorAndUrlByIdDc( reference );
-        if ( !( ( String )authorURL.get( 1 ) ).equalsIgnoreCase( "" ) )
-        {
-%>
-        <td>
-            <span class="boldUnderline">
-              <a href="<%=Utilities.treatURLSpecialCharacters((String)authorURL.get( 1 ))%>"><%=Utilities.treatURLSpecialCharacters((String)authorURL.get( 0 ))%></a>
-            </span>
-        </td>
-<%
-        }
-        else
-        {
 %>
         <td style="text-align:left">
-            <span class="boldUnderline">
-              <a href="documents/<%=reference%>"><%=Utilities.treatURLSpecialCharacters((String)authorURL.get(0))%></a>
-            </span>
+              <a class="link-plain" href="documents/<%=reference%>"><%=Utilities.treatURLSpecialCharacters((String)authorURL.get(0))%></a>
         </td>
-<%
-        }
-%>
       </tr>
 <%
     }

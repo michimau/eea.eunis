@@ -42,6 +42,9 @@
                   <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <a name="documentContent"></a>
+                <h1>
+                  Data Import
+                </h1>
                 <div class="documentActions">
                   <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
                   <ul>
@@ -58,9 +61,6 @@
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
-                <h1>
-                  Data Import
-                </h1>
                 <ul>
                 	<li>
                 		<a href="<%=domainName%>/dataimport/data-tester.jsp">Data tester</a><br/>

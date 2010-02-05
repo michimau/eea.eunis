@@ -87,7 +87,7 @@
         if(!IdDc.equalsIgnoreCase("0"))
         {
     %>
-        <td onmouseover="return showtooltip('<%=Utilities.getReferencesByIdDc(IdDc)%>')" onmouseout="hidetooltip()">
+        <td>
           <span class="boldUnderline">
             <a title="<%=cm.cms("habitat_syntaxa_author")%>" href="<%=Utilities.getAuthorAndUrlByIdDc(IdDc).get(1)%>"><%=Utilities.getAuthorAndUrlByIdDc(IdDc).get(0)%></a>
             <%=cm.cmsTitle("habitat_syntaxa_author")%>
@@ -111,9 +111,9 @@
           String AuthorURL = Utilities.getAuthorAndUrlByIdDc(IdDc).get(0).toString();
           AuthorURL = AuthorURL.replaceAll("&","&amp;");
 %>
-        <td onmouseover="return showtooltip('<%=Utilities.getReferencesByIdDc(IdDc)%>')" onmouseout="hidetooltip()">
+        <td>
           <span class="boldUnderline">
-            <%=AuthorURL%>
+            <a href="documents/<%=IdDc%>"><%=AuthorURL%></a>
           </span>
         </td>
 <%

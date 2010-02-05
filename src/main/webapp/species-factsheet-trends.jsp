@@ -111,7 +111,7 @@
         if (!Utilities.getAuthorAndUrlByIdDc(aRow.getReference()).get(1).toString().equalsIgnoreCase(""))
         {
 %>
-        <td width="25%" style="text-align:left" onmouseover="return showtooltip('<%=Utilities.getReferencesByIdDc(aRow.getReference())%>')" onmouseout="hidetooltip()">
+        <td width="25%" style="text-align:left">
           <span class="boldUnderline">
             <a href="<%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(aRow.getReference()).get(1))%>"><%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(aRow.getReference()).get(0))%></a>
           </span>
@@ -121,7 +121,7 @@
         else
         {
 %>
-        <td width="25%" style="text-align:left" onmouseover="return showtooltip('<%=Utilities.getReferencesByIdDc(aRow.getReference())%>')" onmouseout="hidetooltip()">
+        <td width="25%" style="text-align:left">
           <span class="boldUnderline">
             <a href="documents/<%=aRow.getReference()%>"><%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(aRow.getReference()).get(0))%></a>
           </span>

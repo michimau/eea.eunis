@@ -114,11 +114,9 @@
           {
 %>
         <td width="25%" style="text-align:left">
-          <span onmouseover="return showtooltip('<%=reference%>')" onmouseout="hidetooltip()">
             <span class="boldUnderline">
               <a href="<%=Utilities.treatURLSpecialCharacters((String)authorURL.get(1))%>"><%=Utilities.treatURLSpecialCharacters((String)authorURL.get(0))%></a>
             </span>
-          </span>
         </td>
 <%
           }
@@ -126,10 +124,8 @@
           {
 %>
         <td width="25%" style="text-align:left">
-          <span onmouseover="return showtooltip('<%=reference%>')" onmouseout="hidetooltip()">
           <span class="boldUnderline">
              <a href="documents/<%=aRow.getReference()%>"><%=Utilities.treatURLSpecialCharacters((String)authorURL.get(0))%></a>
-          </span>
           </span>
         </td>
 <%

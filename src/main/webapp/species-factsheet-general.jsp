@@ -138,10 +138,16 @@
       <div>
         <a href="<%=gbifLink%>"><%=cm.cmsPhrase("GBIF page")%></a>
       </div>
-      <% } else { %>
-      <div>
-        <a title="<%=cm.cmsPhrase("Search species on GBIF")%>" href="http://data.gbif.org/species/"><%=cm.cmsPhrase("GBIF search")%></a>
+      <% } else {
+    	  	String gbifLink2 = specie.getScientificName();
+	      	gbifLink2 = gbifLink2.replaceAll( "\\.", "" );
+	      	gbifLink2 = URLEncoder.encode(gbifLink2,"UTF-8");
+			//gbifLink2 = gbifLink2.replaceAll( " ", "\\." );
+	  %>
+	  <div>
+        <a href="http://data.gbif.org/species/<%=gbifLink2%>"><%=cm.cmsPhrase("GBIF search")%></a>
       </div>
+
 <%
 	  }
       String sn = scientificName;

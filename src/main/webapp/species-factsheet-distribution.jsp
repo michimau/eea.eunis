@@ -170,7 +170,7 @@
         if (!Utilities.getAuthorAndUrlByIdDc(GridIdDc).get(1).toString().equalsIgnoreCase(""))
         {
 %>
-        <td onmouseover="return showtooltip('<%=Utilities.getReferencesByIdDc(GridIdDc)%>')" onmouseout="hidetooltip()">
+        <td>
           <span class="boldUnderline">
             <a href="<%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(GridIdDc).get(1))%>"><%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(GridIdDc).get(0))%></a>
           </span>
@@ -180,7 +180,7 @@
         else
         {
 %>
-        <td onmouseover="return showtooltip('<%=Utilities.getReferencesByIdDc(GridIdDc)%>')" onmouseout="hidetooltip()">
+        <td>
           <span class="boldUnderline">
             <a href="documents/<%=GridIdDc%>"><%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(GridIdDc).get(0))%>&nbsp;</a>
           </span>

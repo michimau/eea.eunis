@@ -459,6 +459,7 @@ public class SpeciesFactsheet {
               threat.setReference( getBookAuthorDate( report.getIdDc() ) );
               threat.setSelection( country.getSelection() );
               threat.setThreatCode( consS.getCode() );
+              threat.setIdDc(report.getIdDc());
               int year = Utilities.checkedStringToInt( getBookDate( report.getIdDc() ), 0 );
               threat.setReferenceYear( year );
               results.addElement( threat );

@@ -95,8 +95,7 @@
 			    <%=cm.cmsTitle("grid_distribution")%>
 			</td>
 			<td align="right" valign="top">
-				<a href="<%=kmlUrl%>"><%=cm.cmsPhrase( "header_download_kml" )%></a>
-            <%=cm.cmsTitle( "header_download_kml_title" )%>
+				<a href="<%=kmlUrl%>"><%=cm.cms( "header_download_kml" )%></a>
 			</td>
     </tr>
     </table>

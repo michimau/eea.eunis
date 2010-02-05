@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.WebContentManagement;
+import ro.finsiel.eunis.utilities.EunisUtil;
 
 /**
  * Collection of eunis JSTL functions.
@@ -100,5 +101,25 @@ public class JstlFunctions {
 	 */
 	public static String br(WebContentManagement cms) {
 		return cms.br();
+	}
+	
+	/**
+	 * 
+	 * @param in
+	 * @return
+	 */
+	public static String replaceTags(String in) {
+		return EunisUtil.replaceTags(in);
+	}
+	
+	/**
+	 * 
+	 * @param in
+	 * @param dontCreateHTMLAnchors
+	 * @param dontCreateHTMLLineBreaks
+	 * @return
+	 */
+	public static String replaceTags(String in, boolean dontCreateHTMLAnchors, boolean dontCreateHTMLLineBreaks ) {
+		return EunisUtil.replaceTags(in, dontCreateHTMLAnchors, dontCreateHTMLLineBreaks);
 	}
 }

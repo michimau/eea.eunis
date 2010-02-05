@@ -6,7 +6,7 @@ public interface Constants {
 	   public static final int SEVERITY_INFO = 1;
 	   public static final int SEVERITY_CAUTION = 2;
 	   public static final int SEVERITY_WARNING = 3;
-	   public static final int SEVERITY_VALIDATION = 4;
+	   public static final int SEVERITY_ERROR = 4;
 	   
 	   //Link info constants
 	   public static final String GEOSPECIES_IDENTIFIER = "GEOSPECIES_IDENTIFIER";

@@ -73,7 +73,7 @@ public class ExternalObjectsImporterActionBean extends AbstractStripesAction {
 				if(errors != null && errors.size() > 0){
 					for(Iterator<String> it = errors.iterator(); it.hasNext(); ){
 						String error = EunisUtil.replaceTagsExport(EunisUtil.replaceBrackets(it.next()));
-						handleEunisException(error, Constants.SEVERITY_WARNING);
+						handleEunisException(error, Constants.SEVERITY_ERROR);
 					}
 				}
 				else
@@ -114,13 +114,7 @@ public class ExternalObjectsImporterActionBean extends AbstractStripesAction {
 					String key = it.next();
 					String value = issame.get(key);
 					if(key != null && value != null){
-						String val = "";
-						if(value.equals("yes")) //FIXME: use value.equals("issame") - also in form
-							val = "issame";
-						else if(value.equals("no")) //FIXME: use value.equals("notsame") - also in form
-							val = "notsame";
-						
-						getContext().getExternalObjectsDao().updateExternalObject(key, val);
+						getContext().getExternalObjectsDao().updateExternalObject(key, value);
 					}
 				}
 			}

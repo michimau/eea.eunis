@@ -70,4 +70,28 @@
 			${br(actionBean.webContent)}
 		</example>
 	</function>
+	
+	<function>
+		<description>
+			Encodes the string
+	 	</description>
+		<name>replaceTags</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>java.lang.String replaceTags(java.lang.String)</function-signature>
+		<example>
+			${replaceTags("text")}
+		</example>
+	</function>
+
+	<function>
+		<description>
+			Encodes the string.
+	 	</description>
+		<name>replaceTags2</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>java.lang.String replaceTags(java.lang.String, boolean, boolean)</function-signature>
+		<example>
+			${replaceTags2("text", true, true)}
+		</example>
+	</function>
 </taglib>

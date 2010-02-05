@@ -39,15 +39,15 @@
 								<td><a href="${pageContext.request.contextPath}/species-factsheet.jsp?idSpecies=${object.specieId}" target="_blank">${object.nameSql}</a></td>
 								<td>
 									<stripes:label for="maybesame${object.natureObjectId}">Maybe</stripes:label>
-									<stripes:radio checked="true" name="issame['${object.identifier}']" id="maybesame${object.natureObjectId}" value="maybe"/>
+									<stripes:radio checked="true" name="issame['${object.identifier}']" id="maybesame${object.natureObjectId}" value="maybesame"/>
 								</td>
 								<td>
 									<stripes:label for="issame${object.natureObjectId}">Same</stripes:label>
-									<stripes:radio name="issame['${object.identifier}']" id="issame${object.natureObjectId}" value="yes"/>
+									<stripes:radio name="issame['${object.identifier}']" id="issame${object.natureObjectId}" value="issame"/>
 								</td>
 								<td>
 									<stripes:label for="notsame${object.natureObjectId}">No</stripes:label>
-									<stripes:radio name="issame['${object.identifier}']" id="notsame${object.natureObjectId}" value="no"/>
+									<stripes:radio name="issame['${object.identifier}']" id="notsame${object.natureObjectId}" value="notsame"/>
 								</td>
 							</tr>
 						</c:forEach>

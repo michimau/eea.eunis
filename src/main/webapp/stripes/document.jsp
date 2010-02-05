@@ -26,27 +26,27 @@
                   		<col style="width:80%"/>
 						<tr>
 							<td>Title</td>
-							<td><strong>${actionBean.dcTitle.title}</strong></td>
+							<td><strong>${eunis:replaceTags(actionBean.dcTitle.title)}</strong></td>
 						</tr>
 						<tr class="zebraeven">
 							<td>Alternative title</td>
-							<td><strong>${actionBean.dcTitle.alternative}</strong></td>
+							<td><strong>${eunis:replaceTags(actionBean.dcTitle.alternative)}</strong></td>
 						</tr>
 						<tr>
 							<td>Source</td>
-							<td><strong>${actionBean.dcSource.source}</strong></td>
+							<td><strong>${eunis:replaceTags(actionBean.dcSource.source)}</strong></td>
 						</tr>
 						<tr class="zebraeven">
 							<td>Editor</td>
-							<td><strong>${actionBean.dcSource.editor}</strong></td>
+							<td><strong>${eunis:replaceTags(actionBean.dcSource.editor)}</strong></td>
 						</tr>
 						<tr>
 							<td>Journal Title</td>
-							<td><strong>${actionBean.dcSource.journalTitle}</strong></td>
+							<td><strong>${eunis:replaceTags(actionBean.dcSource.journalTitle)}</strong></td>
 						</tr>
 						<tr class="zebraeven">
 							<td>Book Title</td>
-							<td><strong>${actionBean.dcSource.bookTitle}</strong></td>
+							<td><strong>${eunis:replaceTags(actionBean.dcSource.bookTitle)}</strong></td>
 						</tr>
 						<tr>
 							<td>Journal Issue</td>
@@ -62,7 +62,7 @@
 						</tr>
 						<tr class="zebraeven">
 							<td>URL</td>
-							<td><a href="${actionBean.dcSource.url}">${actionBean.dcSource.url}</a></td>
+							<td><a href="${eunis:replaceTags2(actionBean.dcSource.url, true, true)}">${eunis:replaceTags2(actionBean.dcSource.url, true, true)}</a></td>
 						</tr>
 						<c:if test="${!empty actionBean.dcDate}">
 							<tr>
@@ -73,7 +73,7 @@
 						<c:if test="${!empty actionBean.dcPublisher}">
 							<tr class="zebraeven">
 								<td>Publisher</td>
-								<td><strong>${actionBean.dcPublisher.publisher}</strong></td>
+								<td><strong>${eunis:replaceTags(actionBean.dcPublisher.publisher)}</strong></td>
 							</tr>
 						</c:if>
 					</table>

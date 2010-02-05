@@ -55,21 +55,20 @@
 										</c:when>
 										<c:when test="${actionBean.context.severity == 2}">
 											<div class="caution-msg">
-												<strong>Warning ...</strong>		
+												<strong>Caution ...</strong>		
 												<p><stripes:messages/></p>
 											</div>
 										</c:when>
 										<c:when test="${actionBean.context.severity == 3}">
 											<div class="warning-msg">
-												<strong>Errors ...</strong>		
+												<strong>Warnings ...</strong>		
 												<p><stripes:messages/></p>
 											</div>
 										</c:when>
 										<c:when test="${actionBean.context.severity == 4}">
-											<div class="error-msg">Please correct the flagged fields before continuing
-												<ul>
-													<stripes:messages/>
-												</ul>
+											<div class="error-msg">
+												<strong>Errors ...</strong>		
+												<p><stripes:messages/></p>
 											</div>
 										</c:when>
 										<c:otherwise>

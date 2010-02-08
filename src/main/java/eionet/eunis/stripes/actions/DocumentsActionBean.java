@@ -82,7 +82,10 @@ public class DocumentsActionBean extends AbstractStripesAction {
 			forwardPage = "/stripes/document.jsp";
 			
 			String acceptHeader = getContext().getRequest().getHeader("accept");
-			String[] accept = acceptHeader.split(",");
+			String[] accept = null;
+			if(acceptHeader != null && acceptHeader.length() > 0)
+				accept = acceptHeader.split(",");
+			
 			if(accept != null && accept.length > 0 && accept[0].equals("application/rdf+xml")){
 				return new StreamingResolution("application/rdf+xml",generateRdf(iddoc));
 			} else {

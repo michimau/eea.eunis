@@ -1,4 +1,4 @@
-package eionet.eunis.stripes.actions;
+package ro.finsiel.eunis.dataimport;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -204,7 +204,7 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler{
 	 * 
 	 * @throws SQLException
 	 */
-	protected void endOfFile() throws SQLException{
+	public void endOfFile() throws SQLException{
 		
 		if(dto != null){
 			insert(dto);

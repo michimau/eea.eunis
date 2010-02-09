@@ -94,6 +94,10 @@
                 		<a href="<%=domainName%>/dataimport/importpagelinks">Import page links</a><br/>
                 		The purpose of this page is to import page links from geospecies database.
                 	</li>
+                	<li>
+                		<a href="<%=domainName%>/dataimport/importcdda">Update CDDA site names</a><br/>
+                		The purpose of this page is to update CDDA site names
+                	</li>
                 </ul>
 <!-- END MAIN CONTENT -->
               </div>

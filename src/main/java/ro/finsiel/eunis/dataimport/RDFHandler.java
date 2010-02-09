@@ -1,4 +1,4 @@
-package eionet.eunis.stripes.actions;
+package ro.finsiel.eunis.dataimport;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
 
+import ro.finsiel.eunis.dataimport.RDFHandler;
 import ro.finsiel.eunis.utilities.EunisUtil;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 

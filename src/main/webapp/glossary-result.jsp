@@ -128,7 +128,7 @@
                       &nbsp;
                       [<a title="<%=cm.cms("search_dictionary")%>" href="http://dictionary.reference.com/search?q='<%=result.getTerm()%>'">dictionary.com</a>]
                       <%=cm.cmsTitle("search_dictionary")%>&nbsp;
-                      [<a title="<%=cm.cms("search_gemet")%>" href="http://www.eionet.europa.eu/GEMET">GEMET</a>]
+                      [<a title="<%=cm.cms("search_gemet")%>" href="http://www.eionet.europa.eu/gemet/search?query=<%=result.getTerm()%>">GEMET</a>]
                       <%=cm.cmsTitle("search_gemet")%>&nbsp;
                       [<a title="<%=cm.cms("search_google")%>" href="http://www.google.com/search?q=define:<%=result.getTerm()%>">google.com</a>]
                       <%=cm.cmsTitle("search_google")%>&nbsp;

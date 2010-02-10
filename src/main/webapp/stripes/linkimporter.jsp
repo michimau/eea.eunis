@@ -29,9 +29,8 @@
 			</stripes:form>
 		</c:when>
 		<c:otherwise>
-			<div class="warning-msg">
-				<strong>Errors ...</strong>		
-				<p>You are not logged in or you do not have enough privileges to view this page!</p>
+			<div class="error-msg">
+				You are not logged in or you do not have enough privileges to view this page!
 			</div>
 		</c:otherwise>
 	</c:choose>

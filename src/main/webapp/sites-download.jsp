@@ -57,7 +57,7 @@
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
-                <%=cm.cms("sites_download_01")%>
+                <%=cm.cmsText("sites_download_01")%>
 
                 <%=cm.cmsMsg("sites_download_title")%>
 <!-- END MAIN CONTENT -->

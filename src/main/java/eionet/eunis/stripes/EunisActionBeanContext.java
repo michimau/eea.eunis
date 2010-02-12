@@ -12,7 +12,9 @@ import eionet.eunis.dao.DocumentsDaoImpl;
 import eionet.eunis.dao.ExternalObjectsDaoImpl;
 import eionet.eunis.dao.IDocumentsDao;
 import eionet.eunis.dao.IExternalObjectsDao;
+import eionet.eunis.dao.ISitesDao;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
+import eionet.eunis.dao.SitesDaoImpl;
 import eionet.eunis.dao.SpeciesFactsheetDaoImpl;
 
 /**
@@ -161,6 +163,13 @@ public class EunisActionBeanContext extends ActionBeanContext {
 	 */
 	public IExternalObjectsDao getExternalObjectsDao(){
 		return new ExternalObjectsDaoImpl(getSqlUtilities());
+	}
+	
+	/**
+	 * @return sites helper dao
+	 */
+	public ISitesDao getSitesDao(){
+		return new SitesDaoImpl(getSqlUtilities());
 	}
 	
 	public int getSeverity() {

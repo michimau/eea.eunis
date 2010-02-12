@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -28,10 +30,12 @@ public class CddaImportParser extends DefaultHandler {
         
         private StringBuffer buf; 
         private int counter = 0; 
+        private Map<String, String> sites;
         
         public CddaImportParser(Connection con) {
         	this.con = con;
-        	buf = new StringBuffer(); 
+        	buf = new StringBuffer();
+        	sites = new HashMap<String, String>();
         } 
         
         private void parseDocument() throws SAXException { 
@@ -81,6 +85,7 @@ public class CddaImportParser extends DefaultHandler {
         	        		preparedStatement.clearParameters(); 
         	        		System.gc(); 
         	        	}
+        	        	sites.put(idSite, siteName);
         	        	idSite = null;
         	        	siteName = null;
         			}
@@ -91,15 +96,16 @@ public class CddaImportParser extends DefaultHandler {
         	} 
         } 
         
-        public void execute(InputStream inputStream) throws Exception {
+        //Returns all sites from XML file as java Map
+        public Map<String,String> execute(InputStream inputStream) throws Exception {
                 
             this.inputStream = inputStream; 
             
             try { 
-            	String query = "UPDATE chm62edt_sites SET NAME=? WHERE ID_SITE = ?";
+            	String query = "UPDATE chm62edt_sites SET NAME=? WHERE ID_SITE = ? AND SOURCE_DB = 'CDDA_NATIONAL'";
             	this.preparedStatement = con.prepareStatement(query.toString()); 
                 //con.setAutoCommit(false); 
-                parseDocument(); 
+                parseDocument();
                 if (!(counter % 10000 == 0)){ 
                 	preparedStatement.executeBatch(); 
                 	preparedStatement.clearParameters(); 
@@ -118,6 +124,7 @@ public class CddaImportParser extends DefaultHandler {
                 if ( preparedStatement != null ) 
                 	preparedStatement.close(); 
             } 
+            return sites;
         
         } 
 } 

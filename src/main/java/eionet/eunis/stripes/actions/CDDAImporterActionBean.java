@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Map;
 
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.FileBean;
@@ -41,6 +42,7 @@ public class CDDAImporterActionBean extends AbstractStripesAction {
 			InputStream inputStream = null;
 			
 			try{
+				
 				SQLUtilities sqlUtil = getContext().getSqlUtilities();
 				con = sqlUtil.getConnection();
 				
@@ -49,7 +51,9 @@ public class CDDAImporterActionBean extends AbstractStripesAction {
 				}
 				
 				CddaImportParser parser = new CddaImportParser(con);
-				parser.execute(inputStream);
+				Map<String,String> sites = parser.execute(inputStream);
+				getContext().getSitesDao().deleteSites(sites);
+				
 				showMessage("Successfully updated!");
 				
 			} catch(Exception e) {

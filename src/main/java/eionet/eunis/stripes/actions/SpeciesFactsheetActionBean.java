@@ -1,19 +1,29 @@
 package eionet.eunis.stripes.actions;
 
+import java.io.ByteArrayOutputStream;
 import java.util.LinkedList;
 import java.util.List;
 
 import net.sourceforge.stripes.action.DefaultHandler;
+import net.sourceforge.stripes.action.ErrorResolution;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
+import net.sourceforge.stripes.action.StreamingResolution;
 import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
+import org.simpleframework.xml.core.Persister;
+import org.simpleframework.xml.stream.Format;
 
 import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
+import ro.finsiel.eunis.jrfTables.species.VernacularNamesDomain;
+import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
+import ro.finsiel.eunis.search.species.VernacularNameWrapper;
 import ro.finsiel.eunis.utilities.SQLUtilities;
+import eionet.eunis.dto.SpeciesFactsheetDto;
+import eionet.eunis.dto.VernacularNameDto;
 import eionet.eunis.util.Pair;
 
 /**
@@ -23,7 +33,7 @@ import eionet.eunis.util.Pair;
  * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 @UrlBinding("/species/{idSpecies}/{tab}")
-public class SpeciesFactsheetActionBean extends AbstractStripesAction {
+public class SpeciesFactsheetActionBean extends AbstractStripesAction implements RdfAware {
 	
 	private static final String[][] allTypes = new String[][]{
 		{"GENERAL_INFORMATION","general"},
@@ -37,7 +47,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 		{"LEGAL_INSTRUMENTS","legal"},
 		{"HABITATS","habitats"},
 		{"SITES","sites"},
-		{"GBIF","gbif"}}; 
+		{"GBIF","gbif"}};
+
+	private static final String HEADER = "";
+
+	private static final String FOOTER = ""; 
 	
 	private String idSpecies;
 	private int idSpeciesLink;
@@ -111,6 +125,58 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 		return new ForwardResolution("/stripes/species-factsheet.layout.jsp");
 	}
 
+	private int getSpeciesId() {
+		int tempIdSpecies = 0;
+		//get idSpecies based on the request param.
+		if (StringUtils.isNumeric(idSpecies)) {
+			tempIdSpecies = new Integer(idSpecies);
+		} else if (!StringUtils.isBlank(idSpecies)) {
+			tempIdSpecies = getContext().getSpeciesFactsheetDao().getIdSpeciesForScientificName(this.idSpecies);
+		}
+		return getContext().getSpeciesFactsheetDao().getCanonicalIdSpecies(tempIdSpecies);
+	}
+	
+	public Resolution generateRdf() {
+		int speciesId = getSpeciesId();
+		if (speciesId == 0) {
+			return new ErrorResolution(404);
+		}
+		factsheet = new SpeciesFactsheet(speciesId,speciesId);
+		if (!factsheet.exists()) {
+			return new ErrorResolution(404);
+		}
+		
+		Persister persister = new Persister(new Format(4));
+		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+		SpeciesFactsheetDto dto = new SpeciesFactsheetDto();
+		dto.setScientificName(factsheet.getSpeciesObject().getScientificName());
+		dto.setGenus(factsheet.getSpeciesObject().getGenus());
+		dto.setAuthor(factsheet.getSpeciesObject().getAuthor());
+		dto.setDwcScientificName(dto.getScientificName() + ' ' + dto.getAuthor());
+		List<VernacularNameWrapper> vernacularNames = SpeciesSearchUtility.findVernacularNames(
+						factsheet.getSpeciesObject().getIdNatureObject());
+		if (vernacularNames != null) {
+			List<VernacularNameDto> vernacularDtos = new LinkedList<VernacularNameDto>();
+			for (VernacularNameWrapper wrapper : vernacularNames) {
+				vernacularDtos.add(new VernacularNameDto(wrapper));
+			}
+			dto.setVernacularNames(vernacularDtos);
+		}
+		
+		try {
+			buffer.write(SpeciesFactsheetDto.HEADER.getBytes("UTF-8"));
+			persister.write(dto, buffer, "UTF-8");
+			buffer.write(SpeciesFactsheetDto.FOOTER.getBytes("UTF-8"));
+			buffer.flush();
+			return new StreamingResolution(
+					"application/rdf+xml",
+					buffer.toString("UTF-8"));
+		} catch (Exception ignored) {
+			logger.warn("exception while generating rdf for species, " + ignored);
+			throw new RuntimeException(ignored);
+		}
+//		return new ErrorResolution(404);
+	}
 
 	/**
 	 * @return the factsheet

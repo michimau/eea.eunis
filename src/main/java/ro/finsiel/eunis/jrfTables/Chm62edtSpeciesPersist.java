@@ -64,6 +64,11 @@ public class Chm62edtSpeciesPersist extends PersistentObject {
    * This is a database field.
    **/
   private String i_imagePath = null;
+  
+  /**
+   * This is a database field.
+   **/
+  private String author;
 
   public Chm62edtSpeciesPersist() {
     super();
@@ -276,5 +281,14 @@ public class Chm62edtSpeciesPersist extends PersistentObject {
   public void setValidName(Short validName) {
     i_validName = validName;
     this.markModifiedPersistentState();
+  }
+
+  public String getAuthor() {
+	return author;
+  }
+  
+  public void setAuthor(String author) {
+	  this.author = author;
+	  this.markModifiedPersistentState();
   }
 }

@@ -44,6 +44,7 @@ public class Chm62edtSpeciesDomain extends AbstractDomain {
     this.addColumnSpec(new IntegerColumnSpec("ID_GROUP_SPECIES", "getIdGroupspecies", "setIdGroupspecies", DEFAULT_TO_ZERO, REQUIRED));
     this.addColumnSpec(new StringColumnSpec("ID_TAXONOMY", "getIdTaxcode", "setIdTaxcode", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("GENUS", "getGenus", "setGenus", DEFAULT_TO_NULL));
+    this.addColumnSpec(new StringColumnSpec("AUTHOR", "getAuthor", "setAuthor", DEFAULT_TO_NULL));
   }
 
   /**

@@ -36,19 +36,21 @@ public class SpeciesSearchUtility {
    * @param idNatureObject ID Nature object of that specie
    * @return A list of VernacularNameWrapper objects, containing vernacular names for that specie.
    */
-  public static final Vector findVernacularNames(Integer idNatureObject) {
-    Vector ret = new Vector(0);
-    if (null == idNatureObject) return new Vector(0);
+  public static final Vector<VernacularNameWrapper> findVernacularNames(Integer idNatureObject) {
+    Vector<VernacularNameWrapper> ret = new Vector<VernacularNameWrapper>(0);
+    if (null == idNatureObject) {
+    	return ret;
+    }
     try {
       //search also on synonyms
-      Vector synonyms = new Vector();
+      Vector<Integer> synonyms = new Vector<Integer>();
       Integer IdNatureObjectSpecie = idNatureObject;
 
       Integer IdSpecie = null;
-      List lstSpeciesIDs = new Chm62edtSpeciesDomain().findWhere("ID_NATURE_OBJECT="+idNatureObject);
+      List<Chm62edtSpeciesPersist> lstSpeciesIDs = new Chm62edtSpeciesDomain().findWhere("ID_NATURE_OBJECT="+idNatureObject);
       if(lstSpeciesIDs.size()>0)
       {
-        Iterator it = lstSpeciesIDs.iterator();
+        Iterator<Chm62edtSpeciesPersist> it = lstSpeciesIDs.iterator();
         while (it.hasNext()) {
           Chm62edtSpeciesPersist sp = (Chm62edtSpeciesPersist) it.next();
           IdSpecie = sp.getIdSpecies();
@@ -56,12 +58,12 @@ public class SpeciesSearchUtility {
       }
 
       synonyms.add(IdNatureObjectSpecie);
-      List lstSynonyms = new Chm62edtSpeciesDomain().findWhere("TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK="+IdSpecie);
+      List<Chm62edtSpeciesPersist> lstSynonyms = new Chm62edtSpeciesDomain().findWhere("TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK="+IdSpecie);
       if(lstSynonyms.size()>0)
       {
-        Iterator it = lstSynonyms.iterator();
+        Iterator<Chm62edtSpeciesPersist> it = lstSynonyms.iterator();
         while (it.hasNext()) {
-          Chm62edtSpeciesPersist sp = (Chm62edtSpeciesPersist) it.next();
+          Chm62edtSpeciesPersist sp = it.next();
           synonyms.add(sp.getIdNatureObject());
         }
       }
@@ -76,13 +78,13 @@ public class SpeciesSearchUtility {
       }
 
       //System.out.println("IDs = " + IDs);
-      List verNameList = new VernacularNamesDomain().findWhere("LOOKUP_TYPE='language' AND ID_NATURE_OBJECT IN (" + IDs + ") AND F.NAME='vernacular_name' GROUP BY F.VALUE, NAME_EN");
+      List<VernacularNamesPersist> verNameList = new VernacularNamesDomain().findWhere("LOOKUP_TYPE='language' AND ID_NATURE_OBJECT IN (" + IDs + ") AND F.NAME='vernacular_name' GROUP BY F.VALUE, NAME_EN");
 
       //old list
       //List verNameList = new VernacularNamesDomain().findWhere("LOOKUP_TYPE='language' AND ID_NATURE_OBJECT='" + idNatureObject + "' AND F.NAME='vernacular_name' GROUP BY F.VALUE, NAME_EN");
-      Iterator it = verNameList.iterator();
+      Iterator<VernacularNamesPersist> it = verNameList.iterator();
       while (it.hasNext()) {
-        VernacularNamesPersist vernName = (VernacularNamesPersist) it.next();
+        VernacularNamesPersist vernName = it.next();
         ret.addElement(new VernacularNameWrapper(vernName.getLanguageName(), vernName.getValue(), vernName.getIdDc()));
         vernName.getIdDc();
       }

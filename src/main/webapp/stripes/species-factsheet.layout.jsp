@@ -14,6 +14,9 @@
 	<stripes:layout-component name="head">
 		<script language="JavaScript" src="script/species.js" type="text/javascript"></script>
     	<script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
+		<link rel="alternate" 
+			type="application/rdf+xml" title="RDF" 
+			href="${pageContext.request.contextPath}/species/${actionBean.idSpecies}" />
 	</stripes:layout-component>
 	
 	<stripes:layout-component name="contents">

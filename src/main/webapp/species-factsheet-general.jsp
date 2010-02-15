@@ -257,7 +257,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 			if(itisTSN != null && itisTSN.length() > 0){
     		%>
 		<div>
-        		<a href="http://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=<%=itisTSN%>"><%=cm.cmsPhrase("ITIS page")%></a>
+        		<a href="http://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=<%=itisTSN%>"><%=cm.cmsPhrase("ITIS TSN:")%><%=itisTSN%></a>
 		</div>
         	<%
     		}

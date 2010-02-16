@@ -49,6 +49,8 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 	private boolean hasWikipedia = false;
 	private boolean hasWikispecies = false;
 	private boolean hasBugGuide = false;
+	private boolean hasNCBI = false;
+	private boolean hasITIS = false;
 	
 	private String gsidentifier = null;
 	private String natob_id = null;
@@ -104,22 +106,28 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 			if(natob_id != null && !natob_id.equals("")){
 				
 				if(predicate.toString().equals(geo_ns+"hasGBIFPage") && hasGBIF)
-					insertReportAttribute(Constants.GBIF_PAGE, object, natob_id);
+					insertReportAttribute(Constants.GBIF_PAGE, object, natob_id, litObject);
 				
 				if(predicate.toString().equals(geo_ns+"hasBioLibPage") && hasBiolab)
-					insertReportAttribute(Constants.BIOLIB_PAGE, object, natob_id);
+					insertReportAttribute(Constants.BIOLIB_PAGE, object, natob_id, litObject);
 				
 				if(predicate.toString().equals(geo_ns+"hasBBCPage") && hasBbc)
-					insertReportAttribute(Constants.BBC_PAGE, object, natob_id);
+					insertReportAttribute(Constants.BBC_PAGE, object, natob_id, litObject);
 				
 				if(predicate.toString().equals(geo_ns+"hasWikipediaArticle") && hasWikipedia)
-					insertReportAttribute(Constants.WIKIPEDIA_ARTICLE, object, natob_id);
+					insertReportAttribute(Constants.WIKIPEDIA_ARTICLE, object, natob_id, litObject);
 				
 				if(predicate.toString().equals(geo_ns+"hasWikispeciesArticle") && hasWikispecies)
-					insertReportAttribute(Constants.WIKISPECIES_ARTICLE, object, natob_id);
+					insertReportAttribute(Constants.WIKISPECIES_ARTICLE, object, natob_id, litObject);
 				
 				if(predicate.toString().equals(geo_ns+"hasBugGuidePage") && hasBugGuide)
-					insertReportAttribute(Constants.BUG_GUIDE, object, natob_id);
+					insertReportAttribute(Constants.BUG_GUIDE, object, natob_id, litObject);
+				
+				if(predicate.toString().equals(geo_ns+"hasNCBI") && hasNCBI)
+					insertReportAttribute(Constants.NCBI, object, natob_id, litObject);
+				
+				if(predicate.toString().equals(geo_ns+"hasITIS") && hasITIS)
+					insertReportAttribute(Constants.ITIS, object, natob_id, litObject);
 			}			
 		}
 		catch (Exception e){
@@ -128,9 +136,9 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 		}
 	}
 	
-	private void insertReportAttribute(String name, String value, String natob_id) throws SQLException {
+	private void insertReportAttribute(String name, String value, String natob_id, boolean litObject) throws SQLException {
 		
-		String query = "INSERT INTO CHM62EDT_REPORT_ATTRIBUTES (ID_REPORT_ATTRIBUTES, NAME, TYPE, VALUE) VALUES (?,?,?,?)";
+		String query = "INSERT INTO CHM62EDT_NATURE_OBJECT_ATTRIBUTES (ID_NATURE_OBJECT, NAME, OBJECT, LITOBJECT) VALUES (?,?,?,?)";
 			
 		PreparedStatement ps = null;
 	    try {
@@ -138,8 +146,8 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 	    	
 	    	ps.setString(1, natob_id);
 	    	ps.setString(2, name);
-	    	ps.setString(3, "TEXT");
-	    	ps.setString(4, EunisUtil.replaceTagsImport(value));
+	    	ps.setString(3, EunisUtil.replaceTagsImport(value));
+	    	ps.setBoolean(4, litObject);
 	    	ps.executeUpdate();
 	    	
 	    } catch ( Exception e ) {
@@ -155,7 +163,7 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 		
 		String ret = null;
 		
-		String query = "SELECT ID_NATURE_OBJECT FROM externalobjects WHERE RESOURCE='"+identifier+"' AND RELATION='issame'";
+		String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE OBJECT='"+identifier+"' AND NAME='sameSpecies'";
 		
 		PreparedStatement ps = null;
 	    ResultSet rs = null;
@@ -180,7 +188,7 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 	
 	public void deleteOldRecords() throws SQLException {
 		
-		String query = "DELETE FROM CHM62EDT_REPORT_ATTRIBUTES WHERE NAME IN ";
+		String query = "DELETE FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE NAME IN ";
 		StringBuffer whereClause = new StringBuffer("(");
 		if(hasGBIF)
 			whereClause.append("'").append(Constants.GBIF_PAGE).append("'").append(",");
@@ -193,7 +201,11 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 		if(hasWikispecies)
 			whereClause.append("'").append(Constants.WIKISPECIES_ARTICLE).append("'").append(",");
 		if(hasBugGuide)
-			whereClause.append("'").append(Constants.BUG_GUIDE).append("'");
+			whereClause.append("'").append(Constants.BUG_GUIDE).append("'").append(",");
+		if(hasNCBI)
+			whereClause.append("'").append(Constants.NCBI).append("'").append(",");
+		if(hasITIS)
+			whereClause.append("'").append(Constants.ITIS).append("'");
 		
 		if(whereClause.toString().endsWith(","))
 			whereClause.deleteCharAt(whereClause.length()-1);
@@ -304,5 +316,21 @@ public class RDFHandler implements StatementHandler, ErrorHandler{
 
 	public void setHasBugGuide(boolean hasBugGuide) {
 		this.hasBugGuide = hasBugGuide;
+	}
+
+	public boolean isHasNCBI() {
+		return hasNCBI;
+	}
+
+	public void setHasNCBI(boolean hasNCBI) {
+		this.hasNCBI = hasNCBI;
+	}
+
+	public boolean isHasITIS() {
+		return hasITIS;
+	}
+
+	public void setHasITIS(boolean hasITIS) {
+		this.hasITIS = hasITIS;
 	}
 }

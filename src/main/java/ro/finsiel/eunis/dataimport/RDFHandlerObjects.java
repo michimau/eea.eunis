@@ -101,6 +101,8 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler{
 					dto.setHasCanonicalName(object);
 				if(predicate.toString().equals(geo_ns+"hasScientificNameAuthorship"))
 					dto.setHasScientificNameAutorship(object);
+				if(predicate.toString().equals(geo_ns+"hasScientificName"))
+					dto.setHasScientificName(object);
 			}
 			
 		}
@@ -113,13 +115,14 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler{
 	private void insert(LinkInfoDTO dto) throws SQLException {
 		
 		String identifier = dto.getIdentifier();
-		String sciName = dto.getHasCanonicalName();
-		if(sciName == null)
-			sciName = "";
+		String canName = dto.getHasCanonicalName();
+		if(canName == null) canName = "";
+		String sciName = dto.getHasScientificName();
+		if(sciName == null) sciName = "";
 		String author = dto.getHasScientificNameAutorship();
 		
-		if(sciName != null && author != null){
-			String query = "SELECT S1.ID_NATURE_OBJECT, S2.AUTHOR FROM chm62edt_species AS S1, chm62edt_species AS S2 WHERE S1.ID_SPECIES = S2.ID_SPECIES_LINK AND S2.SCIENTIFIC_NAME = '"+EunisUtil.replaceTagsImport(sciName)+"'";
+		if(canName != null && author != null){
+			String query = "SELECT ID_NATURE_OBJECT, AUTHOR FROM chm62edt_species WHERE SCIENTIFIC_NAME = '"+EunisUtil.replaceTagsImport(canName)+"'";
 			
 			PreparedStatement ps = null;
 		    ResultSet rs = null;
@@ -131,9 +134,9 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler{
 		    		String natob_id = rs.getString("ID_NATURE_OBJECT");
 		    		String sql_author = rs.getString("AUTHOR");
 		    		if(author != null && sql_author != null && author.equals(sql_author)){
-		    			insertExternalObject(natob_id, "issame", identifier, sciName+" "+author);
+		    			insertExternalObject(natob_id, "sameSpecies", identifier, sciName);
 		    		} else {
-		    			insertExternalObject(natob_id, "maybesame", identifier, sciName+" "+author);
+		    			insertExternalObject(natob_id, "maybeSameSpecies", identifier, sciName);
 		    		}
 		    	}
 		    } catch ( Exception e ) {
@@ -151,7 +154,10 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler{
 	
 	private void insertExternalObject(String natob_id, String type, String identifier, String name) throws SQLException {
 		if(!externalObjectExists(natob_id)){
-			String query = "INSERT INTO externalobjects (ID_NATURE_OBJECT, RELATION, RESOURCE, NAME) VALUES (?,?,?,?)";
+			
+			insertName(natob_id, name);
+			
+			String query = "INSERT INTO CHM62EDT_NATURE_OBJECT_ATTRIBUTES (ID_NATURE_OBJECT, NAME, OBJECT, LITOBJECT) VALUES (?,?,?,?)";
 			
 			PreparedStatement ps = null;
 		    try {
@@ -160,7 +166,7 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler{
 		    	ps.setString(1, natob_id);
 		    	ps.setString(2, type);
 		    	ps.setString(3, identifier);
-		    	ps.setString(4, EunisUtil.replaceTagsImport(name));
+		    	ps.setBoolean(4, false);
 		    	ps.executeUpdate();
 		    	
 		    } catch ( Exception e ) {
@@ -173,11 +179,33 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler{
 		}
 	}
 	
+	private void insertName(String natob_id, String name) throws SQLException {
+		String query = "INSERT INTO CHM62EDT_NATURE_OBJECT_ATTRIBUTES (ID_NATURE_OBJECT, NAME, OBJECT, LITOBJECT) VALUES (?,?,?,?)";
+		
+		PreparedStatement ps = null;
+	    try {
+	    	ps = con.prepareStatement(query);
+	    	
+	    	ps.setString(1, natob_id);
+	    	ps.setString(2, "_geospeciesScientificName");
+	    	ps.setString(3, EunisUtil.replaceTagsImport(name));
+	    	ps.setBoolean(4, true);
+	    	ps.executeUpdate();
+	    	
+	    } catch ( Exception e ) {
+	    	e.printStackTrace();
+	    	errors.add(e.getMessage());
+	    } finally {
+	    	if(ps != null)
+	    		ps.close();
+	    }
+	}
+	
 	public boolean externalObjectExists(String natob_id) throws SQLException {
 		
 		boolean ret = false;
 		
-		String query = "SELECT RESOURCE FROM externalobjects WHERE ID_NATURE_OBJECT="+natob_id+" LIMIT 1";
+		String query = "SELECT OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE ID_NATURE_OBJECT="+natob_id+" LIMIT 1";
 		
 		PreparedStatement ps = null;
 	    ResultSet rs = null;

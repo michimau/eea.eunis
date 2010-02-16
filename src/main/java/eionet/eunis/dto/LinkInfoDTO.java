@@ -22,6 +22,7 @@ public class LinkInfoDTO implements Serializable {
 	private String hasCanonicalName;
 	private String hasGenusName;
 	private String hasScientificNameAutorship;
+	private String hasScientificName;
 	private String hasGBIFPage;
 	private String hasBioLibPage;
 	private String hasBBCPage;
@@ -88,6 +89,12 @@ public class LinkInfoDTO implements Serializable {
 	}
 	public void setHasBugGuide(String hasBugGuide) {
 		this.hasBugGuide = hasBugGuide;
+	}
+	public String getHasScientificName() {
+		return hasScientificName;
+	}
+	public void setHasScientificName(String hasScientificName) {
+		this.hasScientificName = hasScientificName;
 	}
 	
 

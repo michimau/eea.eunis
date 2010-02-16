@@ -214,12 +214,12 @@ public class SpeciesFactsheet {
    */
   public String getLink(Integer nature_object_id, String link_name){
 	  String link = null;
-	  List links = new Chm62edtReportAttributesDomain().findWhere("ID_REPORT_ATTRIBUTES="+nature_object_id+" AND NAME='"+link_name+"'");
+	  List links = new Chm62edtNatureObjectAttributesDomain().findWhere("ID_NATURE_OBJECT="+nature_object_id+" AND NAME='"+link_name+"'");
 	  if(links != null){
 		  for(Object link1 : links){
-			  Chm62edtReportAttributesPersist linkob = (Chm62edtReportAttributesPersist) link1;
+			  Chm62edtNatureObjectAttributesPersist linkob = (Chm62edtNatureObjectAttributesPersist) link1;
 			  if(linkob != null)
-				  link = linkob.getValue();
+				  link = linkob.getObject();
 		  }
 	  }
 	  return link;

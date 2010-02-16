@@ -37,6 +37,8 @@ public class LinksImporterActionBean extends AbstractStripesAction {
 	private boolean hasWikipedia = false;
 	private boolean hasWikispecies = false;
 	private boolean hasBugGuide = false;
+	private boolean hasNCBI = false;
+	private boolean hasITIS = false;
 	
 	private boolean delete = false;
 	
@@ -65,6 +67,8 @@ public class LinksImporterActionBean extends AbstractStripesAction {
 				rdfHandler.setHasWikipedia(hasWikipedia);
 				rdfHandler.setHasWikispecies(hasWikispecies);
 				rdfHandler.setHasBugGuide(hasBugGuide);
+				rdfHandler.setHasNCBI(hasNCBI);
+				rdfHandler.setHasITIS(hasITIS);
 				if(delete)
 					rdfHandler.deleteOldRecords();
 				
@@ -172,6 +176,22 @@ public class LinksImporterActionBean extends AbstractStripesAction {
 
 	public void setDelete(boolean delete) {
 		this.delete = delete;
+	}
+
+	public boolean isHasNCBI() {
+		return hasNCBI;
+	}
+
+	public void setHasNCBI(boolean hasNCBI) {
+		this.hasNCBI = hasNCBI;
+	}
+
+	public boolean isHasITIS() {
+		return hasITIS;
+	}
+
+	public void setHasITIS(boolean hasITIS) {
+		this.hasITIS = hasITIS;
 	}
 	
 

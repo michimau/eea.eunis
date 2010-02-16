@@ -253,11 +253,21 @@ if(kingdomname.equalsIgnoreCase("Animals"))
     		}
         	%>
     		<%
-    		String itisTSN = factsheet.getLink(specie.getIdNatureObject(),"sameSynonymITIS");
+    		String itisTSN = factsheet.getLink(specie.getIdNatureObject(),Constants.ITIS);
 			if(itisTSN != null && itisTSN.length() > 0){
     		%>
 		<div>
         		<a href="http://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=<%=itisTSN%>"><%=cm.cmsPhrase("ITIS TSN:")%><%=itisTSN%></a>
+		</div>
+			<%
+    		}
+        	%>
+    		<%
+    		String ncbi = factsheet.getLink(specie.getIdNatureObject(),Constants.NCBI);
+			if(ncbi != null && ncbi.length() > 0){
+    		%>
+		<div>
+        		<a href="http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=<%=ncbi%>&amp;lvl=0"><%=cm.cmsPhrase("NCBI:")%><%=ncbi%></a>
 		</div>
         	<%
     		}

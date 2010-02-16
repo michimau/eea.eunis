@@ -22,7 +22,11 @@
 	        	<stripes:checkbox name="hasWikispecies" id="wikis"/>
 	        	<stripes:label for="wikis"> - Wikispecies</stripes:label>
 	        	<stripes:checkbox name="hasBugGuide" id="bug"/>
-	        	<stripes:label for="bug"> - BugGuide</stripes:label><br/>
+	        	<stripes:label for="bug"> - BugGuide</stripes:label>
+	        	<stripes:checkbox name="hasNCBI" id="ncbi"/>
+	        	<stripes:label for="ncbi"> - NCBI</stripes:label>
+	        	<stripes:checkbox name="hasITIS" id="itis"/>
+	        	<stripes:label for="itis"> - ITIS</stripes:label><br/>
 	        	<stripes:checkbox name="delete" id="delete"/>
 	        	<stripes:label for="delete"> - delete old records</stripes:label><br/>
 				<stripes:submit name="importLinks" value="Import"/>

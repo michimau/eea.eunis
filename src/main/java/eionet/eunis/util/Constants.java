@@ -10,10 +10,12 @@ public interface Constants {
 	   
 	   //Link info constants
 	   public static final String GEOSPECIES_IDENTIFIER = "GEOSPECIES_IDENTIFIER";
-	   public static final String GBIF_PAGE = "GBIF_PAGE";
-	   public static final String BIOLIB_PAGE = "BIOLIB_PAGE";
-	   public static final String BBC_PAGE = "BBC_PAGE";
-	   public static final String WIKIPEDIA_ARTICLE = "WIKIPEDIA_ARTICLE";
-	   public static final String WIKISPECIES_ARTICLE = "WIKISPECIES_ARTICLE";
-	   public static final String BUG_GUIDE = "BUG_GUIDE";
+	   public static final String GBIF_PAGE = "hasGBIFPage";
+	   public static final String BIOLIB_PAGE = "hasBioLibPage";
+	   public static final String BBC_PAGE = "hasBBCPage";
+	   public static final String WIKIPEDIA_ARTICLE = "hasWikipediaArticle";
+	   public static final String WIKISPECIES_ARTICLE = "hasWikispeciesArticle";
+	   public static final String BUG_GUIDE = "hasBugGuidePage";
+	   public static final String NCBI = "sameSpeciesNCBI";
+	   public static final String ITIS = "sameSpeciesITIS";
 }

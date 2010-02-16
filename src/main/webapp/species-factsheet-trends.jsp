@@ -29,7 +29,7 @@
   <h2>
     <%=cm.cmsPhrase("Trends")%>
   </h2>
-  <table summary="<%=cm.cms("trends")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("trends")%>" class="listing" width="100%">
 <!--
     <col style="width:81px;"/>
     <col style="width:81px;"/>

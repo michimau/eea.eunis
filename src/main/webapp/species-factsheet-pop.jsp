@@ -29,7 +29,7 @@
   <h2>
     <%=cm.cmsPhrase("Population")%>
   </h2>
-  <table summary="<%=cm.cms("species_factsheet-pop_12_Sum")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("species_factsheet-pop_12_Sum")%>" class="listing" width="100%">
     <thead>
       <tr>
         <th style="text-align: left;">

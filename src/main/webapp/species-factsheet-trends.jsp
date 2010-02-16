@@ -80,10 +80,10 @@
 <%
       for (int i = 0; i < list.size(); i++)
       {
-        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+	String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
         FactSheetTrendsWrapper aRow = (FactSheetTrendsWrapper)list.get(i);
 %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
         <%
             if(Utilities.isCountry(aRow.getCountry()))

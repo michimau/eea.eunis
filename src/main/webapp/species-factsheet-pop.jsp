@@ -67,12 +67,12 @@
       Vector authorURL;
       for (int i = 0; i < list.size(); i++)
       {
-        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+        String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
         FactSheetPopulationWrapper aRow = (FactSheetPopulationWrapper)list.get(i);
         reference = Utilities.getReferencesByIdDc( aRow.getReference() );
         authorURL = Utilities.getAuthorAndUrlByIdDc( aRow.getReference() );
 %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
 <%
         if(Utilities.isCountry(aRow.getCountry()))

@@ -77,10 +77,10 @@
 <%
     for (int i = 0; i < sites.size(); i++)
     {
-      String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+      String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
       SitesByNatureObjectPersist site = (SitesByNatureObjectPersist)sites.get(i);
 %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
           <%=Utilities.formatString(site.getIDSite())%>
         </td>
@@ -174,10 +174,10 @@
 <%
   for (int i = 0; i < sites2.size(); i++)
   {
-    String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+    String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
     SitesByNatureObjectPersist site = (SitesByNatureObjectPersist)sites2.get(i);
 %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
           <%=Utilities.formatString(site.getIDSite())%>
         </td>

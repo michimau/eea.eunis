@@ -51,11 +51,11 @@
     int i = 0;
     while (it.hasNext())
     {
-      String cssClass = i++ % 2 == 0 ? "" : " class=\"zebraeven\"";
+      String cssClass = i++ % 2 == 0 ? "zebraodd" : "zebraeven";
       VernacularNameWrapper vName = ( ( VernacularNameWrapper ) it.next() );
       String reference = ( vName.getIdDc() == null ? "-1" : vName.getIdDc().toString() );
 %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
           <%=Utilities.treatURLSpecialCharacters(vName.getName())%>
         </td>
@@ -66,7 +66,7 @@
         String ref = Utilities.getReferencesByIdDc( reference );
         Vector authorURL = Utilities.getAuthorAndUrlByIdDc( reference );
 %>
-        <td style="text-align:left">
+        <td>
               <a class="link-plain" href="documents/<%=reference%>"><%=Utilities.treatURLSpecialCharacters((String)authorURL.get(0))%></a>
         </td>
       </tr>

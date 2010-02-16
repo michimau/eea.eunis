@@ -76,10 +76,10 @@
 <%
     for (int i = 0; i < habitats.size(); i++)
     {
-      String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+      String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
       SpeciesHabitatWrapper habitat = (SpeciesHabitatWrapper)habitats.get(i);
 %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
           <%=Utilities.formatString(habitat.getEunisHabitatcode())%>
         </td>

@@ -105,7 +105,7 @@
 %>
   </table>
   <br />
-  <table summary="<%=cm.cms("geographical_distribution")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("geographical_distribution")%>" class="listing" width="100%">
     <thead>
       <tr>
         <th style="text-align: left;">
@@ -130,12 +130,13 @@
 <%
     for (int i = 0; i < v.size(); i++)
     {
+      String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
       GeographicalStatusWrapper aRow = (GeographicalStatusWrapper)v.get(i);
       String country = (null != aRow.getCountry()) ? aRow.getCountry().getAreaNameEnglish() : "nbsp;";
       String reference = Utilities.getReferencesByIdDc(aRow.getReference());
       Vector authorURL = Utilities.getAuthorAndUrlByIdDc(aRow.getReference());
 %>
-      <tr>
+      <tr class="<%=cssClass%>">
         <td>
         <%
             if(Utilities.isCountry(country))
@@ -159,7 +160,7 @@
         <td>
           <%=Utilities.treatURLSpecialCharacters(aRow.getStatus())%>&nbsp;
         </td>
-        <td width="25%">
+        <td>
             	<a href="documents/<%=aRow.getReference()%>"><%=Utilities.treatURLSpecialCharacters((String)authorURL.get( 0 ))%></a>
         </td>
       </tr>

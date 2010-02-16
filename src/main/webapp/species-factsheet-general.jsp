@@ -79,13 +79,13 @@
       int i = 0;
       while(st.hasMoreTokens())
       {
-        String cssClass = i++ % 2 == 0 ? "" : " class=\"zebraeven\"";
+        String cssClass = i++ % 2 == 0 ? "zebraodd" : "zebraeven";
         StringTokenizer sts = new StringTokenizer(st.nextToken(),"*");
         String classification_id = sts.nextToken();
         String classification_level = sts.nextToken();
         String classification_name = sts.nextToken();
 %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td width="20%">
           <%=classification_level%>
         </td>
@@ -124,6 +124,7 @@
       </tr>
     </tbody>
   </table>
+
   <h2><%=cm.cmsPhrase("External links")%></h2>
   <div id="linkcollection">
       <div>
@@ -412,9 +413,9 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 <%
     for ( int i = 0; i < synonyms.size(); i++ )
     {
-      String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+      String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
       SpeciesNatureObjectPersist synonym = (SpeciesNatureObjectPersist)synonyms.get(i);%>
-    <tr <%=cssClass%>>
+    <tr class="<%=cssClass%>">
       <td>
 <%
       if(synonym.getIdSpecies().intValue() == Utilities.checkedStringToInt(idSpecies, 0))

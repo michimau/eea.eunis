@@ -161,15 +161,19 @@
     }
 %>
   <table summary="<%=cm.cms("national_threat_status")%>" class="listing" width="90%">
+    <col style="width : 220px;"/>
+    <col style="width : 120px;"/>
+    <col style="width : 100px;"/>
+    <col />
     <thead>
       <tr>
-        <th style="width : 220px; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Country")%>
         </th>
-        <th style="width : 120px; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("Status")%>
         </th>
-        <th style="width : 100px; text-align: left;">
+        <th style="text-align: left;">
           <%=cm.cmsPhrase("National threat code")%>
         </th>
         <th style="text-align: left;">
@@ -181,10 +185,10 @@
 <%
   for (int i = 0; i < nationalThreatStatus.size(); i++)
   {
-    String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+    String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
     NationalThreatWrapper threat = (NationalThreatWrapper)nationalThreatStatus.get(i);
 %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
 <%
     if(Utilities.isCountry(threat.getCountry()))
@@ -257,10 +261,10 @@
        // Display results.
       for (int i = 0; i < consStatus.size(); i++)
       {
-        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+        String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
         NationalThreatWrapper threat = (NationalThreatWrapper)consStatus.get(i);
 %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
           <%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>
         </td>

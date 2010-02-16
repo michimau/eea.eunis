@@ -30,6 +30,16 @@
     <%=cm.cmsPhrase("Trends")%>
   </h2>
   <table summary="<%=cm.cms("trends")%>" class="listing" width="90%">
+<!--
+    <col style="width:81px;"/>
+    <col style="width:81px;"/>
+    <col style="width:43px;"/>
+    <col style="width:39px;"/>
+    <col style="width:46px;"/>
+    <col style="width:88px;"/>
+    <col style="width:204px;"/>
+    <col style="width:25%;"/>
+-->
     <thead>
       <tr>
         <th style="text-align: left;">
@@ -53,7 +63,7 @@
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-align: left;">
-          <%=cm.cmsPhrase("Tendence")%>
+          <%=cm.cmsPhrase("Tendency")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-align: left;">
@@ -74,7 +84,7 @@
         FactSheetTrendsWrapper aRow = (FactSheetTrendsWrapper)list.get(i);
 %>
       <tr<%=cssClass%>>
-        <td width="81">
+        <td>
         <%
             if(Utilities.isCountry(aRow.getCountry()))
             {
@@ -89,47 +99,27 @@
              }
         %>
         </td>
-        <td width="81">
+        <td>
           <%=Utilities.treatURLSpecialCharacters(aRow.getBioregion())%>
         </td>
-        <td width="43" style="text-align:right">
+        <td style="text-align:right">
           <%=aRow.getStartPeriod()%>&nbsp;
         </td>
-        <td width="39" style="text-align:right">
+        <td style="text-align:right">
           <%=aRow.getEndPeriod()%>&nbsp;
         </td>
-        <td width="46">
+        <td>
           <%=Utilities.treatURLSpecialCharacters(aRow.getStatus())%>&nbsp;
         </td>
-        <td width="88">
+        <td>
           <%=Utilities.treatURLSpecialCharacters(aRow.getTrends())%>&nbsp;
         </td>
-        <td width="204">
+        <td>
           <%=Utilities.treatURLSpecialCharacters(aRow.getQuality())%>&nbsp;
         </td>
-<%
-        if (!Utilities.getAuthorAndUrlByIdDc(aRow.getReference()).get(1).toString().equalsIgnoreCase(""))
-        {
-%>
-        <td width="25%" style="text-align:left">
-          <span class="boldUnderline">
-            <a href="<%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(aRow.getReference()).get(1))%>"><%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(aRow.getReference()).get(0))%></a>
-          </span>
-        </td>
-<%
-        }
-        else
-        {
-%>
-        <td width="25%" style="text-align:left">
-          <span class="boldUnderline">
+        <td>
             <a href="documents/<%=aRow.getReference()%>"><%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(aRow.getReference()).get(0))%></a>
-          </span>
         </td>
-<%
-        }
-%>
-
       </tr>
 <%
       }

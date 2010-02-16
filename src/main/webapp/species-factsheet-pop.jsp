@@ -40,10 +40,8 @@
           <%=cm.cmsPhrase("Biogeographic region")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th>
-          <span style="color:#006CAD">
+        <th style="text-align: left;">
             <%=cm.cmsPhrase("Min / Max (Units)")%>
-          </span>
         </th>
         <th style="text-align: right;">
           <%=cm.cmsPhrase("Date")%>
@@ -109,28 +107,9 @@
         <td>
           <%=Utilities.treatURLSpecialCharacters(aRow.getQuality())%>&nbsp;
         </td>
-<%
-          if (!authorURL.get(1).toString().equalsIgnoreCase(""))
-          {
-%>
-        <td width="25%" style="text-align:left">
-            <span class="boldUnderline">
-              <a href="<%=Utilities.treatURLSpecialCharacters((String)authorURL.get(1))%>"><%=Utilities.treatURLSpecialCharacters((String)authorURL.get(0))%></a>
-            </span>
-        </td>
-<%
-          }
-          else
-          {
-%>
-        <td width="25%" style="text-align:left">
-          <span class="boldUnderline">
+        <td>
              <a href="documents/<%=aRow.getReference()%>"><%=Utilities.treatURLSpecialCharacters((String)authorURL.get(0))%></a>
-          </span>
         </td>
-<%
-          }
-%>
       </tr>
 <%
       }

@@ -227,7 +227,7 @@ public class PopulateDigir {
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				digir_GlobalUniqueIdentifier = "URN:catalog:EUNIS2:SPECDIST:" + rs.getString("IdSpecies");
+				digir_GlobalUniqueIdentifier = "urn:catalog:EUNIS2:SPECDIST:" + rs.getString("IdSpecies");
 
 			    digir_ScientificName = rs.getString("ScientificName");
 			    digir_Kingdom = getTaxonomy(rs.getString("Taxonomy"),"Kingdom");
@@ -243,7 +243,7 @@ public class PopulateDigir {
 			    digir_YearCollected = "NULL";
 			    digir_MonthCollected = "NULL";
 			    digir_DayCollected = "NULL";
-			    digir_RelatedInformation = "http://eunis.eea.europa.eu/eunis/species-factsheet.jsp?idSpecies=" + rs.getString("IdSpecies");
+			    digir_RelatedInformation = "http://eunis.eea.europa.eu/species/" + rs.getString("IdSpecies");
 			    digir_CatalogNumber = digir_ScientificName + "SPECDIST" + digir_Country;
 			    
 			    loadDigirRecord();
@@ -263,7 +263,7 @@ public class PopulateDigir {
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				digir_GlobalUniqueIdentifier = "URN:catalog:EUNIS2:SPECSITES:" + rs.getString("IdSpecies");
+				digir_GlobalUniqueIdentifier = "urn:catalog:EUNIS2:SPECSITES:" + rs.getString("IdSpecies");
 				
 				digir_ScientificName = rs.getString("ScientificName");
 			    digir_Kingdom = getTaxonomy(rs.getString("Taxonomy"), "Kingdom");
@@ -279,7 +279,7 @@ public class PopulateDigir {
 			    digir_YearCollected = "NULL";
 			    digir_MonthCollected = "NULL";
 			    digir_DayCollected = "NULL";
-			    digir_RelatedInformation = "http://eunis.eea.europa.eu/eunis/species-factsheet.jsp?idSpecies=" + rs.getString("IdSpecies");
+			    digir_RelatedInformation = "http://eunis.eea.europa.eu/species/" + rs.getString("IdSpecies");
 			    digir_CatalogNumber = digir_ScientificName + "SPECSITES" + digir_Country + digir_DecimalLatitude + digir_DecimalLongitude;
 			    
 			    loadDigirRecord();
@@ -297,7 +297,7 @@ public class PopulateDigir {
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				digir_GlobalUniqueIdentifier = "URN:catalog:EUNIS2:SPECHAB:" + rs.getString("IdSpecies");
+				digir_GlobalUniqueIdentifier = "urn:catalog:EUNIS2:SPECHAB:" + rs.getString("IdSpecies");
 				
 				digir_ScientificName = rs.getString("ScientificName");
 			    digir_Kingdom = getTaxonomy(rs.getString("Taxonomy"), "Kingdom");
@@ -313,7 +313,7 @@ public class PopulateDigir {
 			    digir_YearCollected = "NULL";
 			    digir_MonthCollected = "NULL";
 			    digir_DayCollected = "NULL";
-			    digir_RelatedInformation = "http://eunis.eea.europa.eu/eunis/species-factsheet.jsp?idSpecies=" + rs.getString("IdSpecies");
+			    digir_RelatedInformation = "http://eunis.eea.europa.eu/species/" + rs.getString("IdSpecies");
 			    digir_CatalogNumber = digir_ScientificName + "SPECHAB";
 			    
 			    loadDigirRecord();
@@ -333,7 +333,7 @@ public class PopulateDigir {
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				digir_GlobalUniqueIdentifier = "URN:catalog:EUNIS2:SPECGRID:" + rs.getString("IdSpecies");
+				digir_GlobalUniqueIdentifier = "urn:catalog:EUNIS2:SPECGRID:" + rs.getString("IdSpecies");
 				
 				digir_ScientificName = rs.getString("ScientificName");
 			    digir_Kingdom = getTaxonomy(rs.getString("Taxonomy"), "Kingdom");
@@ -349,7 +349,7 @@ public class PopulateDigir {
 			    digir_YearCollected = "NULL";
 			    digir_MonthCollected = "NULL";
 			    digir_DayCollected = "NULL";
-			    digir_RelatedInformation = "http://eunis.eea.europa.eu/eunis/species-factsheet.jsp?idSpecies=" + rs.getString("IdSpecies");
+			    digir_RelatedInformation = "http://eunis.eea.europa.eu/species/" + rs.getString("IdSpecies");
 			    digir_CatalogNumber = digir_ScientificName + "SPECGRID" + digir_DecimalLatitude + digir_DecimalLongitude;
 			    
 			    loadDigirRecord();
@@ -369,7 +369,7 @@ public class PopulateDigir {
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				digir_GlobalUniqueIdentifier = "URN:catalog:EUNIS2:SPECSTAT:" + rs.getString("IdSpecies");
+				digir_GlobalUniqueIdentifier = "urn:catalog:EUNIS2:SPECSTAT:" + rs.getString("IdSpecies");
 				
 				digir_ScientificName = rs.getString("ScientificName");
 			    digir_Kingdom = getTaxonomy(rs.getString("Taxonomy"), "Kingdom");
@@ -385,7 +385,7 @@ public class PopulateDigir {
 			    digir_YearCollected = "NULL";
 			    digir_MonthCollected = "NULL";
 			    digir_DayCollected = "NULL";
-			    digir_RelatedInformation = "http://eunis.eea.europa.eu/eunis/species-factsheet.jsp?idSpecies=" + rs.getString("IdSpecies");
+			    digir_RelatedInformation = "http://eunis.eea.europa.eu/species/" + rs.getString("IdSpecies");
 			    digir_CatalogNumber = digir_ScientificName + "SPECSTAT" + digir_Country;
 			    
 			    loadDigirRecord();

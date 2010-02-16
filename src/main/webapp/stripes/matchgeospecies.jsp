@@ -36,7 +36,7 @@
 							<tr>
 								<td><a class="link-plain" href="${object.identifier}" target="_blank">${object.identifier}</a></td>
 								<td>${object.name}</td>
-								<td><a href="${pageContext.request.contextPath}/species-factsheet.jsp?idSpecies=${object.specieId}" target="_blank">${object.nameSql}</a></td>
+								<td><a href="${pageContext.request.contextPath}/species/${object.specieId}" target="_blank">${object.nameSql}</a></td>
 								<td>
 									<stripes:label for="maybesame${object.natureObjectId}">Maybe</stripes:label>
 									<stripes:radio checked="true" name="issame['${object.identifier}']" id="maybesame${object.natureObjectId}" value="maybesame"/>

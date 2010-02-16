@@ -2862,7 +2862,7 @@ public final class Utilities {
 					ret += "<img src=\"images/img_bullet.gif\" alt=\""+taxTitle+"\"/>&nbsp;&nbsp;"+taxTitle+newLine;
 				}
 				if(expand.length()>0 && expandContains(expand,taxId)){
-					ArrayList SpeciesList = sqlc.SQL2Array("SELECT CONCAT('<a href=\"species-factsheet.jsp?idSpecies=',ID_SPECIES,'&amp;idSpeciesLink=',ID_SPECIES_LINK,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+taxId+" ORDER BY SCIENTIFIC_NAME");
+					ArrayList SpeciesList = sqlc.SQL2Array("SELECT CONCAT('<a href=\"species/',ID_SPECIES,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+taxId+" ORDER BY SCIENTIFIC_NAME");
 					if(SpeciesList.size()>0) {
 						ret += "<ul class=\"tree\">"+newLine;
               			for(int i=0;i<SpeciesList.size();i++){

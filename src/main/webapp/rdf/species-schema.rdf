@@ -11,18 +11,114 @@
 		<rdfs:label>EUNIS Species</rdfs:label>
 	</rdfs:Class>
 
-	<rdf:Property rdf:ID="maybeSame">
-                <rdfs:label>Maybe same as</rdfs:label>
-                <rdfs:domain rdf:resource="#Species"/>
-                <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
-                <rdfs:comment xml:lang="en-GB">Used when two resources are suspected of being the same concept</rdfs:comment>
+	<rdf:Property rdf:ID="binomialName">
+		<rdfs:label>Binomial name</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
 	</rdf:Property>
 
-	<rdf:Property rdf:ID="notSame">
-                <rdfs:label>Not same as</rdfs:label>
-                <rdfs:domain rdf:resource="#Species"/>
-                <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
-                <rdfs:comment xml:lang="en-GB">Used when two resources are verified to not being the same concept, but very similar</rdfs:comment>
+	<rdf:Property rdf:ID="hasBBCPage">
+		<rdfs:label>BBC Page</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="hasBugGuide">
+		<rdfs:label>Bug Guide Page</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="hasWikipediaArticle">
+		<rdfs:label>Wikipedia article</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="hasWikispeciesArticle">
+		<rdfs:label>Wikispecies article</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="sameSpeciesGBIF">
+		<rdfs:label>Same species at GBIF</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="sameSpeciesITIS">
+		<rdfs:label>Same species at ITIS</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="sameSpeciesNCBI">
+		<rdfs:label>Same species at NCBI</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	</rdf:Property>
+
+	<owl:InverseFunctionalProperty rdf:ID="sameSynonymGBIF">
+		<rdfs:label>Same synonym at GBIF</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	</owl:InverseFunctionalProperty>
+
+	<owl:InverseFunctionalProperty rdf:ID="sameSynonymITIS">
+		<rdfs:label>Same synonym at ITIS</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	</owl:InverseFunctionalProperty>
+
+	<owl:InverseFunctionalProperty rdf:ID="sameSynonymNCBI">
+		<rdfs:label>Same synonym at NCBI</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	</owl:InverseFunctionalProperty>
+
+	<rdf:Property rdf:ID="maybeSameSpecies">
+		<rdfs:label>Maybe same species as</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+		<rdfs:comment xml:lang="en-GB">Used when two resources are suspected of being the same concept</rdfs:comment>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="maybeSameSynonym">
+		<rdfs:label>Maybe same species synonym as</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+		<rdfs:comment xml:lang="en-GB">Used when two resources are suspected of being the same concept</rdfs:comment>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="notSameSpecies">
+		<rdfs:label>Not same species as</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+		<rdfs:comment xml:lang="en-GB">Used when two resources are verified to not being the same concept, but very similar</rdfs:comment>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="notSameSynonym">
+		<rdfs:label>Not same species synonym as</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+		<rdfs:comment xml:lang="en-GB">Used when two resources are verified to not being the same concept, but very similar</rdfs:comment>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="sameSpecies">
+		<rdfs:label>Same species as</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#sameAs"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+		<rdfs:comment xml:lang="en-GB">Used when two resources are the same species</rdfs:comment>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="sameSynonym">
+		<rdfs:label>Same species synonym as</rdfs:label>
+		<rdfs:domain rdf:resource="#Species"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+		<rdfs:comment xml:lang="en-GB">Used when two resources have the same binomial name and author
+		      (taking into account different spellings and abbreviations)</rdfs:comment>
 	</rdf:Property>
 
 </rdf:RDF>

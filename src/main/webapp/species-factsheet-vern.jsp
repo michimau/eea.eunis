@@ -56,7 +56,7 @@
       String reference = ( vName.getIdDc() == null ? "-1" : vName.getIdDc().toString() );
 %>
       <tr class="<%=cssClass%>">
-        <td>
+        <td xml:lang="<%=vName.getLanguageCode() %>">
           <%=Utilities.treatURLSpecialCharacters(vName.getName())%>
         </td>
         <td>

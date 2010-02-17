@@ -13,16 +13,17 @@ import org.simpleframework.xml.Root;
  *
  * <a href="mailto:aleks21@gmail.com">contact<a>
  */
-@Root(strict = false, name = "eunis:speciesFactsheetDto")
+@Root(strict = false, name = "eunis:Species")
 public class SpeciesFactsheetDto implements Serializable{
 	/**
 	 * serial.
 	 */
 	private static final long serialVersionUID = -6343981482733538221L;
 
-	public static final String HEADER = "<xml " +
+	public static final String HEADER = "<rdf:RDF " +
+			"xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n" +
 			"xmlns:dwc=\"http://rs.tdwg.org/dwc/terms/\" \n" +
-			"xmlns:eunis=\"http://eunis.eea.europa.eu/rdf/species-schema.rdf\">\n";
+			"xmlns:eunis=\"http://eunis.eea.europa.eu/rdf/species-schema.rdf#\">\n";
 			
 
 	public static final String FOOTER = "\n</xml>";

@@ -54,6 +54,7 @@ public class VernacularNamesDomain extends AbstractDomain {
 
     JoinTable language = new JoinTable("CHM62EDT_LANGUAGE", "ID_LOOKUP", "ID_LANGUAGE");
     language.addJoinColumn(new StringJoinColumn("NAME_EN", "languageName", "setLanguageName"));
+    language.addJoinColumn(new StringJoinColumn("CODE", "languageCode", "setLanguageCode"));
     reportType.addJoinTable(language);
   }
 }

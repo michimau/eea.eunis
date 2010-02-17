@@ -13,6 +13,8 @@ public class VernacularNameWrapper implements JavaSortable {
    * Language.
    */
   private String language = "";
+  
+  private String languageCode = "";
   /**
    * Name in that language.
    */
@@ -45,6 +47,18 @@ public class VernacularNameWrapper implements JavaSortable {
   }
 
   /**
+   * Init constructor.
+   * @param language
+   * @param languageCode
+   * @param name
+   * @param idDc
+   */
+  public VernacularNameWrapper(String language, String languageCode, String name, Integer idDc) {
+	this(language, name, idDc);
+	this.languageCode = languageCode;
+  }
+
+/**
    * Getter for language property.
    * @return language.
    */
@@ -103,4 +117,12 @@ public class VernacularNameWrapper implements JavaSortable {
   public void setIdDc(Integer idDc) {
     this.idDc = idDc;
   }
+
+public String getLanguageCode() {
+	return languageCode;
+}
+
+public void setLanguageCode(String languageCode) {
+	this.languageCode = languageCode;
+}
 }

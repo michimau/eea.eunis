@@ -46,47 +46,31 @@ public class SpeciesSearchUtility {
       Vector<Integer> synonyms = new Vector<Integer>();
       Integer IdNatureObjectSpecie = idNatureObject;
 
-      Integer IdSpecie = null;
+      List<Integer> idList = new LinkedList<Integer>();
       List<Chm62edtSpeciesPersist> lstSpeciesIDs = new Chm62edtSpeciesDomain().findWhere("ID_NATURE_OBJECT="+idNatureObject);
-      if(lstSpeciesIDs.size()>0)
-      {
-        Iterator<Chm62edtSpeciesPersist> it = lstSpeciesIDs.iterator();
-        while (it.hasNext()) {
-          Chm62edtSpeciesPersist sp = (Chm62edtSpeciesPersist) it.next();
-          IdSpecie = sp.getIdSpecies();
-        }
+      if(lstSpeciesIDs.size() > 0) {
+    	  for(Chm62edtSpeciesPersist speciesPersist : lstSpeciesIDs) {
+    		  idList.add(speciesPersist.getIdSpecies());
+    	  }
       }
 
       synonyms.add(IdNatureObjectSpecie);
-      List<Chm62edtSpeciesPersist> lstSynonyms = new Chm62edtSpeciesDomain().findWhere("TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK="+IdSpecie);
-      if(lstSynonyms.size()>0)
-      {
-        Iterator<Chm62edtSpeciesPersist> it = lstSynonyms.iterator();
-        while (it.hasNext()) {
-          Chm62edtSpeciesPersist sp = it.next();
-          synonyms.add(sp.getIdNatureObject());
-        }
-      }
-      String IDs = "";
-      for(int k=0;k<synonyms.size();k++)
-      {
-        IDs += synonyms.get(k).toString();
-        if(k != (synonyms.size()-1))
-        {
-          IDs += ",";
+      List<Chm62edtSpeciesPersist> lstSynonyms = new Chm62edtSpeciesDomain().findWhere(
+    		  "TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK IN (" +
+    		  listToStringIds(idList) +")");
+      if(lstSynonyms.size()>0) {
+        for (Chm62edtSpeciesPersist speciesPersist : lstSynonyms) {
+          synonyms.add(speciesPersist.getIdNatureObject());
         }
       }
 
-      //System.out.println("IDs = " + IDs);
-      List<VernacularNamesPersist> verNameList = new VernacularNamesDomain().findWhere("LOOKUP_TYPE='language' AND ID_NATURE_OBJECT IN (" + IDs + ") AND F.NAME='vernacular_name' GROUP BY F.VALUE, NAME_EN");
+      List<VernacularNamesPersist> verNameList = new VernacularNamesDomain().findWhere("LOOKUP_TYPE='language' " +
+      		"AND ID_NATURE_OBJECT IN (" + listToStringIds(synonyms) + ") AND F.NAME='vernacular_name' GROUP BY F.VALUE, NAME_EN");
 
       //old list
       //List verNameList = new VernacularNamesDomain().findWhere("LOOKUP_TYPE='language' AND ID_NATURE_OBJECT='" + idNatureObject + "' AND F.NAME='vernacular_name' GROUP BY F.VALUE, NAME_EN");
-      Iterator<VernacularNamesPersist> it = verNameList.iterator();
-      while (it.hasNext()) {
-        VernacularNamesPersist vernName = it.next();
-        ret.addElement(new VernacularNameWrapper(vernName.getLanguageName(), vernName.getValue(), vernName.getIdDc()));
-        vernName.getIdDc();
+      for(VernacularNamesPersist vernName : verNameList) {
+    	  ret.addElement(new VernacularNameWrapper(vernName.getLanguageName(), vernName.getLanguageCode(), vernName.getValue(), vernName.getIdDc()));
       }
     } catch (Exception ex) {
       // If exception occurrs, return an empty list!
@@ -95,6 +79,18 @@ public class SpeciesSearchUtility {
     } finally {
       return ret;
     }
+  }
+  
+  private static String listToStringIds(List<Integer> list) {
+	  if (list == null || list.isEmpty()) {
+		  throw new IllegalArgumentException("argument cannot be empty");
+	  }
+	  StringBuilder sb = new StringBuilder();
+	  for (Integer integer : list) {
+		  sb.append(integer).append(',');
+	  }
+	  sb.deleteCharAt(sb.length() - 1); //delete last comma
+	  return sb.toString();
   }
 
   /**

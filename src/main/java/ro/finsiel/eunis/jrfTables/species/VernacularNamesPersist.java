@@ -8,6 +8,7 @@ public class VernacularNamesPersist extends PersistentObject {
   private String lookupType = null;
   private String IDLookup = null;
   private String languageName = null;
+  private String languageCode;
 
 
   /**
@@ -375,5 +376,13 @@ public class VernacularNamesPersist extends PersistentObject {
 
   public void setLanguageName(String languageName) {
     this.languageName = languageName;
+  }
+
+  public String getLanguageCode() {
+	return languageCode;
+  }
+
+  public void setLanguageCode(String languageCode) {
+	this.languageCode = languageCode;
   }
 }

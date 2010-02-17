@@ -24,7 +24,7 @@ public class VernacularNameDto implements Serializable {
 	
 	@Attribute(required = false, name="xml:lang")
 	private String code;
-	@Text
+	@Text(required = false)
 	private String value;
 	
 	public VernacularNameDto() {
@@ -32,7 +32,7 @@ public class VernacularNameDto implements Serializable {
 	}
 	
 	public VernacularNameDto(VernacularNameWrapper wrapper) {
-		code = wrapper.getLanguage();
+		code = wrapper.getLanguageCode();
 		value = wrapper.getName();
 	}
 	public String getCode() {

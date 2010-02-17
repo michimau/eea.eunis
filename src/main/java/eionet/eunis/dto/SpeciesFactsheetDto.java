@@ -26,7 +26,7 @@ public class SpeciesFactsheetDto implements Serializable{
 			"xmlns:eunis=\"http://eunis.eea.europa.eu/rdf/species-schema.rdf#\">\n";
 			
 
-	public static final String FOOTER = "\n</xml>";
+	public static final String FOOTER = "\n</rdf:RDF>";
 
 	
 	@Element(required = false, name = "eunis:binomialName")

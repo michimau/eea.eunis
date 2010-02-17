@@ -131,13 +131,13 @@
         <a title="<%=cm.cmsPhrase("Pictures of the species on Google")%>" href="http://images.google.com/images?q=<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("Pictures on Google")%></a>
       </div>
 <%
-      String gbifLink = factsheet.getLink(specie.getIdNatureObject(),Constants.GBIF_PAGE);//specie.getScientificName();
+      String gbifLink = factsheet.getLink(specie.getIdNatureObject(),Constants.SAME_SYNONYM_GBIF);//specie.getScientificName();
       //gbifLink = gbifLink.replaceAll( "\\.", "" );
       if(gbifLink != null && gbifLink.length() > 0){
 //      gbifLink = gbifLink.replaceAll( " ", "\\." );
 %>
       <div>
-        <a href="<%=gbifLink%>"><%=cm.cmsPhrase("GBIF page")%></a>
+        <a href="http://data.gbif.org/species/<%=gbifLink%>"><%=cm.cmsPhrase("GBIF page")%></a>
       </div>
       <% } else {
     	  	String gbifLink2 = specie.getScientificName();
@@ -264,7 +264,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
     		}
         	%>
     		<%
-    		String ncbi = factsheet.getLink(specie.getIdNatureObject(),Constants.NCBI);
+    		String ncbi = factsheet.getLink(specie.getIdNatureObject(),Constants.SAME_SYNONYM_NCBI);
 			if(ncbi != null && ncbi.length() > 0){
     		%>
 		<div>

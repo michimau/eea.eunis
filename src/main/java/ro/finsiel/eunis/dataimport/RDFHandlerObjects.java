@@ -46,6 +46,9 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler{
 	private Connection con = null;
 	
 	private List<String> errors = null;
+	
+	private PreparedStatement preparedStatement;
+	private int counter = 0; 
 			
 	/**
 	 * @throws SQLException 
@@ -53,6 +56,10 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler{
 	 */
 	public RDFHandlerObjects(Connection con) throws SQLException{
 		this.con = con;
+		
+		String query = "INSERT INTO CHM62EDT_NATURE_OBJECT_ATTRIBUTES (ID_NATURE_OBJECT, NAME, OBJECT, LITOBJECT) VALUES (?,?,?,?)";
+		preparedStatement = con.prepareStatement(query);
+		
 		errors = new ArrayList<String>();
 			
 	}
@@ -122,7 +129,7 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler{
 		String author = dto.getHasScientificNameAutorship();
 		
 		if(canName != null && author != null){
-			String query = "SELECT ID_NATURE_OBJECT, AUTHOR FROM chm62edt_species WHERE SCIENTIFIC_NAME = '"+EunisUtil.replaceTagsImport(canName)+"'";
+			String query = "SELECT ID_NATURE_OBJECT, AUTHOR, VALID_NAME FROM chm62edt_species WHERE SCIENTIFIC_NAME = '"+EunisUtil.replaceTagsImport(canName)+"'";
 			
 			PreparedStatement ps = null;
 		    ResultSet rs = null;
@@ -133,10 +140,14 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler{
 		    	while(rs.next()){
 		    		String natob_id = rs.getString("ID_NATURE_OBJECT");
 		    		String sql_author = rs.getString("AUTHOR");
+		    		int valid_name = rs.getInt("VALID_NAME");
 		    		if(author != null && sql_author != null && author.equals(sql_author)){
-		    			insertExternalObject(natob_id, "sameSpecies", identifier, sciName);
+		    			insertExternalObject(natob_id, "sameSynonym", identifier, sciName);
+		    			if(valid_name == 1){
+		    				insertExternalObject(natob_id, "sameSpecies", identifier, sciName);
+		    			}
 		    		} else {
-		    			insertExternalObject(natob_id, "maybeSameSpecies", identifier, sciName);
+		    			insertExternalObject(natob_id, "maybeSameSynonym", identifier, sciName);
 		    		}
 		    	}
 		    } catch ( Exception e ) {
@@ -153,59 +164,60 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler{
 	
 	
 	private void insertExternalObject(String natob_id, String type, String identifier, String name) throws SQLException {
-		if(!externalObjectExists(natob_id)){
+		if(!externalObjectExists(natob_id,type)){
 			
 			insertName(natob_id, name);
 			
-			String query = "INSERT INTO CHM62EDT_NATURE_OBJECT_ATTRIBUTES (ID_NATURE_OBJECT, NAME, OBJECT, LITOBJECT) VALUES (?,?,?,?)";
-			
-			PreparedStatement ps = null;
 		    try {
-		    	ps = con.prepareStatement(query);
+		    	preparedStatement.setString(1, natob_id);
+		    	preparedStatement.setString(2, type);
+		    	preparedStatement.setString(3, identifier);
+		    	preparedStatement.setBoolean(4, false);
+		    	preparedStatement.addBatch();
 		    	
-		    	ps.setString(1, natob_id);
-		    	ps.setString(2, type);
-		    	ps.setString(3, identifier);
-		    	ps.setBoolean(4, false);
-		    	ps.executeUpdate();
+		    	counter++;
+		    	if (counter % 10000 == 0){ 
+		    		preparedStatement.executeBatch(); 
+		    		preparedStatement.clearParameters(); 
+	        		System.gc(); 
+	        	}
 		    	
 		    } catch ( Exception e ) {
 		    	e.printStackTrace();
 		    	errors.add(e.getMessage());
-		    } finally {
-		    	if(ps != null)
-		    		ps.close();
 		    }
 		}
 	}
 	
 	private void insertName(String natob_id, String name) throws SQLException {
-		String query = "INSERT INTO CHM62EDT_NATURE_OBJECT_ATTRIBUTES (ID_NATURE_OBJECT, NAME, OBJECT, LITOBJECT) VALUES (?,?,?,?)";
-		
-		PreparedStatement ps = null;
+	
 	    try {
-	    	ps = con.prepareStatement(query);
+	    	preparedStatement.setString(1, natob_id);
+	    	preparedStatement.setString(2, "_geospeciesScientificName");
+	    	preparedStatement.setString(3, EunisUtil.replaceTagsImport(name));
+	    	preparedStatement.setBoolean(4, true);
+	    	preparedStatement.addBatch();
 	    	
-	    	ps.setString(1, natob_id);
-	    	ps.setString(2, "_geospeciesScientificName");
-	    	ps.setString(3, EunisUtil.replaceTagsImport(name));
-	    	ps.setBoolean(4, true);
-	    	ps.executeUpdate();
+	    	counter++;
+	    	if (counter % 10000 == 0){ 
+	    		preparedStatement.executeBatch(); 
+	    		preparedStatement.clearParameters(); 
+        		System.gc(); 
+        	}
 	    	
 	    } catch ( Exception e ) {
 	    	e.printStackTrace();
 	    	errors.add(e.getMessage());
-	    } finally {
-	    	if(ps != null)
-	    		ps.close();
 	    }
 	}
 	
-	public boolean externalObjectExists(String natob_id) throws SQLException {
+	public boolean externalObjectExists(String natob_id, String type) throws SQLException {
 		
 		boolean ret = false;
 		
-		String query = "SELECT OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE ID_NATURE_OBJECT="+natob_id+" LIMIT 1";
+		String query = "SELECT OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE ID_NATURE_OBJECT="+natob_id+" AND NAME IN ('sameSynonym', 'maybeSameSynonym', 'notSameSynonym') LIMIT 1";
+		if(type != null && type.equals("sameSpecies"))
+			query = "SELECT OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE ID_NATURE_OBJECT="+natob_id+" AND NAME IN ('sameSpecies', 'maybeSameSpecies', 'notSameSpecies') LIMIT 1";
 		
 		PreparedStatement ps = null;
 	    ResultSet rs = null;
@@ -234,9 +246,23 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler{
 	 */
 	public void endOfFile() throws SQLException{
 		
-		if(dto != null){
-			insert(dto);
-		}		
+		try {
+			if(dto != null){
+				insert(dto);
+			}
+			
+			if (!(counter % 10000 == 0)){ 
+				preparedStatement.executeBatch(); 
+				preparedStatement.clearParameters();
+	        	System.gc();
+			}
+		} catch ( Exception e ) { 
+			e.printStackTrace();
+	    	errors.add(e.getMessage());
+		} finally { 
+			if(preparedStatement != null ) 
+				preparedStatement.close();
+		} 
 		
 	}
 	

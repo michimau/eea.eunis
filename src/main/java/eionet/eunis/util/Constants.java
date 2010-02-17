@@ -10,7 +10,7 @@ public interface Constants {
 	   
 	   //Link info constants
 	   public static final String GEOSPECIES_IDENTIFIER = "GEOSPECIES_IDENTIFIER";
-	   public static final String GBIF_PAGE = "hasGBIFPage";
+	   public static final String GBIF_PAGE = "hasGBIF";
 	   public static final String BIOLIB_PAGE = "hasBioLibPage";
 	   public static final String BBC_PAGE = "hasBBCPage";
 	   public static final String WIKIPEDIA_ARTICLE = "hasWikipediaArticle";
@@ -20,8 +20,8 @@ public interface Constants {
 	   //Same Species
 	   public static final String SAME_SPECIES_EOL = "sameSpeciesEOL"; // www.eol.org
 	   public static final String SAME_SPECIES_GBIF = "sameSpeciesGBIF"; // www.gbif.org
-	   public static final String ITIS = "sameSpeciesITIS"; // www.itis.gov
-	   public static final String NCBI = "sameSpeciesNCBI"; // www.ncbi.nlm.nih.gov
+	   public static final String SAME_SPECIES_ITIS = "sameSpeciesITIS"; // www.itis.gov
+	   public static final String SAME_SPECIES_NCBI = "sameSpeciesNCBI"; // www.ncbi.nlm.nih.gov
 
 	   //Same Synonym
 	   public static final String SAME_SYNONYM_EOL = "sameSynonymEOL";

@@ -41,6 +41,7 @@ public class LinksImporterActionBean extends AbstractStripesAction {
 	private boolean hasITIS = false;
 	
 	private boolean delete = false;
+	private String matching;
 	
 	@DefaultHandler
 	public Resolution defaultAction() {
@@ -69,6 +70,9 @@ public class LinksImporterActionBean extends AbstractStripesAction {
 				rdfHandler.setHasBugGuide(hasBugGuide);
 				rdfHandler.setHasNCBI(hasNCBI);
 				rdfHandler.setHasITIS(hasITIS);
+				if(matching == null || matching.length() == 0)
+					matching = "sameSynonym";
+				rdfHandler.setMatching(matching);
 				if(delete)
 					rdfHandler.deleteOldRecords();
 				
@@ -80,6 +84,7 @@ public class LinksImporterActionBean extends AbstractStripesAction {
 		        arp.getHandlers().setStatementHandler(rdfHandler);
 		        arp.getHandlers().setErrorHandler(rdfHandler);
 		        arp.load(inputStream);
+		        rdfHandler.endOfFile();
 				
 				List<String> errors = rdfHandler.getErrors();
 				if(errors != null && errors.size() > 0){
@@ -192,6 +197,14 @@ public class LinksImporterActionBean extends AbstractStripesAction {
 
 	public void setHasITIS(boolean hasITIS) {
 		this.hasITIS = hasITIS;
+	}
+
+	public String getMatching() {
+		return matching;
+	}
+
+	public void setMatching(String matching) {
+		this.matching = matching;
 	}
 	
 

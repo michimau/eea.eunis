@@ -27,6 +27,9 @@
 	        	<stripes:label for="ncbi"> - NCBI</stripes:label>
 	        	<stripes:checkbox name="hasITIS" id="itis"/>
 	        	<stripes:label for="itis"> - ITIS</stripes:label><br/>
+	        	<strong>Matching: </strong>
+	        	<stripes:radio name="matching" id="matching_species" value="sameSpecies"/><stripes:label for="matching_species"> - sameSpecies</stripes:label>
+	        	<stripes:radio name="matching" id="matching_synonym" value="sameSynonym"/><stripes:label for="matching_synonym"> - sameSynonym</stripes:label><br/>
 	        	<stripes:checkbox name="delete" id="delete"/>
 	        	<stripes:label for="delete"> - delete old records</stripes:label><br/>
 				<stripes:submit name="importLinks" value="Import"/>

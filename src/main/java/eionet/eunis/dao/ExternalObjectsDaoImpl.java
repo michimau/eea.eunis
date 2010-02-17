@@ -30,7 +30,7 @@ public class ExternalObjectsDaoImpl extends BaseDaoImpl implements IExternalObje
 
 		//String query = "SELECT CONCAT(S.SCIENTIFIC_NAME, ' ', S.AUTHOR) AS SQL_NAME, S.ID_SPECIES, S.ID_NATURE_OBJECT, E.RESOURCE, E.NAME FROM CHM62EDT_SPECIES S, externalobjects E WHERE E.ID_NATURE_OBJECT = S.ID_NATURE_OBJECT AND RELATION = 'maybesame' ORDER BY E.RESOURCE LIMIT 300";
 		String query = "SELECT CONCAT(S.SCIENTIFIC_NAME, ' ', S.AUTHOR) AS SQL_NAME, S.ID_SPECIES, S.ID_NATURE_OBJECT, A1.OBJECT AS IDENTIFIER, A2.OBJECT AS GEO_NAME FROM CHM62EDT_SPECIES S, chm62edt_nature_object_attributes A1, "+
-			"chm62edt_nature_object_attributes A2 WHERE A1.ID_NATURE_OBJECT = S.ID_NATURE_OBJECT AND A1.NAME = 'maybeSameSpecies' AND A2.ID_NATURE_OBJECT=A1.ID_NATURE_OBJECT AND A2.NAME = '_geospeciesScientificName' ORDER BY A1.OBJECT LIMIT 300";
+			"chm62edt_nature_object_attributes A2 WHERE A1.ID_NATURE_OBJECT = S.ID_NATURE_OBJECT AND A1.NAME = 'maybeSameSynonym' AND A2.ID_NATURE_OBJECT=A1.ID_NATURE_OBJECT AND A2.NAME = '_geospeciesScientificName' ORDER BY A1.OBJECT LIMIT 300";
 		Connection con = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
@@ -61,7 +61,7 @@ public class ExternalObjectsDaoImpl extends BaseDaoImpl implements IExternalObje
 	
 	public void updateExternalObject(String identifier, String val) {
 		if(identifier != null && val != null){
-			String query = "UPDATE chm62edt_nature_object_attributes SET NAME=? WHERE OBJECT=? AND NAME = 'maybeSameSpecies'";
+			String query = "UPDATE chm62edt_nature_object_attributes SET NAME=? WHERE OBJECT=? AND NAME = 'maybeSameSynonym'";
 			
 			Connection con = null;
 			PreparedStatement ps = null;

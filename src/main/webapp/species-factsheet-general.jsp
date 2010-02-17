@@ -254,7 +254,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
     		}
         	%>
     		<%
-    		String itisTSN = factsheet.getLink(specie.getIdNatureObject(),Constants.ITIS);
+    		String itisTSN = factsheet.getLink(specie.getIdNatureObject(),Constants.SAME_SYNONYM_ITIS);
 			if(itisTSN != null && itisTSN.length() > 0){
     		%>
 		<div>

@@ -16,6 +16,16 @@ public interface Constants {
 	   public static final String WIKIPEDIA_ARTICLE = "hasWikipediaArticle";
 	   public static final String WIKISPECIES_ARTICLE = "hasWikispeciesArticle";
 	   public static final String BUG_GUIDE = "hasBugGuidePage";
-	   public static final String NCBI = "sameSpeciesNCBI";
-	   public static final String ITIS = "sameSpeciesITIS";
+
+	   //Same Species
+	   public static final String SAME_SPECIES_EOL = "sameSpeciesEOL"; // www.eol.org
+	   public static final String SAME_SPECIES_GBIF = "sameSpeciesGBIF"; // www.gbif.org
+	   public static final String ITIS = "sameSpeciesITIS"; // www.itis.gov
+	   public static final String NCBI = "sameSpeciesNCBI"; // www.ncbi.nlm.nih.gov
+
+	   //Same Synonym
+	   public static final String SAME_SYNONYM_EOL = "sameSynonymEOL";
+	   public static final String SAME_SYNONYM_GBIF = "sameSynonymGBIF";
+	   public static final String SAME_SYNONYM_ITIS = "sameSynonymITIS";
+	   public static final String SAME_SYNONYM_NCBI = "sameSynonymNCBI";
 }

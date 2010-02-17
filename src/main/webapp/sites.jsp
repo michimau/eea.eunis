@@ -98,8 +98,8 @@
                            name="englishName"
                            id="englishName"
                            value="<%=cm.cms("sites_entersitename")%>"
-                           title="<%=cm.cms("sites_entersitename")%>"
-                           onfocus="this.select();" />
+                           onfocus="if(this.value=='<%=cm.cms("sites_entersitename")%>')this.value='';"
+                           onblur="if(this.value=='')this.value='<%=cm.cms("sites_entersitename")%>';" />
                     <%=cm.cmsLabel("quick_search_sites_01")%>
                     <%=cm.cmsTitle("sites_entersitename")%>
                     <%=cm.cmsInput("sites_entersitename")%>

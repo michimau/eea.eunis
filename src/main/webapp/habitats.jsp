@@ -82,9 +82,10 @@
                     <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_STARTS%>" />
                     <label for="searchString"><%=cm.cmsPhrase("Search habitat types with names starting with:")%></label>
                     <input id="searchString" type="text"
-                           size="30" name="searchString" title="<%=cm.cms("habitat_to_search_for")%>"
+                           size="30" name="searchString"
                            value="<%=cm.cms("enter_habitat_name_here")%>"
-                           onfocus="javascript:document.quick_search.searchString.select();" />
+                           onfocus="if(this.value=='<%=cm.cms("enter_habitat_name_here")%>')this.value='';"
+                           onblur="if(this.value=='')this.value='<%=cm.cms("enter_habitat_name_here")%>';" />
                     <%=cm.cmsTitle("habitat_to_search_for")%>
                     <%=cm.cmsInput("enter_habitat_name_here")%>
                     <input type="submit"

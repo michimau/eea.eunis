@@ -108,9 +108,8 @@
                          id="scientificName"
                          name="scientificName"
                          value="<%=cm.cms("species_main_03_Value")%>"
-                         alt="<%=cm.cms("quick_search_species_name")%>"
-                         title="<%=cm.cms("quick_search_species_name")%>"
-                         onfocus="javascript:document.search.scientificName.select();" />
+                         onfocus="if(this.value=='<%=cm.cms("species_main_03_Value")%>')this.value='';"
+                         onblur="if(this.value=='')this.value='<%=cm.cms("species_main_03_Value")%>';" />
                   <%=cm.cmsInput("species_main_03_Value")%>
                   <%=cm.cmsAlt("quick_search_species_name")%>
                   <%=cm.cmsTitle("quick_search_species_name")%>

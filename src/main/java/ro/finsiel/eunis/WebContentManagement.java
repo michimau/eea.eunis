@@ -487,6 +487,13 @@ public class WebContentManagement implements java.io.Serializable {
       Class.forName( SQL_DRV );
       con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
       
+      if (modifyAllIdentical) {
+    	  ps = con.prepareStatement("DELETE FROM EUNIS_WEB_CONTENT WHERE ID_PAGE = ? AND LANG = ? ");
+    	  ps.setString(1, md5);
+    	  ps.setString(2, lang);
+    	  ps.execute();
+      }
+      
       if(lang.equalsIgnoreCase("EN")) {
    		ps = con.prepareStatement( "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE, CONTENT_VALID ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 0 )" );
         ps.setString( 1, md5 );
@@ -550,6 +557,8 @@ public class WebContentManagement implements java.io.Serializable {
     return result;
   }
 
+  
+  
   public boolean insertContentJDBC( String idPage,
                                     final String content,
                                     final String description,
@@ -568,7 +577,14 @@ public class WebContentManagement implements java.io.Serializable {
       Class.forName( SQL_DRV );
       con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
       
-   	  ps = con.prepareStatement( "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, RECORD_AUTHOR, RECORD_DATE ) VALUES ( MD5(?), ?, ?, ?, ?, CURRENT_TIMESTAMP )" );
+      if (modifyAllIdentical) {
+    	  ps = con.prepareStatement("DELETE FROM EUNIS_WEB_CONTENT WHERE ID_PAGE = MD5(?) AND LANG = ? ");
+    	  ps.setString(1, idPage);
+    	  ps.setString(2, lang);
+    	  ps.execute();
+      }
+      
+   	  ps = con.prepareStatement("INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, RECORD_AUTHOR, RECORD_DATE ) VALUES ( MD5(?), ?, ?, ?, ?, CURRENT_TIMESTAMP )" );
 
       ps.setString( 1, idPage );
       ps.setString( 2, content );

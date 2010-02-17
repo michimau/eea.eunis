@@ -101,11 +101,12 @@ public class UpdateTemplateActionBean extends AbstractStripesAction {
 	private boolean updateTemplate(String url, String idPage, String description, String language) {
         Pair<Integer, String> result = getContentManagement().readContentFromUrl(url);
         if (result != null && result.getId()!= null && result.getId() == 200 && StringUtils.isNotBlank(result.getValue())) {        	
-        	return getContentManagement().insertContentJDBC(
+        	return getContentManagement().savePageContentJDBC(
         			idPage,
         			result.getValue(),
         			description,
         			language,
+        			(short)result.getValue().length(),
         			null,
         			true,
         			getContext().getJdbcDriver(),

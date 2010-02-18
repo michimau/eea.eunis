@@ -220,65 +220,55 @@
                       <table width="100%" summary="layout" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                           <td>
-            <%
-              if (!results.isEmpty())
-              {
-                      if(newName)
-                      {
-                        if(!formBean.getOldName().equalsIgnoreCase(formBean.getScientificName())) {
-              %>
-                         <%=cm.cmsPhrase("No match was found for ")%>
-                         <strong><%=Utilities.treatURLSpecialCharacters(formBean.getOldName())%></strong>.&nbsp;
-                         <%=cm.cmsPhrase("The closest phonetic match we found is: ")%>
-                         <strong><%=Utilities.treatURLSpecialCharacters(formBean.getScientificName())%></strong>
-              <%
-                        } else {
-              %>
-                         <%=cm.cmsPhrase("The closest phonetic match we found is: ")%>
-                         <strong><%=Utilities.treatURLSpecialCharacters(formBean.getScientificName())%></strong>
-              <%
-                        }
-                      } else
-                      {
-            %>
-                         <%=cm.cmsPhrase("No match was found for ")%>
-                         <strong>
-            <%
-                        String searchCriteria = "";
-                        String name = "";
-                        Integer oper = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
-                        if ( typeForm == NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() )
-                        {
-
-                          if ( searchVernacular )
-                          {
-                            searchCriteria = "name";
-                          }
-                          else
-                          {
-                            searchCriteria = "scientific name";
-                          }
-                          name = formBean.getScientificName();
-                        }
-                        if ( typeForm == NameSearchCriteria.CRITERIA_VERNACULAR.intValue() )
-                        {
-                          searchCriteria = "vernacular name";
-                          name = formBean.getVernacularName();
-                        }
-            %>
-                          <%=Utilities.prepareHumanString(searchCriteria, name, oper)%>
-                         </strong>
-            <%
-                        if ( formBean.getLanguage() != null )
-                        {
-            %>
-                           <%=cm.cmsPhrase("The closest phonetic match we found is: ")%>
-                           <strong><%=formBean.getLanguage()%></strong>
-            <%
-                        }
-                      }
-              }
-            %>
+            				<%
+              					if (!results.isEmpty()){
+                      				if(newName){
+                        				if(!formBean.getOldName().equalsIgnoreCase(formBean.getScientificName())){
+              				%>
+                         					<%=cm.cmsPhrase("No match was found for ")%>
+                         					<strong><%=Utilities.treatURLSpecialCharacters(formBean.getOldName())%></strong>.&nbsp;
+                         					<%=cm.cmsPhrase("The closest phonetic match we found is: ")%>
+                         					<strong><%=Utilities.treatURLSpecialCharacters(formBean.getScientificName())%></strong>
+              				<%
+                        				} else {
+              				%>
+                         					<%=cm.cmsPhrase("The closest phonetic match we found is: ")%>
+                         					<strong><%=Utilities.treatURLSpecialCharacters(formBean.getScientificName())%></strong>
+              				<%
+                        				}
+                    				}
+                      			} else {
+            				%>
+                 					<%=cm.cmsPhrase("No match was found for ")%>
+                 					<strong>
+    						<%
+                					String searchCriteria = "";
+                					String name = "";
+                					Integer oper = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
+                					if(typeForm == NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue()){
+                          				if(searchVernacular){
+                    						searchCriteria = "name";
+                  						} else {
+                    						searchCriteria = "scientific name";
+                  						}
+                  						name = formBean.getScientificName();
+                					}
+                					if(typeForm == NameSearchCriteria.CRITERIA_VERNACULAR.intValue()){
+			                          	searchCriteria = "vernacular name";
+			                          	name = formBean.getVernacularName();
+                					}
+    						%>
+                  					<%=Utilities.prepareHumanString(searchCriteria, name, oper)%>
+                 					</strong>
+    						<%
+                					if(formBean.getLanguage() != null){
+    						%>
+                   						<%=cm.cmsPhrase("The closest phonetic match we found is: ")%>
+                   						<strong><%=formBean.getLanguage()%></strong>
+    						<%
+                					}
+              					}
+            				%>
                           </td>
                         </tr>
                       </table>

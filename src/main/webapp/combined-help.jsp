@@ -40,6 +40,7 @@
                   <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <a name="documentContent"></a>
+                <h1><%=cm.cmsPhrase("How to use EUNIS Database Combined Search")%></h1>
                 <div class="documentActions">
                   <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
                   <ul>

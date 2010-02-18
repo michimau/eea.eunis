@@ -303,6 +303,9 @@ fieldset.large legend
 	font-size: 85%;
 }
 
+#linkcollection+h2 {
+	padding-top: 1em;
+}
 #linkcollection div {
 	width: 23%;
 	padding: 3pt;

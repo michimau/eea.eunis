@@ -115,10 +115,10 @@
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
-                <%=cm.cmsPhrase("habitats_key_help_01")%>
+                <%=cm.cmsText("habitats_key_help_01")%>
                 <ul>
                   <li>
-                    <%=cm.cmsPhrase("no")%> ( <img alt="<%=cm.cms("other_question")%>" src="images/mini/navigate.gif" /> <%=cm.cmsPhrase("002 ) - Leading to question named '002'")%>
+                    <%=cm.cmsPhrase("No")%> ( <img alt="<%=cm.cms("other_question")%>" src="images/mini/navigate.gif" /> <%=cm.cmsPhrase("002 ) - Leading to question named '002'")%>
                     <%=cm.cmsTitle("other_question")%>
                   </li>
                   <li>

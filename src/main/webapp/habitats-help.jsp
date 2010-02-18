@@ -39,6 +39,7 @@
                   <jsp:param name="location" value="<%=btrail%>" />
                 </jsp:include>
                 <a name="documentContent"></a>
+                <h1><%=cm.cmsPhrase("EUNIS Habitat types search tools")%></h1>
                 <div class="documentActions">
                   <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
                   <ul>
@@ -55,13 +56,7 @@
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
-                <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td>
-                      <%=cm.cmsText("habitats_help_01")%>
-                    </td>
-                  </tr>
-                </table>
+                <%=cm.cmsText("habitats_help_01")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("habitats_help_title")%>
                 <%=cm.br()%>

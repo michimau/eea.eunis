@@ -39,6 +39,7 @@
                   <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <a name="documentContent"></a>
+                <h1><%=cm.cmsPhrase("GIS Tool Help")%></h1>
                 <div class="documentActions">
                   <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
                   <ul>

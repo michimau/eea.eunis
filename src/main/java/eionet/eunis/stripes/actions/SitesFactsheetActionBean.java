@@ -38,6 +38,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 	private static final String FOOTER = "\n</rdf:RDF>";
 	
 	private String idsite = "";
+	private String mapType = "";
+	private String zoom = "";
 	
 	private static final String[] tabs = {
             "sites_factsheet_tab_general_informations",
@@ -229,6 +231,22 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 	 */
 	public List<Pair<String, String>> getTabsWithData() {
 		return tabsWithData;
+	}
+
+	public String getMapType() {
+		return mapType;
+	}
+
+	public void setMapType(String mapType) {
+		this.mapType = mapType;
+	}
+
+	public String getZoom() {
+		return zoom;
+	}
+
+	public void setZoom(String zoom) {
+		this.zoom = zoom;
 	}
 
 }

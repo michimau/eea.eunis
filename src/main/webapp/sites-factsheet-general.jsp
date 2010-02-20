@@ -955,9 +955,9 @@
           mapType = request.getParameter("mapType");
         }
         String zoom="0";
-        if( request.getParameter("Zoom") != null )
+        if( request.getParameter("zoom") != null )
         {
-          zoom=request.getParameter("Zoom");
+          zoom=request.getParameter("zoom");
         }
         parameters += sitesCoordinates;
         parameters += "&amp;Color=HEEEEEE";
@@ -1012,10 +1012,10 @@
         <%=cm.cmsTitle("change_map_to_biogeographic_boundaries")%>
         <br />
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=<%=mapType%>&amp;Zoom=2#map" title="<%=cm.cms("zoom_in_map")%>"><%=cm.cmsPhrase("Zoom in" )%></a>
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=<%=mapType%>&amp;zoom=2#map" title="<%=cm.cms("zoom_in_map")%>"><%=cm.cmsPhrase("Zoom in" )%></a>
         <%=cm.cmsTitle("zoom_in_map")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=<%=mapType%>&amp;Zoom=0#map" title="<%=cm.cms("zoom_out_map")%>"><%=cm.cmsPhrase("Zoom out" )%></a>
+        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=<%=mapType%>&amp;zoom=0#map" title="<%=cm.cms("zoom_out_map")%>"><%=cm.cmsPhrase("Zoom out" )%></a>
         <%=cm.cmsTitle("zoom_out_map")%>
         <br />
       </td>

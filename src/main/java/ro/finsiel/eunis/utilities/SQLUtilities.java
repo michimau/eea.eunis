@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import ro.finsiel.eunis.dataimport.ColumnDTO;
@@ -106,6 +107,35 @@ public class SQLUtilities {
     SQL_LIMIT = SQLLimit;
   }
 
+  /**
+  * Executes parameterized sql query and return list of results.
+  * Note! only first column in query is returned.
+  * @param sql - sql string
+  * @param params - sql parameters
+  * @return
+  * @throws SQLException
+  */
+  @SuppressWarnings("unchecked")
+  public <T> List<T> executeQuery(String sql, List<Object> params) throws SQLException {
+	  Connection connection = null;
+	  PreparedStatement prepared = null;
+	  ResultSet result = null;
+	  try  {
+		  connection = getConnection();
+		  List<T> resultList = new LinkedList<T>();
+		  prepared = prepareStatement(sql, params, connection);
+		  result = prepared.executeQuery();
+		  while(result.next()) {
+			  resultList.add((T) result.getObject(1));
+		  }
+		  return resultList;
+	  } catch(Exception ex) {
+		  throw new RuntimeException(ex);
+	  } finally {
+		  closeAll(connection, prepared, result);
+	  }
+  }
+  
   /**
    * Execute an sql.
    *

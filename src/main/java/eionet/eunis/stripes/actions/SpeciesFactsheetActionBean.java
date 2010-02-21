@@ -23,6 +23,7 @@ import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 import eionet.eunis.dto.SpeciesFactsheetDto;
+import eionet.eunis.dto.SpeciesSynonymDto;
 import eionet.eunis.dto.VernacularNameDto;
 import eionet.eunis.util.Pair;
 
@@ -133,7 +134,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 		} else if (!StringUtils.isBlank(idSpecies)) {
 			tempIdSpecies = getContext().getSpeciesFactsheetDao().getIdSpeciesForScientificName(this.idSpecies);
 		}
-		return getContext().getSpeciesFactsheetDao().getCanonicalIdSpecies(tempIdSpecies);
+		return tempIdSpecies;
 	}
 	
 	public Resolution generateRdf() {
@@ -155,6 +156,22 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 		dto.setDwcScientificName(dto.getScientificName() + ' ' + dto.getAuthor());
 		List<VernacularNameWrapper> vernacularNames = SpeciesSearchUtility.findVernacularNames(
 						factsheet.getSpeciesObject().getIdNatureObject());
+		if (factsheet.getIdSpeciesLink() != null 
+					&& !factsheet.getIdSpeciesLink().equals(factsheet.getIdSpecies())) {
+			dto.setSynonymFor(new SpeciesSynonymDto(factsheet.getIdSpeciesLink()));
+		}
+		List<Integer> isSynonymFor = getContext()
+				.getSpeciesFactsheetDao()
+				.getSynonyms(factsheet.getIdSpecies());
+		List<SpeciesSynonymDto> speciesSynonym = new LinkedList<SpeciesSynonymDto>();
+		if (isSynonymFor != null && !isSynonymFor.isEmpty()) {
+			for(Integer idSpecies : isSynonymFor) {
+				speciesSynonym.add(new SpeciesSynonymDto(idSpecies));
+			}
+			dto.setHasSynonyms(speciesSynonym);
+		}
+		
+		
 		if (vernacularNames != null) {
 			List<VernacularNameDto> vernacularDtos = new LinkedList<VernacularNameDto>();
 			for (VernacularNameWrapper wrapper : vernacularNames) {

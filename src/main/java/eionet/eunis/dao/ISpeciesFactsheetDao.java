@@ -1,5 +1,7 @@
 package eionet.eunis.dao;
 
+import java.util.List;
+
 import eionet.eunis.stripes.actions.SpeciesFactsheetActionBean;
 
 /**
@@ -35,5 +37,13 @@ public interface ISpeciesFactsheetDao {
 	 * @return
 	 */
 	int getCanonicalIdSpecies(int idSpecies);
+	
+	
+	/**
+	 * Fetch all species ids who are synonyms to given id species.
+	 * @param idSpecies - species id.
+	 * @return - null, IFF nothing is found, list of integers otherwise.
+	 */
+	List<Integer> getSynonyms(int idSpecies);
 
 }

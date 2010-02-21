@@ -13,7 +13,7 @@ import org.simpleframework.xml.Root;
  *
  * <a href="mailto:aleks21@gmail.com">contact<a>
  */
-@Root(strict = false, name = "eunis:Species")
+@Root(strict = false, name = "species")
 public class SpeciesFactsheetDto implements Serializable{
 	/**
 	 * serial.
@@ -23,13 +23,13 @@ public class SpeciesFactsheetDto implements Serializable{
 	public static final String HEADER = "<rdf:RDF " +
 			"xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n" +
 			"xmlns:dwc=\"http://rs.tdwg.org/dwc/terms/\" \n" +
-			"xmlns:eunis=\"http://eunis.eea.europa.eu/rdf/species-schema.rdf#\">\n";
+			"xmlns =\"http://eunis.eea.europa.eu/rdf/species-schema.rdf#\">\n";
 			
 
 	public static final String FOOTER = "\n</rdf:RDF>";
 
 	
-	@Element(required = false, name = "eunis:binomialName")
+	@Element(required = false, name = "binomialName")
 	private String scientificName;
 	@Element(required = false, name = "dwc:scientificNameAuthorship")
 	private String author;
@@ -39,6 +39,10 @@ public class SpeciesFactsheetDto implements Serializable{
 	private String dwcScientificName;
 	@ElementList(required = false, type = VernacularNameDto.class, inline = true)
 	private List<VernacularNameDto> vernacularNames;
+	@Element(required = false, name = "synonymFor")
+	private SpeciesSynonymDto synonymFor;
+	@ElementList(required = false, inline = true, entry = "hasSynonym")
+	private List<SpeciesSynonymDto> hasSynonyms;
 	
 	
 	public String getScientificName() {
@@ -70,6 +74,18 @@ public class SpeciesFactsheetDto implements Serializable{
 	}
 	public void setDwcScientificName(String dwcScientificName) {
 		this.dwcScientificName = dwcScientificName;
+	}
+	public SpeciesSynonymDto getSynonymFor() {
+		return synonymFor;
+	}
+	public void setSynonymFor(SpeciesSynonymDto synonymFor) {
+		this.synonymFor = synonymFor;
+	}
+	public List<SpeciesSynonymDto> getHasSynonyms() {
+		return hasSynonyms;
+	}
+	public void setHasSynonyms(List<SpeciesSynonymDto> hasSynonyms) {
+		this.hasSynonyms = hasSynonyms;
 	}
 	
 	

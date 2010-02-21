@@ -14,7 +14,7 @@ public class SpeciesRdfExportTest extends AbstractMockRoundtripTest {
 	
 	public void testSimple() throws Exception {
 		roundtrip.getRequest().addHeader("accept", "application/rdf+xml");
-		roundtrip.addParameter("idSpecies", "60952");
+		roundtrip.addParameter("idSpecies", "9968");
 		roundtrip.addParameter("tab", "");
 		roundtrip.execute();
 		System.out.println(roundtrip.getResponse().getOutputString());

@@ -198,9 +198,9 @@
       {
         String scientificNameURL = scientificName.replace(' ','+');
 %>
-      <div>
+	<div>
         <a title="<%=cm.cmsPhrase("Search species on Redlist site")%>" href="http://www.redlist.org/apps/redlist/search/external?text=<%=scientificNameURL%>&amp;mode="><%=cm.cmsPhrase("Redlist search")%></a>
-      </div>
+	</div>
 <%
       }
       if( "fishes".equalsIgnoreCase( factsheet.getSpeciesGroup() ) )
@@ -208,22 +208,19 @@
         //genusName = (scientificName.indexOf(" ")>=0? scientificName.substring(0,scientificName.indexOf(" ")) : scientificName);
         String speciesName = (scientificName.trim().indexOf(" ")>=0? scientificName.trim().substring(scientificName.indexOf(" ") + 1) : scientificName);
 %>
-      <div>
-        <a title="<%=cm.cmsPhrase("Search species on Fishbase")%>" href="http://www.fishbase.org/Summary/SpeciesSummary.cfm?genusname=<%=genusName%>&amp;speciesname=<%=Utilities.treatURLSpecialCharacters(speciesName)%>"><%=cm.cmsPhrase("Fishbase search")%></a>
-      </div>
+	<div>
+        <a title="<%=cm.cmsPhrase("Search species on Fishbase")%>" href="http://www.fishbase.org/Summary/SpeciesSummary.php?genusname=<%=genusName%>&amp;speciesname=<%=Utilities.treatURLSpecialCharacters(speciesName)%>"><%=cm.cmsPhrase("Fishbase search")%></a>
+	</div>
 <%
       }
 %>
 
-      <div>
+	<div>
         <a title="<%=cm.cmsPhrase("Search species on SCIRUS")%>" href="http://www.scirus.com/srsapp/search?q=%22<%=Utilities.treatURLSpecialCharacters(scientificName)%>%22&amp;ds=web&amp;g=s&amp;t=all"><%=cm.cmsPhrase("SCIRUS")%></a>
-      </div>
-      <div>
+	</div>
+	<div>
         <a title="<%=cm.cmsPhrase("Search species on Biology Browser")%>" href="http://www.biologybrowser.org/search/apachesolr_search/<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("Biology Browser")%></a>
-      </div>
-      <div>
-        <a title="<%=cm.cmsPhrase("Search species on NCBI Taxonomy browser")%>" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?doptcmdl=ExternalLink&amp;cmd=Search&amp;db=taxonomy&amp;term=<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("NCBI Taxonomy search")%></a>
-      </div>
+	</div>
 <%
 if(kingdomname.equalsIgnoreCase("Animals"))
 {
@@ -236,9 +233,9 @@ if(kingdomname.equalsIgnoreCase("Animals"))
         genus=sn.substring(0, pos).trim();
         spname=sn.substring(pos+1).trim();
 %>
-      <div>
-        <a title="<%=cm.cmsPhrase("Search species on Fauna Europaea")%>" href="http://www.faunaeur.org/index.php?show_what=search%20results&amp;genus=<%=genus%>&amp;species=<%=spname%>"><%=cm.cmsPhrase("Fauna Europaea")%></a>
-    </div>
+	<div>
+		<a title="<%=cm.cmsPhrase("Search species on Fauna Europaea")%>" href="http://www.faunaeur.org/index.php?show_what=search%20results&amp;genus=<%=genus%>&amp;species=<%=spname%>"><%=cm.cmsPhrase("Fauna Europaea")%></a>
+	</div>
 <%
       }
 }
@@ -271,15 +268,19 @@ if(kingdomname.equalsIgnoreCase("Animals"))
         		<a href="http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=<%=ncbi%>&amp;lvl=0"><%=cm.cmsPhrase("NCBI:")%><%=ncbi%></a>
 		</div>
         	<%
-    		}
-        	%>
+    		} else {
+		%>
+		<div>
+			<a title="<%=cm.cmsPhrase("Search species on NCBI Taxonomy browser")%>" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?doptcmdl=ExternalLink&amp;cmd=Search&amp;db=taxonomy&amp;term=<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("NCBI Taxonomy search")%></a>
+		</div>
     		<%
+		}
     		String bbcLink = factsheet.getLink(specie.getIdNatureObject(),Constants.BBC_PAGE);
 			if(bbcLink != null && bbcLink.length() > 0){
     		%>
-      <div>
+		<div>
         		<a href="<%=bbcLink%>"><%=cm.cmsPhrase("BBC page")%></a>
-      	</div>
+		</div>
         	<%
     		}
         	%>
@@ -287,9 +288,9 @@ if(kingdomname.equalsIgnoreCase("Animals"))
     		String wikiLink = factsheet.getLink(specie.getIdNatureObject(),Constants.WIKIPEDIA_ARTICLE);
 			if(wikiLink != null && wikiLink.length() > 0){
     		%>
-      <div>
+		<div>
         		<a href="<%=wikiLink%>"><%=cm.cmsPhrase("Wikipedia article")%></a>
-     	</div>
+		</div>
         	<%
     		}
         	%>
@@ -297,9 +298,9 @@ if(kingdomname.equalsIgnoreCase("Animals"))
     		String wikispeciesLink = factsheet.getLink(specie.getIdNatureObject(),Constants.WIKISPECIES_ARTICLE);
 			if(wikispeciesLink != null && wikispeciesLink.length() > 0){
     		%>
-      <div>
+		<div>
         		<a href="<%=wikispeciesLink%>"><%=cm.cmsPhrase("Wikispecies article")%></a>
-      	</div>
+		</div>
         	<%
     		}
         	%>
@@ -307,9 +308,9 @@ if(kingdomname.equalsIgnoreCase("Animals"))
     		String bugGuideLink = factsheet.getLink(specie.getIdNatureObject(),Constants.BUG_GUIDE);
 			if(bugGuideLink != null && bugGuideLink.length() > 0){
     		%>
-      	<div>
+		<div>
         		<a href="<%=bugGuideLink%>"><%=cm.cmsPhrase("Bug Guide page")%></a>
-      	</div>
+		</div>
         	<%
     		}
         	%>

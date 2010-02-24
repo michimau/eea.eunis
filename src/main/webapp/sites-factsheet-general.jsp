@@ -987,35 +987,35 @@
         </strong>
         <br />
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Standard#map" title="<%=cm.cms("change_map_to_standard")%>"><%=cm.cmsPhrase("Standard (Europe)" )%></a>
+        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=Standard#map" title="<%=cm.cms("change_map_to_standard")%>"><%=cm.cmsPhrase("Standard (Europe)" )%></a>
         <%=cm.cmsTitle("change_map_to_standard")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Standard_B#map" title="<%=cm.cms("change_map_to_standard_boundaries")%>"><%=cm.cmsPhrase("Standard (Europe) - Boundaries" )%></a>
+        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=Standard_B#map" title="<%=cm.cms("change_map_to_standard_boundaries")%>"><%=cm.cmsPhrase("Standard (Europe) - Boundaries" )%></a>
         <%=cm.cmsTitle("change_map_to_standard_boundaries")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Europe#map" title="<%=cm.cms("change_map_to_europe")%>"><%=cm.cmsPhrase("Europe" )%></a>
+        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=Europe#map" title="<%=cm.cms("change_map_to_europe")%>"><%=cm.cmsPhrase("Europe" )%></a>
         <%=cm.cmsTitle("change_map_to_europe")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Europe_B#map" title="<%=cm.cms("change_map_to_europe_boundaries")%>"><%=cm.cmsPhrase("Europe - Boundaries" )%></a>
+        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=Europe_B#map" title="<%=cm.cms("change_map_to_europe_boundaries")%>"><%=cm.cmsPhrase("Europe - Boundaries" )%></a>
         <%=cm.cmsTitle("change_map_to_europe_boundaries")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=World#map" title="<%=cm.cms("change_map_to_world")%>"><%=cm.cmsPhrase("World" )%></a>
+        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=World#map" title="<%=cm.cms("change_map_to_world")%>"><%=cm.cmsPhrase("World" )%></a>
         <%=cm.cmsTitle("change_map_to_world")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=World_B#map" title="<%=cm.cms("change_map_to_world_boundaries")%>"><%=cm.cmsPhrase("World - Boundaries" )%></a>
+        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=World_B#map" title="<%=cm.cms("change_map_to_world_boundaries")%>"><%=cm.cmsPhrase("World - Boundaries" )%></a>
         <%=cm.cmsTitle("change_map_to_world_boundaries")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Biogeographic#map" title="<%=cm.cms("change_map_to_biogeographic")%>"><%=cm.cmsPhrase("Biogeographic" )%></a>
+        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=Biogeographic#map" title="<%=cm.cms("change_map_to_biogeographic")%>"><%=cm.cmsPhrase("Biogeographic" )%></a>
         <%=cm.cmsTitle("change_map_to_biogeographic")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=Biogeographic_B#map" title="<%=cm.cms("change_map_to_biogeographic_boundaries")%>"><%=cm.cmsPhrase("Biogeographic - Boundaries" )%></a>
+        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=Biogeographic_B#map" title="<%=cm.cms("change_map_to_biogeographic_boundaries")%>"><%=cm.cmsPhrase("Biogeographic - Boundaries" )%></a>
         <%=cm.cmsTitle("change_map_to_biogeographic_boundaries")%>
         <br />
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=<%=mapType%>&amp;zoom=2#map" title="<%=cm.cms("zoom_in_map")%>"><%=cm.cmsPhrase("Zoom in" )%></a>
+        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=<%=mapType%>&amp;zoom=2#map" title="<%=cm.cms("zoom_in_map")%>"><%=cm.cmsPhrase("Zoom in" )%></a>
         <%=cm.cmsTitle("zoom_in_map")%>
         <br />
-        <a href="sites-factsheet.jsp?tab=<%=tab%>&amp;idsite=<%=siteid%>&amp;mapType=<%=mapType%>&amp;zoom=0#map" title="<%=cm.cms("zoom_out_map")%>"><%=cm.cmsPhrase("Zoom out" )%></a>
+        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=<%=mapType%>&amp;zoom=0#map" title="<%=cm.cms("zoom_out_map")%>"><%=cm.cmsPhrase("Zoom out" )%></a>
         <%=cm.cmsTitle("zoom_out_map")%>
         <br />
       </td>

@@ -160,10 +160,11 @@
 <%
     }
 %>
-  <table summary="<%=cm.cms("national_threat_status")%>" class="listing" width="90%">
-    <col style="width : 220px;"/>
-    <col style="width : 120px;"/>
-    <col style="width : 100px;"/>
+  <table summary="<%=cm.cms("national_threat_status")%>" class="listing fullwidth">
+    <col style="width: 20%"/>
+    <col style="width: 20%"/>
+    <col style="width: 20%"/>
+    <col style="width: 40%"/>
     <col />
     <thead>
       <tr>
@@ -236,6 +237,10 @@
     <%=cm.cmsPhrase("International Threat Status")%>
   </h2>
   <table summary="<%=cm.cms("international_threat_status")%>" class="listing fullwidth">
+    <col style="width: 20%"/>
+    <col style="width: 20%"/>
+    <col style="width: 20%"/>
+    <col style="width: 40%"/>
     <thead>
       <tr>
         <th scope="col">

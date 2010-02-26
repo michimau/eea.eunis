@@ -112,9 +112,9 @@
     ResultSet rs = ps.executeQuery(sql);
 %>
   <h2>
-    <%=cm.getText( "references" )%>
+    <%=cm.cmsPhrase( "References" )%>
   </h2>
-  <table summary="<%=cm.cms("species_factsheet-references_09_Sum")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("species_factsheet-references_09_Sum")%>" class="listing fullwidth">
     <col style="width: 30%"/>
     <col style="width: 25%"/>
     <col style="width: 25%"/>
@@ -123,15 +123,15 @@
     <col style="width: 15%"/>
     <thead>
       <tr>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Title")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Author")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Editor")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
@@ -142,7 +142,7 @@
 <%--        <td width="10%" align="center">--%>
 <%--          <%=cm.cmsPhrase("Published")%>--%>
 <%--        </td>--%>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Source")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
@@ -161,7 +161,7 @@
     // Display results.
     while(rs.next())
     {
-      String cssClass = i++ % 2 == 0 ? "" : " class=\"zebraeven\"";
+      String cssClass = i++ % 2 == 0 ? "zebraodd" : "zebraeven";
       if(rs.getString(1) == null) source="&nbsp;"; else source=Utilities.treatURLSpecialCharacters(ro.finsiel.eunis.search.Utilities.FormatDatabaseFieldName(rs.getString(1)));
       if(rs.getString(2) == null) author="&nbsp;"; else author=Utilities.treatURLSpecialCharacters(rs.getString(2));
       if(rs.getString(3) == null) editor="&nbsp;"; else editor=Utilities.treatURLSpecialCharacters(rs.getString(3));
@@ -175,7 +175,7 @@
       //if(rs.getString(6) == null) publisher="&nbsp;"; else publisher=rs.getString(6);
 
 %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
           <a href="documents/<%=rs.getString(7)%>"><%=title%></a>
         </td>
@@ -185,7 +185,7 @@
         <td>
           <%=editor%>
         </td>
-        <td style="text-align:right">
+        <td class="number">
           <%=date%>
         </td>
 <%--        <td>--%>
@@ -213,5 +213,4 @@
 %>
 <%=cm.br()%>
 <%=cm.cmsMsg("species_factsheet-references_09_Sum")%>
-<br />
 <br />

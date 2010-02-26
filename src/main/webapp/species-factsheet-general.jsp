@@ -49,7 +49,7 @@
   String authorDate = SpeciesFactsheet.getBookAuthorDate(factsheet.getTaxcodeObject().IdDcTaxcode());
   String kingdomname="";
 %>
-  <table summary="layout" class="datatable" width="90%">
+  <table summary="layout" class="datatable fullwidth">
     <thead>
       <tr>
         <th colspan="2">
@@ -318,7 +318,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
   <h2 style="clear: left">
     <%=cm.cmsPhrase("Source")%>
   </h2>
-  <table summary="layout" class="datatable" width="90%">
+  <table summary="layout" class="datatable fullwidth">
     <tbody>
 <%
     PublicationWrapper book = factsheet.getSpeciesBook();
@@ -397,7 +397,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
   <h2>
     <%=cm.cmsPhrase("Synonyms")%>
   </h2>
-  <table summary="<%=cm.cms("species_factsheet_10_Sum")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("species_factsheet_10_Sum")%>" class="listing fullwidth">
     <thead>
       <tr>
         <th width="40%" style="text-align:left;">
@@ -457,7 +457,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
   <h2>
     <%=cm.cmsPhrase("Valid subspecies in Europe")%>
   </h2>
-  <table summary="<%=cm.cms("species_factsheet_11_Sum")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("species_factsheet_11_Sum")%>" class="listing fullwidth">
     <col style="width:40%"/>
     <col style="width:60%"/>
     <thead>

@@ -49,7 +49,7 @@
   <h2>
     <%=cm.cmsPhrase("Relationships")%>
   </h2>
-  <table summary="<%=cm.cms("sites_factsheet_123")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("sites_factsheet_123")%>" class="listing fullwidth">
     <thead>
       <tr>
         <th style="text-align: left;">
@@ -147,7 +147,7 @@
   <h2>
     <%=cm.cmsPhrase("Relation with other Natura 2000 sites")%>
   </h2>
-  <table summary="<%=cm.cms("sites_factsheet_related_natura2000")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("sites_factsheet_related_natura2000")%>" class="listing fullwidth">
     <thead>
       <tr>
         <th style="text-align: left;">
@@ -197,7 +197,7 @@
   <h2>
     <%=cm.cmsPhrase("Relation with Corine biotope sites")%>
   </h2>
-  <table summary="<%=cm.cms("sites_factsheet_related_corinesites")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("sites_factsheet_related_corinesites")%>" class="listing fullwidth">
     <thead>
       <tr>
         <th style="text-align: left;">

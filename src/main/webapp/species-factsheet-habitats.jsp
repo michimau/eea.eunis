@@ -31,7 +31,7 @@
   <h2>
     <%=cm.cmsPhrase("Habitat types populated by species")%>
   </h2>
-  <table summary="<%=cm.cms("open_the_statistical_data_for")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("open_the_statistical_data_for")%>" class="listing fullwidth">
     <thead>
       <tr>
         <th style="text-align: left;">

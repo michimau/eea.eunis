@@ -104,7 +104,7 @@
 <%
   }
 %>
-  <table summary="<%=cm.cms("table_of_results")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("table_of_results")%>" class="listing fullwidth">
     <thead>
       <tr>
         <th>

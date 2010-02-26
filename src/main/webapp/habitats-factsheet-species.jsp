@@ -31,25 +31,25 @@
   <h2>
     <%=cm.cmsPhrase("Species characteristics for habitat type")%>
   </h2>
-  <table summary="<%=cm.cms("habitat_species")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("habitat_species")%>" class="listing fullwidth">
     <thead>
       <tr>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Species scientific name")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Biogeographic region")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Abundance")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Frequencies")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Faithfulness")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Comment")%>
         </th>
       </tr>

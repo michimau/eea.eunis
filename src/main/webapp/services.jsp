@@ -81,7 +81,7 @@
                   </ul>
                 </div>
                 <br />
-                <table width="90%" summary="layout" class="listing" id="services">
+                <table class="listing fullwidth" id="services">
 <%--
                   <tr>
                     <th align="center">

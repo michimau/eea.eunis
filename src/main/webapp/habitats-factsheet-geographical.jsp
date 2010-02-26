@@ -41,7 +41,7 @@
   <h2>
     <%=cm.cmsPhrase("Geographical distribution")%>
   </h2>
-  <table summary="layout" width="90%" border="0" cellspacing="0" cellpadding="0">
+  <table class="fullwidth" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td>
         <jsp:include page="habitats-factsheet-geo.jsp">
@@ -51,19 +51,19 @@
       </td>
     </tr>
   </table>
-  <table summary="<%=cm.cms("habitat_distribution")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("habitat_distribution")%>" class="listing fullwidth">
     <thead>
       <tr>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Country")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Biogeographic region")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Probability")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Comment")%>
         </th>
       </tr>

@@ -311,3 +311,10 @@ fieldset.large legend
 	padding: 3pt;
 	float:left;
 }
+
+table.fullwidth {
+	width: 100%;
+}
+.listing thead th {
+	padding: 0.2em;
+}

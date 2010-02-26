@@ -27,7 +27,7 @@
   factsheet = new HabitatsFactsheet(idHabitat);
   WebContentManagement cm = SessionManager.getWebContent();
 %>
-  <table summary="layout" width="90%" border="0" cellspacing="1" cellpadding="0" style="border-collapse: collapse;">
+  <table class="fullwidth" border="0" cellspacing="1" cellpadding="0" style="border-collapse: collapse;">
     <tbody>
       <tr>
         <td width="15%">
@@ -81,7 +81,7 @@
   </table>
   <br />
   <%-- Habitat code and Level for EUNIS habitats, original code for NATURA --%>
-  <table summary="layout" width="90%" border="0" cellspacing="1" cellpadding="0">
+  <table class="fullwidth" border="0" cellspacing="1" cellpadding="0">
     <tbody>
 <%
   if (factsheet.isEunis())
@@ -213,13 +213,13 @@
     <h2>
       <%=cm.cmsPhrase("Name in other languages")%>
     </h2>
-    <table summary="<%=cm.cms("habitats_name_in_other_languages")%>" class="listing" width="90%">
+    <table summary="<%=cm.cms("habitats_name_in_other_languages")%>" class="listing fullwidth">
       <thead>
         <tr>
-          <th style="text-align: left;">
+          <th scope="col">
             <%=cm.cmsPhrase("Language")%>
           </th>
-          <th style="text-align: left;">
+          <th scope="col">
             <%=cm.cmsPhrase("Name")%>
           </th>
         </tr>
@@ -260,19 +260,19 @@
     <h2>
       <%=cm.cmsPhrase("Relationships with other classifications")%>
     </h2>
-    <table summary="<%=cm.cms("habitats_factsheet_22")%>" class="listing" width="90%">
+    <table summary="<%=cm.cms("habitats_factsheet_22")%>" class="listing fullwidth">
       <thead>
       <tr>
-        <th width="30%" style="text-align: left;">
+        <th width="30%" scope="col">
           <%=cm.cmsPhrase("Classification")%>
         </th>
-        <th width="15%" style="text-align: left;">
+        <th width="15%" scope="col">
           <%=cm.cmsPhrase("Code")%>
         </th>
-        <th width="40%" style="text-align: left;">
+        <th width="40%" scope="col">
           <%=cm.cmsPhrase("Title")%>
         </th>
-        <th width="15%" style="text-align: left;">
+        <th width="15%" scope="col">
           <%=cm.cmsPhrase("relation_type")%>
         </th>
       </tr>

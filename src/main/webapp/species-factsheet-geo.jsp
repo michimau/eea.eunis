@@ -105,22 +105,22 @@
 %>
   </table>
   <br />
-  <table summary="<%=cm.cms("geographical_distribution")%>" class="listing" width="100%">
+  <table summary="<%=cm.cms("geographical_distribution")%>" class="listing fullwidth">
     <thead>
       <tr>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Country/Area")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Biogeographic region")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Status")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
          <%=cm.cmsPhrase("Reference")%>
          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>

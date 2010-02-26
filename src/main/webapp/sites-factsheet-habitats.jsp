@@ -71,7 +71,7 @@
   <h3>
     <%=cm.cmsPhrase("Habitats listed in Directive")%>
   </h3>
-  <table summary="<%=cm.cms("sites_factsheet_114")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("sites_factsheet_114")%>" class="listing fullwidth">
     <thead>
       <tr>
         <th style="text-align: left;">
@@ -248,16 +248,16 @@
   <h3>
     <%=cm.cmsPhrase("Other habitat types mentioned in site")%>
   </h3>
-  <table summary="<%=cm.cms("sites_factsheet_166")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("sites_factsheet_166")%>" class="listing fullwidth">
     <thead>
       <tr>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Habitat type code")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Habitat type english name")%>
         </th>
-        <th style="text-align : right;">
+        <th scope="col">
           <%=cm.cmsPhrase("Cover(%)")%>
         </th>
       </tr>
@@ -279,7 +279,7 @@
           <%String val = habitat.getHabitatDescription();%>
           <%=(null != val) ? Utilities.formatString(val) : ""%>&nbsp;
         </td>
-        <td align="right">
+        <td class="number">
           <%attribute = factsheet.findSiteAttributes("COVER", habitat.getIdReportAttributes());%>
           <%=(null != attribute) ? Utilities.formatDecimal(attribute.getValue(), 2) : "&nbsp;"%>
         </td>
@@ -329,7 +329,7 @@
   <h3>
     <%=cm.cmsPhrase("Ecological information: Habitats within site")%>
   </h3>
-  <table summary="<%=cm.cms("ecological_information_habitats_within_site")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("ecological_information_habitats_within_site")%>" class="listing fullwidth">
     <thead>
       <tr>
         <th style="text-align: left;">
@@ -394,11 +394,10 @@
         if (sitesSpecificHabitats.size() > 0)
         {
 %>
-  <br />
   <h3>
     <%=cm.cmsPhrase("Habitat types not in EUNIS")%>
   </h3>
-  <table summary="<%=cm.cms("habitat_type_not_eunis")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("habitat_type_not_eunis")%>" class="listing fullwidth">
     <thead>
       <tr>
         <th style="text-align: left;">

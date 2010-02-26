@@ -149,7 +149,7 @@
             if ( tab == 0 )
             {
           %>
-              <table summary="<%=cm.cms("easy_searches")%>" class="datatable" width="90%">
+              <table summary="<%=cm.cms("easy_searches")%>" class="datatable fullwidth">
                 <caption>
                   <%=cm.cmsPhrase("A set of predefined &nbsp;functions to search the database") %>
                 </caption>
@@ -304,7 +304,7 @@
             if ( tab == 1 )
             {
           %>
-              <table summary="<%=cm.cms("advanced_searches")%>" class="datatable" width="90%">
+              <table summary="<%=cm.cms("advanced_searches")%>" class="datatable fullwidth">
                 <caption>
                   <%=cm.cmsPhrase("A flexible search tool to build your own query") %>
                 </caption>
@@ -350,7 +350,7 @@
             if ( tab == 2 )
             {
           %>
-              <table summary="<%=cm.cms("statistical_data")%>" class="datatable" width="90%">
+              <table summary="<%=cm.cms("statistical_data")%>" class="datatable fullwidth">
                 <caption>
                   <%=cm.cmsPhrase( "A search tool to build aggregated data" ) %>
                 </caption>
@@ -388,7 +388,7 @@
             if ( tab == 3 )
             {
           %>
-              <table summary="<%=cm.cms("links_and_downloads")%>" class="datatable" width="90%">
+              <table summary="<%=cm.cms("links_and_downloads")%>" class="datatable fullwidth">
                 <caption>
                   <%=cm.cmsPhrase("Species links and downloads")%>
                 </caption>
@@ -431,7 +431,7 @@
             if ( tab == 4 )
             {
           %>
-                <table summary="<%=cm.cms("help")%>" class="datatable" width="90%">
+                <table summary="<%=cm.cms("help")%>" class="datatable fullwidth">
                   <caption>
                     <%=cm.cmsPhrase("General information on EUNIS application") %>
                   </caption>

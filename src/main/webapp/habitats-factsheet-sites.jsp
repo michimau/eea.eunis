@@ -96,44 +96,38 @@
 <%
       }
 %>
-  <br />
-  <table width="100%" border="0">
-  	<tr>
-  		<td>
-  			<h2>
-			    <%=cm.cmsPhrase("Sites for which this habitat type is recorded")%>
-   		    </h2>
-  		</td>
-  		<td align="right" valign="top">
-			<a href="habitats-factsheet-sites-kml.jsp?idHabitat=<%=idHabitat%>" title="<%=cm.cms( "header_download_kml_title" )%>"><%=cm.cmsPhrase( "See sites in Google Earth (KML file, pre-requires Google Earth installed) " )%></a>
-      		<%=cm.cmsTitle( "header_download_kml_title" )%>
-		</td>
-  	</tr>
-  </table>
-  <table summary="<%=cm.cms("habitat_sites")%>" class="listing" width="90%">
-    <thead>
+<div class="dropshadow figure-right" style="float:right; width: 20em">
+  <div class="shadowed">
+	<a href="habitats-factsheet-sites-kml.jsp?idHabitat=<%=idHabitat%>"><%=cm.cmsPhrase( "See sites in Google Earth" )%></a> <%=cm.cmsPhrase( "(KML file, pre-requires Google Earth installed)" )%>
+  </div>
+</div>
+
+<h2>
+    <%=cm.cmsPhrase("Sites for which this habitat type is recorded")%>
+</h2>
+
     <%
     if (sitesSubList != null && sitesSubList.size() > 0){
     %>
-      <tr>
-     	<td colspan="4" align="center" height="25">
-     		<b>Found <%=count%> records. Showing records <%=myBase%> - <%=last%></b>
-     	</td>
-      </tr>
+<div class="advice-msg" style="text-align:center">
+     		Found <%=count%> records. Showing records <%=myBase%> - <%=last%>
+</div>
     <%
 	}
     %>
+  <table summary="<%=cm.cms("habitat_sites")%>" class="listing fullwidth">
+    <thead>
       <tr>
-        <th width="15%" style="text-align: left;">
+        <th width="15%" scope="col">
           <%=cm.cmsPhrase("Site code")%>
         </th>
-        <th width="15%" style="text-align: left;">
+        <th width="15%" scope="col">
           <%=cm.cmsPhrase("Source data set")%>
         </th>
-        <th width="20%" style="text-align: left;">
+        <th width="20%" scope="col">
           <%=cm.cmsPhrase("Country")%>
         </th>
-        <th width="50%" style="text-align: left;">
+        <th width="50%" scope="col">
           <%=cm.cmsPhrase("Site name")%>
         </th>
       </tr>
@@ -166,9 +160,13 @@
     </tr>
 <%
       }
+%>
+    </tbody>
+  </table>
+<%
       if(count > limit){
 	                		%>
-			<table summary="layout" width="90%" cellspacing="1" cellpadding="1" style="border-collapse:collapse">
+			<table class="fullwidth" cellspacing="1" cellpadding="1" style="border-collapse:collapse">
 				<tr>
 					<%
 					if(mypage > 1){
@@ -204,8 +202,6 @@
 		<%
 	}
 %>
-    </tbody>
-  </table>
   <%=cm.cmsMsg("habitat_sites")%>
 <%
       if(null != sitesForSubtypes && !sitesForSubtypes.isEmpty())
@@ -215,7 +211,7 @@
   <h2>
     <%=cm.cmsPhrase("Sites for habitat subtypes")%>
   </h2>
-  <table summary="<%=cm.cms("habitat_related_sites")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("habitat_related_sites")%>" class="listing fullwidth">
     <thead>
       <tr>
         <th width="15%" style="text-align: left;">

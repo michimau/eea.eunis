@@ -45,7 +45,7 @@
         <a class="navItemLevel1" href="<%=request.getContextPath()%>/species.jsp" accesskey="s" title="<%=cm.cms("generic_header-static_species_title")%>"><%=cm.cmsPhrase("Species")%></a><%=cm.cmsTitle("generic_header-static_species_title")%>
       </li>
       <li class="navTreeItem visualNoMarker">
-        <a class="navItemLevel1" href="<%=request.getContextPath()%>/habitats.jsp" accesskey="h" title="<%=cm.cms("generic_header-static_habitats_title")%>"><%=cm.cmsPhrase("Habitats")%></a><%=cm.cmsTitle("generic_header-static_habitats_title")%>
+        <a class="navItemLevel1" href="<%=request.getContextPath()%>/habitats.jsp" accesskey="h" title="<%=cm.cms("generic_header-static_habitats_title")%>"><%=cm.cmsPhrase("Habitat types")%></a><%=cm.cmsTitle("generic_header-static_habitats_title")%>
       </li>
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" href="<%=request.getContextPath()%>/sites.jsp" accesskey="t" title="<%=cm.cms("generic_header-static_sites_title")%>"><%=cm.cmsPhrase("Sites")%></a><%=cm.cmsTitle("generic_header-static_sites_title")%>

@@ -110,7 +110,7 @@
 
                       
                 %>
-                    <table width="90%" class="datatable">
+                    <table class="datatable fullwidth">
                       <col style="width:50%"/>
                       <col style="width:50%"/>
                       <tr>

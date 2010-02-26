@@ -55,19 +55,19 @@
     <col style="width: 40em"/>
     <thead>
       <tr>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Site code")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Source data set")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Country")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Site name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
@@ -149,22 +149,26 @@
 <%
     }
 %>
-  <table summary="<%=cm.cms("species_factsheet_sites_02_Sum")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("species_factsheet_sites_02_Sum")%>" class="listing fullwidth">
+    <col style="width: 15%"/>
+    <col style="width: 15%"/>
+    <col style="width: 20%"/>
+    <col style="width: 50%"/>
     <thead>
       <tr>
-        <th width="15%" style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Site code")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="15%" style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Source data set")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="20%" style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Country")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th width="50%" style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Site name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
@@ -220,5 +224,4 @@
 <%=cm.cmsMsg("species_factsheet_sites_02_Sum")%>
 <%=cm.br()%>
 
-<br />
 <br />

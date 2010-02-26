@@ -191,7 +191,7 @@
                 <h2>
                   <%=cm.cmsPhrase( "General information" )%>
                 </h2>
-                <table class="datatable" width="90%">
+                <table class="datatable fullwidth">
                   <%--Code--%>
                   <tr>
                     <td width="30%">
@@ -334,7 +334,7 @@
                 <h2>
                   <%=cm.cmsPhrase( "National information" )%>
                 </h2>
-                <table summary="layout" class="datatable" width="90%">
+                <table summary="layout" class="datatable fullwidth">
                   <tr>
                     <td width="30%">
                       <%=cm.cmsPhrase( "National Law" )%>
@@ -383,7 +383,7 @@
                 <h2>
                   <%=cm.cmsPhrase( "References" )%>
                 </h2>
-                <table summary="layout" class="datatable" width="90%">
+                <table summary="layout" class="datatable fullwidth">
                   <tr>
                     <td width="30%">
                       <%=cm.cmsPhrase( "Source" )%>
@@ -478,7 +478,7 @@
                 <h2>
                   <%=cm.cmsPhrase("Designation references")%>
                 </h2>
-                <table summary="layout" class="datatable" width="90%">
+                <table summary="layout" class="datatable fullwidth">
                   <tr>
                     <td width="30%">
                       <%=cm.cmsPhrase("Author:")%>
@@ -563,7 +563,7 @@
 <%
               }
 %>
-                <table summary="<%=cm.cms("sites")%>" class="listing" width="90%">
+                <table summary="<%=cm.cms("sites")%>" class="listing fullwidth">
                   <thead>
                     <tr>
                       <th scope="col">

@@ -30,7 +30,7 @@
   <h2>
     <%=cm.cmsPhrase("Site identification")%>
   </h2>
-  <table summary="layout" class="datatable" width="90%">
+  <table summary="layout" class="datatable fullwidth">
     <tbody>
       <tr>
         <td width="50%">
@@ -258,19 +258,19 @@
   <h2>
     <%=cm.cmsPhrase("Designation information")%>
   </h2>
-  <table summary="<%=cm.cms("designation_information")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("designation_information")%>" class="listing fullwidth">
     <thead>
       <tr>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Source data set")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Designation code")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Designation name (Original)")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Designation name (English)")%>
         </th>
 <%
@@ -436,7 +436,7 @@
   <%
       }
   %>
-  <table summary="layout" class="datatable" width="90%">
+  <table summary="layout" class="datatable fullwidth">
     <tr class="zebraeven">
       <%-- Project ID --%>
       <td width="15%">
@@ -494,7 +494,7 @@
   <h2 style="clear:left">
     <%=cm.cmsPhrase("Location information")%>
   </h2>
-  <table class="datatable" width="90%">
+  <table class="datatable fullwidth">
     <tr>
       <td>
         <%=cm.cmsPhrase("Country")%>

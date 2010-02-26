@@ -123,7 +123,7 @@
                      String nGeographicalDistribution = (String)((TableColumns) listOfStatisticsForAll.get(0)).getColumnsValues().get(9);
                      String nGridDistribution = (String)((TableColumns) listOfStatisticsForAll.get(0)).getColumnsValues().get(10);
             %>
-                <table summary="layout" width="90%" class="datatable">
+                <table class="datatable fullwidth">
                   <tr>
                     <td width="80%">
                      <%=cm.cmsPhrase("Number of distinct species:")%>
@@ -278,7 +278,7 @@
                   <br /> <br />
                   <h2><%=cm.cmsPhrase("Statistical data for")%>&nbsp;<span style="font-style: italic"><%=countryName%></span>:</h2>
                   <br />
-                <table summary="<%=cm.cms("statistical_data_country")%>" width="90%" class="datatable">
+                <table summary="<%=cm.cms("statistical_data_country")%>" class="datatable fullwidth">
                   <tr>
                     <td width="80%">
                       <%=cm.cmsPhrase("Number of distinct species:")%>

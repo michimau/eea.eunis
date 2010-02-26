@@ -245,9 +245,9 @@
                     </tr>
                     <tr>
                       <td>
-                        <table summary="layout" width="90%" class="datatable">
+                        <table class="datatable fullwidth">
                           <tr>
-                            <td width="200">
+                            <td style="width:200px">
                               <label for="term"><%=cm.cmsPhrase("Term")%></label>
                             </td>
                             <td>

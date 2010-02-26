@@ -38,7 +38,7 @@
   <h2>
     <%=cm.cmsPhrase("National and/or International Designation of Natura 2000 site")%>
   </h2>
-  <table summary="<%=cm.cms("sites_factsheet_designations_national")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("sites_factsheet_designations_national")%>" class="listing fullwidth">
     <thead>
       <tr>
         <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-align: left;">
@@ -109,7 +109,7 @@
   <h2>
     <%=cm.cms("sites_factsheet_designations_areas")%>
   </h2>
-  <table summary="<%=cm.cms("sites_factsheet_designations_areas")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("sites_factsheet_designations_areas")%>" class="listing fullwidth">
     <thead>
       <tr>
         <th style="text-align: left;">

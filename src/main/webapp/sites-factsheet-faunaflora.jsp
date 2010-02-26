@@ -54,7 +54,10 @@
       <%=cm.cmsPhrase("Site contact authorities")%>
     </h2>
     <%-- Site contact authorities --%>
-    <table summary="<%=cm.cms("site_contact_authorities")%>" width="90%" class="datatable">
+    <table summary="<%=cm.cms("site_contact_authorities")%>" class="datatable fullwidth">
+    <col style="width:30%"/>
+    <col style="width:70%"/>
+    <tbody>
 <%
     if (SiteFactsheet.TYPE_NATURA2000 == type ||
               SiteFactsheet.TYPE_EMERALD == type ||
@@ -63,10 +66,10 @@
     {
 %>
       <tr class="zebraeven">
-        <td width="40%">
+        <th scope="row">
           <%=cm.cmsPhrase("Respondent")%>
-        </td>
-        <td width="60%">
+        </th>
+        <td>
           <%=respondent%>
         </td>
       </tr>
@@ -76,9 +79,9 @@
     {
 %>
       <tr>
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Author")%>
-        </td>
+        </th>
         <td>
           <%=author%>
         </td>
@@ -92,9 +95,9 @@
     {
 %>
       <tr class="zebraeven">
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Manager")%>
-        </td>
+        </th>
         <td>
           <%=manager%>
         </td>
@@ -105,41 +108,41 @@
     {
 %>
       <tr class="zebraeven">
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Information")%>
-        </td>
+        </th>
         <td>
           <%=information%>
         </td>
       </tr>
       <tr>
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Official contact international")%>
-        </td>
+        </th>
         <td>
           <%=officialContactInternational%>&nbsp;
         </td>
       </tr>
       <tr class="zebraeven">
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Official contact national")%>
-        </td>
+        </th>
         <td>
           <%=officialContactNational%>&nbsp;
         </td>
       </tr>
       <tr>
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Official contact regional")%>
-        </td>
+        </th>
         <td>
           <%=officialContactRegional%>&nbsp;
         </td>
       </tr>
       <tr class="zebraeven">
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Official contact local")%>
-        </td>
+        </th>
         <td>
           <%=officialContactLocal%>&nbsp;
         </td>
@@ -147,6 +150,7 @@
 <%
     }
 %>
+    </tbody>
     </table>
     <br />
 <%
@@ -195,7 +199,10 @@
     <h2>
       <%=cm.cmsPhrase("Description")%>
     </h2>
-    <table width="90%" class="datatable">
+    <table class="datatable fullwidth">
+    <col style="width:30%"/>
+    <col style="width:70%"/>
+    <tbody>
 <%
   if (SiteFactsheet.TYPE_NATURA2000 == type ||
           SiteFactsheet.TYPE_EMERALD == type ||
@@ -204,10 +211,10 @@
   {
 %>
       <tr class="zebraeven">
-        <td width="30%">
+        <th scope="row">
           <%=cm.cmsPhrase("General character of the site")%>
-        </td>
-        <td width="70%">
+        </th>
+        <td>
           <%=character%>&nbsp;
         </td>
       </tr>
@@ -217,41 +224,41 @@
   {
 %>
       <tr>
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Quality")%>
-        </td>
+        </th>
         <td>
           <%=quality%>&nbsp;
         </td>
       </tr>
       <tr class="zebraeven">
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Vulnerability")%>
-        </td>
+        </th>
         <td>
           <%=vulnerability%>&nbsp;
         </td>
       </tr>
       <tr>
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Designation")%>
-        </td>
+        </th>
         <td>
           <%=designation%>&nbsp;
         </td>
       </tr>
       <tr class="zebraeven">
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Owner")%>
-        </td>
+        </th>
         <td>
           <%=ownership%>&nbsp;
         </td>
       </tr>
       <tr>
-        <td>
-          <%=cm.cmsPhrase("documentation")%>
-        </td>
+        <th scope="row">
+          <%=cm.cmsPhrase("Documentation")%>
+        </th>
         <td>
           <%=documentation%>&nbsp;
         </td>
@@ -262,33 +269,33 @@
   {
 %>
       <tr class="zebraeven">
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Habitat types")%>
-        </td>
+        </th>
         <td>
           <%=characterization%>&nbsp;
         </td>
       </tr>
       <tr>
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Flora")%>
-        </td>
+        </th>
         <td>
           <%=floraCharacterization%>&nbsp;
         </td>
       </tr>
       <tr class="zebraeven">
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Fauna")%>
-        </td>
+        </th>
         <td>
           <%=faunaCharacterization%>&nbsp;
         </td>
       </tr>
       <tr>
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Potential vegetation")%>
-        </td>
+        </th>
         <td>
           <%=potentialVegetation%>&nbsp;
         </td>
@@ -299,23 +306,23 @@
   {
 %>
       <tr class="zebraeven">
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Geomorphology")%>
-        </td>
+        </th>
         <td>
           <%=geomorphology%>&nbsp;
         </td>
       </tr>
       <tr>
-        <td>
+        <th scope="row">
           <%=cm.cmsPhrase("Educational interest")%>
-        </td>
+        </th>
         <td>
           <%=educationalInterest%>&nbsp;
         </td>
       </tr>
       <tr class="zebraeven">
-        <td><%=cm.cmsPhrase("Cultural heritage")%></td>
+        <th scope="row"><%=cm.cmsPhrase("Cultural heritage")%></th>
         <td><%=culturalHeritage%>&nbsp;</td>
       </tr>
 <%
@@ -324,7 +331,7 @@
   {
 %>
       <tr>
-        <td><%=cm.cmsPhrase("Justification")%></td>
+        <th scope="row"><%=cm.cmsPhrase("Justification")%></th>
         <td><%=justification%>&nbsp;</td>
       </tr>
 <%
@@ -333,11 +340,11 @@
   {
 %>
       <tr class="zebraeven">
-        <td><%=cm.cmsPhrase("Methodology")%></td>
+        <th scope="row"><%=cm.cmsPhrase("Methodology")%></th>
         <td><%=methodology%>&nbsp;</td>
       </tr>
       <tr>
-        <td><%=cm.cmsPhrase("Budget")%></td>
+        <th scope="row"><%=cm.cmsPhrase("Budget")%></th>
         <td><%=budget%>&nbsp;</td>
       </tr>
 <%
@@ -349,7 +356,7 @@
   {
 %>
       <tr class="zebraeven">
-        <td><%=cm.cmsPhrase("Management plan")%></td>
+        <th scope="row"><%=cm.cmsPhrase("Management plan")%></th>
         <td><%=managementPlan%>&nbsp;</td>
       </tr>
 <%
@@ -358,16 +365,17 @@
   {
 %>
       <tr>
-        <td><%=cm.cmsPhrase("URL official")%></td>
+        <th scope="row"><%=cm.cmsPhrase("URL official")%></th>
         <td><a title="Official URL" href="<%=urlOfficial%>"><%=urlOfficial%></a>&nbsp;</td>
       </tr>
       <tr class="zebraeven">
-        <td><%=cm.cmsPhrase("URL interesting")%></td>
+        <th scope="row"><%=cm.cmsPhrase("URL interesting")%></th>
         <td><a title="URL interesting" href="<%=urlInteresting%>"><%=urlInteresting%></a>&nbsp;</td>
       </tr>
 <%
   }
 %>
+    </tbody>
   </table>
   <br />
 <%
@@ -395,14 +403,14 @@
   <h2>
     <%=cm.cmsPhrase("Ecological information: Fauna and Flora")%>
   </h2>
-  <table summary="<%=cm.cms("ecological_information_fauna_flora")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("ecological_information_fauna_flora")%>" class="listing fullwidth">
     <thead>
       <tr>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Species scientific name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Species group")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
@@ -562,10 +570,10 @@
   <h2>
     <%=cm.cmsPhrase("Other species mentioned in site")%>
   </h2>
-  <table summary="<%=cm.cms("other_species_mentioned_in_site")%>" width="90%" class="listing">
+  <table summary="<%=cm.cms("other_species_mentioned_in_site")%>" class="listing fullwidth">
     <thead>
       <tr>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Species scientific name")%>
         </th>
       </tr>
@@ -580,8 +588,7 @@
 %>
       <tr<%=cssClass%>>
         <td>
-          <a title="<%=cm.cms("sites_factsheet_105")%>" href="http://www.google.com/search?q=<%=specie.getValue()%>"><%=specie.getValue()%></a>
-          <%=cm.cmsTitle("sites_factsheet_105")%>
+          <a href="http://www.google.com/search?q=<%=specie.getValue()%>"><%=specie.getValue()%></a>
         </td>
       </tr>
 <%
@@ -618,14 +625,14 @@
   <h3>
     <%=cm.cmsPhrase("Species")%>
   </h3>
-  <table summary="<%=cm.cms("species")%>" width="90%" class="listing">
+  <table summary="<%=cm.cms("species")%>" class="listing fullwidth">
     <thead>
       <tr>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Species scientific name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Species group")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
@@ -669,10 +676,10 @@
     {
       for (int i = 0; i < eunisSpeciesListedAnnexesDirectives.size(); i++)
       {
-        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+        String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
         SitesSpeciesReportAttributesPersist specie = (SitesSpeciesReportAttributesPersist)eunisSpeciesListedAnnexesDirectives.get(i);
 %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
           <a class="link-plain" href="species/<%=specie.getIdSpecies()%>"><%=specie.getSpeciesScientificName()%></a>
         </td>
@@ -824,22 +831,22 @@
   <h3>
     <%=cm.cmsPhrase("Other species mentioned in site")%>
   </h3>
-  <table summary="<%=cm.cms("other_species_mentioned_in_site")%>" width="0%" class="listing">
+  <table summary="<%=cm.cms("other_species_mentioned_in_site")%>" class="listing fullwidth">
     <thead>
       <tr>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-align: left;">
+        <th scope="col" title="<%=cm.cms("sort_results_on_this_column")%>">
           <%=cm.cmsPhrase("Species group")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-align: left;">
+        <th scope="col" title="<%=cm.cms("sort_results_on_this_column")%>">
           <%=cm.cmsPhrase("Species name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th scope="col" title="<%=cm.cms("sort_results_on_this_column")%>">
           <%=cm.cmsPhrase("Population size estimations")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th scope="col" title="<%=cm.cms("sort_results_on_this_column")%>">
           <%=cm.cmsPhrase("Motivation for species mention")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
@@ -851,10 +858,10 @@
       {
       for (int i = 0; i < eunisSpeciesOtherMentioned.size(); i++)
       {
-        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+        String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
         SitesSpeciesReportAttributesPersist specie = (SitesSpeciesReportAttributesPersist)eunisSpeciesOtherMentioned.get(i);
 %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
           <%=specie.getSpeciesCommonName()%>
         </td>
@@ -885,7 +892,7 @@
         Chm62edtSitesAttributesPersist  attribute2 = null;
       for (int i = 0; i < notEunisSpeciesOtherMentioned.size(); i++)
       {
-        String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+        String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
         Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist)notEunisSpeciesOtherMentioned.get(i);
         String specName = specie.getName();
         specName = (specName == null ? "" : specName.substring(specName.lastIndexOf("_")+1));
@@ -900,7 +907,7 @@
             :(groupName.equalsIgnoreCase("F") ? "Flowering"
             :(groupName.equalsIgnoreCase("R") ? "Reptiles" : "")))))))));
 %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
           <%=groupName%>
         </td>
@@ -927,8 +934,8 @@
         }
       }
 %>
+    </tbody>
     </table>
-    <br />
 <%
     }
   }

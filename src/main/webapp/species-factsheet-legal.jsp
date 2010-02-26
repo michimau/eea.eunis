@@ -31,24 +31,24 @@
   <h2>
     <%=cm.cmsPhrase("Legal Instruments")%>
   </h2>
-  <table summary="<%=cm.cms("species_factsheet_legalInstruments_01_Sum")%>" class="listing">
+  <table summary="<%=cm.cms("species_factsheet_legalInstruments_01_Sum")%>" class="listing fullwidth">
     <thead>
       <tr>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Detailed reference")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("legal text")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Comments")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Url")%>
         </th>
-        <th>
+        <th scope="col">
           <%=cm.cmsPhrase("Geographical implementation")%>
         </th>
       </tr>

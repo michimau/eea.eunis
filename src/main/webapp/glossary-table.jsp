@@ -200,7 +200,7 @@
                 if (rows.size() > 0)
                 {
 %>
-                <table class="sortable" width="90%">
+                <table class="sortable fullwidth">
                   <thead>
                     <tr>
                       <th scope="col">

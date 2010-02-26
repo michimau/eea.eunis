@@ -47,7 +47,7 @@
   <h2>
     <%=cm.cmsPhrase("Human Activities")%>
   </h2>
-  <table summary="<%=cm.cms("human_activities")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("human_activities")%>" class="listing fullwidth">
     <thead>
       <tr>
         <th style="text-align: left;">
@@ -146,7 +146,7 @@
   <h2>
     <%=cm.cmsPhrase("Human Activities")%>
   </h2>
-  <table summary="<%=cm.cms("human_activities")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("human_activities")%>" class="listing fullwidth">
     <thead>
       <tr>
         <th style="text-align: left;">
@@ -261,7 +261,7 @@
   <h2>
     <%=cm.cmsPhrase("References to Maps")%>
   </h2>
-  <table summary="<%=cm.cms("reference_to_maps")%>" class="datatable" width="90%">
+  <table summary="<%=cm.cms("reference_to_maps")%>" class="datatable fullwidth">
     <thead>
       <tr>
         <th style="text-align: left;">
@@ -325,7 +325,7 @@
   <h2>
     <%=cm.cmsPhrase("References to photos")%>
   </h2>
-  <table summary="<%=cm.cms("reference_to_photos")%>" class="datatable" width="90%">
+  <table summary="<%=cm.cms("reference_to_photos")%>" class="datatable fullwidth">
     <thead>
       <tr>
         <th style="text-align: left;">
@@ -391,7 +391,7 @@
   <h2>
     <%=cm.cmsPhrase("Other project specific fields")%>
   </h2>
-  <table class="datatable" width="90%">
+  <table class="datatable fullwidth">
     <tbody>
 <%
   if (SiteFactsheet.TYPE_CDDA_NATIONAL == type)

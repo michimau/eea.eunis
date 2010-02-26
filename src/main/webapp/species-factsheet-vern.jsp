@@ -29,18 +29,18 @@
   <h2>
     <%=cm.cmsPhrase("Vernacular names")%>
   </h2>
-  <table summary="<%=cm.cms("vernacular_names")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("vernacular_names")%>" class="listing fullwidth">
     <thead>
       <tr>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Vernacular Name")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Language")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Reference")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
@@ -80,5 +80,4 @@
 %>
 <%=cm.br()%>
 <%=cm.cmsMsg("vernacular_names")%>
-  <br />
   <br />

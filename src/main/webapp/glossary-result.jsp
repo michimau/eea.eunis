@@ -106,7 +106,7 @@
   {
     Chm62edtGlossaryPersist result = (Chm62edtGlossaryPersist)results.get(i);
 %>
-                <table summary="<%=cm.cms("glossary_term_details")%>" class="datatable" width="90%">
+                <table summary="<%=cm.cms("glossary_term_details")%>" class="datatable fullwidth">
                   <tr>
                     <td width="">
                       <%=cm.cmsPhrase("Term")%>

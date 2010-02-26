@@ -46,13 +46,15 @@ Notes:
   if( results != null && !results.isEmpty() )
   {
 %>
-  <table summary="<%=cm.cms("habitat_other_information")%>" class="listing" width="90%">
+  <table summary="<%=cm.cms("habitat_other_information")%>" class="listing fullwidth">
+    <col style="width:25%"/>
+    <col style="width:75%"/>
     <thead>
       <tr>
-        <th width="25%" style="text-align: left;">
+        <th scope="col">
            <%=cm.cmsPhrase("Name")%>
         </th>
-        <th width="75%" style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Description")%>
         </th>
       </tr>

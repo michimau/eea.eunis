@@ -136,7 +136,7 @@
             if ( tab == 0 )
             {
           %>
-                    <table class="datatable" width="90%" border="0" summary="Easy search">
+                    <table class="datatable fullwidth" summary="Easy search">
                       <caption><%=cm.cms( "sites_main_easySearchesDesc" ) %></caption>
                       <thead>
                         <tr>
@@ -347,7 +347,7 @@
             if ( tab == 1 )
             {
           %>
-                    <table class="datatable" width="90%" border="0" summary="Advanced search">
+                    <table class="datatable fullwidth" summary="Advanced search">
                       <caption><%=cm.cms( "flexible_search_tool_to_build_your_own_query" ) %></caption>
                       <thead>
                         <tr>
@@ -399,7 +399,7 @@
             if ( tab == 2 )
             {
           %>
-                    <table class="datatable" width="90%" summary="Statistical data">
+                    <table class="datatable fullwidth" summary="Statistical data">
                       <caption><%=cm.cms( "search_tool_to_build_aggregated_data" ) %></caption>
                       <thead>
                         <tr>
@@ -435,7 +435,7 @@
             if ( tab == 3 )
             {
           %>
-                    <table class="datatable" width="90%" summary="Links &amp; downloads">
+                    <table class="datatable fullwidth" summary="Links &amp; downloads">
                       <caption><%=cm.cms( "sites_main_linksDesc") %></caption>
                       <thead>
                         <tr>
@@ -482,7 +482,7 @@
             if ( tab == 4 )
             {
           %>
-                <table class="datatable" width="90%" summary="Help">
+                <table class="datatable fullwidth" summary="Help">
                   <caption><%=cm.cms( "general_information_on_eunis" ) %></caption>
                   <thead>
                     <tr>

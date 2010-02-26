@@ -37,6 +37,6 @@ function openHelper(URL) {
     if (database[1].checked == true) currentDB = 1; // ANNEX I
     if (database[2].checked == true) currentDB = 2; // BOTH
     var URL2= URL + '?searchString=' + searchString + '&relationOp=' + relationOp + '&database=' + currentDB + '&useScientific=' + useScientific + '&useVernacular=' + useVernacular + '&useDescription=' + useDescription;
-    eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,location=0,width=400,height=500,left=490,top=0');");
+    eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,location=0,width=450,height=500,left=490,top=0');");
   }
 }

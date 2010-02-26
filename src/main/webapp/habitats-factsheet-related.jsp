@@ -37,21 +37,26 @@
   <%=cm.cmsPhrase("Habitat type syntaxa")%>
   </h2>
   <table summary="<%=cm.cms("habitat_type_syntaxa")%>" class="listing fullwidth">
+    <col style="width:25%"/>
+    <col style="width:6%"/>
+    <col style="width:30%"/>
+    <col style="width:20%"/>
+    <col style="width:14%"/>
     <thead>
       <tr>
-        <th width="25%" style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Name")%>
         </th>
-        <th width="6%" style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Relation")%>
         </th>
-        <th width="30%" style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Source (abbreviated)")%>
         </th>
-        <th width="20%" style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Author")%>
         </th>
-        <th width="14%" style="text-align: left;">
+        <th scope="col">
           <%=cm.cmsPhrase("References")%>
         </th>
       </tr>
@@ -61,10 +66,10 @@
     String IdDc = "";
     for(int i = 0; i < syntaxaw.size(); i++)
     {
-      String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+      String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
       SyntaxaWrapper syntaxa = (SyntaxaWrapper) syntaxaw.get(i);
   %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
           <%=syntaxa.getName()%>
         </td>
@@ -82,50 +87,23 @@
       {
         IdDc = syntaxa.getIdDc().toString();
       }
-      if(!Utilities.getAuthorAndUrlByIdDc(IdDc).get(1).toString().equalsIgnoreCase(""))
+      if(!IdDc.equalsIgnoreCase("0"))
       {
-        if(!IdDc.equalsIgnoreCase("0"))
-        {
-    %>
-        <td>
-          <span class="boldUnderline">
-            <a title="<%=cm.cms("habitat_syntaxa_author")%>" href="<%=Utilities.getAuthorAndUrlByIdDc(IdDc).get(1)%>"><%=Utilities.getAuthorAndUrlByIdDc(IdDc).get(0)%></a>
-            <%=cm.cmsTitle("habitat_syntaxa_author")%>
-          </span>
-        </td>
+	String AuthorURL = Utilities.getAuthorAndUrlByIdDc(IdDc).get(0).toString();
+	AuthorURL = AuthorURL.replaceAll("&","&amp;");
+%>
+      <td>
+	  <a href="documents/<%=IdDc%>"><%=AuthorURL%></a>
+      </td>
 <%
-        }
-        else
-        {
-    %>
-        <td>
-          &nbsp;
-        </td>
-<%
-        }
       }
       else
       {
-        if(!IdDc.equalsIgnoreCase("0"))
-        {
-          String AuthorURL = Utilities.getAuthorAndUrlByIdDc(IdDc).get(0).toString();
-          AuthorURL = AuthorURL.replaceAll("&","&amp;");
 %>
-        <td>
-          <span class="boldUnderline">
-            <a href="documents/<%=IdDc%>"><%=AuthorURL%></a>
-          </span>
-        </td>
+      <td>
+	&nbsp;
+      </td>
 <%
-        }
-        else
-        {
-%>
-        <td>
-          &nbsp;
-        </td>
-<%
-        }
       }
 %>
       </tr>

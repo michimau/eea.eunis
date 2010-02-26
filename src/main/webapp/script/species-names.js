@@ -8,7 +8,7 @@ function openHelper2(popupPage) {
     var relationOp = trim(document.eunis2.relationOp.value);
     var language=escape(document.eunis2.language.value);
     var URL = popupPage + '?typeForm=1&vernacularName=' + vernacularName + '&relationOp=' + relationOp + '&language='+language;
-    eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=0, resizable=yes,location=0,width=400,height=500,left=490,top=0');");
+    eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=0, resizable=yes,location=0,width=450,height=500,left=490,top=0');");
   }
 }
 

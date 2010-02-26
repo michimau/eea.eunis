@@ -78,7 +78,8 @@
                 <a name="documentContent"></a>
                 <img id="loading" alt="Loading" title="Loading" src="images/loading.gif" />
                 <h1>
-                  <%=cm.cmsPhrase("Number / Total area")%>
+                <%=cm.cmsPhrase("Statistical information for from:")%>
+                  <%=formBean.toHumanString()%>
                 </h1>
                 <div class="documentActions">
                   <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
@@ -96,129 +97,103 @@
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
-                <%=cm.cmsPhrase("Statistical data for sites from:")%>
-                <strong>
-                  <%=formBean.toHumanString()%>
-                </strong>
-                <br />
-                <img src="<%=application.getInitParameter("EEA_MAP_SERVER")%>/getmap.asp?Q=<%=sbCCodes.toString().toUpperCase()%>&amp;outline=1" alt="<%=cm.cms("map_image_eea")%>" title="<%=cm.cms("map_image_eea")%>" />
+<div class="figure-right">
+    <div class="figure">
+	<img src="<%=application.getInitParameter("EEA_MAP_SERVER")%>/getmap.asp?Q=<%=sbCCodes.toString().toUpperCase()%>&amp;outline=1" alt="<%=cm.cms("map_image_eea")%>" title="<%=cm.cms("map_image_eea")%>" width="250" height="217" class="scaled"/>
+    </div>
+</div>
+
+                
                 <%=cm.cmsTitle("map_image_eea")%>
                 <%=cm.cmsAlt("map_image_eea")%>
-                <br />
-                <%
-                  Long nrSites = formBean.computeNumberOfSites();
-                  if ( nrSites == null || ( nrSites != null && nrSites.longValue() < 0 ) )
-                  {
-                    nrSites = new Long( 0 );
-                  }
-                %>
-                <%=cm.cmsPhrase("Total number of sites:")%>&nbsp;&nbsp;<%=nrSites%>
-                <br /><br />
-                <strong>
+                <h2>
                   <%=cm.cmsPhrase("Country information")%>
-                </strong>
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" summary="Country information">
+                </h2>
+                <table class="datatable">
+                  <col style="width:25%"/>
+                  <col style="width:25%"/>
+                  <col style="width:25%"/>
+                  <col style="width:25%"/>
                   <tr>
-                    <td width="221">
+                    <th scope="row">
                       <%=cm.cmsPhrase("Original country name:")%>
-                    </td>
-                    <td width="158">
-                      <strong>
+                    </th>
+                    <td>
                         <%=Utilities.formatString(country.getAreaName(),"&nbsp;")%>
-                      </strong>
                     </td>
-                    <td width="221">
+                    <th scope="row">
                       <%=cm.cmsPhrase("ISO Three Letter Code:")%>
-                    </td>
-                    <td width="158">
-                      <strong>
+                    </th>
+                    <td>
                         <%=Utilities.formatString(country.getIso3l(),"&nbsp;")%>
-                      </strong>
                     </td>
                   </tr>
                   <tr>
-                    <td width="221">
+                    <th scope="row">
                       <%=cm.cmsPhrase("English country name:")%>
-                    </td>
-                    <td width="158">
-                      <strong>
+                    </th>
+                    <td>
                         <%=Utilities.formatString(country.getAreaNameEnglish(),"&nbsp;")%>
-                      </strong>
                     </td>
-                    <td width="221">
+                    <th scope="row">
                       <%=cm.cmsPhrase("ISO Numeric Code:")%>
-                    </td>
-                    <td width="158">
-                      <strong>
+                    </th>
+                    <td>
                         <%=Utilities.formatString(country.getIsoN(),"&nbsp;")%>
-                      </strong>
                     </td>
                   </tr>
                   <tr>
-                    <td width="221">
+                    <th scope="row">
                       <%=cm.cmsPhrase("French country name:")%>
-                    </td>
-                    <td width="158">
-                      <strong>
+                    </th>
+                    <td>
                         <%=Utilities.formatString(country.getAreaNameFrench(),"&nbsp;")%>
-                      </strong>
                     </td>
-                    <td width="221">
+                    <th scope="row">
                       <%=cm.cmsPhrase("Capital:")%>
-                    </td>
-                    <td width="158">
-                      <strong>
+                    </th>
+                    <td>
                         <%=Utilities.formatString(country.getCapital(),"&nbsp;")%>
-                      </strong>
                     </td>
                   </tr>
                   <tr>
-                    <td width="221">
+                    <th scope="row">
                       <%=cm.cmsPhrase("EUNIS area code:")%>
-                    </td>
-                    <td width="158">
-                      <strong>
+                    </th>
+                    <td>
                         <%=Utilities.formatString(country.getEunisAreaCode(),"&nbsp;")%>
-                      </strong>
                     </td>
-                    <td width="202">
+                    <th scope="row">
                       <%=cm.cmsPhrase("Surface(km2):")%>
-                    </td>
-                    <td width="151">
-                      <strong>
+                    </th>
+                    <td>
                         <%=Utilities.formatString(country.getSurface(),"&nbsp;")%>
-                      </strong>
                     </td>
                   </tr>
                   <tr>
-                    <td width="221">
+                    <th scope="row">
                       <%=cm.cmsPhrase("ISO Two Letter Code:")%>
-                    </td>
-                    <td width="158">
-                      <strong>
+                    </th>
+                    <td>
                         <%=Utilities.formatString(country.getIso2l(),"&nbsp;")%>
-                      </strong>
                     </td>
-                    <td width="202">
+                    <th scope="row">
                       <%=cm.cmsPhrase("Population number:")%>
-                    </td>
-                    <td width="151">
-                      <strong>
+                    </th>
+                    <td>
                         <%=Utilities.formatString(country.getPopulation(),"&nbsp;")%>
-                      </strong>
                     </td>
                   </tr>
                 </table>
-                <br />
           <%
              // Country regions
              Iterator it = CountryUtil.findRegionsFromCountry(country.getEunisAreaCode());
              if (it != null && it.hasNext())
              {
            %>
-                <strong>
+                <h2>
                   <%=cm.cmsPhrase("Biogeographic regions:")%>
-                </strong>
+                </h2>
                 <table summary="<%=cm.cms("biogeographic_regions")%>" class="listing">
                   <thead>
                     <tr>
@@ -311,7 +286,7 @@
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th title="<%=cm.cms("sort_results_on_this_column")%>">
-                        <%=cm.cmsPhrase("category")%>
+                        <%=cm.cmsPhrase("Category")%>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th title="<%=cm.cms("sort_results_on_this_column")%>">
@@ -345,8 +320,7 @@
                   if (null != d.getDescription() && !d.getDescription().equalsIgnoreCase(""))
                   {
           %>
-                      <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?idDesign=<%=d.getIdDesignation()%>&amp;geoscope=<%=d.getIdGeoscope()%>"><%=d.getDescription()%></a>
-                      <%=cm.cmsTitle("open_designation_factsheet")%>
+                      <a href="designations-factsheet.jsp?idDesign=<%=d.getIdDesignation()%>&amp;geoscope=<%=d.getIdGeoscope()%>"><%=d.getDescription()%></a>
           <%
                   }
                   else
@@ -362,8 +336,7 @@
                   if (null != d.getDescriptionEn() && !d.getDescriptionEn().equalsIgnoreCase(""))
                   {
           %>
-                      <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?idDesign=<%=d.getIdDesignation()%>&amp;geoscope=<%=d.getIdGeoscope()%>"><%=d.getDescriptionEn()%></a>
-                      <%=cm.cmsTitle("open_designation_factsheet")%>
+                      <a href="designations-factsheet.jsp?idDesign=<%=d.getIdDesignation()%>&amp;geoscope=<%=d.getIdGeoscope()%>"><%=d.getDescriptionEn()%></a>
           <%
                   }
                   else
@@ -379,8 +352,7 @@
                   if (null != d.getDescriptionFr() && !d.getDescriptionFr().equalsIgnoreCase(""))
                   {
           %>
-                      <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?idDesign=<%=d.getIdDesignation()%>&amp;geoscope=<%=d.getIdGeoscope()%>"><%=d.getDescriptionFr()%></a>
-                      <%=cm.cmsTitle("open_designation_factsheet")%>
+                      <a href="designations-factsheet.jsp?idDesign=<%=d.getIdDesignation()%>&amp;geoscope=<%=d.getIdGeoscope()%>"><%=d.getDescriptionFr()%></a>
           <%
                   }
                   else
@@ -558,6 +530,16 @@
             {
               ex.printStackTrace();
             }
+                  Long nrSites = formBean.computeNumberOfSites();
+                  if ( nrSites == null || ( nrSites != null && nrSites.longValue() < 0 ) )
+                  {
+                    nrSites = new Long( 0 );
+                  }
+                %>
+		<p>
+                <%=cm.cmsPhrase("Total number of sites:")%> <%=nrSites%>
+		</p>
+               <% 
             if(result != null && result.size()>0)
             {
           %>

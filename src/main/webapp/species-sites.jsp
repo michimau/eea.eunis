@@ -176,7 +176,7 @@
           URL2 += '&scientificName=' + scientificName;
           URL2 += '&relationOp=' + relationOp;
           URL2 += Db2Url();
-          eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,resizable=no,location=0,width=400,height=500,left=500,top=0');");
+          eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,resizable=no,location=0,width=450,height=500,left=500,top=0');");
         }
       //]]>
     </script>

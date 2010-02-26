@@ -45,7 +45,7 @@ function openHelper(URL,displayWarning)
     URL2 = URL2+"&DB_CDDA_INTERNATIONAL=" + DB_CDDA_INTERNATIONAL;
     URL2 = URL2+"&DB_BIOGENETIC=" + DB_BIOGENETIC;
     URL2 = URL2+"&DB_EMERALD=" + DB_EMERALD;
-    eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=400,height=500,left=490,top=0');");
+    eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=450,height=500,left=490,top=0');");
   }
 }
 
@@ -82,10 +82,10 @@ function check(noCriteria)
 
 function openlink(URL)
 {
-  eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=0,resizable=yes, location=0,width=450,height=280,left=490,top=0');");
+  eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=0,resizable=yes, location=0,width=400,height=280,left=490,top=0');");
 }
 
 function openRefineHint() {
   var criteriaType = document.getElementById("criteriaType0").options[document.getElementById("criteriaType0").selectedIndex].value;
-  window.open("sites-refine-helper.jsp?search=names&criteria=" + criteriaType, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=400,height=500,left=490,top=0');
+  window.open("sites-refine-helper.jsp?search=names&criteria=" + criteriaType, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=450,height=500,left=490,top=0');
 }

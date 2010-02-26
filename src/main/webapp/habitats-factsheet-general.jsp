@@ -28,18 +28,21 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
   <table class="fullwidth" border="0" cellspacing="1" cellpadding="0" style="border-collapse: collapse;">
+    <col style="width:20%"/>
+    <col style="width:50%"/>
+    <col style="width:30%"/>
     <tbody>
       <tr>
-        <td width="15%">
+        <td>
           <%=cm.cmsPhrase("English name")%>
         </td>
-        <td width="40%">
+        <td>
           <strong>
             <%=factsheet.getHabitatDescription()%>
           </strong>
         </td>
         <%-- Link to key navigation, taxonomic tree and diagram --%>
-        <td width="20%" align="center">
+        <td align="center">
 <%
   if (factsheet.isEunis() && factsheet.getHabitatLevel().intValue() < 3)
   {
@@ -82,25 +85,29 @@
   <br />
   <%-- Habitat code and Level for EUNIS habitats, original code for NATURA --%>
   <table class="fullwidth" border="0" cellspacing="1" cellpadding="0">
+    <col style="width:20%"/>
+    <col style="width:50%"/>
+    <col style="width:15%"/>
+    <col style="width:15%"/>
     <tbody>
 <%
   if (factsheet.isEunis())
   {
 %>
       <tr>
-        <td width="30%">
+        <td>
           <%=cm.cmsPhrase("EUNIS habitat type code")%>
         </td>
-        <td width="40%">
+        <td>
           &nbsp;
           <strong>
             <%=Utilities.formatString(factsheet.getEunisHabitatCode(), "")%>
           </strong>
         </td>
-        <td width="15%" bgcolor="#DDDDDD" align="right">
+        <td bgcolor="#DDDDDD" align="right">
           <%=cm.cmsPhrase("Level")%>
         </td>
-        <td width="15%" bgcolor="#DDDDDD">
+        <td bgcolor="#DDDDDD">
           &nbsp;
           <strong>
             <%=Utilities.formatString(factsheet.getHabitatLevel(), "")%>
@@ -113,10 +120,10 @@
   {
 %>
       <tr>
-        <td width="30%">
+        <td>
           <%=cm.cmsPhrase("NATURA 2000 habitat type code")%>
         </td>
-        <td width="70%" colspan="3">
+        <td colspan="3">
           &nbsp;
           <strong>
             <%=factsheet.getCode2000()%>
@@ -140,7 +147,7 @@
         <td>
           <strong>
             &nbsp;
-            <%=(factsheet.getPriority() != null && 1 == factsheet.getPriority().shortValue() ? cm.cmsPhrase("Yes") :  cm.cmsPhrase("no"))%>
+            <%=(factsheet.getPriority() != null && 1 == factsheet.getPriority().shortValue() ? cm.cmsPhrase("Yes") :  cm.cmsPhrase("No"))%>
             &nbsp;
           </strong>
         </td>
@@ -229,10 +236,10 @@
     // List habitats internationals names.
     for ( int i = 0; i < names.size(); i++ )
     {
-      String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+      String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
       Chm62edtHabitatInternationalNamePersist name = (Chm62edtHabitatInternationalNamePersist)names.get(i);
 %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
           <%=name.getNameEn()%>
         </td>
@@ -261,19 +268,23 @@
       <%=cm.cmsPhrase("Relationships with other classifications")%>
     </h2>
     <table summary="<%=cm.cms("habitats_factsheet_22")%>" class="listing fullwidth">
+      <col style="width:30%"/>
+      <col style="width:15%"/>
+      <col style="width:40%"/>
+      <col style="width:15%"/>
       <thead>
       <tr>
-        <th width="30%" scope="col">
+        <th scope="col">
           <%=cm.cmsPhrase("Classification")%>
         </th>
-        <th width="15%" scope="col">
+        <th scope="col">
           <%=cm.cmsPhrase("Code")%>
         </th>
-        <th width="40%" scope="col">
+        <th scope="col">
           <%=cm.cmsPhrase("Title")%>
         </th>
-        <th width="15%" scope="col">
-          <%=cm.cmsPhrase("relation_type")%>
+        <th scope="col">
+          <%=cm.cmsPhrase("Relation type")%>
         </th>
       </tr>
     </thead>
@@ -283,12 +294,12 @@
     {
       for (int j = 0; j < otherClassifHabitats.size(); j++)
       {
-        String cssClass = j % 2 == 0 ? "" : " class=\"zebraeven\"";
+        String cssClass = j % 2 == 0 ? "zebraodd" : "zebraeven";
         OtherClassificationPersist otherClassifHabitat = (OtherClassificationPersist)otherClassifHabitats.get(j);
         String _name = otherClassifHabitat.getName();
         _name = _name.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
   %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
           <%=Utilities.formatString(_name, "&nbsp;")%>
         </td>
@@ -311,11 +322,11 @@
     ii++;
     for (int i = 0; i < otherHabitats.size(); i++)
     {
-      String cssClass = i % 2 == 0 ? "" : " class=\"zebraeven\"";
+      String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
       HabitatFactsheetRelWrapper otherHab = (HabitatFactsheetRelWrapper)otherHabitats.get(i);
       String relation = otherHab.getRelation();
 %>
-      <tr<%=cssClass%>>
+      <tr class="<%=cssClass%>">
         <td>
           &nbsp;
         </td>

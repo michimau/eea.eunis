@@ -12,7 +12,7 @@ function openHelper(URL)
   }
   else {
     var URL2 = URL + '?habitatType=' + habitatType + '&searchString=' + searchString + '&legalText=' + legalText;
-    eval("page = window.open(URL2, '', 'scrollbars=yes,resizable=1,toolbar=0,location=0,width=400,height=500,left=490,top=0');");
+    eval("page = window.open(URL2, '', 'scrollbars=yes,resizable=1,toolbar=0,location=0,width=450,height=500,left=490,top=0');");
   }
 }
 

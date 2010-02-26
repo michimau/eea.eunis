@@ -31,7 +31,7 @@ function openHelper(URL,fromWhere,witchDateUse,database,source)
     u = u + "&publisher="+ _publisher +"&relationOpPublisher=" +_relationOpPublisher;
     u = u + "&witchDateUse="+witchDateUse;
     URL2= URL + '?fromWhere='+fromWhere+ u ;
-    eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=400,height=500,left=490,top=0');");
+    eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=450,height=500,left=490,top=0');");
   }
 }
 

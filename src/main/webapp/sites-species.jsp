@@ -82,7 +82,7 @@
                     URL2 += "&DB_BIOGENETIC=" + DB_BIOGENETIC;
                     URL2 += "&DB_EMERALD=" + DB_EMERALD;
 
-                    eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,resizable=no,location=0,width=400,height=500,left=500,top=0');");
+                    eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,resizable=no,location=0,width=450,height=500,left=500,top=0');");
           }
           }
         }

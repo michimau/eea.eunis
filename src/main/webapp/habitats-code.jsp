@@ -63,7 +63,7 @@ function openHelper(URL)
       URL2 += '&relationOp=' + relationOp;
       URL2 += '&searchString=' + searchString;
       URL2 += '&database=' + database;
-      eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,location=0,width=400,height=500,left=490,top=0');");
+      eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0,location=0,width=450,height=500,left=490,top=0');");
     }
   }
 //]]>

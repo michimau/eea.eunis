@@ -25,7 +25,7 @@ function openHelper(URL,fromWhere,dateVal)
     u = u + "&dateVal="+dateVal;
 
         URL2= URL + '?fromWhere='+fromWhere+ u ;
-        eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=400,height=500,left=490,top=0');");
+        eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=450,height=500,left=490,top=0');");
   }
 }
 

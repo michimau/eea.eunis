@@ -91,7 +91,7 @@
     <%=cm.cmsPhrase("Code in other classifications")%>
   </th>
   <th>
-    <%=cm.cms("habitat_type_name")%>
+    <%=cm.cmsPhrase("Habitat type name")%>
   </th>
 </tr>
 <%
@@ -106,7 +106,7 @@
     <%=cm.cmsPhrase("Code in other classifications")%>
   </th>
   <th>
-    <%=cm.cms("Habitat type name")%>
+    <%=cm.cmsPhrase("Habitat type name")%>
   </th>
 </tr>
 <%
@@ -124,7 +124,7 @@
     <%=cm.cmsPhrase("Code in other classifications")%>
   </th>
   <th>
-    <%=cm.cms("Habitat type name")%>
+    <%=cm.cmsPhrase("Habitat type name")%>
   </th>
 </tr>
 <%
@@ -137,7 +137,7 @@
     <%=cm.cmsPhrase("EUNIS habitat type code")%>
   </th>
   <th>
-    <%=cm.cms("Habitat type name")%>
+    <%=cm.cmsPhrase("Habitat type name")%>
   </th>
 </tr>
 <%
@@ -149,7 +149,7 @@
     <%=cm.cmsPhrase("Habitat ANNEX I directive code")%>
   </th>
   <th>
-    <%=cm.cms("Habitat type name")%>
+    <%=cm.cmsPhrase("Habitat type name")%>
   </th>
 </tr>
 <%
@@ -164,7 +164,7 @@
     <%=cm.cmsPhrase("Habitat ANNEX I directive code")%>
   </th>
   <th>
-    <%=cm.cms("Habitat type name")%>
+    <%=cm.cmsPhrase("Habitat type name")%>
   </th>
 </tr>
 <%

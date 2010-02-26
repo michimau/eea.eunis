@@ -28,7 +28,7 @@ function openHelper(URL) {
     alert(species_legal_type_few_letters_msg);
   } else {
     var URL2= URL + '?typeForm=0&groupName=' + groupName + '&scientificName=' + searchString;
-    eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=400,height=500,left=490,top=0');");
+    eval("page = window.open(URL2, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=450,height=500,left=490,top=0');");
   }
 }
 

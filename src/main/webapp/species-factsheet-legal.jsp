@@ -39,7 +39,7 @@
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th scope="col">
-          <%=cm.cmsPhrase("legal text")%>
+          <%=cm.cmsPhrase("Legal text")%>
           <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th scope="col">

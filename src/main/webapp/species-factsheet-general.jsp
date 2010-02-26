@@ -319,15 +319,17 @@ if(kingdomname.equalsIgnoreCase("Animals"))
     <%=cm.cmsPhrase("Source")%>
   </h2>
   <table summary="layout" class="datatable fullwidth">
+    <col style="width:20%"/>
+    <col style="width:80%"/>
     <tbody>
 <%
     PublicationWrapper book = factsheet.getSpeciesBook();
 %>
       <tr>
-        <td width="18%">
+        <td>
           <%=cm.cmsPhrase("Title")%>:
         </td>
-        <td width="70%">
+        <td>
           <strong>
             <%=Utilities.treatURLSpecialCharacters(book.getTitle())%>
           </strong>
@@ -372,8 +374,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
       if(book.getURL().length()>0)
       {
 %>
-          <a title="<%=cm.cms("species_factsheet_14_Title")%>" target="_blank" href="<%=Utilities.treatURLSpecialCharacters(book.getURL().replaceAll("#",""))%>"><%=Utilities.treatURLSpecialCharacters(book.getURL().replaceAll("#",""))%></a>
-          <%=cm.cmsTitle("species_factsheet_14_Title")%>
+          <a href="<%=Utilities.treatURLSpecialCharacters(book.getURL().replaceAll("#",""))%>"><%=Utilities.treatURLSpecialCharacters(book.getURL().replaceAll("#",""))%></a>
 <%
       }
       else
@@ -398,13 +399,15 @@ if(kingdomname.equalsIgnoreCase("Animals"))
     <%=cm.cmsPhrase("Synonyms")%>
   </h2>
   <table summary="<%=cm.cms("species_factsheet_10_Sum")%>" class="listing fullwidth">
+    <col style="width:40%"/>
+    <col style="width:60%"/>
     <thead>
       <tr>
-        <th width="40%" style="text-align:left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Scientific name")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
-        <th width="60%" style="text-align:left;">
+        <th scope="col">
           <%=cm.cmsPhrase("Author")%>
           <%=cm.cmsTitle("sort_by_column")%>
         </th>
@@ -418,27 +421,12 @@ if(kingdomname.equalsIgnoreCase("Animals"))
       SpeciesNatureObjectPersist synonym = (SpeciesNatureObjectPersist)synonyms.get(i);%>
     <tr class="<%=cssClass%>">
       <td>
-<%
-      if(synonym.getIdSpecies().intValue() == Utilities.checkedStringToInt(idSpecies, 0))
-      {
-%>
-        <strong style="color : #C30000; font-style : italic; ">
-          <%=Utilities.treatURLSpecialCharacters(synonym.getScientificName())%>
-        </strong>
-<%
-      }
-      else
-      {
-%>
         <%=Utilities.treatURLSpecialCharacters(synonym.getScientificName())%>
-<%
-      }
-%>
-        </td>
-        <td>
+      </td>
+      <td>
           <%=Utilities.treatURLSpecialCharacters(synonym.getAuthor())%>
-        </td>
-      </tr>
+      </td>
+    </tr>
 <%
     }
 %>

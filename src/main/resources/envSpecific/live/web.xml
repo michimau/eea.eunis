@@ -462,6 +462,10 @@
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/refreshtemplate</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StripesDispatcher</servlet-name>
+		<url-pattern>/pictures-upload.jsp</url-pattern>
+	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>

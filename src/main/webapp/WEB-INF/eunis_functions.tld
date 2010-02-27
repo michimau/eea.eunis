@@ -70,6 +70,25 @@
 			${br(actionBean.webContent)}
 		</example>
 	</function>
+
+	<function>
+		<description>Wrapper to call WebContentManagement.cmsInput</description>
+		<name>cmsInput</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>String cmsInput(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
+		<example>
+			${cmsInput(actionBean.webContent, text)}
+		</example>
+	</function>
+	<function>
+		<description>Wrapper to call WebContentManagement.cmsLabel</description>
+		<name>cmsLabel</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>String cmsLabel(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
+		<example>
+			${cmsLabel(actionBean.webContent, text)}
+		</example>
+	</function>
 	
 	<function>
 		<description>

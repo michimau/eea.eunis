@@ -72,6 +72,34 @@ public class JstlFunctions {
 	 * @param key
 	 * @return
 	 */
+	public static String cmsInput(WebContentManagement cms, String key ) {
+		if(key == null) { 
+			throw new NullPointerException("key cannot be null");
+		}
+		return cms != null
+		? cms.cmsInput(key)
+				: key;
+	}
+	
+	/**
+	 * @param cms
+	 * @param key
+	 * @return
+	 */
+	public static String cmsLabel(WebContentManagement cms, String key ) {
+		if(key == null) { 
+			throw new NullPointerException("key cannot be null");
+		}
+		return cms != null
+		? cms.cmsLabel(key)
+				: key;
+	}
+
+	/**
+	 * @param cms
+	 * @param key
+	 * @return
+	 */
 	public static String cmsPhrase(WebContentManagement cms, String key ) {
 		if(key == null) { 
 			throw new NullPointerException("key cannot be null");

@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb">
+<head>
+<meta http-equiv="Content-Language" content="en-us"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>EUNIS Map help</title>
+</head>
+
+<body>
+<h1>EUNIS Map help</h1>
+<p>The Eunis GIS tool is designed to provide geographical information about 
+Eunis sites, like finding a site, identifying a site, zooming and panning around 
+the Europe map.</p>
+<p>This tool need the Macromedia Flash Player<sup>®</sup> to be installed, this player is 
+free and can be found here:<a
+  href="http://www.macromedia.com/go/getflashplayer"><img
+  src="alternate.gif" width="88" height="31" alt="Get flash player icon"/></a>.</p>
+<h2>Map engine information</h2>
+<p>The map engine is based on EEA ArcIMS services, provided by
+<a href="http://geonode.eea.europa.eu">geonode.eea.europa.eu</a>. The service name is 
+eunis_europe. You can access this service using Eunis GIS tool application, or 
+using a different application, like
+<a href="http://www.esri.com/software/arcexplorer/index.html">ArcExplorer</a>. 
+In the same time, you can access this service using any GIS 
+software supporting the OpenGIS<sup>®</sup> protocols WMS 1.1.1 and WFS 1.0(see
+<a href="http://www.opengeospatial.org/">www.opengeospatial.org</a>).</p>
+<h2>Functionalities</h2>
+<p>Note for Macromedia Macromedia Flash Player<sup>®</sup> 8 users</p>
+<p>
+Due the enhanced security settings for Macromedia Flash Player 8, you must use 
+the advanced control panel settings, to allow flash player to connect to
+<a href="http://geonode.eea.europa.eu">geoneode.eea.europa.eu</a>. (<a href="flash_player_8.html">show</a>)</p>
+<h3>Navigation</h3>
+<p>The Eunis GIS tool can provide navigation over the map.</p>
+<dl>
+<dt>Zoom</dt>
+  <dd>
+<p>Zoom in: Can be done using drag window (<a href="zoomin_window.html">show</a>) 
+or single click (<a href="zoomin_click.html">show</a>)</p>
+<p>Zoom out. Can be done using drag window (<a href="zoomout_window.html">show</a>) 
+or single click as the previous zoom (<a href="zoomout_click.html">show</a>).</p>
+<p>Zoom all. The map will be displayed at the full extent (<a href="zoomall.html">show</a>).</p>
+<p>Zoom to specific country. The map can be displayed at the extent on a 
+selected country (<a href="zoomcountry.html">show</a>). By selecting NONE from 
+the combo box, the highlight over the country will be not displayed</p>
+<p>Precise zoom to an site from the selection list. On big and crowded 
+selections, you can zoom to a specific selected site. (<a href="zoomspecific.html">show</a>)</p>
+  </dd>
+<dt>Pan/Recenter</dt>
+<dd>
+<p>Dragging pan. Click an drag the map in the specific direction (<a href="pandrag.html">show</a>).</p>
+</dd>
+</dl>
+<p>You can use CTRL and numeric pad for panning, CTRL+ for zoom in CTRL- for 
+zoom out</p>
+
+<h3>Selections</h3>
+<dl>
+<dt>Selecting (Identifying). </dt>
+<dd>
+<p>Click on the specified point to display information about that specific Eunis 
+site (<a href="select_click.html">show</a>). </p>
+<p>You can click drag over the map for selection more than one Eunis site (<a href="select_window.html">show</a>) 
+, using rectangle and circle selection </p>
+<p>You can select Eunis point sites, or Eunis area sites (<a href="select_point_or_areas.html">show</a>). </p>
+<p>You can use CTRL and numeric pad 5 to identify everything is visible on 
+screen.</p>
+</dd>
+<dt>Find site by name</dt>
+<dd>
+<p>You can search for a site by name or by an part of the name (<a href="search_by_name.html">show</a>).</p>
+</dd>
+<dt>Clean selection</dt>
+<dd>
+<p>Any existing selection can be cleared on any moment (<a href="clear_selection.html">show</a>)\</p>
+</dd>
+<dt>Select by filtering database</dt>
+<dd>
+<p>You ca select sites just from one database. (<a href="databaseselect.html">show</a>)</p>
+</dd>
+</dl>
+
+<h3>Layer management</h3>
+<p>Each layer can be turned on and off with using the layer list (<a href="layer_manage.html">show</a>).</p>
+
+<h3>Legend display</h3>
+<p>A brief legend is displayed on the Eunis GIS tool (<a href="legend.html">show</a>)</p>
+
+<h3>Layer Information</h3>
+<dl>
+<dt>Eunis Points: </dt>
+    <dd>
+<p>Eunis sites points, V2.2 (June 2005), the layer was derived from Eunis 
+database. The points with no coordinates or with 0,0 coordinates were remove. 
+The sites were converted to a point shapefile.</p>
+    </dd>
+<dt>Eunis Areas</dt>
+    <dd>
+<p>Eunis sites areas, V0.1 (Mai 2005). The layer is derived from Multiple 
+polygon shapes provided by member states. A polygon topology was created.</p>
+    </dd>
+<dt>Rivers, Capitals, Villages, Borders, Counties</dt>
+    <dd>
+<p>Base EEA map layers</p>
+    </dd>
+<dt>Elevation</dt>
+    <dd>
+<p>Base EEA Elevation layer, see
+<a href="http://dataservice.eea.europa.eu/dataservice/metadetails.asp?id=650">
+http://dataservice.eea.europa.eu/dataservice/metadetails.asp?id=650</a></p>
+    </dd>
+<dt>Biogeographical Regions</dt>
+    <dd>
+<p>Base EEA Biogeographical regions, see
+<a href="http://dataservice.eea.europa.eu/atlas/viewdata/viewpub.asp?id=221">
+http://dataservice.eea.europa.eu/atlas/viewdata/viewpub.asp?id=221</a></p>
+    </dd>
+<dt>Forests</dt>
+    <dd>
+<p>See <a href="http://dataservice.eea.europa.eu/atlas/viewdata/viewpub.asp?id=31">
+http://dataservice.eea.europa.eu/atlas/viewdata/viewpub.asp?id=31</a></p>
+    </dd>
+<dt>CLC 2000</dt>
+    <dd>
+<p>See
+<a href="http://dataservice.eea.europa.eu/dataservice/metadetails.asp?id=759">
+http://dataservice.eea.europa.eu/dataservice/metadetails.asp?id=759</a></p>
+    </dd>
+<dt>CLC 1990</dt>
+    <dd>
+<p>See
+<a href="http://dataservice.eea.europa.eu/dataservice/metadetails.asp?id=309">
+http://dataservice.eea.europa.eu/dataservice/metadetails.asp?id=309</a></p>
+    </dd>
+<dt>Scalebar</dt>
+    <dd>
+<p>Dynamic scale bar generated by ArcIMS service</p>
+    </dd>
+</dl>
+
+</body>
+</html>

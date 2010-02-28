@@ -1,0 +1,250 @@
+/**
+dark    : #000000
+medium  : #000000
+light   : #B8D6E8
+**/
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small;
+  background-color: #FFFFFF;
+  margin-left: 20px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  font-size: small;
+}
+
+form {
+  margin: 0px;
+}
+
+.fontSmall {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-small;
+}
+
+.fontNormal {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small;
+}
+
+.fontMedium {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: medium;
+}
+
+.fontLarge {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+}
+
+.fontBold {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small;
+  font-weight: bold;
+}
+
+.textVersion {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-small;
+  color: #000000;
+}
+
+.inputTextFieldCenter {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white;
+  border: 1px solid #000000;
+  text-align: center;
+  color: #000000;
+
+}
+
+a:link {
+  color: #000000;
+  text-decoration: underline;
+  font-size: small;
+}
+
+a:visited {
+  color: #000000;
+  text-decoration: underline;
+  font-size: small;
+}
+
+a:active {
+  color: #000000;
+  text-decoration: underline;
+  font-size: small;
+}
+
+a:hover {
+  color: #FFFFFF;
+  background-color: #000000;
+  font-size: small;
+}
+
+.horizontal_line {
+  width: 100%;
+  height: 1px;
+  background-color: #000000
+}
+
+.grey_rectangle_bold {
+  background-color: #FFFFFF;
+  font-weight: bold;
+  width: 100%;
+}
+
+.grey_rectangle {
+  background-color: #FFFFFF;
+  width: 100%;
+}
+
+.editContent {
+  border: 1px solid red;
+}
+
+/* Tabbed menus  */
+#tabbedmenu {
+  float: left;
+  width: 100%;
+  border-bottom: thin solid #FFFFFF;
+  font-size: x-small;
+  line-height: normal;
+}
+
+#tabbedmenu ul {
+  margin: 0;
+  padding: 2px 2px 0;
+  list-style: none;
+  list-style-image: none;
+}
+
+#tabbedmenu li {
+  float: left;
+  margin: 0;
+  padding: 0 0 0 9px;
+  white-space: nowrap;
+}
+
+#tabbedmenu a {
+  display: block;
+  text-decoration: none;
+  font-weight: normal;
+  color: black;
+  padding: 5px 15px 2px 3px;
+}
+
+#tabbedmenu #currenttab {
+}
+
+#tabbedmenu #currenttab a {
+  text-decoration: none;
+  font-weight: bold;
+  padding-bottom: 2px;
+}
+
+.indexQS {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  background-color: white;
+  color: #000000;
+  border: 1px solid #000000;
+}
+
+#tab {
+  width: 300px;
+  height: 300px;
+  overflow: auto;
+}
+
+.brClear
+{
+  clear : both;
+}
+
+#overDiv
+{
+  z-index:1000;
+  visibility: hidden;
+  position: absolute;
+}
+
+.submit_buttons
+{
+  width : 100%;
+  text-align : right;
+}
+
+.coordinates
+{
+  font-family : "Courier New";
+  font-size : x-small;
+}
+
+#header {
+  width : 100%;
+  height : 20px;
+  overflow:hidden;
+}
+
+#header span {
+  width : 100%;
+  height : 20px;
+}
+
+.languageTextField {
+  font-family: arial, sans-serif;
+  background-color: #FFFFFF;
+  color: black;
+  border: 1px solid black;
+  position :relative;
+  top : 38px;
+}
+
+.search_details {
+	font-family: Arial, Helvetica, sans-serif;
+	clear: both;
+	width: 100%;
+	margin-top: 3px;
+	margin-bottom: 7px;
+	font-size: 95%;
+}
+
+.noshow {
+  display : none;
+}
+
+.boldUnderline {
+    font-weight :bold;
+    color: #000000;
+    text-decoration:underline;
+}
+
+#input disabled {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #FFFFFF;
+  color: #000000;
+  border: 1px solid #000000;
+}
+
+.footerprint {
+  display: none;
+}
+
+.headerstaticprint {
+  display: none;
+}
+
+.headerdynamicprint {
+  display: none;
+}
+
+.headerlanguageprint {
+  display: none;
+}
+
+.headertextprint {
+  text-align : left;
+}

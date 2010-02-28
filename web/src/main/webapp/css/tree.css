@@ -1,0 +1,27 @@
+#tree
+{
+	font-family: verdana, helvetica, sans-serif;
+	font-size: 0.9em;
+}
+
+#tree a
+{
+	color: #000;
+	text-decoration: none;
+	font-size: 0.9em;
+	font-family: verdana, helvetica, sans-serif;
+}
+
+#tree img
+{
+	border: 0px;
+	width: 19px;
+	height: 16px;
+}
+
+ul.tree {
+	margin: 1em 0;
+	list-style-image: none;
+	list-style: none;
+	padding-left: 2em;
+}

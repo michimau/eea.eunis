@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+           xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+           xmlns:owl="http://www.w3.org/2002/07/owl#"
+           xmlns:dcterms="http://purl.org/dc/terms/" 
+           xmlns:foaf="http://xmlns.com/foaf/0.1/"
+           xmlns:void="http://rdfs.org/ns/void#">
+
+   <!-- This file is a listing of the RDF outputs supported by EUNIS
+        See http://rdfs.org/ns/void-guide
+    -->
+  <foaf:Organization rdf:ID="EEA">
+    <foaf:name>European Environment Agency</foaf:name>
+    <foaf:homepage rdf:resource="http://www.eea.europa.eu/"/>
+    <owl:sameAs rdf:resource="http://rod.eionet.europa.eu/clients/3"/>
+  </foaf:Organization>
+
+  <void:Dataset rdf:ID="eunis">
+    <dcterms:title>EUNIS - European Nature Information System</dcterms:title>
+    <dcterms:description>EUNIS consists of information on Species, Habitat types and Sites</dcterms:description>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <foaf:homepage rdf:resource="http://eunis.eea.europa.eu/"/>
+    <void:exampleResource rdf:resource="http://eunis.eea.europa.eu/species/4055"/>
+    <void:exampleResource rdf:resource="http://eunis.eea.europa.eu/sites/UK930012"/>
+    <void:uriPattern>^http://eunis.eea.europa.eu/.*</void:uriPattern>
+    <void:subset rdf:resource="#documents"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="documents">
+    <dcterms:title>Documents from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/documents"/>
+  </void:Dataset>
+
+</rdf:RDF>
+

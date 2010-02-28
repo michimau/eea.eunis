@@ -1,0 +1,406 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+xmlns:cr="http://cr.eionet.europa.eu/ontologies/contreg.rdf#"
+xmlns="http://eunis.eea.europa.eu/rdf/sites-schema.rdf#">
+<siteFactsheetDto rdf:about="http://eunisimport.eea.europa.eu/sites-factsheet.jsp?idsite=100037">
+    <hasDesignation rdf:resource="http://eunis.eea.europa.eu/designations/MK05"/>
+    <hasGeoscope rdf:resource="http://eunis.eea.europa.eu/geoscope/167"/>
+    <idSite>100037</idSite>
+    <idNatureObject>325706</idNatureObject>
+    <designation>Spomenik na prirodata</designation>
+    <respondent></respondent>
+    <name>Matka Canyon</name>
+    <manager></manager>
+    <complexName></complexName>
+    <districtName></districtName>
+    <ownership></ownership>
+    <history></history>
+    <character></character>
+    <description>Matka Canyon is located within Former Yugoslav Rep. of Macedonia  is part of the CDDA National database.</description>
+    <managementPlan></managementPlan>
+    <iucnat></iucnat>
+    <designationDate>1994</designationDate>
+    <compilationDate></compilationDate>
+    <proposedDate></proposedDate>
+    <confirmedDate></confirmedDate>
+    <updateDate></updateDate>
+    <spaDate></spaDate>
+    <sacDate></sacDate>
+    <nationalCode></nationalCode>
+    <natura2000></natura2000>
+    <area>5443.000000000</area>
+    <length></length>
+    <longEw>E</longEw>
+    <longDeg>21</longDeg>
+    <longMin>18</longMin>
+    <longSec>0</longSec>
+    <latNs>N</latNs>
+    <latDeg>41</latDeg>
+    <latMin>57</latMin>
+    <latSec>0</latSec>
+    <longitude>21.300000000</longitude>
+    <latitude>41.950000000</latitude>
+    <sourceDb>CDDA_NATIONAL</sourceDb>
+</siteFactsheetDto>
+<siteFactsheetDto rdf:about="http://eunisimport.eea.europa.eu/sites-factsheet.jsp?idsite=10060">
+    <hasDesignation rdf:resource="http://eunis.eea.europa.eu/designations/IE01"/>
+    <hasGeoscope rdf:resource="http://eunis.eea.europa.eu/geoscope/131"/>
+    <idSite>10060</idSite>
+    <idNatureObject>317110</idNatureObject>
+    <designation>National Nature Reserve - Section 15 of Wildlife Act 1976</designation>
+    <respondent></respondent>
+    <name>Pettigo Plateau</name>
+    <manager></manager>
+    <complexName></complexName>
+    <districtName></districtName>
+    <ownership></ownership>
+    <history></history>
+    <character></character>
+    <description>Pettigo Plateau is located within Ireland  is part of the CDDA National database.</description>
+    <managementPlan></managementPlan>
+    <iucnat></iucnat>
+    <designationDate>1984</designationDate>
+    <compilationDate></compilationDate>
+    <proposedDate></proposedDate>
+    <confirmedDate></confirmedDate>
+    <updateDate></updateDate>
+    <spaDate></spaDate>
+    <sacDate></sacDate>
+    <nationalCode></nationalCode>
+    <natura2000></natura2000>
+    <area>2088.000000000</area>
+    <length></length>
+    <longEw>W</longEw>
+    <longDeg>8</longDeg>
+    <longMin>1</longMin>
+    <longSec>0</longSec>
+    <latNs>N</latNs>
+    <latDeg>54</latDeg>
+    <latMin>37</latMin>
+    <latSec>0</latSec>
+    <longitude>-8.016666667</longitude>
+    <latitude>54.616666667</latitude>
+    <sourceDb>CDDA_NATIONAL</sourceDb>
+</siteFactsheetDto>
+<siteFactsheetDto rdf:about="http://eunisimport.eea.europa.eu/sites-factsheet.jsp?idsite=100016">
+    <hasDesignation rdf:resource="http://eunis.eea.europa.eu/designations/Z"/>
+    <hasGeoscope rdf:resource="http://eunis.eea.europa.eu/geoscope/13"/>
+    <idSite>100016</idSite>
+    <idNatureObject>325705</idNatureObject>
+    <designation>Zapovednik</designation>
+    <respondent></respondent>
+    <name>Prisurskiy</name>
+    <manager></manager>
+    <complexName></complexName>
+    <districtName></districtName>
+    <ownership></ownership>
+    <history></history>
+    <character></character>
+    <description>Prisurskiy is located within Russian Federation  is part of the CDDA National database.</description>
+    <managementPlan></managementPlan>
+    <iucnat></iucnat>
+    <designationDate>1995</designationDate>
+    <compilationDate></compilationDate>
+    <proposedDate></proposedDate>
+    <confirmedDate></confirmedDate>
+    <updateDate></updateDate>
+    <spaDate></spaDate>
+    <sacDate></sacDate>
+    <nationalCode></nationalCode>
+    <natura2000></natura2000>
+    <area>19000.000000000</area>
+    <length></length>
+    <longEw>E</longEw>
+    <longDeg>0</longDeg>
+    <longMin>0</longMin>
+    <longSec>0</longSec>
+    <latNs>N</latNs>
+    <latDeg>0</latDeg>
+    <latMin>0</latMin>
+    <latSec>0</latSec>
+    <longitude>0.000000000</longitude>
+    <latitude>0.000000000</latitude>
+    <sourceDb>CDDA_NATIONAL</sourceDb>
+</siteFactsheetDto>
+<siteFactsheetDto rdf:about="http://eunisimport.eea.europa.eu/sites-factsheet.jsp?idsite=10061">
+    <hasDesignation rdf:resource="http://eunis.eea.europa.eu/designations/IE01"/>
+    <hasGeoscope rdf:resource="http://eunis.eea.europa.eu/geoscope/131"/>
+    <idSite>10061</idSite>
+    <idNatureObject>317111</idNatureObject>
+    <designation>National Nature Reserve - Section 15 of Wildlife Act 1976</designation>
+    <respondent></respondent>
+    <name>Oldhead Wood</name>
+    <manager></manager>
+    <complexName></complexName>
+    <districtName></districtName>
+    <ownership></ownership>
+    <history></history>
+    <character></character>
+    <description>Oldhead Wood is located within Ireland  is part of the CDDA National database.</description>
+    <managementPlan></managementPlan>
+    <iucnat></iucnat>
+    <designationDate>1984</designationDate>
+    <compilationDate></compilationDate>
+    <proposedDate></proposedDate>
+    <confirmedDate></confirmedDate>
+    <updateDate></updateDate>
+    <spaDate></spaDate>
+    <sacDate></sacDate>
+    <nationalCode></nationalCode>
+    <natura2000></natura2000>
+    <area>31.000000000</area>
+    <length></length>
+    <longEw>W</longEw>
+    <longDeg>9</longDeg>
+    <longMin>49</longMin>
+    <longSec>0</longSec>
+    <latNs>N</latNs>
+    <latDeg>53</latDeg>
+    <latMin>42</latMin>
+    <latSec>0</latSec>
+    <longitude>-9.816666667</longitude>
+    <latitude>53.700000000</latitude>
+    <sourceDb>CDDA_NATIONAL</sourceDb>
+</siteFactsheetDto>
+<siteFactsheetDto rdf:about="http://eunisimport.eea.europa.eu/sites-factsheet.jsp?idsite=100015">
+    <hasDesignation rdf:resource="http://eunis.eea.europa.eu/designations/Z"/>
+    <hasGeoscope rdf:resource="http://eunis.eea.europa.eu/geoscope/13"/>
+    <idSite>100015</idSite>
+    <idNatureObject>325704</idNatureObject>
+    <designation>Zapovednik</designation>
+    <respondent></respondent>
+    <name>Rostovskiy</name>
+    <manager></manager>
+    <complexName></complexName>
+    <districtName></districtName>
+    <ownership></ownership>
+    <history></history>
+    <character></character>
+    <description>Rostovskiy is located within Russian Federation  is part of the CDDA National database.</description>
+    <managementPlan></managementPlan>
+    <iucnat></iucnat>
+    <designationDate>1995</designationDate>
+    <compilationDate></compilationDate>
+    <proposedDate></proposedDate>
+    <confirmedDate></confirmedDate>
+    <updateDate></updateDate>
+    <spaDate></spaDate>
+    <sacDate></sacDate>
+    <nationalCode></nationalCode>
+    <natura2000></natura2000>
+    <area>9467.000000000</area>
+    <length></length>
+    <longEw>E</longEw>
+    <longDeg>0</longDeg>
+    <longMin>0</longMin>
+    <longSec>0</longSec>
+    <latNs>N</latNs>
+    <latDeg>0</latDeg>
+    <latMin>0</latMin>
+    <latSec>0</latSec>
+    <longitude>0.000000000</longitude>
+    <latitude>0.000000000</latitude>
+    <sourceDb>CDDA_NATIONAL</sourceDb>
+</siteFactsheetDto>
+<siteFactsheetDto rdf:about="http://eunisimport.eea.europa.eu/sites-factsheet.jsp?idsite=100014">
+    <hasDesignation rdf:resource="http://eunis.eea.europa.eu/designations/Z"/>
+    <hasGeoscope rdf:resource="http://eunis.eea.europa.eu/geoscope/13"/>
+    <idSite>100014</idSite>
+    <idNatureObject>325703</idNatureObject>
+    <designation>Zapovednik</designation>
+    <respondent></respondent>
+    <name>Koryakskiy</name>
+    <manager></manager>
+    <complexName></complexName>
+    <districtName></districtName>
+    <ownership></ownership>
+    <history></history>
+    <character></character>
+    <description>Koryakskiy is located within Russian Federation  is part of the CDDA National database.</description>
+    <managementPlan></managementPlan>
+    <iucnat></iucnat>
+    <designationDate>1995</designationDate>
+    <compilationDate></compilationDate>
+    <proposedDate></proposedDate>
+    <confirmedDate></confirmedDate>
+    <updateDate></updateDate>
+    <spaDate></spaDate>
+    <sacDate></sacDate>
+    <nationalCode></nationalCode>
+    <natura2000></natura2000>
+    <area>327156.000000000</area>
+    <length></length>
+    <longEw>E</longEw>
+    <longDeg>165</longDeg>
+    <longMin>0</longMin>
+    <longSec>0</longSec>
+    <latNs>N</latNs>
+    <latDeg>61</latDeg>
+    <latMin>0</latMin>
+    <latSec>0</latSec>
+    <longitude>165.000000000</longitude>
+    <latitude>61.000000000</latitude>
+    <sourceDb>CDDA_NATIONAL</sourceDb>
+</siteFactsheetDto>
+<siteFactsheetDto rdf:about="http://eunisimport.eea.europa.eu/sites-factsheet.jsp?idsite=100798">
+    <hasDesignation rdf:resource="http://eunis.eea.europa.eu/designations/HU01"/>
+    <hasGeoscope rdf:resource="http://eunis.eea.europa.eu/geoscope/107"/>
+    <idSite>100798</idSite>
+    <idNatureObject>325707</idNatureObject>
+    <designation>Nemzeti Park</designation>
+    <respondent></respondent>
+    <name>Duna-Dráva</name>
+    <manager></manager>
+    <complexName></complexName>
+    <districtName></districtName>
+    <ownership></ownership>
+    <history></history>
+    <character></character>
+    <description>Duna-Dráva is located within Hungary  is part of the CDDA National database.</description>
+    <managementPlan></managementPlan>
+    <iucnat></iucnat>
+    <designationDate>1996</designationDate>
+    <compilationDate></compilationDate>
+    <proposedDate></proposedDate>
+    <confirmedDate></confirmedDate>
+    <updateDate></updateDate>
+    <spaDate></spaDate>
+    <sacDate></sacDate>
+    <nationalCode></nationalCode>
+    <natura2000></natura2000>
+    <area>49386.000000000</area>
+    <length></length>
+    <longEw>E</longEw>
+    <longDeg>0</longDeg>
+    <longMin>0</longMin>
+    <longSec>0</longSec>
+    <latNs>N</latNs>
+    <latDeg>0</latDeg>
+    <latMin>0</latMin>
+    <latSec>0</latSec>
+    <longitude>0.000000000</longitude>
+    <latitude>0.000000000</latitude>
+    <sourceDb>CDDA_NATIONAL</sourceDb>
+</siteFactsheetDto>
+<siteFactsheetDto rdf:about="http://eunisimport.eea.europa.eu/sites-factsheet.jsp?idsite=100839">
+    <hasDesignation rdf:resource="http://eunis.eea.europa.eu/designations/IT01"/>
+    <hasGeoscope rdf:resource="http://eunis.eea.europa.eu/geoscope/137"/>
+    <idSite>100839</idSite>
+    <idNatureObject>325708</idNatureObject>
+    <designation>Parco Nazionale</designation>
+    <respondent></respondent>
+    <name>Asinara</name>
+    <manager></manager>
+    <complexName></complexName>
+    <districtName></districtName>
+    <ownership></ownership>
+    <history></history>
+    <character></character>
+    <description>Asinara is located within Italy  is part of the CDDA National database.</description>
+    <managementPlan></managementPlan>
+    <iucnat></iucnat>
+    <designationDate>1997</designationDate>
+    <compilationDate></compilationDate>
+    <proposedDate></proposedDate>
+    <confirmedDate></confirmedDate>
+    <updateDate></updateDate>
+    <spaDate></spaDate>
+    <sacDate></sacDate>
+    <nationalCode></nationalCode>
+    <natura2000></natura2000>
+    <area>5170.000000000</area>
+    <length></length>
+    <longEw>E</longEw>
+    <longDeg>8</longDeg>
+    <longMin>16</longMin>
+    <longSec>47</longSec>
+    <latNs>N</latNs>
+    <latDeg>41</latDeg>
+    <latMin>3</latMin>
+    <latSec>19</latSec>
+    <longitude>8.279619711</longitude>
+    <latitude>41.055278674</latitude>
+    <sourceDb>CDDA_NATIONAL</sourceDb>
+</siteFactsheetDto>
+<siteFactsheetDto rdf:about="http://eunisimport.eea.europa.eu/sites-factsheet.jsp?idsite=101189">
+    <hasDesignation rdf:resource="http://eunis.eea.europa.eu/designations/EE05"/>
+    <hasGeoscope rdf:resource="http://eunis.eea.europa.eu/geoscope/75"/>
+    <idSite>101189</idSite>
+    <idNatureObject>325709</idNatureObject>
+    <designation>Looduskaitseala</designation>
+    <respondent></respondent>
+    <name>Akste looduskaitseala</name>
+    <manager></manager>
+    <complexName></complexName>
+    <districtName></districtName>
+    <ownership></ownership>
+    <history></history>
+    <character></character>
+    <description>Akste looduskaitseala is located within Estonia  is part of the CDDA National database.</description>
+    <managementPlan></managementPlan>
+    <iucnat></iucnat>
+    <designationDate>1977</designationDate>
+    <compilationDate></compilationDate>
+    <proposedDate></proposedDate>
+    <confirmedDate></confirmedDate>
+    <updateDate></updateDate>
+    <spaDate></spaDate>
+    <sacDate></sacDate>
+    <nationalCode></nationalCode>
+    <natura2000></natura2000>
+    <area>188.000000000</area>
+    <length></length>
+    <longEw>E</longEw>
+    <longDeg>27</longDeg>
+    <longMin>0</longMin>
+    <longSec>49</longSec>
+    <latNs>N</latNs>
+    <latDeg>58</latDeg>
+    <latMin>9</latMin>
+    <latSec>58</latSec>
+    <longitude>27.013678080</longitude>
+    <latitude>58.166178557</latitude>
+    <sourceDb>CDDA_NATIONAL</sourceDb>
+</siteFactsheetDto>
+<siteFactsheetDto rdf:about="http://eunisimport.eea.europa.eu/sites-factsheet.jsp?idsite=101190">
+    <hasDesignation rdf:resource="http://eunis.eea.europa.eu/designations/EE05"/>
+    <hasGeoscope rdf:resource="http://eunis.eea.europa.eu/geoscope/75"/>
+    <idSite>101190</idSite>
+    <idNatureObject>325710</idNatureObject>
+    <designation>Looduskaitseala</designation>
+    <respondent></respondent>
+    <name>Alema looduskaitseala</name>
+    <manager></manager>
+    <complexName></complexName>
+    <districtName></districtName>
+    <ownership></ownership>
+    <history></history>
+    <character></character>
+    <description>Alema looduskaitseala is located within Estonia  is part of the CDDA National database.</description>
+    <managementPlan></managementPlan>
+    <iucnat></iucnat>
+    <designationDate>1981</designationDate>
+    <compilationDate></compilationDate>
+    <proposedDate></proposedDate>
+    <confirmedDate></confirmedDate>
+    <updateDate></updateDate>
+    <spaDate></spaDate>
+    <sacDate></sacDate>
+    <nationalCode></nationalCode>
+    <natura2000></natura2000>
+    <area>49.000000000</area>
+    <length></length>
+    <longEw>E</longEw>
+    <longDeg>24</longDeg>
+    <longMin>20</longMin>
+    <longSec>59</longSec>
+    <latNs>N</latNs>
+    <latDeg>59</latDeg>
+    <latMin>5</latMin>
+    <latSec>21</latSec>
+    <longitude>24.349764581</longitude>
+    <latitude>59.089029546</latitude>
+    <sourceDb>CDDA_NATIONAL</sourceDb>
+</siteFactsheetDto>
+
+</rdf:RDF>

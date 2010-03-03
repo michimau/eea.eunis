@@ -29,6 +29,7 @@ public class HabitatImportParser extends DefaultHandler {
         private PreparedStatement preparedStatementDcIndex;
         private PreparedStatement preparedStatementDcSource;
         private PreparedStatement preparedStatementHabitat;
+        private PreparedStatement preparedStatementHabitatDescription;
         private PreparedStatement preparedStatementNatureObject;
         
         private int maxDcIdInt = 0;
@@ -127,10 +128,15 @@ public class HabitatImportParser extends DefaultHandler {
         			preparedStatementHabitat.setInt(1, maxHabitatIdInt);
         			preparedStatementHabitat.setInt(2, maxNoIdInt);
         			preparedStatementHabitat.setString(3, name);
-        			preparedStatementHabitat.setString(4, description);
+        			preparedStatementHabitat.setString(4, name);
         			preparedStatementHabitat.setString(5, eunisCode);
         			preparedStatementHabitat.setString(6, level);
         			preparedStatementHabitat.addBatch();
+        			
+        			preparedStatementHabitatDescription.setInt(1, maxHabitatIdInt);
+        			preparedStatementHabitatDescription.setString(2, description);
+        			preparedStatementHabitatDescription.setInt(3, dcId);
+        			preparedStatementHabitatDescription.addBatch();
         			
         			preparedStatementNatureObject.setInt(1, maxNoIdInt);
         			preparedStatementNatureObject.setInt(2, dcId);
@@ -147,6 +153,9 @@ public class HabitatImportParser extends DefaultHandler {
                     	
                     	preparedStatementHabitat.executeBatch(); 
                     	preparedStatementHabitat.clearParameters(); 
+                    	
+                    	preparedStatementHabitatDescription.executeBatch(); 
+                    	preparedStatementHabitatDescription.clearParameters(); 
                     	
                     	preparedStatementNatureObject.executeBatch(); 
                     	preparedStatementNatureObject.clearParameters();
@@ -182,6 +191,9 @@ public class HabitatImportParser extends DefaultHandler {
             	String queryHabitat = "INSERT INTO CHM62EDT_HABITAT (ID_HABITAT, ID_NATURE_OBJECT, SCIENTIFIC_NAME, DESCRIPTION, EUNIS_HABITAT_CODE, PRIORITY, LEVEL) VALUES (?,?,?,?,?,0,?)";
             	this.preparedStatementHabitat = con.prepareStatement(queryHabitat);
             	
+            	String queryHabitatDesc = "INSERT INTO CHM62EDT_HABITAT_DESCRIPTION (ID_HABITAT, ID_LANGUAGE, DESCRIPTION, ID_DC) VALUES (?,25,?,?)";
+            	this.preparedStatementHabitatDescription = con.prepareStatement(queryHabitatDesc);
+            	
             	String queryNatureObject = "INSERT INTO CHM62EDT_NATURE_OBJECT (ID_NATURE_OBJECT, ID_DC, ORIGINAL_CODE, TYPE) VALUES (?,?,?,'HABITAT')";
             	this.preparedStatementNatureObject = con.prepareStatement(queryNatureObject);
             	
@@ -195,7 +207,10 @@ public class HabitatImportParser extends DefaultHandler {
                 	preparedStatementDcSource.clearParameters();
                 	
                 	preparedStatementHabitat.executeBatch(); 
-                	preparedStatementHabitat.clearParameters(); 
+                	preparedStatementHabitat.clearParameters();
+                	
+                	preparedStatementHabitatDescription.executeBatch(); 
+                	preparedStatementHabitatDescription.clearParameters(); 
                 	
                 	preparedStatementNatureObject.executeBatch(); 
                 	preparedStatementNatureObject.clearParameters();
@@ -247,6 +262,10 @@ public class HabitatImportParser extends DefaultHandler {
         		ps.executeUpdate();
         		
         		query = "DELETE FROM CHM62EDT_HABITAT WHERE ID_HABITAT != -1";
+        		ps = con.prepareStatement(query);
+        		ps.executeUpdate();
+        		
+        		query = "DELETE FROM CHM62EDT_HABITAT_DESCRIPTION";
         		ps = con.prepareStatement(query);
         		ps.executeUpdate();
         		

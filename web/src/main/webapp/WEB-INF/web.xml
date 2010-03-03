@@ -481,6 +481,11 @@
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/dataimport/importcdda</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>StripesDispatcher</servlet-name>
+		<url-pattern>/dataimport/importhabitats</url-pattern>
+	</servlet-mapping>
 
 	<!-- Session expiration in minutes -->
 	<session-config>

@@ -98,6 +98,10 @@
                 		<a href="<%=domainName%>/dataimport/importcdda">Update CDDA site names</a><br/>
                 		The purpose of this page is to update CDDA site names
                 	</li>
+                	<li>
+                		<a href="<%=domainName%>/dataimport/importhabitats">Import habitats</a><br/>
+                		The purpose of this page is to import habitats from XML formatted file into EUNIS database.
+                	</li>
                 </ul>
 <!-- END MAIN CONTENT -->
               </div>

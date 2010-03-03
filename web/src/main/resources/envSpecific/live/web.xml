@@ -19,7 +19,7 @@
 	-->
 	<context-param>
 		<param-name>DOMAIN_NAME</param-name>
-		<param-value>http://eunis.eea.europa.eu</param-value>
+		<param-value>http://localhost:8080/eunis</param-value>
 		<description>Domain where application is installed</description>
 	</context-param>
 
@@ -37,7 +37,7 @@
 
 	<context-param>
 		<param-name>TOMCAT_HOME</param-name>
-		<param-value>C:\\tomcat5.5</param-value>
+		<param-value>/home/alex/apache-tomcat-5.5.28</param-value>
 		<description>Tomcat installation directory</description>
 	</context-param>
 
@@ -480,6 +480,11 @@
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/dataimport/importcdda</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>StripesDispatcher</servlet-name>
+		<url-pattern>/dataimport/importhabitats</url-pattern>
 	</servlet-mapping>
 
 	<!-- Session expiration in minutes -->

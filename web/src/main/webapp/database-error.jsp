@@ -1,4 +1,5 @@
-<%@ page import="ro.finsiel.eunis.search.Utilities" %>
+<%@ page import="ro.finsiel.eunis.search.Utilities, ro.finsiel.eunis.WebContentManagement" %>
+<jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%--
   - Author(s)   : The EUNIS Database Team.
   - Date        :
@@ -13,6 +14,9 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
     <jsp:include page="header-page.jsp" />
+    <%
+  		WebContentManagement cm = SessionManager.getWebContent();
+	%>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
     </title>

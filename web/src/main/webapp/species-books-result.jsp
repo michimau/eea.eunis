@@ -326,23 +326,12 @@
                     SpeciesBooksPersist book = (SpeciesBooksPersist) it.next();
                     // Sort this vernacular names in alphabetical order
                     String author = (book.getName() == null ? "" : book.getName());
+                    int dc_id = book.getId();
                     String url = book.getUrl().replaceAll("#", "");
                 %>
                     <tr>
                       <td>
-                        <%
-                            if (null != url && !url.equalsIgnoreCase(""))
-                            {
-                        %>
-                        <a target="_blank" href="<%=url%>"><%=Utilities.treatURLSpecialCharacters(author)%></a>
-                        <%
-                        } else
-                        {
-                        %>
-                        <%=Utilities.treatURLSpecialCharacters(author)%>
-                        <%
-                        }
-                        %>
+                        <a target="_blank" href="documents/<%=dc_id%>"><%=Utilities.treatURLSpecialCharacters(author)%></a>
                       </td>
                       <td>
                         <%=Utilities.formatString(Utilities.formatReferencesDate(book.getDate()), "&nbsp;")%>

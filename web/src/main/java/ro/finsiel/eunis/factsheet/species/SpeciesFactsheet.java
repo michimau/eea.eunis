@@ -10,6 +10,7 @@ import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTyp
 import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.factsheet.PublicationWrapper;
+import ro.finsiel.eunis.utilities.EunisUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
@@ -619,7 +620,7 @@ public class SpeciesFactsheet {
     sql = " (ID_SPECIES_LINK = '" + getSpeciesNatureObject().getIdSpecies() + "'";
     sql += " AND TYPE_RELATED_SPECIES='subspecies'";
     sql += " AND ID_SPECIES <> '" + getSpeciesNatureObject().getIdSpecies() + "')";
-    sql += " OR (SCIENTIFIC_NAME LIKE '" + getSpeciesNatureObject().getScientificName() + " %')";
+    sql += " OR (SCIENTIFIC_NAME LIKE '" + EunisUtil.replaceTagsImport(getSpeciesNatureObject().getScientificName()) + " %')";
     try
     {
       //System.out.println("sql = " + sql);

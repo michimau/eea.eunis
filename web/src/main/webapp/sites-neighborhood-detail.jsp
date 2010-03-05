@@ -120,7 +120,6 @@
               <div class="documentContent" id="region-content">
               	<jsp:include page="header-dynamic.jsp">
                         <jsp:param name="location" value="<%=location%>"/>
-                        <jsp:param name="downloadLink" value="<%=downloadLink%>"/>
                         <jsp:param name="mapLink" value="show"/>
                 </jsp:include>
                 <a name="documentContent"></a>

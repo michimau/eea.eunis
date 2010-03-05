@@ -1515,6 +1515,78 @@ public class SiteFactsheet {
     }
     return res;
   }
+  
+  /**
+   * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='QUALITY'.
+   *
+   * @return A list of Chm62edtSitesAttributesPersist objects.
+   */
+  public String getQuality() {
+    String res = "";
+    try
+    {
+      List results = new Chm62edtSitesAttributesDomain().findWhere( "ID_SITE='" + idSite + "' AND NAME='QUALITY'" );
+      if ( null != results && !results.isEmpty() )
+      {
+        Chm62edtSitesAttributesPersist persist = ( Chm62edtSitesAttributesPersist ) results.get( 0 );
+        res = persist.getValue();
+      }
+    }
+    catch ( Exception _ex )
+    {
+      _ex.printStackTrace( System.err );
+      res = "";
+    }
+    return res;
+  }
+  
+  /**
+   * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='VULNERABILITY'.
+   *
+   * @return A list of Chm62edtSitesAttributesPersist objects.
+   */
+  public String getVulnerability() {
+    String res = "";
+    try
+    {
+      List results = new Chm62edtSitesAttributesDomain().findWhere( "ID_SITE='" + idSite + "' AND NAME='VULNERABILITY'" );
+      if ( null != results && !results.isEmpty() )
+      {
+        Chm62edtSitesAttributesPersist persist = ( Chm62edtSitesAttributesPersist ) results.get( 0 );
+        res = persist.getValue();
+      }
+    }
+    catch ( Exception _ex )
+    {
+      _ex.printStackTrace( System.err );
+      res = "";
+    }
+    return res;
+  }
+  
+  /**
+   * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='DOCUMENTATION'.
+   *
+   * @return A list of Chm62edtSitesAttributesPersist objects.
+   */
+  public String getDocumentation() {
+    String res = "";
+    try
+    {
+      List results = new Chm62edtSitesAttributesDomain().findWhere( "ID_SITE='" + idSite + "' AND NAME='DOCUMENTATION'" );
+      if ( null != results && !results.isEmpty() )
+      {
+        Chm62edtSitesAttributesPersist persist = ( Chm62edtSitesAttributesPersist ) results.get( 0 );
+        res = persist.getValue();
+      }
+    }
+    catch ( Exception _ex )
+    {
+      _ex.printStackTrace( System.err );
+      res = "";
+    }
+    return res;
+  }
 
   /**
    * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='EDUCATIONAL_INTEREST'.

@@ -54,11 +54,8 @@ public class Chm62edtSitesPersist extends PersistentObject implements Coordinate
   private String complexName = null;
   private String districtName = null;
   private String ownership = null;
-  private String quality = null;
-  private String vulnerability = null;
   private String history = null;
   private String character = null;
-  private String documentation = null;
   private String managementPlan = null;
   private String iucnat = null;
   private String year = null;
@@ -176,24 +173,6 @@ public class Chm62edtSitesPersist extends PersistentObject implements Coordinate
     this.ownership = ownership;
   }
 
-  public String getQuality() {
-    if (null == quality) return "";
-    return quality;
-  }
-
-  public void setQuality(String quality) {
-    this.quality = quality;
-  }
-
-  public String getVulnerability() {
-    if (null == vulnerability) return "";
-    return vulnerability;
-  }
-
-  public void setVulnerability(String vulnerability) {
-    this.vulnerability = vulnerability;
-  }
-
   public String getHistory() {
     return history;
   }
@@ -209,15 +188,6 @@ public class Chm62edtSitesPersist extends PersistentObject implements Coordinate
 
   public void setCharacter(String character) {
     this.character = character;
-  }
-
-  public String getDocumentation() {
-    if (null == documentation) return "";
-    return documentation;
-  }
-
-  public void setDocumentation(String documentation) {
-    this.documentation = documentation;
   }
 
   public String getManagementPlan() {

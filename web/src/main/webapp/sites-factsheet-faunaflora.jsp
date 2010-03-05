@@ -14,7 +14,7 @@
                  ro.finsiel.eunis.jrfTables.sites.factsheet.SiteSpeciesPersist,
                  ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesPersist,
                  ro.finsiel.eunis.jrfTables.sites.factsheet.SitesSpeciesReportAttributesPersist,
-                 ro.finsiel.eunis.WebContentManagement,
+                 ro.finsiel.eunis.WebContentManagement, ro.finsiel.eunis.utilities.EunisUtil,
                  ro.finsiel.eunis.utilities.SQLUtilities, ro.finsiel.eunis.search.Utilities"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
@@ -156,11 +156,11 @@
 <%
   }
   String character = factsheet.getSiteObject().getCharacter();
-  String quality = factsheet.getSiteObject().getQuality();
-  String vulnerability = factsheet.getSiteObject().getVulnerability();
+  String quality = factsheet.getQuality();
+  String vulnerability = factsheet.getVulnerability();
   String designation = (null != designationDescr) ? designationDescr : "";
   String ownership = factsheet.getSiteObject().getOwnership();
-  String documentation = factsheet.getSiteObject().getDocumentation();
+  String documentation = factsheet.getDocumentation();
   String characterization = factsheet.getHabitatCharacterization();
   String floraCharacterization = factsheet.getFloraCharacterization();
   String faunaCharacterization = factsheet.getFaunaCharacterization();
@@ -215,7 +215,7 @@
           <%=cm.cmsPhrase("General character of the site")%>
         </th>
         <td>
-          <%=character%>&nbsp;
+          <%=EunisUtil.replaceTags(character,false,false)%>&nbsp;
         </td>
       </tr>
 <%
@@ -228,7 +228,7 @@
           <%=cm.cmsPhrase("Quality")%>
         </th>
         <td>
-          <%=quality%>&nbsp;
+          <%=EunisUtil.replaceTags(quality,false,false)%>&nbsp;
         </td>
       </tr>
       <tr class="zebraeven">
@@ -236,7 +236,7 @@
           <%=cm.cmsPhrase("Vulnerability")%>
         </th>
         <td>
-          <%=vulnerability%>&nbsp;
+          <%=EunisUtil.replaceTags(vulnerability,false,false)%>&nbsp;
         </td>
       </tr>
       <tr>
@@ -244,7 +244,7 @@
           <%=cm.cmsPhrase("Designation")%>
         </th>
         <td>
-          <%=designation%>&nbsp;
+          <%=EunisUtil.replaceTags(designation,false,false)%>&nbsp;
         </td>
       </tr>
       <tr class="zebraeven">
@@ -252,7 +252,7 @@
           <%=cm.cmsPhrase("Owner")%>
         </th>
         <td>
-          <%=ownership%>&nbsp;
+          <%=EunisUtil.replaceTags(ownership,false,false)%>&nbsp;
         </td>
       </tr>
       <tr>
@@ -260,7 +260,7 @@
           <%=cm.cmsPhrase("Documentation")%>
         </th>
         <td>
-          <%=documentation%>&nbsp;
+          <%=EunisUtil.replaceTags(documentation,false,false)%>&nbsp;
         </td>
       </tr>
 <%
@@ -273,7 +273,7 @@
           <%=cm.cmsPhrase("Habitat types")%>
         </th>
         <td>
-          <%=characterization%>&nbsp;
+          <%=EunisUtil.replaceTags(characterization,false,false)%>&nbsp;
         </td>
       </tr>
       <tr>
@@ -281,7 +281,7 @@
           <%=cm.cmsPhrase("Flora")%>
         </th>
         <td>
-          <%=floraCharacterization%>&nbsp;
+          <%=EunisUtil.replaceTags(floraCharacterization,false,false)%>&nbsp;
         </td>
       </tr>
       <tr class="zebraeven">
@@ -289,7 +289,7 @@
           <%=cm.cmsPhrase("Fauna")%>
         </th>
         <td>
-          <%=faunaCharacterization%>&nbsp;
+          <%=EunisUtil.replaceTags(faunaCharacterization,false,false)%>&nbsp;
         </td>
       </tr>
       <tr>
@@ -297,7 +297,7 @@
           <%=cm.cmsPhrase("Potential vegetation")%>
         </th>
         <td>
-          <%=potentialVegetation%>&nbsp;
+          <%=EunisUtil.replaceTags(potentialVegetation,false,false)%>&nbsp;
         </td>
       </tr>
 <%
@@ -310,7 +310,7 @@
           <%=cm.cmsPhrase("Geomorphology")%>
         </th>
         <td>
-          <%=geomorphology%>&nbsp;
+          <%=EunisUtil.replaceTags(geomorphology,false,false)%>&nbsp;
         </td>
       </tr>
       <tr>
@@ -318,12 +318,12 @@
           <%=cm.cmsPhrase("Educational interest")%>
         </th>
         <td>
-          <%=educationalInterest%>&nbsp;
+          <%=EunisUtil.replaceTags(educationalInterest,false,false)%>&nbsp;
         </td>
       </tr>
       <tr class="zebraeven">
         <th scope="row"><%=cm.cmsPhrase("Cultural heritage")%></th>
-        <td><%=culturalHeritage%>&nbsp;</td>
+        <td><%=EunisUtil.replaceTags(culturalHeritage,false,false)%>&nbsp;</td>
       </tr>
 <%
   }
@@ -332,7 +332,7 @@
 %>
       <tr>
         <th scope="row"><%=cm.cmsPhrase("Justification")%></th>
-        <td><%=justification%>&nbsp;</td>
+        <td><%=EunisUtil.replaceTags(justification,false,false)%>&nbsp;</td>
       </tr>
 <%
   }
@@ -341,11 +341,11 @@
 %>
       <tr class="zebraeven">
         <th scope="row"><%=cm.cmsPhrase("Methodology")%></th>
-        <td><%=methodology%>&nbsp;</td>
+        <td><%=EunisUtil.replaceTags(methodology,false,false)%>&nbsp;</td>
       </tr>
       <tr>
         <th scope="row"><%=cm.cmsPhrase("Budget")%></th>
-        <td><%=budget%>&nbsp;</td>
+        <td><%=EunisUtil.replaceTags(budget,false,false)%>&nbsp;</td>
       </tr>
 <%
   }
@@ -357,7 +357,7 @@
 %>
       <tr class="zebraeven">
         <th scope="row"><%=cm.cmsPhrase("Management plan")%></th>
-        <td><%=managementPlan%>&nbsp;</td>
+        <td><%=EunisUtil.replaceTags(managementPlan,false,false)%>&nbsp;</td>
       </tr>
 <%
   }

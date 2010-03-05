@@ -361,11 +361,11 @@ public class PDFSitesFactsheet
     }
 
     String character = factsheet.getSiteObject().getCharacter();
-    String quality = factsheet.getSiteObject().getQuality();
-    String vulnerability = factsheet.getSiteObject().getVulnerability();
+    String quality = factsheet.getQuality();
+    String vulnerability = factsheet.getVulnerability();
     String designation = ( null != designationDescr ) ? designationDescr : " ";
     String ownership = factsheet.getSiteObject().getOwnership();
-    String documentation = factsheet.getSiteObject().getDocumentation();
+    String documentation = factsheet.getDocumentation();
     String characterization = factsheet.getHabitatCharacterization();
     String floraCharacterization = factsheet.getFloraCharacterization();
     String faunaCharacterization = factsheet.getFaunaCharacterization();

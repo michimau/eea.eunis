@@ -313,7 +313,7 @@ public class TabScripts {
 		      rs = ps.executeQuery();
 		      while (rs.next()) {
 		    	  int noid = rs.getInt("ID_NATURE_OBJECT");
-		    	  int siteid = rs.getInt("ID_SITE");
+		    	  String siteid = rs.getString("ID_SITE");
 		    	  
 	    		  String sql = "INSERT IGNORE INTO chm62edt_tab_page_sites (ID_NATURE_OBJECT,GENERAL_INFORMATION) VALUES(" + noid + ",'Y')";
 	    		  ps2 = con.prepareStatement(sql);
@@ -321,7 +321,7 @@ public class TabScripts {
 	    		  
 	    		  String fields = "";
 	    		  
-	    		  SiteFactsheet factsheet = new SiteFactsheet(new Integer(siteid).toString());
+	    		  SiteFactsheet factsheet = new SiteFactsheet(siteid);
 	    		  int type = factsheet.getType();
 	    		  
 	    		  //DESIGNATION

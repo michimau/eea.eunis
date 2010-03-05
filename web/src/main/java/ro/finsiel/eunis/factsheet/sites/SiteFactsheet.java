@@ -5,6 +5,7 @@ import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.jrfTables.*;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.*;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
+import ro.finsiel.eunis.utilities.EunisUtil;
 
 import java.util.List;
 import java.util.Vector;
@@ -272,6 +273,7 @@ public class SiteFactsheet {
     {
       return null;
     }
+    attrName = EunisUtil.replaceTagsImport(attrName);
     Chm62edtSitesAttributesPersist result = null;
     try
     {

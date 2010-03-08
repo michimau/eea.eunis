@@ -159,7 +159,7 @@
 	<!-- Last modification date -->
 	<context-param>
 		<param-name>LAST_UPDATE</param-name>
-		<param-value>27 October 2006</param-value>
+		<param-value>11 December 2009</param-value>
 		<description>Date of last modification for the web site</description>
 	</context-param>
 

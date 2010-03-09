@@ -25,6 +25,7 @@ import eionet.eunis.util.Constants;
 public class CDDAImporterActionBean extends AbstractStripesAction {
 	
 	private FileBean file;
+	private boolean updateCountrySitesFactsheet = false;
 		
 	@DefaultHandler
 	public Resolution defaultAction() {
@@ -53,6 +54,8 @@ public class CDDAImporterActionBean extends AbstractStripesAction {
 				CddaImportParser parser = new CddaImportParser(con);
 				Map<String,String> sites = parser.execute(inputStream);
 				getContext().getSitesDao().deleteSites(sites);
+				if(updateCountrySitesFactsheet)
+					getContext().getSitesDao().updateCountrySitesFactsheet();
 				
 				showMessage("Successfully updated!");
 				
@@ -86,6 +89,14 @@ public class CDDAImporterActionBean extends AbstractStripesAction {
 
 	public void setFile(FileBean file) {
 	    this.file = file;
+	}
+
+	public boolean isUpdateCountrySitesFactsheet() {
+		return updateCountrySitesFactsheet;
+	}
+
+	public void setUpdateCountrySitesFactsheet(boolean updateCountrySitesFactsheet) {
+		this.updateCountrySitesFactsheet = updateCountrySitesFactsheet;
 	}
 
 }

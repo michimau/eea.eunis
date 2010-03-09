@@ -102,6 +102,10 @@
                 		<a href="<%=domainName%>/dataimport/importhabitats">Import habitats</a><br/>
                 		The purpose of this page is to import habitats from XML formatted file into EUNIS database.
                 	</li>
+                	<li>
+                		<a href="<%=domainName%>/dataimport/updatecountrysites">Update country sites factsheet</a><br/>
+                		The purpose of this page is to update "chm62edt_country_sites_factsheet" table.
+                	</li>
                 </ul>
 <!-- END MAIN CONTENT -->
               </div>

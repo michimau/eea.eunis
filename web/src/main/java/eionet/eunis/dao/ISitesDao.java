@@ -15,5 +15,7 @@ public interface ISitesDao {
 	 * @param Map sites
 	 */
 	void deleteSites(Map<String, String> sites) throws SQLException;
+	
+	public void updateCountrySitesFactsheet() throws SQLException;
 
 }

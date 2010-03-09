@@ -159,7 +159,7 @@
 	<!-- Last modification date -->
 	<context-param>
 		<param-name>LAST_UPDATE</param-name>
-		<param-value>11 December 2009</param-value>
+		<param-value>27 October 2006</param-value>
 		<description>Date of last modification for the web site</description>
 	</context-param>
 
@@ -485,6 +485,11 @@
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/dataimport/importhabitats</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>StripesDispatcher</servlet-name>
+		<url-pattern>/dataimport/updatecountrysites</url-pattern>
 	</servlet-mapping>
 
 	<!-- Session expiration in minutes -->

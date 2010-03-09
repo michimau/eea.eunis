@@ -2,18 +2,15 @@
 
 <%@ include file="/stripes/common/taglibs.jsp"%>	
 
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Update CDDA site names">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Update country sites factsheet">
 
 	<stripes:layout-component name="contents">
 
 	<c:choose>
 		<c:when test="${actionBean.context.sessionManager.authenticated && actionBean.context.sessionManager.importExportData_RIGHT}">
-	        <h1>Update National CDDA site names</h1>
-	        <stripes:form action="/dataimport/importcdda" method="post" name="f">
-	        	<stripes:file name="file"/><br/>
-	        	<stripes:checkbox name="updateCountrySitesFactsheet" id="update"/>
-	        	<stripes:label for="update"> - automatically update "chm62edt_country_sites_factsheet" table after import</stripes:label><br/>
-				<stripes:submit name="importCdda" value="Update"/>
+	        <h1>Update country sites factsheet</h1>
+	        <stripes:form action="/dataimport/updatecountrysites" method="post" name="f">
+				<stripes:submit name="update" value="Update"/>
 			</stripes:form>
 		</c:when>
 		<c:otherwise>
@@ -28,7 +25,7 @@
 			<div id="portal-column-one">
             	<div class="visualPadding">
               		<jsp:include page="/inc_column_left.jsp">
-                		<jsp:param name="page_name" value="dataimport/importcdda" />
+                		<jsp:param name="page_name" value="dataimport/updatecountrysites" />
               		</jsp:include>
             	</div>
           	</div>

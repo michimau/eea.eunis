@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import ro.finsiel.eunis.utilities.SQLUtilities;
@@ -223,6 +226,188 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 	    	ps15.close();
 	    }
 		
+	}
+	
+	public void updateCountrySitesFactsheet() throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
+		PreparedStatement ps2 = null;
+		ResultSet rs = null;
+		ResultSet rs1 = null;
+		ResultSet rs2 = null;
+		
+		try {
+	    	con = getSqlUtils().getConnection();
+	    	//Empty chm62edt_country_sites_factsheet table before update
+	    	ps = con.prepareStatement("DELETE FROM chm62edt_country_sites_factsheet");
+	    	ps.executeUpdate();
+	    	
+	    	ps = con.prepareStatement("SELECT DISTINCT SOURCE_DB FROM CHM62EDT_SITES WHERE SOURCE_DB IS NOT NULL");
+	    	rs = ps.executeQuery();
+	    	List<String> sources = new ArrayList<String>();
+			while(rs.next()){
+				String sourceDb = rs.getString("SOURCE_DB");
+				if(sourceDb != null)
+					sources.add(sourceDb);
+			}
+				
+			ps1 = con.prepareStatement("SELECT DISTINCT AREA_NAME_EN,SURFACE FROM CHM62EDT_COUNTRY WHERE ISO_2L<>'' AND ISO_2L IS NOT NULL AND AREA_NAME_EN IS NOT NULL");
+			rs1 = ps1.executeQuery();
+			while(rs1.next()){
+				String areaName = rs1.getString("AREA_NAME_EN");
+				if(areaName == null) areaName = "";
+				double surface = rs1.getDouble("SURFACE");
+				
+				for(Iterator<String> it=sources.iterator(); it.hasNext();){
+					String sourceDb = it.next();
+									
+					//here we calculate no of sites
+					String sql = "SELECT Count(DISTINCT C.ID_NATURE_OBJECT) AS cnt "+
+				        "FROM CHM62EDT_COUNTRY AS A "+
+				        "INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON A.ID_GEOSCOPE = B.ID_GEOSCOPE "+
+				        "INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "+
+				        "WHERE A.AREA_NAME_EN = ? AND C.SOURCE_DB = ?";
+					
+					ps2 = con.prepareStatement(sql);
+					ps2.setString(1, areaName);
+					ps2.setString(2, sourceDb);
+					rs2 = ps2.executeQuery();
+					int noSites = 0;
+					while(rs2.next()){
+						noSites = rs2.getInt("cnt");
+					}
+					
+					//here we calculate no of species
+			        sql = "SELECT COUNT(DISTINCT H.ID_NATURE_OBJECT) AS cnt FROM CHM62EDT_COUNTRY AS E INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON D.ID_GEOSCOPE = E.ID_GEOSCOPE INNER JOIN CHM62EDT_SITES AS C ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT INNER JOIN CHM62EDT_SPECIES AS H ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT " +
+			        		"WHERE E.AREA_NAME_EN = ? AND C.SOURCE_DB = ?";
+			        ps2 = con.prepareStatement(sql);
+					ps2.setString(1, areaName);
+					ps2.setString(2, sourceDb);
+					rs2 = ps2.executeQuery();
+					int noSpecies = 0;
+					while(rs2.next()){
+						noSpecies = rs2.getInt("cnt");
+					}
+					
+					//here we calculate no of habitats
+			        sql = "SELECT COUNT(DISTINCT H.ID_NATURE_OBJECT) AS cnt FROM CHM62EDT_COUNTRY AS E INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON D.ID_GEOSCOPE = E.ID_GEOSCOPE INNER JOIN CHM62EDT_SITES AS C ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS K ON C.ID_NATURE_OBJECT = K.ID_NATURE_OBJECT INNER JOIN CHM62EDT_HABITAT AS H " +
+			        		"ON K.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT WHERE E.AREA_NAME_EN = ? AND C.SOURCE_DB = ?";
+			        ps2 = con.prepareStatement(sql);
+					ps2.setString(1, areaName);
+					ps2.setString(2, sourceDb);
+					rs2 = ps2.executeQuery();
+					int noHabitat = 0;
+					while(rs2.next()){
+						noHabitat = rs2.getInt("cnt");
+					}
+					
+					//calculate area
+			        sql = "SELECT C.AREA AS AREA FROM CHM62EDT_COUNTRY AS A " +
+			        "INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON A.ID_GEOSCOPE = B.ID_GEOSCOPE " +
+			        "INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT " +
+			        "WHERE A.AREA_NAME_EN = ? AND C.SOURCE_DB = ? AND C.AREA IS NOT NULL AND C.AREA>0 " +
+			        "GROUP BY C.ID_NATURE_OBJECT";
+			        ps2 = con.prepareStatement(sql);
+					ps2.setString(1, areaName);
+					ps2.setString(2, sourceDb);
+					rs2 = ps2.executeQuery();
+					double totalSizePartial = 0;
+			        int no = 0;
+					while(rs2.next()){
+						totalSizePartial = totalSizePartial + rs2.getDouble("AREA");
+						no = no + 1;
+					}
+					
+					sql = "SELECT H.OVERLAP AS OVERLAP FROM CHM62EDT_COUNTRY AS A" +
+				        " INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON A.ID_GEOSCOPE = B.ID_GEOSCOPE" +
+				        " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT" +
+				        " INNER JOIN CHM62EDT_SITES_SITES AS H ON C.ID_SITE = H.ID_SITE" +
+				        " INNER JOIN CHM62EDT_SITES AS I ON H.ID_SITE_LINK = I.ID_SITE" +
+				        " WHERE A.AREA_NAME_EN = ? AND C.SOURCE_DB =?" +
+				        " AND H.OVERLAP>0 AND C.AREA>0 AND I.AREA>0 GROUP BY C.ID_SITE,I.ID_SITE,H.OVERLAP";
+					ps2 = con.prepareStatement(sql);
+					ps2.setString(1, areaName);
+					ps2.setString(2, sourceDb);
+					rs2 = ps2.executeQuery();
+					double totalSizeOverlap = 0;
+					while(rs2.next()){
+						totalSizeOverlap = totalSizeOverlap + rs2.getDouble("OVERLAP");
+						no = no + 1;
+					}
+			        
+					double totalSize = totalSizePartial - totalSizeOverlap;
+					double avgSize = 0;
+					if(no != 0)
+						avgSize = totalSize / no;
+					
+					double noSitesPerKm = 0;
+					if(noSites != 0){
+						if(surface != 0)
+							noSitesPerKm = noSites / surface;
+					}
+					
+					sql = "SELECT COUNT(DISTINCT C.ID_NATURE_OBJECT) AS cnt FROM CHM62EDT_COUNTRY AS A " +
+				        "INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON A.ID_GEOSCOPE = B.ID_GEOSCOPE " +
+				        "INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT " +
+				        "WHERE A.AREA_NAME_EN = ? AND C.SOURCE_DB = ? AND " +
+				        "((C.AREA IS NOT NULL AND C.AREA>0) OR (C.LENGTH IS NOT NULL AND C.LENGTH>0))";
+					ps2 = con.prepareStatement(sql);
+					ps2.setString(1, areaName);
+					ps2.setString(2, sourceDb);
+					rs2 = ps2.executeQuery();
+					double noSitesWithSurfaceAvailable = 0;
+					while(rs2.next()){
+						noSitesWithSurfaceAvailable = rs2.getDouble("cnt");
+					}
+					
+					double procent = 0;
+					if(noSites != 0)
+						procent = (noSitesWithSurfaceAvailable * 100) / noSites;
+					
+					sql = "SELECT C.AREA AS AREA FROM CHM62EDT_COUNTRY AS A " +
+				        "INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON A.ID_GEOSCOPE = B.ID_GEOSCOPE " +
+				        "INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT " +
+				        "WHERE A.AREA_NAME_EN = ? AND C.SOURCE_DB = ? AND C.AREA IS NOT NULL AND C.AREA>0 " +
+				        "GROUP BY C.ID_NATURE_OBJECT";
+					ps2 = con.prepareStatement(sql);
+					ps2.setString(1, areaName);
+					ps2.setString(2, sourceDb);
+					rs2 = ps2.executeQuery();
+					double sum = 0;
+					while(rs2.next()){
+						double area = rs2.getDouble("AREA");
+						sum = sum + (area - avgSize) * (area - avgSize);
+					}
+					
+					double standardDeviation = 0;
+					if(noSites != 0)
+						standardDeviation = Math.sqrt(sum / noSites);
+					
+					sql = "INSERT INTO chm62edt_country_sites_factsheet (AREA_NAME_EN, SOURCE_DB, NUMBER_OF_SITES, NUMBER_OF_SPECIES, " +
+							"NUMBER_OF_HABITATS, TOTAL_SIZE, NO_SITES_PER_SQUARE_KM, PROCENT_NO_SITES_WITH_SURFACE_AVAILABLE, AVG_SIZE, STANDARD_DEVIATION) " +
+							"VALUES (?,?,?,?,?,?,?,?,?,?)";
+					ps2 = con.prepareStatement(sql);
+					ps2.setString(1, areaName);
+					ps2.setString(2, sourceDb);
+					ps2.setInt(3, noSites);
+					ps2.setInt(4, noSpecies);
+					ps2.setInt(5, noHabitat);
+					ps2.setDouble(6, totalSize);
+					ps2.setDouble(7, noSitesPerKm);
+					ps2.setDouble(8, procent);
+					ps2.setDouble(9, avgSize);
+					ps2.setDouble(10, standardDeviation);
+					ps2.executeUpdate();
+				}
+			}
+	    	
+	    } catch ( Exception e ) {
+	    	e.printStackTrace();
+	    	throw new SQLException(e.getMessage(), e); 
+	    } finally {
+	    	getSqlUtils().closeAll(con, ps, rs);
+	    }
 	}
 
 }

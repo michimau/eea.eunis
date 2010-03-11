@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import ro.finsiel.eunis.dataimport.RDFHandlerObjects;
+import ro.finsiel.eunis.dataimport.parsers.RDFHandlerObjects;
 import ro.finsiel.eunis.utilities.EunisUtil;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 

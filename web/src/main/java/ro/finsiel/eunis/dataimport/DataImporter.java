@@ -23,6 +23,7 @@ import org.quartz.SchedulerFactory;
 import org.quartz.SimpleTrigger;
 import org.xml.sax.SAXException;
 
+import ro.finsiel.eunis.dataimport.parsers.ImportParser;
 import ro.finsiel.eunis.session.SessionManager;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 

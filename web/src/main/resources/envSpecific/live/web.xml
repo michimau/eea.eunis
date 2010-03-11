@@ -489,6 +489,11 @@
 	
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
+		<url-pattern>/dataimport/importreferences</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/dataimport/updatecountrysites</url-pattern>
 	</servlet-mapping>
 

@@ -2,16 +2,13 @@ package eionet.eunis.stripes.actions;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Map;
 
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.FileBean;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
-import ro.finsiel.eunis.dataimport.parsers.CddaImportParser;
+import ro.finsiel.eunis.dataimport.parsers.ReferencesImportParser;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 import eionet.eunis.util.Constants;
 
@@ -21,41 +18,35 @@ import eionet.eunis.util.Constants;
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
-@UrlBinding("/dataimport/importcdda")
-public class CDDAImporterActionBean extends AbstractStripesAction {
+@UrlBinding("/dataimport/importreferences")
+public class ReferencesImporterActionBean extends AbstractStripesAction {
 	
 	private FileBean file;
-	private boolean updateCountrySitesFactsheet = false;
 		
 	@DefaultHandler
 	public Resolution defaultAction() {
-		String forwardPage = "/stripes/cddaimporter.jsp";
-		setMetaDescription("Import National CDDA");
+		String forwardPage = "/stripes/referencesimporter.jsp";
+		setMetaDescription("Import References");
 		return new ForwardResolution(forwardPage);
 	}
 	
-	public Resolution importCdda() {
+	public Resolution importReferences() {
 		
-		String forwardPage = "/stripes/cddaimporter.jsp";
-		setMetaDescription("Import National CDDA");
+		String forwardPage = "/stripes/referencesimporter.jsp";
+		setMetaDescription("Import References");
 		if(getContext().getSessionManager().isAuthenticated() && getContext().getSessionManager().isImportExportData_RIGHT()){
-			Connection con = null;
 			InputStream inputStream = null;
 			
 			try{
 				
 				SQLUtilities sqlUtil = getContext().getSqlUtilities();
-				con = sqlUtil.getConnection();
 				
 				if (file != null){
 					inputStream = file.getInputStream();
 				}
 				
-				CddaImportParser parser = new CddaImportParser(con);
-				Map<String,String> sites = parser.execute(inputStream);
-				getContext().getSitesDao().deleteSites(sites);
-				if(updateCountrySitesFactsheet)
-					getContext().getSitesDao().updateCountrySitesFactsheet();
+				ReferencesImportParser parser = new ReferencesImportParser(sqlUtil);
+				parser.execute(inputStream);
 				
 				showMessage("Successfully updated!");
 				
@@ -74,8 +65,6 @@ public class CDDAImporterActionBean extends AbstractStripesAction {
 				if (inputStream!=null){
 					try{ inputStream.close(); } catch (Exception e){ e.printStackTrace();}
 				}
-				// close connection
-				try{ con.close(); } catch (SQLException se) { se.printStackTrace(); }
 			}
 		} else {
 			handleEunisException("You are not logged in or you do not have enough privileges to view this page!", Constants.SEVERITY_WARNING);
@@ -89,14 +78,6 @@ public class CDDAImporterActionBean extends AbstractStripesAction {
 
 	public void setFile(FileBean file) {
 	    this.file = file;
-	}
-
-	public boolean isUpdateCountrySitesFactsheet() {
-		return updateCountrySitesFactsheet;
-	}
-
-	public void setUpdateCountrySitesFactsheet(boolean updateCountrySitesFactsheet) {
-		this.updateCountrySitesFactsheet = updateCountrySitesFactsheet;
 	}
 
 }

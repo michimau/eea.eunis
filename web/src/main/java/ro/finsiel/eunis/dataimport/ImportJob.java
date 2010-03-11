@@ -10,6 +10,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.xml.sax.SAXException;
 
+import ro.finsiel.eunis.dataimport.parsers.ImportParser;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
 public class ImportJob implements Job {

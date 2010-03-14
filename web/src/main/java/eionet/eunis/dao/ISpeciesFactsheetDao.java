@@ -2,6 +2,7 @@ package eionet.eunis.dao;
 
 import java.util.List;
 
+import eionet.eunis.dto.SpeciesAttributeDto;
 import eionet.eunis.stripes.actions.SpeciesFactsheetActionBean;
 
 /**
@@ -45,5 +46,12 @@ public interface ISpeciesFactsheetDao {
 	 * @return - null, IFF nothing is found, list of integers otherwise.
 	 */
 	List<Integer> getSynonyms(int idSpecies);
+
+	/**
+	 * Fetch  all attributes for given idNatureObject.
+	 * @param idNatureObject
+	 * @return
+	 */
+	List<SpeciesAttributeDto> getAttributesForNatureObject(int idNatureObject);
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
+import org.simpleframework.xml.convert.Convert;
 
 
 /**
@@ -43,6 +44,8 @@ public class SpeciesFactsheetDto implements Serializable{
 	private SpeciesSynonymDto synonymFor;
 	@ElementList(required = false, inline = true, entry = "hasSynonym")
 	private List<SpeciesSynonymDto> hasSynonyms;
+	@ElementList(required = false, inline = true)
+	private List<SpeciesAttributeDto> attributes;
 	
 	
 	public String getScientificName() {
@@ -86,6 +89,12 @@ public class SpeciesFactsheetDto implements Serializable{
 	}
 	public void setHasSynonyms(List<SpeciesSynonymDto> hasSynonyms) {
 		this.hasSynonyms = hasSynonyms;
+	}
+	public List<SpeciesAttributeDto> getAttributes() {
+		return attributes;
+	}
+	public void setAttributes(List<SpeciesAttributeDto> attributes) {
+		this.attributes = attributes;
 	}
 	
 	

@@ -9,6 +9,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.utilities.SQLUtilities;
+import eionet.eunis.dto.SpeciesAttributeDto;
+import eionet.eunis.dto.readers.SpeciesAttributeDTOReader;
 
 /**
  * @author Aleksandr Ivanov
@@ -83,6 +85,22 @@ public class SpeciesFactsheetDaoImpl extends BaseDaoImpl implements ISpeciesFact
 		params.add(idSpecies);
 		try {
 			return utils.executeQuery(sql, params);
+		} catch (SQLException ignored) {
+			logger.error(ignored);
+			throw new RuntimeException(ignored);
+		}
+	}
+
+	public List<SpeciesAttributeDto> getAttributesForNatureObject(int idNatureObject) {
+		SQLUtilities utils = getSqlUtils();
+		String sql = "SELECT * FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES " +
+				"WHERE ID_NATURE_OBJECT = ? AND NAME NOT LIKE '\\_%'";
+		List<Object> params = new LinkedList<Object>();
+		params.add(idNatureObject);
+		try {
+			SpeciesAttributeDTOReader attributeReader = new SpeciesAttributeDTOReader();
+			utils.executeQuery(sql, params, attributeReader );
+			return attributeReader.getResultList();
 		} catch (SQLException ignored) {
 			logger.error(ignored);
 			throw new RuntimeException(ignored);

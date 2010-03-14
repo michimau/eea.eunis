@@ -14,11 +14,11 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
+import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.stream.Format;
 
 import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
-import ro.finsiel.eunis.jrfTables.species.VernacularNamesDomain;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
 import ro.finsiel.eunis.utilities.SQLUtilities;
@@ -50,10 +50,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 		{"SITES","sites"},
 		{"GBIF","gbif"}};
 
-	private static final String HEADER = "";
-
-	private static final String FOOTER = ""; 
-	
 	private String idSpecies;
 	private int idSpeciesLink;
 	
@@ -147,13 +143,19 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 			return new ErrorResolution(404);
 		}
 		
-		Persister persister = new Persister(new Format(4));
+		Persister persister = new Persister(new AnnotationStrategy(), new Format(4));
+		
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 		SpeciesFactsheetDto dto = new SpeciesFactsheetDto();
 		dto.setScientificName(factsheet.getSpeciesObject().getScientificName());
 		dto.setGenus(factsheet.getSpeciesObject().getGenus());
 		dto.setAuthor(factsheet.getSpeciesObject().getAuthor());
 		dto.setDwcScientificName(dto.getScientificName() + ' ' + dto.getAuthor());
+		
+		dto.setAttributes(
+				getContext().getSpeciesFactsheetDao().getAttributesForNatureObject(
+						factsheet.getSpeciesObject().getIdNatureObject()));
+		
 		List<VernacularNameWrapper> vernacularNames = SpeciesSearchUtility.findVernacularNames(
 						factsheet.getSpeciesObject().getIdNatureObject());
 		if (factsheet.getIdSpeciesLink() != null 

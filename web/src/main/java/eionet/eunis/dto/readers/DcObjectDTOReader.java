@@ -10,7 +10,7 @@ import eionet.eunis.dto.DcObjectDTO;
 import ro.finsiel.eunis.utilities.ResultSetBaseReader;
 
 
-public class DcObjectDTOReader extends ResultSetBaseReader {
+public class DcObjectDTOReader extends ResultSetBaseReader<DcObjectDTO> {
 	
 	/** */
 	List<DcObjectDTO> resultList = new ArrayList<DcObjectDTO>();

@@ -60,7 +60,7 @@ public class CDDAImporterActionBean extends AbstractStripesAction {
 				}
 				
 				if (fileSites != null){
-					/*inputStreamSites = fileSites.getInputStream();
+					inputStreamSites = fileSites.getInputStream();
 					
 					CddaSitesImportParser parser = new CddaSitesImportParser(sqlUtil);
 					Map<String, String> sites = parser.execute(inputStreamSites);
@@ -68,7 +68,7 @@ public class CDDAImporterActionBean extends AbstractStripesAction {
 					if(inputStreamSites!=null)
 						inputStreamSites.close();
 					
-					getContext().getSitesDao().deleteSites(sites);*/
+					getContext().getSitesDao().deleteSites(sites);
 					getContext().getSitesDao().updateDesignationsTable();
 				}
 

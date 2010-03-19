@@ -123,7 +123,7 @@ public final class GroupsDomain extends AbstractDomain implements Paginable
 
     List tempList = this.findWhere(filterSQL.toString());
     // After each query, reset the _resultCount, so countResults do correct numbering
-    _resultCount = new Long( this.recCount() );
+    _resultCount = new Long( -1 );
     return tempList;
   }
 

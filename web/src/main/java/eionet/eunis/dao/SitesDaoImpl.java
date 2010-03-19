@@ -409,5 +409,55 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 	    	getSqlUtils().closeAll(con, ps, rs);
 	    }
 	}
+	
+	public void updateDesignationsTable() throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		PreparedStatement ps2 = null;
+		PreparedStatement psUpdateDesignation = null;
+		
+		ResultSet rs = null;
+		ResultSet rs2 = null;
+	    try {
+	    	con = getSqlUtils().getConnection();
+	    	
+	    	String updateDesignation = "UPDATE CHM62EDT_DESIGNATIONS SET CDDA_SITES='Y', TOTAL_NUMBER=? WHERE ID_DESIGNATION=?";
+			psUpdateDesignation = con.prepareStatement(updateDesignation);
+	    	
+	    	String query = "SELECT ID_DESIGNATION FROM CHM62EDT_DESIGNATIONS WHERE SOURCE_DB = 'CDDA_NATIONAL'";
+	    	String query2 = "";
+	    	ps = con.prepareStatement(query);
+	    	rs = ps.executeQuery();
+			while(rs.next()){
+				String idDesignation = rs.getString("ID_DESIGNATION");
+				if(idDesignation != null && idDesignation.length() > 0){
+					query2 = "SELECT COUNT(ID_SITE) AS CNT FROM CHM62EDT_SITES WHERE ID_DESIGNATION=?";
+					ps2 = con.prepareStatement(query2);
+					ps2.setString(1, idDesignation);
+					rs2 = ps2.executeQuery();
+					while(rs2.next()){
+						int cnt = rs2.getInt("CNT");
+						if(cnt > 0){
+							psUpdateDesignation.setInt(1, cnt);
+							psUpdateDesignation.setString(2, idDesignation);
+							psUpdateDesignation.addBatch();
+						}
+					}
+				}
+			}
+			psUpdateDesignation.executeBatch();
+			psUpdateDesignation.clearParameters();
+			System.gc();
+					
+	    } catch ( Exception e ) {
+	    	e.printStackTrace();
+	    	throw new SQLException(e.getMessage(), e); 
+	    } finally {
+	    	getSqlUtils().closeAll(con, ps, rs);
+	    	if(ps2 != null) ps2.close();
+	    	if(psUpdateDesignation != null) psUpdateDesignation.close();
+	    	if(rs2 != null) rs.close();
+	    }
+	}
 
 }

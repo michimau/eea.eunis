@@ -95,8 +95,8 @@
                 		The purpose of this page is to import page links from geospecies database.
                 	</li>
                 	<li>
-                		<a href="<%=domainName%>/dataimport/importcdda">Update CDDA site names</a><br/>
-                		The purpose of this page is to update CDDA site names
+                		<a href="<%=domainName%>/dataimport/importcdda">Import National CDDA sites and designations</a><br/>
+                		The purpose of this page is to import national CDDA sites and designations
                 	</li>
                 	<li>
                 		<a href="<%=domainName%>/dataimport/importhabitats">Import habitats</a><br/>

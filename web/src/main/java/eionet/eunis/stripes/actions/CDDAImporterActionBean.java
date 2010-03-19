@@ -1,6 +1,5 @@
 package eionet.eunis.stripes.actions;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -11,7 +10,8 @@ import net.sourceforge.stripes.action.FileBean;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
-import ro.finsiel.eunis.dataimport.parsers.CddaImportParser;
+import ro.finsiel.eunis.dataimport.parsers.CddaSitesImportParser;
+import ro.finsiel.eunis.dataimport.parsers.DesignationsImportParser;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 import eionet.eunis.util.Constants;
 
@@ -24,56 +24,63 @@ import eionet.eunis.util.Constants;
 @UrlBinding("/dataimport/importcdda")
 public class CDDAImporterActionBean extends AbstractStripesAction {
 	
-	private FileBean file;
+	private FileBean fileDesignations;
+	private FileBean fileSites;
 	private boolean updateCountrySitesFactsheet = false;
 		
 	@DefaultHandler
 	public Resolution defaultAction() {
 		String forwardPage = "/stripes/cddaimporter.jsp";
-		setMetaDescription("Import National CDDA");
+		setMetaDescription("Import National CDDA Sites and Designations");
 		return new ForwardResolution(forwardPage);
 	}
 	
 	public Resolution importCdda() {
 		
 		String forwardPage = "/stripes/cddaimporter.jsp";
-		setMetaDescription("Import National CDDA");
+		setMetaDescription("Import National CDDA Sites and Designations");
 		if(getContext().getSessionManager().isAuthenticated() && getContext().getSessionManager().isImportExportData_RIGHT()){
 			Connection con = null;
-			InputStream inputStream = null;
+			InputStream inputStreamDesignations = null;
+			InputStream inputStreamSites = null;
 			
 			try{
 				
 				SQLUtilities sqlUtil = getContext().getSqlUtilities();
 				con = sqlUtil.getConnection();
 				
-				if (file != null){
-					inputStream = file.getInputStream();
+				if (fileDesignations != null){
+					inputStreamDesignations = fileDesignations.getInputStream();
+					
+					DesignationsImportParser parser = new DesignationsImportParser(sqlUtil);
+					parser.execute(inputStreamDesignations);
+					fileDesignations.delete();
+					if(inputStreamDesignations!=null)
+						inputStreamDesignations.close();
 				}
 				
-				CddaImportParser parser = new CddaImportParser(con);
-				Map<String,String> sites = parser.execute(inputStream);
-				getContext().getSitesDao().deleteSites(sites);
+				if (fileSites != null){
+					/*inputStreamSites = fileSites.getInputStream();
+					
+					CddaSitesImportParser parser = new CddaSitesImportParser(sqlUtil);
+					Map<String, String> sites = parser.execute(inputStreamSites);
+					fileSites.delete();
+					if(inputStreamSites!=null)
+						inputStreamSites.close();
+					
+					getContext().getSitesDao().deleteSites(sites);*/
+					getContext().getSitesDao().updateDesignationsTable();
+				}
+
 				if(updateCountrySitesFactsheet)
 					getContext().getSitesDao().updateCountrySitesFactsheet();
 				
-				showMessage("Successfully updated!");
+				showMessage("Successfully imported!");
 				
 			} catch(Exception e) {
 				e.printStackTrace();
 				handleEunisException(e.getMessage(), Constants.SEVERITY_ERROR);
 			} finally {
-				if(file != null){
-					try{
-						file.delete();
-					} catch(IOException ie){
-						ie.printStackTrace();
-					}
-				}
-				// close input stream
-				if (inputStream!=null){
-					try{ inputStream.close(); } catch (Exception e){ e.printStackTrace();}
-				}
 				// close connection
 				try{ con.close(); } catch (SQLException se) { se.printStackTrace(); }
 			}
@@ -82,14 +89,6 @@ public class CDDAImporterActionBean extends AbstractStripesAction {
 		}
 		return new ForwardResolution(forwardPage);
 	}
-	
-	public FileBean getFile() {
-	    return file;
-	}
-
-	public void setFile(FileBean file) {
-	    this.file = file;
-	}
 
 	public boolean isUpdateCountrySitesFactsheet() {
 		return updateCountrySitesFactsheet;
@@ -97,6 +96,22 @@ public class CDDAImporterActionBean extends AbstractStripesAction {
 
 	public void setUpdateCountrySitesFactsheet(boolean updateCountrySitesFactsheet) {
 		this.updateCountrySitesFactsheet = updateCountrySitesFactsheet;
+	}
+
+	public FileBean getFileDesignations() {
+		return fileDesignations;
+	}
+
+	public void setFileDesignations(FileBean fileDesignations) {
+		this.fileDesignations = fileDesignations;
+	}
+
+	public FileBean getFileSites() {
+		return fileSites;
+	}
+
+	public void setFileSites(FileBean fileSites) {
+		this.fileSites = fileSites;
 	}
 
 }

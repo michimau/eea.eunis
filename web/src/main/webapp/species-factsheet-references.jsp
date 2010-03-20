@@ -17,7 +17,7 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   WebContentManagement cm = SessionManager.getWebContent();
-  String idSpecies = request.getParameter("idSpecies");
+  String idSpecies = request.getParameter("mainIdSpecies");
    // Set SQL string
   String sql="";
   sql+="    SELECT";

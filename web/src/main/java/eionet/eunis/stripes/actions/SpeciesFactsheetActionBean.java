@@ -68,7 +68,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 	
 	@DefaultHandler
 	public Resolution index(){
-		
+		String idSpeciesText = null;
 		if(tab == null || tab.length() == 0){
 			tab = "general";
 		}
@@ -78,12 +78,16 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 			factsheet = new SpeciesFactsheet(0, 0);
 		}
 		int tempIdSpecies = 0;
+		
 		//get idSpecies based on the request param.
 		if (StringUtils.isNumeric(idSpecies)) {
 			tempIdSpecies = new Integer(idSpecies);
 		} else if (!StringUtils.isBlank(idSpecies)) {
+			idSpeciesText = idSpecies;
 			tempIdSpecies = getContext().getSpeciesFactsheetDao().getIdSpeciesForScientificName(this.idSpecies);
 		}
+		
+		
 		int mainIdSpecies = getContext().getSpeciesFactsheetDao().getCanonicalIdSpecies(tempIdSpecies);
 		//it is not a synonym, check the referer
 		if (mainIdSpecies == tempIdSpecies) {
@@ -97,8 +101,17 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 		//it's a synonym for another specie, redirect.
 		else {
 			getContext().addToSession("referer", tempIdSpecies);
-			RedirectResolution redirect = new RedirectResolution(getUrlBinding()).addParameter("idSpecies", mainIdSpecies);
-			return redirect;
+			return new RedirectResolution(getUrlBinding()).addParameter("idSpecies", mainIdSpecies);
+		}
+		
+		if (StringUtils.isNotBlank(idSpeciesText) && !factsheet.exists()) {
+			//redirecting to more general search in case user tried text based search
+			String redirectUrl = "/species-names-result.jsp?pageSize=10" +
+					"&relationOp=2&typeForm=0&showGroup=true&showOrder=true" +
+					"&showFamily=true&showScientificName=true&showVernacularNames=true" +
+					"&showValidName=true&searchSynonyms=true&sort=2&ascendency=0" +
+					"&scientificName=" + idSpeciesText;
+			return new RedirectResolution(redirectUrl);
 		}
 		
 		if (factsheet.exists()) {
@@ -115,7 +128,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 					tabsWithData.add(new Pair<String, String>(allTypes[i][1], getContentManagement().cms(allTypes[i][0].toLowerCase())));
 				}
 			}
-		}
+		} 
 		String eeaHome = getContext().getInitParameter("EEA_HOME");
 		String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,factsheet";
 		setBtrail(btrail);

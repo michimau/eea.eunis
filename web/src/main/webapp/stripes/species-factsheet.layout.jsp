@@ -85,14 +85,14 @@
 		                <c:if test="${actionBean.tab == 'general'}">
 		                	<%-- General information--%>
 			                <jsp:include page="/species-factsheet-general.jsp">
-			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
+			                  <jsp:param name="mainIdSpecies" value="${actionBean.factsheet.idSpecies}" />
 			                </jsp:include>
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'vernacular'}">
 		                	<%-- Vernacular names tab --%>
 			                <jsp:include page="/species-factsheet-vern.jsp">
 			                  <jsp:param name="name" value="${actionBean.scientificName}" />
-			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
+			                  <jsp:param name="mainIdSpecies" value="${actionBean.factsheet.idSpecies}" />
 			                  <jsp:param name="idNatureObject" value="${actionBean.factsheet.speciesNatureObject.idNatureObject}" />
 			                </jsp:include>
 		                </c:if>
@@ -122,7 +122,7 @@
 		                <c:if test="${actionBean.tab == 'references'}">
 		                	<%-- References --%>
 			                <jsp:include page="/species-factsheet-references.jsp">
-			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
+			                  <jsp:param name="mainIdSpecies" value="${actionBean.factsheet.idSpecies}" />
 			                </jsp:include>
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'grid'}">
@@ -136,7 +136,7 @@
 		                <c:if test="${actionBean.tab == 'threatstatus'}">
 		                	<%-- Threat statis --%>
 			                <jsp:include page="/species-factsheet-threat.jsp">
-			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
+			                  <jsp:param name="mainIdSpecies" value="${actionBean.factsheet.idSpecies}" />
 			                  <jsp:param name="scName" value="${actionBean.scientificName}" />
 			                  <jsp:param name="expand" value="true" />
 			                </jsp:include>
@@ -144,19 +144,19 @@
 		                <c:if test="${actionBean.tab == 'legal'}">
 		                	<%-- Legal instruments --%>
 			                <jsp:include page="/species-factsheet-legal.jsp">
-			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
+			                  <jsp:param name="mainIdSpecies" value="${actionBean.factsheet.idSpecies}" />
 			                </jsp:include>
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'habitats'}">
 		                	<%-- Related habitats --%>
 			                <jsp:include page="/species-factsheet-habitats.jsp">
-			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
+			                  <jsp:param name="mainIdSpecies" value="${actionBean.factsheet.idSpecies}" />
 			                </jsp:include>
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'sites'}">
 		                	<%-- Related sites --%>
 			                <jsp:include page="/species-factsheet-sites.jsp">
-			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
+			                  <jsp:param name="mainIdSpecies" value="${actionBean.factsheet.idSpecies}" />
 			                </jsp:include>
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'gbif'}">

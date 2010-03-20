@@ -24,7 +24,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
 
-  Integer idSpecies=Utilities.checkedStringToInt( request.getParameter("idSpecies"), new Integer("-1") );
+  Integer idSpecies=Utilities.checkedStringToInt( request.getParameter("mainIdSpecies"), new Integer("-1") );
   SpeciesFactsheet factsheet = new SpeciesFactsheet( idSpecies, idSpecies );
   //String scientificName = factsheet.getSpeciesObject().getScientificName();
 

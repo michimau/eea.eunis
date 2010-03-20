@@ -18,10 +18,11 @@
 <%
   /// Request parameters:
   // idSpecies - ID of specie
-  String idSpecies = request.getParameter("idSpecies");
+  //String idSpecies = request.getParameter("idSpecies");
+  String mainIdSpecies = request.getParameter("mainIdSpecies");
   SpeciesFactsheet factsheet = new SpeciesFactsheet(
-		  Utilities.checkedStringToInt(idSpecies, new Integer(0)),
-		  Utilities.checkedStringToInt(idSpecies, new Integer(0)));
+		  Utilities.checkedStringToInt(mainIdSpecies, new Integer(0)),
+		  Utilities.checkedStringToInt(mainIdSpecies, new Integer(0)));
   WebContentManagement cm = SessionManager.getWebContent();
   // List of sites related to species.
   List sites = factsheet.getSitesForSpecies();

@@ -12,10 +12,10 @@ import org.simpleframework.xml.Root;
  * @author Aleksandr Ivanov
  * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
-@Root
+@Root(name = "Site")
 public class SiteFactsheetDto implements Serializable {
 	
-	private static final String RDF_URL_MAPPING = "http://eunisimport.eea.europa.eu/sites-factsheet.jsp";
+	private static final String RDF_URL_MAPPING = "http://eunis.eea.europa.eu/sites/";
 	
 	/**
 	 * serial.
@@ -114,7 +114,7 @@ public class SiteFactsheetDto implements Serializable {
 	 */
 	@Attribute(name="rdf:about")
 	public String getRdfAbout() {
-		return String.format("%s?idsite=%S", RDF_URL_MAPPING, idSite);
+		return RDF_URL_MAPPING + idSite;
 	}
 	
 	/**

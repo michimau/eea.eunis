@@ -124,11 +124,15 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 			} else {
 				dto.setIdDc(null);
 			}
-			if (dto.getIdDesignation() != null) {
+			if (dto.getIdDesignation() != null && dto.getIdDesignation().getId() != null) {
 				dto.getIdDesignation().setPrefix("http://eunis.eea.europa.eu/designations/");
+			}else {
+				dto.setIdDesignation(null);
 			}
-			if (dto.getIdGeoscope() != null) {
+			if (dto.getIdGeoscope() != null && dto.getIdGeoscope().getId() != null) {
 				dto.getIdGeoscope().setPrefix("http://eunis.eea.europa.eu/geoscope/");
+			} else {
+				dto.setIdGeoscope(null);
 			}
 			Persister persister = new Persister(new Format(4));
 			ByteArrayOutputStream buffer = new ByteArrayOutputStream();

@@ -14,6 +14,7 @@ public class Chm62edtNatureObjectPicturePersist extends PersistentObject {
   private String i_name = null;
   private String i_fileName = null;
   private String i_description = null;
+  private Boolean mainPicture;
 
   public Chm62edtNatureObjectPicturePersist() {
     super();
@@ -66,7 +67,15 @@ public class Chm62edtNatureObjectPicturePersist extends PersistentObject {
   public void setDescription(String description) {
     i_description = description;
     this.markModifiedPersistentState();
-    this.markModifiedPersistentState();
   }
+
+public Boolean isMainPicture() {
+	return mainPicture;
+}
+
+public void setMainPicture(Boolean mainPicture) {
+	this.markModifiedPersistentState();
+	this.mainPicture = mainPicture;
+}
 
 }

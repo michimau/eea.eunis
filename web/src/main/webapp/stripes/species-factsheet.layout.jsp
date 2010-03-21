@@ -86,6 +86,8 @@
 		                	<%-- General information--%>
 			                <jsp:include page="/species-factsheet-general.jsp">
 			                  <jsp:param name="mainIdSpecies" value="${actionBean.factsheet.idSpecies}" />
+			                  <jsp:param name="mainPictureFilename" value="${actionBean.mainPictureFilename}" />
+			                  
 			                </jsp:include>
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'vernacular'}">

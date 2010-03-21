@@ -16,18 +16,54 @@
                  ro.finsiel.eunis.factsheet.species.SpeciesFactsheet,
                  ro.finsiel.eunis.jrfTables.Chm62edtHabitatInternationalNamePersist,
                  ro.finsiel.eunis.jrfTables.habitats.factsheet.OtherClassificationPersist,
+                 ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist,
                  ro.finsiel.eunis.search.Utilities,
                  java.util.List"%>
 <%@ page import="java.util.Vector"%>
-<jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
+
+<%@page import="ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain"%><jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
   /// INPUT PARAMS: idHabitat
   String idHabitat = request.getParameter("idHabitat");
   HabitatsFactsheet factsheet = null;
   factsheet = new HabitatsFactsheet(idHabitat);
   WebContentManagement cm = SessionManager.getWebContent();
+  List<Chm62edtNatureObjectPicturePersist> pictureList = new Chm62edtNatureObjectPictureDomain()
+  		.findWhere("MAIN_PIC = 1 AND ID_OBJECT = " +idHabitat);
+  String mainPictureId = null;
+  String pictureDescription = null;
+  if (pictureList != null && !pictureList.isEmpty()) {
+	  mainPictureId = application.getInitParameter("UPLOAD_DIR_PICTURES_HABITATS") + "/" +
+	  		pictureList.get(0).getFileName();
+	  pictureDescription = pictureList.get(0).getDescription();
+  }
+  String picsURL = "idobject=" + factsheet.getIdHabitat() + "&amp;natureobjecttype=Habitats";
+  
 %>
-  <table class="fullwidth" border="0" cellspacing="1" cellpadding="0" style="border-collapse: collapse;">
+
+<% if (mainPictureId != null) { %>
+<div style="clear:both; overflow: hidden; ">
+  <div class="figure-plus-container figure-left" style="float:right; width:35%; margin-right:100px;">
+	  <div class="figure-plus">
+	    <div class="figure-image">
+		    <a href="javascript:openpictures('pictures.jsp?<%=picsURL%>',600,600)">
+		    <img src="<%=mainPictureId %>" alt="<%=pictureDescription %>" width="300" height="500" class="scaled"  />
+		    </a>
+	    </div>
+	    <div class="figure-note">
+	      <%=pictureDescription %>
+	    </div>
+	  </div>
+  </div>
+  <div style="width=65%">
+
+<% } %>
+
+  <table 
+  <% if (mainPictureId == null ) { %>
+  class ="tabledata fullwidth"
+  <%} %>
+  border="0" cellspacing="1" cellpadding="0" style="border-collapse: collapse;">
     <col style="width:20%"/>
     <col style="width:50%"/>
     <col style="width:30%"/>
@@ -82,9 +118,16 @@
       </tr>
     </tbody>
   </table>
+ 
+  
+  
   <br />
   <%-- Habitat code and Level for EUNIS habitats, original code for NATURA --%>
-  <table class="fullwidth" border="0" cellspacing="1" cellpadding="0">
+  <table border="0"
+    <% if (mainPictureId == null ) { %>
+  class ="tabledata fullwidth"
+  <%} %>
+   cellspacing="1" cellpadding="0">
     <col style="width:20%"/>
     <col style="width:50%"/>
     <col style="width:15%"/>
@@ -157,6 +200,12 @@
 %>
     </tbody>
   </table>
+  
+   <% if (mainPictureId != null) { %>
+  </div>
+  </div>
+  <% } %>
+  
 <%
   // Habitat description.
   Vector descriptions = null;

@@ -45,8 +45,11 @@
         <label for="filename" class="noshow">
         ${eunis:cms(actionBean.contentManagement, 'pictures_upload_filename_label')}</label>
         <input id="filename" name="filename" type="file" size="50" title="${eunis:cms(actionBean.contentManagement, 'pictures_upload_filename_label')}" />
-      	${eunis:cmsLabel(actionBean.contentManagement, 'pictures_upload_filename_label')}"
-      </p>
+      	${eunis:cmsLabel(actionBean.contentManagement, 'pictures_upload_filename_label')} <br/>
+      	<label for="main_picture">check to upload a general info picture</label>
+      	<input id="main_picture" name="main_picture" type="checkbox" />
+      	
+      	</p>
       <p>
       	${eunis:cmsPhrase(actionBean.contentManagement, 'Picture description (max 255 characters)')}"
         <br />

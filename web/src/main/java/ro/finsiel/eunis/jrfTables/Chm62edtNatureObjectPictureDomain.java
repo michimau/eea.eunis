@@ -1,5 +1,6 @@
 package ro.finsiel.eunis.jrfTables;
 
+import net.sf.jrf.column.columnspecs.BooleanColumnSpec;
 import net.sf.jrf.column.columnspecs.CompoundPrimaryKeyColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
@@ -35,6 +36,7 @@ public class Chm62edtNatureObjectPictureDomain extends AbstractDomain {
                     new StringColumnSpec("FILE_NAME", "getFileName", "setFileName", DEFAULT_TO_NULL, REQUIRED)
             )
     );
+    this.addColumnSpec(new BooleanColumnSpec("MAIN_PIC", "isMainPicture", "setMainPicture", DEFAULT_TO_FALSE));
     this.addColumnSpec(new StringColumnSpec("DESCRIPTION", "getDescription", "setDescription", DEFAULT_TO_EMPTY_STRING));
   }
 }

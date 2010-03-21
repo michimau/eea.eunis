@@ -19,6 +19,8 @@ import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.stream.Format;
 
 import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
 import ro.finsiel.eunis.utilities.SQLUtilities;
@@ -65,8 +67,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 	//refered from name
 	private String referedFromName;
 
+	private String mainPictureFilename;
+
 	
 	@DefaultHandler
+	@SuppressWarnings("unchecked")
 	public Resolution index(){
 		String idSpeciesText = null;
 		if(tab == null || tab.length() == 0){
@@ -127,6 +132,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 				if (!sqlUtil.TabPageIsEmpy(factsheet.getSpeciesNatureObject().getIdNatureObject().toString(), "SPECIES", allTypes[i][0])) {
 					tabsWithData.add(new Pair<String, String>(allTypes[i][1], getContentManagement().cms(allTypes[i][0].toLowerCase())));
 				}
+			}
+			List<Chm62edtNatureObjectPicturePersist> pictures = new Chm62edtNatureObjectPictureDomain()
+					.findWhere("MAIN_PIC = 1 AND ID_OBJECT = " + mainIdSpecies );
+			if (pictures != null && !pictures.isEmpty()) {
+				mainPictureFilename = pictures.get(0).getFileName();
 			}
 		} 
 		String eeaHome = getContext().getInitParameter("EEA_HOME");
@@ -294,6 +304,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 	 */
 	public String getAuthor() {
 		return author;
+	}
+
+	public String getMainPictureFilename() {
+		return mainPictureFilename;
 	}
 
 }

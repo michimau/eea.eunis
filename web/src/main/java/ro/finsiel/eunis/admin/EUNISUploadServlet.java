@@ -13,10 +13,19 @@ import ro.finsiel.eunis.jrfTables.EunisRelatedReportsDomain;
 import ro.finsiel.eunis.jrfTables.EunisRelatedReportsPersist;
 import ro.finsiel.eunis.session.SessionManager;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -205,6 +214,7 @@ public class EUNISUploadServlet extends HttpServlet {
         String idObject = "";
         String description = "";
         String natureObjectType = "";
+        boolean mainPicture = false;
         FileItem uploadedFileItem = null;
 
         for (int i = 0; i < fileItems.size(); i++) {
@@ -231,6 +241,13 @@ public class EUNISUploadServlet extends HttpServlet {
                 if (null != fieldName && fieldName.equalsIgnoreCase("natureobjecttype")) {
                     natureObjectType = fieldValue;
                 }
+
+                // Main picture
+                if (null != fieldName && fieldName.equalsIgnoreCase("main_picture")) {
+                	mainPicture = true;
+                }
+                
+                
             } else {
                 // / UPLOAD FIELD
                 filename = item.getName();
@@ -241,12 +258,9 @@ public class EUNISUploadServlet extends HttpServlet {
 
         if (natureObjectType.equalsIgnoreCase("Species")) {
             uploadDir = getServletConfig().getServletContext().getInitParameter("UPLOAD_DIR_PICTURES_SPECIES");
-        }
-        if (natureObjectType.equalsIgnoreCase("Sites")) {
+        } else if (natureObjectType.equalsIgnoreCase("Sites")) {
             uploadDir = getServletConfig().getServletContext().getInitParameter("UPLOAD_DIR_PICTURES_SITES");
-        }
-        // System.out.println("natureObjectType = " + natureObjectType);
-        if (natureObjectType.equalsIgnoreCase("Habitats")) {
+        } else if (natureObjectType.equalsIgnoreCase("Habitats")) {
             uploadDir = getServletConfig().getServletContext().getInitParameter("UPLOAD_DIR_PICTURES_HABITATS");
         }
         // Save the file in the right dir...
@@ -273,39 +287,52 @@ public class EUNISUploadServlet extends HttpServlet {
         natureObjectInfo.idObject = idObject;
         natureObjectInfo.natureObjectType = natureObjectType;
         // Sync the database with the pictures
+        String scientificName = null;
         if (natureObjectType.equalsIgnoreCase("Species")) {
-            String scientificName = PicturesHelper.findSpeciesByIDObject(idObject);
-            Chm62edtNatureObjectPicturePersist pictureObject = new Chm62edtNatureObjectPicturePersist();
-
-            pictureObject.setDescription(description);
-            pictureObject.setFileName(fname);
-            pictureObject.setIdObject(idObject);
-            pictureObject.setName(scientificName);
-            pictureObject.setNatureObjectType(natureObjectType);
-            new Chm62edtNatureObjectPictureDomain().save(pictureObject);
+            scientificName = PicturesHelper.findSpeciesByIDObject(idObject);
+        } else if (natureObjectType.equalsIgnoreCase("Sites")) {
+        	scientificName = PicturesHelper.findSitesByIDObject(idObject);
+        } else if (natureObjectType.equalsIgnoreCase("Habitats")) {
+        	scientificName = PicturesHelper.findHabitatsByIDObject(idObject);
         }
-        if (natureObjectType.equalsIgnoreCase("Sites")) {
-            String scientificName = PicturesHelper.findSitesByIDObject(idObject);
-            Chm62edtNatureObjectPicturePersist pictureObject = new Chm62edtNatureObjectPicturePersist();
+        	
+    	Chm62edtNatureObjectPicturePersist pictureObject = new Chm62edtNatureObjectPicturePersist();
 
-            pictureObject.setDescription(description);
-            pictureObject.setFileName(fname);
-            pictureObject.setIdObject(idObject);
-            pictureObject.setName(scientificName);
-            pictureObject.setNatureObjectType(natureObjectType);
-            new Chm62edtNatureObjectPictureDomain().save(pictureObject);
-        }
-        if (natureObjectType.equalsIgnoreCase("Habitats")) {
-            String scientificName = PicturesHelper.findHabitatsByIDObject(idObject);
-            Chm62edtNatureObjectPicturePersist pictureObject = new Chm62edtNatureObjectPicturePersist();
+        pictureObject.setDescription(description);
+        pictureObject.setMainPicture(false);
+        pictureObject.setFileName(fname);
+        pictureObject.setIdObject(idObject);
+        pictureObject.setName(scientificName);
+        pictureObject.setNatureObjectType(natureObjectType);
+        new Chm62edtNatureObjectPictureDomain().save(pictureObject);
+        
+        //processing main picture
+        if (mainPicture) {
+        	BufferedImage image = ImageIO.read(file);
+        	int width = Math.min(image.getWidth(), 300);
+        	int height = Math.min(image.getHeight(), 500);
+        	
+        	AffineTransform at = AffineTransform.getScaleInstance((double)width/(double)image.getWidth(),
+        			(double)height/(double)image.getHeight());
+        	BufferedImage output = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        	((Graphics2D)output.getGraphics()).drawRenderedImage(image, at);
+        	
+        	String mainPictureFilename =  idObject  + "_main_picture"+ suffix;
+			File outputFile = new File(BASE_DIR + uploadDir + mainPictureFilename) ;
+			ImageIO.write(output, "JPG", outputFile);
+			
+			Chm62edtNatureObjectPicturePersist mainPicturePersist = new Chm62edtNatureObjectPicturePersist();
 
-            pictureObject.setDescription(description);
-            pictureObject.setFileName(fname);
-            pictureObject.setIdObject(idObject);
-            pictureObject.setName(scientificName);
-            pictureObject.setNatureObjectType(natureObjectType);
-            new Chm62edtNatureObjectPictureDomain().save(pictureObject);
+			mainPicturePersist.setDescription("main picture");
+			mainPicturePersist.setMainPicture(true);
+			mainPicturePersist.setFileName(mainPictureFilename);
+			mainPicturePersist.setIdObject(idObject);
+			mainPicturePersist.setName(scientificName);
+			mainPicturePersist.setNatureObjectType(natureObjectType);
+	        new Chm62edtNatureObjectPictureDomain().save(mainPicturePersist);
+        	
         }
+        
     }
 
     /**

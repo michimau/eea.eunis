@@ -131,7 +131,7 @@ public class PicturesHelper {
   public static List findPicturesForSpecies(String idObject, String natureObjectType) {
     List results = new Vector();
     if (null != idObject && null != natureObjectType) {
-      String sql = " ID_OBJECT='" + idObject + "' AND NATURE_OBJECT_TYPE='" + natureObjectType + "'";
+      String sql = " ID_OBJECT='" + idObject + "' AND NATURE_OBJECT_TYPE='" + natureObjectType + "' AND MAIN_PIC = 0";
       try {
         Chm62edtNatureObjectPictureDomain nop = new Chm62edtNatureObjectPictureDomain();
         results = nop.findWhere(sql);

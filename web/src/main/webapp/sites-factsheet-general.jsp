@@ -15,6 +15,8 @@
                  ro.finsiel.eunis.jrfTables.sites.factsheet.SitesDesignationsPersist,
                  ro.finsiel.eunis.jrfTables.sites.factsheet.RegionsCodesPersist,
                  ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesPersist,
+                 ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist,
+                 ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain,
                  ro.finsiel.eunis.jrfTables.Chm62edtSitesPersist,
                  ro.finsiel.eunis.WebContentManagement"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.Chm62edtDesignationsDomain"%>
@@ -26,7 +28,39 @@
   SiteFactsheet factsheet = new SiteFactsheet(siteid);
   WebContentManagement cm = SessionManager.getWebContent();
   int type = factsheet.getType();
+
+  List<Chm62edtNatureObjectPicturePersist> pictureList = new Chm62edtNatureObjectPictureDomain()
+  		.findWhere("MAIN_PIC = 1 AND ID_OBJECT = '" + factsheet.getIDSite() + "'");
+  String mainPictureId = null;
+  String pictureDescription = null;
+  if (pictureList != null && !pictureList.isEmpty()) {
+	  mainPictureId = application.getInitParameter("UPLOAD_DIR_PICTURES_SITES") + "/" +
+	  		pictureList.get(0).getFileName();
+	  pictureDescription = pictureList.get(0).getDescription();
+  }
+  String picsURL = "idobject=" + factsheet.getIDSite() + "&amp;natureobjecttype=Sites";
+  
 %>
+
+<% if (mainPictureId != null) { %>
+<div style="clear:both; overflow: hidden; ">
+  <div class="figure-plus-container figure-left" style="float:right; width:35%">
+	  <div class="figure-plus">
+	    <div class="figure-image">
+		    <a href="javascript:openpictures('pictures.jsp?<%=picsURL%>',600,600)">
+		    <img src="<%=mainPictureId %>" alt="species main picture" width="300" height="500" class="scaled"  />
+		    </a>
+	    </div>
+	    <div class="figure-note">
+	      <%=pictureDescription %>
+	    </div>
+	  </div>
+  </div>
+  <div style="width:60%">
+
+<% } %>
+
+
   <h2>
     <%=cm.cmsPhrase("Site identification")%>
   </h2>
@@ -247,6 +281,12 @@
 %>
     </tbody>
   </table>
+  
+  <% if (mainPictureId != null) { %>
+
+  </div>
+  </div>
+  <% } %>
   <br />
 <%
       // Site designations

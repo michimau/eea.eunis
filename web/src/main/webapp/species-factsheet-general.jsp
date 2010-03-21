@@ -26,6 +26,7 @@
   /// Request parameters:
   // idSpecies - ID of specie
   String mainIdSpecies = request.getParameter("mainIdSpecies");
+  String mainPictureFilename = request.getParameter("mainPictureFilename");
   SpeciesFactsheet factsheet = new SpeciesFactsheet(
 		  Utilities.checkedStringToInt(mainIdSpecies, new Integer(0)),
 		  Utilities.checkedStringToInt(mainIdSpecies, new Integer(0)));
@@ -48,8 +49,31 @@
   String genusName = specie.getGenus();
   String authorDate = SpeciesFactsheet.getBookAuthorDate(factsheet.getTaxcodeObject().IdDcTaxcode());
   String kingdomname="";
+  String urlPic="idobject="+specie.getIdSpecies()+"&amp;natureobjecttype=Species";
+  String picturePath = application.getInitParameter("UPLOAD_DIR_PICTURES_SPECIES");
+  
 %>
-  <table summary="layout" class="datatable fullwidth">
+  <% if (mainPictureFilename != null && mainPictureFilename.length() > 0)  { %>
+  <div style="clear:both; overflow: hidden; ">
+  <div class="figure-plus-container figure-left" style="float:right; width:35%; margin-right:100px;">
+	  <div class="figure-plus">
+	    <div class="figure-image">
+		    <a href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)"">
+		    <img src="<%=picturePath + "/"+ mainPictureFilename %>" alt="species main picture" width="300" height="500" class="scaled"  />
+		    </a>
+	    </div>
+	    <div class="figure-note">
+	      main picture
+	    </div>
+	  </div>
+  </div>
+  <div style="width=65%">
+  <% } %>
+  <table summary="layout" class="datatable 
+  <%if (mainPictureFilename == null || mainPictureFilename.length() == 0)  { %>
+  fullwidth
+  <%} %>
+  " >
     <thead>
       <tr>
         <th colspan="2">
@@ -125,6 +149,11 @@
     </tbody>
   </table>
 
+<% if (mainPictureFilename != null && mainPictureFilename.length() > 0)  {%>
+  	</div>
+  	</div>	
+  <%} %>
+  
   <h2><%=cm.cmsPhrase("External links")%></h2>
   <div id="linkcollection">
       <div>
@@ -489,7 +518,6 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 <%
   // Species pictures
       List listPictures = factsheet.getPicturesForSpecies();
-      String urlPic="idobject="+specie.getIdSpecies()+"&amp;natureobjecttype=Species";
 
       if(null != listPictures && listPictures.size() > 0)
       {

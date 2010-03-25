@@ -54,26 +54,25 @@
   
 %>
   <% if (mainPictureFilename != null && mainPictureFilename.length() > 0)  { %>
-  <div style="clear:both; overflow: hidden; ">
-  <div class="figure-plus-container figure-left" style="float:right; width:35%; margin-right:100px;">
+<!--  <div style="clear:both; overflow: hidden; "> -->
+  <div class="figure-plus-container figure-left" style="float:right; width:25%; max-width:250px;margin-top:1.4em;">
 	  <div class="figure-plus">
 	    <div class="figure-image">
 		    <a href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)"">
-		    <img src="<%=picturePath + "/"+ mainPictureFilename %>" alt="species main picture" width="300" height="500" class="scaled"  />
+		    <img src="<%=picturePath + "/"+ mainPictureFilename %>" alt="species main picture" class="scaled"  />
 		    </a>
 	    </div>
 	    <div class="figure-note">
-	      main picture
+	      Main picture
 	    </div>
 	  </div>
   </div>
-  <div style="width=65%">
-  <% } %>
-  <table summary="layout" class="datatable 
-  <%if (mainPictureFilename == null || mainPictureFilename.length() == 0)  { %>
-  fullwidth
+  <% }
+  if (mainPictureFilename == null || mainPictureFilename.length() == 0)  { %>
+  <table class="datatable fullwidth">
+  <%} else { %>
+  <table class="datatable" style="width:73%">
   <%} %>
-  " >
     <thead>
       <tr>
         <th colspan="2">
@@ -150,12 +149,15 @@
   </table>
 
 <% if (mainPictureFilename != null && mainPictureFilename.length() > 0)  {%>
-  	</div>
-  	</div>	
+<!--  	</div> -->
   <%} %>
   
   <h2><%=cm.cmsPhrase("External links")%></h2>
+  <% if (mainPictureFilename == null || mainPictureFilename.length() == 0)  { %>
   <div id="linkcollection">
+  <%} else { %>
+  <div id="linkcollection"  style="width:73%">
+  <%} %>
       <div>
         <a title="<%=cm.cmsPhrase("Pictures of the species on Google")%>" href="http://images.google.com/images?q=<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("Pictures on Google")%></a>
       </div>
@@ -344,7 +346,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
     		}
         	%>
   </div> <!-- linkcollection -->
-  <h2 style="clear: left">
+  <h2 style="clear: both">
     <%=cm.cmsPhrase("Source")%>
   </h2>
   <table summary="layout" class="datatable fullwidth">

@@ -4,6 +4,7 @@ medium  : #6DABD0
 light   : #B8D6E8
 */
 @media screen {
+	html { background-color: white; }
 	body .documentContent {
 		font-size: 110% !important;
 	}

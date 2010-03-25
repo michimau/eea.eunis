@@ -54,16 +54,12 @@
   
 %>
   <% if (mainPictureFilename != null && mainPictureFilename.length() > 0)  { %>
-<!--  <div style="clear:both; overflow: hidden; "> -->
   <div class="figure-plus-container figure-left" style="float:right; width:25%; max-width:250px;margin-top:1.4em;">
 	  <div class="figure-plus">
 	    <div class="figure-image">
 		    <a href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)"">
-		    <img src="<%=picturePath + "/"+ mainPictureFilename %>" alt="species main picture" class="scaled"  />
+		    <img src="<%=picturePath + "/"+ mainPictureFilename %>" alt="species main picture" class="scaled" />
 		    </a>
-	    </div>
-	    <div class="figure-note">
-	      Main picture
 	    </div>
 	  </div>
   </div>

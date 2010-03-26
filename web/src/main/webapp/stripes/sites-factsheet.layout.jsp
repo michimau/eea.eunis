@@ -141,39 +141,8 @@
 								<jsp:param name="idsite" value="${actionBean.idsite}" />
 							</jsp:include></c:if>
 		
-						<c:choose>
-							<c:when test="${actionBean.factsheet.picturesForSites ne null and fn:length(actionBean.factsheet.picturesForSites) >0}">
-								<br />
-								<br />
-								<div style="width: 100%;">
-									<a
-										title="${eunis:cms(actionBean.contentManagement, 'sites_factsheet_openpictures')}"
-										href="javascript:openpictures('pictures.jsp?idobject=${actionBean.idsite}&amp;natureobjecttype=Sites',600,600)">
-										${eunis:cmsPhrase(actionBean.contentManagement, 'View pictures')}
-									</a>
-									${eunis:cmsTitle(actionBean.contentManagement, 'sites_factsheet_openpictures')}
-								</div>
-							</c:when>
-							<c:otherwise>
-								<c:if test="actionBean.sessionManager.authenticated">
-									<br />
-									<br />
-									<div style="width: 100%;">
-										<a
-											title="${eunis:cms(actionBean.contentManagement, 'sites_factsheet_openpictures')}"
-											href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;idobject=${actionBean.idsite}&amp;natureobjecttype=Sites',600,600)">
-											${eunis:cmsPhrase(actionBean.contentManagement, 'Upload	pictures')}
-										</a>
-										${eunis:cmsTitle(actionBean.contentManagement, 'sites_factsheet_openpictures')}
-									</div>
-								</c:if>
-							</c:otherwise>
-						</c:choose>
 					</c:when>
 					<c:otherwise>
-						<br />
-						<br />
-		                ${eunis:cmsPhrase(actionBean.contentManagement, 'Upload pictures')}
 		                <br />
 					</c:otherwise>
 				</c:choose>

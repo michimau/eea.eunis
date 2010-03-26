@@ -92,6 +92,7 @@
 <%
   if(null == factsheet.getHabitat())
   {
+// FIXME: Remember to also send code 404
 %>
                 <div class="error-msg">
                     <%=cm.cmsPhrase("Sorry, no habitat type has been found in the database with Habitat type ID=")%>
@@ -353,29 +354,6 @@
 <%
       }
     }
-%>
-                <br />
-<%
-    // Pictures of habitat
-    List list = factsheet.getPicturesForHabitats();
-    String picsURL = "idobject=" + factsheet.getIdHabitat() + "&amp;natureobjecttype=Habitats";
-    if(null != list && list.size() > 0)
-    {
-%>
-                <a title="<%=cm.cms("habitat_open_pictures")%>" href="javascript:openpictures('pictures.jsp?<%=picsURL%>',600,600)"><%=cm.cmsPhrase("View pictures")%></a>
-                <%=cm.cmsTitle("habitat_open_pictures")%>
-<%
-    }
-    else if(SessionManager.isAuthenticated() && SessionManager.isUpload_pictures_RIGHT())
-    {
-%>
-                <br />
-                <br />
-                <a title="<%=cm.cms("upload_pictures")%>" href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=picsURL%>',600,600)"><%=cm.cmsPhrase("Upload pictures")%></a>
-                <%=cm.cmsTitle("upload_pictures")%>
-                <br />
-                <br />
-<%
     }
     out.flush();
     if(!isMini)
@@ -390,7 +368,6 @@
                 <%=cm.br()%>
 <%
     }
-  }
 %>
 <!-- END MAIN CONTENT -->
               </div>

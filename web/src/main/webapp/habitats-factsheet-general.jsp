@@ -42,28 +42,22 @@
 %>
 
 <% if (mainPictureId != null) { %>
-<div style="clear:both; overflow: hidden; ">
-  <div class="figure-plus-container figure-left" style="float:right; width:35%; margin-right:100px;">
-	  <div class="figure-plus">
-	    <div class="figure-image">
+  <div class="naturepic-plus-container naturepic-right">
+	  <div class="naturepic-plus">
+	    <div class="naturepic-image">
 		    <a href="javascript:openpictures('pictures.jsp?<%=picsURL%>',600,600)">
-		    <img src="<%=mainPictureId %>" alt="<%=pictureDescription %>" width="300" height="500" class="scaled"  />
+		    <img src="<%=mainPictureId %>" alt="<%=pictureDescription %>" class="scaled"  />
 		    </a>
 	    </div>
-	    <div class="figure-note">
+	    <div class="naturepic-note">
 	      <%=pictureDescription %>
 	    </div>
 	  </div>
   </div>
-  <div style="width=65%">
-
+  <div class="allow-naturepic">
 <% } %>
 
-  <table 
-  <% if (mainPictureId == null ) { %>
-  class ="tabledata fullwidth"
-  <%} %>
-  border="0" cellspacing="1" cellpadding="0" style="border-collapse: collapse;">
+  <table class="tabledata fullwidth" border="0" cellspacing="1" cellpadding="0" style="border-collapse: collapse;">
     <col style="width:20%"/>
     <col style="width:50%"/>
     <col style="width:30%"/>
@@ -123,11 +117,7 @@
   
   <br />
   <%-- Habitat code and Level for EUNIS habitats, original code for NATURA --%>
-  <table border="0"
-    <% if (mainPictureId == null ) { %>
-  class ="tabledata fullwidth"
-  <%} %>
-   cellspacing="1" cellpadding="0">
+  <table class="tabledata fullwidth" border="0" cellspacing="1" cellpadding="0" style="border-collapse: collapse;">
     <col style="width:20%"/>
     <col style="width:50%"/>
     <col style="width:15%"/>
@@ -201,11 +191,6 @@
     </tbody>
   </table>
   
-   <% if (mainPictureId != null) { %>
-  </div>
-  </div>
-  <% } %>
-  
 <%
   // Habitat description.
   Vector descriptions = null;
@@ -225,6 +210,9 @@
   <h2>
     <%=cm.cmsPhrase("Description")%> ( <%=description.getLanguage()%> )
   </h2>
+<% if (mainPictureId != null) { %>
+</div>
+<% } %>
   <p>
     <%=description.getDescription()%>
   </p>
@@ -422,4 +410,21 @@
     </table>
 <%
   }
+%>
+<%
+  // Habitat type pictures
+      List listPictures = factsheet.getPicturesForHabitats();
+
+      if(null != listPictures && listPictures.size() > 0)
+      {
+%>
+  <a href="javascript:openpictures('pictures.jsp?<%=picsURL%>',600,600)"><%=cm.cmsPhrase("View pictures")%></a>
+<%
+      }
+      else if(SessionManager.isAuthenticated() && SessionManager.isUpload_pictures_RIGHT())
+      {
+%>
+      <a href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=picsURL%>',600,600)"><%=cm.cmsPhrase("Upload pictures")%></a>
+<%
+      }
 %>

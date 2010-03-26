@@ -3,6 +3,71 @@ dark    : #006CAD
 medium  : #6DABD0
 light   : #B8D6E8
 */
+/* */
+
+
+.naturepic-plus {
+	text-indent: 0;
+}
+
+.naturepic-title, .naturepic-nr {
+	font-weight: bold;
+}
+
+.naturepic-image {
+	text-align: center;
+	clear: both;
+}
+
+.naturepic-note {
+	font-weight: normal;
+}
+
+.naturepic-source-copyright {
+	text-align: right;
+}
+
+.naturepic-plus-container {
+	padding: .5%;
+	margin: 6px 0px 5px 0px;
+	width:25%;
+	max-width:250px;
+}
+
+.naturepic-plus {
+	background-color: #fff;
+	border: 1px solid #a9a9a9;
+	margin: 0;
+	padding: 4px;
+}
+
+.naturepic-right {
+	float: right;
+	margin-left:.5%; 
+}
+.naturepic-left {
+	float: left;
+	margin-right:.5%; 
+}
+
+.naturepic-plus .naturepic-image a {
+	display: block;
+	padding-bottom: 13px;
+	background: transparent url('../images/magnify-clip.png') bottom right no-repeat;
+}
+
+.naturepic-plus .naturepic-image a:hover {
+	border:none;
+}
+img.scaled {
+	width: 100%;
+	height: 100%;
+}
+
+.allow-naturepic {
+width:72%;
+}
+
 @media screen {
 	html { background-color: white; }
 	body .documentContent {

@@ -43,20 +43,19 @@
 %>
 
 <% if (mainPictureId != null) { %>
-<div style="clear:both; overflow: hidden; ">
-  <div class="figure-plus-container figure-left" style="float:right; width:35%">
-	  <div class="figure-plus">
-	    <div class="figure-image">
+  <div class="naturepic-plus-container naturepic-right">
+	  <div class="naturepic-plus">
+	    <div class="naturepic-image">
 		    <a href="javascript:openpictures('pictures.jsp?<%=picsURL%>',600,600)">
-		    <img src="<%=mainPictureId %>" alt="species main picture" width="300" height="500" class="scaled"  />
+		    <img src="<%=mainPictureId %>" alt="<%=pictureDescription %>" class="scaled" />
 		    </a>
 	    </div>
-	    <div class="figure-note">
+	    <div class="naturepic-note">
 	      <%=pictureDescription %>
 	    </div>
 	  </div>
   </div>
-  <div style="width:60%">
+  <div class="allow-naturepic">
 
 <% } %>
 
@@ -281,13 +280,6 @@
 %>
     </tbody>
   </table>
-  
-  <% if (mainPictureId != null) { %>
-
-  </div>
-  </div>
-  <% } %>
-  <br />
 <%
       // Site designations
       List designations = SitesSearchUtility.findDesignationsForSitesFactsheet(factsheet.getSiteObject().getIdSite());
@@ -313,16 +305,6 @@
         <th scope="col">
           <%=cm.cmsPhrase("Designation name (English)")%>
         </th>
-<%
-        if (SiteFactsheet.TYPE_CORINE != type)
-        {
-%>
-        <th>
-          <%=cm.cmsPhrase("Designation name (French)")%>
-        </th>
-<%
-        }
-%>
       </tr>
     </thead>
     <tbody>
@@ -373,30 +355,6 @@
           }
 %>
         </td>
-<%
-          if (SiteFactsheet.TYPE_CORINE != type)
-          {
-%>
-        <td>
-<%
-            if(designation.getDescriptionFr() != null && designation.getDescriptionFr().trim().length() > 0)
-            {
-%>
-          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=fr&amp;idDesign=<%=designation.getIdDesignation()%>&amp;geoscope=<%=designation.getIdGeoscope()%>"><%=designation.getDescriptionFr()%></a>
-          <%=cm.cmsTitle("open_designation_factsheet")%>
-<%
-            }
-            else
-            {
-%>
-          &nbsp;
-<%
-            }
-%>
-        </td>
-<%
-          }
-%>
       </tr>
 <%
         }
@@ -475,27 +433,9 @@
   </table>
   <%
       }
-  %>
-  <table summary="layout" class="datatable fullwidth">
-    <tr class="zebraeven">
-      <%-- Project ID --%>
-      <td width="15%">
-        <%=cm.cmsPhrase("Project ID:")%>
-      </td>
-      <td>
-        &nbsp;
-      </td>
-    </tr>
-    <tr class="zebraeven">
-      <%-- Project title --%>
-      <td>
-        <%=cm.cmsPhrase("Project title:")%>
-      </td>
-      <td>
-        &nbsp;
-      </td>
-    </tr>
-  </table>
+   if (mainPictureId != null) { %>
+  </div>
+  <% } %>
 <!--
   <a name="monitoring"></a>
   <h2>
@@ -1083,4 +1023,21 @@
   </form>
 <%
     }
+%>
+<%
+  // Site pictures
+      List listPictures = factsheet.getPicturesForSites();
+
+      if(null != listPictures && listPictures.size() > 0)
+      {
+%>
+  <a href="javascript:openpictures('pictures.jsp?<%=picsURL%>',600,600)"><%=cm.cmsPhrase("View pictures")%></a>
+<%
+      }
+      else if(SessionManager.isAuthenticated() && SessionManager.isUpload_pictures_RIGHT())
+      {
+%>
+      <a href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=picsURL%>',600,600)"><%=cm.cmsPhrase("Upload pictures")%></a>
+<%
+      }
 %>

@@ -54,11 +54,11 @@
   
 %>
   <% if (mainPictureFilename != null && mainPictureFilename.length() > 0)  { %>
-  <div class="figure-plus-container figure-left" style="float:right; width:25%; max-width:250px;margin-top:1.4em;">
-	  <div class="figure-plus">
-	    <div class="figure-image">
+  <div class="naturepic-plus-container naturepic-right">
+	  <div class="naturepic-plus">
+	    <div class="naturepic-image">
 		    <a href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)"">
-		    <img src="<%=picturePath + "/"+ mainPictureFilename %>" alt="species main picture" class="scaled" />
+		    <img src="<%=picturePath + "/"+ mainPictureFilename %>" alt="species main picture" class="scaled"  />
 		    </a>
 	    </div>
 	  </div>
@@ -67,7 +67,7 @@
   if (mainPictureFilename == null || mainPictureFilename.length() == 0)  { %>
   <table class="datatable fullwidth">
   <%} else { %>
-  <table class="datatable" style="width:73%">
+  <table class="datatable allow-naturepic">
   <%} %>
     <thead>
       <tr>
@@ -152,7 +152,7 @@
   <% if (mainPictureFilename == null || mainPictureFilename.length() == 0)  { %>
   <div id="linkcollection">
   <%} else { %>
-  <div id="linkcollection"  style="width:73%">
+  <div id="linkcollection" class="allow-naturepic">
   <%} %>
       <div>
         <a title="<%=cm.cmsPhrase("Pictures of the species on Google")%>" href="http://images.google.com/images?q=<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("Pictures on Google")%></a>
@@ -520,15 +520,13 @@ if(kingdomname.equalsIgnoreCase("Animals"))
       if(null != listPictures && listPictures.size() > 0)
       {
 %>
-  <a title="<%=cm.cms("species_factsheet_12_Title")%>" href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)"><%=cm.cmsPhrase("View pictures")%></a>
-  <%=cm.cmsTitle("species_factsheet_12_Title")%>
+  <a href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)"><%=cm.cmsPhrase("View pictures")%></a>
 <%
       }
-      else if ( SessionManager.isAuthenticated() )
+      else if(SessionManager.isAuthenticated() && SessionManager.isUpload_pictures_RIGHT())
       {
 %>
-      <a title="<%=cm.cms("species_factsheet_13_Title")%>" href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=urlPic%>',600,600)"><%=cm.cmsPhrase("Upload pictures")%></a>
-        <%=cm.cmsTitle("species_factsheet_13_Title")%>
+      <a href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=urlPic%>',600,600)"><%=cm.cmsPhrase("Upload pictures")%></a>
 <%
       }
 %>

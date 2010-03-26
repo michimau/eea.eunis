@@ -62,6 +62,10 @@ public class EUNISUploadServlet extends HttpServlet {
     /** Used for picture uploading. */
     NatureObjectInfo natureObjectInfo = new NatureObjectInfo();
 
+	private static final int MAX_WIDTH = 400;
+
+	private static final int MAX_HEIGHT = 300;
+
     public void init() {
         Settings.loadSettings(this);
         // System.out.println("EUNISUploadServlet::init();");
@@ -309,12 +313,20 @@ public class EUNISUploadServlet extends HttpServlet {
         //processing main picture
         if (mainPicture) {
         	BufferedImage image = ImageIO.read(file);
-        	int width = Math.min(image.getWidth(), 300);
-        	int height = Math.min(image.getHeight(), 500);
+        	double ratio = (double) image.getWidth() / (double) image.getHeight();
+        	double idealRatio = MAX_WIDTH   / MAX_HEIGHT;
+        	int newHeight = 0, newWidth = 0;
+        	if (ratio > idealRatio) {
+        		newWidth = Math.min(image.getWidth(), MAX_WIDTH  );
+        		newHeight =  (int) ((double) newWidth / ratio);
+        	} else {
+        		newHeight = Math.min(image.getHeight(), MAX_HEIGHT);
+        		newWidth = (int) ((double) newHeight * ratio);
+        	}
         	
-        	AffineTransform at = AffineTransform.getScaleInstance((double)width/(double)image.getWidth(),
-        			(double)height/(double)image.getHeight());
-        	BufferedImage output = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        	AffineTransform at = AffineTransform.getScaleInstance((double)newWidth/(double)image.getWidth(),
+        			(double)newHeight/(double)image.getHeight());
+        	BufferedImage output = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
         	((Graphics2D)output.getGraphics()).drawRenderedImage(image, at);
         	
         	String mainPictureFilename =  idObject  + "_main_picture"+ suffix;
@@ -323,14 +335,23 @@ public class EUNISUploadServlet extends HttpServlet {
 			
 			Chm62edtNatureObjectPicturePersist mainPicturePersist = new Chm62edtNatureObjectPicturePersist();
 
-			mainPicturePersist.setDescription("main picture");
+			Chm62edtNatureObjectPictureDomain domain = new Chm62edtNatureObjectPictureDomain();
+			//delete old mainPictures
+			List<Chm62edtNatureObjectPicturePersist> mainPictures = domain.findWhere(
+				 " FILE_NAME = '" + mainPictureFilename + "' and MAIN_PIC = 1 and NAME = '" + scientificName + "'");
+			for (Chm62edtNatureObjectPicturePersist mainPic : mainPictures) {
+				domain.save(mainPic);
+				domain.delete(mainPic);
+			}
+			//create new one
+			mainPicturePersist.setDescription(description);
 			mainPicturePersist.setMainPicture(true);
 			mainPicturePersist.setFileName(mainPictureFilename);
 			mainPicturePersist.setIdObject(idObject);
 			mainPicturePersist.setName(scientificName);
 			mainPicturePersist.setNatureObjectType(natureObjectType);
-	        new Chm62edtNatureObjectPictureDomain().save(mainPicturePersist);
-        	
+			domain.save(mainPicturePersist);
+			
         }
         
     }

@@ -54,8 +54,8 @@
 	    </div>
 	  </div>
   </div>
-  <div class="allow-naturepic">
 <% } %>
+  <div class="allow-naturepic">
 
   <table class="tabledata fullwidth" border="0" cellspacing="1" cellpadding="0" style="border-collapse: collapse;">
     <col style="width:20%"/>
@@ -210,9 +210,7 @@
   <h2>
     <%=cm.cmsPhrase("Description")%> ( <%=description.getLanguage()%> )
   </h2>
-<% if (mainPictureId != null) { %>
 </div>
-<% } %>
   <p>
     <%=description.getDescription()%>
   </p>

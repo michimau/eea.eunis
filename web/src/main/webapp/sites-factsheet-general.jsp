@@ -55,10 +55,8 @@
 	    </div>
 	  </div>
   </div>
-  <div class="allow-naturepic">
-
 <% } %>
-
+  <div class="allow-naturepic">
 
   <h2>
     <%=cm.cmsPhrase("Site identification")%>
@@ -433,9 +431,8 @@
   </table>
   <%
       }
-   if (mainPictureId != null) { %>
+  %>
   </div>
-  <% } %>
 <!--
   <a name="monitoring"></a>
   <h2>

@@ -57,18 +57,15 @@
   <div class="naturepic-plus-container naturepic-right">
 	  <div class="naturepic-plus">
 	    <div class="naturepic-image">
-		    <a href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)">
-		    <img src="<%=picturePath + "/"+ mainPictureFilename %>" alt="species main picture" class="scaled" />
+		    <a href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)"">
+		    <img src="<%=picturePath + "/"+ mainPictureFilename %>" alt="species main picture" class="scaled"  />
 		    </a>
 	    </div>
 	  </div>
   </div>
-  <% }
-  if (mainPictureFilename == null || mainPictureFilename.length() == 0)  { %>
+  <% } %>
+  <div class="allow-naturepic">
   <table class="datatable fullwidth">
-  <%} else { %>
-  <table class="datatable allow-naturepic">
-  <%} %>
     <thead>
       <tr>
         <th colspan="2">
@@ -144,16 +141,9 @@
     </tbody>
   </table>
 
-<% if (mainPictureFilename != null && mainPictureFilename.length() > 0)  {%>
-<!--  	</div> -->
-  <%} %>
   
   <h2><%=cm.cmsPhrase("External links")%></h2>
-  <% if (mainPictureFilename == null || mainPictureFilename.length() == 0)  { %>
   <div id="linkcollection">
-  <%} else { %>
-  <div id="linkcollection" class="allow-naturepic">
-  <%} %>
       <div>
         <a title="<%=cm.cmsPhrase("Pictures of the species on Google")%>" href="http://images.google.com/images?q=<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("Pictures on Google")%></a>
       </div>
@@ -342,6 +332,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
     		}
         	%>
   </div> <!-- linkcollection -->
+</div> <!-- allow-naturepic -->
   <h2 style="clear: both">
     <%=cm.cmsPhrase("Source")%>
   </h2>

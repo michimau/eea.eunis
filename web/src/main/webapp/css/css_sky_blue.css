@@ -29,9 +29,9 @@ light   : #B8D6E8
 
 .naturepic-plus-container {
 	padding: .5%;
-	margin: 6px 0px 5px 0px;
+	margin: 6px 0px 6px 0px;
 	width:25%;
-	max-width:250px;
+	max-width:300px;
 }
 
 .naturepic-plus {
@@ -65,7 +65,11 @@ img.scaled {
 }
 
 .allow-naturepic {
-width:72%;
+	width:100%;
+}
+
+.naturepic-plus-container + .allow-naturepic {
+	width:72%;
 }
 
 @media screen {

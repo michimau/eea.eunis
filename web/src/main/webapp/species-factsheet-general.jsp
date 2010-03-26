@@ -57,8 +57,8 @@
   <div class="naturepic-plus-container naturepic-right">
 	  <div class="naturepic-plus">
 	    <div class="naturepic-image">
-		    <a href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)"">
-		    <img src="<%=picturePath + "/"+ mainPictureFilename %>" alt="species main picture" class="scaled"  />
+		    <a href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)">
+		    <img src="<%=picturePath + "/"+ mainPictureFilename %>" alt="species main picture" class="scaled" />
 		    </a>
 	    </div>
 	  </div>

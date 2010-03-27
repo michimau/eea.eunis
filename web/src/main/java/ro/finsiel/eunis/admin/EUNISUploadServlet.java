@@ -62,9 +62,9 @@ public class EUNISUploadServlet extends HttpServlet {
     /** Used for picture uploading. */
     NatureObjectInfo natureObjectInfo = new NatureObjectInfo();
 
-	private static final int MAX_WIDTH = 400;
+    private static final int MAX_WIDTH = 300;
 
-	private static final int MAX_HEIGHT = 300;
+    private static final int MAX_HEIGHT = 400;
 
     public void init() {
         Settings.loadSettings(this);

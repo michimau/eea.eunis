@@ -162,7 +162,6 @@
     // Name of designation
     String fromWho=(factsheet.getDescription() != null && !factsheet.getDescription().equalsIgnoreCase("") ? factsheet.getDescription() : "");
     if (fromWho.equalsIgnoreCase("")) fromWho=(factsheet.getDescriptionEn() != null && !factsheet.getDescriptionEn().equalsIgnoreCase("") ? factsheet.getDescriptionEn() : "");
-    if (fromWho.equalsIgnoreCase("")) fromWho=(factsheet.getDescriptionFr() != null && !factsheet.getDescriptionFr().equalsIgnoreCase("") ? factsheet.getDescriptionFr() : "");
     String country = Utilities.formatString(Utilities.findCountryByIdGeoscope(factsheet.getIdGeoscope()), "");
     if( country.equalsIgnoreCase( "Europe" ) )
     {
@@ -262,17 +261,6 @@
                   </tr>
                   <tr class="zebraeven">
                     <td>
-                      <%=cm.cmsPhrase( "Designation name in French" )%>
-                    </td>
-                    <td>
-                      &nbsp;
-                      <%=(fromWhere.equalsIgnoreCase("fr")?"<strong>":"")%>
-                      <%=Utilities.formatString(factsheet.getDescriptionFr())%>
-                      <%=(fromWhere.equalsIgnoreCase("fr")?"</strong>":"")%>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
                       <%=cm.cmsPhrase( "Designation abbreviation" )%>
                     </td>
                     <td>
@@ -280,7 +268,7 @@
                       <%=Utilities.formatString(factsheet.getIdDesignation(), "")%>
                     </td>
                   </tr>
-                  <tr class="zebraeven">
+                  <tr>
                     <td>
                       <%=cm.cmsPhrase( "CDDA sites" )%>
                     </td>
@@ -305,7 +293,7 @@
                       <%=Utilities.formatString( cddacount, "&nbsp;" )%>
                     </td>
                   </tr>
-                  <tr>
+                  <tr class="zebraeven">
                     <td>
                       <%=cm.cmsPhrase( "Area reference (ha)" )%>
                     </td>
@@ -314,7 +302,7 @@
                       <%=Utilities.formatString( Utilities.formatDecimal( factsheet.getReferenceArea(), 5 ), "" )%>
                     </td>
                   </tr>
-                  <tr class="zebraeven">
+                  <tr>
                     <td>
                       <%=cm.cmsPhrase( "Total area(ha)" )%>
                     </td>

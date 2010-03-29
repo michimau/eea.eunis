@@ -405,23 +405,6 @@
           }
 %>
         </td>
-        <td>
-<%
-          if(desig.getDescriptionFr() != null && desig.getDescriptionFr().trim().length() > 0)
-          {
-%>
-          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=fr&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescriptionFr()%></a>
-          <%=cm.cmsTitle("open_designation_factsheet")%>
-<%
-          }
-          else
-          {
-%>
-          &nbsp;
-<%
-          }
-%>
-        </td>
       </tr>
   <%
           }

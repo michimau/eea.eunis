@@ -43,9 +43,6 @@
       if (description.equalsIgnoreCase("")) {
         description = designation.getDescriptionEn();
       }
-      if (description.equalsIgnoreCase("")) {
-        description = designation.getDescriptionFr();
-      }
       if (!description.equalsIgnoreCase(""))
       {
 %>

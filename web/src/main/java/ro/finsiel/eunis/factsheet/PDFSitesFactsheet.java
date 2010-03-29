@@ -1279,13 +1279,6 @@ public class PDFSitesFactsheet
       cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
       table.addCell( cell );
 
-      if ( SiteFactsheet.TYPE_CORINE != type )
-      {
-        cell = new Cell( new Phrase( contentManagement.cms( "designation_name_french"), fontNormalBold ) );
-        cell.setBackgroundColor( new Color( 0xEE, 0xEE, 0xEE ) );
-        table.addCell( cell );
-      }
-
       SitesDesignationsPersist designation = ( SitesDesignationsPersist ) designations.get( 0 );
       cell = new Cell( new Phrase( designation.getDataSource(), fontNormal ) );
       table.addCell( cell );
@@ -1299,11 +1292,6 @@ public class PDFSitesFactsheet
       cell = new Cell( new Phrase( designation.getDescriptionEn(), fontNormal ) );
       table.addCell( cell );
 
-      if ( SiteFactsheet.TYPE_CORINE != type )
-      {
-        cell = new Cell( new Phrase( designation.getDescriptionFr(), fontNormal ) );
-        table.addCell( cell );
-      }
       report.addTable( table );
     }
 

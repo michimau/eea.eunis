@@ -70,15 +70,6 @@
             v.addElement(designation.getDescriptionEn().trim());
           }
       }
-      // for french designation
-      if(Utilities.ifStringCorespund(designation.getDescriptionFr(),searchString,relationOp) &&
-              !Utilities.ifStringAppear(v,designation.getDescriptionFr().trim()))
-      {
-        if (designation.getDescriptionFr().trim().length()>0)
-        {
-          v.addElement(designation.getDescriptionFr().trim());
-        }
-      }
     }
   }
   SortListString sorter = new SortListString();

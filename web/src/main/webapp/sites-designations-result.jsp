@@ -32,7 +32,6 @@
   boolean showSourceDB = Utilities.checkedStringToBoolean(formBean.getShowSourceDB(), DesignationsBean.HIDE);
   boolean showDesignation = Utilities.checkedStringToBoolean(formBean.getShowDesignation(), true);
   boolean showDesignEn = Utilities.checkedStringToBoolean(formBean.getShowDesignationEn(), true);
-  boolean showDesignFr = Utilities.checkedStringToBoolean(formBean.getShowDesignationFr(), DesignationsBean.HIDE);
   boolean showIso = Utilities.checkedStringToBoolean(formBean.getShowIso(), DesignationsBean.HIDE);
   boolean showAbreviation = Utilities.checkedStringToBoolean(formBean.getShowAbreviation(), DesignationsBean.HIDE);
   //boolean showSource = Utilities.checkedStringToBoolean(formBean.getShowSource(), DesignationsBean.HIDE);
@@ -208,14 +207,6 @@
                       </option>
           <%
             }
-            if (showDesignFr)
-            {
-          %>
-                      <option value="<%=DesignationsSearchCriteria.CRITERIA_DESIGN_FR%>">
-                        <%=cm.cms("french_designation_name")%>
-                      </option>
-          <%
-            }
             if (showAbreviation)
             {
           %>
@@ -327,7 +318,6 @@
             AbstractSortCriteria sortAbreviation = formBean.lookupSortCriteria(DesignationsSortCriteria.SORT_ABREVIATION);
             AbstractSortCriteria sortDesignation = formBean.lookupSortCriteria(DesignationsSortCriteria.SORT_DESIGNATION);
             AbstractSortCriteria sortDesignEn = formBean.lookupSortCriteria(DesignationsSortCriteria.SORT_DESIGNATION_EN);
-            AbstractSortCriteria sortDesignFr = formBean.lookupSortCriteria(DesignationsSortCriteria.SORT_DESIGNATION_FR);
             AbstractSortCriteria sortCountry = formBean.lookupSortCriteria(DesignationsSortCriteria.SORT_COUNTRY);
           %>
                 <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
@@ -366,15 +356,6 @@
           %>
                       <th scope="col">
                         <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationsSortCriteria.SORT_DESIGNATION_EN%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignEn, sortDesignEn == null )%>"><%=Utilities.getSortImageTag(sortDesignEn)%><%=cm.cmsPhrase("English designation name")%></a>
-                        <%=cm.cmsTitle("sort_results_on_this_column")%>
-                      </th>
-          <%
-            }
-            if (showDesignFr)
-            {
-          %>
-                      <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationsSortCriteria.SORT_DESIGNATION_FR%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignFr, sortDesignFr == null )%>"><%=Utilities.getSortImageTag(sortDesignFr)%><%=cm.cmsPhrase("French designation name")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
           <%
@@ -464,28 +445,6 @@
                     </td>
           <%
               }
-              if (showDesignFr)
-              {
-          %>
-                    <td>
-          <%
-                if (null != designation.getDescriptionFr() && !designation.getDescriptionFr().equalsIgnoreCase(""))
-                {
-          %>
-                        <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=fr&amp;idDesign=<%=designation.getIdDesignation()%>&amp;geoscope=<%=designation.getIdGeoscope()%>"><%=Utilities.formatString(designation.getDescriptionFr(), "&nbsp;")%></a>
-                        <%=cm.cmsTitle("open_designation_factsheet")%>
-          <%
-                }
-                else
-                {
-          %>
-                        &nbsp;
-          <%
-                }
-          %>
-                      </td>
-          <%
-              }
               if (showAbreviation)
               {
           %>
@@ -535,15 +494,6 @@
           %>
                       <th scope="col">
                         <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationsSortCriteria.SORT_DESIGNATION_EN%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignEn, sortDesignEn == null )%>"><%=Utilities.getSortImageTag(sortDesignEn)%><%=cm.cmsPhrase("English designation name")%></a>
-                        <%=cm.cmsTitle("sort_results_on_this_column")%>
-                      </th>
-          <%
-            }
-            if (showDesignFr)
-            {
-          %>
-                      <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=DesignationsSortCriteria.SORT_DESIGNATION_FR%>&amp;ascendency=<%=formBean.changeAscendency(sortDesignFr, sortDesignFr == null )%>"><%=Utilities.getSortImageTag(sortDesignFr)%><%=cm.cmsPhrase("French designation name")%></a>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
           <%

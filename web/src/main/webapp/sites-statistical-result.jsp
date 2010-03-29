@@ -282,10 +282,6 @@
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th title="<%=cm.cms("sort_results_on_this_column")%>">
-                        <%=cm.cmsPhrase("French designation type name")%>
-                        <%=cm.cmsTitle("sort_results_on_this_column")%>
-                      </th>
-                      <th title="<%=cm.cms("sort_results_on_this_column")%>">
                         <%=cm.cmsPhrase("Category")%>
                         <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
@@ -337,22 +333,6 @@
                   {
           %>
                       <a href="designations-factsheet.jsp?idDesign=<%=d.getIdDesignation()%>&amp;geoscope=<%=d.getIdGeoscope()%>"><%=d.getDescriptionEn()%></a>
-          <%
-                  }
-                  else
-                  {
-          %>
-                      &nbsp;
-          <%
-                  }
-          %>
-                    </td>
-                    <td>
-          <%
-                  if (null != d.getDescriptionFr() && !d.getDescriptionFr().equalsIgnoreCase(""))
-                  {
-          %>
-                      <a href="designations-factsheet.jsp?idDesign=<%=d.getIdDesignation()%>&amp;geoscope=<%=d.getIdGeoscope()%>"><%=d.getDescriptionFr()%></a>
           <%
                   }
                   else

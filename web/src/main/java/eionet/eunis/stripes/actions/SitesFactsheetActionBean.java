@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ErrorResolution;
 import net.sourceforge.stripes.action.ForwardResolution;
@@ -95,6 +97,11 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 			pageTitle = getContext().getInitParameter("PAGE_TITLE")
 					+ getContentManagement().cmsPhrase("No data found in the database for the site with ID = ")
 					+ "'" + factsheet.getIDSite() + "'";
+			try{
+				getContext().getResponse().setStatus(HttpServletResponse.SC_NOT_FOUND);
+			} catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 		if (factsheet.exists()) {
 	

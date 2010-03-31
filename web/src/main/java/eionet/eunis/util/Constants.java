@@ -28,4 +28,5 @@ public interface Constants {
 	   public static final String SAME_SYNONYM_GBIF = "sameSynonymGBIF";
 	   public static final String SAME_SYNONYM_ITIS = "sameSynonymITIS";
 	   public static final String SAME_SYNONYM_NCBI = "sameSynonymNCBI";
+	   public static final String SAME_SYNONYM_FAEU = "sameSynonymFaEu"; // Fauna Europaea
 }

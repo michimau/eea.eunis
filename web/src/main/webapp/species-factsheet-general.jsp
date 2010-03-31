@@ -241,29 +241,38 @@
 <%
 if(kingdomname.equalsIgnoreCase("Animals"))
 {
-      sn = scientificName;
-      sn=sn.replaceAll("sp.","").replaceAll("ssp.","");
-      pos = -1;
-      pos = sn.indexOf( " " );
-      if( pos >= 0 )
-      {
-        genus=sn.substring(0, pos).trim();
-        spname=sn.substring(pos+1).trim();
+	String faeu = factsheet.getLink(specie.getIdNatureObject(),Constants.SAME_SYNONYM_FAEU);
+	if(faeu != null && faeu.length() > 0){
+    		%>
+		<div>
+        		<a href="http://www.faunaeur.org/full_results.php?id=<%=faeu%>"><%=cm.cmsPhrase("Fauna Europaea:")%><%=faeu%></a>
+		</div>
+		<%
+	} else {
+		sn = scientificName;
+		sn=sn.replaceAll("sp.","").replaceAll("ssp.","");
+		pos = -1;
+		pos = sn.indexOf( " " );
+		if( pos >= 0 )
+		{
+			genus=sn.substring(0, pos).trim();
+			spname=sn.substring(pos+1).trim();
 %>
 	<div>
 		<a title="<%=cm.cmsPhrase("Search species on Fauna Europaea")%>" href="http://www.faunaeur.org/index.php?show_what=search%20results&amp;genus=<%=genus%>&amp;species=<%=spname%>"><%=cm.cmsPhrase("Fauna Europaea")%></a>
 	</div>
 <%
-      }
+		}
+	}
 }
 %>
     		<%
     		String biolibLink = factsheet.getLink(specie.getIdNatureObject(),Constants.BIOLIB_PAGE);
 			if(biolibLink != null && biolibLink.length() > 0){
     		%>
-      <div>
+		<div>
         		<a href="<%=biolibLink%>"><%=cm.cmsPhrase("Biolib page")%></a>
-      	</div>
+		</div>
         	<%
     		}
         	%>
@@ -274,7 +283,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 		<div>
         		<a href="http://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=<%=itisTSN%>"><%=cm.cmsPhrase("ITIS TSN:")%><%=itisTSN%></a>
 		</div>
-			<%
+		<%
     		}
         	%>
     		<%

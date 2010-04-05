@@ -79,6 +79,13 @@
 		<description>E-mail address for account sending feedback(FROM field on
 			the e-mail message)</description>
 	</context-param>
+	
+	<!-- Font location for PDF generation -->
+	<context-param>
+		<param-name>PDF_FONT</param-name>
+		<param-value>fonts/arial.ttf</param-value>
+		<description>Platform dependent variable which specifies the location of font used in pdf generation</description>
+	</context-param>
 
 	<!-- Here temp files are stored -->
 	<context-param>

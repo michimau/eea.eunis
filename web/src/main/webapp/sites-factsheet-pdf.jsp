@@ -31,6 +31,10 @@
   WebContentManagement cm = SessionManager.getWebContent();
   String temp_dir = application.getInitParameter( "TEMP_DIR" );
   String linktopdf = getServletContext().getRealPath("/") + temp_dir;
+  
+  String pdf_font = application.getInitParameter( "PDF_FONT" );
+  String fontLocation = getServletContext().getRealPath("/") + pdf_font;
+  
   String filename = "SiteFactsheet_" + request.getSession().getId() + ".pdf";
   /// INPUT PARAMS: idHabitat
   String siteid = request.getParameter("idsite");
@@ -108,7 +112,7 @@
       String SQL_USR = application.getInitParameter( "JDBC_USR" );
       String SQL_PWD = application.getInitParameter( "JDBC_PWD" );
 
-      PDFSitesFactsheet pdfFactsheet = new PDFSitesFactsheet( siteid, report, cm, SQL_DRV, SQL_URL, SQL_USR, SQL_PWD );
+      PDFSitesFactsheet pdfFactsheet = new PDFSitesFactsheet( siteid, report, cm, fontLocation, SQL_DRV, SQL_URL, SQL_USR, SQL_PWD );
       pdfFactsheet.generateFactsheet();
 
       report.close();

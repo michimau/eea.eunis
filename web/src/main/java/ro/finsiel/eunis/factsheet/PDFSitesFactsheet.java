@@ -2,6 +2,8 @@ package ro.finsiel.eunis.factsheet;
 
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
+import com.lowagie.text.pdf.BaseFont;
+
 import ro.finsiel.eunis.WebContentManagement;
 import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
 import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesPersist;
@@ -30,16 +32,19 @@ public class PDFSitesFactsheet
   private final String SQL_URL;
   private final String SQL_USR;
   private final String SQL_PWD;
+  private final String fontLocation;
 
   private SiteFactsheet factsheet = null;
   private pdfReport report = null;
   int type = -1;
   private String designationDescr = null;
+  
 
-  Font fontNormal = FontFactory.getFont( FontFactory.HELVETICA, 9, Font.NORMAL );
-  Font fontNormalBold = FontFactory.getFont( FontFactory.HELVETICA, 9, Font.BOLD );
-  Font fontTitle = FontFactory.getFont( FontFactory.HELVETICA, 12, Font.BOLD );
-  Font fontSubtitle = FontFactory.getFont( FontFactory.HELVETICA, 10, Font.BOLD );
+  Font fontNormal;
+  Font fontNormalBold;
+  Font fontTitle;
+  Font fontSubtitle;
+
 
   /**
    * Constructor for PDFSitesFactsheet object.
@@ -51,7 +56,7 @@ public class PDFSitesFactsheet
    * @param SQL_USR SQL Driver username
    * @param SQL_PWD SQL Driver password
    */
-  public PDFSitesFactsheet( String idSite, pdfReport report, WebContentManagement contentManagement,
+  public PDFSitesFactsheet( String idSite, pdfReport report, WebContentManagement contentManagement, String fontLocation,
                             String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD )
   {
     this.contentManagement = contentManagement;
@@ -60,6 +65,7 @@ public class PDFSitesFactsheet
     this.SQL_URL = SQL_URL;
     this.SQL_USR = SQL_USR;
     this.SQL_PWD = SQL_PWD;
+    this.fontLocation = fontLocation;
 
 
     factsheet = new SiteFactsheet( idSite );
@@ -83,22 +89,29 @@ public class PDFSitesFactsheet
     boolean ret = true;
     try
     {
-      getGeneralInformation();
-      report.getDocument().newPage();
+    	BaseFont baseFont = BaseFont.createFont(fontLocation, BaseFont.IDENTITY_H, true);
+    	
+    	fontNormal = new Font(baseFont, 9, Font.NORMAL);
+    	fontNormalBold = new Font(baseFont, 9, Font.BOLD);
+    	fontTitle = new Font(baseFont, 12, Font.BOLD);
+    	fontSubtitle = new Font(baseFont, 10, Font.BOLD);
+    	
+    	getGeneralInformation();
+    	report.getDocument().newPage();
 
-      getDesignations();
-      report.getDocument().newPage();
+      	getDesignations();
+      	report.getDocument().newPage();
 
-      getFaunaFlora();
-      report.getDocument().newPage();
+      	getFaunaFlora();
+      	report.getDocument().newPage();
 
-      getHabitats();
-      report.getDocument().newPage();
+      	getHabitats();
+      	report.getDocument().newPage();
 
-      getRelatedSites();
-      report.getDocument().newPage();
+      	getRelatedSites();
+      	report.getDocument().newPage();
 
-      getOtherInfo();
+      	getOtherInfo();
     }
     catch ( Exception ex )
     {

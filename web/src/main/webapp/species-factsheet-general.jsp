@@ -195,30 +195,38 @@
       </div>
 <%
       }
-
-      // List of species national threat status.
-      List consStatus = factsheet.getConservationStatus(factsheet.getSpeciesObject());
-      boolean isGood = false;
-      if( consStatus != null && consStatus.size() > 0 )
-      {
-        for (int i=0;i<consStatus.size();i++)
-        {
-          NationalThreatWrapper threat = (NationalThreatWrapper)consStatus.get(i);
-          if(threat.getReference() != null && threat.getReference().indexOf("IUCN")>=0)
-          {
-            isGood = true;
-            break;
-          }
-        }
-      }
-      if( isGood )
-      {
-        String scientificNameURL = scientificName.replace(' ','+');
-%>
-	<div>
-        <a title="<%=cm.cmsPhrase("Search species on Redlist site")%>" href="http://www.redlist.org/apps/redlist/search/external?text=<%=scientificNameURL%>&amp;mode="><%=cm.cmsPhrase("Redlist search")%></a>
-	</div>
-<%
+      String rl_id = factsheet.getLink(specie.getIdNatureObject(),Constants.SAME_SYNONYM_REDLIST);
+      if(rl_id != null && rl_id.length() > 0){
+    		%>
+		<div>
+        		<a href="http://www.iucnredlist.org/apps/redlist/details/<%=rl_id%>/0"><%=cm.cmsPhrase("Redlist page")%></a>
+		</div>
+		<%
+      } else {
+	// List of species national threat status.
+	List consStatus = factsheet.getConservationStatus(factsheet.getSpeciesObject());
+	boolean isGood = false;
+	if( consStatus != null && consStatus.size() > 0 )
+	{
+	  for (int i=0;i<consStatus.size();i++)
+	  {
+	    NationalThreatWrapper threat = (NationalThreatWrapper)consStatus.get(i);
+	    if(threat.getReference() != null && threat.getReference().indexOf("IUCN")>=0)
+	    {
+	      isGood = true;
+	      break;
+	    }
+	  }
+	}
+	if( isGood )
+	{
+		  String scientificNameURL = scientificName.replace(' ','+');
+  %>
+		  <div>
+		  <a href="http://www.iucnredlist.org/apps/redlist/search/external?text=<%=scientificNameURL%>&amp;mode="><%=cm.cmsPhrase("Redlist search")%></a>
+		  </div>
+  <%
+	}
       }
       if( "fishes".equalsIgnoreCase( factsheet.getSpeciesGroup() ) )
       {

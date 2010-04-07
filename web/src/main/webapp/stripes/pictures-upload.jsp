@@ -27,7 +27,7 @@
   </head>
   <body>
     <p>
-      ${eunis:cmsPhrase(actionBean.contentManagement, 'This page allows to upload new pictures for')}<strong>${actionBean.scientificName}</strong>.
+      ${eunis:cmsPhrase(actionBean.contentManagement, 'This page allows to upload new pictures for')} <strong>${actionBean.scientificName}</strong>.
     </p>
     <p>
       ${eunis:cmsPhrase(actionBean.contentManagement, 'Please click browse and select the picture from your computer')}
@@ -46,21 +46,17 @@
         ${eunis:cms(actionBean.contentManagement, 'pictures_upload_filename_label')}</label>
         <input id="filename" name="filename" type="file" size="50" title="${eunis:cms(actionBean.contentManagement, 'pictures_upload_filename_label')}" />
       	${eunis:cmsLabel(actionBean.contentManagement, 'pictures_upload_filename_label')} <br/>
-      	<label for="main_picture">check to upload a general info picture</label>
+      	<label for="main_picture">Check to make it the factsheet picture</label>
       	<input id="main_picture" name="main_picture" type="checkbox" />
-      	
-      	</p>
+      </p>
       <p>
-      	${eunis:cmsPhrase(actionBean.contentManagement, 'Picture description (max 255 characters)')}"
+      	${eunis:cmsPhrase(actionBean.contentManagement, 'Picture description (max 255 characters)')}
         <br />
         <label for="description" class="noshow">${eunis:cms(actionBean.contentManagement, 'pictures_upload_description_label')}</label>
         <textarea 
         	id="description"
         	name="description" 
-        	cols="60" rows="5" 
-        	title="${eunis:cms(actionBean.contentManagement, 'pictures_upload_description_label')}">
-        	</textarea>
-       	${eunis:cmsLabel(actionBean.contentManagement, 'pictures_upload_description_label')}"
+        	cols="60" rows="5"></textarea>
       </p>
       <p>
         <input type="reset" 

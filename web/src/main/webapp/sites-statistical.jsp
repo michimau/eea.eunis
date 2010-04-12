@@ -51,8 +51,8 @@
                   <jsp:param name="mapLink" value="show"/>
                 </jsp:include>
                 <a name="documentContent"></a>
+		<h1><%=cm.cmsPhrase( "Number / Total area " )%></h1>
                 <div class="documentActions">
-		  <h1><%=cm.cmsPhrase( "Number / Total area " )%>
                   <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
                   <ul>
                     <li>

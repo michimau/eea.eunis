@@ -119,18 +119,30 @@ public class WebContentManagement implements java.io.Serializable {
    * Look up a longer phrase (potentially HTML) in the content table
    * It is probably not necessary to escape apostrophs
    *
+   * EUNIS was designed to be localised. It is a feature we don't use at the moment, so
+   * in order to save resource we bypass the cmsPhrase() method.
    * @param idPage
    */
   public String cmsPhrase( String idPage ) {
+/*
 	String ret = Utilities.replace(idPage, "'", "\'");
 	return getTextByMD5( ret );
+ */
+	return getTextByMD5( idPage );
   }
   
+  /*
+   * EUNIS was designed to be localised. It is a feature we don't use at the moment, so
+   * in order to save resource we bypass the cmsPhrase() method.
+   */
   public String cmsPhrase( String idPage, Object... arguments ) {
+/*
 	String ret = Utilities.replace(idPage, "'", "\'");  
 	ret = getTextByMD5( ret );
 	ret = MessageFormat.format(ret, arguments);
 	return ret;
+ */
+	return MessageFormat.format(idPage, arguments);
   }
 
   public String cmsMsg( String idPage ) {

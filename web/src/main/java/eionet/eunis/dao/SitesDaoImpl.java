@@ -44,6 +44,10 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 		PreparedStatement ps13 = null;
 		PreparedStatement ps14 = null;
 		PreparedStatement ps15 = null;
+		PreparedStatement ps16 = null;
+		PreparedStatement ps17 = null;
+		PreparedStatement ps18 = null;
+		PreparedStatement ps19 = null;
 		
 		ResultSet rs = null;
 	    try {
@@ -68,16 +72,23 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 							"(SELECT ID_REPORT_TYPE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?)");
 	    	
 	    	ps6 = con.prepareStatement("DELETE FROM chm62edt_nature_object_geoscope WHERE ID_NATURE_OBJECT=?");
-	    	ps7 = con.prepareStatement("DELETE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?");
-	    	ps8 = con.prepareStatement("DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?");
-	    	ps9 = con.prepareStatement("DELETE FROM chm62edt_nature_object_attributes WHERE ID_NATURE_OBJECT=?");
-	    	ps10 = con.prepareStatement("DELETE FROM chm62edt_tab_page_sites WHERE ID_NATURE_OBJECT=?");
-	    	ps11 = con.prepareStatement("DELETE FROM chm62edt_nature_object WHERE ID_NATURE_OBJECT=?");
+	    	ps7 = con.prepareStatement("DELETE FROM chm62edt_nature_object_geoscope WHERE ID_NATURE_OBJECT_LINK=?");
+	    	ps8 = con.prepareStatement("DELETE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?");
+	    	ps9 = con.prepareStatement("DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?");
+	    	ps10 = con.prepareStatement("DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT_LINK=?");
+	    	ps11 = con.prepareStatement("DELETE FROM chm62edt_nature_object_attributes WHERE ID_NATURE_OBJECT=?");
+	    	ps12 = con.prepareStatement("DELETE FROM chm62edt_tab_page_sites WHERE ID_NATURE_OBJECT=?");
 	    	
-	    	ps12 = con.prepareStatement("DELETE FROM chm62edt_sites_sites WHERE ID_SITE=?");
-	    	ps13 = con.prepareStatement("DELETE FROM chm62edt_sites_related_designations WHERE ID_SITE=?");
-	    	ps14 = con.prepareStatement("DELETE FROM chm62edt_site_attributes WHERE ID_SITE=?");
-	    	ps15 = con.prepareStatement("DELETE FROM chm62edt_sites WHERE ID_SITE=?");
+	    	
+	    	ps13 = con.prepareStatement("DELETE FROM chm62edt_sites_sites WHERE ID_SITE=?");
+	    	ps14 = con.prepareStatement("DELETE FROM chm62edt_sites_sites WHERE ID_SITE_LINK=?");
+	    	ps15 = con.prepareStatement("DELETE FROM chm62edt_sites_related_designations WHERE ID_SITE=?");
+	    	ps16 = con.prepareStatement("DELETE FROM chm62edt_site_attributes WHERE ID_SITE=?");
+	    	
+	    	ps17 = con.prepareStatement("DELETE FROM chm62edt_nature_object_picture WHERE ID_OBJECT=? AND NATURE_OBJECT_TYPE='Sites'");
+	    	
+	    	ps18 = con.prepareStatement("DELETE FROM chm62edt_sites WHERE ID_SITE=?");
+	    	ps19 = con.prepareStatement("DELETE FROM chm62edt_nature_object WHERE ID_NATURE_OBJECT=?");
 	    		    	
 	    	rs = ps.executeQuery();
 	    	int counter = 0;
@@ -122,7 +133,7 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 						ps11.setString(1, idNatureObject);
 						ps11.addBatch();
 				    	
-						ps12.setString(1, idSite);
+						ps12.setString(1, idNatureObject);
 						ps12.addBatch();
 						
 						ps13.setString(1, idSite);
@@ -133,6 +144,18 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 				    	
 						ps15.setString(1, idSite);
 						ps15.addBatch();
+						
+						ps16.setString(1, idSite);
+						ps16.addBatch();
+						
+						ps17.setString(1, idNatureObject);
+						ps17.addBatch();
+						
+						ps18.setString(1, idSite);
+						ps18.addBatch();
+						
+						ps19.setString(1, idNatureObject);
+						ps19.addBatch();
 						
 						if (counter % 10000 == 0){ 
         	        		ps1.executeBatch(); 
@@ -165,6 +188,14 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
         	        		ps14.clearParameters();
         	        		ps15.executeBatch(); 
         	        		ps15.clearParameters();
+        	        		ps16.executeBatch(); 
+        	        		ps16.clearParameters();
+        	        		ps17.executeBatch(); 
+        	        		ps17.clearParameters();
+        	        		ps18.executeBatch(); 
+        	        		ps18.clearParameters();
+        	        		ps19.executeBatch(); 
+        	        		ps19.clearParameters();
         	        		System.gc(); 
         	        	}
 					}
@@ -202,6 +233,14 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
         		ps14.clearParameters();
         		ps15.executeBatch(); 
         		ps15.clearParameters();
+        		ps16.executeBatch(); 
+        		ps16.clearParameters();
+        		ps17.executeBatch(); 
+        		ps17.clearParameters();
+        		ps18.executeBatch(); 
+        		ps18.clearParameters();
+        		ps19.executeBatch(); 
+        		ps19.clearParameters();
         		System.gc(); 
             }
 	    	
@@ -224,6 +263,10 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 	    	ps13.close();
 	    	ps14.close();
 	    	ps15.close();
+	    	ps16.close();
+	    	ps17.close();
+	    	ps18.close();
+	    	ps19.close();
 	    }
 		
 	}

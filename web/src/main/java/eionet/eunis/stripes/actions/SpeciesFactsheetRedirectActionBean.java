@@ -22,7 +22,6 @@ public class SpeciesFactsheetRedirectActionBean extends AbstractStripesAction {
 		"trends",
 		"references",
 		"grid",
-		"threatstatus",
 		"legal",
 		"habitats",
 		"sites",

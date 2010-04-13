@@ -20,6 +20,7 @@
                  ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain,
                  ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist,
                  java.util.StringTokenizer,
+                 java.util.ArrayList,
                  eionet.eunis.util.Constants"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
@@ -51,6 +52,17 @@
   String kingdomname="";
   String urlPic="idobject="+specie.getIdSpecies()+"&amp;natureobjecttype=Species";
   String picturePath = application.getInitParameter("UPLOAD_DIR_PICTURES_SPECIES");
+  
+  //List of species international threat status.
+  List consStatus = new ArrayList();
+  try
+  {
+    consStatus = factsheet.getConservationStatus(factsheet.getSpeciesObject());
+  }
+  catch( Exception ex )
+  {
+    ex.printStackTrace();
+  }
   
 %>
   <% if (mainPictureFilename != null && mainPictureFilename.length() > 0)  { %>
@@ -204,7 +216,6 @@
 		<%
       } else {
 	// List of species national threat status.
-	List consStatus = factsheet.getConservationStatus(factsheet.getSpeciesObject());
 	boolean isGood = false;
 	if( consStatus != null && consStatus.size() > 0 )
 	{
@@ -350,6 +361,77 @@ if(kingdomname.equalsIgnoreCase("Animals"))
         	%>
   </div> <!-- linkcollection -->
 </div> <!-- allow-naturepic -->
+	<%
+	    // International threat status
+	    if( consStatus.size() > 0 )
+	    {
+	%>
+	  <br/><br/><br/>
+	  <h2 style="clear: both">
+	    <%=cm.cmsPhrase("International Threat Status")%>
+	  </h2>
+	  <table summary="<%=cm.cms("international_threat_status")%>" class="listing fullwidth">
+	    <col style="width: 20%"/>
+	    <col style="width: 20%"/>
+	    <col style="width: 20%"/>
+	    <col style="width: 40%"/>
+	    <thead>
+	      <tr>
+	        <th scope="col">
+	          <%=cm.cmsPhrase("Area")%>
+	          <%=cm.cmsTitle("sort_results_on_this_column")%>
+	        </th>
+	        <th scope="col">
+	          <%=cm.cmsPhrase("Status")%>
+	          <%=cm.cmsTitle("sort_results_on_this_column")%>
+	        </th>
+	        <th scope="col">
+	          <%=cm.cmsPhrase("International threat code")%>
+	          <%=cm.cmsTitle("sort_results_on_this_column")%>
+	        </th>
+	        <th scope="col">
+	          <%=cm.cmsPhrase("Reference")%>
+	          <%=cm.cmsTitle("sort_results_on_this_column")%>
+	        </th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	<%
+	       // Display results.
+	      for (int i = 0; i < consStatus.size(); i++)
+	      {
+	        String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
+	        NationalThreatWrapper threat = (NationalThreatWrapper)consStatus.get(i);
+	%>
+	      <tr class="<%=cssClass%>">
+	        <td>
+	          <%=Utilities.treatURLSpecialCharacters(threat.getCountry())%>
+	        </td>
+	        <td>
+	          <%=Utilities.treatURLSpecialCharacters(threat.getStatus())%>
+	        </td>
+	        <td>
+	        <span class="boldUnderline" title="<%=factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode()).replaceAll("'"," ").replaceAll("\""," ")%>">
+	          <%=threat.getThreatCode()%>
+	        </span>
+	        </td>
+	        <td>
+	          <a href="documents/<%=threat.getIdDc()%>"><%=Utilities.treatURLSpecialCharacters(threat.getReference())%></a>
+	        </td>
+	      </tr>
+	<%
+	          }
+	%>
+	    </tbody>
+	  </table>
+	<%
+	    }
+	%>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("national_threat_status")%>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("international_threat_status")%>
+  <br />
   <h2 style="clear: both">
     <%=cm.cmsPhrase("Source")%>
   </h2>

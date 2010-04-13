@@ -135,14 +135,6 @@
 			                  <jsp:param name="kmlUrl" value="${pageContext.request.contextPath}/species-factsheet-distribution-kml.jsp?idSpecies=${actionBean.factsheet.idSpecies}&amp;idSpeciesLink=${actionBean.factsheet.idSpeciesLink}" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 'threatstatus'}">
-		                	<%-- Threat statis --%>
-			                <jsp:include page="/species-factsheet-threat.jsp">
-			                  <jsp:param name="mainIdSpecies" value="${actionBean.factsheet.idSpecies}" />
-			                  <jsp:param name="scName" value="${actionBean.scientificName}" />
-			                  <jsp:param name="expand" value="true" />
-			                </jsp:include>
-		                </c:if>
 		                <c:if test="${actionBean.tab == 'legal'}">
 		                	<%-- Legal instruments --%>
 			                <jsp:include page="/species-factsheet-legal.jsp">
@@ -190,8 +182,6 @@
 		    ${eunis:cmsMsg(actionBean.contentManagement, 'references')}
 		    ${eunis:br(actionBean.contentManagement)}
 		    ${eunis:cmsMsg(actionBean.contentManagement, 'grid_distribution')}
-		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'threat_status')}
 		    ${eunis:br(actionBean.contentManagement)}
 		    ${eunis:cmsMsg(actionBean.contentManagement, 'legal_instruments')}
 		    ${eunis:br(actionBean.contentManagement)}

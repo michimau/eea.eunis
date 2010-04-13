@@ -46,7 +46,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 		{"TRENDS","trends"},
 		{"REFERENCES","references"},
 		{"GRID_DISTRIBUTION","grid"},
-		{"THREAT_STATUS","threatstatus"},
 		{"LEGAL_INSTRUMENTS","legal"},
 		{"HABITATS","habitats"},
 		{"SITES","sites"},

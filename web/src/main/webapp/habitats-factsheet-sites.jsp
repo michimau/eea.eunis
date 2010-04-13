@@ -43,7 +43,7 @@
       " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " +
       " WHERE   " + isGoodHabitat + " AND A.ID_NATURE_OBJECT =" + factsheet.getHabitat().getIdNatureObject() +
       " AND C.SOURCE_DB <> 'EMERALD'" +
-      " GROUP BY C.ID_NATURE_OBJECT");
+      " ORDER BY C.ID_SITE");
       
     int count = sites.size();
     
@@ -60,7 +60,7 @@
       " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " +
       " WHERE   " + isGoodHabitat + " AND A.ID_NATURE_OBJECT =" + factsheet.getHabitat().getIdNatureObject() +
       " AND C.SOURCE_DB <> 'EMERALD'" +
-      " GROUP BY C.ID_NATURE_OBJECT LIMIT "+myBase+","+limit);
+      " ORDER BY C.ID_SITE LIMIT "+myBase+","+limit);
 
     // Sites for habitat subtypes.
     List sitesForSubtypes = new SitesByNatureObjectDomain().findCustom("SELECT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN " +
@@ -72,7 +72,7 @@
       " WHERE A.ID_NATURE_OBJECT =" + factsheet.getHabitat().getIdNatureObject() +
       (factsheet.isAnnexI() ? " and right(A.code_2000,2) <> '00' and length(A.code_2000) = 4 AND if(right(A.code_2000,1) = '0',left(A.code_2000,3),A.code_2000) like '" + factsheet.getCode2000() + "%' and A.code_2000 <> '" + factsheet.getCode2000() + "'" : " AND A.EUNIS_HABITAT_CODE like '" + factsheet.getEunisHabitatCode() + "%' and A.EUNIS_HABITAT_CODE<> '" + factsheet.getEunisHabitatCode() + "'") +
       " AND C.SOURCE_DB <> 'EMERALD'" +
-      " GROUP BY C.ID_NATURE_OBJECT");
+      " ORDER BY C.ID_SITE");
 
     if( ( null != sites && !sites.isEmpty() ) || ( null != sitesForSubtypes && !sitesForSubtypes.isEmpty() ) )
     {

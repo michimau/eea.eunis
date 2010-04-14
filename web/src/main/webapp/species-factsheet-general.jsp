@@ -73,6 +73,9 @@
 		    <img src="<%=picturePath + "/"+ mainPictureFilename %>" alt="species main picture" class="scaled" style="max-width:300px; max-height:400px" />
 		    </a>
 	    </div>
+	    <div class="naturepic-note">
+              <%=scientificName %>
+	    </div>
 	  </div>
   </div>
   <% } %>
@@ -264,7 +267,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 	if(faeu != null && faeu.length() > 0){
     		%>
 		<div>
-        		<a href="http://www.faunaeur.org/full_results.php?id=<%=faeu%>"><%=cm.cmsPhrase("Fauna Europaea:")%><%=faeu%></a>
+        		<a href="http://www.faunaeur.org/full_results.php?id=<%=faeu%>"><%=cm.cmsPhrase("Fauna Europaea")%></a>
 		</div>
 		<%
 	} else {
@@ -361,16 +364,16 @@ if(kingdomname.equalsIgnoreCase("Animals"))
         	%>
   </div> <!-- linkcollection -->
 </div> <!-- allow-naturepic -->
+<br style="clear: both"/>
 	<%
 	    // International threat status
 	    if( consStatus.size() > 0 )
 	    {
 	%>
-	  <br/><br/><br/>
 	  <h2 style="clear: both">
 	    <%=cm.cmsPhrase("International Threat Status")%>
 	  </h2>
-	  <table summary="<%=cm.cms("international_threat_status")%>" class="listing fullwidth">
+	  <table summary="<%=cm.cmsPhrase("International Threat Status")%>" class="listing fullwidth">
 	    <col style="width: 20%"/>
 	    <col style="width: 20%"/>
 	    <col style="width: 20%"/>
@@ -427,15 +430,10 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 	<%
 	    }
 	%>
-  <%=cm.br()%>
-  <%=cm.cmsMsg("national_threat_status")%>
-  <%=cm.br()%>
-  <%=cm.cmsMsg("international_threat_status")%>
-  <br />
-  <h2 style="clear: both">
+  <h2>
     <%=cm.cmsPhrase("Source")%>
   </h2>
-  <table summary="layout" class="datatable fullwidth">
+  <table summary="<%=cm.cmsPhrase("Source of species record")%>" class="datatable fullwidth">
     <col style="width:20%"/>
     <col style="width:80%"/>
     <tbody>

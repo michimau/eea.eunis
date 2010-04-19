@@ -87,7 +87,10 @@
 			                <jsp:include page="/species-factsheet-general.jsp">
 			                  <jsp:param name="mainIdSpecies" value="${actionBean.factsheet.idSpecies}" />
 			                  <jsp:param name="mainPictureFilename" value="${actionBean.mainPictureFilename}" />
-			                  
+			                  <jsp:param name="mainPictureMaxWidth" value="${actionBean.mainPictureMaxWidth}" />
+			                  <jsp:param name="mainPictureMaxHeight" value="${actionBean.mainPictureMaxHeight}" />
+			                  <jsp:param name="mainPictureDescription" value="${actionBean.mainPictureDescription}" />
+			                  <jsp:param name="pictureSource" value="${actionBean.pictureSource}" />
 			                </jsp:include>
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'vernacular'}">

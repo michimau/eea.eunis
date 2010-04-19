@@ -2,6 +2,7 @@ package ro.finsiel.eunis.jrfTables;
 
 import net.sf.jrf.column.columnspecs.BooleanColumnSpec;
 import net.sf.jrf.column.columnspecs.CompoundPrimaryKeyColumnSpec;
+import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
@@ -38,5 +39,8 @@ public class Chm62edtNatureObjectPictureDomain extends AbstractDomain {
     );
     this.addColumnSpec(new BooleanColumnSpec("MAIN_PIC", "isMainPicture", "setMainPicture", DEFAULT_TO_FALSE));
     this.addColumnSpec(new StringColumnSpec("DESCRIPTION", "getDescription", "setDescription", DEFAULT_TO_EMPTY_STRING));
+    this.addColumnSpec(new IntegerColumnSpec("MAX_WIDTH", "getMaxWidth", "setMaxWidth", DEFAULT_TO_ZERO));
+    this.addColumnSpec(new IntegerColumnSpec("MAX_HEIGHT", "getMaxHeight", "setMaxHeight", DEFAULT_TO_ZERO));
+    this.addColumnSpec(new StringColumnSpec("SOURCE", "getSource", "setSource", DEFAULT_TO_EMPTY_STRING));
   }
 }

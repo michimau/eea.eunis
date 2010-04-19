@@ -61,8 +61,10 @@
   String filename;
   String name;
   String description;
+  String source;
   String firstimage="";
   String firstdescription="";
+  String firstsource="";
   // List of pictures.
   List pictures = PicturesHelper.findPicturesForSpecies(IdObject, NatureObjectType);
   String scientificName = "";
@@ -86,6 +88,7 @@
         imageArray = new Array();
         nameArray = new Array();
         descriptionArray = new Array();
+        sourceArray = new Array();
 <%
     while (it.hasNext())
     {
@@ -93,15 +96,18 @@
       filename = picture.getFileName();
       name=picture.getName();
       description=picture.getDescription();
+      source=picture.getSource();
       if(firstimage.equalsIgnoreCase(""))
       {
         firstimage = filename;
         firstdescription = description;
+        firstsource = source;
       }
 %>
         imageArray[ImageNum] = new imageItem("<%=dirBase + filename%>");
         nameArray[ImageNum] = "<%=name%>";
         descriptionArray[ImageNum] = "<%=description%>";
+        sourceArray[ImageNum] = "<%=cm.cmsPhrase("Source")%>: <%=source%>";
         ImageNum++;
 <%
     }
@@ -122,6 +128,7 @@
           document[place].src = new_image;
           document.getElementById('picture_name').innerHTML=nameArray[ImageNum];
           document.getElementById('picture_description').innerHTML=descriptionArray[ImageNum];
+          document.getElementById('picture_source').innerHTML=sourceArray[ImageNum];
         }
 
         function getNextImage() {
@@ -135,6 +142,7 @@
           document[place].src = new_image;
           document.getElementById('picture_name').innerHTML=nameArray[ImageNum];
           document.getElementById('picture_description').innerHTML=descriptionArray[ImageNum];
+          document.getElementById('picture_source').innerHTML=sourceArray[ImageNum];
         }
 
         function getPrevImage()
@@ -173,6 +181,9 @@
     </div>
     <div style="width : 100%; text-align : center;">
       <img alt="<%=firstdescription%>" id="image" name="rImage" src="<%=dirBase + firstimage%>" border="1" style="max-width:95%"/>
+    </div>
+    <div id="picture_source" style="width : 100%; text-align:center; font-weight:bold;">
+      <%=cm.cmsPhrase("Source")%>: <%=firstsource%>
     </div>
     <script language="JavaScript" type="text/javascript">
       //<![CDATA[

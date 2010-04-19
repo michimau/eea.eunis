@@ -218,6 +218,9 @@ public class EUNISUploadServlet extends HttpServlet {
         String idObject = "";
         String description = "";
         String natureObjectType = "";
+        String maxWidth = "";
+        String maxHeight = "";
+        String source = "";
         boolean mainPicture = false;
         FileItem uploadedFileItem = null;
 
@@ -239,7 +242,7 @@ public class EUNISUploadServlet extends HttpServlet {
                 }
                 // Description
                 if (null != fieldName && fieldName.equalsIgnoreCase("description")) {
-                    description = fieldValue;
+                    description = new String (fieldValue.getBytes ("iso-8859-1"), "UTF-8");
                 }
                 // Nature object type
                 if (null != fieldName && fieldName.equalsIgnoreCase("natureobjecttype")) {
@@ -249,6 +252,21 @@ public class EUNISUploadServlet extends HttpServlet {
                 // Main picture
                 if (null != fieldName && fieldName.equalsIgnoreCase("main_picture")) {
                 	mainPicture = true;
+                }
+                
+                // Max width
+                if (null != fieldName && fieldName.equalsIgnoreCase("width")) {
+                	maxWidth = fieldValue;
+                }
+                
+                // Max height
+                if (null != fieldName && fieldName.equalsIgnoreCase("height")) {
+                	maxHeight = fieldValue;
+                }
+                
+                // Source
+                if (null != fieldName && fieldName.equalsIgnoreCase("source")) {
+                	source = new String (fieldValue.getBytes ("iso-8859-1"), "UTF-8");
                 }
                 
                 
@@ -308,7 +326,19 @@ public class EUNISUploadServlet extends HttpServlet {
         pictureObject.setIdObject(idObject);
         pictureObject.setName(scientificName);
         pictureObject.setNatureObjectType(natureObjectType);
+        pictureObject.setSource(source);
         new Chm62edtNatureObjectPictureDomain().save(pictureObject);
+        
+        Integer maxWidthInt = 0;
+        Integer maxHeightInt = 0;
+        if(mainPicture){
+	        if(maxWidth != null && maxWidth.length() > 0){
+	        	maxWidthInt = new Integer(maxWidth);
+	        }
+	        if(maxHeight != null && maxHeight.length() > 0){
+	        	maxHeightInt = new Integer(maxHeight);
+	        }
+        }
         
         //processing main picture
         if (mainPicture) {
@@ -316,12 +346,17 @@ public class EUNISUploadServlet extends HttpServlet {
         	double ratio = (double) image.getWidth() / (double) image.getHeight();
         	double idealRatio = MAX_WIDTH   / MAX_HEIGHT;
         	int newHeight = 0, newWidth = 0;
-        	if (ratio > idealRatio) {
-        		newWidth = Math.min(image.getWidth(), MAX_WIDTH  );
-        		newHeight =  (int) ((double) newWidth / ratio);
+        	if(maxWidthInt > 0 && maxHeightInt > 0){
+        		newWidth = maxWidthInt.intValue();
+        		newHeight = maxHeightInt.intValue();
         	} else {
-        		newHeight = Math.min(image.getHeight(), MAX_HEIGHT);
-        		newWidth = (int) ((double) newHeight * ratio);
+	        	if (ratio > idealRatio) {
+	        		newWidth = Math.min(image.getWidth(), MAX_WIDTH  );
+	        		newHeight =  (int) ((double) newWidth / ratio);
+	        	} else {
+	        		newHeight = Math.min(image.getHeight(), MAX_HEIGHT);
+	        		newWidth = (int) ((double) newHeight * ratio);
+	        	}
         	}
         	
         	AffineTransform at = AffineTransform.getScaleInstance((double)newWidth/(double)image.getWidth(),
@@ -350,6 +385,9 @@ public class EUNISUploadServlet extends HttpServlet {
 			mainPicturePersist.setIdObject(idObject);
 			mainPicturePersist.setName(scientificName);
 			mainPicturePersist.setNatureObjectType(natureObjectType);
+			mainPicturePersist.setSource(source);
+			mainPicturePersist.setMaxWidth(maxWidthInt);
+			mainPicturePersist.setMaxHeight(maxHeightInt);
 			domain.save(mainPicturePersist);
 			
         }

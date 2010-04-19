@@ -32,10 +32,16 @@
   		.findWhere("MAIN_PIC = 1 AND ID_OBJECT = " +idHabitat);
   String mainPictureId = null;
   String pictureDescription = null;
+  Integer width = null;
+  Integer height = null;
+  String source = null;
   if (pictureList != null && !pictureList.isEmpty()) {
 	  mainPictureId = application.getInitParameter("UPLOAD_DIR_PICTURES_HABITATS") + "/" +
 	  		pictureList.get(0).getFileName();
 	  pictureDescription = pictureList.get(0).getDescription();
+	  width = pictureList.get(0).getMaxWidth();
+	  height = pictureList.get(0).getMaxHeight();
+	  source = pictureList.get(0).getSource();
   }
   String picsURL = "idobject=" + factsheet.getIdHabitat() + "&amp;natureobjecttype=Habitats";
   
@@ -45,9 +51,19 @@
   <div class="naturepic-plus-container naturepic-right">
 	  <div class="naturepic-plus">
 	    <div class="naturepic-image">
+	    	<%
+	    	String styleAttr = "max-width:300px; max-height:400px;";
+    		if(width != null && width.intValue() > 0 && height != null && height.intValue() > 0){
+	    		styleAttr = "max-width: "+width.intValue()+"px; max-height: "+height.intValue()+"px";
+    		}
+	    	%>
 		    <a href="javascript:openpictures('pictures.jsp?<%=picsURL%>',600,600)">
-		    <img src="<%=mainPictureId %>" alt="<%=pictureDescription %>" class="scaled" style="max-width:300px; max-height:400px" />
+		    <img src="<%=mainPictureId %>" alt="<%=pictureDescription %>" class="scaled" style="<%=styleAttr%>" />
 		    </a>
+		    <% if(source != null && source.length() > 0){%>
+		    	<br/>
+		    	<%=cm.cmsPhrase("Source")%>: <%=source%>
+		    <%}%>
 	    </div>
 	    <div class="naturepic-note">
 	      <%=pictureDescription %>

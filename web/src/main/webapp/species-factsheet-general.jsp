@@ -28,6 +28,12 @@
   // idSpecies - ID of specie
   String mainIdSpecies = request.getParameter("mainIdSpecies");
   String mainPictureFilename = request.getParameter("mainPictureFilename");
+  String mainPictureDescription = request.getParameter("mainPictureDescription");
+  String mainPictureMaxWidth = request.getParameter("mainPictureMaxWidth");
+  String mainPictureMaxHeight = request.getParameter("mainPictureMaxHeight");
+  Integer mainPictureMaxWidthInt = Utilities.checkedStringToInt(mainPictureMaxWidth, new Integer(0));
+  Integer mainPictureMaxHeightInt = Utilities.checkedStringToInt(mainPictureMaxHeight, new Integer(0));
+  String pictureSource = request.getParameter("pictureSource");
   SpeciesFactsheet factsheet = new SpeciesFactsheet(
 		  Utilities.checkedStringToInt(mainIdSpecies, new Integer(0)),
 		  Utilities.checkedStringToInt(mainIdSpecies, new Integer(0)));
@@ -69,9 +75,23 @@
   <div class="naturepic-plus-container naturepic-right">
 	  <div class="naturepic-plus">
 	    <div class="naturepic-image">
+	    	<%
+	    		if(mainPictureDescription == null){
+	    			mainPictureDescription = "";
+	    		}
+	    			
+	    		String styleAttr = "max-width:300px; max-height:400px;";
+	    		if(mainPictureMaxWidthInt != null && mainPictureMaxWidthInt.intValue() > 0 && mainPictureMaxHeightInt != null && mainPictureMaxHeightInt.intValue() > 0){
+		    		styleAttr = "max-width: "+mainPictureMaxWidthInt.intValue()+"px; max-height: "+mainPictureMaxHeightInt.intValue()+"px";
+	    		}
+	    	%>
 		    <a href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)"">
-		    <img src="<%=picturePath + "/"+ mainPictureFilename %>" alt="species main picture" class="scaled" style="max-width:300px; max-height:400px" />
+		    	<img src="<%=picturePath + "/"+ mainPictureFilename %>" alt="<%=mainPictureDescription%>" class="scaled" style="<%=styleAttr%>"/>
 		    </a>
+		    <% if(pictureSource != null && pictureSource.length() > 0){%>
+		    	<br/>
+		    	<%=cm.cmsPhrase("Source")%>: <%=pictureSource%>
+		    <%}%>
 	    </div>
 	    <div class="naturepic-note">
               <%=scientificName %>
@@ -267,7 +287,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 	if(faeu != null && faeu.length() > 0){
     		%>
 		<div>
-        		<a href="http://www.faunaeur.org/full_results.php?id=<%=faeu%>"><%=cm.cmsPhrase("Fauna Europaea")%></a>
+        		<a href="http://www.faunaeur.org/full_results.php?id=<%=faeu%>"><%=cm.cmsPhrase("Fauna Europaea:")%><%=faeu%></a>
 		</div>
 		<%
 	} else {
@@ -364,16 +384,16 @@ if(kingdomname.equalsIgnoreCase("Animals"))
         	%>
   </div> <!-- linkcollection -->
 </div> <!-- allow-naturepic -->
-<br style="clear: both"/>
 	<%
 	    // International threat status
 	    if( consStatus.size() > 0 )
 	    {
 	%>
+	  <br/><br/><br/>
 	  <h2 style="clear: both">
 	    <%=cm.cmsPhrase("International Threat Status")%>
 	  </h2>
-	  <table summary="<%=cm.cmsPhrase("International Threat Status")%>" class="listing fullwidth">
+	  <table summary="<%=cm.cms("international_threat_status")%>" class="listing fullwidth">
 	    <col style="width: 20%"/>
 	    <col style="width: 20%"/>
 	    <col style="width: 20%"/>
@@ -430,10 +450,15 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 	<%
 	    }
 	%>
-  <h2>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("national_threat_status")%>
+  <%=cm.br()%>
+  <%=cm.cmsMsg("international_threat_status")%>
+  <br />
+  <h2 style="clear: both">
     <%=cm.cmsPhrase("Source")%>
   </h2>
-  <table summary="<%=cm.cmsPhrase("Source of species record")%>" class="datatable fullwidth">
+  <table summary="layout" class="datatable fullwidth">
     <col style="width:20%"/>
     <col style="width:80%"/>
     <tbody>

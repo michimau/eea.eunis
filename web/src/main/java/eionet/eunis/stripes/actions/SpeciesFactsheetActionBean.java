@@ -67,6 +67,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 	private String referedFromName;
 
 	private String mainPictureFilename;
+	private String mainPictureMaxWidth;
+	private String mainPictureMaxHeight;
+	private String mainPictureDescription;
+	private String pictureSource;
 
 	
 	@DefaultHandler
@@ -136,6 +140,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 					.findWhere("MAIN_PIC = 1 AND ID_OBJECT = " + mainIdSpecies );
 			if (pictures != null && !pictures.isEmpty()) {
 				mainPictureFilename = pictures.get(0).getFileName();
+				mainPictureMaxWidth = pictures.get(0).getMaxWidth().toString();
+				mainPictureMaxHeight = pictures.get(0).getMaxHeight().toString();
+				mainPictureDescription = pictures.get(0).getDescription();
+				pictureSource = pictures.get(0).getSource();
 			}
 		} 
 		String eeaHome = getContext().getInitParameter("EEA_HOME");
@@ -307,6 +315,22 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 
 	public String getMainPictureFilename() {
 		return mainPictureFilename;
+	}
+
+	public String getMainPictureMaxWidth() {
+		return mainPictureMaxWidth;
+	}
+
+	public String getMainPictureMaxHeight() {
+		return mainPictureMaxHeight;
+	}
+	
+	public String getPictureSource() {
+		return pictureSource;
+	}
+	
+	public String getMainPictureDescription() {
+		return mainPictureDescription;
 	}
 
 }

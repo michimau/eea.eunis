@@ -15,6 +15,9 @@ public class Chm62edtNatureObjectPicturePersist extends PersistentObject {
   private String i_fileName = null;
   private String i_description = null;
   private Boolean mainPicture;
+  private Integer i_max_width = null;
+  private Integer i_max_height = null;
+  private String i_source = null;
 
   public Chm62edtNatureObjectPicturePersist() {
     super();
@@ -77,5 +80,32 @@ public void setMainPicture(Boolean mainPicture) {
 	this.markModifiedPersistentState();
 	this.mainPicture = mainPicture;
 }
+
+  public Integer getMaxWidth() {
+	  return i_max_width;
+  }
+
+  public void setMaxWidth(Integer width) {
+	  i_max_width = width;
+    this.markModifiedPersistentState();
+  }
+  
+  public Integer getMaxHeight() {
+	  return i_max_height;
+  }
+
+  public void setMaxHeight(Integer height) {
+	  i_max_height = height;
+    this.markModifiedPersistentState();
+  }
+  
+  public String getSource() {
+    return i_source;
+  }
+
+  public void setSource(String source) {
+    i_source = source;
+    this.markModifiedPersistentState();
+  }
 
 }

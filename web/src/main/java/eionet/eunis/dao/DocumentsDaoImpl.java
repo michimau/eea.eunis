@@ -3,6 +3,8 @@ package eionet.eunis.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -759,5 +761,75 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		return ret;
 	}
+	
+	public Integer insertSource(String title, String source, String publisher, String editor, String url, String year) throws Exception {
+		Integer ret = null;
+		if(source != null){
+			int id_dc = getId("SELECT MAX(ID_DC) FROM DC_INDEX");
+			id_dc++;
+			ret = new Integer(id_dc);
+			
+			String insertIndex = "INSERT INTO dc_index (ID_DC, REFERENCE, COMMENT, REFCD) VALUES (?,-1,'RED_LIST',0)";
+			String insertTitle = "INSERT INTO dc_title (ID_DC, ID_TITLE, TITLE) VALUES (?,1,?)";
+			String insertPublisher = "INSERT INTO dc_publisher (ID_DC, ID_PUBLISHER, PUBLISHER) VALUES (?,1,?)";
+			String insertDate = "INSERT INTO dc_date (ID_DC, ID_DATE, CREATED) VALUES (?,1,?)";
+			String insertSource = "INSERT INTO dc_source (ID_DC, ID_SOURCE, SOURCE, EDITOR, URL) VALUES (?,1,?,?,?)";
+			
+			Connection con = null;
+			PreparedStatement psIndex = null;
+			PreparedStatement psTitle = null;
+			PreparedStatement psPublisher = null;
+			PreparedStatement psDate = null;
+			PreparedStatement psSource = null;
+		    try {
+		    	con = getSqlUtils().getConnection();
+		    	psIndex = con.prepareStatement(insertIndex);
+		    	psIndex.setInt(1, id_dc);
+		    	psIndex.executeUpdate();
+		    	
+		    	psTitle = con.prepareStatement(insertTitle);
+		    	psTitle.setInt(1, id_dc);
+		    	psTitle.setString(2, title);
+		    	psTitle.executeUpdate();
+		    	
+		    	psPublisher = con.prepareStatement(insertPublisher);
+		    	psPublisher.setInt(1, id_dc);
+		    	psPublisher.setString(2, publisher);
+		    	psPublisher.executeUpdate();
+		    	
+		    	psDate = con.prepareStatement(insertDate);
+		    	psDate.setInt(1, id_dc);
+		    	psDate.setInt(2, new Integer(year).intValue());
+		    	psDate.executeUpdate();
+		    	
+		    	psSource = con.prepareStatement(insertSource);
+		    	psSource.setInt(1, id_dc);
+		    	psSource.setString(2, source);
+		    	psSource.setString(3, editor);
+		    	psSource.setString(4, url);
+		    	psSource.executeUpdate();
+		    	
+		    } catch ( SQLException e ) {
+		    	e.printStackTrace();
+		    } finally {
+		    	con.close();
+		    	psIndex.close();
+				psTitle.close();
+				psPublisher.close();
+				psDate.close();
+				psSource.close();
+		    }
+		}
+		return ret;
+	}
+	
+	private int getId(String query) throws ParseException {
+    	String maxId = getSqlUtils().ExecuteSQL(query);
+    	int maxIdInt = 0;
+    	if(maxId != null && maxId.length()>0)
+    		maxIdInt = new Integer(maxId).intValue();
+    	
+    	return maxIdInt;
+    }
 
 }

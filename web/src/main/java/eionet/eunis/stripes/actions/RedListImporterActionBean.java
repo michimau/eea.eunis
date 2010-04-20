@@ -25,6 +25,13 @@ public class RedListImporterActionBean extends AbstractStripesAction {
 	private FileBean fileMammals;
 	private FileBean fileAmphibians;
 	private FileBean fileReptiles;
+	
+	private String title;
+	private String source;
+	private String publisher;
+	private String editor;
+	private String url;
+	private String date;
 		
 	@DefaultHandler
 	public Resolution defaultAction() {
@@ -46,37 +53,45 @@ public class RedListImporterActionBean extends AbstractStripesAction {
 				
 				SQLUtilities sqlUtil = getContext().getSqlUtilities();
 				
-				if (fileMammals != null){
-					inputStreamMammals = fileMammals.getInputStream();
-					
-					RedListsMammalsImportParser parser = new RedListsMammalsImportParser(sqlUtil);
-					parser.execute(inputStreamMammals);
-					fileMammals.delete();
-					if(inputStreamMammals!=null)
-						inputStreamMammals.close();
+				Integer dc_id = null;
+				if (fileMammals != null || fileAmphibians != null || fileReptiles != null){
+					dc_id = getContext().getDocumentsDao().insertSource(title, source, publisher, editor, url, date);
 				}
 				
-				if (fileAmphibians != null){
-					inputStreamAmphibians = fileAmphibians.getInputStream();
+				if(dc_id != null){
+					if (fileMammals != null){
+						inputStreamMammals = fileMammals.getInputStream();
+						
+						RedListsMammalsImportParser parser = new RedListsMammalsImportParser(sqlUtil, dc_id);
+						parser.execute(inputStreamMammals);
+						fileMammals.delete();
+						if(inputStreamMammals!=null)
+							inputStreamMammals.close();
+					}
 					
-					RedListsAmphibiansImportParser parser = new RedListsAmphibiansImportParser(sqlUtil);
-					parser.execute(inputStreamAmphibians);
-					fileAmphibians.delete();
-					if(inputStreamAmphibians!=null)
-						inputStreamAmphibians.close();
-				}
-				
-				if (fileReptiles != null){
-					inputStreamReptiles = fileReptiles.getInputStream();
+					if (fileAmphibians != null){
+						inputStreamAmphibians = fileAmphibians.getInputStream();
+						
+						RedListsAmphibiansImportParser parser = new RedListsAmphibiansImportParser(sqlUtil, dc_id);
+						parser.execute(inputStreamAmphibians);
+						fileAmphibians.delete();
+						if(inputStreamAmphibians!=null)
+							inputStreamAmphibians.close();
+					}
 					
-					RedListsReptilesImportParser parser = new RedListsReptilesImportParser(sqlUtil);
-					parser.execute(inputStreamReptiles);
-					fileReptiles.delete();
-					if(inputStreamReptiles!=null)
-						inputStreamReptiles.close();
-				}
-				
-				showMessage("Successfully imported!");
+					if (fileReptiles != null){
+						inputStreamReptiles = fileReptiles.getInputStream();
+						
+						RedListsReptilesImportParser parser = new RedListsReptilesImportParser(sqlUtil, dc_id);
+						parser.execute(inputStreamReptiles);
+						fileReptiles.delete();
+						if(inputStreamReptiles!=null)
+							inputStreamReptiles.close();
+					}
+					showMessage("Successfully imported!");
+				} else {
+					handleEunisException("Could not insert new source!", Constants.SEVERITY_WARNING);
+				}				
 				
 			} catch(Exception e) {
 				e.printStackTrace();
@@ -110,6 +125,54 @@ public class RedListImporterActionBean extends AbstractStripesAction {
 
 	public void setFileReptiles(FileBean fileReptiles) {
 		this.fileReptiles = fileReptiles;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getEditor() {
+		return editor;
+	}
+
+	public void setEditor(String editor) {
+		this.editor = editor;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 	
 }

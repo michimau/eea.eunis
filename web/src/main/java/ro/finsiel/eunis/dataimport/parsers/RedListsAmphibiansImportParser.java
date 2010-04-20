@@ -50,12 +50,14 @@ public class RedListsAmphibiansImportParser extends DefaultHandler {
         
         private StringBuffer buf;
         private SQLUtilities sqlUtilities;
-        private HashMap<String, String[]> conservationStatuses;
+        private HashMap<String, String> conservationStatuses;
         private int euGeoscopeId = 0;
         private int eu27GeoscopeId = 0;
+        private Integer idDC;
         
-        public RedListsAmphibiansImportParser(SQLUtilities sqlUtilities) {
+        public RedListsAmphibiansImportParser(SQLUtilities sqlUtilities, Integer id_dc) {
         	this.sqlUtilities = sqlUtilities;
+        	this.idDC = id_dc;
         	this.con = sqlUtilities.getConnection();
         	buf = new StringBuffer();
         } 
@@ -136,70 +138,55 @@ public class RedListsAmphibiansImportParser extends DefaultHandler {
         				genusSpecies  = genus + " " +species;
         			
         			String natObId = getNatureObjectId(genusSpecies);
-        			String[] euCSInfo = conservationStatuses.get(euCat);
-        			String euCSid = null;
-        			String euDCid = null;
-        			if(euCSInfo != null && euCSInfo.length > 0){
-        				euCSid = euCSInfo[0]; //conservation status ID
-        				euDCid = euCSInfo[1]; //ID_DC
-        			}
+        			String euCSid = conservationStatuses.get(euCat);
         			String euGeoId = new Integer(euGeoscopeId).toString();
         			
-        			String[] eu27CSInfo = conservationStatuses.get(eu27Cat);
-        			String eu27CSid = null;
-        			String eu27DCid = null;
-        			if(eu27CSInfo != null && eu27CSInfo.length > 0){
-        				eu27CSid = eu27CSInfo[0]; //conservation status ID
-        				eu27DCid = eu27CSInfo[1]; //ID_DC
-        			}
+        			String eu27CSid = conservationStatuses.get(eu27Cat);
         			String eu27GeoId = new Integer(eu27GeoscopeId).toString();
         			
         			boolean newThreat = false;
         			
-        			if(natObId != null && euCSid != null && euDCid != null && euGeoId != null && !euGeoId.equals("0")){
-        				if(!threatExists(natObId, euCSid, euGeoId)){
+        			if(natObId != null && euCSid != null && idDC != null && euGeoId != null && !euGeoId.equals("0")){
         					
-        					newThreat = true;
-        					
-        					maxReportTypeId++;
-        					maxReportAttributesId++;
-		        			preparedStatementReportType.setInt(1, maxReportTypeId);
-		        			preparedStatementReportType.setString(2, euCSid);
-		        			preparedStatementReportType.addBatch();
-		        			
-		        			preparedStatementReport.setString(1, natObId);
-		        			preparedStatementReport.setString(2, euDCid);
-		        			preparedStatementReport.setString(3, euGeoId);
-		        			preparedStatementReport.setInt(4, maxReportTypeId);
-		        			preparedStatementReport.setInt(5, maxReportAttributesId);
-		        			preparedStatementReport.addBatch();
-		        			
-		        			counter++;
-        				}
+    					newThreat = true;
+    					
+    					maxReportTypeId++;
+    					maxReportAttributesId++;
+	        			preparedStatementReportType.setInt(1, maxReportTypeId);
+	        			preparedStatementReportType.setString(2, euCSid);
+	        			preparedStatementReportType.addBatch();
+	        			
+	        			preparedStatementReport.setString(1, natObId);
+	        			preparedStatementReport.setInt(2, idDC.intValue());
+	        			preparedStatementReport.setString(3, euGeoId);
+	        			preparedStatementReport.setInt(4, maxReportTypeId);
+	        			preparedStatementReport.setInt(5, maxReportAttributesId);
+	        			preparedStatementReport.addBatch();
+	        			
+	        			counter++;
+        				
         			}
         			
-        			if(natObId != null && eu27CSid != null && eu27DCid != null && eu27GeoId != null && !eu27GeoId.equals("0")){
-        				if(!threatExists(natObId, eu27CSid, eu27GeoId)){
+        			if(natObId != null && eu27CSid != null && idDC != null && eu27GeoId != null && !eu27GeoId.equals("0")){
         					
-        					maxReportTypeId++;
-        					
-        					if(!newThreat)
-        						maxReportAttributesId++;
-        					newThreat = true;
-        						
-		        			preparedStatementReportType.setInt(1, maxReportTypeId);
-		        			preparedStatementReportType.setString(2, eu27CSid);
-		        			preparedStatementReportType.addBatch();
-		        			
-		        			preparedStatementReport.setString(1, natObId);
-		        			preparedStatementReport.setString(2, eu27DCid);
-		        			preparedStatementReport.setString(3, eu27GeoId);
-		        			preparedStatementReport.setInt(4, maxReportTypeId);
-		        			preparedStatementReport.setInt(5, maxReportAttributesId);
-		        			preparedStatementReport.addBatch();
-		        			
-		        			counter++;
-        				}
+    					maxReportTypeId++;
+    					
+    					if(!newThreat)
+    						maxReportAttributesId++;
+    					newThreat = true;
+    						
+	        			preparedStatementReportType.setInt(1, maxReportTypeId);
+	        			preparedStatementReportType.setString(2, eu27CSid);
+	        			preparedStatementReportType.addBatch();
+	        			
+	        			preparedStatementReport.setString(1, natObId);
+	        			preparedStatementReport.setInt(2, idDC.intValue());
+	        			preparedStatementReport.setString(3, eu27GeoId);
+	        			preparedStatementReport.setInt(4, maxReportTypeId);
+	        			preparedStatementReport.setInt(5, maxReportAttributesId);
+	        			preparedStatementReport.addBatch();
+	        			
+	        			counter++;
         			}
         			
         			if(newThreat){
@@ -344,53 +331,19 @@ public class RedListsAmphibiansImportParser extends DefaultHandler {
         	return maxIdInt;
         }
         
-        private boolean threatExists(String natId, String consId, String geoId) throws Exception {
-        	boolean ret = false;
-        	
-        	PreparedStatement stmt = null;
-			ResultSet rset = null;
-	    	try{
-	    		String query = "SELECT * FROM chm62edt_reports AS A, chm62edt_report_type AS B " +
-	    				"WHERE A.ID_REPORT_TYPE=B.ID_REPORT_TYPE AND B.LOOKUP_TYPE='CONSERVATION_STATUS' " +
-	    				"AND A.ID_NATURE_OBJECT = ? AND B.ID_LOOKUP = ? AND A.ID_GEOSCOPE=? LIMIT 1";
-	    		stmt = con.prepareStatement(query);
-	    		stmt.setString(1, natId);
-	    		stmt.setString(2, consId);
-	    		stmt.setString(3, geoId);
-	    		rset = stmt.executeQuery();
-	    		while(rset.next()){
-	    			ret = true;
-	    		}      		
-	    		
-	    	} catch(Exception e) { 
-	            throw new IllegalArgumentException(e.getMessage(), e); 
-	        } finally { 
-	        	if(stmt != null) 
-	        		stmt.close();
-	        	if(rset != null) 
-	        		rset.close();
-	        }
-	        return ret;
-        }
-        
-        private HashMap<String, String[]> getConservationStatuses() throws Exception {
-	    	HashMap<String, String[]> ret = new HashMap<String, String[]>();
+        private HashMap<String, String> getConservationStatuses() throws Exception {
+	    	HashMap<String, String> ret = new HashMap<String, String>();
 	    	
 	    	PreparedStatement stmt = null;
 			ResultSet rset = null;
 	    	try{
-	    		String query = "SELECT ID_CONSERVATION_STATUS, CODE, ID_DC FROM CHM62EDT_CONSERVATION_STATUS";
+	    		String query = "SELECT ID_CONSERVATION_STATUS, CODE FROM CHM62EDT_CONSERVATION_STATUS";
 	    		stmt = con.prepareStatement(query);
 	    		rset = stmt.executeQuery();
 	    		while(rset.next()){
 	    			String code = rset.getString("CODE");
 	    			String idCs = rset.getString("ID_CONSERVATION_STATUS");
-	    			String idDc = rset.getString("ID_DC");
-	    			
-	    			String[] array = new String[2];
-	    			array[0] = idCs;
-	    			array[1] = idDc;
-	    			ret.put(code, array);
+	    			ret.put(code, idCs);
 	    		}        		
 	    		
 	    	} catch(Exception e) { 

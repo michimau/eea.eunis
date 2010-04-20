@@ -159,5 +159,17 @@ public interface IDocumentsDao {
 	 * @return DcObjectDTO element
 	 */
 	DcObjectDTO getDcObject(String id);
+	
+	/**
+	 * Insert new source
+	 * @param title
+	 * @param source
+	 * @param publisher
+	 * @param editor
+	 * @param url
+	 * @param year
+	 * @return ID_DC
+	 */
+	Integer insertSource(String title, String source, String publisher, String editor, String url, String year) throws Exception;
 
 }

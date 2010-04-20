@@ -797,10 +797,12 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		    	psPublisher.setString(2, publisher);
 		    	psPublisher.executeUpdate();
 		    	
-		    	psDate = con.prepareStatement(insertDate);
-		    	psDate.setInt(1, id_dc);
-		    	psDate.setInt(2, new Integer(year).intValue());
-		    	psDate.executeUpdate();
+		    	if(year != null && year.length() == 4){
+		    		psDate = con.prepareStatement(insertDate);
+		    		psDate.setInt(1, id_dc);
+		    		psDate.setInt(2, new Integer(year).intValue());
+		    		psDate.executeUpdate();
+		    	}
 		    	
 		    	psSource = con.prepareStatement(insertSource);
 		    	psSource.setInt(1, id_dc);

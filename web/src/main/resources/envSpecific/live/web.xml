@@ -6,10 +6,10 @@
 	version="2.4">
 	<!-- OLD ENV -->
 	<!-- Application name -->
-	<display-name>EUNIS Database</display-name>
+	<display-name>EUNIS Import Database</display-name>
 
 	<!-- Short description -->
-	<description>EUNIS Database</description>
+	<description>EUNIS Import Database</description>
 
 	<!--
 		Context initialization parameters which can be retrieved from servlets
@@ -19,7 +19,7 @@
 	-->
 	<context-param>
 		<param-name>DOMAIN_NAME</param-name>
-		<param-value>http://localhost:8080/eunis</param-value>
+		<param-value>http://eunisimport.eea.europa.eu</param-value>
 		<description>Domain where application is installed</description>
 	</context-param>
 
@@ -37,7 +37,7 @@
 
 	<context-param>
 		<param-name>TOMCAT_HOME</param-name>
-		<param-value>/home/alex/apache-tomcat-5.5.28</param-value>
+		<param-value>/var/lib/tomcat5</param-value>
 		<description>Tomcat installation directory</description>
 	</context-param>
 
@@ -166,7 +166,7 @@
 	<!-- Last modification date -->
 	<context-param>
 		<param-name>LAST_UPDATE</param-name>
-		<param-value>27 October 2006</param-value>
+		<param-value>11 December 2009</param-value>
 		<description>Date of last modification for the web site</description>
 	</context-param>
 
@@ -189,7 +189,7 @@
 	<!-- JDBC URL -->
 	<context-param>
 		<param-name>JDBC_URL</param-name>
-		<param-value>jdbc:mysql://localhost/eunis?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</param-value>
+		<param-value>jdbc:mysql://localhost/eunisimport?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</param-value>
 		<description>JDBC URL to database</description>
 	</context-param>
 
@@ -200,18 +200,17 @@
 		<description>JDBC URL to database</description>
 	</context-param>
 
-
 	<!-- JDBC username -->
 	<context-param>
 		<param-name>JDBC_USR</param-name>
-		<param-value>eunisuser</param-value>
+		<param-value>eunisimp</param-value>
 		<description>JDBC user</description>
 	</context-param>
 
 	<!-- JDBC password -->
 	<context-param>
 		<param-name>JDBC_PWD</param-name>
-		<param-value>password</param-value>
+		<param-value>clerkbuzz</param-value>
 		<description>JDBC password for JDBC_USR</description>
 	</context-param>
 

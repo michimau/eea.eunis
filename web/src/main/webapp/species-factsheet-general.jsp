@@ -230,7 +230,7 @@
       </div>
 <%
       }
-      String rl_id = factsheet.getLink(specie.getIdNatureObject(),Constants.SAME_SYNONYM_REDLIST);
+      String rl_id = factsheet.getLink(specie.getIdNatureObject(),Constants.SAME_SPECIES_REDLIST);
       if(rl_id != null && rl_id.length() > 0){
     		%>
 		<div>

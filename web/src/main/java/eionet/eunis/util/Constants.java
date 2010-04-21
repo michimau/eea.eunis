@@ -22,6 +22,7 @@ public interface Constants {
 	   public static final String SAME_SPECIES_GBIF = "sameSpeciesGBIF"; // www.gbif.org
 	   public static final String SAME_SPECIES_ITIS = "sameSpeciesITIS"; // www.itis.gov
 	   public static final String SAME_SPECIES_NCBI = "sameSpeciesNCBI"; // www.ncbi.nlm.nih.gov
+	   public static final String SAME_SPECIES_REDLIST = "sameSpeciesRedlist"; // IUCN Red list
 
 	   //Same Synonym
 	   public static final String SAME_SYNONYM_EOL = "sameSynonymEOL";
@@ -29,5 +30,4 @@ public interface Constants {
 	   public static final String SAME_SYNONYM_ITIS = "sameSynonymITIS";
 	   public static final String SAME_SYNONYM_NCBI = "sameSynonymNCBI";
 	   public static final String SAME_SYNONYM_FAEU = "sameSynonymFaEu"; // Fauna Europaea
-	   public static final String SAME_SYNONYM_REDLIST = "sameSynonymRedlist"; // IUCN Red list
 }

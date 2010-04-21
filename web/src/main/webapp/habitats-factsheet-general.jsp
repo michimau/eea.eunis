@@ -254,7 +254,7 @@
         <%=cm.cmsPhrase("Source")%>:
       </h3>
       <p>
-        <%=_source%>
+        <a href="documents/<%=description.getIdDc()%>"><%=_source%></a>
       </p>
 <%
         }

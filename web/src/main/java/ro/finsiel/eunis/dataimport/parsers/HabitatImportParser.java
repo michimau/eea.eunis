@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -47,6 +49,8 @@ public class HabitatImportParser extends DefaultHandler {
         
         private StringBuffer buf; 
         private SQLUtilities sqlUtilities;
+        
+        private HashMap<String, Integer> natureObjectIds;
         
         public HabitatImportParser(SQLUtilities sqlUtilities) {
         	this.sqlUtilities = sqlUtilities;
@@ -119,16 +123,26 @@ public class HabitatImportParser extends DefaultHandler {
         		
         		if(qName.equalsIgnoreCase("HABITAT")) {
         			
-        			maxNoIdInt++;
-        			preparedStatementNatureObject.setInt(1, maxNoIdInt);
-        			preparedStatementNatureObject.setInt(2, 0);
-        			preparedStatementNatureObject.setString(3, habId);
-        			preparedStatementNatureObject.addBatch();
+        			Integer noId = null;
+        			noId = natureObjectIds.get(habId);
+        			
+        			int natureObjectId = 0;
+        			if(noId == null){
+    					maxNoIdInt++;
+    					natureObjectId = maxNoIdInt;
+    				} else {
+    					natureObjectId = noId.intValue();
+    				}
+        			
+   					preparedStatementNatureObject.setInt(1, natureObjectId);	
+    				preparedStatementNatureObject.setInt(2, 0);
+    				preparedStatementNatureObject.setString(3, habId);
+    				preparedStatementNatureObject.addBatch();
         			
         			if(eunisCode == null)
         				eunisCode = "";
         			preparedStatementHabitat.setString(1, habId);
-        			preparedStatementHabitat.setInt(2, maxNoIdInt);
+       				preparedStatementHabitat.setInt(2, natureObjectId);
         			preparedStatementHabitat.setString(3, sciName);
         			preparedStatementHabitat.setString(4, name);
         			preparedStatementHabitat.setString(5, code2000);
@@ -141,8 +155,10 @@ public class HabitatImportParser extends DefaultHandler {
         			preparedStatementHabitat.setString(12, level);
         			preparedStatementHabitat.addBatch();
         			
-        			preparedStatementTabInfo.setInt(1, maxNoIdInt);
-        			preparedStatementTabInfo.addBatch();
+        			if(noId == null){
+        				preparedStatementTabInfo.setInt(1, maxNoIdInt);
+        				preparedStatementTabInfo.addBatch();
+        			}
         			
         			counter++;
         	        if (counter % 10000 == 0){
@@ -181,6 +197,7 @@ public class HabitatImportParser extends DefaultHandler {
             
             try {
             	
+            	natureObjectIds = getNatureObjectIds();
             	deleteOldRecords();
             	
             	maxNoIdInt = getMaxId("SELECT MAX(ID_NATURE_OBJECT) FROM CHM62EDT_NATURE_OBJECT");
@@ -244,11 +261,11 @@ public class HabitatImportParser extends DefaultHandler {
         private void deleteOldRecords() throws Exception {
         	PreparedStatement ps = null;
         	try{
-        		String query = "DELETE FROM CHM62EDT_NATURE_OBJECT WHERE TYPE = 'HABITAT'";
+        		String query = "DELETE FROM CHM62EDT_HABITAT";
         		ps = con.prepareStatement(query);
         		ps.executeUpdate();
         		
-        		query = "DELETE FROM CHM62EDT_HABITAT";
+        		query = "DELETE FROM CHM62EDT_NATURE_OBJECT WHERE TYPE = 'HABITAT'";
         		ps = con.prepareStatement(query);
         		ps.executeUpdate();
         		
@@ -259,4 +276,30 @@ public class HabitatImportParser extends DefaultHandler {
             		ps.close();
             }
         }
+        
+        private HashMap<String, Integer> getNatureObjectIds() throws Exception {
+	    	HashMap<String, Integer> ret = new HashMap<String, Integer>();
+	    	
+	    	PreparedStatement stmt = null;
+			ResultSet rset = null;
+	    	try{
+	    		String query = "SELECT ORIGINAL_CODE, ID_NATURE_OBJECT FROM CHM62EDT_NATURE_OBJECT WHERE TYPE = 'HABITAT'";
+	    		stmt = con.prepareStatement(query);
+	    		rset = stmt.executeQuery();
+	    		while(rset.next()){
+	    			String originalCode = rset.getString("ORIGINAL_CODE");
+	    			int idNatureObject = rset.getInt("ID_NATURE_OBJECT");
+    				ret.put(originalCode, new Integer(idNatureObject));
+	    		}        		
+	    		
+	    	} catch(Exception e) { 
+	            throw new IllegalArgumentException(e.getMessage(), e); 
+	        } finally { 
+	        	if(stmt != null) 
+	        		stmt.close();
+	        	if(rset != null) 
+	        		rset.close();
+	        }        	
+	        return ret;
+	    }
 } 

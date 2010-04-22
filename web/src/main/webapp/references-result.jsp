@@ -402,7 +402,7 @@
                   author = Utilities.treatURLAmp( author );
                 }
           %>
-                      <%=author%>
+                      <a href="documents/<%=ref.getIdDc()%>"><%=author%></a>
                     </td>
           <%
               }

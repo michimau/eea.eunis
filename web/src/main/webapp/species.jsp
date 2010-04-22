@@ -219,6 +219,7 @@
                       <%=cm.cmsPhrase("Species threatened at international level")%>
                     </td>
                   </tr>
+<!--
                   <tr class="zebraeven">
                     <td style="white-space: nowrap">
                       <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("national_threat_status")%>" />
@@ -230,7 +231,8 @@
                       <%=cm.cmsPhrase("Species threatened at country level")%>
                     </td>
                   </tr>
-                  <tr>
+-->
+                  <tr class="zebraeven">
                     <td style="white-space: nowrap">
                       <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("legal_instruments")%>" />
                       <a href="species-legal.jsp" title="<%=cm.cms("species_protected_by_legal_texts")%>"><strong><%=cm.cmsPhrase("Legal Instruments")%></strong></a>
@@ -241,7 +243,7 @@
                       <%=cm.cmsPhrase("Species protected by legal texts at European level")%>
                     </td>
                   </tr>
-                  <tr class="zebraeven">
+                  <tr>
                     <td style="white-space: nowrap">
                       <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("pick_species_show_habitat_types")%>" />
                       <a href="habitats-species.jsp?expandare=no&amp;showCode=on&amp;showLevel=on&amp;showVernacularName=on" title="<%=cm.cms("find_habitat_types_characterized_by_species")%>">
@@ -253,7 +255,7 @@
                       <%=cm.cmsPhrase("Find habitat types characterised by a particular species")%>
                     </td>
                   </tr>
-                  <tr>
+                  <tr class="zebraeven">
                     <td style="white-space: nowrap">
                       <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("pick_species_show_sites")%>" />
                       <a href="sites-species.jsp" title="<%=cm.cms("find_sites_types_characterized_by_species")%>"><strong><%=cm.cmsPhrase("Pick species, show sites")%></strong></a>
@@ -264,7 +266,7 @@
                       <%=cm.cmsPhrase("Find sites characterized by a particular species")%>
                     </td>
                   </tr>
-                  <tr class="zebraeven">
+                  <tr>
                     <td style="white-space: nowrap">
                       <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("pick_species_show_references")%>" />
                       <a href="species-books.jsp" title="<%=cm.cms("find_books_articles")%>"><strong><%=cm.cmsPhrase("Pick species, show references")%></strong></a>
@@ -275,7 +277,7 @@
                       <%=cm.cmsPhrase("Find books, articles which refers to species")%>
                     </td>
                   </tr>
-                  <tr>
+                  <tr class="zebraeven">
                     <td style="white-space: nowrap">
                       <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("pick_references_show_species")%>" />
                       <a href="species-references.jsp" title="<%=cm.cms("fins_species_reffered_by_books")%>"><strong><%=cm.cmsPhrase("Pick references, show species")%></strong></a>
@@ -286,7 +288,7 @@
                       <%=cm.cmsPhrase("Find species referred by books, articles etc.")%>
                     </td>
                   </tr>
-                  <tr class="zebraeven">
+                  <tr>
                     <td style="white-space: nowrap">
                       <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("taxonomic_classification")%>" />
                       <a href="species-taxonomic-browser.jsp" title="<%=cm.cms("taxonomic_classification_for_species")%>"><strong><%=cm.cmsPhrase("Taxonomic classification")%></strong></a>

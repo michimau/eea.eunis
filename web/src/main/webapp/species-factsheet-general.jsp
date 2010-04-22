@@ -77,7 +77,7 @@
 	    <div class="naturepic-image">
 	    	<%
 	    		if(mainPictureDescription == null){
-	    			mainPictureDescription = "";
+	    			mainPictureDescription = scientificName;
 	    		}
 	    			
 	    		String styleAttr = "max-width:300px; max-height:400px;";
@@ -88,14 +88,15 @@
 		    <a href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)"">
 		    	<img src="<%=picturePath + "/"+ mainPictureFilename %>" alt="<%=mainPictureDescription%>" class="scaled" style="<%=styleAttr%>"/>
 		    </a>
-		    <% if(pictureSource != null && pictureSource.length() > 0){%>
-		    	<br/>
-		    	<%=cm.cmsPhrase("Source")%>: <%=pictureSource%>
-		    <%}%>
 	    </div>
 	    <div class="naturepic-note">
-              <%=scientificName %>
+              <%=mainPictureDescription %>
 	    </div>
+	    <% if(pictureSource != null && pictureSource.length() > 0){%>
+		<div class="naturepic-source-copyright">
+		<%=cm.cmsPhrase("Source")%>: <%=pictureSource%>
+		</div>
+	    <%}%>
 	  </div>
   </div>
   <% } %>
@@ -234,7 +235,7 @@
       if(rl_id != null && rl_id.length() > 0){
     		%>
 		<div>
-        		<a href="http://www.iucnredlist.org/apps/redlist/details/<%=rl_id%>/0"><%=cm.cmsPhrase("Redlist page")%></a>
+        		<a href="http://www.iucnredlist.org/apps/redlist/details/<%=rl_id%>/0"><%=cm.cmsPhrase("IUCN Red List page")%></a>
 		</div>
 		<%
       } else {
@@ -257,7 +258,7 @@
 		  String scientificNameURL = scientificName.replace(' ','+');
   %>
 		  <div>
-		  <a href="http://www.iucnredlist.org/apps/redlist/search/external?text=<%=scientificNameURL%>&amp;mode="><%=cm.cmsPhrase("Redlist search")%></a>
+		  <a href="http://www.iucnredlist.org/apps/redlist/search/external?text=<%=scientificNameURL%>&amp;mode="><%=cm.cmsPhrase("IUCN Red List search")%></a>
 		  </div>
   <%
 	}
@@ -275,10 +276,7 @@
 %>
 
 	<div>
-        <a title="<%=cm.cmsPhrase("Search species on SCIRUS")%>" href="http://www.scirus.com/srsapp/search?q=%22<%=Utilities.treatURLSpecialCharacters(scientificName)%>%22&amp;ds=web&amp;g=s&amp;t=all"><%=cm.cmsPhrase("SCIRUS")%></a>
-	</div>
-	<div>
-        <a title="<%=cm.cmsPhrase("Search species on Biology Browser")%>" href="http://www.biologybrowser.org/search/apachesolr_search/<%=Utilities.treatURLSpecialCharacters(scientificName)%>"><%=cm.cmsPhrase("Biology Browser")%></a>
+        <a title="<%=cm.cmsPhrase("Search species on SCIRUS")%>" href="http://www.scirus.com/srsapp/search?q=%22<%=Utilities.treatURLSpecialCharacters(scientificName)%>%22&amp;ds=web&amp;g=s&amp;t=all"><%=cm.cmsPhrase("SCIRUS search")%></a>
 	</div>
 <%
 if(kingdomname.equalsIgnoreCase("Animals"))
@@ -287,7 +285,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 	if(faeu != null && faeu.length() > 0){
     		%>
 		<div>
-        		<a href="http://www.faunaeur.org/full_results.php?id=<%=faeu%>"><%=cm.cmsPhrase("Fauna Europaea:")%><%=faeu%></a>
+        		<a href="http://www.faunaeur.org/full_results.php?id=<%=faeu%>"><%=cm.cmsPhrase("Fauna Europaea page")%></a>
 		</div>
 		<%
 	} else {

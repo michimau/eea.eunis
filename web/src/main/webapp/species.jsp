@@ -107,10 +107,9 @@
                   <input size="32"
                          id="scientificName"
                          name="scientificName"
-                         value="<%=cm.cms("species_main_03_Value")%>"
-                         onfocus="if(this.value=='<%=cm.cms("species_main_03_Value")%>')this.value='';"
-                         onblur="if(this.value=='')this.value='<%=cm.cms("species_main_03_Value")%>';" />
-                  <%=cm.cmsInput("species_main_03_Value")%>
+                         value="<%=cm.cmsPhrase("Enter species name here...")%>"
+                         onfocus="if(this.value=='<%=cm.cmsPhrase("Enter species name here...")%>')this.value='';"
+                         onblur="if(this.value=='')this.value='<%=cm.cmsPhrase("Enter species name here...")%>';" />
                   <%=cm.cmsAlt("quick_search_species_name")%>
                   <%=cm.cmsTitle("quick_search_species_name")%>
                   <input id="search" type="submit"
@@ -151,7 +150,7 @@
           %>
               <table summary="<%=cm.cms("easy_searches")%>" class="datatable fullwidth">
                 <caption>
-                  <%=cm.cmsPhrase("A set of predefined &nbsp;functions to search the database") %>
+                  <%=cm.cmsPhrase("A set of predefined functions to search the database") %>
                 </caption>
                 <thead>
                   <tr>
@@ -166,10 +165,9 @@
                 <tbody>
                   <tr>
                     <td style="white-space: nowrap">
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("names")%>" />
+                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
                       <a href="species-names.jsp" title="<%=cm.cms("search_by_latin_or_vernacular")%>"><strong><%=cm.cmsPhrase("Names")%></strong></a>
                       <%=cm.cmsTitle("search_by_latin_or_vernacular")%>
-                      <%=cm.cmsAlt("names")%>
                     </td>
                     <td width="60%">
                       <%=cm.cmsPhrase("Search species by scientific name (in Latin) or by vernacular name (popular name)")%>
@@ -177,10 +175,9 @@
                   </tr>
                   <tr class="zebraeven">
                     <td style="white-space: nowrap">
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("groups")%>" />
+                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
                       <a href="species-groups.jsp" title="<%=cm.cms("species_subspecies_by_group")%>"><strong><%=cm.cmsPhrase("Groups")%></strong></a>
                       <%=cm.cmsTitle("species_subspecies_by_group")%>
-                      <%=cm.cmsAlt("groups")%>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Species &amp; subspecies by Group (Invertebrates, Mammals etc.)")%>
@@ -188,10 +185,9 @@
                   </tr>
                   <tr>
                     <td style="white-space: nowrap">
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("synonyms")%>" />
+                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
                       <a href="species-synonyms.jsp" title="<%=cm.cms("identify_synonym_names_for_species")%>"><strong><%=cm.cmsPhrase("Synonyms")%></strong></a>
                       <%=cm.cmsTitle("identify_synonym_names_for_species")%>
-                      <%=cm.cmsAlt("synonyms")%>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Identify synonym names for species")%>
@@ -199,10 +195,9 @@
                   </tr>
                   <tr class="zebraeven">
                     <td style="white-space: nowrap">
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("country_biogeographic_region_location")%>" />
-                      <a href="species-country.jsp" title="<%=cm.cms("find_species_located_in_country_region")%>"><strong><%=cm.cmsPhrase("Country/Biogeographic region")%></strong></a>
+                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                      <a href="species-country.jsp"><strong><%=cm.cmsPhrase("Country/Biogeographic region")%></strong></a>
                       <%=cm.cmsTitle("find_species_located_in_country_region")%>
-                      <%=cm.cmsAlt("country_biogeographic_region_location")%>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Find species located within a country and/or a biogeographic region")%>
@@ -210,10 +205,9 @@
                   </tr>
                   <tr>
                     <td style="white-space: nowrap">
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("international_threat_status")%>" />
-                      <a href="species-threat-international.jsp" title="<%=cm.cms("species_threatened_at_international_level")%>"><strong><%=cm.cmsPhrase("International Threat Status")%></strong></a>
+                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                      <a href="species-threat-international.jsp"><strong><%=cm.cmsPhrase("International Threat Status")%></strong></a>
                       <%=cm.cmsTitle("species_threatened_at_international_level")%>
-                      <%=cm.cmsAlt("international_threat_status")%>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Species threatened at international level")%>
@@ -222,10 +216,9 @@
 <!--
                   <tr class="zebraeven">
                     <td style="white-space: nowrap">
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("national_threat_status")%>" />
-                      <a href="species-threat-national.jsp" title="<%=cm.cms("species_threatened_at_country_level")%>"><strong><%=cm.cmsPhrase("National threat status")%></strong></a>
+                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                      <a href="species-threat-national.jsp"><strong><%=cm.cmsPhrase("National threat status")%></strong></a>
                       <%=cm.cmsTitle("species_threatened_at_country_level")%>
-                      <%=cm.cmsAlt("national_threat_status")%>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Species threatened at country level")%>
@@ -234,10 +227,9 @@
 -->
                   <tr class="zebraeven">
                     <td style="white-space: nowrap">
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("legal_instruments")%>" />
-                      <a href="species-legal.jsp" title="<%=cm.cms("species_protected_by_legal_texts")%>"><strong><%=cm.cmsPhrase("Legal Instruments")%></strong></a>
+                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                      <a href="species-legal.jsp"><strong><%=cm.cmsPhrase("Legal Instruments")%></strong></a>
                       <%=cm.cmsTitle("species_protected_by_legal_texts")%>
-                      <%=cm.cmsAlt("legal_instruments")%>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Species protected by legal texts at European level")%>
@@ -245,11 +237,10 @@
                   </tr>
                   <tr>
                     <td style="white-space: nowrap">
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("pick_species_show_habitat_types")%>" />
-                      <a href="habitats-species.jsp?expandare=no&amp;showCode=on&amp;showLevel=on&amp;showVernacularName=on" title="<%=cm.cms("find_habitat_types_characterized_by_species")%>">
+                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                      <a href="habitats-species.jsp?expandare=no&amp;showCode=on&amp;showLevel=on&amp;showVernacularName=on">
                           <strong><%=cm.cmsPhrase("Pick species, show habitat types")%></strong></a>
                       <%=cm.cmsTitle("find_habitat_types_characterized_by_species")%>
-                      <%=cm.cmsAlt("pick_species_show_habitat_types")%>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Find habitat types characterised by a particular species")%>
@@ -257,10 +248,9 @@
                   </tr>
                   <tr class="zebraeven">
                     <td style="white-space: nowrap">
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("pick_species_show_sites")%>" />
-                      <a href="sites-species.jsp" title="<%=cm.cms("find_sites_types_characterized_by_species")%>"><strong><%=cm.cmsPhrase("Pick species, show sites")%></strong></a>
+                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                      <a href="sites-species.jsp"><strong><%=cm.cmsPhrase("Pick species, show sites")%></strong></a>
                       <%=cm.cmsTitle("find_sites_types_characterized_by_species")%>
-                      <%=cm.cmsAlt("pick_species_show_sites")%>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Find sites characterized by a particular species")%>
@@ -268,10 +258,9 @@
                   </tr>
                   <tr>
                     <td style="white-space: nowrap">
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("pick_species_show_references")%>" />
-                      <a href="species-books.jsp" title="<%=cm.cms("find_books_articles")%>"><strong><%=cm.cmsPhrase("Pick species, show references")%></strong></a>
+                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                      <a href="species-books.jsp"><strong><%=cm.cmsPhrase("Pick species, show references")%></strong></a>
                       <%=cm.cmsTitle("find_books_articles")%>
-                      <%=cm.cmsAlt("pick_species_show_references")%>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Find books, articles which refers to species")%>
@@ -279,10 +268,9 @@
                   </tr>
                   <tr class="zebraeven">
                     <td style="white-space: nowrap">
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("pick_references_show_species")%>" />
-                      <a href="species-references.jsp" title="<%=cm.cms("fins_species_reffered_by_books")%>"><strong><%=cm.cmsPhrase("Pick references, show species")%></strong></a>
+                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                      <a href="species-references.jsp"><strong><%=cm.cmsPhrase("Pick references, show species")%></strong></a>
                       <%=cm.cmsTitle("fins_species_reffered_by_books")%>
-                      <%=cm.cmsAlt("pick_references_show_species")%>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Find species referred by books, articles etc.")%>
@@ -290,10 +278,9 @@
                   </tr>
                   <tr>
                     <td style="white-space: nowrap">
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("taxonomic_classification")%>" />
-                      <a href="species-taxonomic-browser.jsp" title="<%=cm.cms("taxonomic_classification_for_species")%>"><strong><%=cm.cmsPhrase("Taxonomic classification")%></strong></a>
+                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                      <a href="species-taxonomic-browser.jsp"><strong><%=cm.cmsPhrase("Taxonomic classification")%></strong></a>
                       <%=cm.cmsTitle("taxonomic_classification_for_species")%>
-                      <%=cm.cmsAlt("taxonomic_classification")%>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Taxonomic classification for species")%>
@@ -323,11 +310,10 @@
                 <tbody>
                   <tr>
                     <td style="white-space: nowrap">
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("advanced_search")%>" />
-                      <a href="species-advanced.jsp?natureobject=Species" title="<%=cm.cms("search_using_complex_filtering")%>">
+                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                      <a href="species-advanced.jsp?natureobject=Species">
                           <strong><%=cm.cmsPhrase("Advanced Search")%></strong></a>
                       <%=cm.cmsTitle("search_using_complex_filtering")%>
-                      <%=cm.cmsAlt("advanced_search")%>
                     </td>
                     <td>
                         <%=cm.cmsPhrase("Search species information using more complex filtering capabilities")%>
@@ -335,10 +321,9 @@
                   </tr>
                   <tr class="zebraeven">
                     <td style="white-space: nowrap">
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("how_to_use_advanced_search")%>" />
-                      <a href="advanced-help.jsp" title="<%=cm.cms("species_main_advSearchHelp_Title")%>"><strong><%=cm.cmsPhrase("How to use Advanced search")%></strong></a>
+                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                      <a href="advanced-help.jsp"><strong><%=cm.cmsPhrase("How to use Advanced search")%></strong></a>
                       <%=cm.cmsTitle("species_main_advSearchHelp_Title")%>
-                      <%=cm.cmsAlt("how_to_use_advanced_search")%>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Help on species <strong>Advanced Search</strong>")%>
@@ -369,14 +354,12 @@
                 <tbody>
                   <tr>
                     <td>
-                      <img alt="<%=cm.cms("statistical_data")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                      <a title="<%=cm.cms("fins_statistical_data_about_species")%>" href="species-statistics-module.jsp">
+                      <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                      <a href="species-statistics-module.jsp">
                         <strong>
                           <%=cm.cmsPhrase("Statistical data")%>
                         </strong>
                       </a>
-                      <%=cm.cmsTitle("fins_statistical_data_about_species")%>
-                      <%=cm.cmsAlt("statistical_data")%>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Find statistical data about species")%>
@@ -407,10 +390,8 @@
                 <tbody>
                   <tr>
                     <td>
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("links_and_downloads_2")%>" />
-                      <a href="species-download.jsp" title="<%=cm.cms("links_and_downloads_2")%>"><strong><%=cm.cmsPhrase("Links and Downloads")%></strong></a>
-                      <%=cm.cmsTitle("links_and_downloads_2")%>
-                      <%=cm.cmsAlt("links_and_downloads_2")%>
+                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                      <a href="species-download.jsp"><strong><%=cm.cmsPhrase("Links and Downloads")%></strong></a>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Links and Downloads")%>
@@ -418,9 +399,8 @@
                   </tr>
                   <tr class="zebraeven">
                     <td style="white-space: nowrap">
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("links_and_downloads_2")%>" />
-                      <%=cm.cmsText("species_main_indicators")%>
-                      <%=cm.cmsAlt("links_and_downloads_2")%>
+                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                      <a href="species-indicators.jsp"><strong><%=cm.cmsPhrase("Species indicators")%></strong></a>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Find species used in indicators")%>
@@ -450,21 +430,18 @@
                   <tbody>
                     <tr>
                       <td style="white-space: nowrap">
-                        <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("how_to_use_easy_search")%>" />
-                        <a href="easy-help.jsp" title="<%=cm.cms("species_main_easyHelp_Title")%>"><strong><%=cm.cmsPhrase("How to use Easy search")%></strong></a>
-                        <%=cm.cmsTitle("species_main_easyHelp_Title")%>
-                        <%=cm.cmsAlt("how_to_use_easy_search")%>
+                        <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                        <a href="easy-help.jsp"><strong><%=cm.cmsPhrase("How to use Easy search")%></strong></a>
                       </td>
-                      <td width="60%">
+                      <td>
                         <%=cm.cmsPhrase("Help on species <strong>Easy Searches</strong>")%>
                       </td>
                     </tr>
                     <tr class="zebraeven">
                       <td style="white-space: nowrap">
-                        <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("glossary")%>" />
-                        <a href="glossary.jsp?module=species" title="<%=cm.cms("species_main_glossary_Title")%>"><strong><%=cm.cmsPhrase("Glossary")%></strong></a>
+                        <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                        <a href="glossary.jsp?module=species"><strong><%=cm.cmsPhrase("Glossary")%></strong></a>
                         <%=cm.cmsTitle("species_main_glossary_Title")%>
-                        <%=cm.cmsAlt("glossary")%>
                       </td>
                       <td>
                         <%=cm.cmsPhrase("Glossary of the terms used in EUNIS Database species module")%>
@@ -472,11 +449,10 @@
                     </tr>
                     <tr>
                       <td style="white-space: nowrap">
-                        <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("browse")%>" />
-                        <a href="http://biodiversity-chm.eea.europa.eu/search_html" title="<%=cm.cms("generic_information_tools_on_species")%>">
+                        <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                        <a href="http://biodiversity-chm.eea.europa.eu/search_html">
                             <strong><%=cm.cmsPhrase("Browse")%></strong></a>
                         <%=cm.cmsTitle("generic_information_tools_on_species")%>
-                        <%=cm.cmsAlt("browse")%>
                       </td>
                       <td>
                         <%=cm.cmsPhrase("Generic information tools on Species diversity")%>
@@ -484,10 +460,8 @@
                     </tr>
                     <tr class="zebraeven">
                       <td style="white-space: nowrap">
-                        <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="<%=cm.cms("how_to_use")%>" />
-                        <a href="species-help.jsp" title="<%=cm.cms("species_main_howTo_Title")%>"><strong><%=cm.cmsPhrase("How to use")%></strong></a>
-                        <%=cm.cmsTitle("species_main_howTo_Title")%>
-                        <%=cm.cmsAlt("how_to_use")%>
+                        <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
+                        <a href="species-help.jsp"><strong><%=cm.cmsPhrase("How to use")%></strong></a>
                       </td>
                       <td>
                         <%=cm.cmsPhrase("Help on EUNIS Database species module search tools")%>

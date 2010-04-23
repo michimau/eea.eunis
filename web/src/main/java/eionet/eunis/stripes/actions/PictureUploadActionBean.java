@@ -1,6 +1,7 @@
 package eionet.eunis.stripes.actions;
 
 import java.io.File;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -10,6 +11,8 @@ import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import ro.finsiel.eunis.factsheet.PicturesHelper;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
 import eionet.eunis.util.JstlFunctions;
 
 /**
@@ -26,6 +29,7 @@ public class PictureUploadActionBean extends AbstractStripesAction {
 	private String filename; // used only for deletion
 	private String message;
 	private String errorMessage;
+	private boolean hasMain = false;
 
 	@DefaultHandler
 	public Resolution defaultAction() {
@@ -53,6 +57,11 @@ public class PictureUploadActionBean extends AbstractStripesAction {
 	}
 	
 	public Resolution uploadPicture() {
+		List<Chm62edtNatureObjectPicturePersist> pictureList = new Chm62edtNatureObjectPictureDomain()
+  		.findWhere("MAIN_PIC = 1 AND ID_OBJECT = " +idobject);
+		if(pictureList != null && pictureList.size() > 0){
+			hasMain = true;
+		}
 		return new ForwardResolution("/stripes/pictures-upload.jsp");
 	}
 
@@ -135,5 +144,13 @@ public class PictureUploadActionBean extends AbstractStripesAction {
 
 	public void setFilename(String filename) {
 		this.filename = filename;
+	}
+
+	public boolean isHasMain() {
+		return hasMain;
+	}
+
+	public void setHasMain(boolean hasMain) {
+		this.hasMain = hasMain;
 	}
 }

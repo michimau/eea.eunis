@@ -18,17 +18,6 @@
           }
           return true;
         }
-        function hideMeasures(){
-        	if(document.getElementById('main_picture').checked == true){
-        		document.getElementById('measures').style.visibility = "visible";
-        		document.getElementById('width').style.visibility = "visible";
-        		document.getElementById('height').style.visibility = "visible";
-        	} else {
-        		document.getElementById('measures').style.visibility = "hidden";
-        		document.getElementById('width').style.visibility = "hidden";
-        		document.getElementById('height').style.visibility = "hidden";
-        	}
-        }
       //]]>
     </script>
       <title>
@@ -59,7 +48,14 @@
         <input id="filename" name="filename" type="file" size="50" title="${eunis:cms(actionBean.contentManagement, 'pictures_upload_filename_label')}" />
       	${eunis:cmsLabel(actionBean.contentManagement, 'pictures_upload_filename_label')} <br/>
       	<label for="main_picture">Check to make it the factsheet picture</label>
-      	<input id="main_picture" name="main_picture" type="checkbox" onChange="hideMeasures();"/>
+      	<c:choose>
+			<c:when test="${actionBean.hasMain}">
+      			<input id="main_picture" name="main_picture" type="checkbox"/>
+      		</c:when>
+			<c:otherwise>
+				<input id="main_picture" name="main_picture" type="checkbox" checked="checked" disabled="disabled"/>
+			</c:otherwise>
+		</c:choose>
       </p>
       <p>
       	${eunis:cmsPhrase(actionBean.contentManagement, 'Picture description (max 255 characters)')}
@@ -71,11 +67,6 @@
         	cols="60" rows="5"></textarea>
         <br />
         <label for="source">${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}: </label><input type="text" name="source" id="source"/>
-        <div id="measures" style="visibility:hidden;">
-        	<label for="width">${eunis:cmsPhrase(actionBean.contentManagement, 'Max width')}: </label><input type="text" name="width" id="width" size="4" style="visibility:hidden;"/> ${eunis:cmsPhrase(actionBean.contentManagement, 'pixels')}
-        	<br />
-        	<label for="height">${eunis:cmsPhrase(actionBean.contentManagement, 'Max height')}: </label><input type="text" name="height" id="height" size="4" style="visibility:hidden;"/> ${eunis:cmsPhrase(actionBean.contentManagement, 'pixels')}
-        </div>
         <br/>
       </p>
       <p>

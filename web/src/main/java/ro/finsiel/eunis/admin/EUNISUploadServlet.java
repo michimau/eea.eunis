@@ -218,8 +218,6 @@ public class EUNISUploadServlet extends HttpServlet {
         String idObject = "";
         String description = "";
         String natureObjectType = "";
-        String maxWidth = "";
-        String maxHeight = "";
         String source = "";
         boolean mainPicture = false;
         FileItem uploadedFileItem = null;
@@ -252,16 +250,6 @@ public class EUNISUploadServlet extends HttpServlet {
                 // Main picture
                 if (null != fieldName && fieldName.equalsIgnoreCase("main_picture")) {
                 	mainPicture = true;
-                }
-                
-                // Max width
-                if (null != fieldName && fieldName.equalsIgnoreCase("width")) {
-                	maxWidth = fieldValue;
-                }
-                
-                // Max height
-                if (null != fieldName && fieldName.equalsIgnoreCase("height")) {
-                	maxHeight = fieldValue;
                 }
                 
                 // Source
@@ -329,16 +317,12 @@ public class EUNISUploadServlet extends HttpServlet {
         pictureObject.setSource(source);
         new Chm62edtNatureObjectPictureDomain().save(pictureObject);
         
-        Integer maxWidthInt = 0;
-        Integer maxHeightInt = 0;
-        if(mainPicture){
-	        if(maxWidth != null && maxWidth.length() > 0){
-	        	maxWidthInt = new Integer(maxWidth);
-	        }
-	        if(maxHeight != null && maxHeight.length() > 0){
-	        	maxHeightInt = new Integer(maxHeight);
-	        }
-        }
+        String mainPictureFilename =  idObject  + "_main_picture"+ suffix;
+        Chm62edtNatureObjectPictureDomain domain = new Chm62edtNatureObjectPictureDomain();
+        List<Chm62edtNatureObjectPicturePersist> mainPictures = domain.findWhere(
+				 " FILE_NAME = '" + mainPictureFilename + "' and MAIN_PIC = 1 and NAME = '" + scientificName + "'");
+        if(mainPictures == null || mainPictures.size() == 0)
+        	mainPicture = true;
         
         //processing main picture
         if (mainPicture) {
@@ -346,17 +330,13 @@ public class EUNISUploadServlet extends HttpServlet {
         	double ratio = (double) image.getWidth() / (double) image.getHeight();
         	double idealRatio = MAX_WIDTH   / MAX_HEIGHT;
         	int newHeight = 0, newWidth = 0;
-        	if(maxWidthInt > 0 && maxHeightInt > 0){
-        		newWidth = maxWidthInt.intValue();
-        		newHeight = maxHeightInt.intValue();
+        	
+        	if (ratio > idealRatio) {
+        		newWidth = Math.min(image.getWidth(), MAX_WIDTH  );
+        		newHeight =  (int) ((double) newWidth / ratio);
         	} else {
-	        	if (ratio > idealRatio) {
-	        		newWidth = Math.min(image.getWidth(), MAX_WIDTH  );
-	        		newHeight =  (int) ((double) newWidth / ratio);
-	        	} else {
-	        		newHeight = Math.min(image.getHeight(), MAX_HEIGHT);
-	        		newWidth = (int) ((double) newHeight * ratio);
-	        	}
+        		newHeight = Math.min(image.getHeight(), MAX_HEIGHT);
+        		newWidth = (int) ((double) newHeight * ratio);
         	}
         	
         	AffineTransform at = AffineTransform.getScaleInstance((double)newWidth/(double)image.getWidth(),
@@ -364,16 +344,12 @@ public class EUNISUploadServlet extends HttpServlet {
         	BufferedImage output = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
         	((Graphics2D)output.getGraphics()).drawRenderedImage(image, at);
         	
-        	String mainPictureFilename =  idObject  + "_main_picture"+ suffix;
 			File outputFile = new File(BASE_DIR + uploadDir + mainPictureFilename) ;
 			ImageIO.write(output, "JPG", outputFile);
 			
 			Chm62edtNatureObjectPicturePersist mainPicturePersist = new Chm62edtNatureObjectPicturePersist();
 
-			Chm62edtNatureObjectPictureDomain domain = new Chm62edtNatureObjectPictureDomain();
 			//delete old mainPictures
-			List<Chm62edtNatureObjectPicturePersist> mainPictures = domain.findWhere(
-				 " FILE_NAME = '" + mainPictureFilename + "' and MAIN_PIC = 1 and NAME = '" + scientificName + "'");
 			for (Chm62edtNatureObjectPicturePersist mainPic : mainPictures) {
 				domain.save(mainPic);
 				domain.delete(mainPic);
@@ -386,8 +362,6 @@ public class EUNISUploadServlet extends HttpServlet {
 			mainPicturePersist.setName(scientificName);
 			mainPicturePersist.setNatureObjectType(natureObjectType);
 			mainPicturePersist.setSource(source);
-			mainPicturePersist.setMaxWidth(maxWidthInt);
-			mainPicturePersist.setMaxHeight(maxHeightInt);
 			domain.save(mainPicturePersist);
 			
         }

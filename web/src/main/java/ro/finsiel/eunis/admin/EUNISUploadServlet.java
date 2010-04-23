@@ -328,7 +328,7 @@ public class EUNISUploadServlet extends HttpServlet {
         if (mainPicture) {
         	BufferedImage image = ImageIO.read(file);
         	double ratio = (double) image.getWidth() / (double) image.getHeight();
-        	double idealRatio = MAX_WIDTH   / MAX_HEIGHT;
+        	double idealRatio = (double)MAX_WIDTH / (double)MAX_HEIGHT;
         	int newHeight = 0, newWidth = 0;
         	
         	if (ratio > idealRatio) {
@@ -361,6 +361,8 @@ public class EUNISUploadServlet extends HttpServlet {
 			mainPicturePersist.setIdObject(idObject);
 			mainPicturePersist.setName(scientificName);
 			mainPicturePersist.setNatureObjectType(natureObjectType);
+			mainPicturePersist.setMaxWidth(new Integer(newWidth));
+			mainPicturePersist.setMaxHeight(new Integer(newHeight));
 			mainPicturePersist.setSource(source);
 			domain.save(mainPicturePersist);
 			

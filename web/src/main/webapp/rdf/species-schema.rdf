@@ -118,7 +118,15 @@
 		<rdfs:domain rdf:resource="#Species"/>
 		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
 		<rdfs:comment xml:lang="en-GB">Used when two resources have the same binomial name and author
-		      (taking into account different spellings and abbreviations)</rdfs:comment>
+		      (taking into account different spellings and abbreviations)
+		</rdfs:comment>
+<!--
+	If there are two links from the same record in this database to two different records in
+	the remote database, that means the remote database has duplicates.
+        Transitivity would also apply: If A sameSynonym B, and B sameSynonym C, then A sameSynonym C
+        A sameSynonym B and A notSameSynonym B is illegal.
+        Lots of opportunities for some OWL rules.
+-->
 	</rdf:Property>
 
 </rdf:RDF>

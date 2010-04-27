@@ -269,11 +269,21 @@
         String speciesName = (scientificName.trim().indexOf(" ")>=0? scientificName.trim().substring(scientificName.indexOf(" ") + 1) : scientificName);
 %>
 	<div>
-        <a title="<%=cm.cmsPhrase("Search species on Fishbase")%>" href="http://www.fishbase.org/Summary/SpeciesSummary.php?genusname=<%=genusName%>&amp;speciesname=<%=Utilities.treatURLSpecialCharacters(speciesName)%>"><%=cm.cmsPhrase("Fishbase search")%></a>
+		<a title="<%=cm.cmsPhrase("Search species on Fishbase")%>" href="http://www.fishbase.de/Summary/SpeciesSummary.php?genusname=<%=genusName%>&amp;speciesname=<%=Utilities.treatURLSpecialCharacters(speciesName)%>"><%=cm.cmsPhrase("Fishbase search")%></a>
 	</div>
 <%
       }
-%>
+
+	// World Register of Marine Species - also has seals etc.
+	String wormsid = factsheet.getLink(specie.getIdNatureObject(),Constants.SAME_SYNONYM_WORMS);
+	if(wormsid != null && wormsid.length() > 0){
+	%>
+	<div>
+		<a href="http://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=<%=wormsid%>" title="World Register of Marine Species page"><%=cm.cmsPhrase("WorMS page")%></a>
+	</div>
+	<%
+	}
+	%>
 
 	<div>
         <a title="<%=cm.cmsPhrase("Search species on SCIRUS")%>" href="http://www.scirus.com/srsapp/search?q=%22<%=Utilities.treatURLSpecialCharacters(scientificName)%>%22&amp;ds=web&amp;g=s&amp;t=all"><%=cm.cmsPhrase("SCIRUS search")%></a>

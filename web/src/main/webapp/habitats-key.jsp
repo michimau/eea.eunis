@@ -226,7 +226,7 @@
           %>
                               <%=correctedAnswer%>
                             </strong>
-                            <a title="<%=cm.cms("answer")%>" href="habitats-factsheet.jsp?idHabitat=<%=answer.getIDHabitatLink()%>"><img title="<%=cm.cms("answer")%>" alt="Answer" src="images/mini/sheet.gif" border="0" style="vertical-align:middle" /></a>
+                            <a title="<%=cm.cms("answer")%>" href="habitats/<%=answer.getIDHabitatLink()%>"><img title="<%=cm.cms("answer")%>" alt="Answer" src="images/mini/sheet.gif" border="0" style="vertical-align:middle" /></a>
                             <%=cm.cmsTitle("answer")%>
           <%
                     if (level > 0 && level < 3)

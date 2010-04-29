@@ -544,7 +544,7 @@
                     String habitatsId = (String)habitatsData.get(0);
           %>
                       <div style="background-color: <%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>">
-                        <a href="habitats-factsheet.jsp?idHabitat=<%=habitatsId%>"><%=habitatsName%></a>
+                        <a href="habitats/<%=habitatsId%>"><%=habitatsName%></a>
                       </div>
           <%
                   }

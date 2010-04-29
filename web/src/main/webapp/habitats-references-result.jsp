@@ -478,7 +478,7 @@
                     }
                   %>
                       <td>
-                        <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getScName()%></a>
+                        <a href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getScName()%></a>
                       </td>
                   <%
                     if (showVernacularName) {

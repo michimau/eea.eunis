@@ -108,10 +108,10 @@
 %>
       <tr<%=cssClass%>>
         <td>
-          <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getIdHabitat()%></a>
+          <a href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getIdHabitat()%></a>
         </td>
         <td>
-          <a  href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getHabitatDescription()%></a>
+          <a  href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getHabitatDescription()%></a>
         </td>
         <td style="text-align:right">
           <%attribute = factsheet.findSiteAttributes("COVER", habitat.getIdReportAttributes());%>
@@ -273,7 +273,7 @@
 %>
       <tr<%=cssClass%>>
         <td>
-         <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getIdHabitat()%></a>
+         <a href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getIdHabitat()%></a>
        </td>
         <td>
           <%String val = habitat.getHabitatDescription();%>
@@ -362,7 +362,7 @@
 %>
       <tr<%=cssClass%>>
         <td>
-          <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getHabitatDescription()%></a>
+          <a href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getHabitatDescription()%></a>
         </td>
         <td  style="text-align:right">
           <%attribute = factsheet.findSiteAttributes("COVER", habitat.getIdReportAttributes());%>

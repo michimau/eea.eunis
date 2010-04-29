@@ -298,16 +298,16 @@
                       <%}%>
                       <%if (showScientificName) {%>
                         <td>
-                          <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
+                          <a href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
                         </td>
                       <%}%>
                       <%if (showEnglishName) {%>
                       <td>
-                        <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getDescription()%></a></td>
+                        <a href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getDescription()%></a></td>
                       <%}%>
                       <%if (showDescription) {%>
                       <td style="white-space:nowrap">
-                        <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getDescription()%></a></td>
+                        <a href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getDescription()%></a></td>
                       <%}%>
                       <%if (showPriority) {%>
                       <td style="text-align : center;">

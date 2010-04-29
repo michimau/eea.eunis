@@ -365,7 +365,7 @@
                         %>
                           <tr>
                             <td>
-                              <a href="habitats-factsheet.jsp?idHabitat=<%=idHabitat%>"><%=scientificName%></a>
+                              <a href="habitats/<%=idHabitat%>"><%=scientificName%></a>
                             </td>
                           </tr>
                         <%

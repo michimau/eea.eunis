@@ -518,7 +518,7 @@
                     {
                   %>
                       <td>
-                        <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
+                        <a href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
                       </td>
                   <%
                     }

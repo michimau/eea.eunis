@@ -486,7 +486,7 @@
                                 %>
                                 <tr>
                                   <td style="text-align:left">
-                                    <a href="habitats-factsheet.jsp?idHabitat=<%=idHabitat%>"><%=habitatName%></a>
+                                    <a href="habitats/<%=idHabitat%>"><%=habitatName%></a>
                                   </td>
                                 </tr>
                                 <%

@@ -398,7 +398,7 @@
                       {
                     %>
                           <td>
-                            <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
+                            <a href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getScientificName()%></a>
                             <%=cm.cmsTitle("sort_results_on_this_column")%>
                           </td>
                     <%
@@ -409,7 +409,7 @@
                       {
                     %>
                           <td>
-                            <a href="habitats-factsheet.jsp?idHabitat=<%=habitat.getIdHabitat()%>"><%=habitat.getDescription()%></a>
+                            <a href="habitats/<%=habitat.getIdHabitat()%>"><%=habitat.getDescription()%></a>
                             <%=cm.cmsTitle("sort_results_on_this_column")%>
                           </td>
                     <%

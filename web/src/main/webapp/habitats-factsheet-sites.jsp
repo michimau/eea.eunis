@@ -171,7 +171,7 @@
 					<%
 					if(mypage > 1){
     					%>
-    					<td align="left"><a href="habitats-factsheet.jsp?tab=4&amp;idHabitat=<%=idHabitat%>&amp;page=<%=(mypage - 1)%>">previous page</a></td>
+    					<td align="left"><a href="habitats/<%=idHabitat%>/sites?page=<%=(mypage - 1)%>">previous page</a></td>
     					<%	
 					}
 					%>
@@ -182,7 +182,7 @@
                         while(cnt>0) {
                             i++;
                             if(i != mypage){ %>
-                            	<a href="habitats-factsheet.jsp?tab=4&amp;idHabitat=<%=idHabitat%>&amp;page=<%=i%>"><%=i%></a>&nbsp;&nbsp;
+                            	<a href="habitats/<%=idHabitat%>/sites?page=<%=i%>"><%=i%></a>&nbsp;&nbsp;
                             <% } else { %>
                             	<%=i%>&nbsp;&nbsp;
                             <% }
@@ -193,7 +193,7 @@
 					<%
 					if(count > myEnd){
     					%>
-    					<td align="right"><a href="habitats-factsheet.jsp?tab=4&amp;idHabitat=<%=idHabitat%>&amp;page=<%=(mypage + 1)%>">next page</a></td>
+    					<td align="right"><a href="habitats/<%=idHabitat%>/sites?page=<%=(mypage + 1)%>">next page</a></td>
     					<%	
 					}
 					%>

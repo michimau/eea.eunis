@@ -48,7 +48,7 @@ public class ReferencesImporterActionBean extends AbstractStripesAction {
 				ReferencesImportParser parser = new ReferencesImportParser(sqlUtil);
 				parser.execute(inputStream);
 				
-				showMessage("Successfully updated!");
+				showMessage("Successfully imported!");
 				
 			} catch(Exception e) {
 				e.printStackTrace();

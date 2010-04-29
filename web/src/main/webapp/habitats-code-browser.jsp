@@ -121,7 +121,7 @@
                     <% } else { %>
                       <a title="<%=show%>" id="level_<%=rs.getString("EUNIS_HABITAT_CODE")%>" href="habitats-code-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
                     <% } %>
-                    <a title="<%=rs.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs.getString("ID_HABITAT")%>"><%=rs.getString("EUNIS_HABITAT_CODE")%> : <%=rs.getString("SCIENTIFIC_NAME")%></a><br/>
+                    <a title="<%=rs.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs.getString("ID_HABITAT")%>"><%=rs.getString("EUNIS_HABITAT_CODE")%> : <%=rs.getString("SCIENTIFIC_NAME")%></a><br/>
                     <%
                     	if(expand.length()>0 && Utilities.expandContains(expand,rs.getString("EUNIS_HABITAT_CODE"))) {
 		                  strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
@@ -146,13 +146,13 @@
 		                    <% } else { %>
 		                      <a title="<%=show%>" id="level_<%=rs2.getString("EUNIS_HABITAT_CODE")%>" href="habitats-code-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs2.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs2.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
 		                    <% } %>
-		                      <a title="<%=rs2.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs2.getString("ID_HABITAT")%>"><%=rs2.getString("EUNIS_HABITAT_CODE")%> : <%=rs2.getString("SCIENTIFIC_NAME")%></a><br/>
+		                      <a title="<%=rs2.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs2.getString("ID_HABITAT")%>"><%=rs2.getString("EUNIS_HABITAT_CODE")%> : <%=rs2.getString("SCIENTIFIC_NAME")%></a><br/>
 		                    
 		            <%
 		                    } else {
 		            %>
 		                    <li>
-		                      <img src="images/img_bullet.gif" alt="<%=rs2.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs2.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs2.getString("ID_HABITAT")%>"><%=rs2.getString("EUNIS_HABITAT_CODE")%> : <%=rs2.getString("SCIENTIFIC_NAME")%></a><br/>
+		                      <img src="images/img_bullet.gif" alt="<%=rs2.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs2.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs2.getString("ID_HABITAT")%>"><%=rs2.getString("EUNIS_HABITAT_CODE")%> : <%=rs2.getString("SCIENTIFIC_NAME")%></a><br/>
 		                    
 		            <%
 		                    }
@@ -180,13 +180,13 @@
 				                    <% } else { %>
 				                      <a title="<%=show%>" id="level_<%=rs4.getString("EUNIS_HABITAT_CODE")%>" href="habitats-code-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs4.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs4.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
 				                    <% } %>
-		                            <a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs4.getString("ID_HABITAT")%>"><%=rs4.getString("EUNIS_HABITAT_CODE")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a>
+		                            <a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs4.getString("ID_HABITAT")%>"><%=rs4.getString("EUNIS_HABITAT_CODE")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a>
 		                         
 		            <%
 		                         } else {
 		            %>
 		                         <li>
-		                           <img src="images/img_bullet.gif" alt="<%=rs4.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs4.getString("ID_HABITAT")%>"><%=rs4.getString("EUNIS_HABITAT_CODE")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a>
+		                           <img src="images/img_bullet.gif" alt="<%=rs4.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs4.getString("ID_HABITAT")%>"><%=rs4.getString("EUNIS_HABITAT_CODE")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a>
 		                         
 		            <%
 		                         }
@@ -214,13 +214,13 @@
 					                    <% } else { %>
 					                      <a title="<%=show%>" id="level_<%=rs5.getString("EUNIS_HABITAT_CODE")%>" href="habitats-code-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs5.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs5.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
 					                    <% } %>
-		                              	<a title="<%=rs5.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs5.getString("ID_HABITAT")%>"><%=rs5.getString("EUNIS_HABITAT_CODE")%> : <%=rs5.getString("SCIENTIFIC_NAME")%></a>
+		                              	<a title="<%=rs5.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs5.getString("ID_HABITAT")%>"><%=rs5.getString("EUNIS_HABITAT_CODE")%> : <%=rs5.getString("SCIENTIFIC_NAME")%></a>
 		                            
 		            <%
 		                             } else {
 		            %>
 		                            <li>
-		                              <img src="images/img_bullet.gif" alt="<%=rs5.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs5.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs5.getString("ID_HABITAT")%>"><%=rs5.getString("EUNIS_HABITAT_CODE")%> : <%=rs5.getString("SCIENTIFIC_NAME")%></a>
+		                              <img src="images/img_bullet.gif" alt="<%=rs5.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs5.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs5.getString("ID_HABITAT")%>"><%=rs5.getString("EUNIS_HABITAT_CODE")%> : <%=rs5.getString("SCIENTIFIC_NAME")%></a>
 		                            
 		            <%
 		                             }
@@ -247,13 +247,13 @@
 						                    <% } else { %>
 						                      <a title="<%=show%>" id="level_<%=rs6.getString("EUNIS_HABITAT_CODE")%>" href="habitats-code-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs6.getString("EUNIS_HABITAT_CODE"))%>#level_<%=rs6.getString("EUNIS_HABITAT_CODE")%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
 						                    <% } %>
-											<a title="<%=rs6.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs6.getString("ID_HABITAT")%>"><%=rs6.getString("EUNIS_HABITAT_CODE")%> : <%=rs6.getString("SCIENTIFIC_NAME")%></a>
+											<a title="<%=rs6.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs6.getString("ID_HABITAT")%>"><%=rs6.getString("EUNIS_HABITAT_CODE")%> : <%=rs6.getString("SCIENTIFIC_NAME")%></a>
 		                                 
 		            <%
 		                                 } else {
 		            %>
 		                                 <li>
-		                                   <img src="images/img_bullet.gif" alt="<%=rs6.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs6.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs6.getString("ID_HABITAT")%>"><%=rs6.getString("EUNIS_HABITAT_CODE")%> : <%=rs6.getString("SCIENTIFIC_NAME")%></a>
+		                                   <img src="images/img_bullet.gif" alt="<%=rs6.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs6.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs6.getString("ID_HABITAT")%>"><%=rs6.getString("EUNIS_HABITAT_CODE")%> : <%=rs6.getString("SCIENTIFIC_NAME")%></a>
 		                                 
 		            <%
 		                                 }
@@ -274,7 +274,7 @@
 		                                   {
 		            %>
 		                                     <li>
-		                                       <img src="images/img_bullet.gif" alt="<%=rs7.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs7.getString("SCIENTIFIC_NAME")%>" href="habitats-factsheet.jsp?idHabitat=<%=rs7.getString("ID_HABITAT")%>"><%=rs7.getString("EUNIS_HABITAT_CODE")%> : <%=rs7.getString("SCIENTIFIC_NAME")%></a><br/>
+		                                       <img src="images/img_bullet.gif" alt="<%=rs7.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs7.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs7.getString("ID_HABITAT")%>"><%=rs7.getString("EUNIS_HABITAT_CODE")%> : <%=rs7.getString("SCIENTIFIC_NAME")%></a><br/>
 		                                     </li>
 		            <%
 		                                   }

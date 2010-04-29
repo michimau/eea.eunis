@@ -62,6 +62,18 @@
       count -= batch_size;
       start += batch_size;
     }
+    
+ 	// Habitats
+    rs = ps.executeQuery("SELECT COUNT(*) FROM CHM62EDT_HABITAT");
+    rs.first();
+    start = 0;
+    count = rs.getInt(1);
+    while (count > 0) {
+      out.println("<sitemap><loc>" + application.getInitParameter( "DOMAIN_NAME" ) + "/sitemap-habitats.jsp?start=" + start +
+                  "&amp;size=" + batch_size + "</loc></sitemap>");
+      count -= batch_size;
+      start += batch_size;
+    }
 
     con.close();
 

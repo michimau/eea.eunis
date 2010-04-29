@@ -28,6 +28,7 @@
   SiteFactsheet factsheet = new SiteFactsheet(siteid);
   WebContentManagement cm = SessionManager.getWebContent();
   int type = factsheet.getType();
+  String domainName = application.getInitParameter("DOMAIN_NAME");
 
   List<Chm62edtNatureObjectPicturePersist> pictureList = new Chm62edtNatureObjectPictureDomain()
   		.findWhere("MAIN_PIC = 1 AND ID_OBJECT = '" + factsheet.getIDSite() + "'");
@@ -58,7 +59,7 @@
 	    		styleAttr = "max-width: "+width.intValue()+"px; max-height: "+height.intValue()+"px";
     		}
 	    	%>
-		    <a href="javascript:openpictures('pictures.jsp?<%=picsURL%>',600,600)">
+		    <a href="javascript:openpictures('<%=domainName%>/pictures.jsp?<%=picsURL%>',600,600)">
 		    <img src="<%=mainPictureId %>" alt="<%=pictureDescription %>" class="scaled" style="<%=styleAttr%>"/>
 		    </a>
 		    <% if(source != null && source.length() > 0){%>
@@ -1027,13 +1028,13 @@
       if(null != listPictures && listPictures.size() > 0)
       {
 %>
-  <a href="javascript:openpictures('pictures.jsp?<%=picsURL%>',600,600)"><%=cm.cmsPhrase("View pictures")%></a>
+  <a href="javascript:openpictures('<%=domainName%>/pictures.jsp?<%=picsURL%>',600,600)"><%=cm.cmsPhrase("View pictures")%></a>
 <%
       }
       else if(SessionManager.isAuthenticated() && SessionManager.isUpload_pictures_RIGHT())
       {
 %>
-      <a href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=picsURL%>',600,600)"><%=cm.cmsPhrase("Upload pictures")%></a>
+      <a href="javascript:openpictures('<%=domainName%>/pictures-upload.jsp?operation=upload&amp;<%=picsURL%>',600,600)"><%=cm.cmsPhrase("Upload pictures")%></a>
 <%
       }
 %>

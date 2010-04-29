@@ -41,6 +41,7 @@
   SpeciesNatureObjectPersist specie = factsheet.getSpeciesNatureObject();
   String scientificName = specie.getScientificName();
   WebContentManagement cm = SessionManager.getWebContent();
+  String domainName = application.getInitParameter("DOMAIN_NAME");
 
   // Taxonomic information
   /*
@@ -85,7 +86,7 @@
 		    		styleAttr = "max-width: "+mainPictureMaxWidthInt.intValue()+"px; max-height: "+mainPictureMaxHeightInt.intValue()+"px";
 	    		}
 	    	%>
-		    <a href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)"">
+		    <a href="javascript:openpictures('<%=domainName%>/pictures.jsp?<%=urlPic%>',600,600)"">
 		    	<img src="<%=picturePath + "/"+ mainPictureFilename %>" alt="<%=mainPictureDescription%>" class="scaled" style="<%=styleAttr%>"/>
 		    </a>
 	    </div>
@@ -641,13 +642,13 @@ if(kingdomname.equalsIgnoreCase("Animals"))
       if(null != listPictures && listPictures.size() > 0)
       {
 %>
-  <a href="javascript:openpictures('pictures.jsp?<%=urlPic%>',600,600)"><%=cm.cmsPhrase("View pictures")%></a>
+  <a href="javascript:openpictures('<%=domainName%>/pictures.jsp?<%=urlPic%>',600,600)"><%=cm.cmsPhrase("View pictures")%></a>
 <%
       }
       else if(SessionManager.isAuthenticated() && SessionManager.isUpload_pictures_RIGHT())
       {
 %>
-      <a href="javascript:openpictures('pictures-upload.jsp?operation=upload&amp;<%=urlPic%>',600,600)"><%=cm.cmsPhrase("Upload pictures")%></a>
+      <a href="javascript:openpictures('<%=domainName%>/pictures-upload.jsp?operation=upload&amp;<%=urlPic%>',600,600)"><%=cm.cmsPhrase("Upload pictures")%></a>
 <%
       }
 %>

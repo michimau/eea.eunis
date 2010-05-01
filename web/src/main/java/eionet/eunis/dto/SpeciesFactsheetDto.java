@@ -3,10 +3,10 @@ package eionet.eunis.dto;
 import java.io.Serializable;
 import java.util.List;
 
+import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
-import org.simpleframework.xml.convert.Convert;
 
 
 /**
@@ -14,7 +14,7 @@ import org.simpleframework.xml.convert.Convert;
  *
  * <a href="mailto:aleks21@gmail.com">contact<a>
  */
-@Root(strict = false, name = "species")
+@Root(strict = false, name = "Species")
 public class SpeciesFactsheetDto implements Serializable{
 	/**
 	 * serial.
@@ -28,6 +28,8 @@ public class SpeciesFactsheetDto implements Serializable{
 			
 
 	public static final String FOOTER = "\n</rdf:RDF>";
+
+	private static final String DOMAIN_LOCATION = "http://eunis.eea.europa.eu/species/";
 
 	
 	@Element(required = false, name = "binomialName")
@@ -46,7 +48,13 @@ public class SpeciesFactsheetDto implements Serializable{
 	private List<SpeciesSynonymDto> hasSynonyms;
 	@ElementList(required = false, inline = true)
 	private List<SpeciesAttributeDto> attributes;
+
+	private int speciesId;
 	
+	@Attribute(required = false, name = "rdf:about")
+	public String getRdfAbout() {
+		return DOMAIN_LOCATION + speciesId;
+	}
 	
 	public String getScientificName() {
 		return scientificName;
@@ -95,6 +103,10 @@ public class SpeciesFactsheetDto implements Serializable{
 	}
 	public void setAttributes(List<SpeciesAttributeDto> attributes) {
 		this.attributes = attributes;
+	}
+
+	public void setSpeciesId(int speciesId) {
+		this.speciesId = speciesId;
 	}
 	
 	

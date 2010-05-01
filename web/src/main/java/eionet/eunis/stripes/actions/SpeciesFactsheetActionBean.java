@@ -67,6 +67,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 	private String referedFromName;
 
 	private String mainPictureFilename;
+
 	private String mainPictureMaxWidth;
 	private String mainPictureMaxHeight;
 	private String mainPictureDescription;
@@ -140,6 +141,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 					.findWhere("MAIN_PIC = 1 AND ID_OBJECT = " + mainIdSpecies );
 			if (pictures != null && !pictures.isEmpty()) {
 				mainPictureFilename = pictures.get(0).getFileName();
+
 				mainPictureMaxWidth = pictures.get(0).getMaxWidth().toString();
 				mainPictureMaxHeight = pictures.get(0).getMaxHeight().toString();
 				mainPictureDescription = pictures.get(0).getDescription();
@@ -177,6 +179,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 		
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 		SpeciesFactsheetDto dto = new SpeciesFactsheetDto();
+		dto.setSpeciesId(factsheet.getSpeciesObject().getIdSpecies());
 		dto.setScientificName(factsheet.getSpeciesObject().getScientificName());
 		dto.setGenus(factsheet.getSpeciesObject().getGenus());
 		dto.setAuthor(factsheet.getSpeciesObject().getAuthor());
@@ -316,6 +319,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 	public String getMainPictureFilename() {
 		return mainPictureFilename;
 	}
+
 
 	public String getMainPictureMaxWidth() {
 		return mainPictureMaxWidth;

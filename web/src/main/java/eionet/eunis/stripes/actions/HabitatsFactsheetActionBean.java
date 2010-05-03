@@ -98,7 +98,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 		if (factsheet != null) {
 			metaDescription = factsheet.getMetaHabitatDescription();
 			pageTitle = getContext().getInitParameter("PAGE_TITLE") 
-					+ getContentManagement().cms("factsheet_for")
+					+ getContentManagement().cmsPhrase("Factsheet for")
 					+ " " + factsheet.getHabitat().getScientificName();
 		} else {
 			pageTitle = getContext().getInitParameter("PAGE_TITLE")

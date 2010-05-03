@@ -429,7 +429,8 @@
           sql+="      `DC_SOURCE`.`EDITOR`,";
           sql+="      `DC_DATE`.`CREATED`,";
           sql+="      `DC_TITLE`.`TITLE`,";
-          sql+="      `DC_PUBLISHER`.`PUBLISHER`";
+          sql+="      `DC_PUBLISHER`.`PUBLISHER`,";
+          sql+="      `DC_INDEX`.`ID_DC`";
           sql+="    FROM";
           sql+="      `CHM62EDT_DESIGNATIONS`";
           sql+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_DESIGNATIONS`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
@@ -451,27 +452,39 @@
           String date;
           String title;
           String publisher;
+          String document_id;
 
           rs.beforeFirst();
 
           if(rs.next())
           {
 
-            author = Utilities.formatString( Utilities.FormatDatabaseFieldName( rs.getString( 1 ) ), "&nbsp;" );
-            editor = Utilities.formatString( Utilities.FormatDatabaseFieldName( rs.getString( 2 ) ), "&nbsp;" );
+            author = Utilities.formatString( rs.getString( 1 ), "&nbsp;" );
+            editor = Utilities.formatString( rs.getString( 2 ), "&nbsp;" );
             date = Utilities.formatString( Utilities.formatReferencesDate( rs.getDate( 3 ) ), "&nbsp;" );
-            title = Utilities.formatString( Utilities.FormatDatabaseFieldName( rs.getString( 4 ) ), "&nbsp;" );
-            publisher = Utilities.formatString( Utilities.FormatDatabaseFieldName( rs.getString( 5 ) ), "&nbsp;" );
+            title = Utilities.formatString( rs.getString( 4 ), "&nbsp;" );
+            publisher = Utilities.formatString( rs.getString( 5 ), "&nbsp;" );
+            document_id = Utilities.formatString( rs.getString( 6 ), "0" );
 %>
                 <h2>
                   <%=cm.cmsPhrase("Designation references")%>
                 </h2>
-                <table summary="layout" class="datatable fullwidth">
+                <table class="datatable fullwidth">
+                  <col style="width:30%"/>
+                  <col style="width:70%"/>
                   <tr>
-                    <td width="30%">
+                    <td>
+                      <%=cm.cmsPhrase("Title:")%>
+                    </td>
+                    <td>
+                      <a href="documents/<%=document_id%>"><%=title%></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
                       <%=cm.cmsPhrase("Author:")%>
                     </td>
-                    <td width="70%">
+                    <td>
                       <%=author%>
                     </td>
                   </tr>
@@ -493,17 +506,9 @@
                   </tr>
                   <tr>
                     <td>
-                      <%=cm.cmsPhrase("Title:")%>
-                    </td>
-                    <td>
-                      <%=title%>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width="20%">
                       <%=cm.cmsPhrase("Publisher:")%>
                     </td>
-                    <td width="80%">
+                    <td>
                       <%=publisher%>
                     </td>
                   </tr>

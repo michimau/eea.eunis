@@ -406,8 +406,7 @@
           <%
                 if (null != designation.getDescription() && !designation.getDescription().equalsIgnoreCase(""))
                 {
-                  String factsheetURL = "designations-factsheet.jsp?fromWhere=original&amp;idDesign=" + designation.getIdDesignation();
-                  factsheetURL += "&amp;geoscope=" + designation.getIdGeoscope();
+                  String factsheetURL = "designations/"+designation.getIdGeoscope()+":"+designation.getIdDesignation()+"?fromWhere=original";
           %>
                       <a title="<%=cm.cms("open_designation_factsheet")%>" href="<%=factsheetURL%>"><%=Utilities.formatString(designation.getDescription(), "&nbsp;")%></a>
                       <%=cm.cmsTitle("open_designation_factsheet")%>
@@ -431,7 +430,7 @@
                 if (null != designation.getDescriptionEn() && !designation.getDescriptionEn().equalsIgnoreCase(""))
                 {
           %>
-                      <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=designation.getIdDesignation()%>&amp;geoscope=<%=designation.getIdGeoscope()%>"><%=Utilities.formatString(designation.getDescriptionEn(), "&nbsp;")%></a>
+                      <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations/<%=designation.getIdGeoscope()%>:<%=designation.getIdDesignation()%>?fromWhere=en"><%=Utilities.formatString(designation.getDescriptionEn(), "&nbsp;")%></a>
                       <%=cm.cmsTitle("open_designation_factsheet")%>
           <%
                 }

@@ -6,7 +6,7 @@ import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 
 /**
- * ActionBean to replace old /species-factsheet.jsp.
+ * ActionBean to replace old /habitats-factsheet.jsp.
  * 
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>

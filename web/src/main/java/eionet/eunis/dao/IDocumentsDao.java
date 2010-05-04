@@ -19,6 +19,7 @@ import eionet.eunis.dto.DcSourceDTO;
 import eionet.eunis.dto.DcSubjectDTO;
 import eionet.eunis.dto.DcTitleDTO;
 import eionet.eunis.dto.DcTypeDTO;
+import eionet.eunis.dto.DesignationDcObjectDTO;
 
 
 /**
@@ -171,5 +172,13 @@ public interface IDocumentsDao {
 	 * @return ID_DC
 	 */
 	Integer insertSource(String title, String source, String publisher, String editor, String url, String year) throws Exception;
+	
+	/**
+	 * Get DC object for designation factsheet
+	 * @param idDesig
+	 * @param idGeo
+	 * @return DesignationDcObjectDTO
+	 */
+	DesignationDcObjectDTO getDesignationDcObject(String idDesig, String idGeo) throws Exception;
 
 }

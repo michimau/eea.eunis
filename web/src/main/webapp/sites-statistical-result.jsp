@@ -316,7 +316,7 @@
                   if (null != d.getDescription() && !d.getDescription().equalsIgnoreCase(""))
                   {
           %>
-                      <a href="designations-factsheet.jsp?idDesign=<%=d.getIdDesignation()%>&amp;geoscope=<%=d.getIdGeoscope()%>"><%=d.getDescription()%></a>
+                      <a href="designations/<%=d.getIdGeoscope()%>:<%=d.getIdDesignation()%>"><%=d.getDescription()%></a>
           <%
                   }
                   else
@@ -332,7 +332,7 @@
                   if (null != d.getDescriptionEn() && !d.getDescriptionEn().equalsIgnoreCase(""))
                   {
           %>
-                      <a href="designations-factsheet.jsp?idDesign=<%=d.getIdDesignation()%>&amp;geoscope=<%=d.getIdGeoscope()%>"><%=d.getDescriptionEn()%></a>
+                      <a href="designations/<%=d.getIdGeoscope()%>:<%=d.getIdDesignation()%>"><%=d.getDescriptionEn()%></a>
           <%
                   }
                   else

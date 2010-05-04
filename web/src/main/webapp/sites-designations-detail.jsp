@@ -46,7 +46,7 @@
       if (!description.equalsIgnoreCase(""))
       {
 %>
-        <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?idDesign=<%=designation.getIdDesignation()%>&amp;geoscope=<%=designation.getIdGeoscope()%>"><%=description%></a>
+        <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations/<%=designation.getIdGeoscope()%>:<%=designation.getIdDesignation()%>"><%=description%></a>
         <%=cm.cmsTitle("open_designations_factsheet")%>
 <%
         if(i < results.size()-1)

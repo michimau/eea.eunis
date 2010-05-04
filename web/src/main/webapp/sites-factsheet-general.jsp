@@ -341,7 +341,7 @@
           if(designation.getDescription() != null && designation.getDescription().trim().length() > 0)
           {
 %>
-          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=original&amp;idDesign=<%=designation.getIdDesignation()%>&amp;geoscope=<%=designation.getIdGeoscope()%>"><%=designation.getDescription()%></a>
+          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations/<%=designation.getIdGeoscope()%>:<%=designation.getIdDesignation()%>?fromWhere=original"><%=designation.getDescription()%></a>
           <%=cm.cmsTitle("open_designation_factsheet")%>
 <%
           }
@@ -358,7 +358,7 @@
           if(designation.getDescriptionEn() != null && designation.getDescriptionEn().trim().length() > 0)
           {
 %>
-          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=designation.getIdDesignation()%>&amp;geoscope=<%=designation.getIdGeoscope()%>"><%=designation.getDescriptionEn()%></a>
+          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations/<%=designation.getIdGeoscope()%>:<%=designation.getIdDesignation()%>?fromWhere=en"><%=designation.getDescriptionEn()%></a>
           <%=cm.cmsTitle("open_designation_factsheet")%>
 <%
           }
@@ -393,7 +393,7 @@
           if(desig.getDescription() != null && desig.getDescription().trim().length() > 0)
           {
 %>
-          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=original&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescription()%></a>
+          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations/<%=desig.getIdGeoscope()%>:<%=desig.getIdDesignation()%>?fromWhere=original"><%=desig.getDescription()%></a>
           <%=cm.cmsTitle("open_designation_factsheet")%>
 <%
            }
@@ -410,7 +410,7 @@
           if(desig.getDescriptionEn() != null && desig.getDescriptionEn().trim().length() > 0)
           {
 %>
-            <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescriptionEn()%></a>
+            <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations/<%=desig.getIdGeoscope()%>:<%=desig.getIdDesignation()%>?fromWhere=en"><%=desig.getDescriptionEn()%></a>
             <%=cm.cmsTitle("open_designation_factsheet")%>
 <%
           }

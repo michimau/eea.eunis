@@ -68,11 +68,11 @@
 %>
       <tr<%=cssClass%>>
         <td>
-          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescription()%></a>&nbsp;
+          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations/<%=desig.getIdGeoscope()%>:<%=desig.getIdDesignation()%>?fromWhere=en"><%=desig.getDescription()%></a>&nbsp;
           <%=cm.cmsTitle("open_designation_factsheet")%>
         </td>
         <td>
-          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations-factsheet.jsp?fromWhere=en&amp;idDesign=<%=desig.getIdDesignation()%>&amp;geoscope=<%=desig.getIdGeoscope()%>"><%=desig.getDescriptionEn()%></a>
+          <a title="<%=cm.cms("open_designation_factsheet")%>" href="designations/<%=desig.getIdGeoscope()%>:<%=desig.getIdDesignation()%>?fromWhere=en"><%=desig.getDescriptionEn()%></a>
           <%=cm.cmsTitle("open_designation_factsheet")%>
         </td>
         <td>

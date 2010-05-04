@@ -150,4 +150,54 @@ public class JstlFunctions {
 	public static String replaceTags(String in, boolean dontCreateHTMLAnchors, boolean dontCreateHTMLLineBreaks ) {
 		return EunisUtil.replaceTags(in, dontCreateHTMLAnchors, dontCreateHTMLLineBreaks);
 	}
+	
+	/**
+	 * @param object
+	 * @param defaultValue
+	 * @return
+	 */
+	public static String formatString( Object object, String defaultValue ) {
+	    if(null == object)
+	    	return defaultValue;
+	    if(object.toString().equalsIgnoreCase("null"))
+	    	return defaultValue;
+	    if(object.toString().length() == 0)
+	    	return defaultValue;
+	    return object.toString();
+	}
+	
+	/**
+	 * @param object
+	 * @param decimals
+	 * @return
+	 */
+	public static String formatDecimal( Object val, Integer dec ) {
+	    String val2 = "";
+	    int decimals = dec.intValue();
+	    decimals++;
+	    try{
+	    	if ( val != null ){
+	    		val2 = val.toString();
+	    		int pos = val2.indexOf( "." );
+	    		if ( pos > 0 && pos + decimals <= val2.length() )
+	    			val2 = val2.substring( 0, pos + decimals );
+	    	}
+	    } catch ( Exception ex ) {
+	    	ex.printStackTrace();
+	    }
+	    return val2;
+	}
+	
+	/**
+	   * Translate the SOURCE_DB field from CHM62EDT_SITES in human readable language.
+	   *
+	   * @param sourceDB Source db.
+	   * @return Source database.
+	   */
+	public static String translateSourceDB( String sourceDB ) {
+		if ( null == sourceDB )
+			return "n/a";
+	    String result = sourceDB.replaceAll( "CDDA_NATIONAL", "CDDA National" ).replaceAll( "CDDA_INTERNATIONAL", "CDDA International" ).replaceAll( "NATURA2000", "Natura 2000" ).replaceAll( "CORINE", "Corine" ).replaceAll( "DIPLOMA", "European diploma" ).replaceAll( "BIOGENETIC", "Biogenetic reserves" ).replaceAll( "NATURENET", "NatureNet" ).replaceAll( "EMERALD", "Emerald" );
+	    return result;
+	}
 }

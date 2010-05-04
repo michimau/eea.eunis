@@ -113,4 +113,41 @@
 			${replaceTags2("text", true, true)}
 		</example>
 	</function>
+	
+	<function>
+		<description>
+			This method is used to display value taken from database, which may be null so displaying indirectly through
+   			this method, assures that never will appear in web page, the infamous 'null' string.
+	 	</description>
+		<name>formatString</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>java.lang.String formatString(java.lang.Object, java.lang.String)</function-signature>
+		<example>
+			${formatString("text","default")}
+		</example>
+	</function>
+	
+	<function>
+		<description>
+			Returns required number of decimals
+	 	</description>
+		<name>formatDecimal</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>java.lang.String formatDecimal(java.lang.Object, java.lang.Integer)</function-signature>
+		<example>
+			${formatDecimal("8.990",2)}
+		</example>
+	</function>
+	
+	<function>
+		<description>
+			Translate the SOURCE_DB field from CHM62EDT_SITES in human readable language
+	 	</description>
+		<name>translateSourceDB</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>java.lang.String translateSourceDB(java.lang.String)</function-signature>
+		<example>
+			${translateSourceDB("CDDA_NATIONAL")}
+		</example>
+	</function>
 </taglib>

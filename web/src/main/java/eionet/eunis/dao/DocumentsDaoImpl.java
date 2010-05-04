@@ -25,9 +25,11 @@ import eionet.eunis.dto.DcSourceDTO;
 import eionet.eunis.dto.DcSubjectDTO;
 import eionet.eunis.dto.DcTitleDTO;
 import eionet.eunis.dto.DcTypeDTO;
+import eionet.eunis.dto.DesignationDcObjectDTO;
 import eionet.eunis.dto.readers.DcObjectDTOReader;
 import eionet.eunis.dto.readers.DcTitleDTOReader;
 
+import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
 /**
@@ -833,5 +835,56 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
     	
     	return maxIdInt;
     }
+	
+	public DesignationDcObjectDTO getDesignationDcObject(String idDesig, String idGeo) throws Exception {
+		
+		DesignationDcObjectDTO ret = null;
+		
+		String query = "SELECT " +
+	        "`DC_SOURCE`.`SOURCE`, " +
+	        "`DC_SOURCE`.`EDITOR`, " +
+	        "`DC_DATE`.`CREATED`, " +
+	        "`DC_TITLE`.`TITLE`, " +
+	        "`DC_PUBLISHER`.`PUBLISHER` "+
+	        "FROM " +
+	        "`CHM62EDT_DESIGNATIONS` " +
+	        "INNER JOIN `DC_INDEX` ON (`CHM62EDT_DESIGNATIONS`.`ID_DC` = `DC_INDEX`.`ID_DC`) "+
+	        "INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`) "+
+	        "INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`) "+
+	        "INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`) "+
+	        "INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`) "+
+	        "WHERE "+
+	        "`CHM62EDT_DESIGNATIONS`.ID_DESIGNATION = ? AND `CHM62EDT_DESIGNATIONS`.`ID_GEOSCOPE` = ?";
+		
+		Connection con = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		
+		try{
+			
+			con = getSqlUtils().getConnection();
+			preparedStatement = con.prepareStatement(query);
+			preparedStatement.setString(1, idDesig);
+			preparedStatement.setString(2, idGeo);
+			rs = preparedStatement.executeQuery();
+			while(rs.next()){
+				
+				ret = new DesignationDcObjectDTO();
+				
+				ret.setAuthor(Utilities.formatString( Utilities.FormatDatabaseFieldName( rs.getString( 1 ) ), "" ));
+				ret.setEditor(Utilities.formatString( Utilities.FormatDatabaseFieldName( rs.getString( 2 ) ), "" ));
+				ret.setDate(Utilities.formatString( Utilities.formatReferencesDate( rs.getDate( 3 ) ), "" ));
+				ret.setTitle(Utilities.formatString( Utilities.FormatDatabaseFieldName( rs.getString( 4 ) ), "" ));
+				ret.setPublisher(Utilities.formatString( Utilities.FormatDatabaseFieldName( rs.getString( 5 ) ), "" ));
+				
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			getSqlUtils().closeAll(con, preparedStatement, rs);
+		}
+		
+		return ret;
+	}
 
 }

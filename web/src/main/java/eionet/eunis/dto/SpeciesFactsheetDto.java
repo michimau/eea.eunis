@@ -14,7 +14,7 @@ import org.simpleframework.xml.Root;
  *
  * <a href="mailto:aleks21@gmail.com">contact<a>
  */
-@Root(strict = false, name = "Species")
+@Root(strict = false, name = "SpeciesSynonym")
 public class SpeciesFactsheetDto implements Serializable{
 	/**
 	 * serial.

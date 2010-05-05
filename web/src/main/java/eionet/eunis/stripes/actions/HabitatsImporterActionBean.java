@@ -11,6 +11,7 @@ import ro.finsiel.eunis.dataimport.parsers.ClassCodesImportParser;
 import ro.finsiel.eunis.dataimport.parsers.HabitatClassCodeImportParser;
 import ro.finsiel.eunis.dataimport.parsers.HabitatDescImportParser;
 import ro.finsiel.eunis.dataimport.parsers.HabitatImportParser;
+import ro.finsiel.eunis.dataimport.parsers.ReferencesImportParser;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 import eionet.eunis.util.Constants;
 
@@ -27,6 +28,7 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
 	private FileBean fileHabitatsDesc;
 	private FileBean fileClassCodes;
 	private FileBean fileHabitatClassCodes;
+	private FileBean fileReferences;
 		
 	@DefaultHandler
 	public Resolution defaultAction() {
@@ -44,10 +46,21 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
 			InputStream inputStreamHabitatsDesc = null;
 			InputStream inputStreamClassCodes = null;
 			InputStream inputStreamHabitatClassCodes = null;
+			InputStream inputStreamReferences = null;
 			
 			try{
 				
 				SQLUtilities sqlUtil = getContext().getSqlUtilities();
+				
+				if (fileReferences != null){
+					inputStreamReferences = fileReferences.getInputStream();
+					
+					ReferencesImportParser parser = new ReferencesImportParser(sqlUtil);
+					parser.execute(inputStreamReferences);
+					fileReferences.delete();
+					if(inputStreamReferences!=null)
+						inputStreamReferences.close();
+				}
 				
 				if (fileHabitats != null){
 					inputStreamHabitats = fileHabitats.getInputStream();
@@ -131,6 +144,14 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
 
 	public void setFileHabitatClassCodes(FileBean fileHabitatClassCodes) {
 		this.fileHabitatClassCodes = fileHabitatClassCodes;
+	}
+
+	public FileBean getFileReferences() {
+		return fileReferences;
+	}
+
+	public void setFileReferences(FileBean fileReferences) {
+		this.fileReferences = fileReferences;
 	}
 
 }

@@ -10,6 +10,8 @@
 		<c:when test="${actionBean.context.sessionManager.authenticated && actionBean.context.sessionManager.importExportData_RIGHT}">
 	        <h1>Import habitats</h1>
 	        <stripes:form action="/dataimport/importhabitats" method="post" name="f">
+	        	<stripes:label for="file0">XML file for references (REFERENCES)</stripes:label>
+	        	<stripes:file name="fileReferences" id="file0"/><br/>
 	        	<stripes:label for="file1">XML file for habitats (HABITAT)</stripes:label>
 	        	<stripes:file name="fileHabitats" id="file1"/><br/>
 	        	<stripes:label for="file2">XML file for habitat descriptions (HABTEXT)</stripes:label>

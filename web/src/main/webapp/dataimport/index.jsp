@@ -107,10 +107,6 @@
                 		The purpose of this page is to import red list information from XML formatted file into EUNIS database.
                 	</li>
                 	<li>
-                		<a href="<%=domainName%>/dataimport/importreferences">Import References</a><br/>
-                		The purpose of this page is to import references from XML formatted file into EUNIS database.
-                	</li>
-                	<li>
                 		<a href="<%=domainName%>/dataimport/updatecountrysites">Update country sites factsheet</a><br/>
                 		The purpose of this page is to update "chm62edt_country_sites_factsheet" table.
                 	</li>

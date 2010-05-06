@@ -26,8 +26,6 @@ public class SiteFactsheetDto implements Serializable {
 	private ResourceDto idDesignation;
 	@Element(name = "hasSource", required = false)
 	private ResourceDto idDc;
-	@Element(name = "hasGeoscope", required = false)
-	private ResourceDto idGeoscope;
 	@Element(required = false)
 	private String idSite;
 	@Element(required = false)
@@ -689,20 +687,6 @@ public class SiteFactsheetDto implements Serializable {
 	 */
 	public void setIdDesignation(ResourceDto idDesignation) {
 		this.idDesignation = idDesignation;
-	}
-
-	/**
-	 * @return the idGeoscope
-	 */
-	public ResourceDto getIdGeoscope() {
-		return idGeoscope;
-	}
-
-	/**
-	 * @param idGeoscope the idGeoscope to set
-	 */
-	public void setIdGeoscope(ResourceDto idGeoscope) {
-		this.idGeoscope = idGeoscope;
 	}
 
 	/**

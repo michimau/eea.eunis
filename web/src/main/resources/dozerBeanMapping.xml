@@ -16,10 +16,6 @@
     	<b>idDesignation.id</b>
     </field>
     <field>
-    	<a>siteObject.idGeoscope</a>
-    	<b>idGeoscope.id</b>
-    </field>
-    <field>
     	<a>IDNatureObject</a>
     	<b>idNatureObject</b>
     </field>

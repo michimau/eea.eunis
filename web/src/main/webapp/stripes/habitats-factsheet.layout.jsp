@@ -37,8 +37,7 @@
 						</c:if>
 						<h1 class="documentFirstHeading">${actionBean.factsheet.habitatScientificName}</h1>
 						<div class="documentActions">
-							<h5 class="hiddenStructure">${eunis:cms(actionBean.contentManagement, 'Document Actions')}</h5>
-							${eunis:cmsTitle(actionBean.contentManagement, 'Document Actions')}
+							<h5 class="hiddenStructure">${eunis:cmsPhrase(actionBean.contentManagement, 'Document Actions')}</h5>
 							<ul>
 								<li>
 									<a href="javascript:this.print();">
@@ -60,9 +59,8 @@
 									<a href="javascript:openLink('habitats-factsheet-pdf.jsp?idHabitat=${actionBean.idHabitat}')">
 										<img
 											src="images/pdf.png"
-											alt="${eunis:cmsPhrase(actionBean.contentManagement, 'header_download_pdf_title')}"
-											title="${eunis:cmsPhrase(actionBean.contentManagement, 'header_download_pdf_title')}" />
-									${eunis:cmsTitle(actionBean.contentManagement, 'header_download_pdf_title')}
+											alt="${eunis:cmsPhrase(actionBean.contentManagement, 'Download page as PDF')}"
+											title="${eunis:cmsPhrase(actionBean.contentManagement, 'Download page as PDF')}" />
 									</a>
 								</li>
 							</ul>
@@ -74,15 +72,13 @@
 										<c:choose>
 											<c:when test="${dataTab.id eq actionBean.tab}">
 												<li id="currenttab"><a
-													title="${eunis:cms(actionBean.contentManagement, 'show')} ${dataTab.value}"
 													href="habitats/${actionBean.idHabitat}/${dataTab.id}">
-												${eunis:cms(actionBean.contentManagement, dataTab.value)}</a></li>
+												${eunis:cmsPhrase(actionBean.contentManagement, dataTab.value)}</a></li>
 											</c:when>
 											<c:otherwise>
 												<li><a
-													title="${eunis:cms(actionBean.contentManagement, 'show')} ${dataTab.value}"
 													href="habitats/${actionBean.idHabitat}/${dataTab.id}">
-												${eunis:cms(actionBean.contentManagement, dataTab.value)}</a></li>
+												${eunis:cmsPhrase(actionBean.contentManagement, dataTab.value)}</a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
@@ -133,7 +129,7 @@
 				                            	ctrl_info.style.display = "none";
 				                          	}
 										} catch( e ) {
-				                          	alert("${eunis:cms(actionBean.contentManagement, 'error_expanding_node')}");
+				                          	alert("${eunis:cmsPhrase(actionBean.contentManagement, 'Error expanding node')}");
 				                        }
 				                  	}
 				                  	function otherInfoAll(expand) {
@@ -160,7 +156,7 @@
 													<span style="color:#808080">${other.title} (no records)</span>
 								    			</c:when>
 								    			<c:otherwise>
-								    				<a title="${eunis:cms(actionBean.contentManagement, 'habitat_other_information')}" href="javascript:otherInfo(${other.dictionaryType})">${other.title}</a>${eunis:cms(actionBean.contentManagement, 'habitat_other_information')} (${other.noElements} ${eunis:cms(actionBean.contentManagement, 'records')})
+								    				<a href="javascript:otherInfo(${other.dictionaryType})">${other.title}</a>${eunis:cmsPhrase(actionBean.contentManagement, 'Habitat type other information')} (${other.noElements} ${eunis:cmsPhrase(actionBean.contentManagement, 'records')})
 							                      	<div id="otherInfo${other.dictionaryType}" style="padding-left : 25px; display : none;">
 							                        	<jsp:include page="/habitats-factsheet-other.jsp">
 							                          		<jsp:param name="idHabitat" value="${actionBean.idHabitat}" />

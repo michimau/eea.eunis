@@ -142,7 +142,7 @@
             if(Utilities.isCountry(country))
             {
         %>
-          <a href="javascript:goToCountryStatistics('<%=Utilities.treatURLSpecialCharacters(country)%>')" title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(country)%>"><%=Utilities.treatURLSpecialCharacters(country)%></a>
+          <a href="sites-statistical-result.jsp?country=<%=Utilities.treatURLSpecialCharacters(country)%>&amp;DB_NATURA2000=true&amp;DB_CDDA_NATIONAL=true&amp;DB_NATURE_NET=true&amp;DB_CORINE=true&amp;DB_CDDA_INTERNATIONAL=true&amp;DB_DIPLOMA=true&amp;DB_BIOGENETIC=true&amp;DB_EMERALD=true" title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(country)%>"><%=Utilities.treatURLSpecialCharacters(country)%></a>
           <%=cm.cmsTitle("open_the_statistical_data_for")%>
         <%
             } else {

@@ -93,7 +93,7 @@
             if(Utilities.isCountry(site.getAreaNameEn()))
             {
         %>
-          <a href="javascript:goToSpeciesStatistics('<%=Utilities.treatURLSpecialCharacters(site.getAreaNameEn())%>')" title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(site.getAreaNameEn())%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getAreaNameEn()))%></a>
+          <a href="species-statistics-module.jsp?countryName=<%=Utilities.treatURLSpecialCharacters(site.getAreaNameEn())%>" title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(site.getAreaNameEn())%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getAreaNameEn()))%></a>
           <%=cm.cmsTitle("open_the_statistical_data_for")%>
         <%
             } else {
@@ -196,7 +196,7 @@
             if(Utilities.isCountry(site.getAreaNameEn()))
             {
         %>
-          <a href="javascript:goToSpeciesStatistics('<%=Utilities.treatURLSpecialCharacters(site.getAreaNameEn())%>')" title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(site.getAreaNameEn())%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getAreaNameEn()))%></a>
+          <a href="species-statistics-module.jsp?countryName=<%=Utilities.treatURLSpecialCharacters(site.getAreaNameEn())%>" title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(site.getAreaNameEn())%>"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getAreaNameEn()))%></a>
           <%=cm.cmsTitle("open_the_statistical_data_for")%>
         <%
             } else {

@@ -78,7 +78,7 @@
         if(Utilities.isCountry(aRow.getCountry()))
         {
 %>
-          <a href="javascript:goToSpeciesStatistics('<%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>')"
+          <a href="species-statistics-module.jsp?countryName=<%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>"
              title="<%=cm.cms("open_the_statistical_data_for")%> <%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%>"><%=Utilities.treatURLSpecialCharacters(aRow.getCountry())%></a>
           <%=cm.cmsTitle("open_the_statistical_data_for")%>
 <%

@@ -13,70 +13,6 @@
 		    {
 		      eval("page = window.open(URL, '', 'scrollbars=no,toolbar=0,resizable=yes, location=0,width=380,height=350');");
 		    }
-		
-			function goToCountryStatistics(countryName) {
-		
-				var frm = document.createElement( "FORM" );
-			    document.appendChild( frm );
-			    frm.method = "post";
-			    frm.action="sites-statistical-result.jsp";
-			
-			    var c = document.createElement("input");
-			    c.type= "hidden";
-			    c.name = "country";
-			    c.value = countryName;
-			    frm.appendChild( c );
-			
-				var db1 = document.createElement("input");
-			    db1.type= "hidden";
-			    db1.name = "DB_NATURA2000";
-			    db1.value = true;
-			    frm.appendChild( db1 );
-			
-			    var db2 = document.createElement("input");
-			    db2.type= "hidden";
-			    db2.name = "DB_CDDA_NATIONAL";
-			    db2.value = true;
-			    frm.appendChild( db2 );
-			
-			    var db3 = document.createElement("input");
-			    db3.type= "hidden";
-			    db3.name = "DB_NATURE_NET";
-			    db3.value = false;
-			    frm.appendChild( db3 );
-			
-			    var db4 = document.createElement("input");
-			    db4.type= "hidden";
-			    db4.name = "DB_CORINE";
-			    db4.value = true;
-			    frm.appendChild( db4 );
-			
-			    var db5 = document.createElement("input");
-			    db5.type= "hidden";
-			    db5.name = "DB_CDDA_INTERNATIONAL";
-			    db5.value = true;
-			    frm.appendChild( db5 );
-			
-			    var db6 = document.createElement("input");
-			    db6.type= "hidden";
-			    db6.name = "DB_DIPLOMA";
-			    db6.value = true;
-			    frm.appendChild( db6 );
-			
-			    var db7 = document.createElement("input");
-			    db7.type= "hidden";
-			    db7.name = "DB_BIOGENETIC";
-			    db7.value = true;
-			    frm.appendChild( db7 );
-			
-			    var db8 = document.createElement("input");
-			    db8.type= "hidden";
-			    db8.name = "DB_EMERALD";
-			    db8.value = true;
-			    frm.appendChild( db8 );
-			
-			    frm.submit();
-			}
 		    //]]>
 		    </script>
 		    <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
@@ -132,7 +68,7 @@
                     		<td>
                     			<c:choose> 
 									<c:when test="${actionBean.isCountry}">
-										<a href="javascript:goToCountryStatistics('${actionBean.country}')" title="${eunis:cms(actionBean.contentManagement, 'open_the_statistical_data_for')} ${actionBean.country}">
+										<a href="sites-statistical-result.jsp?country=${actionBean.country}&amp;DB_NATURA2000=true&amp;DB_CDDA_NATIONAL=true&amp;DB_NATURE_NET=false&amp;DB_CORINE=true&amp;DB_CDDA_INTERNATIONAL=true&amp;DB_DIPLOMA=true&amp;DB_BIOGENETIC=true&amp;DB_EMERALD=true" title="${eunis:cms(actionBean.contentManagement, 'open_the_statistical_data_for')} ${actionBean.country}">
 											<strong>${actionBean.country}</strong>
 										</a>
 										${eunis:cmsTitle(actionBean.contentManagement, 'open_the_statistical_data_for')}

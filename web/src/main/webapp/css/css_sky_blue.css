@@ -80,6 +80,9 @@ img.scaled {
 	table {
 		font-size: 1em !important;
 	}
+	body.popup {
+		margin: 0.5em;
+	}
 }
 
 

@@ -160,29 +160,29 @@
   }
 %>
     <title>
-      <%=cm.cms("pictures_page_title")%> <%=scientificName%>
+      <%=cm.cmsPhrase("Pictures of")%> <%=scientificName%>
     </title>
   </head>
-  <body>
+  <body class="popup">
 <%
   if(null != pictures && pictures.size() > 0)
   {
 %>
-    <div id="picture_name" style="width : 100%; text-align:center; font-weight:bold;">
+    <h1 id="picture_name" style="text-align:center; font-weight:bold;">
       <%=scientificName%>
-    </div>
+    </h1>
     <div id="picture_description" style="width : 100%; text-align:center; font-weight:bold;">
       <%=firstdescription%>
     </div>
     <div id="navRow" style="width : 100%; text-align : center;">
-      <a href="javascript:prevImage('rImage')"><%=cm.cmsPhrase("< Previous")%></a>
+      <a href="javascript:prevImage('rImage')"><%=cm.cmsPhrase("&lt; Previous")%></a>
       &nbsp;&nbsp;
-      <a href="javascript:nextImage('rImage')"><%=cm.cmsPhrase("Next >")%></a>
+      <a href="javascript:nextImage('rImage')"><%=cm.cmsPhrase("Next &gt;")%></a>
     </div>
     <div style="width : 100%; text-align : center;">
-      <img alt="<%=firstdescription%>" id="image" name="rImage" src="<%=dirBase + firstimage%>" border="1" style="max-width:95%"/>
+      <img alt="<%=firstdescription%>" id="image" name="rImage" src="<%=dirBase + firstimage%>" border="1" style="max-width:95%; max-height:500px"/>
     </div>
-    <div id="picture_source" style="width : 100%; text-align:center; font-weight:bold;">
+    <div id="picture_source" style="text-align:right; font-weight:bold;">
       <%=cm.cmsPhrase("Source")%>: <%=firstsource%>
     </div>
     <script language="JavaScript" type="text/javascript">
@@ -200,11 +200,14 @@
   else
   {
 %>
+  <div class="note-msg"><strong><%=cm.cmsPhrase("Sorry")%></strong>
+   <p>
     <%=cm.cmsPhrase("We are sorry, but no pictures are available for")%>
-    <strong>
+    <em>
       <%=scientificName%>
-    </strong>
-    <br />
+    </em>
+   </p>
+  </div>
 <%
   }
 %>
@@ -216,8 +219,9 @@
   if (SessionManager.isAuthenticated())
   {
 %>
-    <a href="pictures-upload.jsp?idobject=<%=IdObject%>&amp;natureobjecttype=<%=NatureObjectType%>&amp;operation=upload"><%=cm.cmsPhrase("Upload new picture")%></a><br />
-    <a href="javascript:deletePicture();"><%=cm.cmsPhrase("Delete picture")%></a><br />
+   <p style="text-align:right">
+    [<a href="pictures-upload.jsp?idobject=<%=IdObject%>&amp;natureobjecttype=<%=NatureObjectType%>&amp;operation=upload"><%=cm.cmsPhrase("Upload new picture")%></a>]
+    [<a href="javascript:deletePicture();"><%=cm.cmsPhrase("Delete picture")%></a>]
     <script type="text/javascript" language="javascript">
       //<![CDATA[
       function deletePicture() {
@@ -237,6 +241,7 @@
       <input type="hidden" name="filename" value="" />
       <input type="hidden" name="operation" value="delete" />
     </form>
+  </p>
 <%
   }
   else

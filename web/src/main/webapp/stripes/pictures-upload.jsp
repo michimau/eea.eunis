@@ -25,13 +25,12 @@
         ${actionBean.scientificName}
       </title>
   </head>
-  <body>
-    <p>
-      ${eunis:cmsPhrase(actionBean.contentManagement, 'This page allows to upload new pictures for')} <strong>${actionBean.scientificName}</strong>.
-    </p>
-    <p>
-      ${eunis:cmsPhrase(actionBean.contentManagement, 'Please click browse and select the picture from your computer')}
-      <br />
+  <body class="popup">
+    <h1>
+      ${eunis:cmsPhrase(actionBean.contentManagement, 'Upload new pictures for')} <strong>${actionBean.scientificName}</strong>.
+    </h1>
+    <p class="tip-msg">
+      ${eunis:cmsPhrase(actionBean.contentManagement, 'Please select a picture from your computer. The picture must have a <em>Creative Commons</em> license.')}
     </p>
     <form action="${pageContext.request.contextPath}/fileupload" 
     		method="post" 
@@ -43,11 +42,12 @@
       <input type="hidden" name="natureobjecttype" value="${actionBean.natureobjecttype}" />
       <input type="hidden" name="idobject" value="${actionBean.idobject }"/>
       <p>
-        <label for="filename" class="noshow">
-        ${eunis:cms(actionBean.contentManagement, 'pictures_upload_filename_label')}</label>
-        <input id="filename" name="filename" type="file" size="50" title="${eunis:cms(actionBean.contentManagement, 'pictures_upload_filename_label')}" />
-      	${eunis:cmsLabel(actionBean.contentManagement, 'pictures_upload_filename_label')} <br/>
-      	<label for="main_picture">Check to make it the factsheet picture</label>
+        <label for="filename">
+        ${eunis:cmsPhrase(actionBean.contentManagement, 'Filename:')}</label>
+        <input id="filename" name="filename" type="file" size="50" />
+      </p>
+      <p>
+      	<label for="main_picture">Make it the factsheet thumbnail</label>
       	<c:choose>
 			<c:when test="${actionBean.hasMain}">
       			<input id="main_picture" name="main_picture" type="checkbox"/>
@@ -57,41 +57,37 @@
 			</c:otherwise>
 		</c:choose>
       </p>
-      <p>
-      	${eunis:cmsPhrase(actionBean.contentManagement, 'Picture description (max 255 characters)')}
-        <br />
-        <label for="description" class="noshow">${eunis:cms(actionBean.contentManagement, 'pictures_upload_description_label')}</label>
+      <p><label for="description">
+      	${eunis:cmsPhrase(actionBean.contentManagement, 'Picture description (max 255 characters)')}</label><br />
         <textarea 
         	id="description"
         	name="description" 
+		style="width:100%"
         	cols="60" rows="5"></textarea>
-        <br />
-        <label for="source">${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}: </label><input type="text" name="source" id="source"/>
-        <br/>
+      </p>
+      <p>
+        <label for="source">${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}: </label><input type="text" name="source" id="source" size="30"/>
       </p>
       <p>
         <input type="reset" 
         		id="reset" 
-        		title="${eunis:cms(actionBean.contentManagement, 'reset_values')}" 
         		name="Reset" 
-        		value="${eunis:cms(actionBean.contentManagement, 'reset')}" 
+        		value="${eunis:cmsPhrase(actionBean.contentManagement, 'Reset')}" 
         		class="standardButton" />
          ${eunis:cmsTitle(actionBean.contentManagement, 'reset_values')}
          ${eunis:cmsInput(actionBean.contentManagement, 'reset')}
 
         <input type="submit" 
         		id="submit" 
-        		title="${eunis:cms(actionBean.contentManagement, 'upload')}" 
         		name="Submit" 
-        		value="${eunis:cms(actionBean.contentManagement, 'upload')}" 
+        		value="${eunis:cmsPhrase(actionBean.contentManagement, 'Upload')}" 
         		class="submitSearchButton" />
          ${eunis:cmsTitle(actionBean.contentManagement, 'upload')}
          ${eunis:cmsInput(actionBean.contentManagement, 'upload')}
 
         <input type="button"
         		 onclick="javascript:window.close();"
-           		 value="${eunis:cms(actionBean.contentManagement, 'close_btn')}" 
-           		 title="${eunis:cms(actionBean.contentManagement, 'close_window')}"
+           		 value="${eunis:cms(actionBean.contentManagement, 'Close')}" 
            		 id="button0" name="button" class="standardButton" />
          ${eunis:cmsTitle(actionBean.contentManagement, 'close_window')}
          ${eunis:cmsInput(actionBean.contentManagement, 'close_btn')}

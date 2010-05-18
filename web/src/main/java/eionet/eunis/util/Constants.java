@@ -16,6 +16,7 @@ public interface Constants {
 	   public static final String WIKIPEDIA_ARTICLE = "hasWikipediaArticle";
 	   public static final String WIKISPECIES_ARTICLE = "hasWikispeciesArticle";
 	   public static final String BUG_GUIDE = "hasBugGuidePage";
+	   public static final String ART17_SUMMARY = "art17SummaryPage";
 
 	   //Same Species
 	   public static final String SAME_SPECIES_EOL = "sameSpeciesEOL"; // www.eol.org

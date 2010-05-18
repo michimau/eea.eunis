@@ -318,16 +318,6 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 }
 %>
     		<%
-    		String biolibLink = factsheet.getLink(specie.getIdNatureObject(),Constants.BIOLIB_PAGE);
-			if(biolibLink != null && biolibLink.length() > 0){
-    		%>
-		<div>
-        		<a href="<%=biolibLink%>"><%=cm.cmsPhrase("Biolib page")%></a>
-		</div>
-        	<%
-    		}
-        	%>
-    		<%
     		String itisTSN = factsheet.getLink(specie.getIdNatureObject(),Constants.SAME_SYNONYM_ITIS);
 			if(itisTSN != null && itisTSN.length() > 0){
     		%>
@@ -352,45 +342,27 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 		</div>
     		<%
 		}
-    		String bbcLink = factsheet.getLink(specie.getIdNatureObject(),Constants.BBC_PAGE);
-			if(bbcLink != null && bbcLink.length() > 0){
+		/* Plain links */
+		String[][] linkTab = {
+			{Constants.ART17_SUMMARY,"Art. 17 summary"},
+			{Constants.BBC_PAGE,"BBC page"},
+			{Constants.BIOLIB_PAGE,"Biolib page"},
+			{Constants.BUG_GUIDE,"Bug Guide page"},
+			{Constants.WIKIPEDIA_ARTICLE,"Wikipedia article"},
+			{Constants.WIKISPECIES_ARTICLE,"Wikispecies article"}
+		};
+		String linkUrl;
+		for(String[] linkSet : linkTab) {
+			linkUrl = factsheet.getLink(specie.getIdNatureObject(), linkSet[0]);
+			if(linkUrl != null && linkUrl.length() > 0) {
     		%>
 		<div>
-        		<a href="<%=bbcLink%>"><%=cm.cmsPhrase("BBC page")%></a>
+        		<a href="<%=linkUrl%>"><%=cm.cmsPhrase(linkSet[1])%></a>
 		</div>
         	<%
-    		}
-        	%>
-    		<%
-    		String wikiLink = factsheet.getLink(specie.getIdNatureObject(),Constants.WIKIPEDIA_ARTICLE);
-			if(wikiLink != null && wikiLink.length() > 0){
+			}
+		}
     		%>
-		<div>
-        		<a href="<%=wikiLink%>"><%=cm.cmsPhrase("Wikipedia article")%></a>
-		</div>
-        	<%
-    		}
-        	%>
-    		<%
-    		String wikispeciesLink = factsheet.getLink(specie.getIdNatureObject(),Constants.WIKISPECIES_ARTICLE);
-			if(wikispeciesLink != null && wikispeciesLink.length() > 0){
-    		%>
-		<div>
-        		<a href="<%=wikispeciesLink%>"><%=cm.cmsPhrase("Wikispecies article")%></a>
-		</div>
-        	<%
-    		}
-        	%>
-        	<%
-    		String bugGuideLink = factsheet.getLink(specie.getIdNatureObject(),Constants.BUG_GUIDE);
-			if(bugGuideLink != null && bugGuideLink.length() > 0){
-    		%>
-		<div>
-        		<a href="<%=bugGuideLink%>"><%=cm.cmsPhrase("Bug Guide page")%></a>
-		</div>
-        	<%
-    		}
-        	%>
   </div> <!-- linkcollection -->
 </div> <!-- allow-naturepic -->
 	<%

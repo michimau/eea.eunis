@@ -56,28 +56,34 @@
 
 		    	$(document).ready(function() {
 		    	    $('#criterion').hide();
+		    	    $('#delete_root').hide();
 
-		    	$('#criteria a:first').toggle(function(){
-		    	     $('img', this).attr('src','images/mini/delete.gif');
-		    	     $('#root').html('<select name="Criteria" onchange="#" title="Criteria" id="Criteria">' +
-		    	      '<option selected="selected" value="All">All</option>' +
-		    	      '<option value="Any">Any</option>' +
-		    	      '</select>  of following criteria are met:');
-		    	    
-		    		$('#criterion').fadeIn('slow');
-		    	},function(){
-		    	    $('img', this).attr('src','images/mini/add.gif');
-		    	    $('#root').html('&nbsp;Add root criterion');
-		    	    $('.criterion').fadeOut('slow');
-
+		    	$('#add_root a').click(function(e){
+		    		e.preventDefault();
+		    		
+		    	    $('#delete_root').fadeIn('slow');
+		    	    $(this).parent().hide();
+		    	    $('#criterion').fadeIn('slow');
 		    	});
-		    	  
-		    	$('a[title=Add criterion]').click(function(){
+		    	
+		    	$('#delete_root a').click(function(e){
+		    		e.preventDefault();
+		    		
+		    	    $('#add_root').fadeIn('slow');
+		    	    $(this).parent().hide();
+		    	    $('.criterion').fadeOut('slow');
+		    	});
+
+		    	$('a[title=Add criterion]').click(function(e){
+		    		e.preventDefault();
+		    		
 		    	    var newElem = $('#criterion').clone(true).attr('id', 'criterion2').fadeIn('slow');
 		    	    $(this).parent().after(newElem);
 		    	});
 
-		    	$('a[title=Delete criterion]').click(function(){
+		    	$('a[title=Delete criterion]').click(function(e){
+		    		e.preventDefault();
+		    		
 		    	    $(this).parent().fadeOut('slow');
 		    	    });
 		    	});
@@ -118,18 +124,30 @@
 			</tr>
 		</table>
 
-		<form method="post" action="species-advanced.jsp" name="criteria" id="criteria">
-            <input type="hidden" name="criteria" value="" />
-            <input type="hidden" name="attribute" value="" />
-            <input type="hidden" name="operator" value="" />
-            <input type="hidden" name="firstvalue" value="" />
-            <input type="hidden" name="lastvalue" value="" />
-            <input type="hidden" name="oldfirstvalue" value="" />
-            <input type="hidden" name="oldlastvalue" value="" />
-            <input type="hidden" name="action" value="" />
-            <input type="hidden" name="idnode" value="" />
+		<stripes:form method="post" action="species-advanced.jsp" name="criteria" id="criteria">
+            <stripes:hidden name="criteria" value="" />
+            <stripes:hidden name="attribute" value="" />
+            <stripes:hidden name="operator" value="" />
+            <stripes:hidden name="firstvalue" value="" />
+            <stripes:hidden name="lastvalue" value="" />
+            <stripes:hidden name="oldfirstvalue" value="" />
+            <stripes:hidden name="oldlastvalue" value="" />
+            <stripes:hidden name="action" value="" />
+            <stripes:hidden name="idnode" value="" />
             
-            <a title="${eunis:cms(actionBean.contentManagement, 'add_root')}" href="#"><img border="0" src="images/mini/add.gif" width="13" height="13" alt="${eunis:cms(actionBean.contentManagement, 'add_root')}"/></a><div id="root">&nbsp;${eunis:cmsPhrase(actionBean.contentManagement, 'Add root criterion')}</div>
+            <div id="add_root">
+	            <a title="${eunis:cms(actionBean.contentManagement, 'add_root')}" href=""><img border="0" src="images/mini/add.gif" width="13" height="13" alt="${eunis:cms(actionBean.contentManagement, 'add_root')}" /></a>&nbsp;${eunis:cmsPhrase(actionBean.contentManagement, 'Add root criterion')}
+            </div>
+            
+            <div id="delete_root">
+            	<a title="${eunis:cms(actionBean.contentManagement, 'delete_root_criterion')}" href=""><img alt="${eunis:cms(actionBean.contentManagement, 'delete_root_criterion')}" border="0" src="images/mini/delete.gif" width="13" height="13"/></a>${eunis:cmsTitle(actionBean.contentManagement, 'delete_root_criterion')}
+            	<stripes:label for="Criteria" class="noshow">${eunis:cms(actionBean.contentManagement, 'criteria')}</stripes:label>
+				<stripes:select name="Criteria" title="${eunis:cms(actionBean.contentManagement, 'criteria')}" id="Criteria">
+                	<stripes:options-collection collection="${actionBean.listForCtriteria}"/>
+                </stripes:select>
+                ${eunis:cms(actionBean.contentManagement, 'of_following_criteria_are_met')}
+                <br />     
+            </div>
             
             <div id=criterion class="criterion">
             	<a title="${eunis:cms(actionBean.contentManagement, 'add_criterion')}" href="#"><img border="0" src="images/mini/add.gif" width="13" height="13" alt="${eunis:cms(actionBean.contentManagement, 'add_criterion')}"/></a>${eunis:cmsTitle(actionBean.contentManagement, 'add_criterion')}
@@ -137,36 +155,25 @@
             	<a title="${eunis:cms(actionBean.contentManagement, 'compose_criterion')}" href="#"><img border="0" src="images/mini/compose.gif" width="13" height="13" alt="${eunis:cms(actionBean.contentManagement, 'compose_criterion')}"/></a>${eunis:cmsTitle(actionBean.contentManagement,'compose_criterion')} 
 		
 				&nbsp;1.1 
-				<select name="Attribute" onchange="#" title="Attribute" id="Attribute">
-					<option selected="selected" value="ScientificName">Scientific name</option>
-					<option value="VernacularName">Vernacular Name</option>
-					<option value="Group">Group</option>
-					<option value="ThreatStatus">Threat Status</option>
-					<option value="InternationalThreatStatus">International	Threat Status</option>
-					<option value="Country">Country</option>
-					<option value="Biogeoregion">Biogeoregion</option>
-					<option value="Author">Reference author</option>
-					<option value="Title">Reference title</option>
-					<option value="LegalInstrument">Legal instr. title</option>
-					<option value="Taxonomy">Taxonomy</option>
-					<option value="Abundance">Abundance</option>
-					<option value="Trend">Trend</option>
-					<option value="DistributionStatus">Distribution Status</option>
-				</select> 
+				<stripes:label for="Attribute" class="noshow">${eunis:cms(actionBean.contentManagement, 'advanced_attribute')}</stripes:label>
+				<stripes:select name="Attribute" title="${eunis:cms(actionBean.contentManagement, 'advanced_attribute')}" id="Attribute">
+                	<stripes:options-collection collection="${actionBean.attributesList}"/>
+                </stripes:select>
 				&nbsp; 
-				<select name="Operator" onchange="#" title="Operator"id="Operator">
-					<option selected="selected" value="Equal">Equal</option>
-					<option value="Contains">Contains</option>
-					<option value="Between">Between</option>
-					<option value="Regex">Regex</option>
-				</select> 
+				<stripes:label for="Operator" class="noshow">${eunis:cms(actionBean.contentManagement, 'operator')}</stripes:label>
+				<stripes:select name="Operator" title="${eunis:cms(actionBean.contentManagement, 'operator')}" id="Operator">
+                	<stripes:options-collection collection="${actionBean.operatorsList}"/>
+                </stripes:select>
 				&nbsp; 
-				<input type="text" title="List of values" name="First_Value" id="First_Value" size="25" value="enter value here..." /> <a title="List of values" href="#">
-				<img border="0" src="images/mini/helper.gif" width="11" height="18"	alt="List of values" /></a>
-	            <br />         	
+				<stripes:label for="First_Value1" class="noshow">${eunis:cms(actionBean.contentManagement, 'list_of_values')}</stripes:label>
+				<stripes:text title="${eunis:cms(actionBean.contentManagement, 'list_of_values')}" name="First_Value" id="First_Value" size="25" value="enter value here..." />
+				${eunis:cmsTitle(actionBean.contentManagement,'list_of_values')} 
+				<a title="${eunis:cms(actionBean.contentManagement, 'list_of_values')}" href="javascript:choice('First_Value','','','')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="${eunis:cms(actionBean.contentManagement, 'list_of_values')}"/></a>
+	            <br />     
+	                	
             </div>
             
-		</form>
+		</stripes:form>
 		
 		<br />
         <strong>${eunis:cmsPhrase(actionBean.contentManagement, 'Note: Advanced search might take a long time')}</strong>

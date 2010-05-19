@@ -357,7 +357,7 @@ if(kingdomname.equalsIgnoreCase("Animals"))
 			if(linkUrl != null && linkUrl.length() > 0) {
     		%>
 		<div>
-        		<a href="<%=linkUrl%>"><%=cm.cmsPhrase(linkSet[1])%></a>
+        		<a href="<%=Utilities.treatURLSpecialCharacters(linkUrl)%>"><%=cm.cmsPhrase(linkSet[1])%></a>
 		</div>
         	<%
 			}

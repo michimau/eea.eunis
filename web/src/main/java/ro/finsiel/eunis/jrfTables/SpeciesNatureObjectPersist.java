@@ -70,6 +70,9 @@ public class SpeciesNatureObjectPersist extends PersistentObject {
 
   private Integer refcd = null;
   private String author = null;
+  
+  //Additional field for species factsheet
+  private String bookAuthorDate = null;
 
   public int getReference() {
     if (reference == null) return -1;
@@ -333,4 +336,12 @@ public class SpeciesNatureObjectPersist extends PersistentObject {
   public void setAuthor(String author) {
     this.author = author;
   }
+
+public String getBookAuthorDate() {
+	return bookAuthorDate;
+}
+
+public void setBookAuthorDate(String bookAuthorDate) {
+	this.bookAuthorDate = bookAuthorDate;
+}
 }

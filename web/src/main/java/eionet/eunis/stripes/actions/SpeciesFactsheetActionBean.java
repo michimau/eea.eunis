@@ -1,8 +1,13 @@
 package eionet.eunis.stripes.actions;
 
+import java.awt.Color;
 import java.io.ByteArrayOutputStream;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ErrorResolution;
@@ -18,15 +23,30 @@ import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.stream.Format;
 
+import com.ibm.icu.util.StringTokenizer;
+
+import ro.finsiel.eunis.ImageProcessing;
+import ro.finsiel.eunis.factsheet.species.NationalThreatWrapper;
 import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
+import ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist;
+import ro.finsiel.eunis.jrfTables.species.factsheet.DistributionWrapper;
+import ro.finsiel.eunis.jrfTables.species.factsheet.ReportsDistributionStatusPersist;
+import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain;
+import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist;
+import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
 import ro.finsiel.eunis.utilities.SQLUtilities;
+import eionet.eunis.dto.ClassificationDTO;
+import eionet.eunis.dto.LinkDTO;
+import eionet.eunis.dto.PictureDTO;
+import eionet.eunis.dto.SpeciesDistributionDTO;
 import eionet.eunis.dto.SpeciesFactsheetDto;
 import eionet.eunis.dto.SpeciesSynonymDto;
 import eionet.eunis.dto.VernacularNameDto;
+import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
 
 /**
@@ -66,12 +86,31 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 	//refered from name
 	private String referedFromName;
 
-	private String mainPictureFilename;
-
-	private String mainPictureMaxWidth;
-	private String mainPictureMaxHeight;
-	private String mainPictureDescription;
-	private String pictureSource;
+	//General tab variables
+	private PictureDTO pic;
+	private SpeciesNatureObjectPersist specie;
+	private List<ClassificationDTO> classifications;
+	private String authorDate;
+	private String gbifLink;
+    private String gbifLink2;
+    private String kingdomname;
+    private String redlistLink;
+    private String scientificNameURL;
+    private String speciesName;
+    private String wormsid;
+    private String faeu;
+    private String itisTSN;
+    private String ncbi;
+    private ArrayList<LinkDTO> links;
+    private List consStatus;
+    private List subSpecies;
+    private String domainName;
+    private String urlPic;
+	
+	//Grid distribution tab variables
+	private String gridImage;
+	private boolean gridDistSuccess;
+	private List<SpeciesDistributionDTO> speciesDistribution;
 
 	
 	@DefaultHandler
@@ -137,16 +176,15 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 					tabsWithData.add(new Pair<String, String>(allTypes[i][1], getContentManagement().cms(allTypes[i][0].toLowerCase())));
 				}
 			}
-			List<Chm62edtNatureObjectPicturePersist> pictures = new Chm62edtNatureObjectPictureDomain()
-					.findWhere("MAIN_PIC = 1 AND ID_OBJECT = " + mainIdSpecies );
-			if (pictures != null && !pictures.isEmpty()) {
-				mainPictureFilename = pictures.get(0).getFileName();
-
-				mainPictureMaxWidth = pictures.get(0).getMaxWidth().toString();
-				mainPictureMaxHeight = pictures.get(0).getMaxHeight().toString();
-				mainPictureDescription = pictures.get(0).getDescription();
-				pictureSource = pictures.get(0).getSource();
+			
+			if(tab != null && tab.equals("general")){
+				generalTabActions(mainIdSpecies);
 			}
+			
+			if(tab != null && tab.equals("grid")){
+				gridDistributionTabActions();
+			}
+			
 		} 
 		String eeaHome = getContext().getInitParameter("EEA_HOME");
 		String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,factsheet";
@@ -228,6 +266,221 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 			throw new RuntimeException(ignored);
 		}
 //		return new ErrorResolution(404);
+	}
+	
+	private void generalTabActions(int mainIdSpecies) {
+		
+		specie = factsheet.getSpeciesNatureObject();
+		consStatus = factsheet.getConservationStatus(factsheet.getSpeciesObject());
+		domainName = getContext().getInitParameter("DOMAIN_NAME");
+		urlPic="idobject=" + specie.getIdSpecies() + "&amp;natureobjecttype=Species";
+		
+		List<Chm62edtNatureObjectPicturePersist> pictures = new Chm62edtNatureObjectPictureDomain()
+		.findWhere("MAIN_PIC = 1 AND ID_OBJECT = " + mainIdSpecies );
+		if (pictures != null && !pictures.isEmpty()) {
+			String mainPictureMaxWidth = pictures.get(0).getMaxWidth().toString();
+			String mainPictureMaxHeight = pictures.get(0).getMaxHeight().toString();
+			Integer mainPictureMaxWidthInt = Utilities.checkedStringToInt(mainPictureMaxWidth, new Integer(0));
+			Integer mainPictureMaxHeightInt = Utilities.checkedStringToInt(mainPictureMaxHeight, new Integer(0));
+			
+			String styleAttr = "max-width:300px; max-height:400px;";
+			if(mainPictureMaxWidthInt != null && mainPictureMaxWidthInt.intValue() > 0 && mainPictureMaxHeightInt != null && mainPictureMaxHeightInt.intValue() > 0){
+				styleAttr = "max-width: "+mainPictureMaxWidthInt.intValue()+"px; max-height: "+mainPictureMaxHeightInt.intValue()+"px";
+			}
+			
+			String desc = pictures.get(0).getDescription();
+			if(desc == null || desc.equals(""))
+				desc = specie.getScientificName();
+			
+			String picturePath = getContext().getInitParameter("UPLOAD_DIR_PICTURES_SPECIES");
+			
+			pic = new PictureDTO();
+			pic.setFilename(pictures.get(0).getFileName());
+			pic.setDescription(desc);
+			pic.setSource(pictures.get(0).getSource());
+			pic.setStyle(styleAttr);
+			pic.setMaxwidth(mainPictureMaxWidth);
+			pic.setMaxheight(mainPictureMaxHeight);
+			pic.setPath(picturePath);
+			pic.setDomain(domainName);
+			pic.setUrl(urlPic);
+		}
+		
+		List list = new Vector<Chm62edtTaxcodePersist>();
+	    try{
+	    	list = new Chm62edtTaxcodeDomain().findWhere("ID_TAXONOMY = '" + specie.getIdTaxcode() + "'");
+	    
+		    authorDate = SpeciesFactsheet.getBookAuthorDate(factsheet.getTaxcodeObject().IdDcTaxcode());
+		    classifications = new ArrayList<ClassificationDTO>();
+		    if (list != null && list.size() > 0){
+		    	Chm62edtTaxcodePersist t = (Chm62edtTaxcodePersist) list.get(0);
+		    	String str = t.getTaxonomyTree();
+		    	StringTokenizer st = new StringTokenizer(str,",");
+		    	int i = 0;
+		    	while(st.hasMoreTokens()){
+		    		StringTokenizer sts = new StringTokenizer(st.nextToken(),"*");
+		    		String classification_id = sts.nextToken();
+		            String classification_level = sts.nextToken();
+		            String classification_name = sts.nextToken();
+		            
+		            if(classification_level.equalsIgnoreCase("kingdom"))
+		            	kingdomname = classification_name;
+	    		
+		    		ClassificationDTO classif = new ClassificationDTO();
+		    		classif.setId(classification_id);
+		    		classif.setLevel(classification_level);
+		    		classif.setName(classification_name);
+		    		classifications.add(classif);
+		    	}
+		    }
+		    
+		    gbifLink = factsheet.getLink(specie.getIdNatureObject(),Constants.SAME_SYNONYM_GBIF);//specie.getScientificName();
+		    gbifLink2 = specie.getScientificName();
+	      	gbifLink2 = gbifLink2.replaceAll( "\\.", "" );
+	      	gbifLink2 = URLEncoder.encode(gbifLink2,"UTF-8");
+	      	
+	      	String sn = scientificName;
+	        sn=sn.replaceAll("sp.","").replaceAll("ssp.","");
+	        
+	        if( kingdomname.equalsIgnoreCase( "Animalia" ) ) kingdomname = "Animals";
+	        if( kingdomname.equalsIgnoreCase( "Plantae" ) ) kingdomname = "Plants";
+	        if( kingdomname.equalsIgnoreCase( "Fungi" ) ) kingdomname = "Mushrooms";
+
+	        speciesName = (scientificName.trim().indexOf(" ")>=0? scientificName.trim().substring(scientificName.indexOf(" ") + 1) : scientificName);
+	        
+	        redlistLink = factsheet.getLink(specie.getIdNatureObject(),Constants.SAME_SPECIES_REDLIST);
+	        
+	        // List of species national threat status.
+	    	if( consStatus != null && consStatus.size() > 0 ) {
+	    		for (int i=0;i<consStatus.size();i++){
+	    			NationalThreatWrapper threat = (NationalThreatWrapper)consStatus.get(i);
+	    			if(threat.getReference() != null && threat.getReference().indexOf("IUCN")>=0){
+	    				scientificNameURL = scientificName.replace(' ','+');
+	    			}
+	    		}
+	    	}
+	    	
+	    	// World Register of Marine Species - also has seals etc.
+	    	wormsid = factsheet.getLink(specie.getIdNatureObject(),Constants.SAME_SYNONYM_WORMS);
+	    	
+	    	if(kingdomname.equalsIgnoreCase("Animals"))
+	    		faeu = factsheet.getLink(specie.getIdNatureObject(),Constants.SAME_SYNONYM_FAEU);
+	    	
+	    	itisTSN = factsheet.getLink(specie.getIdNatureObject(),Constants.SAME_SYNONYM_ITIS);
+	    	ncbi = factsheet.getLink(specie.getIdNatureObject(),Constants.SAME_SYNONYM_NCBI);
+	    	
+	    	String[][] linkTab = {
+	    		{Constants.ART17_SUMMARY,"Art. 17 summary"},
+	    		{Constants.BBC_PAGE,"BBC page"},
+	    		{Constants.BIOLIB_PAGE,"Biolib page"},
+	    		{Constants.BUG_GUIDE,"Bug Guide page"},
+	    		{Constants.WIKIPEDIA_ARTICLE,"Wikipedia article"},
+	    		{Constants.WIKISPECIES_ARTICLE,"Wikispecies article"}
+	    	};
+	    	String linkUrl;
+	    	links = new ArrayList<LinkDTO>();
+	    	for(String[] linkSet : linkTab) {
+	    		linkUrl = factsheet.getLink(specie.getIdNatureObject(), linkSet[0]);
+	    		if(linkUrl != null && linkUrl.length() > 0) {
+	    			LinkDTO linkDTO = new LinkDTO();
+	    			linkDTO.setName(linkSet[1]);
+	    			linkDTO.setUrl(linkUrl);
+	    			links.add(linkDTO);
+	        	}
+	    	}
+	    	
+	    	if( consStatus.size() > 0 ){
+	    		List<NationalThreatWrapper> newList = new ArrayList<NationalThreatWrapper>();
+	    		for (int i = 0; i < consStatus.size(); i++){
+	    			String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
+	    			NationalThreatWrapper threat = (NationalThreatWrapper)consStatus.get(i);
+	    			String statusDesc = factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode()).replaceAll("'"," ").replaceAll("\""," ");
+	    			threat.setStatusDesc(statusDesc);
+	    			newList.add(threat);
+	    		}
+	    		consStatus = newList;
+	    	}
+	    	
+	    	subSpecies = factsheet.getSubspecies();
+	    	if (!subSpecies.isEmpty()) {
+	    		List<SpeciesNatureObjectPersist> newList = new ArrayList<SpeciesNatureObjectPersist>();
+	    		for (int i = 0; i < subSpecies.size(); i++){
+	    			SpeciesNatureObjectPersist species = (SpeciesNatureObjectPersist)subSpecies.get(i);
+	    			String bad = SpeciesFactsheet.getBookAuthorDate(species.getIdDublinCore());
+	    			if(bad != null)
+	    				species.setBookAuthorDate(bad);
+	    			newList.add(species);
+	    		}
+	    		subSpecies = newList;
+	    	}
+	    	
+	    } catch (Exception ex) {
+	    	ex.printStackTrace();
+	    }
+	}
+	
+	private void gridDistributionTabActions() {
+		
+		speciesDistribution = new ArrayList<SpeciesDistributionDTO>();
+		
+		DistributionWrapper dist = new DistributionWrapper(factsheet.getSpeciesNatureObject().getIdNatureObject());
+		List d = dist.getDistribution();
+		if (null != d && d.size() > 0){
+			String filename = getContext().getRequest().getSession().getId() + "_" + new Date().getTime() + "_europe.jpg";
+			String tempDir = getContext().getInitParameter( "TEMP_DIR" );
+		    String inputFilename = getContext().getServletContext().getRealPath("/") + "gis/europe-bio.jpg";
+		    gridImage = tempDir + filename;
+		    String outputFilename = getContext().getServletContext().getRealPath("/") + gridImage;
+
+		    gridDistSuccess = false;
+		    try {
+		    	ImageProcessing img = new ImageProcessing( inputFilename, outputFilename );
+		    	img.init();
+		    	for (int i = 0; i < d.size(); i += 2){
+		    		ReportsDistributionStatusPersist dis;
+		    		if ( i < d.size() - 1 ){
+		    			dis = ( ReportsDistributionStatusPersist ) d.get( i + 1 );
+		    			if(dis.getLatitude() != null && dis.getLongitude() != null && dis.getLatitude().doubleValue() != 0 && dis.getLongitude().doubleValue() != 0){
+		    				double longitude = dis.getLongitude().doubleValue();
+		    				double latitude = dis.getLatitude().doubleValue();
+		    				int x;
+		    				int y;
+		    				//WEST +15
+		    				//EAST +44
+		    				//NORTH +73
+		    				//SOUTH +34
+		    				//PIC SIZE: 616 x 407
+		    				//the map goes from -15 to 44 in longitude
+		    				x = ( int ) ( ( 616 * 15 ) / 59 + ( ( longitude * 616 ) / 59 ) );
+		    				//the map goes from 34 to 73 in latitude
+		    				y = ( int ) ( 407 - ( ( ( ( latitude - 34 ) * 407 ) / 39 ) ) );
+		    				int radius = 4;
+		    				img.drawPoint( x, y, Color.RED, radius );
+		    			}
+		    		}
+		    	}
+		    	img.save();
+		    	gridDistSuccess = true;
+		    } catch( Throwable ex ) {
+		    	gridDistSuccess = false;
+		    	ex.printStackTrace();
+		    }
+		    
+		    for (int i = 0; i < d.size(); i += 2){
+		    	SpeciesDistributionDTO gridDTO = new SpeciesDistributionDTO();
+		    	
+		        ReportsDistributionStatusPersist dis = (ReportsDistributionStatusPersist) d.get(i);
+		        gridDTO.setName(dis.getIdLookupGrid());
+		        gridDTO.setStatus(dis.getDistributionStatus());
+		        gridDTO.setReference(dis.getIdDc().toString());
+		        if (i < d.size() - 1){
+		        	dis = (ReportsDistributionStatusPersist) d.get(i+1);
+		        	gridDTO.setLongitude(dis.getLongitude().toString());
+		        	gridDTO.setLatitude(dis.getLatitude().toString());
+		        }
+		        speciesDistribution.add(gridDTO);
+		    }
+		}
 	}
 
 	/**
@@ -316,25 +569,173 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 		return author;
 	}
 
-	public String getMainPictureFilename() {
-		return mainPictureFilename;
+	public boolean isGridDistSuccess() {
+		return gridDistSuccess;
 	}
 
-
-	public String getMainPictureMaxWidth() {
-		return mainPictureMaxWidth;
+	public void setGridDistSuccess(boolean gridDistSuccess) {
+		this.gridDistSuccess = gridDistSuccess;
 	}
 
-	public String getMainPictureMaxHeight() {
-		return mainPictureMaxHeight;
+	public List<SpeciesDistributionDTO> getSpeciesDistribution() {
+		return speciesDistribution;
 	}
-	
-	public String getPictureSource() {
-		return pictureSource;
+
+	public String getGridImage() {
+		return gridImage;
 	}
-	
-	public String getMainPictureDescription() {
-		return mainPictureDescription;
+
+	public PictureDTO getPic() {
+		return pic;
 	}
+
+	public void setPic(PictureDTO pic) {
+		this.pic = pic;
+	}
+
+	public SpeciesNatureObjectPersist getSpecie() {
+		return specie;
+	}
+
+	public void setSpecie(SpeciesNatureObjectPersist specie) {
+		this.specie = specie;
+	}
+
+	public List<ClassificationDTO> getClassifications() {
+		return classifications;
+	}
+
+	public void setClassifications(List<ClassificationDTO> classifications) {
+		this.classifications = classifications;
+	}
+
+	public String getAuthorDate() {
+		return authorDate;
+	}
+
+	public void setAuthorDate(String authorDate) {
+		this.authorDate = authorDate;
+	}
+
+	public String getGbifLink() {
+		return gbifLink;
+	}
+
+	public void setGbifLink(String gbifLink) {
+		this.gbifLink = gbifLink;
+	}
+
+	public String getGbifLink2() {
+		return gbifLink2;
+	}
+
+	public void setGbifLink2(String gbifLink2) {
+		this.gbifLink2 = gbifLink2;
+	}
+
+	public String getKingdomname() {
+		return kingdomname;
+	}
+
+	public void setKingdomname(String kingdomname) {
+		this.kingdomname = kingdomname;
+	}
+
+	public String getRedlistLink() {
+		return redlistLink;
+	}
+
+	public void setRedlistLink(String redlistLink) {
+		this.redlistLink = redlistLink;
+	}
+
+	public String getScientificNameURL() {
+		return scientificNameURL;
+	}
+
+	public void setScientificNameURL(String scientificNameURL) {
+		this.scientificNameURL = scientificNameURL;
+	}
+
+	public String getSpeciesName() {
+		return speciesName;
+	}
+
+	public void setSpeciesName(String speciesName) {
+		this.speciesName = speciesName;
+	}
+
+	public String getWormsid() {
+		return wormsid;
+	}
+
+	public void setWormsid(String wormsid) {
+		this.wormsid = wormsid;
+	}
+
+	public String getFaeu() {
+		return faeu;
+	}
+
+	public void setFaeu(String faeu) {
+		this.faeu = faeu;
+	}
+
+	public String getItisTSN() {
+		return itisTSN;
+	}
+
+	public void setItisTSN(String itisTSN) {
+		this.itisTSN = itisTSN;
+	}
+
+	public String getNcbi() {
+		return ncbi;
+	}
+
+	public void setNcbi(String ncbi) {
+		this.ncbi = ncbi;
+	}
+
+	public ArrayList<LinkDTO> getLinks() {
+		return links;
+	}
+
+	public void setLinks(ArrayList<LinkDTO> links) {
+		this.links = links;
+	}
+
+	public List getConsStatus() {
+		return consStatus;
+	}
+
+	public void setConsStatus(List consStatus) {
+		this.consStatus = consStatus;
+	}
+
+	public List getSubSpecies() {
+		return subSpecies;
+	}
+
+	public void setSubSpecies(List subSpecies) {
+		this.subSpecies = subSpecies;
+	}
+
+	public String getDomainName() {
+		return domainName;
+	}
+
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
+	}
+
+	public String getUrlPic() {
+		return urlPic;
+	}
+
+	public void setUrlPic(String urlPic) {
+		this.urlPic = urlPic;
+	}
+
 
 }

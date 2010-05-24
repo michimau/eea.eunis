@@ -84,14 +84,7 @@
 		                <br />
 		                <c:if test="${actionBean.tab == 'general'}">
 		                	<%-- General information--%>
-			                <jsp:include page="/species-factsheet-general.jsp">
-			                  <jsp:param name="mainIdSpecies" value="${actionBean.factsheet.idSpecies}" />
-			                  <jsp:param name="mainPictureFilename" value="${actionBean.mainPictureFilename}" />
-			                  <jsp:param name="mainPictureMaxWidth" value="${actionBean.mainPictureMaxWidth}" />
-			                  <jsp:param name="mainPictureMaxHeight" value="${actionBean.mainPictureMaxHeight}" />
-			                  <jsp:param name="mainPictureDescription" value="${actionBean.mainPictureDescription}" />
-			                  <jsp:param name="pictureSource" value="${actionBean.pictureSource}" />
-			                </jsp:include>
+			                <stripes:layout-render name="/stripes/species-factsheet-general.jsp"/>
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'vernacular'}">
 		                	<%-- Vernacular names tab --%>
@@ -132,11 +125,7 @@
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'grid'}">
 		                	<%-- Grid distribution --%>
-			                <jsp:include page="/species-factsheet-distribution.jsp">
-			                  <jsp:param name="name" value="${actionBean.scientificName}" />
-			                  <jsp:param name="idNatureObject" value="${actionBean.factsheet.speciesNatureObject.idNatureObject}" />
-			                  <jsp:param name="kmlUrl" value="${pageContext.request.contextPath}/species-factsheet-distribution-kml.jsp?idSpecies=${actionBean.factsheet.idSpecies}&amp;idSpeciesLink=${actionBean.factsheet.idSpeciesLink}" />
-			                </jsp:include>
+			                <stripes:layout-render name="/stripes/species-factsheet-distribution.jsp"/>
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'legal'}">
 		                	<%-- Legal instruments --%>

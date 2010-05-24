@@ -150,4 +150,53 @@
 			${translateSourceDB("CDDA_NATIONAL")}
 		</example>
 	</function>
+	
+	<function>
+		<description>
+			Replace characters having special meaning inside HTML tags with their escaped equivalents, using character entities.
+	 	</description>
+		<name>treatURLSpecialCharacters</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>java.lang.String treatURLSpecialCharacters(java.lang.String)</function-signature>
+		<example>
+			${treatURLSpecialCharacters("xxx")}
+		</example>
+	</function>
+	
+	<function>
+		<description>
+			This method formats the area field from the sites module which is displayed within HTML result pages.
+	 	</description>
+		<name>formatArea</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>java.lang.String formatArea(java.lang.String, int, int, java.lang.String)</function-signature>
+		<example>
+			${formatArea("-1.9999", 4, 4," ")}
+		</example>
+	</function>
+	
+	<function>
+		<description>
+			Find a reference by an idDc and return a vector with two elements , first element contains author of that
+	   		reference and second element contains url of reference.
+	 	</description>
+		<name>getAuthorAndUrlByIdDc</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>java.lang.String getAuthorAndUrlByIdDc(java.lang.String)</function-signature>
+		<example>
+			${getAuthorAndUrlByIdDc("154")}
+		</example>
+	</function>
+	
+	<function>
+		<description>
+			Replace part of string
+	 	</description>
+		<name>replaceAll</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>java.lang.String replaceAll(java.lang.String,java.lang.String,java.lang.String)</function-signature>
+		<example>
+			${replaceAll("xxx.yyy","."," ")}
+		</example>
+	</function>
 </taglib>

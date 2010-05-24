@@ -18,6 +18,7 @@
                  ro.finsiel.eunis.jrfTables.habitats.factsheet.OtherClassificationPersist,
                  ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist,
                  ro.finsiel.eunis.search.Utilities,
+                 eionet.eunis.util.Constants,
                  java.util.List"%>
 <%@ page import="java.util.Vector"%>
 
@@ -263,6 +264,25 @@
       }
     }
   }
+%>
+  	<h2><%=cm.cmsPhrase("External links")%></h2>
+	<div id="linkcollection">
+		<div>
+	        <a title="<%=cm.cmsPhrase("Search on Google")%>" href="http://www.google.com/search?q=<%=factsheet.getHabitat().getScientificName()%>"><%=cm.cmsPhrase("Search on Google")%></a>
+		</div>
+<%
+	String art17 = factsheet.getLink(factsheet.idNatureObject, Constants.ART17_SUMMARY);
+	if(art17 != null && art17.length() > 0){
+%>
+		<div>
+			<a href="<%=art17%>" title="Article 17 Summary"><%=cm.cmsPhrase("Article 17 Summary")%></a>
+		</div>
+<%
+	}
+%>
+	</div>
+<%
+
 
   // List of habitats inernationals names.
   List names = factsheet.getInternationalNames();

@@ -2105,4 +2105,22 @@ public class HabitatsFactsheet {
   public Chm62edtHabitatPersist getHabitat() {
     return habitat;
   }
+  
+  /**
+   * Returns link to outside sources if one exists
+   * @param nauture object ID, outside source name
+   * @return link URL
+   */
+  public String getLink(Integer nature_object_id, String link_name){
+	  String link = null;
+	  List links = new Chm62edtNatureObjectAttributesDomain().findWhere("ID_NATURE_OBJECT="+nature_object_id+" AND NAME='"+link_name+"'");
+	  if(links != null){
+		  for(Object link1 : links){
+			  Chm62edtNatureObjectAttributesPersist linkob = (Chm62edtNatureObjectAttributesPersist) link1;
+			  if(linkob != null)
+				  link = linkob.getObject();
+		  }
+	  }
+	  return link;
+  }
 }

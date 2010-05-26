@@ -1,6 +1,8 @@
 package eionet.eunis.util;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Vector;
 
@@ -125,6 +127,20 @@ public class JstlFunctions {
 		}
 		return cms != null
 				? cms.cmsMsg(key)
+				: key;
+	}
+	
+	/**
+	 * @param cms
+	 * @param key
+	 * @return
+	 */
+	public static String cmsAlt(WebContentManagement cms, String key ) {
+		if(key == null) { 
+			throw new NullPointerException("key cannot be null");
+		}
+		return cms != null
+				? cms.cmsAlt(key)
 				: key;
 	}
 
@@ -255,18 +271,14 @@ public class JstlFunctions {
 	   */
 	public static String getAuthorAndUrlByIdDc( String idDc ) {
 	    String author = "";
-	    try
-	    {
-	      List references = new ReferencesJoinDomain().findWhere( "DC_INDEX.ID_DC = " + idDc );
-	      if ( references != null && references.size() > 0 )
-	      {
-	        author = ( ( ( ReferencesJoinPersist ) references.get( 0 ) ).getSource() == null ? "" : ( ( ReferencesJoinPersist ) references.get( 0 ) ).getSource() );
-	        author = treatURLSpecialCharacters(author);
-	      }
-	    }
-	    catch ( Exception ex )
-	    {
-	      ex.printStackTrace();
+	    try {
+	    	List references = new ReferencesJoinDomain().findWhere( "DC_INDEX.ID_DC = " + idDc );
+	    	if ( references != null && references.size() > 0 ){
+	    		author = ( ( ( ReferencesJoinPersist ) references.get( 0 ) ).getSource() == null ? "" : ( ( ReferencesJoinPersist ) references.get( 0 ) ).getSource() );
+	    		author = treatURLSpecialCharacters(author);
+	    	}
+	    } catch ( Exception ex ) {
+	    	ex.printStackTrace();
 	    }
 	    return author;
 	}
@@ -280,6 +292,36 @@ public class JstlFunctions {
 	public static String replaceAll( String input, String what, String replacement ) {
 		return input.replaceAll(what, replacement);
 	}
-
+	
+	/**
+	   *
+	   * @param input the input string
+	   */
+	public static String encode( String input ) {
+		String ret = "";
+		try{
+			ret = URLEncoder.encode(input,"UTF-8");
+		} catch(UnsupportedEncodingException e) {
+			logger.error(e);
+			e.printStackTrace();
+		}
+		return ret;
+	}
+	
+	/**
+	   *
+	   * @param input 
+	   */
+	public static boolean isCountry( String countryName ) {
+		return Utilities.isCountry(countryName);
+	}
+	
+	/**
+	   *
+	   * @param input the input string
+	   */
+	public static String getReferencesByIdDc( String idDc ) {
+		return Utilities.getReferencesByIdDc(idDc);
+	}
 
 }

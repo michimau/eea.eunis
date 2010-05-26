@@ -88,19 +88,11 @@
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'vernacular'}">
 		                	<%-- Vernacular names tab --%>
-			                <jsp:include page="/species-factsheet-vern.jsp">
-			                  <jsp:param name="name" value="${actionBean.scientificName}" />
-			                  <jsp:param name="mainIdSpecies" value="${actionBean.factsheet.idSpecies}" />
-			                  <jsp:param name="idNatureObject" value="${actionBean.factsheet.speciesNatureObject.idNatureObject}" />
-			                </jsp:include>
+		                	<stripes:layout-render name="/stripes/species-factsheet-vern.jsp"/>
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'countries'}">
 		                	<%-- Geographical distribution --%>
-			                <jsp:include page="/species-factsheet-geo.jsp">
-			                  <jsp:param name="name" value="${actionBean.scientificName}" />
-			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
-			                  <jsp:param name="idNatureObject" value="${actionBean.factsheet.speciesNatureObject.idNatureObject}" />
-			                </jsp:include>
+		                	<stripes:layout-render name="/stripes/species-factsheet-geo.jsp"/>
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'population'}">
 		                	<%-- Population --%>
@@ -147,10 +139,7 @@
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'gbif'}">
 		                	<%-- GBIF observations --%>
-			                <jsp:include page="/species-factsheet-gbif.jsp">
-			                  <jsp:param name="scientificName" value="${actionBean.scientificName}" />
-			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.idSpecies}" />
-			                </jsp:include>
+		                	<stripes:layout-render name="/stripes/species-factsheet-gbif.jsp"/>
 		                </c:if>
 			</c:when>
 			<c:otherwise>

@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
@@ -26,8 +27,11 @@ import org.simpleframework.xml.stream.Format;
 import com.ibm.icu.util.StringTokenizer;
 
 import ro.finsiel.eunis.ImageProcessing;
+import ro.finsiel.eunis.factsheet.species.GeographicalStatusWrapper;
 import ro.finsiel.eunis.factsheet.species.NationalThreatWrapper;
 import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
+import ro.finsiel.eunis.factsheet.species.ThreatColor;
+import ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
 import ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist;
@@ -35,6 +39,7 @@ import ro.finsiel.eunis.jrfTables.species.factsheet.DistributionWrapper;
 import ro.finsiel.eunis.jrfTables.species.factsheet.ReportsDistributionStatusPersist;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist;
+import ro.finsiel.eunis.search.UniqueVector;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
@@ -106,6 +111,19 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
     private List subSpecies;
     private String domainName;
     private String urlPic;
+    
+    //Vernacular names tab variables
+    private List<VernacularNameWrapper> vernNames;
+    
+    
+    //countries tab variables
+    private Vector<GeographicalStatusWrapper> bioRegions;
+    boolean showGeoDistribution = false;
+    private String filename;
+    private UniqueVector colorURL;
+    private String mapserverURL;
+    private String parameters;
+    private Hashtable statusColorPair;
 	
 	//Grid distribution tab variables
 	private String gridImage;
@@ -177,8 +195,19 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 				}
 			}
 			
+			specie = factsheet.getSpeciesNatureObject();
+			domainName = getContext().getInitParameter("DOMAIN_NAME");
+			
 			if(tab != null && tab.equals("general")){
 				generalTabActions(mainIdSpecies);
+			}
+			
+			if(tab != null && tab.equals("vernacular")){
+				vernNames = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
+			}
+			
+			if(tab != null && tab.equals("countries")){
+				geoTabActions();
 			}
 			
 			if(tab != null && tab.equals("grid")){
@@ -270,9 +299,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 	
 	private void generalTabActions(int mainIdSpecies) {
 		
-		specie = factsheet.getSpeciesNatureObject();
 		consStatus = factsheet.getConservationStatus(factsheet.getSpeciesObject());
-		domainName = getContext().getInitParameter("DOMAIN_NAME");
 		urlPic="idobject=" + specie.getIdSpecies() + "&amp;natureobjecttype=Species";
 		
 		List<Chm62edtNatureObjectPicturePersist> pictures = new Chm62edtNatureObjectPictureDomain()
@@ -417,6 +444,47 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 	    } catch (Exception ex) {
 	    	ex.printStackTrace();
 	    }
+	}
+	
+	private void geoTabActions() {
+		bioRegions = SpeciesFactsheet.getBioRegionIterator(specie.getIdNatureObject(), factsheet.getIdSpecies() );
+		if( bioRegions.size() > 0 ){
+			// Display map
+		    colorURL = new UniqueVector();
+		    UniqueVector statuses = new UniqueVector();
+		    // Get all distinct statuses
+		    for (int i = 0;  i < bioRegions.size(); i++){
+		    	GeographicalStatusWrapper aRow = ( GeographicalStatusWrapper )bioRegions.get(i);
+		    	statuses.addElement( aRow.getStatus() );
+		    }
+		    // Compute distinct color for each status
+		    statusColorPair = ThreatColor.getColorsForMap(statuses);
+		    Vector addedCountries = new Vector();
+		    //fix to display in map legend only visible colours
+		    statuses.clear();
+		    for ( int i = 0; i < bioRegions.size(); i++ ){
+		    	GeographicalStatusWrapper aRow = (GeographicalStatusWrapper)bioRegions.get(i);
+		    	Chm62edtCountryPersist cntry = aRow.getCountry();
+		    	if ( cntry != null && !addedCountries.contains( cntry.getAreaNameEnglish() ) ){
+		    		String color = ":H" + (String)statusColorPair.get(aRow.getStatus().toLowerCase());
+		    		String countryColPair = (cntry.getIso2Wcmc()==null)?cntry.getIso2l():cntry.getIso2Wcmc() + color;
+		    		colorURL.addElement(countryColPair);
+		    		addedCountries.add(  cntry.getAreaNameEnglish() );
+		    		//	fix to display in map legend only visible colours
+		    		statuses.addElement( aRow.getStatus() );
+		    	}
+		    }
+		    //fix to display in map legend only visible colours
+		    statusColorPair = ThreatColor.getColorsForMap(statuses);
+		    
+		    int COUNTRIES_PER_MAP = Utilities.checkedStringToInt( getContext().getInitParameter( "COUNTRIES_PER_MAP" ), 120 );
+		    if ( addedCountries.size() < COUNTRIES_PER_MAP ){
+		    	showGeoDistribution = true;
+		    	mapserverURL = getContext().getInitParameter("EEA_MAP_SERVER");
+		    	parameters = "mapType=Standard_B&amp;Q=" + colorURL.getElementsSeparatedByComma() + "&amp;outline=1";
+		    	filename = mapserverURL + "/getmap.asp?" + parameters;
+		    }
+		}
 	}
 	
 	private void gridDistributionTabActions() {
@@ -735,6 +803,70 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 
 	public void setUrlPic(String urlPic) {
 		this.urlPic = urlPic;
+	}
+
+	public Vector<GeographicalStatusWrapper> getBioRegions() {
+		return bioRegions;
+	}
+
+	public void setBioRegions(Vector<GeographicalStatusWrapper> bioRegions) {
+		this.bioRegions = bioRegions;
+	}
+
+	public boolean isShowGeoDistribution() {
+		return showGeoDistribution;
+	}
+
+	public void setShowGeoDistribution(boolean showGeoDistribution) {
+		this.showGeoDistribution = showGeoDistribution;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public UniqueVector getColorURL() {
+		return colorURL;
+	}
+
+	public void setColorURL(UniqueVector colorURL) {
+		this.colorURL = colorURL;
+	}
+
+	public String getMapserverURL() {
+		return mapserverURL;
+	}
+
+	public void setMapserverURL(String mapserverURL) {
+		this.mapserverURL = mapserverURL;
+	}
+
+	public String getParameters() {
+		return parameters;
+	}
+
+	public void setParameters(String parameters) {
+		this.parameters = parameters;
+	}
+
+	public Hashtable getStatusColorPair() {
+		return statusColorPair;
+	}
+
+	public void setStatusColorPair(Hashtable statusColorPair) {
+		this.statusColorPair = statusColorPair;
+	}
+
+	public List<VernacularNameWrapper> getVernNames() {
+		return vernNames;
+	}
+
+	public void setVernNames(List<VernacularNameWrapper> vernNames) {
+		this.vernNames = vernNames;
 	}
 
 

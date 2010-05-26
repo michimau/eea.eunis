@@ -80,6 +80,7 @@
 			${cmsInput(actionBean.webContent, text)}
 		</example>
 	</function>
+	
 	<function>
 		<description>Wrapper to call WebContentManagement.cmsLabel</description>
 		<name>cmsLabel</name>
@@ -87,6 +88,16 @@
 		<function-signature>String cmsLabel(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
 		<example>
 			${cmsLabel(actionBean.webContent, text)}
+		</example>
+	</function>
+	
+	<function>
+		<description>Wrapper to call WebContentManagement.cmsAlt</description>
+		<name>cmsAlt</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>String cmsAlt(ro.finsiel.eunis.WebContentManagement, java.lang.String)</function-signature>
+		<example>
+			${cmsAlt(actionBean.webContent, text)}
 		</example>
 	</function>
 	
@@ -190,6 +201,18 @@
 	
 	<function>
 		<description>
+			Find a reference by her idDc.
+	 	</description>
+		<name>getReferencesByIdDc</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>java.lang.String getReferencesByIdDc(java.lang.String)</function-signature>
+		<example>
+			${getReferencesByIdDc("154")}
+		</example>
+	</function>
+	
+	<function>
+		<description>
 			Replace part of string
 	 	</description>
 		<name>replaceAll</name>
@@ -197,6 +220,30 @@
 		<function-signature>java.lang.String replaceAll(java.lang.String,java.lang.String,java.lang.String)</function-signature>
 		<example>
 			${replaceAll("xxx.yyy","."," ")}
+		</example>
+	</function>
+	
+	<function>
+		<description>
+			Utility class for HTML form encoding.
+	 	</description>
+		<name>encode</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>java.lang.String encode(java.lang.String)</function-signature>
+		<example>
+			${encode("Canis lupus")}
+		</example>
+	</function>
+	
+	<function>
+		<description>
+			Utility class for checking if country exists.
+	 	</description>
+		<name>isCountry</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>boolean isCountry(java.lang.String)</function-signature>
+		<example>
+			${isCountry("Estonia")}
 		</example>
 	</function>
 </taglib>

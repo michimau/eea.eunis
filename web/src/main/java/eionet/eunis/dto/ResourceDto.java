@@ -25,6 +25,20 @@ public class ResourceDto implements Serializable{
 	private String id;
 	@Transient
 	private String prefix;
+	
+
+	public ResourceDto() {
+		//blank
+	}
+
+	/**
+	 * @param id
+	 * @param prefix
+	 */
+	public ResourceDto(String id, String prefix) {
+		this.id = id;
+		this.prefix = prefix;
+	}
 
 	/**
 	 * @return the id

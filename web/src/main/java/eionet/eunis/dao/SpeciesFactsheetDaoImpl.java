@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.utilities.SQLUtilities;
+import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.SpeciesAttributeDto;
 import eionet.eunis.dto.readers.SpeciesAttributeDTOReader;
 
@@ -102,6 +103,30 @@ public class SpeciesFactsheetDaoImpl extends BaseDaoImpl implements ISpeciesFact
 			utils.executeQuery(sql, params, attributeReader );
 			return attributeReader.getResultList();
 		} catch (SQLException ignored) {
+			logger.error(ignored);
+			throw new RuntimeException(ignored);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see eionet.eunis.dao.ISpeciesFactsheetDao#getExpectedInSiteIds(int, int)
+	 */
+	public List<String> getExpectedInSiteIds(int idSpecies, int limit) {
+		String sql = "SELECT DISTINCT ID_SITE FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE R " +
+		"INNER JOIN CHM62EDT_SITES S ON R.ID_NATURE_OBJECT=S.ID_NATURE_OBJECT " +
+		"WHERE ID_NATURE_OBJECT_LINK= ? ORDER BY ID_SITE ";
+
+		List<Object> params = new LinkedList<Object>();
+		params.add(idSpecies);
+
+		if (limit > 0) {
+			sql += " LIMIT ?";
+			params.add(limit);
+		}
+		SQLUtilities utils = getSqlUtils();
+		try {
+			return utils.executeQuery(sql, params);
+		} catch(SQLException ignored) {
 			logger.error(ignored);
 			throw new RuntimeException(ignored);
 		}

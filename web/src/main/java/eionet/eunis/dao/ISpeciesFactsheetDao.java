@@ -2,6 +2,7 @@ package eionet.eunis.dao;
 
 import java.util.List;
 
+import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.SpeciesAttributeDto;
 import eionet.eunis.stripes.actions.SpeciesFactsheetActionBean;
 
@@ -53,5 +54,14 @@ public interface ISpeciesFactsheetDao {
 	 * @return
 	 */
 	List<SpeciesAttributeDto> getAttributesForNatureObject(int idNatureObject);
+	
+	/**
+	 * for given species returns the list of site id locations where it can be expected.
+	 * 
+	 * @param idSpecies species id
+	 * @param limit - limit the number of returned results
+	 * @return ID_SITE locations
+	 */
+	List<String> getExpectedInSiteIds(int idSpecies, int limit);
 
 }

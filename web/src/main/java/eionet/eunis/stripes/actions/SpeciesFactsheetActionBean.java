@@ -47,6 +47,7 @@ import ro.finsiel.eunis.utilities.SQLUtilities;
 import eionet.eunis.dto.ClassificationDTO;
 import eionet.eunis.dto.LinkDTO;
 import eionet.eunis.dto.PictureDTO;
+import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.SpeciesDistributionDTO;
 import eionet.eunis.dto.SpeciesFactsheetDto;
 import eionet.eunis.dto.SpeciesSynonymDto;
@@ -75,6 +76,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 		{"HABITATS","habitats"},
 		{"SITES","sites"},
 		{"GBIF","gbif"}};
+
+	private static final String EXPECTED_IN_PREFIX = "http://eunis.eea.europa.eu/sites/";
 
 	private String idSpecies;
 	private int idSpeciesLink;
@@ -242,7 +245,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 			return new ErrorResolution(404);
 		}
 		
-		Persister persister = new Persister(new AnnotationStrategy(), new Format(4));
+		Persister persister = new Persister(new Format(4));
 		
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 		SpeciesFactsheetDto dto = new SpeciesFactsheetDto();
@@ -255,6 +258,18 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 		dto.setAttributes(
 				getContext().getSpeciesFactsheetDao().getAttributesForNatureObject(
 						factsheet.getSpeciesObject().getIdNatureObject()));
+		
+		//setting expectedInLocations
+		List<String> expectedLocations = getContext().getSpeciesFactsheetDao().getExpectedInSiteIds(
+				factsheet.getSpeciesObject().getIdSpecies(),
+				0);
+		if (expectedLocations != null && !expectedLocations.isEmpty()) {
+			List<ResourceDto> expectedInSites = new LinkedList<ResourceDto>();
+			for(String siteId : expectedLocations) {
+				expectedInSites.add(new ResourceDto(siteId, EXPECTED_IN_PREFIX));
+			}
+			dto.setExpectedInLocations(expectedInSites);
+		}
 		
 		List<VernacularNameWrapper> vernacularNames = SpeciesSearchUtility.findVernacularNames(
 						factsheet.getSpeciesObject().getIdNatureObject());

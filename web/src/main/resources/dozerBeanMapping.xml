@@ -16,10 +16,6 @@
     	<b>idDesignation.id</b>
     </field>
     <field>
-    	<a>IDNatureObject</a>
-    	<b>idNatureObject</b>
-    </field>
-    <field>
     	<a>idDc</a>
     	<b>idDc.id</b>
     </field>
@@ -118,38 +114,6 @@
     <field>
     	<a>siteObject.length</a>
     	<b>length</b>
-    </field>
-    <field>
-    	<a>siteObject.longEW</a>
-    	<b>longEw</b>
-    </field>
-    <field>
-    	<a>siteObject.longDeg</a>
-    	<b>longDeg</b>
-    </field>
-    <field>
-    	<a>siteObject.longMin</a>
-    	<b>longMin</b>
-    </field>
-    <field>
-    	<a>siteObject.longSec</a>
-    	<b>longSec</b>
-    </field>
-    <field>
-    	<a>siteObject.latNS</a>
-    	<b>latNs</b>
-    </field>
-    <field>
-    	<a>siteObject.latDeg</a>
-    	<b>latDeg</b>
-    </field>
-    <field>
-    	<a>siteObject.latMin</a>
-    	<b>latMin</b>
-    </field>
-    <field>
-    	<a>siteObject.latSec</a>
-    	<b>latSec</b>
     </field>
     <field>
     	<a>siteObject.altMean</a>

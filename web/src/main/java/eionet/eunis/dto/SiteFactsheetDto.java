@@ -29,8 +29,6 @@ public class SiteFactsheetDto implements Serializable {
 	@Element(required = false)
 	private String idSite;
 	@Element(required = false)
-	private String idNatureObject;
-	@Element(required = false)
 	private String designation;
 	@Element(required = false)
 	private String respondent;
@@ -79,22 +77,6 @@ public class SiteFactsheetDto implements Serializable {
 	@Element(required = false)
 	private String length;
 	@Element(required = false)
-	private String longEw;
-	@Element(required = false)
-	private String longDeg;
-	@Element(required = false)
-	private String longMin;
-	@Element(required = false)
-	private String longSec;
-	@Element(required = false)
-	private String latNs;
-	@Element(required = false)
-	private String latDeg;
-	@Element(required = false)
-	private String latMin;
-	@Element(required = false)
-	private String latSec;
-	@Element(required = false)
 	private String altMean;
 	@Element(required = false)
 	private String altMax;
@@ -127,20 +109,6 @@ public class SiteFactsheetDto implements Serializable {
 	 */
 	public void setIdSite(String idsite) {
 		this.idSite = idsite;
-	}
-
-	/**
-	 * @return the idNatureObject
-	 */
-	public String getIdNatureObject() {
-		return idNatureObject;
-	}
-
-	/**
-	 * @param idNatureObject the idNatureObject to set
-	 */
-	public void setIdNatureObject(String idNatureObject) {
-		this.idNatureObject = idNatureObject;
 	}
 
 	/**
@@ -477,118 +445,6 @@ public class SiteFactsheetDto implements Serializable {
 	 */
 	public void setLength(String length) {
 		this.length = length;
-	}
-
-	/**
-	 * @return the longEw
-	 */
-	public String getLongEw() {
-		return longEw;
-	}
-
-	/**
-	 * @param longEw the longEw to set
-	 */
-	public void setLongEw(String longEw) {
-		this.longEw = longEw;
-	}
-
-	/**
-	 * @return the longDeg
-	 */
-	public String getLongDeg() {
-		return longDeg;
-	}
-
-	/**
-	 * @param longDeg the longDeg to set
-	 */
-	public void setLongDeg(String longDeg) {
-		this.longDeg = longDeg;
-	}
-
-	/**
-	 * @return the longMin
-	 */
-	public String getLongMin() {
-		return longMin;
-	}
-
-	/**
-	 * @param longMin the longMin to set
-	 */
-	public void setLongMin(String longMin) {
-		this.longMin = longMin;
-	}
-
-	/**
-	 * @return the longSec
-	 */
-	public String getLongSec() {
-		return longSec;
-	}
-
-	/**
-	 * @param longSec the longSec to set
-	 */
-	public void setLongSec(String longSec) {
-		this.longSec = longSec;
-	}
-
-	/**
-	 * @return the latNs
-	 */
-	public String getLatNs() {
-		return latNs;
-	}
-
-	/**
-	 * @param latNs the latNs to set
-	 */
-	public void setLatNs(String latNs) {
-		this.latNs = latNs;
-	}
-
-	/**
-	 * @return the latDeg
-	 */
-	public String getLatDeg() {
-		return latDeg;
-	}
-
-	/**
-	 * @param latDeg the latDeg to set
-	 */
-	public void setLatDeg(String latDeg) {
-		this.latDeg = latDeg;
-	}
-
-	/**
-	 * @return the latMin
-	 */
-	public String getLatMin() {
-		return latMin;
-	}
-
-	/**
-	 * @param latMin the latMin to set
-	 */
-	public void setLatMin(String latMin) {
-		this.latMin = latMin;
-	}
-
-	/**
-	 * @return the latSec
-	 */
-	public String getLatSec() {
-		return latSec;
-	}
-
-	/**
-	 * @param latSec the latSec to set
-	 */
-	public void setLatSec(String latSec) {
-		this.latSec = latSec;
 	}
 
 	/**

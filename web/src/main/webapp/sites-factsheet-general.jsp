@@ -62,14 +62,15 @@
 		    <a href="javascript:openpictures('<%=domainName%>/pictures.jsp?<%=picsURL%>',600,600)">
 		    <img src="<%=mainPictureId %>" alt="<%=pictureDescription %>" class="scaled" style="<%=styleAttr%>"/>
 		    </a>
-		    <% if(source != null && source.length() > 0){%>
-		    	<br/>
-		    	<%=cm.cmsPhrase("Source")%>: <%=source%>
-		    <%}%>
 	    </div>
 	    <div class="naturepic-note">
 	      <%=pictureDescription %>
 	    </div>
+	    <% if(source != null && source.length() > 0){%>
+	      <div class="naturepic-source-copyright">
+		<%=cm.cmsPhrase("Source")%>: <%=source%>
+	      </div>
+	    <%}%>
 	  </div>
   </div>
 <% } %>

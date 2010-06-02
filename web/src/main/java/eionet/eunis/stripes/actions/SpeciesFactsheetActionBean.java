@@ -415,7 +415,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 	    	String[][] linkTab = {
 	    		{Constants.ART17_SUMMARY,"Art. 17 summary"},
 	    		{Constants.BBC_PAGE,"BBC page"},
-	    		{Constants.BIOLIB_PAGE,"Biolib page"},
+//	    		{Constants.BIOLIB_PAGE,"Biolib page"},
 	    		{Constants.BUG_GUIDE,"Bug Guide page"},
 	    		{Constants.WIKIPEDIA_ARTICLE,"Wikipedia article"},
 	    		{Constants.WIKISPECIES_ARTICLE,"Wikispecies article"}

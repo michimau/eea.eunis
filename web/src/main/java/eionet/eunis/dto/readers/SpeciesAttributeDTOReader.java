@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import ro.finsiel.eunis.utilities.ResultSetBaseReader;
 import eionet.eunis.dto.SpeciesAttributeDto;
 
@@ -20,11 +22,17 @@ public class SpeciesAttributeDTOReader extends ResultSetBaseReader<SpeciesAttrib
 	private List<SpeciesAttributeDto> results = new LinkedList<SpeciesAttributeDto>();
 
 	public void readRow(ResultSet rs) throws SQLException {
+		String name = rs.getString("NAME");
+		String object = rs.getString("OBJECT");
+		Boolean litObject = rs.getBoolean("LITOBJECT");
+		if (StringUtils.isBlank(name)) {
+			return;
+		}
 		results.add(
 				new SpeciesAttributeDto(
-						rs.getString("NAME"),
-						rs.getBoolean("LITOBJECT"),
-						rs.getString("OBJECT")));
+						name,
+						litObject,
+						object));
 	}
 
 	public List<SpeciesAttributeDto> getResultList() {

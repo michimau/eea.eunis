@@ -34,22 +34,31 @@ public class SpeciesFactsheetDto implements Serializable{
 	
 	@Element(required = false, name = "binomialName")
 	private String scientificName;
+	
 	@Element(required = false, name = "dwc:scientificNameAuthorship")
 	private String author;
+	
 	@Element(required = false, name = "dwc:genus")
 	private String genus;
+	
 	@Element(required = false, name = "dwc:scientificName")
 	private String dwcScientificName;
+	
 	@ElementList(required = false, type = VernacularNameDto.class, inline = true)
 	private List<VernacularNameDto> vernacularNames;
+	
 	@Element(required = false, name = "synonymFor")
 	private SpeciesSynonymDto synonymFor;
+	
 	@ElementList(required = false, inline = true, entry = "hasSynonym")
 	private List<SpeciesSynonymDto> hasSynonyms;
-	@ElementList(required = false, inline = true)
-	private List<SpeciesAttributeDto> attributes;
+
 	@ElementList(required = false, inline = true, entry = "isExpectedIn")
 	private List<ResourceDto> expectedInLocations;
+	
+	@ElementList(required = false, inline = true)
+	private List<SpeciesAttributeDto> attributes;
+	
 
 	private int speciesId;
 	

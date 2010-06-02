@@ -20,11 +20,8 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
-import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.stream.Format;
-
-import com.ibm.icu.util.StringTokenizer;
 
 import ro.finsiel.eunis.ImageProcessing;
 import ro.finsiel.eunis.factsheet.species.GeographicalStatusWrapper;
@@ -44,6 +41,9 @@ import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
 import ro.finsiel.eunis.utilities.SQLUtilities;
+
+import com.ibm.icu.util.StringTokenizer;
+
 import eionet.eunis.dto.ClassificationDTO;
 import eionet.eunis.dto.LinkDTO;
 import eionet.eunis.dto.PictureDTO;
@@ -261,6 +261,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 		
 		//setting expectedInLocations
 		List<String> expectedLocations = getContext().getSpeciesFactsheetDao().getExpectedInSiteIds(
+				factsheet.getSpeciesObject().getIdNatureObject(),
 				factsheet.getSpeciesObject().getIdSpecies(),
 				0);
 		if (expectedLocations != null && !expectedLocations.isEmpty()) {

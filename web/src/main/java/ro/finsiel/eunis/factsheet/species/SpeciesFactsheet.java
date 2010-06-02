@@ -350,7 +350,7 @@ public class SpeciesFactsheet {
     return results;
   }
 
-  private static String getSpeciesSynonymsCommaSeparated(Integer idNatureObject, Integer idSpecies )
+  public static String getSpeciesSynonymsCommaSeparated(Integer idNatureObject, Integer idSpecies )
   {
     Vector<Integer> synonyms = new Vector<Integer>();
     synonyms.add( idNatureObject );

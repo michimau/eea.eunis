@@ -8,8 +8,8 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
 import ro.finsiel.eunis.utilities.SQLUtilities;
-import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.SpeciesAttributeDto;
 import eionet.eunis.dto.readers.SpeciesAttributeDTOReader;
 
@@ -111,13 +111,18 @@ public class SpeciesFactsheetDaoImpl extends BaseDaoImpl implements ISpeciesFact
 	/* (non-Javadoc)
 	 * @see eionet.eunis.dao.ISpeciesFactsheetDao#getExpectedInSiteIds(int, int)
 	 */
-	public List<String> getExpectedInSiteIds(int idSpecies, int limit) {
-		String sql = "SELECT DISTINCT ID_SITE FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE R " +
-		"INNER JOIN CHM62EDT_SITES S ON R.ID_NATURE_OBJECT=S.ID_NATURE_OBJECT " +
-		"WHERE ID_NATURE_OBJECT_LINK= ? ORDER BY ID_SITE ";
-
+	public List<String> getExpectedInSiteIds(int idNatureObject, int idSpecies, int limit) {
+//		String sql = "SELECT DISTINCT ID_SITE FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE R " +
+//		"INNER JOIN CHM62EDT_SITES S ON R.ID_NATURE_OBJECT=S.ID_NATURE_OBJECT " +
+//		"WHERE ID_NATURE_OBJECT_LINK= ? ORDER BY ID_SITE ";
+		String synonymsIDs = SpeciesFactsheet.getSpeciesSynonymsCommaSeparated(idNatureObject, idSpecies);
+		
+		String sql = "SELECT C.ID_SITE " +
+	      " FROM CHM62EDT_SPECIES AS A " +
+	      " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK " +
+	      " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT " +
+	      " WHERE A.ID_NATURE_OBJECT IN ( " + synonymsIDs + " ) ORDER BY C.ID_SITE";
 		List<Object> params = new LinkedList<Object>();
-		params.add(idSpecies);
 
 		if (limit > 0) {
 			sql += " LIMIT ?";

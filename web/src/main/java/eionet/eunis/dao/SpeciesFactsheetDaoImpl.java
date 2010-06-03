@@ -121,7 +121,9 @@ public class SpeciesFactsheetDaoImpl extends BaseDaoImpl implements ISpeciesFact
 	      " FROM CHM62EDT_SPECIES AS A " +
 	      " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK " +
 	      " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT " +
-	      " WHERE A.ID_NATURE_OBJECT IN ( " + synonymsIDs + " ) ORDER BY C.ID_SITE";
+	      " WHERE A.ID_NATURE_OBJECT IN ( " + synonymsIDs + " ) " +
+	      " GROUP BY C.ID_NATURE_OBJECT " +
+	      " ORDER BY C.ID_SITE";
 		List<Object> params = new LinkedList<Object>();
 
 		if (limit > 0) {

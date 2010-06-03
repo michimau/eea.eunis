@@ -27,6 +27,10 @@ public class SpeciesAttributeConverterTest extends TestCase {
 	 */
 	public void testConverter() throws Exception {
 		SpeciesFactsheetDto tested = new SpeciesFactsheetDto();
+		List<ResourceDto> expectedInLocations = new LinkedList<ResourceDto>();
+		ResourceDto location = new ResourceDto("id", "prefix");
+		expectedInLocations.add(location);
+		tested.setExpectedInLocations(expectedInLocations);
 		List<SpeciesAttributeDto> attributes = new LinkedList<SpeciesAttributeDto>();
 		attributes.add(new SpeciesAttributeDto("literal", true, "literalValue"));
 		attributes.add(new SpeciesAttributeDto("link", false, "link_to_resource"));
@@ -35,8 +39,10 @@ public class SpeciesAttributeConverterTest extends TestCase {
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		persister.write(tested, output);
 		String outputString = output.toString();
+		System.out.println(outputString);
 		assertTrue(outputString.contains("<literal>literalValue</literal>"));
 		assertTrue(outputString.contains("<link rdf:resource=\"link_to_resource\"/>"));
+		assertTrue(outputString.contains("<isExpectedIn"));
 	}
 
 }

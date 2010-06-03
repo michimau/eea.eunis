@@ -1,13 +1,9 @@
 package eionet.eunis.dto;
 
 import java.io.Serializable;
-import java.lang.reflect.Field;
 
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.convert.Convert;
-import org.simpleframework.xml.convert.Converter;
-import org.simpleframework.xml.stream.InputNode;
-import org.simpleframework.xml.stream.OutputNode;
 
 /**
  * Dto object to hold species attributes.
@@ -17,7 +13,7 @@ import org.simpleframework.xml.stream.OutputNode;
  * <a href="mailto:aleks21@gmail.com">contact<a>
  */
 @Root
-@Convert(SpeciesAttributeDto.AttributeConverter.class)
+@Convert(SpeciesAttributeConverter.class)
 public class SpeciesAttributeDto implements Serializable {
 	
 	/**
@@ -56,28 +52,6 @@ public class SpeciesAttributeDto implements Serializable {
 	}
 	public void setValue(String value) {
 		this.value = value;
-	}
-	
-	/**
-	 * Converter class to convert {@link SpeciesAttributeDto} to xml.
-	 */
-	public static final class AttributeConverter implements Converter<SpeciesAttributeDto> {
-		
-		public SpeciesAttributeDto read(InputNode arg0) throws Exception {
-			throw new IllegalStateException("not allowed");
-		}
-		
-		public void write(OutputNode node, SpeciesAttributeDto dto) throws Exception {
-			//small hacking, as OutputElement is not accessible
-			Field name =  node.getClass().getDeclaredField("name");
-			name.setAccessible(true);
-			name.set(node, dto.getName());
-			if (dto.isLiteral()) {
-				node.setValue(dto.getValue());
-			} else {
-				node.setAttribute("rdf:resource", dto.getValue());
-			}
-		}
 	}
 }
 

@@ -20,6 +20,7 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
+import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.stream.Format;
 
@@ -245,7 +246,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 			return new ErrorResolution(404);
 		}
 		
-		Persister persister = new Persister(new Format(4));
+		Persister persister = new Persister(new AnnotationStrategy(), new Format(4));
 		
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 		SpeciesFactsheetDto dto = new SpeciesFactsheetDto();

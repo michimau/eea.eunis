@@ -82,9 +82,9 @@ public class SiteFactsheetDto implements Serializable {
 	private String altMax;
 	@Element(required = false)
 	private String altMin;
-	@Element(required = false)
+	@Element(required = false, name = "geo:long")
 	private String longitude;
-	@Element(required = false)
+        @Element(required = false, name = "geo:lat")
 	private String latitude;
 	@Element(required = false)
 	private String sourceDb;

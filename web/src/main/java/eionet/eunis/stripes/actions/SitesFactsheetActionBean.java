@@ -34,7 +34,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 	
 	private static final String HEADER = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n" 
           + "xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n"
-          + "xmlns:cr=\"http://cr.eionet.europa.eu/ontologies/contreg.rdf#\"\n"
+          + "xmlns:geo=\"http://www.w3.org/2003/01/geo/wgs84_pos#\"\n"
           + "xmlns=\"http://eunis.eea.europa.eu/rdf/sites-schema.rdf#\">\n";
 	
 	private static final String FOOTER = "\n</rdf:RDF>";

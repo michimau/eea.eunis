@@ -611,6 +611,7 @@ public class SpeciesFactsheet {
 
   /**
    * List of SpeciesNatureObjectPersist's.
+   * The query on SCIENTIFIC_NAME should not be necessary if the database is consistent
    *
    * @return A list of SpeciesNatureObjectPersist with all subspecies of this species.
    */
@@ -620,7 +621,7 @@ public class SpeciesFactsheet {
     sql = " (ID_SPECIES_LINK = '" + getSpeciesNatureObject().getIdSpecies() + "'";
     sql += " AND TYPE_RELATED_SPECIES='subspecies'";
     sql += " AND ID_SPECIES <> '" + getSpeciesNatureObject().getIdSpecies() + "')";
-    sql += " OR (SCIENTIFIC_NAME LIKE '" + EunisUtil.replaceTagsImport(getSpeciesNatureObject().getScientificName()) + " %')";
+    sql += " OR (TYPE_RELATED_SPECIES<>'synonym' AND SCIENTIFIC_NAME LIKE '" + EunisUtil.replaceTagsImport(getSpeciesNatureObject().getScientificName()) + " %')";
     try
     {
       //System.out.println("sql = " + sql);

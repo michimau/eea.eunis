@@ -107,8 +107,8 @@
 
                 ps = con.prepareStatement( strSQL );
                 rs = ps.executeQuery();
-                String hide = cm.cms("Hide sublevel habitat types");
-                String show = cm.cms("Show sublevel habitat types");
+                String hide = cm.cmsPhrase("Hide sublevel habitat types");
+                String show = cm.cmsPhrase("Show sublevel habitat types");
             %>
                 <ul class="tree">
             <%

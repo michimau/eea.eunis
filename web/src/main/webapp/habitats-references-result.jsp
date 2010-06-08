@@ -230,8 +230,8 @@
                     <td bgcolor="#EEEEEE">
                       <form name="refineSearch" method="get" onsubmit="return(validateRefineForm(<%=noCriteria%>));" action="">
                         <%=formBean.toFORMParam(filterSearch)%>
-                        <label for="criteriaType" class="noshow"><%=cm.cms("Criteria")%></label>
-                        <select title="<%=cm.cms("Criteria")%>" name="criteriaType" id="criteriaType">
+                        <label for="criteriaType" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
+                        <select title="<%=cm.cmsPhrase("Criteria")%>" name="criteriaType" id="criteriaType">
                           <%
                             if (showCode && 0 == database.compareTo(RefDomain.SEARCH_EUNIS)) {
                           %>
@@ -262,7 +262,6 @@
                           %>
                           <option value="<%=ReferencesSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected"><%=cm.cms("habitat_type_name")%></option>
                         </select>
-                        <%=cm.cms("Criteria")%>
                         <%=cm.cmsInput("eunis_code")%>
                         <%=cm.cmsInput("annex_code")%>
                         <%=cm.cmsInput("generic_index_07")%>
@@ -273,7 +272,6 @@
                           <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("starts with")%></option>
                           <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
                         </select>
-                        <%=cm.cms("operator")%>
                         <%=cm.cmsInput("is")%>
                         <%=cm.cmsInput("starts_with")%>
                         <%=cm.cmsInput("contains")%>

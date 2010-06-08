@@ -185,7 +185,7 @@
                     <td bgcolor="#EEEEEE">
                       <form name="resultSearch" method="get" onsubmit="return(checkHabitats(<%=noCriteria%>));" action="">
                         <%=formBean.toFORMParam(filterSearch)%>
-                        <label for="criteriaType" class="noshow"><%=cm.cms("Criteria")%></label>
+                        <label for="criteriaType" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
                         <select title="Criteria" name="criteriaType" id="criteriaType">
                           <%if (showCode) {%>
                           <option value="<%=LegalSearchCriteria.CRITERIA_EUNIS_CODE%>"><%=cm.cms("eunis_code")%></option><%}%>
@@ -198,7 +198,7 @@
                         <%=cm.cmsInput("eunis_code")%>
                         <%=cm.cmsInput("habitat_type_name")%>
                         <%=cm.cmsInput("legal_text")%>
-                        <label for="oper" class="noshow"><%=cm.cms("Criteria")%></label>
+                        <label for="oper" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
                         <select title="Operator" name="oper" id="oper">
                           <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("is")%></option>
                           <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("starts_with")%></option>
@@ -307,7 +307,7 @@
                       <%}%>
                       <%if (showLegalText) {%>
                       <th scope="col">
-                        <%=cm.cmsPhrase("legal text")%>
+                        <%=cm.cmsPhrase("Legal text")%>
                       </th>
                       <%}%>
                     </tr>
@@ -393,7 +393,7 @@
                       <%}%>
                       <%if (showLegalText) {%>
                       <th scope="col">
-                        <%=cm.cmsPhrase("legal text")%>
+                        <%=cm.cmsPhrase("Legal text")%>
                       </th>
                       <%}%>
                     </tr>

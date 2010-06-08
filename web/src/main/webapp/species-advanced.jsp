@@ -279,10 +279,10 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                   <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
                   <ul>
                     <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif" alt="<%=cm.cmsPhrase("Print this page")%>" title="<%=cm.cms("Print this page")%>" /></a>
+                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif" alt="<%=cm.cmsPhrase("Print this page")%>" title="<%=cm.cmsPhrase("Print this page")%>" /></a>
                     </li>
                     <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif" alt="<%=cm.cmsPhrase("Toggle full screen mode")%>" title="<%=cm.cms("Toggle full screen mode")%>" /></a>
+                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif" alt="<%=cm.cmsPhrase("Toggle full screen mode")%>" title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
                     </li>
                   </ul>
                 </div>

@@ -208,8 +208,8 @@
                   <td bgcolor="#EEEEEE">
                     <form name="refineSearch" method="get" onsubmit="return( validateRefineForm(<%=noCriteria%>) );" action="">
                       <%=formBean.toFORMParam(filterSearch)%>
-                      <label for="criteriaType" class="noshow"><%=cm.cms("Criteria")%></label>
-                      <select title="<%=cm.cms("Criteria")%>" name="criteriaType" id="criteriaType">
+                      <label for="criteriaType" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
+                      <select title="<%=cm.cmsPhrase("Criteria")%>" name="criteriaType" id="criteriaType">
                         <%
                           if (showCode) {
                         %>

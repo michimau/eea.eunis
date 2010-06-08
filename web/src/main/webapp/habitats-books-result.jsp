@@ -176,8 +176,8 @@
                     <td bgcolor="#EEEEEE">
                       <form name="refineSearch" method="get" onsubmit="return(validateRefineForm(<%=noCriteria%>));" action="">
                         <%=formBean.toFORMParam(filterSearch)%>
-                        <label for="criteriaType" class="noshow"><%=cm.cms("Criteria")%></label>
-                        <select title="<%=cm.cms("Criteria")%>" name="criteriaType" id="criteriaType">
+                        <label for="criteriaType" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
+                        <select title="<%=cm.cmsPhrase")%>" name="criteriaType" id="criteriaType">
                           <option value="<%=ReferencesSearchCriteria.CRITERIA_AUTHOR%>"><%=cm.cms("author")%></option>
                           <option value="<%=ReferencesSearchCriteria.CRITERIA_DATE%>"><%=cm.cms("date")%></option>
                           <option value="<%=ReferencesSearchCriteria.CRITERIA_TITLE%>" selected="selected"><%=cm.cms("title")%></option>

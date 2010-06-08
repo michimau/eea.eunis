@@ -241,8 +241,8 @@
                             <form name="resultSearch" method="post" onsubmit="return(checkHabitats(<%=noCriteria%>));" action="habitats-names-result.jsp">
                             <input type="hidden" name="noSoundex" value="true" />
                               <%=formBean.toFORMParam(filterSearch)%>
-                              <label for="criteriaType" class="noshow"><%=cm.cms("Criteria")%></label>
-                              <select name="criteriaType" id="criteriaType" title="<%=cm.cms("Criteria")%>">
+                              <label for="criteriaType" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
+                              <select name="criteriaType" id="criteriaType" title="<%=cm.cmsPhrase("Criteria")%>">
                                 <%if (showCode && 0 == database.compareTo(NamesDomain.SEARCH_EUNIS)) {%>
                                 <option value="<%=NameSearchCriteria.CRITERIA_CODE_EUNIS%>"><%=cm.cms("eunis_code")%></option>
                                 <%}%>

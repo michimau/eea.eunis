@@ -78,8 +78,7 @@
                 <a name="documentContent"></a>
                 <img id="loading" alt="Loading" title="Loading" src="images/loading.gif" />
                 <h1>
-                <%=cm.cmsPhrase("Statistical information for from:")%>
-                  <%=formBean.toHumanString()%>
+                <%=cm.cmsPhrase("Statistical information for:")%> <%=formBean.toHumanString()%>
                 </h1>
                 <div class="documentActions">
                   <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>

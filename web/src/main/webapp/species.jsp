@@ -71,12 +71,12 @@
                 <ul>
                   <li>
                     <a href="javascript:this.print();">
-                    	<img src="http://webservices.eea.europa.eu/templates/print_icon.gif" alt="<%=cm.cmsPhrase("Print this page")%>" title="<%=cm.cms("Print this page")%>" id="icon-print" />
+                    	<img src="http://webservices.eea.europa.eu/templates/print_icon.gif" alt="<%=cm.cmsPhrase("Print this page")%>" title="<%=cm.cmsPhrase("Print this page")%>" id="icon-print" />
                     </a>
                   </li>
                   <li>
                     <a href="javascript:toggleFullScreenMode();">
-                    	<img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif" alt="<%=cm.cmsPhrase("Toggle full screen mode")%>" title="<%=cm.cms("Toggle full screen mode")%>" id="icon-full_screen" />
+                    	<img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif" alt="<%=cm.cmsPhrase("Toggle full screen mode")%>" title="<%=cm.cmsPhrase("Toggle full screen mode")%>" id="icon-full_screen" />
                     </a>
                   </li>
                 </ul>
@@ -148,7 +148,7 @@
             if ( tab == 0 )
             {
           %>
-              <table summary="<%=cm.cms("easy_searches")%>" class="datatable fullwidth">
+              <table class="datatable fullwidth">
                 <caption>
                   <%=cm.cmsPhrase("A set of predefined functions to search the database") %>
                 </caption>
@@ -293,7 +293,7 @@
             if ( tab == 1 )
             {
           %>
-              <table summary="<%=cm.cms("advanced_searches")%>" class="datatable fullwidth">
+              <table summary="layout" class="datatable fullwidth">
                 <caption>
                   <%=cm.cmsPhrase("A flexible search tool to build your own query") %>
                 </caption>
@@ -313,7 +313,6 @@
                       <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
                       <a href="species-advanced.jsp?natureobject=Species">
                           <strong><%=cm.cmsPhrase("Advanced Search")%></strong></a>
-                      <%=cm.cmsTitle("search_using_complex_filtering")%>
                     </td>
                     <td>
                         <%=cm.cmsPhrase("Search species information using more complex filtering capabilities")%>
@@ -323,7 +322,6 @@
                     <td style="white-space: nowrap">
                       <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
                       <a href="advanced-help.jsp"><strong><%=cm.cmsPhrase("How to use Advanced search")%></strong></a>
-                      <%=cm.cmsTitle("species_main_advSearchHelp_Title")%>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Help on species <strong>Advanced Search</strong>")%>
@@ -337,7 +335,7 @@
             if ( tab == 2 )
             {
           %>
-              <table summary="<%=cm.cms("statistical_data")%>" class="datatable fullwidth">
+              <table class="datatable fullwidth">
                 <caption>
                   <%=cm.cmsPhrase( "A search tool to build aggregated data" ) %>
                 </caption>
@@ -373,7 +371,7 @@
             if ( tab == 3 )
             {
           %>
-              <table summary="<%=cm.cms("links_and_downloads")%>" class="datatable fullwidth">
+              <table class="datatable fullwidth">
                 <caption>
                   <%=cm.cmsPhrase("Species links and downloads")%>
                 </caption>
@@ -413,7 +411,7 @@
             if ( tab == 4 )
             {
           %>
-                <table summary="<%=cm.cms("help")%>" class="datatable fullwidth">
+                <table class="datatable fullwidth">
                   <caption>
                     <%=cm.cmsPhrase("General information on EUNIS application") %>
                   </caption>

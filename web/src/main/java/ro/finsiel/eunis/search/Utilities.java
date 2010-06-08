@@ -2306,7 +2306,7 @@ public final class Utilities {
 
      public static String getTextWarningForPopup( WebContentManagement cm, int size ) {
     String result = "" +
-            "<strong>" + cm.cmsText("choice_warning_Text") + "</strong> " +
+            "<strong>" + cm.cmsPhrase("Warning: Database might not contain data for all values!") + "</strong> " +
             "<br /> " +
             " ";
 //    if (size > 100)
@@ -2386,8 +2386,8 @@ public final class Utilities {
   public static String getTextMaxLimitForPopup( WebContentManagement cm, int size ) {
     String result = ( size >= Utilities.MAX_POPUP_RESULTS ?
             "<br /> " +
-                    cm.cmsText( "list_of_values_limit_01" ) + " " +
-                    Utilities.MAX_POPUP_RESULTS + " " + cm.cmsText( "list_of_values_limit_02" ) +
+                    cm.cmsPhrase( "<strong>Note:</strong> Only first" ) + " " +
+                    Utilities.MAX_POPUP_RESULTS + " " + cm.cmsPhrase( " values were displayed. Please refine the search criteria." ) +
                     "<br /><br /> " : "<br />" );
     return result;
   }
@@ -2512,14 +2512,14 @@ public final class Utilities {
     }
     String result = "";
     boolean isGood = false;
-    result += "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_25" ) + "</td>" +
-            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_33" ) + "</td>" +
-            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_34" ) + "</td>" +
-            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_26" ) + "</td>" +
-            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_27" ) + "</td>" +
-            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "total_area_ha" ) + "</td>" +
-            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_29" ) + "</td>" +
-            "<tr><td align=\"right\" bgcolor=\"#DDDDDD\">" + contentManagement.cmsText( "sites_statistical-result_30" ) + "</td>";
+    result += "<tr><th scope=\"row\">" + contentManagement.cmsPhrase( "No. of sites" ) + "</th>" +
+            "<tr><th scope=\"row\">" + contentManagement.cmsPhrase( "No. of species" ) + "</th>" +
+            "<tr><th scope=\"row\">" + contentManagement.cmsPhrase( "No. of habitat types" ) + "</th>" +
+            "<tr><th scope=\"row\">" + contentManagement.cmsPhrase( "No. of sites/km2" ) + "</th>" +
+            "<tr><th scope=\"row\">" + contentManagement.cmsPhrase( "Percent number of sites with surface data available" ) + "</th>" +
+            "<tr><th scope=\"row\">" + contentManagement.cmsPhrase( "Total area (ha)" ) + "</th>" +
+            "<tr><th scope=\"row\">" + contentManagement.cmsPhrase( "Average area(ha)" ) + "</th>" +
+            "<tr><th scope=\"row\">" + contentManagement.cmsPhrase( "Standard deviation for sites area" ) + "</th>";
 
 
     for ( int i = 0; i < factList.size(); i++ )
@@ -2529,37 +2529,37 @@ public final class Utilities {
       String[] splitResult = result.split( "<tr>" );
       if ( splitResult != null && splitResult.length == 9 )
       {
-        splitResult[ 1 ] += "<td bgcolor=\"#FFFFFF\" align=\"right\">" + Utilities.formatArea( site.getNumberOfSites(), 0, 2, "&nbsp;" ) + "</td>";
-        splitResult[ 2 ] += "<td bgcolor=\"#EEEEEE\" align=\"right\">" + Utilities.formatArea( site.getNumberOfSpecies(), 0, 2, "&nbsp;" ) + "</td>";
-        splitResult[ 3 ] += "<td bgcolor=\"#FFFFFF\" align=\"right\">" + Utilities.formatArea( site.getNumberOfHabitats(), 0, 2, "&nbsp;" ) + "</td>";
-        splitResult[ 4 ] += "<td bgcolor=\"#EEEEEE\" align=\"right\">" + Utilities.formatArea( site.getPerSquare(), 0, 2, "&nbsp;" ) + "</td>";
-        splitResult[ 5 ] += "<td bgcolor=\"#FFFFFF\" align=\"right\">" + Utilities.formatArea( site.getSurfaceAvailable(), 0, 2, "&nbsp;" ) + "</td>";
-        splitResult[ 6 ] += "<td bgcolor=\"#EEEEEE\" align=\"right\">" + Utilities.formatArea( site.getTotalSize(), 0, 2, "&nbsp;" ) + "</td>";
-        splitResult[ 7 ] += "<td bgcolor=\"#FFFFFF\" align=\"right\">" + Utilities.formatArea( site.getAvgSize(), 0, 2, "&nbsp;" ) + "</td>";
-        splitResult[ 8 ] += "<td bgcolor=\"#EEEEEE\" align=\"right\">" + Utilities.formatArea( site.getDeviation(), 0, 2, "&nbsp;" ) + "</td>";
+        splitResult[ 1 ] += "<td class=\"number\">" + Utilities.formatArea( site.getNumberOfSites(), 0, 2, "&nbsp;" ) + "</td>";
+        splitResult[ 2 ] += "<td class=\"number\">" + Utilities.formatArea( site.getNumberOfSpecies(), 0, 2, "&nbsp;" ) + "</td>";
+        splitResult[ 3 ] += "<td class=\"number\">" + Utilities.formatArea( site.getNumberOfHabitats(), 0, 2, "&nbsp;" ) + "</td>";
+        splitResult[ 4 ] += "<td class=\"number\">" + Utilities.formatArea( site.getPerSquare(), 0, 2, "&nbsp;" ) + "</td>";
+        splitResult[ 5 ] += "<td class=\"number\">" + Utilities.formatArea( site.getSurfaceAvailable(), 0, 2, "&nbsp;" ) + "</td>";
+        splitResult[ 6 ] += "<td class=\"number\">" + Utilities.formatArea( site.getTotalSize(), 0, 2, "&nbsp;" ) + "</td>";
+        splitResult[ 7 ] += "<td class=\"number\">" + Utilities.formatArea( site.getAvgSize(), 0, 2, "&nbsp;" ) + "</td>";
+        splitResult[ 8 ] += "<td class=\"number\">" + Utilities.formatArea( site.getDeviation(), 0, 2, "&nbsp;" ) + "</td>";
 
         if ( i == factList.size() - 1 )
         {
-          result = "<tr>" + splitResult[ 1 ] + "</tr>" +
-                  "<tr>" + splitResult[ 2 ] + "</tr>" +
-                  "<tr>" + splitResult[ 3 ] + "</tr>" +
-                  "<tr>" + splitResult[ 4 ] + "</tr>" +
-                  "<tr>" + splitResult[ 5 ] + "</tr>" +
-                  "<tr>" + splitResult[ 6 ] + "</tr>" +
-                  "<tr>" + splitResult[ 7 ] + "</tr>" +
-                  "<tr>" + splitResult[ 8 ] + "</tr>";
+          result = "<tr class=\"zebraodd\">" + splitResult[ 1 ] + "</tr>" +
+                  "<tr class=\"zebraeven\">" + splitResult[ 2 ] + "</tr>" +
+                  "<tr class=\"zebraodd\">" + splitResult[ 3 ] + "</tr>" +
+                  "<tr class=\"zebraeven\">" + splitResult[ 4 ] + "</tr>" +
+                  "<tr class=\"zebraodd\">" + splitResult[ 5 ] + "</tr>" +
+                  "<tr class=\"zebraeven\">" + splitResult[ 6 ] + "</tr>" +
+                  "<tr class=\"zebraodd\">" + splitResult[ 7 ] + "</tr>" +
+                  "<tr class=\"zebraeven\">" + splitResult[ 8 ] + "</tr>";
           isGood = true;
         }
         else
         {
-          result = "<tr>" + splitResult[ 1 ] +
-                  "<tr>" + splitResult[ 2 ] +
-                  "<tr>" + splitResult[ 3 ] +
-                  "<tr>" + splitResult[ 4 ] +
-                  "<tr>" + splitResult[ 5 ] +
-                  "<tr>" + splitResult[ 6 ] +
-                  "<tr>" + splitResult[ 7 ] +
-                  "<tr>" + splitResult[ 8 ];
+          result = "<tr class=\"zebraodd\">" + splitResult[ 1 ] +
+                  "<tr class=\"zebraeven\">" + splitResult[ 2 ] +
+                  "<tr class=\"zebraodd\">" + splitResult[ 3 ] +
+                  "<tr class=\"zebraeven\">" + splitResult[ 4 ] +
+                  "<tr class=\"zebraodd\">" + splitResult[ 5 ] +
+                  "<tr class=\"zebraeven\">" + splitResult[ 6 ] +
+                  "<tr class=\"zebraodd\">" + splitResult[ 7 ] +
+                  "<tr class=\"zebraeven\">" + splitResult[ 8 ];
         }
       }
     }
@@ -2829,8 +2829,8 @@ public final class Utilities {
 	
 			ps = con.prepareStatement( strSQL );
 			rs = ps.executeQuery();
-			String hide = cm.cms("Hide sublevels");
-			String show = cm.cms("Show sublevels");
+			String hide = cm.cmsPhrase("Hide sublevels");
+			String show = cm.cmsPhrase("Show sublevels");
 			
 			List<TaxonomyDTO> list = new ArrayList<TaxonomyDTO>();
 			while(rs.next()){

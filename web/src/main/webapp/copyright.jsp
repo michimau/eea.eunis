@@ -96,10 +96,10 @@
                     sSQL += " `DC_SOURCE`.`ISBN`,";
                     sSQL += " `DC_SOURCE`.`URL`";
                     sSQL += " FROM  `DC_INDEX`";
-                    sSQL += " INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-                    sSQL += " INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
-                    sSQL += " INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-                    sSQL += " INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
+                    sSQL += " INNER JOIN `DC_SOURCE` USING (ID_DC)";
+                    sSQL += " INNER JOIN `DC_DATE` USING (ID_DC)";
+                    sSQL += " INNER JOIN `DC_TITLE` USING (ID_DC)";
+                    sSQL += " INNER JOIN `DC_PUBLISHER` USING (ID_DC)";
                     sSQL += " WHERE `DC_INDEX`.`COMMENT` = 'REFERENCES'";
                     sSQL += " ORDER BY `DC_SOURCE`.`SOURCE` ASC";
 
@@ -117,7 +117,7 @@
                 %>
                 <tr<%=cssClass%>>
                   <td id="A<%=cnt%>1">
-<%=Utilities.treatURLSpecialCharacters( nl.getAuthor() )%>
+<a href="documents/<%=nl.getIdReference()%>"><%=Utilities.treatURLSpecialCharacters( nl.getAuthor() )%></a>
                   </td>
                   <td>
                     <%=Utilities.treatURLSpecialCharacters( nl.getTitle() )%>

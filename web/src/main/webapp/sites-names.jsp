@@ -115,27 +115,20 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_mandatory")%>
                   <label for="relationOp"><%=cm.cmsPhrase("Site name")%></label>
-                  <select id="relationOp" name="relationOp" title="<%=cm.cms("operator")%>">
+                  <select id="relationOp" name="relationOp">
                     <option value="<%=Utilities.OPERATOR_IS%>">
-                      <%=cm.cms("is")%>
+                      <%=cm.cmsPhrase("is")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                      <%=cm.cms("contains")%>
+                      <%=cm.cmsPhrase("contains")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected">
-                      <%=cm.cms("starts_with")%>
+                      <%=cm.cmsPhrase("starts with")%>
                     </option>
                   </select>
-                  <%=cm.cmsLabel("operator")%>
-                  <%=cm.cmsTitle("operator")%>
-                  <%=cm.cmsInput("is")%>
-                  <%=cm.cmsInput("contains")%>
-                  <%=cm.cmsInput("starts_with")%>
 
-                  <label for="englishName" class="noshow"><%=cm.cms("site_name")%></label>
-                  <input id="englishName" name="englishName" size="32" value="<%=siteNameFromFactsheet%>" title="<%=cm.cms("site_name")%>" />
-                  <%=cm.cmsLabel("site_name")%>
-                  <%=cm.cmsInput("site_name")%>
+                  <label for="englishName" class="noshow"><%=cm.cmsPhrase("Site name")%></label>
+                  <input id="englishName" name="englishName" size="32" value="<%=siteNameFromFactsheet%>" title="<%=cm.cmsPhrase("Site name")%>" />
 
                   <a title="<%=cm.cms("helper")%>" href="javascript:openHelper('sites-names-choice.jsp')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" style="vertical-align:middle" /></a>
                   <%=cm.cmsTitle("helper")%>
@@ -203,13 +196,8 @@
                   </fieldset>
 
                   <div class="submit_buttons">
-                    <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset")%>" class="standardButton" title="<%=cm.cms("reset_values")%>" />
-                    <%=cm.cmsTitle("reset_values")%>
-                    <%=cm.cmsInput("reset")%>
-
-                    <input id="submit2" name="submit2" type="submit" class="submitSearchButton" value="<%=cm.cms("search")%>" title="<%=cm.cms("search")%>" />
-                    <%=cm.cmsTitle("search")%>
-                    <%=cm.cmsInput("search")%>
+                    <input id="reset" name="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" />
+                    <input id="submit2" name="submit2" type="submit" class="submitSearchButton" value="<%=cm.cmsPhrase("Search")%>" />
                   </div>
                 </form>
           <%

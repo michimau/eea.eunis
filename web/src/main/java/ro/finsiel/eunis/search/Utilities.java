@@ -1509,15 +1509,16 @@ public final class Utilities {
 
   /**
    * This method formats the area field from the sites module which is displayed within HTML result pages.
+   * The purpose is to align numbers, therefore the Courier font.
    *
    * @param input the input string
-   * @param left  how much spaces to left on the left side
-   * @param right how much spaces to let on the right side
+   * @param left  how many spaces to fill on the left side
+   * @param right how many spaces to fill on the right side
    * @param blank which is the blank character to fill empty spaces (ie. in HTML is used &nbsp;)
    * @return The formatted string
    */
   public static String formatArea( String input, int left, int right, String blank ) {
-    String result = "<span style=\"font-family:courier; font-size: 10px\">";
+    String result = "<span style=\"font-family: 'Courier New', courier; font-size: 95%\">";
     result += formatArea( input, left, right, blank, null );
     result += "</span>";
     return result;
@@ -1527,8 +1528,8 @@ public final class Utilities {
    * This method formats the area field from the sites module which is displayed within HTML result pages.
    *
    * @param input    the input string
-   * @param left     how much spaces to left on the left side
-   * @param right    how much spaces to let on the right side
+   * @param left     how many spaces to fill on the left side
+   * @param right    how many spaces to fill on the right side
    * @param blank    which is the blank character to fill empty spaces (ie. in HTML is used &nbsp;)
    * @param cssStyle CSS Style applied to the string. If null, no CSS applied. Result will look like:<br />
    *                 &lt;FONT style="cssStyle"&gt; area &lt;/FONT&gt;
@@ -2508,7 +2509,7 @@ public final class Utilities {
   public static String getSitesCountryFactsheetInTable( List factList, WebContentManagement contentManagement ) {
     if ( factList == null || factList.size() <= 0 )
     {
-      return "";
+      return "<!-- factlist size 0 -->";
     }
     String result = "";
     boolean isGood = false;
@@ -2552,20 +2553,20 @@ public final class Utilities {
         }
         else
         {
-          result = "<tr class=\"zebraodd\">" + splitResult[ 1 ] +
-                  "<tr class=\"zebraeven\">" + splitResult[ 2 ] +
-                  "<tr class=\"zebraodd\">" + splitResult[ 3 ] +
-                  "<tr class=\"zebraeven\">" + splitResult[ 4 ] +
-                  "<tr class=\"zebraodd\">" + splitResult[ 5 ] +
-                  "<tr class=\"zebraeven\">" + splitResult[ 6 ] +
-                  "<tr class=\"zebraodd\">" + splitResult[ 7 ] +
-                  "<tr class=\"zebraeven\">" + splitResult[ 8 ];
+          result = "<tr>" + splitResult[ 1 ] +
+                  "<tr>" + splitResult[ 2 ] +
+                  "<tr>" + splitResult[ 3 ] +
+                  "<tr>" + splitResult[ 4 ] +
+                  "<tr>" + splitResult[ 5 ] +
+                  "<tr>" + splitResult[ 6 ] +
+                  "<tr>" + splitResult[ 7 ] +
+                  "<tr>" + splitResult[ 8 ];
         }
       }
     }
     if ( !isGood )
     {
-      result = "";
+//      result = "";
     }
     return result;
   }

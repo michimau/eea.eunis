@@ -512,10 +512,10 @@
             if(result != null && result.size()>0)
             {
           %>
-                <table summary="<%=cm.cmsPhrase("Sites")%>" class="listing">
+                <table summary="<%=cm.cmsPhrase("Sites")%>" class="datatable">
                   <thead>
                   <tr>
-                    <th>
+                    <th scope="row">
                       <%=cm.cmsPhrase("Source data set")%>
                     </th>
           <%
@@ -523,7 +523,7 @@
                {
                  CountrySitesFactsheetPersist site = (CountrySitesFactsheetPersist)result.get(i);
           %>
-                    <th>
+                    <th scope="col">
                       <%=SitesSearchUtility.translateSourceDB(site.getSourceDB())%>
                     </th>
           <%

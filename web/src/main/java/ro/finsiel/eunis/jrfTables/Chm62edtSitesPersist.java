@@ -200,7 +200,7 @@ public class Chm62edtSitesPersist extends PersistentObject implements Coordinate
   }
 
   public String getIucnat() {
-    if (null != iucnat) return "";
+    if (null == iucnat) return "";
     return iucnat;
   }
 

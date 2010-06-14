@@ -328,14 +328,14 @@ public class TabScripts {
 	    		  if( type == SiteFactsheet.TYPE_NATURA2000 || type == SiteFactsheet.TYPE_EMERALD  || type == SiteFactsheet.TYPE_CORINE ){
 	    			  List sitesDesigc = new ArrayList();
 	    			  if( type == SiteFactsheet.TYPE_NATURA2000 || type == SiteFactsheet.TYPE_EMERALD ){
-	    				  sitesDesigc = new DesignationsSitesRelatedDesignationsDomain().findWhere( "ID_SITE='" + siteid + "' AND SOURCE_TABLE = 'DESIGC' group by id_designation, description_en,NATIONAL_CATEGORY,overlap LIMIT 1" );
+	    				  sitesDesigc = new DesignationsSitesRelatedDesignationsDomain().findWhere( "ID_SITE='" + siteid + "' AND SOURCE_TABLE = 'desigc' group by id_designation, description_en,NATIONAL_CATEGORY,overlap LIMIT 1" );
 	    			  } else {
 	    				  //CORINE
 	    				  sitesDesigc = new DesignationsSitesRelatedDesignationsDomain().findWhere( "ID_SITE='" + siteid + "' group by designated_site,description_en,NATIONAL_CATEGORY,overlap,overlap_type LIMIT 1" );
 	    			  }
 	    			  List sitesDesigr = new Vector();
 	    			  if( type == SiteFactsheet.TYPE_NATURA2000 || type == SiteFactsheet.TYPE_EMERALD){
-	    				  sitesDesigr = new DesignationsSitesRelatedDesignationsDomain().findWhere( "ID_SITE='" + siteid + "' AND SOURCE_TABLE = 'DESIGR' group by designated_site,description_en,NATIONAL_CATEGORY,overlap,overlap_type LIMIT 1" );
+	    				  sitesDesigr = new DesignationsSitesRelatedDesignationsDomain().findWhere( "ID_SITE='" + siteid + "' AND SOURCE_TABLE = 'desigr' group by designated_site,description_en,NATIONAL_CATEGORY,overlap,overlap_type LIMIT 1" );
 	    			  }
 	    			  if((sitesDesigc != null && sitesDesigc.size() > 0) || (sitesDesigr != null && sitesDesigr.size() > 0)){
 	        			  fields += "DESIGNATION='Y',";

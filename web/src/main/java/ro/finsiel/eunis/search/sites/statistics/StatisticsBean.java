@@ -432,7 +432,7 @@ public class StatisticsBean extends SitesFormBean {
             ps.close();
             ps = null;
 
-            ps = con.prepareStatement(" select sum(gr.area) from (SELECT * FROM CHM62EDT_DESIGNATIONS E " +
+            ps = con.prepareStatement(" select sum(gr.area) from (SELECT A.AREA FROM CHM62EDT_DESIGNATIONS E " +
                     " INNER JOIN CHM62EDT_SITES AS A ON (A.AREA >0 AND A.ID_DESIGNATION=E.ID_DESIGNATION and A.ID_GEOSCOPE = E.ID_GEOSCOPE)" +
                     " WHERE TRIM(E.ID_DESIGNATION)=TRIM('" + id + "') " +
                     " AND  E.ID_GEOSCOPE = " + idGeoscope +
@@ -448,7 +448,7 @@ public class StatisticsBean extends SitesFormBean {
             ps.close();
             ps = null;
 
-            ps = con.prepareStatement(" select sum(gr.overlap) from (SELECT * FROM CHM62EDT_DESIGNATIONS E " +
+            ps = con.prepareStatement(" select sum(gr.overlap) from (SELECT H.OVERLAP FROM CHM62EDT_DESIGNATIONS E " +
                     " INNER JOIN CHM62EDT_SITES AS A ON (A.ID_DESIGNATION=E.ID_DESIGNATION and A.ID_GEOSCOPE = E.ID_GEOSCOPE AND A.AREA>0) " +
                     " INNER JOIN CHM62EDT_SITES_SITES AS H ON (A.ID_SITE = H.ID_SITE AND H.OVERLAP>0) " +
                     " INNER JOIN CHM62EDT_SITES AS I ON (H.ID_SITE_LINK = I.ID_SITE AND I.AREA>0)" +

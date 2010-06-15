@@ -113,10 +113,7 @@ public class Natura2000ImportParser extends DefaultHandler {
         private String siteImpactsPercent;
         private String siteImpactsInfluence;
         
-        private String siteMapNumber;
-        private String siteMapScale;
-        private String siteMapProjection;
-        private String siteMapDescription;
+        private String ecoInfo;
         
         private List<String> errors;
         
@@ -539,13 +536,30 @@ public class Natura2000ImportParser extends DefaultHandler {
         			speciesBreeding = buf.toString().trim();
         		}
         		
+        		//values are one step ahead
+        		if(qName.equalsIgnoreCase("EcologicalInformation32A")) {
+        			ecoInfo = Constants.SPECIES_SOURCE_TABLE_BIRD;
+        		} else if(qName.equalsIgnoreCase("EcologicalInformation32B")) {
+        			ecoInfo = Constants.SPECIES_SOURCE_TABLE_MAMMAL;
+        		} else if(qName.equalsIgnoreCase("EcologicalInformation32C")) {
+        			ecoInfo = Constants.SPECIES_SOURCE_TABLE_AMPREP;
+        		} else if(qName.equalsIgnoreCase("EcologicalInformation32D")) {
+        			ecoInfo = Constants.SPECIES_SOURCE_TABLE_FISHES;
+        		} else if(qName.equalsIgnoreCase("EcologicalInformation32E")) {
+        			ecoInfo = Constants.SPECIES_SOURCE_TABLE_INVERT;
+        		} else if(qName.equalsIgnoreCase("EcologicalInformation32F")) {
+        			ecoInfo = Constants.SPECIES_SOURCE_TABLE_PLANT;
+        		}
+        		
         		if(qName.equalsIgnoreCase("Species")) {
         			if(speciesCode != null && speciesCode.length() > 0){
 						String speciesIdNatObject = getSpeciesNatObjectId(speciesCode);
 						
 						if(speciesIdNatObject != null && speciesIdNatObject.length() > 0){
 							
-							String source = getSpeciesSource(speciesIdNatObject);
+							if(ecoInfo == null || ecoInfo.length() == 0)
+								ecoInfo = Constants.SPECIES_SOURCE_TABLE_BIRD;
+							
 							maxReportAttributeId++;
 							
 							preparedStatementNatObjectReportType.setString(1, siteNatureObjectId);
@@ -626,7 +640,7 @@ public class Natura2000ImportParser extends DefaultHandler {
 							preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
 							preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_SPECIES_SOURCE_TABLE);
 							preparedStatementReportAttribute.setString(3, "TEXT");
-							preparedStatementReportAttribute.setString(4, source);
+							preparedStatementReportAttribute.setString(4, ecoInfo);
 							preparedStatementReportAttribute.addBatch();
 							
 							preparedStatementReportAttribute.executeBatch(); 
@@ -951,63 +965,6 @@ public class Natura2000ImportParser extends DefaultHandler {
         			}
         		}
         		
-        		if(qName.equalsIgnoreCase("MapNumber")) {
-        			siteMapNumber = buf.toString().trim();
-        		} else if(qName.equalsIgnoreCase("Scale")) {
-        			siteMapScale = buf.toString().trim();
-        		} else if(qName.equalsIgnoreCase("Projection")) {
-        			siteMapProjection = buf.toString().trim();
-        		} else if(qName.equalsIgnoreCase("Details")) {
-        			siteMapDescription = buf.toString().trim();
-        		}
-        		
-        		if(qName.equalsIgnoreCase("PhysicalMap")) {
-        			//TODO currently only inserts last siteMap (because of site_attributes table primary key violation)
-        		}
-        		
-        		if(qName.equalsIgnoreCase("SiteMap")) {
-        			if(siteMapNumber != null){
-        				preparedStatementSiteAttribute.setString(1, siteCode);
-        				preparedStatementSiteAttribute.setString(2, "MAP_ID");
-        				preparedStatementSiteAttribute.setString(3, "TEXT");
-        				preparedStatementSiteAttribute.setString(4, siteMapNumber);
-        				preparedStatementSiteAttribute.setString(5, "sdfxml");
-        				preparedStatementSiteAttribute.addBatch();
-        			}
-        			if(siteMapScale != null){
-        				preparedStatementSiteAttribute.setString(1, siteCode);
-        				preparedStatementSiteAttribute.setString(2, "MAP_SCALE");
-        				preparedStatementSiteAttribute.setString(3, "TEXT");
-        				preparedStatementSiteAttribute.setString(4, siteMapScale);
-        				preparedStatementSiteAttribute.setString(5, "sdfxml");
-        				preparedStatementSiteAttribute.addBatch();
-        			}
-        			if(siteMapProjection != null){
-        				preparedStatementSiteAttribute.setString(1, siteCode);
-        				preparedStatementSiteAttribute.setString(2, "MAP_PROJECTION");
-        				preparedStatementSiteAttribute.setString(3, "TEXT");
-        				preparedStatementSiteAttribute.setString(4, siteMapProjection);
-        				preparedStatementSiteAttribute.setString(5, "sdfxml");
-        				preparedStatementSiteAttribute.addBatch();
-        			}
-        			if(siteMapDescription != null){
-        				preparedStatementSiteAttribute.setString(1, siteCode);
-        				preparedStatementSiteAttribute.setString(2, "MAP_DESCRIPTION");
-        				preparedStatementSiteAttribute.setString(3, "TEXT");
-        				preparedStatementSiteAttribute.setString(4, siteMapDescription);
-        				preparedStatementSiteAttribute.setString(5, "sdfxml");
-        				preparedStatementSiteAttribute.addBatch();
-        			}
-        			
-        			preparedStatementSiteAttribute.executeBatch();
-            		preparedStatementSiteAttribute.clearParameters();
-            		
-            		siteMapNumber = null;
-        			siteMapScale = null;
-        			siteMapProjection = null;
-        			siteMapDescription = null;
-        		}
-        		
         	} 
         	catch (Exception e){ 
         		if(siteCode != null)
@@ -1230,32 +1187,6 @@ public class Natura2000ImportParser extends DefaultHandler {
         	String noId = sqlUtilities.ExecuteSQL(query);
         	
         	return noId;
-        }
-        
-        private String getSpeciesSource(String speciesNatObId) {
-        	String query = "SELECT G.COMMON_NAME FROM chm62edt_group_species G, chm62edt_species S WHERE S.ID_NATURE_OBJECT = "+speciesNatObId+" AND S.ID_GROUP_SPECIES = G.ID_GROUP_SPECIES";
-        	String source = sqlUtilities.ExecuteSQL(query);
-        	
-        	if(source != null){
-        		if(source.equals("Amphibians") || source.equals("Reptiles"))
-        			source = "Amprep";
-        		else if(source.equals("Birds"))
-        			source = "Bird";
-        		else if(source.equals("Fishes"))
-        			source = "Fishes";
-        		else if(source.equals("Mammals"))
-        			source = "Mammal";
-        		else if(source.equals("Invertebrates"))
-        			source = "invert";
-        		else if(source.equals("Flowering Plants"))
-        			source = "Plant";
-        		else
-        			source = "spec";
-        	} else {
-        		source = "spec";
-        	}
-        	
-        	return source;
         }
         
         private String getSpeciesNatObjectIdByName(String sciName) {

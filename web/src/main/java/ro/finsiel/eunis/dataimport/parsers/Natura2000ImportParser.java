@@ -1113,7 +1113,10 @@ public class Natura2000ImportParser extends DefaultHandler {
         		newSite = true;
         		maxNoIdInt++;
         		siteNatureObjectId = new Integer(maxNoIdInt).toString();
+        	} else {
+        		newSite = false;
         	}
+        		
         }
                 
         private void deleteOldRecords() throws Exception {

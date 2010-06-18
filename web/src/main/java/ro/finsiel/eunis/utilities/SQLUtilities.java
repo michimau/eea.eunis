@@ -1455,5 +1455,4 @@ public class SQLUtilities {
 		  closeAll( con, ps, rs );
 	  }
   }
-  
 }

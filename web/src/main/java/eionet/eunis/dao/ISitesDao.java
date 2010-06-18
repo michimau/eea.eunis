@@ -12,9 +12,15 @@ public interface ISitesDao {
 
 	/**
 	 * Deletes site
-	 * @param Map sites
+	 * @param List siteIds
 	 */
 	void deleteSites(Map<String, String> sites) throws SQLException;
+	
+	/**
+	 * Deletes site
+	 * @param Map sites
+	 */
+	void deleteSitesCdda(Map<String, String> sites) throws SQLException;
 	
 	public void updateCountrySitesFactsheet() throws SQLException;
 	

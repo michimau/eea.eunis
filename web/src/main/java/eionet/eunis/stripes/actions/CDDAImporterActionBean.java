@@ -68,7 +68,7 @@ public class CDDAImporterActionBean extends AbstractStripesAction {
 					if(inputStreamSites!=null)
 						inputStreamSites.close();
 					
-					getContext().getSitesDao().deleteSites(sites);
+					getContext().getSitesDao().deleteSitesCdda(sites);
 					getContext().getSitesDao().updateDesignationsTable();
 				}
 

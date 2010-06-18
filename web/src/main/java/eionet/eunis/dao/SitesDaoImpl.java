@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -20,21 +22,10 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 	public SitesDaoImpl(SQLUtilities sqlUtilities) {
 		super(sqlUtilities);
 	}
-
-	/** 
-	 * @see eionet.eunis.dao.ISitesDao#deleteSites(Map<String, String> sites)
-	 * {@inheritDoc}
-	 */
+	
 	public void deleteSites(Map<String, String> sites) throws SQLException {
-		
 		Connection con = null;
-		PreparedStatement ps = null;
-		PreparedStatement ps1 = null;
-		PreparedStatement ps2 = null;
-		PreparedStatement ps3 = null;
-		PreparedStatement ps4 = null;
-		PreparedStatement ps5 = null;
-		PreparedStatement ps6 = null;
+		Statement st = null;
 		PreparedStatement ps7 = null;
 		PreparedStatement ps8 = null;
 		PreparedStatement ps9 = null;
@@ -49,29 +40,11 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 		PreparedStatement ps18 = null;
 		PreparedStatement ps19 = null;
 		
-		ResultSet rs = null;
 	    try {
 	    	con = getSqlUtils().getConnection();
 	    	
-	    	String query = "SELECT ID_SITE, ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE SOURCE_DB = 'CDDA_NATIONAL'";
-	    	ps = con.prepareStatement(query);
+	    	st = con.createStatement();
 	    	
-	    	ps1 = con.prepareStatement("DELETE FROM chm62edt_report_attributes WHERE ID_REPORT_ATTRIBUTES IN "+
-	    					"(SELECT ID_REPORT_ATTRIBUTES FROM chm62edt_nature_object_geoscope WHERE ID_NATURE_OBJECT=?)");
-	    	
-	    	ps2 = con.prepareStatement("DELETE FROM chm62edt_report_attributes WHERE ID_REPORT_ATTRIBUTES IN "+
-							"(SELECT ID_REPORT_ATTRIBUTES FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?)");
-	    	
-	    	ps3 = con.prepareStatement("DELETE FROM chm62edt_report_attributes WHERE ID_REPORT_ATTRIBUTES IN "+
-							"(SELECT ID_REPORT_ATTRIBUTES FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?)");
-	    	
-	    	ps4 = con.prepareStatement("DELETE FROM chm62edt_report_type WHERE ID_REPORT_TYPE IN "+
-							"(SELECT ID_REPORT_TYPE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?)");
-	    	
-	    	ps5 = con.prepareStatement("DELETE FROM chm62edt_report_type WHERE ID_REPORT_TYPE IN "+
-							"(SELECT ID_REPORT_TYPE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?)");
-	    	
-	    	ps6 = con.prepareStatement("DELETE FROM chm62edt_nature_object_geoscope WHERE ID_NATURE_OBJECT=?");
 	    	ps7 = con.prepareStatement("DELETE FROM chm62edt_nature_object_geoscope WHERE ID_NATURE_OBJECT_LINK=?");
 	    	ps8 = con.prepareStatement("DELETE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?");
 	    	ps9 = con.prepareStatement("DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?");
@@ -89,132 +62,116 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 	    	
 	    	ps18 = con.prepareStatement("DELETE FROM chm62edt_sites WHERE ID_SITE=?");
 	    	ps19 = con.prepareStatement("DELETE FROM chm62edt_nature_object WHERE ID_NATURE_OBJECT=?");
-	    		    	
-	    	rs = ps.executeQuery();
+
 	    	int counter = 0;
-			while(rs.next()){
-				String idNatureObject = rs.getString("ID_NATURE_OBJECT");
-				String idSite = rs.getString("ID_SITE");
-				if(idNatureObject != null && idSite != null){
-					if(sites != null && !sites.containsKey(idSite)){
-						
-						counter++;
-						
-						ps1.setString(1, idNatureObject);
-						ps1.addBatch();
-				    	
-						ps2.setString(1, idNatureObject);
-						ps2.addBatch();
-				    	
-						ps3.setString(1, idNatureObject);
-						ps3.addBatch();
-				    	
-						ps4.setString(1, idNatureObject);
-						ps4.addBatch();
-				    	
-						ps5.setString(1, idNatureObject);
-						ps5.addBatch();
-						
-						ps6.setString(1, idNatureObject);
-						ps6.addBatch();
-						
-						ps7.setString(1, idNatureObject);
-						ps7.addBatch();
-						
-						ps8.setString(1, idNatureObject);
-						ps8.addBatch();
-						
-						ps9.setString(1, idNatureObject);
-						ps9.addBatch();
-						
-						ps10.setString(1, idNatureObject);
-						ps10.addBatch();
-						
-						ps11.setString(1, idNatureObject);
-						ps11.addBatch();
-				    	
-						ps12.setString(1, idNatureObject);
-						ps12.addBatch();
-						
-						ps13.setString(1, idSite);
-						ps13.addBatch();
-				    		
-						ps14.setString(1, idSite);
-						ps14.addBatch();
-				    	
-						ps15.setString(1, idSite);
-						ps15.addBatch();
-						
-						ps16.setString(1, idSite);
-						ps16.addBatch();
-						
-						ps17.setString(1, idNatureObject);
-						ps17.addBatch();
-						
-						ps18.setString(1, idSite);
-						ps18.addBatch();
-						
-						ps19.setString(1, idNatureObject);
-						ps19.addBatch();
-						
-						if (counter % 10000 == 0){ 
-        	        		ps1.executeBatch(); 
-        	        		ps1.clearParameters();
-        	        		ps2.executeBatch(); 
-        	        		ps2.clearParameters();
-        	        		ps3.executeBatch(); 
-        	        		ps3.clearParameters();
-        	        		ps4.executeBatch(); 
-        	        		ps4.clearParameters();
-        	        		ps5.executeBatch(); 
-        	        		ps5.clearParameters();
-        	        		ps6.executeBatch(); 
-        	        		ps6.clearParameters();
-        	        		ps7.executeBatch(); 
-        	        		ps7.clearParameters();
-        	        		ps8.executeBatch(); 
-        	        		ps8.clearParameters();
-        	        		ps9.executeBatch(); 
-        	        		ps9.clearParameters();
-        	        		ps10.executeBatch(); 
-        	        		ps10.clearParameters();
-        	        		ps11.executeBatch(); 
-        	        		ps11.clearParameters();
-        	        		ps12.executeBatch(); 
-        	        		ps12.clearParameters();
-        	        		ps13.executeBatch(); 
-        	        		ps13.clearParameters();
-        	        		ps14.executeBatch(); 
-        	        		ps14.clearParameters();
-        	        		ps15.executeBatch(); 
-        	        		ps15.clearParameters();
-        	        		ps16.executeBatch(); 
-        	        		ps16.clearParameters();
-        	        		ps17.executeBatch(); 
-        	        		ps17.clearParameters();
-        	        		ps18.executeBatch(); 
-        	        		ps18.clearParameters();
-        	        		ps19.executeBatch(); 
-        	        		ps19.clearParameters();
-        	        		System.gc(); 
-        	        	}
+	    	if(sites != null){
+				for(Iterator<String> it = sites.keySet().iterator(); it.hasNext(); ){
+					
+					String siteId = it.next();
+					String idNatureObject = sites.get(siteId);
+					if(idNatureObject == null)
+						idNatureObject = getNatObjectId(siteId);
+					
+					String idReportAttributesGeoscope = getReportAttributeIds(idNatureObject, con, "SELECT ID_REPORT_ATTRIBUTES FROM chm62edt_nature_object_geoscope WHERE ID_NATURE_OBJECT=?");
+					String idReportAttributesReports = getReportAttributeIds(idNatureObject, con, "SELECT ID_REPORT_ATTRIBUTES FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?");
+					String idReportAttributesReportType = getReportAttributeIds(idNatureObject, con, "SELECT ID_REPORT_ATTRIBUTES FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?");
+					
+					String idReportTypeReports = getReportTypeIds(idNatureObject, con, "SELECT ID_REPORT_TYPE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?");
+					String idReportTypeReportType = getReportTypeIds(idNatureObject, con, "SELECT ID_REPORT_TYPE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?");
+
+					counter++;
+					
+					if(idReportAttributesGeoscope != null)
+						st.addBatch("DELETE FROM chm62edt_report_attributes WHERE ID_REPORT_ATTRIBUTES IN ("+idReportAttributesGeoscope+")");
+			    	
+					if(idReportAttributesReports != null)
+						st.addBatch("DELETE FROM chm62edt_report_attributes WHERE ID_REPORT_ATTRIBUTES IN ("+idReportAttributesReports+")");
+					
+					if(idReportAttributesReportType != null)
+						st.addBatch("DELETE FROM chm62edt_report_attributes WHERE ID_REPORT_ATTRIBUTES IN ("+idReportAttributesReportType+")");
+					
+					if(idReportTypeReports != null)
+						st.addBatch("DELETE FROM chm62edt_report_type WHERE ID_REPORT_TYPE IN ("+idReportTypeReports+")");
+					
+					if(idReportTypeReportType != null)
+						st.addBatch("DELETE FROM chm62edt_report_type WHERE ID_REPORT_TYPE IN ("+idReportTypeReportType+")");
+					
+					ps7.setString(1, idNatureObject);
+					ps7.addBatch();
+					
+					ps8.setString(1, idNatureObject);
+					ps8.addBatch();
+					
+					ps9.setString(1, idNatureObject);
+					ps9.addBatch();
+					
+					ps10.setString(1, idNatureObject);
+					ps10.addBatch();
+					
+					ps11.setString(1, idNatureObject);
+					ps11.addBatch();
+			    	
+					ps12.setString(1, idNatureObject);
+					ps12.addBatch();
+					
+					ps13.setString(1, siteId);
+					ps13.addBatch();
+			    		
+					ps14.setString(1, siteId);
+					ps14.addBatch();
+			    	
+					ps15.setString(1, siteId);
+					ps15.addBatch();
+					
+					ps16.setString(1, siteId);
+					ps16.addBatch();
+					
+					ps17.setString(1, idNatureObject);
+					ps17.addBatch();
+					
+					ps18.setString(1, siteId);
+					ps18.addBatch();
+					
+					ps19.setString(1, idNatureObject);
+					ps19.addBatch();
+					
+					if (counter % 10000 == 0){ 
+		        		st.executeBatch();
+		        		st.clearBatch();
+		        		ps7.executeBatch(); 
+		        		ps7.clearParameters();
+		        		ps8.executeBatch(); 
+		        		ps8.clearParameters();
+		        		ps9.executeBatch(); 
+		        		ps9.clearParameters();
+		        		ps10.executeBatch(); 
+		        		ps10.clearParameters();
+		        		ps11.executeBatch(); 
+		        		ps11.clearParameters();
+		        		ps12.executeBatch(); 
+		        		ps12.clearParameters();
+		        		ps13.executeBatch(); 
+		        		ps13.clearParameters();
+		        		ps14.executeBatch(); 
+		        		ps14.clearParameters();
+		        		ps15.executeBatch(); 
+		        		ps15.clearParameters();
+		        		ps16.executeBatch(); 
+		        		ps16.clearParameters();
+		        		ps17.executeBatch(); 
+		        		ps17.clearParameters();
+		        		ps18.executeBatch(); 
+		        		ps18.clearParameters();
+		        		ps19.executeBatch(); 
+		        		ps19.clearParameters();
+		        		System.gc(); 
 					}
 				}
-			}
+	    	}
 			
 			if (!(counter % 10000 == 0)){ 
-				ps1.executeBatch(); 
-        		ps1.clearParameters();
-        		ps2.executeBatch(); 
-        		ps2.clearParameters();
-        		ps3.executeBatch(); 
-        		ps3.clearParameters();
-        		ps4.executeBatch(); 
-        		ps4.clearParameters();
-        		ps5.executeBatch(); 
-        		ps5.clearParameters();
-        		ps6.executeBatch(); 
-        		ps6.clearParameters();
+				st.executeBatch();
+				st.clearBatch();
         		ps7.executeBatch(); 
         		ps7.clearParameters();
         		ps8.executeBatch(); 
@@ -247,13 +204,8 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 	    } catch ( Exception e ) {
 	    	e.printStackTrace();
 	    } finally {
-	    	getSqlUtils().closeAll(con, ps, rs);
-	    	ps1.close();
-	    	ps2.close();
-	    	ps3.close();
-	    	ps4.close();
-	    	ps5.close();
-	    	ps6.close();
+	    	con.close();
+	    	st.close();
 	    	ps7.close();
 	    	ps8.close();
 	    	ps9.close();
@@ -268,7 +220,115 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 	    	ps18.close();
 	    	ps19.close();
 	    }
+	}
+	
+	private String getNatObjectId(String siteId) throws SQLException {
+		String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ID_SITE = '"+siteId+"'";
+		String natId = getSqlUtils().ExecuteSQL(query);
+		return natId;
+	}
+
+	/** 
+	 * @see eionet.eunis.dao.ISitesDao#deleteSites(Map<String, String> sites)
+	 * {@inheritDoc}
+	 */
+	public void deleteSitesCdda(Map<String, String> sites) throws SQLException {
 		
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		ResultSet rs = null;
+	    try {
+	    	con = getSqlUtils().getConnection();
+	    	
+	    	String query = "SELECT ID_SITE, ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE SOURCE_DB = 'CDDA_NATIONAL'";
+	    	ps = con.prepareStatement(query);
+
+	    	rs = ps.executeQuery();
+	    	Map<String,String> siteIds = new HashMap<String,String>();
+			while(rs.next()){
+				String idNatureObject = rs.getString("ID_NATURE_OBJECT");
+				String idSite = rs.getString("ID_SITE");
+				if(idNatureObject != null && idSite != null){
+					if(sites != null && !sites.containsKey(idSite)){
+						siteIds.put(idSite, idNatureObject);
+					}
+				}
+			}
+			deleteSites(siteIds);
+	    	
+	    } catch ( Exception e ) {
+	    	e.printStackTrace();
+	    } finally {
+	    	getSqlUtils().closeAll(con, ps, rs);
+	    }
+		
+	}
+	
+	private String getReportAttributeIds(String objectId, Connection con, String query) throws Exception {
+	    
+	  	String result = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+
+	    try {
+	    	ps = con.prepareStatement(query);
+	    	ps.setString(1, objectId);
+	    	rs = ps.executeQuery();
+
+	    	while ( rs.next() ) {
+	    		String id = rs.getString("ID_REPORT_ATTRIBUTES");
+	    		if(id != null && !id.equals("-1") && id.length() > 0){
+		    		if(result != null && result.length() > 0)
+		    			result += ",";
+		    		else
+		    			result = "";
+		    		result += id;
+	    		}
+	    	}
+	    } catch ( Exception e ) {
+	    	e.printStackTrace();
+	    } finally {
+	    	if(ps != null)
+	    		ps.close();
+	    	if(rs != null)
+	    		rs.close();
+	    }
+
+	    return result;
+	}
+	
+	private String getReportTypeIds(String objectId, Connection con, String query) throws Exception {
+	    
+	  	String result = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+
+	    try {
+	    	ps = con.prepareStatement(query);
+	    	ps.setString(1, objectId);
+	    	rs = ps.executeQuery();
+
+	    	while ( rs.next() ) {
+	    		String id = rs.getString("ID_REPORT_TYPE");
+	    		if(id != null && !id.equals("-1") && id.length() > 0){
+		    		if(result != null && result.length() > 0)
+		    			result += ",";
+		    		else
+		    			result = "";
+		    		result += id;
+	    		}
+	    	}
+	    } catch ( Exception e ) {
+	    	e.printStackTrace();
+	    } finally {
+	    	if(ps != null)
+	    		ps.close();
+	    	if(rs != null)
+	    		rs.close();
+	    }
+
+	    return result;
 	}
 	
 	public void updateCountrySitesFactsheet() throws SQLException {

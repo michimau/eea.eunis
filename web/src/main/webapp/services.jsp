@@ -329,7 +329,7 @@
                       <a href="dataimport" title="<%=cm.cmsPhrase("Data import")%>"><img alt="<%=cm.cmsPhrase("Data import")%>" src="images/clean.gif" width="81" height="43" border="0" title="<%=cm.cmsPhrase("Data import")%>" /></a>
                     </td>
                     <td>
-                      <a href="dataimport"><%=cm.cmsPhrase("Import/Export XML formatted Oracle dumps into EUNIS database")%></a>
+                      <a href="dataimport"><%=cm.cmsPhrase("Import data into EUNIS database")%></a>
                     </td>
                   </tr>
 <%

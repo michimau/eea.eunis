@@ -43,7 +43,7 @@
                 </jsp:include>
                 <a name="documentContent"></a>
                 <h1>
-                  Data Import
+                  Data import and maintenance
                 </h1>
                 <div class="documentActions">
                   <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
@@ -61,6 +61,8 @@
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
+<!--
+		<fieldset><legend>XML Table importers</legend>
                 <ul>
                 	<li>
                 		<a href="<%=domainName%>/dataimport/data-tester.jsp">Data tester</a><br/>
@@ -71,10 +73,6 @@
                 		The purpose of this page is to import the XML formatted Oracle dumps into EUNIS database.
                 	</li>
                 	<li>
-                		<a href="<%=domainName%>/dataimport/import-log.jsp">Background actions log</a><br/>
-                		Log messages about background data import and post import scripts
-                	</li>
-                	<li>
                 		<a href="<%=domainName%>/dataimport/data-exporter.jsp">Data exporter</a><br/>
                 		The purpose of this page is to export EUNIS database table into XML formatted Oracle dump.
                 	</li>
@@ -82,18 +80,27 @@
                 		<a href="<%=domainName%>/dataimport/schema-exporter.jsp">Schema exporter</a><br/>
                 		The purpose of this page is to create XML schema from EUNIS database table structure.
                 	</li>
+                </ul>
+		</fieldset>
+-->
+		<fieldset><legend>Maintenance</legend>
+                <ul>
+                	<li>
+                		<a href="<%=domainName%>/dataimport/import-log.jsp">Background actions log</a><br/>
+                		Log messages about background data import and post import scripts
+                	</li>
                 	<li>
                 		<a href="<%=domainName%>/dataimport/post-import.jsp">Post import scripts</a><br/>
                 		The purpose of this page is to run database scripts after import!
                 	</li>
                 	<li>
-                		<a href="<%=domainName%>/dataimport/matchgeospecies">Match geospecies</a><br/>
-                		The purpose of this page is to import geospecies relations and match some of them manually to EUNIS species.
+                		<a href="<%=domainName%>/dataimport/updatecountrysites">Update country sites factsheet</a><br/>
+                		The purpose of this page is to update "chm62edt_country_sites_factsheet" table.
                 	</li>
-                	<li>
-                		<a href="<%=domainName%>/dataimport/importpagelinks">Import page links</a><br/>
-                		The purpose of this page is to import page links from geospecies database.
-                	</li>
+                </ul>
+		</fieldset>
+		<fieldset><legend>Dedicated importers</legend>
+                <ul>
                 	<li>
                 		<a href="<%=domainName%>/dataimport/importcdda">Import National CDDA sites and designations</a><br/>
                 		The purpose of this page is to import national CDDA sites and designations
@@ -107,10 +114,15 @@
                 		The purpose of this page is to import red list information from XML formatted file into EUNIS database.
                 	</li>
                 	<li>
-                		<a href="<%=domainName%>/dataimport/updatecountrysites">Update country sites factsheet</a><br/>
-                		The purpose of this page is to update "chm62edt_country_sites_factsheet" table.
+                		<a href="<%=domainName%>/dataimport/importpagelinks">Import page links</a><br/>
+                		The purpose of this page is to import page links from geospecies database.
+                	</li>
+                	<li>
+                		<a href="<%=domainName%>/dataimport/matchgeospecies">Match geospecies</a><br/>
+                		The purpose of this page is to import geospecies relations and match some of them manually to EUNIS species.
                 	</li>
                 </ul>
+		</fieldset>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

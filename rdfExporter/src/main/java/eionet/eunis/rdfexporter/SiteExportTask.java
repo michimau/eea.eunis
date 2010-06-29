@@ -45,11 +45,15 @@ public class SiteExportTask implements Runnable {
 			} else {
 				dto.setIdDc(null);
 			}
-			if (dto.getIdDesignation() != null) {
+			if (dto.getIdDesignation() != null && dto.getIdDesignation().getId() != null && factsheet.getSiteObject().getIdGeoscope() != null) {
+				String idDesig = dto.getIdDesignation().getId();
+				Integer idGeo = factsheet.getSiteObject().getIdGeoscope();
+				String newId = idGeo.toString()+":"+idDesig;
+				
+				dto.getIdDesignation().setId(newId);
 				dto.getIdDesignation().setPrefix("http://eunis.eea.europa.eu/designations/");
-			}
-			if (dto.getIdGeoscope() != null) {
-				dto.getIdGeoscope().setPrefix("http://eunis.eea.europa.eu/geoscope/");
+			} else {
+				dto.setIdDesignation(null);
 			}
 			Persister persister = new Persister(new Format(4));
 			ByteArrayOutputStream buffer = new ByteArrayOutputStream();

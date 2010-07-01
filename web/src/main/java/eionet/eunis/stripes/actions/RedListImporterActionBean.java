@@ -1,7 +1,7 @@
 package eionet.eunis.stripes.actions;
 
 import java.io.InputStream;
-import java.util.HashMap;
+import java.util.List;
 
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.FileBean;
@@ -10,6 +10,7 @@ import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import ro.finsiel.eunis.dataimport.parsers.RedListsImportParser;
 import ro.finsiel.eunis.utilities.SQLUtilities;
+import eionet.eunis.dto.PairDTO;
 import eionet.eunis.util.Constants;
 
 /**
@@ -31,7 +32,7 @@ public class RedListImporterActionBean extends AbstractStripesAction {
 	private String url;
 	private String date;
 	
-	private HashMap<Integer,String> sources;
+	private List<PairDTO> sources;
 	private Integer idDc;
 		
 	@DefaultHandler
@@ -60,7 +61,7 @@ public class RedListImporterActionBean extends AbstractStripesAction {
 						idDc = getContext().getDocumentsDao().insertSource(title, source, publisher, editor, url, date);
 				}
 				
-				if(idDc != null){
+				if(idDc != null && idDc.intValue() != -1){
 					for(FileBean file : files){
 						if(file != null){
 							InputStream inputStream = file.getInputStream();
@@ -136,14 +137,6 @@ public class RedListImporterActionBean extends AbstractStripesAction {
 		this.date = date;
 	}
 
-	public HashMap<Integer, String> getSources() {
-		return sources;
-	}
-
-	public void setSources(HashMap<Integer, String> sources) {
-		this.sources = sources;
-	}
-
 	public FileBean[] getFiles() {
 		return files;
 	}
@@ -166,6 +159,14 @@ public class RedListImporterActionBean extends AbstractStripesAction {
 
 	public void setDelete(boolean delete) {
 		this.delete = delete;
+	}
+
+	public List<PairDTO> getSources() {
+		return sources;
+	}
+
+	public void setSources(List<PairDTO> sources) {
+		this.sources = sources;
 	}
 	
 }

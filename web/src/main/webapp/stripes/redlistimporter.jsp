@@ -35,9 +35,7 @@
 			        	<td>
 			        		<stripes:select name="idDc" id="idDc" style="width:400px;" onchange="javascript:showHide(this);">
 			        			<stripes:option value="-1">- new source -</stripes:option>
-			        			<c:forEach var="item" items="${actionBean.sources}">
-			        				<stripes:option value="${item.key}">${item.value}</stripes:option>
-								</c:forEach>
+			        			<stripes:options-collection collection="${actionBean.sources}" value="key" label="value"/>
 			        		</stripes:select>
 			        	</td>
 			        </tr>

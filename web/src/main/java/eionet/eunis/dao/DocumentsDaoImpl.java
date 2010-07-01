@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import eionet.eunis.dto.DcContributorDTO;
@@ -27,6 +26,7 @@ import eionet.eunis.dto.DcSubjectDTO;
 import eionet.eunis.dto.DcTitleDTO;
 import eionet.eunis.dto.DcTypeDTO;
 import eionet.eunis.dto.DesignationDcObjectDTO;
+import eionet.eunis.dto.PairDTO;
 import eionet.eunis.dto.readers.DcObjectDTOReader;
 import eionet.eunis.dto.readers.DcTitleDTOReader;
 
@@ -889,9 +889,9 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		return ret;
 	}
 	
-	public HashMap<Integer,String> getRedListSources() throws Exception {
+	public List<PairDTO> getRedListSources() throws Exception {
 		
-		HashMap<Integer,String> ret = new HashMap<Integer,String>();
+		List<PairDTO> ret = new ArrayList<PairDTO>();
 		
 		String query = "SELECT S.ID_DC, S.SOURCE, TITLE.TITLE " +
 				"FROM chm62edt_reports AS R, chm62edt_report_type AS T, DC_SOURCE AS S, DC_TITLE AS TITLE " +
@@ -909,12 +909,15 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 			rs = preparedStatement.executeQuery();
 			while(rs.next()){
 				
-				Integer idDc = rs.getInt("ID_DC");
+				String idDc = rs.getString("ID_DC");
 				String title = rs.getString("TITLE");
 				String source = rs.getString("SOURCE");
 				
 				String heading = EunisUtil.threeDots(title,50) + " (" + source + ")";
-				ret.put(idDc, heading);				
+				PairDTO pair = new PairDTO();
+				pair.setKey(idDc);
+				pair.setValue(heading);
+				ret.add(pair);				
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

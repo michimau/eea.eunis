@@ -5,18 +5,44 @@
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Import Red List">
 
 	<stripes:layout-component name="contents">
-
+	
+	<script language="JavaScript" type="text/javascript">
+  		//<![CDATA[
+    	function showHide(val) {
+      		if(val.value != -1)
+          		document.getElementById("newsource").style.display = 'none';
+      		else
+      			document.getElementById("newsource").style.display = 'inline';
+    	}
+  		//]]>
+  	</script>
+	
 	<c:choose>
 		<c:when test="${actionBean.context.sessionManager.authenticated && actionBean.context.sessionManager.importExportData_RIGHT}">
 	        <h1>Import Red List</h1>
 	        <stripes:form action="/dataimport/importredlist" method="post" name="f">
-	        	<stripes:label for="file1">XML file for mammals</stripes:label>
-	        	<stripes:file name="fileMammals" id="file1"/><br/>
-	        	<stripes:label for="file2">XML file for amphibians</stripes:label>
-	        	<stripes:file name="fileAmphibians" id="file2"/><br/>
-	        	<stripes:label for="file3">XML file for reptiles</stripes:label>
-	        	<stripes:file name="fileReptiles" id="file3"/><br/><br/>
-	        	<table width="380" border="0">
+	        	<b>XML files</b> (max 5 files per import):<br/>
+	        	<stripes:file name="files[0]"/><br/>
+	        	<stripes:file name="files[1]"/><br/>
+	        	<stripes:file name="files[2]"/><br/>
+	        	<stripes:file name="files[3]"/><br/>
+	        	<stripes:file name="files[4]"/><br/>
+	        	<stripes:checkbox name="delete" id="delete"/>
+	        	<stripes:label for="delete"> - delete old threats (only deletes old threats of species that importer finds in XML file(s))</stripes:label><br/>
+	        	<table width="450" border="0">
+	        		<tr>
+	        			<td><stripes:label for="idDc">Source</stripes:label></td>
+			        	<td>
+			        		<stripes:select name="idDc" id="idDc" style="width:400px;" onchange="javascript:showHide(this);">
+			        			<stripes:option value="-1">- new source -</stripes:option>
+			        			<c:forEach var="item" items="${actionBean.sources}">
+			        				<stripes:option value="${item.key}">${item.value}</stripes:option>
+								</c:forEach>
+			        		</stripes:select>
+			        	</td>
+			        </tr>
+	        	</table>
+	        	<table width="450" border="0" id="newsource">
 	        		<tr>
 	        			<td><stripes:label for="title">Title</stripes:label></td>
 			        	<td><stripes:text name="title" id="title"/></td>
@@ -41,8 +67,10 @@
 			        	<td><stripes:label for="publisher">Publisher</stripes:label></td>
 			        	<td><stripes:text name="publisher" id="publisher"/></td>
 			        </tr>
+			   </table>
+			   <table width="450" border="0">
 			        <tr>
-			        	<td colspan="2" align="right"><stripes:submit name="importRedList" value="Import"/></td>
+			        	<td align="right"><stripes:submit name="importRedList" value="Import"/></td>
 			        </tr>
 			    </table>
 			</stripes:form>

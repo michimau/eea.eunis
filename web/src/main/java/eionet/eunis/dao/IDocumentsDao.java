@@ -1,5 +1,6 @@
 package eionet.eunis.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import eionet.eunis.dto.DcContributorDTO;
@@ -180,5 +181,11 @@ public interface IDocumentsDao {
 	 * @return DesignationDcObjectDTO
 	 */
 	DesignationDcObjectDTO getDesignationDcObject(String idDesig, String idGeo) throws Exception;
+	
+	/**
+	 * Get list of known sources for red list import
+	 * @return List
+	 */
+	HashMap<Integer,String> getRedListSources() throws Exception;
 
 }

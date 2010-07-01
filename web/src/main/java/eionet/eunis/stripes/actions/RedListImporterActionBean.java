@@ -1,15 +1,14 @@
 package eionet.eunis.stripes.actions;
 
 import java.io.InputStream;
+import java.util.HashMap;
 
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.FileBean;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
-import ro.finsiel.eunis.dataimport.parsers.RedListsAmphibiansImportParser;
-import ro.finsiel.eunis.dataimport.parsers.RedListsMammalsImportParser;
-import ro.finsiel.eunis.dataimport.parsers.RedListsReptilesImportParser;
+import ro.finsiel.eunis.dataimport.parsers.RedListsImportParser;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 import eionet.eunis.util.Constants;
 
@@ -22,9 +21,8 @@ import eionet.eunis.util.Constants;
 @UrlBinding("/dataimport/importredlist")
 public class RedListImporterActionBean extends AbstractStripesAction {
 	
-	private FileBean fileMammals;
-	private FileBean fileAmphibians;
-	private FileBean fileReptiles;
+	private FileBean[] files = new FileBean[5];
+	private boolean delete = false;
 	
 	private String title;
 	private String source;
@@ -32,9 +30,17 @@ public class RedListImporterActionBean extends AbstractStripesAction {
 	private String editor;
 	private String url;
 	private String date;
+	
+	private HashMap<Integer,String> sources;
+	private Integer idDc;
 		
 	@DefaultHandler
 	public Resolution defaultAction() {
+		try {
+			sources = getContext().getDocumentsDao().getRedListSources();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		String forwardPage = "/stripes/redlistimporter.jsp";
 		setMetaDescription("Import Red List");
 		return new ForwardResolution(forwardPage);
@@ -45,50 +51,29 @@ public class RedListImporterActionBean extends AbstractStripesAction {
 		String forwardPage = "/stripes/redlistimporter.jsp";
 		setMetaDescription("Import Red List");
 		if(getContext().getSessionManager().isAuthenticated() && getContext().getSessionManager().isImportExportData_RIGHT()){
-			InputStream inputStreamMammals = null;
-			InputStream inputStreamAmphibians = null;
-			InputStream inputStreamReptiles = null;
-			
 			try{
-				
 				SQLUtilities sqlUtil = getContext().getSqlUtilities();
 				
-				Integer dc_id = null;
-				if (fileMammals != null || fileAmphibians != null || fileReptiles != null){
-					dc_id = getContext().getDocumentsDao().insertSource(title, source, publisher, editor, url, date);
+				
+				if(idDc != null && idDc.intValue() == -1){
+					if (files != null && files.length > 0)
+						idDc = getContext().getDocumentsDao().insertSource(title, source, publisher, editor, url, date);
 				}
 				
-				if(dc_id != null){
-					if (fileMammals != null){
-						inputStreamMammals = fileMammals.getInputStream();
-						
-						RedListsMammalsImportParser parser = new RedListsMammalsImportParser(sqlUtil, dc_id);
-						parser.execute(inputStreamMammals);
-						fileMammals.delete();
-						if(inputStreamMammals!=null)
-							inputStreamMammals.close();
-					}
-					
-					if (fileAmphibians != null){
-						inputStreamAmphibians = fileAmphibians.getInputStream();
-						
-						RedListsAmphibiansImportParser parser = new RedListsAmphibiansImportParser(sqlUtil, dc_id);
-						parser.execute(inputStreamAmphibians);
-						fileAmphibians.delete();
-						if(inputStreamAmphibians!=null)
-							inputStreamAmphibians.close();
-					}
-					
-					if (fileReptiles != null){
-						inputStreamReptiles = fileReptiles.getInputStream();
-						
-						RedListsReptilesImportParser parser = new RedListsReptilesImportParser(sqlUtil, dc_id);
-						parser.execute(inputStreamReptiles);
-						fileReptiles.delete();
-						if(inputStreamReptiles!=null)
-							inputStreamReptiles.close();
+				if(idDc != null){
+					for(FileBean file : files){
+						if(file != null){
+							InputStream inputStream = file.getInputStream();
+							
+							RedListsImportParser parser = new RedListsImportParser(sqlUtil, idDc, delete);
+							parser.execute(inputStream);
+							file.delete();
+							if(inputStream!=null)
+								inputStream.close();
+						}
 					}
 					showMessage("Successfully imported!");
+					sources = getContext().getDocumentsDao().getRedListSources();
 				} else {
 					handleEunisException("Could not insert new source!", Constants.SEVERITY_WARNING);
 				}				
@@ -101,30 +86,6 @@ public class RedListImporterActionBean extends AbstractStripesAction {
 			handleEunisException("You are not logged in or you do not have enough privileges to view this page!", Constants.SEVERITY_WARNING);
 		}
 		return new ForwardResolution(forwardPage);
-	}
-
-	public FileBean getFileMammals() {
-		return fileMammals;
-	}
-
-	public void setFileMammals(FileBean fileMammals) {
-		this.fileMammals = fileMammals;
-	}
-
-	public FileBean getFileAmphibians() {
-		return fileAmphibians;
-	}
-
-	public void setFileAmphibians(FileBean fileAmphibians) {
-		this.fileAmphibians = fileAmphibians;
-	}
-
-	public FileBean getFileReptiles() {
-		return fileReptiles;
-	}
-
-	public void setFileReptiles(FileBean fileReptiles) {
-		this.fileReptiles = fileReptiles;
 	}
 
 	public String getTitle() {
@@ -173,6 +134,38 @@ public class RedListImporterActionBean extends AbstractStripesAction {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public HashMap<Integer, String> getSources() {
+		return sources;
+	}
+
+	public void setSources(HashMap<Integer, String> sources) {
+		this.sources = sources;
+	}
+
+	public FileBean[] getFiles() {
+		return files;
+	}
+
+	public void setFiles(FileBean[] files) {
+		this.files = files;
+	}
+
+	public Integer getIdDc() {
+		return idDc;
+	}
+
+	public void setIdDc(Integer idDc) {
+		this.idDc = idDc;
+	}
+
+	public boolean isDelete() {
+		return delete;
+	}
+
+	public void setDelete(boolean delete) {
+		this.delete = delete;
 	}
 	
 }

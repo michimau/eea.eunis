@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import eionet.eunis.dto.DcContributorDTO;
@@ -30,6 +31,7 @@ import eionet.eunis.dto.readers.DcObjectDTOReader;
 import eionet.eunis.dto.readers.DcTitleDTOReader;
 
 import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.utilities.EunisUtil;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
 /**
@@ -884,6 +886,41 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 			getSqlUtils().closeAll(con, preparedStatement, rs);
 		}
 		
+		return ret;
+	}
+	
+	public HashMap<Integer,String> getRedListSources() throws Exception {
+		
+		HashMap<Integer,String> ret = new HashMap<Integer,String>();
+		
+		String query = "SELECT S.ID_DC, S.SOURCE, TITLE.TITLE " +
+				"FROM chm62edt_reports AS R, chm62edt_report_type AS T, DC_SOURCE AS S, DC_TITLE AS TITLE " +
+				"WHERE R.ID_REPORT_TYPE = T.ID_REPORT_TYPE AND T.LOOKUP_TYPE = 'CONSERVATION_STATUS' " +
+				"AND R.ID_DC = S.ID_DC AND R.ID_DC = TITLE.ID_DC GROUP BY R.ID_DC ORDER BY TITLE.TITLE";
+		
+		Connection con = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		
+		try{
+			
+			con = getSqlUtils().getConnection();
+			preparedStatement = con.prepareStatement(query);
+			rs = preparedStatement.executeQuery();
+			while(rs.next()){
+				
+				Integer idDc = rs.getInt("ID_DC");
+				String title = rs.getString("TITLE");
+				String source = rs.getString("SOURCE");
+				
+				String heading = EunisUtil.threeDots(title,50) + " (" + source + ")";
+				ret.put(idDc, heading);				
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			getSqlUtils().closeAll(con, preparedStatement, rs);
+		}
 		return ret;
 	}
 

@@ -10,11 +10,11 @@ libpath=$eunis/lib
 # !!!!!!!!!!!!!!!!! CHECK, if mysql JAR is correct !!!!!!!!!!!!!!
 cp=@MYSQL.JAR@
 
-cp=$cp:$libpath/xmlParserAPIs-2.2.1.jar
-cp=$cp:$libpath/xml-apis-1.0.b2.jar:$CLASSPATH
+cp=$cp:$libpath/jrf-ver.unknown.jar
+cp=$cp:$libpath/log4j-1.2.13.jar:$CLASSPATH
 
 if [ "$1" = "" ]; then
-	echo "Usage: natura2000importer {folderName}"
+	echo "Usage: deletespecies {species1ID} {species2ID} {species3ID} ..."
 else
-	$java -cp $cp ro.finsiel.eunis.dataimport.Natura2000Importer $1
+	$java -cp $cp eionet.eunis.scripts.DeleteSpecies $@
 fi;

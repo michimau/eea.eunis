@@ -1,4 +1,4 @@
-package eionet.eunis.dao;
+package eionet.eunis.dao.impl;
 
 import ro.finsiel.eunis.utilities.SQLUtilities;
 

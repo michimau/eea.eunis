@@ -1,4 +1,4 @@
-package eionet.eunis.dao;
+package eionet.eunis.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import eionet.eunis.dao.IDocumentsDao;
+import eionet.eunis.dao.IExternalObjectsDao;
 import eionet.eunis.dto.ExternalObjectDTO;
 
 import ro.finsiel.eunis.utilities.SQLUtilities;

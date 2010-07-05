@@ -1,4 +1,4 @@
-package eionet.eunis.dao;
+package eionet.eunis.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import eionet.eunis.dao.IDocumentsDao;
 import eionet.eunis.dto.DcContributorDTO;
 import eionet.eunis.dto.DcCoverageDTO;
 import eionet.eunis.dto.DcCreatorDTO;

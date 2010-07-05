@@ -5,16 +5,11 @@ eunis=@WEBAPP.HOME@/WEB-INF
 cd $eunis/classes
 java=/usr/bin/java
 
-libpath=$eunis/lib
-
 # !!!!!!!!!!!!!!!!! CHECK, if mysql JAR is correct !!!!!!!!!!!!!!
 cp=@MYSQL.JAR@
 
-cp=$cp:$libpath/xmlParserAPIs-2.2.1.jar
-cp=$cp:$libpath/xml-apis-1.0.b2.jar:$CLASSPATH
-
 if [ "$1" = "" ]; then
-	echo "Usage: natura2000importer {folderName}"
+	echo "Usage: deletesites {site1ID} {site2ID} {site3ID} ..."
 else
-	$java -cp $cp ro.finsiel.eunis.dataimport.Natura2000Importer $1
+	$java -cp $cp eionet.eunis.scripts.DeleteSites $@
 fi;

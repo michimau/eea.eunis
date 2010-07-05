@@ -1,4 +1,4 @@
-package eionet.eunis.dao;
+package eionet.eunis.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import eionet.eunis.dao.ISitesDao;
 
 import ro.finsiel.eunis.utilities.SQLUtilities;
 

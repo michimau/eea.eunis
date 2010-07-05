@@ -1,4 +1,4 @@
-package eionet.eunis.dao;
+package eionet.eunis.dao.impl;
 
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
 import ro.finsiel.eunis.utilities.SQLUtilities;
+import eionet.eunis.dao.ISpeciesFactsheetDao;
 import eionet.eunis.dto.SpeciesAttributeDto;
 import eionet.eunis.dto.readers.SpeciesAttributeDTOReader;
 

@@ -3,7 +3,7 @@ package eionet.eunis;
 import java.util.List;
 
 import eionet.eunis.dao.ISpeciesFactsheetDao;
-import eionet.eunis.dao.SpeciesFactsheetDaoImpl;
+import eionet.eunis.dao.impl.SpeciesFactsheetDaoImpl;
 
 /**
  * @author alex

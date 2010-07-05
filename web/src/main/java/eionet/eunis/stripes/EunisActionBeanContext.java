@@ -8,14 +8,14 @@ import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.session.SessionManager;
 import ro.finsiel.eunis.utilities.SQLUtilities;
-import eionet.eunis.dao.DocumentsDaoImpl;
-import eionet.eunis.dao.ExternalObjectsDaoImpl;
 import eionet.eunis.dao.IDocumentsDao;
 import eionet.eunis.dao.IExternalObjectsDao;
 import eionet.eunis.dao.ISitesDao;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
-import eionet.eunis.dao.SitesDaoImpl;
-import eionet.eunis.dao.SpeciesFactsheetDaoImpl;
+import eionet.eunis.dao.impl.DocumentsDaoImpl;
+import eionet.eunis.dao.impl.ExternalObjectsDaoImpl;
+import eionet.eunis.dao.impl.SitesDaoImpl;
+import eionet.eunis.dao.impl.SpeciesFactsheetDaoImpl;
 
 /**
  * Eunis application context.

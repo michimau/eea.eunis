@@ -19,7 +19,7 @@ public class DeleteSites {
 		try {
 			if(args.length == 0){
 				System.out.println("Missing site IDs!");
-				System.out.println("Usage: eionet.eunis.scripts.DeleteSites {site1ID} {site2ID} {site3ID} ...");
+				System.out.println("Usage: deletesites {site1ID} {site2ID} {site3ID} ...");
 			} else {
 				Map<String,String> siteIds = new HashMap<String,String>();
 				for (String siteID : args) {

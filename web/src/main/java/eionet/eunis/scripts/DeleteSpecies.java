@@ -19,7 +19,7 @@ public class DeleteSpecies {
 		try {
 			if(args.length == 0){
 				System.out.println("Missing species IDs!");
-				System.out.println("Usage: eionet.eunis.scripts.DeleteSpecies {species1ID} {species2ID} {species3ID} ...");
+				System.out.println("Usage: deletespecies {species1ID} {species2ID} {species3ID} ...");
 			} else {
 				Map<String,String> speciesIds = new HashMap<String,String>();
 				for (String speciesID : args) {

@@ -20,6 +20,7 @@ import org.simpleframework.xml.stream.Format;
 
 import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
+import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.SiteFactsheetDto;
 import eionet.eunis.util.Pair;
 
@@ -126,6 +127,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 			Mapper mapper = DozerBeanMapperSingletonWrapper.getInstance();
 			SiteFactsheetDto dto = mapper
 					.map(factsheet, SiteFactsheetDto.class);
+			dto.setDcmitype(new ResourceDto("","http://purl.org/dc/dcmitype/Text"));
 			if (dto.getIdDc() != null && !"-1".equals(dto.getIdDc().getId())) {
 				dto.getIdDc().setPrefix("http://eunis.eea.europa.eu/documents/");
 			} else {

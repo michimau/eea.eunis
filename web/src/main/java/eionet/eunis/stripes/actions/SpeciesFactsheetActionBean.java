@@ -255,6 +255,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 		dto.setGenus(factsheet.getSpeciesObject().getGenus());
 		dto.setAuthor(factsheet.getSpeciesObject().getAuthor());
 		dto.setDwcScientificName(dto.getScientificName() + ' ' + dto.getAuthor());
+		dto.setDcmitype(new ResourceDto("","http://purl.org/dc/dcmitype/Text"));
 		
 		dto.setAttributes(
 				getContext().getSpeciesFactsheetDao().getAttributesForNatureObject(

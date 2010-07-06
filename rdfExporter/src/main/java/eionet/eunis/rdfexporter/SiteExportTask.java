@@ -12,6 +12,7 @@ import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.stream.Format;
 
 import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
+import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.SiteFactsheetDto;
 
 /**
@@ -40,6 +41,7 @@ public class SiteExportTask implements Runnable {
 			Mapper mapper = DozerBeanMapperSingletonWrapper.getInstance();
 			SiteFactsheetDto dto = mapper
 					.map(factsheet, SiteFactsheetDto.class);
+			dto.setDcmitype(new ResourceDto("","http://purl.org/dc/dcmitype/Text"));
 			if (dto.getIdDc() != null && !"-1".equals(dto.getIdDc().getId())) {
 				dto.getIdDc().setPrefix("http://eunis.eea.europa.eu/documents/");
 			} else {

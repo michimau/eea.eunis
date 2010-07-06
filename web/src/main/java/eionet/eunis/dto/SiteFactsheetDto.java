@@ -22,6 +22,8 @@ public class SiteFactsheetDto implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@Element(name = "rdf:type", required = false)
+	private ResourceDto dcmitype;
 	@Element(name = "hasDesignation", required = false)
 	private ResourceDto idDesignation;
 	@Element(name = "hasSource", required = false)
@@ -557,6 +559,14 @@ public class SiteFactsheetDto implements Serializable {
 	 */
 	public void setIdDc(ResourceDto idDc) {
 		this.idDc = idDc;
+	}
+
+	public ResourceDto getDcmitype() {
+		return dcmitype;
+	}
+
+	public void setDcmitype(ResourceDto dcmitype) {
+		this.dcmitype = dcmitype;
 	}
 
 }

@@ -35,6 +35,9 @@ public class SpeciesFactsheetDto implements Serializable{
 	@Element(required = false, name = "binomialName")
 	private String scientificName;
 	
+	@Element(required = false, name = "rdf:type")
+	private ResourceDto dcmitype;
+	
 	@Element(required = false, name = "dwc:scientificNameAuthorship")
 	private String author;
 	
@@ -127,7 +130,14 @@ public class SpeciesFactsheetDto implements Serializable{
 	public void setExpectedInLocations(List<ResourceDto> expectedInLocations) {
 		this.expectedInLocations = expectedInLocations;
 	}
-	
+
+	public ResourceDto getDcmitype() {
+		return dcmitype;
+	}
+
+	public void setDcmitype(ResourceDto dcmitype) {
+		this.dcmitype = dcmitype;
+	}
 	
 	
 }

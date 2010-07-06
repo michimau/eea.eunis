@@ -2840,7 +2840,7 @@ public final class Utilities {
 			}
 			Collections.sort(list);
 			
-			ret += "<ul class=\"tree\">"+newLine;
+			ret += "<ul class=\"eunistree\">"+newLine;
 			for(TaxonomyDTO tax : list){
 				
 				String taxTitle = tax.getTitle();
@@ -2865,7 +2865,7 @@ public final class Utilities {
 				if(expand.length()>0 && expandContains(expand,taxId)){
 					ArrayList SpeciesList = sqlc.SQL2Array("SELECT CONCAT('<a href=\"species/',ID_SPECIES,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="+taxId+" ORDER BY SCIENTIFIC_NAME");
 					if(SpeciesList.size()>0) {
-						ret += "<ul class=\"tree\">"+newLine;
+						ret += "<ul class=\"eunistree\">"+newLine;
               			for(int i=0;i<SpeciesList.size();i++){
               				ret += "<li>"+newLine;
 							ret += "<img src=\"images/img_bullet.gif\">&nbsp;&nbsp;"+SpeciesList.get(i)+newLine;

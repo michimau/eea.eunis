@@ -1,10 +1,10 @@
-#tree
+#eunistree
 {
 	font-family: verdana, helvetica, sans-serif;
 	font-size: 0.9em;
 }
 
-#tree a
+#eunistree a
 {
 	color: #000;
 	text-decoration: none;
@@ -12,14 +12,14 @@
 	font-family: verdana, helvetica, sans-serif;
 }
 
-#tree img
+#eunistree img
 {
 	border: 0px;
 	width: 19px;
 	height: 16px;
 }
 
-ul.tree {
+ul.eunistree {
 	margin: 1em 0;
 	list-style-image: none;
 	list-style: none;

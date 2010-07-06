@@ -21,7 +21,7 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
   <jsp:include page="header-page.jsp" />
-    <link rel="StyleSheet" href="css/tree.css" type="text/css" />
+    <link rel="StyleSheet" href="css/eunistree.css" type="text/css" />
     <script language="JavaScript" type="text/javascript" src="script/tree.js"></script>
     <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
 <%

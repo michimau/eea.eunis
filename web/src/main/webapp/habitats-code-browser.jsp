@@ -25,7 +25,7 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-    <link rel="StyleSheet" href="css/tree.css" type="text/css" />
+    <link rel="StyleSheet" href="css/eunistree.css" type="text/css" />
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("eunis_habitat_type_hierarchical_view")%>
@@ -110,7 +110,7 @@
                 String hide = cm.cmsPhrase("Hide sublevel habitat types");
                 String show = cm.cmsPhrase("Show sublevel habitat types");
             %>
-                <ul class="tree">
+                <ul class="eunistree">
             <%
                 while(rs.next())
                 {
@@ -134,7 +134,7 @@
 		                  rs2 = ps2.executeQuery();
 		
 		            %>
-		                  <ul class="tree">
+		                  <ul class="eunistree">
 		            <%
 		                  while(rs2.next())
 		                  {
@@ -168,7 +168,7 @@
 		                       rs4 = ps4.executeQuery();
 		
 		            %>
-		                       <ul class="tree">
+		                       <ul class="eunistree">
 		            <%
 		                       while(rs4.next())
 		                       {
@@ -202,7 +202,7 @@
 		                           rs5 = ps5.executeQuery();
 		
 		            %>
-		                           <ul class="tree">
+		                           <ul class="eunistree">
 		            <%
 		                           while(rs5.next())
 		                           {
@@ -235,7 +235,7 @@
 		                               rs6 = ps6.executeQuery();
 		
 		            %>
-		                               <ul class="tree">
+		                               <ul class="eunistree">
 		            <%
 		                               while(rs6.next())
 		                               {
@@ -268,7 +268,7 @@
 		                                   rs7 = ps7.executeQuery();
 		
 		            %>
-		                                   <ul class="tree">
+		                                   <ul class="eunistree">
 		            <%
 		                                   while(rs7.next())
 		                                   {

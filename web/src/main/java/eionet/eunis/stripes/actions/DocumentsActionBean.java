@@ -140,6 +140,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
 			DcObjectDTO object = it.next();
 			if(object != null){
 				s.append("<rdf:Description rdf:about=\"").append(doc_url).append(object.getId()).append("\">\n");
+				s.append("<rdf:type rdf:resource=\"http://purl.org/dc/dcmitype/Text\"/>\n");
 				if(object.getTitle() != null && !object.getTitle().equals(""))
 					s.append("<dc:title>").append(EunisUtil.replaceTags(object.getTitle(), true, true)).append("</dc:title>\n");
 				if(object.getSource() != null && !object.getSource().equals(""))
@@ -187,6 +188,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
 		DcObjectDTO object = getContext().getDocumentsDao().getDcObject(id);
 		if(object != null){
 			s.append("<rdf:Description rdf:about=\"").append(doc_url).append(object.getId()).append("\">\n");
+			s.append("<rdf:type rdf:resource=\"http://purl.org/dc/dcmitype/Text\"/>\n");
 			if(object.getTitle() != null && !object.getTitle().equals(""))
 				s.append("<dc:title>").append(EunisUtil.replaceTags(object.getTitle(), true, true)).append("</dc:title>\n");
 			if(object.getSource() != null && !object.getSource().equals(""))

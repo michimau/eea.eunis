@@ -4,7 +4,7 @@
           xsi:schemaLocation="http://dozer.sourceforge.net
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
           
-  <mapping wildcard="false"> 
+  <mapping wildcard="false" map-null="false"> 
     <class-a>ro.finsiel.eunis.factsheet.sites.SiteFactsheet</class-a>
     <class-b>eionet.eunis.dto.SiteFactsheetDto</class-b>   
     <field>

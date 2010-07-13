@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+   xmlns:sc="http://sw.deri.org/2007/07/sitemapextension/scschema.xsd"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+   >
+
+  <url><loc>http://eunis.eea.europa.eu/copyright.jsp</loc></url>
+
+<!-- RDF files -->
+  <sc:dataset>
+    <sc:datasetLabel>Sites schema declaration</sc:datasetLabel>
+    <sc:dataDumpLocation>http://eunis.eea.europa.eu/rdf/sites-schema.rdf</sc:dataDumpLocation>
+  </sc:dataset>
+
+  <sc:dataset>
+    <sc:datasetLabel>Species schema declaration</sc:datasetLabel>
+    <sc:dataDumpLocation>http://eunis.eea.europa.eu/rdf/species-schema.rdf</sc:dataDumpLocation>
+  </sc:dataset>
+
+  <sc:dataset>
+    <sc:datasetLabel>voID declarations</sc:datasetLabel>
+    <sc:dataDumpLocation>http://eunis.eea.europa.eu/void.rdf</sc:dataDumpLocation>
+  </sc:dataset>
+
+</urlset>
+

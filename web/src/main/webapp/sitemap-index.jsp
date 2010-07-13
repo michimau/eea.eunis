@@ -34,12 +34,13 @@
 
   out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
   out.println("<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">");
+  out.println("<sitemap><loc>http://eunis.eea.europa.eu/sitemap-files.xml</loc></sitemap>");
 
   try {
     ps = con.createStatement();
 
     // Species
-    rs = ps.executeQuery("SELECT COUNT(*) FROM CHM62EDT_SPECIES WHERE VALID_NAME=1");
+    rs = ps.executeQuery("SELECT COUNT(*) FROM CHM62EDT_SPECIES WHERE ID_SPECIES=ID_SPECIES_LINK");
     rs.first();
     start = 0;
     count = rs.getInt(1);

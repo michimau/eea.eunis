@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
  * @version 1.2
  * @since 23.01.2003
  */
-public class ScientificNamePersist extends PersistentObject {
+public class ScientificNamePersist extends PersistentObject implements Comparable<ScientificNamePersist> {
   /** This is a database field. */
   private Integer i_idSpecies = null;
   /** This is a database field. */
@@ -51,6 +51,15 @@ public class ScientificNamePersist extends PersistentObject {
    */
   public ScientificNamePersist() {
     super();
+  }
+  
+  public int compareTo(ScientificNamePersist other){
+	  return getScientificName().compareTo(other.getScientificName());
+  }
+  
+  @Override
+  public String toString(){
+	  return getScientificName();
   }
 
   /** Getter for a database field */

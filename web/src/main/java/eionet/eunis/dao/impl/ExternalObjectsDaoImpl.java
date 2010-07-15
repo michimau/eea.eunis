@@ -6,20 +6,17 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import eionet.eunis.dao.IDocumentsDao;
 import eionet.eunis.dao.IExternalObjectsDao;
 import eionet.eunis.dto.ExternalObjectDTO;
 
-import ro.finsiel.eunis.utilities.SQLUtilities;
 
 /**
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
-public class ExternalObjectsDaoImpl extends BaseDaoImpl implements IExternalObjectsDao {
+public class ExternalObjectsDaoImpl extends MySqlBaseDao implements IExternalObjectsDao {
 
-	public ExternalObjectsDaoImpl(SQLUtilities sqlUtilities) {
-		super(sqlUtilities);
+	public ExternalObjectsDaoImpl() {
 	}
 	
 	/** 
@@ -39,7 +36,7 @@ public class ExternalObjectsDaoImpl extends BaseDaoImpl implements IExternalObje
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			rs = preparedStatement.executeQuery();
 			while(rs.next()){
@@ -55,7 +52,7 @@ public class ExternalObjectsDaoImpl extends BaseDaoImpl implements IExternalObje
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return ret;
@@ -68,7 +65,7 @@ public class ExternalObjectsDaoImpl extends BaseDaoImpl implements IExternalObje
 			Connection con = null;
 			PreparedStatement ps = null;
 		    try {
-		    	con = getSqlUtils().getConnection();
+		    	con = getConnection();
 		    	ps = con.prepareStatement(query);
 		    	
 		    	ps.setString(1, val);
@@ -78,7 +75,7 @@ public class ExternalObjectsDaoImpl extends BaseDaoImpl implements IExternalObje
 		    } catch ( Exception e ) {
 		    	e.printStackTrace();
 		    } finally {
-		    	getSqlUtils().closeAll(con, ps, null);
+		    	closeAllResources(con, ps, null);
 		    }
 		}
 	}

@@ -568,24 +568,6 @@ public class NameBean extends AbstractFormBean {
   }
 
   /**
-   * Getter for newName property - Specifies if name was chossen from soundex table.
-   *
-   * @return value of newName property.
-   */
-  public String getNewName() {
-    return newName;
-  }
-
-  /**
-   * Setter for newName property - Specifies if name was chossen from soundex table.
-   *
-   * @param newName New value
-   */
-  public void setNewName( String newName ) {
-    this.newName = newName;
-  }
-
-  /**
    * Getter for oldName property - Specifies searched name if name was chossen from soundex table.
    *
    * @return value of oldName property.

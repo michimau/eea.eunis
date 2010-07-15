@@ -20,6 +20,7 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 import com.hp.hpl.jena.rdf.arp.ARP;
 
+import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dto.ExternalObjectDTO;
 import eionet.eunis.util.Constants;
 
@@ -41,7 +42,7 @@ public class ExternalObjectsImporterActionBean extends AbstractStripesAction {
 	public Resolution defaultAction() {
 		String forwardPage = "/stripes/matchgeospecies.jsp";
 		setMetaDescription("Match geospecies");
-		objects = getContext().getExternalObjectsDao().getMaybeSameObjects();
+		objects = DaoFactory.getDaoFactory().getExternalObjectsDao().getMaybeSameObjects();
 		return new ForwardResolution(forwardPage);
 	}
 	
@@ -80,7 +81,7 @@ public class ExternalObjectsImporterActionBean extends AbstractStripesAction {
 				else
 					showMessage("Successfully imported!");
 				
-				objects = getContext().getExternalObjectsDao().getMaybeSameObjects();
+				objects = DaoFactory.getDaoFactory().getExternalObjectsDao().getMaybeSameObjects();
 				
 			} catch(Exception e) {
 				e.printStackTrace();
@@ -115,12 +116,12 @@ public class ExternalObjectsImporterActionBean extends AbstractStripesAction {
 					String key = it.next();
 					String value = issame.get(key);
 					if(key != null && value != null){
-						getContext().getExternalObjectsDao().updateExternalObject(key, value);
+						DaoFactory.getDaoFactory().getExternalObjectsDao().updateExternalObject(key, value);
 					}
 				}
 			}
 			showMessage("Successfully updated!");
-			objects = getContext().getExternalObjectsDao().getMaybeSameObjects();			
+			objects = DaoFactory.getDaoFactory().getExternalObjectsDao().getMaybeSameObjects();			
 		} else {
 			// FIXME: This is not a warning message. It is an ERROR message
 			handleEunisException("You are not logged in or you do not have enough privileges to view this page!", Constants.SEVERITY_WARNING);

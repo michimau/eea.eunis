@@ -10,6 +10,7 @@ import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import ro.finsiel.eunis.dataimport.parsers.RedListsImportParser;
 import ro.finsiel.eunis.utilities.SQLUtilities;
+import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dto.PairDTO;
 import eionet.eunis.util.Constants;
 
@@ -38,7 +39,7 @@ public class RedListImporterActionBean extends AbstractStripesAction {
 	@DefaultHandler
 	public Resolution defaultAction() {
 		try {
-			sources = getContext().getDocumentsDao().getRedListSources();
+			sources = DaoFactory.getDaoFactory().getDocumentsDao().getRedListSources();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -58,7 +59,7 @@ public class RedListImporterActionBean extends AbstractStripesAction {
 				
 				if(idDc != null && idDc.intValue() == -1){
 					if (files != null && files.length > 0)
-						idDc = getContext().getDocumentsDao().insertSource(title, source, publisher, editor, url, date);
+						idDc = DaoFactory.getDaoFactory().getDocumentsDao().insertSource(title, source, publisher, editor, url, date);
 				}
 				
 				if(idDc != null && idDc.intValue() != -1){
@@ -74,7 +75,7 @@ public class RedListImporterActionBean extends AbstractStripesAction {
 						}
 					}
 					showMessage("Successfully imported!");
-					sources = getContext().getDocumentsDao().getRedListSources();
+					sources = DaoFactory.getDaoFactory().getDocumentsDao().getRedListSources();
 				} else {
 					handleEunisException("Could not insert new source!", Constants.SEVERITY_WARNING);
 				}				

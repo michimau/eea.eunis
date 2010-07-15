@@ -2,12 +2,8 @@ package eionet.eunis.scripts;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ResourceBundle;
-
-import ro.finsiel.eunis.utilities.SQLUtilities;
-
-import eionet.eunis.dao.impl.SpeciesDaoImpl;
-
+import eionet.eunis.dao.DaoFactory;
+import eionet.eunis.dao.ISpeciesDao;
 
 public class DeleteSpecies {
 	
@@ -27,17 +23,7 @@ public class DeleteSpecies {
 						speciesIds.put(speciesID,null);
 				}
 				if(speciesIds.size() > 0){
-					
-					ResourceBundle props = ResourceBundle.getBundle("jrf");
-					String dbDriver = props.getString("mysql.driver");
-					String dbUrl = props.getString("mysql.url");
-					String dbUser = props.getString("mysql.user");
-					String dbPass = props.getString("mysql.password");
-					
-					SQLUtilities sqlUtilities = new SQLUtilities();
-					sqlUtilities.Init(dbDriver, dbUrl, dbUser, dbPass);
-					
-					SpeciesDaoImpl dao = new SpeciesDaoImpl(sqlUtilities);
+					ISpeciesDao dao = DaoFactory.getDaoFactory().getSpeciesDao();
 					dao.deleteSpecies(speciesIds);
 					System.out.println("Successfully deleted!");
 				}

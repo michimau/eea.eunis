@@ -31,6 +31,11 @@ public abstract class AbstractFormBean implements java.io.Serializable {
    * Current page dispayed on the view.
    */
   protected String currentPage = "0";
+  
+  /**
+   * Is similar name
+   */
+  protected String newName;
 
   /**
    * The results displayed per page at once.
@@ -213,6 +218,10 @@ public abstract class AbstractFormBean implements java.io.Serializable {
     {
       url.append(Utilities.writeURLParameter("ascendency", ascendency));
     }
+    if (classFields.contains("newName") && null != newName)
+    {
+      url.append(Utilities.writeURLParameter("newName", "true"));
+    }
     //  if (null != removeFilterIndex) { url.append(Utilities.writeURLParameter("removeFilterIndex", removeFilterIndex)); }
     return url;
   }
@@ -247,6 +256,9 @@ public abstract class AbstractFormBean implements java.io.Serializable {
     }
     if (classFields.contains("ascendency") && null != ascendency) {
       formString.append(Utilities.writeFormParameter("ascendency", ascendency));
+    }
+    if (classFields.contains("newName") && null != newName) {
+        formString.append(Utilities.writeFormParameter("newName", "true"));
     }
     //if (null != removeFilterIndex) { formString.append(Utilities.writeFormParameter("removeFilterIndex", removeFilterIndex)); }
     return formString;
@@ -430,4 +442,12 @@ public abstract class AbstractFormBean implements java.io.Serializable {
   public void setRemoveFilterIndex(String removeFilterIndex) {
     this.removeFilterIndex = removeFilterIndex;
   }
+
+	public final String getNewName() {
+		return newName;
+	}
+	
+	public final void setNewName(String newName) {
+		this.newName = newName;
+	}
 }

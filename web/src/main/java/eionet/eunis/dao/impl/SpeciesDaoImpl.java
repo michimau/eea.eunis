@@ -10,20 +10,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
 import eionet.eunis.dao.ISpeciesDao;
 
 import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist;
-import ro.finsiel.eunis.utilities.SQLUtilities;
 
 /**
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
-public class SpeciesDaoImpl extends BaseDaoImpl implements ISpeciesDao {
+public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
 
-	public SpeciesDaoImpl(SQLUtilities sqlUtilities) {
-		super(sqlUtilities);
+	public SpeciesDaoImpl() {
 	}
 	
 	public void deleteSpecies(Map<String, String> species) throws SQLException {
@@ -38,7 +38,7 @@ public class SpeciesDaoImpl extends BaseDaoImpl implements ISpeciesDao {
 		PreparedStatement ps6 = null;
 		
 	    try {
-	    	con = getSqlUtils().getConnection();
+	    	con = getConnection();
 	    	
 	    	st = con.createStatement();
 	    	st2 = con.createStatement();
@@ -166,14 +166,14 @@ public class SpeciesDaoImpl extends BaseDaoImpl implements ISpeciesDao {
 	
 	private String getNatObjectId(String specieId) throws SQLException {
 		String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE ID_SPECIES = '"+specieId+"'";
-		String natId = getSqlUtils().ExecuteSQL(query);
+		String natId = ExecuteSQL(query);
 		return natId;
 	}
 	
 	private boolean isSynonym(String specieId) throws SQLException {
 		boolean ret = false;
 		String query = "SELECT VALID_NAME FROM CHM62EDT_SPECIES WHERE ID_SPECIES = '"+specieId+"'";
-		String synonym = getSqlUtils().ExecuteSQL(query);
+		String synonym = ExecuteSQL(query);
 		if(synonym != null && synonym.equals("0"))
 			ret = true;
 		return ret;

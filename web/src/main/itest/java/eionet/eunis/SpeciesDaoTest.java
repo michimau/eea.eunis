@@ -2,8 +2,8 @@ package eionet.eunis;
 
 import java.util.List;
 
+import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
-import eionet.eunis.dao.impl.SpeciesFactsheetDaoImpl;
 
 /**
  * @author alex
@@ -14,7 +14,7 @@ public class SpeciesDaoTest extends SqlUtilitiesTest {
 	
 	
 	public void testGetSynonymsFor() {
-		ISpeciesFactsheetDao dao = new SpeciesFactsheetDaoImpl(sqlUtilities);
+		ISpeciesFactsheetDao dao = DaoFactory.getDaoFactory().getSpeciesFactsheetDao();
 		List<Integer> tested = dao.getSynonyms(1015);
 		assertNotNull(tested);
 		assertEquals(951, (int) tested.get(0));

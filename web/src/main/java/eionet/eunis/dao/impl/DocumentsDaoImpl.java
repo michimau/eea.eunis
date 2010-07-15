@@ -33,16 +33,14 @@ import eionet.eunis.dto.readers.DcTitleDTOReader;
 
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.utilities.EunisUtil;
-import ro.finsiel.eunis.utilities.SQLUtilities;
 
 /**
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
-public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
+public class DocumentsDaoImpl extends MySqlBaseDao implements IDocumentsDao {
 
-	public DocumentsDaoImpl(SQLUtilities sqlUtilities) {
-		super(sqlUtilities);
+	public DocumentsDaoImpl() {
 	}
 	
 	/** 
@@ -59,7 +57,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			getSqlUtils().executeQuery(query, values, rsReader);
+			executeQuery(query, values, rsReader);
 			ret = rsReader.getResultList();
 			
 		} catch(Exception e) {
@@ -84,7 +82,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -98,7 +96,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return object;
@@ -119,7 +117,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -133,7 +131,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return object;
@@ -154,7 +152,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -168,7 +166,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return object;
@@ -189,7 +187,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -208,7 +206,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return object;
@@ -229,7 +227,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -245,7 +243,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return object;
@@ -266,7 +264,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -282,7 +280,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return object;
@@ -303,7 +301,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -317,7 +315,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return object;
@@ -338,7 +336,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -353,7 +351,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return object;
@@ -374,7 +372,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -388,7 +386,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return object;
@@ -409,7 +407,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -423,7 +421,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return object;
@@ -444,7 +442,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -469,7 +467,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return object;
@@ -490,7 +488,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -504,7 +502,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return object;
@@ -525,7 +523,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -539,7 +537,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return object;
@@ -560,7 +558,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -574,7 +572,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return object;
@@ -595,7 +593,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -610,7 +608,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return doc;
@@ -631,7 +629,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -652,7 +650,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return source;
@@ -690,7 +688,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			getSqlUtils().executeQuery(query, values, rsReader);
+			executeQuery(query, values, rsReader);
 			ret = rsReader.getResultList();
 			
 		} catch(Exception e) {
@@ -734,7 +732,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, id);
 			rs = preparedStatement.executeQuery();
@@ -761,7 +759,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return ret;
@@ -787,7 +785,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 			PreparedStatement psDate = null;
 			PreparedStatement psSource = null;
 		    try {
-		    	con = getSqlUtils().getConnection();
+		    	con = getConnection();
 		    	psIndex = con.prepareStatement(insertIndex);
 		    	psIndex.setInt(1, id_dc);
 		    	psIndex.executeUpdate();
@@ -831,7 +829,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 	}
 	
 	private int getId(String query) throws ParseException {
-    	String maxId = getSqlUtils().ExecuteSQL(query);
+    	String maxId = ExecuteSQL(query);
     	int maxIdInt = 0;
     	if(maxId != null && maxId.length()>0)
     		maxIdInt = new Integer(maxId).intValue();
@@ -865,7 +863,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, idDesig);
 			preparedStatement.setString(2, idGeo);
@@ -884,7 +882,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		
 		return ret;
@@ -905,7 +903,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		
 		try{
 			
-			con = getSqlUtils().getConnection();
+			con = getConnection();
 			preparedStatement = con.prepareStatement(query);
 			rs = preparedStatement.executeQuery();
 			while(rs.next()){
@@ -923,7 +921,7 @@ public class DocumentsDaoImpl extends BaseDaoImpl implements IDocumentsDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			getSqlUtils().closeAll(con, preparedStatement, rs);
+			closeAllResources(con, preparedStatement, rs);
 		}
 		return ret;
 	}

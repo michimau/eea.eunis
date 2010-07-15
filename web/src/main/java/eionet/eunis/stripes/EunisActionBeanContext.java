@@ -144,34 +144,6 @@ public class EunisActionBeanContext extends ActionBeanContext {
 		return sqlUtil;
 	}
 	
-	/**
-	 * @return factsheet helper dao
-	 */
-	public ISpeciesFactsheetDao getSpeciesFactsheetDao(){
-		return new SpeciesFactsheetDaoImpl(getSqlUtilities());
-	}
-	
-	/**
-	 * @return docs helper dao
-	 */
-	public IDocumentsDao getDocumentsDao(){
-		return new DocumentsDaoImpl(getSqlUtilities());
-	}
-	
-	/**
-	 * @return external objects helper dao
-	 */
-	public IExternalObjectsDao getExternalObjectsDao(){
-		return new ExternalObjectsDaoImpl(getSqlUtilities());
-	}
-	
-	/**
-	 * @return sites helper dao
-	 */
-	public ISitesDao getSitesDao(){
-		return new SitesDaoImpl(getSqlUtilities());
-	}
-	
 	public int getSeverity() {
 		return severity;
 	}

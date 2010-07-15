@@ -9,7 +9,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
-import ro.finsiel.eunis.utilities.SQLUtilities;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
 import eionet.eunis.dto.SpeciesAttributeDto;
 import eionet.eunis.dto.readers.SpeciesAttributeDTOReader;
@@ -18,12 +17,11 @@ import eionet.eunis.dto.readers.SpeciesAttributeDTOReader;
  * @author Aleksandr Ivanov
  * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
-public class SpeciesFactsheetDaoImpl extends BaseDaoImpl implements ISpeciesFactsheetDao {
+public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFactsheetDao {
 	
 	private static final Logger logger = Logger.getLogger(SpeciesFactsheetDaoImpl.class);
 
-	public SpeciesFactsheetDaoImpl(SQLUtilities sqlUtilities) {
-		super(sqlUtilities);
+	public SpeciesFactsheetDaoImpl() {
 	}
 
 	/** 
@@ -38,7 +36,7 @@ public class SpeciesFactsheetDaoImpl extends BaseDaoImpl implements ISpeciesFact
 				+ StringEscapeUtils.escapeSql(
 						StringEscapeUtils.unescapeHtml(idSpecies)) 
 				+ "'";
-		String result = getSqlUtils().ExecuteSQL(sql);
+		String result = ExecuteSQL(sql);
 		return StringUtils.isNumeric(result) && !StringUtils.isBlank(result)
 				? new Integer(result)
 				: 0;
@@ -49,9 +47,8 @@ public class SpeciesFactsheetDaoImpl extends BaseDaoImpl implements ISpeciesFact
 	 * {@inheritDoc}
 	 */
 	public String getScientificName(int idSpecies) {
-		SQLUtilities utils = getSqlUtils();
 		String sql = "SELECT SCIENTIFIC_NAME FROM CHM62EDT_SPECIES WHERE ID_SPECIES = " + idSpecies;
-		return utils.ExecuteSQL(sql);
+		return ExecuteSQL(sql);
 	}
 
 	/** 
@@ -63,9 +60,8 @@ public class SpeciesFactsheetDaoImpl extends BaseDaoImpl implements ISpeciesFact
 		if (idSpecies <= 0) {
 			return 0;
 		}
-		SQLUtilities utils = getSqlUtils();
 		String synonymSQL = "SELECT ID_SPECIES_LINK FROM CHM62EDT_SPECIES WHERE ID_SPECIES = " + idSpecies;
-		String result = utils.ExecuteSQL(synonymSQL);
+		String result = ExecuteSQL(synonymSQL);
 		
 		return StringUtils.isNumeric(result) && StringUtils.isNotBlank(result) 
 				? new Integer(result)
@@ -80,13 +76,12 @@ public class SpeciesFactsheetDaoImpl extends BaseDaoImpl implements ISpeciesFact
 		if (idSpecies <= 0) {
 			return null;
 		}
-		SQLUtilities utils = getSqlUtils();
 		String sql = "SELECT ID_SPECIES FROM CHM62EDT_SPECIES WHERE ID_SPECIES_LINK = ? AND ID_SPECIES <> ?";
 		List<Object> params = new LinkedList<Object>();
 		params.add(idSpecies);
 		params.add(idSpecies);
 		try {
-			return utils.executeQuery(sql, params);
+			return executeQuery(sql, params);
 		} catch (SQLException ignored) {
 			logger.error(ignored);
 			throw new RuntimeException(ignored);
@@ -94,14 +89,13 @@ public class SpeciesFactsheetDaoImpl extends BaseDaoImpl implements ISpeciesFact
 	}
 
 	public List<SpeciesAttributeDto> getAttributesForNatureObject(int idNatureObject) {
-		SQLUtilities utils = getSqlUtils();
 		String sql = "SELECT * FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES " +
 				"WHERE ID_NATURE_OBJECT = ? AND NAME NOT LIKE '\\_%'";
 		List<Object> params = new LinkedList<Object>();
 		params.add(idNatureObject);
 		try {
 			SpeciesAttributeDTOReader attributeReader = new SpeciesAttributeDTOReader();
-			utils.executeQuery(sql, params, attributeReader );
+			executeQuery(sql, params, attributeReader );
 			return attributeReader.getResultList();
 		} catch (SQLException ignored) {
 			logger.error(ignored);
@@ -131,9 +125,8 @@ public class SpeciesFactsheetDaoImpl extends BaseDaoImpl implements ISpeciesFact
 			sql += " LIMIT ?";
 			params.add(limit);
 		}
-		SQLUtilities utils = getSqlUtils();
 		try {
-			return utils.executeQuery(sql, params);
+			return executeQuery(sql, params);
 		} catch(SQLException ignored) {
 			logger.error(ignored);
 			throw new RuntimeException(ignored);

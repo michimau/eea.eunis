@@ -201,7 +201,7 @@
 			              						<input type="hidden" name="showVernacularNames" value="true" />
 			              						<input type="hidden" name="showValidName" value="true" />
 			              						<input type="hidden" name="showOtherInfo" value="true" />
-			              						<input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
+			              						<input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_IS%>" />
 			              						<input type="hidden" name="searchVernacular" value="true" />
 			              						<input type="hidden" name="searchSynonyms" value="true" />
 			              						<input type="hidden" name="sort" value="<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>" />

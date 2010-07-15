@@ -54,13 +54,20 @@ public class TSVNamesReport extends AbstractTSVReport {
     boolean searchSynonyms = Utilities.checkedStringToBoolean( this.formBean.getSearchSynonyms(), false );
 
     // Coming from form 1
-    if ( NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm )
-    {
-      this.dataFactory = new ro.finsiel.eunis.search.species.names.NamePaginator( new ScientificNameDomain( formBean.toSearchCriteria(),
-              formBean.toSortCriteria(),
-              searchSynonyms,
-              showEUNISInvalidatedSpecies,
-              this.formBean.getSearchVernacular() ) );
+    if ( NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm ){
+    	if(formBean.getNewName() != null && formBean.getNewName().equals("true")){
+    		this.dataFactory = new ro.finsiel.eunis.search.species.names.NamePaginator( new SimilarNameDomain( formBean.toSearchCriteria(),
+    				formBean.toSortCriteria(),
+    				searchSynonyms,
+    				showEUNISInvalidatedSpecies,
+    				this.formBean.getSearchVernacular() ) );
+    	} else {
+    		this.dataFactory = new ro.finsiel.eunis.search.species.names.NamePaginator( new ScientificNameDomain( formBean.toSearchCriteria(),
+    				formBean.toSortCriteria(),
+    				searchSynonyms,
+    				showEUNISInvalidatedSpecies,
+    				this.formBean.getSearchVernacular() ) );
+    	}
     }
     // Coming from form 2
     if ( NameSearchCriteria.CRITERIA_VERNACULAR.intValue() == typeForm )

@@ -4,6 +4,7 @@ import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
+import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.util.Constants;
 
 /**
@@ -28,7 +29,7 @@ public class UpdateCountrySitesFactsheetActionBean extends AbstractStripesAction
 		setMetaDescription("Update country sites factsheet");
 		if(getContext().getSessionManager().isAuthenticated() && getContext().getSessionManager().isImportExportData_RIGHT()){
 			try{
-				getContext().getSitesDao().updateCountrySitesFactsheet();
+				DaoFactory.getDaoFactory().getSitesDao().updateCountrySitesFactsheet();
 				showMessage("Successfully updated!");
 			} catch(Exception e) {
 				e.printStackTrace();

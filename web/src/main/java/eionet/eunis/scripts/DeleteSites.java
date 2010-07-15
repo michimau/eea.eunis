@@ -2,11 +2,8 @@ package eionet.eunis.scripts;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ResourceBundle;
-
-import ro.finsiel.eunis.utilities.SQLUtilities;
-
-import eionet.eunis.dao.impl.SitesDaoImpl;
+import eionet.eunis.dao.DaoFactory;
+import eionet.eunis.dao.ISitesDao;
 
 
 public class DeleteSites {
@@ -27,17 +24,7 @@ public class DeleteSites {
 						siteIds.put(siteID,null);
 				}
 				if(siteIds.size() > 0){
-					
-					ResourceBundle props = ResourceBundle.getBundle("jrf");
-					String dbDriver = props.getString("mysql.driver");
-					String dbUrl = props.getString("mysql.url");
-					String dbUser = props.getString("mysql.user");
-					String dbPass = props.getString("mysql.password");
-					
-					SQLUtilities sqlUtilities = new SQLUtilities();
-					sqlUtilities.Init(dbDriver, dbUrl, dbUser, dbPass);
-					
-					SitesDaoImpl dao = new SitesDaoImpl(sqlUtilities);
+					ISitesDao dao = DaoFactory.getDaoFactory().getSitesDao();
 					dao.deleteSites(siteIds);
 					System.out.println("Successfully deleted!");
 				}

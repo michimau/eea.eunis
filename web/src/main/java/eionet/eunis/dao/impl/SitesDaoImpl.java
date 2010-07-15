@@ -13,16 +13,13 @@ import java.util.Map;
 
 import eionet.eunis.dao.ISitesDao;
 
-import ro.finsiel.eunis.utilities.SQLUtilities;
-
 /**
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
-public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
+public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
 
-	public SitesDaoImpl(SQLUtilities sqlUtilities) {
-		super(sqlUtilities);
+	public SitesDaoImpl() {
 	}
 	
 	public void deleteSites(Map<String, String> sites) throws SQLException {
@@ -43,7 +40,7 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 		PreparedStatement ps19 = null;
 		
 	    try {
-	    	con = getSqlUtils().getConnection();
+	    	con = getConnection();
 	    	
 	    	st = con.createStatement();
 	    	
@@ -226,7 +223,7 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 	
 	private String getNatObjectId(String siteId) throws SQLException {
 		String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ID_SITE = '"+siteId+"'";
-		String natId = getSqlUtils().ExecuteSQL(query);
+		String natId = ExecuteSQL(query);
 		return natId;
 	}
 
@@ -241,7 +238,7 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 		
 		ResultSet rs = null;
 	    try {
-	    	con = getSqlUtils().getConnection();
+	    	con = getConnection();
 	    	
 	    	String query = "SELECT ID_SITE, ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE SOURCE_DB = 'CDDA_NATIONAL'";
 	    	ps = con.prepareStatement(query);
@@ -262,7 +259,7 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 	    } catch ( Exception e ) {
 	    	e.printStackTrace();
 	    } finally {
-	    	getSqlUtils().closeAll(con, ps, rs);
+	    	closeAllResources(con, ps, rs);
 	    }
 		
 	}
@@ -343,7 +340,7 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 		ResultSet rs2 = null;
 		
 		try {
-	    	con = getSqlUtils().getConnection();
+	    	con = getConnection();
 	    	//Empty chm62edt_country_sites_factsheet table before update
 	    	ps = con.prepareStatement("DELETE FROM chm62edt_country_sites_factsheet");
 	    	ps.executeUpdate();
@@ -511,7 +508,7 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 	    	e.printStackTrace();
 	    	throw new SQLException(e.getMessage(), e); 
 	    } finally {
-	    	getSqlUtils().closeAll(con, ps, rs);
+	    	closeAllResources(con, ps, rs);
 	    }
 	}
 	
@@ -524,7 +521,7 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 		ResultSet rs = null;
 		ResultSet rs2 = null;
 	    try {
-	    	con = getSqlUtils().getConnection();
+	    	con = getConnection();
 	    	
 	    	String updateDesignation = "UPDATE CHM62EDT_DESIGNATIONS SET CDDA_SITES='Y', TOTAL_NUMBER=? WHERE ID_DESIGNATION=?";
 			psUpdateDesignation = con.prepareStatement(updateDesignation);
@@ -558,7 +555,7 @@ public class SitesDaoImpl extends BaseDaoImpl implements ISitesDao {
 	    	e.printStackTrace();
 	    	throw new SQLException(e.getMessage(), e); 
 	    } finally {
-	    	getSqlUtils().closeAll(con, ps, rs);
+	    	closeAllResources(con, ps, rs);
 	    	if(ps2 != null) ps2.close();
 	    	if(psUpdateDesignation != null) psUpdateDesignation.close();
 	    	if(rs2 != null) rs.close();

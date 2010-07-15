@@ -129,83 +129,78 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable
    * @return A list of objects which match query criteria
    */
   public List getResults(int offsetStart, int pageSize, AbstractSortCriteria[] sortCriteria) throws CriteriaMissingException {
-    this.sortCriteria = sortCriteria;
-    List results;
-    if ( searchVernacular )
-    {
-      String where = _prepareWhereSearch().toString();
-      String query = "" +
-      " SELECT A.ID_SPECIES," +
-      " A.ID_NATURE_OBJECT," +
-      " A.SCIENTIFIC_NAME AS scientificName," +
-      " A.VALID_NAME AS validName," +
-      " A.ID_SPECIES_LINK," +
-      " A.TYPE_RELATED_SPECIES," +
-      " A.TEMPORARY_SELECT," +
-      " A.TAXONOMIC_SPECIES_CODE," +
-      " A.SPECIES_MAP," +
-      " A.ID_GROUP_SPECIES," +
-      " A.ID_TAXONOMY," +
-      " B.COMMON_NAME AS commonName," +
-      " C.NAME AS taxonomyName," +
-      " C.LEVEL, " +
-      " C.TAXONOMY_TREE, " +
-      " C.NAME AS taxonomicNameFamily, " +
-      " C.NAME AS taxonomicNameOrder" +
-      " FROM CHM62EDT_SPECIES A LEFT" +
-      " OUTER JOIN CHM62EDT_GROUP_SPECIES B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES" +
-      " LEFT OUTER JOIN CHM62EDT_TAXONOMY C ON A.ID_TAXONOMY=C.ID_TAXONOMY LEFT" +
-      " OUTER JOIN CHM62EDT_TAXONOMY D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY" +
-      " WHERE " +  where +
-      " UNION " +
-      " SELECT A.ID_SPECIES," +
-      " A.ID_NATURE_OBJECT," +
-      " A.SCIENTIFIC_NAME AS scientificName," +
-      " A.VALID_NAME AS validName," +
-      " A.ID_SPECIES_LINK," +
-      " A.TYPE_RELATED_SPECIES," +
-      " A.TEMPORARY_SELECT," +
-      " A.TAXONOMIC_SPECIES_CODE," +
-      " A.SPECIES_MAP," +
-      " A.ID_GROUP_SPECIES," +
-      " A.ID_TAXONOMY," +
-      " B.COMMON_NAME AS commonName," +
-      " C.NAME AS taxonomyName," +
-      " C.LEVEL," +
-      " C.TAXONOMY_TREE, " +
-      " C.NAME AS taxonomicNameFamily, " +
-      " C.NAME AS taxonomicNameOrder" +
-      " FROM CHM62EDT_REPORTS G" +
-      " INNER JOIN CHM62EDT_REPORT_TYPE F ON G.ID_REPORT_TYPE=F.ID_REPORT_TYPE" +
-      " INNER JOIN CHM62EDT_SPECIES A ON G.ID_NATURE_OBJECT=A.ID_NATURE_OBJECT" +
-      " LEFT OUTER JOIN CHM62EDT_GROUP_SPECIES B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES" +
-      " LEFT OUTER JOIN CHM62EDT_TAXONOMY C ON A.ID_TAXONOMY=C.ID_TAXONOMY" +
-      " LEFT OUTER JOIN CHM62EDT_TAXONOMY D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY" +
-      " INNER JOIN CHM62EDT_REPORT_ATTRIBUTES I ON G.ID_REPORT_ATTRIBUTES=I.ID_REPORT_ATTRIBUTES" +
-      " WHERE " + _prepareWhereSearchVernacular() +
-      " AND F.LOOKUP_TYPE = 'LANGUAGE'" +
-      " AND I.NAME ='VERNACULAR_NAME' " + _prepareWhereSort() + " LIMIT " + offsetStart + ", " + pageSize;
-      results = this.findCustom( query );
-    }
-    else
-    {
-      if (searchCriteria.length < 1) throw new CriteriaMissingException("Unable to search because no search criteria was specified...");
-      // Prepare the WHERE clause
-      StringBuffer filterSQL = _prepareWhereSearch();
-      // Add the ORDER BY clause to do the sorting
-      if (sortCriteria.length > 0)
-      {
-        filterSQL.append(_prepareWhereSort());
-      }
-      // Add the LIMIT clause to return only the wanted results
-      if (pageSize != 0)
-      {
-        filterSQL.append(" LIMIT " + offsetStart + ", " + pageSize);
-      }
-      results = this.findWhere(filterSQL.toString());
-    }
-    _resultCount = new Long( -1 );// After each query, reset the _resultCount, so countResults do correct numbering.
-    return results;
+	  this.sortCriteria = sortCriteria;
+	  List results;
+	  if ( searchVernacular ){
+	      String where = _prepareWhereSearch().toString();
+	      String query = "" +
+	      " SELECT A.ID_SPECIES," +
+	      " A.ID_NATURE_OBJECT," +
+	      " A.SCIENTIFIC_NAME AS scientificName," +
+	      " A.VALID_NAME AS validName," +
+	      " A.ID_SPECIES_LINK," +
+	      " A.TYPE_RELATED_SPECIES," +
+	      " A.TEMPORARY_SELECT," +
+	      " A.TAXONOMIC_SPECIES_CODE," +
+	      " A.SPECIES_MAP," +
+	      " A.ID_GROUP_SPECIES," +
+	      " A.ID_TAXONOMY," +
+	      " B.COMMON_NAME AS commonName," +
+	      " C.NAME AS taxonomyName," +
+	      " C.LEVEL, " +
+	      " C.TAXONOMY_TREE, " +
+	      " C.NAME AS taxonomicNameFamily, " +
+	      " C.NAME AS taxonomicNameOrder" +
+	      " FROM CHM62EDT_SPECIES A LEFT" +
+	      " OUTER JOIN CHM62EDT_GROUP_SPECIES B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES" +
+	      " LEFT OUTER JOIN CHM62EDT_TAXONOMY C ON A.ID_TAXONOMY=C.ID_TAXONOMY LEFT" +
+	      " OUTER JOIN CHM62EDT_TAXONOMY D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY" +
+	      " WHERE " +  where +
+	      " UNION " +
+	      " SELECT A.ID_SPECIES," +
+	      " A.ID_NATURE_OBJECT," +
+	      " A.SCIENTIFIC_NAME AS scientificName," +
+	      " A.VALID_NAME AS validName," +
+	      " A.ID_SPECIES_LINK," +
+	      " A.TYPE_RELATED_SPECIES," +
+	      " A.TEMPORARY_SELECT," +
+	      " A.TAXONOMIC_SPECIES_CODE," +
+	      " A.SPECIES_MAP," +
+	      " A.ID_GROUP_SPECIES," +
+	      " A.ID_TAXONOMY," +
+	      " B.COMMON_NAME AS commonName," +
+	      " C.NAME AS taxonomyName," +
+	      " C.LEVEL," +
+	      " C.TAXONOMY_TREE, " +
+	      " C.NAME AS taxonomicNameFamily, " +
+	      " C.NAME AS taxonomicNameOrder" +
+	      " FROM CHM62EDT_REPORTS G" +
+	      " INNER JOIN CHM62EDT_REPORT_TYPE F ON G.ID_REPORT_TYPE=F.ID_REPORT_TYPE" +
+	      " INNER JOIN CHM62EDT_SPECIES A ON G.ID_NATURE_OBJECT=A.ID_NATURE_OBJECT" +
+	      " LEFT OUTER JOIN CHM62EDT_GROUP_SPECIES B ON A.ID_GROUP_SPECIES=B.ID_GROUP_SPECIES" +
+	      " LEFT OUTER JOIN CHM62EDT_TAXONOMY C ON A.ID_TAXONOMY=C.ID_TAXONOMY" +
+	      " LEFT OUTER JOIN CHM62EDT_TAXONOMY D ON C.ID_TAXONOMY_LINK=D.ID_TAXONOMY" +
+	      " INNER JOIN CHM62EDT_REPORT_ATTRIBUTES I ON G.ID_REPORT_ATTRIBUTES=I.ID_REPORT_ATTRIBUTES" +
+	      " WHERE " + _prepareWhereSearchVernacular() +
+	      " AND F.LOOKUP_TYPE = 'LANGUAGE'" +
+	      " AND I.NAME ='VERNACULAR_NAME' " + _prepareWhereSort() + " LIMIT " + offsetStart + ", " + pageSize;
+	      results = this.findCustom( query );
+	  } else {
+	      if (searchCriteria.length < 1) throw new CriteriaMissingException("Unable to search because no search criteria was specified...");
+	      // Prepare the WHERE clause
+	      StringBuffer filterSQL = _prepareWhereSearch();
+	      // Add the ORDER BY clause to do the sorting
+	      if (sortCriteria.length > 0){
+	    	  filterSQL.append(_prepareWhereSort());
+	      }
+	      // Add the LIMIT clause to return only the wanted results
+	      if (pageSize != 0){
+	    	  filterSQL.append(" LIMIT " + offsetStart + ", " + pageSize);
+	      }
+	      results = this.findWhere(filterSQL.toString());
+	  }
+	  _resultCount = new Long( -1 );// After each query, reset the _resultCount, so countResults do correct numbering.
+	  return results;
   }
 
   /** This method is used to count the total list of results from a query. It is used to find all for use in pagination.
@@ -280,59 +275,46 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable
    * @throws ro.finsiel.eunis.exceptions.CriteriaMissingException If no search criteria search or wrong criteria is set.
    */
   private StringBuffer _prepareWhereSearch() throws CriteriaMissingException {
-    StringBuffer filterSQL = new StringBuffer();
-    if (searchCriteria.length <= 0) throw new CriteriaMissingException("No criteria set for searching. Search interrupted.");
-    for (int i = 0; i < searchCriteria.length; i++) {
-      if (i > 0) filterSQL.append(" AND ");
-      NameSearchCriteria aCriteria = (NameSearchCriteria) searchCriteria[i];
-      // upcast
-      filterSQL.append(aCriteria.toSQL());
-    }
-    // Here we've changed the way search is done as follows:
-    // - if user checks 'Search in synonyms' then no additional condition is neccesary.
-    // - if user unchecks 'Search in synonyms' then we add an additional condition:
-    //   "AND A.TYPE_RELATED_SPECIES='Species'" thus filtering and returning only 'species and NOT synonyms'.
-    if ( !searchSynnonyms )
-    {
-      filterSQL.append( " AND A.TYPE_RELATED_SPECIES='Species' ");
-    }
-    // The condition below is changed so that 'A.TYPE_RELATED_SPECIES' takes precedence for 'A.VALID_NAME'
-    // - If an user is LOGGED we return also VALID_NAME == 0 species
-    // - If an user is NOT LOGGED, we return also VALID_NAME == 0 species BUT ONLY
-    //   those who have "TYPE_RELATED_SPECIES='Syn'" ( synonyms).
-    //filterSQL.append(Utilities.showEUNISInvalidatedSpecies("AND A.VALID_NAME", showEUNISInvalidatedSpecies));
-    if ( !showEUNISInvalidatedSpecies )
-    {
-      filterSQL.append( " AND ( ( A.VALID_NAME > 0 ) OR ( A.VALID_NAME = 0 AND A.TYPE_RELATED_SPECIES='Synonym' ) ) ");
-    }
-    return filterSQL;
+	  StringBuffer filterSQL = new StringBuffer();
+	  if (searchCriteria.length <= 0) throw new CriteriaMissingException("No criteria set for searching. Search interrupted.");
+	  for (int i = 0; i < searchCriteria.length; i++) {
+		  if (i > 0) filterSQL.append(" AND ");
+		  NameSearchCriteria aCriteria = (NameSearchCriteria) searchCriteria[i];
+		  // upcast
+		  filterSQL.append(aCriteria.toSQL());
+	  }
+	  // Here we've changed the way search is done as follows:
+	  // - if user checks 'Search in synonyms' then no additional condition is neccesary.
+	  // - if user unchecks 'Search in synonyms' then we add an additional condition:
+	  //   "AND A.TYPE_RELATED_SPECIES='Species'" thus filtering and returning only 'species and NOT synonyms'.
+	  if ( !searchSynnonyms )
+		  filterSQL.append( " AND A.TYPE_RELATED_SPECIES='Species' ");
+	  // The condition below is changed so that 'A.TYPE_RELATED_SPECIES' takes precedence for 'A.VALID_NAME'
+	  // - If an user is LOGGED we return also VALID_NAME == 0 species
+	  // - If an user is NOT LOGGED, we return also VALID_NAME == 0 species BUT ONLY
+	  //   those who have "TYPE_RELATED_SPECIES='Syn'" ( synonyms).
+	  //filterSQL.append(Utilities.showEUNISInvalidatedSpecies("AND A.VALID_NAME", showEUNISInvalidatedSpecies));
+	  if ( !showEUNISInvalidatedSpecies )
+		  filterSQL.append( " AND ( ( A.VALID_NAME > 0 ) OR ( A.VALID_NAME = 0 AND A.TYPE_RELATED_SPECIES='Synonym' ) ) ");
+	  return filterSQL;
   }
 
-  private StringBuffer _prepareWhereSearchVernacular() throws CriteriaMissingException
-  {
-    StringBuffer filterSQL = new StringBuffer();
-    if (searchCriteria.length <= 0)
-    {
-      throw new CriteriaMissingException("No criteria set for searching. Search interrupted.");
-    }
-    for (int i = 0; i < searchCriteria.length; i++)
-    {
-      NameSearchCriteria aCriteria = (NameSearchCriteria) searchCriteria[i];
-      if ( aCriteria.isMainCriteria() )
-      {
-        filterSQL.append( Utilities.prepareSQLOperator( "I.VALUE" , aCriteria.getScientificName(), aCriteria.getRelationOp() ) );
-      }
-      else
-      {
-        if( i > 0 ) filterSQL.append( " AND " );
-        filterSQL.append( aCriteria.toSQL() );
-      }
-    }
-    if ( !showEUNISInvalidatedSpecies )
-    {
-      filterSQL.append( " AND A.VALID_NAME > 0 ");
-    }
-    return filterSQL;
+  private StringBuffer _prepareWhereSearchVernacular() throws CriteriaMissingException {
+	  StringBuffer filterSQL = new StringBuffer();
+	  if (searchCriteria.length <= 0)
+		  throw new CriteriaMissingException("No criteria set for searching. Search interrupted.");
+	  for (int i = 0; i < searchCriteria.length; i++){
+		  NameSearchCriteria aCriteria = (NameSearchCriteria) searchCriteria[i];
+		  if( aCriteria.isMainCriteria() ){
+			  filterSQL.append( Utilities.prepareSQLOperator( "I.VALUE" , aCriteria.getScientificName(), aCriteria.getRelationOp() ) );
+		  } else {
+			  if( i > 0 ) filterSQL.append( " AND " );
+			  filterSQL.append( aCriteria.toSQL() );
+		  }
+	  }
+	  if( !showEUNISInvalidatedSpecies )
+		  filterSQL.append( " AND A.VALID_NAME > 0 ");
+	  return filterSQL;
   }
 
   /** Prepare the ORDER BY clause used to do the sorting. Basically it adds the ORDER clause with the criterias set in
@@ -340,30 +322,30 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable
    * @return SQL representation of the sorting.
    */
   private StringBuffer _prepareWhereSort() {
-    StringBuffer filterSQL = new StringBuffer();
-    try {
-      boolean useSort = false;
-      if (sortCriteria.length > 0) {
-        int i = 0;
-        do {
-          if (i > 0) filterSQL.append(", ");
-          NameSortCriteria criteria = (NameSortCriteria) sortCriteria[i]; // Notice the upcast here
-          if (!criteria.getCriteriaAsString().equals("none")) {// Do not add if criteria is sort to NOT SORT
-            if (!criteria.getAscendencyAsString().equals("none")) { // Don't add if ascendency is set to none, nasty hacks
-              filterSQL.append(criteria.toSQL());
-              useSort = true;
-            }
-          }
-          i++;
-        } while (i < sortCriteria.length);
-      }
-      if (useSort) {// If a sort criteria was indeed used, then insert ORDER BY clause at the start of the string
-        filterSQL.insert(0, " ORDER BY ");
-      }
-    } catch (InitializationException e) {
-      e.printStackTrace();  //To change body of catch statement use Options | File Templates.
-    } finally {
-      return filterSQL;
-    }
+	  StringBuffer filterSQL = new StringBuffer();
+	  try {
+		  boolean useSort = false;
+		  if (sortCriteria.length > 0) {
+			  int i = 0;
+			  do {
+				  if (i > 0) filterSQL.append(", ");
+				  NameSortCriteria criteria = (NameSortCriteria) sortCriteria[i]; // Notice the upcast here
+				  if (!criteria.getCriteriaAsString().equals("none")) {// Do not add if criteria is sort to NOT SORT
+					  if (!criteria.getAscendencyAsString().equals("none")) { // Don't add if ascendency is set to none, nasty hacks
+						  filterSQL.append(criteria.toSQL());
+						  useSort = true;
+					  }
+				  }
+				  i++;
+			  } while (i < sortCriteria.length);
+		  }
+		  if (useSort) {// If a sort criteria was indeed used, then insert ORDER BY clause at the start of the string
+			  filterSQL.insert(0, " ORDER BY ");
+		  }
+	  } catch (InitializationException e) {
+		  e.printStackTrace();  //To change body of catch statement use Options | File Templates.
+	  } finally {
+		  return filterSQL;
+	  }
   }
 }

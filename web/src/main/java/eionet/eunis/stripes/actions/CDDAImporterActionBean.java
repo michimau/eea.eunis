@@ -13,6 +13,7 @@ import net.sourceforge.stripes.action.UrlBinding;
 import ro.finsiel.eunis.dataimport.parsers.CddaSitesImportParser;
 import ro.finsiel.eunis.dataimport.parsers.DesignationsImportParser;
 import ro.finsiel.eunis.utilities.SQLUtilities;
+import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.util.Constants;
 
 /**
@@ -68,12 +69,12 @@ public class CDDAImporterActionBean extends AbstractStripesAction {
 					if(inputStreamSites!=null)
 						inputStreamSites.close();
 					
-					getContext().getSitesDao().deleteSitesCdda(sites);
-					getContext().getSitesDao().updateDesignationsTable();
+					DaoFactory.getDaoFactory().getSitesDao().deleteSitesCdda(sites);
+					DaoFactory.getDaoFactory().getSitesDao().updateDesignationsTable();
 				}
 
 				if(updateCountrySitesFactsheet)
-					getContext().getSitesDao().updateCountrySitesFactsheet();
+					DaoFactory.getDaoFactory().getSitesDao().updateCountrySitesFactsheet();
 				
 				showMessage("Successfully imported!");
 				

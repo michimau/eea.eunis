@@ -45,6 +45,8 @@ import ro.finsiel.eunis.utilities.SQLUtilities;
 
 import com.ibm.icu.util.StringTokenizer;
 
+import eionet.eunis.dao.DaoFactory;
+import eionet.eunis.dao.ISpeciesFactsheetDao;
 import eionet.eunis.dto.ClassificationDTO;
 import eionet.eunis.dto.LinkDTO;
 import eionet.eunis.dto.PictureDTO;
@@ -143,6 +145,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 			tab = "general";
 		}
 		
+		ISpeciesFactsheetDao dao = DaoFactory.getDaoFactory().getSpeciesFactsheetDao();
+		
 		//sanity checks
 		if(StringUtils.isBlank(idSpecies) && idSpeciesLink == 0) {
 			factsheet = new SpeciesFactsheet(0, 0);
@@ -154,17 +158,17 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 			tempIdSpecies = new Integer(idSpecies);
 		} else if (!StringUtils.isBlank(idSpecies)) {
 			idSpeciesText = idSpecies;
-			tempIdSpecies = getContext().getSpeciesFactsheetDao().getIdSpeciesForScientificName(this.idSpecies);
+			tempIdSpecies = dao.getIdSpeciesForScientificName(this.idSpecies);
 		}
 		
 		
-		int mainIdSpecies = getContext().getSpeciesFactsheetDao().getCanonicalIdSpecies(tempIdSpecies);
+		int mainIdSpecies = dao.getCanonicalIdSpecies(tempIdSpecies);
 		//it is not a synonym, check the referer
 		if (mainIdSpecies == tempIdSpecies) {
 			Integer referedFrom = (Integer) getContext().getFromSession("referer");
 			if (referedFrom != null && referedFrom > 0) {
 				getContext().removeFromSession("referer");
-				referedFromName = getContext().getSpeciesFactsheetDao().getScientificName(referedFrom);
+				referedFromName = dao.getScientificName(referedFrom);
 			}
 			factsheet = new SpeciesFactsheet(mainIdSpecies, mainIdSpecies);
 		}
@@ -231,7 +235,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 		if (StringUtils.isNumeric(idSpecies)) {
 			tempIdSpecies = new Integer(idSpecies);
 		} else if (!StringUtils.isBlank(idSpecies)) {
-			tempIdSpecies = getContext().getSpeciesFactsheetDao().getIdSpeciesForScientificName(this.idSpecies);
+			tempIdSpecies = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getIdSpeciesForScientificName(this.idSpecies);
 		}
 		return tempIdSpecies;
 	}
@@ -258,11 +262,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 		dto.setDcmitype(new ResourceDto("","http://purl.org/dc/dcmitype/Text"));
 		
 		dto.setAttributes(
-				getContext().getSpeciesFactsheetDao().getAttributesForNatureObject(
+				DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getAttributesForNatureObject(
 						factsheet.getSpeciesObject().getIdNatureObject()));
 		
 		//setting expectedInLocations
-		List<String> expectedLocations = getContext().getSpeciesFactsheetDao().getExpectedInSiteIds(
+		List<String> expectedLocations = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getExpectedInSiteIds(
 				factsheet.getSpeciesObject().getIdNatureObject(),
 				factsheet.getSpeciesObject().getIdSpecies(),
 				0);
@@ -280,9 +284,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 					&& !factsheet.getIdSpeciesLink().equals(factsheet.getIdSpecies())) {
 			dto.setSynonymFor(new SpeciesSynonymDto(factsheet.getIdSpeciesLink()));
 		}
-		List<Integer> isSynonymFor = getContext()
-				.getSpeciesFactsheetDao()
-				.getSynonyms(factsheet.getIdSpecies());
+		List<Integer> isSynonymFor = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getSynonyms(factsheet.getIdSpecies());
 		List<SpeciesSynonymDto> speciesSynonym = new LinkedList<SpeciesSynonymDto>();
 		if (isSynonymFor != null && !isSynonymFor.isEmpty()) {
 			for(Integer idSpecies : isSynonymFor) {

@@ -793,7 +793,7 @@ public final class Utilities {
    * This method transform the given parameters into SQL statement as follows:
    * if oper = OPERATOR_IS: "paramName='paramValue'"
    * if oper = OPERATOR_STARTS: "paramName LIKE '%paramValue'"
-   * if oper = OPERATOR_CONTAINS: "paramName LIKE '%paramValue'"
+   * if oper = OPERATOR_CONTAINS: "paramName LIKE '%paramValue%'"
    * if oper = OPERATOR_GREATER_OR_EQUAL: "paramName >= paramValue"
    * if oper = OPERATOR_SMALLER_OR_EQUAL: "paramName <= paramValue".
    *

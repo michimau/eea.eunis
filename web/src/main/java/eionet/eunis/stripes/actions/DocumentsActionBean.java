@@ -15,6 +15,8 @@ import org.apache.commons.lang.StringUtils;
 
 import ro.finsiel.eunis.utilities.EunisUtil;
 
+import eionet.eunis.dao.DaoFactory;
+import eionet.eunis.dao.IDocumentsDao;
 import eionet.eunis.dto.DcContributorDTO;
 import eionet.eunis.dto.DcCoverageDTO;
 import eionet.eunis.dto.DcCreatorDTO;
@@ -78,6 +80,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
 		
 		String eeaHome = getContext().getInitParameter("EEA_HOME");
 		String btrail = "";
+		IDocumentsDao dao = DaoFactory.getDaoFactory().getDocumentsDao();
 		if (!StringUtils.isBlank(iddoc)) {
 			forwardPage = "/stripes/document.jsp";
 			
@@ -89,22 +92,22 @@ public class DocumentsActionBean extends AbstractStripesAction {
 			if(accept != null && accept.length > 0 && accept[0].equals("application/rdf+xml")){
 				return new StreamingResolution("application/rdf+xml",generateRdf(iddoc));
 			} else {
-				dcTitle = getContext().getDocumentsDao().getDcTitle(iddoc);
-				dcSource = getContext().getDocumentsDao().getDcSource(iddoc);
-				dcContributor = getContext().getDocumentsDao().getDcContributor(iddoc);
-				dcCoverage = getContext().getDocumentsDao().getDcCoverage(iddoc);
-				dcCreator = getContext().getDocumentsDao().getDcCreator(iddoc);
-				dcDate = getContext().getDocumentsDao().getDcDate(iddoc);
-				dcDescription = getContext().getDocumentsDao().getDcDescription(iddoc);
-				dcFormat = getContext().getDocumentsDao().getDcFormat(iddoc);
-				dcIdentifier = getContext().getDocumentsDao().getDcIdentifier(iddoc);
-				dcIndex = getContext().getDocumentsDao().getDcIndex(iddoc);
-				dcLanguage = getContext().getDocumentsDao().getDcLanguage(iddoc);
-				dcPublisher = getContext().getDocumentsDao().getDcPublisher(iddoc);
-				dcRelation = getContext().getDocumentsDao().getDcRelation(iddoc);
-				dcRights = getContext().getDocumentsDao().getDcRights(iddoc);
-				dcSubject = getContext().getDocumentsDao().getDcSubject(iddoc);
-				dcType = getContext().getDocumentsDao().getDcType(iddoc);
+				dcTitle = dao.getDcTitle(iddoc);
+				dcSource = dao.getDcSource(iddoc);
+				dcContributor = dao.getDcContributor(iddoc);
+				dcCoverage = dao.getDcCoverage(iddoc);
+				dcCreator = dao.getDcCreator(iddoc);
+				dcDate = dao.getDcDate(iddoc);
+				dcDescription = dao.getDcDescription(iddoc);
+				dcFormat = dao.getDcFormat(iddoc);
+				dcIdentifier = dao.getDcIdentifier(iddoc);
+				dcIndex = dao.getDcIndex(iddoc);
+				dcLanguage = dao.getDcLanguage(iddoc);
+				dcPublisher = dao.getDcPublisher(iddoc);
+				dcRelation = dao.getDcRelation(iddoc);
+				dcRights = dao.getDcRights(iddoc);
+				dcSubject = dao.getDcSubject(iddoc);
+				dcType = dao.getDcType(iddoc);
 				btrail = "eea#" + eeaHome + ",home#index.jsp,documents#documents";
 				if(dcTitle != null){
 					btrail += "," + dcTitle.getTitle();
@@ -122,7 +125,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
 			if(accept != null && accept.length > 0 && accept[0].equals("application/rdf+xml")){
 				return new StreamingResolution("application/rdf+xml",generateRdfAll());
 			} else {
-				docs = getContext().getDocumentsDao().getDocuments();
+				docs = dao.getDocuments();
 			}
 			setMetaDescription("documents");
 		}
@@ -135,7 +138,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
 		StringBuffer s = new StringBuffer();
 	    s.append(HEADER);
 	    
-		List<DcObjectDTO> objects = getContext().getDocumentsDao().getDcObjects();
+		List<DcObjectDTO> objects = DaoFactory.getDaoFactory().getDocumentsDao().getDcObjects();
 		for(Iterator<DcObjectDTO> it = objects.iterator(); it.hasNext(); ){
 			DcObjectDTO object = it.next();
 			if(object != null){
@@ -185,7 +188,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
 		StringBuffer s = new StringBuffer();
 	    s.append(HEADER);
 	    
-		DcObjectDTO object = getContext().getDocumentsDao().getDcObject(id);
+		DcObjectDTO object = DaoFactory.getDaoFactory().getDocumentsDao().getDcObject(id);
 		if(object != null){
 			s.append("<rdf:Description rdf:about=\"").append(doc_url).append(object.getId()).append("\">\n");
 			s.append("<rdf:type rdf:resource=\"http://purl.org/dc/dcmitype/Text\"/>\n");

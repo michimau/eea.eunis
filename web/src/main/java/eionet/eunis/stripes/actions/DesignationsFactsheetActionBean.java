@@ -2,6 +2,7 @@ package eionet.eunis.stripes.actions;
 
 import java.util.List;
 
+import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dto.DesignationDcObjectDTO;
 
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -86,7 +87,7 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
 	            		cddacount="No";
 	            }
 	            try {
-	            	reference = getContext().getDocumentsDao().getDesignationDcObject(idDesig, idGeo);
+	            	reference = DaoFactory.getDaoFactory().getDocumentsDao().getDesignationDcObject(idDesig, idGeo);
 	            	
 	            	if(showSites){
 	            		sites = SitesSearchUtility.findSitesForDesignation(idDesig, idGeo);

@@ -244,8 +244,22 @@ public class SimilarNameDomain extends AbstractDomain implements Paginable {
 		    	}
 			}
 	    	cnt = ret.size();
+	    	ret = removeDuplicates(ret);
 		} catch(Exception e){
 			e.printStackTrace();
+		}
+		return ret;
+	}
+	
+	private List<ScientificNamePersist> removeDuplicates(List<ScientificNamePersist> list) {
+		List<ScientificNamePersist> ret = new ArrayList<ScientificNamePersist>();
+		List<Integer> ids = new ArrayList<Integer>();
+		for(ScientificNamePersist specie : list){
+			Integer id = specie.getIdSpecies();
+			if(!ids.contains(id)){
+				ret.add(specie);
+				ids.add(id);
+			}
 		}
 		return ret;
 	}

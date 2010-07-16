@@ -41,7 +41,8 @@ public class RdfExporter {
 	private int numOfThreads;
 	private int limit;
 	private int offset;
-	private String fileName;
+	private String fileNameSites;
+	private String fileNameSpecies;
 	
 	private SQLUtilities sqlUtilities;
 	
@@ -70,10 +71,16 @@ public class RdfExporter {
 			else
 				this.offset = Integer.valueOf(exporterProperties.getProperty("OFFSET", "0"));
 			
-			if(StringUtils.isBlank(exporterProperties.getProperty("FILE_NAME"))) {
-				throw new RuntimeException("Pleace specify FILE_NAME property");
+			if(StringUtils.isBlank(exporterProperties.getProperty("FILE_NAME_SITES"))) {
+				throw new RuntimeException("Pleace specify FILE_NAME_SITES property");
 			} else {
-				fileName = exporterProperties.getProperty("FILE_NAME");
+				fileNameSites = exporterProperties.getProperty("FILE_NAME_SITES");
+			}
+			
+			if(StringUtils.isBlank(exporterProperties.getProperty("FILE_NAME_SPECIES"))) {
+				throw new RuntimeException("Pleace specify FILE_NAME_SPECIES property");
+			} else {
+				fileNameSpecies = exporterProperties.getProperty("FILE_NAME_SPECIES");
 			}
 			
 			if(StringUtils.isBlank(exporterProperties.getProperty("JDBC_DRV"))) {
@@ -120,7 +127,7 @@ public class RdfExporter {
 		List<String> siteIds = sqlUtilities.SQL2Array(getSiteIdsQuery);
 		
 		CountDownLatch doneSignal = new CountDownLatch(limit > 0 ? limit : totalNumberOfSites);
-		QueuedFileWriter fileWriter = new QueuedFileWriter(fileName, HEADER_SITES, FOOTER, doneSignal);
+		QueuedFileWriter fileWriter = new QueuedFileWriter(fileNameSites, HEADER_SITES, FOOTER, doneSignal);
 		ExecutorService executor = Executors.newFixedThreadPool(numOfThreads);
 
 		new Thread(fileWriter).start();
@@ -166,7 +173,7 @@ public class RdfExporter {
 		List<String> speciesIds = sqlUtilities.SQL2Array(getSpeciesIdsQuery);
 		
 		CountDownLatch doneSignal = new CountDownLatch(limit > 0 ? limit : totalNumberOfSpecies);
-		QueuedFileWriter fileWriter = new QueuedFileWriter(fileName, HEADER_SPECIES, FOOTER, doneSignal);
+		QueuedFileWriter fileWriter = new QueuedFileWriter(fileNameSpecies, HEADER_SPECIES, FOOTER, doneSignal);
 		ExecutorService executor = Executors.newFixedThreadPool(numOfThreads);
 
 		new Thread(fileWriter).start();

@@ -23,5 +23,20 @@
     <sc:dataDumpLocation>http://eunis.eea.europa.eu/void.rdf</sc:dataDumpLocation>
   </sc:dataset>
 
+  <sc:dataset>
+    <sc:datasetLabel>Documents from EUNIS</sc:datasetLabel>
+    <sc:dataDumpLocation>http://eunis.eea.europa.eu/documents</sc:dataDumpLocation>
+  </sc:dataset>
+
+  <sc:dataset>
+    <sc:datasetLabel>Sites from EUNIS</sc:datasetLabel>
+    <sc:dataDumpLocation>http://eunis.eea.europa.eu/rdf/sites.rdf.gz</sc:dataDumpLocation>
+  </sc:dataset>
+
+  <sc:dataset>
+    <sc:datasetLabel>Species from EUNIS</sc:datasetLabel>
+    <sc:dataDumpLocation>http://eunis.eea.europa.eu/rdf/species.rdf.gz</sc:dataDumpLocation>
+  </sc:dataset>
+
 </urlset>
 

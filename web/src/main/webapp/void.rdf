@@ -27,6 +27,7 @@
     <void:uriPattern>^http://eunis.eea.europa.eu/.*</void:uriPattern>
     <void:subset rdf:resource="#documents"/>
     <void:subset rdf:resource="#sites"/>
+    <void:subset rdf:resource="#species"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="documents">
@@ -41,6 +42,13 @@
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/sites.rdf.gz"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="species">
+    <dcterms:title>Species from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/species.rdf.gz"/>
   </void:Dataset>
 
 </rdf:RDF>

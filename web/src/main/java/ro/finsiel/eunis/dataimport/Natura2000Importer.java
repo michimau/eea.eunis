@@ -63,6 +63,8 @@ public class Natura2000Importer {
 					for(String error : errors){
 						System.out.println(error);
 					}
+				} else {
+					System.out.println("Successfully imported!");
 				}
 			}
 		     

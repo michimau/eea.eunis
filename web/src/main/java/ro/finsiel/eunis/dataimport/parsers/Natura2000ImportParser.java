@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Types;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -277,6 +278,8 @@ public class Natura2000ImportParser extends DefaultHandler {
         				preparedStatementSiteAttribute.executeUpdate();
         				
         				bioRegions.remove(bioRegion.toUpperCase());
+        			} else {
+        				throw new RuntimeException("BioRegion '"+bioRegion+"' doesn't exist!", new Exception());
         			}
         		}
         		
@@ -303,16 +306,49 @@ public class Natura2000ImportParser extends DefaultHandler {
 	        			preparedStatementSite.setString(4, dateSpa);
 	        			preparedStatementSite.setString(5, respondent);
 	        			preparedStatementSite.setString(6, description);
-	        			preparedStatementSite.setString(7, latitude);
+	        			if(latitude != null && latitude.length() > 0)
+	        				preparedStatementSite.setString(7, latitude);
+	        			else
+	        				preparedStatementSite.setNull(7, Types.DECIMAL);
 	        			preparedStatementSite.setString(8, latNs);
-	        			preparedStatementSite.setString(9, latDeg);
-	        			preparedStatementSite.setString(10, latMin);
-	        			preparedStatementSite.setString(11, latSec);
-	        			preparedStatementSite.setString(12, longitude);
+	        			
+	        			if(latDeg != null && latDeg.length() > 0)
+	        				preparedStatementSite.setString(9, latDeg);
+	        			else
+	        				preparedStatementSite.setNull(9, Types.INTEGER);
+	        			
+	        			if(latMin != null && latMin.length() > 0)
+	        				preparedStatementSite.setString(10, latMin);
+	        			else
+	        				preparedStatementSite.setNull(10, Types.INTEGER);
+	        			
+	        			if(latSec != null && latSec.length() > 0)
+	        				preparedStatementSite.setString(11, latSec);
+	        			else
+	        				preparedStatementSite.setNull(11, Types.INTEGER);
+	        			
+	        			if(longitude != null && longitude.length() > 0)
+	        				preparedStatementSite.setString(12, longitude);
+	        			else
+	        				preparedStatementSite.setNull(12, Types.DECIMAL);
+	        			
 	        			preparedStatementSite.setString(13, lonEw);
-	        			preparedStatementSite.setString(14, lonDeg);
-	        			preparedStatementSite.setString(15, lonMin);
-	        			preparedStatementSite.setString(16, lonSec);
+	        			
+	        			if(lonDeg != null && lonDeg.length() > 0)
+	        				preparedStatementSite.setString(14, lonDeg);
+	        			else
+	        				preparedStatementSite.setNull(14, Types.INTEGER);
+	        			
+	        			if(lonMin != null && lonMin.length() > 0)
+	        				preparedStatementSite.setString(15, lonMin);
+	        			else
+	        				preparedStatementSite.setNull(15, Types.INTEGER);
+	        			
+	        			if(lonSec != null && lonSec.length() > 0)
+	        				preparedStatementSite.setString(16, lonSec);
+	        			else
+	        				preparedStatementSite.setNull(16, Types.INTEGER);
+	        			
 	        			preparedStatementSite.setString(17, area);
 	        			preparedStatementSite.setString(18, altMin);
 	        			preparedStatementSite.setString(19, altMax);

@@ -456,6 +456,7 @@ public class CddaSitesImportParser extends DefaultHandler {
 			if(lat != null && lat.length() > 0){
 				//calculate LAT_NS
 				double lat_num = new Double(lat).doubleValue();
+				lat = new Double(lat_num).toString();
 				if(lat_num > 0)
 					latNs = "N";
 				
@@ -509,6 +510,7 @@ public class CddaSitesImportParser extends DefaultHandler {
 				
 				//calculate LON_EW
 				double lon_num = new Double(lon).doubleValue();
+				lon = new Double(lon_num).toString();
 				if(lon_num > 0)
 					lonEw = "E";
 				

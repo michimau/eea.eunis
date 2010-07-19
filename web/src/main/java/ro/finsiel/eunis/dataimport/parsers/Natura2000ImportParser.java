@@ -1286,6 +1286,7 @@ public class Natura2000ImportParser extends DefaultHandler {
 			if(latitude != null && latitude.length() > 0){
 				//calculate LAT_NS
 				double lat_num = new Double(latitude).doubleValue();
+				latitude = new Double(lat_num).toString();
 				if(lat_num > 0)
 					latNs = "N";
 				
@@ -1339,6 +1340,7 @@ public class Natura2000ImportParser extends DefaultHandler {
 				
 				//calculate LON_EW
 				double lon_num = new Double(longitude).doubleValue();
+				longitude = new Double(lon_num).toString();
 				if(lon_num > 0)
 					lonEw = "E";
 				

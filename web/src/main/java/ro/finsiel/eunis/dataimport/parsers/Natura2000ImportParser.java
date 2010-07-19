@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -965,12 +966,15 @@ public class Natura2000ImportParser extends DefaultHandler {
         			}
         		}
         		
-        	} 
+        	}
         	catch (Exception e){ 
-        		if(siteCode != null)
+        		if(siteCode != null){
+        			e.printStackTrace();
         			errors.add("Error! Site ID: "+siteCode+" Error Message: "+e.getMessage());
-        		else
+        		} else {
+        			e.printStackTrace();
         			errors.add("Error Message: "+e.getMessage());
+        		}
         		//throw new RuntimeException(e.toString(), e); 
         	} 
         } 
@@ -1047,10 +1051,12 @@ public class Natura2000ImportParser extends DefaultHandler {
                 con.rollback(); 
                 con.commit(); 
 
-                if(siteCode != null)
-        			errors.add("Error! Site ID: "+siteCode+" Error Message: "+e.getMessage());
-        		else
-        			errors.add("Error Message: "+e.getMessage());
+                if(siteCode != null){
+                	e.printStackTrace();
+        			errors.add("Error! Site ID: "+siteCode+" Error Message: "+e.getMessage()+"\n"+e.getStackTrace());
+                } else {
+        			errors.add("Error Message: "+e.getMessage()+"\n"+e.getStackTrace());
+                }
                 //throw new IllegalArgumentException(e.getMessage(), e); 
             } 
             finally 

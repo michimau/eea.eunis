@@ -237,27 +237,32 @@ public class Natura2000ImportParser extends DefaultHandler {
         		
         		if(qName.equalsIgnoreCase("AdministrativeRegion")) {
         			if(nutsCode != null && nutsCode.length() > 0 && nutsCover != null && nutsCover.length() > 0){
-	        			maxReportTypeId++;
-	        			maxReportAttributeId++;
-	        			
-	        			preparedStatementNatObjectReportType.setString(1, siteNatureObjectId);
-	    				preparedStatementNatObjectReportType.setInt(2, -1);
-	    				preparedStatementNatObjectReportType.setInt(3, -1);
-	    				preparedStatementNatObjectReportType.setInt(4, maxReportTypeId);
-	   					preparedStatementNatObjectReportType.setInt(5, maxReportAttributeId);
-	    				preparedStatementNatObjectReportType.setInt(6, -1);
-	    				preparedStatementNatObjectReportType.executeUpdate();
-	        			
-	    				preparedStatementReportType.setInt(1, maxReportTypeId);
-	    				preparedStatementReportType.setString(2, nutsCode);
-	    				preparedStatementReportType.setString(3, "REGION_CODE");
-	    				preparedStatementReportType.executeUpdate();	    				
-	    				
-    					preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-    					preparedStatementReportAttribute.setString(2, "COVER");
-    					preparedStatementReportAttribute.setString(3, "NUMBER");
-    					preparedStatementReportAttribute.setString(4, nutsCover);
-    					preparedStatementReportAttribute.executeUpdate();
+        				boolean regionExists = regionExists(nutsCode);
+        				if(regionExists){
+		        			maxReportTypeId++;
+		        			maxReportAttributeId++;
+		        			
+		        			preparedStatementNatObjectReportType.setString(1, siteNatureObjectId);
+		    				preparedStatementNatObjectReportType.setInt(2, -1);
+		    				preparedStatementNatObjectReportType.setInt(3, -1);
+		    				preparedStatementNatObjectReportType.setInt(4, maxReportTypeId);
+		   					preparedStatementNatObjectReportType.setInt(5, maxReportAttributeId);
+		    				preparedStatementNatObjectReportType.setInt(6, -1);
+		    				preparedStatementNatObjectReportType.executeUpdate();
+		        			
+		    				preparedStatementReportType.setInt(1, maxReportTypeId);
+		    				preparedStatementReportType.setString(2, nutsCode);
+		    				preparedStatementReportType.setString(3, "REGION_CODE");
+		    				preparedStatementReportType.executeUpdate();	    				
+		    				
+	    					preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
+	    					preparedStatementReportAttribute.setString(2, "COVER");
+	    					preparedStatementReportAttribute.setString(3, "NUMBER");
+	    					preparedStatementReportAttribute.setString(4, nutsCover);
+	    					preparedStatementReportAttribute.executeUpdate();
+        				} else {
+        					throw new RuntimeException("BioRegion with code "+nutsCode+" doesn't exist!", new Exception());
+        				}
         			}				
         		}
         		
@@ -967,14 +972,7 @@ public class Natura2000ImportParser extends DefaultHandler {
         		
         	}
         	catch (Exception e){ 
-        		if(siteCode != null){
-        			e.printStackTrace();
-        			errors.add("Error! Site ID: "+siteCode+" Error Message: "+e.getMessage());
-        		} else {
-        			e.printStackTrace();
-        			errors.add("Error Message: "+e.getMessage());
-        		}
-        		//throw new RuntimeException(e.toString(), e); 
+        		throw new RuntimeException(e.getMessage(), e);
         	} 
         } 
         
@@ -1052,9 +1050,10 @@ public class Natura2000ImportParser extends DefaultHandler {
 
                 if(siteCode != null){
                 	e.printStackTrace();
-        			errors.add("Error! Site ID: "+siteCode+" Error Message: "+e.getMessage()+"\n"+e.getStackTrace());
+        			errors.add("Error! Site ID: "+siteCode+" Error Message: "+e.getMessage());
                 } else {
-        			errors.add("Error Message: "+e.getMessage()+"\n"+e.getStackTrace());
+                	e.printStackTrace();
+        			errors.add("Error Message: "+e.getMessage());
                 }
                 //throw new IllegalArgumentException(e.getMessage(), e); 
             } 
@@ -1190,6 +1189,16 @@ public class Natura2000ImportParser extends DefaultHandler {
         	return maxIdInt;
         }
         
+        private boolean regionExists(String regionCode) {
+        	boolean ret = false;
+        	String query = "SELECT ID_REGION_CODE FROM chm62edt_region_codes WHERE ID_REGION_CODE = '"+regionCode+"'";
+        	String rcId = sqlUtilities.ExecuteSQL(query);
+        	if(rcId != null && rcId.length() > 0)
+        		ret = true;
+        	
+        	return ret;
+        }
+        
         private String getSpeciesNatObjectId(String speciesCode) {
         	String query = "SELECT ID_NATURE_OBJECT FROM chm62edt_nature_object_attributes WHERE NAME = '_natura2000Code' AND OBJECT = '"+speciesCode+"'";
         	String noId = sqlUtilities.ExecuteSQL(query);
@@ -1291,7 +1300,8 @@ public class Natura2000ImportParser extends DefaultHandler {
 			if(latitude != null && latitude.length() > 0){
 				//calculate LAT_NS
 				double lat_num = new Double(latitude).doubleValue();
-				latitude = new Double(lat_num).toString();
+				if(!latitude.contains("."))
+					latitude = new Double(lat_num).toString();
 				if(lat_num > 0)
 					latNs = "N";
 				
@@ -1345,7 +1355,8 @@ public class Natura2000ImportParser extends DefaultHandler {
 				
 				//calculate LON_EW
 				double lon_num = new Double(longitude).doubleValue();
-				longitude = new Double(lon_num).toString();
+				if(!longitude.contains("."))
+					longitude = new Double(lon_num).toString();
 				if(lon_num > 0)
 					lonEw = "E";
 				

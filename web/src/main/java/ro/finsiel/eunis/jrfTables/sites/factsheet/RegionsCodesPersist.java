@@ -76,6 +76,7 @@ public class RegionsCodesPersist extends PersistentObject {
 
   private String regionCode = null;
   private String regionName = null;
+  private String regionDescription = null;
   private String regionCover = null;
 
   public RegionsCodesPersist() {
@@ -495,5 +496,14 @@ public class RegionsCodesPersist extends PersistentObject {
     i_natura2000 = natura2000;
     this.markModifiedPersistentState();
   }
+
+	public String getRegionDescription() {
+		return regionDescription;
+	}
+	
+	public void setRegionDescription(String regionDescription) {
+		this.regionDescription = regionDescription;
+		this.markModifiedPersistentState();
+	}
 
 }

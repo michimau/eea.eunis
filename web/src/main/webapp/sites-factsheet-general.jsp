@@ -548,8 +548,12 @@
               for (int i = 0;  i < regionCodes.size(); i++)
               {
                 RegionsCodesPersist region = (RegionsCodesPersist)regionCodes.get(i);
+                String regionDesc = (String) region.getRegionDescription();
+                if(regionDesc == null || regionDesc.equals("")){
+                	regionDesc = "NUTS";
+                }
 %>
-        NUTS code <%=Utilities.formatString(region.getRegionCode())%>, <%=Utilities.formatString(region.getRegionName())%>, cover:<%=Utilities.formatString(region.getRegionCover())%>%
+        <%=regionDesc %> code <%=Utilities.formatString(region.getRegionCode())%>, <%=Utilities.formatString(region.getRegionName())%>, cover:<%=Utilities.formatString(region.getRegionCover())%>%
 <%
                   if (regionCodes.size() > 1 && i < regionCodes.size() - 1)
                   {

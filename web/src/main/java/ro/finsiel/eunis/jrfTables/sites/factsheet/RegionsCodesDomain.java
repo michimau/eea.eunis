@@ -83,6 +83,7 @@ public class RegionsCodesDomain extends AbstractDomain {
     JoinTable regionCodes = new JoinTable("CHM62EDT_REGION_CODES D", "ID_LOOKUP", "ID_REGION_CODE");
     regionCodes.addJoinColumn(new StringJoinColumn("ID_REGION_CODE", "setRegionCode"));
     regionCodes.addJoinColumn(new StringJoinColumn("NAME", "setRegionName"));
+    regionCodes.addJoinColumn(new StringJoinColumn("DESCRIPTION", "setRegionDescription"));
     reportType.addJoinTable(regionCodes);
 
     JoinTable reportAttributes = new JoinTable("CHM62EDT_REPORT_ATTRIBUTES E", "ID_REPORT_ATTRIBUTES", "ID_REPORT_ATTRIBUTES");

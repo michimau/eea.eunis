@@ -44,10 +44,6 @@ public class SpeciesNatureObjectPersist extends PersistentObject {
   /**
    * This is a database field.
    **/
-  private String i_taxonomicSpeciesCode = null;
-  /**
-   * This is a database field.
-   **/
   private String i_speciesMap = null;
   /**
    * This is a database field.
@@ -176,13 +172,6 @@ public class SpeciesNatureObjectPersist extends PersistentObject {
   /**
    * Getter for a database field.
    **/
-  public String getTaxonomicSpeciesCode() {
-    return i_taxonomicSpeciesCode;
-  }
-
-  /**
-   * Getter for a database field.
-   **/
   public Short getTemporarySelect() {
     return i_temporarySelect;
   }
@@ -290,15 +279,6 @@ public class SpeciesNatureObjectPersist extends PersistentObject {
    **/
   public void setSpeciesMap(String speciesMap) {
     i_speciesMap = speciesMap;
-    this.markModifiedPersistentState();
-  }
-
-  /**
-   * Setter for a database field.
-   * @param taxonomicSpeciesCode
-   **/
-  public void setTaxonomicSpeciesCode(String taxonomicSpeciesCode) {
-    i_taxonomicSpeciesCode = taxonomicSpeciesCode;
     this.markModifiedPersistentState();
   }
 

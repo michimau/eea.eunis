@@ -25,8 +25,6 @@ public class ScientificNamePersist extends PersistentObject implements Comparabl
   /** This is a database field. */
   private Short i_temporarySelect = null;
   /** This is a database field. */
-  private String i_taxonomicSpeciesCode = null;
-  /** This is a database field. */
   private String i_speciesMap = null;
   /** This is a database field. */
   private Integer i_idGroupspecies = null;
@@ -172,11 +170,6 @@ public class ScientificNamePersist extends PersistentObject implements Comparabl
   }
 
   /** Getter for a database field */
-  public String getTaxonomicSpeciesCode() {
-    return i_taxonomicSpeciesCode;
-  }
-
-  /** Getter for a database field */
   public Short getTemporarySelect() {
     return i_temporarySelect;
   }
@@ -284,15 +277,6 @@ public class ScientificNamePersist extends PersistentObject implements Comparabl
    **/
   public void setSpeciesMap(String speciesMap) {
     i_speciesMap = speciesMap;
-    this.markModifiedPersistentState();
-  }
-
-  /**
-   * Setter for a database field.
-   * @param taxonomicSpeciesCode
-   **/
-  public void setTaxonomicSpeciesCode(String taxonomicSpeciesCode) {
-    i_taxonomicSpeciesCode = taxonomicSpeciesCode;
     this.markModifiedPersistentState();
   }
 

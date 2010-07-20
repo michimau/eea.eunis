@@ -23,8 +23,6 @@ public class DictionaryPersist extends PersistentObject {
   /** This is a database field. */
   private Short i_temporarySelect = null;
   /** This is a database field. */
-  private String i_taxonomicSpeciesCode = null;
-  /** This is a database field. */
   private String i_speciesMap = null;
   /** This is a database field. */
   private Integer i_idGroupspecies = null;
@@ -111,11 +109,6 @@ public class DictionaryPersist extends PersistentObject {
   /** Getter for a database field */
   public String getSpeciesMap() {
     return i_speciesMap;
-  }
-
-  /** Getter for a database field */
-  public String getTaxonomicSpeciesCode() {
-    return i_taxonomicSpeciesCode;
   }
 
   /** Getter for a database field */
@@ -226,15 +219,6 @@ public class DictionaryPersist extends PersistentObject {
    **/
   public void setSpeciesMap(String speciesMap) {
     i_speciesMap = speciesMap;
-    this.markModifiedPersistentState();
-  }
-
-  /**
-   * Setter for a database field.
-   * @param taxonomicSpeciesCode
-   **/
-  public void setTaxonomicSpeciesCode(String taxonomicSpeciesCode) {
-    i_taxonomicSpeciesCode = taxonomicSpeciesCode;
     this.markModifiedPersistentState();
   }
 

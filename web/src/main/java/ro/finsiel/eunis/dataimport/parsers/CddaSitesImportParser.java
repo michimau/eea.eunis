@@ -449,9 +449,9 @@ public class CddaSitesImportParser extends DefaultHandler {
         
         private void calculateLatitudeParams(){
         	latNs = "S";
-			latDeg = "";
-			latMin = "";
-			latSec = "";
+			latDeg = null;
+			latMin = null;
+			latSec = null;
 			
 			if(lat != null && lat.length() > 0){
 				//calculate LAT_NS
@@ -503,9 +503,9 @@ public class CddaSitesImportParser extends DefaultHandler {
         
         private void calculateLongitudeParams(){
         	lonEw = "W";
-			lonDeg = "";
-			lonMin = "";
-			lonSec = "";
+			lonDeg = null;
+			lonMin = null;
+			lonSec = null;
 			
 			if(lon != null && lon.length() > 0){
 				

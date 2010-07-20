@@ -4,7 +4,6 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.Types;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -118,8 +117,6 @@ public class Natura2000ImportParser extends DefaultHandler {
         
         private List<String> errors;
         
-        List<String> bioRegions;
-        
         private Connection con; 
         
         private StringBuffer buf; 
@@ -130,19 +127,6 @@ public class Natura2000ImportParser extends DefaultHandler {
         	this.con = sqlUtilities.getConnection();
         	buf = new StringBuffer();
         	errors = new ArrayList<String>();
-        	
-        	bioRegions = new ArrayList<String>();
-        	bioRegions.add(Constants.ALPINE);
-        	bioRegions.add(Constants.ANATOL);
-        	bioRegions.add(Constants.ARCTIC);
-        	bioRegions.add(Constants.ATLANTIC);
-        	bioRegions.add(Constants.BOREAL);
-        	bioRegions.add(Constants.CONTINENT);
-        	bioRegions.add(Constants.MACARONES);
-        	bioRegions.add(Constants.MEDITERRANIAN);
-        	bioRegions.add(Constants.PANNONIC);
-        	bioRegions.add(Constants.PONTIC);
-        	bioRegions.add(Constants.STEPPIC);
         } 
         
         private void parseDocument() throws SAXException { 
@@ -269,15 +253,13 @@ public class Natura2000ImportParser extends DefaultHandler {
         		
         		if(qName.equalsIgnoreCase("BioDescription")) {
         			String bioRegion = buf.toString().trim();
-        			if(bioRegion != null && bioRegions.contains(bioRegion.toUpperCase())){
+        			if(bioRegion != null && bioregionExists(bioRegion)){
         				preparedStatementSiteAttribute.setString(1, siteCode);
         				preparedStatementSiteAttribute.setString(2, bioRegion.toUpperCase());
         				preparedStatementSiteAttribute.setString(3, "BOOLEAN");
        					preparedStatementSiteAttribute.setString(4, "TRUE");
        					preparedStatementSiteAttribute.setString(5, "sdfxml");
         				preparedStatementSiteAttribute.executeUpdate();
-        				
-        				bioRegions.remove(bioRegion.toUpperCase());
         			} else {
         				throw new RuntimeException("BioRegion '"+bioRegion+"' doesn't exist!", new Exception());
         			}
@@ -306,49 +288,16 @@ public class Natura2000ImportParser extends DefaultHandler {
 	        			preparedStatementSite.setString(4, dateSpa);
 	        			preparedStatementSite.setString(5, respondent);
 	        			preparedStatementSite.setString(6, description);
-	        			if(latitude != null && latitude.length() > 0)
-	        				preparedStatementSite.setString(7, latitude);
-	        			else
-	        				preparedStatementSite.setNull(7, Types.DECIMAL);
+        				preparedStatementSite.setString(7, latitude);
 	        			preparedStatementSite.setString(8, latNs);
-	        			
-	        			if(latDeg != null && latDeg.length() > 0)
-	        				preparedStatementSite.setString(9, latDeg);
-	        			else
-	        				preparedStatementSite.setNull(9, Types.INTEGER);
-	        			
-	        			if(latMin != null && latMin.length() > 0)
-	        				preparedStatementSite.setString(10, latMin);
-	        			else
-	        				preparedStatementSite.setNull(10, Types.INTEGER);
-	        			
-	        			if(latSec != null && latSec.length() > 0)
-	        				preparedStatementSite.setString(11, latSec);
-	        			else
-	        				preparedStatementSite.setNull(11, Types.INTEGER);
-	        			
-	        			if(longitude != null && longitude.length() > 0)
-	        				preparedStatementSite.setString(12, longitude);
-	        			else
-	        				preparedStatementSite.setNull(12, Types.DECIMAL);
-	        			
+        				preparedStatementSite.setString(9, latDeg);
+        				preparedStatementSite.setString(10, latMin);
+        				preparedStatementSite.setString(11, latSec);
+        				preparedStatementSite.setString(12, longitude);
 	        			preparedStatementSite.setString(13, lonEw);
-	        			
-	        			if(lonDeg != null && lonDeg.length() > 0)
-	        				preparedStatementSite.setString(14, lonDeg);
-	        			else
-	        				preparedStatementSite.setNull(14, Types.INTEGER);
-	        			
-	        			if(lonMin != null && lonMin.length() > 0)
-	        				preparedStatementSite.setString(15, lonMin);
-	        			else
-	        				preparedStatementSite.setNull(15, Types.INTEGER);
-	        			
-	        			if(lonSec != null && lonSec.length() > 0)
-	        				preparedStatementSite.setString(16, lonSec);
-	        			else
-	        				preparedStatementSite.setNull(16, Types.INTEGER);
-	        			
+        				preparedStatementSite.setString(14, lonDeg);
+        				preparedStatementSite.setString(15, lonMin);
+        				preparedStatementSite.setString(16, lonSec);
 	        			preparedStatementSite.setString(17, area);
 	        			preparedStatementSite.setString(18, altMin);
 	        			preparedStatementSite.setString(19, altMax);
@@ -400,14 +349,6 @@ public class Natura2000ImportParser extends DefaultHandler {
         			preparedStatementSiteAttribute.setString(5, "sdfxml");
         			preparedStatementSiteAttribute.addBatch();
         			
-       	        	for(String region : bioRegions){
-        				preparedStatementSiteAttribute.setString(1, siteCode);
-        				preparedStatementSiteAttribute.setString(2, region);
-        				preparedStatementSiteAttribute.setString(3, "BOOLEAN");
-       					preparedStatementSiteAttribute.setString(4, "FALSE");
-       					preparedStatementSiteAttribute.setString(5, "sdfxml");
-        				preparedStatementSiteAttribute.addBatch();
-        			}
        	        	preparedStatementSiteAttribute.executeBatch(); 
        	        	preparedStatementSiteAttribute.clearParameters();
         		}
@@ -1235,6 +1176,16 @@ public class Natura2000ImportParser extends DefaultHandler {
         	return ret;
         }
         
+        private boolean bioregionExists(String bioRegionCode) {
+        	boolean ret = false;
+        	String query = "SELECT ID_BIOGEOREGION FROM chm62edt_biogeoregion WHERE UPPER(NAME) = '"+bioRegionCode.toUpperCase()+"'";
+        	String brId = sqlUtilities.ExecuteSQL(query);
+        	if(brId != null && brId.length() > 0)
+        		ret = true;
+        	
+        	return ret;
+        }
+        
         private String getSpeciesNatObjectId(String speciesCode) {
         	String query = "SELECT ID_NATURE_OBJECT FROM chm62edt_nature_object_attributes WHERE NAME = '_natura2000Code' AND OBJECT = '"+speciesCode+"'";
         	String noId = sqlUtilities.ExecuteSQL(query);
@@ -1329,9 +1280,9 @@ public class Natura2000ImportParser extends DefaultHandler {
         
         private void calculateLatitudeParams(){
         	latNs = "S";
-			latDeg = "";
-			latMin = "";
-			latSec = "";
+			latDeg = null;
+			latMin = null;
+			latSec = null;
 			
 			if(latitude != null && latitude.length() > 0){
 				//calculate LAT_NS
@@ -1383,9 +1334,9 @@ public class Natura2000ImportParser extends DefaultHandler {
         
         private void calculateLongitudeParams(){
         	lonEw = "W";
-			lonDeg = "";
-			lonMin = "";
-			lonSec = "";
+			lonDeg = null;
+			lonMin = null;
+			lonSec = null;
 			
 			if(longitude != null && longitude.length() > 0){
 				

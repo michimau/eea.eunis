@@ -566,15 +566,27 @@
         if (SiteFactsheet.TYPE_NATURA2000 == type || type == SiteFactsheet.TYPE_EMERALD )
         {
           boolean alpine = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("ALPINE"), false);
-          boolean anatol = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("ANATOL"), false);
+          boolean anatol1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("ANATOL"), false);
+          boolean anatol2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("ANATOLIAN"), false);
+          boolean anatol = anatol1 || anatol2;
           boolean arctic = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("ARCTIC"), false);
           boolean atlantic = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("ATLANTIC"), false);
           boolean boreal = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("BOREAL"), false);
-          boolean continent = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("CONTINENT"), false);
-          boolean macarones = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MACARONES"), false);
-          boolean mediterranean = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MEDITERRANIAN"), false);
-          boolean pannonic = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("PANNONIC"), false);
-          boolean pontic = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("PONTIC"), false);
+          boolean continent1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("CONTINENT"), false);
+          boolean continent2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("CONTINENTAL"), false);
+          boolean continent = continent1 || continent2; 
+          boolean macarones1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MACARONES"), false);
+          boolean macarones2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MACARONESIAN"), false);
+          boolean macarones = macarones1 || macarones2; 
+          boolean mediterranean1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MEDITERRANIAN"), false);
+          boolean mediterranean2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MEDITERRANEAN"), false);
+          boolean mediterranean = mediterranean1 || mediterranean2; 
+          boolean pannonic1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("PANNONIC"), false);
+          boolean pannonic2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("PANNONIAN"), false);
+          boolean pannonic = pannonic1 || pannonic2; 
+          boolean pontic1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("PONTIC"), false);
+          boolean pontic2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("BLACK SEA"), false);
+          boolean pontic = pontic1 || pontic2; 
           boolean steppic = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("STEPPIC"), false);
           if (alpine ||
                   anatol ||

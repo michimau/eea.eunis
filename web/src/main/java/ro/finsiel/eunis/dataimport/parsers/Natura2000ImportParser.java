@@ -16,6 +16,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.utilities.EunisUtil;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 import eionet.eunis.util.Constants;
 
@@ -1178,7 +1180,7 @@ public class Natura2000ImportParser extends DefaultHandler {
         
         private boolean bioregionExists(String bioRegionCode) {
         	boolean ret = false;
-        	String query = "SELECT ID_BIOGEOREGION FROM chm62edt_biogeoregion WHERE UPPER(NAME) = '"+bioRegionCode.toUpperCase()+"'";
+        	String query = "SELECT ID_BIOGEOREGION FROM chm62edt_biogeoregion WHERE UPPER(NAME) = '"+EunisUtil.replaceTags(bioRegionCode.toUpperCase())+"'";
         	String brId = sqlUtilities.ExecuteSQL(query);
         	if(brId != null && brId.length() > 0)
         		ret = true;
@@ -1194,7 +1196,7 @@ public class Natura2000ImportParser extends DefaultHandler {
         }
         
         private String getSpeciesNatObjectIdByName(String sciName) {
-        	String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE SCIENTIFIC_NAME='"+sciName+"'";
+        	String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE SCIENTIFIC_NAME='"+EunisUtil.replaceTags(sciName)+"'";
         	String noId = sqlUtilities.ExecuteSQL(query);
         	
         	return noId;

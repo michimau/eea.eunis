@@ -16,7 +16,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.utilities.EunisUtil;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 import eionet.eunis.util.Constants;

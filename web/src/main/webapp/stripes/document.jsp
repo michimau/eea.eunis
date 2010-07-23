@@ -20,7 +20,32 @@
 						</li>
 					</ul>
 				</div>
-				<h2>Document information:</h2>
+				<br clear="all" />
+				<div id="tabbedmenu">
+                  <ul>
+	              	<c:forEach items="${actionBean.tabsWithData }" var="dataTab">
+              		<c:choose>
+              			<c:when test="${dataTab.id eq actionBean.tab}">
+	              			<li id="currenttab">
+	              				<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${dataTab.value}" 
+	              				href="documents/${actionBean.iddoc}/${dataTab.id}">${dataTab.value}</a>
+	              			</li>
+              			</c:when>
+              			<c:otherwise>
+              				<li>
+	              				<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${dataTab.value}"
+	              				 href="documents/${actionBean.iddoc}/${dataTab.id}">${dataTab.value}</a>
+	              			</li>
+              			</c:otherwise>
+              		</c:choose>
+              		</c:forEach>
+                  </ul>
+                </div>
+                <br style="clear:both;" clear="all" />
+                <br />
+                <c:if test="${actionBean.tab == 'general'}">
+	               	<%-- General information--%>
+	                <h2>Document information:</h2>
 					<table width="90%" class="datatable">
 						<col style="width:20%"/>
                   		<col style="width:80%"/>
@@ -77,6 +102,23 @@
 							</tr>
 						</c:if>
 					</table>
+	            </c:if>
+	            <c:if test="${actionBean.tab == 'species'}">
+	            	<h2>List of species scientific names related to this reference:</h2>
+	            	<c:forEach items="${actionBean.species}" var="spe" varStatus="loop">
+	            		<div style="background-color: ${loop.index % 2 == 0 ? '#FFFFFF' : '#EEEEEE'}">
+                            <a href="species/${spe.key}">${spe.value}</a>
+                        </div>
+	            	</c:forEach>
+	            </c:if>
+	            <c:if test="${actionBean.tab == 'habitats'}">
+	            	<h2>List of habitats related to this reference:</h2>
+	            	<c:forEach items="${actionBean.habitats}" var="habitat" varStatus="loop">
+	            		<div style="background-color: ${loop.index % 2 == 0 ? '#FFFFFF' : '#EEEEEE'}">
+                            <a href="habitats/${habitat.key}">${habitat.value}</a>
+                        </div>
+	            	</c:forEach>
+	            </c:if>
 
 		<!-- END MAIN CONTENT -->
 		</stripes:layout-component>

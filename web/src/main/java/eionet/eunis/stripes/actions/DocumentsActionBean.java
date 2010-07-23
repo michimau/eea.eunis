@@ -1,6 +1,8 @@
 package eionet.eunis.stripes.actions;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -13,6 +15,8 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.lang.StringUtils;
 
+import ro.finsiel.eunis.exceptions.CriteriaMissingException;
+import ro.finsiel.eunis.jrfTables.ReferencesDomain;
 import ro.finsiel.eunis.utilities.EunisUtil;
 
 import eionet.eunis.dao.DaoFactory;
@@ -34,6 +38,8 @@ import eionet.eunis.dto.DcSourceDTO;
 import eionet.eunis.dto.DcSubjectDTO;
 import eionet.eunis.dto.DcTitleDTO;
 import eionet.eunis.dto.DcTypeDTO;
+import eionet.eunis.dto.PairDTO;
+import eionet.eunis.util.Pair;
 
 /**
  * Action bean to handle RDF export.
@@ -41,7 +47,7 @@ import eionet.eunis.dto.DcTypeDTO;
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
-@UrlBinding("/documents/{iddoc}")
+@UrlBinding("/documents/{iddoc}/{tab}")
 public class DocumentsActionBean extends AbstractStripesAction {
 	
 	private static final String HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -73,9 +79,22 @@ public class DocumentsActionBean extends AbstractStripesAction {
 	private DcSubjectDTO dcSubject;
 	private DcTypeDTO dcType;
 	
+	//selected tab
+	private String tab;
+	//tabs to display
+	private List<Pair<String,String>> tabsWithData = new LinkedList<Pair<String,String>>();
+	
+	List<PairDTO> species = new ArrayList<PairDTO>();
+	List<PairDTO> habitats = new ArrayList<PairDTO>();
+	
 	@DefaultHandler
 	@DontValidate(ignoreBindingErrors = true)
 	public Resolution defaultAction() {
+		
+		if(tab == null || tab.length() == 0){
+			tab = "general";
+		}
+		
 		String forwardPage = "/stripes/documents.jsp";
 		
 		String eeaHome = getContext().getInitParameter("EEA_HOME");
@@ -116,6 +135,30 @@ public class DocumentsActionBean extends AbstractStripesAction {
 					return new ErrorResolution(404);
 				}
 			}
+			try {
+				species = ReferencesDomain.getSpeciesForAReference(
+														iddoc,
+														getContext().getJdbcDriver(),
+														getContext().getJdbcUrl(),
+														getContext().getJdbcUser(),
+														getContext().getJdbcPassword());
+				
+				habitats = ReferencesDomain.getHabitatsForAReferences(
+														iddoc,
+														getContext().getJdbcDriver(),
+														getContext().getJdbcUrl(),
+														getContext().getJdbcUser(),
+														getContext().getJdbcPassword());
+					
+			} catch (CriteriaMissingException e) {
+				e.printStackTrace();
+			}
+			tabsWithData.add(new Pair<String, String>("general",getContentManagement().cmsPhrase("General information")));
+			if(species != null && species.size() > 0)
+				tabsWithData.add(new Pair<String, String>("species",getContentManagement().cmsPhrase("Species")));
+			if(habitats != null && habitats.size() > 0)
+				tabsWithData.add(new Pair<String, String>("habitats",getContentManagement().cmsPhrase("Habitats")));
+			
 			setMetaDescription("document");
 		} else {
 			btrail = "eea#" + eeaHome + ",home#index.jsp,documents";
@@ -381,6 +424,38 @@ public class DocumentsActionBean extends AbstractStripesAction {
 
 	public void setDcType(DcTypeDTO dcType) {
 		this.dcType = dcType;
+	}
+
+	public String getTab() {
+		return tab;
+	}
+
+	public void setTab(String tab) {
+		this.tab = tab;
+	}
+
+	public List<Pair<String, String>> getTabsWithData() {
+		return tabsWithData;
+	}
+
+	public void setTabsWithData(List<Pair<String, String>> tabsWithData) {
+		this.tabsWithData = tabsWithData;
+	}
+
+	public List<PairDTO> getSpecies() {
+		return species;
+	}
+
+	public void setSpecies(List<PairDTO> species) {
+		this.species = species;
+	}
+
+	public List<PairDTO> getHabitats() {
+		return habitats;
+	}
+
+	public void setHabitats(List<PairDTO> habitats) {
+		this.habitats = habitats;
 	}
 
 

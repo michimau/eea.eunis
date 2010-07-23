@@ -14,7 +14,8 @@
                  ro.finsiel.eunis.formBeans.ReferencesBean,
                  ro.finsiel.eunis.jrfTables.*,
                  ro.finsiel.eunis.formBeans.ReferencesSortCriteria,
-                 ro.finsiel.eunis.formBeans.ReferencesSearchCriteria"%><%@ page import="ro.finsiel.eunis.exceptions.CriteriaMissingException"%>
+                 ro.finsiel.eunis.formBeans.ReferencesSearchCriteria,
+                 eionet.eunis.dto.PairDTO"%><%@ page import="ro.finsiel.eunis.exceptions.CriteriaMissingException"%>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.formBeans.ReferencesBean" scope="request">
   <jsp:setProperty name="formBean" property="*"/>
 </jsp:useBean>
@@ -498,32 +499,25 @@
                 SQL_USR = application.getInitParameter("JDBC_USR");
                 SQL_PWD = application.getInitParameter("JDBC_PWD");
                 // List of species scientific names related to this reference
-            List speciesResults = null;
-            try
-            {
-              speciesResults = ReferencesDomain.getSpeciesForAReference(ref.getIdDc(),SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+            List<PairDTO> speciesResults = null;
+            try{
+              	speciesResults = ReferencesDomain.getSpeciesForAReference(ref.getIdDc(),SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+            } catch ( CriteriaMissingException e ){
+              	e.printStackTrace();
             }
-            catch ( CriteriaMissingException e )
-            {
-              e.printStackTrace();
-            }
-            int speciesResultSize = (null == speciesResults ? 0 : speciesResults.size());
-                if(speciesResultSize>0)
-                {
-                  for(int i=0;i<speciesResultSize;i++)
-                  {
-                    List speciesData = (List)speciesResults.get(i);
-                    String speciesName = (String)speciesData.get(1);
-                    String speciesId = (String)speciesData.get(0);
+                if(speciesResults != null && speciesResults.size() > 0){
+                	int i = 0;
+                  	for(PairDTO specie : speciesResults){
+	                    String speciesName = specie.getValue();
+                    	String speciesId = specie.getKey();
           %>
                         <div style="background-color: <%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>">
                             <a href="species/<%=speciesId%>"><%=speciesName%></a>
                         </div>
           <%
-                  }
-                }
-                else
-                {
+          				i++;
+                  	}
+                } else {
           %>
                       &nbsp;
           <%
@@ -533,24 +527,20 @@
                     <td style="text-align : center;">
           <%
                 // List of species scientific names related to this reference
-                List habitatsResults = ReferencesDomain.getHabitatsForAReferences(ref.getIdDc(),SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-                int habitatsResultSize = (null == habitatsResults ? 0 : habitatsResults.size());
-                if(habitatsResultSize>0)
-                {
-                  for(int i=0;i<habitatsResultSize;i++)
-                  {
-                    List habitatsData = (List)habitatsResults.get(i);
-                    String habitatsName = (String)habitatsData.get(1);
-                    String habitatsId = (String)habitatsData.get(0);
+                List<PairDTO> habitatsResults = ReferencesDomain.getHabitatsForAReferences(ref.getIdDc(),SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
+                if(habitatsResults != null && habitatsResults.size() > 0){
+                	int i = 0;
+                  	for(PairDTO habitat : habitatsResults){
+	                    String habitatsName = habitat.getValue();
+                    	String habitatsId = habitat.getKey();
           %>
                       <div style="background-color: <%=(0 == (i % 2)) ? "#FFFFFF" : "#EEEEEE"%>">
                         <a href="habitats/<%=habitatsId%>"><%=habitatsName%></a>
                       </div>
           <%
-                  }
-                }
-                else
-                {
+          				i++;
+                  	}
+                } else {
           %>
                     &nbsp;
           <%

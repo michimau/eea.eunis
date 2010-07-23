@@ -13,8 +13,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+
+import eionet.eunis.dto.PairDTO;
 
 /**
  * @author finsiel
@@ -126,8 +129,8 @@ public class ReferencesDomain implements Paginable {
     return results;
   }
 
-    public static Vector getHabitatsForAReferences(String idDc, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD ) {
-    Vector results = new Vector();
+  public static List<PairDTO> getHabitatsForAReferences(String idDc, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD ) {
+    List<PairDTO> results = new ArrayList<PairDTO>();
     String SQL = "";
     Connection con = null;
     PreparedStatement ps = null;
@@ -148,14 +151,13 @@ public class ReferencesDomain implements Paginable {
       rs = ps.executeQuery(SQL);
 
       if (rs.isBeforeFirst()) {
-        while (!rs.isLast()) {
-          rs.next();
-//          results.addElement(rs.getString(1));
-          Vector v = new Vector();
-          v.addElement(rs.getString(1));
-          v.addElement(rs.getString(2));
-          results.addElement(v);
-        }
+    	  while (!rs.isLast()) {
+    		  rs.next();
+    		  PairDTO dto = new PairDTO();
+    		  dto.setKey(rs.getString(1));
+    		  dto.setValue(rs.getString(2));
+    		  results.add(dto);
+    	  }
       }
 
       ps.close();
@@ -166,8 +168,8 @@ public class ReferencesDomain implements Paginable {
     return results;
   }
 
-   public static Vector getSpeciesForAReference(String idDc, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) throws CriteriaMissingException {
-    Vector results = new Vector();
+   public static List<PairDTO> getSpeciesForAReference(String idDc, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) throws CriteriaMissingException {
+	List<PairDTO> results = new ArrayList<PairDTO>();
     Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
@@ -222,14 +224,14 @@ public class ReferencesDomain implements Paginable {
       rs = ps.executeQuery(SQL);
 
       if (rs.isBeforeFirst()) {
-        while (!rs.isLast()) {
-          rs.next();
-//          results.addElement(rs.getString(1));
-          Vector v = new Vector();
-          v.addElement(rs.getString(1));
-          v.addElement(rs.getString(2));
-          results.addElement(v);
-        }
+    	  while (!rs.isLast()) {
+    		  rs.next();
+//          	results.addElement(rs.getString(1));
+    		  PairDTO dto = new PairDTO();
+    		  dto.setKey(rs.getString(1));
+    		  dto.setValue(rs.getString(2));
+    		  results.add(dto);
+    	  }
       }
 
       ps.close();

@@ -1,7 +1,6 @@
 package ro.finsiel.eunis.search.habitats.habitatsByReferences;
 
 import ro.finsiel.eunis.jrfTables.habitats.references.HabitatsBooksDomain;
-import ro.finsiel.eunis.jrfTables.habitats.references.HabitatsBooksDomain;
 import ro.finsiel.eunis.jrfTables.habitats.habitatsByReferences.RefDomain;
 import ro.finsiel.eunis.search.Utilities;
 

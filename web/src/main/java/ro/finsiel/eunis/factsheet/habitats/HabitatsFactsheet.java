@@ -13,8 +13,6 @@ import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.SortList;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.factsheet.HabitatsSpeciesWrapper;
-import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -1300,6 +1298,26 @@ public class HabitatsFactsheet {
       ex.printStackTrace( System.err );
     }
     return results;
+  }
+  
+  /**
+   * Retrieve habitat references (from CHM62EDT_HABITAT_REFERENCES) using
+   * Chm62edtHabitatReferenceDomain
+   *
+   * @return List of Chm62edtHabitatReferencePersist objects.
+   * @throws InitializationException if idHabitat was null during object construction.
+   */
+  public List<Chm62edtHabitatReferencePersist> getHabitatReferences() throws InitializationException {
+	  if ( null == idHabitat ){
+		  throw new InitializationException( "idHabitat was null. Cannot retrieve information." );
+	  }
+	  List<Chm62edtHabitatReferencePersist> results = null;
+	  try {
+		  results = new Chm62edtHabitatReferenceDomain().findWhere( "ID_HABITAT='" + idHabitat + "'" );
+	  } catch ( Exception ex ) {
+		  ex.printStackTrace( System.err );
+	  }
+	  return results;
   }
 
   /**

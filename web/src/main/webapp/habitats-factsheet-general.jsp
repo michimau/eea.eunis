@@ -19,7 +19,8 @@
                  ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist,
                  ro.finsiel.eunis.search.Utilities,
                  eionet.eunis.util.Constants,
-                 java.util.List"%>
+                 java.util.List,
+                 ro.finsiel.eunis.jrfTables.Chm62edtHabitatReferencePersist"%>
 <%@ page import="java.util.Vector"%>
 
 <%@page import="ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain"%><jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
@@ -245,25 +246,67 @@
     </p>
 <%
       }
-      if (null != description.getIdDc())
-      {
-        String textSource = Utilities.formatString(SpeciesFactsheet.getBookAuthorDate(description.getIdDc()), "");
-        if (!textSource.equalsIgnoreCase(""))
-        {
-          String _source = textSource;
-          _source = _source.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
-%>
-      <h3>
-        <%=cm.cmsPhrase("Source")%>:
-      </h3>
-      <p>
-        <a href="documents/<%=description.getIdDc()%>"><%=_source%></a>
-      </p>
-<%
-        }
-      }
     }
   }
+
+	// Habitat references
+  	List<Chm62edtHabitatReferencePersist> references = null;
+  	try {
+  		references = factsheet.getHabitatReferences();
+  	} catch(InitializationException e) {
+  		e.printStackTrace();
+  	}
+  	if(references != null && references.size() > 0){
+%>
+			<h3>
+		        <%=cm.cmsPhrase("References")%>:
+		    </h3>
+			<table class="listing fullwidth">
+      			<thead>
+        			<tr>
+          				<th>
+            				<%=cm.cmsPhrase("Source")%>
+          				</th>
+          				<th>
+            				<%=cm.cmsPhrase("Title")%>
+          				</th>
+          				<th></th>
+        			</tr>
+      			</thead>
+      			<tbody>
+<%
+  		int i = 0;
+	  	for(Chm62edtHabitatReferencePersist ref : references){
+	  		String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
+%>
+      				<tr class="<%=cssClass%>">
+        				<td>
+          					<a href="documents/<%=ref.getIdDc()%>"><%=ref.getSource()%></a>
+        				</td>
+        				<td>
+          					<%=ref.getTitle()%>
+        				</td>
+        				<td>
+        					<%
+        					if(ref.getHaveSource() != null && ref.getHaveSource().equals("1")) {
+        					%>
+        						<%=cm.cmsPhrase("Source")%>
+        					<%
+        					} else if(ref.getHaveRef() != null && ref.getHaveRef().equals("1")) {
+        					%>
+        						<%=cm.cmsPhrase("Other reference")%>
+        					<%
+        					}
+        					%>
+        				</td>
+      				</tr>
+<%
+			i++;
+	  	}
+%>
+			</tbody>
+		</table>	
+<%  }
 %>
   	<h2><%=cm.cmsPhrase("External links")%></h2>
 	<div id="linkcollection">

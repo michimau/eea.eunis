@@ -68,17 +68,17 @@ import eionet.eunis.util.Pair;
 public class SpeciesFactsheetActionBean extends AbstractStripesAction implements RdfAware {
 	
 	private static final String[][] allTypes = new String[][]{
-		{"GENERAL_INFORMATION","general"},
-		{"VERNACULAR_NAMES","vernacular"},
-		{"GEOGRAPHICAL_DISTRIBUTION","countries"},
-		{"POPULATION","population"},
-		{"TRENDS","trends"},
-		{"REFERENCES","references"},
-		{"GRID_DISTRIBUTION","grid"},
-		{"LEGAL_INSTRUMENTS","legal"},
-		{"HABITATS","habitats"},
-		{"SITES","sites"},
-		{"GBIF","gbif"}};
+		{"GENERAL_INFORMATION","general","General information"},
+		{"VERNACULAR_NAMES","vernacular","Vernacular names"},
+		{"GEOGRAPHICAL_DISTRIBUTION","countries","Geograpical distribution"},
+		{"POPULATION","population","Population"},
+		{"TRENDS","trends","Trends"},
+		{"REFERENCES","references","References"},
+		{"GRID_DISTRIBUTION","grid","Grid distribution"},
+		{"LEGAL_INSTRUMENTS","legal","Legal Instruments"},
+		{"HABITATS","habitats","Habitat types"},
+		{"SITES","sites","Sites"},
+		{"GBIF","gbif","GBIF observations"}};
 
 	private static final String EXPECTED_IN_PREFIX = "http://eunis.eea.europa.eu/sites/";
 
@@ -199,7 +199,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 			SQLUtilities sqlUtil = getContext().getSqlUtilities();
 			for (int i = 0; i< allTypes.length; i++) {
 				if (!sqlUtil.TabPageIsEmpy(factsheet.getSpeciesNatureObject().getIdNatureObject().toString(), "SPECIES", allTypes[i][0])) {
-					tabsWithData.add(new Pair<String, String>(allTypes[i][1], getContentManagement().cms(allTypes[i][0].toLowerCase())));
+					tabsWithData.add(new Pair<String, String>(allTypes[i][1], getContentManagement().cmsPhrase(allTypes[i][2])));
 				}
 			}
 			

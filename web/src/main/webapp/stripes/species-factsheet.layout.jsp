@@ -150,27 +150,27 @@
 			</c:otherwise>
 		</c:choose>
 		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'general_information')}
+		    ${eunis:cmsMsg(actionBean.contentManagement, 'General information')}
 		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'vernacular_names')}
+		    ${eunis:cmsMsg(actionBean.contentManagement, 'Vernacular names')}
 		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'geographical_distribution')}
+		    ${eunis:cmsMsg(actionBean.contentManagement, 'Geograpical distribution')}
 		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'population')}
+		    ${eunis:cmsMsg(actionBean.contentManagement, 'Population')}
 		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'trends')}
+		    ${eunis:cmsMsg(actionBean.contentManagement, 'Trends')}
 		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'references')}
+		    ${eunis:cmsMsg(actionBean.contentManagement, 'References')}
 		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'grid_distribution')}
+		    ${eunis:cmsMsg(actionBean.contentManagement, 'Grid distribution')}
 		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'legal_instruments')}
+		    ${eunis:cmsMsg(actionBean.contentManagement, 'Legal Instruments')}
 		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'habitat_types')}
+		    ${eunis:cmsMsg(actionBean.contentManagement, 'Habitat types')}
 		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'sites')}
+		    ${eunis:cmsMsg(actionBean.contentManagement, 'Sites')}
 		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'gbif')}
+		    ${eunis:cmsMsg(actionBean.contentManagement, 'GBIF observations')}
 		    ${eunis:br(actionBean.contentManagement)}
 		    ${eunis:cmsMsg(actionBean.contentManagement, 'species_factsheet_title')}
 		    ${eunis:br(actionBean.contentManagement)}

@@ -95,15 +95,15 @@
 									<c:choose>
 										<c:when test="${dataTab.id eq actionBean.tab}">
 											<li id="currenttab"><a
-												title="Open ${eunis:cms(actionBean.contentManagement, dataTab.value)}"
+												title="Open ${dataTab.value}"
 												href="sites/${actionBean.idsite}/${dataTab.id}">
-											${eunis:cms(actionBean.contentManagement, dataTab.value)}</a></li>
+												${dataTab.value}</a></li>
 										</c:when>
 										<c:otherwise>
 											<li><a
-												title="Open ${eunis:cms(actionBean.contentManagement, dataTab.value)}"
+												title="Open ${dataTab.value}"
 												href="sites/${actionBean.idsite}/${dataTab.id}">
-											${eunis:cms(actionBean.contentManagement, dataTab.value)}</a></li>
+												${dataTab.value}</a></li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>

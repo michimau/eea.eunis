@@ -45,12 +45,12 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 	private String zoom = "";
 	
 	private static final String[] tabs = {
-            "sites_factsheet_tab_general_informations",
-            "sites_factsheet_tab_fauna_flora",
-            "designation_information",
-            "habitat_types",
-            "sites_factsheet_tab_sites",
-            "other_info"
+            "General information",
+            "Fauna and Flora",
+            "Designation information",
+            "Habitat types",
+            "Related sites",
+            "Other Info"
     };
 
     private static final String[][] dbtabs = {
@@ -108,7 +108,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 	
 			for (int i=0; i < tabs.length; i++) {
 				if(!getContext().getSqlUtilities().TabPageIsEmpy(factsheet.getSiteObject().getIdNatureObject().toString(), "SITES", dbtabs[i][0])) {
-					tabsWithData.add(new Pair<String, String>(dbtabs[i][1], tabs[i]));
+					tabsWithData.add(new Pair<String, String>(dbtabs[i][1], getContentManagement().cmsPhrase(tabs[i])));
 				}
 			}
 		

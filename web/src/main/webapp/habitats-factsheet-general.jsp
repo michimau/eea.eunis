@@ -123,8 +123,7 @@
 <%
     }
 %>
-          <a title="<%=cm.cms("open_diagram")%>" href="javascript:openDiagram('habitats-diagram.jsp?habCode=<%=factsheet.getEunisHabitatCode()%>','','toolbar=yes,scrollbars=yes,resizable=yes')"><img alt="<%=cm.cms("open_diagram")%>" src="images/mini/diagram_out.png" title="<%=cm.cms("habitats_factsheet_07")%>" width="20" height="20" border="0" /></a>
-          <%=cm.cmsTitle("open_diagram")%><%=cm.cmsTitle("habitats_factsheet_07")%>
+          <a title="<%=cm.cmsPhrase("Show diagram image")%>" href="habitats-diagram.jsp?habCode=<%=factsheet.getEunisHabitatCode()%>"><img alt="<%=cm.cmsPhrase("Diagram icon")%>" src="images/mini/diagram_out.png" width="20" height="20" border="0" /></a>
 <%
   }
 %>

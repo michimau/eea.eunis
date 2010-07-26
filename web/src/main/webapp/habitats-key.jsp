@@ -115,19 +115,16 @@
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
-                <%=cm.cmsText("habitats_key_help_01")%>
+                <%=cm.cmsPhrase("You can use the 'key navigation' function to identify a specific habitat by answering a set of questions. Starting from first question to next questions you select one of the possible answers. Here are samples of possible answers:")%>
                 <ul>
                   <li>
-                    <%=cm.cmsPhrase("No")%> ( <img alt="<%=cm.cms("other_question")%>" src="images/mini/navigate.gif" /> <%=cm.cmsPhrase("002 ) - Leading to question named '002'")%>
-                    <%=cm.cmsTitle("other_question")%>
+                    <%=cm.cmsPhrase("No")%> ( <img alt="" src="images/mini/navigate.gif" /> <%=cm.cmsPhrase("002 ) - Leading to question named '002'")%>
                   </li>
                   <li>
-                    <%=cm.cmsPhrase("Yes")%> [ <img alt="<%=cm.cms("another_questions")%>" src="images/mini/navigate.gif" /> <%=cm.cmsPhrase("G ] - Leading to another questions subset of level G")%>
-                    <%=cm.cmsTitle("another_questions")%>
+                    <%=cm.cmsPhrase("Yes")%> [ <img alt="" src="images/mini/navigate.gif" /> <%=cm.cmsPhrase("G ] - Leading to another questions subset of level G")%>
                   </li>
                   <li>
-                    <%=cm.cmsPhrase("no")%> <img alt="<%=cm.cms("another_sheet")%>" src="images/mini/sheet.gif" />[ <img alt="Go to factsheet" src="images/mini/navigate.gif" /> <%=cm.cmsPhrase("E6 ] - Links directly to factsheet for E6")%>
-                    <%=cm.cmsTitle("another_sheet")%>
+                    <%=cm.cmsPhrase("No")%> <img alt="<%=cm.cmsPhrase("Factsheet icon")%>" src="images/mini/sheet.gif" />[ <img alt="" src="images/mini/navigate.gif" /> <%=cm.cmsPhrase("E6 ] - Links directly to factsheet for E6")%>
                   </li>
                 </ul>
                 <%=cm.cmsPhrase("Additionally the diagram may be used for reference.")%>
@@ -140,14 +137,13 @@
                 <br />
                 <br />
                 <strong>
-                  <%=cm.cmsPhrase("category")%> : (<%=(null == pageCode) ? cm.cmsPhrase("All") : pageCode%> )<%=question.getPageName()%>
+                  <%=cm.cmsPhrase("Category")%> : (<%=(null == pageCode) ? cm.cmsPhrase("All") : pageCode%> )<%=question.getPageName()%>
                 </strong>
                 <br />
                 <strong>
                   <%=cm.cmsPhrase("Diagram")%> :
                 </strong>
-                <a href="javascript:openDiagram('habitats-diagram.jsp?habCode=<%=pageCode%>','','toolbar=yes,scrollbars=yes,resizable=yes,width=880,height=640')" title="Open diagram"><img alt="<%=cm.cms("show_habitat_diagram")%>" src="images/mini/diagram_out.png" width="20" height="20" border="0" style="vertical-align:middle" /></a>
-                <%=cm.cmsTitle("show_habitat_diagram")%>
+                <a href="habitats-diagram.jsp?habCode=<%=pageCode%>" title="<%=cm.cmsPhrase("Show diagram image")%>"><img alt="<%=cm.cmsPhrase("Diagram icon")%>" src="images/mini/diagram_out.png" width="20" height="20" border="0" style="vertical-align:middle" /></a>
                 <br />
                 <br />
           <%
@@ -226,7 +222,7 @@
           %>
                               <%=correctedAnswer%>
                             </strong>
-                            <a title="<%=cm.cms("answer")%>" href="habitats/<%=answer.getIDHabitatLink()%>"><img title="<%=cm.cms("answer")%>" alt="Answer" src="images/mini/sheet.gif" border="0" style="vertical-align:middle" /></a>
+                            <a title="<%=cm.cms("answer")%>" href="habitats/<%=answer.getIDHabitatLink()%>"><img alt="<%=cm.cmsPhrase("Factsheet icon")%>" src="images/mini/sheet.gif" border="0" style="vertical-align:middle" /></a>
                             <%=cm.cmsTitle("answer")%>
           <%
                     if (level > 0 && level < 3)

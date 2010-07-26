@@ -103,44 +103,11 @@
 		    SessionManager.setUsername(null);
 		    SessionManager.setPassword(null);
 		  }
-		  SQLUtilities sqlc = new SQLUtilities();
-		  sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
-		  String sqlHeadline = "select content from eunis_headlines where NOW() between start_date and end_date order by record_date desc";
-		  String headline = sqlc.ExecuteSQL(sqlHeadline);
-		
-		  String magnifyIMG;
-		  String compassIMG;
-		  ThemeWrapper currentTheme = SessionManager.getThemeManager().getCurrentTheme();
-		  if ( currentTheme.equals( ThemeManager.FRESH_ORANGE ) )
-		  {
-		    magnifyIMG = "magnify_orange.gif";
-		    compassIMG = "compass_orange.jpg";
-		  }
-		  else if ( currentTheme.equals( ThemeManager.NATURE_GREEN ) )
-		  {
-		    magnifyIMG = "magnify_green.gif";
-		    compassIMG = "compass_green.jpg";
-		  }
-		  else if ( currentTheme.equals( ThemeManager.CHERRY ) )
-		  {
-		    magnifyIMG = "magnify_cherry.gif";
-		    compassIMG = "compass_cherry.jpg";
-		  }
-		  else if ( currentTheme.equals( ThemeManager.BLACKWHITE ) )
-		  {
-		    magnifyIMG = "magnify_bw.gif";
-		    compassIMG = "compass_bw.jpg";
-		  }
-		  else
-		  {
-		    magnifyIMG = "magnify.gif";
-		    compassIMG = "compass.jpg";
-		  }
 		%>
   		<script language="JavaScript" src="script/index.js" type="text/javascript"></script>
   		<title>
     		<%=application.getInitParameter("PAGE_TITLE")%>
-    		<%=cm.cms( "welcome_to_eunis_database" )%>
+    		<%=cm.cmsPhrase( "EUNIS - Welcome to EUNIS Database" )%>
   		</title>
   		<style type="text/css">
 			#portal-column-content #content {
@@ -186,7 +153,7 @@
 		          					<div style="position: relative;">
 			          					<div class="figure-right" style="display:inline; position: absolute; right:0; top:0;">
 				         					<div class="figure">
-					         					<img height="350" width="216" title="" alt="<%=cm.cms("index_photo_alt")%>" src="images/intros/<%=Utilities.getIntroImage( application )%>" />
+					         					<img height="350" width="216" title="" alt="<%=cm.cmsPhrase("Image from EUNIS Database photo collection regarding Species, Habitat types and Sites")%>" src="images/intros/<%=Utilities.getIntroImage( application )%>" />
 					     					</div>
 					  					</div>
 			          					<div style="float:left; position: absolute; left:0; top:0; padding-right: 250px;">
@@ -210,11 +177,10 @@
 												<label for="scientificName">
 			                						<%=cm.cmsPhrase( "Species" )%>
 			              						</label>&nbsp;
-			              						<input title="Species name" id="scientificName" name="scientificName" size="24" />
-			              						<input id="search_species" type="submit" name="submit" value="<%=cm.cms("search")%>" class="submitSearchButton" title="<%=cm.cms("search_species")%>" />
-			              						<%=cm.cmsLabel("species_name")%>
+			              						<input title="<%=cm.cmsPhrase("Species name")%>" id="scientificName" name="scientificName" size="24" />
+			              						<input id="search_species" type="submit" name="submit" value="<%=cm.cmsPhrase("Search")%>" class="submitSearchButton" title="<%=cm.cmsPhrase("Search species")%>" />
 			              						<br />
-			              						<a title="<%=cm.cms("index_species_search_tools_title")%>" href="species.jsp"><%=cm.cmsPhrase("Search tools")%></a><%=cm.cmsTitle("index_species_search_tools_title")%>
+			              						<a title="<%=cm.cmsPhrase("Go to Species search tools")%>" href="species.jsp"><%=cm.cmsPhrase("Search tools")%></a>
 			              						<div class="search_details">
 			                						<%=cm.cmsPhrase( "Information about species and subspecies in Europe." )%>
 			              						</div>
@@ -233,13 +199,10 @@
 			              						<label for="searchString">
 			                						<%=cm.cmsPhrase( "Habitat types" )%>
 			              						</label>&nbsp;
-			              						<input title="<%=cm.cms("habitat_type_name")%>" id="searchString" name="searchString" size="24" />
-			              						<%=cm.cmsLabel("habitat_type_name")%>
-			              						<%=cm.cmsTitle("habitat_type_name")%>
-			              						<input id="search_habitat_types" type="submit" name="submit" value="<%=cm.cms("search")%>" class="submitSearchButton" title="<%=cm.cms("search_habitat_type")%>" />
+			              						<input title="<%=cm.cmsPhrase("Habitat type name")%>" id="searchString" name="searchString" size="24" />
+			              						<input id="search_habitat_types" type="submit" name="submit" value="<%=cm.cmsPhrase("Search")%>" class="submitSearchButton" title="<%=cm.cmsPhrase("Search habitat types")%>" />
 			              						<br />	
-			              						<a title="<%=cm.cms("index_habitats_search_tools_title")%>" href="habitats.jsp"><%=cm.cms("search_tools")%></a>
-			              						<%=cm.cmsTitle("index_habitats_search_tools_title")%>
+			              						<a title="<%=cm.cmsPhrase("Go to Habitat types search tools")%>" href="habitats.jsp"><%=cm.cmsPhrase("Search tools")%></a>
 			              						<div class="search_details">
 			                						<%=cm.cmsPhrase( "Information about the EUNIS habitat types classification and Habitats Directive Annex I habitats " )%>
 			              						</div>
@@ -267,31 +230,23 @@
 			              						<label for="englishName">
 			                						<%=cm.cmsPhrase( "Sites" )%>
 			              						</label>&nbsp;
-			              						<input title="<%=cm.cms("site_name")%>" id="englishName" name="englishName" size="24" />
-			              						<%=cm.cmsLabel("site_name")%>
-			              						<%=cm.cmsTitle("site_name")%>
-			              						<input id="search_sites" type="submit" name="submit" value="<%=cm.cms("search")%>" class="submitSearchButton" title="<%=cm.cms( "index_search_sites_label" )%>" />
-			              						<%=cm.cmsTitle( "index_search_sites_label" )%>
+			              						<input title="<%=cm.cmsPhrase("Site name")%>" id="englishName" name="englishName" size="24" />
+			              						<input id="search_sites" type="submit" name="submit" value="<%=cm.cmsPhrase("Search")%>" class="submitSearchButton" title="<%=cm.cmsPhrase( "Search sites" )%>" />
 			              						<br />
-			              						<a title="<%=cm.cms("index_sites_search_tools_title")%>" href="sites.jsp"><%=cm.cms("search_tools")%></a>
-			              						<%=cm.cmsTitle("index_sites_search_tools_title")%>
+			              						<a title="<%=cm.cmsPhrase("Go to Sites search tools")%>" href="sites.jsp"><%=cm.cmsPhrase("Search tools")%></a>
 			              						<div class="search_details" style="margin-bottom: 20px;">
 			                						<%=cm.cmsPhrase( "Information collected from various databases regarding sites" )%>
 			              						</div>
 			            					</form>
-			            					<a href="combined-search.jsp" title="<%=cm.cms("generic_index_21_title")%>"><%=cm.cmsPhrase( "<strong>Combined search</strong>" )%></a>
-			            					<%=cm.cmsTitle("generic_index_21_title")%>
+			            					<a href="combined-search.jsp"><strong><%=cm.cmsPhrase( "Combined search" )%></strong></a>
 			            					<div class="search_details" style="margin-bottom: 20px;">
 			              						<%=cm.cmsPhrase( "Advanced cross-search tool, linking species, habitat types and sites" )%>
 			            					</div>
-			            					<a href="gis-tool.jsp" title="<%=cm.cms("gis_tool_interactive_maps")%>"><%=cm.cmsPhrase( "<strong>Interactive Maps</strong>" )%></a>
-			            					<%=cm.cmsTitle("gis_tool_interactive_maps")%>
+			            					<a href="gis-tool.jsp"><strong><%=cm.cmsPhrase( "Interactive Maps" )%></strong></a>
 			            					&nbsp;
-			            					<a href="gis-tool.jsp" title="<%=cm.cms("gis_tool_interactive_maps")%>"><img src="images/<%=compassIMG%>" width="29" height="29" style="width : 29px; height : 29px; border : 0px; vertical-align : middle;" alt="<%=cm.cms("gis_tool_interactive_maps")%>" title="<%=cm.cms("gis_tool_interactive_maps")%>" /></a>
-			            					<%=cm.cmsTitle("gis_tool_interactive_maps")%>
+			            					<a href="gis-tool.jsp" title="<%=cm.cmsPhrase("GIS Tool Interactive maps")%>"><img src="images/compass.jpg" width="29" height="29" style="width : 29px; height : 29px; border : 0px; vertical-align : middle;" alt="<%=cm.cmsPhrase("GIS Tool Interactive maps")%>" title="<%=cm.cmsPhrase("GIS Tool Interactive maps")%>" /></a>
 			            					<br />
-			            					<%=cm.cms("generic_index_maps")%>
-			            					<%=cm.cmsMsg("welcome_to_eunis_database")%>
+			            					<%=cm.cmsPhrase("Geographical information accessible within an interactive GIS tool allowing users to build maps or identify areas.")%>
 			            					<br />
 											<!-- END MAIN CONTENT -->
 			          					</div>

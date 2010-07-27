@@ -22,53 +22,58 @@
 	        <h1>Import Red List</h1>
 	        <stripes:form action="/dataimport/importredlist" method="post" name="f">
 	        	<b>XML files</b> (max 5 files per import):<br/>
-	        	<stripes:file name="files[0]"/><br/>
-	        	<stripes:file name="files[1]"/><br/>
-	        	<stripes:file name="files[2]"/><br/>
-	        	<stripes:file name="files[3]"/><br/>
-	        	<stripes:file name="files[4]"/><br/>
+	        	<stripes:file name="files[0]" size="50"/><br/>
+	        	<stripes:file name="files[1]" size="50"/><br/>
+	        	<stripes:file name="files[2]" size="50"/><br/>
+	        	<stripes:file name="files[3]" size="50"/><br/>
+	        	<stripes:file name="files[4]" size="50"/><br/>
 	        	<stripes:checkbox name="delete" id="delete"/>
 	        	<stripes:label for="delete"> - delete old threats (only deletes old threats of species that importer finds in XML file(s))</stripes:label><br/>
-	        	<table width="450" border="0">
+	        	<table border="0">
+				<col style="width:10em"/>
+				<col style="width:50em"/>
 	        		<tr>
 	        			<td><stripes:label for="idDc">Source</stripes:label></td>
 			        	<td>
-			        		<stripes:select name="idDc" id="idDc" style="width:400px;" onchange="javascript:showHide(this);">
+			        		<stripes:select name="idDc" id="idDc" style="width:100%;" onchange="javascript:showHide(this);">
 			        			<stripes:option value="-1">- new source -</stripes:option>
 			        			<stripes:options-collection collection="${actionBean.sources}" value="key" label="value"/>
 			        		</stripes:select>
 			        	</td>
 			        </tr>
 	        	</table>
-	        	<table width="450" border="0" id="newsource">
+	        	<table border="0" id="newsource">
+				<col style="width:10em"/>
+				<col style="width:50em"/>
 	        		<tr>
 	        			<td><stripes:label for="title">Title</stripes:label></td>
-			        	<td><stripes:text name="title" id="title"/></td>
+			        	<td><stripes:text name="title" id="title" style="width:100%"/></td>
 			        </tr>
 			        <tr>
 			        	<td><stripes:label for="source">Source</stripes:label></td>
-			        	<td><stripes:text name="source" id="source"/></td>
+			        	<td><stripes:text name="source" id="source" style="width:100%"/></td>
 			        </tr>
 			        <tr>
 			        	<td><stripes:label for="editor">Editor</stripes:label></td>
-			        	<td><stripes:text name="editor" id="editor"/></td>
+			        	<td><stripes:text name="editor" id="editor" style="width:100%"/></td>
 			        </tr>
 			        <tr>
 			        	<td><stripes:label for="url">URL</stripes:label></td>
-			        	<td><stripes:text name="url" id="url"/></td>
+			        	<td><stripes:text name="url" id="url" style="width:100%"/></td>
 			        </tr>
 			        <tr>
 			        	<td><stripes:label for="date">Publish year</stripes:label></td>
-			        	<td><stripes:text name="date" id="date"/> (YYYY)</td>
+			        	<td><stripes:text name="date" id="date" size="4"/> (YYYY)</td>
 			        </tr>
 			        <tr>
 			        	<td><stripes:label for="publisher">Publisher</stripes:label></td>
-			        	<td><stripes:text name="publisher" id="publisher"/></td>
+			        	<td><stripes:text name="publisher" id="publisher" style="width:100%"/></td>
 			        </tr>
 			   </table>
-			   <table width="450" border="0">
+			   <table border="0">
+				<col style="width:60em"/>
 			        <tr>
-			        	<td align="right"><stripes:submit name="importRedList" value="Import"/></td>
+			        	<td style="text-align:center"><stripes:submit name="importRedList" value="Import"/></td>
 			        </tr>
 			    </table>
 			</stripes:form>

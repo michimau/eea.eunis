@@ -73,7 +73,16 @@ public class AbstractStripesAction implements ActionBean {
 		getContext().setSeverity(Constants.SEVERITY_INFO);
 		getContext().getMessages().add(new SimpleMessage(msg));
 	}
-
+	
+	/**
+	 * 
+	 * @param String message
+	 */
+	void showWarning(String msg) {
+		getContext().setSeverity(Constants.SEVERITY_WARNING);
+		getContext().getMessages().add(new SimpleMessage(msg));
+	}
+	
 	public String getMetaDescription() {
 		return metaDescription;
 	}

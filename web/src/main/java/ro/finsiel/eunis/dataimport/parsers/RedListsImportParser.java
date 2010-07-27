@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -32,6 +34,9 @@ public class RedListsImportParser extends DefaultHandler {
         private int counter = 0;
         private int maxReportTypeId = 0;
         private int maxReportAttributesId = 0;
+        
+        private int imported = 0;
+        private List<String> notImported = new ArrayList<String>();
         
         private String scientificName;
         private String euCat;
@@ -251,6 +256,11 @@ public class RedListsImportParser extends DefaultHandler {
 	        			
 	        			counter++;
         			}
+        			
+        			if(newThreat)
+        				imported++;
+        			else
+        				notImported.add(scientificName);
         			
         			if(newThreat){
         				
@@ -541,4 +551,12 @@ public class RedListsImportParser extends DefaultHandler {
 	        		rset.close();
 	        }
         }
+
+		public int getImported() {
+			return imported;
+		}
+
+		public List<String> getNotImported() {
+			return notImported;
+		}
 } 

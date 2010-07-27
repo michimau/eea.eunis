@@ -63,18 +63,29 @@ public class RedListImporterActionBean extends AbstractStripesAction {
 				}
 				
 				if(idDc != null && idDc.intValue() != -1){
+					int cnt = 0;
+					List<String> notImported = null;
 					for(FileBean file : files){
 						if(file != null){
 							InputStream inputStream = file.getInputStream();
 							
 							RedListsImportParser parser = new RedListsImportParser(sqlUtil, idDc, delete);
 							parser.execute(inputStream);
+							cnt = parser.getImported();
+							notImported = parser.getNotImported();
 							file.delete();
 							if(inputStream!=null)
 								inputStream.close();
 						}
 					}
-					showMessage("Successfully imported!");
+					showMessage(cnt+" species imported!");
+					if(notImported != null && notImported.size() > 0){
+						String error = "Following species were not imported: <ul>";
+						for(String name : notImported)
+							error = error + "<li>" + name + "</li>";
+						showWarning(error);
+					}
+						
 					sources = DaoFactory.getDaoFactory().getDocumentsDao().getRedListSources();
 				} else {
 					handleEunisException("Could not insert new source!", Constants.SEVERITY_WARNING);

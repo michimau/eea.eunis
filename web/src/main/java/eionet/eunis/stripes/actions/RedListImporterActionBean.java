@@ -1,6 +1,7 @@
 package eionet.eunis.stripes.actions;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -64,15 +65,16 @@ public class RedListImporterActionBean extends AbstractStripesAction {
 				
 				if(idDc != null && idDc.intValue() != -1){
 					int cnt = 0;
-					List<String> notImported = null;
+					List<String> notImported = new ArrayList<String>();
 					for(FileBean file : files){
 						if(file != null){
 							InputStream inputStream = file.getInputStream();
 							
 							RedListsImportParser parser = new RedListsImportParser(sqlUtil, idDc, delete);
 							parser.execute(inputStream);
-							cnt = parser.getImported();
-							notImported = parser.getNotImported();
+							cnt += parser.getImported();
+							if(parser.getNotImported() != null)
+								notImported.addAll(parser.getNotImported());
 							file.delete();
 							if(inputStream!=null)
 								inputStream.close();

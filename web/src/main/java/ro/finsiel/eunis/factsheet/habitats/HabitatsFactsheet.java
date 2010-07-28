@@ -2141,4 +2141,31 @@ public class HabitatsFactsheet {
 	  }
 	  return link;
   }
+  
+  /**
+   * Returns database edition
+   * @return String edition
+   */
+  public String getEdition(){
+	  
+	  String edition = null;
+	  
+	  List<Chm62edtNatureObjectPersist> natObjects = new Chm62edtNatureObjectDomain().findWhere("ID_NATURE_OBJECT="+habitat.getIdNatureObject());
+	  if(natObjects != null){
+		  Integer idDc = null;
+		  for(Chm62edtNatureObjectPersist object : natObjects){
+			  idDc = object.getIdDc();
+		  }
+		  if(idDc != null){
+			  List<DcSourcePersist> sources = new DcSourceDomain().findWhere("ID_DC="+idDc);
+			  if(sources != null){
+				  for(DcSourcePersist source : sources){
+					  edition = source.getSource();
+				  }
+			  }
+		  }
+	  }
+	  
+	  return edition;
+  }
 }

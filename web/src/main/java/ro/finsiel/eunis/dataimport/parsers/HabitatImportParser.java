@@ -31,6 +31,7 @@ public class HabitatImportParser extends DefaultHandler {
         private PreparedStatement preparedStatementTabInfo;
         
         private int maxNoIdInt = 0;
+        private int maxDcId = 0;
     	
         private int counter = 0;
         
@@ -45,16 +46,19 @@ public class HabitatImportParser extends DefaultHandler {
         private String classRef;
         private String codePart;
         
-        private Connection con; 
+        private Connection con;
+        
+        private String classif;
         
         private StringBuffer buf; 
         private SQLUtilities sqlUtilities;
         
         private HashMap<String, Integer> natureObjectIds;
         
-        public HabitatImportParser(SQLUtilities sqlUtilities) {
+        public HabitatImportParser(SQLUtilities sqlUtilities, String classif) {
         	this.sqlUtilities = sqlUtilities;
         	this.con = sqlUtilities.getConnection();
+        	this.classif = classif;
         	buf = new StringBuffer();
         } 
         
@@ -135,7 +139,7 @@ public class HabitatImportParser extends DefaultHandler {
     				}
         			
    					preparedStatementNatureObject.setInt(1, natureObjectId);	
-    				preparedStatementNatureObject.setInt(2, 0);
+    				preparedStatementNatureObject.setInt(2, maxDcId);
     				preparedStatementNatureObject.setString(3, habId);
     				preparedStatementNatureObject.addBatch();
         			
@@ -201,6 +205,9 @@ public class HabitatImportParser extends DefaultHandler {
             	deleteOldRecords();
             	
             	maxNoIdInt = getMaxId("SELECT MAX(ID_NATURE_OBJECT) FROM CHM62EDT_NATURE_OBJECT");
+            	maxDcId = getMaxId("SELECT MAX(ID_DC) FROM DC_SOURCE");
+            	if(classif != null && classif.length() > 0)
+            		insertClassification();
             	
             	String queryNatureObject = "INSERT INTO CHM62EDT_NATURE_OBJECT (ID_NATURE_OBJECT, ID_DC, ORIGINAL_CODE, TYPE) VALUES (?,?,?,'HABITAT')";
             	this.preparedStatementNatureObject = con.prepareStatement(queryNatureObject);
@@ -302,4 +309,26 @@ public class HabitatImportParser extends DefaultHandler {
 	        }        	
 	        return ret;
 	    }
+        
+        private void insertClassification() throws Exception {
+        	
+    		maxDcId++;
+        	
+        	PreparedStatement stmt = null;
+			ResultSet rset = null;
+	    	try{
+	    		String query = "INSERT INTO DC_SOURCE (ID_DC, ID_SOURCE, SOURCE) VALUES (?,1,?)";
+	    		stmt = con.prepareStatement(query);
+	    		stmt.setInt(1, maxDcId);
+	    		stmt.setString(2, classif);
+	    		stmt.executeUpdate();		    		
+	    	} catch(Exception e) { 
+	            throw new IllegalArgumentException(e.getMessage(), e); 
+	        } finally { 
+	        	if(stmt != null) 
+	        		stmt.close();
+	        	if(rset != null) 
+	        		rset.close();
+	        }
+       	}
 } 

@@ -62,10 +62,21 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
 						inputStreamReferences.close();
 				}
 				
+				String classif = null;
+				if (fileClassCodes != null){
+					inputStreamClassCodes = fileClassCodes.getInputStream();
+					
+					ClassCodesImportParser parser = new ClassCodesImportParser(sqlUtil);
+					classif = parser.execute(inputStreamClassCodes);
+					fileClassCodes.delete();
+					if(inputStreamClassCodes!=null)
+						inputStreamClassCodes.close();
+				}
+				
 				if (fileHabitats != null){
 					inputStreamHabitats = fileHabitats.getInputStream();
 					
-					HabitatImportParser parser = new HabitatImportParser(sqlUtil);
+					HabitatImportParser parser = new HabitatImportParser(sqlUtil, classif);
 					parser.execute(inputStreamHabitats);
 					fileHabitats.delete();
 					if(inputStreamHabitats!=null)
@@ -80,16 +91,6 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
 					fileHabitatsDesc.delete();
 					if(inputStreamHabitatsDesc!=null)
 						inputStreamHabitatsDesc.close();
-				}
-				
-				if (fileClassCodes != null){
-					inputStreamClassCodes = fileClassCodes.getInputStream();
-					
-					ClassCodesImportParser parser = new ClassCodesImportParser(sqlUtil);
-					parser.execute(inputStreamClassCodes);
-					fileClassCodes.delete();
-					if(inputStreamClassCodes!=null)
-						inputStreamClassCodes.close();
 				}
 				
 				if (fileHabitatClassCodes != null){

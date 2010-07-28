@@ -37,6 +37,8 @@ public class ClassCodesImportParser extends DefaultHandler {
         private String current;
         private String legal;
         
+        private String classif;
+        
         private Connection con; 
         
         private StringBuffer buf; 
@@ -124,6 +126,8 @@ public class ClassCodesImportParser extends DefaultHandler {
         	        	System.gc(); 
         	        }
         	        
+        	        classif = name;
+        	        
         	        classId = null;
         	        sort = null;
         	        name = null;
@@ -138,7 +142,7 @@ public class ClassCodesImportParser extends DefaultHandler {
         	} 
         } 
         
-        public void execute(InputStream inputStream) throws Exception {
+        public String execute(InputStream inputStream) throws Exception {
                 
             this.inputStream = inputStream;
             
@@ -174,7 +178,8 @@ public class ClassCodesImportParser extends DefaultHandler {
                 if(con != null) 
                 	con.close(); 
             } 
-        
+            
+            return classif;
         }
         
         private void deleteOldRecords() throws Exception {

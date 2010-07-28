@@ -207,6 +207,22 @@
       </tr>
 <%
   }
+	String edition = factsheet.getEdition();
+	if(edition != null && edition.length() > 0){
+%>
+		<tr>
+			<td>
+				<%=cm.cmsPhrase("Edition")%>
+			</td>
+			<td colspan="3">
+	          	&nbsp;
+	          	<strong>
+	            	<%=factsheet.getEdition()%>
+	          	</strong>
+	        </td>
+		</tr>
+<%
+  }
 %>
     </tbody>
   </table>

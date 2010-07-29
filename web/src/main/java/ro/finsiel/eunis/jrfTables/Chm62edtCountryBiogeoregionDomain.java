@@ -1,6 +1,7 @@
 package ro.finsiel.eunis.jrfTables;
 
 import net.sf.jrf.column.columnspecs.CompoundPrimaryKeyColumnSpec;
+import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
@@ -35,5 +36,6 @@ public class Chm62edtCountryBiogeoregionDomain extends AbstractDomain {
                     new StringColumnSpec("CODE_COUNTRY", "getCodeCountry", "setCodeCountry", DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY)
             )
     );
+    this.addColumnSpec(new IntegerColumnSpec("PERCENT", "getPercentage", "setPercentage", DEFAULT_TO_NULL));
   }
 }

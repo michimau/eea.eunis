@@ -266,6 +266,8 @@ public class RedListsImportParser extends DefaultHandler {
         				
         				if(delete)
         					deleteCurrentThreats(natObId);
+        				else
+        					deleteThreatsForThisSource(natObId);
         				
         				if(notes != null && notes.length() > 0){
 	        				preparedStatementReportAttributes.setInt(1, maxReportAttributesId);
@@ -519,6 +521,74 @@ public class RedListsImportParser extends DefaultHandler {
 	    				
 	    				ps3.setString(1, idReportType);
 	    				ps3.setString(2, natObjectId);
+	    				ps3.addBatch();
+	    			}
+	    			
+	    			if(idReportAttributes != null && !idReportAttributes.equals("-1")){
+	    				ps2.setString(1, idReportAttributes);
+	    				ps2.addBatch();
+	    			}
+	    		}
+	    		ps1.executeBatch();
+	    		ps1.clearParameters();
+	    		
+	    		ps2.executeBatch();
+	    		ps2.clearParameters();
+	    		
+	    		ps3.executeBatch();
+	    		ps3.clearParameters();
+	    		
+	    	} catch(Exception e) { 
+	            throw new IllegalArgumentException(e.getMessage(), e);
+	        } finally { 
+	        	if(stmt != null) 
+	        		stmt.close();
+	        	if(ps1 != null) 
+	        		ps1.close();
+	        	if(ps2 != null) 
+	        		ps2.close();
+	        	if(ps3 != null) 
+	        		ps3.close();
+	        	if(rset != null) 
+	        		rset.close();
+	        }
+        }
+        
+        private void deleteThreatsForThisSource(String natObjectId) throws Exception {
+        	PreparedStatement stmt = null;
+        	PreparedStatement ps1 = null;
+        	PreparedStatement ps2 = null;
+        	PreparedStatement ps3 = null;
+        	
+        	String deleteReportType = "DELETE FROM chm62edt_report_type WHERE ID_REPORT_TYPE = ?";
+        	String deleteReportAttributes = "DELETE FROM chm62edt_report_attributes WHERE ID_REPORT_ATTRIBUTES = ?";
+        	String deleteReports = "DELETE FROM chm62edt_reports WHERE ID_DC = ? AND ID_REPORT_TYPE = ? AND ID_NATURE_OBJECT = ?";
+        	
+			ResultSet rset = null;
+	    	try{
+	    		ps1 = con.prepareStatement(deleteReportType);
+	    		ps2 = con.prepareStatement(deleteReportAttributes);
+	    		ps3 = con.prepareStatement(deleteReports);
+	    		
+	    		String query = "SELECT R.ID_REPORT_TYPE AS TYPE, R.ID_REPORT_ATTRIBUTES AS ATTRIBUTES " +
+					"FROM chm62edt_reports AS R, chm62edt_report_type AS T " +
+					"WHERE R.ID_NATURE_OBJECT = ? AND R.ID_DC = ? AND R.ID_REPORT_TYPE = T.ID_REPORT_TYPE AND T.LOOKUP_TYPE = ?";
+	    		stmt = con.prepareStatement(query);
+	    		stmt.setString(1, natObjectId);
+	    		stmt.setInt(2, idDC);
+	    		stmt.setString(3, "CONSERVATION_STATUS");
+	    		rset = stmt.executeQuery();
+	    		while(rset.next()){
+	    			String idReportType = rset.getString("TYPE");
+	    			String idReportAttributes = rset.getString("ATTRIBUTES");
+	    			
+	    			if(idReportType != null){
+	    				ps1.setString(1, idReportType);
+	    				ps1.addBatch();
+	    				
+	    				ps3.setInt(1, idDC);
+	    				ps3.setString(2, idReportType);
+	    				ps3.setString(3, natObjectId);
 	    				ps3.addBatch();
 	    			}
 	    			

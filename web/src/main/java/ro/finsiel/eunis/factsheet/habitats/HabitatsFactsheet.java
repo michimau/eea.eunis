@@ -2157,10 +2157,10 @@ public class HabitatsFactsheet {
 			  idDc = object.getIdDc();
 		  }
 		  if(idDc != null){
-			  List<DcSourcePersist> sources = new DcSourceDomain().findWhere("ID_DC="+idDc);
+			  List<DcTitlePersist> sources = new DcTitleDomain().findWhere("ID_DC="+idDc);
 			  if(sources != null){
-				  for(DcSourcePersist source : sources){
-					  edition = source.getSource();
+				  for(DcTitlePersist source : sources){
+					  edition = source.getTitle();
 				  }
 			  }
 		  }

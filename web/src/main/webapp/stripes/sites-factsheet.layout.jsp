@@ -175,7 +175,6 @@
 				</div>
 			</div>
           	<!-- end of the left (by default at least) column -->
-		</div>
 		<!-- end of the main and left columns -->
 		<!-- start of right (by default at least) column -->
 		<div id="portal-column-two">
@@ -185,8 +184,6 @@
 				</jsp:include>
 			</div>
 		</div>
-		<!-- end of the right (by default at least) column -->
-		<div class="visualClear"><!-- --></div>
 	</stripes:layout-component>
 </stripes:layout-render>
 

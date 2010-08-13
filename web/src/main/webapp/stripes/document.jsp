@@ -132,8 +132,5 @@
 	            	</div>
 	          	</div>
 	          	<!-- end of the left (by default at least) column -->
-			</div>
-			<!-- end of the main and left columns -->
-			<div class="visualClear"><!-- --></div>
 		</stripes:layout-component>
 </stripes:layout-render>

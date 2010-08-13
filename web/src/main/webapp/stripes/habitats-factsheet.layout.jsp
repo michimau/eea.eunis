@@ -22,9 +22,9 @@
 
 		<!-- MAIN CONTENT --> 
 		<c:choose>
-			<c:when test="${actionBean.factsheet == null}">
+			<c:when test="${actionBean.factsheet.habitat == null}">
 				<div class="error-msg">
-					${eunis:cmsPhrase(actionBean.contentManagement, ('We are sorry, the requested site does not exist'))}
+					${eunis:cmsPhrase(actionBean.contentManagement, ('Sorry, no habitat type has been found in the database'))}
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -65,26 +65,31 @@
 								</li>
 							</ul>
 						</div>
+						<br clear="all" />
 						<c:if test="${!actionBean.mini}">
 							<div id="tabbedmenu">
 								<ul>
 									<c:forEach items="${actionBean.tabsWithData }" var="dataTab">
 										<c:choose>
 											<c:when test="${dataTab.id eq actionBean.tab}">
-												<li id="currenttab"><a
-													href="habitats/${actionBean.idHabitat}/${dataTab.id}">
-												${eunis:cmsPhrase(actionBean.contentManagement, dataTab.value)}</a></li>
+												<li id="currenttab">
+													<a href="habitats/${actionBean.idHabitat}/${dataTab.id}">
+														${eunis:cmsPhrase(actionBean.contentManagement, dataTab.value)}
+													</a>
+												</li>
 											</c:when>
 											<c:otherwise>
-												<li><a
-													href="habitats/${actionBean.idHabitat}/${dataTab.id}">
-												${eunis:cmsPhrase(actionBean.contentManagement, dataTab.value)}</a></li>
+												<li>
+													<a href="habitats/${actionBean.idHabitat}/${dataTab.id}">
+														${eunis:cmsPhrase(actionBean.contentManagement, dataTab.value)}
+													</a>
+												</li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
 								</ul>
 							</div>
-							<br class="brClear" />
+							<br  style="clear:both;" clear="all" />
 						</c:if>
 						<br />
 						<c:if test="${actionBean.tab == 'general'}">
@@ -204,7 +209,6 @@
 				</div>
 			</div>
           	<!-- end of the left (by default at least) column -->
-		</div>
 		<!-- end of the main and left columns -->
 		<!-- start of right (by default at least) column -->
 		<div id="portal-column-two">

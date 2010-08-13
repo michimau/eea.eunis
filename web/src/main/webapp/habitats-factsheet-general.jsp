@@ -246,7 +246,7 @@
   <h2>
     <%=cm.cmsPhrase("Description")%> ( <%=description.getLanguage()%> )
   </h2>
-</div>
+
   <p>
     <%=description.getDescription()%>
   </p>
@@ -281,6 +281,7 @@
   }
 
 %>
+</div>
   	<h2><%=cm.cmsPhrase("External links")%></h2>
 	<div id="linkcollection">
 		<div>

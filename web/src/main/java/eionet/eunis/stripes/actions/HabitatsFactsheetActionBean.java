@@ -94,55 +94,52 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 		String eeaHome = getContext().getInitParameter("EEA_HOME");
 		btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,factsheet";
 		factsheet = new HabitatsFactsheet(idHabitat);
-		//set metadescription and page title
-		if (factsheet != null) {
-			metaDescription = factsheet.getMetaHabitatDescription();
-			pageTitle = getContext().getInitParameter("PAGE_TITLE") 
-					+ getContentManagement().cmsPhrase("Factsheet for")
-					+ " " + factsheet.getHabitat().getScientificName();
-		} else {
+		//check if the habitat exists.
+		if (factsheet.getHabitat() == null) {
 			pageTitle = getContext().getInitParameter("PAGE_TITLE")
-					+ getContentManagement().cmsPhrase("Sorry, no habitat type has been found in the database with Habitat type ID = ")
-					+ "'" + idHabitat + "'";
-			try{
-				getContext().getResponse().setStatus(HttpServletResponse.SC_NOT_FOUND);
-			} catch(Exception e){
-				e.printStackTrace();
+			+ getContentManagement().cmsPhrase("Sorry, no habitat type has been found in the database with Habitat type ID = ")
+			+ "'" + idHabitat + "'";
+
+			getContext().getResponse().setStatus(HttpServletResponse.SC_NOT_FOUND);
+			return new ForwardResolution("/stripes/habitats-factsheet.layout.jsp");
+		}
+		
+		//set metadescription and page title
+		metaDescription = factsheet.getMetaHabitatDescription();
+		pageTitle = getContext().getInitParameter("PAGE_TITLE") 
+				+ getContentManagement().cmsPhrase("Factsheet for")
+				+ " " + factsheet.getHabitat().getScientificName();
+
+		for (int i=0; i < tabs.length; i++) {
+			if(!getContext().getSqlUtilities().TabPageIsEmpy(factsheet.idNatureObject.toString(),"HABITATS",dbtabs[i][0])) {
+				tabsWithData.add(new Pair<String, String>(dbtabs[i][1], tabs[i]));
 			}
 		}
-		if (factsheet != null) {
-	
-			for (int i=0; i < tabs.length; i++) {
-				if(!getContext().getSqlUtilities().TabPageIsEmpy(factsheet.idNatureObject.toString(),"HABITATS",dbtabs[i][0])) {
-					tabsWithData.add(new Pair<String, String>(dbtabs[i][1], tabs[i]));
-				}
-			}
-			
-			if(tab != null && tab.equals("other")){
-				dictionaryLength = dictionary.length;
-				if(factsheet.isEunis()){
-					for(int i = 0; i < dictionary.length; i++){
-						try{
-							Integer dictionaryType = dictionary[i];
-							String title = factsheet.getOtherInfoDescription(dictionaryType);
-							String SQL = factsheet.getSQLForOtherInfo(dictionaryType);
-							String noElements = getContext().getSqlUtilities().ExecuteSQL(SQL);
-							if(title != null){
-								HabitatFactsheetOtherDTO dto = new HabitatFactsheetOtherDTO();
-								dto.setTitle(title);
-								dto.setDictionaryType(dictionaryType);
-								dto.setNoElements(noElements);
-								otherInfo.add(dto);
-							}
-							
-						}catch (Exception e){
-							e.printStackTrace();
+		
+		if(tab != null && tab.equals("other")){
+			dictionaryLength = dictionary.length;
+			if(factsheet.isEunis()){
+				for(int i = 0; i < dictionary.length; i++){
+					try{
+						Integer dictionaryType = dictionary[i];
+						String title = factsheet.getOtherInfoDescription(dictionaryType);
+						String SQL = factsheet.getSQLForOtherInfo(dictionaryType);
+						String noElements = getContext().getSqlUtilities().ExecuteSQL(SQL);
+						if(title != null){
+							HabitatFactsheetOtherDTO dto = new HabitatFactsheetOtherDTO();
+							dto.setTitle(title);
+							dto.setDictionaryType(dictionaryType);
+							dto.setNoElements(noElements);
+							otherInfo.add(dto);
 						}
+						
+					}catch (Exception e){
+						e.printStackTrace();
 					}
 				}
 			}
-		
 		}
+		
 		return new ForwardResolution("/stripes/habitats-factsheet.layout.jsp");
 	}
 	

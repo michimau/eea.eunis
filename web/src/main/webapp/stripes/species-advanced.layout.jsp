@@ -201,7 +201,5 @@
 			<jsp:param name="mapLink" value="show" />
 		</jsp:include></div>
 		</div>
-		<!-- end of the right (by default at least) column -->
-		<div class="visualClear"><!-- --></div>
 	</stripes:layout-component>
 </stripes:layout-render>

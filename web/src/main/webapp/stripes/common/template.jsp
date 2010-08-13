@@ -83,9 +83,13 @@
           				</div>
           				<!-- end of main content block -->
         			<stripes:layout-component name="foot"/>
-      			</div>
       		<!-- end column wrapper -->
+      		</div>
+
+  			<!-- end of the main and left columns -->
+			<div class="visualClear"><!-- --></div>
       		<jsp:include page="/footer-static.jsp" />
+  			</div>
     	</div>
   </body>
 </html>

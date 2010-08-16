@@ -885,30 +885,23 @@ public class SQLUtilities {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    String strSQL = "SELECT SOURCE_DB, COUNT(*) AS RECORD_COUNT";
+    String strSQL = "SELECT COUNT(*) AS RECORD_COUNT";
     strSQL = strSQL + " FROM `chm62edt_sites`";
     strSQL = strSQL + " INNER JOIN `chm62edt_designations` ON (`chm62edt_sites`.ID_DESIGNATION = `chm62edt_designations`.ID_DESIGNATION AND `chm62edt_sites`.ID_GEOSCOPE = `chm62edt_designations`.ID_GEOSCOPE)";
     strSQL = strSQL + " WHERE `chm62edt_sites`.ID_DESIGNATION = '" + idDesignation + "'";
     strSQL = strSQL + " AND `chm62edt_sites`.ID_GEOSCOPE = " + idGeoscope;
-    strSQL = strSQL + " GROUP BY `chm62edt_sites`.ID_DESIGNATION, `chm62edt_sites`.ID_GEOSCOPE";
-    strSQL = strSQL + " ORDER BY SOURCE_DB ASC";
 
-    try
-    {
-      Class.forName( SQL_DRV );
-      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+    try {
+    	Class.forName( SQL_DRV );
+    	con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
 
-      ps = con.prepareStatement( strSQL );
-      rs = ps.executeQuery();
+    	ps = con.prepareStatement( strSQL );
+    	rs = ps.executeQuery();
 
-      if ( rs.next() )
-      {
-        result = true;
-      }
-      con.close();
-    }
-    catch ( Exception ex )
-    {
+	    rs.next();
+	    result = rs.getInt(1) > 0;
+	    con.close();
+    } catch ( Exception ex ) {
       ex.printStackTrace();
     }
 

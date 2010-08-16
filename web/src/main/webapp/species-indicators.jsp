@@ -20,7 +20,7 @@
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,indicators";
 %>
     <title>
-      <%=application.getInitParameter("PAGE_TITLE")%>&nbsp;<%=cm.cms("species-indicators_02")%>
+      <%=application.getInitParameter("PAGE_TITLE")%> <%=cm.cmsPhrase("Indicators for species")%>
     </title>
   </head>
   <body>
@@ -40,7 +40,7 @@
                 </jsp:include>
                 <a name="documentContent"></a>
                 <h1>
-                  <%=cm.cmsText("species-indicators_01")%>
+                  <%=cm.cmsPhrase("Indicators for species")%>
                 </h1>
                 <div class="documentActions">
                   <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
@@ -59,8 +59,6 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <br />
-                <%=cm.cmsMsg("species-indicators_02")%>
-                <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

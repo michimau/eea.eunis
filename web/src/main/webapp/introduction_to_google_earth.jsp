@@ -21,7 +21,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("introduction_to_google_earth")%>
+      <%=cm.cmsPhrase("Introduction to Google Earth network link")%>
     </title>
   </head>
   <body>
@@ -57,8 +57,6 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <%=cm.cmsText("google_earth_introduction")%>
-
-                <%=cm.cmsMsg("introduction_to_google_earth")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

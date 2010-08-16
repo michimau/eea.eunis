@@ -82,7 +82,7 @@
   <head>
     <jsp:include page="header-page.jsp" />
     <script language="JavaScript" type="text/javascript" src="script/species-result.js"></script>
-    <title><%=application.getInitParameter("PAGE_TITLE")%><%=cm.cms("species_advanced_search_results")%></title>
+    <title><%=application.getInitParameter("PAGE_TITLE")%><%=cm.cmsPhrase("Species advanced search results")%></title>
   </head>
   <body>
     <div id="visual-portal-wrapper">
@@ -101,7 +101,7 @@
                 </jsp:include>
                 <a name="documentContent"></a>
                 <h1>
-                  <%=cm.cmsText("species_advanced_search_results")%>
+                  <%=cm.cmsPhrase("Species advanced search results")%>
                 </h1>
                 <div class="documentActions">
                   <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
@@ -182,7 +182,7 @@
             AbstractSortCriteria sortFamily = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_FAMILY);
             AbstractSortCriteria sortSciName = formBean.lookupSortCriteria(AdvancedSortCriteria.SORT_SCIENTIFIC_NAME);
           %>
-              <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+              <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                 <thead>
                   <tr>
           <%
@@ -442,11 +442,6 @@
                       <jsp:param name="toURLParam" value="<%=formBean.toURLParam(navigatorFormFields)%>"/>
                       <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>"/>
                     </jsp:include>
-              <%=cm.br()%>
-              <%=cm.cmsMsg("species_advanced_search_results")%>
-              <%=cm.br()%>
-              <%=cm.cmsMsg("search_results")%>
-              <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

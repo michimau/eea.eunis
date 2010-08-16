@@ -21,7 +21,7 @@
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("sites_help_title")%>
+    <%=cm.cmsPhrase("Fuzzy search help")%>
   </title>
 </head>
   <body>
@@ -58,8 +58,6 @@
                 </div>
 <!-- MAIN CONTENT -->
                       <%=cm.cmsText("help_on_fuzzy_search_01")%>
-                
-                <%=cm.cmsMsg("sites_help_title")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

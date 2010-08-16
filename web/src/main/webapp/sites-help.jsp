@@ -19,7 +19,7 @@
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,sites_help_location";
 %>
-    <title><%=application.getInitParameter("PAGE_TITLE")%><%=cm.cms("sites_help_title")%></title>
+    <title><%=application.getInitParameter("PAGE_TITLE")%><%=cm.cmsPhrase("Sites search help")%></title>
   </head>
   <body>
     <div id="visual-portal-wrapper">
@@ -55,8 +55,6 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <%=cm.cmsText("sites_help_01")%>
-
-                <%=cm.cmsMsg("sites_help_title")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

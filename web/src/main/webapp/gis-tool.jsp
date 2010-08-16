@@ -20,7 +20,7 @@
   %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("gis_title")%>
+      <%=cm.cmsPhrase("Interactive map")%>
     </title>
   </head>
   <body>
@@ -92,7 +92,6 @@
                   </object>
                   <!--> <![endif]-->
                 </object>
-                <%=cm.cmsMsg("gis_title")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

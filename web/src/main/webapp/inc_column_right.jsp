@@ -12,7 +12,7 @@
   {
 %>
 <div class="thumbnail-right">
-  <img height="350" width="216" title="" alt="<%=cm.cms("index_photo_alt")%>" src="images/intros/<%=Utilities.getIntroImage( application )%>" />
+  <img height="350" width="216" alt="" src="images/intros/<%=Utilities.getIntroImage( application )%>" />
 </div>
 <%
   }

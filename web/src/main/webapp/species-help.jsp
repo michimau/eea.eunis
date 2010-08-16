@@ -19,7 +19,7 @@
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,help_on_eunis_database_species_location";
 %>
-    <title><%=application.getInitParameter("PAGE_TITLE")%><%=cm.cms("species_help_02")%></title>
+    <title><%=application.getInitParameter("PAGE_TITLE")%><%=cm.cmsPhrase("Species search help")%></title>
   </head>
   <body>
     <div id="visual-portal-wrapper">
@@ -59,9 +59,6 @@
                   String paragraph01 = cm.cmsText("species_help_01");
                   if (null != paragraph01) out.print(paragraph01);
                 %>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("species_help_02")%>
-                <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

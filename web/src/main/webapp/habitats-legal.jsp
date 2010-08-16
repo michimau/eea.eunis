@@ -33,7 +33,7 @@
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("habitat_type_legal_instruments")%>
+    <%=cm.cmsPhrase("Habitat type legal instruments")%>
   </title>
 </head>
   <body>
@@ -253,9 +253,6 @@
                 </tr>
                 <%}%>
                 </table>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("habitat_type_legal_instruments")%>
-                <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

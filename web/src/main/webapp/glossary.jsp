@@ -47,7 +47,7 @@
 
 <title>
   <%=application.getInitParameter("PAGE_TITLE")%>
-  <%=cm.cms("glossary")%>
+  <%=cm.cmsPhrase("Glossary")%>
 </title>
 <%
   // This parameter is optional. Possible values can be: species,habitats or sites.
@@ -212,8 +212,6 @@
                 <%=cm.cmsMsg("generic_glossary_02")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("generic_glossary_03")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("glossary")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("glossary_note")%>
                 <%=cm.br()%>

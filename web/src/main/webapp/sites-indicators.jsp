@@ -21,7 +21,7 @@
 %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("sites_indicators_page_title")%>
+    <%=cm.cmsPhrase("Indicators for sites")%>
   </title>
 </head>
   <body>

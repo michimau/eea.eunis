@@ -22,7 +22,7 @@
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("links_and_downloads_for_habitats")%>
+    <%=cm.cmsPhrase("Links and Downloads for habitat types")%>
   </title>
   </head>
   <body>
@@ -41,7 +41,7 @@
                   <jsp:param name="mapLink" value="show" />
                 </jsp:include>
                 <a name="documentContent"></a>
-                <h1><%=cm.cmsText("Links and Downloads for habitat types")%></h1>
+                <h1><%=cm.cmsPhrase("Links and Downloads for habitat types")%></h1>
                 <div class="documentActions">
                   <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
                   <ul>
@@ -59,10 +59,7 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <%=cm.br()%>
-                <%=cm.cmsText("No data is available for download at this time.<br />")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("links_and_downloads_for_habitats")%>
-                <%=cm.br()%>
+                <%=cm.cmsPhrase("No data is available for download at this time.")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

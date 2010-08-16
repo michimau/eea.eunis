@@ -21,7 +21,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("news")%>
+      <%=cm.cmsPhrase("News")%>
     </title>
   </head>
   <body>
@@ -59,9 +59,6 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <%=cm.cmsText("news_main")%>
-                <br />
-                <br />
-                <%=cm.cmsMsg("news")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

@@ -21,7 +21,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("gis_help")%>
+      <%=cm.cmsPhrase("Gis tool help")%>
     </title>
   </head>
   <body>
@@ -57,8 +57,6 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <%=cm.cmsText("gis_tool_help_01")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("gis_help")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

@@ -22,7 +22,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("generic_about_title")%>
+      <%=cm.cmsPhrase("About EUNIS")%>
     </title>
   </head>
   <body>
@@ -58,8 +58,6 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <%=cm.cmsText("generic_about_01")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("generic_about_title")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

@@ -45,6 +45,7 @@ Input parameters  on REQUEST:
   // Get the backtrail from string (order of objects is preserved).
   Vector backtrailObjects = BacktrailUtil.parseBacktrailString( dynHeaderLocation, cm );
 %>
+<%--
   <div id="portal-breadcrumbs">
 <%
   for (int i = 0; i < backtrailObjects.size(); i++)
@@ -64,6 +65,7 @@ Input parameters  on REQUEST:
   }
 %>
   </div>
+--%>
 <%
   if (null != dynHeaderPrintLink || null != dynHeaderDownloadLink)
   {
@@ -73,17 +75,14 @@ Input parameters  on REQUEST:
     if (null != dynHeaderPrintLink)
     {
 %>
-          <a href="<%=dynHeaderPrintLink%>" title="<%=cm.cms( "header_download_pdf_title" )%>"><%=cm.cmsPhrase( "Downloadable PDF" )%></a>
-          <%=cm.cmsTitle( "header_download_pdf_title" )%>
+          <a href="<%=dynHeaderPrintLink%>"><%=cm.cmsPhrase( "Downloadable PDF" )%></a>
 <%
     }
     if (null != dynHeaderDownloadLink)
     {
 %>
-            <a href="<%=dynHeaderDownloadLink%>" title="<%=cm.cms( "header_download_tsv_title" )%>"><img alt="<%=cm.cms( "header_download_alt" )%>" src="images/mini/download.gif" width="16" height="16" border="0" style="vertical-align:middle" /></a>
-            <%=cm.cmsTitle( "header_download_tsv_title" )%><%=cm.cmsAlt( "header_download_alt" )%>
-            <a href="<%=dynHeaderDownloadLink%>" title="<%=cm.cms( "header_download_tsv_title" )%>"><%=cm.cmsPhrase( "Download results" )%></a>
-            <%=cm.cmsTitle( "header_download_tsv_title" )%>
+            <a href="<%=dynHeaderDownloadLink%>" title="<%=cm.cmsPhrase( "Create Excel compatible file with search results" )%>"><img alt="" src="images/mini/download.gif" width="16" height="16" border="0" style="vertical-align:middle" /></a>
+            <a href="<%=dynHeaderDownloadLink%>" title="<%=cm.cmsPhrase( "Create Excel compatible file with search results" )%>"><%=cm.cmsPhrase( "Download results" )%></a>
 <%
     }
 %>

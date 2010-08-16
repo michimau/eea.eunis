@@ -24,7 +24,7 @@
   String btrail = "eea#" + eeaHome + ",home#index.jsp,copyright_and_disclaimer_title";
 %>
   <title><%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("copyright_and_disclaimer_title")%>
+    <%=cm.cmsPhrase("Copyright and disclaimer")%>
   </title>
 </head>
 
@@ -136,10 +136,6 @@
                 %>
                 </tbody>
               </table>
-                <%=cm.cmsMsg("copyright_and_disclaimer_title")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("references")%>
-                <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

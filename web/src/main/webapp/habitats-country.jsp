@@ -77,12 +77,12 @@
 %>
 <title>
   <%=application.getInitParameter("PAGE_TITLE")%>
-  <%=cm.cms("habitats_country_title")%>
+  <%=cm.cmsPhrase("Habitat type Country/Biogeographic region")%>
 </title>
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
   // Error message displayed if not text was entered in text fields.
-  var errMessageForm = "<%=cm.cms("habitats_country_02")%>";
+  var errMessageForm = "<%=cm.cmsPhrase("Please enter value for either country or biogeographic region")%>";
 
   // Array of countries
   var countries = new Array();
@@ -156,12 +156,12 @@
     var region = document.eunis._0region.value;
     if (country != "" && !validateCountryForHabitats(country)) // If user entered something in field, validate it
     {
-      alert("<%=cm.cms("habitats_country_03")%>");
+      alert("<%=cm.cmsPhrase("Country is not valid, please use helper to find countries")%>");
       return false;
     }
     if (region != "" && !validateRegionForHabitats(region)) // If user entered something in field, validate it
     {
-      alert("<%=cm.cms("habitats_country_04")%>");
+      alert("<%=cm.cmsPhrase("Region is not valid, please use helper to find biogeographic regions")%>");
       return false;
     }
     var operation = document.eunis.operation.value;
@@ -422,19 +422,6 @@
                 <%
                   }
                 %>
-                <tr>
-                  <td>
-                    <%=cm.br()%>
-                    <%=cm.cmsMsg("habitats_country_title")%>
-                    <%=cm.br()%>
-                    <%=cm.cmsMsg("habitats_country_02")%>
-                    <%=cm.br()%>
-                    <%=cm.cmsMsg("habitats_country_03")%>
-                    <%=cm.br()%>
-                    <%=cm.cmsMsg("habitats_country_04")%>
-                    <%=cm.br()%>
-                  </td>
-                </tr>
                 </table>
 <!-- END MAIN CONTENT -->
               </div>

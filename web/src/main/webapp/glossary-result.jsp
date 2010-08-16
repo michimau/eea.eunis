@@ -53,7 +53,7 @@
     <script language="JavaScript" src="script/species-result.js" type="text/javascript"></script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("generic_glossary-result_title")%>
+      <%=cm.cmsPhrase("Glossary results")%>
     </title>
   </head>
   <body>
@@ -252,8 +252,6 @@
 <%
   }
 %>
-                <%=cm.cmsMsg("generic_glossary-result_title")%>
-                <%=cm.br()%>
                 <%=cm.cmsMsg("generic_glossary-result_03")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("and")%>

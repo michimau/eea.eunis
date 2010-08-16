@@ -133,7 +133,7 @@
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("site_size")%>
+      <%=cm.cmsPhrase("Site size")%>
     </title>
   </head>
   <body>
@@ -169,10 +169,7 @@
                              title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
                     </li>
                     <li>
-                      <a href="sites-help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cms( "header_help_title" )%>"
-                             title="<%=cm.cms( "header_help_title" )%>" /></a>
-            				<%=cm.cmsTitle( "header_help_title" )%>
+                      <a href="sites-help.jsp" title="<%=cm.cmsPhrase( "Help information" )%>"><img src="images/help_icon.gif" alt=""/></a>
                     </li>
                   </ul>
                 </div>
@@ -191,41 +188,30 @@
 
                   <fieldset class="large">
                   <legend><%=cm.cmsPhrase("Search what")%></legend>
-                  <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
-                  <%=cm.cmsAlt("field_mandatory")%>
-                  <label for="searchType" class="noshow"><%=cm.cms("type_of_search")%></label>
-                  <select id="searchType" name="searchType" onchange="adjustUnits(this)" title="<%=cm.cms("type_of_search")%>">
+                  <img style="vertical-align:middle" alt="<%=cm.cmsPhrase("This field is mandatory")%>" title="<%=cm.cmsPhrase("This field is mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
+                  <label for="searchType" class="noshow"><%=cm.cmsPhrase("Type of search")%></label>
+                  <select id="searchType" name="searchType" onchange="adjustUnits(this)" title="<%=cm.cmsPhrase("Type of search")%>">
                     <option value="<%=SizeSearchCriteria.SEARCH_AREA%>" <%=(SizeSearchCriteria.SEARCH_AREA.intValue() == criteriaSelected) ? "selected=\"selected\"" : ""%>>
-                      <%=cm.cms("size")%>
+                      <%=cm.cmsPhrase("Size")%>
                     </option>
                     <option value="<%=SizeSearchCriteria.SEARCH_LENGTH%>" <%=(SizeSearchCriteria.SEARCH_LENGTH.intValue() == criteriaSelected) ? "selected=\"selected\"" : ""%>>
-                      <%=cm.cms("length")%>
+                      <%=cm.cmsPhrase("Length")%>
                     </option>
                   </select>
-                  <%=cm.cmsLabel("type_of_search")%>
-                  <%=cm.cmsTitle("type_of_search")%>
-                  <%=cm.cmsInput("size")%>
-                  <%=cm.cmsInput("length")%>
-                  <select id="relationOp" name="relationOp" onchange="MM_jumpMenu('parent',this,0)" title="<%=cm.cms("operator")%>">
+                  <select id="relationOp" name="relationOp" onchange="MM_jumpMenu('parent',this,0)" title="<%=cm.cmsPhrase("Operator")%>">
                     <option value="relationOp=<%=Utilities.OPERATOR_IS%>" <%if (relationOp == Utilities.OPERATOR_IS.intValue()) {%>selected="selected"<%}%>>
-                      <%=cm.cms("is")%>
+                      <%=cm.cmsPhrase("is")%>
                     </option>
                     <option value="relationOp=<%=Utilities.OPERATOR_BETWEEN%>" <%if (relationOp == Utilities.OPERATOR_BETWEEN.intValue()) {%>selected="selected"<%}%>>
-                      <%=cm.cms("between")%>
+                      <%=cm.cmsPhrase("between")%>
                     </option>
                     <option value="relationOp=<%=Utilities.OPERATOR_GREATER_OR_EQUAL%>" <%if (relationOp == Utilities.OPERATOR_GREATER_OR_EQUAL.intValue()) {%>selected="selected"<%}%>>
-                      <%=cm.cms("greater_than")%>
+                      <%=cm.cmsPhrase("greater than")%>
                     </option>
                     <option value="relationOp=<%=Utilities.OPERATOR_SMALLER_OR_EQUAL%>" <%if (relationOp == Utilities.OPERATOR_SMALLER_OR_EQUAL.intValue()) {%>selected="selected"<%}%>>
-                      <%=cm.cms("smaller_than")%>
+                      <%=cm.cmsPhrase("smaller than")%>
                     </option>
                   </select>
-                  <%=cm.cmsLabel("operator")%>
-                  <%=cm.cmsTitle("operator")%>
-                  <%=cm.cmsInput("is")%>
-                  <%=cm.cmsInput("between")%>
-                  <%=cm.cmsInput("greater_than")%>
-                  <%=cm.cmsInput("smaller_than")%>
           <%
             if (relationOp == Utilities.OPERATOR_BETWEEN.intValue())
             {
@@ -238,29 +224,22 @@
                   <input id="searchStringMax" name="searchStringMax" value="" size="10" title="<%=cm.cms("max_value")%>" />&nbsp;
                   <%=cm.cmsLabel("max_value")%>
                   <%=cm.cmsTitle("max_value")%>
-                  <label for="units1" class="noshow"><%=cm.cms("units")%></label>
-                  <input id="units1" title="<%=cm.cms("units")%>" name="units" style="border-style : none; background-color : transparent; color : black;" value="<%=(SizeSearchCriteria.SEARCH_LENGTH.intValue() == criteriaSelected) ? "m" : "ha"%>" onfocus="blur()" />
-                  <%=cm.cmsLabel("units")%>
-                  <%=cm.cmsTitle("units")%>
+                  <label for="units1" class="noshow"><%=cm.cmsPhrase("Measurement units")%></label>
+                  <input id="units1" title="<%=cm.cmsPhrase("Measurement units")%>" name="units" style="border-style : none; background-color : transparent; color : black;" value="<%=(SizeSearchCriteria.SEARCH_LENGTH.intValue() == criteriaSelected) ? "m" : "ha"%>" onfocus="blur()" />
           <%
             }
             else
             {
           %>
-                  <label for="searchString" class="noshow"><%=cm.cms("search_string")%></label>
-                  <input id="searchString" name="searchString" value="" size="20" title="<%=cm.cms("search_string")%>" />
-                  <%=cm.cmsLabel("search_string")%>
-                  <%=cm.cmsTitle("search_string")%>
-                  <label for="units2" class="noshow"><%=cm.cms("units")%></label>
-                  <input id="units2" name="units" title="<%=cm.cms("units")%>" style="border-style : none; background-color : transparent; color : black;" value=" <%=(SizeSearchCriteria.SEARCH_LENGTH.intValue() == criteriaSelected) ? "m" : "ha"%>" onfocus="blur()" />
-                  <%=cm.cmsLabel("units")%>
-                  <%=cm.cmsTitle("units")%>
+                  <label for="searchString" class="noshow"><%=cm.cmsPhrase("Search string")%></label>
+                  <input id="searchString" name="searchString" value="" size="20" title="<%=cm.cmsPhrase("Search string")%>" />
+                  <label for="units2" class="noshow"><%=cm.cmsPhrase("Measurement units")%></label>
+                  <input id="units2" name="units" title="<%=cm.cmsPhrase("Measurement units")%>" style="border-style : none; background-color : transparent; color : black;" value=" <%=(SizeSearchCriteria.SEARCH_LENGTH.intValue() == criteriaSelected) ? "m" : "ha"%>" onfocus="blur()" />
           <%
             }
           %>
                   <br />
-                  <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
-                  <%=cm.cmsAlt("field_optional")%>
+                  <img style="vertical-align:middle" alt="<%=cm.cmsPhrase("This field is optional")%>" title="<%=cm.cmsPhrase("This field is optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <label for="country">
                       <%=cm.cmsPhrase("Country is")%>
                   </label>
@@ -271,8 +250,7 @@
                   <%=cm.cmsTitle("helper")%>
                   <%=cm.cmsAlt("helper")%>
                   <br />
-                  <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
-                  <%=cm.cmsAlt("field_optional")%>
+                  <img style="vertical-align:middle" alt="<%=cm.cmsPhrase("This field is optional")%>" title="<%=cm.cmsPhrase("This field is optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <label for="yearMin"><%=cm.cmsPhrase("Designation year between")%></label>
                   <input id="yearMin" name="yearMin" type="text" maxlength="4" size="4" title="<%=cm.cms("minimum_designation_year")%>" value="<%=yearMin%>"/>
                   <%=cm.cmsLabel("minimum_designation_year")%>
@@ -289,46 +267,34 @@
                       <%=cm.cmsPhrase("Search shall provide the following information (checked fields will be displayed)")%>
                     </strong>
                     <br />
-                    <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cms("source_data_set")%>" />
+                    <input id="showSourceDB" name="showSourceDB" type="checkbox" value="true" checked="checked" title="<%=cm.cmsPhrase("Source data set")%>" />
                     <label for="showSourceDB"><%=cm.cmsPhrase("Source data set")%></label>
-                    <%=cm.cmsTitle("source_data_set")%>
 
-                    <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cms("country")%>" />
+                    <input id="showCountry" name="showCountry" type="checkbox" value="true" checked="checked" title="<%=cm.cmsPhrase("Country")%>" />
                     <label for="showCountry"><%=cm.cmsPhrase("Country")%></label>
-                    <%=cm.cmsTitle("country")%>
 
-                    <input id="showName" name="showName" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("site_name")%>" />
+                    <input id="showName" name="showName" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cmsPhrase("Site name")%>" />
                     <label for="showName"><%=cm.cmsPhrase("Site name")%></label>
-                    <%=cm.cmsTitle("site_name")%>
 
-                    <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cms("designation_type")%>" />
+                    <input id="showDesignationTypes" name="showDesignationTypes" type="checkbox" value="true" checked="checked" title="<%=cm.cmsPhrase("Designation type")%>" />
                     <label for="showDesignationTypes"><%=cm.cmsPhrase("Designation type")%></label>
-                    <%=cm.cmsTitle("designation_type")%>
 
-                    <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cms("coordinates")%>" />
+                    <input id="showCoordinates" name="showCoordinates" type="checkbox" value="true" checked="checked" title="<%=cm.cmsPhrase("Coordinates")%>" />
                     <label for="showCoordinates"><%=cm.cmsPhrase("Coordinates")%></label>
-                    <%=cm.cmsTitle("coordinates")%>
 
-                    <input id="showSize" name="showSize" type="checkbox" value="true" checked="checked" title="<%=cm.cms("size")%>" />
+                    <input id="showSize" name="showSize" type="checkbox" value="true" checked="checked" title="<%=cm.cmsPhrase("Size")%>" />
                     <label for="showSize"><%=cm.cmsPhrase("Size")%></label>
-                    <%=cm.cmsTitle("size")%>
 
-                    <input id="showLength" name="showLength" type="checkbox" value="true" checked="checked" title="<%=cm.cms("length")%>" />
+                    <input id="showLength" name="showLength" type="checkbox" value="true" checked="checked" title="<%=cm.cmsPhrase("Length")%>" />
                     <label for="showLength"><%=cm.cmsPhrase("Length")%></label>
-                    <%=cm.cmsTitle("length")%>
 
-                    <input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cms("designation_year")%>" />
+                    <input id="showDesignationYear" name="showDesignationYear" type="checkbox" value="true" checked="checked" disabled="disabled" title="<%=cm.cmsPhrase("Designation year")%>" />
                     <label for="showDesignationYear"><%=cm.cmsPhrase("Designation year")%></label>
-                    <%=cm.cmsTitle("designation_year")%>
                   </fieldset>
                   <div class="submit_buttons">
-                    <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset")%>" class="standardButton" title="<%=cm.cms("reset_values")%>" />
-                    <%=cm.cmsTitle("reset_values")%>
-                    <%=cm.cmsInput("reset")%>
+                    <input id="reset" name="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" title="<%=cm.cmsPhrase("Reset values")%>" />
 
-                    <input id="submit2" name="submit2" type="submit" class="submitSearchButton" value="<%=cm.cms("search")%>" title="<%=cm.cms("search")%>" />
-                    <%=cm.cmsTitle("search")%>
-                    <%=cm.cmsInput("search")%>
+                    <input id="submit2" name="submit2" type="submit" class="submitSearchButton" value="<%=cm.cmsPhrase("Search")%>" title="<%=cm.cmsPhrase("Search")%>" />
                   </div>
                 </form>
                 <br />

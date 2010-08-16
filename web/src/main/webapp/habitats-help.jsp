@@ -21,7 +21,7 @@
   %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("habitats_help_title")%>
+    <%=cm.cmsPhrase("Habitat type search help")%>
   </title>
 </head>
   <body>
@@ -57,9 +57,6 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <%=cm.cmsText("habitats_help_01")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("habitats_help_title")%>
-                <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

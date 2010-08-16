@@ -21,7 +21,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("how_to_use_eunis_database")%>
+      <%=cm.cmsPhrase("How to use EUNIS database")%>
     </title>
   </head>
   <body>
@@ -57,8 +57,6 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <%=cm.cmsText("generic_howto_01")%>
-
-                <%=cm.cmsMsg("how_to_use_eunis_database")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

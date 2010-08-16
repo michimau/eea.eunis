@@ -24,7 +24,7 @@
 <%
     WebContentManagement cm = SessionManager.getWebContent();
 %>
-<title><%=cm.cms("systemcheck_01")%></title>
+<title><%=cm.cmsPhrase("EUNIS Database Status page check")%></title>
 </head>
 <body>
 
@@ -92,9 +92,6 @@
 <%
   }
 %>
-<%=cm.br()%>
-<%=cm.cmsMsg("systemcheck_01")%>
-<%=cm.br()%>
 
 </body>
 </html>

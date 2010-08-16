@@ -26,7 +26,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("clear_temporary_data_btn")%>
+      <%=cm.cmsPhrase("Clear temporary data")%>
     </title>
   </head>
   <body>
@@ -81,8 +81,7 @@
                 <br />
                 <br />
                 <form name="clearlog" method="post" action="clear-temporary-data.jsp">
-                  <input type="submit" value="<%=cm.cms("clear_temporary_data_btn")%>" title="<%=cm.cms("clear_temporary_data_btn")%>" id="submit" name="submit" class="submitSearchButton" />
-                  <%=cm.cmsInput("clear_temporary_data_btn")%>
+                  <input type="submit" value="<%=cm.cmsPhrase("Clear temporary data")%>" title="<%=cm.cmsPhrase("Clear temporary data")%>" id="submit" name="submit" class="submitSearchButton" />
                 </form>
 <%
     String SQL_DRV = application.getInitParameter("JDBC_DRV");
@@ -93,7 +92,7 @@
 
     if(request.getParameter("submit") != null)
     {
-      if(request.getParameter("submit").equalsIgnoreCase(cm.cms("clear_temporary_data_btn")))
+      if(request.getParameter("submit").equalsIgnoreCase(cm.cmsPhrase("Clear temporary data")))
       {
         boolean result;
         try

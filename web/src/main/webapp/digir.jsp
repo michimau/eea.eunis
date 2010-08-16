@@ -42,7 +42,7 @@
 %>
   <title>
     <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("digir_title")%>
+    <%=cm.cmsPhrase("DiGIR Provider Statistics")%>
   </title>
 </head>
   <body>
@@ -62,7 +62,7 @@
                 </jsp:include>
                 <a name="documentContent"></a>
 <!-- MAIN CONTENT -->
-                <img alt="<%=cm.cms("loading_data")%>" id="loading" src="images/loading.gif" />
+                <img alt="" id="loading" src="images/loading.gif" />
                 <%
                   out.flush();
                 %>
@@ -221,12 +221,6 @@
                     </td>
                   </tr>
                 </table>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("digir_title")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("loading_data")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("digir_location")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

@@ -20,7 +20,7 @@
   String btrail = "eea#" + eeaHome + ",home#index.jsp,site_map_location";
 %>
     <title><%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("site_map_title")%>
+      <%=cm.cmsPhrase("Site map")%>
     </title>
   </head>
   <body>
@@ -56,8 +56,6 @@
                 </div>
 <!-- MAIN CONTENT -->
 	        <%=cm.cmsText("generic_eunis-map_01")%>
-                <%=cm.cmsMsg("site_map_title")%>
-                <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

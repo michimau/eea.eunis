@@ -26,7 +26,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("feedback_list")%>
+      <%=cm.cmsPhrase("Feedback list")%>
     </title>
 
   </head>
@@ -197,9 +197,6 @@
                 <%
                     }
                 %>
-                    <%=cm.br()%>
-                    <%=cm.cmsMsg("feedback_list")%>
-                    <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

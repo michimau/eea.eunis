@@ -167,13 +167,13 @@
     %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("feedback")%>
+      <%=cm.cmsPhrase("EUNIS feedback")%>
     </title>
     <script type="text/javascript">
       //<![CDATA[
     function testform() {
       if (document.feed.comment.value=="" || document.feed.comment.value=="Enter your comments here... ") {
-        alert('<%=cm.cms("generic_feedback_27")%>');
+        alert('<%=cm.cms("Please insert your comment!")%>');
         return false;
       }
       return true;
@@ -243,7 +243,6 @@
                 <%=bodyHTML%>
                 <br />
                 <br />
-                <%=cm.cmsMsg("EUNIS Feedback")%>
 <%
   }
   else
@@ -392,9 +391,6 @@
                     <%=cm.cmsInput("send_feedback")%>
                   </p>
                 </form>
-                <%=cm.cmsMsg("feedback")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("generic_feedback_27")%>
 <%
   }
 %>

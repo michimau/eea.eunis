@@ -27,7 +27,7 @@
   <%
     WebContentManagement cm = SessionManager.getWebContent();
   %>
-    <title><%=cm.cms("list_of_values")%></title>
+    <title><%=cm.cmsPhrase("List of values")%></title>
   <%
     // Request parameters
     String ctl = request.getParameter("ctl");
@@ -775,7 +775,7 @@
       rs = ps.executeQuery(SQL);
 
       if(!rs.isBeforeFirst()) {
-        out.println("<strong>"+cm.cms("no_results_found_1")+"</strong>");
+        out.println("<strong>"+cm.cmsPhrase("No results found")+"</strong>");
         out.println("<br />");
       } else {
         %>
@@ -810,7 +810,7 @@
           <tr<%=cssClass%>>
             <td>
             <%
-            out.println("<a title=\"" + cm.cms("click_link_to_select_value") + "\" href=\"javascript:setValue('"+rs.getString(1)+"')\">"+rs.getString(1)+"</a>");
+            out.println("<a href=\"javascript:setValue('"+rs.getString(1)+"')\">"+rs.getString(1)+"</a>");
             %>
             </td>
             <td>
@@ -835,14 +835,14 @@
       con.close();
     } else {
         if(!lov.equalsIgnoreCase("SourceDatabase")) {
-          out.println("<strong>"+cm.cms("no_list_of_values_available")+"</strong>");
+          out.println("<strong>"+cm.cmsPhrase("No list of values available")+"</strong>");
           out.println("<br />");
         }
     }
   } catch (Exception e) {
     e.printStackTrace();
     //System.out.println(e.toString());
-    out.println("<strong>"+cm.cms("could_not_retrieve_list_of_values")+"</strong>");
+    out.println("<strong>"+cm.cmsPhrase("Could not retrieve list of values")+"</strong>");
     out.println("<br />");
   }
 %>
@@ -851,15 +851,5 @@
       <input type="button" title="<%=cm.cms("close_window")%>" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="btnclose" id="btnclose" class="standardButton" />
       <%=cm.cmsInput("close_btn")%>
     </form>
-    <%=cm.br()%>
-    <%=cm.cmsMsg("list_of_values")%>
-    <%=cm.br()%>
-    <%=cm.cmsMsg("no_list_of_values_available")%>
-    <%=cm.br()%>
-    <%=cm.cmsMsg("could_not_retrieve_list_of_values")%>
-    <%=cm.br()%>
-    <%=cm.cmsMsg("click_link_to_select_value")%>
-    <%=cm.br()%>
-    <%=cm.cmsMsg("no_results_found_1")%>
   </body>
 </html>

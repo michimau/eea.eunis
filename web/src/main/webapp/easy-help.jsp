@@ -20,7 +20,7 @@
   String btrail = "eea#" + eeaHome + ",home#index.jsp,help_on_easy_search_location";
 %>
     <title><%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("easy_search_help_title")%>
+      <%=cm.cmsPhrase("Easy search help")%>
     </title>
   </head>
   <body>
@@ -56,8 +56,6 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <%=cm.cmsText("generic_easy-help_01")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("easy_search_help_title")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

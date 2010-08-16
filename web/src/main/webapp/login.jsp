@@ -44,7 +44,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("login_page_title")%>
+      <%=cm.cmsPhrase("Login into EUNIS Database")%>
     </title>
   </head>
   <body>
@@ -88,7 +88,7 @@
               {
           %>
               <div class="error-msg">
-                  <%=cm.cms("login_invalid")%>
+                  <%=cm.cms("Invalid login name or password")%>
               </div>
           <%
               }
@@ -124,7 +124,7 @@
             {
           %>
              <div class="system-msg">
-              <%=cm.cmsPhrase("You successfully logged as")%>
+              <%=cm.cmsPhrase("You successfully logged in as")%>
               <strong><%=SessionManager.getUsername()%></strong>.
 							<ul>
               <li><a href="services.jsp"><%=cm.cmsPhrase("Services-page")%></a></li>
@@ -134,10 +134,6 @@
             }
           %>
               <%=cm.cmsText("habitats_login-help_01")%>
-
-              <%=cm.cmsMsg("Login into EUNIS Database")%>
-              <%=cm.br()%>
-              <%=cm.cmsMsg("login_invalid")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

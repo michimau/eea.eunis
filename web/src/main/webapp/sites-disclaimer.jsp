@@ -21,7 +21,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("sites_disclaimer_title")%>
+      <%=cm.cmsPhrase("Sites data set disclaimer")%>
     </title>
   </head>
   <body>
@@ -58,8 +58,6 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <%=cm.cmsText("sites_disclaimer_01")%>
-
-                <%=cm.cmsMsg("sites_disclaimer_title")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

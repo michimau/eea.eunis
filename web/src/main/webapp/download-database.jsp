@@ -21,7 +21,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("download_database")%>
+      <%=cm.cmsPhrase("Download database")%>
     </title>
   </head>
   <body>
@@ -58,11 +58,9 @@
                     </li>
                   </ul>
                 </div>
-                <br />
-                <a title="<%=cm.cms("generic_download-database_02")%>" href="downloads/eunis.zip"><%=cm.cmsPhrase("Download zipped .mdb (Microsoft Access) file")%></a>
-                <br />
-                <br />
-                <%=cm.cmsMsg("download_database")%>
+                <p>
+                <a href="downloads/eunis.zip"><%=cm.cmsPhrase("Download zipped .mdb (Microsoft Access) file")%></a>
+                </p>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

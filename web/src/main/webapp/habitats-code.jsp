@@ -28,7 +28,7 @@
 %>
 <title>
   <%=application.getInitParameter("PAGE_TITLE")%>
-  <%=cm.cms("habitats_code_title")%>
+  <%=cm.cmsPhrase("Habitat type code/classifications")%>
 </title>
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
@@ -55,7 +55,7 @@ function openHelper(URL)
     }
     if (null == database)
     {
-      alert( '<%=cm.cms("habitats_code_02")%>' );
+      alert( '<%=cm.cmsPhrase("Please select database")%>' );
     }
     else
     {
@@ -278,11 +278,6 @@ function openHelper(URL)
                       <jsp:param name="expandSearchCriteria" value="<%=expandSearchCriteria%>" />
                     </jsp:include>
                 <%}%>
-                  <%=cm.br()%>
-                  <%=cm.cmsMsg("habitats_code_title")%>
-                  <%=cm.br()%>
-                  <%=cm.cmsMsg("habitats_code_02")%>
-                  <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

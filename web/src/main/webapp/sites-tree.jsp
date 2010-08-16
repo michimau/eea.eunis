@@ -28,7 +28,7 @@
     <jsp:include page="header-page.jsp" />
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("sites_tree_browser")%>
+      <%=cm.cmsPhrase("Sites tree browser")%>
     </title>
   </head>
   <body>
@@ -64,9 +64,8 @@
                     </li>
                     <li>
                       <a href="help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cms( "header_help_title" )%>"
-                             title="<%=cm.cms( "header_help_title" )%>" /></a>
-            				<%=cm.cmsTitle( "header_help_title" )%>
+                             alt="<%=cm.cmsPhrase( "Help information" )%>"
+                             title="<%=cm.cmsPhrase( "Help information" )%>" /></a>
                     </li>
                   </ul>
                 </div>

@@ -27,7 +27,7 @@
     <script language="JavaScript" type="text/javascript" src="script/sites-designations-save-criteria.js"></script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("sites_designations_title")%>
+      <%=cm.cmsPhrase("Site designation types")%>
     </title>
   </head>
   <body>
@@ -204,8 +204,6 @@
           <%
             }
           %>
-
-                <%=cm.cmsMsg("sites_designations_title")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

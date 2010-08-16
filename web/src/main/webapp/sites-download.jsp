@@ -21,7 +21,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("sites_download_title")%>
+      <%=cm.cmsPhrase("Sites data set download")%>
     </title>
   </head>
   <body>
@@ -58,8 +58,6 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <%=cm.cmsText("sites_download_01")%>
-
-                <%=cm.cmsMsg("sites_download_title")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

@@ -22,14 +22,14 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("generic_404_title")%>
+      <%=cm.cmsPhrase("Application error")%>
     </title>
   </head>
   <body>
     <div id="visual-portal-wrapper">
       <jsp:include page="header.jsp" />
       <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns" class="visualColumnHideTwo"> class="visualColumnHideTwo">
+      <div id="portal-columns" class="visualColumnHideTwo">
         <!-- start of the main and left columns -->
         <div id="visual-column-wrapper">
           <!-- start of main content block -->
@@ -60,13 +60,11 @@
                 <br />
                 <br />
                 <%=cm.cmsText("generic_404_01")%>
-                <a title="<%=cm.cms("send_feedback")%>" href="feedback.jsp"><%=cm.cmsPhrase("EUNIS Feedback")%></a>.
-                <%=cm.cmsTitle("send_feedback")%>
+                <a title="<%=cm.cmsPhrase("Send feedback")%>" href="feedback.jsp"><%=cm.cmsPhrase("EUNIS Feedback")%></a>.
                 <br />
                 <br />
                 <%=cm.cmsPhrase("We appologize for the inconvenience.<br />The EUNIS team.")%>
                 <br />
-                <%=cm.cmsMsg("generic_404_title")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

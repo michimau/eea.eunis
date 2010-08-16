@@ -20,7 +20,7 @@
       String btrail = "eea#" + eeaHome + ",home#index.jsp,user_tutorials_location";
     %>
     <title>
-      <%=application.getInitParameter("PAGE_TITLE")%>
+      <%=application.getInitParameter("PAGE_TITLE")%> <%=cm.cmsPhrase("Tutorials")%>
     </title>
   </head>
   <body>

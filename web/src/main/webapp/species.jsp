@@ -20,7 +20,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
-  String []tabs = { cm.cms("easy_search"), cm.cms("advanced_search"), cm.cms("statistical_data"), cm.cms("links_and_downloads"), cm.cms("help") };
+  String []tabs = { cm.cmsPhrase("Easy search"), cm.cmsPhrase("Advanced search"), cm.cmsPhrase("Statistical data"), cm.cmsPhrase("Links &amp; downloads"), cm.cmsPhrase("Help") };
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species";
 %>
@@ -35,7 +35,7 @@
     {
         if (trim(document.search.scientificName.value) == '' || trim(document.search.scientificName.value) == 'Enter species name here...' )
         {
-            alert('<%=cm.cms("species_main_01_Msg")%>');
+            alert('<%=cm.cmsPhrase("Before searching, please type a few letters from species name.")%>');
             return false;
         }
         else return true;
@@ -44,7 +44,7 @@
     </script>
     <title>
         <%=application.getInitParameter("PAGE_TITLE")%>
-        <%=cm.cms("species_main_title")%>
+        <%=cm.cmsPhrase("Species database")%>
     </title>
   </head>
   <body>
@@ -62,7 +62,7 @@
 			<jsp:param name="location" value="<%=btrail%>"/>
 		</jsp:include>
               <a name="documentContent"></a>
-              <img id="loading" alt="<%=cm.cms("loading_progress")%>" title="<%=cm.cms("loading_progress")%>" src="images/loading.gif" />
+              <img id="loading" alt="" title="<%=cm.cmsPhrase("Loading progress")%>" src="images/loading.gif" />
                 <h1 class="documentFirstHeading">
                   <%=cm.cmsPhrase( "Species search" )%>
                 </h1>
@@ -110,20 +110,13 @@
                          value="<%=cm.cmsPhrase("Enter species name here...")%>"
                          onfocus="if(this.value=='<%=cm.cmsPhrase("Enter species name here...")%>')this.value='';"
                          onblur="if(this.value=='')this.value='<%=cm.cmsPhrase("Enter species name here...")%>';" />
-                  <%=cm.cmsAlt("quick_search_species_name")%>
-                  <%=cm.cmsTitle("quick_search_species_name")%>
                   <input id="search" type="submit"
-                         value="<%=cm.cms("search")%>"
+                         value="<%=cm.cmsPhrase("Search")%>"
                          name="Submit"
                          class="submitSearchButton"
-                         alt="<%=cm.cms("execute_search")%>" title="<%=cm.cms("execute_search")%>"
+                         title="<%=cm.cmsPhrase("Execute search")%>"
                          />
-                  <%=cm.cmsInput("search")%>
-                  <%=cm.cmsAlt("execute_search")%>
-                  <%=cm.cmsTitle("execute_search")%>
-                  <a href="fuzzy-search-help.jsp" title="<%=cm.cms("help_fuzzy_search")%>"><img src="images/mini/help.jpg" border="0" style="vertical-align:middle;" alt="<%=cm.cms("species_main_04_Alt")%>" /></a>
-                  <%=cm.cmsTitle("help_fuzzy_search")%>
-                  <%=cm.cmsAlt("species_main_04_Alt")%>
+                  <a href="fuzzy-search-help.jsp" title="<%=cm.cmsPhrase("Help on fuzzy search")%>"><img src="images/mini/help.jpg" border="0" style="vertical-align:middle;" alt="" /></a>
                 </form>
                 <br />
               </div>
@@ -136,7 +129,7 @@
               currentTab = "";
               if ( tab == i ) currentTab = " id=\"currenttab\"";
           %>
-                <li<%=currentTab%>><a title="<%=tabs[ i ]%>" href="species.jsp?tab=<%=i%>"><%=tabs[ i ]%></a></li>
+                <li<%=currentTab%>><a href="species.jsp?tab=<%=i%>"><%=tabs[ i ]%></a></li>
           <%
               }
           %>
@@ -166,8 +159,7 @@
                   <tr>
                     <td style="white-space: nowrap">
                       <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                      <a href="species-names.jsp" title="<%=cm.cms("search_by_latin_or_vernacular")%>"><strong><%=cm.cmsPhrase("Names")%></strong></a>
-                      <%=cm.cmsTitle("search_by_latin_or_vernacular")%>
+                      <a href="species-names.jsp" title="<%=cm.cmsPhrase("Search species by scientific name (in Latin) or by vernacular name (popular name)")%>"><strong><%=cm.cmsPhrase("Names")%></strong></a>
                     </td>
                     <td width="60%">
                       <%=cm.cmsPhrase("Search species by scientific name (in Latin) or by vernacular name (popular name)")%>
@@ -176,8 +168,7 @@
                   <tr class="zebraeven">
                     <td style="white-space: nowrap">
                       <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                      <a href="species-groups.jsp" title="<%=cm.cms("species_subspecies_by_group")%>"><strong><%=cm.cmsPhrase("Groups")%></strong></a>
-                      <%=cm.cmsTitle("species_subspecies_by_group")%>
+                      <a href="species-groups.jsp" title="<%=cm.cmsPhrase("Species &amp; subspecies by Group (Invertebrates, Mammals etc.)")%>"><strong><%=cm.cmsPhrase("Groups")%></strong></a>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Species &amp; subspecies by Group (Invertebrates, Mammals etc.)")%>
@@ -186,8 +177,7 @@
                   <tr>
                     <td style="white-space: nowrap">
                       <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                      <a href="species-synonyms.jsp" title="<%=cm.cms("identify_synonym_names_for_species")%>"><strong><%=cm.cmsPhrase("Synonyms")%></strong></a>
-                      <%=cm.cmsTitle("identify_synonym_names_for_species")%>
+                      <a href="species-synonyms.jsp" title="<%=cm.cmsPhrase("Identify synonym names for species")%>"><strong><%=cm.cmsPhrase("Synonyms")%></strong></a>
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Identify synonym names for species")%>

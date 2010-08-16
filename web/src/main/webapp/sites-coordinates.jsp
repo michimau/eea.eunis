@@ -31,7 +31,8 @@
         //]]>
     </script>
     <title>
-      <%=cm.cms("sites_coordinates_title")%>
+      <%=application.getInitParameter("PAGE_TITLE")%>
+      <%=cm.cmsPhrase("Site coordinates")%>
     </title>
   </head>
   <body>
@@ -91,13 +92,10 @@
                   <%=cm.cmsAlt("field_included")%>
                   <label for="longMin"><%=cm.cmsPhrase("Longitude")%></label>
                   <%=cm.cmsPhrase("Between")%>
-                  <input id="longMin" name="longMin" type="text" title="<%=cm.cms("sites_coordinates_minlongitude")%>" />
-                  <%=cm.cmsLabel("sites_coordinates_minlongitude")%>
-                  <%=cm.cmsTitle("sites_coordinates_minlongitude")%>
+                  <input id="longMin" name="longMin" type="text" title="<%=cm.cmsPhrase("Minimum longitude")%>" />
 
                   <%=cm.cmsPhrase("and")%>
-                  <label for="longMax" class="noshow"><%=cm.cms("sites_coordinates_maxlongitude")%></label>
-                  <input id="longMax" name="longMax" type="text" title="<%=cm.cms("sites_coordinates_maxlongitude")%>" />&nbsp;
+                  <input id="longMax" name="longMax" type="text" title="<%=cm.cmsPhrase("Maximum longitude")%>" />&nbsp;
                   <script type="text/javascript" language="Javascript">
       //<![CDATA[
                     IE  = (document.all && true);
@@ -238,8 +236,6 @@
           <%
             }
           %>
-
-                <%=cm.cmsMsg("sites_coordinates_title")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

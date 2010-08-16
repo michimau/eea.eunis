@@ -26,7 +26,7 @@
   <script language="JavaScript" src="script/species-books-save-criteria.js" type="text/javascript"></script>
   <script language="JavaScript" type="text/javascript">
   //<![CDATA[
-      var errMessageForm = "<%=cm.cms("species_books_02")%>.";
+      var errMessageForm = "<%=cm.cmsPhrase("Before searching, please type a few letters from species scientific name")%>.";
       function openHelper(URL)
       {
         document.eunis.scientificName.value = trim(document.eunis.scientificName.value);
@@ -72,7 +72,7 @@
   }
 %>
 
-  <title><%=application.getInitParameter("PAGE_TITLE")%><%=cm.cms("species_books_title")%></title>
+  <title><%=application.getInitParameter("PAGE_TITLE")%><%=cm.cmsPhrase("Species references")%></title>
 </head>
 
 <body>
@@ -108,9 +108,8 @@
                     </li>
                     <li>
                       <a href="species-help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cms( "header_help_title" )%>"
-                             title="<%=cm.cms( "header_help_title" )%>" /></a>
-            				<%=cm.cmsTitle( "header_help_title" )%>
+                             alt="<%=cm.cmsPhrase("Help information")%>"
+                             title="<%=cm.cmsPhrase("Help information")%>" /></a>
                     </li>
                   </ul>
                 </div>
@@ -237,10 +236,6 @@
                 %>
                 </table>
 
-                <%=cm.br()%>
-                <%=cm.cmsMsg("species_books_02")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("species_books_title")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("is")%>
                 <%=cm.br()%>

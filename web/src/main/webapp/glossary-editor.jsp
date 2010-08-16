@@ -193,7 +193,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms( "glossary_editor")%>
+      <%=cm.cmsPhrase("Glossary editor")%>
     </title>
   </head>
   <body>
@@ -374,7 +374,6 @@
                     </tr>
                   </table>
                 </form>
-                <%=cm.cmsMsg( "glossary_editor")%>
 <%
   }
   else

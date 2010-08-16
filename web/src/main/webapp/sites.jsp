@@ -14,22 +14,20 @@
                 ro.finsiel.eunis.search.AbstractSortCriteria"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
+  WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,sites";
   int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
-  String []tabs = { "easy_search", "advanced_search", "statistical_data", "links_and_downloads", "help" };
+  String []tabs = { cm.cmsPhrase("Easy search"), cm.cmsPhrase("Advanced search"), cm.cmsPhrase("Statistical data"), cm.cmsPhrase("Links &amp; downloads"), cm.cmsPhrase("Help") };
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>" lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-<%
-  WebContentManagement cm = SessionManager.getWebContent();
-%>
     <script language="javascript" type="text/javascript" src="script/sites.js"></script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("sites")%>
+      <%=cm.cmsPhrase("Sites")%>
     </title>
   </head>
   <body>
@@ -92,23 +90,16 @@
                     <input type="hidden" name="DB_BIOGENETIC" value="ON" />
                     <input type="hidden" name="DB_EMERALD" value="ON" />
                     <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_STARTS%>" />
-                    <label for="englishName"><%=cm.cms("quick_search_sites_01")%></label>
+                    <label for="englishName"><%=cm.cmsPhrase("Search sites with names starting with:")%></label>
                     <input type="text"
                            size="32"
                            name="englishName"
                            id="englishName"
-                           value="<%=cm.cms("sites_entersitename")%>"
-                           onfocus="if(this.value=='<%=cm.cms("sites_entersitename")%>')this.value='';"
-                           onblur="if(this.value=='')this.value='<%=cm.cms("sites_entersitename")%>';" />
-                    <%=cm.cmsLabel("quick_search_sites_01")%>
-                    <%=cm.cmsTitle("sites_entersitename")%>
-                    <%=cm.cmsInput("sites_entersitename")%>
-                    <input type="submit" value="<%=cm.cms( "search")%>" name="Submit" class="submitSearchButton" title="<%=cm.cms( "search")%>" />
-                    <%=cm.cmsInput("search")%>
-                    <%=cm.cmsTitle("search")%>
-                    <a href="fuzzy-search-help.jsp" title="<%=cm.cms("help_fuzzy_search")%>"><img alt="<%=cm.cms("help")%>" src="images/mini/help.jpg" border="0" style="vertical-align:middle" /></a>
-                    <%=cm.cmsTitle("help_fuzzy_search")%>
-                    <%=cm.cmsAlt("help")%>
+                           value="<%=cm.cmsPhrase("Enter site name here...")%>"
+                           onfocus="if(this.value=='<%=cm.cmsPhrase("Enter site name here...")%>')this.value='';"
+                           onblur="if(this.value=='')this.value='<%=cm.cmsPhrase("Enter site name here...")%>';" />
+                    <input type="submit" value="<%=cm.cmsPhrase("Search")%>" name="Submit" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
+                    <a href="fuzzy-search-help.jsp" title="<%=cm.cmsPhrase("Help on fuzzy search")%>"><img alt="" src="images/mini/help.jpg" border="0" style="vertical-align:middle" /></a>
                     <br />
                   </form>
                 </div>
@@ -123,7 +114,7 @@
               if ( tab == i ) currentTab = " id=\"currenttab\"";
           %>
                 <li<%=currentTab%>>
-                  <a title="Select <%=cm.cms( tabs[ i ] )%>" href="sites.jsp?tab=<%=i%>"><%=cm.cms( tabs[ i ] )%></a>
+                  <a href="sites.jsp?tab=<%=i%>"><%=tabs[ i ]%></a>
                 </li>
           <%
               }
@@ -137,7 +128,7 @@
             {
           %>
                     <table class="datatable fullwidth" summary="Easy search">
-                      <caption><%=cm.cms( "sites_main_easySearchesDesc" ) %></caption>
+                      <caption><%=cm.cmsPhrase( "A set of predefined functions to search the database" ) %></caption>
                       <thead>
                         <tr>
                           <th>
@@ -151,31 +142,25 @@
                       <tbody>
                         <tr>
                           <td>
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsTitle("bullet_alt")%>
-                            <%=cm.cmsAlt("bullet_alt")%>
-                            <a title="<%=cm.cms("name")%>" href="sites-names.jsp">
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <a title="<%=cm.cmsPhrase("Search sites by name")%>" href="sites-names.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("Name")%>
                               </strong>
                             </a>
-                            <%=cm.cmsTitle("name")%>
                           </td>
                           <td>
-                            <%=cm.cmsPhrase("Name")%>
+                            <%=cm.cmsPhrase("Search sites by name")%>
                           </td>
                         </tr>
                         <tr class="zebraeven">
                           <td>
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsTitle("bullet_alt")%>
-                            <%=cm.cmsAlt("bullet_alt")%>
-                            <a title="<%=cm.cms("search_by_size")%>" href="sites-size.jsp">
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <a title="<%=cm.cmsPhrase("Search sites by size")%>" href="sites-size.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("Size (Area/Length)")%>
                               </strong>
                             </a>
-                            <%=cm.cmsTitle("search_by_size")%>
                           </td>
                           <td>
                             <%=cm.cmsPhrase("Search sites by size")%>
@@ -183,15 +168,12 @@
                         </tr>
                         <tr>
                           <td>
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsTitle("bullet_alt")%>
-                            <%=cm.cmsAlt("bullet_alt")%>
-                            <a title="<%=cm.cms("search_by_coordinates")%>" href="sites-coordinates.jsp">
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <a title="<%=cm.cmsPhrase("Search sites by geographical coordinates")%>" href="sites-coordinates.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("Coordinates")%>
                               </strong>
                             </a>
-                            <%=cm.cmsTitle("search_by_coordinates")%>
                           </td>
                           <td>
                             <%=cm.cmsPhrase("Search sites by geographical coordinates")%>
@@ -199,15 +181,12 @@
                         </tr>
                         <tr class="zebraeven">
                           <td>
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsTitle("bullet_alt")%>
-                            <%=cm.cmsAlt("bullet_alt")%>
-                            <a title="<%=cm.cms("sites_main_countryDesc")%>" href="sites-country.jsp">
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <a title="<%=cm.cmsPhrase("Search sites by country location")%>" href="sites-country.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("Country")%>
                               </strong>
                             </a>
-                            <%=cm.cmsTitle("sites_main_countryDesc")%>
                           </td>
                           <td>
                             <%=cm.cmsPhrase("Search sites by country location")%>
@@ -215,15 +194,12 @@
                         </tr>
                         <tr>
                           <td>
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsTitle("bullet_alt")%>
-                            <%=cm.cmsAlt("bullet_alt")%>
-                            <a title="<%=cm.cms("sites_main_altitudeDesc")%>" href="sites-altitude.jsp">
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <a title="<%=cm.cmsPhrase("Search sites by characterizing altitude")%>" href="sites-altitude.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("Altitude")%>
                               </strong>
                             </a>
-                            <%=cm.cmsTitle("sites_main_altitudeDesc")%>
                           </td>
                           <td>
                             <%=cm.cmsPhrase("Search sites by characterizing altitude")%>
@@ -231,15 +207,12 @@
                         </tr>
                         <tr class="zebraeven">
                           <td>
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsTitle("bullet_alt")%>
-                            <%=cm.cmsAlt("bullet_alt")%>
-                            <a title="<%=cm.cms("sites_main_designationDesc")%>" href="sites-year.jsp">
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <a title="<%=cm.cmsPhrase("Search sites by the year of designation")%>" href="sites-year.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("Designation year")%>
                               </strong>
                             </a>
-                            <%=cm.cmsTitle("sites_main_designationDesc")%>
                           </td>
                           <td>
                             <%=cm.cmsPhrase("Search sites by the year of designation")%>
@@ -247,31 +220,25 @@
                         </tr>
                         <tr>
                           <td>
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsTitle("bullet_alt")%>
-                            <%=cm.cmsAlt("bullet_alt")%>
-                            <a title="<%=cm.cms("sites_main_showSpeciesDesc")%>" href="species-sites.jsp">
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <a title="<%=cm.cmsPhrase("Identify species located within sites")%>" href="species-sites.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("Pick sites, show species")%>
                               </strong>
                             </a>
-                            <%=cm.cmsTitle("sites_main_showSpeciesDesc")%>
                           </td>
                           <td>
-                            <%=cm.cms("sites_main_showSpeciesDesc")%>
+                            <%=cm.cmsPhrase("Identify species located within sites")%>
                           </td>
                         </tr>
                         <tr class="zebraeven">
                           <td>
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsTitle("bullet_alt")%>
-                            <%=cm.cmsAlt("bullet_alt")%>
-                            <a title="<%=cm.cms("sites_main_showHabitatsDesc")%>" href="habitats-sites.jsp">
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <a title="<%=cm.cmsPhrase("Identify habitat types located within sites ")%>" href="habitats-sites.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("Pick sites, show habitat types")%>
                               </strong>
                             </a>
-                            <%=cm.cmsTitle("sites_main_showHabitatsDesc")%>
                           </td>
                           <td>
                             <%=cm.cmsPhrase("Identify habitat types located within sites")%>
@@ -279,15 +246,12 @@
                         </tr>
                         <tr>
                           <td>
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsTitle("bullet_alt")%>
-                            <%=cm.cmsAlt("bullet_alt")%>
-                            <a title="<%=cm.cms("sites_main_showSitesDesc")%>" href="sites-designated-codes.jsp">
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <a title="<%=cm.cmsPhrase("Search sites by legal instruments")%>" href="sites-designated-codes.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("Pick designation types, show sites")%>
                               </strong>
                             </a>
-                            <%=cm.cmsTitle("sites_main_showSitesDesc")%>
                           </td>
                           <td>
                             <%=cm.cmsPhrase("Search sites by legal instruments ")%>
@@ -295,15 +259,12 @@
                         </tr>
                         <tr class="zebraeven">
                           <td>
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsTitle("bullet_alt")%>
-                            <%=cm.cmsAlt("bullet_alt")%>
-                            <a title="<%=cm.cms("sites_main_designationTypesDesc")%>" href="sites-designations.jsp">
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <a title="<%=cm.cmsPhrase("Search designation types")%>" href="sites-designations.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("Designation types")%>
                               </strong>
                             </a>
-                            <%=cm.cmsTitle("sites_main_designationTypesDesc")%>
                           </td>
                           <td>
                             <%=cm.cmsPhrase("Search designation types")%>
@@ -311,15 +272,12 @@
                         </tr>
                         <tr>
                           <td>
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsTitle("bullet_alt")%>
-                            <%=cm.cmsAlt("bullet_alt")%>
-                            <a title="<%=cm.cms("sites_main_neighborhoodDesc")%>" href="sites-neighborhood.jsp">
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <a title="<%=cm.cmsPhrase("Search neighboring sites within a range of a specified site")%>" href="sites-neighborhood.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("Site neighborhood")%>
                               </strong>
                             </a>
-                            <%=cm.cmsTitle("sites_main_neighborhoodDesc")%>
                           </td>
                           <td abbr="Site neighborhood">
                             <%=cm.cmsPhrase("Search neighboring sites within a range of a specified site")%>
@@ -327,10 +285,8 @@
                         </tr>
                         <tr class="zebraeven">
                           <td>
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                              <%=cm.cmsTitle("bullet_alt")%>
-                              <%=cm.cmsAlt("bullet_alt")%>
-                            <a title="<%=cm.cms("sites_tree_browser")%>" href="sites-tree.jsp">
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <a title="<%=cm.cmsPhrase("Sites tree browser")%>" href="sites-tree.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("Sites tree browser")%>
                               </strong>
@@ -348,7 +304,7 @@
             {
           %>
                     <table class="datatable fullwidth" summary="Advanced search">
-                      <caption><%=cm.cms( "flexible_search_tool_to_build_your_own_query" ) %></caption>
+                      <caption><%=cm.cmsPhrase( "A flexible search tool to build your own query" ) %></caption>
                       <thead>
                         <tr>
                           <th>
@@ -362,15 +318,12 @@
                       <tbody>
                         <tr>
                           <td>
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsTitle("bullet_alt")%>
-                            <%=cm.cmsAlt("bullet_alt")%>
-                            <a title="<%=cm.cms("sites_main_advSearchSearchDesc")%>" href="sites-advanced.jsp?natureobject=Sites">
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <a title="<%=cm.cmsPhrase("Search sites information using more complex filtering capabilities")%>" href="sites-advanced.jsp?natureobject=Sites">
                               <strong>
                                 <%=cm.cmsPhrase("Advanced Search")%>
                               </strong>
                             </a>
-                            <%=cm.cmsTitle("sites_main_advSearchSearchDesc")%>
                           </td>
                           <td>
                             <%=cm.cmsPhrase("Search sites information using more complex filtering capabilities")%>
@@ -378,15 +331,12 @@
                         </tr>
                         <tr class="zebraeven">
                           <td>
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsTitle("bullet_alt")%>
-                            <%=cm.cmsAlt("bullet_alt")%>
-                            <a title="<%=cm.cms("sites_main_advHowToDesc")%>" href="advanced-help.jsp">
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <a title="<%=cm.cmsPhrase("Help on sites Advanced Search")%>" href="advanced-help.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("How to use Advanced search")%>
                               </strong>
                             </a>
-                            <%=cm.cmsTitle("sites_main_advHowToDesc")%>
                           </td>
                           <td>
                             <%=cm.cmsPhrase("Help on sites Advanced Search")%>
@@ -400,7 +350,7 @@
             {
           %>
                     <table class="datatable fullwidth" summary="Statistical data">
-                      <caption><%=cm.cms( "search_tool_to_build_aggregated_data" ) %></caption>
+                      <caption><%=cm.cmsPhrase( "A search tool to build aggregated data" ) %></caption>
                       <thead>
                         <tr>
                           <th>
@@ -414,15 +364,12 @@
                       <tbody>
                         <tr>
                           <td>
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsTitle("bullet_alt")%>
-                            <%=cm.cmsAlt("bullet_alt")%>
-                            <a title="<%=cm.cms("sites_main_numberDesc")%>" href="sites-statistical.jsp">
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <a title="<%=cm.cmsPhrase("Find statistical data about sites")%>" href="sites-statistical.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("Number/Total area")%>
                               </strong>
                             </a>
-                            <%=cm.cmsTitle("sites_main_numberDesc")%>
                           </td>
                           <td>
                             <%=cm.cmsPhrase("Find statistical data about sites")%>
@@ -436,7 +383,7 @@
             {
           %>
                     <table class="datatable fullwidth" summary="Links &amp; downloads">
-                      <caption><%=cm.cms( "sites_main_linksDesc") %></caption>
+                      <caption><%=cm.cmsPhrase( "Links to data sources used in EUNIS sites module") %></caption>
                       <thead>
                         <tr>
                           <th>
@@ -450,15 +397,12 @@
                       <tbody>
                         <tr>
                           <td>
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsTitle("bullet_alt")%>
-                            <%=cm.cmsAlt("bullet_alt")%>
-                            <a title="<%=cm.cms("sites_main_linksDownloadsDesc")%>" href="sites-download.jsp">
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <a title="<%=cm.cmsPhrase("Download full data set, visit data providers etc.")%>" href="sites-download.jsp">
                               <strong>
                                 <%=cm.cmsPhrase("Links and Downloads")%>
                               </strong>
                             </a>
-                            <%=cm.cmsTitle("sites_main_linksDownloadsDesc")%>
                           </td>
                           <td>
                             <%=cm.cmsPhrase("Download full data set, visit data providers etc.")%>
@@ -466,10 +410,8 @@
                         </tr>
                         <tr class="zebraeven">
                           <td style="white-space : nowrap">
-                            <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsTitle("bullet_alt")%>
-                            <%=cm.cmsAlt("bullet_alt")%>
-                            <%=cm.cmsText("sites_main_indicators")%>
+                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                            <%=cm.cmsPhrase("Sites main indicators")%>
                           </td>
                           <td>
                             <%=cm.cmsPhrase("Find sites used in indicators")%>
@@ -483,7 +425,7 @@
             {
           %>
                 <table class="datatable fullwidth" summary="Help">
-                  <caption><%=cm.cms( "general_information_on_eunis" ) %></caption>
+                  <caption><%=cm.cmsPhrase( "General information on EUNIS application" ) %></caption>
                   <thead>
                     <tr>
                       <th>
@@ -497,15 +439,12 @@
                   <tbody>
                     <tr>
                       <td>
-                        <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                        <%=cm.cmsTitle("bullet_alt")%>
-                        <%=cm.cmsAlt("bullet_alt")%>
-                        <a title="<%=cm.cms("how_to_use_easy_search")%>" href="easy-help.jsp">
+                        <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                        <a title="<%=cm.cmsPhrase("How to use Easy search")%>" href="easy-help.jsp">
                           <strong>
                             <%=cm.cmsPhrase("How to use Easy search")%>
                           </strong>
                         </a>
-                        <%=cm.cmsTitle("how_to_use_easy_search")%>
                       </td>
                       <td>
                         <%=cm.cmsPhrase("Help on sites <strong>Easy Searches</strong>")%>
@@ -513,15 +452,12 @@
                     </tr>
                     <tr class="zebraeven">
                       <td>
-                        <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                        <%=cm.cmsTitle("bullet_alt")%>
-                        <%=cm.cmsAlt("bullet_alt")%>
-                        <a title="<%=cm.cms("sites_main_glossaryDesc")%>" href="glossary.jsp?module=sites">
+                        <img alt=""src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                        <a title="<%=cm.cmsPhrase("Glossary of the terms used in EUNIS Database sites module")%>" href="glossary.jsp?module=sites">
                           <strong>
                             <%=cm.cmsPhrase("Glossary")%>
                           </strong>
                         </a>
-                        <%=cm.cmsTitle("sites_main_glossaryDesc")%>
                       </td>
                       <td>
                         <%=cm.cmsPhrase("Glossary of the terms used in EUNIS Database sites module")%>
@@ -529,15 +465,12 @@
                     </tr>
                     <tr>
                       <td>
-                        <img alt="<%=cm.cms("bullet_alt")%>" title="<%=cm.cms("bullet_alt")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                        <%=cm.cmsTitle("bullet_alt")%>
-                        <%=cm.cmsAlt("bullet_alt")%>
-                        <a title="<%=cm.cms("sites_main_sitesHowToDesc")%>" href="sites-help.jsp">
+                        <img alt=""src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
+                        <a title="<%=cm.cmsPhrase("Sites online help")%>" href="sites-help.jsp">
                           <strong>
                             <%=cm.cmsPhrase("How to use")%>
                           </strong>
                         </a>
-                        <%=cm.cmsTitle("sites_main_sitesHowToDesc")%>
                       </td>
                       <td>
                         <%=cm.cmsPhrase("Sites online help")%>

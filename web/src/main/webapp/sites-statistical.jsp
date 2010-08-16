@@ -32,7 +32,7 @@
     </script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("sites_statistical_title")%>
+      <%=cm.cmsPhrase("Sites statistical information")%>
     </title>
   </head>
   <body>
@@ -168,8 +168,6 @@
           <%
             }
           %>
-
-                <%=cm.cmsMsg("sites_statistical_title")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

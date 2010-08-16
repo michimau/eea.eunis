@@ -123,7 +123,7 @@
     <jsp:include page="header-page.jsp" />
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("glossary_editor")%>
+      <%=cm.cmsPhrase("Glossary editor")%>
     </title>
     <script language="JavaScript" type="text/javascript">
     //<![CDATA[
@@ -370,8 +370,6 @@
 <%
               }
 %>
-                <%=cm.cmsMsg("glossary_editor")%>
-                <%=cm.br()%>
                 <%=cm.cmsMsg( "generic_glossary-table_01")%>
 <%
   }

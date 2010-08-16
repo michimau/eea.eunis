@@ -22,7 +22,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("generic_combined-help_title")%>
+      <%=cm.cmsPhrase("Combined search help")%>
     </title>
   </head>
   <body>
@@ -58,8 +58,6 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <%=cm.cmsText("generic_combined-help_01")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("generic_combined-help_title")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

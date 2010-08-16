@@ -21,7 +21,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cms("accessibility_statement")%>
+      <%=cm.cmsPhrase("Accessibility statement")%>
     </title>
   </head>
   <body>
@@ -58,10 +58,7 @@
                   </ul>
                 </div>
 <!-- MAIN CONTENT -->
-                <br />
                 <%=cm.cmsText("accessibility_01")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("accessibility_statement")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

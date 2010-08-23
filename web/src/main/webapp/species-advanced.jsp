@@ -249,9 +249,9 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
   {
 %>
      <jsp:include page="load-save-criteria.jsp">
-       <jsp:param name="fromWhere" value="<%=request.getParameter("fromWhere")%>"/>
-       <jsp:param name="criterianame" value="<%=request.getParameter("criterianame")%>"/>
-       <jsp:param name="siteName" value="<%=request.getParameter("siteName")%>"/>
+       <jsp:param name="fromWhere" value="<%=request.getParameter(\"fromWhere\")%>"/>
+       <jsp:param name="criterianame" value="<%=request.getParameter(\"criterianame\")%>"/>
+       <jsp:param name="siteName" value="<%=request.getParameter(\"siteName\")%>"/>
        <jsp:param name="natureobject" value="<%=NatureObject%>"/>
        <jsp:param name="idsession" value="<%=IdSession%>"/>
      </jsp:include>

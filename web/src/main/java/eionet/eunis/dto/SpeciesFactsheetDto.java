@@ -53,6 +53,9 @@ public class SpeciesFactsheetDto implements Serializable{
 	@Element(required = false, name = "synonymFor")
 	private SpeciesSynonymDto synonymFor;
 	
+	@ElementList(required = false, inline = true, entry = "hasLegalReference")
+	private List<LegalReferenceDTO> hasLegalReferences;
+	
 	@ElementList(required = false, inline = true, entry = "hasSynonym")
 	private List<SpeciesSynonymDto> hasSynonyms;
 
@@ -137,6 +140,14 @@ public class SpeciesFactsheetDto implements Serializable{
 
 	public void setDcmitype(ResourceDto dcmitype) {
 		this.dcmitype = dcmitype;
+	}
+
+	public List<LegalReferenceDTO> getHasLegalReferences() {
+		return hasLegalReferences;
+	}
+
+	public void setHasLegalReferences(List<LegalReferenceDTO> hasLegalReferences) {
+		this.hasLegalReferences = hasLegalReferences;
 	}
 	
 	

@@ -2,6 +2,7 @@ package eionet.eunis.dao;
 
 import java.util.List;
 
+import eionet.eunis.dto.LegalReferenceDTO;
 import eionet.eunis.dto.SpeciesAttributeDto;
 import eionet.eunis.stripes.actions.SpeciesFactsheetActionBean;
 
@@ -62,5 +63,13 @@ public interface ISpeciesFactsheetDao {
 	 * @return ID_SITE locations
 	 */
 	List<String> getExpectedInSiteIds(int idNatureObject, int idSpecies, int limit);
+
+	/**
+	 * for given species returns the list of associated legal references.
+	 * 
+	 * @param idNatureObject - species id.
+	 * @return 
+	 */
+	List<LegalReferenceDTO> getLegalReferences(int idNatureObject);
 
 }

@@ -10,7 +10,9 @@ import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
+import eionet.eunis.dto.LegalReferenceDTO;
 import eionet.eunis.dto.SpeciesAttributeDto;
+import eionet.eunis.dto.readers.LegalReferenceDTOReader;
 import eionet.eunis.dto.readers.SpeciesAttributeDTOReader;
 
 /**
@@ -87,6 +89,22 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
 			throw new RuntimeException(ignored);
 		}
 	}
+	
+	public List<LegalReferenceDTO> getLegalReferences(int idNatureObject) {
+		String sql = "SELECT ID_DC,ANNEX,PRIORITY,COMMENT FROM chm62edt_reports AS A" +
+				" join chm62edt_report_type AS B on A.ID_REPORT_TYPE=B.ID_REPORT_TYPE AND B.LOOKUP_TYPE='LEGAL_STATUS'" +
+				" join chm62edt_legal_status on ID_LEGAL_STATUS=ID_LOOKUP where ID_NATURE_OBJECT = ?";
+		List<Object> params = new LinkedList<Object>();
+		params.add(idNatureObject);
+		try {
+			LegalReferenceDTOReader legalReferenceReader = new LegalReferenceDTOReader();
+			executeQuery(sql, params, legalReferenceReader);
+			return legalReferenceReader.getResultList();
+		} catch (SQLException ignored) {
+			logger.error(ignored);
+			throw new RuntimeException(ignored);
+		}
+	}
 
 	public List<SpeciesAttributeDto> getAttributesForNatureObject(int idNatureObject) {
 		String sql = "SELECT * FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES " +
@@ -132,5 +150,7 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
 			throw new RuntimeException(ignored);
 		}
 	}
+
+	
 
 }

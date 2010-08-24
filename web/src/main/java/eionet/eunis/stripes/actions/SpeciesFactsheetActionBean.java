@@ -269,6 +269,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 		dto.setAttributes(
 				DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getAttributesForNatureObject(
 						factsheet.getSpeciesObject().getIdNatureObject()));
+		dto.setHasLegalReferences(
+				DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getLegalReferences(
+						factsheet.getSpeciesObject().getIdNatureObject()));
 		
 		//setting expectedInLocations
 		List<String> expectedLocations = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getExpectedInSiteIds(

@@ -35,6 +35,7 @@ import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
 import ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.DistributionWrapper;
 import ro.finsiel.eunis.jrfTables.species.factsheet.ReportsDistributionStatusPersist;
+import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist;
 import ro.finsiel.eunis.search.UniqueVector;
@@ -135,6 +136,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 	private String gridImage;
 	private boolean gridDistSuccess;
 	private List<SpeciesDistributionDTO> speciesDistribution;
+	
+	//Sites distribution tab variables
+	private List<SitesByNatureObjectPersist> speciesSites;
+	private String mapIds;
+	private List<SitesByNatureObjectPersist> subSpeciesSites;
+	private String subMapIds;
 
 	
 	@DefaultHandler
@@ -206,22 +213,20 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 			specie = factsheet.getSpeciesNatureObject();
 			domainName = getContext().getInitParameter("DOMAIN_NAME");
 			
-			if(tab != null && tab.equals("general")){
+			if(tab != null && tab.equals("general"))
 				generalTabActions(mainIdSpecies);
-			}
-			
-			if(tab != null && tab.equals("vernacular")){
+				
+			if(tab != null && tab.equals("vernacular"))
 				vernNames = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
-			}
 			
-			if(tab != null && tab.equals("countries")){
+			if(tab != null && tab.equals("countries"))
 				geoTabActions();
-			}
 			
-			if(tab != null && tab.equals("grid")){
+			if(tab != null && tab.equals("grid"))
 				gridDistributionTabActions();
-			}
 			
+			if(tab != null && tab.equals("sites"))
+				sitesTabActions();
 		} 
 		String eeaHome = getContext().getInitParameter("EEA_HOME");
 		String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,factsheet";
@@ -570,6 +575,36 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 		    }
 		}
 	}
+	
+	private void sitesTabActions() {
+		
+		// List of sites related to species.
+		speciesSites = factsheet.getSitesForSpecies();
+		mapIds = getIds(speciesSites);
+		
+		
+		// List of sites related to subspecies.
+		subSpeciesSites = factsheet.getSitesForSubpecies();
+		subMapIds = getIds(subSpeciesSites);
+	}
+	
+	private String getIds(List<SitesByNatureObjectPersist> sites){
+		
+		int maxSitesPerMap = Utilities.checkedStringToInt( getContext().getInitParameter( "MAX_SITES_PER_MAP" ), 2000 );
+		String ids = null;
+		if(sites.size() > 0){
+			ids = "";
+		    if(sites.size() < maxSitesPerMap){
+		    	for (int i = 0; i < sites.size(); i++){
+		    		SitesByNatureObjectPersist site = (SitesByNatureObjectPersist)sites.get(i);
+		    		ids += "'" + site.getIDSite() + "'";
+		    		if ( i < sites.size() - 1 ) ids += ",";
+		    	}
+		    }
+		}
+		
+		return ids;
+	}
 
 	/**
 	 * @return the factsheet
@@ -887,6 +922,38 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 
 	public void setVernNames(List<VernacularNameWrapper> vernNames) {
 		this.vernNames = vernNames;
+	}
+
+	public List<SitesByNatureObjectPersist> getSpeciesSites() {
+		return speciesSites;
+	}
+
+	public void setSpeciesSites(List<SitesByNatureObjectPersist> speciesSites) {
+		this.speciesSites = speciesSites;
+	}
+
+	public String getMapIds() {
+		return mapIds;
+	}
+
+	public void setMapIds(String mapIds) {
+		this.mapIds = mapIds;
+	}
+
+	public List<SitesByNatureObjectPersist> getSubSpeciesSites() {
+		return subSpeciesSites;
+	}
+
+	public void setSubSpeciesSites(List<SitesByNatureObjectPersist> subSpeciesSites) {
+		this.subSpeciesSites = subSpeciesSites;
+	}
+
+	public String getSubMapIds() {
+		return subMapIds;
+	}
+
+	public void setSubMapIds(String subMapIds) {
+		this.subMapIds = subMapIds;
 	}
 
 

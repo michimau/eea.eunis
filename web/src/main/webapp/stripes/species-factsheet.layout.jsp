@@ -133,9 +133,8 @@
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'sites'}">
 		                	<%-- Related sites --%>
-			                <jsp:include page="/species-factsheet-sites.jsp">
-			                  <jsp:param name="mainIdSpecies" value="${actionBean.factsheet.idSpecies}" />
-			                </jsp:include>
+		                	<%-- Geographical distribution --%>
+		                	<stripes:layout-render name="/stripes/species-factsheet-sites.jsp"/>
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'gbif'}">
 		                	<%-- GBIF observations --%>

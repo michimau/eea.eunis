@@ -391,3 +391,20 @@ table.fullwidth {
 .listing thead th {
 	padding: 0.2em;
 }
+
+.listing thead th.sortable{
+	background-image: none;
+}
+
+.dt_sortable.sorted.order2 {
+	background-image: url('../images/sort_ascending.gif');
+	background-repeat: no-repeat;
+	background-position: right;
+}
+
+.dt_sortable.sorted.order1 {
+	background-image: url('../images/sort_descending.gif');
+	background-repeat: no-repeat;
+	background-position: right;
+}
+

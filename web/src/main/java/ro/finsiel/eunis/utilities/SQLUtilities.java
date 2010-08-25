@@ -941,6 +941,40 @@ public class SQLUtilities {
 
     return result;
   }
+  
+  public boolean EunisHabitatHasLowerLevels(String idCode) {
+    boolean result = false;
+
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    String strSQL = "SELECT ID_HABITAT";
+    strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+    strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+idCode+"%'";
+    strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE) > 2";
+
+    try
+    {
+      Class.forName( SQL_DRV );
+      con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+
+      ps = con.prepareStatement( strSQL );
+      rs = ps.executeQuery();
+
+      if ( rs.next() )
+      {
+        result = true;
+      }
+      con.close();
+    }
+    catch ( Exception ex )
+    {
+      ex.printStackTrace();
+    }
+
+    return result;
+  }
 
   public boolean Annex1HabitatHasChilds(String idCode, String idCodeParent) {
     boolean result = false;

@@ -92,6 +92,8 @@
               ResultSet rs6 = null;
               PreparedStatement ps7 = null;
               ResultSet rs7 = null;
+              PreparedStatement ps8 = null;
+              ResultSet rs8 = null;
 
               try
               {
@@ -132,12 +134,14 @@
 		
 		                  ps2 = con.prepareStatement( strSQL );
 		                  rs2 = ps2.executeQuery();
-		
+
 		            %>
 		                  <ul class="eunistree">
 		            <%
+		            	  boolean hasLevel2 = false;
 		                  while(rs2.next())
 		                  {
+		                	hasLevel2 = true;
 		                    if(sqlc.EunisHabitatHasChilds(rs2.getString("EUNIS_HABITAT_CODE"))) {
 		            %>
 		                    <li>
@@ -323,13 +327,35 @@
 		                       </li> 
 		                     <%
 		                  }
+		                  rs2.close();
+		                  ps2.close();
+		                  
+		                  //Hack for category X
+		                  if(!hasLevel2 && sqlc.EunisHabitatHasLowerLevels(rs.getString("EUNIS_HABITAT_CODE"))){
+		                	  strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
+			                  strSQL = strSQL + " FROM CHM62EDT_HABITAT";
+			                  strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+rs.getString("EUNIS_HABITAT_CODE").substring(0,1)+"%'";
+			                  strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE) > 2";
+			                  strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
+			
+			                  ps8 = con.prepareStatement( strSQL );
+			                  rs8 = ps8.executeQuery();
+			                  
+                              while(rs8.next())
+                              {
+	       			%>
+                                <li>
+                                  <img src="images/img_bullet.gif" alt="<%=rs8.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs8.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs8.getString("ID_HABITAT")%>"><%=rs8.getString("EUNIS_HABITAT_CODE")%> : <%=rs8.getString("SCIENTIFIC_NAME")%></a><br/>
+                                </li>
+    	   			<%
+                              }
+                              rs8.close();
+    		                  ps8.close();
+		                  }
 		
 		            %>
 		                  </ul>
 		            <%
-		                  rs2.close();
-		                  ps2.close();
-		
 		                }
                     %>
                   </li>

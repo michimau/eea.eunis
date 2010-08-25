@@ -4,7 +4,6 @@
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle }">
 	<stripes:layout-component name="head">
 		<script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
-		<script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
 		<script language="JavaScript" type="text/javascript">
 		    //<![CDATA[
 		      function openpictures( URL, width, height )
@@ -113,9 +112,7 @@
 							</jsp:include>
 						</c:if>
 						<c:if test="${actionBean.tab == 'sites'}">
-							<jsp:include page="/habitats-factsheet-sites.jsp">
-								<jsp:param name="idHabitat" value="${actionBean.idHabitat}" />
-							</jsp:include>
+							<stripes:layout-render name="/stripes/habitats-factsheet-sites.jsp"/>
 						</c:if>
 						<c:if test="${actionBean.tab == 'species'}">
 							<jsp:include page="/habitats-factsheet-species.jsp">

@@ -133,7 +133,6 @@
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'sites'}">
 		                	<%-- Related sites --%>
-		                	<%-- Geographical distribution --%>
 		                	<stripes:layout-render name="/stripes/species-factsheet-sites.jsp"/>
 		                </c:if>
 		                <c:if test="${actionBean.tab == 'gbif'}">

@@ -1,4 +1,4 @@
-package eionet.eunis.util;
+package eionet.eunis.util.decorators;
 
 import org.displaytag.decorator.TableDecorator;
 

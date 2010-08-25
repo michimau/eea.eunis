@@ -392,10 +392,6 @@ table.fullwidth {
 	padding: 0.2em;
 }
 
-.listing thead th.sortable{
-	background-image: none;
-}
-
 .dt_sortable.sorted.order2 {
 	background-image: url('../images/sort_ascending.gif');
 	background-repeat: no-repeat;

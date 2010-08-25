@@ -7,7 +7,7 @@
 	<stripes:layout-component name="contents">
 		<!-- MAIN CONTENT -->
 					<h2>Documents:</h2>
-					<display:table name="${actionBean.docs}" class="sortable" sort="list" id="listItem" htmlId="listItem" requestURI="/documents" decorator="eionet.eunis.util.DocumentsTableDecorator">
+					<display:table name="${actionBean.docs}" class="sortable" sort="list" id="listItem" htmlId="listItem" requestURI="/documents" decorator="eionet.eunis.util.decorators.DocumentsTableDecorator">
 						<display:column property="idDoc" title="ID_DC"/>
 						<display:column property="docTitle" title="Title" sortable="true" sortProperty="title"/>
 					</display:table>

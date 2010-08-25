@@ -2,12 +2,11 @@ package eionet.eunis.util.decorators;
 
 import org.displaytag.decorator.TableDecorator;
 
-import ro.finsiel.eunis.WebContentManagement;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 
-public class SpeciesSitesTableDecorator extends TableDecorator {
+public class HabitatsSitesTableDecorator extends TableDecorator {
 	/**
 	 * 
 	 * @return
@@ -33,23 +32,7 @@ public class SpeciesSitesTableDecorator extends TableDecorator {
 	public String getArea(){
 		StringBuilder ret = new StringBuilder();
 		SitesByNatureObjectPersist site = (SitesByNatureObjectPersist) getCurrentRowObject();
-		WebContentManagement cm = (WebContentManagement)getPageContext().getAttribute("cm");
-
-		if(Utilities.isCountry(site.getAreaNameEn())){
-			ret.append("<a href=\"species-statistics-module.jsp?countryName=");
-			ret.append(Utilities.treatURLSpecialCharacters(site.getAreaNameEn()));
-			ret.append("\" title=\"");
-			ret.append(cm.cms("open_the_statistical_data_for"));
-			ret.append(" ");
-			ret.append(Utilities.treatURLSpecialCharacters(site.getAreaNameEn()));
-			ret.append("\">");
-				ret.append(Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getAreaNameEn())));
-			ret.append("</a>");
-			ret.append(cm.cmsTitle("open_the_statistical_data_for"));
-        } else {
-        	ret.append(Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getAreaNameEn())));
-        }
-		
+       	ret.append(Utilities.formatString(site.getAreaNameEn()));
 		return ret.toString();
 	}
 	

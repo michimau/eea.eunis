@@ -13,8 +13,8 @@ import org.simpleframework.xml.convert.Convert;
  * <a href="mailto:aleks21@gmail.com">contact<a>
  */
 @Root
-@Convert(SpeciesAttributeConverter.class)
-public class SpeciesAttributeDto implements Serializable {
+@Convert(AttributeConverter.class)
+public class AttributeDto implements Serializable {
 	
 	/**
 	 * serial.
@@ -25,11 +25,11 @@ public class SpeciesAttributeDto implements Serializable {
 	private boolean literal;
 	private String value;
 	
-	public SpeciesAttributeDto() {
+	public AttributeDto() {
 		//blank
 	}
 	
-	public SpeciesAttributeDto(String name, boolean literal, String value) {
+	public AttributeDto(String name, boolean literal, String value) {
 		this.name = name;
 		this.literal = literal;
 		this.value = value;

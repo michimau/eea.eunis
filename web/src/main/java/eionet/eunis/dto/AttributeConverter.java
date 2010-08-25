@@ -7,15 +7,15 @@ import org.simpleframework.xml.stream.InputNode;
 import org.simpleframework.xml.stream.OutputNode;
 
 /**
- * Converter class to convert {@link SpeciesAttributeDto} to xml.
+ * Converter class to convert {@link AttributeDto} to xml.
  */
-public final class SpeciesAttributeConverter implements Converter<SpeciesAttributeDto> {
+public final class AttributeConverter implements Converter<AttributeDto> {
 	
-	public SpeciesAttributeDto read(InputNode arg0) throws Exception {
+	public AttributeDto read(InputNode arg0) throws Exception {
 		throw new IllegalStateException("not allowed");
 	}
 	
-	public void write(OutputNode node, SpeciesAttributeDto dto) throws Exception {
+	public void write(OutputNode node, AttributeDto dto) throws Exception {
 		//small hacking, as OutputElement is not accessible
 		Field name =  node.getClass().getDeclaredField("name");
 		name.setAccessible(true);

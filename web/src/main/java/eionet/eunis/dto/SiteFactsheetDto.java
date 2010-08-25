@@ -1,9 +1,11 @@
 package eionet.eunis.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 /**
@@ -23,7 +25,7 @@ public class SiteFactsheetDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Element(name = "rdf:type", required = false)
-	private ResourceDto dcmitype;
+	private ResourceDto dcmitype;	
 	@Element(name = "hasDesignation", required = false)
 	private ResourceDto idDesignation;
 	@Element(name = "hasSource", required = false)
@@ -86,10 +88,13 @@ public class SiteFactsheetDto implements Serializable {
 	private String altMin;
 	@Element(required = false, name = "geo:long")
 	private String longitude;
-        @Element(required = false, name = "geo:lat")
+    @Element(required = false, name = "geo:lat")
 	private String latitude;
 	@Element(required = false)
 	private String sourceDb;
+	@ElementList(required = false, inline = true)
+	private List<AttributeDto> attributes;
+	
 	
 	/**
 	 * @return the rdfAbout
@@ -567,6 +572,14 @@ public class SiteFactsheetDto implements Serializable {
 
 	public void setDcmitype(ResourceDto dcmitype) {
 		this.dcmitype = dcmitype;
+	}
+
+	public List<AttributeDto> getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(List<AttributeDto> attributes) {
+		this.attributes = attributes;
 	}
 
 }

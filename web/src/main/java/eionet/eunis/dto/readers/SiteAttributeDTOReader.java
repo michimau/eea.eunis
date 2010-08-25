@@ -11,32 +11,28 @@ import ro.finsiel.eunis.utilities.ResultSetBaseReader;
 import eionet.eunis.dto.AttributeDto;
 
 /**
- * Reader class for {@link AttributeDto}.
+ * Reader class to read site related {@link AttributeDto} from database. 
+ * 
  * @author alex
  *
  * <a href="mailto:aleks21@gmail.com">contact<a>
  */
-public class SpeciesAttributeDTOReader extends ResultSetBaseReader<AttributeDto> {
+public class SiteAttributeDTOReader extends ResultSetBaseReader<AttributeDto> {
 
-	
 	private List<AttributeDto> results = new LinkedList<AttributeDto>();
 
-	public void readRow(ResultSet rs) throws SQLException {
-		String name = rs.getString("NAME");
-		String object = rs.getString("OBJECT");
-		Boolean litObject = rs.getBoolean("LITOBJECT");
-		if (StringUtils.isBlank(name)) {
-			return;
-		}
-		results.add(
-				new AttributeDto(
-						name,
-						litObject,
-						object));
-	}
-
+	@Override
 	public List<AttributeDto> getResultList() {
 		return results;
+	}
+
+	@Override
+	public void readRow(ResultSet rs) throws SQLException {
+		results.add(
+				new AttributeDto(
+						StringUtils.lowerCase(rs.getString("NAME")),
+						true,
+						rs.getString("VALUE")));
 	}
 
 }

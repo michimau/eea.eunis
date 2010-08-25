@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
 import eionet.eunis.dto.LegalReferenceDTO;
-import eionet.eunis.dto.SpeciesAttributeDto;
+import eionet.eunis.dto.AttributeDto;
 import eionet.eunis.dto.readers.LegalReferenceDTOReader;
 import eionet.eunis.dto.readers.SpeciesAttributeDTOReader;
 
@@ -106,7 +106,7 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
 		}
 	}
 
-	public List<SpeciesAttributeDto> getAttributesForNatureObject(int idNatureObject) {
+	public List<AttributeDto> getAttributesForNatureObject(int idNatureObject) {
 		String sql = "SELECT * FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES " +
 				"WHERE ID_NATURE_OBJECT = ? AND NAME NOT LIKE '\\_%'";
 		List<Object> params = new LinkedList<Object>();

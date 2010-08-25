@@ -15,11 +15,13 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 import org.dozer.DozerBeanMapperSingletonWrapper;
 import org.dozer.Mapper;
+import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.stream.Format;
 
 import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
+import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.SiteFactsheetDto;
 import eionet.eunis.util.Pair;
@@ -127,6 +129,9 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 			Mapper mapper = DozerBeanMapperSingletonWrapper.getInstance();
 			SiteFactsheetDto dto = mapper
 					.map(factsheet, SiteFactsheetDto.class);
+			dto.setAttributes(
+					DaoFactory.getDaoFactory().getSitesDao().getAttributes(
+							factsheet.getSiteObject().getIdSite()));
 			dto.setDcmitype(new ResourceDto("","http://purl.org/dc/dcmitype/Text"));
 			if (dto.getIdDc() != null && !"-1".equals(dto.getIdDc().getId())) {
 				dto.getIdDc().setPrefix("http://eunis.eea.europa.eu/documents/");
@@ -143,7 +148,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 			} else {
 				dto.setIdDesignation(null);
 			}
-			Persister persister = new Persister(new Format(4));
+			Persister persister = new Persister(new AnnotationStrategy(), new Format(4));
 			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 			try {
 				buffer.write(HEADER.getBytes("UTF-8"));

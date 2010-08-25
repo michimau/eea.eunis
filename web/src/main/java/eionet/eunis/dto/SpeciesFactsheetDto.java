@@ -63,7 +63,7 @@ public class SpeciesFactsheetDto implements Serializable{
 	private List<ResourceDto> expectedInLocations;
 	
 	@ElementList(required = false, inline = true)
-	private List<SpeciesAttributeDto> attributes;
+	private List<AttributeDto> attributes;
 	
 
 	private int speciesId;
@@ -115,10 +115,10 @@ public class SpeciesFactsheetDto implements Serializable{
 	public void setHasSynonyms(List<SpeciesSynonymDto> hasSynonyms) {
 		this.hasSynonyms = hasSynonyms;
 	}
-	public List<SpeciesAttributeDto> getAttributes() {
+	public List<AttributeDto> getAttributes() {
 		return attributes;
 	}
-	public void setAttributes(List<SpeciesAttributeDto> attributes) {
+	public void setAttributes(List<AttributeDto> attributes) {
 		this.attributes = attributes;
 	}
 

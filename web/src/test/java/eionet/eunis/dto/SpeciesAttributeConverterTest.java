@@ -7,12 +7,12 @@ import java.util.List;
 import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 
-import eionet.eunis.dto.SpeciesAttributeDto;
+import eionet.eunis.dto.AttributeDto;
 import eionet.eunis.dto.SpeciesFactsheetDto;
 import junit.framework.TestCase;
 
 /**
- * Unit test to test convertion mechanisms for {@link SpeciesAttributeDto}.
+ * Unit test to test convertion mechanisms for {@link AttributeDto}.
  * 
  * @author alex
  *
@@ -31,9 +31,9 @@ public class SpeciesAttributeConverterTest extends TestCase {
 		ResourceDto location = new ResourceDto("id", "prefix");
 		expectedInLocations.add(location);
 		tested.setExpectedInLocations(expectedInLocations);
-		List<SpeciesAttributeDto> attributes = new LinkedList<SpeciesAttributeDto>();
-		attributes.add(new SpeciesAttributeDto("literal", true, "literalValue"));
-		attributes.add(new SpeciesAttributeDto("link", false, "link_to_resource"));
+		List<AttributeDto> attributes = new LinkedList<AttributeDto>();
+		attributes.add(new AttributeDto("literal", true, "literalValue"));
+		attributes.add(new AttributeDto("link", false, "link_to_resource"));
 		tested.setAttributes(attributes);
 		Persister persister = new Persister(new AnnotationStrategy());
 		ByteArrayOutputStream output = new ByteArrayOutputStream();

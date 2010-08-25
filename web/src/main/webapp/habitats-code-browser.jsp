@@ -99,11 +99,11 @@
               {
                 Class.forName( SQL_DRV );
                 con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
-
+                
                 //we display root nodes
                 strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
                 strSQL = strSQL + " FROM CHM62EDT_HABITAT";
-                strSQL = strSQL + " WHERE LENGTH(EUNIS_HABITAT_CODE)=1";
+                strSQL = strSQL + " WHERE LENGTH(EUNIS_HABITAT_CODE) = 1";
                 strSQL = strSQL + " AND EUNIS_HABITAT_CODE<>'-'";
                 strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
 
@@ -129,7 +129,7 @@
 		                  strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
 		                  strSQL = strSQL + " FROM CHM62EDT_HABITAT";
 		                  strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+rs.getString("EUNIS_HABITAT_CODE").substring(0,1)+"%'";
-		                  strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)=2";
+		                  strSQL = strSQL + " AND LEVEL=2";
 		                  strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
 		
 		                  ps2 = con.prepareStatement( strSQL );
@@ -165,7 +165,7 @@
 		                       strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
 		                       strSQL = strSQL + " FROM CHM62EDT_HABITAT";
 		                       strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+rs2.getString("EUNIS_HABITAT_CODE").substring(0,2)+"%'";
-		                       strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)=4";
+		                       strSQL = strSQL + " AND LEVEL=3";
 		                       strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
 		
 		                       ps4 = con.prepareStatement( strSQL );
@@ -199,7 +199,7 @@
 		                           strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
 		                           strSQL = strSQL + " FROM CHM62EDT_HABITAT";
 		                           strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+rs4.getString("EUNIS_HABITAT_CODE").substring(0,4)+"%'";
-		                           strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)=5";
+		                           strSQL = strSQL + " AND LEVEL=4";
 		                           strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
 		
 		                           ps5 = con.prepareStatement( strSQL );
@@ -232,7 +232,7 @@
 		                               strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
 		                               strSQL = strSQL + " FROM CHM62EDT_HABITAT";
 		                               strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+rs5.getString("EUNIS_HABITAT_CODE").substring(0,5)+"%'";
-		                               strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)=6";
+		                               strSQL = strSQL + " AND LEVEL=5";
 		                               strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
 		
 		                               ps6 = con.prepareStatement( strSQL );
@@ -265,7 +265,7 @@
 		                                   strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
 		                                   strSQL = strSQL + " FROM CHM62EDT_HABITAT";
 		                                   strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+rs6.getString("EUNIS_HABITAT_CODE").substring(0,6)+"%'";
-		                                   strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE)=7";
+		                                   strSQL = strSQL + " AND LEVEL=6";
 		                                   strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
 		
 		                                   ps7 = con.prepareStatement( strSQL );
@@ -329,29 +329,6 @@
 		                  }
 		                  rs2.close();
 		                  ps2.close();
-		                  
-		                  //Hack for category X
-		                  if(!hasLevel2 && sqlc.EunisHabitatHasLowerLevels(rs.getString("EUNIS_HABITAT_CODE"))){
-		                	  strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, EUNIS_HABITAT_CODE";
-			                  strSQL = strSQL + " FROM CHM62EDT_HABITAT";
-			                  strSQL = strSQL + " WHERE EUNIS_HABITAT_CODE LIKE '"+rs.getString("EUNIS_HABITAT_CODE").substring(0,1)+"%'";
-			                  strSQL = strSQL + " AND LENGTH(EUNIS_HABITAT_CODE) > 2";
-			                  strSQL = strSQL + " ORDER BY EUNIS_HABITAT_CODE ASC";
-			
-			                  ps8 = con.prepareStatement( strSQL );
-			                  rs8 = ps8.executeQuery();
-			                  
-                              while(rs8.next())
-                              {
-	       			%>
-                                <li>
-                                  <img src="images/img_bullet.gif" alt="<%=rs8.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs8.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs8.getString("ID_HABITAT")%>"><%=rs8.getString("EUNIS_HABITAT_CODE")%> : <%=rs8.getString("SCIENTIFIC_NAME")%></a><br/>
-                                </li>
-    	   			<%
-                              }
-                              rs8.close();
-    		                  ps8.close();
-		                  }
 		
 		            %>
 		                  </ul>

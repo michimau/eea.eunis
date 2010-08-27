@@ -39,6 +39,7 @@ public class Natura2000ImportParser extends DefaultHandler {
         private PreparedStatement preparedStatementSiteAttribute;
         private PreparedStatement preparedStatementSiteRelatedDesignations;
         private PreparedStatement preparedStatementReportType;
+        private PreparedStatement preparedStatementUpdateManager;
         
         private String siteNatureObjectId;
         
@@ -113,6 +114,8 @@ public class Natura2000ImportParser extends DefaultHandler {
         private String siteImpactsIntensity;
         private String siteImpactsPercent;
         private String siteImpactsInfluence;
+        
+        private String responsible;
         
         private String ecoInfo;
         
@@ -874,6 +877,15 @@ public class Natura2000ImportParser extends DefaultHandler {
         			}
         		}
         		
+        		//Insert site MANAGER
+        		if(qName.equalsIgnoreCase("Responsible")) {
+        			responsible = buf.toString().trim();
+        			preparedStatementUpdateManager.setString(1, responsible);
+        			preparedStatementUpdateManager.setString(2, siteCode);
+        			
+        			preparedStatementUpdateManager.executeUpdate();
+        		}
+        		
         		if(qName.equalsIgnoreCase("Code")) {
         			siteImpactsCode = buf.toString().trim();
         		} else if(qName.equalsIgnoreCase("Intensity")) {
@@ -982,6 +994,9 @@ public class Natura2000ImportParser extends DefaultHandler {
             			"ALT_MIN=?, ALT_MAX=?, ALT_MEAN=? WHERE ID_SITE = ?";
             	this.preparedStatementSite = con.prepareStatement(querySites);
             	
+            	String queryUpdateManager = "UPDATE chm62edt_sites SET MANAGER = ? WHERE ID_SITE = ?";
+            	this.preparedStatementUpdateManager = con.prepareStatement(queryUpdateManager);
+            	
             	String queryBioRegion = "UPDATE chm62edt_site_attributes SET VALUE=? WHERE ID_SITE=? AND NAME=?";
             	this.preparedStatementBioRegion = con.prepareStatement(queryBioRegion);
             	
@@ -1072,6 +1087,9 @@ public class Natura2000ImportParser extends DefaultHandler {
                 
                 if(preparedStatementReportType != null) 
                 	preparedStatementReportType.close();
+                
+                if(preparedStatementUpdateManager != null) 
+                	preparedStatementUpdateManager.close();
                 
                 if(con != null) 
                 	con.close();

@@ -425,7 +425,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 	    	ncbi = factsheet.getLink(specie.getIdNatureObject(),Constants.SAME_SYNONYM_NCBI);
 	    	
 	    	String[][] linkTab = {
-	    		{Constants.ART17_SUMMARY,"Art. 17 summary"},
+	    		{Constants.ART17_SUMMARY,"Conservation status (art. 17)"},
 	    		{Constants.BBC_PAGE,"BBC page"},
 //	    		{Constants.BIOLIB_PAGE,"Biolib page"},
 	    		{Constants.BUG_GUIDE,"Bug Guide page"},

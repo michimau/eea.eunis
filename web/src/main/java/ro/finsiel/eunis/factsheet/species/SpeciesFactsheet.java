@@ -307,7 +307,6 @@ public class SpeciesFactsheet {
       " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT " +
       " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " +
       " WHERE A.ID_NATURE_OBJECT IN ( " + synonymsIDs + " )" +
-      " AND C.SOURCE_DB <> 'EMERALD'" +
       " GROUP BY C.ID_NATURE_OBJECT";
     try
     {
@@ -337,7 +336,6 @@ public class SpeciesFactsheet {
       " AND A.TYPE_RELATED_SPECIES='subspecies'" +
       " AND A.ID_SPECIES <> '" + getSpeciesObject().getIdSpecies() + "')" +
       " OR (A.SCIENTIFIC_NAME LIKE '" + getSpeciesObject().getScientificName() + " %')" +
-//            " AND C.SOURCE_DB <> 'EMERALD'" +
       " GROUP BY C.ID_NATURE_OBJECT";
     try
     {

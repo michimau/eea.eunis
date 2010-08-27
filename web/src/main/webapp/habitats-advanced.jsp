@@ -250,11 +250,14 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
   }
   // Load saved search
   if (request.getParameter("loadCriteria") != null && request.getParameter("loadCriteria").equalsIgnoreCase("yes")) {
+	  String rfw = (String)request.getParameter("fromWhere");
+	  String rcn = (String)request.getParameter("criterianame");
+	  String rsn = (String)request.getParameter("siteName");
 %>
 <jsp:include page="load-save-criteria.jsp">
-  <jsp:param name="fromWhere" value="<%=request.getParameter("fromWhere")%>"/>
-  <jsp:param name="criterianame" value="<%=request.getParameter("criterianame")%>"/>
-  <jsp:param name="siteName" value="<%=request.getParameter("siteName")%>"/>
+  <jsp:param name="fromWhere" value="<%=rfw%>"/>
+  <jsp:param name="criterianame" value="<%=rcn%>"/>
+  <jsp:param name="siteName" value="<%=rsn%>"/>
   <jsp:param name="natureobject" value="<%=NatureObject%>"/>
   <jsp:param name="idsession" value="<%=IdSession%>"/>
 </jsp:include>

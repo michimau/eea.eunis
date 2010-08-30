@@ -1,10 +1,10 @@
 package eionet.eunis.dao;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
-import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist;
+import eionet.eunis.api.LookupSpeciesResult;
+import eionet.eunis.api.SpeciesLookupSearchParam;
 
 /**
  * 
@@ -18,6 +18,14 @@ public interface ISpeciesDao {
 	 * @param List speciesIds
 	 */
 	void deleteSpecies(Map<String, String> species) throws SQLException;
+
+	/**
+	 * Based on the SpeciesLookupSearchParam lookups species.
+	 * 
+	 * @param speciesLookupSearchParam - search parameter.
+	 * @return search result.
+	 */
+	LookupSpeciesResult lookupSpecies(SpeciesLookupSearchParam speciesLookupSearchParam);
 	
 
 }

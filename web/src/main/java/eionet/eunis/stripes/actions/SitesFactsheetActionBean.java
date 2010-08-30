@@ -25,6 +25,7 @@ import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.SiteFactsheetDto;
 import eionet.eunis.util.Pair;
+import eionet.eunis.util.SimpleFrameworkUtils;
 
 /**
  * Action bean to handle sites-factsheet functionality.
@@ -148,20 +149,9 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 			} else {
 				dto.setIdDesignation(null);
 			}
-			Persister persister = new Persister(new AnnotationStrategy(), new Format(4));
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			try {
-				buffer.write(HEADER.getBytes("UTF-8"));
-				persister.write(dto, buffer, "UTF-8");
-				buffer.write(FOOTER.getBytes("UTF-8"));
-				buffer.flush();
-				return new StreamingResolution(
-						"application/rdf+xml",
-						buffer.toString("UTF-8"));
-			} catch (Exception e) {
-				logger.error(e);
-				throw new RuntimeException(e);
-			}
+			return new StreamingResolution(
+					"application/rdf+xml",
+					SimpleFrameworkUtils.convertToString(HEADER, dto, FOOTER));
 		} else {
 			return new ErrorResolution(404);
 		}

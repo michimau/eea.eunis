@@ -1,7 +1,6 @@
 package eionet.eunis.stripes.actions;
 
 import java.awt.Color;
-import java.io.ByteArrayOutputStream;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,9 +19,6 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
-import org.simpleframework.xml.convert.AnnotationStrategy;
-import org.simpleframework.xml.core.Persister;
-import org.simpleframework.xml.stream.Format;
 
 import ro.finsiel.eunis.ImageProcessing;
 import ro.finsiel.eunis.factsheet.species.GeographicalStatusWrapper;
@@ -58,6 +54,7 @@ import eionet.eunis.dto.SpeciesSynonymDto;
 import eionet.eunis.dto.VernacularNameDto;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
+import eionet.eunis.util.SimpleFrameworkUtils;
 
 /**
  * ActionBean to replace old /species-factsheet.jsp.
@@ -145,7 +142,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 
 	
 	@DefaultHandler
-	@SuppressWarnings("unchecked")
 	public Resolution index(){
 		String idSpeciesText = null;
 		if(tab == null || tab.length() == 0){
@@ -255,9 +251,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 			return new ErrorResolution(404);
 		}
 		
-		Persister persister = new Persister(new AnnotationStrategy(), new Format(4));
-		
-		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 		SpeciesFactsheetDto dto = new SpeciesFactsheetDto();
 		dto.setSpeciesId(factsheet.getSpeciesObject().getIdSpecies());
 		dto.setScientificName(factsheet.getSpeciesObject().getScientificName());
@@ -310,19 +303,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 			dto.setVernacularNames(vernacularDtos);
 		}
 		
-		try {
-			buffer.write(SpeciesFactsheetDto.HEADER.getBytes("UTF-8"));
-			persister.write(dto, buffer, "UTF-8");
-			buffer.write(SpeciesFactsheetDto.FOOTER.getBytes("UTF-8"));
-			buffer.flush();
-			return new StreamingResolution(
-					"application/rdf+xml",
-					buffer.toString("UTF-8"));
-		} catch (Exception ignored) {
-			logger.warn("exception while generating rdf for species, " + ignored);
-			throw new RuntimeException(ignored);
-		}
-//		return new ErrorResolution(404);
+		return new StreamingResolution(
+				"application/rdf+xml",
+				SimpleFrameworkUtils.convertToString(
+						SpeciesFactsheetDto.HEADER,
+						dto,
+						SpeciesFactsheetDto.FOOTER));
 	}
 	
 	private void generalTabActions(int mainIdSpecies) {

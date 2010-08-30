@@ -7,35 +7,60 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-
-import eionet.eunis.dao.ISpeciesDao;
+import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist;
+import eionet.eunis.api.LookupSpeciesResult;
+import eionet.eunis.api.SpeciesLookupSearchParam;
+import eionet.eunis.dao.ISpeciesDao;
+import eionet.eunis.dto.readers.LookupSpeciesReader;
 
 /**
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
 public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
+	
+	private static final Logger logger = Logger.getLogger(SpeciesDaoImpl.class);
 
 	public SpeciesDaoImpl() {
+	}
+
+	/* (non-Javadoc)
+	 * @see eionet.eunis.dao.ISpeciesDao#lookupSpecies(eionet.eunis.api.SpeciesLookupSearchParam)
+	 */
+	public LookupSpeciesResult lookupSpecies(SpeciesLookupSearchParam speciesLookupSearchParam) {
+		String query =  
+				" SELECT ID_SPECIES, SCIENTIFIC_NAME, AUTHOR," +
+				" levenshtein(LOWER(SCIENTIFIC_NAME), ?) AS DISTANCE, " +
+				" levenshtein(LOWER(SUBSTRING_INDEX(SCIENTIFIC_NAME,' ',1)), ?) AS DISTANCE_2 " +
+				" FROM chm62edt_species WHERE levenshtein(LOWER(SCIENTIFIC_NAME), ?) < ? " +
+				" ORDER BY DISTANCE_2, DISTANCE, SCIENTIFIC_NAME ";
+		List<Object> params = new LinkedList<Object>();
+		params.add(speciesLookupSearchParam.getSpeciesName());
+		params.add(speciesLookupSearchParam.getSpeciesName());
+		params.add(speciesLookupSearchParam.getSpeciesName());
+		params.add(speciesLookupSearchParam.getMaxLevenshteinDistance());
+		try {
+			LookupSpeciesReader lookupReader = new LookupSpeciesReader();
+			executeQuery(query, params, lookupReader);
+			return lookupReader.getLookupSpeciesResult();
+		} catch (SQLException e) {
+			logger.error("exception in lookupSpecies", e);
+			throw new RuntimeException(e);
+		}
 	}
 	
 	public void deleteSpecies(Map<String, String> species) throws SQLException {
 		Connection con = null;
 		Statement st = null;
 		Statement st2 = null;
-		PreparedStatement ps1 = null;
-		PreparedStatement ps2 = null;
-		PreparedStatement ps3 = null;
-		PreparedStatement ps4 = null;
-		PreparedStatement ps5 = null;
-		PreparedStatement ps6 = null;
+		List<PreparedStatement> statements = new LinkedList<PreparedStatement>();
 		
 	    try {
 	    	con = getConnection();
@@ -43,13 +68,12 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
 	    	st = con.createStatement();
 	    	st2 = con.createStatement();
 	    	
-	    	ps1 = con.prepareStatement("DELETE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?");
-	    	ps2 = con.prepareStatement("DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?");
-	    	ps3 = con.prepareStatement("DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT_LINK=?");
-	    	ps4 = con.prepareStatement("DELETE FROM chm62edt_nature_object_attributes WHERE ID_NATURE_OBJECT=?");
-	    	ps5 = con.prepareStatement("DELETE FROM chm62edt_tab_page_species WHERE ID_NATURE_OBJECT=?");
-	    	
-	    	ps6 = con.prepareStatement("DELETE FROM chm62edt_nature_object_picture WHERE ID_OBJECT=? AND NATURE_OBJECT_TYPE='Species'");
+	    	statements.add(con.prepareStatement("DELETE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?"));
+	    	statements.add(con.prepareStatement("DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?"));
+	    	statements.add(con.prepareStatement("DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT_LINK=?"));
+	    	statements.add(con.prepareStatement("DELETE FROM chm62edt_nature_object_attributes WHERE ID_NATURE_OBJECT=?"));
+	    	statements.add(con.prepareStatement("DELETE FROM chm62edt_tab_page_species WHERE ID_NATURE_OBJECT=?"));
+	    	statements.add(con.prepareStatement("DELETE FROM chm62edt_nature_object_picture WHERE ID_OBJECT=? AND NATURE_OBJECT_TYPE='Species'"));
 	    	
 	    	int counter = 0;
 	    	if(species != null){
@@ -89,39 +113,18 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
 					if(idReportTypeReportType != null)
 						st.addBatch("DELETE FROM chm62edt_report_type WHERE ID_REPORT_TYPE IN ("+idReportTypeReportType+")");
 					
-					ps1.setString(1, idNatureObject);
-					ps1.addBatch();
-					
-					ps2.setString(1, idNatureObject);
-					ps2.addBatch();
-					
-					ps3.setString(1, idNatureObject);
-					ps3.addBatch();
-					
-					ps4.setString(1, idNatureObject);
-					ps4.addBatch();
-			    	
-					ps5.setString(1, idNatureObject);
-					ps5.addBatch();
-					
-					ps6.setString(1, idNatureObject);
-					ps6.addBatch();
+					for (PreparedStatement statement : statements) {
+						statement.setString(1, idNatureObject);
+						statement.addBatch();
+					}
 					
 					if (counter % 10000 == 0){ 
 		        		st.executeBatch();
 		        		st.clearBatch();
-		        		ps1.executeBatch(); 
-		        		ps1.clearParameters();
-		        		ps2.executeBatch(); 
-		        		ps2.clearParameters();
-		        		ps3.executeBatch(); 
-		        		ps3.clearParameters();
-		        		ps4.executeBatch(); 
-		        		ps4.clearParameters();
-		        		ps5.executeBatch(); 
-		        		ps5.clearParameters();
-		        		ps6.executeBatch(); 
-		        		ps6.clearParameters();
+		        		for (PreparedStatement statement : statements) {
+		        			statement.executeBatch();
+		        			statement.clearParameters();
+		        		}
 		        		st2.executeBatch();
 		        		st2.clearBatch();
 		        		System.gc(); 
@@ -132,20 +135,12 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
 			if (!(counter % 10000 == 0)){ 
 				st.executeBatch();
 				st.clearBatch();
-        		ps1.executeBatch(); 
-        		ps1.clearParameters();
-        		ps2.executeBatch(); 
-        		ps2.clearParameters();
-        		ps3.executeBatch(); 
-        		ps3.clearParameters();
-        		ps4.executeBatch(); 
-        		ps4.clearParameters();
-        		ps5.executeBatch(); 
-        		ps5.clearParameters();
-        		ps6.executeBatch(); 
-        		ps6.clearParameters();
-        		st2.executeBatch();
-        		st2.clearBatch();
+				for (PreparedStatement statement : statements) {
+					statement.executeBatch();
+					statement.clearParameters();
+				}
+				st2.executeBatch();
+				st2.clearBatch();
         		System.gc(); 
             }
 	    	
@@ -154,12 +149,11 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
 	    } finally {
 	    	con.close();
 	    	st.close();
-	    	ps1.close();
-	    	ps2.close();
-	    	ps3.close();
-	    	ps4.close();
-	    	ps5.close();
-	    	ps6.close();
+	    	for (PreparedStatement statement : statements) {
+	    		if (statement != null) {
+	    			statement.close();
+	    		}
+	    	}
 	    	st2.close();
 	    }
 	}
@@ -179,6 +173,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
 		return ret;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private String getSynonymIds(String specieId, String natObId) throws SQLException {
 		List<String> synonyms = new ArrayList<String>();
 		synonyms.add(natObId);

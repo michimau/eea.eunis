@@ -126,7 +126,7 @@ public abstract class MySqlBaseDao {
 	 * @param conn
 	 * @throws SQLException
 	 */
-	public void executeQuery(String parameterizedSQL, List<Object> values, ResultSetBaseReader rsReader)
+	public <T> void executeQuery(String parameterizedSQL, List<Object> values, ResultSetBaseReader<T> rsReader)
 																											throws SQLException{
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;

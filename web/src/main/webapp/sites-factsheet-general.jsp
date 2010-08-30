@@ -560,6 +560,10 @@
                     out.print("<br />");
                   }
               }
+            } else if(factsheet.getSiteObject().getNuts() != null && !factsheet.getSiteObject().getNuts().equals("")) {
+%>
+				NUTS code <%=Utilities.formatString(factsheet.getSiteObject().getNuts())%>
+<%
             }
 %>
       </td>

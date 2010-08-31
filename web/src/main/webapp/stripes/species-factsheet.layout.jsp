@@ -27,7 +27,7 @@
 			
 			<img alt="${eunis:cms(actionBean.contentManagement,'loading_data')}" id="loading" src="images/loading.gif" />
 			  <h1 class="documentFirstHeading">
-				${actionBean.scientificName }
+				${eunis:replaceTags(actionBean.scientificName)}
 			  <c:if test="${actionBean.referedFromName != null}">
 			   <span class="redirection-msg">&#8213; redirected from <strong>${actionBean.referedFromName }</strong></span>
 			  </c:if>

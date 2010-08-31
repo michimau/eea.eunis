@@ -34,7 +34,7 @@
 								alt="${eunis:cms(actionBean.contentManagement, 'loading')}"
 								title="${eunis:cms(actionBean.contentManagement, 'loading')}" />
 						</c:if>
-						<h1 class="documentFirstHeading">${actionBean.factsheet.habitatScientificName}</h1>
+						<h1 class="documentFirstHeading">${eunis:replaceTags(actionBean.factsheet.habitatScientificName)}</h1>
 						<div class="documentActions">
 							<h5 class="hiddenStructure">${eunis:cmsPhrase(actionBean.contentManagement, 'Document Actions')}</h5>
 							<ul>

@@ -20,6 +20,7 @@
                  ro.finsiel.eunis.search.Utilities,
                  eionet.eunis.util.Constants,
                  java.util.List,
+                 ro.finsiel.eunis.utilities.EunisUtil,
                  ro.finsiel.eunis.jrfTables.Chm62edtHabitatReferencePersist"%>
 <%@ page import="java.util.Vector"%>
 
@@ -89,7 +90,7 @@
         </td>
         <td>
           <strong>
-            <%=factsheet.getHabitatDescription()%>
+            <%=EunisUtil.replaceTags(factsheet.getHabitatDescription())%>
           </strong>
         </td>
         <%-- Link to key navigation, taxonomic tree and diagram --%>
@@ -248,7 +249,7 @@
   </h2>
 
   <p>
-    <%=description.getDescription()%>
+    <%=EunisUtil.replaceTags(description.getDescription())%>
   </p>
 <%
       if (!description.getOwnerText().equalsIgnoreCase("n/a") && !description.getOwnerText().equalsIgnoreCase(""))

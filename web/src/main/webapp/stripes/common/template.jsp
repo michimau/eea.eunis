@@ -14,7 +14,7 @@
 		<head>
 			<base href="${actionBean.context.domainName}/"/>
 			<jsp:include page="/header-page.jsp">
-				<jsp:param name="metaDescription" value="${actionBean.metaDescription}" />
+				<jsp:param name="metaDescription" value="${eunis:replaceTags(actionBean.metaDescription)}" />
 			</jsp:include>
 			
 			<title>
@@ -23,7 +23,7 @@
 		        		EUNIS
 					</c:when>
 					<c:otherwise>
-						${pageTitle}
+						${eunis:replaceTags(pageTitle)}
 					</c:otherwise>
 				</c:choose>
 			</title>

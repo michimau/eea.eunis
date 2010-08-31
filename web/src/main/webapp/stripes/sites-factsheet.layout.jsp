@@ -53,7 +53,7 @@
 						<img id="loading" src="images/loading.gif"
 							alt="${eunis:cms(actionBean.contentManagement, 'loading')}"
 							title="${eunis:cms(actionBean.contentManagement, 'loading')}" />
-						<h1 class="documentFirstHeading">${actionBean.factsheet.siteObject.name }</h1>
+						<h1 class="documentFirstHeading">${eunis:replaceTags(actionBean.factsheet.siteObject.name)}</h1>
 						<div class="documentActions">
 							<h5 class="hiddenStructure">${eunis:cms(actionBean.contentManagement, 'Document Actions')}</h5>
 							${eunis:cmsTitle(actionBean.contentManagement, 'Document Actions')}

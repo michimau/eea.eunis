@@ -107,7 +107,7 @@
   		<script language="JavaScript" src="script/index.js" type="text/javascript"></script>
   		<title>
     		<%=application.getInitParameter("PAGE_TITLE")%>
-    		<%=cm.cmsPhrase( "EUNIS - Welcome to EUNIS Database" )%>
+    		<%=cm.cmsPhrase( "Welcome to EUNIS Database" )%>
   		</title>
   		<style type="text/css">
 			#portal-column-content #content {

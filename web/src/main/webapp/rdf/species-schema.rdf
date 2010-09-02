@@ -138,7 +138,7 @@
 		<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
 		<rdfs:label>Same species as</rdfs:label>
 		<rdfs:domain rdf:resource="#Species"/>
-		<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#sameAs"/>
+		<!-- <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#sameAs"/> -->
 		<rdfs:range rdf:resource="#Species"/>
 		<rdfs:comment>Used when two resources are the same species</rdfs:comment>
 	</owl:SymmetricProperty>

@@ -1,8 +1,10 @@
 package eionet.eunis.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
+import eionet.eunis.dto.SpeciesDTO;
 import eionet.eunis.api.LookupSpeciesResult;
 import eionet.eunis.api.SpeciesLookupSearchParam;
 
@@ -13,6 +15,12 @@ import eionet.eunis.api.SpeciesLookupSearchParam;
  */
 public interface ISpeciesDao {
 
+	
+	/**
+	 * Returns list of all species as SpeciesDTO objects
+	 */
+	public List<SpeciesDTO> getAllSpecies() throws SQLException;
+	
 	/**
 	 * Deletes species
 	 * @param List speciesIds

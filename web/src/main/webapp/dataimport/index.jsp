@@ -123,6 +123,14 @@
                 	</li>
                 </ul>
 		</fieldset>
+		<fieldset><legend>XML exporters</legend>
+				<ul>
+                	<li>
+                		<a href="<%=domainName%>/dataimport/speciesdump">Generate species XML dump</a><br/>
+                		The purpose of this page is to export all species from EUNIS database into XML file
+                	</li>
+                </ul>
+		</fieldset>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

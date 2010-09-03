@@ -6,15 +6,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.ibm.icu.util.StringTokenizer;
+
+import eionet.eunis.dao.ISpeciesDao;
+import eionet.eunis.dto.SpeciesDTO;
 import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist;
+import ro.finsiel.eunis.search.Utilities;
 import eionet.eunis.api.LookupSpeciesResult;
 import eionet.eunis.api.SpeciesLookupSearchParam;
 import eionet.eunis.dao.ISpeciesDao;
@@ -54,6 +60,108 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
 			logger.error("exception in lookupSpecies", e);
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public List<SpeciesDTO> getAllSpecies() throws SQLException {
+		
+		List<SpeciesDTO> ret = new ArrayList<SpeciesDTO>();
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String query = "SELECT SP.ID_SPECIES, SP.GENUS, SP.SCIENTIFIC_NAME, SP.AUTHOR, SP.VALID_NAME, " +
+				"SP.ID_SPECIES_LINK, SP.TYPE_RELATED_SPECIES, SP.ID_TAXONOMY, GS.COMMON_NAME, " +
+				"T.TAXONOMY_TREE, SOURCE.SOURCE, DATE.CREATED, NA1.OBJECT AS ITIS, NA2.OBJECT AS NCBI, " +
+				"NA3.OBJECT AS WORMS, NA4.OBJECT AS REDLIST, NA5.OBJECT AS FAEU, NA6.OBJECT AS GBIF " +
+				"FROM chm62edt_species AS SP " +
+				"LEFT JOIN chm62edt_group_species AS GS ON SP.ID_GROUP_SPECIES = GS.ID_GROUP_SPECIES " +
+				"LEFT JOIN chm62edt_taxonomy AS T ON SP.ID_TAXONOMY = T.ID_TAXONOMY " +
+				"LEFT JOIN dc_source AS SOURCE ON SP.ID_TAXONOMY = SOURCE.ID_DC " + 
+				"LEFT JOIN dc_date AS DATE ON SP.ID_TAXONOMY = DATE.ID_DC " +
+				"LEFT JOIN chm62edt_nature_object_attributes AS NA1 ON SP.ID_NATURE_OBJECT = NA1.ID_NATURE_OBJECT AND NA1.NAME = 'sameSynonymITIS' " +
+				"LEFT JOIN chm62edt_nature_object_attributes AS NA2 ON SP.ID_NATURE_OBJECT = NA2.ID_NATURE_OBJECT AND NA2.NAME = 'sameSynonymNCBI' " +
+				"LEFT JOIN chm62edt_nature_object_attributes AS NA3 ON SP.ID_NATURE_OBJECT = NA3.ID_NATURE_OBJECT AND NA3.NAME = 'sameSynonymWorMS' " +
+				"LEFT JOIN chm62edt_nature_object_attributes AS NA4 ON SP.ID_NATURE_OBJECT = NA4.ID_NATURE_OBJECT AND NA4.NAME = 'sameSynonymRedlist' " +
+				"LEFT JOIN chm62edt_nature_object_attributes AS NA5 ON SP.ID_NATURE_OBJECT = NA5.ID_NATURE_OBJECT AND NA5.NAME = 'sameSynonymFaEu' " +
+				"LEFT JOIN chm62edt_nature_object_attributes AS NA6 ON SP.ID_NATURE_OBJECT = NA6.ID_NATURE_OBJECT AND NA6.NAME = 'sameSynonymGBIF'";
+		
+		try {
+	    	con = getConnection();
+	    	ps = con.prepareStatement(query);
+			rs = ps.executeQuery();
+
+	    	while ( rs.next() ) {
+	    		String source = rs.getString("SOURCE");
+	    		Date date = rs.getDate("CREATED");
+	    		String taxonomyTree = rs.getString("TAXONOMY_TREE");
+	    		
+	    		String taxonomicReference = "";
+	    		if(source != null && source.length() > 0){
+	    			taxonomicReference = source;
+	    		}
+	    		if(date != null){
+	    			String strDate = Utilities.formatReferencesDate(date);
+	    			if(strDate != null && strDate.length() > 0)
+	    				taxonomicReference += " (" + strDate + ")";
+	    		}
+	    		
+	    		String kingdom = null;
+	    		String phylum = null;
+	    		String sclass = null;
+	    		String order = null;
+	    		String family = null;
+	    		
+	    		StringTokenizer st = new StringTokenizer(taxonomyTree,",");
+		    	while(st.hasMoreTokens()){
+		    		StringTokenizer sts = new StringTokenizer(st.nextToken(),"*");
+		    		String classification_id = sts.nextToken();
+		            String classification_level = sts.nextToken();
+		            String classification_name = sts.nextToken();
+		            
+		            if(classification_level.equalsIgnoreCase("Kingdom"))
+		            	kingdom = classification_name;
+		            else if(classification_level.equalsIgnoreCase("Phylum"))
+		            	phylum = classification_name;
+		            else if(classification_level.equalsIgnoreCase("Class"))
+		            	sclass = classification_name;
+		            else if(classification_level.equalsIgnoreCase("Order"))
+		            	order = classification_name;
+		            else if(classification_level.equalsIgnoreCase("Family"))
+		            	family = classification_name;
+		    	}
+		    	
+		    	SpeciesDTO species = new SpeciesDTO();
+		    	species.setIdSpecies(rs.getString("ID_SPECIES"));
+		    	species.setGenus(rs.getString("GENUS"));
+		    	species.setScientificName(rs.getString("SCIENTIFIC_NAME"));
+		    	species.setAuthor(rs.getString("AUTHOR"));
+		    	species.setValidName(rs.getString("VALID_NAME"));
+		    	species.setIdSpeciesLink(rs.getString("ID_SPECIES_LINK"));
+		    	species.setTypeRelatedSpecies(rs.getString("TYPE_RELATED_SPECIES"));
+		    	species.setGroupSpecies(rs.getString("COMMON_NAME"));
+		    	species.setTaxonomicReference(taxonomicReference);
+		    	species.setIdItis(rs.getString("ITIS"));
+		    	species.setIdNcbi(rs.getString("NCBI"));
+		    	species.setIdWorms(rs.getString("WORMS"));
+		    	species.setIdRedlist(rs.getString("REDLIST"));
+		    	species.setIdFaeu(rs.getString("FAEU"));
+		    	species.setIdGbif(rs.getString("GBIF"));
+		    	species.setKingdom(kingdom);
+		    	species.setPhylum(phylum);
+		    	species.setSpeciesClass(sclass);
+		    	species.setOrder(order);
+		    	species.setFamily(family);
+		    	
+		    	ret.add(species);
+	    	}
+
+		} catch ( Exception e ) {
+	    	e.printStackTrace();
+	    } finally {
+	    	closeAllResources(con, ps, rs);
+	    }
+		
+		return ret;
 	}
 	
 	public void deleteSpecies(Map<String, String> species) throws SQLException {

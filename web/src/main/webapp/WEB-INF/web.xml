@@ -522,6 +522,11 @@
 	
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
+		<url-pattern>/dataimport/speciesdump</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/api/lookup-species</url-pattern>
 	</servlet-mapping>
 

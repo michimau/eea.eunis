@@ -182,18 +182,7 @@ public class ReferencesDomain implements Paginable {
       con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
       //SQL = "(SELECT DISTINCT H.SCIENTIFIC_NAME  " +
-      SQL = "(SELECT DISTINCT H.ID_SPECIES,H.SCIENTIFIC_NAME  " +
-            "FROM CHM62EDT_SPECIES H " +
-            "INNER JOIN CHM62EDT_NATURE_OBJECT B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT " +
-            "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC " +
-//            "LEFT JOIN DC_SOURCE D ON A.ID_DC=D.ID_DC " +
-//            "LEFT JOIN DC_DATE E ON A.ID_DC=E.ID_DC " +
-//            "LEFT JOIN DC_TITLE F ON A.ID_DC=F.ID_DC " +
-//            "LEFT JOIN DC_PUBLISHER G ON A.ID_DC=G.ID_DC " +
-            "WHERE 1=1 " + condition +                         
-            " GROUP BY H.SCIENTIFIC_NAME) " +
-            "UNION " +
-            "(SELECT DISTINCT H.ID_SPECIES,H.SCIENTIFIC_NAME  " +
+      SQL = "SELECT DISTINCT H.ID_SPECIES,H.SCIENTIFIC_NAME  " +
             "FROM CHM62EDT_SPECIES H " +
             "INNER JOIN CHM62EDT_REPORTS B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT " +
             "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE " +
@@ -204,18 +193,7 @@ public class ReferencesDomain implements Paginable {
 //            "LEFT JOIN DC_PUBLISHER G ON A.ID_DC=G.ID_DC " +
             "WHERE 1=1 " + condition +
             " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONS_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') " +
-            " GROUP BY H.SCIENTIFIC_NAME) " +
-            "UNION " +
-            "(SELECT DISTINCT H.ID_SPECIES,H.SCIENTIFIC_NAME  " +
-            "FROM CHM62EDT_SPECIES H " +
-            "INNER JOIN CHM62EDT_TAXONOMY B ON H.ID_TAXONOMY=B.ID_TAXONOMY " +
-            "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC " +
-//            "LEFT JOIN DC_SOURCE D ON A.ID_DC=D.ID_DC " +
-//            "LEFT JOIN DC_DATE E ON A.ID_DC=E.ID_DC " +
-//            "LEFT JOIN DC_TITLE F ON A.ID_DC=F.ID_DC " +
-//            "LEFT JOIN DC_PUBLISHER G ON A.ID_DC=G.ID_DC " +
-            "WHERE  1=1 " + condition +
-            " GROUP BY H.SCIENTIFIC_NAME) " +
+            " GROUP BY H.SCIENTIFIC_NAME " +
             " ORDER BY SCIENTIFIC_NAME";
 
       //System.out.println("SQL = " + SQL);

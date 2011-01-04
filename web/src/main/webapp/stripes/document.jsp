@@ -105,18 +105,22 @@
 	            </c:if>
 	            <c:if test="${actionBean.tab == 'species'}">
 	            	<h2>List of species scientific names related to this reference:</h2>
+			<ol>
 	            	<c:forEach items="${actionBean.species}" var="spe" varStatus="loop">
-	            		<div style="background-color: ${loop.index % 2 == 0 ? '#FFFFFF' : '#EEEEEE'}">
+	            		<li style="background-color: ${loop.index % 2 == 0 ? '#FFFFFF' : '#EEEEEE'}">
                             <a href="species/${spe.key}">${spe.value}</a>
-                        </div>
+                        </li>
 	            	</c:forEach>
+			</ol>
 	            </c:if>
 	            <c:if test="${actionBean.tab == 'habitats'}">
 	            	<h2>List of habitats related to this reference:</h2>
+			<ol>
 	            	<c:forEach items="${actionBean.habitats}" var="habitat" varStatus="loop">
-	            		<div style="background-color: ${loop.index % 2 == 0 ? '#FFFFFF' : '#EEEEEE'}">
+	            		<li style="background-color: ${loop.index % 2 == 0 ? '#FFFFFF' : '#EEEEEE'}">
                             <a href="habitats/${habitat.key}">${habitat.value}</a>
-                        </div>
+                        </li>
+			</ol>
 	            	</c:forEach>
 	            </c:if>
 

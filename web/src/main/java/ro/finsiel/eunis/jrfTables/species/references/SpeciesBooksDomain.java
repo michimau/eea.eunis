@@ -173,7 +173,7 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
             "LEFT JOIN DC_TITLE F ON A.ID_DC=F.ID_DC " +
             "LEFT JOIN DC_PUBLISHER G ON A.ID_DC=G.ID_DC " +
             "WHERE 1=1 " + condition +
-            " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONS_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') " +
+            " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') " +
             " GROUP BY H.SCIENTIFIC_NAME) " +
             "UNION " +
             "(SELECT H.ID_SPECIES AS ID, H.ID_SPECIES_LINK AS ID_LINK, H.SCIENTIFIC_NAME AS NAME, " +
@@ -263,7 +263,7 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
               "LEFT JOIN DC_TITLE F ON A.ID_DC=F.ID_DC " +
               "LEFT JOIN DC_PUBLISHER G ON A.ID_DC=G.ID_DC " +
               "WHERE 1=1 " + condition +
-              " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONS_STATUS','SPECIES_GEO','LEGAL_STATUS'," +
+              " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS'," +
               "'SPECIES_STATUS','POPULATION_UNIT','TREND') " +
               "GROUP BY D.SOURCE,D.EDITOR,E.CREATED,F.TITLE,G.PUBLISHER " +
               "UNION " +

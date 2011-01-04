@@ -192,11 +192,10 @@ public class ReferencesDomain implements Paginable {
 //            "LEFT JOIN DC_TITLE F ON A.ID_DC=F.ID_DC " +
 //            "LEFT JOIN DC_PUBLISHER G ON A.ID_DC=G.ID_DC " +
             "WHERE 1=1 " + condition +
-            " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONS_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') " +
+// Note: 'SPECIES_GEO' isn't used in chm62edt_report_type
+            " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') " +
             " GROUP BY H.SCIENTIFIC_NAME " +
             " ORDER BY SCIENTIFIC_NAME";
-
-      //System.out.println("SQL = " + SQL);
 
       ps = con.prepareStatement(SQL);
       rs = ps.executeQuery(SQL);

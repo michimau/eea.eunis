@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
 import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
 import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
@@ -24,8 +26,11 @@ import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteRelationsDomain;
 import ro.finsiel.eunis.jrfTables.species.VernacularNamesDomain;
 import ro.finsiel.eunis.jrfTables.species.factsheet.ReportsDistributionStatusDomain;
 import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTypeSpeciesDomain;
+import ro.finsiel.eunis.utilities.SQLUtilities;
 
 public class TabScripts {
+	
+	private static final Logger logger = Logger.getLogger(TabScripts.class);
 	
 	private String SQL_DRV = "";
 	private String SQL_URL = "";
@@ -49,23 +54,25 @@ public class TabScripts {
 		  PreparedStatement ps = null;
 		  PreparedStatement ps2 = null;
 		  ResultSet rs = null;
+		  SQLUtilities sqlc = new SQLUtilities();
 
 		  try
 		  {
 			Class.forName( SQL_DRV );
 			con = DriverManager.getConnection( SQL_URL, SQL_USR, SQL_PWD );
+			
+            sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
 
 			String mainSql = "SELECT ID_NATURE_OBJECT, ID_SPECIES, ID_SPECIES_LINK FROM CHM62EDT_SPECIES WHERE TYPE_RELATED_SPECIES='Species'";
 			ps = con.prepareStatement(mainSql);
 			rs = ps.executeQuery();
+			logger.debug("=== Script started! ===");
 			while (rs.next()) {
 				// This routine generates so many objects that the garbage collector can't keep up
 				// We therefore run it manually for every 10.000 rows. There is no need for speed here.
 				if (rs.getRow() % 10000 == 0) {
 					System.gc();
-					// FIXME: Write a statement of progress to the import log.
-					// Something like:
-					//sql.addImportLogMessage("At row: " + rs.getRow());
+					sqlc.addImportLogMessage("Species tab generation at row: " + rs.getRow());
 				}
 				int noid = rs.getInt("ID_NATURE_OBJECT");
 				int speciesid = rs.getInt("ID_SPECIES");
@@ -174,6 +181,7 @@ public class TabScripts {
 		  catch ( Exception e )
 		  {
 			  e.printStackTrace();
+			  sqlc.addImportLogMessage("ERROR occured while generating species tab information: " + e.getMessage());			  
 		  }
 		  finally
 		  {

@@ -294,5 +294,18 @@ public class EunisUtil {
   			else
   				return s;
       }
+      
+      public static boolean isNumber(String in) {
+          
+          try {
+
+              Integer.parseInt(in); 
+          
+          } catch (NumberFormatException ex) {
+              return false;
+          }
+          
+          return true;
+      }
     
 }

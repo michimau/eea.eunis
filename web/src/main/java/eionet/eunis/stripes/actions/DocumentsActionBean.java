@@ -39,6 +39,7 @@ import eionet.eunis.dto.DcSubjectDTO;
 import eionet.eunis.dto.DcTitleDTO;
 import eionet.eunis.dto.DcTypeDTO;
 import eionet.eunis.dto.PairDTO;
+import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
 
 /**
@@ -100,7 +101,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
 		String eeaHome = getContext().getInitParameter("EEA_HOME");
 		String btrail = "";
 		IDocumentsDao dao = DaoFactory.getDaoFactory().getDocumentsDao();
-		if (!StringUtils.isBlank(iddoc)) {
+		if (!StringUtils.isBlank(iddoc) && EunisUtil.isNumber(iddoc)) {
 			forwardPage = "/stripes/document.jsp";
 			
 			String acceptHeader = getContext().getRequest().getHeader("accept");
@@ -160,6 +161,10 @@ public class DocumentsActionBean extends AbstractStripesAction {
 				tabsWithData.add(new Pair<String, String>("habitats",getContentManagement().cmsPhrase("Habitats")));
 			
 			setMetaDescription("document");
+		} else if (!StringUtils.isBlank(iddoc) && !EunisUtil.isNumber(iddoc)) {
+			handleEunisException("Document ID has to be a number!", Constants.SEVERITY_ERROR);
+			docs = dao.getDocuments();
+			setMetaDescription("documents");
 		} else {
 			btrail = "eea#" + eeaHome + ",home#index.jsp,documents";
 			

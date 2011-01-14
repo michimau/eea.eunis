@@ -30,8 +30,6 @@ import ro.finsiel.eunis.utilities.SQLUtilities;
 
 public class TabScripts {
 	
-	private static final Logger logger = Logger.getLogger(TabScripts.class);
-	
 	private String SQL_DRV = "";
 	private String SQL_URL = "";
 	private String SQL_USR = "";
@@ -66,7 +64,6 @@ public class TabScripts {
 			String mainSql = "SELECT ID_NATURE_OBJECT, ID_SPECIES, ID_SPECIES_LINK FROM CHM62EDT_SPECIES WHERE TYPE_RELATED_SPECIES='Species'";
 			ps = con.prepareStatement(mainSql);
 			rs = ps.executeQuery();
-			logger.debug("=== Script started! ===");
 			while (rs.next()) {
 				// This routine generates so many objects that the garbage collector can't keep up
 				// We therefore run it manually for every 10.000 rows. There is no need for speed here.
@@ -135,8 +132,7 @@ public class TabScripts {
 					      " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT " +
 					      " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT " +
 					      " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " +
-					      " WHERE A.ID_NATURE_OBJECT IN ( " + synonymsIDs + " )" +
-					      " AND C.SOURCE_DB <> 'EMERALD'";
+					      " WHERE A.ID_NATURE_OBJECT IN ( " + synonymsIDs + " )";
 				boolean sites = exists(s, con);
 				if (sites){
 					fields += "SITES='Y',";

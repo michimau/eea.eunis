@@ -61,7 +61,7 @@ public class TabScripts {
 			
             sqlc.Init(SQL_DRV,SQL_URL,SQL_USR,SQL_PWD);
 
-			String mainSql = "SELECT ID_NATURE_OBJECT, ID_SPECIES, ID_SPECIES_LINK FROM CHM62EDT_SPECIES WHERE TYPE_RELATED_SPECIES='Species'";
+			String mainSql = "SELECT ID_NATURE_OBJECT, ID_SPECIES, ID_SPECIES_LINK FROM CHM62EDT_SPECIES WHERE TYPE_RELATED_SPECIES IN ('Species','Subspecies')";
 			ps = con.prepareStatement(mainSql);
 			rs = ps.executeQuery();
 			while (rs.next()) {

@@ -182,8 +182,8 @@ public class SimilarNameDomain extends AbstractDomain implements Paginable {
 		}
 		if(results != null && results.size() > pageSize){
 			int offsetEnd = offsetStart + pageSize;
-			if(offsetEnd > (results.size() - 1))
-				offsetEnd = results.size() - 1;
+			if(offsetEnd >= results.size())
+				offsetEnd = results.size();
 			results = results.subList(offsetStart, offsetEnd);
 		}
 		//_resultCount = new Long( -1 );// After each query, reset the _resultCount, so countResults do correct numbering.

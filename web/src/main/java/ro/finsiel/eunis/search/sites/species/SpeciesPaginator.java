@@ -1,7 +1,9 @@
 package ro.finsiel.eunis.search.sites.species;
 
+
 import ro.finsiel.eunis.search.AbstractPaginator;
 import ro.finsiel.eunis.search.Paginable;
+
 
 /**
  * Paginator class for sites->species.
@@ -9,12 +11,12 @@ import ro.finsiel.eunis.search.Paginable;
  */
 public class SpeciesPaginator extends AbstractPaginator {
 
-  /**
-   * Ctor.
-   * @param finder Data factory.
-   */
-  public SpeciesPaginator(Paginable finder) {
-    init(finder);
-  }
+    /**
+     * Ctor.
+     * @param finder Data factory.
+     */
+    public SpeciesPaginator(Paginable finder) {
+        init(finder);
+    }
 
 }

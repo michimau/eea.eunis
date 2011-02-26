@@ -71,10 +71,12 @@ public class RelatedReportsUtil {
 
             try {
                 // Try to remove it first from database
-                List files = new EunisRelatedReportsDomain().findWhere("FILE_NAME='" + filenames[i] + "'");
+                List files = new EunisRelatedReportsDomain().findWhere(
+                        "FILE_NAME='" + filenames[i] + "'");
 
                 if (files.size() > 0) {
-                    EunisRelatedReportsPersist rowObject = (EunisRelatedReportsPersist) files.get(0);
+                    EunisRelatedReportsPersist rowObject = (EunisRelatedReportsPersist) files.get(
+                            0);
 
                     file = new File(uploadDir + filenames[i]);
                     new EunisRelatedReportsDomain().delete(rowObject); // Delete from database
@@ -83,12 +85,14 @@ public class RelatedReportsUtil {
                         file.delete();
                     } else {
                         System.out.println(
-                                RelatedReportsUtil.class.getName() + "::deleteFiles() - Warning: Trying to delete invalid file:"
-                                + file.getAbsolutePath());
+                                RelatedReportsUtil.class.getName()
+                                        + "::deleteFiles() - Warning: Trying to delete invalid file:"
+                                        + file.getAbsolutePath());
                     }
                 } else {
                     // File not found in database so we exit abnormally from this method.
-                    throw new Exception("RelatedReportsUtil::deleteFiles(...) : Unable to delete file.");
+                    throw new Exception(
+                            "RelatedReportsUtil::deleteFiles(...) : Unable to delete file.");
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -104,10 +108,12 @@ public class RelatedReportsUtil {
         for (int i = 0; i < filenames.length; i++) {
             try {
                 // Try to find it in database
-                List files = new EunisRelatedReportsDomain().findWhere("FILE_NAME='" + filenames[i] + "'");
+                List files = new EunisRelatedReportsDomain().findWhere(
+                        "FILE_NAME='" + filenames[i] + "'");
 
                 if (files.size() > 0) {
-                    EunisRelatedReportsPersist rowObject = (EunisRelatedReportsPersist) files.get(0);
+                    EunisRelatedReportsPersist rowObject = (EunisRelatedReportsPersist) files.get(
+                            0);
 
                     rowObject.setApproved(new Integer(1));
                     new EunisRelatedReportsDomain().save(rowObject); // Save it back to database

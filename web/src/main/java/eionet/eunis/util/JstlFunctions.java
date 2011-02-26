@@ -17,7 +17,7 @@ import ro.finsiel.eunis.utilities.EunisUtil;
 
 /**
  * Collection of eunis JSTL functions.
- * 
+ *
  * @author Aleksandr Ivanov
  * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
@@ -27,7 +27,7 @@ public class JstlFunctions {
 
     /**
      * jstl wrapper to factsheet.exists();
-     * 
+     *
      * @param factsheet
      * @return
      */
@@ -47,13 +47,13 @@ public class JstlFunctions {
     }
 
     /**
-     * 
+     *
      * @param cms
      * @param key
      * @return
      */
     public static String cms(WebContentManagement cms, String key) {
-        if (key == null) { 
+        if (key == null) {
             throw new NullPointerException("key cannot be null");
         }
         return cms != null ? cms.cms(key) : key;
@@ -65,7 +65,7 @@ public class JstlFunctions {
      * @return
      */
     public static String cmsTitle(WebContentManagement cms, String key) {
-        if (key == null) { 
+        if (key == null) {
             throw new NullPointerException("key cannot be null");
         }
         return cms != null ? cms.cmsTitle(key) : key;
@@ -77,7 +77,7 @@ public class JstlFunctions {
      * @return
      */
     public static String cmsInput(WebContentManagement cms, String key) {
-        if (key == null) { 
+        if (key == null) {
             throw new NullPointerException("key cannot be null");
         }
         return cms != null ? cms.cmsInput(key) : key;
@@ -89,7 +89,7 @@ public class JstlFunctions {
      * @return
      */
     public static String cmsLabel(WebContentManagement cms, String key) {
-        if (key == null) { 
+        if (key == null) {
             throw new NullPointerException("key cannot be null");
         }
         return cms != null ? cms.cmsLabel(key) : key;
@@ -101,7 +101,7 @@ public class JstlFunctions {
      * @return
      */
     public static String cmsPhrase(WebContentManagement cms, String key) {
-        if (key == null) { 
+        if (key == null) {
             throw new NullPointerException("key cannot be null");
         }
         return cms != null ? cms.cmsPhrase(key) : key;
@@ -113,7 +113,7 @@ public class JstlFunctions {
      * @return
      */
     public static String cmsMsg(WebContentManagement cms, String key) {
-        if (key == null) { 
+        if (key == null) {
             throw new NullPointerException("key cannot be null");
         }
         return cms != null ? cms.cmsMsg(key) : key;
@@ -125,7 +125,7 @@ public class JstlFunctions {
      * @return
      */
     public static String cmsAlt(WebContentManagement cms, String key) {
-        if (key == null) { 
+        if (key == null) {
             throw new NullPointerException("key cannot be null");
         }
         return cms != null ? cms.cmsAlt(key) : key;
@@ -140,7 +140,7 @@ public class JstlFunctions {
     }
 
     /**
-     * 
+     *
      * @param in
      * @return
      */
@@ -149,14 +149,15 @@ public class JstlFunctions {
     }
 
     /**
-     * 
+     *
      * @param in
      * @param dontCreateHTMLAnchors
      * @param dontCreateHTMLLineBreaks
      * @return
      */
     public static String replaceTags(String in, boolean dontCreateHTMLAnchors, boolean dontCreateHTMLLineBreaks) {
-        return EunisUtil.replaceTags(in, dontCreateHTMLAnchors, dontCreateHTMLLineBreaks);
+        return EunisUtil.replaceTags(in, dontCreateHTMLAnchors,
+                dontCreateHTMLLineBreaks);
     }
 
     /**
@@ -270,12 +271,14 @@ public class JstlFunctions {
         String author = "";
 
         try {
-            List references = new ReferencesJoinDomain().findWhere("DC_INDEX.ID_DC = " + idDc);
+            List references = new ReferencesJoinDomain().findWhere(
+                    "DC_INDEX.ID_DC = " + idDc);
 
             if (references != null && references.size() > 0) {
-                author = (((ReferencesJoinPersist) references.get(0)).getSource() == null
-                        ? ""
-                        : ((ReferencesJoinPersist) references.get(0)).getSource());
+                author = (((ReferencesJoinPersist) references.get(0)).getSource()
+                        == null
+                                ? ""
+                                : ((ReferencesJoinPersist) references.get(0)).getSource());
                 author = treatURLSpecialCharacters(author);
             }
         } catch (Exception ex) {
@@ -312,7 +315,7 @@ public class JstlFunctions {
 
     /**
      *
-     * @param input 
+     * @param input
      */
     public static boolean isCountry(String countryName) {
         return Utilities.isCountry(countryName);

@@ -1,11 +1,12 @@
 /*
  * $Id
-*/
+ */
 
 package ro.finsiel.eunis.jrfTables;
 
 
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  *
@@ -13,131 +14,136 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class Chm62edtHabitatGlossaryPersist extends PersistentObject {
 
-  /**
-   * This is a database field.
-   **/
-  private String i_term = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_source = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_definition = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_reference = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_modifiedDate = null;
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idDc = null;
+    /**
+     * This is a database field.
+     **/
+    private String i_term = null;
 
-  public Chm62edtHabitatGlossaryPersist() {
-    super();
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_source = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getDefinition() {
-    return i_definition;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_definition = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdDc() {
-    return i_idDc;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_reference = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getModifiedDate() {
-    return i_modifiedDate;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_modifiedDate = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getReference() {
-    return i_reference;
-  }
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idDc = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getSource() {
-    return i_source;
-  }
+    public Chm62edtHabitatGlossaryPersist() {
+        super();
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getTerm() {
-    return i_term;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getDefinition() {
+        return i_definition;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param definition
-   **/
-  public void setDefinition(String definition) {
-    i_definition = definition;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdDc() {
+        return i_idDc;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idDc
-   **/
-  public void setIdDc(Integer idDc) {
-    i_idDc = idDc;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getModifiedDate() {
+        return i_modifiedDate;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param modifiedDate
-   **/
-  public void setModifiedDate(String modifiedDate) {
-    i_modifiedDate = modifiedDate;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getReference() {
+        return i_reference;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param reference
-   **/
-  public void setReference(String reference) {
-    i_reference = reference;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getSource() {
+        return i_source;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param source
-   **/
-  public void setSource(String source) {
-    i_source = source;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getTerm() {
+        return i_term;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param term
-   **/
-  public void setTerm(String term) {
-    i_term = term;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param definition
+     **/
+    public void setDefinition(String definition) {
+        i_definition = definition;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idDc
+     **/
+    public void setIdDc(Integer idDc) {
+        i_idDc = idDc;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param modifiedDate
+     **/
+    public void setModifiedDate(String modifiedDate) {
+        i_modifiedDate = modifiedDate;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param reference
+     **/
+    public void setReference(String reference) {
+        i_reference = reference;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param source
+     **/
+    public void setSource(String source) {
+        i_source = source;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param term
+     **/
+    public void setTerm(String term) {
+        i_term = term;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
 
 }

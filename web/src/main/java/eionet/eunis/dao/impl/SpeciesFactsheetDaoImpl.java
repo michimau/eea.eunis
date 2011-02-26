@@ -23,7 +23,8 @@ import eionet.eunis.dto.readers.SpeciesAttributeDTOReader;
  */
 public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFactsheetDao {
 
-    private static final Logger logger = Logger.getLogger(SpeciesFactsheetDaoImpl.class);
+    private static final Logger logger = Logger.getLogger(
+            SpeciesFactsheetDaoImpl.class);
 
     public SpeciesFactsheetDaoImpl() {}
 
@@ -36,10 +37,14 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
             return 0;
         }
         String sql = "SELECT ID_SPECIES FROM CHM62EDT_SPECIES WHERE SCIENTIFIC_NAME = '"
-                + StringEscapeUtils.escapeSql(StringEscapeUtils.unescapeHtml(idSpecies)) + "'";
+                + StringEscapeUtils.escapeSql(
+                        StringEscapeUtils.unescapeHtml(idSpecies))
+                        + "'";
         String result = ExecuteSQL(sql);
 
-        return StringUtils.isNumeric(result) && !StringUtils.isBlank(result) ? new Integer(result) : 0;
+        return StringUtils.isNumeric(result) && !StringUtils.isBlank(result)
+                ? new Integer(result)
+                : 0;
     }
 
     /**
@@ -47,7 +52,8 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
      * {@inheritDoc}
      */
     public String getScientificName(int idSpecies) {
-        String sql = "SELECT SCIENTIFIC_NAME FROM CHM62EDT_SPECIES WHERE ID_SPECIES = " + idSpecies;
+        String sql = "SELECT SCIENTIFIC_NAME FROM CHM62EDT_SPECIES WHERE ID_SPECIES = "
+                + idSpecies;
 
         return ExecuteSQL(sql);
     }
@@ -61,10 +67,13 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
         if (idSpecies <= 0) {
             return 0;
         }
-        String synonymSQL = "SELECT ID_SPECIES_LINK FROM CHM62EDT_SPECIES WHERE ID_SPECIES = " + idSpecies;
+        String synonymSQL = "SELECT ID_SPECIES_LINK FROM CHM62EDT_SPECIES WHERE ID_SPECIES = "
+                + idSpecies;
         String result = ExecuteSQL(synonymSQL);
 
-        return StringUtils.isNumeric(result) && StringUtils.isNotBlank(result) ? new Integer(result) : 0;
+        return StringUtils.isNumeric(result) && StringUtils.isNotBlank(result)
+                ? new Integer(result)
+                : 0;
     }
 
     /* (non-Javadoc)
@@ -107,7 +116,8 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
     }
 
     public List<AttributeDto> getAttributesForNatureObject(int idNatureObject) {
-        String sql = "SELECT * FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES " + "WHERE ID_NATURE_OBJECT = ? AND NAME NOT LIKE '\\_%'";
+        String sql = "SELECT * FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES "
+                + "WHERE ID_NATURE_OBJECT = ? AND NAME NOT LIKE '\\_%'";
         List<Object> params = new LinkedList<Object>();
 
         params.add(idNatureObject);
@@ -129,12 +139,14 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
         // String sql = "SELECT DISTINCT ID_SITE FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE R " +
         // "INNER JOIN CHM62EDT_SITES S ON R.ID_NATURE_OBJECT=S.ID_NATURE_OBJECT " +
         // "WHERE ID_NATURE_OBJECT_LINK= ? ORDER BY ID_SITE ";
-        String synonymsIDs = SpeciesFactsheet.getSpeciesSynonymsCommaSeparated(idNatureObject, idSpecies);
+        String synonymsIDs = SpeciesFactsheet.getSpeciesSynonymsCommaSeparated(
+                idNatureObject, idSpecies);
 
         String sql = "SELECT C.ID_SITE " + " FROM CHM62EDT_SPECIES AS A "
                 + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
-                + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT " + " WHERE A.ID_NATURE_OBJECT IN ( "
-                + synonymsIDs + " ) " + " GROUP BY C.ID_NATURE_OBJECT " + " ORDER BY C.ID_SITE";
+                + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+                + " WHERE A.ID_NATURE_OBJECT IN ( " + synonymsIDs + " ) "
+                + " GROUP BY C.ID_NATURE_OBJECT " + " ORDER BY C.ID_SITE";
         List<Object> params = new LinkedList<Object>();
 
         if (limit > 0) {

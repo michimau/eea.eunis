@@ -1,11 +1,12 @@
 /*
  * $Id
-*/
+ */
 
 package ro.finsiel.eunis.jrfTables;
 
 
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  *
@@ -13,291 +14,304 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class DcRelationPersist extends PersistentObject {
 
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idDc = null;
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idRelation = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_relation = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_isVersionOf = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_hasVersion = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_isReplacedBy = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_isRequiredBy = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_requires = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_isPartOf = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_hasPart = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_isReferencedBy = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_References = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_isFormatOf = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_hasFormat = null;
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idDc = null;
 
-  public DcRelationPersist() {
-    super();
-  }
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idRelation = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getHasFormat() {
-    return i_hasFormat;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_relation = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getHasPart() {
-    return i_hasPart;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_isVersionOf = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getHasVersion() {
-    return i_hasVersion;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_hasVersion = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdDc() {
-    return i_idDc;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_isReplacedBy = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdRelation() {
-    return i_idRelation;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_isRequiredBy = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIsFormatOf() {
-    return i_isFormatOf;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_requires = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIsPartOf() {
-    return i_isPartOf;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_isPartOf = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIsReferencedBy() {
-    return i_isReferencedBy;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_hasPart = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIsReplacedBy() {
-    return i_isReplacedBy;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_isReferencedBy = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIsRequiredBy() {
-    return i_isRequiredBy;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_References = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIsVersionOf() {
-    return i_isVersionOf;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_isFormatOf = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getReferences() {
-    return i_References;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_hasFormat = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getRelation() {
-    return i_relation;
-  }
+    public DcRelationPersist() {
+        super();
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getRequires() {
-    return i_requires;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getHasFormat() {
+        return i_hasFormat;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param hasFormat
-   **/
-  public void setHasFormat(String hasFormat) {
-    i_hasFormat = hasFormat;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getHasPart() {
+        return i_hasPart;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param hasPart
-   **/
-  public void setHasPart(String hasPart) {
-    i_hasPart = hasPart;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getHasVersion() {
+        return i_hasVersion;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param hasVersion
-   **/
-  public void setHasVersion(String hasVersion) {
-    i_hasVersion = hasVersion;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdDc() {
+        return i_idDc;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idDc
-   **/
-  public void setIdDc(Integer idDc) {
-    i_idDc = idDc;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdRelation() {
+        return i_idRelation;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idRelation
-   **/
-  public void setIdRelation(Integer idRelation) {
-    i_idRelation = idRelation;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIsFormatOf() {
+        return i_isFormatOf;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param isFormatOf
-   **/
-  public void setIsFormatOf(String isFormatOf) {
-    i_isFormatOf = isFormatOf;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIsPartOf() {
+        return i_isPartOf;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param isPartOf
-   **/
-  public void setIsPartOf(String isPartOf) {
-    i_isPartOf = isPartOf;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIsReferencedBy() {
+        return i_isReferencedBy;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param isReferencedBy
-   **/
-  public void setIsReferencedBy(String isReferencedBy) {
-    i_isReferencedBy = isReferencedBy;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIsReplacedBy() {
+        return i_isReplacedBy;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param isReplacedBy
-   **/
-  public void setIsReplacedBy(String isReplacedBy) {
-    i_isReplacedBy = isReplacedBy;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIsRequiredBy() {
+        return i_isRequiredBy;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param isRequiredBy
-   **/
-  public void setIsRequiredBy(String isRequiredBy) {
-    i_isRequiredBy = isRequiredBy;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIsVersionOf() {
+        return i_isVersionOf;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param isVersionOf
-   **/
-  public void setIsVersionOf(String isVersionOf) {
-    i_isVersionOf = isVersionOf;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getReferences() {
+        return i_References;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param References
-   **/
-  public void setReferences(String References) {
-    i_References = References;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getRelation() {
+        return i_relation;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param relation
-   **/
-  public void setRelation(String relation) {
-    i_relation = relation;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getRequires() {
+        return i_requires;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param requires
-   **/
-  public void setRequires(String requires) {
-    i_requires = requires;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param hasFormat
+     **/
+    public void setHasFormat(String hasFormat) {
+        i_hasFormat = hasFormat;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param hasPart
+     **/
+    public void setHasPart(String hasPart) {
+        i_hasPart = hasPart;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param hasVersion
+     **/
+    public void setHasVersion(String hasVersion) {
+        i_hasVersion = hasVersion;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idDc
+     **/
+    public void setIdDc(Integer idDc) {
+        i_idDc = idDc;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idRelation
+     **/
+    public void setIdRelation(Integer idRelation) {
+        i_idRelation = idRelation;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param isFormatOf
+     **/
+    public void setIsFormatOf(String isFormatOf) {
+        i_isFormatOf = isFormatOf;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param isPartOf
+     **/
+    public void setIsPartOf(String isPartOf) {
+        i_isPartOf = isPartOf;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param isReferencedBy
+     **/
+    public void setIsReferencedBy(String isReferencedBy) {
+        i_isReferencedBy = isReferencedBy;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param isReplacedBy
+     **/
+    public void setIsReplacedBy(String isReplacedBy) {
+        i_isReplacedBy = isReplacedBy;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param isRequiredBy
+     **/
+    public void setIsRequiredBy(String isRequiredBy) {
+        i_isRequiredBy = isRequiredBy;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param isVersionOf
+     **/
+    public void setIsVersionOf(String isVersionOf) {
+        i_isVersionOf = isVersionOf;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param References
+     **/
+    public void setReferences(String References) {
+        i_References = References;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param relation
+     **/
+    public void setRelation(String relation) {
+        i_relation = relation;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param requires
+     **/
+    public void setRequires(String requires) {
+        i_requires = requires;
+        this.markModifiedPersistentState();
+    }
 
 }

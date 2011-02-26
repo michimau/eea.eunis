@@ -1,11 +1,13 @@
 package ro.finsiel.eunis.jrfTables;
 
+
 /**
  * Date: May 5, 2003
  * Time: 11:31:33 AM
  */
 
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  *
@@ -14,128 +16,135 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class Chm62edtSitesAttributesPersist extends PersistentObject {
 
-  /**
-   * This is a database field.
-   **/
-  private String i_idSite = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_name = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_type = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_value = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_sourceDb = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_sourceTable = null;
+    /**
+     * This is a database field.
+     **/
+    private String i_idSite = null;
 
-  public Chm62edtSitesAttributesPersist() {
-    super();
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_name = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getSourceDb() {
-    return i_sourceDb;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_type = null;
 
-  /**
-   * Setter for a database field.
-   **/
-  public void setSourceDb(String sourceDb) {
-    this.i_sourceDb = sourceDb;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_value = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getSourceTable() {
-    return i_sourceTable;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_sourceDb = null;
 
-  /**
-   * Setter for a database field.
-   **/
-  public void setSourceTable(String sourceTable) {
-    this.i_sourceTable = sourceTable;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_sourceTable = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIdSite() {
-    return i_idSite;
-  }
+    public Chm62edtSitesAttributesPersist() {
+        super();
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getName() {
-    return i_name;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getSourceDb() {
+        return i_sourceDb;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getType() {
-    return i_type;
-  }
+    /**
+     * Setter for a database field.
+     **/
+    public void setSourceDb(String sourceDb) {
+        this.i_sourceDb = sourceDb;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getValue() {
-    if (null == i_value) return "";
-    return i_value;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getSourceTable() {
+        return i_sourceTable;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idSite
-   **/
-  public void setIdSite(String idSite) {
-    i_idSite = idSite;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     **/
+    public void setSourceTable(String sourceTable) {
+        this.i_sourceTable = sourceTable;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param name
-   **/
-  public void setName(String name) {
-    i_name = name;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIdSite() {
+        return i_idSite;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param type
-   **/
-  public void setType(String type) {
-    i_type = type;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getName() {
+        return i_name;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param value
-   **/
-  public void setValue(String value) {
-    i_value = value;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getType() {
+        return i_type;
+    }
+
+    /**
+     * Getter for a database field.
+     **/
+    public String getValue() {
+        if (null == i_value) {
+            return "";
+        }
+        return i_value;
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idSite
+     **/
+    public void setIdSite(String idSite) {
+        i_idSite = idSite;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param name
+     **/
+    public void setName(String name) {
+        i_name = name;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param type
+     **/
+    public void setType(String type) {
+        i_type = type;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param value
+     **/
+    public void setValue(String value) {
+        i_value = value;
+        this.markModifiedPersistentState();
+    }
 }

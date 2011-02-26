@@ -72,8 +72,9 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
      */
     public void statement(AResource subject, AResource predicate, AResource object) {
 
-        statement(subject, predicate, object.isAnonymous() ? object.getAnonymousID() : object.getURI(), EMPTY_STRING, false,
-                object.isAnonymous());
+        statement(subject, predicate,
+                object.isAnonymous() ? object.getAnonymousID() : object.getURI(),
+                EMPTY_STRING, false, object.isAnonymous());
     }
 
     /*
@@ -82,7 +83,8 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
      */
     public void statement(AResource subject, AResource predicate, ALiteral object) {
 
-        statement(subject, predicate, object.toString(), object.getLang(), true, false);
+        statement(subject, predicate, object.toString(), object.getLang(), true,
+                false);
     }
 
     /**
@@ -99,7 +101,8 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
 
         try {
             if (predicate.toString().equals(RDF.type.toString())
-                    && object.equals("http://rdf.geospecies.org/ont/geospecies#SpeciesConcept")) {
+                    && object.equals(
+                            "http://rdf.geospecies.org/ont/geospecies#SpeciesConcept")) {
                 if (dto != null) {
                     insert(dto);
                 }
@@ -111,7 +114,8 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
                 if (predicate.toString().equals(geo_ns + "hasCanonicalName")) {
                     dto.setHasCanonicalName(object);
                 }
-                if (predicate.toString().equals(geo_ns + "hasScientificNameAuthorship")) {
+                if (predicate.toString().equals(
+                        geo_ns + "hasScientificNameAuthorship")) {
                     dto.setHasScientificNameAutorship(object);
                 }
                 if (predicate.toString().equals(geo_ns + "hasScientificName")) {
@@ -155,13 +159,17 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
                     String sql_author = rs.getString("AUTHOR");
                     int valid_name = rs.getInt("VALID_NAME");
 
-                    if (author != null && sql_author != null && author.equals(sql_author)) {
-                        insertExternalObject(natob_id, "sameSynonym", identifier, sciName);
+                    if (author != null && sql_author != null
+                            && author.equals(sql_author)) {
+                        insertExternalObject(natob_id, "sameSynonym", identifier,
+                                sciName);
                         if (valid_name == 1) {
-                            insertExternalObject(natob_id, "sameSpecies", identifier, sciName);
+                            insertExternalObject(natob_id, "sameSpecies",
+                                    identifier, sciName);
                         }
                     } else {
-                        insertExternalObject(natob_id, "maybeSameSynonym", identifier, sciName);
+                        insertExternalObject(natob_id, "maybeSameSynonym",
+                                identifier, sciName);
                     }
                 }
             } catch (Exception e) {
@@ -230,11 +238,13 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
 
         boolean ret = false;
 
-        String query = "SELECT OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE ID_NATURE_OBJECT=" + natob_id
+        String query = "SELECT OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE ID_NATURE_OBJECT="
+                + natob_id
                 + " AND NAME IN ('sameSynonym', 'maybeSameSynonym', 'notSameSynonym') LIMIT 1";
 
         if (type != null && type.equals("sameSpecies")) {
-            query = "SELECT OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE ID_NATURE_OBJECT=" + natob_id
+            query = "SELECT OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE ID_NATURE_OBJECT="
+                    + natob_id
                     + " AND NAME IN ('sameSpecies', 'maybeSameSpecies', 'notSameSpecies') LIMIT 1";
         }
 

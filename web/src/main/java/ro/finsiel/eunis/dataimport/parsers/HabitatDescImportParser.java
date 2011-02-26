@@ -156,11 +156,13 @@ public class HabitatDescImportParser extends DefaultHandler {
 
             String queryHabitatDescription = "INSERT INTO CHM62EDT_HABITAT_DESCRIPTION (ID_HABITAT, ID_LANGUAGE, DESCRIPTION, OWNER_TEXT, ID_DC) VALUES (?,?,?,?,?)";
 
-            this.preparedStatement = con.prepareStatement(queryHabitatDescription);
+            this.preparedStatement = con.prepareStatement(
+                    queryHabitatDescription);
 
             String queryUpdateNatureObject = "UPDATE CHM62EDT_NATURE_OBJECT SET ID_DC = ? WHERE ORIGINAL_CODE = ?";
 
-            this.preparedStatementNatureObject = con.prepareStatement(queryUpdateNatureObject);
+            this.preparedStatementNatureObject = con.prepareStatement(
+                    queryUpdateNatureObject);
 
             // con.setAutoCommit(false);
             parseDocument();

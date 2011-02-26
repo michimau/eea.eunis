@@ -15,7 +15,7 @@ import eionet.eunis.util.SimpleFrameworkUtils;
 
 
 /**
- * API interface to allow species to be fuzzily looked up. 
+ * API interface to allow species to be fuzzily looked up.
  *
  * @author alex
  *
@@ -23,13 +23,13 @@ import eionet.eunis.util.SimpleFrameworkUtils;
  */
 @UrlBinding("/api/lookup-species")
 public class LookupSpeciesActionBean extends AbstractStripesAction {
-	
+
     private static final int GENUS_AND_SPECIES_DISTANCE = 4;
 
     private static final int SEARCH_DISTANCE = 7;
 
     private String speciesName;
-	
+
     private String author;
 
     @DefaultHandler
@@ -37,18 +37,24 @@ public class LookupSpeciesActionBean extends AbstractStripesAction {
         if (StringUtils.isBlank(speciesName)) {
             return new ErrorResolution(404);
         }
-        SpeciesLookupSearchParam searchParam = new SpeciesLookupSearchParam(StringUtils.lowerCase(speciesName),
+        SpeciesLookupSearchParam searchParam = new SpeciesLookupSearchParam(
+                StringUtils.lowerCase(speciesName),
                 StringUtils.lowerCase(author));
 
         // if speciesName contains spaces. Will assume
         // that both genus and species parts are looked up.
         // so max distance is lowered
-        searchParam.setMaxLevenshteinDistance(StringUtils.contains(speciesName, ' ') ? GENUS_AND_SPECIES_DISTANCE : SEARCH_DISTANCE);
-        LookupSpeciesResult lookupSpecies = DaoFactory.getDaoFactory().getSpeciesDao().lookupSpecies(searchParam);
+        searchParam.setMaxLevenshteinDistance(
+                StringUtils.contains(speciesName, ' ')
+                        ? GENUS_AND_SPECIES_DISTANCE
+                        : SEARCH_DISTANCE);
+        LookupSpeciesResult lookupSpecies = DaoFactory.getDaoFactory().getSpeciesDao().lookupSpecies(
+                searchParam);
 
-        return new StreamingResolution("text/xml", SimpleFrameworkUtils.convertToString(null, lookupSpecies, null));
+        return new StreamingResolution("text/xml",
+                SimpleFrameworkUtils.convertToString(null, lookupSpecies, null));
     }
-	
+
     public String getSpeciesName() {
         return speciesName;
     }

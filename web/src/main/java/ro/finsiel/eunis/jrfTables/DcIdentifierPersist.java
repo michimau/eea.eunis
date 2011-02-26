@@ -1,11 +1,12 @@
 /*
  * $Id
-*/
+ */
 
 package ro.finsiel.eunis.jrfTables;
 
 
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  *
@@ -13,71 +14,73 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class DcIdentifierPersist extends PersistentObject {
 
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idDc = null;
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idIdentifier = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_identifier = null;
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idDc = null;
 
-  public DcIdentifierPersist() {
-    super();
-  }
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idIdentifier = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdDc() {
-    return i_idDc;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_identifier = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdIdentifier() {
-    return i_idIdentifier;
-  }
+    public DcIdentifierPersist() {
+        super();
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIdentifier() {
-    return i_identifier;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdDc() {
+        return i_idDc;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idDc
-   **/
-  public void setIdDc(Integer idDc) {
-    i_idDc = idDc;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdIdentifier() {
+        return i_idIdentifier;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idIdentifier
-   **/
-  public void setIdIdentifier(Integer idIdentifier) {
-    i_idIdentifier = idIdentifier;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIdentifier() {
+        return i_identifier;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param identifier
-   **/
-  public void setIdentifier(String identifier) {
-    i_identifier = identifier;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param idDc
+     **/
+    public void setIdDc(Integer idDc) {
+        i_idDc = idDc;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idIdentifier
+     **/
+    public void setIdIdentifier(Integer idIdentifier) {
+        i_idIdentifier = idIdentifier;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param identifier
+     **/
+    public void setIdentifier(String identifier) {
+        i_identifier = identifier;
+        this.markModifiedPersistentState();
+    }
 
 }

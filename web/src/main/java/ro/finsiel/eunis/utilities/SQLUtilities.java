@@ -41,39 +41,28 @@ public class SQLUtilities {
     /**
      * SQL used for soundex search
      */
-    public static String smartSoundex = ""
-            + " select name,phonetic,object_type"
+    public static String smartSoundex = "" + " select name,phonetic,object_type"
             + " from `chm62edt_soundex`"
             + " where object_type = '<object_type>'"
             + " and phonetic = soundex('<name>')"
-            + " and left(name,6) = left('<name>',6)"
-            + " union"
-            + " select name,phonetic,object_type"
-            + " from `chm62edt_soundex`"
+            + " and left(name,6) = left('<name>',6)" + " union"
+            + " select name,phonetic,object_type" + " from `chm62edt_soundex`"
             + " where object_type = '<object_type>'"
             + " and phonetic = soundex('<name>')"
-            + " and left(name,5) = left('<name>',5)"
-            + " union"
-            + " select name,phonetic,object_type"
-            + " from `chm62edt_soundex`"
+            + " and left(name,5) = left('<name>',5)" + " union"
+            + " select name,phonetic,object_type" + " from `chm62edt_soundex`"
             + " where object_type = '<object_type>'"
             + " and phonetic = soundex('<name>')"
-            + " and left(name,4) = left('<name>',4)"
-            + " union"
-            + " select name,phonetic,object_type"
-            + " from `chm62edt_soundex`"
+            + " and left(name,4) = left('<name>',4)" + " union"
+            + " select name,phonetic,object_type" + " from `chm62edt_soundex`"
             + " where object_type = '<object_type>'"
             + " and phonetic = soundex('<name>')"
-            + " and left(name,3) = left('<name>',3)"
-            + " union"
-            + " select name,phonetic,object_type"
-            + " from `chm62edt_soundex`"
+            + " and left(name,3) = left('<name>',3)" + " union"
+            + " select name,phonetic,object_type" + " from `chm62edt_soundex`"
             + " where object_type = '<object_type>'"
             + " and phonetic = soundex('<name>')"
-            + " and left(name,2) = left('<name>',2)"
-            + " union"
-            + " select name,phonetic,object_type"
-            + " from `chm62edt_soundex`"
+            + " and left(name,2) = left('<name>',2)" + " union"
+            + " select name,phonetic,object_type" + " from `chm62edt_soundex`"
             + " where object_type = '<object_type>'"
             + " and left(phonetic,3) = left(soundex('<name>'),3)";
 
@@ -501,8 +490,12 @@ public class SQLUtilities {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             ps = con.prepareStatement(
-                    "UPDATE " + tableName + " SET " + columnName + " = '" + columnValue + "' WHERE 1=1"
-                    + (whereCondition == null && whereCondition.trim().length() <= 0 ? "" : " AND " + whereCondition));
+                    "UPDATE " + tableName + " SET " + columnName + " = '"
+                    + columnValue + "' WHERE 1=1"
+                    + (whereCondition == null
+                            && whereCondition.trim().length() <= 0
+                                    ? ""
+                                    : " AND " + whereCondition));
             ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -533,7 +526,10 @@ public class SQLUtilities {
 
             ps = con.prepareStatement(
                     "DELETE FROM " + tableName + " WHERE 1=1"
-                    + (whereCondition == null || whereCondition.trim().length() <= 0 ? "" : " AND " + whereCondition));
+                    + (whereCondition == null
+                            || whereCondition.trim().length() <= 0
+                                    ? ""
+                                    : " AND " + whereCondition));
             ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -583,8 +579,11 @@ public class SQLUtilities {
      */
     public boolean ExecuteInsert(String tableName, TableColumns tableColumns) {
 
-        if (tableName == null || tableName.trim().length() <= 0 || tableColumns == null || tableColumns.getColumnsNames() == null
-                || tableColumns.getColumnsNames().size() <= 0 || tableColumns.getColumnsValues() == null
+        if (tableName == null || tableName.trim().length() <= 0
+                || tableColumns == null
+                || tableColumns.getColumnsNames() == null
+                || tableColumns.getColumnsNames().size() <= 0
+                || tableColumns.getColumnsValues() == null
                 || tableColumns.getColumnsValues().size() <= 0) {
             return false;
         }
@@ -603,12 +602,19 @@ public class SQLUtilities {
 
             for (int i = 0; i < tableColumns.getColumnsNames().size(); i++) {
                 namesList += (String) tableColumns.getColumnsNames().get(i)
-                        + (i < tableColumns.getColumnsNames().size() - 1 ? "," : "");
-                valuesList += "'" + (String) tableColumns.getColumnsValues().get(i) + "'"
-                        + (i < tableColumns.getColumnsNames().size() - 1 ? "," : "");
+                        + (i < tableColumns.getColumnsNames().size() - 1
+                                ? ","
+                                : "");
+                valuesList += "'"
+                        + (String) tableColumns.getColumnsValues().get(i) + "'"
+                        + (i < tableColumns.getColumnsNames().size() - 1
+                                ? ","
+                                : "");
             }
 
-            ps = con.prepareStatement("INSERT INTO " + tableName + " ( " + namesList + " ) values ( " + valuesList + " ) ");
+            ps = con.prepareStatement(
+                    "INSERT INTO " + tableName + " ( " + namesList
+                    + " ) values ( " + valuesList + " ) ");
 
             ps.execute();
         } catch (Exception e) {
@@ -629,7 +635,8 @@ public class SQLUtilities {
      */
     public List<String> ExecuteMultipleInsert(String tableName, List<TableColumns> tableRows) throws Exception {
 
-        if (tableName == null || tableName.trim().length() <= 0 || tableRows == null || tableRows.size() <= 0) {
+        if (tableName == null || tableName.trim().length() <= 0
+                || tableRows == null || tableRows.size() <= 0) {
             return null;
         }
 
@@ -665,15 +672,23 @@ public class SQLUtilities {
                 String valuesList = "";
     	  
                 for (int i = 0; i < tableColumns.getColumnsNames().size(); i++) {
-                    String columnName = (String) tableColumns.getColumnsNames().get(i);
+                    String columnName = (String) tableColumns.getColumnsNames().get(
+                            i);
 
                     if (columnName != null && !columnName.equals("")) {
                         columnName = "`" + columnName + "`";
                     }
-                    String columnValue = (String) tableColumns.getColumnsValues().get(i);
+                    String columnValue = (String) tableColumns.getColumnsValues().get(
+                            i);
 
-                    namesList += columnName + (i < tableColumns.getColumnsNames().size() - 1 ? "," : "");
-                    valuesList += "'" + columnValue + "'" + (i < tableColumns.getColumnsNames().size() - 1 ? "," : "");
+                    namesList += columnName
+                            + (i < tableColumns.getColumnsNames().size() - 1
+                                    ? ","
+                                    : "");
+                    valuesList += "'" + columnValue + "'"
+                            + (i < tableColumns.getColumnsNames().size() - 1
+                            ? ","
+                            : "");
                 }
     	  
                 List xmlColumnNames = tableColumns.getColumnsNames();
@@ -695,7 +710,8 @@ public class SQLUtilities {
                     }
                 }
     	  
-                query = "INSERT INTO " + tableName + " ( " + namesList + " ) values ( " + valuesList + " ) ";
+                query = "INSERT INTO " + tableName + " ( " + namesList
+                        + " ) values ( " + valuesList + " ) ";
                 ps = con.prepareStatement(query);
                 ps.execute();
             }
@@ -703,7 +719,8 @@ public class SQLUtilities {
         } catch (Exception e) {
             con.rollback(); 
             con.commit();
-            throw new IllegalArgumentException(e.getMessage() + " for statement: " + query, e);
+            throw new IllegalArgumentException(
+                    e.getMessage() + " for statement: " + query, e);
             // result.add(e.getMessage()+"<br/> SQL statement: "+query);
         } finally {
             st.close();      
@@ -773,8 +790,10 @@ public class SQLUtilities {
                             // System.out.println("idNatureObjectLink = " + idNatureObjectLink);
                             SQL = "SELECT ";
                             SQL += "`" + TabPageName + "`";
-                            SQL += " FROM CHM62EDT_TAB_PAGE_" + NatureObjectType.toUpperCase();
-                            SQL += " WHERE ID_NATURE_OBJECT=" + idNatureObjectLink;
+                            SQL += " FROM CHM62EDT_TAB_PAGE_"
+                                    + NatureObjectType.toUpperCase();
+                            SQL += " WHERE ID_NATURE_OBJECT="
+                                    + idNatureObjectLink;
 
                             rs.close();
                             ps.close();
@@ -782,7 +801,8 @@ public class SQLUtilities {
                             rs = ps.executeQuery();
 
                             if (rs.next()) {
-                                ret = !rs.getString(TabPageName).equalsIgnoreCase("Y");
+                                ret = !rs.getString(TabPageName).equalsIgnoreCase(
+                                        "Y");
                             } else {
                                 rs.close();
                                 ps.close();
@@ -835,7 +855,8 @@ public class SQLUtilities {
         strSQL = strSQL + " FROM `chm62edt_sites`";
         strSQL = strSQL
                 + " INNER JOIN `chm62edt_designations` ON (`chm62edt_sites`.ID_DESIGNATION = `chm62edt_designations`.ID_DESIGNATION AND `chm62edt_sites`.ID_GEOSCOPE = `chm62edt_designations`.ID_GEOSCOPE)";
-        strSQL = strSQL + " WHERE `chm62edt_sites`.ID_DESIGNATION = '" + idDesignation + "'";
+        strSQL = strSQL + " WHERE `chm62edt_sites`.ID_DESIGNATION = '"
+                + idDesignation + "'";
         strSQL = strSQL + " AND `chm62edt_sites`.ID_GEOSCOPE = " + idGeoscope;
 
         try {
@@ -988,14 +1009,17 @@ public class SQLUtilities {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             DatabaseMetaData meta = con.getMetaData(); 
-            ResultSet rs = meta.getTables(null, null, null, new String[] { "TABLE"});
+            ResultSet rs = meta.getTables(null, null, null,
+                    new String[] { "TABLE"});
 
             ; 
 	      
             while (rs.next()) { 
                 String tableName = rs.getString("TABLE_NAME"); 
 
-                if (tableName != null && (tableName.startsWith("chm62edt") || tableName.startsWith("dc_"))) {
+                if (tableName != null
+                        && (tableName.startsWith("chm62edt")
+                                || tableName.startsWith("dc_"))) {
                     ret.add(tableName);
                 }
             } 
@@ -1174,7 +1198,8 @@ public class SQLUtilities {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             message = EunisUtil.replaceTagsImport(message);
             ps = con.prepareStatement(
-                    "INSERT INTO EUNIS_IMPORT_LOG (MESSAGE, CUR_TIMESTAMP) values ( '" + message + "', CURRENT_TIMESTAMP() ) ");
+                    "INSERT INTO EUNIS_IMPORT_LOG (MESSAGE, CUR_TIMESTAMP) values ( '"
+                            + message + "', CURRENT_TIMESTAMP() ) ");
             ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -1197,7 +1222,8 @@ public class SQLUtilities {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            ps = con.prepareStatement("SELECT LOG_ID, MESSAGE, CUR_TIMESTAMP FROM EUNIS_IMPORT_LOG ORDER BY LOG_ID DESC LIMIT 100");
+            ps = con.prepareStatement(
+                    "SELECT LOG_ID, MESSAGE, CUR_TIMESTAMP FROM EUNIS_IMPORT_LOG ORDER BY LOG_ID DESC LIMIT 100");
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -1231,8 +1257,10 @@ public class SQLUtilities {
 
         statements.add("SELECT URL FROM DC_SOURCE");
         statements.add("SELECT LINK_URL FROM CHM62EDT_GLOSSARY");
-        statements.add("SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES WHERE VALUE LIKE 'http://%'");
-        statements.add("SELECT DATA_SOURCE FROM CHM62EDT_DESIGNATIONS WHERE DATA_SOURCE LIKE 'http://%'");
+        statements.add(
+                "SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES WHERE VALUE LIKE 'http://%'");
+        statements.add(
+                "SELECT DATA_SOURCE FROM CHM62EDT_DESIGNATIONS WHERE DATA_SOURCE LIKE 'http://%'");
 
         try {
             Class.forName(SQL_DRV);
@@ -1341,19 +1369,28 @@ public class SQLUtilities {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 		  
-            int nTotalSpecies = Utilities.checkedStringToInt(ExecuteSQL("select count(*) from eunis_digir"), 0);
-            int nDistinctSpecies = Utilities.checkedStringToInt(ExecuteSQL("select count(DISTINCT ScientificName) from eunis_digir"),
-                    0);
+            int nTotalSpecies = Utilities.checkedStringToInt(
+                    ExecuteSQL("select count(*) from eunis_digir"), 0);
+            int nDistinctSpecies = Utilities.checkedStringToInt(
+                    ExecuteSQL(
+                            "select count(DISTINCT ScientificName) from eunis_digir"),
+                            0);
             int nSpeciesWithCountry = Utilities.checkedStringToInt(
-                    ExecuteSQL("select count(*) from eunis_digir where Country is not null"), 0);
+                    ExecuteSQL(
+                            "select count(*) from eunis_digir where Country is not null"),
+                            0);
             int nSpeciesWithLatLong = Utilities.checkedStringToInt(
                     ExecuteSQL(
                             "select count(*) from eunis_digir where DecimalLatitude is not null AND  DecimalLongitude is not null"),
                             0);
             int nSpeciesFromHabitats = Utilities.checkedStringToInt(
-                    ExecuteSQL("select count(*) from eunis_digir where GlobalUniqueIdentifier LIKE '%SPECHAB%'"), 0);
+                    ExecuteSQL(
+                            "select count(*) from eunis_digir where GlobalUniqueIdentifier LIKE '%SPECHAB%'"),
+                            0);
             int nSpeciesFromSites = Utilities.checkedStringToInt(
-                    ExecuteSQL("select count(*) from eunis_digir where GlobalUniqueIdentifier LIKE '%SPECSITE%'"), 0);
+                    ExecuteSQL(
+                            "select count(*) from eunis_digir where GlobalUniqueIdentifier LIKE '%SPECSITE%'"),
+                            0);
           
             ps = con.prepareStatement("DELETE FROM EUNIS_DIGIR_STATS");
             ps.executeUpdate();

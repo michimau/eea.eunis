@@ -78,7 +78,8 @@ public class JavaSorter {
                 res = (ascending) ? res : (-1) * res;
                 return res;
             } catch (ClassCastException ex) {
-                System.out.println("You can only sort/compare objects which implements JavaSortable");
+                System.out.println(
+                        "You can only sort/compare objects which implements JavaSortable");
                 ex.printStackTrace();
                 return 0;
             }

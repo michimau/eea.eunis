@@ -285,36 +285,44 @@ public class ReferencesImportParser extends DefaultHandler {
 
             String queryDcDate = "INSERT INTO DC_DATE (ID_DC, ID_DATE, CREATED) VALUES (?,1,?)";
 
-            this.preparedStatementDcDateInsert = con.prepareStatement(queryDcDate);
+            this.preparedStatementDcDateInsert = con.prepareStatement(
+                    queryDcDate);
 
             String queryDcTitle = "INSERT INTO DC_TITLE (ID_DC, ID_TITLE, TITLE, ALTERNATIVE) VALUES (?,1,?,?)";
 
-            this.preparedStatementDcTitleInsert = con.prepareStatement(queryDcTitle);
+            this.preparedStatementDcTitleInsert = con.prepareStatement(
+                    queryDcTitle);
 
             String queryDcPublisher = "INSERT INTO DC_PUBLISHER (ID_DC, ID_PUBLISHER, PUBLISHER) VALUES (?,1,?)";
 
-            this.preparedStatementDcPublisherInsert = con.prepareStatement(queryDcPublisher);
+            this.preparedStatementDcPublisherInsert = con.prepareStatement(
+                    queryDcPublisher);
 
             String queryDcSource = "INSERT INTO DC_SOURCE (ID_DC, ID_SOURCE, SOURCE, EDITOR, JOURNAL_TITLE, BOOK_TITLE, JOURNAL_ISSUE, ISBN, URL) VALUES (?,1,?,?,?,?,?,?,?)";
 
-            this.preparedStatementDcSourceInsert = con.prepareStatement(queryDcSource);
+            this.preparedStatementDcSourceInsert = con.prepareStatement(
+                    queryDcSource);
 
             // Update statements
             String queryDcDateUpdate = "UPDATE DC_DATE SET CREATED =? WHERE ID_DC = ?";
 
-            this.preparedStatementDcDateUpdate = con.prepareStatement(queryDcDateUpdate);
+            this.preparedStatementDcDateUpdate = con.prepareStatement(
+                    queryDcDateUpdate);
 
             String queryDcTitleUpdate = "UPDATE DC_TITLE SET TITLE = ?, ALTERNATIVE = ? WHERE ID_DC = ?";
 
-            this.preparedStatementDcTitleUpdate = con.prepareStatement(queryDcTitleUpdate);
+            this.preparedStatementDcTitleUpdate = con.prepareStatement(
+                    queryDcTitleUpdate);
 
             String queryDcPublisherUpdate = "UPDATE DC_PUBLISHER SET PUBLISHER = ? WHERE ID_DC = ?";
 
-            this.preparedStatementDcPublisherUpdate = con.prepareStatement(queryDcPublisherUpdate);
+            this.preparedStatementDcPublisherUpdate = con.prepareStatement(
+                    queryDcPublisherUpdate);
 
             String queryDcSourceUpdate = "UPDATE DC_SOURCE SET SOURCE = ?, EDITOR = ?, JOURNAL_TITLE = ?, BOOK_TITLE = ?, JOURNAL_ISSUE = ?, ISBN = ?, URL = ? WHERE ID_DC = ?";
 
-            this.preparedStatementDcSourceUpdate = con.prepareStatement(queryDcSourceUpdate);
+            this.preparedStatementDcSourceUpdate = con.prepareStatement(
+                    queryDcSourceUpdate);
 
             // con.setAutoCommit(false);
             parseDocument();
@@ -430,7 +438,8 @@ public class ReferencesImportParser extends DefaultHandler {
                     ps.setInt(1, idDc);
                     ps.executeUpdate();
 
-                    ps = con.prepareStatement("DELETE FROM DC_INDEX WHERE ID_DC = ?");
+                    ps = con.prepareStatement(
+                            "DELETE FROM DC_INDEX WHERE ID_DC = ?");
                     ps.setInt(1, idDc);
                     ps.executeUpdate();
                 }

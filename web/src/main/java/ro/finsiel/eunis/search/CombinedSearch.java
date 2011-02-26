@@ -124,8 +124,10 @@ public class CombinedSearch {
             SQL.ensureCapacity(65000);
             SQL.append("INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS");
             SQL.append(" (ID_SESSION,ID_NATURE_OBJECT,");
-            SQL.append(" ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,");
-            SQL.append(" ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2,ID_NATURE_OBJECT_COMBINATION_3)");
+            SQL.append(
+                    " ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,");
+            SQL.append(
+                    " ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2,ID_NATURE_OBJECT_COMBINATION_3)");
             SQL.append(" VALUES ");
             while (tokenizer.hasMoreElements() && pos < max_results) {
                 pos++;
@@ -136,13 +138,21 @@ public class CombinedSearch {
                 SQL.append("-1,");
                 if (SQL.length() > 64000) {
                     if (NatureObject.equalsIgnoreCase("Species")) {
-                        SQL.append(tokenizer.nextElement().toString().trim() + ",-1,-1,");
+                        SQL.append(
+                                tokenizer.nextElement().toString().trim()
+                                        + ",-1,-1,");
                     }
                     if (NatureObject.equalsIgnoreCase("Habitat")) {
-                        SQL.append("-1," + tokenizer.nextElement().toString().trim() + ",-1,");
+                        SQL.append(
+                                "-1,"
+                                        + tokenizer.nextElement().toString().trim()
+                                        + ",-1,");
                     }
                     if (NatureObject.equalsIgnoreCase("Sites")) {
-                        SQL.append("-1,-1," + tokenizer.nextElement().toString().trim() + ",");
+                        SQL.append(
+                                "-1,-1,"
+                                        + tokenizer.nextElement().toString().trim()
+                                        + ",");
                     }
                     SQL.append("-1,-1,-1)");
 
@@ -152,18 +162,28 @@ public class CombinedSearch {
                     SQL.ensureCapacity(65000);
                     SQL.append("INSERT INTO EUNIS_COMBINED_SEARCH_RESULTS");
                     SQL.append(" (ID_SESSION,ID_NATURE_OBJECT,");
-                    SQL.append(" ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,");
-                    SQL.append(" ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2,ID_NATURE_OBJECT_COMBINATION_3)");
+                    SQL.append(
+                            " ID_NATURE_OBJECT_SPECIES,ID_NATURE_OBJECT_HABITATS,ID_NATURE_OBJECT_SITES,");
+                    SQL.append(
+                            " ID_NATURE_OBJECT_COMBINATION_1,ID_NATURE_OBJECT_COMBINATION_2,ID_NATURE_OBJECT_COMBINATION_3)");
                     SQL.append(" VALUES ");
                 } else {
                     if (NatureObject.equalsIgnoreCase("Species")) {
-                        SQL.append(tokenizer.nextElement().toString().trim() + ",-1,-1,");
+                        SQL.append(
+                                tokenizer.nextElement().toString().trim()
+                                        + ",-1,-1,");
                     }
                     if (NatureObject.equalsIgnoreCase("Habitat")) {
-                        SQL.append("-1," + tokenizer.nextElement().toString().trim() + ",-1,");
+                        SQL.append(
+                                "-1,"
+                                        + tokenizer.nextElement().toString().trim()
+                                        + ",-1,");
                     }
                     if (NatureObject.equalsIgnoreCase("Sites")) {
-                        SQL.append("-1,-1," + tokenizer.nextElement().toString().trim() + ",");
+                        SQL.append(
+                                "-1,-1,"
+                                        + tokenizer.nextElement().toString().trim()
+                                        + ",");
                     }
                     SQL.append("-1,-1,-1)");
                     if (pos < max_results) {
@@ -399,7 +419,9 @@ public class CombinedSearch {
                     sas = new ro.finsiel.eunis.search.species.advanced.SpeciesAdvancedSearch();
                     sas.SetSQLLimit(SQL_LIMIT);
                     sas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-                    sas.AddCriteria(rs.getString("ATTRIBUTE"), rs.getString("OPERATOR"), rs.getString("FIRST_VALUE"),
+                    sas.AddCriteria(rs.getString("ATTRIBUTE"),
+                            rs.getString("OPERATOR"),
+                            rs.getString("FIRST_VALUE"),
                             rs.getString("LAST_VALUE"));
                     result = sas.BuildFilter();
                     resultCount = sas.getResultCount();
@@ -411,7 +433,9 @@ public class CombinedSearch {
                     has = new ro.finsiel.eunis.search.habitats.advanced.HabitatsAdvancedSearch();
                     has.SetSQLLimit(SQL_LIMIT);
                     has.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-                    has.AddCriteria(rs.getString("ATTRIBUTE"), rs.getString("OPERATOR"), rs.getString("FIRST_VALUE"),
+                    has.AddCriteria(rs.getString("ATTRIBUTE"),
+                            rs.getString("OPERATOR"),
+                            rs.getString("FIRST_VALUE"),
                             rs.getString("LAST_VALUE"));
                     result = has.BuildFilter();
                     resultCount = has.getResultCount();
@@ -424,7 +448,9 @@ public class CombinedSearch {
                     sas.SetSourceDB(SourceDB);
                     sas.SetSQLLimit(SQL_LIMIT);
                     sas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-                    sas.AddCriteria(rs.getString("ATTRIBUTE"), rs.getString("OPERATOR"), rs.getString("FIRST_VALUE"),
+                    sas.AddCriteria(rs.getString("ATTRIBUTE"),
+                            rs.getString("OPERATOR"),
+                            rs.getString("FIRST_VALUE"),
                             rs.getString("LAST_VALUE"));
                     result = sas.BuildFilter();
                     resultCount = sas.getResultCount();
@@ -474,11 +500,15 @@ public class CombinedSearch {
 
             if (rs.isBeforeFirst()) {
                 rs.next();
-                result = "<strong>" + ro.finsiel.eunis.search.Utilities.SplitString(rs.getString("ATTRIBUTE")) + "</strong> ";
+                result = "<strong>"
+                        + ro.finsiel.eunis.search.Utilities.SplitString(
+                                rs.getString("ATTRIBUTE"))
+                                + "</strong> ";
                 result += "<em>" + rs.getString("OPERATOR") + "</em> ";
                 result += "<u>" + rs.getString("FIRST_VALUE") + "</u>";
                 if (rs.getString("OPERATOR").equalsIgnoreCase("Between")) {
-                    result += " <em>AND</em> <u>" + rs.getString("LAST_VALUE") + "</u>";
+                    result += " <em>AND</em> <u>" + rs.getString("LAST_VALUE")
+                            + "</u>";
                 }
             }
 
@@ -651,7 +681,8 @@ public class CombinedSearch {
                 SQL += " ORDER BY ID_NODE DESC";
             } else {
                 SQL = "SELECT * FROM EUNIS_COMBINED_SEARCH";
-                SQL += " WHERE ID_NODE LIKE '" + IdNode.substring(0, IdNode.length() - 1) + "%'";
+                SQL += " WHERE ID_NODE LIKE '"
+                        + IdNode.substring(0, IdNode.length() - 1) + "%'";
                 SQL += " AND ID_SESSION = '" + IdSession + "'";
                 SQL += " AND NATURE_OBJECT = '" + NatureObject + "'";
                 SQL += " AND LENGTH(ID_NODE) = " + IdNode.length();
@@ -669,7 +700,9 @@ public class CombinedSearch {
                     LastNumber = new Integer(LastNumber.intValue() + 1);
                 } else {
                     // System.out.println("LastNumber = " + rs.getString("ID_NODE").substring(rs.getString("ID_NODE").length()-1));
-                    LastNumber = new Integer(rs.getString("ID_NODE").substring(rs.getString("ID_NODE").length() - 1));
+                    LastNumber = new Integer(
+                            rs.getString("ID_NODE").substring(
+                                    rs.getString("ID_NODE").length() - 1));
                     // System.out.println("LastNumber = " + LastNumber);
                     LastNumber = new Integer(LastNumber.intValue() + 1);
                 }
@@ -683,7 +716,8 @@ public class CombinedSearch {
                 if (IdNode.length() == 1) {
                     IdNodeNew = LastNumber.toString();
                 } else {
-                    IdNodeNew = IdNode.substring(0, IdNode.length() - 1) + LastNumber.toString();
+                    IdNodeNew = IdNode.substring(0, IdNode.length() - 1)
+                            + LastNumber.toString();
                 }
 
                 SQL = "INSERT INTO EUNIS_COMBINED_SEARCH";
@@ -883,8 +917,10 @@ public class CombinedSearch {
             SQLModelStart += "FROM ";
             SQLModelStart += "`EUNIS_COMBINED_SEARCH` ";
             SQLModelStart += "LEFT OUTER JOIN `EUNIS_COMBINED_SEARCH_CRITERIA` ON (`EUNIS_COMBINED_SEARCH`.`ID_SESSION` = `EUNIS_COMBINED_SEARCH_CRITERIA`.`ID_SESSION`) AND (`EUNIS_COMBINED_SEARCH`.`NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_CRITERIA`.`NATURE_OBJECT`) AND (`EUNIS_COMBINED_SEARCH`.`ID_NODE` = `EUNIS_COMBINED_SEARCH_CRITERIA`.`ID_NODE`) ";
-            SQLModelStart += "WHERE (`EUNIS_COMBINED_SEARCH`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += "AND (`EUNIS_COMBINED_SEARCH`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += "WHERE (`EUNIS_COMBINED_SEARCH`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += "AND (`EUNIS_COMBINED_SEARCH`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
             SQLModelEnd += "ORDER BY ";
             SQLModelEnd += "`EUNIS_COMBINED_SEARCH`.`ID_NODE` ";
 
@@ -914,7 +950,8 @@ public class CombinedSearch {
                 } else {
                     SQL = SQLModelStart;
                     SQL += "AND (LENGTH(`EUNIS_COMBINED_SEARCH`.`ID_NODE`)=3) ";
-                    SQL += "AND (`EUNIS_COMBINED_SEARCH`.`ID_NODE` LIKE '" + IdNode + ".%') ";
+                    SQL += "AND (`EUNIS_COMBINED_SEARCH`.`ID_NODE` LIKE '"
+                            + IdNode + ".%') ";
                     SQL += SQLModelEnd;
                     ps = con.prepareStatement(SQL);
                     rsa = ps.executeQuery();
@@ -929,7 +966,8 @@ public class CombinedSearch {
                             } else {
                                 SQL = SQLModelStart;
                                 SQL += "AND (LENGTH(`EUNIS_COMBINED_SEARCH`.`ID_NODE`)=5) ";
-                                SQL += "AND (`EUNIS_COMBINED_SEARCH`.`ID_NODE` LIKE '" + IdNode + ".%') ";
+                                SQL += "AND (`EUNIS_COMBINED_SEARCH`.`ID_NODE` LIKE '"
+                                        + IdNode + ".%') ";
                                 SQL += SQLModelEnd;
                                 ps = con.prepareStatement(SQL);
                                 rsb = ps.executeQuery();
@@ -944,7 +982,8 @@ public class CombinedSearch {
                                         } else {
                                             SQL = SQLModelStart;
                                             SQL += "AND (LENGTH(`EUNIS_COMBINED_SEARCH`.`ID_NODE`)=7) ";
-                                            SQL += "AND (`EUNIS_COMBINED_SEARCH`.`ID_NODE` LIKE '" + IdNode + ".%') ";
+                                            SQL += "AND (`EUNIS_COMBINED_SEARCH`.`ID_NODE` LIKE '"
+                                                    + IdNode + ".%') ";
                                             SQL += SQLModelEnd;
                                             ps = con.prepareStatement(SQL);
                                             rsc = ps.executeQuery();
@@ -952,15 +991,18 @@ public class CombinedSearch {
                                             if (rsc.isBeforeFirst()) {
                                                 where += "[ ";
                                                 while (rsc.next()) {
-                                                    IdNode = rsc.getString("ID_NODE");
+                                                    IdNode = rsc.getString(
+                                                            "ID_NODE");
 
                                                     where += "#" + IdNode + "#";
 
                                                     if (!rsc.isLast()) {
-                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase("Any")) {
+                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase(
+                                                                "Any")) {
                                                             where += " OR ";
                                                         }
-                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase("All")) {
+                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase(
+                                                                "All")) {
                                                             where += " AND ";
                                                         }
                                                     }
@@ -971,10 +1013,12 @@ public class CombinedSearch {
                                         }
 
                                         if (!rsb.isLast()) {
-                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase("Any")) {
+                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase(
+                                                    "Any")) {
                                                 where += " OR ";
                                             }
-                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase("All")) {
+                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase(
+                                                    "All")) {
                                                 where += " AND ";
                                             }
                                         }
@@ -985,10 +1029,12 @@ public class CombinedSearch {
                             }
 
                             if (!rsa.isLast()) {
-                                if (rs.getString("NODE_TYPE").equalsIgnoreCase("Any")) {
+                                if (rs.getString("NODE_TYPE").equalsIgnoreCase(
+                                        "Any")) {
                                     where += " OR ";
                                 }
-                                if (rs.getString("NODE_TYPE").equalsIgnoreCase("All")) {
+                                if (rs.getString("NODE_TYPE").equalsIgnoreCase(
+                                        "All")) {
                                     where += " AND ";
                                 }
                             }
@@ -1052,22 +1098,28 @@ public class CombinedSearch {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQLModelStart = "DELETE FROM EUNIS_COMBINED_SEARCH_TEMP";
-            SQLModelStart += " WHERE (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += " AND (`EUNIS_COMBINED_SEARCH_TEMP`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += " WHERE (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += " AND (`EUNIS_COMBINED_SEARCH_TEMP`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
             ps = con.prepareStatement(SQLModelStart);
             ps.execute();
 
             SQLModelStart = "DELETE FROM EUNIS_COMBINED_SEARCH_CRITERIA_TEMP";
-            SQLModelStart += " WHERE (`EUNIS_COMBINED_SEARCH_CRITERIA_TEMP`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += " AND (`EUNIS_COMBINED_SEARCH_CRITERIA_TEMP`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += " WHERE (`EUNIS_COMBINED_SEARCH_CRITERIA_TEMP`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += " AND (`EUNIS_COMBINED_SEARCH_CRITERIA_TEMP`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
             ps = con.prepareStatement(SQLModelStart);
             ps.execute();
 
             // System.out.println("delete done");
 
             SQLModelStart = "SELECT * FROM EUNIS_COMBINED_SEARCH";
-            SQLModelStart += " WHERE (`EUNIS_COMBINED_SEARCH`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += " AND (`EUNIS_COMBINED_SEARCH`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += " WHERE (`EUNIS_COMBINED_SEARCH`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += " AND (`EUNIS_COMBINED_SEARCH`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
             ps = con.prepareStatement(SQLModelStart);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -1085,8 +1137,10 @@ public class CombinedSearch {
             rs.close();
 
             SQLModelStart = "SELECT * FROM EUNIS_COMBINED_SEARCH_CRITERIA";
-            SQLModelStart += " WHERE (`EUNIS_COMBINED_SEARCH_CRITERIA`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += " AND (`EUNIS_COMBINED_SEARCH_CRITERIA`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += " WHERE (`EUNIS_COMBINED_SEARCH_CRITERIA`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += " AND (`EUNIS_COMBINED_SEARCH_CRITERIA`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
             ps = con.prepareStatement(SQLModelStart);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -1118,8 +1172,10 @@ public class CombinedSearch {
             SQLModelStart += "FROM ";
             SQLModelStart += "`EUNIS_COMBINED_SEARCH_TEMP` ";
             SQLModelStart += "LEFT OUTER JOIN `EUNIS_COMBINED_SEARCH_CRITERIA_TEMP` ON (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_SESSION` = `EUNIS_COMBINED_SEARCH_CRITERIA_TEMP`.`ID_SESSION`) AND (`EUNIS_COMBINED_SEARCH_TEMP`.`NATURE_OBJECT` = `EUNIS_COMBINED_SEARCH_CRITERIA_TEMP`.`NATURE_OBJECT`) AND (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE` = `EUNIS_COMBINED_SEARCH_CRITERIA_TEMP`.`ID_NODE`) ";
-            SQLModelStart += "WHERE (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += "AND (`EUNIS_COMBINED_SEARCH_TEMP`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += "WHERE (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += "AND (`EUNIS_COMBINED_SEARCH_TEMP`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
             SQLModelEnd += "ORDER BY ";
             SQLModelEnd += "`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE` ";
 
@@ -1153,7 +1209,8 @@ public class CombinedSearch {
                 } else {
                     SQL = SQLModelStart;
                     SQL += "AND (LENGTH(`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE`)=3) ";
-                    SQL += "AND (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE` LIKE '" + IdNode + ".%') ";
+                    SQL += "AND (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE` LIKE '"
+                            + IdNode + ".%') ";
                     SQL += SQLModelEnd;
                     ps = con.prepareStatement(SQL);
                     rsa = ps.executeQuery();
@@ -1167,12 +1224,14 @@ public class CombinedSearch {
                             NodeType = rsa.getString("NODE_TYPE");
                             if (NodeType.equalsIgnoreCase("Criteria")) {
                                 where += "#" + IdNode + "#";
-                                snodea = BuildFilter(IdNode, IdSession, NatureObject);
+                                snodea = BuildFilter(IdNode, IdSession,
+                                        NatureObject);
                                 // System.out.println("snodea = " + snodea);
                             } else {
                                 SQL = SQLModelStart;
                                 SQL += "AND (LENGTH(`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE`)=5) ";
-                                SQL += "AND (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE` LIKE '" + IdNode + ".%') ";
+                                SQL += "AND (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE` LIKE '"
+                                        + IdNode + ".%') ";
                                 SQL += SQLModelEnd;
                                 ps = con.prepareStatement(SQL);
                                 rsb = ps.executeQuery();
@@ -1186,12 +1245,14 @@ public class CombinedSearch {
                                         NodeType = rsb.getString("NODE_TYPE");
                                         if (NodeType.equalsIgnoreCase("Criteria")) {
                                             where += "#" + IdNode + "#";
-                                            snodeb = BuildFilter(IdNode, IdSession, NatureObject);
+                                            snodeb = BuildFilter(IdNode,
+                                                    IdSession, NatureObject);
                                             // System.out.println("snodeb = " + snodeb);
                                         } else {
                                             SQL = SQLModelStart;
                                             SQL += "AND (LENGTH(`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE`)=7) ";
-                                            SQL += "AND (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE` LIKE '" + IdNode + ".%') ";
+                                            SQL += "AND (`EUNIS_COMBINED_SEARCH_TEMP`.`ID_NODE` LIKE '"
+                                                    + IdNode + ".%') ";
                                             SQL += SQLModelEnd;
                                             ps = con.prepareStatement(SQL);
                                             rsc = ps.executeQuery();
@@ -1201,19 +1262,24 @@ public class CombinedSearch {
                                                 snodesc = "";
                                                 while (rsc.next()) {
                                                     snodec = "";
-                                                    IdNode = rsc.getString("ID_NODE");
+                                                    IdNode = rsc.getString(
+                                                            "ID_NODE");
 
                                                     where += "#" + IdNode + "#";
-                                                    snodec = BuildFilter(IdNode, IdSession, NatureObject);
+                                                    snodec = BuildFilter(IdNode,
+                                                            IdSession,
+                                                            NatureObject);
                                                     // System.out.println("snodec = " + snodec);
 
                                                     snodesc += snodec;
                                                     if (!rsc.isLast()) {
-                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase("Any")) {
+                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase(
+                                                                "Any")) {
                                                             where += " OR ";
                                                             snodesc += " OR ";
                                                         }
-                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase("All")) {
+                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase(
+                                                                "All")) {
                                                             where += " AND ";
                                                             snodesc += " AND ";
                                                         }
@@ -1224,19 +1290,26 @@ public class CombinedSearch {
                                             rsc.close();
                                             // System.out.println("snodesc = " + snodesc);
                                             // create filter from this level criterias
-                                            SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_" + NatureObject.toUpperCase();
-                                            SQLnodes += " WHERE (" + snodesc + ")";
+                                            SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_"
+                                                    + NatureObject.toUpperCase();
+                                            SQLnodes += " WHERE (" + snodesc
+                                                    + ")";
                                             // System.out.println("SQLnodes = " + SQLnodes);
-                                            snodeb = "ID_NATURE_OBJECT IN (" + ExecuteFilterSQL(SQLnodes, "") + ")";
+                                            snodeb = "ID_NATURE_OBJECT IN ("
+                                                    + ExecuteFilterSQL(SQLnodes,
+                                                    "")
+                                                    + ")";
                                             // System.out.println("snodeb (facut din snodesc) = " + snodeb);
                                         }
                                         snodesb += snodeb;
                                         if (!rsb.isLast()) {
-                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase("Any")) {
+                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase(
+                                                    "Any")) {
                                                 where += " OR ";
                                                 snodesb += " OR ";
                                             }
-                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase("All")) {
+                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase(
+                                                    "All")) {
                                                 where += " AND ";
                                                 snodesb += " AND ";
                                             }
@@ -1247,19 +1320,23 @@ public class CombinedSearch {
                                 rsb.close();
                                 // System.out.println("snodesb = " + snodesb);
                                 // create filter from this level criterias
-                                SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_" + NatureObject.toUpperCase();
+                                SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_"
+                                        + NatureObject.toUpperCase();
                                 SQLnodes += " WHERE (" + snodesb + ")";
                                 // System.out.println("SQLnodes = " + SQLnodes);
-                                snodea = "ID_NATURE_OBJECT IN (" + ExecuteFilterSQL(SQLnodes, "") + ")";
+                                snodea = "ID_NATURE_OBJECT IN ("
+                                        + ExecuteFilterSQL(SQLnodes, "") + ")";
                                 // System.out.println("snodea (facut din snodesb) = " + snodea);
                             }
                             snodesa += snodea;
                             if (!rsa.isLast()) {
-                                if (rs.getString("NODE_TYPE").equalsIgnoreCase("Any")) {
+                                if (rs.getString("NODE_TYPE").equalsIgnoreCase(
+                                        "Any")) {
                                     where += " OR ";
                                     snodesa += " OR ";
                                 }
-                                if (rs.getString("NODE_TYPE").equalsIgnoreCase("All")) {
+                                if (rs.getString("NODE_TYPE").equalsIgnoreCase(
+                                        "All")) {
                                     where += " AND ";
                                     snodesa += " AND ";
                                 }
@@ -1270,11 +1347,13 @@ public class CombinedSearch {
                     rsa.close();
                     // System.out.println("snodesa = " + snodesa);
                     // create filter from this level criterias
-                    SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_" + NatureObject.toUpperCase();
+                    SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_"
+                            + NatureObject.toUpperCase();
                     SQLnodes += " WHERE (" + snodesa + ")";
                     // System.out.println("SQLnodes = " + SQLnodes);
                     // System.out.println("ce se executa ca sa obtin snode = " + ExecuteFilterSQL(SQLnodes,""));
-                    snode = "ID_NATURE_OBJECT IN (" + ExecuteFilterSQL(SQLnodes, "") + ")";
+                    snode = "ID_NATURE_OBJECT IN ("
+                            + ExecuteFilterSQL(SQLnodes, "") + ")";
                     // System.out.println("snode (facut di snodesa) = " + snode);
                 }
                 snodes += snode;
@@ -1379,7 +1458,8 @@ public class CombinedSearch {
                 if (resultCount >= SQL_LIMIT) {// System.out.println("<<< SQL LIMIT of "+SQL_LIMIT+" reached!. The results might not be concludent! >>>");
                 }
                 if (result.length() > 0) {
-                    if (result.substring(result.length() - 1).equalsIgnoreCase(",")) {
+                    if (result.substring(result.length() - 1).equalsIgnoreCase(
+                            ",")) {
                         result = result.substring(0, result.length() - 1);
                     }
                 } else {

@@ -1,11 +1,12 @@
 /*
  * $Id
-*/
+ */
 
 package ro.finsiel.eunis.jrfTables;
 
 
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  *
@@ -13,71 +14,73 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class DcLanguagePersist extends PersistentObject {
 
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idDc = null;
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idLanguage = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_language = null;
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idDc = null;
 
-  public DcLanguagePersist() {
-    super();
-  }
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idLanguage = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdDc() {
-    return i_idDc;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_language = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdLanguage() {
-    return i_idLanguage;
-  }
+    public DcLanguagePersist() {
+        super();
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getLanguage() {
-    return i_language;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdDc() {
+        return i_idDc;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idDc
-   **/
-  public void setIdDc(Integer idDc) {
-    i_idDc = idDc;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdLanguage() {
+        return i_idLanguage;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idLanguage
-   **/
-  public void setIdLanguage(Integer idLanguage) {
-    i_idLanguage = idLanguage;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getLanguage() {
+        return i_language;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param language
-   **/
-  public void setLanguage(String language) {
-    i_language = language;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param idDc
+     **/
+    public void setIdDc(Integer idDc) {
+        i_idDc = idDc;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idLanguage
+     **/
+    public void setIdLanguage(Integer idLanguage) {
+        i_idLanguage = idLanguage;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param language
+     **/
+    public void setLanguage(String language) {
+        i_language = language;
+        this.markModifiedPersistentState();
+    }
 
 }

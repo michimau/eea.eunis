@@ -11,7 +11,7 @@ import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 public class HabitatsSitesTableDecorator extends TableDecorator {
 
     /**
-     * 
+     *
      * @return
      */
     public String getId() {
@@ -19,19 +19,20 @@ public class HabitatsSitesTableDecorator extends TableDecorator {
 
         return Utilities.formatString(site.getIDSite());
     }
-	
+
     /**
-     * 
+     *
      * @return
      */
     public String getSource() {
         SitesByNatureObjectPersist site = (SitesByNatureObjectPersist) getCurrentRowObject();
 
-        return Utilities.formatString(SitesSearchUtility.translateSourceDB(site.getSourceDB()));
+        return Utilities.formatString(
+                SitesSearchUtility.translateSourceDB(site.getSourceDB()));
     }
-	
+
     /**
-     * 
+     *
      * @return
      */
     public String getArea() {
@@ -41,9 +42,9 @@ public class HabitatsSitesTableDecorator extends TableDecorator {
         ret.append(Utilities.formatString(site.getAreaNameEn()));
         return ret.toString();
     }
-	
+
     /**
-     * 
+     *
      * @return
      */
     public String getSiteName() {
@@ -51,7 +52,9 @@ public class HabitatsSitesTableDecorator extends TableDecorator {
         SitesByNatureObjectPersist site = (SitesByNatureObjectPersist) getCurrentRowObject();
 
         ret.append("<a href=\"sites/").append(site.getIDSite()).append("\">");
-        ret.append(Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getName())));
+        ret.append(
+                Utilities.formatString(
+                        Utilities.treatURLSpecialCharacters(site.getName())));
         ret.append("</a>");
         return ret.toString();
     }

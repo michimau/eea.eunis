@@ -151,7 +151,8 @@ public class CddaSitesImportParser extends DefaultHandler {
             if (qName.equalsIgnoreCase("CDDA_v8_sites")) {
 
                 siteNatureObjectId = natObjectIds.get(siteCode);
-                if (siteNatureObjectId == null || siteNatureObjectId.length() == 0) {
+                if (siteNatureObjectId == null
+                        || siteNatureObjectId.length() == 0) {
                     newSite = true;
                     maxNoIdInt++;
                     siteNatureObjectId = new Integer(maxNoIdInt).toString();
@@ -236,7 +237,8 @@ public class CddaSitesImportParser extends DefaultHandler {
                 }
 
                 preparedStatementNatObjectGeoscope.setInt(1, geoscopeIdSites);
-                preparedStatementNatObjectGeoscope.setString(2, siteNatureObjectId);
+                preparedStatementNatObjectGeoscope.setString(2,
+                        siteNatureObjectId);
                 preparedStatementNatObjectGeoscope.addBatch();
 
                 counter++;
@@ -284,14 +286,16 @@ public class CddaSitesImportParser extends DefaultHandler {
 
             deleteOldGeoscopeRecords();
 
-            maxNoIdInt = getMaxId("SELECT MAX(ID_NATURE_OBJECT) FROM CHM62EDT_NATURE_OBJECT");
+            maxNoIdInt = getMaxId(
+                    "SELECT MAX(ID_NATURE_OBJECT) FROM CHM62EDT_NATURE_OBJECT");
             natObjectIds = getNatObjectIds();
             geoscopeIds = getGeoscopeIds();
             geoscopeIdsSites = getGeoscopeIdsSites();
 
             String queryNatObject = "INSERT INTO chm62edt_nature_object (ID_NATURE_OBJECT, ORIGINAL_CODE, ID_DC, TYPE) VALUES (?,?, -1, 'CDDA_NATIONAL_SITES')";
 
-            this.preparedStatementNatObject = con.prepareStatement(queryNatObject);
+            this.preparedStatementNatObject = con.prepareStatement(
+                    queryNatObject);
 
             String querySites = "INSERT INTO chm62edt_sites (ID_SITE, NATIONAL_CODE, ID_DESIGNATION, "
                     + "NAME, AREA, IUCNAT, NUTS, DESIGNATION_DATE, UPDATE_DATE, "
@@ -304,14 +308,17 @@ public class CddaSitesImportParser extends DefaultHandler {
             String querySitesUpdate = "UPDATE chm62edt_sites SET NATIONAL_CODE=?, ID_DESIGNATION=?, "
                     + "NAME=?, AREA=?, IUCNAT=?, NUTS=?, DESIGNATION_DATE=?, UPDATE_DATE=?, "
                     + "LATITUDE=?, LAT_NS=?, LAT_DEG=?, LAT_MIN=?, LAT_SEC=?, LONGITUDE=?, LONG_EW=?, "
-                    + "LONG_DEG=?, LONG_MIN=?, LONG_SEC=?, SOURCE_DB='CDDA_NATIONAL', ID_GEOSCOPE=? " + "WHERE ID_SITE = ?";
+                    + "LONG_DEG=?, LONG_MIN=?, LONG_SEC=?, SOURCE_DB='CDDA_NATIONAL', ID_GEOSCOPE=? "
+                    + "WHERE ID_SITE = ?";
 
-            this.preparedStatementSitesUpdate = con.prepareStatement(querySitesUpdate);
+            this.preparedStatementSitesUpdate = con.prepareStatement(
+                    querySitesUpdate);
 
             String queryNatObjectGeoscope = "INSERT INTO chm62edt_nature_object_geoscope (ID_GEOSCOPE, "
                     + "ID_NATURE_OBJECT, ID_NATURE_OBJECT_LINK, ID_DC, ID_REPORT_ATTRIBUTES) VALUES (?,?, -1, -1, -1)";
 
-            this.preparedStatementNatObjectGeoscope = con.prepareStatement(queryNatObjectGeoscope);
+            this.preparedStatementNatObjectGeoscope = con.prepareStatement(
+                    queryNatObjectGeoscope);
 
             parseDocument();
             if (!(counter % 10000 == 0)) {
@@ -514,7 +521,8 @@ public class CddaSitesImportParser extends DefaultHandler {
 
                     if (indexMin != -1) {
                         latMin = minString.substring(0, indexMin);
-                        String restMin = minString.substring(indexMin + 1, minString.length());
+                        String restMin = minString.substring(indexMin + 1,
+                                minString.length());
 
                         // calculate LAT_SEC
                         if (restMin != null && restMin.length() > 0) {
@@ -575,7 +583,8 @@ public class CddaSitesImportParser extends DefaultHandler {
 
                     if (indexMin != -1) {
                         lonMin = minString.substring(0, indexMin);
-                        String restMin = minString.substring(indexMin + 1, minString.length());
+                        String restMin = minString.substring(indexMin + 1,
+                                minString.length());
 
                         // calculate LON_SEC
                         if (restMin != null && restMin.length() > 0) {

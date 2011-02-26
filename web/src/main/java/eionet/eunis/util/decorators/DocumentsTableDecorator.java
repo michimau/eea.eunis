@@ -9,18 +9,18 @@ import eionet.eunis.dto.DcTitleDTO;
 
 
 /**
- * 
+ *
  * @author altnyris
  *
  */
 public class DocumentsTableDecorator extends TableDecorator {
-	
+
     /**
-     * 
+     *
      * @return
      */
     public String getDocTitle() {
-		
+
         StringBuilder ret = new StringBuilder();
         DcTitleDTO doc = (DcTitleDTO) getCurrentRowObject();
 
@@ -31,8 +31,8 @@ public class DocumentsTableDecorator extends TableDecorator {
             ret.append("-no-title-");
         }
         ret.append("</a>");
-		
+
         return ret.toString();
     }
-	
+
 }

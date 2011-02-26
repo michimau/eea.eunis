@@ -3,7 +3,7 @@ package eionet.eunis.util;
 
 /**
  * Utility class to hold id &lt;-&gt; value.
- * 
+ *
  * @author Aleksandr Ivanov
  * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */

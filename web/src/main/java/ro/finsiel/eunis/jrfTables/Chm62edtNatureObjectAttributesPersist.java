@@ -3,80 +3,84 @@ package ro.finsiel.eunis.jrfTables;
 
 import net.sf.jrf.domain.PersistentObject;
 
+
 /**
  *
  **/
 public class Chm62edtNatureObjectAttributesPersist extends PersistentObject {
 
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idNatureObject = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_name = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_object = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_objectlang = null;
-  /**
-   * This is a database field.
-   **/
-  private Boolean i_litobject;
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idNatureObject = null;
 
-  public Chm62edtNatureObjectAttributesPersist() {
-    super();
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_name = null;
 
-public Integer getIdNatureObject() {
-	return i_idNatureObject;
-}
+    /**
+     * This is a database field.
+     **/
+    private String i_object = null;
 
-public void setIdNatureObject(Integer natureObject) {
-	i_idNatureObject = natureObject;
-	this.markModifiedPersistentState(); 
-}
+    /**
+     * This is a database field.
+     **/
+    private String i_objectlang = null;
 
-public String getName() {
-	return i_name;
-}
+    /**
+     * This is a database field.
+     **/
+    private Boolean i_litobject;
 
-public void setName(String i_name) {
-	this.i_name = i_name;
-	this.markModifiedPersistentState(); 
-}
+    public Chm62edtNatureObjectAttributesPersist() {
+        super();
+    }
 
-public String getObject() {
-	return i_object;
-}
+    public Integer getIdNatureObject() {
+        return i_idNatureObject;
+    }
 
-public void setObject(String i_object) {
-	this.i_object = i_object;
-	this.markModifiedPersistentState(); 
-}
+    public void setIdNatureObject(Integer natureObject) {
+        i_idNatureObject = natureObject;
+        this.markModifiedPersistentState(); 
+    }
 
-public boolean isLitobject() {
-	return i_litobject;
-}
+    public String getName() {
+        return i_name;
+    }
 
-public void setLitobject(Boolean i_litobject) {
-	this.i_litobject = i_litobject;
-	this.markModifiedPersistentState(); 
-}
+    public void setName(String i_name) {
+        this.i_name = i_name;
+        this.markModifiedPersistentState(); 
+    }
 
-public String getObjectLang() {
-	return i_objectlang;
-}
+    public String getObject() {
+        return i_object;
+    }
 
-public void setObjectLang(String i_objectlang) {
-	this.i_objectlang = i_objectlang;
-	this.markModifiedPersistentState(); 
-}
+    public void setObject(String i_object) {
+        this.i_object = i_object;
+        this.markModifiedPersistentState(); 
+    }
 
- 
+    public boolean isLitobject() {
+        return i_litobject;
+    }
+
+    public void setLitobject(Boolean i_litobject) {
+        this.i_litobject = i_litobject;
+        this.markModifiedPersistentState(); 
+    }
+
+    public String getObjectLang() {
+        return i_objectlang;
+    }
+
+    public void setObjectLang(String i_objectlang) {
+        this.i_objectlang = i_objectlang;
+        this.markModifiedPersistentState(); 
+    }
+
 }

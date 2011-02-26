@@ -104,14 +104,18 @@ public class References {
                 } else {
                     put_and.addElement("true");
                 }
-                sql.append(Utilities.prepareSQLOperator("SOURCE", author, relationOpAuthor));
+                sql.append(
+                        Utilities.prepareSQLOperator("SOURCE", author,
+                        relationOpAuthor));
             }
         }
 
         if (
                 (
-                (null != date && !date.equalsIgnoreCase("") && !date.equalsIgnoreCase("null"))
-                || (null != date1 && !date1.equalsIgnoreCase("") && !date1.equalsIgnoreCase("null"))
+                (null != date && !date.equalsIgnoreCase("")
+                && !date.equalsIgnoreCase("null"))
+                || (null != date1 && !date1.equalsIgnoreCase("")
+                && !date1.equalsIgnoreCase("null"))
                 )
                         && null != relationOpDate
                         ) {
@@ -126,14 +130,20 @@ public class References {
                 if (date == null || (date != null && date.equalsIgnoreCase(""))) {
                     sql.append(" CREATED <=" + date1 + " ");
                 }
-                if (date1 == null || (date1 != null && date1.equalsIgnoreCase(""))) {
+                if (date1 == null
+                        || (date1 != null && date1.equalsIgnoreCase(""))) {
                     sql.append(" CREATED >=" + date + " ");
                 }
-                if (date != null && date1 != null && !date.equalsIgnoreCase("") && !date1.equalsIgnoreCase("")) {
-                    sql.append(" CREATED >=" + date + " AND CREATED<=" + date1 + " ");
+                if (date != null && date1 != null && !date.equalsIgnoreCase("")
+                        && !date1.equalsIgnoreCase("")) {
+                    sql.append(
+                            " CREATED >=" + date + " AND CREATED<=" + date1
+                            + " ");
                 }
             } else {
-                sql.append(Utilities.prepareSQLOperator("CREATED", date, relationOpDate));
+                sql.append(
+                        Utilities.prepareSQLOperator("CREATED", date,
+                        relationOpDate));
             }
         }
 
@@ -144,7 +154,9 @@ public class References {
                 } else {
                     put_and.addElement("true");
                 }
-                sql.append(Utilities.prepareSQLOperator("TITLE", title, relationOpTitle));
+                sql.append(
+                        Utilities.prepareSQLOperator("TITLE", title,
+                        relationOpTitle));
             }
         }
 
@@ -155,7 +167,9 @@ public class References {
                 } else {
                     put_and.addElement("true");
                 }
-                sql.append(Utilities.prepareSQLOperator("EDITOR", editor, relationOpEditor));
+                sql.append(
+                        Utilities.prepareSQLOperator("EDITOR", editor,
+                        relationOpEditor));
             }
         }
 
@@ -166,7 +180,9 @@ public class References {
                 } else {
                     put_and.addElement("true");
                 }
-                sql.append(Utilities.prepareSQLOperator("PUBLISHER", publisher, relationOpPublisher));
+                sql.append(
+                        Utilities.prepareSQLOperator("PUBLISHER", publisher,
+                        relationOpPublisher));
             }
         }
 

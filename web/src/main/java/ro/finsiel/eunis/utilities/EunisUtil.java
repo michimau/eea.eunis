@@ -213,7 +213,8 @@ public class EunisUtil {
                     String s = in.substring(i, j + 1);
                     UnicodeEscapes unicodeEscapes = new UnicodeEscapes();
 
-                    if (unicodeEscapes.isXHTMLEntity(s) || unicodeEscapes.isNumericHTMLEscapeCode(s)) {
+                    if (unicodeEscapes.isXHTMLEntity(s)
+                            || unicodeEscapes.isNumericHTMLEscapeCode(s)) {
                         startsEscapeSequence = true;
                     }
                 }
@@ -225,7 +226,8 @@ public class EunisUtil {
                 }
             } else if (c == '\n' && dontCreateHTMLLineBreaks == false) {
                 ret.append("<br/>");
-            } else if (c == '\r' && in.charAt(i + 1) == '\n' && dontCreateHTMLLineBreaks == false) {
+            } else if (c == '\r' && in.charAt(i + 1) == '\n'
+                    && dontCreateHTMLLineBreaks == false) {
                 ret.append("<br/>");
                 i = i + 1;
             } else {

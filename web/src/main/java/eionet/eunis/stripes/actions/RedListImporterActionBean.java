@@ -19,26 +19,26 @@ import eionet.eunis.util.Constants;
 
 /**
  * Action bean to handle RDF export.
- * 
+ *
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
 @UrlBinding("/dataimport/importredlist")
 public class RedListImporterActionBean extends AbstractStripesAction {
-	
+
     private FileBean[] files = new FileBean[5];
     private boolean delete = false;
-	
+
     private String title;
     private String source;
     private String publisher;
     private String editor;
     private String url;
     private String date;
-	
+
     private List<PairDTO> sources;
     private Integer idDc;
-		
+
     @DefaultHandler
     public Resolution defaultAction() {
         try {
@@ -51,22 +51,24 @@ public class RedListImporterActionBean extends AbstractStripesAction {
         setMetaDescription("Import Red List");
         return new ForwardResolution(forwardPage);
     }
-	
+
     public Resolution importRedList() {
-		
+
         String forwardPage = "/stripes/redlistimporter.jsp";
 
         setMetaDescription("Import Red List");
-        if (getContext().getSessionManager().isAuthenticated() && getContext().getSessionManager().isImportExportData_RIGHT()) {
+        if (getContext().getSessionManager().isAuthenticated()
+                && getContext().getSessionManager().isImportExportData_RIGHT()) {
             try {
                 SQLUtilities sqlUtil = getContext().getSqlUtilities();
-				
+
                 if (idDc != null && idDc.intValue() == -1) {
                     if (files != null && files.length > 0) {
-                        idDc = DaoFactory.getDaoFactory().getDocumentsDao().insertSource(title, source, publisher, editor, url, date);
+                        idDc = DaoFactory.getDaoFactory().getDocumentsDao().insertSource(
+                                title, source, publisher, editor, url, date);
                     }
                 }
-				
+
                 if (idDc != null && idDc.intValue() != -1) {
                     int cnt = 0;
                     List<String> notImported = new ArrayList<String>();
@@ -74,8 +76,9 @@ public class RedListImporterActionBean extends AbstractStripesAction {
                     for (FileBean file : files) {
                         if (file != null) {
                             InputStream inputStream = file.getInputStream();
-							
-                            RedListsImportParser parser = new RedListsImportParser(sqlUtil, idDc, delete);
+
+                            RedListsImportParser parser = new RedListsImportParser(
+                                    sqlUtil, idDc, delete);
 
                             parser.execute(inputStream);
                             cnt += parser.getImported();
@@ -97,18 +100,20 @@ public class RedListImporterActionBean extends AbstractStripesAction {
                         }
                         showWarning(error);
                     }
-						
+
                     sources = DaoFactory.getDaoFactory().getDocumentsDao().getRedListSources();
                 } else {
-                    handleEunisException("Could not insert new source!", Constants.SEVERITY_WARNING);
-                }				
-				
+                    handleEunisException("Could not insert new source!",
+                            Constants.SEVERITY_WARNING);
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
                 handleEunisException(e.getMessage(), Constants.SEVERITY_ERROR);
             }
         } else {
-            handleEunisException("You are not logged in or you do not have enough privileges to view this page!",
+            handleEunisException(
+                    "You are not logged in or you do not have enough privileges to view this page!",
                     Constants.SEVERITY_WARNING);
         }
         return new ForwardResolution(forwardPage);
@@ -193,5 +198,5 @@ public class RedListImporterActionBean extends AbstractStripesAction {
     public void setSources(List<PairDTO> sources) {
         this.sources = sources;
     }
-	
+
 }

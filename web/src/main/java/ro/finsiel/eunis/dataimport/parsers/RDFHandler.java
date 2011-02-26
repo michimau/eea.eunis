@@ -80,8 +80,9 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
      */
     public void statement(AResource subject, AResource predicate, AResource object) {
 
-        statement(subject, predicate, object.isAnonymous() ? object.getAnonymousID() : object.getURI(), EMPTY_STRING, false,
-                object.isAnonymous());
+        statement(subject, predicate,
+                object.isAnonymous() ? object.getAnonymousID() : object.getURI(),
+                EMPTY_STRING, false, object.isAnonymous());
     }
 
     /*
@@ -90,7 +91,8 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
      */
     public void statement(AResource subject, AResource predicate, ALiteral object) {
 
-        statement(subject, predicate, object.toString(), object.getLang(), true, false);
+        statement(subject, predicate, object.toString(), object.getLang(), true,
+                false);
     }
 
     /**
@@ -117,45 +119,60 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
 
                 if (predicate.toString().equals(geo_ns + "hasGBIF") && hasGBIF) {
                     if (matching != null && matching.equals("sameSpecies")) {
-                        insertReportAttribute(Constants.SAME_SPECIES_GBIF, object, natob_id, litObject);
+                        insertReportAttribute(Constants.SAME_SPECIES_GBIF,
+                                object, natob_id, litObject);
                     } else {
-                        insertReportAttribute(Constants.SAME_SYNONYM_GBIF, object, natob_id, litObject);
+                        insertReportAttribute(Constants.SAME_SYNONYM_GBIF,
+                                object, natob_id, litObject);
                     }
                 }
 
-                if (predicate.toString().equals(geo_ns + "hasBioLibPage") && hasBiolab) {
-                    insertReportAttribute(Constants.BIOLIB_PAGE, object, natob_id, litObject);
+                if (predicate.toString().equals(geo_ns + "hasBioLibPage")
+                        && hasBiolab) {
+                    insertReportAttribute(Constants.BIOLIB_PAGE, object,
+                            natob_id, litObject);
                 }
 
                 if (predicate.toString().equals(geo_ns + "hasBBCPage") && hasBbc) {
-                    insertReportAttribute(Constants.BBC_PAGE, object, natob_id, litObject);
+                    insertReportAttribute(Constants.BBC_PAGE, object, natob_id,
+                            litObject);
                 }
 
-                if (predicate.toString().equals(geo_ns + "hasWikipediaArticle") && hasWikipedia) {
-                    insertReportAttribute(Constants.WIKIPEDIA_ARTICLE, object, natob_id, litObject);
+                if (predicate.toString().equals(geo_ns + "hasWikipediaArticle")
+                        && hasWikipedia) {
+                    insertReportAttribute(Constants.WIKIPEDIA_ARTICLE, object,
+                            natob_id, litObject);
                 }
 
-                if (predicate.toString().equals(geo_ns + "hasWikispeciesArticle") && hasWikispecies) {
-                    insertReportAttribute(Constants.WIKISPECIES_ARTICLE, object, natob_id, litObject);
+                if (predicate.toString().equals(geo_ns + "hasWikispeciesArticle")
+                        && hasWikispecies) {
+                    insertReportAttribute(Constants.WIKISPECIES_ARTICLE, object,
+                            natob_id, litObject);
                 }
 
-                if (predicate.toString().equals(geo_ns + "hasBugGuidePage") && hasBugGuide) {
-                    insertReportAttribute(Constants.BUG_GUIDE, object, natob_id, litObject);
+                if (predicate.toString().equals(geo_ns + "hasBugGuidePage")
+                        && hasBugGuide) {
+                    insertReportAttribute(Constants.BUG_GUIDE, object, natob_id,
+                            litObject);
                 }
 
                 if (predicate.toString().equals(geo_ns + "hasNCBI") && hasNCBI) {
                     if (matching != null && matching.equals("sameSpecies")) {
-                        insertReportAttribute(Constants.SAME_SPECIES_NCBI, object, natob_id, litObject);
+                        insertReportAttribute(Constants.SAME_SPECIES_NCBI,
+                                object, natob_id, litObject);
                     } else {
-                        insertReportAttribute(Constants.SAME_SYNONYM_NCBI, object, natob_id, litObject);
+                        insertReportAttribute(Constants.SAME_SYNONYM_NCBI,
+                                object, natob_id, litObject);
                     }
                 }
 
                 if (predicate.toString().equals(geo_ns + "hasITIS") && hasITIS) {
                     if (matching != null && matching.equals("sameSpecies")) {
-                        insertReportAttribute(Constants.SAME_SPECIES_ITIS, object, natob_id, litObject);
+                        insertReportAttribute(Constants.SAME_SPECIES_ITIS,
+                                object, natob_id, litObject);
                     } else {
-                        insertReportAttribute(Constants.SAME_SYNONYM_ITIS, object, natob_id, litObject);
+                        insertReportAttribute(Constants.SAME_SYNONYM_ITIS,
+                                object, natob_id, litObject);
                     }
                 }
             }
@@ -192,8 +209,8 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
 
         String ret = null;
 
-        String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE OBJECT='" + identifier + "' AND NAME='"
-                + matching + "'";
+        String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE OBJECT='"
+                + identifier + "' AND NAME='" + matching + "'";
 
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -225,38 +242,49 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
 
         if (hasGBIF) {
             if (matching != null && matching.equals("sameSpecies")) {
-                whereClause.append("'").append(Constants.SAME_SPECIES_GBIF).append("'").append(",");
+                whereClause.append("'").append(Constants.SAME_SPECIES_GBIF).append("'").append(
+                        ",");
             } else {
-                whereClause.append("'").append(Constants.SAME_SYNONYM_GBIF).append("'").append(",");
+                whereClause.append("'").append(Constants.SAME_SYNONYM_GBIF).append("'").append(
+                        ",");
             }
         }
         if (hasBiolab) {
-            whereClause.append("'").append(Constants.BIOLIB_PAGE).append("'").append(",");
+            whereClause.append("'").append(Constants.BIOLIB_PAGE).append("'").append(
+                    ",");
         }
         if (hasBbc) {
-            whereClause.append("'").append(Constants.BBC_PAGE).append("'").append(",");
+            whereClause.append("'").append(Constants.BBC_PAGE).append("'").append(
+                    ",");
         }
         if (hasWikipedia) {
-            whereClause.append("'").append(Constants.WIKIPEDIA_ARTICLE).append("'").append(",");
+            whereClause.append("'").append(Constants.WIKIPEDIA_ARTICLE).append("'").append(
+                    ",");
         }
         if (hasWikispecies) {
-            whereClause.append("'").append(Constants.WIKISPECIES_ARTICLE).append("'").append(",");
+            whereClause.append("'").append(Constants.WIKISPECIES_ARTICLE).append("'").append(
+                    ",");
         }
         if (hasBugGuide) {
-            whereClause.append("'").append(Constants.BUG_GUIDE).append("'").append(",");
+            whereClause.append("'").append(Constants.BUG_GUIDE).append("'").append(
+                    ",");
         }
         if (hasNCBI) {
             if (matching != null && matching.equals("sameSpecies")) {
-                whereClause.append("'").append(Constants.SAME_SPECIES_NCBI).append("'").append(",");
+                whereClause.append("'").append(Constants.SAME_SPECIES_NCBI).append("'").append(
+                        ",");
             } else {
-                whereClause.append("'").append(Constants.SAME_SYNONYM_NCBI).append("'").append(",");
+                whereClause.append("'").append(Constants.SAME_SYNONYM_NCBI).append("'").append(
+                        ",");
             }
         }
         if (hasITIS) {
             if (matching != null && matching.equals("sameSpecies")) {
-                whereClause.append("'").append(Constants.SAME_SPECIES_ITIS).append("'");
+                whereClause.append("'").append(Constants.SAME_SPECIES_ITIS).append(
+                        "'");
             } else {
-                whereClause.append("'").append(Constants.SAME_SYNONYM_ITIS).append("'");
+                whereClause.append("'").append(Constants.SAME_SYNONYM_ITIS).append(
+                        "'");
             }
         }
 

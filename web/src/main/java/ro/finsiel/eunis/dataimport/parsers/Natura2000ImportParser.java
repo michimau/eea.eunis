@@ -234,18 +234,22 @@ public class Natura2000ImportParser extends DefaultHandler {
             }
 
             if (qName.equalsIgnoreCase("AdministrativeRegion")) {
-                if (nutsCode != null && nutsCode.length() > 0 && nutsCover != null && nutsCover.length() > 0) {
+                if (nutsCode != null && nutsCode.length() > 0
+                        && nutsCover != null && nutsCover.length() > 0) {
                     boolean regionExists = regionExists(nutsCode);
 
                     if (regionExists) {
                         maxReportTypeId++;
                         maxReportAttributeId++;
 
-                        preparedStatementNatObjectReportType.setString(1, siteNatureObjectId);
+                        preparedStatementNatObjectReportType.setString(1,
+                                siteNatureObjectId);
                         preparedStatementNatObjectReportType.setInt(2, -1);
                         preparedStatementNatObjectReportType.setInt(3, -1);
-                        preparedStatementNatObjectReportType.setInt(4, maxReportTypeId);
-                        preparedStatementNatObjectReportType.setInt(5, maxReportAttributeId);
+                        preparedStatementNatObjectReportType.setInt(4,
+                                maxReportTypeId);
+                        preparedStatementNatObjectReportType.setInt(5,
+                                maxReportAttributeId);
                         preparedStatementNatObjectReportType.setInt(6, -1);
                         preparedStatementNatObjectReportType.executeUpdate();
 
@@ -254,13 +258,17 @@ public class Natura2000ImportParser extends DefaultHandler {
                         preparedStatementReportType.setString(3, "REGION_CODE");
                         preparedStatementReportType.executeUpdate();
 
-                        preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
+                        preparedStatementReportAttribute.setInt(1,
+                                maxReportAttributeId);
                         preparedStatementReportAttribute.setString(2, "COVER");
                         preparedStatementReportAttribute.setString(3, "NUMBER");
                         preparedStatementReportAttribute.setString(4, nutsCover);
                         preparedStatementReportAttribute.executeUpdate();
                     } else {
-                        throw new RuntimeException("BioRegion with code " + nutsCode + " doesn't exist!", new Exception());
+                        throw new RuntimeException(
+                                "BioRegion with code " + nutsCode
+                                + " doesn't exist!",
+                                new Exception());
                     }
                 }
             }
@@ -270,13 +278,16 @@ public class Natura2000ImportParser extends DefaultHandler {
 
                 if (bioRegion != null && bioregionExists(bioRegion)) {
                     preparedStatementSiteAttribute.setString(1, siteCode);
-                    preparedStatementSiteAttribute.setString(2, bioRegion.toUpperCase());
+                    preparedStatementSiteAttribute.setString(2,
+                            bioRegion.toUpperCase());
                     preparedStatementSiteAttribute.setString(3, "BOOLEAN");
                     preparedStatementSiteAttribute.setString(4, "TRUE");
                     preparedStatementSiteAttribute.setString(5, "sdfxml");
                     preparedStatementSiteAttribute.executeUpdate();
                 } else {
-                    throw new RuntimeException("BioRegion '" + bioRegion + "' doesn't exist!", new Exception());
+                    throw new RuntimeException(
+                            "BioRegion '" + bioRegion + "' doesn't exist!",
+                            new Exception());
                 }
             }
 
@@ -294,8 +305,10 @@ public class Natura2000ImportParser extends DefaultHandler {
                 calculateLongitudeParams();
 
                 if (!newSite) {
-                    preparedStatementUpdateNatObject.setString(1, "NATURA2000_SITES");
-                    preparedStatementUpdateNatObject.setString(2, siteNatureObjectId);
+                    preparedStatementUpdateNatObject.setString(1,
+                            "NATURA2000_SITES");
+                    preparedStatementUpdateNatObject.setString(2,
+                            siteNatureObjectId);
                     preparedStatementUpdateNatObject.setString(3, siteCode);
                     preparedStatementUpdateNatObject.executeUpdate();
 
@@ -356,7 +369,8 @@ public class Natura2000ImportParser extends DefaultHandler {
                 }
 
                 geoscopeId = getGeoscopeId();
-                preparedStatementNatObjectGeoscope.setString(1, siteNatureObjectId);
+                preparedStatementNatObjectGeoscope.setString(1,
+                        siteNatureObjectId);
                 preparedStatementNatObjectGeoscope.setString(2, geoscopeId);
                 preparedStatementNatObjectGeoscope.executeUpdate();
 
@@ -388,63 +402,90 @@ public class Natura2000ImportParser extends DefaultHandler {
             if (qName.equalsIgnoreCase("Habitat")) {
 
                 if (habitatCode != null && habitatCode.length() > 0) {
-                    String habitatIdNatObject = getHabitatNatObjectId(habitatCode);
+                    String habitatIdNatObject = getHabitatNatObjectId(
+                            habitatCode);
 
-                    if (habitatIdNatObject != null && habitatIdNatObject.length() > 0) {
+                    if (habitatIdNatObject != null
+                            && habitatIdNatObject.length() > 0) {
 
                         maxReportAttributeId++;
 
-                        preparedStatementNatObjectReportType.setString(1, siteNatureObjectId);
-                        preparedStatementNatObjectReportType.setString(2, habitatIdNatObject);
+                        preparedStatementNatObjectReportType.setString(1,
+                                siteNatureObjectId);
+                        preparedStatementNatObjectReportType.setString(2,
+                                habitatIdNatObject);
                         preparedStatementNatObjectReportType.setInt(3, -1);
                         preparedStatementNatObjectReportType.setInt(4, -1);
-                        preparedStatementNatObjectReportType.setInt(5, maxReportAttributeId);
+                        preparedStatementNatObjectReportType.setInt(5,
+                                maxReportAttributeId);
                         preparedStatementNatObjectReportType.setInt(6, -1);
 
                         preparedStatementNatObjectReportType.executeUpdate();
 
-                        setSitesTab(siteNatureObjectId, Constants.SITES_TAB_HABITAT_TYPES);
+                        setSitesTab(siteNatureObjectId,
+                                Constants.SITES_TAB_HABITAT_TYPES);
                         setHabitatTabSites(habitatIdNatObject);
 
-                        preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                        preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_HABITAT_SOURCE_TABLE);
+                        preparedStatementReportAttribute.setInt(1,
+                                maxReportAttributeId);
+                        preparedStatementReportAttribute.setString(2,
+                                Constants.REPORT_ATTRIBUTE_HABITAT_SOURCE_TABLE);
                         preparedStatementReportAttribute.setString(3, "TEXT");
                         preparedStatementReportAttribute.setString(4, "habit2");
                         preparedStatementReportAttribute.addBatch();
 
                         if (habitatCover != null && habitatCover.length() > 0) {
-                            preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                            preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_HABITAT_COVER);
+                            preparedStatementReportAttribute.setInt(1,
+                                    maxReportAttributeId);
+                            preparedStatementReportAttribute.setString(2,
+                                    Constants.REPORT_ATTRIBUTE_HABITAT_COVER);
                             preparedStatementReportAttribute.setString(3, "TEXT");
-                            preparedStatementReportAttribute.setString(4, habitatCover);
+                            preparedStatementReportAttribute.setString(4,
+                                    habitatCover);
                             preparedStatementReportAttribute.addBatch();
                         }
-                        if (habitatRepresentatity != null && habitatRepresentatity.length() > 0) {
-                            preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                            preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_HABITAT_REPRESENTATIVITY);
+                        if (habitatRepresentatity != null
+                                && habitatRepresentatity.length() > 0) {
+                            preparedStatementReportAttribute.setInt(1,
+                                    maxReportAttributeId);
+                            preparedStatementReportAttribute.setString(2,
+                                    Constants.REPORT_ATTRIBUTE_HABITAT_REPRESENTATIVITY);
                             preparedStatementReportAttribute.setString(3, "TEXT");
-                            preparedStatementReportAttribute.setString(4, habitatRepresentatity);
+                            preparedStatementReportAttribute.setString(4,
+                                    habitatRepresentatity);
                             preparedStatementReportAttribute.addBatch();
                         }
-                        if (habitatRelsurface != null && habitatRelsurface.length() > 0) {
-                            preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                            preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_HABITAT_RELATIVE_SURFACE);
+                        if (habitatRelsurface != null
+                                && habitatRelsurface.length() > 0) {
+                            preparedStatementReportAttribute.setInt(1,
+                                    maxReportAttributeId);
+                            preparedStatementReportAttribute.setString(2,
+                                    Constants.REPORT_ATTRIBUTE_HABITAT_RELATIVE_SURFACE);
                             preparedStatementReportAttribute.setString(3, "TEXT");
-                            preparedStatementReportAttribute.setString(4, habitatRelsurface);
+                            preparedStatementReportAttribute.setString(4,
+                                    habitatRelsurface);
                             preparedStatementReportAttribute.addBatch();
                         }
-                        if (habitatConsStatus != null && habitatConsStatus.length() > 0) {
-                            preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                            preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_HABITAT_CONSERVATION);
+                        if (habitatConsStatus != null
+                                && habitatConsStatus.length() > 0) {
+                            preparedStatementReportAttribute.setInt(1,
+                                    maxReportAttributeId);
+                            preparedStatementReportAttribute.setString(2,
+                                    Constants.REPORT_ATTRIBUTE_HABITAT_CONSERVATION);
                             preparedStatementReportAttribute.setString(3, "TEXT");
-                            preparedStatementReportAttribute.setString(4, habitatConsStatus);
+                            preparedStatementReportAttribute.setString(4,
+                                    habitatConsStatus);
                             preparedStatementReportAttribute.addBatch();
                         }
-                        if (habitatGlobalAssesment != null && habitatGlobalAssesment.length() > 0) {
-                            preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                            preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_HABITAT_GLOBAL);
+                        if (habitatGlobalAssesment != null
+                                && habitatGlobalAssesment.length() > 0) {
+                            preparedStatementReportAttribute.setInt(1,
+                                    maxReportAttributeId);
+                            preparedStatementReportAttribute.setString(2,
+                                    Constants.REPORT_ATTRIBUTE_HABITAT_GLOBAL);
                             preparedStatementReportAttribute.setString(3, "TEXT");
-                            preparedStatementReportAttribute.setString(4, habitatGlobalAssesment);
+                            preparedStatementReportAttribute.setString(4,
+                                    habitatGlobalAssesment);
                             preparedStatementReportAttribute.addBatch();
                         }
 
@@ -453,51 +494,65 @@ public class Natura2000ImportParser extends DefaultHandler {
 
                     } else {
                         preparedStatementSiteAttribute.setString(1, siteCode);
-                        preparedStatementSiteAttribute.setString(2, "HABITAT_CODE_" + habitatCode);
+                        preparedStatementSiteAttribute.setString(2,
+                                "HABITAT_CODE_" + habitatCode);
                         preparedStatementSiteAttribute.setString(3, "TEXT");
                         preparedStatementSiteAttribute.setString(4, habitatCode);
                         preparedStatementSiteAttribute.setString(5, "habit2");
                         preparedStatementSiteAttribute.addBatch();
 
                         preparedStatementSiteAttribute.setString(1, siteCode);
-                        preparedStatementSiteAttribute.setString(2, "HABITAT_COVER_" + habitatCode);
+                        preparedStatementSiteAttribute.setString(2,
+                                "HABITAT_COVER_" + habitatCode);
                         preparedStatementSiteAttribute.setString(3, "NUMBER");
                         preparedStatementSiteAttribute.setString(4, habitatCover);
                         preparedStatementSiteAttribute.setString(5, "habit2");
                         preparedStatementSiteAttribute.addBatch();
 
-                        if (habitatRepresentatity != null && habitatRepresentatity.length() > 0) {
+                        if (habitatRepresentatity != null
+                                && habitatRepresentatity.length() > 0) {
                             preparedStatementSiteAttribute.setString(1, siteCode);
-                            preparedStatementSiteAttribute.setString(2, "HABITAT_REPRESENTATIVITY_" + habitatCode);
+                            preparedStatementSiteAttribute.setString(2,
+                                    "HABITAT_REPRESENTATIVITY_" + habitatCode);
                             preparedStatementSiteAttribute.setString(3, "NUMBER");
-                            preparedStatementSiteAttribute.setString(4, habitatRepresentatity);
+                            preparedStatementSiteAttribute.setString(4,
+                                    habitatRepresentatity);
                             preparedStatementSiteAttribute.setString(5, "habit2");
                             preparedStatementSiteAttribute.addBatch();
                         }
 
-                        if (habitatRelsurface != null && habitatRelsurface.length() > 0) {
+                        if (habitatRelsurface != null
+                                && habitatRelsurface.length() > 0) {
                             preparedStatementSiteAttribute.setString(1, siteCode);
-                            preparedStatementSiteAttribute.setString(2, "HABITAT_RELATIVE_SURFACE_" + habitatCode);
+                            preparedStatementSiteAttribute.setString(2,
+                                    "HABITAT_RELATIVE_SURFACE_" + habitatCode);
                             preparedStatementSiteAttribute.setString(3, "NUMBER");
-                            preparedStatementSiteAttribute.setString(4, habitatRelsurface);
+                            preparedStatementSiteAttribute.setString(4,
+                                    habitatRelsurface);
                             preparedStatementSiteAttribute.setString(5, "habit2");
                             preparedStatementSiteAttribute.addBatch();
                         }
 
-                        if (habitatConsStatus != null && habitatConsStatus.length() > 0) {
+                        if (habitatConsStatus != null
+                                && habitatConsStatus.length() > 0) {
                             preparedStatementSiteAttribute.setString(1, siteCode);
-                            preparedStatementSiteAttribute.setString(2, "HABITAT_CONSERVATION_" + habitatCode);
+                            preparedStatementSiteAttribute.setString(2,
+                                    "HABITAT_CONSERVATION_" + habitatCode);
                             preparedStatementSiteAttribute.setString(3, "TEXT");
-                            preparedStatementSiteAttribute.setString(4, habitatConsStatus);
+                            preparedStatementSiteAttribute.setString(4,
+                                    habitatConsStatus);
                             preparedStatementSiteAttribute.setString(5, "habit2");
                             preparedStatementSiteAttribute.addBatch();
                         }
 
-                        if (habitatGlobalAssesment != null && habitatGlobalAssesment.length() > 0) {
+                        if (habitatGlobalAssesment != null
+                                && habitatGlobalAssesment.length() > 0) {
                             preparedStatementSiteAttribute.setString(1, siteCode);
-                            preparedStatementSiteAttribute.setString(2, "HABITAT_GLOBAL_" + habitatCode);
+                            preparedStatementSiteAttribute.setString(2,
+                                    "HABITAT_GLOBAL_" + habitatCode);
                             preparedStatementSiteAttribute.setString(3, "TEXT");
-                            preparedStatementSiteAttribute.setString(4, habitatGlobalAssesment);
+                            preparedStatementSiteAttribute.setString(4,
+                                    habitatGlobalAssesment);
                             preparedStatementSiteAttribute.setString(5, "habit2");
                             preparedStatementSiteAttribute.addBatch();
                         }
@@ -553,9 +608,11 @@ public class Natura2000ImportParser extends DefaultHandler {
 
             if (qName.equalsIgnoreCase("Species")) {
                 if (speciesCode != null && speciesCode.length() > 0) {
-                    String speciesIdNatObject = getSpeciesNatObjectId(speciesCode);
+                    String speciesIdNatObject = getSpeciesNatObjectId(
+                            speciesCode);
 
-                    if (speciesIdNatObject != null && speciesIdNatObject.length() > 0) {
+                    if (speciesIdNatObject != null
+                            && speciesIdNatObject.length() > 0) {
 
                         if (ecoInfo == null || ecoInfo.length() == 0) {
                             ecoInfo = Constants.SPECIES_SOURCE_TABLE_BIRD;
@@ -563,83 +620,121 @@ public class Natura2000ImportParser extends DefaultHandler {
 
                         maxReportAttributeId++;
 
-                        preparedStatementNatObjectReportType.setString(1, siteNatureObjectId);
-                        preparedStatementNatObjectReportType.setString(2, speciesIdNatObject);
+                        preparedStatementNatObjectReportType.setString(1,
+                                siteNatureObjectId);
+                        preparedStatementNatObjectReportType.setString(2,
+                                speciesIdNatObject);
                         preparedStatementNatObjectReportType.setInt(3, -1);
                         preparedStatementNatObjectReportType.setInt(4, -1);
-                        preparedStatementNatObjectReportType.setInt(5, maxReportAttributeId);
+                        preparedStatementNatObjectReportType.setInt(5,
+                                maxReportAttributeId);
                         preparedStatementNatObjectReportType.setInt(6, -1);
 
                         preparedStatementNatObjectReportType.executeUpdate();
 
-                        setSitesTab(siteNatureObjectId, Constants.SITES_TAB_FAUNA_FLORA);
+                        setSitesTab(siteNatureObjectId,
+                                Constants.SITES_TAB_FAUNA_FLORA);
                         setSpeciesTabSites(speciesIdNatObject);
 
-                        if (speciesResident != null && speciesResident.length() > 0) {
-                            preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                            preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_SPECIES_RESIDENT);
+                        if (speciesResident != null
+                                && speciesResident.length() > 0) {
+                            preparedStatementReportAttribute.setInt(1,
+                                    maxReportAttributeId);
+                            preparedStatementReportAttribute.setString(2,
+                                    Constants.REPORT_ATTRIBUTE_SPECIES_RESIDENT);
                             preparedStatementReportAttribute.setString(3, "TEXT");
-                            preparedStatementReportAttribute.setString(4, speciesResident);
+                            preparedStatementReportAttribute.setString(4,
+                                    speciesResident);
                             preparedStatementReportAttribute.addBatch();
                         }
-                        if (speciesPopulation != null && speciesPopulation.length() > 0) {
-                            preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                            preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_SPECIES_POPULATION);
+                        if (speciesPopulation != null
+                                && speciesPopulation.length() > 0) {
+                            preparedStatementReportAttribute.setInt(1,
+                                    maxReportAttributeId);
+                            preparedStatementReportAttribute.setString(2,
+                                    Constants.REPORT_ATTRIBUTE_SPECIES_POPULATION);
                             preparedStatementReportAttribute.setString(3, "TEXT");
-                            preparedStatementReportAttribute.setString(4, speciesPopulation);
+                            preparedStatementReportAttribute.setString(4,
+                                    speciesPopulation);
                             preparedStatementReportAttribute.addBatch();
                         }
-                        if (speciesConservation != null && speciesConservation.length() > 0) {
-                            preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                            preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_SPECIES_CONSERVATION);
+                        if (speciesConservation != null
+                                && speciesConservation.length() > 0) {
+                            preparedStatementReportAttribute.setInt(1,
+                                    maxReportAttributeId);
+                            preparedStatementReportAttribute.setString(2,
+                                    Constants.REPORT_ATTRIBUTE_SPECIES_CONSERVATION);
                             preparedStatementReportAttribute.setString(3, "TEXT");
-                            preparedStatementReportAttribute.setString(4, speciesConservation);
+                            preparedStatementReportAttribute.setString(4,
+                                    speciesConservation);
                             preparedStatementReportAttribute.addBatch();
                         }
-                        if (speciesIsolation != null && speciesIsolation.length() > 0) {
-                            preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                            preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_SPECIES_ISOLATION);
+                        if (speciesIsolation != null
+                                && speciesIsolation.length() > 0) {
+                            preparedStatementReportAttribute.setInt(1,
+                                    maxReportAttributeId);
+                            preparedStatementReportAttribute.setString(2,
+                                    Constants.REPORT_ATTRIBUTE_SPECIES_ISOLATION);
                             preparedStatementReportAttribute.setString(3, "TEXT");
-                            preparedStatementReportAttribute.setString(4, speciesIsolation);
+                            preparedStatementReportAttribute.setString(4,
+                                    speciesIsolation);
                             preparedStatementReportAttribute.addBatch();
                         }
                         if (speciesGlobal != null && speciesGlobal.length() > 0) {
-                            preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                            preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_SPECIES_GLOBAL);
+                            preparedStatementReportAttribute.setInt(1,
+                                    maxReportAttributeId);
+                            preparedStatementReportAttribute.setString(2,
+                                    Constants.REPORT_ATTRIBUTE_SPECIES_GLOBAL);
                             preparedStatementReportAttribute.setString(3, "TEXT");
-                            preparedStatementReportAttribute.setString(4, speciesGlobal);
+                            preparedStatementReportAttribute.setString(4,
+                                    speciesGlobal);
                             preparedStatementReportAttribute.addBatch();
                         }
-                        if (speciesStaging != null && speciesStaging.length() > 0) {
-                            preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                            preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_SPECIES_STAGING);
+                        if (speciesStaging != null
+                                && speciesStaging.length() > 0) {
+                            preparedStatementReportAttribute.setInt(1,
+                                    maxReportAttributeId);
+                            preparedStatementReportAttribute.setString(2,
+                                    Constants.REPORT_ATTRIBUTE_SPECIES_STAGING);
                             preparedStatementReportAttribute.setString(3, "TEXT");
-                            preparedStatementReportAttribute.setString(4, speciesStaging);
+                            preparedStatementReportAttribute.setString(4,
+                                    speciesStaging);
                             preparedStatementReportAttribute.addBatch();
                         }
                         if (speciesWinter != null && speciesWinter.length() > 0) {
-                            preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                            preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_SPECIES_WINTER);
+                            preparedStatementReportAttribute.setInt(1,
+                                    maxReportAttributeId);
+                            preparedStatementReportAttribute.setString(2,
+                                    Constants.REPORT_ATTRIBUTE_SPECIES_WINTER);
                             preparedStatementReportAttribute.setString(3, "TEXT");
-                            preparedStatementReportAttribute.setString(4, speciesWinter);
+                            preparedStatementReportAttribute.setString(4,
+                                    speciesWinter);
                             preparedStatementReportAttribute.addBatch();
                         }
-                        if (speciesBreeding != null && speciesBreeding.length() > 0) {
-                            preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                            preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_SPECIES_BREEDING);
+                        if (speciesBreeding != null
+                                && speciesBreeding.length() > 0) {
+                            preparedStatementReportAttribute.setInt(1,
+                                    maxReportAttributeId);
+                            preparedStatementReportAttribute.setString(2,
+                                    Constants.REPORT_ATTRIBUTE_SPECIES_BREEDING);
                             preparedStatementReportAttribute.setString(3, "TEXT");
-                            preparedStatementReportAttribute.setString(4, speciesBreeding);
+                            preparedStatementReportAttribute.setString(4,
+                                    speciesBreeding);
                             preparedStatementReportAttribute.addBatch();
                         }
 
-                        preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                        preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_SPECIES_OTHER_SPECIES);
+                        preparedStatementReportAttribute.setInt(1,
+                                maxReportAttributeId);
+                        preparedStatementReportAttribute.setString(2,
+                                Constants.REPORT_ATTRIBUTE_SPECIES_OTHER_SPECIES);
                         preparedStatementReportAttribute.setString(3, "TEXT");
                         preparedStatementReportAttribute.setString(4, "False");
                         preparedStatementReportAttribute.addBatch();
 
-                        preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                        preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_SPECIES_SOURCE_TABLE);
+                        preparedStatementReportAttribute.setInt(1,
+                                maxReportAttributeId);
+                        preparedStatementReportAttribute.setString(2,
+                                Constants.REPORT_ATTRIBUTE_SPECIES_SOURCE_TABLE);
                         preparedStatementReportAttribute.setString(3, "TEXT");
                         preparedStatementReportAttribute.setString(4, ecoInfo);
                         preparedStatementReportAttribute.addBatch();
@@ -649,81 +744,105 @@ public class Natura2000ImportParser extends DefaultHandler {
                     } else {
                         if (speciesName != null && speciesName.length() > 0) {
                             preparedStatementSiteAttribute.setString(1, siteCode);
-                            preparedStatementSiteAttribute.setString(2, "OTHER_SPECIES_" + speciesName);
+                            preparedStatementSiteAttribute.setString(2,
+                                    "OTHER_SPECIES_" + speciesName);
                             preparedStatementSiteAttribute.setString(3, "TEXT");
-                            preparedStatementSiteAttribute.setString(4, speciesName);
+                            preparedStatementSiteAttribute.setString(4,
+                                    speciesName);
                             preparedStatementSiteAttribute.setString(5, "spec");
                             preparedStatementSiteAttribute.addBatch();
                         }
 
-                        if (speciesResident != null && speciesResident.length() > 0) {
+                        if (speciesResident != null
+                                && speciesResident.length() > 0) {
                             preparedStatementSiteAttribute.setString(1, siteCode);
-                            preparedStatementSiteAttribute.setString(2, "OTHER_SPECIES_RESIDENT_" + speciesName);
+                            preparedStatementSiteAttribute.setString(2,
+                                    "OTHER_SPECIES_RESIDENT_" + speciesName);
                             preparedStatementSiteAttribute.setString(3, "TEXT");
-                            preparedStatementSiteAttribute.setString(4, speciesResident);
+                            preparedStatementSiteAttribute.setString(4,
+                                    speciesResident);
                             preparedStatementSiteAttribute.setString(5, "spec");
                             preparedStatementSiteAttribute.addBatch();
                         }
 
-                        if (speciesPopulation != null && speciesPopulation.length() > 0) {
+                        if (speciesPopulation != null
+                                && speciesPopulation.length() > 0) {
                             preparedStatementSiteAttribute.setString(1, siteCode);
-                            preparedStatementSiteAttribute.setString(2, "OTHER_SPECIES_POPULATION_" + speciesName);
+                            preparedStatementSiteAttribute.setString(2,
+                                    "OTHER_SPECIES_POPULATION_" + speciesName);
                             preparedStatementSiteAttribute.setString(3, "TEXT");
-                            preparedStatementSiteAttribute.setString(4, speciesPopulation);
+                            preparedStatementSiteAttribute.setString(4,
+                                    speciesPopulation);
                             preparedStatementSiteAttribute.setString(5, "spec");
                             preparedStatementSiteAttribute.addBatch();
                         }
 
-                        if (speciesBreeding != null && speciesBreeding.length() > 0) {
+                        if (speciesBreeding != null
+                                && speciesBreeding.length() > 0) {
                             preparedStatementSiteAttribute.setString(1, siteCode);
-                            preparedStatementSiteAttribute.setString(2, "OTHER_SPECIES_BREEDING_" + speciesName);
+                            preparedStatementSiteAttribute.setString(2,
+                                    "OTHER_SPECIES_BREEDING_" + speciesName);
                             preparedStatementSiteAttribute.setString(3, "TEXT");
-                            preparedStatementSiteAttribute.setString(4, speciesBreeding);
+                            preparedStatementSiteAttribute.setString(4,
+                                    speciesBreeding);
                             preparedStatementSiteAttribute.setString(5, "spec");
                             preparedStatementSiteAttribute.addBatch();
                         }
 
                         if (speciesWinter != null && speciesWinter.length() > 0) {
                             preparedStatementSiteAttribute.setString(1, siteCode);
-                            preparedStatementSiteAttribute.setString(2, "OTHER_SPECIES_WINTERING_" + speciesName);
+                            preparedStatementSiteAttribute.setString(2,
+                                    "OTHER_SPECIES_WINTERING_" + speciesName);
                             preparedStatementSiteAttribute.setString(3, "TEXT");
-                            preparedStatementSiteAttribute.setString(4, speciesWinter);
+                            preparedStatementSiteAttribute.setString(4,
+                                    speciesWinter);
                             preparedStatementSiteAttribute.setString(5, "spec");
                             preparedStatementSiteAttribute.addBatch();
                         }
 
-                        if (speciesStaging != null && speciesStaging.length() > 0) {
+                        if (speciesStaging != null
+                                && speciesStaging.length() > 0) {
                             preparedStatementSiteAttribute.setString(1, siteCode);
-                            preparedStatementSiteAttribute.setString(2, "OTHER_SPECIES_STAGING_" + speciesName);
+                            preparedStatementSiteAttribute.setString(2,
+                                    "OTHER_SPECIES_STAGING_" + speciesName);
                             preparedStatementSiteAttribute.setString(3, "TEXT");
-                            preparedStatementSiteAttribute.setString(4, speciesStaging);
+                            preparedStatementSiteAttribute.setString(4,
+                                    speciesStaging);
                             preparedStatementSiteAttribute.setString(5, "spec");
                             preparedStatementSiteAttribute.addBatch();
                         }
 
-                        if (speciesConservation != null && speciesConservation.length() > 0) {
+                        if (speciesConservation != null
+                                && speciesConservation.length() > 0) {
                             preparedStatementSiteAttribute.setString(1, siteCode);
-                            preparedStatementSiteAttribute.setString(2, "OTHER_SPECIES_CONSERVATION_" + speciesName);
+                            preparedStatementSiteAttribute.setString(2,
+                                    "OTHER_SPECIES_CONSERVATION_" + speciesName);
                             preparedStatementSiteAttribute.setString(3, "TEXT");
-                            preparedStatementSiteAttribute.setString(4, speciesConservation);
+                            preparedStatementSiteAttribute.setString(4,
+                                    speciesConservation);
                             preparedStatementSiteAttribute.setString(5, "spec");
                             preparedStatementSiteAttribute.addBatch();
                         }
 
-                        if (speciesIsolation != null && speciesIsolation.length() > 0) {
+                        if (speciesIsolation != null
+                                && speciesIsolation.length() > 0) {
                             preparedStatementSiteAttribute.setString(1, siteCode);
-                            preparedStatementSiteAttribute.setString(2, "OTHER_SPECIES_ISOLATION_" + speciesName);
+                            preparedStatementSiteAttribute.setString(2,
+                                    "OTHER_SPECIES_ISOLATION_" + speciesName);
                             preparedStatementSiteAttribute.setString(3, "TEXT");
-                            preparedStatementSiteAttribute.setString(4, speciesIsolation);
+                            preparedStatementSiteAttribute.setString(4,
+                                    speciesIsolation);
                             preparedStatementSiteAttribute.setString(5, "spec");
                             preparedStatementSiteAttribute.addBatch();
                         }
 
                         if (speciesGlobal != null && speciesGlobal.length() > 0) {
                             preparedStatementSiteAttribute.setString(1, siteCode);
-                            preparedStatementSiteAttribute.setString(2, "OTHER_SPECIES_GLOBAL_" + speciesName);
+                            preparedStatementSiteAttribute.setString(2,
+                                    "OTHER_SPECIES_GLOBAL_" + speciesName);
                             preparedStatementSiteAttribute.setString(3, "TEXT");
-                            preparedStatementSiteAttribute.setString(4, speciesGlobal);
+                            preparedStatementSiteAttribute.setString(4,
+                                    speciesGlobal);
                             preparedStatementSiteAttribute.setString(5, "spec");
                             preparedStatementSiteAttribute.addBatch();
                         }
@@ -754,44 +873,61 @@ public class Natura2000ImportParser extends DefaultHandler {
 
             if (qName.equalsIgnoreCase("OtherSpecies")) {
 
-                if (otherSpeciesSciName != null && otherSpeciesSciName.length() > 0) {
+                if (otherSpeciesSciName != null
+                        && otherSpeciesSciName.length() > 0) {
 
-                    String speciesIdNatObject = getSpeciesNatObjectIdByName(otherSpeciesSciName);
+                    String speciesIdNatObject = getSpeciesNatObjectIdByName(
+                            otherSpeciesSciName);
 
-                    if (speciesIdNatObject != null && speciesIdNatObject.length() > 0) {
+                    if (speciesIdNatObject != null
+                            && speciesIdNatObject.length() > 0) {
 
                         maxReportAttributeId++;
 
-                        preparedStatementNatObjectReportType.setString(1, siteNatureObjectId);
-                        preparedStatementNatObjectReportType.setString(2, speciesIdNatObject);
+                        preparedStatementNatObjectReportType.setString(1,
+                                siteNatureObjectId);
+                        preparedStatementNatObjectReportType.setString(2,
+                                speciesIdNatObject);
                         preparedStatementNatObjectReportType.setInt(3, -1);
                         preparedStatementNatObjectReportType.setInt(4, -1);
-                        preparedStatementNatObjectReportType.setInt(5, maxReportAttributeId);
+                        preparedStatementNatObjectReportType.setInt(5,
+                                maxReportAttributeId);
                         preparedStatementNatObjectReportType.setInt(6, -1);
 
                         preparedStatementNatObjectReportType.executeUpdate();
 
-                        setSitesTab(siteNatureObjectId, Constants.SITES_TAB_FAUNA_FLORA);
+                        setSitesTab(siteNatureObjectId,
+                                Constants.SITES_TAB_FAUNA_FLORA);
                         setSpeciesTabSites(speciesIdNatObject);
 
-                        preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                        preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_SPECIES_SOURCE_TABLE);
+                        preparedStatementReportAttribute.setInt(1,
+                                maxReportAttributeId);
+                        preparedStatementReportAttribute.setString(2,
+                                Constants.REPORT_ATTRIBUTE_SPECIES_SOURCE_TABLE);
                         preparedStatementReportAttribute.setString(3, "TEXT");
                         preparedStatementReportAttribute.setString(4, "spec");
                         preparedStatementReportAttribute.addBatch();
 
-                        if (otherSpeciesMotivation != null && otherSpeciesMotivation.length() > 0) {
-                            preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                            preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_OTHER_SPECIES_MOTIVATION);
+                        if (otherSpeciesMotivation != null
+                                && otherSpeciesMotivation.length() > 0) {
+                            preparedStatementReportAttribute.setInt(1,
+                                    maxReportAttributeId);
+                            preparedStatementReportAttribute.setString(2,
+                                    Constants.REPORT_ATTRIBUTE_OTHER_SPECIES_MOTIVATION);
                             preparedStatementReportAttribute.setString(3, "TEXT");
-                            preparedStatementReportAttribute.setString(4, otherSpeciesMotivation);
+                            preparedStatementReportAttribute.setString(4,
+                                    otherSpeciesMotivation);
                             preparedStatementReportAttribute.addBatch();
                         }
-                        if (otherSpeciesPopulation != null && otherSpeciesPopulation.length() > 0) {
-                            preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                            preparedStatementReportAttribute.setString(2, Constants.REPORT_ATTRIBUTE_OTHER_SPECIES_POPULATION);
+                        if (otherSpeciesPopulation != null
+                                && otherSpeciesPopulation.length() > 0) {
+                            preparedStatementReportAttribute.setInt(1,
+                                    maxReportAttributeId);
+                            preparedStatementReportAttribute.setString(2,
+                                    Constants.REPORT_ATTRIBUTE_OTHER_SPECIES_POPULATION);
                             preparedStatementReportAttribute.setString(3, "TEXT");
-                            preparedStatementReportAttribute.setString(4, otherSpeciesPopulation);
+                            preparedStatementReportAttribute.setString(4,
+                                    otherSpeciesPopulation);
                             preparedStatementReportAttribute.addBatch();
                         }
 
@@ -800,35 +936,49 @@ public class Natura2000ImportParser extends DefaultHandler {
 
                     } else {
                         preparedStatementSiteAttribute.setString(1, siteCode);
-                        preparedStatementSiteAttribute.setString(2, "OTHER_SPECIES_" + otherSpeciesSciName);
+                        preparedStatementSiteAttribute.setString(2,
+                                "OTHER_SPECIES_" + otherSpeciesSciName);
                         preparedStatementSiteAttribute.setString(3, "TEXT");
                         preparedStatementSiteAttribute.setString(4, "spec");
                         preparedStatementSiteAttribute.setString(5, "spec");
                         preparedStatementSiteAttribute.addBatch();
 
-                        setSitesTab(siteNatureObjectId, Constants.SITES_TAB_FAUNA_FLORA);
+                        setSitesTab(siteNatureObjectId,
+                                Constants.SITES_TAB_FAUNA_FLORA);
 
-                        if (otherSpeciesGroup != null && otherSpeciesGroup.length() > 0) {
+                        if (otherSpeciesGroup != null
+                                && otherSpeciesGroup.length() > 0) {
                             preparedStatementSiteAttribute.setString(1, siteCode);
-                            preparedStatementSiteAttribute.setString(2, "OTHER_SPECIES_TAXGROUP_" + otherSpeciesSciName);
+                            preparedStatementSiteAttribute.setString(2,
+                                    "OTHER_SPECIES_TAXGROUP_"
+                                    + otherSpeciesSciName);
                             preparedStatementSiteAttribute.setString(3, "TEXT");
-                            preparedStatementSiteAttribute.setString(4, otherSpeciesGroup);
+                            preparedStatementSiteAttribute.setString(4,
+                                    otherSpeciesGroup);
                             preparedStatementSiteAttribute.setString(5, "spec");
                             preparedStatementSiteAttribute.addBatch();
                         }
-                        if (otherSpeciesPopulation != null && otherSpeciesPopulation.length() > 0) {
+                        if (otherSpeciesPopulation != null
+                                && otherSpeciesPopulation.length() > 0) {
                             preparedStatementSiteAttribute.setString(1, siteCode);
-                            preparedStatementSiteAttribute.setString(2, "OTHER_SPECIES_POPULATION_" + otherSpeciesSciName);
+                            preparedStatementSiteAttribute.setString(2,
+                                    "OTHER_SPECIES_POPULATION_"
+                                    + otherSpeciesSciName);
                             preparedStatementSiteAttribute.setString(3, "TEXT");
-                            preparedStatementSiteAttribute.setString(4, otherSpeciesPopulation);
+                            preparedStatementSiteAttribute.setString(4,
+                                    otherSpeciesPopulation);
                             preparedStatementSiteAttribute.setString(5, "spec");
                             preparedStatementSiteAttribute.addBatch();
                         }
-                        if (otherSpeciesMotivation != null && otherSpeciesMotivation.length() > 0) {
+                        if (otherSpeciesMotivation != null
+                                && otherSpeciesMotivation.length() > 0) {
                             preparedStatementSiteAttribute.setString(1, siteCode);
-                            preparedStatementSiteAttribute.setString(2, "OTHER_SPECIES_MOTIVATION_" + otherSpeciesSciName);
+                            preparedStatementSiteAttribute.setString(2,
+                                    "OTHER_SPECIES_MOTIVATION_"
+                                    + otherSpeciesSciName);
                             preparedStatementSiteAttribute.setString(3, "TEXT");
-                            preparedStatementSiteAttribute.setString(4, otherSpeciesMotivation);
+                            preparedStatementSiteAttribute.setString(4,
+                                    otherSpeciesMotivation);
                             preparedStatementSiteAttribute.setString(5, "spec");
                             preparedStatementSiteAttribute.addBatch();
                         }
@@ -851,8 +1001,11 @@ public class Natura2000ImportParser extends DefaultHandler {
             }
 
             if (qName.equalsIgnoreCase("HabitatClasses")) {
-                if (siteDescriptionHabClassDesc != null && siteDescriptionHabClassCover != null) {
-                    updateSiteDescriptionHabitatClasses(siteDescriptionHabClassDesc, siteCode, siteDescriptionHabClassCover);
+                if (siteDescriptionHabClassDesc != null
+                        && siteDescriptionHabClassCover != null) {
+                    updateSiteDescriptionHabitatClasses(
+                            siteDescriptionHabClassDesc, siteCode,
+                            siteDescriptionHabClassCover);
                 }
 
                 siteDescriptionHabClassDesc = null;
@@ -881,15 +1034,21 @@ public class Natura2000ImportParser extends DefaultHandler {
             }
 
             if (qName.equalsIgnoreCase("DesignationTypes")) {
-                if (siteProtectionDesigTypeCode != null && siteProtectionDesigTypeCover != null) {
-                    preparedStatementSiteRelatedDesignations.setString(1, siteCode);
-                    preparedStatementSiteRelatedDesignations.setString(2, siteProtectionDesigTypeCode);
-                    preparedStatementSiteRelatedDesignations.setString(3, geoscopeId);
-                    preparedStatementSiteRelatedDesignations.setString(4, siteProtectionDesigTypeCover);
+                if (siteProtectionDesigTypeCode != null
+                        && siteProtectionDesigTypeCover != null) {
+                    preparedStatementSiteRelatedDesignations.setString(1,
+                            siteCode);
+                    preparedStatementSiteRelatedDesignations.setString(2,
+                            siteProtectionDesigTypeCode);
+                    preparedStatementSiteRelatedDesignations.setString(3,
+                            geoscopeId);
+                    preparedStatementSiteRelatedDesignations.setString(4,
+                            siteProtectionDesigTypeCover);
 
                     preparedStatementSiteRelatedDesignations.executeUpdate();
 
-                    setSitesTab(siteNatureObjectId, Constants.SITES_TAB_DESIGNATION);
+                    setSitesTab(siteNatureObjectId,
+                            Constants.SITES_TAB_DESIGNATION);
                 }
             }
 
@@ -912,7 +1071,8 @@ public class Natura2000ImportParser extends DefaultHandler {
                 siteImpactsPercent = buf.toString().trim();
             }
 
-            if (qName.equalsIgnoreCase("WithinSite") || qName.equalsIgnoreCase("AroundSite")) {
+            if (qName.equalsIgnoreCase("WithinSite")
+                    || qName.equalsIgnoreCase("AroundSite")) {
                 if (siteImpactsCode != null && siteImpactsCode.length() > 0) {
 
                     maxReportTypeId++;
@@ -923,7 +1083,8 @@ public class Natura2000ImportParser extends DefaultHandler {
 
                     maxReportAttributeId++;
 
-                    preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
+                    preparedStatementReportAttribute.setInt(1,
+                            maxReportAttributeId);
                     preparedStatementReportAttribute.setString(2, "IN_OUT");
                     preparedStatementReportAttribute.setString(3, "TEXT");
                     if (qName.equalsIgnoreCase("WithinSite")) {
@@ -933,41 +1094,56 @@ public class Natura2000ImportParser extends DefaultHandler {
                     }
                     preparedStatementReportAttribute.addBatch();
 
-                    if (siteImpactsIntensity != null && siteImpactsIntensity.length() > 0) {
-                        preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                        preparedStatementReportAttribute.setString(2, "INTENSITY");
+                    if (siteImpactsIntensity != null
+                            && siteImpactsIntensity.length() > 0) {
+                        preparedStatementReportAttribute.setInt(1,
+                                maxReportAttributeId);
+                        preparedStatementReportAttribute.setString(2,
+                                "INTENSITY");
                         preparedStatementReportAttribute.setString(3, "TEXT");
-                        preparedStatementReportAttribute.setString(4, siteImpactsIntensity);
+                        preparedStatementReportAttribute.setString(4,
+                                siteImpactsIntensity);
                         preparedStatementReportAttribute.addBatch();
                     }
-                    if (siteImpactsInfluence != null && siteImpactsInfluence.length() > 0) {
-                        preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
-                        preparedStatementReportAttribute.setString(2, "INFLUENCE");
+                    if (siteImpactsInfluence != null
+                            && siteImpactsInfluence.length() > 0) {
+                        preparedStatementReportAttribute.setInt(1,
+                                maxReportAttributeId);
+                        preparedStatementReportAttribute.setString(2,
+                                "INFLUENCE");
                         preparedStatementReportAttribute.setString(3, "TEXT");
-                        preparedStatementReportAttribute.setString(4, siteImpactsInfluence);
+                        preparedStatementReportAttribute.setString(4,
+                                siteImpactsInfluence);
                         preparedStatementReportAttribute.addBatch();
                     }
-                    if (siteImpactsPercent != null && siteImpactsPercent.length() > 0) {
-                        preparedStatementReportAttribute.setInt(1, maxReportAttributeId);
+                    if (siteImpactsPercent != null
+                            && siteImpactsPercent.length() > 0) {
+                        preparedStatementReportAttribute.setInt(1,
+                                maxReportAttributeId);
                         preparedStatementReportAttribute.setString(2, "COVER");
                         preparedStatementReportAttribute.setString(3, "NUMBER");
-                        preparedStatementReportAttribute.setString(4, siteImpactsPercent);
+                        preparedStatementReportAttribute.setString(4,
+                                siteImpactsPercent);
                         preparedStatementReportAttribute.addBatch();
                     }
 
                     preparedStatementReportAttribute.executeBatch();
                     preparedStatementReportAttribute.clearParameters();
 
-                    preparedStatementNatObjectReportType.setString(1, siteNatureObjectId);
+                    preparedStatementNatObjectReportType.setString(1,
+                            siteNatureObjectId);
                     preparedStatementNatObjectReportType.setInt(2, -1);
                     preparedStatementNatObjectReportType.setInt(3, -1);
-                    preparedStatementNatObjectReportType.setInt(4, maxReportTypeId);
-                    preparedStatementNatObjectReportType.setInt(5, maxReportAttributeId);
+                    preparedStatementNatObjectReportType.setInt(4,
+                            maxReportTypeId);
+                    preparedStatementNatObjectReportType.setInt(5,
+                            maxReportAttributeId);
                     preparedStatementNatObjectReportType.setInt(6, -1);
 
                     preparedStatementNatObjectReportType.executeUpdate();
 
-                    setSitesTab(siteNatureObjectId, Constants.SITES_TAB_OTHER_INFO);
+                    setSitesTab(siteNatureObjectId,
+                            Constants.SITES_TAB_OTHER_INFO);
 
                     siteImpactsCode = null;
                     siteImpactsIntensity = null;
@@ -987,17 +1163,22 @@ public class Natura2000ImportParser extends DefaultHandler {
         this.inputStream = inputStream;
 
         try {
-            maxNoIdInt = getMaxId("SELECT MAX(ID_NATURE_OBJECT) FROM CHM62EDT_NATURE_OBJECT");
-            maxReportAttributeId = getMaxId("SELECT MAX(ID_REPORT_ATTRIBUTES) FROM CHM62EDT_REPORT_ATTRIBUTES");
-            maxReportTypeId = getMaxId("SELECT MAX(ID_REPORT_TYPE) FROM CHM62EDT_REPORT_TYPE");
+            maxNoIdInt = getMaxId(
+                    "SELECT MAX(ID_NATURE_OBJECT) FROM CHM62EDT_NATURE_OBJECT");
+            maxReportAttributeId = getMaxId(
+                    "SELECT MAX(ID_REPORT_ATTRIBUTES) FROM CHM62EDT_REPORT_ATTRIBUTES");
+            maxReportTypeId = getMaxId(
+                    "SELECT MAX(ID_REPORT_TYPE) FROM CHM62EDT_REPORT_TYPE");
 
             String queryNatObject = "INSERT INTO chm62edt_nature_object (ID_NATURE_OBJECT, ORIGINAL_CODE, ID_DC, TYPE) VALUES (?,?, -1, 'NATURA2000_SITES')";
 
-            this.preparedStatementNatObject = con.prepareStatement(queryNatObject);
+            this.preparedStatementNatObject = con.prepareStatement(
+                    queryNatObject);
 
             String updateNatObject = "UPDATE chm62edt_nature_object SET TYPE = ? WHERE ID_NATURE_OBJECT = ? AND ORIGINAL_CODE = ?";
 
-            this.preparedStatementUpdateNatObject = con.prepareStatement(updateNatObject);
+            this.preparedStatementUpdateNatObject = con.prepareStatement(
+                    updateNatObject);
 
             String querySiteInsert = "INSERT INTO chm62edt_sites (ID_SITE, ID_NATURE_OBJECT, NAME, COMPILATION_DATE, "
                     + "COMPLEX_NAME, DISTRICT_NAME, "
@@ -1005,7 +1186,8 @@ public class Natura2000ImportParser extends DefaultHandler {
                     + "LONGITUDE, LONG_EW, LONG_DEG, LONG_MIN, LONG_SEC, AREA, ALT_MIN, ALT_MAX, ALT_MEAN, SOURCE_DB, ID_GEOSCOPE) VALUES "
                     + "(?,?,?,?,'','',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-            this.preparedStatementSiteInsert = con.prepareStatement(querySiteInsert);
+            this.preparedStatementSiteInsert = con.prepareStatement(
+                    querySiteInsert);
 
             String querySites = "UPDATE chm62edt_sites SET NAME=?, COMPILATION_DATE=?, UPDATE_DATE=?, "
                     + "SPA_DATE=?, RESPONDENT=?, DESCRIPTION=?, LATITUDE=?, LAT_NS=?, LAT_DEG=?, LAT_MIN=?, "
@@ -1016,50 +1198,59 @@ public class Natura2000ImportParser extends DefaultHandler {
 
             String queryUpdateManager = "UPDATE chm62edt_sites SET MANAGER = ? WHERE ID_SITE = ?";
 
-            this.preparedStatementUpdateManager = con.prepareStatement(queryUpdateManager);
+            this.preparedStatementUpdateManager = con.prepareStatement(
+                    queryUpdateManager);
 
             String queryBioRegion = "UPDATE chm62edt_site_attributes SET VALUE=? WHERE ID_SITE=? AND NAME=?";
 
-            this.preparedStatementBioRegion = con.prepareStatement(queryBioRegion);
+            this.preparedStatementBioRegion = con.prepareStatement(
+                    queryBioRegion);
 
             String insertNatObjectReportType = "INSERT INTO chm62edt_nature_object_report_type "
                     + "(ID_NATURE_OBJECT, ID_NATURE_OBJECT_LINK, ID_GEOSCOPE, ID_REPORT_TYPE, ID_REPORT_ATTRIBUTES, ID_DC) "
                     + "VALUES (?,?,?,?,?,?)";
 
-            this.preparedStatementNatObjectReportType = con.prepareStatement(insertNatObjectReportType);
+            this.preparedStatementNatObjectReportType = con.prepareStatement(
+                    insertNatObjectReportType);
 
             String insertNatObjectGeoscope = "INSERT INTO CHM62EDT_NATURE_OBJECT_GEOSCOPE "
                     + "(ID_NATURE_OBJECT, ID_NATURE_OBJECT_LINK, ID_DC, ID_GEOSCOPE, ID_REPORT_ATTRIBUTES) "
                     + "VALUES (?,-1,-1,?,-1)";
 
-            this.preparedStatementNatObjectGeoscope = con.prepareStatement(insertNatObjectGeoscope);
+            this.preparedStatementNatObjectGeoscope = con.prepareStatement(
+                    insertNatObjectGeoscope);
 
             String insertReportAttribute = "INSERT INTO chm62edt_report_attributes "
                     + "(ID_REPORT_ATTRIBUTES, NAME, TYPE, VALUE) VALUES (?,?,?,?)";
 
-            this.preparedStatementReportAttribute = con.prepareStatement(insertReportAttribute);
+            this.preparedStatementReportAttribute = con.prepareStatement(
+                    insertReportAttribute);
 
             String insertSiteSites = "INSERT INTO CHM62EDT_SITES_SITES "
                     + "(ID_SITE, ID_SITE_LINK, SEQUENCE, RELATION_TYPE, WITHIN_PROJECT, SOURCE_TABLE) "
                     + "VALUES (?,?,-1,?,1,'sitrel')";
 
-            this.preparedStatementSiteSites = con.prepareStatement(insertSiteSites);
+            this.preparedStatementSiteSites = con.prepareStatement(
+                    insertSiteSites);
 
             String insertSiteAttribute = "INSERT INTO chm62edt_site_attributes "
                     + "(ID_SITE, NAME, TYPE, VALUE, SOURCE_DB, SOURCE_TABLE) VALUES (?,?,?,?,'NATURA2000',?)";
 
-            this.preparedStatementSiteAttribute = con.prepareStatement(insertSiteAttribute);
+            this.preparedStatementSiteAttribute = con.prepareStatement(
+                    insertSiteAttribute);
 
             String insertSiteRelatedDesignations = "INSERT INTO chm62edt_sites_related_designations "
                     + "(ID_SITE, ID_DESIGNATION, ID_GEOSCOPE, SEQUENCE, OVERLAP_TYPE, OVERLAP, SOURCE_DB, SOURCE_TABLE) "
                     + "VALUES (?,?,?,-1,-1,?,'NATURA2000','desigc')";
 
-            this.preparedStatementSiteRelatedDesignations = con.prepareStatement(insertSiteRelatedDesignations);
+            this.preparedStatementSiteRelatedDesignations = con.prepareStatement(
+                    insertSiteRelatedDesignations);
 
             String insertReportType = "INSERT INTO chm62edt_report_type "
                     + "(ID_REPORT_TYPE, ID_LOOKUP, LOOKUP_TYPE) VALUES (?,?,?)";
 
-            this.preparedStatementReportType = con.prepareStatement(insertReportType);
+            this.preparedStatementReportType = con.prepareStatement(
+                    insertReportType);
 
             con.setAutoCommit(false);
             parseDocument();
@@ -1070,7 +1261,9 @@ public class Natura2000ImportParser extends DefaultHandler {
 
             if (siteCode != null) {
                 e.printStackTrace();
-                errors.add("Error! Site ID: " + siteCode + " Error Message: " + e.getMessage());
+                errors.add(
+                        "Error! Site ID: " + siteCode + " Error Message: "
+                        + e.getMessage());
             } else {
                 e.printStackTrace();
                 errors.add("Error Message: " + e.getMessage());
@@ -1139,14 +1332,16 @@ public class Natura2000ImportParser extends DefaultHandler {
     }
 
     private String getHabitatNatObjectId(String habCode) {
-        String query = "SELECT ID_NATURE_OBJECT FROM chm62edt_habitat WHERE CODE_2000='" + habCode + "'";
+        String query = "SELECT ID_NATURE_OBJECT FROM chm62edt_habitat WHERE CODE_2000='"
+                + habCode + "'";
         String noId = sqlUtilities.ExecuteSQL(query);
 
         return noId;
     }
 
     private void getSiteNatObjectId() {
-        String query = "SELECT ID_NATURE_OBJECT FROM chm62edt_sites WHERE ID_SITE='" + siteCode + "'";
+        String query = "SELECT ID_NATURE_OBJECT FROM chm62edt_sites WHERE ID_SITE='"
+                + siteCode + "'";
 
         siteNatureObjectId = sqlUtilities.ExecuteSQL(query);
         if (siteNatureObjectId == null || siteNatureObjectId.length() == 0) {
@@ -1216,8 +1411,8 @@ public class Natura2000ImportParser extends DefaultHandler {
     }
 
     private String getGeoscopeId() {
-        String query = "SELECT ID_GEOSCOPE FROM CHM62EDT_COUNTRY WHERE ISO_2L = '" + siteCode.substring(0, 2)
-                + "' ORDER BY ID_GEOSCOPE";
+        String query = "SELECT ID_GEOSCOPE FROM CHM62EDT_COUNTRY WHERE ISO_2L = '"
+                + siteCode.substring(0, 2) + "' ORDER BY ID_GEOSCOPE";
         String geoId = sqlUtilities.ExecuteSQL(query);
 
         return geoId;
@@ -1236,7 +1431,8 @@ public class Natura2000ImportParser extends DefaultHandler {
 
     private boolean regionExists(String regionCode) {
         boolean ret = false;
-        String query = "SELECT ID_REGION_CODE FROM chm62edt_region_codes WHERE ID_REGION_CODE = '" + regionCode + "'";
+        String query = "SELECT ID_REGION_CODE FROM chm62edt_region_codes WHERE ID_REGION_CODE = '"
+                + regionCode + "'";
         String rcId = sqlUtilities.ExecuteSQL(query);
 
         if (rcId != null && rcId.length() > 0) {
@@ -1268,8 +1464,8 @@ public class Natura2000ImportParser extends DefaultHandler {
     }
 
     private String getSpeciesNatObjectIdByName(String sciName) {
-        String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE SCIENTIFIC_NAME='" + EunisUtil.replaceTags(sciName)
-                + "'";
+        String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE SCIENTIFIC_NAME='"
+                + EunisUtil.replaceTags(sciName) + "'";
         String noId = sqlUtilities.ExecuteSQL(query);
 
         return noId;
@@ -1277,7 +1473,8 @@ public class Natura2000ImportParser extends DefaultHandler {
 
     private void updateSiteDescriptionHabitatClasses(String value, String siteId, String cover) throws Exception {
         String code_query = "SELECT SUBSTRING(name,length(name) - instr(reverse(name),'_') + 2) AS CODE "
-                + "FROM chm62edt_site_attributes WHERE ID_SITE = '" + siteId + "' AND VALUE = '" + value + "'";
+                + "FROM chm62edt_site_attributes WHERE ID_SITE = '" + siteId
+                + "' AND VALUE = '" + value + "'";
         String code = sqlUtilities.ExecuteSQL(code_query);
 
         PreparedStatement ps = null;
@@ -1311,7 +1508,8 @@ public class Natura2000ImportParser extends DefaultHandler {
 
                 ps = con.prepareStatement(query);
             } else {
-                String query = "UPDATE chm62edt_tab_page_sites SET " + tabName + "='Y' WHERE ID_NATURE_OBJECT=?";
+                String query = "UPDATE chm62edt_tab_page_sites SET " + tabName
+                        + "='Y' WHERE ID_NATURE_OBJECT=?";
 
                 ps = con.prepareStatement(query);
             }
@@ -1400,7 +1598,8 @@ public class Natura2000ImportParser extends DefaultHandler {
 
                     if (indexMin != -1) {
                         latMin = minString.substring(0, indexMin);
-                        String restMin = minString.substring(indexMin + 1, minString.length());
+                        String restMin = minString.substring(indexMin + 1,
+                                minString.length());
 
                         // calculate LAT_SEC
                         if (restMin != null && restMin.length() > 0) {
@@ -1461,7 +1660,8 @@ public class Natura2000ImportParser extends DefaultHandler {
 
                     if (indexMin != -1) {
                         lonMin = minString.substring(0, indexMin);
-                        String restMin = minString.substring(indexMin + 1, minString.length());
+                        String restMin = minString.substring(indexMin + 1,
+                                minString.length());
 
                         // calculate LON_SEC
                         if (restMin != null && restMin.length() > 0) {

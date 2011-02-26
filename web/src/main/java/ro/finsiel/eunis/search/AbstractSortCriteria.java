@@ -52,7 +52,8 @@ public abstract class AbstractSortCriteria {
      */
     public String getCriteriaAsString() throws InitializationException {
         if (null == possibleSorts) {
-            throw new InitializationException("possibleSorts not intialized, please review the code!");
+            throw new InitializationException(
+                    "possibleSorts not intialized, please review the code!");
         }
         return possibleSorts.get(getSortCriteria()).toString();
     }
@@ -118,8 +119,11 @@ public abstract class AbstractSortCriteria {
 
         if (null != sortCriteria && null != ascendency) {
             // <input type="hidden" name="sort" value="1">
-            form.append(Utilities.writeFormParameter("sort", sortCriteria.toString()));
-            form.append(Utilities.writeFormParameter("ascendency", ascendency.toString()));
+            form.append(
+                    Utilities.writeFormParameter("sort", sortCriteria.toString()));
+            form.append(
+                    Utilities.writeFormParameter("ascendency",
+                    ascendency.toString()));
         }
         return form.toString();
     }

@@ -1,11 +1,12 @@
 /*
  * $Id
-*/
+ */
 
 package ro.finsiel.eunis.jrfTables;
 
 
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  *
@@ -13,69 +14,70 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class Chm62edtTemporalPersist extends PersistentObject implements HabitatOtherInfo {
 
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idTemporal = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_description = null;
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idTemporal = null;
 
-  private String name = null;
+    /**
+     * This is a database field.
+     **/
+    private String i_description = null;
 
-  private Integer used = null;
+    private String name = null;
 
-  public Chm62edtTemporalPersist() {
-    super();
-  }
+    private Integer used = null;
 
-  public String getName() {
-    return name;
-  }
+    public Chm62edtTemporalPersist() {
+        super();
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getDescription() {
-    return i_description;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdTemporal() {
-    return i_idTemporal;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getDescription() {
+        return i_description;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param description
-   **/
-  public void setDescription(String description) {
-    i_description = description;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdTemporal() {
+        return i_idTemporal;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idTemporal
-   **/
-  public void setIdTemporal(Integer idTemporal) {
-    i_idTemporal = idTemporal;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param description
+     **/
+    public void setDescription(String description) {
+        i_description = description;
+        this.markModifiedPersistentState();
+    }
 
-  public Integer getUsed() {
-    return used;
-  }
+    /**
+     * Setter for a database field.
+     * @param idTemporal
+     **/
+    public void setIdTemporal(Integer idTemporal) {
+        i_idTemporal = idTemporal;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
 
-  public void setUsed(Integer used) {
-    this.used = used;
-  }
+    public Integer getUsed() {
+        return used;
+    }
+
+    public void setUsed(Integer used) {
+        this.used = used;
+    }
 }

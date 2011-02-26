@@ -21,22 +21,22 @@ import ro.finsiel.eunis.search.sites.designations.FactsheetDesignations;
 
 /**
  * Action bean to handle designations-factsheet functionality.
- * 
+ *
  * @author Risto Alt
  * <a href="mailto:risto.alt@tietoenator.com">contact</a>
  */
 @UrlBinding("/designations/{idGeo}:{idDesig}")
 public class DesignationsFactsheetActionBean extends AbstractStripesAction {
-	
+
     private String idGeo = "";
     private String idDesig = "";
     private boolean showSites = false;
     private String fromWhere = "";
-    
+
     private String btrail;
     private String pageTitle = "";
     private String metaDescription = "";
-    
+
     private String fromWho = "";
     private String country = "";
     private boolean isCountry = false;
@@ -45,52 +45,61 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
     private List<DesignationPersist> sites;
     private String siteIds = "";
     private boolean hasSites = false;
-	
+
     private Chm62edtDesignationsPersist factsheet;
-	
+
     /**
      * This action bean only serves RDF through {@link RdfAware}.
      */
     @DefaultHandler
     public Resolution defaultAction() {
-		
+
         String eeaHome = getContext().getInitParameter("EEA_HOME");
 
-        btrail = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,designation_factsheet_location";
-        pageTitle = getContext().getInitParameter("PAGE_TITLE") + getContentManagement().cms("sites_designations-factsheet_title");
-		
+        btrail = "eea#" + eeaHome
+                + ",home#index.jsp,sites#sites.jsp,designation_factsheet_location";
+        pageTitle = getContext().getInitParameter("PAGE_TITLE")
+                + getContentManagement().cms(
+                        "sites_designations-factsheet_title");
+
         if (idDesig != null && idGeo != null) {
-            FactsheetDesignations design = new FactsheetDesignations(idDesig, idGeo);
+            FactsheetDesignations design = new FactsheetDesignations(idDesig,
+                    idGeo);
 
             // Get the DesignationPersist object
             factsheet = design.FindDesignationPersist();
             if (factsheet != null) {
-	    	    
+
                 // Name of designation
-                fromWho = (factsheet.getDescription() != null && !factsheet.getDescription().equalsIgnoreCase("")
-                        ? factsheet.getDescription()
-                        : "");
+                fromWho = (factsheet.getDescription() != null
+                        && !factsheet.getDescription().equalsIgnoreCase("")
+                                ? factsheet.getDescription()
+                                : "");
                 if (fromWho.equalsIgnoreCase("")) {
-                    fromWho = (factsheet.getDescriptionEn() != null && !factsheet.getDescriptionEn().equalsIgnoreCase("")
-                            ? factsheet.getDescriptionEn()
-                            : "");
+                    fromWho = (factsheet.getDescriptionEn() != null
+                            && !factsheet.getDescriptionEn().equalsIgnoreCase("")
+                                    ? factsheet.getDescriptionEn()
+                                    : "");
                 }
-	    	    
-                country = Utilities.formatString(Utilities.findCountryByIdGeoscope(factsheet.getIdGeoscope()), "");
+
+                country = Utilities.formatString(
+                        Utilities.findCountryByIdGeoscope(
+                                factsheet.getIdGeoscope()),
+                                "");
                 if (country.equalsIgnoreCase("Europe")) {
                     country = "European Community";
                 }
-	    	    
+
                 if (country != null && country.trim().length() > 0) {
                     List countries = new Chm62edtCountryDomain().findWhere(
-                            "ISO_2L<>'' AND ISO_2L<>'null' AND ISO_2L IS NOT NULL AND SELECTION <> 0 and AREA_NAME_EN ='" + country
-                            + "'");
+                            "ISO_2L<>'' AND ISO_2L<>'null' AND ISO_2L IS NOT NULL AND SELECTION <> 0 and AREA_NAME_EN ='"
+                                    + country + "'");
 
                     if (countries != null && countries.size() > 0) {
                         isCountry = true;
                     }
                 }
-	    	    
+
                 // Are CDDA sites or not
                 if (factsheet.getCddaSites() != null) {
                     cddacount = factsheet.getCddaSites();
@@ -101,36 +110,43 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
                     }
                 }
                 try {
-                    reference = DaoFactory.getDaoFactory().getDocumentsDao().getDesignationDcObject(idDesig, idGeo);
-	            	
+                    reference = DaoFactory.getDaoFactory().getDocumentsDao().getDesignationDcObject(
+                            idDesig, idGeo);
+
                     if (showSites) {
-                        sites = SitesSearchUtility.findSitesForDesignation(idDesig, idGeo);
-                        int maxSitesPerMap = Utilities.checkedStringToInt(getContext().getInitParameter("MAX_SITES_PER_MAP"), 2000);
+                        sites = SitesSearchUtility.findSitesForDesignation(
+                                idDesig, idGeo);
+                        int maxSitesPerMap = Utilities.checkedStringToInt(
+                                getContext().getInitParameter(
+                                        "MAX_SITES_PER_MAP"),
+                                        2000);
 
                         if (sites.size() < maxSitesPerMap) {
                             for (int i = 0; i < sites.size(); i++) {
-                                DesignationPersist site = (DesignationPersist) sites.get(i);
+                                DesignationPersist site = (DesignationPersist) sites.get(
+                                        i);
 
                                 siteIds += "'" + site.getIdSite() + "'";
-                                if (i < sites.size() - 1) { 
+                                if (i < sites.size() - 1) {
                                     siteIds += ",";
                                 }
                             }
                         }
                     }
-	            	
-                    hasSites = getContext().getSqlUtilities().DesignationHasSites(idDesig, idGeo);
-	            		
+
+                    hasSites = getContext().getSqlUtilities().DesignationHasSites(
+                            idDesig, idGeo);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-	    	    
+
             }
         }
-		
+
         return new ForwardResolution("/stripes/designations-factsheet.jsp");
     }
-	
+
     public Chm62edtDesignationsPersist getFactsheet() {
         return factsheet;
     }

@@ -9,25 +9,26 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 /**
  * ActionBean to replace old /habitats-factsheet.jsp.
- * 
+ *
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
 @UrlBinding("/habitats-factsheet.jsp")
 public class HabitatsFactsheetRedirectActionBean extends AbstractStripesAction {
-	
+
     private static final String[] allTypes = new String[] {
-        "general", "distribution", "instruments", "habitats", "sites", "species", "other"}; 
-	
+        "general", "distribution", "instruments", "habitats", "sites", "species",
+        "other"};
+
     private String idHabitat;
-	
+
     // selected tab
     private int tab;
     private int mini = -1;
-	
+
     @DefaultHandler
     public Resolution index() {
-		
+
         String tabName = allTypes[tab];
         String url = "/habitats/" + idHabitat;
 

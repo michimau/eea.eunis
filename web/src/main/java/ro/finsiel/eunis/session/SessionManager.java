@@ -1,5 +1,6 @@
 package ro.finsiel.eunis.session;
 
+
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Vector;
 import java.util.HashMap;
 
+
 /**
  * This is the main session manager object which keeps all the 'global' variables for the session. So if you want to
  * keep something on the session global, please use this object.
@@ -26,968 +28,979 @@ import java.util.HashMap;
  */
 public final class SessionManager implements java.io.Serializable {
 
-  private static Logger logger = Logger.getLogger(SessionManager.class);
+    private static Logger logger = Logger.getLogger(SessionManager.class);
 
-  private WebContentManagement webContent = new WebContentManagement();
+    private WebContentManagement webContent = new WebContentManagement();
 
-  private String currentLanguage = "en";
-  private static HashMap<String, WebContentManagement> languages = new HashMap();
-  boolean editContentMode = false;
-  boolean advancedEditContentMode = false;
+    private String currentLanguage = "en";
+    private static HashMap<String, WebContentManagement> languages = new HashMap();
+    boolean editContentMode = false;
+    boolean advancedEditContentMode = false;
 
-  /** This is the username for the current session. If user didn't logon, then this field is null */
-  private String username = null;
-  /** This is the password for the current session. If user didn't logon, then this field is null */
-  private String password = null;
-  /** Keeps the track of user login/logout. When true, an user was authorized. */
-  private boolean authenticated = false;
-  /** Keeps the user preferences. */
-  private UserPersist userPrefs = new UserPersist();
-  /** Show / HIDE EUNIS not(!) validated species to authenticated users. */
-  private boolean showEUNISInvalidatedSpecies = false;
+    /** This is the username for the current session. If user didn't logon, then this field is null */
+    private String username = null;
 
-  private boolean login_RIGHT = false;
-  private boolean upload_reports_RIGHT = false;
-  private boolean services_RIGHT = false;
-  private boolean save_search_criteria_RIGHT = false;
-  private boolean content_management_RIGHT = false;
-  private boolean import_export_data_RIGHT = false;
-  private boolean upload_pictures_RIGHT = false;
-  private boolean role_management_RIGHT = false;
-  private boolean admin_ROLE = false;
-  private boolean edit_glossary_RIGHT = false;
-  private boolean manage_users = false;
+    /** This is the password for the current session. If user didn't logon, then this field is null */
+    private String password = null;
 
-  private ThemeManager themeManager = null;
+    /** Keeps the track of user login/logout. When true, an user was authorized. */
+    private boolean authenticated = false;
 
-  private String explainedcriteria = "";
-  private String listcriteria = "";
-  private String sourcedb = "";
-  private String combinedexplainedcriteria1 = "";
-  private String combinedlistcriteria1 = "";
-  private String combinednatureobject1 = "";
-  private String combinedexplainedcriteria2 = "";
-  private String combinedlistcriteria2 = "";
-  private String combinednatureobject2 = "";
-  private String combinedexplainedcriteria3 = "";
-  private String combinedlistcriteria3 = "";
-  private String combinednatureobject3 = "";
-  private String combinedcombinationtype = "";
+    /** Keeps the user preferences. */
+    private UserPersist userPrefs = new UserPersist();
 
-  private boolean digirProviderRunChecked = false;
-  private boolean digirProviderRunning = false;
+    /** Show / HIDE EUNIS not(!) validated species to authenticated users. */
+    private boolean showEUNISInvalidatedSpecies = false;
 
-  private String cacheReportEmailAddress = "";
+    private boolean login_RIGHT = false;
+    private boolean upload_reports_RIGHT = false;
+    private boolean services_RIGHT = false;
+    private boolean save_search_criteria_RIGHT = false;
+    private boolean content_management_RIGHT = false;
+    private boolean import_export_data_RIGHT = false;
+    private boolean upload_pictures_RIGHT = false;
+    private boolean role_management_RIGHT = false;
+    private boolean admin_ROLE = false;
+    private boolean edit_glossary_RIGHT = false;
+    private boolean manage_users = false;
 
-  boolean languageDetected = false;
+    private ThemeManager themeManager = null;
 
-  static
-  {
-    // When server is initializing, load the default language.
-    WebContentManagement cm = new WebContentManagement();
-    cm.setLanguage( "en" );
-    languages.put( "en", cm );
-  }
+    private String explainedcriteria = "";
+    private String listcriteria = "";
+    private String sourcedb = "";
+    private String combinedexplainedcriteria1 = "";
+    private String combinedlistcriteria1 = "";
+    private String combinednatureobject1 = "";
+    private String combinedexplainedcriteria2 = "";
+    private String combinedlistcriteria2 = "";
+    private String combinednatureobject2 = "";
+    private String combinedexplainedcriteria3 = "";
+    private String combinedlistcriteria3 = "";
+    private String combinednatureobject3 = "";
+    private String combinedcombinationtype = "";
 
-  /**
-   * Used for Combined Search function.
-   * @return Source DB.
-   */
-  public String getSourcedb()
-  {
-    return sourcedb;
-  }
+    private boolean digirProviderRunChecked = false;
+    private boolean digirProviderRunning = false;
 
-  /**
-   * Used for Combined Search function.
-   * @param sourcedb New Source DB.
-   */
-  public void setSourcedb(String sourcedb) {
-    this.sourcedb = sourcedb;
-  }
+    private String cacheReportEmailAddress = "";
 
-  /**
-   * Used for Combined Search function.
-   * @return First nature object from which search was started. (Possible values: "Species", "Habitats", "Sites").
-   */
-  public String getCombinednatureobject1() {
-    return combinednatureobject1;
-  }
+    boolean languageDetected = false;
 
-  /**
-   * Used for Combined Search function.
-   * @param combinednatureobject1 New nature object value.
-   */
-  public void setCombinednatureobject1(String combinednatureobject1) {
-    this.combinednatureobject1 = combinednatureobject1;
-  }
+    static {
+        // When server is initializing, load the default language.
+        WebContentManagement cm = new WebContentManagement();
 
-  /**
-   * Used for Combined Search function.
-   * @return Human readable string explaining search criteria.
-   */
-  public String getCombinedexplainedcriteria2() {
-    return combinedexplainedcriteria2;
-  }
+        cm.setLanguage("en");
+        languages.put("en", cm);
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @param combinedexplainedcriteria2 Explanation of search criteria.
-   */
-  public void setCombinedexplainedcriteria2(String combinedexplainedcriteria2) {
-    this.combinedexplainedcriteria2 = combinedexplainedcriteria2;
-  }
+    /**
+     * Used for Combined Search function.
+     * @return Source DB.
+     */
+    public String getSourcedb() {
+        return sourcedb;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @return List of search criteria in human readable form.
-   */
-  public String getCombinedlistcriteria2() {
-    return combinedlistcriteria2;
-  }
+    /**
+     * Used for Combined Search function.
+     * @param sourcedb New Source DB.
+     */
+    public void setSourcedb(String sourcedb) {
+        this.sourcedb = sourcedb;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @param combinedlistcriteria2 New list of search criteria.
-   */
-  public void setCombinedlistcriteria2(String combinedlistcriteria2) {
-    this.combinedlistcriteria2 = combinedlistcriteria2;
-  }
+    /**
+     * Used for Combined Search function.
+     * @return First nature object from which search was started. (Possible values: "Species", "Habitats", "Sites").
+     */
+    public String getCombinednatureobject1() {
+        return combinednatureobject1;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @return Second nature object choosed for searching. (Possible values: "Species", "Habitats", "Sites").
-   */
-  public String getCombinednatureobject2() {
-    return combinednatureobject2;
-  }
+    /**
+     * Used for Combined Search function.
+     * @param combinednatureobject1 New nature object value.
+     */
+    public void setCombinednatureobject1(String combinednatureobject1) {
+        this.combinednatureobject1 = combinednatureobject1;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @param combinednatureobject2 Nature object used for searching.
-   */
-  public void setCombinednatureobject2(String combinednatureobject2) {
-    this.combinednatureobject2 = combinednatureobject2;
-  }
+    /**
+     * Used for Combined Search function.
+     * @return Human readable string explaining search criteria.
+     */
+    public String getCombinedexplainedcriteria2() {
+        return combinedexplainedcriteria2;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @return Human readable string explaining search criteria.
-   */
-  public String getCombinedexplainedcriteria3() {
-    return combinedexplainedcriteria3;
-  }
+    /**
+     * Used for Combined Search function.
+     * @param combinedexplainedcriteria2 Explanation of search criteria.
+     */
+    public void setCombinedexplainedcriteria2(String combinedexplainedcriteria2) {
+        this.combinedexplainedcriteria2 = combinedexplainedcriteria2;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @param combinedexplainedcriteria3 New string explaining search criteria.
-   */
-  public void setCombinedexplainedcriteria3(String combinedexplainedcriteria3) {
-    this.combinedexplainedcriteria3 = combinedexplainedcriteria3;
-  }
+    /**
+     * Used for Combined Search function.
+     * @return List of search criteria in human readable form.
+     */
+    public String getCombinedlistcriteria2() {
+        return combinedlistcriteria2;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @return List of search criteria in human readable form.
-   */
-  public String getCombinedlistcriteria3() {
-    return combinedlistcriteria3;
-  }
+    /**
+     * Used for Combined Search function.
+     * @param combinedlistcriteria2 New list of search criteria.
+     */
+    public void setCombinedlistcriteria2(String combinedlistcriteria2) {
+        this.combinedlistcriteria2 = combinedlistcriteria2;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @param combinedlistcriteria3 New list of search criteria.
-   */
-  public void setCombinedlistcriteria3(String combinedlistcriteria3) {
-    this.combinedlistcriteria3 = combinedlistcriteria3;
-  }
+    /**
+     * Used for Combined Search function.
+     * @return Second nature object choosed for searching. (Possible values: "Species", "Habitats", "Sites").
+     */
+    public String getCombinednatureobject2() {
+        return combinednatureobject2;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @return Third nature object used for searching. (Possible values: "Species", "Habitats", "Sites").
-   */
-  public String getCombinednatureobject3() {
-    return combinednatureobject3;
-  }
-  /**
-   * Used for Combined Search function.
-   * @param combinednatureobject3 New nature object used for searching.
-   */
-  public void setCombinednatureobject3(String combinednatureobject3) {
-    this.combinednatureobject3 = combinednatureobject3;
-  }
+    /**
+     * Used for Combined Search function.
+     * @param combinednatureobject2 Nature object used for searching.
+     */
+    public void setCombinednatureobject2(String combinednatureobject2) {
+        this.combinednatureobject2 = combinednatureobject2;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @return Human readable string explaining combination type between the three possible nature objects.
-   */
-  public String getCombinedcombinationtype() {
-    return combinedcombinationtype;
-  }
+    /**
+     * Used for Combined Search function.
+     * @return Human readable string explaining search criteria.
+     */
+    public String getCombinedexplainedcriteria3() {
+        return combinedexplainedcriteria3;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @param combinedcombinationtype Type of combination.
-   */
-  public void setCombinedcombinationtype(String combinedcombinationtype) {
-    this.combinedcombinationtype = combinedcombinationtype;
-  }
+    /**
+     * Used for Combined Search function.
+     * @param combinedexplainedcriteria3 New string explaining search criteria.
+     */
+    public void setCombinedexplainedcriteria3(String combinedexplainedcriteria3) {
+        this.combinedexplainedcriteria3 = combinedexplainedcriteria3;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @return Human readable string explaining search criteria.
-   */
-  public String getCombinedexplainedcriteria1() {
-    return combinedexplainedcriteria1;
-  }
+    /**
+     * Used for Combined Search function.
+     * @return List of search criteria in human readable form.
+     */
+    public String getCombinedlistcriteria3() {
+        return combinedlistcriteria3;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @param combinedexplainedcriteria Human readable string explaining search criteria.
-   */
-  public void setCombinedexplainedcriteria1(String combinedexplainedcriteria) {
-    this.combinedexplainedcriteria1 = combinedexplainedcriteria;
-  }
+    /**
+     * Used for Combined Search function.
+     * @param combinedlistcriteria3 New list of search criteria.
+     */
+    public void setCombinedlistcriteria3(String combinedlistcriteria3) {
+        this.combinedlistcriteria3 = combinedlistcriteria3;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @return List of search criteria in human readable form.
-   */
-  public String getCombinedlistcriteria1() {
-    return combinedlistcriteria1;
-  }
+    /**
+     * Used for Combined Search function.
+     * @return Third nature object used for searching. (Possible values: "Species", "Habitats", "Sites").
+     */
+    public String getCombinednatureobject3() {
+        return combinednatureobject3;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @param combinedlistcriteria New list of search criteria.
-   */
-  public void setCombinedlistcriteria1(String combinedlistcriteria) {
-    this.combinedlistcriteria1 = combinedlistcriteria;
-  }
+    /**
+     * Used for Combined Search function.
+     * @param combinednatureobject3 New nature object used for searching.
+     */
+    public void setCombinednatureobject3(String combinednatureobject3) {
+        this.combinednatureobject3 = combinednatureobject3;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @return Explained search criteria in human readable form.
-   */
-  public String getExplainedcriteria() {
-    return explainedcriteria;
-  }
+    /**
+     * Used for Combined Search function.
+     * @return Human readable string explaining combination type between the three possible nature objects.
+     */
+    public String getCombinedcombinationtype() {
+        return combinedcombinationtype;
+    }
 
-  /**
-   * Used for Combined Search function.
-   * @param explainedcriteria New explanation of criteria.
-   */
-  public void setExplainedcriteria(String explainedcriteria) {
-    this.explainedcriteria = explainedcriteria;
-  }
+    /**
+     * Used for Combined Search function.
+     * @param combinedcombinationtype Type of combination.
+     */
+    public void setCombinedcombinationtype(String combinedcombinationtype) {
+        this.combinedcombinationtype = combinedcombinationtype;
+    }
 
-  /**
-   * Used for Advanced Search function.
-   * @return Criterias used for searching in human readable form.
-   */
-  public String getListcriteria() {
-    return listcriteria;
-  }
+    /**
+     * Used for Combined Search function.
+     * @return Human readable string explaining search criteria.
+     */
+    public String getCombinedexplainedcriteria1() {
+        return combinedexplainedcriteria1;
+    }
 
-  /**
-   * Used for Advanced Search function.
-   * @param listcriteria New value for search criteria.
-   */
-  public void setListcriteria(String listcriteria) {
-    this.listcriteria = listcriteria;
-  }
+    /**
+     * Used for Combined Search function.
+     * @param combinedexplainedcriteria Human readable string explaining search criteria.
+     */
+    public void setCombinedexplainedcriteria1(String combinedexplainedcriteria) {
+        this.combinedexplainedcriteria1 = combinedexplainedcriteria;
+    }
 
-  // Configure the Logging system.
-  static {
-    BasicConfigurator.configure();
-    logger.info("Log4j system initialized.");
-  }
+    /**
+     * Used for Combined Search function.
+     * @return List of search criteria in human readable form.
+     */
+    public String getCombinedlistcriteria1() {
+        return combinedlistcriteria1;
+    }
 
-  /**
-   * Constructs an new instance of SessionManager object.
-   */
-  public SessionManager()
-  {
-    loadUserPreferences();
-  }
+    /**
+     * Used for Combined Search function.
+     * @param combinedlistcriteria New list of search criteria.
+     */
+    public void setCombinedlistcriteria1(String combinedlistcriteria) {
+        this.combinedlistcriteria1 = combinedlistcriteria;
+    }
 
-  /**
-   * This method is used for error / information purposes. JSP file can't have an logging system on their own (or maybe
-   * will have in the future) and use now the logging features of SessionManager.<br />
-   * This method logs only WARNING MESSAGES. Hierarchy is:<br />
-   * <UL>
-   *  <LI>INFO - most generic, informational messages</LI>
-   *  <LI>WARN - Warning, possible errors etc.</LI>
-   *  <LI>ERROR - Errors, Database connection errors, exceptions etc..</LI>
-   *  <LI>FATAL - I wouldn't like that in my code :)</LI>
-   * @param message Message to output in logs
-   */
-  public static void warn(String message) {
-    logger.warn(message);
-  }
+    /**
+     * Used for Combined Search function.
+     * @return Explained search criteria in human readable form.
+     */
+    public String getExplainedcriteria() {
+        return explainedcriteria;
+    }
 
-  /**
-   * This method is used for error / information purposes. JSP file can't have an logging system on their own (or maybe
-   * will have in the future) and use now the logging features of SessionManager.<br />
-   * This method logs only INFO MESSAGES. Hierarchy is:<br />
-   * <UL>
-   *  <LI>INFO - most generic, informational messages</LI>
-   *  <LI>WARN - Warning, possible errors etc.</LI>
-   *  <LI>ERROR - Errors, Database connection errors, exceptions etc..</LI>
-   *  <LI>FATAL - I wouldn't like that in my code :)</LI>
-   * @param message Message to output in logs
-   */
-  public static void info(String message) {
-    logger.info(message);
-  }
+    /**
+     * Used for Combined Search function.
+     * @param explainedcriteria New explanation of criteria.
+     */
+    public void setExplainedcriteria(String explainedcriteria) {
+        this.explainedcriteria = explainedcriteria;
+    }
 
-  /**
-   * This method is used for error / information purposes. JSP file can't have an logging system on their own (or maybe
-   * will have in the future) and use now the logging features of SessionManager.<br />
-   * This method logs only ERROR MESSAGES. Hierarchy is:<br />
-   * <UL>
-   *  <LI>INFO - most generic, informational messages</LI>
-   *  <LI>WARN - Warning, possible errors etc.</LI>
-   *  <LI>ERROR - Errors, Database connection errors, exceptions etc..</LI>
-   *  <LI>FATAL - I wouldn't like that in my code :)</LI>
-   * @param message Message to output in logs
-   */
-  public static void error(String message) {
-    logger.error(message);
-  }
+    /**
+     * Used for Advanced Search function.
+     * @return Criterias used for searching in human readable form.
+     */
+    public String getListcriteria() {
+        return listcriteria;
+    }
 
-  /**
-   * This method is used for error / information purposes. JSP file can't have an logging system on their own (or maybe
-   * will have in the future) and use now the logging features of SessionManager.<br />
-   * This method logs only FATAL MESSAGES. Hierarchy is:<br />
-   * <UL>
-   *  <LI>INFO - most generic, informational messages</LI>
-   *  <LI>WARN - Warning, possible errors etc.</LI>
-   *  <LI>ERROR - Errors, Database connection errors, exceptions etc..</LI>
-   *  <LI>FATAL - I wouldn't like that in my code :)</LI>
-   * @param message Message to output in logs
-   */
-  public static void fatal(String message) {
-    logger.fatal(message);
-  }
+    /**
+     * Used for Advanced Search function.
+     * @param listcriteria New value for search criteria.
+     */
+    public void setListcriteria(String listcriteria) {
+        this.listcriteria = listcriteria;
+    }
 
-  /**
-   * Login method. This method looks into database and searches for the username and password and checkes for a match
-   * @param username Username
-   * @param password Password in clear (this method will use encription to check...)
-   * @param request HTTP ServletRequest used for accessing the ID of the session.
-   * @return True if username/password pair is valid, false otherwise
-   * Note: Also if the is logged on, his/her preferences are automatically loaded.
-   */
-  public boolean login(String username, String password, HttpServletRequest request) {
-    logout();
-    // authenticated = false...
-    boolean result = false;
-    try{
-    	  DirectoryService.sessionLogin(username, password);
-    	  result = true;
-        //final String encryptedPassword = EncryptPassword.encrypt( password );
-        //result = encryptedPassword.equalsIgnoreCase( user.getPassword() );
-    } catch (DirServiceException ex){
-    	  result = false;
-    	  ex.printStackTrace();
-	} catch (SecurityException ex) {
-    	  result = false;
-    	  ex.printStackTrace();
-	}
-	if(result) {
-        this.username = username;
-        this.password = password;
-        this.authenticated = true;
+    // Configure the Logging system.
+    static {
+        BasicConfigurator.configure();
+        logger.info("Log4j system initialized.");
+    }
+
+    /**
+     * Constructs an new instance of SessionManager object.
+     */
+    public SessionManager() {
         loadUserPreferences();
-        // log the login process to database
-        String JDBC_DRV = Settings.getSetting("JDBC_DRV");
-        String JDBC_URL = Settings.getSetting("JDBC_URL");
-        String JDBC_USR = Settings.getSetting("JDBC_USR");
-        String JDBC_PWD = Settings.getSetting("JDBC_PWD");
-        // update last login date
-         try {
-            Class.forName(JDBC_DRV);
-            Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USR, JDBC_PWD);
-            PreparedStatement ps = null;
+    }
+
+    /**
+     * This method is used for error / information purposes. JSP file can't have an logging system on their own (or maybe
+     * will have in the future) and use now the logging features of SessionManager.<br />
+     * This method logs only WARNING MESSAGES. Hierarchy is:<br />
+     * <UL>
+     *  <LI>INFO - most generic, informational messages</LI>
+     *  <LI>WARN - Warning, possible errors etc.</LI>
+     *  <LI>ERROR - Errors, Database connection errors, exceptions etc..</LI>
+     *  <LI>FATAL - I wouldn't like that in my code :)</LI>
+     * @param message Message to output in logs
+     */
+    public static void warn(String message) {
+        logger.warn(message);
+    }
+
+    /**
+     * This method is used for error / information purposes. JSP file can't have an logging system on their own (or maybe
+     * will have in the future) and use now the logging features of SessionManager.<br />
+     * This method logs only INFO MESSAGES. Hierarchy is:<br />
+     * <UL>
+     *  <LI>INFO - most generic, informational messages</LI>
+     *  <LI>WARN - Warning, possible errors etc.</LI>
+     *  <LI>ERROR - Errors, Database connection errors, exceptions etc..</LI>
+     *  <LI>FATAL - I wouldn't like that in my code :)</LI>
+     * @param message Message to output in logs
+     */
+    public static void info(String message) {
+        logger.info(message);
+    }
+
+    /**
+     * This method is used for error / information purposes. JSP file can't have an logging system on their own (or maybe
+     * will have in the future) and use now the logging features of SessionManager.<br />
+     * This method logs only ERROR MESSAGES. Hierarchy is:<br />
+     * <UL>
+     *  <LI>INFO - most generic, informational messages</LI>
+     *  <LI>WARN - Warning, possible errors etc.</LI>
+     *  <LI>ERROR - Errors, Database connection errors, exceptions etc..</LI>
+     *  <LI>FATAL - I wouldn't like that in my code :)</LI>
+     * @param message Message to output in logs
+     */
+    public static void error(String message) {
+        logger.error(message);
+    }
+
+    /**
+     * This method is used for error / information purposes. JSP file can't have an logging system on their own (or maybe
+     * will have in the future) and use now the logging features of SessionManager.<br />
+     * This method logs only FATAL MESSAGES. Hierarchy is:<br />
+     * <UL>
+     *  <LI>INFO - most generic, informational messages</LI>
+     *  <LI>WARN - Warning, possible errors etc.</LI>
+     *  <LI>ERROR - Errors, Database connection errors, exceptions etc..</LI>
+     *  <LI>FATAL - I wouldn't like that in my code :)</LI>
+     * @param message Message to output in logs
+     */
+    public static void fatal(String message) {
+        logger.fatal(message);
+    }
+
+    /**
+     * Login method. This method looks into database and searches for the username and password and checkes for a match
+     * @param username Username
+     * @param password Password in clear (this method will use encription to check...)
+     * @param request HTTP ServletRequest used for accessing the ID of the session.
+     * @return True if username/password pair is valid, false otherwise
+     * Note: Also if the is logged on, his/her preferences are automatically loaded.
+     */
+    public boolean login(String username, String password, HttpServletRequest request) {
+        logout();
+        // authenticated = false...
+        boolean result = false;
+
+        try {
+            DirectoryService.sessionLogin(username, password);
+            result = true;
+            // final String encryptedPassword = EncryptPassword.encrypt( password );
+            // result = encryptedPassword.equalsIgnoreCase( user.getPassword() );
+        } catch (DirServiceException ex) {
+            result = false;
+            ex.printStackTrace();
+        } catch (SecurityException ex) {
+            result = false;
+            ex.printStackTrace();
+        }
+        if (result) {
+            this.username = username;
+            this.password = password;
+            this.authenticated = true;
+            loadUserPreferences();
+            // log the login process to database
+            String JDBC_DRV = Settings.getSetting("JDBC_DRV");
+            String JDBC_URL = Settings.getSetting("JDBC_URL");
+            String JDBC_USR = Settings.getSetting("JDBC_USR");
+            String JDBC_PWD = Settings.getSetting("JDBC_PWD");
+
+            // update last login date
+            try {
+                Class.forName(JDBC_DRV);
+                Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USR,
+                        JDBC_PWD);
+                PreparedStatement ps = null;
             
-            UserPersist user = findUser(username);
-            if(user == null){
-            	ps = conn.prepareStatement("INSERT INTO EUNIS_USERS (USERNAME) VALUES ('"+username+"')");
-            	ps.execute();
-            	ps = conn.prepareStatement("INSERT INTO EUNIS_USERS_ROLES (USERNAME, ROLENAME) VALUES ('"+username+"','Guest')");
-            	ps.execute();
+                UserPersist user = findUser(username);
+
+                if (user == null) {
+                    ps = conn.prepareStatement(
+                            "INSERT INTO EUNIS_USERS (USERNAME) VALUES ('"
+                                    + username + "')");
+                    ps.execute();
+                    ps = conn.prepareStatement(
+                            "INSERT INTO EUNIS_USERS_ROLES (USERNAME, ROLENAME) VALUES ('"
+                                    + username + "','Guest')");
+                    ps.execute();
+                }
+            
+                ps = conn.prepareStatement(
+                        "UPDATE EUNIS_USERS SET LOGIN_DATE=? WHERE USERNAME=?");
+                ps.setTimestamp(1, new java.sql.Timestamp(new Date().getTime()));
+                ps.setString(2, username);
+                ps.execute();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            
-            ps = conn.prepareStatement("UPDATE EUNIS_USERS SET LOGIN_DATE=? WHERE USERNAME=?");
-            ps.setTimestamp(1, new java.sql.Timestamp(new Date().getTime()));
-            ps.setString(2, username);
-            ps.execute();
-          } catch (Exception e) {
+            if (null != request) {
+                String sessionID = request.getSession().getId();
+                String ipAddr = request.getRemoteAddr();
+                long longTime = new Date().getTime();
+
+                try {
+                    Class.forName(JDBC_DRV);
+                    Connection conn = DriverManager.getConnection(JDBC_URL,
+                            JDBC_USR, JDBC_PWD);
+                    PreparedStatement ps = conn.prepareStatement(
+                            "INSERT INTO EUNIS_SESSION_LOG (ID_SESSION, USERNAME, START, END, IP_ADDRESS) VALUES (?, ?, ?, ?, ?)");
+
+                    ps.setString(1, sessionID);
+                    ps.setString(2, username);
+                    ps.setTimestamp(3, new java.sql.Timestamp(longTime));
+                    ps.setTimestamp(4, new java.sql.Timestamp(longTime));
+                    ps.setString(5, ipAddr);
+                    ps.execute();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println(
+                        "SessionManager::login(...) - request object was null.");
+            }
+        } else {
+            System.out.println(
+                    "Could not log user '" + username
+                    + "'. Password does not match.");
+        }
+        return authenticated;
+    }
+
+    /** Performs a logout of the user, so the username/password/authenticated fields becomes invalid. */
+    public void logout() {
+        this.username = null;
+        this.password = null;
+        this.authenticated = false;
+        this.userPrefs = new UserPersist();
+        this.showEUNISInvalidatedSpecies = false;
+        this.login_RIGHT = false;
+        this.upload_reports_RIGHT = false;
+        this.services_RIGHT = false;
+        this.save_search_criteria_RIGHT = false;
+        this.content_management_RIGHT = false;
+        this.import_export_data_RIGHT = false;
+        this.upload_pictures_RIGHT = false;
+        this.manage_users = false;
+        this.role_management_RIGHT = false;
+        this.edit_glossary_RIGHT = false;
+        this.admin_ROLE = false;
+        setEditContentMode(false);
+        setAdvancedEditContentMode(false);
+    }
+
+    /**
+     * Method to find an user in database after its username (PK).
+     * @param username Username
+     * @return null if user was not found or username is null. UserPersist object associated with that user.
+     */
+    private UserPersist findUser(String username) {
+        if (null == username) {
+            return null;
+        }
+        UserPersist user = null;
+        List list = new Vector();
+
+        try {
+            list = new UserDomain().findWhere("username='" + username + "'");
+        } catch (Exception _ex) {
+            _ex.printStackTrace();
+        }
+        if (list != null && list.size() > 0) {
+            user = (UserPersist) list.get(0);
+        }
+        return user;
+    }
+
+    /**
+     * This method is used to save the user preferences into database (only for authenticated users). Prior to call this
+     * method, username/password pairs must be valid (current session contains an user that was authenticated)
+     */
+    public void saveUserPreferences() {
+        if (isAuthenticated()) {
+            // First load preferences for that user from database
+            // Save into database efectively
+            try {
+                if (null != userPrefs) {
+                    new UserDomain().save(userPrefs);
+                }
+            } catch (Exception ex) {
+                System.err.println(
+                        "Could not save into database user preferences:");
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Load user preferences from database. Prior to call this method, username/password pairs must be valid (current
+     * session contains an user that was authenticated)
+     */
+    public void loadUserPreferences() {
+        UserPersist user = findUser(username);
+
+        if (null == user) {
+            authenticated = false;
+            username = null;
+            password = null;
+            this.userPrefs = new UserPersist();
+            // If user is normal (not authenticated) default preferences.
+            userPrefs.setThemeIndex(new Integer(ThemeManager.THEME_SKY_BLUE));
+        } else {
+            this.userPrefs = user;
+            authenticated = true;
+            username = user.getUsername();
+            // showEUNISInvalidatedSpecies = Utilities.checkedStringToBoolean(user.getShowInvalidatedSpecies().toString(), false);
+            themeManager = new ThemeManager(this);
+            themeManager.switchTheme(user.getThemeIndex().intValue());
+
+            Vector userRights = findUserRights(username);
+
+            if (userRights != null && userRights.size() > 0) {
+                for (int i = 0; i < userRights.size(); i++) {
+                    // System.out.println("rigth="+userRights.get(i));
+                    if (((String) userRights.get(i)).equalsIgnoreCase("login")) {
+                        login_RIGHT = true;
+                    }
+                    if (((String) userRights.get(i)).equalsIgnoreCase(
+                            "upload_reports")) {
+                        upload_reports_RIGHT = true;
+                    }
+                    if (((String) userRights.get(i)).equalsIgnoreCase("services")) {
+                        services_RIGHT = true;
+                    }
+                    if (((String) userRights.get(i)).equalsIgnoreCase(
+                            "save_search_criteria")) {
+                        save_search_criteria_RIGHT = true;
+                    }
+                    if (((String) userRights.get(i)).equalsIgnoreCase(
+                            "content_management")) {
+                        content_management_RIGHT = true;
+                    }
+                    if (((String) userRights.get(i)).equalsIgnoreCase(
+                            "import/export_data")) {
+                        import_export_data_RIGHT = true;
+                    }
+                    if (((String) userRights.get(i)).equalsIgnoreCase(
+                            "user_management")) {
+                        manage_users = true;
+                    }
+                    if (((String) userRights.get(i)).equalsIgnoreCase(
+                            "role_management")) {
+                        role_management_RIGHT = true;
+                    }
+                    if (((String) userRights.get(i)).equalsIgnoreCase(
+                            "upload_pictures")) {
+                        upload_pictures_RIGHT = true;
+                    }
+                    if (((String) userRights.get(i)).equalsIgnoreCase(
+                            "show_novalidated_species")) {
+                        showEUNISInvalidatedSpecies = true;
+                    }
+                    if (((String) userRights.get(i)).equalsIgnoreCase(
+                            "edit_glossary")) {
+                        edit_glossary_RIGHT = true;
+                    }
+                }
+            }
+
+            Vector userRoles = findUserRoles(username);
+
+            if (userRoles != null && userRoles.size() > 0) {
+                for (int i = 0; i < userRoles.size(); i++) {
+                    // System.out.println("rigth="+userRoles.get(i));
+                    if (((String) userRoles.get(i)).equalsIgnoreCase(
+                            "administrator")) {
+                        admin_ROLE = true;
+                    }
+                }
+            }
+
+        }
+    }
+
+    /**
+     * Retrieve the rights for an user.
+     * @param username Username.
+     * @return Vector of UsersRightsPersist objects, one for each right.
+     */
+    public Vector findUserRights(String username) {
+        if (null == username) {
+            return new Vector();
+        }
+        Vector<String> userRights = new Vector<String>();
+
+        try {
+            List list = new UsersRightsDomain().findWhere(
+                    "A.username='" + username
+                    + "' GROUP BY A.USERNAME,C.RIGHTNAME");
+
+            if (list != null && list.size() > 0) {
+                for (int i = 0; i < list.size(); i++) {
+                    userRights.add(
+                            ((UsersRightsPersist) list.get(i)).getRightName());
+                }
+            }
+        } catch (Exception e) {
             e.printStackTrace();
-          }
-        if (null != request)
-        {
-          String sessionID = request.getSession().getId();
-          String ipAddr = request.getRemoteAddr();
-          long longTime = new Date().getTime();
-          try {
-        	  Class.forName(JDBC_DRV);
-        	  Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USR, JDBC_PWD);
-        	  PreparedStatement ps = conn.prepareStatement("INSERT INTO EUNIS_SESSION_LOG (ID_SESSION, USERNAME, START, END, IP_ADDRESS) VALUES (?, ?, ?, ?, ?)");
-        	  ps.setString(1, sessionID);
-        	  ps.setString(2, username);
-        	  ps.setTimestamp(3, new java.sql.Timestamp(longTime));
-        	  ps.setTimestamp(4, new java.sql.Timestamp(longTime));
-        	  ps.setString(5, ipAddr);
-        	  ps.execute();
-          } catch (Exception e) {
-        	  e.printStackTrace();
-          }
         }
-        else
-        {
-          System.out.println("SessionManager::login(...) - request object was null.");
+        return userRights;
+    }
+
+    /**
+     * Retrieve the role for an user.
+     * @param username Username.
+     * @return Vector of UsersRolesPersist objects, one for each right.
+     */
+    public Vector findUserRoles(String username) {
+        if (null == username) {
+            return new Vector();
         }
-	} else {
-        System.out.println("Could not log user '" + username + "'. Password does not match.");
-	}
-    return authenticated;
-  }
+        Vector<String> userRoles = new Vector<String>();
 
-  /** Performs a logout of the user, so the username/password/authenticated fields becomes invalid. */
-  public void logout() {
-    this.username = null;
-    this.password = null;
-    this.authenticated = false;
-    this.userPrefs = new UserPersist();
-    this.showEUNISInvalidatedSpecies = false;
-    this.login_RIGHT = false;
-    this.upload_reports_RIGHT = false;
-    this.services_RIGHT = false;
-    this.save_search_criteria_RIGHT = false;
-    this.content_management_RIGHT = false;
-    this.import_export_data_RIGHT = false;
-    this.upload_pictures_RIGHT = false;
-    this.manage_users = false;
-    this.role_management_RIGHT = false;
-    this.edit_glossary_RIGHT = false;
-    this.admin_ROLE = false;
-    setEditContentMode( false );
-    setAdvancedEditContentMode( false );
-  }
+        try {
+            List list = new UsersRolesDomain().findWhere(
+                    "A.username='" + username
+                    + "' GROUP BY A.USERNAME,E.ROLENAME");
 
-  /**
-   * Method to find an user in database after its username (PK).
-   * @param username Username
-   * @return null if user was not found or username is null. UserPersist object associated with that user.
-   */
-  private UserPersist findUser(String username) {
-    if ( null == username )
-    {
-      return null;
-    }
-    UserPersist user = null;
-    List list = new Vector();
-    try {
-      list = new UserDomain().findWhere("username='" + username + "'");
-    } catch (Exception _ex) {
-      _ex.printStackTrace();
-    }
-    if (list != null && list.size() > 0) {
-      user = (UserPersist) list.get(0);
-    }
-    return user;
-  }
-
-  /**
-   * This method is used to save the user preferences into database (only for authenticated users). Prior to call this
-   * method, username/password pairs must be valid (current session contains an user that was authenticated)
-   */
-  public void saveUserPreferences() {
-    if (isAuthenticated()) {
-      // First load preferences for that user from database
-      // Save into database efectively
-      try {
-        if (null != userPrefs) {
-          new UserDomain().save(userPrefs);
+            if (list != null && list.size() > 0) {
+                for (int i = 0; i < list.size(); i++) {
+                    userRoles.add(
+                            ((UsersRolesPersist) list.get(i)).getRoleName());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-      } catch (Exception ex) {
-        System.err.println("Could not save into database user preferences:");
-        ex.printStackTrace();
-      }
+        return userRoles;
     }
-  }
 
-  /**
-   * Load user preferences from database. Prior to call this method, username/password pairs must be valid (current
-   * session contains an user that was authenticated)
-   */
-  public void loadUserPreferences() {
-    UserPersist user = findUser(username);
-    if (null == user) {
-      authenticated = false;
-      username = null;
-      password = null;
-      this.userPrefs = new UserPersist();
-      // If user is normal (not authenticated) default preferences.
-      userPrefs.setThemeIndex(new Integer(ThemeManager.THEME_SKY_BLUE));
-    } else {
-      this.userPrefs = user;
-      authenticated = true;
-      username = user.getUsername();
-      //showEUNISInvalidatedSpecies = Utilities.checkedStringToBoolean(user.getShowInvalidatedSpecies().toString(), false);
-      themeManager = new ThemeManager(this);
-      themeManager.switchTheme(user.getThemeIndex().intValue());
-
-      Vector userRights = findUserRights(username);
-
-      if (userRights != null && userRights.size() > 0) {
-        for (int i = 0; i < userRights.size(); i++) {
-//          System.out.println("rigth="+userRights.get(i));
-          if (((String) userRights.get(i)).equalsIgnoreCase("login")) {
-            login_RIGHT = true;
-          }
-          if (((String) userRights.get(i)).equalsIgnoreCase("upload_reports")) {
-            upload_reports_RIGHT = true;
-          }
-          if (((String) userRights.get(i)).equalsIgnoreCase("services")) {
-            services_RIGHT = true;
-          }
-          if (((String) userRights.get(i)).equalsIgnoreCase("save_search_criteria")) {
-            save_search_criteria_RIGHT = true;
-          }
-          if (((String) userRights.get(i)).equalsIgnoreCase("content_management")) {
-            content_management_RIGHT = true;
-          }
-          if (((String) userRights.get(i)).equalsIgnoreCase("import/export_data")) {
-        	  import_export_data_RIGHT = true;
-          }
-          if (((String) userRights.get(i)).equalsIgnoreCase("user_management")) {
-            manage_users = true;
-          }
-          if (((String) userRights.get(i)).equalsIgnoreCase("role_management")) {
-            role_management_RIGHT = true;
-          }
-          if (((String) userRights.get(i)).equalsIgnoreCase("upload_pictures")) {
-            upload_pictures_RIGHT = true;
-          }
-          if (((String) userRights.get(i)).equalsIgnoreCase("show_novalidated_species")) {
-            showEUNISInvalidatedSpecies = true;
-          }
-          if (((String) userRights.get(i)).equalsIgnoreCase("edit_glossary")) {
-            edit_glossary_RIGHT = true;
-          }
+    /**
+     * Provides access to the current theme.
+     * @return Current theme used in pages
+     */
+    public ThemeManager getThemeManager() {
+        if (null == themeManager) {
+            loadUserPreferences();
         }
-      }
-
-      Vector userRoles = findUserRoles(username);
-
-      if (userRoles != null && userRoles.size() > 0) {
-        for (int i = 0; i < userRoles.size(); i++) {
-//          System.out.println("rigth="+userRoles.get(i));
-          if (((String) userRoles.get(i)).equalsIgnoreCase("administrator")) {
-            admin_ROLE = true;
-          }
+        if (null == themeManager) {
+            themeManager = new ThemeManager(this);
+            themeManager.switchTheme(ThemeManager.THEME_SKY_BLUE);
         }
-      }
-
+        return themeManager;
     }
-  }
 
-  /**
-   * Retrieve the rights for an user.
-   * @param username Username.
-   * @return Vector of UsersRightsPersist objects, one for each right.
-   */
-  public Vector findUserRights(String username) {
-    if ( null == username )
-    {
-      return new Vector();
-    }
-    Vector<String> userRights = new Vector<String>();
-    try {
-      List list = new UsersRightsDomain().findWhere("A.username='" + username + "' GROUP BY A.USERNAME,C.RIGHTNAME");
-      if (list != null && list.size() > 0) {
-        for (int i = 0; i < list.size(); i++) {
-          userRights.add(((UsersRightsPersist) list.get(i)).getRightName());
+    /**
+     * Changes the current theme of the user.
+     * @param index Index of theme (defined in ThemeManager).
+     */
+    public void setThemeIndex(int index) {
+        if (null != themeManager) {
+            themeManager.switchTheme(index);
         }
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
     }
-    return userRights;
-  }
 
-  /**
-   * Retrieve the role for an user.
-   * @param username Username.
-   * @return Vector of UsersRolesPersist objects, one for each right.
-   */
-  public Vector findUserRoles(String username) {
-    if ( null == username )
-    {
-      return new Vector();
+    /**
+     * Getter for username property.
+     * @return The value of username. If user didn't logon, this method will return null.
+     */
+    public String getUsername() {
+        return username;
     }
-    Vector<String> userRoles = new Vector<String>();
-    try {
-      List list = new UsersRolesDomain().findWhere("A.username='" + username + "' GROUP BY A.USERNAME,E.ROLENAME");
-      if (list != null && list.size() > 0) {
-        for (int i = 0; i < list.size(); i++) {
-          userRoles.add(((UsersRolesPersist) list.get(i)).getRoleName());
+
+    /**
+     * Setter for the username property.
+     * @param username New value for username. If null, then there is no user currently logged.
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * Getter for password property.
+     * @return The value of password. If user didn't logon, this method will return null.
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Setter for passowrd property.
+     * @param password New value for the passowrd. If null, then there is no user currently logged.
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * Getter for authenticated property.
+     * @return True if user is logged on, false otherwise.
+     */
+    public boolean isAuthenticated() {
+        return authenticated;
+    }
+
+    /**
+     * Getter for user preferences object (userPrefs).
+     * @return User preferences.
+     */
+    public UserPersist getUserPrefs() {
+        return userPrefs;
+    }
+
+    /**
+     * Getter for the showEUINSInvalidatedSpecies property.
+     * @return If user should see or not the species not validated by EUNIS.
+     */
+    public boolean getShowEUNISInvalidatedSpecies() {
+        return showEUNISInvalidatedSpecies;
+    }
+
+    /**
+     * Provides access to the content management system which manages HTML pages stored in database
+     * (WEB_CONTENT_MANAGEMENT table).
+     * @return content management object.
+     */
+    public WebContentManagement getWebContent() {
+        return getWebContent(currentLanguage);
+    }
+
+    /**
+     * Return the current web content 'dictionary' for specified language.
+     * @param language Language code
+     * @return Content for that language, if not loaded application will try to
+     * load the specified language. If code not found in EUNIS_WEB_CONTENT table
+     * result will be null.
+     */
+    public WebContentManagement getWebContent(String language) {
+        WebContentManagement cm = new WebContentManagement();
+
+        try {
+            if (languages.keySet().contains(language)) {
+                cm = languages.get(language);
+                cm.setEditMode(editContentMode);
+                cm.setAdvancedEditMode(advancedEditContentMode);
+            } else {
+                cm = new WebContentManagement();
+                cm.setLanguage(language);
+                cm.setEditMode(false);
+                languages.put(language, cm);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+        return cm;
     }
-    return userRoles;
-  }
 
-  /**
-   * Provides access to the current theme.
-   * @return Current theme used in pages
-   */
-  public ThemeManager getThemeManager()
-  {
-    if (null == themeManager)
-    {
-      loadUserPreferences();
+    /**
+     * Getter for login right.
+     * @return Trues if user has the right to login within application.
+     */
+    public boolean isLogin_RIGHT() {
+        return login_RIGHT;
     }
-    if (null == themeManager)
-    {
-      themeManager = new ThemeManager( this );
-      themeManager.switchTheme( ThemeManager.THEME_SKY_BLUE );
+
+    /**
+     * Getter for upload reports right.
+     * @return True if user has the right to upload reports to server (Related Reports).
+     */
+    public boolean isUpload_reports_RIGHT() {
+        return upload_reports_RIGHT;
     }
-    return themeManager;
-  }
 
-  /**
-   * Changes the current theme of the user.
-   * @param index Index of theme (defined in ThemeManager).
-   */
-  public void setThemeIndex(int index) {
-    if (null != themeManager)
-    {
-      themeManager.switchTheme(index);
+    /**
+     * Getter for services right.
+     * @return True if user has the right to access the services page.
+     */
+    public boolean isServices_RIGHT() {
+        return services_RIGHT;
     }
-  }
 
-  /**
-   * Getter for username property.
-   * @return The value of username. If user didn't logon, this method will return null.
-   */
-  public String getUsername() {
-    return username;
-  }
-
-
-  /**
-   * Setter for the username property.
-   * @param username New value for username. If null, then there is no user currently logged.
-   */
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
-
-  /**
-   * Getter for password property.
-   * @return The value of password. If user didn't logon, this method will return null.
-   */
-  public String getPassword() {
-    return password;
-  }
-
-
-  /**
-   * Setter for passowrd property.
-   * @param password New value for the passowrd. If null, then there is no user currently logged.
-   */
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-
-  /**
-   * Getter for authenticated property.
-   * @return True if user is logged on, false otherwise.
-   */
-  public boolean isAuthenticated() {
-    return authenticated;
-  }
-
-
-  /**
-   * Getter for user preferences object (userPrefs).
-   * @return User preferences.
-   */
-  public UserPersist getUserPrefs() {
-    return userPrefs;
-  }
-
-  /**
-   * Getter for the showEUINSInvalidatedSpecies property.
-   * @return If user should see or not the species not validated by EUNIS.
-   */
-  public boolean getShowEUNISInvalidatedSpecies() {
-    return showEUNISInvalidatedSpecies;
-  }
-
-  /**
-   * Provides access to the content management system which manages HTML pages stored in database
-   * (WEB_CONTENT_MANAGEMENT table).
-   * @return content management object.
-   */
-  public WebContentManagement getWebContent()
-  {
-    return getWebContent( currentLanguage );
-  }
-
-  /**
-   * Return the current web content 'dictionary' for specified language.
-   * @param language Language code
-   * @return Content for that language, if not loaded application will try to
-   * load the specified language. If code not found in EUNIS_WEB_CONTENT table
-   * result will be null.
-   */
-  public WebContentManagement getWebContent( String language )
-  {
-    WebContentManagement cm = new WebContentManagement();
-    try
-    {
-      if ( languages.keySet().contains( language ) )
-      {
-        cm = languages.get( language );
-        cm.setEditMode( editContentMode );
-        cm.setAdvancedEditMode( advancedEditContentMode );
-      }
-      else
-      {
-        cm = new WebContentManagement();
-        cm.setLanguage( language );
-        cm.setEditMode( false );
-        languages.put( language, cm );
-      }
+    /**
+     * Getter for save search criteria right.
+     * @return True if user has the right to save searched criteria.
+     */
+    public boolean isSave_search_criteria_RIGHT() {
+        return save_search_criteria_RIGHT;
     }
-    catch( Exception ex )
-    {
-      ex.printStackTrace();
+
+    /**
+     * Getter for content management right.
+     * @return True is user has the right to edit content of web pages.
+     */
+    public boolean isContent_management_RIGHT() {
+        return content_management_RIGHT;
     }
-    return cm;
-  }
-
-  /**
-   * Getter for login right.
-   * @return Trues if user has the right to login within application.
-   */
-  public boolean isLogin_RIGHT() {
-    return login_RIGHT;
-  }
-
-  /**
-   * Getter for upload reports right.
-   * @return True if user has the right to upload reports to server (Related Reports).
-   */
-  public boolean isUpload_reports_RIGHT() {
-    return upload_reports_RIGHT;
-  }
-
-  /**
-   * Getter for services right.
-   * @return True if user has the right to access the services page.
-   */
-  public boolean isServices_RIGHT() {
-    return services_RIGHT;
-  }
-
-  /**
-   * Getter for save search criteria right.
-   * @return True if user has the right to save searched criteria.
-   */
-  public boolean isSave_search_criteria_RIGHT() {
-    return save_search_criteria_RIGHT;
-  }
-
-  /**
-   * Getter for content management right.
-   * @return True is user has the right to edit content of web pages.
-   */
-  public boolean isContent_management_RIGHT() {
-    return content_management_RIGHT;
-  }
   
-  /**
-   * Getter for Import/Export Data.
-   * @return True is user has the right to import or export data.
-   */
-  public boolean isImportExportData_RIGHT() {
-    return import_export_data_RIGHT;
-  }
+    /**
+     * Getter for Import/Export Data.
+     * @return True is user has the right to import or export data.
+     */
+    public boolean isImportExportData_RIGHT() {
+        return import_export_data_RIGHT;
+    }
 
-  /**
-   * Getter for user management right.
-   * @return True if user has the right to manage users.
-   */
-  public boolean isUser_management_RIGHT() {
-    return manage_users;
-  }
+    /**
+     * Getter for user management right.
+     * @return True if user has the right to manage users.
+     */
+    public boolean isUser_management_RIGHT() {
+        return manage_users;
+    }
 
-  /**
-   * Getter for upload pictures right.
-   * @return True if user has the right to upload pictures (for factsheets).
-   */
-  public boolean isUpload_pictures_RIGHT() {
-    return upload_pictures_RIGHT;
-  }
+    /**
+     * Getter for upload pictures right.
+     * @return True if user has the right to upload pictures (for factsheets).
+     */
+    public boolean isUpload_pictures_RIGHT() {
+        return upload_pictures_RIGHT;
+    }
 
-  /**
-   * Getter for role management right.
-   * @return True if user has the right to manage user's roles.
-   */
-  public boolean isRole_management_RIGHT() {
-    return role_management_RIGHT;
-  }
+    /**
+     * Getter for role management right.
+     * @return True if user has the right to manage user's roles.
+     */
+    public boolean isRole_management_RIGHT() {
+        return role_management_RIGHT;
+    }
 
-  /**
-   * Getter for mysql administration right.
-   * @return True if user has the right to execute queries/updates to database (access the application which manages db server).
-   */
-  public boolean isAdmin() {
-    return admin_ROLE;
-  }
+    /**
+     * Getter for mysql administration right.
+     * @return True if user has the right to execute queries/updates to database (access the application which manages db server).
+     */
+    public boolean isAdmin() {
+        return admin_ROLE;
+    }
 
-  /**
-   * Getter for edit glossary right.
-   * @return True if user has the right to edit the glossary of terms.
-   */
-  public boolean isEdit_glossary() {
-    return edit_glossary_RIGHT;
-  }
+    /**
+     * Getter for edit glossary right.
+     * @return True if user has the right to edit the glossary of terms.
+     */
+    public boolean isEdit_glossary() {
+        return edit_glossary_RIGHT;
+    }
 
-  /**
-   * Getter for digirProviderRunChecked property. Digir provider is checked if
-   * runs every time a new session is spawned, then is no longer checked in
-   * order to prevent opening multiple connections to server, each request.
-   * @return digirProviderRunChecked (if check has been done)
-   */
-  public boolean isDigirProviderRunChecked()
-  {
-    return digirProviderRunChecked;
-  }
+    /**
+     * Getter for digirProviderRunChecked property. Digir provider is checked if
+     * runs every time a new session is spawned, then is no longer checked in
+     * order to prevent opening multiple connections to server, each request.
+     * @return digirProviderRunChecked (if check has been done)
+     */
+    public boolean isDigirProviderRunChecked() {
+        return digirProviderRunChecked;
+    }
 
-  /**
-   * Setter for digirProviderRunChecked
-   * @param digirProviderRunChecked New value
-   */
-  public void setDigirProviderRunChecked( boolean digirProviderRunChecked )
-  {
-    this.digirProviderRunChecked = digirProviderRunChecked;
-  }
+    /**
+     * Setter for digirProviderRunChecked
+     * @param digirProviderRunChecked New value
+     */
+    public void setDigirProviderRunChecked(boolean digirProviderRunChecked) {
+        this.digirProviderRunChecked = digirProviderRunChecked;
+    }
 
-  /**
-   * Getter for digirProviderRunning. Specifies if digir provider is running.
-   * @return digirProviderRunning
-   */
-  public boolean isDigirProviderRunning()
-  {
-    return digirProviderRunning;
-  }
+    /**
+     * Getter for digirProviderRunning. Specifies if digir provider is running.
+     * @return digirProviderRunning
+     */
+    public boolean isDigirProviderRunning() {
+        return digirProviderRunning;
+    }
 
-  /**
-   * Setter for digirProviderRunning property
-   * @param digirProviderRunning New value
-   */
-  public void setDigirProviderRunning( boolean digirProviderRunning )
-  {
-    this.digirProviderRunning = digirProviderRunning;
-  }
+    /**
+     * Setter for digirProviderRunning property
+     * @param digirProviderRunning New value
+     */
+    public void setDigirProviderRunning(boolean digirProviderRunning) {
+        this.digirProviderRunning = digirProviderRunning;
+    }
 
-  /**
-   * Current application language specified by the user
-   * @return currentLanguage
-   */
-  public String getCurrentLanguage()
-  {
-    return currentLanguage;
-  }
+    /**
+     * Current application language specified by the user
+     * @return currentLanguage
+     */
+    public String getCurrentLanguage() {
+        return currentLanguage;
+    }
 
-  /**
-   * Sets application current language for an user
-   * @param currentLanguage New code for language.
-   */
-  public void setCurrentLanguage( String currentLanguage )
-  {
-    this.currentLanguage = currentLanguage;
-  }
+    /**
+     * Sets application current language for an user
+     * @param currentLanguage New code for language.
+     */
+    public void setCurrentLanguage(String currentLanguage) {
+        this.currentLanguage = currentLanguage;
+    }
 
-  /**
-   * Getter for editContentMode. If application is in edit content mode
-   * @return editContentMode
-   */
-  public boolean isEditContentMode()
-  {
-    return editContentMode;
-  }
+    /**
+     * Getter for editContentMode. If application is in edit content mode
+     * @return editContentMode
+     */
+    public boolean isEditContentMode() {
+        return editContentMode;
+    }
 
-  /**
-   * Setter for editContentMode property. Activate inline editor
-   * @param editContentMode New value
-   */
-  public void setEditContentMode( boolean editContentMode )
-  {
-    this.editContentMode = editContentMode;
-  }
+    /**
+     * Setter for editContentMode property. Activate inline editor
+     * @param editContentMode New value
+     */
+    public void setEditContentMode(boolean editContentMode) {
+        this.editContentMode = editContentMode;
+    }
 
-  /**
-   * Getter for advancedEditContentMode property. If advanced inline editor
-   * is activated
-   * @return advancedEditContentMode
-   */
-  public boolean isAdvancedEditContentMode() {
-    return advancedEditContentMode;
-  }
+    /**
+     * Getter for advancedEditContentMode property. If advanced inline editor
+     * is activated
+     * @return advancedEditContentMode
+     */
+    public boolean isAdvancedEditContentMode() {
+        return advancedEditContentMode;
+    }
 
-  /**
-   * Setter for advancedEditContentMode property. Activate advanced inline
-   * editor
-   * @param advancedEditContentMode
-   */
-  public void setAdvancedEditContentMode( boolean advancedEditContentMode ) {
-    this.advancedEditContentMode = advancedEditContentMode;
-  }
+    /**
+     * Setter for advancedEditContentMode property. Activate advanced inline
+     * editor
+     * @param advancedEditContentMode
+     */
+    public void setAdvancedEditContentMode(boolean advancedEditContentMode) {
+        this.advancedEditContentMode = advancedEditContentMode;
+    }
 
-  /**
-   * Cache the e-mail address property. This e-mail is where generated reports
-   * are sent.
-   * @return e-mail address entered by user, where reports will be sent.
-   */
-  public String getCacheReportEmailAddress() {
-    return cacheReportEmailAddress;
-  }
+    /**
+     * Cache the e-mail address property. This e-mail is where generated reports
+     * are sent.
+     * @return e-mail address entered by user, where reports will be sent.
+     */
+    public String getCacheReportEmailAddress() {
+        return cacheReportEmailAddress;
+    }
 
-  /**
-   * Setter for e-mail address where reports are sent
-   * @param cacheReportEmailAddress New value
-   */
-  public void setCacheReportEmailAddress( String cacheReportEmailAddress ) {
-    this.cacheReportEmailAddress = cacheReportEmailAddress;
-  }
+    /**
+     * Setter for e-mail address where reports are sent
+     * @param cacheReportEmailAddress New value
+     */
+    public void setCacheReportEmailAddress(String cacheReportEmailAddress) {
+        this.cacheReportEmailAddress = cacheReportEmailAddress;
+    }
 
-  /**
-   * Specifies if language was detected from browser accept-language header
-   * If detected once stop subsequent detections
-   * @return languageDetected status
-   */
-  public boolean isLanguageDetected()
-  {
-    return languageDetected;
-  }
+    /**
+     * Specifies if language was detected from browser accept-language header
+     * If detected once stop subsequent detections
+     * @return languageDetected status
+     */
+    public boolean isLanguageDetected() {
+        return languageDetected;
+    }
 
-  /**
-   * Setter for languageDetected property
-   * @param languageDetected
-   */
-  public void setLanguageDetected( boolean languageDetected ) {
-    this.languageDetected = languageDetected;
-  }
+    /**
+     * Setter for languageDetected property
+     * @param languageDetected
+     */
+    public void setLanguageDetected(boolean languageDetected) {
+        this.languageDetected = languageDetected;
+    }
 }

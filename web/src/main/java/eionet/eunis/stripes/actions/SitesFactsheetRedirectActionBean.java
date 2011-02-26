@@ -9,28 +9,28 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 /**
  * Action bean to handle sites-factsheet functionality.
- * 
+ *
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
 @UrlBinding("/sites-factsheet.jsp")
 public class SitesFactsheetRedirectActionBean extends AbstractStripesAction {
-	
+
     private static final String[] allTypes = new String[] {
-        "general", "faunaflora", "designations", "habitats", "sites", "other"}; 
-	
+        "general", "faunaflora", "designations", "habitats", "sites", "other"};
+
     private String idsite = "";
     private String mapType = "";
     private String zoom = "";
     // selected tab
     private int tab;
-	
+
     /**
      * This action bean only serves RDF through {@link RdfAware}.
      */
     @DefaultHandler
     public Resolution defaultAction() {
-		
+
         String tabName = allTypes[tab];
         String url = "/sites/" + idsite;
 
@@ -43,7 +43,8 @@ public class SitesFactsheetRedirectActionBean extends AbstractStripesAction {
         if (zoom != null && zoom.length() > 0) {
             url = url + "&zoom=" + zoom;
         }
-        if ((mapType != null && mapType.length() > 0) || (zoom != null && zoom.length() > 0)) {
+        if ((mapType != null && mapType.length() > 0)
+                || (zoom != null && zoom.length() > 0)) {
             url = url + "#map";
         }
         RedirectResolution redirect = new RedirectResolution(url);

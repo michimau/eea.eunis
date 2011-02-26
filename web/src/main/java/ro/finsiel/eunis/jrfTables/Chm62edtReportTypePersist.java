@@ -1,11 +1,12 @@
 /*
  * $Id
-*/
+ */
 
 package ro.finsiel.eunis.jrfTables;
 
 
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  *
@@ -13,72 +14,74 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class Chm62edtReportTypePersist extends PersistentObject {
 
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idReportType = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_idLookup = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_lookupType = null;
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idReportType = null;
 
-  public Chm62edtReportTypePersist() {
-    super();
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_idLookup = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIdLookup() {
-    return i_idLookup;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_lookupType = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdReportType() {
-    return i_idReportType;
-  }
+    public Chm62edtReportTypePersist() {
+        super();
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getLookupType() {
-    return i_lookupType;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIdLookup() {
+        return i_idLookup;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idLookup
-   **/
-  public void setIdLookup(String idLookup) {
-    i_idLookup = idLookup;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdReportType() {
+        return i_idReportType;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idReportType
-   **/
-  public void setIdReportType(Integer idReportType) {
-    i_idReportType = idReportType;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getLookupType() {
+        return i_lookupType;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param lookupType
-   **/
-  public void setLookupType(String lookupType) {
-    i_lookupType = lookupType;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param idLookup
+     **/
+    public void setIdLookup(String idLookup) {
+        i_idLookup = idLookup;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idReportType
+     **/
+    public void setIdReportType(Integer idReportType) {
+        i_idReportType = idReportType;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param lookupType
+     **/
+    public void setLookupType(String lookupType) {
+        i_lookupType = lookupType;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
 
 }

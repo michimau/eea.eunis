@@ -1,43 +1,43 @@
 package ro.finsiel.eunis.dataimport;
 
+
 /**
- * 
+ *
  * @author altnyris
  *
  */
 public class ImportLogDTO implements java.io.Serializable {
-	
-	private String id;
-	private String message;
-	private String timestamp;
 
-	/**
-	 * 
-	 */
-	public ImportLogDTO(){
-	}
+    private String id;
+    private String message;
+    private String timestamp;
 
-	public String getMessage() {
-		return message;
-	}
+    /**
+     *
+     */
+    public ImportLogDTO() {}
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public String getTimestamp() {
-		return timestamp;
-	}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	public void setTimestamp(String timestamp) {
-		this.timestamp = timestamp;
-	}
+    public String getTimestamp() {
+        return timestamp;
+    }
 
-	public String getId() {
-		return id;
-	}
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}	
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

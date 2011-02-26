@@ -9,7 +9,7 @@ import eionet.eunis.dto.AttributeDto;
 
 
 /**
- * 
+ *
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
@@ -33,7 +33,7 @@ public interface ISitesDao {
 
     /**
      * For given idSite fetches related attributes.
-     * 
+     *
      * @param idSite - site id.
      * @return
      */

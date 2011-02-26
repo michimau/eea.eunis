@@ -210,7 +210,8 @@ public class HabitatImportParser extends DefaultHandler {
             natureObjectIds = getNatureObjectIds();
             deleteOldRecords();
 
-            maxNoIdInt = getMaxId("SELECT MAX(ID_NATURE_OBJECT) FROM CHM62EDT_NATURE_OBJECT");
+            maxNoIdInt = getMaxId(
+                    "SELECT MAX(ID_NATURE_OBJECT) FROM CHM62EDT_NATURE_OBJECT");
             maxDcId = getMaxId("SELECT MAX(ID_DC) FROM DC_SOURCE");
             if (classif != null && classif.length() > 0) {
                 insertClassification();
@@ -218,7 +219,8 @@ public class HabitatImportParser extends DefaultHandler {
 
             String queryNatureObject = "INSERT INTO CHM62EDT_NATURE_OBJECT (ID_NATURE_OBJECT, ID_DC, ORIGINAL_CODE, TYPE) VALUES (?,?,?,'HABITAT')";
 
-            this.preparedStatementNatureObject = con.prepareStatement(queryNatureObject);
+            this.preparedStatementNatureObject = con.prepareStatement(
+                    queryNatureObject);
 
             String queryHabitat = "INSERT INTO CHM62EDT_HABITAT (ID_HABITAT, ID_NATURE_OBJECT, SCIENTIFIC_NAME, DESCRIPTION, CODE_2000, CODE_ANNEX1, EUNIS_HABITAT_CODE, ORIGINALLY_PUBLISHED_CODE, CLASS_REF, CODE_PART_2, PRIORITY, LEVEL) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
@@ -226,7 +228,8 @@ public class HabitatImportParser extends DefaultHandler {
 
             String queryUpdateSitesTabInfo = "INSERT IGNORE INTO chm62edt_tab_page_habitats(ID_NATURE_OBJECT,GENERAL_INFORMATION) VALUES(?,'Y')";
 
-            this.preparedStatementTabInfo = con.prepareStatement(queryUpdateSitesTabInfo);
+            this.preparedStatementTabInfo = con.prepareStatement(
+                    queryUpdateSitesTabInfo);
 
             // con.setAutoCommit(false);
             parseDocument();

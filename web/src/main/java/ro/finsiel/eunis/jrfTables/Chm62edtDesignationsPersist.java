@@ -1,40 +1,42 @@
 package ro.finsiel.eunis.jrfTables;
 
+
 import net.sf.jrf.domain.PersistentObject;
 import java.math.BigDecimal;
+
 
 /**
  * JRF persistent object.
  * @author finsiel
  **/
 public class Chm62edtDesignationsPersist extends PersistentObject {
-  private String idDesignation = null;
-  private String idGeoscope = null;
-  private Integer idDc = null;
-  private String cddaSites = null;
-  private String description = null;
-  private String descriptionEn = null;
-  private String descriptionFr = null;
-  private String OriginalDataSource = null;
-  private java.math.BigDecimal referenceArea = null;
-  private java.math.BigDecimal totalArea = null;
-  private String nationalLaw = null;
-  private String nationalCategory = null;
-  private String nationalLawReference = null;
-  private String nationalLawAgency = null;
-  private String dataSource = null;
-  private java.math.BigDecimal referenceNumber = null;
-  private Integer totalNumber = null;
-  private String referenceDate = null;
-  private String remark = null;
-  private String remarkSource = null;
+    private String idDesignation = null;
+    private String idGeoscope = null;
+    private Integer idDc = null;
+    private String cddaSites = null;
+    private String description = null;
+    private String descriptionEn = null;
+    private String descriptionFr = null;
+    private String OriginalDataSource = null;
+    private java.math.BigDecimal referenceArea = null;
+    private java.math.BigDecimal totalArea = null;
+    private String nationalLaw = null;
+    private String nationalCategory = null;
+    private String nationalLawReference = null;
+    private String nationalLawAgency = null;
+    private String dataSource = null;
+    private java.math.BigDecimal referenceNumber = null;
+    private Integer totalNumber = null;
+    private String referenceDate = null;
+    private String remark = null;
+    private String remarkSource = null;
 
-  /**
-   * Creates an new instance of Chm62edtDesignationsPersist object.
-   */
-  public Chm62edtDesignationsPersist() {
-    super();
-  }
+    /**
+     * Creates an new instance of Chm62edtDesignationsPersist object.
+     */
+    public Chm62edtDesignationsPersist() {
+        super();
+    }
 
     public String getIdDesignation() {
         return idDesignation;

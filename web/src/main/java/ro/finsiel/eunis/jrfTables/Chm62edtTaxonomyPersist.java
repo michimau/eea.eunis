@@ -1,11 +1,12 @@
 /*
  * $Id
-*/
+ */
 
 package ro.finsiel.eunis.jrfTables;
 
 
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  *
@@ -13,204 +14,211 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class Chm62edtTaxonomyPersist extends PersistentObject {
 
-  String parentLevelName = null;
-  Integer classId = null;
+    String parentLevelName = null;
+    Integer classId = null;
 
-  /**
-   * This is a database field.
-   **/
-  private String i_idTaxonomy = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_level = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_name = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_group = null;
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idDc = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_idTaxonomyParent = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_taxonomyTree = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_idTaxonomyLink = null;
+    /**
+     * This is a database field.
+     **/
+    private String i_idTaxonomy = null;
 
-  public Chm62edtTaxonomyPersist() {
-    super();
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_level = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdDc() {
-    return i_idDc;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_name = null;
 
-  /**
-   * Getter for a joined field.
-   **/
-  public String getParentLevelName() {
-    return parentLevelName;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_group = null;
 
-  /**
-   * Getter for a joined field.
-   **/
-  public Integer getClassID() {
-    return classId;
-  }
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idDc = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIdTaxonomy() {
-    return i_idTaxonomy;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_idTaxonomyParent = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIdTaxonomyLink() {
-    return i_idTaxonomyLink;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_taxonomyTree = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIdTaxonomyParent() {
-    return i_idTaxonomyParent;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_idTaxonomyLink = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getTaxonomyTree() {
-    return i_taxonomyTree;
-  }
+    public Chm62edtTaxonomyPersist() {
+        super();
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-//  public String getNotes() {
-//    return i_notes;
-//  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdDc() {
+        return i_idDc;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getGroup() {
-    return i_group;
-  }
+    /**
+     * Getter for a joined field.
+     **/
+    public String getParentLevelName() {
+        return parentLevelName;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getLevel() {
-    return i_level;
-  }
+    /**
+     * Getter for a joined field.
+     **/
+    public Integer getClassID() {
+        return classId;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getName() {
-    return i_name;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIdTaxonomy() {
+        return i_idTaxonomy;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idDc
-   **/
-  public void setIdDc(Integer idDc) {
-    i_idDc = idDc;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIdTaxonomyLink() {
+        return i_idTaxonomyLink;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idTaxonomy
-   **/
-  public void setIdTaxonomy(String idTaxonomy) {
-    i_idTaxonomy = idTaxonomy;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIdTaxonomyParent() {
+        return i_idTaxonomyParent;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idTaxonomyLink
-   **/
-  public void setIdTaxcodeLink(String idTaxonomyLink) {
-    i_idTaxonomyLink = idTaxonomyLink;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getTaxonomyTree() {
+        return i_taxonomyTree;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idTaxonomyParent
-   **/
-  public void setIdTaxcodeParent(String idTaxonomyParent) {
-    i_idTaxonomyParent = idTaxonomyParent;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    // public String getNotes() {
+    // return i_notes;
+    // }
 
-  /**
-   * Setter for a database field.
-   * @param taxonomyTree
-   **/
-  public void setTaxonomyTree(String taxonomyTree) {
-    i_taxonomyTree = taxonomyTree;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getGroup() {
+        return i_group;
+    }
 
-  public void setParentLevelName(String value) {
-    parentLevelName = value;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getLevel() {
+        return i_level;
+    }
 
-  public void setClassID(Integer value) {
-    classId = value;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getName() {
+        return i_name;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param group
-   **/
-  public void setGroup(String group) {
-    i_group = group;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param idDc
+     **/
+    public void setIdDc(Integer idDc) {
+        i_idDc = idDc;
+        this.markModifiedPersistentState();
+    }
 
-  /**
-   * Setter for a database field.
-   * @param level
-   **/
-  public void setLevel(String level) {
-    i_level = level;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param idTaxonomy
+     **/
+    public void setIdTaxonomy(String idTaxonomy) {
+        i_idTaxonomy = idTaxonomy;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
 
-  /**
-   * Setter for a database field.
-   * @param name
-   **/
-  public void setName(String name) {
-    i_name = name;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param idTaxonomyLink
+     **/
+    public void setIdTaxcodeLink(String idTaxonomyLink) {
+        i_idTaxonomyLink = idTaxonomyLink;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idTaxonomyParent
+     **/
+    public void setIdTaxcodeParent(String idTaxonomyParent) {
+        i_idTaxonomyParent = idTaxonomyParent;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param taxonomyTree
+     **/
+    public void setTaxonomyTree(String taxonomyTree) {
+        i_taxonomyTree = taxonomyTree;
+        this.markModifiedPersistentState();
+    }
+
+    public void setParentLevelName(String value) {
+        parentLevelName = value;
+        this.markModifiedPersistentState();
+    }
+
+    public void setClassID(Integer value) {
+        classId = value;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param group
+     **/
+    public void setGroup(String group) {
+        i_group = group;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param level
+     **/
+    public void setLevel(String level) {
+        i_level = level;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param name
+     **/
+    public void setName(String name) {
+        i_name = name;
+        this.markModifiedPersistentState();
+    }
 
 }

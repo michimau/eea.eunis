@@ -1,10 +1,12 @@
 /*
  * $Id
-*/
+ */
 
 package ro.finsiel.eunis.jrfTables;
 
+
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  *
@@ -12,101 +14,107 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class Chm62edtHabitatDescriptionPersist extends PersistentObject {
 
-  /**
-   * This is a database field.
-   **/
-  private String i_idHabitat = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_description = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_ownerText = null;
+    /**
+     * This is a database field.
+     **/
+    private String i_idHabitat = null;
 
-  private Integer idLanguage = null;
+    /**
+     * This is a database field.
+     **/
+    private String i_description = null;
 
-  private String languageName = null;
+    /**
+     * This is a database field.
+     **/
+    private String i_ownerText = null;
 
-  private Integer idDc = null;
+    private Integer idLanguage = null;
 
-  public Chm62edtHabitatDescriptionPersist() {
-    super();
-  }
+    private String languageName = null;
 
-  public Integer getIdDc() {
-    return idDc;
-  }
+    private Integer idDc = null;
 
-  public void setIdDc(Integer idDc) {
-    this.idDc = idDc;
-  }
+    public Chm62edtHabitatDescriptionPersist() {
+        super();
+    }
 
-  public String getLanguageName() {
-    return languageName;
-  }
+    public Integer getIdDc() {
+        return idDc;
+    }
 
-  public void setLanguageName(String languageName) {
-    this.languageName = languageName;
-  }
+    public void setIdDc(Integer idDc) {
+        this.idDc = idDc;
+    }
 
-  public Integer getIdLanguage() {
-    return idLanguage;
-  }
+    public String getLanguageName() {
+        return languageName;
+    }
 
-  public void setIdLanguage(Integer idLanguage) {
-    this.idLanguage = idLanguage;
-  }
+    public void setLanguageName(String languageName) {
+        this.languageName = languageName;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getDescription() {
-    if (null == i_description) return "n/a";
-    return i_description;
-  }
+    public Integer getIdLanguage() {
+        return idLanguage;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIdHabitat() {
-    return i_idHabitat;
-  }
+    public void setIdLanguage(Integer idLanguage) {
+        this.idLanguage = idLanguage;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getOwnerText() {
-    if (null == i_ownerText) return "n/a";
-    return i_ownerText;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getDescription() {
+        if (null == i_description) {
+            return "n/a";
+        }
+        return i_description;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param description
-   **/
-  public void setDescription(String description) {
-    i_description = description;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIdHabitat() {
+        return i_idHabitat;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idHabitat
-   **/
-  public void setIdHabitat(String idHabitat) {
-    i_idHabitat = idHabitat;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getOwnerText() {
+        if (null == i_ownerText) {
+            return "n/a";
+        }
+        return i_ownerText;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param ownerText
-   **/
-  public void setOwnerText(String ownerText) {
-    i_ownerText = ownerText;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param description
+     **/
+    public void setDescription(String description) {
+        i_description = description;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idHabitat
+     **/
+    public void setIdHabitat(String idHabitat) {
+        i_idHabitat = idHabitat;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param ownerText
+     **/
+    public void setOwnerText(String ownerText) {
+        i_ownerText = ownerText;
+        this.markModifiedPersistentState();
+    }
 }

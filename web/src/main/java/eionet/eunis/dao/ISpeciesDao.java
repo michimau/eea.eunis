@@ -11,7 +11,7 @@ import eionet.eunis.api.SpeciesLookupSearchParam;
 
 
 /**
- * 
+ *
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
@@ -30,7 +30,7 @@ public interface ISpeciesDao {
 
     /**
      * Based on the SpeciesLookupSearchParam lookups species.
-     * 
+     *
      * @param speciesLookupSearchParam - search parameter.
      * @return search result.
      */

@@ -19,19 +19,19 @@ import eionet.eunis.util.Constants;
 
 /**
  * Action bean to handle RDF export.
- * 
+ *
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
 @UrlBinding("/dataimport/importhabitats")
 public class HabitatsImporterActionBean extends AbstractStripesAction {
-	
+
     private FileBean fileHabitats;
     private FileBean fileHabitatsDesc;
     private FileBean fileClassCodes;
     private FileBean fileHabitatClassCodes;
     private FileBean fileReferences;
-		
+
     @DefaultHandler
     public Resolution defaultAction() {
         String forwardPage = "/stripes/habitatsimporter.jsp";
@@ -39,27 +39,29 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
         setMetaDescription("Import Habitats");
         return new ForwardResolution(forwardPage);
     }
-	
+
     public Resolution importHabitats() {
-		
+
         String forwardPage = "/stripes/habitatsimporter.jsp";
 
         setMetaDescription("Import Habitats");
-        if (getContext().getSessionManager().isAuthenticated() && getContext().getSessionManager().isImportExportData_RIGHT()) {
+        if (getContext().getSessionManager().isAuthenticated()
+                && getContext().getSessionManager().isImportExportData_RIGHT()) {
             InputStream inputStreamHabitats = null;
             InputStream inputStreamHabitatsDesc = null;
             InputStream inputStreamClassCodes = null;
             InputStream inputStreamHabitatClassCodes = null;
             InputStream inputStreamReferences = null;
-			
+
             try {
-				
+
                 SQLUtilities sqlUtil = getContext().getSqlUtilities();
-				
+
                 if (fileReferences != null) {
                     inputStreamReferences = fileReferences.getInputStream();
-					
-                    ReferencesImportParser parser = new ReferencesImportParser(sqlUtil);
+
+                    ReferencesImportParser parser = new ReferencesImportParser(
+                            sqlUtil);
 
                     parser.execute(inputStreamReferences);
                     fileReferences.delete();
@@ -67,13 +69,14 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
                         inputStreamReferences.close();
                     }
                 }
-				
+
                 String classif = null;
 
                 if (fileClassCodes != null) {
                     inputStreamClassCodes = fileClassCodes.getInputStream();
-					
-                    ClassCodesImportParser parser = new ClassCodesImportParser(sqlUtil);
+
+                    ClassCodesImportParser parser = new ClassCodesImportParser(
+                            sqlUtil);
 
                     classif = parser.execute(inputStreamClassCodes);
                     fileClassCodes.delete();
@@ -81,11 +84,12 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
                         inputStreamClassCodes.close();
                     }
                 }
-				
+
                 if (fileHabitats != null) {
                     inputStreamHabitats = fileHabitats.getInputStream();
-					
-                    HabitatImportParser parser = new HabitatImportParser(sqlUtil, classif);
+
+                    HabitatImportParser parser = new HabitatImportParser(sqlUtil,
+                            classif);
 
                     parser.execute(inputStreamHabitats);
                     fileHabitats.delete();
@@ -93,11 +97,12 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
                         inputStreamHabitats.close();
                     }
                 }
-				
+
                 if (fileHabitatsDesc != null) {
                     inputStreamHabitatsDesc = fileHabitatsDesc.getInputStream();
-					
-                    HabitatDescImportParser parser = new HabitatDescImportParser(sqlUtil);
+
+                    HabitatDescImportParser parser = new HabitatDescImportParser(
+                            sqlUtil);
 
                     parser.execute(inputStreamHabitatsDesc);
                     fileHabitatsDesc.delete();
@@ -105,11 +110,12 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
                         inputStreamHabitatsDesc.close();
                     }
                 }
-				
+
                 if (fileHabitatClassCodes != null) {
                     inputStreamHabitatClassCodes = fileHabitatClassCodes.getInputStream();
-					
-                    HabitatClassCodeImportParser parser = new HabitatClassCodeImportParser(sqlUtil);
+
+                    HabitatClassCodeImportParser parser = new HabitatClassCodeImportParser(
+                            sqlUtil);
 
                     parser.execute(inputStreamHabitatClassCodes);
                     fileHabitatClassCodes.delete();
@@ -117,20 +123,21 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
                         inputStreamHabitatClassCodes.close();
                     }
                 }
-				
+
                 showMessage("Successfully imported!");
-				
+
             } catch (Exception e) {
                 e.printStackTrace();
                 handleEunisException(e.getMessage(), Constants.SEVERITY_ERROR);
             }
         } else {
-            handleEunisException("You are not logged in or you do not have enough privileges to view this page!",
+            handleEunisException(
+                    "You are not logged in or you do not have enough privileges to view this page!",
                     Constants.SEVERITY_WARNING);
         }
         return new ForwardResolution(forwardPage);
     }
-	
+
     public FileBean getFileHabitats() {
         return fileHabitats;
     }

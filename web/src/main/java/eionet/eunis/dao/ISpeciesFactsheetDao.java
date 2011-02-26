@@ -10,16 +10,16 @@ import eionet.eunis.stripes.actions.SpeciesFactsheetActionBean;
 
 /**
  * Helper Dao interface for {@link SpeciesFactsheetActionBean}.
- * 
+ *
  * @author Aleksandr Ivanov
  * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 public interface ISpeciesFactsheetDao {
 
     /**
-     * For given scientific name tries to find species id 
+     * For given scientific name tries to find species id
      * @param scientificName - scientific name.
-     * 
+     *
      * @return species Id or 0 if not found.
      */
     int getIdSpeciesForScientificName(String scientificName);
@@ -36,7 +36,7 @@ public interface ISpeciesFactsheetDao {
      * If given id species is a synonym to another specie - id of that specie is returned.
      * If given id species is a canonical id species - it is returned.
      * If given id is not found - 0 is returned.
-     * 
+     *
      * @param idSpecies id species.
      * @return
      */
@@ -58,7 +58,7 @@ public interface ISpeciesFactsheetDao {
 
     /**
      * for given species returns the list of site id locations where it can be expected.
-     * 
+     *
      * @param idSpecies species id
      * @param limit - limit the number of returned results
      * @return ID_SITE locations
@@ -67,9 +67,9 @@ public interface ISpeciesFactsheetDao {
 
     /**
      * for given species returns the list of associated legal references.
-     * 
+     *
      * @param idNatureObject - species id.
-     * @return 
+     * @return
      */
     List<LegalReferenceDTO> getLegalReferences(int idNatureObject);
 

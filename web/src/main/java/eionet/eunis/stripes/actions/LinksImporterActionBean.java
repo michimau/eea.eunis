@@ -25,13 +25,13 @@ import eionet.eunis.util.Constants;
 
 /**
  * Action bean to handle RDF export.
- * 
+ *
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
 @UrlBinding("/dataimport/importpagelinks")
 public class LinksImporterActionBean extends AbstractStripesAction {
-	
+
     private FileBean file;
     private boolean hasGBIF = false;
     private boolean hasBiolab = false;
@@ -41,10 +41,10 @@ public class LinksImporterActionBean extends AbstractStripesAction {
     private boolean hasBugGuide = false;
     private boolean hasNCBI = false;
     private boolean hasITIS = false;
-	
+
     private boolean delete = false;
     private String matching;
-	
+
     @DefaultHandler
     public Resolution defaultAction() {
         String forwardPage = "/stripes/linkimporter.jsp";
@@ -52,16 +52,17 @@ public class LinksImporterActionBean extends AbstractStripesAction {
         setMetaDescription("Import Links from GeoSpecies");
         return new ForwardResolution(forwardPage);
     }
-	
+
     public Resolution importLinks() {
-		
+
         String forwardPage = "/stripes/linkimporter.jsp";
 
         setMetaDescription("Import Links from GeoSpecies");
-        if (getContext().getSessionManager().isAuthenticated() && getContext().getSessionManager().isImportExportData_RIGHT()) {
+        if (getContext().getSessionManager().isAuthenticated()
+                && getContext().getSessionManager().isImportExportData_RIGHT()) {
             Connection con = null;
             InputStream inputStream = null;
-			
+
             try {
                 SQLUtilities sqlUtil = getContext().getSqlUtilities();
 
@@ -83,30 +84,31 @@ public class LinksImporterActionBean extends AbstractStripesAction {
                 if (delete) {
                     rdfHandler.deleteOldRecords();
                 }
-				
+
                 if (file != null) {
                     inputStream = file.getInputStream();
                 }
-				
+
                 ARP arp = new ARP();
 
                 arp.getHandlers().setStatementHandler(rdfHandler);
                 arp.getHandlers().setErrorHandler(rdfHandler);
                 arp.load(inputStream);
                 rdfHandler.endOfFile();
-				
+
                 List<String> errors = rdfHandler.getErrors();
 
                 if (errors != null && errors.size() > 0) {
                     for (Iterator<String> it = errors.iterator(); it.hasNext();) {
-                        String error = EunisUtil.replaceTagsExport(EunisUtil.replaceBrackets(it.next()));
+                        String error = EunisUtil.replaceTagsExport(
+                                EunisUtil.replaceBrackets(it.next()));
 
                         handleEunisException(error, Constants.SEVERITY_WARNING);
                     }
                 } else {
                     showMessage("Successfully imported!");
                 }
-				
+
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -133,12 +135,13 @@ public class LinksImporterActionBean extends AbstractStripesAction {
                 }
             }
         } else {
-            handleEunisException("You are not logged in or you do not have enough privileges to view this page!",
+            handleEunisException(
+                    "You are not logged in or you do not have enough privileges to view this page!",
                     Constants.SEVERITY_WARNING);
         }
         return new ForwardResolution(forwardPage);
     }
-	
+
     public FileBean getFile() {
         return file;
     }
@@ -226,5 +229,5 @@ public class LinksImporterActionBean extends AbstractStripesAction {
     public void setMatching(String matching) {
         this.matching = matching;
     }
-	
+
 }

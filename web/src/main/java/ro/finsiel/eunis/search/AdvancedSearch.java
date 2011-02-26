@@ -301,7 +301,9 @@ public class AdvancedSearch {
                 SQL.append("'" + IdSession + "',");
                 SQL.append("'" + NatureObject + "',");
                 if (SQL.length() > 64000) {
-                    SQL.append("'" + tokenizer.nextElement().toString().trim() + "')");
+                    SQL.append(
+                            "'" + tokenizer.nextElement().toString().trim()
+                            + "')");
                     ps.executeUpdate(SQL.toString());
                     SQL = new StringBuffer();
                     SQL.ensureCapacity(65000);
@@ -310,9 +312,13 @@ public class AdvancedSearch {
                     SQL.append(" VALUES ");
                 } else {
                     if (pos < max_results) {
-                        SQL.append("'" + tokenizer.nextElement().toString().trim() + "'),");
+                        SQL.append(
+                                "'" + tokenizer.nextElement().toString().trim()
+                                + "'),");
                     } else {
-                        SQL.append("'" + tokenizer.nextElement().toString().trim() + "')");
+                        SQL.append(
+                                "'" + tokenizer.nextElement().toString().trim()
+                                + "')");
                     }
                 }
             }
@@ -568,7 +574,9 @@ public class AdvancedSearch {
                     sas = new ro.finsiel.eunis.search.species.advanced.SpeciesAdvancedSearch();
                     sas.SetSQLLimit(SQL_LIMIT);
                     sas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-                    sas.AddCriteria(rs.getString("ATTRIBUTE"), rs.getString("OPERATOR"), rs.getString("FIRST_VALUE"),
+                    sas.AddCriteria(rs.getString("ATTRIBUTE"),
+                            rs.getString("OPERATOR"),
+                            rs.getString("FIRST_VALUE"),
                             rs.getString("LAST_VALUE"));
                     result = sas.BuildFilter();
                     resultCount = sas.getResultCount();
@@ -580,7 +588,9 @@ public class AdvancedSearch {
                     has = new ro.finsiel.eunis.search.habitats.advanced.HabitatsAdvancedSearch();
                     has.SetSQLLimit(SQL_LIMIT);
                     has.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-                    has.AddCriteria(rs.getString("ATTRIBUTE"), rs.getString("OPERATOR"), rs.getString("FIRST_VALUE"),
+                    has.AddCriteria(rs.getString("ATTRIBUTE"),
+                            rs.getString("OPERATOR"),
+                            rs.getString("FIRST_VALUE"),
                             rs.getString("LAST_VALUE"));
                     result = has.BuildFilter();
                     resultCount = has.getResultCount();
@@ -593,7 +603,9 @@ public class AdvancedSearch {
                     sas.SetSourceDB(SourceDB);
                     sas.SetSQLLimit(SQL_LIMIT);
                     sas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-                    sas.AddCriteria(rs.getString("ATTRIBUTE"), rs.getString("OPERATOR"), rs.getString("FIRST_VALUE"),
+                    sas.AddCriteria(rs.getString("ATTRIBUTE"),
+                            rs.getString("OPERATOR"),
+                            rs.getString("FIRST_VALUE"),
                             rs.getString("LAST_VALUE"));
                     result = sas.BuildFilter();
                     resultCount = sas.getResultCount();
@@ -651,7 +663,9 @@ public class AdvancedSearch {
                     sas = new ro.finsiel.eunis.search.species.advanced.SpeciesAdvancedSearch();
                     sas.SetSQLLimit(SQL_LIMIT);
                     sas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-                    sas.AddCriteria(rs.getString("ATTRIBUTE"), rs.getString("OPERATOR"), rs.getString("FIRST_VALUE"),
+                    sas.AddCriteria(rs.getString("ATTRIBUTE"),
+                            rs.getString("OPERATOR"),
+                            rs.getString("FIRST_VALUE"),
                             rs.getString("LAST_VALUE"));
                     result = sas.BuildFilter();
                     resultCount = sas.getResultCount();
@@ -663,7 +677,9 @@ public class AdvancedSearch {
                     has = new ro.finsiel.eunis.search.habitats.advanced.HabitatsAdvancedSearch();
                     has.SetSQLLimit(SQL_LIMIT);
                     has.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-                    has.AddCriteria(rs.getString("ATTRIBUTE"), rs.getString("OPERATOR"), rs.getString("FIRST_VALUE"),
+                    has.AddCriteria(rs.getString("ATTRIBUTE"),
+                            rs.getString("OPERATOR"),
+                            rs.getString("FIRST_VALUE"),
                             rs.getString("LAST_VALUE"));
                     result = has.BuildFilter();
                     resultCount = has.getResultCount();
@@ -676,7 +692,9 @@ public class AdvancedSearch {
                     sas.SetSourceDB(SourceDB);
                     sas.SetSQLLimit(SQL_LIMIT);
                     sas.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-                    sas.AddCriteria(rs.getString("ATTRIBUTE"), rs.getString("OPERATOR"), rs.getString("FIRST_VALUE"),
+                    sas.AddCriteria(rs.getString("ATTRIBUTE"),
+                            rs.getString("OPERATOR"),
+                            rs.getString("FIRST_VALUE"),
                             rs.getString("LAST_VALUE"));
                     result = sas.BuildFilter();
                     resultCount = sas.getResultCount();
@@ -720,11 +738,15 @@ public class AdvancedSearch {
 
             if (rs.isBeforeFirst()) {
                 rs.next();
-                result = "<strong>" + ro.finsiel.eunis.search.Utilities.SplitString(rs.getString("ATTRIBUTE")) + "</strong> ";
+                result = "<strong>"
+                        + ro.finsiel.eunis.search.Utilities.SplitString(
+                                rs.getString("ATTRIBUTE"))
+                                + "</strong> ";
                 result += "<em>" + rs.getString("OPERATOR") + "</em> ";
                 result += "<u>" + rs.getString("FIRST_VALUE") + "</u>";
                 if (rs.getString("OPERATOR").equalsIgnoreCase("Between")) {
-                    result += " <em>AND</em> <u>" + rs.getString("LAST_VALUE") + "</u>";
+                    result += " <em>AND</em> <u>" + rs.getString("LAST_VALUE")
+                            + "</u>";
                 }
             }
 
@@ -875,7 +897,8 @@ public class AdvancedSearch {
                 SQL += " ORDER BY ID_NODE DESC";
             } else {
                 SQL = "SELECT * FROM EUNIS_ADVANCED_SEARCH";
-                SQL += " WHERE ID_NODE LIKE '" + IdNode.substring(0, IdNode.length() - 1) + "%'";
+                SQL += " WHERE ID_NODE LIKE '"
+                        + IdNode.substring(0, IdNode.length() - 1) + "%'";
                 SQL += " AND ID_SESSION = '" + IdSession + "'";
                 SQL += " AND NATURE_OBJECT = '" + NatureObject + "'";
                 SQL += " AND LENGTH(ID_NODE) = " + IdNode.length();
@@ -893,7 +916,9 @@ public class AdvancedSearch {
                     LastNumber = new Integer(LastNumber.intValue() + 1);
                 } else {
                     // System.out.println("LastNumber = " + rs.getString("ID_NODE").substring(rs.getString("ID_NODE").length()-1));
-                    LastNumber = new Integer(rs.getString("ID_NODE").substring(rs.getString("ID_NODE").length() - 1));
+                    LastNumber = new Integer(
+                            rs.getString("ID_NODE").substring(
+                                    rs.getString("ID_NODE").length() - 1));
                     // System.out.println("LastNumber = " + LastNumber);
                     LastNumber = new Integer(LastNumber.intValue() + 1);
                 }
@@ -907,7 +932,8 @@ public class AdvancedSearch {
                 if (IdNode.length() == 1) {
                     IdNodeNew = LastNumber.toString();
                 } else {
-                    IdNodeNew = IdNode.substring(0, IdNode.length() - 1) + LastNumber.toString();
+                    IdNodeNew = IdNode.substring(0, IdNode.length() - 1)
+                            + LastNumber.toString();
                 }
 
                 SQL = "INSERT INTO EUNIS_ADVANCED_SEARCH";
@@ -1109,8 +1135,10 @@ public class AdvancedSearch {
             SQLModelStart += "FROM ";
             SQLModelStart += "`EUNIS_ADVANCED_SEARCH` ";
             SQLModelStart += "LEFT OUTER JOIN `EUNIS_ADVANCED_SEARCH_CRITERIA` ON (`EUNIS_ADVANCED_SEARCH`.`ID_SESSION` = `EUNIS_ADVANCED_SEARCH_CRITERIA`.`ID_SESSION`) AND (`EUNIS_ADVANCED_SEARCH`.`NATURE_OBJECT` = `EUNIS_ADVANCED_SEARCH_CRITERIA`.`NATURE_OBJECT`) AND (`EUNIS_ADVANCED_SEARCH`.`ID_NODE` = `EUNIS_ADVANCED_SEARCH_CRITERIA`.`ID_NODE`) ";
-            SQLModelStart += "WHERE (`EUNIS_ADVANCED_SEARCH`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += "AND (`EUNIS_ADVANCED_SEARCH`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += "WHERE (`EUNIS_ADVANCED_SEARCH`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += "AND (`EUNIS_ADVANCED_SEARCH`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
             SQLModelEnd += "ORDER BY ";
             SQLModelEnd += "`EUNIS_ADVANCED_SEARCH`.`ID_NODE` ";
 
@@ -1140,7 +1168,8 @@ public class AdvancedSearch {
                 } else {
                     SQL = SQLModelStart;
                     SQL += "AND (LENGTH(`EUNIS_ADVANCED_SEARCH`.`ID_NODE`)=3) ";
-                    SQL += "AND (`EUNIS_ADVANCED_SEARCH`.`ID_NODE` LIKE '" + IdNode + ".%') ";
+                    SQL += "AND (`EUNIS_ADVANCED_SEARCH`.`ID_NODE` LIKE '"
+                            + IdNode + ".%') ";
                     SQL += SQLModelEnd;
                     ps = con.prepareStatement(SQL);
                     rsa = ps.executeQuery();
@@ -1155,7 +1184,8 @@ public class AdvancedSearch {
                             } else {
                                 SQL = SQLModelStart;
                                 SQL += "AND (LENGTH(`EUNIS_ADVANCED_SEARCH`.`ID_NODE`)=5) ";
-                                SQL += "AND (`EUNIS_ADVANCED_SEARCH`.`ID_NODE` LIKE '" + IdNode + ".%') ";
+                                SQL += "AND (`EUNIS_ADVANCED_SEARCH`.`ID_NODE` LIKE '"
+                                        + IdNode + ".%') ";
                                 SQL += SQLModelEnd;
                                 ps = con.prepareStatement(SQL);
                                 rsb = ps.executeQuery();
@@ -1170,7 +1200,8 @@ public class AdvancedSearch {
                                         } else {
                                             SQL = SQLModelStart;
                                             SQL += "AND (LENGTH(`EUNIS_ADVANCED_SEARCH`.`ID_NODE`)=7) ";
-                                            SQL += "AND (`EUNIS_ADVANCED_SEARCH`.`ID_NODE` LIKE '" + IdNode + ".%') ";
+                                            SQL += "AND (`EUNIS_ADVANCED_SEARCH`.`ID_NODE` LIKE '"
+                                                    + IdNode + ".%') ";
                                             SQL += SQLModelEnd;
                                             ps = con.prepareStatement(SQL);
                                             rsc = ps.executeQuery();
@@ -1178,15 +1209,18 @@ public class AdvancedSearch {
                                             if (rsc.isBeforeFirst()) {
                                                 where += "[ ";
                                                 while (rsc.next()) {
-                                                    IdNode = rsc.getString("ID_NODE");
+                                                    IdNode = rsc.getString(
+                                                            "ID_NODE");
 
                                                     where += "#" + IdNode + "#";
 
                                                     if (!rsc.isLast()) {
-                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase("Any")) {
+                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase(
+                                                                "Any")) {
                                                             where += " OR ";
                                                         }
-                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase("All")) {
+                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase(
+                                                                "All")) {
                                                             where += " AND ";
                                                         }
                                                     }
@@ -1197,10 +1231,12 @@ public class AdvancedSearch {
                                         }
 
                                         if (!rsb.isLast()) {
-                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase("Any")) {
+                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase(
+                                                    "Any")) {
                                                 where += " OR ";
                                             }
-                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase("All")) {
+                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase(
+                                                    "All")) {
                                                 where += " AND ";
                                             }
                                         }
@@ -1211,10 +1247,12 @@ public class AdvancedSearch {
                             }
 
                             if (!rsa.isLast()) {
-                                if (rs.getString("NODE_TYPE").equalsIgnoreCase("Any")) {
+                                if (rs.getString("NODE_TYPE").equalsIgnoreCase(
+                                        "Any")) {
                                     where += " OR ";
                                 }
-                                if (rs.getString("NODE_TYPE").equalsIgnoreCase("All")) {
+                                if (rs.getString("NODE_TYPE").equalsIgnoreCase(
+                                        "All")) {
                                     where += " AND ";
                                 }
                             }
@@ -1285,15 +1323,19 @@ public class AdvancedSearch {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQLModelStart = "DELETE FROM EUNIS_ADVANCED_SEARCH_TEMP";
-            SQLModelStart += " WHERE (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += " AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += " WHERE (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += " AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
 
             ps = con.prepareStatement(SQLModelStart);
             ps.execute();
 
             SQLModelStart = "DELETE FROM EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP";
-            SQLModelStart += " WHERE (`EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += " AND (`EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += " WHERE (`EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += " AND (`EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
 
             ps = con.prepareStatement(SQLModelStart);
             ps.execute();
@@ -1301,8 +1343,10 @@ public class AdvancedSearch {
             // System.out.println("delete done");
 
             SQLModelStart = "SELECT * FROM EUNIS_ADVANCED_SEARCH";
-            SQLModelStart += " WHERE (`EUNIS_ADVANCED_SEARCH`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += " AND (`EUNIS_ADVANCED_SEARCH`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += " WHERE (`EUNIS_ADVANCED_SEARCH`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += " AND (`EUNIS_ADVANCED_SEARCH`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
 
             ps = con.prepareStatement(SQLModelStart);
             rs = ps.executeQuery();
@@ -1322,8 +1366,10 @@ public class AdvancedSearch {
             rs.close();
 
             SQLModelStart = "SELECT * FROM EUNIS_ADVANCED_SEARCH_CRITERIA";
-            SQLModelStart += " WHERE (`EUNIS_ADVANCED_SEARCH_CRITERIA`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += " AND (`EUNIS_ADVANCED_SEARCH_CRITERIA`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += " WHERE (`EUNIS_ADVANCED_SEARCH_CRITERIA`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += " AND (`EUNIS_ADVANCED_SEARCH_CRITERIA`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
 
             ps = con.prepareStatement(SQLModelStart);
             rs = ps.executeQuery();
@@ -1357,8 +1403,10 @@ public class AdvancedSearch {
             SQLModelStart += "FROM ";
             SQLModelStart += "`EUNIS_ADVANCED_SEARCH_TEMP` ";
             SQLModelStart += "LEFT OUTER JOIN `EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP` ON (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_SESSION` = `EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP`.`ID_SESSION`) AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`NATURE_OBJECT` = `EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP`.`NATURE_OBJECT`) AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE` = `EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP`.`ID_NODE`) ";
-            SQLModelStart += "WHERE (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += "AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += "WHERE (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += "AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
             SQLModelEnd += "ORDER BY ";
             SQLModelEnd += "`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE` ";
 
@@ -1395,7 +1443,8 @@ public class AdvancedSearch {
                 } else {
                     SQL = SQLModelStart;
                     SQL += "AND (LENGTH(`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE`)=3) ";
-                    SQL += "AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE` LIKE '" + IdNode + ".%') ";
+                    SQL += "AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE` LIKE '"
+                            + IdNode + ".%') ";
                     SQL += SQLModelEnd;
                     ps = con.prepareStatement(SQL);
                     rsa = ps.executeQuery();
@@ -1409,12 +1458,14 @@ public class AdvancedSearch {
                             NodeType = rsa.getString("NODE_TYPE");
                             if (NodeType.equalsIgnoreCase("Criteria")) {
                                 where += "#" + IdNode + "#";
-                                snodea = BuildFilter(IdNode, IdSession, NatureObject);
+                                snodea = BuildFilter(IdNode, IdSession,
+                                        NatureObject);
                                 // System.out.println("snodea = " + snodea);
                             } else {
                                 SQL = SQLModelStart;
                                 SQL += "AND (LENGTH(`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE`)=5) ";
-                                SQL += "AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE` LIKE '" + IdNode + ".%') ";
+                                SQL += "AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE` LIKE '"
+                                        + IdNode + ".%') ";
                                 SQL += SQLModelEnd;
                                 ps = con.prepareStatement(SQL);
                                 rsb = ps.executeQuery();
@@ -1428,12 +1479,14 @@ public class AdvancedSearch {
                                         NodeType = rsb.getString("NODE_TYPE");
                                         if (NodeType.equalsIgnoreCase("Criteria")) {
                                             where += "#" + IdNode + "#";
-                                            snodeb = BuildFilter(IdNode, IdSession, NatureObject);
+                                            snodeb = BuildFilter(IdNode,
+                                                    IdSession, NatureObject);
                                             // System.out.println("snodeb = " + snodeb);
                                         } else {
                                             SQL = SQLModelStart;
                                             SQL += "AND (LENGTH(`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE`)=7) ";
-                                            SQL += "AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE` LIKE '" + IdNode + ".%') ";
+                                            SQL += "AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE` LIKE '"
+                                                    + IdNode + ".%') ";
                                             SQL += SQLModelEnd;
                                             ps = con.prepareStatement(SQL);
                                             rsc = ps.executeQuery();
@@ -1443,19 +1496,24 @@ public class AdvancedSearch {
                                                 snodesc = "";
                                                 while (rsc.next()) {
                                                     snodec = "";
-                                                    IdNode = rsc.getString("ID_NODE");
+                                                    IdNode = rsc.getString(
+                                                            "ID_NODE");
 
                                                     where += "#" + IdNode + "#";
-                                                    snodec = BuildFilter(IdNode, IdSession, NatureObject);
+                                                    snodec = BuildFilter(IdNode,
+                                                            IdSession,
+                                                            NatureObject);
                                                     // System.out.println("snodec = " + snodec);
 
                                                     snodesc += snodec;
                                                     if (!rsc.isLast()) {
-                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase("Any")) {
+                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase(
+                                                                "Any")) {
                                                             where += " OR ";
                                                             snodesc += " OR ";
                                                         }
-                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase("All")) {
+                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase(
+                                                                "All")) {
                                                             where += " AND ";
                                                             snodesc += " AND ";
                                                         }
@@ -1466,19 +1524,26 @@ public class AdvancedSearch {
                                             rsc.close();
                                             // System.out.println("snodesc = " + snodesc);
                                             // create filter from this level criterias
-                                            SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_" + NatureObject.toUpperCase();
-                                            SQLnodes += " WHERE (" + snodesc + ")";
+                                            SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_"
+                                                    + NatureObject.toUpperCase();
+                                            SQLnodes += " WHERE (" + snodesc
+                                                    + ")";
                                             // System.out.println("SQLnodes = " + SQLnodes);
-                                            snodeb = "ID_NATURE_OBJECT IN (" + ExecuteFilterSQL(SQLnodes, "") + ")";
+                                            snodeb = "ID_NATURE_OBJECT IN ("
+                                                    + ExecuteFilterSQL(SQLnodes,
+                                                    "")
+                                                    + ")";
                                             // System.out.println("snodeb (facut din snodesc) = " + snodeb);
                                         }
                                         snodesb += snodeb;
                                         if (!rsb.isLast()) {
-                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase("Any")) {
+                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase(
+                                                    "Any")) {
                                                 where += " OR ";
                                                 snodesb += " OR ";
                                             }
-                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase("All")) {
+                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase(
+                                                    "All")) {
                                                 where += " AND ";
                                                 snodesb += " AND ";
                                             }
@@ -1489,19 +1554,23 @@ public class AdvancedSearch {
                                 rsb.close();
                                 // System.out.println("snodesb = " + snodesb);
                                 // create filter from this level criterias
-                                SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_" + NatureObject.toUpperCase();
+                                SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_"
+                                        + NatureObject.toUpperCase();
                                 SQLnodes += " WHERE (" + snodesb + ")";
                                 // System.out.println("SQLnodes = " + SQLnodes);
-                                snodea = "ID_NATURE_OBJECT IN (" + ExecuteFilterSQL(SQLnodes, "") + ")";
+                                snodea = "ID_NATURE_OBJECT IN ("
+                                        + ExecuteFilterSQL(SQLnodes, "") + ")";
                                 // System.out.println("snodea (facut din snodesb) = " + snodea);
                             }
                             snodesa += snodea;
                             if (!rsa.isLast()) {
-                                if (rs.getString("NODE_TYPE").equalsIgnoreCase("Any")) {
+                                if (rs.getString("NODE_TYPE").equalsIgnoreCase(
+                                        "Any")) {
                                     where += " OR ";
                                     snodesa += " OR ";
                                 }
-                                if (rs.getString("NODE_TYPE").equalsIgnoreCase("All")) {
+                                if (rs.getString("NODE_TYPE").equalsIgnoreCase(
+                                        "All")) {
                                     where += " AND ";
                                     snodesa += " AND ";
                                 }
@@ -1512,11 +1581,13 @@ public class AdvancedSearch {
                     rsa.close();
                     // System.out.println("snodesa = " + snodesa);
                     // create filter from this level criterias
-                    SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_" + NatureObject.toUpperCase();
+                    SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_"
+                            + NatureObject.toUpperCase();
                     SQLnodes += " WHERE (" + snodesa + ")";
                     // System.out.println("SQLnodes = " + SQLnodes);
                     // System.out.println("ce se executa ca sa obtin snode = " + ExecuteFilterSQL(SQLnodes,""));
-                    snode = "ID_NATURE_OBJECT IN (" + ExecuteFilterSQL(SQLnodes, "") + ")";
+                    snode = "ID_NATURE_OBJECT IN ("
+                            + ExecuteFilterSQL(SQLnodes, "") + ")";
                     // System.out.println("snode (facut di snodesa) = " + snode);
                 }
                 snodes += snode;
@@ -1584,15 +1655,19 @@ public class AdvancedSearch {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             SQLModelStart = "DELETE FROM EUNIS_ADVANCED_SEARCH_TEMP";
-            SQLModelStart += " WHERE (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += " AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += " WHERE (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += " AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
 
             ps = con.prepareStatement(SQLModelStart);
             ps.execute();
 
             SQLModelStart = "DELETE FROM EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP";
-            SQLModelStart += " WHERE (`EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += " AND (`EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += " WHERE (`EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += " AND (`EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
 
             ps = con.prepareStatement(SQLModelStart);
             ps.execute();
@@ -1600,8 +1675,10 @@ public class AdvancedSearch {
             // System.out.println("delete done");
 
             SQLModelStart = "SELECT * FROM EUNIS_ADVANCED_SEARCH";
-            SQLModelStart += " WHERE (`EUNIS_ADVANCED_SEARCH`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += " AND (`EUNIS_ADVANCED_SEARCH`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += " WHERE (`EUNIS_ADVANCED_SEARCH`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += " AND (`EUNIS_ADVANCED_SEARCH`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
 
             ps = con.prepareStatement(SQLModelStart);
             rs = ps.executeQuery();
@@ -1621,8 +1698,10 @@ public class AdvancedSearch {
             rs.close();
 
             SQLModelStart = "SELECT * FROM EUNIS_ADVANCED_SEARCH_CRITERIA";
-            SQLModelStart += " WHERE (`EUNIS_ADVANCED_SEARCH_CRITERIA`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += " AND (`EUNIS_ADVANCED_SEARCH_CRITERIA`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += " WHERE (`EUNIS_ADVANCED_SEARCH_CRITERIA`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += " AND (`EUNIS_ADVANCED_SEARCH_CRITERIA`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
 
             ps = con.prepareStatement(SQLModelStart);
             rs = ps.executeQuery();
@@ -1656,8 +1735,10 @@ public class AdvancedSearch {
             SQLModelStart += "FROM ";
             SQLModelStart += "`EUNIS_ADVANCED_SEARCH_TEMP` ";
             SQLModelStart += "LEFT OUTER JOIN `EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP` ON (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_SESSION` = `EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP`.`ID_SESSION`) AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`NATURE_OBJECT` = `EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP`.`NATURE_OBJECT`) AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE` = `EUNIS_ADVANCED_SEARCH_CRITERIA_TEMP`.`ID_NODE`) ";
-            SQLModelStart += "WHERE (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_SESSION`='" + IdSession + "') ";
-            SQLModelStart += "AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`NATURE_OBJECT`='" + NatureObject + "') ";
+            SQLModelStart += "WHERE (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_SESSION`='"
+                    + IdSession + "') ";
+            SQLModelStart += "AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`NATURE_OBJECT`='"
+                    + NatureObject + "') ";
             SQLModelEnd += "ORDER BY ";
             SQLModelEnd += "`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE` ";
 
@@ -1695,7 +1776,8 @@ public class AdvancedSearch {
                 } else {
                     SQL = SQLModelStart;
                     SQL += "AND (LENGTH(`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE`)=3) ";
-                    SQL += "AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE` LIKE '" + IdNode + ".%') ";
+                    SQL += "AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE` LIKE '"
+                            + IdNode + ".%') ";
                     SQL += SQLModelEnd;
                     ps = con.prepareStatement(SQL);
                     rsa = ps.executeQuery();
@@ -1709,12 +1791,14 @@ public class AdvancedSearch {
                             NodeType = rsa.getString("NODE_TYPE");
                             if (NodeType.equalsIgnoreCase("Criteria")) {
                                 where += "#" + IdNode + "#";
-                                snodea = BuildFilterSave(IdNode, IdSession, NatureObject);
+                                snodea = BuildFilterSave(IdNode, IdSession,
+                                        NatureObject);
                                 // System.out.println("snodea = " + snodea);
                             } else {
                                 SQL = SQLModelStart;
                                 SQL += "AND (LENGTH(`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE`)=5) ";
-                                SQL += "AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE` LIKE '" + IdNode + ".%') ";
+                                SQL += "AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE` LIKE '"
+                                        + IdNode + ".%') ";
                                 SQL += SQLModelEnd;
                                 ps = con.prepareStatement(SQL);
                                 rsb = ps.executeQuery();
@@ -1728,12 +1812,14 @@ public class AdvancedSearch {
                                         NodeType = rsb.getString("NODE_TYPE");
                                         if (NodeType.equalsIgnoreCase("Criteria")) {
                                             where += "#" + IdNode + "#";
-                                            snodeb = BuildFilterSave(IdNode, IdSession, NatureObject);
+                                            snodeb = BuildFilterSave(IdNode,
+                                                    IdSession, NatureObject);
                                             // System.out.println("snodeb = " + snodeb);
                                         } else {
                                             SQL = SQLModelStart;
                                             SQL += "AND (LENGTH(`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE`)=7) ";
-                                            SQL += "AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE` LIKE '" + IdNode + ".%') ";
+                                            SQL += "AND (`EUNIS_ADVANCED_SEARCH_TEMP`.`ID_NODE` LIKE '"
+                                                    + IdNode + ".%') ";
                                             SQL += SQLModelEnd;
                                             ps = con.prepareStatement(SQL);
                                             rsc = ps.executeQuery();
@@ -1743,19 +1829,24 @@ public class AdvancedSearch {
                                                 snodesc = "";
                                                 while (rsc.next()) {
                                                     snodec = "";
-                                                    IdNode = rsc.getString("ID_NODE");
+                                                    IdNode = rsc.getString(
+                                                            "ID_NODE");
 
                                                     where += "#" + IdNode + "#";
-                                                    snodec = BuildFilterSave(IdNode, IdSession, NatureObject);
+                                                    snodec = BuildFilterSave(
+                                                            IdNode, IdSession,
+                                                            NatureObject);
                                                     // System.out.println("snodec = " + snodec);
 
                                                     snodesc += snodec;
                                                     if (!rsc.isLast()) {
-                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase("Any")) {
+                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase(
+                                                                "Any")) {
                                                             where += " OR ";
                                                             snodesc += " OR ";
                                                         }
-                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase("All")) {
+                                                        if (rsb.getString("NODE_TYPE").equalsIgnoreCase(
+                                                                "All")) {
                                                             where += " AND ";
                                                             snodesc += " AND ";
                                                         }
@@ -1766,21 +1857,30 @@ public class AdvancedSearch {
                                             rsc.close();
                                             // System.out.println("snodesc = " + snodesc);
                                             // create filter from this level criterias
-                                            String natObj = NatureObject.substring(0, NatureObject.indexOf("Save"));
+                                            String natObj = NatureObject.substring(
+                                                    0,
+                                                    NatureObject.indexOf("Save"));
 
-                                            SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_" + natObj.toUpperCase();
-                                            SQLnodes += " WHERE (" + snodesc + ")";
+                                            SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_"
+                                                    + natObj.toUpperCase();
+                                            SQLnodes += " WHERE (" + snodesc
+                                                    + ")";
                                             // System.out.println("SQLnodes = " + SQLnodes);
-                                            snodeb = "ID_NATURE_OBJECT IN (" + ExecuteFilterSQL(SQLnodes, "") + ")";
+                                            snodeb = "ID_NATURE_OBJECT IN ("
+                                                    + ExecuteFilterSQL(SQLnodes,
+                                                    "")
+                                                    + ")";
                                             // System.out.println("snodeb (facut din snodesc) = " + snodeb);
                                         }
                                         snodesb += snodeb;
                                         if (!rsb.isLast()) {
-                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase("Any")) {
+                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase(
+                                                    "Any")) {
                                                 where += " OR ";
                                                 snodesb += " OR ";
                                             }
-                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase("All")) {
+                                            if (rsa.getString("NODE_TYPE").equalsIgnoreCase(
+                                                    "All")) {
                                                 where += " AND ";
                                                 snodesb += " AND ";
                                             }
@@ -1791,21 +1891,26 @@ public class AdvancedSearch {
                                 rsb.close();
                                 // System.out.println("snodesb = " + snodesb);
                                 // create filter from this level criterias
-                                String natObj = NatureObject.substring(0, NatureObject.indexOf("Save"));
+                                String natObj = NatureObject.substring(0,
+                                        NatureObject.indexOf("Save"));
 
-                                SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_" + natObj.toUpperCase();
+                                SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_"
+                                        + natObj.toUpperCase();
                                 SQLnodes += " WHERE (" + snodesb + ")";
                                 // System.out.println("SQLnodes = " + SQLnodes);
-                                snodea = "ID_NATURE_OBJECT IN (" + ExecuteFilterSQL(SQLnodes, "") + ")";
+                                snodea = "ID_NATURE_OBJECT IN ("
+                                        + ExecuteFilterSQL(SQLnodes, "") + ")";
                                 // System.out.println("snodea (facut din snodesb) = " + snodea);
                             }
                             snodesa += snodea;
                             if (!rsa.isLast()) {
-                                if (rs.getString("NODE_TYPE").equalsIgnoreCase("Any")) {
+                                if (rs.getString("NODE_TYPE").equalsIgnoreCase(
+                                        "Any")) {
                                     where += " OR ";
                                     snodesa += " OR ";
                                 }
-                                if (rs.getString("NODE_TYPE").equalsIgnoreCase("All")) {
+                                if (rs.getString("NODE_TYPE").equalsIgnoreCase(
+                                        "All")) {
                                     where += " AND ";
                                     snodesa += " AND ";
                                 }
@@ -1816,13 +1921,16 @@ public class AdvancedSearch {
                     rsa.close();
                     // System.out.println("snodesa = " + snodesa);
                     // create filter from this level criterias
-                    String natObj = NatureObject.substring(0, NatureObject.indexOf("Save"));
+                    String natObj = NatureObject.substring(0,
+                            NatureObject.indexOf("Save"));
 
-                    SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_" + natObj.toUpperCase();
+                    SQLnodes = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_"
+                            + natObj.toUpperCase();
                     SQLnodes += " WHERE (" + snodesa + ")";
                     // System.out.println("SQLnodes = " + SQLnodes);
                     // System.out.println("ce se executa ca sa obtin snode = " + ExecuteFilterSQL(SQLnodes,""));
-                    snode = "ID_NATURE_OBJECT IN (" + ExecuteFilterSQL(SQLnodes, "") + ")";
+                    snode = "ID_NATURE_OBJECT IN ("
+                            + ExecuteFilterSQL(SQLnodes, "") + ")";
                     // System.out.println("snode (facut di snodesa) = " + snode);
                 }
                 snodes += snode;
@@ -1923,7 +2031,8 @@ public class AdvancedSearch {
                     if (resultCount < SQL_LIMIT) {
                         // result+=Delimiter+rs.getString(1)+Delimiter;
                         // result+=",";
-                        resultbuf.append(Delimiter).append(rs.getString(1)).append(Delimiter);
+                        resultbuf.append(Delimiter).append(rs.getString(1)).append(
+                                Delimiter);
                         resultbuf.append(",");
                     }
                 }
@@ -1933,7 +2042,8 @@ public class AdvancedSearch {
                 result = resultbuf.toString();
 
                 if (result.length() > 0) {
-                    if (result.substring(result.length() - 1).equalsIgnoreCase(",")) {
+                    if (result.substring(result.length() - 1).equalsIgnoreCase(
+                            ",")) {
                         result = result.substring(0, result.length() - 1);
                     }
                 } else {

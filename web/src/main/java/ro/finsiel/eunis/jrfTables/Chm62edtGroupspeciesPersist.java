@@ -1,11 +1,12 @@
 /*
  * $Id
-*/
+ */
 
 package ro.finsiel.eunis.jrfTables;
 
 
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  *
@@ -13,110 +14,114 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class Chm62edtGroupspeciesPersist extends PersistentObject {
 
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idGroupspecies = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_commonName = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_scientificName = null;
-  /**
-   * This is a database field.
-   **/
-  private Short i_selection = null;
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idDc = null;
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idGroupspecies = null;
 
-  public Chm62edtGroupspeciesPersist() {
-    super();
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_commonName = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getCommonName() {
-    return i_commonName;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_scientificName = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdDc() {
-    return i_idDc;
-  }
+    /**
+     * This is a database field.
+     **/
+    private Short i_selection = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdGroupspecies() {
-    return i_idGroupspecies;
-  }
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idDc = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getScientificName() {
-    return i_scientificName;
-  }
+    public Chm62edtGroupspeciesPersist() {
+        super();
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public Short getSelection() {
-    return i_selection;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getCommonName() {
+        return i_commonName;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param commonName
-   **/
-  public void setCommonName(String commonName) {
-    i_commonName = commonName;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdDc() {
+        return i_idDc;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idDc
-   **/
-  public void setIdDc(Integer idDc) {
-    i_idDc = idDc;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdGroupspecies() {
+        return i_idGroupspecies;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idGroupspecies
-   **/
-  public void setIdGroupspecies(Integer idGroupspecies) {
-    i_idGroupspecies = idGroupspecies;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getScientificName() {
+        return i_scientificName;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param scientificName
-   **/
-  public void setScientificName(String scientificName) {
-    i_scientificName = scientificName;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Short getSelection() {
+        return i_selection;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param selection
-   **/
-  public void setSelection(Short selection) {
-    i_selection = selection;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param commonName
+     **/
+    public void setCommonName(String commonName) {
+        i_commonName = commonName;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idDc
+     **/
+    public void setIdDc(Integer idDc) {
+        i_idDc = idDc;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idGroupspecies
+     **/
+    public void setIdGroupspecies(Integer idGroupspecies) {
+        i_idGroupspecies = idGroupspecies;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param scientificName
+     **/
+    public void setScientificName(String scientificName) {
+        i_scientificName = scientificName;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param selection
+     **/
+    public void setSelection(Short selection) {
+        i_selection = selection;
+        this.markModifiedPersistentState();
+    }
 
 }

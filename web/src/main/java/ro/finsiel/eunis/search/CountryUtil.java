@@ -34,7 +34,8 @@ public class CountryUtil {
         } else { // or for a specified country
             try {
                 _regionsCodes = new Chm62edtCountryBiogeoregionDomain().findWhere(
-                        "CODE_COUNTRY='" + countryCode + "' AND CODE_BIOGEOREGION<>'nd'");
+                        "CODE_COUNTRY='" + countryCode
+                        + "' AND CODE_BIOGEOREGION<>'nd'");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -46,8 +47,10 @@ public class CountryUtil {
             Chm62edtCountryBiogeoregionPersist _aRegion = (Chm62edtCountryBiogeoregionPersist) _it.next();
 
             _regions.addElement(
-                    new RegionWrapper(regionCode2Name(_aRegion.getCodeBiogeoregion()), _aRegion.getCodeBiogeoregion(), "idGeoscope",
-                    _aRegion.getPercentage()));
+                    new RegionWrapper(
+                            regionCode2Name(_aRegion.getCodeBiogeoregion()),
+                            _aRegion.getCodeBiogeoregion(), "idGeoscope",
+                            _aRegion.getPercentage()));
         }
         new SortList().sort(_regions, SortList.SORT_ASCENDING);
         return _regions.iterator();
@@ -66,7 +69,8 @@ public class CountryUtil {
             _countryCodes = findAllCountriesCodes();
         } else {
             try {
-                _countryCodes = new Chm62edtCountryBiogeoregionDomain().findWhere("CODE_BIOGEOREGION='" + regionCode + "'");
+                _countryCodes = new Chm62edtCountryBiogeoregionDomain().findWhere(
+                        "CODE_BIOGEOREGION='" + regionCode + "'");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -78,7 +82,10 @@ public class CountryUtil {
             while (_it.hasNext()) {
                 Chm62edtCountryBiogeoregionPersist _aRegion = (Chm62edtCountryBiogeoregionPersist) _it.next();
 
-                _countries.addElement(new CountryWrapper(countryCode2Name(_aRegion.getCodeCountry()), _aRegion.getCodeCountry(), ""));
+                _countries.addElement(
+                        new CountryWrapper(
+                                countryCode2Name(_aRegion.getCodeCountry()),
+                                _aRegion.getCodeCountry(), ""));
             }
         } catch (ClassCastException ex) {
             ex.printStackTrace();
@@ -96,7 +103,8 @@ public class CountryUtil {
         List results = new Vector();
 
         try {
-            results = new Chm62edtCountryBiogeoregionDomain().findWhere("1=1 GROUP BY CODE_COUNTRY");
+            results = new Chm62edtCountryBiogeoregionDomain().findWhere(
+                    "1=1 GROUP BY CODE_COUNTRY");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,7 +119,8 @@ public class CountryUtil {
         List results = new Vector();
 
         try {
-            results = new Chm62edtCountryBiogeoregionDomain().findWhere("1=1 GROUP BY CODE_BIOGEOREGION");
+            results = new Chm62edtCountryBiogeoregionDomain().findWhere(
+                    "1=1 GROUP BY CODE_BIOGEOREGION");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -131,7 +140,8 @@ public class CountryUtil {
         List _list = new Vector();
 
         try {
-            _list = new ro.finsiel.eunis.jrfTables.Chm62edtBiogeoregionDomain().findWhere("CODE='" + regionCode + "'");
+            _list = new ro.finsiel.eunis.jrfTables.Chm62edtBiogeoregionDomain().findWhere(
+                    "CODE='" + regionCode + "'");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -156,7 +166,8 @@ public class CountryUtil {
         List _list = new Vector();
 
         try {
-            _list = new Chm62edtCountryDomain().findWhere("EUNIS_AREA_CODE='" + code + "'");
+            _list = new Chm62edtCountryDomain().findWhere(
+                    "EUNIS_AREA_CODE='" + code + "'");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -182,14 +193,16 @@ public class CountryUtil {
         List _list = new Vector();
 
         try {
-            _list = new Chm62edtBiogeoregionDomain().findWhere("NAME='" + regionName + "'");
+            _list = new Chm62edtBiogeoregionDomain().findWhere(
+                    "NAME='" + regionName + "'");
         } catch (Exception e) {
             e.printStackTrace();
         }
         if (!_list.isEmpty()) {
             ret = ((Chm62edtBiogeoregionPersist) _list.get(0)).getIdGeoscope();
         } else {
-            throw new RecordNotFoundException("No region with name " + regionName + " has been found.");
+            throw new RecordNotFoundException(
+                    "No region with name " + regionName + " has been found.");
         }
         return ret.toString();
     }
@@ -208,7 +221,8 @@ public class CountryUtil {
         List _list = new Vector();
 
         try {
-            _list = new Chm62edtCountryDomain().findWhere("AREA_NAME_EN='" + countryName + "'");
+            _list = new Chm62edtCountryDomain().findWhere(
+                    "AREA_NAME_EN='" + countryName + "'");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -216,7 +230,8 @@ public class CountryUtil {
             ret = ((Chm62edtCountryPersist) _list.get(0)).getIdGeoscope();
         } else {
             throw new RecordNotFoundException(
-                    "findCountryIdGeoscope(String): No country with name " + countryName + " has been found.");
+                    "findCountryIdGeoscope(String): No country with name "
+                            + countryName + " has been found.");
         }
         return ret.toString();
     }
@@ -237,14 +252,17 @@ public class CountryUtil {
         List _list = new Vector();
 
         try {
-            _list = new Chm62edtCountryDomain().findWhere("EUNIS_AREA_CODE='" + code + "'");
+            _list = new Chm62edtCountryDomain().findWhere(
+                    "EUNIS_AREA_CODE='" + code + "'");
         } catch (Exception e) {
             e.printStackTrace();
         }
         if (!_list.isEmpty()) {
             ret = ((Chm62edtCountryPersist) _list.get(0)).getIdGeoscope();
         } else {
-            throw new RecordNotFoundException("findCountryIdGeoscope(Object): No country with code " + code + " has been found.");
+            throw new RecordNotFoundException(
+                    "findCountryIdGeoscope(Object): No country with code "
+                            + code + " has been found.");
         }
         return ret.toString();
     }
@@ -258,7 +276,8 @@ public class CountryUtil {
         Chm62edtCountryPersist country = null;
 
         try {
-            List contries = new Chm62edtCountryDomain().findWhere("AREA_NAME_EN='" + englishName + "'");
+            List contries = new Chm62edtCountryDomain().findWhere(
+                    "AREA_NAME_EN='" + englishName + "'");
 
             if (null != contries && contries.size() > 0) {
                 country = (Chm62edtCountryPersist) contries.get(0);
@@ -278,7 +297,8 @@ public class CountryUtil {
         Chm62edtBiogeoregionPersist region = null;
 
         try {
-            List regions = new Chm62edtBiogeoregionDomain().findWhere("NAME='" + Name + "'");
+            List regions = new Chm62edtBiogeoregionDomain().findWhere(
+                    "NAME='" + Name + "'");
 
             if (null != regions && regions.size() > 0) {
                 region = (Chm62edtBiogeoregionPersist) regions.get(0);
@@ -298,7 +318,8 @@ public class CountryUtil {
         Chm62edtBiogeoregionPersist region = null;
 
         try {
-            List regions = new Chm62edtBiogeoregionDomain().findWhere("NAME='" + regionName + "'");
+            List regions = new Chm62edtBiogeoregionDomain().findWhere(
+                    "NAME='" + regionName + "'");
 
             if (null != regions && regions.size() > 0) {
                 region = (Chm62edtBiogeoregionPersist) regions.get(0);
@@ -318,7 +339,8 @@ public class CountryUtil {
 
         try {
             ret = new Chm62edtCountryDomain().findWhereOrderBy(
-                    "ISO_2L<>'' AND ISO_2L<>'null' AND ISO_2L IS NOT NULL AND SELECTION <> 0", "AREA_NAME_EN");
+                    "ISO_2L<>'' AND ISO_2L<>'null' AND ISO_2L IS NOT NULL AND SELECTION <> 0",
+                    "AREA_NAME_EN");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             ret = new Vector();
@@ -351,8 +373,9 @@ public class CountryUtil {
         }
         try {
             ret = new Chm62edtCountryDomain().findCustom(
-                    "SELECT * FROM CHM62EDT_COUNTRY WHERE AREA_NAME_EN LIKE '%" + name
-                    + "%' AND (ISO_2L<>'' AND ISO_2L<>'null' AND ISO_2L IS NOT NULL AND SELECTION <> 0) GROUP BY AREA_NAME_EN ORDER BY AREA_NAME_EN");
+                    "SELECT * FROM CHM62EDT_COUNTRY WHERE AREA_NAME_EN LIKE '%"
+                            + name
+                            + "%' AND (ISO_2L<>'' AND ISO_2L<>'null' AND ISO_2L IS NOT NULL AND SELECTION <> 0) GROUP BY AREA_NAME_EN ORDER BY AREA_NAME_EN");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             ret = new Vector();
@@ -372,7 +395,8 @@ public class CountryUtil {
             return result;
         }
         try {
-            List ret = new Chm62edtCountryDomain().findWhere("AREA_NAME_EN='" + areaNameEn + "'");
+            List ret = new Chm62edtCountryDomain().findWhere(
+                    "AREA_NAME_EN='" + areaNameEn + "'");
 
             if (null != ret && ret.size() > 0) {
                 result = ((Chm62edtCountryPersist) ret.get(0)).getIso2l();
@@ -398,7 +422,8 @@ public class CountryUtil {
             return "";
         }
         try {
-            List ret = new Chm62edtCountryDomain().findWhere("ID_GEOSCOPE='" + idGeoscope + "'");
+            List ret = new Chm62edtCountryDomain().findWhere(
+                    "ID_GEOSCOPE='" + idGeoscope + "'");
 
             if (null != ret && ret.size() > 0) {
                 result = ((Chm62edtCountryPersist) ret.get(0)).getAreaNameEnglish();
@@ -421,12 +446,14 @@ public class CountryUtil {
         String ISO = "";
 
         try {
-            List country = new Chm62edtCountryDomain().findWhere("AREA_NAME_EN='" + name + "'");
+            List country = new Chm62edtCountryDomain().findWhere(
+                    "AREA_NAME_EN='" + name + "'");
 
             if (country != null && country.size() > 0) {
-                ISO = (((Chm62edtCountryPersist) country.get(0)).getIso3l() == null
-                        ? ""
-                        : ((Chm62edtCountryPersist) country.get(0)).getIso3l());
+                ISO = (((Chm62edtCountryPersist) country.get(0)).getIso3l()
+                        == null
+                                ? ""
+                                : ((Chm62edtCountryPersist) country.get(0)).getIso3l());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -444,7 +471,8 @@ public class CountryUtil {
         String result = "";
 
         try {
-            List results = new Chm62edtBiogeoregionDomain().findWhere("ID_GEOSCOPE='" + idGeoscope + "'");
+            List results = new Chm62edtBiogeoregionDomain().findWhere(
+                    "ID_GEOSCOPE='" + idGeoscope + "'");
 
             if (null != results && results.size() > 0) {
                 result = ((Chm62edtBiogeoregionPersist) results.get(0)).getBiogeoregionName();
@@ -532,7 +560,8 @@ public class CountryUtil {
 
         String sql = "";
 
-        if ((null != country && country.trim().length() > 0) || (null != region && region.trim().length() > 0)) {
+        if ((null != country && country.trim().length() > 0)
+                || (null != region && region.trim().length() > 0)) {
             if (null != country && country.trim().length() > 0) {
                 whereCond += " and c.area_name_en = '" + country + "' ";
             }
@@ -544,23 +573,30 @@ public class CountryUtil {
                     + " INNER JOIN CHM62EDT_REPORTS AS B ON  A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT ";
             if (null != country && country.trim().length() > 0) {
                 sql += " INNER JOIN CHM62EDT_COUNTRY AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE "
-                        + (null != region && region.trim().length() > 0 ? "INNER" : "LEFT OUTER")
-                        + " JOIN CHM62EDT_BIOGEOREGION AS D ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE where " + whereCond;
+                        + (null != region && region.trim().length() > 0
+                                ? "INNER"
+                                : "LEFT OUTER")
+                                + " JOIN CHM62EDT_BIOGEOREGION AS D ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE where "
+                                + whereCond;
             } else {
                 sql += " INNER JOIN CHM62EDT_BIOGEOREGION AS D ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE "
-                        + " LEFT OUTER JOIN CHM62EDT_COUNTRY AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE where " + whereCond;
+                        + " LEFT OUTER JOIN CHM62EDT_COUNTRY AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE where "
+                        + whereCond;
             }
         } else {
             // if is not country or region yet selected make un union
 
-            sql = "select distinct a.id_nature_object " + "FROM CHM62EDT_HABITAT AS A "
+            sql = "select distinct a.id_nature_object "
+                    + "FROM CHM62EDT_HABITAT AS A "
                     + "INNER JOIN CHM62EDT_REPORTS AS B ON  A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT "
                     + "INNER JOIN CHM62EDT_COUNTRY AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE "
-                    + "where C.AREA_NAME_EN is not null and trim(C.AREA_NAME_EN) != '' and C.AREA_NAME_EN != 'null' " + dbCond
-                    + "union " + "select distinct a.id_nature_object " + "FROM CHM62EDT_HABITAT AS A "
+                    + "where C.AREA_NAME_EN is not null and trim(C.AREA_NAME_EN) != '' and C.AREA_NAME_EN != 'null' "
+                    + dbCond + "union " + "select distinct a.id_nature_object "
+                    + "FROM CHM62EDT_HABITAT AS A "
                     + "INNER JOIN CHM62EDT_REPORTS AS B ON  A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT "
                     + "INNER JOIN CHM62EDT_BIOGEOREGION AS D ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE "
-                    + "where  D.NAME is not null and trim(D.NAME) != '' and D.NAME != 'null' " + dbCond;
+                    + "where  D.NAME is not null and trim(D.NAME) != '' and D.NAME != 'null' "
+                    + dbCond;
         }
 
         List results = sqlc.ExecuteSQLReturnList(sql, 1);
@@ -568,7 +604,9 @@ public class CountryUtil {
 
         if (results != null && results.size() > 0) {
             for (int i = 0; i < results.size(); i++) {
-                resultsAsStrings.add((String) ((TableColumns) results.get(i)).getColumnsValues().get(0));
+                resultsAsStrings.add(
+                        (String) ((TableColumns) results.get(i)).getColumnsValues().get(
+                                0));
             }
         }
         return getNOListString(resultsAsStrings, "B");

@@ -78,7 +78,8 @@ public abstract class AbstractPaginator {
      */
     public List getPage(int pageNumber) throws InitializationException, CriteriaMissingException {
         if (null == finder) {
-            throw new InitializationException("'finder' object was null, so call 'init(finder)' from the finder object failed.");
+            throw new InitializationException(
+                    "'finder' object was null, so call 'init(finder)' from the finder object failed.");
         }
         // Compute offsetStart and offsetEnd for the Paginator.getResults(offsetStart, offsetEnd).
         // Check an overflow and adjust the computed offsets. I'm not sure if it's even needed since MySQL won't mind if
@@ -102,7 +103,8 @@ public abstract class AbstractPaginator {
      */
     public final int countPages() throws CriteriaMissingException, InitializationException {
         if (null == finder) {
-            throw new InitializationException("'finder' object was null, so call 'init(finder)' from the finder object failed.");
+            throw new InitializationException(
+                    "'finder' object was null, so call 'init(finder)' from the finder object failed.");
         }
         if (pageSize <= 0) {
             pageSize = DEFAULT_PAGE_SIZE;
@@ -122,7 +124,8 @@ public abstract class AbstractPaginator {
      */
     public final int countResults() throws CriteriaMissingException, InitializationException {
         if (null == finder) {
-            throw new InitializationException("'finder' object was null, so call 'init(finder)' from the finder object failed.");
+            throw new InitializationException(
+                    "'finder' object was null, so call 'init(finder)' from the finder object failed.");
         }
         return finder.countResults().intValue();
     }
@@ -159,8 +162,12 @@ public abstract class AbstractPaginator {
      */
     public final int setCurrentPage(int currentPage) {
         try {
-            this.currentPage = (currentPage >= countPages()) ? currentPage = countPages() - 1 : currentPage;
-            this.currentPage = (currentPage <= 0) ? currentPage = 0 : currentPage;
+            this.currentPage = (currentPage >= countPages())
+                    ? currentPage = countPages() - 1
+                    : currentPage;
+            this.currentPage = (currentPage <= 0)
+                    ? currentPage = 0
+                    : currentPage;
             return this.currentPage;
         } catch (CriteriaMissingException ex) {
             System.err.println(
@@ -168,7 +175,8 @@ public abstract class AbstractPaginator {
             ex.printStackTrace(System.err);
             return 0;
         } catch (InitializationException iex) {
-            System.err.println("finder object not initialized, please call init()");
+            System.err.println(
+                    "finder object not initialized, please call init()");
             iex.printStackTrace(System.err);
             return 0;
         }

@@ -19,7 +19,7 @@ import eionet.eunis.util.JstlFunctions;
 
 /**
  * @author alex
- * 
+ *
  *         <a href="mailto:aleks21@gmail.com">contact<a>
  */
 @UrlBinding("/pictures-upload.jsp")
@@ -35,22 +35,27 @@ public class PictureUploadActionBean extends AbstractStripesAction {
 
     @DefaultHandler
     public Resolution defaultAction() {
-        if (!getContext().getSessionManager().isAuthenticated() || !getContext().getSessionManager().isUpload_pictures_RIGHT()) {
-            errorMessage = JstlFunctions.cms(getContentManagement(), "pictures_upload_login");
+        if (!getContext().getSessionManager().isAuthenticated()
+                || !getContext().getSessionManager().isUpload_pictures_RIGHT()) {
+            errorMessage = JstlFunctions.cms(getContentManagement(),
+                    "pictures_upload_login");
             return new ForwardResolution("/stripes/pictures-upload_error.jsp");
         }
-		
-        if (null != idobject && null != natureobjecttype && null != operation && operation.equalsIgnoreCase("upload")) {
+
+        if (null != idobject && null != natureobjecttype && null != operation
+                && operation.equalsIgnoreCase("upload")) {
             return uploadPicture();
-			 
-        } else if (null != idobject && null != natureobjecttype && null != operation && operation.equalsIgnoreCase("delete")) {
+
+        } else if (null != idobject && null != natureobjecttype
+                && null != operation && operation.equalsIgnoreCase("delete")) {
             return deletePicture();
         } else {
-            errorMessage = JstlFunctions.cms(getContentManagement(), "pictures_upload_denied");
+            errorMessage = JstlFunctions.cms(getContentManagement(),
+                    "pictures_upload_denied");
             return new ForwardResolution("/stripes/pictures-upload_error.jsp");
         }
     }
-	
+
     public Resolution uploadPicture() {
         List<Chm62edtNatureObjectPicturePersist> pictureList = new Chm62edtNatureObjectPictureDomain().findWhere(
                 "MAIN_PIC = 1 AND ID_OBJECT = " + idobject);
@@ -62,17 +67,20 @@ public class PictureUploadActionBean extends AbstractStripesAction {
     }
 
     private Resolution deletePicture() {
-        boolean result = PicturesHelper.deletePicture(idobject, natureobjecttype, getScientificName(), filename);
+        boolean result = PicturesHelper.deletePicture(idobject, natureobjecttype,
+                getScientificName(), filename);
         // Delete picture physically from disk
         String instanceHome = getContext().getServletContext().getRealPath("/");
         String baseDir = "";
 
         if (StringUtils.equalsIgnoreCase("species", natureobjecttype)) {
-            baseDir = getContext().getInitParameter("UPLOAD_DIR_PICTURES_SPECIES");
+            baseDir = getContext().getInitParameter(
+                    "UPLOAD_DIR_PICTURES_SPECIES");
         } else if (StringUtils.equalsIgnoreCase("sites", natureobjecttype)) {
             baseDir = getContext().getInitParameter("UPLOAD_DIR_PICTURES_SITES");
         } else if (StringUtils.equalsIgnoreCase("habitats", natureobjecttype)) {
-            baseDir = getContext().getInitParameter("UPLOAD_DIR_PICTURES_HABITATS");
+            baseDir = getContext().getInitParameter(
+                    "UPLOAD_DIR_PICTURES_HABITATS");
         }
         String absoluteFilename = instanceHome + baseDir + filename;
         File absolutFile = new File(absoluteFilename);
@@ -83,9 +91,11 @@ public class PictureUploadActionBean extends AbstractStripesAction {
         }
         if (!result) {
             errorMessage = "failed to delete the picture";
-            return new ForwardResolution("/stripes/pictures-upload_error.jsp"); 
-        } 
-        return new RedirectResolution("/pictures.jsp?idobject=" + idobject + "&natureobjecttype=" + natureobjecttype);
+            return new ForwardResolution("/stripes/pictures-upload_error.jsp");
+        }
+        return new RedirectResolution(
+                "/pictures.jsp?idobject=" + idobject + "&natureobjecttype="
+                + natureobjecttype);
     }
 
     public String getErrorMessage() {

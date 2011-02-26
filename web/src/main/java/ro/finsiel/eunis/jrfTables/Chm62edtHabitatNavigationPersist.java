@@ -1,11 +1,12 @@
 /*
  * $Id
-*/
+ */
 
 package ro.finsiel.eunis.jrfTables;
 
 
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  *
@@ -13,194 +14,204 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class Chm62edtHabitatNavigationPersist extends PersistentObject {
 
-  /**
-   * This is a database field.
-   **/
-  private String i_habitatCategory = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_idQuestion = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_idQuestionParent = null;
-  /**
-   * This is a database field.
-   **/
-  private Short i_level = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_question = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_questionDescription = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_answer = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_idQuestionChild = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_node = null;
+    /**
+     * This is a database field.
+     **/
+    private String i_habitatCategory = null;
 
-  public Chm62edtHabitatNavigationPersist() {
-    super();
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_idQuestion = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getAnswer() {
-    return i_answer;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_idQuestionParent = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getHabitatCategory() {
-    return i_habitatCategory;
-  }
+    /**
+     * This is a database field.
+     **/
+    private Short i_level = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIdQuestion() {
-    return i_idQuestion;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_question = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIdQuestionChild() {
-    return i_idQuestionChild;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_questionDescription = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIdQuestionParent() {
-    return i_idQuestionParent;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_answer = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public Short getLevel() {
-    if (null == i_level) return new Short((short) 0);
-    return i_level;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_idQuestionChild = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getNode() {
-    return i_node;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_node = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getQuestion() {
-    return i_question;
-  }
+    public Chm62edtHabitatNavigationPersist() {
+        super();
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getQuestionDescription() {
-    return i_questionDescription;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getAnswer() {
+        return i_answer;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param answer
-   **/
-  public void setAnswer(String answer) {
-    i_answer = answer;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getHabitatCategory() {
+        return i_habitatCategory;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param habitatCategory
-   **/
-  public void setHabitatCategory(String habitatCategory) {
-    i_habitatCategory = habitatCategory;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIdQuestion() {
+        return i_idQuestion;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idQuestion
-   **/
-  public void setIdQuestion(String idQuestion) {
-    i_idQuestion = idQuestion;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIdQuestionChild() {
+        return i_idQuestionChild;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idQuestionChild
-   **/
-  public void setIdQuestionChild(String idQuestionChild) {
-    i_idQuestionChild = idQuestionChild;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIdQuestionParent() {
+        return i_idQuestionParent;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idQuestionParent
-   **/
-  public void setIdQuestionParent(String idQuestionParent) {
-    i_idQuestionParent = idQuestionParent;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Short getLevel() {
+        if (null == i_level) {
+            return new Short((short) 0);
+        }
+        return i_level;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param level
-   **/
-  public void setLevel(Short level) {
-    i_level = level;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getNode() {
+        return i_node;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param node
-   **/
-  public void setNode(String node) {
-    i_node = node;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getQuestion() {
+        return i_question;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param question
-   **/
-  public void setQuestion(String question) {
-    i_question = question;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getQuestionDescription() {
+        return i_questionDescription;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param questionDescription
-   **/
-  public void setQuestionDescription(String questionDescription) {
-    i_questionDescription = questionDescription;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param answer
+     **/
+    public void setAnswer(String answer) {
+        i_answer = answer;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param habitatCategory
+     **/
+    public void setHabitatCategory(String habitatCategory) {
+        i_habitatCategory = habitatCategory;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idQuestion
+     **/
+    public void setIdQuestion(String idQuestion) {
+        i_idQuestion = idQuestion;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idQuestionChild
+     **/
+    public void setIdQuestionChild(String idQuestionChild) {
+        i_idQuestionChild = idQuestionChild;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idQuestionParent
+     **/
+    public void setIdQuestionParent(String idQuestionParent) {
+        i_idQuestionParent = idQuestionParent;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param level
+     **/
+    public void setLevel(Short level) {
+        i_level = level;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param node
+     **/
+    public void setNode(String node) {
+        i_node = node;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param question
+     **/
+    public void setQuestion(String question) {
+        i_question = question;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param questionDescription
+     **/
+    public void setQuestionDescription(String questionDescription) {
+        i_questionDescription = questionDescription;
+        this.markModifiedPersistentState();
+    }
 
 }

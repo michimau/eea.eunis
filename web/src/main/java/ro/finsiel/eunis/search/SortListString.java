@@ -79,7 +79,8 @@ public class SortListString {
                 res = (ascending) ? res : (-1) * res;
                 return res;
             } catch (ClassCastException ex) {
-                System.out.println("You can only sort/compare objects which implements JRFSortable");
+                System.out.println(
+                        "You can only sort/compare objects which implements JRFSortable");
                 ex.printStackTrace();
                 return 0;
             }

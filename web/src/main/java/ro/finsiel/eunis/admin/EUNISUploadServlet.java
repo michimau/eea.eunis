@@ -84,7 +84,8 @@ public class EUNISUploadServlet extends HttpServlet {
         // Initialise the default settings
         try {
             BASE_DIR = getServletContext().getRealPath("/");
-            TEMP_DIR = BASE_DIR + getServletContext().getInitParameter("TEMP_DIR");
+            TEMP_DIR = BASE_DIR
+                    + getServletContext().getInitParameter("TEMP_DIR");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -101,7 +102,8 @@ public class EUNISUploadServlet extends HttpServlet {
         } catch (FileUploadException ex) {
             ex.printStackTrace();
             try {
-                response.sendRedirect("related-reports-error.jsp?status=Error while interpreting request");
+                response.sendRedirect(
+                        "related-reports-error.jsp?status=Error while interpreting request");
             } catch (IOException _ex) {
                 _ex.printStackTrace();
             }
@@ -121,24 +123,29 @@ public class EUNISUploadServlet extends HttpServlet {
                     String fieldValue = item.getString();
 
                     if (null != fieldName && fieldName.equals("uploadType")) {
-                        if (null != fieldValue && fieldValue.equalsIgnoreCase("file")) {
+                        if (null != fieldValue
+                                && fieldValue.equalsIgnoreCase("file")) {
                             uploadType = UPLOAD_TYPE_FILE;
                         }
-                        if (null != fieldValue && fieldValue.equalsIgnoreCase("picture")) {
+                        if (null != fieldValue
+                                && fieldValue.equalsIgnoreCase("picture")) {
                             uploadType = UPLOAD_TYPE_PICTURE;
                         }
                     }
                     // Id object
-                    if (null != fieldName && fieldName.equalsIgnoreCase("idobject")) {
+                    if (null != fieldName
+                            && fieldName.equalsIgnoreCase("idobject")) {
                         natureObjectInfo.idObject = fieldValue;
                     }
                     // Description
-                    if (null != fieldName && fieldName.equalsIgnoreCase("description")) {
+                    if (null != fieldName
+                            && fieldName.equalsIgnoreCase("description")) {
                         natureObjectInfo.description = fieldValue;
                         description = fieldValue;
                     }
                     // Nature object type
-                    if (null != fieldName && fieldName.equalsIgnoreCase("natureobjecttype")) {
+                    if (null != fieldName
+                            && fieldName.equalsIgnoreCase("natureobjecttype")) {
                         natureObjectInfo.natureObjectType = fieldValue;
                     }
                 }
@@ -146,16 +153,20 @@ public class EUNISUploadServlet extends HttpServlet {
             if (uploadType == UPLOAD_TYPE_FILE) {
                 String message = "";
 
-                if (sessionManager.isAuthenticated() && sessionManager.isUpload_reports_RIGHT()) {
+                if (sessionManager.isAuthenticated()
+                        && sessionManager.isUpload_reports_RIGHT()) {
                     try {
-                        uploadDocument(items, message, sessionManager.getUsername(), description);
-                        response.sendRedirect("related-reports-upload.jsp?message=" + message);
+                        uploadDocument(items, message,
+                                sessionManager.getUsername(), description);
+                        response.sendRedirect(
+                                "related-reports-upload.jsp?message=" + message);
                     } catch (IOException ex) { // Thrown by sendRedirect
                         ex.printStackTrace();
                     } catch (Exception ex) {
                         ex.printStackTrace();
                         try {
-                            String errorURL = "related-reports-error.jsp?status=" + ex.getMessage();
+                            String errorURL = "related-reports-error.jsp?status="
+                                    + ex.getMessage();
 
                             response.sendRedirect(errorURL); // location is a dummy param
                         } catch (IOException ioex) {
@@ -166,20 +177,23 @@ public class EUNISUploadServlet extends HttpServlet {
                     message = "You must be logged in and have the 'upload files' ";
                     message += "right in order to use this feature. Upload is not possible.";
                     try {
-                        response.sendRedirect("related-reports-error.jsp?status=" + message);
+                        response.sendRedirect(
+                                "related-reports-error.jsp?status=" + message);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
                 }
             }
             if (uploadType == UPLOAD_TYPE_PICTURE) {
-                if (sessionManager.isAuthenticated() && sessionManager.isUpload_pictures_RIGHT()) {
+                if (sessionManager.isAuthenticated()
+                        && sessionManager.isUpload_pictures_RIGHT()) {
                     try {
                         uploadPicture(items);
                         String redirectStr = "pictures-upload.jsp?operation=upload";
 
                         redirectStr += "&idobject=" + natureObjectInfo.idObject;
-                        redirectStr += "&natureobjecttype=" + natureObjectInfo.natureObjectType;
+                        redirectStr += "&natureobjecttype="
+                                + natureObjectInfo.natureObjectType;
                         redirectStr += "&filename=" + natureObjectInfo.filename;
                         redirectStr += "&message=Picture successfully loaded.";
                         response.sendRedirect(redirectStr);
@@ -189,7 +203,8 @@ public class EUNISUploadServlet extends HttpServlet {
                         ex.printStackTrace();
                         try {
                             response.sendRedirect(
-                                    "related-reports-error.jsp?status=An error ocurred during picture upload. "+ex.getMessage());
+                                    "related-reports-error.jsp?status=An error ocurred during picture upload. "
+                                            + ex.getMessage());
                         } catch (IOException ioex) {
                             ioex.printStackTrace();
                         }
@@ -239,24 +254,28 @@ public class EUNISUploadServlet extends HttpServlet {
                     idObject = fieldValue;
                 }
                 // Description
-                if (null != fieldName && fieldName.equalsIgnoreCase("description")) {
-                    description = new String (fieldValue.getBytes ("iso-8859-1"), "UTF-8");
+                if (null != fieldName
+                        && fieldName.equalsIgnoreCase("description")) {
+                    description = new String(fieldValue.getBytes("iso-8859-1"),
+                            "UTF-8");
                 }
                 // Nature object type
-                if (null != fieldName && fieldName.equalsIgnoreCase("natureobjecttype")) {
+                if (null != fieldName
+                        && fieldName.equalsIgnoreCase("natureobjecttype")) {
                     natureObjectType = fieldValue;
                 }
 
                 // Main picture
-                if (null != fieldName && fieldName.equalsIgnoreCase("main_picture")) {
-                	mainPicture = true;
+                if (null != fieldName
+                        && fieldName.equalsIgnoreCase("main_picture")) {
+                    mainPicture = true;
                 }
                 
                 // Source
                 if (null != fieldName && fieldName.equalsIgnoreCase("source")) {
-                	source = new String (fieldValue.getBytes ("iso-8859-1"), "UTF-8");
+                    source = new String(fieldValue.getBytes("iso-8859-1"),
+                            "UTF-8");
                 }
-                
                 
             } else {
                 // / UPLOAD FIELD
@@ -267,21 +286,30 @@ public class EUNISUploadServlet extends HttpServlet {
         String uploadDir = "";
 
         if (natureObjectType.equalsIgnoreCase("Species")) {
-            uploadDir = getServletConfig().getServletContext().getInitParameter("UPLOAD_DIR_PICTURES_SPECIES");
+            uploadDir = getServletConfig().getServletContext().getInitParameter(
+                    "UPLOAD_DIR_PICTURES_SPECIES");
         } else if (natureObjectType.equalsIgnoreCase("Sites")) {
-            uploadDir = getServletConfig().getServletContext().getInitParameter("UPLOAD_DIR_PICTURES_SITES");
+            uploadDir = getServletConfig().getServletContext().getInitParameter(
+                    "UPLOAD_DIR_PICTURES_SITES");
         } else if (natureObjectType.equalsIgnoreCase("Habitats")) {
-            uploadDir = getServletConfig().getServletContext().getInitParameter("UPLOAD_DIR_PICTURES_HABITATS");
+            uploadDir = getServletConfig().getServletContext().getInitParameter(
+                    "UPLOAD_DIR_PICTURES_HABITATS");
         }
         // Save the file in the right dir...
         filename = FileUtils.getRealName(filename);
         String imgName = filename;
 
         String suffix = imgName.substring(imgName.lastIndexOf("."));
-        if(suffix == null || suffix.equals("") || (!suffix.equalsIgnoreCase(".jpg") && !suffix.equalsIgnoreCase(".jpeg") &&
-        		!suffix.equalsIgnoreCase(".gif") && !suffix.equalsIgnoreCase(".png") && !suffix.equalsIgnoreCase(".tif") &&
-        		!suffix.equalsIgnoreCase(".tiff"))){
-             throw new Exception("File has to be in one of the following formats: jpg, jpeg, gif, png, tif, tiff (case-insensitive)");
+
+        if (suffix == null || suffix.equals("")
+                || (!suffix.equalsIgnoreCase(".jpg")
+                && !suffix.equalsIgnoreCase(".jpeg")
+                && !suffix.equalsIgnoreCase(".gif")
+                && !suffix.equalsIgnoreCase(".png")
+                && !suffix.equalsIgnoreCase(".tif")
+                && !suffix.equalsIgnoreCase(".tiff"))) {
+            throw new Exception(
+                    "File has to be in one of the following formats: jpg, jpeg, gif, png, tif, tiff (case-insensitive)");
         }
         
         String fname = UniqueID.getUniqueID() + suffix.toLowerCase();
@@ -298,15 +326,16 @@ public class EUNISUploadServlet extends HttpServlet {
         natureObjectInfo.natureObjectType = natureObjectType;
         // Sync the database with the pictures
         String scientificName = null;
+
         if (natureObjectType.equalsIgnoreCase("Species")) {
             scientificName = PicturesHelper.findSpeciesByIDObject(idObject);
         } else if (natureObjectType.equalsIgnoreCase("Sites")) {
-        	scientificName = PicturesHelper.findSitesByIDObject(idObject);
+            scientificName = PicturesHelper.findSitesByIDObject(idObject);
         } else if (natureObjectType.equalsIgnoreCase("Habitats")) {
-        	scientificName = PicturesHelper.findHabitatsByIDObject(idObject);
+            scientificName = PicturesHelper.findHabitatsByIDObject(idObject);
         }
         	
-    	Chm62edtNatureObjectPicturePersist pictureObject = new Chm62edtNatureObjectPicturePersist();
+        Chm62edtNatureObjectPicturePersist pictureObject = new Chm62edtNatureObjectPicturePersist();
 
         pictureObject.setDescription(description);
         pictureObject.setMainPicture(false);
@@ -317,54 +346,63 @@ public class EUNISUploadServlet extends HttpServlet {
         pictureObject.setSource(source);
         new Chm62edtNatureObjectPictureDomain().save(pictureObject);
         
-        String mainPictureFilename =  idObject  + "_main_picture"+ suffix;
+        String mainPictureFilename = idObject + "_main_picture" + suffix;
         Chm62edtNatureObjectPictureDomain domain = new Chm62edtNatureObjectPictureDomain();
         List<Chm62edtNatureObjectPicturePersist> mainPictures = domain.findWhere(
-				 " FILE_NAME = '" + mainPictureFilename + "' and MAIN_PIC = 1 and NAME = '" + scientificName + "'");
-        if(mainPictures == null || mainPictures.size() == 0)
-        	mainPicture = true;
-        
-        //processing main picture
-        if (mainPicture) {
-        	BufferedImage image = ImageIO.read(file);
-        	double ratio = (double) image.getWidth() / (double) image.getHeight();
-        	double idealRatio = (double)MAX_WIDTH / (double)MAX_HEIGHT;
-        	int newHeight = 0, newWidth = 0;
-        	
-        	if (ratio > idealRatio) {
-        		newWidth = Math.min(image.getWidth(), MAX_WIDTH  );
-        		newHeight =  (int) ((double) newWidth / ratio);
-        	} else {
-        		newHeight = Math.min(image.getHeight(), MAX_HEIGHT);
-        		newWidth = (int) ((double) newHeight * ratio);
-        	}
-        	
-        	AffineTransform at = AffineTransform.getScaleInstance((double)newWidth/(double)image.getWidth(),
-        			(double)newHeight/(double)image.getHeight());
-        	BufferedImage output = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
-        	((Graphics2D)output.getGraphics()).drawRenderedImage(image, at);
-        	
-			File outputFile = new File(BASE_DIR + uploadDir + mainPictureFilename) ;
-			ImageIO.write(output, "JPG", outputFile);
-			
-			Chm62edtNatureObjectPicturePersist mainPicturePersist = new Chm62edtNatureObjectPicturePersist();
+                " FILE_NAME = '" + mainPictureFilename
+                + "' and MAIN_PIC = 1 and NAME = '" + scientificName + "'");
 
-			//delete old mainPictures
-			for (Chm62edtNatureObjectPicturePersist mainPic : mainPictures) {
-				domain.save(mainPic);
-				domain.delete(mainPic);
-			}
-			//create new one
-			mainPicturePersist.setDescription(description);
-			mainPicturePersist.setMainPicture(true);
-			mainPicturePersist.setFileName(mainPictureFilename);
-			mainPicturePersist.setIdObject(idObject);
-			mainPicturePersist.setName(scientificName);
-			mainPicturePersist.setNatureObjectType(natureObjectType);
-			mainPicturePersist.setMaxWidth(new Integer(newWidth));
-			mainPicturePersist.setMaxHeight(new Integer(newHeight));
-			mainPicturePersist.setSource(source);
-			domain.save(mainPicturePersist);
+        if (mainPictures == null || mainPictures.size() == 0) {
+            mainPicture = true;
+        }
+        
+        // processing main picture
+        if (mainPicture) {
+            BufferedImage image = ImageIO.read(file);
+            double ratio = (double) image.getWidth()
+                    / (double) image.getHeight();
+            double idealRatio = (double) MAX_WIDTH / (double) MAX_HEIGHT;
+            int newHeight = 0, newWidth = 0;
+        	
+            if (ratio > idealRatio) {
+                newWidth = Math.min(image.getWidth(), MAX_WIDTH);
+                newHeight = (int) ((double) newWidth / ratio);
+            } else {
+                newHeight = Math.min(image.getHeight(), MAX_HEIGHT);
+                newWidth = (int) ((double) newHeight * ratio);
+            }
+        	
+            AffineTransform at = AffineTransform.getScaleInstance(
+                    (double) newWidth / (double) image.getWidth(),
+                    (double) newHeight / (double) image.getHeight());
+            BufferedImage output = new BufferedImage(newWidth, newHeight,
+                    BufferedImage.TYPE_INT_RGB);
+
+            ((Graphics2D) output.getGraphics()).drawRenderedImage(image, at);
+        	
+            File outputFile = new File(
+                    BASE_DIR + uploadDir + mainPictureFilename);
+
+            ImageIO.write(output, "JPG", outputFile);
+			
+            Chm62edtNatureObjectPicturePersist mainPicturePersist = new Chm62edtNatureObjectPicturePersist();
+
+            // delete old mainPictures
+            for (Chm62edtNatureObjectPicturePersist mainPic : mainPictures) {
+                domain.save(mainPic);
+                domain.delete(mainPic);
+            }
+            // create new one
+            mainPicturePersist.setDescription(description);
+            mainPicturePersist.setMainPicture(true);
+            mainPicturePersist.setFileName(mainPictureFilename);
+            mainPicturePersist.setIdObject(idObject);
+            mainPicturePersist.setName(scientificName);
+            mainPicturePersist.setNatureObjectType(natureObjectType);
+            mainPicturePersist.setMaxWidth(new Integer(newWidth));
+            mainPicturePersist.setMaxHeight(new Integer(newHeight));
+            mainPicturePersist.setSource(source);
+            domain.save(mainPicturePersist);
 			
         }
         
@@ -400,7 +438,8 @@ public class EUNISUploadServlet extends HttpServlet {
                 uploadedFileItem = item;
             }
         }
-        String uploadDir = getServletConfig().getServletContext().getInitParameter("UPLOAD_DIR_FILES");
+        String uploadDir = getServletConfig().getServletContext().getInitParameter(
+                "UPLOAD_DIR_FILES");
 
         filename = FileUtils.getRealName(filename);
         filename = BASE_DIR + uploadDir + filename;

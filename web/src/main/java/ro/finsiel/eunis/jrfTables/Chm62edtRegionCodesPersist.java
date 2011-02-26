@@ -1,11 +1,12 @@
 /*
  * $Id
-*/
+ */
 
 package ro.finsiel.eunis.jrfTables;
 
 
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  *
@@ -13,59 +14,60 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class Chm62edtRegionCodesPersist extends PersistentObject {
 
-  /**
-   * This is a database field.
-   **/
-  private String i_idRegionCode = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_description = null;
+    /**
+     * This is a database field.
+     **/
+    private String i_idRegionCode = null;
 
-  private String name = null;
+    /**
+     * This is a database field.
+     **/
+    private String i_description = null;
 
-  public Chm62edtRegionCodesPersist() {
-    super();
-  }
+    private String name = null;
 
-  public String getName() {
-    return name;
-  }
+    public Chm62edtRegionCodesPersist() {
+        super();
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getDescription() {
-    return i_description;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIdRegionCode() {
-    return i_idRegionCode;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getDescription() {
+        return i_description;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param description
-   **/
-  public void setDescription(String description) {
-    i_description = description;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIdRegionCode() {
+        return i_idRegionCode;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idRegionCode
-   **/
-  public void setIdRegionCode(String idRegionCode) {
-    i_idRegionCode = idRegionCode;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param description
+     **/
+    public void setDescription(String description) {
+        i_description = description;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idRegionCode
+     **/
+    public void setIdRegionCode(String idRegionCode) {
+        i_idRegionCode = idRegionCode;
+        this.markModifiedPersistentState();
+    }
 
 }

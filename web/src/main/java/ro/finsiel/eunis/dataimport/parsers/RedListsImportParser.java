@@ -176,7 +176,9 @@ public class RedListsImportParser extends DefaultHandler {
 
                 boolean newThreat = false;
 
-                if (natObId != null && euCat != null && euCSid != null && idDC != null && euGeoId != null && !euGeoId.equals("0")) {
+                if (natObId != null && euCat != null && euCSid != null
+                        && idDC != null && euGeoId != null
+                        && !euGeoId.equals("0")) {
 
                     newThreat = true;
 
@@ -196,7 +198,8 @@ public class RedListsImportParser extends DefaultHandler {
                     counter++;
                 }
 
-                if (natObId != null && eu25Cat != null && eu25CSid != null && idDC != null && eu25GeoId != null
+                if (natObId != null && eu25Cat != null && eu25CSid != null
+                        && idDC != null && eu25GeoId != null
                         && !eu25GeoId.equals("0")) {
 
                     maxReportTypeId++;
@@ -220,7 +223,8 @@ public class RedListsImportParser extends DefaultHandler {
                     counter++;
                 }
 
-                if (natObId != null && eu27Cat != null && eu27CSid != null && idDC != null && eu27GeoId != null
+                if (natObId != null && eu27Cat != null && eu27CSid != null
+                        && idDC != null && eu27GeoId != null
                         && !eu27GeoId.equals("0")) {
 
                     maxReportTypeId++;
@@ -244,7 +248,8 @@ public class RedListsImportParser extends DefaultHandler {
                     counter++;
                 }
 
-                if (natObId != null && worldCat != null && worldCSid != null && idDC != null && worldGeoId != null
+                if (natObId != null && worldCat != null && worldCSid != null
+                        && idDC != null && worldGeoId != null
                         && !worldGeoId.equals("0")) {
 
                     maxReportTypeId++;
@@ -283,64 +288,86 @@ public class RedListsImportParser extends DefaultHandler {
                     }
 
                     if (notes != null && notes.length() > 0) {
-                        preparedStatementReportAttributes.setInt(1, maxReportAttributesId);
-                        preparedStatementReportAttributes.setString(2, "EUROPEAN_RED_LIST_NOTES");
+                        preparedStatementReportAttributes.setInt(1,
+                                maxReportAttributesId);
+                        preparedStatementReportAttributes.setString(2,
+                                "EUROPEAN_RED_LIST_NOTES");
                         preparedStatementReportAttributes.setString(3, notes);
                         preparedStatementReportAttributes.addBatch();
                     }
 
                     if (rationale != null && rationale.length() > 0) {
-                        preparedStatementReportAttributes.setInt(1, maxReportAttributesId);
-                        preparedStatementReportAttributes.setString(2, "EUROPEAN_RED_LIST_RATIONALE");
+                        preparedStatementReportAttributes.setInt(1,
+                                maxReportAttributesId);
+                        preparedStatementReportAttributes.setString(2,
+                                "EUROPEAN_RED_LIST_RATIONALE");
                         preparedStatementReportAttributes.setString(3, rationale);
                         preparedStatementReportAttributes.addBatch();
                     }
 
                     if (range != null && range.length() > 0) {
-                        preparedStatementReportAttributes.setInt(1, maxReportAttributesId);
-                        preparedStatementReportAttributes.setString(2, "EUROPEAN_RED_LIST_RANGE");
+                        preparedStatementReportAttributes.setInt(1,
+                                maxReportAttributesId);
+                        preparedStatementReportAttributes.setString(2,
+                                "EUROPEAN_RED_LIST_RANGE");
                         preparedStatementReportAttributes.setString(3, range);
                         preparedStatementReportAttributes.addBatch();
                     }
 
                     if (population != null && population.length() > 0) {
-                        preparedStatementReportAttributes.setInt(1, maxReportAttributesId);
-                        preparedStatementReportAttributes.setString(2, "EUROPEAN_RED_LIST_POPULATION");
-                        preparedStatementReportAttributes.setString(3, population);
+                        preparedStatementReportAttributes.setInt(1,
+                                maxReportAttributesId);
+                        preparedStatementReportAttributes.setString(2,
+                                "EUROPEAN_RED_LIST_POPULATION");
+                        preparedStatementReportAttributes.setString(3,
+                                population);
                         preparedStatementReportAttributes.addBatch();
                     }
 
                     if (populationTrend != null && populationTrend.length() > 0) {
-                        preparedStatementReportAttributes.setInt(1, maxReportAttributesId);
-                        preparedStatementReportAttributes.setString(2, "EUROPEAN_RED_LIST_POPULATION_TREND");
-                        preparedStatementReportAttributes.setString(3, populationTrend);
+                        preparedStatementReportAttributes.setInt(1,
+                                maxReportAttributesId);
+                        preparedStatementReportAttributes.setString(2,
+                                "EUROPEAN_RED_LIST_POPULATION_TREND");
+                        preparedStatementReportAttributes.setString(3,
+                                populationTrend);
                         preparedStatementReportAttributes.addBatch();
                     }
 
                     if (habitat != null && habitat.length() > 0) {
-                        preparedStatementReportAttributes.setInt(1, maxReportAttributesId);
-                        preparedStatementReportAttributes.setString(2, "EUROPEAN_RED_LIST_HABITAT");
+                        preparedStatementReportAttributes.setInt(1,
+                                maxReportAttributesId);
+                        preparedStatementReportAttributes.setString(2,
+                                "EUROPEAN_RED_LIST_HABITAT");
                         preparedStatementReportAttributes.setString(3, habitat);
                         preparedStatementReportAttributes.addBatch();
                     }
 
                     if (threats != null && threats.length() > 0) {
-                        preparedStatementReportAttributes.setInt(1, maxReportAttributesId);
-                        preparedStatementReportAttributes.setString(2, "EUROPEAN_RED_LIST_THREATS");
+                        preparedStatementReportAttributes.setInt(1,
+                                maxReportAttributesId);
+                        preparedStatementReportAttributes.setString(2,
+                                "EUROPEAN_RED_LIST_THREATS");
                         preparedStatementReportAttributes.setString(3, threats);
                         preparedStatementReportAttributes.addBatch();
                     }
 
-                    if (conservationMeasures != null && conservationMeasures.length() > 0) {
-                        preparedStatementReportAttributes.setInt(1, maxReportAttributesId);
-                        preparedStatementReportAttributes.setString(2, "EUROPEAN_RED_LIST_CONSERVATION_MEASURES");
-                        preparedStatementReportAttributes.setString(3, conservationMeasures);
+                    if (conservationMeasures != null
+                            && conservationMeasures.length() > 0) {
+                        preparedStatementReportAttributes.setInt(1,
+                                maxReportAttributesId);
+                        preparedStatementReportAttributes.setString(2,
+                                "EUROPEAN_RED_LIST_CONSERVATION_MEASURES");
+                        preparedStatementReportAttributes.setString(3,
+                                conservationMeasures);
                         preparedStatementReportAttributes.addBatch();
                     }
 
                     if (assessors != null && assessors.length() > 0) {
-                        preparedStatementReportAttributes.setInt(1, maxReportAttributesId);
-                        preparedStatementReportAttributes.setString(2, "EUROPEAN_RED_LIST_ASSESSORS");
+                        preparedStatementReportAttributes.setInt(1,
+                                maxReportAttributesId);
+                        preparedStatementReportAttributes.setString(2,
+                                "EUROPEAN_RED_LIST_ASSESSORS");
                         preparedStatementReportAttributes.setString(3, assessors);
                         preparedStatementReportAttributes.addBatch();
                     }
@@ -386,16 +413,23 @@ public class RedListsImportParser extends DefaultHandler {
         try {
 
             conservationStatuses = getConservationStatuses();
-            maxReportTypeId = getId("SELECT MAX(ID_REPORT_TYPE) FROM CHM62EDT_REPORT_TYPE");
-            maxReportAttributesId = getId("SELECT MAX(ID_REPORT_ATTRIBUTES) FROM CHM62EDT_REPORT_ATTRIBUTES");
-            euGeoscopeId = getId("SELECT ID_GEOSCOPE FROM CHM62EDT_COUNTRY WHERE EUNIS_AREA_CODE = 'EU'");
-            eu25GeoscopeId = getId("SELECT ID_GEOSCOPE FROM CHM62EDT_COUNTRY WHERE EUNIS_AREA_CODE = 'E25'");
-            eu27GeoscopeId = getId("SELECT ID_GEOSCOPE FROM CHM62EDT_COUNTRY WHERE EUNIS_AREA_CODE = 'E27'");
-            worldGeoscopeId = getId("SELECT ID_GEOSCOPE FROM CHM62EDT_COUNTRY WHERE EUNIS_AREA_CODE = 'WO'");
+            maxReportTypeId = getId(
+                    "SELECT MAX(ID_REPORT_TYPE) FROM CHM62EDT_REPORT_TYPE");
+            maxReportAttributesId = getId(
+                    "SELECT MAX(ID_REPORT_ATTRIBUTES) FROM CHM62EDT_REPORT_ATTRIBUTES");
+            euGeoscopeId = getId(
+                    "SELECT ID_GEOSCOPE FROM CHM62EDT_COUNTRY WHERE EUNIS_AREA_CODE = 'EU'");
+            eu25GeoscopeId = getId(
+                    "SELECT ID_GEOSCOPE FROM CHM62EDT_COUNTRY WHERE EUNIS_AREA_CODE = 'E25'");
+            eu27GeoscopeId = getId(
+                    "SELECT ID_GEOSCOPE FROM CHM62EDT_COUNTRY WHERE EUNIS_AREA_CODE = 'E27'");
+            worldGeoscopeId = getId(
+                    "SELECT ID_GEOSCOPE FROM CHM62EDT_COUNTRY WHERE EUNIS_AREA_CODE = 'WO'");
 
             String queryReportType = "INSERT INTO CHM62EDT_REPORT_TYPE (ID_REPORT_TYPE, ID_LOOKUP, LOOKUP_TYPE) VALUES (?,?,'CONSERVATION_STATUS')";
 
-            this.preparedStatementReportType = con.prepareStatement(queryReportType);
+            this.preparedStatementReportType = con.prepareStatement(
+                    queryReportType);
 
             String queryReport = "INSERT INTO CHM62EDT_REPORTS (ID_NATURE_OBJECT, ID_DC, ID_GEOSCOPE, ID_GEOSCOPE_LINK, ID_REPORT_TYPE, ID_REPORT_ATTRIBUTES) VALUES (?,?,?,-1,?,?)";
 
@@ -403,7 +437,8 @@ public class RedListsImportParser extends DefaultHandler {
 
             String queryReportAttributes = "INSERT INTO CHM62EDT_REPORT_ATTRIBUTES (ID_REPORT_ATTRIBUTES, NAME, TYPE, VALUE) VALUES (?,?,'TEXT',?)";
 
-            this.preparedStatementReportAttributes = con.prepareStatement(queryReportAttributes);
+            this.preparedStatementReportAttributes = con.prepareStatement(
+                    queryReportAttributes);
 
             con.setAutoCommit(false);
             parseDocument();
@@ -553,7 +588,8 @@ public class RedListsImportParser extends DefaultHandler {
                     ps3.addBatch();
                 }
 
-                if (idReportAttributes != null && !idReportAttributes.equals("-1")) {
+                if (idReportAttributes != null
+                        && !idReportAttributes.equals("-1")) {
                     ps2.setString(1, idReportAttributes);
                     ps2.addBatch();
                 }
@@ -628,7 +664,8 @@ public class RedListsImportParser extends DefaultHandler {
                     ps3.addBatch();
                 }
 
-                if (idReportAttributes != null && !idReportAttributes.equals("-1")) {
+                if (idReportAttributes != null
+                        && !idReportAttributes.equals("-1")) {
                     ps2.setString(1, idReportAttributes);
                     ps2.addBatch();
                 }

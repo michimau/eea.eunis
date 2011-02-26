@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.jrfTables;
 
+
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  * Created by IntelliJ IDEA.
@@ -10,22 +12,22 @@ import net.sf.jrf.domain.PersistentObject;
  * To change this template use File | Settings | File Templates.
  */
 public class EunisISOLanguagesPersist extends PersistentObject {
-  private String name = "";
-  private String code = "";
+    private String name = "";
+    private String code = "";
 
-  public String getCode() {
-    return code;
-  }
+    public String getCode() {
+        return code;
+    }
 
-  public void setCode( String code ) {
-    this.code = code;
-  }
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setName( String name ) {
-    this.name = name;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 }

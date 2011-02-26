@@ -9,21 +9,21 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 /**
  * ActionBean to replace old /designations-factsheet.jsp.
- * 
+ *
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
 @UrlBinding("/designations-factsheet.jsp")
 public class DesignationsFactsheetRedirectActionBean extends AbstractStripesAction {
-	
+
     private String idDesign;
     private String geoscope;
     private boolean showSites = false;
     private String fromWhere = "";
-	
+
     @DefaultHandler
     public Resolution index() {
-		
+
         String url = "/designations/" + geoscope + ":" + idDesign;
 
         if (showSites) {
@@ -77,7 +77,7 @@ public class DesignationsFactsheetRedirectActionBean extends AbstractStripesActi
     /**
      * @return the currentTab
      */
-	
+
 
 
 }

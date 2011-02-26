@@ -45,26 +45,38 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
 
         try {
             con = getConnection();
-	    
+
             st = con.createStatement();
-	    
-            ps7 = con.prepareStatement("DELETE FROM chm62edt_nature_object_geoscope WHERE ID_NATURE_OBJECT_LINK=?");
-            ps8 = con.prepareStatement("DELETE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?");
-            ps9 = con.prepareStatement("DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?");
-            ps10 = con.prepareStatement("DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT_LINK=?");
-            ps11 = con.prepareStatement("DELETE FROM chm62edt_nature_object_attributes WHERE ID_NATURE_OBJECT=?");
-            ps12 = con.prepareStatement("DELETE FROM chm62edt_tab_page_sites WHERE ID_NATURE_OBJECT=?");
-	    
-            ps13 = con.prepareStatement("DELETE FROM chm62edt_sites_sites WHERE ID_SITE=?");
-            ps14 = con.prepareStatement("DELETE FROM chm62edt_sites_sites WHERE ID_SITE_LINK=?");
-            ps15 = con.prepareStatement("DELETE FROM chm62edt_sites_related_designations WHERE ID_SITE=?");
-            ps16 = con.prepareStatement("DELETE FROM chm62edt_site_attributes WHERE ID_SITE=?");
-	    
+
+            ps7 = con.prepareStatement(
+                    "DELETE FROM chm62edt_nature_object_geoscope WHERE ID_NATURE_OBJECT_LINK=?");
+            ps8 = con.prepareStatement(
+                    "DELETE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?");
+            ps9 = con.prepareStatement(
+                    "DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?");
+            ps10 = con.prepareStatement(
+                    "DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT_LINK=?");
+            ps11 = con.prepareStatement(
+                    "DELETE FROM chm62edt_nature_object_attributes WHERE ID_NATURE_OBJECT=?");
+            ps12 = con.prepareStatement(
+                    "DELETE FROM chm62edt_tab_page_sites WHERE ID_NATURE_OBJECT=?");
+
+            ps13 = con.prepareStatement(
+                    "DELETE FROM chm62edt_sites_sites WHERE ID_SITE=?");
+            ps14 = con.prepareStatement(
+                    "DELETE FROM chm62edt_sites_sites WHERE ID_SITE_LINK=?");
+            ps15 = con.prepareStatement(
+                    "DELETE FROM chm62edt_sites_related_designations WHERE ID_SITE=?");
+            ps16 = con.prepareStatement(
+                    "DELETE FROM chm62edt_site_attributes WHERE ID_SITE=?");
+
             ps17 = con.prepareStatement(
                     "DELETE FROM chm62edt_nature_object_picture WHERE ID_OBJECT=? AND NATURE_OBJECT_TYPE='Sites'");
-	    
-            ps18 = con.prepareStatement("DELETE FROM chm62edt_sites WHERE ID_SITE=?");
-            ps19 = con.prepareStatement("DELETE FROM chm62edt_nature_object WHERE ID_NATURE_OBJECT=?");
+
+            ps18 = con.prepareStatement(
+                    "DELETE FROM chm62edt_sites WHERE ID_SITE=?");
+            ps19 = con.prepareStatement(
+                    "DELETE FROM chm62edt_nature_object WHERE ID_NATURE_OBJECT=?");
 
             int counter = 0;
 
@@ -78,16 +90,21 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                         idNatureObject = getNatObjectId(siteId);
                     }
 
-                    String idReportAttributesGeoscope = getReportAttributeIds(idNatureObject, con,
+                    String idReportAttributesGeoscope = getReportAttributeIds(
+                            idNatureObject, con,
                             "SELECT ID_REPORT_ATTRIBUTES FROM chm62edt_nature_object_geoscope WHERE ID_NATURE_OBJECT=?");
-                    String idReportAttributesReports = getReportAttributeIds(idNatureObject, con,
+                    String idReportAttributesReports = getReportAttributeIds(
+                            idNatureObject, con,
                             "SELECT ID_REPORT_ATTRIBUTES FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?");
-                    String idReportAttributesReportType = getReportAttributeIds(idNatureObject, con,
+                    String idReportAttributesReportType = getReportAttributeIds(
+                            idNatureObject, con,
                             "SELECT ID_REPORT_ATTRIBUTES FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?");
 
-                    String idReportTypeReports = getReportTypeIds(idNatureObject, con,
+                    String idReportTypeReports = getReportTypeIds(idNatureObject,
+                            con,
                             "SELECT ID_REPORT_TYPE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?");
-                    String idReportTypeReportType = getReportTypeIds(idNatureObject, con,
+                    String idReportTypeReportType = getReportTypeIds(
+                            idNatureObject, con,
                             "SELECT ID_REPORT_TYPE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?");
 
                     counter++;
@@ -97,11 +114,11 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                                 "DELETE FROM chm62edt_report_attributes WHERE ID_REPORT_ATTRIBUTES IN ("
                                         + idReportAttributesGeoscope + ")");
                     }
-			    
+
                     if (idReportAttributesReports != null) {
                         st.addBatch(
-                                "DELETE FROM chm62edt_report_attributes WHERE ID_REPORT_ATTRIBUTES IN (" + idReportAttributesReports
-                                + ")");
+                                "DELETE FROM chm62edt_report_attributes WHERE ID_REPORT_ATTRIBUTES IN ("
+                                        + idReportAttributesReports + ")");
                     }
 
                     if (idReportAttributesReportType != null) {
@@ -111,11 +128,15 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                     }
 
                     if (idReportTypeReports != null) {
-                        st.addBatch("DELETE FROM chm62edt_report_type WHERE ID_REPORT_TYPE IN (" + idReportTypeReports + ")");
+                        st.addBatch(
+                                "DELETE FROM chm62edt_report_type WHERE ID_REPORT_TYPE IN ("
+                                        + idReportTypeReports + ")");
                     }
 
                     if (idReportTypeReportType != null) {
-                        st.addBatch("DELETE FROM chm62edt_report_type WHERE ID_REPORT_TYPE IN (" + idReportTypeReportType + ")");
+                        st.addBatch(
+                                "DELETE FROM chm62edt_report_type WHERE ID_REPORT_TYPE IN ("
+                                        + idReportTypeReportType + ")");
                     }
 
                     ps7.setString(1, idNatureObject);
@@ -132,16 +153,16 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
 
                     ps11.setString(1, idNatureObject);
                     ps11.addBatch();
-			    
+
                     ps12.setString(1, idNatureObject);
                     ps12.addBatch();
 
                     ps13.setString(1, siteId);
                     ps13.addBatch();
-			    
+
                     ps14.setString(1, siteId);
                     ps14.addBatch();
-			    
+
                     ps15.setString(1, siteId);
                     ps15.addBatch();
 
@@ -157,72 +178,72 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                     ps19.setString(1, idNatureObject);
                     ps19.addBatch();
 
-                    if (counter % 10000 == 0) { 
+                    if (counter % 10000 == 0) {
                         st.executeBatch();
                         st.clearBatch();
-                        ps7.executeBatch(); 
+                        ps7.executeBatch();
                         ps7.clearParameters();
-                        ps8.executeBatch(); 
+                        ps8.executeBatch();
                         ps8.clearParameters();
-                        ps9.executeBatch(); 
+                        ps9.executeBatch();
                         ps9.clearParameters();
-                        ps10.executeBatch(); 
+                        ps10.executeBatch();
                         ps10.clearParameters();
-                        ps11.executeBatch(); 
+                        ps11.executeBatch();
                         ps11.clearParameters();
-                        ps12.executeBatch(); 
+                        ps12.executeBatch();
                         ps12.clearParameters();
-                        ps13.executeBatch(); 
+                        ps13.executeBatch();
                         ps13.clearParameters();
-                        ps14.executeBatch(); 
+                        ps14.executeBatch();
                         ps14.clearParameters();
-                        ps15.executeBatch(); 
+                        ps15.executeBatch();
                         ps15.clearParameters();
-                        ps16.executeBatch(); 
+                        ps16.executeBatch();
                         ps16.clearParameters();
-                        ps17.executeBatch(); 
+                        ps17.executeBatch();
                         ps17.clearParameters();
-                        ps18.executeBatch(); 
+                        ps18.executeBatch();
                         ps18.clearParameters();
-                        ps19.executeBatch(); 
+                        ps19.executeBatch();
                         ps19.clearParameters();
-                        System.gc(); 
+                        System.gc();
                     }
                 }
             }
 
-            if (!(counter % 10000 == 0)) { 
+            if (!(counter % 10000 == 0)) {
                 st.executeBatch();
                 st.clearBatch();
-                ps7.executeBatch(); 
+                ps7.executeBatch();
                 ps7.clearParameters();
-                ps8.executeBatch(); 
+                ps8.executeBatch();
                 ps8.clearParameters();
-                ps9.executeBatch(); 
+                ps9.executeBatch();
                 ps9.clearParameters();
-                ps10.executeBatch(); 
+                ps10.executeBatch();
                 ps10.clearParameters();
-                ps11.executeBatch(); 
+                ps11.executeBatch();
                 ps11.clearParameters();
-                ps12.executeBatch(); 
+                ps12.executeBatch();
                 ps12.clearParameters();
-                ps13.executeBatch(); 
+                ps13.executeBatch();
                 ps13.clearParameters();
-                ps14.executeBatch(); 
+                ps14.executeBatch();
                 ps14.clearParameters();
-                ps15.executeBatch(); 
+                ps15.executeBatch();
                 ps15.clearParameters();
-                ps16.executeBatch(); 
+                ps16.executeBatch();
                 ps16.clearParameters();
-                ps17.executeBatch(); 
+                ps17.executeBatch();
                 ps17.clearParameters();
-                ps18.executeBatch(); 
+                ps18.executeBatch();
                 ps18.clearParameters();
-                ps19.executeBatch(); 
+                ps19.executeBatch();
                 ps19.clearParameters();
-                System.gc(); 
+                System.gc();
             }
-	    
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -245,7 +266,8 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
     }
 
     private String getNatObjectId(String siteId) throws SQLException {
-        String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ID_SITE = '" + siteId + "'";
+        String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE ID_SITE = '"
+                + siteId + "'";
         String natId = ExecuteSQL(query);
 
         return natId;
@@ -264,7 +286,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
 
         try {
             con = getConnection();
-	    
+
             String query = "SELECT ID_SITE, ID_NATURE_OBJECT FROM CHM62EDT_SITES WHERE SOURCE_DB = 'CDDA_NATIONAL'";
 
             ps = con.prepareStatement(query);
@@ -283,7 +305,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                 }
             }
             deleteSites(siteIds);
-	    
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -293,7 +315,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
     }
 
     private String getReportAttributeIds(String objectId, Connection con, String query) throws Exception {
-	    
+
         String result = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -330,7 +352,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
     }
 
     private String getReportTypeIds(String objectId, Connection con, String query) throws Exception {
-	    
+
         String result = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -378,10 +400,12 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
         try {
             con = getConnection();
             // Empty chm62edt_country_sites_factsheet table before update
-            ps = con.prepareStatement("DELETE FROM chm62edt_country_sites_factsheet");
+            ps = con.prepareStatement(
+                    "DELETE FROM chm62edt_country_sites_factsheet");
             ps.executeUpdate();
-	    
-            ps = con.prepareStatement("SELECT DISTINCT SOURCE_DB FROM CHM62EDT_SITES WHERE SOURCE_DB IS NOT NULL");
+
+            ps = con.prepareStatement(
+                    "SELECT DISTINCT SOURCE_DB FROM CHM62EDT_SITES WHERE SOURCE_DB IS NOT NULL");
             rs = ps.executeQuery();
             List<String> sources = new ArrayList<String>();
 
@@ -408,7 +432,8 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                     String sourceDb = it.next();
 
                     // here we calculate no of sites
-                    String sql = "SELECT Count(DISTINCT C.ID_NATURE_OBJECT) AS cnt " + "FROM CHM62EDT_COUNTRY AS A "
+                    String sql = "SELECT Count(DISTINCT C.ID_NATURE_OBJECT) AS cnt "
+                            + "FROM CHM62EDT_COUNTRY AS A "
                             + "INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON A.ID_GEOSCOPE = B.ID_GEOSCOPE "
                             + "INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
                             + "WHERE A.AREA_NAME_EN = ? AND C.SOURCE_DB = ?";
@@ -463,7 +488,8 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                     int no = 0;
 
                     while (rs2.next()) {
-                        totalSizePartial = totalSizePartial + rs2.getDouble("AREA");
+                        totalSizePartial = totalSizePartial
+                                + rs2.getDouble("AREA");
                         no = no + 1;
                     }
 
@@ -481,10 +507,11 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                     double totalSizeOverlap = 0;
 
                     while (rs2.next()) {
-                        totalSizeOverlap = totalSizeOverlap + rs2.getDouble("OVERLAP");
+                        totalSizeOverlap = totalSizeOverlap
+                                + rs2.getDouble("OVERLAP");
                         no = no + 1;
                     }
-			        
+
                     double totalSize = totalSizePartial - totalSizeOverlap;
                     double avgSize = 0;
 
@@ -561,10 +588,10 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                     ps2.executeUpdate();
                 }
             }
-	    
+
         } catch (Exception e) {
             e.printStackTrace();
-            throw new SQLException(e.getMessage(), e); 
+            throw new SQLException(e.getMessage(), e);
         } finally {
             closeAllResources(con, ps, rs);
         }
@@ -581,11 +608,11 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
 
         try {
             con = getConnection();
-	    
+
             String updateDesignation = "UPDATE CHM62EDT_DESIGNATIONS SET CDDA_SITES='Y', TOTAL_NUMBER=? WHERE ID_DESIGNATION=?";
 
             psUpdateDesignation = con.prepareStatement(updateDesignation);
-	    
+
             String query = "SELECT ID_DESIGNATION FROM CHM62EDT_DESIGNATIONS WHERE SOURCE_DB = 'CDDA_NATIONAL'";
             String query2 = "";
 
@@ -616,7 +643,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new SQLException(e.getMessage(), e); 
+            throw new SQLException(e.getMessage(), e);
         } finally {
             closeAllResources(con, ps, rs);
             if (ps2 != null) {
@@ -632,8 +659,10 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
     }
 
     public List<AttributeDto> getAttributes(String idSite) {
-        String query = "select NAME,VALUE from chm62edt_site_attributes where ID_SITE= ?" + " and NAME not like 'SPECIES_%'"
-                + " and NAME not like 'OTHER_SPECIES_%'" + " and NAME not like 'HABITAT_%'";
+        String query = "select NAME,VALUE from chm62edt_site_attributes where ID_SITE= ?"
+                + " and NAME not like 'SPECIES_%'"
+                + " and NAME not like 'OTHER_SPECIES_%'"
+                + " and NAME not like 'HABITAT_%'";
         List<Object> params = new LinkedList<Object>();
 
         params.add(idSite);

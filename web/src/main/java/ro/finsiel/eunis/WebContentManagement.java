@@ -111,7 +111,8 @@ public class WebContentManagement implements java.io.Serializable {
         }
 
         if (editMode) {
-            ret += "<a title=\"Edit this text\" href=\"javascript:openContentManager('" + idPage
+            ret += "<a title=\"Edit this text\" href=\"javascript:openContentManager('"
+                    + idPage
                     + "', 'text');\"><img src=\"images/edit-content.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
         }
         return ret;
@@ -153,7 +154,8 @@ public class WebContentManagement implements java.io.Serializable {
         if (!editMode) {
             return STR_EMPTY;
         } else {
-            String ret = "<strong><em>" + getDescription(idPage) + "</em></strong>: ";
+            String ret = "<strong><em>" + getDescription(idPage)
+                    + "</em></strong>: ";
 
             ret += "<em>";
             ret += getText(idPage);
@@ -174,7 +176,8 @@ public class WebContentManagement implements java.io.Serializable {
         if (!advancedEditMode) {
             return STR_EMPTY;
         } else {
-            return "<a title=\"Edit Alternative text\" href=\"javascript:openContentManager('" + idPage
+            return "<a title=\"Edit Alternative text\" href=\"javascript:openContentManager('"
+                    + idPage
                     + "', 'alt_title');\"><img src=\"images/edit-content-alt.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
         }
     }
@@ -188,7 +191,8 @@ public class WebContentManagement implements java.io.Serializable {
         if (!advancedEditMode) {
             return STR_EMPTY;
         } else {
-            return "<a title=\"Edit Alternative text\" href=\"javascript:openContentManager('" + idPage
+            return "<a title=\"Edit Alternative text\" href=\"javascript:openContentManager('"
+                    + idPage
                     + "', 'alt_title');\"><img src=\"images/edit-content-title.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
         }
     }
@@ -202,7 +206,8 @@ public class WebContentManagement implements java.io.Serializable {
         if (!advancedEditMode) {
             return STR_EMPTY;
         } else {
-            return "<a title=\"Edit the Value attribute\" href=\"javascript:openContentManager('" + idPage
+            return "<a title=\"Edit the Value attribute\" href=\"javascript:openContentManager('"
+                    + idPage
                     + "', 'alt');\"><img src=\"images/edit-content-msg.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
         }
     }
@@ -216,7 +221,8 @@ public class WebContentManagement implements java.io.Serializable {
         if (!advancedEditMode) {
             return STR_EMPTY;
         } else {
-            return "<a title=\"Edit the Label attribute\" href=\"javascript:openContentManager('" + idPage
+            return "<a title=\"Edit the Label attribute\" href=\"javascript:openContentManager('"
+                    + idPage
                     + "', 'label');\"><img src=\"images/edit-content-msg.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
         }
     }
@@ -232,7 +238,8 @@ public class WebContentManagement implements java.io.Serializable {
             htmlContent.clear();
             final List<WebContentPersist> pages = new WebContentDomain().findCustom(
                     "select a.* from `eunis_web_content` as a, (select max(record_date) mx,id_page,lang from `eunis_web_content` group by id_page,lang) as b where a.id_page = b.id_page and a.lang = b.lang and a.record_date = b.mx and a.lang='"
-                            + language + "' and concat(a.record_date)<>'0000-00-00 00:00:00'");
+                            + language
+                            + "' and concat(a.record_date)<>'0000-00-00 00:00:00'");
 
             for (int i = 0; i < pages.size(); i++) {
                 final WebContentPersist text = pages.get(i);
@@ -269,15 +276,20 @@ public class WebContentManagement implements java.io.Serializable {
                 }
             } else {
                 System.out.println(
-                        "Warning:" + WebContentManagement.class.getName() + "::getText(" + idPage + "): Page not found in cache.");
+                        "Warning:" + WebContentManagement.class.getName()
+                        + "::getText(" + idPage + "): Page not found in cache.");
             }
         } else {
             List<WebContentPersist> dbKeyList = new WebContentDomain().findWhereOrderBy(
-                    "ID_PAGE='" + md5 + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ", "RECORD_DATE DESC");
+                    "ID_PAGE='" + md5
+                    + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
+                    "RECORD_DATE DESC");
 
             if (dbKeyList == null) {
                 dbKeyList = new WebContentDomain().findWhereOrderBy(
-                        "ID_PAGE='" + idPage + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ", "RECORD_DATE DESC");
+                        "ID_PAGE='" + idPage
+                        + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
+                        "RECORD_DATE DESC");
             }
 
             if (!dbKeyList.isEmpty()) {
@@ -285,7 +297,8 @@ public class WebContentManagement implements java.io.Serializable {
                 ret = dbKeyList.get(0).getContent();
             } else {
                 System.out.println(
-                        "Warning:" + WebContentManagement.class.getName() + "::getText(" + idPage
+                        "Warning:" + WebContentManagement.class.getName()
+                        + "::getText(" + idPage
                         + "): Page not found in cache and database.");
             }
         }
@@ -312,14 +325,17 @@ public class WebContentManagement implements java.io.Serializable {
                 }
             } else {
                 System.out.println(
-                        "Warning:" + WebContentManagement.class.getName() + "::getTextByMD5(" + idPage
+                        "Warning:" + WebContentManagement.class.getName()
+                        + "::getTextByMD5(" + idPage
                         + "): Page not found in cache.");
             }
         } else {
             List<WebContentPersist> dbKeyList = null;
 
             dbKeyList = new WebContentDomain().findWhereOrderBy(
-                    "ID_PAGE='" + md5 + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ", "RECORD_DATE DESC");
+                    "ID_PAGE='" + md5
+                    + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
+                    "RECORD_DATE DESC");
             if (!dbKeyList.isEmpty()) {
                 htmlContent.put(idPage, dbKeyList.get(0));
                 ret = dbKeyList.get(0).getContent();
@@ -346,19 +362,23 @@ public class WebContentManagement implements java.io.Serializable {
                 }
             } else {
                 System.out.println(
-                        "Warning:" + WebContentManagement.class.getName() + "::getDescription(" + idPage
+                        "Warning:" + WebContentManagement.class.getName()
+                        + "::getDescription(" + idPage
                         + "): Page not found in cache.");
             }
         } else {
             final List<WebContentPersist> dbKeyList = new WebContentDomain().findWhereOrderBy(
-                    "ID_PAGE='" + idPage + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ", "RECORD_DATE DESC");
+                    "ID_PAGE='" + idPage
+                    + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
+                    "RECORD_DATE DESC");
 
             if (!dbKeyList.isEmpty()) {
                 htmlContent.put(idPage, dbKeyList.get(0));
                 ret = dbKeyList.get(0).getDescription();
             } else {
                 System.out.println(
-                        "Warning:" + WebContentManagement.class.getName() + "::getDescription(" + idPage
+                        "Warning:" + WebContentManagement.class.getName()
+                        + "::getDescription(" + idPage
                         + "): Page not found in cache and database.");
             }
         }
@@ -368,7 +388,8 @@ public class WebContentManagement implements java.io.Serializable {
     public boolean idPageExists(String idPage, String language) {
         boolean ret = false;
         final List<WebContentPersist> dbKeyList = new WebContentDomain().findWhere(
-                "ID_PAGE='" + idPage + "' AND LANG='" + language + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ");
+                "ID_PAGE='" + idPage + "' AND LANG='" + language
+                + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ");
 
         if (dbKeyList.size() > 0) {
             ret = true;
@@ -387,14 +408,17 @@ public class WebContentManagement implements java.io.Serializable {
             ret = htmlContent.get(idPage);
         } else {
             final List<WebContentPersist> dbKeyList = new WebContentDomain().findWhereOrderBy(
-                    "ID_PAGE='" + idPage + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ", "RECORD_DATE DESC");
+                    "ID_PAGE='" + idPage
+                    + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
+                    "RECORD_DATE DESC");
 
             if (!dbKeyList.isEmpty()) {
                 htmlContent.put(idPage, dbKeyList.get(0));
                 ret = dbKeyList.get(0);
             } else {
                 System.out.println(
-                        "Warning:" + WebContentManagement.class.getName() + "::getPersistentObject(" + idPage
+                        "Warning:" + WebContentManagement.class.getName()
+                        + "::getPersistentObject(" + idPage
                         + "): Page not found in cache and database.");
             }
         }
@@ -438,11 +462,13 @@ public class WebContentManagement implements java.io.Serializable {
             String md5 = EunisUtil.digestHexDec(idPage, "MD5");
 
             ret = new WebContentDomain().findWhereOrderBy(
-                    "ID_PAGE='" + md5 + "' AND LANG='" + language + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
+                    "ID_PAGE='" + md5 + "' AND LANG='" + language
+                    + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
                     "RECORD_DATE DESC");
             if (ret == null) {
                 ret = new WebContentDomain().findWhereOrderBy(
-                        "ID_PAGE='" + idPage + "' AND LANG='" + language + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
+                        "ID_PAGE='" + idPage + "' AND LANG='" + language
+                        + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
                         "RECORD_DATE DESC");
             }
         } catch (Exception ex) {
@@ -460,9 +486,11 @@ public class WebContentManagement implements java.io.Serializable {
         if (!showEditTag) {
             return "";
         } else {
-            return "<a title=\"Edit this text\" href=\"javascript:editContent('" + idPage + "');\">"
+            return "<a title=\"Edit this text\" href=\"javascript:editContent('"
+                    + idPage + "');\">"
                     + "<img src=\"images/edit-content.gif\" style=\"border : 0px;\" width=\"9\" height=\"9\" "
-                    + "alt=\"Edit this text\" " + "title=\"Edit this text\" /></a>";
+                    + "alt=\"Edit this text\" "
+                    + "title=\"Edit this text\" /></a>";
         }
     }
 
@@ -492,7 +520,8 @@ public class WebContentManagement implements java.io.Serializable {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             if (modifyAllIdentical) {
-                ps = con.prepareStatement("DELETE FROM EUNIS_WEB_CONTENT WHERE ID_PAGE = ? AND LANG = ? ");
+                ps = con.prepareStatement(
+                        "DELETE FROM EUNIS_WEB_CONTENT WHERE ID_PAGE = ? AND LANG = ? ");
                 ps.setString(1, md5);
                 ps.setString(2, lang);
                 ps.execute();
@@ -531,7 +560,9 @@ public class WebContentManagement implements java.io.Serializable {
                 htmlContent.remove(md5);
                 htmlContent.put(md5, data);
             } else {
-                System.out.println("savePageContentJDBC: Could not find in cache id_page= " + idPage);
+                System.out.println(
+                        "savePageContentJDBC: Could not find in cache id_page= "
+                                + idPage);
             }
             result = true;
         } catch (Exception e) {
@@ -571,7 +602,8 @@ public class WebContentManagement implements java.io.Serializable {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             if (modifyAllIdentical) {
-                ps = con.prepareStatement("DELETE FROM EUNIS_WEB_CONTENT WHERE ID_PAGE = MD5(?) AND LANG = ? ");
+                ps = con.prepareStatement(
+                        "DELETE FROM EUNIS_WEB_CONTENT WHERE ID_PAGE = MD5(?) AND LANG = ? ");
                 ps.setString(1, idPage);
                 ps.setString(2, lang);
                 ps.execute();
@@ -615,7 +647,8 @@ public class WebContentManagement implements java.io.Serializable {
         String value = null;
 
         try {
-            final List<Chm62edtLanguagePersist> items = new Chm62edtLanguageDomain().findWhere("CODE='" + code + "'");
+            final List<Chm62edtLanguagePersist> items = new Chm62edtLanguageDomain().findWhere(
+                    "CODE='" + code + "'");
 
             if (items.size() > 0) {
                 final Chm62edtLanguagePersist languageName = items.get(0);
@@ -642,7 +675,8 @@ public class WebContentManagement implements java.io.Serializable {
 
             // Decode the languages from CHM62EDT_LANGUAGE table
             for (WebContentPersist item : items) {
-                final List<EunisISOLanguagesPersist> tmp = new EunisISOLanguagesDomain().findWhere("CODE = '" + item.getLang() + "'");
+                final List<EunisISOLanguagesPersist> tmp = new EunisISOLanguagesDomain().findWhere(
+                        "CODE = '" + item.getLang() + "'");
 
                 if (tmp.size() > 0) {
                     languages.add(tmp.get(0));
@@ -663,7 +697,8 @@ public class WebContentManagement implements java.io.Serializable {
         List<Chm62edtLanguagePersist> languages = new Vector<Chm62edtLanguagePersist>();
 
         try {
-            final List<Chm62edtLanguagePersist> all_languages = new Chm62edtLanguageDomain().findOrderBy("NAME_EN");
+            final List<Chm62edtLanguagePersist> all_languages = new Chm62edtLanguageDomain().findOrderBy(
+                    "NAME_EN");
             final List<WebContentPersist> translated_languages = new WebContentDomain().findCustom(
                     "SELECT * FROM EUNIS_WEB_CONTENT WHERE CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' GROUP BY LANG");
 
@@ -671,7 +706,8 @@ public class WebContentManagement implements java.io.Serializable {
                 boolean exists = false;
 
                 for (WebContentPersist existing_lang : translated_languages) {
-                    if (existing_lang.getLang().equalsIgnoreCase(language.getCode())) {
+                    if (existing_lang.getLang().equalsIgnoreCase(
+                            language.getCode())) {
                         exists = true;
                         break;
                     }
@@ -697,7 +733,8 @@ public class WebContentManagement implements java.io.Serializable {
         if (code != null && !code.equalsIgnoreCase("en")) {
             // Check if languages is not already in database
             List<WebContentPersist> languages = new WebContentDomain().findWhere(
-                    "LANG='" + code + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ");
+                    "LANG='" + code
+                    + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ");
 
             if (languages.size() > 0) {
                 throw new Exception("Language already added for translation.");
@@ -791,7 +828,8 @@ public class WebContentManagement implements java.io.Serializable {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            InputStream is = this.getClass().getClassLoader().getResourceAsStream(DATA_FILE_NAME);
+            InputStream is = this.getClass().getClassLoader().getResourceAsStream(
+                    DATA_FILE_NAME);
 
             input = new BufferedReader(new InputStreamReader(is));
             String line = null;

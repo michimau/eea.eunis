@@ -1,11 +1,12 @@
 /*
  * $Id
-*/
+ */
 
 package ro.finsiel.eunis.jrfTables;
 
 
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  *
@@ -13,107 +14,108 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class Chm62edtHabitatReportTypePersist extends PersistentObject {
 
-  private String lookupType = null;
-  private String IDLookup = null;
+    private String lookupType = null;
+    private String IDLookup = null;
 
-  /**
-   * This is a database field.
-   **/
-  private String i_idHabitat = null;
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idReportType = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_reportValue = null;
+    /**
+     * This is a database field.
+     **/
+    private String i_idHabitat = null;
 
-  public Chm62edtHabitatReportTypePersist() {
-    super();
-  }
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idReportType = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getIdHabitat() {
-    return i_idHabitat;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_reportValue = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdReportType() {
-    return i_idReportType;
-  }
+    public Chm62edtHabitatReportTypePersist() {
+        super();
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getReportValue() {
-    return i_reportValue;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getIdHabitat() {
+        return i_idHabitat;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idHabitat
-   **/
-  public void setIdHabitat(String idHabitat) {
-    i_idHabitat = idHabitat;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdReportType() {
+        return i_idReportType;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idReportType
-   **/
-  public void setIdReportType(Integer idReportType) {
-    i_idReportType = idReportType;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getReportValue() {
+        return i_reportValue;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param reportValue
-   **/
-  public void setReportValue(String reportValue) {
-    i_reportValue = reportValue;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param idHabitat
+     **/
+    public void setIdHabitat(String idHabitat) {
+        i_idHabitat = idHabitat;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
 
-  /**
-   * Getter for a joined field.
-   **/
-  public String getIDLookup() {
-    return IDLookup;
-  }
+    /**
+     * Setter for a database field.
+     * @param idReportType
+     **/
+    public void setIdReportType(Integer idReportType) {
+        i_idReportType = idReportType;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
 
-  /**
-   * Getter for a joined  field.
-   **/
-  public String getLookupType() {
-    return lookupType;
-  }
+    /**
+     * Setter for a database field.
+     * @param reportValue
+     **/
+    public void setReportValue(String reportValue) {
+        i_reportValue = reportValue;
+        this.markModifiedPersistentState();
+    }
 
+    /**
+     * Getter for a joined field.
+     **/
+    public String getIDLookup() {
+        return IDLookup;
+    }
 
-  /**
-   * Setter for a joined field.
-   * @@param comment
-   **/
-  public void setLookupType(String comment) {
-    lookupType = comment;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a joined  field.
+     **/
+    public String getLookupType() {
+        return lookupType;
+    }
 
-  /**
-   * Setter for a joined  field.
-   * @@param comment
-   **/
-  public void setIDLookup(String comment) {
-    IDLookup = comment;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a joined field.
+     * @@param comment
+     **/
+    public void setLookupType(String comment) {
+        lookupType = comment;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a joined  field.
+     * @@param comment
+     **/
+    public void setIDLookup(String comment) {
+        IDLookup = comment;
+        this.markModifiedPersistentState();
+    }
 
 }

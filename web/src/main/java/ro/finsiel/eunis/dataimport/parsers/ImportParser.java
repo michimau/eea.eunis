@@ -109,7 +109,8 @@ public class ImportParser extends DefaultHandler {
         Integer position = positions.get(colName);
 
         if (position != null) {
-            preparedStatement.setString(position.intValue(), buf.toString().trim());
+            preparedStatement.setString(position.intValue(),
+                    buf.toString().trim());
         }
     }
 

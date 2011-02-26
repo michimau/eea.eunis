@@ -1,11 +1,12 @@
 /*
  * $Id
-*/
+ */
 
 package ro.finsiel.eunis.jrfTables;
 
 
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  *
@@ -13,59 +14,60 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class Chm62edtMotivationPersist extends PersistentObject {
 
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idMotivation = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_description = null;
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idMotivation = null;
 
-  private String name = null;
+    /**
+     * This is a database field.
+     **/
+    private String i_description = null;
 
-  public Chm62edtMotivationPersist() {
-    super();
-  }
+    private String name = null;
 
-  public String getName() {
-    return name;
-  }
+    public Chm62edtMotivationPersist() {
+        super();
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getDescription() {
-    return i_description;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdMotivation() {
-    return i_idMotivation;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getDescription() {
+        return i_description;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param description
-   **/
-  public void setDescription(String description) {
-    i_description = description;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdMotivation() {
+        return i_idMotivation;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idMotivation
-   **/
-  public void setIdMotivation(Integer idMotivation) {
-    i_idMotivation = idMotivation;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param description
+     **/
+    public void setDescription(String description) {
+        i_description = description;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idMotivation
+     **/
+    public void setIdMotivation(Integer idMotivation) {
+        i_idMotivation = idMotivation;
+        this.markModifiedPersistentState();
+    }
 
 }

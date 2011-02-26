@@ -42,7 +42,8 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
      * @see eionet.eunis.dao.ISpeciesDao#lookupSpecies(eionet.eunis.api.SpeciesLookupSearchParam)
      */
     public LookupSpeciesResult lookupSpecies(SpeciesLookupSearchParam speciesLookupSearchParam) {
-        String query = " SELECT ID_SPECIES, SCIENTIFIC_NAME, AUTHOR," + " levenshtein(LOWER(SCIENTIFIC_NAME), ?) AS DISTANCE, "
+        String query = " SELECT ID_SPECIES, SCIENTIFIC_NAME, AUTHOR,"
+                + " levenshtein(LOWER(SCIENTIFIC_NAME), ?) AS DISTANCE, "
                 + " levenshtein(LOWER(SUBSTRING_INDEX(SCIENTIFIC_NAME,' ',1)), ?) AS DISTANCE_2 "
                 + " FROM chm62edt_species WHERE levenshtein(LOWER(SCIENTIFIC_NAME), ?) < ? "
                 + " ORDER BY DISTANCE_2, DISTANCE, SCIENTIFIC_NAME ";
@@ -95,7 +96,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                 String source = rs.getString("SOURCE");
                 Date date = rs.getDate("CREATED");
                 String taxonomyTree = rs.getString("TAXONOMY_TREE");
-	    
+
                 String taxonomicReference = "";
 
                 if (source != null && source.length() > 0) {
@@ -108,21 +109,22 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                         taxonomicReference += " (" + strDate + ")";
                     }
                 }
-	    
+
                 String kingdom = null;
                 String phylum = null;
                 String sclass = null;
                 String order = null;
                 String family = null;
-	    
+
                 StringTokenizer st = new StringTokenizer(taxonomyTree, ",");
 
                 while (st.hasMoreTokens()) {
-                    StringTokenizer sts = new StringTokenizer(st.nextToken(), "*");
+                    StringTokenizer sts = new StringTokenizer(st.nextToken(),
+                            "*");
                     String classification_id = sts.nextToken();
                     String classification_level = sts.nextToken();
                     String classification_name = sts.nextToken();
-		            
+
                     if (classification_level.equalsIgnoreCase("Kingdom")) {
                         kingdom = classification_name;
                     } else if (classification_level.equalsIgnoreCase("Phylum")) {
@@ -135,7 +137,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                         family = classification_name;
                     }
                 }
-		    
+
                 SpeciesDTO species = new SpeciesDTO();
 
                 species.setIdSpecies(rs.getString("ID_SPECIES"));
@@ -144,7 +146,8 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                 species.setAuthor(rs.getString("AUTHOR"));
                 species.setValidName(rs.getString("VALID_NAME"));
                 species.setIdSpeciesLink(rs.getString("ID_SPECIES_LINK"));
-                species.setTypeRelatedSpecies(rs.getString("TYPE_RELATED_SPECIES"));
+                species.setTypeRelatedSpecies(
+                        rs.getString("TYPE_RELATED_SPECIES"));
                 species.setGroupSpecies(rs.getString("COMMON_NAME"));
                 species.setTaxonomicReference(taxonomicReference);
                 species.setIdItis(rs.getString("ITIS"));
@@ -158,7 +161,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                 species.setSpeciesClass(sclass);
                 species.setOrder(order);
                 species.setFamily(family);
-		    
+
                 ret.add(species);
             }
 
@@ -179,19 +182,29 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
 
         try {
             con = getConnection();
-	    
+
             st = con.createStatement();
             st2 = con.createStatement();
-	    
-            statements.add(con.prepareStatement("DELETE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?"));
-            statements.add(con.prepareStatement("DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?"));
-            statements.add(con.prepareStatement("DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT_LINK=?"));
-            statements.add(con.prepareStatement("DELETE FROM chm62edt_nature_object_attributes WHERE ID_NATURE_OBJECT=?"));
-            statements.add(con.prepareStatement("DELETE FROM chm62edt_tab_page_species WHERE ID_NATURE_OBJECT=?"));
+
+            statements.add(
+                    con.prepareStatement(
+                            "DELETE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?"));
+            statements.add(
+                    con.prepareStatement(
+                            "DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?"));
+            statements.add(
+                    con.prepareStatement(
+                            "DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT_LINK=?"));
+            statements.add(
+                    con.prepareStatement(
+                            "DELETE FROM chm62edt_nature_object_attributes WHERE ID_NATURE_OBJECT=?"));
+            statements.add(
+                    con.prepareStatement(
+                            "DELETE FROM chm62edt_tab_page_species WHERE ID_NATURE_OBJECT=?"));
             statements.add(
                     con.prepareStatement(
                             "DELETE FROM chm62edt_nature_object_picture WHERE ID_OBJECT=? AND NATURE_OBJECT_TYPE='Species'"));
-	    
+
             int counter = 0;
 
             if (species != null) {
@@ -205,32 +218,44 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                     }
 
                     if (isSynonym(speciesId)) {
-                        st2.addBatch("DELETE FROM chm62edt_species WHERE ID_SPECIES=" + speciesId);
-                        st2.addBatch("DELETE FROM chm62edt_nature_object WHERE ID_NATURE_OBJECT=" + idNatureObject);
+                        st2.addBatch(
+                                "DELETE FROM chm62edt_species WHERE ID_SPECIES="
+                                        + speciesId);
+                        st2.addBatch(
+                                "DELETE FROM chm62edt_nature_object WHERE ID_NATURE_OBJECT="
+                                        + idNatureObject);
                     } else {
                         st2.addBatch(
-                                "DELETE FROM chm62edt_species WHERE ID_SPECIES=" + speciesId + " OR ID_SPECIES_LINK=" + speciesId);
+                                "DELETE FROM chm62edt_species WHERE ID_SPECIES="
+                                        + speciesId + " OR ID_SPECIES_LINK="
+                                        + speciesId);
                         String ids = getSynonymIds(speciesId, idNatureObject);
 
-                        st2.addBatch("DELETE FROM chm62edt_nature_object WHERE ID_NATURE_OBJECT IN (" + ids + ")");
+                        st2.addBatch(
+                                "DELETE FROM chm62edt_nature_object WHERE ID_NATURE_OBJECT IN ("
+                                        + ids + ")");
                     }
 
-                    String idReportAttributesReports = getReportAttributeIds(idNatureObject, con,
+                    String idReportAttributesReports = getReportAttributeIds(
+                            idNatureObject, con,
                             "SELECT ID_REPORT_ATTRIBUTES FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?");
-                    String idReportAttributesReportType = getReportAttributeIds(idNatureObject, con,
+                    String idReportAttributesReportType = getReportAttributeIds(
+                            idNatureObject, con,
                             "SELECT ID_REPORT_ATTRIBUTES FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?");
 
-                    String idReportTypeReports = getReportTypeIds(idNatureObject, con,
+                    String idReportTypeReports = getReportTypeIds(idNatureObject,
+                            con,
                             "SELECT ID_REPORT_TYPE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?");
-                    String idReportTypeReportType = getReportTypeIds(idNatureObject, con,
+                    String idReportTypeReportType = getReportTypeIds(
+                            idNatureObject, con,
                             "SELECT ID_REPORT_TYPE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?");
 
                     counter++;
 
                     if (idReportAttributesReports != null) {
                         st.addBatch(
-                                "DELETE FROM chm62edt_report_attributes WHERE ID_REPORT_ATTRIBUTES IN (" + idReportAttributesReports
-                                + ")");
+                                "DELETE FROM chm62edt_report_attributes WHERE ID_REPORT_ATTRIBUTES IN ("
+                                        + idReportAttributesReports + ")");
                     }
 
                     if (idReportAttributesReportType != null) {
@@ -240,11 +265,15 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                     }
 
                     if (idReportTypeReports != null) {
-                        st.addBatch("DELETE FROM chm62edt_report_type WHERE ID_REPORT_TYPE IN (" + idReportTypeReports + ")");
+                        st.addBatch(
+                                "DELETE FROM chm62edt_report_type WHERE ID_REPORT_TYPE IN ("
+                                        + idReportTypeReports + ")");
                     }
 
                     if (idReportTypeReportType != null) {
-                        st.addBatch("DELETE FROM chm62edt_report_type WHERE ID_REPORT_TYPE IN (" + idReportTypeReportType + ")");
+                        st.addBatch(
+                                "DELETE FROM chm62edt_report_type WHERE ID_REPORT_TYPE IN ("
+                                        + idReportTypeReportType + ")");
                     }
 
                     for (PreparedStatement statement : statements) {
@@ -252,7 +281,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                         statement.addBatch();
                     }
 
-                    if (counter % 10000 == 0) { 
+                    if (counter % 10000 == 0) {
                         st.executeBatch();
                         st.clearBatch();
                         for (PreparedStatement statement : statements) {
@@ -261,12 +290,12 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                         }
                         st2.executeBatch();
                         st2.clearBatch();
-                        System.gc(); 
+                        System.gc();
                     }
                 }
             }
 
-            if (!(counter % 10000 == 0)) { 
+            if (!(counter % 10000 == 0)) {
                 st.executeBatch();
                 st.clearBatch();
                 for (PreparedStatement statement : statements) {
@@ -275,9 +304,9 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                 }
                 st2.executeBatch();
                 st2.clearBatch();
-                System.gc(); 
+                System.gc();
             }
-	    
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -293,7 +322,8 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
     }
 
     private String getNatObjectId(String specieId) throws SQLException {
-        String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE ID_SPECIES = '" + specieId + "'";
+        String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE ID_SPECIES = '"
+                + specieId + "'";
         String natId = ExecuteSQL(query);
 
         return natId;
@@ -301,7 +331,8 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
 
     private boolean isSynonym(String specieId) throws SQLException {
         boolean ret = false;
-        String query = "SELECT VALID_NAME FROM CHM62EDT_SPECIES WHERE ID_SPECIES = '" + specieId + "'";
+        String query = "SELECT VALID_NAME FROM CHM62EDT_SPECIES WHERE ID_SPECIES = '"
+                + specieId + "'";
         String synonym = ExecuteSQL(query);
 
         if (synonym != null && synonym.equals("0")) {
@@ -334,7 +365,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
     }
 
     private String getReportAttributeIds(String objectId, Connection con, String query) throws Exception {
-	    
+
         String result = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -371,7 +402,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
     }
 
     private String getReportTypeIds(String objectId, Connection con, String query) throws Exception {
-	    
+
         String result = null;
         PreparedStatement ps = null;
         ResultSet rs = null;

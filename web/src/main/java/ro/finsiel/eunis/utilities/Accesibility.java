@@ -17,15 +17,19 @@ public class Accesibility {
 
     static {
         // Generic
-        hm.put("generic.noscript", "JavaScript is disabled. Some functionality will be missing");
+        hm.put("generic.noscript",
+                "JavaScript is disabled. Some functionality will be missing");
         hm.put("generic.refined.delete", "Delete this filter");
-        hm.put("generic.refined.question", "Open values. This link will open a popup");
+        hm.put("generic.refined.question",
+                "Open values. This link will open a popup");
         hm.put("generic.popup", "This link will open a popup");
-        hm.put("generic.popup.lov", "List of values. This link will open a popup");
+        hm.put("generic.popup.lov",
+                "List of values. This link will open a popup");
         hm.put("generic.sortImage", "Sort results by this column");
         hm.put("generic.criteria.mandatory", "This search criteria is mandatory");
         hm.put("generic.criteria.optional", "This search criteria is optional");
-        hm.put("generic.criteria.included", "At least one of these criteria must be entered");
+        hm.put("generic.criteria.included",
+                "At least one of these criteria must be entered");
         hm.put("generic.criteria.save", "Save search criteria");
         hm.put("Species.Name.SearchButton.Alt", "Search button");
     }

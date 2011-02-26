@@ -166,7 +166,8 @@ public class HabitatClassCodeImportParser extends DefaultHandler {
 
             String queryUpdateSitesTabInfo = "UPDATE chm62edt_tab_page_habitats SET LEGAL_INSTRUMENTS='Y' WHERE ID_NATURE_OBJECT = ?";
 
-            this.preparedStatementTabInfo = con.prepareStatement(queryUpdateSitesTabInfo);
+            this.preparedStatementTabInfo = con.prepareStatement(
+                    queryUpdateSitesTabInfo);
 
             // con.setAutoCommit(false);
             parseDocument();

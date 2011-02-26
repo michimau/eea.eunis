@@ -1,11 +1,13 @@
 package eionet.eunis.dto;
 
+
 import java.io.Serializable;
 
 import org.apache.commons.lang.StringUtils;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Transient;
+
 
 /**
  * Resource dto for rdf exporting.
@@ -14,61 +16,56 @@ import org.simpleframework.xml.Transient;
  * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 @Root
-public class ResourceDto implements Serializable{
+public class ResourceDto implements Serializable {
 
-	/**
-	 * serial.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	
-	private String id;
-	@Transient
-	private String prefix;
-	
+    /**
+     * serial.
+     */
+    private static final long serialVersionUID = 1L;
 
-	public ResourceDto() {
-		//blank
-	}
+    private String id;
+    @Transient
+    private String prefix;
 
-	/**
-	 * @param id
-	 * @param prefix
-	 */
-	public ResourceDto(String id, String prefix) {
-		this.id = id;
-		this.prefix = prefix;
-	}
+    public ResourceDto() {// blank
+    }
 
-	/**
-	 * @return the id
-	 */
-	@Attribute(name="rdf:resource")
-	public String getId() {
-		return StringUtils.isBlank(prefix)
-			? id
-			: prefix + id;
-	}
+    /**
+     * @param id
+     * @param prefix
+     */
+    public ResourceDto(String id, String prefix) {
+        this.id = id;
+        this.prefix = prefix;
+    }
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
+    /**
+     * @return the id
+     */
+    @Attribute(name = "rdf:resource")
+    public String getId() {
+        return StringUtils.isBlank(prefix) ? id : prefix + id;
+    }
 
-	/**
-	 * @return the prefix
-	 */
-	public String getPrefix() {
-		return prefix;
-	}
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	/**
-	 * @param prefix the prefix to set
-	 */
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
-	}
+    /**
+     * @return the prefix
+     */
+    public String getPrefix() {
+        return prefix;
+    }
+
+    /**
+     * @param prefix the prefix to set
+     */
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
 
 }

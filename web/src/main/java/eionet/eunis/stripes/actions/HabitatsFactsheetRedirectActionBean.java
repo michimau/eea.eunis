@@ -1,9 +1,11 @@
 package eionet.eunis.stripes.actions;
 
+
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
+
 
 /**
  * ActionBean to replace old /habitats-factsheet.jsp.
@@ -14,67 +16,63 @@ import net.sourceforge.stripes.action.UrlBinding;
 @UrlBinding("/habitats-factsheet.jsp")
 public class HabitatsFactsheetRedirectActionBean extends AbstractStripesAction {
 	
-	private static final String[] allTypes = new String[]{
-		"general",
-		"distribution",
-		"instruments",
-		"habitats",
-		"sites",
-		"species",
-		"other"}; 
+    private static final String[] allTypes = new String[] {
+        "general", "distribution", "instruments", "habitats", "sites", "species", "other"}; 
 	
-	private String idHabitat;
+    private String idHabitat;
 	
-	//selected tab
-	private int tab;
-	private int mini = -1;
+    // selected tab
+    private int tab;
+    private int mini = -1;
 	
-	@DefaultHandler
-	public Resolution index(){
+    @DefaultHandler
+    public Resolution index() {
 		
-			
-		String tabName = allTypes[tab];
-		String url = "/habitats/"+idHabitat;
-		if(tabName != null && tabName.length() > 0)
-			url += "/"+tabName;
-		if(mini > -1)
-			url += "?mini="+mini;
-		RedirectResolution redirect = new RedirectResolution(url);
-		return redirect;
-	}
+        String tabName = allTypes[tab];
+        String url = "/habitats/" + idHabitat;
 
-	/**
-	 * @return the currentTab
-	 */
-	public int getTab() {
-		return tab;
-	}
+        if (tabName != null && tabName.length() > 0) {
+            url += "/" + tabName;
+        }
+        if (mini > -1) {
+            url += "?mini=" + mini;
+        }
+        RedirectResolution redirect = new RedirectResolution(url);
 
-	/**
-	 * @param currentTab the currentTab to set
-	 */
-	public void setTab(int tab) {
-		if (tab > 6 || tab < 0) {
-			tab = 0;
-		}
-		this.tab = tab;
-	}
+        return redirect;
+    }
 
-	public int getMini() {
-		return mini;
-	}
+    /**
+     * @return the currentTab
+     */
+    public int getTab() {
+        return tab;
+    }
 
-	public void setMini(int mini) {
-		this.mini = mini;
-	}
+    /**
+     * @param currentTab the currentTab to set
+     */
+    public void setTab(int tab) {
+        if (tab > 6 || tab < 0) {
+            tab = 0;
+        }
+        this.tab = tab;
+    }
 
-	public String getIdHabitat() {
-		return idHabitat;
-	}
+    public int getMini() {
+        return mini;
+    }
 
-	public void setIdHabitat(String idHabitat) {
-		this.idHabitat = idHabitat;
-	}
+    public void setMini(int mini) {
+        this.mini = mini;
+    }
 
+    public String getIdHabitat() {
+        return idHabitat;
+    }
+
+    public void setIdHabitat(String idHabitat) {
+        this.idHabitat = idHabitat;
+    }
 
 }

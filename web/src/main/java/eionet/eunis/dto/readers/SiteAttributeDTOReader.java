@@ -1,5 +1,6 @@
 package eionet.eunis.dto.readers;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -10,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import ro.finsiel.eunis.utilities.ResultSetBaseReader;
 import eionet.eunis.dto.AttributeDto;
 
+
 /**
  * Reader class to read site related {@link AttributeDto} from database. 
  * 
@@ -19,20 +21,16 @@ import eionet.eunis.dto.AttributeDto;
  */
 public class SiteAttributeDTOReader extends ResultSetBaseReader<AttributeDto> {
 
-	private List<AttributeDto> results = new LinkedList<AttributeDto>();
+    private List<AttributeDto> results = new LinkedList<AttributeDto>();
 
-	@Override
-	public List<AttributeDto> getResultList() {
-		return results;
-	}
+    @Override
+    public List<AttributeDto> getResultList() {
+        return results;
+    }
 
-	@Override
-	public void readRow(ResultSet rs) throws SQLException {
-		results.add(
-				new AttributeDto(
-						StringUtils.lowerCase(rs.getString("NAME")),
-						true,
-						rs.getString("VALUE")));
-	}
+    @Override
+    public void readRow(ResultSet rs) throws SQLException {
+        results.add(new AttributeDto(StringUtils.lowerCase(rs.getString("NAME")), true, rs.getString("VALUE")));
+    }
 
 }

@@ -1,5 +1,6 @@
 package eionet.eunis.stripes.actions;
 
+
 import java.io.ByteArrayOutputStream;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,6 +28,7 @@ import eionet.eunis.dto.SiteFactsheetDto;
 import eionet.eunis.util.Pair;
 import eionet.eunis.util.SimpleFrameworkUtils;
 
+
 /**
  * Action bean to handle sites-factsheet functionality.
  * 
@@ -36,225 +38,214 @@ import eionet.eunis.util.SimpleFrameworkUtils;
 @UrlBinding("/sites/{idsite}/{tab}")
 public class SitesFactsheetActionBean extends AbstractStripesAction implements RdfAware {
 	
-	private static final String HEADER = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n" 
-          + "xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n"
-          + "xmlns:geo=\"http://www.w3.org/2003/01/geo/wgs84_pos#\"\n"
-          + "xmlns=\"http://eunis.eea.europa.eu/rdf/sites-schema.rdf#\">\n";
+    private static final String HEADER = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n" 
+            + "xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n" + "xmlns:geo=\"http://www.w3.org/2003/01/geo/wgs84_pos#\"\n"
+            + "xmlns=\"http://eunis.eea.europa.eu/rdf/sites-schema.rdf#\">\n";
 	
-	private static final String FOOTER = "\n</rdf:RDF>";
+    private static final String FOOTER = "\n</rdf:RDF>";
 	
-	private String idsite = "";
-	private String mapType = "";
-	private String zoom = "";
+    private String idsite = "";
+    private String mapType = "";
+    private String zoom = "";
 	
-	private static final String[] tabs = {
-            "General information",
-            "Fauna and Flora",
-            "Designation information",
-            "Habitat types",
-            "Related sites",
-            "Other Info"
+    private static final String[] tabs = {
+        "General information", "Fauna and Flora", "Designation information", "Habitat types", "Related sites", "Other Info"
     };
 
     private static final String[][] dbtabs = {
-    		{"GENERAL_INFORMATION","general"},
-    		{"FAUNA_FLORA","faunaflora"},
-    		{"DESIGNATION","designations"},
-    		{"HABITATS","habitats"},
-    		{"SITES","sites"},
-    		{"OTHER","other"}
+        { "GENERAL_INFORMATION", "general"}, { "FAUNA_FLORA", "faunaflora"}, { "DESIGNATION", "designations"},
+        { "HABITATS", "habitats"}, { "SITES", "sites"}, { "OTHER", "other"}
     };
     
     private String btrail;
     private String pageTitle = "";
     private String metaDescription = "";
 	
-	private SiteFactsheet factsheet;
+    private SiteFactsheet factsheet;
 	
-	private String sdb;
+    private String sdb;
 	
-	//selected tab
-	private String tab;
-	//tabs to display
-	private List<Pair<String,String>> tabsWithData = new LinkedList<Pair<String,String>>();
+    // selected tab
+    private String tab;
+    // tabs to display
+    private List<Pair<String, String>> tabsWithData = new LinkedList<Pair<String, String>>();
 	
-	/**
-	 * This action bean only serves RDF through {@link RdfAware}.
-	 */
-	@DefaultHandler
-	public Resolution defaultAction() {
+    /**
+     * This action bean only serves RDF through {@link RdfAware}.
+     */
+    @DefaultHandler
+    public Resolution defaultAction() {
 		
-		if(tab == null || tab.length() == 0){
-			tab = "general";
-		}
+        if (tab == null || tab.length() == 0) {
+            tab = "general";
+        }
 		
-		String eeaHome = getContext().getInitParameter("EEA_HOME");
-		btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,factsheet";
-		factsheet = new SiteFactsheet(idsite);
-		//set metadescription and page title
-		if (factsheet.getIDNatureObject() != null) {
-			metaDescription = factsheet.getDescription();
-			pageTitle = getContext().getInitParameter("PAGE_TITLE") 
-					+ getContentManagement().cms("sites_factsheet_title")
-					+ " " + factsheet.getSiteObject().getName();
-		} else {
-			pageTitle = getContext().getInitParameter("PAGE_TITLE")
-					+ getContentManagement().cmsPhrase("No data found in the database for the site with ID = ")
-					+ "'" + factsheet.getIDSite() + "'";
-			try{
-				getContext().getResponse().setStatus(HttpServletResponse.SC_NOT_FOUND);
-			} catch(Exception e){
-				e.printStackTrace();
-			}
-		}
-		if (factsheet.exists()) {
+        String eeaHome = getContext().getInitParameter("EEA_HOME");
+
+        btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,factsheet";
+        factsheet = new SiteFactsheet(idsite);
+        // set metadescription and page title
+        if (factsheet.getIDNatureObject() != null) {
+            metaDescription = factsheet.getDescription();
+            pageTitle = getContext().getInitParameter("PAGE_TITLE") + getContentManagement().cms("sites_factsheet_title") + " "
+                    + factsheet.getSiteObject().getName();
+        } else {
+            pageTitle = getContext().getInitParameter("PAGE_TITLE")
+                    + getContentManagement().cmsPhrase("No data found in the database for the site with ID = ") + "'"
+                    + factsheet.getIDSite() + "'";
+            try {
+                getContext().getResponse().setStatus(HttpServletResponse.SC_NOT_FOUND);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if (factsheet.exists()) {
 	
-			for (int i=0; i < tabs.length; i++) {
-				if(!getContext().getSqlUtilities().TabPageIsEmpy(factsheet.getSiteObject().getIdNatureObject().toString(), "SITES", dbtabs[i][0])) {
-					tabsWithData.add(new Pair<String, String>(dbtabs[i][1], getContentManagement().cmsPhrase(tabs[i])));
-				}
-			}
+            for (int i = 0; i < tabs.length; i++) {
+                if (!getContext().getSqlUtilities().TabPageIsEmpy(factsheet.getSiteObject().getIdNatureObject().toString(), "SITES",
+                        dbtabs[i][0])) {
+                    tabsWithData.add(new Pair<String, String>(dbtabs[i][1], getContentManagement().cmsPhrase(tabs[i])));
+                }
+            }
 		
-			sdb = SitesSearchUtility.translateSourceDB(factsheet.getSiteObject().getSourceDB());
-		}
-		return new ForwardResolution("/stripes/sites-factsheet.layout.jsp");
-	}
+            sdb = SitesSearchUtility.translateSourceDB(factsheet.getSiteObject().getSourceDB());
+        }
+        return new ForwardResolution("/stripes/sites-factsheet.layout.jsp");
+    }
 	
-	/** 
-	 * @see eionet.eunis.stripes.actions.RdfAware#generateRdf()
-	 * {@inheritDoc}
-	 */
-	public Resolution generateRdf() {
-		SiteFactsheet factsheet = new SiteFactsheet(idsite);
-		if (factsheet.exists()) {
-			Mapper mapper = DozerBeanMapperSingletonWrapper.getInstance();
-			SiteFactsheetDto dto = mapper
-					.map(factsheet, SiteFactsheetDto.class);
-			dto.setAttributes(
-					DaoFactory.getDaoFactory().getSitesDao().getAttributes(
-							factsheet.getSiteObject().getIdSite()));
-			dto.setDcmitype(new ResourceDto("","http://purl.org/dc/dcmitype/Text"));
-			if (dto.getIdDc() != null && !"-1".equals(dto.getIdDc().getId())) {
-				dto.getIdDc().setPrefix("http://eunis.eea.europa.eu/documents/");
-			} else {
-				dto.setIdDc(null);
-			}
-			if (dto.getIdDesignation() != null && dto.getIdDesignation().getId() != null && factsheet.getSiteObject().getIdGeoscope() != null) {
-				String idDesig = dto.getIdDesignation().getId();
-				Integer idGeo = factsheet.getSiteObject().getIdGeoscope();
-				String newId = idGeo.toString()+":"+idDesig;
+    /**
+     * @see eionet.eunis.stripes.actions.RdfAware#generateRdf()
+     * {@inheritDoc}
+     */
+    public Resolution generateRdf() {
+        SiteFactsheet factsheet = new SiteFactsheet(idsite);
+
+        if (factsheet.exists()) {
+            Mapper mapper = DozerBeanMapperSingletonWrapper.getInstance();
+            SiteFactsheetDto dto = mapper.map(factsheet, SiteFactsheetDto.class);
+
+            dto.setAttributes(DaoFactory.getDaoFactory().getSitesDao().getAttributes(factsheet.getSiteObject().getIdSite()));
+            dto.setDcmitype(new ResourceDto("", "http://purl.org/dc/dcmitype/Text"));
+            if (dto.getIdDc() != null && !"-1".equals(dto.getIdDc().getId())) {
+                dto.getIdDc().setPrefix("http://eunis.eea.europa.eu/documents/");
+            } else {
+                dto.setIdDc(null);
+            }
+            if (dto.getIdDesignation() != null && dto.getIdDesignation().getId() != null
+                    && factsheet.getSiteObject().getIdGeoscope() != null) {
+                String idDesig = dto.getIdDesignation().getId();
+                Integer idGeo = factsheet.getSiteObject().getIdGeoscope();
+                String newId = idGeo.toString() + ":" + idDesig;
 				
-				dto.getIdDesignation().setId(newId);
-				dto.getIdDesignation().setPrefix("http://eunis.eea.europa.eu/designations/");
-			} else {
-				dto.setIdDesignation(null);
-			}
-			return new StreamingResolution(
-					"application/rdf+xml",
-					SimpleFrameworkUtils.convertToString(HEADER, dto, FOOTER));
-		} else {
-			return new ErrorResolution(404);
-		}
-	}
+                dto.getIdDesignation().setId(newId);
+                dto.getIdDesignation().setPrefix("http://eunis.eea.europa.eu/designations/");
+            } else {
+                dto.setIdDesignation(null);
+            }
+            return new StreamingResolution("application/rdf+xml", SimpleFrameworkUtils.convertToString(HEADER, dto, FOOTER));
+        } else {
+            return new ErrorResolution(404);
+        }
+    }
 
-	/**
-	 * @return the idsite
-	 */
-	public String getIdsite() {
-		return idsite;
-	}
+    /**
+     * @return the idsite
+     */
+    public String getIdsite() {
+        return idsite;
+    }
 
-	/**
-	 * @param idsite the idsite to set
-	 */
-	public void setIdsite(String idsite) {
-		this.idsite = idsite;
-	}
+    /**
+     * @param idsite the idsite to set
+     */
+    public void setIdsite(String idsite) {
+        this.idsite = idsite;
+    }
 
-	/**
-	 * @return the factsheet
-	 */
-	public SiteFactsheet getFactsheet() {
-		return factsheet;
-	}
+    /**
+     * @return the factsheet
+     */
+    public SiteFactsheet getFactsheet() {
+        return factsheet;
+    }
 
-	/**
-	 * @return the tabs
-	 */
-	public String[] getTabs() {
-		return tabs;
-	}
+    /**
+     * @return the tabs
+     */
+    public String[] getTabs() {
+        return tabs;
+    }
 
-	/**
-	 * @return the dbtabs
-	 */
-	public String[][] getDbtabs() {
-		return dbtabs;
-	}
+    /**
+     * @return the dbtabs
+     */
+    public String[][] getDbtabs() {
+        return dbtabs;
+    }
 
-	/**
-	 * @return the sdb
-	 */
-	public String getSdb() {
-		return sdb;
-	}
+    /**
+     * @return the sdb
+     */
+    public String getSdb() {
+        return sdb;
+    }
 
-	/**
-	 * @return the btrail
-	 */
-	public String getBtrail() {
-		return btrail;
-	}
+    /**
+     * @return the btrail
+     */
+    public String getBtrail() {
+        return btrail;
+    }
 
-	/**
-	 * @return the pageTitle
-	 */
-	public String getPageTitle() {
-		return pageTitle;
-	}
+    /**
+     * @return the pageTitle
+     */
+    public String getPageTitle() {
+        return pageTitle;
+    }
 
-	/**
-	 * @return the metaDescription
-	 */
-	public String getMetaDescription() {
-		return metaDescription;
-	}
+    /**
+     * @return the metaDescription
+     */
+    public String getMetaDescription() {
+        return metaDescription;
+    }
 
-	/**
-	 * @return the tab
-	 */
-	public String getTab() {
-		return tab;
-	}
+    /**
+     * @return the tab
+     */
+    public String getTab() {
+        return tab;
+    }
 
-	/**
-	 * @param tab the tab to set
-	 */
-	public void setTab(String tab) {
-		this.tab = tab;
-	}
+    /**
+     * @param tab the tab to set
+     */
+    public void setTab(String tab) {
+        this.tab = tab;
+    }
 
-	/**
-	 * @return the tabsWithData
-	 */
-	public List<Pair<String, String>> getTabsWithData() {
-		return tabsWithData;
-	}
+    /**
+     * @return the tabsWithData
+     */
+    public List<Pair<String, String>> getTabsWithData() {
+        return tabsWithData;
+    }
 
-	public String getMapType() {
-		return mapType;
-	}
+    public String getMapType() {
+        return mapType;
+    }
 
-	public void setMapType(String mapType) {
-		this.mapType = mapType;
-	}
+    public void setMapType(String mapType) {
+        this.mapType = mapType;
+    }
 
-	public String getZoom() {
-		return zoom;
-	}
+    public String getZoom() {
+        return zoom;
+    }
 
-	public void setZoom(String zoom) {
-		this.zoom = zoom;
-	}
+    public void setZoom(String zoom) {
+        this.zoom = zoom;
+    }
 
 }

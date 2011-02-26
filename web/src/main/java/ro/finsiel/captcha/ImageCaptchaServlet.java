@@ -1,5 +1,6 @@
 package ro.finsiel.captcha;
 
+
 import com.octo.captcha.service.CaptchaServiceException;
 
 import javax.imageio.ImageIO;
@@ -14,9 +15,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 
-
 public class ImageCaptchaServlet extends HttpServlet {
-
 
     public void init(ServletConfig servletConfig) throws ServletException {
 
@@ -24,21 +23,20 @@ public class ImageCaptchaServlet extends HttpServlet {
 
     }
 
-
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
-        
-       byte[] captchaChallengeAsJpeg = null;
-       // the output stream to render the captcha image as jpeg into
+
+        byte[] captchaChallengeAsJpeg = null;
+        // the output stream to render the captcha image as jpeg into
         ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
+
         try {
-        // get the session id that will identify the generated captcha. 
-        //the same id must be used to validate the response, the session id is a good candidate!
-        String captchaId = httpServletRequest.getSession().getId();
-        // call the ImageCaptchaService getChallenge method
-            BufferedImage challenge =
-                    CaptchaServiceSingleton.getInstance().getImageChallengeForID(captchaId,
-                            httpServletRequest.getLocale());
-            
+            // get the session id that will identify the generated captcha.
+            // the same id must be used to validate the response, the session id is a good candidate!
+            String captchaId = httpServletRequest.getSession().getId();
+            // call the ImageCaptchaService getChallenge method
+            BufferedImage challenge = CaptchaServiceSingleton.getInstance().getImageChallengeForID(captchaId,
+                    httpServletRequest.getLocale());
+
             // a jpeg encoder
             ImageIO.write(challenge, "jpg", jpegOutputStream);
         } catch (IllegalArgumentException e) {
@@ -56,8 +54,8 @@ public class ImageCaptchaServlet extends HttpServlet {
         httpServletResponse.setHeader("Pragma", "no-cache");
         httpServletResponse.setDateHeader("Expires", 0);
         httpServletResponse.setContentType("image/jpeg");
-        ServletOutputStream responseOutputStream =
-                httpServletResponse.getOutputStream();
+        ServletOutputStream responseOutputStream = httpServletResponse.getOutputStream();
+
         responseOutputStream.write(captchaChallengeAsJpeg);
         responseOutputStream.flush();
         responseOutputStream.close();

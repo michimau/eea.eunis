@@ -20,34 +20,35 @@
  */
 package eionet.eunis.stripes.extensions;
 
+
 /**
  * 
  * @author <a href="mailto:risto.alt@tieto.com">Risto Alt</a>
  *
  */
-public class LoadException extends RuntimeException{
+public class LoadException extends RuntimeException {
 
-	/**
-	 * 
-	 */
-	public LoadException(){
-		super();
-	}
+    /**
+     * 
+     */
+    public LoadException() {
+        super();
+    }
 	
-	/**
-	 * 
-	 * @param message
-	 */
-	public LoadException(String message){
-		super(message);
-	}
+    /**
+     * 
+     * @param message
+     */
+    public LoadException(String message) {
+        super(message);
+    }
 
-	/**
-	 * 
-	 * @param message
-	 * @param cause
-	 */
-	public LoadException(String message, Throwable cause){
-		super(message, cause);
-	}
+    /**
+     * 
+     * @param message
+     * @param cause
+     */
+    public LoadException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

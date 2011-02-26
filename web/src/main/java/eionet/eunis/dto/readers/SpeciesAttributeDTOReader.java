@@ -1,5 +1,6 @@
 package eionet.eunis.dto.readers;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -10,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import ro.finsiel.eunis.utilities.ResultSetBaseReader;
 import eionet.eunis.dto.AttributeDto;
 
+
 /**
  * Reader class for {@link AttributeDto}.
  * @author alex
@@ -18,25 +20,21 @@ import eionet.eunis.dto.AttributeDto;
  */
 public class SpeciesAttributeDTOReader extends ResultSetBaseReader<AttributeDto> {
 
-	
-	private List<AttributeDto> results = new LinkedList<AttributeDto>();
+    private List<AttributeDto> results = new LinkedList<AttributeDto>();
 
-	public void readRow(ResultSet rs) throws SQLException {
-		String name = rs.getString("NAME");
-		String object = rs.getString("OBJECT");
-		Boolean litObject = rs.getBoolean("LITOBJECT");
-		if (StringUtils.isBlank(name)) {
-			return;
-		}
-		results.add(
-				new AttributeDto(
-						name,
-						litObject,
-						object));
-	}
+    public void readRow(ResultSet rs) throws SQLException {
+        String name = rs.getString("NAME");
+        String object = rs.getString("OBJECT");
+        Boolean litObject = rs.getBoolean("LITOBJECT");
 
-	public List<AttributeDto> getResultList() {
-		return results;
-	}
+        if (StringUtils.isBlank(name)) {
+            return;
+        }
+        results.add(new AttributeDto(name, litObject, object));
+    }
+
+    public List<AttributeDto> getResultList() {
+        return results;
+    }
 
 }

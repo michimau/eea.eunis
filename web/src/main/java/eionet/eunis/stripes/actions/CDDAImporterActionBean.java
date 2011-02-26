@@ -1,5 +1,6 @@
 package eionet.eunis.stripes.actions;
 
+
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,6 +17,7 @@ import ro.finsiel.eunis.utilities.SQLUtilities;
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.util.Constants;
 
+
 /**
  * Action bean to handle RDF export.
  * 
@@ -25,94 +27,107 @@ import eionet.eunis.util.Constants;
 @UrlBinding("/dataimport/importcdda")
 public class CDDAImporterActionBean extends AbstractStripesAction {
 	
-	private FileBean fileDesignations;
-	private FileBean fileSites;
-	private boolean updateCountrySitesFactsheet = false;
+    private FileBean fileDesignations;
+    private FileBean fileSites;
+    private boolean updateCountrySitesFactsheet = false;
 		
-	@DefaultHandler
-	public Resolution defaultAction() {
-		String forwardPage = "/stripes/cddaimporter.jsp";
-		setMetaDescription("Import National CDDA Sites and Designations");
-		return new ForwardResolution(forwardPage);
-	}
+    @DefaultHandler
+    public Resolution defaultAction() {
+        String forwardPage = "/stripes/cddaimporter.jsp";
+
+        setMetaDescription("Import National CDDA Sites and Designations");
+        return new ForwardResolution(forwardPage);
+    }
 	
-	public Resolution importCdda() {
+    public Resolution importCdda() {
 		
-		String forwardPage = "/stripes/cddaimporter.jsp";
-		setMetaDescription("Import National CDDA Sites and Designations");
-		if(getContext().getSessionManager().isAuthenticated() && getContext().getSessionManager().isImportExportData_RIGHT()){
-			Connection con = null;
-			InputStream inputStreamDesignations = null;
-			InputStream inputStreamSites = null;
+        String forwardPage = "/stripes/cddaimporter.jsp";
+
+        setMetaDescription("Import National CDDA Sites and Designations");
+        if (getContext().getSessionManager().isAuthenticated() && getContext().getSessionManager().isImportExportData_RIGHT()) {
+            Connection con = null;
+            InputStream inputStreamDesignations = null;
+            InputStream inputStreamSites = null;
 			
-			try{
+            try {
 				
-				SQLUtilities sqlUtil = getContext().getSqlUtilities();
-				con = sqlUtil.getConnection();
+                SQLUtilities sqlUtil = getContext().getSqlUtilities();
+
+                con = sqlUtil.getConnection();
 				
-				if (fileDesignations != null){
-					inputStreamDesignations = fileDesignations.getInputStream();
+                if (fileDesignations != null) {
+                    inputStreamDesignations = fileDesignations.getInputStream();
 					
-					DesignationsImportParser parser = new DesignationsImportParser(sqlUtil);
-					parser.execute(inputStreamDesignations);
-					fileDesignations.delete();
-					if(inputStreamDesignations!=null)
-						inputStreamDesignations.close();
-				}
+                    DesignationsImportParser parser = new DesignationsImportParser(sqlUtil);
+
+                    parser.execute(inputStreamDesignations);
+                    fileDesignations.delete();
+                    if (inputStreamDesignations != null) {
+                        inputStreamDesignations.close();
+                    }
+                }
 				
-				if (fileSites != null){
-					inputStreamSites = fileSites.getInputStream();
+                if (fileSites != null) {
+                    inputStreamSites = fileSites.getInputStream();
 					
-					CddaSitesImportParser parser = new CddaSitesImportParser(sqlUtil);
-					Map<String, String> sites = parser.execute(inputStreamSites);
-					fileSites.delete();
-					if(inputStreamSites!=null)
-						inputStreamSites.close();
+                    CddaSitesImportParser parser = new CddaSitesImportParser(sqlUtil);
+                    Map<String, String> sites = parser.execute(inputStreamSites);
+
+                    fileSites.delete();
+                    if (inputStreamSites != null) {
+                        inputStreamSites.close();
+                    }
 					
-					DaoFactory.getDaoFactory().getSitesDao().deleteSitesCdda(sites);
-					DaoFactory.getDaoFactory().getSitesDao().updateDesignationsTable();
-				}
+                    DaoFactory.getDaoFactory().getSitesDao().deleteSitesCdda(sites);
+                    DaoFactory.getDaoFactory().getSitesDao().updateDesignationsTable();
+                }
 
-				if(updateCountrySitesFactsheet)
-					DaoFactory.getDaoFactory().getSitesDao().updateCountrySitesFactsheet();
+                if (updateCountrySitesFactsheet) {
+                    DaoFactory.getDaoFactory().getSitesDao().updateCountrySitesFactsheet();
+                }
 				
-				showMessage("Successfully imported!");
+                showMessage("Successfully imported!");
 				
-			} catch(Exception e) {
-				e.printStackTrace();
-				handleEunisException(e.getMessage(), Constants.SEVERITY_ERROR);
-			} finally {
-				// close connection
-				try{ con.close(); } catch (SQLException se) { se.printStackTrace(); }
-			}
-		} else {
-			handleEunisException("You are not logged in or you do not have enough privileges to view this page!", Constants.SEVERITY_WARNING);
-		}
-		return new ForwardResolution(forwardPage);
-	}
+            } catch (Exception e) {
+                e.printStackTrace();
+                handleEunisException(e.getMessage(), Constants.SEVERITY_ERROR);
+            } finally {
+                // close connection
+                try {
+                    con.close();
+                } catch (SQLException se) {
+                    se.printStackTrace();
+                }
+            }
+        } else {
+            handleEunisException("You are not logged in or you do not have enough privileges to view this page!",
+                    Constants.SEVERITY_WARNING);
+        }
+        return new ForwardResolution(forwardPage);
+    }
 
-	public boolean isUpdateCountrySitesFactsheet() {
-		return updateCountrySitesFactsheet;
-	}
+    public boolean isUpdateCountrySitesFactsheet() {
+        return updateCountrySitesFactsheet;
+    }
 
-	public void setUpdateCountrySitesFactsheet(boolean updateCountrySitesFactsheet) {
-		this.updateCountrySitesFactsheet = updateCountrySitesFactsheet;
-	}
+    public void setUpdateCountrySitesFactsheet(boolean updateCountrySitesFactsheet) {
+        this.updateCountrySitesFactsheet = updateCountrySitesFactsheet;
+    }
 
-	public FileBean getFileDesignations() {
-		return fileDesignations;
-	}
+    public FileBean getFileDesignations() {
+        return fileDesignations;
+    }
 
-	public void setFileDesignations(FileBean fileDesignations) {
-		this.fileDesignations = fileDesignations;
-	}
+    public void setFileDesignations(FileBean fileDesignations) {
+        this.fileDesignations = fileDesignations;
+    }
 
-	public FileBean getFileSites() {
-		return fileSites;
-	}
+    public FileBean getFileSites() {
+        return fileSites;
+    }
 
-	public void setFileSites(FileBean fileSites) {
-		this.fileSites = fileSites;
-	}
+    public void setFileSites(FileBean fileSites) {
+        this.fileSites = fileSites;
+    }
 
 }

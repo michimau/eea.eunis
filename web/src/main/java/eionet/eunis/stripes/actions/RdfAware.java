@@ -1,6 +1,8 @@
 package eionet.eunis.stripes.actions;
 
+
 import net.sourceforge.stripes.action.Resolution;
+
 
 /**
  * Interface to mark that ActionBean is able to generate RDF.
@@ -10,12 +12,12 @@ import net.sourceforge.stripes.action.Resolution;
  */
 public interface RdfAware {
 	
-	public static final String RDF_GENERATING_METHOD = "generateRdf";
+    public static final String RDF_GENERATING_METHOD = "generateRdf";
 	
-	/**
-	 * generates RDF.
-	 * @return
-	 */
-	Resolution generateRdf();
+    /**
+     * generates RDF.
+     * @return
+     */
+    Resolution generateRdf();
 
 }

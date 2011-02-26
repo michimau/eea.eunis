@@ -344,21 +344,27 @@ public final class Utilities {
         imgTag.append("<img border=\"0\" align=\"middle\" src=\"");
         imgTag.append(IMG_SORT_BASE);
         if (null != sortCriteria) {
-            if (0 == sortCriteria.getAscendency().compareTo(AbstractSortCriteria.ASCENDENCY_ASC)) {
+            if (0
+                    == sortCriteria.getAscendency().compareTo(
+                            AbstractSortCriteria.ASCENDENCY_ASC)) {
                 imgTag.append(IMG_SORT_ASCENDING);
                 imgTag.append(
                         "\" title=\"Results are sorted ascending by this column\" alt=\"Results are sorted ascending by this column\" ");
-            } else if (0 == sortCriteria.getAscendency().compareTo(AbstractSortCriteria.ASCENDENCY_DESC)) {
+            } else if (0
+                    == sortCriteria.getAscendency().compareTo(
+                            AbstractSortCriteria.ASCENDENCY_DESC)) {
                 imgTag.append(IMG_SORT_DESCENDING);
                 imgTag.append(
                         "\" alt=\"Results are sorted descending by this column\" title=\"Results are sorted descending by this column\" ");
             } else {
                 imgTag.append(IMG_SORT_UNSORTED);
-                imgTag.append("\" alt=\"Results are not sorted by this column\" title=\"Results are not sorted by this column\" ");
+                imgTag.append(
+                        "\" alt=\"Results are not sorted by this column\" title=\"Results are not sorted by this column\" ");
             }
         } else {
             imgTag.append(IMG_SORT_UNSORTED);
-            imgTag.append("\" alt=\"Results are not sorted by this column\" title=\"Results are not sorted by this column\" ");
+            imgTag.append(
+                    "\" alt=\"Results are not sorted by this column\" title=\"Results are not sorted by this column\" ");
         }
         imgTag.append(" />");
         return imgTag;
@@ -383,13 +389,15 @@ public final class Utilities {
             imgTag.append(IMG_SORT_ASCENDING);
             imgTag.append(
                     "\" title=\"Results are sorted ascending by this column\" alt=\"Results are sorted ascending by this column\" ");
-        } else if (0 == ascendency.compareTo(AbstractSortCriteria.ASCENDENCY_DESC)) {
+        } else if (0
+                == ascendency.compareTo(AbstractSortCriteria.ASCENDENCY_DESC)) {
             imgTag.append(IMG_SORT_DESCENDING);
             imgTag.append(
                     "\" alt=\"Results are sorted descending by this column\" title=\"Results are sorted descending by this column\" ");
         } else {
             imgTag.append(IMG_SORT_UNSORTED);
-            imgTag.append("\" alt=\"Results are not sorted by this column\" title=\"Results are not sorted by this column\" ");
+            imgTag.append(
+                    "\" alt=\"Results are not sorted by this column\" title=\"Results are not sorted by this column\" ");
         }
         imgTag.append(" />");
         return imgTag;
@@ -760,7 +768,8 @@ public final class Utilities {
                 }
             }
         } catch (IllegalArgumentException iagex) {
-            logger.warn("formatReferencesDate(): An IllegalArgumetnException occurred during the parse of the date. Returning ''");
+            logger.warn(
+                    "formatReferencesDate(): An IllegalArgumetnException occurred during the parse of the date. Returning ''");
             return "";
         }
         return dt;
@@ -785,7 +794,8 @@ public final class Utilities {
         // Check param validity and log errors
         if (null == paramName || null == paramValue || null == oper) {
             logger.warn(
-                    "prepareSQLOperator('" + paramName + "', '" + paramValue + "', " + oper
+                    "prepareSQLOperator('" + paramName + "', '" + paramValue
+                    + "', " + oper
                     + "): null parameters. Returning EMPTY STRING!");
             logger.warn("debugOperator returned: " + debugOperator(oper));
             return sql;
@@ -816,7 +826,9 @@ public final class Utilities {
             branch = true;
         }
         if (!branch) {
-            logger.warn("::prepareSQLOperator(" + paramName + ", " + paramValue + ", " + oper + "): No branch hit!");
+            logger.warn(
+                    "::prepareSQLOperator(" + paramName + ", " + paramValue
+                    + ", " + oper + "): No branch hit!");
         }
         return sql;
     }
@@ -835,7 +847,10 @@ public final class Utilities {
     public static StringBuffer prepareSQLOperator(String paramName, String paramValue, String paramValueMin, String paramValueMax, Integer oper) {
         StringBuffer sql = new StringBuffer();
 
-        if (null == paramName || (null == paramValue && (null == paramValueMin && null == paramValueMax)) || null == oper) {
+        if (null == paramName
+                || (null == paramValue
+                        && (null == paramValueMin && null == paramValueMax))
+                        || null == oper) {
             logger.warn(
                     "prepareSQLOperator(String, String, String, String, Integer): one of the parameters was null. Returning EMPTY STRING!");
             return sql;
@@ -884,7 +899,8 @@ public final class Utilities {
         }
         if (!branch) {
             logger.warn(
-                    "Warning: prepareSQLOperator(" + paramName + ", " + paramValue + ", " + paramValueMin + ", " + paramValueMax
+                    "Warning: prepareSQLOperator(" + paramName + ", "
+                    + paramValue + ", " + paramValueMin + ", " + paramValueMax
                     + ", " + oper + "): No branch hit!");
         }
         return sql;
@@ -931,7 +947,9 @@ public final class Utilities {
             branch = true;
         }
         if (!branch) {
-            logger.warn("::prepareHumanString(" + paramName + ", " + paramValue + ", " + oper + "): No branch hit!");
+            logger.warn(
+                    "::prepareHumanString(" + paramName + ", " + paramValue
+                    + ", " + oper + "): No branch hit!");
             logger.warn("::debugOperator returned: " + debugOperator(oper));
         }
         return humanStr;
@@ -984,8 +1002,9 @@ public final class Utilities {
         }
         if (!branch) {
             logger.warn(
-                    "::prepareHumanString(" + paramName + ", " + paramValue + ", " + paramValueMin + ", " + paramValueMax + ", "
-                    + oper + "): No branch hit!");
+                    "::prepareHumanString(" + paramName + ", " + paramValue
+                    + ", " + paramValueMin + ", " + paramValueMax + ", " + oper
+                    + "): No branch hit!");
             logger.warn("::debugOperator returned: " + debugOperator(oper));
         }
         return humanStr;
@@ -1038,8 +1057,9 @@ public final class Utilities {
         }
         if (!branch) {
             logger.warn(
-                    "Warning: prepareHumanStringForPlural(" + paramName + ", " + paramValue + ", " + paramValueMin + ", "
-                    + paramValueMax + ", " + oper + "): No branch hit!");
+                    "Warning: prepareHumanStringForPlural(" + paramName + ", "
+                    + paramValue + ", " + paramValueMin + ", " + paramValueMax
+                    + ", " + oper + "): No branch hit!");
             logger.warn("debugOperator returned: " + debugOperator(oper));
         }
         return humanStr;
@@ -1091,7 +1111,8 @@ public final class Utilities {
      */
     public static String getGroupName(String idGroupSpecies) {
         String ret = null;
-        List list = new Chm62edtGroupspeciesDomain().findWhere("ID_GROUP_SPECIES ='" + idGroupSpecies + "'");
+        List list = new Chm62edtGroupspeciesDomain().findWhere(
+                "ID_GROUP_SPECIES ='" + idGroupSpecies + "'");
 
         if (list != null && !list.isEmpty()) {
             ret = ((Chm62edtGroupspeciesPersist) list.get(0)).getCommonName();
@@ -1101,7 +1122,8 @@ public final class Utilities {
 
     public static String getIdGroupSpeciesByGroupName(String groupName) {
         String ret = null;
-        List list = new Chm62edtGroupspeciesDomain().findWhere("COMMON_NAME ='" + groupName + "'");
+        List list = new Chm62edtGroupspeciesDomain().findWhere(
+                "COMMON_NAME ='" + groupName + "'");
 
         if (list != null && !list.isEmpty()) {
             ret = ((Chm62edtGroupspeciesPersist) list.get(0)).getIdGroupspecies().toString();
@@ -1118,7 +1140,8 @@ public final class Utilities {
      */
     public static String getConservationName(String id) {
         String s = null;
-        List l1 = new Chm62edtConservationStatusDomain().findWhere("ID_CONSERVATION_STATUS ='" + id + "'");
+        List l1 = new Chm62edtConservationStatusDomain().findWhere(
+                "ID_CONSERVATION_STATUS ='" + id + "'");
 
         if (l1 != null && l1.size() > 0) {
             s = ((Chm62edtConservationStatusPersist) l1.get(0)).getName();
@@ -1227,15 +1250,18 @@ public final class Utilities {
             }
             sql += "AND ( ";
             if (useTerm) {
-                sql += Utilities.prepareSQLOperator(" TERM ", searchString, operand);
+                sql += Utilities.prepareSQLOperator(" TERM ", searchString,
+                        operand);
                 sql += (useDef) ? " OR " : " ) ";
             }
             if (useDef) {
-                sql += Utilities.prepareSQLOperator(" DEFINITION ", searchString, operand);
+                sql += Utilities.prepareSQLOperator(" DEFINITION ", searchString,
+                        operand);
                 sql += " ) ";
             }
             try {
-                list = new Chm62edtGlossaryDomain().findWhere(sql + " ORDER BY TERM");
+                list = new Chm62edtGlossaryDomain().findWhere(
+                        sql + " ORDER BY TERM");
             } catch (Exception _ex) {
                 _ex.printStackTrace(System.err);
             } finally {
@@ -1292,7 +1318,9 @@ public final class Utilities {
         if (null != array) {
             result = new String[array.length];
             for (int i = array.length - 1; i >= 0; i--) {
-                result[ i ] = (null != array[ i ]) ? array[ i ].trim() : array[ i ];
+                result[ i ] = (null != array[ i ])
+                        ? array[ i ].trim()
+                        : array[ i ];
             }
         }
         return result;
@@ -1348,17 +1376,19 @@ public final class Utilities {
         String dom = (Utilities.prepareSQLOperator("H.SCIENTIFIC_NAME", search, Utilities.checkedStringToInt(op, Utilities.OPERATOR_CONTAINS))).toString();
 
         List l1 = new HabitatNatureObjectReportTypeDomain().findWhere(
-                "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND B.ID_NATURE_OBJECT_LINK IS NULL AND " + dom
-                + " GROUP BY H.ID_HABITAT");
+                "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND B.ID_NATURE_OBJECT_LINK IS NULL AND "
+                        + dom + " GROUP BY H.ID_HABITAT");
         List l2 = new HabitatNatureObjectGeoscopeDomain().findWhere(
-                "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND B.ID_NATURE_OBJECT_LINK IS NULL AND " + dom
-                + " GROUP BY H.ID_HABITAT");
+                "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND B.ID_NATURE_OBJECT_LINK IS NULL AND "
+                        + dom + " GROUP BY H.ID_HABITAT");
         List l3 = new CommonRecordsDomain().findWhere(
-                "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND " + dom + " GROUP BY H.ID_HABITAT");
+                "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND " + dom
+                + " GROUP BY H.ID_HABITAT");
 
         if (l1 != null) {
             for (int i = 0; i < l1.size(); i++) {
-                HabitatNatureObjectReportTypePersist s1 = (HabitatNatureObjectReportTypePersist) l1.get(i);
+                HabitatNatureObjectReportTypePersist s1 = (HabitatNatureObjectReportTypePersist) l1.get(
+                        i);
 
                 if (useLimit) {
                     if (v.size() < Utilities.MAX_POPUP_RESULTS) {
@@ -1372,7 +1402,8 @@ public final class Utilities {
 
         if (l2 != null) {
             for (int i = 0; i < l2.size(); i++) {
-                HabitatNatureObjectGeoscopePersist s2 = (HabitatNatureObjectGeoscopePersist) l2.get(i);
+                HabitatNatureObjectGeoscopePersist s2 = (HabitatNatureObjectGeoscopePersist) l2.get(
+                        i);
 
                 if (useLimit) {
                     if (v.size() < Utilities.MAX_POPUP_RESULTS) {
@@ -1449,12 +1480,14 @@ public final class Utilities {
                 leftLen = (input.substring(0, pos)).length();
                 rightLen = (input.substring(pos + 1)).length();
 
-                String leftString = spaces(left - leftLen, blank) + input.substring(0, pos);
+                String leftString = spaces(left - leftLen, blank)
+                        + input.substring(0, pos);
                 // String rightString = (input.substring(pos  + 1) + spaces(right - rightLen, blank)).substring(0, 3);
                 String rightString;
 
                 if (right > rightLen) {
-                    rightString = input.substring(pos + 1).substring(0, rightLen) + spaces(right - rightLen, blank);
+                    rightString = input.substring(pos + 1).substring(0, rightLen)
+                            + spaces(right - rightLen, blank);
                 } else {
                     rightString = input.substring(pos + 1).substring(0, right);
                 }
@@ -1498,8 +1531,10 @@ public final class Utilities {
                 leftLen = (input.substring(0, pos)).length();
                 rightLen = (input.substring(pos + 1)).length();
 
-                String leftString = spaces(left - leftLen, blank) + input.substring(0, pos);
-                String rightString = (input.substring(pos + 1) + spaces(right - rightLen, blank)).substring(0, 3);
+                String leftString = spaces(left - leftLen, blank)
+                        + input.substring(0, pos);
+                String rightString = (input.substring(pos + 1) + spaces(right - rightLen, blank)).substring(
+                        0, 3);
 
                 result = leftString + "." + rightString;
             } else {
@@ -1525,7 +1560,8 @@ public final class Utilities {
     public static String findCountryByISO(String iso) {
         if (iso != null && !iso.equalsIgnoreCase("")) {
             List countries = new Chm62edtCountryDomain().findWhere(
-                    "ISO_3L IS NOT NULL AND TRIM(ISO_3L) <>'' AND ISO_3L ='" + iso + "'");
+                    "ISO_3L IS NOT NULL AND TRIM(ISO_3L) <>'' AND ISO_3L ='"
+                            + iso + "'");
 
             if (countries != null && countries.size() > 0) {
                 return ((Chm62edtCountryPersist) countries.get(0)).getAreaNameEnglish();
@@ -1546,7 +1582,8 @@ public final class Utilities {
      */
     public static String findCountryByIdGeoscope(String idGeoscope) {
         if (idGeoscope != null && !idGeoscope.equalsIgnoreCase("")) {
-            List countries = new Chm62edtCountryDomain().findWhere("ID_GEOSCOPE IS NOT NULL AND ID_GEOSCOPE =" + idGeoscope);
+            List countries = new Chm62edtCountryDomain().findWhere(
+                    "ID_GEOSCOPE IS NOT NULL AND ID_GEOSCOPE =" + idGeoscope);
 
             if (countries != null && countries.size() > 0) {
                 return ((Chm62edtCountryPersist) countries.get(0)).getAreaNameEnglish();
@@ -1567,7 +1604,8 @@ public final class Utilities {
      */
     public static String getCountryName(String idCountry) {
         if (idCountry != null && idCountry.trim().length() > 0) {
-            List countries = new Chm62edtCountryDomain().findWhere("ID_COUNTRY = " + idCountry);
+            List countries = new Chm62edtCountryDomain().findWhere(
+                    "ID_COUNTRY = " + idCountry);
 
             if (countries != null && countries.size() > 0) {
                 return ((Chm62edtCountryPersist) countries.get(0)).getAreaNameEnglish();
@@ -1609,9 +1647,12 @@ public final class Utilities {
             for (int i = 0; i < source_db.length; i++) {
                 if (source_db[ i ]) {
                     if (putOR) {
-                        filterSQL.append(" or " + alias + ".SOURCE_DB = '" + db[ i ] + "' ");
+                        filterSQL.append(
+                                " or " + alias + ".SOURCE_DB = '" + db[ i ]
+                                + "' ");
                     } else {
-                        filterSQL.append(" " + alias + ".SOURCE_DB = '" + db[ i ] + "' ");
+                        filterSQL.append(
+                                " " + alias + ".SOURCE_DB = '" + db[ i ] + "' ");
                     }
                     putOR = true;
                 }
@@ -1626,9 +1667,11 @@ public final class Utilities {
             filterSQL.append(" ( ");
             for (int i = 0; i < source_db.length; i++) {
                 if (i > 0) {
-                    filterSQL.append(" and " + alias + ".SOURCE_DB <> '" + db[ i ] + "' ");
+                    filterSQL.append(
+                            " and " + alias + ".SOURCE_DB <> '" + db[ i ] + "' ");
                 } else {
-                    filterSQL.append(" " + alias + ".SOURCE_DB <> '" + db[ i ] + "' ");
+                    filterSQL.append(
+                            " " + alias + ".SOURCE_DB <> '" + db[ i ] + "' ");
                 }
             }
 
@@ -1794,15 +1837,18 @@ public final class Utilities {
         Vector result = new Vector();
 
         try {
-            List references = new ReferencesJoinDomain().findWhere("DC_INDEX.ID_DC = " + idDc);
+            List references = new ReferencesJoinDomain().findWhere(
+                    "DC_INDEX.ID_DC = " + idDc);
 
             if (references != null && references.size() > 0) {
-                author = (((ReferencesJoinPersist) references.get(0)).getSource() == null
-                        ? ""
-                        : ((ReferencesJoinPersist) references.get(0)).getSource());
-                url = (((ReferencesJoinPersist) references.get(0)).getUrl() == null
-                        ? ""
-                        : ((ReferencesJoinPersist) references.get(0)).getUrl());
+                author = (((ReferencesJoinPersist) references.get(0)).getSource()
+                        == null
+                                ? ""
+                                : ((ReferencesJoinPersist) references.get(0)).getSource());
+                url = (((ReferencesJoinPersist) references.get(0)).getUrl()
+                        == null
+                                ? ""
+                                : ((ReferencesJoinPersist) references.get(0)).getUrl());
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -1839,30 +1885,43 @@ public final class Utilities {
      * @return Return references tooltip for an nature object, giving its ID_DC.
      */
     public static String getReferencesByIdDc(String idDc) {
-        List references = new ReferencesJoinDomain().findWhere("DC_INDEX.ID_DC = '" + idDc + "'");
+        List references = new ReferencesJoinDomain().findWhere(
+                "DC_INDEX.ID_DC = '" + idDc + "'");
         String result = "";
 
         if (references != null && references.size() > 0) {
             result = "<ul>";
             result += "<li>Author : "
-                    + (((ReferencesJoinPersist) references.get(0)).getSource() == null
-                            ? ""
-                            : treatURLSpecialCharacters(removeQuotes(((ReferencesJoinPersist) references.get(0)).getSource())));
+                    + (((ReferencesJoinPersist) references.get(0)).getSource()
+                            == null
+                                    ? ""
+                                    : treatURLSpecialCharacters(
+                                            removeQuotes(
+                                                    ((ReferencesJoinPersist) references.get(0)).getSource())));
             result += "</li>";
             result += " <li>Title : "
-                    + (((ReferencesJoinPersist) references.get(0)).getTitle() == null
-                            ? ""
-                            : treatURLSpecialCharacters(removeQuotes(((ReferencesJoinPersist) references.get(0)).getTitle())));
+                    + (((ReferencesJoinPersist) references.get(0)).getTitle()
+                            == null
+                                    ? ""
+                                    : treatURLSpecialCharacters(
+                                            removeQuotes(
+                                                    ((ReferencesJoinPersist) references.get(0)).getTitle())));
             result += "</li>";
             result += " <li>Editor : "
-                    + (((ReferencesJoinPersist) references.get(0)).getEditor() == null
-                            ? ""
-                            : treatURLSpecialCharacters(removeQuotes(((ReferencesJoinPersist) references.get(0)).getEditor())));
+                    + (((ReferencesJoinPersist) references.get(0)).getEditor()
+                            == null
+                                    ? ""
+                                    : treatURLSpecialCharacters(
+                                            removeQuotes(
+                                                    ((ReferencesJoinPersist) references.get(0)).getEditor())));
             result += "</li>";
             result += " <li>Publisher : "
-                    + (((ReferencesJoinPersist) references.get(0)).getPublisher() == null
-                            ? ""
-                            : treatURLSpecialCharacters(removeQuotes(((ReferencesJoinPersist) references.get(0)).getPublisher())));
+                    + (((ReferencesJoinPersist) references.get(0)).getPublisher()
+                            == null
+                                    ? ""
+                                    : treatURLSpecialCharacters(
+                                            removeQuotes(
+                                                    ((ReferencesJoinPersist) references.get(0)).getPublisher())));
             result += "</li>";
             String date = "";
 
@@ -1872,14 +1931,17 @@ public final class Utilities {
             result += " <li>Date : " + date;
             result += "</li>";
             result += " <li>Url : "
-                    + (((ReferencesJoinPersist) references.get(0)).getUrl() == null
-                            ? ""
-                            : treatURLSpecialCharacters(((ReferencesJoinPersist) references.get(0)).getUrl()));
+                    + (((ReferencesJoinPersist) references.get(0)).getUrl()
+                            == null
+                                    ? ""
+                                    : treatURLSpecialCharacters(
+                                            ((ReferencesJoinPersist) references.get(0)).getUrl()));
             result += "</li>";
             result += "</ul>";
         }
 
-        result = result.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+        result = result.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(
+                ">", "&gt;");
         return result;
     }
 
@@ -2006,7 +2068,8 @@ public final class Utilities {
      */
     public static Integer getIdSpeciesByIdNatureObject(String idNO) {
         Integer id = new Integer(-1);
-        List species = new Chm62edtSpeciesDomain().findWhere("ID_NATURE_OBJECT='" + idNO + "'");
+        List species = new Chm62edtSpeciesDomain().findWhere(
+                "ID_NATURE_OBJECT='" + idNO + "'");
 
         if (species != null && species.size() > 0) {
             id = ((Chm62edtSpeciesPersist) species.get(0)).getIdSpecies();
@@ -2031,18 +2094,21 @@ public final class Utilities {
                 result = "OPERATOR_BETWEEN";
             } else if (operator.intValue() == OPERATOR_CONTAINS.intValue()) {
                 result = "OPERATOR_CONTAINS";
-            } else if (operator.intValue() == OPERATOR_GREATER_OR_EQUAL.intValue()) {
+            } else if (operator.intValue()
+                    == OPERATOR_GREATER_OR_EQUAL.intValue()) {
                 result = "OPERATOR_GREATER_OR_EQUAL";
             } else if (operator.intValue() == OPERATOR_IS.intValue()) {
                 result = "OPERATOR_IS";
             } else if (operator.intValue() == OPERATOR_IS_NOT.intValue()) {
                 result = "OPERATOR_IS_NOT";
-            } else if (operator.intValue() == OPERATOR_SMALLER_OR_EQUAL.intValue()) {
+            } else if (operator.intValue()
+                    == OPERATOR_SMALLER_OR_EQUAL.intValue()) {
                 result = "OPERATOR_SMALLER_OR_EQUAL";
             } else if (operator.intValue() == OPERATOR_STARTS.intValue()) {
                 result = "OPERATOR_STARTS";
             } else {
-                result = "Operator '" + operator + "'" + " is not defined as valid operator.";
+                result = "Operator '" + operator + "'"
+                        + " is not defined as valid operator.";
             }
         }
         return result;
@@ -2128,7 +2194,9 @@ public final class Utilities {
      * @return HTML string content.
      */
     public static String getTextWarningForPopup(int size) {
-        String result = "" + "<strong>Warning: Database might not contains data for all values!</strong> " + "<br /> " + " ";
+        String result = ""
+                + "<strong>Warning: Database might not contains data for all values!</strong> "
+                + "<br /> " + " ";
 
         // if (size > 100)
         // result += "<strong>Note:</strong> Only the first " + Utilities.MAX_POPUP_RESULTS + " values were displayed. Please refine the search criteria. " +
@@ -2138,8 +2206,12 @@ public final class Utilities {
     }
 
     public static String getTextWarningForPopup(WebContentManagement cm, int size) {
-        String result = "" + "<strong>" + cm.cmsPhrase("Warning: Database might not contain data for all values!") + "</strong> "
-                + "<br /> " + " ";
+        String result = "" + "<strong>"
+                + cm.cmsPhrase(
+                "Warning: Database might not contain data for all values!")
+                + "</strong> "
+                + "<br /> "
+                + " ";
 
         // if (size > 100)
         // result += "<strong>Note:</strong> Only the first " + Utilities.MAX_POPUP_RESULTS + " values were displayed. Please refine the search criteria. " +
@@ -2154,10 +2226,14 @@ public final class Utilities {
      * @return HTML string content.
      */
     public static String getAdvancedTextWarningForPopup(int size) {
-        String result = "" + "<strong>Warning: Database might not contains data for all values!</strong> " + "<br /> " + " ";
+        String result = ""
+                + "<strong>Warning: Database might not contains data for all values!</strong> "
+                + "<br /> " + " ";
 
         if (size > 100) {
-            result += "<strong>Note:</strong> Only the first " + Utilities.MAX_POPUP_RESULTS + " values are displayed.<br /><br />";
+            result += "<strong>Note:</strong> Only the first "
+                    + Utilities.MAX_POPUP_RESULTS
+                    + " values are displayed.<br /><br />";
         } else {
             result += "<br />";
         }
@@ -2206,8 +2282,10 @@ public final class Utilities {
      */
     public static String getTextMaxLimitForPopup(int size) {
         String result = (size >= Utilities.MAX_POPUP_RESULTS
-                ? "" + "<br /> " + "<strong>Note:</strong> Only the first " + Utilities.MAX_POPUP_RESULTS
-                + " values were displayed. Please refine the search criteria. " + "<br /><br /> "
+                ? "" + "<br /> " + "<strong>Note:</strong> Only the first "
+                + Utilities.MAX_POPUP_RESULTS
+                + " values were displayed. Please refine the search criteria. "
+                + "<br /><br /> "
                 : "<br />");
 
         return result;
@@ -2215,16 +2293,20 @@ public final class Utilities {
 
     public static String getTextMaxLimitForPopup(WebContentManagement cm, int size) {
         String result = (size >= Utilities.MAX_POPUP_RESULTS
-                ? "<br /> " + cm.cmsPhrase("<strong>Note:</strong> Only first") + " " + Utilities.MAX_POPUP_RESULTS + " "
-                + cm.cmsPhrase(" values were displayed. Please refine the search criteria.") + "<br /><br /> "
-                : "<br />");
+                ? "<br /> " + cm.cmsPhrase("<strong>Note:</strong> Only first")
+                + " " + Utilities.MAX_POPUP_RESULTS + " "
+                + cm.cmsPhrase(
+                        " values were displayed. Please refine the search criteria.")
+                        + "<br /><br /> "
+                        : "<br />");
 
         return result;
     }
 
     public static java.sql.Timestamp stringToTimeStamp(String dataIn, String formatData) {
 
-        if (dataIn == null || dataIn.trim().length() <= 0 || formatData == null || formatData.trim().length() <= 0) {
+        if (dataIn == null || dataIn.trim().length() <= 0 || formatData == null
+                || formatData.trim().length() <= 0) {
             return null;
         }
         SimpleDateFormat sdf = new SimpleDateFormat(formatData);
@@ -2240,7 +2322,8 @@ public final class Utilities {
     }
 
     public static String formatDate(Date dataIn, String formatData) {
-        if (dataIn == null || dataIn.toString().trim().length() <= 0 || formatData == null || formatData.trim().length() <= 0) {
+        if (dataIn == null || dataIn.toString().trim().length() <= 0
+                || formatData == null || formatData.trim().length() <= 0) {
             return "";
         }
         try {
@@ -2322,45 +2405,89 @@ public final class Utilities {
         String result = "";
         boolean isGood = false;
 
-        result += "<tr><th scope=\"row\">" + contentManagement.cmsPhrase("No. of sites") + "</th>" + "<tr><th scope=\"row\">"
-                + contentManagement.cmsPhrase("No. of species") + "</th>" + "<tr><th scope=\"row\">"
-                + contentManagement.cmsPhrase("No. of habitat types") + "</th>" + "<tr><th scope=\"row\">"
-                + contentManagement.cmsPhrase("No. of sites/km2") + "</th>" + "<tr><th scope=\"row\">"
-                + contentManagement.cmsPhrase("Percent number of sites with surface data available") + "</th>"
-                + "<tr><th scope=\"row\">" + contentManagement.cmsPhrase("Total area (ha)") + "</th>" + "<tr><th scope=\"row\">"
-                + contentManagement.cmsPhrase("Average area(ha)") + "</th>" + "<tr><th scope=\"row\">"
-                + contentManagement.cmsPhrase("Standard deviation for sites area") + "</th>";
+        result += "<tr><th scope=\"row\">"
+                + contentManagement.cmsPhrase("No. of sites") + "</th>"
+                + "<tr><th scope=\"row\">"
+                + contentManagement.cmsPhrase("No. of species") + "</th>"
+                + "<tr><th scope=\"row\">"
+                + contentManagement.cmsPhrase("No. of habitat types") + "</th>"
+                + "<tr><th scope=\"row\">"
+                + contentManagement.cmsPhrase("No. of sites/km2") + "</th>"
+                + "<tr><th scope=\"row\">"
+                + contentManagement.cmsPhrase(
+                        "Percent number of sites with surface data available")
+                        + "</th>"
+                        + "<tr><th scope=\"row\">"
+                        + contentManagement.cmsPhrase("Total area (ha)")
+                        + "</th>"
+                        + "<tr><th scope=\"row\">"
+                        + contentManagement.cmsPhrase("Average area(ha)")
+                        + "</th>"
+                        + "<tr><th scope=\"row\">"
+                        + contentManagement.cmsPhrase(
+                                "Standard deviation for sites area")
+                                + "</th>";
 
         for (int i = 0; i < factList.size(); i++) {
-            CountrySitesFactsheetPersist site = (CountrySitesFactsheetPersist) factList.get(i);
+            CountrySitesFactsheetPersist site = (CountrySitesFactsheetPersist) factList.get(
+                    i);
 
             String[] splitResult = result.split("<tr>");
 
             if (splitResult != null && splitResult.length == 9) {
-                splitResult[ 1 ] += "<td class=\"number\">" + Utilities.formatArea(site.getNumberOfSites(), 0, 2, "&nbsp;")
+                splitResult[ 1 ] += "<td class=\"number\">"
+                        + Utilities.formatArea(site.getNumberOfSites(), 0, 2,
+                        "&nbsp;")
                         + "</td>";
-                splitResult[ 2 ] += "<td class=\"number\">" + Utilities.formatArea(site.getNumberOfSpecies(), 0, 2, "&nbsp;")
+                splitResult[ 2 ] += "<td class=\"number\">"
+                        + Utilities.formatArea(site.getNumberOfSpecies(), 0, 2,
+                        "&nbsp;")
                         + "</td>";
-                splitResult[ 3 ] += "<td class=\"number\">" + Utilities.formatArea(site.getNumberOfHabitats(), 0, 2, "&nbsp;")
+                splitResult[ 3 ] += "<td class=\"number\">"
+                        + Utilities.formatArea(site.getNumberOfHabitats(), 0, 2,
+                        "&nbsp;")
                         + "</td>";
-                splitResult[ 4 ] += "<td class=\"number\">" + Utilities.formatArea(site.getPerSquare(), 0, 2, "&nbsp;") + "</td>";
-                splitResult[ 5 ] += "<td class=\"number\">" + Utilities.formatArea(site.getSurfaceAvailable(), 0, 2, "&nbsp;")
+                splitResult[ 4 ] += "<td class=\"number\">"
+                        + Utilities.formatArea(site.getPerSquare(), 0, 2,
+                        "&nbsp;")
                         + "</td>";
-                splitResult[ 6 ] += "<td class=\"number\">" + Utilities.formatArea(site.getTotalSize(), 0, 2, "&nbsp;") + "</td>";
-                splitResult[ 7 ] += "<td class=\"number\">" + Utilities.formatArea(site.getAvgSize(), 0, 2, "&nbsp;") + "</td>";
-                splitResult[ 8 ] += "<td class=\"number\">" + Utilities.formatArea(site.getDeviation(), 0, 2, "&nbsp;") + "</td>";
+                splitResult[ 5 ] += "<td class=\"number\">"
+                        + Utilities.formatArea(site.getSurfaceAvailable(), 0, 2,
+                        "&nbsp;")
+                        + "</td>";
+                splitResult[ 6 ] += "<td class=\"number\">"
+                        + Utilities.formatArea(site.getTotalSize(), 0, 2,
+                        "&nbsp;")
+                        + "</td>";
+                splitResult[ 7 ] += "<td class=\"number\">"
+                        + Utilities.formatArea(site.getAvgSize(), 0, 2, "&nbsp;")
+                        + "</td>";
+                splitResult[ 8 ] += "<td class=\"number\">"
+                        + Utilities.formatArea(site.getDeviation(), 0, 2,
+                        "&nbsp;")
+                        + "</td>";
 
                 if (i == factList.size() - 1) {
-                    result = "<tr class=\"zebraodd\">" + splitResult[ 1 ] + "</tr>" + "<tr class=\"zebraeven\">" + splitResult[ 2 ]
-                            + "</tr>" + "<tr class=\"zebraodd\">" + splitResult[ 3 ] + "</tr>" + "<tr class=\"zebraeven\">"
-                            + splitResult[ 4 ] + "</tr>" + "<tr class=\"zebraodd\">" + splitResult[ 5 ] + "</tr>"
-                            + "<tr class=\"zebraeven\">" + splitResult[ 6 ] + "</tr>" + "<tr class=\"zebraodd\">" + splitResult[ 7 ]
-                            + "</tr>" + "<tr class=\"zebraeven\">" + splitResult[ 8 ] + "</tr>";
+                    result = "<tr class=\"zebraodd\">" + splitResult[ 1 ]
+                            + "</tr>" + "<tr class=\"zebraeven\">"
+                            + splitResult[ 2 ] + "</tr>"
+                            + "<tr class=\"zebraodd\">" + splitResult[ 3 ]
+                            + "</tr>" + "<tr class=\"zebraeven\">"
+                            + splitResult[ 4 ] + "</tr>"
+                            + "<tr class=\"zebraodd\">" + splitResult[ 5 ]
+                            + "</tr>" + "<tr class=\"zebraeven\">"
+                            + splitResult[ 6 ] + "</tr>"
+                            + "<tr class=\"zebraodd\">" + splitResult[ 7 ]
+                            + "</tr>" + "<tr class=\"zebraeven\">"
+                            + splitResult[ 8 ] + "</tr>";
                     isGood = true;
                 } else {
-                    result = "<tr>" + splitResult[ 1 ] + "<tr>" + splitResult[ 2 ] + "<tr>" + splitResult[ 3 ] + "<tr>"
-                            + splitResult[ 4 ] + "<tr>" + splitResult[ 5 ] + "<tr>" + splitResult[ 6 ] + "<tr>" + splitResult[ 7 ]
-                            + "<tr>" + splitResult[ 8 ];
+                    result = "<tr>" + splitResult[ 1 ] + "<tr>"
+                            + splitResult[ 2 ] + "<tr>" + splitResult[ 3 ]
+                            + "<tr>" + splitResult[ 4 ] + "<tr>"
+                            + splitResult[ 5 ] + "<tr>" + splitResult[ 6 ]
+                            + "<tr>" + splitResult[ 7 ] + "<tr>"
+                            + splitResult[ 8 ];
                 }
             }
         }
@@ -2374,7 +2501,8 @@ public final class Utilities {
         List allCountries = CountryUtil.findAllCountries();
 
         for (int j = 0; j < allCountries.size(); j++) {
-            Chm62edtCountryPersist country = (Chm62edtCountryPersist) allCountries.get(j);
+            Chm62edtCountryPersist country = (Chm62edtCountryPersist) allCountries.get(
+                    j);
 
             if (result.trim().length() > 0) {
                 result += "|";
@@ -2389,7 +2517,8 @@ public final class Utilities {
         List allRegions = CountryUtil.findAllRegions();
 
         for (int j = 0; j < allRegions.size(); j++) {
-            Chm62edtBiogeoregionPersist region = (Chm62edtBiogeoregionPersist) allRegions.get(j);
+            Chm62edtBiogeoregionPersist region = (Chm62edtBiogeoregionPersist) allRegions.get(
+                    j);
 
             if (result.trim().length() > 0) {
                 result += "|";
@@ -2408,7 +2537,8 @@ public final class Utilities {
     }
 
     public static String getTaxonomicNameForASpecies(String idSpecies, String what, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
-        if (idSpecies == null || idSpecies.trim().length() <= 0 || what == null || what.trim().length() <= 0) {
+        if (idSpecies == null || idSpecies.trim().length() <= 0 || what == null
+                || what.trim().length() <= 0) {
             return "";
         }
         String result = "";
@@ -2425,8 +2555,11 @@ public final class Utilities {
         if (rez != null && rez.size() > 0) {
             TableColumns columns = (TableColumns) rez.get(0);
 
-            if (columns != null && columns.getColumnsValues() != null && columns.getColumnsValues().size() == 3) {
-                result = getTaxonomicName((String) columns.getColumnsValues().get(0), (String) columns.getColumnsValues().get(1),
+            if (columns != null && columns.getColumnsValues() != null
+                    && columns.getColumnsValues().size() == 3) {
+                result = getTaxonomicName(
+                        (String) columns.getColumnsValues().get(0),
+                        (String) columns.getColumnsValues().get(1),
                         (String) columns.getColumnsValues().get(2), what);
             }
         }
@@ -2450,7 +2583,8 @@ public final class Utilities {
                 String classification_level = sts.nextToken();
                 String classification_name = sts.nextToken();
 
-                if (classification_level != null && classification_level.equalsIgnoreCase(what)) {
+                if (classification_level != null
+                        && classification_level.equalsIgnoreCase(what)) {
                     result = classification_name;
                     break;
                 }
@@ -2488,8 +2622,8 @@ public final class Utilities {
         try {
             if (countryName != null && countryName.trim().length() > 0) {
                 List countries = new Chm62edtCountryDomain().findWhere(
-                        "ISO_2L<>'' AND ISO_2L<>'null' AND ISO_2L IS NOT NULL AND SELECTION <> 0 and AREA_NAME_EN ='" + countryName
-                        + "'");
+                        "ISO_2L<>'' AND ISO_2L<>'null' AND ISO_2L IS NOT NULL AND SELECTION <> 0 and AREA_NAME_EN ='"
+                                + countryName + "'");
 
                 if (countries != null && countries.size() > 0) {
                     return true;
@@ -2513,7 +2647,8 @@ public final class Utilities {
             try {
                 URL url = new URL(strURL);
 
-                in = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+                in = new BufferedReader(
+                        new InputStreamReader(url.openStream(), "UTF-8"));
                 String line;
 
                 while (((line = in.readLine()) != null)) {
@@ -2618,9 +2753,11 @@ public final class Utilities {
             strSQL = "SELECT CONCAT(NAME,' ','(',LEVEL,')') AS TITLE, ID_TAXONOMY AS ID";
             strSQL = strSQL + " FROM CHM62EDT_TAXONOMY";
             if (isRoot) {
-                strSQL = strSQL + " WHERE ID_TAXONOMY=46 OR ID_TAXONOMY=47 OR ID_TAXONOMY=48 OR ID_TAXONOMY=3001";
+                strSQL = strSQL
+                        + " WHERE ID_TAXONOMY=46 OR ID_TAXONOMY=47 OR ID_TAXONOMY=48 OR ID_TAXONOMY=3001";
             } else {
-                strSQL = strSQL + " WHERE ID_TAXONOMY_PARENT=" + id + " AND ID_TAXONOMY != " + id;
+                strSQL = strSQL + " WHERE ID_TAXONOMY_PARENT=" + id
+                        + " AND ID_TAXONOMY != " + id;
             }
 	
             ps = con.prepareStatement(strSQL);
@@ -2631,7 +2768,8 @@ public final class Utilities {
             List<TaxonomyDTO> list = new ArrayList<TaxonomyDTO>();
 
             while (rs.next()) {
-                TaxonomyDTO dto = new TaxonomyDTO(rs.getString("TITLE"), rs.getInt("ID"));
+                TaxonomyDTO dto = new TaxonomyDTO(rs.getString("TITLE"),
+                        rs.getInt("ID"));
 
                 list.add(dto);
             }
@@ -2652,17 +2790,24 @@ public final class Utilities {
                 }
                 if (hasChilds || hasChildSpecies) {
                     if (expandContains(expand, taxId)) {
-                        ret += "<a title=\"" + hide + "\" id=\"level_" + taxId + "\" href=\"species-taxonomic-browser.jsp?expand="
-                                + removeSpecieFromExpanded(expand, taxId) + "#level_" + taxId
-                                + "\"><img src=\"images/img_minus.gif\" alt=\"" + hide + "\"/></a>" + newLine;
+                        ret += "<a title=\"" + hide + "\" id=\"level_" + taxId
+                                + "\" href=\"species-taxonomic-browser.jsp?expand="
+                                + removeSpecieFromExpanded(expand, taxId)
+                                + "#level_" + taxId
+                                + "\"><img src=\"images/img_minus.gif\" alt=\""
+                                + hide + "\"/></a>" + newLine;
                     } else {
-                        ret += "<a title=\"" + show + "\" id=\"level_" + taxId + "\" href=\"species-taxonomic-browser.jsp?expand="
-                                + addToExpanded(expand, taxId) + "#level_" + taxId + "\"><img src=\"images/img_plus.gif\" alt=\""
+                        ret += "<a title=\"" + show + "\" id=\"level_" + taxId
+                                + "\" href=\"species-taxonomic-browser.jsp?expand="
+                                + addToExpanded(expand, taxId) + "#level_"
+                                + taxId
+                                + "\"><img src=\"images/img_plus.gif\" alt=\""
                                 + show + "\"/></a>" + newLine;
                     }
                     ret += "&nbsp;" + taxTitle + newLine;
                 } else {
-                    ret += "<img src=\"images/img_bullet.gif\" alt=\"" + taxTitle + "\"/>&nbsp;&nbsp;" + taxTitle + newLine;
+                    ret += "<img src=\"images/img_bullet.gif\" alt=\""
+                            + taxTitle + "\"/>&nbsp;&nbsp;" + taxTitle + newLine;
                 }
                 if (expand.length() > 0 && expandContains(expand, taxId)) {
                     ArrayList SpeciesList = sqlc.SQL2Array(
@@ -2673,7 +2818,8 @@ public final class Utilities {
                         ret += "<ul class=\"eunistree\">" + newLine;
                         for (int i = 0; i < SpeciesList.size(); i++) {
                             ret += "<li>" + newLine;
-                            ret += "<img src=\"images/img_bullet.gif\">&nbsp;&nbsp;" + SpeciesList.get(i) + newLine;
+                            ret += "<img src=\"images/img_bullet.gif\">&nbsp;&nbsp;"
+                                    + SpeciesList.get(i) + newLine;
                             ret += "</li>" + newLine;
                         }
                         ret += "</ul>" + newLine;
@@ -2681,7 +2827,8 @@ public final class Utilities {
                 }
                 if (expand.length() > 0 && expandContains(expand, taxId)) {
 					
-                    ret += generateSpeciesTaxonomicTree(taxId, expand, false, con, sqlc, cm);
+                    ret += generateSpeciesTaxonomicTree(taxId, expand, false,
+                            con, sqlc, cm);
                 }
 
                 ret += "</li>" + newLine;

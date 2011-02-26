@@ -1,5 +1,6 @@
 package ro.finsiel.eunis.jrfTables.species.references;
 
+
 /**
  * Date: Jul 15, 2003
  * Time: 11:14:50 AM
@@ -20,108 +21,76 @@ import net.sf.jrf.join.joincolumns.DateJoinColumn;
  **/
 public class ReferencesJoinDomain extends AbstractDomain {
 
+    /**
+     **/
+    public PersistentObject newPersistentObject() {
+        return new ReferencesJoinPersist();
+    }
 
-  /**
-   **/
-  public PersistentObject newPersistentObject() {
-    return new ReferencesJoinPersist();
-  }
-
-  /**
-   **/
-  public void setup() {
-    // These setters could be used to override the default.
-    // this.setDatabasePolicy(new null());
-    // this.setJDBCHelper(JDBCHelperFactory.create());
-
-
-    OuterJoinTable IndexSource = null;
-    OuterJoinTable IndexDate = null;
-    OuterJoinTable IndexTitle = null;
-    OuterJoinTable IndexPublisher = null;
-
-    this.setTableName("DC_INDEX");
-    this.setReadOnly(true);
-
-    this.addColumnSpec(
-            new IntegerColumnSpec(
-                    "ID_DC",
-                    "getIdDc",
-                    "setIdDc",
-                    DEFAULT_TO_ZERO
-                    , NATURAL_PRIMARY_KEY
-            ));
-    this.addColumnSpec(
-            new StringColumnSpec(
-                    "COMMENT",
-                    "getComment",
-                    "setComment",
-                    DEFAULT_TO_NULL
-            ));
+    /**
+     **/
+    public void setup() {
+        // These setters could be used to override the default.
+        // this.setDatabasePolicy(new null());
+        // this.setJDBCHelper(JDBCHelperFactory.create());
 
 
-    IndexSource =
-            new OuterJoinTable(
-                    "DC_SOURCE", // table name
-                    "ID_DC", // customer (main) table column(s)
-                    "ID_DC");
-    IndexSource.addJoinColumn(
-            new StringJoinColumn(
-                    "SOURCE", // Column Name
-                    "source", // Alias in case of name conflict
-                    "setSource"));    // Setter method name
-    IndexSource.addJoinColumn(
-            new StringJoinColumn(
-                    "EDITOR", // Column Name
-                    "editor", // Alias in case of name conflict
-                    "setEditor"));    // Setter method name
-    IndexSource.addJoinColumn(
-            new StringJoinColumn(
-                    "URL", // Column Name
-                    "setUrl"));    // Setter method name
+        OuterJoinTable IndexSource = null;
+        OuterJoinTable IndexDate = null;
+        OuterJoinTable IndexTitle = null;
+        OuterJoinTable IndexPublisher = null;
 
-    this.addJoinTable(IndexSource);
+        this.setTableName("DC_INDEX");
+        this.setReadOnly(true);
 
-    IndexDate =
-            new OuterJoinTable(
-                    "DC_DATE", // table name
-                    "ID_DC", // customer (main) table column(s)
-                    "ID_DC");
-    IndexDate.addJoinColumn(
-            new DateJoinColumn(
-                    "CREATED", // Column Name
-                    "created", // Alias in case of name conflict
-                    "setCreated"));    // Setter method name
+        this.addColumnSpec(
+                new IntegerColumnSpec("ID_DC", "getIdDc", "setIdDc",
+                DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));
+        this.addColumnSpec(
+                new StringColumnSpec("COMMENT", "getComment", "setComment",
+                DEFAULT_TO_NULL));
 
-    this.addJoinTable(IndexDate);
+        IndexSource = new OuterJoinTable("DC_SOURCE", // table name
+                "ID_DC", // customer (main) table column(s)
+                "ID_DC");
+        IndexSource.addJoinColumn(new StringJoinColumn("SOURCE", // Column Name
+                "source", // Alias in case of name conflict
+                "setSource")); // Setter method name
+        IndexSource.addJoinColumn(new StringJoinColumn("EDITOR", // Column Name
+                "editor", // Alias in case of name conflict
+                "setEditor")); // Setter method name
+        IndexSource.addJoinColumn(new StringJoinColumn("URL", // Column Name
+                "setUrl")); // Setter method name
 
-    IndexTitle =
-            new OuterJoinTable(
-                    "DC_TITLE", // table name
-                    "ID_DC", // customer (main) table column(s)
-                    "ID_DC");
-    IndexTitle.addJoinColumn(
-            new StringJoinColumn(
-                    "TITLE", // Column Name
-                    "title", // Alias in case of name conflict
-                    "setTitle"));    // Setter method name
+        this.addJoinTable(IndexSource);
 
-    this.addJoinTable(IndexTitle);
+        IndexDate = new OuterJoinTable("DC_DATE", // table name
+                "ID_DC", // customer (main) table column(s)
+                "ID_DC");
+        IndexDate.addJoinColumn(new DateJoinColumn("CREATED", // Column Name
+                "created", // Alias in case of name conflict
+                "setCreated")); // Setter method name
 
-    IndexPublisher =
-            new OuterJoinTable(
-                    "DC_PUBLISHER", // table name
-                    "ID_DC", // customer (main) table column(s)
-                    "ID_DC");
-    IndexPublisher.addJoinColumn(
-            new StringJoinColumn(
-                    "PUBLISHER", // Column Name
-                    "publisher", // Alias in case of name conflict
-                    "setPublisher"));    // Setter method name
+        this.addJoinTable(IndexDate);
 
-    this.addJoinTable(IndexPublisher);
+        IndexTitle = new OuterJoinTable("DC_TITLE", // table name
+                "ID_DC", // customer (main) table column(s)
+                "ID_DC");
+        IndexTitle.addJoinColumn(new StringJoinColumn("TITLE", // Column Name
+                "title", // Alias in case of name conflict
+                "setTitle")); // Setter method name
 
+        this.addJoinTable(IndexTitle);
 
-  }
+        IndexPublisher = new OuterJoinTable("DC_PUBLISHER", // table name
+                "ID_DC", // customer (main) table column(s)
+                "ID_DC");
+        IndexPublisher.addJoinColumn(new StringJoinColumn("PUBLISHER", // Column Name
+                "publisher", // Alias in case of name conflict
+                "setPublisher")); // Setter method name
+
+        this.addJoinTable(IndexPublisher);
+
+    }
 
 }

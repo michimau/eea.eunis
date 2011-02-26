@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.jrfTables.species.factsheet;
 
+
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  * Date: 20.06.2003
@@ -8,89 +10,92 @@ import net.sf.jrf.domain.PersistentObject;
  */
 public class SpeciesStatusReportTypePersist extends PersistentObject {
 
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idSpeciesStatus = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_description = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_shortDefinition = null;
-  /**
-   * This is a database field.
-   **/
-  private String i_statusCode = null;
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idSpeciesStatus = null;
 
-  public SpeciesStatusReportTypePersist() {
-    super();
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_description = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getDescription() {
-    return i_description;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_shortDefinition = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdSpeciesStatus() {
-    return i_idSpeciesStatus;
-  }
+    /**
+     * This is a database field.
+     **/
+    private String i_statusCode = null;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getShortDefinition() {
-    return i_shortDefinition;
-  }
+    public SpeciesStatusReportTypePersist() {
+        super();
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getStatusCode() {
-    return i_statusCode;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getDescription() {
+        return i_description;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param description
-   **/
-  public void setDescription(String description) {
-    i_description = description;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdSpeciesStatus() {
+        return i_idSpeciesStatus;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idSpeciesStatus
-   **/
-  public void setIdSpeciesStatus(Integer idSpeciesStatus) {
-    i_idSpeciesStatus = idSpeciesStatus;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getShortDefinition() {
+        return i_shortDefinition;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param shortDefinition
-   **/
-  public void setShortDefinition(String shortDefinition) {
-    i_shortDefinition = shortDefinition;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getStatusCode() {
+        return i_statusCode;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param statusCode
-   **/
-  public void setStatusCode(String statusCode) {
-    i_statusCode = statusCode;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param description
+     **/
+    public void setDescription(String description) {
+        i_description = description;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idSpeciesStatus
+     **/
+    public void setIdSpeciesStatus(Integer idSpeciesStatus) {
+        i_idSpeciesStatus = idSpeciesStatus;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param shortDefinition
+     **/
+    public void setShortDefinition(String shortDefinition) {
+        i_shortDefinition = shortDefinition;
+        this.markModifiedPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param statusCode
+     **/
+    public void setStatusCode(String statusCode) {
+        i_statusCode = statusCode;
+        this.markModifiedPersistentState();
+    }
 }

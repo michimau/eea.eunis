@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.jrfTables.species.legal;
 
+
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  * @author finsiel
@@ -9,212 +11,224 @@ import net.sf.jrf.domain.PersistentObject;
  */
 public class ScientificLegalPersist extends PersistentObject {
 
-  /** This is a database field. */
-  private Integer i_idSpecies = null;
-  /** This is a database field. */
-  private Integer i_idNatureObject = null;
-  /** This is a database field. */
-  private String i_scientificName = null;
-  /** This is a database field. */
-  private Integer i_idSpeciesLink = null;
-  /** This is a database field. */
-  private Short i_temporarySelect = null;
-  /** This is a database field. */
-  private Integer i_idGroupspecies = null;
-  /** This is a database field. */
-  private Integer idNatureObjectReports = null;
-  /** This is a database field. */
-  private Integer idReportTypeRep = null;
-  /** This is a database field. */
-  private Integer idDcRep = null;
-  /** This is a database field. */
-  private Integer idReportType = null;
-  /** This is a database field. */
-  private String annex = null;
-  /** This is a database field. */
-  private String alternative = null;
-  /** This is a database field. */
-  private Integer idLookup = null;
-  private String commonName = null;
-  private String title = null;
-  private String url = null;
-  private String comment = null;
+    /** This is a database field. */
+    private Integer i_idSpecies = null;
 
-  /** Default constructor */
-  public ScientificLegalPersist() {
-    super();
-  }
+    /** This is a database field. */
+    private Integer i_idNatureObject = null;
 
-  public String getUrl() {
-    return url;
-  }
+    /** This is a database field. */
+    private String i_scientificName = null;
 
-  public void setUrl(String url) {
-    this.url = url;
-  }
+    /** This is a database field. */
+    private Integer i_idSpeciesLink = null;
 
-  public String getTitle() {
-    return title;
-  }
+    /** This is a database field. */
+    private Short i_temporarySelect = null;
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+    /** This is a database field. */
+    private Integer i_idGroupspecies = null;
 
-  /** Getter for a database field. */
-  public Integer getIdGroupspecies() {
-    return i_idGroupspecies;
-  }
+    /** This is a database field. */
+    private Integer idNatureObjectReports = null;
 
-  /** Getter for a database field. */
-  public Integer getIdNatureObject() {
-    return i_idNatureObject;
-  }
+    /** This is a database field. */
+    private Integer idReportTypeRep = null;
 
-  /** Getter for a database field. */
-  public Integer getIdSpecies() {
-    return i_idSpecies;
-  }
+    /** This is a database field. */
+    private Integer idDcRep = null;
 
-  /** Getter for a database field. */
-  public Integer getIdSpeciesLink() {
-    return i_idSpeciesLink;
-  }
+    /** This is a database field. */
+    private Integer idReportType = null;
 
-  /** Getter for a database field. */
-  public String getScientificName() {
-    return i_scientificName;
-  }
+    /** This is a database field. */
+    private String annex = null;
 
-  /** Getter for a database field. */
-  public Short getTemporarySelect() {
-    return i_temporarySelect;
-  }
+    /** This is a database field. */
+    private String alternative = null;
 
-  /**
-   * Setter for a database field.
-   * @param idGroupspecies
-   **/
-  public void setIdGroupspecies(Integer idGroupspecies) {
-    i_idGroupspecies = idGroupspecies;
-    this.markModifiedPersistentState();
-  }
+    /** This is a database field. */
+    private Integer idLookup = null;
+    private String commonName = null;
+    private String title = null;
+    private String url = null;
+    private String comment = null;
 
-  /**
-   * Setter for a database field.
-   * @param idNatureObject
-   **/
-  public void setIdNatureObject(Integer idNatureObject) {
-    i_idNatureObject = idNatureObject;
-    this.markModifiedPersistentState();
-  }
+    /** Default constructor */
+    public ScientificLegalPersist() {
+        super();
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idSpecies
-   **/
-  public void setIdSpecies(Integer idSpecies) {
-    i_idSpecies = idSpecies;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    public String getUrl() {
+        return url;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idSpeciesLink
-   **/
-  public void setIdSpeciesLink(Integer idSpeciesLink) {
-    i_idSpeciesLink = idSpeciesLink;
-    this.markModifiedPersistentState();
-  }
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param scientificName
-   **/
-  public void setScientificName(String scientificName) {
-    i_scientificName = scientificName;
-    this.markModifiedPersistentState();
-  }
+    public String getTitle() {
+        return title;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param temporarySelect
-   **/
-  public void setTemporarySelect(Short temporarySelect) {
-    i_temporarySelect = temporarySelect;
-    this.markModifiedPersistentState();
-  }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-  public String getAlternative() {
-    return alternative;
-  }
+    /** Getter for a database field. */
+    public Integer getIdGroupspecies() {
+        return i_idGroupspecies;
+    }
 
-  public void setAlternative(String alternative) {
-    this.alternative = alternative;
-  }
+    /** Getter for a database field. */
+    public Integer getIdNatureObject() {
+        return i_idNatureObject;
+    }
 
-  public String getAnnex() {
-    return annex;
-  }
+    /** Getter for a database field. */
+    public Integer getIdSpecies() {
+        return i_idSpecies;
+    }
 
-  public void setAnnex(String annex) {
-    this.annex = annex;
-  }
+    /** Getter for a database field. */
+    public Integer getIdSpeciesLink() {
+        return i_idSpeciesLink;
+    }
 
-  public Integer getIdReportType() {
-    return idReportType;
-  }
+    /** Getter for a database field. */
+    public String getScientificName() {
+        return i_scientificName;
+    }
 
-  public void setIdReportType(Integer idReportType) {
-    this.idReportType = idReportType;
-  }
+    /** Getter for a database field. */
+    public Short getTemporarySelect() {
+        return i_temporarySelect;
+    }
 
-  public Integer getIdReportTypeRep() {
-    return idReportTypeRep;
-  }
+    /**
+     * Setter for a database field.
+     * @param idGroupspecies
+     **/
+    public void setIdGroupspecies(Integer idGroupspecies) {
+        i_idGroupspecies = idGroupspecies;
+        this.markModifiedPersistentState();
+    }
 
-  public void setIdReportTypeRep(Integer idReportTypeRep) {
-    this.idReportTypeRep = idReportTypeRep;
-  }
+    /**
+     * Setter for a database field.
+     * @param idNatureObject
+     **/
+    public void setIdNatureObject(Integer idNatureObject) {
+        i_idNatureObject = idNatureObject;
+        this.markModifiedPersistentState();
+    }
 
-  public Integer getIdNatureObjectReports() {
-    return idNatureObjectReports;
-  }
+    /**
+     * Setter for a database field.
+     * @param idSpecies
+     **/
+    public void setIdSpecies(Integer idSpecies) {
+        i_idSpecies = idSpecies;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
 
-  public void setIdNatureObjectReports(Integer idNatureObjectReports) {
-    this.idNatureObjectReports = idNatureObjectReports;
-  }
+    /**
+     * Setter for a database field.
+     * @param idSpeciesLink
+     **/
+    public void setIdSpeciesLink(Integer idSpeciesLink) {
+        i_idSpeciesLink = idSpeciesLink;
+        this.markModifiedPersistentState();
+    }
 
-  public Integer getIdLookup() {
-    return idLookup;
-  }
+    /**
+     * Setter for a database field.
+     * @param scientificName
+     **/
+    public void setScientificName(String scientificName) {
+        i_scientificName = scientificName;
+        this.markModifiedPersistentState();
+    }
 
-  public void setIdLookup(Integer idLookup) {
-    this.idLookup = idLookup;
-  }
+    /**
+     * Setter for a database field.
+     * @param temporarySelect
+     **/
+    public void setTemporarySelect(Short temporarySelect) {
+        i_temporarySelect = temporarySelect;
+        this.markModifiedPersistentState();
+    }
 
-  public Integer getIdDcRep() {
-    return idDcRep;
-  }
+    public String getAlternative() {
+        return alternative;
+    }
 
-  public void setIdDcRep(Integer idDcRep) {
-    this.idDcRep = idDcRep;
-  }
+    public void setAlternative(String alternative) {
+        this.alternative = alternative;
+    }
 
-  public String getCommonName() {
-    return commonName;
-  }
+    public String getAnnex() {
+        return annex;
+    }
 
-  public void setCommonName(String commonName) {
-    this.commonName = commonName;
-  }
+    public void setAnnex(String annex) {
+        this.annex = annex;
+    }
 
-  public String getComment() {
-    return comment;
-  }
+    public Integer getIdReportType() {
+        return idReportType;
+    }
 
-  public void setComment(String comment) {
-    this.comment = comment;
-  }
+    public void setIdReportType(Integer idReportType) {
+        this.idReportType = idReportType;
+    }
+
+    public Integer getIdReportTypeRep() {
+        return idReportTypeRep;
+    }
+
+    public void setIdReportTypeRep(Integer idReportTypeRep) {
+        this.idReportTypeRep = idReportTypeRep;
+    }
+
+    public Integer getIdNatureObjectReports() {
+        return idNatureObjectReports;
+    }
+
+    public void setIdNatureObjectReports(Integer idNatureObjectReports) {
+        this.idNatureObjectReports = idNatureObjectReports;
+    }
+
+    public Integer getIdLookup() {
+        return idLookup;
+    }
+
+    public void setIdLookup(Integer idLookup) {
+        this.idLookup = idLookup;
+    }
+
+    public Integer getIdDcRep() {
+        return idDcRep;
+    }
+
+    public void setIdDcRep(Integer idDcRep) {
+        this.idDcRep = idDcRep;
+    }
+
+    public String getCommonName() {
+        return commonName;
+    }
+
+    public void setCommonName(String commonName) {
+        this.commonName = commonName;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }

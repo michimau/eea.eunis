@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.jrfTables.species.legal;
 
+
 import net.sf.jrf.domain.PersistentObject;
+
 
 /**
  * @author finsiel
@@ -9,212 +11,213 @@ import net.sf.jrf.domain.PersistentObject;
  */
 public class LegalStatusPersist extends PersistentObject {
 
-  /** This is a database field. */
-  private Integer i_idLegalStatus = null;
-  /** This is a database field. */
-  private String i_annex = null;
-  /** This is a database field. */
-  private Short i_priority = null;
-  /** This is a database field. */
-  private String i_comment = null;
-  /** This is a database field. */
-  private String i_legalStatusCode = null;
+    /** This is a database field. */
+    private Integer i_idLegalStatus = null;
 
-  // Joined columns
-  private Integer idReportType = null;
-  private String lookupType = null;
+    /** This is a database field. */
+    private String i_annex = null;
 
-  private Integer idDc = null;
-  private Integer idNatureObject = null;
+    /** This is a database field. */
+    private Short i_priority = null;
 
-  private String alternative = null;
-  private String title = null;
+    /** This is a database field. */
+    private String i_comment = null;
 
-  private String scientificName = null;
-  private Integer idSpecies = null;
-  private Integer idSpeciesLink = null;
+    /** This is a database field. */
+    private String i_legalStatusCode = null;
 
-  private String commonName = null;
+    // Joined columns
+    private Integer idReportType = null;
+    private String lookupType = null;
 
-  private String url = null;
+    private Integer idDc = null;
+    private Integer idNatureObject = null;
 
-  /**
-   *
-   */
-  public LegalStatusPersist() {
-    super();
-  }
+    private String alternative = null;
+    private String title = null;
 
-  public String getUrl() {
-    return url;
-  }
+    private String scientificName = null;
+    private Integer idSpecies = null;
+    private Integer idSpeciesLink = null;
 
-  public void setUrl(String url) {
-    this.url = url;
-  }
+    private String commonName = null;
 
-  public String getTitle() {
-    return title;
-  }
+    private String url = null;
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+    /**
+     *
+     */
+    public LegalStatusPersist() {
+        super();
+    }
 
-  public String getCommonName() {
-    return commonName;
-  }
+    public String getUrl() {
+        return url;
+    }
 
-  public void setCommonName(String commonName) {
-    this.commonName = commonName;
-  }
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
-  public Integer getIdReportType() {
-    return idReportType;
-  }
+    public String getTitle() {
+        return title;
+    }
 
-  public void setIdReportType(Integer idReportType) {
-    this.idReportType = idReportType;
-  }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-  public String getLookupType() {
-    return lookupType;
-  }
+    public String getCommonName() {
+        return commonName;
+    }
 
-  public void setLookupType(String lookupType) {
-    this.lookupType = lookupType;
-  }
+    public void setCommonName(String commonName) {
+        this.commonName = commonName;
+    }
 
-  public Integer getIdDc() {
-    return idDc;
-  }
+    public Integer getIdReportType() {
+        return idReportType;
+    }
 
-  public void setIdDc(Integer idDc) {
-    this.idDc = idDc;
-  }
+    public void setIdReportType(Integer idReportType) {
+        this.idReportType = idReportType;
+    }
 
-  public Integer getIdNatureObject() {
-    return idNatureObject;
-  }
+    public String getLookupType() {
+        return lookupType;
+    }
 
-  public void setIdNatureObject(Integer idNatureObject) {
-    this.idNatureObject = idNatureObject;
-  }
+    public void setLookupType(String lookupType) {
+        this.lookupType = lookupType;
+    }
 
-  public String getAlternative() {
-    return alternative;
-  }
+    public Integer getIdDc() {
+        return idDc;
+    }
 
-  public void setAlternative(String alternative) {
-    this.alternative = alternative;
-  }
+    public void setIdDc(Integer idDc) {
+        this.idDc = idDc;
+    }
 
+    public Integer getIdNatureObject() {
+        return idNatureObject;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getAnnex() {
-    return i_annex;
-  }
+    public void setIdNatureObject(Integer idNatureObject) {
+        this.idNatureObject = idNatureObject;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getComment() {
-    return i_comment;
-  }
+    public String getAlternative() {
+        return alternative;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdLegalStatus() {
-    return i_idLegalStatus;
-  }
+    public void setAlternative(String alternative) {
+        this.alternative = alternative;
+    }
 
+    /**
+     * Getter for a database field.
+     **/
+    public String getAnnex() {
+        return i_annex;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getLegalStatusCode() {
-    return i_legalStatusCode;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getComment() {
+        return i_comment;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public Short getPriority() {
-    return i_priority;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdLegalStatus() {
+        return i_idLegalStatus;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param annex
-   **/
-  public void setAnnex(String annex) {
-    i_annex = annex;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getLegalStatusCode() {
+        return i_legalStatusCode;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param comment
-   **/
-  public void setComment(String comment) {
-    i_comment = comment;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Short getPriority() {
+        return i_priority;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idLegalStatus
-   **/
-  public void setIdLegalStatus(Integer idLegalStatus) {
-    i_idLegalStatus = idLegalStatus;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param annex
+     **/
+    public void setAnnex(String annex) {
+        i_annex = annex;
+        this.markModifiedPersistentState();
+    }
 
+    /**
+     * Setter for a database field.
+     * @param comment
+     **/
+    public void setComment(String comment) {
+        i_comment = comment;
+        this.markModifiedPersistentState();
+    }
 
-  /**
-   * Setter for a database field.
-   * @param legalStatusCode
-   **/
-  public void setLegalStatusCode(String legalStatusCode) {
-    i_legalStatusCode = legalStatusCode;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param idLegalStatus
+     **/
+    public void setIdLegalStatus(Integer idLegalStatus) {
+        i_idLegalStatus = idLegalStatus;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
 
-  /**
-   * Setter for a database field.
-   * @param priority
-   **/
-  public void setPriority(Short priority) {
-    i_priority = priority;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param legalStatusCode
+     **/
+    public void setLegalStatusCode(String legalStatusCode) {
+        i_legalStatusCode = legalStatusCode;
+        this.markModifiedPersistentState();
+    }
 
-  public String getScientificName() {
-    return scientificName;
-  }
+    /**
+     * Setter for a database field.
+     * @param priority
+     **/
+    public void setPriority(Short priority) {
+        i_priority = priority;
+        this.markModifiedPersistentState();
+    }
 
-  public void setScientificName(String scientificName) {
-    this.scientificName = scientificName;
-  }
+    public String getScientificName() {
+        return scientificName;
+    }
 
-  public Integer getIdSpecies() {
-    return idSpecies;
-  }
+    public void setScientificName(String scientificName) {
+        this.scientificName = scientificName;
+    }
 
-  public void setIdSpecies(Integer idSpecies) {
-    this.idSpecies = idSpecies;
-  }
+    public Integer getIdSpecies() {
+        return idSpecies;
+    }
 
-  public Integer getIdSpeciesLink() {
-    return idSpeciesLink;
-  }
+    public void setIdSpecies(Integer idSpecies) {
+        this.idSpecies = idSpecies;
+    }
 
-  public void setIdSpeciesLink(Integer idSpeciesLink) {
-    this.idSpeciesLink = idSpeciesLink;
-  }
+    public Integer getIdSpeciesLink() {
+        return idSpeciesLink;
+    }
+
+    public void setIdSpeciesLink(Integer idSpeciesLink) {
+        this.idSpeciesLink = idSpeciesLink;
+    }
 
 }

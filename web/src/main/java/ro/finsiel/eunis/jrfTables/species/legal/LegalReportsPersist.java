@@ -1,142 +1,148 @@
 package ro.finsiel.eunis.jrfTables.species.legal;
 
+
 import net.sf.jrf.domain.PersistentObject;
 
-/**
+
+ /**
  * @author finsiel
  * @version 1.0
  * @since 15.01.2003
  */
 public class LegalReportsPersist extends PersistentObject {
-  /** This is a database field. */
-  private Integer i_idNatureObject = null;
-  /** This is a database field. */
-  private Integer i_idDc = null;
-  /** This is a database field. */
-  private Integer i_idGeoscope = null;
-  /** This is a database field. */
-  private Integer i_idGeoscopeLink = null;
-  /** This is a database field. */
-  private Integer i_idReportType = null;
-  /** This is a database field. */
-  private Integer i_idReportAttributes = null;
 
-  private String annex = null;
-  private String alternative = null;
+    /** This is a database field. */
+    private Integer i_idNatureObject = null;
 
+    /** This is a database field. */
+    private Integer i_idDc = null;
 
-  public LegalReportsPersist() {
-    super();
-  }
+    /** This is a database field. */
+    private Integer i_idGeoscope = null;
 
+    /** This is a database field. */
+    private Integer i_idGeoscopeLink = null;
 
-  public Integer getIdReportAttributes() {
-    return i_idReportAttributes;
-  }
+    /** This is a database field. */
+    private Integer i_idReportType = null;
 
-  public void setIdReportAttributes(Integer idReportAttributes) {
-    this.i_idReportAttributes = idReportAttributes;
-  }
+    /** This is a database field. */
+    private Integer i_idReportAttributes = null;
 
-  public String getAlternative() {
-    return alternative;
-  }
+    private String annex = null;
+    private String alternative = null;
 
-  public void setAlternative(String alternative) {
-    this.alternative = alternative;
-  }
+    public LegalReportsPersist() {
+        super();
+    }
 
-  public String getAnnex() {
-    return annex;
-  }
+    public Integer getIdReportAttributes() {
+        return i_idReportAttributes;
+    }
 
-  public void setAnnex(String annex) {
-    this.annex = annex;
-  }
+    public void setIdReportAttributes(Integer idReportAttributes) {
+        this.i_idReportAttributes = idReportAttributes;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdDc() {
-    return i_idDc;
-  }
+    public String getAlternative() {
+        return alternative;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdGeoscope() {
-    return i_idGeoscope;
-  }
+    public void setAlternative(String alternative) {
+        this.alternative = alternative;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdGeoscopeLink() {
-    return i_idGeoscopeLink;
-  }
+    public String getAnnex() {
+        return annex;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdNatureObject() {
-    return i_idNatureObject;
-  }
+    public void setAnnex(String annex) {
+        this.annex = annex;
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdReportType() {
-    return i_idReportType;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdDc() {
+        return i_idDc;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idDc
-   **/
-  public void setIdDc(Integer idDc) {
-    i_idDc = idDc;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdGeoscope() {
+        return i_idGeoscope;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idGeoscope
-   **/
-  public void setIdGeoscope(Integer idGeoscope) {
-    i_idGeoscope = idGeoscope;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdGeoscopeLink() {
+        return i_idGeoscopeLink;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idGeoscopeLink
-   **/
-  public void setIdGeoscopeLink(Integer idGeoscopeLink) {
-    i_idGeoscopeLink = idGeoscopeLink;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdNatureObject() {
+        return i_idNatureObject;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idNatureObject
-   **/
-  public void setIdNatureObject(Integer idNatureObject) {
-    i_idNatureObject = idNatureObject;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdReportType() {
+        return i_idReportType;
+    }
 
-  /**
-   * Setter for a database field.
-   * @param idReportType
-   **/
-  public void setIdReportType(Integer idReportType) {
-    i_idReportType = idReportType;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param idDc
+     **/
+    public void setIdDc(Integer idDc) {
+        i_idDc = idDc;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idGeoscope
+     **/
+    public void setIdGeoscope(Integer idGeoscope) {
+        i_idGeoscope = idGeoscope;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idGeoscopeLink
+     **/
+    public void setIdGeoscopeLink(Integer idGeoscopeLink) {
+        i_idGeoscopeLink = idGeoscopeLink;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idNatureObject
+     **/
+    public void setIdNatureObject(Integer idNatureObject) {
+        i_idNatureObject = idNatureObject;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
+
+    /**
+     * Setter for a database field.
+     * @param idReportType
+     **/
+    public void setIdReportType(Integer idReportType) {
+        i_idReportType = idReportType;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
 
 }

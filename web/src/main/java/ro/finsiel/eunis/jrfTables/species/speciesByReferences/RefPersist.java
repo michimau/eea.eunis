@@ -1,5 +1,6 @@
 package ro.finsiel.eunis.jrfTables.species.speciesByReferences;
 
+
 /**
  * Date: Aug 19, 2003
  * Time: 3:52:53 PM
@@ -9,218 +10,208 @@ import net.sf.jrf.domain.PersistentObject;
 
 import java.util.Date;
 
+
 public class RefPersist extends PersistentObject {
 
+    /**
+     * This is a database field.
+     **/
+    private Integer i_idDc = null;
 
-  /**
-   * This is a database field.
-   **/
-  private Integer i_idDc = null;
+    private String i_comment = null;
 
-  private String i_comment = null;
+    private String i_source = null;
 
-  private String i_source = null;
+    private String i_editor = null;
 
-  private String i_editor = null;
+    private String i_url = null;
 
-  private String i_url = null;
+    private String idHabitat = null;
+    private String title = null;
+    private String alternative = null;
+    private String publisher = null;
+    private Date created = null;
+    private Short haveSource = null;
+    private Short haveOtherReferences = null;
+    private String scName = null;
+    private String eunisCode = null;
+    private String annex1Code = null;
+    private Integer level = null;
+    private String description = null;
 
+    public RefPersist() {
+        super();
+    }
 
-  private String idHabitat = null;
-  private String title = null;
-  private String alternative = null;
-  private String publisher = null;
-  private Date created = null;
-  private Short haveSource = null;
-  private Short haveOtherReferences = null;
-  private String scName = null;
-  private String eunisCode = null;
-  private String annex1Code = null;
-  private Integer level = null;
-  private String description = null;
+    public Short getHaveSource() {
+        return haveSource;
+    }
 
+    public void setHaveSource(Short haveSource) {
+        this.haveSource = haveSource;
+    }
 
-  public RefPersist() {
-    super();
-  }
+    public String getEunisCode() {
+        return eunisCode;
+    }
 
+    public void setEunisCode(String haveSource) {
+        this.eunisCode = haveSource;
+    }
 
-  public Short getHaveSource() {
-    return haveSource;
-  }
+    public String getAnnex1Code() {
+        return annex1Code;
+    }
 
-  public void setHaveSource(Short haveSource) {
-    this.haveSource = haveSource;
-  }
+    public void setAnnex1Code(String haveSource) {
+        this.annex1Code = haveSource;
+    }
 
-  public String getEunisCode() {
-    return eunisCode;
-  }
+    public String getDescription() {
+        return description;
+    }
 
-  public void setEunisCode(String haveSource) {
-    this.eunisCode = haveSource;
-  }
+    public void setDescription(String haveSource) {
+        this.description = haveSource;
+    }
 
-  public String getAnnex1Code() {
-    return annex1Code;
-  }
+    public Integer getLevel() {
+        return level;
+    }
 
-  public void setAnnex1Code(String haveSource) {
-    this.annex1Code = haveSource;
-  }
+    public void setLevel(Integer haveSource) {
+        this.level = haveSource;
+    }
 
-  public String getDescription() {
-    return description;
-  }
+    public Short getHaveOtherReferences() {
+        return haveOtherReferences;
+    }
 
-  public void setDescription(String haveSource) {
-    this.description = haveSource;
-  }
+    public void setHaveOtherReferences(Short haveOtherReferences) {
+        this.haveOtherReferences = haveOtherReferences;
+    }
 
-  public Integer getLevel() {
-    return level;
-  }
+    public String getScName() {
+        return scName;
+    }
 
-  public void setLevel(Integer haveSource) {
-    this.level = haveSource;
-  }
+    public void setScName(String scName) {
+        this.scName = scName;
+    }
 
-  public Short getHaveOtherReferences() {
-    return haveOtherReferences;
-  }
+    public String getIdHabitat() {
+        return idHabitat;
+    }
 
-  public void setHaveOtherReferences(Short haveOtherReferences) {
-    this.haveOtherReferences = haveOtherReferences;
-  }
+    public void setIdHabitat(String idHabitat) {
+        this.idHabitat = idHabitat;
+    }
 
-  public String getScName() {
-    return scName;
-  }
+    public String gettitle() {
+        return title;
+    }
 
-  public void setScName(String scName) {
-    this.scName = scName;
-  }
+    public void settitle(String title) {
+        this.title = title;
+    }
 
-  public String getIdHabitat() {
-    return idHabitat;
-  }
+    public String getalternative() {
+        return alternative;
+    }
 
-  public void setIdHabitat(String idHabitat) {
-    this.idHabitat = idHabitat;
-  }
+    public void setalternative(String alternative) {
+        this.alternative = alternative;
+    }
 
+    public String getpublisher() {
+        return publisher;
+    }
 
-  public String gettitle() {
-    return title;
-  }
+    public void setpublisher(String publisher) {
+        this.publisher = publisher;
+    }
 
-  public void settitle(String title) {
-    this.title = title;
-  }
+    public Date getcreated() {
+        return created;
+    }
 
-  public String getalternative() {
-    return alternative;
-  }
+    public void setcreated(Date created) {
+        this.created = created;
+    }
 
-  public void setalternative(String alternative) {
-    this.alternative = alternative;
-  }
+    public String getComment() {
+        return i_comment;
+    }
 
-  public String getpublisher() {
-    return publisher;
-  }
+    public void setComment(String comment) {
+        i_comment = comment;
+        this.markModifiedPersistentState();
+    }
 
-  public void setpublisher(String publisher) {
-    this.publisher = publisher;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getEditor() {
+        return i_editor;
+    }
 
-  public Date getcreated() {
-    return created;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public Integer getIdDc() {
+        return i_idDc;
+    }
 
-  public void setcreated(Date created) {
-    this.created = created;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getSource() {
+        return i_source;
+    }
 
-  public String getComment() {
-    return i_comment;
-  }
+    /**
+     * Getter for a database field.
+     **/
+    public String getUrl() {
+        return i_url;
+    }
 
-  public void setComment(String comment) {
-    i_comment = comment;
-    this.markModifiedPersistentState();
-  }
+    /**
+     * Setter for a database field.
+     * @param editor
+     **/
+    public void setEditor(String editor) {
+        this.i_editor = editor;
 
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getEditor() {
-    return i_editor;
-  }
+    /**
+     * Setter for a database field.
+     * @param idDc
+     **/
+    public void setIdDc(Integer idDc) {
+        i_idDc = idDc;
+        // Changing a primary key so we force this to new.
+        this.forceNewPersistentState();
+    }
 
+    /**
+     * Setter for a database field.
+     * @param source
+     **/
+    public void setSource(String source) {
+        this.i_source = source;
 
-  /**
-   * Getter for a database field.
-   **/
-  public Integer getIdDc() {
-    return i_idDc;
-  }
+    }
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getSource() {
-    return i_source;
-  }
+    /**
+     * Setter for a database field.
+     * @param url
+     **/
+    public void setUrl(String url) {
+        this.i_url = url;
 
-  /**
-   * Getter for a database field.
-   **/
-  public String getUrl() {
-    return i_url;
-  }
-
-
-  /**
-   * Setter for a database field.
-   * @param editor
-   **/
-  public void setEditor(String editor) {
-    this.i_editor = editor;
-
-  }
-
-
-  /**
-   * Setter for a database field.
-   * @param idDc
-   **/
-  public void setIdDc(Integer idDc) {
-    i_idDc = idDc;
-    // Changing a primary key so we force this to new.
-    this.forceNewPersistentState();
-  }
-
-
-  /**
-   * Setter for a database field.
-   * @param source
-   **/
-  public void setSource(String source) {
-    this.i_source = source;
-
-  }
-
-  /**
-   * Setter for a database field.
-   * @param url
-   **/
-  public void setUrl(String url) {
-    this.i_url = url;
-
-  }
-
+    }
 
 }
 

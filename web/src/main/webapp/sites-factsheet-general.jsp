@@ -31,19 +31,19 @@
   String domainName = application.getInitParameter("DOMAIN_NAME");
 
   List<Chm62edtNatureObjectPicturePersist> pictureList = new Chm62edtNatureObjectPictureDomain()
-  		.findWhere("MAIN_PIC = 1 AND ID_OBJECT = '" + factsheet.getIDSite() + "'");
+          .findWhere("MAIN_PIC = 1 AND ID_OBJECT = '" + factsheet.getIDSite() + "'");
   String mainPictureId = null;
   String pictureDescription = null;
   Integer width = null;
   Integer height = null;
   String source = null;
   if (pictureList != null && !pictureList.isEmpty()) {
-	  mainPictureId = application.getInitParameter("UPLOAD_DIR_PICTURES_SITES") + "/" +
-	  		pictureList.get(0).getFileName();
-	  pictureDescription = pictureList.get(0).getDescription();
-	  width = pictureList.get(0).getMaxWidth();
-	  height = pictureList.get(0).getMaxHeight();
-	  source = pictureList.get(0).getSource();
+      mainPictureId = application.getInitParameter("UPLOAD_DIR_PICTURES_SITES")
+        + "/" + pictureList.get(0).getFileName();
+      pictureDescription = pictureList.get(0).getDescription();
+      width = pictureList.get(0).getMaxWidth();
+      height = pictureList.get(0).getMaxHeight();
+      source = pictureList.get(0).getSource();
   }
   String picsURL = "idobject=" + factsheet.getIDSite() + "&amp;natureobjecttype=Sites";
   
@@ -51,27 +51,27 @@
 
 <% if (mainPictureId != null) { %>
   <div class="naturepic-plus-container naturepic-right">
-	  <div class="naturepic-plus">
-	    <div class="naturepic-image">
-	    	<%
-	    	String styleAttr = "max-width:300px; max-height:400px;";
-    		if(width != null && width.intValue() > 0 && height != null && height.intValue() > 0){
-	    		styleAttr = "max-width: "+width.intValue()+"px; max-height: "+height.intValue()+"px";
-    		}
-	    	%>
-		    <a href="javascript:openpictures('<%=domainName%>/pictures.jsp?<%=picsURL%>',600,600)">
-		    <img src="<%=mainPictureId %>" alt="<%=pictureDescription %>" class="scaled" style="<%=styleAttr%>"/>
-		    </a>
-	    </div>
-	    <div class="naturepic-note">
-	      <%=pictureDescription %>
-	    </div>
-	    <% if(source != null && source.length() > 0){%>
-	      <div class="naturepic-source-copyright">
-		<%=cm.cmsPhrase("Source")%>: <%=source%>
-	      </div>
-	    <%}%>
-	  </div>
+      <div class="naturepic-plus">
+        <div class="naturepic-image">
+            <%
+            String styleAttr = "max-width:300px; max-height:400px;";
+            if(width != null && width.intValue() > 0 && height != null && height.intValue() > 0){
+                styleAttr = "max-width: "+width.intValue()+"px; max-height: "+height.intValue()+"px";
+            }
+            %>
+            <a href="javascript:openpictures('<%=domainName%>/pictures.jsp?<%=picsURL%>',600,600)">
+            <img src="<%=mainPictureId %>" alt="<%=pictureDescription %>" class="scaled" style="<%=styleAttr%>"/>
+            </a>
+        </div>
+        <div class="naturepic-note">
+          <%=pictureDescription %>
+        </div>
+        <% if(source != null && source.length() > 0){%>
+          <div class="naturepic-source-copyright">
+        <%=cm.cmsPhrase("Source")%>: <%=source%>
+          </div>
+        <%}%>
+      </div>
   </div>
 <% } %>
   <div class="allow-naturepic">
@@ -457,10 +457,10 @@
           level = "int";
         }
 %>
-	<div>
+    <div>
         <a href="http://sea.unep-wcmc.org/wdbpa/sitedetails.cfm?siteid=<%=factsheet.getSiteObject().getIdSite()%>&amp;level=<%=level%>"><%=cm.cmsPhrase("UNEP-WCMC link")%></a>
         </div>
-	<div>
+    <div>
         <a href="http://www.wdpa.org/siteSheet.aspx?sitecode=<%=factsheet.getSiteObject().getIdSite()%>"><%=cm.cmsPhrase("WPDA info")%></a>
         </div>
 <%
@@ -468,10 +468,10 @@
       if (SiteFactsheet.TYPE_NATURA2000 == type)
       {
 %>
-	<div>
+    <div>
         <a href="http://natura2000.eea.europa.eu/Natura2000/SDFPublic.aspx?site=<%=factsheet.getSiteObject().getIdSite()%>"><%=cm.cmsPhrase("Natura 2000 factsheet")%></a>
         </div>
-	<div>
+    <div>
         <a href="http://natura2000.eea.europa.eu/N2KGisViewer.html#siteCode=<%=factsheet.getSiteObject().getIdSite()%>"><%=cm.cmsPhrase("Natura 2000 mapviewer")%></a>
         </div>
 <%
@@ -550,7 +550,7 @@
                 RegionsCodesPersist region = (RegionsCodesPersist)regionCodes.get(i);
                 String regionDesc = (String) region.getRegionDescription();
                 if(regionDesc == null || regionDesc.equals("")){
-                	regionDesc = "NUTS";
+                    regionDesc = "NUTS";
                 }
 %>
         <%=regionDesc %> code <%=Utilities.formatString(region.getRegionCode())%>, <%=Utilities.formatString(region.getRegionName())%>, cover:<%=Utilities.formatString(region.getRegionCover())%>%
@@ -562,7 +562,7 @@
               }
             } else if(factsheet.getSiteObject().getNuts() != null && !factsheet.getSiteObject().getNuts().equals("")) {
 %>
-				NUTS code <%=Utilities.formatString(factsheet.getSiteObject().getNuts())%>
+                NUTS code <%=Utilities.formatString(factsheet.getSiteObject().getNuts())%>
 <%
             }
 %>
@@ -941,108 +941,109 @@
       }
 %>
   </table>
-<%
-      String longitudeURL = factsheet.getSiteObject().getLongitude();
-      String latitudeURL = factsheet.getSiteObject().getLatitude();
-      if (null != longitudeURL && null != latitudeURL)
-      {
-%>
-  <br />
-<%
-        String sitesCoordinates = "";
-        Chm62edtSitesPersist site = factsheet.getSiteObject();
-        if(site.getLatitude()!=null && site.getLongitude()!=null && !site.getLongitude().substring(0,5).equalsIgnoreCase("0.000") && !site.getLatitude().substring(0,5).equalsIgnoreCase("0.000"))
-        {
 
-          sitesCoordinates = site.getLongitude().substring(0,5)+":"+ site.getLatitude().substring(0,5) + ":-2:" + Utilities.cleanString( site.getName() );
-        }
-
-        String extension=application.getInitParameter("EEA_MAP_SERVER_EXTENSION"); //default image type for maps
-        String urlPic = application.getInitParameter("EEA_MAP_SERVER") + "/getmap.asp";
-        String parameters = "p=";
-        String mapType="World_B";
-        if( request.getParameter( "mapType" ) != null )
-        {
-          mapType = request.getParameter("mapType");
-        }
-        String zoom="0";
-        if( request.getParameter("zoom") != null )
-        {
-          zoom=request.getParameter("zoom");
-        }
-        parameters += sitesCoordinates;
-        parameters += "&amp;Color=HEEEEEE";
-        parameters += "&amp;Coordsys=LL";
-        parameters += "&amp;Size=W345H300";
-        parameters += "&amp;ImageQuality=100";
-        parameters += "&amp;Outline=1";
-        parameters += "&amp;Scalebar=1";
-        parameters += "&amp;MapType=" + mapType;
-        parameters += "&amp;Zoom=" + zoom;
-        String proxy = application.getInitParameter("PROXY_URL");
-        int port = ro.finsiel.eunis.search.Utilities.checkedStringToInt(application.getInitParameter("PROXY_PORT"),0);
-        String filename = urlPic + "?" + parameters;
+<%
+    if (SiteFactsheet.TYPE_NATURA2000 == type) {
 %>
-  <table summary="layout" border="0" cellpadding="0" cellspacing="0" width="90%" style="border-collapse:collapse">
-    <tr>
-      <td width="50%">
-        <a name="map"></a>
-        <img name="mmap" alt="<%=cm.cms("site_location_on_map")%>" title="<%=cm.cms("site_location_on_map")%>" src="<%=filename%>" width="345" height="300" style="vertical-align:middle" />
-        <%=cm.cmsAlt("site_location_on_map")%>
-        <%=cm.cmsTitle("site_location_on_map")%>
-        <br />
-      </td>
-      <td width="50%" style="padding-left : 20px;">
-        <strong>
-          <%=cm.cmsPhrase("Change map type")%>
-        </strong>
-        <br />
-        <br />
-        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=Standard#map" title="<%=cm.cms("change_map_to_standard")%>"><%=cm.cmsPhrase("Standard (Europe)" )%></a>
-        <%=cm.cmsTitle("change_map_to_standard")%>
-        <br />
-        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=Standard_B#map" title="<%=cm.cms("change_map_to_standard_boundaries")%>"><%=cm.cmsPhrase("Standard (Europe) - Boundaries" )%></a>
-        <%=cm.cmsTitle("change_map_to_standard_boundaries")%>
-        <br />
-        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=Europe#map" title="<%=cm.cms("change_map_to_europe")%>"><%=cm.cmsPhrase("Europe" )%></a>
-        <%=cm.cmsTitle("change_map_to_europe")%>
-        <br />
-        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=Europe_B#map" title="<%=cm.cms("change_map_to_europe_boundaries")%>"><%=cm.cmsPhrase("Europe - Boundaries" )%></a>
-        <%=cm.cmsTitle("change_map_to_europe_boundaries")%>
-        <br />
-        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=World#map" title="<%=cm.cms("change_map_to_world")%>"><%=cm.cmsPhrase("World" )%></a>
-        <%=cm.cmsTitle("change_map_to_world")%>
-        <br />
-        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=World_B#map" title="<%=cm.cms("change_map_to_world_boundaries")%>"><%=cm.cmsPhrase("World - Boundaries" )%></a>
-        <%=cm.cmsTitle("change_map_to_world_boundaries")%>
-        <br />
-        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=Biogeographic#map" title="<%=cm.cms("change_map_to_biogeographic")%>"><%=cm.cmsPhrase("Biogeographic" )%></a>
-        <%=cm.cmsTitle("change_map_to_biogeographic")%>
-        <br />
-        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=Biogeographic_B#map" title="<%=cm.cms("change_map_to_biogeographic_boundaries")%>"><%=cm.cmsPhrase("Biogeographic - Boundaries" )%></a>
-        <%=cm.cmsTitle("change_map_to_biogeographic_boundaries")%>
-        <br />
-        <br />
-        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=<%=mapType%>&amp;zoom=2#map" title="<%=cm.cms("zoom_in_map")%>"><%=cm.cmsPhrase("Zoom in" )%></a>
-        <%=cm.cmsTitle("zoom_in_map")%>
-        <br />
-        <a rel="nofollow" href="sites/<%=siteid%>/general?mapType=<%=mapType%>&amp;zoom=0#map" title="<%=cm.cms("zoom_out_map")%>"><%=cm.cmsPhrase("Zoom out" )%></a>
-        <%=cm.cmsTitle("zoom_out_map")%>
-        <br />
-      </td>
-    </tr>
-  </table>
-  <br />
-  <form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
-    <input type="hidden" name="sites" value="'<%=site.getIdSite()%>'" />
-    <input id="showMap" type="submit" title="<%=cm.cms("show_map")%>" name="Show map" value="<%=cm.cms("show_map")%>" class="standardButton" />
-    <%=cm.cmsTitle("show_map")%>
-    <%=cm.cmsInput("show_map")%>
-  </form>
+    <script type="text/javascript">djConfig = { parseOnLoad:true };</script>
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.2"></script>
+
+    <script type="text/javascript">
+      dojo.require("dijit.dijit"); // optimize: load dijit layer
+      dojo.require("esri.map");
+      dojo.require("esri.virtualearth.VETiledLayer");
+      dojo.require("esri.tasks.query");
+      dojo.require("esri.tasks.geometry");
+      dojo.require("esri.layers.FeatureLayer");
+      dojo.require("dijit.TooltipDialog");
+    
+      //Assig a value to the SITECODE    
+      var sitecode = '<%=siteid%>'
+      
+      var map
+      
+      //URL for Natura 2000 REST service in use
+      function getSitesMapService() { return 'http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000Hatch_Cach_WM/MapServer'; }
+            
+      function init() {
+        map = new esri.Map("map", {logo:false, slider: true, nav: true});
+        
+        //Creates a BING Maps object layer to add to the map
+        veTileLayer = new esri.virtualearth.VETiledLayer({
+          bingMapsKey: 'AgnYuBP56hftjLZf07GVhxQrm61_oH1Gkw2F1H5_NSWjyN5s1LKylQ1S3kMDTHb_',
+          mapStyle: esri.virtualearth.VETiledLayer.MAP_STYLE_ROAD
+        });
+                
+        //Loads BING map
+        map.addLayer(veTileLayer);
+        
+        //Creates a Natura 2000 layer object based on the site of interest
+        var featureLayer = new esri.layers.FeatureLayer(getSitesMapService() + "/0",{
+          mode: esri.layers.FeatureLayer.MODE_SNAPSHOT,
+          outFields: ["*"],
+          opacity:.35
+        });
+        dojo.connect(featureLayer,"onMouseOver",showTooltip);
+        dojo.connect(featureLayer,"onMouseOut",closeDialog);
+        featureLayer.setDefinitionExpression("SITECODE='" + sitecode + "'");
+        
+        //Loads Natura 2000 Site
+        map.addLayer(featureLayer);
+        loadGeometry(sitecode);
+      }
+
+      //Function for zooming into the site of interest
+      function loadGeometry(sitecode) {
+        var query = new esri.tasks.Query();
+
+        query.where = "SITECODE='" + sitecode + "'"
+        query.returnGeometry = true;
+        var queryTask = new esri.tasks.QueryTask(getSitesMapService() + "/0");
+        queryTask.execute(query);
+
+        // +++++Listen for QueryTask onComplete event+++++
+        dojo.connect(queryTask, "onComplete", function(featureSet) {
+        polygon = featureSet.features[0].geometry;
+        extent = polygon.getExtent();
+        map.setExtent(extent.expand(2), true);
+        });
+      };
+
+      
+      //Tooltip functionality to sitename and show spatial area 
+      function showTooltip(evt){
+      closeDialog();
+      var tipContent = "<b>Name of the site</b>: " + evt.graphic.attributes.SITENAME +
+      "<br/><b>Area</b>: " + Math.round((evt.graphic.attributes.Shape_Area/1000000)*100/100) + " Square Kilometers";
+      var dialog = new dijit.TooltipDialog({
+        id: "tooltipDialog",
+        content: tipContent,
+        style: "position: absolute; padding:2px; background: white; width: 250px; font: normal normal bold 7pt Tahoma;z-index:100"
+        });
+        dialog.startup();
+
+        dojo.style(dialog.domNode, "opacity", 0.8);
+        dijit.placeOnScreen(dialog.domNode, {x: evt.pageX, y: evt.pageY}, ["TL", "BL"], {x: 10, y: 10});
+      }
+      
+      function closeDialog() {
+        var widget = dijit.byId("tooltipDialog");
+        if (widget) {
+            widget.destroy();
+        }
+      }
+      
+    dojo.addOnLoad(init);
+  </script>
+
+  <h2>
+    <%=cm.cmsPhrase("Map of site")%>
+  </h2>
+  <div id="map" style="position: relative; margin: 1em auto; width:700px; height:500px; border:2px solid #050505;">
+  </div>
+
 <%
     }
-%>
-<%
   // Site pictures
       List listPictures = factsheet.getPicturesForSites();
 

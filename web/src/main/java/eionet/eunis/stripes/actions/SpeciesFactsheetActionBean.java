@@ -68,16 +68,16 @@ import eionet.eunis.util.SimpleFrameworkUtils;
 public class SpeciesFactsheetActionBean extends AbstractStripesAction implements RdfAware {
 
     private static final String[][] allTypes = new String[][] {
-        { "GENERAL_INFORMATION", "general", "General information"},
-        { "VERNACULAR_NAMES", "vernacular", "Vernacular names"},
-        { "GEOGRAPHICAL_DISTRIBUTION", "countries", "Geograpical distribution"},
-        { "POPULATION", "population", "Population"},
-        { "TRENDS", "trends", "Trends"},
-        { "REFERENCES", "references", "References"},
-        { "GRID_DISTRIBUTION", "grid", "Grid distribution"},
-        { "LEGAL_INSTRUMENTS", "legal", "Legal Instruments"},
-        { "HABITATS", "habitats", "Habitat types"}, { "SITES", "sites", "Sites"},
-        { "GBIF", "gbif", "GBIF observations"}};
+        {"GENERAL_INFORMATION", "general", "General information"},
+        {"VERNACULAR_NAMES", "vernacular", "Vernacular names"},
+        {"GEOGRAPHICAL_DISTRIBUTION", "countries", "Geograpical distribution"},
+        {"POPULATION", "population", "Population"},
+        {"TRENDS", "trends", "Trends"},
+        {"REFERENCES", "references", "References"},
+//      {"GRID_DISTRIBUTION", "grid", "Grid distribution"},
+        {"LEGAL_INSTRUMENTS", "legal", "Legal Instruments"},
+        {"HABITATS", "habitats", "Habitat types"}, { "SITES", "sites", "Sites"},
+        {"GBIF", "gbif", "GBIF observations"}};
 
     private static final String EXPECTED_IN_PREFIX = "http://eunis.eea.europa.eu/sites/";
 
@@ -88,14 +88,22 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
     private String scientificName = "";
     private String author = "";
 
-    // selected tab
+    /**
+     * selected tab.
+     */
     private String tab;
-    // tabs to display
+    /**
+     * tabs to display.
+     */
     private List<Pair<String, String>> tabsWithData = new LinkedList<Pair<String, String>>();
-    // refered from name
+    /**
+     * refered from name.
+     */
     private String referedFromName;
 
-    // General tab variables
+    /**
+     * General tab variables.
+     */
     private PictureDTO pic;
     private SpeciesNatureObjectPersist specie;
     private List<ClassificationDTO> classifications;
@@ -108,6 +116,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
     private String speciesName;
     private String wormsid;
     private String faeu;
+    /**
+     * Hold ITIS TSN number
+     */
     private String itisTSN;
     private String ncbi;
     private ArrayList<LinkDTO> links;
@@ -175,8 +186,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
                 referedFromName = dao.getScientificName(referedFrom);
             }
             factsheet = new SpeciesFactsheet(mainIdSpecies, mainIdSpecies);
-        } // it's a synonym for another specie, redirect.
-        else {
+        } else {
+            // it's a synonym for another species, redirect.
             getContext().addToSession("referer", tempIdSpecies);
             return new RedirectResolution(getUrlBinding()).addParameter(
                     "idSpecies", mainIdSpecies);
@@ -258,6 +269,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
         return tempIdSpecies;
     }
 
+    /**
+     * Generates RDF for a species.
+     */
     public Resolution generateRdf() {
         int speciesId = getSpeciesId();
 
@@ -400,19 +414,19 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
                 while (st.hasMoreTokens()) {
                     StringTokenizer sts = new StringTokenizer(st.nextToken(),
                             "*");
-                    String classification_id = sts.nextToken();
-                    String classification_level = sts.nextToken();
-                    String classification_name = sts.nextToken();
+                    String classificationId = sts.nextToken();
+                    String classificationLevel = sts.nextToken();
+                    String classificationName = sts.nextToken();
 
-                    if (classification_level.equalsIgnoreCase("kingdom")) {
-                        kingdomname = classification_name;
+                    if (classificationLevel.equalsIgnoreCase("kingdom")) {
+                        kingdomname = classificationName;
                     }
 
                     ClassificationDTO classif = new ClassificationDTO();
 
-                    classif.setId(classification_id);
-                    classif.setLevel(classification_level);
-                    classif.setName(classification_name);
+                    classif.setId(classificationId);
+                    classif.setLevel(classificationLevel);
+                    classif.setName(classificationName);
                     classifications.add(classif);
                 }
             }
@@ -473,12 +487,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
                     Constants.SAME_SYNONYM_NCBI);
 
             String[][] linkTab = {
-                { Constants.ART17_SUMMARY, "Conservation status (art. 17)"},
-                { Constants.BBC_PAGE, "BBC page"}, // {Constants.BIOLIB_PAGE,"Biolib page"},
-                { Constants.BUG_GUIDE, "Bug Guide page"},
-                { "hasBirdActionPlan", "Bird action plan"},
-                { Constants.WIKIPEDIA_ARTICLE, "Wikipedia article"},
-                { Constants.WIKISPECIES_ARTICLE, "Wikispecies article"}
+                {Constants.ART17_SUMMARY, "Conservation status (art. 17)"},
+                {Constants.BBC_PAGE, "BBC page"}, // {Constants.BIOLIB_PAGE,"Biolib page"},
+                {Constants.BUG_GUIDE, "Bug Guide page"},
+                {"hasBirdActionPlan", "Bird action plan"},
+                {Constants.WIKIPEDIA_ARTICLE, "Wikipedia article"},
+                {Constants.WIKISPECIES_ARTICLE, "Wikispecies article"}
             };
             String linkUrl;
 
@@ -604,14 +618,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
             String filename = getContext().getRequest().getSession().getId()
                     + "_" + new Date().getTime() + "_europe.jpg";
             String tempDir = getContext().getInitParameter("TEMP_DIR");
-            String inputFilename = getContext().getServletContext().getRealPath(
-                    "/")
-                            + "gis/europe-bio.jpg";
+            String inputFilename = getContext().getServletContext().getRealPath("/")
+                    + "gis/europe-bio.jpg";
 
             gridImage = tempDir + filename;
-            String outputFilename = getContext().getServletContext().getRealPath(
-                    "/")
-                            + gridImage;
+            String outputFilename = getContext().getServletContext().getRealPath("/")
+                    + gridImage;
 
             gridDistSuccess = false;
             try {

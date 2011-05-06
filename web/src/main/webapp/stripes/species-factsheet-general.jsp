@@ -22,12 +22,20 @@
 	</c:if>
 	<div class="allow-naturepic">
 		<table class="datatable fullwidth">
-		    ${eunis:cmsPhrase(actionBean.contentManagement, 'Scientific name')} : ${actionBean.scientificName }<br />
-            ${eunis:cmsPhrase(actionBean.contentManagement, 'Author')} : <strong>${actionBean.author}</strong><br />
-            ${eunis:cmsPhrase(actionBean.contentManagement, 'Taxonomic rank')} : <strong>${actionBean.factsheet.speciesObject.typeRelatedSpecies}</strong><br />
-            ${eunis:cmsPhrase(actionBean.contentManagement, 'Valid name')} : <strong>${eunis:getYesNo(actionBean.factsheet.speciesObject.validName)}</strong>
-            <br />
-            <br />
+			<col style="width:10em"/>
+			<col/>
+			<col style="width:10em"/>
+			<col/>
+			<tr>
+				<th scope="row">${eunis:cmsPhrase(actionBean.contentManagement, 'Scientific name')}</th><td>${actionBean.scientificName }</td>
+				<th scope="row">${eunis:cmsPhrase(actionBean.contentManagement, 'Taxonomic rank')}</th><td>${actionBean.factsheet.speciesObject.typeRelatedSpecies}</td>
+	      		</tr>
+			<tr>
+				<th scope="row">${eunis:cmsPhrase(actionBean.contentManagement, 'Author')}</th><td>${actionBean.author}</td>
+				<th scope="row">${eunis:cmsPhrase(actionBean.contentManagement, 'Valid name')}</th><td>${eunis:getYesNo(actionBean.factsheet.speciesObject.validName)}</td>
+	      		</tr>
+		</table>
+		<table class="datatable fullwidth">
 	    	<thead>
 	      		<tr>
 	        		<th colspan="2">

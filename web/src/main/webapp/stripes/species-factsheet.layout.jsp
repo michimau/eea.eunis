@@ -26,10 +26,10 @@
 			<c:when test="${eunis:exists(actionBean.factsheet)}">
 			
 			<img alt="${eunis:cms(actionBean.contentManagement,'loading_data')}" id="loading" src="images/loading.gif" />
-			  <h1 class="documentFirstHeading">${eunis:replaceTags(actionBean.scientificName)}</h1>
+			  <h1 class="documentFirstHeading">${eunis:replaceTags(actionBean.scientificName)}
 			  <c:if test="${actionBean.seniorSpecies != null}">
-			    Synonym of: <a href="${pageContext.request.contextPath}/species/${actionBean.seniorIdSpecies}">${actionBean.seniorSpecies }</a>
-			  </c:if>
+			    <span class="redirection-msg">&#8213; Synonym of <a href="${pageContext.request.contextPath}/species/${actionBean.seniorIdSpecies}"><strong>${actionBean.seniorSpecies }</strong></a></span>
+			  </c:if></h1>
 			<div class="documentActions">
 			  <h5 class="hiddenStructure">${eunis:cmsPhrase(actionBean.contentManagement, 'Document Actions') }</h5>
 			  <ul>

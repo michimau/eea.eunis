@@ -246,4 +246,16 @@
 			${isCountry("Estonia")}
 		</example>
 	</function>
+	
+	<function>
+		<description>
+			Return yes/no depending on integer value
+	 	</description>
+		<name>getYesNo</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>String getYesNo(java.lang.Integer)</function-signature>
+		<example>
+			${getYesNo(1)}
+		</example>
+	</function>
 </taglib>

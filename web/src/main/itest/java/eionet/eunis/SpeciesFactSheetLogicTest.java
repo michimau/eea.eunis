@@ -60,14 +60,6 @@ public class SpeciesFactSheetLogicTest extends TestCase  {
 		assertEquals(1015, ((Object [])redirect.getParameters().get("idSpecies"))[0]);
 	}
 	
-	public void testForwardFromName(){
-		//forward from idSpecies=Egretta alba -> idSpecies=1015
-		action.setIdSpecies("Egretta alba");
-		tested = action.index();
-		assertNull(action.getReferedFromName());
-		assertTrue(tested instanceof ForwardResolution);
-	}
-	
 	public void testForwardFromId(){
 		//forward from idSpecies=1015
 		action.setIdSpecies("1015");

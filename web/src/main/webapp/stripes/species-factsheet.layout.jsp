@@ -26,12 +26,10 @@
 			<c:when test="${eunis:exists(actionBean.factsheet)}">
 			
 			<img alt="${eunis:cms(actionBean.contentManagement,'loading_data')}" id="loading" src="images/loading.gif" />
-			  <h1 class="documentFirstHeading">
-				${eunis:replaceTags(actionBean.scientificName)}
-			  <c:if test="${actionBean.referedFromName != null}">
-			   <span class="redirection-msg">&#8213; redirected from <strong>${actionBean.referedFromName }</strong></span>
+			  <h1 class="documentFirstHeading">${eunis:replaceTags(actionBean.scientificName)}</h1>
+			  <c:if test="${actionBean.seniorSpecies != null}">
+			    Synonym of: <a href="${pageContext.request.contextPath}/species/${actionBean.seniorIdSpecies}">${actionBean.seniorSpecies }</a>
 			  </c:if>
-			  </h1>
 			<div class="documentActions">
 			  <h5 class="hiddenStructure">${eunis:cmsPhrase(actionBean.contentManagement, 'Document Actions') }</h5>
 			  <ul>
@@ -55,11 +53,6 @@
 			  </ul>
 			  </div>
 			  <br clear="all" />
-		                ${eunis:cmsPhrase(actionBean.contentManagement, 'Scientific name')} : ${actionBean.scientificName }
-		                <br />
-		                ${eunis:cmsPhrase(actionBean.contentManagement, 'Author')} : <strong>${actionBean.author}</strong>
-		                <br />
-		                <br />
 		                <div id="tabbedmenu">
 		                  <ul>
 			              	<c:forEach items="${actionBean.tabsWithData }" var="dataTab">

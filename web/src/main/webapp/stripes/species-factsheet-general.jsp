@@ -22,6 +22,12 @@
 	</c:if>
 	<div class="allow-naturepic">
 		<table class="datatable fullwidth">
+		    ${eunis:cmsPhrase(actionBean.contentManagement, 'Scientific name')} : ${actionBean.scientificName }<br />
+            ${eunis:cmsPhrase(actionBean.contentManagement, 'Author')} : <strong>${actionBean.author}</strong><br />
+            ${eunis:cmsPhrase(actionBean.contentManagement, 'Taxonomic rank')} : <strong>${actionBean.factsheet.speciesObject.typeRelatedSpecies}</strong><br />
+            ${eunis:cmsPhrase(actionBean.contentManagement, 'Valid name')} : <strong>${eunis:getYesNo(actionBean.factsheet.speciesObject.validName)}</strong>
+            <br />
+            <br />
 	    	<thead>
 	      		<tr>
 	        		<th colspan="2">
@@ -292,7 +298,7 @@
 	    		<c:forEach items="${actionBean.factsheet.synonymsIterator}" var="synonym" varStatus="loop">
 	    			<tr ${loop.index % 2 == 0 ? '' : 'class="zebraeven"'}>
 	    				<td>
-	        				${eunis:treatURLSpecialCharacters(synonym.scientificName)}
+	        				<a href="${pageContext.request.contextPath}/species/${synonym.idSpecies}">${eunis:treatURLSpecialCharacters(synonym.scientificName)}</a>
 	      				</td>
 	      				<td>
 	          				${eunis:treatURLSpecialCharacters(synonym.author)}

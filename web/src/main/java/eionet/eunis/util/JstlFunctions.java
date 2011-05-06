@@ -1,6 +1,5 @@
 package eionet.eunis.util;
 
-
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.net.URLEncoder;
@@ -14,12 +13,10 @@ import ro.finsiel.eunis.jrfTables.species.references.ReferencesJoinPersist;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.utilities.EunisUtil;
 
-
 /**
  * Collection of eunis JSTL functions.
- *
- * @author Aleksandr Ivanov
- * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
+ * 
+ * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 public class JstlFunctions {
 
@@ -27,9 +24,9 @@ public class JstlFunctions {
 
     /**
      * jstl wrapper to factsheet.exists();
-     *
-     * @param factsheet
-     * @return
+     * 
+     * @param suspicious
+     * @return String
      */
     public static boolean exists(Object suspicious) {
         try {
@@ -47,10 +44,10 @@ public class JstlFunctions {
     }
 
     /**
-     *
+     * 
      * @param cms
      * @param key
-     * @return
+     * @return String
      */
     public static String cms(WebContentManagement cms, String key) {
         if (key == null) {
@@ -62,7 +59,7 @@ public class JstlFunctions {
     /**
      * @param cms
      * @param key
-     * @return
+     * @return String
      */
     public static String cmsTitle(WebContentManagement cms, String key) {
         if (key == null) {
@@ -74,7 +71,7 @@ public class JstlFunctions {
     /**
      * @param cms
      * @param key
-     * @return
+     * @return String
      */
     public static String cmsInput(WebContentManagement cms, String key) {
         if (key == null) {
@@ -86,7 +83,7 @@ public class JstlFunctions {
     /**
      * @param cms
      * @param key
-     * @return
+     * @return String
      */
     public static String cmsLabel(WebContentManagement cms, String key) {
         if (key == null) {
@@ -98,7 +95,7 @@ public class JstlFunctions {
     /**
      * @param cms
      * @param key
-     * @return
+     * @return String
      */
     public static String cmsPhrase(WebContentManagement cms, String key) {
         if (key == null) {
@@ -110,7 +107,7 @@ public class JstlFunctions {
     /**
      * @param cms
      * @param key
-     * @return
+     * @return String
      */
     public static String cmsMsg(WebContentManagement cms, String key) {
         if (key == null) {
@@ -122,7 +119,7 @@ public class JstlFunctions {
     /**
      * @param cms
      * @param key
-     * @return
+     * @return String
      */
     public static String cmsAlt(WebContentManagement cms, String key) {
         if (key == null) {
@@ -133,37 +130,36 @@ public class JstlFunctions {
 
     /**
      * @param cms
-     * @return
+     * @return String
      */
     public static String br(WebContentManagement cms) {
         return cms.br();
     }
 
     /**
-     *
+     * 
      * @param in
-     * @return
+     * @return String
      */
     public static String replaceTags(String in) {
         return EunisUtil.replaceTags(in);
     }
 
     /**
-     *
+     * 
      * @param in
      * @param dontCreateHTMLAnchors
      * @param dontCreateHTMLLineBreaks
-     * @return
+     * @return String
      */
     public static String replaceTags(String in, boolean dontCreateHTMLAnchors, boolean dontCreateHTMLLineBreaks) {
-        return EunisUtil.replaceTags(in, dontCreateHTMLAnchors,
-                dontCreateHTMLLineBreaks);
+        return EunisUtil.replaceTags(in, dontCreateHTMLAnchors, dontCreateHTMLLineBreaks);
     }
 
     /**
      * @param object
      * @param defaultValue
-     * @return
+     * @return String
      */
     public static String formatString(Object object, String defaultValue) {
         if (null == object) {
@@ -179,9 +175,9 @@ public class JstlFunctions {
     }
 
     /**
-     * @param object
-     * @param decimals
-     * @return
+     * @param val
+     * @param dec
+     * @return String
      */
     public static String formatDecimal(Object val, Integer dec) {
         String val2 = "";
@@ -205,25 +201,29 @@ public class JstlFunctions {
 
     /**
      * Translate the SOURCE_DB field from CHM62EDT_SITES in human readable language.
-     *
-     * @param sourceDB Source db.
+     * 
+     * @param sourceDB
+     *            Source db.
      * @return Source database.
      */
     public static String translateSourceDB(String sourceDB) {
         if (null == sourceDB) {
             return "n/a";
         }
-        String result = sourceDB.replaceAll("CDDA_NATIONAL", "CDDA National").replaceAll("CDDA_INTERNATIONAL", "CDDA International").replaceAll("NATURA2000", "Natura 2000").replaceAll("CORINE", "Corine").replaceAll("DIPLOMA", "European diploma").replaceAll("BIOGENETIC", "Biogenetic reserves").replaceAll("NATURENET", "NatureNet").replaceAll(
-                "EMERALD", "Emerald");
+        String result = sourceDB.replaceAll("CDDA_NATIONAL", "CDDA National")
+                .replaceAll("CDDA_INTERNATIONAL", "CDDA International").replaceAll("NATURA2000", "Natura 2000")
+                .replaceAll("CORINE", "Corine").replaceAll("DIPLOMA", "European diploma")
+                .replaceAll("BIOGENETIC", "Biogenetic reserves").replaceAll("NATURENET", "NatureNet")
+                .replaceAll("EMERALD", "Emerald");
 
         return result;
     }
 
     /**
-     * Replace characters having special meaning inside HTML tags
-     * with their escaped equivalents, using character entities.
-     *
-     * @param str String to be parsed
+     * Replace characters having special meaning inside HTML tags with their escaped equivalents, using character entities.
+     * 
+     * @param str
+     *            String to be parsed
      * @return Processed string.
      */
     public static String treatURLSpecialCharacters(String str) {
@@ -245,11 +245,15 @@ public class JstlFunctions {
 
     /**
      * This method formats the area field from the sites module which is displayed within HTML result pages.
-     *
-     * @param input the input string
-     * @param left  how much spaces to left on the left side
-     * @param right how much spaces to let on the right side
-     * @param blank which is the blank character to fill empty spaces (ie. in HTML is used &nbsp;)
+     * 
+     * @param input
+     *            the input string
+     * @param left
+     *            how much spaces to left on the left side
+     * @param right
+     *            how much spaces to let on the right side
+     * @param blank
+     *            which is the blank character to fill empty spaces (ie. in HTML is used &nbsp;)
      * @return The formatted string
      */
     public static String formatArea(String input, int left, int right, String blank) {
@@ -261,24 +265,22 @@ public class JstlFunctions {
     }
 
     /**
-     * Find a reference by an idDc and return a vector with two elements , first element contains author of that
-     * reference and second element contains url of reference.
-     *
-     * @param idDc idDC of reference
+     * Find a reference by an idDc and return a vector with two elements , first element contains author of that reference and
+     * second element contains url of reference.
+     * 
+     * @param idDc
+     *            idDC of reference
      * @return author
      */
     public static String getAuthorAndUrlByIdDc(String idDc) {
         String author = "";
 
         try {
-            List references = new ReferencesJoinDomain().findWhere(
-                    "DC_INDEX.ID_DC = " + idDc);
+            List references = new ReferencesJoinDomain().findWhere("DC_INDEX.ID_DC = " + idDc);
 
             if (references != null && references.size() > 0) {
-                author = (((ReferencesJoinPersist) references.get(0)).getSource()
-                        == null
-                                ? ""
-                                : ((ReferencesJoinPersist) references.get(0)).getSource());
+                author = (((ReferencesJoinPersist) references.get(0)).getSource() == null ? ""
+                        : ((ReferencesJoinPersist) references.get(0)).getSource());
                 author = treatURLSpecialCharacters(author);
             }
         } catch (Exception ex) {
@@ -288,18 +290,23 @@ public class JstlFunctions {
     }
 
     /**
-     *
-     * @param input the input string
-     * @param what to replace
+     * 
+     * @param input
+     *            the input string
+     * @param what
+     *            to replace
      * @param replacement
+     * @return String
      */
     public static String replaceAll(String input, String what, String replacement) {
         return input.replaceAll(what, replacement);
     }
 
     /**
-     *
-     * @param input the input string
+     * 
+     * @param input
+     *            the input string
+     * @return String
      */
     public static String encode(String input) {
         String ret = "";
@@ -314,19 +321,35 @@ public class JstlFunctions {
     }
 
     /**
-     *
-     * @param input
+     * 
+     * @param countryName
+     * @return boolean
      */
     public static boolean isCountry(String countryName) {
         return Utilities.isCountry(countryName);
     }
 
     /**
-     *
-     * @param input the input string
+     * 
+     * @param idDc
+     * @return String
      */
     public static String getReferencesByIdDc(String idDc) {
         return Utilities.getReferencesByIdDc(idDc);
+    }
+
+    /**
+     * Return yes/no depending on integer value
+     * 
+     * @param value
+     * @return String
+     */
+    public static String getYesNo(Integer value) {
+        String ret = "no";
+        if (value != null && value == 1) {
+            ret = "yes";
+        }
+        return ret;
     }
 
 }

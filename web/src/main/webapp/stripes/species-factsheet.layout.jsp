@@ -132,6 +132,10 @@
 		                	<%-- GBIF observations --%>
 		                	<stripes:layout-render name="/stripes/species-factsheet-gbif.jsp"/>
 		                </c:if>
+		                <c:if test="${actionBean.tab == 'deliveries'}">
+		                	<%-- Deliveries --%>
+		                	<stripes:layout-render name="/stripes/species-factsheet-deliveries.jsp"/>
+		                </c:if>
 			</c:when>
 			<c:otherwise>
 				<div class="error-msg">

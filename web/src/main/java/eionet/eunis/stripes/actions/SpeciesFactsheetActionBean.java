@@ -55,6 +55,8 @@ import eionet.eunis.dto.VernacularNameDto;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
 import eionet.eunis.util.SimpleFrameworkUtils;
+import eionet.sparqlClient.helpers.QueryExecutor;
+import eionet.sparqlClient.helpers.QueryResult;
 
 /**
  * ActionBean to replace old /species-factsheet.jsp.
@@ -70,7 +72,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
             { "TRENDS", "trends", "Trends" }, { "REFERENCES", "references", "References" },
             // {"GRID_DISTRIBUTION", "grid", "Grid distribution"},
             { "LEGAL_INSTRUMENTS", "legal", "Legal Instruments" }, { "HABITATS", "habitats", "Habitat types" },
-            { "SITES", "sites", "Sites" }, { "GBIF", "gbif", "GBIF observations" } };
+            { "SITES", "sites", "Sites" }, { "GBIF", "gbif", "GBIF observations" }, { "DELIVERIES", "deliveries", "Deliveries" } };
 
     private static final String EXPECTED_IN_PREFIX = "http://eunis.eea.europa.eu/sites/";
 
@@ -120,8 +122,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
     private String itisTSN;
     private String ncbi;
     private ArrayList<LinkDTO> links;
-    private List consStatus;
-    private List subSpecies;
+    private List<NationalThreatWrapper> consStatus;
+    private List<SpeciesNatureObjectPersist> subSpecies;
     private String domainName;
     private String urlPic;
 
@@ -135,7 +137,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
     private UniqueVector colorURL;
     private String mapserverURL;
     private String parameters;
-    private Hashtable statusColorPair;
+    private Hashtable<String, String> statusColorPair;
 
     // Grid distribution tab variables
     private String gridImage;
@@ -147,6 +149,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
     private String mapIds;
     private List<SitesByNatureObjectPersist> subSpeciesSites;
     private String subMapIds;
+    
+    // Deliveries tab variables
+    private QueryResult deliveries;
 
     @DefaultHandler
     public Resolution index() {
@@ -204,6 +209,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
                     tabsWithData.add(new Pair<String, String>(allTypes[i][1], getContentManagement().cmsPhrase(allTypes[i][2])));
                 }
             }
+            
+            // Always add deliveries tab
+            tabsWithData.add(new Pair<String, String>("deliveries", getContentManagement().cmsPhrase("Deliveries")));
 
             specie = factsheet.getSpeciesNatureObject();
             domainName = getContext().getInitParameter("DOMAIN_NAME");
@@ -226,6 +234,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 
             if (tab != null && tab.equals("sites")) {
                 sitesTabActions();
+            }
+            
+            if (tab != null && tab.equals("deliveries")) {
+                deliveriesTabActions(mainIdSpecies);
             }
         }
         String eeaHome = getContext().getInitParameter("EEA_HOME");
@@ -462,7 +474,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
                 List<NationalThreatWrapper> newList = new ArrayList<NationalThreatWrapper>();
 
                 for (int i = 0; i < consStatus.size(); i++) {
-                    String cssClass = i % 2 == 0 ? "zebraodd" : "zebraeven";
                     NationalThreatWrapper threat = (NationalThreatWrapper) consStatus.get(i);
                     String statusDesc = factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode())
                             .replaceAll("'", " ").replaceAll("\"", " ");
@@ -509,7 +520,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
             }
             // Compute distinct color for each status
             statusColorPair = ThreatColor.getColorsForMap(statuses);
-            Vector addedCountries = new Vector();
+            Vector<String> addedCountries = new Vector<String>();
 
             // fix to display in map legend only visible colours
             statuses.clear();
@@ -623,6 +634,30 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
         subSpeciesSites = factsheet.getSitesForSubpecies();
         subMapIds = getIds(subSpeciesSites);
     }
+    
+    private void deliveriesTabActions(int idSpecies) {
+        
+        String query = "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
+            + "PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> "
+            + "PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> "
+            + "SELECT DISTINCT ?released ?coverage ?label ?envelope WHERE { "
+            + "GRAPH ?sourcefile { "
+            + "_:reference ?pred <http://eunis.eea.europa.eu/species/" + idSpecies + "> "
+            + "OPTIONAL { _:reference rdfs:label ?label } "
+            + "} "
+            + "?envelope rod:hasFile ?sourcefile; "
+            + "rod:released ?released; "
+            + "rod:locality _:locurl. "
+            + "_:locurl rdfs:label ?coverage "
+            + "} ORDER BY DESC(?released)";
+        
+        String CRSparqlEndpoint = getContext().getApplicationProperty("cr.sparql.endpoint");
+        if (!StringUtils.isBlank(CRSparqlEndpoint)) {
+            QueryExecutor executor = new QueryExecutor();
+            executor.executeQuery(CRSparqlEndpoint, query);
+            deliveries = executor.getResults();
+        }
+    }
 
     private String getIds(List<SitesByNatureObjectPersist> sites) {
 
@@ -669,8 +704,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
     }
 
     /**
-     * @param currentTab
-     *            the currentTab to set
+     * @param tab the currentTab to set
      */
     public void setTab(String tab) {
         this.tab = tab;
@@ -870,19 +904,19 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
         this.links = links;
     }
 
-    public List getConsStatus() {
+    public List<NationalThreatWrapper> getConsStatus() {
         return consStatus;
     }
 
-    public void setConsStatus(List consStatus) {
+    public void setConsStatus(List<NationalThreatWrapper> consStatus) {
         this.consStatus = consStatus;
     }
 
-    public List getSubSpecies() {
+    public List<SpeciesNatureObjectPersist> getSubSpecies() {
         return subSpecies;
     }
 
-    public void setSubSpecies(List subSpecies) {
+    public void setSubSpecies(List<SpeciesNatureObjectPersist> subSpecies) {
         this.subSpecies = subSpecies;
     }
 
@@ -950,11 +984,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
         this.parameters = parameters;
     }
 
-    public Hashtable getStatusColorPair() {
+    public Hashtable<String, String> getStatusColorPair() {
         return statusColorPair;
     }
 
-    public void setStatusColorPair(Hashtable statusColorPair) {
+    public void setStatusColorPair(Hashtable<String, String> statusColorPair) {
         this.statusColorPair = statusColorPair;
     }
 
@@ -1000,6 +1034,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 
     public int getSeniorIdSpecies() {
         return seniorIdSpecies;
+    }
+
+    public QueryResult getDeliveries() {
+        return deliveries;
     }
 
 }

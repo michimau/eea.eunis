@@ -638,18 +638,24 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
     private void deliveriesTabActions(int idSpecies) {
         
         String query = "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
-            + "PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> "
-            + "PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> "
-            + "SELECT DISTINCT ?released ?coverage ?label ?envelope WHERE { "
-            + "GRAPH ?sourcefile { "
-            + "_:reference ?pred <http://eunis.eea.europa.eu/species/" + idSpecies + "> "
-            + "OPTIONAL { _:reference rdfs:label ?label } "
-            + "} "
-            + "?envelope rod:hasFile ?sourcefile; "
-            + "rod:released ?released; "
-            + "rod:locality _:locurl. "
-            + "_:locurl rdfs:label ?coverage "
-            + "} ORDER BY DESC(?released)";
+                + "PREFIX dc: <http://purl.org/dc/elements/1.1/> "
+                + "PREFIX dct: <http://purl.org/dc/terms/> "
+                + "PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> "
+                + "PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> "
+                + "SELECT DISTINCT xsd:date(?released) AS ?released ?coverage ?envelope ?envtitle "
+                + "IRI(bif:concat(?sourcefile,'/manage_document')) AS ?file ?filetitle "
+                + "WHERE { "
+                + "GRAPH ?sourcefile { "
+                + "_:reference ?pred <http://eunis.eea.europa.eu/species/" + idSpecies + "> "
+                + "OPTIONAL { _:reference rdfs:label ?label } "
+                + "} "
+                + "?envelope rod:hasFile ?sourcefile; "
+                + "rod:released ?released; "
+                + "rod:locality _:locurl; "
+                + "dc:title ?envtitle . "
+                + "_:locurl rdfs:label ?coverage . "
+                + "?sourcefile dc:title ?filetitle "
+                + "} ORDER BY DESC(?released)";
         
         String CRSparqlEndpoint = getContext().getApplicationProperty("cr.sparql.endpoint");
         if (!StringUtils.isBlank(CRSparqlEndpoint)) {

@@ -1,7 +1,5 @@
 package eionet.eunis.util.decorators;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -16,25 +14,23 @@ import eionet.sparqlClient.helpers.ResultValue;
  */
 public class DeliveriesTableDecorator extends TableDecorator {
     
-    protected SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-
     /**
      * 
      * @return String
      * @throws Exception
      */
-    public String getTitle() throws Exception {
+    public String getEnvelope() throws Exception {
 
         Map<String, ResultValue> wm = (Map<String, ResultValue>) getCurrentRowObject();
         if (wm == null) {
             return "";
         } else {
-            ResultValue label = (ResultValue) wm.get("label");
+            ResultValue envtitle = (ResultValue) wm.get("envtitle");
             ResultValue envelope = (ResultValue) wm.get("envelope");
 
             String title = "- no-label -";
-            if (label != null && !StringUtils.isBlank(label.getValue())) {
-                title = label.getValue();
+            if (envtitle != null && !StringUtils.isBlank(envtitle.getValue())) {
+                title = envtitle.getValue();
             }
             if (envelope != null && !StringUtils.isBlank(envelope.getValue())) {
                 StringBuffer ret = new StringBuffer();
@@ -47,13 +43,43 @@ public class DeliveriesTableDecorator extends TableDecorator {
             return title;
         }
     }
+    
+    /**
+     * 
+     * @return String
+     * @throws Exception
+     */
+    public String getFile() throws Exception {
+
+        Map<String, ResultValue> wm = (Map<String, ResultValue>) getCurrentRowObject();
+        if (wm == null) {
+            return "";
+        } else {
+            ResultValue filetitle = (ResultValue) wm.get("filetitle");
+            ResultValue file = (ResultValue) wm.get("file");
+
+            String title = "- no-label -";
+            if (filetitle != null && !StringUtils.isBlank(filetitle.getValue())) {
+                title = filetitle.getValue();
+            }
+            if (file != null && !StringUtils.isBlank(file.getValue())) {
+                StringBuffer ret = new StringBuffer();
+                ret.append("<a href=\"").append(file.getValue()).append("\">");
+                ret.append(title);
+                ret.append("</a>");
+                title = ret.toString();
+            }
+
+            return title;
+        }
+    }
 
     /**
      * 
-     * @return Date
+     * @return String
      * @throws Exception
      */
-    public Date getReleased() throws Exception {
+    public String getReleased() throws Exception {
 
         Map<String, ResultValue> wm = (Map<String, ResultValue>) getCurrentRowObject();
         if (wm == null) {
@@ -61,9 +87,9 @@ public class DeliveriesTableDecorator extends TableDecorator {
         } else {
             ResultValue released = (ResultValue) wm.get("released");
 
-            Date ret = null;
+            String ret = "";
             if (released != null && !StringUtils.isBlank(released.getValue())) {
-                ret = dateFormat.parse(released.getValue());
+                ret = released.getValue();
             }
 
             return ret;
@@ -97,12 +123,30 @@ public class DeliveriesTableDecorator extends TableDecorator {
      * @return String
      * @throws Exception
      */
-    public String getLabel() throws Exception {
+    public String getEnvelopeLabel() throws Exception {
 
         String ret = "";
         Map<String, ResultValue> wm = (Map<String, ResultValue>) getCurrentRowObject();
         if (wm != null) {
-            ResultValue label = (ResultValue) wm.get("label");
+            ResultValue label = (ResultValue) wm.get("envtitle");
+            if (label != null && label.getValue() != null) {
+                ret = label.getValue();
+            }
+        }
+        return ret;
+    }
+    
+    /**
+     * 
+     * @return String
+     * @throws Exception
+     */
+    public String getFileLabel() throws Exception {
+
+        String ret = "";
+        Map<String, ResultValue> wm = (Map<String, ResultValue>) getCurrentRowObject();
+        if (wm != null) {
+            ResultValue label = (ResultValue) wm.get("filetitle");
             if (label != null && label.getValue() != null) {
                 ret = label.getValue();
             }

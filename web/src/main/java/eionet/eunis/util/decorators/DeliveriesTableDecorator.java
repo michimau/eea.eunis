@@ -1,5 +1,7 @@
 package eionet.eunis.util.decorators;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -13,6 +15,8 @@ import eionet.sparqlClient.helpers.ResultValue;
  * 
  */
 public class DeliveriesTableDecorator extends TableDecorator {
+    
+    protected SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     
     /**
      * 
@@ -76,10 +80,10 @@ public class DeliveriesTableDecorator extends TableDecorator {
 
     /**
      * 
-     * @return String
+     * @return Date
      * @throws Exception
      */
-    public String getReleased() throws Exception {
+    public Date getReleased() throws Exception {
 
         Map<String, ResultValue> wm = (Map<String, ResultValue>) getCurrentRowObject();
         if (wm == null) {
@@ -87,9 +91,9 @@ public class DeliveriesTableDecorator extends TableDecorator {
         } else {
             ResultValue released = (ResultValue) wm.get("released");
 
-            String ret = "";
+            Date ret = null;
             if (released != null && !StringUtils.isBlank(released.getValue())) {
-                ret = released.getValue();
+                ret = dateFormat.parse(released.getValue());
             }
 
             return ret;

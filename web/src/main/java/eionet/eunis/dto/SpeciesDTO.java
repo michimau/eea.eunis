@@ -113,8 +113,12 @@ public class SpeciesDTO implements Serializable {
         return validName;
     }
 
-    public void setValidName(String validName) {
-        this.validName = validName;
+    public void setValidName(Short validName) {
+        if (validName != null && validName == 1) {
+            this.validName = "true";
+        } else {
+            this.validName = "false";
+        }
     }
 
     public String getIdSpeciesLink() {

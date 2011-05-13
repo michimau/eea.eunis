@@ -30,8 +30,17 @@ public class SpeciesFactsheetDto implements Serializable {
 
     private static final String DOMAIN_LOCATION = "http://eunis.eea.europa.eu/species/";
 
+    @Element(required = false, name = "speciesCode")
+    private int speciesId;
+    
     @Element(required = false, name = "binomialName")
     private String scientificName;
+    
+    @Element(required = false, name = "validName")
+    private DatatypeDto validName;
+    
+    @Element(required = false, name = "taxonomicRank")
+    private String typeRelatedSpecies;
 
     @Element(required = false, name = "rdf:type")
     private ResourceDto dcmitype;
@@ -62,8 +71,6 @@ public class SpeciesFactsheetDto implements Serializable {
 
     @ElementList(required = false, inline = true)
     private List<AttributeDto> attributes;
-
-    private int speciesId;
 
     @Attribute(required = false, name = "rdf:about")
     public String getRdfAbout() {
@@ -160,6 +167,22 @@ public class SpeciesFactsheetDto implements Serializable {
 
     public void setHasLegalReferences(List<LegalReferenceDTO> hasLegalReferences) {
         this.hasLegalReferences = hasLegalReferences;
+    }
+
+    public DatatypeDto getValidName() {
+        return validName;
+    }
+
+    public void setValidName(DatatypeDto validName) {
+        this.validName = validName;
+    }
+
+    public String getTypeRelatedSpecies() {
+        return typeRelatedSpecies;
+    }
+
+    public void setTypeRelatedSpecies(String typeRelatedSpecies) {
+        this.typeRelatedSpecies = typeRelatedSpecies;
     }
 
 }

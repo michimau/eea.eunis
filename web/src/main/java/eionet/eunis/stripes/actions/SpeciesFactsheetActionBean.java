@@ -45,6 +45,7 @@ import com.ibm.icu.util.StringTokenizer;
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
 import eionet.eunis.dto.ClassificationDTO;
+import eionet.eunis.dto.DatatypeDto;
 import eionet.eunis.dto.LinkDTO;
 import eionet.eunis.dto.PictureDTO;
 import eionet.eunis.dto.ResourceDto;
@@ -277,6 +278,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 
         dto.setSpeciesId(factsheet.getSpeciesObject().getIdSpecies());
         dto.setScientificName(factsheet.getSpeciesObject().getScientificName());
+        dto.setValidName(new DatatypeDto(factsheet.getSpeciesObject().getValidName(), "http://www.w3.org/2001/XMLSchema#boolean"));
+        dto.setTypeRelatedSpecies(factsheet.getSpeciesObject().getTypeRelatedSpecies());
         dto.setGenus(factsheet.getSpeciesObject().getGenus());
         dto.setAuthor(factsheet.getSpeciesObject().getAuthor());
         dto.setDwcScientificName(dto.getScientificName() + ' ' + dto.getAuthor());

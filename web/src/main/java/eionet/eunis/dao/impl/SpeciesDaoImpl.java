@@ -24,7 +24,6 @@ import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist;
 import ro.finsiel.eunis.search.Utilities;
 import eionet.eunis.api.LookupSpeciesResult;
 import eionet.eunis.api.SpeciesLookupSearchParam;
-import eionet.eunis.dao.ISpeciesDao;
 import eionet.eunis.dto.readers.LookupSpeciesReader;
 
 
@@ -85,7 +84,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                 + "LEFT JOIN chm62edt_nature_object_attributes AS NA3 ON SP.ID_NATURE_OBJECT = NA3.ID_NATURE_OBJECT AND NA3.NAME = 'sameSynonymWorMS' "
                 + "LEFT JOIN chm62edt_nature_object_attributes AS NA4 ON SP.ID_NATURE_OBJECT = NA4.ID_NATURE_OBJECT AND NA4.NAME = 'sameSynonymRedlist' "
                 + "LEFT JOIN chm62edt_nature_object_attributes AS NA5 ON SP.ID_NATURE_OBJECT = NA5.ID_NATURE_OBJECT AND NA5.NAME = 'sameSynonymFaEu' "
-                + "LEFT JOIN chm62edt_nature_object_attributes AS NA6 ON SP.ID_NATURE_OBJECT = NA6.ID_NATURE_OBJECT AND NA6.NAME = 'sameSynonymGBIF'";
+                + "LEFT JOIN chm62edt_nature_object_attributes AS NA6 ON SP.ID_NATURE_OBJECT = NA6.ID_NATURE_OBJECT AND NA6.NAME = 'sameSynonymGBIF' LIMIT 30";
 
         try {
             con = getConnection();
@@ -144,10 +143,9 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                 species.setGenus(rs.getString("GENUS"));
                 species.setScientificName(rs.getString("SCIENTIFIC_NAME"));
                 species.setAuthor(rs.getString("AUTHOR"));
-                species.setValidName(rs.getString("VALID_NAME"));
+                species.setValidName(rs.getShort("VALID_NAME"));
                 species.setIdSpeciesLink(rs.getString("ID_SPECIES_LINK"));
-                species.setTypeRelatedSpecies(
-                        rs.getString("TYPE_RELATED_SPECIES"));
+                species.setTypeRelatedSpecies(rs.getString("TYPE_RELATED_SPECIES"));
                 species.setGroupSpecies(rs.getString("COMMON_NAME"));
                 species.setTaxonomicReference(taxonomicReference);
                 species.setIdItis(rs.getString("ITIS"));

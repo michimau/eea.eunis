@@ -115,7 +115,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
     private String redlistLink;
     private String scientificNameURL;
     private String speciesName;
+    /** World Register of Marine Species - also has seals etc. */
     private String wormsid;
+    /** Natura 2000 identifier in chm62edt_nature_object_attributes */
+    private String n2000id;
     private String faeu;
     /**
      * Hold ITIS TSN number
@@ -447,6 +450,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
             // World Register of Marine Species - also has seals etc.
             wormsid = factsheet.getLink(specie.getIdNatureObject(), Constants.SAME_SYNONYM_WORMS);
 
+            n2000id = factsheet.getLink(specie.getIdNatureObject(), "sameSynonymN2000");
+
             if (kingdomname.equalsIgnoreCase("Animals")) {
                 faeu = factsheet.getLink(specie.getIdNatureObject(), Constants.SAME_SYNONYM_FAEU);
             }
@@ -457,8 +462,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
             String[][] linkTab = {
                     { Constants.ART17_SUMMARY, "Conservation status (art. 17)" },
                     { Constants.BBC_PAGE, "BBC page" }, // {Constants.BIOLIB_PAGE,"Biolib page"},
-                    { Constants.BUG_GUIDE, "Bug Guide page" }, { "hasBirdActionPlan", "Bird action plan" },
-                    { Constants.WIKIPEDIA_ARTICLE, "Wikipedia article" }, { Constants.WIKISPECIES_ARTICLE, "Wikispecies article" } };
+                    { Constants.BUG_GUIDE, "Bug Guide page" },
+                    { "hasBirdActionPlan", "Bird action plan" },
+                    { Constants.WIKIPEDIA_ARTICLE, "Wikipedia article" },
+                    { Constants.WIKISPECIES_ARTICLE, "Wikispecies article" } };
             String linkUrl;
 
             links = new ArrayList<LinkDTO>();
@@ -871,6 +878,14 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
 
     public void setSpeciesName(String speciesName) {
         this.speciesName = speciesName;
+    }
+
+    public String getN2000id() {
+        return n2000id;
+    }
+
+    public void setN2000id(String n2000id) {
+        this.n2000id = n2000id;
     }
 
     public String getWormsid() {

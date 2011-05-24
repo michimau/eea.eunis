@@ -108,7 +108,7 @@
 				</c:when>
 		  		<c:otherwise>
 					<div>
-			  			<a href="http://www.iucnredlist.org/apps/redlist/search/external?text=${actionBean.scientificNameURL}&amp;mode=">${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red List search')}</a>
+			  			<a href="http://www.iucnredlist.org/apps/redlist/search/external?text=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}&amp;mode=">${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red List search')}</a>
 			  		</div>
 				</c:otherwise>
 			</c:choose>
@@ -154,6 +154,11 @@
 					</div>
 				</c:otherwise>
 			</c:choose>
+			<c:if test="${!empty actionBean.n2000id}">
+				<div>
+					${eunis:cmsPhrase(actionBean.contentManagement, 'N2000 code:')} ${actionBean.n2000id}
+				</div>
+			</c:if>
 			<c:forEach items="${actionBean.links}" var="link" varStatus="loop">
 				<div>
 	        		<a href="${eunis:treatURLSpecialCharacters(link.url)}">${link.name}</a>

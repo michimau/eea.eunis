@@ -84,7 +84,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                 + "LEFT JOIN chm62edt_nature_object_attributes AS NA3 ON SP.ID_NATURE_OBJECT = NA3.ID_NATURE_OBJECT AND NA3.NAME = 'sameSynonymWorMS' "
                 + "LEFT JOIN chm62edt_nature_object_attributes AS NA4 ON SP.ID_NATURE_OBJECT = NA4.ID_NATURE_OBJECT AND NA4.NAME = 'sameSynonymRedlist' "
                 + "LEFT JOIN chm62edt_nature_object_attributes AS NA5 ON SP.ID_NATURE_OBJECT = NA5.ID_NATURE_OBJECT AND NA5.NAME = 'sameSynonymFaEu' "
-                + "LEFT JOIN chm62edt_nature_object_attributes AS NA6 ON SP.ID_NATURE_OBJECT = NA6.ID_NATURE_OBJECT AND NA6.NAME = 'sameSynonymGBIF' LIMIT 30";
+                + "LEFT JOIN chm62edt_nature_object_attributes AS NA6 ON SP.ID_NATURE_OBJECT = NA6.ID_NATURE_OBJECT AND NA6.NAME = 'sameSynonymGBIF'";
 
         try {
             con = getConnection();

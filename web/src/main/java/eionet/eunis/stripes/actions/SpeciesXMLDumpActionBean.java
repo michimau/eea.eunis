@@ -42,10 +42,7 @@ public class SpeciesXMLDumpActionBean extends AbstractStripesAction {
                     StringBuffer buf = new StringBuffer();
 
                     buf.append("<species>\n");
-                    buf.append("    <speciesCode>").append(sp.getIdSpecies()).append("</speciesCode>\n");
-                    buf.append("    <validName rdf:datatype=\"http://www.w3.org/2001/XMLSchema#boolean\">")
-                            .append(sp.getValidName()).append("</validName>\n");
-                    buf.append("    <taxonomicRank>").append(sp.getTypeRelatedSpecies()).append("</taxonomicRank>\n");
+                    buf.append("    <ID_SPECIES>").append(sp.getIdSpecies()).append("</ID_SPECIES>\n");
                     if (sp.getKingdom() != null && sp.getKingdom().length() > 0) {
                         buf.append("    <Kingdom>").append(EunisUtil.replaceTags(sp.getKingdom(), true, true))
                                 .append("</Kingdom>\n");
@@ -73,8 +70,15 @@ public class SpeciesXMLDumpActionBean extends AbstractStripesAction {
                     if (sp.getAuthor() != null && sp.getAuthor().length() > 0) {
                         buf.append("    <Author>").append(EunisUtil.replaceTags(sp.getAuthor(), true, true)).append("</Author>\n");
                     }
+                    if (sp.getValidName() != null && sp.getValidName().length() > 0) {
+                        buf.append("    <VALID_NAME>").append(sp.getValidNameInteger()).append("</VALID_NAME>\n");
+                    }
                     if (sp.getIdSpeciesLink() != null && sp.getIdSpeciesLink().length() > 0) {
                         buf.append("    <ID_SPECIES_LINK>").append(sp.getIdSpeciesLink()).append("</ID_SPECIES_LINK>\n");
+                    }
+                    if (sp.getTypeRelatedSpecies() != null && sp.getTypeRelatedSpecies().length() > 0) {
+                        buf.append("    <TYPE_RELATED_SPECIES>").append(
+                                EunisUtil.replaceTags(sp.getTypeRelatedSpecies(), true, true)).append("</TYPE_RELATED_SPECIES>\n");
                     }
                     if (sp.getGroupSpecies() != null && sp.getGroupSpecies().length() > 0) {
                         buf.append("    <SPECIES_GROUP>").append(EunisUtil.replaceTags(sp.getGroupSpecies(), true, true))

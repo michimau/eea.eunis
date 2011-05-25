@@ -26,6 +26,7 @@ public class SpeciesDTO implements Serializable {
     private String scientificName;
     private String author;
     private String validName;
+    private int validNameInteger;
     private String idSpeciesLink;
     private String typeRelatedSpecies;
     private String groupSpecies;
@@ -199,6 +200,14 @@ public class SpeciesDTO implements Serializable {
 
     public void setIdGbif(String idGbif) {
         this.idGbif = idGbif;
+    }
+
+    public int getValidNameInteger() {
+        return validNameInteger;
+    }
+
+    public void setValidNameInteger(int validNameInteger) {
+        this.validNameInteger = validNameInteger;
     }
 
 }

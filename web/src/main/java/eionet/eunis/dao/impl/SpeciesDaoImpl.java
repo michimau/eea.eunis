@@ -144,6 +144,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                 species.setScientificName(rs.getString("SCIENTIFIC_NAME"));
                 species.setAuthor(rs.getString("AUTHOR"));
                 species.setValidName(rs.getShort("VALID_NAME"));
+                species.setValidNameInteger(rs.getShort("VALID_NAME"));
                 species.setIdSpeciesLink(rs.getString("ID_SPECIES_LINK"));
                 species.setTypeRelatedSpecies(rs.getString("TYPE_RELATED_SPECIES"));
                 species.setGroupSpecies(rs.getString("COMMON_NAME"));

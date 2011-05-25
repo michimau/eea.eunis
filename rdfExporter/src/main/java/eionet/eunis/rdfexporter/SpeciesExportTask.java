@@ -15,6 +15,7 @@ import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
 import eionet.eunis.dao.DaoFactory;
+import eionet.eunis.dto.DatatypeDto;
 import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.SpeciesFactsheetDto;
 import eionet.eunis.dto.SpeciesSynonymDto;
@@ -48,6 +49,8 @@ public class SpeciesExportTask implements Runnable {
 			SpeciesFactsheetDto dto = new SpeciesFactsheetDto();
 			dto.setSpeciesId(factsheet.getSpeciesObject().getIdSpecies());
 			dto.setScientificName(factsheet.getSpeciesObject().getScientificName());
+			dto.setValidName(new DatatypeDto(factsheet.getSpeciesObject().getValidName(), "http://www.w3.org/2001/XMLSchema#boolean"));
+	        dto.setTypeRelatedSpecies(factsheet.getSpeciesObject().getTypeRelatedSpecies());
 			dto.setGenus(factsheet.getSpeciesObject().getGenus());
 			dto.setAuthor(factsheet.getSpeciesObject().getAuthor());
 			dto.setDwcScientificName(dto.getScientificName() + ' ' + dto.getAuthor());

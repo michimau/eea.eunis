@@ -33,7 +33,7 @@ import eionet.eunis.util.Pair;
 
 
 /**
- * Manage the content from the WEB_CONTENT table. Used for HTML editing of the web pages.
+ * Mange the content from the WEB_CONTENT table. Used for HTML editing of the web pages.
  * This object is constructed to store the content of page in a cache. If HTML is edited directly on database,
  * the looks on page might not be resembled in current page without starting a new browser session. This is because
  * page content is loaded on cache only when new session is created.
@@ -41,6 +41,9 @@ import eionet.eunis.util.Pair;
  * @author finsiel
  */
 public class WebContentManagement implements java.io.Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private static final String STR_EMPTY = "";
     private static final String STR_BR = "<br />";
 
@@ -63,7 +66,7 @@ public class WebContentManagement implements java.io.Serializable {
     private boolean advancedEditMode = false;
 
     /**
-     * Change current language displayed within web pages.
+     * Change current language displayed within web pages
      *
      * @param language
      */
@@ -85,8 +88,8 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Get the text for a token in the content table.
-     * Tokens can't contain apostrophs
+     * Get the text for a token in the content table
+     * Tokens can't contain apostrophes
      *
      * @param idPage
      */
@@ -95,8 +98,8 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Get the text for a token in the content table.
-     * Tokens can't contain apostrophs
+     * Get the text for a token in the content table
+     * Tokens can't contain apostrophes
      * Not to be used inside HTML attribute values
      * If we're in edit mode, then show an edit-icon.
      *
@@ -105,10 +108,7 @@ public class WebContentManagement implements java.io.Serializable {
     public String cmsText(String idPage) {
         String ret = Utilities.replace(idPage, "'", "''");
 
-        ret = getTextByMD5(ret);  //FIXME: Don't MD5 encode
-        if (ret == null) {
-            ret = getText(ret);
-        }
+        ret = getText(ret);
 
         if (editMode) {
             ret += "<a title=\"Edit this text\" href=\"javascript:openContentManager('"
@@ -119,42 +119,44 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Look up a longer phrase (potentially HTML) in the content table.
-     * It is probably not necessary to escape apostrophs
+     * Look up a longer phrase (potentially HTML) in the content table
      *
-     * EUNIS was designed to be localised. It is a feature we don't use at the moment, so
+     * EUNIS was designed to be localized. It is a feature we don't use at the moment, so
      * in order to save resource we bypass the cmsPhrase() method.
+     *
      * @param idPage
+     * @return String
      */
     public String cmsPhrase(String idPage) {
 
-        /*
-         String ret = Utilities.replace(idPage, "'", "\'");
-         return getTextByMD5( ret );
-         */
+        if (language != null && language.equalsIgnoreCase("en")) {
+            return idPage;
+        }
+
         return getTextByMD5(idPage);
     }
 
     /**
-     * Look up a longer phrase (potentially HTML) in the content table with placeholders.
-     * EUNIS was designed to be localised. It is a feature we don't use at the moment, so
+     * Look up a longer phrase (potentially HTML) in the content table
+     * Replace tokens in parameter idPage with values from parameter arguments
+     *
+     * EUNIS was designed to be localized. It is a feature we don't use at the moment, so
      * in order to save resource we bypass the cmsPhrase() method.
+     *
+     * @param idPage
+     * @param arguments
+     * @return String
      */
     public String cmsPhrase(String idPage, Object... arguments) {
 
-        /*
-         String ret = Utilities.replace(idPage, "'", "\'");
-         ret = getTextByMD5( ret );
-         ret = MessageFormat.format(ret, arguments);
-         return ret;
-         */
-        return MessageFormat.format(idPage, arguments);
+        if (language != null && language.equalsIgnoreCase("en")) {
+            return MessageFormat.format(idPage, arguments);
+        }
+
+        String ret = getTextByMD5(idPage);
+        return MessageFormat.format(ret, arguments);
     }
 
-    /**
-     * Edit the text for a token in the content table that isn't shown in view mode.
-     * Javascript, error messages, page title etc.
-     */
     public String cmsMsg(String idPage) {
         if (!editMode) {
             return STR_EMPTY;
@@ -173,7 +175,7 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Edit mode - use this method where the crayon shall appear.
+     * Edit mode - use this method where the crayon will appear
      *
      * @param idPage
      */
@@ -188,7 +190,7 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Edit mode - use this method where the crayon shall appear.
+     * Edit mode - use this method where the crayon will appear
      *
      * @param idPage
      */
@@ -203,7 +205,7 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Edit mode - use this method where the crayon shall appear.
+     * Edit mode - use this method where the crayon will appear
      *
      * @param idPage
      */
@@ -218,7 +220,7 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Edit mode - use this method where the crayon shall appear.
+     * Edit mode - use this method where the crayon will appear
      *
      * @param idPage
      */
@@ -472,7 +474,6 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Show a crayon with a link to an edit dialog.
      * @param idPage
      * @param showEditTag
      * @deprecated use cmsXXXX methods instead.

@@ -728,100 +728,51 @@ public class SQLUtilities {
     }
 
     /**
-     * Determines if a factsheet page will be displayed
+     * Determines what tabs will be shown for given factsheet
      * 
      * @param idNatureObject object from database
      * @param NatureObjectType type of object (species, habitats, sites)
-     * @param TabPageName Tab page name (see factsheets JSP pages for available values)
-     * @return Boolean show/hide tab page in factsheet
+     * @return List<String> list of column names that exist
      */
-    public boolean TabPageIsEmpy(String idNatureObject, String NatureObjectType, String TabPageName) {
+    public List<String> getExistingTabPages(String idNatureObject, String NatureObjectType) {
 
-        boolean ret = true;
+        List<String> existingTabs = new ArrayList<String>();
 
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String SQL = "SELECT ";
-
-        SQL += "`" + TabPageName + "`";
+        String SQL = "SELECT *";
         SQL += " FROM CHM62EDT_TAB_PAGE_" + NatureObjectType.toUpperCase();
         SQL += " WHERE ID_NATURE_OBJECT=" + idNatureObject;
 
-        // System.out.println("SQL = " + SQL);
         try {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             ps = con.prepareStatement(SQL);
             rs = ps.executeQuery();
+            ResultSetMetaData meta = rs.getMetaData();
+            int colCnt = meta.getColumnCount();
 
             if (rs.next()) {
-                ret = !rs.getString(TabPageName).equalsIgnoreCase("Y");
-                if (ret && TabPageName.equalsIgnoreCase("LEGAL_INSTRUMENTS")) {
-                    // search if we have legal instruments for synonyms
-                    String idNatureObjectLink = "";
-                    String idSpecies = "";
-
-                    SQL = "SELECT ID_SPECIES";
-                    SQL += " FROM CHM62EDT_SPECIES";
-                    SQL += " WHERE ID_NATURE_OBJECT = " + idNatureObject;
-                    // System.out.println("SQL = " + SQL);
-                    rs.close();
-                    ps.close();
-                    ps = con.prepareStatement(SQL);
-                    rs = ps.executeQuery();
-                    if (rs.next()) {
-                        idSpecies = rs.getString(1);
-                        // System.out.println("idSpecies = " + idSpecies);
-                        SQL = "SELECT ID_NATURE_OBJECT";
-                        SQL += " FROM CHM62EDT_SPECIES";
-                        SQL += " WHERE ID_SPECIES_LINK = " + idSpecies;
-                        // System.out.println("SQL = " + SQL);
-                        rs.close();
-                        ps.close();
-                        ps = con.prepareStatement(SQL);
-                        rs = ps.executeQuery();
-
-                        if (rs.next()) {
-                            idNatureObjectLink = rs.getString(1);
-                            // System.out.println("idNatureObjectLink = " + idNatureObjectLink);
-                            SQL = "SELECT ";
-                            SQL += "`" + TabPageName + "`";
-                            SQL += " FROM CHM62EDT_TAB_PAGE_"
-                                + NatureObjectType.toUpperCase();
-                            SQL += " WHERE ID_NATURE_OBJECT="
-                                + idNatureObjectLink;
-
-                            rs.close();
-                            ps.close();
-                            ps = con.prepareStatement(SQL);
-                            rs = ps.executeQuery();
-
-                            if (rs.next()) {
-                                ret = !rs.getString(TabPageName).equalsIgnoreCase(
-                                "Y");
-                            } else {
-                                rs.close();
-                                ps.close();
-                            }
-                        } else {
-                            rs.close();
-                            ps.close();
+                for (int i = 1; i <= colCnt; i++){
+                    String colName = meta.getColumnName(i);
+                    if (colName != null && !colName.equalsIgnoreCase("ID_NATURE_OBJECT")) {
+                        boolean exists = rs.getString(colName).equalsIgnoreCase("Y");
+                        if (exists) {
+                            existingTabs.add(colName);
                         }
-                    } else {
-                        rs.close();
-                        ps.close();
                     }
                 }
             }
         } catch (Exception e) {// e.printStackTrace();
+            e.printStackTrace();
         } finally {
             closeAll(con, ps, rs);
         }
 
-        return ret;
+        return existingTabs;
         // quick hack to display all tabs in factsheet
         // return false;
     }
@@ -1384,8 +1335,8 @@ public class SQLUtilities {
             int nSpeciesWithLatLong = Utilities
             .checkedStringToInt(
                     ExecuteSQL(
-                            "select count(*) from eunis_digir where DecimalLatitude is not null AND  DecimalLongitude is not null"),
-                            0);
+                    "select count(*) from eunis_digir where DecimalLatitude is not null AND  DecimalLongitude is not null"),
+                    0);
             int nSpeciesFromHabitats = Utilities.checkedStringToInt(
                     ExecuteSQL(
                     "select count(*) from eunis_digir where GlobalUniqueIdentifier LIKE '%SPECHAB%'"),

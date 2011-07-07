@@ -119,6 +119,9 @@
 								<jsp:param name="idHabitat" value="${actionBean.idHabitat}" />
 							</jsp:include>
 						</c:if>
+						<c:if test="${actionBean.tab == 'art17'}">
+							<stripes:layout-render name="/stripes/habitats-factsheet-art17-dist.jsp"/>
+						</c:if>
 						<c:if test="${actionBean.tab == 'other'}">
 							<c:if test="${actionBean.factsheet.eunis}">
 								<script language="JavaScript" type="text/javascript">
@@ -178,11 +181,16 @@
 					</c:otherwise>
 				</c:choose>
 				<c:if test="${!actionBean.mini}">
-	                 ${eunis:cmsMsg(actionBean.contentManagement, 'factsheet_for')}
-	                 ${eunis:br(actionBean.contentManagement)}
-	                 ${eunis:cmsMsg(actionBean.contentManagement, 'loading_data')}
-	                 ${eunis:br(actionBean.contentManagement)}
-	                 ${eunis:cmsMsg(actionBean.contentManagement, 'error_expanding_node')}		
+					<c:forEach items="${actionBean.tabs}" var="tab">
+	                  ${eunis:cmsMsg(actionBean.contentManagement, tab)}
+	                  ${eunis:br(actionBean.contentManagement)}
+					</c:forEach>
+					${eunis:br(actionBean.contentManagement)}
+	                ${eunis:cmsMsg(actionBean.contentManagement, 'factsheet_for')}
+	                ${eunis:br(actionBean.contentManagement)}
+	                ${eunis:cmsMsg(actionBean.contentManagement, 'loading_data')}
+	                ${eunis:br(actionBean.contentManagement)}
+	                ${eunis:cmsMsg(actionBean.contentManagement, 'error_expanding_node')}		
                  </c:if>	
 			</c:otherwise>
 		</c:choose> 

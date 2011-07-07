@@ -27,7 +27,9 @@
 					</c:otherwise>
 				</c:choose>
 			</title>
-			<stripes:layout-component name="head"/>
+			<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.3/js/dojo/dijit/themes/claro/claro.css">
+    		<script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.3"></script>
+    		<stripes:layout-component name="head"/>
 		</head>
 		<body>
     		<div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>

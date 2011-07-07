@@ -1,29 +1,46 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
+	<script type="text/javascript">
+		dojo.require("esri.map");
+		function init() {
+        	var initialExtent = new esri.geometry.Extent({"xmin":-3549139.09145218,"ymin":4871361.38436808,"xmax":5129676.02317436,"ymax":11227551.8207187,"spatialReference":{"wkid":102100}});
+
+        	var map = new esri.Map("map", {extent: initialExtent});
+        	var tiledMapServiceLayer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer");
+        	map.addLayer(tiledMapServiceLayer);
+
+        	//Use the ImageParameters to set map service layer definitions and map service visible layers before adding to the client map.
+        	var imageParameters = new esri.layers.ImageParameters();
+
+        	//layer.setLayerDefinitions takes an array.  The index of the array corresponds to the layer id.
+        	//In the sample below I add an element in the array at 3,4, and 5.
+        	//Those array elements correspond to the layer id within the remote ArcGISDynamicMapServiceLayer
+        	var layerDefs = [];
+        	layerDefs[1] = "Type = 'species' and Assesment = '${actionBean.scientificName}'";
+        	imageParameters.layerDefinitions = layerDefs;
+
+        	//I want layers 5,4, and 3 to be visible
+        	imageParameters.layerIds = [1];
+        	imageParameters.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
+        	imageParameters.transparent = true;
+
+        	//construct ArcGISDynamicMapServiceLayer with imageParameters from above
+        	var dynamicMapServiceLayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters});
+
+        	map.addLayer(dynamicMapServiceLayer);
+      	}
+      	dojo.addOnLoad(init);
+	</script>
 	<c:if test="${actionBean.showGeoDistribution}">
 		<h2>
 	    	${eunis:cmsPhrase(actionBean.contentManagement, 'Geographical distribution')}
 	  	</h2>
-	  	<table summary="layout" border="0" cellpadding="3" cellspacing="0" width="90%">
-			<tr>
-				<td>
-					<c:if test="${!empty actionBean.colorURL}">
-						<img alt="${eunis:cms(actionBean.contentManagement, 'map_image_eea')}" src="${actionBean.filename}" title="${eunis:cms(actionBean.contentManagement, 'map_image_eea')}" />
-        				${eunis:cmsAlt(actionBean.contentManagement, 'map_image_eea')}
-					</c:if>
-					<br />
-        			<a title="${eunis:cms(actionBean.contentManagement, 'open_new_window')}" href="javascript:openLink('${actionBean.mapserverURL}/getmap.asp?${actionBean.parameters}');">${eunis:cmsPhrase(actionBean.contentManagement, 'Open map in new window')}</a>
-        			${eunis:cmsTitle(actionBean.contentManagement, 'open_new_window')}
-      			</td>
-      			<td>
-        			${eunis:cmsPhrase(actionBean.contentManagement, 'Legend')}:
-        			<br />
-        			<c:forEach items="${actionBean.statusColorPair}" var="pair" varStatus="loop">
-						<img alt="${eunis:cms(actionBean.contentManagement, 'map_image_eea')}" src="${actionBean.mapserverURL}/getLegend.asp?Color=H${pair.value}" title="${eunis:cms(actionBean.contentManagement, 'map_image_eea')}" />${eunis:cmsTitle(actionBean.contentManagement, 'map_image_eea')}&nbsp;${pair.key}
-          				<br />
-        			</c:forEach>
-        		</td>
+    	<table summary="layout" border="0" cellpadding="3" cellspacing="0" width="90%">
+    		<tr>
+    			<td>
+    				<div id="map" style="width:450px; height:300px; border:1px solid #000;"></div>
+    			</td>
     		</tr>
     	</table>
     	<br />

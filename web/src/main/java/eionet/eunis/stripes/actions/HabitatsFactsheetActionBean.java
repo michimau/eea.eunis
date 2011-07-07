@@ -1,8 +1,10 @@
 package eionet.eunis.stripes.actions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,9 +34,16 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction implement
     private static final String[] tabs = {"General information", "Geographical distribution", "Legal instruments",
         "Habitat types", "Sites", "Species", "Other info"};
 
-    private static final String[][] dbtabs = { {"GENERAL_INFORMATION", "general"}, {"GEOGRAPHICAL_DISTRIBUTION", "distribution"},
-        {"LEGAL_INSTRUMENTS", "instruments"}, {"HABITATS", "habitats"}, {"SITES", "sites"}, {"SPECIES", "species"},
-        {"OTHER", "other"}};
+    private static final Map<String, String[]> types = new HashMap<String, String[]>();
+    static {
+        types.put("GENERAL_INFORMATION", new String[] {"general", tabs[0]});
+        types.put("GEOGRAPHICAL_DISTRIBUTION", new String[] {"distribution", tabs[1]});
+        types.put("LEGAL_INSTRUMENTS", new String[] {"instruments", tabs[2]});
+        types.put("HABITATS", new String[] {"habitats", tabs[3]});
+        types.put("SITES", new String[] {"sites", tabs[4]});
+        types.put("SPECIES", new String[] {"species", tabs[5]});
+        types.put("OTHER", new String[] {"other", tabs[6]});
+    }
 
     private static final Integer[] dictionary = {HabitatsFactsheet.OTHER_INFO_ALTITUDE, HabitatsFactsheet.OTHER_INFO_DEPTH,
         HabitatsFactsheet.OTHER_INFO_CLIMATE, HabitatsFactsheet.OTHER_INFO_GEOMORPH, HabitatsFactsheet.OTHER_INFO_SUBSTRATE,
@@ -98,10 +107,18 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction implement
             getContext().getInitParameter("PAGE_TITLE") + getContentManagement().cmsPhrase("Factsheet for") + " "
             + factsheet.getHabitat().getScientificName();
 
-        for (int i = 0; i < tabs.length; i++) {
-            if (!getContext().getSqlUtilities().TabPageIsEmpy(factsheet.idNatureObject.toString(), "HABITATS", dbtabs[i][0])) {
-                tabsWithData.add(new Pair<String, String>(dbtabs[i][1], tabs[i]));
+        // Decide what tabs to show
+        List<String> existingTabs =
+            getContext().getSqlUtilities().getExistingTabPages(factsheet.idNatureObject.toString(), "HABITATS");
+        for (String tab : existingTabs) {
+            if (types.containsKey(tab)) {
+                String[] tabData = types.get(tab);
+                tabsWithData.add(new Pair<String, String>(tabData[0], getContentManagement().cmsPhrase(tabData[1])));
             }
+        }
+
+        if (factsheet.isAnnexI()) {
+            tabsWithData.add(new Pair<String, String>("art17","Distribution map from Art. 17"));
         }
 
         if (tab != null && tab.equals("sites")) {
@@ -225,13 +242,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction implement
      */
     public String[] getTabs() {
         return tabs;
-    }
-
-    /**
-     * @return the dbtabs
-     */
-    public String[][] getDbtabs() {
-        return dbtabs;
     }
 
     /**

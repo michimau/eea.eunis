@@ -144,28 +144,10 @@
 			
 			</c:otherwise>
 		</c:choose>
-		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'General information')}
-		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'Vernacular names')}
-		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'Geograpical distribution')}
-		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'Population')}
-		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'Trends')}
-		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'References')}
-		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'Grid distribution')}
-		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'Legal Instruments')}
-		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'Habitat types')}
-		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'Sites')}
-		    ${eunis:br(actionBean.contentManagement)}
-		    ${eunis:cmsMsg(actionBean.contentManagement, 'GBIF observations')}
+			<c:forEach items="${actionBean.tabs}" var="tab">
+				${eunis:cmsMsg(actionBean.contentManagement, tab)}
+				${eunis:br(actionBean.contentManagement)}
+			</c:forEach>
 		    ${eunis:br(actionBean.contentManagement)}
 		    ${eunis:cmsMsg(actionBean.contentManagement, 'species_factsheet_title')}
 		    ${eunis:br(actionBean.contentManagement)}

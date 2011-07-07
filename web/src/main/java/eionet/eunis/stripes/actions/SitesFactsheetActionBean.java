@@ -1,8 +1,9 @@
 package eionet.eunis.stripes.actions;
 
-
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,20 +27,18 @@ import eionet.eunis.dto.SiteFactsheetDto;
 import eionet.eunis.util.Pair;
 import eionet.eunis.util.SimpleFrameworkUtils;
 
-
 /**
  * Action bean to handle sites-factsheet functionality.
- *
- * @author Aleksandr Ivanov
- * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
+ * 
+ * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 @UrlBinding("/sites/{idsite}/{tab}")
 public class SitesFactsheetActionBean extends AbstractStripesAction implements RdfAware {
 
     private static final String HEADER = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
-            + "xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n"
-            + "xmlns:geo=\"http://www.w3.org/2003/01/geo/wgs84_pos#\"\n"
-            + "xmlns=\"http://eunis.eea.europa.eu/rdf/sites-schema.rdf#\">\n";
+        + "xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n"
+        + "xmlns:geo=\"http://www.w3.org/2003/01/geo/wgs84_pos#\"\n"
+        + "xmlns=\"http://eunis.eea.europa.eu/rdf/sites-schema.rdf#\">\n";
 
     private static final String FOOTER = "\n</rdf:RDF>";
 
@@ -47,16 +46,18 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
     private String mapType = "";
     private String zoom = "";
 
-    private static final String[] tabs = {
-        "General information", "Fauna and Flora", "Designation information",
-        "Habitat types", "Related sites", "Other Info"
-    };
+    private static final String[] tabs = {"General information", "Fauna and Flora", "Designation information", "Habitat types",
+        "Related sites", "Other Info"};
 
-    private static final String[][] dbtabs = {
-        { "GENERAL_INFORMATION", "general"}, { "FAUNA_FLORA", "faunaflora"},
-        { "DESIGNATION", "designations"}, { "HABITATS", "habitats"},
-        { "SITES", "sites"}, { "OTHER", "other"}
-    };
+    private static final Map<String, String[]> types = new HashMap<String, String[]>();
+    static {
+        types.put("GENERAL_INFORMATION", new String[] {"general", tabs[0]});
+        types.put("FAUNA_FLORA", new String[] {"faunaflora", tabs[1]});
+        types.put("DESIGNATION", new String[] {"designations", tabs[2]});
+        types.put("HABITATS", new String[] {"habitats", tabs[3]});
+        types.put("SITES", new String[] {"sites", tabs[4]});
+        types.put("OTHER", new String[] {"other", tabs[5]});
+    }
 
     private String btrail;
     private String pageTitle = "";
@@ -73,6 +74,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 
     /**
      * This action bean only serves RDF through {@link RdfAware}.
+     * 
      * @return Resolution
      */
     @DefaultHandler
@@ -84,43 +86,39 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 
         String eeaHome = getContext().getInitParameter("EEA_HOME");
 
-        btrail = "eea#" + eeaHome
-                + ",home#index.jsp,species#species.jsp,factsheet";
+        btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,factsheet";
         factsheet = new SiteFactsheet(idsite);
         // set metadescription and page title
         if (factsheet.getIDNatureObject() != null) {
             metaDescription = factsheet.getDescription();
-            pageTitle = getContext().getInitParameter("PAGE_TITLE")
-                    + getContentManagement().cms("sites_factsheet_title") + " "
-                    + factsheet.getSiteObject().getName();
+            pageTitle =
+                getContext().getInitParameter("PAGE_TITLE") + getContentManagement().cms("sites_factsheet_title") + " "
+                + factsheet.getSiteObject().getName();
         } else {
-            pageTitle = getContext().getInitParameter("PAGE_TITLE")
-                    + getContentManagement().cmsPhrase(
-                            "No data found in the database for the site with ID = ")
-                            + "'"
-                            + factsheet.getIDSite()
-                            + "'";
+            pageTitle =
+                getContext().getInitParameter("PAGE_TITLE")
+                + getContentManagement().cmsPhrase("No data found in the database for the site with ID = ") + "'"
+                + factsheet.getIDSite() + "'";
             try {
-                getContext().getResponse().setStatus(
-                        HttpServletResponse.SC_NOT_FOUND);
+                getContext().getResponse().setStatus(HttpServletResponse.SC_NOT_FOUND);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         if (factsheet.exists()) {
 
-            for (int i = 0; i < tabs.length; i++) {
-                if (!getContext().getSqlUtilities().TabPageIsEmpy(
-                        factsheet.getSiteObject().getIdNatureObject().toString(),
-                        "SITES", dbtabs[i][0])) {
-                    tabsWithData.add(
-                            new Pair<String, String>(dbtabs[i][1],
-                            getContentManagement().cmsPhrase(tabs[i])));
+            // Decide what tabs to show
+            List<String> existingTabs =
+                getContext().getSqlUtilities().getExistingTabPages(factsheet.getSiteObject().getIdNatureObject().toString(),
+                        "SITES");
+            for (String tab : existingTabs) {
+                if (types.containsKey(tab)) {
+                    String[] tabData = types.get(tab);
+                    tabsWithData.add(new Pair<String, String>(tabData[0], getContentManagement().cmsPhrase(tabData[1])));
                 }
             }
 
-            sdb = SitesSearchUtility.translateSourceDB(
-                    factsheet.getSiteObject().getSourceDB());
+            sdb = SitesSearchUtility.translateSourceDB(factsheet.getSiteObject().getSourceDB());
         }
         return new ForwardResolution("/stripes/sites-factsheet.layout.jsp");
     }
@@ -135,9 +133,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
             Mapper mapper = DozerBeanMapperSingletonWrapper.getInstance();
             SiteFactsheetDto dto = mapper.map(factsheet, SiteFactsheetDto.class);
 
-            dto.setAttributes(
-                    DaoFactory.getDaoFactory().getSitesDao().getAttributes(
-                            factsheet.getSiteObject().getIdSite()));
+            dto.setAttributes(DaoFactory.getDaoFactory().getSitesDao().getAttributes(factsheet.getSiteObject().getIdSite()));
 
             dto.setDcmitype(new ResourceDto("", "http://purl.org/dc/dcmitype/Text"));
             if (dto.getIdDc() != null && !"-1".equals(dto.getIdDc().getId())) {
@@ -145,16 +141,14 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
             } else {
                 dto.setIdDc(null);
             }
-            if (dto.getIdDesignation() != null
-                    && dto.getIdDesignation().getId() != null
+            if (dto.getIdDesignation() != null && dto.getIdDesignation().getId() != null
                     && factsheet.getSiteObject().getIdGeoscope() != null) {
                 String idDesig = dto.getIdDesignation().getId();
                 Integer idGeo = factsheet.getSiteObject().getIdGeoscope();
                 String newId = idGeo.toString() + ":" + idDesig;
 
                 dto.getIdDesignation().setId(newId);
-                dto.getIdDesignation().setPrefix(
-                        "http://eunis.eea.europa.eu/designations/");
+                dto.getIdDesignation().setPrefix("http://eunis.eea.europa.eu/designations/");
             } else {
                 dto.setIdDesignation(null);
             }
@@ -165,13 +159,14 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
                 dto.setLength(new DatatypeDto(factsheet.getSiteObject().getLength(), "http://www.w3.org/2001/XMLSchema#decimal"));
             }
             if (!StringUtils.isBlank(factsheet.getSiteObject().getLatitude())) {
-                dto.setLatitude(new DatatypeDto(factsheet.getSiteObject().getLatitude(), "http://www.w3.org/2001/XMLSchema#decimal"));
+                dto.setLatitude(new DatatypeDto(factsheet.getSiteObject().getLatitude(),
+                "http://www.w3.org/2001/XMLSchema#decimal"));
             }
             if (!StringUtils.isBlank(factsheet.getSiteObject().getLongitude())) {
-                dto.setLongitude(new DatatypeDto(factsheet.getSiteObject().getLongitude(), "http://www.w3.org/2001/XMLSchema#decimal"));
+                dto.setLongitude(new DatatypeDto(factsheet.getSiteObject().getLongitude(),
+                "http://www.w3.org/2001/XMLSchema#decimal"));
             }
-            return new StreamingResolution("application/rdf+xml",
-                    SimpleFrameworkUtils.convertToString(HEADER, dto, FOOTER));
+            return new StreamingResolution("application/rdf+xml", SimpleFrameworkUtils.convertToString(HEADER, dto, FOOTER));
         } else {
             return new ErrorResolution(404);
         }
@@ -185,7 +180,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
     }
 
     /**
-     * @param idsite the idsite to set
+     * @param idsite
+     *            the idsite to set
      */
     public void setIdsite(String idsite) {
         this.idsite = idsite;
@@ -203,13 +199,6 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
      */
     public String[] getTabs() {
         return tabs;
-    }
-
-    /**
-     * @return the dbtabs
-     */
-    public String[][] getDbtabs() {
-        return dbtabs;
     }
 
     /**
@@ -248,7 +237,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
     }
 
     /**
-     * @param tab the tab to set
+     * @param tab
+     *            the tab to set
      */
     public void setTab(String tab) {
         this.tab = tab;

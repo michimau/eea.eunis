@@ -266,10 +266,9 @@ public class WebContentManagement implements java.io.Serializable {
         String ret = idPage;
 
         idPage = idPage.trim();
-        String md5 = EunisUtil.digestHexDec(idPage, "MD5");
 
-        if (htmlContent.containsKey(idPage) || htmlContent.containsKey(md5)) {
-            WebContentPersist text = htmlContent.get(md5);
+        if (htmlContent.containsKey(idPage) || htmlContent.containsKey(idPage)) {
+            WebContentPersist text = htmlContent.get(idPage);
 
             if (text == null) {
                 text = htmlContent.get(idPage);
@@ -288,7 +287,7 @@ public class WebContentManagement implements java.io.Serializable {
             }
         } else {
             List<WebContentPersist> dbKeyList = new WebContentDomain().findWhereOrderBy(
-                    "ID_PAGE='" + md5
+                    "ID_PAGE='" + idPage
                     + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
             "RECORD_DATE DESC");
 
@@ -455,18 +454,10 @@ public class WebContentManagement implements java.io.Serializable {
         List ret = new ArrayList();
 
         try {
-            String md5 = EunisUtil.digestHexDec(idPage, "MD5");
-
             ret = new WebContentDomain().findWhereOrderBy(
-                    "ID_PAGE='" + md5 + "' AND LANG='" + language
+                    "ID_PAGE='" + idPage + "' AND LANG='" + language
                     + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
             "RECORD_DATE DESC");
-            if (ret == null) {
-                ret = new WebContentDomain().findWhereOrderBy(
-                        "ID_PAGE='" + idPage + "' AND LANG='" + language
-                        + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
-                "RECORD_DATE DESC");
-            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -510,15 +501,13 @@ public class WebContentManagement implements java.io.Serializable {
         PreparedStatement ps = null;
 
         try {
-            String md5 = EunisUtil.digestHexDec(idPage, "MD5");
-
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             if (modifyAllIdentical) {
                 ps = con.prepareStatement(
                 "DELETE FROM EUNIS_WEB_CONTENT WHERE ID_PAGE = ? AND LANG = ? ");
-                ps.setString(1, md5);
+                ps.setString(1, idPage);
                 ps.setString(2, lang);
                 ps.execute();
             }
@@ -526,7 +515,7 @@ public class WebContentManagement implements java.io.Serializable {
             if (lang.equalsIgnoreCase("EN")) {
                 ps = con.prepareStatement(
                 "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE, CONTENT_VALID ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 0 )");
-                ps.setString(1, md5);
+                ps.setString(1, idPage);
                 ps.setString(2, content);
                 ps.setString(3, description);
                 ps.setString(4, lang);
@@ -535,7 +524,7 @@ public class WebContentManagement implements java.io.Serializable {
             } else {
                 ps = con.prepareStatement(
                 "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP )");
-                ps.setString(1, md5);
+                ps.setString(1, idPage);
                 ps.setString(2, content);
                 ps.setString(3, description);
                 ps.setString(4, lang);
@@ -547,14 +536,14 @@ public class WebContentManagement implements java.io.Serializable {
             // Do not reload all language again, just modify the current key.
             // cacheHTMLContent( this.language );
             idPage = idPage.trim();
-            if (htmlContent.containsKey(md5)) {
-                WebContentPersist data = htmlContent.get(md5);
+            if (htmlContent.containsKey(idPage)) {
+                WebContentPersist data = htmlContent.get(idPage);
 
                 data.setContent(content);
                 data.setDescription(description);
                 data.setContentLength(contentLength);
-                htmlContent.remove(md5);
-                htmlContent.put(md5, data);
+                htmlContent.remove(idPage);
+                htmlContent.put(idPage, data);
             } else {
                 System.out.println(
                         "savePageContentJDBC: Could not find in cache id_page= "

@@ -1,7 +1,6 @@
 package eionet.eunis.stripes.actions;
 
 
-import java.io.ByteArrayOutputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,15 +13,14 @@ import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.StreamingResolution;
 import net.sourceforge.stripes.action.UrlBinding;
 
+import org.apache.commons.lang.StringUtils;
 import org.dozer.DozerBeanMapperSingletonWrapper;
 import org.dozer.Mapper;
-import org.simpleframework.xml.convert.AnnotationStrategy;
-import org.simpleframework.xml.core.Persister;
-import org.simpleframework.xml.stream.Format;
 
 import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import eionet.eunis.dao.DaoFactory;
+import eionet.eunis.dto.DatatypeDto;
 import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.SiteFactsheetDto;
 import eionet.eunis.util.Pair;
@@ -75,6 +73,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 
     /**
      * This action bean only serves RDF through {@link RdfAware}.
+     * @return Resolution
      */
     @DefaultHandler
     public Resolution defaultAction() {
@@ -128,7 +127,6 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
 
     /**
      * @see eionet.eunis.stripes.actions.RdfAware#generateRdf()
-     * {@inheritDoc}
      */
     public Resolution generateRdf() {
         SiteFactsheet factsheet = new SiteFactsheet(idsite);
@@ -140,8 +138,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
             dto.setAttributes(
                     DaoFactory.getDaoFactory().getSitesDao().getAttributes(
                             factsheet.getSiteObject().getIdSite()));
-            dto.setDcmitype(
-                    new ResourceDto("", "http://purl.org/dc/dcmitype/Text"));
+
+            dto.setDcmitype(new ResourceDto("", "http://purl.org/dc/dcmitype/Text"));
             if (dto.getIdDc() != null && !"-1".equals(dto.getIdDc().getId())) {
                 dto.getIdDc().setPrefix("http://eunis.eea.europa.eu/documents/");
             } else {
@@ -159,6 +157,18 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
                         "http://eunis.eea.europa.eu/designations/");
             } else {
                 dto.setIdDesignation(null);
+            }
+            if (!StringUtils.isBlank(factsheet.getSiteObject().getArea())) {
+                dto.setArea(new DatatypeDto(factsheet.getSiteObject().getArea(), "http://www.w3.org/2001/XMLSchema#decimal"));
+            }
+            if (!StringUtils.isBlank(factsheet.getSiteObject().getLength())) {
+                dto.setLength(new DatatypeDto(factsheet.getSiteObject().getLength(), "http://www.w3.org/2001/XMLSchema#decimal"));
+            }
+            if (!StringUtils.isBlank(factsheet.getSiteObject().getLatitude())) {
+                dto.setLatitude(new DatatypeDto(factsheet.getSiteObject().getLatitude(), "http://www.w3.org/2001/XMLSchema#decimal"));
+            }
+            if (!StringUtils.isBlank(factsheet.getSiteObject().getLongitude())) {
+                dto.setLongitude(new DatatypeDto(factsheet.getSiteObject().getLongitude(), "http://www.w3.org/2001/XMLSchema#decimal"));
             }
             return new StreamingResolution("application/rdf+xml",
                     SimpleFrameworkUtils.convertToString(HEADER, dto, FOOTER));

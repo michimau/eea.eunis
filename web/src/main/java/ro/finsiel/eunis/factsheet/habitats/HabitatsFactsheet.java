@@ -1,10 +1,67 @@
 package ro.finsiel.eunis.factsheet.habitats;
 
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
+
 import net.sf.jrf.exceptions.DatabaseException;
+
 import org.apache.log4j.Logger;
+
 import ro.finsiel.eunis.exceptions.InitializationException;
-import ro.finsiel.eunis.jrfTables.*;
+import ro.finsiel.eunis.jrfTables.Chm62edtAbundanceDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtAbundancePersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtAltitudeDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtChemistryDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtClimateDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtCoverDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtDepthDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtExposureDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtFaithfulnessDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtFaithfulnessPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtFrequenciesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtFrequenciesPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtGeomorphDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtHabitatDescriptionDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtHabitatDescriptionPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtHabitatDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtHabitatHabitatDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtHabitatHabitatPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtHabitatInternationalNameDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtHabitatInternationalNamePersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtHabitatPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtHabitatReferenceDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtHabitatReferencePersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtHabitatSyntaxaDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtHabitatSyntaxaPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtHumidityDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtImpactDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtLifeFormDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtLightIntensityDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectAttributesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectAttributesPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectReportTypeDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectReportTypePersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtReportTypeDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtReportTypePersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtRichnessDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtSalinityDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpatialDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesStatusDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesStatusPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtSubstrateDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtTemperatureDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtTemporalDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtUsageDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtWaterDomain;
+import ro.finsiel.eunis.jrfTables.DcTitleDomain;
+import ro.finsiel.eunis.jrfTables.DcTitlePersist;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatCountryDomain;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalDomain;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.OtherClassificationDomain;
@@ -14,9 +71,6 @@ import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.SortList;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.factsheet.HabitatsSpeciesWrapper;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
 
 
 /**
@@ -229,7 +283,7 @@ public class HabitatsFactsheet {
     public Chm62edtHabitatInternationalNamePersist getHabitatInternational(String englishName) throws InitializationException {
         if (null == englishName) {
             throw new InitializationException(
-                    "idHabitat was null. This is unacceptable.");
+            "idHabitat was null. This is unacceptable.");
         }
         Chm62edtHabitatInternationalNamePersist ret = null;
 
@@ -256,7 +310,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatSintaxa() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. This is unacceptable.");
+            "idHabitat was null. This is unacceptable.");
         }
         Vector ret = new Vector();
 
@@ -365,10 +419,10 @@ public class HabitatsFactsheet {
      */
     public String getSQLForOtherInfo(Integer information) throws InitializationException {
         String result = "SELECT count(*) "
-                + " FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE A "
-                + " INNER JOIN CHM62EDT_REPORT_TYPE B ON A.ID_REPORT_TYPE=B.ID_REPORT_TYPE "
-                + " where A.ID_NATURE_OBJECT = " + idNatureObject
-                + " AND B.LOOKUP_TYPE = ";
+            + " FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE A "
+            + " INNER JOIN CHM62EDT_REPORT_TYPE B ON A.ID_REPORT_TYPE=B.ID_REPORT_TYPE "
+            + " where A.ID_NATURE_OBJECT = " + idNatureObject
+            + " AND B.LOOKUP_TYPE = ";
 
         if (null != information) {
             if (0 == information.compareTo(OTHER_INFO_ALTITUDE)) {
@@ -515,7 +569,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatAltZone() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. This is unacceptable.");
+            "idHabitat was null. This is unacceptable.");
         }
         Vector res = new Vector();
 
@@ -551,7 +605,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatChemistry() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. This is unacceptable.");
+            "idHabitat was null. This is unacceptable.");
         }
         Vector res = new Vector();
 
@@ -586,7 +640,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatClimate() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -622,7 +676,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatImpact() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -658,7 +712,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatTemperature() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -694,7 +748,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatLifeForm() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -730,7 +784,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatLightIntensity() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -766,7 +820,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatSubstrate() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -802,7 +856,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatHumidity() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -838,7 +892,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatUsage() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -874,7 +928,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatWater() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -910,7 +964,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatCover() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -946,7 +1000,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatSalinity() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -982,7 +1036,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatDepth() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -1018,7 +1072,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatGeomorph() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -1054,7 +1108,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatSpeciesRichness() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -1090,7 +1144,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatExposure() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -1126,7 +1180,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatSpatial() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -1162,7 +1216,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatTemporal() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector res = new Vector();
 
@@ -1199,7 +1253,7 @@ public class HabitatsFactsheet {
     public Vector<DescriptionWrapper> getDescrOwner() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector<DescriptionWrapper> results = new Vector<DescriptionWrapper>();
 
@@ -1214,8 +1268,8 @@ public class HabitatsFactsheet {
 
                     results.addElement(
                             new DescriptionWrapper(habitatDescr.getDescription(),
-                            habitatDescr.getLanguageName(),
-                            habitatDescr.getOwnerText(), habitatDescr.getIdDc()));
+                                    habitatDescr.getLanguageName(),
+                                    habitatDescr.getOwnerText(), habitatDescr.getIdDc()));
                 }
             }
         } catch (Exception ex) {
@@ -1223,7 +1277,7 @@ public class HabitatsFactsheet {
         }
         return results;
     }
-  
+
     /**
      * Retrieve habitat references (from CHM62EDT_HABITAT_REFERENCES) using
      * Chm62edtHabitatReferenceDomain
@@ -1234,7 +1288,7 @@ public class HabitatsFactsheet {
     public List<Chm62edtHabitatReferencePersist> getHabitatReferences() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         List<Chm62edtHabitatReferencePersist> results = null;
 
@@ -1256,7 +1310,7 @@ public class HabitatsFactsheet {
     public List getInternationalNames() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         try {
             return new Chm62edtHabitatInternationalNameDomain().findWhere(
@@ -1277,7 +1331,7 @@ public class HabitatsFactsheet {
     private CodeLevelWrapper findHabitatEunisCodeLevel(final Integer idHabitat) throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         CodeLevelWrapper ret = null;
 
@@ -1317,7 +1371,7 @@ public class HabitatsFactsheet {
     private String findScientificName(Integer idHabitat) throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         String ret = "";
 
@@ -1351,12 +1405,10 @@ public class HabitatsFactsheet {
      */
     public Vector getOtherHabitatsRelations() throws InitializationException {
         if (null == idHabitat) {
-            throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            throw new InitializationException("idHabitat was null. Cannot retrieve information.");
         }
         Vector v = new Vector();
-        List list = new Chm62edtHabitatHabitatDomain().findWhere(
-                "ID_HABITAT='" + idHabitat + "'");
+        List list = new Chm62edtHabitatHabitatDomain().findWhere("ID_HABITAT='" + idHabitat + "'");
         Iterator it = list.iterator();
 
         while (it.hasNext()) {
@@ -1373,52 +1425,36 @@ public class HabitatsFactsheet {
                     boolean duplicate = false;
 
                     for (int j = i + 1; j < v.size(); j++) {
-                        Chm62edtHabitatHabitatPersist comparHab = (Chm62edtHabitatHabitatPersist) v.get(
-                                j);
-                        int currentIdHab = Utilities.checkedStringToInt(
-                                currHab.getIdHabitat(), -1);
-                        int comparIdHab = Utilities.checkedStringToInt(
-                                currHab.getIdHabitat(), -2);
+                        Chm62edtHabitatHabitatPersist comparHab = (Chm62edtHabitatHabitatPersist) v.get(j);
+                        int currentIdHab = Utilities.checkedStringToInt(currHab.getIdHabitat(), -1);
+                        int comparIdHab = Utilities.checkedStringToInt(currHab.getIdHabitat(), -2);
 
                         if (currentIdHab == comparIdHab) {
-                            if (currHab.getIdHabitatLink().intValue()
-                                    == comparHab.getIdHabitatLink().intValue()) {
+                            if (currHab.getIdHabitatLink().intValue() == comparHab.getIdHabitatLink().intValue()) {
                                 duplicate = true;
                             }
                         }
                     }
                     if (!duplicate) {
-                        CodeLevelWrapper eunisCode = findHabitatEunisCodeLevel(
-                                currHab.getIdHabitatLink());
+                        CodeLevelWrapper eunisCode = findHabitatEunisCodeLevel(currHab.getIdHabitatLink());
                         HabitatFactsheetRelWrapper aWrapper = new HabitatFactsheetRelWrapper();
 
                         aWrapper.setEunisCode(eunisCode.getCode());
-                        aWrapper.setRelation(
-                                currHab.getRelationType().equals("A")
-                                        ? "Ancestor"
-                                        : "Parent");
-                        aWrapper.setScientificName(
-                                findScientificName(currHab.getIdHabitatLink()));
-                        aWrapper.setCriteria(
-                                HabitatFactsheetRelWrapper.SORT_EUNIS_CODE);
+                        aWrapper.setRelation(currHab.getRelationType().equals("A") ? "Ancestor" : "Parent");
+                        aWrapper.setScientificName(findScientificName(currHab.getIdHabitatLink()));
+                        aWrapper.setCriteria(HabitatFactsheetRelWrapper.SORT_EUNIS_CODE);
                         aWrapper.setLevel(eunisCode.getLevel());
                         aWrapper.setIdHabitat(eunisCode.getIdHabitat());
                         res.addElement(aWrapper);
                     }
                 }
-                Chm62edtHabitatHabitatPersist lastHab = (Chm62edtHabitatHabitatPersist) v.get(
-                        v.size() - 1);
-                CodeLevelWrapper eunisCode = findHabitatEunisCodeLevel(
-                        lastHab.getIdHabitatLink());
+                Chm62edtHabitatHabitatPersist lastHab = (Chm62edtHabitatHabitatPersist) v.get(v.size() - 1);
+                CodeLevelWrapper eunisCode = findHabitatEunisCodeLevel(lastHab.getIdHabitatLink());
                 HabitatFactsheetRelWrapper aWrapper = new HabitatFactsheetRelWrapper();
 
                 aWrapper.setEunisCode(eunisCode.getCode());
-                aWrapper.setRelation(
-                        lastHab.getRelationType().equals("A")
-                                ? "Ancestor"
-                                : "Parent");
-                aWrapper.setScientificName(
-                        findScientificName(lastHab.getIdHabitatLink()));
+                aWrapper.setRelation(lastHab.getRelationType().equals("A") ? "Ancestor" : "Parent");
+                aWrapper.setScientificName(findScientificName(lastHab.getIdHabitatLink()));
                 aWrapper.setCriteria(HabitatFactsheetRelWrapper.SORT_EUNIS_CODE);
                 aWrapper.setLevel(eunisCode.getLevel());
                 aWrapper.setIdHabitat(eunisCode.getIdHabitat());
@@ -1444,7 +1480,7 @@ public class HabitatsFactsheet {
     public List getOtherClassifications() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         List result = new Vector();
 
@@ -1468,7 +1504,7 @@ public class HabitatsFactsheet {
     public Vector getHabitatLegalInfo() throws InitializationException {
         if (null == idHabitat) {
             throw new InitializationException(
-                    "idHabitat was null. Cannot retrieve information.");
+            "idHabitat was null. Cannot retrieve information.");
         }
         Vector ret = new Vector();
 
@@ -1580,49 +1616,49 @@ public class HabitatsFactsheet {
                 if (attributes.size() > 1) {
                     probability = ((Chm62edtReportAttributesPersist) attributes.get(
                             0)
-                                    != null
-                                            && ((Chm62edtReportAttributesPersist) attributes.get(0)).getName().equalsIgnoreCase(
-                                                    "probability")
-                                                            ? ((Chm62edtReportAttributesPersist) attributes.get(0)).getValue()
-                                                            : ((Chm62edtReportAttributesPersist) attributes.get(
-                                                                    1)
-                                                                            != null
-                                                                                    && ((Chm62edtReportAttributesPersist) attributes.get(1)).getName().equalsIgnoreCase(
-                                                                                            "probability")
-                                                                                                    ? ((Chm62edtReportAttributesPersist) attributes.get(1)).getValue()
-                                                                                                    : ""));
+                            != null
+                            && ((Chm62edtReportAttributesPersist) attributes.get(0)).getName().equalsIgnoreCase(
+                                    "probability")
+                                    ? ((Chm62edtReportAttributesPersist) attributes.get(0)).getValue()
+                                            : ((Chm62edtReportAttributesPersist) attributes.get(
+                                                    1)
+                                                    != null
+                                                    && ((Chm62edtReportAttributesPersist) attributes.get(1)).getName().equalsIgnoreCase(
+                                                            "probability")
+                                                            ? ((Chm62edtReportAttributesPersist) attributes.get(1)).getValue()
+                                                                    : ""));
 
                     comment = ((Chm62edtReportAttributesPersist) attributes.get(
                             0)
-                                    != null
-                                            && ((Chm62edtReportAttributesPersist) attributes.get(0)).getName().equalsIgnoreCase(
-                                                    "comment")
-                                                            ? ((Chm62edtReportAttributesPersist) attributes.get(0)).getValue()
-                                                            : ((Chm62edtReportAttributesPersist) attributes.get(
-                                                                    1)
-                                                                            != null
-                                                                                    && ((Chm62edtReportAttributesPersist) attributes.get(1)).getName().equalsIgnoreCase(
-                                                                                            "comment")
-                                                                                                    ? ((Chm62edtReportAttributesPersist) attributes.get(1)).getValue()
-                                                                                                    : ""));
+                            != null
+                            && ((Chm62edtReportAttributesPersist) attributes.get(0)).getName().equalsIgnoreCase(
+                                    "comment")
+                                    ? ((Chm62edtReportAttributesPersist) attributes.get(0)).getValue()
+                                            : ((Chm62edtReportAttributesPersist) attributes.get(
+                                                    1)
+                                                    != null
+                                                    && ((Chm62edtReportAttributesPersist) attributes.get(1)).getName().equalsIgnoreCase(
+                                                            "comment")
+                                                            ? ((Chm62edtReportAttributesPersist) attributes.get(1)).getValue()
+                                                                    : ""));
                 } else {
                     probability = ((Chm62edtReportAttributesPersist) attributes.get(
                             0)
-                                    != null
-                                            ? (((Chm62edtReportAttributesPersist) attributes.get(0)).getName().equalsIgnoreCase(
-                                                    "probability")
-                                                            ? ((Chm62edtReportAttributesPersist) attributes.get(0)).getValue()
-                                                            : "")
-                                                            : "");
+                            != null
+                            ? (((Chm62edtReportAttributesPersist) attributes.get(0)).getName().equalsIgnoreCase(
+                                    "probability")
+                                    ? ((Chm62edtReportAttributesPersist) attributes.get(0)).getValue()
+                                            : "")
+                                            : "");
 
                     comment = ((Chm62edtReportAttributesPersist) attributes.get(
                             0)
-                                    != null
-                                            ? (((Chm62edtReportAttributesPersist) attributes.get(0)).getName().equalsIgnoreCase(
-                                                    "comment")
-                                                            ? ((Chm62edtReportAttributesPersist) attributes.get(0)).getValue()
-                                                            : "")
-                                                            : "");
+                            != null
+                            ? (((Chm62edtReportAttributesPersist) attributes.get(0)).getName().equalsIgnoreCase(
+                                    "comment")
+                                    ? ((Chm62edtReportAttributesPersist) attributes.get(0)).getValue()
+                                            : "")
+                                            : "");
                 }
             }
         } catch (Exception e) {
@@ -1716,7 +1752,7 @@ public class HabitatsFactsheet {
         } catch (DatabaseException _ex) {
             logger.error(
                     "getidNoForHabitat(): Could not find habitat due to database exception: "
-                            + _ex.getMessage());
+                    + _ex.getMessage());
         }
         return -1;
     }
@@ -1816,7 +1852,7 @@ public class HabitatsFactsheet {
      */
     public String getEunisHabitatCode() {
         String eunisCode = (null != habitat)
-                ? habitat.getEunisHabitatCode()
+        ? habitat.getEunisHabitatCode()
                 : null;
 
         if (null == eunisCode) {
@@ -1972,8 +2008,8 @@ public class HabitatsFactsheet {
         try {
             species = new HabitatsNatureObjectReportTypeSpeciesDomain().findWhere(
                     "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND H.ID_NATURE_OBJECT = "
-                            + idNatureObject
-                            + " GROUP BY C.ID_NATURE_OBJECT ORDER BY C.SCIENTIFIC_NAME");
+                    + idNatureObject
+                    + " GROUP BY C.ID_NATURE_OBJECT ORDER BY C.SCIENTIFIC_NAME");
             if (species != null) {
                 for (int i = 0; i < species.size(); i++) {
                     HabitatsNatureObjectReportTypeSpeciesPersist specie = (HabitatsNatureObjectReportTypeSpeciesPersist) species.get(
@@ -1993,10 +2029,10 @@ public class HabitatsFactsheet {
 
                     results.addElement(
                             new HabitatsSpeciesWrapper(specie.getIdSpecies(),
-                            specie.getIdSpeciesLink(),
-                            specie.getSpeciesScientificName(), geoscope,
-                            abundance, frequencies, faithfulness, speciesStatus,
-                            comment));
+                                    specie.getIdSpeciesLink(),
+                                    specie.getSpeciesScientificName(), geoscope,
+                                    abundance, frequencies, faithfulness, speciesStatus,
+                                    comment));
                 }
             }
         } catch (Exception _ex) {
@@ -2043,7 +2079,7 @@ public class HabitatsFactsheet {
     public Chm62edtHabitatPersist getHabitat() {
         return habitat;
     }
-  
+
     /**
      * Returns link to outside sources if one exists
      * @param nauture object ID, outside source name
@@ -2066,15 +2102,15 @@ public class HabitatsFactsheet {
         }
         return link;
     }
-  
+
     /**
      * Returns database edition
      * @return String edition
      */
     public String getEdition() {
-	  
+
         String edition = null;
-	  
+
         List<Chm62edtNatureObjectPersist> natObjects = new Chm62edtNatureObjectDomain().findWhere(
                 "ID_NATURE_OBJECT=" + habitat.getIdNatureObject());
 
@@ -2095,7 +2131,7 @@ public class HabitatsFactsheet {
                 }
             }
         }
-	  
+
         return edition;
     }
 }

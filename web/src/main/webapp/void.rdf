@@ -21,6 +21,7 @@
     <dcterms:description>EUNIS consists of information on Species, Habitat types and Sites</dcterms:description>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
+    <dcterms:subject rdf:resource="http://dbpedia.org/resource/Natura_2000"/>
     <foaf:homepage rdf:resource="http://eunis.eea.europa.eu/"/>
     <void:exampleResource rdf:resource="http://eunis.eea.europa.eu/species/4055"/>
     <void:exampleResource rdf:resource="http://eunis.eea.europa.eu/sites/UK930012"/>
@@ -28,6 +29,8 @@
     <void:subset rdf:resource="#documents"/>
     <void:subset rdf:resource="#sites"/>
     <void:subset rdf:resource="#species"/>
+    <void:subset rdf:resource="#taxonomies"/>
+    <void:subset rdf:resource="#habitats"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="documents">
@@ -48,7 +51,24 @@
     <dcterms:title>Species from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
+    <dcterms:subject rdf:resource="http://dbpedia.org/resource/Species"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/species.rdf.gz"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="taxonomies">
+    <dcterms:title>Higher (family and up) taxonomies from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <dcterms:subject rdf:resource="http://dbpedia.org/resource/Taxonomic_rank"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/taxonomies.rdf.gz"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="habitats">
+    <dcterms:title>Habitat types from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <dcterms:subject rdf:resource="http://dbpedia.org/resource/Habitat"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/habitats.rdf.gz"/>
   </void:Dataset>
 
 </rdf:RDF>

@@ -19,7 +19,7 @@
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,links_and_downloads";
 %>
-    <title><%=application.getInitParameter("PAGE_TITLE")%><%=cm.cms("species_download_title")%></title>
+    <title><%=application.getInitParameter("PAGE_TITLE")%> <%=cm.cmsPhrase("Species links and downloads")%></title>
   </head>
   <body>
     <div id="visual-portal-wrapper">
@@ -57,9 +57,7 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <br />
-                <%=cm.cmsPhrase("No data is available for download at this time.<br />")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("species_download_title")%>
+                <%=cm.cmsText("species_download_01")%>
                 <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>

@@ -287,6 +287,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
         dto.setAuthor(factsheet.getSpeciesObject().getAuthor());
         dto.setDwcScientificName(dto.getScientificName() + ' ' + dto.getAuthor());
         dto.setDcmitype(new ResourceDto("", "http://purl.org/dc/dcmitype/Text"));
+        
+        if (!StringUtils.isBlank(factsheet.getSpeciesObject().getIdTaxcode())) {
+            dto.setTaxonomy(new ResourceDto(factsheet.getSpeciesObject().getIdTaxcode(), "http://eunis.eea.europa.eu/taxonomy/"));
+        }
 
         dto.setAttributes(DaoFactory.getDaoFactory().getSpeciesFactsheetDao()
                 .getAttributesForNatureObject(factsheet.getSpeciesObject().getIdNatureObject()));

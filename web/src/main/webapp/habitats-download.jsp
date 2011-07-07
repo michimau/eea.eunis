@@ -59,7 +59,7 @@
                 </div>
 <!-- MAIN CONTENT -->
                 <%=cm.br()%>
-                <%=cm.cmsPhrase("No data is available for download at this time.")%>
+                <%=cm.cmsText("habitats_download_01")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

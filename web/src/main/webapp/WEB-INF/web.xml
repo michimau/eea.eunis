@@ -463,6 +463,10 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
+		<url-pattern>/taxonomy/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/habitats/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>

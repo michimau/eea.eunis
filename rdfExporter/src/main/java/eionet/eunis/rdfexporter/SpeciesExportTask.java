@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
@@ -55,6 +56,9 @@ public class SpeciesExportTask implements Runnable {
 			dto.setAuthor(factsheet.getSpeciesObject().getAuthor());
 			dto.setDwcScientificName(dto.getScientificName() + ' ' + dto.getAuthor());
 			dto.setDcmitype(new ResourceDto("","http://purl.org/dc/dcmitype/Text"));
+			if (!StringUtils.isBlank(factsheet.getSpeciesObject().getIdTaxcode())) {
+	            dto.setTaxonomy(new ResourceDto(factsheet.getSpeciesObject().getIdTaxcode(), "http://eunis.eea.europa.eu/taxonomy/"));
+	        }
 			
 			dto.setAttributes(
 					DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getAttributesForNatureObject(

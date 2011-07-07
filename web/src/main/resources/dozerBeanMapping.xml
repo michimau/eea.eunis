@@ -4,7 +4,7 @@
           xsi:schemaLocation="http://dozer.sourceforge.net
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
           
-  <mapping wildcard="false" map-null="false"> 
+  <mapping wildcard="false" map-null="false" map-empty-string="false"> 
     <class-a>ro.finsiel.eunis.factsheet.sites.SiteFactsheet</class-a>
     <class-b>eionet.eunis.dto.SiteFactsheetDto</class-b>   
     <field>
@@ -108,14 +108,6 @@
     	<b>nuts</b>
     </field>
     <field>
-    	<a>siteObject.area</a>
-    	<b>area</b>
-    </field>
-    <field>
-    	<a>siteObject.length</a>
-    	<b>length</b>
-    </field>
-    <field>
     	<a>siteObject.altMean</a>
     	<b>altMean</b>
     </field>
@@ -126,18 +118,6 @@
     <field>
     	<a>siteObject.altMin</a>
     	<b>altMin</b>
-    </field>
-    <field>
-    	<a>siteObject.longitude</a>
-    	<b>longitude</b>
-    </field>
-    <field>
-    	<a>siteObject.latitude</a>
-    	<b>latitude</b>
-    </field>
-    <field>
-    	<a>siteObject.latitude</a>
-    	<b>latitude</b>
     </field>
     <field>
     	<a>siteObject.sourceDB</a>

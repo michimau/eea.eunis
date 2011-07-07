@@ -1,6 +1,5 @@
 package ro.finsiel.eunis.dataimport;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,8 +17,9 @@ import org.quartz.SimpleTrigger;
 import ro.finsiel.eunis.session.SessionManager;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
-
 public class PostImportScripts extends HttpServlet {
+
+    private static final long serialVersionUID = -6182473557022340518L;
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String retPage = "dataimport/post-import.jsp";
@@ -27,18 +27,18 @@ public class PostImportScripts extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         SessionManager sessionManager = (SessionManager) session.getAttribute(
-                "SessionManager");
+        "SessionManager");
 
         if (sessionManager.isAuthenticated()
                 && sessionManager.isImportExportData_RIGHT()) {
             String SQL_DRV = request.getSession().getServletContext().getInitParameter(
-                    "JDBC_DRV");
+            "JDBC_DRV");
             String SQL_URL = request.getSession().getServletContext().getInitParameter(
-                    "JDBC_URL");
+            "JDBC_URL");
             String SQL_USR = request.getSession().getServletContext().getInitParameter(
-                    "JDBC_USR");
+            "JDBC_USR");
             String SQL_PWD = request.getSession().getServletContext().getInitParameter(
-                    "JDBC_PWD");
+            "JDBC_PWD");
 
             String sites = request.getParameter("sites");
             String empty_digir = request.getParameter("empty_digir");
@@ -86,11 +86,10 @@ public class PostImportScripts extends HttpServlet {
                 } else {
 
                     SQLUtilities sql = new SQLUtilities();
-
                     sql.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
 
                     if (sites != null && sites.equals("on")) {
-                        sql.runPostImportSitesScript();
+                        sql.runPostImportSitesScript(false);
                     }
 
                     if (empty_digir != null && empty_digir.equals("on")) {
@@ -100,7 +99,7 @@ public class PostImportScripts extends HttpServlet {
                     if (digir != null && digir.equals("on")) {
                         PopulateDigir pd = new PopulateDigir();
 
-                        pd.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+                        pd.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD, false);
                         pd.populate();
                     }
 
@@ -110,7 +109,7 @@ public class PostImportScripts extends HttpServlet {
 
                     TabScripts scripts = new TabScripts();
 
-                    scripts.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+                    scripts.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD, false);
 
                     if (spiecesTab != null && spiecesTab.equals("on")) {
                         scripts.setTabSpecies();

@@ -1,9 +1,9 @@
 package ro.finsiel.eunis.jrfTables;
 
 
-import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.column.columnspecs.CompoundPrimaryKeyColumnSpec;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
+import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 import net.sf.jrf.join.JoinTable;
@@ -37,18 +37,15 @@ public class Chm62edtHabitatInternationalNameDomain extends AbstractDomain {
         this.addColumnSpec(
                 new CompoundPrimaryKeyColumnSpec(
                         new IntegerColumnSpec("ID_HABITAT", "getIdHabitat",
-                        "setIdHabitat", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY),
-                        new IntegerColumnSpec("ID_LANGUAGE", "getIdLanguage",
-                        "setIdLanguage", DEFAULT_TO_NULL, NATURAL_PRIMARY_KEY)));
-        this.addColumnSpec(
-                new StringColumnSpec("INTERNATIONAL_NAME", "getName", "setName",
-                DEFAULT_TO_NULL));
+                                "setIdHabitat", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY),
+                                new IntegerColumnSpec("ID_LANGUAGE", "getIdLanguage",
+                                        "setIdLanguage", DEFAULT_TO_NULL, NATURAL_PRIMARY_KEY)));
+        this.addColumnSpec(new StringColumnSpec("INTERNATIONAL_NAME", "getName", "setName",DEFAULT_TO_NULL));
 
-        JoinTable Language = new JoinTable("CHM62EDT_LANGUAGE A", "ID_LANGUAGE",
-                "ID_LANGUAGE");
+        JoinTable Language = new JoinTable("CHM62EDT_LANGUAGE A", "ID_LANGUAGE","ID_LANGUAGE");
 
-        Language.addJoinColumn(
-                new StringJoinColumn("NAME_EN", "getNameEn", "setNameEn"));
+        Language.addJoinColumn(new StringJoinColumn("NAME_EN", "getNameEn", "setNameEn"));
+        Language.addJoinColumn(new StringJoinColumn("CODE", "getCode", "setCode"));
         this.addJoinTable(Language);
     }
 }

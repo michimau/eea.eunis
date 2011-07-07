@@ -14,10 +14,16 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class Chm62edtHabitatInternationalNamePersist extends PersistentObject {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     private Integer IdHabitat = null;
     private Integer IdLanguage = null;
     private String Name = null;
     private String NameEn = null;
+    private String Code = null;
 
     public Integer getIdLanguage() {
         return IdLanguage;
@@ -49,6 +55,14 @@ public class Chm62edtHabitatInternationalNamePersist extends PersistentObject {
 
     public void setIdHabitat(Integer idHabitat) {
         IdHabitat = idHabitat;
+    }
+
+    public String getCode() {
+        return Code;
+    }
+
+    public void setCode(String code) {
+        Code = code;
     }
 
 }

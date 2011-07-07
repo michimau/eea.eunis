@@ -27,6 +27,8 @@ import java.util.Vector;
  */
 public class PDFSitesFactsheet {
     private static final float TABLE_WIDTH = 94f;
+    private static final int TONE_DD = 0xDD;
+    private static final int TONE_EE = 0xEE;
 
     private WebContentManagement contentManagement = null;
     private final String SQL_DRV;
@@ -150,29 +152,28 @@ public class PDFSitesFactsheet {
                         new Phrase(
                                 "National and/or International Designation of Natura 2000 site",
                                 fontTitle));
-                cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                 cell.setColspan(4);
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase("Designation code", fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase("Designation name", fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase("Category", fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase("Cover(%)", fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 for (int i = 0; i < sitesDesigc.size(); i++) {
-                    DesignationsSitesRelatedDesignationsPersist desig = (DesignationsSitesRelatedDesignationsPersist) sitesDesigc.get(
-                            i);
+                    DesignationsSitesRelatedDesignationsPersist desig = (DesignationsSitesRelatedDesignationsPersist) sitesDesigc.get(i);
 
                     cell = new Cell(
                             new Phrase(desig.getDescription(), fontNormal));
@@ -229,33 +230,32 @@ public class PDFSitesFactsheet {
 
                 cell = new Cell(
                         new Phrase("Relation with designated areas", fontTitle));
-                cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                 cell.setColspan(5);
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase("Designated site", fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase("Designation name", fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase("Category", fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase("Overlap", fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase("Overlap P", fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 for (int i = 0; i < sitesDesigr.size(); i++) {
-                    DesignationsSitesRelatedDesignationsPersist desig = (DesignationsSitesRelatedDesignationsPersist) sitesDesigr.get(
-                            i);
+                    DesignationsSitesRelatedDesignationsPersist desig = (DesignationsSitesRelatedDesignationsPersist) sitesDesigr.get(i);
 
                     cell = new Cell(
                             new Phrase(
@@ -287,9 +287,7 @@ public class PDFSitesFactsheet {
 
                     cell = new Cell(
                             new Phrase(
-                                    Utilities.formatString(
-                                            desig.getOverlapType()),
-                                            fontNormal));
+                                    Utilities.formatString( desig.getOverlapType()), fontNormal));
                     table.addCell(cell);
                 }
                 report.addTable(table);
@@ -344,7 +342,7 @@ public class PDFSitesFactsheet {
             cell = new Cell(
                     new Phrase(contentManagement.cms("site_contact_authorities"),
                     fontSubtitle));
-            cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+            cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
             cell.setColspan(2);
             table.addCell(cell);
 
@@ -489,7 +487,7 @@ public class PDFSitesFactsheet {
             Cell cell;
 
             cell = new Cell(new Phrase("Description", fontTitle));
-            cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+            cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
             cell.setColspan(2);
             table.addCell(cell);
 
@@ -700,7 +698,7 @@ public class PDFSitesFactsheet {
                                     contentManagement.cms(
                                             "ecological_information_fauna_flora"),
                                             fontTitle));
-                    cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                    cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                     cell.setColspan(13);
                     table.addCell(cell);
 
@@ -709,89 +707,88 @@ public class PDFSitesFactsheet {
                                     contentManagement.cms(
                                             "species_scientific_name"),
                                             fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(contentManagement.cms("species_group"),
                             fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(contentManagement.cms("resident"),
                             fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(contentManagement.cms("breeding"),
                             fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(
                                     contentManagement.cms("sites_factsheet_94"),
                                     fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(contentManagement.cms("staging"),
                             fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(
                                     contentManagement.cms("sites_factsheet_96"),
                                     fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(contentManagement.cms("species"),
                             fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(
                                     contentManagement.cms("sites_factsheet_98"),
                                     fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(
                                     contentManagement.cms("sites_factsheet_99"),
                                     fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(contentManagement.cms("isolation"),
                             fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(
                                     contentManagement.cms("sites_factsheet_101"),
                                     fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(contentManagement.cms("species_status"),
                             fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     for (int i = 0; i < species.size(); i++) {
-                        SiteSpeciesPersist specie = (SiteSpeciesPersist) species.get(
-                                i);
+                        SiteSpeciesPersist specie = (SiteSpeciesPersist) species.get(i);
 
                         cell = new Cell(
                                 new Phrase(specie.getSpeciesScientificName(),
@@ -956,20 +953,19 @@ public class PDFSitesFactsheet {
                                 contentManagement.cms(
                                         "other_species_mentioned_in_site"),
                                         fontTitle));
-                cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(
                                 contentManagement.cms("species_scientific_name"),
                                 fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 // Here I get the species which are only specific to site
                 for (int i = 0; i < sitesSpecificspecies.size(); i++) {
-                    Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist) sitesSpecificspecies.get(
-                            i);
+                    Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist) sitesSpecificspecies.get(i);
 
                     cell = new Cell(new Phrase(specie.getValue(), fontNormal));
                     table.addCell(cell);
@@ -1006,7 +1002,7 @@ public class PDFSitesFactsheet {
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("species"), fontTitle));
-                cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                 cell.setColspan(10);
                 table.addCell(cell);
 
@@ -1014,66 +1010,65 @@ public class PDFSitesFactsheet {
                         new Phrase(
                                 contentManagement.cms("species_scientific_name"),
                                 fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("species_group"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("resident"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("breeding"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_94"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("staging"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_99"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_96"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("isolation"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_101"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 for (int i = 0; i < eunisSpeciesListedAnnexesDirectives.size(); i++) {
-                    SitesSpeciesReportAttributesPersist specie = (SitesSpeciesReportAttributesPersist) eunisSpeciesListedAnnexesDirectives.get(
-                            i);
+                    SitesSpeciesReportAttributesPersist specie = (SitesSpeciesReportAttributesPersist) eunisSpeciesListedAnnexesDirectives.get(i);
 
                     cell = new Cell(
                             new Phrase(specie.getSpeciesScientificName(),
@@ -1185,8 +1180,7 @@ public class PDFSitesFactsheet {
 
                 for (int i = 0; i
                         < notEunisSpeciesListedAnnexesDirectives.size(); i++) {
-                    Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist) notEunisSpeciesListedAnnexesDirectives.get(
-                            i);
+                    Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist) notEunisSpeciesListedAnnexesDirectives.get(i);
                     String specName = specie.getName();
 
                     specName = (specName == null
@@ -1220,8 +1214,7 @@ public class PDFSitesFactsheet {
                     cell = new Cell(new Phrase(groupName, fontNormal));
                     table.addCell(cell);
 
-                    attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes(
-                            "RESIDENT_" + specName);
+                    attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("RESIDENT_" + specName);
                     cell = new Cell(
                             new Phrase(
                                     (null != attribute2)
@@ -1232,8 +1225,7 @@ public class PDFSitesFactsheet {
                                                     fontNormal));
                     table.addCell(cell);
 
-                    attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes(
-                            "BREEDING_" + specName);
+                    attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("BREEDING_" + specName);
                     cell = new Cell(
                             new Phrase(
                                     (null != attribute2)
@@ -1244,8 +1236,7 @@ public class PDFSitesFactsheet {
                                                     fontNormal));
                     table.addCell(cell);
 
-                    attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes(
-                            "WINTERING_" + specName);
+                    attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("WINTERING_" + specName);
                     cell = new Cell(
                             new Phrase(
                                     (null != attribute2)
@@ -1256,8 +1247,7 @@ public class PDFSitesFactsheet {
                                                     fontNormal));
                     table.addCell(cell);
 
-                    attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes(
-                            "STAGING_" + specName);
+                    attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("STAGING_" + specName);
                     cell = new Cell(
                             new Phrase(
                                     (null != attribute2)
@@ -1268,8 +1258,7 @@ public class PDFSitesFactsheet {
                                                     fontNormal));
                     table.addCell(cell);
 
-                    attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes(
-                            "CONSERVATION_" + specName);
+                    attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("CONSERVATION_" + specName);
                     cell = new Cell(
                             new Phrase(
                                     (null != attribute2)
@@ -1280,8 +1269,7 @@ public class PDFSitesFactsheet {
                                                     fontNormal));
                     table.addCell(cell);
 
-                    attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes(
-                            "POPULATION_" + specName);
+                    attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("POPULATION_" + specName);
                     cell = new Cell(
                             new Phrase(
                                     (null != attribute2)
@@ -1292,8 +1280,7 @@ public class PDFSitesFactsheet {
                                                     fontNormal));
                     table.addCell(cell);
 
-                    attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes(
-                            "ISOLATION_" + specName);
+                    attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("ISOLATION_" + specName);
                     cell = new Cell(
                             new Phrase(
                                     (null != attribute2)
@@ -1304,8 +1291,7 @@ public class PDFSitesFactsheet {
                                                     fontNormal));
                     table.addCell(cell);
 
-                    attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes(
-                            "GLOBAL_" + specName);
+                    attribute2 = factsheet.findNotEunisSpeciesListedAnnexesDirectivesAttributes("GLOBAL_" + specName);
                     cell = new Cell(
                             new Phrase(
                                     (null != attribute2)
@@ -1341,20 +1327,20 @@ public class PDFSitesFactsheet {
                                 contentManagement.cms(
                                         "other_species_mentioned_in_site"),
                                         fontTitle));
-                cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                 cell.setColspan(4);
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("species_group"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("species_name"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
@@ -1362,7 +1348,7 @@ public class PDFSitesFactsheet {
                                 contentManagement.cms(
                                         "population_size_estimations"),
                                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
@@ -1370,12 +1356,11 @@ public class PDFSitesFactsheet {
                                 contentManagement.cms(
                                         "motivation_for_species_mention"),
                                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 for (int i = 0; i < eunisSpeciesOtherMentioned.size(); i++) {
-                    SitesSpeciesReportAttributesPersist specie = (SitesSpeciesReportAttributesPersist) eunisSpeciesOtherMentioned.get(
-                            i);
+                    SitesSpeciesReportAttributesPersist specie = (SitesSpeciesReportAttributesPersist) eunisSpeciesOtherMentioned.get(i);
 
                     cell = new Cell(
                             new Phrase(specie.getSpeciesCommonName(), fontNormal));
@@ -1386,8 +1371,7 @@ public class PDFSitesFactsheet {
                             fontNormal));
                     table.addCell(cell);
 
-                    attribute = factsheet.findSiteAttributes("OTHER_POPULATION",
-                            specie.getIdReportAttributes());
+                    attribute = factsheet.findSiteAttributes("OTHER_POPULATION", specie.getIdReportAttributes());
                     cell = new Cell(
                             new Phrase(
                                     (null != attribute)
@@ -1398,8 +1382,7 @@ public class PDFSitesFactsheet {
                                                     fontNormal));
                     table.addCell(cell);
 
-                    attribute = factsheet.findSiteAttributes("OTHER_MOTIVATION",
-                            specie.getIdReportAttributes());
+                    attribute = factsheet.findSiteAttributes("OTHER_MOTIVATION", specie.getIdReportAttributes());
                     cell = new Cell(
                             new Phrase(
                                     (null != attribute)
@@ -1413,15 +1396,13 @@ public class PDFSitesFactsheet {
                 Chm62edtSitesAttributesPersist attribute2;
 
                 for (int i = 0; i < notEunisSpeciesOtherMentioned.size(); i++) {
-                    Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist) notEunisSpeciesOtherMentioned.get(
-                            i);
+                    Chm62edtSitesAttributesPersist specie = (Chm62edtSitesAttributesPersist) notEunisSpeciesOtherMentioned.get(i);
                     String specName = specie.getName();
 
                     specName = (specName == null
                             ? " "
                             : specName.substring(specName.lastIndexOf("_") + 1));
-                    attribute2 = factsheet.findNotEunisSpeciesOtherMentionedAttributes(
-                            "TAXGROUP_" + specName);
+                    attribute2 = factsheet.findNotEunisSpeciesOtherMentionedAttributes("TAXGROUP_" + specName);
                     String groupName = (null != attribute2)
                             ? ((null != attribute2.getValue())
                                     ? attribute2.getValue()
@@ -1471,8 +1452,7 @@ public class PDFSitesFactsheet {
                                                     fontNormal));
                     table.addCell(cell);
 
-                    attribute2 = factsheet.findNotEunisSpeciesOtherMentionedAttributes(
-                            "MOTIVATION_" + specName);
+                    attribute2 = factsheet.findNotEunisSpeciesOtherMentionedAttributes("MOTIVATION_" + specName);
                     cell = new Cell(
                             new Phrase(
                                     (null != attribute2)
@@ -1507,7 +1487,7 @@ public class PDFSitesFactsheet {
 
         cell = new Cell(
                 new Phrase(factsheet.getSiteObject().getName(), fontTitle));
-        cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+        cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
         cell.setHorizontalAlignment(Cell.ALIGN_CENTER);
         table.addCell(cell);
         cell = new Cell(
@@ -1516,7 +1496,7 @@ public class PDFSitesFactsheet {
                                 + " " + sdb + " "
                                 + contentManagement.cms("sites_factsheet_02"),
                                 fontNormalBold));
-        cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+        cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
         cell.setHorizontalAlignment(Cell.ALIGN_CENTER);
         table.addCell(cell);
 
@@ -1539,7 +1519,7 @@ public class PDFSitesFactsheet {
         cell = new Cell(
                 new Phrase(contentManagement.cms("site_identification"),
                 fontSubtitle));
-        cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+        cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
         cell.setColspan(2);
         table.addCell(cell);
 
@@ -1848,33 +1828,33 @@ public class PDFSitesFactsheet {
             cell = new Cell(
                     new Phrase(contentManagement.cms("designation_information"),
                     fontTitle));
-            cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+            cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
             cell.setColspan(SiteFactsheet.TYPE_CORINE != type ? 5 : 4);
             table.addCell(cell);
 
             cell = new Cell(
                     new Phrase(contentManagement.cms("source_data_set"),
                     fontNormalBold));
-            cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
             cell = new Cell(
                     new Phrase(contentManagement.cms("designation_code"),
                     fontNormalBold));
-            cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
             cell = new Cell(
                     new Phrase(
                             contentManagement.cms("designation_name_original"),
                             fontNormalBold));
-            cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
             cell = new Cell(
                     new Phrase(contentManagement.cms("designation_name_english"),
                     fontNormalBold));
-            cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
             SitesDesignationsPersist designation = (SitesDesignationsPersist) designations.get(
@@ -1912,12 +1892,12 @@ public class PDFSitesFactsheet {
 
         cell = new Cell(
                 new Phrase(contentManagement.cms("project_id"), fontNormal));
-        cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+        cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
         table.addCell(cell);
 
         cell = new Cell(
                 new Phrase(contentManagement.cms("project_title"), fontNormal));
-        cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+        cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
         table.addCell(cell);
         report.addTable(table);
 
@@ -1934,7 +1914,7 @@ public class PDFSitesFactsheet {
         cell = new Cell(
                 new Phrase(contentManagement.cms("sites_factsheet_24"),
                 fontNormal));
-        cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+        cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
         table.addCell(cell);
         report.addTable(table);
 
@@ -1958,39 +1938,39 @@ public class PDFSitesFactsheet {
         cell = new Cell(
                 new Phrase(contentManagement.cms("location_information"),
                 fontSubtitle));
-        cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+        cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
         cell.setColspan(9);
         table.addCell(cell);
 
         cell = new Cell(new Phrase(contentManagement.cms("country"), fontNormal));
-        cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+        cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
         cell.setColspan(2);
         table.addCell(cell);
 
         cell = new Cell(
                 new Phrase(Utilities.formatString(country, " "), fontNormal));
-        cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+        cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
         table.addCell(cell);
 
         if (!country.equalsIgnoreCase(parentCountry)) {
             cell = new Cell(
                     new Phrase(contentManagement.cms("parent_country"),
                     fontNormal));
-            cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             cell.setColspan(2);
             table.addCell(cell);
 
             cell = new Cell(new Phrase(parentCountry, fontNormal));
-            cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
         } else {
             cell = new Cell(new Phrase(" ", fontNormal));
-            cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             cell.setColspan(2);
             table.addCell(cell);
 
             cell = new Cell(new Phrase(" ", fontNormal));
-            cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
         }
 
@@ -2000,7 +1980,7 @@ public class PDFSitesFactsheet {
             cell = new Cell(
                     new Phrase(contentManagement.cms("sites_factsheet_30"),
                     fontNormal));
-            cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             cell.setColspan(2);
             table.addCell(cell);
 
@@ -2021,7 +2001,7 @@ public class PDFSitesFactsheet {
                     }
                 }
                 cell = new Cell(new Phrase(txt, fontNormal));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
             }
@@ -2073,80 +2053,80 @@ public class PDFSitesFactsheet {
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_149"),
                         fontTitle));
-                cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                 cell.setColspan(12);
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("biogeographic_region"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_152"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_153"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_154"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_155"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_156"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_157"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_158"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_159"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_160"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_161"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_162"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 // ROW
@@ -2292,7 +2272,7 @@ public class PDFSitesFactsheet {
                                     contentManagement.cms(
                                             "biogeographic_regions"),
                                             fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     String txt = " ";
@@ -2304,7 +2284,7 @@ public class PDFSitesFactsheet {
                         txt += persist.getValue() + ",";
                     }
                     cell = new Cell(new Phrase(txt, fontNormal));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
                     report.addTable(table);
                 }
@@ -2371,49 +2351,49 @@ public class PDFSitesFactsheet {
                             new Phrase(
                                     "Ecological information: Habitats within site",
                                     fontTitle));
-                    cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                    cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                     cell.setColspan(7);
                     table.addCell(cell);
 
                     cell = new Cell(new Phrase("Code", fontNormal));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(contentManagement.cms("english_name"),
                             fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(contentManagement.cms("cover_percent"),
                             fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(contentManagement.cms("representativity"),
                             fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(
                                     contentManagement.cms("sites_factsheet_118"),
                                     fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(contentManagement.cms("conservation"),
                             fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(contentManagement.cms("global"),
                             fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     if (!habit1Eunis.isEmpty()) {
@@ -2598,7 +2578,7 @@ public class PDFSitesFactsheet {
                             new Phrase(
                                     "Ecological information: Habitats within site",
                                     fontTitle));
-                    cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                    cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                     cell.setColspan(3);
                     table.addCell(cell);
 
@@ -2606,7 +2586,7 @@ public class PDFSitesFactsheet {
                             new Phrase(
                                     contentManagement.cms("habitat_type_code"),
                                     fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
@@ -2614,13 +2594,13 @@ public class PDFSitesFactsheet {
                                     contentManagement.cms(
                                             "habitat_type_english_name"),
                                             fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase(contentManagement.cms("cover_percent"),
                             fontNormalBold));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     if (!habits2Eunis.isEmpty()) {
@@ -2717,33 +2697,33 @@ public class PDFSitesFactsheet {
                             new Phrase(
                                     "Ecological information: Habitats within site",
                                     fontTitle));
-                    cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                    cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                     cell.setColspan(6);
                     table.addCell(cell);
 
                     cell = new Cell(
                             new Phrase("Habitat type english name", fontNormal));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(new Phrase("Cover (%)", fontNormal));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(new Phrase("Representativity", fontNormal));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(new Phrase("Surface (ha)", fontNormal));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(new Phrase("Conservation", fontNormal));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     cell = new Cell(new Phrase("Global", fontNormal));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     Chm62edtReportAttributesPersist attribute;
@@ -2830,11 +2810,11 @@ public class PDFSitesFactsheet {
 
                     cell = new Cell(
                             new Phrase("Habitat types not in EUNIS", fontTitle));
-                    cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                    cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                     table.addCell(cell);
 
                     cell = new Cell(new Phrase("Habitat type code", fontNormal));
-                    cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                    cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                     table.addCell(cell);
 
                     for (int i = 0; i < sitesSpecificHabitats.size(); i++) {
@@ -2883,38 +2863,38 @@ public class PDFSitesFactsheet {
                 cell = new Cell(
                         new Phrase(contentManagement.cms("human_activities"),
                         fontTitle));
-                cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                 cell.setColspan(5);
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("activity"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("inside_outside"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("intensity"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("cover_percent"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("influence"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 for (int i = 0; i < activities.size(); i++) {
@@ -3041,32 +3021,32 @@ public class PDFSitesFactsheet {
                 cell = new Cell(
                         new Phrase(contentManagement.cms("human_activities"),
                         fontSubtitle));
-                cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                 cell.setColspan(6);
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase("Activity", fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase("Description", fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase("Location", fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase("Intensity", fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase("Cover(%)", fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase("Influence", fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 for (int i = 0; i < activities.size(); i++) {
@@ -3200,32 +3180,32 @@ public class PDFSitesFactsheet {
                 cell = new Cell(
                         new Phrase(contentManagement.cms("reference_to_maps"),
                         fontSubtitle));
-                cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                 cell.setColspan(4);
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("number"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("scale"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("projection"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("details"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase(mapID, fontNormal));
@@ -3282,42 +3262,42 @@ public class PDFSitesFactsheet {
                 cell = new Cell(
                         new Phrase(contentManagement.cms("reference_to_photos"),
                         fontSubtitle));
-                cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                 cell.setColspan(6);
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("type"), fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("number"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("location"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("description"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("date"), fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("author"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(new Phrase(photoType, fontNormal));
@@ -3370,7 +3350,7 @@ public class PDFSitesFactsheet {
             cell = new Cell(
                     new Phrase(contentManagement.cms("sites_factsheet_144"),
                     fontSubtitle));
-            cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+            cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
             cell.setColspan(2);
             table.addCell(cell);
             if (SiteFactsheet.TYPE_CDDA_NATIONAL == type) {
@@ -3447,37 +3427,37 @@ public class PDFSitesFactsheet {
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_123"),
                         fontSubtitle));
-                cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                 cell.setColspan(5);
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("id_site"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("scientific_name"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("within_databases"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("type"), fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("overlap_percent"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 for (int i = 0; i < sites.size(); i++) {
@@ -3543,26 +3523,26 @@ public class PDFSitesFactsheet {
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_123"),
                         fontTitle));
-                cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                 cell.setColspan(3);
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("Type of relation"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("Site code"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("Site name"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 for (int i = 0; i < sitesNatura200.size(); i++) {
@@ -3603,32 +3583,32 @@ public class PDFSitesFactsheet {
                 cell = new Cell(
                         new Phrase(contentManagement.cms("sites_factsheet_123"),
                         fontSubtitle));
-                cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
+                cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
                 cell.setColspan(4);
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("Site code"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("Site name"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("Overlap"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 cell = new Cell(
                         new Phrase(contentManagement.cms("Overlap P"),
                         fontNormalBold));
-                cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
+                cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
                 for (int i = 0; i < sitesCorine.size(); i++) {

@@ -297,7 +297,7 @@ public class SitesSearchUtility {
         ret.append((null != longitudeOrLatitude && !longitudeOrLatitude.equalsIgnoreCase("n/a")) ? longitudeOrLatitude : " ");
         ret.append(" ");
         ret.append((null != degrees) ? ((degrees.length() == 1) ? " " + degrees : degrees) : "  ");
-        ret.append("°");
+        ret.append("\u00B0");
         ret.append((null != minutes) ? ((minutes.length() == 1) ? "0" + minutes : minutes) : "00");
         ret.append("'");
         ret.append((null != seconds) ? ((seconds.length() == 1) ? "0" + seconds : seconds) : "00");
@@ -334,7 +334,7 @@ public class SitesSearchUtility {
         ret.append((null != longEW && !longEW.equalsIgnoreCase("n/a")) ? longEW : " ");
         ret.append(" ");
         ret.append((null != longDeg) ? ((longDeg.length() == 1) ? " " + longDeg : longDeg) : "  ");
-        ret.append("°");
+        ret.append("\u00B0");
         ret.append((null != longMin) ? ((longMin.length() == 1) ? "0" + longMin : longMin) : "00");
         ret.append("'");
         ret.append((null != longSec) ? ((longSec.length() == 1) ? "0" + longSec : longSec) : "00");
@@ -344,7 +344,7 @@ public class SitesSearchUtility {
         ret.append((null != latNS && !latNS.equalsIgnoreCase("n/a")) ? latNS : " ");
         ret.append(" ");
         ret.append((null != latDeg) ? ((latDeg.length() == 1) ? " " + latDeg : latDeg) : "  ");
-        ret.append("°");
+        ret.append("\u00B0");
         ret.append((null != latMin) ? ((latMin.length() == 1) ? "0" + latMin : latMin) : "00");
         ret.append("'");
         ret.append((null != latSec) ? ((latSec.length() == 1) ? "0" + latSec : latSec) : "00");

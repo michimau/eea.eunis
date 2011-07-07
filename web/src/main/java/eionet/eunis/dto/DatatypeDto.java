@@ -39,6 +39,15 @@ public class DatatypeDto implements Serializable {
     }
     
     /**
+     * @param value
+     * @param type
+     */
+    public DatatypeDto(String value, String type) {
+        this.value = value;
+        this.type = type;
+    }
+    
+    /**
      * @return value
      */
     public String getValue() {

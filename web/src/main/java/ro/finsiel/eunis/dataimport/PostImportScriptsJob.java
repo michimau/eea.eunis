@@ -1,17 +1,18 @@
 package ro.finsiel.eunis.dataimport;
 
-
 import java.sql.SQLException;
+
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import ro.finsiel.eunis.utilities.SQLUtilities;
 
+import ro.finsiel.eunis.utilities.SQLUtilities;
 
 public class PostImportScriptsJob implements Job {
 
-    public PostImportScriptsJob() {}
+    public PostImportScriptsJob() {
+    }
 
     public void execute(JobExecutionContext context) throws JobExecutionException {
 
@@ -37,7 +38,7 @@ public class PostImportScriptsJob implements Job {
         try {
 
             if (sites != null && sites.equals("on")) {
-                sql.runPostImportSitesScript();
+                sql.runPostImportSitesScript(false);
             }
 
             if (empty_digir != null && empty_digir.equals("on")) {
@@ -47,7 +48,7 @@ public class PostImportScriptsJob implements Job {
             if (digir != null && digir.equals("on")) {
                 PopulateDigir pd = new PopulateDigir();
 
-                pd.Init(sqlDrv, sqlUrl, sqlUsr, sqlPwd);
+                pd.Init(sqlDrv, sqlUrl, sqlUsr, sqlPwd, false);
                 pd.populate();
             }
 
@@ -57,7 +58,7 @@ public class PostImportScriptsJob implements Job {
 
             TabScripts scripts = new TabScripts();
 
-            scripts.Init(sqlDrv, sqlUrl, sqlUsr, sqlPwd);
+            scripts.Init(sqlDrv, sqlUrl, sqlUsr, sqlPwd, false);
 
             if (spiecesTab != null && spiecesTab.equals("on")) {
                 scripts.setTabSpecies();

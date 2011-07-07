@@ -33,7 +33,7 @@ import eionet.eunis.util.Pair;
 
 
 /**
- * Mange the content from the WEB_CONTENT table. Used for HTML editing of the web pages.
+ * Manage the content from the WEB_CONTENT table. Used for HTML editing of the web pages.
  * This object is constructed to store the content of page in a cache. If HTML is edited directly on database,
  * the looks on page might not be resembled in current page without starting a new browser session. This is because
  * page content is loaded on cache only when new session is created.
@@ -63,7 +63,7 @@ public class WebContentManagement implements java.io.Serializable {
     private boolean advancedEditMode = false;
 
     /**
-     * Change current language displayed within web pages
+     * Change current language displayed within web pages.
      *
      * @param language
      */
@@ -85,7 +85,7 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Get the text for a token in the content table
+     * Get the text for a token in the content table.
      * Tokens can't contain apostrophs
      *
      * @param idPage
@@ -95,7 +95,7 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Get the text for a token in the content table
+     * Get the text for a token in the content table.
      * Tokens can't contain apostrophs
      * Not to be used inside HTML attribute values
      * If we're in edit mode, then show an edit-icon.
@@ -105,21 +105,21 @@ public class WebContentManagement implements java.io.Serializable {
     public String cmsText(String idPage) {
         String ret = Utilities.replace(idPage, "'", "''");
 
-        ret = getTextByMD5(ret);
+        ret = getTextByMD5(ret);  //FIXME: Don't MD5 encode
         if (ret == null) {
             ret = getText(ret);
         }
 
         if (editMode) {
             ret += "<a title=\"Edit this text\" href=\"javascript:openContentManager('"
-                    + idPage
-                    + "', 'text');\"><img src=\"images/edit-content.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
+                + idPage
+                + "', 'text');\"><img src=\"images/edit-content.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
         }
         return ret;
     }
 
     /**
-     * Look up a longer phrase (potentially HTML) in the content table
+     * Look up a longer phrase (potentially HTML) in the content table.
      * It is probably not necessary to escape apostrophs
      *
      * EUNIS was designed to be localised. It is a feature we don't use at the moment, so
@@ -135,7 +135,8 @@ public class WebContentManagement implements java.io.Serializable {
         return getTextByMD5(idPage);
     }
 
-    /*
+    /**
+     * Look up a longer phrase (potentially HTML) in the content table with placeholders.
      * EUNIS was designed to be localised. It is a feature we don't use at the moment, so
      * in order to save resource we bypass the cmsPhrase() method.
      */
@@ -150,25 +151,29 @@ public class WebContentManagement implements java.io.Serializable {
         return MessageFormat.format(idPage, arguments);
     }
 
+    /**
+     * Edit the text for a token in the content table that isn't shown in view mode.
+     * Javascript, error messages, page title etc.
+     */
     public String cmsMsg(String idPage) {
         if (!editMode) {
             return STR_EMPTY;
         } else {
             String ret = "<strong><em>" + getDescription(idPage)
-                    + "</em></strong>: ";
+            + "</em></strong>: ";
 
             ret += "<em>";
             ret += getText(idPage);
             ret += "</em>";
             ret += "<a title=\"Edit Text from this page (normally not visible online - javascript, error messages, page title etc.)\" href=\"javascript:openContentManager('"
-                    + idPage
-                    + "', 'msg');\"><img src=\"images/edit-content-msg.gif\" style=\"border : 0px;\" width=\"9\" height=\"9\" /></a>";
+                + idPage
+                + "', 'msg');\"><img src=\"images/edit-content-msg.gif\" style=\"border : 0px;\" width=\"9\" height=\"9\" /></a>";
             return ret;
         }
     }
 
     /**
-     * Edit mode - use this method where the crayon will appear
+     * Edit mode - use this method where the crayon shall appear.
      *
      * @param idPage
      */
@@ -177,13 +182,13 @@ public class WebContentManagement implements java.io.Serializable {
             return STR_EMPTY;
         } else {
             return "<a title=\"Edit Alternative text\" href=\"javascript:openContentManager('"
-                    + idPage
-                    + "', 'alt_title');\"><img src=\"images/edit-content-alt.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
+            + idPage
+            + "', 'alt_title');\"><img src=\"images/edit-content-alt.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
         }
     }
 
     /**
-     * Edit mode - use this method where the crayon will appear
+     * Edit mode - use this method where the crayon shall appear.
      *
      * @param idPage
      */
@@ -192,13 +197,13 @@ public class WebContentManagement implements java.io.Serializable {
             return STR_EMPTY;
         } else {
             return "<a title=\"Edit Alternative text\" href=\"javascript:openContentManager('"
-                    + idPage
-                    + "', 'alt_title');\"><img src=\"images/edit-content-title.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
+            + idPage
+            + "', 'alt_title');\"><img src=\"images/edit-content-title.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
         }
     }
 
     /**
-     * Edit mode - use this method where the crayon will appear
+     * Edit mode - use this method where the crayon shall appear.
      *
      * @param idPage
      */
@@ -207,13 +212,13 @@ public class WebContentManagement implements java.io.Serializable {
             return STR_EMPTY;
         } else {
             return "<a title=\"Edit the Value attribute\" href=\"javascript:openContentManager('"
-                    + idPage
-                    + "', 'alt');\"><img src=\"images/edit-content-msg.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
+            + idPage
+            + "', 'alt');\"><img src=\"images/edit-content-msg.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
         }
     }
 
     /**
-     * Edit mode - use this method where the crayon will appear
+     * Edit mode - use this method where the crayon shall appear.
      *
      * @param idPage
      */
@@ -222,8 +227,8 @@ public class WebContentManagement implements java.io.Serializable {
             return STR_EMPTY;
         } else {
             return "<a title=\"Edit the Label attribute\" href=\"javascript:openContentManager('"
-                    + idPage
-                    + "', 'label');\"><img src=\"images/edit-content-msg.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
+            + idPage
+            + "', 'label');\"><img src=\"images/edit-content-msg.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
         }
     }
 
@@ -238,8 +243,8 @@ public class WebContentManagement implements java.io.Serializable {
             htmlContent.clear();
             final List<WebContentPersist> pages = new WebContentDomain().findCustom(
                     "select a.* from `eunis_web_content` as a, (select max(record_date) mx,id_page,lang from `eunis_web_content` group by id_page,lang) as b where a.id_page = b.id_page and a.lang = b.lang and a.record_date = b.mx and a.lang='"
-                            + language
-                            + "' and concat(a.record_date)<>'0000-00-00 00:00:00'");
+                    + language
+                    + "' and concat(a.record_date)<>'0000-00-00 00:00:00'");
 
             for (int i = 0; i < pages.size(); i++) {
                 final WebContentPersist text = pages.get(i);
@@ -283,13 +288,13 @@ public class WebContentManagement implements java.io.Serializable {
             List<WebContentPersist> dbKeyList = new WebContentDomain().findWhereOrderBy(
                     "ID_PAGE='" + md5
                     + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
-                    "RECORD_DATE DESC");
+            "RECORD_DATE DESC");
 
             if (dbKeyList == null) {
                 dbKeyList = new WebContentDomain().findWhereOrderBy(
                         "ID_PAGE='" + idPage
                         + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
-                        "RECORD_DATE DESC");
+                "RECORD_DATE DESC");
             }
 
             if (!dbKeyList.isEmpty()) {
@@ -329,17 +334,6 @@ public class WebContentManagement implements java.io.Serializable {
                         + "::getTextByMD5(" + idPage
                         + "): Page not found in cache.");
             }
-        } else {
-            List<WebContentPersist> dbKeyList = null;
-
-            dbKeyList = new WebContentDomain().findWhereOrderBy(
-                    "ID_PAGE='" + md5
-                    + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
-                    "RECORD_DATE DESC");
-            if (!dbKeyList.isEmpty()) {
-                htmlContent.put(idPage, dbKeyList.get(0));
-                ret = dbKeyList.get(0).getContent();
-            }
         }
         return ret;
     }
@@ -370,7 +364,7 @@ public class WebContentManagement implements java.io.Serializable {
             final List<WebContentPersist> dbKeyList = new WebContentDomain().findWhereOrderBy(
                     "ID_PAGE='" + idPage
                     + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
-                    "RECORD_DATE DESC");
+            "RECORD_DATE DESC");
 
             if (!dbKeyList.isEmpty()) {
                 htmlContent.put(idPage, dbKeyList.get(0));
@@ -410,7 +404,7 @@ public class WebContentManagement implements java.io.Serializable {
             final List<WebContentPersist> dbKeyList = new WebContentDomain().findWhereOrderBy(
                     "ID_PAGE='" + idPage
                     + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
-                    "RECORD_DATE DESC");
+            "RECORD_DATE DESC");
 
             if (!dbKeyList.isEmpty()) {
                 htmlContent.put(idPage, dbKeyList.get(0));
@@ -464,12 +458,12 @@ public class WebContentManagement implements java.io.Serializable {
             ret = new WebContentDomain().findWhereOrderBy(
                     "ID_PAGE='" + md5 + "' AND LANG='" + language
                     + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
-                    "RECORD_DATE DESC");
+            "RECORD_DATE DESC");
             if (ret == null) {
                 ret = new WebContentDomain().findWhereOrderBy(
                         "ID_PAGE='" + idPage + "' AND LANG='" + language
                         + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
-                        "RECORD_DATE DESC");
+                "RECORD_DATE DESC");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -478,6 +472,7 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
+     * Show a crayon with a link to an edit dialog.
      * @param idPage
      * @param showEditTag
      * @deprecated use cmsXXXX methods instead.
@@ -487,10 +482,10 @@ public class WebContentManagement implements java.io.Serializable {
             return "";
         } else {
             return "<a title=\"Edit this text\" href=\"javascript:editContent('"
-                    + idPage + "');\">"
-                    + "<img src=\"images/edit-content.gif\" style=\"border : 0px;\" width=\"9\" height=\"9\" "
-                    + "alt=\"Edit this text\" "
-                    + "title=\"Edit this text\" /></a>";
+            + idPage + "');\">"
+            + "<img src=\"images/edit-content.gif\" style=\"border : 0px;\" width=\"9\" height=\"9\" "
+            + "alt=\"Edit this text\" "
+            + "title=\"Edit this text\" /></a>";
         }
     }
 
@@ -521,7 +516,7 @@ public class WebContentManagement implements java.io.Serializable {
 
             if (modifyAllIdentical) {
                 ps = con.prepareStatement(
-                        "DELETE FROM EUNIS_WEB_CONTENT WHERE ID_PAGE = ? AND LANG = ? ");
+                "DELETE FROM EUNIS_WEB_CONTENT WHERE ID_PAGE = ? AND LANG = ? ");
                 ps.setString(1, md5);
                 ps.setString(2, lang);
                 ps.execute();
@@ -529,7 +524,7 @@ public class WebContentManagement implements java.io.Serializable {
 
             if (lang.equalsIgnoreCase("EN")) {
                 ps = con.prepareStatement(
-                        "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE, CONTENT_VALID ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 0 )");
+                "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE, CONTENT_VALID ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 0 )");
                 ps.setString(1, md5);
                 ps.setString(2, content);
                 ps.setString(3, description);
@@ -538,7 +533,7 @@ public class WebContentManagement implements java.io.Serializable {
                 ps.setString(6, username);
             } else {
                 ps = con.prepareStatement(
-                        "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP )");
+                "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, CONTENT_LENGTH, RECORD_AUTHOR, RECORD_DATE ) VALUES ( ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP )");
                 ps.setString(1, md5);
                 ps.setString(2, content);
                 ps.setString(3, description);
@@ -562,7 +557,7 @@ public class WebContentManagement implements java.io.Serializable {
             } else {
                 System.out.println(
                         "savePageContentJDBC: Could not find in cache id_page= "
-                                + idPage);
+                        + idPage);
             }
             result = true;
         } catch (Exception e) {
@@ -603,14 +598,14 @@ public class WebContentManagement implements java.io.Serializable {
 
             if (modifyAllIdentical) {
                 ps = con.prepareStatement(
-                        "DELETE FROM EUNIS_WEB_CONTENT WHERE ID_PAGE = MD5(?) AND LANG = ? ");
+                "DELETE FROM EUNIS_WEB_CONTENT WHERE ID_PAGE = MD5(?) AND LANG = ? ");
                 ps.setString(1, idPage);
                 ps.setString(2, lang);
                 ps.execute();
             }
 
             ps = con.prepareStatement(
-                    "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, RECORD_AUTHOR, RECORD_DATE ) VALUES ( MD5(?), ?, ?, ?, ?, CURRENT_TIMESTAMP )");
+            "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, RECORD_AUTHOR, RECORD_DATE ) VALUES ( MD5(?), ?, ?, ?, ?, CURRENT_TIMESTAMP )");
 
             ps.setString(1, idPage);
             ps.setString(2, content);
@@ -671,7 +666,7 @@ public class WebContentManagement implements java.io.Serializable {
 
         try {
             final List<WebContentPersist> items = new WebContentDomain().findCustom(
-                    "SELECT * FROM EUNIS_WEB_CONTENT WHERE LANG_STATUS > 0 AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' GROUP BY LANG");
+            "SELECT * FROM EUNIS_WEB_CONTENT WHERE LANG_STATUS > 0 AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' GROUP BY LANG");
 
             // Decode the languages from CHM62EDT_LANGUAGE table
             for (WebContentPersist item : items) {
@@ -698,9 +693,9 @@ public class WebContentManagement implements java.io.Serializable {
 
         try {
             final List<Chm62edtLanguagePersist> all_languages = new Chm62edtLanguageDomain().findOrderBy(
-                    "NAME_EN");
+            "NAME_EN");
             final List<WebContentPersist> translated_languages = new WebContentDomain().findCustom(
-                    "SELECT * FROM EUNIS_WEB_CONTENT WHERE CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' GROUP BY LANG");
+            "SELECT * FROM EUNIS_WEB_CONTENT WHERE CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' GROUP BY LANG");
 
             for (Chm62edtLanguagePersist language : all_languages) {
                 boolean exists = false;
@@ -844,7 +839,7 @@ public class WebContentManagement implements java.io.Serializable {
 
                     if (!new_ids.contains(text)) {
                         ps = con.prepareStatement(
-                                "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, RECORD_AUTHOR, RECORD_DATE ) VALUES ( MD5(?), ?, ?, ?, ?, CURRENT_TIMESTAMP )");
+                        "INSERT INTO EUNIS_WEB_CONTENT( ID_PAGE, CONTENT, DESCRIPTION, LANG, RECORD_AUTHOR, RECORD_DATE ) VALUES ( MD5(?), ?, ?, ?, ?, CURRENT_TIMESTAMP )");
                         ps.setString(1, text);
                         ps.setString(2, text);
                         ps.setString(3, description);

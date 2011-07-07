@@ -1,6 +1,5 @@
 package ro.finsiel.eunis.dataimport;
 
-
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -10,12 +9,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import ro.finsiel.eunis.utilities.EunisUtil;
-
+import ro.finsiel.eunis.utilities.SQLUtilities;
 
 /**
- *
  * @author altnyris
- *
  */
 public class PopulateDigir {
 
@@ -56,35 +53,43 @@ public class PopulateDigir {
 
     private Connection con = null;
 
+    private boolean cmd = false;
+
     /**
      * Creates a new PopulateDigir object.
      */
-    public PopulateDigir() {}
+    public PopulateDigir() {
+    }
 
     /**
      * Initialization method for this object.
-     *
-     * @param SQL_DRIVER_NAME     JDBC driver.
-     * @param SQL_DRIVER_URL      JDBC url.
+     * 
+     * @param SQL_DRIVER_NAME JDBC driver.
+     * @param SQL_DRIVER_URL JDBC url.
      * @param SQL_DRIVER_USERNAME JDBC username.
      * @param SQL_DRIVER_PASSWORD JDBC password.
+     * @param cmd
      */
     public void Init(String SQL_DRIVER_NAME, String SQL_DRIVER_URL,
-            String SQL_DRIVER_USERNAME, String SQL_DRIVER_PASSWORD) {
+            String SQL_DRIVER_USERNAME, String SQL_DRIVER_PASSWORD, boolean cmd) {
         SQL_DRV = SQL_DRIVER_NAME;
         SQL_URL = SQL_DRIVER_URL;
         SQL_USR = SQL_DRIVER_USERNAME;
         SQL_PWD = SQL_DRIVER_PASSWORD;
+        this.cmd = cmd;
     }
 
     public void populate() throws SQLException {
 
         Statement st = null;
+        SQLUtilities sql = new SQLUtilities();
 
         try {
 
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+
+            sql.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
 
             DatabaseMetaData dbm = con.getMetaData();
             ResultSet tables = dbm.getTables(null, null, "eunis_digir", null);
@@ -95,33 +100,33 @@ public class PopulateDigir {
                 st = con.createStatement();
 
                 String table = "CREATE TABLE eunis_digir ("
-                        + "`GlobalUniqueIdentifier` varchar(64) default NULL, "
-                        + "`DateLastModified` datetime default NULL, "
-                        + "`BasisOfRecord` varchar(50) default NULL, "
-                        + "`InstitutionCode` varchar(16) default NULL, "
-                        + "`CollectionCode` varchar(16) default NULL, "
-                        + "`CatalogNumber` varchar(64) default NULL, "
-                        + "`ScientificName` varchar(64) default NULL, "
-                        + "`Kingdom` varchar(32) default NULL, "
-                        + "`Phylum` varchar(32) default NULL, "
-                        + "`Class` varchar(32) default NULL, "
-                        + "`Order` varchar(32) default NULL, "
-                        + "`Family` varchar(32) default NULL, "
-                        + "`Genus` varchar(32) default NULL, "
-                        + "`ScientificNameAuthor` varchar(50) default NULL, "
-                        + "`Continent` varchar(16) default NULL, "
-                        + "`Country` varchar(32) default NULL, "
-                        + "`GeodeticDatum` varchar(64) default 'not recorded', "
-                        + "`DecimalLatitude` varchar(32) default NULL, "
-                        + "`DecimalLongitude` varchar(32) default NULL, "
-                        + "`CoordinateUncertaintyInMeters` int(6) default NULL, "
-                        + "`YearCollected` tinyint(4) default NULL, "
-                        + "`MonthCollected` tinyint(4) default NULL, "
-                        + "`DayCollected` tinyint(4) default NULL, "
-                        + "`Collector` tinyint(4) default NULL, "
-                        + "`RelatedInformation` varchar(255) default NULL, "
-                        + "KEY `GlobalUniqueIdentifier` (`GlobalUniqueIdentifier`), "
-                        + "FULLTEXT KEY `ScientificName` (`ScientificName`)) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+                    + "`GlobalUniqueIdentifier` varchar(64) default NULL, "
+                    + "`DateLastModified` datetime default NULL, "
+                    + "`BasisOfRecord` varchar(50) default NULL, "
+                    + "`InstitutionCode` varchar(16) default NULL, "
+                    + "`CollectionCode` varchar(16) default NULL, "
+                    + "`CatalogNumber` varchar(64) default NULL, "
+                    + "`ScientificName` varchar(64) default NULL, "
+                    + "`Kingdom` varchar(32) default NULL, "
+                    + "`Phylum` varchar(32) default NULL, "
+                    + "`Class` varchar(32) default NULL, "
+                    + "`Order` varchar(32) default NULL, "
+                    + "`Family` varchar(32) default NULL, "
+                    + "`Genus` varchar(32) default NULL, "
+                    + "`ScientificNameAuthor` varchar(50) default NULL, "
+                    + "`Continent` varchar(16) default NULL, "
+                    + "`Country` varchar(32) default NULL, "
+                    + "`GeodeticDatum` varchar(64) default 'not recorded', "
+                    + "`DecimalLatitude` varchar(32) default NULL, "
+                    + "`DecimalLongitude` varchar(32) default NULL, "
+                    + "`CoordinateUncertaintyInMeters` int(6) default NULL, "
+                    + "`YearCollected` tinyint(4) default NULL, "
+                    + "`MonthCollected` tinyint(4) default NULL, "
+                    + "`DayCollected` tinyint(4) default NULL, "
+                    + "`Collector` tinyint(4) default NULL, "
+                    + "`RelatedInformation` varchar(255) default NULL, "
+                    + "KEY `GlobalUniqueIdentifier` (`GlobalUniqueIdentifier`), "
+                    + "FULLTEXT KEY `ScientificName` (`ScientificName`)) ENGINE=MyISAM DEFAULT CHARSET=utf8";
 
                 st.executeUpdate(table);
                 loadDigir();
@@ -129,6 +134,7 @@ public class PopulateDigir {
 
         } catch (Exception e) {
             e.printStackTrace();
+            EunisUtil.writeLogMessage("ERROR occured while populating DIGIR data: " + e.getMessage(), cmd, sql);
             throw new RuntimeException(e.toString(), e);
         } finally {
             if (st != null) {
@@ -146,7 +152,7 @@ public class PopulateDigir {
 
         if (digir_CatalogNumber != null && digir_CatalogNumber.length() > 0) {
             strCatalogNumberHash = EunisUtil.digestHexDec(digir_CatalogNumber,
-                    "MD5");
+            "MD5");
         }
 
         try {
@@ -218,31 +224,45 @@ public class PopulateDigir {
 
         StringBuffer digirRecordQuery = new StringBuffer();
 
-        digirRecordQuery.append("INSERT IGNORE INTO `eunis_digir` (`GlobalUniqueIdentifier`,`BasisOfRecord`,`InstitutionCode`,").append("`CollectionCode`,`CatalogNumber`,`ScientificName`,`Kingdom`,`Phylum`,`Class`,`Order`,`Family`,").append("`Genus`,`ScientificNameAuthor`,`Continent`,`Country`,`GeodeticDatum`,`DecimalLatitude`,`DecimalLongitude`,").append("`CoordinateUncertaintyInMeters`,`YearCollected`,`MonthCollected`,`DayCollected`,`RelatedInformation`) VALUES(").append(
-                "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        digirRecordQuery
+        .append("INSERT IGNORE INTO `eunis_digir` (`GlobalUniqueIdentifier`,`BasisOfRecord`,`InstitutionCode`,")
+        .append("`CollectionCode`,`CatalogNumber`,`ScientificName`,`Kingdom`,`Phylum`,`Class`,`Order`,`Family`,")
+        .append("`Genus`,`ScientificNameAuthor`,`Continent`,`Country`,`GeodeticDatum`,`DecimalLatitude`,`DecimalLongitude`,")
+        .append("`CoordinateUncertaintyInMeters`,`YearCollected`,`MonthCollected`,`DayCollected`,`RelatedInformation`) VALUES(")
+        .append(
+        "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
         this.digirRecordPreparedStatement = con.prepareStatement(
                 digirRecordQuery.toString());
 
         PreparedStatement ps = null;
         ResultSet rs = null;
+        SQLUtilities sql = new SQLUtilities();
 
         try {
+            sql.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+
             String query = "SELECT DISTINCT CHM62EDT_SPECIES.ID_SPECIES AS IdSpecies, CHM62EDT_SPECIES.GENUS AS Genus, "
-                    + "CHM62EDT_SPECIES.SCIENTIFIC_NAME AS ScientificName, CHM62EDT_SPECIES.AUTHOR AS ScientificNameAuthor, "
-                    + "CHM62EDT_SPECIES.ID_SPECIES AS RelatedInformation, CHM62EDT_COUNTRY.AREA_NAME AS Country, "
-                    + "CHM62EDT_TAXONOMY.TAXONOMY_TREE AS Taxonomy "
-                    + "FROM(CHM62EDT_SPECIES) "
-                    + "INNER JOIN CHM62EDT_REPORTS ON CHM62EDT_SPECIES.ID_NATURE_OBJECT=CHM62EDT_REPORTS.ID_NATURE_OBJECT "
-                    + "INNER JOIN CHM62EDT_COUNTRY ON CHM62EDT_REPORTS.ID_GEOSCOPE=CHM62EDT_COUNTRY.ID_GEOSCOPE "
-                    + "INNER JOIN CHM62EDT_TAXONOMY ON CHM62EDT_SPECIES.ID_TAXONOMY=CHM62EDT_TAXONOMY.ID_TAXONOMY";
+                + "CHM62EDT_SPECIES.SCIENTIFIC_NAME AS ScientificName, CHM62EDT_SPECIES.AUTHOR AS ScientificNameAuthor, "
+                + "CHM62EDT_SPECIES.ID_SPECIES AS RelatedInformation, CHM62EDT_COUNTRY.AREA_NAME AS Country, "
+                + "CHM62EDT_TAXONOMY.TAXONOMY_TREE AS Taxonomy "
+                + "FROM(CHM62EDT_SPECIES) "
+                + "INNER JOIN CHM62EDT_REPORTS ON CHM62EDT_SPECIES.ID_NATURE_OBJECT=CHM62EDT_REPORTS.ID_NATURE_OBJECT "
+                + "INNER JOIN CHM62EDT_COUNTRY ON CHM62EDT_REPORTS.ID_GEOSCOPE=CHM62EDT_COUNTRY.ID_GEOSCOPE "
+                + "INNER JOIN CHM62EDT_TAXONOMY ON CHM62EDT_SPECIES.ID_TAXONOMY=CHM62EDT_TAXONOMY.ID_TAXONOMY";
 
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
 
             while (rs.next()) {
+
+                if (rs.getRow() % 5000 == 0) {
+                    System.gc();
+                    EunisUtil.writeLogMessage("Load DIGIR data phase 1/5 at row: " + rs.getRow(), cmd, sql);
+                }
+
                 digir_GlobalUniqueIdentifier = "urn:catalog:EUNIS2:SPECDIST:"
-                        + rs.getString("IdSpecies");
+                    + rs.getString("IdSpecies");
 
                 digir_ScientificName = rs.getString("ScientificName");
                 digir_Kingdom = getTaxonomy(rs.getString("Taxonomy"), "Kingdom");
@@ -259,29 +279,35 @@ public class PopulateDigir {
                 digir_MonthCollected = "NULL";
                 digir_DayCollected = "NULL";
                 digir_RelatedInformation = "http://eunis.eea.europa.eu/species/"
-                        + rs.getString("IdSpecies");
+                    + rs.getString("IdSpecies");
                 digir_CatalogNumber = digir_ScientificName + "SPECDIST"
-                        + digir_Country;
+                + digir_Country;
 
                 loadDigirRecord();
             }
 
             query = "SELECT DISTINCT CHM62EDT_SPECIES.ID_SPECIES AS IdSpecies, CHM62EDT_SPECIES.ID_SPECIES AS RelatedInformation, "
-                    + "CHM62EDT_SPECIES.SCIENTIFIC_NAME AS ScientificName, CHM62EDT_SPECIES.AUTHOR AS ScientificNameAuthor, "
-                    + "CHM62EDT_SPECIES.GENUS AS Genus, CHM62EDT_TAXONOMY.TAXONOMY_TREE AS Taxonomy, CHM62EDT_COUNTRY.AREA_NAME AS Country, "
-                    + "CHM62EDT_SITES.LONG_DEG As Longitude, CHM62EDT_SITES.LAT_DEG As Latitude "
-                    + "FROM CHM62EDT_SITES "
-                    + "INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE ON (CHM62EDT_SITES.ID_NATURE_OBJECT = CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_NATURE_OBJECT) "
-                    + "INNER JOIN CHM62EDT_SPECIES ON (CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_NATURE_OBJECT_LINK = CHM62EDT_SPECIES.ID_NATURE_OBJECT) "
-                    + "INNER JOIN CHM62EDT_TAXONOMY ON (CHM62EDT_SPECIES.ID_TAXONOMY = CHM62EDT_TAXONOMY.ID_TAXONOMY) "
-                    + "INNER JOIN CHM62EDT_COUNTRY ON (CHM62EDT_SITES.ID_GEOSCOPE = CHM62EDT_COUNTRY.ID_GEOSCOPE)";
+                + "CHM62EDT_SPECIES.SCIENTIFIC_NAME AS ScientificName, CHM62EDT_SPECIES.AUTHOR AS ScientificNameAuthor, "
+                + "CHM62EDT_SPECIES.GENUS AS Genus, CHM62EDT_TAXONOMY.TAXONOMY_TREE AS Taxonomy, CHM62EDT_COUNTRY.AREA_NAME AS Country, "
+                + "CHM62EDT_SITES.LONG_DEG As Longitude, CHM62EDT_SITES.LAT_DEG As Latitude "
+                + "FROM CHM62EDT_SITES "
+                + "INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE ON (CHM62EDT_SITES.ID_NATURE_OBJECT = CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_NATURE_OBJECT) "
+                + "INNER JOIN CHM62EDT_SPECIES ON (CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_NATURE_OBJECT_LINK = CHM62EDT_SPECIES.ID_NATURE_OBJECT) "
+                + "INNER JOIN CHM62EDT_TAXONOMY ON (CHM62EDT_SPECIES.ID_TAXONOMY = CHM62EDT_TAXONOMY.ID_TAXONOMY) "
+                + "INNER JOIN CHM62EDT_COUNTRY ON (CHM62EDT_SITES.ID_GEOSCOPE = CHM62EDT_COUNTRY.ID_GEOSCOPE)";
 
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
 
             while (rs.next()) {
+
+                if (rs.getRow() % 5000 == 0) {
+                    System.gc();
+                    EunisUtil.writeLogMessage("Load DIGIR data phase 2/5 at row: " + rs.getRow(), cmd, sql);
+                }
+
                 digir_GlobalUniqueIdentifier = "urn:catalog:EUNIS2:SPECSITES:"
-                        + rs.getString("IdSpecies");
+                    + rs.getString("IdSpecies");
 
                 digir_ScientificName = rs.getString("ScientificName");
                 digir_Kingdom = getTaxonomy(rs.getString("Taxonomy"), "Kingdom");
@@ -293,37 +319,43 @@ public class PopulateDigir {
                 digir_ScientificNameAuthor = rs.getString("ScientificNameAuthor");
                 digir_Country = rs.getString("Country");
                 digir_DecimalLatitude = rs.getString("Latitude") != null
-                        ? rs.getString("Latitude")
+                ? rs.getString("Latitude")
                         : "0";
                 digir_DecimalLongitude = rs.getString("Longitude") != null
-                        ? rs.getString("Longitude")
+                ? rs.getString("Longitude")
                         : "0";
                 digir_YearCollected = "NULL";
                 digir_MonthCollected = "NULL";
                 digir_DayCollected = "NULL";
                 digir_RelatedInformation = "http://eunis.eea.europa.eu/species/"
-                        + rs.getString("IdSpecies");
+                    + rs.getString("IdSpecies");
                 digir_CatalogNumber = digir_ScientificName + "SPECSITES"
-                        + digir_Country + digir_DecimalLatitude
-                        + digir_DecimalLongitude;
+                + digir_Country + digir_DecimalLatitude
+                + digir_DecimalLongitude;
 
                 loadDigirRecord();
             }
 
             query = "SELECT DISTINCT CHM62EDT_SPECIES.ID_SPECIES AS IdSpecies, CHM62EDT_SPECIES.SCIENTIFIC_NAME AS ScientificName, "
-                    + "CHM62EDT_SPECIES.GENUS AS Genus, CHM62EDT_SPECIES.AUTHOR AS ScientificNameAuthor, "
-                    + "CHM62EDT_TAXONOMY.TAXONOMY_TREE AS Taxonomy "
-                    + "FROM CHM62EDT_SPECIES "
-                    + "INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE ON (CHM62EDT_SPECIES.ID_NATURE_OBJECT = CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_NATURE_OBJECT) "
-                    + "INNER JOIN CHM62EDT_HABITAT ON (CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_NATURE_OBJECT_LINK = CHM62EDT_HABITAT.ID_NATURE_OBJECT) "
-                    + "INNER JOIN CHM62EDT_TAXONOMY ON (CHM62EDT_SPECIES.ID_TAXONOMY = CHM62EDT_TAXONOMY.ID_TAXONOMY)";
+                + "CHM62EDT_SPECIES.GENUS AS Genus, CHM62EDT_SPECIES.AUTHOR AS ScientificNameAuthor, "
+                + "CHM62EDT_TAXONOMY.TAXONOMY_TREE AS Taxonomy "
+                + "FROM CHM62EDT_SPECIES "
+                + "INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE ON (CHM62EDT_SPECIES.ID_NATURE_OBJECT = CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_NATURE_OBJECT) "
+                + "INNER JOIN CHM62EDT_HABITAT ON (CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_NATURE_OBJECT_LINK = CHM62EDT_HABITAT.ID_NATURE_OBJECT) "
+                + "INNER JOIN CHM62EDT_TAXONOMY ON (CHM62EDT_SPECIES.ID_TAXONOMY = CHM62EDT_TAXONOMY.ID_TAXONOMY)";
 
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
 
             while (rs.next()) {
+
+                if (rs.getRow() % 5000 == 0) {
+                    System.gc();
+                    EunisUtil.writeLogMessage("Load DIGIR data phase 3/5 at row: " + rs.getRow(), cmd, sql);
+                }
+
                 digir_GlobalUniqueIdentifier = "urn:catalog:EUNIS2:SPECHAB:"
-                        + rs.getString("IdSpecies");
+                    + rs.getString("IdSpecies");
 
                 digir_ScientificName = rs.getString("ScientificName");
                 digir_Kingdom = getTaxonomy(rs.getString("Taxonomy"), "Kingdom");
@@ -340,28 +372,34 @@ public class PopulateDigir {
                 digir_MonthCollected = "NULL";
                 digir_DayCollected = "NULL";
                 digir_RelatedInformation = "http://eunis.eea.europa.eu/species/"
-                        + rs.getString("IdSpecies");
+                    + rs.getString("IdSpecies");
                 digir_CatalogNumber = digir_ScientificName + "SPECHAB";
 
                 loadDigirRecord();
             }
 
             query = "SELECT DISTINCT CHM62EDT_SPECIES.ID_SPECIES AS IdSpecies, CHM62EDT_SPECIES.SCIENTIFIC_NAME AS ScientificName, "
-                    + "CHM62EDT_SPECIES.GENUS AS Genus, CHM62EDT_SPECIES.AUTHOR AS ScientificNameAuthor, "
-                    + "CHM62EDT_TAXONOMY.TAXONOMY_TREE AS Taxonomy, CHM62EDT_GRID.LATITUDE AS Latitude, CHM62EDT_GRID.LONGITUDE AS Longitude "
-                    + "FROM CHM62EDT_SPECIES "
-                    + "INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE ON (CHM62EDT_SPECIES.ID_NATURE_OBJECT = CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_NATURE_OBJECT) "
-                    + "INNER JOIN CHM62EDT_REPORT_TYPE ON (CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_REPORT_TYPE = CHM62EDT_REPORT_TYPE.ID_REPORT_TYPE) "
-                    + "INNER JOIN CHM62EDT_GRID ON (CHM62EDT_REPORT_TYPE.ID_LOOKUP = CHM62EDT_GRID.NAME) "
-                    + "INNER JOIN CHM62EDT_TAXONOMY ON (CHM62EDT_SPECIES.ID_TAXONOMY = CHM62EDT_TAXONOMY.ID_TAXONOMY) "
-                    + "WHERE (CHM62EDT_REPORT_TYPE.LOOKUP_TYPE = 'GRID')";
+                + "CHM62EDT_SPECIES.GENUS AS Genus, CHM62EDT_SPECIES.AUTHOR AS ScientificNameAuthor, "
+                + "CHM62EDT_TAXONOMY.TAXONOMY_TREE AS Taxonomy, CHM62EDT_GRID.LATITUDE AS Latitude, CHM62EDT_GRID.LONGITUDE AS Longitude "
+                + "FROM CHM62EDT_SPECIES "
+                + "INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE ON (CHM62EDT_SPECIES.ID_NATURE_OBJECT = CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_NATURE_OBJECT) "
+                + "INNER JOIN CHM62EDT_REPORT_TYPE ON (CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_REPORT_TYPE = CHM62EDT_REPORT_TYPE.ID_REPORT_TYPE) "
+                + "INNER JOIN CHM62EDT_GRID ON (CHM62EDT_REPORT_TYPE.ID_LOOKUP = CHM62EDT_GRID.NAME) "
+                + "INNER JOIN CHM62EDT_TAXONOMY ON (CHM62EDT_SPECIES.ID_TAXONOMY = CHM62EDT_TAXONOMY.ID_TAXONOMY) "
+                + "WHERE (CHM62EDT_REPORT_TYPE.LOOKUP_TYPE = 'GRID')";
 
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
 
             while (rs.next()) {
+
+                if (rs.getRow() % 5000 == 0) {
+                    System.gc();
+                    EunisUtil.writeLogMessage("Load DIGIR data phase 4/5 at row: " + rs.getRow(), cmd, sql);
+                }
+
                 digir_GlobalUniqueIdentifier = "urn:catalog:EUNIS2:SPECGRID:"
-                        + rs.getString("IdSpecies");
+                    + rs.getString("IdSpecies");
 
                 digir_ScientificName = rs.getString("ScientificName");
                 digir_Kingdom = getTaxonomy(rs.getString("Taxonomy"), "Kingdom");
@@ -373,38 +411,44 @@ public class PopulateDigir {
                 digir_ScientificNameAuthor = rs.getString("ScientificNameAuthor");
                 digir_Country = "NULL";
                 digir_DecimalLatitude = rs.getString("Latitude") != null
-                        ? rs.getString("Latitude")
+                ? rs.getString("Latitude")
                         : "0";
                 digir_DecimalLongitude = rs.getString("Longitude") != null
-                        ? rs.getString("Longitude")
+                ? rs.getString("Longitude")
                         : "0";
                 digir_YearCollected = "NULL";
                 digir_MonthCollected = "NULL";
                 digir_DayCollected = "NULL";
                 digir_RelatedInformation = "http://eunis.eea.europa.eu/species/"
-                        + rs.getString("IdSpecies");
+                    + rs.getString("IdSpecies");
                 digir_CatalogNumber = digir_ScientificName + "SPECGRID"
-                        + digir_DecimalLatitude + digir_DecimalLongitude;
+                + digir_DecimalLatitude + digir_DecimalLongitude;
 
                 loadDigirRecord();
             }
 
             query = "SELECT DISTINCT CHM62EDT_SPECIES.ID_SPECIES AS IdSpecies, CHM62EDT_SPECIES.SCIENTIFIC_NAME AS ScientificName, "
-                    + "CHM62EDT_SPECIES.GENUS AS Genus, CHM62EDT_SPECIES.AUTHOR AS ScientificNameAuthor, "
-                    + "CHM62EDT_TAXONOMY.TAXONOMY_TREE AS Taxonomy, CHM62EDT_COUNTRY.AREA_NAME AS Country "
-                    + "FROM CHM62EDT_SPECIES "
-                    + "INNER JOIN CHM62EDT_REPORTS ON (CHM62EDT_SPECIES.ID_NATURE_OBJECT = CHM62EDT_REPORTS.ID_NATURE_OBJECT) "
-                    + "INNER JOIN CHM62EDT_COUNTRY ON (CHM62EDT_REPORTS.ID_GEOSCOPE = CHM62EDT_COUNTRY.ID_GEOSCOPE) "
-                    + "INNER JOIN CHM62EDT_REPORT_TYPE ON (CHM62EDT_REPORTS.ID_REPORT_TYPE = CHM62EDT_REPORT_TYPE.ID_REPORT_TYPE) "
-                    + "INNER JOIN CHM62EDT_TAXONOMY ON (CHM62EDT_SPECIES.ID_TAXONOMY = CHM62EDT_TAXONOMY.ID_TAXONOMY) "
-                    + "WHERE (CHM62EDT_REPORT_TYPE.LOOKUP_TYPE = 'CONSERVATION_STATUS')";
+                + "CHM62EDT_SPECIES.GENUS AS Genus, CHM62EDT_SPECIES.AUTHOR AS ScientificNameAuthor, "
+                + "CHM62EDT_TAXONOMY.TAXONOMY_TREE AS Taxonomy, CHM62EDT_COUNTRY.AREA_NAME AS Country "
+                + "FROM CHM62EDT_SPECIES "
+                + "INNER JOIN CHM62EDT_REPORTS ON (CHM62EDT_SPECIES.ID_NATURE_OBJECT = CHM62EDT_REPORTS.ID_NATURE_OBJECT) "
+                + "INNER JOIN CHM62EDT_COUNTRY ON (CHM62EDT_REPORTS.ID_GEOSCOPE = CHM62EDT_COUNTRY.ID_GEOSCOPE) "
+                + "INNER JOIN CHM62EDT_REPORT_TYPE ON (CHM62EDT_REPORTS.ID_REPORT_TYPE = CHM62EDT_REPORT_TYPE.ID_REPORT_TYPE) "
+                + "INNER JOIN CHM62EDT_TAXONOMY ON (CHM62EDT_SPECIES.ID_TAXONOMY = CHM62EDT_TAXONOMY.ID_TAXONOMY) "
+                + "WHERE (CHM62EDT_REPORT_TYPE.LOOKUP_TYPE = 'CONSERVATION_STATUS')";
 
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
 
             while (rs.next()) {
+
+                if (rs.getRow() % 5000 == 0) {
+                    System.gc();
+                    EunisUtil.writeLogMessage("Load DIGIR data phase 5/5 at row: " + rs.getRow(), cmd, sql);
+                }
+
                 digir_GlobalUniqueIdentifier = "urn:catalog:EUNIS2:SPECSTAT:"
-                        + rs.getString("IdSpecies");
+                    + rs.getString("IdSpecies");
 
                 digir_ScientificName = rs.getString("ScientificName");
                 digir_Kingdom = getTaxonomy(rs.getString("Taxonomy"), "Kingdom");
@@ -421,9 +465,9 @@ public class PopulateDigir {
                 digir_MonthCollected = "NULL";
                 digir_DayCollected = "NULL";
                 digir_RelatedInformation = "http://eunis.eea.europa.eu/species/"
-                        + rs.getString("IdSpecies");
+                    + rs.getString("IdSpecies");
                 digir_CatalogNumber = digir_ScientificName + "SPECSTAT"
-                        + digir_Country;
+                + digir_Country;
 
                 loadDigirRecord();
             }

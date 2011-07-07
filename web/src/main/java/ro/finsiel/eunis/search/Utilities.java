@@ -1518,10 +1518,15 @@ public final class Utilities {
      * @return The formatted string
      */
     public static String formatAreaPDF(String input, int left, int right, String blank) {
-        String result;
+        
+        String result = " ";
+        
+        if (blank == null) {
+            blank = " ";
+        }
 
         if (null != input && !input.equalsIgnoreCase("-1")) {
-            input.replaceAll(",", ".");
+            input = input.replace(",", ".");
             int pos;
             int leftLen;
             int rightLen;
@@ -1531,10 +1536,8 @@ public final class Utilities {
                 leftLen = (input.substring(0, pos)).length();
                 rightLen = (input.substring(pos + 1)).length();
 
-                String leftString = spaces(left - leftLen, blank)
-                        + input.substring(0, pos);
-                String rightString = (input.substring(pos + 1) + spaces(right - rightLen, blank)).substring(
-                        0, 3);
+                String leftString = spaces(left - leftLen, blank) + input.substring(0, pos);
+                String rightString = (input.substring(pos + 1) + spaces(right - rightLen, blank)).substring(0, 3);
 
                 result = leftString + "." + rightString;
             } else {
@@ -1544,9 +1547,9 @@ public final class Utilities {
                 result = leftString + spaces(right + 1, blank);
             }
         } else {
-            return " ";
+            return result;
         }
-        input.replaceAll(".", ",");
+        result = result.replace(".", ",");
         return result;
     }
 

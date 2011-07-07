@@ -79,9 +79,9 @@ public class SiteFactsheetDto implements Serializable {
     @Element(required = false)
     private String nuts;
     @Element(required = false)
-    private String area;
+    private DatatypeDto area;
     @Element(required = false)
-    private String length;
+    private DatatypeDto length;
     @Element(required = false)
     private String altMean;
     @Element(required = false)
@@ -89,9 +89,9 @@ public class SiteFactsheetDto implements Serializable {
     @Element(required = false)
     private String altMin;
     @Element(required = false, name = "geo:long")
-    private String longitude;
+    private DatatypeDto longitude;
     @Element(required = false, name = "geo:lat")
-    private String latitude;
+    private DatatypeDto latitude;
     @Element(required = false)
     private String sourceDb;
     @ElementList(required = false, inline = true)
@@ -430,28 +430,28 @@ public class SiteFactsheetDto implements Serializable {
     /**
      * @return the area
      */
-    public String getArea() {
+    public DatatypeDto getArea() {
         return area;
     }
 
     /**
      * @param area the area to set
      */
-    public void setArea(String area) {
+    public void setArea(DatatypeDto area) {
         this.area = area;
     }
 
     /**
      * @return the length
      */
-    public String getLength() {
+    public DatatypeDto getLength() {
         return length;
     }
 
     /**
      * @param length the length to set
      */
-    public void setLength(String length) {
+    public void setLength(DatatypeDto length) {
         this.length = length;
     }
 
@@ -500,28 +500,28 @@ public class SiteFactsheetDto implements Serializable {
     /**
      * @return the longitude
      */
-    public String getLongitude() {
+    public DatatypeDto getLongitude() {
         return longitude;
     }
 
     /**
      * @param longitude the longitude to set
      */
-    public void setLongitude(String longitude) {
+    public void setLongitude(DatatypeDto longitude) {
         this.longitude = longitude;
     }
 
     /**
      * @return the latitude
      */
-    public String getLatitude() {
+    public DatatypeDto getLatitude() {
         return latitude;
     }
 
     /**
      * @param latitude the latitude to set
      */
-    public void setLatitude(String latitude) {
+    public void setLatitude(DatatypeDto latitude) {
         this.latitude = latitude;
     }
 

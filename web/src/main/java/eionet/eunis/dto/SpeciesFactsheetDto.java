@@ -41,6 +41,9 @@ public class SpeciesFactsheetDto implements Serializable {
     
     @Element(required = false, name = "taxonomicRank")
     private String typeRelatedSpecies;
+    
+    @Element(required = false, name = "taxonomy")
+    private ResourceDto taxonomy;
 
     @Element(required = false, name = "rdf:type")
     private ResourceDto dcmitype;
@@ -183,6 +186,14 @@ public class SpeciesFactsheetDto implements Serializable {
 
     public void setTypeRelatedSpecies(String typeRelatedSpecies) {
         this.typeRelatedSpecies = typeRelatedSpecies;
+    }
+
+    public ResourceDto getTaxonomy() {
+        return taxonomy;
+    }
+
+    public void setTaxonomy(ResourceDto taxonomy) {
+        this.taxonomy = taxonomy;
     }
 
 }

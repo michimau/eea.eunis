@@ -44,7 +44,7 @@
 	<!-- Static part of the page title (JSPs)-->
 	<context-param>
 		<param-name>PAGE_TITLE</param-name>
-		<param-value>EUNIS - </param-value>
+		<param-value>EUNISIMPORT - </param-value>
 		<description>Static part of the pages title</description>
 	</context-param>
 
@@ -210,7 +210,7 @@
 	<!-- JDBC password -->
 	<context-param>
 		<param-name>JDBC_PWD</param-name>
-		<param-value>clerkbuzz</param-value>
+		<param-value>blizzaro</param-value>
 		<description>JDBC password for JDBC_USR</description>
 	</context-param>
 

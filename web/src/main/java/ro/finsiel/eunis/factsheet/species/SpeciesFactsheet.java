@@ -62,7 +62,7 @@ public class SpeciesFactsheet {
                 this.idSpeciesLink = speciesObject.getIdSpeciesLink();
                 exists = true;
             } else {
-                if (idSpecies != idSpeciesLink) { // Search again only if idSpecies != idSpeciesLink
+                if (idSpecies.intValue() != idSpeciesLink.intValue()) { // Search again only if idSpecies != idSpeciesLink
                     species = new Chm62edtSpeciesDomain().findWhere("ID_SPECIES = " + idSpecies);
                     if (null != species && species.size() > 0) {
                         speciesObject = ((Chm62edtSpeciesPersist) species.get(0));

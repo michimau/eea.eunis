@@ -36,7 +36,14 @@
     		<div id="visual-portal-wrapper">
       			<jsp:include page="/header.jsp" />
       			<!-- The wrapper div. It contains the three columns. -->
-      			<div id="portal-columns" class="visualColumnHideTwo">
+      			<c:choose>
+		        	<c:when test="${empty layout}">
+		        		<div id="portal-columns" class="visualColumnHideTwo">
+					</c:when>
+					<c:otherwise>
+						<div id="portal-columns" class="${layout}">
+					</c:otherwise>
+				</c:choose>
         			<!-- start of the main and left columns -->
         			<div id="visual-column-wrapper">
           				<!-- start of main content block -->

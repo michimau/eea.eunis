@@ -13,17 +13,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.ibm.icu.util.StringTokenizer;
-
-import eionet.eunis.dao.ISpeciesDao;
-import eionet.eunis.dto.SpeciesDTO;
 import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist;
 import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.utilities.EunisUtil;
 import eionet.eunis.api.LookupSpeciesResult;
 import eionet.eunis.api.SpeciesLookupSearchParam;
+import eionet.eunis.dao.ISpeciesDao;
+import eionet.eunis.dto.SpeciesDTO;
+import eionet.eunis.dto.TaxonomyTreeDTO;
 import eionet.eunis.dto.readers.LookupSpeciesReader;
 
 
@@ -42,10 +42,10 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
      */
     public LookupSpeciesResult lookupSpecies(SpeciesLookupSearchParam speciesLookupSearchParam) {
         String query = " SELECT ID_SPECIES, SCIENTIFIC_NAME, AUTHOR,"
-                + " levenshtein(LOWER(SCIENTIFIC_NAME), ?) AS DISTANCE, "
-                + " levenshtein(LOWER(SUBSTRING_INDEX(SCIENTIFIC_NAME,' ',1)), ?) AS DISTANCE_2 "
-                + " FROM chm62edt_species WHERE levenshtein(LOWER(SCIENTIFIC_NAME), ?) < ? "
-                + " ORDER BY DISTANCE_2, DISTANCE, SCIENTIFIC_NAME ";
+            + " levenshtein(LOWER(SCIENTIFIC_NAME), ?) AS DISTANCE, "
+            + " levenshtein(LOWER(SUBSTRING_INDEX(SCIENTIFIC_NAME,' ',1)), ?) AS DISTANCE_2 "
+            + " FROM chm62edt_species WHERE levenshtein(LOWER(SCIENTIFIC_NAME), ?) < ? "
+            + " ORDER BY DISTANCE_2, DISTANCE, SCIENTIFIC_NAME ";
         List<Object> params = new LinkedList<Object>();
 
         params.add(speciesLookupSearchParam.getSpeciesName());
@@ -71,20 +71,20 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
         ResultSet rs = null;
 
         String query = "SELECT SP.ID_SPECIES, SP.GENUS, SP.SCIENTIFIC_NAME, SP.AUTHOR, SP.VALID_NAME, "
-                + "SP.ID_SPECIES_LINK, SP.TYPE_RELATED_SPECIES, SP.ID_TAXONOMY, GS.COMMON_NAME, "
-                + "T.TAXONOMY_TREE, SOURCE.SOURCE, DATE.CREATED, NA1.OBJECT AS ITIS, NA2.OBJECT AS NCBI, "
-                + "NA3.OBJECT AS WORMS, NA4.OBJECT AS REDLIST, NA5.OBJECT AS FAEU, NA6.OBJECT AS GBIF "
-                + "FROM chm62edt_species AS SP "
-                + "LEFT JOIN chm62edt_group_species AS GS ON SP.ID_GROUP_SPECIES = GS.ID_GROUP_SPECIES "
-                + "LEFT JOIN chm62edt_taxonomy AS T ON SP.ID_TAXONOMY = T.ID_TAXONOMY "
-                + "LEFT JOIN dc_source AS SOURCE ON SP.ID_TAXONOMY = SOURCE.ID_DC "
-                + "LEFT JOIN dc_date AS DATE ON SP.ID_TAXONOMY = DATE.ID_DC "
-                + "LEFT JOIN chm62edt_nature_object_attributes AS NA1 ON SP.ID_NATURE_OBJECT = NA1.ID_NATURE_OBJECT AND NA1.NAME = 'sameSynonymITIS' "
-                + "LEFT JOIN chm62edt_nature_object_attributes AS NA2 ON SP.ID_NATURE_OBJECT = NA2.ID_NATURE_OBJECT AND NA2.NAME = 'sameSynonymNCBI' "
-                + "LEFT JOIN chm62edt_nature_object_attributes AS NA3 ON SP.ID_NATURE_OBJECT = NA3.ID_NATURE_OBJECT AND NA3.NAME = 'sameSynonymWorMS' "
-                + "LEFT JOIN chm62edt_nature_object_attributes AS NA4 ON SP.ID_NATURE_OBJECT = NA4.ID_NATURE_OBJECT AND NA4.NAME = 'sameSynonymRedlist' "
-                + "LEFT JOIN chm62edt_nature_object_attributes AS NA5 ON SP.ID_NATURE_OBJECT = NA5.ID_NATURE_OBJECT AND NA5.NAME = 'sameSynonymFaEu' "
-                + "LEFT JOIN chm62edt_nature_object_attributes AS NA6 ON SP.ID_NATURE_OBJECT = NA6.ID_NATURE_OBJECT AND NA6.NAME = 'sameSynonymGBIF'";
+            + "SP.ID_SPECIES_LINK, SP.TYPE_RELATED_SPECIES, SP.ID_TAXONOMY, GS.COMMON_NAME, "
+            + "T.TAXONOMY_TREE, SOURCE.SOURCE, DATE.CREATED, NA1.OBJECT AS ITIS, NA2.OBJECT AS NCBI, "
+            + "NA3.OBJECT AS WORMS, NA4.OBJECT AS REDLIST, NA5.OBJECT AS FAEU, NA6.OBJECT AS GBIF "
+            + "FROM chm62edt_species AS SP "
+            + "LEFT JOIN chm62edt_group_species AS GS ON SP.ID_GROUP_SPECIES = GS.ID_GROUP_SPECIES "
+            + "LEFT JOIN chm62edt_taxonomy AS T ON SP.ID_TAXONOMY = T.ID_TAXONOMY "
+            + "LEFT JOIN dc_source AS SOURCE ON T.ID_DC = SOURCE.ID_DC "
+            + "LEFT JOIN dc_date AS DATE ON T.ID_DC = DATE.ID_DC "
+            + "LEFT JOIN chm62edt_nature_object_attributes AS NA1 ON SP.ID_NATURE_OBJECT = NA1.ID_NATURE_OBJECT AND NA1.NAME = 'sameSynonymITIS' "
+            + "LEFT JOIN chm62edt_nature_object_attributes AS NA2 ON SP.ID_NATURE_OBJECT = NA2.ID_NATURE_OBJECT AND NA2.NAME = 'sameSynonymNCBI' "
+            + "LEFT JOIN chm62edt_nature_object_attributes AS NA3 ON SP.ID_NATURE_OBJECT = NA3.ID_NATURE_OBJECT AND NA3.NAME = 'sameSynonymWorMS' "
+            + "LEFT JOIN chm62edt_nature_object_attributes AS NA4 ON SP.ID_NATURE_OBJECT = NA4.ID_NATURE_OBJECT AND NA4.NAME = 'sameSynonymRedlist' "
+            + "LEFT JOIN chm62edt_nature_object_attributes AS NA5 ON SP.ID_NATURE_OBJECT = NA5.ID_NATURE_OBJECT AND NA5.NAME = 'sameSynonymFaEu' "
+            + "LEFT JOIN chm62edt_nature_object_attributes AS NA6 ON SP.ID_NATURE_OBJECT = NA6.ID_NATURE_OBJECT AND NA6.NAME = 'sameSynonymGBIF'";
 
         try {
             con = getConnection();
@@ -109,33 +109,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                     }
                 }
 
-                String kingdom = null;
-                String phylum = null;
-                String sclass = null;
-                String order = null;
-                String family = null;
-
-                StringTokenizer st = new StringTokenizer(taxonomyTree, ",");
-
-                while (st.hasMoreTokens()) {
-                    StringTokenizer sts = new StringTokenizer(st.nextToken(),
-                            "*");
-                    String classification_id = sts.nextToken();
-                    String classification_level = sts.nextToken();
-                    String classification_name = sts.nextToken();
-
-                    if (classification_level.equalsIgnoreCase("Kingdom")) {
-                        kingdom = classification_name;
-                    } else if (classification_level.equalsIgnoreCase("Phylum")) {
-                        phylum = classification_name;
-                    } else if (classification_level.equalsIgnoreCase("Class")) {
-                        sclass = classification_name;
-                    } else if (classification_level.equalsIgnoreCase("Order")) {
-                        order = classification_name;
-                    } else if (classification_level.equalsIgnoreCase("Family")) {
-                        family = classification_name;
-                    }
-                }
+                TaxonomyTreeDTO taxonomy = EunisUtil.extractTaxonomyTree(taxonomyTree);
 
                 SpeciesDTO species = new SpeciesDTO();
 
@@ -155,11 +129,14 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                 species.setIdRedlist(rs.getString("REDLIST"));
                 species.setIdFaeu(rs.getString("FAEU"));
                 species.setIdGbif(rs.getString("GBIF"));
-                species.setKingdom(kingdom);
-                species.setPhylum(phylum);
-                species.setSpeciesClass(sclass);
-                species.setOrder(order);
-                species.setFamily(family);
+
+                if (taxonomy != null) {
+                    species.setKingdom(taxonomy.getKingdom());
+                    species.setPhylum(taxonomy.getPhylum());
+                    species.setSpeciesClass(taxonomy.getDwcClass());
+                    species.setOrder(taxonomy.getOrder());
+                    species.setFamily(taxonomy.getFamily());
+                }
 
                 ret.add(species);
             }
@@ -187,22 +164,22 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
 
             statements.add(
                     con.prepareStatement(
-                            "DELETE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?"));
+                    "DELETE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?"));
             statements.add(
                     con.prepareStatement(
-                            "DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?"));
+                    "DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?"));
             statements.add(
                     con.prepareStatement(
-                            "DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT_LINK=?"));
+                    "DELETE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT_LINK=?"));
             statements.add(
                     con.prepareStatement(
-                            "DELETE FROM chm62edt_nature_object_attributes WHERE ID_NATURE_OBJECT=?"));
+                    "DELETE FROM chm62edt_nature_object_attributes WHERE ID_NATURE_OBJECT=?"));
             statements.add(
                     con.prepareStatement(
-                            "DELETE FROM chm62edt_tab_page_species WHERE ID_NATURE_OBJECT=?"));
+                    "DELETE FROM chm62edt_tab_page_species WHERE ID_NATURE_OBJECT=?"));
             statements.add(
                     con.prepareStatement(
-                            "DELETE FROM chm62edt_nature_object_picture WHERE ID_OBJECT=? AND NATURE_OBJECT_TYPE='Species'"));
+                    "DELETE FROM chm62edt_nature_object_picture WHERE ID_OBJECT=? AND NATURE_OBJECT_TYPE='Species'"));
 
             int counter = 0;
 
@@ -219,60 +196,60 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                     if (isSynonym(speciesId)) {
                         st2.addBatch(
                                 "DELETE FROM chm62edt_species WHERE ID_SPECIES="
-                                        + speciesId);
+                                + speciesId);
                         st2.addBatch(
                                 "DELETE FROM chm62edt_nature_object WHERE ID_NATURE_OBJECT="
-                                        + idNatureObject);
+                                + idNatureObject);
                     } else {
                         st2.addBatch(
                                 "DELETE FROM chm62edt_species WHERE ID_SPECIES="
-                                        + speciesId + " OR ID_SPECIES_LINK="
-                                        + speciesId);
+                                + speciesId + " OR ID_SPECIES_LINK="
+                                + speciesId);
                         String ids = getSynonymIds(speciesId, idNatureObject);
 
                         st2.addBatch(
                                 "DELETE FROM chm62edt_nature_object WHERE ID_NATURE_OBJECT IN ("
-                                        + ids + ")");
+                                + ids + ")");
                     }
 
                     String idReportAttributesReports = getReportAttributeIds(
                             idNatureObject, con,
-                            "SELECT ID_REPORT_ATTRIBUTES FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?");
+                    "SELECT ID_REPORT_ATTRIBUTES FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?");
                     String idReportAttributesReportType = getReportAttributeIds(
                             idNatureObject, con,
-                            "SELECT ID_REPORT_ATTRIBUTES FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?");
+                    "SELECT ID_REPORT_ATTRIBUTES FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?");
 
                     String idReportTypeReports = getReportTypeIds(idNatureObject,
                             con,
-                            "SELECT ID_REPORT_TYPE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?");
+                    "SELECT ID_REPORT_TYPE FROM chm62edt_reports WHERE ID_NATURE_OBJECT=?");
                     String idReportTypeReportType = getReportTypeIds(
                             idNatureObject, con,
-                            "SELECT ID_REPORT_TYPE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?");
+                    "SELECT ID_REPORT_TYPE FROM chm62edt_nature_object_report_type WHERE ID_NATURE_OBJECT=?");
 
                     counter++;
 
                     if (idReportAttributesReports != null) {
                         st.addBatch(
                                 "DELETE FROM chm62edt_report_attributes WHERE ID_REPORT_ATTRIBUTES IN ("
-                                        + idReportAttributesReports + ")");
+                                + idReportAttributesReports + ")");
                     }
 
                     if (idReportAttributesReportType != null) {
                         st.addBatch(
                                 "DELETE FROM chm62edt_report_attributes WHERE ID_REPORT_ATTRIBUTES IN ("
-                                        + idReportAttributesReportType + ")");
+                                + idReportAttributesReportType + ")");
                     }
 
                     if (idReportTypeReports != null) {
                         st.addBatch(
                                 "DELETE FROM chm62edt_report_type WHERE ID_REPORT_TYPE IN ("
-                                        + idReportTypeReports + ")");
+                                + idReportTypeReports + ")");
                     }
 
                     if (idReportTypeReportType != null) {
                         st.addBatch(
                                 "DELETE FROM chm62edt_report_type WHERE ID_REPORT_TYPE IN ("
-                                        + idReportTypeReportType + ")");
+                                + idReportTypeReportType + ")");
                     }
 
                     for (PreparedStatement statement : statements) {
@@ -322,7 +299,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
 
     private String getNatObjectId(String specieId) throws SQLException {
         String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE ID_SPECIES = '"
-                + specieId + "'";
+            + specieId + "'";
         String natId = ExecuteSQL(query);
 
         return natId;
@@ -331,7 +308,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
     private boolean isSynonym(String specieId) throws SQLException {
         boolean ret = false;
         String query = "SELECT VALID_NAME FROM CHM62EDT_SPECIES WHERE ID_SPECIES = '"
-                + specieId + "'";
+            + specieId + "'";
         String synonym = ExecuteSQL(query);
 
         if (synonym != null && synonym.equals("0")) {

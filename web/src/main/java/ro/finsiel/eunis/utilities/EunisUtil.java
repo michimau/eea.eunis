@@ -6,6 +6,8 @@ import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.util.StringTokenizer;
 
+import eionet.eunis.dto.TaxonomyTreeDTO;
+
 public class EunisUtil {
 
     /**
@@ -344,6 +346,34 @@ public class EunisUtil {
         } else {
             sql.addImportLogMessage(msg);
         }
+    }
+
+    public static TaxonomyTreeDTO extractTaxonomyTree(String taxonomyTree) {
+
+        TaxonomyTreeDTO ret = new TaxonomyTreeDTO();
+
+        StringTokenizer st = new StringTokenizer(taxonomyTree, ",");
+
+        while (st.hasMoreTokens()) {
+            StringTokenizer sts = new StringTokenizer(st.nextToken(), "*");
+            String classification_id = sts.nextToken();
+            String classification_level = sts.nextToken();
+            String classification_name = sts.nextToken();
+
+            if (classification_level.equalsIgnoreCase("Kingdom")) {
+                ret.setKingdom(classification_name);
+            } else if (classification_level.equalsIgnoreCase("Phylum")) {
+                ret.setPhylum(classification_name);
+            } else if (classification_level.equalsIgnoreCase("Class")) {
+                ret.setDwcClass(classification_name);
+            } else if (classification_level.equalsIgnoreCase("Order")) {
+                ret.setOrder(classification_name);
+            } else if (classification_level.equalsIgnoreCase("Family")) {
+                ret.setFamily(classification_name);
+            }
+        }
+
+        return ret;
     }
 
 }

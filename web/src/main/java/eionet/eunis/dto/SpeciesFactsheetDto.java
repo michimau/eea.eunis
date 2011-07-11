@@ -24,7 +24,8 @@ public class SpeciesFactsheetDto implements Serializable {
     private static final long serialVersionUID = -6343981482733538221L;
 
     public static final String HEADER = "<rdf:RDF " + "xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
-            + "xmlns:dwc=\"http://rs.tdwg.org/dwc/terms/\" \n" + "xmlns =\"http://eunis.eea.europa.eu/rdf/species-schema.rdf#\">\n";
+    + "xmlns:dwc=\"http://rs.tdwg.org/dwc/terms/\" \n"
+    + "xmlns =\"http://eunis.eea.europa.eu/rdf/species-schema.rdf#\">\n";
 
     public static final String FOOTER = "\n</rdf:RDF>";
 
@@ -32,16 +33,16 @@ public class SpeciesFactsheetDto implements Serializable {
 
     @Element(required = false, name = "speciesCode")
     private int speciesId;
-    
+
     @Element(required = false, name = "binomialName")
     private String scientificName;
-    
+
     @Element(required = false, name = "validName")
     private DatatypeDto validName;
-    
+
     @Element(required = false, name = "taxonomicRank")
     private String typeRelatedSpecies;
-    
+
     @Element(required = false, name = "taxonomy")
     private ResourceDto taxonomy;
 
@@ -56,6 +57,24 @@ public class SpeciesFactsheetDto implements Serializable {
 
     @Element(required = false, name = "dwc:scientificName")
     private String dwcScientificName;
+
+    @Element(required = false, name = "dwc:kingdom")
+    private String kingdom;
+
+    @Element(required = false, name = "dwc:phylum")
+    private String phylum;
+
+    @Element(required = false, name = "dwc:class")
+    private String dwcClass;
+
+    @Element(required = false, name = "dwc:order")
+    private String order;
+
+    @Element(required = false, name = "dwc:family")
+    private String family;
+
+    @Element(required = false, name = "dwc:nameAccordingToID")
+    private String nameAccordingToID;
 
     @ElementList(required = false, type = VernacularNameDto.class, inline = true)
     private List<VernacularNameDto> vernacularNames;
@@ -194,6 +213,54 @@ public class SpeciesFactsheetDto implements Serializable {
 
     public void setTaxonomy(ResourceDto taxonomy) {
         this.taxonomy = taxonomy;
+    }
+
+    public String getKingdom() {
+        return kingdom;
+    }
+
+    public void setKingdom(String kingdom) {
+        this.kingdom = kingdom;
+    }
+
+    public String getPhylum() {
+        return phylum;
+    }
+
+    public void setPhylum(String phylum) {
+        this.phylum = phylum;
+    }
+
+    public String getDwcClass() {
+        return dwcClass;
+    }
+
+    public void setDwcClass(String dwcClass) {
+        this.dwcClass = dwcClass;
+    }
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
+    }
+
+    public String getFamily() {
+        return family;
+    }
+
+    public void setFamily(String family) {
+        this.family = family;
+    }
+
+    public String getNameAccordingToID() {
+        return nameAccordingToID;
+    }
+
+    public void setNameAccordingToID(String nameAccordingToID) {
+        this.nameAccordingToID = nameAccordingToID;
     }
 
 }

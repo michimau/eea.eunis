@@ -54,6 +54,7 @@ import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.SpeciesDistributionDTO;
 import eionet.eunis.dto.SpeciesFactsheetDto;
 import eionet.eunis.dto.SpeciesSynonymDto;
+import eionet.eunis.dto.TaxonomyTreeDTO;
 import eionet.eunis.dto.VernacularNameDto;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
@@ -302,6 +303,17 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
         dto.setTypeRelatedSpecies(factsheet.getSpeciesObject().getTypeRelatedSpecies());
         dto.setGenus(factsheet.getSpeciesObject().getGenus());
         dto.setAuthor(factsheet.getSpeciesObject().getAuthor());
+
+        TaxonomyTreeDTO taxonomyTree = factsheet.getTaxonomicTree(factsheet.getSpeciesObject().getIdTaxcode());
+        if (taxonomyTree != null) {
+            dto.setKingdom(taxonomyTree.getKingdom());
+            dto.setPhylum(taxonomyTree.getPhylum());
+            dto.setDwcClass(taxonomyTree.getDwcClass());
+            dto.setOrder(taxonomyTree.getOrder());
+            dto.setFamily(taxonomyTree.getFamily());
+        }
+        dto.setNameAccordingToID(SpeciesFactsheet.getBookAuthorDate(factsheet.getTaxcodeObject().IdDcTaxcode()));
+
         dto.setDwcScientificName(dto.getScientificName() + ' ' + dto.getAuthor());
         dto.setDcmitype(new ResourceDto("", "http://purl.org/dc/dcmitype/Text"));
 

@@ -161,7 +161,7 @@ public class Chm62edtTaxonomyPersist extends PersistentObject {
      * Setter for a database field.
      * @param idTaxonomyLink
      **/
-    public void setIdTaxcodeLink(String idTaxonomyLink) {
+    public void setIdTaxonomyLink(String idTaxonomyLink) {
         i_idTaxonomyLink = idTaxonomyLink;
         this.markModifiedPersistentState();
     }
@@ -170,7 +170,7 @@ public class Chm62edtTaxonomyPersist extends PersistentObject {
      * Setter for a database field.
      * @param idTaxonomyParent
      **/
-    public void setIdTaxcodeParent(String idTaxonomyParent) {
+    public void setIdTaxonomyParent(String idTaxonomyParent) {
         i_idTaxonomyParent = idTaxonomyParent;
         this.markModifiedPersistentState();
     }

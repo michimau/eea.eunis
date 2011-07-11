@@ -1,22 +1,77 @@
 package ro.finsiel.eunis.factsheet.species;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
+
 import org.apache.log4j.Logger;
-import ro.finsiel.eunis.jrfTables.*;
+
+import ro.finsiel.eunis.jrfTables.Chm62edtAbundanceDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtAbundancePersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtAreaLegalTextDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtAreaLegalTextPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtBiogeoregionDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtBiogeoregionPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtConservationStatusDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtConservationStatusPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtCountryDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtFaithfulnessDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtFaithfulnessPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtFrequenciesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtFrequenciesPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtLegalStatusDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtLegalStatusPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectAttributesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectAttributesPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtPopulationUnitDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtPopulationUnitPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtReportTypeDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtReportTypePersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtReportsDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtReportsPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesStatusDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesStatusPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtTaxcodeLeftDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtTaxcodeLeftPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtTaxonomyDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtTaxonomyPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtTrendDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtTrendPersist;
+import ro.finsiel.eunis.jrfTables.DcDateDomain;
+import ro.finsiel.eunis.jrfTables.DcDatePersist;
+import ro.finsiel.eunis.jrfTables.DcPublisherDomain;
+import ro.finsiel.eunis.jrfTables.DcPublisherPersist;
+import ro.finsiel.eunis.jrfTables.DcSourceDomain;
+import ro.finsiel.eunis.jrfTables.DcSourcePersist;
+import ro.finsiel.eunis.jrfTables.DcTitleDomain;
+import ro.finsiel.eunis.jrfTables.DcTitlePersist;
+import ro.finsiel.eunis.jrfTables.SpeciesNatureObjectDomain;
+import ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist;
 import ro.finsiel.eunis.jrfTables.species.VernacularNamesDomain;
 import ro.finsiel.eunis.jrfTables.species.VernacularNamesPersist;
-import ro.finsiel.eunis.jrfTables.species.factsheet.*;
+import ro.finsiel.eunis.jrfTables.species.factsheet.InfoQualityReportTypeDomain;
+import ro.finsiel.eunis.jrfTables.species.factsheet.InfoQualityReportTypePersist;
+import ro.finsiel.eunis.jrfTables.species.factsheet.NatureObjectDcSourceDomain;
+import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain;
+import ro.finsiel.eunis.jrfTables.species.factsheet.SpeciesStatusReportTypeDomain;
+import ro.finsiel.eunis.jrfTables.species.factsheet.SpeciesStatusReportTypePersist;
 import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTypeSpeciesDomain;
 import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTypeSpeciesPersist;
 import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.factsheet.PublicationWrapper;
 import ro.finsiel.eunis.utilities.EunisUtil;
-
-import java.text.SimpleDateFormat;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
+import eionet.eunis.dto.TaxonomyTreeDTO;
 
 
 /**
@@ -188,7 +243,7 @@ public class SpeciesFactsheet {
         }
         return ret;
     }
-  
+
     /**
      * Returns link to outside sources if one exists
      * @param nauture object ID, outside source name
@@ -257,7 +312,7 @@ public class SpeciesFactsheet {
                     }
                     results.addElement(
                             new SpeciesHabitatWrapper(habitat.getHabitatScientificName(), code, habitat.getIdHabitat(), type,
-                            geoscope, abundance, frequencies, faithfulness, speciesStatus, comment));
+                                    geoscope, abundance, frequencies, faithfulness, speciesStatus, comment));
                 }
             }
         } catch (Exception _ex) {
@@ -278,12 +333,12 @@ public class SpeciesFactsheet {
 
         List results = new Vector();
         String sql = "SELECT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN "
-                + " FROM CHM62EDT_SPECIES AS A "
-                + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
-                + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
-                + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
-                + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE A.ID_NATURE_OBJECT IN ( "
-                + synonymsIDs + " )" + " GROUP BY C.ID_NATURE_OBJECT";
+            + " FROM CHM62EDT_SPECIES AS A "
+            + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
+            + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+            + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
+            + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE A.ID_NATURE_OBJECT IN ( "
+            + synonymsIDs + " )" + " GROUP BY C.ID_NATURE_OBJECT";
 
         try {
             results = new SitesByNatureObjectDomain().findCustom(sql);
@@ -301,14 +356,14 @@ public class SpeciesFactsheet {
     public List getSitesForSubpecies() {
         List results = new Vector();
         String sql = "SELECT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN "
-                + " FROM CHM62EDT_SPECIES AS A "
-                + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
-                + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
-                + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
-                + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE (A.ID_SPECIES_LINK = '"
-                + getSpeciesObject().getIdSpecies() + "'" + " AND A.TYPE_RELATED_SPECIES='subspecies'" + " AND A.ID_SPECIES <> '"
-                + getSpeciesObject().getIdSpecies() + "')" + " OR (A.SCIENTIFIC_NAME LIKE '"
-                + getSpeciesObject().getScientificName() + " %')" + " GROUP BY C.ID_NATURE_OBJECT";
+            + " FROM CHM62EDT_SPECIES AS A "
+            + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
+            + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+            + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
+            + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE (A.ID_SPECIES_LINK = '"
+            + getSpeciesObject().getIdSpecies() + "'" + " AND A.TYPE_RELATED_SPECIES='subspecies'" + " AND A.ID_SPECIES <> '"
+            + getSpeciesObject().getIdSpecies() + "')" + " OR (A.SCIENTIFIC_NAME LIKE '"
+            + getSpeciesObject().getScientificName() + " %')" + " GROUP BY C.ID_NATURE_OBJECT";
 
         try {
             results = new SitesByNatureObjectDomain().findCustom(sql);
@@ -587,7 +642,7 @@ public class SpeciesFactsheet {
         sql += " AND TYPE_RELATED_SPECIES='subspecies'";
         sql += " AND ID_SPECIES <> '" + getSpeciesNatureObject().getIdSpecies() + "')";
         sql += " OR (TYPE_RELATED_SPECIES<>'synonym' AND SCIENTIFIC_NAME LIKE '"
-                + EunisUtil.replaceTagsImport(getSpeciesNatureObject().getScientificName()) + " %')";
+            + EunisUtil.replaceTagsImport(getSpeciesNatureObject().getScientificName()) + " %')";
         try {
             // System.out.println("sql = " + sql);
             result = new SpeciesNatureObjectDomain().findWhere(sql);
@@ -610,7 +665,7 @@ public class SpeciesFactsheet {
 
         try {
             List<Chm62edtCountryPersist> countries = new Chm62edtCountryDomain().findWhere(
-                    "AREA_NAME_EN LIKE 'Europe%' OR AREA_NAME_EN = 'World'");
+            "AREA_NAME_EN LIKE 'Europe%' OR AREA_NAME_EN = 'World'");
 
             for (Chm62edtCountryPersist country : countries) {
                 // String sql = "LOOKUP_TYPE='CONSERVATION_STATUS' AND ID_GEOSCOPE='" + country.getIdGeoscope() + "' AND ID_NATURE_OBJECT='" + getSpeciesNatureObject().getIdNatureObject() + "'";
@@ -619,7 +674,7 @@ public class SpeciesFactsheet {
                 // System.out.println("synonymsIDs = " + synonymsIDs);
 
                 String sql = "LOOKUP_TYPE='CONSERVATION_STATUS' AND ID_GEOSCOPE='" + country.getIdGeoscope()
-                        + "' AND ID_NATURE_OBJECT IN (" + synonymsIDs + ")";
+                + "' AND ID_NATURE_OBJECT IN (" + synonymsIDs + ")";
                 List<Chm62edtReportsPersist> reports = new Chm62edtReportsDomain().findWhere(sql);
 
                 if (reports.size() > 0) {
@@ -767,7 +822,7 @@ public class SpeciesFactsheet {
 
             // String sql = " (LOOKUP_TYPE IN ('SPECIES_STATUS')) AND  (ID_NATURE_OBJECT='" + idNatureObject + "') ORDER BY ID_REPORT_TYPE, ID_LOOKUP DESC";
             String sql = " (LOOKUP_TYPE IN ('SPECIES_STATUS')) AND  (ID_NATURE_OBJECT IN ( " + synonymsIDs
-                    + " ) ) ORDER BY ID_REPORT_TYPE, ID_LOOKUP DESC";
+            + " ) ) ORDER BY ID_REPORT_TYPE, ID_LOOKUP DESC";
 
             List<Chm62edtReportsPersist> list = new Chm62edtReportsDomain().findWhere(sql);
 
@@ -1109,6 +1164,16 @@ public class SpeciesFactsheet {
     }
 
     /**
+     * Retrieve kingdom name for species.
+     *
+     * @param taxcodeID ID_TAXONOMY from CHM62EDT_TAXONOMY.
+     * @return Kingdom.
+     */
+    public String getKingdomName(String taxcodeID) {
+        return getTaxonomicName(taxcodeID, 4);
+    }
+
+    /**
      * Retrieve taxonomic information about a species.
      *
      * @param taxcodeID ID_TAXONOMY from CHM62EDT_TAXONOMY.
@@ -1126,24 +1191,24 @@ public class SpeciesFactsheet {
             if (!ltaxcode.isEmpty() && level < 3) {
                 t = (Chm62edtTaxonomyPersist) ltaxcode.get(0);
                 switch (level) {
-                case 0:
-                    tName = t.getName();
-                    break;
+                    case 0:
+                        tName = t.getName();
+                        break;
 
-                case 1:
-                    tName = t.getParentLevelName();
-                    break;
+                    case 1:
+                        tName = t.getParentLevelName();
+                        break;
 
-                case 2:
-                    tName = getTaxonomicName(t.getClassID().toString(), 0);
-                    break;
+                    case 2:
+                        tName = getTaxonomicName(t.getClassID().toString(), 0);
+                        break;
 
-                case 3:
-                    tName = getTaxonomicName(t.getClassID().toString(), 1);
-                    break;
+                    case 3:
+                        tName = getTaxonomicName(t.getClassID().toString(), 1);
+                        break;
 
-                default:
-                    tName = "bad taxionomic level";
+                    default:
+                        tName = "bad taxionomic level";
                 }
             } else {
                 if (3 == level) {
@@ -1169,6 +1234,36 @@ public class SpeciesFactsheet {
         }
         return tName;
     }
+
+    /**
+     * Retrieve taxonomic tree information.
+     *
+     * @param taxcodeID TAXONOMY_TREE from CHM62EDT_TAXONOMY.
+     * @return TaxonomyTreeDTO
+     */
+    public TaxonomyTreeDTO getTaxonomicTree(String taxcodeID) {
+
+        TaxonomyTreeDTO ret = null;
+        Chm62edtTaxonomyDomain tDomain = new Chm62edtTaxonomyDomain();
+        Chm62edtTaxonomyPersist t;
+
+        try {
+            if (taxcodeID != null) {
+                List ltaxcode = tDomain.findWhere("CHM62EDT_TAXONOMY.ID_TAXONOMY='" + taxcodeID + "'");
+
+                if (!ltaxcode.isEmpty()) {
+                    t = (Chm62edtTaxonomyPersist) ltaxcode.get(0);
+                    String tree = t.getTaxonomyTree();
+                    ret = EunisUtil.extractTaxonomyTree(tree);
+                }
+            }
+        } catch (Exception _ex) {
+            _ex.printStackTrace(System.err);
+        }
+
+        return ret;
+    }
+
 
     /**
      * Retrieve minumum population for a given species.

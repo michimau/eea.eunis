@@ -13,7 +13,7 @@ cp=$cp:$CLASSPATH
 cp=@MYSQL.JAR@
 
 if [ "$1" = "" ]; then
-	echo "Missing argument! Possible first arguments are: sites, empty_digir, digir, statistics, species_tab, sites_tab, habitats_tab"
+	echo "Missing argument! Possible first arguments are: sites, empty_digir, digir, statistics, species_tab, sites_tab, habitats_tab, taxonomy_tree"
 else
 	$java -cp $cp eionet.eunis.scripts.PostImportScriptsCmd $@
 fi;

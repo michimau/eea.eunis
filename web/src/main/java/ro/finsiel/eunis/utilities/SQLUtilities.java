@@ -31,35 +31,24 @@ public class SQLUtilities {
     private String SQL_PWD = "";
     private int SQL_LIMIT = 1000;
     private int resultCount = 0;
-    private static final String INSERT_BOOKMARK = "INSERT INTO EUNIS_BOOKMARKS( USERNAME, BOOKMARK, DESCRIPTION ) VALUES( ?, ?, ?)";
+    private static final String INSERT_BOOKMARK =
+        "INSERT INTO EUNIS_BOOKMARKS( USERNAME, BOOKMARK, DESCRIPTION ) VALUES( ?, ?, ?)";
 
     /**
      * SQL used for soundex search
      */
-    public static String smartSoundex = "" + " select name,phonetic,object_type"
-    + " from `chm62edt_soundex`"
-    + " where object_type = '<object_type>'"
-    + " and phonetic = soundex('<name>')"
-    + " and left(name,6) = left('<name>',6)" + " union"
-    + " select name,phonetic,object_type" + " from `chm62edt_soundex`"
-    + " where object_type = '<object_type>'"
-    + " and phonetic = soundex('<name>')"
-    + " and left(name,5) = left('<name>',5)" + " union"
-    + " select name,phonetic,object_type" + " from `chm62edt_soundex`"
-    + " where object_type = '<object_type>'"
-    + " and phonetic = soundex('<name>')"
-    + " and left(name,4) = left('<name>',4)" + " union"
-    + " select name,phonetic,object_type" + " from `chm62edt_soundex`"
-    + " where object_type = '<object_type>'"
-    + " and phonetic = soundex('<name>')"
-    + " and left(name,3) = left('<name>',3)" + " union"
-    + " select name,phonetic,object_type" + " from `chm62edt_soundex`"
-    + " where object_type = '<object_type>'"
-    + " and phonetic = soundex('<name>')"
-    + " and left(name,2) = left('<name>',2)" + " union"
-    + " select name,phonetic,object_type" + " from `chm62edt_soundex`"
-    + " where object_type = '<object_type>'"
-    + " and left(phonetic,3) = left(soundex('<name>'),3)";
+    public static String smartSoundex = "" + " select name,phonetic,object_type" + " from `chm62edt_soundex`"
+    + " where object_type = '<object_type>'" + " and phonetic = soundex('<name>')"
+    + " and left(name,6) = left('<name>',6)" + " union" + " select name,phonetic,object_type" + " from `chm62edt_soundex`"
+    + " where object_type = '<object_type>'" + " and phonetic = soundex('<name>')"
+    + " and left(name,5) = left('<name>',5)" + " union" + " select name,phonetic,object_type" + " from `chm62edt_soundex`"
+    + " where object_type = '<object_type>'" + " and phonetic = soundex('<name>')"
+    + " and left(name,4) = left('<name>',4)" + " union" + " select name,phonetic,object_type" + " from `chm62edt_soundex`"
+    + " where object_type = '<object_type>'" + " and phonetic = soundex('<name>')"
+    + " and left(name,3) = left('<name>',3)" + " union" + " select name,phonetic,object_type" + " from `chm62edt_soundex`"
+    + " where object_type = '<object_type>'" + " and phonetic = soundex('<name>')"
+    + " and left(name,2) = left('<name>',2)" + " union" + " select name,phonetic,object_type" + " from `chm62edt_soundex`"
+    + " where object_type = '<object_type>'" + " and left(phonetic,3) = left(soundex('<name>'),3)";
 
     /**
      * Creates a new SQLUtilities object.
@@ -70,13 +59,16 @@ public class SQLUtilities {
     /**
      * Initialization method for this object.
      * 
-     * @param SQL_DRIVER_NAME JDBC driver.
-     * @param SQL_DRIVER_URL JDBC url.
-     * @param SQL_DRIVER_USERNAME JDBC username.
-     * @param SQL_DRIVER_PASSWORD JDBC password.
+     * @param SQL_DRIVER_NAME
+     *            JDBC driver.
+     * @param SQL_DRIVER_URL
+     *            JDBC url.
+     * @param SQL_DRIVER_USERNAME
+     *            JDBC username.
+     * @param SQL_DRIVER_PASSWORD
+     *            JDBC password.
      */
-    public void Init(String SQL_DRIVER_NAME, String SQL_DRIVER_URL,
-            String SQL_DRIVER_USERNAME, String SQL_DRIVER_PASSWORD) {
+    public void Init(String SQL_DRIVER_NAME, String SQL_DRIVER_URL, String SQL_DRIVER_USERNAME, String SQL_DRIVER_PASSWORD) {
         SQL_DRV = SQL_DRIVER_NAME;
         SQL_URL = SQL_DRIVER_URL;
         SQL_USR = SQL_DRIVER_USERNAME;
@@ -86,7 +78,8 @@ public class SQLUtilities {
     /**
      * Limit the results computed.
      * 
-     * @param SQLLimit Limit.
+     * @param SQLLimit
+     *            Limit.
      */
     public void SetSQLLimit(int SQLLimit) {
         SQL_LIMIT = SQLLimit;
@@ -95,8 +88,10 @@ public class SQLUtilities {
     /**
      * Executes parameterized sql query and return list of results. Note! only first column in query is returned.
      * 
-     * @param sql - sql string
-     * @param params - sql parameters
+     * @param sql
+     *            - sql string
+     * @param params
+     *            - sql parameters
      * @return
      * @throws SQLException
      */
@@ -126,8 +121,10 @@ public class SQLUtilities {
     /**
      * Execute an sql.
      * 
-     * @param SQL SQL.
-     * @param Delimiter LIMIT
+     * @param SQL
+     *            SQL.
+     * @param Delimiter
+     *            LIMIT
      * @return result
      */
     public String ExecuteFilterSQL(String SQL, String Delimiter) {
@@ -191,7 +188,8 @@ public class SQLUtilities {
     /**
      * Executes a SELECT sql and returns the first value.
      * 
-     * @param SQL SQL.
+     * @param SQL
+     *            SQL.
      * @return First column.
      */
     public ArrayList<String> SQL2Array(String SQL) {
@@ -231,7 +229,8 @@ public class SQLUtilities {
     /**
      * Executes a SELECT sql and returns the first value.
      * 
-     * @param SQL SQL.
+     * @param SQL
+     *            SQL.
      * @return First column.
      */
     public String ExecuteSQL(String SQL) {
@@ -272,7 +271,8 @@ public class SQLUtilities {
     /**
      * Executes a sql.
      * 
-     * @param SQL SQL.
+     * @param SQL
+     *            SQL.
      */
     public void ExecuteDirectSQL(String SQL) {
 
@@ -334,8 +334,7 @@ public class SQLUtilities {
      * @param conn
      * @throws SQLException
      */
-    public void executeQuery(String parameterizedSQL, List<Object> values, ResultSetBaseReader rsReader)
-    throws SQLException {
+    public void executeQuery(String parameterizedSQL, List<Object> values, ResultSetBaseReader rsReader) throws SQLException {
         ResultSet rs = null;
         PreparedStatement pstmt = null;
         Connection con = null;
@@ -378,8 +377,10 @@ public class SQLUtilities {
     /**
      * Execute an sql.
      * 
-     * @param SQL SQL.
-     * @param noColumns Number of columns
+     * @param SQL
+     *            SQL.
+     * @param noColumns
+     *            Number of columns
      * @return list of sql results.
      */
     public List ExecuteSQLReturnList(String SQL, int noColumns) {
@@ -469,10 +470,14 @@ public class SQLUtilities {
     /**
      * Execute UPDATE statement
      * 
-     * @param tableName table name
-     * @param columnName column update
-     * @param columnValue new value for column
-     * @param whereCondition WHERE condition
+     * @param tableName
+     *            table name
+     * @param columnName
+     *            column update
+     * @param columnValue
+     *            new value for column
+     * @param whereCondition
+     *            WHERE condition
      * @return operation status
      */
     public boolean ExecuteUpdate(String tableName, String columnName, String columnValue, String whereCondition) {
@@ -486,13 +491,9 @@ public class SQLUtilities {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            ps = con.prepareStatement(
-                    "UPDATE " + tableName + " SET " + columnName + " = '"
-                    + columnValue + "' WHERE 1=1"
-                    + (whereCondition == null
-                            && whereCondition.trim().length() <= 0
-                            ? ""
-                                    : " AND " + whereCondition));
+            ps =
+                con.prepareStatement("UPDATE " + tableName + " SET " + columnName + " = '" + columnValue + "' WHERE 1=1"
+                        + (whereCondition == null && whereCondition.trim().length() <= 0 ? "" : " AND " + whereCondition));
             ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -506,8 +507,10 @@ public class SQLUtilities {
     /**
      * Execute DELETE statement
      * 
-     * @param tableName table name
-     * @param whereCondition WHERE
+     * @param tableName
+     *            table name
+     * @param whereCondition
+     *            WHERE
      * @return operation status
      */
     public boolean ExecuteDelete(String tableName, String whereCondition) {
@@ -521,12 +524,9 @@ public class SQLUtilities {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            ps = con.prepareStatement(
-                    "DELETE FROM " + tableName + " WHERE 1=1"
-                    + (whereCondition == null
-                            || whereCondition.trim().length() <= 0
-                            ? ""
-                                    : " AND " + whereCondition));
+            ps =
+                con.prepareStatement("DELETE FROM " + tableName + " WHERE 1=1"
+                        + (whereCondition == null || whereCondition.trim().length() <= 0 ? "" : " AND " + whereCondition));
             ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -540,9 +540,12 @@ public class SQLUtilities {
     /**
      * Insert bookmark functionality
      * 
-     * @param username username associated with that bookmark
-     * @param bookmarkURL URL
-     * @param description Short description displayed to the user
+     * @param username
+     *            username associated with that bookmark
+     * @param bookmarkURL
+     *            URL
+     * @param description
+     *            Short description displayed to the user
      * @return operation status
      */
     public boolean insertBookmark(String username, String bookmarkURL, String description) {
@@ -571,17 +574,16 @@ public class SQLUtilities {
     /**
      * Execute INSERT statement
      * 
-     * @param tableName table name
-     * @param tableColumns columns
+     * @param tableName
+     *            table name
+     * @param tableColumns
+     *            columns
      * @return operation status
      */
     public boolean ExecuteInsert(String tableName, TableColumns tableColumns) {
 
-        if (tableName == null || tableName.trim().length() <= 0
-                || tableColumns == null
-                || tableColumns.getColumnsNames() == null
-                || tableColumns.getColumnsNames().size() <= 0
-                || tableColumns.getColumnsValues() == null
+        if (tableName == null || tableName.trim().length() <= 0 || tableColumns == null || tableColumns.getColumnsNames() == null
+                || tableColumns.getColumnsNames().size() <= 0 || tableColumns.getColumnsValues() == null
                 || tableColumns.getColumnsValues().size() <= 0) {
             return false;
         }
@@ -599,20 +601,15 @@ public class SQLUtilities {
             String valuesList = "";
 
             for (int i = 0; i < tableColumns.getColumnsNames().size(); i++) {
-                namesList += (String) tableColumns.getColumnsNames().get(i)
-                + (i < tableColumns.getColumnsNames().size() - 1
-                        ? ","
-                                : "");
-                valuesList += "'"
-                    + (String) tableColumns.getColumnsValues().get(i) + "'"
-                    + (i < tableColumns.getColumnsNames().size() - 1
-                            ? ","
-                                    : "");
+                namesList +=
+                    (String) tableColumns.getColumnsNames().get(i)
+                    + (i < tableColumns.getColumnsNames().size() - 1 ? "," : "");
+                valuesList +=
+                    "'" + (String) tableColumns.getColumnsValues().get(i) + "'"
+                    + (i < tableColumns.getColumnsNames().size() - 1 ? "," : "");
             }
 
-            ps = con.prepareStatement(
-                    "INSERT INTO " + tableName + " ( " + namesList
-                    + " ) values ( " + valuesList + " ) ");
+            ps = con.prepareStatement("INSERT INTO " + tableName + " ( " + namesList + " ) values ( " + valuesList + " ) ");
 
             ps.execute();
         } catch (Exception e) {
@@ -627,14 +624,15 @@ public class SQLUtilities {
     /**
      * Execute INSERT statement
      * 
-     * @param tableName table name
-     * @param tableColumns columns
+     * @param tableName
+     *            table name
+     * @param tableColumns
+     *            columns
      * @return operation status
      */
     public List<String> ExecuteMultipleInsert(String tableName, List<TableColumns> tableRows) throws Exception {
 
-        if (tableName == null || tableName.trim().length() <= 0
-                || tableRows == null || tableRows.size() <= 0) {
+        if (tableName == null || tableName.trim().length() <= 0 || tableRows == null || tableRows.size() <= 0) {
             return null;
         }
 
@@ -670,23 +668,15 @@ public class SQLUtilities {
                 String valuesList = "";
 
                 for (int i = 0; i < tableColumns.getColumnsNames().size(); i++) {
-                    String columnName = (String) tableColumns.getColumnsNames().get(
-                            i);
+                    String columnName = (String) tableColumns.getColumnsNames().get(i);
 
                     if (columnName != null && !columnName.equals("")) {
                         columnName = "`" + columnName + "`";
                     }
-                    String columnValue = (String) tableColumns.getColumnsValues().get(
-                            i);
+                    String columnValue = (String) tableColumns.getColumnsValues().get(i);
 
-                    namesList += columnName
-                    + (i < tableColumns.getColumnsNames().size() - 1
-                            ? ","
-                                    : "");
-                    valuesList += "'" + columnValue + "'"
-                    + (i < tableColumns.getColumnsNames().size() - 1
-                            ? ","
-                                    : "");
+                    namesList += columnName + (i < tableColumns.getColumnsNames().size() - 1 ? "," : "");
+                    valuesList += "'" + columnValue + "'" + (i < tableColumns.getColumnsNames().size() - 1 ? "," : "");
                 }
 
                 List xmlColumnNames = tableColumns.getColumnsNames();
@@ -708,8 +698,7 @@ public class SQLUtilities {
                     }
                 }
 
-                query = "INSERT INTO " + tableName + " ( " + namesList
-                + " ) values ( " + valuesList + " ) ";
+                query = "INSERT INTO " + tableName + " ( " + namesList + " ) values ( " + valuesList + " ) ";
                 ps = con.prepareStatement(query);
                 ps.execute();
             }
@@ -717,8 +706,7 @@ public class SQLUtilities {
         } catch (Exception e) {
             con.rollback();
             con.commit();
-            throw new IllegalArgumentException(
-                    e.getMessage() + " for statement: " + query, e);
+            throw new IllegalArgumentException(e.getMessage() + " for statement: " + query, e);
             // result.add(e.getMessage()+"<br/> SQL statement: "+query);
         } finally {
             st.close();
@@ -730,8 +718,10 @@ public class SQLUtilities {
     /**
      * Determines what tabs will be shown for given factsheet
      * 
-     * @param idNatureObject object from database
-     * @param NatureObjectType type of object (species, habitats, sites)
+     * @param idNatureObject
+     *            object from database
+     * @param NatureObjectType
+     *            type of object (species, habitats, sites)
      * @return List<String> list of column names that exist
      */
     public List<String> getExistingTabPages(String idNatureObject, String NatureObjectType) {
@@ -756,7 +746,7 @@ public class SQLUtilities {
             int colCnt = meta.getColumnCount();
 
             if (rs.next()) {
-                for (int i = 1; i <= colCnt; i++){
+                for (int i = 1; i <= colCnt; i++) {
                     String colName = meta.getColumnName(i);
                     if (colName != null && !colName.equalsIgnoreCase("ID_NATURE_OBJECT")) {
                         boolean exists = rs.getString(colName).equalsIgnoreCase("Y");
@@ -803,10 +793,10 @@ public class SQLUtilities {
         String strSQL = "SELECT COUNT(*) AS RECORD_COUNT";
 
         strSQL = strSQL + " FROM `chm62edt_sites`";
-        strSQL = strSQL
-        + " INNER JOIN `chm62edt_designations` ON (`chm62edt_sites`.ID_DESIGNATION = `chm62edt_designations`.ID_DESIGNATION AND `chm62edt_sites`.ID_GEOSCOPE = `chm62edt_designations`.ID_GEOSCOPE)";
-        strSQL = strSQL + " WHERE `chm62edt_sites`.ID_DESIGNATION = '"
-        + idDesignation + "'";
+        strSQL =
+            strSQL
+            + " INNER JOIN `chm62edt_designations` ON (`chm62edt_sites`.ID_DESIGNATION = `chm62edt_designations`.ID_DESIGNATION AND `chm62edt_sites`.ID_GEOSCOPE = `chm62edt_designations`.ID_GEOSCOPE)";
+        strSQL = strSQL + " WHERE `chm62edt_sites`.ID_DESIGNATION = '" + idDesignation + "'";
         strSQL = strSQL + " AND `chm62edt_sites`.ID_GEOSCOPE = " + idGeoscope;
 
         try {
@@ -959,17 +949,14 @@ public class SQLUtilities {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             DatabaseMetaData meta = con.getMetaData();
-            ResultSet rs = meta.getTables(null, null, null,
-                    new String[] { "TABLE" });
+            ResultSet rs = meta.getTables(null, null, null, new String[] {"TABLE"});
 
             ;
 
             while (rs.next()) {
                 String tableName = rs.getString("TABLE_NAME");
 
-                if (tableName != null
-                        && (tableName.startsWith("chm62edt")
-                                || tableName.startsWith("dc_"))) {
+                if (tableName != null && (tableName.startsWith("chm62edt") || tableName.startsWith("dc_"))) {
                     ret.add(tableName);
                 }
             }
@@ -1111,8 +1098,7 @@ public class SQLUtilities {
 
                     if (!value.equalsIgnoreCase("NULL") && !value.equals("")) {
                         ret.append("<").append(columnName).append(">").append(EunisUtil.replaceTagsExport(value)).append("</")
-                        .append(columnName).append(">").append(
-                                nl);
+                        .append(columnName).append(">").append(nl);
                     }
                 }
                 ret.append("</ROW>").append(nl);
@@ -1148,9 +1134,9 @@ public class SQLUtilities {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             message = EunisUtil.replaceTagsImport(message);
-            ps = con.prepareStatement(
-                    "INSERT INTO EUNIS_IMPORT_LOG (MESSAGE, CUR_TIMESTAMP) values ( '"
-                    + message + "', CURRENT_TIMESTAMP() ) ");
+            ps =
+                con.prepareStatement("INSERT INTO EUNIS_IMPORT_LOG (MESSAGE, CUR_TIMESTAMP) values ( '" + message
+                        + "', CURRENT_TIMESTAMP() ) ");
             ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -1173,8 +1159,8 @@ public class SQLUtilities {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            ps = con.prepareStatement(
-            "SELECT LOG_ID, MESSAGE, CUR_TIMESTAMP FROM EUNIS_IMPORT_LOG ORDER BY LOG_ID DESC LIMIT 100");
+            ps =
+                con.prepareStatement("SELECT LOG_ID, MESSAGE, CUR_TIMESTAMP FROM EUNIS_IMPORT_LOG ORDER BY LOG_ID DESC LIMIT 100");
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -1208,10 +1194,8 @@ public class SQLUtilities {
 
         statements.add("SELECT URL FROM DC_SOURCE");
         statements.add("SELECT LINK_URL FROM CHM62EDT_GLOSSARY");
-        statements.add(
-        "SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES WHERE VALUE LIKE 'http://%'");
-        statements.add(
-        "SELECT DATA_SOURCE FROM CHM62EDT_DESIGNATIONS WHERE DATA_SOURCE LIKE 'http://%'");
+        statements.add("SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES WHERE VALUE LIKE 'http://%'");
+        statements.add("SELECT DATA_SOURCE FROM CHM62EDT_DESIGNATIONS WHERE DATA_SOURCE LIKE 'http://%'");
 
         try {
             Class.forName(SQL_DRV);
@@ -1267,17 +1251,17 @@ public class SQLUtilities {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
 
-            ps = con.prepareStatement(
-            "UPDATE chm62edt_sites SET LATITUDE=-(LAT_DEG+(LAT_MIN*60+LAT_SEC)/3600.000) WHERE LATITUDE IS NULL AND LAT_NS='S' AND LAT_DEG IS NOT NULL");
+            ps =
+                con.prepareStatement("UPDATE chm62edt_sites SET LATITUDE=-(LAT_DEG+(LAT_MIN*60+LAT_SEC)/3600.000) WHERE LATITUDE IS NULL AND LAT_NS='S' AND LAT_DEG IS NOT NULL");
             ps.execute();
-            ps = con.prepareStatement(
-            "UPDATE chm62edt_sites SET LATITUDE=LAT_DEG+(LAT_MIN*60+LAT_SEC)/3600.000 WHERE LATITUDE IS NULL AND LAT_NS='N' AND LAT_DEG is NOT NULL");
+            ps =
+                con.prepareStatement("UPDATE chm62edt_sites SET LATITUDE=LAT_DEG+(LAT_MIN*60+LAT_SEC)/3600.000 WHERE LATITUDE IS NULL AND LAT_NS='N' AND LAT_DEG is NOT NULL");
             ps.execute();
-            ps = con.prepareStatement(
-            "UPDATE chm62edt_sites SET LONGITUDE=-(LONG_DEG+(LONG_MIN*60+LONG_SEC)/3600.000) WHERE LONGITUDE IS NULL AND LONG_EW='W' AND LONG_DEG IS NOT NULL");
+            ps =
+                con.prepareStatement("UPDATE chm62edt_sites SET LONGITUDE=-(LONG_DEG+(LONG_MIN*60+LONG_SEC)/3600.000) WHERE LONGITUDE IS NULL AND LONG_EW='W' AND LONG_DEG IS NOT NULL");
             ps.execute();
-            ps = con.prepareStatement(
-            "UPDATE chm62edt_sites SET LONGITUDE=LONG_DEG+(LONG_MIN*60+LONG_SEC)/3600.000 WHERE LONGITUDE IS NULL AND LONG_EW='E' AND LONG_DEG IS NOT NULL");
+            ps =
+                con.prepareStatement("UPDATE chm62edt_sites SET LONGITUDE=LONG_DEG+(LONG_MIN*60+LONG_SEC)/3600.000 WHERE LONGITUDE IS NULL AND LONG_EW='E' AND LONG_DEG IS NOT NULL");
             ps.execute();
         } catch (Exception e) {
             EunisUtil.writeLogMessage("ERROR occured while generating sites latitude/longitude values: " + e.getMessage(), cmd,
@@ -1322,36 +1306,29 @@ public class SQLUtilities {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
-            int nTotalSpecies = Utilities.checkedStringToInt(
-                    ExecuteSQL("select count(*) from eunis_digir"), 0);
-            int nDistinctSpecies = Utilities.checkedStringToInt(
-                    ExecuteSQL(
-                    "select count(DISTINCT ScientificName) from eunis_digir"),
-                    0);
-            int nSpeciesWithCountry = Utilities.checkedStringToInt(
-                    ExecuteSQL(
-                    "select count(*) from eunis_digir where Country is not null"),
-                    0);
-            int nSpeciesWithLatLong = Utilities
-            .checkedStringToInt(
-                    ExecuteSQL(
-                    "select count(*) from eunis_digir where DecimalLatitude is not null AND  DecimalLongitude is not null"),
-                    0);
-            int nSpeciesFromHabitats = Utilities.checkedStringToInt(
-                    ExecuteSQL(
-                    "select count(*) from eunis_digir where GlobalUniqueIdentifier LIKE '%SPECHAB%'"),
-                    0);
-            int nSpeciesFromSites = Utilities.checkedStringToInt(
-                    ExecuteSQL(
-                    "select count(*) from eunis_digir where GlobalUniqueIdentifier LIKE '%SPECSITE%'"),
-                    0);
+            int nTotalSpecies = Utilities.checkedStringToInt(ExecuteSQL("select count(*) from eunis_digir"), 0);
+            int nDistinctSpecies =
+                Utilities.checkedStringToInt(ExecuteSQL("select count(DISTINCT ScientificName) from eunis_digir"), 0);
+            int nSpeciesWithCountry =
+                Utilities.checkedStringToInt(ExecuteSQL("select count(*) from eunis_digir where Country is not null"), 0);
+            int nSpeciesWithLatLong =
+                Utilities
+                .checkedStringToInt(
+                        ExecuteSQL("select count(*) from eunis_digir where DecimalLatitude is not null AND  DecimalLongitude is not null"),
+                        0);
+            int nSpeciesFromHabitats =
+                Utilities.checkedStringToInt(
+                        ExecuteSQL("select count(*) from eunis_digir where GlobalUniqueIdentifier LIKE '%SPECHAB%'"), 0);
+            int nSpeciesFromSites =
+                Utilities.checkedStringToInt(
+                        ExecuteSQL("select count(*) from eunis_digir where GlobalUniqueIdentifier LIKE '%SPECSITE%'"), 0);
 
             ps = con.prepareStatement("DELETE FROM EUNIS_DIGIR_STATS");
             ps.executeUpdate();
 
-            ps = con.prepareStatement(
-                    "INSERT INTO EUNIS_DIGIR_STATS (TotalSpecies, DistinctSpecies, SpeciesWithCountry, "
-                    + "SpeciesWithLatLong, SpeciesFromHabitats, SpeciesFromSites, DateLastModified) VALUES (?,?,?,?,?,?,NOW())");
+            ps =
+                con.prepareStatement("INSERT INTO EUNIS_DIGIR_STATS (TotalSpecies, DistinctSpecies, SpeciesWithCountry, "
+                        + "SpeciesWithLatLong, SpeciesFromHabitats, SpeciesFromSites, DateLastModified) VALUES (?,?,?,?,?,?,NOW())");
 
             ps.setInt(1, nTotalSpecies);
             ps.setInt(2, nDistinctSpecies);
@@ -1362,6 +1339,60 @@ public class SQLUtilities {
 
             ps.executeUpdate();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAll(con, ps, rs);
+        }
+    }
+
+    /**
+     * Reconstruct the TAXONOMY_TREE
+     */
+    public void reconstructTaxonomyTree() {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String tree = "";
+        // ID of taxonomy that is updated
+        String origId = "";
+
+        try {
+            Class.forName(SQL_DRV);
+            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+
+            ps = con.prepareStatement("SELECT ID_TAXONOMY, ID_TAXONOMY_PARENT, LEVEL, NAME FROM CHM62EDT_TAXONOMY LIMIT 100");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String id = rs.getString("ID_TAXONOMY");
+                origId = id;
+                String parent = rs.getString("ID_TAXONOMY_PARENT");
+                String level = rs.getString("LEVEL");
+                String name = rs.getString("NAME");
+                tree = id + "*" + level + "*" + name;
+                do {
+                    ps = con.prepareStatement(
+                    "SELECT ID_TAXONOMY, ID_TAXONOMY_PARENT, LEVEL, NAME FROM CHM62EDT_TAXONOMY WHERE ID_TAXONOMY = ?");
+                    ps.setString(1, parent);
+                    ResultSet rs2 = ps.executeQuery();
+                    while (rs2.next()) {
+                        id = rs2.getString("ID_TAXONOMY");
+                        parent = rs2.getString("ID_TAXONOMY_PARENT");
+                        level = rs2.getString("LEVEL");
+                        name = rs2.getString("NAME");
+                        tree = id + "*" + level + "*" + name + "," + tree;
+                    }
+                    rs2.close();
+                } while (!id.equals(parent));
+
+                // Update TAXONOMY_TREE
+                ps = con.prepareStatement("UPDATE CHM62EDT_TAXONOMY SET TAXONOMY_TREE = ? WHERE ID_TAXONOMY = ?");
+                ps.setString(1, tree);
+                ps.setString(2, origId);
+                ps.executeUpdate();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

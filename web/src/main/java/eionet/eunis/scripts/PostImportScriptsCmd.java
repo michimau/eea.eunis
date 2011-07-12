@@ -16,7 +16,7 @@ public class PostImportScriptsCmd {
         if (args.length == 0) {
             System.out.println("Missing argument!");
             System.out
-            .println("Possible first arguments are: sites, empty_digir, digir, statistics, species_tab, sites_tab, habitats_tab");
+            .println("Possible first arguments are: sites, empty_digir, digir, statistics, species_tab, sites_tab, habitats_tab, taxonomy_tree");
         } else {
             try {
                 ResourceBundle props = ResourceBundle.getBundle("jrf");
@@ -40,6 +40,8 @@ public class PostImportScriptsCmd {
                     pd.populate();
                 } else if (args[0].equals("statistics")) {
                     sql.generateDigirStatistics();
+                } else if (args[0].equals("taxonomy_tree")) {
+                    sql.reconstructTaxonomyTree();
                 } else {
                     TabScripts scripts = new TabScripts();
                     scripts.Init(dbDriver, dbUrl, dbUser, dbPass, true);

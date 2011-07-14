@@ -64,7 +64,7 @@ public class TabScripts {
             int noid, speciesid = 0;
             String sql, fields, s, synonymsIDs = "";
 
-            String mainSql = "SELECT ID_NATURE_OBJECT, ID_SPECIES, ID_SPECIES_LINK FROM CHM62EDT_SPECIES WHERE TYPE_RELATED_SPECIES IN ('Species','Subspecies') LIMIT 5000";
+            String mainSql = "SELECT ID_NATURE_OBJECT, ID_SPECIES, ID_SPECIES_LINK FROM CHM62EDT_SPECIES WHERE TYPE_RELATED_SPECIES IN ('Species','Subspecies')";
 
             ps = con.prepareStatement(mainSql);
             rs = ps.executeQuery();
@@ -205,7 +205,7 @@ public class TabScripts {
                 }
 
             }
-            //updateReferences();
+            updateReferences();
 
         } catch (Exception e) {
             EunisUtil.writeLogMessage("ERROR occured while generating species tab information: " + e.getMessage(), cmd, sqlc);

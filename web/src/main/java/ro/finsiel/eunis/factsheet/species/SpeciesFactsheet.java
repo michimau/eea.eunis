@@ -421,6 +421,7 @@ public class SpeciesFactsheet {
 
                 List list1 = new Chm62edtConservationStatusDomain().findWhere(
                         "ID_CONSERVATION_STATUS = '" + report.getIDLookup() + "'");
+
                 List list2 = new Chm62edtCountryDomain().findWhere(
                         "AREA_NAME_EN not like 'ospar%' and ID_GEOSCOPE='" + report.getIdGeoscope() + "'");
 

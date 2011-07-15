@@ -113,7 +113,8 @@ public class WebContentManagement implements java.io.Serializable {
         if (editMode) {
             ret += "<a title=\"Edit this text\" href=\"javascript:openContentManager('"
                 + idPage
-                + "', 'text');\"><img src=\"images/edit-content.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
+                + "', 'text');\"><img src=\"images/edit-content.gif\" "
+                + "style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
         }
         return ret;
     }
@@ -133,6 +134,7 @@ public class WebContentManagement implements java.io.Serializable {
             return idPage;
         }
 
+        // If you convert the idPage to MD5 here, you don't need getTextByMD5, you can just call getText
         return getTextByMD5(idPage);
     }
 
@@ -153,6 +155,7 @@ public class WebContentManagement implements java.io.Serializable {
             return MessageFormat.format(idPage, arguments);
         }
 
+        // If you convert the idPage to MD5 here, you don't need getTextByMD5, you can just call getText
         String ret = getTextByMD5(idPage);
         return MessageFormat.format(ret, arguments);
     }
@@ -167,9 +170,11 @@ public class WebContentManagement implements java.io.Serializable {
             ret += "<em>";
             ret += getText(idPage);
             ret += "</em>";
-            ret += "<a title=\"Edit Text from this page (normally not visible online - javascript, error messages, page title etc.)\" href=\"javascript:openContentManager('"
+            ret += "<a title=\"Edit Text from this page (normally not visible online - javascript,"
+                + " error messages, page title etc.)\" href=\"javascript:openContentManager('"
                 + idPage
-                + "', 'msg');\"><img src=\"images/edit-content-msg.gif\" style=\"border : 0px;\" width=\"9\" height=\"9\" /></a>";
+                + "', 'msg');\"><img src=\"images/edit-content-msg.gif\" "
+                + "style=\"border : 0px;\" width=\"9\" height=\"9\" /></a>";
             return ret;
         }
     }
@@ -185,7 +190,8 @@ public class WebContentManagement implements java.io.Serializable {
         } else {
             return "<a title=\"Edit Alternative text\" href=\"javascript:openContentManager('"
             + idPage
-            + "', 'alt_title');\"><img src=\"images/edit-content-alt.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
+            + "', 'alt_title');\"><img src=\"images/edit-content-alt.gif\" "
+            + "style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
         }
     }
 
@@ -200,7 +206,8 @@ public class WebContentManagement implements java.io.Serializable {
         } else {
             return "<a title=\"Edit Alternative text\" href=\"javascript:openContentManager('"
             + idPage
-            + "', 'alt_title');\"><img src=\"images/edit-content-title.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
+            + "', 'alt_title');\"><img src=\"images/edit-content-title.gif\" "
+            + "style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
         }
     }
 
@@ -215,12 +222,13 @@ public class WebContentManagement implements java.io.Serializable {
         } else {
             return "<a title=\"Edit the Value attribute\" href=\"javascript:openContentManager('"
             + idPage
-            + "', 'alt');\"><img src=\"images/edit-content-msg.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
+            + "', 'alt');\"><img src=\"images/edit-content-msg.gif\" "
+            + "style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
         }
     }
 
     /**
-     * Edit mode - use this method where the crayon will appear
+     * Edit mode - use this method where the crayon will appear.
      *
      * @param idPage
      */
@@ -230,7 +238,8 @@ public class WebContentManagement implements java.io.Serializable {
         } else {
             return "<a title=\"Edit the Label attribute\" href=\"javascript:openContentManager('"
             + idPage
-            + "', 'label');\"><img src=\"images/edit-content-msg.gif\" style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
+            + "', 'label');\"><img src=\"images/edit-content-msg.gif\" "
+            + "style=\"border : 0px; padding-left : 2px;\" width=\"9\" height=\"9\" /></a>";
         }
     }
 
@@ -244,7 +253,9 @@ public class WebContentManagement implements java.io.Serializable {
         try {
             htmlContent.clear();
             final List<WebContentPersist> pages = new WebContentDomain().findCustom(
-                    "select a.* from `eunis_web_content` as a, (select max(record_date) mx,id_page,lang from `eunis_web_content` group by id_page,lang) as b where a.id_page = b.id_page and a.lang = b.lang and a.record_date = b.mx and a.lang='"
+                    "select a.* from `eunis_web_content` as a, (select max(record_date) mx,id_page,lang"
+                    + " from `eunis_web_content` group by id_page,lang) as b where a.id_page = b.id_page"
+                    + " and a.lang = b.lang and a.record_date = b.mx and a.lang='"
                     + language
                     + "' and concat(a.record_date)<>'0000-00-00 00:00:00'");
 
@@ -259,6 +270,12 @@ public class WebContentManagement implements java.io.Serializable {
         }
     }
 
+    /**
+     * Query first the cache then the database for the token. Gets the newest
+     * if there are several editions.
+     *
+     * @param idPage - key to look up in database.
+     */
     public String getText(String idPage) {
         if (idPage == null) {
             return "";
@@ -267,7 +284,7 @@ public class WebContentManagement implements java.io.Serializable {
 
         idPage = idPage.trim();
 
-        if (htmlContent.containsKey(idPage) || htmlContent.containsKey(idPage)) {
+        if (htmlContent.containsKey(idPage)) {
             WebContentPersist text = htmlContent.get(idPage);
 
             if (text == null) {
@@ -287,14 +304,13 @@ public class WebContentManagement implements java.io.Serializable {
             }
         } else {
             List<WebContentPersist> dbKeyList = new WebContentDomain().findWhereOrderBy(
-                    "ID_PAGE='" + idPage
-                    + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
+                    "ID_PAGE='" + idPage + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
             "RECORD_DATE DESC");
 
             if (dbKeyList == null) {
+                // Why would it make sense to retry a query that just failed?
                 dbKeyList = new WebContentDomain().findWhereOrderBy(
-                        "ID_PAGE='" + idPage
-                        + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
+                        "ID_PAGE='" + idPage + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
                 "RECORD_DATE DESC");
             }
 
@@ -311,6 +327,13 @@ public class WebContentManagement implements java.io.Serializable {
         return ret;
     }
 
+    /**
+     * Query the cache for a translation to the text.
+     * TODO: The method is unfinished! It doesn't look in the database
+     * if the language is different than English.
+     *
+     * @param idPage - key to look up in database - the full English phrase.
+     */
     public String getTextByMD5(String idPage) {
         if (idPage == null) {
             return "";
@@ -362,9 +385,9 @@ public class WebContentManagement implements java.io.Serializable {
                         + "): Page not found in cache.");
             }
         } else {
+            // Duplicate from line 297
             final List<WebContentPersist> dbKeyList = new WebContentDomain().findWhereOrderBy(
-                    "ID_PAGE='" + idPage
-                    + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
+                    "ID_PAGE='" + idPage + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
             "RECORD_DATE DESC");
 
             if (!dbKeyList.isEmpty()) {
@@ -380,6 +403,9 @@ public class WebContentManagement implements java.io.Serializable {
         return ret;
     }
 
+    /**
+     * Checks if a page with a given id exists for the language.
+     */
     public boolean idPageExists(String idPage, String language) {
         boolean ret = false;
         final List<WebContentPersist> dbKeyList = new WebContentDomain().findWhere(
@@ -392,6 +418,10 @@ public class WebContentManagement implements java.io.Serializable {
         return ret;
     }
 
+    /**
+     * Same as getText(), but returns the result as WebContentPersist type.
+     * This method should be called by getText().
+     */
     public WebContentPersist getPersistentObject(String idPage) {
         WebContentPersist ret = null;
 
@@ -402,9 +432,9 @@ public class WebContentManagement implements java.io.Serializable {
         if (htmlContent.containsKey(idPage)) {
             ret = htmlContent.get(idPage);
         } else {
+            // Duplicate from line 297
             final List<WebContentPersist> dbKeyList = new WebContentDomain().findWhereOrderBy(
-                    "ID_PAGE='" + idPage
-                    + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
+                    "ID_PAGE='" + idPage + "' AND CONCAT(RECORD_DATE)<> '0000-00-00 00:00:00' ",
             "RECORD_DATE DESC");
 
             if (!dbKeyList.isEmpty()) {
@@ -424,6 +454,8 @@ public class WebContentManagement implements java.io.Serializable {
      * Retrieve always last version of english version of page content directly from database.
      * $MODULE$_$PAGE$_$PARAGRAPH$, for example: species_names-result_0 means first paragraph from
      * Species::Names::Results (species-names-result.jsp) page.<BR>
+     *
+     * To be used for the XLIFF generation? Why is it hardwired to English?
      *
      * @param idPage ID of the page to be retrieved (ID_PAGE from WEB_CONTENT table)
      * @return HTML content of the web page or if ID not found or exception ocurred the empty "" string.

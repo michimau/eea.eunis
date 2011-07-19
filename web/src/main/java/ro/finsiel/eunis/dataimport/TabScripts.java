@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,6 @@ public class TabScripts {
 
         Connection con = null;
         PreparedStatement ps = null;
-        PreparedStatement ps2 = null;
         ResultSet rs = null;
         SQLUtilities sqlc = new SQLUtilities();
 
@@ -62,138 +61,86 @@ public class TabScripts {
 
             sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
 
-            String mainSql = "SELECT ID_NATURE_OBJECT, ID_SPECIES, ID_SPECIES_LINK FROM CHM62EDT_SPECIES WHERE TYPE_RELATED_SPECIES IN ('Species','Subspecies')";
+            String mainSql = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE TYPE_RELATED_SPECIES IN ('Species','Subspecies')";
 
             ps = con.prepareStatement(mainSql);
             rs = ps.executeQuery();
+
+            Statement stat = con.createStatement();
+            EunisUtil.writeLogMessage("GENERAL tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
             while (rs.next()) {
-                // This routine generates so many objects that the garbage
-                // collector can't keep up
-                // We therefore run it manually for every 10.000 rows. There is
-                // no need for speed here.
                 if (rs.getRow() % 10000 == 0) {
                     System.gc();
-                    EunisUtil.writeLogMessage("Species tab generation at row: " + rs.getRow() + " Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
+                    stat.executeBatch();
                 }
-                int noid = rs.getInt("ID_NATURE_OBJECT");
-                int speciesid = rs.getInt("ID_SPECIES");
-
-                String fields = "";
-                String sql = "INSERT IGNORE INTO chm62edt_tab_page_species (ID_NATURE_OBJECT,GENERAL_INFORMATION) VALUES(" +noid+ ",'Y')";
-
-                ps2 = con.prepareStatement(sql);
-                ps2.executeUpdate();
-
-                String synonymsIDs = getSpeciesSynonymsCommaSeparated(String.valueOf(noid), String.valueOf(speciesid), con);
-
-                String s = "CHM62EDT_REPORTS AS A, CHM62EDT_REPORT_TYPE AS B, DC_INDEX AS C "
-                    + "WHERE A.ID_REPORT_TYPE=B.ID_REPORT_TYPE AND A.ID_DC = C.ID_DC AND (B.LOOKUP_TYPE IN ('SPECIES_STATUS')) "
-                    + "AND  (A.ID_NATURE_OBJECT IN (" + synonymsIDs + ")) AND "
-                    + "EXISTS (SELECT * FROM CHM62EDT_COUNTRY AS CO WHERE CO.AREA_NAME_EN not like 'ospar%' and CO.ID_GEOSCOPE=A.ID_GEOSCOPE LIMIT 1) AND "
-                    + "EXISTS(SELECT * FROM CHM62EDT_BIOGEOREGION AS BIO WHERE BIO.ID_GEOSCOPE=A.ID_GEOSCOPE_LINK LIMIT 1) AND "
-                    + "EXISTS(SELECT * FROM CHM62EDT_SPECIES_STATUS AS SS WHERE SS.ID_SPECIES_STATUS=B.ID_LOOKUP LIMIT 1)";
-
-                if (exists(s, con)) {
-                    fields += "GEOGRAPHICAL_DISTRIBUTION='Y',";
-                } else {
-                    fields += "GEOGRAPHICAL_DISTRIBUTION='N',";
-                }
-
-                /*distribution = new ReportsDistributionStatusDomain().findWhere("ID_NATURE_OBJECT = " + noid
-                        + " AND (D.LOOKUP_TYPE ='DISTRIBUTION_STATUS' OR D.LOOKUP_TYPE ='GRID') GROUP BY C.NAME,C.LATITUDE,C.LONGITUDE LIMIT 1");
-
-                if (distribution != null && distribution.size() > 0) {
-                    fields += "GRID_DISTRIBUTION='Y',";
-                } else {
-                    fields += "GRID_DISTRIBUTION='N',";
-                }*/
-
-                s = "CHM62EDT_HABITAT AS H "
-                    + "INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS A ON H.ID_NATURE_OBJECT = A.ID_NATURE_OBJECT_LINK "
-                    + "INNER JOIN CHM62EDT_SPECIES AS C ON A.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
-                    + "WHERE H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND C.ID_NATURE_OBJECT IN ("+synonymsIDs+") "
-                    + "GROUP BY H.ID_NATURE_OBJECT";
-
-                if (exists(s, con)) {
-                    fields += "HABITATS='Y',";
-                } else {
-                    fields += "HABITATS='N',";
-                }
-
-                s = "CHM62EDT_REPORTS AS A "
-                    + "INNER JOIN CHM62EDT_REPORT_TYPE AS B ON A.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
-                    + "INNER JOIN DC_INDEX AS C ON A.ID_DC = C.ID_DC "
-                    + "WHERE B.LOOKUP_TYPE='LEGAL_STATUS' AND A.ID_NATURE_OBJECT IN ("+synonymsIDs+")";
-
-                if (exists(s, con)) {
-                    fields += "LEGAL_INSTRUMENTS='Y',";
-                } else {
-                    fields += "LEGAL_INSTRUMENTS='N',";
-                }
-
-                s = "CHM62EDT_REPORTS AS A "
-                    + "INNER JOIN CHM62EDT_REPORT_TYPE AS B ON A.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
-                    + "INNER JOIN DC_INDEX AS C ON A.ID_DC = C.ID_DC "
-                    + "WHERE B.LOOKUP_TYPE='POPULATION_UNIT' AND A.ID_NATURE_OBJECT IN ("+synonymsIDs+")";
-
-                if (exists(s, con)) {
-                    fields += "POPULATION='Y',";
-                } else {
-                    fields += "POPULATION='N',";
-                }
-
-                s = "CHM62EDT_SPECIES AS A "
-                    + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
-                    + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
-                    + " WHERE A.ID_NATURE_OBJECT IN ( " + synonymsIDs + " )";
-
-                if (exists(s, con)) {
-                    fields += "SITES='Y',";
-                } else {
-                    fields += "SITES='N',";
-                }
-
-                s = "CHM62EDT_REPORTS AS A "
-                    + "INNER JOIN CHM62EDT_REPORT_TYPE AS B ON A.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
-                    + "WHERE B.LOOKUP_TYPE='CONSERVATION_STATUS' AND A.ID_NATURE_OBJECT IN (" + synonymsIDs + ")";
-
-                if (exists(s, con)) {
-                    fields += "THREAT_STATUS='Y',";
-                } else {
-                    fields += "THREAT_STATUS='N',";
-                }
-
-                s = "CHM62EDT_REPORTS AS R, CHM62EDT_REPORT_TYPE AS RT WHERE R.ID_REPORT_TYPE=RT.ID_REPORT_TYPE "
-                    + "AND RT.LOOKUP_TYPE='TREND' AND R.ID_NATURE_OBJECT IN (" + synonymsIDs + ")";
-
-                if (exists(s, con)) {
-                    fields += "TRENDS='Y',";
-                } else {
-                    fields += "TRENDS='N',";
-                }
-
-                s = "CHM62EDT_REPORTS AS A "
-                    + "INNER JOIN CHM62EDT_REPORT_ATTRIBUTES AS B ON A.ID_REPORT_ATTRIBUTES = B.ID_REPORT_ATTRIBUTES "
-                    + "INNER JOIN CHM62EDT_REPORT_TYPE AS C ON A.ID_REPORT_TYPE = C.ID_REPORT_TYPE "
-                    + "INNER JOIN CHM62EDT_LANGUAGE AS D ON C.ID_LOOKUP = D.ID_LANGUAGE "
-                    + "WHERE C.LOOKUP_TYPE='language' AND A.ID_NATURE_OBJECT IN (" + synonymsIDs + ") "
-                    + "AND B.NAME='vernacular_name' GROUP BY B.VALUE, D.NAME_EN";
-
-                if (exists(s, con)) {
-                    fields += "VERNACULAR_NAMES='Y',";
-                } else {
-                    fields += "VERNACULAR_NAMES='N',";
-                }
-
-                if (fields.endsWith(",")) {
-                    fields = fields.substring(0, fields.length() - 1);
-                }
-                if (fields != null && fields.length() > 0) {
-                    ps2 = con.prepareStatement("UPDATE chm62edt_tab_page_species SET "+ fields +" WHERE ID_NATURE_OBJECT=" + noid);
-                    ps2.executeUpdate();
-                }
+                String sql = "INSERT IGNORE INTO chm62edt_tab_page_species (ID_NATURE_OBJECT,GENERAL_INFORMATION) VALUES("+rs.getString("ID_NATURE_OBJECT")+",'Y')";
+                stat.addBatch(sql);
             }
-            updateReferences();
+            stat.executeBatch();
+            stat.close();
+            EunisUtil.writeLogMessage("GENERAL tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
+
+            // Update Geographical distribution tab
+            String s = "CHM62EDT_REPORTS AS A, CHM62EDT_REPORT_TYPE AS B, DC_INDEX AS C "
+                + "WHERE A.ID_REPORT_TYPE=B.ID_REPORT_TYPE AND A.ID_DC = C.ID_DC AND (B.LOOKUP_TYPE IN ('SPECIES_STATUS')) AND "
+                + "EXISTS (SELECT * FROM CHM62EDT_COUNTRY AS CO WHERE CO.AREA_NAME_EN not like 'ospar%' and CO.ID_GEOSCOPE=A.ID_GEOSCOPE LIMIT 1) AND "
+                + "EXISTS(SELECT * FROM CHM62EDT_BIOGEOREGION AS BIO WHERE BIO.ID_GEOSCOPE=A.ID_GEOSCOPE_LINK LIMIT 1) AND "
+                + "EXISTS(SELECT * FROM CHM62EDT_SPECIES_STATUS AS SS WHERE SS.ID_SPECIES_STATUS=B.ID_LOOKUP LIMIT 1)";
+            updateSpeciesTab(s, con, sqlc, "GEOGRAPHICAL_DISTRIBUTION");
+
+            /*distribution = new ReportsDistributionStatusDomain().findWhere("ID_NATURE_OBJECT = " + noid
+                        + " AND (D.LOOKUP_TYPE ='DISTRIBUTION_STATUS' OR D.LOOKUP_TYPE ='GRID') GROUP BY C.NAME,C.LATITUDE,C.LONGITUDE LIMIT 1");*/
+
+            // Update Habitats tab
+            s = "CHM62EDT_HABITAT AS H "
+                + "INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS R ON H.ID_NATURE_OBJECT = R.ID_NATURE_OBJECT_LINK "
+                + "INNER JOIN CHM62EDT_SPECIES AS A ON R.ID_NATURE_OBJECT = A.ID_NATURE_OBJECT "
+                + "WHERE H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000'";
+            updateSpeciesTab(s, con, sqlc, "HABITATS");
+
+            // Update LEGAL_INSTRUMENTS tab
+            s = "CHM62EDT_REPORTS AS A "
+                + "INNER JOIN CHM62EDT_REPORT_TYPE AS B ON A.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
+                + "INNER JOIN DC_INDEX AS C ON A.ID_DC = C.ID_DC "
+                + "WHERE B.LOOKUP_TYPE='LEGAL_STATUS'";
+            updateSpeciesTab(s, con, sqlc, "LEGAL_INSTRUMENTS");
+
+            // Update POPULATION tab
+            s = "CHM62EDT_REPORTS AS A "
+                + "INNER JOIN CHM62EDT_REPORT_TYPE AS B ON A.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
+                + "INNER JOIN DC_INDEX AS C ON A.ID_DC = C.ID_DC "
+                + "WHERE B.LOOKUP_TYPE='POPULATION_UNIT'";
+            updateSpeciesTab(s, con, sqlc, "POPULATION");
+
+            // Update SITES tab
+            s = "CHM62EDT_SPECIES AS A "
+                + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
+                + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT";
+            updateSpeciesTab(s, con, sqlc, "SITES");
+
+            // Update THREAT_STATUS tab
+            s = "CHM62EDT_REPORTS AS A "
+                + "INNER JOIN CHM62EDT_REPORT_TYPE AS B ON A.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
+                + "WHERE B.LOOKUP_TYPE='CONSERVATION_STATUS'";
+            updateSpeciesTab(s, con, sqlc, "THREAT_STATUS");
+
+            // Update TRENDS tab
+            s = "CHM62EDT_REPORTS AS A, CHM62EDT_REPORT_TYPE AS RT WHERE A.ID_REPORT_TYPE=RT.ID_REPORT_TYPE "
+                + "AND RT.LOOKUP_TYPE='TREND'";
+            updateSpeciesTab(s, con, sqlc, "TRENDS");
+
+            // Update VERNACULAR_NAMES tab
+            s = "CHM62EDT_REPORTS AS A "
+                + "INNER JOIN CHM62EDT_REPORT_ATTRIBUTES AS B ON A.ID_REPORT_ATTRIBUTES = B.ID_REPORT_ATTRIBUTES "
+                + "INNER JOIN CHM62EDT_REPORT_TYPE AS C ON A.ID_REPORT_TYPE = C.ID_REPORT_TYPE "
+                + "INNER JOIN CHM62EDT_LANGUAGE AS D ON C.ID_LOOKUP = D.ID_LANGUAGE "
+                + "WHERE C.LOOKUP_TYPE='language' AND B.NAME='vernacular_name'";
+            updateSpeciesTab(s, con, sqlc, "VERNACULAR_NAMES");
+
+            // Update REFERENCES tab
+            EunisUtil.writeLogMessage("REFERENCES tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
+            updateReferences(con);
+            EunisUtil.writeLogMessage("REFERENCES tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
 
         } catch (Exception e) {
             EunisUtil.writeLogMessage("ERROR occured while generating species tab information: " + e.getMessage(), cmd, sqlc);
@@ -203,27 +150,26 @@ public class TabScripts {
         }
     }
 
-    private String getSpeciesSynonymsCommaSeparated(String idNatureObject, String idSpecies, Connection con) {
-
-        String ret = idNatureObject;
-        String sql = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK=" + idSpecies;
+    private void updateSpeciesTab(String sql, Connection con, SQLUtilities sqlc, String tab) throws Exception {
 
         PreparedStatement ps = null;
-        ResultSet rs = null;
-
         try {
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
+            EunisUtil.writeLogMessage(tab + " tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
 
-            while (rs.next()) {
-                ret += "," + rs.getString("ID_NATURE_OBJECT");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            ps = con.prepareStatement("UPDATE chm62edt_tab_page_species SET `" + tab + "` = 'N'");
+            ps.executeUpdate();
+
+            String query = "UPDATE chm62edt_tab_page_species SET `" + tab + "` = 'Y' WHERE ID_NATURE_OBJECT IN (" +
+            "SELECT DISTINCT A.ID_NATURE_OBJECT FROM " + sql + ")";
+            ps = con.prepareStatement(query);
+            ps.executeUpdate();
+
+            EunisUtil.writeLogMessage(tab + " tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
+
         } finally {
-            closeAll(null, ps, rs);
+            // connection will be closed in setTabSpecies() method
+            closeAll(null, ps, null);
         }
-        return ret;
     }
 
     /**
@@ -586,8 +532,8 @@ public class TabScripts {
         return ret;
     }
 
-    private void updateReferences() {
-        Connection con = null;
+    private void updateReferences(Connection con) {
+
         PreparedStatement ps = null;
         ResultSet rs = null;
 
@@ -664,7 +610,8 @@ public class TabScripts {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            closeAll(con, ps, rs);
+            // Connection will be closed in parent method
+            closeAll(null, ps, rs);
         }
     }
 

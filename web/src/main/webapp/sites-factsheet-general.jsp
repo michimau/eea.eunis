@@ -469,7 +469,7 @@
       {
 %>
     <div>
-        <a href="http://natura2000.eea.europa.eu/Natura2000/SDFPublic.aspx?site=<%=factsheet.getSiteObject().getIdSite()%>"><%=cm.cmsPhrase("Natura 2000 factsheet")%></a>
+        <a rel="nofollow" href="http://natura2000.eea.europa.eu/Natura2000/SDFPublic.aspx?site=<%=factsheet.getSiteObject().getIdSite()%>"><%=cm.cmsPhrase("Natura 2000 factsheet")%></a>
         </div>
     <div>
         <a href="http://natura2000.eea.europa.eu/N2KGisViewer.html#siteCode=<%=factsheet.getSiteObject().getIdSite()%>"><%=cm.cmsPhrase("Natura 2000 mapviewer")%></a>

@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ErrorResolution;
 import net.sourceforge.stripes.action.ForwardResolution;
@@ -68,7 +71,7 @@ import eionet.sparqlClient.helpers.QueryResult;
  * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 @UrlBinding("/species/{idSpecies}/{tab}")
-public class SpeciesFactsheetActionBean extends AbstractStripesAction implements RdfAware {
+public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     private static final String[] tabs = {"General information", "Vernacular names", "Geograpical distribution", "Population",
         "Trends", "References", "Legal Instruments", "Habitat types", "Sites", "GBIF observations", "Deliveries"};
@@ -171,9 +174,28 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
     // Deliveries tab variables
     private QueryResult deliveries;
 
+    private static final String ACCEPT_RDF_HEADER = "application/rdf+xml";
+
     @DefaultHandler
     public Resolution index() {
         String idSpeciesText = null;
+
+        if (tab != null && tab.equals("rdf")) {
+            return generateRdf();
+        }
+
+        domainName = getContext().getInitParameter("DOMAIN_NAME");
+
+        // If accept header contains RDF, then redirect to rdf page with code 303
+        String acceptHeader = getContext().getRequest().getHeader("accept");
+        if (acceptHeader != null && acceptHeader.contains(ACCEPT_RDF_HEADER)) {
+            return new Resolution() {
+                public void execute(HttpServletRequest request, HttpServletResponse response) {
+                    response.setStatus(HttpServletResponse.SC_SEE_OTHER);
+                    response.setHeader("Location",domainName + "/species/" + idSpecies + "/rdf");
+                }
+            };
+        }
 
         if (tab == null || tab.length() == 0) {
             tab = "general";
@@ -236,7 +258,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction implements
             tabsWithData.add(new Pair<String, String>("deliveries", getContentManagement().cmsPhrase("Deliveries")));
 
             specie = factsheet.getSpeciesNatureObject();
-            domainName = getContext().getInitParameter("DOMAIN_NAME");
 
             if (tab != null && tab.equals("general")) {
                 generalTabActions(mainIdSpecies);

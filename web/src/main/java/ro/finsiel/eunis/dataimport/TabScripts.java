@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +51,6 @@ public class TabScripts {
 
         Connection con = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
         SQLUtilities sqlc = new SQLUtilities();
 
         try {
@@ -61,23 +59,18 @@ public class TabScripts {
 
             sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
 
-            String mainSql = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE TYPE_RELATED_SPECIES IN ('Species','Subspecies')";
+            EunisUtil.writeLogMessage("GENERAL tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
+
+            // Delete old records
+            ps = con.prepareStatement("DELETE FROM chm62edt_tab_page_species;");
+            ps.executeUpdate();
+
+            String mainSql = "INSERT INTO chm62edt_tab_page_species (ID_NATURE_OBJECT,GENERAL_INFORMATION) "
+                + "(SELECT ID_NATURE_OBJECT,'Y' FROM chm62edt_species)";
 
             ps = con.prepareStatement(mainSql);
-            rs = ps.executeQuery();
+            ps.executeUpdate();
 
-            Statement stat = con.createStatement();
-            EunisUtil.writeLogMessage("GENERAL tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
-            while (rs.next()) {
-                if (rs.getRow() % 10000 == 0) {
-                    System.gc();
-                    stat.executeBatch();
-                }
-                String sql = "INSERT IGNORE INTO chm62edt_tab_page_species (ID_NATURE_OBJECT,GENERAL_INFORMATION) VALUES("+rs.getString("ID_NATURE_OBJECT")+",'Y')";
-                stat.addBatch(sql);
-            }
-            stat.executeBatch();
-            stat.close();
             EunisUtil.writeLogMessage("GENERAL tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
 
             // Update Geographical distribution tab
@@ -146,7 +139,7 @@ public class TabScripts {
             EunisUtil.writeLogMessage("ERROR occured while generating species tab information: " + e.getMessage(), cmd, sqlc);
             e.printStackTrace();
         } finally {
-            closeAll(con, ps, rs);
+            closeAll(con, ps, null);
         }
     }
 
@@ -156,9 +149,6 @@ public class TabScripts {
         ResultSet rs = null;
         try {
             EunisUtil.writeLogMessage(tab + " tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
-
-            ps = con.prepareStatement("UPDATE chm62edt_tab_page_species SET `" + tab + "` = 'N'");
-            ps.executeUpdate();
 
             String query = "UPDATE chm62edt_tab_page_species SET `" + tab + "` = 'Y' WHERE ID_NATURE_OBJECT IN (" +
             "SELECT DISTINCT A.ID_NATURE_OBJECT FROM " + sql + ")";

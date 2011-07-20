@@ -74,7 +74,7 @@ public class SpeciesFactsheetDto implements Serializable {
     private String family;
 
     @Element(required = false, name = "dwc:nameAccordingToID")
-    private String nameAccordingToID;
+    private ResourceDto nameAccordingToID;
 
     @ElementList(required = false, type = VernacularNameDto.class, inline = true)
     private List<VernacularNameDto> vernacularNames;
@@ -255,11 +255,11 @@ public class SpeciesFactsheetDto implements Serializable {
         this.family = family;
     }
 
-    public String getNameAccordingToID() {
+    public ResourceDto getNameAccordingToID() {
         return nameAccordingToID;
     }
 
-    public void setNameAccordingToID(String nameAccordingToID) {
+    public void setNameAccordingToID(ResourceDto nameAccordingToID) {
         this.nameAccordingToID = nameAccordingToID;
     }
 

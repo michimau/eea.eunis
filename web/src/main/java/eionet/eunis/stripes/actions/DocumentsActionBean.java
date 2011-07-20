@@ -19,7 +19,6 @@ import org.apache.commons.lang.StringUtils;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.jrfTables.ReferencesDomain;
 import ro.finsiel.eunis.utilities.EunisUtil;
-
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dao.IDocumentsDao;
 import eionet.eunis.dto.DcContributorDTO;
@@ -54,10 +53,10 @@ import eionet.eunis.util.Pair;
 public class DocumentsActionBean extends AbstractStripesAction {
 
     private static final String HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-            + "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
-            + "xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n"
-            + "xmlns:dcterms=\"http://purl.org/dc/terms/\"\n"
-            + "xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
+        + "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
+        + "xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n"
+        + "xmlns:dcterms=\"http://purl.org/dc/terms/\"\n"
+        + "xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 
     private static final String FOOTER = "\n</rdf:RDF>";
 
@@ -136,7 +135,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
                 dcSubject = dao.getDcSubject(iddoc);
                 dcType = dao.getDcType(iddoc);
                 btrail = "eea#" + eeaHome
-                        + ",home#index.jsp,documents#documents";
+                + ",home#index.jsp,documents#documents";
                 if (dcTitle != null) {
                     btrail += "," + dcTitle.getTitle();
                 }
@@ -160,16 +159,16 @@ public class DocumentsActionBean extends AbstractStripesAction {
             }
             tabsWithData.add(
                     new Pair<String, String>("general",
-                    getContentManagement().cmsPhrase("General information")));
+                            getContentManagement().cmsPhrase("General information")));
             if (species != null && species.size() > 0) {
                 tabsWithData.add(
                         new Pair<String, String>("species",
-                        getContentManagement().cmsPhrase("Species")));
+                                getContentManagement().cmsPhrase("Species")));
             }
             if (habitats != null && habitats.size() > 0) {
                 tabsWithData.add(
                         new Pair<String, String>("habitats",
-                        getContentManagement().cmsPhrase("Habitats")));
+                                getContentManagement().cmsPhrase("Habitats")));
             }
 
             setMetaDescription("document");
@@ -210,82 +209,81 @@ public class DocumentsActionBean extends AbstractStripesAction {
 
             if (object != null) {
                 s.append("<rdf:Description rdf:about=\"").append(doc_url).append(object.getId()).append(
-                        "\">\n");
-                s.append(
-                        "<rdf:type rdf:resource=\"http://purl.org/dc/dcmitype/Text\"/>\n");
+                "\">\n");
+                s.append("<rdf:type rdf:resource=\"http://purl.org/dc/dcmitype/Text\"/>\n");
                 if (object.getTitle() != null && !object.getTitle().equals("")) {
                     s.append("<dc:title>").append(EunisUtil.replaceTags(object.getTitle(), true, true)).append(
-                            "</dc:title>\n");
+                    "</dc:title>\n");
                 }
                 if (object.getSource() != null && !object.getSource().equals("")) {
                     s.append("<dc:source>").append(EunisUtil.replaceTags(object.getSource(), true, true)).append(
-                            "</dc:source>\n");
+                    "</dc:source>\n");
                 }
                 if (object.getSourceUrl() != null
                         && !object.getSourceUrl().equals("")) {
                     s.append("<rdfs:seeAlso rdf:resource=\"").append(EunisUtil.replaceTags(object.getSourceUrl(), true, true)).append(
-                            "\"/>\n");
+                    "\"/>\n");
                 }
                 if (object.getContributor() != null
                         && !object.getContributor().equals("")) {
                     s.append("<dc:contributor>").append(EunisUtil.replaceTags(object.getContributor(), true, true)).append(
-                            "</dc:contributor>\n");
+                    "</dc:contributor>\n");
                 }
                 if (object.getCoverage() != null
                         && !object.getCoverage().equals("")) {
                     s.append("<dc:coverage>").append(EunisUtil.replaceTags(object.getCoverage(), true, true)).append(
-                            "</dc:coverage>\n");
+                    "</dc:coverage>\n");
                 }
                 if (object.getCreator() != null
                         && !object.getCreator().equals("")) {
                     s.append("<dc:creator>").append(EunisUtil.replaceTags(object.getCreator(), true, true)).append(
-                            "</dc:creator>\n");
+                    "</dc:creator>\n");
                 }
                 if (object.getDate() != null && !object.getDate().equals("")) {
                     s.append("<dc:date>").append(object.getDate()).append(
-                            "</dc:date>\n");
+                    "</dc:date>\n");
                 }
                 if (object.getDescription() != null
                         && !object.getDescription().equals("")) {
                     s.append("<dc:description>").append(EunisUtil.replaceTags(object.getDescription(), true, true)).append(
-                            "</dc:description>\n");
+                    "</dc:description>\n");
                 }
                 if (object.getFormat() != null && !object.getFormat().equals("")) {
                     s.append("<dc:format>").append(EunisUtil.replaceTags(object.getFormat(), true, true)).append(
-                            "</dc:format>\n");
+                    "</dc:format>\n");
                 }
                 if (object.getIdentifier() != null
                         && !object.getIdentifier().equals("")) {
                     s.append("<dc:identifier>").append(EunisUtil.replaceTags(object.getIdentifier(), true, true)).append(
-                            "</dc:identifier>\n");
+                    "</dc:identifier>\n");
                 }
                 if (object.getLanguage() != null
                         && !object.getLanguage().equals("")) {
                     s.append("<dc:language>").append(EunisUtil.replaceTags(object.getLanguage(), true, true)).append(
-                            "</dc:language>\n");
+                    "</dc:language>\n");
                 }
                 if (object.getPublisher() != null
                         && !object.getPublisher().equals("")) {
                     s.append("<dc:publisher>").append(EunisUtil.replaceTags(object.getPublisher(), true, true)).append(
-                            "</dc:publisher>\n");
+                    "</dc:publisher>\n");
                 }
                 if (object.getRelation() != null
                         && !object.getRelation().equals("")) {
                     s.append("<dc:relation>").append(EunisUtil.replaceTags(object.getRelation(), true, true)).append(
-                            "</dc:relation>\n");
+                    "</dc:relation>\n");
                 }
                 if (object.getRights() != null && !object.getRights().equals("")) {
                     s.append("<dc:rights>").append(EunisUtil.replaceTags(object.getRights(), true, true)).append(
-                            "</dc:rights>\n");
+                    "</dc:rights>\n");
                 }
                 if (object.getSubject() != null
                         && !object.getSubject().equals("")) {
                     s.append("<dc:subject>").append(EunisUtil.replaceTags(object.getSubject(), true, true)).append(
-                            "</dc:subject>\n");
+                    "</dc:subject>\n");
                 }
                 if (object.getType() != null && !object.getType().equals("")) {
                     s.append("<dc:type>").append(EunisUtil.replaceTags(object.getType(), true, true)).append(
-                            "</dc:type>\n");
+                    "</dc:type>\n");
                 }
                 s.append("</rdf:Description>\n");
             }
@@ -305,77 +303,77 @@ public class DocumentsActionBean extends AbstractStripesAction {
 
         if (object != null) {
             s.append("<rdf:Description rdf:about=\"").append(doc_url).append(object.getId()).append(
-                    "\">\n");
+            "\">\n");
             s.append(
-                    "<rdf:type rdf:resource=\"http://purl.org/dc/dcmitype/Text\"/>\n");
+            "<rdf:type rdf:resource=\"http://purl.org/dc/dcmitype/Text\"/>\n");
             if (object.getTitle() != null && !object.getTitle().equals("")) {
                 s.append("<dc:title>").append(EunisUtil.replaceTags(object.getTitle(), true, true)).append(
-                        "</dc:title>\n");
+                "</dc:title>\n");
             }
             if (object.getSource() != null && !object.getSource().equals("")) {
                 s.append("<dc:source>").append(EunisUtil.replaceTags(object.getSource(), true, true)).append(
-                        "</dc:source>\n");
+                "</dc:source>\n");
             }
             if (object.getSourceUrl() != null
                     && !object.getSourceUrl().equals("")) {
                 s.append("<rdfs:seeAlso rdf:resource=\"").append(EunisUtil.replaceTags(object.getSourceUrl(), true, true)).append(
-                        "\"/>\n");
+                "\"/>\n");
             }
             if (object.getContributor() != null
                     && !object.getContributor().equals("")) {
                 s.append("<dc:contributor>").append(EunisUtil.replaceTags(object.getContributor(), true, true)).append(
-                        "</dc:contributor>\n");
+                "</dc:contributor>\n");
             }
             if (object.getCoverage() != null && !object.getCoverage().equals("")) {
                 s.append("<dc:coverage>").append(EunisUtil.replaceTags(object.getCoverage(), true, true)).append(
-                        "</dc:coverage>\n");
+                "</dc:coverage>\n");
             }
             if (object.getCreator() != null && !object.getCreator().equals("")) {
                 s.append("<dc:creator>").append(EunisUtil.replaceTags(object.getCreator(), true, true)).append(
-                        "</dc:creator>\n");
+                "</dc:creator>\n");
             }
             if (object.getDate() != null && !object.getDate().equals("")) {
                 s.append("<dc:date>").append(object.getDate()).append(
-                        "</dc:date>\n");
+                "</dc:date>\n");
             }
             if (object.getDescription() != null
                     && !object.getDescription().equals("")) {
                 s.append("<dc:description>").append(EunisUtil.replaceTags(object.getDescription(), true, true)).append(
-                        "</dc:description>\n");
+                "</dc:description>\n");
             }
             if (object.getFormat() != null && !object.getFormat().equals("")) {
                 s.append("<dc:format>").append(EunisUtil.replaceTags(object.getFormat(), true, true)).append(
-                        "</dc:format>\n");
+                "</dc:format>\n");
             }
             if (object.getIdentifier() != null
                     && !object.getIdentifier().equals("")) {
                 s.append("<dc:identifier>").append(EunisUtil.replaceTags(object.getIdentifier(), true, true)).append(
-                        "</dc:identifier>\n");
+                "</dc:identifier>\n");
             }
             if (object.getLanguage() != null && !object.getLanguage().equals("")) {
                 s.append("<dc:language>").append(EunisUtil.replaceTags(object.getLanguage(), true, true)).append(
-                        "</dc:language>\n");
+                "</dc:language>\n");
             }
             if (object.getPublisher() != null
                     && !object.getPublisher().equals("")) {
                 s.append("<dc:publisher>").append(EunisUtil.replaceTags(object.getPublisher(), true, true)).append(
-                        "</dc:publisher>\n");
+                "</dc:publisher>\n");
             }
             if (object.getRelation() != null && !object.getRelation().equals("")) {
                 s.append("<dc:relation>").append(EunisUtil.replaceTags(object.getRelation(), true, true)).append(
-                        "</dc:relation>\n");
+                "</dc:relation>\n");
             }
             if (object.getRights() != null && !object.getRights().equals("")) {
                 s.append("<dc:rights>").append(EunisUtil.replaceTags(object.getRights(), true, true)).append(
-                        "</dc:rights>\n");
+                "</dc:rights>\n");
             }
             if (object.getSubject() != null && !object.getSubject().equals("")) {
                 s.append("<dc:subject>").append(EunisUtil.replaceTags(object.getSubject(), true, true)).append(
-                        "</dc:subject>\n");
+                "</dc:subject>\n");
             }
             if (object.getType() != null && !object.getType().equals("")) {
                 s.append("<dc:type>").append(EunisUtil.replaceTags(object.getType(), true, true)).append(
-                        "</dc:type>\n");
+                "</dc:type>\n");
             }
             s.append("</rdf:Description>\n");
         }

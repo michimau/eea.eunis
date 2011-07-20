@@ -191,12 +191,10 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
       <%=cm.cmsPhrase( "Sorry, no species matching has been found in database with ID:" )%> <%=factsheet.getIdSpecies()%>
       <br/>
       <br/>
-      <input id="button2" title="<%=cm.cms("close_window")%>" type="button"
+      <input id="button2" title="<%=cm.cmsPhrase("Close window")%>" type="button"
        onclick="javascript:window.close();"
-       value="<%=cm.cms("close_btn")%>" name="button"
+       value="<%=cm.cmsPhrase("Close")%>" name="button"
        class="standardButton"/>
-      <%=cm.cmsTitle( "close_window")%>
-      <%=cm.cmsInput( "close_btn")%>
 <%
   }
 %>

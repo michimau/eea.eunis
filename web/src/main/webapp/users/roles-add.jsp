@@ -437,9 +437,7 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
     <%
       }
     %>
-    <input id="input3" type="reset" value="<%=cm.cms("reset")%>" name="Reset" title="<%=cm.cms("reset")%>" />
-    <%=cm.cmsTitle("reset")%>
-    <%=cm.cmsInput("reset")%>
+    <input id="input3" type="reset" value="<%=cm.cmsPhrase("Reset")%>" name="Reset" title="<%=cm.cmsPhrase("Reset")%>" />
   </td>
  </tr>
  <tr>

@@ -370,9 +370,8 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     </li>
                     <li>
                       <a href="combined-help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cms( "header_help_title" )%>"
-                             title="<%=cm.cms( "header_help_title" )%>" /></a>
-            				<%=cm.cmsTitle( "header_help_title" )%>
+                             alt="<%=cm.cmsPhrase("Help information")%>"
+                             title="<%=cm.cmsPhrase("Help information")%>" /></a>
                     </li>
                   </ul>
                 </div>
@@ -817,7 +816,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                         if (val.equalsIgnoreCase("SourceDatabase")) { selected = " selected=\"selected\""; } else { selected = ""; }
                         out.println("<option" + selected + " value=\"SourceDatabase\">" + cm.cms("source_database") + "</option>");
                         if (val.equalsIgnoreCase("Country")) { selected = " selected=\"selected\""; } else { selected = ""; }
-                        out.println("<option" + selected + " value=\"Country\">" + cm.cms("country") + "</option>");
+                        out.println("<option" + selected + " value=\"Country\">" + cm.cmsPhrase("Country") + "</option>");
                         if (val.equalsIgnoreCase("Biogeoregion")) { selected = " selected=\"selected\""; } else { selected = ""; }
                         out.println("<option" + selected + " value=\"Biogeoregion\">" + cm.cms("biogeographic_region") + "</option>");
                         if (val.equalsIgnoreCase("Author")) { selected = " selected=\"selected\""; } else { selected = ""; }
@@ -860,7 +859,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                         <%=cm.cmsInput("code_eunis_annex")%>
                         <%=cm.cmsInput("legal_instruments")%>
                         <%=cm.cmsInput("source_database")%>
-                        <%=cm.cmsInput("country")%>
                         <%=cm.cmsInput("biogeographic_region")%>
                         <%=cm.cmsInput("reference_author")%>
                         <%=cm.cmsInput("reference_title")%>
@@ -884,7 +882,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                         <%
                       } else if(NatureObject.equalsIgnoreCase("Species")) {
                         if(val.equalsIgnoreCase("ScientificName")) { selected=" selected=\"selected\""; } else { selected=""; }
-                        out.println("<option"+selected+" value=\"ScientificName\">"+cm.cms("scientific_name")+"</option>");
+                        out.println("<option"+selected+" value=\"ScientificName\">"+cm.cmsPhrase("Scientific name")+"</option>");
                         if(val.equalsIgnoreCase("VernacularName")) { selected=" selected=\"selected\""; } else { selected=""; }
                         out.println("<option"+selected+" value=\"VernacularName\">"+cm.cms("vernacular_name")+"</option>");
                         if(val.equalsIgnoreCase("Group")) { selected=" selected=\"selected\""; } else { selected=""; }
@@ -894,7 +892,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                         if(val.equalsIgnoreCase("InternationalThreatStatus")) { selected=" selected=\"selected\""; } else { selected=""; }
                         out.println("<option"+selected+" value=\"InternationalThreatStatus\">"+cm.cms("international_threat_status")+"</option>");
                         if(val.equalsIgnoreCase("Country")) { selected=" selected=\"selected\""; } else { selected=""; }
-                        out.println("<option"+selected+" value=\"Country\">"+cm.cms("country")+"</option>");
+                        out.println("<option"+selected+" value=\"Country\">"+cm.cmsPhrase("Country")+"</option>");
                         if(val.equalsIgnoreCase("Biogeoregion")) { selected=" selected=\"selected\""; } else { selected=""; }
                         out.println("<option"+selected+" value=\"Biogeoregion\">"+cm.cms("biogeoregion")+"</option>");
                         if(val.equalsIgnoreCase("Author")) { selected=" selected=\"selected\""; } else { selected=""; }
@@ -913,11 +911,9 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                         out.println("<option"+selected+" value=\"DistributionStatus\">"+cm.cms("distribution_status")+"</option>");
                         out.println("</select>");
                         %>
-                        <%=cm.cmsInput("scientific_name")%>
                         <%=cm.cmsInput("vernacular_name")%>
                         <%=cm.cmsInput("threat_status")%>
                         <%=cm.cmsInput("international_threat_status")%>
-                        <%=cm.cmsInput("country")%>
                         <%=cm.cmsInput("biogeoregion")%>
                         <%=cm.cmsInput("reference_author")%>
                         <%=cm.cmsInput("reference_title")%>
@@ -935,7 +931,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                         if(val.equalsIgnoreCase("DesignationYear")) { selected=" selected=\"selected\""; } else { selected=""; }
                         out.println("<option"+selected+" value=\"DesignationYear\">"+cm.cms("designation_year")+"</option>");
                         if(val.equalsIgnoreCase("Country")) { selected=" selected=\"selected\""; } else { selected=""; }
-                        out.println("<option"+selected+" value=\"Country\">"+cm.cms("country")+"</option>");
+                        out.println("<option"+selected+" value=\"Country\">"+cm.cmsPhrase("Country")+"</option>");
                         if(val.equalsIgnoreCase("Size")) { selected=" selected=\"selected\""; } else { selected=""; }
                         out.println("<option"+selected+" value=\"Size\">"+cm.cms("size")+"</option>");
                         if(val.equalsIgnoreCase("Longitude")) { selected=" selected=\"selected\""; } else { selected=""; }
@@ -961,7 +957,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                         <%=cm.cmsInput("name")%>
                         <%=cm.cmsInput("code_column")%>
                         <%=cm.cmsInput("designation_year")%>
-                        <%=cm.cmsInput("country")%>
                         <%=cm.cmsInput("size")%>
                         <%=cm.cmsInput("longitude")%>
                         <%=cm.cmsInput("latitude")%>
@@ -1025,13 +1020,11 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                   <br />
                   <% } %>
                   <br />
-                  <input type="button" class="saveButton" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save")%>" />
-                  <%=cm.cmsTitle("save")%>
+                  <input type="button" class="saveButton" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cmsPhrase("Save")%>" />
                   &nbsp;&nbsp;&nbsp;
                   <input type="submit" class="submitSearchButton" value="Search" id="Search" name="Search" title="<%=cm.cmsPhrase("Search")%>" />
                   &nbsp;&nbsp;&nbsp;
-                  <input type="button" class="standardButton" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cms("reset")%>" />
-                  <%=cm.cmsTitle("reset")%>
+                  <input type="button" class="standardButton" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cmsPhrase("Reset")%>" />
                   <%
               } else {
                   %>

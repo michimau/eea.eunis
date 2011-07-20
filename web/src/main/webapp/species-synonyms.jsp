@@ -153,8 +153,7 @@
                                   <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
                                   <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected" ><%=cm.cmsPhrase("starts with")%></option>
                                 </select>
-                                <input id="scientificName" alt="<%=cm.cms("scientific_name")%>" size="32" name="scientificName" value="" title="<%=cm.cms("scientific_name")%>" />
-                                <%=cm.cmsAlt("scientific_name")%>
+                                <input id="scientificName" alt="<%=cm.cmsPhrase("Scientific name")%>" size="32" name="scientificName" value="" title="<%=cm.cmsPhrase("Scientific name")%>" />
                                 <a title="<%=cm.cms("list_values_link")%>" href="javascript:openHelper('species-synonyms-choice.jsp')"><img alt="<%=cm.cms("species_synonyms_16")%>" height="18" style="vertical-align:middle" title="<%=cm.cms("species_synonyms_16")%>" src="images/helper/helper.gif" width="11" border="0" /></a>
                                 <%=cm.cmsTitle("list_values_link")%>
                                 <%=cm.cmsAlt("species_synonyms_16")%>
@@ -163,9 +162,7 @@
                             </tr>
                             <tr>
                               <td style="text-align:right">
-                                <input id="Reset" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="standardButton" title="<%=cm.cms("reset")%>" />
-                                <%=cm.cmsTitle("reset")%>
-                                <%=cm.cmsInput("reset")%>
+                                <input id="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" name="Reset" class="standardButton" title="<%=cm.cmsPhrase("Reset")%>" />
                                 <input id="Search" type="submit" value="<%=cm.cmsPhrase("Search")%>" name="submit2" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
                               </td>
                             </tr>

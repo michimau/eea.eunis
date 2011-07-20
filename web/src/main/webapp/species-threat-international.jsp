@@ -254,9 +254,8 @@
                             <input title="<%=cm.cms("status")%>" id="checkbox1" type="checkbox" name="showStatus" value="true" <%=(showStatus ? "checked=\"checked\"" : "")%> />
                               <label for="checkbox1"><%=cm.cmsPhrase("Threat Status")%></label>
                               <%=cm.cmsTitle("status")%>
-                            <input title="<%=cm.cms("scientific_name")%>" id="checkbox3" type="checkbox" name="true" value="true" disabled="disabled" checked="checked" />
+                            <input title="<%=cm.cmsPhrase("Scientific name")%>" id="checkbox3" type="checkbox" name="true" value="true" disabled="disabled" checked="checked" />
                               <label for="checkbox3"><%=cm.cmsPhrase("Scientific name")%></label>
-                              <%=cm.cmsTitle("scientific_name")%>
                             <input title="<%=cm.cms("vernacular_name")%>" id="checkbox4" type="checkbox" name="showVernacularNames" value="true" <%=(showVernacularNames ? "checked=\"checked\"" : "")%> />
                               <label for="checkbox4"><%=cm.cmsPhrase("Vernacular names")%></label>
                               <%=cm.cmsTitle("vernacular_name")%>
@@ -340,8 +339,8 @@
                                 }
                               %>
                                    &nbsp;
-                                   <label for="Country" class="noshow"><%=cm.cms("country")%></label>
-                                   <select title="<%=cm.cms("country")%>" name="Contry" id="Country" onchange="MM_jumpMenuInternational('parent',this,0)">
+                                   <label for="Country" class="noshow"><%=cm.cmsPhrase("Country")%></label>
+                                   <select title="<%=cm.cmsPhrase("Country")%>" name="Contry" id="Country" onchange="MM_jumpMenuInternational('parent',this,0)">
                                     <option value="species-threat-international.jsp?idGroup=<%=group%>&amp;groupName=<%=groupName%>" selected="selected">
                                       <%=cm.cms("species_threat-international_18")%>
                                     </option>
@@ -385,8 +384,6 @@
                                     }
                                  %>
                                   </select>
-                                  <%=cm.cmsLabel("country")%>
-                                  <%=cm.cmsTitle("country")%>
                             <%
                                 } else {
                              %>

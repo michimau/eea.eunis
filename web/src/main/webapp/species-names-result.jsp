@@ -302,7 +302,7 @@
 	                              								if (showScientificName) {
             								%>
 	                                								<option value="<%=NameSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected">
-	                                    								<%=cm.cms("scientific_name")%>
+	                                    								<%=cm.cmsPhrase("Scientific name")%>
 	                                								</option>
             								<%
 	                              								}
@@ -913,8 +913,6 @@
                 				</table>
             					<%=cm.br()%>
             					<%=cm.cmsMsg("species_names-result_pageTitle")%>
-            					<%=cm.br()%>
-            					<%=cm.cmsMsg("scientific_name")%>
             					<%=cm.br()%>
 							<!-- END MAIN CONTENT -->
               				</div>

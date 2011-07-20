@@ -122,17 +122,14 @@
     <br />
     <table summary="<%=cm.cms("species_factsheet-geo-legal_11_Sum")%>" width="640" border="0" cellspacing="0" cellpadding="0" id="legalevent" class="sortable">
       <tr>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="font-weight: bold; text-align: left;">
+        <th title="<%=cm.cmsPhrase("Sort results on this column")%>" style="font-weight: bold; text-align: left;">
           <%=cm.cmsPhrase("Country")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="font-weight: bold; text-align: left;">
+        <th title="<%=cm.cmsPhrase("Sort results on this column")%>" style="font-weight: bold; text-align: left;">
           <%=cm.cmsPhrase("Date of event (yyyy-MM-dd)")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="font-weight: bold; text-align: left;">
+        <th title="<%=cm.cmsPhrase("Sort results on this column")%>" style="font-weight: bold; text-align: left;">
           <%=cm.cmsPhrase("Event")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
 <%
@@ -164,9 +161,7 @@
 %>
     </table>
     <p style="text-align:left">
-      <input id="button1" title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" class="standardButton" />
-      <%=cm.cmsTitle("close_window")%>
-      <%=cm.cmsInput("close_btn")%>
+      <input id="button1" title="<%=cm.cmsPhrase("Close window")%>" type="button" value="<%=cm.cmsPhrase("Close")%>" onclick="javascript:window.close()" name="button" class="standardButton" />
     </p>
 
 <%=cm.br()%>

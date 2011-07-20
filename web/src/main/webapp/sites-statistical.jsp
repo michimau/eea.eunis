@@ -67,9 +67,8 @@
                     </li>
                     <li>
                       <a href="sites-help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cms( "header_help_title" )%>"
-                             title="<%=cm.cms( "header_help_title" )%>" /></a>
-            				<%=cm.cmsTitle( "header_help_title" )%>
+                             alt="<%=cm.cmsPhrase("Help information")%>"
+                             title="<%=cm.cmsPhrase("Help information")%>" /></a>
                     </li>
                   </ul>
                 </div>
@@ -132,9 +131,8 @@
                     <%=cm.cmsLabel("maximum_designation_year")%>
                   </strong>
                   <div class="submit_buttons">
-                    <input id="reset" name="Reset" type="reset" value="<%=cm.cms("reset")%>" class="standardButton" title="<%=cm.cms("reset_values")%>" />
+                    <input id="reset" name="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" title="<%=cm.cms("reset_values")%>" />
                     <%=cm.cmsTitle("reset_values")%>
-                    <%=cm.cmsInput("reset")%>
 
                     <input id="submit2" name="submit2" type="submit" class="submitSearchButton" value="<%=cm.cmsPhrase("Search")%>" title="<%=cm.cmsPhrase("Search")%>" />
                   </div>
@@ -147,9 +145,7 @@
            %>
                 <br />
                 <%=cm.cmsPhrase("Save your criteria:")%>
-                <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-statistical.jsp','5','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
-                <%=cm.cmsTitle("save")%>
-                <%=cm.cmsAlt("save")%>
+                <a title="<%=cm.cmsPhrase("Save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-statistical.jsp','5','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cmsPhrase("Save")%>" title="<%=cm.cmsPhrase("Save")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
           <%
             // Set Vector for URL string
             Vector show = new Vector();

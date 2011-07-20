@@ -662,7 +662,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       if(val.equalsIgnoreCase("DesignationYear")) { selected=" selected=\"selected\""; } else { selected=""; }
                       out.println("<option"+selected+" value=\"DesignationYear\">"+cm.cms("designation_year")+"</option>");
                       if(val.equalsIgnoreCase("Country")) { selected=" selected=\"selected\""; } else { selected=""; }
-                      out.println("<option"+selected+" value=\"Country\">"+cm.cms("country")+"</option>");
+                      out.println("<option"+selected+" value=\"Country\">"+cm.cmsPhrase("Country")+"</option>");
                       if(val.equalsIgnoreCase("Size")) { selected=" selected=\"selected\""; } else { selected=""; }
                       out.println("<option"+selected+" value=\"Size\">"+cm.cms("size")+"</option>");
                       if(val.equalsIgnoreCase("Longitude")) { selected=" selected=\"selected\""; } else { selected=""; }
@@ -689,7 +689,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     <%=cm.cmsInput("name")%>
                     <%=cm.cmsInput("code_column")%>
                     <%=cm.cmsInput("designation_year")%>
-                    <%=cm.cmsInput("country")%>
                     <%=cm.cmsInput("size")%>
                     <%=cm.cmsInput("longitude")%>
                     <%=cm.cmsInput("latitude")%>
@@ -748,13 +747,11 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 <br />
                 <jsp:include page="sites-databases.jsp" />
                 <br />
-                <input type="button" class="saveButton" onclick="disableSaveButton()" value="Save" id="Save" name="Save" title="<%=cm.cms("save")%>" />
-                    <%=cm.cmsTitle("save")%>
+                <input type="button" class="saveButton" onclick="disableSaveButton()" value="Save" id="Save" name="Save" title="<%=cm.cmsPhrase("Save")%>" />
                 &nbsp;&nbsp;&nbsp;
                 <input type="submit" class="submitSearchButton" value="Search" id="Search" name="Search" title="<%=cm.cmsPhrase("Search")%>" />
                 &nbsp;&nbsp;&nbsp;
-                <input type="button" class="standardButton" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cms("reset")%>" />
-                <%=cm.cmsTitle("reset")%>
+                <input type="button" class="standardButton" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cmsPhrase("Reset")%>" />
                 <%
             } else {
                 %>

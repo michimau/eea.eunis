@@ -65,9 +65,8 @@
                     </li>
                     <li>
                       <a href="habitats-help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cms( "header_help_title" )%>"
-                             title="<%=cm.cms( "header_help_title" )%>" /></a>
-            				<%=cm.cmsTitle( "header_help_title" )%>
+                             alt="<%=cm.cmsPhrase("Help information")%>"
+                             title="<%=cm.cmsPhrase("Help information")%>" /></a>
                     </li>
                   </ul>
                 </div>
@@ -157,9 +156,8 @@
                         <tr>
                           <td align="right">
                             <br />
-                            <input type="reset" title="Reset fields" value="<%=cm.cms("reset")%>" name="Reset" id="Reset" class="standardButton" />
+                            <input type="reset" title="Reset fields" value="<%=cm.cmsPhrase("Reset")%>" name="Reset" id="Reset" class="standardButton" />
                             <%=cm.cmsTitle("reset_values")%>
-                            <%=cm.cmsInput("reset")%>
                             <input type="submit" title="<%=cm.cmsPhrase("Search")%>" value="<%=cm.cmsPhrase("Search")%>" name="submit2" id="submit2" class="submitSearchButton" />
                           </td>
                         </tr>

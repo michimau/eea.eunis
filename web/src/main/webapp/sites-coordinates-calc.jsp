@@ -153,9 +153,7 @@
         <br />
         <div style="width : 100%; text-align : right;">
         <br />
-        <input id="reset" type="reset" name="Reset" value="<%=cm.cms("reset")%>" class="standardButton" title="<%=cm.cms("reset")%>" />
-        <%=cm.cmsInput("reset")%>
-        <%=cm.cmsTitle("reset")%>
+        <input id="reset" type="reset" name="Reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" title="<%=cm.cmsPhrase("Reset")%>" />
           &nbsp;
         <input id="calculate" type="button" name="calculate" value="<%=cm.cms("sites_coordinates_calc_calculate_value")%>" onclick="javascript:transform(document.converter);" class="submitSearchButton" title="<%=cm.cms("calculate")%>" />
         <%=cm.cmsInput("sites_coordinates_calc_calculate_value")%>

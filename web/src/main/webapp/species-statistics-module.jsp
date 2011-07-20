@@ -233,8 +233,8 @@
                 <br />
                 <%=cm.cmsPhrase("please choose a country:")%> &nbsp;&nbsp;
                 </strong>
-                <label for="Country" class="noshow"><%=cm.cms("country")%></label>
-                <select title="<%=cm.cms("country")%>" name="Country" id="Country" onchange="MM_jumpMenuCountry('parent',this,0)">
+                <label for="Country" class="noshow"><%=cm.cmsPhrase("Country")%></label>
+                <select title="<%=cm.cmsPhrase("Country")%>" name="Country" id="Country" onchange="MM_jumpMenuCountry('parent',this,0)">
                 <option value="species-statistics-module.jsp"><%=cm.cms("please_choose_country")%></option>
                   <%
                      for(int i=0;i<allCountries.size();i++)
@@ -247,8 +247,6 @@
                      }
                   %>
                 </select>
-                <%=cm.cmsLabel("country")%>
-                <%=cm.cmsTitle("country")%>
                 <br />
                 <%
                    if(countryName.trim().length()>0)

@@ -88,9 +88,8 @@
                     </li>
                     <li>
                       <a href="sites-help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cms( "header_help_title" )%>"
-                             title="<%=cm.cms( "header_help_title" )%>" /></a>
-            				<%=cm.cmsTitle( "header_help_title" )%>
+                             alt="<%=cm.cmsPhrase("Help information")%>"
+                             title="<%=cm.cmsPhrase("Help information")%>" /></a>
                     </li>
                   </ul>
                 </div>
@@ -137,9 +136,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_optional")%>" title="<%=cm.cms("field_optional")%>" src="images/mini/field_optional.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_optional")%>
                   <label for="country"><%=cm.cmsPhrase("Country is")%></label>
-                  <input id="country" name="country" type="text" size="30" title="<%=cm.cms("country")%>" />
-                  <%=cm.cmsLabel("country")%>
-                  <%=cm.cmsTitle("country")%>
+                  <input id="country" name="country" type="text" size="30" title="<%=cm.cmsPhrase("Country")%>" />
                   <a title="<%=cm.cms("helper")%>" href="javascript:chooseCountry('sites-country-choice.jsp?field=country')"><img src="images/helper/helper.gif" alt="<%=cm.cms("helper")%>" title="<%=cm.cms("helper")%>" width="11" height="18" border="0" style="vertical-align:middle" /></a>
                   <%=cm.cmsTitle("helper")%>
                   <%=cm.cmsAlt("helper")%>
@@ -220,9 +217,7 @@
           %>
                 <br />
                 <%=cm.cmsPhrase("Save your criteria:")%>
-                <a title="<%=cm.cms("save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-names.jsp','4','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save")%>" title="<%=cm.cms("save")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
-                <%=cm.cmsTitle("save")%>
-                <%=cm.cmsAlt("save")%>
+                <a title="<%=cm.cmsPhrase("Save")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'sites-names.jsp','4','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cmsPhrase("Save")%>" title="<%=cm.cmsPhrase("Save")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                 <jsp:include page="show-criteria-search.jsp">
                   <jsp:param name="pageName" value="<%=pageName%>" />
                   <jsp:param name="pageNameResult" value="<%=pageNameResult%>" />

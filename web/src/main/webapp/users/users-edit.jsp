@@ -526,9 +526,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
     if(users_operation.equalsIgnoreCase("add_users"))
     {
    %>
-     <input id="input2" type="reset" value="<%=cm.cms("reset")%>" name="Reset" title="<%=cm.cms("reset")%>" />
-     <%=cm.cmsTitle("reset")%>
-     <%=cm.cmsInput("reset")%>
+     <input id="input2" type="reset" value="<%=cm.cmsPhrase("Reset")%>" name="Reset" title="<%=cm.cmsPhrase("Reset")%>" />
   <%
     }
   %>

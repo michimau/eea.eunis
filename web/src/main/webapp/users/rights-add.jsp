@@ -310,9 +310,7 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
     <%=cm.cmsInput("add_right")%>
     <%=cm.cmsInput("update_data")%>
     &nbsp;&nbsp;
-    <input id="input2" type="reset" value="<%=cm.cms("reset")%>" name="Reset" title="<%=cm.cms("reset")%>" />
-    <%=cm.cmsTitle("reset")%>
-    <%=cm.cmsInput("reset")%>
+    <input id="input2" type="reset" value="<%=cm.cmsPhrase("Reset")%>" name="Reset" title="<%=cm.cmsPhrase("Reset")%>" />
   </td>
 </tr>
 <tr>

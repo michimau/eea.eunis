@@ -125,26 +125,21 @@
       <tr>
         <th scope="col">
           <%=cm.cmsPhrase("Title")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th scope="col">
           <%=cm.cmsPhrase("Author")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th scope="col">
           <%=cm.cmsPhrase("Editor")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-align:right">
           <%=cm.cmsPhrase("Date")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
 <%--        <td width="10%" align="center">--%>
 <%--          <%=cm.cmsPhrase("Published")%>--%>
 <%--        </td>--%>
         <th scope="col">
           <%=cm.cmsPhrase("Source")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
     </thead>

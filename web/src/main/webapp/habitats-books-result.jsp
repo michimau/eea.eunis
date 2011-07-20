@@ -119,9 +119,8 @@
                     </li>
                     <li>
                       <a href="habitats-help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cms( "header_help_title" )%>"
-                             title="<%=cm.cms( "header_help_title" )%>" /></a>
-            				<%=cm.cmsTitle( "header_help_title" )%>
+                             alt="<%=cm.cmsPhrase("Help information")%>"
+                             title="<%=cm.cmsPhrase("Help information")%>" /></a>
                     </li>
                   </ul>
                 </div>
@@ -269,34 +268,29 @@
                   <thead>
                     <tr>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor) ? true : false)%>">
+                        <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor) ? true : false)%>">
                           <%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsPhrase("Author")%>
                         </a>
-                        <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate) ? true : false)%>">
+                        <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate) ? true : false)%>">
                           <%=Utilities.getSortImageTag(sortDate)%><%=cm.cmsPhrase("Date")%>
                         </a>
-                        <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
-                      <th title="<%=cm.cms("sort_results_on_this_column")%>" scope="col">
+                      <th title="<%=cm.cmsPhrase("Sort results on this column")%>" scope="col">
                         <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle))%>">
                           <%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsPhrase("Title")%>
                         </a>
-                        <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor) ? true : false)%>">
+                        <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor) ? true : false)%>">
                           <%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsPhrase("Editor")%>
                         </a>
-                        <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher) ? true : false)%>">
+                        <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher) ? true : false)%>">
                           <%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsPhrase("Publisher")%>
                         </a>
-                        <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th scope="col" width="15%" style="text-align : center;">
                         <%=cm.cmsPhrase("Source type")%>
@@ -377,34 +371,29 @@
                   <thead>
                     <tr>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor) ? true : false)%>">
+                        <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_AUTHOR%>&amp;ascendency=<%=formBean.changeAscendency(sortAuthor, (null == sortAuthor) ? true : false)%>">
                           <%=Utilities.getSortImageTag(sortAuthor)%><%=cm.cmsPhrase("Author")%>
                         </a>
-                        <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate) ? true : false)%>">
+                        <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_DATE%>&amp;ascendency=<%=formBean.changeAscendency(sortDate, (null == sortDate) ? true : false)%>">
                           <%=Utilities.getSortImageTag(sortDate)%><%=cm.cmsPhrase("Date")%>
                         </a>
-                        <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
-                      <th title="<%=cm.cms("sort_results_on_this_column")%>" scope="col">
+                      <th title="<%=cm.cmsPhrase("Sort results on this column")%>" scope="col">
                         <a href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_TITLE%>&amp;ascendency=<%=formBean.changeAscendency(sortTitle, (null == sortTitle))%>">
                           <%=Utilities.getSortImageTag(sortTitle)%><%=cm.cmsPhrase("Title")%>
                         </a>
-                        <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor) ? true : false)%>">
+                        <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_EDITOR%>&amp;ascendency=<%=formBean.changeAscendency(sortEditor, (null == sortEditor) ? true : false)%>">
                           <%=Utilities.getSortImageTag(sortEditor)%><%=cm.cmsPhrase("Editor")%>
                         </a>
-                        <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th scope="col">
-                        <a title="<%=cm.cms("sort_results_on_this_column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher) ? true : false)%>">
+                        <a title="<%=cm.cmsPhrase("Sort results on this column")%>" href="<%=pageName + "?" + urlSortString%>&amp;sort=<%=ReferencesSortCriteria.SORT_PUBLISHER%>&amp;ascendency=<%=formBean.changeAscendency(sortPublisher, (null == sortPublisher) ? true : false)%>">
                           <%=Utilities.getSortImageTag(sortPublisher)%><%=cm.cmsPhrase("Publisher")%>
                         </a>
-                        <%=cm.cmsTitle("sort_results_on_this_column")%>
                       </th>
                       <th scope="col" width="15%" style="text-align : center;">
                         <%=cm.cmsPhrase("Source type")%>

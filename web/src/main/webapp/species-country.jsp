@@ -170,9 +170,8 @@
                           <td style="background-color:#EEEEEE">
                             <input id="checkbox1" title="<%=cm.cmsPhrase("Group")%>" alt="<%=cm.cmsPhrase("Group")%>" type="checkbox" name="showGroup" value="true" disabled="disabled" checked="checked" />
                               <label for="checkbox1"><%=cm.cmsPhrase("Group")%></label>
-                            <input id="checkbox2" title="<%=cm.cms("scientific_name")%>" alt="<%=cm.cms("scientific_name")%>" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" />
+                            <input id="checkbox2" title="<%=cm.cmsPhrase("Scientific name")%>" alt="<%=cm.cmsPhrase("Scientific name")%>" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" />
                               <label for="checkbox2"><%=cm.cmsPhrase("Scientific name")%></label>
-                              <%=cm.cmsTitle("scientific_name")%>
                             <input id="checkbox3" title="<%=cm.cms("vernacular_names")%>" alt="<%=cm.cms("vernacular_names")%>" type="checkbox" name="showVernacularNames" value="true" checked="checked" />
                               <label for="checkbox3"><%=cm.cmsPhrase("Vernacular names")%></label>
                               <%=cm.cmsTitle("vernacular_names")%>
@@ -193,8 +192,8 @@
                                 if (null == country)
                                 {// If country is null then display the country selection texbox
                               %>
-                                <label for="Country" class="noshow"><%=cm.cms("country")%></label>
-                                <select title="<%=cm.cms("country")%>" name="Country" id="Country" <%=onChange%>>
+                                <label for="Country" class="noshow"><%=cm.cmsPhrase("Country")%></label>
+                                <select title="<%=cm.cmsPhrase("Country")%>" name="Country" id="Country" <%=onChange%>>
                                   <option value="species-country.jsp">
                                       <%=cm.cms("please_select_a_country")%>
                                   </option>
@@ -219,8 +218,6 @@
                                   }
                                   %>
                                 </select>
-                                <%=cm.cmsLabel("country")%>
-                                <%=cm.cmsTitle("country")%>
                               <%
                               } else
                               { // or else put out the selected country and let the user select the region.
@@ -300,9 +297,8 @@
                               <td>
                                 <input id="saveCriteriaCheckbox" title="<%=cm.cms("save_criteria")%>" alt="<%=cm.cms("save_criteria")%>" type="checkbox" name="saveCriteria" value="true" <%=gr%> /><label for="saveCriteriaCheckbox"><%=cm.cmsPhrase("Save your criteria:")%></label>
                                 <%=cm.cmsTitle("save_criteria")%>
-                                <a title="<%=cm.cms("save_criteria")%>" href="javascript:checkSaveCriteria()"><img alt="<%=cm.cms("save")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
+                                <a title="<%=cm.cms("save_criteria")%>" href="javascript:checkSaveCriteria()"><img alt="<%=cm.cmsPhrase("Save")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                                 <%=cm.cmsTitle("save_criteria")%>
-                                <%=cm.cmsAlt("save")%>
                               </td>
                             </tr>
                             <tr><td>&nbsp;</td></tr>

@@ -124,13 +124,11 @@ function setCountry(val) {
          if(0 == whichclicked)
          {
      %>
-        <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setCountry('<%=name%>');"><%=name%></a>
-        <%=cm.cmsTitle("click_link_to_select_value")%>
+        <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setCountry('<%=name%>');"><%=name%></a>
      <%
      }else {
      %>
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setRegion('<%=name%>');"><%=name%></a>
-          <%=cm.cmsTitle("click_link_to_select_value")%>
+          <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setRegion('<%=name%>');"><%=name%></a>
       <%
           }
       %>
@@ -143,9 +141,7 @@ function setCountry(val) {
 </div>
 <%=Utilities.getTextMaxLimitForPopup(cm, results.size())%>
 <form action="">
-  <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" id="button" class="standardButton" />
+  <input title="<%=cm.cmsPhrase("Close window")%>" type="button" value="<%=cm.cmsPhrase("Close")%>" onclick="javascript:window.close()" name="button" id="button" class="standardButton" />
 </form>
-<%=cm.cmsInput("close_btn")%>
-<%=cm.br()%>
 </body>
 </html>

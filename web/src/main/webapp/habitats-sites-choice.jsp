@@ -87,8 +87,7 @@
     %>
     <tr bgcolor="<%=rowBgColor%>">
       <td>
-        <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(value)%>');"><%=value%></a>
-        <%=cm.cmsTitle("click_link_to_select_value")%>
+        <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(value)%>');"><%=value%></a>
       </td>
     </tr>
     <%
@@ -110,8 +109,7 @@
   <br />
 
   <form action="">
-    <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" id="button" name="button" class="standardButton" />
-    <%=cm.cmsInput("close_btn")%>
+    <input title="<%=cm.cmsPhrase("Close window")%>" type="button" value="<%=cm.cmsPhrase("Close")%>" onclick="javascript:window.close()" id="button" name="button" class="standardButton" />
   </form>
 </body>
 </html>

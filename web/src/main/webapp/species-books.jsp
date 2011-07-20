@@ -189,9 +189,7 @@
                         </tr>
                         <tr>
                           <td style="text-align:right" colspan="2">
-                            <input id="Reset" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="standardButton" alt="Reset" title="<%=cm.cms("reset")%>" />
-                            <%=cm.cmsTitle("reset")%>
-                            <%=cm.cmsInput("reset")%>
+                            <input id="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" name="Reset" class="standardButton" alt="Reset" title="<%=cm.cmsPhrase("Reset")%>" />
                             <input id="submit" type="submit" value="<%=cm.cmsPhrase("Search")%>" name="submit2" class="submitSearchButton" alt="Search" title="<%=cm.cmsPhrase("Search")%>" />
                           </td>
                         </tr>

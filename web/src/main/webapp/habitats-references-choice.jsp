@@ -183,8 +183,7 @@
   %>
   <tr>
     <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getsource()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getsource()))%></a>
-      <%=cm.cmsTitle("click_link_to_select_value")%>
+      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getsource()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getsource()))%></a>
     </td>
   </tr>
   <%
@@ -195,8 +194,7 @@
   %>
   <tr>
     <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.formatReferencesDate(n.getcreated())%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatReferencesDate(n.getcreated())%></a>
-      <%=cm.cmsTitle("click_link_to_select_value")%>
+      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatReferencesDate(n.getcreated())%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatReferencesDate(n.getcreated())%></a>
     </td>
   </tr>
   <%
@@ -207,8 +205,7 @@
   %>
   <tr>
     <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.gettitle()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.gettitle()))%></a>
-      <%=cm.cmsTitle("click_link_to_select_value")%>
+      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.gettitle()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.gettitle()))%></a>
     </td>
   </tr>
   <%
@@ -219,8 +216,7 @@
   %>
   <tr>
     <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.geteditor()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.geteditor()))%></a>
-      <%=cm.cmsTitle("click_link_to_select_value")%>
+      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.geteditor()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.geteditor()))%></a>
     </td>
   </tr>
   <%
@@ -230,8 +226,7 @@
   %>
   <tr>
     <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getpublisher()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getpublisher()))%></a>
-      <%=cm.cmsTitle("click_link_to_select_value")%>
+      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getpublisher()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getpublisher()))%></a>
     </td>
   </tr>
   <%
@@ -266,8 +261,7 @@
   // out.print(Utilities.getTextMaxLimitForPopup((results == null ? 0 : results.size())));
 %>
 <form action="">
-  <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" id="button" name="button" class="standardButton" />
-  <%=cm.cmsInput("close_btn")%>
+  <input title="<%=cm.cmsPhrase("Close window")%>" type="button" value="<%=cm.cmsPhrase("Close")%>" onclick="javascript:window.close()" id="button" name="button" class="standardButton" />
 </form>
 </body>
 </html>

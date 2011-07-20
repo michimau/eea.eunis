@@ -237,9 +237,9 @@
                   <table width="100%" border="0" summary="layout">
                     <tr>
                       <td>
-                        <input title="<%=cm.cms("reset")%>" type="reset" name="reset" id="reset" value="<%=cm.cms("reset")%>" class="standardButton" />
+                        <input title="<%=cm.cmsPhrase("Reset")%>" type="reset" name="reset" id="reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" />
                         &nbsp;&nbsp;&nbsp;
-                        <input title="<%=cm.cms("save")%>" type="submit" name="save" id="save" value="<%=cm.cms("save")%>" class="submitSearchButton" />
+                        <input title="<%=cm.cmsPhrase("Save")%>" type="submit" name="save" id="save" value="<%=cm.cmsPhrase("Save")%>" class="submitSearchButton" />
                         &nbsp;&nbsp;&nbsp;
                       </td>
                     </tr>
@@ -366,9 +366,9 @@
                     </tr>
                     <tr>
                       <td>
-                        <input title="<%=cm.cms("reset")%>" type="reset" name="reset" id="reset2" value="Reset" class="standardButton" />
+                        <input title="<%=cm.cmsPhrase("Reset")%>" type="reset" name="reset" id="reset2" value="Reset" class="standardButton" />
                         &nbsp;&nbsp;&nbsp;
-                        <input title="<%=cm.cms("save")%>" type="submit" name="save" id="save2" value="Save" class="submitSearchButton" />
+                        <input title="<%=cm.cmsPhrase("Save")%>" type="submit" name="save" id="save2" value="Save" class="submitSearchButton" />
                         &nbsp;&nbsp;&nbsp;
                       </td>
                     </tr>

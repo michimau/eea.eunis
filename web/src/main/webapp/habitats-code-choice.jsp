@@ -226,8 +226,7 @@
     if(database == CodeDomain.SEARCH_EUNIS.intValue() || database == CodeDomain.SEARCH_ANNEX.intValue()) {
   %>
   <td bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-    <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=eunisOrAnnexcode%>')"><%=eunisOrAnnexcode%></a>&nbsp;
-    <%=cm.cmsTitle("click_link_to_select_value")%>
+    <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=eunisOrAnnexcode%>')"><%=eunisOrAnnexcode%></a>&nbsp;
   </td>
   <td>
     <%=habitatName%>
@@ -237,12 +236,10 @@
     if(database == CodeDomain.SEARCH_BOTH.intValue()) {
   %>
   <td bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-    <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=eunisCode%>')"><%=eunisCode%></a>&nbsp;
-    <%=cm.cmsTitle("click_link_to_select_value")%>
+    <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=eunisCode%>')"><%=eunisCode%></a>&nbsp;
   </td>
   <td bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-    <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=annexCode%>')"><%=annexCode%></a>&nbsp;
-    <%=cm.cmsTitle("click_link_to_select_value")%>
+    <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=annexCode%>')"><%=annexCode%></a>&nbsp;
   </td>
   <td>
     <%=habitatName%>
@@ -259,12 +256,10 @@
     if(database == CodeDomain.SEARCH_EUNIS.intValue() || database == CodeDomain.SEARCH_ANNEX.intValue()) {
   %>
   <td bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-    <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=eunisOrAnnexcode%>')"><%=eunisOrAnnexcode%></a>&nbsp;
-    <%=cm.cmsTitle("click_link_to_select_value")%>
+    <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=eunisOrAnnexcode%>')"><%=eunisOrAnnexcode%></a>&nbsp;
   </td>
   <td bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-    <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=code%>')"><%=code%></a>&nbsp;
-    <%=cm.cmsTitle("click_link_to_select_value")%>
+    <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=code%>')"><%=code%></a>&nbsp;
   </td>
   <td>
     <%=habitatName%>
@@ -274,16 +269,13 @@
     if(database == CodeDomain.SEARCH_BOTH.intValue()) {
   %>
   <td bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-    <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=eunisCode%>')"><%=eunisCode%></a>&nbsp;
-    <%=cm.cmsTitle("click_link_to_select_value")%>
+    <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=eunisCode%>')"><%=eunisCode%></a>&nbsp;
   </td>
-  <td title="<%=cm.cms("click_link_to_select_value")%>" bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
+  <td title="<%=cm.cmsPhrase("Click link to select the value")%>" bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
     <a href="javascript:setLine('<%=annexCode%>')"><%=annexCode%></a>&nbsp;
-    <%=cm.cmsTitle("click_link_to_select_value")%>
   </td>
-  <td title="<%=cm.cms("click_link_to_select_value")%>" bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
+  <td title="<%=cm.cmsPhrase("Click link to select the value")%>" bgcolor="<%=(0 == (i % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
     <a href="javascript:setLine('<%=code%>')"><%=code%></a>&nbsp;
-    <%=cm.cmsTitle("click_link_to_select_value")%>
   </td>
   <td>
     <%=habitatName%>
@@ -302,8 +294,7 @@
 %>
 <br />
 <form action="">
-  <input title="<%=cm.cms("close_window")%>" type="button" name="button" id="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" class="standardButton" />
-  <%=cm.cmsInput("close_btn")%>
+  <input title="<%=cm.cmsPhrase("Close window")%>" type="button" name="button" id="button" value="<%=cm.cmsPhrase("Close")%>" onclick="javascript:window.close()" class="standardButton" />
 </form>
 <%=cm.cmsMsg("only_first_100_values")%>
 <%=cm.br()%>

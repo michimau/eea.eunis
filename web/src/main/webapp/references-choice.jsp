@@ -236,9 +236,7 @@
 %>
     <br />
     <form action="">
-      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button1" name="button" class="standardButton" />
-      <%=cm.cmsTitle("close_window")%>
-      <%=cm.cmsInput("close_btn")%>
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cmsPhrase("Close")%>" title="<%=cm.cmsPhrase("Close window")%>" id="button1" name="button" class="standardButton" />
     </form>
   </body>
 </html>

@@ -207,7 +207,7 @@
                             <option value="showGroup"><%=cm.cmsPhrase("Group")%></option>
                             <option value="showOrder"><%=cm.cms("order_column")%></option>
                             <option value="showFamily"><%=cm.cms("family")%></option>
-                            <option value="showScientificName"><%=cm.cms("scientific_name")%></option>
+                            <option value="showScientificName"><%=cm.cmsPhrase("Scientific name")%></option>
                             <option value="showVernacularName"><%=cm.cms("vernacular_names")%></option>
 <%
   }
@@ -225,7 +225,7 @@
   {
 %>
                             <option value="showSourceDB"><%=cm.cms("source_data_set")%></option>
-                            <option value="showCountry"><%=cm.cms("country")%></option>
+                            <option value="showCountry"><%=cm.cmsPhrase("Country")%></option>
                             <option value="showDesignationType"><%=cm.cms("designation_type")%></option>
                             <option value="showName"><%=cm.cms("site_name")%></option>
                             <option value="showCoordinates"><%=cm.cms("coordinates")%></option>
@@ -246,7 +246,6 @@
 %>
                           <%=cm.cmsInput("order_column")%>
                           <%=cm.cmsInput("family")%>
-                          <%=cm.cmsInput("scientific_name")%>
                           <%=cm.cmsInput("vernacular_names")%>
                           <%=cm.cmsInput("priority")%>
 <%
@@ -264,7 +263,6 @@
   {
 %>
                           <%=cm.cmsInput("source_data_set")%>
-                          <%=cm.cmsInput("country")%>
                           <%=cm.cmsInput("designation_type")%>
                           <%=cm.cmsInput("site_name")%>
                           <%=cm.cmsInput("coordinates")%>

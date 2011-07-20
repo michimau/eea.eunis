@@ -296,7 +296,7 @@
             <%--                  <option value="<%=CountrySearchCriteria.CRITERIA_ORDER%>"><%=cm.cms("order_column")%></option>--%>
             <%--                  <option value="<%=CountrySearchCriteria.CRITERIA_FAMILY%>"><%=cm.cms("family")%></option>--%>
                               <option value="<%=CountrySearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected">
-                                  <%=cm.cms("scientific_name")%>
+                                  <%=cm.cmsPhrase("Scientific name")%>
                               </option>
                             </select>
                             <select id="select2" title="<%=cm.cmsPhrase("Operator")%>" name="oper">
@@ -705,8 +705,6 @@
                 <%=cm.cmsMsg("species_country-result_title")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("enter_refine_criteria_correctly")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("scientific_name")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("table_of_results")%>
                 <%=cm.br()%>

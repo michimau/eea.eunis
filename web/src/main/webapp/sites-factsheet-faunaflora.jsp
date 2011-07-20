@@ -408,19 +408,15 @@
       <tr>
         <th scope="col">
           <%=cm.cmsPhrase("Species scientific name")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th scope="col">
           <%=cm.cmsPhrase("Species group")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th>
           <%=cm.cmsPhrase("Resident")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th>
           <%=cm.cmsPhrase("Breeding")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th>
           <%=cm.cmsPhrase("Winter.")%>
@@ -436,11 +432,9 @@
         </th>
         <th>
           <%=cm.cmsPhrase("Species")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th>
           <%=cm.cmsPhrase("Nesting")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th>
           <%=cm.cmsPhrase("Conserv.")%>
@@ -448,15 +442,12 @@
         </th>
         <th>
           <%=cm.cmsPhrase("Isolation")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th>
           <%=cm.cmsPhrase("Global status")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th>
           <%=cm.cmsPhrase("Species status")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
     </thead>
@@ -630,19 +621,15 @@
       <tr>
         <th scope="col">
           <%=cm.cmsPhrase("Species scientific name")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th scope="col">
           <%=cm.cmsPhrase("Species group")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th>
           <%=cm.cmsPhrase("Resident")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th>
           <%=cm.cmsPhrase("Breeding")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th>
           <%=cm.cmsPhrase("Winter.")%>
@@ -650,7 +637,6 @@
         </th>
         <th>
           <%=cm.cmsPhrase("Staging")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th>
           <%=cm.cmsPhrase("Conserv.")%>
@@ -662,11 +648,9 @@
         </th>
         <th>
           <%=cm.cmsPhrase("Isolation")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th>
           <%=cm.cmsPhrase("Global status")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
     </thead>
@@ -834,21 +818,17 @@
   <table summary="<%=cm.cms("other_species_mentioned_in_site")%>" class="listing fullwidth">
     <thead>
       <tr>
-        <th scope="col" title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th scope="col" title="<%=cm.cmsPhrase("Sort results on this column")%>">
           <%=cm.cmsPhrase("Species group")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th scope="col" title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th scope="col" title="<%=cm.cmsPhrase("Sort results on this column")%>">
           <%=cm.cmsPhrase("Species name")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th scope="col" title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th scope="col" title="<%=cm.cmsPhrase("Sort results on this column")%>">
           <%=cm.cmsPhrase("Population size estimations")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th scope="col" title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th scope="col" title="<%=cm.cmsPhrase("Sort results on this column")%>">
           <%=cm.cmsPhrase("Motivation for species mention")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
     </thead>

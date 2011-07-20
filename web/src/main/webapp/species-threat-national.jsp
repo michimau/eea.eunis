@@ -258,15 +258,13 @@
                             <td>
                               <input title="<%=cm.cmsPhrase("Group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" <%=chekedGroup%> />
                                 <label for="checkbox1"><%=cm.cmsPhrase("Group")%></label>
-                              <input title="<%=cm.cms("country")%>" id="checkbox5" type="checkbox" name="showCountry" value="true" <%=chekedCountry%> />
+                              <input title="<%=cm.cmsPhrase("Country")%>" id="checkbox5" type="checkbox" name="showCountry" value="true" <%=chekedCountry%> />
                                 <label for="checkbox5"><%=cm.cmsPhrase("Country")%></label>
-                                <%=cm.cmsTitle("country")%>
                               <input title="<%=cm.cms("status")%>" id="checkbox6" type="checkbox" name="showStatus" value="true" <%=chekedStatus%> />
                                 <label for="checkbox6"><%=cm.cmsPhrase("Threat Status")%></label>
                                 <%=cm.cmsTitle("status")%>
-                              <input title="<%=cm.cms("scientific_name")%>" id="checkbox2" type="checkbox" name="true" value="true" disabled="disabled" checked="checked" />
+                              <input title="<%=cm.cmsPhrase("Scientific name")%>" id="checkbox2" type="checkbox" name="true" value="true" disabled="disabled" checked="checked" />
                                 <label for="checkbox2"><%=cm.cmsPhrase("Scientific name")%></label>
-                                <%=cm.cmsTitle("scientific_name")%>
                               <input title="<%=cm.cms("vernacular_name")%>" id="checkbox3" type="checkbox" name="showVernacularNames" value="true" <%=chekedVernacular%> />
                                 <label for="checkbox3"><%=cm.cmsPhrase("Vernacular names")%></label>
                                 <%=cm.cmsTitle("vernacular_name")%>
@@ -342,8 +340,8 @@
                                 <%
                                   }
                                 %>
-                                  <label for="select2" class="noshow"><%=cm.cms("country")%></label>
-                                  <select id="select2" title="<%=cm.cms("country")%>" name="Contry" onchange="MM_jumpMenuInternational('parent',this,0)">
+                                  <label for="select2" class="noshow"><%=cm.cmsPhrase("Country")%></label>
+                                  <select id="select2" title="<%=cm.cmsPhrase("Country")%>" name="Contry" onchange="MM_jumpMenuInternational('parent',this,0)">
                                     <option value="species-threat-national.jsp?idGroup=<%=group%>&amp;groupName=<%=groupName%>" selected="selected">
                                       <%=cm.cms("please_select_a_country")%>
                                     </option>
@@ -384,8 +382,6 @@
                                     }
                                  %>
                                   </select>
-                                  <%=cm.cmsLabel("country")%>
-                                  <%=cm.cmsTitle("country")%>
                               <%
                                 }
                                 else

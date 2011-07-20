@@ -132,9 +132,8 @@
                     </li>
                     <li>
                       <a href="habitats-help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cms( "header_help_title" )%>"
-                             title="<%=cm.cms( "header_help_title" )%>" /></a>
-            				<%=cm.cmsTitle( "header_help_title" )%>
+                             alt="<%=cm.cmsPhrase("Help information")%>"
+                             title="<%=cm.cmsPhrase("Help information")%>" /></a>
                     </li>
                   </ul>
                 </div>
@@ -160,9 +159,8 @@
                           <input title="<%=cm.cms("family")%>" id="checkbox3" type="checkbox" name="showFamily" value="true" checked="checked" />
                             <label for="checkbox3"><%=cm.cmsPhrase("Family")%></label>
                             <%=cm.cmsTitle("family")%>
-                          <input title="<%=cm.cms("scientific_name")%>" id="checkbox4" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" />
+                          <input title="<%=cm.cmsPhrase("Scientific name")%>" id="checkbox4" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" />
                             <label for="checkbox4"><%=cm.cmsPhrase("Species scientific name")%></label>
-                            <%=cm.cmsTitle("scientific_name")%>
                           <input title="<%=cm.cms("habitat_types")%>" id="checkbox5" type="checkbox" name="showHabitats" value="true" checked="checked" disabled="disabled" />
                             <label for="checkbox5"><%=cm.cmsPhrase("Habitat types")%></label>
                             <%=cm.cmsTitle("habitat_types")%>
@@ -188,10 +186,8 @@
                           <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
                           <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cmsPhrase("starts with")%></option>
                         </select>
-                        <label for="scientificName" class="noshow"><%=cm.cms("scientific_name")%></label>
-                        <input alt="<%=cm.cms("scientific_name")%>" size="32" id="scientificName" name="scientificName" value="" title="<%=cm.cms("habitat_type_name")%>" />
-                        <%=cm.cmsLabel("scientific_name")%>
-                        <%=cm.cmsAlt("scientific_name")%>
+                        <label for="scientificName" class="noshow"><%=cm.cmsPhrase("Scientific name")%></label>
+                        <input alt="<%=cm.cmsPhrase("Scientific name")%>" size="32" id="scientificName" name="scientificName" value="" title="<%=cm.cms("habitat_type_name")%>" />
                         <%=cm.cmsTitle("habitat_type_name")%>
                         <a title="<%=cm.cms("list_values_link")%>" href="javascript:openHelper('species-habitats-choice.jsp')"><img alt="<%=cm.cms("species_habitats_17")%>" height="18" title="<%=cm.cms("species_habitats_17")%>" src="images/helper/helper.gif" width="11" border="0" /></a>
                           <%=cm.cmsAlt("species_habitats_17")%>
@@ -210,9 +206,7 @@
                     </tr>
                     <tr>
                       <td style="text-align:right">
-                        <input id="Reset" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="standardButton" title="<%=cm.cms("reset")%>" />
-                        <%=cm.cmsTitle("reset")%>
-                        <%=cm.cmsInput("reset")%>
+                        <input id="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" name="Reset" class="standardButton" title="<%=cm.cmsPhrase("Reset")%>" />
                         <input id="Search" type="submit" value="<%=cm.cmsPhrase("Search")%>" name="submit2" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
                       </td>
                     </tr>

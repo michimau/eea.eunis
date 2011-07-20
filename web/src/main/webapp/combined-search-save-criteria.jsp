@@ -249,14 +249,12 @@
               if (null == request.getParameter("description"))
               {
 %>
-              <input title="<%=cm.cms("save")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("save")%>" class="submitSearchButton" />
-              <%=cm.cmsInput("save")%>
-              <input title="<%=cm.cms("reset")%>" type="reset" name="Reset" id="Reset" value="<%=cm.cms("reset")%>" class="standardButton" />
-              <%=cm.cmsInput("reset")%>
+              <input title="<%=cm.cmsPhrase("Save")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cmsPhrase("Save")%>" class="submitSearchButton" />
+              <input title="<%=cm.cmsPhrase("Reset")%>" type="reset" name="Reset" id="Reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" />
 <%
               }
 %>
-            <input type="button" title="<%=cm.cms("close_window")%>" name="Close" id="Close" value="<%=cm.cms("close_btn")%>" onclick="javascript:closeWindow('<%=request.getParameter("fromWhere")%>')" class="standardButton" /><%=cm.cmsInput("close_btn")%>
+            <input type="button" title="<%=cm.cmsPhrase("Close window")%>" name="Close" id="Close" value="<%=cm.cmsPhrase("Close")%>" onclick="javascript:closeWindow('<%=request.getParameter("fromWhere")%>')" class="standardButton" />
           </td>
         </tr>
     </table>

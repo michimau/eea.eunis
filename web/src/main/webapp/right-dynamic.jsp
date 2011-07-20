@@ -58,8 +58,7 @@ Input parameters  on REQUEST:
     {
 %>
 
-            <li><a href="<%=domain%>/<%=dynHeaderHelpLink%>" title="<%=cm.cms( "header_help_title" )%>"><%=cm.cmsPhrase( "Help" )%></a>
-            <%=cm.cmsTitle( "header_help_title" )%></li>
+            <li><a href="<%=domain%>/<%=dynHeaderHelpLink%>" title="<%=cm.cmsPhrase("Help information")%>"><%=cm.cmsPhrase( "Help" )%></a></li>
 <%
     }
     if (null != dynHeaderPrintLink)

@@ -44,35 +44,27 @@
       <tr>
         <th style="text-align: left;">
           <%=cm.cmsPhrase("Country")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-align: left;">
           <%=cm.cmsPhrase("Biogeographic region")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-align:right;">
           <%=cm.cmsPhrase("Start Period")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-align:right;">
           <%=cm.cmsPhrase("End period")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-align: left;">
           <%=cm.cmsPhrase("Status")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-align: left;">
           <%=cm.cmsPhrase("Tendency")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-align: left;">
           <%=cm.cmsPhrase("Quality")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
         <th style="text-align: left;">
           <%=cm.cmsPhrase("Reference")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
     </thead>

@@ -305,9 +305,8 @@
                 ckShowURL = Utilities.checkedStringToBoolean( request.getParameter( "showURL" ), true );
               }
             %>
-                            <input title="<%=cm.cms("scientific_name")%>" id="checkbox1" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" />
+                            <input title="<%=cm.cmsPhrase("Scientific name")%>" id="checkbox1" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" />
                               <label for="checkbox1"><%=cm.cmsPhrase("Scientific name")%></label>
-                              <%=cm.cmsTitle("scientific_name")%>
                             <input title="<%=cm.cmsPhrase("Group")%>" id="checkbox2" type="checkbox" name="showGroup" value="true" <%=ckShowGroup ? "checked=\"checked\"" : ""%> />
                               <label for="checkbox2"><%=cm.cmsPhrase("Group")%></label>
                             <input title="<%=cm.cms("legal_text")%>" id="checkbox3" type="checkbox" name="showLegalText" value="true" <%=ckShowLegalText ? "checked=\"checked\"" : ""%> />
@@ -478,9 +477,8 @@
                           </tr>
                           <tr>
                             <td>
-                              <input title="<%=cm.cms("scientific_name")%>" id="checkbox11" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" />
+                              <input title="<%=cm.cmsPhrase("Scientific name")%>" id="checkbox11" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" />
                                 <label for="checkbox11"><%=cm.cmsPhrase("Scientific name")%></label>
-                                <%=cm.cmsTitle("scientific_name")%>
                               <input title="<%=cm.cmsPhrase("Group")%>" id="checkbox12" type="checkbox" name="showGroup" value="true" checked="checked" />
                                 <label for="checkbox12"><%=cm.cmsPhrase("Group")%></label>
                               <input title="<%=cm.cms("legal_text")%>" id="checkbox13" type="checkbox" name="showLegalText" value="true" checked="checked" />
@@ -544,7 +542,7 @@
                               <label for ="scientificName"><%=cm.cmsPhrase("Scientific name")%></label>
                           </td>
                           <td style="vertical-align:bottom" colspan="3">
-                            <input id="scientificName" alt="<%=cm.cms("scientific_name")%>" size="43" name="scientificName" title="<%=cm.cms("scientific_name")%>" value="<%=(request.getParameter("scientificName") == null ? "" : request.getParameter("scientificName"))%>" /><%=cm.cmsTitle("scientific_name")%>&nbsp;
+                            <input id="scientificName" alt="<%=cm.cmsPhrase("Scientific name")%>" size="43" name="scientificName" title="<%=cm.cmsPhrase("Scientific name")%>" value="<%=(request.getParameter("scientificName") == null ? "" : request.getParameter("scientificName"))%>" />&nbsp;
                             <a title="<%=cm.cms("list_values_link")%>" href="javascript:openHelper('species-legal-choice.jsp')"><img alt="<%=cm.cms("species_legal_13")%>" style="vertical-align:middle" height="18" title="<%=cm.cms("species_legal_13")%>" src="images/helper/helper.gif" width="11" border="0" /></a>
                             <%=cm.cmsTitle("list_values_link")%>
                             <%=cm.cmsAlt("species_legal_13")%>
@@ -572,9 +570,7 @@
                         %>
                         <tr>
                           <td style="text-align:right" colspan="5">
-                            <input id="Reset" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="standardButton" title="<%=cm.cms("reset")%>" />
-                            <%=cm.cmsTitle("reset")%>
-                            <%=cm.cmsInput("reset")%>
+                            <input id="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" name="Reset" class="standardButton" title="<%=cm.cmsPhrase("Reset")%>" />
                             <input id="Search" type="submit" value="<%=cm.cmsPhrase("Search")%>" name="submit2" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
                           </td>
                         </tr>

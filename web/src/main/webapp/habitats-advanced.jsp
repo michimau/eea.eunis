@@ -297,9 +297,8 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     </li>
                     <li>
                       <a href="habitats-help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cms( "header_help_title" )%>"
-                             title="<%=cm.cms( "header_help_title" )%>" /></a>
-            				<%=cm.cmsTitle( "header_help_title" )%>
+                             alt="<%=cm.cmsPhrase("Help information")%>"
+                             title="<%=cm.cmsPhrase("Help information")%>" /></a>
                     </li>
                   </ul>
                 </div>
@@ -597,7 +596,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       if (val.equalsIgnoreCase("SourceDatabase")) { selected = " selected=\"selected\""; } else { selected = ""; }
                       out.println("<option" + selected + " value=\"SourceDatabase\">" + cm.cms("source_database") + "</option>");
                       if (val.equalsIgnoreCase("Country")) { selected = " selected=\"selected\""; } else { selected = ""; }
-                      out.println("<option" + selected + " value=\"Country\">" + cm.cms("country") + "</option>");
+                      out.println("<option" + selected + " value=\"Country\">" + cm.cmsPhrase("Country") + "</option>");
                       if (val.equalsIgnoreCase("Biogeoregion")) { selected = " selected=\"selected\""; } else { selected = ""; }
                       out.println("<option" + selected + " value=\"Biogeoregion\">" + cm.cms("biogeographic_region") + "</option>");
                       if (val.equalsIgnoreCase("Author")) { selected = " selected=\"selected\""; } else { selected = ""; }
@@ -641,7 +640,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     <%=cm.cmsInput("code_eunis_annex")%>
                     <%=cm.cmsInput("legal_instruments")%>
                     <%=cm.cmsInput("source_database")%>
-                    <%=cm.cmsInput("country")%>
                     <%=cm.cmsInput("biogeographic_region")%>
                     <%=cm.cmsInput("reference_author")%>
                     <%=cm.cmsInput("reference_title")%>
@@ -731,13 +729,11 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                   }
                 %>
                     <br />
-                    <input type="button" class="saveButton" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save")%>" />
-                    <%=cm.cmsTitle("save")%>
+                    <input type="button" class="saveButton" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cmsPhrase("Save")%>" />
                     &nbsp;&nbsp;&nbsp;
                     <input type="submit" class="submitSearchButton" value="Search" id="Search" name="Search" title="<%=cm.cmsPhrase("Search")%>" />
                     &nbsp;&nbsp;&nbsp;
-                    <input type="button" class="standardButton" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cms("reset")%>" />
-                    <%=cm.cmsTitle("reset")%>
+                    <input type="button" class="standardButton" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cmsPhrase("Reset")%>" />
                     <%
                 } else {
                     %>

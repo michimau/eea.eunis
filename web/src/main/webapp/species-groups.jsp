@@ -130,8 +130,7 @@
                             <input title="<%=cm.cms("family")%>" id="checkbox3" type="checkbox" name="showFamily" value="true" checked="checked" />
                               <%=cm.cmsTitle("family")%>
                               <label for ="checkbox3"><%=cm.cmsPhrase("Family")%></label>
-                            <input title="<%=cm.cms("scientific_name")%>" id="checkbox4" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" />
-                              <%=cm.cmsTitle("scientific_name")%>
+                            <input title="<%=cm.cmsPhrase("Scientific name")%>" id="checkbox4" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" />
                               <label for ="checkbox4"><%=cm.cmsPhrase("Scientific name")%></label>
                               <input title="<%=cm.cms("vernacular_name")%>" id="checkbox5" type="checkbox" name="showVernacularNames" value="true" />
                               <%=cm.cmsTitle("vernacular_name")%>
@@ -222,9 +221,7 @@
                         <tr>
                           <td colspan="5" style="text-align:right">
                             <br />
-                            <input id="Reset" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="standardButton" title="<%=cm.cms("reset")%>" />
-                            <%=cm.cmsTitle("reset")%>
-                            <%=cm.cmsInput("reset")%>
+                            <input id="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" name="Reset" class="standardButton" title="<%=cm.cmsPhrase("Reset")%>" />
                             <input id="Search" type="submit" value="<%=cm.cmsPhrase("Search")%>" name="submit" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
                           </td>
                         </tr>

@@ -208,9 +208,8 @@
                     </li>
                     <li>
                       <a href="habitats-help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cms( "header_help_title" )%>"
-                             title="<%=cm.cms( "header_help_title" )%>" /></a>
-            				<%=cm.cmsTitle( "header_help_title" )%>
+                             alt="<%=cm.cmsPhrase("Help information")%>"
+                             title="<%=cm.cmsPhrase("Help information")%>" /></a>
                     </li>
                   </ul>
                 </div>
@@ -273,7 +272,7 @@
                     %>
                     <img title="<%=cm.cms("included_field")%>" alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" style="vertical-align:middle" /><%=cm.cmsTitle("included_field")%>&nbsp;
                     <label for="h_0country"><%=cm.cmsPhrase("Country")%></label>
-                    <input type="text" name="_0country" id="h_0country" value="<%=country0%>" onblur="return false;" title="<%=cm.cms("country")%>" />&nbsp;
+                    <input type="text" name="_0country" id="h_0country" value="<%=country0%>" onblur="return false;" title="<%=cm.cmsPhrase("Country")%>" />&nbsp;
                     <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:openHelper('habitats-country-choice.jsp?field=_0country&amp;whichclicked=0')">
                       <img alt="<%=cm.cmsPhrase("List of values")%>" src="images/helper/helper.gif" width="11" height="18" border="0" style="vertical-align:middle" /></a>
                     <label for="h_0region"><%=cm.cmsPhrase("AND/OR Biogeographic region")%></label>
@@ -299,7 +298,7 @@
                     %>
                     <img alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" style="vertical-align:middle" /><%=cm.cmsTitle("included_field")%>&nbsp;
                     <label for="h_<%=i + 1%>country"><%=cm.cmsPhrase("Country")%></label>
-                    <input type="text" name="_<%=i + 1%>country" id="h_<%=i + 1%>country" value="<%=country%>" onfocus="blur()" title="<%=cm.cms("country")%>" />&nbsp;&nbsp;&nbsp;
+                    <input type="text" name="_<%=i + 1%>country" id="h_<%=i + 1%>country" value="<%=country%>" onfocus="blur()" title="<%=cm.cmsPhrase("Country")%>" />&nbsp;&nbsp;&nbsp;
                     <label for="h_<%=i + 1%>region"><%=cm.cmsPhrase("AND Biogeographic region")%></label>
                     <input type="text" name="_<%=i + 1%>region" id="h_<%=i + 1%>region" value="<%=region%>" onfocus="blur()" title="<%=cm.cms("habitats_country_14")%>" />&nbsp;&nbsp;&nbsp;
                     <input title="<%=cm.cms("delete_criteria")%>" type="submit" id="h<%=i + 1%>Remove" name="<%=i + 1%>Remove" value="<%=cm.cms("delete_criteria")%>"
@@ -341,12 +340,10 @@
                 </tr>
                 <tr>
                   <td width="22%" align="right" colspan="2">
-                    <input type="reset" value="<%=cm.cms("reset")%>" name="Reset" id="Reset"
+                    <input type="reset" value="<%=cm.cmsPhrase("Reset")%>" name="Reset" id="Reset"
                            onclick="document.eunis.operation.value='search'"
                            onkeypress="document.eunis.operation.value='search'"
-                           class="standardButton" title="<%=cm.cms("reset")%>" />
-                    <%=cm.cmsTitle("reset")%>
-                    <%=cm.cmsInput("reset")%>
+                           class="standardButton" title="<%=cm.cmsPhrase("Reset")%>" />
                     <input type="submit" name="Search" id="Search" value="<%=cm.cmsPhrase("Search")%>"
                            onclick="document.eunis.operation.value='reset'"
                            onkeypress="document.eunis.operation.value='reset'"

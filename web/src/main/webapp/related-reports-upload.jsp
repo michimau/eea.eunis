@@ -65,17 +65,14 @@
     <%=cm.cmsInput("related_reports_upload_description_value")%>
   </p>
   <p>
-    <input title="<%=cm.cms("reset_values")%>" type="reset" name="Reset" id="Reset" value="<%=cm.cms("reset")%>" class="standardButton" />
+    <input title="<%=cm.cms("reset_values")%>" type="reset" name="Reset" id="Reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" />
     <%=cm.cmsTitle("reset_values")%>
-    <%=cm.cmsInput("reset")%>
 
     <input title="<%=cm.cms("upload_document")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("upload")%>" class="submitSearchButton" />
     <%=cm.cmsTitle("upload_document")%>
     <%=cm.cmsInput("upload")%>
 
-    <input type="button" onclick="javascript:window.close();" value="<%=cm.cms("close_window")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="standardButton" />
-    <%=cm.cmsTitle("close_window")%>
-    <%=cm.cmsInput("close_window")%>
+    <input type="button" onclick="javascript:window.close();" value="<%=cm.cmsPhrase("Close window")%>" title="<%=cm.cmsPhrase("Close window")%>" id="button2" name="button" class="standardButton" />
   </p>
 </form>
 <%
@@ -105,9 +102,7 @@ else
   <%=cm.cmsPhrase("You must be logged in and have the proper rights in order to access this page")%>.
   <br />
   <form action="">
-    <input type="button" onclick="javascript:window.close();" value="<%=cm.cms("close_window")%>" title="<%=cm.cms("close_window")%>" id="button1" name="button" class="standardButton" />
-    <%=cm.cmsTitle("close_window")%>
-    <%=cm.cmsInput("close_window")%>
+    <input type="button" onclick="javascript:window.close();" value="<%=cm.cmsPhrase("Close window")%>" title="<%=cm.cmsPhrase("Close window")%>" id="button1" name="button" class="standardButton" />
   </form>
 <%
   }

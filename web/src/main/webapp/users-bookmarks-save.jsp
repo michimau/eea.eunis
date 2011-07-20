@@ -73,15 +73,9 @@
       <textarea title="<%=cm.cms("description")%>" name="description" id="description" rows="6" cols="60"></textarea>
       <%=cm.cmsTitle("description")%>
       <br />      
-      <input title="<%=cm.cms("save")%>" id="input1" type="submit" name="Save" value="<%=cm.cms("save")%>" class="saveButton" />
-      <%=cm.cmsTitle("save")%>
-      <%=cm.cmsInput("save")%>
-      <input title="<%=cm.cms("reset")%>" id="input2" type="reset" name="Reset" value="<%=cm.cms("reset")%>" class="standardButton" />
-      <%=cm.cmsTitle("reset")%>
-      <%=cm.cmsInput("reset")%>
-      <input title="<%=cm.cms("close_window")%>" id="input3" type="button" name="Close" value="<%=cm.cms("close_btn")%>" class="standardButton" onClick="window.close();" />
-      <%=cm.cmsTitle("close_window")%>
-      <%=cm.cmsInput("close_btn")%>
+      <input title="<%=cm.cmsPhrase("Save")%>" id="input1" type="submit" name="Save" value="<%=cm.cmsPhrase("Save")%>" class="saveButton" />
+      <input title="<%=cm.cmsPhrase("Reset")%>" id="input2" type="reset" name="Reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" />
+      <input title="<%=cm.cmsPhrase("Close window")%>" id="input3" type="button" name="Close" value="<%=cm.cmsPhrase("Close")%>" class="standardButton" onClick="window.close();" />
     </form>
 <%
   if ( action.equalsIgnoreCase( "saveBookmark" ) )

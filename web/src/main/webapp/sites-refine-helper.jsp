@@ -50,44 +50,37 @@
     <table summary="<%=cm.cmsPhrase("List of values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
       <tr>
         <td bgcolor="#EEEEEE">
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('CDDA National')"><%=cm.cmsPhrase("CDDA National")%></a>
-          <%=cm.cmsTitle("click_link_to_select_value")%>
+          <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('CDDA National')"><%=cm.cmsPhrase("CDDA National")%></a>
         </td>
       </tr>
       <tr>
         <td>
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('CDDA International')"><%=cm.cmsPhrase("CDDA International")%></a>
-          <%=cm.cmsTitle("click_link_to_select_value")%>
+          <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('CDDA International')"><%=cm.cmsPhrase("CDDA International")%></a>
         </td>
       </tr>
       <tr>
         <td bgcolor="#EEEEEE">
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Corine biotopes')"><%=cm.cmsPhrase("Corine Biotopes")%></a>
-          <%=cm.cmsTitle("click_link_to_select_value")%>
+          <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('Corine biotopes')"><%=cm.cmsPhrase("Corine Biotopes")%></a>
         </td>
       </tr>
       <tr>
         <td>
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Biogenetic reserve')"><%=cm.cmsPhrase("Biogenetic Reserve")%></a>
-          <%=cm.cmsTitle("click_link_to_select_value")%>
+          <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('Biogenetic reserve')"><%=cm.cmsPhrase("Biogenetic Reserve")%></a>
         </td>
       </tr>
       <tr>
         <td bgcolor="#EEEEEE">
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('European diploma')"><%=cm.cmsPhrase("European Diploma")%></a>
-          <%=cm.cmsTitle("click_link_to_select_value")%>
+          <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('European diploma')"><%=cm.cmsPhrase("European Diploma")%></a>
         </td>
       </tr>
       <tr>
         <td>
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Natura 2000')"><%=cm.cmsPhrase("Natura 2000")%></a>
-          <%=cm.cmsTitle("click_link_to_select_value")%>
+          <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('Natura 2000')"><%=cm.cmsPhrase("Natura 2000")%></a>
         </td>
       </tr>
       <tr>
         <td>
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('Emerald')"><%=cm.cmsPhrase("Emerald")%></a>
-          <%=cm.cmsTitle("click_link_to_select_value")%>
+          <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('Emerald')"><%=cm.cmsPhrase("Emerald")%></a>
         </td>
       </tr>
     </table>
@@ -110,8 +103,7 @@
 %>
       <tr>
         <td bgcolor="<%=color%>">
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(country.getAreaNameEnglish())%>')"><%=country.getAreaNameEnglish()%></a>
-          <%=cm.cmsTitle("click_link_to_select_value")%>
+          <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(country.getAreaNameEnglish())%>')"><%=country.getAreaNameEnglish()%></a>
         </td>
       </tr>
 <%
@@ -137,8 +129,7 @@
 %>
       <tr>
         <td bgcolor="<%=color%>">
-          <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(country.getAreaNameEnglish())%>')"><%=country.getAreaNameEnglish()%></a>
-          <%=cm.cmsTitle("click_link_to_select_value")%>
+          <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.treatURLSpecialCharacters(country.getAreaNameEnglish())%>')"><%=country.getAreaNameEnglish()%></a>
         </td>
       </tr>
 <%
@@ -150,9 +141,7 @@
 %>
     <br />
     <form action="">
-      <input type="button" onClick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" title="<%=cm.cms("close_window")%>" id="button2" name="button" class="standardButton" />
-      <%=cm.cmsTitle("close_window")%>
-      <%=cm.cmsInput("close_btn")%>
+      <input type="button" onClick="javascript:window.close();" value="<%=cm.cmsPhrase("Close")%>" title="<%=cm.cmsPhrase("Close window")%>" id="button2" name="button" class="standardButton" />
     </form>
   </body>
 </html>

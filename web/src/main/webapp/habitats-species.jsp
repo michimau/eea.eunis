@@ -210,9 +210,7 @@
                         </tr>
                         <tr>
                           <td width="40%" align="right">
-                            <input title="<%=cm.cms("reset")%>" type="reset" value="<%=cm.cms("reset")%>" name="Reset" id="Reset" class="standardButton" />
-                            <%=cm.cmsTitle("reset")%>
-                            <%=cm.cmsInput("reset")%>
+                            <input title="<%=cm.cmsPhrase("Reset")%>" type="reset" value="<%=cm.cmsPhrase("Reset")%>" name="Reset" id="Reset" class="standardButton" />
                             <input title="<%=cm.cmsPhrase("Search")%>" type="submit" value="<%=cm.cmsPhrase("Search")%>" name="submit2" id="submit2" class="submitSearchButton" />
                           </td>
                         </tr>

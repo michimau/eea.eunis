@@ -41,21 +41,17 @@
   <table summary="<%=cm.cms("sites_factsheet_designations_national")%>" class="listing fullwidth">
     <thead>
       <tr>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-align: left;">
+        <th title="<%=cm.cmsPhrase("Sort results on this column")%>" style="text-align: left;">
           <%=cm.cmsPhrase("Designation code")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-align: left;">
+        <th title="<%=cm.cmsPhrase("Sort results on this column")%>" style="text-align: left;">
           <%=cm.cmsPhrase("Designation name")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
-        <th title="<%=cm.cms("sort_results_on_this_column")%>" style="text-align: left;">
-          <%=cm.cmsPhrase("category")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
+        <th title="<%=cm.cmsPhrase("Sort results on this column")%>" style="text-align: left;">
+          <%=cm.cmsPhrase("Category")%>
         </th>
-        <th style="text-align : right;" title="<%=cm.cms("sort_results_on_this_column")%>">
+        <th style="text-align : right;" title="<%=cm.cmsPhrase("Sort results on this column")%>">
           <%=cm.cmsPhrase("Cover(%)")%>
-          <%=cm.cmsTitle("sort_results_on_this_column")%>
         </th>
       </tr>
     </thead>

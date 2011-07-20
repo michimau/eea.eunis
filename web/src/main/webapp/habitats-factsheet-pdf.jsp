@@ -173,8 +173,7 @@
     </p>
     <br />
     <br />
-    <input type="button" onclick="javascript:window.close();" value="<%=cm.cms("close_btn")%>" name="button" class="standardButton">
-    <%=cm.cmsInput("close_btn")%>
+    <input type="button" onclick="javascript:window.close();" value="<%=cm.cmsPhrase("Close")%>" name="button" class="standardButton">
 <%
   }
 %>

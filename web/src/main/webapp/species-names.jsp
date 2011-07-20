@@ -125,8 +125,7 @@
                                       <%=cm.cmsTitle("order_column")%>
                                     <input title="<%=cm.cms("family")%>" id="checkbox3" type="checkbox" name="showFamily" value="true" checked="checked" /><label for="checkbox3"><%=cm.cmsPhrase("Family")%></label>
                                       <%=cm.cmsTitle("family")%>
-                                    <input title="<%=cm.cms("scientific_name")%>" id="checkbox4" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" /><label for="checkbox4"><%=cm.cmsPhrase("Scientific name")%></label>
-                                      <%=cm.cmsTitle("scientific_name")%>
+                                    <input title="<%=cm.cmsPhrase("Scientific name")%>" id="checkbox4" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" /><label for="checkbox4"><%=cm.cmsPhrase("Scientific name")%></label>
                                     <input title="<%=cm.cms("valid_name")%>" id="checkbox6" type="checkbox" name="showValidName" value="true" checked="checked" /><label for="checkbox6"><%=cm.cmsPhrase("Valid name")%></label>
                                       <%=cm.cmsTitle("valid_name")%>
                                     <input title="<%=cm.cms("vernacular_name")%>" id="checkbox5" type="checkbox" name="showVernacularNames" value="true" checked="checked" /><label for="checkbox5"><%=cm.cmsPhrase("Vernacular Name")%></label>
@@ -143,8 +142,7 @@
                                 <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
                                 <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cmsPhrase("starts with")%></option>
                               </select>
-                              <input id="scientificName" alt="<%=cm.cms("scientific_name")%>" size="32" name="scientificName" value="" title="<%=cm.cms("species_scientific_name")%>" />
-                              <%=cm.cmsAlt("scientific_name")%>
+                              <input id="scientificName" alt="<%=cm.cmsPhrase("Scientific name")%>" size="32" name="scientificName" value="" title="<%=cm.cms("species_scientific_name")%>" />
                               <%=cm.cmsTitle("species_scientific_name")%>
                               <a title="<%=cm.cms("list_values_link")%>" href="javascript:openHelper1('document.eunis1.scientificName','ScientificName','Species','document.eunis1.relationOp');"><img alt="<%=cm.cmsPhrase("List of values")%>" style="vertical-align:middle" src="images/helper/helper.gif" border="0" /></a>
                               <%=cm.cmsTitle("list_values_link")%>
@@ -153,10 +151,8 @@
                               <%=cm.cmsTitle("search_synonyms")%>
                               <label for="searchSynonyms"><%=cm.cmsPhrase("Search in synonyms")%></label>
                               <div style="width : 100%; text-align: right;">
-                                <input id="Reset" type="reset" value="<%=cm.cms("reset")%>"
-                                  name="Reset" class="standardButton" title="<%=cm.cms("reset")%>" />
-                                <%=cm.cmsInput("reset")%>
-                                <%=cm.cmsTitle("reset")%>
+                                <input id="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>"
+                                  name="Reset" class="standardButton" title="<%=cm.cmsPhrase("Reset")%>" />
                                 <input id="Search" type="submit" value="<%=cm.cmsPhrase("Search" )%>"
                                   name="submit" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
                               </div>
@@ -225,8 +221,7 @@
                                         <%=cm.cmsTitle("order_column")%>
                                       <input title="<%=cm.cms("family")%>" id="checkbox13" type="checkbox" name="showFamily" value="true" checked="checked" /><label for="checkbox13"><%=cm.cmsPhrase("Family")%></label>
                                         <%=cm.cmsTitle("family")%>
-                                      <input title="<%=cm.cms("scientific_name")%>" id="checkbox14" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" /><label for="checkbox14"><%=cm.cmsPhrase("Scientific name")%></label>
-                                        <%=cm.cmsTitle("scientific_name")%>
+                                      <input title="<%=cm.cmsPhrase("Scientific name")%>" id="checkbox14" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" /><label for="checkbox14"><%=cm.cmsPhrase("Scientific name")%></label>
                                       <%--<input id="checkbox15" type="checkbox" name="showKingdom" value="true" checked="checked" /><label for="checkbox15"><%=cm.cmsPhrase("Kingdom")%></label>--%>
                                       <input title="<%=cm.cms("valid_name")%>" id="checkbox17" type="checkbox" name="showValidName" value="true" checked="checked" /><label for="checkbox17"><%=cm.cmsPhrase("Valid name")%></label>
                                         <%=cm.cmsTitle("valid_name")%>
@@ -279,9 +274,7 @@
                                 <%=cm.cmsTitle("language")%>
                                 <br />
                                 <div style="width: 100%; text-align:right">
-                                  <input id="Reset1" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="standardButton" title="<%=cm.cms("reset")%>" />
-                                  <%=cm.cmsInput("reset")%>
-                                  <%=cm.cmsTitle("reset")%>
+                                  <input id="Reset1" type="reset" value="<%=cm.cmsPhrase("Reset")%>" name="Reset" class="standardButton" title="<%=cm.cmsPhrase("Reset")%>" />
                                   <input id="Search1" type="submit" value="<%=cm.cmsPhrase("Search")%>" name="submit" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
                                 </div>
                               </td>

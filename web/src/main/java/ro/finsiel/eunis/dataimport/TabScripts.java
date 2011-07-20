@@ -73,6 +73,14 @@ public class TabScripts {
 
             EunisUtil.writeLogMessage("GENERAL tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
 
+            // Update GBIF tab
+            EunisUtil.writeLogMessage("GBIF tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
+            String gbifSql = "UPDATE chm62edt_tab_page_species SET GBIF = 'Y' WHERE ID_NATURE_OBJECT IN ( "
+                + "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE TYPE_RELATED_SPECIES IN ('Species','Subspecies','Synonym'))";
+            ps = con.prepareStatement(gbifSql);
+            ps.executeUpdate();
+            EunisUtil.writeLogMessage("GBIF tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
+
             // Update Geographical distribution tab
             String s = "CHM62EDT_REPORTS AS A, CHM62EDT_REPORT_TYPE AS B, DC_INDEX AS C "
                 + "WHERE A.ID_REPORT_TYPE=B.ID_REPORT_TYPE AND A.ID_DC = C.ID_DC AND (B.LOOKUP_TYPE IN ('SPECIES_STATUS')) AND "

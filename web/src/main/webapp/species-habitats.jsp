@@ -194,7 +194,6 @@
                         <%=cm.cmsAlt("scientific_name")%>
                         <%=cm.cmsTitle("habitat_type_name")%>
                         <a title="<%=cm.cms("list_values_link")%>" href="javascript:openHelper('species-habitats-choice.jsp')"><img alt="<%=cm.cms("species_habitats_17")%>" height="18" title="<%=cm.cms("species_habitats_17")%>" src="images/helper/helper.gif" width="11" border="0" /></a>
-                          <%=cm.cmsTitle("list_of_values")%>
                           <%=cm.cmsAlt("species_habitats_17")%>
                       </td>
                     </tr>
@@ -214,9 +213,7 @@
                         <input id="Reset" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="standardButton" title="<%=cm.cms("reset")%>" />
                         <%=cm.cmsTitle("reset")%>
                         <%=cm.cmsInput("reset")%>
-                        <input id="Search" type="submit" value="<%=cm.cms("search")%>" name="submit2" class="submitSearchButton" title="<%=cm.cms("search")%>" />
-                        <%=cm.cmsTitle("search")%>
-                        <%=cm.cmsInput("search")%>
+                        <input id="Search" type="submit" value="<%=cm.cmsPhrase("Search")%>" name="submit2" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
                       </td>
                     </tr>
                    </table>

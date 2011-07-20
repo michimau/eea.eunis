@@ -30,7 +30,7 @@
       Integer typeForm = Utilities.checkedStringToInt(formBean.getTypeForm(), NameSearchCriteria.CRITERIA_SCIENTIFIC);
     %>
     <title>
-      <%=cm.cms("list_of_values")%>
+      <%=cm.cmsPhrase("List of values")%>
     </title>
       <script language="JavaScript" src="script/header.js" type="text/javascript"></script> 
       <script language="JavaScript" type="text/javascript">
@@ -83,7 +83,7 @@
       <br />
       <br />
       <div id="tab">
-      <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+      <table summary="<%=cm.cmsPhrase("List of values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
     Iterator it = species.iterator();
     int i = 0;
@@ -132,10 +132,5 @@
       <%=cm.cmsTitle("close_window")%>
       <%=cm.cmsInput("close_btn")%>
     </form>
-  <%=cm.br()%>
-  <%=cm.cmsMsg("list_of_values")%>
-  <%=cm.br()%>
-  <%=cm.cmsMsg("list_of_values")%>
-  <%=cm.br()%>
   </body>
 </html>

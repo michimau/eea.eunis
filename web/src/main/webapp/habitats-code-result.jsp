@@ -245,11 +245,9 @@
                           <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cmsPhrase("starts with")%></option>
                           <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
                         </select>
-                        <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
-                        <input title="<%=cm.cms("filter_value")%>" name="criteriaSearch" id="criteriaSearch" type="text" size="30" />
-                        <%=cm.cmsLabel("filter_value")%>
-                        <input title="Search" class="submitSearchButton" type="submit" name="Submit" id="Submit" value="<%=cm.cms("search")%>" />
-                        <%=cm.cmsInput("search")%>
+                        <label for="criteriaSearch" class="noshow"><%=cm.cmsPhrase("Filter value")%></label>
+                        <input title="<%=cm.cmsPhrase("Filter value")%>" name="criteriaSearch" id="criteriaSearch" type="text" size="30" />
+                        <input title="Search" class="submitSearchButton" type="submit" name="Submit" id="Submit" value="<%=cm.cmsPhrase("Search")%>" />
                       </form>
                     </td>
                   </tr>
@@ -333,7 +331,7 @@
                   AbstractSortCriteria eunisCodeCrit = formBean.lookupSortCriteria(CodeSortCriteria.SORT_EUNIS_CODE);
                   AbstractSortCriteria annexCodeCrit = formBean.lookupSortCriteria(CodeSortCriteria.SORT_ANNEX_CODE);
                 %>
-                <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                   <thead>
                     <tr>
                   <%

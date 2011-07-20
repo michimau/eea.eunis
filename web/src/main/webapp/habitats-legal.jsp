@@ -155,8 +155,8 @@
                       <br />
                       <input title="<%=cm.cms("habitats_legal_11")%>" size="30" name="searchString" id="searchString" /><%=cm.cmsTitle("habitats_legal_11")%>
                       &nbsp;
-                      <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-legal-choice.jsp');">
-                        <img alt="<%=cm.cms("list_of_values")%>" height="18" src="images/helper/helper.gif" style="vertical-align:middle" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
+                      <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:openHelper('habitats-legal-choice.jsp');">
+                        <img alt="<%=cm.cmsPhrase("List of values")%>" height="18" src="images/helper/helper.gif" style="vertical-align:middle" width="11" border="0" /></a>
                     </td>
                     <td width="6%" align="right">
                       <br />
@@ -195,9 +195,7 @@
                       <input title="<%=cm.cms("reset")%>" type="reset" value="<%=cm.cms("reset")%>" name="Reset" id="Reset" class="standardButton" />
                       <%=cm.cmsTitle("reset")%>
                       <%=cm.cmsInput("reset")%>
-                      <input title="<%=cm.cms("search")%>" type="submit" value="<%=cm.cms("search")%>" id="submit" name="submit" class="submitSearchButton" />
-                      <%=cm.cmsTitle("search")%>
-                      <%=cm.cmsInput("search")%>
+                      <input title="<%=cm.cmsPhrase("Search")%>" type="submit" value="<%=cm.cmsPhrase("Search")%>" id="submit" name="submit" class="submitSearchButton" />
                     </td>
                   </tr>
                 </table>

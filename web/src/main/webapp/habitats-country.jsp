@@ -274,12 +274,12 @@
                     <img title="<%=cm.cms("included_field")%>" alt="<%=cm.cms("included_field")%>" src="images/mini/field_included.gif" style="vertical-align:middle" /><%=cm.cmsTitle("included_field")%>&nbsp;
                     <label for="h_0country"><%=cm.cmsPhrase("Country")%></label>
                     <input type="text" name="_0country" id="h_0country" value="<%=country0%>" onblur="return false;" title="<%=cm.cms("country")%>" />&nbsp;
-                    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-country-choice.jsp?field=_0country&amp;whichclicked=0')">
-                      <img alt="<%=cm.cms("list_of_values")%>" src="images/helper/helper.gif" width="11" height="18" border="0" style="vertical-align:middle" /></a><%=cm.cmsTitle("list_of_values")%>
+                    <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:openHelper('habitats-country-choice.jsp?field=_0country&amp;whichclicked=0')">
+                      <img alt="<%=cm.cmsPhrase("List of values")%>" src="images/helper/helper.gif" width="11" height="18" border="0" style="vertical-align:middle" /></a>
                     <label for="h_0region"><%=cm.cmsPhrase("AND/OR Biogeographic region")%></label>
                     <input type="text" name="_0region" id="h_0region" value="<%=region0%>" onblur="return false;" title="<%=cm.cms("habitats_country_12")%>" />&nbsp;
-                    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-country-choice.jsp?field=_0region&amp;whichclicked=1')">
-                      <img src="images/helper/helper.gif" alt="<%=cm.cms("list_of_values")%>" width="11" height="18" border="0" style="vertical-align:middle" /></a><%=cm.cmsTitle("list_of_values")%>
+                    <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:openHelper('habitats-country-choice.jsp?field=_0region&amp;whichclicked=1')">
+                      <img src="images/helper/helper.gif" alt="<%=cm.cmsPhrase("List of values")%>" width="11" height="18" border="0" style="vertical-align:middle" /></a>
                     <%/// These are the dynamic current inputs
                       if (requestParser.countItems() < 5) {
                     %>
@@ -347,12 +347,10 @@
                            class="standardButton" title="<%=cm.cms("reset")%>" />
                     <%=cm.cmsTitle("reset")%>
                     <%=cm.cmsInput("reset")%>
-                    <input type="submit" name="Search" id="Search" value="<%=cm.cms("search")%>"
+                    <input type="submit" name="Search" id="Search" value="<%=cm.cmsPhrase("Search")%>"
                            onclick="document.eunis.operation.value='reset'"
                            onkeypress="document.eunis.operation.value='reset'"
-                           class="submitSearchButton" title="<%=cm.cms("search")%>" />
-                    <%=cm.cmsTitle("search")%>
-                    <%=cm.cmsInput("search")%>
+                           class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
                   </td>
                 </tr>
                 <tr>

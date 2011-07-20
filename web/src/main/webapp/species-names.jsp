@@ -146,9 +146,8 @@
                               <input id="scientificName" alt="<%=cm.cms("scientific_name")%>" size="32" name="scientificName" value="" title="<%=cm.cms("species_scientific_name")%>" />
                               <%=cm.cmsAlt("scientific_name")%>
                               <%=cm.cmsTitle("species_scientific_name")%>
-                              <a title="<%=cm.cms("list_values_link")%>" href="javascript:openHelper1('document.eunis1.scientificName','ScientificName','Species','document.eunis1.relationOp');"><img alt="<%=cm.cms("list_of_values")%>" style="vertical-align:middle" src="images/helper/helper.gif" border="0" /></a>
+                              <a title="<%=cm.cms("list_values_link")%>" href="javascript:openHelper1('document.eunis1.scientificName','ScientificName','Species','document.eunis1.relationOp');"><img alt="<%=cm.cmsPhrase("List of values")%>" style="vertical-align:middle" src="images/helper/helper.gif" border="0" /></a>
                               <%=cm.cmsTitle("list_values_link")%>
-                              <%=cm.cmsAlt("list_of_values")%>
                               <br />
                               <input type="checkbox" title="<%=cm.cms("search_synonyms")%>" id="searchSynonyms" name="searchSynonyms" value="true" checked="checked" />
                               <%=cm.cmsTitle("search_synonyms")%>
@@ -158,10 +157,8 @@
                                   name="Reset" class="standardButton" title="<%=cm.cms("reset")%>" />
                                 <%=cm.cmsInput("reset")%>
                                 <%=cm.cmsTitle("reset")%>
-                                <input id="Search" type="submit" value="<%=cm.cms( "search" )%>"
-                                  name="submit" class="submitSearchButton" title="<%=cm.cms("search")%>" />
-                                  <%=cm.cmsTitle("search")%>
-                                  <%=cm.cmsInput("search")%>
+                                <input id="Search" type="submit" value="<%=cm.cmsPhrase("Search" )%>"
+                                  name="submit" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
                               </div>
                           </td>
                         </tr>
@@ -251,9 +248,8 @@
                                     title="<%=cm.cms("species_vernacular_name")%>" />
                                 <%=cm.cmsAlt("vernacular_name")%>
                                 <%=cm.cmsTitle("species_vernacular_name")%>
-                                <a title="<%=cm.cms("list_values_link")%>" href="javascript:openHelper2('species-names-choice.jsp')"><img alt="<%=cm.cms("list_of_values")%>" style="vertical-align:middle" src="images/helper/helper.gif" border="0" /></a>
+                                <a title="<%=cm.cms("list_values_link")%>" href="javascript:openHelper2('species-names-choice.jsp')"><img alt="<%=cm.cmsPhrase("List of values")%>" style="vertical-align:middle" src="images/helper/helper.gif" border="0" /></a>
                                 <%=cm.cmsTitle("list_values_link")%>
-                                <%=cm.cmsAlt("list_of_values")%>
                                 &nbsp;
                                 <strong>
                                 <%=cm.cmsPhrase("in")%>
@@ -286,10 +282,7 @@
                                   <input id="Reset1" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="standardButton" title="<%=cm.cms("reset")%>" />
                                   <%=cm.cmsInput("reset")%>
                                   <%=cm.cmsTitle("reset")%>
-                                  <input id="Search1" type="submit" value="<%=cm.cms("search")%>" name="submit" class="submitSearchButton" title="<%=cm.cms("search")%>" />
-                                  <%=cm.cmsLabel("search")%>
-                                  <%=cm.cmsInput("search")%>
-                                  <%=cm.cmsTitle("search")%>
+                                  <input id="Search1" type="submit" value="<%=cm.cmsPhrase("Search")%>" name="submit" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
                                 </div>
                               </td>
                             </tr>

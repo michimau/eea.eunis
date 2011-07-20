@@ -820,24 +820,22 @@
                     val = rs.getString("FIRST_VALUE");
                     currentValue = val;
                 %>
-                    <label for="First_Value<%=IdNode%>" class="noshow"><%=cm.cms("list_of_values")%></label>
-                    <input type="text" title="<%=cm.cms("list_of_values")%>" id="First_Value<%=IdNode%>"
+                    <label for="First_Value<%=IdNode%>" class="noshow"><%=cm.cmsPhrase("List of values")%></label>
+                    <input type="text" title="<%=cm.cmsPhrase("List of values")%>" id="First_Value<%=IdNode%>"
                            name="First_Value<%=IdNode%>" size="25" value="<%=val%>"
                            onblur="submitFirstValueForm(this,'<%=IdNode%>','<%=IdSession%>','<%=NatureObject%>');" onfocus="saveFirstValue(this)" onkeyup="textChanged(event)" />
-                    <%=cm.cmsTitle("list_of_values")%>
-                    <a title="<%=cm.cms("list_of_values")%>" href="javascript:choice('First_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="first_binocular" onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cms("list_of_values")%>" /></a>
+                    <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:choice('First_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="first_binocular" onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cmsPhrase("List of values")%>" /></a>
                 <%
                     if (rs.getString("OPERATOR").equalsIgnoreCase("Between")) {
                       out.println(cm.cmsPhrase("and"));
                       val = rs.getString("LAST_VALUE");
                       currentValue = val;
                 %>
-                    <label for="Last_Value<%=IdNode%>" class="noshow"><%=cm.cms("list_of_values")%></label>
-                    <input type="text" title="<%=cm.cms("list_of_values")%>" id="Last_Value<%=IdNode%>"
+                    <label for="Last_Value<%=IdNode%>" class="noshow"><%=cm.cmsPhrase("List of values")%></label>
+                    <input type="text" title="<%=cm.cmsPhrase("List of values")%>" id="Last_Value<%=IdNode%>"
                            name="Last_Value<%=IdNode%>" size="25" value="<%=val%>"
                            onblur="submitLastValueForm(this,'<%=IdNode%>','<%=IdSession%>','<%=NatureObject%>')" onfocus="saveLastValue(this)" onkeyup="textChanged(event)" />
-                    <%=cm.cmsTitle("list_of_values")%>
-                    <a title="<%=cm.cms("list_of_values")%>" href="javascript:choice('Last_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="last_binocular" onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cms("list_of_values")%>" /></a>
+                    <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:choice('Last_Value<%=IdNode%>','<%=currentAttribute%>','<%=NatureObject%>','<%=currentOperator%>')" name="last_binocular" onmouseover="setCurrentSelected(this.name)" onmouseout="setCurrentSelected('')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="<%=cm.cmsPhrase("List of values")%>" /></a>
                 <%
                     }
                 %>
@@ -855,8 +853,7 @@
                   <input type="button" class="saveButton" onclick="disableSaveButton()" disabled="disabled" value="Save" id="Save" name="Save" title="<%=cm.cms("save")%>" />
                   <%=cm.cmsTitle("save")%>
                   &nbsp;&nbsp;&nbsp;
-                  <input type="submit" class="submitSearchButton" value="Search" id="Search" name="Search" title="<%=cm.cms("search")%>" />
-                  <%=cm.cmsTitle("search")%>
+                  <input type="submit" class="submitSearchButton" value="Search" id="Search" name="Search" title="<%=cm.cmsPhrase("Search")%>" />
                   &nbsp;&nbsp;&nbsp;
                   <input type="button" class="standardButton" onclick="submitButtonForm('reset','0')" value="Reset" id="Reset" name="Reset" title="<%=cm.cms("reset")%>" />
                   <%=cm.cmsTitle("reset")%>

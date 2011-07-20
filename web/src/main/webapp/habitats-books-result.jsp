@@ -194,12 +194,9 @@
                           <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cmsPhrase("starts with")%></option>
                           <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
                         </select>
-                        <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
-                        <input title="<%=cm.cms("filter_value")%>" type="text" name="criteriaSearch" id="criteriaSearch" size="30" />
-                        <%=cm.cmsTitle("filter_value")%>
-                        <input title="<%=cm.cms("search")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("search")%>" class="submitSearchButton" />
-                        <%=cm.cmsTitle("search")%>
-                        <%=cm.cmsInput("search")%>
+                        <label for="criteriaSearch" class="noshow"><%=cm.cmsPhrase("Filter value")%></label>
+                        <input title="<%=cm.cmsPhrase("Filter value")%>" type="text" name="criteriaSearch" id="criteriaSearch" size="30" />
+                        <input title="<%=cm.cmsPhrase("Search")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cmsPhrase("Search")%>" class="submitSearchButton" />
                       </form>
                     </td>
                   </tr>
@@ -268,7 +265,7 @@
                   speciesURLFields.addElement("criteriaSearch");
                   String search = formBean.toURLParam(speciesURLFields);
                 %>
-                <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                   <thead>
                     <tr>
                       <th scope="col">
@@ -431,8 +428,6 @@
                 </tr>
                 </table>
                 <%=cm.cmsMsg("habitats_books-result_title")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("search_results")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("habitat_types")%>
                 <%=cm.br()%>

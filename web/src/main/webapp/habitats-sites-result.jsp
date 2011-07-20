@@ -270,12 +270,9 @@
                         <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cmsPhrase("starts with")%></option>
                         <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
                       </select>
-                      <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
-                      <input title="<%=cm.cms("filter_value")%>" name="criteriaSearch" id="criteriaSearch" type="text" size="30" />
-                      <%=cm.cmsTitle("filter_value")%>
-                      <input title="<%=cm.cms("search")%>" class="submitSearchButton" type="submit" name="Submit" id="Submit" value="<%=cm.cms("search")%>" />
-                      <%=cm.cmsTitle("search")%>
-                      <%=cm.cmsInput("search")%>
+                      <label for="criteriaSearch" class="noshow"><%=cm.cmsPhrase("Filter value")%></label>
+                      <input title="<%=cm.cmsPhrase("Filter value")%>" name="criteriaSearch" id="criteriaSearch" type="text" size="30" />
+                      <input title="<%=cm.cmsPhrase("Search")%>" class="submitSearchButton" type="submit" name="Submit" id="Submit" value="<%=cm.cmsPhrase("Search")%>" />
                     </form>
                   </td>
                 </tr>
@@ -350,7 +347,7 @@
                   AbstractSortCriteria sciNameCrit = formBean.lookupSortCriteria(SitesSortCriteria.SORT_SCIENTIFIC_NAME);
                   AbstractSortCriteria nameCrit = formBean.lookupSortCriteria(SitesSortCriteria.SORT_VERNACULAR_NAME);
                 %>
-                <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                   <thead>
                     <tr>
                   <%
@@ -685,8 +682,6 @@
                 </table>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("pick_sites_show_habitat_types")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("search_results")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("sites")%>
                 <%=cm.br()%>

@@ -244,14 +244,9 @@
                         </option>
                       </select>
 
-                      <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
-                      <input title="<%=cm.cms("filter_value")%>" id="criteriaSearch" name="criteriaSearch" type="text" size="30" />
-                      <%=cm.cmsLabel("filter_value")%>
-                      <%=cm.cmsTitle("filter_value")%>
-
-                      <input class="submitSearchButton" type="submit" id="submit" name="Submit" value="<%=cm.cms("search")%>" title="<%=cm.cms("search")%>" />
-                      <%=cm.cmsTitle("search")%>
-                      <%=cm.cmsInput("search")%>
+                      <label for="criteriaSearch" class="noshow"><%=cm.cmsPhrase("Filter value")%></label>
+                      <input title="<%=cm.cmsPhrase("Filter value")%>" id="criteriaSearch" name="criteriaSearch" type="text" size="30" />
+                      <input class="submitSearchButton" type="submit" id="submit" name="Submit" value="<%=cm.cmsPhrase("Search")%>" title="<%=cm.cmsPhrase("Search")%>" />
                     </form>
           <%
               ro.finsiel.eunis.search.AbstractSearchCriteria[] criterias = formBean.toSearchCriteria();
@@ -310,7 +305,7 @@
             AbstractSortCriteria sortEditor = formBean.lookupSortCriteria(ReferencesSortCriteria.SORT_EDITOR);
             AbstractSortCriteria sortPublisher = formBean.lookupSortCriteria(ReferencesSortCriteria.SORT_PUBLISHER);
           %>
-                <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                   <thead>
                     <tr>
           <%
@@ -620,7 +615,6 @@
 
                 <%=cm.cmsMsg("references_references-result_title")%>
                 <%=cm.br()%>
-                <%=cm.cmsMsg("search_results")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

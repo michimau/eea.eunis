@@ -25,7 +25,7 @@
       WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title>
-      <%=cm.cms("list_of_values")%>
+      <%=cm.cmsPhrase("List of values")%>
     </title>
     <%// Get form parameters here%>
     <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.sites.SitesBean" scope="request">
@@ -83,7 +83,7 @@
         <br />
         <br />
         <div id="tab">
-        <table summary="<%=cm.cms("list_of_values")%>" class="datatable">
+        <table summary="<%=cm.cmsPhrase("List of values")%>" class="datatable">
         <%
           String value = "";
           // Display results.
@@ -130,12 +130,5 @@
         <%=cm.cmsTitle("close_window")%>
         <%=cm.cmsInput("close_btn")%>
       </form>
-
-<%=cm.br()%>
-<%=cm.cmsMsg("list_of_values")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("list_of_values")%>
-<%=cm.br()%>
-
   </body>
 </html>

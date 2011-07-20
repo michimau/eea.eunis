@@ -24,7 +24,7 @@
     WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
-    <%=cm.cms("list_of_values")%>
+    <%=cm.cmsPhrase("List of values")%>
   </title>
   <script language="JavaScript" type="text/javascript">
   //<![CDATA[
@@ -106,8 +106,5 @@
   <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" id="button" class="standardButton" />
   <%=cm.cmsInput("close_btn")%>
 </form>
-<%=cm.cms("list_of_values")%>
-<%=cm.br()%>
-<%=cm.cmsTitle("list_of_values")%>
 </body>
 </html>

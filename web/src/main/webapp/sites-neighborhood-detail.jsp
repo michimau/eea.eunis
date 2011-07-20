@@ -239,7 +239,7 @@
                   AbstractSortCriteria sortLong = formBean.lookupSortCriteria(NeighborhoodDetailSortCriteria.SORT_LONG);
                 %>
                       <a name="dataTable"></a>
-                      <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                      <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                         <thead>
                           <tr>
                             <th scope="col" nowrap="nowrap">
@@ -350,8 +350,6 @@
                 %>
 
                       <%=cm.cmsMsg("sites_neighborhood-detail_title")%>
-                      <%=cm.br()%>
-                      <%=cm.cmsMsg("search_results")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

@@ -276,7 +276,7 @@
                   expand.addElement("pageSize");
                   expand.addElement("currentPage");
                   String expandURL = formBean.toURLParam(expand);%>
-                  <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                  <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                     <thead>
                       <tr>
                         <%
@@ -543,8 +543,6 @@
                 </tr>
                 </table>
                   <%=cm.cmsMsg("generic_combined-search-results-species_title")%>
-                  <%=cm.br()%>
-                  <%=cm.cmsMsg("search_results")%>
                   <%=cm.br()%>
                   <%=cm.cmsMsg("vernacular_names")%>
 <!-- END MAIN CONTENT -->

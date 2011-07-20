@@ -38,7 +38,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
-      <%=cm.cms("list_of_values")%>
+      <%=cm.cmsPhrase("List of values")%>
     </title>
     <script language="JavaScript" type="text/javascript">
       //<![CDATA[
@@ -78,7 +78,7 @@
     <br />
     <br />
     <div id="tab">
-      <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+      <table summary="<%=cm.cmsPhrase("List of values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
     for ( int i = 0; i < results.size(); i++ )
     {
@@ -120,6 +120,5 @@
       <%=cm.cmsTitle("close_window")%>
       <%=cm.cmsInput("close_btn")%>
     </form>
-    <%=cm.cmsMsg("list_of_values")%>
   </body>
 </html>

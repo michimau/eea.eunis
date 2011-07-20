@@ -89,12 +89,11 @@
                     <%=cm.cmsTitle("habitat_to_search_for")%>
                     <%=cm.cmsInput("enter_habitat_name_here")%>
                     <input type="submit"
-                           value="<%=cm.cms("search")%>"
+                           value="<%=cm.cmsPhrase("Search")%>"
                            name="Submit"
                            id="Submit"
                            class="submitSearchButton"
                            title="Search" />
-                    <%=cm.cmsInput("search")%>
                     <a href="fuzzy-search-help.jsp" title="<%=cm.cms("help_fuzzy_search")%>"><img alt="<%=cm.cms("help_fuzzy_search")%>" title="<%=cm.cms("help_fuzzy_search")%>" src="images/mini/help.jpg" border="0" style="vertical-align:middle" /></a>
                     <%=cm.cmsTitle("help_fuzzy_search")%>
                   </form>

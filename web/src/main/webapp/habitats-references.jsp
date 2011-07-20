@@ -192,11 +192,11 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                   <td>
                     <input title="<%=cm.cms("date")%>" size="5" name="date" id="date_normal" value="<%=date%>" /><%=cm.cmsTitle("date")%>
                     &nbsp;
-                    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','date',1,database,source)"><img alt="<%=cm.cms("list_of_values")%>" height="18" style="vertical-align:middle" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
+                    <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:openHelper('habitats-references-choice.jsp','date',1,database,source)"><img alt="<%=cm.cmsPhrase("List of values")%>" height="18" style="vertical-align:middle" src="images/helper/helper.gif" width="11" border="0" /></a>
                     <%=cm.cmsPhrase("and")%>
                     <input title="<%=cm.cms("date")%>" size="5" name="date1" id="date1" value="<%=date1%>" /><%=cm.cmsTitle("date")%>
                     &nbsp;
-                    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','date',2,database,source)"><img alt="<%=cm.cms("list_of_values")%>" height="18" style="vertical-align:middle" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
+                    <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:openHelper('habitats-references-choice.jsp','date',2,database,source)"><img alt="<%=cm.cmsPhrase("List of values")%>" height="18" style="vertical-align:middle" src="images/helper/helper.gif" width="11" border="0" /></a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                   <%
                   } else {
@@ -205,7 +205,7 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                     <label for="date_between" class="noshow"><%=cm.cms("year")%></label>
                     <input title="<%=cm.cms("year")%>" size="5" name="date" id="date_between" value="<%=date%>" />
                     <%=cm.cmsLabel("year")%>
-                    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','date',1,database,source)"><img height="18" style="vertical-align:middle" alt="<%=cm.cms("list_of_values")%>" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
+                    <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:openHelper('habitats-references-choice.jsp','date',1,database,source)"><img height="18" style="vertical-align:middle" alt="<%=cm.cmsPhrase("List of values")%>" src="images/helper/helper.gif" width="11" border="0" /></a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                   <%
                     }
@@ -232,7 +232,7 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                   </td>
                   <td>
                     <input title="<%=cm.cms("title")%>" size="32" name="title" id="title" value="<%=title%>" />
-                    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','title',0,database,source)"><img height="18" style="vertical-align:middle" alt="<%=cm.cms("list_of_values")%>" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
+                    <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:openHelper('habitats-references-choice.jsp','title',0,database,source)"><img height="18" style="vertical-align:middle" alt="<%=cm.cmsPhrase("List of values")%>" src="images/helper/helper.gif" width="11" border="0" /></a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                   </td>
                 </tr>
@@ -251,7 +251,7 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                   </td>
                   <td>
                     <input title="<%=cm.cms("editor")%>" size="32" name="editor" id="editor" value="<%=editor%>" />
-                    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','editor',0,database,source)"><img height="18" style="vertical-align:middle" alt="<%=cm.cms("list_of_values")%>" src="images/helper/helper.gif" width="11" border="0" /><%=cm.cmsTitle("list_of_values")%></a>
+                    <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:openHelper('habitats-references-choice.jsp','editor',0,database,source)"><img height="18" style="vertical-align:middle" alt="<%=cm.cmsPhrase("List of values")%>" src="images/helper/helper.gif" width="11" border="0" /></a>
                   </td>
                 </tr>
                 <tr>
@@ -270,7 +270,7 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                   </td>
                   <td>
                     <input title="<%=cm.cms("publisher")%>" size="32" name="publisher" id="publisher" value="<%=publisher%>" />
-                    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-references-choice.jsp','publisher',0,database,source)"><img height="18" style="vertical-align:middle" alt="<%=cm.cms("list_of_values")%>" src="images/helper/helper.gif" width="11" border="0" /></a><%=cm.cmsTitle("list_of_values")%>
+                    <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:openHelper('habitats-references-choice.jsp','publisher',0,database,source)"><img height="18" style="vertical-align:middle" alt="<%=cm.cmsPhrase("List of values")%>" src="images/helper/helper.gif" width="11" border="0" /></a>
                   </td>
                 </tr>
                 </table>
@@ -315,9 +315,7 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                     <input title="<%=cm.cms("reset")%>" alt="<%=cm.cms("reset")%>" type="reset" value="<%=cm.cms("reset")%>" name="Reset" id="Reset" class="standardButton" />
                     <%=cm.cmsTitle("reset")%>
                     <%=cm.cmsInput("reset")%>
-                    <input title="<%=cm.cms("search")%>" alt="<%=cm.cms("search")%>" type="submit" id="submit2" value="<%=cm.cms("search")%>" name="submit2" class="submitSearchButton" />
-                    <%=cm.cmsTitle("search")%>
-                    <%=cm.cmsInput("search")%>
+                    <input title="<%=cm.cmsPhrase("Search")%>" alt="<%=cm.cmsPhrase("Search")%>" type="submit" id="submit2" value="<%=cm.cmsPhrase("Search")%>" name="submit2" class="submitSearchButton" />
                   </td>
                 </tr>
                 </table>

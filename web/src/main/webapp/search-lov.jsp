@@ -36,7 +36,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
-      <%=cm.cms("list_of_values")%>
+      <%=cm.cmsPhrase("List of values")%>
     </title>
     <script language="JavaScript" type="text/javascript">
     //<![CDATA[
@@ -588,6 +588,5 @@
         <%=cm.cmsTitle("close_window")%>
         <%=cm.cmsInput("close_btn")%>
       </form>
-    <%=cm.cmsMsg("list_of_values")%>
   </body>
 </html>

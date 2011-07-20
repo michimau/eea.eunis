@@ -183,7 +183,7 @@
                   <label for="filter" class="noshow"><%=cm.cms("glossary_search_value")%></label>
                   <input title="<%=cm.cms("glossary_search_value")%>" type="text" name="filter" id="filter" value="<%=filter%>" size="30" />
                   <%=cm.cmsLabel("glossary_search_value")%>
-                  <input title="<%=cm.cms("search")%>" type="submit" name="search" id="search" value="<%=cm.cms( "generic_glossary-table_05")%>" class="submitSearchButton" />
+                  <input title="<%=cm.cmsPhrase("Search")%>" type="submit" name="search" id="search" value="<%=cm.cms( "generic_glossary-table_05")%>" class="submitSearchButton" />
                   <%=cm.cmsInput( "generic_glossary-table_05")%>
 <%
                   if (null != sort && !sort.equalsIgnoreCase(""))

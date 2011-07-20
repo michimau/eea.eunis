@@ -25,7 +25,7 @@
     WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
-    <%=cm.cms("list_of_values")%>
+    <%=cm.cmsPhrase("List of values")%>
   </title>
   <script language="JavaScript" type="text/javascript">
   //<![CDATA[
@@ -77,7 +77,7 @@
 <h2><%=cm.cmsPhrase("List of values")%></h2>
 
 <div id="tab">
-<table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+<table summary="<%=cm.cmsPhrase("List of values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
   // Search other classification
   if(idClassification != -1) {
@@ -305,11 +305,7 @@
   <input title="<%=cm.cms("close_window")%>" type="button" name="button" id="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" class="standardButton" />
   <%=cm.cmsInput("close_btn")%>
 </form>
-<%=cm.cmsMsg("list_of_values")%>
-<%=cm.br()%>
 <%=cm.cmsMsg("only_first_100_values")%>
-<%=cm.br()%>
-<%=cm.cmsTitle("list_of_values")%>
 <%=cm.br()%>
 </body>
 </html>

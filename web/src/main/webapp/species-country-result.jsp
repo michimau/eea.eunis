@@ -311,14 +311,10 @@
                               </option>
                             </select>
                             <label for="criteriaSearch" class="noshow">
-                              <%=cm.cms("filter_value")%>
+                              <%=cm.cmsPhrase("Filter value")%>
                             </label>
-                            <input id="criteriaSearch" title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" name="criteriaSearch" type="text" size="30" />
-                            <%=cm.cmsLabel("filter_value")%>
-                            <%=cm.cmsTitle("filter_value")%>
-                            <input id="search" title="<%=cm.cms("search")%>" class="submitSearchButton" type="submit" name="Submit" value="<%=cm.cms("search")%>" />
-                            <%=cm.cmsTitle("search")%>
-                            <%=cm.cmsInput("search")%>
+                            <input id="criteriaSearch" title="<%=cm.cmsPhrase("Filter value")%>" alt="<%=cm.cmsPhrase("Filter value")%>" name="criteriaSearch" type="text" size="30" />
+                            <input id="search" title="<%=cm.cmsPhrase("Search")%>" class="submitSearchButton" type="submit" name="Submit" value="<%=cm.cmsPhrase("Search")%>" />
                           </form>
                         </td>
                       </tr>
@@ -410,7 +406,7 @@
                       //AbstractSortCriteria familyCrit = formBean.lookupSortCriteria(CountrySortCriteria.SORT_FAMILY);
                       AbstractSortCriteria sciNameCrit = formBean.lookupSortCriteria(CountrySortCriteria.SORT_SCIENTIFIC_NAME);
                     %>
-                    <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                    <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                       <thead>
                         <tr>
                           <th scope="col">

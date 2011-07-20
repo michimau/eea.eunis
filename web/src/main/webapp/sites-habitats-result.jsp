@@ -216,14 +216,10 @@
                       <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
                     </select>
 
-                    <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
-                    <input id="criteriaSearch" name="criteriaSearch" type="text" size="30" title="<%=cm.cms("filter_value")%>" />
-                    <%=cm.cmsLabel("filter_value")%>
-                    <%=cm.cmsTitle("filter_value")%>
+                    <label for="criteriaSearch" class="noshow"><%=cm.cmsPhrase("Filter value")%></label>
+                    <input id="criteriaSearch" name="criteriaSearch" type="text" size="30" title="<%=cm.cmsPhrase("Filter value")%>" />
 
-                    <input id="submit" name="Submit" type="submit" value="<%=cm.cms("search")%>" class="submitSearchButton" title="<%=cm.cms("search")%>" />
-                    <%=cm.cmsTitle("search")%>
-                    <%=cm.cmsInput("search")%>
+                    <input id="submit" name="Submit" type="submit" value="<%=cm.cmsPhrase("Search")%>" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
                   </form>
             <%
               ro.finsiel.eunis.search.AbstractSearchCriteria[] criterias = formBean.toSearchCriteria();
@@ -283,7 +279,7 @@
               AbstractSortCriteria sortLong = formBean.lookupSortCriteria(HabitatSortCriteria.SORT_LONG);
             %>
                   <br />
-                  <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                  <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                     <thead>
                       <tr>
             <%
@@ -530,8 +526,6 @@
                   </jsp:include>
 
                   <%=cm.cmsMsg("sites_habitats-result_title")%>
-                  <%=cm.br()%>
-                  <%=cm.cmsMsg("search_results")%>
                   <%=cm.br()%>
                   <%=cm.cmsMsg("habitat_types")%>
 <!-- END MAIN CONTENT -->

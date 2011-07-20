@@ -323,11 +323,8 @@
                                 							<label for="criteriaSearch" class="noshow">
                                   								<%=cm.cmsPhrase("Criteria")%>
                                 							</label>
-                              								<input id="criteriaSearch" title="<%=cm.cms("filter_value")%>" name="criteriaSearch" type="text" size="30" />
-                              								<%=cm.cmsTitle("filter_value")%>
-                              								<input id="refine" title="<%=cm.cms("search")%>" class="submitSearchButton" type="submit" name="Submit" value="<%=cm.cms("search")%>" />
-                              								<%=cm.cmsTitle("search")%>
-                              								<%=cm.cmsInput("search")%>
+                              								<input id="criteriaSearch" title="<%=cm.cmsPhrase("Filter value")%>" name="criteriaSearch" type="text" size="30" />
+                              								<input id="refine" title="<%=cm.cmsPhrase("Search")%>" class="submitSearchButton" type="submit" name="Submit" value="<%=cm.cmsPhrase("Search")%>" />
                             							</form>
                           							</td>
                         						</tr>
@@ -420,7 +417,7 @@
                       						<%
                         					}
                       						%>
-                      						<table summary="<%=cm.cms("search_results")%>" cellpadding="0" cellspacing="0" width="100%" class="sortable">
+                      						<table summary="<%=cm.cmsPhrase("Search results")%>" cellpadding="0" cellspacing="0" width="100%" class="sortable">
                         						<thead>
                         							<tr>
             								<%
@@ -919,8 +916,6 @@
             					<%=cm.br()%>
             					<%=cm.cmsMsg("scientific_name")%>
             					<%=cm.br()%>
-					            <%=cm.cmsMsg("search_results")%>
-					            <%=cm.br()%>
 							<!-- END MAIN CONTENT -->
               				</div>
             			</div>

@@ -249,10 +249,8 @@
                           <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cmsPhrase("starts with")%></option>
                         </select>
 
-                        <label for="scientificName" class="noshow"><%=cm.cms("filter_value")%></label>
-                        <input title="<%=cm.cms("filter_value")%>" size="32" id="scientificName" name="scientificName" value="" />
-                        <%=cm.cmsLabel("filter_value")%>
-                        <%=cm.cmsTitle("filter_value")%>
+                        <label for="scientificName" class="noshow"><%=cm.cmsPhrase("Filter value")%></label>
+                        <input title="<%=cm.cmsPhrase("Filter value")%>" size="32" id="scientificName" name="scientificName" value="" />
                         <a title="<%=cm.cms("list_values_link")%>" href="javascript:openHelper('species-sites-choice.jsp')"><img alt="<%=cm.cms("list_values_link")%>" height="18" src="images/helper/helper.gif" width="11" border="0" title="<%=cm.cms("list_values_link")%>" /></a>
                         <%=cm.cmsTitle("list_values_link")%>
                   </fieldset>
@@ -287,9 +285,7 @@
                         <input id="Reset" type="reset" value="<%=cm.cms("reset")%>" name="Reset" class="standardButton" title="<%=cm.cms("reset")%>" />
                         <%=cm.cmsTitle("reset")%>
                         <%=cm.cmsInput("reset")%>
-                        <input id="Search" type="submit" value="<%=cm.cms("search")%>" name="submit2" class="submitSearchButton" title="<%=cm.cms("search")%>" />
-                        <%=cm.cmsTitle("search")%>
-                        <%=cm.cmsInput("search")%>
+                        <input id="Search" type="submit" value="<%=cm.cmsPhrase("Search")%>" name="submit2" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
                       </div>
                 </form>
 

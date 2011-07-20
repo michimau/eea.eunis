@@ -23,7 +23,7 @@
       WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title>
-      <%=cm.cms("list_of_values")%>
+      <%=cm.cmsPhrase("List of values")%>
     </title>
     <%// use form bean here%>
     <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.legal.LegalBean" scope="page">
@@ -77,7 +77,7 @@
           <br />
           <br />
           <div id="tab">
-          <table summary="<%=cm.cms("list_of_values")%>" class="datatable">
+          <table summary="<%=cm.cmsPhrase("List of values")%>" class="datatable">
           <%
             if (typeForm == LegalSearchCriteria.CRITERIA_SPECIES.intValue())
             {
@@ -119,12 +119,5 @@
       <%=cm.cmsTitle("close_window")%>
       <%=cm.cmsInput("close_btn")%>
     </form>
-
-<%=cm.br()%>
-<%=cm.cmsMsg("list_of_values")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("list_of_values")%>
-<%=cm.br()%>
-
   </body>
 </html>

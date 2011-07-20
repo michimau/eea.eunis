@@ -242,13 +242,9 @@
                                   <%=cm.cmsPhrase("contains")%>
                               </option>
                             </select>
-                            <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
-                            <input id="criteriaSearch" title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" name="criteriaSearch" type="text" size="30" />
-                            <%=cm.cmsLabel("filter_value")%>
-                            <%=cm.cmsTitle("filter_value")%>
-                            <input id="refine" title="<%=cm.cms("search")%>" class="submitSearchButton" type="submit" name="Submit" value="<%=cm.cms("search")%>" />
-                            <%=cm.cmsTitle("search")%>
-                            <%=cm.cmsInput("search")%>
+                            <label for="criteriaSearch" class="noshow"><%=cm.cmsPhrase("Filter value")%></label>
+                            <input id="criteriaSearch" title="<%=cm.cmsPhrase("Filter value")%>" alt="<%=cm.cmsPhrase("Filter value")%>" name="criteriaSearch" type="text" size="30" />
+                            <input id="refine" title="<%=cm.cmsPhrase("Search")%>" class="submitSearchButton" type="submit" name="Submit" value="<%=cm.cmsPhrase("Search")%>" />
                           </form>
                         </td>
                       </tr>
@@ -325,7 +321,7 @@
                     <%
                       }
                     %>
-                  <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                  <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                     <%
                       // Compute the sort criteria
                       Vector sortURLFields = new Vector();      /* Used for sorting */
@@ -542,8 +538,6 @@
                 <%=cm.cmsMsg("species_references-result_title")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("species_scientific_name")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("search_results")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("list_vernacular")%>
                 <%=cm.br()%>

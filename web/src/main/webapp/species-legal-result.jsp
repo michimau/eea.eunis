@@ -334,14 +334,10 @@
                             </select>
                             <input type="hidden" name="typeForm" value="<%=LegalSearchCriteria.CRITERIA_SPECIES%>" />
                               <label for="criteriaSearch" class="noshow">
-                                <%=cm.cms("filter_value")%>
+                                <%=cm.cmsPhrase("Filter value")%>
                               </label>
-                            <input id="criteriaSearch" title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" name="criteriaSearch" type="text" size="30" />
-                            <%=cm.cmsLabel("filter_value")%>
-                            <%=cm.cmsTitle("filter_value")%>
-                            <input title="<%=cm.cms("search")%>" id="refine" class="submitSearchButton" type="submit" name="Submit" value="<%=cm.cms("search")%>" />
-                            <%=cm.cmsTitle("search")%>
-                            <%=cm.cmsInput("search")%>
+                            <input id="criteriaSearch" title="<%=cm.cmsPhrase("Filter value")%>" alt="<%=cm.cmsPhrase("Filter value")%>" name="criteriaSearch" type="text" size="30" />
+                            <input title="<%=cm.cmsPhrase("Search")%>" id="refine" class="submitSearchButton" type="submit" name="Submit" value="<%=cm.cmsPhrase("Search")%>" />
                           </form>
                         </td>
                       </tr>
@@ -409,7 +405,7 @@
                       String urlSortString = formBean.toURLParam(sortURLFields);
                       AbstractSortCriteria sciNameCrit = formBean.lookupSortCriteria(LegalSortCriteria.SORT_SCIENTIFIC_NAME);
                     %>
-                  <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                  <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                     <thead>
                       <tr>
             <%
@@ -714,8 +710,6 @@
             <%=cm.cmsMsg("species_legal-result_title")%>
             <%=cm.br()%>
             <%=cm.cmsMsg("scientific_name")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("search_results")%>
             <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>

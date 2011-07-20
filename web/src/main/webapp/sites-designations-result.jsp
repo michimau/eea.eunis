@@ -244,18 +244,12 @@
                       </option>
                     </select>
 
-                    <label for="criteriaSearch0" class="noshow"><%=cm.cms("filter_value")%></label>
-                    <input id="criteriaSearch0" name="criteriaSearch" type="text" size="30" title="<%=cm.cms("filter_value")%>" />
-                    <%=cm.cmsLabel("filter_value")%>
-                    <%=cm.cmsTitle("filter_value")%>
+                    <label for="criteriaSearch0" class="noshow"><%=cm.cmsPhrase("Filter value")%></label>
+                    <input id="criteriaSearch0" name="criteriaSearch" type="text" size="30" title="<%=cm.cmsPhrase("Filter value")%>" />
 
-                    <a title="<%=cm.cms("list_of_values")%>" href="javascript:openRefineHint()" name="binocular" id="binocular"><img src="images/helper/helper.gif" alt="<%=cm.cms("list_of_values")%>" border="0" width="11" height="18" style="vertical-align:middle" /></a>
-                    <%=cm.cmsTitle("list_of_values")%>
-                    <%=cm.cmsAlt("list_of_values")%>
+                    <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:openRefineHint()" name="binocular" id="binocular"><img src="images/helper/helper.gif" alt="<%=cm.cmsPhrase("List of values")%>" border="0" width="11" height="18" style="vertical-align:middle" /></a>
 
-                    <input id="submit" name="Submit" type="submit" value="<%=cm.cms("search")%>" class="submitSearchButton" title="<%=cm.cms("search")%>" />
-                    <%=cm.cmsTitle("search")%>
-                    <%=cm.cmsInput("search")%>
+                    <input id="submit" name="Submit" type="submit" value="<%=cm.cmsPhrase("Search")%>" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
                   </form>
           <%
             ro.finsiel.eunis.search.AbstractSearchCriteria[] criterias = formBean.toSearchCriteria();
@@ -313,7 +307,7 @@
             AbstractSortCriteria sortDesignEn = formBean.lookupSortCriteria(DesignationsSortCriteria.SORT_DESIGNATION_EN);
             AbstractSortCriteria sortCountry = formBean.lookupSortCriteria(DesignationsSortCriteria.SORT_COUNTRY);
           %>
-                <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                   <thead>
                     <tr>
           <%
@@ -514,7 +508,6 @@
 
                 <%=cm.cmsMsg("sites_designations-result_title")%>
                 <%=cm.br()%>
-                <%=cm.cmsMsg("search_results")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

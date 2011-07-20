@@ -210,15 +210,11 @@
                                 </select>
                                 <%=cm.cmsTitle("species_books-result_17_Title")%>
                                 <label for="criteriaSearch" class="noshow">
-                                 <%=cm.cms("filter_value")%>
+                                 <%=cm.cmsPhrase("Filter value")%>
                                 </label>
-                                <input id="criteriaSearch" title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" name="criteriaSearch" type="text" size="30" />
-                                <%=cm.cmsLabel("filter_value")%>
-                                <%=cm.cmsTitle("filter_value")%>
-                                <input id="button1" class="standardButton" type="submit" name="Submit" title="<%=cm.cms("search")%>"
-                                       value="<%=cm.cms("search")%>" />
-                                <%=cm.cmsTitle("search")%>
-                                <%=cm.cmsInput("search")%>
+                                <input id="criteriaSearch" title="<%=cm.cmsPhrase("Filter value")%>" alt="<%=cm.cmsPhrase("Filter value")%>" name="criteriaSearch" type="text" size="30" />
+                                <input id="button1" class="standardButton" type="submit" name="Submit" title="<%=cm.cmsPhrase("Search")%>"
+                                       value="<%=cm.cmsPhrase("Search")%>" />
                             </form>
                         </td>
                     </tr>
@@ -284,7 +280,7 @@
                     speciesURLFields.addElement("criteriaSearch");
                     String search = formBean.toURLParam(speciesURLFields);
                 %>
-                <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                   <thead>
                     <tr>
                       <th scope="col">

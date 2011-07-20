@@ -223,7 +223,7 @@
             expand.addElement("pageSize");
             expand.addElement("currentPage");
           %>
-                <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                   <thead>
                     <tr>
           <%
@@ -741,7 +741,6 @@
                   <jsp:param name="toFORMParam" value="<%=formBean.toFORMParam(navigatorFormFields)%>"/>
                 </jsp:include>
                 <%=cm.cmsMsg("sites_advanced_results")%>
-                <%=cm.cmsMsg("search_results")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

@@ -190,10 +190,9 @@ function validateForm()
                                 <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cmsPhrase("is")%></option>
                                 <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cmsPhrase("starts with")%></option>
                               </select>
-                              <label for="scientificName" class="noshow"><%=cm.cms("filter_value")%></label>
-                              <input title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" size="30" name="scientificName" id="scientificName" />
-                              <%=cm.cmsTitle("filter_value")%>
-                              <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-sites-choice.jsp')"><img title="<%=cm.cms("list_of_values")%>" border="0" alt="List of values" src="images/helper/helper.gif" width="11" height="18" /></a><%=cm.cmsTitle("list_of_values")%>
+                              <label for="scientificName" class="noshow"><%=cm.cmsPhrase("Filter value")%></label>
+                              <input title="<%=cm.cmsPhrase("Filter value")%>" alt="<%=cm.cmsPhrase("Filter value")%>" size="30" name="scientificName" id="scientificName" />
+                              <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:openHelper('habitats-sites-choice.jsp')"><img title="<%=cm.cmsPhrase("List of values")%>" border="0" alt="List of values" src="images/helper/helper.gif" width="11" height="18" /></a>
                   </fieldset>
 
                   <fieldset class="large">
@@ -220,9 +219,7 @@ function validateForm()
                             <input title="<%=cm.cms("reset")%>" alt="<%=cm.cms("reset")%>" type="reset" value="<%=cm.cms("reset")%>" name="Reset" id="Reset" class="standardButton" />
                             <%=cm.cmsTitle("reset")%>
                             <%=cm.cmsInput("reset")%>
-                            <input title="<%=cm.cms("search")%>" alt="<%=cm.cms("search")%>" type="submit" value="<%=cm.cms("search")%>" name="submit2" id="submit2" class="submitSearchButton" />
-                            <%=cm.cmsTitle("search")%>
-                            <%=cm.cmsInput("search")%>
+                            <input title="<%=cm.cmsPhrase("Search")%>" alt="<%=cm.cmsPhrase("Search")%>" type="submit" value="<%=cm.cmsPhrase("Search")%>" name="submit2" id="submit2" class="submitSearchButton" />
                 </div>
                 <%
                   // Save search criteria

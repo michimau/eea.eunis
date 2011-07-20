@@ -29,7 +29,7 @@
   WebContentManagement cm = SessionManager.getWebContent();
 %>
     <title>
-      <%=cm.cms("list_of_values")%>
+      <%=cm.cmsPhrase("List of values")%>
     </title>
     <script language="JavaScript" type="text/javascript">
       //<![CDATA[
@@ -47,7 +47,7 @@
   {
 %>
       <%=cm.cmsPhrase("Possible values for source data sets are:")%>
-    <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+    <table summary="<%=cm.cmsPhrase("List of values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
       <tr>
         <td bgcolor="#EEEEEE">
           <a title="<%=cm.cms("click_link_to_select_value")%>" href="javascript:setLine('CDDA National')"><%=cm.cmsPhrase("CDDA National")%></a>
@@ -101,7 +101,7 @@
     Iterator regionsIt = list.iterator();
 %>
     <%=cm.cmsPhrase("Possible values for country are:")%>
-    <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+    <table summary="<%=cm.cmsPhrase("List of values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
     while ( regionsIt.hasNext() )
     {
@@ -128,7 +128,7 @@
     Iterator regionsIt = list.iterator();
 %>
       <%=cm.cmsPhrase("Possible values for country are:")%>
-    <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+    <table summary="<%=cm.cmsPhrase("List of values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
 <%
     while (regionsIt.hasNext())
     {
@@ -154,6 +154,5 @@
       <%=cm.cmsTitle("close_window")%>
       <%=cm.cmsInput("close_btn")%>
     </form>
-    <%=cm.cmsMsg("list_of_values")%>
   </body>
 </html>

@@ -21,7 +21,7 @@
     WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
-    <%=cm.cms("list_of_values")%>
+    <%=cm.cmsPhrase("List of values")%>
   </title>
   <%// Get form parameters here%>
   <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.sites.SitesBean" scope="request">
@@ -76,7 +76,7 @@
 <br />
 
 <div id="tab">
-  <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+  <table summary="<%=cm.cmsPhrase("List of values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
     <%
       // Display results.
       String rowBgColor = "";
@@ -113,8 +113,5 @@
     <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" id="button" name="button" class="standardButton" />
     <%=cm.cmsInput("close_btn")%>
   </form>
-<%=cm.cms("list_of_values")%>
-<%=cm.br()%>
-<%=cm.cmsTitle("list_of_values")%>
 </body>
 </html>

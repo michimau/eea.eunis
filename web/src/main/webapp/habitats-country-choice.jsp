@@ -24,7 +24,7 @@
     WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
-    <%=cm.cms("list_of_values")%>
+    <%=cm.cmsPhrase("List of values")%>
   </title>
     <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.country.CountryBean" scope="request">
       <jsp:setProperty name="formBean" property="*" />
@@ -111,7 +111,7 @@ function setCountry(val) {
 <br />
 
 <div id="tab">
-  <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+  <table summary="<%=cm.cmsPhrase("List of values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
     <%
         int i = 0;
         for(int j=0;j<results.size();j++)
@@ -146,10 +146,6 @@ function setCountry(val) {
   <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" id="button" class="standardButton" />
 </form>
 <%=cm.cmsInput("close_btn")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("list_of_values")%>
-<%=cm.br()%>
-<%=cm.cmsTitle("list_of_values")%>
 <%=cm.br()%>
 </body>
 </html>

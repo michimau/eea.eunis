@@ -22,7 +22,7 @@
     WebContentManagement cm = SessionManager.getWebContent();
   %>
   <title>
-    <%=cm.cms("list_of_values")%>
+    <%=cm.cmsPhrase("List of values")%>
   </title>
   <script language="JavaScript" type="text/javascript">
   //<![CDATA[
@@ -66,7 +66,7 @@
   if(results != null && results.size() > 0) {
 %>
 <div id="tab">
-  <table summary="<%=cm.cms("list_of_values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
+  <table summary="<%=cm.cmsPhrase("List of values")%>" border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">
     <tr>
       <th>
         <%=cm.cmsPhrase("Search results")%>
@@ -102,9 +102,5 @@
   <input title="<%=cm.cms("close_window")%>" type="button" value="<%=cm.cms("close_btn")%>" onclick="javascript:window.close()" name="button" id="button" class="standardButton" />
   <%=cm.cmsInput("close_btn")%>
 </form>
-<%=cm.cmsMsg("list_of_values")%>
-<%=cm.br()%>
-<%=cm.cmsMsg("list_of_values")%>
-<%=cm.br()%>
 </body>
 </html>

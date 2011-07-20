@@ -185,10 +185,9 @@
                                 <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cmsPhrase("is")%></option>
                                 <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cmsPhrase("starts with")%></option>
                               </select>
-                              <label for="scientificName" class="noshow"><%=cm.cms("filter_value")%></label>
-                              <input size="30" alt="<%=cm.cms("filter_value")%>" title="<%=cm.cms("filter_value")%>" id="scientificName" name="scientificName" />
-                              <%=cm.cmsTitle("filter_value")%>
-                              <a title="<%=cm.cms("list_of_values")%>" href="javascript:openHelper('habitats-species-choice.jsp')"><img alt="<%=cm.cms("list_of_values")%>" style="vertical-align:middle" border="0" src="images/helper/helper.gif" width="11" height="18" /></a><%=cm.cmsTitle("list_of_values")%>
+                              <label for="scientificName" class="noshow"><%=cm.cmsPhrase("Filter value")%></label>
+                              <input size="30" alt="<%=cm.cmsPhrase("Filter value")%>" title="<%=cm.cmsPhrase("Filter value")%>" id="scientificName" name="scientificName" />
+                              <a title="<%=cm.cmsPhrase("List of values")%>" href="javascript:openHelper('habitats-species-choice.jsp')"><img alt="<%=cm.cmsPhrase("List of values")%>" style="vertical-align:middle" border="0" src="images/helper/helper.gif" width="11" height="18" /></a>
                               <br />
                             </div>
                           </td>
@@ -214,9 +213,7 @@
                             <input title="<%=cm.cms("reset")%>" type="reset" value="<%=cm.cms("reset")%>" name="Reset" id="Reset" class="standardButton" />
                             <%=cm.cmsTitle("reset")%>
                             <%=cm.cmsInput("reset")%>
-                            <input title="<%=cm.cms("search")%>" type="submit" value="<%=cm.cms("search")%>" name="submit2" id="submit2" class="submitSearchButton" />
-                            <%=cm.cmsTitle("search")%>
-                            <%=cm.cmsInput("search")%>
+                            <input title="<%=cm.cmsPhrase("Search")%>" type="submit" value="<%=cm.cmsPhrase("Search")%>" name="submit2" id="submit2" class="submitSearchButton" />
                           </td>
                         </tr>
                     </table>

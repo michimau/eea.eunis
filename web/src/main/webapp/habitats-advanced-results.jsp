@@ -194,7 +194,7 @@
                   expand.addElement("pageSize");
                   expand.addElement("currentPage");
                   String expandURL = formBean.toURLParam(expand);%>
-                <table class="sortable" width="100%" summary="<%=cm.cms("search_results")%>">
+                <table class="sortable" width="100%" summary="<%=cm.cmsPhrase("Search results")%>">
                   <thead>
                     <tr>
                       <%

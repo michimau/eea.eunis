@@ -136,9 +136,7 @@
                     <%=cm.cmsTitle("reset_values")%>
                     <%=cm.cmsInput("reset")%>
 
-                    <input id="submit2" name="submit2" type="submit" class="submitSearchButton" value="<%=cm.cms("search")%>" title="<%=cm.cms("search")%>" />
-                    <%=cm.cmsTitle("search")%>
-                    <%=cm.cmsInput("search")%>
+                    <input id="submit2" name="submit2" type="submit" class="submitSearchButton" value="<%=cm.cmsPhrase("Search")%>" title="<%=cm.cmsPhrase("Search")%>" />
                   </div>
                   <jsp:include page="sites-search-common.jsp" />
                 </form>

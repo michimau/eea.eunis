@@ -192,14 +192,10 @@ function openHelper(URL)
                       <label for="searchString">
                       <%=cm.cmsPhrase("Code")%></label>
                       <select title="Operator" name="relationOp" id="relationOp">
-                        <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
-                        <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
-                        <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("starts_with")%></option>
+                        <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cmsPhrase("is")%></option>
+                        <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
+                        <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cmsPhrase("starts with")%></option>
                       </select>
-                      <%=cm.cmsLabel("operator")%>
-                      <%=cm.cmsInput("is")%>
-                      <%=cm.cmsInput("contains")%>
-                      <%=cm.cmsInput("starts_with")%>
                       <label for="searchString" class="noshow"><%=cm.cms("filter_value")%></label>
                       <input type="text" title="<%=cm.cms("filter_value")%>" size="20" name="searchString" id="searchString" value="" />
                       <%=cm.cmsLabel("filter_value")%>

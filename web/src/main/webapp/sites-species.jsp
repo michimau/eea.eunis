@@ -165,8 +165,8 @@
                   </div>
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_mandatory")%>
-                  <label for="searchAttribute" class="noshow"><%=cm.cms("criteria")%></label>
-                  <select id="searchAttribute" name="searchAttribute" title="<%=cm.cms("criteria")%>">
+                  <label for="searchAttribute" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
+                  <select id="searchAttribute" name="searchAttribute" title="<%=cm.cmsPhrase("Criteria")%>">
                     <option value="<%=SpeciesSearchCriteria.SEARCH_SCIENTIFIC_NAME%>" selected="selected">
                       <%=cm.cms("species_scientific_name")%>
                     </option>
@@ -186,8 +186,6 @@
                       <%=cm.cms("biogeographic_region_name")%>
                     </option>
                   </select>
-                  <%=cm.cmsTitle("criteria")%>
-                  <%=cm.cmsLabel("criteria")%>
                   <%=cm.cmsInput("species_scientific_name")%>
                   <%=cm.cmsInput("species_group")%>
                   <%=cm.cmsInput("species_vernacular_name")%>
@@ -195,22 +193,17 @@
                   <%=cm.cmsInput("country_name")%>
                   <%=cm.cmsInput("biogeographic_region_name")%>
                   &nbsp;
-                  <select id="relationOp" name="relationOp" title="<%=cm.cms("operator")%>">
+                  <select id="relationOp" name="relationOp" title="<%=cm.cmsPhrase("Operator")%>">
                     <option value="<%=Utilities.OPERATOR_IS%>">
-                      <%=cm.cms("is")%>
+                      <%=cm.cmsPhrase("is")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                      <%=cm.cms("contains")%>
+                      <%=cm.cmsPhrase("contains")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected">
-                      <%=cm.cms("starts_with")%>
+                      <%=cm.cmsPhrase("starts with")%>
                     </option>
                   </select>
-                  <%=cm.cmsLabel("operator")%>
-                  <%=cm.cmsTitle("operator")%>
-                  <%=cm.cmsInput("is")%>
-                  <%=cm.cmsInput("contains")%>
-                  <%=cm.cmsInput("starts_with")%>
                   <label for="searchString" class="noshow"><%=cm.cms("search_string")%></label>
                   <input id="searchString" name="searchString" value="" size="32" title="<%=cm.cms("search_string")%>" />
                   <%=cm.cmsLabel("search_string")%>

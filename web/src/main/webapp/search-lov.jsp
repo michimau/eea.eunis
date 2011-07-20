@@ -371,14 +371,14 @@
         SQL+=" ORDER BY SCIENTIFIC_NAME";
         SQL+=" LIMIT 0,100";
       }
-      if( oper.equalsIgnoreCase( cm.cms("contains") ) )
+      if( oper.equalsIgnoreCase( cm.cmsPhrase("contains") ) )
       {
         SQL="SELECT DISTINCT SCIENTIFIC_NAME,ID_SPECIES FROM CHM62EDT_SPECIES";
         SQL+=" WHERE SCIENTIFIC_NAME LIKE '%"+val+"%'";
         SQL+=" ORDER BY SCIENTIFIC_NAME";
         SQL+=" LIMIT 0,100";
       }
-      if( oper.equalsIgnoreCase( cm.cms("starts_with") ) )
+      if( oper.equalsIgnoreCase( cm.cmsPhrase("starts with") ) )
       {
         SQL="SELECT DISTINCT SCIENTIFIC_NAME,ID_SPECIES FROM CHM62EDT_SPECIES";
         SQL+=" WHERE SCIENTIFIC_NAME LIKE '"+val+"%'";

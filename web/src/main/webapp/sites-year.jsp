@@ -174,9 +174,9 @@
                   <%=cm.cmsAlt("field_mandatory")%>
 
                   <label for="relationOp"><%=cm.cmsPhrase("Year")%></label>
-                  <select id="relationOp" name="relationOp" onchange="MM_jumpMenu('parent',this,0)" title="<%=cm.cms("operator")%>">
+                  <select id="relationOp" name="relationOp" onchange="MM_jumpMenu('parent',this,0)" title="<%=cm.cmsPhrase("Operator")%>">
                     <option value="sites-year.jsp?relationOp=<%=Utilities.OPERATOR_IS%>" <%if (relationOp == Utilities.OPERATOR_IS.intValue()) {%>selected="selected"<%}%>>
-                      <%=cm.cms("is")%>
+                      <%=cm.cmsPhrase("is")%>
                     </option>
                     <option value="sites-year.jsp?relationOp=<%=Utilities.OPERATOR_BETWEEN%>" <%if (relationOp == Utilities.OPERATOR_BETWEEN.intValue()) {%>selected="selected"<%}%>>
                       <%=cm.cms("between")%>
@@ -188,8 +188,6 @@
                       <%=cm.cms("sites_year_21")%>
                     </option>
                   </select>
-                  <%=cm.cmsLabel("operator")%>
-                  <%=cm.cmsInput("is")%>
                   <%=cm.cmsInput("between")%>
                   <%=cm.cmsInput("sites_year_20")%>
                   <%=cm.cmsInput("sites_year_21")%>

@@ -102,7 +102,7 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_included")%>" title="<%=cm.cms("field_included")%>" src="images/mini/field_included.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_included")%>
                   <label for="relOp"><%=cm.cmsPhrase("Mean Altitude(m)")%></label>
-                  <select id="relOp" name="relOp" onchange="MM_jumpMenuAlt('parent',this,0)" title="<%=cm.cms("operator")%>">
+                  <select id="relOp" name="relOp" onchange="MM_jumpMenuAlt('parent',this,0)" title="<%=cm.cmsPhrase("Operator")%>">
           <%
             String selected = "";
             String no = Utilities.formatString( request.getParameter( "no" ), "" );
@@ -112,7 +112,7 @@
             }
           %>
                     <option value="sites-altitude.jsp?between=no&amp;no=1&amp;between2=<%=request.getParameter("between2")%>&amp;no2=<%=request.getParameter("no2")%>&amp;between3=<%=request.getParameter("between3")%>&amp;no3=<%=request.getParameter("no3")%>" <%=selected%>>
-                      <%=cm.cms("is")%>
+                      <%=cm.cmsPhrase("is")%>
                     </option>
           <%
             selected = "";
@@ -145,9 +145,6 @@
                       <%=cm.cms("smaller_than")%>
                     </option>
                   </select>
-                  <%=cm.cmsLabel("operator")%>
-                  <%=cm.cmsTitle("operator")%>
-                  <%=cm.cmsInput("is")%>
                   <%=cm.cmsInput("between")%>
                   <%=cm.cmsInput("greater_than")%>
                   <%=cm.cmsInput("smaller_than")%>
@@ -200,9 +197,9 @@
             }
           %>
                   <label for="relOp2"><%=cm.cmsPhrase("Minimum Altitude(m)")%></label>
-                  <select id="relOp2" name="relOp2" onchange="MM_jumpMenuAlt('parent',this,0)" title="<%=cm.cms("operator")%>">
+                  <select id="relOp2" name="relOp2" onchange="MM_jumpMenuAlt('parent',this,0)" title="<%=cm.cmsPhrase("Operator")%>">
                     <option value="sites-altitude.jsp?between2=no&amp;no2=1&amp;between=<%=request.getParameter("between")%>&amp;no=<%=request.getParameter("no")%>&amp;between3=<%=request.getParameter("between3")%>&amp;no3=<%=request.getParameter("no3")%>" <%=selected%>>
-                      <%=cm.cms("is")%>
+                      <%=cm.cmsPhrase("is")%>
                     </option>
           <%
             selected = "";
@@ -235,9 +232,6 @@
                       <%=cm.cms("smaller_than")%>
                     </option>
                   </select>
-                  <%=cm.cmsLabel("operator")%>
-                  <%=cm.cmsTitle("operator")%>
-                  <%=cm.cmsInput("is")%>
                   <%=cm.cmsInput("between")%>
                   <%=cm.cmsInput("greater_than")%>
                   <%=cm.cmsInput("smaller_than")%>
@@ -290,9 +284,9 @@
             }
           %>
                   <label for="relOp3"><%=cm.cmsPhrase("Maximum Altitude(m)")%></label>
-                  <select id="relOp3" name="relOp3" onchange="MM_jumpMenuAlt('parent',this,0)" title="<%=cm.cms("operator")%>">
+                  <select id="relOp3" name="relOp3" onchange="MM_jumpMenuAlt('parent',this,0)" title="<%=cm.cmsPhrase("Operator")%>">
                     <option value="sites-altitude.jsp?between3=no&amp;no3=1&amp;between=<%=request.getParameter("between")%>&amp;no=<%=request.getParameter("no")%>&amp;between2=<%=request.getParameter("between2")%>&amp;no2=<%=request.getParameter("no2")%>" <%=selected%>>
-                      <%=cm.cms("is")%>
+                      <%=cm.cmsPhrase("is")%>
                     </option>
           <%
             selected = "";
@@ -325,9 +319,6 @@
                       <%=cm.cms("smaller_than")%>
                     </option>
                   </select>
-                  <%=cm.cmsLabel("operator")%>
-                  <%=cm.cmsTitle("operator")%>
-                  <%=cm.cmsInput("is")%>
                   <%=cm.cmsInput("between")%>
                   <%=cm.cmsInput("greater_than")%>
                   <%=cm.cmsInput("smaller_than")%>

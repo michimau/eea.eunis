@@ -130,15 +130,11 @@
                         <label for="searchString">
                           <%=cm.cmsPhrase("Name(Description)")%>
                         </label>
-                      <select title="<%=cm.cms("operator")%>" name="relationOp" id="relationOp">
-                        <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
-                        <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
-                        <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("starts_with")%></option>
+                      <select title="<%=cm.cmsPhrase("Operator")%>" name="relationOp" id="relationOp">
+                        <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
+                        <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cmsPhrase("is")%></option>
+                        <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cmsPhrase("starts with")%></option>
                       </select>
-                      <%=cm.cmsLabel("operator")%>
-                      <%=cm.cmsInput("contains")%>
-                      <%=cm.cmsInput("is")%>
-                      <%=cm.cmsInput("starts_with")%>
                       <label for="searchString" class="noshow"><%=cm.cms("filter_value")%></label>
                       <input type="text" size="30" name="searchString" id="searchString" title="<%=cm.cms("filter_value")%>" /><%=cm.cmsTitle("filter_value")%>&nbsp;
                       <a href="javascript:openHelper('habitats-names-choice.jsp')" title="<%=cm.cms("list_of_values")%>"><img alt="<%=cm.cms("list_of_values")%>" title="<%=cm.cms("list_of_values")%>" border="0" src="images/helper/helper.gif" width="11" height="18" style="vertical-align:middle" /></a><%=cm.cmsTitle("list_of_values")%>

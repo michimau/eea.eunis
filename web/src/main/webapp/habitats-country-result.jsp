@@ -201,7 +201,7 @@
                     <td bgcolor="#EEEEEE">
                       <form name="resultSearch" method="get" onsubmit="return(checkHabitats(<%=noCriteria%>));" action="habitats-country-result.jsp">
                         <%=formBean.toFORMParam(filterSearch)%>
-                        <label for="criteriaType" class="noshow"><%=cm.cms("criteria")%></label>
+                        <label for="criteriaType" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
                         <select title="Criteria" name="criteriaType" id="criteriaType">
                           <%
                             if (showCode && 0 == database.compareTo(CountryDomain.SEARCH_BOTH)) {
@@ -222,21 +222,16 @@
                           <%if (showVernacularName) {%>
                           <option value="<%=CountrySearchCriteria.CRITERIA_NAME%>"><%=cm.cms("habitat_type_english_name")%></option><%}%>
                         </select>
-                        <%=cm.cmsLabel("criteria")%>
                         <%=cm.cmsInput("eunis_code")%>
                         <%=cm.cmsInput("annex_code")%>
                         <%=cm.cmsInput("generic_index_07")%>
                         <%=cm.cmsInput("habitat_type_name")%>
                         <%=cm.cmsInput("habitat_type_english_name")%>
                         <select title="Operator" name="oper" id="oper">
-                          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("is")%></option>
-                          <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("starts_with")%></option>
-                          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
+                          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cmsPhrase("is")%></option>
+                          <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cmsPhrase("starts with")%></option>
+                          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
                         </select>
-                        <%=cm.cmsLabel("operator")%>
-                        <%=cm.cmsInput("is")%>
-                        <%=cm.cmsInput("starts_with")%>
-                        <%=cm.cmsInput("contains")%>
                         <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
                         <input title="<%=cm.cms("filter_value")%>" name="criteriaSearch" id="criteriaSearch" type="text" size="30" />
                         <%=cm.cmsLabel("filter_value")%>

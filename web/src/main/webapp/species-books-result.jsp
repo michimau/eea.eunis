@@ -179,8 +179,8 @@
                         <td style="background-color:#EEEEEE">
                             <form name="refineSearch" method="get" onsubmit="return(validateRefineForm(<%=noCriteria%>));" action="">
                                 <%=formBean.toFORMParam(filterSearch)%>
-                                <label for="select1" class="noshow"><%=cm.cms("criteria")%></label>
-                                <select id="select1" title="<%=cm.cms("criteria")%>" name="criteriaType">
+                                <label for="select1" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
+                                <select id="select1" title="<%=cm.cmsPhrase("Criteria")%>" name="criteriaType">
                                     <option value="<%=ReferencesSearchCriteria.CRITERIA_AUTHOR%>">
                                         <%=cm.cms("author")%>
                                     </option>
@@ -197,20 +197,17 @@
                                         <%=cm.cms("publisher")%>
                                     </option>
                                 </select>
-                                <%=cm.cmsLabel("criteria")%>
-                                <%=cm.cmsTitle("criteria")%>
                                 <select id="select2" title="<%=cm.cms("species_books-result_17_Title")%>" name="oper">
                                     <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                                        <%=cm.cms("is")%>
+                                        <%=cm.cmsPhrase("is")%>
                                     </option>
                                     <option value="<%=Utilities.OPERATOR_STARTS%>">
-                                        <%=cm.cms("starts_with")%>
+                                        <%=cm.cmsPhrase("starts with")%>
                                     </option>
                                     <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                                        <%=cm.cms("contains")%>
+                                        <%=cm.cmsPhrase("contains")%>
                                     </option>
                                 </select>
-                                <%=cm.cmsLabel("operator")%>
                                 <%=cm.cmsTitle("species_books-result_17_Title")%>
                                 <label for="criteriaSearch" class="noshow">
                                  <%=cm.cms("filter_value")%>
@@ -435,12 +432,6 @@
                 <%=cm.cmsMsg("editor")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("publisher")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("is")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("starts_with")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("contains")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("species_books-result_20_Sum")%>
                 <%=cm.br()%>

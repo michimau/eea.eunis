@@ -126,14 +126,10 @@
                             <img alt="Mandatory" src="images/mini/field_mandatory.gif" style="vertical-align:middle" />
                             <label for="scientificName"><strong><%=cm.cmsPhrase("Habitat type name")%></strong></label>
                             <select name="relationOp" id="relationOp" title="Operator">
-                              <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
-                              <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
-                              <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("starts_with")%></option>
+                              <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cmsPhrase("is")%></option>
+                              <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
+                              <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cmsPhrase("starts with")%></option>
                             </select>
-                            <%=cm.cmsLabel("operator")%>
-                            <%=cm.cmsInput("is")%>
-                            <%=cm.cmsInput("contains")%>
-                            <%=cm.cmsInput("starts_with")%>
                             <label for="scientificName" class="noshow"><%=cm.cms("list_of_values")%></label>
                             <input type="text" size="32" name="scientificName" id="scientificName" value="" title="Name" />
                             <%=cm.cmsLabel("list_of_values")%>

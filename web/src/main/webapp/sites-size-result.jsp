@@ -117,13 +117,13 @@
         var LENGTH = <%=SizeSearchCriteria.CRITERIA_LENGTH%>;
         removeElementsFromList(operList);
         var optIS = document.createElement("OPTION");
-        optIS.text = "<%=cm.cms("is")%>";
+        optIS.text = "<%=cm.cmsPhrase("is")%>";
         optIS.value = "<%=Utilities.OPERATOR_IS%>";
         var optSTART = document.createElement("OPTION");
         optSTART.text = "<%=cm.cms("starts")%>";
         optSTART.value = "<%=Utilities.OPERATOR_STARTS%>";
         var optCONTAIN = document.createElement("OPTION");
-        optCONTAIN.text = "<%=cm.cms("contains")%>";
+        optCONTAIN.text = "<%=cm.cmsPhrase("contains")%>";
         optCONTAIN.value = "<%=Utilities.OPERATOR_CONTAINS%>";
         var optGREAT = document.createElement("OPTION");
         optGREAT.text = "<%=cm.cms("greater")%>";
@@ -268,7 +268,7 @@
                         </strong>
                         <form title="refine search results" name="criteriaSearch" method="get" onsubmit="return(check(<%=noCriteria%>));" action="">
                           <%=formBean.toFORMParam(filterSearch)%>
-                          <label for="criteriaType0" class="noshow"><%=cm.cms("criteria")%></label>
+                          <label for="criteriaType0" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
                           <select id="criteriaType0" name="criteriaType" onchange="changeCriteria()" title="Criteria">
                 <%
                   if (showSourceDB)
@@ -311,7 +311,6 @@
                   }
                 %>
                           </select>
-                          <%=cm.cmsLabel("criteria")%>
                           <%=cm.cmsInput("database_source")%>
                           <%=cm.cmsInput("country")%>
                           <%=cm.cmsInput("site_name")%>
@@ -320,11 +319,9 @@
 
                           <select id="oper0" name="oper">
                             <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                              <%=cm.cms("is")%>
+                              <%=cm.cmsPhrase("is")%>
                             </option>
                           </select>
-                          <%=cm.cmsLabel("operator")%>
-                          <%=cm.cmsInput("is")%>
 
                           <label for="criteriaSearch0" class="noshow"><%=cm.cms("filter_value")%></label>
                           <input id="criteriaSearch0" name="criteriaSearch" type="text" size="30" title="<%=cm.cms("filter_value")%>" />
@@ -630,11 +627,7 @@
 
                       <%=cm.cmsMsg("sites_size-result_title")%>
                       <%=cm.br()%>
-                      <%=cm.cmsMsg("is")%>
-                      <%=cm.br()%>
                       <%=cm.cmsMsg("starts")%>
-                      <%=cm.br()%>
-                      <%=cm.cmsMsg("contains")%>
                       <%=cm.br()%>
                       <%=cm.cmsMsg("greater")%>
                       <%=cm.br()%>

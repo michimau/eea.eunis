@@ -310,8 +310,8 @@
                     <strong>
                       <%=formBean.toFORMParam(filterSearch)%>
                     </strong>
-                    <label for="criteriaType0" class="noshow"><%=cm.cms("criteria")%></label>
-                    <select id="criteriaType0" name="criteriaType" onchange="changeCriteria()" title="<%=cm.cms("criteria")%>">
+                    <label for="criteriaType0" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
+                    <select id="criteriaType0" name="criteriaType" onchange="changeCriteria()" title="<%=cm.cmsPhrase("Criteria")%>">
           <%
             if ( showSourceDB )
             {
@@ -347,19 +347,14 @@
             }
           %>
                     </select>
-                    <%=cm.cmsLabel("criteria")%>
-                    <%=cm.cmsTitle("criteria")%>
                     <%=cm.cmsInput("database_source")%>
                     <%=cm.cmsInput("country")%>
                     <%=cm.cmsInput("name")%>
                     <%=cm.cmsInput("size")%>
 
-                    <select id="oper0" name="oper" title="<%=cm.cms("operator")%>">
-                      <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("is")%></option>
+                    <select id="oper0" name="oper" title="<%=cm.cmsPhrase("Operator")%>">
+                      <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cmsPhrase("is")%></option>
                     </select>
-                    <%=cm.cmsLabel("operator")%>
-                    <%=cm.cmsTitle("operator")%>
-                    <%=cm.cmsInput("is")%>
 
                     <label for="criteriaSearch0" class="noshow"><%=cm.cms("filter_value")%></label>
                     <input id="criteriaSearch0" name="criteriaSearch" type="text" size="30" title="<%=cm.cms("filter_value")%>" />

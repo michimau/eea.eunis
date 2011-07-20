@@ -169,13 +169,13 @@
                             <label for="select1" class="noshow"><%=cm.cms("relation_type")%></label>
                             <select id="select1" title="<%=cm.cms("relation_type")%>" name="relationOp">
                               <option value="<%=Utilities.OPERATOR_IS%>">
-                                  <%=cm.cms("is")%>
+                                  <%=cm.cmsPhrase("is")%>
                               </option>
                               <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                                  <%=cm.cms("contains")%>
+                                  <%=cm.cmsPhrase("contains")%>
                               </option>
                               <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected">
-                                  <%=cm.cms("starts_with")%>
+                                  <%=cm.cmsPhrase("starts with")%>
                               </option>
                             </select>
                             <%=cm.cmsLabel("relation_type")%>
@@ -235,14 +235,6 @@
                   }
                 %>
                 </table>
-
-                <%=cm.br()%>
-                <%=cm.cmsMsg("is")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("contains")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("starts_with")%>
-                <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

@@ -184,21 +184,16 @@
                           <option value="<%=ReferencesSearchCriteria.CRITERIA_EDITOR%>"><%=cm.cms("editor")%></option>
                           <option value="<%=ReferencesSearchCriteria.CRITERIA_PUBLISHER%>"><%=cm.cms("publisher")%></option>
                         </select>
-                        <%=cm.cmsLabel("criteria")%>
                         <%=cm.cmsInput("author")%>
                         <%=cm.cmsInput("date")%>
                         <%=cm.cmsInput("title")%>
                         <%=cm.cmsInput("editor")%>
                         <%=cm.cmsInput("publisher")%>
-                        <select title="<%=cm.cms("operator")%>" name="oper" id="oper">
-                          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("is")%></option>
-                          <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("starts_with")%></option>
-                          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
+                        <select title="<%=cm.cmsPhrase("Operator")%>" name="oper" id="oper">
+                          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cmsPhrase("is")%></option>
+                          <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cmsPhrase("starts with")%></option>
+                          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
                         </select>
-                        <%=cm.cmsLabel("operator")%>
-                        <%=cm.cmsInput("is")%>
-                        <%=cm.cmsInput("starts_with")%>
-                        <%=cm.cmsInput("contains")%>
                         <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
                         <input title="<%=cm.cms("filter_value")%>" type="text" name="criteriaSearch" id="criteriaSearch" size="30" />
                         <%=cm.cmsTitle("filter_value")%>

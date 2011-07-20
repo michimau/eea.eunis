@@ -246,9 +246,8 @@
                         </tr>
                         <tr>
                           <td>
-                            <input title="<%=cm.cms("group")%>" id="checkbox2" type="checkbox" name="showGroup" value="true" <%=(showGroup ? "checked=\"checked\"" : "")%> />
+                            <input title="<%=cm.cmsPhrase("Group")%>" id="checkbox2" type="checkbox" name="showGroup" value="true" <%=(showGroup ? "checked=\"checked\"" : "")%> />
                               <label for="checkbox2"><%=cm.cmsPhrase("Group")%></label>
-                              <%=cm.cmsTitle("group")%>
                             <input title="<%=cm.cms("geographic_region")%>" id="checkbox5" type="checkbox" name="showGeo" value="true" <%=(showGeo ? "checked=\"checked\"" : "")%> />
                               <label for="checkbox5"><%=cm.cmsPhrase("Geographical region")%></label>
                               <%=cm.cmsTitle("geographic_region")%>

@@ -624,9 +624,9 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     <%
                   }
 
-                  String cmsCriteria = cm.cms("criteria");
+                  String cmsCriteria = cm.cmsPhrase("Criteria");
                   String cmsAttribute = cm.cms("advanced_attribute");
-                  String cmsOperator = cm.cms("operator");
+                  String cmsOperator = cm.cmsPhrase("Operator");
                   String cmsAll = cm.cms("all");
                   String cmsAny = cm.cms("any");
                   String cmsFollowingCriteria = cm.cms("of_following_criteria_are_met");
@@ -710,7 +710,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     if(val.equalsIgnoreCase("Equal")) { selected=" selected=\"selected\""; } else { selected=""; }
                     out.println("<option"+selected+" value=\"Equal\">"+cm.cms("equal")+"</option>");
                     if(val.equalsIgnoreCase("Contains")) { selected=" selected=\"selected\""; } else { selected=""; }
-                    out.println("<option"+selected+" value=\"Contains\">"+cm.cms("contains")+"</option>");
+                    out.println("<option"+selected+" value=\"Contains\">"+cm.cmsPhrase("Contains")+"</option>");
                     if(val.equalsIgnoreCase("Between")) { selected=" selected=\"selected\""; } else { selected=""; }
                     out.println("<option"+selected+" value=\"Between\">"+cm.cms("between")+"</option>");
                     if(val.equalsIgnoreCase("Regex")) { selected=" selected=\"selected\""; } else { selected=""; }
@@ -718,7 +718,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     out.println("</select>");
                     %>
                     <%=cm.cmsInput("equal")%>
-                    <%=cm.cmsInput("contains")%>
                     <%=cm.cmsInput("between")%>
                     <%
                     out.println("&nbsp;");
@@ -965,11 +964,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
             <%=cm.br()%>
             <%=cm.cmsMsg("error_composing_branch")%>
             <%=cm.br()%>
-            <%=cm.cmsMsg("criteria")%>
-            <%=cm.br()%>
             <%=cm.cmsMsg("advanced_attribute")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("operator")%>
             <%=cm.br()%>
             <%=cm.cmsMsg("all")%>
             <%=cm.br()%>

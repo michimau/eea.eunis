@@ -95,22 +95,17 @@
                   <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
                   <%=cm.cmsAlt("field_mandatory")%>
                   <label for="relationOp"><%=cm.cmsPhrase("Site name")%></label>&nbsp;
-                  <select id="relationOp" name="relationOp" title="<%=cm.cms("operator")%>">
+                  <select id="relationOp" name="relationOp" title="<%=cm.cmsPhrase("Operator")%>">
                     <option value="<%=Utilities.OPERATOR_IS%>">
-                      <%=cm.cms("is")%>
+                      <%=cm.cmsPhrase("is")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                      <%=cm.cms("contains")%>
+                      <%=cm.cmsPhrase("contains")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected">
-                      <%=cm.cms("starts_with")%>
+                      <%=cm.cmsPhrase("starts with")%>
                     </option>
                   </select>
-                  <%=cm.cmsLabel("operator")%>
-                  <%=cm.cmsTitle("operator")%>
-                  <%=cm.cmsInput("is")%>
-                  <%=cm.cmsInput("contains")%>
-                  <%=cm.cmsInput("starts_with")%>
 
                   <label for="englishName" class="noshow"><%=cm.cms("site_name")%></label>
                   <input id="englishName" name="englishName" size="32" title="<%=cm.cms("site_name")%>" />&nbsp;

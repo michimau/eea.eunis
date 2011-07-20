@@ -224,7 +224,7 @@
                         <td>
                           <form name="refineSearch" method="get" onsubmit="return(validateRefineForm(<%=noCriteria%>));" action="" >
                           <%=formBean.toFORMParam(filterSearch)%>
-                            <label for="select1" class="noshow"><%=cm.cms("criteria")%></label>
+                            <label for="select1" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
                               <%
                                   if (!showGroup || !idGroup.equalsIgnoreCase("-1"))
                                   {
@@ -234,13 +234,13 @@
                                   }
                               %>
 
-                            <select id="select1" title="<%=cm.cms("criteria")%>" <%=(showGroup && idGroup.equalsIgnoreCase("-1") ? "" : "disabled=\"disabled\"")%>>
+                            <select id="select1" title="<%=cm.cmsPhrase("Criteria")%>" <%=(showGroup && idGroup.equalsIgnoreCase("-1") ? "" : "disabled=\"disabled\"")%>>
                               <%
                                   if (showGroup && idGroup.equalsIgnoreCase("-1"))
                                   {
                               %>
                                 <option value="<%=NationalSearchCriteria.CRITERIA_GROUP%>">
-                                    <%=cm.cms("group")%>
+                                    <%=cm.cmsPhrase("Group")%>
                                 </option>
                                 <%
                                     }
@@ -249,21 +249,17 @@
                                   <%=cm.cms("scientific_name")%>
                               </option>
                             </select>
-                            <%=cm.cmsLabel("criteria")%>
-                            <%=cm.cmsTitle("criteria")%>
-                            <select id="select2" title="<%=cm.cms("operator")%>" name="oper">
+                            <select id="select2" title="<%=cm.cmsPhrase("Operator")%>" name="oper">
                               <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                                  <%=cm.cms("is")%>
+                                  <%=cm.cmsPhrase("is")%>
                               </option>
                               <option value="<%=Utilities.OPERATOR_STARTS%>">
-                                  <%=cm.cms("starts_with")%>
+                                  <%=cm.cmsPhrase("starts with")%>
                               </option>
                               <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                                  <%=cm.cms("contains")%>
+                                  <%=cm.cmsPhrase("contains")%>
                               </option>
                             </select>
-                            <%=cm.cmsLabel("operator")%>
-                            <%=cm.cmsTitle("operator")%>
                             <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
                             <input id="criteriaSearch" title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" name="criteriaSearch" type="text" size="30" />
                             <%=cm.cmsLabel("filter_value")%>
@@ -555,15 +551,7 @@
             <%=cm.br()%>
             <%=cm.cmsMsg("species_threat-national-result_title")%>
             <%=cm.br()%>
-            <%=cm.cmsMsg("group")%>
-            <%=cm.br()%>
             <%=cm.cmsMsg("scientific_name")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("is")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("starts_with")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("contains")%>
             <%=cm.br()%>
             <%=cm.cmsMsg("search_results")%>
             <%=cm.br()%>

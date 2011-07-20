@@ -269,8 +269,8 @@
                   <br />
                   <form title="refine search results" name="criteriaSearch" method="get" onsubmit="return(check(<%=noCriteria%>));" action="">
                   <%=formBean.toFORMParam(filterSearch)%>
-                    <label for="criteriaType0" class="noshow"><%=cm.cms("criteria")%></label>
-                    <select id="criteriaType0" name="criteriaType" onchange="changeCriteria()" title="<%=cm.cms("criteria")%>">
+                    <label for="criteriaType0" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
+                    <select id="criteriaType0" name="criteriaType" onchange="changeCriteria()" title="<%=cm.cmsPhrase("Criteria")%>">
           <%
             if (showSourceDB)
             {
@@ -312,8 +312,6 @@
             }
           %>
                     </select>
-                    <%=cm.cmsLabel("criteria")%>
-                    <%=cm.cmsTitle("criteria")%>
                     <%=cm.cmsInput("country")%>
                     <%=cm.cmsInput("name")%>
                     <%=cm.cmsInput("mean_altitude_m")%>
@@ -321,14 +319,11 @@
                     <%=cm.cmsInput("maximum_altitude_m")%>
                     <%=cm.cmsInput("country")%>
 
-                    <select id="oper0" name="oper" title="<%=cm.cms("operator")%>">
+                    <select id="oper0" name="oper" title="<%=cm.cmsPhrase("Operator")%>">
                       <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                        <%=cm.cms("is")%>
+                        <%=cm.cmsPhrase("is")%>
                       </option>
                     </select>
-                    <%=cm.cmsLabel("operator")%>
-                    <%=cm.cmsTitle("operator")%>
-                    <%=cm.cmsInput("is")%>
 
                     <label for="criteriaSearch0" class="noshow"><%=cm.cms("filter_value")%></label>
                     <input id="criteriaSearch0" name="criteriaSearch" type="text" size="30" title="<%=cm.cms("filter_value")%>" />

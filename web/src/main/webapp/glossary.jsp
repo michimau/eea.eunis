@@ -177,11 +177,10 @@
                             <img width="11" height="12" style="vertical-align:middle" alt="Mandatory field" title="This field is mandatory" src="images/mini/field_mandatory.gif" />
                             <label for="searchString"><%=cm.cmsPhrase( "Term" )%></label>
                             <select title="Operator" name="operand" id="operand">
-                              <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
-                              <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
-                              <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("starts_with")%></option>
+                              <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cmsPhrase("is")%></option>
+                              <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
+                              <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cmsPhrase("starts with")%></option>
                             </select>
-                            <%=cm.cmsLabel("operator")%>
                             <label for="searchString" class="noshow"><%=cm.cms("glossary_search_value")%></label>
                             <input type="text" title="Search value" size="20" name="searchString" id="searchString" value="" />
                             <%=cm.cmsInput("glossary_search_value")%>
@@ -220,12 +219,6 @@
                 <%=cm.cmsMsg("glossary_note_habitats")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("glossary_note_sites")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("is")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("contains")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("starts_with")%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

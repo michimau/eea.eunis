@@ -204,8 +204,8 @@
                   <%=cm.cmsPhrase("Refine your search")%>
                   <form title="refine search results" name="criteriaSearch" method="get" onsubmit="return(check(<%=noCriteria%>));" action="">
                     <%=formBean.toFORMParam(filterSearch)%>
-                    <label for="criteriaType0" class="noshow"><%=cm.cms("criteria")%></label>
-                    <select id="criteriaType0" name="criteriaType" title="<%=cm.cms("criteria")%>">
+                    <label for="criteriaType0" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
+                    <select id="criteriaType0" name="criteriaType" title="<%=cm.cmsPhrase("Criteria")%>">
           <%
             if (showSourceDB)
             {
@@ -247,8 +247,6 @@
             }
           %>
                     </select>
-                    <%=cm.cmsLabel("criteria")%>
-                    <%=cm.cmsTitle("criteria")%>
                     <%=cm.cmsInput("database_source")%>
                     <%=cm.cmsInput("site_name")%>
                     <%=cm.cmsInput("designation_name")%>
@@ -256,22 +254,17 @@
                     <%=cm.cmsInput("french_designation_name")%>
                     <%=cm.cmsInput("country")%>
 
-                    <select id="oper0" name="oper" title="<%=cm.cms("operator")%>">
+                    <select id="oper0" name="oper" title="<%=cm.cmsPhrase("Operator")%>">
                       <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                        <%=cm.cms("is")%>
+                        <%=cm.cmsPhrase("is")%>
                       </option>
                       <option value="<%=Utilities.OPERATOR_STARTS%>">
-                        <%=cm.cms("starts_with")%>
+                        <%=cm.cmsPhrase("starts with")%>
                       </option>
                       <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                        <%=cm.cms("contains")%>
+                        <%=cm.cmsPhrase("contains")%>
                       </option>
                     </select>
-                    <%=cm.cmsLabel("operator")%>
-                    <%=cm.cmsTitle("operator")%>
-                    <%=cm.cmsInput("is")%>
-                    <%=cm.cmsInput("starts_with")%>
-                    <%=cm.cmsInput("contains")%>
 
                     <label for="criteriaSearch0" class="noshow"><%=cm.cms("filter_value")%></label>
                     <input id="criteriaSearch0" name="criteriaSearch" type="text" size="30" title="<%=cm.cms("filter_value")%>" />

@@ -267,14 +267,11 @@
                         <%=cm.cmsInput("generic_index_07")%>
                         <%=cm.cmsInput("english_name")%>
                         <%=cm.cmsInput("habitat_type_name")%>
-                        <select title="<%=cm.cms("operator")%>" name="oper" id="oper">
-                          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("is")%></option>
+                        <select title="<%=cm.cmsPhrase("Operator")%>" name="oper" id="oper">
+                          <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cmsPhrase("is")%></option>
                           <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("starts with")%></option>
-                          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
+                          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
                         </select>
-                        <%=cm.cmsInput("is")%>
-                        <%=cm.cmsInput("starts_with")%>
-                        <%=cm.cmsInput("contains")%>
                         <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
                         <input title="<%=cm.cms("filter_value")%>" name="criteriaSearch" id="criteriaSearch" type="text" size="30" />
                         <%=cm.cmsTitle("filter_value")%>

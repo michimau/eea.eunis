@@ -291,7 +291,7 @@
                         <td>
                           <form name="refineSearch" method="get" onsubmit="return(validateRefineForm(<%=noCriteria%>));" action="">
                           <%=formBean.toFORMParam(filterSearch)%>
-                          <label for="select1" class="noshow"><%=cm.cms("criteria")%></label>
+                          <label for="select1" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
                               <%
                                   if (!showGroup || !isAnyGroup)
                                   {
@@ -301,7 +301,7 @@
                                   }
                               %>
 
-                          <select id="select1" title="<%=cm.cms("criteria")%>" name="criteriaType" <%=(showGroup && isAnyGroup ? "" : "disabled=\"disabled\"")%>>
+                          <select id="select1" title="<%=cm.cmsPhrase("Criteria")%>" name="criteriaType" <%=(showGroup && isAnyGroup ? "" : "disabled=\"disabled\"")%>>
                            <%
                                if (showScientificName)
                                {
@@ -315,27 +315,23 @@
                                   {
                                %>
                               <option value="<%=LegalSearchCriteria.CRITERIA_GROUP%>" selected="selected">
-                                  <%=cm.cms("group")%>
+                                  <%=cm.cmsPhrase("Group")%>
                               </option>
                               <%
                                   }
                               %>
                             </select>
-                            <%=cm.cmsLabel("criteria")%>
-                            <%=cm.cmsTitle("criteria")%>
-                            <select id="select2" title="<%=cm.cms("operator")%>" name="oper">
+                            <select id="select2" title="<%=cm.cmsPhrase("Operator")%>" name="oper">
                               <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                                  <%=cm.cms("is")%>
+                                  <%=cm.cmsPhrase("is")%>
                               </option>
                               <option value="<%=Utilities.OPERATOR_STARTS%>">
-                                  <%=cm.cms("starts_with")%>
+                                  <%=cm.cmsPhrase("starts with")%>
                               </option>
                               <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                                  <%=cm.cms("contains")%>
+                                  <%=cm.cmsPhrase("contains")%>
                               </option>
                             </select>
-                            <%=cm.cmsLabel("operator")%>
-                            <%=cm.cmsTitle("operator")%>
                             <input type="hidden" name="typeForm" value="<%=LegalSearchCriteria.CRITERIA_SPECIES%>" />
                               <label for="criteriaSearch" class="noshow">
                                 <%=cm.cms("filter_value")%>
@@ -718,14 +714,6 @@
             <%=cm.cmsMsg("species_legal-result_title")%>
             <%=cm.br()%>
             <%=cm.cmsMsg("scientific_name")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("group")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("is")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("starts_with")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("contains")%>
             <%=cm.br()%>
             <%=cm.cmsMsg("search_results")%>
             <%=cm.br()%>

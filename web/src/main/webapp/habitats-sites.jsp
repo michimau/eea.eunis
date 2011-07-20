@@ -173,28 +173,23 @@ function validateForm()
                   <legend><%=cm.cmsPhrase("Search what")%></legend>
 
                               <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("mandatory_field")%>" src="images/mini/field_mandatory.gif" /><%=cm.cmsTitle("mandatory_field")%>&nbsp;
-                              <label for="searchAttribute" class="noshow"><%=cm.cms("criteria")%></label>
-                              <select title="<%=cm.cms("criteria")%>" name="searchAttribute" id="searchAttribute">
+                              <label for="searchAttribute" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
+                              <select title="<%=cm.cmsPhrase("Criteria")%>" name="searchAttribute" id="searchAttribute">
                                 <option value="<%=SitesSearchCriteria.SEARCH_NAME%>" selected="selected"><%=cm.cms("site_name")%></option>
                                 <option value="<%=SitesSearchCriteria.SEARCH_SIZE%>"><%=cm.cms("site_size")%></option>
                                 <option value="<%=SitesSearchCriteria.SEARCH_COUNTRY%>"><%=cm.cms("country_name")%></option>
                                 <option value="<%=SitesSearchCriteria.SEARCH_REGION%>"><%=cm.cms("biogeographic_region_name")%></option>
                               </select>
-                              <%=cm.cmsLabel("criteria")%>
                               <%=cm.cmsInput("site_name")%>
                               <%=cm.cmsInput("site_size")%>
                               <%=cm.cmsInput("country_name")%>
                               <%=cm.cmsInput("biogeographic_region_name")%>
                               &nbsp;
-                              <select title="<%=cm.cms("operator")%>" name="relationOp" id="relationOp">
-                                <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
-                                <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
-                                <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("starts_with")%></option>
+                              <select title="<%=cm.cmsPhrase("Operator")%>" name="relationOp" id="relationOp">
+                                <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
+                                <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cmsPhrase("is")%></option>
+                                <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cmsPhrase("starts with")%></option>
                               </select>
-                              <%=cm.cmsLabel("operator")%>
-                              <%=cm.cmsInput("contains")%>
-                              <%=cm.cmsInput("is")%>
-                              <%=cm.cmsInput("starts_with")%>
                               <label for="scientificName" class="noshow"><%=cm.cms("filter_value")%></label>
                               <input title="<%=cm.cms("filter_value")%>" alt="<%=cm.cms("filter_value")%>" size="30" name="scientificName" id="scientificName" />
                               <%=cm.cmsTitle("filter_value")%>

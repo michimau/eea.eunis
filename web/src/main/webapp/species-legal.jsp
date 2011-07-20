@@ -308,9 +308,8 @@
                             <input title="<%=cm.cms("scientific_name")%>" id="checkbox1" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" />
                               <label for="checkbox1"><%=cm.cmsPhrase("Scientific name")%></label>
                               <%=cm.cmsTitle("scientific_name")%>
-                            <input title="<%=cm.cms("group")%>" id="checkbox2" type="checkbox" name="showGroup" value="true" <%=ckShowGroup ? "checked=\"checked\"" : ""%> />
+                            <input title="<%=cm.cmsPhrase("Group")%>" id="checkbox2" type="checkbox" name="showGroup" value="true" <%=ckShowGroup ? "checked=\"checked\"" : ""%> />
                               <label for="checkbox2"><%=cm.cmsPhrase("Group")%></label>
-                              <%=cm.cmsTitle("group")%>
                             <input title="<%=cm.cms("legal_text")%>" id="checkbox3" type="checkbox" name="showLegalText" value="true" <%=ckShowLegalText ? "checked=\"checked\"" : ""%> />
                               <label for="checkbox3"><%=cm.cmsPhrase("legal text")%></label>
                               <%=cm.cmsTitle("legal_text")%>
@@ -482,9 +481,8 @@
                               <input title="<%=cm.cms("scientific_name")%>" id="checkbox11" type="checkbox" name="showScientificName" value="true" checked="checked" disabled="disabled" />
                                 <label for="checkbox11"><%=cm.cmsPhrase("Scientific name")%></label>
                                 <%=cm.cmsTitle("scientific_name")%>
-                              <input title="<%=cm.cms("group")%>" id="checkbox12" type="checkbox" name="showGroup" value="true" checked="checked" />
+                              <input title="<%=cm.cmsPhrase("Group")%>" id="checkbox12" type="checkbox" name="showGroup" value="true" checked="checked" />
                                 <label for="checkbox12"><%=cm.cmsPhrase("Group")%></label>
-                                <%=cm.cmsTitle("group")%>
                               <input title="<%=cm.cms("legal_text")%>" id="checkbox13" type="checkbox" name="showLegalText" value="true" checked="checked" />
                                 <label for="checkbox13"><%=cm.cmsPhrase("legal text")%></label>
                                 <%=cm.cmsTitle("legal_text")%>

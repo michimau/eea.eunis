@@ -152,9 +152,8 @@
                             <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed):")%>
                           </strong>
                           <br />
-                          <input title="<%=cm.cms("group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" />
+                          <input title="<%=cm.cmsPhrase("Group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" />
                             <label for="checkbox1"><%=cm.cmsPhrase("Group")%></label>
-                            <%=cm.cmsTitle("group")%>
                           <input title="<%=cm.cms("order_column")%>" id="checkbox2" type="checkbox" name="showOrder" value="true" checked="checked" />
                             <label for="checkbox2"><%=cm.cmsPhrase("Order")%></label>
                             <%=cm.cmsTitle("order_column")%>
@@ -184,10 +183,10 @@
                         <%=cm.cmsLabel("search_attribute")%>
                         <%=cm.cmsTitle("search_attribute")%>
                         &nbsp;
-                        <select id="select2" title="<%=cm.cms("operator")%>" name="relationOp">
-                          <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
-                          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
-                          <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("starts_with")%></option>
+                        <select id="select2" title="<%=cm.cmsPhrase("Operator")%>" name="relationOp">
+                          <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cmsPhrase("is")%></option>
+                          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
+                          <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cmsPhrase("starts with")%></option>
                         </select>
                         <label for="scientificName" class="noshow"><%=cm.cms("scientific_name")%></label>
                         <input alt="<%=cm.cms("scientific_name")%>" size="32" id="scientificName" name="scientificName" value="" title="<%=cm.cms("habitat_type_name")%>" />
@@ -287,12 +286,6 @@
             <%=cm.cmsMsg("country_name")%>
             <%=cm.br()%>
             <%=cm.cmsMsg("biogeographic_region_name")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("is")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("contains")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("starts_with")%>
             <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>

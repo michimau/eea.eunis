@@ -123,19 +123,16 @@
                     <label for="relationOpAuthor"><%=cm.cmsPhrase("Author")%></label>
                     <select id="relationOpAuthor" name="relationOpAuthor">
                       <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpAuthor.equalsIgnoreCase(Utilities.OPERATOR_IS.toString())?"selected=\"selected\"":"")%>>
-                        <%=cm.cms( "is")%>
+                        <%=cm.cmsPhrase("is")%>
                       </option>
                       <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpAuthor.equalsIgnoreCase(Utilities.OPERATOR_CONTAINS.toString())?"selected=\"selected\"":"")%>>
-                        <%=cm.cms("contains")%>
+                        <%=cm.cmsPhrase("contains")%>
                       </option>
                       <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpAuthor.equalsIgnoreCase(Utilities.OPERATOR_STARTS.toString())?"selected=\"selected\"":"")%>>
                         <%=cm.cms("starts")%>
                       </option>
                     </select>
-                    <%=cm.cmsInput( "is")%>
-                    <%=cm.cmsInput( "contains")%>
-                    <%=cm.cmsInput( "starts")%>
-                    <%=cm.cmsLabel("operator")%>
+                    <%=cm.cmsInput("starts")%>
 
                     <label for="author" class="noshow">Author</label>
                     <input size="80" id="author" name="author" value="<%=author%>" />
@@ -148,15 +145,13 @@
                     <label for="relOpDate"><%=cm.cmsPhrase("Year")%></label>
                     <select id="relOpDate" name="relOpDate" onchange="MM_jumpMenu('parent',this,0)">
                       <option value="references.jsp?between=no" <%=(request.getParameter("between")==null?"selected=\"selected\"":(request.getParameter("between").equalsIgnoreCase("yes")?"":"selected=\"selected\""))%>>
-                        <%=cm.cms("is")%>
+                        <%=cm.cmsPhrase("is")%>
                       </option>
                       <option value="references.jsp?between=yes" <%if (request.getParameter("between")!=null && request.getParameter("between").equalsIgnoreCase("yes")){%> selected="selected"<%}%>>
                         <%=cm.cms("between")%>
                       </option>
                     </select>
-                    <%=cm.cmsInput( "is")%>
-                    <%=cm.cmsInput( "between")%>
-                    <%=cm.cmsLabel("operator")%>
+                    <%=cm.cmsInput("between")%>
           <%
             if (request.getParameter("between")!=null && request.getParameter("between").equalsIgnoreCase("yes"))
             {
@@ -192,19 +187,16 @@
                   <label for="relationOpTitle"><%=cm.cmsPhrase("Title")%></label>
                   <select id="relationOpTitle" name="relationOpTitle">
                     <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpTitle.equalsIgnoreCase(Utilities.OPERATOR_IS.toString())?"selected=\"selected\"":"")%>>
-                      <%=cm.cms("is")%>
+                      <%=cm.cmsPhrase("is")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpTitle.equalsIgnoreCase(Utilities.OPERATOR_CONTAINS.toString())?"selected=\"selected\"":"")%>>
-                      <%=cm.cms("contains")%>
+                      <%=cm.cmsPhrase("contains")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpTitle.equalsIgnoreCase(Utilities.OPERATOR_STARTS.toString())?"selected=\"selected\"":"")%>>
                       <%=cm.cms("starts")%>
                     </option>
                   </select>
-                  <%=cm.cmsInput( "is")%>
-                  <%=cm.cmsInput( "contains")%>
                   <%=cm.cmsInput( "starts")%>
-                  <%=cm.cmsLabel("operator")%>
 
                   <label for="title" class="noshow">
                     <%=cm.cms("title")%>
@@ -218,19 +210,16 @@
                   <label for="relationOpEditor"><%=cm.cmsPhrase("Editor")%></label>
                   <select id="relationOpEditor" name="relationOpEditor">
                     <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpEditor.equalsIgnoreCase(Utilities.OPERATOR_IS.toString())?"selected=\"selected\"":"")%>>
-                      <%=cm.cms("is")%>
+                      <%=cm.cmsPhrase("is")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpEditor.equalsIgnoreCase(Utilities.OPERATOR_CONTAINS.toString())?"selected=\"selected\"":"")%>>
-                      <%=cm.cms("contains")%>
+                      <%=cm.cmsPhrase("contains")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpEditor.equalsIgnoreCase(Utilities.OPERATOR_STARTS.toString())?"selected=\"selected\"":"")%>>
                       <%=cm.cms("starts")%>
                     </option>
                   </select>
-                  <%=cm.cmsInput( "is")%>
-                  <%=cm.cmsInput( "contains")%>
                   <%=cm.cmsInput( "starts")%>
-                  <%=cm.cmsLabel("operator")%>
 
                   <label for="editor" class="noshow">
                     <%=cm.cms("editor")%>
@@ -245,19 +234,16 @@
                   <label for="relationOpPublisher"><%=cm.cmsPhrase("Publisher")%></label>
                   <select id="relationOpPublisher" name="relationOpPublisher">
                     <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpPublisher.equalsIgnoreCase(Utilities.OPERATOR_IS.toString())?"selected=\"selected\"":"")%>>
-                      <%=cm.cms("is")%>
+                      <%=cm.cmsPhrase("is")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpPublisher.equalsIgnoreCase(Utilities.OPERATOR_CONTAINS.toString())?"selected=\"selected\"":"")%>>
-                      <%=cm.cms("contains")%>
+                      <%=cm.cmsPhrase("contains")%>
                     </option>
                     <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpPublisher.equalsIgnoreCase(Utilities.OPERATOR_STARTS.toString())?"selected=\"selected\"":"")%>>
                       <%=cm.cms("starts")%>
                     </option>
                   </select>
-                  <%=cm.cmsInput( "is")%>
-                  <%=cm.cmsInput( "contains")%>
                   <%=cm.cmsInput( "starts")%>
-                  <%=cm.cmsLabel("operator")%>
 
                   <label for="publisher" class="noshow">Publisher</label>
                   <input size="80" id="publisher" name="publisher" value="<%=publisher%>" />

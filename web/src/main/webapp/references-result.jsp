@@ -186,7 +186,7 @@
                     <br />
                     <form name="criteriaSearch" method="get" onsubmit="return(check(<%=noCriteria%>));" action="" >
                      <%=formBean.toFORMParam(filterSearch)%>
-                      <label for="criteriaType" class="noshow"><%=cm.cms("criteria")%></label>
+                      <label for="criteriaType" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
                       <select id="criteriaType" name="criteriaType">
           <%
             if (showEditor)
@@ -226,7 +226,6 @@
                           <%=cm.cms("author")%>
                         </option>
                       </select>
-                      <%=cm.cmsLabel("criteria")%>
                       <%=cm.cmsInput("editor")%>
                       <%=cm.cmsInput("publisher")%>
                       <%=cm.cmsInput("year")%>
@@ -235,19 +234,15 @@
 
                       <select id="oper" name="oper">
                         <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                          <%=cm.cms("is")%>
+                          <%=cm.cmsPhrase("is")%>
                         </option>
                         <option value="<%=Utilities.OPERATOR_STARTS%>">
-                          <%=cm.cms("starts_with")%>
+                          <%=cm.cmsPhrase("starts with")%>
                         </option>
                         <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                          <%=cm.cms("contains")%>
+                          <%=cm.cmsPhrase("contains")%>
                         </option>
                       </select>
-                      <%=cm.cmsLabel("operator")%>
-                      <%=cm.cmsInput("is")%>
-                      <%=cm.cmsInput("starts_with")%>
-                      <%=cm.cmsInput("contains")%>
 
                       <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
                       <input title="<%=cm.cms("filter_value")%>" id="criteriaSearch" name="criteriaSearch" type="text" size="30" />

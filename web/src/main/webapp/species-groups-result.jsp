@@ -224,9 +224,9 @@
                           <td>
                             <form name="resultSearch" method="get" onsubmit="return(checkRefineSearch(<%=noCriteria%>));" action="">
                               <%=formBean.toFORMParam(filterSearch)%>
-                              <label for="select1" class="noshow"><%=cm.cms("criteria")%></label>
+                              <label for="select1" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
                               <input type="hidden" name="criteriaType" value="<%=GroupSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" />
-                              <select id="select1" title="<%=cm.cms("criteria")%>" name="criteriaType" disabled="disabled">
+                              <select id="select1" title="<%=cm.cmsPhrase("Criteria")%>" name="criteriaType" disabled="disabled">
             <%
                              if (showScientificName)
                              {
@@ -238,21 +238,17 @@
                              }
             %>
                               </select>
-                              <%=cm.cmsLabel("criteria")%>
-                              <%=cm.cmsTitle("criteria")%>
-                              <select id="select2" title="<%=cm.cms("operator")%>" name="oper">
+                              <select id="select2" title="<%=cm.cmsPhrase("Operator")%>" name="oper">
                                 <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                                    <%=cm.cms("is")%>
+                                    <%=cm.cmsPhrase("is")%>
                                 </option>
                                 <option value="<%=Utilities.OPERATOR_STARTS%>">
-                                    <%=cm.cms("starts_with")%>
+                                    <%=cm.cmsPhrase("starts with")%>
                                 </option>
                                 <option value="<%=Utilities.OPERATOR_CONTAINS%>">
-                                    <%=cm.cms("contains")%>
+                                    <%=cm.cmsPhrase("contains")%>
                                 </option>
                               </select>
-                              <%=cm.cmsLabel("operator")%>
-                              <%=cm.cmsTitle("operator")%>
                               <label for="criteriaSearch" class="noshow">
                                <%=cm.cms("filter_value")%>
                               </label>
@@ -552,12 +548,6 @@
                 <%=cm.cmsMsg("enter_refine_criteria_correctly")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("scientific_name")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("is")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("starts_with")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("contains")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("search_results")%>
                 <%=cm.br()%>

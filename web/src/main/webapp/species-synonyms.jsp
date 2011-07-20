@@ -93,9 +93,8 @@
                                   </tr>
                                   <tr>
                                     <td>
-                                      <input title="<%=cm.cms("group")%>" id="checkbox1" name="checkbox1" type="checkbox" value="show" checked="checked" disabled="disabled" />
+                                      <input title="<%=cm.cmsPhrase("Group")%>" id="checkbox1" name="checkbox1" type="checkbox" value="show" checked="checked" disabled="disabled" />
                                         <label for="checkbox1"><%=cm.cmsPhrase("Group")%></label>
-                                        <%=cm.cmsTitle("group")%>
                                       <input title="<%=cm.cms("synonym")%>" id="checkbox2" name="checkbox2" type="checkbox" value="show" checked="checked" disabled="disabled" />
                                         <label for="checkbox2"><%=cm.cmsPhrase("Synonym name")%></label>
                                         <%=cm.cmsTitle("synonym")%>
@@ -149,13 +148,11 @@
                                 <%=cm.cmsTitle("field_mandatory")%>
                                 &nbsp;
                                 <label for="scientificName"><%=cm.cmsPhrase("Species scientific name")%></label>
-                                <select id="select2" title="<%=cm.cms("operator")%>" name="relationOp">
-                                  <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
-                                  <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
-                                  <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected" ><%=cm.cms("starts_with")%></option>
+                                <select id="select2" title="<%=cm.cmsPhrase("Operator")%>" name="relationOp">
+                                  <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cmsPhrase("is")%></option>
+                                  <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
+                                  <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected" ><%=cm.cmsPhrase("starts with")%></option>
                                 </select>
-                                <%=cm.cmsLabel("operator")%>
-                                <%=cm.cmsTitle("operator")%>
                                 <input id="scientificName" alt="<%=cm.cms("scientific_name")%>" size="32" name="scientificName" value="" title="<%=cm.cms("scientific_name")%>" />
                                 <%=cm.cmsAlt("scientific_name")%>
                                 <a title="<%=cm.cms("list_values_link")%>" href="javascript:openHelper('species-synonyms-choice.jsp')"><img alt="<%=cm.cms("species_synonyms_16")%>" height="18" style="vertical-align:middle" title="<%=cm.cms("species_synonyms_16")%>" src="images/helper/helper.gif" width="11" border="0" /></a>
@@ -219,12 +216,6 @@
               <%=cm.cmsMsg("species_synonyms_02")%>
               <%=cm.br()%>
               <%=cm.cmsMsg("any_group")%>
-              <%=cm.br()%>
-              <%=cm.cmsMsg("is")%>
-              <%=cm.br()%>
-              <%=cm.cmsMsg("contains")%>
-              <%=cm.br()%>
-              <%=cm.cmsMsg("starts_with")%>
               <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>

@@ -204,7 +204,7 @@
   if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("species"))
   {
 %>
-                            <option value="showGroup"><%=cm.cms("group")%></option>
+                            <option value="showGroup"><%=cm.cmsPhrase("Group")%></option>
                             <option value="showOrder"><%=cm.cms("order_column")%></option>
                             <option value="showFamily"><%=cm.cms("family")%></option>
                             <option value="showScientificName"><%=cm.cms("scientific_name")%></option>
@@ -244,7 +244,6 @@
   if (null != searchedDatabase && searchedDatabase.equalsIgnoreCase("species"))
   {
 %>
-                          <%=cm.cmsInput("group")%>
                           <%=cm.cmsInput("order_column")%>
                           <%=cm.cmsInput("family")%>
                           <%=cm.cmsInput("scientific_name")%>

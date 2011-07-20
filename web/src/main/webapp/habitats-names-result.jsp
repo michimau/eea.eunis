@@ -260,21 +260,16 @@
                                 <%if (showScientificName) {%>
                                 <option value="<%=NameSearchCriteria.CRITERIA_SCIENTIFIC_NAME%>" selected="selected"><%=cm.cms("habitat_type_name")%></option><%}%>
                               </select>
-                              <%=cm.cmsLabel("Criteria")%>
                               <%=cm.cmsInput("eunis_code")%>
                               <%=cm.cmsInput("annex_code")%>
                               <%=cm.cmsInput("generic_index_07")%>
                               <%=cm.cmsInput("habitat_type_english_name")%>
                               <%=cm.cmsInput("habitat_type_name")%>
-                              <select title="<%=cm.cms("operator")%>" name="oper" id="oper">
-                                <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cms("is")%></option>
-                                <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cms("starts_with")%></option>
-                                <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
+                              <select title="<%=cm.cmsPhrase("Operator")%>" name="oper" id="oper">
+                                <option value="<%=Utilities.OPERATOR_IS%>" selected="selected"><%=cm.cmsPhrase("is")%></option>
+                                <option value="<%=Utilities.OPERATOR_STARTS%>"><%=cm.cmsPhrase("starts with")%></option>
+                                <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
                               </select>
-                              <%=cm.cmsLabel("operator")%>
-                              <%=cm.cmsInput("is")%>
-                              <%=cm.cmsInput("starts_with")%>
-                              <%=cm.cmsInput("contains")%>
                               <label for="criteriaSearch" class="noshow"><%=cm.cms("filter_value")%></label>
                               <input alt="<%=cm.cms("filter_value")%>" title="<%=cm.cms("filter_value")%>" name="criteriaSearch" id="criteriaSearch" type="text" size="30" />
                               <%=cm.cmsTitle("filter_value")%>

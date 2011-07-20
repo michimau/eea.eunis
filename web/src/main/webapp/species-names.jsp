@@ -36,15 +36,15 @@
         var cur_oper = eval(oper);
         var control = eval(cur_ctl);
         var val = trim(cur_ctl.value);
-        realOper = "<%=cm.cms("contains")%>";
+        realOper = "<%=cm.cmsPhrase("contains")%>";
         if (val == "")
         {
           // errMessageForm1 - defined in species-names.js
           alert(errMessageForm1);
         } else {
-          if (cur_oper.value == <%=Utilities.OPERATOR_CONTAINS%>) realOper = "<%=cm.cms("contains")%>";
+          if (cur_oper.value == <%=Utilities.OPERATOR_CONTAINS%>) realOper = "<%=cm.cmsPhrase("contains")%>";
           if (cur_oper.value == <%=Utilities.OPERATOR_IS%>) realOper = "<%=cm.cms("species_names_02_Msg")%>";
-          if (cur_oper.value == <%=Utilities.OPERATOR_STARTS%>) realOper = "<%=cm.cms("starts_with")%>";
+          if (cur_oper.value == <%=Utilities.OPERATOR_STARTS%>) realOper = "<%=cm.cmsPhrase("starts with")%>";
           URL = 'search-lov.jsp' + '?ctl=' + ctl + '&lov=' + lov + '&natureobject=' + natureobject + '&val=' + val + '&oper=' + realOper;
           eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=0, resizable=yes, location=0,width=450,height=500,left=490,top=0');");
         }
@@ -120,8 +120,7 @@
                                 </tr>
                                 <tr>
                                   <td>
-                                    <input title="<%=cm.cms("group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" /><label for="checkbox1"><%=cm.cmsPhrase("Group")%></label>
-                                      <%=cm.cmsTitle("group")%>
+                                    <input title="<%=cm.cmsPhrase("Group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" /><label for="checkbox1"><%=cm.cmsPhrase("Group")%></label>
                                     <input title="<%=cm.cms("order_column")%>" id="checkbox2" type="checkbox" name="showOrder" value="true" checked="checked" /><label for="checkbox2"><%=cm.cmsPhrase("Order")%></label>
                                       <%=cm.cmsTitle("order_column")%>
                                     <input title="<%=cm.cms("family")%>" id="checkbox3" type="checkbox" name="showFamily" value="true" checked="checked" /><label for="checkbox3"><%=cm.cmsPhrase("Family")%></label>
@@ -139,13 +138,11 @@
                               <%=cm.cmsAlt("field_mandatory")%>
                               <%=cm.cmsTitle("field_mandatory")%>
                               <label for="scientificName"><%=cm.cmsPhrase("Scientific name")%></label>
-                              <select id="select1" title="<%=cm.cms("operator")%>" name="relationOp">
-                                <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
-                                <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
-                                <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("starts_with")%></option>
+                              <select id="select1" title="<%=cm.cmsPhrase("Operator")%>" name="relationOp">
+                                <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cmsPhrase("is")%></option>
+                                <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
+                                <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cmsPhrase("starts with")%></option>
                               </select>
-                              <%=cm.cmsTitle("operator")%>
-                              <%=cm.cmsLabel("operator")%>
                               <input id="scientificName" alt="<%=cm.cms("scientific_name")%>" size="32" name="scientificName" value="" title="<%=cm.cms("species_scientific_name")%>" />
                               <%=cm.cmsAlt("scientific_name")%>
                               <%=cm.cmsTitle("species_scientific_name")%>
@@ -226,8 +223,7 @@
                                   </tr>
                                   <tr>
                                     <td>
-                                      <input title="<%=cm.cms("group")%>" id="checkbox11" type="checkbox" name="showGroup" value="true" checked="checked" /><label for="checkbox11"><%=cm.cmsPhrase("Group")%></label>
-                                        <%=cm.cmsTitle("group")%>
+                                      <input title="<%=cm.cmsPhrase("Group")%>" id="checkbox11" type="checkbox" name="showGroup" value="true" checked="checked" /><label for="checkbox11"><%=cm.cmsPhrase("Group")%></label>
                                       <input title="<%=cm.cms("order_column")%>" id="checkbox12" type="checkbox" name="showOrder" value="true" checked="checked" /><label for="checkbox12"><%=cm.cmsPhrase("Order")%></label>
                                         <%=cm.cmsTitle("order_column")%>
                                       <input title="<%=cm.cms("family")%>" id="checkbox13" type="checkbox" name="showFamily" value="true" checked="checked" /><label for="checkbox13"><%=cm.cmsPhrase("Family")%></label>
@@ -246,13 +242,11 @@
                                 <%=cm.cmsAlt("field_mandatory")%>
                                 <%=cm.cmsTitle("field_mandatory")%>
                                 <label for="vernacularName"><%=cm.cmsPhrase("Vernacular Name")%></label>
-                                <select id="select2" title="<%=cm.cms("operator")%>" size="1" name="relationOp">
-                                  <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
-                                  <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
-                                  <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("starts_with")%></option>
+                                <select id="select2" title="<%=cm.cmsPhrase("Operator")%>" size="1" name="relationOp">
+                                  <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cmsPhrase("is")%></option>
+                                  <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
+                                  <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cmsPhrase("starts with")%></option>
                                 </select>
-                                <%=cm.cmsLabel("operator")%>
-                                <%=cm.cmsTitle("operator")%>
                                 <input id="vernacularName" alt="<%=cm.cms("vernacular_name")%>" size="30" name="vernacularName" value=""
                                     title="<%=cm.cms("species_vernacular_name")%>" />
                                 <%=cm.cmsAlt("vernacular_name")%>
@@ -349,19 +343,9 @@
                   </tr>
                 </table>
                 <%=cm.br()%>
-                <%=cm.cmsMsg("contains")%>
-                <%=cm.br()%>
                 <%=cm.cmsMsg("species_names_02_Msg")%>
                 <%=cm.br()%>
-                <%=cm.cmsMsg("starts_with")%>
-                <%=cm.br()%>
                 <%=cm.cmsMsg("species_names_pageTitle")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("is")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("contains")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("starts_with")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("species_names_anyLanguage")%>
                 <%=cm.br()%>

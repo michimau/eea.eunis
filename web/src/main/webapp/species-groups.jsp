@@ -122,8 +122,7 @@
                         </tr>
                         <tr>
                           <td>
-                            <input title="<%=cm.cms("group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" />
-                              <%=cm.cmsTitle("group")%>
+                            <input title="<%=cm.cmsPhrase("Group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" />
                               <label for ="checkbox1"><%=cm.cmsPhrase("Group")%></label>
                             <input title="<%=cm.cms("order_column")%>" id="checkbox2" type="checkbox" name="showOrder" value="true" checked="checked" />
                               <%=cm.cmsTitle("order_column")%>
@@ -185,9 +184,8 @@
                               </td>
                               <td style="text-align:center">
                                 <input id="radio_<%=ii%>" type="radio" value="<%=group.getIdGroupspecies()%>" name="groupID" onclick="javascript:setGroupName('<%=(group.getCommonName() != null ? group.getCommonName().replaceAll("&","&amp;") : "")%>','<%=group.getIdGroupspecies()%>')"
-                                  title="<%=cm.cms("select")%> <%=(group.getCommonName() != null ? group.getCommonName().replaceAll("&","&amp;") : " ")%> <%=cm.cms("group")%>" />
+                                  title="<%=cm.cms("select")%> <%=(group.getCommonName() != null ? group.getCommonName().replaceAll("&","&amp;") : " ")%> <%=cm.cmsPhrase("Group")%>" />
                                   <%=cm.cmsTitle("select")%>
-                                  <%=cm.cmsTitle("group")%>
                               </td>
                             </tr>
                       <%

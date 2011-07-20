@@ -39,13 +39,13 @@
         function changeOperatorList(criteriaType, operList) {
           removeElementsFromList(operList);
           var optIS = document.createElement("OPTION");
-          optIS.text = "<%=cm.cms("is")%>";
+          optIS.text = "<%=cm.cmsPhrase("is")%>";
           optIS.value = "<%=Utilities.OPERATOR_IS%>";
           var optSTART = document.createElement("OPTION");
           optSTART.text = "<%=cm.cms("starts")%>";
           optSTART.value = "<%=Utilities.OPERATOR_STARTS%>";
           var optCONTAIN = document.createElement("OPTION");
-          optCONTAIN.text = "<%=cm.cms("contains")%>";
+          optCONTAIN.text = "<%=cm.cmsPhrase("contains")%>";
           optCONTAIN.value = "<%=Utilities.OPERATOR_CONTAINS%>";
           var optGREAT = document.createElement("OPTION");
           optGREAT.text = "<%=cm.cms("greater")%>";
@@ -243,13 +243,11 @@
                         <%=cm.cmsLabel("search_attribute")%>
                         <%=cm.cmsTitle("search_attribute")%>
                           &nbsp;
-                        <select id="select2" title="<%=cm.cms("operator")%>" name="relationOp">
-                          <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cms("is")%></option>
-                          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cms("contains")%></option>
-                          <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cms("starts_with")%></option>
+                        <select id="select2" title="<%=cm.cmsPhrase("Operator")%>" name="relationOp">
+                          <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cmsPhrase("is")%></option>
+                          <option value="<%=Utilities.OPERATOR_CONTAINS%>"><%=cm.cmsPhrase("contains")%></option>
+                          <option value="<%=Utilities.OPERATOR_STARTS%>" selected="selected"><%=cm.cmsPhrase("starts with")%></option>
                         </select>
-                        <%=cm.cmsLabel("operator")%>
-                        <%=cm.cmsTitle("operator")%>
 
                         <label for="scientificName" class="noshow"><%=cm.cms("filter_value")%></label>
                         <input title="<%=cm.cms("filter_value")%>" size="32" id="scientificName" name="scientificName" value="" />
@@ -265,9 +263,8 @@
                       <%=cm.cmsPhrase("Search will provide the following information (checked fields will be displayed), as provided in the original database:")%>
                     </strong>
                     <br/>
-                              <input title="<%=cm.cms("group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" />
+                              <input title="<%=cm.cmsPhrase("Group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" />
                               <label for="checkbox1"><%=cm.cmsPhrase("Group")%></label>
-                              <%=cm.cmsTitle("group")%>
 
                               <input title="<%=cm.cms("order_column")%>" id="checkbox2" type="checkbox" name="showOrder" value="true" checked="checked" />
                               <label for="checkbox2"><%=cm.cmsPhrase("Order")%></label>
@@ -341,11 +338,7 @@
             <%=cm.br()%>
             <%=cm.cmsMsg("biogeographic_region_is_not_valid")%>
             <%=cm.br()%>
-            <%=cm.cmsMsg("is")%>
-            <%=cm.br()%>
             <%=cm.cmsMsg("starts")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("contains")%>
             <%=cm.br()%>
             <%=cm.cmsMsg("greater")%>
             <%=cm.br()%>
@@ -368,12 +361,6 @@
             <%=cm.cmsMsg("country_name")%>
             <%=cm.br()%>
             <%=cm.cmsMsg("biogeographic_region_name")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("is")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("contains")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("starts_with")%>
             <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>

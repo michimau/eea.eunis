@@ -115,13 +115,13 @@
           var NAME = <%=CountrySearchCriteria.CRITERIA_ENGLISH_NAME%>;
           removeElementsFromList(operList);
           var optIS = document.createElement("OPTION");
-          optIS.text = "<%=cm.cms("is")%>";
+          optIS.text = "<%=cm.cmsPhrase("is")%>";
           optIS.value = "<%=Utilities.OPERATOR_IS%>";
           var optSTART = document.createElement("OPTION");
           optSTART.text = "<%=cm.cms("starts")%>";
           optSTART.value = "<%=Utilities.OPERATOR_STARTS%>";
           var optCONTAIN = document.createElement("OPTION");
-          optCONTAIN.text = "<%=cm.cms("contains")%>";
+          optCONTAIN.text = "<%=cm.cmsPhrase("contains")%>";
           optCONTAIN.value = "<%=Utilities.OPERATOR_CONTAINS%>";
           var optGREAT = document.createElement("OPTION");
           optGREAT.text = "<%=cm.cms("greater")%>";
@@ -251,8 +251,8 @@
                   </strong>
                   <form title="refine search results" name="criteriaSearch" method="get" onsubmit="return(check(<%=noCriteria%>));" action="">
                     <%=formBean.toFORMParam(filterSearch)%>
-                    <label for="criteriaType0" class="noshow"><%=cm.cms("criteria")%></label>
-                    <select id="criteriaType0" name="criteriaType" onchange="changeCriteria()" title="<%=cm.cms("criteria")%>">
+                    <label for="criteriaType0" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
+                    <select id="criteriaType0" name="criteriaType" onchange="changeCriteria()" title="<%=cm.cmsPhrase("Criteria")%>">
           <%
             if ( showSourceDB )
             {
@@ -272,20 +272,15 @@
             }
           %>
                     </select>
-                    <%=cm.cmsLabel("criteria")%>
-                    <%=cm.cmsTitle("criteria")%>
                     <%=cm.cmsInput("database_source")%>
                     <%=cm.cmsInput("name")%>
 
-                    <label for="oper0" class="noshow"><%=cm.cms("operator")%></label>
-                    <select id="oper0" name="oper" title="<%=cm.cms("operator")%>">
+                    <label for="oper0" class="noshow"><%=cm.cmsPhrase("Operator")%></label>
+                    <select id="oper0" name="oper" title="<%=cm.cmsPhrase("Operator")%>">
                       <option value="<%=Utilities.OPERATOR_IS%>" selected="selected">
-                        <%=cm.cms("is")%>
+                        <%=cm.cmsPhrase("is")%>
                       </option>
                     </select>
-                    <%=cm.cmsLabel("operator")%>
-                    <%=cm.cmsTitle("operator")%>
-                    <%=cm.cmsInput("is")%>
 
                     <label for="criteriaSearch0" class="noshow"><%=cm.cms("filter_value")%></label>
                     <input id="criteriaSearch0" name="criteriaSearch" type="text" size="30" title="<%=cm.cms("filter_value")%>" />
@@ -590,11 +585,7 @@
                 <%=cm.br()%>
                 <%=cm.cmsMsg("search_results")%>
                 <%=cm.br()%>
-                <%=cm.cmsMsg("is")%>
-                <%=cm.br()%>
                 <%=cm.cmsMsg("starts")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("contains")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("greater")%>
                 <%=cm.br()%>

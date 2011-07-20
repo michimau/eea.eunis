@@ -168,9 +168,8 @@
                         </tr>
                         <tr>
                           <td style="background-color:#EEEEEE">
-                            <input id="checkbox1" title="<%=cm.cms("group")%>" alt="<%=cm.cms("group")%>" type="checkbox" name="showGroup" value="true" disabled="disabled" checked="checked" />
+                            <input id="checkbox1" title="<%=cm.cmsPhrase("Group")%>" alt="<%=cm.cmsPhrase("Group")%>" type="checkbox" name="showGroup" value="true" disabled="disabled" checked="checked" />
                               <label for="checkbox1"><%=cm.cmsPhrase("Group")%></label>
-                              <%=cm.cmsTitle("group")%>
                             <input id="checkbox2" title="<%=cm.cms("scientific_name")%>" alt="<%=cm.cms("scientific_name")%>" type="checkbox" name="showScientificName" value="true" disabled="disabled" checked="checked" />
                               <label for="checkbox2"><%=cm.cmsPhrase("Scientific name")%></label>
                               <%=cm.cmsTitle("scientific_name")%>

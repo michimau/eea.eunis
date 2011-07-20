@@ -599,9 +599,9 @@
                     <%
                   }
 
-                  String cmsCriteria = cm.cms("criteria");
+                  String cmsCriteria = cm.cmsPhrase("Criteria");
                   String cmsAttribute = cm.cms("advanced_attribute");
-                  String cmsOperator = cm.cms("operator");
+                  String cmsOperator = cm.cmsPhrase("Operator");
                   String cmsAll = cm.cms("all");
                   String cmsAny = cm.cms("any");
                   String cmsFollowingCriteria = cm.cms("of_following_criteria_are_met");
@@ -710,7 +710,7 @@
                       if(val.equalsIgnoreCase("VernacularName")) { selected=" selected=\"selected\""; } else { selected=""; }
                       out.println("<option"+selected+" value=\"VernacularName\">"+cm.cms("vernacular_name")+"</option>");
                       if(val.equalsIgnoreCase("Group")) { selected=" selected=\"selected\""; } else { selected=""; }
-                      out.println("<option"+selected+" value=\"Group\">"+cm.cms("group")+"</option>");
+                      out.println("<option"+selected+" value=\"Group\">"+cm.cmsPhrase("Group")+"</option>");
                       if(val.equalsIgnoreCase("ThreatStatus")) { selected=" selected=\"selected\""; } else { selected=""; }
                       out.println("<option"+selected+" value=\"ThreatStatus\">"+cm.cms("threat_status")+"</option>");
                       if(val.equalsIgnoreCase("InternationalThreatStatus")) { selected=" selected=\"selected\""; } else { selected=""; }
@@ -737,7 +737,6 @@
                       %>
                       <%=cm.cmsInput("scientific_name")%>
                       <%=cm.cmsInput("vernacular_name")%>
-                      <%=cm.cmsInput("group")%>
                       <%=cm.cmsInput("threat_status")%>
                       <%=cm.cmsInput("international_threat_status")%>
                       <%=cm.cmsInput("country")%>
@@ -806,7 +805,7 @@
                     if(val.equalsIgnoreCase("Equal")) { selected=" selected=\"selected\""; } else { selected=""; }
                     out.println("<option"+selected+" value=\"Equal\">"+cm.cms("equal")+"</option>");
                     if(val.equalsIgnoreCase("Contains")) { selected=" selected=\"selected\""; } else { selected=""; }
-                    out.println("<option"+selected+" value=\"Contains\">"+cm.cms("contains")+"</option>");
+                    out.println("<option"+selected+" value=\"Contains\">"+cm.cmsPhrase("Contains")+"</option>");
                     if(val.equalsIgnoreCase("Between")) { selected=" selected=\"selected\""; } else { selected=""; }
                     out.println("<option"+selected+" value=\"Between\">"+cm.cms("between")+"</option>");
                     if(val.equalsIgnoreCase("Regex")) { selected=" selected=\"selected\""; } else { selected=""; }
@@ -814,7 +813,6 @@
                     out.println("</select>");
                     %>
                     <%=cm.cmsInput("equal")%>
-                    <%=cm.cmsInput("contains")%>
                     <%=cm.cmsInput("between")%>
                     <%
                     out.println("&nbsp;");

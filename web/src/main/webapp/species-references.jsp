@@ -100,9 +100,8 @@
                           </tr>
                           <tr>
                             <td>
-                              <input title="<%=cm.cms("group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" />
+                              <input title="<%=cm.cmsPhrase("Group")%>" id="checkbox1" type="checkbox" name="showGroup" value="true" checked="checked" />
                                 <label for="checkbox1"><%=cm.cmsPhrase("Group")%></label>
-                                <%=cm.cmsTitle("group")%>
                               <input title="<%=cm.cms("order_column")%>" id="checkbox2" type="checkbox" name="showOrder" value="true" checked="checked" />
                                 <label for="checkbox2"><%=cm.cmsPhrase("Order")%></label>
                                 <%=cm.cmsTitle("order_column")%>
@@ -132,13 +131,11 @@
                               <label for="author"><%=cm.cmsPhrase("Author")%></label>
                             </td>
                             <td width="17%">
-                              <select id="select1" title="<%=cm.cms("operator")%>" name="relationOpAuthor">
-                                <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpAuthor == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("is")%></option>
-                                <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpAuthor == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("contains")%></option>
-                                <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpAuthor == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("starts_with")%></option>
+                              <select id="select1" title="<%=cm.cmsPhrase("Operator")%>" name="relationOpAuthor">
+                                <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpAuthor == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cmsPhrase("is")%></option>
+                                <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpAuthor == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cmsPhrase("contains")%></option>
+                                <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpAuthor == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cmsPhrase("starts with")%></option>
                               </select>
-                              <%=cm.cmsLabel("operator")%>
-                              <%=cm.cmsTitle("operator")%>
                             </td>
                             <td width="69%">
                               <input id="author" title="<%=cm.cms("author")%>" alt="<%=cm.cms("author")%>" size="32" name="author" value="<%=author%>" />
@@ -171,12 +168,10 @@
 %>
                             </td>
                             <td>
-                              <select id="select2" title="<%=cm.cms("operator")%>" name="relOpDate" onchange="MM_jumpMenu('parent',this,0)">
-                                <option value="species-references.jsp?between=no" <%=(request.getParameter("between")==null?"selected=\"selected\"":(request.getParameter("between").equalsIgnoreCase("yes")?"":"selected=\"selected\""))%>><%=cm.cms("is")%></option>
+                              <select id="select2" title="<%=cm.cmsPhrase("Operator")%>" name="relOpDate" onchange="MM_jumpMenu('parent',this,0)">
+                                <option value="species-references.jsp?between=no" <%=(request.getParameter("between")==null?"selected=\"selected\"":(request.getParameter("between").equalsIgnoreCase("yes")?"":"selected=\"selected\""))%>><%=cm.cmsPhrase("is")%></option>
                                 <option value="species-references.jsp?between=yes" <%if (request.getParameter("between")!=null && request.getParameter("between").equalsIgnoreCase("yes")){%> selected="selected"<%}%>><%=cm.cms("between")%></option>
                               </select>
-                              <%=cm.cmsLabel("operator")%>
-                              <%=cm.cmsTitle("operator")%>
                             </td>
                             <%
                               // If relOpDate is between
@@ -232,13 +227,11 @@
                               <label for="title"><%=cm.cmsPhrase("Title")%></label>
                             </td>
                             <td>
-                              <select id="select3" title="<%=cm.cms("operator")%>" name="relationOpTitle">
-                                <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpTitle == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("is")%></option>
-                                <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpTitle == Utilities.OPERATOR_CONTAINS.intValue())?"selected=\"selected\"" : ""%>><%=cm.cms("contains")%></option>
-                                <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpTitle == Utilities.OPERATOR_STARTS.intValue())?"selected=\"selected\"" : ""%>><%=cm.cms("starts_with")%></option>
+                              <select id="select3" title="<%=cm.cmsPhrase("Operator")%>" name="relationOpTitle">
+                                <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpTitle == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cmsPhrase("is")%></option>
+                                <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpTitle == Utilities.OPERATOR_CONTAINS.intValue())?"selected=\"selected\"" : ""%>><%=cm.cmsPhrase("contains")%></option>
+                                <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpTitle == Utilities.OPERATOR_STARTS.intValue())?"selected=\"selected\"" : ""%>><%=cm.cmsPhrase("starts with")%></option>
                               </select>
-                              <%=cm.cmsLabel("operator")%>
-                              <%=cm.cmsTitle("operator")%>
                             </td>
                             <td>
                               <input id="title" title="<%=cm.cms("title")%>" alt="<%=cm.cms("title")%>" size="32" name="title" value="<%=title%>" />
@@ -257,13 +250,11 @@
                               <label for="editor"><%=cm.cmsPhrase("Editor")%></label>
                             </td>
                             <td>
-                              <select id="select4" title="<%=cm.cms("operator")%>" name="relationOpEditor">
-                                <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpEditor == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("is")%></option>
-                                <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpEditor == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("contains")%></option>
-                                <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpEditor == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("starts_with")%></option>
+                              <select id="select4" title="<%=cm.cmsPhrase("Operator")%>" name="relationOpEditor">
+                                <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpEditor == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cmsPhrase("is")%></option>
+                                <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpEditor == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cmsPhrase("contains")%></option>
+                                <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpEditor == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cmsPhrase("starts with")%></option>
                               </select>
-                              <%=cm.cmsLabel("operator")%>
-                              <%=cm.cmsTitle("operator")%>
                             </td>
                             <td>
                               <input id="editor" title="<%=cm.cms("editor")%>" alt="<%=cm.cms("editor")%>" size="32" name="editor" value="<%=editor%>" />
@@ -282,13 +273,11 @@
                               <label for="publisher"><%=cm.cmsPhrase("Publisher")%></label>
                             </td>
                             <td>
-                              <select id="select5" title="<%=cm.cms("operator")%>" name="relationOpPublisher">
-                                <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpPublisher == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("is")%></option>
-                                <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpPublisher == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("contains")%></option>
-                                <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpPublisher == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cms("starts_with")%></option>
+                              <select id="select5" title="<%=cm.cmsPhrase("Operator")%>" name="relationOpPublisher">
+                                <option value="<%=Utilities.OPERATOR_IS%>" <%=(relationOpPublisher == Utilities.OPERATOR_IS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cmsPhrase("is")%></option>
+                                <option value="<%=Utilities.OPERATOR_CONTAINS%>" <%=(relationOpPublisher == Utilities.OPERATOR_CONTAINS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cmsPhrase("contains")%></option>
+                                <option value="<%=Utilities.OPERATOR_STARTS%>" <%=(relationOpPublisher == Utilities.OPERATOR_STARTS.intValue()) ? "selected=\"selected\"" : ""%>><%=cm.cmsPhrase("starts with")%></option>
                               </select>
-                              <%=cm.cmsLabel("operator")%>
-                              <%=cm.cmsTitle("operator")%>
                             </td>
                             <td>
                               <input id="publisher" title="<%=cm.cms("publisher")%>" alt="<%=cm.cms("publisher")%>" size="32" name="publisher" value="<%=publisher%>" />
@@ -363,12 +352,6 @@
 
             <%=cm.br()%>
             <%=cm.cmsMsg("pick_references_show_species")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("is")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("contains")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("starts_with")%>
             <%=cm.br()%>
             <%=cm.cmsMsg("between")%>
             <%=cm.br()%>

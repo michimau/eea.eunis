@@ -105,6 +105,9 @@ public class TabScripts {
                 + "WHERE B.LOOKUP_TYPE='LEGAL_STATUS'";
             updateSpeciesTab(s, con, sqlc, "LEGAL_INSTRUMENTS");
 
+            // Update LEGAL_INSTRUMENTS for parent species
+            updateParentSpecies(con, sqlc, "LEGAL_INSTRUMENTS");
+
             // Update POPULATION tab
             s = "CHM62EDT_REPORTS AS A "
                 + "INNER JOIN CHM62EDT_REPORT_TYPE AS B ON A.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
@@ -117,6 +120,9 @@ public class TabScripts {
                 + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
                 + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT";
             updateSpeciesTab(s, con, sqlc, "SITES");
+
+            // Update SITES for parent species
+            updateParentSpecies(con, sqlc, "SITES");
 
             // Update THREAT_STATUS tab
             s = "CHM62EDT_REPORTS AS A "
@@ -169,6 +175,45 @@ public class TabScripts {
         } finally {
             // connection will be closed in setTabSpecies() method
             closeAll(null, ps, null);
+        }
+    }
+
+    private void updateParentSpecies(Connection con, SQLUtilities sqlc, String tab) throws Exception {
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            EunisUtil.writeLogMessage(tab + " tab generation for parent species started. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
+
+            String sql = "SELECT DISTINCT senior.ID_NATURE_OBJECT AS NAT_OB_ID "
+                + "FROM chm62edt_species AS junior "
+                + "JOIN chm62edt_tab_page_species AS juniors using(ID_NATURE_OBJECT) "
+                + "JOIN chm62edt_species AS senior ON junior.ID_SPECIES_LINK = senior.ID_SPECIES "
+                + "JOIN chm62edt_tab_page_species AS seniors ON senior.ID_NATURE_OBJECT = seniors.ID_NATURE_OBJECT "
+                + "WHERE junior.ID_SPECIES <> junior.ID_SPECIES_LINK "
+                + "AND juniors." + tab + " = 'Y' AND seniors." + tab + " = 'N'";
+
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            String ids = "";
+            while (rs.next()) {
+                String natObId = rs.getString("NAT_OB_ID");
+                ids += natObId + ",";
+            }
+            // Remove last comma
+            if (ids.lastIndexOf(",") != -1){
+                ids = ids.substring(0,ids.lastIndexOf(","));
+            }
+
+            String query = "UPDATE chm62edt_tab_page_species SET `" + tab + "` = 'Y' WHERE ID_NATURE_OBJECT IN (" + ids + ")";
+            ps = con.prepareStatement(query);
+            ps.executeUpdate();
+
+            EunisUtil.writeLogMessage(tab + " tab generation for parent species finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
+
+        } finally {
+            // connection will be closed in setTabSpecies() method
+            closeAll(null, ps, rs);
         }
     }
 

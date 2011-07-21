@@ -64,7 +64,11 @@ public class SpeciesExportTask implements Runnable {
                 dto.setOrder(taxonomyTree.getOrder());
                 dto.setFamily(taxonomyTree.getFamily());
             }
-            dto.setNameAccordingToID(SpeciesFactsheet.getBookAuthorDate(factsheet.getTaxcodeObject().IdDcTaxcode()));
+            if (factsheet.getTaxcodeObject() != null && factsheet.getTaxcodeObject().IdDcTaxcode() != null) {
+                dto.setNameAccordingToID(
+                        new ResourceDto(
+                                factsheet.getTaxcodeObject().IdDcTaxcode().toString(), "http://eunis.eea.europa.eu/documents/"));
+            }
 
             dto.setDwcScientificName(dto.getScientificName() + ' ' + dto.getAuthor());
             dto.setDcmitype(new ResourceDto("","http://purl.org/dc/dcmitype/Text"));

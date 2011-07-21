@@ -23,8 +23,7 @@ public class Natura2000Importer {
         try {
             if (args.length == 0) {
                 System.out.println("Missing folderName!");
-                System.out.println(
-                        "Usage: ro.finsiel.eunis.dataimport.Natura2000Importer {folderName}");
+                System.out.println("Usage: ro.finsiel.eunis.dataimport.Natura2000Importer {folderName}");
             } else {
                 File directory = new File(args[0]);
                 File files[] = directory.listFiles();
@@ -46,8 +45,7 @@ public class Natura2000Importer {
                 int cnt = 1;
 
                 for (File f : files) {
-                    Natura2000ImportParser parser = new Natura2000ImportParser(
-                            sqlUtilities);
+                    Natura2000ImportParser parser = new Natura2000ImportParser(sqlUtilities);
 
                     fis = new FileInputStream(f);
                     bis = new BufferedInputStream(fis);

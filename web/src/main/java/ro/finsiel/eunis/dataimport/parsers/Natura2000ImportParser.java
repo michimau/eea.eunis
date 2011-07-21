@@ -1077,7 +1077,7 @@ public class Natura2000ImportParser extends DefaultHandler {
 
             this.preparedStatementSiteSites = con.prepareStatement(insertSiteSites);
 
-            String insertSiteAttribute = "INSERT INTO chm62edt_site_attributes "
+            String insertSiteAttribute = "INSERT IGNORE INTO chm62edt_site_attributes "
                 + "(ID_SITE, NAME, TYPE, VALUE, SOURCE_DB, SOURCE_TABLE) VALUES (?,?,?,?,'NATURA2000',?)";
 
             this.preparedStatementSiteAttribute = con.prepareStatement(insertSiteAttribute);

@@ -44,7 +44,10 @@ public class WebContentManagement implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /** Constant for the empty string - used as a return value. */
     private static final String STR_EMPTY = "";
+
+    /** Constant for HTML newline - used as a return value. */
     private static final String STR_BR = "<br />";
 
     /**
@@ -60,25 +63,36 @@ public class WebContentManagement implements java.io.Serializable {
      */
     private HashMap<String, WebContentPersist> htmlContent = new HashMap<String, WebContentPersist>();
 
+    /** User's chosen language - defaults to English */
     private String language = "en";
 
+    /** If in edit-mode then show links to change the content. */
     private boolean editMode = false;
+    /** In advanced edit-mode you can edit attribute values - alt, title, value, label. */
     private boolean advancedEditMode = false;
 
     /**
-     * Change current language displayed within web pages
+     * Change current language displayed within web pages.
      *
-     * @param language
+     * @param language - the language chosen by the user.
      */
     public void setLanguage(final String language) {
         this.language = language;
         reloadLanguageData();
     }
 
+    /**
+     * Reload cached phrases for the chosen language.
+     */
     public void reloadLanguageData() {
         cacheHTMLContent(language);
     }
 
+    /**
+     * Used to cause a newline between the crayon links in editmodes.
+     *
+     * @return - A HTML BR statement if in edit modes - otherwise nothing.
+     */
     public String br() {
         if (!editMode && !advancedEditMode) {
             return STR_EMPTY;
@@ -120,13 +134,15 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Look up a longer phrase (potentially HTML) in the content table
+     * Look up a short phrase (potentially HTML) in the content table.
      *
-     * EUNIS was designed to be localized. It is a feature we don't use at the moment, so
-     * in order to save resource we bypass the cmsPhrase() method.
+     * The cmsPhrase() is used for short strings - typically one liners. The argument is the phrase.
+     * When the argument is looked up in the database, it is MD5 encoded first. This ensures that the
+     * key kan fit in the ID_PAGE column in wiki:eunis_web_content.  In order to save resource we
+     * bypass the database lookup when the language is English.
      *
-     * @param idPage
-     * @return String
+     * @param idPage - phrase to look up.
+     * @return String - phrase to display on webpage.
      */
     public String cmsPhrase(String idPage) {
 
@@ -139,15 +155,17 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Look up a longer phrase (potentially HTML) in the content table
-     * Replace tokens in parameter idPage with values from parameter arguments
+     * Look up a short phrase (potentially HTML) in the content table
+     * replacing tokens in parameter idPage with values from parameter arguments.
      *
-     * EUNIS was designed to be localized. It is a feature we don't use at the moment, so
-     * in order to save resource we bypass the cmsPhrase() method.
+     * The cmsPhrase() is used for short strings - typically one liners. The argument is the phrase.
+     * When the argument is looked up in the database, it is MD5 encoded first. This ensures that the
+     * key kan fit in the ID_PAGE column in wiki:eunis_web_content.  In order to save resource we
+     * bypass the database lookup when the language is English.
      *
-     * @param idPage
-     * @param arguments
-     * @return String
+     * @param idPage - phrase to look up.
+     * @param arguments - arguments for the MessageFormat placeholders in the phrase.
+     * @return String - phrase to display on webpage.
      */
     public String cmsPhrase(String idPage, Object... arguments) {
 
@@ -160,6 +178,12 @@ public class WebContentManagement implements java.io.Serializable {
         return MessageFormat.format(ret, arguments);
     }
 
+    /**
+     * Used for editing of text that is normally not visible on the page - javascript, error messages, page title etc.
+     * When in edit-mode the description and token are shown in italics with a crayon at the end of it.
+     *
+     * @param idPage - token to look up.
+     */
     public String cmsMsg(String idPage) {
         if (!editMode) {
             return STR_EMPTY;
@@ -180,9 +204,9 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Edit mode - use this method where the crayon will appear
+     * Advanced edit mode - use this method where the crayon will appear.
      *
-     * @param idPage
+     * @param idPage - token to look up.
      */
     public String cmsAlt(String idPage) {
         if (!advancedEditMode) {
@@ -196,9 +220,9 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Edit mode - use this method where the crayon will appear
+     * Advanced edit mode - use this method where the crayon will appear.
      *
-     * @param idPage
+     * @param idPage - token to look up.
      */
     public String cmsTitle(String idPage) {
         if (!advancedEditMode) {
@@ -212,9 +236,9 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Edit mode - use this method where the crayon will appear
+     * Advanced edit mode - use this method where the crayon will appear.
      *
-     * @param idPage
+     * @param idPage - token to look up.
      */
     public String cmsInput(String idPage) {
         if (!advancedEditMode) {
@@ -228,9 +252,9 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
-     * Edit mode - use this method where the crayon will appear.
+     * Advanced edit mode - use this method where the crayon will appear.
      *
-     * @param idPage
+     * @param idPage - token to look up.
      */
     public String cmsLabel(String idPage) {
         if (!advancedEditMode) {
@@ -362,6 +386,12 @@ public class WebContentManagement implements java.io.Serializable {
         return ret;
     }
 
+    /**
+     * Get the description of a HTML page.
+     *
+     * @param idPage - token to look up.
+     * @return - the description.
+     */
     public String getDescription(String idPage) {
         if (idPage == null) {
             return "";
@@ -497,6 +527,7 @@ public class WebContentManagement implements java.io.Serializable {
     }
 
     /**
+     * Write an edit crayon allowing editing of the HTML phrase.
      * @param idPage
      * @param showEditTag
      * @deprecated use cmsXXXX methods instead.
@@ -517,6 +548,12 @@ public class WebContentManagement implements java.io.Serializable {
     // return writeEditTag( idPage, editMode );
     // }
 
+    /**
+     * Save the modified HTML content.
+     * If the language to save in is English, then mark the content invalid - meaning the translations have to be checked.
+     *
+     * @param modifyAllIdentical - Deletes the historic versions of the page.
+     */
     public boolean savePageContentJDBC(String idPage,
             final String content,
             final String description,

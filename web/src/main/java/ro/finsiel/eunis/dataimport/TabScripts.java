@@ -63,7 +63,7 @@ public class TabScripts {
                     sqlc);
 
             // Delete old records
-            ps = con.prepareStatement("DELETE FROM chm62edt_tab_page_species;");
+            ps = con.prepareStatement("DELETE FROM chm62edt_tab_page_species");
             ps.executeUpdate();
 
             String mainSql =
@@ -359,7 +359,7 @@ public class TabScripts {
     /**
      * Generate tab information for sites
      */
-    public void setTabSites() {
+    public void setTabSitesOld() {
 
         Connection con = null;
         PreparedStatement ps = null;
@@ -400,8 +400,7 @@ public class TabScripts {
                 int type = factsheet.getType();
 
                 // DESIGNATION
-                if (type == SiteFactsheet.TYPE_NATURA2000 || type == SiteFactsheet.TYPE_EMERALD
-                        || type == SiteFactsheet.TYPE_CORINE) {
+                if (type == SiteFactsheet.TYPE_NATURA2000 || type == SiteFactsheet.TYPE_EMERALD || type == SiteFactsheet.TYPE_CORINE) {
                     List sitesDesigc = new ArrayList();
 
                     if (type == SiteFactsheet.TYPE_NATURA2000 || type == SiteFactsheet.TYPE_EMERALD) {
@@ -449,30 +448,14 @@ public class TabScripts {
                 List sitesSpecificHabitats = new ArrayList();
 
                 if (type == SiteFactsheet.TYPE_NATURA2000 || type == SiteFactsheet.TYPE_EMERALD) {
-                    habit1Eunis =
-                        new SiteHabitatsDomain()
-                    .findWhere("A.ID_NATURE_OBJECT='"
-                            + noid
-                            + "' and CHM62EDT_REPORT_ATTRIBUTES.NAME='SOURCE_TABLE' "
-                            + "and CHM62EDT_REPORT_ATTRIBUTES.VALUE='habit1' LIMIT 1");
-                    habit1NotEunis =
-                        new Chm62edtSitesAttributesDomain()
-                    .findWhere("ID_SITE='"
-                            + siteid
-                            + "' AND SOURCE_TABLE = 'HABIT1' AND NAME LIKE 'HABITAT_CODE_%' "
-                            + "GROUP BY SUBSTRING(name,length(name) - instr(reverse(name),'_') + 2) LIMIT 1");
-                    habits2Eunis =
-                        new SiteHabitatsDomain()
-                    .findWhere("A.ID_NATURE_OBJECT='"
-                            + noid
-                            + "' and CHM62EDT_REPORT_ATTRIBUTES.NAME='SOURCE_TABLE' "
-                            + "and CHM62EDT_REPORT_ATTRIBUTES.VALUE='habit2' LIMIT 1");
-                    habits2NotEunis =
-                        new Chm62edtSitesAttributesDomain()
-                    .findWhere("ID_SITE='"
-                            + siteid
-                            + "' AND SOURCE_TABLE = 'HABIT2' AND NAME LIKE 'HABITAT_CODE_%' "
-                            + "GROUP BY SUBSTRING(name,length(name) - instr(reverse(name),'_') + 2) LIMIT 1");
+                    habit1Eunis = new SiteHabitatsDomain().findWhere("A.ID_NATURE_OBJECT='" + noid
+                            + "' and CHM62EDT_REPORT_ATTRIBUTES.NAME='SOURCE_TABLE' and CHM62EDT_REPORT_ATTRIBUTES.VALUE='habit1' LIMIT 1");
+                    habit1NotEunis = new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + siteid
+                            + "' AND SOURCE_TABLE = 'HABIT1' AND NAME LIKE 'HABITAT_CODE_%' GROUP BY SUBSTRING(name,length(name) - instr(reverse(name),'_') + 2) LIMIT 1");
+                    habits2Eunis = new SiteHabitatsDomain().findWhere("A.ID_NATURE_OBJECT='" + noid
+                            + "' and CHM62EDT_REPORT_ATTRIBUTES.NAME='SOURCE_TABLE' and CHM62EDT_REPORT_ATTRIBUTES.VALUE='habit2' LIMIT 1");
+                    habits2NotEunis = new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='"+ siteid
+                            + "' AND SOURCE_TABLE = 'HABIT2' AND NAME LIKE 'HABITAT_CODE_%' GROUP BY SUBSTRING(name,length(name) - instr(reverse(name),'_') + 2) LIMIT 1");
                 } else {
                     String isGoodHabitat =
                         " IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',RIGHT(CHM62EDT_HABITAT.CODE_2000,2),1) <> "
@@ -480,18 +463,15 @@ public class TabScripts {
                         + "IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',LENGTH(CHM62EDT_HABITAT.CODE_2000),1) = "
                         + "IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',4,1) ";
 
-                    habitats =
-                        new SiteHabitatsDomain().findWhere(isGoodHabitat + " AND A.ID_NATURE_OBJECT='" + noid
-                                + "' GROUP BY CHM62EDT_HABITAT.ID_NATURE_OBJECT, CHM62EDT_SITES.ID_NATURE_OBJECT LIMIT 1");
-                    sitesSpecificHabitats =
-                        new Chm62edtSitesAttributesDomain().findWhere(" NAME LIKE 'HABITAT_CODE_%' AND ID_SITE='" + siteid
-                                + "' group by name LIMIT 1");
+                    habitats = new SiteHabitatsDomain().findWhere(isGoodHabitat + " AND A.ID_NATURE_OBJECT='" + noid
+                            + "' GROUP BY CHM62EDT_HABITAT.ID_NATURE_OBJECT, CHM62EDT_SITES.ID_NATURE_OBJECT LIMIT 1");
+                    sitesSpecificHabitats = new Chm62edtSitesAttributesDomain().findWhere(" NAME LIKE 'HABITAT_CODE_%' AND ID_SITE='" + siteid
+                            + "' group by name LIMIT 1");
                 }
 
                 if ((SiteFactsheet.TYPE_NATURA2000 == type || type == SiteFactsheet.TYPE_EMERALD
-                        && (!habit1Eunis.isEmpty() || !habit1NotEunis.isEmpty() || !habits2Eunis.isEmpty() || !habits2NotEunis
-                                .isEmpty()))
-                                || (!habitats.isEmpty() || !sitesSpecificHabitats.isEmpty())) {
+                        && (!habit1Eunis.isEmpty() || !habit1NotEunis.isEmpty() || !habits2Eunis.isEmpty() || !habits2NotEunis.isEmpty()))
+                        || (!habitats.isEmpty() || !sitesSpecificHabitats.isEmpty())) {
                     fields += "HABITATS='Y',";
                 } else {
                     fields += "HABITATS='N',";
@@ -505,12 +485,10 @@ public class TabScripts {
                 if (type != SiteFactsheet.TYPE_NATURA2000) {
                     sites = new SiteRelationsDomain().findWhere("A.ID_SITE='" + siteid + "' LIMIT 1");
                 } else {
-                    sitesNatura200 =
-                        new SiteRelationsDomain().findWhere("A.ID_SITE='" + siteid
-                                + "' AND B.SOURCE_DB = 'NATURA2000' AND A.SOURCE_TABLE = 'sitrel' LIMIT 1");
-                    sitesCorine =
-                        new SiteRelationsDomain().findWhere("A.ID_SITE='" + siteid
-                                + "' AND B.SOURCE_DB = 'NATURA2000' AND A.SOURCE_TABLE = 'corine' LIMIT 1");
+                    sitesNatura200 = new SiteRelationsDomain().findWhere("A.ID_SITE='" + siteid
+                            + "' AND B.SOURCE_DB = 'NATURA2000' AND A.SOURCE_TABLE = 'sitrel' LIMIT 1");
+                    sitesCorine = new SiteRelationsDomain().findWhere("A.ID_SITE='" + siteid
+                            + "' AND B.SOURCE_DB = 'NATURA2000' AND A.SOURCE_TABLE = 'corine' LIMIT 1");
                 }
                 if (!sites.isEmpty() || !sitesNatura200.isEmpty() || !sitesCorine.isEmpty()) {
                     fields += "SITES='Y',";
@@ -524,16 +502,13 @@ public class TabScripts {
                 if (SiteFactsheet.TYPE_CORINE == type || SiteFactsheet.TYPE_DIPLOMA == type
                         || SiteFactsheet.TYPE_BIOGENETIC == type || SiteFactsheet.TYPE_NATURA2000 == type
                         || type == SiteFactsheet.TYPE_EMERALD) {
-                    List activities =
-                        new HumanActivityDomain().findWhere("LOOKUP_TYPE = 'HUMAN_ACTIVITY' AND ID_SITE='" + siteid
-                                + "' LIMIT 1");
+                    List activities = new HumanActivityDomain().findWhere("LOOKUP_TYPE = 'HUMAN_ACTIVITY' AND ID_SITE='" + siteid + "' LIMIT 1");
 
                     if (activities.size() > 0) {
                         other_exist = true;
                     }
                 }
-                if (SiteFactsheet.TYPE_NATURA2000 == type || SiteFactsheet.TYPE_EMERALD == type
-                        || SiteFactsheet.TYPE_DIPLOMA == type || SiteFactsheet.TYPE_BIOGENETIC == type) {
+                if (SiteFactsheet.TYPE_NATURA2000 == type || SiteFactsheet.TYPE_EMERALD == type || SiteFactsheet.TYPE_DIPLOMA == type || SiteFactsheet.TYPE_BIOGENETIC == type) {
                     String mapID = factsheet.getMapID();
                     String mapScale = factsheet.getMapScale();
                     String mapProjection = factsheet.getMapProjection();
@@ -587,6 +562,126 @@ public class TabScripts {
             e.printStackTrace();
         } finally {
             closeAll(con, ps, rs);
+        }
+    }
+
+    /**
+     * Generate tab information for sites
+     */
+    public void setTabSites() {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        SQLUtilities sqlc = new SQLUtilities();
+
+        try {
+            Class.forName(SQL_DRV);
+            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+
+            sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+
+            EunisUtil.writeLogMessage("GENERAL tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
+                    sqlc);
+
+            // Delete old records
+            ps = con.prepareStatement("DELETE FROM chm62edt_tab_page_sites");
+            ps.executeUpdate();
+
+            String mainSql = "INSERT INTO chm62edt_tab_page_sites (ID_NATURE_OBJECT,GENERAL_INFORMATION,FAUNA_FLORA) "
+                + "(SELECT ID_NATURE_OBJECT,'Y','Y' FROM chm62edt_sites)";
+
+            ps = con.prepareStatement(mainSql);
+            ps.executeUpdate();
+
+            EunisUtil.writeLogMessage("GENERAL tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
+                    sqlc);
+
+            // Update DESIGNATION tab
+            String s =
+                "SELECT DISTINCT A.ID_NATURE_OBJECT FROM CHM62EDT_DESIGNATIONS D "
+                + "JOIN CHM62EDT_SITES_RELATED_DESIGNATIONS AS R ON D.ID_DESIGNATION = R.ID_DESIGNATION "
+                + "JOIN CHM62EDT_SITES AS A ON R.ID_SITE = A.ID_SITE "
+                + "WHERE R.SOURCE_DB IN ('NATURA2000','EMERALD','CORINE') AND R.SOURCE_TABLE IN ('desigr','desigc')";
+            updateSitesTab(s, con, sqlc, "DESIGNATION");
+
+            // Update HABITATS tab
+            s = "SELECT N.ID_NATURE_OBJECT FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS N "
+                + "JOIN CHM62EDT_HABITAT AS H ON N.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT "
+                + "JOIN CHM62EDT_REPORT_ATTRIBUTES AS R ON N.ID_REPORT_ATTRIBUTES = R.ID_REPORT_ATTRIBUTES "
+                + "WHERE R.NAME = 'SOURCE_TABLE' AND R.VALUE IN ('habit1','habit2') "
+                + "UNION "
+                + "SELECT A.ID_NATURE_OBJECT FROM CHM62EDT_SITE_ATTRIBUTES AS S "
+                + "JOIN CHM62EDT_SITES AS A ON S.ID_SITE = A.ID_SITE  "
+                + "WHERE S.SOURCE_TABLE IN ('HABIT1','HABIT2') AND S.NAME LIKE 'HABITAT_CODE_%' AND A.SOURCE_DB IN ('NATURA2000','EMERALD') "
+                + "UNION "
+                + "SELECT A.ID_NATURE_OBJECT FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS N "
+                + "JOIN CHM62EDT_SITES AS A ON N.ID_NATURE_OBJECT = A.ID_NATURE_OBJECT "
+                + "JOIN CHM62EDT_HABITAT AS H ON N.ID_NATURE_OBJECT_LINK = H.ID_NATURE_OBJECT "
+                + "JOIN CHM62EDT_REPORT_ATTRIBUTES AS R ON N.ID_REPORT_ATTRIBUTES = R.ID_REPORT_ATTRIBUTES "
+                + "WHERE A.SOURCE_DB NOT IN ('NATURA2000','EMERALD')";
+            updateSitesTab(s, con, sqlc, "HABITATS");
+
+            // Update SITES tab
+            s = "SELECT DISTINCT A.ID_NATURE_OBJECT FROM CHM62EDT_SITES_SITES AS S "
+                + "JOIN CHM62EDT_SITES AS A ON S.ID_SITE_LINK = A.ID_SITE "
+                + "JOIN CHM62EDT_NATURA2000_SITE_TYPE AS C ON S.RELATION_TYPE=C.ID_SITE_TYPE "
+                + "WHERE (A.SOURCE_DB = 'NATURA2000' AND S.SOURCE_TABLE IN ('sitrel','corine')) OR (A.SOURCE_DB != 'NATURA2000')";
+            updateSitesTab(s, con, sqlc, "SITES");
+
+            // Update OTHER tab
+            s = "SELECT A.ID_NATURE_OBJECT FROM CHM62EDT_SITES AS A "
+                + "JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS N ON A.ID_NATURE_OBJECT = N.ID_NATURE_OBJECT "
+                + "JOIN CHM62EDT_REPORT_TYPE AS R ON N.ID_REPORT_TYPE = R.ID_REPORT_TYPE "
+                + "JOIN CHM62EDT_NATURA2000_ACTIVITY_CODE AS C ON R.ID_LOOKUP = C.ID_ACTIVITY_CODE "
+                + "WHERE R.LOOKUP_TYPE = 'HUMAN_ACTIVITY' AND A.SOURCE_DB IN ('NATURA2000','CORINE','DIPLOMA','BIOGENETIC','EMERALD') "
+                + "UNION "
+                + "SELECT A.ID_NATURE_OBJECT FROM CHM62EDT_SITE_ATTRIBUTES AS S "
+                + "JOIN CHM62EDT_SITES AS A ON S.ID_SITE = A.ID_SITE "
+                + "WHERE A.SOURCE_DB IN ('NATURA2000','EMERALD','DIPLOMA','BIOGENETIC') AND "
+                + "EXISTS(SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES AS S2 WHERE S2.ID_SITE=S.ID_SITE AND S2.NAME = 'MAP_ID' AND LENGTH(S2.VALUE) > 0 LIMIT 1) AND "
+                + "EXISTS(SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES AS S2 WHERE S2.ID_SITE=S.ID_SITE AND S2.NAME = 'MAP_SCALE' AND LENGTH(S2.VALUE) > 0 LIMIT 1) AND "
+                + "EXISTS(SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES AS S2 WHERE S2.ID_SITE=S.ID_SITE AND S2.NAME = 'MAP_PROJECTION' AND LENGTH(S2.VALUE) > 0 LIMIT 1) AND "
+                + "EXISTS(SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES AS S2 WHERE S2.ID_SITE=S.ID_SITE AND S2.NAME = 'MAP_DETAILS' AND LENGTH(S2.VALUE) > 0 LIMIT 1) "
+                + "UNION "
+                + "SELECT A.ID_NATURE_OBJECT FROM CHM62EDT_SITE_ATTRIBUTES AS S "
+                + "JOIN CHM62EDT_SITES AS A ON S.ID_SITE = A.ID_SITE  "
+                + "WHERE A.SOURCE_DB IN ('NATURA2000','EMERALD','DIPLOMA','BIOGENETIC') AND "
+                + "EXISTS(SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES AS S2 WHERE S2.ID_SITE=S.ID_SITE AND S2.NAME = 'PHOTO_TYPE' AND LENGTH(S2.VALUE) > 0 LIMIT 1) AND "
+                + "EXISTS(SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES AS S2 WHERE S2.ID_SITE=S.ID_SITE AND S2.NAME = 'PHOTO_NUMBER' AND LENGTH(S2.VALUE) > 0 LIMIT 1) AND "
+                + "EXISTS(SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES AS S2 WHERE S2.ID_SITE=S.ID_SITE AND S2.NAME = 'PHOTO_LOCATION' AND LENGTH(S2.VALUE) > 0 LIMIT 1) AND "
+                + "EXISTS(SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES AS S2 WHERE S2.ID_SITE=S.ID_SITE AND S2.NAME = 'PHOTO_DESCRIPTION' AND LENGTH(S2.VALUE) > 0 LIMIT 1) AND "
+                + "EXISTS(SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES AS S2 WHERE S2.ID_SITE=S.ID_SITE AND S2.NAME = 'PHOTO_DATE' AND LENGTH(S2.VALUE) > 0 LIMIT 1) AND "
+                + "EXISTS(SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES AS S2 WHERE S2.ID_SITE=S.ID_SITE AND S2.NAME = 'PHOTO_AUTHOR' AND LENGTH(S2.VALUE) > 0 LIMIT 1) "
+                + "UNION "
+                + "SELECT A.ID_NATURE_OBJECT FROM CHM62EDT_SITE_ATTRIBUTES AS S "
+                + "JOIN CHM62EDT_SITES AS A ON S.ID_SITE = A.ID_SITE "
+                + "WHERE LENGTH(A.IUCNAT) > 0 OR (S.NAME IN ('TYPOLOGY','REFERENCE_DOCUMENT_NUMBER','REFERENCE_DOCUMENT_SOURCE') AND LENGTH(S.VALUE) > 0)";
+            updateSitesTab(s, con, sqlc, "OTHER");
+
+        } catch (Exception e) {
+            EunisUtil.writeLogMessage("ERROR occured while generating sites tab information: " + e.getMessage(), cmd, sqlc);
+            e.printStackTrace();
+        } finally {
+            closeAll(con, ps, null);
+        }
+    }
+
+    private void updateSitesTab(String sql, Connection con, SQLUtilities sqlc, String tab) throws Exception {
+
+        PreparedStatement ps = null;
+        try {
+            EunisUtil.writeLogMessage(tab + " tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
+                    sqlc);
+
+            String query = "UPDATE chm62edt_tab_page_sites SET `" + tab + "` = 'Y' WHERE ID_NATURE_OBJECT IN (" + sql + ")";
+            ps = con.prepareStatement(query);
+            ps.executeUpdate();
+
+            EunisUtil.writeLogMessage(tab + " tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
+                    sqlc);
+        } finally {
+            // connection will be closed in setTabSites() method
+            closeAll(null, ps, null);
         }
     }
 

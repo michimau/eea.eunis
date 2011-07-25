@@ -101,8 +101,7 @@
     int realLevel = factsheet.getHabitatLevel().intValue() + 1;
 %>
           <%-- Key navigation--%>
-          <a title="<%=cm.cms("open_key_navigation")%>" href="habitats-key.jsp?pageCode=<%=factsheet.getEunisHabitatCode()%>&amp;level=<%=realLevel%>"><img alt="Key navigation" src="images/mini/key_in.png" width="20" height="20" title="<%=cm.cms("habitats_factsheet_80")%>" border="0" /></a>
-          <%=cm.cmsTitle("open_key_navigation")%><%=cm.cmsTitle("habitats_factsheet_80")%>
+          <a title="<%=cm.cmsPhrase("Open key navigation page")%>" href="habitats-key.jsp?pageCode=<%=factsheet.getEunisHabitatCode()%>&amp;level=<%=realLevel%>"><img alt="Key navigation" src="images/mini/key_in.png" width="20" height="20" title="<%=cm.cmsPhrase("Go to habitat key navigation")%>" border="0" /></a>
           &nbsp;&nbsp;
 <%
   }
@@ -111,16 +110,14 @@
     if (factsheet.getHabitatLevel() != null && factsheet.getHabitatLevel().intValue() > 1)
     {
 %>
-          <a title="<%=cm.cms("open_code_browser")%>" href="habitats-code-browser.jsp?Code=<%=factsheet.getEunisHabitatCode()%>&amp;habID=<%=factsheet.getIdHabitat()%>&amp;fromFactsheet=yes"><img alt="<%=cm.cms("open_code_browser")%>" src="images/mini/tree.gif" width="20" height="20" border="0" title="<%=cm.cms("habitats_factsheet_06")%>" /></a>
-          <%=cm.cmsTitle("open_code_browser")%><%=cm.cmsTitle("habitats_factsheet_06")%>
+          <a title="<%=cm.cmsPhrase("Open code browser")%>" href="habitats-code-browser.jsp?Code=<%=factsheet.getEunisHabitatCode()%>&amp;habID=<%=factsheet.getIdHabitat()%>&amp;fromFactsheet=yes"><img alt="<%=cm.cmsPhrase("Open code browser")%>" src="images/mini/tree.gif" width="20" height="20" border="0" title="<%=cm.cmsPhrase("Show habitat in taxonomic tree")%>" /></a>
           &nbsp;&nbsp;
 <%
     }
     if (factsheet.getHabitatLevel() != null && factsheet.getHabitatLevel().intValue() == 1)
     {
 %>
-          <a title="<%=cm.cms("open_tree_navigation")%>" href="habitats-code-browser.jsp"><img alt="<%=cm.cms("open_tree_navigation")%>" src="images/mini/tree.gif" width="20" height="20" border="0" title="<%=cm.cms("habitats_factsheet_06")%>" /></a>
-          <%=cm.cmsTitle("open_tree_navigation")%><%=cm.cmsTitle("habitats_factsheet_06")%>
+          <a title="<%=cm.cmsPhrase("Open tree navigation")%>" href="habitats-code-browser.jsp"><img alt="<%=cm.cmsPhrase("Open tree navigation")%>" src="images/mini/tree.gif" width="20" height="20" border="0" title="<%=cm.cmsPhrase("Show habitat in taxonomic tree")%>" /></a>
           &nbsp;&nbsp;
 <%
     }
@@ -290,10 +287,18 @@
 		</div>
 <%
 	String art17 = factsheet.getLink(factsheet.idNatureObject, Constants.ART17_SUMMARY);
-	if(art17 != null && art17.length() > 0){
+	if (art17 != null && art17.length() > 0) {
 %>
 		<div>
 			<a href="<%=art17%>"><%=cm.cmsPhrase("Article 17 Summary")%></a>
+		</div>
+<%
+	}
+	String codeN2000 = factsheet.getCode2000();
+	if (codeN2000 != null && codeN2000.length() > 0) {
+%>
+		<div>
+			<a href="http://natura2000.eea.europa.eu/#annexICode=<%=codeN2000%>"><%=cm.cmsPhrase("Natura2000 mapviewer")%></a>
 		</div>
 <%
 	}
@@ -311,7 +316,7 @@
     <h2>
       <%=cm.cmsPhrase("Name in other languages")%>
     </h2>
-    <table summary="<%=cm.cms("habitats_name_in_other_languages")%>" class="listing fullwidth">
+    <table summary="<%=cm.cmsPhrase("Name in other languages")%>" class="listing fullwidth">
       <thead>
         <tr>
           <th scope="col">
@@ -358,7 +363,7 @@
     <h2>
       <%=cm.cmsPhrase("Relationships with other classifications")%>
     </h2>
-    <table summary="<%=cm.cms("habitats_factsheet_22")%>" class="listing fullwidth">
+    <table summary="<%=cm.cmsPhrase("Relationships with other classifications")%>" class="listing fullwidth">
       <col style="width:30%"/>
       <col style="width:15%"/>
       <col style="width:40%"/>
@@ -448,8 +453,7 @@
           {
             int realLevel = otherHab.getLevel().intValue() + 1;
 %>
-          <a title="<%=cm.cms("go_to_key_navigator")%>" href="habitats-key.jsp?pageCode=<%=otherHab.getEunisCode()%>&amp;level=<%=realLevel%>"><img src="images/mini/key_out.png" alt="<%=cm.cms("go_to_key_navigator")%>" border="0" /></a>
-          <%=cm.cmsTitle("go_to_key_navigator")%>
+          <a title="<%=cm.cmsPhrase("Go to key navigator, starting with this habitat")%>" href="habitats-key.jsp?pageCode=<%=otherHab.getEunisCode()%>&amp;level=<%=realLevel%>"><img src="images/mini/key_out.png" alt="<%=cm.cmsPhrase("Go to key navigator, starting with this habitat")%>" border="0" /></a>
 <%
           }
 %>

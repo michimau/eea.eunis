@@ -133,9 +133,7 @@
                                   </td>
                                 </tr>
                               </table>
-                              <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
-                              <%=cm.cmsAlt("field_mandatory")%>
-                              <%=cm.cmsTitle("field_mandatory")%>
+                              <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cmsPhrase("This field is mandatory")%>" title="<%=cm.cmsPhrase("This field is mandatory")%>" src="images/mini/field_mandatory.gif" />
                               <label for="scientificName"><%=cm.cmsPhrase("Scientific name")%></label>
                               <select id="select1" title="<%=cm.cmsPhrase("Operator")%>" name="relationOp">
                                 <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cmsPhrase("is")%></option>
@@ -230,9 +228,7 @@
                                     </td>
                                   </tr>
                                 </table>
-                                <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
-                                <%=cm.cmsAlt("field_mandatory")%>
-                                <%=cm.cmsTitle("field_mandatory")%>
+                                <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cmsPhrase("This field is mandatory")%>" title="<%=cm.cmsPhrase("This field is mandatory")%>" src="images/mini/field_mandatory.gif" />
                                 <label for="vernacularName"><%=cm.cmsPhrase("Vernacular Name")%></label>
                                 <select id="select2" title="<%=cm.cmsPhrase("Operator")%>" size="1" name="relationOp">
                                   <option value="<%=Utilities.OPERATOR_IS%>"><%=cm.cmsPhrase("is")%></option>

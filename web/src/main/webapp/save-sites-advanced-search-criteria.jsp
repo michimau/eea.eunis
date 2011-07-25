@@ -19,7 +19,7 @@
       WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title>
-      <%=cm.cms("save_criteria")%>
+      <%=cm.cmsPhrase("Save search criteria")%>
     </title>
 
     <script language="JavaScript" type="text/javascript">
@@ -241,8 +241,7 @@
 %>
             <input type="submit" id="submit" name="Submit" title="<%=cm.cmsPhrase("Save")%>" value="<%=cm.cmsPhrase("Save")%>" class="submitSearchButton" />
 
-            <input type="reset" id="reset" name="Reset" title="<%=cm.cms("reset_values")%>" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" />
-            <%=cm.cmsTitle("reset_values")%>
+            <input type="reset" id="reset" name="Reset" title="<%=cm.cmsPhrase("Reset values")%>" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" />
 <%
     }
 %>
@@ -251,8 +250,6 @@
         </tr>
       </table>
     </form>
-    <%=cm.br()%>
-    <%=cm.cmsMsg("save_criteria")%>
     <%=cm.br()%>
     <%=cm.cmsMsg("search_criteria_saved")%>
     <%=cm.br()%>

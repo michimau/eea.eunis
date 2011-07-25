@@ -166,8 +166,7 @@
                     <label for="showHabitat"><%=cm.cmsPhrase("Habitat types&nbsp;")%></label>
                     <%=cm.cmsTitle("sites_habitats_07")%>
                   </div>
-                  <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
-                  <%=cm.cmsAlt("field_mandatory")%>
+                  <img style="vertical-align:middle" alt="<%=cm.cmsPhrase("This field is mandatory")%>" title="<%=cm.cmsPhrase("This field is mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
                   <label for="searchAttribute" class="noshow"><%=cm.cms("search_attribute")%></label>
                   <select id="searchAttribute" name="searchAttribute" title="<%=cm.cms("search_attribute")%>">
                     <option value="<%=HabitatSearchCriteria.SEARCH_NAME%>" selected="selected">
@@ -227,8 +226,7 @@
                     <%=cm.cmsTitle("both")%>
                   </div>
                   <div class="submit_buttons">
-                    <input id="reset" name="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" title="<%=cm.cms("reset_values")%>" />
-                    <%=cm.cmsTitle("reset_values")%>
+                    <input id="reset" name="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" title="<%=cm.cmsPhrase("Reset values")%>" />
 
                     <input id="submit2" name="submit2" type="submit" class="submitSearchButton" value="<%=cm.cmsPhrase("Search")%>" title="<%=cm.cmsPhrase("Search")%>" />
                   </div>

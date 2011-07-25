@@ -327,8 +327,7 @@
                       <table summary="layout" cellspacing="2" cellpadding="0" border="0" width="100%" style="text-align:left">
                         <tr>
                           <td style="vertical-align:bottom" colspan="2">
-                            <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
-                            <%=cm.cmsAlt("field_mandatory")%>
+                            <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cmsPhrase("This field is mandatory")%>" title="<%=cm.cmsPhrase("This field is mandatory")%>" src="images/mini/field_mandatory.gif" />
                             <strong>
                               <%=cm.cmsPhrase("Group")%>
                             </strong>
@@ -375,8 +374,7 @@
                           %>
                           <td style="vertical-align:bottom" colspan="2">
                             <br />
-                            <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
-                            <%=cm.cmsAlt("field_mandatory")%>
+                            <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cmsPhrase("This field is mandatory")%>" title="<%=cm.cmsPhrase("This field is mandatory")%>" src="images/mini/field_mandatory.gif" />
                             <strong><%=cm.cmsPhrase("legal text")%></strong>
                           </td>
                           <%
@@ -437,9 +435,8 @@
                               <tr>
                                 <td colspan="5">&nbsp;
                                  <br />
-                                  <input title="<%=cm.cms("save_criteria")%>" id="saveCriteria1" type="checkbox" name="saveCriteria" value="true" <%=sv%> />
+                                  <input title="<%=cm.cmsPhrase("Save search criteria")%>" id="saveCriteria1" type="checkbox" name="saveCriteria" value="true" <%=sv%> />
                                   <label for="saveCriteria1"><%=cm.cmsPhrase("Save your criteria:")%></label>
-                                  <%=cm.cmsTitle("save_criteria")%>
                                   <a title="<%=cm.cms("save_open_link")%>" href="javascript:checkSaveCriteria(1)"><img alt="<%=cm.cms("save_open_link")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                                   <%=cm.cmsTitle("save_open_link")%>
                                 </td>
@@ -537,8 +534,7 @@
                         <tr>
                           <td colspan="2">
                             <br />
-                            <img alt="<%=cm.cms("field_mandatory")%>" width="11" height="12" style="vertical-align:middle" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
-                            <%=cm.cmsAlt("field_mandatory")%>
+                            <img alt="<%=cm.cmsPhrase("This field is mandatory")%>" width="11" height="12" style="vertical-align:middle" title="<%=cm.cmsPhrase("This field is mandatory")%>" src="images/mini/field_mandatory.gif" />
                               <label for ="scientificName"><%=cm.cmsPhrase("Scientific name")%></label>
                           </td>
                           <td style="vertical-align:bottom" colspan="3">
@@ -555,8 +551,7 @@
                             <tr>
                               <td colspan="5">
                                 <br/>
-                                <input title="<%=cm.cms("save_criteria")%>" id="saveCriteria2" type="checkbox" name="saveCriteria" value="true" <%=sv%> />
-                                <%=cm.cmsTitle("save_criteria")%>
+                                <input title="<%=cm.cmsPhrase("Save search criteria")%>" id="saveCriteria2" type="checkbox" name="saveCriteria" value="true" <%=sv%> />
                                   <label for="saveCriteria2">
                                       <%=cm.cmsPhrase("Save your criteria:")%>
                                   </label>

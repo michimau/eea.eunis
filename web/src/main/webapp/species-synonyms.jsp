@@ -144,8 +144,7 @@
                             </tr>
                             <tr>
                               <td>
-                                <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
-                                <%=cm.cmsTitle("field_mandatory")%>
+                                <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cmsPhrase("This field is mandatory")%>" title="<%=cm.cmsPhrase("This field is mandatory")%>" src="images/mini/field_mandatory.gif" />
                                 &nbsp;
                                 <label for="scientificName"><%=cm.cmsPhrase("Species scientific name")%></label>
                                 <select id="select2" title="<%=cm.cmsPhrase("Operator")%>" name="relationOp">

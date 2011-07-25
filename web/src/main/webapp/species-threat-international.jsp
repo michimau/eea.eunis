@@ -266,8 +266,7 @@
                       <table summary="layout" cellspacing="1" cellpadding="0" border="0" width="100%" style="text-align:left">
                         <tr>
                           <td style="vertical-align:middle">
-                            <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" />
-                            <%=cm.cmsAlt("field_mandatory")%>
+                            <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cmsPhrase("This field is mandatory")%>" title="<%=cm.cmsPhrase("This field is mandatory")%>" src="images/mini/field_mandatory.gif" />
                             <%
                               if (null == group)
                               {
@@ -490,10 +489,9 @@
                           %>
                               <tr>
                                 <td>&nbsp; <br />
-                                  <input title="<%=cm.cms("save_criteria")%>" id="saveCriteria" type="checkbox" name="saveCriteria" value="true" <%=isSaveCriteriaChecked%> /> <%=cm.cmsTitle("save_criteria")%>
+                                  <input title="<%=cm.cmsPhrase("Save search criteria")%>" id="saveCriteria" type="checkbox" name="saveCriteria" value="true" <%=isSaveCriteriaChecked%> />
                                     <label for="saveCriteria"><%=cm.cmsPhrase("Save this criteria")%></label>
-                                    <a title="<%=cm.cms("save_criteria")%>" href="javascript:checkSaveCriteria()"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
-                                    <%=cm.cmsTitle("save_criteria")%>
+                                    <a title="<%=cm.cmsPhrase("Save search criteria")%>" href="javascript:checkSaveCriteria()"><img alt="<%=cm.cmsPhrase("Save search criteria")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                                 </td>
                               </tr>
                               <tr><td>&nbsp;</td></tr>

@@ -91,8 +91,7 @@
 
                   <fieldset class="large">
                   <legend><%=cm.cmsPhrase("Search what")%></legend>
-                  <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
-                  <%=cm.cmsAlt("field_mandatory")%>
+                  <img style="vertical-align:middle" alt="<%=cm.cmsPhrase("This field is mandatory")%>" title="<%=cm.cmsPhrase("This field is mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
                   <label for="relationOp"><%=cm.cmsPhrase("Site name")%></label>&nbsp;
                   <select id="relationOp" name="relationOp" title="<%=cm.cmsPhrase("Operator")%>">
                     <option value="<%=Utilities.OPERATOR_IS%>">
@@ -174,8 +173,7 @@
                   </fieldset>
 
                   <div class="submit_buttons">
-                    <input id="reset" name="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" title="<%=cm.cms("reset_values")%>" />
-                    <%=cm.cmsTitle("reset_values")%>
+                    <input id="reset" name="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" title="<%=cm.cmsPhrase("Reset values")%>" />
 
                     <input id="submit2" name="submit2" type="submit" class="submitSearchButton" value="<%=cm.cmsPhrase("Search")%>" title="<%=cm.cmsPhrase("Search")%>" />
                   </div>

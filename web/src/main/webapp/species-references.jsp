@@ -169,7 +169,7 @@
                             <td>
                               <select id="select2" title="<%=cm.cmsPhrase("Operator")%>" name="relOpDate" onchange="MM_jumpMenu('parent',this,0)">
                                 <option value="species-references.jsp?between=no" <%=(request.getParameter("between")==null?"selected=\"selected\"":(request.getParameter("between").equalsIgnoreCase("yes")?"":"selected=\"selected\""))%>><%=cm.cmsPhrase("is")%></option>
-                                <option value="species-references.jsp?between=yes" <%if (request.getParameter("between")!=null && request.getParameter("between").equalsIgnoreCase("yes")){%> selected="selected"<%}%>><%=cm.cms("between")%></option>
+                                <option value="species-references.jsp?between=yes" <%if (request.getParameter("between")!=null && request.getParameter("between").equalsIgnoreCase("yes")){%> selected="selected"<%}%>><%=cm.cmsPhrase("Between")%></option>
                               </select>
                             </td>
                             <%
@@ -347,8 +347,6 @@
 
             <%=cm.br()%>
             <%=cm.cmsMsg("pick_references_show_species")%>
-            <%=cm.br()%>
-            <%=cm.cmsMsg("between")%>
             <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>

@@ -231,7 +231,7 @@
                   <fieldset class="large">
                   <legend><%=cm.cmsPhrase("Search what")%></legend>
 
-                        <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" /><%=cm.cmsAlt("field_mandatory")%>&nbsp;
+                        <img width="11" height="12" style="vertical-align:middle" alt="<%=cm.cmsPhrase("This field is mandatory")%>" title="<%=cm.cmsPhrase("This field is mandatory")%>" src="images/mini/field_mandatory.gif" />&nbsp;
                         <label for="searchAttribute" class="noshow"><%=cm.cms("search_attribute")%></label>
                         <select id="searchAttribute" title="<%=cm.cms("search_attribute")%>" name="searchAttribute" onchange="changeCriteria()">
                           <option value="<%=SitesSearchCriteria.SEARCH_NAME%>" selected="selected"><%=cm.cms("site_name")%></option>

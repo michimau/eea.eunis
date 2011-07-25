@@ -180,9 +180,8 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                        <%if (request.getParameter("between") != null && request.getParameter("between").equalsIgnoreCase("yes")) { %>
                          selected="selected"
                        <% } %>
-                       ><%=cm.cms("between")%></option>
+                       ><%=cm.cmsPhrase("Between")%></option>
                     </select>
-                    <%=cm.cmsInput("between")%>
                   </td>
                   <%
                     // If relOpDate is between
@@ -343,8 +342,7 @@ source[1] = <%=RefDomain.OTHER_INFO%>
                   <td>
                     <script language="JavaScript" src="script/habitats-references-save-criteria.js" type="text/javascript"></script>
                     <%=cm.cmsPhrase("Save your criteria")%>:
-                    <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-references.jsp','7','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_criteria")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
-                    <%=cm.cmsTitle("save_criteria")%>
+                    <a title="<%=cm.cmsPhrase("Save search criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-references.jsp','7','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cmsPhrase("Save search criteria")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                   </td>
                 </tr>
                 <%

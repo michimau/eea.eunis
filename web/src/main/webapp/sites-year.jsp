@@ -169,8 +169,7 @@
 
                   <fieldset class="large">
                   <legend><%=cm.cmsPhrase("Search what")%></legend>
-                  <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
-                  <%=cm.cmsAlt("field_mandatory")%>
+                  <img style="vertical-align:middle" alt="<%=cm.cmsPhrase("This field is mandatory")%>" title="<%=cm.cmsPhrase("This field is mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
 
                   <label for="relationOp"><%=cm.cmsPhrase("Year")%></label>
                   <select id="relationOp" name="relationOp" onchange="MM_jumpMenu('parent',this,0)" title="<%=cm.cmsPhrase("Operator")%>">
@@ -178,7 +177,7 @@
                       <%=cm.cmsPhrase("is")%>
                     </option>
                     <option value="sites-year.jsp?relationOp=<%=Utilities.OPERATOR_BETWEEN%>" <%if (relationOp == Utilities.OPERATOR_BETWEEN.intValue()) {%>selected="selected"<%}%>>
-                      <%=cm.cms("between")%>
+                      <%=cm.cmsPhrase("Between")%>
                     </option>
                     <option value="sites-year.jsp?relationOp=<%=Utilities.OPERATOR_GREATER_OR_EQUAL%>" <%if (relationOp == Utilities.OPERATOR_GREATER_OR_EQUAL.intValue()) {%>selected="selected"<%}%>>
                       <%=cm.cms("sites_year_20")%>
@@ -187,7 +186,6 @@
                       <%=cm.cms("sites_year_21")%>
                     </option>
                   </select>
-                  <%=cm.cmsInput("between")%>
                   <%=cm.cmsInput("sites_year_20")%>
                   <%=cm.cmsInput("sites_year_21")%>
           <%
@@ -261,8 +259,7 @@
                   </fieldset>
 
                   <div class="submit_buttons">
-                    <input id="reset" name="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" title="<%=cm.cms("reset_values")%>" />
-                    <%=cm.cmsTitle("reset_values")%>
+                    <input id="reset" name="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" title="<%=cm.cmsPhrase("Reset values")%>" />
 
                     <input id="submit2" name="submit2" type="submit" class="submitSearchButton" value="<%=cm.cmsPhrase("Search")%>" title="<%=cm.cmsPhrase("Search")%>" />
                   </div>

@@ -19,7 +19,7 @@
       WebContentManagement cm = SessionManager.getWebContent();
     %>
     <title>
-      <%=cm.cms("save_criteria")%>
+      <%=cm.cmsPhrase("Save search criteria")%>
     </title>
      <%
        // Set IdSession variable
@@ -259,6 +259,5 @@
         </tr>
     </table>
   </form>
-  <%=cm.cmsMsg("save_criteria")%>
   </body>
 </html>

@@ -65,8 +65,7 @@
     <%=cm.cmsInput("related_reports_upload_description_value")%>
   </p>
   <p>
-    <input title="<%=cm.cms("reset_values")%>" type="reset" name="Reset" id="Reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" />
-    <%=cm.cmsTitle("reset_values")%>
+    <input title="<%=cm.cmsPhrase("Reset values")%>" type="reset" name="Reset" id="Reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" />
 
     <input title="<%=cm.cms("upload_document")%>" type="submit" name="Submit" id="Submit" value="<%=cm.cms("upload")%>" class="submitSearchButton" />
     <%=cm.cmsTitle("upload_document")%>

@@ -169,7 +169,7 @@
                     </tr>
                     <tr>
                       <td colspan="2">
-                        <img title="<%=cm.cms("field_mandatory")%>" alt="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" /><%=cm.cmsAlt("field_mandatory")%>&nbsp;
+                        <img title="<%=cm.cmsPhrase("This field is mandatory")%>" alt="<%=cm.cmsPhrase("This field is mandatory")%>" src="images/mini/field_mandatory.gif" />&nbsp;
                         <label for="select1" class="noshow"><%=cm.cms("search_attribute")%></label>
                         <select id="select1" title="<%=cm.cms("search_attribute")%>" name="searchAttribute">
                           <option value="<%=HabitateSearchCriteria.SEARCH_NAME%>" selected="selected"><%=cm.cms("name_or_description")%></option>

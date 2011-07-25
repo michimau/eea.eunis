@@ -76,8 +76,7 @@
                 <%=cm.cmsText("sites_statistical_01")%>
                 <form name="eunis" onsubmit="javascript:return validateForm();" action="sites-statistical-result.jsp" method="get">
                   <br />
-                  <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
-                  <%=cm.cmsAlt("field_mandatory")%>
+                  <img style="vertical-align:middle" alt="<%=cm.cmsPhrase("This field is mandatory")%>" title="<%=cm.cmsPhrase("This field is mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
                   <label for="country">
                       <%=cm.cmsPhrase("Country is")%>
                   </label>
@@ -131,8 +130,7 @@
                     <%=cm.cmsLabel("maximum_designation_year")%>
                   </strong>
                   <div class="submit_buttons">
-                    <input id="reset" name="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" title="<%=cm.cms("reset_values")%>" />
-                    <%=cm.cmsTitle("reset_values")%>
+                    <input id="reset" name="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" title="<%=cm.cmsPhrase("Reset values")%>" />
 
                     <input id="submit2" name="submit2" type="submit" class="submitSearchButton" value="<%=cm.cmsPhrase("Search")%>" title="<%=cm.cmsPhrase("Search")%>" />
                   </div>

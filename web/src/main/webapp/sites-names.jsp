@@ -111,8 +111,7 @@
 
                   <fieldset class="large">
                   <legend><%=cm.cmsPhrase("Search what")%></legend>
-                  <img style="vertical-align:middle" alt="<%=cm.cms("field_mandatory")%>" title="<%=cm.cms("field_mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
-                  <%=cm.cmsAlt("field_mandatory")%>
+                  <img style="vertical-align:middle" alt="<%=cm.cmsPhrase("This field is mandatory")%>" title="<%=cm.cmsPhrase("This field is mandatory")%>" src="images/mini/field_mandatory.gif" width="11" height="12" />
                   <label for="relationOp"><%=cm.cmsPhrase("Site name")%></label>
                   <select id="relationOp" name="relationOp">
                     <option value="<%=Utilities.OPERATOR_IS%>">

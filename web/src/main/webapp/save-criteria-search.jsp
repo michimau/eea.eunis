@@ -188,8 +188,7 @@ String descr = (request.getParameter("description") == null ? "" : request.getPa
 %>
             <input type="submit" id="submit" name="Submit" title="<%=cm.cmsPhrase("Save")%>" value="<%=cm.cmsPhrase("Save")%>" class="submitSearchButton" />
 
-            <input type="reset" id="reset" name="Reset" title="<%=cm.cms("reset_values")%>" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" />
-            <%=cm.cmsTitle("reset_values")%>
+            <input type="reset" id="reset" name="Reset" title="<%=cm.cmsPhrase("Reset values")%>" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" />
 <%
   }
 %>

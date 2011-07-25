@@ -247,8 +247,7 @@ function openHelper(URL)
                     </script>
                     <script language="JavaScript" src="script/habitats-code-save-criteria.js" type="text/javascript"></script>
                     <%=cm.cmsPhrase("Save your criteria")%>:
-                    <a title="<%=cm.cms("save_criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-code.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cms("save_criteria")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
-                    <%=cm.cmsTitle("save_criteria")%>
+                    <a title="<%=cm.cmsPhrase("Save search criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-code.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img border="0" alt="<%=cm.cmsPhrase("Save search criteria")%>" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                 <%
                   // Set Vector for URL string
                   Vector show = new Vector();

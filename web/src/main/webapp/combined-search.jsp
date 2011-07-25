@@ -132,7 +132,7 @@
   function submitFirstValueForm(firstvalue, idnode) {
     if(firstvalue.value == "") {
       firstvalue.value = document.criteria.oldfirstvalue.value;
-      alert('<%=cm.cms("previous_values_was_restored")%>');
+      alert('<%=cm.cmsPhrase("Previous values were restored")%>');
       firstvalue.focus();
 		  return(false);
     }
@@ -162,7 +162,7 @@
   function submitLastValueForm(lastvalue, idnode) {
     if(lastvalue.value == "") {
       lastvalue.value = document.criteria.oldlastvalue.value;
-      alert('<%=cm.cms("previous_values_was_restored")%>');
+      alert('<%=cm.cmsPhrase("Previous values were restored")%>');
       firstvalue.focus();
 		  return false;
     }
@@ -981,13 +981,12 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       if(val.equalsIgnoreCase("Contains")) { selected=" selected=\"selected\""; } else { selected=""; }
                       out.println("<option"+selected+" value=\"Contains\">"+cm.cmsPhrase("Contains")+"</option>");
                       if(val.equalsIgnoreCase("Between")) { selected=" selected=\"selected\""; } else { selected=""; }
-                      out.println("<option"+selected+" value=\"Between\">"+cm.cms("between")+"</option>");
+                      out.println("<option"+selected+" value=\"Between\">"+cm.cmsPhrase("Between")+"</option>");
                       if(val.equalsIgnoreCase("Regex")) { selected=" selected=\"selected\""; } else { selected=""; }
                       out.println("<option"+selected+" value=\"Regex\">Regex</option>");
                       out.println("</select>");
                       %>
                       <%=cm.cmsInput("equal")%>
-                      <%=cm.cmsInput("between")%>
                       <%
                       out.println("&nbsp;");
 
@@ -1345,10 +1344,9 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                   <tr>
                     <td>
                       <form name="saveCriteriaSearch" action="combined-search-save-criteria.jsp" method="post">
-                        <input type="button" name="Save Criteria" title="<%=cm.cms("save_criteria")%>"
-                               id="SaveCriteria" value="<%=cm.cms("save_criteria")%>" class="submitSearchButton"
+                        <input type="button" name="Save Criteria" title="<%=cm.cmsPhrase("Save search criteria")%>"
+                               id="SaveCriteria" value="<%=cm.cmsPhrase("Save search criteria")%>" class="submitSearchButton"
                                onclick="javascript:SaveCriteriaFunction('<%=NatureObject%>');" />
-                        <%=cm.cmsTitle("save_criteria")%>
                         <input type="hidden" name="idsession" value="<%=IdSession%>" />
                         <input type="hidden" name="natureobject" value="<%=NatureObject%>" />
                         <input type="hidden" name="username" value="<%=SessionManager.getUsername()%>" />

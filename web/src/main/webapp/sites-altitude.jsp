@@ -121,7 +121,7 @@
             }
           %>
                     <option value="sites-altitude.jsp?between=yes&amp;no=2&amp;between2=<%=request.getParameter("between2")%>&amp;no2=<%=request.getParameter("no2")%>&amp;between3=<%=request.getParameter("between3")%>&amp;no3=<%=request.getParameter("no3")%>" <%=selected%>>
-                      <%=cm.cms("between")%>
+                      <%=cm.cmsPhrase("Between")%>
                     </option>
           <%
             selected = "";
@@ -144,7 +144,6 @@
                       <%=cm.cms("smaller_than")%>
                     </option>
                   </select>
-                  <%=cm.cmsInput("between")%>
                   <%=cm.cmsInput("greater_than")%>
                   <%=cm.cmsInput("smaller_than")%>
           <%
@@ -208,7 +207,7 @@
             }
           %>
                     <option value="sites-altitude.jsp?between2=yes&amp;no2=2&amp;between=<%=request.getParameter("between")%>&amp;no=<%=request.getParameter("no")%>&amp;between3=<%=request.getParameter("between3")%>&amp;no3=<%=request.getParameter("no3")%>" <%=selected%>>
-                      <%=cm.cms("between")%>
+                      <%=cm.cmsPhrase("Between")%>
                     </option>
           <%
             selected = "";
@@ -295,7 +294,7 @@
             }
           %>
                     <option value="sites-altitude.jsp?between3=yes&amp;no3=2&amp;between=<%=request.getParameter("between")%>&amp;no=<%=request.getParameter("no")%>&amp;between2=<%=request.getParameter("between2")%>&amp;no2=<%=request.getParameter("no2")%>" <%=selected%>>
-                      <%=cm.cms("between")%>
+                      <%=cm.cmsPhrase("Between")%>
                     </option>
           <%
             selected = "";
@@ -405,8 +404,7 @@
                   </fieldset>
 
                   <div class="submit_buttons">
-                    <input id="reset" name="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" title="<%=cm.cms("reset_values")%>" />
-                    <%=cm.cmsTitle("reset_values")%>
+                    <input id="reset" name="Reset" type="reset" value="<%=cm.cmsPhrase("Reset")%>" class="standardButton" title="<%=cm.cmsPhrase("Reset values")%>" />
 
                     <input id="submit2" name="submit2" type="submit" class="submitSearchButton" value="<%=cm.cmsPhrase("Search")%>" title="<%=cm.cmsPhrase("Search")%>" />
                   </div>

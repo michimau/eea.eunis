@@ -132,7 +132,7 @@
   function submitFirstValueForm(firstvalue, idnode) {
     if(firstvalue.value == "") {
       firstvalue.value = document.criteria.oldfirstvalue.value;
-      alert('<%=cm.cms("previous_values_was_restored")%>');
+      alert('<%=cm.cmsPhrase("Previous values were restored")%>');
       firstvalue.focus();
 		  return(false);
     }
@@ -161,7 +161,7 @@
   function submitLastValueForm(lastvalue, idnode) {
     if(lastvalue.value == "") {
       lastvalue.value = document.criteria.oldlastvalue.value;
-      alert('<%=cm.cms("previous_values_was_restored")%>');
+      alert('<%=cm.cmsPhrase("Previous values were restored")%>');
       firstvalue.focus();
 		  return false;
     }
@@ -688,7 +688,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                       selected = "";
                     }
                     if (!rs.getString("ATTRIBUTE").equalsIgnoreCase("LegalInstruments")) {
-                      out.println("<option" + selected + " value=\"Between\">" + cm.cms("between") + "</option>");
+                      out.println("<option" + selected + " value=\"Between\">" + cm.cmsPhrase("Between") + "</option>");
                     }
 
                     if (val.equalsIgnoreCase("Regex")) {
@@ -701,7 +701,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                     out.println("</select>");
                     %>
                     <%=cm.cmsInput("equal")%>
-                    <%=cm.cmsInput("between")%>
                     <%
                     out.println("&nbsp;");
 
@@ -847,7 +846,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                   <tr>
                     <td>
                       <form name="saveCriteriaSearch" action="save-species-or-habitats-advanced-search-criteria.jsp" method="post">
-                        <input type="button" name="Save Criteria" title="<%=cm.cms("save_criteria")%>" id="SaveCriteria" value="<%=cm.cms("save_search")%>" class="submitSearchButton" onclick="javascript:SaveCriteriaFunction();" />
+                        <input type="button" name="Save Criteria" title="<%=cm.cmsPhrase("Save search criteria")%>" id="SaveCriteria" value="<%=cm.cms("save_search")%>" class="submitSearchButton" onclick="javascript:SaveCriteriaFunction();" />
                         <%=cm.cmsInput("save_search")%>
                         <input type="hidden" name="idsession" value="<%=IdSession%>" />
                         <input type="hidden" name="natureobject" value="<%=NatureObject%>" />
@@ -922,8 +921,6 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 <%=cm.cmsMsg("press_save_to_save_criteria")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("criteria_saved")%>
-                <%=cm.br()%>
-                <%=cm.cmsMsg("previous_values_was_restored")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("advanced_search")%>
                 <%=cm.br()%>

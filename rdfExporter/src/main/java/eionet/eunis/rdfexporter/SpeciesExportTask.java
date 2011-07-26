@@ -25,7 +25,7 @@ import eionet.eunis.dto.VernacularNameDto;
 
 /**
  * Species export task.
- * 
+ *
  */
 public class SpeciesExportTask implements Runnable {
     private static final Logger logger = Logger.getLogger(SpeciesExportTask.class);

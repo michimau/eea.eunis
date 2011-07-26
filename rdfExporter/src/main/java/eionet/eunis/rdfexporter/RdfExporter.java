@@ -14,26 +14,26 @@ import eionet.eunis.rdf.GenerateHabitatRDF;
 
 /**
  * Main class of RDF exporter.
- * 
+ *
  * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 public class RdfExporter {
     private static final Logger logger = Logger.getLogger(RdfExporter.class);
 
     private static final String HEADER_SITES = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
-        + "xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n"
-        + "xmlns:cr=\"http://cr.eionet.europa.eu/ontologies/contreg.rdf#\"\n"
-        + "xmlns:geo=\"http://www.w3.org/2003/01/geo/wgs84_pos#\"\n"
-        + "xmlns=\"http://eunis.eea.europa.eu/rdf/sites-schema.rdf#\">\n";
+        + " xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n"
+        + " xmlns:cr=\"http://cr.eionet.europa.eu/ontologies/contreg.rdf#\"\n"
+        + " xmlns:geo=\"http://www.w3.org/2003/01/geo/wgs84_pos#\"\n"
+        + " xmlns=\"http://eunis.eea.europa.eu/rdf/sites-schema.rdf#\">\n";
 
     private static final String HEADER_SPECIES = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
-        + "xmlns:cr=\"http://cr.eionet.europa.eu/ontologies/contreg.rdf#\"\n"
-        + "xmlns:dwc=\"http://rs.tdwg.org/dwc/terms/\" \n"
-        + "xmlns =\"http://eunis.eea.europa.eu/rdf/species-schema.rdf#\">\n";
+        + " xmlns:cr=\"http://cr.eionet.europa.eu/ontologies/contreg.rdf#\"\n"
+        + " xmlns:dwc=\"http://rs.tdwg.org/dwc/terms/\"\n"
+        + " xmlns =\"http://eunis.eea.europa.eu/rdf/species-schema.rdf#\">\n";
 
     private static final String HEADER_TAXONOMIES = "<rdf:RDF xmlns=\"http://eunis.eea.europa.eu/rdf/taxonomies-schema.rdf#\"\n"
-        + "xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
-        + "xmlns:dcterms=\"http://purl.org/dc/terms/\">\n";
+        + " xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
+        + " xmlns:dcterms=\"http://purl.org/dc/terms/\">\n";
 
     private static final String FOOTER = "\n</rdf:RDF>";
 
@@ -52,8 +52,8 @@ public class RdfExporter {
     private SQLUtilities sqlUtilities;
 
     /**
-     * Load properties from exporter.properties file and initialize SQLUtils
-     * 
+     * Load properties from exporter.properties file and initialize SQLUtils.
+     *
      * @param numberOfObjectsToImport
      * @param offset
      */
@@ -134,7 +134,7 @@ public class RdfExporter {
     }
 
     /**
-     * Export sites to file
+     * Export sites to file.
      */
     public void exportSites() {
         String countSitesQuery = "SELECT COUNT(ID_SITE) FROM CHM62EDT_SITES";
@@ -184,7 +184,7 @@ public class RdfExporter {
     }
 
     /**
-     * Export habitats to file
+     * Export habitats to file.
      */
     public void exportHabitats() {
         String countHabitatQuery = "SELECT COUNT(ID_HABITAT) FROM CHM62EDT_HABITAT";
@@ -235,7 +235,7 @@ public class RdfExporter {
     }
 
     /**
-     * Export species to file
+     * Export species to file.
      */
     public void exportSpecies() {
         String countSpeciesQuery = "SELECT COUNT(ID_SPECIES) FROM CHM62EDT_SPECIES";
@@ -285,7 +285,7 @@ public class RdfExporter {
     }
 
     /**
-     * Export taxonomy to file
+     * Export taxonomy to file.
      */
     public void exportTaxonomies() {
         String countTaxonomyQuery = "SELECT COUNT(ID_TAXONOMY) FROM CHM62EDT_TAXONOMY";
@@ -335,8 +335,8 @@ public class RdfExporter {
     }
 
     /**
-     * main method
-     * 
+     * main method.
+     *
      * @param args
      */
     public static void main(String... args) {
@@ -344,7 +344,7 @@ public class RdfExporter {
             logger.error("Missing argument what to import: sites/species/taxonomies/habitats");
         } else if (!args[0].equals("sites") && !args[0].equals("species") && !args[0].equals("taxonomies")
                 && !args[0].equals("habitats")) {
-            logger.error("Given arguments value has to be \"sites\" or \"species\" or \"taxonomies\" or \"habitats\"");
+            logger.error("Usage: rdfExporter {sites|species|taxonomies|habitats} [limit] [offset]");
         } else {
             logger.info("RDF exporter started");
             long startTime = System.currentTimeMillis();

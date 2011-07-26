@@ -16,7 +16,7 @@ import eionet.eunis.dto.TaxonomyDto;
 
 /**
  * Taxonomy export task.
- * 
+ *
  * @author altnyris
  */
 public class TaxonomyExportTask implements Runnable {

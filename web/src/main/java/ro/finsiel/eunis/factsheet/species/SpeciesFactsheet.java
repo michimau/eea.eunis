@@ -155,7 +155,7 @@ public class SpeciesFactsheet {
     }
 
     /**
-     * Species description as a human readable string in englihs language.
+     * Species description as a human readable string in english language.
      * @return Description of species scientific an vernacular name and localization
      * within Europe.
      */
@@ -191,7 +191,7 @@ public class SpeciesFactsheet {
             }
 
             List<Chm62edtSpeciesPersist> lstSynonyms = new Chm62edtSpeciesDomain().findWhere(
-                    "TYPE_RELATED_SPECIES = 'Syn' and ID_SPECIES_LINK=" + IdSpecie);
+                    "TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK=" + IdSpecie);
 
             if (lstSynonyms.size() > 0) {
                 for (Chm62edtSpeciesPersist lstSynonym : lstSynonyms) {

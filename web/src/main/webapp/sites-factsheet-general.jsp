@@ -80,16 +80,18 @@
     <%=cm.cmsPhrase("Site identification")%>
   </h2>
   <table summary="layout" class="datatable fullwidth">
+    <col style="width:40%"/>
+    <col style="width:60%"/>
     <tbody>
       <tr>
-        <td width="50%">
+        <td>
           <%-- Code in database --%>
           <strong>
             <%=SitesSearchUtility.translateSourceDB(factsheet.getSiteObject().getSourceDB())%>
           </strong>
           <%=cm.cmsPhrase("code in database")%>
         </td>
-        <td width="50%">
+        <td>
           <strong>
             <%=factsheet.getIDSite()%>
           </strong>

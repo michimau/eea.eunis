@@ -49,14 +49,15 @@
             SiteFactsheet.TYPE_CORINE == type || SiteFactsheet.TYPE_BIOGENETIC == type ||
             SiteFactsheet.TYPE_DIPLOMA == type)) // If some attributes are non-null and site is from these dbs
   {
+    int rowinx = 0;
 %>
     <h2>
       <%=cm.cmsPhrase("Site contact authorities")%>
     </h2>
     <%-- Site contact authorities --%>
     <table summary="<%=cm.cms("site_contact_authorities")%>" class="datatable fullwidth">
-    <col style="width:30%"/>
-    <col style="width:70%"/>
+    <col style="width:20%"/>
+    <col style="width:80%"/>
     <tbody>
 <%
     if (SiteFactsheet.TYPE_NATURA2000 == type ||
@@ -65,7 +66,7 @@
               SiteFactsheet.TYPE_BIOGENETIC == type)
     {
 %>
-      <tr class="zebraeven">
+      <tr<%=rowinx++ % 2 == 0 ? " class=\"zebraeven\"" : ""%>>
         <th scope="row">
           <%=cm.cmsPhrase("Respondent")%>
         </th>
@@ -77,7 +78,7 @@
     if (SiteFactsheet.TYPE_BIOGENETIC == type)
     {
 %>
-      <tr>
+      <tr<%=rowinx++ % 2 == 0 ? " class=\"zebraeven\"" : ""%>>
         <th scope="row">
           <%=cm.cmsPhrase("Author")%>
         </th>
@@ -93,7 +94,7 @@
             SiteFactsheet.TYPE_BIOGENETIC == type)
     {
 %>
-      <tr class="zebraeven">
+      <tr<%=rowinx++ % 2 == 0 ? " class=\"zebraeven\"" : ""%>>
         <th scope="row">
           <%=cm.cmsPhrase("Manager")%>
         </th>
@@ -104,7 +105,7 @@
     if (SiteFactsheet.TYPE_DIPLOMA == type)
     {
 %>
-      <tr class="zebraeven">
+      <tr<%=rowinx++ % 2 == 0 ? " class=\"zebraeven\"" : ""%>>
         <th scope="row">
           <%=cm.cmsPhrase("Information")%>
         </th>
@@ -112,7 +113,7 @@
           <%=information%>
         </td>
       </tr>
-      <tr>
+      <tr<%=rowinx++ % 2 == 0 ? " class=\"zebraeven\"" : ""%>>
         <th scope="row">
           <%=cm.cmsPhrase("Official contact international")%>
         </th>
@@ -120,7 +121,7 @@
           <%=officialContactInternational%>&nbsp;
         </td>
       </tr>
-      <tr class="zebraeven">
+      <tr<%=rowinx++ % 2 == 0 ? " class=\"zebraeven\"" : ""%>>
         <th scope="row">
           <%=cm.cmsPhrase("Official contact national")%>
         </th>
@@ -128,7 +129,7 @@
           <%=officialContactNational%>&nbsp;
         </td>
       </tr>
-      <tr>
+      <tr<%=rowinx++ % 2 == 0 ? " class=\"zebraeven\"" : ""%>>
         <th scope="row">
           <%=cm.cmsPhrase("Official contact regional")%>
         </th>
@@ -136,7 +137,7 @@
           <%=officialContactRegional%>&nbsp;
         </td>
       </tr>
-      <tr class="zebraeven">
+      <tr<%=rowinx++ % 2 == 0 ? " class=\"zebraeven\"" : ""%>>
         <th scope="row">
           <%=cm.cmsPhrase("Official contact local")%>
         </th>

@@ -22,10 +22,10 @@
 	</c:if>
 	<div class="allow-naturepic">
 		<table class="datatable fullwidth">
-			<col style="width:10em"/>
-			<col/>
-			<col style="width:10em"/>
-			<col/>
+			<col style="width:20%"/>
+			<col style="width:40%"/>
+			<col style="width:20%"/>
+			<col style="width:20%"/>
 			<tr>
 				<th scope="row">${eunis:cmsPhrase(actionBean.contentManagement, 'Scientific name')}</th><td>${actionBean.scientificName }</td>
 				<th scope="row">${eunis:cmsPhrase(actionBean.contentManagement, 'Taxonomic rank')}</th><td>${actionBean.factsheet.speciesObject.typeRelatedSpecies}</td>
@@ -36,6 +36,9 @@
 	      		</tr>
 		</table>
 		<table class="datatable fullwidth">
+			<col style="width:20%"/>
+			<col style="width:40%"/>
+			<col style="width:40%"/>
 	    	<thead>
 	      		<tr>
 	        		<th colspan="2">
@@ -49,31 +52,25 @@
 	    	<tbody>
 	    		<c:forEach items="${actionBean.classifications}" var="classif" varStatus="loop">
 					<tr ${loop.index % 2 == 0 ? '' : 'class="zebraeven"'}>
-						<td width="20%">
+						<td>
 	          				${classif.level}
 	        			</td>
-	        			<td width="40%">
-	          				<strong>
+	        			<td style="font-weight:bold">
 		            			${classif.name}
-	    	      			</strong>
 	        			</td>
 	        			<c:if test="${classif.level == 'Kingdom'}">
-	        				<td rowspan="${fn:length(actionBean.classifications) + 1}" style="text-align:center; background-color:#EEEEEE; vertical-align:middle;">
-	          					<strong>
+	        				<td rowspan="${fn:length(actionBean.classifications) + 1}" style="text-align:center; background-color:#EEEEEE; vertical-align:middle;font-weight:bold">
 	            					${eunis:treatURLSpecialCharacters(actionBean.authorDate)}
-	          					</strong>
 	        				</td>
 	        			</c:if>
 					</tr>
 				</c:forEach>
 				<tr class="zebraeven">
-	        		<td width="20%">
+	        		<td>
 	          			${eunis:cmsPhrase(actionBean.contentManagement, 'Genus')}
 	        		</td>
-	        		<td width="40%">
-	          			<strong>
+	        		<td style="font-weight:bold">
 	            			${actionBean.specie.genus}
-	          			</strong>
 	        		</td>
 	      		</tr>
 	    	</tbody>
@@ -231,59 +228,51 @@
 	    <col style="width:80%"/>
 	    <tbody>
 	    	<tr>
-        		<td>
+        		<th scope="row">
           			${eunis:cmsPhrase(actionBean.contentManagement, 'Title')}:
-        		</td>
+        		</th>
         		<td>
-          			<strong>
             			${eunis:treatURLSpecialCharacters(actionBean.factsheet.speciesBook.title)}
-          			</strong>
         		</td>
       		</tr>
       		<tr class="zebraeven">
-        		<td>
+        		<th scope="row">
           			${eunis:cmsPhrase(actionBean.contentManagement, 'Author')}:
-        		</td>
+        		</th>
         		<td>
-          			<strong>
             			${eunis:treatURLSpecialCharacters(actionBean.factsheet.speciesBook.author)}
-          			</strong>
         		</td>
       		</tr>
       		<tr>
-        		<td>
+        		<th scope="row">
           			${eunis:cmsPhrase(actionBean.contentManagement, 'Publisher')}:
-        		</td>
+        		</th>
         		<td>
-          			<strong>
             			${eunis:treatURLSpecialCharacters(actionBean.factsheet.speciesBook.publisher)}
-          			</strong>
         		</td>
       		</tr>
       		<tr class="zebraeven">
-        		<td>
+        		<th scope="row">
           			${eunis:cmsPhrase(actionBean.contentManagement, 'Publication date')}:
-        		</td>
+        		</th>
         		<td>
-          			<strong>
             			${eunis:treatURLSpecialCharacters(actionBean.factsheet.speciesBook.date)}
-          			</strong>
         		</td>
       		</tr>
       		<tr>
-        		<td>
+        		<th scope="row">
           			${eunis:cmsPhrase(actionBean.contentManagement, 'Url')}:
-        		</td>
+        		</th>
         		<td>
         			<c:choose> 
-						<c:when test="${!empty actionBean.factsheet.speciesBook.URL}">
-				        	<a href="${eunis:replaceAll(eunis:treatURLSpecialCharacters(actionBean.factsheet.speciesBook.URL),'#','')}">${eunis:replaceAll(eunis:treatURLSpecialCharacters(actionBean.factsheet.speciesBook.URL),'#','')}</a>
-						</c:when>
-				  		<c:otherwise>
-				  			&nbsp;
-						</c:otherwise>
-					</c:choose>
-				</td>
+					<c:when test="${!empty actionBean.factsheet.speciesBook.URL}">
+			        	<a href="${eunis:replaceAll(eunis:treatURLSpecialCharacters(actionBean.factsheet.speciesBook.URL),'#','')}">${eunis:replaceAll(eunis:treatURLSpecialCharacters(actionBean.factsheet.speciesBook.URL),'#','')}</a>
+					</c:when>
+			  		<c:otherwise>
+			  			&nbsp;
+					</c:otherwise>
+				</c:choose>
+			</td>
       		</tr>
     	</tbody>
   	</table>

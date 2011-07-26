@@ -69,9 +69,8 @@
         <th scope="row">
           <%=cm.cmsPhrase("Respondent")%>
         </th>
-        <td>
-          <%=respondent%>
-        </td>
+        <%-- white-space:pre-line can have no whitespace between <td> and value --%>
+        <td style="white-space:pre-line"><%=respondent%></td>
       </tr>
 <%
     }
@@ -98,9 +97,7 @@
         <th scope="row">
           <%=cm.cmsPhrase("Manager")%>
         </th>
-        <td>
-          <%=manager%>
-        </td>
+        <td style="white-space:pre-line"><%=manager%></td>
       </tr>
 <%
     }

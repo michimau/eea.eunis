@@ -3,20 +3,18 @@ package eionet.eunis.stripes.actions;
 
 import java.util.List;
 
-import eionet.eunis.dao.DaoFactory;
-import eionet.eunis.dto.DesignationDcObjectDTO;
-
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
-
 import ro.finsiel.eunis.jrfTables.Chm62edtCountryDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist;
 import ro.finsiel.eunis.jrfTables.sites.designation_code.DesignationPersist;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.search.sites.designations.FactsheetDesignations;
+import eionet.eunis.dao.DaoFactory;
+import eionet.eunis.dto.DesignationDcObjectDTO;
 
 
 /**
@@ -57,10 +55,9 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
         String eeaHome = getContext().getInitParameter("EEA_HOME");
 
         btrail = "eea#" + eeaHome
-                + ",home#index.jsp,sites#sites.jsp,designation_factsheet_location";
+        + ",home#index.jsp,sites#sites.jsp,designation_factsheet_location";
         pageTitle = getContext().getInitParameter("PAGE_TITLE")
-                + getContentManagement().cms(
-                        "sites_designations-factsheet_title");
+        + getContentManagement().cmsPhrase("Designation identification for ");
 
         if (idDesig != null && idGeo != null) {
             FactsheetDesignations design = new FactsheetDesignations(idDesig,
@@ -73,19 +70,19 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
                 // Name of designation
                 fromWho = (factsheet.getDescription() != null
                         && !factsheet.getDescription().equalsIgnoreCase("")
-                                ? factsheet.getDescription()
+                        ? factsheet.getDescription()
                                 : "");
                 if (fromWho.equalsIgnoreCase("")) {
                     fromWho = (factsheet.getDescriptionEn() != null
                             && !factsheet.getDescriptionEn().equalsIgnoreCase("")
-                                    ? factsheet.getDescriptionEn()
+                            ? factsheet.getDescriptionEn()
                                     : "");
                 }
 
                 country = Utilities.formatString(
                         Utilities.findCountryByIdGeoscope(
                                 factsheet.getIdGeoscope()),
-                                "");
+                "");
                 if (country.equalsIgnoreCase("Europe")) {
                     country = "European Community";
                 }
@@ -93,7 +90,7 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
                 if (country != null && country.trim().length() > 0) {
                     List countries = new Chm62edtCountryDomain().findWhere(
                             "ISO_2L<>'' AND ISO_2L<>'null' AND ISO_2L IS NOT NULL AND SELECTION <> 0 and AREA_NAME_EN ='"
-                                    + country + "'");
+                            + country + "'");
 
                     if (countries != null && countries.size() > 0) {
                         isCountry = true;
@@ -118,12 +115,12 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
                                 idDesig, idGeo);
                         int maxSitesPerMap = Utilities.checkedStringToInt(
                                 getContext().getInitParameter(
-                                        "MAX_SITES_PER_MAP"),
-                                        2000);
+                                "MAX_SITES_PER_MAP"),
+                                2000);
 
                         if (sites.size() < maxSitesPerMap) {
                             for (int i = 0; i < sites.size(); i++) {
-                                DesignationPersist site = (DesignationPersist) sites.get(
+                                DesignationPersist site = sites.get(
                                         i);
 
                                 siteIds += "'" + site.getIdSite() + "'";

@@ -1,10 +1,24 @@
 package ro.finsiel.eunis.factsheet;
 
 
-import com.lowagie.text.*;
-import com.lowagie.text.Font;
+import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Iterator;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.Vector;
+
 import ro.finsiel.eunis.WebContentManagement;
-import ro.finsiel.eunis.factsheet.species.*;
+import ro.finsiel.eunis.factsheet.species.FactSheetPopulationWrapper;
+import ro.finsiel.eunis.factsheet.species.FactSheetTrendsWrapper;
+import ro.finsiel.eunis.factsheet.species.GeographicalStatusWrapper;
+import ro.finsiel.eunis.factsheet.species.LegalStatusWrapper;
+import ro.finsiel.eunis.factsheet.species.NationalThreatWrapper;
+import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
+import ro.finsiel.eunis.factsheet.species.SpeciesHabitatWrapper;
 import ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.DistributionWrapper;
 import ro.finsiel.eunis.jrfTables.species.factsheet.ReportsDistributionStatusPersist;
@@ -18,15 +32,11 @@ import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
 import ro.finsiel.eunis.search.species.factsheet.PublicationWrapper;
 
-import java.awt.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.Iterator;
-import java.util.List;
-import java.util.StringTokenizer;
-import java.util.Vector;
+import com.lowagie.text.Cell;
+import com.lowagie.text.Font;
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.Table;
 
 
 /**
@@ -163,29 +173,29 @@ public final class PDFSpeciesFactsheet {
             table.addCell(cell);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("code_cell"), fontNormal));
+                    new Phrase(contentManagement.cmsPhrase("Code cell"), fontNormal));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
                     new Phrase(
-                            contentManagement.cms(
-                                    "species_factsheet-distribution_04"),
-                                    fontNormal));
+                            contentManagement.cmsPhrase(
+                            "Latitude (dec. deg)"),
+                            fontNormal));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
                     new Phrase(
-                            contentManagement.cms(
-                                    "species_factsheet-distribution_05"),
-                                    fontNormal));
+                            contentManagement.cmsPhrase(
+                            "Longitude (dec. deg.)"),
+                            fontNormal));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("status"), fontNormal));
+                    new Phrase(contentManagement.cmsPhrase("Status"), fontNormal));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("reference"), fontNormal));
+                    new Phrase(contentManagement.cmsPhrase("Reference"), fontNormal));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
@@ -251,7 +261,7 @@ public final class PDFSpeciesFactsheet {
 
         cell = new Cell(
                 new Phrase(
-                        contentManagement.cms("scientific_name") + ": "
+                        contentManagement.cmsPhrase("Scientific name") + ": "
                         + scientificName,
                         fontNormal));
         cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
@@ -259,7 +269,7 @@ public final class PDFSpeciesFactsheet {
 
         cell = new Cell(
                 new Phrase(
-                        contentManagement.cms("author") + ": "
+                        contentManagement.cmsPhrase("Author") + ": "
                         + Utilities.formatString(
                                 factsheet.getSpeciesNatureObject().getAuthor()),
                                 fontNormal));
@@ -283,14 +293,14 @@ public final class PDFSpeciesFactsheet {
 
         cell = new Cell(
                 new Phrase(
-                        contentManagement.cms(
-                                "species_factsheet_taxonomicInformation"),
-                                fontTitle));
+                        contentManagement.cmsPhrase(
+                        "Taxonomic information"),
+                        fontTitle));
         cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
         cell.setColspan(2);
         table.addCell(cell);
         cell = new Cell(
-                new Phrase(contentManagement.cms("reference"), fontSubtitle));
+                new Phrase(contentManagement.cmsPhrase("Reference"), fontSubtitle));
         cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
         cell.setHorizontalAlignment(Cell.ALIGN_CENTER);
         table.addCell(cell);
@@ -300,8 +310,8 @@ public final class PDFSpeciesFactsheet {
         try {
             list = new Chm62edtTaxcodeDomain().findWhere(
                     "ID_TAXONOMY = '"
-                            + factsheet.getSpeciesNatureObject().getIdTaxcode()
-                            + "'");
+                    + factsheet.getSpeciesNatureObject().getIdTaxcode()
+                    + "'");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -360,7 +370,7 @@ public final class PDFSpeciesFactsheet {
         float[] widthsSrc = { 20f, 80f };
 
         table.setWidths(widthsSrc);
-        cell = new Cell(new Phrase(contentManagement.cms("source"), fontTitle));
+        cell = new Cell(new Phrase(contentManagement.cmsPhrase("Source"), fontTitle));
         cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
         cell.setColspan(2);
         table.addCell(cell);
@@ -368,28 +378,28 @@ public final class PDFSpeciesFactsheet {
         PublicationWrapper book = factsheet.getSpeciesBook();
 
         cell = new Cell(
-                new Phrase(contentManagement.cms("title"), fontNormalBold));
+                new Phrase(contentManagement.cmsPhrase("Title"), fontNormalBold));
         table.addCell(cell);
         cell = new Cell(
                 new Phrase(Utilities.formatString(book.getTitle()), fontNormal));
         table.addCell(cell);
-        cell = new Cell(new Phrase(contentManagement.cms("author")));
+        cell = new Cell(new Phrase(contentManagement.cmsPhrase("Author")));
         table.addCell(cell);
         cell = new Cell(
                 new Phrase(Utilities.formatString(book.getAuthor()), fontNormal));
         table.addCell(cell);
-        cell = new Cell(new Phrase(contentManagement.cms("publisher")));
+        cell = new Cell(new Phrase(contentManagement.cmsPhrase("Publisher")));
         table.addCell(cell);
         cell = new Cell(
                 new Phrase(Utilities.formatString(book.getPublisher()),
-                fontNormal));
+                        fontNormal));
         table.addCell(cell);
-        cell = new Cell(new Phrase(contentManagement.cms("publication_date")));
+        cell = new Cell(new Phrase(contentManagement.cmsPhrase("Publication date")));
         table.addCell(cell);
         cell = new Cell(
                 new Phrase(Utilities.formatString(book.getDate()), fontNormal));
         table.addCell(cell);
-        cell = new Cell(new Phrase(contentManagement.cms("url")));
+        cell = new Cell(new Phrase(contentManagement.cmsPhrase("Url")));
         table.addCell(cell);
         cell = new Cell(
                 new Phrase(Utilities.formatString(book.getURL()), fontNormal));
@@ -409,17 +419,17 @@ public final class PDFSpeciesFactsheet {
             table.setWidths(widthsSyn);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("synonyms"), fontTitle));
+                    new Phrase(contentManagement.cmsPhrase("Synonyms"), fontTitle));
             cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
             cell.setColspan(2);
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("scientific_name"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Scientific name"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("author"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Author"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
@@ -454,19 +464,19 @@ public final class PDFSpeciesFactsheet {
             table.setWidths(widthsSubsp);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("valid_subspecies_europe"),
-                    fontTitle));
+                    new Phrase(contentManagement.cmsPhrase("Valid subspecies in Europe"),
+                            fontTitle));
             cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
             cell.setColspan(2);
             table.addCell(cell);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("scientific_name"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Scientific name"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("source"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Source"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
@@ -523,22 +533,22 @@ public final class PDFSpeciesFactsheet {
             table.addCell(cell);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("species_factsheet-geo_04"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Country/Area"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("biogeographic_region"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Biogeographic region"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("status"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Status"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("reference"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Reference"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
@@ -546,7 +556,7 @@ public final class PDFSpeciesFactsheet {
                 GeographicalStatusWrapper aRow = (GeographicalStatusWrapper) v.get(
                         i);
                 String country = (null != aRow.getCountry())
-                        ? aRow.getCountry().getAreaNameEnglish()
+                ? aRow.getCountry().getAreaNameEnglish()
                         : " ";
                 Vector authorURL = Utilities.getAuthorAndUrlByIdDc(
                         aRow.getReference());
@@ -592,55 +602,55 @@ public final class PDFSpeciesFactsheet {
 
             cell = new Cell(
                     new Phrase(
-                            contentManagement.cms(
-                                    "habitat_type_populated_by_species"),
-                                    fontTitle));
+                            contentManagement.cmsPhrase(
+                            "Habitat types populated by species"),
+                            fontTitle));
             cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
             cell.setColspan(9);
             table.addCell(cell);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("eunis_code"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("EUNIS Code"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("annex_code"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("ANNEX I Code"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("habitat_type_name"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Habitat type name"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("biogeographic_region"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Biogeographic region"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("abundance"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Abundance"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("frequencies"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Frequencies"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("faithfulness"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Faithfulness"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("species_status"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Species status"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("comment"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Comment"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
@@ -666,7 +676,7 @@ public final class PDFSpeciesFactsheet {
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(Utilities.formatString(habitat.getGeoscope()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(
@@ -691,7 +701,7 @@ public final class PDFSpeciesFactsheet {
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(Utilities.formatString(habitat.getComment()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
             }
             report.addTable(table);
@@ -724,34 +734,34 @@ public final class PDFSpeciesFactsheet {
             Cell cell;
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("legal_instruments"),
-                    fontTitle));
+                    new Phrase(contentManagement.cmsPhrase("Legal Instruments"),
+                            fontTitle));
             cell.setBackgroundColor(new Color(TONE_DD, TONE_DD, TONE_DD));
             cell.setColspan(5);
             table.addCell(cell);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("detailed_reference"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Detailed reference"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("legal_text"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("legal text"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(new Phrase("Comments"));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("url"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Url"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
                     new Phrase(
-                            contentManagement.cms(
-                                    "species_factsheet_legalInstrumentsGeoImplem"),
-                                    fontNormalBold));
+                            contentManagement.cmsPhrase(
+                            "Countries"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
@@ -766,11 +776,11 @@ public final class PDFSpeciesFactsheet {
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(Utilities.formatString(legal.getLegalText()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(Utilities.formatString(legal.getComments()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
 
                 String sFormattedURL = Utilities.formatString(legal.getUrl()).replaceAll(
@@ -782,8 +792,7 @@ public final class PDFSpeciesFactsheet {
                 cell = new Cell(new Phrase(sFormattedURL, fontNormal));
                 table.addCell(cell);
 
-                String legalInfo = contentManagement.cms(
-                        "species_factsheet_notApplicable");
+                String legalInfo = contentManagement.cmsPhrase("Not applicable. See Bonn Agreement or Memorandum.");
 
                 if (!legal.getReference().equalsIgnoreCase("10333")) {
                     legalInfo = " ";
@@ -826,33 +835,33 @@ public final class PDFSpeciesFactsheet {
             table.addCell(cell);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("country"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Country"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("biogeographic_region"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Biogeographic region"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("min_max"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Min / Max (Units)"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("date"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Date"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("status"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Status"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("quality"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Quality"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("reference"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Reference"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
@@ -865,11 +874,11 @@ public final class PDFSpeciesFactsheet {
                 authorURL = Utilities.getAuthorAndUrlByIdDc(aRow.getReference());
                 cell = new Cell(
                         new Phrase(Utilities.formatString(aRow.getCountry()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(Utilities.formatString(aRow.getBioregion()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(
@@ -880,19 +889,19 @@ public final class PDFSpeciesFactsheet {
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(Utilities.formatString(aRow.getDate()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(Utilities.formatString(aRow.getStatus()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(Utilities.formatString(aRow.getQuality()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(Utilities.formatString(authorURL.get(0)),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
             }
             report.addTable(table);
@@ -1012,23 +1021,23 @@ public final class PDFSpeciesFactsheet {
             table.addCell(cell);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("title"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Title"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("author"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Author"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("editor"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Editor"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("date"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Date"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("source"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Source"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
@@ -1113,22 +1122,22 @@ public final class PDFSpeciesFactsheet {
             table.addCell(cell);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("site_code"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Site code"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("source_data_set"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Source data set"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("country"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Country"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("site_name"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Site name"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
@@ -1138,7 +1147,7 @@ public final class PDFSpeciesFactsheet {
 
                 cell = new Cell(
                         new Phrase(Utilities.formatString(site.getIDSite()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(
@@ -1149,11 +1158,11 @@ public final class PDFSpeciesFactsheet {
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(Utilities.formatString(site.getAreaNameEn()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(Utilities.formatString(site.getName()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
             }
             report.addTable(table);
@@ -1176,18 +1185,18 @@ public final class PDFSpeciesFactsheet {
                 table.setWidth(TABLE_WIDTH);
 
                 cell = new Cell(
-                        new Phrase(contentManagement.cms("source_data_set"),
-                        fontNormalBold));
+                        new Phrase(contentManagement.cmsPhrase("Source data set"),
+                                fontNormalBold));
                 cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
                 cell = new Cell(
-                        new Phrase(contentManagement.cms("country"),
-                        fontNormalBold));
+                        new Phrase(contentManagement.cmsPhrase("Country"),
+                                fontNormalBold));
                 cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
                 cell = new Cell(
-                        new Phrase(contentManagement.cms("site_name"),
-                        fontNormalBold));
+                        new Phrase(contentManagement.cmsPhrase("Site name"),
+                                fontNormalBold));
                 cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
                 table.addCell(cell);
 
@@ -1247,21 +1256,21 @@ public final class PDFSpeciesFactsheet {
             table.addCell(cell);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("country"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Country"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("status"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Status"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("national_threat_code"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("National threat code"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("reference"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Reference"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
@@ -1271,11 +1280,11 @@ public final class PDFSpeciesFactsheet {
 
                 cell = new Cell(
                         new Phrase(Utilities.formatString(threat.getCountry()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(Utilities.formatString(threat.getStatus()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(
@@ -1284,7 +1293,7 @@ public final class PDFSpeciesFactsheet {
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(Utilities.formatString(threat.getReference()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
             }
             report.addTable(table);
@@ -1317,23 +1326,23 @@ public final class PDFSpeciesFactsheet {
             table.addCell(cell);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("area"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Area"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("status"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Status"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
                     new Phrase(
-                            contentManagement.cms(
-                                    "species_factsheet-conservation_09"),
-                                    fontNormalBold));
+                            contentManagement.cmsPhrase(
+                            "International threat code"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("reference"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Reference"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
@@ -1344,11 +1353,11 @@ public final class PDFSpeciesFactsheet {
 
                 cell = new Cell(
                         new Phrase(Utilities.formatString(threat.getCountry()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(Utilities.formatString(threat.getStatus()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(
@@ -1357,7 +1366,7 @@ public final class PDFSpeciesFactsheet {
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(Utilities.formatString(threat.getReference()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
             }
             report.addTable(table);
@@ -1395,48 +1404,48 @@ public final class PDFSpeciesFactsheet {
             table.addCell(cell);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("country"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Country"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("biogeographic_region"),
-                    fontNormalBold));
-            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
-            table.addCell(cell);
-
-            cell = new Cell(
-                    new Phrase(contentManagement.cms("start_period"),
-                    fontNormalBold));
-            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
-            table.addCell(cell);
-
-            cell = new Cell(
-                    new Phrase(contentManagement.cms("end_period"),
-                    fontNormalBold));
-            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
-            table.addCell(cell);
-
-            cell = new Cell(
-                    new Phrase(contentManagement.cms("status"), fontNormalBold));
-            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
-            table.addCell(cell);
-
-            cell = new Cell(
-                    new Phrase(
-                            contentManagement.cms("species_factsheet-trends_07"),
+                    new Phrase(contentManagement.cmsPhrase("Biogeographic region"),
                             fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("quality"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Start Period"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("reference"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("End period"),
+                            fontNormalBold));
+            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
+            table.addCell(cell);
+
+            cell = new Cell(
+                    new Phrase(contentManagement.cmsPhrase("Status"), fontNormalBold));
+            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
+            table.addCell(cell);
+
+            cell = new Cell(
+                    new Phrase(
+                            contentManagement.cmsPhrase("species_factsheet-trends_07"),
+                            fontNormalBold));
+            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
+            table.addCell(cell);
+
+            cell = new Cell(
+                    new Phrase(contentManagement.cmsPhrase("Quality"), fontNormalBold));
+            cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
+            table.addCell(cell);
+
+            cell = new Cell(
+                    new Phrase(contentManagement.cmsPhrase("Reference"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
@@ -1446,11 +1455,11 @@ public final class PDFSpeciesFactsheet {
 
                 cell = new Cell(
                         new Phrase(Utilities.formatString(aRow.getCountry()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
                 cell = new Cell(
                         new Phrase(Utilities.formatString(aRow.getBioregion()),
-                        fontNormal));
+                                fontNormal));
                 table.addCell(cell);
                 cell = new Cell(new Phrase(aRow.getStartPeriod(), fontNormal));
                 table.addCell(cell);
@@ -1504,17 +1513,17 @@ public final class PDFSpeciesFactsheet {
             table.addCell(cell);
 
             cell = new Cell(
-                    new Phrase(contentManagement.cms("vernacular_name"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Vernacular Name"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("language"), fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Language"), fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
             cell = new Cell(
-                    new Phrase(contentManagement.cms("reference"),
-                    fontNormalBold));
+                    new Phrase(contentManagement.cmsPhrase("Reference"),
+                            fontNormalBold));
             cell.setBackgroundColor(new Color(TONE_EE, TONE_EE, TONE_EE));
             table.addCell(cell);
 
@@ -1522,7 +1531,7 @@ public final class PDFSpeciesFactsheet {
                 VernacularNameWrapper vName = ((VernacularNameWrapper) it.next());
                 String reference = (vName.getIdDc() == null
                         ? "-1"
-                        : vName.getIdDc().toString());
+                                : vName.getIdDc().toString());
                 Vector authorURL = Utilities.getAuthorAndUrlByIdDc(reference);
 
                 cell = new Cell(new Phrase(vName.getName(), fontNormal));

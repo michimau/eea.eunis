@@ -23,9 +23,8 @@ public class SpeciesAdvancedActionBean extends AbstractStripesAction {
 
     @DefaultHandler
     public Resolution index() {
-        pageTitle = getContext().getInitParameter("PAGE_TITLE") + " "
-                + natureObject + " "
-                + getContentManagement().cms("advanced_search");
+        pageTitle = getContext().getInitParameter("PAGE_TITLE") + " " + natureObject + " "
+        + getContentManagement().cmsPhrase("Advanced Search");
 
         return new ForwardResolution("/stripes/species-advanced.layout.jsp");
     }
@@ -45,20 +44,20 @@ public class SpeciesAdvancedActionBean extends AbstractStripesAction {
     public List<String> getAttributesList() {
         ArrayList<String> attributes = new ArrayList<String>();
 
-        attributes.add(getContentManagement().cms("scientific_name"));
-        attributes.add(getContentManagement().cms("vernacular_name"));
-        attributes.add(getContentManagement().cms("group"));
-        attributes.add(getContentManagement().cms("threat_status"));
-        attributes.add(getContentManagement().cms("international_threat_status"));
-        attributes.add(getContentManagement().cms("country"));
-        attributes.add(getContentManagement().cms("biogeoregion"));
-        attributes.add(getContentManagement().cms("reference_author"));
-        attributes.add(getContentManagement().cms("reference_title"));
-        attributes.add(getContentManagement().cms("species_advanced_19"));
-        attributes.add(getContentManagement().cms("taxonomy"));
-        attributes.add(getContentManagement().cms("abundance"));
-        attributes.add(getContentManagement().cms("trend"));
-        attributes.add(getContentManagement().cms("distribution_status"));
+        attributes.add(getContentManagement().cmsPhrase("Scientific name"));
+        attributes.add(getContentManagement().cmsPhrase("Vernacular Name"));
+        attributes.add(getContentManagement().cmsPhrase("Group"));
+        attributes.add(getContentManagement().cmsPhrase("Threat Status"));
+        attributes.add(getContentManagement().cmsPhrase("International Threat Status"));
+        attributes.add(getContentManagement().cmsPhrase("Country"));
+        attributes.add(getContentManagement().cmsPhrase("Biogeoregion"));
+        attributes.add(getContentManagement().cmsPhrase("Reference author"));
+        attributes.add(getContentManagement().cmsPhrase("Reference title"));
+        attributes.add(getContentManagement().cmsPhrase("Legal instr. title"));
+        attributes.add(getContentManagement().cmsPhrase("Taxonomy"));
+        attributes.add(getContentManagement().cmsPhrase("Abundance"));
+        attributes.add(getContentManagement().cmsPhrase("Trend"));
+        attributes.add(getContentManagement().cmsPhrase("Distribution Status"));
 
         return attributes;
     }
@@ -66,9 +65,9 @@ public class SpeciesAdvancedActionBean extends AbstractStripesAction {
     public List<String> getOperatorsList() {
         ArrayList<String> operators = new ArrayList<String>();
 
-        operators.add(getContentManagement().cms("equal"));
-        operators.add(getContentManagement().cms("contains"));
-        operators.add(getContentManagement().cms("between"));
+        operators.add(getContentManagement().cmsPhrase("Equal"));
+        operators.add(getContentManagement().cmsPhrase("Contains"));
+        operators.add(getContentManagement().cmsPhrase("Between"));
         operators.add("Regex");
 
         return operators;
@@ -77,8 +76,8 @@ public class SpeciesAdvancedActionBean extends AbstractStripesAction {
     public List<String> getListForCtriteria() {
         ArrayList<String> values = new ArrayList<String>();
 
-        values.add(getContentManagement().cms("all"));
-        values.add(getContentManagement().cms("any"));
+        values.add(getContentManagement().cmsPhrase("All"));
+        values.add(getContentManagement().cmsPhrase("Any"));
 
         return values;
     }

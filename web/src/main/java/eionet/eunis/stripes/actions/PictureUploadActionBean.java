@@ -4,23 +4,22 @@ package eionet.eunis.stripes.actions;
 import java.io.File;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
-
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
+
+import org.apache.commons.lang.StringUtils;
+
 import ro.finsiel.eunis.factsheet.PicturesHelper;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
-import eionet.eunis.util.JstlFunctions;
 
 
 /**
  * @author alex
- *
- *         <a href="mailto:aleks21@gmail.com">contact<a>
+ * <a href="mailto:aleks21@gmail.com">contact<a>
  */
 @UrlBinding("/pictures-upload.jsp")
 public class PictureUploadActionBean extends AbstractStripesAction {
@@ -35,23 +34,18 @@ public class PictureUploadActionBean extends AbstractStripesAction {
 
     @DefaultHandler
     public Resolution defaultAction() {
-        if (!getContext().getSessionManager().isAuthenticated()
-                || !getContext().getSessionManager().isUpload_pictures_RIGHT()) {
-            errorMessage = JstlFunctions.cms(getContentManagement(),
-                    "pictures_upload_login");
+        if (!getContext().getSessionManager().isAuthenticated() || !getContext().getSessionManager().isUpload_pictures_RIGHT()) {
+            errorMessage = getContentManagement()
+            .cmsPhrase("You must be logged in and have the 'upload pictures' right in order to access this page");
             return new ForwardResolution("/stripes/pictures-upload_error.jsp");
         }
 
-        if (null != idobject && null != natureobjecttype && null != operation
-                && operation.equalsIgnoreCase("upload")) {
+        if (null != idobject && null != natureobjecttype && null != operation && operation.equalsIgnoreCase("upload")) {
             return uploadPicture();
-
-        } else if (null != idobject && null != natureobjecttype
-                && null != operation && operation.equalsIgnoreCase("delete")) {
+        } else if (null != idobject && null != natureobjecttype && null != operation && operation.equalsIgnoreCase("delete")) {
             return deletePicture();
         } else {
-            errorMessage = JstlFunctions.cms(getContentManagement(),
-                    "pictures_upload_denied");
+            errorMessage = getContentManagement().cmsPhrase("This page was accessed in a wrong way");
             return new ForwardResolution("/stripes/pictures-upload_error.jsp");
         }
     }
@@ -67,20 +61,19 @@ public class PictureUploadActionBean extends AbstractStripesAction {
     }
 
     private Resolution deletePicture() {
-        boolean result = PicturesHelper.deletePicture(idobject, natureobjecttype,
-                getScientificName(), filename);
+        boolean result = PicturesHelper.deletePicture(idobject, natureobjecttype, getScientificName(), filename);
         // Delete picture physically from disk
         String instanceHome = getContext().getServletContext().getRealPath("/");
         String baseDir = "";
 
         if (StringUtils.equalsIgnoreCase("species", natureobjecttype)) {
             baseDir = getContext().getInitParameter(
-                    "UPLOAD_DIR_PICTURES_SPECIES");
+            "UPLOAD_DIR_PICTURES_SPECIES");
         } else if (StringUtils.equalsIgnoreCase("sites", natureobjecttype)) {
             baseDir = getContext().getInitParameter("UPLOAD_DIR_PICTURES_SITES");
         } else if (StringUtils.equalsIgnoreCase("habitats", natureobjecttype)) {
             baseDir = getContext().getInitParameter(
-                    "UPLOAD_DIR_PICTURES_HABITATS");
+            "UPLOAD_DIR_PICTURES_HABITATS");
         }
         String absoluteFilename = instanceHome + baseDir + filename;
         File absolutFile = new File(absoluteFilename);

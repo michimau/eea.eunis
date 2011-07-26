@@ -91,14 +91,12 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
         // set metadescription and page title
         if (factsheet.getIDNatureObject() != null) {
             metaDescription = factsheet.getDescription();
-            pageTitle =
-                getContext().getInitParameter("PAGE_TITLE") + getContentManagement().cms("sites_factsheet_title") + " "
-                + factsheet.getSiteObject().getName();
+            pageTitle = getContext().getInitParameter("PAGE_TITLE") + getContentManagement().cmsPhrase("Site factsheet for") + " "
+            + factsheet.getSiteObject().getName();
         } else {
-            pageTitle =
-                getContext().getInitParameter("PAGE_TITLE")
-                + getContentManagement().cmsPhrase("No data found in the database for the site with ID = ") + "'"
-                + factsheet.getIDSite() + "'";
+            pageTitle = getContext().getInitParameter("PAGE_TITLE")
+            + getContentManagement().cmsPhrase("No data found in the database for the site with ID = ") + "'"
+            + factsheet.getIDSite() + "'";
             try {
                 getContext().getResponse().setStatus(HttpServletResponse.SC_NOT_FOUND);
             } catch (Exception e) {
@@ -110,7 +108,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
             // Decide what tabs to show
             List<String> existingTabs =
                 getContext().getSqlUtilities().getExistingTabPages(factsheet.getSiteObject().getIdNatureObject().toString(),
-                        "SITES");
+                "SITES");
             for (String tab : existingTabs) {
                 if (types.containsKey(tab)) {
                     String[] tabData = types.get(tab);

@@ -47,7 +47,7 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
     private Chm62edtDesignationsPersist factsheet;
 
     /**
-     * This action bean only serves RDF through {@link RdfAware}.
+     * Init designation factsheet
      */
     @DefaultHandler
     public Resolution defaultAction() {
@@ -60,8 +60,7 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
         + getContentManagement().cmsPhrase("Designation identification for ");
 
         if (idDesig != null && idGeo != null) {
-            FactsheetDesignations design = new FactsheetDesignations(idDesig,
-                    idGeo);
+            FactsheetDesignations design = new FactsheetDesignations(idDesig, idGeo);
 
             // Get the DesignationPersist object
             factsheet = design.FindDesignationPersist();
@@ -79,10 +78,7 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
                                     : "");
                 }
 
-                country = Utilities.formatString(
-                        Utilities.findCountryByIdGeoscope(
-                                factsheet.getIdGeoscope()),
-                "");
+                country = Utilities.formatString(Utilities.findCountryByIdGeoscope(factsheet.getIdGeoscope()), "");
                 if (country.equalsIgnoreCase("Europe")) {
                     country = "European Community";
                 }
@@ -107,12 +103,10 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
                     }
                 }
                 try {
-                    reference = DaoFactory.getDaoFactory().getDocumentsDao().getDesignationDcObject(
-                            idDesig, idGeo);
+                    reference = DaoFactory.getDaoFactory().getDocumentsDao().getDesignationDcObject(idDesig, idGeo);
 
                     if (showSites) {
-                        sites = SitesSearchUtility.findSitesForDesignation(
-                                idDesig, idGeo);
+                        sites = SitesSearchUtility.findSitesForDesignation(idDesig, idGeo);
                         int maxSitesPerMap = Utilities.checkedStringToInt(
                                 getContext().getInitParameter(
                                 "MAX_SITES_PER_MAP"),
@@ -120,8 +114,7 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
 
                         if (sites.size() < maxSitesPerMap) {
                             for (int i = 0; i < sites.size(); i++) {
-                                DesignationPersist site = sites.get(
-                                        i);
+                                DesignationPersist site = sites.get(i);
 
                                 siteIds += "'" + site.getIdSite() + "'";
                                 if (i < sites.size() - 1) {
@@ -131,8 +124,7 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
                         }
                     }
 
-                    hasSites = getContext().getSqlUtilities().DesignationHasSites(
-                            idDesig, idGeo);
+                    hasSites = getContext().getSqlUtilities().DesignationHasSites(idDesig, idGeo);
 
                 } catch (Exception e) {
                     e.printStackTrace();

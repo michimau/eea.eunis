@@ -19,6 +19,7 @@ import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
 import ro.finsiel.eunis.search.Utilities;
 import eionet.eunis.dto.HabitatFactsheetOtherDTO;
 import eionet.eunis.rdf.GenerateHabitatRDF;
+import eionet.eunis.stripes.extensions.Redirect303Resolution;
 import eionet.eunis.util.Pair;
 
 /**
@@ -27,7 +28,7 @@ import eionet.eunis.util.Pair;
  * @author Risto Alt
  */
 @UrlBinding("/habitats/{idHabitat}/{tab}")
-public class HabitatsFactsheetActionBean extends AbstractStripesAction implements RdfAware {
+public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     private String idHabitat = "";
 
@@ -74,12 +75,29 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction implement
 
     // Variable for RDF generation
     private StringBuffer rdf;
+    private static final String ACCEPT_RDF_HEADER = "application/rdf+xml";
+    private String domainName;
 
     /**
      * This action bean only serves RDF through {@link RdfAware}.
      */
     @DefaultHandler
     public Resolution defaultAction() {
+
+        // Resolve what format should be returned - RDF or HTML
+        if (idHabitat != null && idHabitat.length() > 0) {
+            if (tab != null && tab.equals("rdf")) {
+                return generateRdf();
+            }
+
+            domainName = getContext().getInitParameter("DOMAIN_NAME");
+
+            // If accept header contains RDF, then redirect to rdf page with code 303
+            String acceptHeader = getContext().getRequest().getHeader("accept");
+            if (acceptHeader != null && acceptHeader.contains(ACCEPT_RDF_HEADER)) {
+                return new Redirect303Resolution(domainName + "/habitats/" + idHabitat + "/rdf");
+            }
+        }
 
         if (tab == null || tab.length() == 0) {
             tab = "general";

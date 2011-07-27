@@ -178,16 +178,19 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     public Resolution index() {
         String idSpeciesText = null;
 
-        if (tab != null && tab.equals("rdf")) {
-            return generateRdf();
-        }
+        // Resolve what format should be returned - RDF or HTML
+        if (idSpecies != null && idSpecies.length() > 0) {
+            if (tab != null && tab.equals("rdf")) {
+                return generateRdf();
+            }
 
-        domainName = getContext().getInitParameter("DOMAIN_NAME");
+            domainName = getContext().getInitParameter("DOMAIN_NAME");
 
-        // If accept header contains RDF, then redirect to rdf page with code 303
-        String acceptHeader = getContext().getRequest().getHeader("accept");
-        if (acceptHeader != null && acceptHeader.contains(ACCEPT_RDF_HEADER)) {
-            return new Redirect303Resolution(domainName + "/species/" + idSpecies + "/rdf");
+            // If accept header contains RDF, then redirect to rdf page with code 303
+            String acceptHeader = getContext().getRequest().getHeader("accept");
+            if (acceptHeader != null && acceptHeader.contains(ACCEPT_RDF_HEADER)) {
+                return new Redirect303Resolution(domainName + "/species/" + idSpecies + "/rdf");
+            }
         }
 
         if (tab == null || tab.length() == 0) {

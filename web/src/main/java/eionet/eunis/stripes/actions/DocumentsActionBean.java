@@ -39,6 +39,7 @@ import eionet.eunis.dto.DcSubjectDTO;
 import eionet.eunis.dto.DcTitleDTO;
 import eionet.eunis.dto.DcTypeDTO;
 import eionet.eunis.dto.PairDTO;
+import eionet.eunis.stripes.extensions.Redirect303Resolution;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
 
@@ -86,12 +87,38 @@ public class DocumentsActionBean extends AbstractStripesAction {
     // tabs to display
     private List<Pair<String, String>> tabsWithData = new LinkedList<Pair<String, String>>();
 
+    private static final String ACCEPT_RDF_HEADER = "application/rdf+xml";
+    private String domainName;
+
     List<PairDTO> species = new ArrayList<PairDTO>();
     List<PairDTO> habitats = new ArrayList<PairDTO>();
 
     @DefaultHandler
     @DontValidate(ignoreBindingErrors = true)
     public Resolution defaultAction() {
+
+        domainName = getContext().getInitParameter("DOMAIN_NAME");
+
+        // Resolve what format should be returned - RDF or HTML
+        if (!StringUtils.isBlank(iddoc) && EunisUtil.isNumber(iddoc)) {
+            if (tab != null && tab.equals("rdf")) {
+                return new StreamingResolution(ACCEPT_RDF_HEADER, generateRdf(iddoc));
+            }
+            // If accept header contains RDF, then redirect to rdf page with code 303
+            String acceptHeader = getContext().getRequest().getHeader("accept");
+            if (acceptHeader != null && acceptHeader.contains(ACCEPT_RDF_HEADER)) {
+                return new Redirect303Resolution(domainName + "/documents/" + iddoc + "/rdf");
+            }
+        } else {
+            if (iddoc != null && iddoc.equals("rdf")) {
+                return new StreamingResolution(ACCEPT_RDF_HEADER, generateRdfAll());
+            }
+            // If accept header contains RDF, then redirect to rdf page with code 303
+            String acceptHeader = getContext().getRequest().getHeader("accept");
+            if (acceptHeader != null && acceptHeader.contains(ACCEPT_RDF_HEADER)) {
+                return new Redirect303Resolution(domainName + "/documents/rdf");
+            }
+        }
 
         if (tab == null || tab.length() == 0) {
             tab = "general";
@@ -106,42 +133,29 @@ public class DocumentsActionBean extends AbstractStripesAction {
         if (!StringUtils.isBlank(iddoc) && EunisUtil.isNumber(iddoc)) {
             forwardPage = "/stripes/document.jsp";
 
-            String acceptHeader = getContext().getRequest().getHeader("accept");
-            String[] accept = null;
-
-            if (acceptHeader != null && acceptHeader.length() > 0) {
-                accept = acceptHeader.split(",");
+            dcTitle = dao.getDcTitle(iddoc);
+            dcSource = dao.getDcSource(iddoc);
+            dcContributor = dao.getDcContributor(iddoc);
+            dcCoverage = dao.getDcCoverage(iddoc);
+            dcCreator = dao.getDcCreator(iddoc);
+            dcDate = dao.getDcDate(iddoc);
+            dcDescription = dao.getDcDescription(iddoc);
+            dcFormat = dao.getDcFormat(iddoc);
+            dcIdentifier = dao.getDcIdentifier(iddoc);
+            dcIndex = dao.getDcIndex(iddoc);
+            dcLanguage = dao.getDcLanguage(iddoc);
+            dcPublisher = dao.getDcPublisher(iddoc);
+            dcRelation = dao.getDcRelation(iddoc);
+            dcRights = dao.getDcRights(iddoc);
+            dcSubject = dao.getDcSubject(iddoc);
+            dcType = dao.getDcType(iddoc);
+            btrail = "eea#" + eeaHome
+            + ",home#index.jsp,documents#documents";
+            if (dcTitle != null) {
+                btrail += "," + dcTitle.getTitle();
             }
-
-            if (accept != null && accept.length > 0
-                    && accept[0].equals("application/rdf+xml")) {
-                return new StreamingResolution("application/rdf+xml",
-                        generateRdf(iddoc));
-            } else {
-                dcTitle = dao.getDcTitle(iddoc);
-                dcSource = dao.getDcSource(iddoc);
-                dcContributor = dao.getDcContributor(iddoc);
-                dcCoverage = dao.getDcCoverage(iddoc);
-                dcCreator = dao.getDcCreator(iddoc);
-                dcDate = dao.getDcDate(iddoc);
-                dcDescription = dao.getDcDescription(iddoc);
-                dcFormat = dao.getDcFormat(iddoc);
-                dcIdentifier = dao.getDcIdentifier(iddoc);
-                dcIndex = dao.getDcIndex(iddoc);
-                dcLanguage = dao.getDcLanguage(iddoc);
-                dcPublisher = dao.getDcPublisher(iddoc);
-                dcRelation = dao.getDcRelation(iddoc);
-                dcRights = dao.getDcRights(iddoc);
-                dcSubject = dao.getDcSubject(iddoc);
-                dcType = dao.getDcType(iddoc);
-                btrail = "eea#" + eeaHome
-                + ",home#index.jsp,documents#documents";
-                if (dcTitle != null) {
-                    btrail += "," + dcTitle.getTitle();
-                }
-                if (dcTitle == null && dcSource == null) {
-                    return new ErrorResolution(404);
-                }
+            if (dcTitle == null && dcSource == null) {
+                return new ErrorResolution(404);
             }
             try {
                 species = ReferencesDomain.getSpeciesForAReference(iddoc,
@@ -173,23 +187,12 @@ public class DocumentsActionBean extends AbstractStripesAction {
 
             setMetaDescription("document");
         } else if (!StringUtils.isBlank(iddoc) && !EunisUtil.isNumber(iddoc)) {
-            handleEunisException("Document ID has to be a number!",
-                    Constants.SEVERITY_ERROR);
+            handleEunisException("Document ID has to be a number!", Constants.SEVERITY_ERROR);
             docs = dao.getDocuments();
             setMetaDescription("documents");
         } else {
             btrail = "eea#" + eeaHome + ",home#index.jsp,documents";
-
-            String acceptHeader = getContext().getRequest().getHeader("accept");
-            String[] accept = acceptHeader.split(",");
-
-            if (accept != null && accept.length > 0
-                    && accept[0].equals("application/rdf+xml")) {
-                return new StreamingResolution("application/rdf+xml",
-                        generateRdfAll());
-            } else {
-                docs = dao.getDocuments();
-            }
+            docs = dao.getDocuments();
             setMetaDescription("documents");
         }
         setBtrail(btrail);

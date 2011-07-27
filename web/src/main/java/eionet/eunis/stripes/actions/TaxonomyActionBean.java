@@ -22,7 +22,7 @@ import eionet.eunis.util.SimpleFrameworkUtils;
  * @author Risto Alt
  */
 @UrlBinding("/taxonomy/{idtaxonomy}")
-public class TaxonomyActionBean extends AbstractStripesAction implements RdfAware {
+public class TaxonomyActionBean extends AbstractStripesAction {
 
     private String idtaxonomy = "";
 

@@ -1295,8 +1295,8 @@ public class Natura2000ImportParser extends DefaultHandler {
 
     private String getSpeciesNatObjectId(String speciesCode) {
         String query =
-            "SELECT ID_NATURE_OBJECT FROM chm62edt_nature_object_attributes WHERE NAME = '_natura2000Code' AND OBJECT = '"
-            + speciesCode + "'";
+            "SELECT ID_NATURE_OBJECT FROM chm62edt_nature_object_attributes WHERE NAME = '"
+            + Constants.SAME_SYNONYM_N2000 + "' AND OBJECT = '" + speciesCode + "'";
         String noId = sqlUtilities.ExecuteSQL(query);
 
         return noId;

@@ -24,6 +24,7 @@ import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dto.DatatypeDto;
 import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.SiteFactsheetDto;
+import eionet.eunis.stripes.extensions.Redirect303Resolution;
 import eionet.eunis.util.Pair;
 import eionet.eunis.util.SimpleFrameworkUtils;
 
@@ -33,7 +34,7 @@ import eionet.eunis.util.SimpleFrameworkUtils;
  * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 @UrlBinding("/sites/{idsite}/{tab}")
-public class SitesFactsheetActionBean extends AbstractStripesAction implements RdfAware {
+public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     private static final String HEADER = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
         + "xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n"
@@ -72,6 +73,9 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
     // tabs to display
     private List<Pair<String, String>> tabsWithData = new LinkedList<Pair<String, String>>();
 
+    private static final String ACCEPT_RDF_HEADER = "application/rdf+xml";
+    private String domainName;
+
     /**
      * This action bean only serves RDF through {@link RdfAware}.
      * 
@@ -79,6 +83,18 @@ public class SitesFactsheetActionBean extends AbstractStripesAction implements R
      */
     @DefaultHandler
     public Resolution defaultAction() {
+
+        if (tab != null && tab.equals("rdf")) {
+            return generateRdf();
+        }
+
+        domainName = getContext().getInitParameter("DOMAIN_NAME");
+
+        // If accept header contains RDF, then redirect to rdf page with code 303
+        String acceptHeader = getContext().getRequest().getHeader("accept");
+        if (acceptHeader != null && acceptHeader.contains(ACCEPT_RDF_HEADER)) {
+            return new Redirect303Resolution(domainName + "/sites/" + idsite + "/rdf");
+        }
 
         if (tab == null || tab.length() == 0) {
             tab = "general";

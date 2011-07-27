@@ -11,9 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ErrorResolution;
 import net.sourceforge.stripes.action.ForwardResolution;
@@ -59,6 +56,7 @@ import eionet.eunis.dto.SpeciesFactsheetDto;
 import eionet.eunis.dto.SpeciesSynonymDto;
 import eionet.eunis.dto.TaxonomyTreeDTO;
 import eionet.eunis.dto.VernacularNameDto;
+import eionet.eunis.stripes.extensions.Redirect303Resolution;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
 import eionet.eunis.util.SimpleFrameworkUtils;
@@ -189,12 +187,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         // If accept header contains RDF, then redirect to rdf page with code 303
         String acceptHeader = getContext().getRequest().getHeader("accept");
         if (acceptHeader != null && acceptHeader.contains(ACCEPT_RDF_HEADER)) {
-            return new Resolution() {
-                public void execute(HttpServletRequest request, HttpServletResponse response) {
-                    response.setStatus(HttpServletResponse.SC_SEE_OTHER);
-                    response.setHeader("Location",domainName + "/species/" + idSpecies + "/rdf");
-                }
-            };
+            return new Redirect303Resolution(domainName + "/species/" + idSpecies + "/rdf");
         }
 
         if (tab == null || tab.length() == 0) {
@@ -511,7 +504,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             // World Register of Marine Species - also has seals etc.
             wormsid = factsheet.getLink(specie.getIdNatureObject(), Constants.SAME_SYNONYM_WORMS);
 
-            n2000id = factsheet.getLink(specie.getIdNatureObject(), "sameSynonymN2000");
+            n2000id = factsheet.getLink(specie.getIdNatureObject(), Constants.SAME_SYNONYM_N2000);
 
             if (kingdomname.equalsIgnoreCase("Animals")) {
                 faeu = factsheet.getLink(specie.getIdNatureObject(), Constants.SAME_SYNONYM_FAEU);

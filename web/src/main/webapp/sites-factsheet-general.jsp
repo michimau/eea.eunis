@@ -460,10 +460,7 @@
         }
 %>
     <div>
-        <a href="http://sea.unep-wcmc.org/wdbpa/sitedetails.cfm?siteid=<%=factsheet.getSiteObject().getIdSite()%>&amp;level=<%=level%>"><%=cm.cmsPhrase("UNEP-WCMC link")%></a>
-        </div>
-    <div>
-        <a href="http://www.wdpa.org/siteSheet.aspx?sitecode=<%=factsheet.getSiteObject().getIdSite()%>"><%=cm.cmsPhrase("WPDA info")%></a>
+        <a href="http://protectedplanet.net/sites/<%=factsheet.getSiteObject().getIdSite()%>"><%=cm.cmsPhrase("Protected Planet")%></a>
         </div>
 <%
       }

@@ -37,7 +37,7 @@ public class DatatypeDto implements Serializable {
         setValue(value);
         this.type = type;
     }
-    
+
     /**
      * @param value
      * @param type
@@ -46,7 +46,7 @@ public class DatatypeDto implements Serializable {
         this.value = value;
         this.type = type;
     }
-    
+
     /**
      * @return value
      */

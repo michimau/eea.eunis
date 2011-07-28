@@ -83,11 +83,11 @@ public class SiteFactsheetDto implements Serializable {
     @Element(required = false)
     private DatatypeDto length;
     @Element(required = false)
-    private String altMean;
+    private DatatypeDto altMean;
     @Element(required = false)
-    private String altMax;
+    private DatatypeDto altMax;
     @Element(required = false)
-    private String altMin;
+    private DatatypeDto altMin;
     @Element(required = false, name = "geo:long")
     private DatatypeDto longitude;
     @Element(required = false, name = "geo:lat")
@@ -132,7 +132,7 @@ public class SiteFactsheetDto implements Serializable {
     public void setDesignation(String idDesignation) {
         this.designation = idDesignation;
     }
- 
+
     /**
      * @return the respondent
      */
@@ -458,42 +458,42 @@ public class SiteFactsheetDto implements Serializable {
     /**
      * @return the altMean
      */
-    public String getAltMean() {
+    public DatatypeDto getAltMean() {
         return altMean;
     }
 
     /**
      * @param altMean the altMean to set
      */
-    public void setAltMean(String altMean) {
+    public void setAltMean(DatatypeDto altMean) {
         this.altMean = altMean;
     }
 
     /**
      * @return the altMax
      */
-    public String getAltMax() {
+    public DatatypeDto getAltMax() {
         return altMax;
     }
 
     /**
      * @param altMax the altMax to set
      */
-    public void setAltMax(String altMax) {
+    public void setAltMax(DatatypeDto altMax) {
         this.altMax = altMax;
     }
 
     /**
      * @return the altMin
      */
-    public String getAltMin() {
+    public DatatypeDto getAltMin() {
         return altMin;
     }
 
     /**
      * @param altMin the altMin to set
      */
-    public void setAltMin(String altMin) {
+    public void setAltMin(DatatypeDto altMin) {
         this.altMin = altMin;
     }
 

@@ -108,18 +108,6 @@
     	<b>nuts</b>
     </field>
     <field>
-    	<a>siteObject.altMean</a>
-    	<b>altMean</b>
-    </field>
-    <field>
-    	<a>siteObject.altMax</a>
-    	<b>altMax</b>
-    </field>
-    <field>
-    	<a>siteObject.altMin</a>
-    	<b>altMin</b>
-    </field>
-    <field>
     	<a>siteObject.sourceDB</a>
     	<b>sourceDb</b>
     </field>

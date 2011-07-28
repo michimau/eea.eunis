@@ -75,6 +75,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     private static final String ACCEPT_RDF_HEADER = "application/rdf+xml";
     private String domainName;
+    private static final String XSD_DECIMAL = "http://www.w3.org/2001/XMLSchema#decimal";
+    private static final String XSD_INTEGER = "http://www.w3.org/2001/XMLSchema#integer";
 
     /**
      * This action bean only serves RDF through {@link RdfAware}.
@@ -170,18 +172,25 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
                 dto.setIdDesignation(null);
             }
             if (!StringUtils.isBlank(factsheet.getSiteObject().getArea())) {
-                dto.setArea(new DatatypeDto(factsheet.getSiteObject().getArea(), "http://www.w3.org/2001/XMLSchema#decimal"));
+                dto.setArea(new DatatypeDto(factsheet.getSiteObject().getArea(), XSD_DECIMAL));
             }
             if (!StringUtils.isBlank(factsheet.getSiteObject().getLength())) {
-                dto.setLength(new DatatypeDto(factsheet.getSiteObject().getLength(), "http://www.w3.org/2001/XMLSchema#decimal"));
+                dto.setLength(new DatatypeDto(factsheet.getSiteObject().getLength(), XSD_DECIMAL));
             }
             if (!StringUtils.isBlank(factsheet.getSiteObject().getLatitude())) {
-                dto.setLatitude(new DatatypeDto(factsheet.getSiteObject().getLatitude(),
-                "http://www.w3.org/2001/XMLSchema#decimal"));
+                dto.setLatitude(new DatatypeDto(factsheet.getSiteObject().getLatitude(), XSD_DECIMAL));
             }
             if (!StringUtils.isBlank(factsheet.getSiteObject().getLongitude())) {
-                dto.setLongitude(new DatatypeDto(factsheet.getSiteObject().getLongitude(),
-                "http://www.w3.org/2001/XMLSchema#decimal"));
+                dto.setLongitude(new DatatypeDto(factsheet.getSiteObject().getLongitude(), XSD_DECIMAL));
+            }
+            if (!StringUtils.isBlank(factsheet.getSiteObject().getAltMin())) {
+                dto.setAltMin(new DatatypeDto(factsheet.getSiteObject().getAltMin(), XSD_INTEGER));
+            }
+            if (!StringUtils.isBlank(factsheet.getSiteObject().getAltMax())) {
+                dto.setAltMax(new DatatypeDto(factsheet.getSiteObject().getAltMax(), XSD_INTEGER));
+            }
+            if (!StringUtils.isBlank(factsheet.getSiteObject().getAltMean())) {
+                dto.setAltMean(new DatatypeDto(factsheet.getSiteObject().getAltMean(), XSD_INTEGER));
             }
             return new StreamingResolution("application/rdf+xml", SimpleFrameworkUtils.convertToString(HEADER, dto, FOOTER));
         } else {

@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Types;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,6 +69,7 @@ public class Natura2000ImportParser extends DefaultHandler {
     private String altMin;
     private String altMax;
     private String altMean;
+    private String lengthKm;
     private String geoscopeId;
     private String nutsCode;
     private String nutsCover;
@@ -240,6 +242,13 @@ public class Natura2000ImportParser extends DefaultHandler {
                 nutsCode = buf.toString().trim();
             } else if (qName.equalsIgnoreCase("NutsCover")) {
                 nutsCover = buf.toString().trim();
+            } else if (qName.equalsIgnoreCase("LengthKM")) {
+                lengthKm = buf.toString().trim();
+                if (lengthKm != null && lengthKm.length() > 0) {
+                    double length = Double.parseDouble(lengthKm);
+                    length = length * 1000;
+                    lengthKm = new Double(length).toString();
+                }
             }
 
             if (qName.equalsIgnoreCase("OtherSiteCode")) {
@@ -346,7 +355,12 @@ public class Natura2000ImportParser extends DefaultHandler {
                     preparedStatementSite.setString(20, altMean);
                     preparedStatementSite.setString(21, "80");
                     preparedStatementSite.setString(22, siteDesignation);
-                    preparedStatementSite.setString(23, siteCode);
+                    if (lengthKm != null && lengthKm.length() > 0) {
+                        preparedStatementSite.setString(23, lengthKm);
+                    } else {
+                        preparedStatementSite.setNull(23, Types.DECIMAL);
+                    }
+                    preparedStatementSite.setString(24, siteCode);
                     preparedStatementSite.executeUpdate();
                 } else {
                     preparedStatementNatObject.setString(1, siteNatureObjectId);
@@ -380,6 +394,11 @@ public class Natura2000ImportParser extends DefaultHandler {
                     preparedStatementSiteInsert.setString(23, "NATURA2000");
                     preparedStatementSiteInsert.setString(24, "80");
                     preparedStatementSiteInsert.setString(25, siteDesignation);
+                    if (lengthKm != null && lengthKm.length() > 0) {
+                        preparedStatementSiteInsert.setString(26, lengthKm);
+                    } else {
+                        preparedStatementSiteInsert.setNull(26, Types.DECIMAL);
+                    }
                     preparedStatementSiteInsert.executeUpdate();
                 }
 
@@ -1034,15 +1053,15 @@ public class Natura2000ImportParser extends DefaultHandler {
                 + "COMPLEX_NAME, DISTRICT_NAME, "
                 + "UPDATE_DATE, SPA_DATE, RESPONDENT, DESCRIPTION, LATITUDE, LAT_NS, LAT_DEG, LAT_MIN, LAT_SEC, "
                 + "LONGITUDE, LONG_EW, LONG_DEG, LONG_MIN, LONG_SEC, AREA, ALT_MIN, ALT_MAX, ALT_MEAN, SOURCE_DB, "
-                + "ID_GEOSCOPE, ID_DESIGNATION) VALUES "
-                + "(?,?,?,?,'','',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "ID_GEOSCOPE, ID_DESIGNATION, LENGTH) VALUES "
+                + "(?,?,?,?,'','',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             this.preparedStatementSiteInsert = con.prepareStatement(querySiteInsert);
 
             String querySites = "UPDATE chm62edt_sites SET NAME=?, COMPILATION_DATE=?, UPDATE_DATE=?, "
                 + "SPA_DATE=?, RESPONDENT=?, DESCRIPTION=?, LATITUDE=?, LAT_NS=?, LAT_DEG=?, LAT_MIN=?, "
                 + "LAT_SEC=?, LONGITUDE=?, LONG_EW=?, LONG_DEG=?, LONG_MIN=?, LONG_SEC=?, AREA=?, "
-                + "ALT_MIN=?, ALT_MAX=?, ALT_MEAN=?, ID_GEOSCOPE=?, ID_DESIGNATION=? WHERE ID_SITE = ?";
+                + "ALT_MIN=?, ALT_MAX=?, ALT_MEAN=?, ID_GEOSCOPE=?, ID_DESIGNATION=?, LENGTH=? WHERE ID_SITE = ?";
 
             this.preparedStatementSite = con.prepareStatement(querySites);
 

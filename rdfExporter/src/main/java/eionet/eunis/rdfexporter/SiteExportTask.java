@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.dozer.DozerBeanMapperSingletonWrapper;
 import org.dozer.Mapper;
+import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.stream.Format;
 
@@ -43,9 +44,7 @@ public class SiteExportTask implements Runnable {
             Mapper mapper = DozerBeanMapperSingletonWrapper.getInstance();
             SiteFactsheetDto dto = mapper.map(factsheet, SiteFactsheetDto.class);
 
-            dto.setAttributes(
-                    DaoFactory.getDaoFactory().getSitesDao().getAttributes(
-                            factsheet.getSiteObject().getIdSite()));
+            dto.setAttributes(DaoFactory.getDaoFactory().getSitesDao().getAttributes(factsheet.getSiteObject().getIdSite()));
 
             dto.setDcmitype(new ResourceDto("", "http://purl.org/dc/dcmitype/Text"));
             if (dto.getIdDc() != null && !"-1".equals(dto.getIdDc().getId())) {
@@ -85,7 +84,7 @@ public class SiteExportTask implements Runnable {
             if (!StringUtils.isBlank(factsheet.getSiteObject().getAltMean())) {
                 dto.setAltMean(new DatatypeDto(factsheet.getSiteObject().getAltMean(), XSD_INTEGER));
             }
-            Persister persister = new Persister(new Format(4));
+            Persister persister = new Persister(new AnnotationStrategy(), new Format(4));
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             try {
                 persister.write(dto, buffer, "UTF-8");

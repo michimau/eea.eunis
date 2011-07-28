@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
+import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.stream.Format;
 
@@ -47,7 +48,7 @@ public class TaxonomyExportTask implements Runnable {
             dto.setSource(new ResourceDto(taxonomy.getIdDc().toString(), "http://eunis.eea.europa.eu/documents/"));
             dto.setNotes(taxonomy.getNotes());
 
-            Persister persister = new Persister(new Format(4));
+            Persister persister = new Persister(new AnnotationStrategy(), new Format(4));
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             try {
                 persister.write(dto, buffer, "UTF-8");

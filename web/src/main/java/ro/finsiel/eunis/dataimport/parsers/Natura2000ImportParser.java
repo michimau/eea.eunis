@@ -245,9 +245,14 @@ public class Natura2000ImportParser extends DefaultHandler {
             } else if (qName.equalsIgnoreCase("LengthKM")) {
                 lengthKm = buf.toString().trim();
                 if (lengthKm != null && lengthKm.length() > 0) {
-                    double length = Double.parseDouble(lengthKm);
-                    length = length * 1000;
-                    lengthKm = new Double(length).toString();
+                    double length;
+                    try {
+                        length = Double.parseDouble(lengthKm);
+                        length = length * 1000;
+                        lengthKm = new Double(length).toString();
+                    } catch (NumberFormatException e) {
+                        System.out.println("Length " + lengthKm + " is unparseable!");
+                    }
                 }
             }
 

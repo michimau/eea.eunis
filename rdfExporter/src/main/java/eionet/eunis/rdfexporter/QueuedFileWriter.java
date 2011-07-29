@@ -102,6 +102,13 @@ public class QueuedFileWriter implements Runnable {
     }
 
     /**
+     * Count down
+     */
+    public void countDown() {
+        doneSignal.countDown();
+    }
+
+    /**
      * Write footer and stop listening to the queue.
      */
     public void shutdown() {

@@ -68,6 +68,7 @@ public class TaxonomyExportTask implements Runnable {
             }
         } else {
             logger.error("Taxonomy " + idtaxonomy + " not found");
+            fileWriter.countDown();
         }
     }
 

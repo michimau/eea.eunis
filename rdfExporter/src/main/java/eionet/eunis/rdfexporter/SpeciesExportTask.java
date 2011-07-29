@@ -136,6 +136,7 @@ public class SpeciesExportTask implements Runnable {
             }
         } else {
             logger.error("Species " + idspecies + " not found");
+            fileWriter.countDown();
         }
     }
 

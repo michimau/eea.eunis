@@ -104,6 +104,7 @@ public class SiteExportTask implements Runnable {
             }
         } else {
             logger.error("Site " + idsite + " not found");
+            fileWriter.countDown();
         }
     }
 

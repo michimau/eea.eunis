@@ -73,7 +73,7 @@ public class RdfExporter {
             if (numberOfObjectsToImport != null && numberOfObjectsToImport.length() > 0)
                 limit = Integer.valueOf(numberOfObjectsToImport);
             else
-                limit = Integer.valueOf(exporterProperties.getProperty("NUMBER_OF_SITES_TO_EXPORT", "0"));
+                limit = Integer.valueOf(exporterProperties.getProperty("NUMBER_OF_OBJECTS_TO_EXPORT", "0"));
 
             if (offset != null && offset.length() > 0)
                 this.offset = Integer.valueOf(offset);
@@ -161,8 +161,7 @@ public class RdfExporter {
             SiteExportTask task = new SiteExportTask(id, fileWriter);
             if (counter < numOfThreads) {
                 try {
-                    // jrf connection pool needs some time to create new
-                    // connection
+                    // jrf connection pool needs some time to create new connection
                     Thread.sleep(100L);
                 } catch (InterruptedException e) {
                     logger.error(e, e);

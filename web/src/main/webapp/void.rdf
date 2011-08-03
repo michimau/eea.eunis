@@ -8,7 +8,7 @@
            xmlns:void="http://rdfs.org/ns/void#">
 
    <!-- This file is a listing of the RDF outputs supported by EUNIS
-        See http://rdfs.org/ns/void-guide
+        See http://www.w3.org/TR/void/
     -->
   <foaf:Organization rdf:ID="EEA">
     <foaf:name>European Environment Agency</foaf:name>
@@ -26,6 +26,7 @@
     <void:exampleResource rdf:resource="http://eunis.eea.europa.eu/species/4055"/>
     <void:exampleResource rdf:resource="http://eunis.eea.europa.eu/sites/UK930012"/>
     <void:uriPattern>^http://eunis.eea.europa.eu/.*</void:uriPattern>
+    <void:sparqlEndpoint rdf:resource="http://semantic.eea.europa.eu/sparql"/>
     <void:subset rdf:resource="#documents"/>
     <void:subset rdf:resource="#sites"/>
     <void:subset rdf:resource="#species"/>

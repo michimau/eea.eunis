@@ -59,8 +59,6 @@ public class DocumentsActionBean extends AbstractStripesAction {
         + "xmlns:dcterms=\"http://purl.org/dc/terms/\"\n"
         + "xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 
-    private static final String FOOTER = "\n</rdf:RDF>";
-
     private static final String doc_url = "http://eunis.eea.europa.eu/documents/";
 
     private String iddoc;
@@ -87,7 +85,6 @@ public class DocumentsActionBean extends AbstractStripesAction {
     // tabs to display
     private List<Pair<String, String>> tabsWithData = new LinkedList<Pair<String, String>>();
 
-    private static final String ACCEPT_RDF_HEADER = "application/rdf+xml";
     private String domainName;
 
     List<PairDTO> species = new ArrayList<PairDTO>();
@@ -102,20 +99,20 @@ public class DocumentsActionBean extends AbstractStripesAction {
         // Resolve what format should be returned - RDF or HTML
         if (!StringUtils.isBlank(iddoc) && EunisUtil.isNumber(iddoc)) {
             if (tab != null && tab.equals("rdf")) {
-                return new StreamingResolution(ACCEPT_RDF_HEADER, generateRdf(iddoc));
+                return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, generateRdf(iddoc));
             }
             // If accept header contains RDF, then redirect to rdf page with code 303
             String acceptHeader = getContext().getRequest().getHeader("accept");
-            if (acceptHeader != null && acceptHeader.contains(ACCEPT_RDF_HEADER)) {
+            if (acceptHeader != null && acceptHeader.contains(Constants.ACCEPT_RDF_HEADER)) {
                 return new Redirect303Resolution(domainName + "/documents/" + iddoc + "/rdf");
             }
         } else {
             if (iddoc != null && iddoc.equals("rdf")) {
-                return new StreamingResolution(ACCEPT_RDF_HEADER, generateRdfAll());
+                return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, generateRdfAll());
             }
             // If accept header contains RDF, then redirect to rdf page with code 303
             String acceptHeader = getContext().getRequest().getHeader("accept");
-            if (acceptHeader != null && acceptHeader.contains(ACCEPT_RDF_HEADER)) {
+            if (acceptHeader != null && acceptHeader.contains(Constants.ACCEPT_RDF_HEADER)) {
                 return new Redirect303Resolution(domainName + "/documents/rdf");
             }
         }
@@ -291,7 +288,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
                 s.append("</rdf:Description>\n");
             }
         }
-        s.append(FOOTER);
+        s.append(Constants.RDF_FOOTER);
 
         return s.toString();
     }
@@ -380,7 +377,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
             }
             s.append("</rdf:Description>\n");
         }
-        s.append(FOOTER);
+        s.append(Constants.RDF_FOOTER);
 
         return s.toString();
     }

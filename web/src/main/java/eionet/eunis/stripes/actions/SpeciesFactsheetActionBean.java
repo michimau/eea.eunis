@@ -172,8 +172,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     // Deliveries tab variables
     private QueryResult deliveries;
 
-    private static final String ACCEPT_RDF_HEADER = "application/rdf+xml";
-
     @DefaultHandler
     public Resolution index() {
         String idSpeciesText = null;
@@ -188,7 +186,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             // If accept header contains RDF, then redirect to rdf page with code 303
             String acceptHeader = getContext().getRequest().getHeader("accept");
-            if (acceptHeader != null && acceptHeader.contains(ACCEPT_RDF_HEADER)) {
+            if (acceptHeader != null && acceptHeader.contains(Constants.ACCEPT_RDF_HEADER)) {
                 return new Redirect303Resolution(domainName + "/species/" + idSpecies + "/rdf");
             }
         }
@@ -389,8 +387,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             dto.setVernacularNames(vernacularDtos);
         }
 
-        return new StreamingResolution("application/rdf+xml", SimpleFrameworkUtils.convertToString(SpeciesFactsheetDto.HEADER,
-                dto, SpeciesFactsheetDto.FOOTER));
+        return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, SimpleFrameworkUtils.convertToString(
+                SpeciesFactsheetDto.HEADER, dto, Constants.RDF_FOOTER));
     }
 
     private void generalTabActions(int mainIdSpecies) {

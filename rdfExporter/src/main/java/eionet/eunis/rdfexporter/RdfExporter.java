@@ -10,7 +10,10 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.utilities.SQLUtilities;
+import eionet.eunis.dto.DoubleDTO;
+import eionet.eunis.rdf.GenerateDesignationRDF;
 import eionet.eunis.rdf.GenerateHabitatRDF;
+import eionet.eunis.util.Constants;
 
 /**
  * Main class of RDF exporter.
@@ -35,8 +38,6 @@ public class RdfExporter {
         + " xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
         + " xmlns:dcterms=\"http://purl.org/dc/terms/\">\n";
 
-    private static final String FOOTER = "\n</rdf:RDF>";
-
     public static final String DEFAULT_NUM_OF_THREADS = "5";
 
     protected Properties exporterProperties;
@@ -48,6 +49,7 @@ public class RdfExporter {
     private String fileNameSpecies;
     private String fileNameTaxonomies;
     private String fileNameHabitats;
+    private String fileNameDesignations;
 
     private SQLUtilities sqlUtilities;
 
@@ -104,6 +106,12 @@ public class RdfExporter {
                 fileNameHabitats = exporterProperties.getProperty("FILE_NAME_HABITATS");
             }
 
+            if (StringUtils.isBlank(exporterProperties.getProperty("FILE_NAME_DESIGNATIONS"))) {
+                throw new RuntimeException("Pleace specify FILE_NAME_DESIGNATIONS property");
+            } else {
+                fileNameDesignations = exporterProperties.getProperty("FILE_NAME_DESIGNATIONS");
+            }
+
             if (StringUtils.isBlank(exporterProperties.getProperty("JDBC_DRV"))) {
                 throw new RuntimeException("Pleace specify JDBC_DRV property");
             } else {
@@ -151,7 +159,7 @@ public class RdfExporter {
         List<String> siteIds = sqlUtilities.SQL2Array(getSiteIdsQuery);
 
         CountDownLatch doneSignal = new CountDownLatch(limit > 0 ? limit : totalNumberOfSites);
-        QueuedFileWriter fileWriter = new QueuedFileWriter(fileNameSites, HEADER_SITES, FOOTER, doneSignal);
+        QueuedFileWriter fileWriter = new QueuedFileWriter(fileNameSites, HEADER_SITES, Constants.RDF_FOOTER, doneSignal);
         ExecutorService executor = Executors.newFixedThreadPool(numOfThreads);
 
         new Thread(fileWriter).start();
@@ -201,7 +209,8 @@ public class RdfExporter {
         List<String> habitatIds = sqlUtilities.SQL2Array(getHabitatIdsQuery);
 
         CountDownLatch doneSignal = new CountDownLatch(limit > 0 ? limit : totalNumberOfHabitat);
-        QueuedFileWriter fileWriter = new QueuedFileWriter(fileNameHabitats, GenerateHabitatRDF.HEADER, FOOTER, doneSignal);
+        QueuedFileWriter fileWriter = new QueuedFileWriter(
+                fileNameHabitats, GenerateHabitatRDF.HEADER, Constants.RDF_FOOTER, doneSignal);
         ExecutorService executor = Executors.newFixedThreadPool(numOfThreads);
 
         new Thread(fileWriter).start();
@@ -234,6 +243,59 @@ public class RdfExporter {
     }
 
     /**
+     * Export designations to file.
+     */
+    public void exportDesignations() {
+        String countDesignationsQuery = "SELECT COUNT(*) FROM CHM62EDT_DESIGNATIONS";
+        String getIdsQuery =
+            "SELECT ID_DESIGNATION, ID_GEOSCOPE FROM CHM62EDT_DESIGNATIONS ORDER BY ID_DESIGNATION"
+            + (limit > 0 ? " LIMIT " + (offset > 0 ? offset + "," : "") + limit : "");
+
+        int totalNumberOfDesignations = Integer.valueOf(sqlUtilities.ExecuteSQL(countDesignationsQuery));
+
+        logger.debug("Total number of designations in DB: " + totalNumberOfDesignations);
+        if (limit > 0)
+            logger.debug("Number of exported designations will be limited by " + limit
+                    + (offset > 0 ? " with offset " + offset : ""));
+
+        List<DoubleDTO> ids = sqlUtilities.SQL2ListOfDoubles(getIdsQuery, "ID_DESIGNATION", "ID_GEOSCOPE");
+
+        CountDownLatch doneSignal = new CountDownLatch(limit > 0 ? limit : totalNumberOfDesignations);
+        QueuedFileWriter fileWriter = new QueuedFileWriter(
+                fileNameDesignations, GenerateDesignationRDF.HEADER, Constants.RDF_FOOTER, doneSignal);
+        ExecutorService executor = Executors.newFixedThreadPool(numOfThreads);
+
+        new Thread(fileWriter).start();
+
+        int counter = 0;
+        for (DoubleDTO d : ids) {
+            DesignationExportTask task = new DesignationExportTask(d.getOne(), d.getTwo(), fileWriter);
+            if (counter < numOfThreads) {
+                try {
+                    // jrf connection pool needs some time to create new
+                    // connection
+                    Thread.sleep(100L);
+                } catch (InterruptedException e) {
+                    logger.error(e, e);
+                }
+                counter++;
+            }
+
+            executor.execute(task);
+        }
+
+        try {
+            doneSignal.await();
+        } catch (InterruptedException e) {
+            logger.error(e, e);
+        }
+
+        executor.shutdown();
+        fileWriter.shutdown();
+    }
+
+
+    /**
      * Export species to file.
      */
     public void exportSpecies() {
@@ -251,7 +313,8 @@ public class RdfExporter {
         List<String> speciesIds = sqlUtilities.SQL2Array(getSpeciesIdsQuery);
 
         CountDownLatch doneSignal = new CountDownLatch(limit > 0 ? limit : totalNumberOfSpecies);
-        QueuedFileWriter fileWriter = new QueuedFileWriter(fileNameSpecies, HEADER_SPECIES, FOOTER, doneSignal);
+        QueuedFileWriter fileWriter = new QueuedFileWriter(
+                fileNameSpecies, HEADER_SPECIES, Constants.RDF_FOOTER, doneSignal);
         ExecutorService executor = Executors.newFixedThreadPool(numOfThreads);
 
         new Thread(fileWriter).start();
@@ -302,7 +365,8 @@ public class RdfExporter {
         List<String> taxonomyIds = sqlUtilities.SQL2Array(getTaxonomyIdsQuery);
 
         CountDownLatch doneSignal = new CountDownLatch(limit > 0 ? limit : totalNumberOfTaxonomy);
-        QueuedFileWriter fileWriter = new QueuedFileWriter(fileNameTaxonomies, HEADER_TAXONOMIES, FOOTER, doneSignal);
+        QueuedFileWriter fileWriter = new QueuedFileWriter(
+                fileNameTaxonomies, HEADER_TAXONOMIES, Constants.RDF_FOOTER, doneSignal);
         ExecutorService executor = Executors.newFixedThreadPool(numOfThreads);
 
         new Thread(fileWriter).start();
@@ -340,10 +404,10 @@ public class RdfExporter {
      */
     public static void main(String... args) {
         if (args.length == 0) {
-            logger.error("Missing argument what to import: sites/species/taxonomies/habitats");
+            logger.error("Missing argument what to import: sites/species/taxonomies/habitats/designations");
         } else if (!args[0].equals("sites") && !args[0].equals("species") && !args[0].equals("taxonomies")
-                && !args[0].equals("habitats")) {
-            logger.error("Usage: rdfExporter {sites|species|taxonomies|habitats} [limit] [offset]");
+                && !args[0].equals("habitats") && !args[0].equals("designations")) {
+            logger.error("Usage: rdfExporter {sites|species|taxonomies|habitats|designations} [limit] [offset]");
         } else {
             logger.info("RDF exporter started");
             long startTime = System.currentTimeMillis();
@@ -379,6 +443,9 @@ public class RdfExporter {
             } else if (what != null && what.equals("habitats")) {
                 exporter.exportHabitats();
                 exportedCnt = "Totally exported " + HabitatExportTask.getNumberOfExportedHabitats() + " habitat types.";
+            } else if (what != null && what.equals("designations")) {
+                exporter.exportDesignations();
+                exportedCnt = "Totally exported " + DesignationExportTask.getNumberOfExportedDesignations() + " designations.";
             }
 
             long endTime = System.currentTimeMillis();

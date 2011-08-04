@@ -20,6 +20,7 @@ import ro.finsiel.eunis.search.Utilities;
 import eionet.eunis.dto.HabitatFactsheetOtherDTO;
 import eionet.eunis.rdf.GenerateHabitatRDF;
 import eionet.eunis.stripes.extensions.Redirect303Resolution;
+import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
 
 /**
@@ -75,7 +76,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     // Variable for RDF generation
     private StringBuffer rdf;
-    private static final String ACCEPT_RDF_HEADER = "application/rdf+xml";
     private String domainName;
 
     /**
@@ -94,7 +94,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
             // If accept header contains RDF, then redirect to rdf page with code 303
             String acceptHeader = getContext().getRequest().getHeader("accept");
-            if (acceptHeader != null && acceptHeader.contains(ACCEPT_RDF_HEADER)) {
+            if (acceptHeader != null && acceptHeader.contains(Constants.ACCEPT_RDF_HEADER)) {
                 return new Redirect303Resolution(domainName + "/habitats/" + idHabitat + "/rdf");
             }
         }
@@ -184,12 +184,12 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             GenerateHabitatRDF genRdf = new GenerateHabitatRDF(idHabitat);
             rdf.append(genRdf.getHabitatRdf());
 
-            rdf.append(GenerateHabitatRDF.FOOTER);
+            rdf.append(Constants.RDF_FOOTER);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return new StreamingResolution("application/rdf+xml", rdf.toString());
+        return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, rdf.toString());
     }
 
     private void sitesTabActions() {

@@ -14,6 +14,7 @@ import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist;
 import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.TaxonomyDto;
+import eionet.eunis.util.Constants;
 import eionet.eunis.util.SimpleFrameworkUtils;
 
 /**
@@ -45,8 +46,8 @@ public class TaxonomyActionBean extends AbstractStripesAction {
             dto.setSource(new ResourceDto(taxonomy.getIdDc().toString(), "http://eunis.eea.europa.eu/documents/"));
             dto.setNotes(StringEscapeUtils.escapeXml(taxonomy.getNotes()));
 
-            return new StreamingResolution("application/rdf+xml", SimpleFrameworkUtils.convertToString(TaxonomyDto.HEADER, dto,
-                    TaxonomyDto.FOOTER));
+            return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, SimpleFrameworkUtils.convertToString(TaxonomyDto.HEADER, dto,
+                    Constants.RDF_FOOTER));
         } else {
             return new ErrorResolution(404);
         }

@@ -19,6 +19,7 @@ import java.util.List;
 import ro.finsiel.eunis.dataimport.ColumnDTO;
 import ro.finsiel.eunis.dataimport.ImportLogDTO;
 import ro.finsiel.eunis.search.Utilities;
+import eionet.eunis.dto.DoubleDTO;
 
 /**
  * Created by IntelliJ IDEA. User: ancai Date: 03.03.2005 Time: 15:35:37 To change this template use File | Settings | File
@@ -213,6 +214,51 @@ public class SQLUtilities {
 
             while (rs.next()) {
                 result.add(rs.getString(1));
+            }
+
+            closeAll(con, ps, rs);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            closeAll(con, ps, rs);
+        }
+
+        return result;
+    }
+
+    /**
+     * Executes a SELECT sql and returns the given two columns as object.
+     * 
+     * @param SQL
+     * @param firstColumn
+     * @param secondColumn
+     * @return list
+     */
+    public ArrayList<DoubleDTO> SQL2ListOfDoubles(String SQL, String firstColumn, String secondColumn) {
+
+        if (SQL == null || SQL.trim().length() <= 0 || firstColumn == null || secondColumn == null) {
+            return null;
+        }
+
+        ArrayList<DoubleDTO> result = new ArrayList<DoubleDTO>();
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Class.forName(SQL_DRV);
+            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+
+            ps = con.prepareStatement(SQL);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                DoubleDTO d = new DoubleDTO();
+                d.setOne(rs.getString(firstColumn));
+                d.setTwo(rs.getString(secondColumn));
+                result.add(d);
             }
 
             closeAll(con, ps, rs);

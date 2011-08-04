@@ -88,4 +88,14 @@ public interface Constants {
     public static final String SPECIES_SOURCE_TABLE_INVERT = "invert";
     public static final String SPECIES_SOURCE_TABLE_PLANT = "Plant";
 
+    // RDF datatypes
+    public static final String XSD_DECIMAL = "http://www.w3.org/2001/XMLSchema#decimal";
+    public static final String XSD_INTEGER = "http://www.w3.org/2001/XMLSchema#integer";
+
+    // RDF header
+    public static final String ACCEPT_RDF_HEADER = "application/rdf+xml";
+
+    // RDF footer
+    public static final String RDF_FOOTER = "\n</rdf:RDF>";
+
 }

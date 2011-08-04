@@ -17,6 +17,7 @@ import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dto.DatatypeDto;
 import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.SiteFactsheetDto;
+import eionet.eunis.util.Constants;
 
 /**
  * Site export task.
@@ -29,9 +30,6 @@ public class SiteExportTask implements Runnable {
 
     private String idsite;
     private QueuedFileWriter fileWriter;
-
-    private static final String XSD_DECIMAL = "http://www.w3.org/2001/XMLSchema#decimal";
-    private static final String XSD_INTEGER = "http://www.w3.org/2001/XMLSchema#integer";
 
     public SiteExportTask(String idsite, QueuedFileWriter fileWriter) {
         this.idsite = idsite;
@@ -64,25 +62,25 @@ public class SiteExportTask implements Runnable {
                 dto.setIdDesignation(null);
             }
             if (!StringUtils.isBlank(factsheet.getSiteObject().getArea())) {
-                dto.setArea(new DatatypeDto(factsheet.getSiteObject().getArea(), XSD_DECIMAL));
+                dto.setArea(new DatatypeDto(factsheet.getSiteObject().getArea(), Constants.XSD_DECIMAL));
             }
             if (!StringUtils.isBlank(factsheet.getSiteObject().getLength())) {
-                dto.setLength(new DatatypeDto(factsheet.getSiteObject().getLength(), XSD_DECIMAL));
+                dto.setLength(new DatatypeDto(factsheet.getSiteObject().getLength(), Constants.XSD_DECIMAL));
             }
             if (!StringUtils.isBlank(factsheet.getSiteObject().getLatitude())) {
-                dto.setLatitude(new DatatypeDto(factsheet.getSiteObject().getLatitude(), XSD_DECIMAL));
+                dto.setLatitude(new DatatypeDto(factsheet.getSiteObject().getLatitude(), Constants.XSD_DECIMAL));
             }
             if (!StringUtils.isBlank(factsheet.getSiteObject().getLongitude())) {
-                dto.setLongitude(new DatatypeDto(factsheet.getSiteObject().getLongitude(), XSD_DECIMAL));
+                dto.setLongitude(new DatatypeDto(factsheet.getSiteObject().getLongitude(), Constants.XSD_DECIMAL));
             }
             if (!StringUtils.isBlank(factsheet.getSiteObject().getAltMin())) {
-                dto.setAltMin(new DatatypeDto(factsheet.getSiteObject().getAltMin(), XSD_INTEGER));
+                dto.setAltMin(new DatatypeDto(factsheet.getSiteObject().getAltMin(), Constants.XSD_INTEGER));
             }
             if (!StringUtils.isBlank(factsheet.getSiteObject().getAltMax())) {
-                dto.setAltMax(new DatatypeDto(factsheet.getSiteObject().getAltMax(), XSD_INTEGER));
+                dto.setAltMax(new DatatypeDto(factsheet.getSiteObject().getAltMax(), Constants.XSD_INTEGER));
             }
             if (!StringUtils.isBlank(factsheet.getSiteObject().getAltMean())) {
-                dto.setAltMean(new DatatypeDto(factsheet.getSiteObject().getAltMean(), XSD_INTEGER));
+                dto.setAltMean(new DatatypeDto(factsheet.getSiteObject().getAltMean(), Constants.XSD_INTEGER));
             }
             Persister persister = new Persister(new AnnotationStrategy(), new Format(4));
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();

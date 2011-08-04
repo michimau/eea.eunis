@@ -27,8 +27,6 @@ public class SpeciesFactsheetDto implements Serializable {
     + "xmlns:dwc=\"http://rs.tdwg.org/dwc/terms/\" \n"
     + "xmlns =\"http://eunis.eea.europa.eu/rdf/species-schema.rdf#\">\n";
 
-    public static final String FOOTER = "\n</rdf:RDF>";
-
     private static final String DOMAIN_LOCATION = "http://eunis.eea.europa.eu/species/";
 
     @Element(required = false, name = "speciesCode")

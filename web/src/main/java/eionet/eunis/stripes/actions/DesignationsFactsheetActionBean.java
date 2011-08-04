@@ -6,6 +6,7 @@ import java.util.List;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
+import net.sourceforge.stripes.action.StreamingResolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import ro.finsiel.eunis.jrfTables.Chm62edtCountryDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist;
@@ -15,6 +16,9 @@ import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.search.sites.designations.FactsheetDesignations;
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dto.DesignationDcObjectDTO;
+import eionet.eunis.rdf.GenerateDesignationRDF;
+import eionet.eunis.stripes.extensions.Redirect303Resolution;
+import eionet.eunis.util.Constants;
 
 
 /**
@@ -23,7 +27,7 @@ import eionet.eunis.dto.DesignationDcObjectDTO;
  * @author Risto Alt
  * <a href="mailto:risto.alt@tietoenator.com">contact</a>
  */
-@UrlBinding("/designations/{idGeo}:{idDesig}")
+@UrlBinding("/designations/{idGeo}:{idDesig}/{tab}")
 public class DesignationsFactsheetActionBean extends AbstractStripesAction {
 
     private String idGeo = "";
@@ -46,16 +50,34 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
 
     private Chm62edtDesignationsPersist factsheet;
 
+    // Variable for RDF generation
+    private String tab;
+    private StringBuffer rdf;
+    private String domainName;
+
     /**
      * Init designation factsheet
      */
     @DefaultHandler
     public Resolution defaultAction() {
 
+        // Resolve what format should be returned - RDF or HTML
+        if (idGeo != null && idGeo.length() > 0 && idDesig != null && idDesig.length() > 0) {
+            if (tab != null && tab.equals("rdf")) {
+                return generateRdf();
+            }
+            domainName = getContext().getInitParameter("DOMAIN_NAME");
+
+            // If accept header contains RDF, then redirect to rdf page with code 303
+            String acceptHeader = getContext().getRequest().getHeader("accept");
+            if (acceptHeader != null && acceptHeader.contains(Constants.ACCEPT_RDF_HEADER)) {
+                return new Redirect303Resolution(domainName + "/designations/" + idGeo + ":" + idDesig + "/rdf");
+            }
+        }
+
         String eeaHome = getContext().getInitParameter("EEA_HOME");
 
-        btrail = "eea#" + eeaHome
-        + ",home#index.jsp,sites#sites.jsp,designation_factsheet_location";
+        btrail = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,designation_factsheet_location";
         pageTitle = getContext().getInitParameter("PAGE_TITLE")
         + getContentManagement().cmsPhrase("Designation identification for ");
 
@@ -134,6 +156,25 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
         }
 
         return new ForwardResolution("/stripes/designations-factsheet.jsp");
+    }
+
+    /**
+     * Generate RDF for a designation
+     */
+    public Resolution generateRdf() {
+        try {
+            rdf = new StringBuffer();
+            rdf.append(GenerateDesignationRDF.HEADER);
+
+            GenerateDesignationRDF genRdf = new GenerateDesignationRDF(idDesig, idGeo);
+            rdf.append(genRdf.getDesignationRdf());
+
+            rdf.append(Constants.RDF_FOOTER);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, rdf.toString());
     }
 
     public Chm62edtDesignationsPersist getFactsheet() {
@@ -223,6 +264,14 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
 
     public String getSiteIds() {
         return siteIds;
+    }
+
+    public String getTab() {
+        return tab;
+    }
+
+    public void setTab(String tab) {
+        this.tab = tab;
     }
 
 }

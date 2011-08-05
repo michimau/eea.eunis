@@ -122,6 +122,9 @@
 						<c:if test="${actionBean.tab == 'art17'}">
 							<stripes:layout-render name="/stripes/habitats-factsheet-art17-dist.jsp"/>
 						</c:if>
+						<c:if test="${actionBean.tab == 'deliveries'}">
+							<stripes:layout-render name="/stripes/habitats-factsheet-deliveries.jsp"/>
+						</c:if>
 						<c:if test="${actionBean.tab == 'other'}">
 							<c:if test="${actionBean.factsheet.eunis}">
 								<script language="JavaScript" type="text/javascript">

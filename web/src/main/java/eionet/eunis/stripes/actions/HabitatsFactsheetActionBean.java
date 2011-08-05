@@ -13,6 +13,9 @@ import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.StreamingResolution;
 import net.sourceforge.stripes.action.UrlBinding;
+
+import org.apache.commons.lang.StringUtils;
+
 import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
@@ -22,6 +25,8 @@ import eionet.eunis.rdf.GenerateHabitatRDF;
 import eionet.eunis.stripes.extensions.Redirect303Resolution;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
+import eionet.sparqlClient.helpers.QueryExecutor;
+import eionet.sparqlClient.helpers.QueryResult;
 
 /**
  * Action bean to handle habitats-factsheet functionality.
@@ -77,6 +82,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     // Variable for RDF generation
     private StringBuffer rdf;
     private String domainName;
+
+    // Deliveries tab variables
+    private QueryResult deliveries;
 
     /**
      * This action bean only serves RDF through {@link RdfAware}.
@@ -137,6 +145,11 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
         if (factsheet.isAnnexI()) {
             tabsWithData.add(new Pair<String, String>("art17","Distribution map from Art. 17"));
+        }
+
+        if (factsheet.getCode2000() != null && factsheet.getCode2000().length() == 4) {
+            tabsWithData.add(new Pair<String, String>("deliveries","Deliveries"));
+            deliveriesTabActions(idHabitat);
         }
 
         if (tab != null && tab.equals("sites")) {
@@ -240,7 +253,37 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                 }
             }
         }
+    }
 
+    private void deliveriesTabActions(String idHabitat) {
+
+        String query =
+            "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
+            + "PREFIX dc: <http://purl.org/dc/elements/1.1/> "
+            + "PREFIX dct: <http://purl.org/dc/terms/> "
+            + "PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> "
+            + "PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> "
+            + "SELECT DISTINCT xsd:date(?released) AS ?released ?coverage ?envelope ?envtitle "
+            + "IRI(bif:concat(?sourcefile,'/manage_document')) AS ?file ?filetitle "
+            + "WHERE { "
+            + "GRAPH ?sourcefile { "
+            + "_:reference ?pred <http://eunis.eea.europa.eu/habitats/" + idHabitat + "> "
+            + "OPTIONAL { _:reference rdfs:label ?label } "
+            + "} "
+            + "?envelope rod:hasFile ?sourcefile; "
+            + "rod:released ?released; "
+            + "rod:locality _:locurl; "
+            + "dc:title ?envtitle . "
+            + "_:locurl rdfs:label ?coverage . "
+            + "?sourcefile dc:title ?filetitle "
+            + "} ORDER BY DESC(?released)";
+
+        String CRSparqlEndpoint = getContext().getApplicationProperty("cr.sparql.endpoint");
+        if (!StringUtils.isBlank(CRSparqlEndpoint)) {
+            QueryExecutor executor = new QueryExecutor();
+            executor.executeQuery(CRSparqlEndpoint, query);
+            deliveries = executor.getResults();
+        }
     }
 
     public String getIdHabitat() {
@@ -351,6 +394,14 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     public void setMapIds(String mapIds) {
         this.mapIds = mapIds;
+    }
+
+    public QueryResult getDeliveries() {
+        return deliveries;
+    }
+
+    public void setDeliveries(QueryResult deliveries) {
+        this.deliveries = deliveries;
     }
 
 }

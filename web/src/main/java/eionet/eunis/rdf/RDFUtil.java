@@ -46,8 +46,8 @@ public class RDFUtil {
      * string then the user is indicating he wants the literal to have no
      * language code. Only untyped literals can have language codes.
      * Type can be one of '' or a XML schema simple type (without namespace).
-     * TODO: Should check that if you provide the "boolean" type then the only
-     * legal values are "true" or "false". Should do similar checks for numbers
+     * Could check that if you provide the "boolean" type then the only
+     * legal values are "true" or "false". Could do similar checks for numbers
      * as well.
      *
      * @param tag - the name of the predicate.
@@ -60,9 +60,9 @@ public class RDFUtil {
         StringBuffer rdf = new StringBuffer();
         if (val != null && val.length() > 0) {
             rdf.append("    <").append(tag);
-            if (null == type || "" == type) {
+            if (null == type || type.equals("")) {
                 // Only untyped literals can have a language.
-                if (null != langcode && "" != langcode) {
+                if (null != langcode && !langcode.equals("")) {
                     rdf.append(" xml:lang=\"").append(langcode).append("\"");
                 }
             } else {
@@ -100,7 +100,7 @@ public class RDFUtil {
         StringBuffer rdf = new StringBuffer();
         if (val != null && val.length() > 0) {
             rdf.append("    <").append(tag);
-            if (null != langcode && "" != langcode) {
+            if (null != langcode && !langcode.equals("")) {
                 rdf.append(" xml:lang=\"").append(langcode).append("\"");
             }
             rdf.append(">").append(StringEscapeUtils.escapeXml(val))

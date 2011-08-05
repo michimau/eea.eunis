@@ -48,7 +48,7 @@ public class GenerateDesignationRDF {
                     if (!cddacount.equalsIgnoreCase("Y")) {
                         val = Boolean.TRUE;
                     }
-                    rdf.append(RDFUtil.writeLiteral("CDDASites", val));
+                    rdf.append(RDFUtil.writeLiteral("hasCDDASites", val));
                 }
 
                 rdf.append(RDFUtil.writeLiteral("areaReference", factsheet.getReferenceArea()));

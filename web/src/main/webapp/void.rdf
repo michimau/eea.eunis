@@ -27,18 +27,12 @@
     <void:exampleResource rdf:resource="http://eunis.eea.europa.eu/sites/UK930012"/>
     <void:uriPattern>^http://eunis.eea.europa.eu/.*</void:uriPattern>
     <void:sparqlEndpoint rdf:resource="http://semantic.eea.europa.eu/sparql"/>
-    <void:subset rdf:resource="#documents"/>
     <void:subset rdf:resource="#sites"/>
     <void:subset rdf:resource="#species"/>
-    <void:subset rdf:resource="#taxonomies"/>
     <void:subset rdf:resource="#habitats"/>
-  </void:Dataset>
-
-  <void:Dataset rdf:ID="documents">
-    <dcterms:title>Documents from EUNIS</dcterms:title>
-    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
-    <dcterms:creator rdf:resource="#EEA"/>
-    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/documents"/>
+    <void:subset rdf:resource="#designations"/>
+    <void:subset rdf:resource="#references"/>
+    <void:subset rdf:resource="#taxonomies"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="sites">
@@ -70,6 +64,20 @@
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:subject rdf:resource="http://dbpedia.org/resource/Habitat"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/habitats.rdf.gz"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="designations">
+    <dcterms:title>Designations of sites from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/designations.rdf.gz"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="references">
+    <dcterms:title>Documents from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/documents"/>
   </void:Dataset>
 
 </rdf:RDF>

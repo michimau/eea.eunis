@@ -24,7 +24,7 @@
   </sc:dataset>
 
   <sc:dataset>
-    <sc:datasetLabel>Documents from EUNIS</sc:datasetLabel>
+    <sc:datasetLabel>References from EUNIS</sc:datasetLabel>
     <sc:dataDumpLocation>http://eunis.eea.europa.eu/documents</sc:dataDumpLocation>
   </sc:dataset>
 
@@ -36,6 +36,11 @@
   <sc:dataset>
     <sc:datasetLabel>Species from EUNIS</sc:datasetLabel>
     <sc:dataDumpLocation>http://eunis.eea.europa.eu/rdf/species.rdf.gz</sc:dataDumpLocation>
+  </sc:dataset>
+
+  <sc:dataset>
+    <sc:datasetLabel>Site designations from EUNIS</sc:datasetLabel>
+    <sc:dataDumpLocation>http://eunis.eea.europa.eu/rdf/designations.rdf.gz</sc:dataDumpLocation>
   </sc:dataset>
 
 </urlset>

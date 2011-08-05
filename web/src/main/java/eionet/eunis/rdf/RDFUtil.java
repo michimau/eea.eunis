@@ -22,16 +22,13 @@ public class RDFUtil {
     /**
      * Write a property where the type and language are provided.
      * Usage is for attribute tables where the type is provided as a field.
-     * The language code can be null, empty string or a code. If it is the empty
-     * string then the user is indicating he wants the literal to have an empty
-     * language code. Only untyped literals can have language codes.
      * Type can be one of 'reference', '' or a XML schema simple type (without
      *  namespace). It it is 'reference' then the val is a URL.
      *
      * @param tag - the name of the predicate.
      * @param val - value to write.
      * @param langcode - language code.
-     * @param langcode - type of literal - unless "reference"
+     * @param type - type of literal - unless "reference"
      * @return String
      */
     public static String writeProperty(final String tag, final String val, final String langcode, final String type) {
@@ -46,14 +43,17 @@ public class RDFUtil {
      * Write a literal where the type and language are provided.
      * Usage is for attribute tables where the type is provided as a field.
      * The language code can be null, empty string or a code. If it is the empty
-     * string then the user is indicating he wants the literal to have an empty
+     * string then the user is indicating he wants the literal to have no
      * language code. Only untyped literals can have language codes.
      * Type can be one of '' or a XML schema simple type (without namespace).
+     * TODO: Should check that if you provide the "boolean" type then the only
+     * legal values are "true" or "false". Should do similar checks for numbers
+     * as well.
      *
      * @param tag - the name of the predicate.
      * @param val - value to write.
      * @param langcode - language code.
-     * @param langcode - type of literal
+     * @param type - type of literal
      * @return String
      */
     public static String writeLiteral(final String tag, final String val, final String langcode, final String type) {
@@ -62,7 +62,7 @@ public class RDFUtil {
             rdf.append("    <").append(tag);
             if (null == type || "" == type) {
                 // Only untyped literals can have a language.
-                if (null != langcode) {
+                if (null != langcode && "" != langcode) {
                     rdf.append(" xml:lang=\"").append(langcode).append("\"");
                 }
             } else {
@@ -88,7 +88,7 @@ public class RDFUtil {
     /**
      * Write a string literal where the language is provided.
      * The language code can be null, empty string or a code. If it is the empty
-     * string then the user is indicating he wants the literal to have an empty
+     * string then the user is indicating he wants the literal to have no
      * language code. Only untyped literals can have language codes.
      *
      * @param tag - the name of the predicate.
@@ -100,7 +100,7 @@ public class RDFUtil {
         StringBuffer rdf = new StringBuffer();
         if (val != null && val.length() > 0) {
             rdf.append("    <").append(tag);
-            if (null != langcode) {
+            if (null != langcode && "" != langcode) {
                 rdf.append(" xml:lang=\"").append(langcode).append("\"");
             }
             rdf.append(">").append(StringEscapeUtils.escapeXml(val))

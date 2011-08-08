@@ -200,7 +200,7 @@
       languages = cm.getTranslatedLanguages();
       versions = cm.getIDPageVersions( idPage, language );
       descriptionText = Utilities.formatString( cmPersist.getDescription() );
-      contentText = Utilities.formatString( cm.getText( idPage ) );
+      contentText = Utilities.treatURLAmp(Utilities.formatString(cm.getText(idPage)));
 
       if ( version != -1 )
       {

@@ -38,9 +38,11 @@ import eionet.eunis.dto.DcSourceDTO;
 import eionet.eunis.dto.DcSubjectDTO;
 import eionet.eunis.dto.DcTitleDTO;
 import eionet.eunis.dto.DcTypeDTO;
+import eionet.eunis.dto.DocumentDTO;
 import eionet.eunis.dto.PairDTO;
 import eionet.eunis.stripes.extensions.Redirect303Resolution;
 import eionet.eunis.util.Constants;
+import eionet.eunis.util.CustomPaginatedList;
 import eionet.eunis.util.Pair;
 
 
@@ -62,7 +64,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
     private static final String doc_url = "http://eunis.eea.europa.eu/documents/";
 
     private String iddoc;
-    private List<DcTitleDTO> docs;
+    private CustomPaginatedList<DocumentDTO> docs;
     private DcTitleDTO dcTitle;
     private DcSourceDTO dcSource;
     private DcContributorDTO dcContributor;
@@ -89,6 +91,10 @@ public class DocumentsActionBean extends AbstractStripesAction {
 
     List<PairDTO> species = new ArrayList<PairDTO>();
     List<PairDTO> habitats = new ArrayList<PairDTO>();
+
+    private int page;
+    private String sort;
+    private String dir;
 
     @DefaultHandler
     @DontValidate(ignoreBindingErrors = true)
@@ -126,6 +132,8 @@ public class DocumentsActionBean extends AbstractStripesAction {
         String eeaHome = getContext().getInitParameter("EEA_HOME");
         String btrail = "";
         IDocumentsDao dao = DaoFactory.getDaoFactory().getDocumentsDao();
+
+        String defaultPageSize = getContext().getApplicationProperty("default.page.size");
 
         if (!StringUtils.isBlank(iddoc) && EunisUtil.isNumber(iddoc)) {
             forwardPage = "/stripes/document.jsp";
@@ -185,11 +193,10 @@ public class DocumentsActionBean extends AbstractStripesAction {
             setMetaDescription("document");
         } else if (!StringUtils.isBlank(iddoc) && !EunisUtil.isNumber(iddoc)) {
             handleEunisException("Document ID has to be a number!", Constants.SEVERITY_ERROR);
-            docs = dao.getDocuments();
             setMetaDescription("documents");
         } else {
             btrail = "eea#" + eeaHome + ",home#index.jsp,documents";
-            docs = dao.getDocuments();
+            docs = dao.getDocuments(page, Integer.parseInt(defaultPageSize), sort, dir);
             setMetaDescription("documents");
         }
         setBtrail(btrail);
@@ -390,11 +397,11 @@ public class DocumentsActionBean extends AbstractStripesAction {
         this.iddoc = iddoc;
     }
 
-    public List<DcTitleDTO> getDocs() {
+    public CustomPaginatedList<DocumentDTO> getDocs() {
         return docs;
     }
 
-    public void setDocs(List<DcTitleDTO> docs) {
+    public void setDocs(CustomPaginatedList<DocumentDTO> docs) {
         this.docs = docs;
     }
 
@@ -556,6 +563,30 @@ public class DocumentsActionBean extends AbstractStripesAction {
 
     public void setHabitats(List<PairDTO> habitats) {
         this.habitats = habitats;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
+    public String getDir() {
+        return dir;
+    }
+
+    public void setDir(String dir) {
+        this.dir = dir;
     }
 
 }

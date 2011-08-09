@@ -21,7 +21,10 @@ import eionet.eunis.dto.DcSubjectDTO;
 import eionet.eunis.dto.DcTitleDTO;
 import eionet.eunis.dto.DcTypeDTO;
 import eionet.eunis.dto.DesignationDcObjectDTO;
+import eionet.eunis.dto.DocumentDTO;
 import eionet.eunis.dto.PairDTO;
+import eionet.eunis.stripes.actions.DocumentsActionBean;
+import eionet.eunis.util.CustomPaginatedList;
 
 
 /**
@@ -34,9 +37,13 @@ public interface IDocumentsDao {
 
     /**
      * Returns list of dublin core elements
+     * @param page nr
+     * @param defaltPageSize
+     * @param sort order
+     * @param dir - sort direction
      * @return list
      */
-    List<DcTitleDTO> getDocuments();
+    CustomPaginatedList<DocumentDTO> getDocuments(int page, int defaltPageSize, String sort, String dir);
 
     /**
      * Returns content of table DC_CONTRIBUTOR

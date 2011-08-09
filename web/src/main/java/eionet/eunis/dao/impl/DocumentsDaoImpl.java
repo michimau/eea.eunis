@@ -9,6 +9,10 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.displaytag.properties.SortOrderEnum;
+
+import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.utilities.EunisUtil;
 import eionet.eunis.dao.IDocumentsDao;
 import eionet.eunis.dto.DcContributorDTO;
 import eionet.eunis.dto.DcCoverageDTO;
@@ -28,12 +32,11 @@ import eionet.eunis.dto.DcSubjectDTO;
 import eionet.eunis.dto.DcTitleDTO;
 import eionet.eunis.dto.DcTypeDTO;
 import eionet.eunis.dto.DesignationDcObjectDTO;
+import eionet.eunis.dto.DocumentDTO;
 import eionet.eunis.dto.PairDTO;
 import eionet.eunis.dto.readers.DcObjectDTOReader;
-import eionet.eunis.dto.readers.DcTitleDTOReader;
-
-import ro.finsiel.eunis.search.Utilities;
-import ro.finsiel.eunis.utilities.EunisUtil;
+import eionet.eunis.dto.readers.DocumentDTOReader;
+import eionet.eunis.util.CustomPaginatedList;
 
 
 /**
@@ -45,22 +48,94 @@ public class DocumentsDaoImpl extends MySqlBaseDao implements IDocumentsDao {
     public DocumentsDaoImpl() {}
 
     /**
-     * @see eionet.eunis.dao.IDocumentsDao#getDocuments()
+     * @see eionet.eunis.dao.IDocumentsDao#getDocuments(int page, int defaltPageSize, String sort, String dir)
      * {@inheritDoc}
      */
-    public List<DcTitleDTO> getDocuments() {
+    public CustomPaginatedList<DocumentDTO> getDocuments(int page, int defaltPageSize, String sort, String dir) {
 
-        List<DcTitleDTO> ret = new ArrayList<DcTitleDTO>();
+        CustomPaginatedList<DocumentDTO> ret = new CustomPaginatedList<DocumentDTO>();
 
-        String query = "SELECT ID_DC, ID_TITLE, TITLE, ALTERNATIVE FROM DC_INDEX LEFT JOIN DC_TITLE USING (ID_DC)";
+        int offset = 0;
+        if (page > 1) {
+            offset = page * defaltPageSize;
+        }
+
+        String order = "";
+        if (sort != null) {
+            if (sort.equals("idDoc")) {
+                order = "ID_DC";
+            } else if (sort.equals("docTitle")) {
+                order = "TITLE";
+            } else if (sort.equals("author")) {
+                order = "SOURCE";
+            } else if (sort.equals("docYear")) {
+                order = "CREATED";
+            }
+        }
+
+        if (order != null && order.length() > 0 && dir != null && dir.length() > 0) {
+            order = order + " " + dir.toUpperCase();
+        }
+
+        String query = "SELECT ID_DC, ID_TITLE, TITLE, ALTERNATIVE, SOURCE, CREATED FROM DC_INDEX "
+            + "LEFT JOIN DC_TITLE USING (ID_DC) "
+            + "LEFT JOIN DC_SOURCE USING (ID_DC) "
+            + "LEFT JOIN DC_DATE USING (ID_DC)";
+        if (order != null && order.length() > 0) {
+            query = query + " ORDER BY " + order;
+        }
+        query = query + (defaltPageSize > 0 ? " LIMIT " + (offset > 0 ? offset + "," : "") + defaltPageSize : "");
         List<Object> values = new ArrayList<Object>();
-        DcTitleDTOReader rsReader = new DcTitleDTOReader();
+        DocumentDTOReader rsReader = new DocumentDTOReader();
 
         try {
 
             executeQuery(query, values, rsReader);
-            ret = rsReader.getResultList();
+            List<DocumentDTO> docs = rsReader.getResultList();
 
+            int listSize = getDocumentsCnt();
+            ret.setList(docs);
+            ret.setFullListSize(listSize);
+            ret.setObjectsPerPage(defaltPageSize);
+            if (page == 0) {
+                page = 1;
+            }
+            ret.setPageNumber(page);
+            ret.setSortCriterion(sort);
+            if (dir != null && dir.equals("asc")) {
+                ret.setSortDirection(SortOrderEnum.ASCENDING);
+            } else if (dir != null && dir.equals("desc")) {
+                ret.setSortDirection(SortOrderEnum.DESCENDING);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ret;
+    }
+
+    /**
+     * @see eionet.eunis.dao.IDocumentsDao#getDocumentsCnt()
+     * {@inheritDoc}
+     */
+    private int getDocumentsCnt() {
+
+        int ret = 0;
+
+        String query = "SELECT COUNT(*) FROM DC_INDEX LEFT JOIN DC_TITLE USING (ID_DC)";
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+
+            con = getConnection();
+            preparedStatement = con.prepareStatement(query);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                ret = rs.getInt(1);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -666,22 +741,22 @@ public class DocumentsDaoImpl extends MySqlBaseDao implements IDocumentsDao {
         List<DcObjectDTO> ret = new ArrayList<DcObjectDTO>();
 
         String query = "SELECT ID_DC, TITLE, SOURCE, URL, CONTRIBUTOR, COVERAGE, CREATOR, CREATED, DESCRIPTION, FORMAT, "
-                + "IDENTIFIER, LANGUAGE, PUBLISHER, RELATION, RIGHTS, SUBJECT, TYPE "
-                + "FROM DC_INDEX " + "LEFT JOIN DC_TITLE USING (ID_DC) "
-                + "LEFT JOIN DC_SOURCE USING (ID_DC) "
-                + "LEFT JOIN DC_CONTRIBUTOR USING (ID_DC) "
-                + "LEFT JOIN DC_CREATOR USING (ID_DC) "
-                + "LEFT JOIN DC_COVERAGE USING (ID_DC) "
-                + "LEFT JOIN DC_DATE USING (ID_DC) "
-                + "LEFT JOIN DC_DESCRIPTION USING (ID_DC) "
-                + "LEFT JOIN DC_FORMAT USING (ID_DC) "
-                + "LEFT JOIN DC_IDENTIFIER USING (ID_DC) "
-                + "LEFT JOIN DC_LANGUAGE USING (ID_DC) "
-                + "LEFT JOIN DC_PUBLISHER USING (ID_DC) "
-                + "LEFT JOIN DC_RELATION USING (ID_DC) "
-                + "LEFT JOIN DC_RIGHTS USING (ID_DC) "
-                + "LEFT JOIN DC_SUBJECT USING (ID_DC) "
-                + "LEFT JOIN DC_TYPE USING (ID_DC)";
+            + "IDENTIFIER, LANGUAGE, PUBLISHER, RELATION, RIGHTS, SUBJECT, TYPE "
+            + "FROM DC_INDEX " + "LEFT JOIN DC_TITLE USING (ID_DC) "
+            + "LEFT JOIN DC_SOURCE USING (ID_DC) "
+            + "LEFT JOIN DC_CONTRIBUTOR USING (ID_DC) "
+            + "LEFT JOIN DC_CREATOR USING (ID_DC) "
+            + "LEFT JOIN DC_COVERAGE USING (ID_DC) "
+            + "LEFT JOIN DC_DATE USING (ID_DC) "
+            + "LEFT JOIN DC_DESCRIPTION USING (ID_DC) "
+            + "LEFT JOIN DC_FORMAT USING (ID_DC) "
+            + "LEFT JOIN DC_IDENTIFIER USING (ID_DC) "
+            + "LEFT JOIN DC_LANGUAGE USING (ID_DC) "
+            + "LEFT JOIN DC_PUBLISHER USING (ID_DC) "
+            + "LEFT JOIN DC_RELATION USING (ID_DC) "
+            + "LEFT JOIN DC_RIGHTS USING (ID_DC) "
+            + "LEFT JOIN DC_SUBJECT USING (ID_DC) "
+            + "LEFT JOIN DC_TYPE USING (ID_DC)";
 
         List<Object> values = new ArrayList<Object>();
         DcObjectDTOReader rsReader = new DcObjectDTOReader();
@@ -707,22 +782,22 @@ public class DocumentsDaoImpl extends MySqlBaseDao implements IDocumentsDao {
         DcObjectDTO ret = new DcObjectDTO();
 
         String query = "SELECT ID_DC, TITLE, SOURCE, URL, CONTRIBUTOR, COVERAGE, CREATOR, CREATED, DESCRIPTION, FORMAT, "
-                + "IDENTIFIER, LANGUAGE, PUBLISHER, RELATION, RIGHTS, SUBJECT, TYPE "
-                + "FROM DC_INDEX " + "LEFT JOIN DC_TITLE USING (ID_DC) "
-                + "LEFT JOIN DC_SOURCE USING (ID_DC) "
-                + "LEFT JOIN DC_CONTRIBUTOR USING (ID_DC) "
-                + "LEFT JOIN DC_CREATOR USING (ID_DC) "
-                + "LEFT JOIN DC_COVERAGE USING (ID_DC) "
-                + "LEFT JOIN DC_DATE USING (ID_DC) "
-                + "LEFT JOIN DC_DESCRIPTION USING (ID_DC) "
-                + "LEFT JOIN DC_FORMAT USING (ID_DC) "
-                + "LEFT JOIN DC_IDENTIFIER USING (ID_DC) "
-                + "LEFT JOIN DC_LANGUAGE USING (ID_DC) "
-                + "LEFT JOIN DC_PUBLISHER USING (ID_DC) "
-                + "LEFT JOIN DC_RELATION USING (ID_DC) "
-                + "LEFT JOIN DC_RIGHTS USING (ID_DC) "
-                + "LEFT JOIN DC_SUBJECT USING (ID_DC) "
-                + "LEFT JOIN DC_TYPE USING (ID_DC) " + "WHERE ID_DC = ?";
+            + "IDENTIFIER, LANGUAGE, PUBLISHER, RELATION, RIGHTS, SUBJECT, TYPE "
+            + "FROM DC_INDEX " + "LEFT JOIN DC_TITLE USING (ID_DC) "
+            + "LEFT JOIN DC_SOURCE USING (ID_DC) "
+            + "LEFT JOIN DC_CONTRIBUTOR USING (ID_DC) "
+            + "LEFT JOIN DC_CREATOR USING (ID_DC) "
+            + "LEFT JOIN DC_COVERAGE USING (ID_DC) "
+            + "LEFT JOIN DC_DATE USING (ID_DC) "
+            + "LEFT JOIN DC_DESCRIPTION USING (ID_DC) "
+            + "LEFT JOIN DC_FORMAT USING (ID_DC) "
+            + "LEFT JOIN DC_IDENTIFIER USING (ID_DC) "
+            + "LEFT JOIN DC_LANGUAGE USING (ID_DC) "
+            + "LEFT JOIN DC_PUBLISHER USING (ID_DC) "
+            + "LEFT JOIN DC_RELATION USING (ID_DC) "
+            + "LEFT JOIN DC_RIGHTS USING (ID_DC) "
+            + "LEFT JOIN DC_SUBJECT USING (ID_DC) "
+            + "LEFT JOIN DC_TYPE USING (ID_DC) " + "WHERE ID_DC = ?";
 
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -845,16 +920,16 @@ public class DocumentsDaoImpl extends MySqlBaseDao implements IDocumentsDao {
         DesignationDcObjectDTO ret = null;
 
         String query = "SELECT " + "`DC_SOURCE`.`SOURCE`, "
-                + "`DC_SOURCE`.`EDITOR`, " + "`DC_DATE`.`CREATED`, "
-                + "`DC_TITLE`.`TITLE`, " + "`DC_PUBLISHER`.`PUBLISHER` "
-                + "FROM " + "`CHM62EDT_DESIGNATIONS` "
-                + "INNER JOIN `DC_INDEX` ON (`CHM62EDT_DESIGNATIONS`.`ID_DC` = `DC_INDEX`.`ID_DC`) "
-                + "INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`) "
-                + "INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`) "
-                + "INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`) "
-                + "INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`) "
-                + "WHERE "
-                + "`CHM62EDT_DESIGNATIONS`.ID_DESIGNATION = ? AND `CHM62EDT_DESIGNATIONS`.`ID_GEOSCOPE` = ?";
+        + "`DC_SOURCE`.`EDITOR`, " + "`DC_DATE`.`CREATED`, "
+        + "`DC_TITLE`.`TITLE`, " + "`DC_PUBLISHER`.`PUBLISHER` "
+        + "FROM " + "`CHM62EDT_DESIGNATIONS` "
+        + "INNER JOIN `DC_INDEX` ON (`CHM62EDT_DESIGNATIONS`.`ID_DC` = `DC_INDEX`.`ID_DC`) "
+        + "INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`) "
+        + "INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`) "
+        + "INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`) "
+        + "INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`) "
+        + "WHERE "
+        + "`CHM62EDT_DESIGNATIONS`.ID_DESIGNATION = ? AND `CHM62EDT_DESIGNATIONS`.`ID_GEOSCOPE` = ?";
 
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -875,26 +950,26 @@ public class DocumentsDaoImpl extends MySqlBaseDao implements IDocumentsDao {
                         Utilities.formatString(
                                 Utilities.FormatDatabaseFieldName(
                                         rs.getString(1)),
-                                        ""));
+                        ""));
                 ret.setEditor(
                         Utilities.formatString(
                                 Utilities.FormatDatabaseFieldName(
                                         rs.getString(2)),
-                                        ""));
+                        ""));
                 ret.setDate(
                         Utilities.formatString(
                                 Utilities.formatReferencesDate(rs.getDate(3)),
-                                ""));
+                        ""));
                 ret.setTitle(
                         Utilities.formatString(
                                 Utilities.FormatDatabaseFieldName(
                                         rs.getString(4)),
-                                        ""));
+                        ""));
                 ret.setPublisher(
                         Utilities.formatString(
                                 Utilities.FormatDatabaseFieldName(
                                         rs.getString(5)),
-                                        ""));
+                        ""));
 
             }
         } catch (Exception e) {
@@ -911,9 +986,9 @@ public class DocumentsDaoImpl extends MySqlBaseDao implements IDocumentsDao {
         List<PairDTO> ret = new ArrayList<PairDTO>();
 
         String query = "SELECT S.ID_DC, S.SOURCE, TITLE.TITLE "
-                + "FROM chm62edt_reports AS R, chm62edt_report_type AS T, DC_SOURCE AS S, DC_TITLE AS TITLE "
-                + "WHERE R.ID_REPORT_TYPE = T.ID_REPORT_TYPE AND T.LOOKUP_TYPE = 'CONSERVATION_STATUS' "
-                + "AND R.ID_DC = S.ID_DC AND R.ID_DC = TITLE.ID_DC GROUP BY R.ID_DC ORDER BY TITLE.TITLE";
+            + "FROM chm62edt_reports AS R, chm62edt_report_type AS T, DC_SOURCE AS S, DC_TITLE AS TITLE "
+            + "WHERE R.ID_REPORT_TYPE = T.ID_REPORT_TYPE AND T.LOOKUP_TYPE = 'CONSERVATION_STATUS' "
+            + "AND R.ID_DC = S.ID_DC AND R.ID_DC = TITLE.ID_DC GROUP BY R.ID_DC ORDER BY TITLE.TITLE";
 
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -931,7 +1006,7 @@ public class DocumentsDaoImpl extends MySqlBaseDao implements IDocumentsDao {
                 String source = rs.getString("SOURCE");
 
                 String heading = EunisUtil.threeDots(title, 50) + " (" + source
-                        + ")";
+                + ")";
                 PairDTO pair = new PairDTO();
 
                 pair.setKey(idDc);

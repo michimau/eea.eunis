@@ -299,7 +299,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     /**
      * Generates RDF for a species.
      */
-    public Resolution generateRdf() {
+    private Resolution generateRdf() {
         int speciesId = getSpeciesId();
 
         if (speciesId == 0) {

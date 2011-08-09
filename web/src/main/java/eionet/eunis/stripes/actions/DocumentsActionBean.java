@@ -2,7 +2,6 @@ package eionet.eunis.stripes.actions;
 
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,6 +39,7 @@ import eionet.eunis.dto.DcTitleDTO;
 import eionet.eunis.dto.DcTypeDTO;
 import eionet.eunis.dto.DocumentDTO;
 import eionet.eunis.dto.PairDTO;
+import eionet.eunis.rdf.GenerateDocumentRDF;
 import eionet.eunis.stripes.extensions.Redirect303Resolution;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.CustomPaginatedList;
@@ -54,14 +54,6 @@ import eionet.eunis.util.Pair;
  */
 @UrlBinding("/documents/{iddoc}/{tab}")
 public class DocumentsActionBean extends AbstractStripesAction {
-
-    private static final String HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-        + "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
-        + "xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n"
-        + "xmlns:dcterms=\"http://purl.org/dc/terms/\"\n"
-        + "xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
-
-    private static final String doc_url = "http://eunis.eea.europa.eu/documents/";
 
     private String iddoc;
     private CustomPaginatedList<DocumentDTO> docs;
@@ -105,7 +97,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
         // Resolve what format should be returned - RDF or HTML
         if (!StringUtils.isBlank(iddoc) && EunisUtil.isNumber(iddoc)) {
             if (tab != null && tab.equals("rdf")) {
-                return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, generateRdf(iddoc));
+                return generateRdf();
             }
             // If accept header contains RDF, then redirect to rdf page with code 303
             String acceptHeader = getContext().getRequest().getHeader("accept");
@@ -114,7 +106,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
             }
         } else {
             if (iddoc != null && iddoc.equals("rdf")) {
-                return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, generateRdfAll());
+                return generateRdfAll();
             }
             // If accept header contains RDF, then redirect to rdf page with code 303
             String acceptHeader = getContext().getRequest().getHeader("accept");
@@ -204,190 +196,47 @@ public class DocumentsActionBean extends AbstractStripesAction {
         return new ForwardResolution(forwardPage);
     }
 
-    private String generateRdfAll() {
-        StringBuffer s = new StringBuffer();
+    /**
+     * Generates RDF for all documents.
+     */
+    private Resolution generateRdfAll() {
 
-        s.append(HEADER);
-
-        List<DcObjectDTO> objects = DaoFactory.getDaoFactory().getDocumentsDao().getDcObjects();
-
-        for (Iterator<DcObjectDTO> it = objects.iterator(); it.hasNext();) {
-            DcObjectDTO object = it.next();
-
-            if (object != null) {
-                s.append("<rdf:Description rdf:about=\"").append(doc_url).append(object.getId()).append(
-                "\">\n");
-                s.append("<rdf:type rdf:resource=\"http://purl.org/dc/dcmitype/Text\"/>\n");
-                if (object.getTitle() != null && !object.getTitle().equals("")) {
-                    s.append("<dc:title>").append(EunisUtil.replaceTags(object.getTitle(), true, true)).append(
-                    "</dc:title>\n");
-                }
-                if (object.getSource() != null && !object.getSource().equals("")) {
-                    s.append("<dc:source>").append(EunisUtil.replaceTags(object.getSource(), true, true)).append(
-                    "</dc:source>\n");
-                }
-                if (object.getSourceUrl() != null
-                        && !object.getSourceUrl().equals("")) {
-                    s.append("<rdfs:seeAlso rdf:resource=\"").append(EunisUtil.replaceTags(object.getSourceUrl(), true, true)).append(
-                    "\"/>\n");
-                }
-                if (object.getContributor() != null
-                        && !object.getContributor().equals("")) {
-                    s.append("<dc:contributor>").append(EunisUtil.replaceTags(object.getContributor(), true, true)).append(
-                    "</dc:contributor>\n");
-                }
-                if (object.getCoverage() != null
-                        && !object.getCoverage().equals("")) {
-                    s.append("<dc:coverage>").append(EunisUtil.replaceTags(object.getCoverage(), true, true)).append(
-                    "</dc:coverage>\n");
-                }
-                if (object.getCreator() != null
-                        && !object.getCreator().equals("")) {
-                    s.append("<dc:creator>").append(EunisUtil.replaceTags(object.getCreator(), true, true)).append(
-                    "</dc:creator>\n");
-                }
-                if (object.getDate() != null && !object.getDate().equals("")) {
-                    s.append("<dc:date>").append(object.getDate()).append(
-                    "</dc:date>\n");
-                }
-                if (object.getDescription() != null
-                        && !object.getDescription().equals("")) {
-                    s.append("<dc:description>").append(EunisUtil.replaceTags(object.getDescription(), true, true)).append(
-                    "</dc:description>\n");
-                }
-                if (object.getFormat() != null && !object.getFormat().equals("")) {
-                    s.append("<dc:format>").append(EunisUtil.replaceTags(object.getFormat(), true, true)).append(
-                    "</dc:format>\n");
-                }
-                if (object.getIdentifier() != null
-                        && !object.getIdentifier().equals("")) {
-                    s.append("<dc:identifier>").append(EunisUtil.replaceTags(object.getIdentifier(), true, true)).append(
-                    "</dc:identifier>\n");
-                }
-                if (object.getLanguage() != null
-                        && !object.getLanguage().equals("")) {
-                    s.append("<dc:language>").append(EunisUtil.replaceTags(object.getLanguage(), true, true)).append(
-                    "</dc:language>\n");
-                }
-                if (object.getPublisher() != null
-                        && !object.getPublisher().equals("")) {
-                    s.append("<dc:publisher>").append(EunisUtil.replaceTags(object.getPublisher(), true, true)).append(
-                    "</dc:publisher>\n");
-                }
-                if (object.getRelation() != null
-                        && !object.getRelation().equals("")) {
-                    s.append("<dc:relation>").append(EunisUtil.replaceTags(object.getRelation(), true, true)).append(
-                    "</dc:relation>\n");
-                }
-                if (object.getRights() != null && !object.getRights().equals("")) {
-                    s.append("<dc:rights>").append(EunisUtil.replaceTags(object.getRights(), true, true)).append(
-                    "</dc:rights>\n");
-                }
-                if (object.getSubject() != null
-                        && !object.getSubject().equals("")) {
-                    s.append("<dc:subject>").append(EunisUtil.replaceTags(object.getSubject(), true, true)).append(
-                    "</dc:subject>\n");
-                }
-                if (object.getType() != null && !object.getType().equals("")) {
-                    s.append("<dc:type>").append(EunisUtil.replaceTags(object.getType(), true, true)).append(
-                    "</dc:type>\n");
-                }
-                s.append("</rdf:Description>\n");
+        StringBuffer rdf = new StringBuffer();
+        try {
+            rdf.append(GenerateDocumentRDF.HEADER);
+            List<DcObjectDTO> objects = DaoFactory.getDaoFactory().getDocumentsDao().getDcObjects();
+            for (DcObjectDTO object : objects) {
+                GenerateDocumentRDF genRdf = new GenerateDocumentRDF(object.getId());
+                rdf.append(genRdf.getDocumentRdf());
             }
+            rdf.append(Constants.RDF_FOOTER);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        s.append(Constants.RDF_FOOTER);
 
-        return s.toString();
+        return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, rdf.toString());
     }
 
-    private String generateRdf(String id) {
-        StringBuffer s = new StringBuffer();
+    /**
+     * Generates RDF for a single document.
+     */
+    private Resolution generateRdf() {
 
-        s.append(HEADER);
+        StringBuffer rdf = new StringBuffer();
+        try {
+            rdf.append(GenerateDocumentRDF.HEADER);
 
-        DcObjectDTO object = DaoFactory.getDaoFactory().getDocumentsDao().getDcObject(
-                id);
+            GenerateDocumentRDF genRdf = new GenerateDocumentRDF(iddoc);
+            rdf.append(genRdf.getDocumentRdf());
 
-        if (object != null) {
-            s.append("<rdf:Description rdf:about=\"").append(doc_url).append(object.getId()).append(
-            "\">\n");
-            s.append(
-            "<rdf:type rdf:resource=\"http://purl.org/dc/dcmitype/Text\"/>\n");
-            if (object.getTitle() != null && !object.getTitle().equals("")) {
-                s.append("<dc:title>").append(EunisUtil.replaceTags(object.getTitle(), true, true)).append(
-                "</dc:title>\n");
-            }
-            if (object.getSource() != null && !object.getSource().equals("")) {
-                s.append("<dc:source>").append(EunisUtil.replaceTags(object.getSource(), true, true)).append(
-                "</dc:source>\n");
-            }
-            if (object.getSourceUrl() != null
-                    && !object.getSourceUrl().equals("")) {
-                s.append("<rdfs:seeAlso rdf:resource=\"").append(EunisUtil.replaceTags(object.getSourceUrl(), true, true)).append(
-                "\"/>\n");
-            }
-            if (object.getContributor() != null
-                    && !object.getContributor().equals("")) {
-                s.append("<dc:contributor>").append(EunisUtil.replaceTags(object.getContributor(), true, true)).append(
-                "</dc:contributor>\n");
-            }
-            if (object.getCoverage() != null && !object.getCoverage().equals("")) {
-                s.append("<dc:coverage>").append(EunisUtil.replaceTags(object.getCoverage(), true, true)).append(
-                "</dc:coverage>\n");
-            }
-            if (object.getCreator() != null && !object.getCreator().equals("")) {
-                s.append("<dc:creator>").append(EunisUtil.replaceTags(object.getCreator(), true, true)).append(
-                "</dc:creator>\n");
-            }
-            if (object.getDate() != null && !object.getDate().equals("")) {
-                s.append("<dc:date>").append(object.getDate()).append(
-                "</dc:date>\n");
-            }
-            if (object.getDescription() != null
-                    && !object.getDescription().equals("")) {
-                s.append("<dc:description>").append(EunisUtil.replaceTags(object.getDescription(), true, true)).append(
-                "</dc:description>\n");
-            }
-            if (object.getFormat() != null && !object.getFormat().equals("")) {
-                s.append("<dc:format>").append(EunisUtil.replaceTags(object.getFormat(), true, true)).append(
-                "</dc:format>\n");
-            }
-            if (object.getIdentifier() != null
-                    && !object.getIdentifier().equals("")) {
-                s.append("<dc:identifier>").append(EunisUtil.replaceTags(object.getIdentifier(), true, true)).append(
-                "</dc:identifier>\n");
-            }
-            if (object.getLanguage() != null && !object.getLanguage().equals("")) {
-                s.append("<dc:language>").append(EunisUtil.replaceTags(object.getLanguage(), true, true)).append(
-                "</dc:language>\n");
-            }
-            if (object.getPublisher() != null
-                    && !object.getPublisher().equals("")) {
-                s.append("<dc:publisher>").append(EunisUtil.replaceTags(object.getPublisher(), true, true)).append(
-                "</dc:publisher>\n");
-            }
-            if (object.getRelation() != null && !object.getRelation().equals("")) {
-                s.append("<dc:relation>").append(EunisUtil.replaceTags(object.getRelation(), true, true)).append(
-                "</dc:relation>\n");
-            }
-            if (object.getRights() != null && !object.getRights().equals("")) {
-                s.append("<dc:rights>").append(EunisUtil.replaceTags(object.getRights(), true, true)).append(
-                "</dc:rights>\n");
-            }
-            if (object.getSubject() != null && !object.getSubject().equals("")) {
-                s.append("<dc:subject>").append(EunisUtil.replaceTags(object.getSubject(), true, true)).append(
-                "</dc:subject>\n");
-            }
-            if (object.getType() != null && !object.getType().equals("")) {
-                s.append("<dc:type>").append(EunisUtil.replaceTags(object.getType(), true, true)).append(
-                "</dc:type>\n");
-            }
-            s.append("</rdf:Description>\n");
+            rdf.append(Constants.RDF_FOOTER);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        s.append(Constants.RDF_FOOTER);
 
-        return s.toString();
+        return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, rdf.toString());
     }
+
 
     public String getIddoc() {
         return iddoc;

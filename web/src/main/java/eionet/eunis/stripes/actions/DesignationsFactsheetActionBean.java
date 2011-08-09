@@ -161,7 +161,7 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
     /**
      * Generate RDF for a designation
      */
-    public Resolution generateRdf() {
+    private Resolution generateRdf() {
         try {
             rdf = new StringBuffer();
             rdf.append(GenerateDesignationRDF.HEADER);

@@ -781,9 +781,10 @@ public class DocumentsDaoImpl extends MySqlBaseDao implements IDocumentsDao {
 
         DcObjectDTO ret = new DcObjectDTO();
 
-        String query = "SELECT ID_DC, TITLE, SOURCE, URL, CONTRIBUTOR, COVERAGE, CREATOR, CREATED, DESCRIPTION, FORMAT, "
-            + "IDENTIFIER, LANGUAGE, PUBLISHER, RELATION, RIGHTS, SUBJECT, TYPE "
-            + "FROM DC_INDEX " + "LEFT JOIN DC_TITLE USING (ID_DC) "
+        String query = "SELECT ID_DC, TITLE, ALTERNATIVE, SOURCE, EDITOR, URL, CONTRIBUTOR, COVERAGE, CREATOR, CREATED, "
+            + "DESCRIPTION, FORMAT, IDENTIFIER, LANGUAGE, PUBLISHER, RELATION, RIGHTS, SUBJECT, TYPE "
+            + "FROM DC_INDEX "
+            + "LEFT JOIN DC_TITLE USING (ID_DC) "
             + "LEFT JOIN DC_SOURCE USING (ID_DC) "
             + "LEFT JOIN DC_CONTRIBUTOR USING (ID_DC) "
             + "LEFT JOIN DC_CREATOR USING (ID_DC) "
@@ -812,7 +813,9 @@ public class DocumentsDaoImpl extends MySqlBaseDao implements IDocumentsDao {
             while (rs.next()) {
                 ret.setId(rs.getString("ID_DC"));
                 ret.setTitle(rs.getString("TITLE"));
+                ret.setAlternative(rs.getString("ALTERNATIVE"));
                 ret.setSource(rs.getString("SOURCE"));
+                ret.setEditor(rs.getString("EDITOR"));
                 ret.setSourceUrl(rs.getString("URL"));
                 ret.setContributor(rs.getString("CONTRIBUTOR"));
                 ret.setCoverage(rs.getString("COVERAGE"));

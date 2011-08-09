@@ -80,7 +80,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private String mapIds;
 
     // Variable for RDF generation
-    private StringBuffer rdf;
     private String domainName;
 
     // Deliveries tab variables
@@ -188,10 +187,11 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     /**
      * Generates RDF for a habitats.
      */
-    public Resolution generateRdf() {
+    private Resolution generateRdf() {
+
+        StringBuffer rdf = new StringBuffer();
 
         try {
-            rdf = new StringBuffer();
             rdf.append(GenerateHabitatRDF.HEADER);
 
             GenerateHabitatRDF genRdf = new GenerateHabitatRDF(idHabitat);

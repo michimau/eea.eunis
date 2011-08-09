@@ -37,6 +37,8 @@ public class DcObjectDTO implements Serializable {
     private String rights;
     private String subject;
     private String type;
+    private String editor;
+    private String alternative;
 
     public String getId() {
         return id;
@@ -172,6 +174,22 @@ public class DcObjectDTO implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getEditor() {
+        return editor;
+    }
+
+    public void setEditor(String editor) {
+        this.editor = editor;
+    }
+
+    public String getAlternative() {
+        return alternative;
+    }
+
+    public void setAlternative(String alternative) {
+        this.alternative = alternative;
     }
 
 }

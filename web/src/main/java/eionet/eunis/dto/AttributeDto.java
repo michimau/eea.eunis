@@ -24,15 +24,15 @@ public class AttributeDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String name;
-    private boolean literal;
     private String value;
+    private String type;
 
     public AttributeDto() {// blank
     }
 
-    public AttributeDto(String name, boolean literal, String value) {
+    public AttributeDto(String name, String type, String value) {
         this.name = name;
-        this.literal = literal;
+        this.type = type;
         this.value = value;
     }
 
@@ -44,20 +44,20 @@ public class AttributeDto implements Serializable {
         this.name = name;
     }
 
-    public boolean isLiteral() {
-        return literal;
-    }
-
-    public void setLiteral(boolean literal) {
-        this.literal = literal;
-    }
-
     public String getValue() {
         return value;
     }
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
 

@@ -25,12 +25,12 @@ public class SpeciesAttributeDTOReader extends ResultSetBaseReader<AttributeDto>
     public void readRow(ResultSet rs) throws SQLException {
         String name = rs.getString("NAME");
         String object = rs.getString("OBJECT");
-        Boolean litObject = rs.getBoolean("LITOBJECT");
+        String type = rs.getString("TYPE");
 
         if (StringUtils.isBlank(name)) {
             return;
         }
-        results.add(new AttributeDto(name, litObject, object));
+        results.add(new AttributeDto(name, type, object));
     }
 
     public List<AttributeDto> getResultList() {

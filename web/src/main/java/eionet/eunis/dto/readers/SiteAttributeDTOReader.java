@@ -25,7 +25,7 @@ public class SiteAttributeDTOReader extends ResultSetBaseReader<AttributeDto> {
 
     @Override
     public void readRow(ResultSet rs) throws SQLException {
-        results.add(new AttributeDto(StringUtils.lowerCase(rs.getString("NAME")), true,
+        results.add(new AttributeDto(StringUtils.lowerCase(rs.getString("NAME")), "",
                 StringUtils.lowerCase(rs.getString("VALUE"))));
     }
 

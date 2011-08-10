@@ -1,0 +1,3 @@
+ALTER TABLE chm62edt_nature_object_attributes ADD COLUMN `TYPE` ENUM('reference', '', 'string', 'integer', 'decimal', 'boolean', 'dateTime', 'date') NULL DEFAULT '';
+UPDATE chm62edt_nature_object_attributes SET TYPE = 'boolean' WHERE NAME IN ("alpine", "anatol", "arctic", "atlantic", "boreal", "continental", "macronesia","mediterranian", "pannonian", "black_sea", "steppic");
+UPDATE chm62edt_nature_object_attributes SET TYPE = 'reference' WHERE LITOBJECT = 0;

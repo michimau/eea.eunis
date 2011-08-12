@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,11 +17,15 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.lang.StringUtils;
 
+import ro.finsiel.eunis.factsheet.habitats.DescriptionWrapper;
 import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
 import ro.finsiel.eunis.search.Utilities;
 import eionet.eunis.dto.HabitatFactsheetOtherDTO;
+import eionet.eunis.dto.PictureDTO;
 import eionet.eunis.rdf.GenerateHabitatRDF;
 import eionet.eunis.stripes.extensions.Redirect303Resolution;
 import eionet.eunis.util.Constants;
@@ -85,6 +90,12 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     // Deliveries tab variables
     private QueryResult deliveries;
 
+    // General tab variables
+    private PictureDTO pic;
+    private String picsURL;
+    private Vector<DescriptionWrapper> descriptions;
+    private String art17link;
+
     /**
      * This action bean only serves RDF through {@link RdfAware}.
      */
@@ -146,9 +157,13 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             tabsWithData.add(new Pair<String, String>("art17","Distribution map from Art. 17"));
         }
 
+        if (tab != null && tab.equals("general")) {
+            generalTabActions();
+        }
+
         if (factsheet.getCode2000() != null && factsheet.getCode2000().length() == 4) {
             tabsWithData.add(new Pair<String, String>("deliveries","Deliveries"));
-            deliveriesTabActions(idHabitat);
+            deliveriesTabActions();
         }
 
         if (tab != null && tab.equals("sites")) {
@@ -255,7 +270,55 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
-    private void deliveriesTabActions(String idHabitat) {
+    private void generalTabActions() {
+
+        try {
+            picsURL = "idobject=" + factsheet.getIdHabitat() + "&amp;natureobjecttype=Habitats";
+
+            List<Chm62edtNatureObjectPicturePersist> pictures = new Chm62edtNatureObjectPictureDomain()
+            .findWhere("MAIN_PIC = 1 AND ID_OBJECT = " +idHabitat);
+
+            if (pictures != null && !pictures.isEmpty()) {
+                String mainPictureMaxWidth = pictures.get(0).getMaxWidth().toString();
+                String mainPictureMaxHeight = pictures.get(0).getMaxHeight().toString();
+                Integer mainPictureMaxWidthInt = Utilities.checkedStringToInt(mainPictureMaxWidth, new Integer(0));
+                Integer mainPictureMaxHeightInt = Utilities.checkedStringToInt(mainPictureMaxHeight, new Integer(0));
+
+                String styleAttr = "max-width:300px; max-height:400px;";
+
+                if (mainPictureMaxWidthInt != null && mainPictureMaxWidthInt.intValue() > 0 && mainPictureMaxHeightInt != null
+                        && mainPictureMaxHeightInt.intValue() > 0) {
+                    styleAttr =
+                        "max-width: " + mainPictureMaxWidthInt.intValue() + "px; max-height: "
+                        + mainPictureMaxHeightInt.intValue() + "px";
+                }
+
+                String desc = pictures.get(0).getDescription();
+
+                String picturePath = getContext().getInitParameter("UPLOAD_DIR_PICTURES_HABITATS");
+
+                pic = new PictureDTO();
+                pic.setFilename(pictures.get(0).getFileName());
+                pic.setDescription(desc);
+                pic.setSource(pictures.get(0).getSource());
+                pic.setStyle(styleAttr);
+                pic.setMaxwidth(mainPictureMaxWidth);
+                pic.setMaxheight(mainPictureMaxHeight);
+                pic.setPath(picturePath);
+                pic.setDomain(domainName);
+                pic.setUrl(picsURL);
+            }
+
+
+            descriptions = factsheet.getDescrOwner();
+            art17link = getContext().getNatObjectAttribute(factsheet.idNatureObject, Constants.ART17_SUMMARY);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void deliveriesTabActions() {
 
         String query =
             "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
@@ -402,6 +465,26 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     public void setDeliveries(QueryResult deliveries) {
         this.deliveries = deliveries;
+    }
+
+    public String getPicsURL() {
+        return picsURL;
+    }
+
+    public PictureDTO getPic() {
+        return pic;
+    }
+
+    public Vector<DescriptionWrapper> getDescriptions() {
+        return descriptions;
+    }
+
+    public String getArt17link() {
+        return art17link;
+    }
+
+    public String getDomainName() {
+        return domainName;
     }
 
 }

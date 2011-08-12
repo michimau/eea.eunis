@@ -1,9 +1,12 @@
 package eionet.eunis.dao;
 
 
+import java.util.Hashtable;
 import java.util.List;
 
+import eionet.eunis.dto.AttributeDto;
 import eionet.eunis.dto.ExternalObjectDTO;
+import eionet.eunis.stripes.actions.DocumentsActionBean;
 
 
 /**
@@ -24,5 +27,12 @@ public interface IExternalObjectsDao {
      * Updates external object
      */
     void updateExternalObject(String identifier, String val);
+
+    /**
+     * return all nature object attributes for given nature object
+     * @param id
+     * @return Hashtable<String, AttributeDto>
+     */
+    Hashtable<String, AttributeDto> getNatureObjectAttributes(Integer id);
 
 }

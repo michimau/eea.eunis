@@ -92,9 +92,7 @@
 						</c:if>
 						<br />
 						<c:if test="${actionBean.tab == 'general'}">
-							<jsp:include page="/habitats-factsheet-general.jsp">
-								<jsp:param name="idHabitat" value="${actionBean.idHabitat}" />
-							</jsp:include>
+							<stripes:layout-render name="/stripes/habitats-factsheet-general.jsp"/>
 						</c:if>
 						<c:if test="${actionBean.tab == 'distribution'}">
 							<jsp:include page="/habitats-factsheet-geographical.jsp">

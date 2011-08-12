@@ -466,7 +466,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 }
             }
 
-            gbifLink = factsheet.getLink(specie.getIdNatureObject(), Constants.SAME_SYNONYM_GBIF); // specie.getScientificName();
+            gbifLink = getContext().getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_GBIF); // specie.getScientificName();
             gbifLink2 = specie.getScientificName();
             gbifLink2 = gbifLink2.replaceAll("\\.", "");
             gbifLink2 = URLEncoder.encode(gbifLink2, "UTF-8");
@@ -489,7 +489,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 (scientificName.trim().indexOf(" ") >= 0 ? scientificName.trim().substring(scientificName.indexOf(" ") + 1)
                         : scientificName);
 
-            redlistLink = factsheet.getLink(specie.getIdNatureObject(), Constants.SAME_SPECIES_REDLIST);
+            redlistLink = getContext().getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SPECIES_REDLIST);
 
             // List of species national threat status.
             if (consStatus != null && consStatus.size() > 0) {
@@ -503,16 +503,16 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
 
             // World Register of Marine Species - also has seals etc.
-            wormsid = factsheet.getLink(specie.getIdNatureObject(), Constants.SAME_SYNONYM_WORMS);
+            wormsid = getContext().getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_WORMS);
 
-            n2000id = factsheet.getLink(specie.getIdNatureObject(), Constants.SAME_SYNONYM_N2000);
+            n2000id = getContext().getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_N2000);
 
             if (kingdomname.equalsIgnoreCase("Animals")) {
-                faeu = factsheet.getLink(specie.getIdNatureObject(), Constants.SAME_SYNONYM_FAEU);
+                faeu = getContext().getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_FAEU);
             }
 
-            itisTSN = factsheet.getLink(specie.getIdNatureObject(), Constants.SAME_SYNONYM_ITIS);
-            ncbi = factsheet.getLink(specie.getIdNatureObject(), Constants.SAME_SYNONYM_NCBI);
+            itisTSN = getContext().getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_ITIS);
+            ncbi = getContext().getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_NCBI);
 
             String[][] linkTab =
             {
@@ -525,7 +525,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             links = new ArrayList<LinkDTO>();
             for (String[] linkSet : linkTab) {
-                linkUrl = factsheet.getLink(specie.getIdNatureObject(), linkSet[0]);
+                linkUrl = getContext().getNatObjectAttribute(specie.getIdNatureObject(), linkSet[0]);
                 if (linkUrl != null && linkUrl.length() > 0) {
                     LinkDTO linkDTO = new LinkDTO();
 

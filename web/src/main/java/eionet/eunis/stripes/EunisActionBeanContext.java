@@ -1,6 +1,7 @@
 package eionet.eunis.stripes;
 
 
+import java.util.Hashtable;
 import java.util.Properties;
 
 import net.sourceforge.stripes.action.ActionBeanContext;
@@ -9,14 +10,9 @@ import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.session.SessionManager;
 import ro.finsiel.eunis.utilities.SQLUtilities;
-import eionet.eunis.dao.IDocumentsDao;
-import eionet.eunis.dao.IExternalObjectsDao;
-import eionet.eunis.dao.ISitesDao;
-import eionet.eunis.dao.ISpeciesFactsheetDao;
-import eionet.eunis.dao.impl.DocumentsDaoImpl;
-import eionet.eunis.dao.impl.ExternalObjectsDaoImpl;
-import eionet.eunis.dao.impl.SitesDaoImpl;
-import eionet.eunis.dao.impl.SpeciesFactsheetDaoImpl;
+import eionet.eunis.dao.DaoFactory;
+import eionet.eunis.dto.AttributeDto;
+import eionet.eunis.util.Constants;
 
 
 /**
@@ -49,6 +45,37 @@ public class EunisActionBeanContext extends ActionBeanContext {
             }
         }
         return eunisProperties.getProperty(key);
+    }
+
+    /**
+     * get nature object attribute
+     * 
+     * @param id - id of nature object
+     * @param attr - name of attribute
+     * @return String
+     */
+    public String getNatObjectAttribute(Integer id, String name) {
+        String ret = null;
+        if (id != null && name != null) {
+            String key = Constants.NAT_OBJECT_ATTRIBUTES_SESSION_KEY + id;
+            Hashtable<String, AttributeDto> hash = (Hashtable<String, AttributeDto>) getRequest().getSession().getAttribute(key);
+            if (hash != null) {
+                AttributeDto attr = hash.get(name);
+                if (attr != null) {
+                    ret = attr.getValue();
+                }
+            } else {
+                Hashtable<String, AttributeDto> h = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectAttributes(id);
+                getRequest().getSession().setAttribute(key, h);
+                if (h != null && h.size() > 0) {
+                    AttributeDto attr = h.get(name);
+                    if (attr != null) {
+                        ret = attr.getValue();
+                    }
+                }
+            }
+        }
+        return ret;
     }
 
     /**
@@ -138,7 +165,7 @@ public class EunisActionBeanContext extends ActionBeanContext {
         if (sqlUtil == null) {
             sqlUtil = new SQLUtilities();
             sqlUtil.Init(getJdbcDriver(), getJdbcUrl(), getJdbcUser(), getJdbcPassword());
-        } 
+        }
         return sqlUtil;
     }
 

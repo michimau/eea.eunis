@@ -211,10 +211,10 @@ public class JstlFunctions {
             return "n/a";
         }
         String result = sourceDB.replaceAll("CDDA_NATIONAL", "CDDA National")
-                .replaceAll("CDDA_INTERNATIONAL", "CDDA International").replaceAll("NATURA2000", "Natura 2000")
-                .replaceAll("CORINE", "Corine").replaceAll("DIPLOMA", "European diploma")
-                .replaceAll("BIOGENETIC", "Biogenetic reserves").replaceAll("NATURENET", "NatureNet")
-                .replaceAll("EMERALD", "Emerald");
+        .replaceAll("CDDA_INTERNATIONAL", "CDDA International").replaceAll("NATURA2000", "Natura 2000")
+        .replaceAll("CORINE", "Corine").replaceAll("DIPLOMA", "European diploma")
+        .replaceAll("BIOGENETIC", "Biogenetic reserves").replaceAll("NATURENET", "NatureNet")
+        .replaceAll("EMERALD", "Emerald");
 
         return result;
     }
@@ -349,6 +349,60 @@ public class JstlFunctions {
         if (value != null && value == 1) {
             ret = "yes";
         }
+        return ret;
+    }
+
+    /**
+     * Executes any method that takes one Integer param and returns String
+     * 
+     * @param className - name of the class where method exists
+     * @param methodName - name of the method to be executed
+     * @param param - param of type Integer
+     * @return String
+     */
+    public static Object execMethodParamInteger(String className, String methodName, Integer param) {
+        Object ret = null;
+        try {
+            Class<?> c = Class.forName(className);
+            Object t = c.getClass();
+            Class<?>[] parameterTypes = new Class[] {Integer.class};
+            Method  method = c.getDeclaredMethod (methodName, parameterTypes);
+            Integer[] params = new Integer[] {param};
+            ret = method.invoke(t, params);
+            if (ret instanceof String) {
+                ret = Utilities.formatString(ret);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ret;
+    }
+
+    /**
+     * Executes any method that takes one String param and returns String
+     * 
+     * @param className - name of the class where method exists
+     * @param methodName - name of the method to be executed
+     * @param param - param of type String
+     * @return String
+     */
+    public static Object execMethodParamString(String className, String methodName, String param) {
+        Object ret = null;
+        try {
+            Class<?> c = Class.forName(className);
+            Object t = c.getClass();
+            Class<?>[] parameterTypes = new Class[] {String.class};
+            Method  method = c.getDeclaredMethod (methodName, parameterTypes);
+            String[] params = new String[] {param};
+            ret = method.invoke(t, params);
+            if (ret instanceof String) {
+                ret = Utilities.formatString(ret);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return ret;
     }
 

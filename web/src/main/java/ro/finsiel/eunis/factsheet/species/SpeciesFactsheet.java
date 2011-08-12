@@ -26,8 +26,6 @@ import ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesPersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtLegalStatusDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtLegalStatusPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectAttributesDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectAttributesPersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtPopulationUnitDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtPopulationUnitPersist;
@@ -242,28 +240,6 @@ public class SpeciesFactsheet {
             ret += " it is geographically distrubuted among the following countries/areas: " + countries;
         }
         return ret;
-    }
-
-    /**
-     * Returns link to outside sources if one exists
-     * @param nauture object ID, outside source name
-     * @return link URL
-     */
-    public String getLink(Integer nature_object_id, String link_name) {
-        String link = null;
-        List links = new Chm62edtNatureObjectAttributesDomain().findWhere(
-                "ID_NATURE_OBJECT=" + nature_object_id + " AND NAME='" + link_name + "'");
-
-        if (links != null) {
-            for (Object link1 : links) {
-                Chm62edtNatureObjectAttributesPersist linkob = (Chm62edtNatureObjectAttributesPersist) link1;
-
-                if (linkob != null) {
-                    link = linkob.getObject();
-                }
-            }
-        }
-        return link;
     }
 
     /**

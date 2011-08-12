@@ -258,4 +258,28 @@
 			${getYesNo(1)}
 		</example>
 	</function>
+	
+	<function>
+		<description>
+			Executes any method that takes one Integer param and returns String
+	 	</description>
+		<name>execMethodParamInteger</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>String execMethodParamInteger(java.lang.String, java.lang.String, java.lang.Integer)</function-signature>
+		<example>
+			${execMethodParamInteger("className","methodName",1)}
+		</example>
+	</function>
+	
+	<function>
+		<description>
+			Executes any method that takes one String param and returns String
+	 	</description>
+		<name>execMethodParamString</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>String execMethodParamString(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+		<example>
+			${execMethodParamString("className","methodName","param")}
+		</example>
+	</function>
 </taglib>

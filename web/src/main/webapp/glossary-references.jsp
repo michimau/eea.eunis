@@ -18,7 +18,7 @@
   // id - ID_DC from CHM62EDT_GLOSSARY table
   int id = Utilities.checkedStringToInt( request.getParameter("idDc"), -1 );
   // List of glossary references
-  List l1 = new DcIndexDcSourceDomain().findWhere("DC_INDEX.ID_DC="+id);
+  List l1 = new DcIndexDomain().findWhere("ID_DC="+id);
   if (l1.size() > 0)
   {
 %>

@@ -45,14 +45,8 @@ import ro.finsiel.eunis.jrfTables.Chm62edtTaxonomyDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtTaxonomyPersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtTrendDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtTrendPersist;
-import ro.finsiel.eunis.jrfTables.DcDateDomain;
-import ro.finsiel.eunis.jrfTables.DcDatePersist;
-import ro.finsiel.eunis.jrfTables.DcPublisherDomain;
-import ro.finsiel.eunis.jrfTables.DcPublisherPersist;
-import ro.finsiel.eunis.jrfTables.DcSourceDomain;
-import ro.finsiel.eunis.jrfTables.DcSourcePersist;
-import ro.finsiel.eunis.jrfTables.DcTitleDomain;
-import ro.finsiel.eunis.jrfTables.DcTitlePersist;
+import ro.finsiel.eunis.jrfTables.DcIndexDomain;
+import ro.finsiel.eunis.jrfTables.DcIndexPersist;
 import ro.finsiel.eunis.jrfTables.SpeciesNatureObjectDomain;
 import ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist;
 import ro.finsiel.eunis.jrfTables.species.VernacularNamesDomain;
@@ -489,19 +483,16 @@ public class SpeciesFactsheet {
         String author = "";
 
         try {
-            List list = new DcSourceDomain().findWhere("ID_DC='" + ID_DC + "'");
+            List list = new DcIndexDomain().findWhere("ID_DC='" + ID_DC + "'");
 
             if (list.size() > 0) {
-                author = ((DcSourcePersist) list.get(0)).getSource();
-            }
-            List list1 = new DcDateDomain().findWhere("ID_DC='" + ID_DC + "'");
-
-            if (list1.size() > 0) {
-                DcDatePersist date = (DcDatePersist) list1.get(0);
-                String dateStr = Utilities.formatReferencesDate(date.getCreated());
-
-                if (!dateStr.equalsIgnoreCase("")) {
-                    author += " (" + dateStr + ")";
+                DcIndexPersist po = (DcIndexPersist) list.get(0);
+                if (po != null) {
+                    author = po.getSource();
+                    String dateStr = Utilities.formatReferencesDate(po.getCreated());
+                    if (!dateStr.equalsIgnoreCase("")) {
+                        author += " (" + dateStr + ")";
+                    }
                 }
             }
         } catch (Exception _ex) {
@@ -520,10 +511,10 @@ public class SpeciesFactsheet {
         String ret = "";
 
         try {
-            List list = new DcSourceDomain().findWhere("ID_DC='" + ID_DC + "'");
+            List list = new DcIndexDomain().findWhere("ID_DC='" + ID_DC + "'");
 
             if (list.size() > 0) {
-                ret = ((DcSourcePersist) list.get(0)).getSource();
+                ret = ((DcIndexPersist) list.get(0)).getSource();
             }
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
@@ -541,10 +532,10 @@ public class SpeciesFactsheet {
         String ret = "";
 
         try {
-            List list1 = new DcDateDomain().findWhere("ID_DC='" + ID_DC + "'");
+            List list1 = new DcIndexDomain().findWhere("ID_DC='" + ID_DC + "'");
 
             if (list1.size() > 0) {
-                DcDatePersist date = (DcDatePersist) list1.get(0);
+                DcIndexPersist date = (DcIndexPersist) list1.get(0);
 
                 if (null != date.getCreated()) {
                     ret = new SimpleDateFormat("yyyy").format(date.getCreated());
@@ -565,44 +556,23 @@ public class SpeciesFactsheet {
         PublicationWrapper publication = new PublicationWrapper();
 
         try {
-            List sources = new DcSourceDomain().findWhere("ID_DC='" + getSpeciesNatureObject().getIdDublinCore() + "'");
-
-            if (sources.size() > 0) {
-                DcSourcePersist source = (DcSourcePersist) sources.get(0);
-
-                publication.setAuthor(source.getSource());
-                publication.setURL(source.getUrl());
-            }
-            List titles = new DcTitleDomain().findWhere("ID_DC='" + getSpeciesNatureObject().getIdDublinCore() + "'");
-
-            if (titles.size() > 0) {
-                DcTitlePersist title = (DcTitlePersist) titles.get(0);
-
-                publication.setTitle(title.getTitle());
-            }
-            List publishers = new DcPublisherDomain().findWhere("ID_DC='" + getSpeciesNatureObject().getIdDublinCore() + "'");
-
-            if (publishers.size() > 0) {
-                DcPublisherPersist publisher = (DcPublisherPersist) publishers.get(0);
-
-                publication.setPublisher(publisher.getPublisher());
-            }
-            List dates = new DcDateDomain().findWhere("ID_DC='" + getSpeciesNatureObject().getIdDublinCore() + "'");
-
-            if (dates.size() > 0) {
-                DcDatePersist date = (DcDatePersist) dates.get(0);
-
-                if (date.getCreated() != null) {
-                    publication.setDate(new SimpleDateFormat("yyyy").format(date.getCreated()));
+            List docs = new DcIndexDomain().findWhere("ID_DC='" + getSpeciesNatureObject().getIdDublinCore() + "'");
+            if (docs.size() > 0) {
+                DcIndexPersist po = (DcIndexPersist) docs.get(0);
+                publication.setAuthor(po.getSource());
+                publication.setURL(po.getUrl());
+                publication.setTitle(po.getTitle());
+                publication.setPublisher(po.getPublisher());
+                if (po.getCreated() != null) {
+                    publication.setDate(new SimpleDateFormat("yyyy").format(po.getCreated()));
                 } else {
                     System.out.println(
                             "Warning: " + SpeciesFactsheet.class.getName() + "::getSpeciesBook() - date.getCreated returned null");
                 }
+            }        } catch (Exception _ex) {
+                _ex.printStackTrace(System.err);
             }
-        } catch (Exception _ex) {
-            _ex.printStackTrace(System.err);
-        }
-        return publication;
+            return publication;
     }
 
     /**
@@ -716,21 +686,12 @@ public class SpeciesFactsheet {
                         legalStatus.setArea(country.getAreaNameEnglish());
                     }
                     // Legal text
-                    List l2 = new DcTitleDomain().findWhere("ID_DC='" + report.getIdDc() + "'");
-
+                    List l2 = new DcIndexDomain().findWhere("ID_DC='" + report.getIdDc() + "'");
                     if (l2.size() > 0) {
-                        DcTitlePersist title = (DcTitlePersist) l2.get(0);
-
-                        legalStatus.setDetailedReference(title.getTitle());
-                        legalStatus.setLegalText(title.getAlternative());
-                    }
-                    // / URL
-                    List l3 = new DcSourceDomain().findWhere("ID_DC='" + report.getIdDc() + "'");
-
-                    if (l3.size() > 0) {
-                        DcSourcePersist source = (DcSourcePersist) l3.get(0);
-
-                        legalStatus.setUrl(source.getUrl());
+                        DcIndexPersist po = (DcIndexPersist) l2.get(0);
+                        legalStatus.setDetailedReference(po.getTitle());
+                        legalStatus.setLegalText(po.getAlternative());
+                        legalStatus.setUrl(po.getUrl());
                     }
 
                     legalStatus.setComments("");
@@ -979,27 +940,21 @@ public class SpeciesFactsheet {
     public static Vector getSpeciesReferences(Integer idNatureObject) {
         Vector results = new Vector();
         String sql = "";
-
-        // List list = new NatureObjectDcSourceDomain().findWhere("CHM62EDT_NATURE_OBJECT.ID_NATURE_OBJECT=" + idNatureObject + " GROUP BY DC_SOURCE.SOURCE,DC_SOURCE.EDITOR,DC_TITLE.TITLE,DC_PUBLISHER.PUBLISHER");
         sql += "    SELECT";
         sql += "      `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`,";
         sql += "      `DC_INDEX`.`ID_DC`,";
         sql += "      `CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` AS `TYPE`,";
-        sql += "      `DC_SOURCE`.`SOURCE`,";
-        sql += "      `DC_SOURCE`.`EDITOR`,";
-        sql += "      `DC_DATE`.`CREATED`,";
-        sql += "      `DC_TITLE`.`TITLE`,";
-        sql += "      `DC_PUBLISHER`.`PUBLISHER`";
+        sql += "      `DC_INDEX`.`SOURCE`,";
+        sql += "      `DC_INDEX`.`EDITOR`,";
+        sql += "      `DC_INDEX`.`CREATED`,";
+        sql += "      `DC_INDEX`.`TITLE`,";
+        sql += "      `DC_INDEX`.`PUBLISHER`";
         sql += "    FROM";
         sql += "      `CHM62EDT_SPECIES`";
         sql += "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
         sql += "      INNER JOIN `CHM62EDT_REPORTS` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`)";
         sql += "      INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_REPORTS`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
         sql += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_REPORTS`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-        sql += "      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-        sql += "      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-        sql += "      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-        sql += "      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
         sql += "    WHERE";
         sql += "      (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND'))";
         sql += "    AND (`CHM62EDT_SPECIES`.`ID_SPECIES` = " + idNatureObject + ")";
@@ -1008,19 +963,15 @@ public class SpeciesFactsheet {
         sql += "      `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`,";
         sql += "      `DC_INDEX`.`ID_DC`,";
         sql += "      'Synonyms' AS `TYPE`,";
-        sql += "      `DC_SOURCE`.`SOURCE`,";
-        sql += "      `DC_SOURCE`.`EDITOR`,";
-        sql += "      `DC_DATE`.`CREATED`,";
-        sql += "      `DC_TITLE`.`TITLE`,";
-        sql += "      `DC_PUBLISHER`.`PUBLISHER`";
+        sql += "      `DC_INDEX`.`SOURCE`,";
+        sql += "      `DC_INDEX`.`EDITOR`,";
+        sql += "      `DC_INDEX`.`CREATED`,";
+        sql += "      `DC_INDEX`.`TITLE`,";
+        sql += "      `DC_INDEX`.`PUBLISHER`";
         sql += "    FROM";
         sql += "      `CHM62EDT_SPECIES`";
         sql += "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
         sql += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-        sql += "      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-        sql += "      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-        sql += "      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-        sql += "      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
         sql += "    WHERE `CHM62EDT_SPECIES`.`ID_SPECIES_LINK` = " + idNatureObject;
         sql += "    AND `CHM62EDT_SPECIES`.`ID_SPECIES` <> " + idNatureObject;
         sql += "    UNION";
@@ -1028,41 +979,33 @@ public class SpeciesFactsheet {
         sql += "      `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`,";
         sql += "      `DC_INDEX`.`ID_DC`,";
         sql += "      'Species' AS `TYPE`,";
-        sql += "      `DC_SOURCE`.`SOURCE`,";
-        sql += "      `DC_SOURCE`.`EDITOR`,";
-        sql += "      `DC_DATE`.`CREATED`,";
-        sql += "      `DC_TITLE`.`TITLE`,";
-        sql += "      `DC_PUBLISHER`.`PUBLISHER`";
+        sql += "      `DC_INDEX`.`SOURCE`,";
+        sql += "      `DC_INDEX`.`EDITOR`,";
+        sql += "      `DC_INDEX`.`CREATED`,";
+        sql += "      `DC_INDEX`.`TITLE`,";
+        sql += "      `DC_INDEX`.`PUBLISHER`";
         sql += "    FROM";
         sql += "      `CHM62EDT_SPECIES`";
         sql += "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
         sql += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-        sql += "      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-        sql += "      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-        sql += "      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-        sql += "      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
         sql += "    WHERE `CHM62EDT_SPECIES`.`ID_SPECIES` = " + idNatureObject;
         sql += "    UNION";
         sql += "    SELECT";
         sql += "      `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`,";
         sql += "      `DC_INDEX`.`ID_DC`,";
         sql += "      'Taxonomy' AS `TYPE`,";
-        sql += "      `DC_SOURCE`.`SOURCE`,";
-        sql += "      `DC_SOURCE`.`EDITOR`,";
-        sql += "      `DC_DATE`.`CREATED`,";
-        sql += "      `DC_TITLE`.`TITLE`,";
-        sql += "      `DC_PUBLISHER`.`PUBLISHER`";
+        sql += "      `DC_INDEX`.`SOURCE`,";
+        sql += "      `DC_INDEX`.`EDITOR`,";
+        sql += "      `DC_INDEX`.`CREATED`,";
+        sql += "      `DC_INDEX`.`TITLE`,";
+        sql += "      `DC_INDEX`.`PUBLISHER`";
         sql += "    FROM";
         sql += "      `CHM62EDT_SPECIES`";
         sql += "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
         sql += "      INNER JOIN `CHM62EDT_TAXONOMY` ON (`CHM62EDT_SPECIES`.`ID_TAXONOMY` = `CHM62EDT_TAXONOMY`.`ID_TAXONOMY`)";
         sql += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_TAXONOMY`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-        sql += "      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-        sql += "      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-        sql += "      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-        sql += "      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
         sql += "    WHERE `CHM62EDT_SPECIES`.`ID_SPECIES` = " + idNatureObject;
-        sql += "    GROUP BY CHM62EDT_SPECIES.ID_NATURE_OBJECT,DC_INDEX.ID_DC,DC_SOURCE.SOURCE,DC_SOURCE.EDITOR,DC_TITLE.TITLE,DC_PUBLISHER.PUBLISHER,DC_DATE.CREATED";
+        sql += "    GROUP BY CHM62EDT_SPECIES.ID_NATURE_OBJECT,DC_INDEX.ID_DC,DC_INDEX.SOURCE,DC_INDEX.EDITOR,DC_INDEX.TITLE,DC_INDEX.PUBLISHER,DC_INDEX.CREATED";
         try {
             List list = new NatureObjectDcSourceDomain().findCustom(sql, 1000);
 

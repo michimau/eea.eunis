@@ -1,20 +1,41 @@
 package ro.finsiel.eunis.search.species;
 
 
-import ro.finsiel.eunis.jrfTables.species.legal.ScientificLegalDomain;
-import ro.finsiel.eunis.jrfTables.species.legal.LegalReportsDomain;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.Vector;
+
+import ro.finsiel.eunis.factsheet.species.NationalThreatWrapper;
+import ro.finsiel.eunis.jrfTables.Chm62edtAbundanceDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtAbundancePersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtConservationStatusDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtConservationStatusPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtDistributionStatusDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtDistributionStatusPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtInfoQualityDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtInfoQualityPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtLanguageDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesStatusDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesStatusPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtTrendDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtTrendPersist;
 import ro.finsiel.eunis.jrfTables.species.VernacularNamesDomain;
 import ro.finsiel.eunis.jrfTables.species.VernacularNamesPersist;
-import ro.finsiel.eunis.jrfTables.*;
-import ro.finsiel.eunis.search.Utilities;
-import ro.finsiel.eunis.jrfTables.species.taxonomy.SpeciesGroupSpeciesDomain;
+import ro.finsiel.eunis.jrfTables.species.legal.LegalReportsDomain;
+import ro.finsiel.eunis.jrfTables.species.legal.ScientificLegalDomain;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist;
-import ro.finsiel.eunis.factsheet.species.NationalThreatWrapper;
+import ro.finsiel.eunis.jrfTables.species.taxonomy.SpeciesGroupSpeciesDomain;
+import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 import ro.finsiel.eunis.utilities.TableColumns;
-
-import java.util.*;
 
 
 /**
@@ -78,7 +99,7 @@ public class SpeciesSearchUtility {
             for (VernacularNamesPersist vernName : verNameList) {
                 ret.addElement(
                         new VernacularNameWrapper(vernName.getLanguageName(), vernName.getLanguageCode(), vernName.getValue(),
-                        vernName.getIdDc()));
+                                vernName.getIdDc()));
             }
         } catch (Exception ex) {
             // If exception occurrs, return an empty list!
@@ -88,7 +109,7 @@ public class SpeciesSearchUtility {
             return ret;
         }
     }
-  
+
     private static String listToStringIds(List<Integer> list) {
         if (list == null || list.isEmpty()) {
             throw new IllegalArgumentException("argument cannot be empty");
@@ -131,12 +152,12 @@ public class SpeciesSearchUtility {
             SQLUtilities sqlc = new SQLUtilities();
 
             sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
-        
+
             String SQL = "SELECT distinct e.scientific_name " + "FROM CHM62EDT_LEGAL_STATUS AS D "
-                    + "INNER JOIN CHM62EDT_REPORT_TYPE AS C ON (D.ID_LEGAL_STATUS = C.ID_LOOKUP and C.LOOKUP_TYPE='LEGAL_STATUS') "
-                    + "INNER JOIN CHM62EDT_REPORTS AS B ON C.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
-                    + "INNER JOIN DC_TITLE AS A ON B.ID_DC = A.ID_DC "
-                    + "INNER JOIN CHM62EDT_SPECIES AS E ON B.ID_NATURE_OBJECT = E.ID_NATURE_OBJECT ";
+            + "INNER JOIN CHM62EDT_REPORT_TYPE AS C ON (D.ID_LEGAL_STATUS = C.ID_LOOKUP and C.LOOKUP_TYPE='LEGAL_STATUS') "
+            + "INNER JOIN CHM62EDT_REPORTS AS B ON C.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
+            + "INNER JOIN DC_INDEX AS A ON B.ID_DC = A.ID_DC "
+            + "INNER JOIN CHM62EDT_SPECIES AS E ON B.ID_NATURE_OBJECT = E.ID_NATURE_OBJECT ";
 
             if (groupID.equalsIgnoreCase("any")) {
                 SQL += " WHERE E.SCIENTIFIC_NAME LIKE '%" + scientificName + "%'";
@@ -581,7 +602,7 @@ public class SpeciesSearchUtility {
             if (0 == criteria.compareTo(CRITERIA_VERNACULAR_NAME)) {
                 if (null == langName || (null != langName && langName.equalsIgnoreCase("any"))) {
                     String sql = Utilities.prepareSQLOperator("VALUE", name, relationOp)
-                            + " AND NAME='vernacular_name' GROUP BY VALUE";
+                    + " AND NAME='vernacular_name' GROUP BY VALUE";
 
                     if (!expandAll) {
                         sql += " LIMIT 0, " + Utilities.MAX_POPUP_RESULTS;
@@ -589,7 +610,7 @@ public class SpeciesSearchUtility {
                     results = new Chm62edtReportAttributesDomain().findWhere(sql);
                 } else {
                     String sql = Utilities.prepareSQLOperator("VALUE", name, relationOp)
-                            + " AND LOOKUP_TYPE='language' AND NAME='vernacular_name' AND NAME_EN='" + langName + "'";
+                    + " AND LOOKUP_TYPE='language' AND NAME='vernacular_name' AND NAME_EN='" + langName + "'";
 
                     if (!expandAll) {
                         sql += " LIMIT 0, " + Utilities.MAX_POPUP_RESULTS;
@@ -894,15 +915,15 @@ public class SpeciesSearchUtility {
 
             sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
             String sql = "SELECT DISTINCT NAME_EN " + "FROM CHM62EDT_LANGUAGE AS A "
-                    + "INNER JOIN CHM62EDT_REPORT_TYPE AS B ON (A.ID_LANGUAGE = B.ID_LOOKUP AND B.LOOKUP_TYPE = 'LANGUAGE') "
-                    + "INNER JOIN CHM62EDT_REPORTS AS C ON B.ID_REPORT_TYPE = C.ID_REPORT_TYPE "
-                    + "INNER JOIN `chm62edt_report_attributes` AS D ON (C.ID_REPORT_ATTRIBUTES = D.ID_REPORT_ATTRIBUTES AND D.NAME='VERNACULAR_NAME') "
-                    + "ORDER BY NAME_EN";
+            + "INNER JOIN CHM62EDT_REPORT_TYPE AS B ON (A.ID_LANGUAGE = B.ID_LOOKUP AND B.LOOKUP_TYPE = 'LANGUAGE') "
+            + "INNER JOIN CHM62EDT_REPORTS AS C ON B.ID_REPORT_TYPE = C.ID_REPORT_TYPE "
+            + "INNER JOIN `chm62edt_report_attributes` AS D ON (C.ID_REPORT_ATTRIBUTES = D.ID_REPORT_ATTRIBUTES AND D.NAME='VERNACULAR_NAME') "
+            + "ORDER BY NAME_EN";
             List columns = sqlc.ExecuteSQLReturnList(sql, 1);
 
             if (columns != null && columns.size() > 0) {
                 for (int i = 0; i < columns.size(); i++) {
-                    results.add((String) ((TableColumns) columns.get(i)).getColumnsValues().get(0));
+                    results.add(((TableColumns) columns.get(i)).getColumnsValues().get(0));
                 }
             }
         } catch (Exception ex) {

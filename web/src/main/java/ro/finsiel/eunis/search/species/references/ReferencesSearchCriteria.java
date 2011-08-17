@@ -1,10 +1,10 @@
 package ro.finsiel.eunis.search.species.references;
 
 
+import java.util.Hashtable;
+
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.Utilities;
-
-import java.util.Hashtable;
 
 
 /**
@@ -86,11 +86,11 @@ public class ReferencesSearchCriteria extends AbstractSearchCriteria {
             return;
         }
         sqlMappings = new Hashtable();
-        sqlMappings.put(CRITERIA_AUTHOR, "D.SOURCE ");
-        sqlMappings.put(CRITERIA_DATE, "E.CREATED");
-        sqlMappings.put(CRITERIA_TITLE, "F.TITLE");
-        sqlMappings.put(CRITERIA_EDITOR, "D.EDITOR");
-        sqlMappings.put(CRITERIA_PUBLISHER, "G.PUBLISHER");
+        sqlMappings.put(CRITERIA_AUTHOR, "A.SOURCE ");
+        sqlMappings.put(CRITERIA_DATE, "A.CREATED");
+        sqlMappings.put(CRITERIA_TITLE, "A.TITLE");
+        sqlMappings.put(CRITERIA_EDITOR, "A.EDITOR");
+        sqlMappings.put(CRITERIA_PUBLISHER, "A.PUBLISHER");
         sqlMappings.put(CRITERIA_SCIENTIFIC, "H.SCIENTIFIC_NAME ");
     }
 

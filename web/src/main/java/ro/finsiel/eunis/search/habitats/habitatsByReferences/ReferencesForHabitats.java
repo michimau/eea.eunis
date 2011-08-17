@@ -1,12 +1,12 @@
 package ro.finsiel.eunis.search.habitats.habitatsByReferences;
 
 
-import ro.finsiel.eunis.jrfTables.habitats.references.HabitatsBooksDomain;
-import ro.finsiel.eunis.jrfTables.habitats.habitatsByReferences.RefDomain;
-import ro.finsiel.eunis.search.Utilities;
-
-import java.util.Vector;
 import java.util.List;
+import java.util.Vector;
+
+import ro.finsiel.eunis.jrfTables.habitats.habitatsByReferences.RefDomain;
+import ro.finsiel.eunis.jrfTables.habitats.references.HabitatsBooksDomain;
+import ro.finsiel.eunis.search.Utilities;
 
 
 /**
@@ -96,17 +96,17 @@ public class ReferencesForHabitats {
                 } else {
                     put_and.addElement("true");
                 }
-                sql.append(Utilities.prepareSQLOperator("D.SOURCE", author, relationOpAuthor));
+                sql.append(Utilities.prepareSQLOperator("J.SOURCE", author, relationOpAuthor));
             }
         }
 
         if (
                 (
-                (null != date && !date.equalsIgnoreCase("") && !date.equalsIgnoreCase("null"))
-                || (null != date1 && !date1.equalsIgnoreCase("") && !date1.equalsIgnoreCase("null"))
+                        (null != date && !date.equalsIgnoreCase("") && !date.equalsIgnoreCase("null"))
+                        || (null != date1 && !date1.equalsIgnoreCase("") && !date1.equalsIgnoreCase("null"))
                 )
-                        && null != relationOpDate
-                        ) {
+                && null != relationOpDate
+        ) {
 
             if (put_and.contains("true")) {
                 sql.append(" AND ");
@@ -116,16 +116,16 @@ public class ReferencesForHabitats {
 
             if (relationOpDate.compareTo(Utilities.OPERATOR_BETWEEN) == 0) {
                 if (date == null || (date != null && date.equalsIgnoreCase(""))) {
-                    sql.append(" E.CREATED <=" + date1 + " ");
+                    sql.append(" J.CREATED <=" + date1 + " ");
                 }
                 if (date1 == null || (date1 != null && date1.equalsIgnoreCase(""))) {
-                    sql.append(" E.CREATED >=" + date + " ");
+                    sql.append(" J.CREATED >=" + date + " ");
                 }
                 if (date != null && date1 != null && !date.equalsIgnoreCase("") && !date1.equalsIgnoreCase("")) {
-                    sql.append(" E.CREATED >=" + date + " AND E.CREATED<=" + date1 + " ");
+                    sql.append(" J.CREATED >=" + date + " AND J.CREATED<=" + date1 + " ");
                 }
             } else {
-                sql.append(Utilities.prepareSQLOperator("E.CREATED", date, relationOpDate));
+                sql.append(Utilities.prepareSQLOperator("J.CREATED", date, relationOpDate));
             }
         }
 
@@ -136,7 +136,7 @@ public class ReferencesForHabitats {
                 } else {
                     put_and.addElement("true");
                 }
-                sql.append(Utilities.prepareSQLOperator("F.TITLE", title, relationOpTitle));
+                sql.append(Utilities.prepareSQLOperator("J.TITLE", title, relationOpTitle));
             }
         }
 
@@ -147,7 +147,7 @@ public class ReferencesForHabitats {
                 } else {
                     put_and.addElement("true");
                 }
-                sql.append(Utilities.prepareSQLOperator("D.EDITOR", editor, relationOpEditor));
+                sql.append(Utilities.prepareSQLOperator("J.EDITOR", editor, relationOpEditor));
             }
         }
 
@@ -158,7 +158,7 @@ public class ReferencesForHabitats {
                 } else {
                     put_and.addElement("true");
                 }
-                sql.append(Utilities.prepareSQLOperator("G.PUBLISHER", publisher, relationOpPublisher));
+                sql.append(Utilities.prepareSQLOperator("J.PUBLISHER", publisher, relationOpPublisher));
             }
         }
 
@@ -185,19 +185,19 @@ public class ReferencesForHabitats {
         }
 
         if (fromWhere.equalsIgnoreCase("author")) {
-            sql.append(" GROUP BY D.SOURCE ");
+            sql.append(" GROUP BY J.SOURCE ");
         }
         if (fromWhere.equalsIgnoreCase("date")) {
-            sql.append(" GROUP BY E.CREATED ");
+            sql.append(" GROUP BY J.CREATED ");
         }
         if (fromWhere.equalsIgnoreCase("title")) {
-            sql.append(" GROUP BY F.TITLE ");
+            sql.append(" GROUP BY J.TITLE ");
         }
         if (fromWhere.equalsIgnoreCase("editor")) {
-            sql.append(" GROUP BY D.EDITOR ");
+            sql.append(" GROUP BY J.EDITOR ");
         }
         if (fromWhere.equalsIgnoreCase("publisher")) {
-            sql.append(" GROUP BY G.PUBLISHER ");
+            sql.append(" GROUP BY J.PUBLISHER ");
         }
 
         if (useLimit) {

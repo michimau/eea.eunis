@@ -6,9 +6,9 @@ package ro.finsiel.eunis.jrfTables.species.speciesByReferences;
  * Time: 3:52:53 PM
  */
 
-import net.sf.jrf.domain.PersistentObject;
-
 import java.util.Date;
+
+import net.sf.jrf.domain.PersistentObject;
 
 
 public class RefPersist extends PersistentObject {
@@ -107,35 +107,35 @@ public class RefPersist extends PersistentObject {
         this.idHabitat = idHabitat;
     }
 
-    public String gettitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void settitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getalternative() {
+    public String getAlternative() {
         return alternative;
     }
 
-    public void setalternative(String alternative) {
+    public void setAlternative(String alternative) {
         this.alternative = alternative;
     }
 
-    public String getpublisher() {
+    public String getPublisher() {
         return publisher;
     }
 
-    public void setpublisher(String publisher) {
+    public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
 
-    public Date getcreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setcreated(Date created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 

@@ -2,8 +2,8 @@ package ro.finsiel.eunis.search.habitats.advanced;
 
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Vector;
 
@@ -235,14 +235,14 @@ public class HabitatsAdvancedSearch {
                     habitatsSQL = "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_HABITAT";
                     if (sOperand.equalsIgnoreCase("Contains")) {
                         habitatsSQL += " WHERE EUNIS_HABITAT_CODE LIKE '%" + sValueMin + "%' OR CODE_ANNEX1 LIKE '%" + sValueMin
-                                + "%'";
+                        + "%'";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
                         habitatsSQL += " WHERE EUNIS_HABITAT_CODE = '" + sValueMin + "' OR CODE_ANNEX1 = '" + sValueMin + "'";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
                         habitatsSQL += " WHERE EUNIS_HABITAT_CODE REGEXP '" + sValueMin + "' OR CODE_ANNEX1 REGEXP '" + sValueMin
-                                + "'";
+                        + "'";
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
                         habitatsSQL += " WHERE (EUNIS_HABITAT_CODE BETWEEN '%" + sValueMin + "%' AND '%" + sValueMax + "%')";
@@ -334,18 +334,17 @@ public class HabitatsAdvancedSearch {
                     habitatsSQL += " INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
                     habitatsSQL += " INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
                     habitatsSQL += " INNER JOIN `DC_INDEX` `DC_INDEX_REFERENCE` ON (`DC_INDEX`.`REFERENCE` = `DC_INDEX_REFERENCE`.`REFCD`)";
-                    habitatsSQL += " INNER JOIN `DC_TITLE` ON (`DC_INDEX_REFERENCE`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " WHERE (`DC_TITLE`.`TITLE` = '" + sValueMin + "')";
+                        habitatsSQL += " WHERE (`DC_INDEX`.`TITLE` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " WHERE (`DC_TITLE`.`TITLE` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " WHERE (`DC_INDEX`.`TITLE` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " WHERE (`DC_TITLE`.`TITLE` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " WHERE (`DC_INDEX`.`TITLE` LIKE '%" + sValueMin + "%')";
                     }
                 }
 
@@ -353,18 +352,17 @@ public class HabitatsAdvancedSearch {
                     habitatsSQL = "SELECT DISTINCT `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` FROM `CHM62EDT_HABITAT`";
                     habitatsSQL += " INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
                     habitatsSQL += " INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-                    habitatsSQL += " INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " WHERE (`DC_SOURCE`.`SOURCE` = '" + sValueMin + "')";
+                        habitatsSQL += " WHERE (`DC_INDEX`.`SOURCE` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " WHERE (`DC_SOURCE`.`SOURCE` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " WHERE (`DC_INDEX`.`SOURCE` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " WHERE (`DC_SOURCE`.`SOURCE` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " WHERE (`DC_INDEX`.`SOURCE` LIKE '%" + sValueMin + "%')";
                     }
                 }
 
@@ -372,18 +370,17 @@ public class HabitatsAdvancedSearch {
                     habitatsSQL = "SELECT DISTINCT `CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` FROM `CHM62EDT_HABITAT`";
                     habitatsSQL += " INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
                     habitatsSQL += " INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-                    habitatsSQL += " INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        habitatsSQL += " WHERE (`DC_TITLE`.`TITLE` = '" + sValueMin + "')";
+                        habitatsSQL += " WHERE (`DC_INDEX`.`TITLE` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        habitatsSQL += " WHERE (`DC_TITLE`.`TITLE` REGEXP '" + sValueMin + "')";
+                        habitatsSQL += " WHERE (`DC_INDEX`.`TITLE` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        habitatsSQL += " WHERE (`DC_TITLE`.`TITLE` LIKE '%" + sValueMin + "%')";
+                        habitatsSQL += " WHERE (`DC_INDEX`.`TITLE` LIKE '%" + sValueMin + "%')";
                     }
                 }
 
@@ -552,9 +549,9 @@ public class HabitatsAdvancedSearch {
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
                         habitatsSQL += " AND (`CHM62EDT_LIFE_FORM`.`ID_LIFE_FORM` >= " + GetID(sValueMin, "ID_LIFE_FORM", "", "")
-                                + ")";
+                        + ")";
                         habitatsSQL += " AND (`CHM62EDT_LIFE_FORM`.`ID_LIFE_FORM` <= " + GetID(sValueMax, "ID_LIFE_FORM", "", "")
-                                + ")";
+                        + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("LightIntensity")) {
@@ -575,9 +572,9 @@ public class HabitatsAdvancedSearch {
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
                         habitatsSQL += " AND (`CHM62EDT_LIGHT_INTENSITY`.`ID_LIGHT_INTENSITY` >= "
-                                + GetID(sValueMin, "LIGHT_INTENSITY", "", "") + ")";
+                            + GetID(sValueMin, "LIGHT_INTENSITY", "", "") + ")";
                         habitatsSQL += " AND (`CHM62EDT_LIGHT_INTENSITY`.`ID_LIGHT_INTENSITY` <= "
-                                + GetID(sValueMax, "LIGHT_INTENSITY", "", "") + ")";
+                            + GetID(sValueMax, "LIGHT_INTENSITY", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Marine")) {

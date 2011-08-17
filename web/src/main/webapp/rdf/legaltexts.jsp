@@ -23,7 +23,7 @@ public String create_resource_property(String column_name, String value)
   String prefix = "http://eunis.eea.europa.eu/legaltexts/";
   String localname = "ID_DC";
   String rdftype = "LegalText";
-  String strSQL = "select distinct chm62edt_reports.id_dc as id_dc, title, alternative, url as sourceDocument from chm62edt_reports, chm62edt_report_type,dc_title,dc_source where chm62edt_reports.ID_REPORT_TYPE = chm62edt_report_type.ID_REPORT_TYPE and LOOKUP_TYPE = \"LEGAL_STATUS\" and chm62edt_reports.id_dc = dc_title.id_dc and chm62edt_reports.id_dc = dc_source.id_dc";
+  String strSQL = "select distinct chm62edt_reports.id_dc as id_dc, title, alternative, url as sourceDocument from chm62edt_reports, chm62edt_report_type,dc_index where chm62edt_reports.ID_REPORT_TYPE = chm62edt_report_type.ID_REPORT_TYPE and LOOKUP_TYPE = \"LEGAL_STATUS\" and chm62edt_reports.id_dc = dc_index.id_dc";
 
 
 %>

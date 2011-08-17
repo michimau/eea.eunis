@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.jrfTables.species.legal;
 
 
+import java.util.List;
+
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.ShortColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
@@ -16,8 +18,6 @@ import ro.finsiel.eunis.search.Paginable;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.legal.LegalSearchCriteria;
 import ro.finsiel.eunis.search.species.legal.LegalSortCriteria;
-
-import java.util.List;
 
 
 /**
@@ -52,7 +52,7 @@ public class LegalStatusDomain extends AbstractDomain implements Paginable {
         return new LegalStatusPersist();
     }
 
-     /****/
+    /****/
     public void setup() {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
@@ -63,80 +63,58 @@ public class LegalStatusDomain extends AbstractDomain implements Paginable {
 
         this.addColumnSpec(
                 new IntegerColumnSpec("ID_LEGAL_STATUS", "getIdLegalStatus",
-                "setIdLegalStatus", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));
+                        "setIdLegalStatus", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));
         this.addColumnSpec(
                 new StringColumnSpec("ANNEX", "getAnnex", "setAnnex",
-                DEFAULT_TO_EMPTY_STRING, REQUIRED));
+                        DEFAULT_TO_EMPTY_STRING, REQUIRED));
         this.addColumnSpec(
                 new ShortColumnSpec("PRIORITY", "getPriority", "setPriority",
-                null));
+                        null));
         this.addColumnSpec(
                 new StringColumnSpec("COMMENT", "getComment", "setComment",
-                DEFAULT_TO_NULL));
+                        DEFAULT_TO_NULL));
         this.addColumnSpec(
                 new StringColumnSpec("CODE", "getLegalStatusCode",
-                "setLegalStatusCode", DEFAULT_TO_NULL));
+                        "setLegalStatusCode", DEFAULT_TO_NULL));
 
         this.setTableAlias("D");
         // Joined tables
         JoinTable reportType = null;
         JoinTable reports = null;
-        JoinTable dcTitle = null;
+        JoinTable dcIndex = null;
         JoinTable species = null;
         JoinTable groupSpecies = null;
 
-        reportType = new JoinTable("CHM62EDT_REPORT_TYPE C", "ID_LEGAL_STATUS",
-                "ID_LOOKUP");
-        reportType.addJoinColumn(
-                new IntegerJoinColumn("ID_REPORT_TYPE", "idReportType",
-                "setIdReportType"));
-        reportType.addJoinColumn(
-                new StringJoinColumn("LOOKUP_TYPE", "lookupType",
-                "setLookupType"));
+        reportType = new JoinTable("CHM62EDT_REPORT_TYPE C", "ID_LEGAL_STATUS", "ID_LOOKUP");
+        reportType.addJoinColumn(new IntegerJoinColumn("ID_REPORT_TYPE", "idReportType", "setIdReportType"));
+        reportType.addJoinColumn(new StringJoinColumn("LOOKUP_TYPE", "lookupType", "setLookupType"));
         this.addJoinTable(reportType);
 
-        reports = new JoinTable("CHM62EDT_REPORTS B", "ID_REPORT_TYPE",
-                "ID_REPORT_TYPE");
+        reports = new JoinTable("CHM62EDT_REPORTS B", "ID_REPORT_TYPE", "ID_REPORT_TYPE");
         reports.addJoinColumn(new IntegerJoinColumn("ID_DC", "idDc", "setIdDc"));
-        reports.addJoinColumn(
-                new IntegerJoinColumn("ID_NATURE_OBJECT", "idNatureObject",
-                "setIdNatureObject"));
+        reports.addJoinColumn(new IntegerJoinColumn("ID_NATURE_OBJECT", "idNatureObject", "setIdNatureObject"));
         reportType.addJoinTable(reports);
 
-        dcTitle = new JoinTable("DC_TITLE A", "ID_DC", "ID_DC");
-        dcTitle.addJoinColumn(
-                new StringJoinColumn("ALTERNATIVE", "alternative",
-                "setAlternative"));
-        dcTitle.addJoinColumn(new StringJoinColumn("TITLE", "title", "setTitle"));
-        reports.addJoinTable(dcTitle);
+        dcIndex = new JoinTable("DC_INDEX A", "ID_DC", "ID_DC");
+        dcIndex.addJoinColumn(new StringJoinColumn("ALTERNATIVE", "alternative", "setAlternative"));
+        dcIndex.addJoinColumn(new StringJoinColumn("TITLE", "title", "setTitle"));
+        dcIndex.addJoinColumn(new StringJoinColumn("URL", "setUrl"));
+        reports.addJoinTable(dcIndex);
 
-        species = new JoinTable("CHM62EDT_SPECIES E", "ID_NATURE_OBJECT",
-                "ID_NATURE_OBJECT");
-        species.addJoinColumn(
-                new StringJoinColumn("SCIENTIFIC_NAME", "scientificName",
-                "setScientificName"));
-        species.addJoinColumn(
-                new IntegerJoinColumn("ID_SPECIES", "idSpecies", "setIdSpecies"));
-        species.addJoinColumn(
-                new IntegerJoinColumn("ID_SPECIES_LINK", "idSpeciesLink",
-                "setIdSpeciesLink"));
+        species = new JoinTable("CHM62EDT_SPECIES E", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+        species.addJoinColumn(new StringJoinColumn("SCIENTIFIC_NAME", "scientificName", "setScientificName"));
+        species.addJoinColumn(new IntegerJoinColumn("ID_SPECIES", "idSpecies", "setIdSpecies"));
+        species.addJoinColumn(new IntegerJoinColumn("ID_SPECIES_LINK", "idSpeciesLink", "setIdSpeciesLink"));
 
         reports.addJoinTable(species);
 
-        dcTitle = new JoinTable("DC_SOURCE G", "ID_DC", "ID_DC");
-        dcTitle.addJoinColumn(new StringJoinColumn("URL", "setUrl"));
-        reports.addJoinTable(dcTitle);
-
-        groupSpecies = new JoinTable("CHM62EDT_GROUP_SPECIES F",
-                "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
-        groupSpecies.addJoinColumn(
-                new StringJoinColumn("COMMON_NAME", "commonName",
-                "setCommonName"));
+        groupSpecies = new JoinTable("CHM62EDT_GROUP_SPECIES F", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
+        groupSpecies.addJoinColumn(new StringJoinColumn("COMMON_NAME", "commonName", "setCommonName"));
         species.addJoinTable(groupSpecies);
 
     }
 
-     /** This method is used to retrieve a sub-set of the main results of a query given its start index offset and end
+    /** This method is used to retrieve a sub-set of the main results of a query given its start index offset and end
      * index offset.
      * @param offsetStart The start offset (i.e. 0). If offsetStart = offSetEnd then return the whole list
      * @param pageSize The end offset (i.e. 1). If offsetStart = offSetEnd then return the whole list
@@ -147,7 +125,7 @@ public class LegalStatusDomain extends AbstractDomain implements Paginable {
         this.sortCriteria = sortCriteria;
         if (searchCriteria.length < 1) {
             throw new CriteriaMissingException(
-                    "Unable to search because no search criteria was specified...");
+            "Unable to search because no search criteria was specified...");
         }
         // Prepare the WHERE clause
         StringBuffer filterSQL = _prepareWhereSearch();
@@ -177,7 +155,7 @@ public class LegalStatusDomain extends AbstractDomain implements Paginable {
 
         if (searchCriteria.length <= 0) {
             throw new CriteriaMissingException(
-                    "No criteria set for searching. Search interrupted.");
+            "No criteria set for searching. Search interrupted.");
         }
         for (int i = 0; i < searchCriteria.length; i++) {
             if (i > 0) {
@@ -190,7 +168,7 @@ public class LegalStatusDomain extends AbstractDomain implements Paginable {
         }
         filterSQL.append(
                 Utilities.showEUNISInvalidatedSpecies("AND E.VALID_NAME",
-                showEUNISInvalidatedSpecies));
+                        showEUNISInvalidatedSpecies));
         return filterSQL;
     }
 
@@ -251,13 +229,12 @@ public class LegalStatusDomain extends AbstractDomain implements Paginable {
         // Set the main QUERY
         sql.append(
                 "SELECT COUNT(*) FROM CHM62EDT_LEGAL_STATUS AS D "
-                        + "INNER JOIN CHM62EDT_REPORT_TYPE AS C ON D.ID_LEGAL_STATUS = C.ID_LOOKUP "
-                        + "INNER JOIN CHM62EDT_REPORTS AS B ON C.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
-                        + "INNER JOIN DC_TITLE AS A ON B.ID_DC = A.ID_DC "
-                        + "INNER JOIN CHM62EDT_SPECIES AS E ON B.ID_NATURE_OBJECT = E.ID_NATURE_OBJECT "
-                        + "INNER JOIN DC_SOURCE AS G ON B.ID_DC = G.ID_DC "
-                        + "INNER JOIN CHM62EDT_GROUP_SPECIES AS F ON E.ID_GROUP_SPECIES = F.ID_GROUP_SPECIES "
-                        + "WHERE ");
+                + "INNER JOIN CHM62EDT_REPORT_TYPE AS C ON D.ID_LEGAL_STATUS = C.ID_LOOKUP "
+                + "INNER JOIN CHM62EDT_REPORTS AS B ON C.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
+                + "INNER JOIN DC_INDEX AS A ON B.ID_DC = A.ID_DC "
+                + "INNER JOIN CHM62EDT_SPECIES AS E ON B.ID_NATURE_OBJECT = E.ID_NATURE_OBJECT "
+                + "INNER JOIN CHM62EDT_GROUP_SPECIES AS F ON E.ID_GROUP_SPECIES = F.ID_GROUP_SPECIES "
+                + "WHERE ");
         // Apply WHERE CLAUSE
         sql.append(_prepareWhereSearch().toString());
         // Apply SORT CLAUSE - DON'T NEED IT FOR COUNT...

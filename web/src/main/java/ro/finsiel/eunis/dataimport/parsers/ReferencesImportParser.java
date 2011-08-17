@@ -31,15 +31,7 @@ public class ReferencesImportParser extends DefaultHandler {
     private InputStream inputStream;
 
     private PreparedStatement preparedStatementDcIndexInsert;
-    private PreparedStatement preparedStatementDcDateInsert;
-    private PreparedStatement preparedStatementDcTitleInsert;
-    private PreparedStatement preparedStatementDcPublisherInsert;
-    private PreparedStatement preparedStatementDcSourceInsert;
-
-    private PreparedStatement preparedStatementDcDateUpdate;
-    private PreparedStatement preparedStatementDcTitleUpdate;
-    private PreparedStatement preparedStatementDcPublisherUpdate;
-    private PreparedStatement preparedStatementDcSourceUpdate;
+    private PreparedStatement preparedStatementDcIndexUpdate;
 
     private int counter = 0;
 
@@ -158,62 +150,41 @@ public class ReferencesImportParser extends DefaultHandler {
                 if (dcId == null) {
 
                     maxDcId++;
+                    String created = formatYear(date);
+
                     preparedStatementDcIndexInsert.setInt(1, maxDcId);
                     preparedStatementDcIndexInsert.setString(2, legalInstCd);
                     preparedStatementDcIndexInsert.setString(3, refcd);
+                    preparedStatementDcIndexInsert.setString(4, created);
+                    preparedStatementDcIndexInsert.setString(5, title);
+                    preparedStatementDcIndexInsert.setString(6, abrevTitle);
+                    preparedStatementDcIndexInsert.setString(7, publisher);
+                    preparedStatementDcIndexInsert.setString(8, author);
+                    preparedStatementDcIndexInsert.setString(9, editor);
+                    preparedStatementDcIndexInsert.setString(10, journTitle);
+                    preparedStatementDcIndexInsert.setString(11, bookTitle);
+                    preparedStatementDcIndexInsert.setString(12, journIssue);
+                    preparedStatementDcIndexInsert.setString(13, isbn);
+                    preparedStatementDcIndexInsert.setString(14, url);
                     preparedStatementDcIndexInsert.addBatch();
-
-                    String created = formatYear(date);
-
-                    preparedStatementDcDateInsert.setInt(1, maxDcId);
-                    preparedStatementDcDateInsert.setString(2, created);
-                    preparedStatementDcDateInsert.addBatch();
-
-                    preparedStatementDcTitleInsert.setInt(1, maxDcId);
-                    preparedStatementDcTitleInsert.setString(2, title);
-                    preparedStatementDcTitleInsert.setString(3, abrevTitle);
-                    preparedStatementDcTitleInsert.addBatch();
-
-                    preparedStatementDcPublisherInsert.setInt(1, maxDcId);
-                    preparedStatementDcPublisherInsert.setString(2, publisher);
-                    preparedStatementDcPublisherInsert.addBatch();
-
-                    preparedStatementDcSourceInsert.setInt(1, maxDcId);
-                    preparedStatementDcSourceInsert.setString(2, author);
-                    preparedStatementDcSourceInsert.setString(3, editor);
-                    preparedStatementDcSourceInsert.setString(4, journTitle);
-                    preparedStatementDcSourceInsert.setString(5, bookTitle);
-                    preparedStatementDcSourceInsert.setString(6, journIssue);
-                    preparedStatementDcSourceInsert.setString(7, isbn);
-                    preparedStatementDcSourceInsert.setString(8, url);
-                    preparedStatementDcSourceInsert.addBatch();
 
                 } else {
 
                     String created = formatYear(date);
 
-                    preparedStatementDcDateUpdate.setString(1, created);
-                    preparedStatementDcDateUpdate.setInt(2, dcId.intValue());
-                    preparedStatementDcDateUpdate.addBatch();
-
-                    preparedStatementDcTitleUpdate.setString(1, title);
-                    preparedStatementDcTitleUpdate.setString(2, abrevTitle);
-                    preparedStatementDcTitleUpdate.setInt(3, dcId.intValue());
-                    preparedStatementDcTitleUpdate.addBatch();
-
-                    preparedStatementDcPublisherUpdate.setString(1, publisher);
-                    preparedStatementDcPublisherUpdate.setInt(2, dcId.intValue());
-                    preparedStatementDcPublisherUpdate.addBatch();
-
-                    preparedStatementDcSourceUpdate.setString(1, author);
-                    preparedStatementDcSourceUpdate.setString(2, editor);
-                    preparedStatementDcSourceUpdate.setString(3, journTitle);
-                    preparedStatementDcSourceUpdate.setString(4, bookTitle);
-                    preparedStatementDcSourceUpdate.setString(5, journIssue);
-                    preparedStatementDcSourceUpdate.setString(6, isbn);
-                    preparedStatementDcSourceUpdate.setString(7, url);
-                    preparedStatementDcSourceUpdate.setInt(8, dcId.intValue());
-                    preparedStatementDcSourceUpdate.addBatch();
+                    preparedStatementDcIndexUpdate.setString(1, created);
+                    preparedStatementDcIndexUpdate.setString(2, title);
+                    preparedStatementDcIndexUpdate.setString(3, abrevTitle);
+                    preparedStatementDcIndexUpdate.setString(4, publisher);
+                    preparedStatementDcIndexUpdate.setString(5, author);
+                    preparedStatementDcIndexUpdate.setString(6, editor);
+                    preparedStatementDcIndexUpdate.setString(7, journTitle);
+                    preparedStatementDcIndexUpdate.setString(8, bookTitle);
+                    preparedStatementDcIndexUpdate.setString(9, journIssue);
+                    preparedStatementDcIndexUpdate.setString(10, isbn);
+                    preparedStatementDcIndexUpdate.setString(11, url);
+                    preparedStatementDcIndexUpdate.setInt(12, dcId.intValue());
+                    preparedStatementDcIndexUpdate.addBatch();
 
                 }
 
@@ -222,29 +193,8 @@ public class ReferencesImportParser extends DefaultHandler {
                     preparedStatementDcIndexInsert.executeBatch();
                     preparedStatementDcIndexInsert.clearParameters();
 
-                    preparedStatementDcDateInsert.executeBatch();
-                    preparedStatementDcDateInsert.clearParameters();
-
-                    preparedStatementDcTitleInsert.executeBatch();
-                    preparedStatementDcTitleInsert.clearParameters();
-
-                    preparedStatementDcPublisherInsert.executeBatch();
-                    preparedStatementDcPublisherInsert.clearParameters();
-
-                    preparedStatementDcSourceInsert.executeBatch();
-                    preparedStatementDcSourceInsert.clearParameters();
-
-                    preparedStatementDcDateUpdate.executeBatch();
-                    preparedStatementDcDateUpdate.clearParameters();
-
-                    preparedStatementDcTitleUpdate.executeBatch();
-                    preparedStatementDcTitleUpdate.clearParameters();
-
-                    preparedStatementDcPublisherUpdate.executeBatch();
-                    preparedStatementDcPublisherUpdate.clearParameters();
-
-                    preparedStatementDcSourceUpdate.executeBatch();
-                    preparedStatementDcSourceUpdate.clearParameters();
+                    preparedStatementDcIndexUpdate.executeBatch();
+                    preparedStatementDcIndexUpdate.clearParameters();
 
                     System.gc();
                 }
@@ -278,51 +228,17 @@ public class ReferencesImportParser extends DefaultHandler {
             // deleteOldRecords();
             maxDcId = getMaxId("SELECT MAX(ID_DC) FROM DC_INDEX");
 
-            // Insert statements
-            String query = "INSERT INTO DC_INDEX (ID_DC, REFERENCE, COMMENT, REFCD) VALUES (?,?,'REFERENCES',?)";
-
+            // Insert statement
+            String query = "INSERT INTO DC_INDEX (ID_DC, REFERENCE, COMMENT, REFCD, "
+                + "CREATED, TITLE, ALTERNATIVE, PUBLISHER, SOURCE, EDITOR, JOURNAL_TITLE, "
+                + "BOOK_TITLE, JOURNAL_ISSUE, ISBN, URL) VALUES (?,?,'REFERENCES',?,?,?,?,?,?,?,?,?,?,?,?)";
             this.preparedStatementDcIndexInsert = con.prepareStatement(query);
 
-            String queryDcDate = "INSERT INTO DC_DATE (ID_DC, ID_DATE, CREATED) VALUES (?,1,?)";
-
-            this.preparedStatementDcDateInsert = con.prepareStatement(
-                    queryDcDate);
-
-            String queryDcTitle = "INSERT INTO DC_TITLE (ID_DC, ID_TITLE, TITLE, ALTERNATIVE) VALUES (?,1,?,?)";
-
-            this.preparedStatementDcTitleInsert = con.prepareStatement(
-                    queryDcTitle);
-
-            String queryDcPublisher = "INSERT INTO DC_PUBLISHER (ID_DC, ID_PUBLISHER, PUBLISHER) VALUES (?,1,?)";
-
-            this.preparedStatementDcPublisherInsert = con.prepareStatement(
-                    queryDcPublisher);
-
-            String queryDcSource = "INSERT INTO DC_SOURCE (ID_DC, ID_SOURCE, SOURCE, EDITOR, JOURNAL_TITLE, BOOK_TITLE, JOURNAL_ISSUE, ISBN, URL) VALUES (?,1,?,?,?,?,?,?,?)";
-
-            this.preparedStatementDcSourceInsert = con.prepareStatement(
-                    queryDcSource);
-
-            // Update statements
-            String queryDcDateUpdate = "UPDATE DC_DATE SET CREATED =? WHERE ID_DC = ?";
-
-            this.preparedStatementDcDateUpdate = con.prepareStatement(
-                    queryDcDateUpdate);
-
-            String queryDcTitleUpdate = "UPDATE DC_TITLE SET TITLE = ?, ALTERNATIVE = ? WHERE ID_DC = ?";
-
-            this.preparedStatementDcTitleUpdate = con.prepareStatement(
-                    queryDcTitleUpdate);
-
-            String queryDcPublisherUpdate = "UPDATE DC_PUBLISHER SET PUBLISHER = ? WHERE ID_DC = ?";
-
-            this.preparedStatementDcPublisherUpdate = con.prepareStatement(
-                    queryDcPublisherUpdate);
-
-            String queryDcSourceUpdate = "UPDATE DC_SOURCE SET SOURCE = ?, EDITOR = ?, JOURNAL_TITLE = ?, BOOK_TITLE = ?, JOURNAL_ISSUE = ?, ISBN = ?, URL = ? WHERE ID_DC = ?";
-
-            this.preparedStatementDcSourceUpdate = con.prepareStatement(
-                    queryDcSourceUpdate);
+            // Update statement
+            String queryDcIndexUpdate = "UPDATE DC_INDEX SET CREATED = ?, TITLE = ?, "
+                + "ALTERNATIVE = ?, PUBLISHER = ?, SOURCE = ?, EDITOR = ?, JOURNAL_TITLE = ?, BOOK_TITLE = ?, "
+                + "JOURNAL_ISSUE = ?, ISBN = ?, URL = ? WHERE ID_DC = ?";
+            this.preparedStatementDcIndexUpdate = con.prepareStatement(queryDcIndexUpdate);
 
             // con.setAutoCommit(false);
             parseDocument();
@@ -330,29 +246,8 @@ public class ReferencesImportParser extends DefaultHandler {
                 preparedStatementDcIndexInsert.executeBatch();
                 preparedStatementDcIndexInsert.clearParameters();
 
-                preparedStatementDcDateInsert.executeBatch();
-                preparedStatementDcDateInsert.clearParameters();
-
-                preparedStatementDcTitleInsert.executeBatch();
-                preparedStatementDcTitleInsert.clearParameters();
-
-                preparedStatementDcPublisherInsert.executeBatch();
-                preparedStatementDcPublisherInsert.clearParameters();
-
-                preparedStatementDcSourceInsert.executeBatch();
-                preparedStatementDcSourceInsert.clearParameters();
-
-                preparedStatementDcDateUpdate.executeBatch();
-                preparedStatementDcDateUpdate.clearParameters();
-
-                preparedStatementDcTitleUpdate.executeBatch();
-                preparedStatementDcTitleUpdate.clearParameters();
-
-                preparedStatementDcPublisherUpdate.executeBatch();
-                preparedStatementDcPublisherUpdate.clearParameters();
-
-                preparedStatementDcSourceUpdate.executeBatch();
-                preparedStatementDcSourceUpdate.clearParameters();
+                preparedStatementDcIndexUpdate.executeBatch();
+                preparedStatementDcIndexUpdate.clearParameters();
 
                 System.gc();
             }
@@ -367,36 +262,8 @@ public class ReferencesImportParser extends DefaultHandler {
                 preparedStatementDcIndexInsert.close();
             }
 
-            if (preparedStatementDcDateInsert != null) {
-                preparedStatementDcDateInsert.close();
-            }
-
-            if (preparedStatementDcTitleInsert != null) {
-                preparedStatementDcTitleInsert.close();
-            }
-
-            if (preparedStatementDcPublisherInsert != null) {
-                preparedStatementDcPublisherInsert.close();
-            }
-
-            if (preparedStatementDcSourceInsert != null) {
-                preparedStatementDcSourceInsert.close();
-            }
-
-            if (preparedStatementDcDateUpdate != null) {
-                preparedStatementDcDateUpdate.close();
-            }
-
-            if (preparedStatementDcTitleUpdate != null) {
-                preparedStatementDcTitleUpdate.close();
-            }
-
-            if (preparedStatementDcPublisherUpdate != null) {
-                preparedStatementDcPublisherUpdate.close();
-            }
-
-            if (preparedStatementDcSourceUpdate != null) {
-                preparedStatementDcSourceUpdate.close();
+            if (preparedStatementDcIndexUpdate != null) {
+                preparedStatementDcIndexUpdate.close();
             }
 
             if (con != null) {
@@ -417,29 +284,8 @@ public class ReferencesImportParser extends DefaultHandler {
                 if (!xmlRefcds.contains(refCd)) {
                     int idDc = dcId.intValue();
 
-                    String sql = "DELETE FROM DC_DATE WHERE ID_DC = ?";
-
-                    ps = con.prepareStatement(sql);
-                    ps.setInt(1, idDc);
-                    ps.executeUpdate();
-
-                    sql = "DELETE FROM DC_TITLE WHERE ID_DC = ?";
-                    ps = con.prepareStatement(sql);
-                    ps.setInt(1, idDc);
-                    ps.executeUpdate();
-
-                    sql = "DELETE FROM DC_PUBLISHER WHERE ID_DC = ?";
-                    ps = con.prepareStatement(sql);
-                    ps.setInt(1, idDc);
-                    ps.executeUpdate();
-
-                    sql = "DELETE FROM DC_SOURCE WHERE ID_DC = ?";
-                    ps = con.prepareStatement(sql);
-                    ps.setInt(1, idDc);
-                    ps.executeUpdate();
-
                     ps = con.prepareStatement(
-                            "DELETE FROM DC_INDEX WHERE ID_DC = ?");
+                    "DELETE FROM DC_INDEX WHERE ID_DC = ?");
                     ps.setInt(1, idDc);
                     ps.executeUpdate();
                 }

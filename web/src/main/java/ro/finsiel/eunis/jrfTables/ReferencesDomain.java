@@ -1,15 +1,6 @@
 package ro.finsiel.eunis.jrfTables;
 
 
-import ro.finsiel.eunis.exceptions.CriteriaMissingException;
-import ro.finsiel.eunis.exceptions.InitializationException;
-import ro.finsiel.eunis.formBeans.ReferencesSearchCriteria;
-import ro.finsiel.eunis.formBeans.ReferencesSortCriteria;
-import ro.finsiel.eunis.search.AbstractSearchCriteria;
-import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.Paginable;
-import ro.finsiel.eunis.search.ReferencesWrapper;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,6 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import ro.finsiel.eunis.exceptions.CriteriaMissingException;
+import ro.finsiel.eunis.exceptions.InitializationException;
+import ro.finsiel.eunis.formBeans.ReferencesSearchCriteria;
+import ro.finsiel.eunis.formBeans.ReferencesSortCriteria;
+import ro.finsiel.eunis.search.AbstractSearchCriteria;
+import ro.finsiel.eunis.search.AbstractSortCriteria;
+import ro.finsiel.eunis.search.Paginable;
+import ro.finsiel.eunis.search.ReferencesWrapper;
 import eionet.eunis.dto.PairDTO;
 
 
@@ -61,7 +60,7 @@ public class ReferencesDomain implements Paginable {
         this.sortCriteria = sortCriteria;
         if (searchCriteria.length < 1) {
             throw new CriteriaMissingException(
-                    "Unable to search because no search criteria was specified...");
+            "Unable to search because no search criteria was specified...");
         }
 
         // add filter from results page
@@ -103,17 +102,13 @@ public class ReferencesDomain implements Paginable {
         try {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            SQL += " SELECT DISTINCT `DC_SOURCE`.`SOURCE`,";
-            SQL += " `DC_DATE`.`CREATED`,";
-            SQL += " `DC_TITLE`.`TITLE`,";
-            SQL += " `DC_SOURCE`.`EDITOR`,";
-            SQL += " `DC_PUBLISHER`.`PUBLISHER`,";
-            SQL += " `DC_SOURCE`.`URL`, DC_INDEX.ID_DC ";
+            SQL += " SELECT DISTINCT `DC_INDEX`.`SOURCE`,";
+            SQL += " `DC_INDEX`.`CREATED`,";
+            SQL += " `DC_INDEX`.`TITLE`,";
+            SQL += " `DC_INDEX`.`EDITOR`,";
+            SQL += " `DC_INDEX`.`PUBLISHER`,";
+            SQL += " `DC_INDEX`.`URL`, DC_INDEX.ID_DC ";
             SQL += "  FROM  `DC_INDEX`";
-            SQL += " INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-            SQL += " INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
-            SQL += " INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-            SQL += " INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
             // !!added to get only references with species and habitats
             SQL += " INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`DC_INDEX`.`ID_DC` = `CHM62EDT_NATURE_OBJECT`.`ID_DC`)";
             SQL += " WHERE `DC_INDEX`.`COMMENT` = 'REFERENCES'";
@@ -199,18 +194,15 @@ public class ReferencesDomain implements Paginable {
 
             // SQL = "(SELECT DISTINCT H.SCIENTIFIC_NAME  " +
             SQL = "SELECT DISTINCT H.ID_SPECIES,H.SCIENTIFIC_NAME  "
-                    + "FROM CHM62EDT_SPECIES H "
-                    + "INNER JOIN CHM62EDT_REPORTS B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
-                    + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
-                    + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC " + // "LEFT JOIN DC_SOURCE D ON A.ID_DC=D.ID_DC " +
-                    // "LEFT JOIN DC_DATE E ON A.ID_DC=E.ID_DC " +
-                    // "LEFT JOIN DC_TITLE F ON A.ID_DC=F.ID_DC " +
-                    // "LEFT JOIN DC_PUBLISHER G ON A.ID_DC=G.ID_DC " +
-                    "WHERE 1=1 " + condition
-                    + // Note: 'SPECIES_GEO' isn't used in chm62edt_report_type
-                    " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') "
-                    + " GROUP BY H.SCIENTIFIC_NAME "
-                    + " ORDER BY SCIENTIFIC_NAME";
+                + "FROM CHM62EDT_SPECIES H "
+                + "INNER JOIN CHM62EDT_REPORTS B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
+                + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
+                + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC " +
+                "WHERE 1=1 " + condition
+                + // Note: 'SPECIES_GEO' isn't used in chm62edt_report_type
+                " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') "
+                + " GROUP BY H.SCIENTIFIC_NAME "
+                + " ORDER BY SCIENTIFIC_NAME";
 
             ps = con.prepareStatement(SQL);
             rs = ps.executeQuery(SQL);
@@ -259,7 +251,7 @@ public class ReferencesDomain implements Paginable {
 
         if (searchCriteria.length < 1) {
             throw new CriteriaMissingException(
-                    "Unable to search because no search criteria was specified...");
+            "Unable to search because no search criteria was specified...");
         }
 
         StringBuffer filterSQL = _prepareWhereSearch("ReferencesPart");
@@ -284,7 +276,7 @@ public class ReferencesDomain implements Paginable {
 
         if (searchCriteria.length <= 0) {
             throw new CriteriaMissingException(
-                    "No criteria set for searching. Search interrupted.");
+            "No criteria set for searching. Search interrupted.");
         }
 
         for (int i = 0; i < searchCriteria.length; i++) {

@@ -1,15 +1,15 @@
 package ro.finsiel.eunis.search.species.speciesByReferences;
 
 
-import ro.finsiel.eunis.search.Utilities;
-import ro.finsiel.eunis.search.SortListString;
-
-import java.util.List;
-import java.util.Vector;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.DriverManager;
+import java.util.List;
+import java.util.Vector;
+
+import ro.finsiel.eunis.search.SortListString;
+import ro.finsiel.eunis.search.Utilities;
 
 
 /**
@@ -109,17 +109,17 @@ public class ReferencesForSpecies {
                 } else {
                     put_and.addElement("true");
                 }
-                sql.append(Utilities.prepareSQLOperator("D.SOURCE", author, relationOpAuthor));
+                sql.append(Utilities.prepareSQLOperator("A.SOURCE", author, relationOpAuthor));
             }
         }
 
         if (
                 (
-                (null != date && !date.trim().equalsIgnoreCase("") && !date.equalsIgnoreCase("null"))
-                || (null != date1 && !date1.trim().equalsIgnoreCase("") && !date1.equalsIgnoreCase("null"))
+                        (null != date && !date.trim().equalsIgnoreCase("") && !date.equalsIgnoreCase("null"))
+                        || (null != date1 && !date1.trim().equalsIgnoreCase("") && !date1.equalsIgnoreCase("null"))
                 )
-                        && null != relationOpDate
-                        ) {
+                && null != relationOpDate
+        ) {
 
             if (put_and.contains("true")) {
                 sql.append(" AND ");
@@ -129,16 +129,16 @@ public class ReferencesForSpecies {
 
             if (relationOpDate.compareTo(Utilities.OPERATOR_BETWEEN) == 0) {
                 if (date == null || (date != null && date.trim().equalsIgnoreCase(""))) {
-                    sql.append(" E.CREATED <=" + date1 + " ");
+                    sql.append(" A.CREATED <=" + date1 + " ");
                 }
                 if (date1 == null || (date1 != null && date1.trim().equalsIgnoreCase(""))) {
-                    sql.append(" E.CREATED >=" + date + " ");
+                    sql.append(" A.CREATED >=" + date + " ");
                 }
                 if (date != null && date1 != null && !date.trim().equalsIgnoreCase("") && !date1.trim().equalsIgnoreCase("")) {
-                    sql.append(" E.CREATED >=" + date + " AND E.CREATED<=" + date1 + " ");
+                    sql.append(" A.CREATED >=" + date + " AND A.CREATED<=" + date1 + " ");
                 }
             } else {
-                sql.append(Utilities.prepareSQLOperator("E.CREATED", date, relationOpDate));
+                sql.append(Utilities.prepareSQLOperator("A.CREATED", date, relationOpDate));
             }
         }
 
@@ -149,7 +149,7 @@ public class ReferencesForSpecies {
                 } else {
                     put_and.addElement("true");
                 }
-                sql.append(Utilities.prepareSQLOperator("F.TITLE", title, relationOpTitle));
+                sql.append(Utilities.prepareSQLOperator("A.TITLE", title, relationOpTitle));
             }
         }
 
@@ -160,7 +160,7 @@ public class ReferencesForSpecies {
                 } else {
                     put_and.addElement("true");
                 }
-                sql.append(Utilities.prepareSQLOperator("D.EDITOR", editor, relationOpEditor));
+                sql.append(Utilities.prepareSQLOperator("A.EDITOR", editor, relationOpEditor));
             }
         }
 
@@ -171,7 +171,7 @@ public class ReferencesForSpecies {
                 } else {
                     put_and.addElement("true");
                 }
-                sql.append(Utilities.prepareSQLOperator("G.PUBLISHER", publisher, relationOpPublisher));
+                sql.append(Utilities.prepareSQLOperator("A.PUBLISHER", publisher, relationOpPublisher));
             }
         }
 
@@ -206,7 +206,6 @@ public class ReferencesForSpecies {
 
     private Vector returnReferences(String sql, String fromWhere) {
         Vector results = new Vector();
-        boolean[] objectIsNotNull = { false, false, false, false, false};
         String SQL = "";
         String SQL_REFERENCES = "";
         Connection con = null;
@@ -217,88 +216,27 @@ public class ReferencesForSpecies {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
+            SQL_REFERENCES = "SELECT DISTINCT A.";
+
             if (fromWhere.equalsIgnoreCase("author")) {
-                SQL_REFERENCES = "SELECT DISTINCT D.SOURCE ";
-            }
-            if (fromWhere.equalsIgnoreCase("date")) {
-                SQL_REFERENCES = "SELECT DISTINCT E.CREATED ";
-            }
-            if (fromWhere.equalsIgnoreCase("title")) {
-                SQL_REFERENCES = "SELECT DISTINCT F.TITLE ";
-            }
-            if (fromWhere.equalsIgnoreCase("editor")) {
-                SQL_REFERENCES = "SELECT DISTINCT D.EDITOR ";
-            }
-            if (fromWhere.equalsIgnoreCase("publisher")) {
-                SQL_REFERENCES = "SELECT DISTINCT G.PUBLISHER ";
+                SQL_REFERENCES += "SOURCE ";
+            } else if (fromWhere.equalsIgnoreCase("date")) {
+                SQL_REFERENCES += "CREATED ";
+            } else if (fromWhere.equalsIgnoreCase("title")) {
+                SQL_REFERENCES += "TITLE ";
+            } else if (fromWhere.equalsIgnoreCase("editor")) {
+                SQL_REFERENCES += "EDITOR ";
+            } else if (fromWhere.equalsIgnoreCase("publisher")) {
+                SQL_REFERENCES += "PUBLISHER ";
             }
 
             SQL_REFERENCES += "FROM DC_INDEX A ";
 
-            // on put join with DC_SOURCE for example because in where condition will have condition by source or editor
-            // (fields from this table)
-
-            if (null != author && null != relationOpAuthor) {
-                if (!author.equalsIgnoreCase("")) {
-                    SQL_REFERENCES += "INNER JOIN DC_SOURCE D ON A.ID_DC = D.ID_DC ";
-                    objectIsNotNull[0] = true;
-                }
-            }
-
-            if (
-                    (
-                    (null != date && !date.equalsIgnoreCase(""))
-                    || (null != date1 && !date1.equalsIgnoreCase("") && !date1.equalsIgnoreCase("null"))
-                    )
-                            && null != relationOpDate
-                            ) {
-                SQL_REFERENCES += "INNER JOIN DC_DATE E ON A.ID_DC = E.ID_DC ";
-                objectIsNotNull[1] = true;
-            }
-
-            if (null != editor && null != relationOpEditor) {
-                if (!editor.equalsIgnoreCase("") && !objectIsNotNull[0]) {
-                    SQL_REFERENCES += "INNER JOIN DC_SOURCE D ON A.ID_DC = D.ID_DC ";
-                    objectIsNotNull[2] = true;
-                }
-            }
-
-            if (null != title && null != relationOpTitle) {
-                if (!title.equalsIgnoreCase("")) {
-                    SQL_REFERENCES += "INNER JOIN DC_TITLE F ON A.ID_DC = F.ID_DC ";
-                    objectIsNotNull[3] = true;
-                }
-            }
-
-            if (null != publisher && null != relationOpPublisher) {
-                if (!publisher.equalsIgnoreCase("")) {
-                    SQL_REFERENCES += "INNER JOIN DC_PUBLISHER G ON A.ID_DC = G.ID_DC ";
-                    objectIsNotNull[4] = true;
-                }
-            }
-
-            // on put join with DC_EDITOR for example because editor field will be appear in select line
-            if (fromWhere.equalsIgnoreCase("author") && !objectIsNotNull[0] && !objectIsNotNull[2]) {
-                SQL_REFERENCES += "INNER JOIN DC_SOURCE D ON A.ID_DC = D.ID_DC ";
-            }
-            if (fromWhere.equalsIgnoreCase("date") && !objectIsNotNull[1]) {
-
-                SQL_REFERENCES += "INNER JOIN DC_DATE E ON A.ID_DC = E.ID_DC ";
-            }
-            if (fromWhere.equalsIgnoreCase("title") && !objectIsNotNull[3]) {
-                SQL_REFERENCES += "INNER JOIN DC_TITLE F ON A.ID_DC = F.ID_DC ";
-            }
-            if (fromWhere.equalsIgnoreCase("editor") && !objectIsNotNull[0] && !objectIsNotNull[2]) {
-                SQL_REFERENCES += "INNER JOIN DC_SOURCE D ON A.ID_DC = D.ID_DC ";
-            }
-            if (fromWhere.equalsIgnoreCase("publisher") && !objectIsNotNull[4]) {
-                SQL_REFERENCES += "INNER JOIN DC_PUBLISHER G ON A.ID_DC = G.ID_DC ";
-            }
 
             SQL = SQL_REFERENCES;
 
             SQL += "INNER JOIN CHM62EDT_NATURE_OBJECT B ON A.ID_DC=B.ID_DC "
-                    + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT ";
+                + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT ";
 
             SQL += "WHERE 1=1 ";
 
@@ -315,8 +253,8 @@ public class ReferencesForSpecies {
             SQL += SQL_REFERENCES;
 
             SQL += "INNER JOIN CHM62EDT_REPORTS B ON A.ID_DC=B.ID_DC "
-                    + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
-                    + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT ";
+                + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
+                + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT ";
 
             SQL += "WHERE 1=1 ";
 
@@ -329,14 +267,14 @@ public class ReferencesForSpecies {
             SQL += sql;
 
             SQL += " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS',"
-                    + "'SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') ";
+                + "'SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') ";
 
             SQL += " UNION ";
 
             SQL += SQL_REFERENCES;
 
             SQL += "INNER JOIN CHM62EDT_TAXONOMY B ON A.ID_DC=B.ID_DC "
-                    + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_TAXONOMY = H.ID_TAXONOMY ";
+                + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_TAXONOMY = H.ID_TAXONOMY ";
 
             SQL += "WHERE 1=1 ";
 

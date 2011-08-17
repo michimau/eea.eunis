@@ -176,7 +176,7 @@
                       <form name="refineSearch" method="get" onsubmit="return(validateRefineForm(<%=noCriteria%>));" action="">
                         <%=formBean.toFORMParam(filterSearch)%>
                         <label for="criteriaType" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
-                        <select title="<%=cm.cmsPhrase")%>" name="criteriaType" id="criteriaType">
+                        <select title="<%=cm.cmsPhrase("Criteria")%>" name="criteriaType" id="criteriaType">
                           <option value="<%=ReferencesSearchCriteria.CRITERIA_AUTHOR%>"><%=cm.cms("author")%></option>
                           <option value="<%=ReferencesSearchCriteria.CRITERIA_DATE%>"><%=cm.cms("date")%></option>
                           <option value="<%=ReferencesSearchCriteria.CRITERIA_TITLE%>" selected="selected"><%=cm.cms("title")%></option>
@@ -314,19 +314,19 @@
                 %>
                     <tr<%=cssClass%>>
                       <td>
-                        <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(book.getsource()), "&nbsp;")%>
+                        <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(book.getSource()), "&nbsp;")%>
                       </td>
                       <td style="text-align : center;">
-                        <%=Utilities.formatString(Utilities.formatReferencesDate(book.getcreated() ), "&nbsp;")%>
+                        <%=Utilities.formatString(Utilities.formatReferencesDate(book.getCreated() ), "&nbsp;")%>
                       </td>
                       <td>
-                        <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(book.gettitle()), "&nbsp;")%>
+                        <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(book.getTitle()), "&nbsp;")%>
                       </td>
                       <td style="white-space : nowrap">
-                        <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(book.geteditor()), "&nbsp;")%>
+                        <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(book.getEditor()), "&nbsp;")%>
                       </td>
                       <td>
-                        <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(book.getpublisher()), "&nbsp;")%>
+                        <%=Utilities.formatString(Utilities.treatURLSpecialCharacters(book.getPublisher()), "&nbsp;")%>
                       </td>
                       <td style="text-align : center;">
                         <%=Utilities.returnSourceValueReferences(book.getHaveSource())%>
@@ -336,7 +336,7 @@
                         // Request parameter
                         HabitatsBooksDomain habitatsBooks = new HabitatsBooksDomain(formBean.toSearchCriteria(), database);
                         // Set the result list
-                        List resultsHabitats = habitatsBooks.getHabitatsByReferences(book.getidDC().toString(), true);
+                        List resultsHabitats = habitatsBooks.getHabitatsByReferences(book.getIdDC().toString(), true);
 
 
                         if (resultsHabitats != null && resultsHabitats.size() > 0)

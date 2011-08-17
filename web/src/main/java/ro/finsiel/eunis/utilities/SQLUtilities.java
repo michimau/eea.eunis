@@ -1238,7 +1238,7 @@ public class SQLUtilities {
 
         List<String> statements = new ArrayList<String>();
 
-        statements.add("SELECT URL FROM DC_SOURCE");
+        statements.add("SELECT URL FROM DC_INDEX");
         statements.add("SELECT LINK_URL FROM CHM62EDT_GLOSSARY");
         statements.add("SELECT VALUE FROM CHM62EDT_SITE_ATTRIBUTES WHERE VALUE LIKE 'http://%'");
         statements.add("SELECT DATA_SOURCE FROM CHM62EDT_DESIGNATIONS WHERE DATA_SOURCE LIKE 'http://%'");

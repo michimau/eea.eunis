@@ -187,15 +187,15 @@
 
   if(lov.equalsIgnoreCase("LegalInstrument")) {
     if(oper.equalsIgnoreCase("Equal")) {
-      SQL="SELECT DISTINCT `DC_TITLE`.`TITLE`,`DC_TITLE`.`ALTERNATIVE` FROM  `DC_INDEX` INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`REFERENCE` = `DC_TITLE`.`ID_DC`) WHERE `DC_TITLE`.`TITLE`='"+ val + "' ORDER BY `DC_TITLE`.`TITLE`";
+      SQL="SELECT DISTINCT `TITLE`, `ALTERNATIVE` FROM  `DC_INDEX` WHERE `TITLE`='"+ val + "' ORDER BY `TITLE`";
     } else {
       if(oper.equalsIgnoreCase("Contains")) {
-        SQL="SELECT DISTINCT `DC_TITLE`.`TITLE`,`DC_TITLE`.`ALTERNATIVE` FROM  `DC_INDEX` INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`REFERENCE` = `DC_TITLE`.`ID_DC`) WHERE `DC_TITLE`.`TITLE` LIKE '%"+ val + "%' ORDER BY `DC_TITLE`.`TITLE`";
+        SQL="SELECT DISTINCT `TITLE`, `ALTERNATIVE` FROM `DC_INDEX` WHERE `TITLE` LIKE '%"+ val + "%' ORDER BY `TITLE`";
       } else {
         if(oper.equalsIgnoreCase("Between")) {
-          SQL="SELECT DISTINCT `DC_TITLE`.`TITLE`,`DC_TITLE`.`ALTERNATIVE` FROM  `DC_INDEX` INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`REFERENCE` = `DC_TITLE`.`ID_DC`) WHERE `DC_TITLE`.`TITLE` LIKE '%"+ val + "%' ORDER BY `DC_TITLE`.`TITLE`";
+          SQL="SELECT DISTINCT `TITLE`, `ALTERNATIVE` FROM `DC_INDEX` WHERE `TITLE` LIKE '%"+ val + "%' ORDER BY `TITLE`";
         } else {
-          SQL="SELECT DISTINCT `DC_TITLE`.`TITLE`,`DC_TITLE`.`ALTERNATIVE` FROM  `DC_INDEX` INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`REFERENCE` = `DC_TITLE`.`ID_DC`) ORDER BY `DC_TITLE`.`TITLE`";
+          SQL="SELECT DISTINCT `TITLE`, `ALTERNATIVE` FROM  `DC_INDEX` ORDER BY `TITLE`";
         }
       }
     }
@@ -395,95 +395,78 @@
     if(natureobject.equalsIgnoreCase("Species")) {
       String SQLWhere="";
       if(oper.equalsIgnoreCase("Equal")) {
-        SQLWhere=" (`DC_SOURCE`.`SOURCE` = '"+ val + "')";
+        SQLWhere=" (`DC_INDEX`.`SOURCE` = '"+ val + "')";
       } else {
         if(oper.equalsIgnoreCase("Contains")) {
-          SQLWhere=" (`DC_SOURCE`.`SOURCE` LIKE '%"+ val + "%')";
+          SQLWhere=" (`DC_INDEX`.`SOURCE` LIKE '%"+ val + "%')";
         } else {
           if(oper.equalsIgnoreCase("Between")) {
-            SQLWhere=" (`DC_SOURCE`.`SOURCE` = '"+ val + "')";
+            SQLWhere=" (`DC_INDEX`.`SOURCE` = '"+ val + "')";
           } else {
-            SQLWhere=" (`DC_SOURCE`.`SOURCE` LIKE '%"+ val + "%')";
+            SQLWhere=" (`DC_INDEX`.`SOURCE` LIKE '%"+ val + "%')";
           }
         }
       }
       SQL+="    SELECT";
-      SQL+="      `DC_SOURCE`.`SOURCE`,";
-      SQL+="      `DC_SOURCE`.`EDITOR`";
+      SQL+="      `DC_INDEX`.`SOURCE`,";
+      SQL+="      `DC_INDEX`.`EDITOR`";
       SQL+="    FROM";
       SQL+="      `CHM62EDT_SPECIES`";
       SQL+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
       SQL+="      INNER JOIN `CHM62EDT_REPORTS` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`)";
       SQL+="      INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_REPORTS`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
       SQL+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_REPORTS`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
       SQL+="    WHERE";
       SQL+="      (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` IN ('DISTRIBUTION_STATUS','LANGUAGE','CONS_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND'))";
       SQL+="    AND "+SQLWhere;
       SQL+="    UNION";
       SQL+="    SELECT";
-      SQL+="      `DC_SOURCE`.`SOURCE`,";
-      SQL+="      `DC_SOURCE`.`EDITOR`";
+      SQL+="      `DC_INDEX`.`SOURCE`,";
+      SQL+="      `DC_INDEX`.`EDITOR`";
       SQL+="    FROM";
       SQL+="      `CHM62EDT_SPECIES`";
       SQL+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
       SQL+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
       SQL+="    WHERE "+SQLWhere;
       SQL+="    UNION";
       SQL+="    SELECT";
-      SQL+="      `DC_SOURCE`.`SOURCE`,";
-      SQL+="      `DC_SOURCE`.`EDITOR`";
+      SQL+="      `DC_INDEX`.`SOURCE`,";
+      SQL+="      `DC_INDEX`.`EDITOR`";
       SQL+="    FROM";
       SQL+="      `CHM62EDT_SPECIES`";
       SQL+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
       SQL+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
       SQL+="    WHERE "+SQLWhere;
       SQL+="    UNION";
       SQL+="    SELECT";
-      SQL+="      `DC_SOURCE`.`SOURCE`,";
-      SQL+="      `DC_SOURCE`.`EDITOR`";
+      SQL+="      `DC_INDEX`.`SOURCE`,";
+      SQL+="      `DC_INDEX`.`EDITOR`";
       SQL+="    FROM";
       SQL+="      `CHM62EDT_SPECIES`";
       SQL+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
       SQL+="      INNER JOIN `CHM62EDT_TAXONOMY` ON (`CHM62EDT_SPECIES`.`ID_TAXONOMY` = `CHM62EDT_TAXONOMY`.`ID_TAXONOMY`)";
       SQL+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_TAXONOMY`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
       SQL+="    WHERE "+SQLWhere;
-      SQL+="    GROUP BY DC_SOURCE.SOURCE,DC_SOURCE.EDITOR";
-      SQL+="    ORDER BY `DC_SOURCE`.`SOURCE`";
+      SQL+="    GROUP BY DC_INDEX.SOURCE,DC_INDEX.EDITOR";
+      SQL+="    ORDER BY `DC_INDEX`.`SOURCE`";
       SQL+="    LIMIT 0,100";
     }
     if(natureobject.equalsIgnoreCase("Habitat")) {
       String isGoodHabitat = " IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',RIGHT(CHM62EDT_HABITAT.CODE_2000,2),1) <> IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '','00',2) AND IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',LENGTH(CHM62EDT_HABITAT.CODE_2000),1) = IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',4,1) ";
 
-      SQL="SELECT DISTINCT `DC_SOURCE`.`SOURCE`,`DC_SOURCE`.`EDITOR` FROM `CHM62EDT_HABITAT`";
+      SQL="SELECT DISTINCT `DC_INDEX`.`SOURCE`,`DC_INDEX`.`EDITOR` FROM `CHM62EDT_HABITAT`";
       SQL+=" INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
       SQL+=" INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-      SQL+=" INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
       if(oper.equalsIgnoreCase("Equal")) {
-        SQL+=" WHERE "+isGoodHabitat+" AND (`DC_SOURCE`.`SOURCE` = '"+ val + "') ORDER BY `DC_SOURCE`.`SOURCE`";
+        SQL+=" WHERE "+isGoodHabitat+" AND (`DC_INDEX`.`SOURCE` = '"+ val + "') ORDER BY `DC_INDEX`.`SOURCE`";
       } else {
         if(oper.equalsIgnoreCase("Contains")) {
-          SQL+=" WHERE "+isGoodHabitat+" AND (`DC_SOURCE`.`SOURCE` LIKE '%"+ val + "%') ORDER BY `DC_SOURCE`.`SOURCE`";
+          SQL+=" WHERE "+isGoodHabitat+" AND (`DC_INDEX`.`SOURCE` LIKE '%"+ val + "%') ORDER BY `DC_INDEX`.`SOURCE`";
         } else {
           if(oper.equalsIgnoreCase("Between")) {
-            SQL+=" WHERE "+isGoodHabitat+" AND (`DC_SOURCE`.`SOURCE` = '"+ val + "') ORDER BY `DC_SOURCE`.`SOURCE`";
+            SQL+=" WHERE "+isGoodHabitat+" AND (`DC_INDEX`.`SOURCE` = '"+ val + "') ORDER BY `DC_INDEX`.`SOURCE`";
           } else {
-            SQL+=" WHERE "+isGoodHabitat+" AND (`DC_SOURCE`.`SOURCE` LIKE '%"+ val + "%') ORDER BY `DC_SOURCE`.`SOURCE`";
+            SQL+=" WHERE "+isGoodHabitat+" AND (`DC_INDEX`.`SOURCE` LIKE '%"+ val + "%') ORDER BY `DC_INDEX`.`SOURCE`";
           }
         }
       }
@@ -494,96 +477,79 @@
     if(natureobject.equalsIgnoreCase("Species")) {
       String SQLWhere="";
       if(oper.equalsIgnoreCase("Equal")) {
-        SQLWhere=" (`DC_TITLE`.`TITLE` = '"+ val + "')";
+        SQLWhere=" (`DC_INDEX`.`TITLE` = '"+ val + "')";
       } else {
         if(oper.equalsIgnoreCase("Contains")) {
-          SQLWhere=" (`DC_TITLE`.`TITLE` LIKE '%"+ val + "%')";
+          SQLWhere=" (`DC_INDEX`.`TITLE` LIKE '%"+ val + "%')";
         } else {
           if(oper.equalsIgnoreCase("Between")) {
-            SQLWhere=" (`DC_TITLE`.`TITLE` = '"+ val + "')";
+            SQLWhere=" (`DC_INDEX`.`TITLE` = '"+ val + "')";
           } else {
-            SQLWhere=" (`DC_TITLE`.`TITLE` LIKE '%"+ val + "%')";
+            SQLWhere=" (`DC_INDEX`.`TITLE` LIKE '%"+ val + "%')";
           }
         }
       }
       SQL+="    SELECT";
-      SQL+="      `DC_TITLE`.`TITLE`,";
-      SQL+="      `DC_TITLE`.`ALTERNATIVE`";
+      SQL+="      `DC_INDEX`.`TITLE`,";
+      SQL+="      `DC_INDEX`.`ALTERNATIVE`";
       SQL+="    FROM";
       SQL+="      `CHM62EDT_SPECIES`";
       SQL+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
       SQL+="      INNER JOIN `CHM62EDT_REPORTS` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`)";
       SQL+="      INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_REPORTS`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
       SQL+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_REPORTS`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
       SQL+="    WHERE";
       SQL+="      (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` IN ('DISTRIBUTION_STATUS','LANGUAGE','CONS_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND'))";
       SQL+="    AND "+SQLWhere;
       SQL+="    UNION";
       SQL+="    SELECT";
-      SQL+="      `DC_TITLE`.`TITLE`,";
-      SQL+="      `DC_TITLE`.`ALTERNATIVE`";
+      SQL+="      `DC_INDEX`.`TITLE`,";
+      SQL+="      `DC_INDEX`.`ALTERNATIVE`";
       SQL+="    FROM";
       SQL+="      `CHM62EDT_SPECIES`";
       SQL+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
       SQL+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
       SQL+="    WHERE "+SQLWhere;
       SQL+="    UNION";
       SQL+="    SELECT";
-      SQL+="      `DC_TITLE`.`TITLE`,";
-      SQL+="      `DC_TITLE`.`ALTERNATIVE`";
+      SQL+="      `DC_INDEX`.`TITLE`,";
+      SQL+="      `DC_INDEX`.`ALTERNATIVE`";
       SQL+="    FROM";
       SQL+="      `CHM62EDT_SPECIES`";
       SQL+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
       SQL+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
       SQL+="    WHERE "+SQLWhere;
       SQL+="    UNION";
       SQL+="    SELECT";
-      SQL+="      `DC_TITLE`.`TITLE`,";
-      SQL+="      `DC_TITLE`.`ALTERNATIVE`";
+      SQL+="      `DC_INDEX`.`TITLE`,";
+      SQL+="      `DC_INDEX`.`ALTERNATIVE`";
       SQL+="    FROM";
       SQL+="      `CHM62EDT_SPECIES`";
       SQL+="      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
       SQL+="      INNER JOIN `CHM62EDT_TAXONOMY` ON (`CHM62EDT_SPECIES`.`ID_TAXONOMY` = `CHM62EDT_TAXONOMY`.`ID_TAXONOMY`)";
       SQL+="      INNER JOIN `DC_INDEX` ON (`CHM62EDT_TAXONOMY`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-      SQL+="      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
       SQL+="    WHERE "+SQLWhere;
-      SQL+="    GROUP BY DC_SOURCE.SOURCE,DC_SOURCE.EDITOR";
-      SQL+="    ORDER BY `DC_TITLE`.`TITLE`";
+      SQL+="    GROUP BY DC_INDEX.SOURCE,DC_INDEX.EDITOR";
+      SQL+="    ORDER BY `DC_INDEX`.`TITLE`";
       SQL+="    LIMIT 0,100";
     }
 
     if(natureobject.equalsIgnoreCase("Habitat")) {
       String isGoodHabitat = " IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',RIGHT(CHM62EDT_HABITAT.CODE_2000,2),1) <> IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '','00',2) AND IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',LENGTH(CHM62EDT_HABITAT.CODE_2000),1) = IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',4,1) ";
 
-      SQL="SELECT DISTINCT `DC_TITLE`.`TITLE`,`DC_TITLE`.`ALTERNATIVE` FROM `CHM62EDT_HABITAT`";
+      SQL="SELECT DISTINCT `DC_INDEX`.`TITLE`,`DC_INDEX`.`ALTERNATIVE` FROM `CHM62EDT_HABITAT`";
       SQL+=" INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_HABITAT`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
       SQL+=" INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-      SQL+=" INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
       if(oper.equalsIgnoreCase("Equal")) {
-        SQL+=" WHERE "+isGoodHabitat+" AND  (`DC_TITLE`.`TITLE` = '"+ val + "') ORDER BY `DC_TITLE`.`TITLE`";
+        SQL+=" WHERE "+isGoodHabitat+" AND  (`DC_INDEX`.`TITLE` = '"+ val + "') ORDER BY `DC_INDEX`.`TITLE`";
       } else {
         if(oper.equalsIgnoreCase("Contains")) {
-          SQL+=" WHERE "+isGoodHabitat+" AND  (`DC_TITLE`.`TITLE` LIKE '%"+ val + "%') ORDER BY `DC_TITLE`.`TITLE`";
+          SQL+=" WHERE "+isGoodHabitat+" AND  (`DC_INDEX`.`TITLE` LIKE '%"+ val + "%') ORDER BY `DC_INDEX`.`TITLE`";
         } else {
           if(oper.equalsIgnoreCase("Between")) {
-            SQL+=" WHERE "+isGoodHabitat+" AND  (`DC_TITLE`.`TITLE` = '"+ val + "') ORDER BY `DC_TITLE`.`TITLE`";
+            SQL+=" WHERE "+isGoodHabitat+" AND  (`DC_INDEX`.`TITLE` = '"+ val + "') ORDER BY `DC_INDEX`.`TITLE`";
           } else {
-            SQL+=" WHERE "+isGoodHabitat+" AND  (`DC_TITLE`.`TITLE` LIKE '%"+ val + "%') ORDER BY `DC_TITLE`.`TITLE`";
+            SQL+=" WHERE "+isGoodHabitat+" AND  (`DC_INDEX`.`TITLE` LIKE '%"+ val + "%') ORDER BY `DC_INDEX`.`TITLE`";
           }
         }
       }

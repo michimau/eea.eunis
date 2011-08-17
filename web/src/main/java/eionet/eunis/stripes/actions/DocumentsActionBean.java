@@ -20,23 +20,7 @@ import ro.finsiel.eunis.jrfTables.ReferencesDomain;
 import ro.finsiel.eunis.utilities.EunisUtil;
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dao.IDocumentsDao;
-import eionet.eunis.dto.DcContributorDTO;
-import eionet.eunis.dto.DcCoverageDTO;
-import eionet.eunis.dto.DcCreatorDTO;
-import eionet.eunis.dto.DcDateDTO;
-import eionet.eunis.dto.DcDescriptionDTO;
-import eionet.eunis.dto.DcFormatDTO;
-import eionet.eunis.dto.DcIdentifierDTO;
 import eionet.eunis.dto.DcIndexDTO;
-import eionet.eunis.dto.DcLanguageDTO;
-import eionet.eunis.dto.DcObjectDTO;
-import eionet.eunis.dto.DcPublisherDTO;
-import eionet.eunis.dto.DcRelationDTO;
-import eionet.eunis.dto.DcRightsDTO;
-import eionet.eunis.dto.DcSourceDTO;
-import eionet.eunis.dto.DcSubjectDTO;
-import eionet.eunis.dto.DcTitleDTO;
-import eionet.eunis.dto.DcTypeDTO;
 import eionet.eunis.dto.DocumentDTO;
 import eionet.eunis.dto.PairDTO;
 import eionet.eunis.rdf.GenerateDocumentRDF;
@@ -57,22 +41,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
 
     private String iddoc;
     private CustomPaginatedList<DocumentDTO> docs;
-    private DcTitleDTO dcTitle;
-    private DcSourceDTO dcSource;
-    private DcContributorDTO dcContributor;
-    private DcCoverageDTO dcCoverage;
-    private DcCreatorDTO dcCreator;
-    private DcDateDTO dcDate;
-    private DcDescriptionDTO dcDescription;
-    private DcFormatDTO dcFormat;
-    private DcIdentifierDTO dcIdentifier;
     private DcIndexDTO dcIndex;
-    private DcLanguageDTO dcLanguage;
-    private DcPublisherDTO dcPublisher;
-    private DcRelationDTO dcRelation;
-    private DcRightsDTO dcRights;
-    private DcSubjectDTO dcSubject;
-    private DcTypeDTO dcType;
 
     // selected tab
     private String tab;
@@ -129,29 +98,13 @@ public class DocumentsActionBean extends AbstractStripesAction {
 
         if (!StringUtils.isBlank(iddoc) && EunisUtil.isNumber(iddoc)) {
             forwardPage = "/stripes/document.jsp";
-
-            dcTitle = dao.getDcTitle(iddoc);
-            dcSource = dao.getDcSource(iddoc);
-            dcContributor = dao.getDcContributor(iddoc);
-            dcCoverage = dao.getDcCoverage(iddoc);
-            dcCreator = dao.getDcCreator(iddoc);
-            dcDate = dao.getDcDate(iddoc);
-            dcDescription = dao.getDcDescription(iddoc);
-            dcFormat = dao.getDcFormat(iddoc);
-            dcIdentifier = dao.getDcIdentifier(iddoc);
             dcIndex = dao.getDcIndex(iddoc);
-            dcLanguage = dao.getDcLanguage(iddoc);
-            dcPublisher = dao.getDcPublisher(iddoc);
-            dcRelation = dao.getDcRelation(iddoc);
-            dcRights = dao.getDcRights(iddoc);
-            dcSubject = dao.getDcSubject(iddoc);
-            dcType = dao.getDcType(iddoc);
             btrail = "eea#" + eeaHome
             + ",home#index.jsp,documents#documents";
-            if (dcTitle != null) {
-                btrail += "," + dcTitle.getTitle();
+            if (dcIndex != null && dcIndex.getTitle() != null) {
+                btrail += "," + dcIndex.getTitle();
             }
-            if (dcTitle == null && dcSource == null) {
+            if (dcIndex == null) {
                 return new ErrorResolution(404);
             }
             try {
@@ -168,18 +121,12 @@ public class DocumentsActionBean extends AbstractStripesAction {
             } catch (CriteriaMissingException e) {
                 e.printStackTrace();
             }
-            tabsWithData.add(
-                    new Pair<String, String>("general",
-                            getContentManagement().cmsPhrase("General information")));
+            tabsWithData.add(new Pair<String, String>("general", getContentManagement().cmsPhrase("General information")));
             if (species != null && species.size() > 0) {
-                tabsWithData.add(
-                        new Pair<String, String>("species",
-                                getContentManagement().cmsPhrase("Species")));
+                tabsWithData.add(new Pair<String, String>("species", getContentManagement().cmsPhrase("Species")));
             }
             if (habitats != null && habitats.size() > 0) {
-                tabsWithData.add(
-                        new Pair<String, String>("habitats",
-                                getContentManagement().cmsPhrase("Habitats")));
+                tabsWithData.add(new Pair<String, String>("habitats", getContentManagement().cmsPhrase("Habitats")));
             }
 
             setMetaDescription("document");
@@ -204,9 +151,9 @@ public class DocumentsActionBean extends AbstractStripesAction {
         StringBuffer rdf = new StringBuffer();
         try {
             rdf.append(GenerateDocumentRDF.HEADER);
-            List<DcObjectDTO> objects = DaoFactory.getDaoFactory().getDocumentsDao().getDcObjects();
-            for (DcObjectDTO object : objects) {
-                GenerateDocumentRDF genRdf = new GenerateDocumentRDF(object.getId());
+            List<DcIndexDTO> objects = DaoFactory.getDaoFactory().getDocumentsDao().getDcObjects();
+            for (DcIndexDTO object : objects) {
+                GenerateDocumentRDF genRdf = new GenerateDocumentRDF(object);
                 rdf.append(genRdf.getDocumentRdf());
             }
             rdf.append(Constants.RDF_FOOTER);
@@ -254,132 +201,12 @@ public class DocumentsActionBean extends AbstractStripesAction {
         this.docs = docs;
     }
 
-    public DcTitleDTO getDcTitle() {
-        return dcTitle;
-    }
-
-    public void setDcTitle(DcTitleDTO dcTitle) {
-        this.dcTitle = dcTitle;
-    }
-
-    public DcSourceDTO getDcSource() {
-        return dcSource;
-    }
-
-    public void setDcSource(DcSourceDTO dcSource) {
-        this.dcSource = dcSource;
-    }
-
-    public DcContributorDTO getDcContributor() {
-        return dcContributor;
-    }
-
-    public void setDcContributor(DcContributorDTO dcContributor) {
-        this.dcContributor = dcContributor;
-    }
-
-    public DcCoverageDTO getDcCoverage() {
-        return dcCoverage;
-    }
-
-    public void setDcCoverage(DcCoverageDTO dcCoverage) {
-        this.dcCoverage = dcCoverage;
-    }
-
-    public DcCreatorDTO getDcCreator() {
-        return dcCreator;
-    }
-
-    public void setDcCreator(DcCreatorDTO dcCreator) {
-        this.dcCreator = dcCreator;
-    }
-
-    public DcDateDTO getDcDate() {
-        return dcDate;
-    }
-
-    public void setDcDate(DcDateDTO dcDate) {
-        this.dcDate = dcDate;
-    }
-
-    public DcDescriptionDTO getDcDescription() {
-        return dcDescription;
-    }
-
-    public void setDcDescription(DcDescriptionDTO dcDescription) {
-        this.dcDescription = dcDescription;
-    }
-
-    public DcFormatDTO getDcFormat() {
-        return dcFormat;
-    }
-
-    public void setDcFormat(DcFormatDTO dcFormat) {
-        this.dcFormat = dcFormat;
-    }
-
-    public DcIdentifierDTO getDcIdentifier() {
-        return dcIdentifier;
-    }
-
-    public void setDcIdentifier(DcIdentifierDTO dcIdentifier) {
-        this.dcIdentifier = dcIdentifier;
-    }
-
     public DcIndexDTO getDcIndex() {
         return dcIndex;
     }
 
     public void setDcIndex(DcIndexDTO dcIndex) {
         this.dcIndex = dcIndex;
-    }
-
-    public DcLanguageDTO getDcLanguage() {
-        return dcLanguage;
-    }
-
-    public void setDcLanguage(DcLanguageDTO dcLanguage) {
-        this.dcLanguage = dcLanguage;
-    }
-
-    public DcPublisherDTO getDcPublisher() {
-        return dcPublisher;
-    }
-
-    public void setDcPublisher(DcPublisherDTO dcPublisher) {
-        this.dcPublisher = dcPublisher;
-    }
-
-    public DcRelationDTO getDcRelation() {
-        return dcRelation;
-    }
-
-    public void setDcRelation(DcRelationDTO dcRelation) {
-        this.dcRelation = dcRelation;
-    }
-
-    public DcRightsDTO getDcRights() {
-        return dcRights;
-    }
-
-    public void setDcRights(DcRightsDTO dcRights) {
-        this.dcRights = dcRights;
-    }
-
-    public DcSubjectDTO getDcSubject() {
-        return dcSubject;
-    }
-
-    public void setDcSubject(DcSubjectDTO dcSubject) {
-        this.dcSubject = dcSubject;
-    }
-
-    public DcTypeDTO getDcType() {
-        return dcType;
-    }
-
-    public void setDcType(DcTypeDTO dcType) {
-        this.dcType = dcType;
     }
 
     public String getTab() {

@@ -5,6 +5,8 @@
 package ro.finsiel.eunis.jrfTables;
 
 
+import java.util.Date;
+
 import net.sf.jrf.domain.PersistentObject;
 
 
@@ -14,17 +16,21 @@ import net.sf.jrf.domain.PersistentObject;
  **/
 public class DcIndexPersist extends PersistentObject {
 
-    /**
-     * This is a database field.
-     **/
-    private Integer i_idDc = null;
+    private Integer idDc = null;
+    private String comment = null;
+    private int reference = -1;
+    private Date created = null;
+    private String title = null;
+    private String alternative = null;
+    private String publisher = null;
+    private String source = null;
+    private String editor = null;
+    private String journalTitle = null;
+    private String bookTitle = null;
+    private String journalIssue = null;
+    private String isbn = null;
+    private String url = null;
 
-    /**
-     * This is a database field.
-     **/
-    private String i_comment = null;
-
-    private int i_reference = -1;
 
     public DcIndexPersist() {
         super();
@@ -34,18 +40,18 @@ public class DcIndexPersist extends PersistentObject {
      * Getter for a database field.
      **/
     public String getComment() {
-        return i_comment;
+        return comment;
     }
 
     /**
      * Getter for a database field.
      **/
     public Integer getIdDc() {
-        return i_idDc;
+        return idDc;
     }
 
     public int getReference() {
-        return i_reference;
+        return reference;
     }
 
     /**
@@ -53,15 +59,15 @@ public class DcIndexPersist extends PersistentObject {
      * @param comment
      **/
     public void setComment(String comment) {
-        i_comment = comment;
+        comment = comment;
         this.markModifiedPersistentState();
     }
 
     public void setReference(Integer reference) {
         if (reference == null) {
-            i_reference = -1;
+            reference = -1;
         } else {
-            i_reference = reference.intValue();
+            reference = reference.intValue();
         }
         this.markModifiedPersistentState();
     }
@@ -71,9 +77,101 @@ public class DcIndexPersist extends PersistentObject {
      * @param idDc
      **/
     public void setIdDc(Integer idDc) {
-        i_idDc = idDc;
+        idDc = idDc;
         // Changing a primary key so we force this to new.
         this.forceNewPersistentState();
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAlternative() {
+        return alternative;
+    }
+
+    public void setAlternative(String alternative) {
+        this.alternative = alternative;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getEditor() {
+        return editor;
+    }
+
+    public void setEditor(String editor) {
+        this.editor = editor;
+    }
+
+    public String getJournalTitle() {
+        return journalTitle;
+    }
+
+    public void setJournalTitle(String journalTitle) {
+        this.journalTitle = journalTitle;
+    }
+
+    public String getBookTitle() {
+        return bookTitle;
+    }
+
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
+
+    public String getJournalIssue() {
+        return journalIssue;
+    }
+
+    public void setJournalIssue(String journalIssue) {
+        this.journalIssue = journalIssue;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setReference(int reference) {
+        this.reference = reference;
     }
 
 }

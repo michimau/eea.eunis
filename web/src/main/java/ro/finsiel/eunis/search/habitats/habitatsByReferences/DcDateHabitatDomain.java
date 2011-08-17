@@ -1,9 +1,9 @@
 package ro.finsiel.eunis.search.habitats.habitatsByReferences;
 
 
+import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
-import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.join.JoinTable;
 import net.sf.jrf.join.joincolumns.DateJoinColumn;
 import ro.finsiel.eunis.jrfTables.habitats.references.HabitatsBooksPersist;
@@ -58,8 +58,8 @@ public class DcDateHabitatDomain extends AbstractDomain {
 
         JoinTable Date = null;
 
-        Date = new JoinTable("DC_DATE E", "ID_DC", "ID_DC");
-        Date.addJoinColumn(new DateJoinColumn("CREATED", "created", "setcreated"));
+        Date = new JoinTable("DC_INDEX E", "ID_DC", "ID_DC");
+        Date.addJoinColumn(new DateJoinColumn("CREATED", "created", "setCreated"));
         habitatReferences.addJoinTable(Date);
 
     }

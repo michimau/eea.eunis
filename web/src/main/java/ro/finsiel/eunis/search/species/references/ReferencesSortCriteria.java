@@ -50,10 +50,10 @@ public class ReferencesSortCriteria extends AbstractSortCriteria {
         setAscendency(ascendency);
         // Initialize the mappings
         possibleSorts.put(SORT_NONE, "none"); // If none, then DO NOT SORT
-        possibleSorts.put(SORT_AUTHOR, "D.SOURCE"); // Author
-        possibleSorts.put(SORT_DATE, "E.CREATED"); // Date
-        possibleSorts.put(SORT_TITLE, "F.TITLE"); // Title
-        possibleSorts.put(SORT_EDITOR, "D.EDITOR"); // Editor
-        possibleSorts.put(SORT_PUBLISHER, "G.PUBLISHER"); // Publisher
+        possibleSorts.put(SORT_AUTHOR, "A.SOURCE"); // Author
+        possibleSorts.put(SORT_DATE, "A.CREATED"); // Date
+        possibleSorts.put(SORT_TITLE, "A.TITLE"); // Title
+        possibleSorts.put(SORT_EDITOR, "A.EDITOR"); // Editor
+        possibleSorts.put(SORT_PUBLISHER, "A.PUBLISHER"); // Publisher
     }
 }

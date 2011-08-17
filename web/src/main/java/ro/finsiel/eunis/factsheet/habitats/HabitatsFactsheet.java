@@ -60,8 +60,8 @@ import ro.finsiel.eunis.jrfTables.Chm62edtTemperatureDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtTemporalDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtUsageDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtWaterDomain;
-import ro.finsiel.eunis.jrfTables.DcTitleDomain;
-import ro.finsiel.eunis.jrfTables.DcTitlePersist;
+import ro.finsiel.eunis.jrfTables.DcIndexDomain;
+import ro.finsiel.eunis.jrfTables.DcIndexPersist;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatCountryDomain;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalDomain;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.OtherClassificationDomain;
@@ -1618,47 +1618,47 @@ public class HabitatsFactsheet {
                             0)
                             != null
                             && ((Chm62edtReportAttributesPersist) attributes.get(0)).getName().equalsIgnoreCase(
-                                    "probability")
-                                    ? ((Chm62edtReportAttributesPersist) attributes.get(0)).getValue()
-                                            : ((Chm62edtReportAttributesPersist) attributes.get(
-                                                    1)
-                                                    != null
-                                                    && ((Chm62edtReportAttributesPersist) attributes.get(1)).getName().equalsIgnoreCase(
-                                                            "probability")
-                                                            ? ((Chm62edtReportAttributesPersist) attributes.get(1)).getValue()
-                                                                    : ""));
+                            "probability")
+                            ? ((Chm62edtReportAttributesPersist) attributes.get(0)).getValue()
+                                    : ((Chm62edtReportAttributesPersist) attributes.get(
+                                            1)
+                                            != null
+                                            && ((Chm62edtReportAttributesPersist) attributes.get(1)).getName().equalsIgnoreCase(
+                                                    "probability")
+                                                    ? ((Chm62edtReportAttributesPersist) attributes.get(1)).getValue()
+                                                            : ""));
 
                     comment = ((Chm62edtReportAttributesPersist) attributes.get(
                             0)
                             != null
                             && ((Chm62edtReportAttributesPersist) attributes.get(0)).getName().equalsIgnoreCase(
-                                    "comment")
-                                    ? ((Chm62edtReportAttributesPersist) attributes.get(0)).getValue()
-                                            : ((Chm62edtReportAttributesPersist) attributes.get(
-                                                    1)
-                                                    != null
-                                                    && ((Chm62edtReportAttributesPersist) attributes.get(1)).getName().equalsIgnoreCase(
-                                                            "comment")
-                                                            ? ((Chm62edtReportAttributesPersist) attributes.get(1)).getValue()
-                                                                    : ""));
+                            "comment")
+                            ? ((Chm62edtReportAttributesPersist) attributes.get(0)).getValue()
+                                    : ((Chm62edtReportAttributesPersist) attributes.get(
+                                            1)
+                                            != null
+                                            && ((Chm62edtReportAttributesPersist) attributes.get(1)).getName().equalsIgnoreCase(
+                                                    "comment")
+                                                    ? ((Chm62edtReportAttributesPersist) attributes.get(1)).getValue()
+                                                            : ""));
                 } else {
                     probability = ((Chm62edtReportAttributesPersist) attributes.get(
                             0)
                             != null
                             ? (((Chm62edtReportAttributesPersist) attributes.get(0)).getName().equalsIgnoreCase(
-                                    "probability")
-                                    ? ((Chm62edtReportAttributesPersist) attributes.get(0)).getValue()
-                                            : "")
-                                            : "");
+                            "probability")
+                            ? ((Chm62edtReportAttributesPersist) attributes.get(0)).getValue()
+                                    : "")
+                                    : "");
 
                     comment = ((Chm62edtReportAttributesPersist) attributes.get(
                             0)
                             != null
                             ? (((Chm62edtReportAttributesPersist) attributes.get(0)).getName().equalsIgnoreCase(
-                                    "comment")
-                                    ? ((Chm62edtReportAttributesPersist) attributes.get(0)).getValue()
-                                            : "")
-                                            : "");
+                            "comment")
+                            ? ((Chm62edtReportAttributesPersist) attributes.get(0)).getValue()
+                                    : "")
+                                    : "");
                 }
             }
         } catch (Exception e) {
@@ -2121,11 +2121,10 @@ public class HabitatsFactsheet {
                 idDc = object.getIdDc();
             }
             if (idDc != null) {
-                List<DcTitlePersist> sources = new DcTitleDomain().findWhere(
-                        "ID_DC=" + idDc);
+                List<DcIndexPersist> sources = new DcIndexDomain().findWhere("ID_DC=" + idDc);
 
                 if (sources != null) {
-                    for (DcTitlePersist source : sources) {
+                    for (DcIndexPersist source : sources) {
                         edition = source.getTitle();
                     }
                 }

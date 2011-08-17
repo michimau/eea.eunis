@@ -276,7 +276,7 @@ public class JstlFunctions {
         String author = "";
 
         try {
-            List references = new ReferencesJoinDomain().findWhere("DC_INDEX.ID_DC = " + idDc);
+            List references = new ReferencesJoinDomain().findWhere("ID_DC = " + idDc);
 
             if (references != null && references.size() > 0) {
                 author = (((ReferencesJoinPersist) references.get(0)).getSource() == null ? ""

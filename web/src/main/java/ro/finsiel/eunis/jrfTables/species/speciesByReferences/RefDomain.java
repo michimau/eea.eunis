@@ -7,6 +7,14 @@ package ro.finsiel.eunis.jrfTables.species.speciesByReferences;
  */
 
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.Vector;
+
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
@@ -16,14 +24,6 @@ import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.speciesByReferences.ReferencesSearchCriteria;
 import ro.finsiel.eunis.search.species.speciesByReferences.ReferencesSortCriteria;
 import ro.finsiel.eunis.search.species.speciesByReferences.SpeciesRefWrapper;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.List;
-import java.util.StringTokenizer;
-import java.util.Vector;
 
 
 public class RefDomain implements Paginable {
@@ -65,7 +65,7 @@ public class RefDomain implements Paginable {
         this.sortCriteria = sortCriteria;
         if (searchCriteria.length < 1) {
             throw new CriteriaMissingException(
-                    "Unable to search because no search criteria was specified...");
+            "Unable to search because no search criteria was specified...");
         }
 
         // add filter from results page
@@ -108,33 +108,23 @@ public class RefDomain implements Paginable {
         try {
             Class.forName(SQL_DRV);
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            SQL = "SELECT DISTINCT H.ID_SPECIES " + "FROM DC_INDEX A "
-                    + "INNER JOIN CHM62EDT_NATURE_OBJECT B ON A.ID_DC=B.ID_DC "
-                    + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT "
-                    + "LEFT JOIN DC_SOURCE D ON A.ID_DC=D.ID_DC "
-                    + "LEFT JOIN DC_DATE E ON A.ID_DC=E.ID_DC "
-                    + "LEFT JOIN DC_TITLE F ON A.ID_DC=F.ID_DC "
-                    + "LEFT JOIN DC_PUBLISHER G ON A.ID_DC=G.ID_DC "
-                    + "WHERE 1=1 " + condition + " UNION "
-                    + "SELECT DISTINCT H.ID_SPECIES " + "FROM DC_INDEX A "
-                    + "INNER JOIN CHM62EDT_REPORTS B ON A.ID_DC=B.ID_DC "
-                    + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
-                    + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT "
-                    + "LEFT JOIN DC_SOURCE D ON A.ID_DC=D.ID_DC "
-                    + "LEFT JOIN DC_DATE E ON A.ID_DC=E.ID_DC "
-                    + "LEFT JOIN DC_TITLE F ON A.ID_DC=F.ID_DC "
-                    + "LEFT JOIN DC_PUBLISHER G ON A.ID_DC=G.ID_DC "
-                    + "WHERE 1=1 " + condition
-                    + " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') "
-                    + "UNION " + "SELECT DISTINCT H.ID_SPECIES "
-                    + "FROM DC_INDEX A "
-                    + "INNER JOIN CHM62EDT_TAXONOMY B ON A.ID_DC=B.ID_DC "
-                    + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_TAXONOMY = H.ID_TAXONOMY "
-                    + "LEFT JOIN DC_SOURCE D ON A.ID_DC=D.ID_DC "
-                    + "LEFT JOIN DC_DATE E ON A.ID_DC=E.ID_DC "
-                    + "LEFT JOIN DC_TITLE F ON A.ID_DC=F.ID_DC "
-                    + "LEFT JOIN DC_PUBLISHER G ON A.ID_DC=G.ID_DC "
-                    + "WHERE  1=1 " + condition;
+            SQL = "SELECT DISTINCT H.ID_SPECIES "
+                + "FROM DC_INDEX A "
+                + "INNER JOIN CHM62EDT_NATURE_OBJECT B ON A.ID_DC=B.ID_DC "
+                + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT "
+                + "WHERE 1=1 " + condition + " UNION "
+                + "SELECT DISTINCT H.ID_SPECIES " + "FROM DC_INDEX A "
+                + "INNER JOIN CHM62EDT_REPORTS B ON A.ID_DC=B.ID_DC "
+                + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
+                + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_NATURE_OBJECT = H.ID_NATURE_OBJECT "
+                + "WHERE 1=1 " + condition
+                + " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') "
+                + "UNION "
+                + "SELECT DISTINCT H.ID_SPECIES "
+                + "FROM DC_INDEX A "
+                + "INNER JOIN CHM62EDT_TAXONOMY B ON A.ID_DC=B.ID_DC "
+                + "INNER JOIN CHM62EDT_SPECIES H ON B.ID_TAXONOMY = H.ID_TAXONOMY "
+                + "WHERE  1=1 " + condition;
             // System.out.println("id list="+SQL);
             ps = con.prepareStatement(SQL);
             rs = ps.executeQuery(SQL);
@@ -172,22 +162,22 @@ public class RefDomain implements Paginable {
                 for (int i = 0; i < idSpeciesList.size(); i++) {
                     if (i < idSpeciesList.size() - 1) {
                         conditionIn += ((Integer) idSpeciesList.get(i)).toString()
-                                + ",";
+                        + ",";
                     } else {
                         conditionIn += ((Integer) idSpeciesList.get(i)).toString()
-                                + ")";
+                        + ")";
                     }
                 }
 
                 Class.forName(SQL_DRV);
                 con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
                 SQL = "SELECT H.ID_SPECIES,H.ID_SPECIES_LINK,H.ID_NATURE_OBJECT,H.SCIENTIFIC_NAME,A.COMMON_NAME,B.NAME,B.LEVEL,B.TAXONOMY_TREE "
-                        + "FROM CHM62EDT_SPECIES H "
-                        + "LEFT JOIN CHM62EDT_GROUP_SPECIES A ON H.ID_GROUP_SPECIES=A.ID_GROUP_SPECIES "
-                        + "LEFT JOIN CHM62EDT_TAXONOMY B ON (H.ID_TAXONOMY = B.ID_TAXONOMY ) "
-                        + // "LEFT JOIN CHM62EDT_TAXONOMY C ON (B.ID_TAXONOMY_LINK=C.ID_TAXONOMY ) " +
-                        "WHERE 1=1 " + conditionIn + condition
-                        + sortOrderAndLimit;
+                    + "FROM CHM62EDT_SPECIES H "
+                    + "LEFT JOIN CHM62EDT_GROUP_SPECIES A ON H.ID_GROUP_SPECIES=A.ID_GROUP_SPECIES "
+                    + "LEFT JOIN CHM62EDT_TAXONOMY B ON (H.ID_TAXONOMY = B.ID_TAXONOMY ) "
+                    + // "LEFT JOIN CHM62EDT_TAXONOMY C ON (B.ID_TAXONOMY_LINK=C.ID_TAXONOMY ) " +
+                    "WHERE 1=1 " + conditionIn + condition
+                    + sortOrderAndLimit;
 
                 ps = con.prepareStatement(SQL);
                 rs = ps.executeQuery(SQL);
@@ -197,13 +187,13 @@ public class RefDomain implements Paginable {
 
                         results.addElement(
                                 new SpeciesRefWrapper(new Integer(rs.getInt(1)),
-                                new Integer(rs.getInt(2)),
-                                new Integer(rs.getInt(3)), rs.getString(4),
-                                rs.getString(5),
-                                getTaxonomicName(rs.getString(7),
-                                rs.getString(6), rs.getString(8), "order_column"),
-                                getTaxonomicName(rs.getString(7),
-                                rs.getString(6), rs.getString(8), "family")));
+                                        new Integer(rs.getInt(2)),
+                                        new Integer(rs.getInt(3)), rs.getString(4),
+                                        rs.getString(5),
+                                        getTaxonomicName(rs.getString(7),
+                                                rs.getString(6), rs.getString(8), "order_column"),
+                                                getTaxonomicName(rs.getString(7),
+                                                        rs.getString(6), rs.getString(8), "family")));
                     }
                 }
                 ps.close();
@@ -234,10 +224,10 @@ public class RefDomain implements Paginable {
                 for (int i = 0; i < idSpeciesList.size(); i++) {
                     if (i < idSpeciesList.size() - 1) {
                         conditionIn += ((Integer) idSpeciesList.get(i)).toString()
-                                + ",";
+                        + ",";
                     } else {
                         conditionIn += ((Integer) idSpeciesList.get(i)).toString()
-                                + ")";
+                        + ")";
                     }
                 }
 
@@ -245,10 +235,10 @@ public class RefDomain implements Paginable {
                 con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
                 SQL = "SELECT count(ID_SPECIES) " + "FROM CHM62EDT_SPECIES H "
-                        + "LEFT JOIN CHM62EDT_GROUP_SPECIES A ON H.ID_GROUP_SPECIES=A.ID_GROUP_SPECIES "
-                        + "LEFT JOIN CHM62EDT_TAXONOMY B ON (H.ID_TAXONOMY = B.ID_TAXONOMY ) "
-                        + // "LEFT JOIN CHM62EDT_TAXONOMY C ON (B.ID_TAXONOMY_LINK=C.ID_TAXONOMY ) " +
-                        "WHERE 1=1 " + conditionIn + condition;
+                + "LEFT JOIN CHM62EDT_GROUP_SPECIES A ON H.ID_GROUP_SPECIES=A.ID_GROUP_SPECIES "
+                + "LEFT JOIN CHM62EDT_TAXONOMY B ON (H.ID_TAXONOMY = B.ID_TAXONOMY ) "
+                + // "LEFT JOIN CHM62EDT_TAXONOMY C ON (B.ID_TAXONOMY_LINK=C.ID_TAXONOMY ) " +
+                "WHERE 1=1 " + conditionIn + condition;
                 // System.out.println("sql1="+SQL);
                 ps = con.prepareStatement(SQL);
                 rs = ps.executeQuery(SQL);
@@ -292,7 +282,7 @@ public class RefDomain implements Paginable {
 
         if (searchCriteria.length < 1) {
             throw new CriteriaMissingException(
-                    "Unable to search because no search criteria was specified...");
+            "Unable to search because no search criteria was specified...");
         }
 
         StringBuffer filterSQL = _prepareWhereSearch("ReferencesPart");
@@ -325,12 +315,10 @@ public class RefDomain implements Paginable {
 
         if (searchCriteria.length <= 0) {
             throw new CriteriaMissingException(
-                    "No criteria set for searching. Search interrupted.");
+            "No criteria set for searching. Search interrupted.");
         }
 
-        filterSQL.append(
-                Utilities.showEUNISInvalidatedSpecies(" H.VALID_NAME",
-                showInvalidatedSpecies));
+        filterSQL.append(Utilities.showEUNISInvalidatedSpecies(" H.VALID_NAME", showInvalidatedSpecies));
         for (int i = 0; i < searchCriteria.length; i++) {
             ReferencesSearchCriteria aCriteria = (ReferencesSearchCriteria) searchCriteria[i]; // upcast
 

@@ -45,8 +45,7 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
         String forwardPage = "/stripes/habitatsimporter.jsp";
 
         setMetaDescription("Import Habitats");
-        if (getContext().getSessionManager().isAuthenticated()
-                && getContext().getSessionManager().isImportExportData_RIGHT()) {
+        if (getContext().getSessionManager().isAuthenticated() && getContext().getSessionManager().isImportExportData_RIGHT()) {
             InputStream inputStreamHabitats = null;
             InputStream inputStreamHabitatsDesc = null;
             InputStream inputStreamClassCodes = null;
@@ -60,8 +59,7 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
                 if (fileReferences != null) {
                     inputStreamReferences = fileReferences.getInputStream();
 
-                    ReferencesImportParser parser = new ReferencesImportParser(
-                            sqlUtil);
+                    ReferencesImportParser parser = new ReferencesImportParser(sqlUtil);
 
                     parser.execute(inputStreamReferences);
                     fileReferences.delete();
@@ -75,8 +73,7 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
                 if (fileClassCodes != null) {
                     inputStreamClassCodes = fileClassCodes.getInputStream();
 
-                    ClassCodesImportParser parser = new ClassCodesImportParser(
-                            sqlUtil);
+                    ClassCodesImportParser parser = new ClassCodesImportParser(sqlUtil);
 
                     classif = parser.execute(inputStreamClassCodes);
                     fileClassCodes.delete();
@@ -88,8 +85,7 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
                 if (fileHabitats != null) {
                     inputStreamHabitats = fileHabitats.getInputStream();
 
-                    HabitatImportParser parser = new HabitatImportParser(sqlUtil,
-                            classif);
+                    HabitatImportParser parser = new HabitatImportParser(sqlUtil, classif);
 
                     parser.execute(inputStreamHabitats);
                     fileHabitats.delete();
@@ -101,8 +97,7 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
                 if (fileHabitatsDesc != null) {
                     inputStreamHabitatsDesc = fileHabitatsDesc.getInputStream();
 
-                    HabitatDescImportParser parser = new HabitatDescImportParser(
-                            sqlUtil);
+                    HabitatDescImportParser parser = new HabitatDescImportParser(sqlUtil);
 
                     parser.execute(inputStreamHabitatsDesc);
                     fileHabitatsDesc.delete();
@@ -114,8 +109,7 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
                 if (fileHabitatClassCodes != null) {
                     inputStreamHabitatClassCodes = fileHabitatClassCodes.getInputStream();
 
-                    HabitatClassCodeImportParser parser = new HabitatClassCodeImportParser(
-                            sqlUtil);
+                    HabitatClassCodeImportParser parser = new HabitatClassCodeImportParser(sqlUtil);
 
                     parser.execute(inputStreamHabitatClassCodes);
                     fileHabitatClassCodes.delete();

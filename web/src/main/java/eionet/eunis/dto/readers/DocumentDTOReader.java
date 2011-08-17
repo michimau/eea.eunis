@@ -20,7 +20,6 @@ public class DocumentDTOReader extends ResultSetBaseReader<DocumentDTO> {
         DocumentDTO docDTO = new DocumentDTO();
 
         docDTO.setIdDoc(rs.getString("ID_DC"));
-        docDTO.setIdTitle(rs.getString("ID_TITLE"));
         docDTO.setTitle(rs.getString("TITLE"));
         docDTO.setAlternative(rs.getString("ALTERNATIVE"));
         docDTO.setAuthor(rs.getString("SOURCE"));

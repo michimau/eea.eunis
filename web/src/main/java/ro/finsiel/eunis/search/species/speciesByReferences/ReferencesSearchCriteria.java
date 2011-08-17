@@ -1,11 +1,11 @@
 package ro.finsiel.eunis.search.species.speciesByReferences;
 
 
-import ro.finsiel.eunis.search.AbstractSearchCriteria;
-import ro.finsiel.eunis.search.Utilities;
-
 import java.util.Hashtable;
 import java.util.Vector;
+
+import ro.finsiel.eunis.search.AbstractSearchCriteria;
+import ro.finsiel.eunis.search.Utilities;
 
 
 /**
@@ -193,17 +193,17 @@ public class ReferencesSearchCriteria extends AbstractSearchCriteria {
                     } else {
                         put_and.addElement("true");
                     }
-                    sql.append(Utilities.prepareSQLOperator("D.SOURCE", author, relationOpAuthor));
+                    sql.append(Utilities.prepareSQLOperator("A.SOURCE", author, relationOpAuthor));
                 }
             }
 
             if (
                     (
-                    (null != date && !date.equalsIgnoreCase("") && !date.equalsIgnoreCase("null"))
-                    || (null != date1 && !date1.equalsIgnoreCase("") && !date1.equalsIgnoreCase("null"))
+                            (null != date && !date.equalsIgnoreCase("") && !date.equalsIgnoreCase("null"))
+                            || (null != date1 && !date1.equalsIgnoreCase("") && !date1.equalsIgnoreCase("null"))
                     )
-                            && null != relationOpDate
-                            ) {
+                    && null != relationOpDate
+            ) {
 
                 if (put_and.contains("true")) {
                     sql.append(" AND ");
@@ -213,16 +213,16 @@ public class ReferencesSearchCriteria extends AbstractSearchCriteria {
 
                 if (relationOpDate.compareTo(Utilities.OPERATOR_BETWEEN) == 0) {
                     if (date == null || (date != null && date.equalsIgnoreCase(""))) {
-                        sql.append(" E.CREATED <=" + date1 + " ");
+                        sql.append(" A.CREATED <=" + date1 + " ");
                     }
                     if (date1 == null || (date1 != null && date1.equalsIgnoreCase(""))) {
-                        sql.append(" E.CREATED >=" + date + " ");
+                        sql.append(" A.CREATED >=" + date + " ");
                     }
                     if (date != null && date1 != null && !date.equalsIgnoreCase("") && !date1.equalsIgnoreCase("")) {
-                        sql.append(" E.CREATED >=" + date + " AND E.CREATED<=" + date1 + " ");
+                        sql.append(" A.CREATED >=" + date + " AND A.CREATED<=" + date1 + " ");
                     }
                 } else {
-                    sql.append(Utilities.prepareSQLOperator("E.CREATED", date, relationOpDate));
+                    sql.append(Utilities.prepareSQLOperator("A.CREATED", date, relationOpDate));
                 }
             }
 
@@ -233,7 +233,7 @@ public class ReferencesSearchCriteria extends AbstractSearchCriteria {
                     } else {
                         put_and.addElement("true");
                     }
-                    sql.append(Utilities.prepareSQLOperator("F.TITLE", title, relationOpTitle));
+                    sql.append(Utilities.prepareSQLOperator("A.TITLE", title, relationOpTitle));
                 }
             }
 
@@ -244,7 +244,7 @@ public class ReferencesSearchCriteria extends AbstractSearchCriteria {
                     } else {
                         put_and.addElement("true");
                     }
-                    sql.append(Utilities.prepareSQLOperator("D.EDITOR", editor, relationOpEditor));
+                    sql.append(Utilities.prepareSQLOperator("A.EDITOR", editor, relationOpEditor));
                 }
             }
 
@@ -255,7 +255,7 @@ public class ReferencesSearchCriteria extends AbstractSearchCriteria {
                     } else {
                         put_and.addElement("true");
                     }
-                    sql.append(Utilities.prepareSQLOperator("G.PUBLISHER", publisher, relationOpPublisher));
+                    sql.append(Utilities.prepareSQLOperator("A.PUBLISHER", publisher, relationOpPublisher));
                 }
             }
 
@@ -358,11 +358,11 @@ public class ReferencesSearchCriteria extends AbstractSearchCriteria {
 
         if (
                 (
-                (null != date && !date.equalsIgnoreCase("") && !date.equalsIgnoreCase("null"))
-                || (null != date1 && !date1.equalsIgnoreCase("") && !date1.equalsIgnoreCase("null"))
+                        (null != date && !date.equalsIgnoreCase("") && !date.equalsIgnoreCase("null"))
+                        || (null != date1 && !date1.equalsIgnoreCase("") && !date1.equalsIgnoreCase("null"))
                 )
-                        && null != relationOpDate
-                        ) {
+                && null != relationOpDate
+        ) {
             if (put_and.contains("true")) {
                 sql.append(" AND ");
             } else {
@@ -385,7 +385,7 @@ public class ReferencesSearchCriteria extends AbstractSearchCriteria {
 
             sql.append(
                     Utilities.prepareHumanString("Year", (date == null || date.equalsIgnoreCase("") ? date1 : date), date, date1,
-                    relationOpForDate));
+                            relationOpForDate));
         }
 
         if (null != title && null != relationOpTitle) {

@@ -1,9 +1,9 @@
 package ro.finsiel.eunis.jrfTables;
 
 
+import net.sf.jrf.column.columnspecs.CompoundPrimaryKeyColumnSpec;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
-import net.sf.jrf.column.columnspecs.CompoundPrimaryKeyColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 import net.sf.jrf.join.JoinTable;
@@ -36,26 +36,15 @@ public class Chm62edtHabitatReferenceDomain extends AbstractDomain {
         this.addColumnSpec(
                 new CompoundPrimaryKeyColumnSpec(
                         new IntegerColumnSpec("ID_HABITAT", "getIdHabitat",
-                        "setIdHabitat", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY),
-                        new IntegerColumnSpec("ID_DC", "getIdDc", "setIdDc",
-                        DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY)));
-        this.addColumnSpec(
-                new StringColumnSpec("HAVE_SOURCE", "getHaveSource",
-                "setHaveSource", DEFAULT_TO_ZERO));
-        this.addColumnSpec(
-                new StringColumnSpec("HAVE_OTHER_REFERENCES", "getHaveRef",
-                "setHaveRef", DEFAULT_TO_ZERO));
+                                "setIdHabitat", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY),
+                                new IntegerColumnSpec("ID_DC", "getIdDc", "setIdDc",
+                                        DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY)));
+        this.addColumnSpec(new StringColumnSpec("HAVE_SOURCE", "getHaveSource", "setHaveSource", DEFAULT_TO_ZERO));
+        this.addColumnSpec(new StringColumnSpec("HAVE_OTHER_REFERENCES", "getHaveRef", "setHaveRef", DEFAULT_TO_ZERO));
 
-        JoinTable sourceTable = new JoinTable("DC_SOURCE D", "ID_DC", "ID_DC");
-
-        sourceTable.addJoinColumn(
-                new StringJoinColumn("SOURCE", "getSource", "setSource"));
-        this.addJoinTable(sourceTable);
-    
-        JoinTable titleTable = new JoinTable("DC_TITLE T", "ID_DC", "ID_DC");
-
-        titleTable.addJoinColumn(
-                new StringJoinColumn("TITLE", "getTitle", "setTitle"));
-        this.addJoinTable(titleTable);
+        JoinTable indexTable = new JoinTable("DC_INDEX D", "ID_DC", "ID_DC");
+        indexTable.addJoinColumn(new StringJoinColumn("SOURCE", "getSource", "setSource"));
+        indexTable.addJoinColumn(new StringJoinColumn("TITLE", "getTitle", "setTitle"));
+        this.addJoinTable(indexTable);
     }
 }

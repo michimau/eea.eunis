@@ -1,12 +1,12 @@
 package ro.finsiel.eunis.search;
 
 
-import java.util.Vector;
-import java.util.List;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.DriverManager;
+import java.util.List;
+import java.util.Vector;
 
 
 /**
@@ -106,19 +106,19 @@ public class References {
                 }
                 sql.append(
                         Utilities.prepareSQLOperator("SOURCE", author,
-                        relationOpAuthor));
+                                relationOpAuthor));
             }
         }
 
         if (
                 (
-                (null != date && !date.equalsIgnoreCase("")
-                && !date.equalsIgnoreCase("null"))
-                || (null != date1 && !date1.equalsIgnoreCase("")
-                && !date1.equalsIgnoreCase("null"))
+                        (null != date && !date.equalsIgnoreCase("")
+                                && !date.equalsIgnoreCase("null"))
+                                || (null != date1 && !date1.equalsIgnoreCase("")
+                                        && !date1.equalsIgnoreCase("null"))
                 )
-                        && null != relationOpDate
-                        ) {
+                && null != relationOpDate
+        ) {
 
             if (put_and.contains("true")) {
                 sql.append(" AND ");
@@ -143,7 +143,7 @@ public class References {
             } else {
                 sql.append(
                         Utilities.prepareSQLOperator("CREATED", date,
-                        relationOpDate));
+                                relationOpDate));
             }
         }
 
@@ -156,7 +156,7 @@ public class References {
                 }
                 sql.append(
                         Utilities.prepareSQLOperator("TITLE", title,
-                        relationOpTitle));
+                                relationOpTitle));
             }
         }
 
@@ -169,7 +169,7 @@ public class References {
                 }
                 sql.append(
                         Utilities.prepareSQLOperator("EDITOR", editor,
-                        relationOpEditor));
+                                relationOpEditor));
             }
         }
 
@@ -182,7 +182,7 @@ public class References {
                 }
                 sql.append(
                         Utilities.prepareSQLOperator("PUBLISHER", publisher,
-                        relationOpPublisher));
+                                relationOpPublisher));
             }
         }
 
@@ -229,30 +229,26 @@ public class References {
             SQL_REFERENCES = "SELECT DISTINCT ";
 
             if (fromWhere.equalsIgnoreCase("author")) {
-                SQL_REFERENCES += " `DC_SOURCE`.`SOURCE`";
+                SQL_REFERENCES += " `DC_INDEX`.`SOURCE`";
             }
             if (fromWhere.equalsIgnoreCase("date")) {
-                SQL_REFERENCES += " CONCAT(`DC_DATE`.`CREATED`)";
+                SQL_REFERENCES += " CONCAT(`DC_INDEX`.`CREATED`)";
             }
             if (fromWhere.equalsIgnoreCase("title")) {
-                SQL_REFERENCES += " `DC_TITLE`.`TITLE`";
+                SQL_REFERENCES += " `DC_INDEX`.`TITLE`";
             }
             if (fromWhere.equalsIgnoreCase("editor")) {
-                SQL_REFERENCES += " `DC_SOURCE`.`EDITOR`";
+                SQL_REFERENCES += " `DC_INDEX`.`EDITOR`";
             }
             if (fromWhere.equalsIgnoreCase("publisher")) {
-                SQL_REFERENCES += " `DC_PUBLISHER`.`PUBLISHER`";
+                SQL_REFERENCES += " `DC_INDEX`.`PUBLISHER`";
             }
 
             SQL_REFERENCES += " FROM  `DC_INDEX`";
-            SQL_REFERENCES += " INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-            SQL_REFERENCES += " INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
-            SQL_REFERENCES += " INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-            SQL_REFERENCES += " INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
             // !!added to get only references with species and habitats
             SQL_REFERENCES += " INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`DC_INDEX`.`ID_DC` = `CHM62EDT_NATURE_OBJECT`.`ID_DC`)";
             SQL_REFERENCES += " WHERE `DC_INDEX`.`COMMENT` = 'REFERENCES'";
-            SQL_REFERENCES += " AND `DC_DATE`.`CREATED` > 1000";
+            SQL_REFERENCES += " AND `DC_INDEX`.`CREATED` > 1000";
 
             if (sql.length() > 0) {
                 SQL_REFERENCES += " AND " + sql;

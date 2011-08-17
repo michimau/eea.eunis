@@ -2,10 +2,10 @@
 
 <%@ include file="/stripes/common/taglibs.jsp"%>	
 
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Document - ${actionBean.dcTitle.title}">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Document - ${actionBean.dcIndex.title}">
 	<stripes:layout-component name="contents">
 			<!-- MAIN CONTENT -->
-				<h1 class="documentFirstHeading">${actionBean.dcTitle.title}</h1>
+				<h1 class="documentFirstHeading">${actionBean.dcIndex.title}</h1>
 				<div class="documentActions">
 					<h5 class="hiddenStructure">${eunis:cms(actionBean.contentManagement, 'Document Actions')}</h5>
 					${eunis:cmsTitle(actionBean.contentManagement, 'Document Actions')}
@@ -51,77 +51,69 @@
                   		<col style="width:80%"/>
 						<tr>
 							<td>Title</td>
-							<td><strong>${eunis:replaceTags(actionBean.dcTitle.title)}</strong></td>
+							<td><strong>${eunis:replaceTags(actionBean.dcIndex.title)}</strong></td>
 						</tr>
 						<tr class="zebraeven">
 							<td>Alternative title</td>
-							<td><strong>${eunis:replaceTags(actionBean.dcTitle.alternative)}</strong></td>
+							<td><strong>${eunis:replaceTags(actionBean.dcIndex.alternative)}</strong></td>
 						</tr>
 						<tr>
 							<td>Source</td>
-							<td><strong>${eunis:replaceTags(actionBean.dcSource.source)}</strong></td>
+							<td><strong>${eunis:replaceTags(actionBean.dcIndex.source)}</strong></td>
 						</tr>
 						<tr class="zebraeven">
 							<td>Editor</td>
-							<td><strong>${eunis:replaceTags(actionBean.dcSource.editor)}</strong></td>
+							<td><strong>${eunis:replaceTags(actionBean.dcIndex.editor)}</strong></td>
 						</tr>
 						<tr>
 							<td>Journal Title</td>
-							<td><strong>${eunis:replaceTags(actionBean.dcSource.journalTitle)}</strong></td>
+							<td><strong>${eunis:replaceTags(actionBean.dcIndex.journalTitle)}</strong></td>
 						</tr>
 						<tr class="zebraeven">
 							<td>Book Title</td>
-							<td><strong>${eunis:replaceTags(actionBean.dcSource.bookTitle)}</strong></td>
+							<td><strong>${eunis:replaceTags(actionBean.dcIndex.bookTitle)}</strong></td>
 						</tr>
 						<tr>
 							<td>Journal Issue</td>
-							<td><strong>${actionBean.dcSource.journalIssue}</strong></td>
+							<td><strong>${actionBean.dcIndex.journalIssue}</strong></td>
 						</tr>
 						<tr class="zebraeven">
 							<td>ISBN</td>
-							<td><strong>${actionBean.dcSource.isbn}</strong></td>
+							<td><strong>${actionBean.dcIndex.isbn}</strong></td>
 						</tr>
 						<tr>
-							<td>GEO Level</td>
-							<td><strong>${actionBean.dcSource.geoLevel}</strong></td>
+							<td>URL</td>
+							<td><a href="${eunis:replaceTags2(actionBean.dcIndex.url, true, true)}">${eunis:replaceTags2(actionBean.dcIndex.url, true, true)}</a></td>
 						</tr>
 						<tr class="zebraeven">
-							<td>URL</td>
-							<td><a href="${eunis:replaceTags2(actionBean.dcSource.url, true, true)}">${eunis:replaceTags2(actionBean.dcSource.url, true, true)}</a></td>
+							<td>Created</td>
+							<td><strong>${actionBean.dcIndex.created}</strong></td>
 						</tr>
-						<c:if test="${!empty actionBean.dcDate}">
-							<tr>
-								<td>Created</td>
-								<td><strong>${actionBean.dcDate.created}</strong></td>
-							</tr>
-						</c:if>
-						<c:if test="${!empty actionBean.dcPublisher}">
-							<tr class="zebraeven">
-								<td>Publisher</td>
-								<td><strong>${eunis:replaceTags(actionBean.dcPublisher.publisher)}</strong></td>
-							</tr>
-						</c:if>
+						<tr>
+							<td>Publisher</td>
+							<td><strong>${eunis:replaceTags(actionBean.dcIndex.publisher)}</strong></td>
+						</tr>
 					</table>
 	            </c:if>
 	            <c:if test="${actionBean.tab == 'species'}">
 	            	<h2>List of species scientific names related to this reference:</h2>
-			<ol>
+					<ol>
 	            	<c:forEach items="${actionBean.species}" var="spe" varStatus="loop">
 	            		<li style="background-color: ${loop.index % 2 == 0 ? '#FFFFFF' : '#EEEEEE'}">
                             <a href="species/${spe.key}">${spe.value}</a>
                         </li>
 	            	</c:forEach>
-			</ol>
+					</ol>
 	            </c:if>
 	            <c:if test="${actionBean.tab == 'habitats'}">
 	            	<h2>List of habitats related to this reference:</h2>
-			<ol>
+					<ol>
 	            	<c:forEach items="${actionBean.habitats}" var="habitat" varStatus="loop">
 	            		<li style="background-color: ${loop.index % 2 == 0 ? '#FFFFFF' : '#EEEEEE'}">
                             <a href="habitats/${habitat.key}">${habitat.value}</a>
                         </li>
-			</ol>
 	            	</c:forEach>
+	            	</ol>
 	            </c:if>
 
 		<!-- END MAIN CONTENT -->

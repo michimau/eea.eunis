@@ -1,11 +1,11 @@
 package ro.finsiel.eunis.search.species.advanced;
 
 
-import java.sql.SQLException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 
@@ -282,13 +282,13 @@ public class SpeciesAdvancedSearch {
                         sOperand = "Equal";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        SQLWhere = " (`DC_SOURCE`.`SOURCE` = '" + sValueMin + "')";
+                        SQLWhere = " (`DC_INDEX`.`SOURCE` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        SQLWhere = " (`DC_SOURCE`.`SOURCE` REGEXP '" + sValueMin + "')";
+                        SQLWhere = " (`DC_INDEX`.`SOURCE` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        SQLWhere = " (`DC_SOURCE`.`SOURCE` LIKE '%" + sValueMin + "%')";
+                        SQLWhere = " (`DC_INDEX`.`SOURCE` LIKE '%" + sValueMin + "%')";
                     }
                     speciesSQL += "    SELECT";
                     speciesSQL += "      `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`";
@@ -298,10 +298,6 @@ public class SpeciesAdvancedSearch {
                     speciesSQL += "      INNER JOIN `CHM62EDT_REPORTS` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`)";
                     speciesSQL += "      INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_REPORTS`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
                     speciesSQL += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_REPORTS`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
                     speciesSQL += "    WHERE";
                     speciesSQL += "      (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND'))";
                     speciesSQL += "    AND " + SQLWhere;
@@ -312,10 +308,6 @@ public class SpeciesAdvancedSearch {
                     speciesSQL += "      `CHM62EDT_SPECIES`";
                     speciesSQL += "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
                     speciesSQL += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
                     speciesSQL += "    WHERE " + SQLWhere;
                     speciesSQL += "    UNION";
                     speciesSQL += "    SELECT";
@@ -324,10 +316,6 @@ public class SpeciesAdvancedSearch {
                     speciesSQL += "      `CHM62EDT_SPECIES`";
                     speciesSQL += "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
                     speciesSQL += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
                     speciesSQL += "    WHERE " + SQLWhere;
                     speciesSQL += "    UNION";
                     speciesSQL += "    SELECT";
@@ -337,10 +325,6 @@ public class SpeciesAdvancedSearch {
                     speciesSQL += "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
                     speciesSQL += "      INNER JOIN `CHM62EDT_TAXONOMY` ON (`CHM62EDT_SPECIES`.`ID_TAXONOMY` = `CHM62EDT_TAXONOMY`.`ID_TAXONOMY`)";
                     speciesSQL += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_TAXONOMY`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
                     speciesSQL += "    WHERE " + SQLWhere;
                 }
 
@@ -350,20 +334,18 @@ public class SpeciesAdvancedSearch {
                     speciesSQL += " INNER JOIN `CHM62EDT_REPORTS` ON (`CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT` = `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`)";
                     speciesSQL += " INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_REPORTS`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
                     speciesSQL += " INNER JOIN `DC_INDEX` ON (`CHM62EDT_REPORTS`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-                    speciesSQL += " INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-                    speciesSQL += " INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
                     speciesSQL += " WHERE `CHM62EDT_REPORT_TYPE`.LOOKUP_TYPE='LEGAL_STATUS'";
                     if (sOperand.equalsIgnoreCase("Between")) {
                         sOperand = "Equal";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        speciesSQL += " AND (`DC_TITLE`.`TITLE` = '" + sValueMin + "')";
+                        speciesSQL += " AND (`DC_INDEX`.`TITLE` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        speciesSQL += " AND (`DC_TITLE`.`TITLE` REGEXP '" + sValueMin + "')";
+                        speciesSQL += " AND (`DC_INDEX`.`TITLE` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        speciesSQL += " AND (`DC_TITLE`.`TITLE` LIKE '%" + sValueMin + "%')";
+                        speciesSQL += " AND (`DC_INDEX`.`TITLE` LIKE '%" + sValueMin + "%')";
                     }
                 }
 
@@ -374,13 +356,13 @@ public class SpeciesAdvancedSearch {
                         sOperand = "Equal";
                     }
                     if (sOperand.equalsIgnoreCase("Equal")) {
-                        SQLWhere = " (`DC_TITLE`.`TITLE` = '" + sValueMin + "')";
+                        SQLWhere = " (`DC_INDEX`.`TITLE` = '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Regex")) {
-                        SQLWhere = " (`DC_TITLE`.`TITLE` REGEXP '" + sValueMin + "')";
+                        SQLWhere = " (`DC_INDEX`.`TITLE` REGEXP '" + sValueMin + "')";
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
-                        SQLWhere = " (`DC_TITLE`.`TITLE` LIKE '%" + sValueMin + "%')";
+                        SQLWhere = " (`DC_INDEX`.`TITLE` LIKE '%" + sValueMin + "%')";
                     }
                     speciesSQL += "    SELECT";
                     speciesSQL += "      `CHM62EDT_SPECIES`.`ID_NATURE_OBJECT`";
@@ -390,10 +372,6 @@ public class SpeciesAdvancedSearch {
                     speciesSQL += "      INNER JOIN `CHM62EDT_REPORTS` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`)";
                     speciesSQL += "      INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_REPORTS`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
                     speciesSQL += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_REPORTS`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
                     speciesSQL += "    WHERE";
                     speciesSQL += "      (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND'))";
                     speciesSQL += "    AND " + SQLWhere;
@@ -404,10 +382,6 @@ public class SpeciesAdvancedSearch {
                     speciesSQL += "      `CHM62EDT_SPECIES`";
                     speciesSQL += "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
                     speciesSQL += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
                     speciesSQL += "    WHERE " + SQLWhere;
                     speciesSQL += "    UNION";
                     speciesSQL += "    SELECT";
@@ -416,10 +390,6 @@ public class SpeciesAdvancedSearch {
                     speciesSQL += "      `CHM62EDT_SPECIES`";
                     speciesSQL += "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
                     speciesSQL += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
                     speciesSQL += "    WHERE " + SQLWhere;
                     speciesSQL += "    UNION";
                     speciesSQL += "    SELECT";
@@ -429,10 +399,6 @@ public class SpeciesAdvancedSearch {
                     speciesSQL += "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
                     speciesSQL += "      INNER JOIN `CHM62EDT_TAXONOMY` ON (`CHM62EDT_SPECIES`.`ID_TAXONOMY` = `CHM62EDT_TAXONOMY`.`ID_TAXONOMY`)";
                     speciesSQL += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_TAXONOMY`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_PUBLISHER` ON (`DC_INDEX`.`ID_DC` = `DC_PUBLISHER`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_TITLE` ON (`DC_INDEX`.`ID_DC` = `DC_TITLE`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_SOURCE` ON (`DC_INDEX`.`ID_DC` = `DC_SOURCE`.`ID_DC`)";
-                    speciesSQL += "      INNER JOIN `DC_DATE` ON (`DC_INDEX`.`ID_DC` = `DC_DATE`.`ID_DC`)";
                     speciesSQL += "    WHERE " + SQLWhere;
                 }
 
@@ -474,9 +440,9 @@ public class SpeciesAdvancedSearch {
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
                         speciesSQL += " AND (`CHM62EDT_CONSERVATION_STATUS`.`ID_CONSERVATION_STATUS` >= "
-                                + GetID(sValueMin, "CONSERVATION_STATUS", "", "") + ")";
+                            + GetID(sValueMin, "CONSERVATION_STATUS", "", "") + ")";
                         speciesSQL += " AND (`CHM62EDT_CONSERVATION_STATUS`.`ID_CONSERVATION_STATUS` <= "
-                                + GetID(sValueMax, "CONSERVATION_STATUS", "", "") + ")";
+                            + GetID(sValueMax, "CONSERVATION_STATUS", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("InternationalThreatStatus")) {
@@ -499,9 +465,9 @@ public class SpeciesAdvancedSearch {
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
                         speciesSQL += " AND (`CHM62EDT_CONSERVATION_STATUS`.`ID_CONSERVATION_STATUS` >= "
-                                + GetID(sValueMin, "CONSERVATION_STATUS", "", "") + ")";
+                            + GetID(sValueMin, "CONSERVATION_STATUS", "", "") + ")";
                         speciesSQL += " AND (`CHM62EDT_CONSERVATION_STATUS`.`ID_CONSERVATION_STATUS` <= "
-                                + GetID(sValueMax, "CONSERVATION_STATUS", "", "") + ")";
+                            + GetID(sValueMax, "CONSERVATION_STATUS", "", "") + ")";
                     }
                 }
                 if (sTable.equalsIgnoreCase("Country")) {
@@ -558,9 +524,9 @@ public class SpeciesAdvancedSearch {
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
                         speciesSQL += " AND (`CHM62EDT_ABUNDANCE`.`ID_ABUNDANCE` >= "
-                                + GetID(sValueMin, "ABUNDANCE", "", "DESCRIPTION") + ")";
+                            + GetID(sValueMin, "ABUNDANCE", "", "DESCRIPTION") + ")";
                         speciesSQL += " AND (`CHM62EDT_ABUNDANCE`.`ID_ABUNDANCE` <= "
-                                + GetID(sValueMax, "ABUNDANCE", "", "DESCRIPTION") + ")";
+                            + GetID(sValueMax, "ABUNDANCE", "", "DESCRIPTION") + ")";
                     }
                 }
 
@@ -582,9 +548,9 @@ public class SpeciesAdvancedSearch {
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
                         speciesSQL += " AND (`CHM62EDT_LEGAL_STATUS`.`ID_LEGAL_STATUS` >= "
-                                + GetID(sValueMin, "LEGAL_STATUS", "", "COMMENT") + ")";
+                            + GetID(sValueMin, "LEGAL_STATUS", "", "COMMENT") + ")";
                         speciesSQL += " AND (`CHM62EDT_LEGAL_STATUS`.`ID_LEGAL_STATUS` <= "
-                                + GetID(sValueMax, "LEGAL_STATUS", "", "COMMENT") + ")";
+                            + GetID(sValueMax, "LEGAL_STATUS", "", "COMMENT") + ")";
                     }
                 }
 
@@ -628,9 +594,9 @@ public class SpeciesAdvancedSearch {
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
                         speciesSQL += " AND (`CHM62EDT_DISTRIBUTION_STATUS`.`ID_DISTRIBUTION_STATUS` >= "
-                                + GetID(sValueMin, "DISTRIBUTION_STATUS", "", "") + ")";
+                            + GetID(sValueMin, "DISTRIBUTION_STATUS", "", "") + ")";
                         speciesSQL += " AND (`CHM62EDT_DISTRIBUTION_STATUS`.`ID_DISTRIBUTION_STATUS` <= "
-                                + GetID(sValueMax, "DISTRIBUTION_STATUS", "", "") + ")";
+                            + GetID(sValueMax, "DISTRIBUTION_STATUS", "", "") + ")";
                     }
                 }
 
@@ -652,9 +618,9 @@ public class SpeciesAdvancedSearch {
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
                         speciesSQL += " AND (`CHM62EDT_SPECIES_STATUS`.`ID_SPECIES_STATUS` >= "
-                                + GetID(sValueMin, "SPECIES_STATUS", "", "DESCRIPTION") + ")";
+                            + GetID(sValueMin, "SPECIES_STATUS", "", "DESCRIPTION") + ")";
                         speciesSQL += " AND (`CHM62EDT_SPECIES_STATUS`.`ID_SPECIES_STATUS` <= "
-                                + GetID(sValueMax, "SPECIES_STATUS", "", "DESCRIPTION") + ")";
+                            + GetID(sValueMax, "SPECIES_STATUS", "", "DESCRIPTION") + ")";
                     }
                 }
 
@@ -676,9 +642,9 @@ public class SpeciesAdvancedSearch {
                     }
                     if (sOperand.equalsIgnoreCase("Between")) {
                         speciesSQL += " AND (`CHM62EDT_INFO_QUALITY`.`ID_INFO_QUALITY` >= "
-                                + GetID(sValueMin, "INFO_QUALITY", "", "STATUS") + ")";
+                            + GetID(sValueMin, "INFO_QUALITY", "", "STATUS") + ")";
                         speciesSQL += " AND (`CHM62EDT_INFO_QUALITY`.`ID_INFO_QUALITY` <= "
-                                + GetID(sValueMin, "INFO_QUALITY", "", "STATUS") + ")";
+                            + GetID(sValueMin, "INFO_QUALITY", "", "STATUS") + ")";
                     }
                 }
                 // execute every attribute query

@@ -14,8 +14,8 @@
                 ro.finsiel.eunis.search.habitats.HabitatsSearchUtility,
                 ro.finsiel.eunis.WebContentManagement,
                 ro.finsiel.eunis.formBeans.AbstractFormBean"%>
-<%@ page import="ro.finsiel.eunis.jrfTables.DcIndexDcSourceDomain"%>
-<%@ page import="ro.finsiel.eunis.jrfTables.DcIndexDcSourcePersist"%>
+<%@ page import="ro.finsiel.eunis.jrfTables.DcIndexDomain"%>
+<%@ page import="ro.finsiel.eunis.jrfTables.DcIndexPersist"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.formBeans.GlossaryBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
@@ -192,10 +192,10 @@
       List refs;
       try
       {
-        refs = new DcIndexDcSourceDomain().findWhere("DC_INDEX.ID_DC="+result.getIdDc());
+        refs = new DcIndexDomain().findWhere("ID_DC="+result.getIdDc());
         for (int ii = 0; ii < refs.size(); ii++)
         {
-          DcIndexDcSourcePersist aRef = (( DcIndexDcSourcePersist ) refs.get(ii));
+          DcIndexPersist aRef = (( DcIndexPersist ) refs.get(ii));
           String title=Utilities.formatString(aRef.getTitle());
           String source=Utilities.formatString(aRef.getSource());
           String editor=Utilities.formatString(aRef.getEditor());

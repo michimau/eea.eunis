@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.jrfTables.species.legal;
 
 
+import java.util.List;
+
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
@@ -16,8 +18,6 @@ import ro.finsiel.eunis.search.Paginable;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.legal.LegalSearchCriteria;
 import ro.finsiel.eunis.search.species.legal.LegalSortCriteria;
-
-import java.util.List;
 
 
 /**
@@ -51,7 +51,7 @@ public class ScientificLegalDomain extends AbstractDomain implements Paginable {
         return new ScientificLegalPersist();
     }
 
-     /****/
+    /****/
     public void setup() {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
@@ -62,19 +62,19 @@ public class ScientificLegalDomain extends AbstractDomain implements Paginable {
         /** Table's columns specifications */
         this.addColumnSpec(
                 new IntegerColumnSpec("ID_SPECIES", "getIdSpecies",
-                "setIdSpecies", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));
+                        "setIdSpecies", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));
         this.addColumnSpec(
                 new IntegerColumnSpec("ID_NATURE_OBJECT", "getIdNatureObject",
-                "setIdNatureObject", DEFAULT_TO_ZERO, REQUIRED));
+                        "setIdNatureObject", DEFAULT_TO_ZERO, REQUIRED));
         this.addColumnSpec(
                 new StringColumnSpec("SCIENTIFIC_NAME", "getScientificName",
-                "setScientificName", DEFAULT_TO_EMPTY_STRING, REQUIRED));
+                        "setScientificName", DEFAULT_TO_EMPTY_STRING, REQUIRED));
         this.addColumnSpec(
                 new IntegerColumnSpec("ID_SPECIES_LINK", "getIdSpeciesLink",
-                "setIdSpeciesLink", DEFAULT_TO_NULL));
+                        "setIdSpeciesLink", DEFAULT_TO_NULL));
         this.addColumnSpec(
                 new IntegerColumnSpec("ID_GROUP_SPECIES", "getIdGroupspecies",
-                "setIdGroupspecies", DEFAULT_TO_ZERO, REQUIRED));
+                        "setIdGroupspecies", DEFAULT_TO_ZERO, REQUIRED));
         // Faster performance
         setReadOnly(true);
 
@@ -82,53 +82,33 @@ public class ScientificLegalDomain extends AbstractDomain implements Paginable {
         JoinTable reports = null;
         JoinTable reportType = null;
         JoinTable legalStatus = null;
-        JoinTable dcTitle = null;
+        JoinTable dcIndex = null;
         JoinTable groupSpecies = null;
 
         // table join: "TABLE_NAME ALIAS", "MAIN_TABLE_COLUMN", "SECOND_TABLE_COLUMN");
-        reports = new JoinTable("CHM62EDT_REPORTS A", "ID_NATURE_OBJECT",
-                "ID_NATURE_OBJECT");
-        reports.addJoinColumn(
-                new IntegerJoinColumn("ID_NATURE_OBJECT", "idNatureObjReports",
-                "setIdNatureObjectReports"));
-        reports.addJoinColumn(
-                new IntegerJoinColumn("ID_REPORT_TYPE", "idReportTypeRep",
-                "setIdReportTypeRep"));
-        reports.addJoinColumn(
-                new IntegerJoinColumn("ID_DC", "idDcRep", "setIdDcRep"));
+        reports = new JoinTable("CHM62EDT_REPORTS A", "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");
+        reports.addJoinColumn(new IntegerJoinColumn("ID_NATURE_OBJECT", "idNatureObjReports", "setIdNatureObjectReports"));
+        reports.addJoinColumn(new IntegerJoinColumn("ID_REPORT_TYPE", "idReportTypeRep", "setIdReportTypeRep"));
+        reports.addJoinColumn(new IntegerJoinColumn("ID_DC", "idDcRep", "setIdDcRep"));
         this.addJoinTable(reports);
 
-        reportType = new JoinTable("CHM62EDT_REPORT_TYPE B", "ID_REPORT_TYPE",
-                "ID_REPORT_TYPE");
-        reportType.addJoinColumn(
-                new IntegerJoinColumn("ID_REPORT_TYPE", "idReportType",
-                "setIdReportType"));
+        reportType = new JoinTable("CHM62EDT_REPORT_TYPE B", "ID_REPORT_TYPE", "ID_REPORT_TYPE");
+        reportType.addJoinColumn(new IntegerJoinColumn("ID_REPORT_TYPE", "idReportType", "setIdReportType"));
         reports.addJoinTable(reportType);
 
-        legalStatus = new JoinTable("CHM62EDT_LEGAL_STATUS C", "ID_LOOKUP",
-                "ID_LEGAL_STATUS");
-        legalStatus.addJoinColumn(
-                new StringJoinColumn("ANNEX", "annex", "setAnnex"));
-        legalStatus.addJoinColumn(
-                new StringJoinColumn("COMMENT", "comment", "setComment"));
+        legalStatus = new JoinTable("CHM62EDT_LEGAL_STATUS C", "ID_LOOKUP", "ID_LEGAL_STATUS");
+        legalStatus.addJoinColumn(new StringJoinColumn("ANNEX", "annex", "setAnnex"));
+        legalStatus.addJoinColumn(new StringJoinColumn("COMMENT", "comment", "setComment"));
         reportType.addJoinTable(legalStatus);
 
-        dcTitle = new JoinTable("DC_TITLE D", "ID_DC", "ID_DC");
-        dcTitle.addJoinColumn(
-                new StringJoinColumn("ALTERNATIVE", "Alternative",
-                "setAlternative"));
-        dcTitle.addJoinColumn(new StringJoinColumn("TITLE", "title", "setTitle"));
-        reports.addJoinTable(dcTitle);
+        dcIndex = new JoinTable("DC_INDEX D", "ID_DC", "ID_DC");
+        dcIndex.addJoinColumn(new StringJoinColumn("ALTERNATIVE", "Alternative", "setAlternative"));
+        dcIndex.addJoinColumn(new StringJoinColumn("TITLE", "title", "setTitle"));
+        dcIndex.addJoinColumn(new StringJoinColumn("URL", "setUrl"));
+        reports.addJoinTable(dcIndex);
 
-        dcTitle = new JoinTable("DC_SOURCE G", "ID_DC", "ID_DC");
-        dcTitle.addJoinColumn(new StringJoinColumn("URL", "setUrl"));
-        reports.addJoinTable(dcTitle);
-
-        groupSpecies = new JoinTable("CHM62EDT_GROUP_SPECIES F",
-                "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
-        groupSpecies.addJoinColumn(
-                new StringJoinColumn("COMMON_NAME", "commonName",
-                "setCommonName"));
+        groupSpecies = new JoinTable("CHM62EDT_GROUP_SPECIES F", "ID_GROUP_SPECIES", "ID_GROUP_SPECIES");
+        groupSpecies.addJoinColumn(new StringJoinColumn("COMMON_NAME", "commonName", "setCommonName"));
         this.addJoinTable(groupSpecies);
     }
 
@@ -143,7 +123,7 @@ public class ScientificLegalDomain extends AbstractDomain implements Paginable {
         this.sortCriteria = sortCriteria;
         if (searchCriteria.length < 1) {
             throw new CriteriaMissingException(
-                    "Unable to search because no search criteria was specified...");
+            "Unable to search because no search criteria was specified...");
         }
         // Prepare the WHERE clause
         StringBuffer filterSQL = _prepareWhereSearch();
@@ -173,7 +153,7 @@ public class ScientificLegalDomain extends AbstractDomain implements Paginable {
 
         if (searchCriteria.length <= 0) {
             throw new CriteriaMissingException(
-                    "No criteria set for searching. Search interrupted.");
+            "No criteria set for searching. Search interrupted.");
         }
         for (int i = 0; i < searchCriteria.length; i++) {
             if (i > 0) {
@@ -186,7 +166,7 @@ public class ScientificLegalDomain extends AbstractDomain implements Paginable {
         }
         filterSQL.append(
                 Utilities.showEUNISInvalidatedSpecies("AND E.VALID_NAME",
-                showEUNISInvalidatedSpecies));
+                        showEUNISInvalidatedSpecies));
         return filterSQL;
     }
 
@@ -253,13 +233,12 @@ public class ScientificLegalDomain extends AbstractDomain implements Paginable {
         // Set the main QUERY
         sql.append(
                 "SELECT COUNT(*) FROM CHM62EDT_SPECIES AS E "
-                        + "INNER JOIN  CHM62EDT_REPORTS AS A ON E.ID_NATURE_OBJECT = A.ID_NATURE_OBJECT "
-                        + "INNER JOIN CHM62EDT_REPORT_TYPE AS B ON A.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
-                        + "INNER JOIN CHM62EDT_LEGAL_STATUS AS C ON B.ID_LOOKUP = C.ID_LEGAL_STATUS "
-                        + "INNER JOIN DC_TITLE AS D ON A.ID_DC = D.ID_DC "
-                        + "INNER JOIN DC_SOURCE AS G ON A.ID_DC = G.ID_DC "
-                        + "INNER JOIN CHM62EDT_GROUP_SPECIES AS F ON E.ID_GROUP_SPECIES = F.ID_GROUP_SPECIES "
-                        + "WHERE ");
+                + "INNER JOIN  CHM62EDT_REPORTS AS A ON E.ID_NATURE_OBJECT = A.ID_NATURE_OBJECT "
+                + "INNER JOIN CHM62EDT_REPORT_TYPE AS B ON A.ID_REPORT_TYPE = B.ID_REPORT_TYPE "
+                + "INNER JOIN CHM62EDT_LEGAL_STATUS AS C ON B.ID_LOOKUP = C.ID_LEGAL_STATUS "
+                + "INNER JOIN DC_INDEX AS D ON A.ID_DC = D.ID_DC "
+                + "INNER JOIN CHM62EDT_GROUP_SPECIES AS F ON E.ID_GROUP_SPECIES = F.ID_GROUP_SPECIES "
+                + "WHERE ");
         // Apply WHERE CLAUSE
         sql.append(_prepareWhereSearch().toString());
         // Apply SORT CLAUSE - DON'T NEED IT FOR COUNT...

@@ -13,7 +13,6 @@ public class DocumentDTO {
     private static final long serialVersionUID = 1L;
 
     private String idDoc;
-    private String idTitle;
     private String title;
     private String alternative;
     private String author;
@@ -25,14 +24,6 @@ public class DocumentDTO {
 
     public void setIdDoc(String idDoc) {
         this.idDoc = idDoc;
-    }
-
-    public String getIdTitle() {
-        return idTitle;
-    }
-
-    public void setIdTitle(String idTitle) {
-        this.idTitle = idTitle;
     }
 
     public String getTitle() {

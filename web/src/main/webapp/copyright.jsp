@@ -83,25 +83,21 @@
                   try {
                     Chm62edtReferencesDomain nd = new Chm62edtReferencesDomain();
                     // List of all 'REFERENCES'
-                    String sSQL = "SELECT `DC_INDEX`.`ID_DC`,";
-                    sSQL += " `DC_SOURCE`.`SOURCE`,";
-                    sSQL += " CONCAT(`DC_DATE`.`CREATED`),";
-                    sSQL += " `DC_TITLE`.`TITLE`,";
-                    sSQL += " `DC_TITLE`.`ALTERNATIVE`,";
-                    sSQL += " `DC_SOURCE`.`EDITOR`,";
-                    sSQL += " `DC_SOURCE`.`JOURNAL_TITLE`,";
-                    sSQL += " `DC_SOURCE`.`BOOK_TITLE`,";
-                    sSQL += " `DC_SOURCE`.`JOURNAL_ISSUE`,";
-                    sSQL += " `DC_PUBLISHER`.`PUBLISHER`,";
-                    sSQL += " `DC_SOURCE`.`ISBN`,";
-                    sSQL += " `DC_SOURCE`.`URL`";
+                    String sSQL = "SELECT `ID_DC`,";
+                    sSQL += " `SOURCE`,";
+                    sSQL += " CONCAT(`CREATED`),";
+                    sSQL += " `TITLE`,";
+                    sSQL += " `ALTERNATIVE`,";
+                    sSQL += " `EDITOR`,";
+                    sSQL += " `JOURNAL_TITLE`,";
+                    sSQL += " `BOOK_TITLE`,";
+                    sSQL += " `JOURNAL_ISSUE`,";
+                    sSQL += " `PUBLISHER`,";
+                    sSQL += " `ISBN`,";
+                    sSQL += " `URL`";
                     sSQL += " FROM  `DC_INDEX`";
-                    sSQL += " INNER JOIN `DC_SOURCE` USING (ID_DC)";
-                    sSQL += " INNER JOIN `DC_DATE` USING (ID_DC)";
-                    sSQL += " INNER JOIN `DC_TITLE` USING (ID_DC)";
-                    sSQL += " INNER JOIN `DC_PUBLISHER` USING (ID_DC)";
-                    sSQL += " WHERE `DC_INDEX`.`COMMENT` = 'REFERENCES'";
-                    sSQL += " ORDER BY `DC_SOURCE`.`SOURCE` ASC";
+                    sSQL += " WHERE `COMMENT` = 'REFERENCES'";
+                    sSQL += " ORDER BY `SOURCE` ASC";
 
                     List list = nd.findCustom(sSQL);
 

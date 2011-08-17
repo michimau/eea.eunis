@@ -1,10 +1,14 @@
 package ro.finsiel.eunis.jrfTables.species.references;
 
 
+import java.util.Date;
+import java.util.List;
+import java.util.Vector;
+
+import net.sf.jrf.column.columnoptions.NullableColumnOption;
+import net.sf.jrf.column.columnspecs.DateColumnSpec;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
-import net.sf.jrf.column.columnspecs.DateColumnSpec;
-import net.sf.jrf.column.columnoptions.NullableColumnOption;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
@@ -13,15 +17,8 @@ import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
 import ro.finsiel.eunis.search.Paginable;
 import ro.finsiel.eunis.search.Utilities;
-
 import ro.finsiel.eunis.search.species.references.ReferencesSearchCriteria;
 import ro.finsiel.eunis.search.species.references.ReferencesSortCriteria;
-import ro.finsiel.eunis.jrfTables.*;
-
-import java.util.List;
-import java.util.Vector;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 
 
 public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
@@ -48,7 +45,7 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
         return new SpeciesBooksPersist();
     }
 
-     /****/
+    /****/
     public void setup() {
         // These setters could be used to override the default.
         // this.setDatabasePolicy(new null());
@@ -58,33 +55,17 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
         this.setReadOnly(true);
         this.setTableAlias("A");
 
-        this.addColumnSpec(
-                new IntegerColumnSpec("ID", "getId", "setId", DEFAULT_TO_ZERO,
-                NATURAL_PRIMARY_KEY));
-        this.addColumnSpec(
-                new IntegerColumnSpec("ID_LINK", "getIdLink", "setIdLink",
-                DEFAULT_TO_NULL));
-        this.addColumnSpec(
-                new StringColumnSpec("NAME", "getName", "setName",
-                DEFAULT_TO_EMPTY_STRING));
-        this.addColumnSpec(
-                new StringColumnSpec("EDITOR", "getEditor", "setEditor",
-                DEFAULT_TO_EMPTY_STRING));
-        this.addColumnSpec(
-                new DateColumnSpec("DATE", new NullableColumnOption(), "getDate",
-                "setDate", DEFAULT_TO_NULL));
-        this.addColumnSpec(
-                new StringColumnSpec("TITLE", "getTitle", "setTitle",
-                DEFAULT_TO_EMPTY_STRING));
-        this.addColumnSpec(
-                new StringColumnSpec("PUBLISHER", "getPublisher", "setPublisher",
-                DEFAULT_TO_EMPTY_STRING));
-        this.addColumnSpec(
-                new StringColumnSpec("URL", "getUrl", "setUrl",
-                DEFAULT_TO_EMPTY_STRING));
+        this.addColumnSpec(new IntegerColumnSpec("ID", "getId", "setId", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));
+        this.addColumnSpec(new IntegerColumnSpec("ID_LINK", "getIdLink", "setIdLink", DEFAULT_TO_NULL));
+        this.addColumnSpec(new StringColumnSpec("NAME", "getName", "setName", DEFAULT_TO_EMPTY_STRING));
+        this.addColumnSpec(new StringColumnSpec("EDITOR", "getEditor", "setEditor", DEFAULT_TO_EMPTY_STRING));
+        this.addColumnSpec(new DateColumnSpec("DATE", new NullableColumnOption(), "getDate", "setDate", DEFAULT_TO_NULL));
+        this.addColumnSpec(new StringColumnSpec("TITLE", "getTitle", "setTitle", DEFAULT_TO_EMPTY_STRING));
+        this.addColumnSpec(new StringColumnSpec("PUBLISHER", "getPublisher", "setPublisher", DEFAULT_TO_EMPTY_STRING));
+        this.addColumnSpec(new StringColumnSpec("URL", "getUrl", "setUrl", DEFAULT_TO_EMPTY_STRING));
     }
 
-     /** This method is used to retrieve a sub-set of the main results of a query given its start index offset and end
+    /** This method is used to retrieve a sub-set of the main results of a query given its start index offset and end
      * index offset.
      * @param offsetStart The start offset (i.e. 0). If offsetStart = offSetEnd then return the whole list
      * @param pageSize The end offset (i.e. 1). If offsetStart = offSetEnd then return the whole list
@@ -95,7 +76,7 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
         this.sortCriteria = sortCriteria;
         if (searchCriteria.length < 1) {
             throw new CriteriaMissingException(
-                    "Unable to search because no search criteria was specified...");
+            "Unable to search because no search criteria was specified...");
         }
 
         // Add the LIMIT clause to return only the wanted results
@@ -130,101 +111,57 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
 
         if (searchCriteria.length < 1) {
             throw new CriteriaMissingException(
-                    "Unable to search because no search criteria was specified...");
+            "Unable to search because no search criteria was specified...");
         }
         // Prepare the WHERE clause
         StringBuffer filterSQL = _prepareWhereSearch();
         String condition = "";
 
         if (id != null) {
-            // String author = null;
-            // java.sql.Timestamp date = null;
-            // String title = null;
-            // String editor = null;
-            // String publisher = null;
-            //
-            // List sources = new DcSourceDomain().findWhere("ID_DC='" + id + "'");
-            // if (sources != null && sources.size() > 0) {
-            // author = ((DcSourcePersist) sources.get(0)).getSource();
-            // editor = ((DcSourcePersist) sources.get(0)).getEditor();
-            // }
-            //
-            // List dates = new DcDateDomain().findWhere("ID_DC='" + id + "'");
-            // if (dates != null && dates.size() > 0) {
-            // date = ((DcDatePersist) dates.get(0)).getCreated();
-            // }
-            //
-            // List titles = new DcTitleDomain().findWhere("ID_DC='" + id + "'");
-            // if (titles != null && titles.size() > 0) {
-            // title = ((DcTitlePersist) titles.get(0)).getTitle();
-            // }
-            //
-            // List publishers = new DcPublisherDomain().findWhere("ID_DC='" + id + "'");
-            // if (publishers != null && publishers.size() > 0) {
-            // publisher = ((DcPublisherPersist) publishers.get(0)).getPublisher();
-            // }
-            //
-            // SimpleDateFormat dt = new SimpleDateFormat("yyyy");
-            // if (author != null) author = author.trim().replaceAll("'", "''");
-            // if (editor != null) editor = editor.trim().replaceAll("'", "''");
-            // if (title != null) title = title.trim().replaceAll("'", "''");
-            // if (publisher != null) publisher = publisher.trim().replaceAll("'", "''");
-
-
-            // String lineCondition = "  TRIM(D.SOURCE)  " + convertor(author) + " AND E.CREATED  " + convertor(date == null ? null : dt.format(date)) + " AND TRIM(F.TITLE)  " + convertor(title) + " AND TRIM(D.EDITOR)  " + convertor(editor) + " AND TRIM(G.PUBLISHER) " + convertor(publisher);
             String lineCondition = "A.ID_DC = " + id;
 
             condition = (filterSQL.length() > 0
                     ? " AND " + filterSQL.toString() + " AND " + lineCondition
-                    + " "
-                    : " AND " + lineCondition + " ");
+                            + " "
+                            : " AND " + lineCondition + " ");
         } else {
             condition = (filterSQL.length() > 0
                     ? " AND " + filterSQL.toString()
-                    : "");
+                            : "");
         }
 
         String SQL = "(SELECT H.ID_SPECIES AS ID, H.ID_SPECIES_LINK AS ID_LINK, H.SCIENTIFIC_NAME AS NAME, "
-                + "H.SCIENTIFIC_NAME AS EDITOR, "
-                + new Date(1998, 1, 1).getYear() + " AS DATE, "
-                + "H.SCIENTIFIC_NAME AS TITLE, H.SCIENTIFIC_NAME AS PUBLISHER, "
-                + "H.SCIENTIFIC_NAME AS URL " + "FROM CHM62EDT_SPECIES H "
-                + "INNER JOIN CHM62EDT_NATURE_OBJECT B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
-                + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
-                + "LEFT JOIN DC_SOURCE D ON A.ID_DC=D.ID_DC "
-                + "LEFT JOIN DC_DATE E ON A.ID_DC=E.ID_DC "
-                + "LEFT JOIN DC_TITLE F ON A.ID_DC=F.ID_DC "
-                + "LEFT JOIN DC_PUBLISHER G ON A.ID_DC=G.ID_DC " + "WHERE 1=1 "
-                + condition + " GROUP BY H.SCIENTIFIC_NAME) " + "UNION "
-                + "(SELECT H.ID_SPECIES AS ID, H.ID_SPECIES_LINK AS ID_LINK, H.SCIENTIFIC_NAME AS NAME, "
-                + "H.SCIENTIFIC_NAME AS EDITOR, "
-                + new Date(1998, 1, 1).getYear() + " AS DATE, "
-                + "H.SCIENTIFIC_NAME AS TITLE, H.SCIENTIFIC_NAME AS PUBLISHER, "
-                + "H.SCIENTIFIC_NAME AS URL " + "FROM CHM62EDT_SPECIES H "
-                + "INNER JOIN CHM62EDT_REPORTS B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
-                + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
-                + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
-                + "LEFT JOIN DC_SOURCE D ON A.ID_DC=D.ID_DC "
-                + "LEFT JOIN DC_DATE E ON A.ID_DC=E.ID_DC "
-                + "LEFT JOIN DC_TITLE F ON A.ID_DC=F.ID_DC "
-                + "LEFT JOIN DC_PUBLISHER G ON A.ID_DC=G.ID_DC " + "WHERE 1=1 "
-                + condition
-                + " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') "
-                + " GROUP BY H.SCIENTIFIC_NAME) " + "UNION "
-                + "(SELECT H.ID_SPECIES AS ID, H.ID_SPECIES_LINK AS ID_LINK, H.SCIENTIFIC_NAME AS NAME, "
-                + "H.SCIENTIFIC_NAME AS EDITOR, "
-                + new Date(1998, 1, 1).getYear() + " AS DATE, "
-                + "H.SCIENTIFIC_NAME AS TITLE, H.SCIENTIFIC_NAME AS PUBLISHER, "
-                + "H.SCIENTIFIC_NAME AS URL " + "FROM CHM62EDT_SPECIES H "
-                + "INNER JOIN CHM62EDT_TAXONOMY B ON H.ID_TAXONOMY=B.ID_TAXONOMY "
-                + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
-                + "LEFT JOIN DC_SOURCE D ON A.ID_DC=D.ID_DC "
-                + "LEFT JOIN DC_DATE E ON A.ID_DC=E.ID_DC "
-                + "LEFT JOIN DC_TITLE F ON A.ID_DC=F.ID_DC "
-                + "LEFT JOIN DC_PUBLISHER G ON A.ID_DC=G.ID_DC " + "WHERE  1=1 "
-                + condition + " GROUP BY H.SCIENTIFIC_NAME) " + " ORDER BY NAME"
-                + " LIMIT 0,"
-                + new Integer(Utilities.MAX_POPUP_RESULTS).toString();
+            + "H.SCIENTIFIC_NAME AS EDITOR, "
+            + new Date(1998, 1, 1).getYear() + " AS DATE, "
+            + "H.SCIENTIFIC_NAME AS TITLE, H.SCIENTIFIC_NAME AS PUBLISHER, "
+            + "H.SCIENTIFIC_NAME AS URL " + "FROM CHM62EDT_SPECIES H "
+            + "INNER JOIN CHM62EDT_NATURE_OBJECT B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
+            + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
+            + "WHERE 1=1 "
+            + condition + " GROUP BY H.SCIENTIFIC_NAME) " + "UNION "
+            + "(SELECT H.ID_SPECIES AS ID, H.ID_SPECIES_LINK AS ID_LINK, H.SCIENTIFIC_NAME AS NAME, "
+            + "H.SCIENTIFIC_NAME AS EDITOR, "
+            + new Date(1998, 1, 1).getYear() + " AS DATE, "
+            + "H.SCIENTIFIC_NAME AS TITLE, H.SCIENTIFIC_NAME AS PUBLISHER, "
+            + "H.SCIENTIFIC_NAME AS URL " + "FROM CHM62EDT_SPECIES H "
+            + "INNER JOIN CHM62EDT_REPORTS B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
+            + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
+            + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
+            + "WHERE 1=1 "
+            + condition
+            + " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') "
+            + " GROUP BY H.SCIENTIFIC_NAME) " + "UNION "
+            + "(SELECT H.ID_SPECIES AS ID, H.ID_SPECIES_LINK AS ID_LINK, H.SCIENTIFIC_NAME AS NAME, "
+            + "H.SCIENTIFIC_NAME AS EDITOR, "
+            + new Date(1998, 1, 1).getYear() + " AS DATE, "
+            + "H.SCIENTIFIC_NAME AS TITLE, H.SCIENTIFIC_NAME AS PUBLISHER, "
+            + "H.SCIENTIFIC_NAME AS URL " + "FROM CHM62EDT_SPECIES H "
+            + "INNER JOIN CHM62EDT_TAXONOMY B ON H.ID_TAXONOMY=B.ID_TAXONOMY "
+            + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
+            + "WHERE  1=1 "
+            + condition + " GROUP BY H.SCIENTIFIC_NAME) " + " ORDER BY NAME"
+            + " LIMIT 0,"
+            + new Integer(Utilities.MAX_POPUP_RESULTS).toString();
 
         List species = this.findCustom(SQL.toString());
 
@@ -269,7 +206,7 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
     private Long _rawCount() throws CriteriaMissingException {
         if (searchCriteria.length < 1) {
             throw new CriteriaMissingException(
-                    "Unable to search because no search criteria was specified...");
+            "Unable to search because no search criteria was specified...");
         }
         if (finalResults == null) {
 
@@ -278,46 +215,34 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
 
             String condition = (filterSQL.length() > 0
                     ? " AND " + filterSQL.toString()
-                    : "");
+                            : "");
 
-            String SQL = "SELECT A.ID_DC AS ID,A.ID_DC AS ID_LINK,D.SOURCE AS NAME,D.EDITOR AS EDITOR,"
-                    + "E.CREATED AS DATE,F.TITLE AS TITLE,G.PUBLISHER AS PUBLISHER,D.URL AS URL "
-                    + "FROM CHM62EDT_SPECIES H "
-                    + "INNER JOIN CHM62EDT_NATURE_OBJECT B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
-                    + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
-                    + "LEFT JOIN DC_SOURCE D ON A.ID_DC=D.ID_DC "
-                    + "LEFT JOIN DC_DATE E ON A.ID_DC=E.ID_DC "
-                    + "LEFT JOIN DC_TITLE F ON A.ID_DC=F.ID_DC "
-                    + "LEFT JOIN DC_PUBLISHER G ON A.ID_DC=G.ID_DC "
-                    + "WHERE 1=1 " + condition
-                    + " GROUP BY D.SOURCE,D.EDITOR,E.CREATED,F.TITLE,G.PUBLISHER "
-                    + "UNION "
-                    + "SELECT A.ID_DC AS ID,A.ID_DC AS ID_LINK,D.SOURCE AS NAME,D.EDITOR AS EDITOR,"
-                    + "E.CREATED AS DATE,F.TITLE AS TITLE,G.PUBLISHER AS PUBLISHER,D.URL AS URL "
-                    + "FROM CHM62EDT_SPECIES H "
-                    + "INNER JOIN CHM62EDT_REPORTS B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
-                    + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
-                    + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
-                    + "LEFT JOIN DC_SOURCE D ON A.ID_DC=D.ID_DC "
-                    + "LEFT JOIN DC_DATE E ON A.ID_DC=E.ID_DC "
-                    + "LEFT JOIN DC_TITLE F ON A.ID_DC=F.ID_DC "
-                    + "LEFT JOIN DC_PUBLISHER G ON A.ID_DC=G.ID_DC "
-                    + "WHERE 1=1 " + condition
-                    + " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS',"
-                    + "'SPECIES_STATUS','POPULATION_UNIT','TREND') "
-                    + "GROUP BY D.SOURCE,D.EDITOR,E.CREATED,F.TITLE,G.PUBLISHER "
-                    + "UNION "
-                    + "SELECT A.ID_DC AS ID,A.ID_DC AS ID_LINK,D.SOURCE AS NAME,D.EDITOR AS EDITOR,"
-                    + "E.CREATED AS DATE,F.TITLE AS TITLE,G.PUBLISHER AS PUBLISHER,D.URL AS URL "
-                    + "FROM CHM62EDT_SPECIES H "
-                    + "INNER JOIN CHM62EDT_TAXONOMY B ON H.ID_TAXONOMY=B.ID_TAXONOMY "
-                    + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
-                    + "LEFT JOIN DC_SOURCE D ON A.ID_DC=D.ID_DC "
-                    + "LEFT JOIN DC_DATE E ON A.ID_DC=E.ID_DC "
-                    + "LEFT JOIN DC_TITLE F ON A.ID_DC=F.ID_DC "
-                    + "LEFT JOIN DC_PUBLISHER G ON A.ID_DC=G.ID_DC "
-                    + "WHERE  1=1 " + condition
-                    + " GROUP BY D.SOURCE,D.EDITOR,E.CREATED,F.TITLE,G.PUBLISHER ";
+            String SQL = "SELECT A.ID_DC AS ID,A.ID_DC AS ID_LINK,A.SOURCE AS NAME,A.EDITOR AS EDITOR,"
+                + "A.CREATED AS DATE,A.TITLE AS TITLE,A.PUBLISHER AS PUBLISHER,A.URL AS URL "
+                + "FROM CHM62EDT_SPECIES H "
+                + "INNER JOIN CHM62EDT_NATURE_OBJECT B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
+                + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
+                + "WHERE 1=1 " + condition
+                + " GROUP BY A.SOURCE,A.EDITOR,A.CREATED,A.TITLE,A.PUBLISHER "
+                + "UNION "
+                + "SELECT A.ID_DC AS ID,A.ID_DC AS ID_LINK,A.SOURCE AS NAME,A.EDITOR AS EDITOR,"
+                + "A.CREATED AS DATE,A.TITLE AS TITLE,A.PUBLISHER AS PUBLISHER,A.URL AS URL "
+                + "FROM CHM62EDT_SPECIES H "
+                + "INNER JOIN CHM62EDT_REPORTS B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
+                + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
+                + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
+                + "WHERE 1=1 " + condition
+                + " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS',"
+                + "'SPECIES_STATUS','POPULATION_UNIT','TREND') "
+                + "GROUP BY A.SOURCE,A.EDITOR,A.CREATED,A.TITLE,A.PUBLISHER "
+                + "UNION "
+                + "SELECT A.ID_DC AS ID,A.ID_DC AS ID_LINK,A.SOURCE AS NAME,A.EDITOR AS EDITOR,"
+                + "A.CREATED AS DATE,A.TITLE AS TITLE,A.PUBLISHER AS PUBLISHER,A.URL AS URL "
+                + "FROM CHM62EDT_SPECIES H "
+                + "INNER JOIN CHM62EDT_TAXONOMY B ON H.ID_TAXONOMY=B.ID_TAXONOMY "
+                + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
+                + "WHERE  1=1 " + condition
+                + " GROUP BY A.SOURCE,A.EDITOR,A.CREATED,A.TITLE,A.PUBLISHER ";
 
             List references = this.findCustom(SQL.toString());
 
@@ -341,21 +266,21 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
     private StringBuffer _prepareWhereSearch() throws CriteriaMissingException {
         StringBuffer filterSQL = new StringBuffer();
 
-        filterSQL.append(" ((D.SOURCE IS NOT NULL AND TRIM(D.SOURCE) <> '') OR ");
-        filterSQL.append(" (D.EDITOR IS NOT NULL AND TRIM(D.EDITOR) <> '') OR ");
+        filterSQL.append(" ((A.SOURCE IS NOT NULL AND TRIM(A.SOURCE) <> '') OR ");
+        filterSQL.append(" (A.EDITOR IS NOT NULL AND TRIM(A.EDITOR) <> '') OR ");
         filterSQL.append(
-                " (E.CREATED IS NOT NULL AND TRIM(E.CREATED) <> '') OR ");
-        filterSQL.append(" (F.TITLE IS NOT NULL AND TRIM(F.TITLE) <> '') OR ");
+        " (A.CREATED IS NOT NULL AND TRIM(A.CREATED) <> '') OR ");
+        filterSQL.append(" (A.TITLE IS NOT NULL AND TRIM(A.TITLE) <> '') OR ");
         filterSQL.append(
-                " (G.PUBLISHER IS NOT NULL AND TRIM(G.PUBLISHER) <> '')) ");
+        " (A.PUBLISHER IS NOT NULL AND TRIM(A.PUBLISHER) <> '')) ");
 
         filterSQL.append(
                 Utilities.showEUNISInvalidatedSpecies("AND H.VALID_NAME",
-                showInvalidatedSpecies));
+                        showInvalidatedSpecies));
 
         if (searchCriteria.length <= 0) {
             throw new CriteriaMissingException(
-                    "No criteria set for searching, so I bailed out...");
+            "No criteria set for searching, so I bailed out...");
         }
         for (int i = 0; i < searchCriteria.length; i++) {
             filterSQL.append(" AND ");

@@ -178,55 +178,55 @@
       for(int i = 0; i < results.size(); i++) {
         HabitatsBooksPersist n = (HabitatsBooksPersist) results.get(i);
         if(request.getParameter("fromWhere").equalsIgnoreCase("author") &&
-          !Utilities.formatString(n.getsource(), "").equalsIgnoreCase("")) {
+          !Utilities.formatString(n.getSource(), "").equalsIgnoreCase("")) {
           wasPrintSomething = true;
   %>
   <tr>
     <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getsource()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getsource()))%></a>
+      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getSource()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getSource()))%></a>
     </td>
   </tr>
   <%
     }
     if(request.getParameter("fromWhere").equalsIgnoreCase("date") &&
-      !Utilities.formatReferencesDate(n.getcreated()).equalsIgnoreCase("")) {
+      !Utilities.formatReferencesDate(n.getCreated()).equalsIgnoreCase("")) {
       wasPrintSomething = true;
   %>
   <tr>
     <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatReferencesDate(n.getcreated())%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatReferencesDate(n.getcreated())%></a>
+      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatReferencesDate(n.getCreated())%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatReferencesDate(n.getCreated())%></a>
     </td>
   </tr>
   <%
     }
     if(request.getParameter("fromWhere").equalsIgnoreCase("title") &&
-      !Utilities.formatString(n.gettitle(), "").equalsIgnoreCase("")) {
+      !Utilities.formatString(n.getTitle(), "").equalsIgnoreCase("")) {
       wasPrintSomething = true;
   %>
   <tr>
     <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.gettitle()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.gettitle()))%></a>
+      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getTitle()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getTitle()))%></a>
     </td>
   </tr>
   <%
     }
     if(request.getParameter("fromWhere").equalsIgnoreCase("editor") &&
-      !Utilities.formatString(n.geteditor(), "").equalsIgnoreCase("")) {
+      !Utilities.formatString(n.getEditor(), "").equalsIgnoreCase("")) {
       wasPrintSomething = true;
   %>
   <tr>
     <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.geteditor()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.geteditor()))%></a>
+      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getEditor()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getEditor()))%></a>
     </td>
   </tr>
   <%
     }
-    if(request.getParameter("fromWhere").equalsIgnoreCase("publisher") && !Utilities.formatString(n.getpublisher(), "").equalsIgnoreCase("")) {
+    if(request.getParameter("fromWhere").equalsIgnoreCase("publisher") && !Utilities.formatString(n.getPublisher(), "").equalsIgnoreCase("")) {
       wasPrintSomething = true;
   %>
   <tr>
     <td bgcolor="<%=(0 == (j++ % 2)) ? "#EEEEEE" : "#FFFFFF"%>">
-      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getpublisher()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getpublisher()))%></a>
+      <a title="<%=cm.cmsPhrase("Click link to select the value")%>" href="javascript:setLine('<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getPublisher()))%>','<%=request.getParameter("fromWhere")%>','<%=witchDateUse%>');"><%=Utilities.formatString(Utilities.treatURLSpecialCharacters(n.getPublisher()))%></a>
     </td>
   </tr>
   <%

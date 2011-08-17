@@ -1,9 +1,9 @@
 package ro.finsiel.eunis.search.habitats.habitatsByReferences;
 
 
+import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
-import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.join.JoinTable;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
 import ro.finsiel.eunis.jrfTables.habitats.references.HabitatsBooksPersist;
@@ -58,9 +58,9 @@ public class DcSourceHabitatDomain extends AbstractDomain {
 
         JoinTable Source = null;
 
-        Source = new JoinTable("DC_SOURCE D", "ID_DC", "ID_DC");
-        Source.addJoinColumn(new StringJoinColumn("SOURCE", "setsource"));
-        Source.addJoinColumn(new StringJoinColumn("EDITOR", "seteditor"));
+        Source = new JoinTable("DC_INDEX D", "ID_DC", "ID_DC");
+        Source.addJoinColumn(new StringJoinColumn("SOURCE", "setSource"));
+        Source.addJoinColumn(new StringJoinColumn("EDITOR", "setEditor"));
         Source.addJoinColumn(new StringJoinColumn("URL", "setUrl"));
         habitatReferences.addJoinTable(Source);
     }

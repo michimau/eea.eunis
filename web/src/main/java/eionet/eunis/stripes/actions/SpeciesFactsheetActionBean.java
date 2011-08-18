@@ -40,6 +40,7 @@ import ro.finsiel.eunis.search.UniqueVector;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
+import ro.finsiel.eunis.search.species.factsheet.PublicationWrapper;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
 import com.ibm.icu.util.StringTokenizer;
@@ -135,6 +136,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     /** Natura 2000 identifier in chm62edt_nature_object_attributes */
     private String n2000id;
     private String faeu;
+    private PublicationWrapper speciesBook;
     /**
      * Hold ITIS TSN number
      */
@@ -392,6 +394,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     private void generalTabActions(int mainIdSpecies) {
+
+        speciesBook = factsheet.getSpeciesBook();
 
         consStatus = factsheet.getConservationStatus(factsheet.getSpeciesObject());
         urlPic = "idobject=" + specie.getIdSpecies() + "&amp;natureobjecttype=Species";
@@ -1115,6 +1119,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     public String[] getTabs() {
         return tabs;
+    }
+
+    public PublicationWrapper getSpeciesBook() {
+        return speciesBook;
     }
 
 }

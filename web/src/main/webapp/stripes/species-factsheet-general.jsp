@@ -232,7 +232,7 @@
           			${eunis:cmsPhrase(actionBean.contentManagement, 'Title')}:
         		</th>
         		<td>
-            			${eunis:treatURLSpecialCharacters(actionBean.factsheet.speciesBook.title)}
+            			${eunis:treatURLSpecialCharacters(actionBean.speciesBook.title)}
         		</td>
       		</tr>
       		<tr class="zebraeven">
@@ -240,7 +240,7 @@
           			${eunis:cmsPhrase(actionBean.contentManagement, 'Author')}:
         		</th>
         		<td>
-            			${eunis:treatURLSpecialCharacters(actionBean.factsheet.speciesBook.author)}
+            			${eunis:treatURLSpecialCharacters(actionBean.speciesBook.author)}
         		</td>
       		</tr>
       		<tr>
@@ -248,7 +248,7 @@
           			${eunis:cmsPhrase(actionBean.contentManagement, 'Publisher')}:
         		</th>
         		<td>
-            			${eunis:treatURLSpecialCharacters(actionBean.factsheet.speciesBook.publisher)}
+            			${eunis:treatURLSpecialCharacters(actionBean.speciesBook.publisher)}
         		</td>
       		</tr>
       		<tr class="zebraeven">
@@ -256,7 +256,7 @@
           			${eunis:cmsPhrase(actionBean.contentManagement, 'Publication date')}:
         		</th>
         		<td>
-            			${eunis:treatURLSpecialCharacters(actionBean.factsheet.speciesBook.date)}
+            			${eunis:treatURLSpecialCharacters(actionBean.speciesBook.date)}
         		</td>
       		</tr>
       		<tr>
@@ -265,8 +265,8 @@
         		</th>
         		<td>
         			<c:choose> 
-					<c:when test="${!empty actionBean.factsheet.speciesBook.URL}">
-			        	<a href="${eunis:replaceAll(eunis:treatURLSpecialCharacters(actionBean.factsheet.speciesBook.URL),'#','')}">${eunis:replaceAll(eunis:treatURLSpecialCharacters(actionBean.factsheet.speciesBook.URL),'#','')}</a>
+					<c:when test="${!empty actionBean.speciesBook.URL}">
+			        	<a href="${eunis:replaceAll(eunis:treatURLSpecialCharacters(actionBean.speciesBook.URL),'#','')}">${eunis:replaceAll(eunis:treatURLSpecialCharacters(actionBean.speciesBook.URL),'#','')}</a>
 					</c:when>
 			  		<c:otherwise>
 			  			&nbsp;

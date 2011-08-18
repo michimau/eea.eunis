@@ -455,12 +455,19 @@ public class SpeciesFactsheet {
                     if (country.getIso2l() == null || (country.getIso2l() != null && country.getIso2l().equals(""))) {
                         if (!(country.getAreaNameEnglish() == null || country.getAreaNameEnglish().trim().indexOf("ospar") == 0)) {
                             threat.setCountry(country.getAreaNameEnglish());
-                            threat.setReference(getBookAuthorDate(report.getIdDc()));
+                            String author = report.getSource();
+                            String dateStr = Utilities.formatReferencesDate(report.getCreated());
+                            if (!dateStr.equalsIgnoreCase("")) {
+                                author += " (" + dateStr + ")";
+                            }
+                            threat.setReference(author);
                             threat.setSelection(country.getSelection());
                             threat.setThreatCode(consS.getCode());
                             threat.setIdDc(report.getIdDc());
-                            int year = Utilities.checkedStringToInt(getBookDate(report.getIdDc()), 0);
-
+                            int year = 0;
+                            if (null != report.getCreated()) {
+                                year = Utilities.checkedStringToInt(new SimpleDateFormat("yyyy").format(report.getCreated()), 0);
+                            }
                             threat.setReferenceYear(year);
                             results.addElement(threat);
                         }

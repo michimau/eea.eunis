@@ -5,6 +5,8 @@
 package ro.finsiel.eunis.jrfTables;
 
 
+import java.util.Date;
+
 import net.sf.jrf.domain.PersistentObject;
 
 
@@ -20,6 +22,8 @@ public class Chm62edtReportsPersist extends PersistentObject {
     private Integer i_idNatureObject = null;
     private Integer i_idDc = null;
     private Integer reference = null;
+    private String source;
+    private Date created;
 
     public Integer getReference() {
         return reference;
@@ -164,5 +168,21 @@ public class Chm62edtReportsPersist extends PersistentObject {
     public void setIDLookup(String comment) {
         IDLookup = comment;
         this.markModifiedPersistentState();
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
     }
 }

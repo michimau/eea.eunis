@@ -94,7 +94,7 @@
 			</c:choose>
 			<c:if test="${!empty actionBean.specie.genus && !empty actionBean.speciesName}">
 				<div>
-		        	<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'Search species on UNEP-WCMC')}" href="http://sea.unep-wcmc.org/isdb/species.cfm?source=${actionBean.kingdomname}&amp;genus=${actionBean.specie.genus}&amp;species=${eunis:treatURLSpecialCharacters(actionBean.speciesName)}">${eunis:cmsPhrase(actionBean.contentManagement, 'UNEP-WCMC search')}</a>
+		        	<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'Search species on UNEP-WCMC')}" href="http://www.unep-wcmc-apps.org/isdb/Taxonomy/tax-gs-search2.cfm?displaylanguage=ENG&source=${actionBean.kingdomname}&amp;GenName=${actionBean.specie.genus}&amp;SpcName=${eunis:treatURLSpecialCharacters(actionBean.speciesName)}">${eunis:cmsPhrase(actionBean.contentManagement, 'UNEP-WCMC search')}</a>
 		      	</div>
 			</c:if>
 			<c:choose> 
@@ -116,7 +116,10 @@
 			</c:if>
 			<c:if test="${!empty actionBean.wormsid}">
 				<div>
-					<a href="http://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=${actionBean.wormsid}" title="World Register of Marine Species page">${eunis:cmsPhrase(actionBean.contentManagement, 'WorMS page')}</a>
+					<a href="http://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=${actionBean.wormsid}" title="World Register of Marine Species page">${eunis:cmsPhrase(actionBean.contentManagement, 'WoRMS page')}</a>
+				</div>
+				<div>
+				<a rel="nofollow" href="http://www.eu-nomen.eu/portal/taxon.php?GUID=urn:lsid:marinespecies.org:taxname:${actionBean.wormsid}" >${eunis:cmsPhrase(actionBean.contentManagement, 'PESI page')}</a>
 				</div>
 			</c:if>
 			<div>
@@ -127,11 +130,18 @@
 					<div>
 			        	<a href="http://www.faunaeur.org/full_results.php?id=${actionBean.faeu}">${eunis:cmsPhrase(actionBean.contentManagement, 'Fauna Europaea page')}</a>
 					</div>
+					<c:if test="${empty actionBean.wormsid}">
+					<div>
+			        	<a rel="nofollow" href="http://www.eu-nomen.eu/portal/taxon.php?GUID=urn:lsid:faunaeur.org:taxname:${actionBean.faeu}" >${eunis:cmsPhrase(actionBean.contentManagement, 'PESI page')}</a>
+					</div>
+					</c:if>
 				</c:when>
 		  		<c:otherwise>
+					<c:if test="${actionBean.kingdomname == 'Animals'}">
 					<div>
-						<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'Search species on Fauna Europaea')}" href="http://www.faunaeur.org/index.php?show_what=search%20results&amp;genus=${actionBean.specie.genus}&amp;species=${actionBean.speciesName}">${eunis:cmsPhrase(actionBean.contentManagement, 'Fauna Europaea')}</a>
+						<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'Search species on Fauna Europaea')}" href="http://www.faunaeur.org/index.php?show_what=search%20results&amp;genus=${actionBean.specie.genus}&amp;species=${actionBean.speciesName}">${eunis:cmsPhrase(actionBean.contentManagement, 'Search Fauna Europaea')}</a>
 					</div>
+					</c:if>
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${!empty actionBean.itisTSN}">

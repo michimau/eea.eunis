@@ -18,6 +18,7 @@ import ro.finsiel.eunis.utilities.EunisUtil;
 import com.hp.hpl.jena.rdf.arp.ALiteral;
 import com.hp.hpl.jena.rdf.arp.AResource;
 import com.hp.hpl.jena.rdf.arp.StatementHandler;
+
 import eionet.eunis.stripes.extensions.LoadException;
 import eionet.eunis.util.Constants;
 
@@ -66,7 +67,7 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
      */
     public RDFHandler(Connection con) throws SQLException {
         this.con = con;
-        String query = "INSERT INTO CHM62EDT_NATURE_OBJECT_ATTRIBUTES (ID_NATURE_OBJECT, NAME, OBJECT, LITOBJECT) VALUES (?,?,?,?)";
+        String query = "INSERT INTO CHM62EDT_NATURE_OBJECT_ATTRIBUTES (ID_NATURE_OBJECT, NAME, OBJECT, TYPE) VALUES (?,?,?,?)";
 
         preparedStatement = con.prepareStatement(query);
 
@@ -82,7 +83,7 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
 
         statement(subject, predicate,
                 object.isAnonymous() ? object.getAnonymousID() : object.getURI(),
-                EMPTY_STRING, false, object.isAnonymous());
+                        EMPTY_STRING, false, object.isAnonymous());
     }
 
     /*
@@ -189,7 +190,11 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
             preparedStatement.setString(1, natob_id);
             preparedStatement.setString(2, name);
             preparedStatement.setString(3, EunisUtil.replaceTagsImport(value));
-            preparedStatement.setBoolean(4, litObject);
+            if (litObject) {
+                preparedStatement.setString(4, "");
+            } else {
+                preparedStatement.setString(4, "reference");
+            }
             preparedStatement.addBatch();
 
             counter++;
@@ -210,7 +215,7 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
         String ret = null;
 
         String query = "SELECT ID_NATURE_OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE OBJECT='"
-                + identifier + "' AND NAME='" + matching + "'";
+            + identifier + "' AND NAME='" + matching + "'";
 
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -243,48 +248,48 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
         if (hasGBIF) {
             if (matching != null && matching.equals("sameSpecies")) {
                 whereClause.append("'").append(Constants.SAME_SPECIES_GBIF).append("'").append(
-                        ",");
+                ",");
             } else {
                 whereClause.append("'").append(Constants.SAME_SYNONYM_GBIF).append("'").append(
-                        ",");
+                ",");
             }
         }
         if (hasBiolab) {
             whereClause.append("'").append(Constants.BIOLIB_PAGE).append("'").append(
-                    ",");
+            ",");
         }
         if (hasBbc) {
             whereClause.append("'").append(Constants.BBC_PAGE).append("'").append(
-                    ",");
+            ",");
         }
         if (hasWikipedia) {
             whereClause.append("'").append(Constants.WIKIPEDIA_ARTICLE).append("'").append(
-                    ",");
+            ",");
         }
         if (hasWikispecies) {
             whereClause.append("'").append(Constants.WIKISPECIES_ARTICLE).append("'").append(
-                    ",");
+            ",");
         }
         if (hasBugGuide) {
             whereClause.append("'").append(Constants.BUG_GUIDE).append("'").append(
-                    ",");
+            ",");
         }
         if (hasNCBI) {
             if (matching != null && matching.equals("sameSpecies")) {
                 whereClause.append("'").append(Constants.SAME_SPECIES_NCBI).append("'").append(
-                        ",");
+                ",");
             } else {
                 whereClause.append("'").append(Constants.SAME_SYNONYM_NCBI).append("'").append(
-                        ",");
+                ",");
             }
         }
         if (hasITIS) {
             if (matching != null && matching.equals("sameSpecies")) {
                 whereClause.append("'").append(Constants.SAME_SPECIES_ITIS).append(
-                        "'");
+                "'");
             } else {
                 whereClause.append("'").append(Constants.SAME_SYNONYM_ITIS).append(
-                        "'");
+                "'");
             }
         }
 

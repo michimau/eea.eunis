@@ -32,7 +32,7 @@ public class Chm62edtNatureObjectAttributesPersist extends PersistentObject {
     /**
      * This is a database field.
      **/
-    private Boolean i_litobject;
+    private String type;
 
     public Chm62edtNatureObjectAttributesPersist() {
         super();
@@ -44,7 +44,7 @@ public class Chm62edtNatureObjectAttributesPersist extends PersistentObject {
 
     public void setIdNatureObject(Integer natureObject) {
         i_idNatureObject = natureObject;
-        this.markModifiedPersistentState(); 
+        this.markModifiedPersistentState();
     }
 
     public String getName() {
@@ -53,7 +53,7 @@ public class Chm62edtNatureObjectAttributesPersist extends PersistentObject {
 
     public void setName(String i_name) {
         this.i_name = i_name;
-        this.markModifiedPersistentState(); 
+        this.markModifiedPersistentState();
     }
 
     public String getObject() {
@@ -62,16 +62,7 @@ public class Chm62edtNatureObjectAttributesPersist extends PersistentObject {
 
     public void setObject(String i_object) {
         this.i_object = i_object;
-        this.markModifiedPersistentState(); 
-    }
-
-    public boolean isLitobject() {
-        return i_litobject;
-    }
-
-    public void setLitobject(Boolean i_litobject) {
-        this.i_litobject = i_litobject;
-        this.markModifiedPersistentState(); 
+        this.markModifiedPersistentState();
     }
 
     public String getObjectLang() {
@@ -80,7 +71,16 @@ public class Chm62edtNatureObjectAttributesPersist extends PersistentObject {
 
     public void setObjectLang(String i_objectlang) {
         this.i_objectlang = i_objectlang;
-        this.markModifiedPersistentState(); 
+        this.markModifiedPersistentState();
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+        this.markModifiedPersistentState();
     }
 
 }

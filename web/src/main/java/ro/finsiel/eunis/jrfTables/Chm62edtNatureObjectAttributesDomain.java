@@ -1,12 +1,11 @@
 package ro.finsiel.eunis.jrfTables;
 
 
-import net.sf.jrf.domain.AbstractDomain;
-import net.sf.jrf.domain.PersistentObject;
-import net.sf.jrf.column.columnspecs.BooleanColumnSpec;
 import net.sf.jrf.column.columnspecs.CompoundPrimaryKeyColumnSpec;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
+import net.sf.jrf.domain.AbstractDomain;
+import net.sf.jrf.domain.PersistentObject;
 
 
 /**
@@ -32,23 +31,23 @@ public class Chm62edtNatureObjectAttributesDomain extends AbstractDomain {
         // this.setJDBCHelper(JDBCHelperFactory.create());
         this.setTableName("CHM62EDT_NATURE_OBJECT_ATTRIBUTES");
         this.setReadOnly(true);
-    
+
         this.addColumnSpec(
                 new CompoundPrimaryKeyColumnSpec(
                         new IntegerColumnSpec("ID_NATURE_OBJECT",
-                        "getIdNatureObject", "setIdNatureObject", "-1",
-                        NATURAL_PRIMARY_KEY),
-                        new StringColumnSpec("NAME", "getName", "setName",
-                        DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY)));
+                                "getIdNatureObject", "setIdNatureObject", "-1",
+                                NATURAL_PRIMARY_KEY),
+                                new StringColumnSpec("NAME", "getName", "setName",
+                                        DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY)));
 
         this.addColumnSpec(
                 new StringColumnSpec("OBJECT", "getObject", "setObject",
-                DEFAULT_TO_EMPTY_STRING, REQUIRED));
+                        DEFAULT_TO_EMPTY_STRING, REQUIRED));
         this.addColumnSpec(
                 new StringColumnSpec("OBJECTLANG", "getObjectLang",
-                "setObjectLang", DEFAULT_TO_EMPTY_STRING, REQUIRED));
+                        "setObjectLang", DEFAULT_TO_EMPTY_STRING, REQUIRED));
         this.addColumnSpec(
-                new BooleanColumnSpec("LITOBJECT", "isLitobject", "setLitobject",
-                DEFAULT_TO_TRUE, REQUIRED));
+                new StringColumnSpec("TYPE", "getType",
+                        "setType", DEFAULT_TO_EMPTY_STRING, REQUIRED));
     }
 }

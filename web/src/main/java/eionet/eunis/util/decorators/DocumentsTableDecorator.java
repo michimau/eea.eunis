@@ -25,7 +25,7 @@ public class DocumentsTableDecorator extends TableDecorator {
 
         ret.append("<a href='documents/").append(doc.getIdDoc()).append("'>");
         if (doc.getTitle() != null && !doc.getTitle().equals("")) {
-            ret.append(EunisUtil.replaceTags(doc.getTitle()));
+            ret.append(EunisUtil.replaceTags(doc.getTitle(), true, true));
         } else {
             ret.append("-no-title-");
         }

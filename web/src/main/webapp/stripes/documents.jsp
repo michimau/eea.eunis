@@ -10,7 +10,7 @@
 					<display:table name="${actionBean.docs}" class="sortable" sort="external" id="listItem" htmlId="listItem" requestURI="/documents" decorator="eionet.eunis.util.decorators.DocumentsTableDecorator">
 						<display:column property="idDoc" title="ID" sortable="true"/>
 						<display:column property="docTitle" title="Title" sortable="true"/>
-						<display:column property="author" title="Author" sortable="true"/>
+						<display:column property="author" title="Author" sortable="true" decorator="eionet.eunis.util.decorators.ReplaceTagsColumnDecorator"/>
 						<display:column property="docYear" title="Year" sortable="true"/>
 					</display:table>
 

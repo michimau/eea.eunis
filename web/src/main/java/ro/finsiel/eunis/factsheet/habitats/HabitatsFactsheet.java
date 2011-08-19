@@ -1624,9 +1624,9 @@ public class HabitatsFactsheet {
                                             1)
                                             != null
                                             && ((Chm62edtReportAttributesPersist) attributes.get(1)).getName().equalsIgnoreCase(
-                                                    "probability")
-                                                    ? ((Chm62edtReportAttributesPersist) attributes.get(1)).getValue()
-                                                            : ""));
+                                            "probability")
+                                            ? ((Chm62edtReportAttributesPersist) attributes.get(1)).getValue()
+                                                    : ""));
 
                     comment = ((Chm62edtReportAttributesPersist) attributes.get(
                             0)
@@ -1638,9 +1638,9 @@ public class HabitatsFactsheet {
                                             1)
                                             != null
                                             && ((Chm62edtReportAttributesPersist) attributes.get(1)).getName().equalsIgnoreCase(
-                                                    "comment")
-                                                    ? ((Chm62edtReportAttributesPersist) attributes.get(1)).getValue()
-                                                            : ""));
+                                            "comment")
+                                            ? ((Chm62edtReportAttributesPersist) attributes.get(1)).getValue()
+                                                    : ""));
                 } else {
                     probability = ((Chm62edtReportAttributesPersist) attributes.get(
                             0)
@@ -2088,8 +2088,7 @@ public class HabitatsFactsheet {
     public String getLink(Integer nature_object_id, String link_name) {
         String link = null;
         List links = new Chm62edtNatureObjectAttributesDomain().findWhere(
-                "ID_NATURE_OBJECT=" + nature_object_id + " AND NAME='"
-                + link_name + "'");
+                "ID_NATURE_OBJECT=" + nature_object_id + " AND NAME='" + link_name + "'");
 
         if (links != null) {
             for (Object link1 : links) {

@@ -58,7 +58,7 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
     public RDFHandlerObjects(Connection con) throws SQLException {
         this.con = con;
 
-        String query = "INSERT INTO CHM62EDT_NATURE_OBJECT_ATTRIBUTES (ID_NATURE_OBJECT, NAME, OBJECT, LITOBJECT) VALUES (?,?,?,?)";
+        String query = "INSERT INTO CHM62EDT_NATURE_OBJECT_ATTRIBUTES (ID_NATURE_OBJECT, NAME, OBJECT, TYPE) VALUES (?,?,?,?)";
 
         preparedStatement = con.prepareStatement(query);
 
@@ -74,7 +74,7 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
 
         statement(subject, predicate,
                 object.isAnonymous() ? object.getAnonymousID() : object.getURI(),
-                EMPTY_STRING, false, object.isAnonymous());
+                        EMPTY_STRING, false, object.isAnonymous());
     }
 
     /*
@@ -102,7 +102,7 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
         try {
             if (predicate.toString().equals(RDF.type.toString())
                     && object.equals(
-                            "http://rdf.geospecies.org/ont/geospecies#SpeciesConcept")) {
+                    "http://rdf.geospecies.org/ont/geospecies#SpeciesConcept")) {
                 if (dto != null) {
                     insert(dto);
                 }
@@ -146,7 +146,7 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
 
         if (canName != null && author != null) {
             String query = "SELECT ID_NATURE_OBJECT, AUTHOR, VALID_NAME FROM chm62edt_species WHERE SCIENTIFIC_NAME = '"
-                    + EunisUtil.replaceTagsImport(canName) + "'";
+                + EunisUtil.replaceTagsImport(canName) + "'";
 
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -195,7 +195,7 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
                 preparedStatement.setString(1, natob_id);
                 preparedStatement.setString(2, type);
                 preparedStatement.setString(3, identifier);
-                preparedStatement.setBoolean(4, false);
+                preparedStatement.setString(4, "reference");
                 preparedStatement.addBatch();
 
                 counter++;
@@ -239,13 +239,13 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
         boolean ret = false;
 
         String query = "SELECT OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE ID_NATURE_OBJECT="
-                + natob_id
-                + " AND NAME IN ('sameSynonym', 'maybeSameSynonym', 'notSameSynonym') LIMIT 1";
+            + natob_id
+            + " AND NAME IN ('sameSynonym', 'maybeSameSynonym', 'notSameSynonym') LIMIT 1";
 
         if (type != null && type.equals("sameSpecies")) {
             query = "SELECT OBJECT FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES WHERE ID_NATURE_OBJECT="
-                    + natob_id
-                    + " AND NAME IN ('sameSpecies', 'maybeSameSpecies', 'notSameSpecies') LIMIT 1";
+                + natob_id
+                + " AND NAME IN ('sameSpecies', 'maybeSameSpecies', 'notSameSpecies') LIMIT 1";
         }
 
         PreparedStatement ps = null;

@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 
 import org.displaytag.properties.SortOrderEnum;
@@ -131,8 +130,8 @@ public class DocumentsDaoImpl extends MySqlBaseDao implements IDocumentsDao {
      * @see eionet.eunis.dao.IDocumentsDao#getDcAttributes(java.lang.String)
      * {@inheritDoc}
      */
-    public Hashtable<String, AttributeDto> getDcAttributes(String idDc) {
-        Hashtable<String, AttributeDto> ret = new Hashtable<String, AttributeDto>();
+    public List<AttributeDto> getDcAttributes(String idDc) {
+        List<AttributeDto> ret = new ArrayList<AttributeDto>();
 
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -140,15 +139,16 @@ public class DocumentsDaoImpl extends MySqlBaseDao implements IDocumentsDao {
 
         try {
             con = getConnection();
-            preparedStatement = con.prepareStatement("SELECT NAME, OBJECT, TYPE FROM DC_ATTRIBUTES WHERE ID_DC = ?");
+            preparedStatement = con.prepareStatement("SELECT NAME, OBJECT, OBJECTLANG, TYPE FROM DC_ATTRIBUTES WHERE ID_DC = ?");
             preparedStatement.setString(1, idDc);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 String name = rs.getString("NAME");
                 String object = rs.getString("OBJECT");
+                String lang = rs.getString("OBJECTLANG");
                 String type = rs.getString("TYPE");
-                AttributeDto attr = new AttributeDto(name, type, object);
-                ret.put(name, attr);
+                AttributeDto attr = new AttributeDto(name, type, object, lang);
+                ret.add(attr);
             }
         } catch (Exception e) {
             e.printStackTrace();

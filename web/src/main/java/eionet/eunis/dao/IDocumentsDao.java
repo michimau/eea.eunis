@@ -1,7 +1,6 @@
 package eionet.eunis.dao;
 
 
-import java.util.Hashtable;
 import java.util.List;
 
 import eionet.eunis.dto.AttributeDto;
@@ -34,9 +33,9 @@ public interface IDocumentsDao {
     /**
      * Returns all attributes from DC_ATTRIBUTES table for given ID_DC
      * @param idDc
-     * @return Hashtable<String, AttributeDto>
+     * @return List<AttributeDto>
      */
-    Hashtable<String, AttributeDto> getDcAttributes(String idDc);
+    List<AttributeDto> getDcAttributes(String idDc);
 
     /**
      * Returns content of table DC_INDEX

@@ -2,7 +2,7 @@
 
 <%@ include file="/stripes/common/taglibs.jsp"%>	
 
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Document - ${actionBean.dcIndex.title}">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Document - ${actionBean.dcIndex.title}" base="documents/">
 	<stripes:layout-component name="contents">
 			<!-- MAIN CONTENT -->
 				<h1 class="documentFirstHeading">${actionBean.dcIndex.title}</h1>
@@ -83,7 +83,7 @@
 						</tr>
 						<tr>
 							<td>URL</td>
-							<td><a href="${eunis:replaceTags2(actionBean.dcIndex.url, true, true)}">${eunis:replaceTags2(actionBean.dcIndex.url, true, true)}</a></td>
+							<td><a href="${eunis:replaceTags(actionBean.dcIndex.url)}">${eunis:replaceTags(actionBean.dcIndex.url)}</a></td>
 						</tr>
 						<tr class="zebraeven">
 							<td>Created</td>
@@ -93,6 +93,21 @@
 							<td>Publisher</td>
 							<td><strong>${eunis:replaceTags(actionBean.dcIndex.publisher)}</strong></td>
 						</tr>
+						<c:if test="${!empty actionBean.dcAttributes}">
+							<c:forEach items="${actionBean.dcAttributes}" var="attr" varStatus="loop">
+								<tr ${loop.index % 2 == 0 ? '' : 'class="zebraeven"'}>
+									<td>${attr.name}</td>
+									<c:choose>
+				              			<c:when test="${attr.type == 'reference'}">
+					              			<td><a href="${eunis:replaceTags(attr.value)}">${eunis:replaceTags(attr.value)}</a></td>
+				              			</c:when>
+				              			<c:otherwise>
+				              				<td><strong>${eunis:replaceTags(attr.value)}</strong></td>
+				              			</c:otherwise>
+				              		</c:choose>
+								</tr>
+							</c:forEach>
+						</c:if>
 					</table>
 	            </c:if>
 	            <c:if test="${actionBean.tab == 'species'}">

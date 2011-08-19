@@ -1,6 +1,6 @@
 package eionet.eunis.rdf;
 
-import java.util.Hashtable;
+import java.util.List;
 
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dto.AttributeDto;
@@ -14,7 +14,7 @@ public class GenerateDocumentRDF {
         + "xmlns:dcterms=\"http://purl.org/dc/terms/\">\n";
 
     private DcIndexDTO object;
-    private Hashtable<String, AttributeDto> attributes;
+    private List<AttributeDto> attributes;
     private String id;
     private StringBuffer rdf;
 
@@ -46,17 +46,17 @@ public class GenerateDocumentRDF {
                 rdf.append(RDFUtil.writeLiteral("dcterms:creator", object.getSource()));
                 rdf.append(RDFUtil.writeReference("dcterms:source", object.getUrl()));
                 rdf.append(RDFUtil.writeLiteral("dcterms:contributor", object.getEditor()));
-                rdf.append(RDFUtil.writeLiteral("dcterms:coverage", getValue("coverage")));
                 rdf.append(RDFUtil.writeLiteral("dcterms:created", object.getCreated()));
-                rdf.append(RDFUtil.writeLiteral("dcterms:description", getValue("description")));
-                rdf.append(RDFUtil.writeLiteral("dcterms:format", getValue("format")));
-                rdf.append(RDFUtil.writeLiteral("dcterms:identifier", getValue("identifier")));
-                rdf.append(RDFUtil.writeLiteral("dcterms:language", getValue("language")));
                 rdf.append(RDFUtil.writeLiteral("dcterms:publisher", object.getPublisher()));
-                rdf.append(RDFUtil.writeLiteral("dcterms:relation", getValue("relation")));
-                rdf.append(RDFUtil.writeLiteral("dcterms:rights", getValue("rights")));
-                rdf.append(RDFUtil.writeLiteral("dcterms:subject", getValue("subject")));
-                rdf.append(RDFUtil.writeLiteral("dcterms:type", getValue("type")));
+                for(AttributeDto attr : attributes) {
+                    if (attr.getType() != null && attr.getType().equals("reference")) {
+                        rdf.append(RDFUtil.writeReference("dcterms:" + attr.getName(), attr.getValue()));
+                    } else {
+                        rdf.append(
+                                RDFUtil.writeLiteral("dcterms:" + attr.getName(), attr.getValue(), attr.getLang(), attr.getType())
+                        );
+                    }
+                }
                 rdf.append("</rdf:Description>\n");
             }
         } catch (Exception e) {
@@ -65,14 +65,4 @@ public class GenerateDocumentRDF {
         return rdf;
     }
 
-    private String getValue(String key) {
-        String ret = null;
-        if (key != null && attributes != null) {
-            AttributeDto attr = attributes.get(key);
-            if (attr != null) {
-                ret = attr.getValue();
-            }
-        }
-        return ret;
-    }
 }

@@ -20,6 +20,7 @@ import ro.finsiel.eunis.jrfTables.ReferencesDomain;
 import ro.finsiel.eunis.utilities.EunisUtil;
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dao.IDocumentsDao;
+import eionet.eunis.dto.AttributeDto;
 import eionet.eunis.dto.DcIndexDTO;
 import eionet.eunis.dto.DocumentDTO;
 import eionet.eunis.dto.PairDTO;
@@ -42,6 +43,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
     private String iddoc;
     private CustomPaginatedList<DocumentDTO> docs;
     private DcIndexDTO dcIndex;
+    private List<AttributeDto> dcAttributes;
 
     // selected tab
     private String tab;
@@ -99,6 +101,7 @@ public class DocumentsActionBean extends AbstractStripesAction {
         if (!StringUtils.isBlank(iddoc) && EunisUtil.isNumber(iddoc)) {
             forwardPage = "/stripes/document.jsp";
             dcIndex = dao.getDcIndex(iddoc);
+            dcAttributes = dao.getDcAttributes(iddoc);
             btrail = "eea#" + eeaHome
             + ",home#index.jsp,documents#documents";
             if (dcIndex != null && dcIndex.getTitle() != null) {
@@ -263,6 +266,10 @@ public class DocumentsActionBean extends AbstractStripesAction {
 
     public void setDir(String dir) {
         this.dir = dir;
+    }
+
+    public List<AttributeDto> getDcAttributes() {
+        return dcAttributes;
     }
 
 }

@@ -142,7 +142,7 @@ public class JstlFunctions {
      * @return String
      */
     public static String replaceTags(String in) {
-        return EunisUtil.replaceTags(in);
+        return EunisUtil.replaceTags(in, true, true);
     }
 
     /**

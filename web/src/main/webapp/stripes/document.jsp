@@ -2,7 +2,7 @@
 
 <%@ include file="/stripes/common/taglibs.jsp"%>	
 
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Document - ${actionBean.dcIndex.title}" base="documents/">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Document - ${actionBean.dcIndex.title}">
 	<stripes:layout-component name="contents">
 			<!-- MAIN CONTENT -->
 				<h1 class="documentFirstHeading">${actionBean.dcIndex.title}</h1>
@@ -95,7 +95,7 @@
 						</tr>
 						<c:if test="${!empty actionBean.dcAttributes}">
 							<c:forEach items="${actionBean.dcAttributes}" var="attr" varStatus="loop">
-								<tr ${loop.index % 2 == 0 ? '' : 'class="zebraeven"'}>
+								<tr ${loop.index % 2 != 0 ? '' : 'class="zebraeven"'}>
 									<td>${attr.name}</td>
 									<c:choose>
 				              			<c:when test="${attr.type == 'reference'}">

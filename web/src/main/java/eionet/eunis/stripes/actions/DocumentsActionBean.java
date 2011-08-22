@@ -2,8 +2,10 @@ package eionet.eunis.stripes.actions;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.DontValidate;
@@ -28,6 +30,7 @@ import eionet.eunis.rdf.GenerateDocumentRDF;
 import eionet.eunis.stripes.extensions.Redirect303Resolution;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.CustomPaginatedList;
+import eionet.eunis.util.DcTermsLabels;
 import eionet.eunis.util.Pair;
 
 
@@ -58,6 +61,8 @@ public class DocumentsActionBean extends AbstractStripesAction {
     private int page;
     private String sort;
     private String dir;
+
+    private Map<String, String> dcTermsLabels = new HashMap<String, String>();
 
     @DefaultHandler
     @DontValidate(ignoreBindingErrors = true)
@@ -100,8 +105,11 @@ public class DocumentsActionBean extends AbstractStripesAction {
 
         if (!StringUtils.isBlank(iddoc) && EunisUtil.isNumber(iddoc)) {
             forwardPage = "/stripes/document.jsp";
+
             dcIndex = dao.getDcIndex(iddoc);
             dcAttributes = dao.getDcAttributes(iddoc);
+            dcTermsLabels = DcTermsLabels.getDctermslabels();
+
             btrail = "eea#" + eeaHome
             + ",home#index.jsp,documents#documents";
             if (dcIndex != null && dcIndex.getTitle() != null) {
@@ -270,6 +278,10 @@ public class DocumentsActionBean extends AbstractStripesAction {
 
     public List<AttributeDto> getDcAttributes() {
         return dcAttributes;
+    }
+
+    public Map<String, String> getDcTermsLabels() {
+        return dcTermsLabels;
     }
 
 }

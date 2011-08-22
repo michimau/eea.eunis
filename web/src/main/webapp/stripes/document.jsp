@@ -96,7 +96,7 @@
 						<c:if test="${!empty actionBean.dcAttributes}">
 							<c:forEach items="${actionBean.dcAttributes}" var="attr" varStatus="loop">
 								<tr ${loop.index % 2 != 0 ? '' : 'class="zebraeven"'}>
-									<td>${attr.name}</td>
+									<td>${actionBean.dcTermsLabels[attr.name]}</td>
 									<c:choose>
 				              			<c:when test="${attr.type == 'reference'}">
 					              			<td><a href="${eunis:replaceTags(attr.value)}">${eunis:replaceTags(attr.value)}</a></td>

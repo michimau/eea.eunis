@@ -33,24 +33,24 @@ public class TSVHabitatCodeReport extends AbstractTSVReport
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    */
-  public TSVHabitatCodeReport( String sessionID, AbstractFormBean formBean )
+  public TSVHabitatCodeReport(String sessionID, AbstractFormBean formBean)
   {
-    super( "HabitatsCodeReport_" + sessionID + ".tsv" );
-    this.formBean = ( CodeBean ) formBean;
+    super("HabitatsCodeReport_" + sessionID + ".tsv");
+    this.formBean = (CodeBean) formBean;
     this.filename = "HabitatsCodeReport_" + sessionID + ".tsv";
-    xmlreport = new XMLReport( "HabitatsCodeReport_" + sessionID + ".xml" );
+    xmlreport = new XMLReport("HabitatsCodeReport_" + sessionID + ".xml");
     // Init the data factory
-    if ( null != formBean )
+    if (null != formBean)
     {
-      Integer _database = Utilities.checkedStringToInt( ( ( CodeBean ) formBean ).getDatabase(), CodeDomain.SEARCH_EUNIS );
-      dataFactory = new CodePaginator( new CodeDomain( formBean.toSearchCriteria(), formBean.toSortCriteria(), _database ) );
-      dataFactory.setSortCriteria( formBean.toSortCriteria() );
+      Integer _database = Utilities.checkedStringToInt(((CodeBean) formBean).getDatabase(), CodeDomain.SEARCH_EUNIS);
+      dataFactory = new CodePaginator(new CodeDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), _database));
+      dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
     else
     {
-      System.out.println( TSVHabitatCodeReport.class.getName() + "::ctor() - Warning: formBean was null!" );
+      System.out.println(TSVHabitatCodeReport.class.getName() + "::ctor() - Warning: formBean was null!");
     }
-    this.database = Utilities.checkedStringToInt( this.formBean.getDatabase(), CodeDomain.SEARCH_EUNIS );
+    this.database = Utilities.checkedStringToInt(this.formBean.getDatabase(), CodeDomain.SEARCH_EUNIS);
   }
 
   /**
@@ -59,34 +59,34 @@ public class TSVHabitatCodeReport extends AbstractTSVReport
    */
   public List<String> createHeader()
   {
-    if ( null == formBean )
+    if (null == formBean)
     {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
     // Level
-    if ( formBean.getDatabase().equalsIgnoreCase( CodeDomain.SEARCH_EUNIS.toString() ) )
+    if (formBean.getDatabase().equalsIgnoreCase(CodeDomain.SEARCH_EUNIS.toString()))
     {
-      headers.addElement( "Level" );
+      headers.addElement("Level");
     }
     // Code
-    if ( 0 == database.compareTo( CodeDomain.SEARCH_BOTH ) )
+    if (0 == database.compareTo(CodeDomain.SEARCH_BOTH))
     {
-      headers.addElement( "EUNIS code" );
-      headers.addElement( "ANNEX I code" );
+      headers.addElement("EUNIS code");
+      headers.addElement("ANNEX I code");
     }
-    if ( 0 == database.compareTo( CodeDomain.SEARCH_EUNIS ) )
+    if (0 == database.compareTo(CodeDomain.SEARCH_EUNIS))
     {
-      headers.addElement( "EUNIS code" );
+      headers.addElement("EUNIS code");
     }
-    if ( 0 == database.compareTo( CodeDomain.SEARCH_ANNEX ) )
+    if (0 == database.compareTo(CodeDomain.SEARCH_ANNEX))
     {
-      headers.addElement( "ANNEX I code" );
+      headers.addElement("ANNEX I code");
     }
     // Name
-    headers.addElement( "Habitat type name" );
+    headers.addElement("Habitat type name");
     // Relation
-    headers.addElement( "Relation with other habitat types" );
+    headers.addElement("Relation with other habitat types");
     return headers;
   }
 
@@ -95,91 +95,91 @@ public class TSVHabitatCodeReport extends AbstractTSVReport
    */
   public void writeData()
   {
-    if ( null == dataFactory )
+    if (null == dataFactory)
     {
       return;
     }
-    dataFactory.setPageSize( RESULTS_PER_PAGE );
+    dataFactory.setPageSize(RESULTS_PER_PAGE);
     try
     {
       int _pagesCount = dataFactory.countPages();
-      if ( _pagesCount == 0 )
+      if (_pagesCount == 0)
       {
         closeFile();
         return;
       }
-      writeRow( createHeader() );
-      xmlreport.writeRow( createHeader() );
-      Integer relationOp = Utilities.checkedStringToInt( formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS );
-      for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
+      writeRow(createHeader());
+      xmlreport.writeRow(createHeader());
+      Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
-        List resultSet = dataFactory.getPage( _currPage );
-        for ( int i = 0; i < resultSet.size(); i++ )
+        List resultSet = dataFactory.getPage(_currPage);
+        for (int i = 0; i < resultSet.size(); i++)
         {
-          CodePersist habitat = ( CodePersist ) resultSet.get( i );
-          Integer idHab = Utilities.checkedStringToInt( habitat.getIdHabitat(), 0 );
-          List otherClassifications = HabitatsSearchUtility.findOtherClassifications( idHab, relationOp, formBean.getSearchString() );
+          CodePersist habitat = (CodePersist) resultSet.get(i);
+          Integer idHab = Utilities.checkedStringToInt(habitat.getIdHabitat(), 0);
+          List otherClassifications = HabitatsSearchUtility.findOtherClassifications(idHab, relationOp, formBean.getSearchString());
           // TSV
-          if ( otherClassifications.size() > 0 )
+          if (otherClassifications.size() > 0)
           {
-            for ( int j = 0; j < otherClassifications.size(); j++ )
+            for (int j = 0; j < otherClassifications.size(); j++)
             {
-              OtherClassWrapper classification = ( OtherClassWrapper ) otherClassifications.get( j );
-              if ( j == 0 )
+              OtherClassWrapper classification = (OtherClassWrapper) otherClassifications.get(j);
+              if (j == 0)
               {
                 Vector<String> aRow = new Vector<String>();
                 // Level
-                if ( formBean.getDatabase().equalsIgnoreCase( CodeDomain.SEARCH_EUNIS.toString() ) )
+                if (formBean.getDatabase().equalsIgnoreCase(CodeDomain.SEARCH_EUNIS.toString()))
                 {
-                  aRow.addElement( habitat.getHabLevel().toString() );
+                  aRow.addElement(habitat.getHabLevel().toString());
                 }
                 // Code
-                if ( 0 == database.compareTo( CodeDomain.SEARCH_BOTH ) )
+                if (0 == database.compareTo(CodeDomain.SEARCH_BOTH))
                 {
-                  aRow.addElement( habitat.getEunisHabitatCode() );
-                  aRow.addElement( habitat.getCode2000() );
+                  aRow.addElement(habitat.getEunisHabitatCode());
+                  aRow.addElement(habitat.getCode2000());
                 }
-                if ( 0 == database.compareTo( CodeDomain.SEARCH_EUNIS ) )
+                if (0 == database.compareTo(CodeDomain.SEARCH_EUNIS))
                 {
-                  aRow.addElement( habitat.getEunisHabitatCode() );
+                  aRow.addElement(habitat.getEunisHabitatCode());
                 }
-                if ( 0 == database.compareTo( CodeDomain.SEARCH_ANNEX ) )
+                if (0 == database.compareTo(CodeDomain.SEARCH_ANNEX))
                 {
-                  aRow.addElement( habitat.getCode2000() );
+                  aRow.addElement(habitat.getCode2000());
                 }
                 // Scientific name
-                aRow.addElement( habitat.getScientificName() );
+                aRow.addElement(habitat.getScientificName());
                 // Relation
-                aRow.addElement( classification.getCode() + "-" + classification.getClassificatioName() + "(" + classification.getRelationDecoded() + ")" );
-                writeRow( aRow );
+                aRow.addElement(classification.getCode() + "-" + classification.getClassificatioName() + "(" + classification.getRelationDecoded() + ")");
+                writeRow(aRow);
               }
               else
               {
                 Vector<String> aRow = new Vector<String>();
                 // Level
-                if ( formBean.getDatabase().equalsIgnoreCase( CodeDomain.SEARCH_EUNIS.toString() ) )
+                if (formBean.getDatabase().equalsIgnoreCase(CodeDomain.SEARCH_EUNIS.toString()))
                 {
-                  aRow.addElement( "" );
+                  aRow.addElement("");
                 }
                 // Code
-                if ( 0 == database.compareTo( CodeDomain.SEARCH_BOTH ) )
+                if (0 == database.compareTo(CodeDomain.SEARCH_BOTH))
                 {
-                  aRow.addElement( "" );
-                  aRow.addElement( "" );
+                  aRow.addElement("");
+                  aRow.addElement("");
                 }
-                if ( 0 == database.compareTo( CodeDomain.SEARCH_EUNIS ) )
+                if (0 == database.compareTo(CodeDomain.SEARCH_EUNIS))
                 {
-                  aRow.addElement( "" );
+                  aRow.addElement("");
                 }
-                if ( 0 == database.compareTo( CodeDomain.SEARCH_ANNEX ) )
+                if (0 == database.compareTo(CodeDomain.SEARCH_ANNEX))
                 {
-                  aRow.addElement( "" );
+                  aRow.addElement("");
                 }
                 // Scientific name
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Relation
-                aRow.addElement( classification.getCode() + "-" + classification.getClassificatioName() + "(" + classification.getRelationDecoded() + ")" );
-                writeRow( aRow );
+                aRow.addElement(classification.getCode() + "-" + classification.getClassificatioName() + "(" + classification.getRelationDecoded() + ")");
+                writeRow(aRow);
               }
             }
           }
@@ -187,82 +187,82 @@ public class TSVHabitatCodeReport extends AbstractTSVReport
           {
             Vector<String> aRow = new Vector<String>();
             // Level
-            if ( formBean.getDatabase().equalsIgnoreCase( CodeDomain.SEARCH_EUNIS.toString() ) )
+            if (formBean.getDatabase().equalsIgnoreCase(CodeDomain.SEARCH_EUNIS.toString()))
             {
-              aRow.addElement( habitat.getHabLevel().toString() );
+              aRow.addElement(habitat.getHabLevel().toString());
             }
             // Code
-            if ( 0 == database.compareTo( CodeDomain.SEARCH_BOTH ) )
+            if (0 == database.compareTo(CodeDomain.SEARCH_BOTH))
             {
-              aRow.addElement( habitat.getEunisHabitatCode() );
-              aRow.addElement( habitat.getCode2000() );
+              aRow.addElement(habitat.getEunisHabitatCode());
+              aRow.addElement(habitat.getCode2000());
             }
-            if ( 0 == database.compareTo( CodeDomain.SEARCH_EUNIS ) )
+            if (0 == database.compareTo(CodeDomain.SEARCH_EUNIS))
             {
-              aRow.addElement( habitat.getEunisHabitatCode() );
+              aRow.addElement(habitat.getEunisHabitatCode());
             }
-            if ( 0 == database.compareTo( CodeDomain.SEARCH_ANNEX ) )
+            if (0 == database.compareTo(CodeDomain.SEARCH_ANNEX))
             {
-              aRow.addElement( habitat.getCode2000() );
+              aRow.addElement(habitat.getCode2000());
             }
             // Scientific name
-            aRow.addElement( habitat.getScientificName() );
+            aRow.addElement(habitat.getScientificName());
             // Relation
-            aRow.addElement( "-" );
-            writeRow( aRow );
+            aRow.addElement("-");
+            writeRow(aRow);
           }
 
           // XML
           Vector<String> aRow = new Vector<String>();
           // Level
-          if ( formBean.getDatabase().equalsIgnoreCase( CodeDomain.SEARCH_EUNIS.toString() ) )
+          if (formBean.getDatabase().equalsIgnoreCase(CodeDomain.SEARCH_EUNIS.toString()))
           {
-            aRow.addElement( habitat.getHabLevel().toString() );
+            aRow.addElement(habitat.getHabLevel().toString());
           }
           // Code
-          if ( 0 == database.compareTo( CodeDomain.SEARCH_BOTH ) )
+          if (0 == database.compareTo(CodeDomain.SEARCH_BOTH))
           {
-            aRow.addElement( habitat.getEunisHabitatCode() );
-            aRow.addElement( habitat.getCode2000() );
+            aRow.addElement(habitat.getEunisHabitatCode());
+            aRow.addElement(habitat.getCode2000());
           }
-          if ( 0 == database.compareTo( CodeDomain.SEARCH_EUNIS ) )
+          if (0 == database.compareTo(CodeDomain.SEARCH_EUNIS))
           {
-            aRow.addElement( habitat.getEunisHabitatCode() );
+            aRow.addElement(habitat.getEunisHabitatCode());
           }
-          if ( 0 == database.compareTo( CodeDomain.SEARCH_ANNEX ) )
+          if (0 == database.compareTo(CodeDomain.SEARCH_ANNEX))
           {
-            aRow.addElement( habitat.getCode2000() );
+            aRow.addElement(habitat.getCode2000());
           }
           // Scientific name
-          aRow.addElement( habitat.getScientificName() );
+          aRow.addElement(habitat.getScientificName());
 
           String otherCodes = "";
-          for ( int j = 0; j < otherClassifications.size(); j++ )
+          for (int j = 0; j < otherClassifications.size(); j++)
           {
-            OtherClassWrapper classification = ( OtherClassWrapper ) otherClassifications.get( j );
+            OtherClassWrapper classification = (OtherClassWrapper) otherClassifications.get(j);
             otherCodes += "<classification code=\"" + classification.getCode() + "\" " +
                                            "name=\"" + classification.getClassificatioName() + "\" " +
                                            " relation=\"" + classification.getRelationDecoded() + "\" />";
           }
           // Relation
-          aRow.addElement( otherCodes );
-          xmlreport.writeRow( aRow );
+          aRow.addElement(otherCodes);
+          xmlreport.writeRow(aRow);
         }
       }
     }
-    catch ( CriteriaMissingException ex )
+    catch (CriteriaMissingException ex)
     {
       ex.printStackTrace();
     }
-    catch ( InitializationException iex )
+    catch (InitializationException iex)
     {
       iex.printStackTrace();
     }
-    catch ( IOException ioex )
+    catch (IOException ioex)
     {
       ioex.printStackTrace();
     }
-    catch ( Exception ex2 )
+    catch (Exception ex2)
     {
       ex2.printStackTrace();
     }

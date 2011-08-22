@@ -31,14 +31,14 @@ public class TSVSitesAdvanced extends AbstractTSVReport
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    */
-  public TSVSitesAdvanced( String sessionID, AbstractFormBean formBean )
+  public TSVSitesAdvanced(String sessionID, AbstractFormBean formBean)
   {
-    super( "SitesAdvancedReport_" + sessionID + ".tsv" );
-    this.formBean = ( CombinedSearchBean ) formBean;
+    super("SitesAdvancedReport_" + sessionID + ".tsv");
+    this.formBean = (CombinedSearchBean) formBean;
     this.filename = "SitesAdvancedReport_" + sessionID + ".tsv";
-    this.dataFactory = new DictionaryPaginator( new DictionaryDomain( sessionID ) );
-    this.dataFactory.setSortCriteria( formBean.toSortCriteria() );
-    xmlreport = new XMLReport( "SitesAdvancedReport_" + sessionID + ".xml" );
+    this.dataFactory = new DictionaryPaginator(new DictionaryDomain(sessionID));
+    this.dataFactory.setSortCriteria(formBean.toSortCriteria());
+    xmlreport = new XMLReport("SitesAdvancedReport_" + sessionID + ".xml");
   }
 
   /**
@@ -48,35 +48,35 @@ public class TSVSitesAdvanced extends AbstractTSVReport
    */
   public List<String> createHeader()
   {
-    if ( null == formBean )
+    if (null == formBean)
     {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
     // Source data set
-    headers.addElement( "Source data set" );
+    headers.addElement("Source data set");
     // Site name
-    headers.addElement( "Site name" );
+    headers.addElement("Site name");
     // Designation type
-    headers.addElement( "Designation type" );
+    headers.addElement("Designation type");
     // Country
-    headers.addElement( "Country" );
+    headers.addElement("Country");
     // Designation year
-    headers.addElement( "Designation year" );
+    headers.addElement("Designation year");
     // Longitude
-    headers.addElement( "Longitude" );
+    headers.addElement("Longitude");
     // Latitude
-    headers.addElement( "Latitude" );
+    headers.addElement("Latitude");
     // Size
-    headers.addElement( "Size" );
+    headers.addElement("Size");
     // Length
-    headers.addElement( "Length" );
+    headers.addElement("Length");
     // Min. altitude
-    headers.addElement( "Min. altitude" );
+    headers.addElement("Min. altitude");
     // Max. altitude
-    headers.addElement( "Max. altitude" );
+    headers.addElement("Max. altitude");
     // Mean altitude
-    headers.addElement( "Mean altitude" );
+    headers.addElement("Mean altitude");
     return headers;
   }
 
@@ -85,72 +85,72 @@ public class TSVSitesAdvanced extends AbstractTSVReport
    */
   public void writeData()
   {
-    if ( null == dataFactory )
+    if (null == dataFactory)
     {
       return;
     }
-    dataFactory.setPageSize( RESULTS_PER_PAGE );
+    dataFactory.setPageSize(RESULTS_PER_PAGE);
     try
     {
       int _pagesCount = dataFactory.countPages();
-      if ( _pagesCount == 0 )
+      if (_pagesCount == 0)
       {
         closeFile();
         return;
       }
-      writeRow( createHeader() );
-      xmlreport.writeRow( createHeader() );
-      for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
+      writeRow(createHeader());
+      xmlreport.writeRow(createHeader());
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
-        List resultSet = dataFactory.getPage( _currPage );
-        for ( int i = 0; i < resultSet.size(); i++ )
+        List resultSet = dataFactory.getPage(_currPage);
+        for (int i = 0; i < resultSet.size(); i++)
         {
-          DictionaryPersist site = ( DictionaryPersist ) resultSet.get( i );
-          String designations = Utilities.formatString( site.getDesign() );
+          DictionaryPersist site = (DictionaryPersist) resultSet.get(i);
+          String designations = Utilities.formatString(site.getDesign());
 
           Vector<String> row = new Vector<String>();
           // Source data set
-          row.addElement( SitesSearchUtility.translateSourceDB(site.getSourceDB()) );
+          row.addElement(SitesSearchUtility.translateSourceDB(site.getSourceDB()));
           // Site name
-          row.addElement( site.getName() );
+          row.addElement(site.getName());
           // Designation type
-          row.addElement( designations );
+          row.addElement(designations);
           // Country
-          row.addElement( site.getAreaNameEn() );
+          row.addElement(site.getAreaNameEn());
           // Designation year
-          row.addElement( SitesSearchUtility.parseDesignationYear(site.getDesignationDate(), site.getSourceDB()));
+          row.addElement(SitesSearchUtility.parseDesignationYear(site.getDesignationDate(), site.getSourceDB()));
           // Longitude
-          row.addElement( SitesSearchUtility.formatCoordinatesPDF(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec()) );
+          row.addElement(SitesSearchUtility.formatCoordinatesPDF(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec()));
           // Latitude
-          row.addElement( SitesSearchUtility.formatCoordinatesPDF(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec()) );
+          row.addElement(SitesSearchUtility.formatCoordinatesPDF(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec()));
           // Size
-          row.addElement( Utilities.formatAreaPDF(site.getArea(), 5, 2, "") );
+          row.addElement(Utilities.formatAreaPDF(site.getArea(), 5, 2, ""));
           // Length
-          row.addElement( Utilities.formatAreaPDF(site.getLength(), 5, 2, "") );
+          row.addElement(Utilities.formatAreaPDF(site.getLength(), 5, 2, ""));
           // Min. altitude
-          row.addElement( Utilities.formatString(site.getAltMin()) );
+          row.addElement(Utilities.formatString(site.getAltMin()));
           // Max. altitude
-          row.addElement( Utilities.formatString(site.getAltMax()) );
+          row.addElement(Utilities.formatString(site.getAltMax()));
           // Mean altitude
-          row.addElement( Utilities.formatString(site.getAltMean()) );
-          writeRow( row );
-          xmlreport.writeRow( row );
+          row.addElement(Utilities.formatString(site.getAltMean()));
+          writeRow(row);
+          xmlreport.writeRow(row);
         }
       }
     }
-    catch ( CriteriaMissingException ex )
+    catch (CriteriaMissingException ex)
     {
       ex.printStackTrace();
     }
-    catch ( InitializationException iex )
+    catch (InitializationException iex)
     {
       iex.printStackTrace();
     }
-    catch ( IOException ioex )
+    catch (IOException ioex)
     {
       ioex.printStackTrace();
     }
-    catch ( Exception ex2 )
+    catch (Exception ex2)
     {
       ex2.printStackTrace();
     }

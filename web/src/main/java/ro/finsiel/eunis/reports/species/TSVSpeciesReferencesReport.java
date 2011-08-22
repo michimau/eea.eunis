@@ -37,12 +37,12 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
    * @param SQL_USR SQL Driver user
    * @param SQL_PWD SQL Driver password
    */
-  public TSVSpeciesReferencesReport( String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies,
+  public TSVSpeciesReferencesReport(String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies,
                                      String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) {
-    super( "species-references_" + sessionID + ".tsv" );
-    this.formBean = ( ReferencesBean ) formBean;
+    super("species-references_" + sessionID + ".tsv");
+    this.formBean = (ReferencesBean) formBean;
     this.filename = "species-references_" + sessionID + ".tsv";
-    xmlreport = new XMLReport( "species-references_" + sessionID + ".xml" );
+    xmlreport = new XMLReport("species-references_" + sessionID + ".xml");
     this.dataFactory = new ReferencesPaginator(new RefDomain(formBean.toSearchCriteria(),
                                                                           formBean.toSortCriteria(),
                                                                           showEUNISInvalidatedSpecies,
@@ -59,16 +59,16 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
    * @return An array with the columns headers of the table
    */
   public List<String> createHeader() {
-    if ( null == formBean )
+    if (null == formBean)
     {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
-    headers.addElement( "Group" );
-    headers.addElement( "Order" );
-    headers.addElement( "Family" );
-    headers.addElement( "Scientific name" );
-    headers.addElement( "Vernacular names" );
+    headers.addElement("Group");
+    headers.addElement("Order");
+    headers.addElement("Family");
+    headers.addElement("Scientific name");
+    headers.addElement("Vernacular names");
     return headers;
   }
 
@@ -76,66 +76,66 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
    * Use this method to write specific data into the file. Implemented in inherited classes.
    */
   public void writeData() {
-    if ( null == dataFactory )
+    if (null == dataFactory)
     {
       return;
     }
-    dataFactory.setPageSize( RESULTS_PER_PAGE );
+    dataFactory.setPageSize(RESULTS_PER_PAGE);
     try
     {
       int _pagesCount = dataFactory.countPages();
-      if ( _pagesCount == 0 )
+      if (_pagesCount == 0)
       {
         closeFile();
         return;
       }
-      writeRow( createHeader() );
-      xmlreport.writeRow( createHeader() );
-      for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
+      writeRow(createHeader());
+      xmlreport.writeRow(createHeader());
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
-        List resultSet = dataFactory.getPage( _currPage );
-        for ( int i = 0; i < resultSet.size(); i++ )
+        List resultSet = dataFactory.getPage(_currPage);
+        for (int i = 0; i < resultSet.size(); i++)
         {
           String xmlVernacularNames = "";
-          SpeciesRefWrapper specie = (SpeciesRefWrapper)resultSet.get( i );
+          SpeciesRefWrapper specie = (SpeciesRefWrapper)resultSet.get(i);
           Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
           Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);
-          if ( sortVernList.size() > 0 )
+          if (sortVernList.size() > 0)
           {
             for (int ii = 0; ii < sortVernList.size(); ii++)
             {
               VernacularNameWrapper aVernName = (VernacularNameWrapper)sortVernList.get(ii);
               String vernacularName = aVernName.getName();
               xmlVernacularNames += "<name language=\"" + aVernName.getLanguage() + "\">" + aVernName.getName() + "</name>";
-              if ( ii == 0 )
+              if (ii == 0)
               {
                 Vector<String> row = new Vector<String>();
                 // Group
-                row.addElement( specie.getGroupName() );
+                row.addElement(specie.getGroupName());
                 // Order
-                row.addElement( specie.getOrderName() );
+                row.addElement(specie.getOrderName());
                 // Family
-                row.addElement( specie.getFamilyName() );
+                row.addElement(specie.getFamilyName());
                 // Scientific name
-                row.addElement( specie.getScientificName() );
+                row.addElement(specie.getScientificName());
                 // Vernacular name
-                row.addElement( vernacularName );
-                writeRow( row );
+                row.addElement(vernacularName);
+                writeRow(row);
               }
               else
               {
                 Vector<String> row = new Vector<String>();
                 // Group
-                row.addElement( "" );
+                row.addElement("");
                 // Order
-                row.addElement( "" );
+                row.addElement("");
                 // Family
-                row.addElement( "" );
+                row.addElement("");
                 // Scientific name
-                row.addElement( "" );
+                row.addElement("");
                 // Vernacular name
-                row.addElement( vernacularName );
-                writeRow( row );
+                row.addElement(vernacularName);
+                writeRow(row);
               }
             }
           }
@@ -143,45 +143,45 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
           {
             Vector<String> row = new Vector<String>();
             // Group
-            row.addElement( specie.getGroupName() );
+            row.addElement(specie.getGroupName());
             // Order
-            row.addElement( specie.getOrderName() );
+            row.addElement(specie.getOrderName());
             // Family
-            row.addElement( specie.getFamilyName() );
+            row.addElement(specie.getFamilyName());
             // Scientific name
-            row.addElement( specie.getScientificName() );
+            row.addElement(specie.getScientificName());
             // Vernacular name
-            row.addElement( "-" );
-            writeRow( row );
+            row.addElement("-");
+            writeRow(row);
           }
           Vector<String> row = new Vector<String>();
           // Group
-          row.addElement( specie.getGroupName() );
+          row.addElement(specie.getGroupName());
           // Order
-          row.addElement( specie.getOrderName() );
+          row.addElement(specie.getOrderName());
           // Family
-          row.addElement( specie.getFamilyName() );
+          row.addElement(specie.getFamilyName());
           // Scientific name
-          row.addElement( specie.getScientificName() );
+          row.addElement(specie.getScientificName());
           // Vernacular name
-          row.addElement( xmlVernacularNames );
-          xmlreport.writeRow( row );
+          row.addElement(xmlVernacularNames);
+          xmlreport.writeRow(row);
         }
       }
     }
-    catch ( CriteriaMissingException ex )
+    catch (CriteriaMissingException ex)
     {
       ex.printStackTrace();
     }
-    catch ( InitializationException iex )
+    catch (InitializationException iex)
     {
       iex.printStackTrace();
     }
-    catch ( IOException ioex )
+    catch (IOException ioex)
     {
       ioex.printStackTrace();
     }
-    catch ( Exception ex2 )
+    catch (Exception ex2)
     {
       ex2.printStackTrace();
     }

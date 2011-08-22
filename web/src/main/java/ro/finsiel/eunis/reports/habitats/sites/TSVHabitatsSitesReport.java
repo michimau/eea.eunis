@@ -37,28 +37,28 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    */
-  public TSVHabitatsSitesReport( String sessionID, AbstractFormBean formBean )
+  public TSVHabitatsSitesReport(String sessionID, AbstractFormBean formBean)
   {
-    super( "HabitatsSitesReport_" + sessionID + ".tsv" );
-    this.formBean = ( SitesBean ) formBean;
+    super("HabitatsSitesReport_" + sessionID + ".tsv");
+    this.formBean = (SitesBean) formBean;
     this.filename = "HabitatsSitesReport_" + sessionID + ".tsv";
-    xmlreport = new XMLReport( "HabitatsSitesReport_" + sessionID + ".xml" );
+    xmlreport = new XMLReport("HabitatsSitesReport_" + sessionID + ".xml");
     // Init the data factory
-    if ( null != formBean )
+    if (null != formBean)
     {
       Integer database = HabitatsSitesDomain.SEARCH_BOTH;
-      Integer searchAttribute = Utilities.checkedStringToInt( this.formBean.getSearchAttribute(), SitesSearchCriteria.SEARCH_NAME );
+      Integer searchAttribute = Utilities.checkedStringToInt(this.formBean.getSearchAttribute(), SitesSearchCriteria.SEARCH_NAME);
       boolean[] source_db = { true, true, true, true, true, true, true, true };
-      dataFactory = new SitesPaginator( new HabitatsSitesDomain( formBean.toSearchCriteria(),
+      dataFactory = new SitesPaginator(new HabitatsSitesDomain(formBean.toSearchCriteria(),
           formBean.toSortCriteria(),
           searchAttribute,
           database,
-          source_db ) );
-      this.dataFactory.setSortCriteria( formBean.toSortCriteria() );
+          source_db));
+      this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
     else
     {
-      System.out.println( TSVHabitatsSitesReport.class.getName() + "::ctor() - Warning: formBean was null!" );
+      System.out.println(TSVHabitatsSitesReport.class.getName() + "::ctor() - Warning: formBean was null!");
     }
   }
 
@@ -69,18 +69,18 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
    */
   public List<String> createHeader()
   {
-    if ( null == formBean )
+    if (null == formBean)
     {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
     // Code
-    headers.addElement( "EUNIS code" );
-    headers.addElement( "ANNEX I code" );
+    headers.addElement("EUNIS code");
+    headers.addElement("ANNEX I code");
     // Name
-    headers.addElement( "Habitat name" );
+    headers.addElement("Habitat name");
     // English name
-    headers.addElement( "Sites names" );
+    headers.addElement("Sites names");
     return headers;
   }
 
@@ -89,70 +89,70 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
    */
   public void writeData()
   {
-    if ( null == dataFactory )
+    if (null == dataFactory)
     {
       return;
     }
-    dataFactory.setPageSize( RESULTS_PER_PAGE );
+    dataFactory.setPageSize(RESULTS_PER_PAGE);
     try
     {
       int _pagesCount = dataFactory.countPages();
-      if ( _pagesCount == 0 )
+      if (_pagesCount == 0)
       {
         closeFile();
         return;
       }
-      Integer searchAttribute = Utilities.checkedStringToInt( formBean.getSearchAttribute(), SitesSearchCriteria.SEARCH_NAME );
-      Integer relationOp = Utilities.checkedStringToInt( formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS );
+      Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), SitesSearchCriteria.SEARCH_NAME);
+      Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
       boolean[] source_db = { true, true, true, true, true, true, true, true };
       Integer database = HabitatsSitesDomain.SEARCH_BOTH;
-      writeRow( createHeader() );
-      xmlreport.writeRow( createHeader() );
-      for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
+      writeRow(createHeader());
+      xmlreport.writeRow(createHeader());
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
-        List resultSet = dataFactory.getPage( _currPage );
-        for ( int i = 0; i < resultSet.size(); i++ )
+        List resultSet = dataFactory.getPage(_currPage);
+        for (int i = 0; i < resultSet.size(); i++)
         {
-          HabitatsSitesPersist habitat = ( HabitatsSitesPersist ) resultSet.get( i );
+          HabitatsSitesPersist habitat = (HabitatsSitesPersist) resultSet.get(i);
           Integer idNatureObject = habitat.getIdNatureObject();
 
           List resultsSites = new HabitatsSitesDomain().findSitesWithHabitats(
-              new SitesSearchCriteria( searchAttribute,
+              new SitesSearchCriteria(searchAttribute,
                   formBean.getScientificName(),
-                  relationOp ),
+                  relationOp),
               source_db,
               searchAttribute,
               idNatureObject,
-              database );
-          if ( resultsSites != null && resultsSites.size() > 0 )
+              database);
+          if (resultsSites != null && resultsSites.size() > 0)
           {
             for (int ii = 0; ii < resultsSites.size(); ii++)
             {
               List l = (List) resultsSites.get(ii);
 
-              if ( ii == 0 )
+              if (ii == 0)
               {
                 Vector<String> aRow = new Vector<String>();
                 // Code
-                aRow.addElement( habitat.getEunisHabitatCode() );
-                aRow.addElement( habitat.getCodeAnnex1() );
+                aRow.addElement(habitat.getEunisHabitatCode());
+                aRow.addElement(habitat.getCodeAnnex1());
                 // Name
-                aRow.addElement( habitat.getScientificName() );
+                aRow.addElement(habitat.getScientificName());
                 // Sites
-                aRow.addElement( l.get(0) + "(" + l.get(1) + ")" );
-                writeRow( aRow );
+                aRow.addElement(l.get(0) + "(" + l.get(1) + ")");
+                writeRow(aRow);
               }
               else
               {
                 Vector<String> aRow = new Vector<String>();
                 // Code
-                aRow.addElement( "" );
-                aRow.addElement( "" );
+                aRow.addElement("");
+                aRow.addElement("");
                 // Name
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Sites names
-                aRow.addElement( l.get(0) + "(" + l.get(1) + ")" );
-                writeRow( aRow );
+                aRow.addElement(l.get(0) + "(" + l.get(1) + ")");
+                writeRow(aRow);
               }
             }
           }
@@ -160,22 +160,22 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
           {
             Vector<String> aRow = new Vector<String>();
             // Code
-            aRow.addElement( habitat.getEunisHabitatCode() );
-            aRow.addElement( habitat.getCodeAnnex1() );
+            aRow.addElement(habitat.getEunisHabitatCode());
+            aRow.addElement(habitat.getCodeAnnex1());
             // Name
-            aRow.addElement( habitat.getScientificName() );
+            aRow.addElement(habitat.getScientificName());
             // Sites names
-            aRow.addElement( "-" );
-            writeRow( aRow );
+            aRow.addElement("-");
+            writeRow(aRow);
           }
 
           // XML report
           Vector<String> aRow = new Vector<String>();
           // Code
-          aRow.addElement( habitat.getEunisHabitatCode() );
-          aRow.addElement( habitat.getCodeAnnex1() );
+          aRow.addElement(habitat.getEunisHabitatCode());
+          aRow.addElement(habitat.getCodeAnnex1());
           // Name
-          aRow.addElement( habitat.getScientificName() );
+          aRow.addElement(habitat.getScientificName());
           // Sites names
           String sites = "";
           for (int ii = 0; ii < resultsSites.size(); ii++)
@@ -183,24 +183,24 @@ public class TSVHabitatsSitesReport extends AbstractTSVReport
             List l = (List) resultsSites.get(ii);
             sites += "<site name=\"" + l.get(0)  + "\" database=\"" + l.get(1) + "\" />";
           }
-          aRow.addElement( sites );
-          xmlreport.writeRow( aRow );
+          aRow.addElement(sites);
+          xmlreport.writeRow(aRow);
         }
       }
     }
-    catch ( CriteriaMissingException ex )
+    catch (CriteriaMissingException ex)
     {
       ex.printStackTrace();
     }
-    catch ( InitializationException iex )
+    catch (InitializationException iex)
     {
       iex.printStackTrace();
     }
-    catch ( IOException ioex )
+    catch (IOException ioex)
     {
       ioex.printStackTrace();
     }
-    catch ( Exception ex2 )
+    catch (Exception ex2)
     {
       ex2.printStackTrace();
     }

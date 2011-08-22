@@ -39,22 +39,22 @@ public class TSVLegalReport extends AbstractTSVReport
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    * @param showEUNISInvalidatedSpecies Show invalidated species
    */
-  public TSVLegalReport( String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies )
+  public TSVLegalReport(String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies)
   {
-    super( "SpeciesLegalReport_" + sessionID + ".tsv" );
-    this.formBean = ( LegalBean ) formBean;
+    super("SpeciesLegalReport_" + sessionID + ".tsv");
+    this.formBean = (LegalBean) formBean;
     this.filename = "SpeciesLegalReport_" + sessionID + ".tsv";
-    xmlreport = new XMLReport( "SpeciesLegalReport_" + sessionID + ".xml" );
-    typeForm = Utilities.checkedStringToInt( this.formBean.getTypeForm(), LegalSearchCriteria.CRITERIA_SPECIES.intValue() );
+    xmlreport = new XMLReport("SpeciesLegalReport_" + sessionID + ".xml");
+    typeForm = Utilities.checkedStringToInt(this.formBean.getTypeForm(), LegalSearchCriteria.CRITERIA_SPECIES.intValue());
     // Form 1
-    if ( LegalSearchCriteria.CRITERIA_SPECIES.intValue() == typeForm )
+    if (LegalSearchCriteria.CRITERIA_SPECIES.intValue() == typeForm)
     {
-      this.dataFactory = new LegalPaginator( new ScientificLegalDomain( formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies ) );
+      this.dataFactory = new LegalPaginator(new ScientificLegalDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies));
     }
     // Form 2
-    if ( LegalSearchCriteria.CRITERIA_LEGAL.intValue() == typeForm )
+    if (LegalSearchCriteria.CRITERIA_LEGAL.intValue() == typeForm)
     {
-      this.dataFactory = new LegalPaginator( new LegalStatusDomain( formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies ) );
+      this.dataFactory = new LegalPaginator(new LegalStatusDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies));
     }
   }
 
@@ -65,23 +65,23 @@ public class TSVLegalReport extends AbstractTSVReport
    */
   public List<String> createHeader()
   {
-    if ( null == formBean )
+    if (null == formBean)
     {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
     // Scientific name
-    headers.addElement( "Scientific name" );
+    headers.addElement("Scientific name");
     // Group
-    headers.addElement( "Group" );
+    headers.addElement("Group");
     // Legal text
-    headers.addElement( "Legal text" );
+    headers.addElement("Legal text");
     // Abbreviation
-    headers.addElement( "Abbreviation" );
+    headers.addElement("Abbreviation");
     // Comment
-    headers.addElement( "Comment" );
+    headers.addElement("Comment");
     // URL
-    headers.addElement( "URL" );
+    headers.addElement("URL");
     return headers;
   }
 
@@ -90,25 +90,25 @@ public class TSVLegalReport extends AbstractTSVReport
    */
   public void writeData()
   {
-    if ( null == dataFactory )
+    if (null == dataFactory)
     {
       return;
     }
-    dataFactory.setPageSize( RESULTS_PER_PAGE );
+    dataFactory.setPageSize(RESULTS_PER_PAGE);
     try
     {
       int _pagesCount = dataFactory.countPages();
-      if ( _pagesCount == 0 )
+      if (_pagesCount == 0)
       {
         closeFile();
         return;
       }
-      writeRow( createHeader() );
-      xmlreport.writeRow( createHeader() );
-      for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
+      writeRow(createHeader());
+      xmlreport.writeRow(createHeader());
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
-        List resultSet = dataFactory.getPage( _currPage );
-        for ( int i = 0; i < resultSet.size(); i++ )
+        List resultSet = dataFactory.getPage(_currPage);
+        for (int i = 0; i < resultSet.size(); i++)
         {
           Vector<String> aRow = new Vector<String>();
 
@@ -120,9 +120,9 @@ public class TSVLegalReport extends AbstractTSVReport
           String cellURL = "";
 
           // Form 1
-          if ( LegalSearchCriteria.CRITERIA_SPECIES.intValue() == typeForm )
+          if (LegalSearchCriteria.CRITERIA_SPECIES.intValue() == typeForm)
           {
-            ScientificLegalPersist specie = ( ScientificLegalPersist ) resultSet.get( i );
+            ScientificLegalPersist specie = (ScientificLegalPersist) resultSet.get(i);
 
             cellScientificName = specie.getScientificName();
             cellGroup = specie.getCommonName();
@@ -132,9 +132,9 @@ public class TSVLegalReport extends AbstractTSVReport
             cellURL = specie.getUrl();
           }
           // Form 2
-          if ( LegalSearchCriteria.CRITERIA_LEGAL.intValue() == typeForm )
+          if (LegalSearchCriteria.CRITERIA_LEGAL.intValue() == typeForm)
           {
-            LegalStatusPersist specie = ( LegalStatusPersist ) resultSet.get( i );
+            LegalStatusPersist specie = (LegalStatusPersist) resultSet.get(i);
 
             cellScientificName = specie.getScientificName();
             cellGroup = specie.getCommonName();
@@ -143,30 +143,30 @@ public class TSVLegalReport extends AbstractTSVReport
             cellComment = specie.getComment();
             cellURL = specie.getUrl();
           }
-          aRow.addElement( cellScientificName );
-          aRow.addElement( cellGroup );
-          aRow.addElement( cellLegalText );
-          aRow.addElement( cellAbbreviation );
-          aRow.addElement( cellComment );
-          aRow.addElement( cellURL );
-          writeRow( aRow );
-          xmlreport.writeRow( aRow );
+          aRow.addElement(cellScientificName);
+          aRow.addElement(cellGroup);
+          aRow.addElement(cellLegalText);
+          aRow.addElement(cellAbbreviation);
+          aRow.addElement(cellComment);
+          aRow.addElement(cellURL);
+          writeRow(aRow);
+          xmlreport.writeRow(aRow);
         }
       }
     }
-    catch ( CriteriaMissingException ex )
+    catch (CriteriaMissingException ex)
     {
       ex.printStackTrace();
     }
-    catch ( InitializationException iex )
+    catch (InitializationException iex)
     {
       iex.printStackTrace();
     }
-    catch ( IOException ioex )
+    catch (IOException ioex)
     {
       ioex.printStackTrace();
     }
-    catch ( Exception ex2 )
+    catch (Exception ex2)
     {
       ex2.printStackTrace();
     }

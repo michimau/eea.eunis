@@ -37,13 +37,13 @@ public class TSVNamesReport extends AbstractTSVReport
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    */
-  public TSVNamesReport( String sessionID, AbstractFormBean formBean )
+  public TSVNamesReport(String sessionID, AbstractFormBean formBean)
   {
-    super( "SitesNamesReport_" + sessionID + ".tsv" );
-    this.formBean = ( NameBean ) formBean;
+    super("SitesNamesReport_" + sessionID + ".tsv");
+    this.formBean = (NameBean) formBean;
     this.filename = "SitesNamesReport_" + sessionID + ".tsv";
-    xmlreport = new XMLReport( "SitesNamesReport_" + sessionID + ".xml" );
-    if ( null != formBean )
+    xmlreport = new XMLReport("SitesNamesReport_" + sessionID + ".xml");
+    if (null != formBean)
     {
       boolean[] source =
           {
@@ -56,12 +56,12 @@ public class TSVNamesReport extends AbstractTSVReport
               false,
               this.formBean.getDB_EMERALD() != null
           };
-      dataFactory = new NamePaginator( new NameDomain( formBean.toSearchCriteria(), formBean.toSortCriteria(), "", source ) );
-      this.dataFactory.setSortCriteria( formBean.toSortCriteria() );
+      dataFactory = new NamePaginator(new NameDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), "", source));
+      this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
     else
     {
-      System.out.println( TSVNamesReport.class.getName() + "::ctor() - Warning: formBean was null!" );
+      System.out.println(TSVNamesReport.class.getName() + "::ctor() - Warning: formBean was null!");
     }
   }
 
@@ -72,26 +72,26 @@ public class TSVNamesReport extends AbstractTSVReport
    */
   public List<String> createHeader()
   {
-    if ( null == formBean )
+    if (null == formBean)
     {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
     // Source data set
-    headers.addElement( "Source data set" );
+    headers.addElement("Source data set");
     // Country
-    headers.addElement( "Country" );
+    headers.addElement("Country");
     // Name
-    headers.addElement( "Name" );
+    headers.addElement("Name");
     // Designations
-    headers.addElement( "Designation type" );
+    headers.addElement("Designation type");
     // Coordinates
-    headers.addElement( "Longitude" );
-    headers.addElement( "Latitude" );
+    headers.addElement("Longitude");
+    headers.addElement("Latitude");
     // Size
-    headers.addElement( "Size" );
+    headers.addElement("Size");
     // Year
-    //headers.addElement( "Designation year" );
+    //headers.addElement("Designation year");
     return headers;
   }
 
@@ -100,69 +100,69 @@ public class TSVNamesReport extends AbstractTSVReport
    */
   public void writeData()
   {
-    if ( null == dataFactory )
+    if (null == dataFactory)
     {
       return;
     }
-    dataFactory.setPageSize( RESULTS_PER_PAGE );
+    dataFactory.setPageSize(RESULTS_PER_PAGE);
     try
     {
       int _pagesCount = dataFactory.countPages();
-      if ( _pagesCount == 0 ) // Do not write anything, since there are no results
+      if (_pagesCount == 0) // Do not write anything, since there are no results
       {
         closeFile();
         return;
       }
 
-      writeRow( createHeader() );
-      xmlreport.writeRow( createHeader() );
+      writeRow(createHeader());
+      xmlreport.writeRow(createHeader());
 
-      for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
-        List resultSet = dataFactory.getPage( _currPage );
-        for ( int i = 0; i < resultSet.size(); i++ )
+        List resultSet = dataFactory.getPage(_currPage);
+        for (int i = 0; i < resultSet.size(); i++)
         {
-          NamePersist site = ( NamePersist ) resultSet.get( i );
+          NamePersist site = (NamePersist) resultSet.get(i);
 
           String designations = "";
-          if ( site.getIdDesignation() != null && site.getIdGeoscope() != null )
+          if (site.getIdDesignation() != null && site.getIdGeoscope() != null)
           {
-            designations = SitesSearchUtility.siteDesignationsAsCommaSeparatedString( site.getIdDesignation(), site.getIdGeoscope().toString() );
+            designations = SitesSearchUtility.siteDesignationsAsCommaSeparatedString(site.getIdDesignation(), site.getIdGeoscope().toString());
           }
           Vector<String> aRow = new Vector<String>();
           // Source database
-          aRow.addElement( SitesSearchUtility.translateSourceDB( site.getSourceDB() ) );
+          aRow.addElement(SitesSearchUtility.translateSourceDB(site.getSourceDB()));
           // Country
-          aRow.addElement( Utilities.formatString( site.getAreaNameEn() ) );
+          aRow.addElement(Utilities.formatString(site.getAreaNameEn()));
           // Name
-          aRow.addElement( Utilities.formatString( site.getName() ) );
+          aRow.addElement(Utilities.formatString(site.getName()));
           // Designations
-          aRow.addElement( designations );
+          aRow.addElement(designations);
           // Coordinates
-          aRow.addElement( SitesSearchUtility.formatCoordinatesPDF( site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec() ) );
-          aRow.addElement( SitesSearchUtility.formatCoordinatesPDF( site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec() ) );
+          aRow.addElement(SitesSearchUtility.formatCoordinatesPDF(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec()));
+          aRow.addElement(SitesSearchUtility.formatCoordinatesPDF(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec()));
           // Altitude
-          aRow.addElement( Utilities.formatAreaPDF( site.getArea(), 9, 2, "" ) );
+          aRow.addElement(Utilities.formatAreaPDF(site.getArea(), 9, 2, ""));
           // Year
-          //aRow.addElement( SitesSearchUtility.parseDesignationYear( site.getDesignationDate(), site.getSourceDB() ) );
-          writeRow( aRow );
-          xmlreport.writeRow( aRow );
+          //aRow.addElement(SitesSearchUtility.parseDesignationYear(site.getDesignationDate(), site.getSourceDB()));
+          writeRow(aRow);
+          xmlreport.writeRow(aRow);
         }
       }
     }
-    catch ( CriteriaMissingException ex )
+    catch (CriteriaMissingException ex)
     {
       ex.printStackTrace();
     }
-    catch ( InitializationException iex )
+    catch (InitializationException iex)
     {
       iex.printStackTrace();
     }
-    catch ( IOException ioex )
+    catch (IOException ioex)
     {
       ioex.printStackTrace();
     }
-    catch ( Exception ex2 )
+    catch (Exception ex2)
     {
       ex2.printStackTrace();
     }

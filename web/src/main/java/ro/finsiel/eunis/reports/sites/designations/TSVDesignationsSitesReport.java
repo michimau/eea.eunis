@@ -38,14 +38,14 @@ public class TSVDesignationsSitesReport extends AbstractTSVReport
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    */
-  public TSVDesignationsSitesReport( String sessionID, AbstractFormBean formBean )
+  public TSVDesignationsSitesReport(String sessionID, AbstractFormBean formBean)
   {
-    super( "DesignationsSitesReport_" + sessionID + ".tsv" );
-    this.formBean = ( DesignationsBean ) formBean;
+    super("DesignationsSitesReport_" + sessionID + ".tsv");
+    this.formBean = (DesignationsBean) formBean;
     this.filename = "DesignationsSitesReport_" + sessionID + ".tsv";
-    xmlreport = new XMLReport( "DesignationsSitesReport_" + sessionID + ".xml" );
+    xmlreport = new XMLReport("DesignationsSitesReport_" + sessionID + ".xml");
     // Init the data factory
-    if ( null != formBean )
+    if (null != formBean)
     {
       boolean[] source =
           {
@@ -58,12 +58,12 @@ public class TSVDesignationsSitesReport extends AbstractTSVReport
               false,
               this.formBean.getDB_EMERALD() != null
           };
-      dataFactory = new DesignationsPaginator( new DesignationsDomain( formBean.toSearchCriteria(), formBean.toSortCriteria(), source ) );
-      this.dataFactory.setSortCriteria( formBean.toSortCriteria() );
+      dataFactory = new DesignationsPaginator(new DesignationsDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), source));
+      this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
     else
     {
-      System.out.println( TSVDesignationsSitesReport.class.getName() + "::ctor() -> Warning: formBean was null!" );
+      System.out.println(TSVDesignationsSitesReport.class.getName() + "::ctor() -> Warning: formBean was null!");
     }
   }
 
@@ -74,21 +74,21 @@ public class TSVDesignationsSitesReport extends AbstractTSVReport
    */
   public List<String> createHeader()
   {
-    if ( null == formBean )
+    if (null == formBean)
     {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
     // Source database
-    headers.addElement( "Source data set" );
+    headers.addElement("Source data set");
     // Country
-    headers.addElement( "Country" );
+    headers.addElement("Country");
     // Designation
-    headers.addElement( "Designation name" );
+    headers.addElement("Designation name");
     // DesignationEn
-    headers.addElement( "English designation name" );
+    headers.addElement("English designation name");
     // Abreviation
-    headers.addElement( "Abbreviation" );
+    headers.addElement("Abbreviation");
     return headers;
   }
 
@@ -97,60 +97,60 @@ public class TSVDesignationsSitesReport extends AbstractTSVReport
    */
   public void writeData()
   {
-    if ( null == dataFactory )
+    if (null == dataFactory)
     {
       return;
     }
-    dataFactory.setPageSize( RESULTS_PER_PAGE );
+    dataFactory.setPageSize(RESULTS_PER_PAGE);
     try
     {
       int _pagesCount = dataFactory.countPages();
-      if ( _pagesCount == 0 )
+      if (_pagesCount == 0)
       {
         closeFile();
         return; // Do not write anything, since there are no results
       }
       // Write table header
-      writeRow( createHeader() );
-      xmlreport.writeRow( createHeader() );
+      writeRow(createHeader());
+      xmlreport.writeRow(createHeader());
       // Write data page by page
-      for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
-        List resultSet = dataFactory.getPage( _currPage );
+        List resultSet = dataFactory.getPage(_currPage);
         // Write data row by row
-        for ( int i = 0; i < resultSet.size(); i++ )
+        for (int i = 0; i < resultSet.size(); i++)
         {
           // Retrieve a site
-          DesignationsPersist designation = ( DesignationsPersist ) resultSet.get( i );
+          DesignationsPersist designation = (DesignationsPersist) resultSet.get(i);
           Vector<String> aRow = new Vector<String>();
           // Source data set
-          aRow.addElement( SitesSearchUtility.translateSourceDB( designation.getDataSet() ) );
+          aRow.addElement(SitesSearchUtility.translateSourceDB(designation.getDataSet()));
           // Country
-          aRow.addElement( Utilities.formatString( designation.getCountry() ) );
+          aRow.addElement(Utilities.formatString(designation.getCountry()));
           // Designation
-          aRow.addElement( Utilities.formatString( designation.getDescription() ) );
+          aRow.addElement(Utilities.formatString(designation.getDescription()));
           // DesignationEn
-          aRow.addElement( Utilities.formatString( designation.getDescriptionEn() ) );
+          aRow.addElement(Utilities.formatString(designation.getDescriptionEn()));
           // Abbreviation
-          aRow.addElement( Utilities.formatString( designation.getAbbreviation() ) );
-          writeRow( aRow );
-          xmlreport.writeRow( createHeader() );
+          aRow.addElement(Utilities.formatString(designation.getAbbreviation()));
+          writeRow(aRow);
+          xmlreport.writeRow(createHeader());
         }
       }
     }
-    catch ( CriteriaMissingException ex )
+    catch (CriteriaMissingException ex)
     {
       ex.printStackTrace();
     }
-    catch ( InitializationException iex )
+    catch (InitializationException iex)
     {
       iex.printStackTrace();
     }
-    catch ( IOException ioex )
+    catch (IOException ioex)
     {
       ioex.printStackTrace();
     }
-    catch ( Exception ex2 )
+    catch (Exception ex2)
     {
       ex2.printStackTrace();
     }

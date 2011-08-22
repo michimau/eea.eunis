@@ -44,45 +44,45 @@ public class TSVNamesReport extends AbstractTSVReport {
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    * @param showEUNISInvalidatedSpecies Show invalidated species
    */
-  public TSVNamesReport( String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies ) {
-    super( "SpeciesNamesReport_" + sessionID + ".tsv" );
-    this.formBean = ( NameBean ) formBean;
+  public TSVNamesReport(String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies) {
+    super("SpeciesNamesReport_" + sessionID + ".tsv");
+    this.formBean = (NameBean) formBean;
     this.filename = "SpeciesNamesReport_" + sessionID + ".tsv";
-    xmlreport = new XMLReport( "SpeciesNamesReport_" + sessionID + ".xml" );
-    typeForm = Utilities.checkedStringToInt( this.formBean.getTypeForm(), NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() );
-    isAnyLanguage = null != this.formBean.getLanguage() && this.formBean.getLanguage().equalsIgnoreCase( "any" );
-    boolean searchSynonyms = Utilities.checkedStringToBoolean( this.formBean.getSearchSynonyms(), false );
+    xmlreport = new XMLReport("SpeciesNamesReport_" + sessionID + ".xml");
+    typeForm = Utilities.checkedStringToInt(this.formBean.getTypeForm(), NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue());
+    isAnyLanguage = null != this.formBean.getLanguage() && this.formBean.getLanguage().equalsIgnoreCase("any");
+    boolean searchSynonyms = Utilities.checkedStringToBoolean(this.formBean.getSearchSynonyms(), false);
 
     // Coming from form 1
-    if ( NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm ){
+    if (NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm){
     	if(formBean.getNewName() != null && formBean.getNewName().equals("true")){
-    		this.dataFactory = new ro.finsiel.eunis.search.species.names.NamePaginator( new SimilarNameDomain( formBean.toSearchCriteria(),
+    		this.dataFactory = new ro.finsiel.eunis.search.species.names.NamePaginator(new SimilarNameDomain(formBean.toSearchCriteria(),
     				formBean.toSortCriteria(),
     				searchSynonyms,
     				showEUNISInvalidatedSpecies,
-    				this.formBean.getSearchVernacular() ) );
+    				this.formBean.getSearchVernacular()));
     	} else {
-    		this.dataFactory = new ro.finsiel.eunis.search.species.names.NamePaginator( new ScientificNameDomain( formBean.toSearchCriteria(),
+    		this.dataFactory = new ro.finsiel.eunis.search.species.names.NamePaginator(new ScientificNameDomain(formBean.toSearchCriteria(),
     				formBean.toSortCriteria(),
     				searchSynonyms,
     				showEUNISInvalidatedSpecies,
-    				this.formBean.getSearchVernacular() ) );
+    				this.formBean.getSearchVernacular()));
     	}
     }
     // Coming from form 2
-    if ( NameSearchCriteria.CRITERIA_VERNACULAR.intValue() == typeForm )
+    if (NameSearchCriteria.CRITERIA_VERNACULAR.intValue() == typeForm)
     {
-      if ( isAnyLanguage )
+      if (isAnyLanguage)
       {
-        this.dataFactory = new ro.finsiel.eunis.search.species.names.NamePaginator( new VernacularNameAnyDomain( formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies ) );
+        this.dataFactory = new ro.finsiel.eunis.search.species.names.NamePaginator(new VernacularNameAnyDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies));
       }
       else
       {
-        this.dataFactory = new ro.finsiel.eunis.search.species.names.NamePaginator( new VernacularNameDomain( formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies ) );
+        this.dataFactory = new ro.finsiel.eunis.search.species.names.NamePaginator(new VernacularNameDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies));
       }
     }
 
-    //xmlreport = new XMLReport( "SpeciesNamesReport_" + sessionID + ".xml" );
+    //xmlreport = new XMLReport("SpeciesNamesReport_" + sessionID + ".xml");
   }
 
   /**
@@ -91,17 +91,17 @@ public class TSVNamesReport extends AbstractTSVReport {
    * @return An array with the columns headers of the table
    */
   public List<String> createHeader() {
-    if ( null == formBean )
+    if (null == formBean)
     {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
-    headers.addElement( "Group" );
-    headers.addElement( "Order" );
-    headers.addElement( "Family" );
-    headers.addElement( "Scientific name" );
-    headers.addElement( "Valid name" );
-    headers.addElement( "Vernacular names" );
+    headers.addElement("Group");
+    headers.addElement("Order");
+    headers.addElement("Family");
+    headers.addElement("Scientific name");
+    headers.addElement("Valid name");
+    headers.addElement("Vernacular names");
     return headers;
   }
 
@@ -109,25 +109,25 @@ public class TSVNamesReport extends AbstractTSVReport {
    * Use this method to write specific data into the file. Implemented in inherited classes
    */
   public void writeData() {
-    if ( null == dataFactory )
+    if (null == dataFactory)
     {
       return;
     }
-    dataFactory.setPageSize( RESULTS_PER_PAGE );
+    dataFactory.setPageSize(RESULTS_PER_PAGE);
     try
     {
       int _pagesCount = dataFactory.countPages();
-      if ( _pagesCount == 0 )
+      if (_pagesCount == 0)
       {
         closeFile();
         return;
       }
-      writeRow( createHeader() );
-      xmlreport.writeRow( createHeader() );
-      for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
+      writeRow(createHeader());
+      xmlreport.writeRow(createHeader());
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
-        List resultSet = dataFactory.getPage( _currPage );
-        for ( int i = 0; i < resultSet.size(); i++ )
+        List resultSet = dataFactory.getPage(_currPage);
+        for (int i = 0; i < resultSet.size(); i++)
         {
           Vector<String>aRow = new Vector<String>();
           ArrayList<String> xmlRow = new ArrayList<String>();
@@ -136,73 +136,73 @@ public class TSVNamesReport extends AbstractTSVReport {
           String cellFamily = "";
           String cellScientificName = "";
           String cellValidName = "";
-          Integer cellIdVernacularSearch = new Integer( 0 );
+          Integer cellIdVernacularSearch = new Integer(0);
           // Coming from form 1
-          if ( NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm )
+          if (NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm)
           {
-            ScientificNamePersist specie = ( ScientificNamePersist ) resultSet.get( i );
-            cellGroup = ( null == specie.getCommonName() ) ? "" : ( specie.getCommonName().equalsIgnoreCase( "null" ) ) ? "" : specie.getCommonName();
+            ScientificNamePersist specie = (ScientificNamePersist) resultSet.get(i);
+            cellGroup = (null == specie.getCommonName()) ? "" : (specie.getCommonName().equalsIgnoreCase("null")) ? "" : specie.getCommonName();
             cellOrder = specie.getTaxonomicNameOrder();
-            cellOrder = ( null == specie.getTaxonomicNameOrder() ) ? "" : ( specie.getTaxonomicNameOrder().equalsIgnoreCase( "null" ) ) ? "" : cellOrder;
-            cellFamily = ( specie.getTaxonomyLevel() != null && specie.getTaxonomyLevel().equalsIgnoreCase( "family" ) ? ( specie.getTaxonomicNameFamily() != null && !specie.getTaxonomicNameFamily().equalsIgnoreCase( "null" ) ? specie.getTaxonomicNameFamily() : "" ) : "" );
+            cellOrder = (null == specie.getTaxonomicNameOrder()) ? "" : (specie.getTaxonomicNameOrder().equalsIgnoreCase("null")) ? "" : cellOrder;
+            cellFamily = (specie.getTaxonomyLevel() != null && specie.getTaxonomyLevel().equalsIgnoreCase("family") ? (specie.getTaxonomicNameFamily() != null && !specie.getTaxonomicNameFamily().equalsIgnoreCase("null") ? specie.getTaxonomicNameFamily() : "") : "");
             cellScientificName = specie.getScientificName();
             cellValidName = "" + specie.getValidName();
             cellIdVernacularSearch = specie.getIdNatureObject();
           }
           // Coming from form 2
-          if ( NameSearchCriteria.CRITERIA_VERNACULAR.intValue() == typeForm )
+          if (NameSearchCriteria.CRITERIA_VERNACULAR.intValue() == typeForm)
           {
-            if ( isAnyLanguage )
+            if (isAnyLanguage)
             {
-              VernacularNameAnyPersist specie = ( VernacularNameAnyPersist ) resultSet.get( i );
+              VernacularNameAnyPersist specie = (VernacularNameAnyPersist) resultSet.get(i);
               cellGroup = specie.getCommonName();
               cellOrder = specie.getTaxonomicNameOrder();
-              cellOrder = ( null == specie.getTaxonomicNameOrder() ) ? "" : ( specie.getTaxonomicNameOrder().equalsIgnoreCase( "null" ) ) ? "" : cellOrder;
+              cellOrder = (null == specie.getTaxonomicNameOrder()) ? "" : (specie.getTaxonomicNameOrder().equalsIgnoreCase("null")) ? "" : cellOrder;
               cellFamily = specie.getTaxonomicNameFamily();
               cellScientificName = specie.getScientificName();
               cellIdVernacularSearch = specie.getIdNatureObject();
             }
             else
             {
-              VernacularNamePersist specie = ( VernacularNamePersist ) resultSet.get( i );
+              VernacularNamePersist specie = (VernacularNamePersist) resultSet.get(i);
               cellGroup = specie.getCommonName();
               cellOrder = specie.getTaxonomicNameOrder();
-              cellOrder = ( null == specie.getTaxonomicNameOrder() ) ? "" : ( specie.getTaxonomicNameOrder().equalsIgnoreCase( "null" ) ) ? "" : cellOrder;
+              cellOrder = (null == specie.getTaxonomicNameOrder()) ? "" : (specie.getTaxonomicNameOrder().equalsIgnoreCase("null")) ? "" : cellOrder;
               cellFamily = specie.getTaxonomicNameFamily();
               cellScientificName = specie.getScientificName();
               cellIdVernacularSearch = specie.getIdNatureObject();
             }
           }
-          aRow.addElement( cellGroup );
-          aRow.addElement( cellOrder );
-          aRow.addElement( cellFamily );
-          aRow.addElement( cellScientificName );
-          aRow.addElement( cellValidName );
+          aRow.addElement(cellGroup);
+          aRow.addElement(cellOrder);
+          aRow.addElement(cellFamily);
+          aRow.addElement(cellScientificName);
+          aRow.addElement(cellValidName);
 
-          xmlRow.add( cellGroup );
-          xmlRow.add( cellOrder );
-          xmlRow.add( cellFamily );
-          xmlRow.add( cellScientificName );
-          xmlRow.add( cellValidName );
+          xmlRow.add(cellGroup);
+          xmlRow.add(cellOrder);
+          xmlRow.add(cellFamily);
+          xmlRow.add(cellScientificName);
+          xmlRow.add(cellValidName);
           // Vernacular names (multiple rows)
-          Vector vernNamesList = SpeciesSearchUtility.findVernacularNames( cellIdVernacularSearch );
+          Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(cellIdVernacularSearch);
           String xmlVernacularNames = "";
-          if ( vernNamesList.size() > 0 )
+          if (vernNamesList.size() > 0)
           {
-            Vector sortVernList = new JavaSorter().sort( vernNamesList, JavaSorter.SORT_ALPHABETICAL );
+            Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);
             boolean blankLine = false;
             boolean atLeastALine = false;
-            for ( int v = 0; v < sortVernList.size(); v++ )
+            for (int v = 0; v < sortVernList.size(); v++)
             {
-              VernacularNameWrapper aVernName = ( VernacularNameWrapper ) sortVernList.get( v );
+              VernacularNameWrapper aVernName = (VernacularNameWrapper) sortVernList.get(v);
               boolean write = false;
               String language = formBean.getLanguage();
               String specieLangName = aVernName.getLanguage();
 
-              if ( NameSearchCriteria.CRITERIA_VERNACULAR.intValue() == typeForm && !isAnyLanguage )
+              if (NameSearchCriteria.CRITERIA_VERNACULAR.intValue() == typeForm && !isAnyLanguage)
               {
-                if ( language.toLowerCase().equalsIgnoreCase( specieLangName.toLowerCase() ) ||
-                        language.toLowerCase().equalsIgnoreCase( "english" ) )
+                if (language.toLowerCase().equalsIgnoreCase(specieLangName.toLowerCase()) ||
+                        language.toLowerCase().equalsIgnoreCase("english"))
                 {
                   write = true;
                 }
@@ -211,63 +211,63 @@ public class TSVNamesReport extends AbstractTSVReport {
               {
                 write = true;
               }
-              if ( write )
+              if (write)
               {
                 atLeastALine = true;
-                if ( !blankLine )
+                if (!blankLine)
                 {
                   // Language
-                  aRow.addElement( aVernName.getLanguage() );
+                  aRow.addElement(aVernName.getLanguage());
                   // Vernacular name
-                  aRow.addElement( aVernName.getName() );
+                  aRow.addElement(aVernName.getName());
                   blankLine = true;
-                  writeRow( aRow );
+                  writeRow(aRow);
                 }
                 else
                 {
                   Vector<String> anotherRow = new Vector<String>();
-                  anotherRow.addElement( "" );
-                  anotherRow.addElement( "" );
-                  anotherRow.addElement( "" );
-                  anotherRow.addElement( "" );
-                  anotherRow.addElement( "" );
+                  anotherRow.addElement("");
+                  anotherRow.addElement("");
+                  anotherRow.addElement("");
+                  anotherRow.addElement("");
+                  anotherRow.addElement("");
                   // Language
-                  anotherRow.addElement( aVernName.getLanguage() );
+                  anotherRow.addElement(aVernName.getLanguage());
                   // Vernacular name
-                  anotherRow.addElement( aVernName.getName() );
-                  writeRow( anotherRow );
+                  anotherRow.addElement(aVernName.getName());
+                  writeRow(anotherRow);
                 }
               }
               xmlVernacularNames += "<name language=\"" + aVernName.getLanguage() + "\">" + aVernName.getName() + "</name>";
             }
-            if ( !atLeastALine )
+            if (!atLeastALine)
             {
-              writeRow( aRow );
+              writeRow(aRow);
             }
           }
           else
           {
-            aRow.addElement( "-" );
-            writeRow( aRow );
+            aRow.addElement("-");
+            writeRow(aRow);
           }
-          xmlRow.add( xmlVernacularNames );
-          xmlreport.writeRow( xmlRow );
+          xmlRow.add(xmlVernacularNames);
+          xmlreport.writeRow(xmlRow);
         }
       }
     }
-    catch ( CriteriaMissingException ex )
+    catch (CriteriaMissingException ex)
     {
       ex.printStackTrace();
     }
-    catch ( InitializationException iex )
+    catch (InitializationException iex)
     {
       iex.printStackTrace();
     }
-    catch ( IOException ioex )
+    catch (IOException ioex)
     {
       ioex.printStackTrace();
     }
-    catch ( Exception ex2 )
+    catch (Exception ex2)
     {
       ex2.printStackTrace();
     }

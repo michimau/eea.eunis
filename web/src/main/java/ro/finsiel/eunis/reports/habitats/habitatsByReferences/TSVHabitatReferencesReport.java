@@ -36,22 +36,22 @@ public class TSVHabitatReferencesReport extends AbstractTSVReport
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    */
-  public TSVHabitatReferencesReport( String sessionID, AbstractFormBean formBean )
+  public TSVHabitatReferencesReport(String sessionID, AbstractFormBean formBean)
   {
-    super( "HabitatReferencesNewReport_" + sessionID + ".tsv" );
+    super("HabitatReferencesNewReport_" + sessionID + ".tsv");
     this.formBean = formBean;
     this.filename = "HabitatReferencesNewReport_" + sessionID + ".tsv";
-    xmlreport = new XMLReport( "HabitatReferencesNewReport_" + sessionID + ".xml" );
-    if ( null != formBean )
+    xmlreport = new XMLReport("HabitatReferencesNewReport_" + sessionID + ".xml");
+    if (null != formBean)
     {
-      Integer database = Utilities.checkedStringToInt( ( ( ReferencesBean ) formBean ).getDatabase(), RefDomain.SEARCH_EUNIS );
-      Integer source = Utilities.checkedStringToInt( ( ( ReferencesBean ) formBean ).getSource(), RefDomain.SOURCE );
-      dataFactory = new ReferencesPaginator( new RefDomain( formBean.toSearchCriteria(), formBean.toSortCriteria(), database, source ) );
-      this.dataFactory.setSortCriteria( formBean.toSortCriteria() );
+      Integer database = Utilities.checkedStringToInt(((ReferencesBean) formBean).getDatabase(), RefDomain.SEARCH_EUNIS);
+      Integer source = Utilities.checkedStringToInt(((ReferencesBean) formBean).getSource(), RefDomain.SOURCE);
+      dataFactory = new ReferencesPaginator(new RefDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), database, source));
+      this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
     else
     {
-      System.out.println( TSVHabitatReferencesReport.class.getName() + "::ctor() - Warning: formBean was null!" );
+      System.out.println(TSVHabitatReferencesReport.class.getName() + "::ctor() - Warning: formBean was null!");
     }
   }
 
@@ -61,36 +61,36 @@ public class TSVHabitatReferencesReport extends AbstractTSVReport
    */
   public List<String> createHeader()
   {
-    Integer database = Utilities.checkedStringToInt( ( ( ReferencesBean ) formBean ).getDatabase(), RefDomain.SEARCH_EUNIS );
-    if ( null == formBean )
+    Integer database = Utilities.checkedStringToInt(((ReferencesBean) formBean).getDatabase(), RefDomain.SEARCH_EUNIS);
+    if (null == formBean)
     {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
     // Level
-    if ( ( ( ReferencesBean ) formBean ).getDatabase().equalsIgnoreCase( RefDomain.SEARCH_EUNIS.toString() ) )
+    if (((ReferencesBean) formBean).getDatabase().equalsIgnoreCase(RefDomain.SEARCH_EUNIS.toString()))
     {
-      headers.addElement( "Level" );
+      headers.addElement("Level");
     }
     // Code
-    if ( 0 == database.compareTo( RefDomain.SEARCH_BOTH ) )
+    if (0 == database.compareTo(RefDomain.SEARCH_BOTH))
     {
-      headers.addElement( "EUNIS code" );
-      headers.addElement( "ANNEX code" );
+      headers.addElement("EUNIS code");
+      headers.addElement("ANNEX code");
     }
-    if ( 0 == database.compareTo( RefDomain.SEARCH_EUNIS ) )
+    if (0 == database.compareTo(RefDomain.SEARCH_EUNIS))
     {
-      headers.addElement( "EUNIS code" );
+      headers.addElement("EUNIS code");
     }
-    if ( 0 == database.compareTo( RefDomain.SEARCH_ANNEX_I ) )
+    if (0 == database.compareTo(RefDomain.SEARCH_ANNEX_I))
     {
-      headers.addElement( "ANNEX I code" );
+      headers.addElement("ANNEX I code");
     }
 
     // Habitat type name
-    headers.addElement( "Habitat type name" );
+    headers.addElement("Habitat type name");
     // Habitat type english name
-    headers.addElement( "Habitat type english name" );
+    headers.addElement("Habitat type english name");
 
     return headers;
   }
@@ -100,71 +100,71 @@ public class TSVHabitatReferencesReport extends AbstractTSVReport
    */
   public void writeData()
   {
-    Integer database = Utilities.checkedStringToInt( ( ( ReferencesBean ) formBean ).getDatabase(), RefDomain.SEARCH_EUNIS );
-    if ( null == dataFactory )
+    Integer database = Utilities.checkedStringToInt(((ReferencesBean) formBean).getDatabase(), RefDomain.SEARCH_EUNIS);
+    if (null == dataFactory)
     {
       return;
     }
-    dataFactory.setPageSize( RESULTS_PER_PAGE );
+    dataFactory.setPageSize(RESULTS_PER_PAGE);
     try
     {
       int _pagesCount = dataFactory.countPages();
-      if ( _pagesCount == 0 )
+      if (_pagesCount == 0)
       {
         closeFile();
         return;
       }
-      writeRow( createHeader() );
-      xmlreport.writeRow( createHeader() );
-      for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
+      writeRow(createHeader());
+      xmlreport.writeRow(createHeader());
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
-        List resultSet = dataFactory.getPage( _currPage );
+        List resultSet = dataFactory.getPage(_currPage);
         // Write data row by row
-        for ( int i = 0; i < resultSet.size(); i++ )
+        for (int i = 0; i < resultSet.size(); i++)
         {
-          RefPersist specie = ( RefPersist ) resultSet.get( i );
+          RefPersist specie = (RefPersist) resultSet.get(i);
           Vector<String> aRow = new Vector<String>();
           // Level
-          if ( ( ( ReferencesBean ) formBean ).getDatabase().equalsIgnoreCase( RefDomain.SEARCH_EUNIS.toString() ) )
+          if (((ReferencesBean) formBean).getDatabase().equalsIgnoreCase(RefDomain.SEARCH_EUNIS.toString()))
           {
-            aRow.addElement( specie.getLevel().toString() );
+            aRow.addElement(specie.getLevel().toString());
           }
           // Code
-          if ( 0 == database.compareTo( RefDomain.SEARCH_BOTH ) )
+          if (0 == database.compareTo(RefDomain.SEARCH_BOTH))
           {
-            aRow.addElement( specie.getEunisCode() );
-            aRow.addElement( specie.getAnnex1Code() );
+            aRow.addElement(specie.getEunisCode());
+            aRow.addElement(specie.getAnnex1Code());
           }
-          if ( 0 == database.compareTo( RefDomain.SEARCH_EUNIS ) )
+          if (0 == database.compareTo(RefDomain.SEARCH_EUNIS))
           {
-            aRow.addElement( specie.getEunisCode() );
+            aRow.addElement(specie.getEunisCode());
           }
-          if ( 0 == database.compareTo( RefDomain.SEARCH_ANNEX_I ) )
+          if (0 == database.compareTo(RefDomain.SEARCH_ANNEX_I))
           {
-            aRow.addElement( specie.getAnnex1Code() );
+            aRow.addElement(specie.getAnnex1Code());
           }
           // Habitat type name
-          aRow.addElement( specie.getScName() );
+          aRow.addElement(specie.getScName());
           // Habitat type english name
-          aRow.addElement( specie.getDescription() );
-          writeRow( aRow );
-          xmlreport.writeRow( aRow );
+          aRow.addElement(specie.getDescription());
+          writeRow(aRow);
+          xmlreport.writeRow(aRow);
         }
       }
     }
-    catch ( CriteriaMissingException ex )
+    catch (CriteriaMissingException ex)
     {
       ex.printStackTrace();
     }
-    catch ( InitializationException iex )
+    catch (InitializationException iex)
     {
       iex.printStackTrace();
     }
-    catch ( IOException ioex )
+    catch (IOException ioex)
     {
       ioex.printStackTrace();
     }
-    catch ( Exception ex2 )
+    catch (Exception ex2)
     {
       ex2.printStackTrace();
     }

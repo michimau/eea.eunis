@@ -38,23 +38,23 @@ public class TSVSpeciesHabitatsReport extends AbstractTSVReport
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    * @param showInvalidatedSpecies Show invalidated species
    */
-  public TSVSpeciesHabitatsReport( String sessionID, AbstractFormBean formBean, boolean showInvalidatedSpecies )
+  public TSVSpeciesHabitatsReport(String sessionID, AbstractFormBean formBean, boolean showInvalidatedSpecies)
   {
-    super( "SpeciesHabitatsReport_" + sessionID + ".tsv" );
-    this.formBean = ( HabitateBean ) formBean;
+    super("SpeciesHabitatsReport_" + sessionID + ".tsv");
+    this.formBean = (HabitateBean) formBean;
     this.filename = "SpeciesHabitatsReport_" + sessionID + ".tsv";
-    xmlreport = new XMLReport( "SpeciesHabitatsReport_" + sessionID + ".xml" );
+    xmlreport = new XMLReport("SpeciesHabitatsReport_" + sessionID + ".xml");
     this.showInvalidatedSpecies = showInvalidatedSpecies;
-    if ( null != formBean )
+    if (null != formBean)
     {
-      Integer database = Utilities.checkedStringToInt( ( ( HabitateBean ) formBean ).getDatabase(), ScientificNameDomain.SEARCH_EUNIS );
-      Integer searchAttribute = Utilities.checkedStringToInt( ( ( HabitateBean ) formBean ).getSearchAttribute(), ScientificNameDomain.SEARCH_EUNIS );
-      dataFactory = new HabitatePaginator( new ScientificNameDomain( formBean.toSearchCriteria(), formBean.toSortCriteria(), showInvalidatedSpecies, searchAttribute, database ) );
-      this.dataFactory.setSortCriteria( formBean.toSortCriteria() );
+      Integer database = Utilities.checkedStringToInt(((HabitateBean) formBean).getDatabase(), ScientificNameDomain.SEARCH_EUNIS);
+      Integer searchAttribute = Utilities.checkedStringToInt(((HabitateBean) formBean).getSearchAttribute(), ScientificNameDomain.SEARCH_EUNIS);
+      dataFactory = new HabitatePaginator(new ScientificNameDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), showInvalidatedSpecies, searchAttribute, database));
+      this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
     else
     {
-      System.out.println( TSVSpeciesHabitatsReport.class.getName() + "::ctor() - Warning: formBean was null!" );
+      System.out.println(TSVSpeciesHabitatsReport.class.getName() + "::ctor() - Warning: formBean was null!");
     }
 
   }
@@ -65,21 +65,21 @@ public class TSVSpeciesHabitatsReport extends AbstractTSVReport
    */
   public List<String> createHeader()
   {
-    if ( null == formBean )
+    if (null == formBean)
     {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
     // Group
-    headers.addElement( "Group" );
+    headers.addElement("Group");
     // Order
-    headers.addElement( "Order" );
+    headers.addElement("Order");
     // Family
-    headers.addElement( "Family" );
+    headers.addElement("Family");
     // Scientific name
-    headers.addElement( "Species scientific name" );
+    headers.addElement("Species scientific name");
     // Habitat types
-    headers.addElement( "Habitat types" );
+    headers.addElement("Habitat types");
     return headers;
   }
 
@@ -89,30 +89,30 @@ public class TSVSpeciesHabitatsReport extends AbstractTSVReport
    */
   public void writeData()
   {
-    if ( null == dataFactory )
+    if (null == dataFactory)
     {
       return;
     }
-    dataFactory.setPageSize( RESULTS_PER_PAGE );
+    dataFactory.setPageSize(RESULTS_PER_PAGE);
     try
     {
       int _pagesCount = dataFactory.countPages();
-      if ( _pagesCount == 0 )
+      if (_pagesCount == 0)
       {
         closeFile();
         return;
       }
-      Integer searchAttribute = Utilities.checkedStringToInt( formBean.getSearchAttribute(), HabitateSearchCriteria.SEARCH_NAME );
-      Integer relationOp = Utilities.checkedStringToInt( formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS );
-      Integer database = Utilities.checkedStringToInt( formBean.getDatabase(), HabitateSearchCriteria.SEARCH_NAME );
-      writeRow( createHeader() );
-      xmlreport.writeRow( createHeader() );
-      for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
+      Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), HabitateSearchCriteria.SEARCH_NAME);
+      Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
+      Integer database = Utilities.checkedStringToInt(formBean.getDatabase(), HabitateSearchCriteria.SEARCH_NAME);
+      writeRow(createHeader());
+      xmlreport.writeRow(createHeader());
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
-        List resultSet = dataFactory.getPage( _currPage );
-        for ( int i = 0; i < resultSet.size(); i++ )
+        List resultSet = dataFactory.getPage(_currPage);
+        for (int i = 0; i < resultSet.size(); i++)
         {
-          ScientificNamePersist specie = ( ScientificNamePersist ) resultSet.get( i );
+          ScientificNamePersist specie = (ScientificNamePersist) resultSet.get(i);
 
           Vector<String> aRow = new Vector<String>();
           Vector<String> xmlRow = new Vector<String>();
@@ -127,49 +127,49 @@ public class TSVSpeciesHabitatsReport extends AbstractTSVReport
               new HabitateSearchCriteria(
                   searchAttribute,
                   formBean.getScientificName(),
-                  relationOp ),
+                  relationOp),
               database,
               searchAttribute,
               idNatureObject,
-              showInvalidatedSpecies );
+              showInvalidatedSpecies);
           String habitats = "";
-          if ( resultsHabitats.size() > 0 )
+          if (resultsHabitats.size() > 0)
           {
-            for ( int j = 0; j < resultsHabitats.size(); j++ )
+            for (int j = 0; j < resultsHabitats.size(); j++)
             {
               aRow = new Vector<String>();
-              String habitatName = Utilities.treatURLSpecialCharacters( ( String ) resultsHabitats.get( j ) );
-              if ( j == 0 )
+              String habitatName = Utilities.treatURLSpecialCharacters((String) resultsHabitats.get(j));
+              if (j == 0)
               {
                 cellGroup = specie.getCommonName();
-                cellOrder = Utilities.formatString( specie.getTaxonomicNameOrder() );
+                cellOrder = Utilities.formatString(specie.getTaxonomicNameOrder());
                 cellFamily = specie.getTaxonomicNameFamily();
                 cellScientificName = specie.getScientificName();
                 // Group
-                aRow.addElement( cellGroup );
+                aRow.addElement(cellGroup);
                 // Order
-                aRow.addElement( cellOrder );
+                aRow.addElement(cellOrder);
                 // Family
-                aRow.addElement( cellFamily );
+                aRow.addElement(cellFamily);
                 // Scientific name
-                aRow.addElement( cellScientificName );
+                aRow.addElement(cellScientificName);
                 // Habitat
-                aRow.addElement( habitatName );
-                writeRow( aRow );
+                aRow.addElement(habitatName);
+                writeRow(aRow);
               }
               else
               {
                 // Group
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Order
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Family
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Scientific name
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Habitat
-                aRow.addElement( habitatName );
-                writeRow( aRow );
+                aRow.addElement(habitatName);
+                writeRow(aRow);
               }
               habitats += "<habitat>" + habitatName + "</habitat>";
             }
@@ -177,44 +177,44 @@ public class TSVSpeciesHabitatsReport extends AbstractTSVReport
           else
           {
             cellGroup = specie.getCommonName();
-            cellOrder = Utilities.formatString( specie.getTaxonomicNameOrder() );
+            cellOrder = Utilities.formatString(specie.getTaxonomicNameOrder());
             cellFamily = specie.getTaxonomicNameFamily();
             cellScientificName = specie.getScientificName();
 
             // Group
-            aRow.addElement( cellGroup );
+            aRow.addElement(cellGroup);
             // Order
-            aRow.addElement( cellOrder );
+            aRow.addElement(cellOrder);
             // Family
-            aRow.addElement( cellFamily );
+            aRow.addElement(cellFamily);
             // Scientific name
-            aRow.addElement( cellScientificName );
+            aRow.addElement(cellScientificName);
             // Habitat
-            aRow.addElement( "-" );
-            writeRow( aRow );
+            aRow.addElement("-");
+            writeRow(aRow);
           }
-          xmlRow.add( specie.getCommonName() );
-          xmlRow.add( Utilities.formatString( specie.getTaxonomicNameOrder() ) );
-          xmlRow.add( specie.getTaxonomicNameFamily() );
-          xmlRow.add( specie.getScientificName() );
-          xmlRow.add( habitats );
-          xmlreport.writeRow( xmlRow );
+          xmlRow.add(specie.getCommonName());
+          xmlRow.add(Utilities.formatString(specie.getTaxonomicNameOrder()));
+          xmlRow.add(specie.getTaxonomicNameFamily());
+          xmlRow.add(specie.getScientificName());
+          xmlRow.add(habitats);
+          xmlreport.writeRow(xmlRow);
         }
       }
     }
-    catch ( CriteriaMissingException ex )
+    catch (CriteriaMissingException ex)
     {
       ex.printStackTrace();
     }
-    catch ( InitializationException iex )
+    catch (InitializationException iex)
     {
       iex.printStackTrace();
     }
-    catch ( IOException ioex )
+    catch (IOException ioex)
     {
       ioex.printStackTrace();
     }
-    catch ( Exception ex2 )
+    catch (Exception ex2)
     {
       ex2.printStackTrace();
     }

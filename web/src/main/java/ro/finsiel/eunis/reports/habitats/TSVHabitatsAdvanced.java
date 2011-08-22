@@ -31,14 +31,14 @@ public class TSVHabitatsAdvanced extends AbstractTSVReport
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    */
-  public TSVHabitatsAdvanced( String sessionID, AbstractFormBean formBean )
+  public TSVHabitatsAdvanced(String sessionID, AbstractFormBean formBean)
   {
-    super( "HabitatsAdvancedReport_" + sessionID + ".tsv" );
-    this.formBean = ( CombinedSearchBean ) formBean;
+    super("HabitatsAdvancedReport_" + sessionID + ".tsv");
+    this.formBean = (CombinedSearchBean) formBean;
     this.filename = "HabitatsAdvancedReport_" + sessionID + ".tsv";
-    xmlreport = new XMLReport( "HabitatsAdvancedReport_" + sessionID + ".xml" );
-    this.dataFactory = new DictionaryPaginator( new DictionaryDomain( sessionID ) );
-    this.dataFactory.setSortCriteria( formBean.toSortCriteria() );
+    xmlreport = new XMLReport("HabitatsAdvancedReport_" + sessionID + ".xml");
+    this.dataFactory = new DictionaryPaginator(new DictionaryDomain(sessionID));
+    this.dataFactory.setSortCriteria(formBean.toSortCriteria());
   }
 
   /**
@@ -48,16 +48,16 @@ public class TSVHabitatsAdvanced extends AbstractTSVReport
    */
   public List<String> createHeader()
   {
-    if ( null == formBean )
+    if (null == formBean)
     {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
-    headers.addElement( "Level" );
-    headers.addElement( "EUNIS code" );
-    headers.addElement( "ANNEX I code" );
-    headers.addElement( "Habitat type name" );
-    headers.addElement( "Priority" );
+    headers.addElement("Level");
+    headers.addElement("EUNIS code");
+    headers.addElement("ANNEX I code");
+    headers.addElement("Habitat type name");
+    headers.addElement("Priority");
     return headers;
   }
 
@@ -66,61 +66,61 @@ public class TSVHabitatsAdvanced extends AbstractTSVReport
    */
   public void writeData()
   {
-    if ( null == dataFactory )
+    if (null == dataFactory)
     {
       return;
     }
-    dataFactory.setPageSize( RESULTS_PER_PAGE );
+    dataFactory.setPageSize(RESULTS_PER_PAGE);
     try
     {
       int _pagesCount = dataFactory.countPages();
-      if ( _pagesCount == 0 )
+      if (_pagesCount == 0)
       {
         closeFile();
         return;
       }
-      writeRow( createHeader() );
-      xmlreport.writeRow( createHeader() );
-      for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
+      writeRow(createHeader());
+      xmlreport.writeRow(createHeader());
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
-        List resultSet = dataFactory.getPage( _currPage );
-        for ( int i = 0; i < resultSet.size(); i++ )
+        List resultSet = dataFactory.getPage(_currPage);
+        for (int i = 0; i < resultSet.size(); i++)
         {
-          DictionaryPersist habitat = ( DictionaryPersist ) resultSet.get( i );
+          DictionaryPersist habitat = (DictionaryPersist) resultSet.get(i);
           String level = "";
           int idHabitat = Utilities.checkedStringToInt(habitat.getIdHabitat(), -1);
-          if ( habitat.getHabLevel() != null ) level = habitat.getHabLevel().intValue() + "";
+          if (habitat.getHabLevel() != null) level = habitat.getHabLevel().intValue() + "";
           boolean isEUNIS = idHabitat <= 10000;
 
           Vector<String> row = new Vector<String>();
           // Level
-          row.addElement( level );
+          row.addElement(level);
           // EUNIS code
-          row.addElement( isEUNIS ? habitat.getEunisHabitatCode() : "" );
+          row.addElement(isEUNIS ? habitat.getEunisHabitatCode() : "");
           // ANNEX I code
-          row.addElement( (isEUNIS) ? "" : habitat.getCodeAnnex1() );
+          row.addElement((isEUNIS) ? "" : habitat.getCodeAnnex1());
           // Name
-          row.addElement( habitat.getScientificName() );
+          row.addElement(habitat.getScientificName());
           // Priority
-          row.addElement( habitat.getPriority() != null && 1 == habitat.getPriority().shortValue() ? "Yes" : "No" );
-          writeRow( row );
-          xmlreport.writeRow( row );
+          row.addElement(habitat.getPriority() != null && 1 == habitat.getPriority().shortValue() ? "Yes" : "No");
+          writeRow(row);
+          xmlreport.writeRow(row);
         }
       }
     }
-    catch ( CriteriaMissingException ex )
+    catch (CriteriaMissingException ex)
     {
       ex.printStackTrace();
     }
-    catch ( InitializationException iex )
+    catch (InitializationException iex)
     {
       iex.printStackTrace();
     }
-    catch ( IOException ioex )
+    catch (IOException ioex)
     {
       ioex.printStackTrace();
     }
-    catch ( Exception ex2 )
+    catch (Exception ex2)
     {
       ex2.printStackTrace();
     }

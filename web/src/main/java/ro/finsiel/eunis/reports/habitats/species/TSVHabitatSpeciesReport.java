@@ -41,27 +41,27 @@ public class TSVHabitatSpeciesReport extends AbstractTSVReport
    * @param showEUNISInvalidatedSpecies Show invalidated species
    * @param searchAttribute attribute searched
    */
-  public TSVHabitatSpeciesReport( String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies, Integer searchAttribute )
+  public TSVHabitatSpeciesReport(String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies, Integer searchAttribute)
   {
-    super( "HabitatSpeciesReport_" + sessionID + ".tsv" );
-    this.formBean = ( SpeciesBean ) formBean;
+    super("HabitatSpeciesReport_" + sessionID + ".tsv");
+    this.formBean = (SpeciesBean) formBean;
     this.filename = "HabitatSpeciesReport_" + sessionID + ".tsv";
     this.showEUNISInvalidatedSpecies = showEUNISInvalidatedSpecies;
-    xmlreport = new XMLReport( "HabitatSpeciesReport_" + sessionID + ".xml" );
+    xmlreport = new XMLReport("HabitatSpeciesReport_" + sessionID + ".xml");
     // Init the data factory
-    if ( null != formBean )
+    if (null != formBean)
     {
-      Integer database = Utilities.checkedStringToInt( ( ( SpeciesBean ) formBean ).getDatabase(), ScientificNameDomain.SEARCH_EUNIS );
-      this.dataFactory = new SpeciesPaginator( new ScientificNameDomain( formBean.toSearchCriteria(),
+      Integer database = Utilities.checkedStringToInt(((SpeciesBean) formBean).getDatabase(), ScientificNameDomain.SEARCH_EUNIS);
+      this.dataFactory = new SpeciesPaginator(new ScientificNameDomain(formBean.toSearchCriteria(),
           formBean.toSortCriteria(),
           database,
           showEUNISInvalidatedSpecies,
-          searchAttribute ) );
-      this.dataFactory.setSortCriteria( formBean.toSortCriteria() );
+          searchAttribute));
+      this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
     else
     {
-      System.out.println( TSVHabitatSpeciesReport.class.getName() + "::ctor() - Warning: formBean was null!" );
+      System.out.println(TSVHabitatSpeciesReport.class.getName() + "::ctor() - Warning: formBean was null!");
     }
   }
 
@@ -72,37 +72,37 @@ public class TSVHabitatSpeciesReport extends AbstractTSVReport
    */
   public List<String> createHeader()
   {
-    Integer database = Utilities.checkedStringToInt( formBean.getDatabase(), ScientificNameDomain.SEARCH_EUNIS );
-    if ( null == formBean )
+    Integer database = Utilities.checkedStringToInt(formBean.getDatabase(), ScientificNameDomain.SEARCH_EUNIS);
+    if (null == formBean)
     {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
     // Level
-    if ( formBean.getDatabase().equalsIgnoreCase( ScientificNameDomain.SEARCH_EUNIS.toString() ) )
+    if (formBean.getDatabase().equalsIgnoreCase(ScientificNameDomain.SEARCH_EUNIS.toString()))
     {
-      headers.addElement( "Level" );
+      headers.addElement("Level");
     }
     // Code
-    if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_BOTH ) )
+    if (0 == database.compareTo(ScientificNameDomain.SEARCH_BOTH))
     {
-      headers.addElement( "EUNIS Code" );
-      headers.addElement( "ANNEX I Code" );
+      headers.addElement("EUNIS Code");
+      headers.addElement("ANNEX I Code");
     }
-    if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_EUNIS ) )
+    if (0 == database.compareTo(ScientificNameDomain.SEARCH_EUNIS))
     {
-      headers.addElement( "EUNIS Code" );
+      headers.addElement("EUNIS Code");
     }
-    if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_ANNEX_I ) )
+    if (0 == database.compareTo(ScientificNameDomain.SEARCH_ANNEX_I))
     {
-      headers.addElement( "ANNEX I Code" );
+      headers.addElement("ANNEX I Code");
     }
     // Habitat name
-    headers.addElement( "Name" );
+    headers.addElement("Name");
     // English name
-    headers.addElement( "Habitat type english name" );
+    headers.addElement("Habitat type english name");
     // Species
-    headers.addElement( "Species" );
+    headers.addElement("Species");
 
     return headers;
   }
@@ -112,106 +112,106 @@ public class TSVHabitatSpeciesReport extends AbstractTSVReport
    */
   public void writeData()
   {
-    Integer database = Utilities.checkedStringToInt( formBean.getDatabase(), ScientificNameDomain.SEARCH_EUNIS );
-    if ( null == dataFactory )
+    Integer database = Utilities.checkedStringToInt(formBean.getDatabase(), ScientificNameDomain.SEARCH_EUNIS);
+    if (null == dataFactory)
     {
       return;
     }
-    dataFactory.setPageSize( RESULTS_PER_PAGE );
+    dataFactory.setPageSize(RESULTS_PER_PAGE);
     try
     {
       int _pagesCount = dataFactory.countPages();
-      if ( _pagesCount == 0 )
+      if (_pagesCount == 0)
       {
         closeFile();
         return;
       }
-      writeRow( createHeader() );
-      xmlreport.writeRow( createHeader() );
-      Integer searchAttribute = Utilities.checkedStringToInt( formBean.getSearchAttribute(), SpeciesSearchCriteria.SEARCH_SCIENTIFIC_NAME );
-      Integer relationOp = Utilities.checkedStringToInt( formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS );
-      for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
+      writeRow(createHeader());
+      xmlreport.writeRow(createHeader());
+      Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), SpeciesSearchCriteria.SEARCH_SCIENTIFIC_NAME);
+      Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
-        List resultSet = dataFactory.getPage( _currPage );
-        for ( int i = 0; i < resultSet.size(); i++ )
+        List resultSet = dataFactory.getPage(_currPage);
+        for (int i = 0; i < resultSet.size(); i++)
         {
-          ScientificNamePersist habitat = ( ScientificNamePersist ) resultSet.get( i );
+          ScientificNamePersist habitat = (ScientificNamePersist) resultSet.get(i);
 
           // List of species attributes.
           Integer idNatureObject = habitat.getIdNatureObject();
-          List resultsSpecies = new ScientificNameDomain().findSpeciesFromHabitat( new SpeciesSearchCriteria( searchAttribute,
+          List resultsSpecies = new ScientificNameDomain().findSpeciesFromHabitat(new SpeciesSearchCriteria(searchAttribute,
               formBean.getScientificName(),
-              relationOp ),
+              relationOp),
               database,
               showEUNISInvalidatedSpecies,
               idNatureObject,
-              searchAttribute );
-          if ( resultsSpecies != null && resultsSpecies.size() > 0 )
+              searchAttribute);
+          if (resultsSpecies != null && resultsSpecies.size() > 0)
           {
             for(int ii = 0; ii < resultsSpecies.size(); ii++)
             {
               TableColumns tableColumns = (TableColumns) resultsSpecies.get(ii);
               String scientificName = (String) tableColumns.getColumnsValues().get(0);
 
-              if( ii == 0 )
+              if(ii == 0)
               {
                 Vector<String> aRow = new Vector<String>();
                 // Level
-                if ( ( formBean ).getDatabase().equalsIgnoreCase( ScientificNameDomain.SEARCH_EUNIS.toString() ) )
+                if ((formBean).getDatabase().equalsIgnoreCase(ScientificNameDomain.SEARCH_EUNIS.toString()))
                 {
-                  aRow.addElement( habitat.getHabLevel().toString() );
+                  aRow.addElement(habitat.getHabLevel().toString());
                 }
                 // Code
-                if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_BOTH ) )
+                if (0 == database.compareTo(ScientificNameDomain.SEARCH_BOTH))
                 {
-                  aRow.addElement( habitat.getEunisHabitatCode() );
-                  aRow.addElement( habitat.getCodeAnnex1() );
+                  aRow.addElement(habitat.getEunisHabitatCode());
+                  aRow.addElement(habitat.getCodeAnnex1());
                 }
-                if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_EUNIS ) )
+                if (0 == database.compareTo(ScientificNameDomain.SEARCH_EUNIS))
                 {
-                  aRow.addElement( habitat.getEunisHabitatCode() );
+                  aRow.addElement(habitat.getEunisHabitatCode());
                 }
-                if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_ANNEX_I ) )
+                if (0 == database.compareTo(ScientificNameDomain.SEARCH_ANNEX_I))
                 {
-                  aRow.addElement( habitat.getCodeAnnex1() );
+                  aRow.addElement(habitat.getCodeAnnex1());
                 }
                 // Name
-                aRow.addElement( habitat.getScientificName() );
+                aRow.addElement(habitat.getScientificName());
                 // English name
-                aRow.addElement( habitat.getDescription() );
+                aRow.addElement(habitat.getDescription());
                 // Species
-                aRow.addElement( scientificName );
-                writeRow( aRow );
+                aRow.addElement(scientificName);
+                writeRow(aRow);
               }
               else
               {
                 Vector<String> aRow = new Vector<String>();
                 // Level
-                if ( ( formBean ).getDatabase().equalsIgnoreCase( ScientificNameDomain.SEARCH_EUNIS.toString() ) )
+                if ((formBean).getDatabase().equalsIgnoreCase(ScientificNameDomain.SEARCH_EUNIS.toString()))
                 {
-                  aRow.addElement( "" );
+                  aRow.addElement("");
                 }
                 // Code
-                if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_BOTH ) )
+                if (0 == database.compareTo(ScientificNameDomain.SEARCH_BOTH))
                 {
-                  aRow.addElement( "" );
-                  aRow.addElement( "" );
+                  aRow.addElement("");
+                  aRow.addElement("");
                 }
-                if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_EUNIS ) )
+                if (0 == database.compareTo(ScientificNameDomain.SEARCH_EUNIS))
                 {
-                  aRow.addElement( "" );
+                  aRow.addElement("");
                 }
-                if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_ANNEX_I ) )
+                if (0 == database.compareTo(ScientificNameDomain.SEARCH_ANNEX_I))
                 {
-                  aRow.addElement( "" );
+                  aRow.addElement("");
                 }
                 // Name
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // English name
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Species
-                aRow.addElement( scientificName );
-                writeRow( aRow );
+                aRow.addElement(scientificName);
+                writeRow(aRow);
               }
             }
           }
@@ -219,58 +219,58 @@ public class TSVHabitatSpeciesReport extends AbstractTSVReport
           {
             Vector<String> aRow = new Vector<String>();
             // Level
-            if ( ( formBean ).getDatabase().equalsIgnoreCase( ScientificNameDomain.SEARCH_EUNIS.toString() ) )
+            if ((formBean).getDatabase().equalsIgnoreCase(ScientificNameDomain.SEARCH_EUNIS.toString()))
             {
-              aRow.addElement( habitat.getHabLevel().toString() );
+              aRow.addElement(habitat.getHabLevel().toString());
             }
             // Code
-            if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_BOTH ) )
+            if (0 == database.compareTo(ScientificNameDomain.SEARCH_BOTH))
             {
-              aRow.addElement( habitat.getEunisHabitatCode() );
-              aRow.addElement( habitat.getCodeAnnex1() );
+              aRow.addElement(habitat.getEunisHabitatCode());
+              aRow.addElement(habitat.getCodeAnnex1());
             }
-            if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_EUNIS ) )
+            if (0 == database.compareTo(ScientificNameDomain.SEARCH_EUNIS))
             {
-              aRow.addElement( habitat.getEunisHabitatCode() );
+              aRow.addElement(habitat.getEunisHabitatCode());
             }
-            if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_ANNEX_I ) )
+            if (0 == database.compareTo(ScientificNameDomain.SEARCH_ANNEX_I))
             {
-              aRow.addElement( habitat.getCodeAnnex1() );
+              aRow.addElement(habitat.getCodeAnnex1());
             }
             // Name
-            aRow.addElement( habitat.getScientificName() );
+            aRow.addElement(habitat.getScientificName());
             // English name
-            aRow.addElement( habitat.getDescription() );
+            aRow.addElement(habitat.getDescription());
             // Species
-            aRow.addElement( "" );
-            writeRow( aRow );
+            aRow.addElement("");
+            writeRow(aRow);
           }
 
           // XML Report
           Vector<String> aRow = new Vector<String>();
           // Level
-          if ( ( formBean ).getDatabase().equalsIgnoreCase( ScientificNameDomain.SEARCH_EUNIS.toString() ) )
+          if ((formBean).getDatabase().equalsIgnoreCase(ScientificNameDomain.SEARCH_EUNIS.toString()))
           {
-            aRow.addElement( habitat.getHabLevel().toString() );
+            aRow.addElement(habitat.getHabLevel().toString());
           }
           // Code
-          if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_BOTH ) )
+          if (0 == database.compareTo(ScientificNameDomain.SEARCH_BOTH))
           {
-            aRow.addElement( habitat.getEunisHabitatCode() );
-            aRow.addElement( habitat.getCodeAnnex1() );
+            aRow.addElement(habitat.getEunisHabitatCode());
+            aRow.addElement(habitat.getCodeAnnex1());
           }
-          if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_EUNIS ) )
+          if (0 == database.compareTo(ScientificNameDomain.SEARCH_EUNIS))
           {
-            aRow.addElement( habitat.getEunisHabitatCode() );
+            aRow.addElement(habitat.getEunisHabitatCode());
           }
-          if ( 0 == database.compareTo( ScientificNameDomain.SEARCH_ANNEX_I ) )
+          if (0 == database.compareTo(ScientificNameDomain.SEARCH_ANNEX_I))
           {
-            aRow.addElement( habitat.getCodeAnnex1() );
+            aRow.addElement(habitat.getCodeAnnex1());
           }
           // Name
-          aRow.addElement( habitat.getScientificName() );
+          aRow.addElement(habitat.getScientificName());
           // English name
-          aRow.addElement( habitat.getDescription() );
+          aRow.addElement(habitat.getDescription());
           // Species
           String species = "";
           for(int ii = 0; ii < resultsSpecies.size(); ii++)
@@ -278,24 +278,24 @@ public class TSVHabitatSpeciesReport extends AbstractTSVReport
             TableColumns tableColumns = (TableColumns) resultsSpecies.get(ii);
             species += "<species>" + tableColumns.getColumnsValues().get(0) + "</species>";
           }
-          aRow.addElement( species );
-          xmlreport.writeRow( aRow );
+          aRow.addElement(species);
+          xmlreport.writeRow(aRow);
         }
       }
     }
-    catch ( CriteriaMissingException ex )
+    catch (CriteriaMissingException ex)
     {
       ex.printStackTrace();
     }
-    catch ( InitializationException iex )
+    catch (InitializationException iex)
     {
       iex.printStackTrace();
     }
-    catch ( IOException ioex )
+    catch (IOException ioex)
     {
       ioex.printStackTrace();
     }
-    catch ( Exception ex2 )
+    catch (Exception ex2)
     {
       ex2.printStackTrace();
     }

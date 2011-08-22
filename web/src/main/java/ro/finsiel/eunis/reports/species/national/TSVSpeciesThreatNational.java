@@ -36,19 +36,19 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    * @param showEUNISInvalidatedSpecies Show invalidated species
    */
-  public TSVSpeciesThreatNational( String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies ) {
-    super( "SpeciesThreatNationalReport_" + sessionID + ".tsv" );
+  public TSVSpeciesThreatNational(String sessionID, AbstractFormBean formBean, boolean showEUNISInvalidatedSpecies) {
+    super("SpeciesThreatNationalReport_" + sessionID + ".tsv");
     this.formBean = formBean;
     this.filename = "SpeciesThreatNationalReport_" + sessionID + ".tsv";
-    xmlreport = new XMLReport( "SpeciesThreatNationalReport_" + sessionID + ".xml" );
-    if ( null != formBean )
+    xmlreport = new XMLReport("SpeciesThreatNationalReport_" + sessionID + ".xml");
+    if (null != formBean)
     {
-      dataFactory = new NationalPaginator( new NationalThreatStatusDomain( formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies ) );
-      this.dataFactory.setSortCriteria( formBean.toSortCriteria() );
+      dataFactory = new NationalPaginator(new NationalThreatStatusDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies));
+      this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
     else
     {
-      System.out.println( TSVSpeciesThreatNational.class.getName() + "::ctor() - Warning: formBean was null!" );
+      System.out.println(TSVSpeciesThreatNational.class.getName() + "::ctor() - Warning: formBean was null!");
     }
 
   }
@@ -59,19 +59,19 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
    * @return An array with the columns headers of the table
    */
   public List<String> createHeader() {
-    if ( null == formBean )
+    if (null == formBean)
     {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
     // Group
-    headers.addElement( "Group" );
+    headers.addElement("Group");
     // Country
-    headers.addElement( "Country" );
+    headers.addElement("Country");
     // Scientific name
-    headers.addElement( "Scientific name" );
+    headers.addElement("Scientific name");
     // Vernacular names (multiple rows)
-    headers.addElement( "Vernacular names" );
+    headers.addElement("Vernacular names");
     return headers;
   }
 
@@ -80,62 +80,62 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
    * Use this method to write specific data into the file. Implemented in inherited classes
    */
   public void writeData() {
-    if ( null == dataFactory )
+    if (null == dataFactory)
     {
       return;
     }
-    dataFactory.setPageSize( RESULTS_PER_PAGE );
+    dataFactory.setPageSize(RESULTS_PER_PAGE);
     try
     {
       int _pagesCount = dataFactory.countPages();
-      if ( _pagesCount == 0 )
+      if (_pagesCount == 0)
       {
         closeFile();
         return;
       }
-      writeRow( createHeader() );
-      xmlreport.writeRow( createHeader() );
-      for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
+      writeRow(createHeader());
+      xmlreport.writeRow(createHeader());
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
-        List resultSet = dataFactory.getPage( _currPage );
-        for ( int i = 0; i < resultSet.size(); i++ )
+        List resultSet = dataFactory.getPage(_currPage);
+        for (int i = 0; i < resultSet.size(); i++)
         {
-          NationalThreatStatusPersist specie = ( NationalThreatStatusPersist ) resultSet.get( i );
-          Vector vernNamesList = SpeciesSearchUtility.findVernacularNames( specie.getIdNatureObject() );
-          Vector sortVernList = new JavaSorter().sort( vernNamesList, JavaSorter.SORT_ALPHABETICAL );
+          NationalThreatStatusPersist specie = (NationalThreatStatusPersist) resultSet.get(i);
+          Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
+          Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);
           String xmlVernacularNames = "";
-          if ( sortVernList.size() > 0 )
+          if (sortVernList.size() > 0)
           {
-            for ( int ii = 0; ii < sortVernList.size(); ii++ )
+            for (int ii = 0; ii < sortVernList.size(); ii++)
             {
-              VernacularNameWrapper aVernName = ( VernacularNameWrapper ) sortVernList.get( ii );
+              VernacularNameWrapper aVernName = (VernacularNameWrapper) sortVernList.get(ii);
               String vernacularName = aVernName.getName();
 
-              if ( ii == 0 )
+              if (ii == 0)
               {
                 Vector<String> aRow = new Vector<String>();
                 // Group
-                aRow.addElement( specie.getCommonName() );
+                aRow.addElement(specie.getCommonName());
                 // Country
-                aRow.addElement( specie.getCountry() );
+                aRow.addElement(specie.getCountry());
                 // Scientific name
-                aRow.addElement( specie.getScName() );
+                aRow.addElement(specie.getScName());
                 // Vernacular name
-                aRow.addElement( vernacularName );
-                writeRow( aRow );
+                aRow.addElement(vernacularName);
+                writeRow(aRow);
               }
               else
               {
                 Vector<String> aRow = new Vector<String>();
                 // Group
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Country
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Scientific name
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Vernacular name
-                aRow.addElement( vernacularName );
-                writeRow( aRow );
+                aRow.addElement(vernacularName);
+                writeRow(aRow);
               }
               xmlVernacularNames += "<name language=\"" + aVernName.getLanguage() + "\">" + aVernName.getName() + "</name>";
             }
@@ -144,37 +144,37 @@ public class TSVSpeciesThreatNational extends AbstractTSVReport {
           {
             Vector<String> aRow = new Vector<String>();
             // Group
-            aRow.addElement( specie.getCommonName() );
+            aRow.addElement(specie.getCommonName());
             // Country
-            aRow.addElement( specie.getCountry() );
+            aRow.addElement(specie.getCountry());
             // Scientific name
-            aRow.addElement( specie.getScName() );
+            aRow.addElement(specie.getScName());
             // Vernacular name
-            aRow.addElement( "-" );
-            writeRow( aRow );
+            aRow.addElement("-");
+            writeRow(aRow);
           }
           Vector<String> aRow = new Vector<String>();
-          aRow.addElement( specie.getCommonName() );
-          aRow.addElement( specie.getCountry() );
-          aRow.addElement( specie.getScName() );
-          aRow.addElement( xmlVernacularNames );
-          xmlreport.writeRow( aRow );
+          aRow.addElement(specie.getCommonName());
+          aRow.addElement(specie.getCountry());
+          aRow.addElement(specie.getScName());
+          aRow.addElement(xmlVernacularNames);
+          xmlreport.writeRow(aRow);
         }
       }
     }
-    catch ( CriteriaMissingException ex )
+    catch (CriteriaMissingException ex)
     {
       ex.printStackTrace();
     }
-    catch ( InitializationException iex )
+    catch (InitializationException iex)
     {
       iex.printStackTrace();
     }
-    catch ( IOException ioex )
+    catch (IOException ioex)
     {
       ioex.printStackTrace();
     }
-    catch ( Exception ex2 )
+    catch (Exception ex2)
     {
       ex2.printStackTrace();
     }

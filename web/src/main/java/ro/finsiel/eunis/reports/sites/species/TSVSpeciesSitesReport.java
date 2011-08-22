@@ -44,32 +44,32 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
    * @param showInvalidatedSpecies Show invalidated species
    * @param searchAttribute Type of search
    */
-  public TSVSpeciesSitesReport( String sessionID, AbstractFormBean formBean, boolean showInvalidatedSpecies, Integer searchAttribute )
+  public TSVSpeciesSitesReport(String sessionID, AbstractFormBean formBean, boolean showInvalidatedSpecies, Integer searchAttribute)
   {
-    super( "SpeciesSitesReport_" + sessionID + ".tsv" );
-    this.formBean = ( SpeciesBean )formBean;
+    super("SpeciesSitesReport_" + sessionID + ".tsv");
+    this.formBean = (SpeciesBean)formBean;
     this.filename = "SpeciesSitesReport_" + sessionID + ".tsv";
-    xmlreport = new XMLReport( "SpeciesSitesReport_" + sessionID + ".xml" );
+    xmlreport = new XMLReport("SpeciesSitesReport_" + sessionID + ".xml");
     this.showInvalidatedSpecies = showInvalidatedSpecies;
     // Init the data factory
-    if ( null != formBean )
+    if (null != formBean)
     {
       boolean[] source = {
-          ( this.formBean ).getDB_NATURA2000() != null,
-          ( this.formBean ).getDB_CORINE() != null,
-          ( this.formBean ).getDB_DIPLOMA() != null,
-          ( this.formBean ).getDB_CDDA_NATIONAL() != null,
-          ( this.formBean ).getDB_CDDA_INTERNATIONAL() != null,
-          ( this.formBean ).getDB_BIOGENETIC() != null,
+          (this.formBean).getDB_NATURA2000() != null,
+          (this.formBean).getDB_CORINE() != null,
+          (this.formBean).getDB_DIPLOMA() != null,
+          (this.formBean).getDB_CDDA_NATIONAL() != null,
+          (this.formBean).getDB_CDDA_INTERNATIONAL() != null,
+          (this.formBean).getDB_BIOGENETIC() != null,
           false,
-          ( this.formBean ).getDB_EMERALD() != null
+          (this.formBean).getDB_EMERALD() != null
       };
-      dataFactory = new SpeciesPaginator( new SpeciesDomain( formBean.toSearchCriteria(), formBean.toSortCriteria(), showInvalidatedSpecies, source, searchAttribute ) );
-      this.dataFactory.setSortCriteria( formBean.toSortCriteria() );
+      dataFactory = new SpeciesPaginator(new SpeciesDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), showInvalidatedSpecies, source, searchAttribute));
+      this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
     else
     {
-      System.out.println( TSVSpeciesSitesReport.class.getName() + "::ctor() - Warning: formBean was null!" );
+      System.out.println(TSVSpeciesSitesReport.class.getName() + "::ctor() - Warning: formBean was null!");
     }
   }
 
@@ -80,19 +80,19 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
    */
   public List<String> createHeader()
   {
-    if ( null == formBean )
+    if (null == formBean)
     {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
     // Source database
-    headers.addElement( "Source data set" );
+    headers.addElement("Source data set");
     // DesignationTypes
-    headers.addElement( "Designation type" );
+    headers.addElement("Designation type");
     // Name
-    headers.addElement( "Site name" );
+    headers.addElement("Site name");
     // Species
-    headers.addElement( "Species" );
+    headers.addElement("Species");
     return headers;
   }
 
@@ -101,85 +101,85 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
    */
   public void writeData()
   {
-    if ( null == dataFactory )
+    if (null == dataFactory)
     {
       return;
     }
-    dataFactory.setPageSize( RESULTS_PER_PAGE );
+    dataFactory.setPageSize(RESULTS_PER_PAGE);
     try
     {
       int _pagesCount = dataFactory.countPages();
-      if ( _pagesCount == 0 )
+      if (_pagesCount == 0)
       {
         closeFile();
         return;
       }
-      writeRow( createHeader() );
-      xmlreport.writeRow( createHeader() );
+      writeRow(createHeader());
+      xmlreport.writeRow(createHeader());
 
       Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), SpeciesSearchCriteria.SEARCH_SCIENTIFIC_NAME);
       Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
 
       boolean[] source = {
-          ( this.formBean ).getDB_NATURA2000() != null,
-          ( this.formBean ).getDB_CORINE() != null,
-          ( this.formBean ).getDB_DIPLOMA() != null,
-          ( this.formBean ).getDB_CDDA_NATIONAL() != null,
-          ( this.formBean ).getDB_CDDA_INTERNATIONAL() != null,
-          ( this.formBean ).getDB_BIOGENETIC() != null,
+          (this.formBean).getDB_NATURA2000() != null,
+          (this.formBean).getDB_CORINE() != null,
+          (this.formBean).getDB_DIPLOMA() != null,
+          (this.formBean).getDB_CDDA_NATIONAL() != null,
+          (this.formBean).getDB_CDDA_INTERNATIONAL() != null,
+          (this.formBean).getDB_BIOGENETIC() != null,
           false,
-          ( this.formBean ).getDB_EMERALD() != null
+          (this.formBean).getDB_EMERALD() != null
       };
-      for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
-        List resultSet = dataFactory.getPage( _currPage );
-        for ( int i = 0; i < resultSet.size(); i++ )
+        List resultSet = dataFactory.getPage(_currPage);
+        for (int i = 0; i < resultSet.size(); i++)
         {
-          SpeciesPersist site = ( SpeciesPersist ) resultSet.get( i );
+          SpeciesPersist site = (SpeciesPersist) resultSet.get(i);
           String designations = "";
-          if( site.getIdGeoscope() != null )
+          if(site.getIdGeoscope() != null)
           {
-            designations = SitesSearchUtility.siteDesignationsAsCommaSeparatedString( site.getIdDesignation(), site.getIdGeoscope().toString() );
+            designations = SitesSearchUtility.siteDesignationsAsCommaSeparatedString(site.getIdDesignation(), site.getIdGeoscope().toString());
           }
 
           Integer idNatureObject = site.getIdNatureObject();
-          List resultsSpecies = new SpeciesDomain().findSpeciesFromSite( new SpeciesSearchCriteria( searchAttribute,
+          List resultsSpecies = new SpeciesDomain().findSpeciesFromSite(new SpeciesSearchCriteria(searchAttribute,
               formBean.getSearchString(),
-              relationOp ),
+              relationOp),
               showInvalidatedSpecies,
               idNatureObject,
-              searchAttribute, source );
-          if ( resultsSpecies != null && resultsSpecies.size() > 0 )
+              searchAttribute, source);
+          if (resultsSpecies != null && resultsSpecies.size() > 0)
           {
             for(int ii=0;ii<resultsSpecies.size();ii++)
             {
               TableColumns tableColumns = (TableColumns) resultsSpecies.get(ii);
               String scientificName = (String)tableColumns.getColumnsValues().get(0);
-              if ( ii == 0 )
+              if (ii == 0)
               {
                 Vector<String> aRow = new Vector<String>();
                 // Source database
-                aRow.addElement( ( SitesSearchUtility.translateSourceDB( site.getSourceDB() ) ) );
+                aRow.addElement((SitesSearchUtility.translateSourceDB(site.getSourceDB())));
                 // Designations
-                aRow.addElement( designations );
+                aRow.addElement(designations);
                 // Name
-                aRow.addElement( Utilities.formatString( site.getName() ) );
+                aRow.addElement(Utilities.formatString(site.getName()));
                 // Species
-                aRow.addElement( scientificName );
-                writeRow( aRow );
+                aRow.addElement(scientificName);
+                writeRow(aRow);
               }
               else
               {
                 Vector<String> aRow = new Vector<String>();
                 // Source database
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Designations
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Name
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Species
-                aRow.addElement( scientificName );
-                writeRow( aRow );
+                aRow.addElement(scientificName);
+                writeRow(aRow);
               }
             }
           }
@@ -187,24 +187,24 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
           {
             Vector<String> aRow = new Vector<String>();
             // Source database
-            aRow.addElement( ( SitesSearchUtility.translateSourceDB( site.getSourceDB() ) ) );
+            aRow.addElement((SitesSearchUtility.translateSourceDB(site.getSourceDB())));
             // Designations
-            aRow.addElement( designations );
+            aRow.addElement(designations);
             // Name
-            aRow.addElement( Utilities.formatString( site.getName() ) );
+            aRow.addElement(Utilities.formatString(site.getName()));
             // Species
-            aRow.addElement( "-" );
-            writeRow( aRow );
+            aRow.addElement("-");
+            writeRow(aRow);
           }
 
           // XML Report
           Vector<String> aRow = new Vector<String>();
           // Source database
-          aRow.addElement( ( SitesSearchUtility.translateSourceDB( site.getSourceDB() ) ) );
+          aRow.addElement((SitesSearchUtility.translateSourceDB(site.getSourceDB())));
           // Designations
-          aRow.addElement( designations );
+          aRow.addElement(designations);
           // Name
-          aRow.addElement( Utilities.formatString( site.getName() ) );
+          aRow.addElement(Utilities.formatString(site.getName()));
           // Species
           String species = "";
           for(int ii=0;ii<resultsSpecies.size();ii++)
@@ -212,24 +212,24 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
             TableColumns tableColumns = (TableColumns) resultsSpecies.get(ii);
             species += "<species>" + tableColumns.getColumnsValues().get(0) + "</species>";
           }
-          aRow.addElement( species );
-          xmlreport.writeRow( aRow );
+          aRow.addElement(species);
+          xmlreport.writeRow(aRow);
         }
       }
     }
-    catch ( CriteriaMissingException ex )
+    catch (CriteriaMissingException ex)
     {
       ex.printStackTrace();
     }
-    catch ( InitializationException iex )
+    catch (InitializationException iex)
     {
       iex.printStackTrace();
     }
-    catch ( IOException ioex )
+    catch (IOException ioex)
     {
       ioex.printStackTrace();
     }
-    catch ( Exception ex2 )
+    catch (Exception ex2)
     {
       ex2.printStackTrace();
     }

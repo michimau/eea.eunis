@@ -38,21 +38,21 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    * @param showInvalidatedSpecies Show invalidated species
    */
-  public TSVSpeciesReferencesReport( String sessionID, AbstractFormBean formBean, boolean showInvalidatedSpecies )
+  public TSVSpeciesReferencesReport(String sessionID, AbstractFormBean formBean, boolean showInvalidatedSpecies)
   {
-    super( "SpeciesReferencesReport_" + sessionID + ".tsv" );
+    super("SpeciesReferencesReport_" + sessionID + ".tsv");
     this.formBean = formBean;
     this.filename = "SpeciesReferencesReport_" + sessionID + ".tsv";
-    xmlreport = new XMLReport( "SpeciesReferencesReport_" + sessionID + ".xml" );
+    xmlreport = new XMLReport("SpeciesReferencesReport_" + sessionID + ".xml");
     this.showInvalidatedSpecies = showInvalidatedSpecies;
-    if ( null != formBean )
+    if (null != formBean)
     {
-      dataFactory = new ReferencesPaginator( new SpeciesBooksDomain( formBean.toSearchCriteria(), showInvalidatedSpecies ) );
-      this.dataFactory.setSortCriteria( formBean.toSortCriteria() );
+      dataFactory = new ReferencesPaginator(new SpeciesBooksDomain(formBean.toSearchCriteria(), showInvalidatedSpecies));
+      this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
     else
     {
-      System.out.println( TSVSpeciesReferencesReport.class.getName() + "::ctor() - Warning: formBean was null!" );
+      System.out.println(TSVSpeciesReferencesReport.class.getName() + "::ctor() - Warning: formBean was null!");
     }
   }
 
@@ -63,23 +63,23 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport
    */
   public List<String> createHeader()
   {
-    if ( null == formBean )
+    if (null == formBean)
     {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
     // Author
-    headers.addElement( "Author" );
+    headers.addElement("Author");
     // Date
-    headers.addElement( "Date" );
+    headers.addElement("Date");
     // Title
-    headers.addElement( "Title" );
+    headers.addElement("Title");
     // Editor
-    headers.addElement( "Editor" );
+    headers.addElement("Editor");
     // Publisher
-    headers.addElement( "Publisher" );
+    headers.addElement("Publisher");
     // Species
-    headers.addElement( "Species" );
+    headers.addElement("Species");
     return headers;
   }
 
@@ -88,79 +88,79 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport
    */
   public void writeData()
   {
-    if ( null == dataFactory )
+    if (null == dataFactory)
     {
       return;
     }
-    dataFactory.setPageSize( RESULTS_PER_PAGE );
+    dataFactory.setPageSize(RESULTS_PER_PAGE);
     try
     {
       int _pagesCount = dataFactory.countPages();
-      if ( _pagesCount == 0 )
+      if (_pagesCount == 0)
       {
         closeFile();
         return;
       }
-      writeRow( createHeader() );
-      xmlreport.writeRow( createHeader() );
-      for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
+      writeRow(createHeader());
+      xmlreport.writeRow(createHeader());
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
-        List resultSet = dataFactory.getPage( _currPage );
-        for ( int i = 0; i < resultSet.size(); i++ )
+        List resultSet = dataFactory.getPage(_currPage);
+        for (int i = 0; i < resultSet.size(); i++)
         {
-          SpeciesBooksPersist book = ( SpeciesBooksPersist ) resultSet.get( i );
+          SpeciesBooksPersist book = (SpeciesBooksPersist) resultSet.get(i);
 
           // Compute species
-          SpeciesBooksDomain domain = new SpeciesBooksDomain( formBean.toSearchCriteria(), showInvalidatedSpecies );
+          SpeciesBooksDomain domain = new SpeciesBooksDomain(formBean.toSearchCriteria(), showInvalidatedSpecies);
           List resultsSpecies = new ArrayList();
           try
           {
-            resultsSpecies = domain.getSpeciesForAReference( book.getId().toString() );
+            resultsSpecies = domain.getSpeciesForAReference(book.getId().toString());
           }
-          catch ( Exception e )
+          catch (Exception e)
           {
             e.printStackTrace();
           }
           String species = "";
-          if ( resultsSpecies != null && resultsSpecies.size() > 0 )
+          if (resultsSpecies != null && resultsSpecies.size() > 0)
           {
-            for ( int j = 0; j < resultsSpecies.size(); j++ )
+            for (int j = 0; j < resultsSpecies.size(); j++)
             {
-              SpeciesBooksPersist specie = ( SpeciesBooksPersist ) resultsSpecies.get( j );
+              SpeciesBooksPersist specie = (SpeciesBooksPersist) resultsSpecies.get(j);
 
-              if ( j == 0 )
+              if (j == 0)
               {
                 Vector<String> aRow = new Vector<String>();
                 // Author
-                aRow.addElement( Utilities.formatString( book.getName() ) );
+                aRow.addElement(Utilities.formatString(book.getName()));
                 // Date
-                aRow.addElement( Utilities.formatReferencesDate( book.getDate() ) );
+                aRow.addElement(Utilities.formatReferencesDate(book.getDate()));
                 // Title
-                aRow.addElement( Utilities.formatString( book.getTitle() ) );
+                aRow.addElement(Utilities.formatString(book.getTitle()));
                 // Editor
-                aRow.addElement( Utilities.formatString( book.getEditor() ) );
+                aRow.addElement(Utilities.formatString(book.getEditor()));
                 // Publisher
-                aRow.addElement( Utilities.formatString( book.getPublisher() ) );
+                aRow.addElement(Utilities.formatString(book.getPublisher()));
                 // Species scientific name
-                aRow.addElement( specie.getName() );
-                writeRow( aRow );
+                aRow.addElement(specie.getName());
+                writeRow(aRow);
               }
               else
               {
                 Vector<String> aRow = new Vector<String>();
                 // Author
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Date
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Title
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Editor
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Publisher
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Species scientific name
-                aRow.addElement( specie.getName() );
-                writeRow( aRow );
+                aRow.addElement(specie.getName());
+                writeRow(aRow);
               }
               species += "<species>" + specie.getName() + "</species>";
             }
@@ -169,50 +169,50 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport
           {
             Vector<String> aRow = new Vector<String>();
             // Author
-            aRow.addElement( Utilities.formatString( book.getName() ) );
+            aRow.addElement(Utilities.formatString(book.getName()));
             // Date
-            aRow.addElement( Utilities.formatReferencesDate( book.getDate() ) );
+            aRow.addElement(Utilities.formatReferencesDate(book.getDate()));
             // Title
-            aRow.addElement( Utilities.formatString( book.getTitle() ) );
+            aRow.addElement(Utilities.formatString(book.getTitle()));
             // Editor
-            aRow.addElement( Utilities.formatString( book.getEditor() ) );
+            aRow.addElement(Utilities.formatString(book.getEditor()));
             // Publisher
-            aRow.addElement( Utilities.formatString( book.getPublisher() ) );
+            aRow.addElement(Utilities.formatString(book.getPublisher()));
             // Species scientific name
-            aRow.addElement( "-");
-            writeRow( aRow );
+            aRow.addElement("-");
+            writeRow(aRow);
           }
 
           Vector<String> aRow = new Vector<String>();
           // Author
-          aRow.addElement( Utilities.formatString( book.getName() ) );
+          aRow.addElement(Utilities.formatString(book.getName()));
           // Date
-          aRow.addElement( Utilities.formatReferencesDate( book.getDate() ) );
+          aRow.addElement(Utilities.formatReferencesDate(book.getDate()));
           // Title
-          aRow.addElement( Utilities.formatString( book.getTitle() ) );
+          aRow.addElement(Utilities.formatString(book.getTitle()));
           // Editor
-          aRow.addElement( Utilities.formatString( book.getEditor() ) );
+          aRow.addElement(Utilities.formatString(book.getEditor()));
           // Publisher
-          aRow.addElement( Utilities.formatString( book.getPublisher() ) );
+          aRow.addElement(Utilities.formatString(book.getPublisher()));
           // Species scientific name
-          aRow.addElement( species );
-          xmlreport.writeRow( aRow );
+          aRow.addElement(species);
+          xmlreport.writeRow(aRow);
         }
       }
     }
-    catch ( CriteriaMissingException ex )
+    catch (CriteriaMissingException ex)
     {
       ex.printStackTrace();
     }
-    catch ( InitializationException iex )
+    catch (InitializationException iex)
     {
       iex.printStackTrace();
     }
-    catch ( IOException ioex )
+    catch (IOException ioex)
     {
       ioex.printStackTrace();
     }
-    catch ( Exception ex2 )
+    catch (Exception ex2)
     {
       ex2.printStackTrace();
     }

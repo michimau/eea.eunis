@@ -38,28 +38,28 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    * @param showInvalidatedSpecies Show invalidated species
    */
-  public TSVSpeciesSitesReport( String sessionID, AbstractFormBean formBean, boolean showInvalidatedSpecies )
+  public TSVSpeciesSitesReport(String sessionID, AbstractFormBean formBean, boolean showInvalidatedSpecies)
   {
-    super( "SpeciesSitesReport_" + sessionID + ".tsv" );
-    this.formBean = ( SitesBean ) formBean;
+    super("SpeciesSitesReport_" + sessionID + ".tsv");
+    this.formBean = (SitesBean) formBean;
     this.filename = "SpeciesSitesReport_" + sessionID + ".tsv";
-    xmlreport = new XMLReport( "SpeciesSitesReport_" + sessionID + ".xml" );
+    xmlreport = new XMLReport("SpeciesSitesReport_" + sessionID + ".xml");
     this.showInvalidatedSpecies = showInvalidatedSpecies;
     // Init the data factory
-    if ( null != formBean )
+    if (null != formBean)
     {
-      Integer searchAttribute = Utilities.checkedStringToInt( ( ( SitesBean ) formBean ).getSearchAttribute(), SitesSearchCriteria.SEARCH_NAME );
+      Integer searchAttribute = Utilities.checkedStringToInt(((SitesBean) formBean).getSearchAttribute(), SitesSearchCriteria.SEARCH_NAME);
       boolean[] source_db = { true, true, true, true, true, true, true, true };
-      this.dataFactory = new SitesPaginator( new SpeciesSitesDomain( formBean.toSearchCriteria(),
+      this.dataFactory = new SitesPaginator(new SpeciesSitesDomain(formBean.toSearchCriteria(),
           formBean.toSortCriteria(),
           showInvalidatedSpecies,
           searchAttribute,
-          source_db ) );
-      this.dataFactory.setSortCriteria( formBean.toSortCriteria() );
+          source_db));
+      this.dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
     else
     {
-      System.out.println( TSVSpeciesSitesReport.class.getName() + "::ctor() - Warning: formBean was null!" );
+      System.out.println(TSVSpeciesSitesReport.class.getName() + "::ctor() - Warning: formBean was null!");
     }
 
   }
@@ -70,21 +70,21 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
    */
   public List<String> createHeader()
   {
-    if ( null == formBean )
+    if (null == formBean)
     {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
     // Group
-    headers.addElement( "Group" );
+    headers.addElement("Group");
     // Order
-    headers.addElement( "Order" );
+    headers.addElement("Order");
     // Family
-    headers.addElement( "Family" );
+    headers.addElement("Family");
     // Scientific name
-    headers.addElement( "Scientific name" );
+    headers.addElement("Scientific name");
     // Sites
-    headers.addElement( "Sites names" );
+    headers.addElement("Sites names");
     return headers;
   }
 
@@ -94,74 +94,74 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
    */
   public void writeData()
   {
-    if ( null == dataFactory )
+    if (null == dataFactory)
     {
       return;
     }
-    dataFactory.setPageSize( RESULTS_PER_PAGE );
+    dataFactory.setPageSize(RESULTS_PER_PAGE);
     try
     {
       int _pagesCount = dataFactory.countPages();
-      if ( _pagesCount == 0 )
+      if (_pagesCount == 0)
       {
         closeFile();
         return;
       }
-      Integer searchAttribute = Utilities.checkedStringToInt( formBean.getSearchAttribute(), SitesSearchCriteria.SEARCH_NAME );
-      Integer relationOp = Utilities.checkedStringToInt( formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS );
+      Integer searchAttribute = Utilities.checkedStringToInt(formBean.getSearchAttribute(), SitesSearchCriteria.SEARCH_NAME);
+      Integer relationOp = Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS);
       boolean[] source_db = { true, true, true, true, true, true, true, true };
-      writeRow( createHeader() );
-      xmlreport.writeRow( createHeader() );
-      for ( int _currPage = 0; _currPage < _pagesCount; _currPage++ )
+      writeRow(createHeader());
+      xmlreport.writeRow(createHeader());
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
       {
-        List resultSet = dataFactory.getPage( _currPage );
-        for ( int i = 0; i < resultSet.size(); i++ )
+        List resultSet = dataFactory.getPage(_currPage);
+        for (int i = 0; i < resultSet.size(); i++)
         {
-          SpeciesSitesPersist specie = ( SpeciesSitesPersist ) resultSet.get( i );
+          SpeciesSitesPersist specie = (SpeciesSitesPersist) resultSet.get(i);
           Integer idNatureObject = specie.getIdNatureObject();
           List resultsSites = new SpeciesSitesDomain().findSitesWithSpecies(
-              new SitesSearchCriteria( searchAttribute,
+              new SitesSearchCriteria(searchAttribute,
                   formBean.getScientificName(),
-                  relationOp ),
+                  relationOp),
               source_db,
               searchAttribute,
               idNatureObject,
-              showInvalidatedSpecies );
+              showInvalidatedSpecies);
           String sites = "";
-          if ( resultsSites.size() > 0 )
+          if (resultsSites.size() > 0)
           {
             for(int ii=0;ii<resultsSites.size();ii++)
             {
               List l = (List) resultsSites.get(ii);
-              if ( ii == 0 )
+              if (ii == 0)
               {
                 Vector<String> aRow = new Vector<String>();
                 // Group
-                aRow.addElement( specie.getCommonName() );
+                aRow.addElement(specie.getCommonName());
                 // Order
-                aRow.addElement( specie.getTaxonomicNameOrder() );
+                aRow.addElement(specie.getTaxonomicNameOrder());
                 // Family
-                aRow.addElement( specie.getTaxonomicNameFamily() );
+                aRow.addElement(specie.getTaxonomicNameFamily());
                 // Scientific name
-                aRow.addElement( specie.getScientificName() );
+                aRow.addElement(specie.getScientificName());
                 // Sites names
-                aRow.addElement( l.get(0) + "(" + l.get(1) + ")" );
-                writeRow( aRow );
+                aRow.addElement(l.get(0) + "(" + l.get(1) + ")");
+                writeRow(aRow);
               }
               else
               {
                 Vector<String> aRow = new Vector<String>();
                 // Group
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Order
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Family
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Scientific name
-                aRow.addElement( "" );
+                aRow.addElement("");
                 // Sites names
-                aRow.addElement( l.get(0) + "(" + l.get(1) + ")" );
-                writeRow( aRow );
+                aRow.addElement(l.get(0) + "(" + l.get(1) + ")");
+                writeRow(aRow);
               }
               sites += "<site name=\"" + l.get(0)  + "\" database=\"" + l.get(1) + "\" />";
             }
@@ -170,45 +170,45 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
           {
             Vector<String> aRow = new Vector<String>();
             // Group
-            aRow.addElement( specie.getCommonName() );
+            aRow.addElement(specie.getCommonName());
             // Order
-            aRow.addElement( specie.getTaxonomicNameOrder() );
+            aRow.addElement(specie.getTaxonomicNameOrder());
             // Family
-            aRow.addElement( specie.getTaxonomicNameFamily() );
+            aRow.addElement(specie.getTaxonomicNameFamily());
             // Scientific name
-            aRow.addElement( specie.getScientificName() );
+            aRow.addElement(specie.getScientificName());
             // Sites names
-            aRow.addElement( "-" );
-            writeRow( aRow );
+            aRow.addElement("-");
+            writeRow(aRow);
           }
           Vector<String> aRow = new Vector<String>();
           // Group
-          aRow.addElement( specie.getCommonName() );
+          aRow.addElement(specie.getCommonName());
           // Order
-          aRow.addElement( specie.getTaxonomicNameOrder() );
+          aRow.addElement(specie.getTaxonomicNameOrder());
           // Family
-          aRow.addElement( specie.getTaxonomicNameFamily() );
+          aRow.addElement(specie.getTaxonomicNameFamily());
           // Scientific name
-          aRow.addElement( specie.getScientificName() );
+          aRow.addElement(specie.getScientificName());
           // Sites names
-          aRow.addElement( sites );
-          xmlreport.writeRow( aRow );
+          aRow.addElement(sites);
+          xmlreport.writeRow(aRow);
         }
       }
     }
-    catch ( CriteriaMissingException ex )
+    catch (CriteriaMissingException ex)
     {
       ex.printStackTrace();
     }
-    catch ( InitializationException iex )
+    catch (InitializationException iex)
     {
       iex.printStackTrace();
     }
-    catch ( IOException ioex )
+    catch (IOException ioex)
     {
       ioex.printStackTrace();
     }
-    catch ( Exception ex2 )
+    catch (Exception ex2)
     {
       ex2.printStackTrace();
     }

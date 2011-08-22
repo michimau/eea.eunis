@@ -31,8 +31,7 @@ public class TSVHabitatsAdvanced extends AbstractTSVReport
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    */
-  public TSVHabitatsAdvanced(String sessionID, AbstractFormBean formBean)
-  {
+  public TSVHabitatsAdvanced(String sessionID, AbstractFormBean formBean) {
     super("HabitatsAdvancedReport_" + sessionID + ".tsv");
     this.formBean = (CombinedSearchBean) formBean;
     this.filename = "HabitatsAdvancedReport_" + sessionID + ".tsv";
@@ -46,10 +45,8 @@ public class TSVHabitatsAdvanced extends AbstractTSVReport
    *
    * @return An array with the columns headers of the table
    */
-  public List<String> createHeader()
-  {
-    if (null == formBean)
-    {
+  public List<String> createHeader() {
+    if (null == formBean) {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
@@ -64,28 +61,22 @@ public class TSVHabitatsAdvanced extends AbstractTSVReport
   /**
    * Use this method to write specific data into the file. Implemented in inherited classes
    */
-  public void writeData()
-  {
-    if (null == dataFactory)
-    {
+  public void writeData() {
+    if (null == dataFactory) {
       return;
     }
     dataFactory.setPageSize(RESULTS_PER_PAGE);
-    try
-    {
+    try {
       int _pagesCount = dataFactory.countPages();
-      if (_pagesCount == 0)
-      {
+      if (_pagesCount == 0) {
         closeFile();
         return;
       }
       writeRow(createHeader());
       xmlreport.writeRow(createHeader());
-      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
-      {
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++) {
         List resultSet = dataFactory.getPage(_currPage);
-        for (int i = 0; i < resultSet.size(); i++)
-        {
+        for (int i = 0; i < resultSet.size(); i++) {
           DictionaryPersist habitat = (DictionaryPersist) resultSet.get(i);
           String level = "";
           int idHabitat = Utilities.checkedStringToInt(habitat.getIdHabitat(), -1);
@@ -107,25 +98,15 @@ public class TSVHabitatsAdvanced extends AbstractTSVReport
           xmlreport.writeRow(row);
         }
       }
-    }
-    catch (CriteriaMissingException ex)
-    {
+    } catch (CriteriaMissingException ex) {
       ex.printStackTrace();
-    }
-    catch (InitializationException iex)
-    {
+    } catch (InitializationException iex) {
       iex.printStackTrace();
-    }
-    catch (IOException ioex)
-    {
+    } catch (IOException ioex) {
       ioex.printStackTrace();
-    }
-    catch (Exception ex2)
-    {
+    } catch (Exception ex2) {
       ex2.printStackTrace();
-    }
-    finally
-    {
+    } finally {
       closeFile();
     }
   }

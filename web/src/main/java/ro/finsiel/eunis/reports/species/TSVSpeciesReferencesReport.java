@@ -59,8 +59,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
    * @return An array with the columns headers of the table
    */
   public List<String> createHeader() {
-    if (null == formBean)
-    {
+    if (null == formBean) {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
@@ -76,39 +75,31 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
    * Use this method to write specific data into the file. Implemented in inherited classes.
    */
   public void writeData() {
-    if (null == dataFactory)
-    {
+    if (null == dataFactory) {
       return;
     }
     dataFactory.setPageSize(RESULTS_PER_PAGE);
-    try
-    {
+    try {
       int _pagesCount = dataFactory.countPages();
-      if (_pagesCount == 0)
-      {
+      if (_pagesCount == 0) {
         closeFile();
         return;
       }
       writeRow(createHeader());
       xmlreport.writeRow(createHeader());
-      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
-      {
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++) {
         List resultSet = dataFactory.getPage(_currPage);
-        for (int i = 0; i < resultSet.size(); i++)
-        {
+        for (int i = 0; i < resultSet.size(); i++) {
           String xmlVernacularNames = "";
           SpeciesRefWrapper specie = (SpeciesRefWrapper)resultSet.get(i);
           Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
           Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);
-          if (sortVernList.size() > 0)
-          {
-            for (int ii = 0; ii < sortVernList.size(); ii++)
-            {
+          if (sortVernList.size() > 0) {
+            for (int ii = 0; ii < sortVernList.size(); ii++) {
               VernacularNameWrapper aVernName = (VernacularNameWrapper)sortVernList.get(ii);
               String vernacularName = aVernName.getName();
               xmlVernacularNames += "<name language=\"" + aVernName.getLanguage() + "\">" + aVernName.getName() + "</name>";
-              if (ii == 0)
-              {
+              if (ii == 0) {
                 Vector<String> row = new Vector<String>();
                 // Group
                 row.addElement(specie.getGroupName());
@@ -121,9 +112,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
                 // Vernacular name
                 row.addElement(vernacularName);
                 writeRow(row);
-              }
-              else
-              {
+              } else {
                 Vector<String> row = new Vector<String>();
                 // Group
                 row.addElement("");
@@ -138,9 +127,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
                 writeRow(row);
               }
             }
-          }
-          else
-          {
+          } else {
             Vector<String> row = new Vector<String>();
             // Group
             row.addElement(specie.getGroupName());
@@ -168,25 +155,15 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport {
           xmlreport.writeRow(row);
         }
       }
-    }
-    catch (CriteriaMissingException ex)
-    {
+    } catch (CriteriaMissingException ex) {
       ex.printStackTrace();
-    }
-    catch (InitializationException iex)
-    {
+    } catch (InitializationException iex) {
       iex.printStackTrace();
-    }
-    catch (IOException ioex)
-    {
+    } catch (IOException ioex) {
       ioex.printStackTrace();
-    }
-    catch (Exception ex2)
-    {
+    } catch (Exception ex2) {
       ex2.printStackTrace();
-    }
-    finally
-    {
+    } finally {
       closeFile();
     }
   }

@@ -42,13 +42,10 @@ public class TSVSpeciesSynonymReport extends AbstractTSVReport {
     this.filename = "SpeciesSynonymReport_" + sessionID + ".tsv";
     xmlreport = new XMLReport("SpeciesSynonymReport_" + sessionID + ".xml");
     this.showEUNISInvalidatedSpecies = showEUNISInvalidatedSpecies;
-    if (null != formBean)
-    {
+    if (null != formBean) {
       dataFactory = new SynonymsPaginator(new ScientificNameDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies));
       this.dataFactory.setSortCriteria(formBean.toSortCriteria());
-    }
-    else
-    {
+    } else {
       System.out.println(TSVSpeciesSynonymReport.class.getName() + "::ctor() - Warning: formBean was null!");
     }
   }
@@ -58,8 +55,7 @@ public class TSVSpeciesSynonymReport extends AbstractTSVReport {
    * @return An array with the columns headers of the table
    */
   public List<String> createHeader() {
-    if (null == formBean)
-    {
+    if (null == formBean) {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
@@ -75,48 +71,38 @@ public class TSVSpeciesSynonymReport extends AbstractTSVReport {
    * Use this method to write specific data into the file. Implemented in inherited classes.
    */
   public void writeData() {
-    if (null == dataFactory)
-    {
+    if (null == dataFactory) {
       return;
     }
     dataFactory.setPageSize(RESULTS_PER_PAGE);
-    try
-    {
+    try {
       int _pagesCount = dataFactory.countPages();
-      if (_pagesCount == 0)
-      {
+      if (_pagesCount == 0) {
         closeFile();
         return;
       }
       writeRow(createHeader());
       xmlreport.writeRow(createHeader());
-      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
-      {
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++) {
         List resultSet = dataFactory.getPage(_currPage);
-        for (int i = 0; i < resultSet.size(); i++)
-        {
+        for (int i = 0; i < resultSet.size(); i++) {
           ScientificNamePersist specie = (ScientificNamePersist) resultSet.get(i);
           List resultsSpecies;
           String synonyms = "";
-          try
-          {
+          try {
             resultsSpecies = new ScientificNameDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), showEUNISInvalidatedSpecies).geSpeciesListForASynonym(specie.getIdSpec());
 
-            if (resultsSpecies.size() > 0)
-            {
-              for (int j = 0; j < resultsSpecies.size(); j++)
-              {
+            if (resultsSpecies.size() > 0) {
+              for (int j = 0; j < resultsSpecies.size(); j++) {
                 TableColumns tableColumns = (TableColumns) resultsSpecies.get(j);
                 String scientificName = (String)tableColumns.getColumnsValues().get(0);
                 Vector<String> aRow = new Vector<String>();
-                if (j == 0)
-                {
+                if (j == 0) {
                   aRow.addElement(specie.getGrName());
                   aRow.addElement(specie.getScName());
                   aRow.addElement(scientificName);
                 }
-                else
-                {
+                else {
                   aRow.addElement("");
                   aRow.addElement("");
                   aRow.addElement(scientificName);
@@ -125,8 +111,7 @@ public class TSVSpeciesSynonymReport extends AbstractTSVReport {
                 synonyms += "<synonym>" + scientificName + "</synonym>";
               }
             }
-            else
-            {
+            else {
               Vector<String> aRow = new Vector<String>();
               aRow.addElement(specie.getGrName());
               aRow.addElement(specie.getScName());
@@ -134,8 +119,7 @@ public class TSVSpeciesSynonymReport extends AbstractTSVReport {
               writeRow(aRow);
             }
           }
-          catch (Exception ex)
-          {
+          catch (Exception ex) {
             ex.printStackTrace();
           }
           Vector<String> aRow = new Vector<String>();
@@ -145,25 +129,15 @@ public class TSVSpeciesSynonymReport extends AbstractTSVReport {
           xmlreport.writeRow(aRow);
         }
       }
-    }
-    catch (CriteriaMissingException ex)
-    {
+    } catch (CriteriaMissingException ex) {
       ex.printStackTrace();
-    }
-    catch (InitializationException iex)
-    {
+    } catch (InitializationException iex) {
       iex.printStackTrace();
-    }
-    catch (IOException ioex)
-    {
+    } catch (IOException ioex) {
       ioex.printStackTrace();
-    }
-    catch (Exception ex2)
-    {
+    } catch (Exception ex2) {
       ex2.printStackTrace();
-    }
-    finally
-    {
+    } finally {
       closeFile();
     }
   }

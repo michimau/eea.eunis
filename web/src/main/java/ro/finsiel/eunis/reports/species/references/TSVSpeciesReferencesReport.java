@@ -38,20 +38,16 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    * @param showInvalidatedSpecies Show invalidated species
    */
-  public TSVSpeciesReferencesReport(String sessionID, AbstractFormBean formBean, boolean showInvalidatedSpecies)
-  {
+  public TSVSpeciesReferencesReport(String sessionID, AbstractFormBean formBean, boolean showInvalidatedSpecies) {
     super("SpeciesReferencesReport_" + sessionID + ".tsv");
     this.formBean = formBean;
     this.filename = "SpeciesReferencesReport_" + sessionID + ".tsv";
     xmlreport = new XMLReport("SpeciesReferencesReport_" + sessionID + ".xml");
     this.showInvalidatedSpecies = showInvalidatedSpecies;
-    if (null != formBean)
-    {
+    if (null != formBean) {
       dataFactory = new ReferencesPaginator(new SpeciesBooksDomain(formBean.toSearchCriteria(), showInvalidatedSpecies));
       this.dataFactory.setSortCriteria(formBean.toSortCriteria());
-    }
-    else
-    {
+    } else {
       System.out.println(TSVSpeciesReferencesReport.class.getName() + "::ctor() - Warning: formBean was null!");
     }
   }
@@ -61,10 +57,8 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport
    *
    * @return An array with the columns headers of the table
    */
-  public List<String> createHeader()
-  {
-    if (null == formBean)
-    {
+  public List<String> createHeader() {
+    if (null == formBean) {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
@@ -86,50 +80,39 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport
   /**
    * Use this method to write specific data into the file. Implemented in inherited classes
    */
-  public void writeData()
-  {
-    if (null == dataFactory)
-    {
+  public void writeData() {
+    if (null == dataFactory) {
       return;
     }
     dataFactory.setPageSize(RESULTS_PER_PAGE);
-    try
-    {
+    try {
       int _pagesCount = dataFactory.countPages();
-      if (_pagesCount == 0)
-      {
+      if (_pagesCount == 0) {
         closeFile();
         return;
       }
       writeRow(createHeader());
       xmlreport.writeRow(createHeader());
-      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
-      {
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++) {
         List resultSet = dataFactory.getPage(_currPage);
-        for (int i = 0; i < resultSet.size(); i++)
-        {
+        for (int i = 0; i < resultSet.size(); i++) {
           SpeciesBooksPersist book = (SpeciesBooksPersist) resultSet.get(i);
 
           // Compute species
           SpeciesBooksDomain domain = new SpeciesBooksDomain(formBean.toSearchCriteria(), showInvalidatedSpecies);
           List resultsSpecies = new ArrayList();
-          try
-          {
+          try {
             resultsSpecies = domain.getSpeciesForAReference(book.getId().toString());
           }
-          catch (Exception e)
-          {
+          catch (Exception e) {
             e.printStackTrace();
           }
           String species = "";
-          if (resultsSpecies != null && resultsSpecies.size() > 0)
-          {
-            for (int j = 0; j < resultsSpecies.size(); j++)
-            {
+          if (resultsSpecies != null && resultsSpecies.size() > 0) {
+            for (int j = 0; j < resultsSpecies.size(); j++) {
               SpeciesBooksPersist specie = (SpeciesBooksPersist) resultsSpecies.get(j);
 
-              if (j == 0)
-              {
+              if (j == 0) {
                 Vector<String> aRow = new Vector<String>();
                 // Author
                 aRow.addElement(Utilities.formatString(book.getName()));
@@ -144,9 +127,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport
                 // Species scientific name
                 aRow.addElement(specie.getName());
                 writeRow(aRow);
-              }
-              else
-              {
+              } else {
                 Vector<String> aRow = new Vector<String>();
                 // Author
                 aRow.addElement("");
@@ -164,9 +145,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport
               }
               species += "<species>" + specie.getName() + "</species>";
             }
-          }
-          else
-          {
+          } else {
             Vector<String> aRow = new Vector<String>();
             // Author
             aRow.addElement(Utilities.formatString(book.getName()));
@@ -199,25 +178,15 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport
           xmlreport.writeRow(aRow);
         }
       }
-    }
-    catch (CriteriaMissingException ex)
-    {
+    } catch (CriteriaMissingException ex) {
       ex.printStackTrace();
-    }
-    catch (InitializationException iex)
-    {
+    } catch (InitializationException iex) {
       iex.printStackTrace();
-    }
-    catch (IOException ioex)
-    {
+    } catch (IOException ioex) {
       ioex.printStackTrace();
-    }
-    catch (Exception ex2)
-    {
+    } catch (Exception ex2) {
       ex2.printStackTrace();
-    }
-    finally
-    {
+    } finally {
       closeFile();
     }
   }

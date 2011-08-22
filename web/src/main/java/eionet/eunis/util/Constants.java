@@ -96,7 +96,7 @@ public interface Constants {
     public static final String ACCEPT_RDF_HEADER = "application/rdf+xml";
 
     // RDF footer
-    public static final String RDF_FOOTER = "\n</rdf:RDF>";
+    public static final String RDF_FOOTER = "\n</rdf:RDF>\n";
 
     public static final String NAT_OBJECT_ATTRIBUTES_SESSION_KEY = "natObjectAttributes_";
 

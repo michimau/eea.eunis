@@ -29,19 +29,16 @@ public class TSVHabitatLegalReport extends AbstractTSVReport
    * @param sessionID Session ID got from page
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    */
-  public TSVHabitatLegalReport(String sessionID, AbstractFormBean formBean)
-  {
+  public TSVHabitatLegalReport(String sessionID, AbstractFormBean formBean) {
     super("HabitatsLegalReport_" + sessionID + ".tsv");
     this.formBean = formBean;
     this.filename = "HabitatsLegalReport_" + sessionID + ".tsv";
     xmlreport = new XMLReport("HabitatsLegalReport_" + sessionID + ".xml");
-    if (null != formBean)
-    {
+    if (null != formBean) {
       dataFactory = new LegalPaginator(new EUNISLegalDomain(formBean.toSearchCriteria(), formBean.toSortCriteria()));
       dataFactory.setSortCriteria(formBean.toSortCriteria());
     }
-    else
-    {
+    else {
       System.out.println(TSVHabitatLegalReport.class.getName() + "::ctor() - Warning: formBean was null!");
     }
   }
@@ -51,10 +48,8 @@ public class TSVHabitatLegalReport extends AbstractTSVReport
    *
    * @return An array with the columns headers of the table
    */
-  public List<String> createHeader()
-  {
-    if (null == formBean)
-    {
+  public List<String> createHeader() {
+    if (null == formBean) {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
@@ -72,37 +67,28 @@ public class TSVHabitatLegalReport extends AbstractTSVReport
   /**
    * Use this method to write specific data into the file. Implemented in inherited classes
    */
-  public void writeData()
-  {
-    if (null == dataFactory)
-    {
+  public void writeData() {
+    if (null == dataFactory) {
       return;
     }
     dataFactory.setPageSize(RESULTS_PER_PAGE);
-    try
-    {
+    try {
       int _pagesCount = dataFactory.countPages();
-      if (_pagesCount == 0)
-      {
+      if (_pagesCount == 0) {
         closeFile();
         return;
       }
       writeRow(createHeader());
-      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
-      {
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++) {
         List resultSet = dataFactory.getPage(_currPage);
-        for (int i = 0; i < resultSet.size(); i++)
-        {
+        for (int i = 0; i < resultSet.size(); i++) {
           EUNISLegalPersist habitat = (EUNISLegalPersist) resultSet.get(i);
 
           List legalTexts = HabitatsSearchUtility.findHabitatLegalInstrument(habitat.getIdHabitat());
-          if (legalTexts.size() > 0)
-          {
-            for (int j = 0; j < legalTexts.size(); j++)
-            {
+          if (legalTexts.size() > 0) {
+            for (int j = 0; j < legalTexts.size(); j++) {
               EUNISLegalPersist legalText = (EUNISLegalPersist) legalTexts.get(j);
-              if (j == 0)
-              {
+              if (j == 0) {
                 Vector<String> aRow = new Vector<String>();
                 // Level
                 aRow.addElement(habitat.getHabLevel().toString());
@@ -113,9 +99,7 @@ public class TSVHabitatLegalReport extends AbstractTSVReport
                 // Legal text
                 aRow.addElement(legalText.getLegalName());
                 writeRow(aRow);
-              }
-              else
-              {
+              } else {
                 Vector<String> aRow = new Vector<String>();
                 // Level
                 aRow.addElement("");
@@ -128,9 +112,7 @@ public class TSVHabitatLegalReport extends AbstractTSVReport
                 writeRow(aRow);
               }
             }
-          }
-          else
-          {
+          } else {
             Vector<String> aRow = new Vector<String>();
             // Level
             aRow.addElement(habitat.getHabLevel().toString());
@@ -152,8 +134,7 @@ public class TSVHabitatLegalReport extends AbstractTSVReport
           // English name
           aRow.addElement(habitat.getScientificName());
           String text = "";
-          for (int j = 0; j < legalTexts.size(); j++)
-          {
+          for (int j = 0; j < legalTexts.size(); j++) {
             EUNISLegalPersist legalText = (EUNISLegalPersist) legalTexts.get(j);
             text += "<legal_text>" + legalText.getLegalName() + "</legal_text>\n";
           }
@@ -162,25 +143,15 @@ public class TSVHabitatLegalReport extends AbstractTSVReport
           xmlreport.writeRow(aRow);
         }
       }
-    }
-    catch (CriteriaMissingException ex)
-    {
+    } catch (CriteriaMissingException ex) {
       ex.printStackTrace();
-    }
-    catch (InitializationException iex)
-    {
+    } catch (InitializationException iex) {
       iex.printStackTrace();
-    }
-    catch (IOException ioex)
-    {
+    } catch (IOException ioex) {
       ioex.printStackTrace();
-    }
-    catch (Exception ex2)
-    {
+    } catch (Exception ex2) {
       ex2.printStackTrace();
-    }
-    finally
-    {
+    } finally {
       closeFile();
     }
   }

@@ -38,16 +38,14 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
    * @param formBean  Form bean queried for output formatting (DB query, sort criterias etc)
    * @param showInvalidatedSpecies Show invalidated species
    */
-  public TSVSpeciesSitesReport(String sessionID, AbstractFormBean formBean, boolean showInvalidatedSpecies)
-  {
+  public TSVSpeciesSitesReport(String sessionID, AbstractFormBean formBean, boolean showInvalidatedSpecies) {
     super("SpeciesSitesReport_" + sessionID + ".tsv");
     this.formBean = (SitesBean) formBean;
     this.filename = "SpeciesSitesReport_" + sessionID + ".tsv";
     xmlreport = new XMLReport("SpeciesSitesReport_" + sessionID + ".xml");
     this.showInvalidatedSpecies = showInvalidatedSpecies;
     // Init the data factory
-    if (null != formBean)
-    {
+    if (null != formBean) {
       Integer searchAttribute = Utilities.checkedStringToInt(((SitesBean) formBean).getSearchAttribute(), SitesSearchCriteria.SEARCH_NAME);
       boolean[] source_db = { true, true, true, true, true, true, true, true };
       this.dataFactory = new SitesPaginator(new SpeciesSitesDomain(formBean.toSearchCriteria(),
@@ -56,9 +54,7 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
           searchAttribute,
           source_db));
       this.dataFactory.setSortCriteria(formBean.toSortCriteria());
-    }
-    else
-    {
+    } else {
       System.out.println(TSVSpeciesSitesReport.class.getName() + "::ctor() - Warning: formBean was null!");
     }
 
@@ -68,10 +64,8 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
    * Create the table headers.
    * @return An array with the columns headers of the table
    */
-  public List<String> createHeader()
-  {
-    if (null == formBean)
-    {
+  public List<String> createHeader() {
+    if (null == formBean) {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
@@ -92,18 +86,14 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
   /**
    * Use this method to write specific data into the file. Implemented in inherited classes
    */
-  public void writeData()
-  {
-    if (null == dataFactory)
-    {
+  public void writeData() {
+    if (null == dataFactory) {
       return;
     }
     dataFactory.setPageSize(RESULTS_PER_PAGE);
-    try
-    {
+    try {
       int _pagesCount = dataFactory.countPages();
-      if (_pagesCount == 0)
-      {
+      if (_pagesCount == 0) {
         closeFile();
         return;
       }
@@ -112,11 +102,9 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
       boolean[] source_db = { true, true, true, true, true, true, true, true };
       writeRow(createHeader());
       xmlreport.writeRow(createHeader());
-      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
-      {
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++) {
         List resultSet = dataFactory.getPage(_currPage);
-        for (int i = 0; i < resultSet.size(); i++)
-        {
+        for (int i = 0; i < resultSet.size(); i++) {
           SpeciesSitesPersist specie = (SpeciesSitesPersist) resultSet.get(i);
           Integer idNatureObject = specie.getIdNatureObject();
           List resultsSites = new SpeciesSitesDomain().findSitesWithSpecies(
@@ -128,13 +116,10 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
               idNatureObject,
               showInvalidatedSpecies);
           String sites = "";
-          if (resultsSites.size() > 0)
-          {
-            for(int ii=0;ii<resultsSites.size();ii++)
-            {
+          if (resultsSites.size() > 0) {
+            for(int ii=0;ii<resultsSites.size();ii++) {
               List l = (List) resultsSites.get(ii);
-              if (ii == 0)
-              {
+              if (ii == 0) {
                 Vector<String> aRow = new Vector<String>();
                 // Group
                 aRow.addElement(specie.getCommonName());
@@ -147,9 +132,7 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
                 // Sites names
                 aRow.addElement(l.get(0) + "(" + l.get(1) + ")");
                 writeRow(aRow);
-              }
-              else
-              {
+              } else {
                 Vector<String> aRow = new Vector<String>();
                 // Group
                 aRow.addElement("");
@@ -165,9 +148,7 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
               }
               sites += "<site name=\"" + l.get(0)  + "\" database=\"" + l.get(1) + "\" />";
             }
-          }
-          else
-          {
+          } else {
             Vector<String> aRow = new Vector<String>();
             // Group
             aRow.addElement(specie.getCommonName());
@@ -195,25 +176,15 @@ public class TSVSpeciesSitesReport extends AbstractTSVReport
           xmlreport.writeRow(aRow);
         }
       }
-    }
-    catch (CriteriaMissingException ex)
-    {
+    } catch (CriteriaMissingException ex) {
       ex.printStackTrace();
-    }
-    catch (InitializationException iex)
-    {
+    } catch (InitializationException iex) {
       iex.printStackTrace();
-    }
-    catch (IOException ioex)
-    {
+    } catch (IOException ioex) {
       ioex.printStackTrace();
-    }
-    catch (Exception ex2)
-    {
+    } catch (Exception ex2) {
       ex2.printStackTrace();
-    }
-    finally
-    {
+    } finally {
       closeFile();
     }
   }

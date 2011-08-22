@@ -75,34 +75,28 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
    * @return An array with the columns headers of the table
    */
   public List<String> createHeader() {
-    if (null == formBean)
-    {
+    if (null == formBean) {
       return new Vector<String>();
     }
     Vector<String> headers = new Vector<String>();
     // Group
-    if (showGroup)
-    {
+    if (showGroup) {
       headers.addElement("Group");
     }
     // Order
-    if (showOrder)
-    {
+    if (showOrder) {
       headers.addElement("Order");
     }
     // Family
-    if (showFamily)
-    {
+    if (showFamily) {
       headers.addElement("Family");
     }
     // Scientific name
-    if (showScientificName)
-    {
+    if (showScientificName) {
       headers.addElement("Scientific name");
     }
     // Vernacular names (multiple rows)
-    if (showVernacularName)
-    {
+    if (showVernacularName) {
       headers.addElement("Vernacular names");
     }
     return headers;
@@ -112,27 +106,22 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
    * Use this method to write specific data into the file. Implemented in inherited classes.
    */
   public void writeData() {
-    if (null == dataFactory)
-    {
+    if (null == dataFactory) {
       return;
     }
     dataFactory.setPageSize(RESULTS_PER_PAGE);
-    try
-    {
+    try {
       int _pagesCount = dataFactory.countPages();
-      if (_pagesCount == 0)
-      {
+      if (_pagesCount == 0) {
         closeFile();
         return;
       }
       // Write table header
       writeRow(createHeader());
       xmlreport.writeRow(createHeader());
-      for (int _currPage = 0; _currPage < _pagesCount; _currPage++)
-      {
+      for (int _currPage = 0; _currPage < _pagesCount; _currPage++) {
         List resultSet = dataFactory.getPage(_currPage);
-        for (int i = 0; i < resultSet.size(); i++)
-        {
+        for (int i = 0; i < resultSet.size(); i++) {
           Vector<String> aRow = new Vector<String>();
           Vector<String> xmlrow = new Vector<String>();
           String cellGroup;
@@ -148,70 +137,56 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
           cellScientificName = specie.getScientificName();
           cellIdVernacularSearch = specie.getIdNatureObject();
           // Group
-          if (showGroup)
-          {
+          if (showGroup) {
             aRow.addElement(cellGroup);
             xmlrow.addElement(cellGroup);
           }
           // Order
-          if (showOrder)
-          {
+          if (showOrder) {
             aRow.addElement(cellOrder);
             xmlrow.addElement(cellOrder);
           }
           // Family
-          if (showFamily)
-          {
+          if (showFamily) {
             aRow.addElement(cellFamily);
             xmlrow.addElement(cellFamily);
           }
           // Scientific name
-          if (showScientificName)
-          {
+          if (showScientificName) {
             aRow.addElement(cellScientificName);
             xmlrow.addElement(cellScientificName);
           }
           // Vernacular names (multiple rows)
-          if (showVernacularName)
-          {
+          if (showVernacularName) {
             String xmlVernacularNames = "";
             Vector vernNamesList = SpeciesSearchUtility.findVernacularNames(cellIdVernacularSearch);
-            if (vernNamesList.size() > 0)
-            {
+            if (vernNamesList.size() > 0) {
               Vector sortVernList = new JavaSorter().sort(vernNamesList, JavaSorter.SORT_ALPHABETICAL);
               boolean blankLine = false;
               boolean atLeastALine = false;
-              for (int v = 0; v < sortVernList.size(); v++)
-              {
+              for (int v = 0; v < sortVernList.size(); v++) {
                 VernacularNameWrapper aVernName = (VernacularNameWrapper) sortVernList.get(v);
                 xmlVernacularNames += "<name language=\"" + aVernName.getLanguage() + "\">" + aVernName.getName() + "</name>";
                 atLeastALine = true;
-                if (!blankLine)
-                {
+                if (!blankLine) {
                   // Language
                   aRow.addElement(aVernName.getLanguage());
                   // Vernacular name
                   aRow.addElement(aVernName.getName());
                   blankLine = true;
                   writeRow(aRow);
-                }
-                else
-                {
+                } else {
                   Vector<String> anotherRow = new Vector<String>();
-                  if (showGroup)
-                  {
+                  if (showGroup) {
                     anotherRow.addElement("");
                   }
-                  if (showOrder)
-                  {
+                  if (showOrder) {
                     anotherRow.addElement("");
                   }
-                  if (showFamily)
-                  {
+                  if (showFamily) {
                     anotherRow.addElement("");
                   }
-                  if (showScientificName)
-                  {
+                  if (showScientificName) {
                     anotherRow.addElement("");
                   }
                   // Language
@@ -221,46 +196,31 @@ public class TSVSpeciesAdvanced extends AbstractTSVReport {
                   writeRow(anotherRow);
                 }
               }
-              if (!atLeastALine)
-              {
+              if (!atLeastALine) {
                 writeRow(aRow);
               }
               xmlrow.add(xmlVernacularNames);
-            }
-            else
-            {
+            } else {
               // If vernacular names list is empty add something to fill the cell or table gets screwed
               aRow.addElement("-");
               writeRow(aRow);
             }
-          }
-          else
-          {
+          } else {
             writeRow(aRow);
           }
 
           xmlreport.writeRow(xmlrow);
         }
       }
-    }
-    catch (CriteriaMissingException ex)
-    {
+    } catch (CriteriaMissingException ex) {
       ex.printStackTrace();
-    }
-    catch (InitializationException iex)
-    {
+    } catch (InitializationException iex) {
       iex.printStackTrace();
-    }
-    catch (IOException ioex)
-    {
+    } catch (IOException ioex) {
       ioex.printStackTrace();
-    }
-    catch (Exception ex2)
-    {
+    } catch (Exception ex2) {
       ex2.printStackTrace();
-    }
-    finally
-    {
+    } finally {
       closeFile();
     }
   }

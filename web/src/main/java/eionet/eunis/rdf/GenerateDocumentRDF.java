@@ -13,7 +13,7 @@ public class GenerateDocumentRDF {
      * or have been provided in constructor.
      */
     public static final String HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-        + "<rdf:RDF xml:base=\"http://eunis.eea.europa.eu/documents/\"\n"
+        + "<rdf:RDF xml:base=\"http://eunis.eea.europa.eu/\"\n"
         + "  xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
         + "  xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n"
         + "  xmlns=\"http://purl.org/dc/terms/\">\n";
@@ -46,7 +46,7 @@ public class GenerateDocumentRDF {
         StringBuffer rdf = new StringBuffer();
         try {
             if (object != null && attributes != null) {
-                rdf.append("<rdf:Description rdf:about=\"http://eunis.eea.europa.eu/documents/").append(id).append("\">\n");
+                rdf.append("<rdf:Description rdf:about=\"documents/").append(id).append("\">\n");
                 rdf.append(RDFUtil.writeReference("rdf:type", "http://purl.org/dc/dcmitype/Text"));
                 rdf.append(RDFUtil.writeLiteral("title", object.getTitle()));
                 rdf.append(RDFUtil.writeLiteral("alternative", object.getAlternative()));

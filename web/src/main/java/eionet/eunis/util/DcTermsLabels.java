@@ -69,6 +69,7 @@ public final class DcTermsLabels {
         dcTermsLabels.put("title", "Title");
         dcTermsLabels.put("type", "Type");
         dcTermsLabels.put("valid", "Date Valid");
+        dcTermsLabels.put("rdf:type", "Type");
     }
 
     public static Map<String, String> getDctermslabels() {

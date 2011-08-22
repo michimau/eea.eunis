@@ -11,7 +11,7 @@ public class GenerateDocumentRDF {
     public static final String HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
         + "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
         + "xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n"
-        + "xmlns:dcterms=\"http://purl.org/dc/terms/\">\n";
+        + "xmlns=\"http://purl.org/dc/terms/\">\n";
 
     private DcIndexDTO object;
     private List<AttributeDto> attributes;
@@ -41,21 +41,15 @@ public class GenerateDocumentRDF {
             if (object != null && attributes != null) {
                 rdf.append("<rdf:Description rdf:about=\"http://eunis.eea.europa.eu/documents/").append(id).append("\">\n");
                 rdf.append(RDFUtil.writeReference("rdf:type", "http://purl.org/dc/dcmitype/Text"));
-                rdf.append(RDFUtil.writeLiteral("dcterms:title", object.getTitle()));
-                rdf.append(RDFUtil.writeLiteral("dcterms:alternative", object.getAlternative()));
-                rdf.append(RDFUtil.writeLiteral("dcterms:creator", object.getSource()));
-                rdf.append(RDFUtil.writeReference("dcterms:source", object.getUrl()));
-                rdf.append(RDFUtil.writeLiteral("dcterms:contributor", object.getEditor()));
-                rdf.append(RDFUtil.writeLiteral("dcterms:created", object.getCreated()));
-                rdf.append(RDFUtil.writeLiteral("dcterms:publisher", object.getPublisher()));
+                rdf.append(RDFUtil.writeLiteral("title", object.getTitle()));
+                rdf.append(RDFUtil.writeLiteral("alternative", object.getAlternative()));
+                rdf.append(RDFUtil.writeLiteral("creator", object.getSource()));
+                rdf.append(RDFUtil.writeReference("source", object.getUrl()));
+                rdf.append(RDFUtil.writeLiteral("contributor", object.getEditor()));
+                rdf.append(RDFUtil.writeLiteral("created", object.getCreated()));
+                rdf.append(RDFUtil.writeLiteral("publisher", object.getPublisher()));
                 for(AttributeDto attr : attributes) {
-                    if (attr.getType() != null && attr.getType().equals("reference")) {
-                        rdf.append(RDFUtil.writeReference("dcterms:" + attr.getName(), attr.getValue()));
-                    } else {
-                        rdf.append(
-                                RDFUtil.writeLiteral("dcterms:" + attr.getName(), attr.getValue(), attr.getLang(), attr.getType())
-                        );
-                    }
+                    rdf.append(RDFUtil.writeProperty(attr.getName(),attr.getValue(), attr.getLang(), attr.getType()));
                 }
                 rdf.append("</rdf:Description>\n");
             }

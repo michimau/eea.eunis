@@ -34,7 +34,7 @@ public class RDFUtil {
      * @return String
      */
     public static String writeProperty(final String tag, final String val, final String langcode, final String type) {
-        if (type == "reference") {
+        if (null != type && type.equals("reference")) {
             return writeReference(tag, val);
         } else {
             return writeLiteral(tag, val, langcode, type);

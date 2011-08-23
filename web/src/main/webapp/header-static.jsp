@@ -32,15 +32,11 @@
     <select title="Select site language" id="language_international" name="language_international" onchange="changeLanguage();" class="languageTextField">
 <%
   String selected;
-  for(int i = 0; i < translatedLanguages.size(); i++)
-  {
+  for (int i = 0; i < translatedLanguages.size(); i++) {
     EunisISOLanguagesPersist language = ( EunisISOLanguagesPersist ) translatedLanguages.get(i);
-    if(language.getCode().equalsIgnoreCase( SessionManager.getCurrentLanguage() ) )
-    {
+    if (language.getCode().equalsIgnoreCase( SessionManager.getCurrentLanguage() ) ) {
       selected = " selected=\"selected\"";
-    }
-    else
-    {
+    } else {
       selected = "";
     }
 %>
@@ -61,19 +57,19 @@
   <table summary="layout" border="1" cellpadding="0" cellspacing="0" width="100%">
     <tr>
       <td style="padding-left : 5px;">
-        <a href="<%=domain%>/index.jsp" accesskey="1" title="<%=cm.cms("home_page")%>"><%=cm.cmsPhrase("EUNIS")%></a><%=cm.cmsTitle("home_page")%>
+        <a href="<%=domain%>/index.jsp" accesskey="1" title="<%=cm.cmsPhrase("Home page")%>"><%=cm.cmsPhrase("EUNIS")%></a>
       </td>
       <td style="padding-left : 5px;">
-        <a href="<%=domain%>/login.jsp" accesskey="l" title="<%=cm.cms("generic_header-static_login_title")%>"><%=cm.cmsPhrase("EUNIS Login")%></a><%=cm.cmsTitle("generic_header-static_login_title")%>
+        <a href="<%=domain%>/login.jsp" accesskey="l" title="<%=cm.cmsPhrase("User login")%>"><%=cm.cmsPhrase("EUNIS Login")%></a>
       </td>
       <td style="padding-left : 5px;">
-        <a id="digir_url_link" href="<%=domain%>/digir.jsp" title="<%=cm.cms("generic_header-static_digir_title")%>"><%=cm.cmsPhrase("DiGIR Provider")%></a><%=cm.cmsTitle("generic_header-static_digir_title")%>
+        <a id="digir_url_link" href="<%=domain%>/digir.jsp" title="<%=cm.cmsPhrase("View DiGIR application provider information")%>"><%=cm.cmsPhrase("DiGIR Provider")%></a>
       </td>
       <td style="padding-left : 5px;">
-        <a href="<%=domain%>/references" accesskey="r" title="<%=cm.cms("generic_header-static_references_title")%>"><%=cm.cmsPhrase("References")%></a><%=cm.cmsTitle("generic_header-static_references_title")%>
+        <a href="<%=domain%>/references" accesskey="r" title="<%=cm.cmsPhrase("View references used in EUNIS")%>"><%=cm.cmsPhrase("References")%></a>
       </td>
       <td style="padding-left : 5px;">
-        <a href="<%=domain%>/related-reports.jsp" accesskey="p" title="<%=cm.cms("generic_header-static_reports_title")%>"><%=cm.cmsPhrase("Related reports")%></a><%=cm.cmsTitle("generic_header-static_reports_title")%>
+        <a href="<%=domain%>/related-reports.jsp" accesskey="p" title="<%=cm.cmsPhrase("View and download reports on biodiversity")%>"><%=cm.cmsPhrase("Related reports")%></a>
       </td>
       <td colspan="3" style="padding-left : 5px; text-align : right;">
         <form action="" name="searchGoogle" id="searchGoogle" method="get" onsubmit="popSearch(); return false;">
@@ -82,38 +78,36 @@
                name="q"
                id="qq"
                size="15"
-               title="<%=cm.cms("header_google_title")%>"
-               value="<%=cm.cms("header_google")%>"
+               title="<%=cm.cmsPhrase("Type the string you are searching for and press 'Enter'")%>"
+               value="<%=cm.cmsPhrase("Search on Google")%>"
                onfocus="javascript:document.searchGoogle.qq.select();" />
-          <%=cm.cmsTitle("header_google_title")%>
-          <%=cm.cmsInput("header_google")%>
         </form>
       </td>
     </tr>
     <tr>
       <td style="padding-left : 5px;">
-        <a href="<%=domain%>/species.jsp" accesskey="s" title="<%=cm.cms("generic_header-static_species_title")%>"><%=cm.cmsPhrase("species")%></a><%=cm.cmsTitle("generic_header-static_species_title")%>
+        <a href="<%=domain%>/species.jsp" accesskey="s" title="<%=cm.cmsPhrase("Species module")%>"><%=cm.cmsPhrase("Species")%></a>
       </td>
       <td style="padding-left : 5px;">
-        <a href="<%=domain%>/habitats.jsp" accesskey="h" title="<%=cm.cms("generic_header-static_habitats_title")%>"><%=cm.cmsPhrase("Habitats")%></a><%=cm.cmsTitle("generic_header-static_habitats_title")%>
+        <a href="<%=domain%>/habitats.jsp" accesskey="h" title="<%=cm.cmsPhrase("Habitat types module")%>"><%=cm.cmsPhrase("Habitats")%></a>
       </td>
       <td style="padding-left : 5px;">
-        <a href="<%=domain%>/sites.jsp" accesskey="t" title="<%=cm.cms("generic_header-static_sites_title")%>"><%=cm.cmsPhrase("Sites")%></a><%=cm.cmsTitle("generic_header-static_sites_title")%>
+        <a href="<%=domain%>/sites.jsp" accesskey="t" title="<%=cm.cmsPhrase("Sites module")%>"><%=cm.cmsPhrase("Sites")%></a>
       </td>
       <td style="padding-left : 5px;">
-        <a href="<%=domain%>/combined-search.jsp" accesskey="c" title="<%=cm.cms("generic_header-static_combined_title")%>"><%=cm.cmsPhrase("Combined search")%></a><%=cm.cmsTitle("generic_header-static_combined_title")%>
+        <a href="<%=domain%>/combined-search.jsp" accesskey="c" title="<%=cm.cmsPhrase("Combined search tool")%>"><%=cm.cmsPhrase("Combined search")%></a>
       </td>
       <td style="padding-left : 5px;">
-        <a href="<%=domain%>/glossary.jsp" accesskey="g" title="<%=cm.cms("generic_header-static_glossary_title")%>"><%=cm.cmsPhrase("Glossary")%></a><%=cm.cmsTitle("generic_header-static_glossary_title")%>
+        <a href="<%=domain%>/glossary.jsp" accesskey="g" title="<%=cm.cmsPhrase("Glossary of terms")%>"><%=cm.cmsPhrase("Glossary")%></a>
       </td>
       <td style="padding-left : 5px;">
-        <a href="<%=domain%>/eunis-map.jsp" accesskey="3" title="<%=cm.cms("generic_header-static_sitemap_title")%>"><%=cm.cmsPhrase("EUNIS Sitemap")%></a><%=cm.cmsTitle("generic_header-static_sitemap_title")%>
+        <a href="<%=domain%>/eunis-map.jsp" accesskey="3" title="<%=cm.cmsPhrase("EUNIS navigation map")%>"><%=cm.cmsPhrase("EUNIS Sitemap")%></a>
       </td>
       <td style="padding-left : 5px;">
-        <a href="<%=domain%>/gis-tool.jsp" accesskey="u" title="<%=cm.cms("generic_header-static_gistool_title")%>"><%=cm.cmsPhrase("Interactive Maps")%></a><%=cm.cmsTitle("generic_header-static_gistool_title")%>
+        <a href="<%=domain%>/gis-tool.jsp" accesskey="u" title="<%=cm.cmsPhrase("Interactive maps")%>"><%=cm.cmsPhrase("Interactive Maps")%></a>
       </td>
       <td style="padding-left : 5px;">
-        <a href="<%=domain%>/about.jsp" accesskey="b" title="<%=cm.cms("generic_header-static_about_title")%>"><%=cm.cmsPhrase("About EUNIS")%></a><%=cm.cmsTitle("generic_header-static_about_title")%>
+        <a href="<%=domain%>/about.jsp" accesskey="b" title="<%=cm.cmsPhrase("Information about EUNIS")%>"><%=cm.cmsPhrase("About EUNIS")%></a>
       </td>
     </tr>
   </table>

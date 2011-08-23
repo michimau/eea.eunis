@@ -2,8 +2,8 @@ package eionet.eunis.dao.impl;
 
 
 import eionet.eunis.dao.DaoFactory;
-import eionet.eunis.dao.IDocumentsDao;
 import eionet.eunis.dao.IExternalObjectsDao;
+import eionet.eunis.dao.IReferencesDao;
 import eionet.eunis.dao.ISitesDao;
 import eionet.eunis.dao.ISpeciesDao;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
@@ -13,18 +13,18 @@ public class MySqlDaoFactory extends DaoFactory {
 
     public MySqlDaoFactory() {}
 
-    private IDocumentsDao documentsDao = new DocumentsDaoImpl();
+    private IReferencesDao referencesDao = new ReferencesDaoImpl();
     private IExternalObjectsDao externalObjectsDao = new ExternalObjectsDaoImpl();
     private ISitesDao sitesDao = new SitesDaoImpl();
     private ISpeciesDao speciesDao = new SpeciesDaoImpl();
     private ISpeciesFactsheetDao speciesFactsheetDao = new SpeciesFactsheetDaoImpl();
 
-    public IDocumentsDao getDocumentsDao() {
-        return documentsDao;
+    public IReferencesDao getReferncesDao() {
+        return referencesDao;
     }
 
-    public void setDocumentsDao(IDocumentsDao documentsDao) {
-        this.documentsDao = documentsDao;
+    public void setReferencesDao(IReferencesDao referencesDao) {
+        this.referencesDao = referencesDao;
     }
 
     public IExternalObjectsDao getExternalObjectsDao() {

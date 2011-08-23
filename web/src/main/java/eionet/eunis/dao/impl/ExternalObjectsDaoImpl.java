@@ -22,7 +22,7 @@ public class ExternalObjectsDaoImpl extends MySqlBaseDao implements IExternalObj
     public ExternalObjectsDaoImpl() {}
 
     /**
-     * @see eionet.eunis.dao.IDocumentsDao#getDocuments()
+     * @see eionet.eunis.dao.IExternalObjectsDao#getMaybeSameObjects()
      * {@inheritDoc}
      */
     public List<ExternalObjectDTO> getMaybeSameObjects() {

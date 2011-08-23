@@ -113,7 +113,7 @@
                 %>
                 <tr<%=cssClass%>>
                   <td id="A<%=cnt%>1">
-<a href="documents/<%=nl.getIdReference()%>"><%=Utilities.treatURLSpecialCharacters( nl.getAuthor() )%></a>
+					<a href="references/<%=nl.getIdReference()%>"><%=Utilities.treatURLSpecialCharacters( nl.getAuthor() )%></a>
                   </td>
                   <td>
                     <%=Utilities.treatURLSpecialCharacters( nl.getTitle() )%>

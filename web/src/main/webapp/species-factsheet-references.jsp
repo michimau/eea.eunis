@@ -156,7 +156,7 @@
 %>
       <tr class="<%=cssClass%>">
         <td>
-          <a href="documents/<%=rs.getString(7)%>"><%=title%></a>
+          <a href="references/<%=rs.getString(7)%>"><%=title%></a>
         </td>
         <td>
           <%=author%>

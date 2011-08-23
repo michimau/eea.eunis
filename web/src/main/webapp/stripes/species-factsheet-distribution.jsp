@@ -54,7 +54,7 @@
  					<td style="text-align:right">${eunis:formatArea(dist.longitude, 3, 4, "&nbsp;")}</td>
  					<td>${eunis:treatURLSpecialCharacters(dist.status)}</td>
  					<td>
- 						<a class="link-plain" href="documents/${dist.reference}">
+ 						<a class="link-plain" href="references/${dist.reference}">
  							${eunis:getAuthorAndUrlByIdDc(dist.reference)}
  						</a>
  					</td>

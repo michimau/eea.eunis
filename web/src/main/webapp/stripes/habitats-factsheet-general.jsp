@@ -183,7 +183,7 @@
 		  					${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}
 						</h3>
 						<p>
-		  					<a href="documents/${desc.idDc}">${eunis:treatURLSpecialCharacters(ssource)}</a>
+		  					<a href="references/${desc.idDc}">${eunis:treatURLSpecialCharacters(ssource)}</a>
 						</p>
   					</c:if>
   				</c:if>

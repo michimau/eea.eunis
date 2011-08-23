@@ -64,7 +64,7 @@ public class GenerateDesignationRDF {
                 rdf.append(RDFUtil.writeLiteral("remarkSource", factsheet.getRemarkSource()));
 
                 if (factsheet.getIdDc() != null && factsheet.getIdDc() != -1) {
-                    rdf.append(RDFUtil.writeReference("reference", "http://eunis.eea.europa.eu/documents/" + factsheet.getIdDc()));
+                    rdf.append(RDFUtil.writeReference("reference", "http://eunis.eea.europa.eu/references/" + factsheet.getIdDc()));
                 }
 
                 rdf.append("</Designation>\n");

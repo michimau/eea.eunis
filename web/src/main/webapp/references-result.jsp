@@ -388,7 +388,7 @@
                   author = Utilities.treatURLAmp( author );
                 }
           %>
-                      <a href="documents/<%=ref.getIdDc()%>"><%=author%></a>
+                      <a href="references/<%=ref.getIdDc()%>"><%=author%></a>
                     </td>
           <%
               }

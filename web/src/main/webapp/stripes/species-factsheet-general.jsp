@@ -218,7 +218,7 @@
 	        			</span>
 	        		</td>
 	        		<td>
-	          			<a href="documents/${threat.idDc}">${eunis:treatURLSpecialCharacters(threat.reference)}</a>
+	          			<a href="references/${threat.idDc}">${eunis:treatURLSpecialCharacters(threat.reference)}</a>
 	        		</td>
 	      		</tr>
 	    	</c:forEach>

@@ -2,16 +2,16 @@
 
 <%@ include file="/stripes/common/taglibs.jsp"%>	
 
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Documents">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="References">
 
 	<stripes:layout-component name="contents">
 		<!-- MAIN CONTENT -->
-					<h2>Documents:</h2>
-					<display:table name="${actionBean.docs}" class="sortable" sort="external" id="listItem" htmlId="listItem" requestURI="/documents" decorator="eionet.eunis.util.decorators.DocumentsTableDecorator">
-						<display:column property="idDoc" title="ID" sortable="true"/>
-						<display:column property="docTitle" title="Title" sortable="true"/>
+					<h2>References:</h2>
+					<display:table name="${actionBean.refs}" class="sortable" sort="external" id="listItem" htmlId="listItem" requestURI="/references" decorator="eionet.eunis.util.decorators.ReferencesTableDecorator">
+						<display:column property="idRef" title="ID" sortable="true"/>
+						<display:column property="refTitle" title="Title" sortable="true"/>
 						<display:column property="author" title="Author" sortable="true" decorator="eionet.eunis.util.decorators.ReplaceTagsColumnDecorator"/>
-						<display:column property="docYear" title="Year" sortable="true"/>
+						<display:column property="refYear" title="Year" sortable="true"/>
 					</display:table>
 
 		<!-- END MAIN CONTENT -->
@@ -21,7 +21,7 @@
 			<div id="portal-column-one">
             	<div class="visualPadding">
               		<jsp:include page="/inc_column_left.jsp">
-                		<jsp:param name="page_name" value="documents" />
+                		<jsp:param name="page_name" value="references" />
               		</jsp:include>
             	</div>
           	</div>

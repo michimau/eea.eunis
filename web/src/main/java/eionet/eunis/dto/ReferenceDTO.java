@@ -5,25 +5,25 @@ package eionet.eunis.dto;
  * 
  * @author altnyris
  */
-public class DocumentDTO {
+public class ReferenceDTO {
 
     /**
      * serial.
      */
     private static final long serialVersionUID = 1L;
 
-    private String idDoc;
+    private String idRef;
     private String title;
     private String alternative;
     private String author;
     private String year;
 
-    public String getIdDoc() {
-        return idDoc;
+    public String getIdRef() {
+        return idRef;
     }
 
-    public void setIdDoc(String idDoc) {
-        this.idDoc = idDoc;
+    public void setIdRef(String idRef) {
+        this.idRef = idRef;
     }
 
     public String getTitle() {

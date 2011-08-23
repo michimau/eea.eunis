@@ -51,7 +51,7 @@ public class GenerateHabitatRDF {
                             String textSource =
                                 Utilities.formatString(SpeciesFactsheet.getBookAuthorDate(description.getIdDc()), "");
                             if (textSource != null && textSource.length() > 0) {
-                                rdf.append(RDFUtil.writeReference("dct:source", "http://eunis.eea.europa.eu/documents/" + description.getIdDc()));
+                                rdf.append(RDFUtil.writeReference("dct:source", "http://eunis.eea.europa.eu/references/" + description.getIdDc()));
                             }
                         }
                     }

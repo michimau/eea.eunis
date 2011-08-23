@@ -152,7 +152,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
             dto.setDcmitype(new ResourceDto("", "http://purl.org/dc/dcmitype/Text"));
             if (dto.getIdDc() != null && !"-1".equals(dto.getIdDc().getId())) {
-                dto.getIdDc().setPrefix("http://eunis.eea.europa.eu/documents/");
+                dto.getIdDc().setPrefix("http://eunis.eea.europa.eu/references/");
             } else {
                 dto.setIdDc(null);
             }

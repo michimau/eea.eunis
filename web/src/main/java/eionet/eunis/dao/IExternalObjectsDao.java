@@ -6,11 +6,11 @@ import java.util.List;
 
 import eionet.eunis.dto.AttributeDto;
 import eionet.eunis.dto.ExternalObjectDTO;
-import eionet.eunis.stripes.actions.DocumentsActionBean;
+import eionet.eunis.stripes.actions.ReferencesActionBean;
 
 
 /**
- * Helper Dao interface for {@link DocumentsActionBean}.
+ * Helper Dao interface for {@link ReferencesActionBean}.
  *
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>

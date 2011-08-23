@@ -67,7 +67,7 @@ public class SpeciesExportTask implements Runnable {
             if (factsheet.getTaxcodeObject() != null && factsheet.getTaxcodeObject().IdDcTaxcode() != null) {
                 dto.setNameAccordingToID(
                         new ResourceDto(
-                                factsheet.getTaxcodeObject().IdDcTaxcode().toString(), "http://eunis.eea.europa.eu/documents/"));
+                                factsheet.getTaxcodeObject().IdDcTaxcode().toString(), "http://eunis.eea.europa.eu/references/"));
             }
 
             dto.setDwcScientificName(dto.getScientificName() + ' ' + dto.getAuthor());

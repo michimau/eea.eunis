@@ -6,7 +6,7 @@ import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dto.AttributeDto;
 import eionet.eunis.dto.DcIndexDTO;
 
-public class GenerateDocumentRDF {
+public class GenerateReferenceRDF {
 
     /**
      * RDF root element. Domain name is hardwired. It should have come from getContext().getInitParameter("DOMAIN_NAME")
@@ -20,33 +20,33 @@ public class GenerateDocumentRDF {
 
     private DcIndexDTO object;
     private List<AttributeDto> attributes;
-    /** Identifier of the document (ID_DC). */
+    /** Identifier of the reference (ID_DC). */
     private String id;
     //private StringBuffer rdf;
 
-    public GenerateDocumentRDF(String id) {
+    public GenerateReferenceRDF(String id) {
         if (id != null && id.length() > 0) {
-            this.object = DaoFactory.getDaoFactory().getDocumentsDao().getDcIndex(id);
-            this.attributes = DaoFactory.getDaoFactory().getDocumentsDao().getDcAttributes(id);
+            this.object = DaoFactory.getDaoFactory().getReferncesDao().getDcIndex(id);
+            this.attributes = DaoFactory.getDaoFactory().getReferncesDao().getDcAttributes(id);
         }
         this.id = id;
         //this.rdf = new StringBuffer();
     }
 
-    public GenerateDocumentRDF(DcIndexDTO object) {
+    public GenerateReferenceRDF(DcIndexDTO object) {
         if (object != null && object.getIdDc() != null) {
             this.object = object;
-            this.attributes = DaoFactory.getDaoFactory().getDocumentsDao().getDcAttributes(object.getIdDc());
+            this.attributes = DaoFactory.getDaoFactory().getReferncesDao().getDcAttributes(object.getIdDc());
             this.id = object.getIdDc();
         }
         //this.rdf = new StringBuffer();
     }
 
-    public StringBuffer getDocumentRdf() {
+    public StringBuffer getReferenceRdf() {
         StringBuffer rdf = new StringBuffer();
         try {
             if (object != null && attributes != null) {
-                rdf.append("<rdf:Description rdf:about=\"documents/").append(id).append("\">\n");
+                rdf.append("<rdf:Description rdf:about=\"references/").append(id).append("\">\n");
                 rdf.append(RDFUtil.writeReference("rdf:type", "http://purl.org/dc/dcmitype/Text"));
                 rdf.append(RDFUtil.writeLiteral("title", object.getTitle()));
                 rdf.append(RDFUtil.writeLiteral("alternative", object.getAlternative()));

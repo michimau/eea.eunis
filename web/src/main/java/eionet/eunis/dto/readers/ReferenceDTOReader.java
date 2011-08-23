@@ -7,19 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ro.finsiel.eunis.utilities.ResultSetBaseReader;
-import eionet.eunis.dto.DocumentDTO;
+import eionet.eunis.dto.ReferenceDTO;
 
 
-public class DocumentDTOReader extends ResultSetBaseReader<DocumentDTO> {
+public class ReferenceDTOReader extends ResultSetBaseReader<ReferenceDTO> {
 
     /** */
-    List<DocumentDTO> resultList = new ArrayList<DocumentDTO>();
+    List<ReferenceDTO> resultList = new ArrayList<ReferenceDTO>();
 
     public void readRow(ResultSet rs) throws SQLException {
 
-        DocumentDTO docDTO = new DocumentDTO();
+        ReferenceDTO docDTO = new ReferenceDTO();
 
-        docDTO.setIdDoc(rs.getString("ID_DC"));
+        docDTO.setIdRef(rs.getString("ID_DC"));
         docDTO.setTitle(rs.getString("TITLE"));
         docDTO.setAlternative(rs.getString("ALTERNATIVE"));
         docDTO.setAuthor(rs.getString("SOURCE"));
@@ -31,7 +31,7 @@ public class DocumentDTOReader extends ResultSetBaseReader<DocumentDTO> {
     /**
      * @return the resultList
      */
-    public List<DocumentDTO> getResultList() {
+    public List<ReferenceDTO> getResultList() {
         return resultList;
     }
 

@@ -110,7 +110,7 @@
           <%=Utilities.treatURLSpecialCharacters(aRow.getQuality())%>&nbsp;
         </td>
         <td>
-            <a href="documents/<%=aRow.getReference()%>"><%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(aRow.getReference()).get(0))%></a>
+            <a href="references/<%=aRow.getReference()%>"><%=Utilities.treatURLSpecialCharacters((String)Utilities.getAuthorAndUrlByIdDc(aRow.getReference()).get(0))%></a>
         </td>
       </tr>
 <%

@@ -7,8 +7,8 @@
 			<!-- MAIN CONTENT -->
 				<h1 class="documentFirstHeading">${actionBean.dcIndex.title}</h1>
 				<div class="documentActions">
-					<h5 class="hiddenStructure">${eunis:cms(actionBean.contentManagement, 'Document Actions')}</h5>
-					${eunis:cmsTitle(actionBean.contentManagement, 'Document Actions')}
+					<h5 class="hiddenStructure">${eunis:cms(actionBean.contentManagement, 'Reference Actions')}</h5>
+					${eunis:cmsTitle(actionBean.contentManagement, 'Reference Actions')}
 					<ul>
 						<li>
 							<a href="javascript:this.print();">
@@ -28,13 +28,13 @@
               			<c:when test="${dataTab.id eq actionBean.tab}">
 	              			<li id="currenttab">
 	              				<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${dataTab.value}" 
-	              				href="documents/${actionBean.iddoc}/${dataTab.id}">${dataTab.value}</a>
+	              				href="references/${actionBean.idref}/${dataTab.id}">${dataTab.value}</a>
 	              			</li>
               			</c:when>
               			<c:otherwise>
               				<li>
 	              				<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${dataTab.value}"
-	              				 href="documents/${actionBean.iddoc}/${dataTab.id}">${dataTab.value}</a>
+	              				 href="references/${actionBean.idref}/${dataTab.id}">${dataTab.value}</a>
 	              			</li>
               			</c:otherwise>
               		</c:choose>
@@ -45,7 +45,7 @@
                 <br />
                 <c:if test="${actionBean.tab == 'general'}">
 	               	<%-- General information--%>
-	                <h2>Document information:</h2>
+	                <h2>Reference information:</h2>
 					<table width="90%" class="datatable">
 						<col style="width:20%"/>
                   		<col style="width:80%"/>
@@ -138,7 +138,7 @@
 				<div id="portal-column-one">
 	            	<div class="visualPadding">
 	              		<jsp:include page="/inc_column_left.jsp">
-	                		<jsp:param name="page_name" value="documents/${actionBean.iddoc}" />
+	                		<jsp:param name="page_name" value="references/${actionBean.idref}" />
 	              		</jsp:include>
 	            	</div>
 	          	</div>

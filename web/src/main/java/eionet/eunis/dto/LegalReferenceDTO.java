@@ -40,7 +40,7 @@ public class LegalReferenceDTO implements Serializable {
     private String comment;
 
     public LegalReferenceDTO(int idDc, String annex, int priority, String comment) {
-        this.idDc = new ResourceDto(idDc + "", "http://eunis.eea.europa.eu/documents/");
+        this.idDc = new ResourceDto(idDc + "", "http://eunis.eea.europa.eu/references/");
         this.annex = annex;
         this.priority = priority;
         this.comment = comment;

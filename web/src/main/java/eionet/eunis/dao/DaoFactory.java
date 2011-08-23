@@ -12,7 +12,7 @@ public abstract class DaoFactory {
         return mySqlDaoFactory;
     }
 
-    public abstract IDocumentsDao getDocumentsDao();
+    public abstract IReferencesDao getReferncesDao();
 
     public abstract IExternalObjectsDao getExternalObjectsDao();
 

@@ -93,7 +93,7 @@
 	AuthorURL = AuthorURL.replaceAll("&","&amp;");
 %>
       <td>
-	  <a href="documents/<%=IdDc%>"><%=AuthorURL%></a>
+	  <a href="references/<%=IdDc%>"><%=AuthorURL%></a>
       </td>
 <%
       }

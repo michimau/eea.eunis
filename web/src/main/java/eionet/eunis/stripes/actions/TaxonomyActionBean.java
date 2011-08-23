@@ -43,7 +43,7 @@ public class TaxonomyActionBean extends AbstractStripesAction {
             dto.setName(StringEscapeUtils.escapeXml(taxonomy.getTaxonomicName()));
             dto.setLink(new ResourceDto(taxonomy.getIdTaxcodeLink(), "http://eunis.eea.europa.eu/taxonomy/"));
             dto.setParent(new ResourceDto(taxonomy.getIdTaxcodeParent(), "http://eunis.eea.europa.eu/taxonomy/"));
-            dto.setSource(new ResourceDto(taxonomy.getIdDc().toString(), "http://eunis.eea.europa.eu/documents/"));
+            dto.setSource(new ResourceDto(taxonomy.getIdDc().toString(), "http://eunis.eea.europa.eu/references/"));
             dto.setNotes(StringEscapeUtils.escapeXml(taxonomy.getNotes()));
 
             return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, SimpleFrameworkUtils.convertToString(TaxonomyDto.HEADER, dto,

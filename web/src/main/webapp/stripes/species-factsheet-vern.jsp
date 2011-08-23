@@ -36,7 +36,7 @@
           					${vern.language}
         				</td>
         				<td>
-              				<a class="link-plain" href="documents/${ref}">${eunis:getAuthorAndUrlByIdDc(ref)}</a>
+              				<a class="link-plain" href="references/${ref}">${eunis:getAuthorAndUrlByIdDc(ref)}</a>
         				</td>
 					</tr>
 				</c:forEach>

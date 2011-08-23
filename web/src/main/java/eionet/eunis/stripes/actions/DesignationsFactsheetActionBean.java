@@ -125,7 +125,7 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
                     }
                 }
                 try {
-                    reference = DaoFactory.getDaoFactory().getDocumentsDao().getDesignationDcObject(idDesig, idGeo);
+                    reference = DaoFactory.getDaoFactory().getReferncesDao().getDesignationDcObject(idDesig, idGeo);
 
                     if (showSites) {
                         sites = SitesSearchUtility.findSitesForDesignation(idDesig, idGeo);

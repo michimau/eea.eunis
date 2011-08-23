@@ -45,7 +45,7 @@ public class TaxonomyExportTask implements Runnable {
             dto.setName(taxonomy.getTaxonomicName());
             dto.setLink(new ResourceDto(taxonomy.getIdTaxcodeLink(), "http://eunis.eea.europa.eu/taxonomy/"));
             dto.setParent(new ResourceDto(taxonomy.getIdTaxcodeParent(), "http://eunis.eea.europa.eu/taxonomy/"));
-            dto.setSource(new ResourceDto(taxonomy.getIdDc().toString(), "http://eunis.eea.europa.eu/documents/"));
+            dto.setSource(new ResourceDto(taxonomy.getIdDc().toString(), "http://eunis.eea.europa.eu/references/"));
             dto.setNotes(taxonomy.getNotes());
 
             Persister persister = new Persister(new AnnotationStrategy(), new Format(4));

@@ -323,7 +323,7 @@
                 %>
                     <tr>
                       <td>
-                        <a target="_blank" href="documents/<%=dc_id%>"><%=Utilities.treatURLSpecialCharacters(author)%></a>
+                        <a target="_blank" href="references/<%=dc_id%>"><%=Utilities.treatURLSpecialCharacters(author)%></a>
                       </td>
                       <td>
                         <%=Utilities.formatString(Utilities.formatReferencesDate(book.getDate()), "&nbsp;")%>

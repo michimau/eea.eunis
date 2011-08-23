@@ -60,7 +60,7 @@
         <a class="navItemLevel1" href="<%=request.getContextPath()%>/glossary.jsp" accesskey="g" title="<%=cm.cmsPhrase("Glossary of terms")%>"><%=cm.cmsPhrase("Glossary")%></a>
       </li>
       <li class="navTreeItem visualNoMarker">
-        <a class="navItemLevel1" href="<%=request.getContextPath()%>/references.jsp" accesskey="r" title="<%=cm.cmsPhrase("View references used in EUNIS")%>"><%=cm.cmsPhrase("References")%></a>
+        <a class="navItemLevel1" href="<%=request.getContextPath()%>/references" accesskey="r" title="<%=cm.cmsPhrase("View references used in EUNIS")%>"><%=cm.cmsPhrase("References")%></a>
       </li>
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" id="digir_url_link" href="<%=request.getContextPath()%>/digir.jsp" title="<%=cm.cmsPhrase("View DiGIR application provider information")%>"><%=cm.cmsPhrase("DiGIR Provider")%></a>

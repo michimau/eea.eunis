@@ -90,7 +90,7 @@
 				          	${eunis:treatURLSpecialCharacters(region.status)}&nbsp;
 				        </td>
 				        <td>
-							<a href="documents/${region.reference}&nbsp;">${eunis:getAuthorAndUrlByIdDc(region.reference)}</a>
+							<a href="references/${region.reference}&nbsp;">${eunis:getAuthorAndUrlByIdDc(region.reference)}</a>
 				        </td>
     			</c:forEach>
     		</tbody>

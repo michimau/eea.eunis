@@ -74,10 +74,10 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="references">
-    <dcterms:title>Documents from EUNIS</dcterms:title>
+    <dcterms:title>References from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
-    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/documents"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/references"/>
   </void:Dataset>
 
 </rdf:RDF>

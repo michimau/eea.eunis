@@ -70,7 +70,7 @@
         <a id="digir_url_link" href="<%=domain%>/digir.jsp" title="<%=cm.cms("generic_header-static_digir_title")%>"><%=cm.cmsPhrase("DiGIR Provider")%></a><%=cm.cmsTitle("generic_header-static_digir_title")%>
       </td>
       <td style="padding-left : 5px;">
-        <a href="<%=domain%>/references.jsp" accesskey="r" title="<%=cm.cms("generic_header-static_references_title")%>"><%=cm.cmsPhrase("References")%></a><%=cm.cmsTitle("generic_header-static_references_title")%>
+        <a href="<%=domain%>/references" accesskey="r" title="<%=cm.cms("generic_header-static_references_title")%>"><%=cm.cmsPhrase("References")%></a><%=cm.cmsTitle("generic_header-static_references_title")%>
       </td>
       <td style="padding-left : 5px;">
         <a href="<%=domain%>/related-reports.jsp" accesskey="p" title="<%=cm.cms("generic_header-static_reports_title")%>"><%=cm.cmsPhrase("Related reports")%></a><%=cm.cmsTitle("generic_header-static_reports_title")%>

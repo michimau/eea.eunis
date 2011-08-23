@@ -66,7 +66,7 @@ import eionet.sparqlClient.helpers.QueryResult;
 
 /**
  * ActionBean to replace old /species-factsheet.jsp.
- * 
+ *
  * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 @UrlBinding("/species/{idSpecies}/{tab}")
@@ -109,12 +109,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      */
     private List<Pair<String, String>> tabsWithData = new LinkedList<Pair<String, String>>();
     /**
-     * senior synonym name
+     * senior synonym name.
      */
     private String seniorSpecies;
 
     /**
-     * senior synonym ID
+     * senior synonym ID.
      */
     private int seniorIdSpecies;
 
@@ -133,12 +133,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private String speciesName;
     /** World Register of Marine Species - also has seals etc. */
     private String wormsid;
-    /** Natura 2000 identifier in chm62edt_nature_object_attributes */
+    /** Natura 2000 identifier in chm62edt_nature_object_attributes. */
     private String n2000id;
     private String faeu;
     private PublicationWrapper speciesBook;
     /**
-     * Hold ITIS TSN number
+     * Hold ITIS TSN number.
      */
     private String itisTSN;
     private String ncbi;
@@ -148,10 +148,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private String domainName;
     private String urlPic;
 
-    // Vernacular names tab variables
+    /** Vernacular names tab variables. */
     private List<VernacularNameWrapper> vernNames;
 
-    // countries tab variables
+    /** countries tab variables. */
     private Vector<GeographicalStatusWrapper> bioRegions;
     boolean showGeoDistribution = false;
     private String filename;
@@ -160,18 +160,18 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private String parameters;
     private Hashtable<String, String> statusColorPair;
 
-    // Grid distribution tab variables
+    /** Grid distribution tab variables. */
     private String gridImage;
     private boolean gridDistSuccess;
     private List<SpeciesDistributionDTO> speciesDistribution;
 
-    // Sites distribution tab variables
+    /** Sites distribution tab variables. */
     private List<SitesByNatureObjectPersist> speciesSites;
     private String mapIds;
     private List<SitesByNatureObjectPersist> subSpeciesSites;
     private String subMapIds;
 
-    // Deliveries tab variables
+    /** Deliveries tab variables. */
     private QueryResult deliveries;
 
     @DefaultHandler
@@ -518,11 +518,16 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             itisTSN = getContext().getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_ITIS);
             ncbi = getContext().getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_NCBI);
 
+            // For attributes that are links to HTML pages.
+            // TODO: We need a solution where we can introduce a new attribute name into the database
+            // without having to recompile the application. I.e. those link labels have to be elsewhere.
             String[][] linkTab =
             {
                     {Constants.ART17_SUMMARY, "Conservation status (art. 17)"},
                     {Constants.BBC_PAGE, "BBC page"}, // {Constants.BIOLIB_PAGE,"Biolib page"},
-                    {Constants.BUG_GUIDE, "Bug Guide page"}, {"hasBirdActionPlan", "Bird action plan"},
+                    {Constants.BUG_GUIDE, "Bug Guide page"},
+                    {"hasBirdActionPlan", "Bird action plan"},
+                    {Constants.EOL_PAGE, "Encyclopedia of Life"},
                     {Constants.WIKIPEDIA_ARTICLE, "Wikipedia article"},
                     {Constants.WIKISPECIES_ARTICLE, "Wikispecies article"}};
             String linkUrl;

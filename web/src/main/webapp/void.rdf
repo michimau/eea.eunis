@@ -33,6 +33,10 @@
     <void:subset rdf:resource="#designations"/>
     <void:subset rdf:resource="#references"/>
     <void:subset rdf:resource="#taxonomies"/>
+    <void:subset rdf:resource="#biogeoregions"/>
+    <void:subset rdf:resource="#countries"/>
+    <void:subset rdf:resource="#countrybiogeo"/>
+    <void:subset rdf:resource="#speciesgroup"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="sites">
@@ -66,11 +70,39 @@
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/habitats.rdf.gz"/>
   </void:Dataset>
 
+  <void:Dataset rdf:ID="countries">
+    <dcterms:title>Countries from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/countries.rdf.gz"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="biogeoregions">
+    <dcterms:title>Biogeographical regions from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/biogeoregions.rdf.gz"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="countrybiogeo">
+    <dcterms:title>Links between countries and biogeographical regions in EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/countrybiogeo.rdf.gz"/>
+  </void:Dataset>
+
   <void:Dataset rdf:ID="designations">
     <dcterms:title>Designations of sites from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/designations.rdf.gz"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="speciesgroup">
+    <dcterms:title>Species groups from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/speciesgroup.rdf.gz"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="references">

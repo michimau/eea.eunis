@@ -16,9 +16,12 @@ import ro.finsiel.eunis.search.species.factsheet.HabitatsSpeciesWrapper;
 public class GenerateHabitatRDF {
 
     /** RDF header with namespaces. */
-    public static final String HEADER = "<rdf:RDF xmlns=\"http://eunis.eea.europa.eu/rdf/habitats-schema.rdf#\"\n"
+    public static final String HEADER = "<rdf:RDF "
+        + "xmlns=\"http://eunis.eea.europa.eu/rdf/habitats-schema.rdf#\"\n"
         + "xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
-        + "xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n" + "xmlns:dct=\"http://purl.org/dc/terms/\">\n";
+        + "xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n"
+        + "xmlns:foaf=\"http://xmlns.com/foaf/0.1/\"\n"
+        + "xmlns:dct=\"http://purl.org/dc/terms/\">\n";
 
     private HabitatsFactsheet factsheet;
     private String idHabitat;

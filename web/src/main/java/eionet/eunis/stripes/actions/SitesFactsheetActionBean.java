@@ -40,6 +40,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     private static final String HEADER = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
         + "xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n"
         + "xmlns:geo=\"http://www.w3.org/2003/01/geo/wgs84_pos#\"\n"
+        + "xmlns:foaf=\"http://xmlns.com/foaf/0.1/\"\n"
         + "xmlns=\"http://eunis.eea.europa.eu/rdf/sites-schema.rdf#\">\n";
 
     private String idsite = "";

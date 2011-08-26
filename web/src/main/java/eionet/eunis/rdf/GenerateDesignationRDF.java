@@ -6,7 +6,8 @@ import ro.finsiel.eunis.search.sites.designations.FactsheetDesignations;
 
 public class GenerateDesignationRDF {
 
-    public static final String HEADER = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
+    public static final String HEADER = "<rdf:RDF "
+        + "xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
         + "xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n"
         + "xmlns:geo=\"http://www.w3.org/2003/01/geo/wgs84_pos#\"\n"
         + "xmlns=\"http://eunis.eea.europa.eu/rdf/designations-schema.rdf#\">\n";

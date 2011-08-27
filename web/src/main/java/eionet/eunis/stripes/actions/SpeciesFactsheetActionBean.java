@@ -527,6 +527,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                     {Constants.BBC_PAGE, "BBC page"}, // {Constants.BIOLIB_PAGE,"Biolib page"},
                     {Constants.BUG_GUIDE, "Bug Guide page"},
                     {"hasBirdActionPlan", "Bird action plan"},
+                    {"hasWCMCPage", "UNEP-WCMC page"},
                     {Constants.EOL_PAGE, "Encyclopedia of Life"},
                     {Constants.WIKIPEDIA_ARTICLE, "Wikipedia article"},
                     {Constants.WIKISPECIES_ARTICLE, "Wikispecies article"}};

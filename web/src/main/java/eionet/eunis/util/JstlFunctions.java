@@ -15,7 +15,7 @@ import ro.finsiel.eunis.utilities.EunisUtil;
 
 /**
  * Collection of eunis JSTL functions.
- * 
+ *
  * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 public class JstlFunctions {
@@ -24,7 +24,7 @@ public class JstlFunctions {
 
     /**
      * jstl wrapper to factsheet.exists();
-     * 
+     *
      * @param suspicious
      * @return String
      */
@@ -44,7 +44,7 @@ public class JstlFunctions {
     }
 
     /**
-     * 
+     *
      * @param cms
      * @param key
      * @return String
@@ -137,7 +137,7 @@ public class JstlFunctions {
     }
 
     /**
-     * 
+     *
      * @param in
      * @return String
      */
@@ -146,7 +146,7 @@ public class JstlFunctions {
     }
 
     /**
-     * 
+     *
      * @param in
      * @param dontCreateHTMLAnchors
      * @param dontCreateHTMLLineBreaks
@@ -201,7 +201,7 @@ public class JstlFunctions {
 
     /**
      * Translate the SOURCE_DB field from CHM62EDT_SITES in human readable language.
-     * 
+     *
      * @param sourceDB
      *            Source db.
      * @return Source database.
@@ -221,7 +221,7 @@ public class JstlFunctions {
 
     /**
      * Replace characters having special meaning inside HTML tags with their escaped equivalents, using character entities.
-     * 
+     *
      * @param str
      *            String to be parsed
      * @return Processed string.
@@ -245,7 +245,7 @@ public class JstlFunctions {
 
     /**
      * This method formats the area field from the sites module which is displayed within HTML result pages.
-     * 
+     *
      * @param input
      *            the input string
      * @param left
@@ -267,7 +267,7 @@ public class JstlFunctions {
     /**
      * Find a reference by an idDc and return a vector with two elements , first element contains author of that reference and
      * second element contains url of reference.
-     * 
+     *
      * @param idDc
      *            idDC of reference
      * @return author
@@ -290,7 +290,7 @@ public class JstlFunctions {
     }
 
     /**
-     * 
+     *
      * @param input
      *            the input string
      * @param what
@@ -303,7 +303,7 @@ public class JstlFunctions {
     }
 
     /**
-     * 
+     *
      * @param input
      *            the input string
      * @return String
@@ -321,7 +321,7 @@ public class JstlFunctions {
     }
 
     /**
-     * 
+     *
      * @param countryName
      * @return boolean
      */
@@ -330,7 +330,7 @@ public class JstlFunctions {
     }
 
     /**
-     * 
+     *
      * @param idDc
      * @return String
      */
@@ -340,7 +340,7 @@ public class JstlFunctions {
 
     /**
      * Return yes/no depending on integer value
-     * 
+     *
      * @param value
      * @return String
      */
@@ -354,7 +354,7 @@ public class JstlFunctions {
 
     /**
      * Executes any method that takes one Integer param and returns String
-     * 
+     *
      * @param className - name of the class where method exists
      * @param methodName - name of the method to be executed
      * @param param - param of type Integer
@@ -381,7 +381,7 @@ public class JstlFunctions {
 
     /**
      * Executes any method that takes one String param and returns String
-     * 
+     *
      * @param className - name of the class where method exists
      * @param methodName - name of the method to be executed
      * @param param - param of type String

@@ -9,7 +9,7 @@ import org.simpleframework.xml.convert.Convert;
 
 /**
  * Dto object to hold species attributes.
- * 
+ *
  * @author alex
  *
  * <a href="mailto:aleks21@gmail.com">contact<a>

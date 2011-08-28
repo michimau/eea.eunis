@@ -17,20 +17,21 @@ import eionet.eunis.util.Constants;
 
 /**
  * Eunis application context.
- * 
+ *
  * @author Aleksandr Ivanov
  * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 public class EunisActionBeanContext extends ActionBeanContext {
 
     private static SQLUtilities sqlUtil;
+    /** Storage of values from eunis.properties file. */
     private static Properties eunisProperties;
     private int severity;
     private static final Logger logger = Logger.getLogger(EunisActionBeanContext.class);
 
     /**
      * get application property from eunis.properties file.
-     * 
+     *
      * @param key key to fetch.
      * @return
      */
@@ -48,11 +49,13 @@ public class EunisActionBeanContext extends ActionBeanContext {
     }
 
     /**
-     * get nature object attribute
-     * 
+     * Get nature object attribute. All attributes for the nature object are stored in <em>Session scope</em> the
+     * first time an attribute is needed. It has the side-effect that a user won't see an attribute update
+     * until he closes his browser.
+     *
      * @param id - id of nature object
      * @param attr - name of attribute
-     * @return String
+     * @return String - value of attribute.
      */
     public String getNatObjectAttribute(Integer id, String name) {
         String ret = null;
@@ -80,7 +83,7 @@ public class EunisActionBeanContext extends ActionBeanContext {
 
     /**
      * Gets an object from session.
-     * 
+     *
      * @param key
      * @return
      */
@@ -90,7 +93,7 @@ public class EunisActionBeanContext extends ActionBeanContext {
 
     /**
      * Add an object to session.
-     * 
+     *
      * @param key
      * @param value
      */
@@ -100,7 +103,7 @@ public class EunisActionBeanContext extends ActionBeanContext {
 
     /**
      * Removes object from session.
-     * 
+     *
      * @param key
      */
     public void removeFromSession(String key) {
@@ -109,7 +112,7 @@ public class EunisActionBeanContext extends ActionBeanContext {
 
     /**
      * Gets application init parameter.
-     * 
+     *
      * @param key
      * @return
      */

@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 
 /**
- * 
+ *
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */

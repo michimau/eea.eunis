@@ -14,7 +14,7 @@ import ro.finsiel.eunis.utilities.ResultSetBaseReader;
 
 /**
  * Reader class to read SpeciesDTO from the database.
- * 
+ *
  * @author Aleksandr Ivanov
  * <a href="mailto:aleks21@gmail.com">contact</a>
  */

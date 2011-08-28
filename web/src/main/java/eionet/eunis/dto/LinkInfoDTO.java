@@ -8,7 +8,7 @@ import org.simpleframework.xml.Root;
 
 /**
  * Document dto object.
- * 
+ *
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */

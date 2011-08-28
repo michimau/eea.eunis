@@ -33,7 +33,7 @@ public class DeleteSites {
                     System.out.println("Successfully deleted!");
                 }
             }
-		     
+
         } catch (Exception e) {
             e.printStackTrace();
         }

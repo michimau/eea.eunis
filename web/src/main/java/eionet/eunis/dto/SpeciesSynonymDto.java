@@ -26,7 +26,7 @@ public class SpeciesSynonymDto implements Serializable {
 
     @Attribute(required = false, name = "rdf:resource")
     public String getSpeciesId() {
-        return "http://eunis.eea.europa.eu/species/" + speciesId; 
+        return "http://eunis.eea.europa.eu/species/" + speciesId;
     }
 
 }

@@ -12,7 +12,7 @@ import org.simpleframework.xml.Root;
 
 /**
  * Site factsheet dto object.
- * 
+ *
  * @author Aleksandr Ivanov
  * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */

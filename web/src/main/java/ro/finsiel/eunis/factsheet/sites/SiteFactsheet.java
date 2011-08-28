@@ -90,6 +90,9 @@ public class SiteFactsheet {
         return null;
     }
 
+    /**
+     * Generate a description for search engines.
+     */
     public String getDescription() {
         String ret = "";
 

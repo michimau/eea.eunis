@@ -10,7 +10,7 @@ import org.simpleframework.xml.Root;
 
 /**
  * DTO class to export legalReferences to RDF.
- * 
+ *
  * @author alex
  *
  * <a href="mailto:aleks21@gmail.com">contact<a>

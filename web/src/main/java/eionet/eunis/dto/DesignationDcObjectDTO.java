@@ -8,7 +8,7 @@ import org.simpleframework.xml.Root;
 
 /**
  * DC tables dto object for designation factsheet.
- * 
+ *
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */

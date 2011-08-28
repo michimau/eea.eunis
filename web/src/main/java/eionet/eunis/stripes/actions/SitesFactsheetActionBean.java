@@ -31,7 +31,7 @@ import eionet.eunis.util.SimpleFrameworkUtils;
 
 /**
  * Action bean to handle sites-factsheet functionality.
- * 
+ *
  * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 @UrlBinding("/sites/{idsite}/{tab}")
@@ -66,6 +66,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     private SiteFactsheet factsheet;
 
+    /** The name of the source DB. */
     private String sdb;
 
     // selected tab
@@ -77,7 +78,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * This action bean only serves RDF through {@link RdfAware}.
-     * 
+     *
      * @return Resolution
      */
     @DefaultHandler
@@ -140,7 +141,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * Generate RDF for a site
+     * Generate RDF for a site.
      */
     public Resolution generateRdf() {
         SiteFactsheet factsheet = new SiteFactsheet(idsite);

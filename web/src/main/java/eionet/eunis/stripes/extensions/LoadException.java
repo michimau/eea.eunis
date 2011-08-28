@@ -22,21 +22,21 @@ package eionet.eunis.stripes.extensions;
 
 
 /**
- * 
+ *
  * @author <a href="mailto:risto.alt@tieto.com">Risto Alt</a>
  *
  */
 public class LoadException extends RuntimeException {
 
     /**
-     * 
+     *
      */
     public LoadException() {
         super();
     }
 	
     /**
-     * 
+     *
      * @param message
      */
     public LoadException(String message) {
@@ -44,7 +44,7 @@ public class LoadException extends RuntimeException {
     }
 
     /**
-     * 
+     *
      * @param message
      * @param cause
      */

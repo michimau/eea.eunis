@@ -65,7 +65,9 @@ import eionet.sparqlClient.helpers.QueryExecutor;
 import eionet.sparqlClient.helpers.QueryResult;
 
 /**
- * ActionBean to replace old /species-factsheet.jsp.
+ * ActionBean for species factsheet.
+ * Data is loaded from {@link ro.finsiel.eunis.factsheet.species.SpeciesFactsheet} and
+ * {@link ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist}.
  *
  * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
@@ -93,6 +95,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     private static final String EXPECTED_IN_PREFIX = "http://eunis.eea.europa.eu/sites/";
 
+    /** The argument given. Can be a species number or scientific name */
     private String idSpecies;
     private int idSpeciesLink;
 
@@ -118,9 +121,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      */
     private int seniorIdSpecies;
 
-    /**
-     * General tab variables.
-     */
+    /** Variables for the "general" tab.  */
     private PictureDTO pic;
     private SpeciesNatureObjectPersist specie;
     private List<ClassificationDTO> classifications;
@@ -128,6 +129,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private String gbifLink;
     private String gbifLink2;
     private String kingdomname;
+    /** IUCN Redlist number */
     private String redlistLink;
     private String scientificNameURL;
     private String speciesName;
@@ -135,12 +137,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private String wormsid;
     /** Natura 2000 identifier in chm62edt_nature_object_attributes. */
     private String n2000id;
+    /** Fauna Europea number */
     private String faeu;
     private PublicationWrapper speciesBook;
-    /**
-     * Hold ITIS TSN number.
-     */
+    /** ITIS TSN number.  */
     private String itisTSN;
+    /** NCBI number */
     private String ncbi;
     private ArrayList<LinkDTO> links;
     private List<NationalThreatWrapper> consStatus;
@@ -205,7 +207,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
         int mainIdSpecies = 0;
 
-        // get idSpecies based on the request param.
+        // get idSpecies based on the request param. Functionality also available in #getSpeciesId()
         if (StringUtils.isNumeric(idSpecies)) {
             mainIdSpecies = new Integer(idSpecies);
         } else if (!StringUtils.isBlank(idSpecies)) {
@@ -300,6 +302,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Generates RDF for a species.
+     * Data is loaded from {@link ro.finsiel.eunis.factsheet.species.SpeciesFactsheet}, inserted into
+     * {@link eionet.eunis.dto.SpeciesFactsheetDto} which is then serialised to XML.
      */
     private Resolution generateRdf() {
         int speciesId = getSpeciesId();
@@ -393,6 +397,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 SpeciesFactsheetDto.HEADER, dto, Constants.RDF_FOOTER));
     }
 
+    /**
+     * Populate the member variables used in the "general" tab.
+     *
+     * @param mainIdSpecies - The species ID. Same as specie.getIdSpecies()
+     */
     private void generalTabActions(int mainIdSpecies) {
 
         speciesBook = factsheet.getSpeciesBook();
@@ -400,6 +409,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         consStatus = factsheet.getConservationStatus(factsheet.getSpeciesObject());
         urlPic = "idobject=" + specie.getIdSpecies() + "&amp;natureobjecttype=Species";
 
+        // TODO: This is only slightly different from ro.finsiel.eunis.factsheet.species.SpeciesFactsheet#getPicturesForSpecies
+        // The next two lines should be refactored to call a method in ro.finsiel.eunis.factsheet.species.SpeciesFactsheet
+        // and there can at most be one main picture. No need to return a list.
         List<Chm62edtNatureObjectPicturePersist> pictures =
             new Chm62edtNatureObjectPictureDomain().findWhere("MAIN_PIC = 1 AND ID_OBJECT = " + mainIdSpecies);
 
@@ -441,9 +453,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         List list = new Vector<Chm62edtTaxcodePersist>();
 
         try {
-            list = new Chm62edtTaxcodeDomain().findWhere("ID_TAXONOMY = '" + specie.getIdTaxcode() + "'");
-
             authorDate = SpeciesFactsheet.getBookAuthorDate(factsheet.getTaxcodeObject().IdDcTaxcode());
+
+            // The next 20 lines should probably be refactored to ro.finsiel.eunis.factsheet.species.SpeciesFactsheet
+            // This layer doesn't need to know that the taxonomy is stored as a segmented string in the DB.
+            list = new Chm62edtTaxcodeDomain().findWhere("ID_TAXONOMY = '" + specie.getIdTaxcode() + "'");
             classifications = new ArrayList<ClassificationDTO>();
             if (list != null && list.size() > 0) {
                 Chm62edtTaxcodePersist t = (Chm62edtTaxcodePersist) list.get(0);
@@ -581,6 +595,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
+    /**
+     * Populate the member variables used in the "geo" tab.
+     *
+     * @param mainIdSpecies - The species ID.
+     */
     private void geoTabActions() {
         bioRegions = SpeciesFactsheet.getBioRegionIterator(specie.getIdNatureObject(), factsheet.getIdSpecies());
         if (bioRegions.size() > 0) {
@@ -628,6 +647,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
+    /**
+     * Populate the member variables used in the "grid" tab.
+     *
+     * @param mainIdSpecies - The species ID.
+     */
     private void gridDistributionTabActions() {
 
         speciesDistribution = new ArrayList<SpeciesDistributionDTO>();
@@ -700,6 +724,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
+    /**
+     * Populate the member variables used in the "sites" tab.
+     *
+     * @param mainIdSpecies - The species ID.
+     */
     private void sitesTabActions() {
 
         // List of sites related to species.
@@ -711,6 +740,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         subMapIds = getIds(subSpeciesSites);
     }
 
+    /**
+     * Populate the member variables used in the "deliveries" tab.
+     *
+     * @param mainIdSpecies - The species ID.
+     */
     private void deliveriesTabActions(int idSpecies) {
 
         String query =

@@ -12,7 +12,7 @@ import eionet.eunis.dto.LegalReferenceDTO;
 
 /**
  * Helper class to read {@link LegalReferenceDTO} objects from the database.
- * 
+ *
  * @author alex
  *
  * <a href="mailto:aleks21@gmail.com">contact<a>

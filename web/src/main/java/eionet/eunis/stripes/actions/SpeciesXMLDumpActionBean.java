@@ -16,7 +16,7 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 /**
  * ActionBean for species XML dump
- * 
+ *
  * @author Risto Alt
  */
 @UrlBinding("/dataimport/speciesdump")

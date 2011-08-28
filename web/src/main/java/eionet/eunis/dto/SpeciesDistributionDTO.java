@@ -8,7 +8,7 @@ import org.simpleframework.xml.Root;
 
 /**
  * DTO object for species factsheet Grid distribution tab
- * 
+ *
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */

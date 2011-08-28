@@ -19,7 +19,7 @@ import ro.finsiel.eunis.search.species.VernacularNameWrapper;
 public class VernacularNameDto implements Serializable {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1009968749712710452L;
 

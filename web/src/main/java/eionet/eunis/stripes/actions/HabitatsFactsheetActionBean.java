@@ -35,7 +35,8 @@ import eionet.sparqlClient.helpers.QueryResult;
 
 /**
  * Action bean to handle habitats-factsheet functionality.
- * 
+ * Data is loaded from {@link ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet}.
+ *
  * @author Risto Alt
  */
 @UrlBinding("/habitats/{idHabitat}/{tab}")
@@ -220,6 +221,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, rdf.toString());
     }
 
+    /**
+     * Populate the member variables used in the "sites" tab.
+     */
     private void sitesTabActions() {
         String isGoodHabitat =
             " IF(TRIM(A.CODE_2000) <> '',RIGHT(A.CODE_2000,2),1) <> IF(TRIM(A.CODE_2000) <> '','00',2) AND IF(TRIM(A.CODE_2000) <> '',LENGTH(A.CODE_2000),1) = IF(TRIM(A.CODE_2000) <> '',4,1) ";
@@ -270,11 +274,17 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
+    /**
+     * Populate the member variables used in the "general" tab.
+     */
     private void generalTabActions() {
 
         try {
             picsURL = "idobject=" + factsheet.getIdHabitat() + "&amp;natureobjecttype=Habitats";
 
+            // TODO: This is only slightly different from ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet#getPicturesForHabitats
+            // The next two lines should be refactored to call a method in ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet
+            // and there can at most be one main picture. No need to return a list.
             List<Chm62edtNatureObjectPicturePersist> pictures = new Chm62edtNatureObjectPictureDomain()
             .findWhere("MAIN_PIC = 1 AND ID_OBJECT = " +idHabitat);
 
@@ -318,6 +328,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     }
 
+    /**
+     * Populate the member variables used in the "deliveries" tab.
+     */
     private void deliveriesTabActions() {
 
         String query =

@@ -7,8 +7,8 @@ import org.simpleframework.xml.Root;
 
 
 /**
- * DTO object for factsheet picture
- * 
+ * DTO object for factsheet picture.
+ *
  * @author Risto Alt
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */

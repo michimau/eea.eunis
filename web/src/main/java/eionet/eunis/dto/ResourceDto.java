@@ -11,7 +11,7 @@ import org.simpleframework.xml.Transient;
 
 /**
  * Resource dto for rdf exporting.
- * 
+ *
  * @author Aleksandr Ivanov
  * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */

@@ -20,7 +20,11 @@ public final class AttributeConverter implements Converter<AttributeDto> {
         Field name = node.getClass().getDeclaredField("name");
 
         name.setAccessible(true);
-        name.set(node, dto.getName());
+        String nodeName = dto.getName();
+        if (nodeName != null) {
+            nodeName = nodeName.replace(" ", "_");
+        }
+        name.set(node, nodeName);
         if (dto.getType() != null) {
             if (dto.getType().equals("reference")) {
                 node.setAttribute("rdf:resource", dto.getValue());

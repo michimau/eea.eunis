@@ -2,6 +2,7 @@ package eionet.eunis.stripes.actions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,8 @@ import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
 import ro.finsiel.eunis.search.Utilities;
+import eionet.eunis.dao.DaoFactory;
+import eionet.eunis.dto.AttributeDto;
 import eionet.eunis.dto.HabitatFactsheetOtherDTO;
 import eionet.eunis.dto.PictureDTO;
 import eionet.eunis.rdf.GenerateHabitatRDF;
@@ -321,7 +324,15 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
 
             descriptions = factsheet.getDescrOwner();
-            art17link = getContext().getNatObjectAttribute(factsheet.idNatureObject, Constants.ART17_SUMMARY);
+
+            Hashtable<String, AttributeDto> natObjectAttributes =
+                DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectAttributes(factsheet.idNatureObject);
+            if (natObjectAttributes != null && natObjectAttributes.size() > 0) {
+                AttributeDto attr = natObjectAttributes.get(Constants.ART17_SUMMARY);
+                if (attr != null) {
+                    art17link = attr.getValue();
+                }
+            }
         } catch(Exception e) {
             e.printStackTrace();
         }

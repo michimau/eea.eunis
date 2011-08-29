@@ -1,7 +1,6 @@
 package eionet.eunis.stripes;
 
 
-import java.util.Hashtable;
 import java.util.Properties;
 
 import net.sourceforge.stripes.action.ActionBeanContext;
@@ -10,9 +9,6 @@ import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.session.SessionManager;
 import ro.finsiel.eunis.utilities.SQLUtilities;
-import eionet.eunis.dao.DaoFactory;
-import eionet.eunis.dto.AttributeDto;
-import eionet.eunis.util.Constants;
 
 
 /**
@@ -46,39 +42,6 @@ public class EunisActionBeanContext extends ActionBeanContext {
             }
         }
         return eunisProperties.getProperty(key);
-    }
-
-    /**
-     * Get nature object attribute. All attributes for the nature object are stored in <em>Session scope</em> the
-     * first time an attribute is needed. It has the side-effect that a user won't see an attribute update
-     * until he closes his browser.
-     *
-     * @param id - id of nature object
-     * @param attr - name of attribute
-     * @return String - value of attribute.
-     */
-    public String getNatObjectAttribute(Integer id, String name) {
-        String ret = null;
-        if (id != null && name != null) {
-            String key = Constants.NAT_OBJECT_ATTRIBUTES_SESSION_KEY + id;
-            Hashtable<String, AttributeDto> hash = (Hashtable<String, AttributeDto>) getRequest().getSession().getAttribute(key);
-            if (hash != null) {
-                AttributeDto attr = hash.get(name);
-                if (attr != null) {
-                    ret = attr.getValue();
-                }
-            } else {
-                Hashtable<String, AttributeDto> h = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectAttributes(id);
-                getRequest().getSession().setAttribute(key, h);
-                if (h != null && h.size() > 0) {
-                    AttributeDto attr = h.get(name);
-                    if (attr != null) {
-                        ret = attr.getValue();
-                    }
-                }
-            }
-        }
-        return ret;
     }
 
     /**

@@ -47,6 +47,7 @@ import com.ibm.icu.util.StringTokenizer;
 
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
+import eionet.eunis.dto.AttributeDto;
 import eionet.eunis.dto.ClassificationDTO;
 import eionet.eunis.dto.DatatypeDto;
 import eionet.eunis.dto.LinkDTO;
@@ -149,6 +150,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private List<SpeciesNatureObjectPersist> subSpecies;
     private String domainName;
     private String urlPic;
+    private Hashtable<String, AttributeDto> natObjectAttributes;
 
     /** Vernacular names tab variables. */
     private List<VernacularNameWrapper> vernNames;
@@ -484,7 +486,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 }
             }
 
-            gbifLink = getContext().getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_GBIF); // specie.getScientificName();
+            gbifLink = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_GBIF); // specie.getScientificName();
             gbifLink2 = specie.getScientificName();
             gbifLink2 = gbifLink2.replaceAll("\\.", "");
             gbifLink2 = URLEncoder.encode(gbifLink2, "UTF-8");
@@ -507,7 +509,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 (scientificName.trim().indexOf(" ") >= 0 ? scientificName.trim().substring(scientificName.indexOf(" ") + 1)
                         : scientificName);
 
-            redlistLink = getContext().getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SPECIES_REDLIST);
+            redlistLink = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SPECIES_REDLIST);
 
             // List of species national threat status.
             if (consStatus != null && consStatus.size() > 0) {
@@ -521,16 +523,16 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
 
             // World Register of Marine Species - also has seals etc.
-            wormsid = getContext().getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_WORMS);
+            wormsid = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_WORMS);
 
-            n2000id = getContext().getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_N2000);
+            n2000id = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_N2000);
 
             if (kingdomname.equalsIgnoreCase("Animals")) {
-                faeu = getContext().getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_FAEU);
+                faeu = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_FAEU);
             }
 
-            itisTSN = getContext().getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_ITIS);
-            ncbi = getContext().getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_NCBI);
+            itisTSN = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_ITIS);
+            ncbi = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_NCBI);
 
             // For attributes that are links to HTML pages.
             // TODO: We need a solution where we can introduce a new attribute name into the database
@@ -549,7 +551,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             links = new ArrayList<LinkDTO>();
             for (String[] linkSet : linkTab) {
-                linkUrl = getContext().getNatObjectAttribute(specie.getIdNatureObject(), linkSet[0]);
+                linkUrl = getNatObjectAttribute(specie.getIdNatureObject(), linkSet[0]);
                 if (linkUrl != null && linkUrl.length() > 0) {
                     LinkDTO linkDTO = new LinkDTO();
 
@@ -593,6 +595,26 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    /**
+     * Get value for given ID_NATURE_OBJECT and attribute name from chm62edt_nature_object_attributes table.
+     *
+     * @param id - The nature object ID.
+     * @param name - attribute name.
+     */
+    private String getNatObjectAttribute(Integer id, String name) {
+        String ret = null;
+        if (id != null && name != null) {
+            if (natObjectAttributes == null) {
+                natObjectAttributes = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectAttributes(id);
+            }
+            AttributeDto attr = natObjectAttributes.get(name);
+            if (attr != null) {
+                ret = attr.getValue();
+            }
+        }
+        return ret;
     }
 
     /**

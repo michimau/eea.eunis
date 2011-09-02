@@ -16,7 +16,7 @@ public class RDFUtil {
     public static String writeReference(final String tag, final String ref) {
         StringBuffer rdf = new StringBuffer();
         if (ref != null && ref.length() > 0) {
-            rdf.append("    <").append(tag).append(" rdf:resource=\"").append(ref).append("\"/>\n");
+            rdf.append("    <").append(tag).append(" rdf:resource=\"").append(StringEscapeUtils.escapeXml(ref)).append("\"/>\n");
         }
         return rdf.toString();
     }

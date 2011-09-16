@@ -44,7 +44,7 @@
     		</tr>
     	</table>
     	<br />
-    	<table summary="${eunis:cms(actionBean.contentManagement, 'geographical_distribution')}" class="listing fullwidth">
+    	<table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'Geographical distribution')}" class="listing fullwidth">
     		<thead>
       			<tr>
         			<th scope="col">
@@ -90,12 +90,10 @@
 				          	${eunis:treatURLSpecialCharacters(region.status)}&nbsp;
 				        </td>
 				        <td>
-							<a href="references/${region.reference}&nbsp;">${eunis:getAuthorAndUrlByIdDc(region.reference)}</a>
+							<a href="references/${region.reference}">${eunis:getAuthorAndUrlByIdDc(region.reference)}</a>
 				        </td>
     			</c:forEach>
     		</tbody>
     	</table>
 	</c:if>
-	${eunis:br(actionBean.contentManagement)}
-	${eunis:cmsMsg(actionBean.contentManagement, 'geographical_distribution')}
 </stripes:layout-definition>

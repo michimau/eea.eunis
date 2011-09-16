@@ -7,8 +7,7 @@
 			<!-- MAIN CONTENT -->
 				<h1 class="documentFirstHeading">${actionBean.dcIndex.title}</h1>
 				<div class="documentActions">
-					<h5 class="hiddenStructure">${eunis:cms(actionBean.contentManagement, 'Reference Actions')}</h5>
-					${eunis:cmsTitle(actionBean.contentManagement, 'Reference Actions')}
+					<h5 class="hiddenStructure">${eunis:cmsPhrase(actionBean.contentManagement, 'Reference Actions')}</h5>
 					<ul>
 						<li>
 							<a href="javascript:this.print();">

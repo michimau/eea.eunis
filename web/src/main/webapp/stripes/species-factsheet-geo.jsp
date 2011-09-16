@@ -4,7 +4,7 @@
 	<script type="text/javascript">
 		dojo.require("esri.map");
 		function init() {
-        	var initialExtent = new esri.geometry.Extent({"xmin":-3549139.09145218,"ymin":4871361.38436808,"xmax":5129676.02317436,"ymax":11227551.8207187,"spatialReference":{"wkid":102100}});
+        	var initialExtent = new esri.geometry.Extent({"xmin":-3549139.09145218,"ymin":4771361.38436808,"xmax":5129676.02317436,"ymax":11127551.8207187,"spatialReference":{"wkid":102100}});
 
         	var map = new esri.Map("map", {extent: initialExtent});
         	var tiledMapServiceLayer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer");
@@ -36,13 +36,8 @@
 		<h2>
 	    	${eunis:cmsPhrase(actionBean.contentManagement, 'Geographical distribution')}
 	  	</h2>
-    	<table summary="layout" border="0" cellpadding="3" cellspacing="0" width="90%">
-    		<tr>
-    			<td>
-    				<div id="map" style="width:450px; height:300px; border:1px solid #000;"></div>
-    			</td>
-    		</tr>
-    	</table>
+		<div id="map" style="width:600px; height:400px; border:1px solid #000; margin: 1em"></div>
+        <c:if test="1 == 0">
     	<br />
     	<table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'Geographical distribution')}" class="listing fullwidth">
     		<thead>
@@ -95,5 +90,6 @@
     			</c:forEach>
     		</tbody>
     	</table>
+    	</c:if>
 	</c:if>
 </stripes:layout-definition>

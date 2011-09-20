@@ -1,4 +1,4 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@page import="eionet.eunis.stripes.actions.UpdateTemplateActionBean;" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
-<%= SessionManager.getWebContent().getTextByMD5(UpdateTemplateActionBean.FOOTER)%>
+<%= SessionManager.getWebContent().getText(UpdateTemplateActionBean.FOOTER)%>

@@ -3,9 +3,9 @@ triplify = {}
 
 triplify['baseurl'] = "http://eunis.eea.europa.eu/"
 
-triplify['database'] = "eunis"
-triplify['user'] = "dbuser"
-triplify['password'] = "dbpasswd"
+triplify['database'] = "eunisimport"
+triplify['user'] = "eunisimp"
+triplify['password'] = "monetmanet"
 
 # Triplify uses URIs to identify objects. In order to simplify their handling
 # you should define shortcuts (i.e. namespace prefixes) for all namespaces
@@ -71,11 +71,15 @@ triplify['queries']= {
                     IF(id_dc=-1,NULL,id_dc) AS hasReference, area_type
                     FROM chm62edt_geoscope""",
       'biogeoregions':
-                   """ SELECT CODE AS id,
+                   (""" SELECT CODE AS id,
                        CODE_EEA AS codeEEA,
                        NAME AS areaName,
-                       CONCAT('http://rdfdata.eionet.europa.eu/eu/biogeographic-regions/',RIGHT(CODE_EEA,3)) AS 'owl:sameAs->'
+                       CONCAT('http://rdfdata.eionet.europa.eu/eea/biogeographic-regions/',RIGHT(CODE_EEA,3)) AS 'owl:sameAs->'
                        FROM chm62edt_biogeoregion WHERE CODE_EEA <>'nd'""",
+                   """ SELECT CODE_BIOGEOREGION AS id,
+                       CODE_COUNTRY AS hasCountry
+                       FROM chm62edt_country_biogeoregion
+                       WHERE CODE_BIOGEOREGION<>'nd'"""),
 
 
         'speciesgroup': """SELECT ID_GROUP_SPECIES AS id, common_name, scientific_name FROM chm62edt_group_species""",
@@ -118,6 +122,7 @@ triplify['objectProperties']= {
         'forBioGeoRegion': 'biogeoregions',
         'hasBioGeoRegion': 'countrybiogeo',
         'forCountry': 'countries',
+        'hasCountry': 'countries',
 }
 
 # Objects are classified according to their type. However, you can specify

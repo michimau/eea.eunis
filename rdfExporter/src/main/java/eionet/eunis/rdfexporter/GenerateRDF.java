@@ -36,19 +36,28 @@ class RDFField {
  * RDF generator.
  */
 public class GenerateRDF {
+    /** Base of XML file. */
     private String baseurl;
+    /** Connection to database. */
     private Connection con;
-    private StringBuffer out;
-    private RDFField names[];
+    /** Names, types and langcodes of columns. */
+    private RDFField[] names;
+    /** The URL of the null namespace. */
     private String nullNamespace;
+    /** The namespaces to add to the rdf:RDF element. */
     private HashMap namespaces;
+    /** The properties that are object properties. They point to another object. */
     private HashMap objectProperties;
+    /** All the tables in the properties file. */
     private String[] tables;
+    /** Hashtable of loaded properties. */
     private Properties props;
+    /** The output stream to send output to. */
     private PrintStream outputStream;
 
     /**
      * Constructor.
+     * @param writer - The output stream to send output to
      */
     public GenerateRDF(PrintStream writer) throws IOException, FileNotFoundException,
                                 SQLException, ClassNotFoundException,
@@ -58,7 +67,7 @@ public class GenerateRDF {
         String driver;
         String userName;
         String password;
-       
+
         outputStream = writer;
         props.load(getClass().getClassLoader().getResourceAsStream("rdfexport.properties"));
 //      props.load(new FileInputStream("rdfexport.properties"));
@@ -76,7 +85,7 @@ public class GenerateRDF {
         baseurl = props.getProperty("baseurl");
 
         namespaces = new HashMap();
-        namespaces.put("rdf","http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+        namespaces.put("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
 
         objectProperties = new HashMap();
         // Get the namespaces from the properties file.
@@ -93,17 +102,21 @@ public class GenerateRDF {
 
     /**
      * Do a nice shutdown in case the user forgets to call close().
+     *
+     * @throws Throwable - ignored
      */
     protected void finalize() throws Throwable {
-	try {
+        try {
             close();
-	} finally {
-	    super.finalize();
-	}
+        } finally {
+            super.finalize();
+        }
     }
 
     /**
      * Close the connection to the database.
+     *
+     * @throws SQLException if there is a database problem.
      */
     public void close() throws SQLException {
         if (con != null) {
@@ -128,7 +141,7 @@ public class GenerateRDF {
      * @param value from database.
      */
     private void writeProperty(RDFField property, Object value) {
-        String typelang_attr = "";
+        String typelangAttr = "";
 
         if (value == null) {
             return;
@@ -153,11 +166,11 @@ public class GenerateRDF {
             if (property.datatype.startsWith("xsd:")) {
                 property.datatype = "http://www.w3.org/2001/XMLSchema#" + property.datatype.substring(4);
             }
-            typelang_attr = " rdf:datatype=\"" + property.datatype + '"';
+            typelangAttr = " rdf:datatype=\"" + property.datatype + '"';
         } else if (!"".equals(property.langcode)) {
-            typelang_attr = " xml:lang=\"" + property.langcode + '"';
+            typelangAttr = " xml:lang=\"" + property.langcode + '"';
         }
-        output(typelang_attr);
+        output(typelangAttr);
         output(">");
         output(value.toString());
         output("</");
@@ -172,10 +185,11 @@ public class GenerateRDF {
      *
      *  @param query - SQL query to patch
      *  @param identifier to insert into query
+     *  @return patched SQL query
      */
     private String injectIdentifier(String query, String identifier) {
-        String[] keywords = {" order ", " limit ", " procedure "," into ", " for ", " lock " };
-        String lquery = query.toLowerCase().replace("\n"," ");
+        String[] keywords = {" order ", " limit ", " procedure ", " into ", " for ", " lock " };
+        String lquery = query.toLowerCase().replace("\n", " ");
         int insertBefore = lquery.length();
         for (String k : keywords) {
             int i = lquery.indexOf(k);
@@ -185,9 +199,11 @@ public class GenerateRDF {
         }
         int h = lquery.indexOf(" having ");
         if (h == -1) {
-            query = query.substring(0, insertBefore) +  " HAVING id='" + identifier.replace("'","''") + "'" + query.substring(insertBefore);
+            query = query.substring(0, insertBefore) + " HAVING id='" + identifier.replace("'", "''") + "'"
+                    + query.substring(insertBefore);
         } else {
-            query = query.substring(0, h + 8) +  "id='" + identifier.replace("'","''") + "' AND " + query.substring(h + 8);
+            query = query.substring(0, h + 8) +  "id='" + identifier.replace("'", "''") + "' AND "
+                    + query.substring(h + 8);
         }
         return query;
     }
@@ -236,6 +252,9 @@ public class GenerateRDF {
 
     /**
      * Add namespace to table.
+     *
+     * @param name - namespace token.
+     * @param url - namespace url.
      */
     private void addNamespace(String name, String url) {
         namespaces.put(name, url);
@@ -243,6 +262,9 @@ public class GenerateRDF {
 
     /**
      * Add name of property to table of object properties.
+     *
+     * @param name - name of column.
+     * @param reference - will always start with '->'.
      */
     private void addObjectProperty(String name, String reference) {
         objectProperties.put(name, reference);
@@ -250,6 +272,8 @@ public class GenerateRDF {
 
     /**
      * Set the vocabulary in case it needs to be different from the properties file.
+     *
+     * @param url - namespace url.
      */
     public void setVocabulary(String url) {
         nullNamespace = url;
@@ -291,6 +315,7 @@ public class GenerateRDF {
      * Run a query.
      *
      * @param segment - the namespace of the table
+     * @param sql - the query to run.
      * @param rdfClass - the class to assign or rdf:Description
      */
     private void runQuery(String segment, String sql, String rdfClass) {
@@ -330,13 +355,15 @@ public class GenerateRDF {
     /**
      * Get the metadata from the columns. Check what datatype the database delivers.
      * but override if the user has specified something else in the column label.
+     *
+     * @param rsmd - metadata extracted from database.
      */
     private void queryStruct(ResultSetMetaData rsmd) throws SQLException {
         String dbDatatype;
         String rdfDatatype = "";
         int numcols = rsmd.getColumnCount();
 
-        this.names = new RDFField[numcols+1];
+        this.names = new RDFField[numcols + 1];
 
         for (int i = 1; i <= numcols; i++) {
             dbDatatype = rsmd.getColumnTypeName(i);
@@ -363,6 +390,9 @@ public class GenerateRDF {
      *      hasRef->expert becomes "hasRef","->expert",""
      *      price^^xsd:decimal becomes "price","xsd:decimal",""
      *      rdfs:label@fr becomes "rdfs:label","","fr"
+     *
+     * @param complexname - name containing column name plus datatype or language code.
+     * @param datatype - suggested datatype from database.
      * @return RDFField - struct of three strings: Name, datatype and langcode.
      */
     private RDFField parseName(String complexname, String datatype) {
@@ -396,6 +426,8 @@ public class GenerateRDF {
 
     /**
      * Main routine. Primarily to demonstrate the use.
+     *
+     * @param args - command line arguments.
      */
     public static void main(String[] args) {
         ArrayList unusedArgs;
@@ -406,6 +438,7 @@ public class GenerateRDF {
 
         // Parse arguments. Just find an -i option
         // The -i takes an argument that is the record id we're interested in
+        // variable "i" is in fact used.
         for (int a = 0, i = 0; a < args.length; a++) {
             if (args[a].equals("-i")) {
                 identifier = args[++a];

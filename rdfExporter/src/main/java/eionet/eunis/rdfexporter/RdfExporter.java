@@ -5,6 +5,9 @@ import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.PrintStream;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -405,9 +408,9 @@ public class RdfExporter {
     public static void main(String... args) {
         if (args.length == 0) {
             logger.error("Missing argument what to import: sites/species/taxonomies/habitats/designations");
-        } else if (!args[0].equals("sites") && !args[0].equals("species") && !args[0].equals("taxonomies")
-                && !args[0].equals("habitats") && !args[0].equals("designations")) {
-            logger.error("Usage: rdfExporter {sites|species|taxonomies|habitats|designations} [limit] [offset]");
+//      } else if (!args[0].equals("sites") && !args[0].equals("species") && !args[0].equals("taxonomies")
+//              && !args[0].equals("habitats") && !args[0].equals("designations")) {
+//          logger.error("Usage: rdfExporter {sites|species|taxonomies|habitats|designations} [limit] [offset]");
         } else {
             logger.info("RDF exporter started");
             long startTime = System.currentTimeMillis();
@@ -446,6 +449,22 @@ public class RdfExporter {
             } else if (what != null && what.equals("designations")) {
                 exporter.exportDesignations();
                 exportedCnt = "Totally exported " + DesignationExportTask.getNumberOfExportedDesignations() + " designations.";
+            } else {
+                try {
+                    PrintStream outputStream = new PrintStream(what + ".rdf");
+                    GenerateRDF r = new GenerateRDF(outputStream);
+
+                    if ("taxonomy".equals(what)) {
+                        r.setVocabulary("http://eunis.eea.europa.eu/rdf/taxonomies-schema.rdf#");
+                    }
+                    r.rdfHeader();
+                    r.exportTable(what);
+                    r.rdfFooter();
+                    r.close();
+                    exportedCnt = "";
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             long endTime = System.currentTimeMillis();

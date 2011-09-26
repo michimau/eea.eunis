@@ -3,9 +3,9 @@ package eionet.eunis.rdfexporter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.Arrays;
 
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -63,14 +63,13 @@ public class GenerateRDF {
     /**
      * Constructor.
      * @param writer - The output stream to send output to
-     * @throws IOException
-     * @throws FileNotFoundException - if the properties file is missing
+     * @throws IOException - if the properties file is missing
      * @throws SQLException - if the SQL database is not available
      * @throws ClassNotFoundException - if the SQL driver is unavailable
      * @throws InstantiationException - if the SQL driver can't be instantiatied
-     * @throws IllegalAccessException
+     * @throws IllegalAccessException - unknown
      */
-    public GenerateRDF(PrintStream writer) throws IOException, FileNotFoundException,
+    public GenerateRDF(PrintStream writer) throws IOException,
                                 SQLException, ClassNotFoundException,
                                 InstantiationException, IllegalAccessException {
         props = new Properties();
@@ -225,7 +224,7 @@ public class GenerateRDF {
      * @return list of strings.
      */
     public String[] getAllTables() {
-        return tables;
+        return Arrays.copyOf(tables, tables.length);
     }
 
     /**
@@ -358,6 +357,7 @@ public class GenerateRDF {
                     output(">\n");
                 }
             }
+            stmt.close();
         } catch (SQLException e) {
             output("ERROR: " + e.getMessage());
         }

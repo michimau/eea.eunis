@@ -1,6 +1,5 @@
 package eionet.eunis.rdfexporter;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -21,10 +20,16 @@ import org.apache.commons.lang.StringEscapeUtils;
  * No need to do data encapsulation.
  */
 class RDFField {
+    /** Name of column. */
     String name;
+    /** Datatype of column. */
     String datatype;
+    /** Language code of column. */
     String langcode;
 
+    /**
+     * Constructor.
+     */
     RDFField() {
         name = "";
         datatype = "";
@@ -58,6 +63,12 @@ public class GenerateRDF {
     /**
      * Constructor.
      * @param writer - The output stream to send output to
+     * @throws IOException
+     * @throws FileNotFoundException - if the properties file is missing
+     * @throws SQLException - if the SQL database is not available
+     * @throws ClassNotFoundException - if the SQL driver is unavailable
+     * @throws InstantiationException - if the SQL driver can't be instantiatied
+     * @throws IllegalAccessException
      */
     public GenerateRDF(PrintStream writer) throws IOException, FileNotFoundException,
                                 SQLException, ClassNotFoundException,
@@ -357,6 +368,7 @@ public class GenerateRDF {
      * but override if the user has specified something else in the column label.
      *
      * @param rsmd - metadata extracted from database.
+     * @throws SQLException - if the SQL database is not available
      */
     private void queryStruct(ResultSetMetaData rsmd) throws SQLException {
         String dbDatatype;
@@ -424,11 +436,7 @@ public class GenerateRDF {
         return result;
     }
 
-    /**
-     * Main routine. Primarily to demonstrate the use.
-     *
-     * @param args - command line arguments.
-     */
+    /*
     public static void main(String[] args) {
         ArrayList unusedArgs;
         String[] tables;
@@ -472,5 +480,6 @@ public class GenerateRDF {
         }
 
     }
+    */
 }
 //vim: set expandtab sw=4 :

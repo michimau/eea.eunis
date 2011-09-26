@@ -5,8 +5,6 @@ import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.PrintStream;
 
 import org.apache.commons.lang.StringUtils;
@@ -64,7 +62,6 @@ public class RdfExporter {
      */
     public void init(String numberOfObjectsToImport, String offset) {
         String jdbcDriver = null;
-        ;
         String jdbcUrl = null;
         String jdbcUser = null;
         String jdbcPassword = null;
@@ -403,7 +400,7 @@ public class RdfExporter {
     /**
      * main method.
      *
-     * @param args
+     * @param args - Command line arguments
      */
     public static void main(String... args) {
         if (args.length == 0) {
@@ -446,7 +443,7 @@ public class RdfExporter {
             } else if (what != null && what.equals("habitats")) {
                 exporter.exportHabitats();
                 exportedCnt = "Totally exported " + HabitatExportTask.getNumberOfExportedHabitats() + " habitat types.";
-            } else if (what != null && what.equals("designations")) {
+            } else if ("designations".equals(what)) {
                 exporter.exportDesignations();
                 exportedCnt = "Totally exported " + DesignationExportTask.getNumberOfExportedDesignations() + " designations.";
             } else {

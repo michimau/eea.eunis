@@ -47,61 +47,61 @@
 	                <h2>Reference information:</h2>
 					<table width="90%" class="datatable">
 						<col style="width:20%"/>
-                  		<col style="width:80%"/>
+						<col style="width:80%"/>
 						<tr>
-							<td>Title</td>
-							<td><strong>${eunis:replaceTags(actionBean.dcIndex.title)}</strong></td>
+							<th scope="row">Title</th>
+							<td>${eunis:replaceTags(actionBean.dcIndex.title)}</td>
 						</tr>
 						<tr class="zebraeven">
-							<td>Alternative title</td>
-							<td><strong>${eunis:replaceTags(actionBean.dcIndex.alternative)}</strong></td>
+							<th scope="row">Alternative title</th>
+							<td>${eunis:replaceTags(actionBean.dcIndex.alternative)}</td>
 						</tr>
 						<tr>
-							<td>Source</td>
-							<td><strong>${eunis:replaceTags(actionBean.dcIndex.source)}</strong></td>
+							<th scope="row">Source</th>
+							<td>${eunis:replaceTags(actionBean.dcIndex.source)}</td>
 						</tr>
 						<tr class="zebraeven">
-							<td>Editor</td>
-							<td><strong>${eunis:replaceTags(actionBean.dcIndex.editor)}</strong></td>
+							<th scope="row">Editor</th>
+							<td>${eunis:replaceTags(actionBean.dcIndex.editor)}</td>
 						</tr>
 						<tr>
-							<td>Journal Title</td>
-							<td><strong>${eunis:replaceTags(actionBean.dcIndex.journalTitle)}</strong></td>
+							<th scope="row">Journal Title</th>
+							<td>${eunis:replaceTags(actionBean.dcIndex.journalTitle)}</td>
 						</tr>
 						<tr class="zebraeven">
-							<td>Book Title</td>
-							<td><strong>${eunis:replaceTags(actionBean.dcIndex.bookTitle)}</strong></td>
+							<th scope="row">Book Title</th>
+							<td>${eunis:replaceTags(actionBean.dcIndex.bookTitle)}</td>
 						</tr>
 						<tr>
-							<td>Journal Issue</td>
-							<td><strong>${actionBean.dcIndex.journalIssue}</strong></td>
+							<th scope="row">Journal Issue</th>
+							<td>${actionBean.dcIndex.journalIssue}</td>
 						</tr>
 						<tr class="zebraeven">
-							<td>ISBN</td>
-							<td><strong>${actionBean.dcIndex.isbn}</strong></td>
+							<th scope="row">ISBN</th>
+							<td>${actionBean.dcIndex.isbn}</td>
 						</tr>
 						<tr>
-							<td>URL</td>
+							<th scope="row">URL</th>
 							<td><a href="${eunis:replaceTags(actionBean.dcIndex.url)}">${eunis:replaceTags(actionBean.dcIndex.url)}</a></td>
 						</tr>
 						<tr class="zebraeven">
-							<td>Created</td>
-							<td><strong>${actionBean.dcIndex.created}</strong></td>
+							<th scope="row">Created</th>
+							<td>${actionBean.dcIndex.created}</td>
 						</tr>
 						<tr>
-							<td>Publisher</td>
-							<td><strong>${eunis:replaceTags(actionBean.dcIndex.publisher)}</strong></td>
+							<th scope="row">Publisher</th>
+							<td>${eunis:replaceTags(actionBean.dcIndex.publisher)}</td>
 						</tr>
 						<c:if test="${!empty actionBean.dcAttributes}">
 							<c:forEach items="${actionBean.dcAttributes}" var="attr" varStatus="loop">
 								<tr ${loop.index % 2 != 0 ? '' : 'class="zebraeven"'}>
-									<td>${actionBean.dcTermsLabels[attr.name]}</td>
+									<th scope="row">${actionBean.dcTermsLabels[attr.name]}</th>
 									<c:choose>
 				              			<c:when test="${attr.type == 'reference'}">
 					              			<td><a href="${eunis:replaceTags(attr.value)}">${eunis:replaceTags(attr.value)}</a></td>
 				              			</c:when>
 				              			<c:otherwise>
-				              				<td><strong>${eunis:replaceTags(attr.value)}</strong></td>
+				              				<td>${eunis:replaceTags(attr.value)}</td>
 				              			</c:otherwise>
 				              		</c:choose>
 								</tr>

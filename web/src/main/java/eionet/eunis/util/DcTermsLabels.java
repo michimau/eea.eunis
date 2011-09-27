@@ -70,6 +70,7 @@ public final class DcTermsLabels {
         dcTermsLabels.put("type", "Type");
         dcTermsLabels.put("valid", "Date Valid");
         dcTermsLabels.put("rdf:type", "Type");
+        dcTermsLabels.put("owl:sameAs", "Same As");
     }
 
     public static Map<String, String> getDctermslabels() {

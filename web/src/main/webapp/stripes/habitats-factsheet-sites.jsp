@@ -3,7 +3,7 @@
 <stripes:layout-definition>
 	<c:set var="cm" value="${actionBean.contentManagement}"/>
 	<c:if test="${!empty actionBean.sites || !empty actionBean.sitesForSubtypes}">
-		<c:if test="${!empty actionBean.mapIds}">
+		<c:if test="${0==1 and !empty actionBean.mapIds}">
 			<form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
 		    	<input type="hidden" name="sites" value="${actionBean.mapIds}" />
 		    	<input type="submit" name="Show map" id="ShowMap" value="${eunis:cms(cm, 'show_map')}" title="${eunis:cms(cm, 'show_map')}" class="standardButton" />

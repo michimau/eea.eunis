@@ -1,6 +1,5 @@
 package eionet.eunis.rdfexporter;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.HashMap;
@@ -258,6 +257,19 @@ public class GenerateRDF {
                 firstQuery = false;
             }
         }
+
+        String tableAttributesKey = table.concat(".attributetable");
+
+        for (String key : props.stringPropertyNames()) {
+            if (key.startsWith(tableAttributesKey)) {
+                String query = props.getProperty(key);
+                if (identifier != null) {
+                    query = injectIdentifier(query, identifier);
+                }
+                runAttributes(table, query, firstQuery ? rdfClass : "rdf:Description");
+                firstQuery = false;
+            }
+        }
     }
 
     /**
@@ -358,6 +370,62 @@ public class GenerateRDF {
                 }
             }
             stmt.close();
+        } catch (SQLException e) {
+            output("ERROR: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Query attributes table. The result must have five columns.
+     *  1. id, 2. attribute name, 3. value, 4. datatype, 5. languagecode
+     *
+     * @param segment - the namespace of the table
+     * @param sql - the query
+     * @param rdfClass - the class to assign or rdf:Description
+     */
+    private void runAttributes(String segment, String sql, String rdfClass) {
+        try {
+            Statement stmt = con.createStatement();
+            String currentId = null;
+            Boolean firstTime = true;
+
+            if (stmt.execute(sql)) {
+                ResultSet rs = stmt.getResultSet();
+
+                while (rs.next()) {
+                    RDFField property = new RDFField();
+                    if (rs.getObject(1) == null) {
+                        continue;
+                    }
+                    String id = rs.getObject(1).toString();
+                    if (!id.equals(currentId)) {
+                        if (!firstTime) {
+                            output("</");
+                            output(rdfClass);
+                            output(">\n");
+                            firstTime = false;
+                        }
+                        output("<");
+                        output(rdfClass);
+                        output(" rdf:about=\"");
+                        output(segment);
+                        output("/");
+                        output(id);
+                        output("\">\n");
+                        currentId = id;
+                    }
+
+                    property.name = rs.getObject(2).toString();
+                    property.datatype = rs.getObject(4).toString();
+                    property.langcode = rs.getObject(5).toString();
+                    writeProperty(property, rs.getObject(3));
+                    if (!firstTime) {
+                        output("</");
+                        output(rdfClass);
+                        output(">\n");
+                    }
+                }
+            }
         } catch (SQLException e) {
             output("ERROR: " + e.getMessage());
         }

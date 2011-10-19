@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Connection;
-import org.apache.commons.lang.StringEscapeUtils;
 
 /**
  * A struct to hold a complex type.
@@ -33,6 +32,72 @@ class RDFField {
         name = "";
         datatype = "";
         langcode = "";
+    }
+}
+
+
+/**
+ * Class to help XML escape strings.
+ * @see http://www.java2s.com/Tutorial/Java/0120__Development/EscapeHTML.htm
+ */
+class StringHelper {
+    /**
+     * Escape characters that have special meaning in XML.
+     *
+     * @param s - The string to escape.
+     * @return escaped string.
+     */
+    public static String escapeXml(String s) {
+        int length = s.length();
+        int newLength = length;
+        // first check for characters that might
+        // be dangerous and calculate a length
+        // of the string that has escapes.
+        for (int i = 0; i < length; i++) {
+            char c = s.charAt(i);
+            switch (c) {
+              case '\"':{
+                  newLength += 5;
+              } break;
+              case '&':
+              case '\'':{
+                  newLength += 4;
+              } break;
+              case '<':
+              case '>':{
+                  newLength += 3;
+              } break;
+            }
+        }
+        if (length == newLength) {
+            // nothing to escape in the string
+            return s;
+        }
+        StringBuffer sb = new StringBuffer(newLength);
+        for (int i = 0; i < length; i++) {
+            char c = s.charAt(i);
+            switch (c) {
+                case '\"':{
+                    sb.append("&quot;");
+                } break;
+                case '\'':{
+                    sb.append("&#39;");
+                } break;
+                case '&':{
+                    sb.append("&amp;");
+                } break;
+                case '<':{
+                    sb.append("&lt;");
+                } break;
+                case '>':{
+                    sb.append("&gt;");
+                } break;
+                default: {
+                    sb.append(c);
+                }
+            }
+        }
+        return sb.toString();
     }
 }
 
@@ -161,13 +226,13 @@ public class GenerateRDF {
             // Handle pointers
             if (property.datatype.length() == 2) {
                 output(" rdf:resource=\"");
-                output(StringEscapeUtils.escapeXml(value.toString()));
+                output(StringHelper.escapeXml(value.toString()));
                 output("\"/>\n");
             } else {
                 output(" rdf:resource=\"");
                 output(property.datatype.substring(2));
                 output("/");
-                output(StringEscapeUtils.escapeXml(value.toString()));
+                output(StringHelper.escapeXml(value.toString()));
                 output("\"/>\n");
             }
             return;
@@ -181,7 +246,7 @@ public class GenerateRDF {
         }
         output(typelangAttr);
         output(">");
-        output(value.toString());
+        output(StringHelper.escapeXml(value.toString()));
         output("</");
         output(property.name);
         output(">\n");
@@ -403,7 +468,6 @@ public class GenerateRDF {
                             output("</");
                             output(rdfClass);
                             output(">\n");
-                            firstTime = false;
                         }
                         output("<");
                         output(rdfClass);
@@ -413,17 +477,18 @@ public class GenerateRDF {
                         output(id);
                         output("\">\n");
                         currentId = id;
+                        firstTime = false;
                     }
 
                     property.name = rs.getObject(2).toString();
                     property.datatype = rs.getObject(4).toString();
                     property.langcode = rs.getObject(5).toString();
                     writeProperty(property, rs.getObject(3));
-                    if (!firstTime) {
-                        output("</");
-                        output(rdfClass);
-                        output(">\n");
-                    }
+                }
+                if (!firstTime) {
+                    output("</");
+                    output(rdfClass);
+                    output(">\n");
                 }
             }
         } catch (SQLException e) {
@@ -466,8 +531,8 @@ public class GenerateRDF {
 
     /**
      * Parses a column label. It can be parsed into three parts: name, datatype, language.
-     *      hasRef-> becomes "hasRef","->",""
-     *      hasRef->expert becomes "hasRef","->expert",""
+     *      hasRef-&gt; becomes "hasRef","-&gt;",""
+     *      hasRef-&gt;expert becomes "hasRef","-&gt;expert",""
      *      price^^xsd:decimal becomes "price","xsd:decimal",""
      *      rdfs:label@fr becomes "rdfs:label","","fr"
      *

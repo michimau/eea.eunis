@@ -511,15 +511,16 @@ public class GenerateRDF {
         this.names = new RDFField[numcols + 1];
 
         for (int i = 1; i <= numcols; i++) {
-            dbDatatype = rsmd.getColumnTypeName(i);
+            dbDatatype = rsmd.getColumnTypeName(i).toLowerCase();
             //TODO: implement all types, perhaps even implement mapping in properties file.
-            if ("VARCHAR".equals(dbDatatype) || "CHAR".equals(dbDatatype)) {
+            rdfDatatype = "";
+            if ("varchar".equals(dbDatatype) || "char".equals(dbDatatype) || "nvarchar".equals(dbDatatype)) {
                 rdfDatatype = "";
-            } else if ("INT".equals(dbDatatype)) {
+            } else if ("int".equals(dbDatatype)) {
                 rdfDatatype = "xsd:integer";
-            } else if ("DATETIME".equals(dbDatatype)) {
+            } else if ("datetime".equals(dbDatatype)) {
                 rdfDatatype = "xsd:dateTime";
-            } else if ("DECIMAL".equals(dbDatatype)) {
+            } else if ("decimal".equals(dbDatatype)) {
                 rdfDatatype = "xsd:decimal";
             }
             if (objectProperties.containsKey(rsmd.getColumnLabel(i))) {

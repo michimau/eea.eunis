@@ -56,17 +56,19 @@ class StringHelper {
         for (int i = 0; i < length; i++) {
             char c = s.charAt(i);
             switch (c) {
-              case '\"':{
-                  newLength += 5;
-              } break;
-              case '&':
-              case '\'':{
-                  newLength += 4;
-              } break;
-              case '<':
-              case '>':{
-                  newLength += 3;
-              } break;
+                case '\"':
+                    newLength += 5;
+                    break;
+                case '&':
+                case '\'':
+                    newLength += 4;
+                    break;
+                case '<':
+                case '>':
+                    newLength += 3;
+                    break;
+                default:
+                    break;
             }
         }
         if (length == newLength) {
@@ -77,24 +79,23 @@ class StringHelper {
         for (int i = 0; i < length; i++) {
             char c = s.charAt(i);
             switch (c) {
-                case '\"':{
+                case '\"':
                     sb.append("&quot;");
-                } break;
-                case '\'':{
+                    break;
+                case '\'':
                     sb.append("&#39;");
-                } break;
-                case '&':{
+                    break;
+                case '&':
                     sb.append("&amp;");
-                } break;
-                case '<':{
+                    break;
+                case '<':
                     sb.append("&lt;");
-                } break;
-                case '>':{
+                    break;
+                case '>':
                     sb.append("&gt;");
-                } break;
-                default: {
+                    break;
+                default:
                     sb.append(c);
-                }
             }
         }
         return sb.toString();
@@ -434,9 +435,10 @@ public class GenerateRDF {
                     output(">\n");
                 }
             }
-            stmt.close();
         } catch (SQLException e) {
             output("ERROR: " + e.getMessage());
+        } finally {
+            stmt.close();
         }
     }
 
@@ -493,6 +495,8 @@ public class GenerateRDF {
             }
         } catch (SQLException e) {
             output("ERROR: " + e.getMessage());
+        } finally {
+            stmt.close();
         }
     }
 

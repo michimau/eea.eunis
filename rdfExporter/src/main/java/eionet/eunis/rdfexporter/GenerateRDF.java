@@ -296,8 +296,9 @@ public class GenerateRDF {
      * Export a table as RDF. A table can consist of several queries.
      *
      * @param table - name of table in properties file
+     * @throws SQLException if there is a database problem.
      */
-    public void exportTable(String table) {
+    public void exportTable(String table) throws SQLException {
         exportTable(table, null);
     }
 
@@ -306,8 +307,9 @@ public class GenerateRDF {
      *
      * @param table - name of table in properties file
      * @param identifier - primary key of the record we want or null for all records.
+     * @throws SQLException if there is a database problem.
      */
-    public void exportTable(String table, String identifier) {
+    public void exportTable(String table, String identifier) throws SQLException {
         Boolean firstQuery = true;
         String rdfClass = table.substring(0, 1).toUpperCase() + table.substring(1).toLowerCase();
         rdfClass = props.getProperty(table.concat(".class"), rdfClass);
@@ -405,10 +407,12 @@ public class GenerateRDF {
      * @param segment - the namespace of the table
      * @param sql - the query to run.
      * @param rdfClass - the class to assign or rdf:Description
+     * @throws SQLException - if the SQL database is not available
      */
-    private void runQuery(String segment, String sql, String rdfClass) {
+    private void runQuery(String segment, String sql, String rdfClass) throws SQLException {
+        Statement stmt = null;
         try {
-            Statement stmt = con.createStatement();
+            stmt = con.createStatement();
 
             if (stmt.execute(sql)) {
                 // There's a ResultSet to be had
@@ -435,10 +439,10 @@ public class GenerateRDF {
                     output(">\n");
                 }
             }
-        } catch (SQLException e) {
-            output("ERROR: " + e.getMessage());
         } finally {
-            stmt.close();
+            if (stmt != null) {
+                stmt.close();
+            }
         }
     }
 
@@ -449,10 +453,12 @@ public class GenerateRDF {
      * @param segment - the namespace of the table
      * @param sql - the query
      * @param rdfClass - the class to assign or rdf:Description
+     * @throws SQLException - if the SQL database is not available
      */
-    private void runAttributes(String segment, String sql, String rdfClass) {
+    private void runAttributes(String segment, String sql, String rdfClass) throws SQLException {
+        Statement stmt = null;
         try {
-            Statement stmt = con.createStatement();
+            stmt = con.createStatement();
             String currentId = null;
             Boolean firstTime = true;
 
@@ -493,10 +499,10 @@ public class GenerateRDF {
                     output(">\n");
                 }
             }
-        } catch (SQLException e) {
-            output("ERROR: " + e.getMessage());
         } finally {
-            stmt.close();
+            if (stmt != null) {
+                stmt.close();
+            }
         }
     }
 

@@ -42,6 +42,12 @@ class RDFField {
  */
 class StringHelper {
     /**
+     * Constructor. Since all methods are static we don't want instantiations of the class.
+     */
+    private StringHelper() {
+        throw new UnsupportedOperationException();
+    }
+    /**
      * Escape characters that have special meaning in XML.
      *
      * @param s - The string to escape.

@@ -1,6 +1,5 @@
 package eionet.eunis.dto;
 
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,11 +8,10 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
-
 /**
  * @author alex
- *
- * <a href="mailto:aleks21@gmail.com">contact<a>
+ * 
+ *         <a href="mailto:aleks21@gmail.com">contact<a>
  */
 @Root(strict = false, name = "SpeciesSynonym")
 public class SpeciesFactsheetDto implements Serializable {
@@ -24,9 +22,8 @@ public class SpeciesFactsheetDto implements Serializable {
     private static final long serialVersionUID = -6343981482733538221L;
 
     public static final String HEADER = "<rdf:RDF " + "xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
-    + "xmlns:dwc=\"http://rs.tdwg.org/dwc/terms/\" \n"
-    + "xmlns:foaf=\"http://xmlns.com/foaf/0.1/\" \n"
-    + "xmlns =\"http://eunis.eea.europa.eu/rdf/species-schema.rdf#\">\n";
+            + "xmlns:dwc=\"http://rs.tdwg.org/dwc/terms/\" \n" + "xmlns:foaf=\"http://xmlns.com/foaf/0.1/\" \n"
+            + "xmlns =\"http://eunis.eea.europa.eu/rdf/species-schema.rdf#\">\n";
 
     private static final String DOMAIN_LOCATION = "http://eunis.eea.europa.eu/species/";
 
@@ -89,6 +86,9 @@ public class SpeciesFactsheetDto implements Serializable {
 
     @ElementList(required = false, inline = true, entry = "isExpectedIn")
     private List<ResourceDto> expectedInLocations;
+
+    @ElementList(required = false, inline = true, entry = "foaf:page")
+    private List<ResourceDto> links;
 
     @ElementList(required = false, inline = true)
     private List<AttributeDto> attributes;
@@ -260,6 +260,14 @@ public class SpeciesFactsheetDto implements Serializable {
 
     public void setNameAccordingToID(ResourceDto nameAccordingToID) {
         this.nameAccordingToID = nameAccordingToID;
+    }
+
+    public List<ResourceDto> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<ResourceDto> links) {
+        this.links = links;
     }
 
 }

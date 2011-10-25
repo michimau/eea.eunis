@@ -1,6 +1,5 @@
 package eionet.eunis.dto;
 
-
 import java.io.Serializable;
 
 import org.apache.commons.lang.StringUtils;
@@ -8,12 +7,10 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Transient;
 
-
 /**
  * Resource dto for rdf exporting.
- *
- * @author Aleksandr Ivanov
- * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
+ * 
+ * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 @Root
 public class ResourceDto implements Serializable {
@@ -28,6 +25,13 @@ public class ResourceDto implements Serializable {
     private String prefix;
 
     public ResourceDto() {// blank
+    }
+
+    /**
+     * @param id
+     */
+    public ResourceDto(String id) {
+        this.id = id;
     }
 
     /**
@@ -48,7 +52,8 @@ public class ResourceDto implements Serializable {
     }
 
     /**
-     * @param id the id to set
+     * @param id
+     *            the id to set
      */
     public void setId(String id) {
         this.id = id;
@@ -62,7 +67,8 @@ public class ResourceDto implements Serializable {
     }
 
     /**
-     * @param prefix the prefix to set
+     * @param prefix
+     *            the prefix to set
      */
     public void setPrefix(String prefix) {
         this.prefix = prefix;

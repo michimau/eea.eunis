@@ -66,17 +66,16 @@ import eionet.sparqlClient.helpers.QueryExecutor;
 import eionet.sparqlClient.helpers.QueryResult;
 
 /**
- * ActionBean for species factsheet.
- * Data is loaded from {@link ro.finsiel.eunis.factsheet.species.SpeciesFactsheet} and
+ * ActionBean for species factsheet. Data is loaded from {@link ro.finsiel.eunis.factsheet.species.SpeciesFactsheet} and
  * {@link ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist}.
- *
+ * 
  * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 @UrlBinding("/species/{idSpecies}/{tab}")
 public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     private static final String[] tabs = {"General information", "Vernacular names", "Geograpical distribution", "Population",
-        "Trends", "References", "Legal Instruments", "Habitat types", "Sites", "GBIF observations", "Deliveries"};
+            "Trends", "References", "Legal Instruments", "Habitat types", "Sites", "GBIF observations", "Deliveries"};
 
     private static final Map<String, String[]> types = new HashMap<String, String[]>();
     static {
@@ -122,7 +121,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      */
     private int seniorIdSpecies;
 
-    /** Variables for the "general" tab.  */
+    /** Variables for the "general" tab. */
     private PictureDTO pic;
     private SpeciesNatureObjectPersist specie;
     private List<ClassificationDTO> classifications;
@@ -141,7 +140,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     /** Fauna Europea number */
     private String faeu;
     private PublicationWrapper speciesBook;
-    /** ITIS TSN number.  */
+    /** ITIS TSN number. */
     private String itisTSN;
     /** NCBI number */
     private String ncbi;
@@ -229,9 +228,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         if (StringUtils.isNotBlank(idSpeciesText) && !factsheet.exists()) {
             // redirecting to more general search in case user tried text based search
             String redirectUrl =
-                "/species-names-result.jsp?pageSize=10" + "&relationOp=2&typeForm=0&showGroup=true&showOrder=true"
-                + "&showFamily=true&showScientificName=true&showVernacularNames=true"
-                + "&showValidName=true&searchSynonyms=true&sort=2&ascendency=0" + "&scientificName=" + idSpeciesText;
+                    "/species-names-result.jsp?pageSize=10" + "&relationOp=2&typeForm=0&showGroup=true&showOrder=true"
+                            + "&showFamily=true&showScientificName=true&showVernacularNames=true"
+                            + "&showValidName=true&searchSynonyms=true&sort=2&ascendency=0" + "&scientificName=" + idSpeciesText;
 
             return new RedirectResolution(redirectUrl);
         }
@@ -246,7 +245,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             // Decide what tabs to show
             List<String> existingTabs =
-                sqlUtil.getExistingTabPages(factsheet.getSpeciesNatureObject().getIdNatureObject().toString(), "SPECIES");
+                    sqlUtil.getExistingTabPages(factsheet.getSpeciesNatureObject().getIdNatureObject().toString(), "SPECIES");
             for (String tab : existingTabs) {
                 if (types.containsKey(tab)) {
                     String[] tabData = types.get(tab);
@@ -303,8 +302,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * Generates RDF for a species.
-     * Data is loaded from {@link ro.finsiel.eunis.factsheet.species.SpeciesFactsheet}, inserted into
+     * Generates RDF for a species. Data is loaded from {@link ro.finsiel.eunis.factsheet.species.SpeciesFactsheet}, inserted into
      * {@link eionet.eunis.dto.SpeciesFactsheetDto} which is then serialised to XML.
      */
     private Resolution generateRdf() {
@@ -336,9 +334,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             dto.setFamily(taxonomyTree.getFamily());
         }
         if (factsheet.getTaxcodeObject() != null && factsheet.getTaxcodeObject().IdDcTaxcode() != null) {
-            dto.setNameAccordingToID(
-                    new ResourceDto(
-                            factsheet.getTaxcodeObject().IdDcTaxcode().toString(), "http://eunis.eea.europa.eu/references/"));
+            dto.setNameAccordingToID(new ResourceDto(factsheet.getTaxcodeObject().IdDcTaxcode().toString(),
+                    "http://eunis.eea.europa.eu/references/"));
         }
 
         dto.setDwcScientificName(dto.getScientificName() + ' ' + dto.getAuthor());
@@ -350,16 +347,30 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
         dto.setAttributes(DaoFactory.getDaoFactory().getSpeciesFactsheetDao()
                 .getAttributesForNatureObject(factsheet.getSpeciesObject().getIdNatureObject()));
+
         dto.setHasLegalReferences(DaoFactory.getDaoFactory().getSpeciesFactsheetDao()
                 .getLegalReferences(factsheet.getSpeciesObject().getIdNatureObject()));
 
+        // setting html links
+        ArrayList<LinkDTO> linkObjects =
+                DaoFactory.getDaoFactory().getExternalObjectsDao()
+                        .getNatureObjectLinks(factsheet.getSpeciesObject().getIdNatureObject());
+        if (linkObjects != null && !linkObjects.isEmpty()) {
+            List<ResourceDto> links = new LinkedList<ResourceDto>();
+
+            for (LinkDTO link : linkObjects) {
+                links.add(new ResourceDto(link.getUrl()));
+            }
+            dto.setLinks(links);
+        }
+
         // setting expectedInLocations
         List<String> expectedLocations =
-            DaoFactory
-            .getDaoFactory()
-            .getSpeciesFactsheetDao()
-            .getExpectedInSiteIds(factsheet.getSpeciesObject().getIdNatureObject(),
-                    factsheet.getSpeciesObject().getIdSpecies(), 0);
+                DaoFactory
+                        .getDaoFactory()
+                        .getSpeciesFactsheetDao()
+                        .getExpectedInSiteIds(factsheet.getSpeciesObject().getIdNatureObject(),
+                                factsheet.getSpeciesObject().getIdSpecies(), 0);
 
         if (expectedLocations != null && !expectedLocations.isEmpty()) {
             List<ResourceDto> expectedInSites = new LinkedList<ResourceDto>();
@@ -371,7 +382,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
 
         List<VernacularNameWrapper> vernacularNames =
-            SpeciesSearchUtility.findVernacularNames(factsheet.getSpeciesObject().getIdNatureObject());
+                SpeciesSearchUtility.findVernacularNames(factsheet.getSpeciesObject().getIdNatureObject());
 
         if (factsheet.getIdSpeciesLink() != null && !factsheet.getIdSpeciesLink().equals(factsheet.getIdSpecies())) {
             dto.setSynonymFor(new SpeciesSynonymDto(factsheet.getIdSpeciesLink()));
@@ -401,8 +412,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "general" tab.
-     *
-     * @param mainIdSpecies - The species ID. Same as specie.getIdSpecies()
+     * 
+     * @param mainIdSpecies
+     *            - The species ID. Same as specie.getIdSpecies()
      */
     private void generalTabActions(int mainIdSpecies) {
 
@@ -415,7 +427,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         // The next two lines should be refactored to call a method in ro.finsiel.eunis.factsheet.species.SpeciesFactsheet
         // and there can at most be one main picture. No need to return a list.
         List<Chm62edtNatureObjectPicturePersist> pictures =
-            new Chm62edtNatureObjectPictureDomain().findWhere("MAIN_PIC = 1 AND ID_OBJECT = " + mainIdSpecies);
+                new Chm62edtNatureObjectPictureDomain().findWhere("MAIN_PIC = 1 AND ID_OBJECT = " + mainIdSpecies);
 
         if (pictures != null && !pictures.isEmpty()) {
             String mainPictureMaxWidth = pictures.get(0).getMaxWidth().toString();
@@ -428,8 +440,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             if (mainPictureMaxWidthInt != null && mainPictureMaxWidthInt.intValue() > 0 && mainPictureMaxHeightInt != null
                     && mainPictureMaxHeightInt.intValue() > 0) {
                 styleAttr =
-                    "max-width: " + mainPictureMaxWidthInt.intValue() + "px; max-height: "
-                    + mainPictureMaxHeightInt.intValue() + "px";
+                        "max-width: " + mainPictureMaxWidthInt.intValue() + "px; max-height: "
+                                + mainPictureMaxHeightInt.intValue() + "px";
             }
 
             String desc = pictures.get(0).getDescription();
@@ -506,8 +518,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
 
             speciesName =
-                (scientificName.trim().indexOf(" ") >= 0 ? scientificName.trim().substring(scientificName.indexOf(" ") + 1)
-                        : scientificName);
+                    (scientificName.trim().indexOf(" ") >= 0 ? scientificName.trim().substring(scientificName.indexOf(" ") + 1)
+                            : scientificName);
 
             redlistLink = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SPECIES_REDLIST);
 
@@ -534,32 +546,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             itisTSN = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_ITIS);
             ncbi = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_NCBI);
 
-            // For attributes that are links to HTML pages.
-            // TODO: We need a solution where we can introduce a new attribute name into the database
-            // without having to recompile the application. I.e. those link labels have to be elsewhere.
-            String[][] linkTab =
-            {
-                    {Constants.ART17_SUMMARY, "Conservation status (art. 17)"},
-                    {Constants.BBC_PAGE, "BBC page"}, // {Constants.BIOLIB_PAGE,"Biolib page"},
-                    {Constants.BUG_GUIDE, "Bug Guide page"},
-                    {"hasBirdActionPlan", "Bird action plan"},
-                    {"hasWCMCPage", "UNEP-WCMC page"},
-                    {Constants.EOL_PAGE, "Encyclopedia of Life"},
-                    {Constants.WIKIPEDIA_ARTICLE, "Wikipedia article"},
-                    {Constants.WIKISPECIES_ARTICLE, "Wikispecies article"}};
-            String linkUrl;
-
-            links = new ArrayList<LinkDTO>();
-            for (String[] linkSet : linkTab) {
-                linkUrl = getNatObjectAttribute(specie.getIdNatureObject(), linkSet[0]);
-                if (linkUrl != null && linkUrl.length() > 0) {
-                    LinkDTO linkDTO = new LinkDTO();
-
-                    linkDTO.setName(linkSet[1]);
-                    linkDTO.setUrl(linkUrl);
-                    links.add(linkDTO);
-                }
-            }
+            // Links to HMTL pages
+            links = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(specie.getIdNatureObject());
 
             if (consStatus.size() > 0) {
                 List<NationalThreatWrapper> newList = new ArrayList<NationalThreatWrapper>();
@@ -567,8 +555,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 for (int i = 0; i < consStatus.size(); i++) {
                     NationalThreatWrapper threat = consStatus.get(i);
                     String statusDesc =
-                        factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode()).replaceAll("'", " ")
-                        .replaceAll("\"", " ");
+                            factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode()).replaceAll("'", " ")
+                                    .replaceAll("\"", " ");
 
                     threat.setStatusDesc(statusDesc);
                     newList.add(threat);
@@ -599,9 +587,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Get value for given ID_NATURE_OBJECT and attribute name from chm62edt_nature_object_attributes table.
-     *
-     * @param id - The nature object ID.
-     * @param name - attribute name.
+     * 
+     * @param id
+     *            - The nature object ID.
+     * @param name
+     *            - attribute name.
      */
     private String getNatObjectAttribute(Integer id, String name) {
         String ret = null;
@@ -619,8 +609,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "geo" tab.
-     *
-     * @param mainIdSpecies - The species ID.
+     * 
+     * @param mainIdSpecies
+     *            - The species ID.
      */
     private void geoTabActions() {
         bioRegions = SpeciesFactsheet.getBioRegionIterator(specie.getIdNatureObject(), factsheet.getIdSpecies());
@@ -671,8 +662,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "grid" tab.
-     *
-     * @param mainIdSpecies - The species ID.
+     * 
+     * @param mainIdSpecies
+     *            - The species ID.
      */
     private void gridDistributionTabActions() {
 
@@ -748,8 +740,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "sites" tab.
-     *
-     * @param mainIdSpecies - The species ID.
+     * 
+     * @param mainIdSpecies
+     *            - The species ID.
      */
     private void sitesTabActions() {
 
@@ -764,22 +757,23 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "deliveries" tab.
-     *
-     * @param mainIdSpecies - The species ID.
+     * 
+     * @param mainIdSpecies
+     *            - The species ID.
      */
     private void deliveriesTabActions(int idSpecies) {
 
         String query =
-            "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " + "PREFIX dc: <http://purl.org/dc/elements/1.1/> "
-            + "PREFIX dct: <http://purl.org/dc/terms/> "
-            + "PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> "
-            + "PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> "
-            + "SELECT DISTINCT xsd:date(?released) AS ?released ?coverage ?envelope ?envtitle "
-            + "IRI(bif:concat(?sourcefile,'/manage_document')) AS ?file ?filetitle " + "WHERE { "
-            + "GRAPH ?sourcefile { " + "_:reference ?pred <http://eunis.eea.europa.eu/species/" + idSpecies + "> "
-            + "OPTIONAL { _:reference rdfs:label ?label } " + "} " + "?envelope rod:hasFile ?sourcefile; "
-            + "rod:released ?released; " + "rod:locality _:locurl; " + "dc:title ?envtitle . "
-            + "_:locurl rdfs:label ?coverage . " + "?sourcefile dc:title ?filetitle " + "} ORDER BY DESC(?released)";
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " + "PREFIX dc: <http://purl.org/dc/elements/1.1/> "
+                        + "PREFIX dct: <http://purl.org/dc/terms/> "
+                        + "PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> "
+                        + "PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> "
+                        + "SELECT DISTINCT xsd:date(?released) AS ?released ?coverage ?envelope ?envtitle "
+                        + "IRI(bif:concat(?sourcefile,'/manage_document')) AS ?file ?filetitle " + "WHERE { "
+                        + "GRAPH ?sourcefile { " + "_:reference ?pred <http://eunis.eea.europa.eu/species/" + idSpecies + "> "
+                        + "OPTIONAL { _:reference rdfs:label ?label } " + "} " + "?envelope rod:hasFile ?sourcefile; "
+                        + "rod:released ?released; " + "rod:locality _:locurl; " + "dc:title ?envtitle . "
+                        + "_:locurl rdfs:label ?coverage . " + "?sourcefile dc:title ?filetitle " + "} ORDER BY DESC(?released)";
 
         String CRSparqlEndpoint = getContext().getApplicationProperty("cr.sparql.endpoint");
         if (!StringUtils.isBlank(CRSparqlEndpoint)) {

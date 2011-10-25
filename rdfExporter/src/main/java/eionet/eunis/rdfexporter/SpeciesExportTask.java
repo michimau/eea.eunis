@@ -2,6 +2,7 @@ package eionet.eunis.rdfexporter;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -17,6 +18,7 @@ import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dto.DatatypeDto;
+import eionet.eunis.dto.LinkDTO;
 import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.SpeciesFactsheetDto;
 import eionet.eunis.dto.SpeciesSynonymDto;
@@ -25,7 +27,7 @@ import eionet.eunis.dto.VernacularNameDto;
 
 /**
  * Species export task.
- *
+ * 
  */
 public class SpeciesExportTask implements Runnable {
     private static final Logger logger = Logger.getLogger(SpeciesExportTask.class);
@@ -35,7 +37,6 @@ public class SpeciesExportTask implements Runnable {
     private String idspecies;
     private QueuedFileWriter fileWriter;
 
-
     public SpeciesExportTask(String idspecies, QueuedFileWriter fileWriter) {
         this.idspecies = idspecies;
         this.fileWriter = fileWriter;
@@ -43,15 +44,16 @@ public class SpeciesExportTask implements Runnable {
 
     public void run() {
         Integer speciesId = new Integer(idspecies);
-        SpeciesFactsheet factsheet = new SpeciesFactsheet(speciesId,speciesId);
-        if(factsheet.exists()) {
+        SpeciesFactsheet factsheet = new SpeciesFactsheet(speciesId, speciesId);
+        if (factsheet.exists()) {
             Persister persister = new Persister(new AnnotationStrategy(), new Format(4));
 
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             SpeciesFactsheetDto dto = new SpeciesFactsheetDto();
             dto.setSpeciesId(factsheet.getSpeciesObject().getIdSpecies());
             dto.setScientificName(factsheet.getSpeciesObject().getScientificName());
-            dto.setValidName(new DatatypeDto(factsheet.getSpeciesObject().getValidName(), "http://www.w3.org/2001/XMLSchema#boolean"));
+            dto.setValidName(new DatatypeDto(factsheet.getSpeciesObject().getValidName(),
+                    "http://www.w3.org/2001/XMLSchema#boolean"));
             dto.setTypeRelatedSpecies(factsheet.getSpeciesObject().getTypeRelatedSpecies());
             dto.setGenus(factsheet.getSpeciesObject().getGenus());
             dto.setAuthor(factsheet.getSpeciesObject().getAuthor());
@@ -65,46 +67,59 @@ public class SpeciesExportTask implements Runnable {
                 dto.setFamily(taxonomyTree.getFamily());
             }
             if (factsheet.getTaxcodeObject() != null && factsheet.getTaxcodeObject().IdDcTaxcode() != null) {
-                dto.setNameAccordingToID(
-                        new ResourceDto(
-                                factsheet.getTaxcodeObject().IdDcTaxcode().toString(), "http://eunis.eea.europa.eu/references/"));
+                dto.setNameAccordingToID(new ResourceDto(factsheet.getTaxcodeObject().IdDcTaxcode().toString(),
+                        "http://eunis.eea.europa.eu/references/"));
             }
 
             dto.setDwcScientificName(dto.getScientificName() + ' ' + dto.getAuthor());
-            dto.setDcmitype(new ResourceDto("","http://purl.org/dc/dcmitype/Text"));
+            dto.setDcmitype(new ResourceDto("", "http://purl.org/dc/dcmitype/Text"));
             if (!StringUtils.isBlank(factsheet.getSpeciesObject().getIdTaxcode())) {
-                dto.setTaxonomy(new ResourceDto(factsheet.getSpeciesObject().getIdTaxcode(), "http://eunis.eea.europa.eu/taxonomy/"));
+                dto.setTaxonomy(new ResourceDto(factsheet.getSpeciesObject().getIdTaxcode(),
+                        "http://eunis.eea.europa.eu/taxonomy/"));
             }
 
-            dto.setAttributes(
-                    DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getAttributesForNatureObject(
-                            factsheet.getSpeciesObject().getIdNatureObject()));
+            dto.setAttributes(DaoFactory.getDaoFactory().getSpeciesFactsheetDao()
+                    .getAttributesForNatureObject(factsheet.getSpeciesObject().getIdNatureObject()));
             dto.setHasLegalReferences(DaoFactory.getDaoFactory().getSpeciesFactsheetDao()
                     .getLegalReferences(factsheet.getSpeciesObject().getIdNatureObject()));
 
-            //setting expectedInLocations
-            List<String> expectedLocations = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getExpectedInSiteIds(
-                    factsheet.getSpeciesObject().getIdNatureObject(),
-                    factsheet.getSpeciesObject().getIdSpecies(),
-                    0);
+            // setting html links
+            ArrayList<LinkDTO> linkObjects =
+                    DaoFactory.getDaoFactory().getExternalObjectsDao()
+                            .getNatureObjectLinks(factsheet.getSpeciesObject().getIdNatureObject());
+            if (linkObjects != null && !linkObjects.isEmpty()) {
+                List<ResourceDto> links = new LinkedList<ResourceDto>();
+
+                for (LinkDTO link : linkObjects) {
+                    links.add(new ResourceDto(link.getUrl()));
+                }
+                dto.setLinks(links);
+            }
+
+            // setting expectedInLocations
+            List<String> expectedLocations =
+                    DaoFactory
+                            .getDaoFactory()
+                            .getSpeciesFactsheetDao()
+                            .getExpectedInSiteIds(factsheet.getSpeciesObject().getIdNatureObject(),
+                                    factsheet.getSpeciesObject().getIdSpecies(), 0);
             if (expectedLocations != null && !expectedLocations.isEmpty()) {
                 List<ResourceDto> expectedInSites = new LinkedList<ResourceDto>();
-                for(String siteId : expectedLocations) {
+                for (String siteId : expectedLocations) {
                     expectedInSites.add(new ResourceDto(siteId, "http://eunis.eea.europa.eu/sites/"));
                 }
                 dto.setExpectedInLocations(expectedInSites);
             }
 
-            List<VernacularNameWrapper> vernacularNames = SpeciesSearchUtility.findVernacularNames(
-                    factsheet.getSpeciesObject().getIdNatureObject());
-            if (factsheet.getIdSpeciesLink() != null
-                    && !factsheet.getIdSpeciesLink().equals(factsheet.getIdSpecies())) {
+            List<VernacularNameWrapper> vernacularNames =
+                    SpeciesSearchUtility.findVernacularNames(factsheet.getSpeciesObject().getIdNatureObject());
+            if (factsheet.getIdSpeciesLink() != null && !factsheet.getIdSpeciesLink().equals(factsheet.getIdSpecies())) {
                 dto.setSynonymFor(new SpeciesSynonymDto(factsheet.getIdSpeciesLink()));
             }
             List<Integer> isSynonymFor = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getSynonyms(factsheet.getIdSpecies());
             List<SpeciesSynonymDto> speciesSynonym = new LinkedList<SpeciesSynonymDto>();
             if (isSynonymFor != null && !isSynonymFor.isEmpty()) {
-                for(Integer idSpecies : isSynonymFor) {
+                for (Integer idSpecies : isSynonymFor) {
                     speciesSynonym.add(new SpeciesSynonymDto(idSpecies));
                 }
                 dto.setHasSynonyms(speciesSynonym);
@@ -128,8 +143,8 @@ public class SpeciesExportTask implements Runnable {
 
                 speciesExported.incrementAndGet();
 
-                if(logger.isDebugEnabled()) {
-                    logger.debug("Exporting species #" + speciesExported.get() + " (ID_SPECIES = " + idspecies + ")" );
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Exporting species #" + speciesExported.get() + " (ID_SPECIES = " + idspecies + ")");
                 }
             } catch (Exception e) {
                 logger.error(e);

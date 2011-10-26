@@ -1,11 +1,9 @@
 package ro.finsiel.eunis.jrfTables;
 
-
 import net.sf.jrf.domain.PersistentObject;
 
-
 /**
- *
+ * 
  * @version $Revision: 1.1.1.1 $ $Date: 2003/12/09 08:34:51 $
  **/
 public class Chm62edtNatureObjectPicturePersist extends PersistentObject {
@@ -19,6 +17,8 @@ public class Chm62edtNatureObjectPicturePersist extends PersistentObject {
     private Integer i_max_width = null;
     private Integer i_max_height = null;
     private String i_source = null;
+    private String i_sourceUrl = null;
+    private String license = null;
 
     public Chm62edtNatureObjectPicturePersist() {
         super();
@@ -90,7 +90,7 @@ public class Chm62edtNatureObjectPicturePersist extends PersistentObject {
         i_max_width = width;
         this.markModifiedPersistentState();
     }
-  
+
     public Integer getMaxHeight() {
         return i_max_height;
     }
@@ -99,7 +99,7 @@ public class Chm62edtNatureObjectPicturePersist extends PersistentObject {
         i_max_height = height;
         this.markModifiedPersistentState();
     }
-  
+
     public String getSource() {
         return i_source;
     }
@@ -107,6 +107,23 @@ public class Chm62edtNatureObjectPicturePersist extends PersistentObject {
     public void setSource(String source) {
         i_source = source;
         this.markModifiedPersistentState();
+    }
+
+    public String getSourceUrl() {
+        return i_sourceUrl;
+    }
+
+    public void setSourceUrl(String sourceUrl) {
+        i_sourceUrl = sourceUrl;
+        this.markModifiedPersistentState();
+    }
+
+    public String getLicense() {
+        return license;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
     }
 
 }

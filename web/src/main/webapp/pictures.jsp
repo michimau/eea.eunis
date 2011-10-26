@@ -4,6 +4,7 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : Display pictures in factsheet
 --%>
+<%@page import="ro.finsiel.eunis.utilities.EunisUtil"%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
   request.setCharacterEncoding( "UTF-8");
@@ -61,7 +62,9 @@
   String filename;
   String name;
   String description;
+  String license="";
   String source;
+  String sourceUrl;
   String firstimage="";
   String firstdescription="";
   String firstsource="";
@@ -96,7 +99,12 @@
       filename = picture.getFileName();
       name=picture.getName();
       description=picture.getDescription();
+      license=picture.getLicense();
       source=picture.getSource();
+      sourceUrl=picture.getSourceUrl();
+      if (sourceUrl != null && !sourceUrl.equals("")) {
+          source = "<a href=\"" + EunisUtil.replaceTags(sourceUrl, true, true) + "\">" + source + "</a>";
+      }
       if(firstimage.equalsIgnoreCase(""))
       {
         firstimage = filename;
@@ -108,6 +116,7 @@
         nameArray[ImageNum] = "<%=name%>";
         descriptionArray[ImageNum] = "<%=description%>";
         sourceArray[ImageNum] = "<%=cm.cmsPhrase("Source")%>: <%=source%>";
+        licenseArray[ImageNum] = "<%=cm.cmsPhrase("License")%>: <%=license%>";
         ImageNum++;
 <%
     }
@@ -129,6 +138,7 @@
           document.getElementById('picture_name').innerHTML=nameArray[ImageNum];
           document.getElementById('picture_description').innerHTML=descriptionArray[ImageNum];
           document.getElementById('picture_source').innerHTML=sourceArray[ImageNum];
+          document.getElementById('picture_license').innerHTML=licenseArray[ImageNum];
         }
 
         function getNextImage() {
@@ -143,6 +153,7 @@
           document.getElementById('picture_name').innerHTML=nameArray[ImageNum];
           document.getElementById('picture_description').innerHTML=descriptionArray[ImageNum];
           document.getElementById('picture_source').innerHTML=sourceArray[ImageNum];
+          document.getElementById('license_source').innerHTML=licenseArray[ImageNum];
         }
 
         function getPrevImage()
@@ -184,6 +195,9 @@
     </div>
     <div id="picture_source" style="text-align:right; font-weight:bold;">
       <%=cm.cmsPhrase("Source")%>: <%=firstsource%>
+    </div>
+    <div id="picture_license" style="text-align:right; font-weight:bold;">
+      <%=cm.cmsPhrase("License")%>: <%=license%>
     </div>
     <script language="JavaScript" type="text/javascript">
       //<![CDATA[

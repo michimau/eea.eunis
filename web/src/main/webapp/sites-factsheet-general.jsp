@@ -4,6 +4,7 @@
   - Copyright : (c) 2002-2005 EEA - European Environment Agency.
   - Description : 'General information about a site' - part of site's factsheet
 --%>
+<%@page import="ro.finsiel.eunis.utilities.EunisUtil"%>
 <%@page contentType="text/html;charset=UTF-8"%>
 <%
   request.setCharacterEncoding( "UTF-8");
@@ -37,6 +38,8 @@
   Integer width = null;
   Integer height = null;
   String source = null;
+  String sourceUrl = null;
+  String license = null;
   if (pictureList != null && !pictureList.isEmpty()) {
       mainPictureId = application.getInitParameter("UPLOAD_DIR_PICTURES_SITES")
         + "/" + pictureList.get(0).getFileName();
@@ -44,9 +47,11 @@
       width = pictureList.get(0).getMaxWidth();
       height = pictureList.get(0).getMaxHeight();
       source = pictureList.get(0).getSource();
+      sourceUrl = pictureList.get(0).getSourceUrl();
+      license = pictureList.get(0).getLicense();
   }
   String picsURL = "idobject=" + factsheet.getIDSite() + "&amp;natureobjecttype=Sites";
-  
+
 %>
 
 <% if (mainPictureId != null) { %>
@@ -68,8 +73,18 @@
         </div>
         <% if(source != null && source.length() > 0){%>
           <div class="naturepic-source-copyright">
-        <%=cm.cmsPhrase("Source")%>: <%=source%>
+        	<%=cm.cmsPhrase("Source")%>:
+        	 <% if(sourceUrl != null && sourceUrl.length() > 0){%>
+        		<a href="<%=EunisUtil.replaceTags(sourceUrl, true, true)%>"><%=source%></a>
+        	 <% } else {%>
+        	 	<%=source%>
+        	 <% }%>
           </div>
+        <%}%>
+        <% if(license != null && license.length() > 0){%>
+	        <div class="naturepic-source-copyright">
+	        	<%=cm.cmsPhrase("License")%>: <%=license%>
+	        </div>
         <%}%>
       </div>
   </div>
@@ -581,19 +596,19 @@
           boolean boreal = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("BOREAL"), false);
           boolean continent1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("CONTINENT"), false);
           boolean continent2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("CONTINENTAL"), false);
-          boolean continent = continent1 || continent2; 
+          boolean continent = continent1 || continent2;
           boolean macarones1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MACARONES"), false);
           boolean macarones2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MACARONESIAN"), false);
-          boolean macarones = macarones1 || macarones2; 
+          boolean macarones = macarones1 || macarones2;
           boolean mediterranean1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MEDITERRANIAN"), false);
           boolean mediterranean2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("MEDITERRANEAN"), false);
-          boolean mediterranean = mediterranean1 || mediterranean2; 
+          boolean mediterranean = mediterranean1 || mediterranean2;
           boolean pannonic1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("PANNONIC"), false);
           boolean pannonic2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("PANNONIAN"), false);
-          boolean pannonic = pannonic1 || pannonic2; 
+          boolean pannonic = pannonic1 || pannonic2;
           boolean pontic1 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("PONTIC"), false);
           boolean pontic2 = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("BLACK SEA"), false);
-          boolean pontic = pontic1 || pontic2; 
+          boolean pontic = pontic1 || pontic2;
           boolean steppic = Utilities.checkedStringToBoolean(factsheet.findSiteAttribute("STEPPIC"), false);
           if (alpine ||
                   anatol ||
@@ -955,27 +970,27 @@
       dojo.require("esri.tasks.geometry");
       dojo.require("esri.layers.FeatureLayer");
       dojo.require("dijit.TooltipDialog");
-    
-      //Assig a value to the SITECODE    
+
+      //Assig a value to the SITECODE
       var sitecode = '<%=siteid%>'
-      
+
       var map
-      
+
       //URL for Natura 2000 REST service in use
       function getSitesMapService() { return 'http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000Hatch_Cach_WM/MapServer'; }
-            
+
       function init() {
         map = new esri.Map("map", {logo:false, slider: true, nav: true});
-        
+
         //Creates a BING Maps object layer to add to the map
         veTileLayer = new esri.virtualearth.VETiledLayer({
           bingMapsKey: 'AgnYuBP56hftjLZf07GVhxQrm61_oH1Gkw2F1H5_NSWjyN5s1LKylQ1S3kMDTHb_',
           mapStyle: esri.virtualearth.VETiledLayer.MAP_STYLE_ROAD
         });
-                
+
         //Loads BING map
         map.addLayer(veTileLayer);
-        
+
         //Creates a Natura 2000 layer object based on the site of interest
         var featureLayer = new esri.layers.FeatureLayer(getSitesMapService() + "/0",{
           mode: esri.layers.FeatureLayer.MODE_SNAPSHOT,
@@ -985,7 +1000,7 @@
         dojo.connect(featureLayer,"onMouseOver",showTooltip);
         dojo.connect(featureLayer,"onMouseOut",closeDialog);
         featureLayer.setDefinitionExpression("SITECODE='" + sitecode + "'");
-        
+
         //Loads Natura 2000 Site
         map.addLayer(featureLayer);
         loadGeometry(sitecode);
@@ -1008,8 +1023,8 @@
         });
       };
 
-      
-      //Tooltip functionality to sitename and show spatial area 
+
+      //Tooltip functionality to sitename and show spatial area
       function showTooltip(evt){
       closeDialog();
       var tipContent = "<b>Name of the site</b>: " + evt.graphic.attributes.SITENAME +
@@ -1024,14 +1039,14 @@
         dojo.style(dialog.domNode, "opacity", 0.8);
         dijit.placeOnScreen(dialog.domNode, {x: evt.pageX, y: evt.pageY}, ["TL", "BL"], {x: 10, y: 10});
       }
-      
+
       function closeDialog() {
         var widget = dijit.byId("tooltipDialog");
         if (widget) {
             widget.destroy();
         }
       }
-      
+
     dojo.addOnLoad(init);
   </script>
 
@@ -1052,7 +1067,7 @@
   <a href="javascript:openpictures('<%=domainName%>/pictures.jsp?<%=picsURL%>',600,600)"><%=cm.cmsPhrase("View pictures")%></a>
 <%
       }
-      else if(SessionManager.isAuthenticated() && SessionManager.isUpload_pictures_RIGHT())
+      if(SessionManager.isAuthenticated() && SessionManager.isUpload_pictures_RIGHT())
       {
 %>
       <a href="javascript:openpictures('<%=domainName%>/pictures-upload.jsp?operation=upload&amp;<%=picsURL%>',600,600)"><%=cm.cmsPhrase("Upload pictures")%></a>

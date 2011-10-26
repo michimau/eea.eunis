@@ -15,8 +15,21 @@
 	    		</div>
 	    		<c:if test="${!empty actionBean.pic.source}">
 					<div class="naturepic-source-copyright">
-						${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}: ${actionBean.pic.source}
+						${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}:
+						<c:choose>
+							<c:when test="${!empty actionBean.pic.sourceUrl}">
+								<a href="${eunis:treatURLSpecialCharacters(actionBean.pic.sourceUrl)}">${actionBean.pic.source}</a>
+							</c:when>
+							<c:otherwise>
+								${actionBean.pic.source}
+							</c:otherwise>
+						</c:choose>
 					</div>
+	    		</c:if>
+	    		<c:if test="${!empty actionBean.pic.license}">
+		    		<div class="naturepic-source-copyright">
+		    			${eunis:cmsPhrase(actionBean.contentManagement, 'License')}: ${actionBean.pic.license}
+		    		</div>
 	    		</c:if>
 	  		</div>
   		</div>
@@ -278,7 +291,7 @@
 	        				<td>
 	          					${eunis:execMethodParamString('ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet', 'mapHabitatsRelations', classif.relationType)}
 	        				</td>
-						</tr>    				
+						</tr>
 	    			</c:forEach>
 	    		</c:if>
 	    		<c:if test="${!empty actionBean.factsheet.otherHabitatsRelations}">
@@ -314,18 +327,14 @@
     		</tbody>
     	</table>
 	</c:if>
-	<c:choose>
-		<c:when test="${!empty actionBean.factsheet.picturesForHabitats}">
-			<a href="javascript:openpictures('${actionBean.domainName}/pictures.jsp?${actionBean.picsURL}',600,600)">
-				${eunis:cmsPhrase(actionBean.contentManagement, 'View pictures')}
-			</a>
-		</c:when>
-		<c:when test="${actionBean.context.sessionManager.authenticated && actionBean.context.sessionManager.upload_pictures_RIGHT}">
-			<a href="javascript:openpictures('${actionBean.domainName}/pictures-upload.jsp?operation=upload&amp;${actionBean.picsURL}',600,600)">
-				${eunis:cmsPhrase(actionBean.contentManagement, 'Upload pictures')}
-			</a>
-		</c:when>
-		<c:otherwise>
-		</c:otherwise>
-	</c:choose>
+	<c:if test="${!empty actionBean.factsheet.picturesForHabitats}">
+		<a href="javascript:openpictures('${actionBean.domainName}/pictures.jsp?${actionBean.picsURL}',600,600)">
+			${eunis:cmsPhrase(actionBean.contentManagement, 'View pictures')}
+		</a>
+	</c:if>
+	<c:if test="${actionBean.context.sessionManager.authenticated && actionBean.context.sessionManager.upload_pictures_RIGHT}">
+		<a href="javascript:openpictures('${actionBean.domainName}/pictures-upload.jsp?operation=upload&amp;${actionBean.picsURL}',600,600)">
+			${eunis:cmsPhrase(actionBean.contentManagement, 'Upload pictures')}
+		</a>
+	</c:if>
 </stripes:layout-definition>

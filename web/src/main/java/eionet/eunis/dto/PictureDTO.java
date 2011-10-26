@@ -1,16 +1,13 @@
 package eionet.eunis.dto;
 
-
 import java.io.Serializable;
 
 import org.simpleframework.xml.Root;
 
-
 /**
  * DTO object for factsheet picture.
- *
- * @author Risto Alt
- * <a href="mailto:risto.alt@tieto.com">contact</a>
+ * 
+ * @author Risto Alt <a href="mailto:risto.alt@tieto.com">contact</a>
  */
 @Root
 public class PictureDTO implements Serializable {
@@ -25,10 +22,12 @@ public class PictureDTO implements Serializable {
     private String maxwidth;
     private String maxheight;
     private String source;
+    private String sourceUrl;
     private String path;
     private String style;
     private String domain;
     private String url;
+    private String license;
 
     public String getFilename() {
         return filename;
@@ -100,6 +99,22 @@ public class PictureDTO implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getSourceUrl() {
+        return sourceUrl;
+    }
+
+    public void setSourceUrl(String sourceUrl) {
+        this.sourceUrl = sourceUrl;
+    }
+
+    public String getLicense() {
+        return license;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
     }
 
 }

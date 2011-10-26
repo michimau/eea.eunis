@@ -456,12 +456,14 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             pic.setFilename(pictures.get(0).getFileName());
             pic.setDescription(desc);
             pic.setSource(pictures.get(0).getSource());
+            pic.setSourceUrl(pictures.get(0).getSourceUrl());
             pic.setStyle(styleAttr);
             pic.setMaxwidth(mainPictureMaxWidth);
             pic.setMaxheight(mainPictureMaxHeight);
             pic.setPath(picturePath);
             pic.setDomain(domainName);
             pic.setUrl(urlPic);
+            pic.setLicense(pictures.get(0).getLicense());
         }
 
         List list = new Vector<Chm62edtTaxcodePersist>();

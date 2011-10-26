@@ -37,9 +37,9 @@ import eionet.sparqlClient.helpers.QueryExecutor;
 import eionet.sparqlClient.helpers.QueryResult;
 
 /**
- * Action bean to handle habitats-factsheet functionality.
- * Data is loaded from {@link ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet}.
- *
+ * Action bean to handle habitats-factsheet functionality. Data is loaded from
+ * {@link ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet}.
+ * 
  * @author Risto Alt
  */
 @UrlBinding("/habitats/{idHabitat}/{tab}")
@@ -48,7 +48,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private String idHabitat = "";
 
     private static final String[] tabs = {"General information", "Geographical distribution", "Legal instruments",
-        "Habitat types", "Sites", "Species", "Other info"};
+            "Habitat types", "Sites", "Species", "Other info"};
 
     private static final Map<String, String[]> types = new HashMap<String, String[]>();
     static {
@@ -62,12 +62,12 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     }
 
     private static final Integer[] dictionary = {HabitatsFactsheet.OTHER_INFO_ALTITUDE, HabitatsFactsheet.OTHER_INFO_DEPTH,
-        HabitatsFactsheet.OTHER_INFO_CLIMATE, HabitatsFactsheet.OTHER_INFO_GEOMORPH, HabitatsFactsheet.OTHER_INFO_SUBSTRATE,
-        HabitatsFactsheet.OTHER_INFO_LIFEFORM, HabitatsFactsheet.OTHER_INFO_COVER, HabitatsFactsheet.OTHER_INFO_HUMIDITY,
-        HabitatsFactsheet.OTHER_INFO_WATER, HabitatsFactsheet.OTHER_INFO_SALINITY, HabitatsFactsheet.OTHER_INFO_EXPOSURE,
-        HabitatsFactsheet.OTHER_INFO_CHEMISTRY, HabitatsFactsheet.OTHER_INFO_TEMPERATURE, HabitatsFactsheet.OTHER_INFO_LIGHT,
-        HabitatsFactsheet.OTHER_INFO_SPATIAL, HabitatsFactsheet.OTHER_INFO_TEMPORAL, HabitatsFactsheet.OTHER_INFO_IMPACT,
-        HabitatsFactsheet.OTHER_INFO_USAGE};
+            HabitatsFactsheet.OTHER_INFO_CLIMATE, HabitatsFactsheet.OTHER_INFO_GEOMORPH, HabitatsFactsheet.OTHER_INFO_SUBSTRATE,
+            HabitatsFactsheet.OTHER_INFO_LIFEFORM, HabitatsFactsheet.OTHER_INFO_COVER, HabitatsFactsheet.OTHER_INFO_HUMIDITY,
+            HabitatsFactsheet.OTHER_INFO_WATER, HabitatsFactsheet.OTHER_INFO_SALINITY, HabitatsFactsheet.OTHER_INFO_EXPOSURE,
+            HabitatsFactsheet.OTHER_INFO_CHEMISTRY, HabitatsFactsheet.OTHER_INFO_TEMPERATURE, HabitatsFactsheet.OTHER_INFO_LIGHT,
+            HabitatsFactsheet.OTHER_INFO_SPATIAL, HabitatsFactsheet.OTHER_INFO_TEMPORAL, HabitatsFactsheet.OTHER_INFO_IMPACT,
+            HabitatsFactsheet.OTHER_INFO_USAGE};
     private int dictionaryLength;
 
     private String btrail;
@@ -132,10 +132,10 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         // check if the habitat exists.
         if (factsheet.getHabitat() == null) {
             pageTitle =
-                getContext().getInitParameter("PAGE_TITLE")
-                + getContentManagement().cmsPhrase(
-                "Sorry, no habitat type has been found in the database with Habitat type ID = ") + "'"
-                + idHabitat + "'";
+                    getContext().getInitParameter("PAGE_TITLE")
+                            + getContentManagement().cmsPhrase(
+                                    "Sorry, no habitat type has been found in the database with Habitat type ID = ") + "'"
+                            + idHabitat + "'";
 
             getContext().getResponse().setStatus(HttpServletResponse.SC_NOT_FOUND);
             return new ForwardResolution("/stripes/habitats-factsheet.layout.jsp");
@@ -144,12 +144,12 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         // set metadescription and page title
         metaDescription = factsheet.getMetaHabitatDescription();
         pageTitle =
-            getContext().getInitParameter("PAGE_TITLE") + getContentManagement().cmsPhrase("Factsheet for") + " "
-            + factsheet.getHabitat().getScientificName();
+                getContext().getInitParameter("PAGE_TITLE") + getContentManagement().cmsPhrase("Factsheet for") + " "
+                        + factsheet.getHabitat().getScientificName();
 
         // Decide what tabs to show
         List<String> existingTabs =
-            getContext().getSqlUtilities().getExistingTabPages(factsheet.idNatureObject.toString(), "HABITATS");
+                getContext().getSqlUtilities().getExistingTabPages(factsheet.idNatureObject.toString(), "HABITATS");
         for (String tab : existingTabs) {
             if (types.containsKey(tab)) {
                 String[] tabData = types.get(tab);
@@ -158,7 +158,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         }
 
         if (factsheet.isAnnexI()) {
-            tabsWithData.add(new Pair<String, String>("art17","Distribution map from Art. 17"));
+            tabsWithData.add(new Pair<String, String>("art17", "Distribution map from Art. 17"));
         }
 
         if (tab != null && tab.equals("general")) {
@@ -166,7 +166,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         }
 
         if (factsheet.getCode2000() != null && factsheet.getCode2000().length() == 4) {
-            tabsWithData.add(new Pair<String, String>("deliveries","Deliveries"));
+            tabsWithData.add(new Pair<String, String>("deliveries", "Deliveries"));
             deliveriesTabActions();
         }
 
@@ -229,36 +229,36 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
      */
     private void sitesTabActions() {
         String isGoodHabitat =
-            " IF(TRIM(A.CODE_2000) <> '',RIGHT(A.CODE_2000,2),1) <> IF(TRIM(A.CODE_2000) <> '','00',2) AND IF(TRIM(A.CODE_2000) <> '',LENGTH(A.CODE_2000),1) = IF(TRIM(A.CODE_2000) <> '',4,1) ";
+                " IF(TRIM(A.CODE_2000) <> '',RIGHT(A.CODE_2000,2),1) <> IF(TRIM(A.CODE_2000) <> '','00',2) AND IF(TRIM(A.CODE_2000) <> '',LENGTH(A.CODE_2000),1) = IF(TRIM(A.CODE_2000) <> '',4,1) ";
 
         // Sites for which this habitat is recorded.
         sites =
-            new SitesByNatureObjectDomain()
-        .findCustom("SELECT DISTINCT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN "
-                + " FROM CHM62EDT_HABITAT AS A "
-                + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
-                + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
-                + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
-                + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE   "
-                + isGoodHabitat + " AND A.ID_NATURE_OBJECT =" + factsheet.getHabitat().getIdNatureObject()
-                + " AND C.SOURCE_DB <> 'EMERALD'" + " ORDER BY C.ID_SITE");
+                new SitesByNatureObjectDomain()
+                        .findCustom("SELECT DISTINCT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN "
+                                + " FROM CHM62EDT_HABITAT AS A "
+                                + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
+                                + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+                                + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
+                                + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE   "
+                                + isGoodHabitat + " AND A.ID_NATURE_OBJECT =" + factsheet.getHabitat().getIdNatureObject()
+                                + " AND C.SOURCE_DB <> 'EMERALD'" + " ORDER BY C.ID_SITE");
 
         // Sites for habitat subtypes.
         sitesForSubtypes =
-            new SitesByNatureObjectDomain()
-        .findCustom("SELECT DISTINCT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN "
-                + " FROM CHM62EDT_HABITAT AS A "
-                + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
-                + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
-                + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
-                + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE "
-                + " WHERE A.ID_NATURE_OBJECT ="
-                + factsheet.getHabitat().getIdNatureObject()
-                + (factsheet.isAnnexI() ? " and right(A.code_2000,2) <> '00' and length(A.code_2000) = 4 AND if(right(A.code_2000,1) = '0',left(A.code_2000,3),A.code_2000) like '"
-                        + factsheet.getCode2000() + "%' and A.code_2000 <> '" + factsheet.getCode2000() + "'"
-                        : " AND A.EUNIS_HABITAT_CODE like '" + factsheet.getEunisHabitatCode()
-                        + "%' and A.EUNIS_HABITAT_CODE<> '" + factsheet.getEunisHabitatCode() + "'")
-                        + " AND C.SOURCE_DB <> 'EMERALD'" + " ORDER BY C.ID_SITE");
+                new SitesByNatureObjectDomain()
+                        .findCustom("SELECT DISTINCT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN "
+                                + " FROM CHM62EDT_HABITAT AS A "
+                                + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
+                                + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+                                + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
+                                + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE "
+                                + " WHERE A.ID_NATURE_OBJECT ="
+                                + factsheet.getHabitat().getIdNatureObject()
+                                + (factsheet.isAnnexI() ? " and right(A.code_2000,2) <> '00' and length(A.code_2000) = 4 AND if(right(A.code_2000,1) = '0',left(A.code_2000,3),A.code_2000) like '"
+                                        + factsheet.getCode2000() + "%' and A.code_2000 <> '" + factsheet.getCode2000() + "'"
+                                        : " AND A.EUNIS_HABITAT_CODE like '" + factsheet.getEunisHabitatCode()
+                                                + "%' and A.EUNIS_HABITAT_CODE<> '" + factsheet.getEunisHabitatCode() + "'")
+                                + " AND C.SOURCE_DB <> 'EMERALD'" + " ORDER BY C.ID_SITE");
 
         if ((null != sites && !sites.isEmpty()) || (null != sitesForSubtypes && !sitesForSubtypes.isEmpty())) {
             mapIds = "";
@@ -285,11 +285,12 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         try {
             picsURL = "idobject=" + factsheet.getIdHabitat() + "&amp;natureobjecttype=Habitats";
 
-            // TODO: This is only slightly different from ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet#getPicturesForHabitats
+            // TODO: This is only slightly different from
+            // ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet#getPicturesForHabitats
             // The next two lines should be refactored to call a method in ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet
             // and there can at most be one main picture. No need to return a list.
-            List<Chm62edtNatureObjectPicturePersist> pictures = new Chm62edtNatureObjectPictureDomain()
-            .findWhere("MAIN_PIC = 1 AND ID_OBJECT = " +idHabitat);
+            List<Chm62edtNatureObjectPicturePersist> pictures =
+                    new Chm62edtNatureObjectPictureDomain().findWhere("MAIN_PIC = 1 AND ID_OBJECT = " + idHabitat);
 
             if (pictures != null && !pictures.isEmpty()) {
                 String mainPictureMaxWidth = pictures.get(0).getMaxWidth().toString();
@@ -302,8 +303,8 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                 if (mainPictureMaxWidthInt != null && mainPictureMaxWidthInt.intValue() > 0 && mainPictureMaxHeightInt != null
                         && mainPictureMaxHeightInt.intValue() > 0) {
                     styleAttr =
-                        "max-width: " + mainPictureMaxWidthInt.intValue() + "px; max-height: "
-                        + mainPictureMaxHeightInt.intValue() + "px";
+                            "max-width: " + mainPictureMaxWidthInt.intValue() + "px; max-height: "
+                                    + mainPictureMaxHeightInt.intValue() + "px";
                 }
 
                 String desc = pictures.get(0).getDescription();
@@ -314,26 +315,27 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                 pic.setFilename(pictures.get(0).getFileName());
                 pic.setDescription(desc);
                 pic.setSource(pictures.get(0).getSource());
+                pic.setSourceUrl(pictures.get(0).getSourceUrl());
                 pic.setStyle(styleAttr);
                 pic.setMaxwidth(mainPictureMaxWidth);
                 pic.setMaxheight(mainPictureMaxHeight);
                 pic.setPath(picturePath);
                 pic.setDomain(domainName);
                 pic.setUrl(picsURL);
+                pic.setLicense(pictures.get(0).getLicense());
             }
-
 
             descriptions = factsheet.getDescrOwner();
 
             Hashtable<String, AttributeDto> natObjectAttributes =
-                DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectAttributes(factsheet.idNatureObject);
+                    DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectAttributes(factsheet.idNatureObject);
             if (natObjectAttributes != null && natObjectAttributes.size() > 0) {
                 AttributeDto attr = natObjectAttributes.get(Constants.ART17_SUMMARY);
                 if (attr != null) {
                     art17link = attr.getValue();
                 }
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -345,25 +347,16 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private void deliveriesTabActions() {
 
         String query =
-            "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
-            + "PREFIX dc: <http://purl.org/dc/elements/1.1/> "
-            + "PREFIX dct: <http://purl.org/dc/terms/> "
-            + "PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> "
-            + "PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> "
-            + "SELECT DISTINCT xsd:date(?released) AS ?released ?coverage ?envelope ?envtitle "
-            + "IRI(bif:concat(?sourcefile,'/manage_document')) AS ?file ?filetitle "
-            + "WHERE { "
-            + "GRAPH ?sourcefile { "
-            + "_:reference ?pred <http://eunis.eea.europa.eu/habitats/" + idHabitat + "> "
-            + "OPTIONAL { _:reference rdfs:label ?label } "
-            + "} "
-            + "?envelope rod:hasFile ?sourcefile; "
-            + "rod:released ?released; "
-            + "rod:locality _:locurl; "
-            + "dc:title ?envtitle . "
-            + "_:locurl rdfs:label ?coverage . "
-            + "?sourcefile dc:title ?filetitle "
-            + "} ORDER BY DESC(?released)";
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " + "PREFIX dc: <http://purl.org/dc/elements/1.1/> "
+                        + "PREFIX dct: <http://purl.org/dc/terms/> "
+                        + "PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> "
+                        + "PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> "
+                        + "SELECT DISTINCT xsd:date(?released) AS ?released ?coverage ?envelope ?envtitle "
+                        + "IRI(bif:concat(?sourcefile,'/manage_document')) AS ?file ?filetitle " + "WHERE { "
+                        + "GRAPH ?sourcefile { " + "_:reference ?pred <http://eunis.eea.europa.eu/habitats/" + idHabitat + "> "
+                        + "OPTIONAL { _:reference rdfs:label ?label } " + "} " + "?envelope rod:hasFile ?sourcefile; "
+                        + "rod:released ?released; " + "rod:locality _:locurl; " + "dc:title ?envtitle . "
+                        + "_:locurl rdfs:label ?coverage . " + "?sourcefile dc:title ?filetitle " + "} ORDER BY DESC(?released)";
 
         String CRSparqlEndpoint = getContext().getApplicationProperty("cr.sparql.endpoint");
         if (!StringUtils.isBlank(CRSparqlEndpoint)) {

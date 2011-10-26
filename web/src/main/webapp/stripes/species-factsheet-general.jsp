@@ -14,8 +14,21 @@
 	    		</div>
 	    		<c:if test="${!empty actionBean.pic.source}">
 					<div class="naturepic-source-copyright">
-						${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}: ${actionBean.pic.source}
+						${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}:
+						<c:choose>
+							<c:when test="${!empty actionBean.pic.sourceUrl}">
+								<a href="${eunis:treatURLSpecialCharacters(actionBean.pic.sourceUrl)}">${actionBean.pic.source}</a>
+							</c:when>
+							<c:otherwise>
+								${actionBean.pic.source}
+							</c:otherwise>
+						</c:choose>
 					</div>
+	    		</c:if>
+	    		<c:if test="${!empty actionBean.pic.license}">
+		    		<div class="naturepic-source-copyright">
+		    			${eunis:cmsPhrase(actionBean.contentManagement, 'License')}: ${actionBean.pic.license}
+		    		</div>
 	    		</c:if>
 	  		</div>
   		</div>
@@ -80,7 +93,7 @@
 		    <div>
 		        <a title="${eunis:cmsPhrase(actionBean.contentManagement, 'Pictures of the species on Google')}" href="http://images.google.com/images?q=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}">${eunis:cmsPhrase(actionBean.contentManagement, 'Pictures on Google')}</a>
 			</div>
-			<c:choose> 
+			<c:choose>
 				<c:when test="${!empty actionBean.gbifLink}">
 					<div>
 		        		<a href="http://data.gbif.org/species/${actionBean.gbifLink}">${eunis:cmsPhrase(actionBean.contentManagement, 'GBIF page')}</a>
@@ -97,7 +110,7 @@
 		        	<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'Search species on UNEP-WCMC')}" href="http://www.unep-wcmc-apps.org/isdb/Taxonomy/tax-gs-search2.cfm?displaylanguage=ENG&source=${actionBean.kingdomname}&amp;GenName=${actionBean.specie.genus}&amp;SpcName=${eunis:treatURLSpecialCharacters(actionBean.speciesName)}">${eunis:cmsPhrase(actionBean.contentManagement, 'UNEP-WCMC search')}</a>
 		      	</div>
 			</c:if>
-			<c:choose> 
+			<c:choose>
 				<c:when test="${!empty actionBean.redlistLink}">
 					<div>
 		        		<a href="http://www.iucnredlist.org/apps/redlist/details/${actionBean.redlistLink}/0">${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red List page')}</a>
@@ -125,7 +138,7 @@
 			<div>
 	        	<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'Search species on SCIRUS')}" href="http://www.scirus.com/srsapp/search?q=%22${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}%22&amp;ds=web&amp;g=s&amp;t=all">${eunis:cmsPhrase(actionBean.contentManagement, 'SCIRUS search')}</a>
 			</div>
-			<c:choose> 
+			<c:choose>
 				<c:when test="${!empty actionBean.faeu}">
 					<div>
 			        	<a href="http://www.faunaeur.org/full_results.php?id=${actionBean.faeu}">${eunis:cmsPhrase(actionBean.contentManagement, 'Fauna Europaea page')}</a>
@@ -149,7 +162,7 @@
 	        		<a href="http://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=${actionBean.itisTSN}">${eunis:cmsPhrase(actionBean.contentManagement, 'ITIS TSN:')}${actionBean.itisTSN}</a>
 				</div>
 			</c:if>
-			<c:choose> 
+			<c:choose>
 				<c:when test="${!empty actionBean.ncbi}">
 					<div>
 			        	<a href="http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${actionBean.ncbi}&amp;lvl=0">${eunis:cmsPhrase(actionBean.contentManagement, 'NCBI:')}${actionBean.ncbi}</a>
@@ -274,7 +287,7 @@
           			${eunis:cmsPhrase(actionBean.contentManagement, 'Url')}:
         		</th>
         		<td>
-        			<c:choose> 
+        			<c:choose>
 					<c:when test="${!empty actionBean.speciesBook.URL}">
 			        	<a href="${eunis:replaceAll(eunis:treatURLSpecialCharacters(actionBean.speciesBook.URL),'#','')}">${eunis:replaceAll(eunis:treatURLSpecialCharacters(actionBean.speciesBook.URL),'#','')}</a>
 					</c:when>
@@ -304,7 +317,7 @@
         				${eunis:cmsPhrase(actionBean.contentManagement, 'Author')}
 	          			${eunis:cmsTitle(actionBean.contentManagement, 'sort_by_column')}
         			</th>
-      			</tr>	
+      			</tr>
     		</thead>
     		<tbody>
 	    		<c:forEach items="${actionBean.factsheet.synonymsIterator}" var="synonym" varStatus="loop">
@@ -338,7 +351,7 @@
         				${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}
 	          			${eunis:cmsTitle(actionBean.contentManagement, 'sort_results_on_this_column')}
         			</th>
-      			</tr>	
+      			</tr>
     		</thead>
     		<tbody>
 	    		<c:forEach items="${actionBean.subSpecies}" var="subspecie" varStatus="loop">
@@ -357,16 +370,12 @@
   	</c:if>
   	<br />
   	<br />
-  	<c:choose>
-  		<c:when test="${!empty actionBean.factsheet.picturesForSpecies}">
-  			<a href="javascript:openpictures('${actionBean.domainName}/pictures.jsp?${actionBean.urlPic}',600,600)">${eunis:cmsPhrase(actionBean.contentManagement, 'View pictures')}</a>
-  		</c:when>
-		<c:when test="${actionBean.context.sessionManager.authenticated && actionBean.context.sessionManager.upload_pictures_RIGHT}">
-			<a href="javascript:openpictures('${actionBean.domainName}/pictures-upload.jsp?operation=upload&amp;${actionBean.urlPic}',600,600)">${eunis:cmsPhrase(actionBean.contentManagement, 'Upload pictures')}</a>
-		</c:when>
-		<c:otherwise>
-		</c:otherwise>
-	</c:choose>
+	<c:if test="${!empty actionBean.factsheet.picturesForSpecies}">
+		<a href="javascript:openpictures('${actionBean.domainName}/pictures.jsp?${actionBean.urlPic}',600,600)">${eunis:cmsPhrase(actionBean.contentManagement, 'View pictures')}</a>
+	</c:if>
+	<c:if test="${actionBean.context.sessionManager.authenticated && actionBean.context.sessionManager.upload_pictures_RIGHT}">
+		<a href="javascript:openpictures('${actionBean.domainName}/pictures-upload.jsp?operation=upload&amp;${actionBean.urlPic}',600,600)">${eunis:cmsPhrase(actionBean.contentManagement, 'Upload pictures')}</a>
+	</c:if>
 	${eunis:br(actionBean.contentManagement)}
 	${eunis:cmsMsg(actionBean.contentManagement, 'species_factsheet_10_Sum')}
 	${eunis:br(actionBean.contentManagement)}

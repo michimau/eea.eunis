@@ -103,7 +103,7 @@
       source=picture.getSource();
       sourceUrl=picture.getSourceUrl();
       if (sourceUrl != null && !sourceUrl.equals("")) {
-          source = "<a href=\"" + EunisUtil.replaceTags(sourceUrl, true, true) + "\">" + source + "</a>";
+          source = "<a href='" + EunisUtil.replaceTags(sourceUrl, true, true) + "'>" + source + "</a>";
       }
       if (license != null && !license.equals("")) {
           source = source + " (" + license + ")";

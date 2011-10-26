@@ -76,6 +76,7 @@
       <p>
         <label for="license">${eunis:cmsPhrase(actionBean.contentManagement, 'License')}: </label>
         <select name="license" id="license">
+        	<option value=""></option>
         	<option value="CC BY">CC BY</option>
         	<option value="CC BY-SA">CC BY-SA</option>
         	<option value="CC BY-ND">CC BY-ND</option>

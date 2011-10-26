@@ -62,7 +62,7 @@
   String filename;
   String name;
   String description;
-  String license="";
+  String license;
   String source;
   String sourceUrl;
   String firstimage="";
@@ -105,6 +105,9 @@
       if (sourceUrl != null && !sourceUrl.equals("")) {
           source = "<a href=\"" + EunisUtil.replaceTags(sourceUrl, true, true) + "\">" + source + "</a>";
       }
+      if (license != null && !license.equals("")) {
+          source = source + " (" + license + ")";
+      }
       if(firstimage.equalsIgnoreCase(""))
       {
         firstimage = filename;
@@ -116,7 +119,6 @@
         nameArray[ImageNum] = "<%=name%>";
         descriptionArray[ImageNum] = "<%=description%>";
         sourceArray[ImageNum] = "<%=cm.cmsPhrase("Source")%>: <%=source%>";
-        licenseArray[ImageNum] = "<%=cm.cmsPhrase("License")%>: <%=license%>";
         ImageNum++;
 <%
     }
@@ -138,7 +140,6 @@
           document.getElementById('picture_name').innerHTML=nameArray[ImageNum];
           document.getElementById('picture_description').innerHTML=descriptionArray[ImageNum];
           document.getElementById('picture_source').innerHTML=sourceArray[ImageNum];
-          document.getElementById('picture_license').innerHTML=licenseArray[ImageNum];
         }
 
         function getNextImage() {
@@ -153,7 +154,6 @@
           document.getElementById('picture_name').innerHTML=nameArray[ImageNum];
           document.getElementById('picture_description').innerHTML=descriptionArray[ImageNum];
           document.getElementById('picture_source').innerHTML=sourceArray[ImageNum];
-          document.getElementById('license_source').innerHTML=licenseArray[ImageNum];
         }
 
         function getPrevImage()
@@ -195,9 +195,6 @@
     </div>
     <div id="picture_source" style="text-align:right; font-weight:bold;">
       <%=cm.cmsPhrase("Source")%>: <%=firstsource%>
-    </div>
-    <div id="picture_license" style="text-align:right; font-weight:bold;">
-      <%=cm.cmsPhrase("License")%>: <%=license%>
     </div>
     <script language="JavaScript" type="text/javascript">
       //<![CDATA[

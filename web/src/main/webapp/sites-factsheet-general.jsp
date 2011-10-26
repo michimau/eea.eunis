@@ -79,12 +79,10 @@
         	 <% } else {%>
         	 	<%=source%>
         	 <% }%>
+        	 <% if(license != null && license.length() > 0){%>
+       			&nbsp;(<%=license%>)
+       		<% }%>
           </div>
-        <%}%>
-        <% if(license != null && license.length() > 0){%>
-	        <div class="naturepic-source-copyright">
-	        	<%=cm.cmsPhrase("License")%>: <%=license%>
-	        </div>
         <%}%>
       </div>
   </div>

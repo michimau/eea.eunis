@@ -24,12 +24,10 @@
 								${actionBean.pic.source}
 							</c:otherwise>
 						</c:choose>
+						<c:if test="${!empty actionBean.pic.license}">
+							&nbsp;(${actionBean.pic.license})
+						</c:if>
 					</div>
-	    		</c:if>
-	    		<c:if test="${!empty actionBean.pic.license}">
-		    		<div class="naturepic-source-copyright">
-		    			${eunis:cmsPhrase(actionBean.contentManagement, 'License')}: ${actionBean.pic.license}
-		    		</div>
 	    		</c:if>
 	  		</div>
   		</div>

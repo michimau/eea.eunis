@@ -1,6 +1,6 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 
-<%@ include file="/stripes/common/taglibs.jsp"%>	
+<%@ include file="/stripes/common/taglibs.jsp"%>
 <c:set var="title" value=""></c:set>
 <c:choose>
 	<c:when test="${eunis:exists(actionBean.factsheet)}">
@@ -14,17 +14,17 @@
 	<stripes:layout-component name="head">
 		<script language="JavaScript" src="script/species.js" type="text/javascript"></script>
     	<script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
-		<link rel="alternate" 
-			type="application/rdf+xml" title="RDF" 
+		<link rel="alternate"
+			type="application/rdf+xml" title="RDF"
 			href="${pageContext.request.contextPath}/species/${actionBean.idSpecies}" />
 	</stripes:layout-component>
-	
+
 	<stripes:layout-component name="contents">
 		<!-- MAIN CONTENT -->
-		
-		<c:choose> 
+
+		<c:choose>
 			<c:when test="${eunis:exists(actionBean.factsheet)}">
-			
+
 			<img alt="${eunis:cms(actionBean.contentManagement,'loading_data')}" id="loading" src="images/loading.gif" />
 			  <h1 class="documentFirstHeading">${eunis:replaceTags(actionBean.scientificName)}
 			  <c:if test="${actionBean.seniorSpecies != null}">
@@ -59,7 +59,7 @@
 		              		<c:choose>
 		              			<c:when test="${dataTab.id eq actionBean.tab}">
 			              			<li id="currenttab">
-			              				<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${dataTab.value}" 
+			              				<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${dataTab.value}"
 			              				href="species/${actionBean.factsheet.idSpecies}/${dataTab.id}">${dataTab.value}</a>
 			              			</li>
 		              			</c:when>
@@ -132,16 +132,16 @@
 		                	<%-- GBIF observations --%>
 		                	<stripes:layout-render name="/stripes/species-factsheet-gbif.jsp"/>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 'deliveries'}">
-		                	<%-- Deliveries --%>
-		                	<stripes:layout-render name="/stripes/species-factsheet-deliveries.jsp"/>
+		                <c:if test="${actionBean.tab == 'foreigndata'}">
+		                	<%-- Foreigndata --%>
+		                	<stripes:layout-render name="/stripes/species-factsheet-foreigndata.jsp"/>
 		                </c:if>
 			</c:when>
 			<c:otherwise>
 				<div class="error-msg">
 		           ${eunis:cmsPhrase(actionBean.contentManagement, 'We are sorry, the requested species does not exist')}
-		        </div>	
-			
+		        </div>
+
 			</c:otherwise>
 		</c:choose>
 			<c:forEach items="${actionBean.tabs}" var="tab">

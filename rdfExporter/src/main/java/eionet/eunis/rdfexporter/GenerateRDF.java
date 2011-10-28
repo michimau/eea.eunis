@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.Arrays;
+import java.util.TreeSet;
 
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -121,9 +122,11 @@ public class GenerateRDF {
     /** The URL of the null namespace. */
     private String nullNamespace;
     /** The namespaces to add to the rdf:RDF element. */
-    private HashMap namespaces;
+    private HashMap<String, String> namespaces;
     /** The properties that are object properties. They point to another object. */
-    private HashMap objectProperties;
+    private HashMap<String, String> objectProperties;
+    /** The datatype mappings */
+    private HashMap<String, String> datatypeMap;
     /** All the tables in the properties file. */
     private String[] tables;
     /** Hashtable of loaded properties. */
@@ -165,10 +168,11 @@ public class GenerateRDF {
         nullNamespace = props.getProperty("vocabulary");
         baseurl = props.getProperty("baseurl");
 
-        namespaces = new HashMap();
+        namespaces = new HashMap<String, String>();
         namespaces.put("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
 
-        objectProperties = new HashMap();
+        objectProperties = new HashMap<String, String>();
+        datatypeMap = new HashMap<String, String>();
         // Get the namespaces from the properties file.
         // Get the objectproperties from the properties file.
         for (String key : props.stringPropertyNames()) {
@@ -177,6 +181,8 @@ public class GenerateRDF {
             } else if (key.startsWith("objectproperty.")) {
                 String value = props.getProperty(key);
                 addObjectProperty(key.substring(15), "->".concat(value));
+            } else if (key.startsWith("datatype.")) {
+                datatypeMap.put(key.substring(9), props.getProperty(key));
             }
         }
     }
@@ -309,7 +315,10 @@ public class GenerateRDF {
     }
 
     /**
-     * Export a table as RDF. A table can consist of several queries.
+     * Export a table as RDF. A table can consist of several queries specified
+     * as property names table.query1, table.query2, table.attributetable1 etc.
+     * The queries are sorted on name before being executed with the x.query
+     * first then x.attributetable second.
      *
      * @param table - name of table in properties file
      * @param identifier - primary key of the record we want or null for all records.
@@ -319,9 +328,10 @@ public class GenerateRDF {
         Boolean firstQuery = true;
         String rdfClass = table.substring(0, 1).toUpperCase() + table.substring(1).toLowerCase();
         rdfClass = props.getProperty(table.concat(".class"), rdfClass);
+        TreeSet<String> sortedProps = new TreeSet<String>(props.stringPropertyNames());
         String tableQueryKey = table.concat(".query");
 
-        for (String key : props.stringPropertyNames()) {
+        for (String key : sortedProps) {
             if (key.startsWith(tableQueryKey)) {
                 String query = props.getProperty(key);
                 if (identifier != null) {
@@ -334,7 +344,7 @@ public class GenerateRDF {
 
         String tableAttributesKey = table.concat(".attributetable");
 
-        for (String key : props.stringPropertyNames()) {
+        for (String key : sortedProps) {
             if (key.startsWith(tableAttributesKey)) {
                 String query = props.getProperty(key);
                 if (identifier != null) {
@@ -528,16 +538,9 @@ public class GenerateRDF {
 
         for (int i = 1; i <= numcols; i++) {
             dbDatatype = rsmd.getColumnTypeName(i).toLowerCase();
-            //TODO: implement all types, perhaps even implement mapping in properties file.
-            rdfDatatype = "";
-            if ("varchar".equals(dbDatatype) || "char".equals(dbDatatype) || "nvarchar".equals(dbDatatype)) {
+            rdfDatatype = datatypeMap.get((Object) dbDatatype);
+            if (rdfDatatype == null) {
                 rdfDatatype = "";
-            } else if ("int".equals(dbDatatype)) {
-                rdfDatatype = "xsd:integer";
-            } else if ("datetime".equals(dbDatatype)) {
-                rdfDatatype = "xsd:dateTime";
-            } else if ("decimal".equals(dbDatatype)) {
-                rdfDatatype = "xsd:decimal";
             }
             if (objectProperties.containsKey(rsmd.getColumnLabel(i))) {
                 rdfDatatype = objectProperties.get(rsmd.getColumnLabel(i)).toString();
@@ -586,13 +589,16 @@ public class GenerateRDF {
         return result;
     }
 
+    /**
+     * Main routine. Primarily to demonstrate the use.
+     */
     /*
     public static void main(String[] args) {
-        ArrayList unusedArgs;
+        ArrayList<String> unusedArgs;
         String[] tables;
         String identifier = null;
 
-        unusedArgs = new ArrayList(args.length);
+        unusedArgs = new ArrayList<String>(args.length);
 
         // Parse arguments. Just find an -i option
         // The -i takes an argument that is the record id we're interested in

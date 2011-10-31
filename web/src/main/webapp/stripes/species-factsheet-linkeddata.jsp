@@ -29,7 +29,7 @@
  			</c:if>
 		 	<c:choose>
 			 	<c:when test="${not empty actionBean.queryResultCols && not empty actionBean.queryResultRows}">
-			 		<display:table name="actionBean.queryResultRows" class="sortable" pagesize="50" sort="list" style="width: 100%" requestURI="/species/${actionBean.idSpecies}/linkeddata">
+			 		<display:table name="actionBean.queryResultRows" class="sortable" pagesize="50" sort="list" requestURI="/species/${actionBean.idSpecies}/linkeddata">
 					    <c:forEach var="cl" items="${actionBean.queryResultCols}">
 					      	<display:column property="${cl.property}" title="${cl.title}" sortable="${cl.sortable}" decorator="eionet.eunis.util.decorators.ForeignDataColumnDecorator"/>
 					    </c:forEach>

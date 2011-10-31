@@ -1,12 +1,19 @@
 package ro.finsiel.eunis.factsheet;
 
 
-import ro.finsiel.eunis.jrfTables.*;
-
 import java.util.List;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
+
+import ro.finsiel.eunis.jrfTables.Chm62edtHabitatDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtHabitatPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtSitesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtSitesPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist;
 
 
 /**
@@ -105,8 +112,7 @@ public class PicturesHelper {
     public static boolean deletePicture(String idObject, String natureObjectType, String name, String filename) {
         boolean ret = false;
 
-        if (null != idObject && null != natureObjectType && null != name
-                && null != filename) {
+        if (null != idObject && null != natureObjectType && null != name && null != filename) {
             try {
                 Chm62edtNatureObjectPicturePersist picture = null;
 
@@ -114,29 +120,22 @@ public class PicturesHelper {
                 name = name.replaceAll("'", "''");
                 filename = filename.replaceAll("'", "''");
                 String sql = " ID_OBJECT='" + idObject
-                        + "' AND NATURE_OBJECT_TYPE='" + natureObjectType
-                        + "' AND " + " NAME='" + name + "' AND FILE_NAME='"
-                        + filename + "'";
-                List pictures = new Chm62edtNatureObjectPictureDomain().findWhere(
-                        sql);
+                + "' AND NATURE_OBJECT_TYPE='" + natureObjectType
+                + "' AND " + " NAME='" + name + "' AND FILE_NAME='" + filename + "'";
+                List pictures = new Chm62edtNatureObjectPictureDomain().findWhere(sql);
 
                 if (null != pictures && pictures.size() > 0) {
                     // remove it from table.
-                    picture = (Chm62edtNatureObjectPicturePersist) pictures.get(
-                            0);
-                    int retValue = new Chm62edtNatureObjectPictureDomain().delete(
-                            picture);
-
+                    picture = (Chm62edtNatureObjectPicturePersist) pictures.get(0);
+                    int retValue = new Chm62edtNatureObjectPictureDomain().delete(picture);
                     ret = (1 == retValue) ? true : false;
                 }
             } catch (Exception _ex) {
                 _ex.printStackTrace(System.err);
             }
         } else {
-            logger.warn(
-                    "deletePicture(" + idObject + ", " + natureObjectType + ", "
-                    + name + ", " + filename
-                    + ") : One of the parameters was null!");
+            logger.warn("deletePicture(" + idObject + ", " + natureObjectType + ", "
+                    + name + ", " + filename + ") : One of the parameters was null!");
         }
         return ret;
     }
@@ -152,8 +151,8 @@ public class PicturesHelper {
 
         if (null != idObject && null != natureObjectType) {
             String sql = " ID_OBJECT='" + idObject
-                    + "' AND NATURE_OBJECT_TYPE='" + natureObjectType
-                    + "' AND MAIN_PIC = 0";
+            + "' AND NATURE_OBJECT_TYPE='" + natureObjectType
+            + "' AND MAIN_PIC = 0";
 
             try {
                 Chm62edtNatureObjectPictureDomain nop = new Chm62edtNatureObjectPictureDomain();

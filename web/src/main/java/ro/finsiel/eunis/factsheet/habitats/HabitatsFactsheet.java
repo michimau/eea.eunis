@@ -1,6 +1,7 @@
 package ro.finsiel.eunis.factsheet.habitats;
 
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -44,6 +45,7 @@ import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectAttributesPersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectReportTypeDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectReportTypePersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesDomain;
@@ -71,6 +73,7 @@ import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.SortList;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.factsheet.HabitatsSpeciesWrapper;
+import eionet.eunis.dto.PictureDTO;
 
 
 /**
@@ -2042,24 +2045,101 @@ public class HabitatsFactsheet {
     }
 
     /**
-     * Retrieve the pictures available for this habitat.
+     * Retrieve the pictures available for this habitat..
      *
-     * @return List of Chm62edtNatureObjectPicturePersist objects.
+     * @param limit - number of pictures returned
+     * @param mainPic - query only main pic
+     * @return A list of Chm62edtNatureObjectPicturePersist objects, one for each picture.
      */
-    public List getPicturesForHabitats() {
-        List results = new Vector();
-        String where = "";
-        Chm62edtNatureObjectPictureDomain nop = new Chm62edtNatureObjectPictureDomain();
+    public List<Chm62edtNatureObjectPicturePersist> getPicturesForHabitats(Integer limit, boolean mainPic) {
+        List<Chm62edtNatureObjectPicturePersist> results = new ArrayList<Chm62edtNatureObjectPicturePersist>();
 
+        Chm62edtNatureObjectPictureDomain nop = new Chm62edtNatureObjectPictureDomain();
+        String where = "";
         where += " ID_OBJECT='" + habitat.getIdHabitat() + "'";
         where += " AND NATURE_OBJECT_TYPE='Habitats'";
+        if (mainPic) {
+            where += " AND MAIN_PIC = 1";
+        }
+        if (limit != null) {
+            where += " LIMIT " + limit;
+        }
         try {
             results = nop.findWhere(where);
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
-            results = new Vector();
         }
         return results;
+    }
+
+    /**
+     * Check if habitat has pictures.
+     *
+     * @return boolean - true if factsheet has pictures.
+     */
+    public boolean getHasPictures() {
+        boolean ret = false;
+        try {
+            List<Chm62edtNatureObjectPicturePersist> pplist = getPicturesForHabitats(1, false);
+            if (pplist != null && pplist.size() > 0) {
+                ret = true;
+            }
+        } catch (Exception _ex) {
+            _ex.printStackTrace(System.err);
+        }
+        return ret;
+    }
+
+    /**
+     * Get the main picture available in database for this habitat. It queries the CHM62EDT_NATURE_OBJECT_PICTURE
+     * with ID_HABITAT and NATURE_OBJECT_TYPE='Habitats' AND MAIN_PIC = 1 .
+     *
+     * @return A PictureDTO object.
+     */
+    public PictureDTO getMainPicture(String picturePath, String domainName) {
+        PictureDTO ret = null;
+        try {
+            List<Chm62edtNatureObjectPicturePersist> pplist = getPicturesForHabitats(1, true);
+            if (pplist != null && pplist.size() > 0) {
+                Chm62edtNatureObjectPicturePersist pp = pplist.get(0);
+                if (pp != null) {
+                    String mainPictureMaxWidth = pp.getMaxWidth().toString();
+                    String mainPictureMaxHeight = pp.getMaxHeight().toString();
+                    Integer mainPictureMaxWidthInt = Utilities.checkedStringToInt(mainPictureMaxWidth, new Integer(0));
+                    Integer mainPictureMaxHeightInt = Utilities.checkedStringToInt(mainPictureMaxHeight, new Integer(0));
+
+                    String styleAttr = "max-width:300px; max-height:400px;";
+
+                    if (mainPictureMaxWidthInt != null && mainPictureMaxWidthInt.intValue() > 0 && mainPictureMaxHeightInt != null
+                            && mainPictureMaxHeightInt.intValue() > 0) {
+                        styleAttr = "max-width: " + mainPictureMaxWidthInt.intValue() +
+                        "px; max-height: " + mainPictureMaxHeightInt.intValue() + "px";
+                    }
+
+                    String desc = pp.getDescription();
+
+                    if (desc == null || desc.equals("")) {
+                        desc = habitat.getScientificName();
+                    }
+
+                    ret = new PictureDTO();
+                    ret.setFilename(pp.getFileName());
+                    ret.setDescription(desc);
+                    ret.setSource(pp.getSource());
+                    ret.setSourceUrl(pp.getSourceUrl());
+                    ret.setStyle(styleAttr);
+                    ret.setMaxwidth(mainPictureMaxWidth);
+                    ret.setMaxheight(mainPictureMaxHeight);
+                    ret.setPath(picturePath);
+                    ret.setDomain(domainName);
+                    ret.setLicense(pp.getLicense());
+                }
+
+            }
+        } catch (Exception _ex) {
+            _ex.printStackTrace(System.err);
+        }
+        return ret;
     }
 
     /**

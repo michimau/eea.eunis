@@ -6,7 +6,7 @@ import org.simpleframework.xml.Root;
 
 /**
  * DTO object for factsheet picture.
- * 
+ *
  * @author Risto Alt <a href="mailto:risto.alt@tieto.com">contact</a>
  */
 @Root
@@ -26,7 +26,6 @@ public class PictureDTO implements Serializable {
     private String path;
     private String style;
     private String domain;
-    private String url;
     private String license;
 
     public String getFilename() {
@@ -91,14 +90,6 @@ public class PictureDTO implements Serializable {
 
     public void setDomain(String domain) {
         this.domain = domain;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public String getSourceUrl() {

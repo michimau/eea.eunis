@@ -2,6 +2,7 @@ package ro.finsiel.eunis.factsheet.species;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -27,6 +28,7 @@ import ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesPersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtLegalStatusDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtLegalStatusPersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtPopulationUnitDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtPopulationUnitPersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesDomain;
@@ -59,10 +61,17 @@ import ro.finsiel.eunis.jrfTables.species.factsheet.SpeciesStatusReportTypeDomai
 import ro.finsiel.eunis.jrfTables.species.factsheet.SpeciesStatusReportTypePersist;
 import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTypeSpeciesDomain;
 import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTypeSpeciesPersist;
+import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain;
+import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist;
 import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.factsheet.PublicationWrapper;
 import ro.finsiel.eunis.utilities.EunisUtil;
+
+import com.ibm.icu.util.StringTokenizer;
+
+import eionet.eunis.dto.ClassificationDTO;
+import eionet.eunis.dto.PictureDTO;
 import eionet.eunis.dto.TaxonomyTreeDTO;
 
 
@@ -1411,21 +1420,131 @@ public class SpeciesFactsheet {
      * Get the pictures available in database for this species. It queries the CHM62EDT_NATURE_OBJECT_PICTURE
      * with ID_SPECIES ant NATURE_OBJECT_TYPE='Species'.
      *
+     * @param limit - number of pictures returned
+     * @param mainPic - query only main pic
      * @return A list of Chm62edtNatureObjectPicturePersist objects, one for each picture.
      */
-    public List getPicturesForSpecies() {
-        List results = new Vector();
-        String where = "";
-        Chm62edtNatureObjectPictureDomain nop = new Chm62edtNatureObjectPictureDomain();
+    public List<Chm62edtNatureObjectPicturePersist> getPicturesForSpecies(Integer limit, boolean mainPic) {
+        List<Chm62edtNatureObjectPicturePersist> results = new ArrayList<Chm62edtNatureObjectPicturePersist>();
 
+        Chm62edtNatureObjectPictureDomain nop = new Chm62edtNatureObjectPictureDomain();
+        String where = "";
         where += " ID_OBJECT='" + getSpeciesObject().getIdSpecies() + "'";
         where += " AND NATURE_OBJECT_TYPE='Species'";
+        if (mainPic) {
+            where += " AND MAIN_PIC = 1";
+        }
+        if (limit != null) {
+            where += " LIMIT " + limit;
+        }
         try {
             results = nop.findWhere(where);
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
         }
         return results;
+    }
+
+    /**
+     * Check if species has pictures.
+     *
+     * @return boolean - true if factsheet has pictures.
+     */
+    public boolean getHasPictures() {
+        boolean ret = false;
+        try {
+            List<Chm62edtNatureObjectPicturePersist> pplist = getPicturesForSpecies(1, false);
+            if (pplist != null && pplist.size() > 0) {
+                ret = true;
+            }
+        } catch (Exception _ex) {
+            _ex.printStackTrace(System.err);
+        }
+        return ret;
+    }
+
+    /**
+     * Get the main picture available in database for this species. It queries the CHM62EDT_NATURE_OBJECT_PICTURE
+     * with ID_SPECIES and NATURE_OBJECT_TYPE='Species' AND MAIN_PIC = 1 .
+     *
+     * @return A PictureDTO object.
+     */
+    public PictureDTO getMainPicture(String picturePath, String domainName) {
+        PictureDTO ret = null;
+        try {
+            List<Chm62edtNatureObjectPicturePersist> pplist = getPicturesForSpecies(1, true);
+            if (pplist != null && pplist.size() > 0) {
+                Chm62edtNatureObjectPicturePersist pp = pplist.get(0);
+                if (pp != null) {
+                    String mainPictureMaxWidth = pp.getMaxWidth().toString();
+                    String mainPictureMaxHeight = pp.getMaxHeight().toString();
+                    Integer mainPictureMaxWidthInt = Utilities.checkedStringToInt(mainPictureMaxWidth, new Integer(0));
+                    Integer mainPictureMaxHeightInt = Utilities.checkedStringToInt(mainPictureMaxHeight, new Integer(0));
+
+                    String styleAttr = "max-width:300px; max-height:400px;";
+
+                    if (mainPictureMaxWidthInt != null && mainPictureMaxWidthInt.intValue() > 0 && mainPictureMaxHeightInt != null
+                            && mainPictureMaxHeightInt.intValue() > 0) {
+                        styleAttr = "max-width: " + mainPictureMaxWidthInt.intValue() +
+                        "px; max-height: " + mainPictureMaxHeightInt.intValue() + "px";
+                    }
+
+                    String desc = pp.getDescription();
+
+                    if (desc == null || desc.equals("")) {
+                        desc = getSpeciesObject().getScientificName();
+                    }
+
+                    ret = new PictureDTO();
+                    ret.setFilename(pp.getFileName());
+                    ret.setDescription(desc);
+                    ret.setSource(pp.getSource());
+                    ret.setSourceUrl(pp.getSourceUrl());
+                    ret.setStyle(styleAttr);
+                    ret.setMaxwidth(mainPictureMaxWidth);
+                    ret.setMaxheight(mainPictureMaxHeight);
+                    ret.setPath(picturePath);
+                    ret.setDomain(domainName);
+                    ret.setLicense(pp.getLicense());
+                }
+
+            }
+        } catch (Exception _ex) {
+            _ex.printStackTrace(System.err);
+        }
+        return ret;
+    }
+
+    /**
+     * Get species classification info.
+     *
+     * @return List<ClassificationDTO>.
+     */
+    public List<ClassificationDTO> getClassifications() {
+        List<ClassificationDTO> classifications = new ArrayList<ClassificationDTO>();
+
+        List<Chm62edtTaxcodePersist> list = new Chm62edtTaxcodeDomain().findWhere(
+                "ID_TAXONOMY = '" + getSpeciesObject().getIdTaxcode() + "'");
+        if (list != null && list.size() > 0) {
+            Chm62edtTaxcodePersist t = list.get(0);
+            String str = t.getTaxonomyTree();
+            StringTokenizer st = new StringTokenizer(str, ",");
+            int i = 0;
+
+            while (st.hasMoreTokens()) {
+                StringTokenizer sts = new StringTokenizer(st.nextToken(), "*");
+                String classificationId = sts.nextToken();
+                String classificationLevel = sts.nextToken();
+                String classificationName = sts.nextToken();
+
+                ClassificationDTO classif = new ClassificationDTO();
+                classif.setId(classificationId);
+                classif.setLevel(classificationLevel);
+                classif.setName(classificationName);
+                classifications.add(classif);
+            }
+        }
+        return classifications;
     }
 
     /**

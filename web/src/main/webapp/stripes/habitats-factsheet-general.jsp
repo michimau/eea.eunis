@@ -6,7 +6,7 @@
 		<div class="naturepic-plus-container naturepic-right">
 	  		<div class="naturepic-plus">
 	    		<div class="naturepic-image">
-			   		<a href="javascript:openpictures('${actionBean.pic.domain}/pictures.jsp?${actionBean.pic.url}',600,600)"">
+			   		<a href="javascript:openpictures('${actionBean.pic.domain}/pictures.jsp?idobject=${actionBean.idHabitat}&amp;natureobjecttype=Habitats',600,600)"">
 				    	<img src="${actionBean.pic.path}/${actionBean.pic.filename}" alt="${actionBean.pic.description}" class="scaled" style="${actionBean.pic.style}"/>
 				    </a>
 			    </div>
@@ -325,13 +325,14 @@
     		</tbody>
     	</table>
 	</c:if>
-	<c:if test="${!empty actionBean.factsheet.picturesForHabitats}">
-		<a href="javascript:openpictures('${actionBean.domainName}/pictures.jsp?${actionBean.picsURL}',600,600)">
+	<c:if test="${actionBean.factsheet.hasPictures}">
+		<a href="javascript:openpictures('${actionBean.domainName}/pictures.jsp?idobject=${actionBean.idHabitat}&amp;natureobjecttype=Habitats',600,600)">
 			${eunis:cmsPhrase(actionBean.contentManagement, 'View pictures')}
 		</a>
 	</c:if>
+	<br/>
 	<c:if test="${actionBean.context.sessionManager.authenticated && actionBean.context.sessionManager.upload_pictures_RIGHT}">
-		<a href="javascript:openpictures('${actionBean.domainName}/pictures-upload.jsp?operation=upload&amp;${actionBean.picsURL}',600,600)">
+		<a href="javascript:openpictures('${actionBean.domainName}/pictures-upload.jsp?operation=upload&amp;idobject=${actionBean.idHabitat}&amp;natureobjecttype=Habitats',600,600)">
 			${eunis:cmsPhrase(actionBean.contentManagement, 'Upload pictures')}
 		</a>
 	</c:if>

@@ -28,13 +28,10 @@ import ro.finsiel.eunis.factsheet.species.NationalThreatWrapper;
 import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
 import ro.finsiel.eunis.factsheet.species.ThreatColor;
 import ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
 import ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.DistributionWrapper;
 import ro.finsiel.eunis.jrfTables.species.factsheet.ReportsDistributionStatusPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
-import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist;
 import ro.finsiel.eunis.search.UniqueVector;
 import ro.finsiel.eunis.search.Utilities;
@@ -42,9 +39,6 @@ import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
 import ro.finsiel.eunis.search.species.factsheet.PublicationWrapper;
 import ro.finsiel.eunis.utilities.SQLUtilities;
-
-import com.ibm.icu.util.StringTokenizer;
-
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
 import eionet.eunis.dto.AttributeDto;
@@ -148,7 +142,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private List<NationalThreatWrapper> consStatus;
     private List<SpeciesNatureObjectPersist> subSpecies;
     private String domainName;
-    private String urlPic;
     private Hashtable<String, AttributeDto> natObjectAttributes;
 
     /** Vernacular names tab variables. */
@@ -417,90 +410,28 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     /**
      * Populate the member variables used in the "general" tab.
      *
-     * @param mainIdSpecies
-     *            - The species ID. Same as specie.getIdSpecies()
+     * @param mainIdSpecies - The species ID. Same as specie.getIdSpecies()
      */
     private void generalTabActions(int mainIdSpecies) {
 
         speciesBook = factsheet.getSpeciesBook();
-
         consStatus = factsheet.getConservationStatus(factsheet.getSpeciesObject());
-        urlPic = "idobject=" + specie.getIdSpecies() + "&amp;natureobjecttype=Species";
 
-        // TODO: This is only slightly different from ro.finsiel.eunis.factsheet.species.SpeciesFactsheet#getPicturesForSpecies
-        // The next two lines should be refactored to call a method in ro.finsiel.eunis.factsheet.species.SpeciesFactsheet
-        // and there can at most be one main picture. No need to return a list.
-        List<Chm62edtNatureObjectPicturePersist> pictures =
-            new Chm62edtNatureObjectPictureDomain().findWhere("MAIN_PIC = 1 AND ID_OBJECT = " + mainIdSpecies);
-
-        if (pictures != null && !pictures.isEmpty()) {
-            String mainPictureMaxWidth = pictures.get(0).getMaxWidth().toString();
-            String mainPictureMaxHeight = pictures.get(0).getMaxHeight().toString();
-            Integer mainPictureMaxWidthInt = Utilities.checkedStringToInt(mainPictureMaxWidth, new Integer(0));
-            Integer mainPictureMaxHeightInt = Utilities.checkedStringToInt(mainPictureMaxHeight, new Integer(0));
-
-            String styleAttr = "max-width:300px; max-height:400px;";
-
-            if (mainPictureMaxWidthInt != null && mainPictureMaxWidthInt.intValue() > 0 && mainPictureMaxHeightInt != null
-                    && mainPictureMaxHeightInt.intValue() > 0) {
-                styleAttr =
-                    "max-width: " + mainPictureMaxWidthInt.intValue() + "px; max-height: "
-                    + mainPictureMaxHeightInt.intValue() + "px";
-            }
-
-            String desc = pictures.get(0).getDescription();
-
-            if (desc == null || desc.equals("")) {
-                desc = specie.getScientificName();
-            }
-
-            String picturePath = getContext().getInitParameter("UPLOAD_DIR_PICTURES_SPECIES");
-
-            pic = new PictureDTO();
-            pic.setFilename(pictures.get(0).getFileName());
-            pic.setDescription(desc);
-            pic.setSource(pictures.get(0).getSource());
-            pic.setSourceUrl(pictures.get(0).getSourceUrl());
-            pic.setStyle(styleAttr);
-            pic.setMaxwidth(mainPictureMaxWidth);
-            pic.setMaxheight(mainPictureMaxHeight);
-            pic.setPath(picturePath);
-            pic.setDomain(domainName);
-            pic.setUrl(urlPic);
-            pic.setLicense(pictures.get(0).getLicense());
-        }
+        // Get main picture
+        String picturePath = getContext().getInitParameter("UPLOAD_DIR_PICTURES_SPECIES");
+        pic = factsheet.getMainPicture(picturePath, domainName);
 
         List list = new Vector<Chm62edtTaxcodePersist>();
-
         try {
             authorDate = SpeciesFactsheet.getBookAuthorDate(factsheet.getTaxcodeObject().IdDcTaxcode());
 
-            // The next 20 lines should probably be refactored to ro.finsiel.eunis.factsheet.species.SpeciesFactsheet
-            // This layer doesn't need to know that the taxonomy is stored as a segmented string in the DB.
-            list = new Chm62edtTaxcodeDomain().findWhere("ID_TAXONOMY = '" + specie.getIdTaxcode() + "'");
-            classifications = new ArrayList<ClassificationDTO>();
-            if (list != null && list.size() > 0) {
-                Chm62edtTaxcodePersist t = (Chm62edtTaxcodePersist) list.get(0);
-                String str = t.getTaxonomyTree();
-                StringTokenizer st = new StringTokenizer(str, ",");
-                int i = 0;
-
-                while (st.hasMoreTokens()) {
-                    StringTokenizer sts = new StringTokenizer(st.nextToken(), "*");
-                    String classificationId = sts.nextToken();
-                    String classificationLevel = sts.nextToken();
-                    String classificationName = sts.nextToken();
-
-                    if (classificationLevel.equalsIgnoreCase("kingdom")) {
-                        kingdomname = classificationName;
+            classifications = factsheet.getClassifications();
+            // Extract kingdom name
+            if (classifications != null) {
+                for (ClassificationDTO classif : classifications) {
+                    if (classif.getLevel().equalsIgnoreCase("kingdom")) {
+                        kingdomname = classif.getName();
                     }
-
-                    ClassificationDTO classif = new ClassificationDTO();
-
-                    classif.setId(classificationId);
-                    classif.setLevel(classificationLevel);
-                    classif.setName(classificationName);
-                    classifications.add(classif);
                 }
             }
 
@@ -515,11 +446,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             if (kingdomname.equalsIgnoreCase("Animalia")) {
                 kingdomname = "Animals";
-            }
-            if (kingdomname.equalsIgnoreCase("Plantae")) {
+            } else if (kingdomname.equalsIgnoreCase("Plantae")) {
                 kingdomname = "Plants";
-            }
-            if (kingdomname.equalsIgnoreCase("Fungi")) {
+            } else if (kingdomname.equalsIgnoreCase("Fungi")) {
                 kingdomname = "Mushrooms";
             }
 
@@ -594,10 +523,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     /**
      * Get value for given ID_NATURE_OBJECT and attribute name from chm62edt_nature_object_attributes table.
      *
-     * @param id
-     *            - The nature object ID.
-     * @param name
-     *            - attribute name.
+     * @param id - The nature object ID.
+     * @param name - attribute name.
      */
     private String getNatObjectAttribute(Integer id, String name) {
         String ret = null;
@@ -615,9 +542,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "geo" tab.
-     *
-     * @param mainIdSpecies
-     *            - The species ID.
      */
     private void geoTabActions() {
         bioRegions = SpeciesFactsheet.getBioRegionIterator(specie.getIdNatureObject(), factsheet.getIdSpecies());
@@ -629,7 +553,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             // Get all distinct statuses
             for (int i = 0; i < bioRegions.size(); i++) {
                 GeographicalStatusWrapper aRow = bioRegions.get(i);
-
                 statuses.addElement(aRow.getStatus());
             }
             // Compute distinct color for each status
@@ -668,9 +591,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "grid" tab.
-     *
-     * @param mainIdSpecies
-     *            - The species ID.
      */
     private void gridDistributionTabActions() {
 
@@ -746,9 +666,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "sites" tab.
-     *
-     * @param mainIdSpecies
-     *            - The species ID.
      */
     private void sitesTabActions() {
 
@@ -764,7 +681,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     /**
      * Populate the member variables used in the "foreigndata" tab.
      *
-     * @param mainIdSpecies - The species ID.
+     * @param idSpecies - The species ID.
      */
     private void foreigndataTabActions(int idSpecies) {
         try {
@@ -811,8 +728,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param factsheet
-     *            the factsheet to set
+     * @param factsheet the factsheet to set
      */
     public void setFactsheet(SpeciesFactsheet factsheet) {
         this.factsheet = factsheet;
@@ -826,8 +742,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param tab
-     *            the currentTab to set
+     * @param tab the currentTab to set
      */
     public void setTab(String tab) {
         this.tab = tab;
@@ -848,8 +763,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param idSpecies
-     *            the idSpecies to set
+     * @param idSpecies the idSpecies to set
      */
     public void setIdSpecies(String idSpecies) {
         this.idSpecies = idSpecies;
@@ -870,8 +784,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param idSpeciesLink
-     *            the idSpeciesLink to set
+     * @param idSpeciesLink the idSpeciesLink to set
      */
     public void setIdSpeciesLink(int idSpeciesLink) {
         this.idSpeciesLink = idSpeciesLink;
@@ -1057,14 +970,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     public void setDomainName(String domainName) {
         this.domainName = domainName;
-    }
-
-    public String getUrlPic() {
-        return urlPic;
-    }
-
-    public void setUrlPic(String urlPic) {
-        this.urlPic = urlPic;
     }
 
     public Vector<GeographicalStatusWrapper> getBioRegions() {

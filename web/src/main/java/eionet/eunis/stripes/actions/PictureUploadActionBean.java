@@ -67,13 +67,11 @@ public class PictureUploadActionBean extends AbstractStripesAction {
         String baseDir = "";
 
         if (StringUtils.equalsIgnoreCase("species", natureobjecttype)) {
-            baseDir = getContext().getInitParameter(
-            "UPLOAD_DIR_PICTURES_SPECIES");
+            baseDir = getContext().getInitParameter("UPLOAD_DIR_PICTURES_SPECIES");
         } else if (StringUtils.equalsIgnoreCase("sites", natureobjecttype)) {
             baseDir = getContext().getInitParameter("UPLOAD_DIR_PICTURES_SITES");
         } else if (StringUtils.equalsIgnoreCase("habitats", natureobjecttype)) {
-            baseDir = getContext().getInitParameter(
-            "UPLOAD_DIR_PICTURES_HABITATS");
+            baseDir = getContext().getInitParameter("UPLOAD_DIR_PICTURES_HABITATS");
         }
         String absoluteFilename = instanceHome + baseDir + filename;
         File absolutFile = new File(absoluteFilename);

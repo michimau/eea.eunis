@@ -132,9 +132,9 @@
 		                	<%-- GBIF observations --%>
 		                	<stripes:layout-render name="/stripes/species-factsheet-gbif.jsp"/>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 'foreigndata'}">
+		                <c:if test="${actionBean.tab == 'linkeddata'}">
 		                	<%-- Foreigndata --%>
-		                	<stripes:layout-render name="/stripes/species-factsheet-foreigndata.jsp"/>
+		                	<stripes:layout-render name="/stripes/species-factsheet-linkeddata.jsp"/>
 		                </c:if>
 			</c:when>
 			<c:otherwise>

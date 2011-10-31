@@ -53,7 +53,7 @@ import eionet.eunis.dto.SpeciesFactsheetDto;
 import eionet.eunis.dto.SpeciesSynonymDto;
 import eionet.eunis.dto.TaxonomyTreeDTO;
 import eionet.eunis.dto.VernacularNameDto;
-import eionet.eunis.rdf.ForeignData;
+import eionet.eunis.rdf.LinkedData;
 import eionet.eunis.stripes.extensions.Redirect303Resolution;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
@@ -250,8 +250,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 }
             }
 
-            // Always add foreigndata tab
-            tabsWithData.add(new Pair<String, String>("foreigndata", getContentManagement().cmsPhrase("Foreign data")));
+            // Always add linkeddata tab
+            tabsWithData.add(new Pair<String, String>("linkeddata", getContentManagement().cmsPhrase("Linked data")));
 
             specie = factsheet.getSpeciesNatureObject();
 
@@ -275,8 +275,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 sitesTabActions();
             }
 
-            if (tab != null && tab.equals("foreigndata")) {
-                foreigndataTabActions(mainIdSpecies);
+            if (tab != null && tab.equals("linkeddata")) {
+                linkeddataTabActions(mainIdSpecies);
             }
         }
         String eeaHome = getContext().getInitParameter("EEA_HOME");
@@ -679,13 +679,13 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * Populate the member variables used in the "foreigndata" tab.
+     * Populate the member variables used in the "linkeddata" tab.
      *
      * @param idSpecies - The species ID.
      */
-    private void foreigndataTabActions(int idSpecies) {
+    private void linkeddataTabActions(int idSpecies) {
         try {
-            ForeignData fd = new ForeignData();
+            LinkedData fd = new LinkedData();
             queries = fd.getQueryObjects();
 
             if (!StringUtils.isBlank(query)) {

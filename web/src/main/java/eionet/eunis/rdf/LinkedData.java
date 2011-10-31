@@ -22,9 +22,9 @@ import eionet.sparqlClient.helpers.ResultValue;
  * @author Risto Alt
  *
  */
-public class ForeignData {
+public class LinkedData {
 
-    private static final Logger logger = Logger.getLogger(ForeignData.class);
+    private static final Logger logger = Logger.getLogger(LinkedData.class);
 
     /** All the queries in the properties file. */
     private String[] queries;
@@ -42,9 +42,9 @@ public class ForeignData {
     /** Query result cols. */
     private ArrayList<Map<String, Object>> cols;
 
-    public ForeignData() throws Exception {
+    public LinkedData() throws Exception {
         props = new Properties();
-        props.load(getClass().getClassLoader().getResourceAsStream("foreigndata.properties"));
+        props.load(getClass().getClassLoader().getResourceAsStream("linkeddata.properties"));
         queries = props.getProperty("queries").split(" ");
 
         if (queries != null) {
@@ -79,7 +79,7 @@ public class ForeignData {
                 generateRows(queryId, result);
                 generateCols(queryId, result);
             } else {
-                logger.error("query or endpoint is not defined in foreigndata.properties file for: " + queryId);
+                logger.error("query or endpoint is not defined in linkeddata.properties file for: " + queryId);
             }
         }
     }
@@ -161,7 +161,11 @@ public class ForeignData {
                 if (columnLabels != null && columnLabels.containsKey(prop)) {
                     newcol.put("title", columnLabels.get(prop));
                 } else {
-                    newcol.put("title", prop);
+                    String title = prop.replaceAll("_", " ");
+                    if (title != null && title.length() > 1) {
+                        title = Character.toUpperCase(title.charAt(0)) + title.substring(1);
+                    }
+                    newcol.put("title", title);
                 }
                 newcol.put("sortable", col.get("sortable"));
 

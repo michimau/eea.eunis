@@ -46,7 +46,7 @@
 <%
     for (int i = 0; i < l1.size(); i++)
     {
-      DcIndexDcSourcePersist aRef = ((DcIndexDcSourcePersist) l1.get(i));
+      DcIndexPersist aRef = ((DcIndexPersist) l1.get(i));
       String title=Utilities.formatString(aRef.getTitle());
       String source=Utilities.formatString(aRef.getSource());
       String editor=Utilities.formatString(aRef.getEditor());

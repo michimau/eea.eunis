@@ -2,7 +2,6 @@ package eionet.eunis.rdfexporter;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
@@ -10,10 +9,8 @@ import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.stream.Format;
 
-import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain;
-import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist;
-import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.TaxonomyDto;
+import eionet.eunis.rdf.GenerateTaxonomyRDF;
 
 /**
  * Taxonomy export task.
@@ -35,19 +32,10 @@ public class TaxonomyExportTask implements Runnable {
 
     public void run() {
 
-        List<Chm62edtTaxcodePersist> list = new Chm62edtTaxcodeDomain().findWhere("ID_TAXONOMY = '" + idtaxonomy + "'");
-        if (list != null && list.size() > 0) {
-            Chm62edtTaxcodePersist taxonomy = list.get(0);
+        GenerateTaxonomyRDF genRdf = new GenerateTaxonomyRDF(idtaxonomy);
+        TaxonomyDto dto = genRdf.getTaxonomyRdf();
 
-            TaxonomyDto dto = new TaxonomyDto();
-            dto.setTaxonomyId(taxonomy.getIdTaxcode());
-            dto.setLevel(taxonomy.getTaxonomicLevel());
-            dto.setName(taxonomy.getTaxonomicName());
-            dto.setLink(new ResourceDto(taxonomy.getIdTaxcodeLink(), "http://eunis.eea.europa.eu/taxonomy/"));
-            dto.setParent(new ResourceDto(taxonomy.getIdTaxcodeParent(), "http://eunis.eea.europa.eu/taxonomy/"));
-            dto.setSource(new ResourceDto(taxonomy.getIdDc().toString(), "http://eunis.eea.europa.eu/references/"));
-            dto.setNotes(taxonomy.getNotes());
-
+        if (dto != null) {
             Persister persister = new Persister(new AnnotationStrategy(), new Format(4));
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             try {
@@ -57,7 +45,6 @@ public class TaxonomyExportTask implements Runnable {
                 buffer.close();
 
                 fileWriter.addTaskToWrite(writeTask);
-
                 taxonomiesExported.incrementAndGet();
 
                 if (logger.isDebugEnabled()) {

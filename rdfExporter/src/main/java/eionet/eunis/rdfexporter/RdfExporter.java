@@ -1,11 +1,11 @@
 package eionet.eunis.rdfexporter;
 
+import java.io.PrintStream;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.io.PrintStream;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -14,31 +14,19 @@ import ro.finsiel.eunis.utilities.SQLUtilities;
 import eionet.eunis.dto.DoubleDTO;
 import eionet.eunis.rdf.GenerateDesignationRDF;
 import eionet.eunis.rdf.GenerateHabitatRDF;
+import eionet.eunis.rdf.GenerateSiteRDF;
+import eionet.eunis.rdf.GenerateSpeciesRDF;
+import eionet.eunis.rdf.GenerateTaxonomyRDF;
 import eionet.eunis.util.Constants;
 
 /**
  * Main class of RDF exporter.
  *
- * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
+ * @author Risto Alt
  */
 public class RdfExporter {
+
     private static final Logger logger = Logger.getLogger(RdfExporter.class);
-
-    private static final String HEADER_SITES = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
-        + " xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n"
-        + " xmlns:cr=\"http://cr.eionet.europa.eu/ontologies/contreg.rdf#\"\n"
-        + " xmlns:geo=\"http://www.w3.org/2003/01/geo/wgs84_pos#\"\n"
-        + " xmlns=\"http://eunis.eea.europa.eu/rdf/sites-schema.rdf#\">\n";
-
-    private static final String HEADER_SPECIES = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
-        + " xmlns:cr=\"http://cr.eionet.europa.eu/ontologies/contreg.rdf#\"\n"
-        + " xmlns:dwc=\"http://rs.tdwg.org/dwc/terms/\"\n"
-        + " xmlns =\"http://eunis.eea.europa.eu/rdf/species-schema.rdf#\">\n";
-
-    private static final String HEADER_TAXONOMIES = "<rdf:RDF xmlns=\"http://eunis.eea.europa.eu/rdf/taxonomies-schema.rdf#\"\n"
-        + " xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
-        + " xmlns:dcterms=\"http://purl.org/dc/terms/\">\n";
-
     public static final String DEFAULT_NUM_OF_THREADS = "5";
 
     protected Properties exporterProperties;
@@ -159,7 +147,8 @@ public class RdfExporter {
         List<String> siteIds = sqlUtilities.SQL2Array(getSiteIdsQuery);
 
         CountDownLatch doneSignal = new CountDownLatch(limit > 0 ? limit : totalNumberOfSites);
-        QueuedFileWriter fileWriter = new QueuedFileWriter(fileNameSites, HEADER_SITES, Constants.RDF_FOOTER, doneSignal);
+        QueuedFileWriter fileWriter = new QueuedFileWriter(
+                fileNameSites, GenerateSiteRDF.HEADER, Constants.RDF_FOOTER, doneSignal);
         ExecutorService executor = Executors.newFixedThreadPool(numOfThreads);
 
         new Thread(fileWriter).start();
@@ -314,7 +303,7 @@ public class RdfExporter {
 
         CountDownLatch doneSignal = new CountDownLatch(limit > 0 ? limit : totalNumberOfSpecies);
         QueuedFileWriter fileWriter = new QueuedFileWriter(
-                fileNameSpecies, HEADER_SPECIES, Constants.RDF_FOOTER, doneSignal);
+                fileNameSpecies, GenerateSpeciesRDF.HEADER, Constants.RDF_FOOTER, doneSignal);
         ExecutorService executor = Executors.newFixedThreadPool(numOfThreads);
 
         new Thread(fileWriter).start();
@@ -366,7 +355,7 @@ public class RdfExporter {
 
         CountDownLatch doneSignal = new CountDownLatch(limit > 0 ? limit : totalNumberOfTaxonomy);
         QueuedFileWriter fileWriter = new QueuedFileWriter(
-                fileNameTaxonomies, HEADER_TAXONOMIES, Constants.RDF_FOOTER, doneSignal);
+                fileNameTaxonomies, GenerateTaxonomyRDF.HEADER, Constants.RDF_FOOTER, doneSignal);
         ExecutorService executor = Executors.newFixedThreadPool(numOfThreads);
 
         new Thread(fileWriter).start();
@@ -405,9 +394,9 @@ public class RdfExporter {
     public static void main(String... args) {
         if (args.length == 0) {
             logger.error("Missing argument what to import: sites/species/taxonomies/habitats/designations");
-//      } else if (!args[0].equals("sites") && !args[0].equals("species") && !args[0].equals("taxonomies")
-//              && !args[0].equals("habitats") && !args[0].equals("designations")) {
-//          logger.error("Usage: rdfExporter {sites|species|taxonomies|habitats|designations} [limit] [offset]");
+            //      } else if (!args[0].equals("sites") && !args[0].equals("species") && !args[0].equals("taxonomies")
+            //              && !args[0].equals("habitats") && !args[0].equals("designations")) {
+            //          logger.error("Usage: rdfExporter {sites|species|taxonomies|habitats|designations} [limit] [offset]");
         } else {
             logger.info("RDF exporter started");
             long startTime = System.currentTimeMillis();

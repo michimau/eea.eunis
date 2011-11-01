@@ -10,7 +10,7 @@ import org.simpleframework.xml.Root;
 
 /**
  * @author alex
- * 
+ *
  *         <a href="mailto:aleks21@gmail.com">contact<a>
  */
 @Root(strict = false, name = "SpeciesSynonym")
@@ -20,10 +20,6 @@ public class SpeciesFactsheetDto implements Serializable {
      * serial.
      */
     private static final long serialVersionUID = -6343981482733538221L;
-
-    public static final String HEADER = "<rdf:RDF " + "xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
-            + "xmlns:dwc=\"http://rs.tdwg.org/dwc/terms/\" \n" + "xmlns:foaf=\"http://xmlns.com/foaf/0.1/\" \n"
-            + "xmlns =\"http://eunis.eea.europa.eu/rdf/species-schema.rdf#\">\n";
 
     private static final String DOMAIN_LOCATION = "http://eunis.eea.europa.eu/species/";
 

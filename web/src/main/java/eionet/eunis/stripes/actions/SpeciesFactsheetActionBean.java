@@ -43,16 +43,12 @@ import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
 import eionet.eunis.dto.AttributeDto;
 import eionet.eunis.dto.ClassificationDTO;
-import eionet.eunis.dto.DatatypeDto;
 import eionet.eunis.dto.ForeignDataQueryDTO;
 import eionet.eunis.dto.LinkDTO;
 import eionet.eunis.dto.PictureDTO;
-import eionet.eunis.dto.ResourceDto;
 import eionet.eunis.dto.SpeciesDistributionDTO;
 import eionet.eunis.dto.SpeciesFactsheetDto;
-import eionet.eunis.dto.SpeciesSynonymDto;
-import eionet.eunis.dto.TaxonomyTreeDTO;
-import eionet.eunis.dto.VernacularNameDto;
+import eionet.eunis.rdf.GenerateSpeciesRDF;
 import eionet.eunis.rdf.LinkedData;
 import eionet.eunis.stripes.extensions.Redirect303Resolution;
 import eionet.eunis.util.Constants;
@@ -86,8 +82,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         types.put("SITES", new String[] {"sites", tabs[8]});
         types.put("GBIF", new String[] {"gbif", tabs[9]});
     }
-
-    private static final String EXPECTED_IN_PREFIX = "http://eunis.eea.europa.eu/sites/";
 
     /** The argument given. Can be a species number or scientific name */
     private String idSpecies;
@@ -303,108 +297,21 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      * {@link eionet.eunis.dto.SpeciesFactsheetDto} which is then serialised to XML.
      */
     private Resolution generateRdf() {
-        int speciesId = getSpeciesId();
 
+        int speciesId = getSpeciesId();
         if (speciesId == 0) {
             return new ErrorResolution(404);
         }
-        factsheet = new SpeciesFactsheet(speciesId, speciesId);
-        if (!factsheet.exists()) {
+
+        GenerateSpeciesRDF genRdf = new GenerateSpeciesRDF(speciesId);
+        SpeciesFactsheetDto dto = genRdf.getSpeciesRdf();
+
+        if (dto != null) {
+            return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, SimpleFrameworkUtils.convertToString(
+                    GenerateSpeciesRDF.HEADER, dto, Constants.RDF_FOOTER));
+        } else {
             return new ErrorResolution(404);
         }
-
-        SpeciesFactsheetDto dto = new SpeciesFactsheetDto();
-
-        dto.setSpeciesId(factsheet.getSpeciesObject().getIdSpecies());
-        dto.setScientificName(factsheet.getSpeciesObject().getScientificName());
-        dto.setValidName(new DatatypeDto(factsheet.getSpeciesObject().getValidName(), "http://www.w3.org/2001/XMLSchema#boolean"));
-        dto.setTypeRelatedSpecies(factsheet.getSpeciesObject().getTypeRelatedSpecies());
-        dto.setGenus(factsheet.getSpeciesObject().getGenus());
-        dto.setAuthor(factsheet.getSpeciesObject().getAuthor());
-
-        TaxonomyTreeDTO taxonomyTree = factsheet.getTaxonomicTree(factsheet.getSpeciesObject().getIdTaxcode());
-        if (taxonomyTree != null) {
-            dto.setKingdom(taxonomyTree.getKingdom());
-            dto.setPhylum(taxonomyTree.getPhylum());
-            dto.setDwcClass(taxonomyTree.getDwcClass());
-            dto.setOrder(taxonomyTree.getOrder());
-            dto.setFamily(taxonomyTree.getFamily());
-        }
-        if (factsheet.getTaxcodeObject() != null && factsheet.getTaxcodeObject().IdDcTaxcode() != null) {
-            dto.setNameAccordingToID(new ResourceDto(factsheet.getTaxcodeObject().IdDcTaxcode().toString(),
-            "http://eunis.eea.europa.eu/references/"));
-        }
-
-        dto.setDwcScientificName(dto.getScientificName() + ' ' + dto.getAuthor());
-        dto.setDcmitype(new ResourceDto("", "http://purl.org/dc/dcmitype/Text"));
-
-        if (!StringUtils.isBlank(factsheet.getSpeciesObject().getIdTaxcode())) {
-            dto.setTaxonomy(new ResourceDto(factsheet.getSpeciesObject().getIdTaxcode(), "http://eunis.eea.europa.eu/taxonomy/"));
-        }
-
-        dto.setAttributes(DaoFactory.getDaoFactory().getSpeciesFactsheetDao()
-                .getAttributesForNatureObject(factsheet.getSpeciesObject().getIdNatureObject()));
-
-        dto.setHasLegalReferences(DaoFactory.getDaoFactory().getSpeciesFactsheetDao()
-                .getLegalReferences(factsheet.getSpeciesObject().getIdNatureObject()));
-
-        // setting html links
-        ArrayList<LinkDTO> linkObjects =
-            DaoFactory.getDaoFactory().getExternalObjectsDao()
-            .getNatureObjectLinks(factsheet.getSpeciesObject().getIdNatureObject());
-        if (linkObjects != null && !linkObjects.isEmpty()) {
-            List<ResourceDto> links = new LinkedList<ResourceDto>();
-
-            for (LinkDTO link : linkObjects) {
-                links.add(new ResourceDto(link.getUrl()));
-            }
-            dto.setLinks(links);
-        }
-
-        // setting expectedInLocations
-        List<String> expectedLocations =
-            DaoFactory
-            .getDaoFactory()
-            .getSpeciesFactsheetDao()
-            .getExpectedInSiteIds(factsheet.getSpeciesObject().getIdNatureObject(),
-                    factsheet.getSpeciesObject().getIdSpecies(), 0);
-
-        if (expectedLocations != null && !expectedLocations.isEmpty()) {
-            List<ResourceDto> expectedInSites = new LinkedList<ResourceDto>();
-
-            for (String siteId : expectedLocations) {
-                expectedInSites.add(new ResourceDto(siteId, EXPECTED_IN_PREFIX));
-            }
-            dto.setExpectedInLocations(expectedInSites);
-        }
-
-        List<VernacularNameWrapper> vernacularNames =
-            SpeciesSearchUtility.findVernacularNames(factsheet.getSpeciesObject().getIdNatureObject());
-
-        if (factsheet.getIdSpeciesLink() != null && !factsheet.getIdSpeciesLink().equals(factsheet.getIdSpecies())) {
-            dto.setSynonymFor(new SpeciesSynonymDto(factsheet.getIdSpeciesLink()));
-        }
-        List<Integer> isSynonymFor = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getSynonyms(factsheet.getIdSpecies());
-        List<SpeciesSynonymDto> speciesSynonym = new LinkedList<SpeciesSynonymDto>();
-
-        if (isSynonymFor != null && !isSynonymFor.isEmpty()) {
-            for (Integer idSpecies : isSynonymFor) {
-                speciesSynonym.add(new SpeciesSynonymDto(idSpecies));
-            }
-            dto.setHasSynonyms(speciesSynonym);
-        }
-
-        if (vernacularNames != null) {
-            List<VernacularNameDto> vernacularDtos = new LinkedList<VernacularNameDto>();
-
-            for (VernacularNameWrapper wrapper : vernacularNames) {
-                vernacularDtos.add(new VernacularNameDto(wrapper));
-            }
-            dto.setVernacularNames(vernacularDtos);
-        }
-
-        return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, SimpleFrameworkUtils.convertToString(
-                SpeciesFactsheetDto.HEADER, dto, Constants.RDF_FOOTER));
     }
 
     /**

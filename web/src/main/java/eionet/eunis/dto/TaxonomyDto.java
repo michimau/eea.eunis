@@ -17,10 +17,6 @@ public class TaxonomyDto implements Serializable {
      */
     private static final long serialVersionUID = -6343981482733538221L;
 
-    public static final String HEADER = "<rdf:RDF xmlns=\"http://eunis.eea.europa.eu/rdf/taxonomies-schema.rdf#\"\n"
-        + "xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n"
-        + "xmlns:dcterms=\"http://purl.org/dc/terms/\">\n";
-
     private static final String DOMAIN_LOCATION = "http://eunis.eea.europa.eu/taxonomy/";
 
     private String taxonomyId;

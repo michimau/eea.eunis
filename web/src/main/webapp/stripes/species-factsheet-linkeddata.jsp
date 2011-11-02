@@ -7,7 +7,11 @@
 	<c:choose>
 		<c:when test="${empty actionBean.query}">
 			<c:if test="${not empty actionBean.queries}">
-				<b>Select a query:</b>
+				<p>
+				This page contains reports that query foreign systems for structured data the <em>links</em> to the species.
+				It is possible that there is no relevant data and then the query show nothing. As more data becomes available we will add more queries.
+				</p>
+				<h3>Select a query:</h3>
 				<dl>
 					<c:forEach items="${actionBean.queries}" var="query" varStatus="loop">
 				 		<dt><a href="species/${actionBean.idSpecies}/linkeddata?query=${query.id}" rel="nofollow">${query.title}</a></dt>
@@ -18,14 +22,15 @@
  		</c:when>
  		<c:otherwise>
  			<c:if test="${not empty actionBean.queries}">
- 				<b>Select a query:</b>
+ 				<div style="font-weight:bold">Select a query:</div>
  				<stripes:form action="/species/${actionBean.idSpecies}/linkeddata" method="post">
+				<p>
 	 				<stripes:select name="query">
 	 					<stripes:options-collection collection="${actionBean.queries}" label="title" value="id"/>
 			 		</stripes:select>
 			 		<stripes:submit name="linkeddata" value="Execute query"/>
+				</p>
 		 		</stripes:form>
-				<br/>
  			</c:if>
 		 	<c:choose>
 			 	<c:when test="${not empty actionBean.queryResultCols && not empty actionBean.queryResultRows}">

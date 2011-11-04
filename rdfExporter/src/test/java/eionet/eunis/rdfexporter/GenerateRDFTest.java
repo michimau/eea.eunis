@@ -13,7 +13,7 @@ import org.junit.Test;
  * @see http://download.oracle.com/javase/tutorial/reflect/class/index.html
  * @see http://tutorials.jenkov.com/java-reflection/private-fields-and-methods.html
  */
-class GenerateRDFTest extends TestCase {
+public class GenerateRDFTest extends TestCase {
 
 
     private void callParseName(String testString, String testDatatype,
@@ -116,12 +116,5 @@ class GenerateRDFTest extends TestCase {
                 "SELECT X AS id, count(*) FROM Y WHERE X='819' GROUP BY id HAVING id='819' AND Z=1");
         callInjectWhere("SELECT X AS id, count(*) FROM Y GROUP BY id HAVING Z=1 ORDER BY ID", "819", "X",
                 "SELECT X AS id, count(*) FROM Y WHERE X='819' GROUP BY id HAVING Z=1 ORDER BY ID");
-    }
-
-    public static void main(String args[]) throws Exception {
-        GenerateRDFTest testClass = new GenerateRDFTest();
-        testClass.test_parseName();
-        testClass.test_injectHaving();
-        testClass.test_injectWhere();
     }
 }

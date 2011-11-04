@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import junit.framework.TestCase;
 import junit.framework.Assert;
+import org.junit.Test;
+
 
 /**
  * Uses the Reflection API to get private members
@@ -35,6 +37,7 @@ class GenerateRDFTest extends TestCase {
         assertEquals(expectedLangcode, (String) f.get(ret));
     }
 
+    @Test
     public void test_parseName() throws Exception {
         callParseName("hasRef->export", "", "hasRef", "->export", "");
         callParseName("hasRef->", "", "hasRef", "->", "");
@@ -49,7 +52,7 @@ class GenerateRDFTest extends TestCase {
               String expectedQuery) throws Exception {
         GenerateRDF classToTest = new GenerateRDF(System.out);
         String f;
-        final Method method = classToTest.getClass().getDeclaredMethod("injectIdentifier",
+        final Method method = classToTest.getClass().getDeclaredMethod("injectHaving",
                    new Class[]{String.class, String.class});
         method.setAccessible(true);
         Object ret = method.invoke(classToTest, testQuery, testIdentifier);
@@ -57,7 +60,8 @@ class GenerateRDFTest extends TestCase {
         assertEquals(expectedQuery, f);
     }
 
-    public void test_injectIdentifier() throws Exception {
+    @Test
+    public void test_injectHaving() throws Exception {
         // Test injection of identifier
         callInjectIdentifier("SELECT X AS id, * FROM Y", "819", 
                 "SELECT X AS id, * FROM Y HAVING id='819'");
@@ -75,9 +79,49 @@ class GenerateRDFTest extends TestCase {
                 "SELECT X AS id, count(*) FROM Y GROUP BY id HAVING id='819' AND Z=1 ORDER BY ID");
     }
 
+    private void callInjectWhere(String testQuery, String testIdentifier, String testKey,
+              String expectedQuery) throws Exception {
+        GenerateRDF classToTest = new GenerateRDF(System.out);
+        String f;
+        final Method method = classToTest.getClass().getDeclaredMethod("injectWhere",
+                   new Class[]{String.class, String.class, String.class});
+        method.setAccessible(true);
+        Object ret = method.invoke(classToTest, testQuery, testKey, testIdentifier);
+        f = (String) ret;
+        assertEquals(expectedQuery, f);
+    }
+
+    @Test
+    public void test_injectWhere() throws Exception {
+        // Test injection of identifier
+        callInjectWhere("SELECT X AS id, * FROM Y", "819", "X",
+                "SELECT X AS id, * FROM Y WHERE X='819'");
+        callInjectWhere("SELECT X AS id, * FROM Y HAVING id='819'", "819", "X",
+                "SELECT X AS id, * FROM Y WHERE X='819' HAVING id='819'");
+        callInjectWhere("SELECT X AS id, * FROM Y ORDER BY postcode", "819", "X",
+                "SELECT X AS id, * FROM Y WHERE X='819' ORDER BY postcode");
+        callInjectWhere("SELECT X AS id, * FROM Y HAVING id='819' ORDER BY postcode", "819", "X",
+                "SELECT X AS id, * FROM Y WHERE X='819' HAVING id='819' ORDER BY postcode");
+        // Test injection of identifier with LIMIT
+        callInjectWhere("SELECT X AS id, * FROM Y ORDER BY postcode LIMIT 10 OFFSET 2", "819", "X",
+                "SELECT X AS id, * FROM Y WHERE X='819' ORDER BY postcode LIMIT 10 OFFSET 2");
+        callInjectWhere("SELECT X AS id, * FROM Y HAVING id='819' ORDER BY postcode LIMIT 10 OFFSET 2", "819", "X",
+                "SELECT X AS id, * FROM Y WHERE X='819' HAVING id='819' ORDER BY postcode LIMIT 10 OFFSET 2");
+        callInjectWhere("SELECT X AS id, * FROM Y LIMIT 10 OFFSET 2", "819", "X",
+                "SELECT X AS id, * FROM Y WHERE X='819' LIMIT 10 OFFSET 2");
+        // Test injection of identifier with HAVING
+        callInjectWhere("SELECT X AS id, count(*) FROM Y GROUP BY id HAVING Z=1", "819", "X",
+                "SELECT X AS id, count(*) FROM Y WHERE X='819' GROUP BY id HAVING Z=1");
+        callInjectWhere("SELECT X AS id, count(*) FROM Y GROUP BY id HAVING id='819' AND Z=1", "819", "X",
+                "SELECT X AS id, count(*) FROM Y WHERE X='819' GROUP BY id HAVING id='819' AND Z=1");
+        callInjectWhere("SELECT X AS id, count(*) FROM Y GROUP BY id HAVING Z=1 ORDER BY ID", "819", "X",
+                "SELECT X AS id, count(*) FROM Y WHERE X='819' GROUP BY id HAVING Z=1 ORDER BY ID");
+    }
+
     public static void main(String args[]) throws Exception {
         GenerateRDFTest testClass = new GenerateRDFTest();
         testClass.test_parseName();
-        testClass.test_injectIdentifier();
+        testClass.test_injectHaving();
+        testClass.test_injectWhere();
     }
 }

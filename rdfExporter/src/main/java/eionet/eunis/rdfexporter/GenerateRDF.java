@@ -127,7 +127,7 @@ public class GenerateRDF {
     private HashMap<String, String> namespaces;
     /** The properties that are object properties. They point to another object. */
     private HashMap<String, String> objectProperties;
-    /** The datatype mappings */
+    /** The datatype mappings. */
     private HashMap<String, String> datatypeMap;
     /** All the tables in the properties file. */
     private String[] tables;
@@ -380,7 +380,7 @@ public class GenerateRDF {
                 if (identifier != null) {
                     String tableKeyKey = table.concat(".key").concat(key.substring(tableQueryKey.length()));
                     String whereKey = props.getProperty(tableKeyKey);
-                    if(whereKey != null) {
+                    if (whereKey != null) {
                         query = injectWhere(query, whereKey, identifier);
                     } else {
                         query = injectHaving(query, identifier);
@@ -399,7 +399,7 @@ public class GenerateRDF {
                 if (identifier != null) {
                     String tableKeyKey = table.concat(".attributekey").concat(key.substring(tableAttributesKey.length()));
                     String whereKey = props.getProperty(tableKeyKey);
-                    if(whereKey != null) {
+                    if (whereKey != null) {
                         query = injectWhere(query, whereKey, identifier);
                     } else {
                         query = injectHaving(query, identifier);

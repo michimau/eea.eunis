@@ -27,10 +27,12 @@ import eionet.eunis.util.Constants;
 public class RdfExporter {
 
     private static final Logger logger = Logger.getLogger(RdfExporter.class);
+    /** Number of parallel connections to the database. */
     public static final String DEFAULT_NUM_OF_THREADS = "5";
 
     protected Properties exporterProperties;
 
+    /** Number of parallel connections to the database. */
     private int numOfThreads;
     private int limit;
     private int offset;
@@ -45,8 +47,8 @@ public class RdfExporter {
     /**
      * Load properties from exporter.properties file and initialize SQLUtils.
      *
-     * @param numberOfObjectsToImport
-     * @param offset
+     * @param numberOfObjectsToImport - Number of objects to export.
+     * @param offset into the database query
      */
     public void init(String numberOfObjectsToImport, String offset) {
         String jdbcDriver = null;
@@ -402,8 +404,9 @@ public class RdfExporter {
             long startTime = System.currentTimeMillis();
 
             String what = null;
-            String numberOfObjectsToImport = null;
-            String offset = null;
+            String numberOfObjectsToImport = null; //TODO: Remove
+            String offset = null; //TODO: Remove
+            //TODO: Add the ability to export one object
 
             int i = 0;
             for (String arg : args) {
@@ -419,6 +422,7 @@ public class RdfExporter {
             RdfExporter exporter = new RdfExporter();
             exporter.init(numberOfObjectsToImport, offset);
 
+            //TODO: Remove count of exported objects
             String exportedCnt = "";
             if (what != null && what.equals("sites")) {
                 exporter.exportSites();

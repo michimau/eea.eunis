@@ -439,13 +439,7 @@ public class RdfExporter {
                 try {
                     PrintStream outputStream = new PrintStream(what + ".rdf");
                     GenerateRDF r = new GenerateRDF(outputStream);
-
-                    if ("taxonomy".equals(what)) {
-                        r.setVocabulary("http://eunis.eea.europa.eu/rdf/taxonomies-schema.rdf#");
-                    }
-                    r.rdfHeader();
                     r.exportTable(what);
-                    r.rdfFooter();
                     r.close();
                     exportedCnt = "";
                 } catch (Exception e) {

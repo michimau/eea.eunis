@@ -41,7 +41,7 @@ class RDFField {
  * Class to help XML escape strings.
  * @see http://www.java2s.com/Tutorial/Java/0120__Development/EscapeHTML.htm
  */
-class StringHelper {
+final class StringHelper {
     /**
      * Constructor. Since all methods are static we don't want instantiations of the class.
      */
@@ -121,6 +121,8 @@ public class GenerateRDF {
     private RDFField[] names;
     /** The URL of the null namespace. */
     private String nullNamespace;
+    /** If output has started, then you can't change the nullNamespace. */
+    private Boolean rdfHeaderWritten = false;
     /** The namespaces to add to the rdf:RDF element. */
     private HashMap<String, String> namespaces;
     /** The properties that are object properties. They point to another object. */
@@ -165,7 +167,7 @@ public class GenerateRDF {
         Class.forName(driver).newInstance();
         con = DriverManager.getConnection(dbUrl, userName, password);
         // Generate exception if there is no vocabulary property
-        nullNamespace = props.getProperty("vocabulary");
+        setVocabulary(props.getProperty("vocabulary"));
         baseurl = props.getProperty("baseurl");
 
         namespaces = new HashMap<String, String>();
@@ -206,6 +208,7 @@ public class GenerateRDF {
      * @throws SQLException if there is a database problem.
      */
     public void close() throws SQLException {
+        rdfFooter();
         if (con != null) {
             con.close();
             con = null;
@@ -274,7 +277,7 @@ public class GenerateRDF {
      *  @param identifier to insert into query
      *  @return patched SQL query
      */
-    private String injectIdentifier(String query, String identifier) {
+    private String injectHaving(String query, String identifier) {
         String[] keywords = {" order ", " limit ", " procedure ", " into ", " for ", " lock " };
         String lquery = query.toLowerCase().replace("\n", " ");
         int insertBefore = lquery.length();
@@ -289,12 +292,43 @@ public class GenerateRDF {
             query = query.substring(0, insertBefore) + " HAVING id='" + identifier.replace("'", "''") + "'"
                     + query.substring(insertBefore);
         } else {
-            query = query.substring(0, h + 8) +  "id='" + identifier.replace("'", "''") + "' AND "
+            query = query.substring(0, h + 8) + "id='" + identifier.replace("'", "''") + "' AND "
                     + query.substring(h + 8);
         }
         return query;
     }
 
+    /**
+     * The user can choose one record to output. This is done by inserting
+     *  a WHERE <em>key</em>=... into the SELECT statement.
+     *  If the ID is numeric, then Mysql will convert the type to match
+     *
+     *  @param query - SQL query to patch
+     *  @param key - Name of column that can be used as key in index
+     *  @param identifier to insert into query
+     *  @return patched SQL query
+     */
+    private String injectWhere(String query, String key, String identifier) {
+        // Handle WHERE for key hints
+        String[] keywords = {" group ", " having ", " order ", " limit ", " procedure ", " into ", " for ", " lock " };
+        String lquery = query.toLowerCase().replace("\n", " ");
+        int insertBefore = lquery.length();
+        for (String k : keywords) {
+            int i = lquery.indexOf(k);
+            if (i >= 0 && i < insertBefore) {
+                insertBefore = i;
+            }
+        }
+        int h = lquery.indexOf(" where ");
+        if (h == -1) {
+            query = query.substring(0, insertBefore) + " WHERE " + key + "='" + identifier.replace("'", "''") + "'"
+                    + query.substring(insertBefore);
+        } else {
+            query = query.substring(0, h + 7) + key + "='" + identifier.replace("'", "''") + "' AND "
+                    + query.substring(h + 7);
+        }
+        return query;
+    }
 
     /**
      * Return all known tables in properties file.
@@ -325,6 +359,15 @@ public class GenerateRDF {
      * @throws SQLException if there is a database problem.
      */
     public void exportTable(String table, String identifier) throws SQLException {
+        String voc = props.getProperty(table.concat(".vocabulary"));
+        if (voc != null) {
+            setVocabulary(voc);
+        } else {
+            setVocabulary(props.getProperty("vocabulary"));
+        }
+        if (!rdfHeaderWritten) {
+            rdfHeader();
+        }
         Boolean firstQuery = true;
         String rdfClass = table.substring(0, 1).toUpperCase() + table.substring(1).toLowerCase();
         rdfClass = props.getProperty(table.concat(".class"), rdfClass);
@@ -335,7 +378,13 @@ public class GenerateRDF {
             if (key.startsWith(tableQueryKey)) {
                 String query = props.getProperty(key);
                 if (identifier != null) {
-                    query = injectIdentifier(query, identifier);
+                    String tableKeyKey = table.concat(".key").concat(key.substring(tableQueryKey.length()));
+                    String whereKey = props.getProperty(tableKeyKey);
+                    if(whereKey != null) {
+                        query = injectWhere(query, whereKey, identifier);
+                    } else {
+                        query = injectHaving(query, identifier);
+                    }
                 }
                 runQuery(table, query, firstQuery ? rdfClass : "rdf:Description");
                 firstQuery = false;
@@ -348,7 +397,13 @@ public class GenerateRDF {
             if (key.startsWith(tableAttributesKey)) {
                 String query = props.getProperty(key);
                 if (identifier != null) {
-                    query = injectIdentifier(query, identifier);
+                    String tableKeyKey = table.concat(".attributekey").concat(key.substring(tableAttributesKey.length()));
+                    String whereKey = props.getProperty(tableKeyKey);
+                    if(whereKey != null) {
+                        query = injectWhere(query, whereKey, identifier);
+                    } else {
+                        query = injectHaving(query, identifier);
+                    }
                 }
                 runAttributes(table, query, firstQuery ? rdfClass : "rdf:Description");
                 firstQuery = false;
@@ -381,14 +436,20 @@ public class GenerateRDF {
      *
      * @param url - namespace url.
      */
-    public void setVocabulary(String url) {
+    private void setVocabulary(String url) {
+        if (!url.equals(nullNamespace) && rdfHeaderWritten) {
+            throw new RuntimeException("Can't set vocabulary after output has started!");
+        }
         nullNamespace = url;
     }
 
     /**
      * Generate the RDF header element.
      */
-    public void rdfHeader() {
+    private void rdfHeader() {
+        if (rdfHeaderWritten) {
+            throw new RuntimeException("Can't write header twice!");
+        }
         output("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         output("<rdf:RDF");
         for (Object key : namespaces.keySet()) {
@@ -408,12 +469,13 @@ public class GenerateRDF {
             output("\"");
         }
         output(">\n");
+        rdfHeaderWritten = true;
     }
 
     /**
      * Generate the RDF footer element.
      */
-    public void rdfFooter() {
+    private void rdfFooter() {
         output("</rdf:RDF>\n");
     }
 
@@ -625,11 +687,9 @@ public class GenerateRDF {
                 }
             }
 
-            r.rdfHeader();
             for (String table : tables) {
                 r.exportTable(table, identifier);
             }
-            r.rdfFooter();
             r.close();
         } catch (Exception e) {
             e.printStackTrace();

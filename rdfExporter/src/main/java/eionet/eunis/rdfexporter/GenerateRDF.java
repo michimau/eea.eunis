@@ -110,7 +110,14 @@ final class StringHelper {
 }
 
 /**
- * RDF generator.
+ * RDF generator. The queries are stored in a properties file. There
+ * are two types of queries. A plain select and an attributes table.
+ * For the plain select the class will use the first column as the
+ * <em>identifier</em>, and create RDF properties for the other columns.
+ *
+ * For the attributes table the result must have one + X * four columns:
+ *  1. id, 2. attribute name, 3. value, 4. datatype, 5. languagecode,
+ *         6. attribute name, 7. value, 8. datatype, 9. languagecode, etc.
  */
 public class GenerateRDF {
     /** Base of XML file. */
@@ -156,7 +163,6 @@ public class GenerateRDF {
 
         outputStream = writer;
         props.load(getClass().getClassLoader().getResourceAsStream("rdfexport.properties"));
-//      props.load(new FileInputStream("rdfexport.properties"));
 
         driver = props.getProperty("driver");
         dbUrl = props.getProperty("database");
@@ -489,6 +495,8 @@ public class GenerateRDF {
      */
     private void runQuery(String segment, String sql, String rdfClass) throws SQLException {
         Statement stmt = null;
+        String currentId = null;
+        Boolean firstTime = true;
         try {
             stmt = con.createStatement();
 
@@ -502,16 +510,28 @@ public class GenerateRDF {
                 int numcols = rsmd.getColumnCount();
 
                 while (rs.next()) {
-                    output("<");
-                    output(rdfClass);
-                    output(" rdf:about=\"");
-                    output(segment);
-                    output("/");
-                    output(rs.getObject(1).toString());
-                    output("\">\n");
+                    String id = rs.getObject(1).toString();
+                    if (!id.equals(currentId)) {
+                        if (!firstTime) {
+                            output("</");
+                            output(rdfClass);
+                            output(">\n");
+                        }
+                        output("<");
+                        output(rdfClass);
+                        output(" rdf:about=\"");
+                        output(segment);
+                        output("/");
+                        output(id);
+                        output("\">\n");
+                        currentId = id;
+                        firstTime = false;
+                    }
                     for (int i = 2; i <= numcols; i++) {
                         writeProperty(names[i], rs.getObject(i));
                     }
+                }
+                if (!firstTime) {
                     output("</");
                     output(rdfClass);
                     output(">\n");
@@ -525,8 +545,9 @@ public class GenerateRDF {
     }
 
     /**
-     * Query attributes table. The result must have five columns.
-     *  1. id, 2. attribute name, 3. value, 4. datatype, 5. languagecode
+     * Query attributes table. The result must have one + X * four columns.
+     *  1. id, 2. attribute name, 3. value, 4. datatype, 5. languagecode,
+     *         6. attribute name, 7. value, 8. datatype, 9. languagecode, etc.
      *
      * @param segment - the namespace of the table
      * @param sql - the query
@@ -535,13 +556,16 @@ public class GenerateRDF {
      */
     private void runAttributes(String segment, String sql, String rdfClass) throws SQLException {
         Statement stmt = null;
+        String currentId = null;
+        Boolean firstTime = true;
         try {
             stmt = con.createStatement();
-            String currentId = null;
-            Boolean firstTime = true;
 
             if (stmt.execute(sql)) {
                 ResultSet rs = stmt.getResultSet();
+
+                ResultSetMetaData rsmd = rs.getMetaData();
+                int numcols = rsmd.getColumnCount();
 
                 while (rs.next()) {
                     RDFField property = new RDFField();
@@ -566,10 +590,12 @@ public class GenerateRDF {
                         firstTime = false;
                     }
 
-                    property.name = rs.getObject(2).toString();
-                    property.datatype = rs.getObject(4).toString();
-                    property.langcode = rs.getObject(5).toString();
-                    writeProperty(property, rs.getObject(3));
+                    for (int b = 2; b < numcols; b += 4) {
+                        property.name = rs.getObject(b + 0).toString();
+                        property.datatype = rs.getObject(b + 2).toString();
+                        property.langcode = rs.getObject(b + 3).toString();
+                        writeProperty(property, rs.getObject(b + 1));
+                    }
                 }
                 if (!firstTime) {
                     output("</");

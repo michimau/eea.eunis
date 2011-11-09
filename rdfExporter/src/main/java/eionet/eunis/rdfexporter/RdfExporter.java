@@ -1,6 +1,7 @@
 package eionet.eunis.rdfexporter;
 
 import java.io.PrintStream;
+import java.sql.Connection;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
@@ -442,9 +443,11 @@ public class RdfExporter {
             } else {
                 try {
                     PrintStream outputStream = new PrintStream(what + ".rdf");
-                    GenerateRDF r = new GenerateRDF(outputStream);
+                    Connection con = exporter.sqlUtilities.getConnection();
+                    GenerateRDF r = new GenerateRDF(outputStream, con);
                     r.exportTable(what);
                     r.close();
+                    con.close();
                     exportedCnt = "";
                 } catch (Exception e) {
                     e.printStackTrace();

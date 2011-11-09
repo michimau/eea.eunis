@@ -146,32 +146,24 @@ public class GenerateRDF {
     /**
      * Constructor.
      * @param writer - The output stream to send output to
+     * @param dbCon - The database connection
      * @throws IOException - if the properties file is missing
      * @throws SQLException - if the SQL database is not available
      * @throws ClassNotFoundException - if the SQL driver is unavailable
      * @throws InstantiationException - if the SQL driver can't be instantiatied
      * @throws IllegalAccessException - unknown
      */
-    public GenerateRDF(PrintStream writer) throws IOException,
+    public GenerateRDF(PrintStream writer, Connection dbCon) throws IOException,
                                 SQLException, ClassNotFoundException,
                                 InstantiationException, IllegalAccessException {
         props = new Properties();
-        String dbUrl;
-        String driver;
-        String userName;
-        String password;
 
         outputStream = writer;
         props.load(getClass().getClassLoader().getResourceAsStream("rdfexport.properties"));
 
-        driver = props.getProperty("driver");
-        dbUrl = props.getProperty("database");
-        userName = props.getProperty("user");
-        password = props.getProperty("password");
         tables = props.getProperty("tables").split(" ");
 
-        Class.forName(driver).newInstance();
-        con = DriverManager.getConnection(dbUrl, userName, password);
+        con = dbCon;
         // Generate exception if there is no vocabulary property
         setVocabulary(props.getProperty("vocabulary"));
         baseurl = props.getProperty("baseurl");
@@ -592,8 +584,20 @@ public class GenerateRDF {
 
                     for (int b = 2; b < numcols; b += 4) {
                         property.name = rs.getObject(b + 0).toString();
-                        property.datatype = rs.getObject(b + 2).toString();
-                        property.langcode = rs.getObject(b + 3).toString();
+                        if (rs.getObject(b + 2) == null) {
+                            if (objectProperties.containsKey(property.name)) {
+                                property.datatype = objectProperties.get(property.name);
+                            } else {
+                                property.datatype = "";
+                            }
+                        } else {
+                            property.datatype = rs.getObject(b + 2).toString();
+                        }
+                        if (rs.getObject(b + 3) != null) {
+                            property.langcode = rs.getObject(b + 3).toString();
+                        } else {
+                            property.langcode = "";
+                        }
                         writeProperty(property, rs.getObject(b + 1));
                     }
                 }
@@ -702,7 +706,17 @@ public class GenerateRDF {
             }
         }
         try {
-            GenerateRDF r = new GenerateRDF(System.out);
+            Properties props = new Properties();
+            props.load(new FileInputStream("rdfexport.properties"));
+
+            String driver = props.getProperty("driver");
+            String dbUrl = props.getProperty("database");
+            String userName = props.getProperty("user");
+            String password = props.getProperty("password");
+
+            Class.forName(driver).newInstance();
+            Connection con = DriverManager.getConnection(dbUrl, userName, password);
+            GenerateRDF r = new GenerateRDF(System.out, con);
 
             if (unusedArgs.size() == 0) {
                 tables = r.getAllTables();
@@ -717,6 +731,7 @@ public class GenerateRDF {
                 r.exportTable(table, identifier);
             }
             r.close();
+            con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

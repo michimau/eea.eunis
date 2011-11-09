@@ -7,7 +7,6 @@ import java.util.Properties;
 import java.util.Arrays;
 import java.util.TreeSet;
 
-import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.SQLException;
 import java.sql.ResultSet;

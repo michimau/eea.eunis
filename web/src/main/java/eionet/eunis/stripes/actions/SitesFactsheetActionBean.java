@@ -8,22 +8,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sourceforge.stripes.action.DefaultHandler;
-import net.sourceforge.stripes.action.ErrorResolution;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
-import net.sourceforge.stripes.action.StreamingResolution;
 import net.sourceforge.stripes.action.UrlBinding;
-
-import org.apache.commons.lang.StringUtils;
-
 import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
-import eionet.eunis.dto.SiteFactsheetDto;
-import eionet.eunis.rdf.GenerateSiteRDF;
-import eionet.eunis.stripes.extensions.Redirect303Resolution;
-import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
-import eionet.eunis.util.SimpleFrameworkUtils;
 
 /**
  * Action bean to handle sites-factsheet functionality.
@@ -64,8 +54,6 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     // tabs to display
     private List<Pair<String, String>> tabsWithData = new LinkedList<Pair<String, String>>();
 
-    private String domainName;
-
     /**
      * This action bean only serves RDF through {@link RdfAware}.
      *
@@ -73,21 +61,6 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
      */
     @DefaultHandler
     public Resolution defaultAction() {
-
-        // Resolve what format should be returned - RDF or HTML
-        if (idsite != null && idsite.length() > 0) {
-            if (tab != null && tab.equals("rdf")) {
-                return generateRdf();
-            }
-
-            domainName = getContext().getInitParameter("DOMAIN_NAME");
-
-            // If accept header contains RDF, then redirect to rdf page with code 303
-            String acceptHeader = getContext().getRequest().getHeader("accept");
-            if (acceptHeader != null && acceptHeader.contains(Constants.ACCEPT_RDF_HEADER)) {
-                return new Redirect303Resolution(domainName + "/sites/" + idsite + "/rdf");
-            }
-        }
 
         if (tab == null || tab.length() == 0) {
             tab = "general";
@@ -128,26 +101,6 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             sdb = SitesSearchUtility.translateSourceDB(factsheet.getSiteObject().getSourceDB());
         }
         return new ForwardResolution("/stripes/sites-factsheet.layout.jsp");
-    }
-
-    /**
-     * Generate RDF for a site.
-     */
-    public Resolution generateRdf() {
-
-        if (StringUtils.isBlank(idsite)) {
-            return new ErrorResolution(404);
-        }
-
-        GenerateSiteRDF genRdf = new GenerateSiteRDF(idsite);
-        SiteFactsheetDto dto = genRdf.getSiteRdf();
-
-        if (dto != null) {
-            return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, SimpleFrameworkUtils.convertToString(
-                    GenerateSiteRDF.HEADER, dto, Constants.RDF_FOOTER));
-        } else {
-            return new ErrorResolution(404);
-        }
     }
 
     /**

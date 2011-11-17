@@ -79,7 +79,7 @@
 		<description>E-mail address for account sending feedback(FROM field on
 			the e-mail message)</description>
 	</context-param>
-	
+
 	<!-- Font location for PDF generation -->
 	<context-param>
 		<param-name>PDF_FONT</param-name>
@@ -384,7 +384,7 @@
 		<servlet-name>sites</servlet-name>
 		<url-pattern>/sites</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>habitats</servlet-name>
 		<url-pattern>/habitats</url-pattern>
@@ -394,6 +394,11 @@
 		<servlet-name>jcaptcha</servlet-name>
 		<url-pattern>/jcaptcha</url-pattern>
 	</servlet-mapping>
+
+	<filter>
+	    <filter-name>RdfFilter</filter-name>
+	    <filter-class>eionet.eunis.rdf.RdfFilter</filter-class>
+	</filter>
 
 	<!-- Stripes filter and its mapping -->
 	<filter>
@@ -421,6 +426,11 @@
 			<param-value>250mb</param-value>
 		</init-param>
 	</filter>
+
+	<filter-mapping>
+		<filter-name>RdfFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+  	</filter-mapping>
 
 	<filter-mapping>
 		<filter-name>StripesFilter</filter-name>
@@ -463,10 +473,6 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/gis-tool</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/taxonomy/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
@@ -501,45 +507,50 @@
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/pictures-upload.jsp</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/dataimport/importpagelinks</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/dataimport/matchgeospecies</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/dataimport/importcdda</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/dataimport/importhabitats</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/dataimport/importredlist</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/dataimport/updatecountrysites</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/dataimport/speciesdump</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
 		<url-pattern>/api/lookup-species</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>StripesDispatcher</servlet-name>
+		<url-pattern>/gis-tool</url-pattern>
 	</servlet-mapping>
 
 	<!-- Session expiration in minutes -->

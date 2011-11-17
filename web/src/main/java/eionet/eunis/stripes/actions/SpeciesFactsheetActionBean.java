@@ -12,11 +12,9 @@ import java.util.Map;
 import java.util.Vector;
 
 import net.sourceforge.stripes.action.DefaultHandler;
-import net.sourceforge.stripes.action.ErrorResolution;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
-import net.sourceforge.stripes.action.StreamingResolution;
 import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.lang.StringEscapeUtils;
@@ -47,13 +45,9 @@ import eionet.eunis.dto.ForeignDataQueryDTO;
 import eionet.eunis.dto.LinkDTO;
 import eionet.eunis.dto.PictureDTO;
 import eionet.eunis.dto.SpeciesDistributionDTO;
-import eionet.eunis.dto.SpeciesFactsheetDto;
-import eionet.eunis.rdf.GenerateSpeciesRDF;
 import eionet.eunis.rdf.LinkedData;
-import eionet.eunis.stripes.extensions.Redirect303Resolution;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
-import eionet.eunis.util.SimpleFrameworkUtils;
 import eionet.sparqlClient.helpers.ResultValue;
 
 /**
@@ -171,21 +165,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     public Resolution index() {
         String idSpeciesText = null;
 
-        // Resolve what format should be returned - RDF or HTML
-        if (idSpecies != null && idSpecies.length() > 0) {
-            if (tab != null && tab.equals("rdf")) {
-                return generateRdf();
-            }
-
-            domainName = getContext().getInitParameter("DOMAIN_NAME");
-
-            // If accept header contains RDF, then redirect to rdf page with code 303
-            String acceptHeader = getContext().getRequest().getHeader("accept");
-            if (acceptHeader != null && acceptHeader.contains(Constants.ACCEPT_RDF_HEADER)) {
-                return new Redirect303Resolution(domainName + "/species/" + idSpecies + "/rdf");
-            }
-        }
-
         // Default tab is "general"
         if (tab == null || tab.length() == 0) {
             tab = "general";
@@ -290,28 +269,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             tempIdSpecies = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getIdSpeciesForScientificName(this.idSpecies);
         }
         return tempIdSpecies;
-    }
-
-    /**
-     * Generates RDF for a species. Data is loaded from {@link ro.finsiel.eunis.factsheet.species.SpeciesFactsheet}, inserted into
-     * {@link eionet.eunis.dto.SpeciesFactsheetDto} which is then serialised to XML.
-     */
-    private Resolution generateRdf() {
-
-        int speciesId = getSpeciesId();
-        if (speciesId == 0) {
-            return new ErrorResolution(404);
-        }
-
-        GenerateSpeciesRDF genRdf = new GenerateSpeciesRDF(speciesId);
-        SpeciesFactsheetDto dto = genRdf.getSpeciesRdf();
-
-        if (dto != null) {
-            return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, SimpleFrameworkUtils.convertToString(
-                    GenerateSpeciesRDF.HEADER, dto, Constants.RDF_FOOTER));
-        } else {
-            return new ErrorResolution(404);
-        }
     }
 
     /**

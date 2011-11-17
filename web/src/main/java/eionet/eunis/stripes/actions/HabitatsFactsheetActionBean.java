@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
-import net.sourceforge.stripes.action.StreamingResolution;
 import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.lang.StringUtils;
@@ -27,8 +26,6 @@ import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dto.AttributeDto;
 import eionet.eunis.dto.HabitatFactsheetOtherDTO;
 import eionet.eunis.dto.PictureDTO;
-import eionet.eunis.rdf.GenerateHabitatRDF;
-import eionet.eunis.stripes.extensions.Redirect303Resolution;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
 import eionet.sparqlClient.helpers.QueryExecutor;
@@ -102,21 +99,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
      */
     @DefaultHandler
     public Resolution defaultAction() {
-
-        // Resolve what format should be returned - RDF or HTML
-        if (idHabitat != null && idHabitat.length() > 0) {
-            if (tab != null && tab.equals("rdf")) {
-                return generateRdf();
-            }
-
-            domainName = getContext().getInitParameter("DOMAIN_NAME");
-
-            // If accept header contains RDF, then redirect to rdf page with code 303
-            String acceptHeader = getContext().getRequest().getHeader("accept");
-            if (acceptHeader != null && acceptHeader.contains(Constants.ACCEPT_RDF_HEADER)) {
-                return new Redirect303Resolution(domainName + "/habitats/" + idHabitat + "/rdf");
-            }
-        }
 
         if (tab == null || tab.length() == 0) {
             tab = "general";
@@ -198,27 +180,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         }
 
         return new ForwardResolution("/stripes/habitats-factsheet.layout.jsp");
-    }
-
-    /**
-     * Generates RDF for a habitats.
-     */
-    private Resolution generateRdf() {
-
-        StringBuffer rdf = new StringBuffer();
-
-        try {
-            rdf.append(GenerateHabitatRDF.HEADER);
-
-            GenerateHabitatRDF genRdf = new GenerateHabitatRDF(idHabitat);
-            rdf.append(genRdf.getHabitatRdf());
-
-            rdf.append(Constants.RDF_FOOTER);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, rdf.toString());
     }
 
     /**

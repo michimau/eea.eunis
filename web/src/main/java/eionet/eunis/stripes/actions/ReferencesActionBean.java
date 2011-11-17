@@ -12,7 +12,6 @@ import net.sourceforge.stripes.action.DontValidate;
 import net.sourceforge.stripes.action.ErrorResolution;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
-import net.sourceforge.stripes.action.StreamingResolution;
 import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.lang.StringUtils;
@@ -26,8 +25,6 @@ import eionet.eunis.dto.AttributeDto;
 import eionet.eunis.dto.DcIndexDTO;
 import eionet.eunis.dto.PairDTO;
 import eionet.eunis.dto.ReferenceDTO;
-import eionet.eunis.rdf.GenerateReferenceRDF;
-import eionet.eunis.stripes.extensions.Redirect303Resolution;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.CustomPaginatedList;
 import eionet.eunis.util.DcTermsLabels;
@@ -52,8 +49,6 @@ public class ReferencesActionBean extends AbstractStripesAction {
     // tabs to display
     private List<Pair<String, String>> tabsWithData = new LinkedList<Pair<String, String>>();
 
-    private String domainName;
-
     List<PairDTO> species = new ArrayList<PairDTO>();
     List<PairDTO> habitats = new ArrayList<PairDTO>();
 
@@ -66,29 +61,6 @@ public class ReferencesActionBean extends AbstractStripesAction {
     @DefaultHandler
     @DontValidate(ignoreBindingErrors = true)
     public Resolution defaultAction() {
-
-        domainName = getContext().getInitParameter("DOMAIN_NAME");
-
-        // Resolve what format should be returned - RDF or HTML
-        if (!StringUtils.isBlank(idref) && EunisUtil.isNumber(idref)) {
-            if (tab != null && tab.equals("rdf")) {
-                return generateRdf();
-            }
-            // If accept header contains RDF, then redirect to rdf page with code 303
-            String acceptHeader = getContext().getRequest().getHeader("accept");
-            if (acceptHeader != null && acceptHeader.contains(Constants.ACCEPT_RDF_HEADER)) {
-                return new Redirect303Resolution(domainName + "/references/" + idref + "/rdf");
-            }
-        } else {
-            if (idref != null && idref.equals("rdf")) {
-                return generateRdfAll();
-            }
-            // If accept header contains RDF, then redirect to rdf page with code 303
-            String acceptHeader = getContext().getRequest().getHeader("accept");
-            if (acceptHeader != null && acceptHeader.contains(Constants.ACCEPT_RDF_HEADER)) {
-                return new Redirect303Resolution(domainName + "/references/rdf");
-            }
-        }
 
         if (tab == null || tab.length() == 0) {
             tab = "general";
@@ -152,48 +124,6 @@ public class ReferencesActionBean extends AbstractStripesAction {
 
         return new ForwardResolution(forwardPage);
     }
-
-    /**
-     * Generates RDF for all references.
-     */
-    private Resolution generateRdfAll() {
-
-        StringBuffer rdf = new StringBuffer();
-        try {
-            rdf.append(GenerateReferenceRDF.HEADER);
-            List<DcIndexDTO> objects = DaoFactory.getDaoFactory().getReferncesDao().getDcObjects();
-            for (DcIndexDTO object : objects) {
-                GenerateReferenceRDF genRdf = new GenerateReferenceRDF(object);
-                rdf.append(genRdf.getReferenceRdf());
-            }
-            rdf.append(Constants.RDF_FOOTER);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, rdf.toString());
-    }
-
-    /**
-     * Generates RDF for a single reference.
-     */
-    private Resolution generateRdf() {
-
-        StringBuffer rdf = new StringBuffer();
-        try {
-            rdf.append(GenerateReferenceRDF.HEADER);
-
-            GenerateReferenceRDF genRdf = new GenerateReferenceRDF(idref);
-            rdf.append(genRdf.getReferenceRdf());
-
-            rdf.append(Constants.RDF_FOOTER);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return new StreamingResolution(Constants.ACCEPT_RDF_HEADER, rdf.toString());
-    }
-
 
     public String getIdref() {
         return idref;

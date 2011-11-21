@@ -11,10 +11,6 @@ import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
-import eionet.eunis.dto.LegalReferenceDTO;
-import eionet.eunis.dto.AttributeDto;
-import eionet.eunis.dto.readers.LegalReferenceDTOReader;
-import eionet.eunis.dto.readers.SpeciesAttributeDTOReader;
 
 
 /**
@@ -37,14 +33,14 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
             return 0;
         }
         String sql = "SELECT ID_SPECIES FROM CHM62EDT_SPECIES WHERE SCIENTIFIC_NAME = '"
-                + StringEscapeUtils.escapeSql(
-                        StringEscapeUtils.unescapeHtml(idSpecies))
-                        + "'";
+            + StringEscapeUtils.escapeSql(
+                    StringEscapeUtils.unescapeHtml(idSpecies))
+                    + "'";
         String result = ExecuteSQL(sql);
 
         return StringUtils.isNumeric(result) && !StringUtils.isBlank(result)
-                ? new Integer(result)
-                : 0;
+        ? new Integer(result)
+        : 0;
     }
 
     /**
@@ -53,7 +49,7 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
      */
     public String getScientificName(int idSpecies) {
         String sql = "SELECT SCIENTIFIC_NAME FROM CHM62EDT_SPECIES WHERE ID_SPECIES = "
-                + idSpecies;
+            + idSpecies;
 
         return ExecuteSQL(sql);
     }
@@ -68,12 +64,12 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
             return 0;
         }
         String synonymSQL = "SELECT ID_SPECIES_LINK FROM CHM62EDT_SPECIES WHERE ID_SPECIES = "
-                + idSpecies;
+            + idSpecies;
         String result = ExecuteSQL(synonymSQL);
 
         return StringUtils.isNumeric(result) && StringUtils.isNotBlank(result)
-                ? new Integer(result)
-                : 0;
+        ? new Integer(result)
+        : 0;
     }
 
     /* (non-Javadoc)
@@ -97,41 +93,6 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
         }
     }
 
-    public List<LegalReferenceDTO> getLegalReferences(int idNatureObject) {
-        String sql = "SELECT ID_DC,ANNEX,PRIORITY,COMMENT FROM chm62edt_reports AS A"
-                + " join chm62edt_report_type AS B on A.ID_REPORT_TYPE=B.ID_REPORT_TYPE AND B.LOOKUP_TYPE='LEGAL_STATUS'"
-                + " join chm62edt_legal_status on ID_LEGAL_STATUS=ID_LOOKUP where ID_NATURE_OBJECT = ?";
-        List<Object> params = new LinkedList<Object>();
-
-        params.add(idNatureObject);
-        try {
-            LegalReferenceDTOReader legalReferenceReader = new LegalReferenceDTOReader();
-
-            executeQuery(sql, params, legalReferenceReader);
-            return legalReferenceReader.getResultList();
-        } catch (SQLException ignored) {
-            logger.error(ignored);
-            throw new RuntimeException(ignored);
-        }
-    }
-
-    public List<AttributeDto> getAttributesForNatureObject(int idNatureObject) {
-        String sql = "SELECT * FROM CHM62EDT_NATURE_OBJECT_ATTRIBUTES "
-                + "WHERE ID_NATURE_OBJECT = ? AND NAME NOT LIKE '\\_%'";
-        List<Object> params = new LinkedList<Object>();
-
-        params.add(idNatureObject);
-        try {
-            SpeciesAttributeDTOReader attributeReader = new SpeciesAttributeDTOReader();
-
-            executeQuery(sql, params, attributeReader);
-            return attributeReader.getResultList();
-        } catch (SQLException ignored) {
-            logger.error(ignored);
-            throw new RuntimeException(ignored);
-        }
-    }
-
     /* (non-Javadoc)
      * @see eionet.eunis.dao.ISpeciesFactsheetDao#getExpectedInSiteIds(int, int)
      */
@@ -143,10 +104,10 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
                 idNatureObject, idSpecies);
 
         String sql = "SELECT C.ID_SITE " + " FROM CHM62EDT_SPECIES AS A "
-                + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
-                + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
-                + " WHERE A.ID_NATURE_OBJECT IN ( " + synonymsIDs + " ) "
-                + " GROUP BY C.ID_NATURE_OBJECT " + " ORDER BY C.ID_SITE";
+        + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
+        + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+        + " WHERE A.ID_NATURE_OBJECT IN ( " + synonymsIDs + " ) "
+        + " GROUP BY C.ID_NATURE_OBJECT " + " ORDER BY C.ID_SITE";
         List<Object> params = new LinkedList<Object>();
 
         if (limit > 0) {

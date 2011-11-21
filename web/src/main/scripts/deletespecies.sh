@@ -5,13 +5,11 @@ eunis=@WEBAPP.HOME@/WEB-INF
 cd $eunis/classes
 java=/usr/bin/java
 
-libpath=$eunis/lib
-
 # !!!!!!!!!!!!!!!!! CHECK, if mysql JAR is correct !!!!!!!!!!!!!!
 cp=@MYSQL.JAR@
 
-cp=$cp:$libpath/jrf-ver.unknown.jar
-cp=$cp:$libpath/log4j-1.2.13.jar:$CLASSPATH
+cp=$cp:@JRF.JAR@
+cp=$cp:@LOG4J.JAR@:$CLASSPATH
 
 if [ "$1" = "" ]; then
 	echo "Usage: deletespecies {species1ID} {species2ID} {species3ID} ..."

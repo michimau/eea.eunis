@@ -3,9 +3,6 @@ package eionet.eunis.dto;
 
 import java.io.Serializable;
 
-import org.simpleframework.xml.Root;
-import org.simpleframework.xml.convert.Convert;
-
 
 /**
  * Dto object to hold species attributes.
@@ -14,8 +11,6 @@ import org.simpleframework.xml.convert.Convert;
  *
  * <a href="mailto:aleks21@gmail.com">contact<a>
  */
-@Root
-@Convert(AttributeConverter.class)
 public class AttributeDto implements Serializable {
 
     /**

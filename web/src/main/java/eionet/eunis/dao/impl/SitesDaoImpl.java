@@ -9,13 +9,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import eionet.eunis.dao.ISitesDao;
-import eionet.eunis.dto.AttributeDto;
-import eionet.eunis.dto.readers.SiteAttributeDTOReader;
 
 
 /**
@@ -657,24 +654,4 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
             }
         }
     }
-
-    public List<AttributeDto> getAttributes(String idSite) {
-        String query = "select NAME, VALUE, TYPE from chm62edt_site_attributes where ID_SITE= ?"
-            + " and NAME not like 'SPECIES_%'"
-            + " and NAME not like 'OTHER_SPECIES_%'"
-            + " and NAME not like 'HABITAT_%'";
-        List<Object> params = new LinkedList<Object>();
-
-        params.add(idSite);
-
-        try {
-            SiteAttributeDTOReader rsReader = new SiteAttributeDTOReader();
-
-            executeQuery(query, params, rsReader);
-            return rsReader.getResultList();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }

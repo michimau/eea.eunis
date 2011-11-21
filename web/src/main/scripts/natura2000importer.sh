@@ -5,13 +5,11 @@ eunis=@WEBAPP.HOME@/WEB-INF
 cd $eunis/classes
 java=/usr/bin/java
 
-libpath=$eunis/lib
-
 # !!!!!!!!!!!!!!!!! CHECK, if mysql JAR is correct !!!!!!!!!!!!!!
 cp=@MYSQL.JAR@
 
-cp=$cp:$libpath/xmlParserAPIs-2.2.1.jar
-cp=$cp:$libpath/xml-apis-1.0.b2.jar:$CLASSPATH
+cp=$cp:@XML-APIS.JAR@
+cp=$cp:@XML-PARSER.JAR@:$CLASSPATH
 
 if [ "$1" = "" ]; then
 	echo "Usage: natura2000importer {folderName}"

@@ -2,10 +2,7 @@ package eionet.eunis.dao;
 
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
-
-import eionet.eunis.dto.AttributeDto;
 
 
 /**
@@ -30,13 +27,5 @@ public interface ISitesDao {
     public void updateCountrySitesFactsheet() throws SQLException;
 
     public void updateDesignationsTable() throws SQLException;
-
-    /**
-     * For given idSite fetches related attributes.
-     *
-     * @param idSite - site id.
-     * @return
-     */
-    public List<AttributeDto> getAttributes(String idSite);
 
 }

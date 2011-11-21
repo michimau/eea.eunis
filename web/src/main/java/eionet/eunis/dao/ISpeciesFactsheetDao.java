@@ -3,8 +3,6 @@ package eionet.eunis.dao;
 
 import java.util.List;
 
-import eionet.eunis.dto.LegalReferenceDTO;
-import eionet.eunis.dto.AttributeDto;
 import eionet.eunis.stripes.actions.SpeciesFactsheetActionBean;
 
 
@@ -50,13 +48,6 @@ public interface ISpeciesFactsheetDao {
     List<Integer> getSynonyms(int idSpecies);
 
     /**
-     * Fetch  all attributes for given idNatureObject.
-     * @param idNatureObject
-     * @return
-     */
-    List<AttributeDto> getAttributesForNatureObject(int idNatureObject);
-
-    /**
      * for given species returns the list of site id locations where it can be expected.
      *
      * @param idSpecies species id
@@ -64,13 +55,5 @@ public interface ISpeciesFactsheetDao {
      * @return ID_SITE locations
      */
     List<String> getExpectedInSiteIds(int idNatureObject, int idSpecies, int limit);
-
-    /**
-     * for given species returns the list of associated legal references.
-     *
-     * @param idNatureObject - species id.
-     * @return
-     */
-    List<LegalReferenceDTO> getLegalReferences(int idNatureObject);
 
 }

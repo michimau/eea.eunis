@@ -10,6 +10,11 @@
 	<name>Eunis Web Module</name>
 	<url>http://maven.apache.org</url>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<env>local</env>
+	</properties>
+
 	<parent>
 		<groupId>eionet.eunis</groupId>
 		<artifactId>eunis</artifactId>
@@ -78,49 +83,87 @@
 						</configuration>
 					</execution>
 					<execution>
+						<id>copy files</id>
+						<phase>install</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<loadproperties srcFile="${env}.properties"/>
+
+								<!-- Copy supporting scripts -->
+								<copy todir="${scripts.dir}" overwrite="true">
+									<fileset dir="src/main/scripts"></fileset>
+									<filterchain>
+										<replacetokens>
+											<token key="WEBAPP.HOME" value="${webapp.home}"/>
+											<token key="MYSQL.JAR" value="${maven.dependency.mysql.mysql-connector-java.jar.path}"/>
+											<token key="LOG4J.JAR" value="${maven.dependency.log4j.log4j.jar.path}"/>
+											<token key="JRF.JAR" value="${maven.dependency.jrf.jrf.jar.path}"/>
+											<token key="XML-APIS.JAR" value="${maven.dependency.xml-apis.xml-apis.jar.path}"/>
+											<token key="XML-PARSER.JAR" value="${maven.dependency.xerces.xmlParserAPIs.jar.path}"/>
+										</replacetokens>
+									</filterchain>
+								</copy>
+							</tasks>
+						</configuration>
+					</execution>
+					<!--execution>
 						<id>deploy to Tomcat</id>
 						<phase>install</phase>
 						<goals>
 							<goal>run</goal>
 						</goals>
 						<configuration>
-							<tasks if="webapp.root">
-								<!-- At this point we have an exploded web-app in target/eunis  -->
-								<echo message="Deploying to ${webapp.root}" />
-								<copy todir="${webapp.root}" includeEmptyDirs="true"
+							<tasks>
+								<loadproperties srcFile="${env}.properties"/>
+
+								<echo message="Deploying to ${webapp.home}" />
+								<copy todir="${webapp.home}" includeEmptyDirs="true"
 									overwrite="true">
 									<fileset dir="target/eunis" />
 								</copy>
-								<copy todir="${webapp.root}/WEB-INF/" overwrite="true"
-									file="${basedir}/src/main/resources/envSpecific/${env}/web.xml" />
 							</tasks>
 						</configuration>
-					</execution>
+					</execution-->
 				</executions>
 			</plugin>
+			<!-- maven-war-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+			    <!--<version>2.1.1</version> -->
+                <configuration>
+                    <filters>
+                        <filter>${basedir}/${env}.properties</filter>
+                    </filters>
+                    <webResources>
+                        <resource>
+                         <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+                         <filtering>true</filtering>
+                         <targetPath>WEB-INF</targetPath>
+                         <includes>
+                             <include>web.xml</include>
+                         </includes>
+                     </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
 		</plugins>
+
+		<!-- filters for src/main/resources and src/test/resources -->
+		<filters>
+			<filter>${env}.properties</filter>
+		</filters>
+
 		<!-- Define resource specific filtering -->
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
-				<excludes>
-					<exclude>envSpecific/**/*</exclude>
-				</excludes>
-			</resource>
-			<resource>
-				<directory>${basedir}/src/main/resources/envSpecific/${env}</directory>
-				<filtering>true</filtering>
-				<excludes>
-					<exclude>web.xml</exclude>
-				</excludes>
-			</resource>
-			<!-- NOTE!!! this overwrites default web.xml, with ENV specific one -->
-			<resource>
-				<directory>${basedir}/src/main/resources/envSpecific/${env}</directory>
-				<targetPath>${basedir}/target/eunis/WEB-INF/</targetPath>
 				<includes>
-					<include>web.xml</include>
+					<include>*.*</include>
 				</includes>
 			</resource>
 		</resources>

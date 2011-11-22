@@ -109,23 +109,22 @@
 							</tasks>
 						</configuration>
 					</execution>
-					<!--execution>
+					<execution>
 						<id>deploy to Tomcat</id>
 						<phase>install</phase>
 						<goals>
 							<goal>run</goal>
 						</goals>
 						<configuration>
-							<tasks>
-								<loadproperties srcFile="${env}.properties"/>
-
-								<echo message="Deploying to ${webapp.home}" />
-								<copy todir="${webapp.home}" includeEmptyDirs="true" overwrite="true">
+							<tasks if="webapp.root">
+								<!-- At this point we have an exploded web-app in target/eunis  -->
+								<echo message="Deploying to ${webapp.root}" />
+								<copy todir="${webapp.root}" includeEmptyDirs="true" overwrite="true">
 									<fileset dir="target/eunis" />
 								</copy>
 							</tasks>
 						</configuration>
-					</execution-->
+					</execution>
 				</executions>
 			</plugin>
 			<!-- maven-war-plugin -->

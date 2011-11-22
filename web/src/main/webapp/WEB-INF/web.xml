@@ -189,7 +189,7 @@
 	<!-- JDBC URL -->
 	<context-param>
 		<param-name>JDBC_URL</param-name>
-		<param-value>${mysql.url}${mysql.url.ending}</param-value>
+		<param-value>${mysql.url}${mysql.url.ending.escaped}</param-value>
 		<description>JDBC URL to database</description>
 	</context-param>
 

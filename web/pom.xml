@@ -109,7 +109,7 @@
 							</tasks>
 						</configuration>
 					</execution>
-					<!--execution>
+					<execution>
 						<id>deploy to Tomcat</id>
 						<phase>install</phase>
 						<goals>
@@ -120,13 +120,12 @@
 								<loadproperties srcFile="${env}.properties"/>
 
 								<echo message="Deploying to ${webapp.home}" />
-								<copy todir="${webapp.home}" includeEmptyDirs="true"
-									overwrite="true">
+								<copy todir="${webapp.home}" includeEmptyDirs="true" overwrite="true">
 									<fileset dir="target/eunis" />
 								</copy>
 							</tasks>
 						</configuration>
-					</execution-->
+					</execution>
 				</executions>
 			</plugin>
 			<!-- maven-war-plugin -->

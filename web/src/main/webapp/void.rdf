@@ -27,16 +27,82 @@
     <void:exampleResource rdf:resource="http://eunis.eea.europa.eu/sites/UK930012"/>
     <void:uriPattern>^http://eunis.eea.europa.eu/.*</void:uriPattern>
     <void:sparqlEndpoint rdf:resource="http://semantic.eea.europa.eu/sparql"/>
-    <void:subset rdf:resource="#sites"/>
-    <void:subset rdf:resource="#species"/>
-    <void:subset rdf:resource="#habitats"/>
-    <void:subset rdf:resource="#designations"/>
-    <void:subset rdf:resource="#references"/>
-    <void:subset rdf:resource="#taxonomies"/>
     <void:subset rdf:resource="#biogeoregions"/>
     <void:subset rdf:resource="#countries"/>
     <void:subset rdf:resource="#countrybiogeo"/>
+    <void:subset rdf:resource="#designations"/>
+    <void:subset rdf:resource="#habitats"/>
+    <void:subset rdf:resource="#images"/>
+    <void:subset rdf:resource="#legalrefs"/>
+    <void:subset rdf:resource="#references"/>
+    <void:subset rdf:resource="#sites"/>
+    <void:subset rdf:resource="#species"/>
     <void:subset rdf:resource="#speciesgroup"/>
+    <void:subset rdf:resource="#taxonomies"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="biogeoregions">
+    <dcterms:title>Biogeographical regions from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/biogeoregions.rdf.gz"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="countries">
+    <dcterms:title>Countries from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/countries.rdf.gz"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="countrybiogeo">
+    <dcterms:title>Links between countries and biogeographical regions in EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/countrybiogeo.rdf.gz"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="designations">
+    <dcterms:title>Designations of sites from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/designations.rdf.gz"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="geoscope">
+    <dcterms:title>Geographical scopes from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/geoscope.rdf.gz"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="habitats">
+    <dcterms:title>Habitat types from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <dcterms:subject rdf:resource="http://dbpedia.org/resource/Habitat"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/habitats.rdf.gz"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="images">
+    <dcterms:title>Images from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/images.rdf.gz"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="legalrefs">
+    <dcterms:title>Legislation references from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/legalrefs.rdf.gz"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="references">
+    <dcterms:title>References from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/references/rdf"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="sites">
@@ -54,50 +120,6 @@
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/species.rdf.gz"/>
   </void:Dataset>
 
-  <void:Dataset rdf:ID="taxonomies">
-    <dcterms:title>Higher (family and up) taxonomies from EUNIS</dcterms:title>
-    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
-    <dcterms:creator rdf:resource="#EEA"/>
-    <dcterms:subject rdf:resource="http://dbpedia.org/resource/Taxonomic_rank"/>
-    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/taxonomies.rdf.gz"/>
-  </void:Dataset>
-
-  <void:Dataset rdf:ID="habitats">
-    <dcterms:title>Habitat types from EUNIS</dcterms:title>
-    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
-    <dcterms:creator rdf:resource="#EEA"/>
-    <dcterms:subject rdf:resource="http://dbpedia.org/resource/Habitat"/>
-    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/habitats.rdf.gz"/>
-  </void:Dataset>
-
-  <void:Dataset rdf:ID="countries">
-    <dcterms:title>Countries from EUNIS</dcterms:title>
-    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
-    <dcterms:creator rdf:resource="#EEA"/>
-    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/countries.rdf.gz"/>
-  </void:Dataset>
-
-  <void:Dataset rdf:ID="biogeoregions">
-    <dcterms:title>Biogeographical regions from EUNIS</dcterms:title>
-    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
-    <dcterms:creator rdf:resource="#EEA"/>
-    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/biogeoregions.rdf.gz"/>
-  </void:Dataset>
-
-  <void:Dataset rdf:ID="countrybiogeo">
-    <dcterms:title>Links between countries and biogeographical regions in EUNIS</dcterms:title>
-    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
-    <dcterms:creator rdf:resource="#EEA"/>
-    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/countrybiogeo.rdf.gz"/>
-  </void:Dataset>
-
-  <void:Dataset rdf:ID="designations">
-    <dcterms:title>Designations of sites from EUNIS</dcterms:title>
-    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
-    <dcterms:creator rdf:resource="#EEA"/>
-    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/designations.rdf.gz"/>
-  </void:Dataset>
-
   <void:Dataset rdf:ID="speciesgroup">
     <dcterms:title>Species groups from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
@@ -105,11 +127,12 @@
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/speciesgroup.rdf.gz"/>
   </void:Dataset>
 
-  <void:Dataset rdf:ID="references">
-    <dcterms:title>References from EUNIS</dcterms:title>
+  <void:Dataset rdf:ID="taxonomies">
+    <dcterms:title>Higher (family and up) taxonomies from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
-    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/references/rdf"/>
+    <dcterms:subject rdf:resource="http://dbpedia.org/resource/Taxonomic_rank"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/taxonomies.rdf.gz"/>
   </void:Dataset>
 
 </rdf:RDF>

@@ -9,6 +9,7 @@ import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Vector;
 
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -550,7 +551,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      */
     private void linkeddataTabActions(int idSpecies) {
         try {
-            LinkedData fd = new LinkedData();
+            Properties props = new Properties();
+            props.load(getClass().getClassLoader().getResourceAsStream("linkeddata_species.properties"));
+            LinkedData fd = new LinkedData(props);
             queries = fd.getQueryObjects();
 
             if (!StringUtils.isBlank(query)) {

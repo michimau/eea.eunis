@@ -44,9 +44,8 @@ public class LinkedData {
     /** Source of the data. */
     private String attribution;
 
-    public LinkedData() throws Exception {
-        props = new Properties();
-        props.load(getClass().getClassLoader().getResourceAsStream("linkeddata.properties"));
+    public LinkedData(Properties props) throws Exception {
+        this.props = props;
         queries = props.getProperty("queries").split(" ");
 
         if (queries != null) {
@@ -62,7 +61,7 @@ public class LinkedData {
         }
     }
 
-    public void executeQuery(String queryId, int idSpecies) throws Exception {
+    public void executeQuery(String queryId, int id) throws Exception {
 
         if (props != null && queryId != null) {
             String query = props.getProperty(queryId + ".query");
@@ -70,9 +69,9 @@ public class LinkedData {
             attribution = props.getProperty(queryId + ".attribution");
 
             if (!StringUtils.isBlank(query) && !StringUtils.isBlank(endpoint)) {
-                // Replace [ID_SPECIES] in query
-                if (query.contains("[ID_SPECIES]")) {
-                    query = query.replace("[ID_SPECIES]", new Integer(idSpecies).toString());
+                // Replace [IDENTIFIER] in query
+                if (query.contains("[IDENTIFIER]")) {
+                    query = query.replace("[IDENTIFIER]", new Integer(id).toString());
                 }
 
                 QueryExecutor executor = new QueryExecutor();
@@ -82,7 +81,7 @@ public class LinkedData {
                 generateRows(queryId, result);
                 generateCols(queryId, result);
             } else {
-                logger.error("query or endpoint is not defined in linkeddata.properties file for: " + queryId);
+                logger.error("query or endpoint is not defined in linkeddata properties file for: " + queryId);
             }
         }
     }

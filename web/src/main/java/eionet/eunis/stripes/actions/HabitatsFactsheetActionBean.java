@@ -6,6 +6,7 @@ import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Vector;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,12 +25,13 @@ import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
 import ro.finsiel.eunis.search.Utilities;
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dto.AttributeDto;
+import eionet.eunis.dto.ForeignDataQueryDTO;
 import eionet.eunis.dto.HabitatFactsheetOtherDTO;
 import eionet.eunis.dto.PictureDTO;
+import eionet.eunis.rdf.LinkedData;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
-import eionet.sparqlClient.helpers.QueryExecutor;
-import eionet.sparqlClient.helpers.QueryResult;
+import eionet.sparqlClient.helpers.ResultValue;
 
 /**
  * Action bean to handle habitats-factsheet functionality. Data is loaded from
@@ -86,8 +88,12 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     // Variable for RDF generation
     private String domainName;
 
-    // Deliveries tab variables
-    private QueryResult deliveries;
+    /** LinkedData tab variables. */
+    private List<ForeignDataQueryDTO> queries;
+    private String query;
+    private ArrayList<Map<String, Object>> queryResultCols;
+    private ArrayList<HashMap<String, ResultValue>> queryResultRows;
+    private String attribution;
 
     // General tab variables
     private PictureDTO pic;
@@ -136,6 +142,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             }
         }
 
+        // Always add linkeddata tab
+        tabsWithData.add(new Pair<String, String>("linkeddata", getContentManagement().cmsPhrase("Linked data")));
+
         if (factsheet.isAnnexI()) {
             tabsWithData.add(new Pair<String, String>("art17", "Distribution map from Art. 17"));
         }
@@ -144,9 +153,8 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             generalTabActions();
         }
 
-        if (factsheet.getCode2000() != null && factsheet.getCode2000().length() == 4) {
-            tabsWithData.add(new Pair<String, String>("deliveries", "Deliveries"));
-            deliveriesTabActions();
+        if (tab != null && tab.equals("linkeddata")) {
+            linkeddataTabActions();
         }
 
         if (tab != null && tab.equals("sites")) {
@@ -262,27 +270,24 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * Populate the member variables used in the "deliveries" tab.
+     * Populate the member variables used in the "linkeddata" tab.
+     *
      */
-    private void deliveriesTabActions() {
+    private void linkeddataTabActions() {
+        try {
+            Properties props = new Properties();
+            props.load(getClass().getClassLoader().getResourceAsStream("linkeddata_habitats.properties"));
+            LinkedData fd = new LinkedData(props);
+            queries = fd.getQueryObjects();
 
-        String query =
-            "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " + "PREFIX dc: <http://purl.org/dc/elements/1.1/> "
-            + "PREFIX dct: <http://purl.org/dc/terms/> "
-            + "PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> "
-            + "PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> "
-            + "SELECT DISTINCT xsd:date(?released) AS ?released ?coverage ?envelope ?envtitle "
-            + "IRI(bif:concat(?sourcefile,'/manage_document')) AS ?file ?filetitle " + "WHERE { "
-            + "GRAPH ?sourcefile { " + "_:reference ?pred <http://eunis.eea.europa.eu/habitats/" + idHabitat + "> "
-            + "OPTIONAL { _:reference rdfs:label ?label } " + "} " + "?envelope rod:hasFile ?sourcefile; "
-            + "rod:released ?released; " + "rod:locality _:locurl; " + "dc:title ?envtitle . "
-            + "_:locurl rdfs:label ?coverage . " + "?sourcefile dc:title ?filetitle " + "} ORDER BY DESC(?released)";
-
-        String CRSparqlEndpoint = getContext().getApplicationProperty("cr.sparql.endpoint");
-        if (!StringUtils.isBlank(CRSparqlEndpoint)) {
-            QueryExecutor executor = new QueryExecutor();
-            executor.executeQuery(CRSparqlEndpoint, query);
-            deliveries = executor.getResults();
+            if (!StringUtils.isBlank(query)) {
+                fd.executeQuery(query, Integer.parseInt(idHabitat));
+                queryResultCols = fd.getCols();
+                queryResultRows = fd.getRows();
+                attribution = fd.getAttribution();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -395,14 +400,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         this.mapIds = mapIds;
     }
 
-    public QueryResult getDeliveries() {
-        return deliveries;
-    }
-
-    public void setDeliveries(QueryResult deliveries) {
-        this.deliveries = deliveries;
-    }
-
     public PictureDTO getPic() {
         return pic;
     }
@@ -417,6 +414,30 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     public String getDomainName() {
         return domainName;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
+    }
+
+    public List<ForeignDataQueryDTO> getQueries() {
+        return queries;
+    }
+
+    public ArrayList<Map<String, Object>> getQueryResultCols() {
+        return queryResultCols;
+    }
+
+    public ArrayList<HashMap<String, ResultValue>> getQueryResultRows() {
+        return queryResultRows;
+    }
+
+    public String getAttribution() {
+        return attribution;
     }
 
 }

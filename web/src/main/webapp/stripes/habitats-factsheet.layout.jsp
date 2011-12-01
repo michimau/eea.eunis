@@ -1,6 +1,6 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 
-<%@ include file="/stripes/common/taglibs.jsp"%>	
+<%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle }">
 	<stripes:layout-component name="head">
 		<script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
@@ -19,7 +19,7 @@
 	</stripes:layout-component>
 	<stripes:layout-component name="contents">
 
-		<!-- MAIN CONTENT --> 
+		<!-- MAIN CONTENT -->
 		<c:choose>
 			<c:when test="${actionBean.factsheet.habitat == null}">
 				<div class="error-msg">
@@ -120,9 +120,9 @@
 						<c:if test="${actionBean.tab == 'art17'}">
 							<stripes:layout-render name="/stripes/habitats-factsheet-art17-dist.jsp"/>
 						</c:if>
-						<c:if test="${actionBean.tab == 'deliveries'}">
-							<stripes:layout-render name="/stripes/habitats-factsheet-deliveries.jsp"/>
-						</c:if>
+						<c:if test="${actionBean.tab == 'linkeddata'}">
+		                	<stripes:layout-render name="/stripes/habitats-factsheet-linkeddata.jsp"/>
+		                </c:if>
 						<c:if test="${actionBean.tab == 'other'}">
 							<c:if test="${actionBean.factsheet.eunis}">
 								<script language="JavaScript" type="text/javascript">
@@ -191,10 +191,10 @@
 	                ${eunis:br(actionBean.contentManagement)}
 	                ${eunis:cmsMsg(actionBean.contentManagement, 'loading_data')}
 	                ${eunis:br(actionBean.contentManagement)}
-	                ${eunis:cmsMsg(actionBean.contentManagement, 'error_expanding_node')}		
-                 </c:if>	
+	                ${eunis:cmsMsg(actionBean.contentManagement, 'error_expanding_node')}
+                 </c:if>
 			</c:otherwise>
-		</c:choose> 
+		</c:choose>
 		<!-- END MAIN CONTENT -->
 		<script language="JavaScript" type="text/javascript">
 	      	//<![CDATA[

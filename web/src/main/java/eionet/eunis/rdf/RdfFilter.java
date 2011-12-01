@@ -55,7 +55,7 @@ public class RdfFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         String uri = httpRequest.getRequestURI();
-        if (uri != null && uri.contains("/rdf")){
+        if (uri != null && uri.endsWith("/rdf")){
             String cpath = httpRequest.getContextPath();
             if (!StringUtils.isBlank(cpath) && !cpath.equals("/")) {
                 uri = uri.replace(cpath, "");

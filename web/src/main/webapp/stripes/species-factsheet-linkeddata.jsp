@@ -39,6 +39,9 @@
 					      	<display:column property="${cl.property}" title="${cl.title}" sortable="${cl.sortable}" decorator="eionet.eunis.util.decorators.ForeignDataColumnDecorator"/>
 					    </c:forEach>
 					</display:table>
+					<c:if test="${not empty actionBean.attribution}">
+						<b>Source:</b> ${actionBean.attribution}
+					</c:if>
 			 	</c:when>
 			 	<c:otherwise>
 			 		Query didn't return any result!

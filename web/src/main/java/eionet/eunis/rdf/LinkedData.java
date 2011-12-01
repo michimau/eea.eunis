@@ -41,6 +41,8 @@ public class LinkedData {
     private ArrayList<HashMap<String, ResultValue>> rows;
     /** Query result cols. */
     private ArrayList<Map<String, Object>> cols;
+    /** Source of the data. */
+    private String attribution;
 
     public LinkedData() throws Exception {
         props = new Properties();
@@ -65,6 +67,7 @@ public class LinkedData {
         if (props != null && queryId != null) {
             String query = props.getProperty(queryId + ".query");
             String endpoint = props.getProperty(queryId + ".endpoint");
+            attribution = props.getProperty(queryId + ".attribution");
 
             if (!StringUtils.isBlank(query) && !StringUtils.isBlank(endpoint)) {
                 // Replace [ID_SPECIES] in query
@@ -186,5 +189,9 @@ public class LinkedData {
 
     public ArrayList<HashMap<String, ResultValue>> getRows() {
         return rows;
+    }
+
+    public String getAttribution() {
+        return attribution;
     }
 }

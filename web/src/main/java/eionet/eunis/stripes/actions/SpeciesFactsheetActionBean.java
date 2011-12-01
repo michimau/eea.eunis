@@ -155,11 +155,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private List<SitesByNatureObjectPersist> subSpeciesSites;
     private String subMapIds;
 
-    /** ForeignData tab variables. */
+    /** LinkedData tab variables. */
     private List<ForeignDataQueryDTO> queries;
     private String query;
     private ArrayList<Map<String, Object>> queryResultCols;
     private ArrayList<HashMap<String, ResultValue>> queryResultRows;
+    private String attribution;
 
     @DefaultHandler
     public Resolution index() {
@@ -556,6 +557,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 fd.executeQuery(query, idSpecies);
                 queryResultCols = fd.getCols();
                 queryResultRows = fd.getRows();
+                attribution = fd.getAttribution();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -962,5 +964,13 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     public ArrayList<HashMap<String, ResultValue>> getQueryResultRows() {
         return queryResultRows;
+    }
+
+    public String getAttribution() {
+        return attribution;
+    }
+
+    public void setAttribution(String attribution) {
+        this.attribution = attribution;
     }
 }

@@ -3,6 +3,10 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle }">
 	<stripes:layout-component name="head">
+                <c:if test="${!empty actionBean.factsheet}">
+                        <link rel="alternate" type="application/rdf+xml" title="RDF" href="${pageContext.request.contextPath}/habitats/${actionBean.idHabitat}/rdf" />
+                </c:if>
+
 		<script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
 		<script language="JavaScript" type="text/javascript">
 		    //<![CDATA[

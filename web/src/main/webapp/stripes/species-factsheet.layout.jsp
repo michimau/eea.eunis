@@ -16,7 +16,7 @@
     	<script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
 		<link rel="alternate"
 			type="application/rdf+xml" title="RDF"
-			href="${pageContext.request.contextPath}/species/${actionBean.idSpecies}" />
+			href="${pageContext.request.contextPath}/species/${actionBean.idSpecies}/rdf" />
 	</stripes:layout-component>
 
 	<stripes:layout-component name="contents">

@@ -4,7 +4,7 @@
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle }">
 	<stripes:layout-component name="head">
 		<c:if test="${eunis:exists(actionBean.factsheet)}">
-			<link rel="alternate" type="application/rdf+xml" title="RDF" href="${pageContext.request.contextPath}/sites/${actionBean.idsite}" />
+			<link rel="alternate" type="application/rdf+xml" title="RDF" href="${pageContext.request.contextPath}/sites/${actionBean.idsite}/rdf" />
 		</c:if>
 		<script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
 		<script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>

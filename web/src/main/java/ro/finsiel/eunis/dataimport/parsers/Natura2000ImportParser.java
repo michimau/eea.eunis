@@ -291,7 +291,7 @@ public class Natura2000ImportParser extends DefaultHandler {
                         preparedStatementReportAttribute.setString(4, nutsCover);
                         preparedStatementReportAttribute.executeUpdate();
                     } else {
-                        System.out.println("AdministrativeRegion with code " + nutsCode + " doesn't exist!");
+                        System.out.println(" Warning! AdministrativeRegion with code " + nutsCode + " doesn't exist!");
                     }
                 }
             }
@@ -307,7 +307,7 @@ public class Natura2000ImportParser extends DefaultHandler {
                     preparedStatementSiteAttribute.setString(5, "sdfxml");
                     preparedStatementSiteAttribute.executeUpdate();
                 } else {
-                    System.out.println("BioRegion '" + bioRegion + "' doesn't exist!");
+                    System.out.println(" Warning! BioRegion '" + bioRegion + "' doesn't exist!");
                 }
             }
 

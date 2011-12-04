@@ -304,7 +304,7 @@
           <%attribute2 = factsheet.findHabit2NotEunisAttributes("NAME_EN_"+habCode);%>
           <%=(null != attribute2) ? Utilities.formatString(attribute2.getValue()) : ""%>&nbsp;
         </td>
-        <td style="text-align:right;">
+        <td class="number">
           <%attribute2 = factsheet.findHabit2NotEunisAttributes("COVER_"+habCode);%>
           <%=(null != attribute2) ? Utilities.formatDecimal(attribute2.getValue(), 2) : ""%>&nbsp;
         </td>

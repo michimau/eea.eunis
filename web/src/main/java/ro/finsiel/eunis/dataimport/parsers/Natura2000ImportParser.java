@@ -31,10 +31,7 @@ public class Natura2000ImportParser extends DefaultHandler {
     private BufferedInputStream inputStream;
 
     private PreparedStatement preparedStatementNatObject;
-    private PreparedStatement preparedStatementUpdateNatObject;
     private PreparedStatement preparedStatementSiteInsert;
-    private PreparedStatement preparedStatementSite;
-    private PreparedStatement preparedStatementBioRegion;
     private PreparedStatement preparedStatementNatObjectReportType;
     private PreparedStatement preparedStatementNatObjectGeoscope;
     private PreparedStatement preparedStatementReportAttribute;
@@ -73,7 +70,6 @@ public class Natura2000ImportParser extends DefaultHandler {
     private String geoscopeId;
     private String nutsCode;
     private String nutsCover;
-    private boolean newSite = false;
 
     private int maxNoIdInt = 0;
     private int maxReportAttributeId = 0;
@@ -104,6 +100,7 @@ public class Natura2000ImportParser extends DefaultHandler {
 
     private String siteDescriptionHabClassDesc;
     private String siteDescriptionHabClassCover;
+    private int siteDescriptionHabClassCodeCnt;
 
     private String siteDescriptionOtherCharacteristics;
     private String siteDescriptionQualityImportance;
@@ -202,9 +199,7 @@ public class Natura2000ImportParser extends DefaultHandler {
                 }
 
                 getSiteNatObjectId();
-                if (!newSite) {
-                    deleteOldRecords();
-                }
+                deleteOldRecords();
                 setSitesTab(siteNatureObjectId, Constants.SITES_TAB_GENERAL);
 
             } else if (qName.equalsIgnoreCase("Date_Compilation")) {
@@ -296,10 +291,7 @@ public class Natura2000ImportParser extends DefaultHandler {
                         preparedStatementReportAttribute.setString(4, nutsCover);
                         preparedStatementReportAttribute.executeUpdate();
                     } else {
-                        throw new RuntimeException(
-                                "BioRegion with code " + nutsCode
-                                + " doesn't exist!",
-                                new Exception());
+                        System.out.println("AdministrativeRegion with code " + nutsCode + " doesn't exist!");
                     }
                 }
             }
@@ -315,7 +307,7 @@ public class Natura2000ImportParser extends DefaultHandler {
                     preparedStatementSiteAttribute.setString(5, "sdfxml");
                     preparedStatementSiteAttribute.executeUpdate();
                 } else {
-                    throw new RuntimeException("BioRegion '" + bioRegion + "' doesn't exist!", new Exception());
+                    System.out.println("BioRegion '" + bioRegion + "' doesn't exist!");
                 }
             }
 
@@ -332,80 +324,43 @@ public class Natura2000ImportParser extends DefaultHandler {
                 calculateLatitudeParams();
                 calculateLongitudeParams();
 
-                if (!newSite) {
-                    preparedStatementUpdateNatObject.setString(1, "NATURA2000_SITES");
-                    preparedStatementUpdateNatObject.setString(2, siteNatureObjectId);
-                    preparedStatementUpdateNatObject.setString(3, siteCode);
-                    preparedStatementUpdateNatObject.executeUpdate();
+                preparedStatementNatObject.setString(1, siteNatureObjectId);
+                preparedStatementNatObject.setString(2, siteCode);
+                preparedStatementNatObject.executeUpdate();
 
-                    preparedStatementSite.setString(1, siteName);
-                    preparedStatementSite.setString(2, dateCompilation);
-                    preparedStatementSite.setString(3, dateUpdate);
-                    preparedStatementSite.setString(4, dateSpa);
-                    preparedStatementSite.setString(5, respondent);
-                    preparedStatementSite.setString(6, description);
-                    preparedStatementSite.setString(7, latitude);
-                    preparedStatementSite.setString(8, latNs);
-                    preparedStatementSite.setString(9, latDeg);
-                    preparedStatementSite.setString(10, latMin);
-                    preparedStatementSite.setString(11, latSec);
-                    preparedStatementSite.setString(12, longitude);
-                    preparedStatementSite.setString(13, lonEw);
-                    preparedStatementSite.setString(14, lonDeg);
-                    preparedStatementSite.setString(15, lonMin);
-                    preparedStatementSite.setString(16, lonSec);
-                    preparedStatementSite.setString(17, area);
-                    preparedStatementSite.setString(18, altMin);
-                    preparedStatementSite.setString(19, altMax);
-                    preparedStatementSite.setString(20, altMean);
-                    preparedStatementSite.setString(21, "80");
-                    preparedStatementSite.setString(22, siteDesignation);
-                    if (lengthKm != null && lengthKm.length() > 0) {
-                        preparedStatementSite.setString(23, lengthKm);
-                    } else {
-                        preparedStatementSite.setNull(23, Types.DECIMAL);
-                    }
-                    preparedStatementSite.setString(24, siteCode);
-                    preparedStatementSite.executeUpdate();
+                //String geoIdEu = getGeoscopeIdEu();
+
+                preparedStatementSiteInsert.setString(1, siteCode);
+                preparedStatementSiteInsert.setString(2, siteNatureObjectId);
+                preparedStatementSiteInsert.setString(3, siteName);
+                preparedStatementSiteInsert.setString(4, dateCompilation);
+                preparedStatementSiteInsert.setString(5, dateUpdate);
+                preparedStatementSiteInsert.setString(6, dateSpa);
+                preparedStatementSiteInsert.setString(7, respondent);
+                preparedStatementSiteInsert.setString(8, description);
+                preparedStatementSiteInsert.setString(9, latitude);
+                preparedStatementSiteInsert.setString(10, latNs);
+                preparedStatementSiteInsert.setString(11, latDeg);
+                preparedStatementSiteInsert.setString(12, latMin);
+                preparedStatementSiteInsert.setString(13, latSec);
+                preparedStatementSiteInsert.setString(14, longitude);
+                preparedStatementSiteInsert.setString(15, lonEw);
+                preparedStatementSiteInsert.setString(16, lonDeg);
+                preparedStatementSiteInsert.setString(17, lonMin);
+                preparedStatementSiteInsert.setString(18, lonSec);
+                preparedStatementSiteInsert.setString(19, area);
+                preparedStatementSiteInsert.setString(20, altMin);
+                preparedStatementSiteInsert.setString(21, altMax);
+                preparedStatementSiteInsert.setString(22, altMean);
+                preparedStatementSiteInsert.setString(23, "NATURA2000");
+                preparedStatementSiteInsert.setString(24, "80");
+                preparedStatementSiteInsert.setString(25, siteDesignation);
+                if (lengthKm != null && lengthKm.length() > 0) {
+                    preparedStatementSiteInsert.setString(26, lengthKm);
                 } else {
-                    preparedStatementNatObject.setString(1, siteNatureObjectId);
-                    preparedStatementNatObject.setString(2, siteCode);
-                    preparedStatementNatObject.executeUpdate();
-
-                    //String geoIdEu = getGeoscopeIdEu();
-
-                    preparedStatementSiteInsert.setString(1, siteCode);
-                    preparedStatementSiteInsert.setString(2, siteNatureObjectId);
-                    preparedStatementSiteInsert.setString(3, siteName);
-                    preparedStatementSiteInsert.setString(4, dateCompilation);
-                    preparedStatementSiteInsert.setString(5, dateUpdate);
-                    preparedStatementSiteInsert.setString(6, dateSpa);
-                    preparedStatementSiteInsert.setString(7, respondent);
-                    preparedStatementSiteInsert.setString(8, description);
-                    preparedStatementSiteInsert.setString(9, latitude);
-                    preparedStatementSiteInsert.setString(10, latNs);
-                    preparedStatementSiteInsert.setString(11, latDeg);
-                    preparedStatementSiteInsert.setString(12, latMin);
-                    preparedStatementSiteInsert.setString(13, latSec);
-                    preparedStatementSiteInsert.setString(14, longitude);
-                    preparedStatementSiteInsert.setString(15, lonEw);
-                    preparedStatementSiteInsert.setString(16, lonDeg);
-                    preparedStatementSiteInsert.setString(17, lonMin);
-                    preparedStatementSiteInsert.setString(18, lonSec);
-                    preparedStatementSiteInsert.setString(19, area);
-                    preparedStatementSiteInsert.setString(20, altMin);
-                    preparedStatementSiteInsert.setString(21, altMax);
-                    preparedStatementSiteInsert.setString(22, altMean);
-                    preparedStatementSiteInsert.setString(23, "NATURA2000");
-                    preparedStatementSiteInsert.setString(24, "80");
-                    preparedStatementSiteInsert.setString(25, siteDesignation);
-                    if (lengthKm != null && lengthKm.length() > 0) {
-                        preparedStatementSiteInsert.setString(26, lengthKm);
-                    } else {
-                        preparedStatementSiteInsert.setNull(26, Types.DECIMAL);
-                    }
-                    preparedStatementSiteInsert.executeUpdate();
+                    preparedStatementSiteInsert.setNull(26, Types.DECIMAL);
                 }
+                preparedStatementSiteInsert.executeUpdate();
 
                 geoscopeId = getGeoscopeId();
                 preparedStatementNatObjectGeoscope.setString(1, siteNatureObjectId);
@@ -904,26 +859,27 @@ public class Natura2000ImportParser extends DefaultHandler {
 
             if (qName.equalsIgnoreCase("HabitatClasses")) {
                 if (siteDescriptionHabClassDesc != null && siteDescriptionHabClassCover != null) {
-                    updateSiteDescriptionHabitatClasses(siteDescriptionHabClassDesc, siteCode, siteDescriptionHabClassCover);
+                    insertSiteDescriptionHabitatClasses(siteDescriptionHabClassDesc, siteCode, siteDescriptionHabClassCover);
                 }
-
                 siteDescriptionHabClassDesc = null;
                 siteDescriptionHabClassCover = null;
             }
 
             if (qName.equalsIgnoreCase("OtherCharacteristics")) {
                 siteDescriptionOtherCharacteristics = buf.toString().trim();
+                insertSiteAttribute(siteCode, "HABITAT_CHARACTERIZATION", siteDescriptionOtherCharacteristics, "TEXT", "habit2");
             } else if (qName.equalsIgnoreCase("QualityImportance")) {
                 siteDescriptionQualityImportance = buf.toString().trim();
+                insertSiteAttribute(siteCode, "QUALITY", siteDescriptionQualityImportance, "TEXT", "habit2");
             } else if (qName.equalsIgnoreCase("Vulnerability")) {
                 siteDescriptionVulnerability = buf.toString().trim();
+                insertSiteAttribute(siteCode, "VULNERABILITY", siteDescriptionVulnerability, "TEXT", "habit2");
             } else if (qName.equalsIgnoreCase("SiteDesignation")) {
                 siteDescriptionSiteDesignation = buf.toString().trim();
+                insertSiteAttribute(siteCode, "SITE_DESIGNATION", siteDescriptionSiteDesignation, "TEXT", "habit2");
             } else if (qName.equalsIgnoreCase("Documentation")) {
                 siteDescriptionDocumentation = buf.toString().trim();
-            }
-
-            if (qName.equalsIgnoreCase("SiteDescription")) {// TODO insert new values
+                insertSiteAttribute(siteCode, "DOCUMENTATION", siteDescriptionDocumentation, "TEXT", "habit2");
             }
 
             if (qName.equalsIgnoreCase("Code")) {
@@ -1045,13 +1001,7 @@ public class Natura2000ImportParser extends DefaultHandler {
 
             String queryNatObject =
                 "INSERT INTO chm62edt_nature_object (ID_NATURE_OBJECT, ORIGINAL_CODE, ID_DC, TYPE) VALUES (?,?, -1, 'NATURA2000_SITES')";
-
             this.preparedStatementNatObject = con.prepareStatement(queryNatObject);
-
-            String updateNatObject =
-                "UPDATE chm62edt_nature_object SET TYPE = ? WHERE ID_NATURE_OBJECT = ? AND ORIGINAL_CODE = ?";
-
-            this.preparedStatementUpdateNatObject = con.prepareStatement(updateNatObject);
 
             String querySiteInsert =
                 "INSERT INTO chm62edt_sites (ID_SITE, ID_NATURE_OBJECT, NAME, COMPILATION_DATE, "
@@ -1060,60 +1010,40 @@ public class Natura2000ImportParser extends DefaultHandler {
                 + "LONGITUDE, LONG_EW, LONG_DEG, LONG_MIN, LONG_SEC, AREA, ALT_MIN, ALT_MAX, ALT_MEAN, SOURCE_DB, "
                 + "ID_GEOSCOPE, ID_DESIGNATION, LENGTH) VALUES "
                 + "(?,?,?,?,'','',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
             this.preparedStatementSiteInsert = con.prepareStatement(querySiteInsert);
 
-            String querySites = "UPDATE chm62edt_sites SET NAME=?, COMPILATION_DATE=?, UPDATE_DATE=?, "
-                + "SPA_DATE=?, RESPONDENT=?, DESCRIPTION=?, LATITUDE=?, LAT_NS=?, LAT_DEG=?, LAT_MIN=?, "
-                + "LAT_SEC=?, LONGITUDE=?, LONG_EW=?, LONG_DEG=?, LONG_MIN=?, LONG_SEC=?, AREA=?, "
-                + "ALT_MIN=?, ALT_MAX=?, ALT_MEAN=?, ID_GEOSCOPE=?, ID_DESIGNATION=?, LENGTH=? WHERE ID_SITE = ?";
-
-            this.preparedStatementSite = con.prepareStatement(querySites);
-
             String queryUpdateManager = "UPDATE chm62edt_sites SET MANAGER = ? WHERE ID_SITE = ?";
-
             this.preparedStatementUpdateManager = con.prepareStatement(queryUpdateManager);
 
-            String queryBioRegion = "UPDATE chm62edt_site_attributes SET VALUE=? WHERE ID_SITE=? AND NAME=?";
-
-            this.preparedStatementBioRegion = con.prepareStatement(queryBioRegion);
-
-            String insertNatObjectReportType = "INSERT INTO chm62edt_nature_object_report_type "
+            String insertNatObjectReportType = "INSERT IGNORE INTO chm62edt_nature_object_report_type "
                 + "(ID_NATURE_OBJECT, ID_NATURE_OBJECT_LINK, ID_GEOSCOPE, ID_REPORT_TYPE, ID_REPORT_ATTRIBUTES, ID_DC) "
                 + "VALUES (?,?,?,?,?,?)";
-
             this.preparedStatementNatObjectReportType = con.prepareStatement(insertNatObjectReportType);
 
-            String insertNatObjectGeoscope = "INSERT INTO CHM62EDT_NATURE_OBJECT_GEOSCOPE "
+            String insertNatObjectGeoscope = "INSERT IGNORE INTO CHM62EDT_NATURE_OBJECT_GEOSCOPE "
                 + "(ID_NATURE_OBJECT, ID_NATURE_OBJECT_LINK, ID_DC, ID_GEOSCOPE, ID_REPORT_ATTRIBUTES) "
                 + "VALUES (?,-1,-1,?,-1)";
-
             this.preparedStatementNatObjectGeoscope = con.prepareStatement(insertNatObjectGeoscope);
 
-            String insertReportAttribute = "INSERT INTO chm62edt_report_attributes "
+            String insertReportAttribute = "INSERT IGNORE INTO chm62edt_report_attributes "
                 + "(ID_REPORT_ATTRIBUTES, NAME, TYPE, VALUE) VALUES (?,?,?,?)";
-
             this.preparedStatementReportAttribute = con.prepareStatement(insertReportAttribute);
 
-            String insertSiteSites = "INSERT INTO CHM62EDT_SITES_SITES "
+            String insertSiteSites = "INSERT IGNORE INTO CHM62EDT_SITES_SITES "
                 + "(ID_SITE, ID_SITE_LINK, SEQUENCE, RELATION_TYPE, WITHIN_PROJECT, SOURCE_TABLE) "
                 + "VALUES (?,?,-1,?,1,'sitrel')";
-
             this.preparedStatementSiteSites = con.prepareStatement(insertSiteSites);
 
             String insertSiteAttribute = "INSERT IGNORE INTO chm62edt_site_attributes "
                 + "(ID_SITE, NAME, TYPE, VALUE, SOURCE_DB, SOURCE_TABLE) VALUES (?,?,?,?,'NATURA2000',?)";
-
             this.preparedStatementSiteAttribute = con.prepareStatement(insertSiteAttribute);
 
-            String insertSiteRelatedDesignations = "INSERT INTO chm62edt_sites_related_designations "
+            String insertSiteRelatedDesignations = "INSERT IGNORE INTO chm62edt_sites_related_designations "
                 + "(ID_SITE, ID_DESIGNATION, ID_GEOSCOPE, SEQUENCE, OVERLAP_TYPE, OVERLAP, SOURCE_DB, SOURCE_TABLE) "
                 + "VALUES (?,?,?,-1,-1,?,'NATURA2000','desigc')";
-
             this.preparedStatementSiteRelatedDesignations = con.prepareStatement(insertSiteRelatedDesignations);
 
-            String insertReportType = "INSERT INTO chm62edt_report_type (ID_REPORT_TYPE, ID_LOOKUP, LOOKUP_TYPE) VALUES (?,?,?)";
-
+            String insertReportType = "INSERT IGNORE INTO chm62edt_report_type (ID_REPORT_TYPE, ID_LOOKUP, LOOKUP_TYPE) VALUES (?,?,?)";
             this.preparedStatementReportType = con.prepareStatement(insertReportType);
 
             con.setAutoCommit(false);
@@ -1136,20 +1066,8 @@ public class Natura2000ImportParser extends DefaultHandler {
                 preparedStatementNatObject.close();
             }
 
-            if (preparedStatementUpdateNatObject != null) {
-                preparedStatementUpdateNatObject.close();
-            }
-
             if (preparedStatementSiteInsert != null) {
                 preparedStatementSiteInsert.close();
-            }
-
-            if (preparedStatementSite != null) {
-                preparedStatementSite.close();
-            }
-
-            if (preparedStatementBioRegion != null) {
-                preparedStatementBioRegion.close();
             }
 
             if (preparedStatementNatObjectReportType != null) {
@@ -1194,26 +1112,20 @@ public class Natura2000ImportParser extends DefaultHandler {
     }
 
     private String getHabitatNatObjectId(String habCode) {
-        String query = "SELECT ID_NATURE_OBJECT FROM chm62edt_habitat WHERE CODE_2000='"
-            + habCode + "'";
+        String query = "SELECT ID_NATURE_OBJECT FROM chm62edt_habitat WHERE CODE_2000='" + habCode + "'";
         String noId = sqlUtilities.ExecuteSQL(query);
 
         return noId;
     }
 
     private void getSiteNatObjectId() {
-        String query = "SELECT ID_NATURE_OBJECT FROM chm62edt_sites WHERE ID_SITE='"
-            + siteCode + "'";
+        String query = "SELECT ID_NATURE_OBJECT FROM chm62edt_sites WHERE ID_SITE='" + siteCode + "'";
 
         siteNatureObjectId = sqlUtilities.ExecuteSQL(query);
         if (siteNatureObjectId == null || siteNatureObjectId.length() == 0) {
-            newSite = true;
             maxNoIdInt++;
             siteNatureObjectId = new Integer(maxNoIdInt).toString();
-        } else {
-            newSite = false;
         }
-
     }
 
     private void deleteOldRecords() throws Exception {
@@ -1249,6 +1161,16 @@ public class Natura2000ImportParser extends DefaultHandler {
             ps.executeUpdate();
 
             query = "DELETE FROM CHM62EDT_REPORTS WHERE ID_NATURE_OBJECT = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, siteNatureObjectId);
+            ps.executeUpdate();
+
+            query = "DELETE FROM CHM62EDT_SITES WHERE ID_NATURE_OBJECT = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, siteNatureObjectId);
+            ps.executeUpdate();
+
+            query = "DELETE FROM CHM62EDT_NATURE_OBJECT WHERE ID_NATURE_OBJECT = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, siteNatureObjectId);
             ps.executeUpdate();
@@ -1293,8 +1215,7 @@ public class Natura2000ImportParser extends DefaultHandler {
 
     private boolean regionExists(String regionCode) {
         boolean ret = false;
-        String query = "SELECT ID_REGION_CODE FROM chm62edt_region_codes WHERE ID_REGION_CODE = '"
-            + regionCode + "'";
+        String query = "SELECT ID_REGION_CODE FROM chm62edt_region_codes WHERE ID_REGION_CODE = '" + regionCode + "'";
         String rcId = sqlUtilities.ExecuteSQL(query);
 
         if (rcId != null && rcId.length() > 0) {
@@ -1334,32 +1255,31 @@ public class Natura2000ImportParser extends DefaultHandler {
         return noId;
     }
 
-    private void updateSiteDescriptionHabitatClasses(String value, String siteId, String cover) throws Exception {
+    private void insertSiteDescriptionHabitatClasses(String desc, String siteId, String cover) throws Exception {
         String code_query = "SELECT SUBSTRING(name,length(name) - instr(reverse(name),'_') + 2) AS CODE "
-            + "FROM chm62edt_site_attributes WHERE ID_SITE = '" + siteId
-            + "' AND VALUE = '" + value + "'";
+            + "FROM chm62edt_site_attributes WHERE VALUE = '" + desc + "' LIMIT 1";
         String code = sqlUtilities.ExecuteSQL(code_query);
 
-        PreparedStatement ps = null;
-
-        try {
-            if (code != null && code.length() > 0) {
-                String updateCover_query = "UPDATE chm62edt_site_attributes SET VALUE = ? WHERE ID_SITE = ? AND NAME = ?";
-
-                ps = con.prepareStatement(updateCover_query);
-                ps.setString(1, cover);
-                ps.setString(2, siteId);
-                ps.setString(3, "HABITAT_COVER_" + code);
-
-                ps.executeUpdate();
-            }
-        } catch (Exception e) {
-            throw new IllegalArgumentException(e.getMessage(), e);
-        } finally {
-            if (ps != null) {
-                ps.close();
-            }
+        // If code doesn't exist figure out some test code. XML files doesn't contain habitat code.
+        if (code == null || code.length() == 0) {
+            code = "XX" + siteDescriptionHabClassCodeCnt;
+            siteDescriptionHabClassCodeCnt++;
         }
+
+        if (code != null && code.length() > 0) {
+            insertSiteAttribute(siteId, "HABITAT_NAME_EN_" + code, desc, "TEXT", "habit2");
+            insertSiteAttribute(siteId, "HABITAT_COVER_" + code, cover, "NUMBER", "habit2");
+            insertSiteAttribute(siteId, "HABITAT_CODE_" + code, code, "TEXT", "habit2");
+        }
+    }
+
+    private void insertSiteAttribute(String siteId, String name, String value, String type, String sourceTable) throws Exception {
+        preparedStatementSiteAttribute.setString(1, siteId);
+        preparedStatementSiteAttribute.setString(2, name);
+        preparedStatementSiteAttribute.setString(3, type);
+        preparedStatementSiteAttribute.setString(4, value);
+        preparedStatementSiteAttribute.setString(5, sourceTable);
+        preparedStatementSiteAttribute.executeUpdate();
     }
 
     private void setSitesTab(String idNatureObject, String tabName) throws Exception {

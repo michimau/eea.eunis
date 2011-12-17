@@ -6,6 +6,9 @@ package eionet.eunis.rdf;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.sql.Connection;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -55,8 +58,43 @@ public class RdfFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         String uri = httpRequest.getRequestURI();
+        String cpath = httpRequest.getContextPath();
         if (uri != null && uri.endsWith("/rdf")){
-            String cpath = httpRequest.getContextPath();
+            boolean rdf = extractTableAndIdentifier(uri, cpath);
+            if (rdf) {
+                try {
+                    Connection con = ConnectionUtil.getSimpleConnection();
+
+                    httpResponse.setContentType(ACCEPT_RDF_HEADER);
+                    httpResponse.setCharacterEncoding("UTF-8");
+                    GenerateRDF genRdf = new GenerateRDF(new PrintStream(httpResponse.getOutputStream()), con);
+                    genRdf.exportTable(table, identifier);
+                    genRdf.close();
+                    return;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new ServletException(e.getMessage(), e);
+                }
+            }
+        } else if (StringUtils.contains(httpRequest.getHeader("accept"), ACCEPT_RDF_HEADER)){
+            Properties props = new Properties();
+            props.load(getClass().getClassLoader().getResourceAsStream("rdfexport.properties"));
+            List<String> tables = Arrays.asList(props.getProperty("tables").split(" "));
+            if (tables != null && tables.size() > 0) {
+                extractTableAndIdentifier(uri, cpath);
+                if (table != null && tables.contains(table)) {
+                    httpResponse.sendRedirect(uri + "/rdf");
+                    return;
+                }
+            }
+        }
+        // Pass control on to the next filter
+        chain.doFilter(request, response);
+    }
+
+    private boolean extractTableAndIdentifier(String uri, String cpath) {
+        boolean ret = false;
+        if (!StringUtils.isBlank(uri)) {
             if (!StringUtils.isBlank(cpath) && !cpath.equals("/")) {
                 uri = uri.replace(cpath, "");
             }
@@ -66,32 +104,15 @@ public class RdfFilter implements Filter {
             }
 
             String[] st = uri.split("/");
-
-            if (st != null && ((st.length > 2 && st[2].equals("rdf")) || (st.length == 2 && st[1].equals("rdf")))) {
+            if (st != null && st.length > 0) {
                 table = st[0];
                 if (st.length > 2) {
                     identifier = st[1];
                 }
-
-                try {
-                    Connection con = ConnectionUtil.getSimpleConnection();
-
-                    httpResponse.setContentType(ACCEPT_RDF_HEADER);
-                    httpResponse.setCharacterEncoding("UTF-8");
-                    GenerateRDF genRdf = new GenerateRDF(new PrintStream(httpResponse.getOutputStream()), con);
-                    genRdf.exportTable(table, identifier);
-                    genRdf.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    throw new ServletException(e.getMessage(), e);
-                }
+                ret = true;
             }
-        } else if (StringUtils.contains(httpRequest.getHeader("accept"), ACCEPT_RDF_HEADER)){
-            httpResponse.sendRedirect(uri + "/rdf");
-        } else {
-            // Pass control on to the next filter
-            chain.doFilter(request, response);
         }
+        return ret;
     }
 
     /**

@@ -21,9 +21,9 @@
   factsheet = new HabitatsFactsheet(idHabitat);
   String scientificName = factsheet.getHabitat().getScientificName();
   String description = factsheet.getHabitat().getDescription();
-  
+
   response.setHeader("Content-Disposition", "attachment; filename="+scientificName+"_sites.kml");
-  
+
   try
   {
     String isGoodHabitat = " IF(TRIM(A.CODE_2000) <> '',RIGHT(A.CODE_2000,2),1) <> IF(TRIM(A.CODE_2000) <> '','00',2) AND IF(TRIM(A.CODE_2000) <> '',LENGTH(A.CODE_2000),1) = IF(TRIM(A.CODE_2000) <> '',4,1) ";
@@ -58,7 +58,7 @@
 		</LabelStyle>
 	</Style>
     <%
-      
+
     if( ( null != sites && !sites.isEmpty() ) )
     {
       // List of sites for which this habitat is recorded.
@@ -66,6 +66,7 @@
       {
         SitesByNatureObjectPersist site = (SitesByNatureObjectPersist) sites.get(i);
         String SiteName = Utilities.formatString(site.getName());
+        String siteCode = site.getIDSite();
         String areaName = site.getAreaNameEn();
         String latitude = site.getLatitude();
         String longitude = site.getLongitude();
@@ -73,9 +74,16 @@
 %>
 <Placemark>
 	<name><%=SiteName%></name>
-	<description>
-		<%=areaName%>
-	</description>
+	<ExtendedData>
+		<Data name="siteCode">
+			<displayName>Site code</displayName>
+			<value><%=siteCode%></value>
+		</Data>
+		<Data name="country">
+			<displayName>Country</displayName>
+			<value><%=areaName%></value>
+		</Data>
+	</ExtendedData>
 	<open>0</open>
 	<styleUrl>#presence</styleUrl>
 	<Point>

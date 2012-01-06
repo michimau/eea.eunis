@@ -155,13 +155,7 @@
             mapFields.addElement("criteriaSearch");
             mapFields.addElement("oper");
             mapFields.addElement("criteriaType");
-          %>
-                <jsp:include page="sites-map.jsp">
-                  <jsp:param name="resultsCount" value="<%=resultsCount%>"/>
-                  <jsp:param name="mapName" value="sites-advanced-map.jsp"/>
-                  <jsp:param name="toURLParam" value="<%=formBean.toURLParam(mapFields)%>"/>
-                </jsp:include>
-          <%
+
             Vector pageSizeFormFields = new Vector();
             pageSizeFormFields.addElement("sort");
             pageSizeFormFields.addElement("ascendency");

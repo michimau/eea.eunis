@@ -224,23 +224,6 @@
                   mapFields.addElement("criteriaSearch");
                   mapFields.addElement("oper");
                   mapFields.addElement("criteriaType");
-                  for (int i = 0; i < results.size(); i++)
-                  {
-                    SizePersist site = (SizePersist)results.get(i);
-                    String longitude = SitesSearchUtility.formatCoordinates(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec());
-                    String latitude = SitesSearchUtility.formatCoordinates(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec());
-                    if ( longitude.lastIndexOf( "n/a" ) < 0 && latitude.lastIndexOf( "n/a" ) < 0 )
-                    {
-                %>
-                          <jsp:include page="sites-map.jsp">
-                            <jsp:param name="resultsCount" value="<%=resultsCount%>"/>
-                            <jsp:param name="mapName" value="sites-size-map.jsp"/>
-                            <jsp:param name="toURLParam" value="<%=formBean.toURLParam(mapFields)%>"/>
-                          </jsp:include>
-                <%
-                      break;
-                    };
-                  }
 
                   Vector pageSizeFormFields = new Vector();
                   pageSizeFormFields.addElement("sort");

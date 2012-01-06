@@ -221,12 +221,6 @@
                 <br />
                 <%=formBean.getMainSearchCriteria().toHumanString()%>.
                 <br />
-                <jsp:include page="sites-map.jsp">
-                  <jsp:param name="resultsCount" value="<%=resultsCount%>"/>
-                  <jsp:param name="mapName" value="sites-names-map.jsp"/>
-                  <jsp:param name="toURLParam" value="<%=formBean.toURLParam(mapFields)%>"/>
-                </jsp:include>
-                <br />
                 <label for="radius">
                   <%=cm.cmsPhrase("Please enter search radius&nbsp;")%>
                 </label>

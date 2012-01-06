@@ -222,11 +222,6 @@
                   mapFields.addElement("oper");
                   mapFields.addElement("criteriaType");
                 %>
-                  <jsp:include page="sites-map.jsp">
-                    <jsp:param name="resultsCount" value="<%=resultsCount%>"/>
-                    <jsp:param name="mapName" value="combined-search-map.jsp" />
-                    <jsp:param name="toURLParam" value="<%=formBean.toURLParam(mapFields)%>" />
-                  </jsp:include>
                   <br />
                   <%// Prepare parameters for pagesize.jsp
                     Vector pageSizeFormFields = new Vector();         /*  These fields are used by pagesize.jsp, included below.    */

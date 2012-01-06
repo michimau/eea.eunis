@@ -218,24 +218,6 @@
             mapFields.addElement("oper");
             mapFields.addElement("criteriaType");
 
-            for (int i = 0; i < results.size(); i++)
-            {
-              YearPersist site = (YearPersist)results.get( i );
-              String longitude = SitesSearchUtility.formatCoordinates(site.getLongEW(), site.getLongDeg(), site.getLongMin(), site.getLongSec());
-              String latitude = SitesSearchUtility.formatCoordinates(site.getLatNS(), site.getLatDeg(), site.getLatMin(), site.getLatSec());
-              if ( longitude.lastIndexOf( "n/a" ) < 0 && latitude.lastIndexOf( "n/a" ) < 0 )
-              {
-          %>
-                <jsp:include page="sites-map.jsp">
-                  <jsp:param name="resultsCount" value="<%=resultsCount%>"/>
-                  <jsp:param name="mapName" value="sites-year-map.jsp"/>
-                  <jsp:param name="toURLParam" value="<%=formBean.toURLParam(mapFields)%>"/>
-                </jsp:include>
-          <%
-                break;
-              };
-            }
-
             // Prepare parameters for pagesize.jsp
             Vector pageSizeFormFields = new Vector();       /*  These fields are used by pagesize.jsp, included below.    */
             pageSizeFormFields.addElement("sort");          /*  *NOTE* I didn't add currentPage & pageSize since pageSize */

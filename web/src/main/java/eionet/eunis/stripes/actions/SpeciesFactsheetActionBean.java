@@ -60,7 +60,7 @@ import eionet.sparqlClient.helpers.ResultValue;
 @UrlBinding("/species/{idSpecies}/{tab}")
 public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
-    private static final String[] tabs = {"General information", "Vernacular names", "Geograpical information", "Population",
+    private static final String[] tabs = {"General information", "Vernacular names", "Geographical information", "Population",
         "Trends", "References", "Legal Instruments", "Habitat types", "Sites", "GBIF observations"};
 
     private static final Map<String, String[]> types = new HashMap<String, String[]>();

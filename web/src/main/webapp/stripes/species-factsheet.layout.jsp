@@ -83,7 +83,7 @@
 		                	<%-- Vernacular names tab --%>
 		                	<stripes:layout-render name="/stripes/species-factsheet-vern.jsp"/>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 'countries'}">
+		                <c:if test="${actionBean.tab == 'geo'}">
 		                	<%-- Geographical distribution --%>
 		                	<stripes:layout-render name="/stripes/species-factsheet-geo.jsp"/>
 		                </c:if>

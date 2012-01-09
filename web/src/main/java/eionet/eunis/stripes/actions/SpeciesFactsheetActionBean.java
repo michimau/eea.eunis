@@ -60,14 +60,14 @@ import eionet.sparqlClient.helpers.ResultValue;
 @UrlBinding("/species/{idSpecies}/{tab}")
 public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
-    private static final String[] tabs = {"General information", "Vernacular names", "Geograpical distribution", "Population",
+    private static final String[] tabs = {"General information", "Vernacular names", "Geograpical information", "Population",
         "Trends", "References", "Legal Instruments", "Habitat types", "Sites", "GBIF observations"};
 
     private static final Map<String, String[]> types = new HashMap<String, String[]>();
     static {
         types.put("GENERAL_INFORMATION", new String[] {"general", tabs[0]});
         types.put("VERNACULAR_NAMES", new String[] {"vernacular", tabs[1]});
-        types.put("GEOGRAPHICAL_DISTRIBUTION", new String[] {"countries", tabs[2]});
+        types.put("GEOGRAPHICAL_DISTRIBUTION", new String[] {"geo", tabs[2]});
         types.put("POPULATION", new String[] {"population", tabs[3]});
         types.put("TRENDS", new String[] {"trends", tabs[4]});
         types.put("REFERENCES", new String[] {"references", tabs[5]});
@@ -238,7 +238,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 vernNames = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
             }
 
-            if (tab != null && tab.equals("countries")) {
+            if (tab != null && tab.equals("geo")) {
                 geoTabActions();
             }
 

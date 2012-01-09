@@ -1,76 +1,232 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
-	<script type="text/javascript">
-		dojo.require("esri.map");
-		var layer, map, n2000layer, cddalayer, visible = [];
-		function init() {
-			var initialExtent = new esri.geometry.Extent({"xmin":-3549139.09145218,"ymin":4771361.38436808,"xmax":5129676.02317436,"ymax":11127551.8207187,"spatialReference":{"wkid":102100}});
+		<script type="text/javascript">
+			dojo.require("esri.map");
+			dojo.declare("my.SpeciesDistLayer", esri.layers.DynamicMapServiceLayer, {
 
-			map = new esri.Map("map", {extent: initialExtent});
-			var tiledMapServiceLayer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer");
-			map.addLayer(tiledMapServiceLayer);
+				constructor: function() {
+					this.initialExtent = this.fullExtent = new esri.geometry.Extent({"xmin":-232.03125,"ymin":-116.015625,"xmax":232.03125,"ymax":116.015625,"spatialReference":{"wkid":4326}});
+					this.spatialReference = new esri.SpatialReference({wkid:4326});
 
-			n2000layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000Solid_Cach_WM/MapServer");
-			cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/CDDA_Dyna_WGS84/MapServer");
+					this.loaded = true;
+					this.onLoad(this);
+				},
 
-			//Use the ImageParameters to set map service layer definitions and map service visible layers before adding to the client map.
-			var imageParameters = new esri.layers.ImageParameters();
+				getImageUrl: function(extent, width, height, callback) {
+					var params = {
+						request:"GetMap",
+						transparent:true,
+						format:"image/png",
+						version:"1.1.1",
+						layers:"fifao:SPECIES_DIST",
+						styles: "",
+						exceptions: "application/vnd.ogc.se_inimage",
+						cql_filter: "ALPHACODE='COD'",
 
-			//layer.setLayerDefinitions takes an array.  The index of the array corresponds to the layer id.
-			//In the sample below I add an element in the array at 3,4, and 5.
-			//Those array elements correspond to the layer id within the remote ArcGISDynamicMapServiceLayer
-			var layerDefs = [];
-			layerDefs[1] = "Type = 'species' and Assesment = '${actionBean.scientificName}'";
-			imageParameters.layerDefinitions = layerDefs;
+						//changing values
+						bbox:extent.xmin + "," + extent.ymin + "," + extent.xmax + "," + extent.ymax,
+						srs: "EPSG:" + extent.spatialReference.wkid,
+						width: width,
+						height: height
+					};
 
-			//I want layers 5,4, and 3 to be visible
-			imageParameters.layerIds = [1];
-			imageParameters.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
-			imageParameters.transparent = true;
-
-			//construct ArcGISDynamicMapServiceLayer with imageParameters from above
-			layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters});
-
-			map.addLayer(layer);
-		}
-
-		function updateLayerVisibility(id) {
-			var input = document.getElementById(id);
-			if (input.checked) {
-				if (id == 'distribution') {
-					visible = [0,1];
-					layer.setVisibleLayers(visible);
-				} else if (id == 'natura') {
-					map.addLayer(n2000layer);
-				} else if (id == 'cdda') {
-					map.addLayer(cddalayer);
+					callback("http://www.fao.org/figis/geoserver/wms?" + dojo.objectToQuery(params));
 				}
-			} else {
-				if (id == 'distribution') {
-					visible = [1];
-					layer.setVisibleLayers(visible);
-				} else if (id == 'natura') {
-					map.removeLayer(n2000layer);
-				} else if (id == 'cdda') {
-					map.removeLayer(cddalayer);
+			})
+
+			dojo.declare("my.SpeciesDistLayer2", esri.layers.DynamicMapServiceLayer, {
+
+				constructor: function() {
+					this.initialExtent = this.fullExtent = new esri.geometry.Extent({"xmin":-232.03125,"ymin":-116.015625,"xmax":232.03125,"ymax":116.015625,"spatialReference":{"wkid":4326}});
+					this.spatialReference = new esri.SpatialReference({wkid:4326});
+
+					this.loaded = true;
+					this.opacity = 0.4;
+					this.onLoad(this);
+				},
+
+				getImageUrl: function(extent, width, height, callback) {
+					var params = {
+						request:"GetMap",
+						transparent:true,
+						format:"image/png",
+						version:"1.1.1",
+						layers:"fifao:SPECIES_DIST",
+						styles: "",
+						exceptions: "application/vnd.ogc.se_inimage",
+						cql_filter: "ALPHACODE='COD'",
+
+						//changing values
+						bbox:extent.xmin + "," + extent.ymin + "," + extent.xmax + "," + extent.ymax,
+						srs: "EPSG:" + extent.spatialReference.wkid,
+						width: width,
+						height: height
+					};
+
+					callback("http://www.fao.org/figis/geoserver/wms?" + dojo.objectToQuery(params));
+				}
+			})
+
+		      dojo.declare("my.SpeciesDistOuterLimitLayer", esri.layers.DynamicMapServiceLayer, {
+				constructor: function() {
+					this.initialExtent = this.fullExtent = new esri.geometry.Extent({"xmin":-180.0,"ymin":-75.119,"xmax":180.0,"ymax":87.024,"spatialReference":{"wkid":4326}});
+					this.spatialReference = new esri.SpatialReference({wkid:4326});
+
+					this.loaded = true;
+					this.onLoad(this);
+				},
+
+				getImageUrl: function(extent, width, height, callback) {
+					var params = {
+						request:"GetMap",
+						transparent:true,
+						format:"image/png",
+						version:"1.1.1",
+						layers:"fifao:eez",
+						styles: "",
+						exceptions: "application/vnd.ogc.se_inimage",
+
+						//changing values
+						bbox:extent.xmin + "," + extent.ymin + "," + extent.xmax + "," + extent.ymax,
+						srs: "EPSG:" + extent.spatialReference.wkid,
+						width: width,
+						height: height
+					};
+
+					callback("http://www.fao.org/figis/geoserver/wms?" + dojo.objectToQuery(params));
+				}
+		      })
+
+			dojo.declare("my.ContinentLayer", esri.layers.DynamicMapServiceLayer, {
+				constructor: function() {
+					this.initialExtent = this.fullExtent = new esri.geometry.Extent({"xmin":-180.0,"ymin":-90.0,"xmax":180.0,"ymax":83.624,"spatialReference":{"wkid":4326}});
+					this.spatialReference = new esri.SpatialReference({wkid:4326});
+					this.loaded = true;
+					this.onLoad(this);
+				},
+
+				getImageUrl: function(extent, width, height, callback) {
+					var params = {
+						request:"GetMap",
+						transparent:true,
+						format:"image/png",
+						version:"1.1.1",
+						layers:"fifao:UN_CONTINENT",
+						styles: "",
+						exceptions: "application/vnd.ogc.se_inimage",
+
+						//changing values
+						bbox:extent.xmin + "," + extent.ymin + "," + extent.xmax + "," + extent.ymax,
+						srs: "EPSG:" + extent.spatialReference.wkid,
+						width: width,
+						height: height
+					};
+
+					callback("http://www.fao.org/figis/geoserver/wms?" + dojo.objectToQuery(params));
+				}
+		      })
+
+			var layer_dist, layer_range, map, n2000layer, cddalayer, visible = [];
+			var speciesDistLayer, speciesDistLayer2, speciesDistOuterLimitLayer, continentLayer;
+			function init() {
+				var initExtent =  new esri.geometry.Extent({"xmin":-15.03125,"ymin":40.015625,"xmax":40.03125,"ymax":60.015625,"spatialReference":{"wkid":4326}});
+				map = new esri.Map("map",{extent:initExtent});
+				map.addLayer(new esri.layers.ArcGISDynamicMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"));
+
+				n2000layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000Solid_Cach_WM/MapServer");
+				cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/CDDA_Dyna_WGS84/MapServer");
+
+				speciesDistLayer = new my.SpeciesDistLayer();
+				speciesDistLayer2 = new my.SpeciesDistLayer2();
+				speciesDistOuterLimitLayer = new my.SpeciesDistOuterLimitLayer();
+				continentLayer = new my.ContinentLayer();
+
+				// Species Distribution layer
+				var imageParameters_dist = new esri.layers.ImageParameters();
+				var layerDefs_dist = [];
+				layerDefs_dist[0] = "Type = 'species' and Assesment = '${actionBean.scientificName}'";
+				imageParameters_dist.layerDefinitions = layerDefs_dist;
+				imageParameters_dist.layerIds = [0];
+				imageParameters_dist.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
+				imageParameters_dist.transparent = true;
+				layer_dist = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_dist});
+				map.addLayer(layer_dist);
+
+				// Species Range layer
+				var imageParameters_range = new esri.layers.ImageParameters();
+				var layerDefs_range = [];
+				layerDefs_range[1] = "Type = 'species' and Assesment = '${actionBean.scientificName}'";
+				imageParameters_range.layerDefinitions = layerDefs_range;
+				imageParameters_range.layerIds = [1];
+				imageParameters_range.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
+				imageParameters_range.transparent = true;
+				layer_range = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_range});
+			}
+
+			function updateLayerVisibility(id) {
+				var input = document.getElementById(id);
+				if (input.checked) {
+					if (id == 'fao1') {
+						map.addLayer(speciesDistLayer);
+						map.addLayer(continentLayer);
+					} else if (id == 'distribution') {
+						map.addLayer(layer_dist);
+					} else if (id == 'range') {
+						map.addLayer(layer_range);
+					} else if (id == 'fao2') {
+						map.addLayer(speciesDistLayer2);
+					} else if (id == 'natura') {
+						map.addLayer(n2000layer);
+					} else if (id == 'cdda') {
+						map.addLayer(cddalayer);
+					}
+				} else {
+					if (id == 'fao1') {
+						map.removeLayer(speciesDistLayer);
+						map.removeLayer(continentLayer);
+					} else if (id == 'distribution') {
+						map.removeLayer(layer_dist);
+					} else if (id == 'range') {
+						map.removeLayer(layer_range);
+					} else if (id == 'fao2') {
+						map.removeLayer(speciesDistLayer2);
+					} else if (id == 'natura') {
+						map.removeLayer(n2000layer);
+					} else if (id == 'cdda') {
+						map.removeLayer(cddalayer);
+					}
 				}
 			}
-		}
-      	dojo.addOnLoad(init);
-	</script>
-	<c:if test="${actionBean.showGeoDistribution}">
+			dojo.addOnLoad(init);
+		</script>
 		<h2>
-	    	${eunis:cmsPhrase(actionBean.contentManagement, 'Geographical distribution')}
+	    	${eunis:cmsPhrase(actionBean.contentManagement, 'Geographical information')}
 	  	</h2>
-		<div style="position:relative; width: 770px; height:400px;">
+		<div style="position:relative; width: 840px; height:400px;">
 			<div id="map" style="position:absolute;width:600px; height:400px; border:1px solid #000; margin: 1em"></div>
 			<div style="position:absolute; top:0; right: 0;">
 				<br />
 				<b>Additional layers:</b><br /><br />
-				<input type="checkbox" class="list_item" id="distribution" onclick="updateLayerVisibility('distribution');"/> Distribution<br />
-				<input type="checkbox" class="list_item" id="natura" onclick="updateLayerVisibility('natura');"/> Natura 2000 sites<br />
-				<input type="checkbox" class="list_item" id="cdda" onclick="updateLayerVisibility('cdda');"/> CDDA sites<br />
+				<label for="distribution">
+					<input type="checkbox" class="list_item" id="distribution" onclick="updateLayerVisibility('distribution');" checked="checked"/>
+					Distribution
+				</label>
+				<br />
+				<label for="range">
+					<input type="checkbox" class="list_item" id="range" onclick="updateLayerVisibility('range');"/>
+					Range
+				</label>
+				<br />
+				<label for="natura">
+					<input type="checkbox" class="list_item" id="natura" onclick="updateLayerVisibility('natura');"/>
+					Natura 2000 sites
+				</label>
+				<br />
+				<label for="cdda">
+					<input type="checkbox" class="list_item" id="cdda" onclick="updateLayerVisibility('cdda');"/>
+					Nationally designated sites
+				</label>
 			</div>
 		</div>
 		<c:if test="1 == 0">
@@ -127,5 +283,4 @@
     		</tbody>
     	</table>
     	</c:if>
-	</c:if>
 </stripes:layout-definition>

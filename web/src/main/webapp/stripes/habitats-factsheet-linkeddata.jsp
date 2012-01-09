@@ -8,8 +8,8 @@
 		<c:when test="${empty actionBean.query}">
 			<c:if test="${not empty actionBean.queries}">
 				<p>
-				This page contains reports that query foreign systems for structured data the <em>links</em> to the habitat.
-				It is possible that there is no relevant data and then the query show nothing. As more data becomes available we will add more queries.
+				This page contains reports that query foreign systems for structured data that <em>links</em> to the habitat.
+				It is possible that there is no relevant data and then the query shows nothing. As more data becomes available as linked data we will add more queries
 				</p>
 				<h3>Select a query:</h3>
 				<dl>

@@ -22,7 +22,7 @@
 %>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
-      <%=cm.cmsPhrase("About EUNIS")%>
+      <%=cm.cmsPhrase("About the European Nature Information System, EUNIS")%>
     </title>
   </head>
   <body>
@@ -40,7 +40,7 @@
                   <jsp:param name="location" value="<%=btrail%>"/>
                 </jsp:include>
                 <a name="documentContent"></a>
-		<h1><%=cm.cmsPhrase("About the EUNIS Database")%></h1>
+		<h1><%=cm.cmsPhrase("About the European Nature Information System, EUNIS")%></h1>
                 <div class="documentActions">
                   <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
                   <ul>

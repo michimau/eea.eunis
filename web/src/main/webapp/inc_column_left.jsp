@@ -82,9 +82,6 @@
   <dd class="portletItem">
     <ul class="portletNavigationTree navTreeLevel0">
       <li class="navTreeItem visualNoMarker">
-        <a class="navItemLevel1" title="<%=cm.cmsPhrase("Introduction to EUNIS Database")%>" href="<%=request.getContextPath()%>/introduction.jsp"><%=cm.cmsPhrase( "Introduction" )%></a>
-      </li>
-      <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" title="<%=cm.cmsPhrase("About EUNIS Database")%>" href="<%=request.getContextPath()%>/about.jsp" accesskey="b"><%=cm.cmsPhrase( "About EUNIS" )%></a>
       </li>
       <li class="navTreeItem visualNoMarker">

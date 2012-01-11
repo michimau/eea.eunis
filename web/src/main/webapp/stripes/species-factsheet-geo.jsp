@@ -3,39 +3,8 @@
 <stripes:layout-definition>
 		<script type="text/javascript">
 			dojo.require("esri.map");
-			dojo.declare("my.SpeciesDistLayer", esri.layers.DynamicMapServiceLayer, {
 
-				constructor: function() {
-					this.initialExtent = this.fullExtent = new esri.geometry.Extent({"xmin":-232.03125,"ymin":-116.015625,"xmax":232.03125,"ymax":116.015625,"spatialReference":{"wkid":4326}});
-					this.spatialReference = new esri.SpatialReference({wkid:4326});
-
-					this.loaded = true;
-					this.onLoad(this);
-				},
-
-				getImageUrl: function(extent, width, height, callback) {
-					var params = {
-						request:"GetMap",
-						transparent:true,
-						format:"image/png",
-						version:"1.1.1",
-						layers:"fifao:SPECIES_DIST",
-						styles: "",
-						exceptions: "application/vnd.ogc.se_inimage",
-						cql_filter: "ALPHACODE='COD'",
-
-						//changing values
-						bbox:extent.xmin + "," + extent.ymin + "," + extent.xmax + "," + extent.ymax,
-						srs: "EPSG:" + extent.spatialReference.wkid,
-						width: width,
-						height: height
-					};
-
-					callback("http://www.fao.org/figis/geoserver/wms?" + dojo.objectToQuery(params));
-				}
-			})
-
-			dojo.declare("my.SpeciesDistLayer2", esri.layers.DynamicMapServiceLayer, {
+			dojo.declare("my.FAODistLayer", esri.layers.DynamicMapServiceLayer, {
 
 				constructor: function() {
 					this.initialExtent = this.fullExtent = new esri.geometry.Extent({"xmin":-232.03125,"ymin":-116.015625,"xmax":232.03125,"ymax":116.015625,"spatialReference":{"wkid":4326}});
@@ -55,7 +24,7 @@
 						layers:"fifao:SPECIES_DIST",
 						styles: "",
 						exceptions: "application/vnd.ogc.se_inimage",
-						cql_filter: "ALPHACODE='COD'",
+						cql_filter: "ALPHACODE='${actionBean.faoCode}'",
 
 						//changing values
 						bbox:extent.xmin + "," + extent.ymin + "," + extent.xmax + "," + extent.ymax,
@@ -68,67 +37,8 @@
 				}
 			})
 
-		      dojo.declare("my.SpeciesDistOuterLimitLayer", esri.layers.DynamicMapServiceLayer, {
-				constructor: function() {
-					this.initialExtent = this.fullExtent = new esri.geometry.Extent({"xmin":-180.0,"ymin":-75.119,"xmax":180.0,"ymax":87.024,"spatialReference":{"wkid":4326}});
-					this.spatialReference = new esri.SpatialReference({wkid:4326});
-
-					this.loaded = true;
-					this.onLoad(this);
-				},
-
-				getImageUrl: function(extent, width, height, callback) {
-					var params = {
-						request:"GetMap",
-						transparent:true,
-						format:"image/png",
-						version:"1.1.1",
-						layers:"fifao:eez",
-						styles: "",
-						exceptions: "application/vnd.ogc.se_inimage",
-
-						//changing values
-						bbox:extent.xmin + "," + extent.ymin + "," + extent.xmax + "," + extent.ymax,
-						srs: "EPSG:" + extent.spatialReference.wkid,
-						width: width,
-						height: height
-					};
-
-					callback("http://www.fao.org/figis/geoserver/wms?" + dojo.objectToQuery(params));
-				}
-		      })
-
-			dojo.declare("my.ContinentLayer", esri.layers.DynamicMapServiceLayer, {
-				constructor: function() {
-					this.initialExtent = this.fullExtent = new esri.geometry.Extent({"xmin":-180.0,"ymin":-90.0,"xmax":180.0,"ymax":83.624,"spatialReference":{"wkid":4326}});
-					this.spatialReference = new esri.SpatialReference({wkid:4326});
-					this.loaded = true;
-					this.onLoad(this);
-				},
-
-				getImageUrl: function(extent, width, height, callback) {
-					var params = {
-						request:"GetMap",
-						transparent:true,
-						format:"image/png",
-						version:"1.1.1",
-						layers:"fifao:UN_CONTINENT",
-						styles: "",
-						exceptions: "application/vnd.ogc.se_inimage",
-
-						//changing values
-						bbox:extent.xmin + "," + extent.ymin + "," + extent.xmax + "," + extent.ymax,
-						srs: "EPSG:" + extent.spatialReference.wkid,
-						width: width,
-						height: height
-					};
-
-					callback("http://www.fao.org/figis/geoserver/wms?" + dojo.objectToQuery(params));
-				}
-		      })
-
 			var layer_dist, layer_range, map, n2000layer, cddalayer, visible = [];
-			var speciesDistLayer, speciesDistLayer2, speciesDistOuterLimitLayer, continentLayer;
+			var faoDistLayer;
 			function init() {
 				var initExtent =  new esri.geometry.Extent({"xmin":-15.03125,"ymin":40.015625,"xmax":40.03125,"ymax":60.015625,"spatialReference":{"wkid":4326}});
 				map = new esri.Map("map",{extent:initExtent});
@@ -137,10 +47,7 @@
 				n2000layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000Solid_Cach_WM/MapServer");
 				cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/CDDA_Dyna_WGS84/MapServer");
 
-				speciesDistLayer = new my.SpeciesDistLayer();
-				speciesDistLayer2 = new my.SpeciesDistLayer2();
-				speciesDistOuterLimitLayer = new my.SpeciesDistOuterLimitLayer();
-				continentLayer = new my.ContinentLayer();
+				faoDistLayer = new my.FAODistLayer();
 
 				// Species Distribution layer
 				var imageParameters_dist = new esri.layers.ImageParameters();
@@ -167,30 +74,24 @@
 			function updateLayerVisibility(id) {
 				var input = document.getElementById(id);
 				if (input.checked) {
-					if (id == 'fao1') {
-						map.addLayer(speciesDistLayer);
-						map.addLayer(continentLayer);
-					} else if (id == 'distribution') {
+					if (id == 'distribution') {
 						map.addLayer(layer_dist);
 					} else if (id == 'range') {
 						map.addLayer(layer_range);
-					} else if (id == 'fao2') {
-						map.addLayer(speciesDistLayer2);
+					} else if (id == 'fao') {
+						map.addLayer(faoDistLayer);
 					} else if (id == 'natura') {
 						map.addLayer(n2000layer);
 					} else if (id == 'cdda') {
 						map.addLayer(cddalayer);
 					}
 				} else {
-					if (id == 'fao1') {
-						map.removeLayer(speciesDistLayer);
-						map.removeLayer(continentLayer);
-					} else if (id == 'distribution') {
+					if (id == 'distribution') {
 						map.removeLayer(layer_dist);
 					} else if (id == 'range') {
 						map.removeLayer(layer_range);
-					} else if (id == 'fao2') {
-						map.removeLayer(speciesDistLayer2);
+					} else if (id == 'fao') {
+						map.removeLayer(faoDistLayer);
 					} else if (id == 'natura') {
 						map.removeLayer(n2000layer);
 					} else if (id == 'cdda') {
@@ -227,6 +128,13 @@
 					<input type="checkbox" class="list_item" id="cdda" onclick="updateLayerVisibility('cdda');"/>
 					Nationally designated sites
 				</label>
+				<br />
+				<c:if test="${not empty actionBean.faoCode}">
+					<label for="fao">
+						<input type="checkbox" class="list_item" id="fao" onclick="updateLayerVisibility('fao');"/>
+						FAO distribution
+					</label>
+				</c:if>
 			</div>
 		</div>
 		<c:if test="1 == 0">

@@ -56,4 +56,12 @@ public interface ISpeciesFactsheetDao {
      */
     List<String> getExpectedInSiteIds(int idNatureObject, int idSpecies, int limit);
 
+    /**
+     * Returns FAO code for species from chm62edt_nature_object_attributes table.
+     *
+     * @param natObjId - ID_NATURE_OBJECT.
+     * @return FAO code.
+     */
+    String getFaoCode(Integer natObjId);
+
 }

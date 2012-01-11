@@ -5,9 +5,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import eionet.eunis.dto.SpeciesDTO;
 import eionet.eunis.api.LookupSpeciesResult;
 import eionet.eunis.api.SpeciesLookupSearchParam;
+import eionet.eunis.dto.SpeciesDTO;
 
 
 /**

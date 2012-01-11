@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
+import eionet.eunis.util.Constants;
 
 
 /**
@@ -120,6 +121,12 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
             logger.error(ignored);
             throw new RuntimeException(ignored);
         }
+    }
+
+    public String getFaoCode(Integer natObjId) {
+        String query = "SELECT OBJECT FROM chm62edt_nature_object_attributes WHERE NAME = '"
+            + Constants.SAME_SPECIES_FIFAO + "' AND ID_NATURE_OBJECT = " + natObjId;
+        return ExecuteSQL(query);
     }
 
 }

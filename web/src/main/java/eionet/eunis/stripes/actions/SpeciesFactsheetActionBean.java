@@ -136,9 +136,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     /** Vernacular names tab variables. */
     private List<VernacularNameWrapper> vernNames;
 
-    /** countries tab variables. */
+    /** geo tab variables. */
     private Vector<GeographicalStatusWrapper> bioRegions;
     boolean showGeoDistribution = false;
+    private String faoCode;
     private String filename;
     private UniqueVector colorURL;
     private String mapserverURL;
@@ -410,6 +411,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      * Populate the member variables used in the "geo" tab.
      */
     private void geoTabActions() {
+
+        // Get FAO code if one exists
+        faoCode = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getFaoCode(specie.getIdNatureObject());
+
         bioRegions = SpeciesFactsheet.getBioRegionIterator(specie.getIdNatureObject(), factsheet.getIdSpecies());
         if (bioRegions.size() > 0) {
             // Display map
@@ -975,5 +980,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     public void setAttribution(String attribution) {
         this.attribution = attribution;
+    }
+
+    public String getFaoCode() {
+        return faoCode;
     }
 }

@@ -885,7 +885,7 @@ public class SpeciesFactsheet {
      * @param idSpecies ID_SPECIES from CHM62EDT_SPECIES
      * @return A vector of FactSheetTrendsWrapper objects.
      */
-    public static Vector getTrends(Integer idNatureObject, Integer idSpecies) {
+    public static Vector<FactSheetTrendsWrapper> getTrends(Integer idNatureObject, Integer idSpecies) {
         Vector<FactSheetTrendsWrapper> results = new Vector<FactSheetTrendsWrapper>();
 
         try {

@@ -1363,7 +1363,7 @@ public final class PDFSpeciesFactsheet {
      * @throws Exception
      */
     private void getTrends() throws Exception {
-        Vector list = SpeciesFactsheet.getTrends(idNatureObject, idSpecies);
+        Vector<FactSheetTrendsWrapper> list = SpeciesFactsheet.getTrends(idNatureObject, idSpecies);
 
         if (list.size() > 0) {
             Table table = new Table(8);
@@ -1434,7 +1434,7 @@ public final class PDFSpeciesFactsheet {
             table.addCell(cell);
 
             for (int i = 0; i < list.size(); i++) {
-                FactSheetTrendsWrapper aRow = (FactSheetTrendsWrapper) list.get(
+                FactSheetTrendsWrapper aRow = list.get(
                         i);
 
                 cell = new Cell(

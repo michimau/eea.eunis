@@ -105,10 +105,10 @@
 	    	${eunis:cmsPhrase(actionBean.contentManagement, 'Geographical information')}
 	  	</h2>
 		<div style="position:relative; width: 100%; height:400px;">
-			<div id="map" style="position:absolute;width:600px; height:400px; border:1px solid #000; margin: 1em"></div>
-			<div style="position:absolute; width:430px; top:0; right: 0;">
+			<div id="map" style="float:left; width:600px; height:400px; border:1px solid #000; margin: 1em 0.5em 1em 0"></div>
+			<div style="float:left; width:220px;">
 				<br />
-				<b>Additional layers:</b><br /><br />
+				<b>Additional layers:</b><br />
 				<dl>
 					<dt>
 						<label for="distribution">

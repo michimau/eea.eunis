@@ -104,37 +104,50 @@
 		<h2>
 	    	${eunis:cmsPhrase(actionBean.contentManagement, 'Geographical information')}
 	  	</h2>
-		<div style="position:relative; width: 840px; height:400px;">
+		<div style="position:relative; width: 100%; height:400px;">
 			<div id="map" style="position:absolute;width:600px; height:400px; border:1px solid #000; margin: 1em"></div>
-			<div style="position:absolute; top:0; right: 0;">
+			<div style="position:absolute; width:430px; top:0; right: 0;">
 				<br />
 				<b>Additional layers:</b><br /><br />
-				<label for="distribution">
-					<input type="checkbox" class="list_item" id="distribution" onclick="updateLayerVisibility('distribution');" checked="checked"/>
-					Distribution
-				</label>
-				<br />
-				<label for="range">
-					<input type="checkbox" class="list_item" id="range" onclick="updateLayerVisibility('range');"/>
-					Range
-				</label>
-				<br />
-				<label for="natura">
-					<input type="checkbox" class="list_item" id="natura" onclick="updateLayerVisibility('natura');"/>
-					Natura 2000 sites
-				</label>
-				<br />
-				<label for="cdda">
-					<input type="checkbox" class="list_item" id="cdda" onclick="updateLayerVisibility('cdda');"/>
-					Nationally designated sites
-				</label>
-				<br />
-				<c:if test="${not empty actionBean.faoCode}">
-					<label for="fao">
-						<input type="checkbox" class="list_item" id="fao" onclick="updateLayerVisibility('fao');"/>
-						FAO distribution
+				<dl>
+					<dt>
+						<label for="distribution">
+							<input type="checkbox" class="list_item" id="distribution" onclick="updateLayerVisibility('distribution');" checked="checked"/>
+							Distribution
+						</label>
+					</dt>
+					<dd>Population distribution reported under Article 17, Habitats Directive in 2008</dd>
+					<dt>
+						<label for="range">
+							<input type="checkbox" class="list_item" id="range" onclick="updateLayerVisibility('range');"/>
+							Range
+						</label>
+					</dt>
+					<dd>Ranges for this species reported under Article 17, Habitats Directive in 2008</dd>
+					<dt>
+						<label for="natura">
+							<input type="checkbox" class="list_item" id="natura" onclick="updateLayerVisibility('natura');"/>
+							Natura 2000 sites
+						</label>
+					</dt>
+					<dd></dd>
+					<dt>
+					<label for="cdda">
+						<input type="checkbox" class="list_item" id="cdda" onclick="updateLayerVisibility('cdda');"/>
+						Nationally designated sites
 					</label>
-				</c:if>
+					</dt>
+					<dd></dd>
+					<c:if test="${not empty actionBean.faoCode}">
+						<dt>
+							<label for="fao">
+								<input type="checkbox" class="list_item" id="fao" onclick="updateLayerVisibility('fao');"/>
+								FAO distribution
+							</label>
+						</dt>
+						<dd>Source: the <a href="http://www.fao.org/figis/geoserver/factsheets/species.html">FAO Aquatic Species Distribution Map Viewer</a> <br/>© FAO</dd>
+					</c:if>
+				</dl>
 			</div>
 		</div>
 		<c:if test="1 == 0">

@@ -140,6 +140,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private Vector<GeographicalStatusWrapper> bioRegions;
     boolean showGeoDistribution = false;
     private String faoCode;
+    private String gbifCode;
     private String filename;
     private UniqueVector colorURL;
     private String mapserverURL;
@@ -413,7 +414,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private void geoTabActions() {
 
         // Get FAO code if one exists
-        faoCode = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getFaoCode(specie.getIdNatureObject());
+        faoCode = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getNatObjAttribute(specie.getIdNatureObject(), Constants.SAME_SPECIES_FIFAO);
+
+        // Get GBIF code if one exists
+        gbifCode = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getNatObjAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_GBIF);
 
         bioRegions = SpeciesFactsheet.getBioRegionIterator(specie.getIdNatureObject(), factsheet.getIdSpecies());
         if (bioRegions.size() > 0) {
@@ -984,5 +988,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     public String getFaoCode() {
         return faoCode;
+    }
+
+    public String getGbifCode() {
+        return gbifCode;
     }
 }

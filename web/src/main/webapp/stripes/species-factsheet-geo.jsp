@@ -4,6 +4,37 @@
 		<script type="text/javascript">
 			dojo.require("esri.map");
 
+			dojo.declare("my.GBIFLayer", esri.layers.DynamicMapServiceLayer, {
+
+				constructor: function() {
+					this.initialExtent = this.fullExtent = new esri.geometry.Extent({"xmin":-232.03125,"ymin":-116.015625,"xmax":232.03125,"ymax":116.015625,"spatialReference":{"wkid":4326}});
+					this.spatialReference = new esri.SpatialReference({wkid:4326});
+
+					this.loaded = true;
+					this.onLoad(this);
+				},
+
+				getImageUrl: function(extent, width, height, callback) {
+					var params = {
+						request:"GetMap",
+						transparent:true,
+						format:"image/png",
+						version:"1.1.1",
+						layers:"gbif:tabDensityLayer",
+						styles: "",
+						exceptions: "application%2Fvnd.ogc.se_inimage",
+						filter: "<Filter><PropertyIsEqualTo><PropertyName>url</PropertyName><Literal><![CDATA[http://data.gbif.org/maplayer/taxon/${actionBean.gbifCode}]]></Literal></PropertyIsEqualTo></Filter>",
+
+						//changing values
+						bbox:extent.xmin + "," + extent.ymin + "," + extent.xmax + "," + extent.ymax,
+						srs: "EPSG:" + extent.spatialReference.wkid,
+						width: width,
+						height: height
+					};
+					callback("http://ogc.gbif.org/wms?" + dojo.objectToQuery(params));
+				}
+			})
+
 			dojo.declare("my.FAODistLayer", esri.layers.DynamicMapServiceLayer, {
 
 				constructor: function() {
@@ -38,7 +69,7 @@
 			})
 
 			var layer_dist, layer_range, map, n2000layer, cddalayer, visible = [];
-			var faoDistLayer;
+			var faoDistLayer, gbifLayer;
 			function init() {
 				var initExtent =  new esri.geometry.Extent({"xmin":-15.03125,"ymin":40.015625,"xmax":40.03125,"ymax":60.015625,"spatialReference":{"wkid":4326}});
 				map = new esri.Map("map",{extent:initExtent});
@@ -48,6 +79,7 @@
 				cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/CDDA_Dyna_WGS84/MapServer");
 
 				faoDistLayer = new my.FAODistLayer();
+				gbifLayer = new my.GBIFLayer();
 
 				// Species Distribution layer
 				var imageParameters_dist = new esri.layers.ImageParameters();
@@ -58,7 +90,6 @@
 				imageParameters_dist.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
 				imageParameters_dist.transparent = true;
 				layer_dist = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_dist});
-				map.addLayer(layer_dist);
 
 				// Species Range layer
 				var imageParameters_range = new esri.layers.ImageParameters();
@@ -69,6 +100,9 @@
 				imageParameters_range.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
 				imageParameters_range.transparent = true;
 				layer_range = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_range});
+
+				map.addLayer(layer_dist);
+				//map.addLayer(gbifLayer);
 			}
 
 			function updateLayerVisibility(id) {
@@ -84,6 +118,8 @@
 						map.addLayer(n2000layer);
 					} else if (id == 'cdda') {
 						map.addLayer(cddalayer);
+					} else if (id == 'gbif') {
+						map.addLayer(gbifLayer);
 					}
 				} else {
 					if (id == 'distribution') {
@@ -96,6 +132,8 @@
 						map.removeLayer(n2000layer);
 					} else if (id == 'cdda') {
 						map.removeLayer(cddalayer);
+					} else if (id == 'gbif') {
+						map.removeLayer(gbifLayer);
 					}
 				}
 			}
@@ -116,14 +154,14 @@
 							Distribution
 						</label>
 					</dt>
-					<dd>Population distribution reported under Article 17, Habitats Directive in 2008</dd>
+					<dd>Distribution reported under Article 17, Habitats Directive</dd>
 					<dt>
 						<label for="range">
 							<input type="checkbox" class="list_item" id="range" onclick="updateLayerVisibility('range');"/>
 							Range
 						</label>
 					</dt>
-					<dd>Ranges for this species reported under Article 17, Habitats Directive in 2008</dd>
+					<dd>Range reported under Article 17, Habitats Directive</dd>
 					<dt>
 						<label for="natura">
 							<input type="checkbox" class="list_item" id="natura" onclick="updateLayerVisibility('natura');"/>
@@ -145,7 +183,16 @@
 								FAO distribution
 							</label>
 						</dt>
-						<dd>Source: the <a href="http://www.fao.org/figis/geoserver/factsheets/species.html">FAO Aquatic Species Distribution Map Viewer</a> <br/>© FAO</dd>
+						<dd>Source: the <a href="http://www.fao.org/figis/geoserver/factsheets/species.html">FAO Aquatic Species Distribution Map Viewer</a> © FAO</dd>
+					</c:if>
+					<c:if test="${not empty actionBean.gbifCode}">
+						<!--dt>
+							<label for="gbif">
+								<input type="checkbox" class="list_item" id="gbif" onclick="updateLayerVisibility('gbif');" checked="checked"/>
+								GBIF density
+							</label>
+						</dt>
+						<dd></dd-->
 					</c:if>
 				</dl>
 			</div>

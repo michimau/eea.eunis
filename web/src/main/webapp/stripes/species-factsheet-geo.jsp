@@ -101,8 +101,8 @@
 				imageParameters_range.transparent = true;
 				layer_range = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_range});
 
-				map.addLayer(layer_dist);
-				//map.addLayer(gbifLayer);
+				map.addLayer(gbifLayer);
+				//map.addLayer(layer_dist);
 			}
 
 			function updateLayerVisibility(id) {
@@ -148,9 +148,18 @@
 				<br />
 				<b>Additional layers:</b><br />
 				<dl>
+					<c:if test="${not empty actionBean.gbifCode}">
+						<dt>
+							<label for="gbif">
+								<input type="checkbox" class="list_item" id="gbif" onclick="updateLayerVisibility('gbif');" checked="checked"/>
+								GBIF observations
+							</label>
+						</dt>
+						<dd>Map depicts density of specimen and observational data. Source: <a href="http://data.gbif.org/species/${actionBean.gbifCode}">GBIF</a></dd>
+					</c:if>
 					<dt>
 						<label for="distribution">
-							<input type="checkbox" class="list_item" id="distribution" onclick="updateLayerVisibility('distribution');" checked="checked"/>
+							<input type="checkbox" class="list_item" id="distribution" onclick="updateLayerVisibility('distribution');"/>
 							Distribution
 						</label>
 					</dt>
@@ -184,15 +193,6 @@
 							</label>
 						</dt>
 						<dd>Source: the <a href="http://www.fao.org/figis/geoserver/factsheets/species.html">FAO Aquatic Species Distribution Map Viewer</a> © FAO</dd>
-					</c:if>
-					<c:if test="${not empty actionBean.gbifCode}">
-						<!--dt>
-							<label for="gbif">
-								<input type="checkbox" class="list_item" id="gbif" onclick="updateLayerVisibility('gbif');" checked="checked"/>
-								GBIF density
-							</label>
-						</dt>
-						<dd></dd-->
 					</c:if>
 				</dl>
 			</div>

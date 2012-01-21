@@ -61,7 +61,7 @@ import eionet.sparqlClient.helpers.ResultValue;
 public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     private static final String[] tabs = {"General information", "Vernacular names", "Geographical information", "Population",
-        "Trends", "References", "Legal Instruments", "Habitat types", "Sites", "GBIF observations"};
+        "Trends", "References", "Legal Instruments", "Habitat types", "Sites"};
 
     private static final Map<String, String[]> types = new HashMap<String, String[]>();
     static {
@@ -75,7 +75,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         types.put("LEGAL_INSTRUMENTS", new String[] {"legal", tabs[6]});
         types.put("HABITATS", new String[] {"habitats", tabs[7]});
         types.put("SITES", new String[] {"sites", tabs[8]});
-        types.put("GBIF", new String[] {"gbif", tabs[9]});
     }
 
     /** The argument given. Can be a species number or scientific name */

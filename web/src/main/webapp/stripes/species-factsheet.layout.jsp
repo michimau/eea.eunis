@@ -128,10 +128,6 @@
 		                	<%-- Related sites --%>
 		                	<stripes:layout-render name="/stripes/species-factsheet-sites.jsp"/>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 'gbif'}">
-		                	<%-- GBIF observations --%>
-		                	<stripes:layout-render name="/stripes/species-factsheet-gbif.jsp"/>
-		                </c:if>
 		                <c:if test="${actionBean.tab == 'linkeddata'}">
 		                	<%-- Foreigndata --%>
 		                	<stripes:layout-render name="/stripes/species-factsheet-linkeddata.jsp"/>

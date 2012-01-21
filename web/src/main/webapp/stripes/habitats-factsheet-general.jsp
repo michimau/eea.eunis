@@ -187,7 +187,7 @@
       					${desc.ownerText}
     				</p>
   				</c:if>
-  				<c:if test="${!empty desc.idDc}">
+  				<c:if test="${!empty desc.idDc && idDc != -1}">
   					<c:set var="ssource" value="${eunis:execMethodParamInteger('ro.finsiel.eunis.factsheet.species.SpeciesFactsheet', 'getBookAuthorDate', desc.idDc)}"/>
   					<c:if test="${!empty ssource}">
   						<h3>

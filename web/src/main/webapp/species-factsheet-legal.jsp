@@ -46,9 +46,6 @@
         <th scope="col">
           <%=cm.cmsPhrase("Url")%>
         </th>
-        <th scope="col">
-          <%=cm.cmsPhrase("Geographical implementation")%>
-        </th>
       </tr>
     </thead>
     <tbody>
@@ -83,23 +80,6 @@
       }
 %>
           &nbsp;
-        </td>
-        <td align="center">
-<%
-      if(!legal.getReference().equalsIgnoreCase("10333"))
-      {
-%>
-          <a title="<%=cm.cms("species_factsheet_legalInstruments_03_Title")%>" href="javascript:MM_openBrWindow('species-factsheet-geo-legal.jsp?country=<%=Utilities.treatURLSpecialCharacters(legal.getArea())%>&amp;idSpecies=<%=factsheet.getIdSpecies()%>&amp;idSpeciesLink=<%=factsheet.getIdSpeciesLink()%>&amp;URL=<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getUrl())).replaceAll("#","")%>&amp;Title=<%=Utilities.formatString(Utilities.treatURLSpecialCharacters(legal.getLegalText()))%>&amp;refs=<%=Utilities.treatURLSpecialCharacters(legal.getReference())%>&amp;mapnumber=<%=i%>','','scrollbars=yes,resizable=yes,width=760,height=480')"><img alt="<%=cm.cms("species_factsheet_legalInstruments_03_Title")%>" src="images/mini/globe.gif" border="0" /></a>
-          <%=cm.cmsTitle("species_factsheet_legalInstruments_03_Title")%>
-<%
-      }
-      else
-      {
-%>
-          <%=cm.cmsPhrase("Not applicable. See Bonn Agreement or Memorandum.")%>
-<%
-      }
-%>
         </td>
       </tr>
 <%

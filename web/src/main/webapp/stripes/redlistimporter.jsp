@@ -6,15 +6,15 @@
 
 	<stripes:layout-component name="contents">
 	
-	<script language="JavaScript" type="text/javascript">
-  		//<![CDATA[
+	<script type="text/javascript">
+	//<![CDATA[
     	function showHide(val) {
       		if(val.value != -1)
           		document.getElementById("newsource").style.display = 'none';
       		else
       			document.getElementById("newsource").style.display = 'inline';
     	}
-  		//]]>
+	//]]>
   	</script>
 	
 	<c:choose>

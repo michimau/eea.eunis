@@ -2,6 +2,7 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
 		<script type="text/javascript">
+		//<![CDATA[
 			dojo.require("esri.map");
 
 			dojo.declare("my.GBIFLayer", esri.layers.DynamicMapServiceLayer, {
@@ -138,6 +139,7 @@
 				}
 			}
 			dojo.addOnLoad(init);
+		//]]>
 		</script>
 		<h2>
 	    	${eunis:cmsPhrase(actionBean.contentManagement, 'Geographical information')}

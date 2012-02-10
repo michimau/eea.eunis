@@ -5,7 +5,7 @@
 	xml:lang="${actionBean.context.sessionManager.currentLanguage}">
   <head>
     <jsp:include page="../header-page.jsp" />
-    <script language="JavaScript" type="text/javascript">
+    <script type="text/javascript">
       //<![CDATA[
         function validateForm() {
           if (document.uploadPicture.filename.value == "") {

@@ -132,6 +132,7 @@
 						<c:if test="${actionBean.tab == 'other'}">
 							<c:if test="${actionBean.factsheet.eunis}">
 								<script language="JavaScript" type="text/javascript">
+								//<![CDATA[
 									function otherInfo(info) {
 				                    	var ctrl_info = document.getElementById("otherInfo" + info);
 				                    	try {
@@ -156,6 +157,7 @@
 					                        } catch( e ) {}
 										}
 				                  	}
+						//]]>
 				                </script>
 				                <a href="javascript:otherInfoAll(true);" title="Expand all characteristic information">Expand All</a> |
 				                <a href="javascript:otherInfoAll(false);" title="Collapse all characteristic information">Collapse All</a>

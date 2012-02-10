@@ -3,6 +3,7 @@
 <stripes:layout-definition>
 	<c:set var="cm" value="${actionBean.contentManagement}"/>
 	<script type="text/javascript">
+	//<![CDATA[
 		dojo.require("esri.map");
 
 		var layer_dist, layer_range, map, n2000layer, cddalayer;
@@ -136,6 +137,7 @@
 		}
 
       	dojo.addOnLoad(init);
+	//]]>
 	</script>
 	<h2>
    		${eunis:cmsPhrase(cm, 'Distribution map from Article 17')}

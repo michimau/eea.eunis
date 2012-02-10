@@ -19,6 +19,7 @@
 		<script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
 		<script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.3"></script>
 		<script type="text/javascript">
+		//<![CDATA[
 			dojo.require("dijit.layout.BorderContainer");
 			dojo.require("dijit.layout.ContentPane");
 			dojo.require("dijit.layout.AccordionContainer");
@@ -86,6 +87,7 @@
 			}
  
 			dojo.addOnLoad(init);
+		//]]>
 		</script>
 	</head>
  

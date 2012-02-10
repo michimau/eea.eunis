@@ -102,7 +102,7 @@
     <dcterms:title>References from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
-    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/references/rdf"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/references.rdf.gz"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="sites">

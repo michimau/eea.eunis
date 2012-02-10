@@ -109,6 +109,7 @@
     		<%=application.getInitParameter("PAGE_TITLE")%>
     		<%=cm.cmsPhrase( "Welcome to EUNIS Database" )%>
   		</title>
+<meta name="description" content="EUNIS provides access to: Information on Species, Habitat types and Sites taken into account in relevant international conventions or from International Red Lists; Specific data collected in the framework of the EEA's reporting activities, which also constitute a core set of data to be updated periodically."/>
   		<style type="text/css">
 			#portal-column-content #content {
 			    margin-right: 0 ! important;
@@ -155,7 +156,7 @@
 				         					<div class="figure">
 					         					<img height="350" width="216" title="" alt="<%=cm.cmsPhrase("Image from EUNIS Database photo collection regarding Species, Habitat types and Sites")%>" src="images/intros/<%=Utilities.getIntroImage( application )%>" />
 					     					</div>
-					  					</div>
+					  				</div>
 			          					<div style="float:left; position: absolute; left:0; top:0; padding-right: 250px;">
 											<!-- MAIN CONTENT -->
 			            					<br />
@@ -242,12 +243,14 @@
 			            					<div class="search_details" style="margin-bottom: 20px;">
 			              						<%=cm.cmsPhrase( "Advanced cross-search tool, linking species, habitat types and sites" )%>
 			            					</div>
+<%--
 			            					<a href="gis-tool.jsp"><strong><%=cm.cmsPhrase( "Interactive Maps" )%></strong></a>
 			            					&nbsp;
 			            					<a href="gis-tool.jsp" title="<%=cm.cmsPhrase("GIS Tool Interactive maps")%>"><img src="images/compass.jpg" width="29" height="29" style="width : 29px; height : 29px; border : 0px; vertical-align : middle;" alt="<%=cm.cmsPhrase("GIS Tool Interactive maps")%>" title="<%=cm.cmsPhrase("GIS Tool Interactive maps")%>" /></a>
 			            					<br />
 			            					<%=cm.cmsPhrase("Geographical information accessible within an interactive GIS tool allowing users to build maps or identify areas.")%>
 			            					<br />
+--%>
 											<!-- END MAIN CONTENT -->
 			          					</div>
 		          					</div>

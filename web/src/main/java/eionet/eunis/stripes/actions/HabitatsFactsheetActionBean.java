@@ -50,7 +50,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private static final Map<String, String[]> types = new HashMap<String, String[]>();
     static {
         types.put("GENERAL_INFORMATION", new String[] {"general", tabs[0]});
-        types.put("GEOGRAPHICAL_DISTRIBUTION", new String[] {"distribution", tabs[1]});
+        //types.put("GEOGRAPHICAL_DISTRIBUTION", new String[] {"distribution", tabs[1]});
         types.put("LEGAL_INSTRUMENTS", new String[] {"instruments", tabs[2]});
         types.put("HABITATS", new String[] {"habitats", tabs[3]});
         types.put("SITES", new String[] {"sites", tabs[4]});
@@ -146,7 +146,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         tabsWithData.add(new Pair<String, String>("linkeddata", getContentManagement().cmsPhrase("Linked data")));
 
         if (factsheet.isAnnexI()) {
-            tabsWithData.add(new Pair<String, String>("art17", "Distribution map from Art. 17"));
+            tabsWithData.add(new Pair<String, String>("geo", "Geographical information"));
         }
 
         if (tab != null && tab.equals("general")) {

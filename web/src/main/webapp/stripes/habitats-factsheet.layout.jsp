@@ -98,10 +98,15 @@
 						<c:if test="${actionBean.tab == 'general'}">
 							<stripes:layout-render name="/stripes/habitats-factsheet-general.jsp"/>
 						</c:if>
+						<!--
 						<c:if test="${actionBean.tab == 'distribution'}">
 							<jsp:include page="/habitats-factsheet-geographical.jsp">
 								<jsp:param name="idHabitat" value="${actionBean.idHabitat}" />
 							</jsp:include>
+						</c:if>
+						-->
+						<c:if test="${actionBean.tab == 'geo'}">
+							<stripes:layout-render name="/stripes/habitats-factsheet-geo.jsp"/>
 						</c:if>
 						<c:if test="${actionBean.tab == 'instruments'}">
 							<jsp:include page="/habitats-factsheet-legal.jsp">
@@ -120,9 +125,6 @@
 							<jsp:include page="/habitats-factsheet-species.jsp">
 								<jsp:param name="idHabitat" value="${actionBean.idHabitat}" />
 							</jsp:include>
-						</c:if>
-						<c:if test="${actionBean.tab == 'art17'}">
-							<stripes:layout-render name="/stripes/habitats-factsheet-art17-dist.jsp"/>
 						</c:if>
 						<c:if test="${actionBean.tab == 'linkeddata'}">
 		                	<stripes:layout-render name="/stripes/habitats-factsheet-linkeddata.jsp"/>

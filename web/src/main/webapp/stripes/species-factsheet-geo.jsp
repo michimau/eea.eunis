@@ -179,10 +179,10 @@
 					</dt>
 					<dd></dd>
 					<dt>
-					<label for="cdda">
-						<input type="checkbox" class="list_item" id="cdda" onclick="updateLayerVisibility('cdda');"/>
-						Nationally designated sites
-					</label>
+						<label for="cdda">
+							<input type="checkbox" class="list_item" id="cdda" onclick="updateLayerVisibility('cdda');"/>
+							Nationally designated sites
+						</label>
 					</dt>
 					<dd></dd>
 					<c:if test="${not empty actionBean.faoCode}">

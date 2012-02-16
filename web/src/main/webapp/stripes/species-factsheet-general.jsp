@@ -189,8 +189,8 @@
 	  	<h2 style="clear: both">
 		    ${eunis:cmsPhrase(actionBean.contentManagement, 'International Threat Status')}
 	  	</h2>
-	  	<table summary=" ${eunis:cms(actionBean.contentManagement, 'international_threat_status')}" class="listing fullwidth">
-		    <col style="width: 20%"/>
+	  	<table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'International Threat Status')}" class="listing fullwidth">
+		<col style="width: 20%"/>
 	    	<col style="width: 20%"/>
 	    	<col style="width: 20%"/>
 	    	<col style="width: 40%"/>
@@ -236,10 +236,6 @@
 	    	</tbody>
 		</table>
 	</c:if>
-	${eunis:br(actionBean.contentManagement)}
-	${eunis:cmsMsg(actionBean.contentManagement, 'national_threat_status')}
-	${eunis:br(actionBean.contentManagement)}
-	${eunis:cmsMsg(actionBean.contentManagement, 'international_threat_status')}
 	<br />
 	<c:if test="${!empty actionBean.factsheet.speciesNatureObject.idDublinCore && actionBean.factsheet.speciesNatureObject.idDublinCore != -1}">
 	  	<h2 style="clear: both">
@@ -300,8 +296,7 @@
 	  	</table>
   	</c:if>
   	<c:if test="${!empty actionBean.factsheet.synonymsIterator}">
-  		<br />
-  		<h2>
+  		<h2 style="clear: both">
     		${eunis:cmsPhrase(actionBean.contentManagement, 'Synonyms')}
   		</h2>
   		<table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'species_factsheet_10_Sum')}" class="listing fullwidth">
@@ -334,8 +329,7 @@
   		</table>
   	</c:if>
   	<c:if test="${!empty actionBean.subSpecies}">
-  		<br />
-  		<h2>
+  		<h2 style="clear: both">
     		${eunis:cmsPhrase(actionBean.contentManagement, 'Valid subspecies in Europe')}
   		</h2>
   		<table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'species_factsheet_11_Sum')}" class="listing fullwidth">

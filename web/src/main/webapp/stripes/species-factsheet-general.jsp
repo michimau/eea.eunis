@@ -179,7 +179,14 @@
 			</c:if>
 			<c:forEach items="${actionBean.links}" var="link" varStatus="loop">
 				<div>
-	        		<a href="${eunis:treatURLSpecialCharacters(link.url)}">${link.name}</a>
+				<c:choose>
+					<c:when test="${!empty link.url}">
+						<a href="${eunis:treatURLSpecialCharacters(link.url)}">${link.name}</a>
+					</c:when>
+					<c:otherwise>
+						${link.name}
+					</c:otherwise>
+				</c:choose>
 				</div>
 			</c:forEach>
 		</div> <!-- linkcollection -->

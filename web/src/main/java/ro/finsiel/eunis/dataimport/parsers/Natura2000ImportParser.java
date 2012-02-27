@@ -1150,12 +1150,30 @@ public class Natura2000ImportParser extends DefaultHandler {
             ps.setString(1, siteCode);
             ps.executeUpdate();
 
+            query = "DELETE ST FROM CHM62EDT_REPORT_ATTRIBUTES AS ST, CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS TT " +
+            "WHERE ST.ID_REPORT_ATTRIBUTES = TT.ID_REPORT_ATTRIBUTES AND TT.ID_NATURE_OBJECT = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, siteNatureObjectId);
+            ps.executeUpdate();
+
             query = "DELETE FROM CHM62EDT_NATURE_OBJECT_REPORT_TYPE WHERE ID_NATURE_OBJECT = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, siteNatureObjectId);
             ps.executeUpdate();
 
+            query = "DELETE ST FROM CHM62EDT_REPORT_ATTRIBUTES AS ST, CHM62EDT_NATURE_OBJECT_GEOSCOPE AS TT " +
+            "WHERE ST.ID_REPORT_ATTRIBUTES = TT.ID_REPORT_ATTRIBUTES AND TT.ID_NATURE_OBJECT = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, siteNatureObjectId);
+            ps.executeUpdate();
+
             query = "DELETE FROM CHM62EDT_NATURE_OBJECT_GEOSCOPE WHERE ID_NATURE_OBJECT = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, siteNatureObjectId);
+            ps.executeUpdate();
+
+            query = "DELETE ST FROM CHM62EDT_REPORT_ATTRIBUTES AS ST, CHM62EDT_REPORTS AS TT " +
+            "WHERE ST.ID_REPORT_ATTRIBUTES = TT.ID_REPORT_ATTRIBUTES AND TT.ID_NATURE_OBJECT = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, siteNatureObjectId);
             ps.executeUpdate();

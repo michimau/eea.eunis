@@ -133,9 +133,6 @@
 				<a rel="nofollow" href="http://www.eu-nomen.eu/portal/taxon.php?GUID=urn:lsid:marinespecies.org:taxname:${actionBean.wormsid}" >${eunis:cmsPhrase(actionBean.contentManagement, 'PESI page')}</a>
 				</div>
 			</c:if>
-			<div>
-	        	<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'Search species on SCIRUS')}" href="http://www.scirus.com/srsapp/search?q=%22${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}%22&amp;ds=web&amp;g=s&amp;t=all">${eunis:cmsPhrase(actionBean.contentManagement, 'SCIRUS search')}</a>
-			</div>
 			<c:choose>
 				<c:when test="${!empty actionBean.faeu}">
 					<div>

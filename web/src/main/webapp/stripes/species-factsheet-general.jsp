@@ -129,20 +129,12 @@
 				<div>
 					<a href="http://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=${actionBean.wormsid}" title="World Register of Marine Species page">${eunis:cmsPhrase(actionBean.contentManagement, 'WoRMS page')}</a>
 				</div>
-				<div>
-				<a rel="nofollow" href="http://www.eu-nomen.eu/portal/taxon.php?GUID=urn:lsid:marinespecies.org:taxname:${actionBean.wormsid}" >${eunis:cmsPhrase(actionBean.contentManagement, 'PESI page')}</a>
-				</div>
 			</c:if>
 			<c:choose>
 				<c:when test="${!empty actionBean.faeu}">
 					<div>
 			        	<a href="http://www.faunaeur.org/full_results.php?id=${actionBean.faeu}">${eunis:cmsPhrase(actionBean.contentManagement, 'Fauna Europaea page')}</a>
 					</div>
-					<c:if test="${empty actionBean.wormsid}">
-					<div>
-			        	<a rel="nofollow" href="http://www.eu-nomen.eu/portal/taxon.php?GUID=urn:lsid:faunaeur.org:taxname:${actionBean.faeu}" >${eunis:cmsPhrase(actionBean.contentManagement, 'PESI page')}</a>
-					</div>
-					</c:if>
 				</c:when>
 		  		<c:otherwise>
 					<c:if test="${actionBean.kingdomname == 'Animals'}">

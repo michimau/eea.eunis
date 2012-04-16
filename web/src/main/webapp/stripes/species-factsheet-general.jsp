@@ -144,9 +144,9 @@
 					</c:if>
 				</c:otherwise>
 			</c:choose>
-			<c:if test="${!empty actionBean.itisTSN}">
+			<c:if test="${empty actionBean.itisTSN}">
 				<div>
-	        		<a href="http://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=${actionBean.itisTSN}">${eunis:cmsPhrase(actionBean.contentManagement, 'ITIS TSN:')}${actionBean.itisTSN}</a>
+				<a href="http://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=Scientific_Name&amp;search_kingdom=every&amp;search_span=exactly_for&amp;search_value=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}&amp;categories=All&amp;source=html&amp;search_credRating=All">${eunis:cmsPhrase(actionBean.contentManagement, 'Search ITIS')}</a>
 				</div>
 			</c:if>
 			<c:choose>

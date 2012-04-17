@@ -23,14 +23,17 @@
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:subject rdf:resource="http://dbpedia.org/resource/Natura_2000"/>
     <foaf:homepage rdf:resource="http://eunis.eea.europa.eu/"/>
+    <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
     <void:exampleResource rdf:resource="http://eunis.eea.europa.eu/species/4055"/>
     <void:exampleResource rdf:resource="http://eunis.eea.europa.eu/sites/UK930012"/>
-    <void:uriPattern>^http://eunis.eea.europa.eu/.*</void:uriPattern>
+    <void:uriSpace>http://eunis.eea.europa.eu/</void:uriSpace>
     <void:sparqlEndpoint rdf:resource="http://semantic.eea.europa.eu/sparql"/>
     <void:subset rdf:resource="#biogeoregions"/>
     <void:subset rdf:resource="#countries"/>
     <void:subset rdf:resource="#countrybiogeo"/>
     <void:subset rdf:resource="#designations"/>
+    <void:subset rdf:resource="#eunishabitats"/>
+    <void:subset rdf:resource="#geoscope"/>
     <void:subset rdf:resource="#habitats"/>
     <void:subset rdf:resource="#images"/>
     <void:subset rdf:resource="#legalrefs"/>
@@ -39,6 +42,13 @@
     <void:subset rdf:resource="#species"/>
     <void:subset rdf:resource="#speciesgroup"/>
     <void:subset rdf:resource="#taxonomies"/>
+
+    <void:vocabulary rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos"/>
+    <void:vocabulary rdf:resource="http://rs.tdwg.org/dwc/terms/"/>
+    <void:vocabulary rdf:resource="http://www.w3.org/2004/02/skos/core"/>
+    <void:vocabulary rdf:resource="http://creativecommons.org/ns#"/>
+    <void:vocabulary rdf:resource="http://purl.org/dc/terms/"/>
+    <void:vocabulary rdf:resource="http://eunis.eea.europa.eu/rdf/schema.rdf#"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="biogeoregions">
@@ -46,6 +56,7 @@
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/biogeoregions.rdf.gz"/>
+    <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="countries">
@@ -53,6 +64,7 @@
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/countries.rdf.gz"/>
+    <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="countrybiogeo">
@@ -60,6 +72,7 @@
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/countrybiogeo.rdf.gz"/>
+    <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="designations">
@@ -67,6 +80,18 @@
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/designations.rdf.gz"/>
+    <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="eunishabitats">
+    <dcterms:title>EUNIS Habitat types from EUNIS</dcterms:title>
+    <dcterms:description>The EUNIS Habitat types classification is a comprehensive pan-European system to facilitate the harmonised description and collection of data across Europe through the use of criteria for habitat identification; it covers all types of habitats from natural to artificial, from terrestrial to freshwater and marine.</dcterms:description>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <dcterms:subject rdf:resource="http://dbpedia.org/resource/Habitat"/>
+    <void:exampleResource rdf:resource="http://eunis.eea.europa.eu/eunishabitats/A1.112"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/eunishabitats.rdf.gz"/>
+    <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="geoscope">
@@ -74,14 +99,16 @@
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/geoscope.rdf.gz"/>
+    <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="habitats">
-    <dcterms:title>Habitat types from EUNIS</dcterms:title>
+    <dcterms:title>All habitat types from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:subject rdf:resource="http://dbpedia.org/resource/Habitat"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/habitats.rdf.gz"/>
+    <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="images">
@@ -89,6 +116,7 @@
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/images.rdf.gz"/>
+    <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="legalrefs">
@@ -96,6 +124,7 @@
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/legalrefs.rdf.gz"/>
+    <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="references">
@@ -103,6 +132,7 @@
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/references.rdf.gz"/>
+    <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="sites">
@@ -110,6 +140,7 @@
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/sites.rdf.gz"/>
+    <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="species">
@@ -118,6 +149,7 @@
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:subject rdf:resource="http://dbpedia.org/resource/Species"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/species.rdf.gz"/>
+    <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="speciesgroup">
@@ -125,6 +157,7 @@
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/speciesgroup.rdf.gz"/>
+    <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="taxonomies">
@@ -133,6 +166,23 @@
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:subject rdf:resource="http://dbpedia.org/resource/Taxonomic_rank"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/taxonomies.rdf.gz"/>
+    <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
+  </void:Dataset>
+
+<!-- Linksets -->
+  <void:Linkset rdf:ID="species2dbpedia">
+    <void:subjectsTarget rdf:resource="#species"/>
+    <void:objectsTarget rdf:resource="#DBpedia"/>
+    <void:linkPredicate rdf:resource="http://eunis.eea.europa.eu/rdf/species-schema.rdf#sameSpecies"/>
+    <void:subset rdf:resource="#eunis"/>
+  </void:Linkset>
+
+<!-- Remote datasets -->
+  <void:Dataset rdf:ID="DBpedia">
+    <foaf:homepage rdf:resource="http://dbpedia.org/"/>
+    <void:sparqlEndpoint rdf:resource="http://dbpedia.org/sparql"/>
+    <void:exampleResource rdf:resource="http://dbpedia.org/resource/Atlantic_salmon"/>
+    <void:exampleResource rdf:resource="http://dbpedia.org/resource/Peregrine_Falcon"/>
   </void:Dataset>
 
 </rdf:RDF>

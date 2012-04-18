@@ -13,6 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.utilities.EunisUtil;
+import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dto.ForeignDataQueryDTO;
 import eionet.sparqlClient.helpers.QueryExecutor;
 import eionet.sparqlClient.helpers.QueryResult;
@@ -44,19 +45,22 @@ public class LinkedData {
     /** Source of the data. */
     private String attribution;
 
-    public LinkedData(Properties props) throws Exception {
+    public LinkedData(Properties props, Integer natObjId) throws Exception {
         this.props = props;
         queries = props.getProperty("queries").split(" ");
 
         if (queries != null) {
             queryObjects = new ArrayList<ForeignDataQueryDTO>();
             for (String queryId : queries) {
-                ForeignDataQueryDTO dto = new ForeignDataQueryDTO();
-                dto.setId(queryId);
-                dto.setTitle(props.getProperty(queryId + ".title"));
-                dto.setSummary(props.getProperty(queryId + ".summary"));
-                dto.setQuery(props.getProperty(queryId + ".query"));
-                queryObjects.add(dto);
+                boolean resultExists = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().queryResultExists(natObjId, queryId);
+                if (natObjId == null || (natObjId != null && resultExists)) {
+                    ForeignDataQueryDTO dto = new ForeignDataQueryDTO();
+                    dto.setId(queryId);
+                    dto.setTitle(props.getProperty(queryId + ".title"));
+                    dto.setSummary(props.getProperty(queryId + ".summary"));
+                    dto.setQuery(props.getProperty(queryId + ".query"));
+                    queryObjects.add(dto);
+                }
             }
         }
     }

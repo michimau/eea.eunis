@@ -153,6 +153,40 @@ public class TabScripts {
         }
     }
 
+    /**
+     * Generate species linked data tab information for species
+     */
+    public void setSpeciesLinkedDataTab() {
+        Connection con = null;
+        PreparedStatement ps = null;
+        SQLUtilities sqlc = new SQLUtilities();
+
+        try {
+            Class.forName(SQL_DRV);
+            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+
+            sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+
+            // Update GBIF tab
+            EunisUtil
+            .writeLogMessage("LINKED DATA tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
+            String linkeddataSql =
+                "UPDATE chm62edt_tab_page_species SET LINKEDDATA = 'Y' WHERE ID_NATURE_OBJECT IN ( "
+                + "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_nature_object_attributes WHERE "
+                + "NAME = '_linkedDataQueries' AND LENGTH(OBJECT > 0))";
+            ps = con.prepareStatement(linkeddataSql);
+            ps.executeUpdate();
+            EunisUtil.writeLogMessage("LINKED DATA tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
+                    sqlc);
+
+        } catch (Exception e) {
+            EunisUtil.writeLogMessage("ERROR occured while generating species linked data tab information: " + e.getMessage(), cmd, sqlc);
+            e.printStackTrace();
+        } finally {
+            closeAll(con, ps, null);
+        }
+    }
+
     private void updateSpeciesTab(String sql, Connection con, SQLUtilities sqlc, String tab) throws Exception {
 
         PreparedStatement ps = null;

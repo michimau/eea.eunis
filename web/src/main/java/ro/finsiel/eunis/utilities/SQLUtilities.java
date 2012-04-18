@@ -59,7 +59,7 @@ public class SQLUtilities {
 
     /**
      * Initialization method for this object.
-     * 
+     *
      * @param SQL_DRIVER_NAME
      *            JDBC driver.
      * @param SQL_DRIVER_URL
@@ -78,7 +78,7 @@ public class SQLUtilities {
 
     /**
      * Limit the results computed.
-     * 
+     *
      * @param SQLLimit
      *            Limit.
      */
@@ -88,7 +88,7 @@ public class SQLUtilities {
 
     /**
      * Executes parameterized sql query and return list of results. Note! only first column in query is returned.
-     * 
+     *
      * @param sql
      *            - sql string
      * @param params
@@ -121,7 +121,7 @@ public class SQLUtilities {
 
     /**
      * Execute an sql.
-     * 
+     *
      * @param SQL
      *            SQL.
      * @param Delimiter
@@ -188,7 +188,7 @@ public class SQLUtilities {
 
     /**
      * Executes a SELECT sql and returns the first value.
-     * 
+     *
      * @param SQL
      *            SQL.
      * @return First column.
@@ -229,7 +229,7 @@ public class SQLUtilities {
 
     /**
      * Executes a SELECT sql and returns the given two columns as object.
-     * 
+     *
      * @param SQL
      * @param firstColumn
      * @param secondColumn
@@ -274,7 +274,7 @@ public class SQLUtilities {
 
     /**
      * Executes a SELECT sql and returns the first value.
-     * 
+     *
      * @param SQL
      *            SQL.
      * @return First column.
@@ -316,7 +316,7 @@ public class SQLUtilities {
 
     /**
      * Executes a sql.
-     * 
+     *
      * @param SQL
      *            SQL.
      */
@@ -422,7 +422,7 @@ public class SQLUtilities {
 
     /**
      * Execute an sql.
-     * 
+     *
      * @param SQL
      *            SQL.
      * @param noColumns
@@ -506,7 +506,7 @@ public class SQLUtilities {
 
     /**
      * Count search results.
-     * 
+     *
      * @return reusults count.
      */
     public int getResultCount() {
@@ -515,7 +515,7 @@ public class SQLUtilities {
 
     /**
      * Execute UPDATE statement
-     * 
+     *
      * @param tableName
      *            table name
      * @param columnName
@@ -552,7 +552,7 @@ public class SQLUtilities {
 
     /**
      * Execute DELETE statement
-     * 
+     *
      * @param tableName
      *            table name
      * @param whereCondition
@@ -585,7 +585,7 @@ public class SQLUtilities {
 
     /**
      * Insert bookmark functionality
-     * 
+     *
      * @param username
      *            username associated with that bookmark
      * @param bookmarkURL
@@ -619,7 +619,7 @@ public class SQLUtilities {
 
     /**
      * Execute INSERT statement
-     * 
+     *
      * @param tableName
      *            table name
      * @param tableColumns
@@ -669,7 +669,7 @@ public class SQLUtilities {
 
     /**
      * Execute INSERT statement
-     * 
+     *
      * @param tableName
      *            table name
      * @param tableColumns
@@ -763,7 +763,7 @@ public class SQLUtilities {
 
     /**
      * Determines what tabs will be shown for given factsheet
-     * 
+     *
      * @param idNatureObject
      *            object from database
      * @param NatureObjectType
@@ -1161,7 +1161,7 @@ public class SQLUtilities {
 
     /**
      * Execute INSERT statement
-     * 
+     *
      * @param message
      * @return operation status
      */

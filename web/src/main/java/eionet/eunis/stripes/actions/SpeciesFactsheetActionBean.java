@@ -61,7 +61,7 @@ import eionet.sparqlClient.helpers.ResultValue;
 public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     private static final String[] tabs = {"General information", "Vernacular names", "Geographical information", "Population",
-        "Trends", "References", "Legal Instruments", "Habitat types", "Sites"};
+        "Trends", "References", "Legal Instruments", "Habitat types", "Sites", "Linked data"};
 
     private static final Map<String, String[]> types = new HashMap<String, String[]>();
     static {
@@ -75,6 +75,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         types.put("LEGAL_INSTRUMENTS", new String[] {"legal", tabs[6]});
         types.put("HABITATS", new String[] {"habitats", tabs[7]});
         types.put("SITES", new String[] {"sites", tabs[8]});
+        types.put("LINKEDDATA", new String[] {"linkeddata", tabs[9]});
     }
 
     /** The argument given. Can be a species number or scientific name */
@@ -226,9 +227,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 }
             }
 
-            // Always add linkeddata tab
-            tabsWithData.add(new Pair<String, String>("linkeddata", getContentManagement().cmsPhrase("Linked data")));
-
             specie = factsheet.getSpeciesNatureObject();
 
             if (tab != null && tab.equals("general")) {
@@ -252,7 +250,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
 
             if (tab != null && tab.equals("linkeddata")) {
-                linkeddataTabActions(mainIdSpecies);
+                linkeddataTabActions(mainIdSpecies, specie.getIdNatureObject());
             }
         }
         String eeaHome = getContext().getInitParameter("EEA_HOME");
@@ -557,11 +555,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      *
      * @param idSpecies - The species ID.
      */
-    private void linkeddataTabActions(int idSpecies) {
+    private void linkeddataTabActions(int idSpecies, Integer natObjId) {
         try {
             Properties props = new Properties();
             props.load(getClass().getClassLoader().getResourceAsStream("linkeddata_species.properties"));
-            LinkedData fd = new LinkedData(props);
+            LinkedData fd = new LinkedData(props, natObjId);
             queries = fd.getQueryObjects();
 
             if (!StringUtils.isBlank(query)) {

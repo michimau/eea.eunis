@@ -65,4 +65,36 @@ public interface ISpeciesFactsheetDao {
      */
     String getNatObjAttribute(Integer natObjId, String name);
 
+    /**
+     * Returns true if query has any result for this species
+     *
+     * @param natObjId - ID_NATURE_OBJECT.
+     * @param queryId.
+     * @return boolean.
+     */
+    boolean queryResultExists(Integer natObjId, String queryId);
+
+    /**
+     * Insert _linkedDataQueries records into chm62edt_nature_object_attributes for each species
+     */
+    public void insertNatObLinkedData();
+
+    /**
+     * update _linkedDataQueries records in chm62edt_nature_object_attributes for each species
+     *
+     * @param speciesIds.
+     * @param queryId.
+     */
+    public void updateNatObLinkedData(String speciesIds, String queryId);
+
+    /**
+     * Remove leftovers
+     */
+    public void removeEmptyNatObLinkedData();
+
+    /**
+     * Remove previous records from chm62edt_nature_object_attributes
+     */
+    public void removeAllNatObLinkedData();
+
 }

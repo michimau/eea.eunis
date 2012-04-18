@@ -1,6 +1,8 @@
 package eionet.eunis.dao.impl;
 
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
@@ -126,6 +128,94 @@ public class SpeciesFactsheetDaoImpl extends MySqlBaseDao implements ISpeciesFac
         String query = "SELECT OBJECT FROM chm62edt_nature_object_attributes WHERE NAME = '"
             + name + "' AND ID_NATURE_OBJECT = " + natObjId;
         return ExecuteSQL(query);
+    }
+
+    public boolean queryResultExists(Integer natObjId, String queryId) {
+        boolean ret = false;
+        String query = "SELECT OBJECT FROM chm62edt_nature_object_attributes WHERE NAME = '_linkedDataQueries' " +
+        "AND ID_NATURE_OBJECT = " + natObjId;
+        String result = ExecuteSQL(query);
+        if (!StringUtils.isBlank(result) && result.contains(queryId)) {
+            ret = true;
+        }
+        return ret;
+    }
+
+    public void insertNatObLinkedData() {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = getConnection();
+
+            ps = con.prepareStatement("insert into chm62edt_nature_object_attributes (ID_NATURE_OBJECT, NAME) " +
+            "(SELECT ID_NATURE_OBJECT,'_linkedDataQueries' FROM chm62edt_species)");
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAllResources(con, ps, null);
+        }
+    }
+
+    public void updateNatObLinkedData(String speciesIds, String queryId) {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = getConnection();
+
+            ps = con.prepareStatement("UPDATE chm62edt_nature_object_attributes " +
+                    "SET OBJECT=CONCAT_WS(',',OBJECT,'"+queryId+"') " +
+                    "WHERE NAME='_linkedDataQueries' AND ID_NATURE_OBJECT IN " +
+                    "(SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_species WHERE ID_SPECIES IN ("+speciesIds+")) " +
+                    "AND FIND_IN_SET('"+queryId+"', OBJECT)=0");
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAllResources(con, ps, null);
+        }
+    }
+
+    public void removeEmptyNatObLinkedData() {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = getConnection();
+
+            ps = con.prepareStatement("delete from chm62edt_nature_object_attributes where NAME = '_linkedDataQueries' AND LENGTH(OBJECT) = 0");
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAllResources(con, ps, null);
+        }
+    }
+
+    public void removeAllNatObLinkedData() {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = getConnection();
+            ps = con.prepareStatement("delete from chm62edt_nature_object_attributes where NAME = '_linkedDataQueries'");
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAllResources(con, ps, null);
+        }
     }
 
 }

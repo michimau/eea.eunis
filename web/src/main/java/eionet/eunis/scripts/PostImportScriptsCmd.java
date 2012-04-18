@@ -16,7 +16,7 @@ public class PostImportScriptsCmd {
         if (args.length == 0) {
             System.out.println("Missing argument!");
             System.out
-            .println("Possible first arguments are: sites, empty_digir, digir, statistics, species_tab, sites_tab, habitats_tab, taxonomy_tree");
+            .println("Possible first arguments are: sites, empty_digir, digir, statistics, species_tab, sites_tab, habitats_tab, linkeddata_tab, taxonomy_tree");
         } else {
             try {
                 ResourceBundle props = ResourceBundle.getBundle("jrf");
@@ -51,6 +51,8 @@ public class PostImportScriptsCmd {
                         scripts.setTabSites();
                     } else if (args[0].equals("habitats_tab")) {
                         scripts.setTabHabitats();
+                    } else if (args[0].equals("linkeddata_tab")) {
+                        scripts.setSpeciesLinkedDataTab();
                     }
                 }
 

@@ -505,7 +505,7 @@ public class SpeciesFactsheet {
                 DcIndexPersist po = (DcIndexPersist) list.get(0);
                 if (po != null) {
                     author = po.getSource();
-                    String dateStr = Utilities.formatReferencesDate(po.getCreated());
+                    String dateStr = po.getCreated();
                     if (!dateStr.equalsIgnoreCase("")) {
                         author += " (" + dateStr + ")";
                     }
@@ -554,7 +554,7 @@ public class SpeciesFactsheet {
                 DcIndexPersist date = (DcIndexPersist) list1.get(0);
 
                 if (null != date.getCreated()) {
-                    ret = new SimpleDateFormat("yyyy").format(date.getCreated());
+                    ret = date.getCreated();
                 }
             }
         } catch (Exception _ex) {
@@ -580,7 +580,7 @@ public class SpeciesFactsheet {
                 publication.setTitle(po.getTitle());
                 publication.setPublisher(po.getPublisher());
                 if (po.getCreated() != null) {
-                    publication.setDate(new SimpleDateFormat("yyyy").format(po.getCreated()));
+                    publication.setDate(po.getCreated());
                 } else {
                     System.out.println(
                             "Warning: " + SpeciesFactsheet.class.getName() + "::getSpeciesBook() - date.getCreated returned null");

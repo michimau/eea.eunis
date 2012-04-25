@@ -5,8 +5,6 @@
 package ro.finsiel.eunis.jrfTables;
 
 
-import java.util.Date;
-
 import net.sf.jrf.domain.PersistentObject;
 
 
@@ -19,7 +17,7 @@ public class DcIndexPersist extends PersistentObject {
     private Integer idDc = null;
     private String comment = null;
     private int reference = -1;
-    private Date created = null;
+    private String created = null;
     private String title = null;
     private String alternative = null;
     private String publisher = null;
@@ -82,11 +80,14 @@ public class DcIndexPersist extends PersistentObject {
         this.forceNewPersistentState();
     }
 
-    public Date getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(String created) {
+        if(created != null && created.length() > 4) {
+            created = created.substring(0, 4);
+        }
         this.created = created;
     }
 

@@ -5,8 +5,6 @@
 package ro.finsiel.eunis.jrfTables;
 
 
-import net.sf.jrf.column.columnoptions.NullableColumnOption;
-import net.sf.jrf.column.columnspecs.DateColumnSpec;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
@@ -38,7 +36,7 @@ public class DcIndexDomain extends AbstractDomain {
         this.addColumnSpec(new IntegerColumnSpec("ID_DC", "getIdDc", "setIdDc", DEFAULT_TO_ZERO, NATURAL_PRIMARY_KEY));
         this.addColumnSpec(new StringColumnSpec("COMMENT", "getComment", "setComment", DEFAULT_TO_NULL));
         this.addColumnSpec(new IntegerColumnSpec("REFERENCE", "getReference", "setReference", DEFAULT_TO_NULL));
-        this.addColumnSpec(new DateColumnSpec("CREATED", new NullableColumnOption(), "getCreated", "setCreated", DEFAULT_TO_NULL));
+        this.addColumnSpec(new StringColumnSpec("CREATED", "getCreated", "setCreated", DEFAULT_TO_NULL));
         this.addColumnSpec(new StringColumnSpec("TITLE", "getTitle", "setTitle", DEFAULT_TO_NULL));
         this.addColumnSpec(new StringColumnSpec("ALTERNATIVE", "getAlternative", "setAlternative", DEFAULT_TO_NULL));
         this.addColumnSpec(new StringColumnSpec("PUBLISHER", "getPublisher", "setPublisher", DEFAULT_TO_NULL));

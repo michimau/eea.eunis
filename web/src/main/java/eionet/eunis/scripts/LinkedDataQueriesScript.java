@@ -38,7 +38,7 @@ public class LinkedDataQueriesScript {
             Properties props = new Properties();
             URL url = ClassLoader.getSystemResource("externaldata_species.xml");
             props.loadFromXML(url.openStream());
-            String[] queries = props.getProperty("queries").split(" ");
+            String[] queries = props.getProperty("queries").split("\\s+");
             for (String queryId : queries) {
                 System.out.println("Starting with query: " + queryId);
                 String endpoint = props.getProperty(queryId + ".endpoint");

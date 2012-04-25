@@ -5,7 +5,10 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">deliveries derogationsreport vernacularnames landings art17ranges art17populations birdlifedistribution birdlifetrend butterfliestrend conservationstatus</entry>
+  <entry key="queries">deliveries derogationsreport vernacularnames
+       landings art17ranges art17populations
+       birdlifedistribution birdlifetrend
+	butterfliestrend conservationstatus</entry>
 <!-- -->
 <!-- .endpoint, .title and .query are mandatory for all queries -->
 <!-- .summary - use HTML format - i.e. escape & and < -->

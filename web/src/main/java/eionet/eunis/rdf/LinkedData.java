@@ -47,7 +47,7 @@ public class LinkedData {
 
     public LinkedData(Properties props, Integer natObjId) throws Exception {
         this.props = props;
-        queries = props.getProperty("queries").split(" ");
+        queries = props.getProperty("queries").split("\\s+");
 
         if (queries != null) {
             queryObjects = new ArrayList<ForeignDataQueryDTO>();

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>Linked data queries for habitat types</comment>
+<!-- -->
+<!-- The list of queries in this file. Separated by whitespace. -->
+<!-- -->
+  <entry key="queries">deliveries art17ranges habitatdistribution</entry>
+
+<!-- -->
+<!-- .endpoint, .title and .query are mandatory for all queries -->
+<!-- .summary - use HTML format - i.e. escape & and < -->
+<!-- -->
+
+
+
+<!-- -->
+<!-- Deliveries query -->
+<!-- -->
+  <entry key="deliveries.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="deliveries.title">Reportnet deliveries</entry>
+  <entry key="deliveries.summary">Files delivered through Reportnet with relevance to this habitat type.</entry>
+
+<!-- Links are defined as {queryId}.link.{labelColumn}={linkColumn} -->
+<!-- If the label column in SPARQL query is bound to ?filetitle and link itself to ?file -->
+<!-- then the property should be defined as: {queryId}.link.filetitle = file -->
+<!-- This will produce <a href="file">filetitle</a> in result row -->
+  <entry key="deliveries.link.filetitle">file</entry>
+  <entry key="deliveries.link.envtitle">envelope</entry>
+  <entry key="deliveries.column.envtitle">Envelope</entry>
+  <entry key="deliveries.column.filetitle">File</entry>
+
+<!-- Query -->
+<!-- [IDENTIFIER] is replaced with actual habitat ID before query will be executed -->
+  <entry key="deliveries.query"><![CDATA[
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX dc: <http://purl.org/dc/elements/1.1/> 
+PREFIX dct: <http://purl.org/dc/terms/> 
+PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
+PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> 
+
+SELECT DISTINCT xsd:date(?released) AS ?released ?coverage ?envelope ?envtitle 
+ IRI(bif:concat(?sourcefile,'/manage_document')) AS ?file ?filetitle 
+WHERE { 
+	GRAPH ?sourcefile { 
+		_:reference ?pred <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]> . 
+		OPTIONAL { 
+			_:reference rdfs:label ?label 
+		} 
+	} 
+	?envelope rod:hasFile ?sourcefile; 
+		rod:released ?released; 
+		rod:locality _:locurl; 
+		dc:title ?envtitle . 
+		_:locurl rdfs:label ?coverage . 
+	?sourcefile dc:title ?filetitle 
+} ORDER BY DESC(?released)
+]]></entry>
+
+
+<!-- -->
+<!-- .endpoint, .title and .query are mandatory for all queries -->
+<!-- .summary - use HTML format - i.e. escape & and < -->
+<!-- -->
+
+  <entry key="art17ranges.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="art17ranges.title">Ranges for this habitat type reported under Article 17, Habitats Directive</entry>
+<!-- .summary - use HTML format - i.e. escape & and < -->
+  <entry key="art17ranges.summary"><![CDATA[Assessments on the conservation status of the habitat types 
+   and species of Community interest have been carried out in EU 25 for the period 2001-2006, 
+   compiled as part of the Habitats Directive - Article 17 reporting process. 
+   The data summary sheet for habitat type conservation status provides an overview per biogeographical region.]]></entry>
+  <entry key="art17ranges.column.pc_rsa">Percent</entry>
+  <entry key="art17ranges.column.surfacerange">Surface of range</entry>
+  <entry key="art17ranges.column.region">Region</entry>
+  <entry key="art17ranges.column.country">Country</entry>
+  <entry key="art17ranges.column.range">Range reference</entry>
+  <entry key="art17ranges.query"><![CDATA[
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/> 
+PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/> 
+PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/> 
+
+SELECT ?country ?region ?surfacerange ?pc_rsa ?conclusion ?trend 
+  bif:concat(?complementary_favourable_range_q, STR(?complementary_favourable_range)) AS ?favourable_range 
+ ?quality 
+WHERE { 
+  ?subj a ?rdfType ; 
+        art17:forHabitatType <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]>; 
+        art17:forRegion _:regionUrl . 
+  _:regionUrl e:name ?region . 
+OPTIONAL { ?subj  art17:forCountry _:countryUrl. 
+           _:countryUrl e:name ?country. } 
+OPTIONAL {?subj art17:range_surface_area ?surfacerange} 
+OPTIONAL {?subj art17:percentage_range_surface_area ?pc_rsa} 
+OPTIONAL {?subj art17:conclusion_range _:conclusion_rangeUrl . 
+         _:conclusion_rangeUrl o:name ?conclusion } 
+OPTIONAL {?subj art17:range_trend ?trend} 
+OPTIONAL {?subj art17:complementary_favourable_range_q ?complementary_favourable_range_q} 
+OPTIONAL {?subj art17:complementary_favourable_range ?complementary_favourable_range} 
+OPTIONAL {?subj art17:range_quality ?quality} 
+FILTER(?rdfType IN (art17:Habitattypesummary, art17:HabitatTypeManualAssessment)) 
+} ORDER BY ?country ?region
+]]></entry>
+<!-- Additional rdf:type: art17:HabitatTypeAutomaticAssessment -->
+
+  <entry key="habitatdistribution.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+  <entry key="habitatdistribution.title">Countries having this habitat type</entry>
+  <entry key="habitatdistribution.summary">Data collected by the European Commission and ETC/BD in 2002 and 2005</entry>
+  <entry key="habitatdistribution.query"><![CDATA[
+PREFIX e: <http://eunis.eea.europa.eu/rdf/schema.rdf#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX eea: <http://rdfdata.eionet.europa.eu/eea/ontology/> 
+
+SELECT ?country ?biogeoregion ?probability ?comment ?source ?date 
+FROM <http://rdfdata.eionet.europa.eu/eunis/habitatdistribution.rdf.gz> 
+FROM <http://rdfdata.eionet.europa.eu/eea/biogeographic-regions.rdf> 
+FROM <http://rdfdata.eionet.europa.eu/eea/countries.rdf> 
+WHERE { 
+ ?subject e:forHabitat <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]>; 
+          e:forCountry ?ucountry; 
+          dcterms:source ?usource. 
+ OPTIONAL {?subject e:hasBioGeoRegion ?ubiogeoregion . 
+         ?ubiogeoregion eea:name ?biogeoregion }  
+ OPTIONAL {?subject e:probability ?probability }  
+ OPTIONAL {?subject e:comment ?comment }  
+ ?usource dcterms:title ?source; 
+          dcterms:date ?date. 
+ ?ucountry eea:name ?country 
+} ORDER BY DESC(?date) ?country ?biogeoregion
+]]></entry>
+</properties>

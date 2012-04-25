@@ -36,8 +36,8 @@ public class LinkedDataQueriesScript {
             // update _linkedDataQueries records in chm62edt_nature_object_attributes for each species
             String codes = "";
             Properties props = new Properties();
-            URL url = ClassLoader.getSystemResource("linkeddata_species.properties");
-            props.load(url.openStream());
+            URL url = ClassLoader.getSystemResource("externaldata_species.xml");
+            props.loadFromXML(url.openStream());
             String[] queries = props.getProperty("queries").split(" ");
             for (String queryId : queries) {
                 System.out.println("Starting with query: " + queryId);

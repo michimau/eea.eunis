@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>Linked data queries for protected sites</comment>
+<!-- -->
+<!-- The list of queries in this file. Separated by whitespace. -->
+<!-- -->
+  <entry key="queries">deliveries</entry>
+
+<!-- -->
+<!-- .endpoint, .title and .query are mandatory for all queries -->
+<!-- .summary - use HTML format - i.e. escape & and < -->
+<!-- -->
+
+
+
+<!-- -->
+<!-- Deliveries query -->
+<!-- -->
+  <entry key="deliveries.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="deliveries.title">Reportnet deliveries</entry>
+  <entry key="deliveries.summary">Files delivered through Reportnet with relevance to this site.</entry>
+
+<!-- Links are defined as {queryId}.link.{labelColumn}={linkColumn} -->
+<!-- If the label column in SPARQL query is bound to ?filetitle and link itself to ?file -->
+<!-- then the property should be defined as: {queryId}.link.filetitle = file -->
+<!-- This will produce <a href="file">filetitle</a> in result row -->
+  <entry key="deliveries.link.filetitle">file</entry>
+  <entry key="deliveries.link.envtitle">envelope</entry>
+  <entry key="deliveries.column.envtitle">Envelope</entry>
+  <entry key="deliveries.column.filetitle">File</entry>
+
+<!-- Query -->
+<!-- [IDENTIFIER] is replaced with actual sites ID before query will be executed -->
+  <entry key="deliveries.query"><![CDATA[
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX dc: <http://purl.org/dc/elements/1.1/> 
+PREFIX dct: <http://purl.org/dc/terms/> 
+PREFIX e: <http://eunis.eea.europa.eu/rdf/sites-schema.rdf#> 
+PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> 
+SELECT DISTINCT xsd:date(?released) AS ?released ?coverage ?envelope ?envtitle 
+IRI(bif:concat(?sourcefile,'/manage_document')) AS ?file ?filetitle 
+WHERE { 
+	GRAPH ?sourcefile { 
+		_:reference ?pred <http://eunis.eea.europa.eu/sites/[IDENTIFIER]> . 
+    OPTIONAL { 
+	_:reference rdfs:label ?label 
+    } 
+} 
+?envelope rod:hasFile ?sourcefile; 
+rod:released ?released; 
+rod:locality _:locurl; 
+dc:title ?envtitle . 
+_:locurl rdfs:label ?coverage . 
+?sourcefile dc:title ?filetitle 
+} ORDER BY DESC(?released)
+]]></entry>
+
+</properties>

@@ -558,7 +558,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private void linkeddataTabActions(int idSpecies, Integer natObjId) {
         try {
             Properties props = new Properties();
-            props.load(getClass().getClassLoader().getResourceAsStream("linkeddata_species.properties"));
+            props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_species.xml"));
             LinkedData fd = new LinkedData(props, natObjId);
             queries = fd.getQueryObjects();
 

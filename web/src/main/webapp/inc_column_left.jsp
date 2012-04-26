@@ -63,10 +63,7 @@
         <a class="navItemLevel1" href="<%=request.getContextPath()%>/references" accesskey="r" title="<%=cm.cmsPhrase("View references used in EUNIS")%>"><%=cm.cmsPhrase("References")%></a>
       </li>
       <li class="navTreeItem visualNoMarker">
-        <a class="navItemLevel1" id="digir_url_link" href="<%=request.getContextPath()%>/digir.jsp" title="<%=cm.cmsPhrase("View DiGIR application provider information")%>"><%=cm.cmsPhrase("DiGIR Provider")%></a>
-      </li>
-      <li class="navTreeItem visualNoMarker">
-        <a class="navItemLevel1" href="<%=request.getContextPath()%>/related-reports.jsp" accesskey="p" title="<%=cm.cmsPhrase("View and download reports on biodiversity")%>"><%=cm.cmsPhrase("Related reports")%></a>
+        <a class="navItemLevel1" href="<%=request.getContextPath()%>/related-reports.jsp" accesskey="p" title="<%=cm.cmsPhrase("Files and links related to biodiversity")%>"><%=cm.cmsPhrase("Downloads and links")%></a>
       </li>
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" href="<%=request.getContextPath()%>/introduction_to_google_earth.jsp" accesskey="l" title="<%=cm.cmsPhrase("Google Earth network link")%>"><%=cm.cmsPhrase("Google Earth network link")%></a>
@@ -97,19 +94,16 @@
         <a class="navItemLevel1" title="<%=cm.cmsPhrase("EUNIS Database latest news")%>" href="<%=request.getContextPath()%>/news.jsp"><%=cm.cmsPhrase( "EUNIS News" )%></a>
       </li>
       <li class="navTreeItem visualNoMarker">
-        <a class="navItemLevel1" href="http://biodiversity-chm.eea.europa.eu/information/database/" title="<%=cm.cmsPhrase("Other nature information sources")%>"><%=cm.cmsPhrase("Related databases")%></a>
-      </li>
-      <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" href="mailto:<%=application.getInitParameter("EMAIL_FEEDBACK")%>" accesskey="9" title="<%=cm.cmsPhrase("Contact EUNIS site administrator")%>"><%=cm.cmsPhrase("Contact EUNIS")%></a>
       </li>
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" href="<%=request.getContextPath()%>/feedback.jsp" title="<%=cm.cmsPhrase("Send feedback on EUNIS Database")%>"><%=cm.cmsPhrase("EUNIS Feedback")%></a>
       </li>
       <li class="navTreeItem visualNoMarker">
-        <a class="navItemLevel1" href="<%=request.getContextPath()%>/copyright.jsp" title="<%=cm.cmsPhrase("Copyright and Privacy Policy for EUNIS Database")%>"><%=cm.cmsPhrase("EUNIS Copyright and Disclaimer")%></a>
+        <a class="navItemLevel1" href="<%=request.getContextPath()%>/copyright.jsp" title="<%=cm.cmsPhrase("Copyright and Privacy Policy for EUNIS Database")%>"><%=cm.cmsPhrase("Copyright and Disclaimer")%></a>
       </li>
       <li class="navTreeItem visualNoMarker">
-        <a class="navItemLevel1" href="<%=request.getContextPath()%>/accessibility.jsp" title="<%=cm.cmsPhrase("Accessibility statement")%>" accesskey="0"><%=cm.cmsPhrase("Eunis Accessibility statement")%></a>
+        <a class="navItemLevel1" href="<%=request.getContextPath()%>/accessibility.jsp" title="<%=cm.cmsPhrase("Accessibility statement")%>" accesskey="0"><%=cm.cmsPhrase("Accessibility statement")%></a>
       </li>
     </ul>
     <span class="portletBottomLeft"></span>

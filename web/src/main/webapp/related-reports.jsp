@@ -123,7 +123,7 @@
                 <a name="documentContent"></a>
 <!-- MAIN CONTENT -->
               <h1>
-                <%=cm.cmsPhrase("Related reports")%>
+                <%=cm.cmsPhrase("Downloads and links")%>
               </h1>
                 <div class="documentActions">
                   <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
@@ -141,7 +141,9 @@
                   </ul>
                 </div>
               <br />
+		<p class="documentDescription">
               <%=cm.cmsPhrase("From this page you can download additional reports related to biodiversity")%>.
+		</p>
           <%
             // If there are documents pending, display this to the user who has such right, to know this.
             if(RelatedReportsUtil.listPendingReports().size() > 0 && SessionManager.isAuthenticated() && SessionManager.isUpload_reports_RIGHT())
@@ -168,11 +170,11 @@
             if(approvedReportsList.size() == 0)
             {
           %>
-              <br />
+              <p>
               <strong>
                 <%=cm.cmsPhrase("No documents available for download at this time")%>.
               </strong>
-              <br />
+              </p>
           <%
             }
             else
@@ -340,6 +342,9 @@
                 <%=cm.cmsMsg("related_reports_approval_deletefiles")%>
                 <%=cm.br()%>
                 <%=cm.cmsMsg("related_reports_approval_files")%>
+                <br />
+                <%=cm.cmsText("related_reports_links")%>
+                <%=cm.br()%>
 <!-- END MAIN CONTENT -->
               </div>
             </div>

@@ -140,7 +140,6 @@
                     </li>
                   </ul>
                 </div>
-              <br />
 		<p class="documentDescription">
               <%=cm.cmsPhrase("From this page you can download additional reports related to biodiversity")%>.
 		</p>

@@ -7,8 +7,8 @@
                         <link rel="alternate" type="application/rdf+xml" title="RDF" href="${pageContext.request.contextPath}/habitats/${actionBean.idHabitat}/rdf" />
                 </c:if>
 
-		<script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
-		<script language="JavaScript" type="text/javascript">
+		<script src="script/overlib.js" type="text/javascript"></script>
+		<script type="text/javascript">
 		    //<![CDATA[
 		      function openpictures( URL, width, height )
 			  {
@@ -68,7 +68,7 @@
 								</li>
 							</ul>
 						</div>
-						<br clear="all" />
+						<br style="clear:both;" />
 						<c:if test="${!actionBean.mini}">
 							<div id="tabbedmenu">
 								<ul>
@@ -92,7 +92,7 @@
 									</c:forEach>
 								</ul>
 							</div>
-							<br  style="clear:both;" clear="all" />
+							<br style="clear:both;" clear="all" />
 						</c:if>
 						<br />
 						<c:if test="${actionBean.tab == 'general'}">
@@ -131,7 +131,7 @@
 		                </c:if>
 						<c:if test="${actionBean.tab == 'other'}">
 							<c:if test="${actionBean.factsheet.eunis}">
-								<script language="JavaScript" type="text/javascript">
+								<script type="text/javascript">
 								//<![CDATA[
 									function otherInfo(info) {
 				                    	var ctrl_info = document.getElementById("otherInfo" + info);
@@ -204,7 +204,7 @@
 			</c:otherwise>
 		</c:choose>
 		<!-- END MAIN CONTENT -->
-		<script language="JavaScript" type="text/javascript">
+		<script type="text/javascript">
 	      	//<![CDATA[
 			try {
 				var ctrl_loading = document.getElementById("loading");
@@ -220,6 +220,28 @@
 					<jsp:include page="/inc_column_left.jsp">
 						<jsp:param name="page_name" value="habitats" />
 					</jsp:include>
+<dl class="portlet portlet-navigation-tree">
+  <dd class="portletItem">
+    <ul class="portletNavigationTree navTreeLevel0">
+        <c:if test="${actionBean.factsheet.hasPictures}">
+      <li class="navTreeItem visualNoMarker">
+                <a href="javascript:openpictures('${actionBean.domainName}/pictures.jsp?idobject=${actionBean.idHabitat}&amp;natureobjecttype=Habitats',600,600)">
+                        ${eunis:cmsPhrase(actionBean.contentManagement, 'View pictures')}
+                </a>
+      </li>
+        </c:if>
+        <c:if test="${actionBean.context.sessionManager.authenticated && actionBean.context.sessionManager.upload_pictures_RIGHT}">
+      <li class="navTreeItem visualNoMarker">
+                <a href="javascript:openpictures('${actionBean.domainName}/pictures-upload.jsp?operation=upload&amp;idobject=${actionBean.idHabitat}&amp;natureobjecttype=Habitats',600,600)">
+                        ${eunis:cmsPhrase(actionBean.contentManagement, 'Upload pictures')}
+                </a>
+      </li>
+        </c:if>
+    </ul>
+    <span class="portletBottomLeft"></span>
+    <span class="portletBottomRight"></span>
+  </dd>
+</dl>
 				</div>
 			</div>
           	<!-- end of the left (by default at least) column -->
@@ -236,4 +258,3 @@
 		<div class="visualClear"><!-- --></div>
 	</stripes:layout-component>
 </stripes:layout-render>
-

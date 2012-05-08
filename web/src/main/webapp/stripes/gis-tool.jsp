@@ -6,7 +6,7 @@
 		<!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
 		<title>${actionBean.pageTitle}</title>
-		<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.3/js/dojo/dijit/themes/claro/claro.css">
+		<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.3/js/dojo/dijit/themes/claro/claro.css"/>
 		<style>
 			html, body { height: 98%; width: 98%; margin: 0; padding: 5px; }
 			#rightPane{

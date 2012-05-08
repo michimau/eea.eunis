@@ -5,7 +5,7 @@
 		<div class="naturepic-plus-container naturepic-right">
 	  		<div class="naturepic-plus">
 	    		<div class="naturepic-image">
-			   		<a href="javascript:openpictures('${actionBean.pic.domain}/pictures.jsp?idobject=${actionBean.idSpecies}&amp;natureobjecttype=Species',600,600)"">
+			   		<a href="javascript:openpictures('${actionBean.pic.domain}/pictures.jsp?idobject=${actionBean.idSpecies}&amp;natureobjecttype=Species',600,600)">
 				    	<img src="${actionBean.pic.path}/${actionBean.pic.filename}" alt="${actionBean.pic.description}" class="scaled" style="${actionBean.pic.style}"/>
 				    </a>
 			    </div>
@@ -105,7 +105,7 @@
 			</c:choose>
 			<c:if test="${!empty actionBean.specie.genus && !empty actionBean.speciesName}">
 				<div>
-		        	<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'Search species on UNEP-WCMC')}" href="http://www.unep-wcmc-apps.org/isdb/Taxonomy/tax-gs-search2.cfm?displaylanguage=ENG&source=${actionBean.kingdomname}&amp;GenName=${actionBean.specie.genus}&amp;SpcName=${eunis:treatURLSpecialCharacters(actionBean.speciesName)}">${eunis:cmsPhrase(actionBean.contentManagement, 'UNEP-WCMC search')}</a>
+		        	<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'Search species on UNEP-WCMC')}" href="http://www.unep-wcmc-apps.org/isdb/Taxonomy/tax-gs-search2.cfm?displaylanguage=ENG&amp;source=${actionBean.kingdomname}&amp;GenName=${actionBean.specie.genus}&amp;SpcName=${eunis:treatURLSpecialCharacters(actionBean.speciesName)}">${eunis:cmsPhrase(actionBean.contentManagement, 'UNEP-WCMC search')}</a>
 		      	</div>
 			</c:if>
 			<c:choose>
@@ -295,7 +295,7 @@
   		<h2 style="clear: both">
     		${eunis:cmsPhrase(actionBean.contentManagement, 'Synonyms')}
   		</h2>
-  		<table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'species_factsheet_10_Sum')}" class="listing fullwidth">
+  		<table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'List of synonyms')}" class="listing fullwidth">
     		<col style="width:40%"/>
     		<col style="width:60%"/>
     		<thead>
@@ -328,7 +328,7 @@
   		<h2 style="clear: both">
     		${eunis:cmsPhrase(actionBean.contentManagement, 'Valid subspecies in Europe')}
   		</h2>
-  		<table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'species_factsheet_11_Sum')}" class="listing fullwidth">
+  		<table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'List of subspecies')}" class="listing fullwidth">
     		<col style="width:40%"/>
     		<col style="width:60%"/>
     		<thead>
@@ -358,19 +358,5 @@
     		</tbody>
   		</table>
   	</c:if>
-  	<br />
-  	<br />
-	<c:if test="${actionBean.factsheet.hasPictures}">
-		<a href="javascript:openpictures('${actionBean.domainName}/pictures.jsp?idobject=${actionBean.idSpecies}&amp;natureobjecttype=Species',600,600)">${eunis:cmsPhrase(actionBean.contentManagement, 'View pictures')}</a>
-	</c:if>
-	<br/>
-	<c:if test="${actionBean.context.sessionManager.authenticated && actionBean.context.sessionManager.upload_pictures_RIGHT}">
-		<a href="javascript:openpictures('${actionBean.domainName}/pictures-upload.jsp?operation=upload&amp;idobject=${actionBean.idSpecies}&amp;natureobjecttype=Species',600,600)">${eunis:cmsPhrase(actionBean.contentManagement, 'Upload pictures')}</a>
-	</c:if>
-	${eunis:br(actionBean.contentManagement)}
-	${eunis:cmsMsg(actionBean.contentManagement, 'species_factsheet_10_Sum')}
-	${eunis:br(actionBean.contentManagement)}
-	${eunis:cmsMsg(actionBean.contentManagement, 'species_factsheet_11_Sum')}
-	<br />
   	<br />
 </stripes:layout-definition>

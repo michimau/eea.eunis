@@ -12,8 +12,8 @@
 </c:choose>
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}">
 	<stripes:layout-component name="head">
-		<script language="JavaScript" src="script/species.js" type="text/javascript"></script>
-    	<script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
+		<script src="script/species.js" type="text/javascript"></script>
+		<script src="script/overlib.js" type="text/javascript"></script>
 		<link rel="alternate"
 			type="application/rdf+xml" title="RDF"
 			href="${pageContext.request.contextPath}/species/${actionBean.idSpecies}/rdf" />
@@ -180,6 +180,25 @@
               		<jsp:include page="/inc_column_left.jsp">
                 		<jsp:param name="page_name" value="species-factsheet.jsp" />
               		</jsp:include>
+<dl class="portlet portlet-navigation-tree">
+  <dd class="portletItem">
+    <ul class="portletNavigationTree navTreeLevel0">
+        <c:if test="${actionBean.factsheet.hasPictures}">
+      <li class="navTreeItem visualNoMarker">
+                <a href="javascript:openpictures('${actionBean.domainName}/pictures.jsp?idobject=${actionBean.idSpecies}&amp;natureobjecttype=Species',600,600)">${eunis:cmsPhrase(actionBean.contentManagement, 'View pictures')}</a>
+      </li>
+        </c:if>
+        <c:if test="${actionBean.context.sessionManager.authenticated && actionBean.context.sessionManager.upload_pictures_RIGHT}">
+      <li class="navTreeItem visualNoMarker">
+                <a href="javascript:openpictures('${actionBean.domainName}/pictures-upload.jsp?operation=upload&amp;idobject=${actionBean.idSpecies}&amp;natureobjecttype=Species',600,600)">${eunis:cmsPhrase(actionBean.contentManagement, 'Upload pictures')}</a>
+      </li>
+        </c:if>
+    </ul>
+    <span class="portletBottomLeft"></span>
+    <span class="portletBottomRight"></span>
+  </dd>
+</dl>
+
             	</div>
           	</div>
           	<!-- end of the left (by default at least) column -->

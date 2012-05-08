@@ -26,7 +26,7 @@
     }
   }
 %>
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
   function saveBookmark()
   {
     var URL = "users-bookmarks-save.jsp?bookmarkURL=<%=URLEncoder.encode( bookmarkURL, "UTF-8" )%>";
@@ -111,7 +111,7 @@
   </dd>
   <dt class="portletHeader">
     <br />
-    <%=cm.cmsPhrase("User preferences")%>
+    <%=cm.cmsPhrase("User operations")%>
   </dt>
   <dd class="portletItem lastItem">
     <ul class="portletNavigationTree navTreeLevel0">

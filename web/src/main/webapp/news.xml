@@ -20,13 +20,6 @@
             <dc:date>2005-12-23</dc:date>
         </item>
         <item>
-            <title>EUNIS DiGIR Provider</title>
-            <link>http://eunis.eea.europa.eu/digir.jsp</link>
-            <description>The DiGIR Provider was updated - More than 1.500.000 records provided by EUNIS 2</description>
-            <dc:creator>EEA - European Environment Agency</dc:creator>
-          <dc:date>2005-12-23</dc:date>
-        </item>
-        <item>
             <title>EUNIS documentation</title>
             <link>http://eunis.eea.europa.eu</link>
             <description>The EUNIS 2 documentation was updated for this release</description>
@@ -34,5 +27,5 @@
           <dc:date>2005-12-23</dc:date>
         </item>
     </channel>
-</rss> 
+</rss>
 

@@ -63,9 +63,6 @@
         <a href="<%=domain%>/login.jsp" accesskey="l" title="<%=cm.cmsPhrase("User login")%>"><%=cm.cmsPhrase("EUNIS Login")%></a>
       </td>
       <td style="padding-left : 5px;">
-        <a id="digir_url_link" href="<%=domain%>/digir.jsp" title="<%=cm.cmsPhrase("View DiGIR application provider information")%>"><%=cm.cmsPhrase("DiGIR Provider")%></a>
-      </td>
-      <td style="padding-left : 5px;">
         <a href="<%=domain%>/references" accesskey="r" title="<%=cm.cmsPhrase("View references used in EUNIS")%>"><%=cm.cmsPhrase("References")%></a>
       </td>
       <td style="padding-left : 5px;">

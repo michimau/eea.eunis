@@ -79,4 +79,3 @@
   <%=cm.cmsTitle("accessibility_statement")%>
   <img src="images/pixel.gif" width="10" height="1" alt="" />
 </div>
-<%--<jsp:include page="digir_check.jsp" />--%>

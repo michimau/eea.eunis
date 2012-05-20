@@ -38,6 +38,7 @@
     <void:subset rdf:resource="#images"/>
     <void:subset rdf:resource="#legalrefs"/>
     <void:subset rdf:resource="#references"/>
+    <void:subset rdf:resource="#regioncoverage"/>
     <void:subset rdf:resource="#sites"/>
     <void:subset rdf:resource="#species"/>
     <void:subset rdf:resource="#speciesgroup"/>
@@ -132,6 +133,14 @@
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/references.rdf.gz"/>
+    <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
+  </void:Dataset>
+
+  <void:Dataset rdf:ID="regioncoverage">
+    <dcterms:title>Region coverage of protected sites from EUNIS</dcterms:title>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/regioncoverage.rdf.gz"/>
     <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
 

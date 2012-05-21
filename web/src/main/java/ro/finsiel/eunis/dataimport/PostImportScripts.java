@@ -41,9 +41,6 @@ public class PostImportScripts extends HttpServlet {
             "JDBC_PWD");
 
             String sites = request.getParameter("sites");
-            String empty_digir = request.getParameter("empty_digir");
-            String digir = request.getParameter("digir");
-            String statistics = request.getParameter("statistics");
             String spiecesTab = request.getParameter("spiecesTab");
             String habitatsTab = request.getParameter("habitatsTab");
             String sitesTab = request.getParameter("sitesTab");
@@ -65,9 +62,6 @@ public class PostImportScripts extends HttpServlet {
                     jobDetail.getJobDataMap().put("sqlPwd", SQL_PWD);
 
                     jobDetail.getJobDataMap().put("sites", sites);
-                    jobDetail.getJobDataMap().put("empty_digir", empty_digir);
-                    jobDetail.getJobDataMap().put("digir", digir);
-                    jobDetail.getJobDataMap().put("statistics", statistics);
                     jobDetail.getJobDataMap().put("spiecesTab", spiecesTab);
                     jobDetail.getJobDataMap().put("sitesTab", sitesTab);
                     jobDetail.getJobDataMap().put("habitatsTab", habitatsTab);
@@ -90,21 +84,6 @@ public class PostImportScripts extends HttpServlet {
 
                     if (sites != null && sites.equals("on")) {
                         sql.runPostImportSitesScript(false);
-                    }
-
-                    if (empty_digir != null && empty_digir.equals("on")) {
-                        sql.emptyDigiTable();
-                    }
-
-                    if (digir != null && digir.equals("on")) {
-                        PopulateDigir pd = new PopulateDigir();
-
-                        pd.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD, false);
-                        pd.populate();
-                    }
-
-                    if (statistics != null && statistics.equals("on")) {
-                        sql.generateDigirStatistics();
                     }
 
                     TabScripts scripts = new TabScripts();

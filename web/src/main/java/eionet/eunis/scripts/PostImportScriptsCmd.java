@@ -2,7 +2,6 @@ package eionet.eunis.scripts;
 
 import java.util.ResourceBundle;
 
-import ro.finsiel.eunis.dataimport.PopulateDigir;
 import ro.finsiel.eunis.dataimport.TabScripts;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
@@ -16,7 +15,7 @@ public class PostImportScriptsCmd {
         if (args.length == 0) {
             System.out.println("Missing argument!");
             System.out
-            .println("Possible first arguments are: sites, empty_digir, digir, statistics, species_tab, sites_tab, habitats_tab, linkeddata_tab, taxonomy_tree");
+            .println("Possible first arguments are: sites, species_tab, sites_tab, habitats_tab, linkeddata_tab, taxonomy_tree");
         } else {
             try {
                 ResourceBundle props = ResourceBundle.getBundle("jrf");
@@ -32,14 +31,6 @@ public class PostImportScriptsCmd {
 
                 if (args[0].equals("sites")) {
                     sql.runPostImportSitesScript(true);
-                } else if (args[0].equals("empty_digir")) {
-                    sql.emptyDigiTable();
-                } else if (args[0].equals("digir")) {
-                    PopulateDigir pd = new PopulateDigir();
-                    pd.Init(dbDriver, dbUrl, dbUser, dbPass, true);
-                    pd.populate();
-                } else if (args[0].equals("statistics")) {
-                    sql.generateDigirStatistics();
                 } else if (args[0].equals("taxonomy_tree")) {
                     sql.reconstructTaxonomyTree();
                 } else {

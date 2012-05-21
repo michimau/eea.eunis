@@ -18,7 +18,6 @@ import java.util.List;
 
 import ro.finsiel.eunis.dataimport.ColumnDTO;
 import ro.finsiel.eunis.dataimport.ImportLogDTO;
-import ro.finsiel.eunis.search.Utilities;
 import eionet.eunis.dto.DoubleDTO;
 
 /**
@@ -109,7 +108,7 @@ public class SQLUtilities {
             prepared = prepareStatement(sql, params, connection);
             result = prepared.executeQuery();
             while (result.next()) {
-                resultList.add((T) result.getObject(1));
+                resultList.add((T)result.getObject(1));
             }
             return resultList;
         } catch (Exception ex) {
@@ -1315,80 +1314,6 @@ public class SQLUtilities {
             e.printStackTrace();
         } finally {
             closeAll(con, ps, null);
-        }
-    }
-
-    /**
-     * Execute DELETE statement
-     */
-    public void emptyDigiTable() {
-
-        Connection con = null;
-        PreparedStatement ps = null;
-
-        try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-            ps = con.prepareStatement("DELETE FROM EUNIS_DIGIR");
-            ps.executeUpdate();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            closeAll(con, ps, null);
-        }
-    }
-
-    /**
-     * Execute UPDATE statement
-     */
-    public void generateDigirStatistics() {
-
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
-
-            int nTotalSpecies = Utilities.checkedStringToInt(ExecuteSQL("select count(*) from eunis_digir"), 0);
-            int nDistinctSpecies =
-                Utilities.checkedStringToInt(ExecuteSQL("select count(DISTINCT ScientificName) from eunis_digir"), 0);
-            int nSpeciesWithCountry =
-                Utilities.checkedStringToInt(ExecuteSQL("select count(*) from eunis_digir where Country is not null"), 0);
-            int nSpeciesWithLatLong =
-                Utilities
-                .checkedStringToInt(
-                        ExecuteSQL("select count(*) from eunis_digir where DecimalLatitude is not null AND  DecimalLongitude is not null"),
-                        0);
-            int nSpeciesFromHabitats =
-                Utilities.checkedStringToInt(
-                        ExecuteSQL("select count(*) from eunis_digir where GlobalUniqueIdentifier LIKE '%SPECHAB%'"), 0);
-            int nSpeciesFromSites =
-                Utilities.checkedStringToInt(
-                        ExecuteSQL("select count(*) from eunis_digir where GlobalUniqueIdentifier LIKE '%SPECSITE%'"), 0);
-
-            ps = con.prepareStatement("DELETE FROM EUNIS_DIGIR_STATS");
-            ps.executeUpdate();
-
-            ps =
-                con.prepareStatement("INSERT INTO EUNIS_DIGIR_STATS (TotalSpecies, DistinctSpecies, SpeciesWithCountry, "
-                        + "SpeciesWithLatLong, SpeciesFromHabitats, SpeciesFromSites, DateLastModified) VALUES (?,?,?,?,?,?,NOW())");
-
-            ps.setInt(1, nTotalSpecies);
-            ps.setInt(2, nDistinctSpecies);
-            ps.setInt(3, nSpeciesWithCountry);
-            ps.setInt(4, nSpeciesWithLatLong);
-            ps.setInt(5, nSpeciesFromHabitats);
-            ps.setInt(6, nSpeciesFromSites);
-
-            ps.executeUpdate();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            closeAll(con, ps, rs);
         }
     }
 

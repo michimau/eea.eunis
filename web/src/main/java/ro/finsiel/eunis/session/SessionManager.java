@@ -80,9 +80,6 @@ public final class SessionManager implements java.io.Serializable {
     private String combinednatureobject3 = "";
     private String combinedcombinationtype = "";
 
-    private boolean digirProviderRunChecked = false;
-    private boolean digirProviderRunning = false;
-
     private String cacheReportEmailAddress = "";
 
     boolean languageDetected = false;
@@ -418,22 +415,22 @@ public final class SessionManager implements java.io.Serializable {
                 Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USR,
                         JDBC_PWD);
                 PreparedStatement ps = null;
-            
+
                 UserPersist user = findUser(username);
 
                 if (user == null) {
                     ps = conn.prepareStatement(
                             "INSERT INTO EUNIS_USERS (USERNAME) VALUES ('"
-                                    + username + "')");
+                            + username + "')");
                     ps.execute();
                     ps = conn.prepareStatement(
                             "INSERT INTO EUNIS_USERS_ROLES (USERNAME, ROLENAME) VALUES ('"
-                                    + username + "','Guest')");
+                            + username + "','Guest')");
                     ps.execute();
                 }
-            
+
                 ps = conn.prepareStatement(
-                        "UPDATE EUNIS_USERS SET LOGIN_DATE=? WHERE USERNAME=?");
+                "UPDATE EUNIS_USERS SET LOGIN_DATE=? WHERE USERNAME=?");
                 ps.setTimestamp(1, new java.sql.Timestamp(new Date().getTime()));
                 ps.setString(2, username);
                 ps.execute();
@@ -450,7 +447,7 @@ public final class SessionManager implements java.io.Serializable {
                     Connection conn = DriverManager.getConnection(JDBC_URL,
                             JDBC_USR, JDBC_PWD);
                     PreparedStatement ps = conn.prepareStatement(
-                            "INSERT INTO EUNIS_SESSION_LOG (ID_SESSION, USERNAME, START, END, IP_ADDRESS) VALUES (?, ?, ?, ?, ?)");
+                    "INSERT INTO EUNIS_SESSION_LOG (ID_SESSION, USERNAME, START, END, IP_ADDRESS) VALUES (?, ?, ?, ?, ?)");
 
                     ps.setString(1, sessionID);
                     ps.setString(2, username);
@@ -463,7 +460,7 @@ public final class SessionManager implements java.io.Serializable {
                 }
             } else {
                 System.out.println(
-                        "SessionManager::login(...) - request object was null.");
+                "SessionManager::login(...) - request object was null.");
             }
         } else {
             System.out.println(
@@ -532,7 +529,7 @@ public final class SessionManager implements java.io.Serializable {
                 }
             } catch (Exception ex) {
                 System.err.println(
-                        "Could not save into database user preferences:");
+                "Could not save into database user preferences:");
                 ex.printStackTrace();
             }
         }
@@ -569,42 +566,42 @@ public final class SessionManager implements java.io.Serializable {
                         login_RIGHT = true;
                     }
                     if (((String) userRights.get(i)).equalsIgnoreCase(
-                            "upload_reports")) {
+                    "upload_reports")) {
                         upload_reports_RIGHT = true;
                     }
                     if (((String) userRights.get(i)).equalsIgnoreCase("services")) {
                         services_RIGHT = true;
                     }
                     if (((String) userRights.get(i)).equalsIgnoreCase(
-                            "save_search_criteria")) {
+                    "save_search_criteria")) {
                         save_search_criteria_RIGHT = true;
                     }
                     if (((String) userRights.get(i)).equalsIgnoreCase(
-                            "content_management")) {
+                    "content_management")) {
                         content_management_RIGHT = true;
                     }
                     if (((String) userRights.get(i)).equalsIgnoreCase(
-                            "import/export_data")) {
+                    "import/export_data")) {
                         import_export_data_RIGHT = true;
                     }
                     if (((String) userRights.get(i)).equalsIgnoreCase(
-                            "user_management")) {
+                    "user_management")) {
                         manage_users = true;
                     }
                     if (((String) userRights.get(i)).equalsIgnoreCase(
-                            "role_management")) {
+                    "role_management")) {
                         role_management_RIGHT = true;
                     }
                     if (((String) userRights.get(i)).equalsIgnoreCase(
-                            "upload_pictures")) {
+                    "upload_pictures")) {
                         upload_pictures_RIGHT = true;
                     }
                     if (((String) userRights.get(i)).equalsIgnoreCase(
-                            "show_novalidated_species")) {
+                    "show_novalidated_species")) {
                         showEUNISInvalidatedSpecies = true;
                     }
                     if (((String) userRights.get(i)).equalsIgnoreCase(
-                            "edit_glossary")) {
+                    "edit_glossary")) {
                         edit_glossary_RIGHT = true;
                     }
                 }
@@ -616,7 +613,7 @@ public final class SessionManager implements java.io.Serializable {
                 for (int i = 0; i < userRoles.size(); i++) {
                     // System.out.println("rigth="+userRoles.get(i));
                     if (((String) userRoles.get(i)).equalsIgnoreCase(
-                            "administrator")) {
+                    "administrator")) {
                         admin_ROLE = true;
                     }
                 }
@@ -837,7 +834,7 @@ public final class SessionManager implements java.io.Serializable {
     public boolean isContent_management_RIGHT() {
         return content_management_RIGHT;
     }
-  
+
     /**
      * Getter for Import/Export Data.
      * @return True is user has the right to import or export data.
@@ -884,40 +881,6 @@ public final class SessionManager implements java.io.Serializable {
      */
     public boolean isEdit_glossary() {
         return edit_glossary_RIGHT;
-    }
-
-    /**
-     * Getter for digirProviderRunChecked property. Digir provider is checked if
-     * runs every time a new session is spawned, then is no longer checked in
-     * order to prevent opening multiple connections to server, each request.
-     * @return digirProviderRunChecked (if check has been done)
-     */
-    public boolean isDigirProviderRunChecked() {
-        return digirProviderRunChecked;
-    }
-
-    /**
-     * Setter for digirProviderRunChecked
-     * @param digirProviderRunChecked New value
-     */
-    public void setDigirProviderRunChecked(boolean digirProviderRunChecked) {
-        this.digirProviderRunChecked = digirProviderRunChecked;
-    }
-
-    /**
-     * Getter for digirProviderRunning. Specifies if digir provider is running.
-     * @return digirProviderRunning
-     */
-    public boolean isDigirProviderRunning() {
-        return digirProviderRunning;
-    }
-
-    /**
-     * Setter for digirProviderRunning property
-     * @param digirProviderRunning New value
-     */
-    public void setDigirProviderRunning(boolean digirProviderRunning) {
-        this.digirProviderRunning = digirProviderRunning;
     }
 
     /**

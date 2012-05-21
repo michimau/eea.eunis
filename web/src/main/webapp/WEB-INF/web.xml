@@ -1,584 +1,564 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID"
-	version="2.4">
-	<!-- OLD ENV -->
-	<!-- Application name -->
-	<display-name>EUNIS Database</display-name>
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+    http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID"
+    version="2.4">
+    <!-- OLD ENV -->
+    <!-- Application name -->
+    <display-name>EUNIS Database</display-name>
 
-	<!-- Short description -->
-	<description>EUNIS Database</description>
+    <!-- Short description -->
+    <description>EUNIS Database</description>
 
-	<!--
-		Context initialization parameters which can be retrieved from servlets
-		or JSP by calling
-		getServletConfig().getServletContext().getInitParameter("param-name")
-		or application.getInitParameter("param-name");
-	-->
-	<context-param>
-		<param-name>DOMAIN_NAME</param-name>
-		<param-value>${domain.name}</param-value>
-		<description>Domain where application is installed</description>
-	</context-param>
+    <!--
+        Context initialization parameters which can be retrieved from servlets
+        or JSP by calling
+        getServletConfig().getServletContext().getInitParameter("param-name")
+        or application.getInitParameter("param-name");
+    -->
+    <context-param>
+        <param-name>DOMAIN_NAME</param-name>
+        <param-value>${domain.name}</param-value>
+        <description>Domain where application is installed</description>
+    </context-param>
 
-	<context-param>
-		<param-name>DIGIR_URL</param-name>
-		<param-value>http://eunis.eea.europa.eu:8980/digir/</param-value>
-		<description>DiGIR provider</description>
-	</context-param>
+    <context-param>
+        <param-name>TOMCAT_HOME</param-name>
+        <param-value>${tomcat.home}</param-value>
+        <description>Tomcat installation directory</description>
+    </context-param>
 
-	<context-param>
-		<param-name>DIGIR_SERVICE</param-name>
-		<param-value>http://eunis.eea.europa.eu:8980/digir/DiGIR.php</param-value>
-		<description>XML for the DiGIR service</description>
-	</context-param>
+    <!-- Static part of the page title (JSPs)-->
+    <context-param>
+        <param-name>PAGE_TITLE</param-name>
+        <param-value>EUNIS - </param-value>
+        <description>Static part of the pages title</description>
+    </context-param>
 
-	<context-param>
-		<param-name>TOMCAT_HOME</param-name>
-		<param-value>${tomcat.home}</param-value>
-		<description>Tomcat installation directory</description>
-	</context-param>
+    <!-- Feedback e-mail address -->
+    <context-param>
+        <param-name>EMAIL_FEEDBACK</param-name>
+        <param-value>eunis@eea.europa.eu</param-value>
+        <description>Mail address where feedback is sent</description>
+    </context-param>
 
-	<!-- Static part of the page title (JSPs)-->
-	<context-param>
-		<param-name>PAGE_TITLE</param-name>
-		<param-value>EUNIS - </param-value>
-		<description>Static part of the pages title</description>
-	</context-param>
+    <context-param>
+        <param-name>SMTP_SERVER</param-name>
+        <param-value>localhost</param-value>
+        <description>Relay SMTP server</description>
+    </context-param>
 
-	<!-- Feedback e-mail address -->
-	<context-param>
-		<param-name>EMAIL_FEEDBACK</param-name>
-		<param-value>eunis@eea.europa.eu</param-value>
-		<description>Mail address where feedback is sent</description>
-	</context-param>
+    <context-param>
+        <param-name>SMTP_USERNAME</param-name>
+        <param-value></param-value>
+        <description>SMTP authentication ( if applicable )</description>
+    </context-param>
 
-	<context-param>
-		<param-name>SMTP_SERVER</param-name>
-		<param-value>localhost</param-value>
-		<description>Relay SMTP server</description>
-	</context-param>
+    <context-param>
+        <param-name>SMTP_PASSWORD</param-name>
+        <param-value></param-value>
+        <description>SMTP password ( if applicable )</description>
+    </context-param>
 
-	<context-param>
-		<param-name>SMTP_USERNAME</param-name>
-		<param-value></param-value>
-		<description>SMTP authentication ( if applicable )</description>
-	</context-param>
+    <context-param>
+        <param-name>SMTP_SENDER</param-name>
+        <param-value>eunis@eea.europa.eu</param-value>
+        <description>E-mail address for account sending feedback(FROM field on
+            the e-mail message)</description>
+    </context-param>
 
-	<context-param>
-		<param-name>SMTP_PASSWORD</param-name>
-		<param-value></param-value>
-		<description>SMTP password ( if applicable )</description>
-	</context-param>
+    <!-- Font location for PDF generation -->
+    <context-param>
+        <param-name>PDF_FONT</param-name>
+        <param-value>fonts/arial.ttf</param-value>
+        <description>Platform dependent variable which specifies the location of font used in pdf generation</description>
+    </context-param>
 
-	<context-param>
-		<param-name>SMTP_SENDER</param-name>
-		<param-value>eunis@eea.europa.eu</param-value>
-		<description>E-mail address for account sending feedback(FROM field on
-			the e-mail message)</description>
-	</context-param>
+    <!-- Here temp files are stored -->
+    <context-param>
+        <param-name>TEMP_DIR</param-name>
+        <param-value>temp/</param-value>
+        <description>Platform dependent variable which specifies where the
+            temporary files should be created</description>
+    </context-param>
 
-	<!-- Font location for PDF generation -->
-	<context-param>
-		<param-name>PDF_FONT</param-name>
-		<param-value>fonts/arial.ttf</param-value>
-		<description>Platform dependent variable which specifies the location of font used in pdf generation</description>
-	</context-param>
+    <!-- Upload directory for reports (related reports) -->
+    <context-param>
+        <param-name>UPLOAD_DIR_FILES</param-name>
+        <param-value>upload/</param-value>
+        <description>Upload path for related reports</description>
+    </context-param>
 
-	<!-- Here temp files are stored -->
-	<context-param>
-		<param-name>TEMP_DIR</param-name>
-		<param-value>temp/</param-value>
-		<description>Platform dependent variable which specifies where the
-			temporary files should be created</description>
-	</context-param>
+    <!-- Upload directory for pictures (species) -->
+    <context-param>
+        <param-name>UPLOAD_DIR_PICTURES_SPECIES</param-name>
+        <param-value>images/species/</param-value>
+        <description>Upload path for images with species</description>
+    </context-param>
 
-	<!-- Upload directory for reports (related reports) -->
-	<context-param>
-		<param-name>UPLOAD_DIR_FILES</param-name>
-		<param-value>upload/</param-value>
-		<description>Upload path for related reports</description>
-	</context-param>
+    <!-- Upload directory for pictures (habitats) -->
+    <context-param>
+        <param-name>UPLOAD_DIR_PICTURES_HABITATS</param-name>
+        <param-value>images/habitats/</param-value>
+        <description>Upload path for images with habitats</description>
+    </context-param>
 
-	<!-- Upload directory for pictures (species) -->
-	<context-param>
-		<param-name>UPLOAD_DIR_PICTURES_SPECIES</param-name>
-		<param-value>images/species/</param-value>
-		<description>Upload path for images with species</description>
-	</context-param>
+    <!-- Upload directory for pictures (sites) -->
+    <context-param>
+        <param-name>UPLOAD_DIR_PICTURES_SITES</param-name>
+        <param-value>images/sites/</param-value>
+        <description>Upload path for images with sites</description>
+    </context-param>
 
-	<!-- Upload directory for pictures (habitats) -->
-	<context-param>
-		<param-name>UPLOAD_DIR_PICTURES_HABITATS</param-name>
-		<param-value>images/habitats/</param-value>
-		<description>Upload path for images with habitats</description>
-	</context-param>
+    <!--
+        Maximum allowed size for uploaded files (general setting for all
+        files)
+    -->
+    <context-param>
+        <param-name>UPLOAD_FILE_MAX_SIZE</param-name>
+        <param-value>10485760</param-value>
+        <description>Maximum allowed size in bytes for uploaded files on the
+            server (all files)</description>
+    </context-param>
 
-	<!-- Upload directory for pictures (sites) -->
-	<context-param>
-		<param-name>UPLOAD_DIR_PICTURES_SITES</param-name>
-		<param-value>images/sites/</param-value>
-		<description>Upload path for images with sites</description>
-	</context-param>
+    <!-- Maximum allowed sites displayed within GIS tool -->
+    <context-param>
+        <param-name>MAX_SITES_PER_MAP</param-name>
+        <param-value>2000</param-value>
+        <description>Maximum number of sites displayable within GIS tool</description>
+    </context-param>
 
-	<!--
-		Maximum allowed size for uploaded files (general setting for all
-		files)
-	-->
-	<context-param>
-		<param-name>UPLOAD_FILE_MAX_SIZE</param-name>
-		<param-value>10485760</param-value>
-		<description>Maximum allowed size in bytes for uploaded files on the
-			server (all files)</description>
-	</context-param>
+    <!-- Maximum number of results displayed within a result page -->
+    <context-param>
+        <param-name>MAX_RESULTS_PER_PAGE</param-name>
+        <param-value>300</param-value>
+        <description>Maximum number of results displayed within a results page</description>
+    </context-param>
 
-	<!-- Maximum allowed sites displayed within GIS tool -->
-	<context-param>
-		<param-name>MAX_SITES_PER_MAP</param-name>
-		<param-value>2000</param-value>
-		<description>Maximum number of sites displayable within GIS tool</description>
-	</context-param>
-
-	<!-- Maximum number of results displayed within a result page -->
-	<context-param>
-		<param-name>MAX_RESULTS_PER_PAGE</param-name>
-		<param-value>300</param-value>
-		<description>Maximum number of results displayed within a results page</description>
-	</context-param>
-
-	<!-- Maximum number of results displayed within a result page -->
-	<context-param>
-		<param-name>TSV_REPORT_RESULTS_LIMIT_WARNING</param-name>
-		<param-value>4000</param-value>
-		<description>
-			Upper limit for the number of search results.
-			Reaching this limit a warning is displayed to the user that report generation
-			might take a very long time.
-			It might take as long as an hour depending on server load, number of
-			results, complexity of the query.
-			Usually this operation slows or even blocks MySQL database server and
-			impacts other users as well.
+    <!-- Maximum number of results displayed within a result page -->
+    <context-param>
+        <param-name>TSV_REPORT_RESULTS_LIMIT_WARNING</param-name>
+        <param-value>4000</param-value>
+        <description>
+            Upper limit for the number of search results.
+            Reaching this limit a warning is displayed to the user that report generation
+            might take a very long time.
+            It might take as long as an hour depending on server load, number of
+            results, complexity of the query.
+            Usually this operation slows or even blocks MySQL database server and
+            impacts other users as well.
     </description>
-	</context-param>
+    </context-param>
 
-	<!-- Last modification date -->
-	<context-param>
-		<param-name>LAST_UPDATE</param-name>
-		<param-value>27 October 2006</param-value>
-		<description>Date of last modification for the web site</description>
-	</context-param>
+    <!-- Last modification date -->
+    <context-param>
+        <param-name>LAST_UPDATE</param-name>
+        <param-value>27 October 2006</param-value>
+        <description>Date of last modification for the web site</description>
+    </context-param>
 
-	<!-- Application version -->
-	<context-param>
-		<param-name>APP_VERSION</param-name>
-		<param-value>2.0</param-value>
-		<description>Current version of the application</description>
-	</context-param>
+    <!-- Application version -->
+    <context-param>
+        <param-name>APP_VERSION</param-name>
+        <param-value>2.0</param-value>
+        <description>Current version of the application</description>
+    </context-param>
 
-	<!-- JDBC Direct connection characteristics -->
-	<!-- JDBC driver-->
-	<context-param>
-		<param-name>JDBC_DRV</param-name>
-		<param-value>${mysql.driver}</param-value>
-		<description>JDBC Driver used for direct connections to database
-			server</description>
-	</context-param>
+    <!-- JDBC Direct connection characteristics -->
+    <!-- JDBC driver-->
+    <context-param>
+        <param-name>JDBC_DRV</param-name>
+        <param-value>${mysql.driver}</param-value>
+        <description>JDBC Driver used for direct connections to database
+            server</description>
+    </context-param>
 
-	<!-- JDBC URL -->
-	<context-param>
-		<param-name>JDBC_URL</param-name>
-		<param-value>${mysql.url}${mysql.url.ending.escaped}</param-value>
-		<description>JDBC URL to database</description>
-	</context-param>
+    <!-- JDBC URL -->
+    <context-param>
+        <param-name>JDBC_URL</param-name>
+        <param-value>${mysql.url}${mysql.url.ending.escaped}</param-value>
+        <description>JDBC URL to database</description>
+    </context-param>
 
-	<!-- JDBC URL DIGIR-->
-	<context-param>
-		<param-name>JDBC_URL_DIGIR</param-name>
-		<param-value>jdbc:mysql://localhost/digir?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8</param-value>
-		<description>JDBC URL to database</description>
-	</context-param>
+    <!-- JDBC username -->
+    <context-param>
+        <param-name>JDBC_USR</param-name>
+        <param-value>${mysql.user}</param-value>
+        <description>JDBC user</description>
+    </context-param>
 
+    <!-- JDBC password -->
+    <context-param>
+        <param-name>JDBC_PWD</param-name>
+        <param-value>${mysql.password}</param-value>
+        <description>JDBC password for JDBC_USR</description>
+    </context-param>
 
-	<!-- JDBC username -->
-	<context-param>
-		<param-name>JDBC_USR</param-name>
-		<param-value>${mysql.user}</param-value>
-		<description>JDBC user</description>
-	</context-param>
+    <context-param>
+        <param-name>EEA_MAP_SERVER</param-name>
+        <param-value>http://map.eea.europa.eu</param-value>
+        <description>Address of the EEA map server</description>
+    </context-param>
 
-	<!-- JDBC password -->
-	<context-param>
-		<param-name>JDBC_PWD</param-name>
-		<param-value>${mysql.password}</param-value>
-		<description>JDBC password for JDBC_USR</description>
-	</context-param>
+    <context-param>
+        <param-name>EEA_HOME</param-name>
+        <param-value>http://www.eea.europa.eu/</param-value>
+        <description>Address of the EEA server</description>
+    </context-param>
 
-	<context-param>
-		<param-name>EEA_MAP_SERVER</param-name>
-		<param-value>http://map.eea.europa.eu</param-value>
-		<description>Address of the EEA map server</description>
-	</context-param>
+    <context-param>
+        <param-name>EEA_MAP_SERVER_EXTENSION</param-name>
+        <param-value>jpg</param-value>
+        <description>Image file extension for images generated by EEA map
+            server</description>
+    </context-param>
 
-	<context-param>
-		<param-name>EEA_HOME</param-name>
-		<param-value>http://www.eea.europa.eu/</param-value>
-		<description>Address of the EEA server</description>
-	</context-param>
+    <!--
+        <context-param> <param-name>PROXY_URL</param-name>
+        <param-value>192.168.1.245</param-value> <description>Organization
+        proxy server address</description> </context-param> <context-param>
+        <param-name>PROXY_PORT</param-name> <param-value>3128</param-value>
+        <description>Organization proxy server port number</description>
+        </context-param>
+    -->
 
-	<context-param>
-		<param-name>EEA_MAP_SERVER_EXTENSION</param-name>
-		<param-value>jpg</param-value>
-		<description>Image file extension for images generated by EEA map
-			server</description>
-	</context-param>
+    <context-param>
+        <param-name>SITES_PER_MAP</param-name>
+        <param-value>60</param-value>
+        <description>Number of sites displayed for maps generated from EEA
+            server</description>
+    </context-param>
 
-	<!--
-		<context-param> <param-name>PROXY_URL</param-name>
-		<param-value>192.168.1.245</param-value> <description>Organization
-		proxy server address</description> </context-param> <context-param>
-		<param-name>PROXY_PORT</param-name> <param-value>3128</param-value>
-		<description>Organization proxy server port number</description>
-		</context-param>
-	-->
+    <context-param>
+        <param-name>SQL_LIMIT</param-name>
+        <param-value>500000</param-value>
+        <description>Limit of rows returned in advanced and combined search</description>
+    </context-param>
 
-	<context-param>
-		<param-name>SITES_PER_MAP</param-name>
-		<param-value>60</param-value>
-		<description>Number of sites displayed for maps generated from EEA
-			server</description>
-	</context-param>
+    <context-param>
+        <param-name>COUNTRIES_PER_MAP</param-name>
+        <param-value>120</param-value>
+        <description>Number of countries displayed within maps retrieved from
+            EEA map server</description>
+    </context-param>
 
-	<context-param>
-		<param-name>SQL_LIMIT</param-name>
-		<param-value>500000</param-value>
-		<description>Limit of rows returned in advanced and combined search</description>
-	</context-param>
+    <!--
+        Listener registered to cleanup the temporary files during a session,
+        when it expires
+    -->
+    <listener>
+        <listener-class>ro.finsiel.eunis.session.CleanupSessionListener</listener-class>
+    </listener>
 
-	<context-param>
-		<param-name>COUNTRIES_PER_MAP</param-name>
-		<param-value>120</param-value>
-		<description>Number of countries displayed within maps retrieved from
-			EEA map server</description>
-	</context-param>
+    <!-- Servlet declarations, configurations & mappings to URLs -->
+    <servlet>
+        <servlet-name>upload</servlet-name>
+        <servlet-class>ro.finsiel.eunis.admin.EUNISUploadServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
 
-	<!--
-		Listener registered to cleanup the temporary files during a session,
-		when it expires
-	-->
-	<listener>
-		<listener-class>ro.finsiel.eunis.session.CleanupSessionListener</listener-class>
-	</listener>
+    <servlet>
+        <servlet-name>schemas</servlet-name>
+        <servlet-class>ro.finsiel.eunis.dataimport.Schemas</servlet-class>
+    </servlet>
 
-	<!-- Servlet declarations, configurations & mappings to URLs -->
-	<servlet>
-		<servlet-name>upload</servlet-name>
-		<servlet-class>ro.finsiel.eunis.admin.EUNISUploadServlet</servlet-class>
-		<load-on-startup>0</load-on-startup>
-	</servlet>
+    <servlet>
+        <servlet-name>datatester</servlet-name>
+        <servlet-class>ro.finsiel.eunis.dataimport.DataImportTester</servlet-class>
+    </servlet>
 
-	<servlet>
-		<servlet-name>schemas</servlet-name>
-		<servlet-class>ro.finsiel.eunis.dataimport.Schemas</servlet-class>
-	</servlet>
+    <servlet>
+        <servlet-name>dataimporter</servlet-name>
+        <servlet-class>ro.finsiel.eunis.dataimport.DataImporter</servlet-class>
+    </servlet>
 
-	<servlet>
-		<servlet-name>datatester</servlet-name>
-		<servlet-class>ro.finsiel.eunis.dataimport.DataImportTester</servlet-class>
-	</servlet>
+    <servlet>
+        <servlet-name>postimport</servlet-name>
+        <servlet-class>ro.finsiel.eunis.dataimport.PostImportScripts</servlet-class>
+    </servlet>
 
-	<servlet>
-		<servlet-name>dataimporter</servlet-name>
-		<servlet-class>ro.finsiel.eunis.dataimport.DataImporter</servlet-class>
-	</servlet>
+    <servlet>
+        <servlet-name>dataexporter</servlet-name>
+        <servlet-class>ro.finsiel.eunis.dataimport.DataExporter</servlet-class>
+    </servlet>
 
-	<servlet>
-		<servlet-name>postimport</servlet-name>
-		<servlet-class>ro.finsiel.eunis.dataimport.PostImportScripts</servlet-class>
-	</servlet>
+    <servlet>
+        <servlet-name>schemaexporter</servlet-name>
+        <servlet-class>ro.finsiel.eunis.dataimport.SchemaExporter</servlet-class>
+    </servlet>
 
-	<servlet>
-		<servlet-name>dataexporter</servlet-name>
-		<servlet-class>ro.finsiel.eunis.dataimport.DataExporter</servlet-class>
-	</servlet>
+    <servlet>
+        <servlet-name>urls</servlet-name>
+        <servlet-class>ro.finsiel.eunis.urls.Urls</servlet-class>
+    </servlet>
 
-	<servlet>
-		<servlet-name>schemaexporter</servlet-name>
-		<servlet-class>ro.finsiel.eunis.dataimport.SchemaExporter</servlet-class>
-	</servlet>
+    <servlet>
+        <servlet-name>species</servlet-name>
+        <jsp-file>/species.jsp</jsp-file>
+    </servlet>
 
-	<servlet>
-		<servlet-name>urls</servlet-name>
-		<servlet-class>ro.finsiel.eunis.urls.Urls</servlet-class>
-	</servlet>
+    <servlet>
+        <servlet-name>sites</servlet-name>
+        <jsp-file>/sites.jsp</jsp-file>
+    </servlet>
 
-	<servlet>
-		<servlet-name>species</servlet-name>
-		<jsp-file>/species.jsp</jsp-file>
-	</servlet>
+    <servlet>
+        <servlet-name>habitats</servlet-name>
+        <jsp-file>/habitats.jsp</jsp-file>
+    </servlet>
 
-	<servlet>
-		<servlet-name>sites</servlet-name>
-		<jsp-file>/sites.jsp</jsp-file>
-	</servlet>
+    <servlet>
+        <servlet-name>jcaptcha</servlet-name>
+        <servlet-class>ro.finsiel.captcha.ImageCaptchaServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
 
-	<servlet>
-		<servlet-name>habitats</servlet-name>
-		<jsp-file>/habitats.jsp</jsp-file>
-	</servlet>
+    <!-- Map servlet to URL -->
+    <servlet-mapping>
+        <servlet-name>upload</servlet-name>
+        <url-pattern>/fileupload</url-pattern>
+    </servlet-mapping>
 
-	<servlet>
-		<servlet-name>jcaptcha</servlet-name>
-		<servlet-class>ro.finsiel.captcha.ImageCaptchaServlet</servlet-class>
-		<load-on-startup>0</load-on-startup>
-	</servlet>
+    <servlet-mapping>
+        <servlet-name>schemas</servlet-name>
+        <url-pattern>/schemas/*</url-pattern>
+    </servlet-mapping>
 
-	<!-- Map servlet to URL -->
-	<servlet-mapping>
-		<servlet-name>upload</servlet-name>
-		<url-pattern>/fileupload</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>urls</servlet-name>
+        <url-pattern>/urls.jsp</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>schemas</servlet-name>
-		<url-pattern>/schemas/*</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>datatester</servlet-name>
+        <url-pattern>/datatester</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>urls</servlet-name>
-		<url-pattern>/urls.jsp</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>dataimporter</servlet-name>
+        <url-pattern>/dataimporter</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>datatester</servlet-name>
-		<url-pattern>/datatester</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>postimport</servlet-name>
+        <url-pattern>/postimport</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>dataimporter</servlet-name>
-		<url-pattern>/dataimporter</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>dataexporter</servlet-name>
+        <url-pattern>/dataexporter</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>postimport</servlet-name>
-		<url-pattern>/postimport</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>schemaexporter</servlet-name>
+        <url-pattern>/schemaexporter</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>dataexporter</servlet-name>
-		<url-pattern>/dataexporter</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>species</servlet-name>
+        <url-pattern>/species</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>schemaexporter</servlet-name>
-		<url-pattern>/schemaexporter</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sites</servlet-name>
+        <url-pattern>/sites</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>species</servlet-name>
-		<url-pattern>/species</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>habitats</servlet-name>
+        <url-pattern>/habitats</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>sites</servlet-name>
-		<url-pattern>/sites</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>jcaptcha</servlet-name>
+        <url-pattern>/jcaptcha</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>habitats</servlet-name>
-		<url-pattern>/habitats</url-pattern>
-	</servlet-mapping>
+    <filter>
+        <filter-name>RdfFilter</filter-name>
+        <filter-class>eionet.eunis.rdf.RdfFilter</filter-class>
+    </filter>
 
-	<servlet-mapping>
-		<servlet-name>jcaptcha</servlet-name>
-		<url-pattern>/jcaptcha</url-pattern>
-	</servlet-mapping>
+    <!-- Stripes filter and its mapping -->
+    <filter>
+        <display-name>Stripes Filter</display-name>
+        <filter-name>StripesFilter</filter-name>
+        <filter-class>net.sourceforge.stripes.controller.StripesFilter</filter-class>
+        <init-param>
+            <param-name>ActionResolver.Packages</param-name>
+            <param-value>eionet.eunis.stripes.actions</param-value>
+        </init-param>
+        <init-param>
+          <param-name>Extension.Packages</param-name>
+          <param-value>eionet.eunis.stripes.extensions</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ActionBeanContext.Class</param-name>
+            <param-value>eionet.eunis.stripes.EunisActionBeanContext</param-value>
+        </init-param>
+        <init-param>
+            <param-name>LocalePicker.Locales</param-name>
+            <param-value>en_US:UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>FileUpload.MaximumPostSize</param-name>
+            <param-value>250mb</param-value>
+        </init-param>
+    </filter>
 
-	<filter>
-	    <filter-name>RdfFilter</filter-name>
-	    <filter-class>eionet.eunis.rdf.RdfFilter</filter-class>
-	</filter>
+    <filter-mapping>
+        <filter-name>RdfFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+      </filter-mapping>
 
-	<!-- Stripes filter and its mapping -->
-	<filter>
-		<display-name>Stripes Filter</display-name>
-		<filter-name>StripesFilter</filter-name>
-		<filter-class>net.sourceforge.stripes.controller.StripesFilter</filter-class>
-		<init-param>
-			<param-name>ActionResolver.Packages</param-name>
-			<param-value>eionet.eunis.stripes.actions</param-value>
-		</init-param>
-		<init-param>
-		  <param-name>Extension.Packages</param-name>
-		  <param-value>eionet.eunis.stripes.extensions</param-value>
-		</init-param>
-		<init-param>
-		    <param-name>ActionBeanContext.Class</param-name>
-		    <param-value>eionet.eunis.stripes.EunisActionBeanContext</param-value>
-		</init-param>
-		<init-param>
-		    <param-name>LocalePicker.Locales</param-name>
-		    <param-value>en_US:UTF-8</param-value>
-		</init-param>
-		<init-param>
-			<param-name>FileUpload.MaximumPostSize</param-name>
-			<param-value>250mb</param-value>
-		</init-param>
-	</filter>
+    <filter-mapping>
+        <filter-name>StripesFilter</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
 
-	<filter-mapping>
-		<filter-name>RdfFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-  	</filter-mapping>
+    <filter-mapping>
+        <filter-name>StripesFilter</filter-name>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
 
-	<filter-mapping>
-		<filter-name>StripesFilter</filter-name>
-		<url-pattern>*.jsp</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-	</filter-mapping>
+    <!-- Stripes servlet and its mapping -->
+    <servlet>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <servlet-class>net.sourceforge.stripes.controller.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 
-	<filter-mapping>
-		<filter-name>StripesFilter</filter-name>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<dispatcher>REQUEST</dispatcher>
-	</filter-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>*.action</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/species-factsheet.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/species/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/sites-factsheet.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/sites/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/taxonomy/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/habitats/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/habitats-factsheet.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/designations/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/designations-factsheet.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/references/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/documents/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/refreshtemplate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/pictures-upload.jsp</url-pattern>
+    </servlet-mapping>
 
-	<!-- Stripes servlet and its mapping -->
-	<servlet>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<servlet-class>net.sourceforge.stripes.controller.DispatcherServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/dataimport/importpagelinks</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>*.action</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/species-factsheet.jsp</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/species/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/sites-factsheet.jsp</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/sites/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/taxonomy/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/habitats/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/habitats-factsheet.jsp</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/designations/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/designations-factsheet.jsp</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/references/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/documents/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/refreshtemplate</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/pictures-upload.jsp</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/dataimport/matchgeospecies</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/dataimport/importpagelinks</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/dataimport/importcdda</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/dataimport/matchgeospecies</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/dataimport/importhabitats</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/dataimport/importcdda</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/dataimport/importredlist</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/dataimport/importhabitats</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/dataimport/updatecountrysites</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/dataimport/importredlist</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/dataimport/speciesdump</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/dataimport/updatecountrysites</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/api/lookup-species</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/dataimport/speciesdump</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/gis-tool</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/api/lookup-species</url-pattern>
-	</servlet-mapping>
+    <!-- Session expiration in minutes -->
+    <session-config>
+        <session-timeout>60</session-timeout>
+    </session-config>
 
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/gis-tool</url-pattern>
-	</servlet-mapping>
+    <mime-mapping>
+        <extension>kml</extension>
+        <mime-type>application/vnd.google-earth.kml+xml</mime-type>
+    </mime-mapping>
 
-	<!-- Session expiration in minutes -->
-	<session-config>
-		<session-timeout>60</session-timeout>
-	</session-config>
+    <!-- List of known index pages -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 
-	<mime-mapping>
-		<extension>kml</extension>
-		<mime-type>application/vnd.google-earth.kml+xml</mime-type>
-	</mime-mapping>
-
-	<!-- List of known index pages -->
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
-
-	<!--Error handling page-->
-	<error-page>
-		<error-code>403</error-code>
-		<location>/403.jsp</location>
-	</error-page>
-	<!-- error-page>
-		<exception-type>java.lang.Exception</exception-type>
-		<location>/500.jsp</location>
-	</error-page-->
-	<error-page>
-		<error-code>404</error-code>
-		<location>/404.jsp</location>
-	</error-page>
+    <!--Error handling page-->
+    <error-page>
+        <error-code>403</error-code>
+        <location>/403.jsp</location>
+    </error-page>
+    <!-- error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/500.jsp</location>
+    </error-page-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.jsp</location>
+    </error-page>
 </web-app>

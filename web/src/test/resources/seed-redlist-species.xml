@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <dc_index ID_DC="2407" COMMENT="REFERENCES" SOURCE="IUCN Red List Categories and Criteria: Version 3.1" EDITOR="IUCN Species Survival Commission" ISBN="2-8317-0633-5" URL="http://www.iucn.org" TITLE=
+  "IUCN Red List Categories and Criteria: Version 3.1" PUBLISHER="IUCN, Gland, Switzerland and Cambridge, UK" REFCD="0" REFERENCE="-1"/>
+  <dc_index ID_DC="1" COMMENT="RED_LIST" REFCD="0" REFERENCE="-1" SOURCE="sss" TITLE="IUCN"/>
+  <chm62edt_country ID_COUNTRY="67" ID_GEOSCOPE="67" EUNIS_AREA_CODE="E25" AREA_NAME="European Union (25 Member States)" AREA_NAME_EN="European Union (25 Member States)" ISO_3L="EU" ISO_N="0" ISO_2_WCMC="EU" ISO_3_WCMC="EU" ISO_3_WCMC_PARENT="EU" AREUCD="EU" SURFACE="0" POPULATION="0" SELECTION="1" AREA_NAME_FR=""/>
+  <chm62edt_country ID_COUNTRY="80" ID_GEOSCOPE="80" EUNIS_AREA_CODE="EU" AREA_NAME_EN="Europe" AREA_NAME_FR="Europe" ISO_N="0" SURFACE="0" POPULATION="0" SELECTION="0"/>
+  <chm62edt_country ID_COUNTRY="263" ID_GEOSCOPE="263" EUNIS_AREA_CODE="WO" AREA_NAME_EN="World" AREA_NAME_FR="Monde" ISO_N="0" SURFACE="0" POPULATION="0" SELECTION="0"/>
+  <chm62edt_country ID_COUNTRY="275" ID_GEOSCOPE="287" EUNIS_AREA_CODE="E27" AREA_NAME="European Union (27 Member States)" AREA_NAME_EN="European Union (27 Member States)" ISO_3L="EU" ISO_N="0" ISO_2_WCMC="EU" ISO_3_WCMC="EU" ISO_3_WCMC_PARENT="EU" AREUCD="EU" SURFACE="0" POPULATION="0" SELECTION="1"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="4256" ID_DC="1835" ORIGINAL_CODE="9970" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="53906" ID_DC="1835" ORIGINAL_CODE="78776" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="53909" ID_DC="1835" ORIGINAL_CODE="78779" TYPE="SPECIES"/>
+  <chm62edt_nature_object ID_NATURE_OBJECT="101117" ID_DC="1785" ORIGINAL_CODE="127496" TYPE="SPECIES"/>
+  <chm62edt_species ID_SPECIES="78776" ID_NATURE_OBJECT="53906" SCIENTIFIC_NAME="Cerchysiella laeviscuta" VALID_NAME="1" ID_SPECIES_LINK="78776" TYPE_RELATED_SPECIES="Species" TEMPORARY_SELECT="0" GENUS="Cerchysiella" SPECIES_MAP="NULL" ID_GROUP_SPECIES="1" ID_TAXONOMY="185141" AUTHOR="(Thomson, 1876)"/>
+  <chm62edt_species ID_SPECIES="78779" ID_NATURE_OBJECT="53909" SCIENTIFIC_NAME="Cerchysiella laeviscuta" VALID_NAME="0" ID_SPECIES_LINK="78778" TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="0" GENUS="Cerchysiella" SPECIES_MAP="NULL" ID_GROUP_SPECIES="1" ID_TAXONOMY="185141" AUTHOR="Erd&#195;&#402;&#194;&#182;s, 1946"/>
+  <chm62edt_species ID_SPECIES="9970" ID_NATURE_OBJECT="4256" SCIENTIFIC_NAME="Salmo trutta" VALID_NAME="0" ID_SPECIES_LINK="15673" TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Salmo" SPECIES_MAP="NULL" ID_GROUP_SPECIES="2" ID_TAXONOMY="16" AUTHOR="Linnaeus, 1758"/>
+  <chm62edt_species ID_SPECIES="127496" ID_NATURE_OBJECT="101117" SCIENTIFIC_NAME="Salmo trutta" VALID_NAME="0" ID_SPECIES_LINK="15671" TYPE_RELATED_SPECIES="Synonym" TEMPORARY_SELECT="1" GENUS="Salmo" SPECIES_MAP="NULL" ID_GROUP_SPECIES="2" ID_TAXONOMY="16" AUTHOR="(non Linnaeus, 1758)"/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="4256" NAME="notSameSpecies" OBJECT="http://lod.geospecies.org/ses/kFudm" OBJECTLANG="" TYPE="reference"/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="4256" NAME="sameSpecies" OBJECT="http://dbpedia.org/resource/Brown_trout" OBJECTLANG="" TYPE="reference"/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="4256" NAME="sameSpeciesRedlist" OBJECT="19861" OBJECTLANG="" TYPE=""/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="4256" NAME="sameSynonym" OBJECT="http://lod.geospecies.org/ses/kFudm" OBJECTLANG="" TYPE="reference"/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="4256" NAME="sameSynonymFaEu" OBJECT="304750" OBJECTLANG="" TYPE=""/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="4256" NAME="sameSynonymGBIF" OBJECT="4284017" OBJECTLANG="" TYPE="integer"/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="4256" NAME="sameSynonymITIS" OBJECT="161997" OBJECTLANG="" TYPE=""/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="4256" NAME="sameSynonymNCBI" OBJECT="8032" OBJECTLANG="" TYPE=""/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="4256" NAME="sameSynonymWorMS" OBJECT="127187" OBJECTLANG="" TYPE=""/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="4256" NAME="_geospeciesScientificName" OBJECT="Salmo trutta Linnaeus, 1758" OBJECTLANG="" TYPE=""/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="4256" NAME="_linkedDataQueries" OBJECT=",vernacularnames,conservationstatus" OBJECTLANG="" TYPE=""/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="53906" NAME="sameSynonymFaEu" OBJECT="69587" OBJECTLANG="" TYPE=""/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="53906" NAME="sameSynonymGBIF" OBJECT="1376085" OBJECTLANG="" TYPE="integer"/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="53909" NAME="sameSynonymFaEu" OBJECT="69587" OBJECTLANG="" TYPE=""/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="101117" NAME="notSameSpecies" OBJECT="http://lod.geospecies.org/ses/kFudm" OBJECTLANG="" TYPE="reference"/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="101117" NAME="notSameSynonym" OBJECT="http://lod.geospecies.org/ses/kFudm" OBJECTLANG="" TYPE="reference"/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="101117" NAME="sameSynonymFaEu" OBJECT="304750" OBJECTLANG="" TYPE=""/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="101117" NAME="sameSynonymITIS" OBJECT="161997" OBJECTLANG="" TYPE=""/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="101117" NAME="_geospeciesScientificName" OBJECT="Salmo trutta Linnaeus, 1758" OBJECTLANG="" TYPE=""/>
+  <chm62edt_nature_object_attributes ID_NATURE_OBJECT="101117" NAME="_linkedDataQueries" OBJECT=",conservationstatus" OBJECTLANG="" TYPE=""/>
+</dataset>

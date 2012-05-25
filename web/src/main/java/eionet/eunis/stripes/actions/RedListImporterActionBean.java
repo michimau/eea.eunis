@@ -61,6 +61,7 @@ public class RedListImporterActionBean extends AbstractStripesAction {
                 && getContext().getSessionManager().isImportExportData_RIGHT()) {
             try {
                 SQLUtilities sqlUtil = getContext().getSqlUtilities();
+                Integer redlistCatIdDc = new Integer(getContext().getApplicationProperty("redlist.categories.id_dc"));
 
                 if (idDc != null && idDc.intValue() == -1) {
                     if (files != null && files.length > 0) {
@@ -69,7 +70,7 @@ public class RedListImporterActionBean extends AbstractStripesAction {
                     }
                 }
 
-                if (idDc != null && idDc.intValue() != -1) {
+                if (idDc != null && idDc.intValue() != -1 && redlistCatIdDc != null) {
                     int cnt = 0;
                     List<String> notImported = new ArrayList<String>();
 
@@ -78,7 +79,7 @@ public class RedListImporterActionBean extends AbstractStripesAction {
                             InputStream inputStream = file.getInputStream();
 
                             RedListsImportParser parser = new RedListsImportParser(
-                                    sqlUtil, idDc, delete);
+                                    sqlUtil, idDc, delete, redlistCatIdDc);
 
                             parser.execute(inputStream);
                             cnt += parser.getImported();

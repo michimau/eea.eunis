@@ -104,7 +104,7 @@ public class RedListImporterActionBean extends AbstractStripesAction {
                         for (String name : duplicates) {
                             error.append("<li>" + name + "</li>");
                         }
-                        error.append("</ul>");
+                        error.append("</ul><br/>");
                     }
                     if (notImported != null && notImported.size() > 0) {
                         error.append("Following species (" + notImported.size() + ") were not imported: <ul>");
@@ -112,7 +112,7 @@ public class RedListImporterActionBean extends AbstractStripesAction {
                         for (String name : notImported) {
                             error.append("<li>" + name + "</li>");
                         }
-                        error.append("</ul><br/>");
+                        error.append("</ul>");
                     }
                     if (error.length() > 0) {
                         showWarning(error.toString());

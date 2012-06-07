@@ -39,6 +39,8 @@ public class RedListsImportParser extends DefaultHandler {
 
     private int imported = 0;
     private List<String> notImported = new ArrayList<String>();
+    private List<String> importedSpecies = new ArrayList<String>();
+    private List<String> duplicateSpecies = new ArrayList<String>();
 
     private String scientificName;
     private String euCat;
@@ -200,12 +202,17 @@ public class RedListsImportParser extends DefaultHandler {
                         prepareReportAttributeStatements("EUROPEAN_RED_LIST_THREATS", threats);
                         prepareReportAttributeStatements("EUROPEAN_RED_LIST_CONSERVATION_MEASURES", conservationMeasures);
                         prepareReportAttributeStatements("EUROPEAN_RED_LIST_ASSESSORS", assessors);
+
+                        if (!importedSpecies.contains(scientificName)){
+                            importedSpecies.add(scientificName);
+                        }else{
+                            duplicateSpecies.add(scientificName);
+                        }
                     }
                 }
                 if (!newThreats) {
                     notImported.add(scientificName);
                 }
-
                 if (counter != 0 && counter % 3000 == 0) {
                     preparedStatementReportType.executeBatch();
                     preparedStatementReportType.clearParameters();
@@ -638,5 +645,11 @@ public class RedListsImportParser extends DefaultHandler {
 
     public List<String> getNotImported() {
         return notImported;
+    }
+    public List<String> getImportedSpecies() {
+        return importedSpecies;
+    }
+    public List<String> getDuplicateSpecies() {
+        return duplicateSpecies;
     }
 }

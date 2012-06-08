@@ -6,7 +6,6 @@ import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 import net.sf.jrf.join.JoinTable;
-import net.sf.jrf.join.joincolumns.DateJoinColumn;
 import net.sf.jrf.join.joincolumns.IntegerJoinColumn;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
@@ -21,6 +20,7 @@ public class Chm62edtReportsDomain extends AbstractDomain {
      * Implements newPersistentObject from AbstractDomain.
      * @return New persistent object (table row).
      */
+    @Override
     public PersistentObject newPersistentObject() {
         return new Chm62edtReportsPersist();
     }
@@ -28,6 +28,7 @@ public class Chm62edtReportsDomain extends AbstractDomain {
     /**
      * Implements setup from AbstractDomain.
      */
+    @Override
     public void setup() {
         this.setTableName("CHM62EDT_REPORTS");
         this.setReadOnly(true);
@@ -65,7 +66,7 @@ public class Chm62edtReportsDomain extends AbstractDomain {
         dcIndex.addJoinColumn(new IntegerJoinColumn("REFERENCE", "getReference","setReference"));
         dcIndex.addJoinColumn(new IntegerJoinColumn("REFCD", "getReference", "setRefcd"));
         dcIndex.addJoinColumn(new StringJoinColumn("SOURCE", "source", "setSource"));
-        dcIndex.addJoinColumn(new DateJoinColumn("CREATED", "created", "setCreated"));
+        dcIndex.addJoinColumn(new StringJoinColumn("CREATED", "created", "setCreated"));
         this.addJoinTable(dcIndex);
     }
 }

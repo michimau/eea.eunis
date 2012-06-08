@@ -795,6 +795,24 @@ public final class Utilities {
         }
         return dt;
     }
+    /**
+     * Format a given year value within a displayable date, but only the year part of the whole date.
+     *
+     * @param String Date to be parsed
+     * @return The year representation of this date
+     */
+    public static String formatReferencesYear(String date) {
+        String dt = "";
+
+        if (null == date) {
+            return "";
+        }
+        dt = (date.length() > 4) ? date.substring(0, 4) : date;
+        if (dt.equals("0001")) {
+            dt = "";
+        }
+        return dt;
+    }
 
     /**
      * This method transform the given parameters into SQL statement as follows:
@@ -1242,6 +1260,7 @@ public final class Utilities {
      * @see #formatString
      * @deprecated by formatString(Object object)
      */
+    @Deprecated
     public static String IsContainsNull(String s) {
         return (s == null ? "" : (s.equalsIgnoreCase("null") ? "" : s));
     }
@@ -1355,6 +1374,7 @@ public final class Utilities {
      * @see ro.finsiel.eunis.search.sites.SitesSearchUtility#translateSourceDBInvert;
      * @deprecated by ro.finsiel.eunis.search.sites.SitesSearchUtilities#translateSourceDBInvert;
      */
+    @Deprecated
     public static String SourceDBSite(String sourceDB) {
         if (sourceDB.equalsIgnoreCase("CDDA National")) {
             return "CDDA_NATIONAL";

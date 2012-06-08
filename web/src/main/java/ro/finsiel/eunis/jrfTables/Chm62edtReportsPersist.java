@@ -5,8 +5,6 @@
 package ro.finsiel.eunis.jrfTables;
 
 
-import java.util.Date;
-
 import net.sf.jrf.domain.PersistentObject;
 
 
@@ -23,7 +21,7 @@ public class Chm62edtReportsPersist extends PersistentObject {
     private Integer i_idDc = null;
     private Integer reference = null;
     private String source;
-    private Date created;
+    private String created;
 
     public Integer getReference() {
         return reference;
@@ -178,11 +176,11 @@ public class Chm62edtReportsPersist extends PersistentObject {
         this.source = source;
     }
 
-    public Date getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(String created) {
         this.created = created;
     }
 }

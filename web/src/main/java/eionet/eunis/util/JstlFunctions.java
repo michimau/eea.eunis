@@ -162,16 +162,7 @@ public class JstlFunctions {
      * @return String
      */
     public static String formatString(Object object, String defaultValue) {
-        if (null == object) {
-            return defaultValue;
-        }
-        if (object.toString().equalsIgnoreCase("null")) {
-            return defaultValue;
-        }
-        if (object.toString().length() == 0) {
-            return defaultValue;
-        }
-        return object.toString();
+        return Utilities.formatString(object, defaultValue);
     }
 
     /**
@@ -202,19 +193,18 @@ public class JstlFunctions {
     /**
      * Translate the SOURCE_DB field from CHM62EDT_SITES in human readable language.
      *
-     * @param sourceDB
-     *            Source db.
+     * @param sourceDB Source db.
      * @return Source database.
      */
     public static String translateSourceDB(String sourceDB) {
         if (null == sourceDB) {
             return "n/a";
         }
-        String result = sourceDB.replaceAll("CDDA_NATIONAL", "CDDA National")
-        .replaceAll("CDDA_INTERNATIONAL", "CDDA International").replaceAll("NATURA2000", "Natura 2000")
-        .replaceAll("CORINE", "Corine").replaceAll("DIPLOMA", "European diploma")
-        .replaceAll("BIOGENETIC", "Biogenetic reserves").replaceAll("NATURENET", "NatureNet")
-        .replaceAll("EMERALD", "Emerald");
+        String result =
+                sourceDB.replaceAll("CDDA_NATIONAL", "CDDA National").replaceAll("CDDA_INTERNATIONAL", "CDDA International")
+                        .replaceAll("NATURA2000", "Natura 2000").replaceAll("CORINE", "Corine")
+                        .replaceAll("DIPLOMA", "European diploma").replaceAll("BIOGENETIC", "Biogenetic reserves")
+                        .replaceAll("NATURENET", "NatureNet").replaceAll("EMERALD", "Emerald");
 
         return result;
     }
@@ -222,8 +212,7 @@ public class JstlFunctions {
     /**
      * Replace characters having special meaning inside HTML tags with their escaped equivalents, using character entities.
      *
-     * @param str
-     *            String to be parsed
+     * @param str String to be parsed
      * @return Processed string.
      */
     public static String treatURLSpecialCharacters(String str) {
@@ -244,32 +233,34 @@ public class JstlFunctions {
     }
 
     /**
-     * This method formats the area field from the sites module which is displayed within HTML result pages.
+     * This is a direct call to {@link Utilities#formatArea(String, int, int, String, String)},
+     * see the JavaDoc of that method for more information.
+     *
+     * @return
+     */
+    public static String formatArea(String input, int left, int right, String blank, String cssStyle) {
+        return Utilities.formatArea(input, left, right, blank, cssStyle);
+    }
+
+    /**
+     * This is a direct call to {@link Utilities#formatArea(String, int, int, String)},
+     * see the JavaDoc of that method for more information.
      *
      * @param input
-     *            the input string
      * @param left
-     *            how much spaces to left on the left side
      * @param right
-     *            how much spaces to let on the right side
      * @param blank
-     *            which is the blank character to fill empty spaces (ie. in HTML is used &nbsp;)
-     * @return The formatted string
+     * @return
      */
     public static String formatArea(String input, int left, int right, String blank) {
-        String result = "<span style=\"font-family:courier; font-size: 10px\">";
-
-        result += Utilities.formatArea(input, left, right, blank, null);
-        result += "</span>";
-        return result;
+        return Utilities.formatArea(input, left, right, blank);
     }
 
     /**
      * Find a reference by an idDc and return a vector with two elements , first element contains author of that reference and
      * second element contains url of reference.
      *
-     * @param idDc
-     *            idDC of reference
+     * @param idDc idDC of reference
      * @return author
      */
     public static String getAuthorAndUrlByIdDc(String idDc) {
@@ -279,8 +270,9 @@ public class JstlFunctions {
             List references = new ReferencesJoinDomain().findWhere("ID_DC = " + idDc);
 
             if (references != null && references.size() > 0) {
-                author = (((ReferencesJoinPersist) references.get(0)).getSource() == null ? ""
-                        : ((ReferencesJoinPersist) references.get(0)).getSource());
+                author =
+                        (((ReferencesJoinPersist) references.get(0)).getSource() == null ? ""
+                                : ((ReferencesJoinPersist) references.get(0)).getSource());
                 author = treatURLSpecialCharacters(author);
             }
         } catch (Exception ex) {
@@ -291,10 +283,8 @@ public class JstlFunctions {
 
     /**
      *
-     * @param input
-     *            the input string
-     * @param what
-     *            to replace
+     * @param input the input string
+     * @param what to replace
      * @param replacement
      * @return String
      */
@@ -304,8 +294,7 @@ public class JstlFunctions {
 
     /**
      *
-     * @param input
-     *            the input string
+     * @param input the input string
      * @return String
      */
     public static String encode(String input) {
@@ -366,7 +355,7 @@ public class JstlFunctions {
             Class<?> c = Class.forName(className);
             Object t = c.getClass();
             Class<?>[] parameterTypes = new Class[] {Integer.class};
-            Method  method = c.getDeclaredMethod (methodName, parameterTypes);
+            Method method = c.getDeclaredMethod(methodName, parameterTypes);
             Integer[] params = new Integer[] {param};
             ret = method.invoke(t, params);
             if (ret instanceof String) {
@@ -393,7 +382,7 @@ public class JstlFunctions {
             Class<?> c = Class.forName(className);
             Object t = c.getClass();
             Class<?>[] parameterTypes = new Class[] {String.class};
-            Method  method = c.getDeclaredMethod (methodName, parameterTypes);
+            Method method = c.getDeclaredMethod(methodName, parameterTypes);
             String[] params = new String[] {param};
             ret = method.invoke(t, params);
             if (ret instanceof String) {
@@ -405,5 +394,4 @@ public class JstlFunctions {
 
         return ret;
     }
-
 }

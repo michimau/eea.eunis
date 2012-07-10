@@ -1,16 +1,49 @@
 package ro.finsiel.eunis.factsheet.sites;
 
-
-import org.apache.log4j.Logger;
-import ro.finsiel.eunis.exceptions.InitializationException;
-import ro.finsiel.eunis.jrfTables.*;
-import ro.finsiel.eunis.jrfTables.sites.factsheet.*;
-import ro.finsiel.eunis.search.sites.SitesSearchUtility;
-import ro.finsiel.eunis.utilities.EunisUtil;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
+import ro.finsiel.eunis.exceptions.InitializationException;
+import ro.finsiel.eunis.jrfTables.Chm62edtCountryDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtGlobalDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtGlobalPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtIsolationDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtIsolationPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatura2000ConservationCodeDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatura2000ConservationCodePersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectGeoscopeDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectGeoscopePersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtPopulationDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtPopulationPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtSitesDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtSitesPersist;
+import ro.finsiel.eunis.jrfTables.DesignationsSitesRelatedDesignationsDomain;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.HumanActivityAttributesDomain;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.HumanActivityAttributesPersist;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.HumanActivityDomain;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.RegionsCodesDomain;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsDomain;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteRelationsDomain;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteSpeciesDomain;
+import ro.finsiel.eunis.jrfTables.sites.factsheet.SitesSpeciesReportAttributesDomain;
+import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.sites.SitesSearchUtility;
+import ro.finsiel.eunis.utilities.EunisUtil;
+import eionet.eunis.dto.PictureDTO;
 
 /**
  * This is the factsheet generator for the site's factsheet.
@@ -73,7 +106,7 @@ public class SiteFactsheet {
     public SiteFactsheet(String idSite) {
         this.idSite = idSite;
     }
-  
+
     public Integer getIdDc() {
         try {
             Integer pk = getSiteObject().getIdNatureObject();
@@ -115,17 +148,18 @@ public class SiteFactsheet {
     /**
      * Find site attributes from CHM62EDT_REPORT_ATTRIBUTES.
      *
-     * @param attributeName     Name of the attribute (NAME column from table, ex. COVER, GLOBAL, POPULATION etc.)
-     * @param idReportAttribute ID_REPORT_ATTRIBUTES for that nature object
-     *                          (ex. CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_REPORT_ATTRIBUTES).
+     * @param attributeName Name of the attribute (NAME column from table, ex. COVER, GLOBAL, POPULATION etc.)
+     * @param idReportAttribute ID_REPORT_ATTRIBUTES for that nature object (ex.
+     *            CHM62EDT_NATURE_OBJECT_REPORT_TYPE.ID_REPORT_ATTRIBUTES).
      * @return An Chm62edtReportAttributesPersist objects with this information.
      */
     public Chm62edtReportAttributesPersist findSiteAttributes(String attributeName, Integer idReportAttribute) {
         Chm62edtReportAttributesPersist attribute = null;
 
         try {
-            List results = new Chm62edtReportAttributesDomain().findWhere(
-                    "NAME LIKE '%" + attributeName + "%' AND ID_REPORT_ATTRIBUTES='" + idReportAttribute + "'");
+            List results =
+                    new Chm62edtReportAttributesDomain().findWhere("NAME LIKE '%" + attributeName
+                            + "%' AND ID_REPORT_ATTRIBUTES='" + idReportAttribute + "'");
 
             if (null != results && results.size() > 0) {
                 attribute = ((Chm62edtReportAttributesPersist) results.get(0));
@@ -159,7 +193,8 @@ public class SiteFactsheet {
     // public List findSitesSpeciesByIDNatureObjectNatura2000() {
     // List results = new Vector();
     // try {
-    // results = new SiteSpeciesDomain().findWhere("A.ID_NATURE_OBJECT='" + getSiteObject().getIdNatureObject() + "' AND A.ID_REPORT_TYPE='-1'");
+    // results = new SiteSpeciesDomain().findWhere("A.ID_NATURE_OBJECT='" + getSiteObject().getIdNatureObject() +
+    // "' AND A.ID_REPORT_TYPE='-1'");
     // } catch (Exception _ex) {
     // _ex.printStackTrace(System.err);
     // results = new Vector();
@@ -171,15 +206,17 @@ public class SiteFactsheet {
 
     /**
      * Species listed within natura 2000 directives.
+     *
      * @return List of species SitesSpeciesReportAttributesPersist objects
      */
     public List findEunisSpeciesListedAnnexesDirectivesForSitesNatura2000() {
         List results;
 
         try {
-            results = new SitesSpeciesReportAttributesDomain().findWhere(
-                    "A.ID_NATURE_OBJECT='" + getSiteObject().getIdNatureObject()
-                    + "' AND E.NAME='SOURCE_TABLE' AND E.VALUE IN ('AMPREP','BIRD','FISHES','INVERT','MAMMAL','PLANT')");
+            results =
+                    new SitesSpeciesReportAttributesDomain().findWhere("A.ID_NATURE_OBJECT='"
+                            + getSiteObject().getIdNatureObject()
+                            + "' AND E.NAME='SOURCE_TABLE' AND E.VALUE IN ('AMPREP','BIRD','FISHES','INVERT','MAMMAL','PLANT')");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -192,15 +229,18 @@ public class SiteFactsheet {
 
     /**
      * Find non-EUNIS species related to site, listed in directives.
+     *
      * @return List of Chm62edtSitesAttributesPersis objects
      */
     public List findNotEunisSpeciesListedAnnexesDirectives() {
         List results = new Vector();
 
         try {
-            results = new Chm62edtSitesAttributesDomain().findWhere(
-                    "ID_SITE='" + getSiteObject().getIdSite()
-                    + "' AND SOURCE_TABLE IN ('AMPREP','BIRD','FISHES','INVERT','MAMMAL','PLANT') AND NAME LIKE 'OTHER_SPECIES_%' GROUP BY SUBSTRING(name,length(name) - instr(reverse(name),'_') + 2)");
+            results =
+                    new Chm62edtSitesAttributesDomain()
+                            .findWhere("ID_SITE='"
+                                    + getSiteObject().getIdSite()
+                                    + "' AND SOURCE_TABLE IN ('AMPREP','BIRD','FISHES','INVERT','MAMMAL','PLANT') AND NAME LIKE 'OTHER_SPECIES_%' GROUP BY SUBSTRING(name,length(name) - instr(reverse(name),'_') + 2)");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -213,15 +253,18 @@ public class SiteFactsheet {
 
     /**
      * Find other non-EUNIS species related to this site.
+     *
      * @return List of Chm62edtSitesAttributesPersist objects
      */
     public List findNotEunisSpeciesOtherMentioned() {
         List results = new Vector();
 
         try {
-            results = new Chm62edtSitesAttributesDomain().findWhere(
-                    "ID_SITE='" + getSiteObject().getIdSite()
-                    + "' AND SOURCE_TABLE = 'SPEC' AND NAME LIKE 'OTHER_SPECIES_%' GROUP BY SUBSTRING(name,length(name) - instr(reverse(name),'_') + 2)");
+            results =
+                    new Chm62edtSitesAttributesDomain()
+                            .findWhere("ID_SITE='"
+                                    + getSiteObject().getIdSite()
+                                    + "' AND SOURCE_TABLE = 'SPEC' AND NAME LIKE 'OTHER_SPECIES_%' GROUP BY SUBSTRING(name,length(name) - instr(reverse(name),'_') + 2)");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -234,6 +277,7 @@ public class SiteFactsheet {
 
     /**
      * Find non-EUNIS species related to site, listed in Annexes and directives.
+     *
      * @param attrName attribute name
      * @return Species object
      */
@@ -244,10 +288,12 @@ public class SiteFactsheet {
         Chm62edtSitesAttributesPersist result = null;
 
         try {
-            List attrList = new Chm62edtSitesAttributesDomain().findWhere(
-                    "ID_SITE='" + getSiteObject().getIdSite()
-                    + "' AND SOURCE_TABLE IN ('AMPREP','BIRD','FISHES','INVERT','MAMMAL','PLANT') AND NAME = 'OTHER_SPECIES_"
-                    + attrName + "'");
+            List attrList =
+                    new Chm62edtSitesAttributesDomain()
+                            .findWhere("ID_SITE='"
+                                    + getSiteObject().getIdSite()
+                                    + "' AND SOURCE_TABLE IN ('AMPREP','BIRD','FISHES','INVERT','MAMMAL','PLANT') AND NAME = 'OTHER_SPECIES_"
+                                    + attrName + "'");
 
             if (attrList != null && attrList.size() > 0) {
                 result = (Chm62edtSitesAttributesPersist) attrList.get(0);
@@ -261,6 +307,7 @@ public class SiteFactsheet {
 
     /**
      * Non-EUNIS species mentioned in other attributes, related to this site.
+     *
      * @param attrName Attribute name
      * @return Species object
      */
@@ -272,9 +319,9 @@ public class SiteFactsheet {
         Chm62edtSitesAttributesPersist result = null;
 
         try {
-            List attrList = new Chm62edtSitesAttributesDomain().findWhere(
-                    "ID_SITE='" + getSiteObject().getIdSite() + "' AND SOURCE_TABLE = 'SPEC' AND NAME = 'OTHER_SPECIES_" + attrName
-                    + "'");
+            List attrList =
+                    new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + getSiteObject().getIdSite()
+                            + "' AND SOURCE_TABLE = 'SPEC' AND NAME = 'OTHER_SPECIES_" + attrName + "'");
 
             if (attrList != null && attrList.size() > 0) {
                 result = (Chm62edtSitesAttributesPersist) attrList.get(0);
@@ -288,6 +335,7 @@ public class SiteFactsheet {
 
     /**
      * Isolation information for an site.
+     *
      * @param id Site id
      * @return Isolation description
      */
@@ -311,6 +359,7 @@ public class SiteFactsheet {
 
     /**
      * Retrieve values from CHM62EDT_GLOBAL.
+     *
      * @param id ID_GLOBAL
      * @return List of Chm62edtGlobalPersist objects
      */
@@ -334,6 +383,7 @@ public class SiteFactsheet {
 
     /**
      * Get conservation name for natura site.
+     *
      * @param id site id
      * @return Conservation name
      */
@@ -357,6 +407,7 @@ public class SiteFactsheet {
 
     /**
      * Find population for an site.
+     *
      * @param id site id
      * @return Population description
      */
@@ -380,14 +431,16 @@ public class SiteFactsheet {
 
     /**
      * List of other unclassified species mentioned in Natura 2000 sites.
+     *
      * @return List of SitesSpeciesReportAttributesPersist objects
      */
     public List findEunisSpeciesOtherMentionedForSitesNatura2000() {
         List results = new Vector();
 
         try {
-            results = new SitesSpeciesReportAttributesDomain().findWhere(
-                    "A.ID_NATURE_OBJECT='" + getSiteObject().getIdNatureObject() + "' AND E.NAME='SOURCE_TABLE' AND E.VALUE ='spec'");
+            results =
+                    new SitesSpeciesReportAttributesDomain().findWhere("A.ID_NATURE_OBJECT='"
+                            + getSiteObject().getIdNatureObject() + "' AND E.NAME='SOURCE_TABLE' AND E.VALUE ='spec'");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -400,14 +453,16 @@ public class SiteFactsheet {
 
     /**
      * Species related to site.
+     *
      * @return List of SiteSpeciesPersist objects
      */
     public List findSitesSpeciesByIDNatureObjectNatura2000Other() {
         List results = new Vector();
 
         try {
-            results = new SiteSpeciesDomain().findWhere(
-                    "A.ID_NATURE_OBJECT='" + getSiteObject().getIdNatureObject() + "' AND A.ID_REPORT_TYPE='-999'");
+            results =
+                    new SiteSpeciesDomain().findWhere("A.ID_NATURE_OBJECT='" + getSiteObject().getIdNatureObject()
+                            + "' AND A.ID_REPORT_TYPE='-999'");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -427,8 +482,9 @@ public class SiteFactsheet {
         List results = new Vector();
 
         try {
-            results = new Chm62edtSitesAttributesDomain().findWhere(
-                    "NAME LIKE 'SPECIES%' AND ID_SITE='" + getSiteObject().getIdSite() + "'");
+            results =
+                    new Chm62edtSitesAttributesDomain().findWhere("NAME LIKE 'SPECIES%' AND ID_SITE='"
+                            + getSiteObject().getIdSite() + "'");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -448,8 +504,9 @@ public class SiteFactsheet {
         List results = new Vector();
 
         try {
-            results = new Chm62edtSitesAttributesDomain().findWhere(
-                    "NAME LIKE 'SPECIES%' AND ID_SITE='" + getSiteObject().getIdSite() + "'");
+            results =
+                    new Chm62edtSitesAttributesDomain().findWhere("NAME LIKE 'SPECIES%' AND ID_SITE='"
+                            + getSiteObject().getIdSite() + "'");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -469,8 +526,9 @@ public class SiteFactsheet {
         List results = new Vector();
 
         try {
-            results = new Chm62edtSitesAttributesDomain().findWhere(
-                    "NAME LIKE 'OTHER_SPECIES%' AND ID_SITE='" + getSiteObject().getIdSite() + "'");
+            results =
+                    new Chm62edtSitesAttributesDomain().findWhere("NAME LIKE 'OTHER_SPECIES%' AND ID_SITE='"
+                            + getSiteObject().getIdSite() + "'");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -490,8 +548,9 @@ public class SiteFactsheet {
         List results;
 
         try {
-            results = new HumanActivityDomain().findWhere(
-                    "LOOKUP_TYPE = 'HUMAN_ACTIVITY' AND ID_SITE='" + getSiteObject().getIdSite() + "'");
+            results =
+                    new HumanActivityDomain().findWhere("LOOKUP_TYPE = 'HUMAN_ACTIVITY' AND ID_SITE='"
+                            + getSiteObject().getIdSite() + "'");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -504,6 +563,7 @@ public class SiteFactsheet {
 
     /**
      * Find the human activity attribute fot this site.
+     *
      * @param attribute Name of the attribute (ex. IN_OUT, INTENSITY, COVER etc.).
      * @param position Index
      * @return An HumanActivityAttributesPersist with this information or null.
@@ -512,9 +572,9 @@ public class SiteFactsheet {
         HumanActivityAttributesPersist result = null;
 
         try {
-            List results = new HumanActivityAttributesDomain().findWhere(
-                    "LOOKUP_TYPE = 'HUMAN_ACTIVITY' AND ID_SITE='" + getSiteObject().getIdSite() + "' AND C.NAME='" + attribute
-                    + "' LIMIT " + position + ", 10 ");
+            List results =
+                    new HumanActivityAttributesDomain().findWhere("LOOKUP_TYPE = 'HUMAN_ACTIVITY' AND ID_SITE='"
+                            + getSiteObject().getIdSite() + "' AND C.NAME='" + attribute + "' LIMIT " + position + ", 10 ");
 
             if (null != results && results.size() > 0) {
                 result = (HumanActivityAttributesPersist) results.get(0);
@@ -535,9 +595,9 @@ public class SiteFactsheet {
         HumanActivityAttributesPersist result = null;
 
         try {
-            List results = new HumanActivityAttributesDomain().findWhere(
-                    "LOOKUP_TYPE = 'HUMAN_ACTIVITY' AND ID_SITE='" + getSiteObject().getIdSite() + "' AND C.NAME='" + attribute
-                    + "'");
+            List results =
+                    new HumanActivityAttributesDomain().findWhere("LOOKUP_TYPE = 'HUMAN_ACTIVITY' AND ID_SITE='"
+                            + getSiteObject().getIdSite() + "' AND C.NAME='" + attribute + "'");
 
             if (null != results && results.size() > 0) {
                 result = (HumanActivityAttributesPersist) results.get(0);
@@ -557,9 +617,11 @@ public class SiteFactsheet {
         List results = new Vector();
 
         try {
-            results = new SiteHabitatsDomain().findWhere(
-                    "A.ID_NATURE_OBJECT='" + getSiteObject().getIdNatureObject()
-                    + "' and CHM62EDT_REPORT_ATTRIBUTES.NAME='SOURCE_TABLE' and CHM62EDT_REPORT_ATTRIBUTES.VALUE='habit1'");
+            results =
+                    new SiteHabitatsDomain()
+                            .findWhere("A.ID_NATURE_OBJECT='"
+                                    + getSiteObject().getIdNatureObject()
+                                    + "' and CHM62EDT_REPORT_ATTRIBUTES.NAME='SOURCE_TABLE' and CHM62EDT_REPORT_ATTRIBUTES.VALUE='habit1'");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -572,15 +634,18 @@ public class SiteFactsheet {
 
     /**
      * Find habitats related to this site, not mentioned in EUNIS but related.
+     *
      * @return List of Chm62edtSitesAttributesPersist objects
      */
     public List findHabit1NotEunis() {
         List results = new Vector();
 
         try {
-            results = new Chm62edtSitesAttributesDomain().findWhere(
-                    "ID_SITE='" + getSiteObject().getIdSite()
-                    + "' AND SOURCE_TABLE = 'HABIT1' AND NAME LIKE 'HABITAT_CODE_%' GROUP BY SUBSTRING(name,length(name) - instr(reverse(name),'_') + 2)");
+            results =
+                    new Chm62edtSitesAttributesDomain()
+                            .findWhere("ID_SITE='"
+                                    + getSiteObject().getIdSite()
+                                    + "' AND SOURCE_TABLE = 'HABIT1' AND NAME LIKE 'HABITAT_CODE_%' GROUP BY SUBSTRING(name,length(name) - instr(reverse(name),'_') + 2)");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -593,6 +658,7 @@ public class SiteFactsheet {
 
     /**
      * Find habitat from site's attribute.
+     *
      * @param attrName Attribute's name
      * @return Habitat
      */
@@ -603,9 +669,9 @@ public class SiteFactsheet {
         Chm62edtSitesAttributesPersist result = null;
 
         try {
-            List attrList = new Chm62edtSitesAttributesDomain().findWhere(
-                    "ID_SITE='" + getSiteObject().getIdSite() + "' AND SOURCE_TABLE = 'HABIT1' AND NAME = 'HABITAT_" + attrName
-                    + "'");
+            List attrList =
+                    new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + getSiteObject().getIdSite()
+                            + "' AND SOURCE_TABLE = 'HABIT1' AND NAME = 'HABITAT_" + attrName + "'");
 
             if (attrList != null && attrList.size() > 0) {
                 result = (Chm62edtSitesAttributesPersist) attrList.get(0);
@@ -619,6 +685,7 @@ public class SiteFactsheet {
 
     /**
      * Find habitat from site's attributes.
+     *
      * @param attrName attribute name
      * @return Habitat
      */
@@ -629,9 +696,9 @@ public class SiteFactsheet {
         Chm62edtSitesAttributesPersist result = null;
 
         try {
-            List attrList = new Chm62edtSitesAttributesDomain().findWhere(
-                    "ID_SITE='" + getSiteObject().getIdSite() + "' AND SOURCE_TABLE = 'HABIT2' AND NAME = 'HABITAT_" + attrName
-                    + "'");
+            List attrList =
+                    new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + getSiteObject().getIdSite()
+                            + "' AND SOURCE_TABLE = 'HABIT2' AND NAME = 'HABITAT_" + attrName + "'");
 
             if (attrList != null && attrList.size() > 0) {
                 result = (Chm62edtSitesAttributesPersist) attrList.get(0);
@@ -645,15 +712,18 @@ public class SiteFactsheet {
 
     /**
      * Find habitats not in EUNIS.
+     *
      * @return List of Chm62edtSitesAttributesPersist objects
      */
     public List findHabit2NotEunis() {
         List results = new Vector();
 
         try {
-            results = new Chm62edtSitesAttributesDomain().findWhere(
-                    "ID_SITE='" + getSiteObject().getIdSite()
-                    + "' AND SOURCE_TABLE = 'HABIT2' AND NAME LIKE 'HABITAT_CODE_%' GROUP BY SUBSTRING(name,length(name) - instr(reverse(name),'_') + 2)");
+            results =
+                    new Chm62edtSitesAttributesDomain()
+                            .findWhere("ID_SITE='"
+                                    + getSiteObject().getIdSite()
+                                    + "' AND SOURCE_TABLE = 'HABIT2' AND NAME LIKE 'HABITAT_CODE_%' GROUP BY SUBSTRING(name,length(name) - instr(reverse(name),'_') + 2)");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -673,9 +743,11 @@ public class SiteFactsheet {
         List results = new Vector();
 
         try {
-            results = new SiteHabitatsDomain().findWhere(
-                    "A.ID_NATURE_OBJECT='" + getSiteObject().getIdNatureObject()
-                    + "' and CHM62EDT_REPORT_ATTRIBUTES.NAME='SOURCE_TABLE' and CHM62EDT_REPORT_ATTRIBUTES.VALUE='habit2'");
+            results =
+                    new SiteHabitatsDomain()
+                            .findWhere("A.ID_NATURE_OBJECT='"
+                                    + getSiteObject().getIdNatureObject()
+                                    + "' and CHM62EDT_REPORT_ATTRIBUTES.NAME='SOURCE_TABLE' and CHM62EDT_REPORT_ATTRIBUTES.VALUE='habit2'");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -693,7 +765,9 @@ public class SiteFactsheet {
     // public List findSitesSpecificHabitats() {
     // List results = new Vector();
     // try {
-    // results = new Chm62edtSitesAttributesDomain().findWhere(" NAME LIKE 'HABITAT%' AND NAME NOT LIKE 'HABITAT_CHARACTERIZATION' AND ID_SITE='" + getSiteObject().getIdSite() + "'");
+    // results = new
+    // Chm62edtSitesAttributesDomain().findWhere(" NAME LIKE 'HABITAT%' AND NAME NOT LIKE 'HABITAT_CHARACTERIZATION' AND ID_SITE='"
+    // + getSiteObject().getIdSite() + "'");
     // } catch (Exception _ex) {
     // _ex.printStackTrace(System.err);
     // results = new Vector();
@@ -711,8 +785,9 @@ public class SiteFactsheet {
         List results = new Vector();
 
         try {
-            results = new Chm62edtSitesAttributesDomain().findWhere(
-                    " NAME LIKE 'HABITAT_CODE_%' AND ID_SITE='" + getSiteObject().getIdSite() + "' group by name");
+            results =
+                    new Chm62edtSitesAttributesDomain().findWhere(" NAME LIKE 'HABITAT_CODE_%' AND ID_SITE='"
+                            + getSiteObject().getIdSite() + "' group by name");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -732,7 +807,8 @@ public class SiteFactsheet {
         List results = new Vector();
 
         try {
-            // results = new SiteRelationsDomain().findWhere("A.ID_SITE='" + getSiteObject().getIdSite() + "' AND B.SOURCE_DB <> 'EMERALD'");
+            // results = new SiteRelationsDomain().findWhere("A.ID_SITE='" + getSiteObject().getIdSite() +
+            // "' AND B.SOURCE_DB <> 'EMERALD'");
             results = new SiteRelationsDomain().findWhere("A.ID_SITE='" + getSiteObject().getIdSite() + "'");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
@@ -753,8 +829,9 @@ public class SiteFactsheet {
         List results = new Vector();
 
         try {
-            results = new SiteRelationsDomain().findWhere(
-                    "A.ID_SITE='" + getSiteObject().getIdSite() + "' AND B.SOURCE_DB = 'NATURA2000' AND A.SOURCE_TABLE = 'sitrel'");
+            results =
+                    new SiteRelationsDomain().findWhere("A.ID_SITE='" + getSiteObject().getIdSite()
+                            + "' AND B.SOURCE_DB = 'NATURA2000' AND A.SOURCE_TABLE = 'sitrel'");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -774,8 +851,9 @@ public class SiteFactsheet {
         List results = new Vector();
 
         try {
-            results = new SiteRelationsDomain().findWhere(
-                    "A.ID_SITE='" + getSiteObject().getIdSite() + "' AND B.SOURCE_DB = 'NATURA2000' AND A.SOURCE_TABLE = 'corine'");
+            results =
+                    new SiteRelationsDomain().findWhere("A.ID_SITE='" + getSiteObject().getIdSite()
+                            + "' AND B.SOURCE_DB = 'NATURA2000' AND A.SOURCE_TABLE = 'corine'");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -822,8 +900,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * This method checks if the given idSite does exist within database (there is a record with this ID_SITE in
-     * CHM62EDT_SITES).
+     * This method checks if the given idSite does exist within database (there is a record with this ID_SITE in CHM62EDT_SITES).
      *
      * @return true if site exists, false if doesn't or exception occurrs.
      */
@@ -896,19 +973,20 @@ public class SiteFactsheet {
         }
         // If not initialized - get the data from DB into cache
         try {
-            List results = new Chm62edtDesignationsDomain().findCustom(
-                    " SELECT A.* FROM CHM62EDT_DESIGNATIONS AS A "
-                            + " INNER JOIN CHM62EDT_SITES AS B ON (A.ID_DESIGNATION = B.ID_DESIGNATION AND A.ID_GEOSCOPE = B.ID_GEOSCOPE) "
-                            + " WHERE B.ID_SITE='" + idSite + "'");
+            List results =
+                    new Chm62edtDesignationsDomain()
+                            .findCustom(" SELECT A.* FROM CHM62EDT_DESIGNATIONS AS A "
+                                    + " INNER JOIN CHM62EDT_SITES AS B ON (A.ID_DESIGNATION = B.ID_DESIGNATION AND A.ID_GEOSCOPE = B.ID_GEOSCOPE) "
+                                    + " WHERE B.ID_SITE='" + idSite + "'");
 
             if (null != results && results.size() > 0) {
                 String descr = ((Chm62edtDesignationsPersist) results.get(0)).getDescription();
                 String descrEn = ((Chm62edtDesignationsPersist) results.get(0)).getDescriptionEn();
                 String descrFr = ((Chm62edtDesignationsPersist) results.get(0)).getDescriptionFr();
 
-                siteTableDesignations = (descr == null || descr.trim().length() <= 0
-                        ? (descrEn == null || descrEn.trim().length() <= 0
-                                ? (descrFr == null || descrFr.trim().length() <= 0 ? "" : descrFr)
+                siteTableDesignations =
+                        (descr == null || descr.trim().length() <= 0 ? (descrEn == null || descrEn.trim().length() <= 0 ? (descrFr == null
+                                || descrFr.trim().length() <= 0 ? "" : descrFr)
                                 : descrEn)
                                 : descr); // Save information in cache
                 retObject = siteTableDesignations;
@@ -999,7 +1077,8 @@ public class SiteFactsheet {
         String ret = "";
 
         try {
-            List list = new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + idSite + "' AND NAME='DATE_FIRST_DESIGNATION'");
+            List list =
+                    new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + idSite + "' AND NAME='DATE_FIRST_DESIGNATION'");
 
             if (null != list && list.size() > 0) {
                 Chm62edtSitesAttributesPersist attribute = (Chm62edtSitesAttributesPersist) list.get(0);
@@ -1073,7 +1152,7 @@ public class SiteFactsheet {
     }
 
     /**
-     * SELECT * FROM CHM62EDT_COUNTRY WHERE ISO_2L='" + idSite.substring(0, 2) +"'"   * @return
+     * SELECT * FROM CHM62EDT_COUNTRY WHERE ISO_2L='" + idSite.substring(0, 2) +"'" * @return
      *
      * @return Country for this site.
      */
@@ -1139,9 +1218,10 @@ public class SiteFactsheet {
         List res = new Vector();
 
         try {
-            res = new RegionsCodesDomain().findWhere(
-                    "ID_SITE='" + idSite + "' AND C.LOOKUP_TYPE='REGION_CODE' GROUP BY D.ID_REGION_CODE, D.NAME, E.VALUE");
-            // Eventually  AND E.NAME='COVER'
+            res =
+                    new RegionsCodesDomain().findWhere("ID_SITE='" + idSite
+                            + "' AND C.LOOKUP_TYPE='REGION_CODE' GROUP BY D.ID_REGION_CODE, D.NAME, E.VALUE");
+            // Eventually AND E.NAME='COVER'
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             res = new Vector();
@@ -1201,8 +1281,8 @@ public class SiteFactsheet {
         String res = "";
 
         try {
-            List results = new Chm62edtSitesAttributesDomain().findWhere(
-                    "ID_SITE='" + idSite + "' AND NAME='HABITAT_CHARACTERIZATION'");
+            List results =
+                    new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + idSite + "' AND NAME='HABITAT_CHARACTERIZATION'");
 
             if (null != results && results.size() > 0) {
                 Chm62edtSitesAttributesPersist persist = (Chm62edtSitesAttributesPersist) results.get(0);
@@ -1225,8 +1305,8 @@ public class SiteFactsheet {
         String res = "";
 
         try {
-            List results = new Chm62edtSitesAttributesDomain().findWhere(
-                    "ID_SITE='" + idSite + "' AND NAME='FLORA_CHARACTERIZATION'");
+            List results =
+                    new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + idSite + "' AND NAME='FLORA_CHARACTERIZATION'");
 
             if (null != results && results.size() > 0) {
                 Chm62edtSitesAttributesPersist persist = (Chm62edtSitesAttributesPersist) results.get(0);
@@ -1249,8 +1329,8 @@ public class SiteFactsheet {
         String res = "";
 
         try {
-            List results = new Chm62edtSitesAttributesDomain().findWhere(
-                    "ID_SITE='" + idSite + "' AND NAME='FAUNA_CHARACTERIZATION'");
+            List results =
+                    new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + idSite + "' AND NAME='FAUNA_CHARACTERIZATION'");
 
             if (null != results && results.size() > 0) {
                 Chm62edtSitesAttributesPersist persist = (Chm62edtSitesAttributesPersist) results.get(0);
@@ -1273,7 +1353,8 @@ public class SiteFactsheet {
         String res = "";
 
         try {
-            List results = new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + idSite + "' AND NAME='CONTACT_INTERNATIONAL'");
+            List results =
+                    new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + idSite + "' AND NAME='CONTACT_INTERNATIONAL'");
 
             if (null != results && !results.isEmpty()) {
                 Chm62edtSitesAttributesPersist persist = (Chm62edtSitesAttributesPersist) results.get(0);
@@ -1365,7 +1446,8 @@ public class SiteFactsheet {
         String res = "";
 
         try {
-            List results = new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + idSite + "' AND NAME='POTENTIAL_VEGETATION'");
+            List results =
+                    new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + idSite + "' AND NAME='POTENTIAL_VEGETATION'");
 
             if (null != results && !results.isEmpty()) {
                 Chm62edtSitesAttributesPersist persist = (Chm62edtSitesAttributesPersist) results.get(0);
@@ -1401,7 +1483,7 @@ public class SiteFactsheet {
         }
         return res;
     }
-  
+
     /**
      * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='QUALITY'.
      *
@@ -1424,7 +1506,7 @@ public class SiteFactsheet {
         }
         return res;
     }
-  
+
     /**
      * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='VULNERABILITY'.
      *
@@ -1447,7 +1529,7 @@ public class SiteFactsheet {
         }
         return res;
     }
-  
+
     /**
      * SELECT * FROM CHM62EDT_SITES_ATTRIBUTES WHERE ID_SITE='idSite' AND NAME='DOCUMENTATION'.
      *
@@ -1480,7 +1562,8 @@ public class SiteFactsheet {
         String res = "";
 
         try {
-            List results = new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + idSite + "' AND NAME='EDUCATIONAL_INTEREST'");
+            List results =
+                    new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + idSite + "' AND NAME='EDUCATIONAL_INTEREST'");
 
             if (null != results && !results.isEmpty()) {
                 Chm62edtSitesAttributesPersist persist = (Chm62edtSitesAttributesPersist) results.get(0);
@@ -1749,8 +1832,8 @@ public class SiteFactsheet {
         String res = "";
 
         try {
-            List results = new Chm62edtSitesAttributesDomain().findWhere(
-                    "ID_SITE='" + idSite + "' AND NAME='REFERENCE_DOCUMENT_NUMBER'");
+            List results =
+                    new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + idSite + "' AND NAME='REFERENCE_DOCUMENT_NUMBER'");
 
             if (null != results && !results.isEmpty()) {
                 Chm62edtSitesAttributesPersist persist = (Chm62edtSitesAttributesPersist) results.get(0);
@@ -1773,8 +1856,8 @@ public class SiteFactsheet {
         String res = "";
 
         try {
-            List results = new Chm62edtSitesAttributesDomain().findWhere(
-                    "ID_SITE='" + idSite + "' AND NAME='REFERENCE_DOCUMENT_SOURCE'");
+            List results =
+                    new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + idSite + "' AND NAME='REFERENCE_DOCUMENT_SOURCE'");
 
             if (null != results && !results.isEmpty()) {
                 Chm62edtSitesAttributesPersist persist = (Chm62edtSitesAttributesPersist) results.get(0);
@@ -2121,9 +2204,9 @@ public class SiteFactsheet {
         String res = "";
 
         try {
-            List results = new Chm62edtSitesAttributesDomain().findWhere(
-                    "ID_SITE='" + idSite + "' AND NAME LIKE '" + attrName + "%' AND SOURCE_DB='" + getSiteObject().getSourceDB()
-                    + "'");
+            List results =
+                    new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + idSite + "' AND NAME LIKE '" + attrName
+                            + "%' AND SOURCE_DB='" + getSiteObject().getSourceDB() + "'");
 
             if (null != results && !results.isEmpty()) {
                 Chm62edtSitesAttributesPersist persist = (Chm62edtSitesAttributesPersist) results.get(0);
@@ -2147,8 +2230,9 @@ public class SiteFactsheet {
         String res = "";
 
         try {
-            List results = new Chm62edtSitesAttributesDomain().findWhere(
-                    "ID_SITE='" + idSite + "' AND NAME = '" + attrName + "' AND SOURCE_DB='" + getSiteObject().getSourceDB() + "'");
+            List results =
+                    new Chm62edtSitesAttributesDomain().findWhere("ID_SITE='" + idSite + "' AND NAME = '" + attrName
+                            + "' AND SOURCE_DB='" + getSiteObject().getSourceDB() + "'");
 
             if (null != results && !results.isEmpty()) {
                 Chm62edtSitesAttributesPersist persist = (Chm62edtSitesAttributesPersist) results.get(0);
@@ -2186,15 +2270,16 @@ public class SiteFactsheet {
 
     /**
      * Other related sites using Natura 2000 designations.
+     *
      * @return List of DesignationsSitesRelatedDesignationsPersist objects
      */
     public List findSiteRelationsNatura2000Desigc() {
         List results = new Vector();
 
         try {
-            results = new DesignationsSitesRelatedDesignationsDomain().findWhere(
-                    "ID_SITE='" + getSiteObject().getIdSite()
-                    + "' AND SOURCE_TABLE = 'DESIGC' group by id_designation, description_en,NATIONAL_CATEGORY,overlap");
+            results =
+                    new DesignationsSitesRelatedDesignationsDomain().findWhere("ID_SITE='" + getSiteObject().getIdSite()
+                            + "' AND SOURCE_TABLE = 'DESIGC' group by id_designation, description_en,NATIONAL_CATEGORY,overlap");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -2207,15 +2292,18 @@ public class SiteFactsheet {
 
     /**
      * Other related sites using Natura 2000 designations.
+     *
      * @return List of DesignationsSitesRelatedDesignationsPersist objects
      */
     public List findSiteRelationsNatura2000Desigr() {
         List results = new Vector();
 
         try {
-            results = new DesignationsSitesRelatedDesignationsDomain().findWhere(
-                    "ID_SITE='" + getSiteObject().getIdSite()
-                    + "' AND SOURCE_TABLE = 'DESIGR' group by designated_site,description_en,NATIONAL_CATEGORY,overlap,overlap_type");
+            results =
+                    new DesignationsSitesRelatedDesignationsDomain()
+                            .findWhere("ID_SITE='"
+                                    + getSiteObject().getIdSite()
+                                    + "' AND SOURCE_TABLE = 'DESIGR' group by designated_site,description_en,NATIONAL_CATEGORY,overlap,overlap_type");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -2228,15 +2316,16 @@ public class SiteFactsheet {
 
     /**
      * Relation with other sites.
+     *
      * @return List of DesignationsSitesRelatedDesignationsPersist objects
      */
     public List findSiteRelationsCorine() {
         List results = new Vector();
 
         try {
-            results = new DesignationsSitesRelatedDesignationsDomain().findWhere(
-                    "ID_SITE='" + getSiteObject().getIdSite()
-                    + "' group by designated_site,description_en,NATIONAL_CATEGORY,overlap,overlap_type");
+            results =
+                    new DesignationsSitesRelatedDesignationsDomain().findWhere("ID_SITE='" + getSiteObject().getIdSite()
+                            + "' group by designated_site,description_en,NATIONAL_CATEGORY,overlap,overlap_type");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -2256,11 +2345,13 @@ public class SiteFactsheet {
         List results = new Vector();
 
         try {
-            String isGoodHabitat = " IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',RIGHT(CHM62EDT_HABITAT.CODE_2000,2),1) <> IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '','00',2) AND IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',LENGTH(CHM62EDT_HABITAT.CODE_2000),1) = IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',4,1) ";
+            String isGoodHabitat =
+                    " IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',RIGHT(CHM62EDT_HABITAT.CODE_2000,2),1) <> IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '','00',2) AND IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',LENGTH(CHM62EDT_HABITAT.CODE_2000),1) = IF(TRIM(CHM62EDT_HABITAT.CODE_2000) <> '',4,1) ";
 
-            results = new SiteHabitatsDomain().findWhere(
-                    isGoodHabitat + " AND A.ID_NATURE_OBJECT='" + getSiteObject().getIdNatureObject()
-                    + "' GROUP BY CHM62EDT_HABITAT.ID_NATURE_OBJECT, CHM62EDT_SITES.ID_NATURE_OBJECT");
+            results =
+                    new SiteHabitatsDomain().findWhere(isGoodHabitat + " AND A.ID_NATURE_OBJECT='"
+                            + getSiteObject().getIdNatureObject()
+                            + "' GROUP BY CHM62EDT_HABITAT.ID_NATURE_OBJECT, CHM62EDT_SITES.ID_NATURE_OBJECT");
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
             results = new Vector();
@@ -2273,6 +2364,7 @@ public class SiteFactsheet {
 
     /**
      * Determine site type: Natura 2000, Corine, CDDA etc.
+     *
      * @return Habitat type
      */
     public String getSiteType() {
@@ -2280,8 +2372,9 @@ public class SiteFactsheet {
         String sType = "";
 
         try {
-            results = new Chm62edtSitesAttributesDomain().findWhere(
-                    " NAME='TYPE' AND ID_SITE = '" + getSiteObject().getIdSite() + "'");
+            results =
+                    new Chm62edtSitesAttributesDomain().findWhere(" NAME='TYPE' AND ID_SITE = '" + getSiteObject().getIdSite()
+                            + "'");
             if (results.size() > 0) {
                 Chm62edtSitesAttributesPersist t = (Chm62edtSitesAttributesPersist) results.get(0);
 
@@ -2293,4 +2386,85 @@ public class SiteFactsheet {
         return sType;
     }
 
+    /**
+     * Returns the underlying site's main picture available in the database. If no such picture exists, the method returns null.
+     *
+     * @param picturePath
+     * @param domainName
+     * @return
+     */
+    public PictureDTO getMainPicture(String picturePath, String domainName) {
+
+        PictureDTO result = null;
+        try {
+            List<Chm62edtNatureObjectPicturePersist> pictureList = getPicturesForSites(1, true);
+            if (pictureList != null && !pictureList.isEmpty()) {
+
+                Chm62edtNatureObjectPicturePersist mainPicture = pictureList.get(0);
+                if (mainPicture != null) {
+
+                    String maxWidthStr = mainPicture.getMaxWidth().toString();
+                    String maxHeightStr = mainPicture.getMaxHeight().toString();
+                    Integer maxWidthInt = Utilities.checkedStringToInt(maxWidthStr, Integer.valueOf(0));
+                    Integer maxHeightInt = Utilities.checkedStringToInt(maxHeightStr, Integer.valueOf(0));
+
+                    String styleAttr = "max-width:300px; max-height:400px;";
+                    if (maxWidthInt != null && maxWidthInt.intValue() > 0 && maxHeightInt != null && maxHeightInt.intValue() > 0) {
+                        styleAttr = "max-width: " + maxWidthInt.intValue() + "px; max-height: " + maxHeightInt.intValue() + "px";
+                    }
+
+                    String description = mainPicture.getDescription();
+                    if (description == null || description.equals("")) {
+                        description = getSiteObject().getDescription();
+                    }
+
+                    result = new PictureDTO();
+                    result.setFilename(mainPicture.getFileName());
+                    result.setDescription(description);
+                    result.setSource(mainPicture.getSource());
+                    result.setSourceUrl(mainPicture.getSourceUrl());
+                    result.setStyle(styleAttr);
+                    result.setMaxwidth(maxWidthStr);
+                    result.setMaxheight(maxHeightStr);
+                    result.setPath(picturePath);
+                    result.setDomain(domainName);
+                    result.setLicense(mainPicture.getLicense());
+                }
+
+            }
+        } catch (Exception _ex) {
+            _ex.printStackTrace(System.err);
+        }
+        return result;
+    }
+
+    /**
+     * Returns the main pictures of this site,a s present in the CHM62EDT_NATURE_OBJECT_PICTURE table.
+     *
+     * @param limit
+     * @param mainPicOnly
+     * @return
+     */
+    private List<Chm62edtNatureObjectPicturePersist> getPicturesForSites(Integer limit, boolean mainPicOnly) {
+
+        List<Chm62edtNatureObjectPicturePersist> resultList = new ArrayList<Chm62edtNatureObjectPicturePersist>();
+        Chm62edtNatureObjectPictureDomain pictureDomain = new Chm62edtNatureObjectPictureDomain();
+        String where = "";
+        where += " ID_OBJECT='" + getSiteObject().getIdSite() + "'";
+        where += " AND NATURE_OBJECT_TYPE='Sites'";
+
+        if (mainPicOnly) {
+            where += " AND MAIN_PIC = 1";
+        }
+        if (limit != null) {
+            where += " LIMIT " + limit;
+        }
+
+        try {
+            resultList = pictureDomain.findWhere(where);
+        } catch (Exception _ex) {
+            _ex.printStackTrace(System.err);
+        }
+        return resultList;
+    }
 }

@@ -1,6 +1,6 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 
-<%@ include file="/stripes/common/taglibs.jsp"%>	
+<%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle }">
 	<stripes:layout-component name="head">
 		<c:if test="${eunis:exists(actionBean.factsheet)}">
@@ -14,22 +14,22 @@
 		      {
 		        window.open(theURL,winName,features);
 		      }
-		
+
 		      function openLink(URL)
 		      {
 		        eval("page = window.open(URL, '', 'scrollbars=no,toolbar=0,resizable=yes, location=0,width=380,height=350');");
 		      }
-		
+
 		      function openGooglePics(URL)
 		      {
 		        eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=yes,resizable=yes, location=yes,width="+screen.width+",height="+screen.height+",left=0,top=0');");
 		      }
-		
+
 		      function openpictures(URL, width, height)
 		      {
 		        eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=0,resizable=yes, location=0,width="+width+",height="+height+",left=100,top=0');");
 		      }
-		
+
 		      function openunepwcmc(URL, width, height)
 		      {
 		        eval("page = window.open(URL, '', 'scrollbars=yes,toolbar=yes,resizable=yes, location=yes,width="+screen.width+",height="+screen.height+",left=0,top=0');");
@@ -39,7 +39,7 @@
 	</stripes:layout-component>
 	<stripes:layout-component name="contents">
 
-		<!-- MAIN CONTENT --> 
+		<!-- MAIN CONTENT -->
 		<c:choose>
 			<c:when test="${actionBean.factsheet.IDNatureObject == null}">
 				<div class="error-msg">
@@ -49,7 +49,7 @@
 			<c:otherwise>
 				<c:choose>
 					<c:when test="${eunis:exists(actionBean.factsheet)}">
-		
+
 						<img id="loading" src="images/loading.gif"
 							alt="${eunis:cms(actionBean.contentManagement, 'loading')}"
 							title="${eunis:cms(actionBean.contentManagement, 'loading')}" />
@@ -86,7 +86,7 @@
 							</ul>
 						</div>
 						<div class="documentDescription">
-							${eunis:cmsPhrase(actionBean.contentManagement, 'Factsheet filled with data from')} ${actionBean.sdb}
+							${eunis:cmsPhrase(actionBean.contentManagement, 'Factsheet filled with data from')} ${actionBean.sourceDbName}
 							${eunis:cmsPhrase(actionBean.contentManagement, 'data set')}
 						</div>
 						<div id="tabbedmenu">
@@ -112,9 +112,7 @@
 						<br class="brClear" />
 						<br />
 						<c:if test="${actionBean.tab == 'general'}">
-							<jsp:include page="/sites-factsheet-general.jsp">
-								<jsp:param name="idsite" value="${actionBean.idsite}" />
-							</jsp:include>
+							<stripes:layout-render name="/stripes/sites-factsheet-general.jsp"/>
 						</c:if>
 						<c:if test="${actionBean.tab == 'faunaflora'}">
 							<jsp:include page="/sites-factsheet-faunaflora.jsp">
@@ -140,21 +138,21 @@
 							<jsp:include page="/sites-factsheet-other.jsp">
 								<jsp:param name="idsite" value="${actionBean.idsite}" />
 							</jsp:include></c:if>
-		
+
 					</c:when>
 					<c:otherwise>
 		                <br />
 					</c:otherwise>
 				</c:choose>
-				<c:forEach items="${actionBean.tabs}" var="tab">
+				<c:forEach items="${actionBean.tabTitles}" var="tab">
                   ${eunis:cmsMsg(actionBean.contentManagement, tab)}
                   ${eunis:br(actionBean.contentManagement)}
 				</c:forEach>
                  ${eunis:cmsMsg(actionBean.contentManagement, 'sites_factsheet_title')}
                  ${eunis:br(actionBean.contentManagement)}
-                 ${eunis:cmsMsg(actionBean.contentManagement, 'loading')}		
+                 ${eunis:cmsMsg(actionBean.contentManagement, 'loading')}
 			</c:otherwise>
-		</c:choose> 
+		</c:choose>
 		<!-- END MAIN CONTENT -->
 		<script language="JavaScript" type="text/javascript">
 	      //<![CDATA[

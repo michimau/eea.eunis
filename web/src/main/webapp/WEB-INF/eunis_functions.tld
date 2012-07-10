@@ -20,7 +20,7 @@
 			${exists(factsheet)}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>Wrapper to call WebContentManagement.cms</description>
 		<name>cms</name>
@@ -30,7 +30,7 @@
 			${cms(actionBean.webContent, key)}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>Wrapper to call WebContentManagement.cmsTitle</description>
 		<name>cmsTitle</name>
@@ -60,7 +60,7 @@
 			${cmsMsg(actionBean.webContent, key)}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>Wrapper to call WebContentManagement.br</description>
 		<name>br</name>
@@ -80,7 +80,7 @@
 			${cmsInput(actionBean.webContent, text)}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>Wrapper to call WebContentManagement.cmsLabel</description>
 		<name>cmsLabel</name>
@@ -90,7 +90,7 @@
 			${cmsLabel(actionBean.webContent, text)}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>Wrapper to call WebContentManagement.cmsAlt</description>
 		<name>cmsAlt</name>
@@ -100,7 +100,7 @@
 			${cmsAlt(actionBean.webContent, text)}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>
 			Encodes the string
@@ -124,7 +124,7 @@
 			${replaceTags2("text", true, true)}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>
 			This method is used to display value taken from database, which may be null so displaying indirectly through
@@ -137,7 +137,7 @@
 			${formatString("text","default")}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>
 			Returns required number of decimals
@@ -149,7 +149,7 @@
 			${formatDecimal("8.990",2)}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>
 			Translate the SOURCE_DB field from CHM62EDT_SITES in human readable language
@@ -161,7 +161,7 @@
 			${translateSourceDB("CDDA_NATIONAL")}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>
 			Replace characters having special meaning inside HTML tags with their escaped equivalents, using character entities.
@@ -173,10 +173,10 @@
 			${treatURLSpecialCharacters("xxx")}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>
-			This method formats the area field from the sites module which is displayed within HTML result pages.
+			See JavaDoc of the below function-signature.
 	 	</description>
 		<name>formatArea</name>
 		<function-class>eionet.eunis.util.JstlFunctions</function-class>
@@ -185,7 +185,19 @@
 			${formatArea("-1.9999", 4, 4," ")}
 		</example>
 	</function>
-	
+
+	<function>
+        <description>
+            See JavaDoc of the below function-signature.
+        </description>
+        <name>formatAreaExt</name>
+        <function-class>eionet.eunis.util.JstlFunctions</function-class>
+        <function-signature>java.lang.String formatArea(java.lang.String, int, int, java.lang.String, java.lang.String)</function-signature>
+        <example>
+            ${formatArea("-1.9999", 4, 4," ")}
+        </example>
+    </function>
+
 	<function>
 		<description>
 			Find a reference by an idDc and return a vector with two elements , first element contains author of that
@@ -198,7 +210,7 @@
 			${getAuthorAndUrlByIdDc("154")}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>
 			Find a reference by her idDc.
@@ -210,7 +222,7 @@
 			${getReferencesByIdDc("154")}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>
 			Replace part of string
@@ -222,7 +234,7 @@
 			${replaceAll("xxx.yyy","."," ")}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>
 			Utility class for HTML form encoding.
@@ -234,7 +246,7 @@
 			${encode("Canis lupus")}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>
 			Utility class for checking if country exists.
@@ -246,7 +258,7 @@
 			${isCountry("Estonia")}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>
 			Return yes/no depending on integer value
@@ -258,7 +270,7 @@
 			${getYesNo(1)}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>
 			Executes any method that takes one Integer param and returns String
@@ -270,7 +282,7 @@
 			${execMethodParamInteger("className","methodName",1)}
 		</example>
 	</function>
-	
+
 	<function>
 		<description>
 			Executes any method that takes one String param and returns String

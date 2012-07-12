@@ -25,8 +25,8 @@
       String eeaHome = application.getInitParameter( "EEA_HOME" );
       String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,country_biogeographic_region_location";
     %>
-    <script language="JavaScript" src="script/species-country.js" type="text/javascript"></script>
-    <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
+    <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-country.js" type="text/javascript"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript">
     //<![CDATA[
         function onLoadFunction() {

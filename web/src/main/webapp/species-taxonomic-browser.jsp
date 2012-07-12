@@ -22,8 +22,8 @@
   <head>
   <jsp:include page="header-page.jsp" />
     <link rel="StyleSheet" href="css/eunistree.css" type="text/css" />
-    <script language="JavaScript" type="text/javascript" src="script/tree.js"></script>
-    <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/tree.js"></script>
+    <script language="JavaScript" src="<%=request.getContextPath()%>/script/sortable.js" type="text/javascript"></script>
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );

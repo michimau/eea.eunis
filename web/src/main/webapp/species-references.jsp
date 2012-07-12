@@ -17,8 +17,8 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-    <script language="JavaScript" type="text/javascript" src="script/species-references.js"></script>
-    <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/species-references.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
@@ -319,7 +319,7 @@
                         //]]>
                       </script>
                       <br />
-                      <script language="JavaScript" type="text/javascript" src="script/species-references-save-criteria.js"></script>
+                      <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/species-references-save-criteria.js"></script>
                       <%=cm.cmsPhrase("Save your criteria")%>:
                       <a title="<%=cm.cms("save_open_link")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'species-references.jsp','5','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_open_link")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                       <%=cm.cmsTitle("save_open_link")%>

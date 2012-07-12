@@ -17,13 +17,13 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
-  <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
+  <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>
   <%
     WebContentManagement cm = SessionManager.getWebContent();
     String eeaHome = application.getInitParameter( "EEA_HOME" );
     String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,pick_species_show_references_location";
   %>
-  <script language="JavaScript" src="script/species-books-save-criteria.js" type="text/javascript"></script>
+  <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-books-save-criteria.js" type="text/javascript"></script>
   <script language="JavaScript" type="text/javascript">
   //<![CDATA[
       var errMessageForm = "<%=cm.cmsPhrase("Before searching, please type a few letters from species scientific name")%>.";

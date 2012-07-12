@@ -7,7 +7,7 @@
                         <link rel="alternate" type="application/rdf+xml" title="RDF" href="${pageContext.request.contextPath}/habitats/${actionBean.idHabitat}/rdf" />
                 </c:if>
 
-		<script src="script/overlib.js" type="text/javascript"></script>
+		<script src="<%=request.getContextPath()%>/script/overlib.js" type="text/javascript"></script>
 		<script type="text/javascript">
 		    //<![CDATA[
 		      function openpictures( URL, width, height )

@@ -28,7 +28,7 @@
     <title>
       <%=cm.cmsPhrase("Save criteria")%>
     </title>
-    <script language="JavaScript" src="script/header.js" type="text/javascript"></script>  
+    <script language="JavaScript" src="<%=request.getContextPath()%>/script/header.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript">
       //<![CDATA[
         function closeWindow(where,exp)

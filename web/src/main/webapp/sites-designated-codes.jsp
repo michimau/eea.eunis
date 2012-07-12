@@ -22,9 +22,9 @@
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,Sites#sites.jsp,sites_designated_codes_location";
 %>
-    <script language="JavaScript" type="text/javascript" src="script/sites-designated-codes.js"></script>
-    <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
-    <script language="JavaScript" type="text/javascript" src="script/sites-designated-codes-save-criteria.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-designated-codes.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-designated-codes-save-criteria.js"></script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("site_by_designation_codes")%>

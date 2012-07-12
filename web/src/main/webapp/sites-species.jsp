@@ -23,8 +23,8 @@
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,sites_species_location";
 %>
-    <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
-    <script language="JavaScript" type="text/javascript" src="script/sites-species-save-criteria.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-species-save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript">
       //<![CDATA[
         function validateForm()

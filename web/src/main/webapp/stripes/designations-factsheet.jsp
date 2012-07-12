@@ -1,6 +1,6 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 
-<%@ include file="/stripes/common/taglibs.jsp"%>	
+<%@ include file="/stripes/common/taglibs.jsp"%>
 
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle}">
 	<stripes:layout-component name="head">
@@ -15,11 +15,11 @@
 		    }
 		    //]]>
 		    </script>
-		    <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
+		    <script language="JavaScript" src="<%=request.getContextPath()%>/script/sortable.js" type="text/javascript"></script>
 	</stripes:layout-component>
 	<stripes:layout-component name="contents">
 			<!-- MAIN CONTENT -->
-			<c:choose> 
+			<c:choose>
 				<c:when test="${!empty actionBean.factsheet}">
 					<h1 class="documentFirstHeading">${eunis:cmsPhrase(actionBean.contentManagement, 'Designation type')}: ${actionBean.fromWho}</h1>
 					<div class="documentActions">
@@ -66,7 +66,7 @@
                     			${eunis:cmsPhrase(actionBean.contentManagement, 'Geographical coverage')}
                     		</td>
                     		<td>
-                    			<c:choose> 
+                    			<c:choose>
 									<c:when test="${actionBean.isCountry}">
 										<a href="sites-statistical-result.jsp?country=${actionBean.country}&amp;DB_NATURA2000=true&amp;DB_CDDA_NATIONAL=true&amp;DB_NATURE_NET=false&amp;DB_CORINE=true&amp;DB_CDDA_INTERNATIONAL=true&amp;DB_DIPLOMA=true&amp;DB_BIOGENETIC=true&amp;DB_EMERALD=true" title="${eunis:cms(actionBean.contentManagement, 'open_the_statistical_data_for')} ${actionBean.country}">
 											<strong>${actionBean.country}</strong>
@@ -84,7 +84,7 @@
 	                      		${eunis:cmsPhrase(actionBean.contentManagement, 'Designation name in original language')}
 	                    	</td>
 	                    	<td>
-	                      		<c:choose> 
+	                      		<c:choose>
 									<c:when test="${actionBean.fromWhere == 'original'}">
 										<strong>${eunis:formatString(actionBean.factsheet.description, "")}</strong>
 									</c:when>
@@ -99,7 +99,7 @@
 	                      		${eunis:cmsPhrase(actionBean.contentManagement, 'Designation name in English')}
 	                    	</td>
 	                    	<td>
-	                      		<c:choose> 
+	                      		<c:choose>
 									<c:when test="${actionBean.fromWhere == 'en'}">
 										<strong>${eunis:formatString(actionBean.factsheet.descriptionEn, "")}</strong>
 									</c:when>
@@ -142,7 +142,7 @@
                     		</td>
                   		</tr>
 				  	</table>
-				  	<c:if test="${!empty actionBean.factsheet.nationalLaw || !empty actionBean.factsheet.nationalCategory 
+				  	<c:if test="${!empty actionBean.factsheet.nationalLaw || !empty actionBean.factsheet.nationalCategory
 				  					|| !empty actionBean.factsheet.nationalLawReference || !empty actionBean.factsheet.nationalLawAgency}">
 				  		<h2>
                   			${eunis:cmsPhrase(actionBean.contentManagement, 'National information')}
@@ -182,8 +182,8 @@
                   			</tr>
                   		</table>
 				  	</c:if>
-				  	<c:if test="${!empty actionBean.factsheet.dataSource || !empty actionBean.factsheet.referenceNumber 
-				  					|| !empty actionBean.factsheet.referenceDate || !empty actionBean.factsheet.remark 
+				  	<c:if test="${!empty actionBean.factsheet.dataSource || !empty actionBean.factsheet.referenceNumber
+				  					|| !empty actionBean.factsheet.referenceDate || !empty actionBean.factsheet.remark
 				  					|| !empty actionBean.factsheet.remarkSource}">
 				  		<h2>
 				  			${eunis:cmsPhrase(actionBean.contentManagement, 'References')}
@@ -279,9 +279,9 @@
                   		</table>
                   		<br/>
 				  	</c:if>
-				  	<c:choose> 
+				  	<c:choose>
 						<c:when test="${actionBean.showSites}">
-						  	<c:choose> 
+						  	<c:choose>
 								<c:when test="${!empty actionBean.sites}">
 							  		<h2>
 					                  	${eunis:cmsPhrase(actionBean.contentManagement, 'Related sites for this designation')}

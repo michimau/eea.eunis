@@ -28,7 +28,7 @@
     <jsp:setProperty name="formBean" property="*" />
   </jsp:useBean>
   <jsp:include page="header-page.jsp" />
-  <script language="JavaScript" src="script/species-result.js" type="text/javascript"></script>
+  <script language="JavaScript" src="<%=request.getContextPath()%>/script/species-result.js" type="text/javascript"></script>
   <%
     WebContentManagement cm = SessionManager.getWebContent();
     String eeaHome = application.getInitParameter( "EEA_HOME" );

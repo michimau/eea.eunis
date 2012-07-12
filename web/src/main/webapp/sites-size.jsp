@@ -31,9 +31,9 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
 %>
-    <script language="JavaScript" type="text/javascript" src="script/sites-size.js"></script>
-    <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
-    <script language="JavaScript" type="text/javascript" src="script/sites-size-save-criteria.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-size.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-size-save-criteria.js"></script>
     <script language="JavaScript" type="text/JavaScript">
     //<![CDATA[
         function MM_jumpMenu(targ, selObj, restore){

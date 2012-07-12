@@ -108,7 +108,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
 %>
-  <script language="JavaScript" src="script/habitats-result.js" type="text/javascript"></script>
+  <script language="JavaScript" src="<%=request.getContextPath()%>/script/habitats-result.js" type="text/javascript"></script>
   <script language="JavaScript" type="text/javascript">
   //<![CDATA[
     function openPopup(theURL,winName,features) { //v2.0

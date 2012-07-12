@@ -17,9 +17,9 @@
 <%@ page import="java.util.List"%>
 <jsp:include page="meta-tags.jsp"/>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
-<script type="text/javascript" language="JavaScript" src="script/msg-<%=SessionManager.getCurrentLanguage()%>.js"></script>
-<script type="text/javascript" language="JavaScript" src="script/header.js"></script>
-<script type="text/javascript" language="JavaScript" src="script/utils.js"></script>
+<script type="text/javascript" language="JavaScript" src="<%=request.getContextPath()%>/script/msg-<%=SessionManager.getCurrentLanguage()%>.js"></script>
+<script type="text/javascript" language="JavaScript" src="<%=request.getContextPath()%>/script/header.js"></script>
+<script type="text/javascript" language="JavaScript" src="<%=request.getContextPath()%>/script/utils.js"></script>
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   List translatedLanguages = cm.getTranslatedLanguages();
@@ -89,5 +89,5 @@
   }
 %>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/print.css" media="print" />
-    
+
 <jsp:include page="required-head.jsp" />

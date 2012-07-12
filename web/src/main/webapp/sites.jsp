@@ -24,7 +24,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>" lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-    <script language="javascript" type="text/javascript" src="script/sites.js"></script>
+    <script language="javascript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites.js"></script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cmsPhrase("Sites")%>

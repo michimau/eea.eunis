@@ -12,8 +12,8 @@
 </c:choose>
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}">
 	<stripes:layout-component name="head">
-		<script src="script/species.js" type="text/javascript"></script>
-		<script src="script/overlib.js" type="text/javascript"></script>
+		<script src="<%=request.getContextPath()%>/script/species.js" type="text/javascript"></script>
+		<script src="<%=request.getContextPath()%>/script/overlib.js" type="text/javascript"></script>
 		<link rel="alternate"
 			type="application/rdf+xml" title="RDF"
 			href="${pageContext.request.contextPath}/species/${actionBean.idSpecies}/rdf" />

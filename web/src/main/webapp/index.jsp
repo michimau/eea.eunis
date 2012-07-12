@@ -104,7 +104,7 @@
 		    SessionManager.setPassword(null);
 		  }
 		%>
-  		<script language="JavaScript" src="script/index.js" type="text/javascript"></script>
+  		<script language="JavaScript" src="<%=request.getContextPath()%>/script/index.js" type="text/javascript"></script>
   		<title>
     		<%=application.getInitParameter("PAGE_TITLE")%>
     		<%=cm.cmsPhrase( "Welcome to EUNIS Database" )%>

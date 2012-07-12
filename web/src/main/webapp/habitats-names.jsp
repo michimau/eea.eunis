@@ -22,8 +22,8 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
-  <script language="JavaScript" src="script/habitats-names.js" type="text/javascript"></script>
-  <script language="JavaScript" src="script/save-criteria.js" type="text/javascript"></script>
+  <script language="JavaScript" src="<%=request.getContextPath()%>/script/habitats-names.js" type="text/javascript"></script>
+  <script language="JavaScript" src="<%=request.getContextPath()%>/script/save-criteria.js" type="text/javascript"></script>
   <%
     String eeaHome = application.getInitParameter( "EEA_HOME" );
     String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,names";
@@ -194,7 +194,7 @@
                     var database3='<%=NamesDomain.SEARCH_BOTH%>';
                     //]]>
                     </script>
-                    <script language="JavaScript" src="script/habitats-names-save-criteria.js" type="text/javascript"></script>
+                    <script language="JavaScript" src="<%=request.getContextPath()%>/script/habitats-names-save-criteria.js" type="text/javascript"></script>
                     <%=cm.cmsPhrase("Save your criteria")%>:
                     <a title="<%=cm.cmsPhrase("Save search criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-names.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cmsPhrase("Save search criteria")%>" title="Save" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                 <%

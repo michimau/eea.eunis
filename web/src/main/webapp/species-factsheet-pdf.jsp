@@ -24,7 +24,7 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp"/>
-  <script language="JavaScript" type="text/javascript" src="script/timer.js"></script>
+  <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/timer.js"></script>
 <%
   Integer idSpecies = Utilities.checkedStringToInt( request.getParameter( "idSpecies" ), new Integer( 0 ) );
   Integer idSpeciesLink = Utilities.checkedStringToInt( request.getParameter( "idSpeciesLink" ), new Integer( 0 ) );

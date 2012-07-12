@@ -84,8 +84,8 @@
         padding: 5px 15px 2px 3px;
       }
     </style>
-    <script language="JavaScript" type="text/javascript" src="script/overlib.js"></script>
-    <script language="JavaScript" type="text/javascript" src="script/user-management.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/overlib.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/user-management.js"></script>
   </head>
   <body>
     <div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>

@@ -22,9 +22,9 @@
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,coordinates";
 %>
-    <script type="text/javascript" language="Javascript" src="script/sites-coordinates.js"></script>
-    <script type="text/javascript" language="Javascript" src="script/save-criteria.js"></script>
-    <script type="text/javascript" language="Javascript" src="script/sites-coordinates-save-criteria.js"></script>
+    <script type="text/javascript" language="Javascript" src="<%=request.getContextPath()%>/script/sites-coordinates.js"></script>
+    <script type="text/javascript" language="Javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>
+    <script type="text/javascript" language="Javascript" src="<%=request.getContextPath()%>/script/sites-coordinates-save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript">
       //<![CDATA[
      var countryListString = "<%=Utilities.getCountryListString()%>";

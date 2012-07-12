@@ -24,9 +24,9 @@
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,sites_habitats_location";
 %>
-    <script language="JavaScript" type="text/javascript" src="script/sites-habitats.js"></script>
-    <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
-    <script language="JavaScript" type="text/javascript" src="script/sites-habitats-save-criteria.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-habitats.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-habitats-save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript">
     //<![CDATA[
     var errInvalidRegion = "Biogeographic regions is not valid, please use helper to find biogeographic regions";

@@ -3,21 +3,21 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${actionBean.pageTitle}">
 	<stripes:layout-component name="head">
-		<script language="JavaScript" src="script/lib/jquery.js" type="text/javascript"></script>
+		<script language="JavaScript" src="<%=request.getContextPath()%>/script/lib/jquery.js" type="text/javascript"></script>
 		<script language="JavaScript" type="text/javascript">
 		    //<![CDATA[
 		    	function MM_jumpMenu(targ,selObj,restore)
-		    	{ 
+		    	{
     				eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
     				if (restore) selObj.selectedIndex=0;
   				}
 
-  				function setCurrentSelected(val) 
+  				function setCurrentSelected(val)
   				{
     				current_selected = val;
     				return true;
   				}
-		    	function choice(ctl, lov, natureobject, oper) 
+		    	function choice(ctl, lov, natureobject, oper)
 		    	{
     				var cur_ctl = "window.document.criteria['"+ctl+"'].value";
     				var val = eval(cur_ctl);
@@ -60,15 +60,15 @@
 
 		    	$('#add_root a').click(function(e){
 		    		e.preventDefault();
-		    		
+
 		    	    $('#delete_root').fadeIn('slow');
 		    	    $(this).parent().hide();
 		    	    $('#criterion').fadeIn('slow');
 		    	});
-		    	
+
 		    	$('#delete_root a').click(function(e){
 		    		e.preventDefault();
-		    		
+
 		    	    $('#add_root').fadeIn('slow');
 		    	    $(this).parent().hide();
 		    	    $('.criterion').fadeOut('slow');
@@ -76,14 +76,14 @@
 
 		    	$('a[title=Add criterion]').click(function(e){
 		    		e.preventDefault();
-		    		
+
 		    	    var newElem = $('#criterion').clone(true).attr('id', 'criterion2').fadeIn('slow');
 		    	    $(this).parent().after(newElem);
 		    	});
 
 		    	$('a[title=Delete criterion]').click(function(e){
 		    		e.preventDefault();
-		    		
+
 		    	    $(this).parent().fadeOut('slow');
 		    	    });
 		    	});
@@ -99,13 +99,13 @@
 			${eunis:cmsTitle(actionBean.contentManagement, 'Document Actions')}
 			<ul>
 				<li>
-					<a href="javascript:this.print();"> 
+					<a href="javascript:this.print();">
 						<img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
 							 alt="${eunis:cmsPhrase(actionBean.contentManagement, 'Print this page')}"
 							 title="${eunis:cmsPhrase(actionBean.contentManagement, 'Print this page')}" />
 					</a>
 				</li>
-				<li><a href="javascript:toggleFullScreenMode();"> 
+				<li><a href="javascript:toggleFullScreenMode();">
 					<img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
 						 alt="${eunis:cmsPhrase(actionBean.contentManagement, 'Toggle full screen mode')}"
 					 	 title="${eunis:cmsPhrase(actionBean.contentManagement, 'Toggle full screen mode')}" />
@@ -134,11 +134,11 @@
             <stripes:hidden name="oldlastvalue" value="" />
             <stripes:hidden name="action" value="" />
             <stripes:hidden name="idnode" value="" />
-            
+
             <div id="add_root">
 	            <a title="${eunis:cms(actionBean.contentManagement, 'add_root')}" href=""><img border="0" src="images/mini/add.gif" width="13" height="13" alt="${eunis:cms(actionBean.contentManagement, 'add_root')}" /></a>&nbsp;${eunis:cmsPhrase(actionBean.contentManagement, 'Add root criterion')}
             </div>
-            
+
             <div id="delete_root">
             	<a title="${eunis:cms(actionBean.contentManagement, 'delete_root_criterion')}" href=""><img alt="${eunis:cms(actionBean.contentManagement, 'delete_root_criterion')}" border="0" src="images/mini/delete.gif" width="13" height="13"/></a>${eunis:cmsTitle(actionBean.contentManagement, 'delete_root_criterion')}
             	<stripes:label for="Criteria" class="noshow">${eunis:cms(actionBean.contentManagement, 'criteria')}</stripes:label>
@@ -146,35 +146,35 @@
                 	<stripes:options-collection collection="${actionBean.listForCtriteria}"/>
                 </stripes:select>
                 ${eunis:cms(actionBean.contentManagement, 'of_following_criteria_are_met')}
-                <br />     
+                <br />
             </div>
-            
+
             <div id=criterion class="criterion">
             	<a title="${eunis:cms(actionBean.contentManagement, 'add_criterion')}" href="#"><img border="0" src="images/mini/add.gif" width="13" height="13" alt="${eunis:cms(actionBean.contentManagement, 'add_criterion')}"/></a>${eunis:cmsTitle(actionBean.contentManagement, 'add_criterion')}
             	<a title="${eunis:cms(actionBean.contentManagement, 'delete_criterion')}" href="#"><img border="0" src="images/mini/delete.gif" width="13" height="13" alt="${eunis:cms(actionBean.contentManagement, 'delete_criterion')}"/></a>${eunis:cmsTitle(actionBean.contentManagement, 'delete_criterion')}
-            	<a title="${eunis:cms(actionBean.contentManagement, 'compose_criterion')}" href="#"><img border="0" src="images/mini/compose.gif" width="13" height="13" alt="${eunis:cms(actionBean.contentManagement, 'compose_criterion')}"/></a>${eunis:cmsTitle(actionBean.contentManagement,'compose_criterion')} 
-		
-				&nbsp;1.1 
+            	<a title="${eunis:cms(actionBean.contentManagement, 'compose_criterion')}" href="#"><img border="0" src="images/mini/compose.gif" width="13" height="13" alt="${eunis:cms(actionBean.contentManagement, 'compose_criterion')}"/></a>${eunis:cmsTitle(actionBean.contentManagement,'compose_criterion')}
+
+				&nbsp;1.1
 				<stripes:label for="Attribute" class="noshow">${eunis:cms(actionBean.contentManagement, 'advanced_attribute')}</stripes:label>
 				<stripes:select name="Attribute" title="${eunis:cms(actionBean.contentManagement, 'advanced_attribute')}" id="Attribute">
                 	<stripes:options-collection collection="${actionBean.attributesList}"/>
                 </stripes:select>
-				&nbsp; 
+				&nbsp;
 				<stripes:label for="Operator" class="noshow">${eunis:cms(actionBean.contentManagement, 'operator')}</stripes:label>
 				<stripes:select name="Operator" title="${eunis:cms(actionBean.contentManagement, 'operator')}" id="Operator">
                 	<stripes:options-collection collection="${actionBean.operatorsList}"/>
                 </stripes:select>
-				&nbsp; 
+				&nbsp;
 				<stripes:label for="First_Value1" class="noshow">${eunis:cms(actionBean.contentManagement, 'list_of_values')}</stripes:label>
 				<stripes:text title="${eunis:cms(actionBean.contentManagement, 'list_of_values')}" name="First_Value" id="First_Value" size="25" value="enter value here..." />
-				${eunis:cmsTitle(actionBean.contentManagement,'list_of_values')} 
+				${eunis:cmsTitle(actionBean.contentManagement,'list_of_values')}
 				<a title="${eunis:cms(actionBean.contentManagement, 'list_of_values')}" href="javascript:choice('First_Value','','','')"><img border="0" src="images/helper/helper.gif" width="11" height="18" alt="${eunis:cms(actionBean.contentManagement, 'list_of_values')}"/></a>
-	            <br />     
-	                	
+	            <br />
+
             </div>
-            
+
 		</stripes:form>
-		
+
 		<br />
         <strong>${eunis:cmsPhrase(actionBean.contentManagement, 'Note: Advanced search might take a long time')}</strong>
         <br />
@@ -191,9 +191,9 @@
 		</jsp:include></div>
 		</div>
 		<!-- end of the left (by default at least) column -->
-		
+
 		<!-- end of the main and left columns -->
-		
+
 		<!-- start of right (by default at least) column -->
 		<div id="portal-column-two">
 		<div class="visualPadding"><jsp:include

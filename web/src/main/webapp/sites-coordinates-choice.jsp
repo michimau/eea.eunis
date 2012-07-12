@@ -42,8 +42,8 @@
         visibility : hidden;
       }
     </style>
-    <script language="JavaScript" type="text/javascript" src="script/map_selector/c_RubberRectangle.js"></script>
-    <script language="JavaScript" type="text/javascript" src="script/map_selector/c_rbox.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/map_selector/c_RubberRectangle.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/map_selector/c_rbox.js"></script>
     <script language="JavaScript" type="text/javascript">
       function boxprocess(OrigX,OrigY,DestX,DestY)
       {

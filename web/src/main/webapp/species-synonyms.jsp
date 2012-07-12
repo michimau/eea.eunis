@@ -30,8 +30,8 @@
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cms("species_synonyms_02")%>
     </title>
-    <script language="JavaScript" type="text/javascript" src="script/species-synonyms.js"></script>
-    <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/species-synonyms.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>
   </head>
   <body>
     <div id="visual-portal-wrapper">
@@ -186,7 +186,7 @@
                         //]]>
                         </script>
                         <br />
-                        <script language="JavaScript" type="text/javascript" src="script/species-synonyms-save-criteria.js"></script>
+                        <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/species-synonyms-save-criteria.js"></script>
                         <%=cm.cmsPhrase("Save your criteria")%>:
                         <a title="<%=cm.cms("save_open_link")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'species-synonyms.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cms("save_open_link")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                         <%=cm.cmsTitle("save_open_link")%>

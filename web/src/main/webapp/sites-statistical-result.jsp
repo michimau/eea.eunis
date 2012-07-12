@@ -52,8 +52,8 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
     <jsp:include page="header-page.jsp" />
-    <script language="JavaScript" type="text/javascript" src="script/sites-statistical.js"></script>
-    <script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-statistical.js"></script>
+    <script language="JavaScript" src="<%=request.getContextPath()%>/script/sortable.js" type="text/javascript"></script>
     <title>
       <%=application.getInitParameter("PAGE_TITLE")%>
       <%=cm.cmsPhrase("Statistical information for")%>

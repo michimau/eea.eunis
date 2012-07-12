@@ -24,8 +24,8 @@
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
 <head>
   <jsp:include page="header-page.jsp" />
-  <script language="JavaScript" src="script/habitats-legal.js" type="text/javascript"></script>
-  <script language="JavaScript" src="script/save-criteria.js" type="text/javascript"></script>
+  <script language="JavaScript" src="<%=request.getContextPath()%>/script/habitats-legal.js" type="text/javascript"></script>
+  <script language="JavaScript" src="<%=request.getContextPath()%>/script/save-criteria.js" type="text/javascript"></script>
   <%
     WebContentManagement cm = SessionManager.getWebContent();
     String eeaHome = application.getInitParameter( "EEA_HOME" );
@@ -220,7 +220,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <script language="JavaScript" src="script/habitats-legal-save-criteria.js" type="text/javascript"></script>
+                    <script language="JavaScript" src="<%=request.getContextPath()%>/script/habitats-legal-save-criteria.js" type="text/javascript"></script>
                     <%=cm.cmsPhrase("Save your criteria")%>:
                     <a title="<%=cm.cmsPhrase("Save search criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',true,'habitats-legal.jsp','3','eunis',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cmsPhrase("Save search criteria")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                   </td>

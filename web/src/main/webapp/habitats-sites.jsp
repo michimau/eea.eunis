@@ -25,7 +25,7 @@
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,habitats_sites_location";
 %>
-  <script language="JavaScript" src="script/save-criteria.js" type="text/javascript"></script>
+  <script language="JavaScript" src="<%=request.getContextPath()%>/script/save-criteria.js" type="text/javascript"></script>
   <script language="JavaScript" type="text/javascript">
   //<![CDATA[
 var errInvalidRegion = '<%=cm.cms("biogeographic_region_is_not_valid")%>';
@@ -240,7 +240,7 @@ function validateForm()
                 </tr>
                 <tr>
                   <td>
-                    <script language="JavaScript" src="script/habitats-sites-save-criteria.js" type="text/javascript"></script>
+                    <script language="JavaScript" src="<%=request.getContextPath()%>/script/habitats-sites-save-criteria.js" type="text/javascript"></script>
                     <%=cm.cmsPhrase("Save your criteria")%>:
                     <a title="<%=cm.cmsPhrase("Save search criteria")%>" href="javascript:composeParameterListForSaveCriteria('<%=request.getParameter("expandSearchCriteria")%>',validateForm(),'habitats-sites.jsp','2','criteria',attributesNames,formFieldAttributes,operators,formFieldOperators,booleans,'save-criteria-search.jsp');"><img alt="<%=cm.cmsPhrase("Save search criteria")%>" border="0" src="images/save.jpg" width="21" height="19" style="vertical-align:middle" /></a>
                   </td>

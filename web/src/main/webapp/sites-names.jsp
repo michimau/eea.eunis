@@ -27,9 +27,9 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
 %>
-    <script language="JavaScript" type="text/javascript" src="script/sites-names.js"></script>
-    <script language="JavaScript" type="text/javascript" src="script/save-criteria.js"></script>
-    <script language="JavaScript" type="text/javascript" src="script/sites-names-save-criteria.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-names.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/save-criteria.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<%=request.getContextPath()%>/script/sites-names-save-criteria.js"></script>
     <script language="JavaScript" type="text/javascript">
       //<![CDATA[
       var countryListString = "<%=Utilities.getCountryListString()%>";

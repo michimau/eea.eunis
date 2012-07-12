@@ -32,7 +32,7 @@
     <title>
       <%=cm.cmsPhrase("List of values")%>
     </title>
-      <script language="JavaScript" src="script/header.js" type="text/javascript"></script> 
+      <script language="JavaScript" src="<%=request.getContextPath()%>/script/header.js" type="text/javascript"></script>
       <script language="JavaScript" type="text/javascript">
       //<![CDATA[
            function setLine(val) {

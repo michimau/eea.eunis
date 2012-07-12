@@ -6,8 +6,8 @@
 		<c:if test="${eunis:exists(actionBean.factsheet)}">
 			<link rel="alternate" type="application/rdf+xml" title="RDF" href="${pageContext.request.contextPath}/sites/${actionBean.idsite}/rdf" />
 		</c:if>
-		<script language="JavaScript" src="script/overlib.js" type="text/javascript"></script>
-		<script language="JavaScript" src="script/sortable.js" type="text/javascript"></script>
+		<script language="JavaScript" src="<%=request.getContextPath()%>/script/overlib.js" type="text/javascript"></script>
+		<script language="JavaScript" src="<%=request.getContextPath()%>/script/sortable.js" type="text/javascript"></script>
 		<script language="JavaScript" type="text/javascript">
 		    //<![CDATA[
 		      function openWindow(theURL,winName,features)

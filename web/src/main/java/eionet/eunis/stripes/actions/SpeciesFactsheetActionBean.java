@@ -477,7 +477,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             String inputFilename = getContext().getServletContext().getRealPath("/") + "gis/europe-bio.jpg";
 
             gridImage = tempDir + filename;
-            String outputFilename = getContext().getServletContext().getRealPath("/") + gridImage;
+            String outputFilename = getContext().getServletContext().getInitParameter(Constants.APP_HOME_INIT_PARAM) + gridImage;
 
             gridDistSuccess = false;
             try {

@@ -27,6 +27,7 @@ import org.xml.sax.SAXException;
 import ro.finsiel.eunis.dataimport.parsers.ImportParser;
 import ro.finsiel.eunis.session.SessionManager;
 import ro.finsiel.eunis.utilities.SQLUtilities;
+import eionet.eunis.util.Constants;
 
 
 public class DataImporter extends HttpServlet {
@@ -76,7 +77,7 @@ public class DataImporter extends HttpServlet {
 
             // Initialise the default settings
             try {
-                BASE_DIR = getServletContext().getRealPath("/");
+                BASE_DIR = getServletContext().getInitParameter(Constants.APP_HOME_INIT_PARAM);
                 TEMP_DIR = BASE_DIR
                         + getServletContext().getInitParameter("TEMP_DIR");
             } catch (Exception ex) {

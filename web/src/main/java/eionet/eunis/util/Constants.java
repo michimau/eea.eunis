@@ -100,4 +100,6 @@ public interface Constants {
     // RDF footer
     public static final String RDF_FOOTER = "\n</rdf:RDF>\n";
 
+    /** The name of the webapp init-parameter that stands for application home. */
+    public static final String APP_HOME_INIT_PARAM = "APP_HOME";
 }

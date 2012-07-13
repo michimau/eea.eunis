@@ -18,13 +18,14 @@
                  java.text.SimpleDateFormat,
                  java.util.Date,
                  java.util.List,
+                 eionet.eunis.util.Constants,
                  java.util.Properties" %>
 <jsp:useBean id="FormBean" class="ro.finsiel.eunis.admin.RelatedReportsBean" scope="request">
   <jsp:setProperty name="FormBean" property="*"/>
 </jsp:useBean>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <%
-  String uploadDir = getServletContext().getRealPath("/") + application.getInitParameter("UPLOAD_DIR_FILES");
+  String uploadDir = getServletContext().getInitParameter(Constants.APP_HOME_INIT_PARAM) + application.getInitParameter("UPLOAD_DIR_FILES");
   String[] deleteFile = FormBean.getFilenames();
   String operation = FormBean.getOperation();
   String eeaHome = application.getInitParameter( "EEA_HOME" );
@@ -240,7 +241,7 @@
               EunisRelatedReportsPersist report = (EunisRelatedReportsPersist) approvedReportsList.get(i);
               if(null != report)
               {
-                File file = new File(getServletContext().getRealPath("/") + application.getInitParameter("UPLOAD_DIR_FILES") + report.getFileName());
+                File file = new File(getServletContext().getInitParameter(Constants.APP_HOME_INIT_PARAM) + application.getInitParameter("UPLOAD_DIR_FILES") + report.getFileName());
           %>
                   <tr class="<%=(0 == (i % 2) ? "zebraodd" : "zebraeven")%>">
           <%

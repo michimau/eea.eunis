@@ -1,16 +1,18 @@
 package ro.finsiel.eunis.session;
 
 
-import ro.finsiel.eunis.Settings;
-import ro.finsiel.eunis.search.Utilities;
-
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionListener;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.Date;
+
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionListener;
+
+import ro.finsiel.eunis.Settings;
+import ro.finsiel.eunis.search.Utilities;
+import eionet.eunis.util.Constants;
 
 
 /**
@@ -36,7 +38,7 @@ public class CleanupSessionListener implements HttpSessionListener {
      */
     public void sessionDestroyed(javax.servlet.http.HttpSessionEvent httpSessionEvent) {
         HttpSession session = httpSessionEvent.getSession();
-        String TEMP_PATH = session.getServletContext().getRealPath("/");
+        String TEMP_PATH = session.getServletContext().getInitParameter(Constants.APP_HOME_INIT_PARAM);
 
         TEMP_PATH += Settings.getSetting("TEMP_DIR");
         String sessionID = session.getId();

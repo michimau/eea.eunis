@@ -1,12 +1,14 @@
 package ro.finsiel.eunis;
 
 
-import ro.finsiel.eunis.search.sites.SitesSearchUtility;
-import ro.finsiel.eunis.search.Utilities;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 import javax.servlet.http.HttpServlet;
-import java.util.Hashtable;
-import java.util.Enumeration;
+
+import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.search.sites.SitesSearchUtility;
+import eionet.eunis.util.Constants;
 
 
 /**
@@ -96,35 +98,8 @@ public class Settings {
                     servlet.getServletContext().getInitParameter(param));
             // System.out.println(param  + " = " + servlet.getServletContext().getInitParameter(param));
         }
-        SitesSearchUtility.SITES_PER_MAP = Utilities.checkedStringToInt(
-                Settings.getSetting("SITES_PER_MAP"), 300);
-        Settings.setSetting("INSTANCE_HOME",
-                servlet.getServletContext().getRealPath("/"));
-        // Initialize the global settings of Settings object from web.xml
-        // Settings.setSetting("DOMAIN_NAME", servlet.getServletContext().getInitParameter("DOMAIN_NAME"));
-        // Settings.setSetting("PAGE_TITLE", servlet.getServletContext().getInitParameter("PAGE_TITLE"));
-        // Settings.setSetting("EMAIL_FEEDBACK", servlet.getServletContext().getInitParameter("EMAIL_FEEDBACK"));
-        //
-        // Settings.setSetting("NEWS_URL", servlet.getServletContext().getInitParameter("NEWS_URL"));
-        // Settings.setSetting("TEMP_DIR", servlet.getServletContext().getInitParameter("TEMP_DIR"));
-        // Settings.setSetting("UPLOAD_DIR_FILES", servlet.getServletContext().getInitParameter("UPLOAD_DIR_FILES"));
-        // Settings.setSetting("UPLOAD_DIR_PICTURES_SPECIES", servlet.getServletContext().getInitParameter("UPLOAD_DIR_PICTURES_SPECIES"));
-        // Settings.setSetting("UPLOAD_DIR_PICTURES_HABITATS", servlet.getServletContext().getInitParameter("UPLOAD_DIR_PICTURES_HABITATS"));
-        // Settings.setSetting("UPLOAD_DIR_PICTURES_SITES", servlet.getServletContext().getInitParameter("UPLOAD_DIR_PICTURES_SITES"));
-        // Settings.setSetting("UPLOAD_FILE_MAX_SIZE", servlet.getServletContext().getInitParameter("UPLOAD_FILE_MAX_SIZE"));
-        // Settings.setSetting("LAST_UPDATE", servlet.getServletContext().getInitParameter("LAST_UPDATE"));
-        // Settings.setSetting("APP_VERSION", servlet.getServletContext().getInitParameter("APP_VERSION"));
-        // Settings.setSetting("JDBC_DRV", servlet.getServletContext().getInitParameter("JDBC_DRV"));
-        // Settings.setSetting("JDBC_URL", servlet.getServletContext().getInitParameter("JDBC_URL"));
-        // Settings.setSetting("JDBC_USR", servlet.getServletContext().getInitParameter("JDBC_USR"));
-        // Settings.setSetting("JDBC_PWD", servlet.getServletContext().getInitParameter("JDBC_PWD"));
-        // Settings.setSetting("MAP_URL", servlet.getServletContext().getInitParameter("MAP_URL"));
-        // Settings.setSetting("EEA_MAP_SERVER", servlet.getServletContext().getInitParameter("EEA_MAP_SERVER"));
-        // Settings.setSetting("EEA_MAP_SERVER_EXTENSION", servlet.getServletContext().getInitParameter("EEA_MAP_SERVER_EXTENSION"));
-        // Settings.setSetting("PROXY_URL", servlet.getServletContext().getInitParameter("PROXY_URL"));
-        // Settings.setSetting("PROXY_PORT", servlet.getServletContext().getInitParameter("PROXY_PORT"));
-        // Settings.setSetting("BUG", servlet.getServletContext().getInitParameter("bug"));
-        // Settings.setSetting("TOMCAT_HOME", servlet.getServletContext().getInitParameter("TOMCAT_HOME"));
+        SitesSearchUtility.SITES_PER_MAP = Utilities.checkedStringToInt(Settings.getSetting("SITES_PER_MAP"), 300);
+        Settings.setSetting("INSTANCE_HOME", servlet.getServletContext().getInitParameter(Constants.APP_HOME_INIT_PARAM));
         loaded = true;
     }
 

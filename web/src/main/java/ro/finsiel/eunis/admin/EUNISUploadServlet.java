@@ -26,11 +26,12 @@ import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
 import ro.finsiel.eunis.jrfTables.EunisRelatedReportsDomain;
 import ro.finsiel.eunis.jrfTables.EunisRelatedReportsPersist;
 import ro.finsiel.eunis.session.SessionManager;
+import eionet.eunis.util.Constants;
 
 /**
  * This is the servlet used for uploading files / documents on the server.<br />
  * Implemented as a servlet which performs POST FORM processing.
- * 
+ *
  * @author finsiel
  */
 public class EUNISUploadServlet extends HttpServlet {
@@ -69,7 +70,7 @@ public class EUNISUploadServlet extends HttpServlet {
 
     /**
      * Overrides public method doPost of javax.servlet.http.HttpServlet.
-     * 
+     *
      * @param request
      *            Request object
      * @param response
@@ -82,7 +83,7 @@ public class EUNISUploadServlet extends HttpServlet {
 
         // Initialise the default settings
         try {
-            BASE_DIR = getServletContext().getRealPath("/");
+            BASE_DIR = getServletContext().getInitParameter(Constants.APP_HOME_INIT_PARAM);
             TEMP_DIR = BASE_DIR + getServletContext().getInitParameter("TEMP_DIR");
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -206,7 +207,7 @@ public class EUNISUploadServlet extends HttpServlet {
 
     /**
      * This method is used to upload pictures for species/sites within database.
-     * 
+     *
      * @param fileItems
      *            FileItems which came form request parsed by the upload method (DiskFileUpload).<br />
      *            Contains information about upload (HTTP FORM headers, parsed as elements).
@@ -398,7 +399,7 @@ public class EUNISUploadServlet extends HttpServlet {
 
     /**
      * This method is used to upload a generic file (*.doc, *.pdf etc) on the server.
-     * 
+     *
      * @param fileItems
      *            FileItems which came form request parsed by the upload method (DiskFileUpload).<br />
      *            Contains information about upload (HTTP FORM headers, parsed as elements).

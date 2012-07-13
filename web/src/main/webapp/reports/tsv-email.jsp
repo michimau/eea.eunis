@@ -1,3 +1,4 @@
+<%@ page import="eionet.eunis.util.Constants"%>
 <%@ page import="ro.finsiel.eunis.search.Utilities"%>
 <%@ page import="ro.finsiel.eunis.SendMail"%>
 <%@ page import="java.util.ArrayList"%>
@@ -21,7 +22,7 @@
   String csvfilename = Utilities.formatString( request.getParameter( "tsvfilename"), "" );
   String xmlfilename = Utilities.formatString( request.getParameter( "xmlfilename"), "" );
 
-  String INSTANCE_HOME = getServletContext().getRealPath("/");
+  String INSTANCE_HOME = getServletContext().getInitParameter(Constants.APP_HOME_INIT_PARAM);
   String TEMP_DIR = application.getInitParameter( "TEMP_DIR" );
 
   File csvfile;

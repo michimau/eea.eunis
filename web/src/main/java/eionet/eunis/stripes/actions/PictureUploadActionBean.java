@@ -15,6 +15,7 @@ import org.apache.commons.lang.StringUtils;
 import ro.finsiel.eunis.factsheet.PicturesHelper;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
+import eionet.eunis.util.Constants;
 
 
 /**
@@ -52,7 +53,7 @@ public class PictureUploadActionBean extends AbstractStripesAction {
 
     public Resolution uploadPicture() {
         List<Chm62edtNatureObjectPicturePersist> pictureList = new Chm62edtNatureObjectPictureDomain().findWhere(
-                "MAIN_PIC = 1 AND ID_OBJECT = " + idobject);
+                "MAIN_PIC = 1 AND ID_OBJECT = '" + idobject + "'");
 
         if (pictureList != null && pictureList.size() > 0) {
             hasMain = true;
@@ -63,7 +64,7 @@ public class PictureUploadActionBean extends AbstractStripesAction {
     private Resolution deletePicture() {
         boolean result = PicturesHelper.deletePicture(idobject, natureobjecttype, getScientificName(), filename);
         // Delete picture physically from disk
-        String instanceHome = getContext().getServletContext().getRealPath("/");
+        String instanceHome = getContext().getServletContext().getInitParameter(Constants.APP_HOME_INIT_PARAM);
         String baseDir = "";
 
         if (StringUtils.equalsIgnoreCase("species", natureobjecttype)) {

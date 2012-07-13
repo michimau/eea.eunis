@@ -24,6 +24,15 @@
     </context-param>
 
     <context-param>
+        <param-name>APP_HOME</param-name>
+        <param-value>${app.home}</param-value>
+        <description>
+            Absolute path to the directory where EUNIS keeps its "internal" files.
+            MUST end with path separator!
+        </description>
+    </context-param>
+
+    <context-param>
         <param-name>TOMCAT_HOME</param-name>
         <param-value>${tomcat.home}</param-value>
         <description>Tomcat installation directory</description>
@@ -75,7 +84,7 @@
         <description>Platform dependent variable which specifies the location of font used in pdf generation</description>
     </context-param>
 
-    <!-- Here temp files are stored -->
+    <!-- Directory where temporary files are stored. Relative to APP_HOME, must NOT start with path separator. -->
     <context-param>
         <param-name>TEMP_DIR</param-name>
         <param-value>temp/</param-value>
@@ -83,28 +92,28 @@
             temporary files should be created</description>
     </context-param>
 
-    <!-- Upload directory for reports (related reports) -->
+    <!-- Directory where reports will be uploaded to. Relative to APP_HOME, must NOT start with path separator. -->
     <context-param>
         <param-name>UPLOAD_DIR_FILES</param-name>
         <param-value>upload/</param-value>
         <description>Upload path for related reports</description>
     </context-param>
 
-    <!-- Upload directory for pictures (species) -->
+    <!-- Directory where pictures of species will be uploaded to. Relative to APP_HOME, must NOT start with path separator. -->
     <context-param>
         <param-name>UPLOAD_DIR_PICTURES_SPECIES</param-name>
         <param-value>images/species/</param-value>
         <description>Upload path for images with species</description>
     </context-param>
 
-    <!-- Upload directory for pictures (habitats) -->
+    <!-- Directory where habitats of species will be uploaded to. Relative to APP_HOME, must NOT start with path separator. -->
     <context-param>
         <param-name>UPLOAD_DIR_PICTURES_HABITATS</param-name>
         <param-value>images/habitats/</param-value>
         <description>Upload path for images with habitats</description>
     </context-param>
 
-    <!-- Upload directory for pictures (sites) -->
+    <!-- Directory where pictures of sites will be uploaded to. Relative to APP_HOME, must NOT start with path separator. -->
     <context-param>
         <param-name>UPLOAD_DIR_PICTURES_SITES</param-name>
         <param-value>images/sites/</param-value>
@@ -314,6 +323,11 @@
         <load-on-startup>0</load-on-startup>
     </servlet>
 
+    <servlet>
+        <servlet-name>DownloadServlet</servlet-name>
+        <servlet-class>eionet.eunis.servlets.DownloadServlet</servlet-class>
+    </servlet>
+
     <!-- Map servlet to URL -->
     <servlet-mapping>
         <servlet-name>upload</servlet-name>
@@ -373,6 +387,31 @@
     <servlet-mapping>
         <servlet-name>jcaptcha</servlet-name>
         <url-pattern>/jcaptcha</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DownloadServlet</servlet-name>
+        <url-pattern>/temp/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DownloadServlet</servlet-name>
+        <url-pattern>/upload/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DownloadServlet</servlet-name>
+        <url-pattern>/images/species/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DownloadServlet</servlet-name>
+        <url-pattern>/images/habitats/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DownloadServlet</servlet-name>
+        <url-pattern>/images/sites/*</url-pattern>
     </servlet-mapping>
 
     <filter>

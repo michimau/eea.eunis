@@ -18,6 +18,7 @@
                 java.text.SimpleDateFormat,
                 java.util.Date,
                 ro.finsiel.eunis.factsheet.PDFHabitatsFactsheet,
+                eionet.eunis.util.Constants,
                 ro.finsiel.eunis.reports.pdfReport" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -74,7 +75,7 @@
   String idHabitat = request.getParameter("idHabitat");
   pdfReport report = new pdfReport();
   String temp_dir = application.getInitParameter( "TEMP_DIR" );
-  String linktopdf = getServletContext().getRealPath("/") + temp_dir;
+  String linktopdf = getServletContext().getInitParameter(Constants.APP_HOME_INIT_PARAM) + temp_dir;
   String filename = "HabitatFactsheet_" + request.getSession().getId() + ".pdf";
   out.flush();
   HabitatsFactsheet factsheet = new HabitatsFactsheet(idHabitat);

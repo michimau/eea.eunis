@@ -25,6 +25,7 @@ import org.quartz.SimpleTrigger;
 import org.xml.sax.SAXException;
 
 import ro.finsiel.eunis.session.SessionManager;
+import eionet.eunis.util.Constants;
 
 
 public class DataImportTester extends HttpServlet {
@@ -83,7 +84,7 @@ public class DataImportTester extends HttpServlet {
 
             // Initialise the default settings
             try {
-                BASE_DIR = getServletContext().getRealPath("/");
+                BASE_DIR = getServletContext().getInitParameter(Constants.APP_HOME_INIT_PARAM);
                 TEMP_DIR = BASE_DIR
                         + getServletContext().getInitParameter("TEMP_DIR");
             } catch (Exception ex) {

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	 xmlns:owl="http://www.w3.org/2002/07/owl#"
+	 xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+	<owl:Ontology rdf:about="">
+		<rdfs:label>EUNIS schema</rdfs:label>
+	</owl:Ontology>
+
+	<rdfs:Class rdf:ID="Abundance">
+		<rdfs:label>Abundance</rdfs:label>
+	</rdfs:Class>
+
+	<rdfs:Class rdf:ID="Taxonomy">
+		<rdfs:label>Taxonomy</rdfs:label>
+	</rdfs:Class>
+
+	<rdfs:Class rdf:ID="Document">
+		<rdfs:label>Document</rdfs:label>
+	</rdfs:Class>
+
+	<rdf:Property rdf:ID="taxonname">
+		<rdfs:label>Name</rdfs:label>
+		<rdfs:domain rdf:resource="#Taxonomy"/>
+		<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#label"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="id_taxonomy_parent">
+		<rdfs:label>Parent taxon</rdfs:label>
+		<rdfs:domain rdf:resource="#Taxonomy"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="sourceDocument">
+		<rdfs:label>Source</rdfs:label>
+	</rdf:Property>
+
+</rdf:RDF>

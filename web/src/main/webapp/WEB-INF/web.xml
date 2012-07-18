@@ -414,6 +414,11 @@
         <url-pattern>/images/sites/*</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>DownloadServlet</servlet-name>
+        <url-pattern>/rdf/*</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>RdfFilter</filter-name>
         <filter-class>eionet.eunis.rdf.RdfFilter</filter-class>

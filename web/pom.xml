@@ -114,6 +114,9 @@
                                         </replacetokens>
                                     </filterchain>
                                 </copy>
+                                <copy todir="${app.home}/rdf" overwrite="true">
+                                    <fileset dir="src/main/webapp/rdf"></fileset>
+                                </copy>
                             </tasks>
                         </configuration>
                     </execution>

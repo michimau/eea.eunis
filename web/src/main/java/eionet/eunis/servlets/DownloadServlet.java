@@ -105,7 +105,7 @@ public class DownloadServlet extends HttpServlet {
         String pathInfo = request.getPathInfo();
         String servletPath = request.getServletPath();
 
-        // Create the abstract file reference to the request file.
+        // Create the abstract file reference to the requested file.
         File file = null;
         String fileRelativePath = StringUtils.substringAfter(request.getRequestURI(), request.getContextPath());
         if (StringUtils.isNotEmpty(fileRelativePath) && StringUtils.isNotEmpty(appHome)){

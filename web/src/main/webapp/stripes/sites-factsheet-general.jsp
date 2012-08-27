@@ -614,7 +614,7 @@
 			var map
 
 			//URL for Natura 2000 REST service in use
-			function getSitesMapService() { return 'http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000Hatch_Cach_WM/MapServer'; }
+			function getSitesMapService() { return 'http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000_Dyna_WM/MapServer'; }
 
 			function init() {
 			  map = new esri.Map("map", {logo:false, slider: true, nav: true});

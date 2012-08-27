@@ -2796,7 +2796,7 @@ public final class Utilities {
             strSQL = strSQL + " FROM CHM62EDT_TAXONOMY";
             if (isRoot) {
                 strSQL = strSQL
-                + " WHERE ID_TAXONOMY=46 OR ID_TAXONOMY=47 OR ID_TAXONOMY=48 OR ID_TAXONOMY=3001";
+                + " WHERE ID_TAXONOMY=ID_TAXONOMY_PARENT";
             } else {
                 strSQL = strSQL + " WHERE ID_TAXONOMY_PARENT=" + id
                 + " AND ID_TAXONOMY != " + id;

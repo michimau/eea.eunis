@@ -216,6 +216,20 @@
 				<a href="http://natura2000.eea.europa.eu/#annexICode=${actionBean.factsheet.code2000}">${eunis:cmsPhrase(actionBean.contentManagement, 'Natura2000 mapviewer')}</a>
 			</div>
 		</c:if>
+		<c:forEach items="${actionBean.links}" var="link" varStatus="loop">
+            <div>
+                <c:choose>
+                    <c:when test="${!empty link.url}">
+                        <a href="${eunis:treatURLSpecialCharacters(link.url)}">
+                            <c:out value="${link.name}"/>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <c:out value="${link.name}"/>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+        </c:forEach>
 	</div>
 	<c:if test="${!empty actionBean.factsheet.internationalNames}">
 		<br />

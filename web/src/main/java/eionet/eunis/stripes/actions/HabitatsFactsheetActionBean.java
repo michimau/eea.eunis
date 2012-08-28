@@ -27,6 +27,7 @@ import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dto.AttributeDto;
 import eionet.eunis.dto.ForeignDataQueryDTO;
 import eionet.eunis.dto.HabitatFactsheetOtherDTO;
+import eionet.eunis.dto.LinkDTO;
 import eionet.eunis.dto.PictureDTO;
 import eionet.eunis.rdf.LinkedData;
 import eionet.eunis.util.Constants;
@@ -99,6 +100,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private PictureDTO pic;
     private Vector<DescriptionWrapper> descriptions;
     private String art17link;
+    
+    /** The site's external links. */
+    private ArrayList<LinkDTO> links;
 
     /**
      * This action bean only serves RDF through {@link RdfAware}.
@@ -263,6 +267,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                     art17link = attr.getValue();
                 }
             }
+            
+            // Set the site's external links.
+            links = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(factsheet.idNatureObject);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -439,5 +446,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     public String getAttribution() {
         return attribution;
     }
+
+	public ArrayList<LinkDTO> getLinks() {
+		return links;
+	}
 
 }

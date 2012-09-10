@@ -36,10 +36,8 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--
-                Install jar into local repository to be resolved as dependency by
-                other projects
-            -->
+            <!-- Install jar into local repository to be resolved as dependency
+                by other projects -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
@@ -90,31 +88,48 @@
                         </goals>
                         <configuration>
                             <tasks>
-                                <loadproperties srcFile="${env}.properties"/>
+                                <loadproperties srcFile="${env}.properties" />
 
                                 <!-- Copy supporting scripts -->
-                                <copy todir="${scripts.dir}" overwrite="true">
+                                <copy todir="${scripts.dir}"
+                                    overwrite="true">
                                     <fileset dir="src/main/scripts"></fileset>
                                     <filterchain>
                                         <replacetokens>
-                                            <token key="WEBAPP.HOME" value="${webapp.home}"/>
-                                            <token key="MYSQL.JAR" value="${maven.dependency.mysql.mysql-connector-java.jar.path}"/>
-                                            <token key="LOG4J.JAR" value="${maven.dependency.log4j.log4j.jar.path}"/>
-                                            <token key="JRF.JAR" value="${maven.dependency.jrf.jrf.jar.path}"/>
-                                            <token key="XML-APIS.JAR" value="${maven.dependency.xml-apis.xml-apis.jar.path}"/>
-                                            <token key="XML-PARSER.JAR" value="${maven.dependency.xerces.xmlParserAPIs.jar.path}"/>
-                                            <token key="COMMONS-LANG.JAR" value="${maven.dependency.commons-lang.commons-lang.jar.path}"/>
-                                            <token key="COMMONS-LOGGING.JAR" value="${maven.dependency.commons-logging.commons-logging.jar.path}"/>
-                                            <token key="COMMONS-CODEC.JAR" value="${maven.dependency.commons-codec.commons-codec.jar.path}"/>
-                                            <token key="COMMONS-HTTPCLIENT.JAR" value="${maven.dependency.commons-httpclient.commons-httpclient.jar.path}"/>
-                                            <token key="SLF4J.JAR" value="${maven.dependency.org.slf4j.slf4j-log4j12.jar.path}"/>
-                                            <token key="SLF4J-API.JAR" value="${maven.dependency.org.slf4j.slf4j-api.jar.path}"/>
-                                            <token key="SPARQL-CLIENT.JAR" value="${maven.dependency.eionet.sparql-client.jar.path}"/>
-                                            <token key="SESAME.JAR" value="${maven.dependency.org.openrdf.openrdf-sesame.jar.path}"/>
+                                            <token key="WEBAPP.HOME"
+                                                value="${webapp.home}" />
+                                            <token key="MYSQL.JAR"
+                                                value="${maven.dependency.mysql.mysql-connector-java.jar.path}" />
+                                            <token key="LOG4J.JAR"
+                                                value="${maven.dependency.log4j.log4j.jar.path}" />
+                                            <token key="JRF.JAR"
+                                                value="${maven.dependency.jrf.jrf.jar.path}" />
+                                            <token key="XML-APIS.JAR"
+                                                value="${maven.dependency.xml-apis.xml-apis.jar.path}" />
+                                            <token key="XML-PARSER.JAR"
+                                                value="${maven.dependency.xerces.xmlParserAPIs.jar.path}" />
+                                            <token key="COMMONS-LANG.JAR"
+                                                value="${maven.dependency.commons-lang.commons-lang.jar.path}" />
+                                            <token key="COMMONS-LOGGING.JAR"
+                                                value="${maven.dependency.commons-logging.commons-logging.jar.path}" />
+                                            <token key="COMMONS-CODEC.JAR"
+                                                value="${maven.dependency.commons-codec.commons-codec.jar.path}" />
+                                            <token
+                                                key="COMMONS-HTTPCLIENT.JAR"
+                                                value="${maven.dependency.commons-httpclient.commons-httpclient.jar.path}" />
+                                            <token key="SLF4J.JAR"
+                                                value="${maven.dependency.org.slf4j.slf4j-log4j12.jar.path}" />
+                                            <token key="SLF4J-API.JAR"
+                                                value="${maven.dependency.org.slf4j.slf4j-api.jar.path}" />
+                                            <token key="SPARQL-CLIENT.JAR"
+                                                value="${maven.dependency.eionet.sparql-client.jar.path}" />
+                                            <token key="SESAME.JAR"
+                                                value="${maven.dependency.org.openrdf.openrdf-sesame.jar.path}" />
                                         </replacetokens>
                                     </filterchain>
                                 </copy>
-                                <copy todir="${app.home}/rdf" overwrite="true">
+                                <copy todir="${app.home}/rdf"
+                                    overwrite="true">
                                     <fileset dir="src/main/webapp/rdf"></fileset>
                                 </copy>
                             </tasks>
@@ -128,9 +143,11 @@
                         </goals>
                         <configuration>
                             <tasks if="webapp.root">
-                                <!-- At this point we have an exploded web-app in target/eunis  -->
+                                <!-- At this point we have an exploded web-app
+                                    in target/eunis -->
                                 <echo message="Deploying to ${webapp.root}" />
-                                <copy todir="${webapp.root}" includeEmptyDirs="true" overwrite="true">
+                                <copy todir="${webapp.root}"
+                                    includeEmptyDirs="true" overwrite="true">
                                     <fileset dir="target/eunis" />
                                 </copy>
                             </tasks>
@@ -149,14 +166,24 @@
                     </filters>
                     <webResources>
                         <resource>
-                         <directory>${basedir}/src/main/webapp/WEB-INF</directory>
-                         <filtering>true</filtering>
-                         <targetPath>WEB-INF</targetPath>
-                         <includes>
-                             <include>web.xml</include>
-                         </includes>
-                     </resource>
+                            <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+                            <filtering>true</filtering>
+                            <targetPath>WEB-INF</targetPath>
+                            <includes>
+                                <include>web.xml</include>
+                            </includes>
+                        </resource>
                     </webResources>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <wtpversion>1.5</wtpversion>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>true</downloadJavadocs>
                 </configuration>
             </plugin>
         </plugins>

@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 
 import eionet.eunis.util.sql.ConnectionUtil;
+import eionet.rdfexport.RDFExportService;
+import eionet.rdfexport.RDFExportServiceImpl;
 
 /**
  * @author Risto Alt
@@ -43,11 +45,16 @@ public class RdfFilter implements Filter {
     /**
      * Check if RDF is requested.
      *
-     * @param request - The servlet request we are processing
-     * @param result - The servlet response we are creating
-     * @param chain - The filter chain we are processing
-     * @exception IOException - if an input/output error occurs
-     * @exception ServletException - if a servlet error occurs
+     * @param request
+     *            - The servlet request we are processing
+     * @param result
+     *            - The servlet response we are creating
+     * @param chain
+     *            - The filter chain we are processing
+     * @exception IOException
+     *                - if an input/output error occurs
+     * @exception ServletException
+     *                - if a servlet error occurs
      */
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
@@ -59,7 +66,7 @@ public class RdfFilter implements Filter {
 
         String uri = httpRequest.getRequestURI();
         String cpath = httpRequest.getContextPath();
-        if (uri != null && uri.endsWith("/rdf")){
+        if (uri != null && uri.endsWith("/rdf")) {
             boolean rdf = extractTableAndIdentifier(uri, cpath);
             if (rdf) {
                 try {
@@ -67,16 +74,20 @@ public class RdfFilter implements Filter {
 
                     httpResponse.setContentType(ACCEPT_RDF_HEADER);
                     httpResponse.setCharacterEncoding("UTF-8");
-                    GenerateRDF genRdf = new GenerateRDF(new PrintStream(httpResponse.getOutputStream()), con);
-                    genRdf.exportTable(table, identifier);
-                    genRdf.close();
+
+                    Properties props = new Properties();
+                    props.load(getClass().getClassLoader().getResourceAsStream("rdfexport.properties"));
+                    RDFExportService rdfExportService =
+                            new RDFExportServiceImpl(new PrintStream(httpResponse.getOutputStream()), con, props);
+                    rdfExportService.exportTable(table, identifier);
+                    con.close();
                     return;
                 } catch (Exception e) {
                     e.printStackTrace();
                     throw new ServletException(e.getMessage(), e);
                 }
             }
-        } else if (StringUtils.contains(httpRequest.getHeader("accept"), ACCEPT_RDF_HEADER)){
+        } else if (StringUtils.contains(httpRequest.getHeader("accept"), ACCEPT_RDF_HEADER)) {
             Properties props = new Properties();
             props.load(getClass().getClassLoader().getResourceAsStream("rdfexport.properties"));
             List<String> tables = Arrays.asList(props.getProperty("tables").split(" "));
@@ -118,7 +129,8 @@ public class RdfFilter implements Filter {
     /**
      * Place this filter into service.
      *
-     * @param filterConfig - The filter configuration object
+     * @param filterConfig
+     *            - The filter configuration object
      */
     public void init(FilterConfig filterConfig) throws ServletException {
     }

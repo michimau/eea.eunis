@@ -7,9 +7,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.sql.Connection;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import eionet.eunis.util.sql.ConnectionUtil;
+import eionet.rdfexport.RDFExportService;
+import eionet.rdfexport.RDFExportServiceImpl;
 
 /**
  * @author Risto Alt
@@ -48,9 +51,12 @@ public class RdfExporter {
                 FileOutputStream fos = new FileOutputStream(file);
 
                 Connection con = ConnectionUtil.getSimpleConnection();
-                GenerateRDF genRdf = new GenerateRDF(new PrintStream(fos), con);
-                genRdf.exportTable(table, identifier);
-                genRdf.close();
+                Properties properties = new Properties();
+                properties.load(RdfExporter.class.getClassLoader().getResourceAsStream("rdfexport.properties"));
+                RDFExportService rdfExportService = new RDFExportServiceImpl(new PrintStream(fos), con, properties);
+                rdfExportService.exportTable(table, identifier);
+
+                con.close();
                 fos.close();
 
                 System.out.println("Successfully exported to: " + dir + "/" + table + ".rdf");

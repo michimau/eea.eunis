@@ -59,6 +59,7 @@ public class DownloadServlet extends HttpServlet {
     /**
      * @see javax.servlet.GenericServlet#init(javax.servlet.ServletConfig)
      */
+    @Override
     public void init(ServletConfig config) throws ServletException{
 
         super.init(config);
@@ -72,6 +73,7 @@ public class DownloadServlet extends HttpServlet {
      *
      * @see HttpServlet#doHead(HttpServletRequest, HttpServletResponse).
      */
+    @Override
     protected void doHead(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Process request without content.
         processRequest(request, response, false);
@@ -82,6 +84,7 @@ public class DownloadServlet extends HttpServlet {
      *
      * @see HttpServlet#doGet(HttpServletRequest, HttpServletResponse).
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Process request with content.
@@ -108,6 +111,7 @@ public class DownloadServlet extends HttpServlet {
         // Create the abstract file reference to the requested file.
         File file = null;
         String fileRelativePath = StringUtils.substringAfter(request.getRequestURI(), request.getContextPath());
+        fileRelativePath = StringUtils.replace(fileRelativePath, "%20", " ");
         if (StringUtils.isNotEmpty(fileRelativePath) && StringUtils.isNotEmpty(appHome)){
             file = new File (appHome, fileRelativePath);
         }
@@ -346,8 +350,8 @@ public class DownloadServlet extends HttpServlet {
         String[] acceptValues = acceptHeader.split("\\s*(,|;)\\s*");
         Arrays.sort(acceptValues);
         return Arrays.binarySearch(acceptValues, toAccept) > -1
-        || Arrays.binarySearch(acceptValues, toAccept.replaceAll("/.*$", "/*")) > -1
-        || Arrays.binarySearch(acceptValues, "*/*") > -1;
+                || Arrays.binarySearch(acceptValues, toAccept.replaceAll("/.*$", "/*")) > -1
+                || Arrays.binarySearch(acceptValues, "*/*") > -1;
     }
 
     /**

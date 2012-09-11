@@ -2,6 +2,7 @@ package ro.finsiel.eunis.search;
 
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -51,6 +52,7 @@ import ro.finsiel.eunis.jrfTables.species.references.ReferencesJoinPersist;
 import ro.finsiel.eunis.search.species.taxcode.TaxonomyDTO;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 import ro.finsiel.eunis.utilities.TableColumns;
+import eionet.eunis.util.Constants;
 
 
 /**
@@ -370,22 +372,22 @@ public final class Utilities {
                             AbstractSortCriteria.ASCENDENCY_ASC)) {
                 imgTag.append(IMG_SORT_ASCENDING);
                 imgTag.append(
-                "\" title=\"Results are sorted ascending by this column\" alt=\"Results are sorted ascending by this column\" ");
+                        "\" title=\"Results are sorted ascending by this column\" alt=\"Results are sorted ascending by this column\" ");
             } else if (0
                     == sortCriteria.getAscendency().compareTo(
                             AbstractSortCriteria.ASCENDENCY_DESC)) {
                 imgTag.append(IMG_SORT_DESCENDING);
                 imgTag.append(
-                "\" alt=\"Results are sorted descending by this column\" title=\"Results are sorted descending by this column\" ");
+                        "\" alt=\"Results are sorted descending by this column\" title=\"Results are sorted descending by this column\" ");
             } else {
                 imgTag.append(IMG_SORT_UNSORTED);
                 imgTag.append(
-                "\" alt=\"Results are not sorted by this column\" title=\"Results are not sorted by this column\" ");
+                        "\" alt=\"Results are not sorted by this column\" title=\"Results are not sorted by this column\" ");
             }
         } else {
             imgTag.append(IMG_SORT_UNSORTED);
             imgTag.append(
-            "\" alt=\"Results are not sorted by this column\" title=\"Results are not sorted by this column\" ");
+                    "\" alt=\"Results are not sorted by this column\" title=\"Results are not sorted by this column\" ");
         }
         imgTag.append(" />");
         return imgTag;
@@ -409,16 +411,16 @@ public final class Utilities {
         if (0 == ascendency.compareTo(AbstractSortCriteria.ASCENDENCY_ASC)) {
             imgTag.append(IMG_SORT_ASCENDING);
             imgTag.append(
-            "\" title=\"Results are sorted ascending by this column\" alt=\"Results are sorted ascending by this column\" ");
+                    "\" title=\"Results are sorted ascending by this column\" alt=\"Results are sorted ascending by this column\" ");
         } else if (0
                 == ascendency.compareTo(AbstractSortCriteria.ASCENDENCY_DESC)) {
             imgTag.append(IMG_SORT_DESCENDING);
             imgTag.append(
-            "\" alt=\"Results are sorted descending by this column\" title=\"Results are sorted descending by this column\" ");
+                    "\" alt=\"Results are sorted descending by this column\" title=\"Results are sorted descending by this column\" ");
         } else {
             imgTag.append(IMG_SORT_UNSORTED);
             imgTag.append(
-            "\" alt=\"Results are not sorted by this column\" title=\"Results are not sorted by this column\" ");
+                    "\" alt=\"Results are not sorted by this column\" title=\"Results are not sorted by this column\" ");
         }
         imgTag.append(" />");
         return imgTag;
@@ -790,7 +792,7 @@ public final class Utilities {
             }
         } catch (IllegalArgumentException iagex) {
             logger.warn(
-            "formatReferencesDate(): An IllegalArgumetnException occurred during the parse of the date. Returning ''");
+                    "formatReferencesDate(): An IllegalArgumetnException occurred during the parse of the date. Returning ''");
             return "";
         }
         return dt;
@@ -888,10 +890,10 @@ public final class Utilities {
 
         if (null == paramName
                 || (null == paramValue
-                        && (null == paramValueMin && null == paramValueMax))
-                        || null == oper) {
+                && (null == paramValueMin && null == paramValueMax))
+                || null == oper) {
             logger.warn(
-            "prepareSQLOperator(String, String, String, String, Integer): one of the parameters was null. Returning EMPTY STRING!");
+                    "prepareSQLOperator(String, String, String, String, Integer): one of the parameters was null. Returning EMPTY STRING!");
             return sql;
         }
         if (null == paramValue) {
@@ -939,8 +941,8 @@ public final class Utilities {
         if (!branch) {
             logger.warn(
                     "Warning: prepareSQLOperator(" + paramName + ", "
-                    + paramValue + ", " + paramValueMin + ", " + paramValueMax
-                    + ", " + oper + "): No branch hit!");
+                            + paramValue + ", " + paramValueMin + ", " + paramValueMax
+                            + ", " + oper + "): No branch hit!");
         }
         return sql;
     }
@@ -1097,8 +1099,8 @@ public final class Utilities {
         if (!branch) {
             logger.warn(
                     "Warning: prepareHumanStringForPlural(" + paramName + ", "
-                    + paramValue + ", " + paramValueMin + ", " + paramValueMax
-                    + ", " + oper + "): No branch hit!");
+                            + paramValue + ", " + paramValueMin + ", " + paramValueMax
+                            + ", " + oper + "): No branch hit!");
             logger.warn("debugOperator returned: " + debugOperator(oper));
         }
         return humanStr;
@@ -1359,8 +1361,8 @@ public final class Utilities {
             result = new String[array.length];
             for (int i = array.length - 1; i >= 0; i--) {
                 result[ i ] = (null != array[ i ])
-                ? array[ i ].trim()
-                        : array[ i ];
+                        ? array[ i ].trim()
+                                : array[ i ];
             }
         }
         return result;
@@ -1418,10 +1420,10 @@ public final class Utilities {
 
         List l1 = new HabitatNatureObjectReportTypeDomain().findWhere(
                 "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND B.ID_NATURE_OBJECT_LINK IS NULL AND "
-                + dom + " GROUP BY H.ID_HABITAT");
+                        + dom + " GROUP BY H.ID_HABITAT");
         List l2 = new HabitatNatureObjectGeoscopeDomain().findWhere(
                 "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND B.ID_NATURE_OBJECT_LINK IS NULL AND "
-                + dom + " GROUP BY H.ID_HABITAT");
+                        + dom + " GROUP BY H.ID_HABITAT");
         List l3 = new CommonRecordsDomain().findWhere(
                 "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND " + dom
                 + " GROUP BY H.ID_HABITAT");
@@ -1522,13 +1524,13 @@ public final class Utilities {
                 rightLen = (input.substring(pos + 1)).length();
 
                 String leftString = spaces(left - leftLen, blank)
-                + input.substring(0, pos);
+                        + input.substring(0, pos);
                 // String rightString = (input.substring(pos  + 1) + spaces(right - rightLen, blank)).substring(0, 3);
                 String rightString;
 
                 if (right > rightLen) {
                     rightString = input.substring(pos + 1).substring(0, rightLen)
-                    + spaces(right - rightLen, blank);
+                            + spaces(right - rightLen, blank);
                 } else {
                     rightString = input.substring(pos + 1).substring(0, right);
                 }
@@ -1605,7 +1607,7 @@ public final class Utilities {
         if (iso != null && !iso.equalsIgnoreCase("")) {
             List countries = new Chm62edtCountryDomain().findWhere(
                     "ISO_3L IS NOT NULL AND TRIM(ISO_3L) <>'' AND ISO_3L ='"
-                    + iso + "'");
+                            + iso + "'");
 
             if (countries != null && countries.size() > 0) {
                 return ((Chm62edtCountryPersist) countries.get(0)).getAreaNameEnglish();
@@ -1693,7 +1695,7 @@ public final class Utilities {
                     if (putOR) {
                         filterSQL.append(
                                 " or " + alias + ".SOURCE_DB = '" + db[ i ]
-                                                                        + "' ");
+                                        + "' ");
                     } else {
                         filterSQL.append(
                                 " " + alias + ".SOURCE_DB = '" + db[ i ] + "' ");
@@ -1934,36 +1936,36 @@ public final class Utilities {
         if (references != null && references.size() > 0) {
             result = "<ul>";
             result += "<li>Author : "
-                + (((ReferencesJoinPersist) references.get(0)).getSource()
-                        == null
-                        ? ""
-                                : treatURLSpecialCharacters(
-                                        removeQuotes(
-                                                ((ReferencesJoinPersist) references.get(0)).getSource())));
+                    + (((ReferencesJoinPersist) references.get(0)).getSource()
+                            == null
+                            ? ""
+                                    : treatURLSpecialCharacters(
+                                            removeQuotes(
+                                                    ((ReferencesJoinPersist) references.get(0)).getSource())));
             result += "</li>";
             result += " <li>Title : "
-                + (((ReferencesJoinPersist) references.get(0)).getTitle()
-                        == null
-                        ? ""
-                                : treatURLSpecialCharacters(
-                                        removeQuotes(
-                                                ((ReferencesJoinPersist) references.get(0)).getTitle())));
+                    + (((ReferencesJoinPersist) references.get(0)).getTitle()
+                            == null
+                            ? ""
+                                    : treatURLSpecialCharacters(
+                                            removeQuotes(
+                                                    ((ReferencesJoinPersist) references.get(0)).getTitle())));
             result += "</li>";
             result += " <li>Editor : "
-                + (((ReferencesJoinPersist) references.get(0)).getEditor()
-                        == null
-                        ? ""
-                                : treatURLSpecialCharacters(
-                                        removeQuotes(
-                                                ((ReferencesJoinPersist) references.get(0)).getEditor())));
+                    + (((ReferencesJoinPersist) references.get(0)).getEditor()
+                            == null
+                            ? ""
+                                    : treatURLSpecialCharacters(
+                                            removeQuotes(
+                                                    ((ReferencesJoinPersist) references.get(0)).getEditor())));
             result += "</li>";
             result += " <li>Publisher : "
-                + (((ReferencesJoinPersist) references.get(0)).getPublisher()
-                        == null
-                        ? ""
-                                : treatURLSpecialCharacters(
-                                        removeQuotes(
-                                                ((ReferencesJoinPersist) references.get(0)).getPublisher())));
+                    + (((ReferencesJoinPersist) references.get(0)).getPublisher()
+                            == null
+                            ? ""
+                                    : treatURLSpecialCharacters(
+                                            removeQuotes(
+                                                    ((ReferencesJoinPersist) references.get(0)).getPublisher())));
             result += "</li>";
             String date = "";
 
@@ -1973,11 +1975,11 @@ public final class Utilities {
             result += " <li>Date : " + date;
             result += "</li>";
             result += " <li>Url : "
-                + (((ReferencesJoinPersist) references.get(0)).getUrl()
-                        == null
-                        ? ""
-                                : treatURLSpecialCharacters(
-                                        ((ReferencesJoinPersist) references.get(0)).getUrl()));
+                    + (((ReferencesJoinPersist) references.get(0)).getUrl()
+                            == null
+                            ? ""
+                                    : treatURLSpecialCharacters(
+                                            ((ReferencesJoinPersist) references.get(0)).getUrl()));
             result += "</li>";
             result += "</ul>";
         }
@@ -2150,7 +2152,7 @@ public final class Utilities {
                 result = "OPERATOR_STARTS";
             } else {
                 result = "Operator '" + operator + "'"
-                + " is not defined as valid operator.";
+                        + " is not defined as valid operator.";
             }
         }
         return result;
@@ -2237,8 +2239,8 @@ public final class Utilities {
      */
     public static String getTextWarningForPopup(int size) {
         String result = ""
-            + "<strong>Warning: Database might not contains data for all values!</strong> "
-            + "<br /> " + " ";
+                + "<strong>Warning: Database might not contains data for all values!</strong> "
+                + "<br /> " + " ";
 
         // if (size > 100)
         // result += "<strong>Note:</strong> Only the first " + Utilities.MAX_POPUP_RESULTS + " values were displayed. Please refine the search criteria. " +
@@ -2249,11 +2251,11 @@ public final class Utilities {
 
     public static String getTextWarningForPopup(WebContentManagement cm, int size) {
         String result = "" + "<strong>"
-        + cm.cmsPhrase(
-        "Warning: Database might not contain data for all values!")
-        + "</strong> "
-        + "<br /> "
-        + " ";
+                + cm.cmsPhrase(
+                        "Warning: Database might not contain data for all values!")
+                        + "</strong> "
+                        + "<br /> "
+                        + " ";
 
         // if (size > 100)
         // result += "<strong>Note:</strong> Only the first " + Utilities.MAX_POPUP_RESULTS + " values were displayed. Please refine the search criteria. " +
@@ -2269,13 +2271,13 @@ public final class Utilities {
      */
     public static String getAdvancedTextWarningForPopup(int size) {
         String result = ""
-            + "<strong>Warning: Database might not contains data for all values!</strong> "
-            + "<br /> " + " ";
+                + "<strong>Warning: Database might not contains data for all values!</strong> "
+                + "<br /> " + " ";
 
         if (size > 100) {
             result += "<strong>Note:</strong> Only the first "
-                + Utilities.MAX_POPUP_RESULTS
-                + " values are displayed.<br /><br />";
+                    + Utilities.MAX_POPUP_RESULTS
+                    + " values are displayed.<br /><br />";
         } else {
             result += "<br />";
         }
@@ -2325,10 +2327,10 @@ public final class Utilities {
     public static String getTextMaxLimitForPopup(int size) {
         String result = (size >= Utilities.MAX_POPUP_RESULTS
                 ? "" + "<br /> " + "<strong>Note:</strong> Only the first "
-                        + Utilities.MAX_POPUP_RESULTS
-                        + " values were displayed. Please refine the search criteria. "
-                        + "<br /><br /> "
-                        : "<br />");
+                + Utilities.MAX_POPUP_RESULTS
+                + " values were displayed. Please refine the search criteria. "
+                + "<br /><br /> "
+                : "<br />");
 
         return result;
     }
@@ -2338,9 +2340,9 @@ public final class Utilities {
                 ? "<br /> " + cm.cmsPhrase("<strong>Note:</strong> Only first")
                         + " " + Utilities.MAX_POPUP_RESULTS + " "
                         + cm.cmsPhrase(
-                        " values were displayed. Please refine the search criteria.")
-                        + "<br /><br /> "
-                        : "<br />");
+                                " values were displayed. Please refine the search criteria.")
+                                + "<br /><br /> "
+                                : "<br />");
 
         return result;
     }
@@ -2448,27 +2450,27 @@ public final class Utilities {
         boolean isGood = false;
 
         result += "<tr><th scope=\"row\">"
-            + contentManagement.cmsPhrase("No. of sites") + "</th>"
-            + "<tr><th scope=\"row\">"
-            + contentManagement.cmsPhrase("No. of species") + "</th>"
-            + "<tr><th scope=\"row\">"
-            + contentManagement.cmsPhrase("No. of habitat types") + "</th>"
-            + "<tr><th scope=\"row\">"
-            + contentManagement.cmsPhrase("No. of sites/km2") + "</th>"
-            + "<tr><th scope=\"row\">"
-            + contentManagement.cmsPhrase(
-            "Percent number of sites with surface data available")
-            + "</th>"
-            + "<tr><th scope=\"row\">"
-            + contentManagement.cmsPhrase("Total area (ha)")
-            + "</th>"
-            + "<tr><th scope=\"row\">"
-            + contentManagement.cmsPhrase("Average area(ha)")
-            + "</th>"
-            + "<tr><th scope=\"row\">"
-            + contentManagement.cmsPhrase(
-            "Standard deviation for sites area")
-            + "</th>";
+                + contentManagement.cmsPhrase("No. of sites") + "</th>"
+                + "<tr><th scope=\"row\">"
+                + contentManagement.cmsPhrase("No. of species") + "</th>"
+                + "<tr><th scope=\"row\">"
+                + contentManagement.cmsPhrase("No. of habitat types") + "</th>"
+                + "<tr><th scope=\"row\">"
+                + contentManagement.cmsPhrase("No. of sites/km2") + "</th>"
+                + "<tr><th scope=\"row\">"
+                + contentManagement.cmsPhrase(
+                        "Percent number of sites with surface data available")
+                        + "</th>"
+                        + "<tr><th scope=\"row\">"
+                        + contentManagement.cmsPhrase("Total area (ha)")
+                        + "</th>"
+                        + "<tr><th scope=\"row\">"
+                        + contentManagement.cmsPhrase("Average area(ha)")
+                        + "</th>"
+                        + "<tr><th scope=\"row\">"
+                        + contentManagement.cmsPhrase(
+                                "Standard deviation for sites area")
+                                + "</th>";
 
         for (int i = 0; i < factList.size(); i++) {
             CountrySitesFactsheetPersist site = (CountrySitesFactsheetPersist) factList.get(
@@ -2478,58 +2480,58 @@ public final class Utilities {
 
             if (splitResult != null && splitResult.length == 9) {
                 splitResult[ 1 ] += "<td class=\"number\">"
-                    + Utilities.formatArea(site.getNumberOfSites(), 0, 2,
-                    "&nbsp;")
-                    + "</td>";
+                        + Utilities.formatArea(site.getNumberOfSites(), 0, 2,
+                                "&nbsp;")
+                                + "</td>";
                 splitResult[ 2 ] += "<td class=\"number\">"
-                    + Utilities.formatArea(site.getNumberOfSpecies(), 0, 2,
-                    "&nbsp;")
-                    + "</td>";
+                        + Utilities.formatArea(site.getNumberOfSpecies(), 0, 2,
+                                "&nbsp;")
+                                + "</td>";
                 splitResult[ 3 ] += "<td class=\"number\">"
-                    + Utilities.formatArea(site.getNumberOfHabitats(), 0, 2,
-                    "&nbsp;")
-                    + "</td>";
+                        + Utilities.formatArea(site.getNumberOfHabitats(), 0, 2,
+                                "&nbsp;")
+                                + "</td>";
                 splitResult[ 4 ] += "<td class=\"number\">"
-                    + Utilities.formatArea(site.getPerSquare(), 0, 2,
-                    "&nbsp;")
-                    + "</td>";
+                        + Utilities.formatArea(site.getPerSquare(), 0, 2,
+                                "&nbsp;")
+                                + "</td>";
                 splitResult[ 5 ] += "<td class=\"number\">"
-                    + Utilities.formatArea(site.getSurfaceAvailable(), 0, 2,
-                    "&nbsp;")
-                    + "</td>";
+                        + Utilities.formatArea(site.getSurfaceAvailable(), 0, 2,
+                                "&nbsp;")
+                                + "</td>";
                 splitResult[ 6 ] += "<td class=\"number\">"
-                    + Utilities.formatArea(site.getTotalSize(), 0, 2,
-                    "&nbsp;")
-                    + "</td>";
+                        + Utilities.formatArea(site.getTotalSize(), 0, 2,
+                                "&nbsp;")
+                                + "</td>";
                 splitResult[ 7 ] += "<td class=\"number\">"
-                    + Utilities.formatArea(site.getAvgSize(), 0, 2, "&nbsp;")
-                    + "</td>";
+                        + Utilities.formatArea(site.getAvgSize(), 0, 2, "&nbsp;")
+                        + "</td>";
                 splitResult[ 8 ] += "<td class=\"number\">"
-                    + Utilities.formatArea(site.getDeviation(), 0, 2,
-                    "&nbsp;")
-                    + "</td>";
+                        + Utilities.formatArea(site.getDeviation(), 0, 2,
+                                "&nbsp;")
+                                + "</td>";
 
                 if (i == factList.size() - 1) {
                     result = "<tr class=\"zebraodd\">" + splitResult[ 1 ]
-                                                                      + "</tr>" + "<tr class=\"zebraeven\">"
-                                                                      + splitResult[ 2 ] + "</tr>"
-                                                                      + "<tr class=\"zebraodd\">" + splitResult[ 3 ]
-                                                                                                                 + "</tr>" + "<tr class=\"zebraeven\">"
-                                                                                                                 + splitResult[ 4 ] + "</tr>"
-                                                                                                                 + "<tr class=\"zebraodd\">" + splitResult[ 5 ]
-                                                                                                                                                            + "</tr>" + "<tr class=\"zebraeven\">"
-                                                                                                                                                            + splitResult[ 6 ] + "</tr>"
-                                                                                                                                                            + "<tr class=\"zebraodd\">" + splitResult[ 7 ]
-                                                                                                                                                                                                       + "</tr>" + "<tr class=\"zebraeven\">"
-                                                                                                                                                                                                       + splitResult[ 8 ] + "</tr>";
+                            + "</tr>" + "<tr class=\"zebraeven\">"
+                            + splitResult[ 2 ] + "</tr>"
+                            + "<tr class=\"zebraodd\">" + splitResult[ 3 ]
+                                    + "</tr>" + "<tr class=\"zebraeven\">"
+                                    + splitResult[ 4 ] + "</tr>"
+                                    + "<tr class=\"zebraodd\">" + splitResult[ 5 ]
+                                            + "</tr>" + "<tr class=\"zebraeven\">"
+                                            + splitResult[ 6 ] + "</tr>"
+                                            + "<tr class=\"zebraodd\">" + splitResult[ 7 ]
+                                                    + "</tr>" + "<tr class=\"zebraeven\">"
+                                                    + splitResult[ 8 ] + "</tr>";
                     isGood = true;
                 } else {
                     result = "<tr>" + splitResult[ 1 ] + "<tr>"
-                    + splitResult[ 2 ] + "<tr>" + splitResult[ 3 ]
-                                                               + "<tr>" + splitResult[ 4 ] + "<tr>"
-                                                               + splitResult[ 5 ] + "<tr>" + splitResult[ 6 ]
-                                                                                                          + "<tr>" + splitResult[ 7 ] + "<tr>"
-                                                                                                          + splitResult[ 8 ];
+                            + splitResult[ 2 ] + "<tr>" + splitResult[ 3 ]
+                                    + "<tr>" + splitResult[ 4 ] + "<tr>"
+                                    + splitResult[ 5 ] + "<tr>" + splitResult[ 6 ]
+                                            + "<tr>" + splitResult[ 7 ] + "<tr>"
+                                            + splitResult[ 8 ];
                 }
             }
         }
@@ -2591,8 +2593,8 @@ public final class Utilities {
 
         List rez = sqlc.ExecuteSQLReturnList(
                 "SELECT LEVEL,NAME,TAXONOMY_TREE FROM CHM62EDT_SPECIES AS A INNER JOIN CHM62EDT_TAXONOMY AS B ON A.ID_TAXONOMY = B.ID_TAXONOMY WHERE A.ID_SPECIES = "
-                + idSpecies,
-                3);
+                        + idSpecies,
+                        3);
 
         if (rez != null && rez.size() > 0) {
             TableColumns columns = (TableColumns) rez.get(0);
@@ -2640,19 +2642,24 @@ public final class Utilities {
         String ret = "1.jpg";
 
         try {
-            String physicalPath = application.getRealPath("/images/intros");
-            java.io.File dir = new java.io.File(physicalPath);
-            java.io.File[] files = dir.listFiles();
+            String appHome = application.getInitParameter(Constants.APP_HOME_INIT_PARAM);
+            File dir = new File (appHome, "/images/intros");
+            if (dir.exists() && dir.isDirectory()){
+                java.io.File[] files = dir.listFiles();
 
-            if (files.length > 0) {
-                Random rnd = new Random(new Date().getTime());
-                int iRnd;
+                if (files.length > 0) {
+                    Random rnd = new Random(new Date().getTime());
+                    int iRnd;
 
-                iRnd = rnd.nextInt(files.length);
-                if (iRnd == 0) {
-                    iRnd = 1;
+                    iRnd = rnd.nextInt(files.length);
+                    if (iRnd == 0) {
+                        iRnd = 1;
+                    }
+                    ret = files[ iRnd ].getName();
                 }
-                ret = files[ iRnd ].getName();
+            }
+            else{
+                throw new Exception("Could not find intro images directory: " + dir);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -2665,7 +2672,7 @@ public final class Utilities {
             if (countryName != null && countryName.trim().length() > 0) {
                 List countries = new Chm62edtCountryDomain().findWhere(
                         "ISO_2L<>'' AND ISO_2L<>'null' AND ISO_2L IS NOT NULL AND SELECTION <> 0 and AREA_NAME_EN ='"
-                        + countryName + "'");
+                                + countryName + "'");
 
                 if (countries != null && countries.size() > 0) {
                     return true;
@@ -2796,10 +2803,10 @@ public final class Utilities {
             strSQL = strSQL + " FROM CHM62EDT_TAXONOMY";
             if (isRoot) {
                 strSQL = strSQL
-                + " WHERE ID_TAXONOMY=ID_TAXONOMY_PARENT";
+                        + " WHERE ID_TAXONOMY=ID_TAXONOMY_PARENT";
             } else {
                 strSQL = strSQL + " WHERE ID_TAXONOMY_PARENT=" + id
-                + " AND ID_TAXONOMY != " + id;
+                        + " AND ID_TAXONOMY != " + id;
             }
 
             ps = con.prepareStatement(strSQL);
@@ -2833,35 +2840,35 @@ public final class Utilities {
                 if (hasChilds || hasChildSpecies) {
                     if (expandContains(expand, taxId)) {
                         ret += "<a title=\"" + hide + "\" id=\"level_" + taxId
-                        + "\" href=\"species-taxonomic-browser.jsp?expand="
-                        + removeSpecieFromExpanded(expand, taxId)
-                        + "#level_" + taxId
-                        + "\"><img src=\"images/img_minus.gif\" alt=\""
-                        + hide + "\"/></a>" + newLine;
+                                + "\" href=\"species-taxonomic-browser.jsp?expand="
+                                + removeSpecieFromExpanded(expand, taxId)
+                                + "#level_" + taxId
+                                + "\"><img src=\"images/img_minus.gif\" alt=\""
+                                + hide + "\"/></a>" + newLine;
                     } else {
                         ret += "<a title=\"" + show + "\" id=\"level_" + taxId
-                        + "\" href=\"species-taxonomic-browser.jsp?expand="
-                        + addToExpanded(expand, taxId) + "#level_"
-                        + taxId
-                        + "\"><img src=\"images/img_plus.gif\" alt=\""
-                        + show + "\"/></a>" + newLine;
+                                + "\" href=\"species-taxonomic-browser.jsp?expand="
+                                + addToExpanded(expand, taxId) + "#level_"
+                                + taxId
+                                + "\"><img src=\"images/img_plus.gif\" alt=\""
+                                + show + "\"/></a>" + newLine;
                     }
                     ret += "&nbsp;" + taxTitle + newLine;
                 } else {
                     ret += "<img src=\"images/img_bullet.gif\" alt=\""
-                        + taxTitle + "\"/>&nbsp;&nbsp;" + taxTitle + newLine;
+                            + taxTitle + "\"/>&nbsp;&nbsp;" + taxTitle + newLine;
                 }
                 if (expand.length() > 0 && expandContains(expand, taxId)) {
                     ArrayList SpeciesList = sqlc.SQL2Array(
                             "SELECT CONCAT('<a href=\"species/',ID_SPECIES,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="
-                            + taxId + " ORDER BY SCIENTIFIC_NAME");
+                                    + taxId + " ORDER BY SCIENTIFIC_NAME");
 
                     if (SpeciesList.size() > 0) {
                         ret += "<ul class=\"eunistree\">" + newLine;
                         for (int i = 0; i < SpeciesList.size(); i++) {
                             ret += "<li>" + newLine;
                             ret += "<img src=\"images/img_bullet.gif\">&nbsp;&nbsp;"
-                                + SpeciesList.get(i) + newLine;
+                                    + SpeciesList.get(i) + newLine;
                             ret += "</li>" + newLine;
                         }
                         ret += "</ul>" + newLine;

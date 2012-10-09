@@ -8,7 +8,7 @@
   <entry key="queries">deliveries derogationsreport vernacularnames
        landings art17ranges art17populations
        birdlifedistribution birdlifetrend
-	butterfliestrend conservationstatus</entry>
+	butterfliestrend</entry>
 <!-- -->
 <!-- .endpoint, .title and .query are mandatory for all queries -->
 <!-- .summary - use HTML format - i.e. escape & and < -->
@@ -302,56 +302,36 @@ and <a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset
 (Currently a proof of concept query)
 ]]></entry>
   <entry key="landings.query"><![CDATA[
-PREFIX qb: <http://purl.org/linked-data/cube#> 
-PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#> 
-PREFIX sdmx-dimension: <http://purl.org/linked-data/sdmx/2009/dimension#> 
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
-PREFIX e: <http://eurostat.linked-statistics.org/property#> 
-PREFIX dataset: <http://eurostat.linked-statistics.org/data/> 
-PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX e: <http://eurostat.linked-statistics.org/property#>
+PREFIX measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+PREFIX dimension: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX g: <http://eurostat.linked-statistics.org/ontologies/geographic.rdf#>
+PREFIX dataset: <http://eurostat.linked-statistics.org/data/>
+PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
 SELECT ?country ?year ?landed ?unit 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_be.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_bg.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_cy.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_de.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_dk.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_ee.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_es.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_fi.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_fr.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_gr.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_ie.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_is.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_it.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_lt.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_lv.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_mt.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_nl.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_no.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_pl.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_pt.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_ro.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_se.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_si.rdf> 
-FROM <http://eurostat.linked-statistics.org/data/fish_ld_uk.rdf> 
-FROM <http://eurostat.linked-statistics.org/dic/unit.rdf> 
-FROM <http://eurostat.linked-statistics.org/dic/geo.rdf> 
-FROM <http://semantic.eea.europa.eu/home/roug/species-map.rdf> 
-WHERE { 
-  ?obsUri e:species ?uspecies; 
-          e:pres <http://eurostat.linked-statistics.org/dic/pres#P00>; 
-          e:dest <http://eurostat.linked-statistics.org/dic/dest#D0>; 
-          e:natvessr <http://eurostat.linked-statistics.org/dic/natvessr#TOTAL>; 
-          e:unit <http://eurostat.linked-statistics.org/dic/unit#TPW>, ?uunit; 
-          e:geo ?ucountry; 
-          sdmx-dimension:timePeriod ?year; 
-          sdmx-measure:obsValue ?landed. 
-  ?ucountry rdfs:label ?country. 
-  ?uunit rdfs:label ?unit. 
-  ?uspecies eunis:sameSynonym <http://eunis.eea.europa.eu/species/[IDENTIFIER]> 
-} ORDER BY ?country ?year
+WHERE {
+  GRAPH <http://eunis.eea.europa.eu/rdf/species.rdf.gz> {
+   <http://eunis.eea.europa.eu/species/[IDENTIFIER]> eunis:sameSynonym ?uspecies
+  }
+  ?obsUri e:species ?uspecies;
+     e:pres <http://eurostat.linked-statistics.org/dic/pres#0>;
+     e:dest <http://eurostat.linked-statistics.org/dic/dest#0>;
+     e:natvessr <http://eurostat.linked-statistics.org/dic/natvessr#TOTAL>;
+     e:unit <http://eurostat.linked-statistics.org/dic/unit#TPW>, ?uunit;
+     e:geo ?ucountry; 
+     dimension:timePeriod ?year;
+     measure:obsValue ?landed.
+ GRAPH <http://eurostat.linked-statistics.org/dic/geo.rdf> {
+  ?ucountry skos:prefLabel ?country.
+ }
+ GRAPH <http://eurostat.linked-statistics.org/dic/unit.rdf> {
+  ?uunit skos:prefLabel ?unit. 
+ }
+}
+ORDER BY ?country ?year
 ]]></entry>
 
   <entry key="landings.codes"><![CDATA[
@@ -360,13 +340,15 @@ PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
 SELECT DISTINCT ?speciescode 
 WHERE { 
-  ?obsUri e:pres <http://eurostat.linked-statistics.org/dic/pres#P00>; 
-          e:dest <http://eurostat.linked-statistics.org/dic/dest#D0>; 
+  ?obsUri e:pres <http://eurostat.linked-statistics.org/dic/pres#0>; 
+          e:dest <http://eurostat.linked-statistics.org/dic/dest#0>; 
           e:natvessr <http://eurostat.linked-statistics.org/dic/natvessr#TOTAL>; 
           e:unit <http://eurostat.linked-statistics.org/dic/unit#TPW>; 
           e:species ?uspecies. 
-  ?uspecies eunis:sameSynonym ?speciesurl. 
-  ?speciesurl eunis:speciesCode ?speciescode 
+  GRAPH <http://eunis.eea.europa.eu/rdf/species.rdf.gz> {
+   ?speciesurl eunis:sameSynonym ?uspecies.
+   ?speciesurl eunis:speciesCode ?speciescode 
+  }
 }
 ]]></entry>
 

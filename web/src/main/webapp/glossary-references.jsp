@@ -51,7 +51,6 @@
       String source=Utilities.formatString(aRef.getSource());
       String editor=Utilities.formatString(aRef.getEditor());
       String publisher=Utilities.formatString(aRef.getPublisher());
-      String dateRef=Utilities.formatReferencesDate(aRef.getCreated());
       // If one of them is not null
       if((editor+title+publisher+source).trim().length()>0)
       {
@@ -72,7 +71,7 @@
 <%
         if (null!=aRef.getCreated())
         {
-          String dt = Utilities.formatString( Utilities.formatReferencesDate(aRef.getCreated()), "&nbsp;" );
+          String dt = Utilities.formatString( aRef.getCreated(), "&nbsp;" );
 %>
             <td>
               <%=dt%>

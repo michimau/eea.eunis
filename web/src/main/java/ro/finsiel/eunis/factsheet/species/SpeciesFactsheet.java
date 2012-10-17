@@ -179,7 +179,7 @@ public class SpeciesFactsheet {
 
             synonyms.add(species.getIdNatureObject());
             List<Chm62edtSpeciesPersist> lstSpeciesIDs =
-                new Chm62edtSpeciesDomain().findWhere("ID_NATURE_OBJECT=" + species.getIdNatureObject());
+                    new Chm62edtSpeciesDomain().findWhere("ID_NATURE_OBJECT=" + species.getIdNatureObject());
 
             if (lstSpeciesIDs.size() > 0) {
                 for (Chm62edtSpeciesPersist lstSpeciesID : lstSpeciesIDs) {
@@ -188,7 +188,7 @@ public class SpeciesFactsheet {
             }
 
             List<Chm62edtSpeciesPersist> lstSynonyms =
-                new Chm62edtSpeciesDomain().findWhere("TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK=" + IdSpecie);
+                    new Chm62edtSpeciesDomain().findWhere("TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK=" + IdSpecie);
 
             if (lstSynonyms.size() > 0) {
                 for (Chm62edtSpeciesPersist lstSynonym : lstSynonyms) {
@@ -204,8 +204,8 @@ public class SpeciesFactsheet {
                 }
             }
             List<VernacularNamesPersist> verNameList =
-                new VernacularNamesDomain().findWhere("NAME_EN='English' AND LOOKUP_TYPE='language' AND ID_NATURE_OBJECT IN ("
-                        + IDs + ") AND F.NAME='vernacular_name' GROUP BY F.VALUE, NAME_EN");
+                    new VernacularNamesDomain().findWhere("NAME_EN='English' AND LOOKUP_TYPE='language' AND ID_NATURE_OBJECT IN ("
+                            + IDs + ") AND F.NAME='vernacular_name' GROUP BY F.VALUE, NAME_EN");
 
             if (!verNameList.isEmpty()) {
                 vernacularName = verNameList.get(0).getValue() + ", ";
@@ -252,8 +252,8 @@ public class SpeciesFactsheet {
 
         try {
             String synonymsIDs =
-                getSpeciesSynonymsCommaSeparated(getSpeciesNatureObject().getIdNatureObject(), getSpeciesNatureObject()
-                        .getIdSpecies());
+                    getSpeciesSynonymsCommaSeparated(getSpeciesNatureObject().getIdNatureObject(), getSpeciesNatureObject()
+                            .getIdSpecies());
 
             // System.out.println("synonymsIDs = " + synonymsIDs);
 
@@ -261,7 +261,7 @@ public class SpeciesFactsheet {
             // "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND C.ID_NATURE_OBJECT = " +
             // getSpeciesNatureObject().getIdNatureObject() + " GROUP BY H.ID_NATURE_OBJECT" );
             habitats =
-                new HabitatsNatureObjectReportTypeSpeciesDomain()
+                    new HabitatsNatureObjectReportTypeSpeciesDomain()
             .findWhere("H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND C.ID_NATURE_OBJECT IN ( " + synonymsIDs
                     + " ) GROUP BY H.ID_NATURE_OBJECT");
             if (habitats != null) {
@@ -306,18 +306,18 @@ public class SpeciesFactsheet {
      */
     public List getSitesForSpecies() {
         String synonymsIDs =
-            getSpeciesSynonymsCommaSeparated(getSpeciesNatureObject().getIdNatureObject(), getSpeciesNatureObject()
-                    .getIdSpecies());
+                getSpeciesSynonymsCommaSeparated(getSpeciesNatureObject().getIdNatureObject(), getSpeciesNatureObject()
+                        .getIdSpecies());
         // System.out.println("synonymsIDs = " + synonymsIDs);
 
         List results = new Vector();
         String sql =
-            "SELECT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN " + " FROM CHM62EDT_SPECIES AS A "
-            + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
-            + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
-            + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
-            + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE A.ID_NATURE_OBJECT IN ( "
-            + synonymsIDs + " )" + " GROUP BY C.ID_NATURE_OBJECT";
+                "SELECT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN " + " FROM CHM62EDT_SPECIES AS A "
+                        + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
+                        + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+                        + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
+                        + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE A.ID_NATURE_OBJECT IN ( "
+                        + synonymsIDs + " )" + " GROUP BY C.ID_NATURE_OBJECT";
 
         try {
             results = new SitesByNatureObjectDomain().findCustom(sql);
@@ -335,14 +335,14 @@ public class SpeciesFactsheet {
     public List getSitesForSubpecies() {
         List results = new Vector();
         String sql =
-            "SELECT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN " + " FROM CHM62EDT_SPECIES AS A "
-            + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
-            + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
-            + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
-            + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE (A.ID_SPECIES_LINK = '"
-            + getSpeciesObject().getIdSpecies() + "'" + " AND A.TYPE_RELATED_SPECIES='subspecies'"
-            + " AND A.ID_SPECIES <> '" + getSpeciesObject().getIdSpecies() + "')" + " OR (A.SCIENTIFIC_NAME LIKE '"
-            + getSpeciesObject().getScientificName() + " %')" + " GROUP BY C.ID_NATURE_OBJECT";
+                "SELECT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN " + " FROM CHM62EDT_SPECIES AS A "
+                        + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
+                        + " INNER JOIN CHM62EDT_SITES AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
+                        + " LEFT JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS D ON C.ID_NATURE_OBJECT = D.ID_NATURE_OBJECT "
+                        + " LEFT JOIN CHM62EDT_COUNTRY AS E ON D.ID_GEOSCOPE = E.ID_GEOSCOPE " + " WHERE (A.ID_SPECIES_LINK = '"
+                        + getSpeciesObject().getIdSpecies() + "'" + " AND A.TYPE_RELATED_SPECIES='subspecies'"
+                        + " AND A.ID_SPECIES <> '" + getSpeciesObject().getIdSpecies() + "')" + " OR (A.SCIENTIFIC_NAME LIKE '"
+                        + getSpeciesObject().getScientificName() + " %')" + " GROUP BY C.ID_NATURE_OBJECT";
 
         try {
             results = new SitesByNatureObjectDomain().findCustom(sql);
@@ -358,7 +358,7 @@ public class SpeciesFactsheet {
         synonyms.add(idNatureObject);
 
         List<Chm62edtSpeciesPersist> lstSynonyms =
-            new Chm62edtSpeciesDomain().findWhere("TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK=" + idSpecies);
+                new Chm62edtSpeciesDomain().findWhere("TYPE_RELATED_SPECIES = 'Synonym' and ID_SPECIES_LINK=" + idSpecies);
 
         if (lstSynonyms.size() > 0) {
             for (Chm62edtSpeciesPersist lstSynonym : lstSynonyms) {
@@ -394,19 +394,19 @@ public class SpeciesFactsheet {
             // System.out.println("synonymsIDs = " + synonymsIDs);
 
             List<Chm62edtReportsPersist> list =
-                new Chm62edtReportsDomain().findWhere("LOOKUP_TYPE='CONSERVATION_STATUS' AND ID_NATURE_OBJECT IN ("
-                        + synonymsIDs + ")");
+                    new Chm62edtReportsDomain().findWhere("LOOKUP_TYPE='CONSERVATION_STATUS' AND ID_NATURE_OBJECT IN ("
+                            + synonymsIDs + ")");
 
             for (Chm62edtReportsPersist report : list) {
                 NationalThreatWrapper threat = new NationalThreatWrapper();
 
                 List list1 =
-                    new Chm62edtConservationStatusDomain()
+                        new Chm62edtConservationStatusDomain()
                 .findWhere("ID_CONSERVATION_STATUS = '" + report.getIDLookup() + "'");
 
                 List list2 =
-                    new Chm62edtCountryDomain().findWhere("AREA_NAME_EN not like 'ospar%' and ID_GEOSCOPE='"
-                            + report.getIdGeoscope() + "'");
+                        new Chm62edtCountryDomain().findWhere("AREA_NAME_EN not like 'ospar%' and ID_GEOSCOPE='"
+                                + report.getIdGeoscope() + "'");
 
                 if (list1.size() > 0 && list2.size() > 0) {
                     Chm62edtConservationStatusPersist consS = (Chm62edtConservationStatusPersist) list1.get(0);
@@ -450,18 +450,18 @@ public class SpeciesFactsheet {
             String synonymsIDs = getSpeciesSynonymsCommaSeparated(specie.getIdNatureObject(), specie.getIdSpecies());
             // System.out.println("synonymsIDs = " + synonymsIDs);
             List<Chm62edtReportsPersist> list =
-                new Chm62edtReportsDomain().findWhere("LOOKUP_TYPE='CONSERVATION_STATUS' AND ID_NATURE_OBJECT IN ("
-                        + synonymsIDs + ")");
+                    new Chm62edtReportsDomain().findWhere("LOOKUP_TYPE='CONSERVATION_STATUS' AND ID_NATURE_OBJECT IN ("
+                            + synonymsIDs + ")");
 
             for (Chm62edtReportsPersist report : list) {
                 NationalThreatWrapper threat = new NationalThreatWrapper();
 
                 List list1 =
-                    new Chm62edtConservationStatusDomain()
+                        new Chm62edtConservationStatusDomain()
                 .findWhere("ID_CONSERVATION_STATUS = '" + report.getIDLookup() + "'");
                 List list2 =
-                    new Chm62edtCountryDomain().findWhere("AREA_NAME_EN not like 'ospar%' and ID_GEOSCOPE='"
-                            + report.getIdGeoscope() + "'");
+                        new Chm62edtCountryDomain().findWhere("AREA_NAME_EN not like 'ospar%' and ID_GEOSCOPE='"
+                                + report.getIdGeoscope() + "'");
 
                 if (list1.size() > 0 && list2.size() > 0) {
                     Chm62edtConservationStatusPersist consS = (Chm62edtConservationStatusPersist) list1.get(0);
@@ -511,7 +511,7 @@ public class SpeciesFactsheet {
                 if (po != null) {
                     author = po.getSource();
                     String dateStr = po.getCreated();
-                    if (!dateStr.equalsIgnoreCase("")) {
+                    if (dateStr != null && dateStr.length() > 0) {
                         author += " (" + dateStr + ")";
                     }
                 }
@@ -611,8 +611,8 @@ public class SpeciesFactsheet {
         sql += " AND TYPE_RELATED_SPECIES='subspecies'";
         sql += " AND ID_SPECIES <> '" + getSpeciesNatureObject().getIdSpecies() + "')";
         sql +=
-            " OR (TYPE_RELATED_SPECIES<>'synonym' AND SCIENTIFIC_NAME LIKE '"
-            + EunisUtil.replaceTagsImport(getSpeciesNatureObject().getScientificName()) + " %')";
+                " OR (TYPE_RELATED_SPECIES<>'synonym' AND SCIENTIFIC_NAME LIKE '"
+                        + EunisUtil.replaceTagsImport(getSpeciesNatureObject().getScientificName()) + " %')";
         try {
             // System.out.println("sql = " + sql);
             result = new SpeciesNatureObjectDomain().findWhere(sql);
@@ -635,19 +635,19 @@ public class SpeciesFactsheet {
 
         try {
             List<Chm62edtCountryPersist> countries =
-                new Chm62edtCountryDomain().findWhere("AREA_NAME_EN LIKE 'Europe%' OR AREA_NAME_EN = 'World'");
+                    new Chm62edtCountryDomain().findWhere("AREA_NAME_EN LIKE 'Europe%' OR AREA_NAME_EN = 'World'");
 
             for (Chm62edtCountryPersist country : countries) {
                 // String sql = "LOOKUP_TYPE='CONSERVATION_STATUS' AND ID_GEOSCOPE='" + country.getIdGeoscope() +
                 // "' AND ID_NATURE_OBJECT='" + getSpeciesNatureObject().getIdNatureObject() + "'";
                 String synonymsIDs =
-                    getSpeciesSynonymsCommaSeparated(getSpeciesNatureObject().getIdNatureObject(), getSpeciesNatureObject()
-                            .getIdSpecies());
+                        getSpeciesSynonymsCommaSeparated(getSpeciesNatureObject().getIdNatureObject(), getSpeciesNatureObject()
+                                .getIdSpecies());
                 // System.out.println("synonymsIDs = " + synonymsIDs);
 
                 String sql =
-                    "LOOKUP_TYPE='CONSERVATION_STATUS' AND ID_GEOSCOPE='" + country.getIdGeoscope()
-                    + "' AND ID_NATURE_OBJECT IN (" + synonymsIDs + ")";
+                        "LOOKUP_TYPE='CONSERVATION_STATUS' AND ID_GEOSCOPE='" + country.getIdGeoscope()
+                        + "' AND ID_NATURE_OBJECT IN (" + synonymsIDs + ")";
                 List<Chm62edtReportsPersist> reports = new Chm62edtReportsDomain().findWhere(sql);
 
                 if (reports.size() > 0) {
@@ -656,8 +656,8 @@ public class SpeciesFactsheet {
 
                         threat.setArea(country.getAreaNameEnglish());
                         List conservations =
-                            new Chm62edtConservationStatusDomain().findWhere("ID_CONSERVATION_STATUS='" + report.getIDLookup()
-                                    + "'");
+                                new Chm62edtConservationStatusDomain().findWhere("ID_CONSERVATION_STATUS='" + report.getIDLookup()
+                                        + "'");
 
                         if (conservations.size() > 0) {
                             threat.setStatus(((Chm62edtConservationStatusPersist) conservations.get(0)).getName());
@@ -692,8 +692,8 @@ public class SpeciesFactsheet {
             // System.out.println("synonymsIDs = " + synonymsIDs);
 
             List<Chm62edtReportsPersist> list =
-                new Chm62edtReportsDomain().findWhere("LOOKUP_TYPE='LEGAL_STATUS' AND ID_NATURE_OBJECT IN (" + synonymsIDs
-                        + ")");
+                    new Chm62edtReportsDomain().findWhere("LOOKUP_TYPE='LEGAL_STATUS' AND ID_NATURE_OBJECT IN (" + synonymsIDs
+                            + ")");
 
             if (list.size() > 0) {
                 for (Chm62edtReportsPersist report : list) {
@@ -760,7 +760,7 @@ public class SpeciesFactsheet {
 
         try {
             List<Chm62edtAreaLegalTextPersist> events =
-                new Chm62edtAreaLegalTextDomain().findWhere("ID_GEOSCOPE='" + idGeoscope + "' ORDER BY LEGAL_DATE ");
+                    new Chm62edtAreaLegalTextDomain().findWhere("ID_GEOSCOPE='" + idGeoscope + "' ORDER BY LEGAL_DATE ");
 
             if (null != events && !events.isEmpty()) {
                 for (Chm62edtAreaLegalTextPersist event : events) {
@@ -790,16 +790,16 @@ public class SpeciesFactsheet {
             // String sql = " (LOOKUP_TYPE IN ('SPECIES_STATUS')) AND  (ID_NATURE_OBJECT='" + idNatureObject +
             // "') ORDER BY ID_REPORT_TYPE, ID_LOOKUP DESC";
             String sql =
-                " (LOOKUP_TYPE IN ('SPECIES_STATUS')) AND  (ID_NATURE_OBJECT IN ( " + synonymsIDs
-                + " ) ) ORDER BY ID_REPORT_TYPE, ID_LOOKUP DESC";
+                    " (LOOKUP_TYPE IN ('SPECIES_STATUS')) AND  (ID_NATURE_OBJECT IN ( " + synonymsIDs
+                    + " ) ) ORDER BY ID_REPORT_TYPE, ID_LOOKUP DESC";
 
             List<Chm62edtReportsPersist> list = new Chm62edtReportsDomain().findWhere(sql);
 
             for (Chm62edtReportsPersist report : list) {
                 GeographicalStatusWrapper geoObject = new GeographicalStatusWrapper();
                 List countries =
-                    new Chm62edtCountryDomain().findWhere("AREA_NAME_EN not like 'ospar%' and ID_GEOSCOPE='"
-                            + report.getIdGeoscope() + "'");
+                        new Chm62edtCountryDomain().findWhere("AREA_NAME_EN not like 'ospar%' and ID_GEOSCOPE='"
+                                + report.getIdGeoscope() + "'");
                 List regions = new Chm62edtBiogeoregionDomain().findWhere("ID_GEOSCOPE='" + report.getIdGeoscopeLink() + "'");
                 List statuses = new Chm62edtSpeciesStatusDomain().findWhere("ID_SPECIES_STATUS='" + report.getIDLookup() + "'");
 
@@ -861,8 +861,8 @@ public class SpeciesFactsheet {
             // System.out.println("synonymsIDs = " + synonymsIDs);
 
             List list =
-                new Chm62edtReportsDomain().findWhere("ID_NATURE_OBJECT IN (" + synonymsIDs
-                        + ") AND LOOKUP_TYPE='POPULATION_UNIT'");
+                    new Chm62edtReportsDomain().findWhere("ID_NATURE_OBJECT IN (" + synonymsIDs
+                            + ") AND LOOKUP_TYPE='POPULATION_UNIT'");
 
             FactSheetPopulationWrapper popW;
 
@@ -913,7 +913,7 @@ public class SpeciesFactsheet {
             // List<Chm62edtReportsPersist> list = new Chm62edtReportsDomain().findWhere( "ID_NATURE_OBJECT='" + idNatureObject +
             // "' AND LOOKUP_TYPE='TREND'" );
             List<Chm62edtReportsPersist> list =
-                new Chm62edtReportsDomain().findWhere("ID_NATURE_OBJECT IN ( " + synonymsIDs + " ) AND LOOKUP_TYPE='TREND'");
+                    new Chm62edtReportsDomain().findWhere("ID_NATURE_OBJECT IN ( " + synonymsIDs + " ) AND LOOKUP_TYPE='TREND'");
 
             for (Chm62edtReportsPersist report : list) {
                 FactSheetTrendsWrapper trendsW = new FactSheetTrendsWrapper();
@@ -987,15 +987,15 @@ public class SpeciesFactsheet {
         sql += "    FROM";
         sql += "      `CHM62EDT_SPECIES`";
         sql +=
-            "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
+                "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
         sql +=
-            "      INNER JOIN `CHM62EDT_REPORTS` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`)";
+                "      INNER JOIN `CHM62EDT_REPORTS` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_REPORTS`.`ID_NATURE_OBJECT`)";
         sql +=
-            "      INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_REPORTS`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
+                "      INNER JOIN `CHM62EDT_REPORT_TYPE` ON (`CHM62EDT_REPORTS`.`ID_REPORT_TYPE` = `CHM62EDT_REPORT_TYPE`.`ID_REPORT_TYPE`)";
         sql += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_REPORTS`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
         sql += "    WHERE";
         sql +=
-            "      (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND'))";
+                "      (`CHM62EDT_REPORT_TYPE`.`LOOKUP_TYPE` IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND'))";
         sql += "    AND (`CHM62EDT_SPECIES`.`ID_SPECIES` = " + idNatureObject + ")";
         sql += "    UNION";
         sql += "    SELECT";
@@ -1010,7 +1010,7 @@ public class SpeciesFactsheet {
         sql += "    FROM";
         sql += "      `CHM62EDT_SPECIES`";
         sql +=
-            "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
+                "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
         sql += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
         sql += "    WHERE `CHM62EDT_SPECIES`.`ID_SPECIES_LINK` = " + idNatureObject;
         sql += "    AND `CHM62EDT_SPECIES`.`ID_SPECIES` <> " + idNatureObject;
@@ -1027,7 +1027,7 @@ public class SpeciesFactsheet {
         sql += "    FROM";
         sql += "      `CHM62EDT_SPECIES`";
         sql +=
-            "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
+                "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
         sql += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_NATURE_OBJECT`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
         sql += "    WHERE `CHM62EDT_SPECIES`.`ID_SPECIES` = " + idNatureObject;
         sql += "    UNION";
@@ -1043,12 +1043,12 @@ public class SpeciesFactsheet {
         sql += "    FROM";
         sql += "      `CHM62EDT_SPECIES`";
         sql +=
-            "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
+                "      INNER JOIN `CHM62EDT_NATURE_OBJECT` ON (`CHM62EDT_SPECIES`.`ID_NATURE_OBJECT` = `CHM62EDT_NATURE_OBJECT`.`ID_NATURE_OBJECT`)";
         sql += "      INNER JOIN `CHM62EDT_TAXONOMY` ON (`CHM62EDT_SPECIES`.`ID_TAXONOMY` = `CHM62EDT_TAXONOMY`.`ID_TAXONOMY`)";
         sql += "      INNER JOIN `DC_INDEX` ON (`CHM62EDT_TAXONOMY`.`ID_DC` = `DC_INDEX`.`ID_DC`)";
         sql += "    WHERE `CHM62EDT_SPECIES`.`ID_SPECIES` = " + idNatureObject;
         sql +=
-            "    GROUP BY CHM62EDT_SPECIES.ID_NATURE_OBJECT,DC_INDEX.ID_DC,DC_INDEX.SOURCE,DC_INDEX.EDITOR,DC_INDEX.TITLE,DC_INDEX.PUBLISHER,DC_INDEX.CREATED";
+                "    GROUP BY CHM62EDT_SPECIES.ID_NATURE_OBJECT,DC_INDEX.ID_DC,DC_INDEX.SOURCE,DC_INDEX.EDITOR,DC_INDEX.TITLE,DC_INDEX.PUBLISHER,DC_INDEX.CREATED";
         try {
             List list = new NatureObjectDcSourceDomain().findCustom(sql, 1000);
 
@@ -1154,24 +1154,24 @@ public class SpeciesFactsheet {
             if (!ltaxcode.isEmpty() && level < 3) {
                 t = (Chm62edtTaxonomyPersist) ltaxcode.get(0);
                 switch (level) {
-                case 0:
-                    tName = t.getName();
-                    break;
+                    case 0:
+                        tName = t.getName();
+                        break;
 
-                case 1:
-                    tName = t.getParentLevelName();
-                    break;
+                    case 1:
+                        tName = t.getParentLevelName();
+                        break;
 
-                case 2:
-                    tName = getTaxonomicName(t.getClassID().toString(), 0);
-                    break;
+                    case 2:
+                        tName = getTaxonomicName(t.getClassID().toString(), 0);
+                        break;
 
-                case 3:
-                    tName = getTaxonomicName(t.getClassID().toString(), 1);
-                    break;
+                    case 3:
+                        tName = getTaxonomicName(t.getClassID().toString(), 1);
+                        break;
 
-                default:
-                    tName = "bad taxionomic level";
+                    default:
+                        tName = "bad taxionomic level";
                 }
             } else {
                 if (3 == level) {
@@ -1238,8 +1238,8 @@ public class SpeciesFactsheet {
 
         try {
             List results =
-                new Chm62edtReportAttributesDomain().findWhere("ID_REPORT_ATTRIBUTES='" + idReportAttribute
-                        + "' AND NAME='POP_MIN'");
+                    new Chm62edtReportAttributesDomain().findWhere("ID_REPORT_ATTRIBUTES='" + idReportAttribute
+                            + "' AND NAME='POP_MIN'");
 
             if (null != results && results.size() > 0) {
                 result = Utilities.checkedStringToInt(((Chm62edtReportAttributesPersist) results.get(0)).getValue(), 0);
@@ -1263,8 +1263,8 @@ public class SpeciesFactsheet {
 
         try {
             List results =
-                new Chm62edtReportAttributesDomain().findWhere("ID_REPORT_ATTRIBUTES='" + idReportAttribute
-                        + "' AND NAME='POP_MAX'");
+                    new Chm62edtReportAttributesDomain().findWhere("ID_REPORT_ATTRIBUTES='" + idReportAttribute
+                            + "' AND NAME='POP_MAX'");
 
             if (null != results && results.size() > 0) {
                 result = Utilities.checkedStringToInt(((Chm62edtReportAttributesPersist) results.get(0)).getValue(), 0);
@@ -1313,8 +1313,8 @@ public class SpeciesFactsheet {
             // List results = new Chm62edtReportAttributesDomain().findWhere("ID_REPORT_ATTRIBUTES='" + idReportAttribute +
             // "' AND NAME='REFERENCE_DATE'");
             List results =
-                new Chm62edtReportAttributesDomain().findWhere("ID_REPORT_ATTRIBUTES='" + idReportAttribute
-                        + "' AND NAME='REFERENCE_PERIOD'");
+                    new Chm62edtReportAttributesDomain().findWhere("ID_REPORT_ATTRIBUTES='" + idReportAttribute
+                            + "' AND NAME='REFERENCE_PERIOD'");
 
             if (null != results && results.size() > 0) {
                 result = ((Chm62edtReportAttributesPersist) results.get(0)).getValue();
@@ -1338,8 +1338,8 @@ public class SpeciesFactsheet {
 
         try {
             List results =
-                new SpeciesStatusReportTypeDomain().findWhere("ID_REPORT_TYPE='" + idReportType
-                        + "' AND LOOKUP_TYPE='SPECIES_STATUS'");
+                    new SpeciesStatusReportTypeDomain().findWhere("ID_REPORT_TYPE='" + idReportType
+                            + "' AND LOOKUP_TYPE='SPECIES_STATUS'");
 
             if (null != results && results.size() > 0) {
                 result = ((SpeciesStatusReportTypePersist) results.get(0)).getDescription();
@@ -1363,8 +1363,8 @@ public class SpeciesFactsheet {
 
         try {
             List results =
-                new InfoQualityReportTypeDomain().findWhere("ID_REPORT_TYPE='" + idReportType
-                        + "' AND LOOKUP_TYPE='INFO_QUALITY'");
+                    new InfoQualityReportTypeDomain().findWhere("ID_REPORT_TYPE='" + idReportType
+                            + "' AND LOOKUP_TYPE='INFO_QUALITY'");
 
             if (null != results && results.size() > 0) {
                 result = ((InfoQualityReportTypePersist) results.get(0)).getDescription();
@@ -1388,8 +1388,8 @@ public class SpeciesFactsheet {
 
         try {
             List results =
-                new Chm62edtReportAttributesDomain().findWhere("ID_REPORT_ATTRIBUTES='" + idReportAttribute
-                        + "' AND NAME='START_PERIOD'");
+                    new Chm62edtReportAttributesDomain().findWhere("ID_REPORT_ATTRIBUTES='" + idReportAttribute
+                            + "' AND NAME='START_PERIOD'");
 
             if (null != results && results.size() > 0) {
                 result = ((Chm62edtReportAttributesPersist) results.get(0)).getValue();
@@ -1413,8 +1413,8 @@ public class SpeciesFactsheet {
 
         try {
             List results =
-                new Chm62edtReportAttributesDomain().findWhere("ID_REPORT_ATTRIBUTES='" + idReportAttribute
-                        + "' AND NAME='END_PERIOD'");
+                    new Chm62edtReportAttributesDomain().findWhere("ID_REPORT_ATTRIBUTES='" + idReportAttribute
+                            + "' AND NAME='END_PERIOD'");
 
             if (null != results && results.size() > 0) {
                 result = ((Chm62edtReportAttributesPersist) results.get(0)).getValue();
@@ -1520,8 +1520,8 @@ public class SpeciesFactsheet {
                     if (mainPictureMaxWidthInt != null && mainPictureMaxWidthInt.intValue() > 0 && mainPictureMaxHeightInt != null
                             && mainPictureMaxHeightInt.intValue() > 0) {
                         styleAttr =
-                            "max-width: " + mainPictureMaxWidthInt.intValue() + "px; max-height: "
-                            + mainPictureMaxHeightInt.intValue() + "px";
+                                "max-width: " + mainPictureMaxWidthInt.intValue() + "px; max-height: "
+                                        + mainPictureMaxHeightInt.intValue() + "px";
                     }
 
                     String desc = pp.getDescription();
@@ -1559,7 +1559,7 @@ public class SpeciesFactsheet {
         List<ClassificationDTO> classifications = new ArrayList<ClassificationDTO>();
 
         List<Chm62edtTaxcodePersist> list =
-            new Chm62edtTaxcodeDomain().findWhere("ID_TAXONOMY = '" + getSpeciesObject().getIdTaxcode() + "'");
+                new Chm62edtTaxcodeDomain().findWhere("ID_TAXONOMY = '" + getSpeciesObject().getIdTaxcode() + "'");
         if (list != null && list.size() > 0) {
             Chm62edtTaxcodePersist t = list.get(0);
             String str = t.getTaxonomyTree();
@@ -1594,8 +1594,8 @@ public class SpeciesFactsheet {
 
         try {
             List results =
-                new Chm62edtReportAttributesDomain().findWhere("ID_REPORT_ATTRIBUTES='" + idReportAttribute + "' AND NAME='"
-                        + name + "'");
+                    new Chm62edtReportAttributesDomain().findWhere("ID_REPORT_ATTRIBUTES='" + idReportAttribute + "' AND NAME='"
+                            + name + "'");
 
             if (null != results && results.size() > 0) {
                 result = ((Chm62edtReportAttributesPersist) results.get(0)).getValue();
@@ -1621,8 +1621,8 @@ public class SpeciesFactsheet {
 
         try {
             List results =
-                new Chm62edtReportTypeDomain().findWhere("ID_REPORT_TYPE='" + idReportType + "' AND LOOKUP_TYPE='"
-                        + lookup_type + "'");
+                    new Chm62edtReportTypeDomain().findWhere("ID_REPORT_TYPE='" + idReportType + "' AND LOOKUP_TYPE='"
+                            + lookup_type + "'");
 
             if (null != results && results.size() > 0) {
                 idLookup = ((Chm62edtReportTypePersist) results.get(0)).getIdLookup();
@@ -1738,7 +1738,7 @@ public class SpeciesFactsheet {
     public String getSpeciesGroup() {
         String result = "";
         List groups =
-            new Chm62edtGroupspeciesDomain().findWhere("ID_GROUP_SPECIES = " + getSpeciesNatureObject().getIdGroupspecies());
+                new Chm62edtGroupspeciesDomain().findWhere("ID_GROUP_SPECIES = " + getSpeciesNatureObject().getIdGroupspecies());
 
         if (groups != null && groups.size() > 0) {
             result = ((Chm62edtGroupspeciesPersist) groups.get(0)).getCommonName();

@@ -1,12 +1,12 @@
 package ro.finsiel.eunis.search.species.country;
 
 
+import java.util.Vector;
+
 import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
-import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
-
-import java.util.Vector;
+import ro.finsiel.eunis.search.Utilities;
 
 
 /**
@@ -47,6 +47,7 @@ public final class CountryBean extends AbstractFormBean {
      * in order to use them in searches.
      * @return A list of AbstractSearchCriteria objects used to do the search.
      */
+    @Override
     public AbstractSearchCriteria[] toSearchCriteria() {
         if (null == country || null == region) {
             return new AbstractSearchCriteria[0];
@@ -94,6 +95,7 @@ public final class CountryBean extends AbstractFormBean {
      * in order to use them in sorting, again...
      * @return A list of AbstractSearchCriteria objects used to do the sorting
      */
+    @Override
     public AbstractSortCriteria[] toSortCriteria() {
         if (null == sort || null == ascendency) {
             return new AbstractSortCriteria[0];
@@ -115,7 +117,9 @@ public final class CountryBean extends AbstractFormBean {
      * @param classFields Fields to be included in parameters.
      * @return An URL compatible type of representation(i.e.: >>param1=val1&param2=val2&param3=val3 etc.<<.
      */
+    @Override
     public String toURLParam(Vector classFields) {
+
         StringBuffer url = new StringBuffer();
 
         url.append(toURLParamSuper(classFields)); // Add fields of the superclass (DO NOT FORGET!)
@@ -168,6 +172,7 @@ public final class CountryBean extends AbstractFormBean {
      * @param classFields Fields to be included in parameters.
      * @return An form compatible type of representation of request parameters.
      */
+    @Override
     public String toFORMParam(Vector classFields) {
         StringBuffer form = new StringBuffer();
 

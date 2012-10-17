@@ -1,10 +1,13 @@
 package ro.finsiel.eunis.formBeans;
 
 
-import ro.finsiel.eunis.search.*;
-
-import java.util.Vector;
 import java.util.ArrayList;
+import java.util.Vector;
+
+import ro.finsiel.eunis.search.AbstractPaginator;
+import ro.finsiel.eunis.search.AbstractSearchCriteria;
+import ro.finsiel.eunis.search.AbstractSortCriteria;
+import ro.finsiel.eunis.search.Utilities;
 
 
 /**
@@ -34,7 +37,7 @@ public abstract class AbstractFormBean implements java.io.Serializable {
      * Current page dispayed on the view.
      */
     protected String currentPage = "0";
-  
+
     /**
      * Is similar name
      */
@@ -226,6 +229,7 @@ public abstract class AbstractFormBean implements java.io.Serializable {
             url.append(Utilities.writeURLParameter("newName", "true"));
         }
         // if (null != removeFilterIndex) { url.append(Utilities.writeURLParameter("removeFilterIndex", removeFilterIndex)); }
+
         return url;
     }
 
@@ -393,7 +397,7 @@ public abstract class AbstractFormBean implements java.io.Serializable {
     public void setCriteriaSearch(String[] criteriaSearch) {
         this.criteriaSearch = (null != criteriaSearch)
                 ? Utilities.trimArray(criteriaSearch)
-                : criteriaSearch;
+                        : criteriaSearch;
     }
 
     /**
@@ -447,7 +451,7 @@ public abstract class AbstractFormBean implements java.io.Serializable {
     public final String getNewName() {
         return newName;
     }
-	
+
     public final void setNewName(String newName) {
         this.newName = newName;
     }

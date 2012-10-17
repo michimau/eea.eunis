@@ -1,10 +1,6 @@
-<%--
-  - Author(s) : The EUNIS Database Team.
-  - Date :
-  - Copyright : (c) 2002-2005 EEA - European Environment Agency.
-  - Description : 'Habitats country' function - results page.
---%>
 <%@page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/stripes/common/taglibs.jsp"%>
+
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
@@ -54,7 +50,12 @@
 
   // This is used in @page include...
   int resultsCount = paginator.countResults();
-  final String pageName = "habitats-country-result.jsp";
+
+  String pageName = (String) request.getAttribute("javax.servlet.forward.request_uri");
+  if (pageName == null || pageName.length()==0){
+      pageName = request.getContextPath() + request.getServletPath();
+  }
+
   int pagesCount = paginator.countPages();
   int guid = 0;
   // Now extract the results for the current page.
@@ -71,68 +72,17 @@
   String tsvLink = "javascript:openTSVDownload('reports/habitats/tsv-habitats-country.jsp?" + formBean.toURLParam(reportFields) + "')";
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String location = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,habitats_country_location#habitats-country.jsp,results";
-  if (results.isEmpty())
-  {
-    boolean fromRefine = formBean != null && formBean.getCriteriaSearch() != null && formBean.getCriteriaSearch().length > 0;
+
 %>
-  <jsp:forward page="emptyresults.jsp">
-    <jsp:param name="location" value="<%=location%>" />
-    <jsp:param name="fromRefine" value="<%=fromRefine%>" />
-  </jsp:forward>
-<%
-  }
-%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-<head>
-  <jsp:include page="header-page.jsp" />
-  <script language="JavaScript" src="<%=request.getContextPath()%>/script/habitats-result.js" type="text/javascript"></script>
-  <title>
-    <%=application.getInitParameter("PAGE_TITLE")%>
-    <%=cm.cms("habitats_country-result_title")%>
-  </title>
-</head>
-  <body>
-    <div id="visual-portal-wrapper">
-      <jsp:include page="header.jsp" />
-      <!-- The wrapper div. It contains the three columns. -->
-      <div id="portal-columns" class="visualColumnHideTwo">
-        <!-- start of the main and left columns -->
-        <div id="visual-column-wrapper">
-          <!-- start of main content block -->
-          <div id="portal-column-content">
-            <div id="content">
-              <div class="documentContent" id="region-content">
-              	<jsp:include page="header-dynamic.jsp">
-                  <jsp:param name="location" value="<%=location%>" />
-                  <jsp:param name="downloadLink" value="<%=tsvLink%>" />
-                </jsp:include>
-                <a name="documentContent"></a>
-                <h1>
-                  <%=cm.cmsPhrase("Country / Biogeographic region")%>
-                </h1>
-                <div class="documentActions">
-                  <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
-                  <ul>
-                    <li>
-                      <a href="javascript:this.print();"><img src="http://webservices.eea.europa.eu/templates/print_icon.gif"
-                            alt="<%=cm.cmsPhrase("Print this page")%>"
-                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
-                    </li>
-                    <li>
-                      <a href="javascript:toggleFullScreenMode();"><img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif"
-                             alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
-                             title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
-                    </li>
-                    <li>
-                      <a href="habitats-help.jsp"><img src="images/help_icon.gif"
-                             alt="<%=cm.cmsPhrase("Help information")%>"
-                             title="<%=cm.cmsPhrase("Help information")%>" /></a>
-                    </li>
-                  </ul>
-                </div>
-<!-- MAIN CONTENT -->
-                <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
+<stripes:layout-definition>
+
+    <%
+    if (results.isEmpty()){
+        %>
+        <p>No habitat types found by this criteria!</p><%
+    }
+    else{ %>
+	   <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                 <td>
                 <table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -172,7 +122,7 @@
                   pageSizeFormFields.addElement("criteriaType");
                   pageSizeFormFields.addElement("expand");
                 %>
-                <jsp:include page="pagesize.jsp">
+                <jsp:include page="../pagesize.jsp">
                   <jsp:param name="guid" value="<%=guid%>" />
                   <jsp:param name="pageName" value="<%=pageName%>" />
                   <jsp:param name="pageSize" value="<%=formBean.getPageSize()%>" />
@@ -198,7 +148,7 @@
                   </tr>
                   <tr>
                     <td bgcolor="#EEEEEE">
-                      <form name="resultSearch" method="get" onsubmit="return(checkHabitats(<%=noCriteria%>));" action="habitats-country-result.jsp">
+                      <form name="resultSearch" method="get" onsubmit="return(checkHabitats(<%=noCriteria%>));" action="">
                         <%=formBean.toFORMParam(filterSearch)%>
                         <label for="criteriaType" class="noshow"><%=cm.cmsPhrase("Criteria")%></label>
                         <select title="Criteria" name="criteriaType" id="criteriaType">
@@ -266,7 +216,7 @@
                   navigatorFormFields.addElement("criteriaType");
                   navigatorFormFields.addElement("expand");
                 %>
-                <jsp:include page="navigator.jsp">
+                <jsp:include page="../navigator.jsp">
                   <jsp:param name="pagesCount" value="<%=pagesCount%>" />
                   <jsp:param name="pageName" value="<%=pageName%>" />
                   <jsp:param name="guid" value="<%=guid%>" />
@@ -572,7 +522,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <jsp:include page="navigator.jsp">
+                    <jsp:include page="../navigator.jsp">
                       <jsp:param name="pagesCount" value="<%=pagesCount%>" />
                       <jsp:param name="pageName" value="<%=pageName%>" />
                       <jsp:param name="guid" value="<%=guid + 1%>" />
@@ -586,26 +536,7 @@
                   <%=cm.br()%>
                   <%=cm.cmsMsg("habitats_country-result_title")%>
                   <%=cm.br()%>
-<!-- END MAIN CONTENT -->
-              </div>
-            </div>
-          </div>
-          <!-- end of main content block -->
-          <!-- start of the left (by default at least) column -->
-          <div id="portal-column-one">
-            <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp">
-                <jsp:param name="page_name" value="habitats-country-result.jsp" />
-              </jsp:include>
-            </div>
-          </div>
-          <!-- end of the left (by default at least) column -->
-        </div>
-        <!-- end of the main and left columns -->
-        <div class="visualClear"><!-- --></div>
-      </div>
-      <!-- end column wrapper -->
-      <jsp:include page="footer-static.jsp" />
-    </div>
-  </body>
-</html>
+    <%
+    } // End else (if results found)
+    %>
+</stripes:layout-definition>

@@ -8,8 +8,10 @@ import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import ro.finsiel.eunis.jrfTables.Chm62edtCountryDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist;
 import ro.finsiel.eunis.jrfTables.sites.designation_code.DesignationPersist;
+import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.search.sites.designations.FactsheetDesignations;
@@ -49,6 +51,9 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
     // Variable for RDF generation
     private String tab;
 
+    /** */
+    private Chm62edtCountryPersist countryObject;
+
     /**
      * Init designation factsheet
      */
@@ -59,7 +64,7 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
 
         btrail = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,designation_factsheet_location";
         pageTitle = getContext().getInitParameter("PAGE_TITLE")
-        + getContentManagement().cmsPhrase("Designation identification for ");
+                + getContentManagement().cmsPhrase("Designation identification for ");
 
         if (idDesig != null && idGeo != null) {
             FactsheetDesignations design = new FactsheetDesignations(idDesig, idGeo);
@@ -81,14 +86,17 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
                 }
 
                 country = Utilities.formatString(Utilities.findCountryByIdGeoscope(factsheet.getIdGeoscope()), "");
-                if (country.equalsIgnoreCase("Europe")) {
+                if (country != null && country.equalsIgnoreCase("Europe")) {
                     country = "European Community";
                 }
 
                 if (country != null && country.trim().length() > 0) {
+
+                    countryObject = CountryUtil.findCountry(country);
+
                     List countries = new Chm62edtCountryDomain().findWhere(
                             "ISO_2L<>'' AND ISO_2L<>'null' AND ISO_2L IS NOT NULL AND SELECTION <> 0 and AREA_NAME_EN ='"
-                            + country + "'");
+                                    + country + "'");
 
                     if (countries != null && countries.size() > 0) {
                         isCountry = true;
@@ -111,8 +119,8 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
                         sites = SitesSearchUtility.findSitesForDesignation(idDesig, idGeo);
                         int maxSitesPerMap = Utilities.checkedStringToInt(
                                 getContext().getInitParameter(
-                                "MAX_SITES_PER_MAP"),
-                                2000);
+                                        "MAX_SITES_PER_MAP"),
+                                        2000);
 
                         if (sites.size() < maxSitesPerMap) {
                             for (int i = 0; i < sites.size(); i++) {
@@ -145,6 +153,7 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
     /**
      * @return the btrail
      */
+    @Override
     public String getBtrail() {
         return btrail;
     }
@@ -159,6 +168,7 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
     /**
      * @return the metaDescription
      */
+    @Override
     public String getMetaDescription() {
         return metaDescription;
     }
@@ -235,4 +245,7 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
         this.tab = tab;
     }
 
+    public Chm62edtCountryPersist getCountryObject() {
+        return countryObject;
+    }
 }

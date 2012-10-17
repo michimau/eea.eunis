@@ -100,7 +100,8 @@
     j++;
   }
   j = 0;
-  Iterator allBiogeoregions = CountryUtil.findRegionsFromCountry("any");
+
+  Iterator allBiogeoregions = CountryUtil.findRegionsFromCountry("any").iterator();
   while (allBiogeoregions.hasNext())
   {
     RegionWrapper biogeoregion = (RegionWrapper)allBiogeoregions.next();

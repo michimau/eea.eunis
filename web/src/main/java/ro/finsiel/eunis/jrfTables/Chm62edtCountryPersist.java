@@ -403,242 +403,249 @@ public class Chm62edtCountryPersist extends PersistentObject {
      * Setter for a database field.
      * @param areaName New value.
      **/  public void setAreaName(String areaName) {
-        i_areaName = areaName;
-        this.markModifiedPersistentState();
-    }
+         i_areaName = areaName;
+         this.markModifiedPersistentState();
+     }
 
-    /**
-     * Setter for a database field.
-     * @param areaNameEnglish New value.
-     **/  public void setAreaNameEnglish(String areaNameEnglish) {
-        i_areaNameEnglish = areaNameEnglish;
-        this.markModifiedPersistentState();
-    }
+     /**
+      * Setter for a database field.
+      * @param areaNameEnglish New value.
+      **/  public void setAreaNameEnglish(String areaNameEnglish) {
+          i_areaNameEnglish = areaNameEnglish;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param areaNameFrench New value.
-     **/
-    public void setAreaNameFrench(String areaNameFrench) {
-        i_areaNameFrench = areaNameFrench;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param areaNameFrench New value.
+       **/
+      public void setAreaNameFrench(String areaNameFrench) {
+          i_areaNameFrench = areaNameFrench;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param areucd New value.
-     **/
-    public void setAreucd(String areucd) {
-        i_areucd = areucd;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param areucd New value.
+       **/
+      public void setAreucd(String areucd) {
+          i_areucd = areucd;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param capital New value.
-     **/
-    public void setCapital(String capital) {
-        i_capital = capital;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param capital New value.
+       **/
+      public void setCapital(String capital) {
+          i_capital = capital;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param countryType New value.
-     **/
-    public void setCountryType(String countryType) {
-        i_countryType = countryType;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param countryType New value.
+       **/
+      public void setCountryType(String countryType) {
+          i_countryType = countryType;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param currencyCode New value.
-     **/
-    public void setCurrencyCode(String currencyCode) {
-        i_currencyCode = currencyCode;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param currencyCode New value.
+       **/
+      public void setCurrencyCode(String currencyCode) {
+          i_currencyCode = currencyCode;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param currencyName New value.
-     **/
-    public void setCurrencyName(String currencyName) {
-        i_currencyName = currencyName;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param currencyName New value.
+       **/
+      public void setCurrencyName(String currencyName) {
+          i_currencyName = currencyName;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param eunisAreaCode New value.
-     **/
-    public void setEunisAreaCode(String eunisAreaCode) {
-        i_eunisAreaCode = eunisAreaCode;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param eunisAreaCode New value.
+       **/
+      public void setEunisAreaCode(String eunisAreaCode) {
+          i_eunisAreaCode = eunisAreaCode;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param idCountry New value.
-     **/
-    public void setIdCountry(Integer idCountry) {
-        i_idCountry = idCountry;
-        // Changing a primary key so we force this to new.
-        this.forceNewPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param idCountry New value.
+       **/
+      public void setIdCountry(Integer idCountry) {
+          i_idCountry = idCountry;
+          // Changing a primary key so we force this to new.
+          this.forceNewPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param idGeoscope New value.
-     **/
-    public void setIdGeoscope(Integer idGeoscope) {
-        i_idGeoscope = idGeoscope;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param idGeoscope New value.
+       **/
+      public void setIdGeoscope(Integer idGeoscope) {
+          i_idGeoscope = idGeoscope;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param iso2Wcmc New value.
-     **/
-    public void setIso2Wcmc(String iso2Wcmc) {
-        i_iso2Wcmc = iso2Wcmc;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param iso2Wcmc New value.
+       **/
+      public void setIso2Wcmc(String iso2Wcmc) {
+          i_iso2Wcmc = iso2Wcmc;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param iso2l New value.
-     **/
-    public void setIso2l(String iso2l) {
-        i_iso2l = iso2l;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param iso2l New value.
+       **/
+      public void setIso2l(String iso2l) {
+          i_iso2l = iso2l;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param iso3Wcmc New value.
-     **/
-    public void setIso3Wcmc(String iso3Wcmc) {
-        i_iso3Wcmc = iso3Wcmc;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param iso3Wcmc New value.
+       **/
+      public void setIso3Wcmc(String iso3Wcmc) {
+          i_iso3Wcmc = iso3Wcmc;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param iso3WcmcParent New value.
-     **/
-    public void setIso3WcmcParent(String iso3WcmcParent) {
-        i_iso3WcmcParent = iso3WcmcParent;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param iso3WcmcParent New value.
+       **/
+      public void setIso3WcmcParent(String iso3WcmcParent) {
+          i_iso3WcmcParent = iso3WcmcParent;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param iso3l New value.
-     **/
-    public void setIso3l(String iso3l) {
-        i_iso3l = iso3l;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param iso3l New value.
+       **/
+      public void setIso3l(String iso3l) {
+          i_iso3l = iso3l;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param isoN New value.
-     **/
-    public void setIsoN(Short isoN) {
-        i_isoN = isoN;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param isoN New value.
+       **/
+      public void setIsoN(Short isoN) {
+          i_isoN = isoN;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param ngo New value.
-     **/
-    public void setNgo(Short ngo) {
-        i_ngo = ngo;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param ngo New value.
+       **/
+      public void setNgo(Short ngo) {
+          i_ngo = ngo;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param numberDesignArea New value.
-     **/
-    public void setNumberDesignArea(Integer numberDesignArea) {
-        i_numberDesignArea = numberDesignArea;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param numberDesignArea New value.
+       **/
+      public void setNumberDesignArea(Integer numberDesignArea) {
+          i_numberDesignArea = numberDesignArea;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param politicalStatus New value.
-     **/
-    public void setPoliticalStatus(String politicalStatus) {
-        i_politicalStatus = politicalStatus;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param politicalStatus New value.
+       **/
+      public void setPoliticalStatus(String politicalStatus) {
+          i_politicalStatus = politicalStatus;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param popDensity New value.
-     **/
-    public void setPopDensity(Double popDensity) {
-        i_popDensity = popDensity;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param popDensity New value.
+       **/
+      public void setPopDensity(Double popDensity) {
+          i_popDensity = popDensity;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param population New value.
-     **/
-    public void setPopulation(Integer population) {
-        i_population = population;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param population New value.
+       **/
+      public void setPopulation(Integer population) {
+          i_population = population;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param selection New value.
-     **/
-    public void setSelection(Short selection) {
-        i_selection = selection;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param selection New value.
+       **/
+      public void setSelection(Short selection) {
+          i_selection = selection;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param sortNumber New value.
-     **/
-    public void setSortNumber(Integer sortNumber) {
-        i_sortNumber = sortNumber;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param sortNumber New value.
+       **/
+      public void setSortNumber(Integer sortNumber) {
+          i_sortNumber = sortNumber;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param source New value.
-     **/
-    public void setSource(String source) {
-        i_source = source;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param source New value.
+       **/
+      public void setSource(String source) {
+          i_source = source;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param surface New value.
-     **/
-    public void setSurface(Integer surface) {
-        i_surface = surface;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param surface New value.
+       **/
+      public void setSurface(Integer surface) {
+          i_surface = surface;
+          this.markModifiedPersistentState();
+      }
 
-    /**
-     * Setter for a database field.
-     * @param telCode New value.
-     **/
-    public void setTelCode(Short telCode) {
-        i_telCode = telCode;
-        this.markModifiedPersistentState();
-    }
+      /**
+       * Setter for a database field.
+       * @param telCode New value.
+       **/
+      public void setTelCode(Short telCode) {
+          i_telCode = telCode;
+          this.markModifiedPersistentState();
+      }
 
+      /**
+       *
+       * @return
+       */
+      public boolean isIndeedCountry(){
+          return i_iso2l != null && i_iso2l.length()>0 && !i_iso2l.toLowerCase().equals("null") && i_selection != 0;
+      }
 }

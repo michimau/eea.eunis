@@ -1,6 +1,12 @@
 package ro.finsiel.eunis.search.sites.statistics;
 
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.List;
+import java.util.Vector;
+
 import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsDomain;
 import ro.finsiel.eunis.jrfTables.sites.statistics.StatisticsDomain;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
@@ -8,13 +14,7 @@ import ro.finsiel.eunis.search.AbstractSortCriteria;
 import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesFormBean;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.List;
-import java.util.Vector;
+import ro.finsiel.eunis.utilities.SQLUtilities;
 
 
 /**
@@ -127,9 +127,9 @@ public class StatisticsBean extends SitesFormBean {
             sql += "<=" + yearMax + " ";
         }
         boolean[] source = {
-            DB_NATURA2000 == null ? false : true, DB_CORINE == null ? false : true, DB_DIPLOMA == null ? false : true,
-            DB_CDDA_NATIONAL == null ? false : true, DB_CDDA_INTERNATIONAL == null ? false : true,
-            DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true,
+                DB_NATURA2000 == null ? false : true, DB_CORINE == null ? false : true, DB_DIPLOMA == null ? false : true,
+                        DB_CDDA_NATIONAL == null ? false : true, DB_CDDA_INTERNATIONAL == null ? false : true,
+                                DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true,
         };
 
         sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), source, db, "A").toString();
@@ -182,10 +182,9 @@ public class StatisticsBean extends SitesFormBean {
             sql += "<=" + yearMax + " ";
         }
         boolean[] source = {
-            DB_NATURA2000 == null ? false : true, DB_CORINE == null ? false : true, DB_DIPLOMA == null ? false : true,
-            DB_CDDA_NATIONAL == null ? false : true, DB_CDDA_INTERNATIONAL == null ? false : true,
-            DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true,
-        };
+                DB_NATURA2000 == null ? false : true, DB_CORINE == null ? false : true, DB_DIPLOMA == null ? false : true,
+                        DB_CDDA_NATIONAL == null ? false : true, DB_CDDA_INTERNATIONAL == null ? false : true,
+                                DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true};
 
         sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), source, db, "A").toString();
 
@@ -263,9 +262,9 @@ public class StatisticsBean extends SitesFormBean {
 
         if (useIso3l) {
             boolean[] source = {
-                DB_NATURA2000 == null ? false : true, DB_CORINE == null ? false : true, DB_DIPLOMA == null ? false : true,
-                DB_CDDA_NATIONAL == null ? false : true, DB_CDDA_INTERNATIONAL == null ? false : true,
-                DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true,
+                    DB_NATURA2000 == null ? false : true, DB_CORINE == null ? false : true, DB_DIPLOMA == null ? false : true,
+                            DB_CDDA_NATIONAL == null ? false : true, DB_CDDA_INTERNATIONAL == null ? false : true,
+                                    DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true,
             };
 
             sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), source, db, "E").toString();
@@ -366,7 +365,7 @@ public class StatisticsBean extends SitesFormBean {
         //
         // sql += " WHERE (1=1) AND " + sqlWhereSecondSelect + " GROUP BY E.ID_DESIGNATION,E.ISO_3L,E.DESCRIPTION,E.SOURCE_DB";
 
-        try {    
+        try {
             designations = new Chm62edtDesignationsDomain().findCustom(sql);
 
         } catch (Exception e) {
@@ -380,19 +379,11 @@ public class StatisticsBean extends SitesFormBean {
      * @param idSitesList
      * @param id
      * @param idGeoscope
-     * @param SQL_DRV
-     * @param SQL_URL
-     * @param SQL_USR
-     * @param SQL_PSW
+     * @param sqlUtilities
      * @return no of sites and total area for a designation
      */
-    public Vector getValueForDesignations(List idSitesList,
-            String id,
-            String idGeoscope,
-            String SQL_DRV,
-            String SQL_URL,
-            String SQL_USR,
-            String SQL_PSW) {
+    public Vector getValueForDesignations(List idSitesList, String id, String idGeoscope, SQLUtilities sqlUtilities) {
+
         Vector values = new Vector();
 
         String sqlWhere = prepareSQL(false);
@@ -405,8 +396,7 @@ public class StatisticsBean extends SitesFormBean {
         ResultSet rs = null;
 
         try {
-            Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PSW);
+            con = sqlUtilities.getConnection();
 
             ps = con.prepareStatement(
                     " SELECT COUNT(DISTINCT A.ID_SITE) FROM CHM62EDT_DESIGNATIONS E "
@@ -475,7 +465,7 @@ public class StatisticsBean extends SitesFormBean {
                     values.addElement(
                             (areaTotal.longValue() - areaTotalOverlap.longValue() < 0
                                     ? new Long(0)
-                                    : new Long(areaTotal.longValue() - areaTotalOverlap.longValue())));
+                            : new Long(areaTotal.longValue() - areaTotalOverlap.longValue())));
                 } else {
                     values.addElement(areaTotal);
                 }
@@ -590,6 +580,7 @@ public class StatisticsBean extends SitesFormBean {
      *
      * @return First criterias used for search (when going from query page to result page).
      */
+    @Override
     public AbstractSearchCriteria getMainSearchCriteria() {
         return null;
     }
@@ -600,6 +591,7 @@ public class StatisticsBean extends SitesFormBean {
      *
      * @return objects which are used for search / filter
      */
+    @Override
     public AbstractSearchCriteria[] toSearchCriteria() {
         // This search doesn't use search refinement.
         return new AbstractSearchCriteria[0];
@@ -611,6 +603,7 @@ public class StatisticsBean extends SitesFormBean {
      *
      * @return A list of AbstractSearchCriteria objects used to do the sorting.
      */
+    @Override
     public AbstractSortCriteria[] toSortCriteria() {
         // This search doesn't need sorting.
         return new AbstractSortCriteria[0];
@@ -623,6 +616,7 @@ public class StatisticsBean extends SitesFormBean {
      * @param classFields Fields to be included in parameters.
      * @return An URL compatible type of representation(i.e.: >>param1=val1&param2=val2&param3=val3 etc.<<.
      */
+    @Override
     public String toURLParam(Vector classFields) {
         // This search doesn't need pagination.
         return "";
@@ -635,6 +629,7 @@ public class StatisticsBean extends SitesFormBean {
      * @param classFields Fields to be included in parameters.
      * @return An form compatible type of representation of request parameters.
      */
+    @Override
     public String toFORMParam(Vector classFields) {
         // This search doesn't need pagination
         return "";

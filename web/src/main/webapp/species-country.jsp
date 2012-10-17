@@ -253,7 +253,7 @@
                                   <%
                                     }
                                     // Fill in the regions
-                                  Iterator regionsIt = speciesCountryUtil.findRegionsFromCountry(country);
+                                  Iterator regionsIt = speciesCountryUtil.findRegionsFromCountry(country).iterator();
                                   RegionWrapper aRegion = null;
                                   while (regionsIt.hasNext())
                                   {

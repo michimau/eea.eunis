@@ -17,7 +17,9 @@ import net.sourceforge.stripes.action.UrlBinding;
 import org.apache.commons.lang.StringUtils;
 
 import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
+import ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsDomain;
+import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 import ro.finsiel.eunis.session.SessionManager;
@@ -37,7 +39,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     /** Tab titles as displayed to the user. */
     private static final String[] TAB_TITLES = {"General information", "Fauna and Flora", "Designation information",
-            "Habitat types", "Related sites", "Other Info"};
+        "Habitat types", "Related sites", "Other Info"};
 
     /**
      * The types of tabs this factsheet can have. Each tab has a name and the tab title displayed to the user.
@@ -125,6 +127,9 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     private String longitudeFormatted;
     private String latitudeFormatted;
 
+    /** */
+    private Chm62edtCountryPersist countryObject;
+
     /**
      * The default event handler of this action bean. Note that this action bean only serves RDF through {@link RdfAware}.
      *
@@ -156,8 +161,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         } else {
             pageTitle =
                     getContext().getInitParameter("PAGE_TITLE")
-                            + getContentManagement().cmsPhrase("No data found in the database for the site with ID = ") + "'"
-                            + factsheet.getIDSite() + "'";
+                    + getContentManagement().cmsPhrase("No data found in the database for the site with ID = ") + "'"
+                    + factsheet.getIDSite() + "'";
             try {
                 getContext().getResponse().setStatus(HttpServletResponse.SC_NOT_FOUND);
             } catch (Exception e) {
@@ -190,6 +195,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
             // Populates the data that the selected tab needs to display.
             prepareSelectedTabData();
+
         }
 
         // Forward to the factsheet layout page.
@@ -210,6 +216,12 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
      * Prepares the data displayed on the general tab.
      */
     private void prepareGeneralTab() {
+
+        // Prepare country object
+        String countryNameEnglish = factsheet.getCountry();
+        if (countryNameEnglish != null && countryNameEnglish.length() > 0){
+            countryObject = CountryUtil.findCountry(countryNameEnglish);
+        }
 
         // Set the site's "main" picture displayed in the factsheet's general tab.
         // A site may or may not have such a picture.
@@ -251,24 +263,24 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     private void setCoordinates() {
         if (!isTypeCorine())
         {
-          latitudeFormatted = SitesSearchUtility.formatCoordinates(factsheet.getSiteObject().getLatNS(),
-                  factsheet.getSiteObject().getLatDeg(),
-                  factsheet.getSiteObject().getLatMin(),
-                  factsheet.getSiteObject().getLatSec());
-          longitudeFormatted = SitesSearchUtility.formatCoordinates(factsheet.getSiteObject().getLongEW(),
-                  factsheet.getSiteObject().getLongDeg(),
-                  factsheet.getSiteObject().getLongMin(),
-                  factsheet.getSiteObject().getLongSec());
+            latitudeFormatted = SitesSearchUtility.formatCoordinates(factsheet.getSiteObject().getLatNS(),
+                    factsheet.getSiteObject().getLatDeg(),
+                    factsheet.getSiteObject().getLatMin(),
+                    factsheet.getSiteObject().getLatSec());
+            longitudeFormatted = SitesSearchUtility.formatCoordinates(factsheet.getSiteObject().getLongEW(),
+                    factsheet.getSiteObject().getLongDeg(),
+                    factsheet.getSiteObject().getLongMin(),
+                    factsheet.getSiteObject().getLongSec());
         }
         else
         {
-          latitudeFormatted = SitesSearchUtility.formatCoordinates("N", factsheet.getSiteObject().getLatDeg(),
-                  factsheet.getSiteObject().getLatMin(),
-                  factsheet.getSiteObject().getLatSec());
-          longitudeFormatted = SitesSearchUtility.formatCoordinates(factsheet.getSiteObject().getLongEW(),
-                  factsheet.getSiteObject().getLongDeg(),
-                  factsheet.getSiteObject().getLongMin(),
-                  factsheet.getSiteObject().getLongSec());
+            latitudeFormatted = SitesSearchUtility.formatCoordinates("N", factsheet.getSiteObject().getLatDeg(),
+                    factsheet.getSiteObject().getLatMin(),
+                    factsheet.getSiteObject().getLatSec());
+            longitudeFormatted = SitesSearchUtility.formatCoordinates(factsheet.getSiteObject().getLongEW(),
+                    factsheet.getSiteObject().getLongDeg(),
+                    factsheet.getSiteObject().getLongMin(),
+                    factsheet.getSiteObject().getLongSec());
         }
     }
 
@@ -310,6 +322,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     /**
      * @return the btrail
      */
+    @Override
     public String getBtrail() {
         return btrail;
     }
@@ -324,6 +337,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
     /**
      * @return the metaDescription
      */
+    @Override
     public String getMetaDescription() {
         return metaDescription;
     }
@@ -795,5 +809,9 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
      */
     public ArrayList<LinkDTO> getLinks() {
         return links;
+    }
+
+    public Chm62edtCountryPersist getCountryObject() {
+        return countryObject;
     }
 }

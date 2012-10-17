@@ -1,16 +1,25 @@
 package ro.finsiel.eunis.search;
 
 
-import ro.finsiel.eunis.exceptions.RecordNotFoundException;
-import ro.finsiel.eunis.jrfTables.*;
-import ro.finsiel.eunis.jrfTables.habitats.country.CountryDomain;
-import ro.finsiel.eunis.search.species.country.RegionWrapper;
-import ro.finsiel.eunis.search.species.country.CountryWrapper;
-import ro.finsiel.eunis.utilities.SQLUtilities;
-import ro.finsiel.eunis.utilities.TableColumns;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+
+import ro.finsiel.eunis.exceptions.RecordNotFoundException;
+import ro.finsiel.eunis.jrfTables.Chm62edtBiogeoregionDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtBiogeoregionPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtCountryBiogeoregionDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtCountryBiogeoregionPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtCountryDomain;
+import ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist;
+import ro.finsiel.eunis.jrfTables.habitats.country.CountryDomain;
+import ro.finsiel.eunis.search.species.country.CountryWrapper;
+import ro.finsiel.eunis.search.species.country.RegionWrapper;
+import ro.finsiel.eunis.utilities.SQLUtilities;
+import ro.finsiel.eunis.utilities.TableColumns;
 
 
 /**
@@ -25,7 +34,7 @@ public class CountryUtil {
      * biogeographic regions available.
      * @return An non-null List object containing the regions as Country.
      */
-    public static Iterator findRegionsFromCountry(String countryCode) {
+    public static Vector findRegionsFromCountry(String countryCode) {
         List _regionsCodes = new Vector();
 
         if (countryCode.equals("any")) {
@@ -53,7 +62,7 @@ public class CountryUtil {
                             _aRegion.getPercentage()));
         }
         new SortList().sort(_regions, SortList.SORT_ASCENDING);
-        return _regions.iterator();
+        return _regions;
     }
 
     /**
@@ -289,6 +298,41 @@ public class CountryUtil {
     }
 
     /**
+     * Finds country by its ID.
+     *
+     * @param countryId
+     * @return
+     */
+    @SuppressWarnings("rawtypes")
+    public static Chm62edtCountryPersist findCountry(int countryId) {
+
+        try {
+            List contries = new Chm62edtCountryDomain().findWhere("ID_COUNTRY=" + countryId);
+            return contries !=null && !contries.isEmpty() ? (Chm62edtCountryPersist) contries.get(0) : null;
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+            return null;
+        }
+    }
+
+    /**
+     * Find country information by the given EUNIS area code (EUNIS_AREA_CODE column in database).
+     *
+     * @param areaCode
+     * @return null if not found
+     */
+    public static Chm62edtCountryPersist findCountryByAreaCode(String areaCode) {
+
+        try {
+            List countries = new Chm62edtCountryDomain().findWhere("EUNIS_AREA_CODE='" + areaCode + "'");
+            return countries == null || countries.isEmpty() ? null : (Chm62edtCountryPersist) countries.iterator().next();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+            return null;
+        }
+    }
+
+    /**
      * Find a region (from CHM62EDT_BIOGEOREGION).
      * @param Name Region name.
      * @return Region JRF object.
@@ -452,7 +496,7 @@ public class CountryUtil {
             if (country != null && country.size() > 0) {
                 ISO = (((Chm62edtCountryPersist) country.get(0)).getIso3l()
                         == null
-                                ? ""
+                        ? ""
                                 : ((Chm62edtCountryPersist) country.get(0)).getIso3l());
             }
         } catch (Exception e) {
@@ -574,7 +618,7 @@ public class CountryUtil {
             if (null != country && country.trim().length() > 0) {
                 sql += " INNER JOIN CHM62EDT_COUNTRY AS C ON B.ID_GEOSCOPE = C.ID_GEOSCOPE "
                         + (null != region && region.trim().length() > 0
-                                ? "INNER"
+                        ? "INNER"
                                 : "LEFT OUTER")
                                 + " JOIN CHM62EDT_BIOGEOREGION AS D ON B.ID_GEOSCOPE_LINK = D.ID_GEOSCOPE where "
                                 + whereCond;
@@ -605,7 +649,7 @@ public class CountryUtil {
         if (results != null && results.size() > 0) {
             for (int i = 0; i < results.size(); i++) {
                 resultsAsStrings.add(
-                        (String) ((TableColumns) results.get(i)).getColumnsValues().get(
+                        ((TableColumns) results.get(i)).getColumnsValues().get(
                                 0));
             }
         }

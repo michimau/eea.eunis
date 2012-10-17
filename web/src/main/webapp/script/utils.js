@@ -231,11 +231,6 @@ function validateRegion(regionListString,name)
   }
  }
 
-function goToCountryStatistics(countryName)
-{
-  window.location.href = 'sites-statistical-result.jsp?country='+ countryName + '&DB_NATURA2000=true&DB_CDDA_NATIONAL=true&DB_NATURE_NET=true&DB_CORINE=true&DB_CDDA_INTERNATIONAL=true&DB_DIPLOMA=true&DB_BIOGENETIC=true&DB_EMERALD=true';
-}
-
 function goToSpeciesStatistics(countryName)
 {
   window.location.href = 'species-statistics-module.jsp?countryName=' + countryName;

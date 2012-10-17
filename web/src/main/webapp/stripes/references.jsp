@@ -1,6 +1,6 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 
-<%@ include file="/stripes/common/taglibs.jsp"%>	
+<%@ include file="/stripes/common/taglibs.jsp"%>
 
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="References">
 

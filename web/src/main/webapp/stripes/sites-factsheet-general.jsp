@@ -316,7 +316,7 @@
             <td colspan="2">
                 <c:choose>
                     <c:when test="${eunis:isCountry(country)}">
-                        <a href="sites-statistical-result.jsp?country=${country}&amp;DB_NATURA2000=true&amp;DB_CDDA_NATIONAL=true&amp;DB_NATURE_NET=true&amp;DB_CORINE=true&amp;DB_CDDA_INTERNATIONAL=true&amp;DB_DIPLOMA=true&amp;DB_BIOGENETIC=true&amp;DB_EMERALD=true" title="${eunis:cms(actionBean.contentManagement, 'open_the_statistical_data_for')} ${country}">
+                        <a href="${pageContext.request.contextPath}/countries/${actionBean.countryObject.eunisAreaCode}?DB_NATURA2000=true&amp;DB_CDDA_NATIONAL=true&amp;DB_NATURE_NET=true&amp;DB_CORINE=true&amp;DB_CDDA_INTERNATIONAL=true&amp;DB_DIPLOMA=true&amp;DB_BIOGENETIC=true&amp;DB_EMERALD=true" title="${eunis:cms(actionBean.contentManagement, 'open_the_statistical_data_for')} ${country}">
                             <c:out value="${country}"/>
                         </a>
                     </c:when>

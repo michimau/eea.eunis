@@ -87,15 +87,15 @@
 	        <div id="tabbedmenu">
 	            <ul>
 	                <c:forEach items="${actionBean.tabs}" var="tab">
-	                    <li ${tab eq actionBean.tab ? 'id="currenttab"' : ''}>
-	                        <c:if test="${tab eq actionBean.tab}">
+	                    <li ${tab eq actionBean.currTab ? 'id="currenttab"' : ''}>
+	                        <c:if test="${tab eq actionBean.currTab}">
 	                            <a href="javascript:window.location.reload()" onclick="return false;" title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${tab.title}">${tab.title}</a>
 	                        </c:if>
-	                        <c:if test="${!(tab eq actionBean.tab)}">
+	                        <c:if test="${!(tab eq actionBean.currTab)}">
 		                        <stripes:link beanclass="${actionBean.class.name}" title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${tab.title}">
 		                            <stripes:param name="eunisAreaCode" value="${actionBean.country.eunisAreaCode}"/>
-		                            <stripes:param name="tab" value="${tab}"/>
-		                            <c:if test="${tab == 'DESIG_TYPES' && actionBean.tab == 'GENERAL'}">
+		                            <stripes:param name="tab" value="${tab.camelCaseName}"/>
+		                            <c:if test="${tab == 'DESIG_TYPES' && actionBean.currTab == 'GENERAL'}">
 	                                    <stripes:param name="yearMin" value="${actionBean.statisticsBean.yearMin}"/>
 										<stripes:param name="yearMax" value="${actionBean.statisticsBean.yearMax}"/>
 										<stripes:param name="designation" value="${actionBean.statisticsBean.designation}"/>
@@ -131,16 +131,16 @@
 
 	        <br style="clear:both;" clear="all"/>
 	        <br/>
-			<c:if test="${actionBean.tab == 'GENERAL'}">
+			<c:if test="${actionBean.currTab == 'GENERAL'}">
 	            <stripes:layout-render name="/stripes/country-factsheet-general.jsp"/>
 			</c:if>
-	        <c:if test="${actionBean.tab == 'DESIG_TYPES'}">
+	        <c:if test="${actionBean.currTab == 'DESIG_TYPES'}">
 	            <stripes:layout-render name="/stripes/country-factsheet-desig-types.jsp"/>
 	        </c:if>
-	        <c:if test="${actionBean.tab == 'SPECIES'}">
+	        <c:if test="${actionBean.currTab == 'SPECIES'}">
 	            <stripes:layout-render name="/stripes/country-factsheet-species.jsp"/>
 	        </c:if>
-	        <c:if test="${actionBean.tab == 'HABITAT_TYPES'}">
+	        <c:if test="${actionBean.currTab == 'HABITAT_TYPES'}">
 	            <stripes:layout-render name="/stripes/country-factsheet-habitat-types.jsp"/>
 	        </c:if>
 

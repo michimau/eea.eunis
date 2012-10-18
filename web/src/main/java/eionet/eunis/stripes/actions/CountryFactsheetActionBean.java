@@ -37,6 +37,7 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.WordUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist;
@@ -68,7 +69,7 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
     private String eunisAreaCode;
 
     /** The current tab of the factsheet. */
-    private Tab tab = Tab.GENERAL;
+    private Tab currTab = Tab.GENERAL;
 
     /** The persistent country object representing the country requested. */
     private Chm62edtCountryPersist country;
@@ -97,6 +98,9 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
     /** HTML that lists the country's sites factsheets. */
     private String sitesCountryFactsheetRowsHtml;
 
+    /** The current tab's friendly name. */
+    private String tab = Tab.GENERAL.getCamelCaseName();
+
     /**
      * Default action handler.
      *
@@ -111,6 +115,19 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
     @Before(on = {"view"})
     public void beforeView() {
 
+        // Ensure the tab is set.
+        if (tab == null){
+            tab = Tab.GENERAL.getCamelCaseName();
+        }
+
+        // Set the current tab from its friendly string representation.
+        for (int i = 0; i < TABS.length; i++) {
+            if (TABS[i].getCamelCaseName().equals(tab)){
+                currTab = TABS[i];
+                break;
+            }
+        }
+
         // If the country's area-code not given, return right away, as we have nothing to do here.
         if (StringUtils.isBlank(eunisAreaCode)) {
             return;
@@ -123,7 +140,7 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
         }
 
         // Necessary assignments for the "general" and "desig-types" tabs.
-        if (tab.equals(Tab.GENERAL) || tab.equals(Tab.DESIG_TYPES)) {
+        if (currTab.equals(Tab.GENERAL) || currTab.equals(Tab.DESIG_TYPES)) {
 
             populateStatisticsBean();
             countryRegions = CountryUtil.findRegionsFromCountry(country.getEunisAreaCode());
@@ -235,7 +252,7 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
      * @return
      */
     public String getNameForTitle() {
-        if (tab.equals(Tab.GENERAL) || tab.equals(Tab.DESIG_TYPES)) {
+        if (currTab.equals(Tab.GENERAL) || currTab.equals(Tab.DESIG_TYPES)) {
             return statisticsBean == null ? "" : statisticsBean.toHumanString();
         } else {
             return country == null ? "" : country.getAreaNameEnglish();
@@ -298,18 +315,11 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @return the tab
+     *
+     * @return
      */
-    public Tab getTab() {
-        return tab;
-    }
-
-    /**
-     * @param tab
-     *            the tab to set
-     */
-    public void setTab(Tab tab) {
-        this.tab = tab;
+    public Tab getCurrTab() {
+        return currTab;
     }
 
     /**
@@ -378,6 +388,15 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
+     *
+     * @param tab
+     */
+    public void setTab(String tab) {
+        this.tab = tab;
+    }
+
+
+    /**
      * @author jaanus
      */
     public enum Tab {
@@ -388,6 +407,9 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
         /** The tab's displayed title. */
         String title;
 
+        /** The enum's camel-case name where underscores replaced by empty string, and the very first letter is lower case. */
+        String camelCaseName;
+
         /**
          * Constructor.
          *
@@ -395,6 +417,7 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
          */
         Tab(String title) {
             this.title = title;
+            camelCaseName = WordUtils.uncapitalize(WordUtils.capitalizeFully(name(), new char[]{'_'}).replaceAll("_", ""));
         }
 
         /**
@@ -402,6 +425,14 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
          */
         public String getTitle() {
             return title;
+        }
+
+        /**
+         *
+         * @return
+         */
+        public String getCamelCaseName(){
+            return camelCaseName;
         }
     }
 }

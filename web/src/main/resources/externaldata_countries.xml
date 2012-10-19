@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>Linked data queries for protected sites</comment>
+<!-- -->
+<!-- The list of queries in this file. Separated by whitespace. -->
+<!-- -->
+  <entry key="queries">sites</entry>
+
+<!-- -->
+<!-- .endpoint, .title and .query are mandatory for all queries -->
+<!-- .summary - use HTML format - i.e. escape & and < -->
+<!-- -->
+
+
+
+<!-- -->
+<!-- Deliveries query -->
+<!-- -->
+  <entry key="sites.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="sites.title">Number of SCIs and SACs by biogeographical region</entry>
+  <entry key="sites.summary"><![CDATA[According to reporting carried out in EU 25 for the period 2001-2006,
+compiled as part of the Habitats Directive - Article 17 reporting process.
+SCI = Sites of Community Interest, SAC = Special Areas of Conservation]]></entry>
+
+<!-- Links are defined as {queryId}.link.{labelColumn}={linkColumn} -->
+<!-- If the label column in SPARQL query is bound to ?filetitle and link itself to ?file -->
+<!-- then the property should be defined as: {queryId}.link.filetitle = file -->
+<!-- This will produce <a href="file">filetitle</a> in result row -->
+  <entry key="sites.column.SCItotal_number">SCI total number</entry>
+  <entry key="sites.column.SCItotal_area">SCI total area</entry>
+  <entry key="sites.column.SCImarine_number">SCI marine number</entry>
+  <entry key="sites.column.SCImarine_area">SCI marine area</entry>
+  <entry key="sites.column.SACtotal_number">SAC total number</entry>
+  <entry key="sites.column.SACtotal_area">SAC total area</entry>
+  <entry key="sites.column.SACmarine_number">SAC marine number</entry>
+  <entry key="sites.column.SACmarine_area">SAC marine area</entry>
+
+<!-- Query -->
+<!-- [IDENTIFIER] is replaced with actual sites ID before query will be executed -->
+  <entry key="sites.query"><![CDATA[
+PREFIX p: <http://rdfdata.eionet.europa.eu/article17/generalreport/>
+PREFIX eea: <http://rdfdata.eionet.europa.eu/eea/ontology/>
+
+SELECT ?region ?SCItotal_number ?SCItotal_area ?SCImarine_number ?SCImarine_area
+               ?SACtotal_number ?SACtotal_area ?SACmarine_number ?SACmarine_area
+WHERE {
+  ?report a p:GeneralReport;
+           p:forCountry <http://rdfdata.eionet.europa.eu/ramon/nuts/[IDENTIFIER]>.
+  ?report  p:community-importance ?scirec.
+  ?report  p:areas-of-conservation ?sacrec.
+  ?scirec p:region ?regionUrl;
+          p:total_number ?SCItotal_number;
+          p:total_area ?SCItotal_area;
+          p:marine_number ?SCImarine_number;
+          p:marine_area ?SCImarine_area.
+  ?sacrec p:region ?regionUrl;
+          p:total_number ?SACtotal_number;
+          p:total_area ?SACtotal_area;
+          p:marine_number ?SACmarine_number;
+          p:marine_area ?SACmarine_area.
+
+  ?regionUrl eea:name ?region.
+}
+]]></entry>
+
+</properties>

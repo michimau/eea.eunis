@@ -56,18 +56,22 @@
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" href="<%=request.getContextPath()%>/gis-tool.jsp" accesskey="u" title="<%=cm.cmsPhrase("Interactive maps")%>"><%=cm.cmsPhrase("Interactive maps")%></a>
       </li>
+<%--
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" href="<%=request.getContextPath()%>/glossary.jsp" accesskey="g" title="<%=cm.cmsPhrase("Glossary of terms")%>"><%=cm.cmsPhrase("Glossary")%></a>
       </li>
+--%>
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" href="<%=request.getContextPath()%>/references" accesskey="r" title="<%=cm.cmsPhrase("View references used in EUNIS")%>"><%=cm.cmsPhrase("References")%></a>
       </li>
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" href="<%=request.getContextPath()%>/related-reports.jsp" accesskey="p" title="<%=cm.cmsPhrase("Files and links related to biodiversity")%>"><%=cm.cmsPhrase("Downloads and links")%></a>
       </li>
+<%--
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" href="<%=request.getContextPath()%>/introduction_to_google_earth.jsp" accesskey="l" title="<%=cm.cmsPhrase("Google Earth network link")%>"><%=cm.cmsPhrase("Google Earth network link")%></a>
       </li>
+--%>
     </ul>
     <span class="portletBottomLeft"></span>
     <span class="portletBottomRight"></span>
@@ -90,9 +94,11 @@
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" title="<%=cm.cmsPhrase("EUNIS Database animated tutorials")%>" href="<%=request.getContextPath()%>/tutorials.jsp"><%=cm.cmsPhrase( "Tutorials" )%></a>
       </li>
+<%--
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" title="<%=cm.cmsPhrase("EUNIS Database latest news")%>" href="<%=request.getContextPath()%>/news.jsp"><%=cm.cmsPhrase( "EUNIS News" )%></a>
       </li>
+--%>
       <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" href="mailto:<%=application.getInitParameter("EMAIL_FEEDBACK")%>" accesskey="9" title="<%=cm.cmsPhrase("Contact EUNIS site administrator")%>"><%=cm.cmsPhrase("Contact EUNIS")%></a>
       </li>

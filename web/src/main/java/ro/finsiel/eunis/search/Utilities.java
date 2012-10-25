@@ -161,7 +161,7 @@ public final class Utilities {
      * @param object Object to be interpreted
      * @return String representation of that object (.toString()) if non-null.
      */
-    public static final String formatString(Object object) {
+    public static String formatString(Object object) {
         return formatString(object, "");
     }
 
@@ -173,7 +173,7 @@ public final class Utilities {
      * @param defaultValue Default value.
      * @return String representation of that object (.toString()) if non-null.
      */
-    public static final String formatString(Object object, String defaultValue) {
+    public static String formatString(Object object, String defaultValue) {
         if (null == object) {
             return defaultValue;
         }
@@ -319,7 +319,7 @@ public final class Utilities {
      * @param defaultValue Default value if s cannot be parsed
      * @return The boolean representation of s
      */
-    public static final boolean checkedStringToBoolean(String s, Boolean defaultValue) {
+    public static boolean checkedStringToBoolean(String s, Boolean defaultValue) {
         boolean ret = false;
 
         if (null != defaultValue) {
@@ -372,22 +372,26 @@ public final class Utilities {
                             AbstractSortCriteria.ASCENDENCY_ASC)) {
                 imgTag.append(IMG_SORT_ASCENDING);
                 imgTag.append(
-                        "\" title=\"Results are sorted ascending by this column\" alt=\"Results are sorted ascending by this column\" ");
+                        "\" title=\"Results are sorted ascending by this column\" "
+                        + "alt=\"Results are sorted ascending by this column\" ");
             } else if (0
                     == sortCriteria.getAscendency().compareTo(
                             AbstractSortCriteria.ASCENDENCY_DESC)) {
                 imgTag.append(IMG_SORT_DESCENDING);
                 imgTag.append(
-                        "\" alt=\"Results are sorted descending by this column\" title=\"Results are sorted descending by this column\" ");
+                        "\" alt=\"Results are sorted descending by this column\" "
+                        + "title=\"Results are sorted descending by this column\" ");
             } else {
                 imgTag.append(IMG_SORT_UNSORTED);
                 imgTag.append(
-                        "\" alt=\"Results are not sorted by this column\" title=\"Results are not sorted by this column\" ");
+                        "\" alt=\"Results are not sorted by this column\" "
+                        + "title=\"Results are not sorted by this column\" ");
             }
         } else {
             imgTag.append(IMG_SORT_UNSORTED);
             imgTag.append(
-                    "\" alt=\"Results are not sorted by this column\" title=\"Results are not sorted by this column\" ");
+                    "\" alt=\"Results are not sorted by this column\" "
+                        + "title=\"Results are not sorted by this column\" ");
         }
         imgTag.append(" />");
         return imgTag;
@@ -395,7 +399,7 @@ public final class Utilities {
 
     /**
      * This method computes the HTML tag IMG appended in each column sorted. for example:
-     * &ltIMG border='0' align='absmiddle' src='images/sort_unsorted.gif'&gt
+     * &lt;IMG border='0' align='absmiddle' src='images/sort_unsorted.gif'&gt;
      *
      * @param ascendency What type of image to return
      * @return The HTML IMG tag.
@@ -503,7 +507,7 @@ public final class Utilities {
     }
 
     /**
-     * This method return a string with checked fields list like : "&showName=true&showDesignationYear=true..."
+     * This method return a string with checked fields list like : "&showName=true&showDesignationYear=true...".
      *
      * @param v vector with checked fields
      * @return string with checked fields
@@ -521,7 +525,7 @@ public final class Utilities {
     }
 
     /**
-     * This method will write the value of a parameters, as an URL representable string, in another words:
+     * This method will write the value of a parameters, as an URL representable string, in other words:
      * "&paramName=paramValue".
      *
      * @param paramName  Parameters name
@@ -542,7 +546,7 @@ public final class Utilities {
     }
 
     /**
-     * This method will write the value of a parameters, as an URL representable string, in another words:
+     * This method will write the value of a parameters, as an URL representable string, in other words:
      * "&paramName=paramValue".
      *
      * @param paramName  Parameters name
@@ -626,7 +630,7 @@ public final class Utilities {
 
     /**
      * This method is used to create a representation in a form of a param<->value pair, i.e., having param1,value1
-     * after calling this method will return the string"<input type="hidden" name="param1" value="value1">\n"
+     * after calling this method will return the string: "<input type="hidden" name="param1" value="value1">\n".
      *
      * @param paramName  Name of the parameter (in form terms, the name property of the field)
      * @param paramValue Value of the parameter (in form terms, the value property of the field)
@@ -652,7 +656,7 @@ public final class Utilities {
 
     /**
      * This method is used to create a representation in a form of a param<->value pair, i.e., having param1,value1
-     * after calling this method will return the string"<input type="hidden" name="param1" value="value1">\n"
+     * after calling this method will return the string: "<input type="hidden" name="param1" value="value1">\n".
      *
      * @param paramName  Name of the parameter (in form terms, the name property of the field)
      * @param paramValue Value of the parameter (in form terms, the value property of the field)
@@ -677,7 +681,7 @@ public final class Utilities {
 
     /**
      * This method is used to create a representation in a form of a param<->value pair, i.e., having param1,value1
-     * after calling this method will return the string"<input type="hidden" name="param1" value="value1">\n"
+     * after calling this method will return the string: "<input type="hidden" name="param1" value="value1">\n".
      *
      * @param paramName  Name of the parameter (in form terms, the name property of the field)
      * @param paramValue Value of the parameter (in form terms, the value property of the field)
@@ -702,7 +706,7 @@ public final class Utilities {
 
     /**
      * This method is used to create a representation in a form of a param<->value pair, i.e., having param1,value1
-     * after calling this method will return the string"<input type="hidden" name="param1" value="value1">\n"
+     * after calling this method will return the string: "<input type="hidden" name="param1" value="value1">\n".
      *
      * @param paramName  Name of the parameter (in form terms, the name property of the field)
      * @param paramValue Value of the parameter (in form terms, the value property of the field)
@@ -727,7 +731,7 @@ public final class Utilities {
 
     /**
      * This method is used to create a representation in a form of a param<->value pair, i.e., having param1,value1
-     * after calling this method will return the string"<input type="hidden" name="param1" value="value1">\n"
+     * after calling this method will return the string: "<input type="hidden" name="param1" value="value1">\n".
      *
      * @param paramName  Name of the parameter (in form terms, the name property of the field)
      * @param paramValue Value of the parameter (in form terms, the value property of the field)
@@ -752,7 +756,7 @@ public final class Utilities {
 
     /**
      * This method is used to create a representation in a form of a param<->value pair, i.e., having param1,value1
-     * after calling this method will return the string"<input type="hidden" name="param1" value="value1">\n"
+     * after calling this method will return the string: "<input type="hidden" name="param1" value="value1">\n".
      * This method is used to write a single parameter with multiple values.
      *
      * @param paramName   Name of the parameters
@@ -800,7 +804,7 @@ public final class Utilities {
     /**
      * Format a given year value within a displayable date, but only the year part of the whole date.
      *
-     * @param String Date to be parsed
+     * @param date Date to be parsed
      * @return The year representation of this date
      */
     public static String formatReferencesYear(String date) {
@@ -885,7 +889,8 @@ public final class Utilities {
      * @param oper          Type of operation, see above
      * @return An SQL representation, see above.
      */
-    public static StringBuffer prepareSQLOperator(String paramName, String paramValue, String paramValueMin, String paramValueMax, Integer oper) {
+    public static StringBuffer prepareSQLOperator(String paramName, String paramValue, String paramValueMin,
+                                                  String paramValueMax, Integer oper) {
         StringBuffer sql = new StringBuffer();
 
         if (null == paramName
@@ -1008,7 +1013,8 @@ public final class Utilities {
      * @param oper          the operator. Possible values are: ro.finsiel.eunis.OPERATOR_XXXX
      * @return An human readable representation of the parameters given.
      */
-    public static StringBuffer prepareHumanString(String paramName, String paramValue, String paramValueMin, String paramValueMax, Integer oper) {
+    public static StringBuffer prepareHumanString(String paramName, String paramValue, String paramValueMin,
+                                                  String paramValueMax, Integer oper) {
         StringBuffer humanStr = new StringBuffer();
 
         humanStr.append(paramName);
@@ -1191,7 +1197,7 @@ public final class Utilities {
     }
 
     /**
-     * Find a string within a string and highlight it using HTML's <B>bolding<B> tag.
+     * Find a string within a string and highlight it using HTML's <B>bolding</B> tag.
      *
      * @param data       String to be searched
      * @param searchTerm Searched string which will be highlighted within text data...
@@ -1205,8 +1211,8 @@ public final class Utilities {
             Matcher matcher = pattern.matcher(data);
 
             result = matcher.replaceAll("<strong>" + searchTerm + "</strong>");
-        } catch (Exception _ex) {
-            _ex.printStackTrace(System.err);
+        } catch (Exception exVal) {
+            exVal.printStackTrace(System.err);
         } finally {
             if (null == result) {
                 result = data;
@@ -1304,8 +1310,8 @@ public final class Utilities {
             try {
                 list = new Chm62edtGlossaryDomain().findWhere(
                         sql + " ORDER BY TERM");
-            } catch (Exception _ex) {
-                _ex.printStackTrace(System.err);
+            } catch (Exception exVal) {
+                exVal.printStackTrace(System.err);
             } finally {
                 if (null == list) {
                     list = new Vector();
@@ -1667,17 +1673,17 @@ public final class Utilities {
      * Return a where condition string like '... and (A.SOURCE_DB='corine' or A.SOURCE_DB='CDDA_NATIONAL' OR A.SOURCE.DB='CDDA_INTERNATIONAL')'.
      *
      * @param sql       is other part of sql where condition of query for witch on construct this where condition string
-     * @param source_db is a boolean vector witch indicate whitch source database has been selected
+     * @param sourceDb is a boolean vector witch indicate whitch source database has been selected
      * @param db        is a vector whitch contains all source database values from database
      * @param alias     Table alias.
      * @return where condition.
      */
-    public static StringBuffer getConditionForSourceDB(StringBuffer sql, boolean[] source_db, String[] db, String alias) {
+    public static StringBuffer getConditionForSourceDB(StringBuffer sql, boolean[] sourceDb, String[] db, String alias) {
         StringBuffer filterSQL = sql;
         boolean exist = false;
 
-        for (int i = 0; i < source_db.length; i++) {
-            if (source_db[ i ]) {
+        for (int i = 0; i < sourceDb.length; i++) {
+            if (sourceDb[ i ]) {
                 exist = true;
             }
         }
@@ -1690,8 +1696,8 @@ public final class Utilities {
 
             boolean putOR = false;
 
-            for (int i = 0; i < source_db.length; i++) {
-                if (source_db[ i ]) {
+            for (int i = 0; i < sourceDb.length; i++) {
+                if (sourceDb[ i ]) {
                     if (putOR) {
                         filterSQL.append(
                                 " or " + alias + ".SOURCE_DB = '" + db[ i ]
@@ -1711,7 +1717,7 @@ public final class Utilities {
                 filterSQL.append(" AND ");
             }
             filterSQL.append(" ( ");
-            for (int i = 0; i < source_db.length; i++) {
+            for (int i = 0; i < sourceDb.length; i++) {
                 if (i > 0) {
                     filterSQL.append(
                             " and " + alias + ".SOURCE_DB <> '" + db[ i ] + "' ");
@@ -1771,7 +1777,7 @@ public final class Utilities {
     }
 
     /**
-     * @param str
+     * @param str - string to split
      */
     public static String SplitString(String str) {
         String result = "";
@@ -1790,7 +1796,9 @@ public final class Utilities {
     }
 
     /**
-     * @param str
+     * Formats a name like "SOURCE_DATABASE" to "Source database".
+     *
+     * @param str - field name to format
      */
     public static String FormatDatabaseFieldName(String str) {
         if (str == null) {
@@ -1999,8 +2007,8 @@ public final class Utilities {
 
         try {
             currentDate = new SimpleDateFormat("dd MMMM yyyy").format(new Date()).toString();
-        } catch (Exception _ex) {
-            _ex.printStackTrace(System.err);
+        } catch (Exception exVal) {
+            exVal.printStackTrace(System.err);
         }
         return currentDate;
     }
@@ -2015,8 +2023,8 @@ public final class Utilities {
 
         try {
             currentDate = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss").format(new Date()).toString();
-        } catch (Exception _ex) {
-            _ex.printStackTrace(System.err);
+        } catch (Exception exVal) {
+            exVal.printStackTrace(System.err);
         }
         return currentDate;
     }
@@ -2128,7 +2136,7 @@ public final class Utilities {
      * @param operator Operator value as Integer
      * @return Operator name as string
      */
-    public static final String debugOperator(Integer operator) {
+    public static String debugOperator(Integer operator) {
         String result;
 
         if (null == operator) {
@@ -2168,7 +2176,7 @@ public final class Utilities {
     public static String showEUNISInvalidatedSpecies(String tableColumn, boolean show) {
         String sql = "";
 
-        if (show) {// No filter condition necesary
+        if (show) { // No filter condition necesary
         } else {
             sql = " " + tableColumn + " > 0 ";
         }
@@ -2399,7 +2407,7 @@ public final class Utilities {
      *
      * @param args Command line args
      */
-    public static void main(String[] args) {// BasicConfigurator.configure();
+    public static void main(String[] args) { // BasicConfigurator.configure();
         // Test checkedStringToInt
         // Test trimArray
         // String testString = "-123.3435242";
@@ -2535,7 +2543,7 @@ public final class Utilities {
                 }
             }
         }
-        if (!isGood) {// result = "";
+        if (!isGood) { // result = "";
         }
         return result;
     }
@@ -2623,13 +2631,13 @@ public final class Utilities {
 
             while (st.hasMoreTokens()) {
                 StringTokenizer sts = new StringTokenizer(st.nextToken(), "*");
-                // String classification_id = sts.nextToken();
-                String classification_level = sts.nextToken();
-                String classification_name = sts.nextToken();
+                // String classificationId = sts.nextToken();
+                String classificationLevel = sts.nextToken();
+                String classificationName = sts.nextToken();
 
-                if (classification_level != null
-                        && classification_level.equalsIgnoreCase(what)) {
-                    result = classification_name;
+                if (classificationLevel != null
+                        && classificationLevel.equalsIgnoreCase(what)) {
+                    result = classificationName;
                     break;
                 }
             }
@@ -2644,7 +2652,7 @@ public final class Utilities {
         try {
             String appHome = application.getInitParameter(Constants.APP_HOME_INIT_PARAM);
             File dir = new File (appHome, "/images/intros");
-            if (dir.exists() && dir.isDirectory()){
+            if (dir.exists() && dir.isDirectory()) {
                 java.io.File[] files = dir.listFiles();
 
                 if (files.length > 0) {
@@ -2657,8 +2665,7 @@ public final class Utilities {
                     }
                     ret = files[ iRnd ].getName();
                 }
-            }
-            else{
+            } else {
                 throw new Exception("Could not find intro images directory: " + dir);
             }
         } catch (Exception ex) {
@@ -2859,9 +2866,12 @@ public final class Utilities {
                             + taxTitle + "\"/>&nbsp;&nbsp;" + taxTitle + newLine;
                 }
                 if (expand.length() > 0 && expandContains(expand, taxId)) {
+
+                    ret += generateSpeciesTaxonomicTree(taxId, expand, false, con, sqlc, cm);
+
                     ArrayList SpeciesList = sqlc.SQL2Array(
-                            "SELECT CONCAT('<a href=\"species/',ID_SPECIES,'\">',SCIENTIFIC_NAME,'</a>') FROM CHM62EDT_SPECIES WHERE ID_TAXONOMY="
-                                    + taxId + " ORDER BY SCIENTIFIC_NAME");
+                            "SELECT CONCAT('<a href=\"species/',ID_SPECIES,'\">',SCIENTIFIC_NAME,'</a>') FROM chm62edt_species"
+                                    + " WHERE ID_TAXONOMY=" + taxId + " ORDER BY SCIENTIFIC_NAME");
 
                     if (SpeciesList.size() > 0) {
                         ret += "<ul class=\"eunistree\">" + newLine;
@@ -2874,12 +2884,6 @@ public final class Utilities {
                         ret += "</ul>" + newLine;
                     }
                 }
-                if (expand.length() > 0 && expandContains(expand, taxId)) {
-
-                    ret += generateSpeciesTaxonomicTree(taxId, expand, false,
-                            con, sqlc, cm);
-                }
-
                 ret += "</li>" + newLine;
             }
 

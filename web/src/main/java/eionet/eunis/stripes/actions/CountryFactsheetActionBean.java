@@ -416,7 +416,7 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
          */
         Tab(String title) {
             this.title = title;
-            displayName = name().toLowerCase();
+            displayName = name().toLowerCase().replaceAll("_","");
         }
 
         /**

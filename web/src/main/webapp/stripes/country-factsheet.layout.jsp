@@ -94,7 +94,7 @@
 	                        <c:if test="${!(tab eq actionBean.currTab)}">
 		                        <stripes:link beanclass="${actionBean.class.name}" title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${tab.title}">
 		                            <stripes:param name="eunisAreaCode" value="${actionBean.country.eunisAreaCode}"/>
-		                            <stripes:param name="tab" value="${tab.camelCaseName}"/>
+		                            <stripes:param name="tab" value="${tab.displayName}"/>
 		                            <c:if test="${tab == 'DESIG_TYPES' && actionBean.currTab == 'GENERAL'}">
 	                                    <stripes:param name="yearMin" value="${actionBean.statisticsBean.yearMin}"/>
 										<stripes:param name="yearMax" value="${actionBean.statisticsBean.yearMax}"/>

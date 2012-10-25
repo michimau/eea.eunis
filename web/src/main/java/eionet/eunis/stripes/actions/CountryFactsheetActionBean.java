@@ -37,7 +37,6 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.WordUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist;
@@ -99,7 +98,7 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
     private String sitesCountryFactsheetRowsHtml;
 
     /** The current tab's friendly name. */
-    private String tab = Tab.GENERAL.getCamelCaseName();
+    private String tab = Tab.GENERAL.getDisplayName();
 
     /**
      * Default action handler.
@@ -117,12 +116,12 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
 
         // Ensure the tab is set.
         if (tab == null){
-            tab = Tab.GENERAL.getCamelCaseName();
+            tab = Tab.GENERAL.getDisplayName();
         }
 
         // Set the current tab from its friendly string representation.
         for (int i = 0; i < TABS.length; i++) {
-            if (TABS[i].getCamelCaseName().equals(tab)){
+            if (TABS[i].getDisplayName().equals(tab)){
                 currTab = TABS[i];
                 break;
             }
@@ -408,7 +407,7 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
         String title;
 
         /** The enum's camel-case name where underscores replaced by empty string, and the very first letter is lower case. */
-        String camelCaseName;
+        String displayName;
 
         /**
          * Constructor.
@@ -417,7 +416,7 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
          */
         Tab(String title) {
             this.title = title;
-            camelCaseName = WordUtils.uncapitalize(WordUtils.capitalizeFully(name(), new char[]{'_'}).replaceAll("_", ""));
+            displayName = name().toLowerCase();
         }
 
         /**
@@ -431,8 +430,8 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
          *
          * @return
          */
-        public String getCamelCaseName(){
-            return camelCaseName;
+        public String getDisplayName(){
+            return displayName;
         }
     }
 }

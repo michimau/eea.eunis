@@ -49,7 +49,9 @@
             //Assig a value to the SITECODE
             var sitecode = '${param.idsite}'
 
-            var map
+            var map;
+            var natura2000Layer;
+            var clc2006Layer;
 
             //URL for Natura 2000 REST service in use
             function getSitesMapServiceNatura2000() { return 'http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000_Dyna_WM/MapServer'; }
@@ -67,17 +69,20 @@
               map.addLayer(veTileLayer);
 
               //Creates a Natura 2000 layer object based on the site of interest
-              var featureLayer = new esri.layers.FeatureLayer(getSitesMapServiceNatura2000() + "/0",{
+              var natura2000Layer = new esri.layers.FeatureLayer(getSitesMapServiceNatura2000() + "/0",{
                 mode: esri.layers.FeatureLayer.MODE_SNAPSHOT,
                 outFields: ["*"],
                 opacity:.35
               });
-              dojo.connect(featureLayer,"onMouseOver",showTooltip);
-              dojo.connect(featureLayer,"onMouseOut",closeDialog);
-              featureLayer.setDefinitionExpression("SITECODE='" + sitecode + "'");
+              dojo.connect(natura2000Layer,"onMouseOver",showTooltip);
+              dojo.connect(natura2000Layer,"onMouseOut",closeDialog);
+              natura2000Layer.setDefinitionExpression("SITECODE='" + sitecode + "'");
 
-              //Loads Natura 2000 Site
-              map.addLayer(featureLayer);
+              // Prepare CLC2006 layer
+              clc2006Layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Land/CLC2006_Dyna_WM/MapServer");
+
+              // Loads Natura 2000 layer.
+              map.addLayer(natura2000Layer);
 
               loadGeometry(sitecode);
             }
@@ -122,12 +127,30 @@
               }
             }
 
+            function updateLayerVisibility(layerCheckbox){
+                if (layerCheckbox.checked) {
+                    if (layerCheckbox.id == 'natura2000') {
+                        map.addLayer(natura2000Layer);
+                    } else if (layerCheckbox.id == 'clc2006') {
+                        map.addLayer(clc2006Layer);
+                    }
+                } else {
+                	if (layerCheckbox.id == 'natura2000') {
+                        map.removeLayer(natura2000Layer);
+                    } else if (layerCheckbox.id == 'clc2006') {
+                        map.removeLayer(clc2006Layer);
+                    }
+                }
+            }
+
             dojo.addOnLoad(init);
         </script>
 
         <h2>
             <c:out value="${eunis:cmsPhrase(actionBean.contentManagement, 'Map of site')}"/>
         </h2>
-        <div id="map" style="position: relative; margin: 1em auto; width:700px; height:500px; border:2px solid #050505;">
-        </div>
+        <strong>Add/remove Corine Landcover 2006 layer:</strong>
+
+        <input type="checkbox" class="list_item" id="clc2006" onclick="updateLayerVisibility(this);"/>
+        <div id="map" style="width:700px; height:500px; border:2px solid #050505;"></div>
     </c:if>

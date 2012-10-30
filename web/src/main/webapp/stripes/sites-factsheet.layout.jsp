@@ -89,26 +89,28 @@
 							${eunis:cmsPhrase(actionBean.contentManagement, 'Factsheet filled with data from')} ${actionBean.sourceDbName}
 							${eunis:cmsPhrase(actionBean.contentManagement, 'data set')}
 						</div>
-						<div id="tabbedmenu">
-							<ul>
-								<c:forEach items="${actionBean.tabsWithData }" var="dataTab">
-									<c:choose>
-										<c:when test="${dataTab.id eq actionBean.tab}">
-											<li id="currenttab"><a
-												title="Open ${dataTab.value}"
-												href="sites/${actionBean.idsite}/${dataTab.id}">
-												${dataTab.value}</a></li>
-										</c:when>
-										<c:otherwise>
-											<li><a
-												title="Open ${dataTab.value}"
-												href="sites/${actionBean.idsite}/${dataTab.id}">
-												${dataTab.value}</a></li>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-							</ul>
-						</div>
+						<c:if test="${not empty actionBean.tabsWithData}">
+							<div id="tabbedmenu">
+								<ul>
+									<c:forEach items="${actionBean.tabsWithData}" var="dataTab">
+										<c:choose>
+											<c:when test="${dataTab.id eq actionBean.tab}">
+												<li id="currenttab"><a
+													title="Open ${dataTab.value}"
+													href="sites/${actionBean.idsite}/${dataTab.id}">
+													${dataTab.value}</a></li>
+											</c:when>
+											<c:otherwise>
+												<li><a
+													title="Open ${dataTab.value}"
+													href="sites/${actionBean.idsite}/${dataTab.id}">
+													${dataTab.value}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</ul>
+							</div>
+						</c:if>
 						<br class="brClear" />
 						<br />
 						<c:if test="${actionBean.tab == 'general'}">
@@ -134,6 +136,11 @@
 								<jsp:param name="idsite" value="${actionBean.idsite}" />
 							</jsp:include>
 						</c:if>
+						<c:if test="${actionBean.tab == 'geo'}">
+                            <jsp:include page="/sites-factsheet-geo.jsp">
+                                <jsp:param name="idsite" value="${actionBean.idsite}" />
+                            </jsp:include>
+                        </c:if>
 						<c:if test="${actionBean.tab == 'other'}">
 							<jsp:include page="/sites-factsheet-other.jsp">
 								<jsp:param name="idsite" value="${actionBean.idsite}" />

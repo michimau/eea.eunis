@@ -3,9 +3,11 @@ package eionet.eunis.stripes.actions;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -39,12 +41,12 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
     /** Tab titles as displayed to the user. */
     private static final String[] TAB_TITLES = {"General information", "Fauna and Flora", "Designation information",
-        "Habitat types", "Related sites", "Other Info"};
+        "Habitat types", "Related sites", "Geographical information", "Other Info"};
 
     /**
      * The types of tabs this factsheet can have. Each tab has a name and the tab title displayed to the user.
      */
-    private static final Map<String, String[]> TAB_TYPES = new HashMap<String, String[]>();
+    private static final Map<String, String[]> TAB_TYPES = new LinkedHashMap<String, String[]>();
 
     /**
      * Static initializations block.
@@ -56,7 +58,8 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
         TAB_TYPES.put("DESIGNATION", new String[] {"designations", TAB_TITLES[2]});
         TAB_TYPES.put("HABITATS", new String[] {"habitats", TAB_TITLES[3]});
         TAB_TYPES.put("SITES", new String[] {"sites", TAB_TITLES[4]});
-        TAB_TYPES.put("OTHER", new String[] {"other", TAB_TITLES[5]});
+        TAB_TYPES.put("GEO", new String[] {"geo", TAB_TITLES[5]});
+        TAB_TYPES.put("OTHER", new String[] {"other", TAB_TITLES[6]});
     }
 
     /** The id of the site in question. */
@@ -178,15 +181,21 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             String siteNatureObjectId = factsheet.getSiteObject().getIdNatureObject().toString();
             List<String> existingTabs = sqlUtilities.getExistingTabPages(siteNatureObjectId, "SITES");
 
-            // Decide which of the existing tabs to actually display to the user.
-            for (String existingTab : existingTabs) {
-                if (TAB_TYPES.containsKey(existingTab)) {
+            // Should it be that no tabs were found from database, ensure that at least the currently requested tab
+            // header is shown.
+            if (existingTabs.isEmpty()){
+                existingTabs.add(getCurrentTabType());
+            }
 
-                    String[] tabNameTitlePair = TAB_TYPES.get(existingTab);
-                    String tabeName = tabNameTitlePair[0];
+            // Decide which of the existing tabs to actually display to the user.
+            for (String tabType : TAB_TYPES.keySet()) {
+                if (existingTabs.contains(tabType) || (tabType.equals("GEO") && isTypeNatura2000())) {
+
+                    String[] tabNameTitlePair = TAB_TYPES.get(tabType);
+                    String tabName = tabNameTitlePair[0];
                     String tabTitle = tabNameTitlePair[1];
 
-                    tabsWithData.add(new Pair<String, String>(tabeName, getContentManagement().cmsPhrase(tabTitle)));
+                    tabsWithData.add(new Pair<String, String>(tabName, getContentManagement().cmsPhrase(tabTitle)));
                 }
             }
 
@@ -200,6 +209,23 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
         // Forward to the factsheet layout page.
         return new ForwardResolution("/stripes/sites-factsheet.layout.jsp");
+    }
+
+    /**
+     *
+     * @return
+     */
+    private String getCurrentTabType(){
+
+        String currentTab = tab == null ? "general" : tab;
+        for (Entry<String, String[]> entry : TAB_TYPES.entrySet()) {
+            String[] value = entry.getValue();
+            if (value[0].equals(currentTab)){
+                return entry.getKey();
+            }
+        }
+
+        return null;
     }
 
     /**

@@ -1,15 +1,46 @@
 package eionet.eunis.util.decorators;
 
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.PageContext;
+
 import org.displaytag.decorator.TableDecorator;
 
 import ro.finsiel.eunis.WebContentManagement;
+import ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
+import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
 
 
 public class SpeciesSitesTableDecorator extends TableDecorator {
+
+    /** */
+    private String requestContextPath = null;
+
+    /**
+     * Lazy-loading getter for the context path of the request behind this decorator.
+     */
+    private String getRequestContextPath(){
+
+        if (requestContextPath == null){
+            PageContext pageContext = getPageContext();
+            if (pageContext != null){
+                ServletRequest request = pageContext.getRequest();
+                if (request instanceof HttpServletRequest){
+                    requestContextPath = ((HttpServletRequest) request).getContextPath();
+                }
+            }
+
+            if (requestContextPath == null){
+                requestContextPath = "";
+            }
+        }
+
+        return requestContextPath;
+    }
 
     /**
      *
@@ -40,19 +71,23 @@ public class SpeciesSitesTableDecorator extends TableDecorator {
         SitesByNatureObjectPersist site = (SitesByNatureObjectPersist) getCurrentRowObject();
         WebContentManagement cm = (WebContentManagement) getPageContext().getAttribute("cm");
 
-        if (Utilities.isCountry(site.getAreaNameEn())) {
-            ret.append("<a href=\"species-statistics-module.jsp?countryName=");
-            ret.append(Utilities.treatURLSpecialCharacters(site.getAreaNameEn()));
+        String areaNameEn = site.getAreaNameEn();
+        Chm62edtCountryPersist country = CountryUtil.findCountry(areaNameEn);
+
+        if (country != null) {
+
+            ret.append("<a href=\"").append(getRequestContextPath()).append("/countries/");
+            ret.append(Utilities.treatURLSpecialCharacters(country.getEunisAreaCode()));
             ret.append("\" title=\"");
-            ret.append(cm.cmsPhrase("Open the statistical data for"));
+            ret.append(cm.cmsPhrase("Open factsheet for"));
             ret.append(" ");
-            ret.append(Utilities.treatURLSpecialCharacters(site.getAreaNameEn()));
+            ret.append(Utilities.treatURLSpecialCharacters(areaNameEn));
             ret.append("\">");
-            ret.append(Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getAreaNameEn())));
+            ret.append(Utilities.formatString(Utilities.treatURLSpecialCharacters(areaNameEn)));
             ret.append("</a>");
             ret.append(cm.cmsTitle("open_the_statistical_data_for"));
         } else {
-            ret.append(Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getAreaNameEn())));
+            ret.append(Utilities.formatString(Utilities.treatURLSpecialCharacters(areaNameEn)));
         }
 
         return ret.toString();

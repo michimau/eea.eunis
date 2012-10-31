@@ -79,7 +79,7 @@
               natura2000Layer.setDefinitionExpression("SITECODE='" + sitecode + "'");
 
               // Prepare CLC2006 layer
-              clc2006Layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Land/CLC2006_Dyna_WM/MapServer");
+              clc2006Layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Land/CLC2006_Dyna_WM/MapServer", {opacity:0.4});
 
               // Loads Natura 2000 layer.
               map.addLayer(natura2000Layer);
@@ -127,7 +127,14 @@
               }
             }
 
+            function updateLayerVisibilityExt(layerCheckbox){
+
+            	layerCheckbox.checked = !layerCheckbox.checked;
+            	updateLayerVisibility(layerCheckbox);
+            }
+
             function updateLayerVisibility(layerCheckbox){
+
                 if (layerCheckbox.checked) {
                     if (layerCheckbox.id == 'natura2000') {
                         map.addLayer(natura2000Layer);
@@ -149,7 +156,7 @@
         <h2>
             <c:out value="${eunis:cmsPhrase(actionBean.contentManagement, 'Map of site')}"/>
         </h2>
-        <strong>Add/remove Corine Landcover 2006 layer:</strong>
+        <a href="javascript:void(0);" onclick="updateLayerVisibilityExt(document.getElementById('clc2006'));return false;"><strong>Add/remove Corine Landcover 2006 layer:</strong></a>
 
         <input type="checkbox" class="list_item" id="clc2006" onclick="updateLayerVisibility(this);"/>
         <div id="map" style="width:700px; height:500px; border:2px solid #050505;"></div>

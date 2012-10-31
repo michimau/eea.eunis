@@ -100,7 +100,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private PictureDTO pic;
     private Vector<DescriptionWrapper> descriptions;
     private String art17link;
-    
+
     /** The site's external links. */
     private ArrayList<LinkDTO> links;
 
@@ -121,10 +121,10 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         // check if the habitat exists.
         if (factsheet.getHabitat() == null) {
             pageTitle =
-                getContext().getInitParameter("PAGE_TITLE")
-                + getContentManagement().cmsPhrase(
-                "Sorry, no habitat type has been found in the database with Habitat type ID = ") + "'"
-                + idHabitat + "'";
+                    getContext().getInitParameter("PAGE_TITLE")
+                    + getContentManagement().cmsPhrase(
+                            "Sorry, no habitat type has been found in the database with Habitat type ID = ") + "'"
+                            + idHabitat + "'";
 
             getContext().getResponse().setStatus(HttpServletResponse.SC_NOT_FOUND);
             return new ForwardResolution("/stripes/habitats-factsheet.layout.jsp");
@@ -133,12 +133,12 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         // set metadescription and page title
         metaDescription = factsheet.getMetaHabitatDescription();
         pageTitle =
-            getContext().getInitParameter("PAGE_TITLE") + getContentManagement().cmsPhrase("Factsheet for") + " "
-            + factsheet.getHabitat().getScientificName();
+                getContext().getInitParameter("PAGE_TITLE") + getContentManagement().cmsPhrase("Factsheet for") + " "
+                        + factsheet.getHabitat().getScientificName();
 
         // Decide what tabs to show
         List<String> existingTabs =
-            getContext().getSqlUtilities().getExistingTabPages(factsheet.idNatureObject.toString(), "HABITATS");
+                getContext().getSqlUtilities().getExistingTabPages(factsheet.idNatureObject.toString(), "HABITATS");
         for (String tab : existingTabs) {
             if (types.containsKey(tab)) {
                 String[] tabData = types.get(tab);
@@ -147,7 +147,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         }
 
         // Always add linkeddata tab
-        tabsWithData.add(new Pair<String, String>("linkeddata", getContentManagement().cmsPhrase("Linked data")));
+        tabsWithData.add(new Pair<String, String>("linkeddata", getContentManagement().cmsPhrase("External data")));
 
         if (factsheet.isAnnexI()) {
             tabsWithData.add(new Pair<String, String>("geo", "Geographical information"));
@@ -199,11 +199,11 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
      */
     private void sitesTabActions() {
         String isGoodHabitat =
-            " IF(TRIM(A.CODE_2000) <> '',RIGHT(A.CODE_2000,2),1) <> IF(TRIM(A.CODE_2000) <> '','00',2) AND IF(TRIM(A.CODE_2000) <> '',LENGTH(A.CODE_2000),1) = IF(TRIM(A.CODE_2000) <> '',4,1) ";
+                " IF(TRIM(A.CODE_2000) <> '',RIGHT(A.CODE_2000,2),1) <> IF(TRIM(A.CODE_2000) <> '','00',2) AND IF(TRIM(A.CODE_2000) <> '',LENGTH(A.CODE_2000),1) = IF(TRIM(A.CODE_2000) <> '',4,1) ";
 
         // Sites for which this habitat is recorded.
         sites =
-            new SitesByNatureObjectDomain()
+                new SitesByNatureObjectDomain()
         .findCustom("SELECT DISTINCT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN "
                 + " FROM CHM62EDT_HABITAT AS A "
                 + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
@@ -215,7 +215,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
         // Sites for habitat subtypes.
         sitesForSubtypes =
-            new SitesByNatureObjectDomain()
+                new SitesByNatureObjectDomain()
         .findCustom("SELECT DISTINCT C.ID_SITE, C.NAME, C.SOURCE_DB, C.LATITUDE, C.LONGITUDE, E.AREA_NAME_EN "
                 + " FROM CHM62EDT_HABITAT AS A "
                 + " INNER JOIN CHM62EDT_NATURE_OBJECT_REPORT_TYPE AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
@@ -260,14 +260,14 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             descriptions = factsheet.getDescrOwner();
 
             Hashtable<String, AttributeDto> natObjectAttributes =
-                DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectAttributes(factsheet.idNatureObject);
+                    DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectAttributes(factsheet.idNatureObject);
             if (natObjectAttributes != null && natObjectAttributes.size() > 0) {
                 AttributeDto attr = natObjectAttributes.get(Constants.ART17_SUMMARY);
                 if (attr != null) {
                     art17link = attr.getValue();
                 }
             }
-            
+
             // Set the site's external links.
             links = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(factsheet.idNatureObject);
         } catch (Exception e) {
@@ -320,6 +320,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     /**
      * @return the btrail
      */
+    @Override
     public String getBtrail() {
         return btrail;
     }
@@ -334,6 +335,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     /**
      * @return the metaDescription
      */
+    @Override
     public String getMetaDescription() {
         return metaDescription;
     }
@@ -447,8 +449,8 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return attribution;
     }
 
-	public ArrayList<LinkDTO> getLinks() {
-		return links;
-	}
+    public ArrayList<LinkDTO> getLinks() {
+        return links;
+    }
 
 }

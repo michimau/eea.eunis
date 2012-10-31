@@ -2,14 +2,14 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
 	<h2>
-		${eunis:cmsPhrase(actionBean.contentManagement, 'Linked data')}
+		${eunis:cmsPhrase(actionBean.contentManagement, 'External data')}
 	</h2>
 	<c:choose>
 		<c:when test="${empty actionBean.query}">
 			<c:if test="${not empty actionBean.queries}">
 				<p>
 				This page contains reports that query foreign systems for structured data that <em>links</em> to the habitat.
-				It is possible that there is no relevant data and then the query shows nothing. As more data becomes available as linked data we will add more queries
+				It is possible that there is no relevant data and then the query shows nothing. As more data becomes available as external data we will add more queries.
 				</p>
 				<h3>Select a query:</h3>
 				<dl>

@@ -61,7 +61,7 @@ import eionet.sparqlClient.helpers.ResultValue;
 public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     private static final String[] tabs = {"General information", "Vernacular names", "Geographical information", "Population",
-        "Trends", "References", "Legal Instruments", "Habitat types", "Sites", "Linked data"};
+        "Trends", "References", "Legal Instruments", "Habitat types", "Sites", "External data"};
 
     private static final Map<String, String[]> types = new HashMap<String, String[]>();
     static {
@@ -202,9 +202,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         if (StringUtils.isNotBlank(idSpeciesText) && !factsheet.exists()) {
             // redirecting to more general search in case user tried text based search
             String redirectUrl =
-                "/species-names-result.jsp?pageSize=10" + "&relationOp=2&typeForm=0&showGroup=true&showOrder=true"
-                + "&showFamily=true&showScientificName=true&showVernacularNames=true"
-                + "&showValidName=true&searchSynonyms=true&sort=2&ascendency=0" + "&scientificName=" + idSpeciesText;
+                    "/species-names-result.jsp?pageSize=10" + "&relationOp=2&typeForm=0&showGroup=true&showOrder=true"
+                            + "&showFamily=true&showScientificName=true&showVernacularNames=true"
+                            + "&showValidName=true&searchSynonyms=true&sort=2&ascendency=0" + "&scientificName=" + idSpeciesText;
 
             return new RedirectResolution(redirectUrl);
         }
@@ -219,7 +219,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             // Decide what tabs to show
             List<String> existingTabs =
-                sqlUtil.getExistingTabPages(factsheet.getSpeciesNatureObject().getIdNatureObject().toString(), "SPECIES");
+                    sqlUtil.getExistingTabPages(factsheet.getSpeciesNatureObject().getIdNatureObject().toString(), "SPECIES");
             for (String tab : existingTabs) {
                 if (types.containsKey(tab)) {
                     String[] tabData = types.get(tab);
@@ -318,8 +318,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
 
             speciesName =
-                (scientificName.trim().indexOf(" ") >= 0 ? scientificName.trim().substring(scientificName.indexOf(" ") + 1)
-                        : scientificName);
+                    (scientificName.trim().indexOf(" ") >= 0 ? scientificName.trim().substring(scientificName.indexOf(" ") + 1)
+                            : scientificName);
 
             redlistLink = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SPECIES_REDLIST);
 
@@ -355,8 +355,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 for (int i = 0; i < consStatus.size(); i++) {
                     NationalThreatWrapper threat = consStatus.get(i);
                     String statusDesc =
-                        factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode()).replaceAll("'", " ")
-                        .replaceAll("\"", " ");
+                            factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode()).replaceAll("'", " ")
+                            .replaceAll("\"", " ");
 
                     threat.setStatusDesc(statusDesc);
                     newList.add(threat);

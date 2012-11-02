@@ -46,8 +46,8 @@ public class TabScripts {
 
             sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
 
-            EunisUtil.writeLogMessage("GENERAL tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
-                    sqlc);
+            EunisUtil.writeLogMessage("GENERAL tab generation started. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
 
             // Delete old records
             ps = con.prepareStatement("DELETE FROM chm62edt_tab_page_species");
@@ -60,19 +60,20 @@ public class TabScripts {
             ps = con.prepareStatement(mainSql);
             ps.executeUpdate();
 
-            EunisUtil.writeLogMessage("GENERAL tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
-                    sqlc);
+            EunisUtil.writeLogMessage("GENERAL tab generation finished. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
 
             // Update GBIF tab
             EunisUtil
             .writeLogMessage("GBIF tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
             String gbifSql =
                 "UPDATE chm62edt_tab_page_species SET GBIF = 'Y' WHERE ID_NATURE_OBJECT IN ( "
-                + "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES WHERE TYPE_RELATED_SPECIES IN ('Species','Subspecies','Synonym'))";
+                        + "SELECT DISTINCT ID_NATURE_OBJECT FROM CHM62EDT_SPECIES "
+                        + "WHERE TYPE_RELATED_SPECIES IN ('Species','Subspecies','Synonym'))";
             ps = con.prepareStatement(gbifSql);
             ps.executeUpdate();
-            EunisUtil.writeLogMessage("GBIF tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
-                    sqlc);
+            EunisUtil.writeLogMessage("GBIF tab generation finished. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
 
             // Update Geographical distribution tab
             String s =
@@ -139,11 +140,13 @@ public class TabScripts {
             updateSpeciesTab(s, con, sqlc, "VERNACULAR_NAMES");
 
             // Update REFERENCES tab
-            EunisUtil.writeLogMessage("REFERENCES tab generation started. Time: " + new Timestamp(System.currentTimeMillis()),
-                    cmd, sqlc);
+            EunisUtil.writeLogMessage("REFERENCES tab generation started. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
             updateReferences(con);
-            EunisUtil.writeLogMessage("REFERENCES tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()),
-                    cmd, sqlc);
+            EunisUtil.writeLogMessage("REFERENCES tab generation finished. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
+
+            //TODO: Update linked data method
 
         } catch (Exception e) {
             EunisUtil.writeLogMessage("ERROR occured while generating species tab information: " + e.getMessage(), cmd, sqlc);
@@ -154,7 +157,8 @@ public class TabScripts {
     }
 
     /**
-     * Generate species linked data tab information for species
+     * Generate species linked data tab information for species. This method assumes that
+     * all rows have been set to 'N' already.
      */
     public void setSpeciesLinkedDataTab() {
         Connection con = null;
@@ -167,20 +171,21 @@ public class TabScripts {
 
             sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
 
-            // Update GBIF tab
-            EunisUtil
-            .writeLogMessage("LINKED DATA tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
-            String linkeddataSql =
-                "UPDATE chm62edt_tab_page_species SET LINKEDDATA = 'Y' WHERE ID_NATURE_OBJECT IN ( "
-                + "SELECT DISTINCT ID_NATURE_OBJECT FROM chm62edt_nature_object_attributes WHERE "
-                + "NAME = '_linkedDataQueries' AND LENGTH(OBJECT > 0))";
+            // Update Linked data tab
+            EunisUtil .writeLogMessage("LINKED DATA tab generation started. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
+            String linkeddataSql = "UPDATE chm62edt_tab_page_species t "
+                    + "JOIN chm62edt_nature_object_attributes a "
+                    + "ON t.ID_NATURE_OBJECT=a.ID_NATURE_OBJECT AND a.NAME='_linkedDataQueries' "
+                    + "SET LINKEDDATA = 'Y' WHERE LENGTH(OBJECT) > 0";
             ps = con.prepareStatement(linkeddataSql);
             ps.executeUpdate();
-            EunisUtil.writeLogMessage("LINKED DATA tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
-                    sqlc);
+            EunisUtil.writeLogMessage("LINKED DATA tab generation finished. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
 
         } catch (Exception e) {
-            EunisUtil.writeLogMessage("ERROR occured while generating species linked data tab information: " + e.getMessage(), cmd, sqlc);
+            EunisUtil.writeLogMessage("ERROR occured while generating species linked data tab information: "
+                    + e.getMessage(), cmd, sqlc);
             e.printStackTrace();
         } finally {
             closeAll(con, ps, null);
@@ -192,9 +197,8 @@ public class TabScripts {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            EunisUtil.writeLogMessage(tab + " tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
-                    sqlc);
-
+            EunisUtil.writeLogMessage(tab + " tab generation started. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
             String query =
                 "UPDATE chm62edt_tab_page_species SET `" + tab + "` = 'Y' WHERE ID_NATURE_OBJECT IN ("
                 + "SELECT DISTINCT A.ID_NATURE_OBJECT FROM " + sql + ")";
@@ -231,8 +235,8 @@ public class TabScripts {
             }
             // Update senior species where junior species = 'Y' - END
 
-            EunisUtil.writeLogMessage(tab + " tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
-                    sqlc);
+            EunisUtil.writeLogMessage(tab + " tab generation finished. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
 
         } finally {
             // connection will be closed in setTabSpecies() method
@@ -241,7 +245,7 @@ public class TabScripts {
     }
 
     /**
-     * Generate tab information for habitats
+     * Generate tab information for habitats.
      */
     public void setTabHabitats() {
 
@@ -255,8 +259,8 @@ public class TabScripts {
 
             sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
 
-            EunisUtil.writeLogMessage("GENERAL tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
-                    sqlc);
+            EunisUtil.writeLogMessage("GENERAL tab generation started. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
 
             // Delete old records
             ps = con.prepareStatement("DELETE FROM chm62edt_tab_page_habitats");
@@ -268,8 +272,8 @@ public class TabScripts {
             ps = con.prepareStatement(mainSql);
             ps.executeUpdate();
 
-            EunisUtil.writeLogMessage("GENERAL tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
-                    sqlc);
+            EunisUtil.writeLogMessage("GENERAL tab generation finished. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
 
             // Update GEOGRAPHICAL_DISTRIBUTION tab
             String s = "SELECT DISTINCT A.ID_NATURE_OBJECT FROM CHM62EDT_HABITAT AS A "
@@ -325,7 +329,7 @@ public class TabScripts {
     }
 
     /**
-     * Generate tab information for sites
+     * Generate tab information for sites.
      */
     public void setTabSites() {
 
@@ -339,8 +343,8 @@ public class TabScripts {
 
             sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
 
-            EunisUtil.writeLogMessage("GENERAL tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
-                    sqlc);
+            EunisUtil.writeLogMessage("GENERAL tab generation started. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
 
             // Delete old records
             ps = con.prepareStatement("DELETE FROM chm62edt_tab_page_sites");
@@ -352,8 +356,8 @@ public class TabScripts {
             ps = con.prepareStatement(mainSql);
             ps.executeUpdate();
 
-            EunisUtil.writeLogMessage("GENERAL tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
-                    sqlc);
+            EunisUtil.writeLogMessage("GENERAL tab generation finished. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
 
             // Update DESIGNATION tab
             String s =
@@ -477,15 +481,15 @@ public class TabScripts {
 
         PreparedStatement ps = null;
         try {
-            EunisUtil.writeLogMessage(tab + " tab generation started. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
-                    sqlc);
+            EunisUtil.writeLogMessage(tab + " tab generation started. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
 
             String query = "UPDATE "+table+" SET `" + tab + "` = 'Y' WHERE ID_NATURE_OBJECT IN (" + sql + ")";
             ps = con.prepareStatement(query);
             ps.executeUpdate();
 
-            EunisUtil.writeLogMessage(tab + " tab generation finished. Time: " + new Timestamp(System.currentTimeMillis()), cmd,
-                    sqlc);
+            EunisUtil.writeLogMessage(tab + " tab generation finished. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
         } finally {
             // connection will be closed in parent method
             closeAll(null, ps, null);

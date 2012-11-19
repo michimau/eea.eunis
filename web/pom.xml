@@ -125,6 +125,8 @@
                                                 value="${maven.dependency.eionet.sparql-client.jar.path}" />
                                             <token key="SESAME.JAR"
                                                 value="${maven.dependency.org.openrdf.openrdf-sesame.jar.path}" />
+                                            <token key="RDF-EXPORTER.JAR"
+                                                value="${maven.dependency.eionet.rdf-export.rdf-exporter.jar.path}" />
                                         </replacetokens>
                                     </filterchain>
                                 </copy>

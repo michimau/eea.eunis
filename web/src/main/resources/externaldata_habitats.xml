@@ -5,7 +5,7 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">deliveries art17ranges habitatdistribution</entry>
+  <entry key="queries">deliveries art17ranges habitatdistribution syntaxa</entry>
 
 <!-- -->
 <!-- .endpoint, .title and .query are mandatory for all queries -->
@@ -129,4 +129,60 @@ WHERE {
  ?ucountry eea:name ?country 
 } ORDER BY DESC(?date) ?country ?biogeoregion
 ]]></entry>
+
+
+
+
+<!-- -->
+<!-- Syntaxa crosswalk query -->
+<!-- -->
+  <entry key="syntaxa.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+  <entry key="syntaxa.title">Crosswalk from habitat types to phytosociological syntaxa</entry>
+  <entry key="syntaxa.summary"><![CDATA[The European Vegetation Survey developed an overview of European vegetation units,
+syntaxa, providing a standardising tool in classifying vegetation types across Europe.]]></entry>
+
+<!--  <entry key="syntaxa.column.SYNTAXON_code">Code</entry> -->
+  <entry key="syntaxa.column.SYNTAXON_NAME">Syntaxon name</entry>
+
+<!-- Query -->
+<!-- [IDENTIFIER] is replaced with actual habitat ID before query will be executed -->
+  <entry key="syntaxa.query"><![CDATA[
+PREFIX tableFile: <http://semantic.eea.europa.eu/project/eunis/EUNIS_Syntaxa_crosswalk_EEA_friendly.tsv#>
+PREFIX h: <http://eunis.eea.europa.eu/rdf/habitats-schema.rdf#>
+
+SELECT ?SYNTAXON_NAME
+WHERE {
+ GRAPH <http://semantic.eea.europa.eu/project/eunis/EUNIS_Syntaxa_crosswalk_EEA_friendly.tsv> {
+   _:rec tableFile:EUNIS_code ?EUNIS_code .
+   _:rec tableFile:SYNTAXON_NAME ?SYNTAXON_NAME .
+   _:rec tableFile:SYNTAXON_code ?SYNTAXON_code 
+  FILTER(?SYNTAXON_code != '')
+ }
+ GRAPH <http://eunis.eea.europa.eu/rdf/habitats.rdf.gz> {
+  <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]> h:habitatCode ?EUNIS_code
+  }
+}
+]]></entry>
+  <entry key="syntaxa.codes"><![CDATA[
+PREFIX tableFile: <http://semantic.eea.europa.eu/project/eunis/EUNIS_Syntaxa_crosswalk_EEA_friendly.tsv#>
+PREFIX h: <http://eunis.eea.europa.eu/rdf/habitats-schema.rdf#>
+
+SELECT distinct ?code
+WHERE {
+ GRAPH <http://semantic.eea.europa.eu/project/eunis/EUNIS_Syntaxa_crosswalk_EEA_friendly.tsv> {
+   _:rec tableFile:EUNIS_code ?EUNIS_code .
+   _:rec tableFile:SYNTAXON_NAME ?SYNTAXON_NAME .
+   _:rec tableFile:SYNTAXON_code ?SYNTAXON_code 
+  FILTER(?SYNTAXON_code != '')
+ }
+ GRAPH <http://eunis.eea.europa.eu/rdf/habitats.rdf.gz> {
+  ?eunisurl h:habitatCode ?EUNIS_code;
+            h:code ?code
+  }
+}
+]]></entry>
+
+
+
+
 </properties>

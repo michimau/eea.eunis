@@ -137,7 +137,7 @@ WHERE {
 <!-- Syntaxa crosswalk query -->
 <!-- -->
   <entry key="syntaxa.endpoint">http://semantic.eea.europa.eu/sparql</entry>
-  <entry key="syntaxa.title">Crosswalk from habitat types to phytosociological syntaxa</entry>
+  <entry key="syntaxa.title">Crosswalk from EUNIS habitat types to phytosociological syntaxa</entry>
   <entry key="syntaxa.summary"><![CDATA[The European Vegetation Survey developed an overview of European vegetation units,
 syntaxa, providing a standardising tool in classifying vegetation types across Europe.]]></entry>
 

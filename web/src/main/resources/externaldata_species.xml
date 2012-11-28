@@ -97,21 +97,21 @@ PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
 SELECT ?country ?region ?surfacerange "2001-2006" AS ?period ?pc_rsa ?conclusion ?trend 
   bif:concat(?complementary_favourable_range_q, STR(?complementary_favourable_range)) AS ?favourable_range 
  ?quality 
-  WHERE { 
+WHERE { 
   ?subj a art17:Speciessummary ; 
 	art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>; 
         art17:forCountry _:countryUrl; 
         art17:forRegion _:regionUrl . 
- _:regionUrl e:name ?region . 
- _:countryUrl e:name ?country. 
+  _:regionUrl e:name ?region . 
+  _:countryUrl e:name ?country. 
   OPTIONAL {?subj art17:range_surface_area ?surfacerange} 
   OPTIONAL {?subj art17:percentage_range_surface_area ?pc_rsa} 
-OPTIONAL {?subj art17:conclusion_range _:conclusion_rangeUrl . 
-         _:conclusion_rangeUrl o:name ?conclusion } 
-OPTIONAL {?subj art17:range_trend ?trend} 
-OPTIONAL {?subj art17:complementary_favourable_range_q ?complementary_favourable_range_q} 
-OPTIONAL {?subj art17:complementary_favourable_range ?complementary_favourable_range} 
-OPTIONAL {?subj art17:range_quality ?quality} 
+  OPTIONAL {?subj art17:conclusion_range _:conclusion_rangeUrl . 
+            _:conclusion_rangeUrl o:name ?conclusion } 
+  OPTIONAL {?subj art17:range_trend ?trend} 
+  OPTIONAL {?subj art17:complementary_favourable_range_q ?complementary_favourable_range_q} 
+  OPTIONAL {?subj art17:complementary_favourable_range ?complementary_favourable_range} 
+  OPTIONAL {?subj art17:range_quality ?quality} 
 } ORDER BY ?country ?region
 ]]></entry>
 
@@ -121,7 +121,7 @@ PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
 PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
 
 SELECT DISTINCT ?speciescode 
-  WHERE { 
+WHERE { 
   ?subj a art17:Speciessummary ; 
         art17:forSpecies ?speciesurl. 
  ?speciesurl e:speciesCode ?speciescode 
@@ -149,7 +149,7 @@ SELECT ?country ?region ?minimum_size ?maximum_size ?unit
  ?percentage_mean_size "2001-2006" AS ?period ?conclusion ?trend ?yearly_magnitude 
  bif:concat(?complementary_favourable_population_q, STR(?complementary_favourable_population)) AS ?favourable_population 
  ?quality 
- WHERE { 
+WHERE { 
   ?subj a art17:Speciessummary ; 
         art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>; 
         art17:forCountry _:countryUrl; 
@@ -176,7 +176,7 @@ PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
 PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
 
 SELECT DISTINCT ?speciescode 
-  WHERE { 
+WHERE { 
   ?subj a art17:Speciessummary ; 
         art17:forSpecies ?speciesurl. 
  ?speciesurl e:speciesCode ?speciescode 
@@ -197,7 +197,8 @@ SELECT DISTINCT ?speciescode
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 PREFIX h: <http://rdfdata.eionet.europa.eu/habdir/ontology/> 
 
-SELECT ?region ?from ?until ?justification ?activity ?impact WHERE { 
+SELECT ?region ?from ?until ?justification ?activity ?impact
+WHERE { 
  ?subj h:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>; 
        h:licenseValidFrom ?from; 
        h:licenseValidUntil ?until; 
@@ -215,8 +216,8 @@ PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
 SELECT DISTINCT ?speciescode 
 WHERE { 
- _:subj h:forSpecies ?speciesurl. 
- ?speciesurl e:speciesCode ?speciescode 
+    _:subj h:forSpecies ?speciesurl. 
+    ?speciesurl e:speciesCode ?speciescode 
 }
 ]]></entry>
 
@@ -234,9 +235,10 @@ PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 PREFIX geospecies: <http://rdf.geospecies.org/ont/geospecies#> 
 PREFIX dwc: <http://rs.tdwg.org/dwc/terms/> 
 
-SELECT DISTINCT ?otherspecies LANG(?vernacular) AS ?language ?vernacular WHERE { 
+SELECT DISTINCT ?otherspecies LANG(?vernacular) AS ?language ?vernacular
+WHERE { 
   <http://eunis.eea.europa.eu/species/[IDENTIFIER]> eunis:sameSpecies ?otherspecies; 
-                                            eunis:binomialName ?binomial. 
+                                                    eunis:binomialName ?binomial. 
  { ?otherspecies rdfs:label ?vernacular } 
  UNION 
  { ?otherspecies geospecies:hasCommonName ?vernacular } 
@@ -303,12 +305,11 @@ and <a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset
 ]]></entry>
   <entry key="landings.query"><![CDATA[
 PREFIX qb: <http://purl.org/linked-data/cube#>
-PREFIX e: <http://eurostat.linked-statistics.org/property#>
+PREFIX e: <http://rdfdata.eionet.europa.eu/eurostat/property#>
 PREFIX measure: <http://purl.org/linked-data/sdmx/2009/measure#>
 PREFIX dimension: <http://purl.org/linked-data/sdmx/2009/dimension#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX g: <http://eurostat.linked-statistics.org/ontologies/geographic.rdf#>
-PREFIX dataset: <http://eurostat.linked-statistics.org/data/>
+PREFIX dataset: <http://rdfdata.eionet.europa.eu/eurostat/data/>
 PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
 SELECT ?country ?year ?landed ?unit 
@@ -317,17 +318,17 @@ WHERE {
    <http://eunis.eea.europa.eu/species/[IDENTIFIER]> eunis:sameSynonym ?uspecies
   }
   ?obsUri e:species ?uspecies;
-     e:pres <http://eurostat.linked-statistics.org/dic/pres#0>;
-     e:dest <http://eurostat.linked-statistics.org/dic/dest#0>;
-     e:natvessr <http://eurostat.linked-statistics.org/dic/natvessr#TOTAL>;
-     e:unit <http://eurostat.linked-statistics.org/dic/unit#TPW>, ?uunit;
+     e:pres <http://rdfdata.eionet.europa.eu/eurostat/dic/pres#0>;
+     e:dest <http://rdfdata.eionet.europa.eu/eurostat/dic/dest#0>;
+     e:natvessr <http://rdfdata.eionet.europa.eu/eurostat/dic/natvessr#TOTAL>;
+     e:unit <http://rdfdata.eionet.europa.eu/eurostat/dic/unit#TPW>, ?uunit;
      e:geo ?ucountry; 
      dimension:timePeriod ?year;
      measure:obsValue ?landed.
- GRAPH <http://eurostat.linked-statistics.org/dic/geo.rdf> {
+ GRAPH <http://rdfdata.eionet.europa.eu/eurostat/dic/geo.rdf> {
   ?ucountry skos:prefLabel ?country.
  }
- GRAPH <http://eurostat.linked-statistics.org/dic/unit.rdf> {
+ GRAPH <http://rdfdata.eionet.europa.eu/eurostat/dic/unit.rdf> {
   ?uunit skos:prefLabel ?unit. 
  }
 }
@@ -335,19 +336,19 @@ ORDER BY ?country ?year
 ]]></entry>
 
   <entry key="landings.codes"><![CDATA[
-PREFIX e: <http://eurostat.linked-statistics.org/property#> 
+PREFIX e: <http://rdfdata.eionet.europa.eu/eurostat/property#> 
 PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
 
 SELECT DISTINCT ?speciescode 
 WHERE { 
-  ?obsUri e:pres <http://eurostat.linked-statistics.org/dic/pres#0>; 
-          e:dest <http://eurostat.linked-statistics.org/dic/dest#0>; 
-          e:natvessr <http://eurostat.linked-statistics.org/dic/natvessr#TOTAL>; 
-          e:unit <http://eurostat.linked-statistics.org/dic/unit#TPW>; 
+  ?obsUri e:pres <http://rdfdata.eionet.europa.eu/eurostat/dic/pres#0>; 
+          e:dest <http://rdfdata.eionet.europa.eu/eurostat/dic/dest#0>; 
+          e:natvessr <http://rdfdata.eionet.europa.eu/eurostat/dic/natvessr#TOTAL>; 
+          e:unit <http://rdfdata.eionet.europa.eu/eurostat/dic/unit#TPW>; 
           e:species ?uspecies. 
   GRAPH <http://eunis.eea.europa.eu/rdf/species.rdf.gz> {
-   ?speciesurl eunis:sameSynonym ?uspecies.
-   ?speciesurl eunis:speciesCode ?speciescode 
+      ?speciesurl eunis:sameSynonym ?uspecies.
+      ?speciesurl eunis:speciesCode ?speciescode 
   }
 }
 ]]></entry>

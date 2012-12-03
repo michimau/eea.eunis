@@ -3,14 +3,6 @@
 <stripes:layout-definition>
 	<c:set var="cm" value="${actionBean.contentManagement}"/>
 	<c:if test="${!empty actionBean.speciesSites}">
-		<c:if test="${!empty actionBean.mapIds}">		
-			<form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
-	    		<input type="hidden" name="sites" value="${actionBean.mapIds}" />
-	    		<input id="showMap" type="submit" title="${eunis:cms(cm, 'show_map')}" name="Show map" value="${eunis:cms(actionBean.contentManagement, 'show_map')}" class="standardButton" />
-			    ${eunis:cmsTitle(cm, 'show_map')}
-			    ${eunis:cmsInput(cm, 'show_map')}
-	  		</form>
-	  	</c:if>
 		<br />
 		<display:table summary="${eunis:cms(cm, 'species_factsheet_sites_01_Sum')}" name="${actionBean.speciesSites}" class="sortable" pagesize="50" sort="list" id="listItem" htmlId="listItem" requestURI="/species/${actionBean.idSpecies}/sites" decorator="eionet.eunis.util.decorators.SpeciesSitesTableDecorator" style="width: 100%">
 			<display:column property="id" title="Site code" sortable="true"/>
@@ -42,10 +34,10 @@
 			<display:column property="siteName" title="Site name" sortable="true" sortProperty="name"/>
 		</display:table>
 	</c:if>
-	${eunis:br(actionBean.contentManagement)}
+  	${eunis:br(actionBean.contentManagement)}
 	${eunis:cmsMsg(cm, 'species_factsheet_sites_01_Sum')}
 	${eunis:br(actionBean.contentManagement)}
 	${eunis:cmsMsg(cm, 'species_factsheet_sites_02_Sum')}
 	${eunis:br(actionBean.contentManagement)}
-  	
+
 </stripes:layout-definition>

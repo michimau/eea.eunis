@@ -18,7 +18,7 @@
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,sites";
   int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
-  String []tabs = { cm.cmsPhrase("Easy search"), cm.cmsPhrase("Advanced search"), cm.cmsPhrase("Statistical data"), cm.cmsPhrase("Links &amp; downloads"), cm.cmsPhrase("Help") };
+  String []tabs = { cm.cmsPhrase("Easy search"), cm.cmsPhrase("Advanced search"), cm.cmsPhrase("Statistical data"), cm.cmsPhrase("Help") };
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>" lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -380,48 +380,6 @@
           <%
             }
             if ( tab == 3 )
-            {
-          %>
-                    <table class="datatable fullwidth" summary="Links &amp; downloads">
-                      <caption><%=cm.cmsPhrase( "Links to data sources used in EUNIS sites module") %></caption>
-                      <thead>
-                        <tr>
-                          <th>
-                            <%=cm.cmsPhrase("Links &amp; downloads")%>
-                          </th>
-                          <th>
-                            <%=cm.cmsPhrase("Description")%>
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <a title="<%=cm.cmsPhrase("Download full data set, visit data providers etc.")%>" href="sites-download.jsp">
-                              <strong>
-                                <%=cm.cmsPhrase("Links and Downloads")%>
-                              </strong>
-                            </a>
-                          </td>
-                          <td>
-                            <%=cm.cmsPhrase("Download full data set, visit data providers etc.")%>
-                          </td>
-                        </tr>
-                        <tr class="zebraeven">
-                          <td style="white-space : nowrap">
-                            <img alt="" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" />
-                            <%=cm.cmsPhrase("Sites main indicators")%>
-                          </td>
-                          <td>
-                            <%=cm.cmsPhrase("Find sites used in indicators")%>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-          <%
-            }
-            if ( tab == 4 )
             {
           %>
                 <table class="datatable fullwidth" summary="Help">

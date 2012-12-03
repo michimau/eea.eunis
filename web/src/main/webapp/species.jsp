@@ -20,7 +20,7 @@
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
-  String []tabs = { cm.cmsPhrase("Easy search"), cm.cmsPhrase("Advanced search"), cm.cmsPhrase("Statistical data"), cm.cmsPhrase("Links &amp; downloads"), cm.cmsPhrase("Help") };
+  String []tabs = { cm.cmsPhrase("Easy search"), cm.cmsPhrase("Advanced search"), cm.cmsPhrase("Statistical data"), cm.cmsPhrase("Help") };
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species";
 %>
@@ -357,48 +357,7 @@
               </table>
           <%
             }
-
             if ( tab == 3 )
-            {
-          %>
-              <table class="datatable fullwidth">
-                <caption>
-                  <%=cm.cmsPhrase("Species links and downloads")%>
-                </caption>
-                <thead>
-                  <tr>
-                    <th width="40%">
-                      <%=cm.cmsPhrase("Links to data downloads")%>
-                    </th>
-                    <th width="60%">
-                      <%=cm.cmsPhrase("Description")%>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                      <a href="species-download.jsp"><strong><%=cm.cmsPhrase("Links and Downloads")%></strong></a>
-                    </td>
-                    <td>
-                      <%=cm.cmsPhrase("Links and Downloads")%>
-                    </td>
-                  </tr>
-                  <tr class="zebraeven">
-                    <td style="white-space: nowrap">
-                      <img src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" alt="" />
-                      <a href="species-indicators.jsp"><strong><%=cm.cmsPhrase("Species indicators")%></strong></a>
-                    </td>
-                    <td>
-                      <%=cm.cmsPhrase("Find species used in indicators")%>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-          <%
-            }
-            if ( tab == 4 )
             {
           %>
                 <table class="datatable fullwidth">

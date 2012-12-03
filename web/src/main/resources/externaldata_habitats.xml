@@ -5,7 +5,7 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">deliveries art17ranges habitatdistribution syntaxa</entry>
+  <entry key="queries">deliveries art17ranges habitatdistribution</entry>
 
 <!-- -->
 <!-- .endpoint, .title and .query are mandatory for all queries -->

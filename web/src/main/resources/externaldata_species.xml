@@ -304,12 +304,12 @@ and <a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset
 (Currently a proof of concept query)
 ]]></entry>
   <entry key="landings.query"><![CDATA[
-PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX e: <http://rdfdata.eionet.europa.eu/eurostat/property#>
 PREFIX measure: <http://purl.org/linked-data/sdmx/2009/measure#>
 PREFIX dimension: <http://purl.org/linked-data/sdmx/2009/dimension#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX dataset: <http://rdfdata.eionet.europa.eu/eurostat/data/>
 PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
 SELECT ?country ?year ?landed ?unit 
@@ -325,8 +325,9 @@ WHERE {
      e:geo ?ucountry; 
      dimension:timePeriod ?year;
      measure:obsValue ?landed.
- GRAPH <http://rdfdata.eionet.europa.eu/eurostat/dic/geo.rdf> {
-  ?ucountry skos:prefLabel ?country.
+ GRAPH <http://rdfdata.eionet.europa.eu/eea/countries.rdf> {
+  ?eeacountry owl:sameAs ?ucountry .
+  ?eeacountry skos:prefLabel ?country.
  }
  GRAPH <http://rdfdata.eionet.europa.eu/eurostat/dic/unit.rdf> {
   ?uunit skos:prefLabel ?unit. 
@@ -381,30 +382,37 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dcterms: <http://purl.org/dc/terms/> 
 PREFIX eea: <http://rdfdata.eionet.europa.eu/eea/ontology/> 
 
-SELECT ?country ?biogeoregion bif:sprintf('%s/%s (%s)',str(?pop_min),str(?pop_max),?unit) AS ?observation ?period ?status ?quality ?source ?published 
-FROM <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz> 
-FROM <http://rdfdata.eionet.europa.eu/eea/biogeographic-regions.rdf> 
-FROM <http://rdfdata.eionet.europa.eu/eea/countries.rdf> 
-WHERE { 
- ?subject b:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>; 
-          b:forCountry ?ucountry; 
-          a b:ConservationStatus; 
-          b:pop_min ?pop_min; 
-          b:pop_max ?pop_max; 
-          b:unit ?unit; 
-          dcterms:source ?usource 
-          FILTER(?usource IN (<http://rdfdata.eionet.europa.eu/eunis/references/1850>, 
-                              <http://rdfdata.eionet.europa.eu/eunis/references/1570>)) 
- OPTIONAL {?subject b:hasBioGeoRegion ?ubiogeoregion. 
-           ?ubiogeoregion eea:name ?biogeoregion }  
- OPTIONAL {?subject b:reference_period ?period }  
- OPTIONAL {?subject b:hasStatus ?hasStatus . 
-           ?hasStatus rdfs:label ?status }  
- OPTIONAL {?subject b:hasInfoQuality ?hasInfoQuality . 
-           ?hasInfoQuality rdfs:label ?quality }  
- ?usource dcterms:alternative ?source; 
-          dcterms:date ?published. 
- ?ucountry rdfs:label ?country. 
+SELECT ?country ?biogeoregion
+  bif:sprintf('%s/%s (%s)', str(?pop_min),str(?pop_max),?unit) AS ?observation
+ ?period ?status ?quality ?source ?published 
+
+WHERE {
+GRAPH <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz> {
+  ?subject b:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>; 
+           b:forCountry ?ucountry; 
+           a b:ConservationStatus; 
+           b:pop_min ?pop_min; 
+           b:pop_max ?pop_max; 
+           b:unit ?unit; 
+           dcterms:source ?usource 
+           FILTER(?usource IN (<http://rdfdata.eionet.europa.eu/eunis/references/1850>, 
+                               <http://rdfdata.eionet.europa.eu/eunis/references/1570>)) 
+  OPTIONAL {?subject b:reference_period ?period }  
+  OPTIONAL {?subject b:hasStatus ?hasStatus . 
+            ?hasStatus rdfs:label ?status }  
+  OPTIONAL {?subject b:hasInfoQuality ?hasInfoQuality . 
+            ?hasInfoQuality rdfs:label ?quality }  
+  ?usource dcterms:alternative ?source; 
+           dcterms:date ?published. 
+  ?ucountry rdfs:label ?country. 
+ }
+ OPTIONAL {
+  ?subject b:hasBioGeoRegion ?ubiogeoregion. 
+  GRAPH <http://rdfdata.eionet.europa.eu/eea/biogeographic-regions.rdf> {
+   ?ubiogeoregion eea:name ?biogeoregion
+  }
+ }
+
 } ORDER BY ?country ?biogeoregion DESC(?published)
 ]]></entry>
 
@@ -414,17 +422,20 @@ PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 PREFIX dcterms: <http://purl.org/dc/terms/> 
 
 SELECT DISTINCT ?speciescode  
-FROM <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz> 
-FROM <http://eunis.eea.europa.eu/rdf/species.rdf.gz> 
+
 WHERE { 
+ GRAPH <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz> {
  ?subject b:forSpecies ?speciesurl; 
           a b:ConservationStatus; 
           b:pop_min ?pop_min; 
           b:pop_max ?pop_max; 
           dcterms:source ?usource 
  FILTER(?usource IN (<http://rdfdata.eionet.europa.eu/eunis/references/1850>, 
-                     <http://rdfdata.eionet.europa.eu/eunis/references/1570>)) 
- ?speciesurl eunis:speciesCode ?speciescode 
+                     <http://rdfdata.eionet.europa.eu/eunis/references/1570>))
+ } 
+ GRAPH <http://eunis.eea.europa.eu/rdf/species.rdf.gz> {
+  ?speciesurl eunis:speciesCode ?speciescode 
+ }
 }
 ]]></entry>
 
@@ -456,10 +467,11 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dcterms: <http://purl.org/dc/terms/> 
 PREFIX eea: <http://rdfdata.eionet.europa.eu/eea/ontology/> 
 
-SELECT ?country ?biogeoregion bif:sprintf('%s-%s',str(?start_period), str(?end_period)) AS ?period ?status ?trend ?quality ?source ?published 
+SELECT ?country ?biogeoregion
+ bif:sprintf('%s-%s',str(?start_period), str(?end_period)) AS ?period
+ ?status ?trend ?quality ?source ?published 
 FROM <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz> 
 FROM <http://rdfdata.eionet.europa.eu/eea/biogeographic-regions.rdf> 
-FROM <http://rdfdata.eionet.europa.eu/eea/countries.rdf> 
 WHERE { 
  ?subject b:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>; 
           b:forCountry ?ucountry; 

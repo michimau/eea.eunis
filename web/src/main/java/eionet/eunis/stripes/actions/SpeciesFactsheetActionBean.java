@@ -61,7 +61,7 @@ import eionet.sparqlClient.helpers.ResultValue;
 public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     private static final String[] tabs = {"General information", "Vernacular names", "Geographical information", "Population",
-        "Trends", "References", "Legal Instruments", "Habitat types", "Sites", "External data"};
+        "Trends", "Legal Instruments", "Habitat types", "Sites", "External data"};
 
     private static final Map<String, String[]> types = new HashMap<String, String[]>();
     static {
@@ -70,12 +70,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         types.put("GEOGRAPHICAL_DISTRIBUTION", new String[] {"geo", tabs[2]});
         types.put("POPULATION", new String[] {"population", tabs[3]});
         types.put("TRENDS", new String[] {"trends", tabs[4]});
-        types.put("REFERENCES", new String[] {"references", tabs[5]});
         // types.put("GRID_DISTRIBUTION", new String[] {"grid", "Grid distribution"});
-        types.put("LEGAL_INSTRUMENTS", new String[] {"legal", tabs[6]});
-        types.put("HABITATS", new String[] {"habitats", tabs[7]});
-        types.put("SITES", new String[] {"sites", tabs[8]});
-        types.put("LINKEDDATA", new String[] {"linkeddata", tabs[9]});
+        types.put("LEGAL_INSTRUMENTS", new String[] {"legal", tabs[5]});
+        types.put("HABITATS", new String[] {"habitats", tabs[6]});
+        types.put("SITES", new String[] {"sites", tabs[7]});
+        types.put("LINKEDDATA", new String[] {"linkeddata", tabs[8]});
     }
 
     /** The argument given. Can be a species number or scientific name */
@@ -223,9 +222,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             for (String tab : existingTabs) {
                 if (types.containsKey(tab)) {
                     String[] tabData = types.get(tab);
-                    if(!tab.equals("REFERENCES")){
                         tabsWithData.add(new Pair<String, String>(tabData[0], getContentManagement().cmsPhrase(tabData[1])));
-                    }
                 }
             }
 

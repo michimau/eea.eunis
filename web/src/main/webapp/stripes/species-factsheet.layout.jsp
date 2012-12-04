@@ -102,12 +102,6 @@
 			                  <jsp:param name="idSpecies" value="${actionBean.factsheet.speciesNatureObject.idSpecies}" />
 			                </jsp:include>
 		                </c:if>
-		                <c:if test="${actionBean.tab == 'references'}">
-		                	<%-- References --%>
-			                <jsp:include page="/species-factsheet-references.jsp">
-			                  <jsp:param name="mainIdSpecies" value="${actionBean.factsheet.idSpecies}" />
-			                </jsp:include>
-		                </c:if>
 		                <c:if test="${actionBean.tab == 'grid'}">
 		                	<%-- Grid distribution --%>
 			                <stripes:layout-render name="/stripes/species-factsheet-distribution.jsp"/>

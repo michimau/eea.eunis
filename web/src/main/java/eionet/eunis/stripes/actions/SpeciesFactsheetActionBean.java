@@ -223,7 +223,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             for (String tab : existingTabs) {
                 if (types.containsKey(tab)) {
                     String[] tabData = types.get(tab);
-                    tabsWithData.add(new Pair<String, String>(tabData[0], getContentManagement().cmsPhrase(tabData[1])));
+                    if(!tab.equals("REFERENCES")){
+                        tabsWithData.add(new Pair<String, String>(tabData[0], getContentManagement().cmsPhrase(tabData[1])));
+                    }
                 }
             }
 

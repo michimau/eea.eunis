@@ -66,11 +66,11 @@ public class ScientificNamePersist extends PersistentObject implements Comparabl
     public ScientificNamePersist() {
         super();
     }
-  
+
     public int compareTo(ScientificNamePersist other) {
         return getScientificName().compareTo(other.getScientificName());
     }
-  
+
     @Override
     public String toString() {
         return getScientificName();
@@ -81,7 +81,7 @@ public class ScientificNamePersist extends PersistentObject implements Comparabl
         String ret = "";
         String level = this.getTaxonomyLevel();
 
-        if (level != null && level.equalsIgnoreCase("order_column")) {
+        if (level != null && level.equalsIgnoreCase("order")) {
             ret = this.getTaxonomyName();
         } else {
             String str = this.getTaxonomyTree();
@@ -98,7 +98,7 @@ public class ScientificNamePersist extends PersistentObject implements Comparabl
 
                     if (classification_level != null
                             && classification_level.equalsIgnoreCase(
-                                    "order_column")) {
+                                    "order")) {
                         ret = classification_name;
                         break;
                     }

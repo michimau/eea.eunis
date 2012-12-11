@@ -117,10 +117,6 @@
                 		<a href="<%=domainName%>/dataimport/importpagelinks">Import page links</a><br/>
                 		The purpose of this page is to import page links from geospecies database.
                 	</li>
-                	<li>
-                		<a href="<%=domainName%>/dataimport/matchgeospecies">Match geospecies</a><br/>
-                		The purpose of this page is to import geospecies relations and match some of them manually to EUNIS species.
-                	</li>
                 </ul>
 		</fieldset>
 		<fieldset><legend>XML exporters</legend>

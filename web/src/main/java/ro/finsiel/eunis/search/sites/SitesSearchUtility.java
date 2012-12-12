@@ -90,6 +90,8 @@ public class SitesSearchUtility {
         String sql = where;
 
         sql += " LIMIT 0, " + Utilities.MAX_POPUP_RESULTS;
+
+        System.out.println("sql "+sql);
         try {
             results = new Chm62edtDesignationsDomain().findWhere(sql);
         } catch (Exception _ex) {

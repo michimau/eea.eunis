@@ -23,6 +23,7 @@
   String idGeoscope = request.getParameter("idGeoscope");
   String sourceDB = request.getParameter("sourceDB");
   List results = new ArrayList();
+
   if(!sourceDB.equalsIgnoreCase("CORINE"))
   {
     String SiteType = SitesSearchUtility.getSiteType(idSite);
@@ -30,8 +31,10 @@
     if(!sourceDB.equalsIgnoreCase("NATURA2000") || !SiteType.equalsIgnoreCase("C"))
     {
       results = SitesSearchUtility.findDesignationsForSite(idDesignation, idGeoscope);
+
     } else {
       results = SitesSearchUtility.findDesignationsTypeC();
+
     }
   }
   if (results.size() > 0)
@@ -40,6 +43,8 @@
     {
       Chm62edtDesignationsPersist designation = (Chm62edtDesignationsPersist)results.get(i);
       String description = designation.getDescription();
+
+
       if (description.equalsIgnoreCase("")) {
         description = designation.getDescriptionEn();
       }

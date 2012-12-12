@@ -139,16 +139,20 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
         }
 
         // Necessary assignments for the "general" and "desig-types" tabs.
-        if (currTab.equals(Tab.GENERAL) || currTab.equals(Tab.DESIG_TYPES)) {
+        if (currTab.equals(Tab.GENERAL)||currTab.equals(Tab.DESIG_TYPES) ) {
 
             populateStatisticsBean();
             countryRegions = CountryUtil.findRegionsFromCountry(country.getEunisAreaCode());
             isIndeedCountry = Utilities.isCountry(country.getAreaNameEnglish());
-            if (isIndeedCountry) {
+         // Necessary assignments for the  "desig-types" tab.
+            if (isIndeedCountry && currTab.equals(Tab.DESIG_TYPES)) {
                 loadDesignations();
             }
 
+
             loadCountrySitesFactsheets();
+
+
         }
     }
 
@@ -275,10 +279,10 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
         List siteIds = new ArrayList();
         if (queryResultList != null && queryResultList.size() > 0) {
             for (int i = 0; i < queryResultList.size(); i++) {
+
                 siteIds.add(((TableColumns) queryResultList.get(i)).getColumnsValues().get(0));
             }
         }
-
         designations = statisticsBean.getDesignationsList(siteIds);
         if (designations != null && !designations.isEmpty()) {
             for (Iterator iter = designations.iterator(); iter.hasNext();) {
@@ -287,6 +291,8 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
                         designation.getIdGeoscope(), sqlUtilities));
             }
         }
+
+
     }
 
     /**

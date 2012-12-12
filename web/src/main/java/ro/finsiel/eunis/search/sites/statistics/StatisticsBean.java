@@ -1,6 +1,5 @@
 package ro.finsiel.eunis.search.sites.statistics;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +15,6 @@ import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesFormBean;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
-
 /**
  * Form bean used for sites->statistical data.
  *
@@ -28,12 +26,12 @@ public class StatisticsBean extends SitesFormBean {
     private Long sitesNumber = new Long(-1);
     private Long totalArea = new Long(-1);
     private Long totalLength = new Long(-1);
-    private static String[] db = {
-        "Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic",
-        "NatureNet", "Emerald"};
+    private static String[] db = {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic",
+            "NatureNet", "Emerald"};
 
     /**
      * Compute number of sites for main search criteria.
+     *
      * @return number of sites
      */
     public Long computeNumberOfSites() {
@@ -42,13 +40,16 @@ public class StatisticsBean extends SitesFormBean {
         String sql = "";
 
         try {
-            sql = " SELECT COUNT(DISTINCT A.ID_SITE) FROM CHM62EDT_COUNTRY AS C "
-                    + " INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON C.ID_GEOSCOPE = B.ID_GEOSCOPE "
-                    + " INNER JOIN CHM62EDT_SITES AS A ON B.ID_NATURE_OBJECT=A.ID_NATURE_OBJECT ";
+            sql =
+                    " SELECT COUNT(DISTINCT A.ID_SITE) FROM CHM62EDT_COUNTRY AS C "
+                            + " INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON C.ID_GEOSCOPE = B.ID_GEOSCOPE "
+                            + " INNER JOIN CHM62EDT_SITES AS A ON B.ID_NATURE_OBJECT=A.ID_NATURE_OBJECT ";
             if ((null != designation && designation.trim().length() > 0 && !designation.trim().equalsIgnoreCase("null"))
-                    || (null != designationCat && !designationCat.equalsIgnoreCase("any")
-                    && !designationCat.trim().equalsIgnoreCase("null"))) {
-                sql += " INNER JOIN CHM62EDT_DESIGNATIONS E ON (A.ID_DESIGNATION=E.ID_DESIGNATION AND A.ID_GEOSCOPE=E.ID_GEOSCOPE)";
+                    || (null != designationCat && !designationCat.equalsIgnoreCase("any") && !designationCat.trim()
+                            .equalsIgnoreCase("null")))
+            {
+                sql +=
+                        " INNER JOIN CHM62EDT_DESIGNATIONS E ON (A.ID_DESIGNATION=E.ID_DESIGNATION AND A.ID_GEOSCOPE=E.ID_GEOSCOPE)";
             }
             sql += " WHERE " + sqlWhere;
 
@@ -64,6 +65,7 @@ public class StatisticsBean extends SitesFormBean {
 
     /**
      * Construct the where condition for computeNumberOfSites function.
+     *
      * @return SQL.
      */
     public String prepareSQLForComputeNoSites() {
@@ -99,14 +101,15 @@ public class StatisticsBean extends SitesFormBean {
                 sql += " AND ";
             }
             sql += " A.DESIGNATION_DATE IS NOT NULL" + " AND A.DESIGNATION_DATE <> ''";
-            sql += " AND CAST(CONCAT(IF(A.source_db='BIOGENETIC',left(A.designation_date,4),''), "
-                    + "IF(A.source_db='CDDA_INTERNATIONAL',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='CDDA_NATIONAL',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='EMERALD',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='DIPLOMA',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='NATURA2000',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='CORINE',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='NATURENET',right(A.designation_date,4),'')) AS SIGNED)";
+            sql +=
+                    " AND CAST(CONCAT(IF(A.source_db='BIOGENETIC',left(A.designation_date,4),''), "
+                            + "IF(A.source_db='CDDA_INTERNATIONAL',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='CDDA_NATIONAL',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='EMERALD',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='DIPLOMA',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='NATURA2000',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='CORINE',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='NATURENET',right(A.designation_date,4),'')) AS SIGNED)";
 
             sql += ">=" + yearMin + " ";
         }
@@ -115,22 +118,22 @@ public class StatisticsBean extends SitesFormBean {
                 sql += " AND ";
             }
             sql += " A.DESIGNATION_DATE IS NOT NULL" + " AND A.DESIGNATION_DATE <> ''";
-            sql += " AND CAST(CONCAT(IF(A.source_db='BIOGENETIC',left(A.designation_date,4),''), "
-                    + "IF(A.source_db='CDDA_INTERNATIONAL',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='CDDA_NATIONAL',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='EMERALD',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='DIPLOMA',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='NATURA2000',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='CORINE',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='NATURENET',right(A.designation_date,4),'')) AS SIGNED)";
+            sql +=
+                    " AND CAST(CONCAT(IF(A.source_db='BIOGENETIC',left(A.designation_date,4),''), "
+                            + "IF(A.source_db='CDDA_INTERNATIONAL',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='CDDA_NATIONAL',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='EMERALD',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='DIPLOMA',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='NATURA2000',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='CORINE',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='NATURENET',right(A.designation_date,4),'')) AS SIGNED)";
 
             sql += "<=" + yearMax + " ";
         }
-        boolean[] source = {
-                DB_NATURA2000 == null ? false : true, DB_CORINE == null ? false : true, DB_DIPLOMA == null ? false : true,
+        boolean[] source =
+                {DB_NATURA2000 == null ? false : true, DB_CORINE == null ? false : true, DB_DIPLOMA == null ? false : true,
                         DB_CDDA_NATIONAL == null ? false : true, DB_CDDA_INTERNATIONAL == null ? false : true,
-                                DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true,
-        };
+                        DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true,};
 
         sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), source, db, "A").toString();
 
@@ -139,6 +142,7 @@ public class StatisticsBean extends SitesFormBean {
 
     /**
      * Construct the where condition for query which returns the list of sites that fulfil main search criteria.
+     *
      * @return SQL.
      */
 
@@ -154,14 +158,15 @@ public class StatisticsBean extends SitesFormBean {
                 sql += " AND ";
             }
             sql += " A.DESIGNATION_DATE IS NOT NULL" + " AND A.DESIGNATION_DATE <> ''";
-            sql += " AND CAST(CONCAT(IF(A.source_db='BIOGENETIC',left(A.designation_date,4),''), "
-                    + "IF(A.source_db='CDDA_INTERNATIONAL',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='CDDA_NATIONAL',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='EMERALD',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='DIPLOMA',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='NATURA2000',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='CORINE',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='NATURENET',right(A.designation_date,4),'')) AS SIGNED)";
+            sql +=
+                    " AND CAST(CONCAT(IF(A.source_db='BIOGENETIC',left(A.designation_date,4),''), "
+                            + "IF(A.source_db='CDDA_INTERNATIONAL',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='CDDA_NATIONAL',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='EMERALD',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='DIPLOMA',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='NATURA2000',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='CORINE',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='NATURENET',right(A.designation_date,4),'')) AS SIGNED)";
 
             sql += ">=" + yearMin + " ";
         }
@@ -170,21 +175,22 @@ public class StatisticsBean extends SitesFormBean {
                 sql += " AND ";
             }
             sql += " A.DESIGNATION_DATE IS NOT NULL" + " AND A.DESIGNATION_DATE <> ''";
-            sql += " AND CAST(CONCAT(IF(A.source_db='BIOGENETIC',left(A.designation_date,4),''), "
-                    + "IF(A.source_db='CDDA_INTERNATIONAL',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='CDDA_NATIONAL',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='EMERALD',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='DIPLOMA',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='NATURA2000',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='CORINE',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='NATURENET',right(A.designation_date,4),'')) AS SIGNED)";
+            sql +=
+                    " AND CAST(CONCAT(IF(A.source_db='BIOGENETIC',left(A.designation_date,4),''), "
+                            + "IF(A.source_db='CDDA_INTERNATIONAL',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='CDDA_NATIONAL',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='EMERALD',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='DIPLOMA',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='NATURA2000',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='CORINE',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='NATURENET',right(A.designation_date,4),'')) AS SIGNED)";
 
             sql += "<=" + yearMax + " ";
         }
-        boolean[] source = {
-                DB_NATURA2000 == null ? false : true, DB_CORINE == null ? false : true, DB_DIPLOMA == null ? false : true,
+        boolean[] source =
+                {DB_NATURA2000 == null ? false : true, DB_CORINE == null ? false : true, DB_DIPLOMA == null ? false : true,
                         DB_CDDA_NATIONAL == null ? false : true, DB_CDDA_INTERNATIONAL == null ? false : true,
-                                DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true};
+                        DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true};
 
         sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), source, db, "A").toString();
 
@@ -193,7 +199,9 @@ public class StatisticsBean extends SitesFormBean {
 
     /**
      * Return where condition in the others cases.
-     * @param useIso3l - country is obtained by iso3l
+     *
+     * @param useIso3l
+     *            - country is obtained by iso3l
      * @return string condition
      */
     public String prepareSQL(boolean useIso3l) {
@@ -231,14 +239,15 @@ public class StatisticsBean extends SitesFormBean {
                 sql += " AND ";
             }
             sql += " A.DESIGNATION_DATE IS NOT NULL" + " AND A.DESIGNATION_DATE <> ''";
-            sql += " AND CAST(CONCAT(IF(A.source_db='BIOGENETIC',left(A.designation_date,4),''), "
-                    + "IF(A.source_db='CDDA_INTERNATIONAL',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='CDDA_NATIONAL',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='EMERALD',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='DIPLOMA',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='NATURA2000',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='CORINE',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='NATURENET',right(A.designation_date,4),'')) AS SIGNED)";
+            sql +=
+                    " AND CAST(CONCAT(IF(A.source_db='BIOGENETIC',left(A.designation_date,4),''), "
+                            + "IF(A.source_db='CDDA_INTERNATIONAL',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='CDDA_NATIONAL',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='EMERALD',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='DIPLOMA',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='NATURA2000',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='CORINE',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='NATURENET',right(A.designation_date,4),'')) AS SIGNED)";
 
             sql += ">=" + yearMin + " ";
         }
@@ -248,24 +257,24 @@ public class StatisticsBean extends SitesFormBean {
                 sql += " AND ";
             }
             sql += " A.DESIGNATION_DATE IS NOT NULL" + " AND A.DESIGNATION_DATE <> ''";
-            sql += " AND CAST(CONCAT(IF(A.source_db='BIOGENETIC',left(A.designation_date,4),''), "
-                    + "IF(A.source_db='CDDA_INTERNATIONAL',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='CDDA_NATIONAL',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='EMERALD',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='DIPLOMA',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='NATURA2000',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='CORINE',right(A.designation_date,4),''), "
-                    + "IF(A.source_db='NATURENET',right(A.designation_date,4),'')) AS SIGNED)";
+            sql +=
+                    " AND CAST(CONCAT(IF(A.source_db='BIOGENETIC',left(A.designation_date,4),''), "
+                            + "IF(A.source_db='CDDA_INTERNATIONAL',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='CDDA_NATIONAL',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='EMERALD',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='DIPLOMA',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='NATURA2000',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='CORINE',right(A.designation_date,4),''), "
+                            + "IF(A.source_db='NATURENET',right(A.designation_date,4),'')) AS SIGNED)";
 
             sql += "<=" + yearMax + " ";
         }
 
         if (useIso3l) {
-            boolean[] source = {
-                    DB_NATURA2000 == null ? false : true, DB_CORINE == null ? false : true, DB_DIPLOMA == null ? false : true,
+            boolean[] source =
+                    {DB_NATURA2000 == null ? false : true, DB_CORINE == null ? false : true, DB_DIPLOMA == null ? false : true,
                             DB_CDDA_NATIONAL == null ? false : true, DB_CDDA_INTERNATIONAL == null ? false : true,
-                                    DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true,
-            };
+                            DB_BIOGENETIC == null ? false : true, false, DB_EMERALD == null ? false : true,};
 
             sql = Utilities.getConditionForSourceDB(new StringBuffer(sql), source, db, "E").toString();
         }
@@ -309,6 +318,7 @@ public class StatisticsBean extends SitesFormBean {
 
     /**
      * Put list of sites in where condition format.
+     *
      * @param idSitesList
      * @param alias
      * @return string condition
@@ -336,7 +346,8 @@ public class StatisticsBean extends SitesFormBean {
     }
 
     /**
-     *  Return list of designations.
+     * Return list of designations.
+     *
      * @param idSitesList
      * @return list of designations
      */
@@ -347,11 +358,12 @@ public class StatisticsBean extends SitesFormBean {
 
         String sql = "";
 
-        sql = " SELECT E.*  FROM CHM62EDT_DESIGNATIONS E "
-                + " INNER JOIN CHM62EDT_SITES A ON (E.ID_DESIGNATION=A.ID_DESIGNATION AND E.ID_GEOSCOPE=A.ID_GEOSCOPE)" + " WHERE "
-                + getSitesConditions(idSitesList, "A")
-                + (sqlWhere != null && sqlWhere.trim().length() > 0 ? " AND " + sqlWhere : "")
-                + " GROUP BY E.ID_DESIGNATION,E.ID_GEOSCOPE";
+        sql =
+                " SELECT E.*  FROM CHM62EDT_DESIGNATIONS E "
+                        + " INNER JOIN CHM62EDT_SITES A ON (E.ID_DESIGNATION=A.ID_DESIGNATION AND E.ID_GEOSCOPE=A.ID_GEOSCOPE)"
+                        + " WHERE " + getSitesConditions(idSitesList, "A")
+                        + (sqlWhere != null && sqlWhere.trim().length() > 0 ? " AND " + sqlWhere : "")
+                        + " GROUP BY E.ID_DESIGNATION,E.ID_GEOSCOPE";
         // " UNION" +
         // " SELECT E.* " +
         // " FROM CHM62EDT_DESIGNATIONS AS E " +
@@ -376,6 +388,7 @@ public class StatisticsBean extends SitesFormBean {
 
     /**
      * Return no of sites and total area for a designation.
+     *
      * @param idSitesList
      * @param id
      * @param idGeoscope
@@ -398,17 +411,20 @@ public class StatisticsBean extends SitesFormBean {
         try {
             con = sqlUtilities.getConnection();
 
-            ps = con.prepareStatement(
-                    " SELECT COUNT(DISTINCT A.ID_SITE) FROM CHM62EDT_DESIGNATIONS E "
+            String sql =
+                    "SELECT COUNT(DISTINCT AreaSite.ASite), sum(AreaSite.AArea) as GR FROM "
+                            + " (SELECT  A.ID_SITE as ASite , A.AREA as AArea FROM CHM62EDT_DESIGNATIONS E "
                             + " INNER JOIN CHM62EDT_SITES A ON (E.ID_DESIGNATION=A.ID_DESIGNATION AND E.ID_GEOSCOPE=A.ID_GEOSCOPE)"
                             + " WHERE TRIM(E.ID_DESIGNATION)=TRIM('" + id + "') " + " AND  E.ID_GEOSCOPE = " + idGeoscope
                             + (sqlWhere != null && sqlWhere.trim().length() > 0 ? " AND " + sqlWhere : "") + " AND "
-                            + getSitesConditions(idSitesList, "A"));
+                            + getSitesConditions(idSitesList, "A") + ") as AreaSite";
+
+            ps = con.prepareStatement(sql);
 
             rs = ps.executeQuery();
-
             if (rs != null && rs.next()) {
                 noSites = rs.getLong(1);
+                areaTotal = rs.getLong(2);
             }
 
             rs.close();
@@ -416,37 +432,36 @@ public class StatisticsBean extends SitesFormBean {
             ps.close();
             ps = null;
 
-            ps = con.prepareStatement(
-                    " select sum(gr.area) from (SELECT A.AREA FROM CHM62EDT_DESIGNATIONS E "
-                            + " INNER JOIN CHM62EDT_SITES AS A ON (A.AREA >0 AND A.ID_DESIGNATION=E.ID_DESIGNATION and A.ID_GEOSCOPE = E.ID_GEOSCOPE)"
-                            + " WHERE TRIM(E.ID_DESIGNATION)=TRIM('" + id + "') " + " AND  E.ID_GEOSCOPE = " + idGeoscope
-                            + (sqlWhere != null && sqlWhere.trim().length() > 0 ? " AND " + sqlWhere : "") + " AND "
-                            + getSitesConditions(idSitesList, "A") + " group by A.id_site) as gr");
-
+            sql = "select OVERLAP from CHM62EDT_SITES_SITES WHERE OVERLAP > 0 LIMIT 1";
+            ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-
-            if (rs != null && rs.next()) {
-                areaTotal = rs.getLong(1);
-            }
+            boolean hasOverlaps = rs.next();
 
             rs.close();
             rs = null;
             ps.close();
             ps = null;
+            
+            if (hasOverlaps) {
+                sql =
+                        " select sum(gr.overlap) from (SELECT H.OVERLAP FROM CHM62EDT_DESIGNATIONS E "
+                                + " INNER JOIN CHM62EDT_SITES AS A ON (A.ID_DESIGNATION=E.ID_DESIGNATION and A.ID_GEOSCOPE = E.ID_GEOSCOPE AND A.AREA>0) "
+                                + " INNER JOIN CHM62EDT_SITES_SITES AS H ON (A.ID_SITE = H.ID_SITE AND H.OVERLAP>0) "
+                                + " INNER JOIN CHM62EDT_SITES AS I ON (H.ID_SITE_LINK = I.ID_SITE AND I.AREA>0)"
+                                + " WHERE TRIM(E.ID_DESIGNATION)=TRIM('" + id + "') " + " AND  E.ID_GEOSCOPE = " + idGeoscope
+                                + (sqlWhere != null && sqlWhere.trim().length() > 0 ? " AND " + sqlWhere : "") + " AND "
+                                + getSitesConditions(idSitesList, "A") + " group by A.ID_SITE,H.ID_SITE_LINK,H.OVERLAP) as gr";
 
-            ps = con.prepareStatement(
-                    " select sum(gr.overlap) from (SELECT H.OVERLAP FROM CHM62EDT_DESIGNATIONS E "
-                            + " INNER JOIN CHM62EDT_SITES AS A ON (A.ID_DESIGNATION=E.ID_DESIGNATION and A.ID_GEOSCOPE = E.ID_GEOSCOPE AND A.AREA>0) "
-                            + " INNER JOIN CHM62EDT_SITES_SITES AS H ON (A.ID_SITE = H.ID_SITE AND H.OVERLAP>0) "
-                            + " INNER JOIN CHM62EDT_SITES AS I ON (H.ID_SITE_LINK = I.ID_SITE AND I.AREA>0)"
-                            + " WHERE TRIM(E.ID_DESIGNATION)=TRIM('" + id + "') " + " AND  E.ID_GEOSCOPE = " + idGeoscope
-                            + (sqlWhere != null && sqlWhere.trim().length() > 0 ? " AND " + sqlWhere : "") + " AND "
-                            + getSitesConditions(idSitesList, "A") + " group by A.ID_SITE,H.ID_SITE_LINK,H.OVERLAP) as gr");
+                ps = con.prepareStatement(sql);
 
-            rs = ps.executeQuery();
+                rs = ps.executeQuery();
 
-            if (rs != null && rs.next()) {
-                areaTotalOverlap = rs.getLong(1);
+                if (rs != null && rs.next()) {
+                    areaTotalOverlap = rs.getLong(1);
+
+                }
+            } else {
+                areaTotalOverlap = (long) 0;
             }
 
         } catch (Exception e) {
@@ -462,10 +477,9 @@ public class StatisticsBean extends SitesFormBean {
 
             if (areaTotal != null) {
                 if (areaTotalOverlap != null) {
-                    values.addElement(
-                            (areaTotal.longValue() - areaTotalOverlap.longValue() < 0
-                                    ? new Long(0)
-                            : new Long(areaTotal.longValue() - areaTotalOverlap.longValue())));
+
+                    values.addElement((areaTotal.longValue() - areaTotalOverlap.longValue() < 0 ? new Long(0) : new Long(areaTotal
+                            .longValue() - areaTotalOverlap.longValue())));
                 } else {
                     values.addElement(areaTotal);
                 }
@@ -480,9 +494,13 @@ public class StatisticsBean extends SitesFormBean {
 
     /**
      * Close all db elements.
-     * @param con connection
-     * @param ps prepared sql statement
-     * @param rs result set
+     *
+     * @param con
+     *            connection
+     * @param ps
+     *            prepared sql statement
+     * @param rs
+     *            result set
      */
     private void closeAll(Connection con, PreparedStatement ps, ResultSet rs) {
         try {
@@ -551,7 +569,8 @@ public class StatisticsBean extends SitesFormBean {
     /**
      * Setter for designation property.
      *
-     * @param designation designation.
+     * @param designation
+     *            designation.
      */
     public void setDesignation(String designation) {
         this.designation = designation;
@@ -569,7 +588,8 @@ public class StatisticsBean extends SitesFormBean {
     /**
      * Setter for designationCat property.
      *
-     * @param designationCat designationCat.
+     * @param designationCat
+     *            designationCat.
      */
     public void setDesignationCat(String designationCat) {
         this.designationCat = designationCat;
@@ -586,8 +606,8 @@ public class StatisticsBean extends SitesFormBean {
     }
 
     /**
-     * This method will transform the request parameters used for search back in search objects (AbstractSearchCriteria)
-     * in order to use them in searches...
+     * This method will transform the request parameters used for search back in search objects (AbstractSearchCriteria) in order to
+     * use them in searches...
      *
      * @return objects which are used for search / filter
      */
@@ -598,8 +618,8 @@ public class StatisticsBean extends SitesFormBean {
     }
 
     /**
-     * This method will transform the request parameters used for sorting back in search objects (AbstractSortCriteria)
-     * in order to use them in sorting, again...
+     * This method will transform the request parameters used for sorting back in search objects (AbstractSortCriteria) in order to
+     * use them in sorting, again...
      *
      * @return A list of AbstractSearchCriteria objects used to do the sorting.
      */
@@ -610,10 +630,11 @@ public class StatisticsBean extends SitesFormBean {
     }
 
     /**
-     * This method will transform the request parameters, back to an URL compatible type of request so that
-     * one should not manually write the URL.
+     * This method will transform the request parameters, back to an URL compatible type of request so that one should not manually
+     * write the URL.
      *
-     * @param classFields Fields to be included in parameters.
+     * @param classFields
+     *            Fields to be included in parameters.
      * @return An URL compatible type of representation(i.e.: >>param1=val1&param2=val2&param3=val3 etc.<<.
      */
     @Override
@@ -623,10 +644,11 @@ public class StatisticsBean extends SitesFormBean {
     }
 
     /**
-     * This method will transform the request parameters into a form compatible hidden input parameters, for example.
-     * &ltINPUT type="hidden" name="paramName" value="paramValue"&gt.
+     * This method will transform the request parameters into a form compatible hidden input parameters, for example. &ltINPUT
+     * type="hidden" name="paramName" value="paramValue"&gt.
      *
-     * @param classFields Fields to be included in parameters.
+     * @param classFields
+     *            Fields to be included in parameters.
      * @return An form compatible type of representation of request parameters.
      */
     @Override

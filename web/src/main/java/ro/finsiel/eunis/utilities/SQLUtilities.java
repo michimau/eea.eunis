@@ -313,6 +313,53 @@ public class SQLUtilities {
         return result;
     }
 
+
+    /**
+     * Executes a CREATE sql .
+     *
+     * @param SQL
+     */
+    public void UpdateSQL(String SQL) {
+
+        if (SQL == null || SQL.trim().length() <= 0) {
+            System.out.println("SQL is empty!");
+        }
+        // System.out.println("SQL = " + SQL);
+
+        String result = "";
+
+        Connection con = null;
+        Statement statement = null;
+        int updateQuery = 0;
+
+        try {
+            Class.forName(SQL_DRV);
+            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+
+            statement = con.createStatement();
+            updateQuery = statement.executeUpdate(SQL);
+
+            if (updateQuery != 0) {
+                System.out.println("table is created successfully and " + updateQuery
+                        + " row is inserted.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                statement.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+
+
     /**
      * Executes a sql.
      *

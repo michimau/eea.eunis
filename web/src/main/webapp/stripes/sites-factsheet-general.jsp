@@ -266,7 +266,7 @@
         </div>
         <c:if test="${actionBean.typeCDDA}">
             <div>
-                <a href="http://protectedplanet.net/sites/${actionBean.factsheet.siteObject.idSite}">
+                <a href="http://www.protectedplanet.net/sites/${actionBean.factsheet.siteObject.idSite}">
                     <c:out value="${eunis:cmsPhrase(actionBean.contentManagement, 'Protected Planet')}"/>
                 </a>
             </div>

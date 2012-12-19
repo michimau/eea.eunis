@@ -859,7 +859,7 @@ public class SQLUtilities {
         // return false;
     }
 
-    public void closeAll(Connection con, PreparedStatement ps, ResultSet rs) {
+    public static void closeAll(Connection con, PreparedStatement ps, ResultSet rs) {
         try {
             if (rs != null) {
                 rs.close();
@@ -1417,4 +1417,5 @@ public class SQLUtilities {
             closeAll(con, ps, rs);
         }
     }
+
 }

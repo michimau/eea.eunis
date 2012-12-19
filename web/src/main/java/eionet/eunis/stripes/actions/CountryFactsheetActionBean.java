@@ -22,6 +22,12 @@
 package eionet.eunis.stripes.actions;
 
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -40,6 +46,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist;
+import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist;
 import ro.finsiel.eunis.jrfTables.sites.statistics.CountrySitesFactsheetDomain;
 import ro.finsiel.eunis.jrfTables.sites.statistics.CountrySitesFactsheetPersist;
@@ -115,13 +122,13 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
     public void beforeView() {
 
         // Ensure the tab is set.
-        if (tab == null){
+        if (tab == null) {
             tab = Tab.GENERAL.getDisplayName();
         }
 
         // Set the current tab from its friendly string representation.
         for (int i = 0; i < TABS.length; i++) {
-            if (TABS[i].getDisplayName().equals(tab)){
+            if (TABS[i].getDisplayName().equals(tab)) {
                 currTab = TABS[i];
                 break;
             }
@@ -139,19 +146,17 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
         }
 
         // Necessary assignments for the "general" and "desig-types" tabs.
-        if (currTab.equals(Tab.GENERAL)||currTab.equals(Tab.DESIG_TYPES) ) {
+        if (currTab.equals(Tab.GENERAL) || currTab.equals(Tab.DESIG_TYPES)) {
 
             populateStatisticsBean();
             countryRegions = CountryUtil.findRegionsFromCountry(country.getEunisAreaCode());
             isIndeedCountry = Utilities.isCountry(country.getAreaNameEnglish());
-         // Necessary assignments for the  "desig-types" tab.
+            // Necessary assignments for the "desig-types" tab.
             if (isIndeedCountry && currTab.equals(Tab.DESIG_TYPES)) {
                 loadDesignations();
             }
 
-
             loadCountrySitesFactsheets();
-
 
         }
     }
@@ -165,13 +170,13 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
         sql.append(" AREA_NAME_EN = '").append(country.getAreaNameEnglish()).append("'");
 
         boolean[] source =
-            {getContext().getRequest().getParameter("DB_NATURA2000") != null,
-            getContext().getRequest().getParameter("DB_CORINE") != null,
-            getContext().getRequest().getParameter("DB_DIPLOMA") != null,
-            getContext().getRequest().getParameter("DB_CDDA_NATIONAL") != null,
-            getContext().getRequest().getParameter("DB_CDDA_INTERNATIONAL") != null,
-            getContext().getRequest().getParameter("DB_BIOGENETIC") != null, false,
-            getContext().getRequest().getParameter("DB_EMERALD") != null};
+                {getContext().getRequest().getParameter("DB_NATURA2000") != null,
+                        getContext().getRequest().getParameter("DB_CORINE") != null,
+                        getContext().getRequest().getParameter("DB_DIPLOMA") != null,
+                        getContext().getRequest().getParameter("DB_CDDA_NATIONAL") != null,
+                        getContext().getRequest().getParameter("DB_CDDA_INTERNATIONAL") != null,
+                        getContext().getRequest().getParameter("DB_BIOGENETIC") != null, false,
+                        getContext().getRequest().getParameter("DB_EMERALD") != null};
 
         if (source[0] == false && source[1] == false && source[2] == false && source[3] == false && source[4] == false
                 && source[5] == false && source[6] == false && source[7] == false) {
@@ -186,7 +191,7 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
         }
 
         String[] db =
-            {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
+                {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
 
         sql = Utilities.getConditionForSourceDB(sql, source, db, "CHM62EDT_COUNTRY_SITES_FACTSHEET");
 
@@ -262,37 +267,174 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
+
+
     /**
      *
-     * @return
+     *
      */
     private void loadDesignations() {
 
-        String sql =
-                " SELECT DISTINCT A.ID_SITE FROM CHM62EDT_COUNTRY AS C "
-                        + " INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE AS B ON C.ID_GEOSCOPE = B.ID_GEOSCOPE "
-                        + " INNER JOIN CHM62EDT_SITES AS A ON B.ID_NATURE_OBJECT=A.ID_NATURE_OBJECT WHERE "
-                        + statisticsBean.prepareSQLForFindSites();
+        List noSitesA = new ArrayList<Long>();
+        List areaTotalA = new ArrayList<Long>();
+        List areaTotalOverlapA = new ArrayList<Long>();
+
+        Connection con = null;
 
         SQLUtilities sqlUtilities = getContext().getSqlUtilities();
-        List queryResultList = sqlUtilities.ExecuteSQLReturnList(sql, 1);
-        List siteIds = new ArrayList();
-        if (queryResultList != null && queryResultList.size() > 0) {
-            for (int i = 0; i < queryResultList.size(); i++) {
+        try {
 
-                siteIds.add(((TableColumns) queryResultList.get(i)).getColumnsValues().get(0));
+            con = sqlUtilities.getConnection();
+
+            populateDesignations(con, noSitesA, areaTotalA);
+            populateOverlaps(con, areaTotalOverlapA);
+
+            for (int j = 0; j < noSitesA.size(); j++) {
+
+                Vector values = new Vector();
+
+                if (noSitesA.get(j) != null || (Long) noSitesA.get(j) != 0) {
+                    values.addElement(noSitesA.get(j));
+                } else {
+                    values.addElement(new Long(0));
+                }
+                if (areaTotalA.get(j) != null || (Long) areaTotalA.get(j) != 0) {
+                    if (areaTotalOverlapA.get(j) != null || (Long) areaTotalOverlapA.get(j) != 0) {
+
+                        values.addElement(((Long) areaTotalA.get(j) - (Long) areaTotalOverlapA.get(j) < 0 ? new Long(0)
+                        : ((Long) areaTotalA.get(j) - (Long) areaTotalOverlapA.get(j))));
+                    } else {
+                        values.addElement((Long) areaTotalA.get(j));
+                    }
+                } else {
+                    values.addElement(new Long(0));
+                }
+
+                designationsValues.add(values);
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            SQLUtilities.closeAll(con, null, null);
+
         }
-        designations = statisticsBean.getDesignationsList(siteIds);
-        if (designations != null && !designations.isEmpty()) {
-            for (Iterator iter = designations.iterator(); iter.hasNext();) {
-                Chm62edtDesignationsPersist designation = (Chm62edtDesignationsPersist) iter.next();
-                designationsValues.add(statisticsBean.getValueForDesignations(siteIds, designation.getIdDesignation(),
-                        designation.getIdGeoscope(), sqlUtilities));
+
+    }
+
+    /**
+     * @param con Connection
+     * @param noSitesA List of 'Total number of sites'
+     * @param areaTotalA List of 'Total area(ha)'
+     * @throws SQLException
+     */
+    private void populateDesignations(Connection con, List noSitesA, List areaTotalA) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+
+            String sql =
+                    "SELECT DESIG.ID_DESIGNATION as DESIG_ID, "
+                            + " DESIG.ID_GEOSCOPE as GEO, "
+                            + " DESIG.DESCRIPTION_EN as TITLE, "
+                            + " count(distinct SITES.ID_SITE) as SITE_COUNT, "
+                            + " sum(SITES.AREA) as TOT_AREA , "
+                            + " DESIG.* "
+                            + " from "
+                            + " CHM62EDT_DESIGNATIONS as DESIG "
+                            + " inner join CHM62EDT_SITES as SITES on (DESIG.ID_DESIGNATION=SITES.ID_DESIGNATION and DESIG.ID_GEOSCOPE=SITES.ID_GEOSCOPE) "
+                            + " inner join CHM62EDT_NATURE_OBJECT_GEOSCOPE as GEO on (SITES.ID_NATURE_OBJECT=GEO.ID_NATURE_OBJECT) "
+                            + " inner join CHM62EDT_COUNTRY as CNTRY on (GEO.ID_GEOSCOPE = CNTRY.ID_GEOSCOPE) " + " where "
+                            + statisticsBean.prepareSQLForFindSites() + " group by " + "DESIG.ID_DESIGNATION, DESIG.ID_GEOSCOPE;";
+
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                noSitesA.add(rs.getLong("SITE_COUNT"));
+                areaTotalA.add(rs.getLong("TOT_AREA"));
+                Chm62edtDesignationsPersist persist = new Chm62edtDesignationsPersist();
+
+                persist.setDescriptionEn(rs.getString("TITLE"));
+                persist.setIdGeoscope(rs.getString("GEO"));
+                persist.setDescription(rs.getString("DESCRIPTION"));
+                persist.setNationalCategory(rs.getString("NATIONAL_CATEGORY"));
+                persist.setIdDc(rs.getInt("ID_DC"));
+                persist.setCddaSites(rs.getString("CDDA_SITES"));
+                persist.setOriginalDataSource(rs.getString("ORIGINAL_DATASOURCE"));
+                persist.setReferenceArea(rs.getBigDecimal("REFERENCE_AREA"));
+                persist.setNationalLaw(rs.getString("NATIONAL_LAW"));
+                persist.setNationalLawReference(rs.getString("NATIONAL_LAW_REFERENCE"));
+                persist.setNationalLawAgency(rs.getString("NATIONAL_LAW_AGENCY"));
+                persist.setDataSource(rs.getString("DATA_SOURCE"));
+                persist.setReferenceNumber(rs.getBigDecimal("REFERENCE_NUMBER"));
+                persist.setReferenceDate(rs.getString("REFERENCE_DATE"));
+                persist.setRemark(rs.getString("REMARK"));
+                persist.setRemarkSource(rs.getString("REMARK_SOURCE"));
+                persist.setTotalArea(rs.getBigDecimal("TOTAL_AREA"));
+                persist.setIdDesignation(rs.getString("DESIG_ID"));
+
+                if (designations == null) {
+                    designations = new ArrayList();
+                }
+                designations.add(persist);
+
             }
+        } finally {
+            SQLUtilities.closeAll(null, ps, rs);
         }
+    }
 
+    /**
+     * @param con Connection
+     * @param areaTotalOverlapA area total overlap list
+     * @throws SQLException
+     */
+    private void populateOverlaps(Connection con, List areaTotalOverlapA) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select OVERLAP from CHM62EDT_SITES_SITES WHERE OVERLAP > 0 LIMIT 1";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            boolean hasOverlaps = rs.next();
 
+            SQLUtilities.closeAll(null, ps, rs);
+            rs = null;
+            ps = null;
+
+            if (hasOverlaps) {
+
+                for (int i = 0; i < designations.size(); i++) {
+
+                    Chm62edtDesignationsPersist design = (Chm62edtDesignationsPersist) designations.get(i);
+
+                    sql =
+                            "select sum(gr.overlap) from "
+                                    + " (SELECT SITES_SITES.OVERLAP FROM "
+                                    + " CHM62EDT_DESIGNATIONS as DESIG "
+                                    + " INNER JOIN CHM62EDT_SITES AS SITES ON (SITES.ID_DESIGNATION=DESIG.ID_DESIGNATION and SITES.ID_GEOSCOPE = DESIG.ID_GEOSCOPE AND SITES.AREA>0) "
+                                    + " INNER JOIN CHM62EDT_NATURE_OBJECT_GEOSCOPE as GEO on (SITES.ID_NATURE_OBJECT=GEO.ID_NATURE_OBJECT) "
+                                    + " INNER JOIN CHM62EDT_COUNTRY as CNTRY on (GEO.ID_GEOSCOPE = CNTRY.ID_GEOSCOPE) "
+                                    + " INNER JOIN CHM62EDT_SITES_SITES AS SITES_SITES ON (SITES.ID_SITE = SITES_SITES.ID_SITE AND SITES_SITES.OVERLAP>0) "
+                                    + " INNER JOIN CHM62EDT_SITES AS SITES2 ON (SITES_SITES.ID_SITE_LINK = SITES2.ID_SITE AND SITES2.AREA>0) "
+                                    + " where DESIG.ID_DESIGNATION='" + design.getIdDesignation() + "' "
+                                    + " AND  DESIG.ID_GEOSCOPE = " + design.getIdGeoscope() + " AND "
+                                    + statisticsBean.prepareSQLForFindSites()
+                                    + " group by SITES.ID_SITE, SITES_SITES.ID_SITE_LINK, SITES_SITES.OVERLAP) as gr;";
+
+                    ps = con.prepareStatement(sql);
+                    rs = ps.executeQuery();
+
+                    if (rs != null && rs.next()) {
+                        areaTotalOverlapA.add(rs.getLong(1));
+                    }
+                }
+            } else {
+                areaTotalOverlapA.add((long) 0);
+            }
+        } finally {
+            SQLUtilities.closeAll(null, ps, rs);
+        }
     }
 
     /**
@@ -400,7 +542,6 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
         this.tab = tab;
     }
 
-
     /**
      * @author jaanus
      */
@@ -422,7 +563,7 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
          */
         Tab(String title) {
             this.title = title;
-            displayName = name().toLowerCase().replaceAll("_","");
+            displayName = name().toLowerCase().replaceAll("_", "");
         }
 
         /**
@@ -436,8 +577,9 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
          *
          * @return
          */
-        public String getDisplayName(){
+        public String getDisplayName() {
             return displayName;
         }
     }
+
 }

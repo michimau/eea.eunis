@@ -156,8 +156,7 @@
         <h2>
             <c:out value="${eunis:cmsPhrase(actionBean.contentManagement, 'Map of site')}"/>
         </h2>
-        <a href="javascript:void(0);" onclick="updateLayerVisibilityExt(document.getElementById('clc2006'));return false;"><strong>Add/remove Corine Landcover 2006 layer:</strong></a>
-
+        <label for="clc2006" style="font-weight:bold">Add/remove Corine Landcover 2006 layer:</label>
         <input type="checkbox" class="list_item" id="clc2006" onclick="updateLayerVisibility(this);"/>
         <div id="map" style="width:700px; height:500px; border:2px solid #050505;"></div>
     </c:if>

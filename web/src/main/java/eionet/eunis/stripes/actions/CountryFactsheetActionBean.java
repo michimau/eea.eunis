@@ -22,8 +22,6 @@
 package eionet.eunis.stripes.actions;
 
 import java.lang.reflect.InvocationTargetException;
-import java.math.BigDecimal;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,7 +44,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist;
 import ro.finsiel.eunis.jrfTables.sites.statistics.CountrySitesFactsheetDomain;
 import ro.finsiel.eunis.jrfTables.sites.statistics.CountrySitesFactsheetPersist;
@@ -54,7 +51,6 @@ import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.statistics.StatisticsBean;
 import ro.finsiel.eunis.utilities.SQLUtilities;
-import ro.finsiel.eunis.utilities.TableColumns;
 
 /**
  * Stripes action bean for a country factsheet.
@@ -170,13 +166,13 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
         sql.append(" AREA_NAME_EN = '").append(country.getAreaNameEnglish()).append("'");
 
         boolean[] source =
-                {getContext().getRequest().getParameter("DB_NATURA2000") != null,
-                        getContext().getRequest().getParameter("DB_CORINE") != null,
-                        getContext().getRequest().getParameter("DB_DIPLOMA") != null,
-                        getContext().getRequest().getParameter("DB_CDDA_NATIONAL") != null,
-                        getContext().getRequest().getParameter("DB_CDDA_INTERNATIONAL") != null,
-                        getContext().getRequest().getParameter("DB_BIOGENETIC") != null, false,
-                        getContext().getRequest().getParameter("DB_EMERALD") != null};
+            {getContext().getRequest().getParameter("DB_NATURA2000") != null,
+            getContext().getRequest().getParameter("DB_CORINE") != null,
+            getContext().getRequest().getParameter("DB_DIPLOMA") != null,
+            getContext().getRequest().getParameter("DB_CDDA_NATIONAL") != null,
+            getContext().getRequest().getParameter("DB_CDDA_INTERNATIONAL") != null,
+            getContext().getRequest().getParameter("DB_BIOGENETIC") != null, false,
+            getContext().getRequest().getParameter("DB_EMERALD") != null};
 
         if (source[0] == false && source[1] == false && source[2] == false && source[3] == false && source[4] == false
                 && source[5] == false && source[6] == false && source[7] == false) {
@@ -191,7 +187,7 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
         }
 
         String[] db =
-                {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
+            {"Natura2000", "Corine", "Diploma", "CDDA_National", "CDDA_International", "Biogenetic", "NatureNet", "Emerald"};
 
         sql = Utilities.getConditionForSourceDB(sql, source, db, "CHM62EDT_COUNTRY_SITES_FACTSHEET");
 
@@ -275,9 +271,9 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
      */
     private void loadDesignations() {
 
-        List noSitesA = new ArrayList<Long>();
-        List areaTotalA = new ArrayList<Long>();
-        List areaTotalOverlapA = new ArrayList<Long>();
+        ArrayList<Long> noSitesA = new ArrayList<Long>();
+        ArrayList<Long> areaTotalA = new ArrayList<Long>();
+        ArrayList<Long> areaTotalOverlapA = new ArrayList<Long>();
 
         Connection con = null;
 
@@ -293,18 +289,20 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
 
                 Vector values = new Vector();
 
-                if (noSitesA.get(j) != null || (Long) noSitesA.get(j) != 0) {
+                if (noSitesA.get(j).longValue() != 0) {
                     values.addElement(noSitesA.get(j));
                 } else {
                     values.addElement(new Long(0));
                 }
-                if (areaTotalA.get(j) != null || (Long) areaTotalA.get(j) != 0) {
-                    if (areaTotalOverlapA.get(j) != null || (Long) areaTotalOverlapA.get(j) != 0) {
 
-                        values.addElement(((Long) areaTotalA.get(j) - (Long) areaTotalOverlapA.get(j) < 0 ? new Long(0)
-                        : ((Long) areaTotalA.get(j) - (Long) areaTotalOverlapA.get(j))));
+                if (!areaTotalA.isEmpty() && areaTotalA.get(j).longValue() != 0) {
+
+                    if (!areaTotalOverlapA.isEmpty() && areaTotalOverlapA.get(j).longValue() != 0) {
+
+                        values.addElement((areaTotalA.get(j) - areaTotalOverlapA.get(j) < 0 ? new Long(0)
+                        : (areaTotalA.get(j) - areaTotalOverlapA.get(j))));
                     } else {
-                        values.addElement((Long) areaTotalA.get(j));
+                        values.addElement(areaTotalA.get(j));
                     }
                 } else {
                     values.addElement(new Long(0));
@@ -424,13 +422,8 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
 
                     ps = con.prepareStatement(sql);
                     rs = ps.executeQuery();
-
-                    if (rs != null && rs.next()) {
-                        areaTotalOverlapA.add(rs.getLong(1));
-                    }
+                    areaTotalOverlapA.add(rs.next() ? rs.getLong(1) : Long.valueOf(0));
                 }
-            } else {
-                areaTotalOverlapA.add((long) 0);
             }
         } finally {
             SQLUtilities.closeAll(null, ps, rs);

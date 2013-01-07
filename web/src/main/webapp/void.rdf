@@ -10,6 +10,13 @@
    <!-- This file is a listing of the RDF outputs supported by EUNIS
         See http://www.w3.org/TR/void/
     -->
+  <void:DatasetDescription rdf:about="">
+    <rdfs:label>About: VoID document for EUNIS</rdfs:label>
+    <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
+    <dcterms:creator rdf:resource="#EEA"/>
+    <rdfs:seeAlso rdf:resource="http://www.eionet.europa.eu/void.rdf"/>
+  </void:DatasetDescription>
+
   <foaf:Organization rdf:ID="EEA">
     <foaf:name>European Environment Agency</foaf:name>
     <foaf:homepage rdf:resource="http://www.eea.europa.eu/"/>
@@ -90,6 +97,7 @@
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:subject rdf:resource="http://dbpedia.org/resource/Habitat"/>
+    <dcterms:subject rdf:resource="http://www.eionet.europa.eu/gemet/concept/3808"/>
     <void:exampleResource rdf:resource="http://eunis.eea.europa.eu/eunishabitats/A1.112"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/eunishabitats.rdf.gz"/>
     <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
@@ -108,6 +116,7 @@
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:subject rdf:resource="http://dbpedia.org/resource/Habitat"/>
+    <dcterms:subject rdf:resource="http://www.eionet.europa.eu/gemet/concept/3808"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/habitats.rdf.gz"/>
     <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
@@ -124,6 +133,7 @@
     <dcterms:title>Legislation references from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
+    <dcterms:subject rdf:resource="http://www.eionet.europa.eu/gemet/concept/4746"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/legalrefs.rdf.gz"/>
     <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
@@ -148,6 +158,8 @@
     <dcterms:title>Sites from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
+    <dcterms:subject rdf:resource="http://www.eionet.europa.eu/gemet/concept/6740"/>
+    <dcterms:subject rdf:resource="http://www.eionet.europa.eu/gemet/concept/9382"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/sites.rdf.gz"/>
     <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
@@ -157,6 +169,7 @@
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:subject rdf:resource="http://dbpedia.org/resource/Species"/>
+    <dcterms:subject rdf:resource="http://www.eionet.europa.eu/gemet/concept/7982"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/species.rdf.gz"/>
     <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>
@@ -174,6 +187,7 @@
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:subject rdf:resource="http://dbpedia.org/resource/Taxonomic_rank"/>
+    <dcterms:subject rdf:resource="http://www.eionet.europa.eu/gemet/concept/8313"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/taxonomies.rdf.gz"/>
     <void:feature rdf:resource="http://www.w3.org/ns/formats/RDF_XML"/>
   </void:Dataset>

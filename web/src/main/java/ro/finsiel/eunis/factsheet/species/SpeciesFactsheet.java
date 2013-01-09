@@ -737,8 +737,17 @@ public class SpeciesFactsheet {
                         }
                     }
 
-                    results.addElement(legalStatus);
+                    if (results.size() == 0) {
+                        results.add(legalStatus);
+                    }
+
+                    if ((legalStatus.equals(results)) == false) {
+                        results.add(legalStatus);
+
+                    }
+                    
                 }
+
             }
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);
@@ -746,8 +755,11 @@ public class SpeciesFactsheet {
         if (null == results) {
             results = new Vector<LegalStatusWrapper>();
         }
+
         return results;
     }
+
+
 
     /**
      * Find information about legal area status.

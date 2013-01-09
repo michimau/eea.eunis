@@ -1,5 +1,7 @@
 package ro.finsiel.eunis.factsheet.species;
 
+import java.util.List;
+
 
 /**
  * Wrapper for legal information about species, used in species factsheet.
@@ -138,5 +140,49 @@ public class LegalStatusWrapper {
 
     public void setIdDc(Integer idDc) {
         this.idDc = idDc;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        LegalStatusWrapper obj2 = (LegalStatusWrapper) this;
+        List<LegalStatusWrapper> objects = (List<LegalStatusWrapper>) obj;
+        boolean status = false;
+        for (LegalStatusWrapper object : objects) {
+            if ((object.idDc.compareTo(obj2.idDc) == 0 && isStringsEquals(object.area, obj2.area)
+                    && isStringsEquals(object.comments, obj2.comments)
+                    && isStringsEquals(object.detailedReference, obj2.detailedReference)
+                    && isStringsEquals(object.legalText, obj2.legalText) && isStringsEquals(object.refcd, obj2.refcd)
+                    && isStringsEquals(object.reference, obj2.reference) && isStringsEquals(object.url, obj2.url))
+                    && !(isAllNull(obj2))) {
+
+                status = true;
+            }
+        }
+        return status;
+
+    }
+
+    private static boolean isStringsEquals(String str1, String str2) {
+        if (str1 == null && str2 == null) {
+            return true;
+        } else if ((str1 == null && str2 != null) || (str1 != null && str2 == null)) {
+            return false;
+        } else {
+            return str1.equals(str2);
+        }
+
+    }
+
+    private static boolean isAllNull(LegalStatusWrapper obj1) {
+        if (obj1.idDc == null && obj1.area == null && obj1.comments == null && obj1.detailedReference == null
+                && obj1.legalText == null && obj1.refcd == null && obj1.reference == null && obj1.url == null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

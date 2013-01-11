@@ -11,7 +11,7 @@ public class PostImportScriptsCmd {
      * @param args
      */
     public static void main(String[] args) {
-
+        System.out.println("argument" +args[0]);
         if (args.length == 0) {
             System.out.println("Missing argument!");
             System.out
@@ -37,12 +37,16 @@ public class PostImportScriptsCmd {
                     TabScripts scripts = new TabScripts();
                     scripts.Init(dbDriver, dbUrl, dbUser, dbPass, true);
                     if (args[0].equals("species_tab")) {
+                        System.out.println("* species_tab * ");
                         scripts.setTabSpecies();
                     } else if (args[0].equals("sites_tab")) {
+                        System.out.println("* sites_tab * ");
                         scripts.setTabSites();
                     } else if (args[0].equals("habitats_tab")) {
+                        System.out.println("* habitats_tab * ");
                         scripts.setTabHabitats();
                     } else if (args[0].equals("linkeddata_tab")) {
+                        System.out.println("* linkeddata_tab * ");
                         scripts.setSpeciesLinkedDataTab();
                     }
                 }

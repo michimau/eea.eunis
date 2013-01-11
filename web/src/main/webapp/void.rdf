@@ -54,9 +54,9 @@
     <void:vocabulary rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos"/>
     <void:vocabulary rdf:resource="http://rs.tdwg.org/dwc/terms/"/>
     <void:vocabulary rdf:resource="http://www.w3.org/2004/02/skos/core"/>
-    <void:vocabulary rdf:resource="http://creativecommons.org/ns#"/>
+    <void:vocabulary rdf:resource="http://creativecommons.org/ns"/>
     <void:vocabulary rdf:resource="http://purl.org/dc/terms/"/>
-    <void:vocabulary rdf:resource="http://eunis.eea.europa.eu/rdf/schema.rdf#"/>
+    <void:vocabulary rdf:resource="http://eunis.eea.europa.eu/rdf/schema.rdf"/>
   </void:Dataset>
 
   <void:Dataset rdf:ID="biogeoregions">
@@ -92,8 +92,8 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="eunishabitats">
-    <dcterms:title>EUNIS Habitat types from EUNIS</dcterms:title>
-    <dcterms:description>The EUNIS Habitat types classification is a comprehensive pan-European system to facilitate the harmonised description and collection of data across Europe through the use of criteria for habitat identification; it covers all types of habitats from natural to artificial, from terrestrial to freshwater and marine.</dcterms:description>
+    <dcterms:title>EUNIS Habitat types for the INSPIRE Directive Annex III no 18: Habitats and biotopes</dcterms:title>
+    <dcterms:description>EUNIS habitats types classification as reference for the INSPIRE Directive Annex III no 18: Habitats and biotopes</dcterms:description>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:subject rdf:resource="http://dbpedia.org/resource/Habitat"/>
@@ -113,6 +113,7 @@
 
   <void:Dataset rdf:ID="habitats">
     <dcterms:title>All habitat types from EUNIS</dcterms:title>
+    <dcterms:description>The EUNIS Habitat types classification is a comprehensive pan-European system to facilitate the harmonised description and collection of data across Europe through the use of criteria for habitat identification; it covers all types of habitats from natural to artificial, from terrestrial to freshwater and marine.</dcterms:description>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:subject rdf:resource="http://dbpedia.org/resource/Habitat"/>
@@ -175,7 +176,7 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="speciesgroup">
-    <dcterms:title>Species groups from EUNIS</dcterms:title>
+    <dcterms:title>Species groups from EUNIS (mammals, birds, etc.)</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <void:dataDump rdf:resource="http://eunis.eea.europa.eu/rdf/speciesgroup.rdf.gz"/>

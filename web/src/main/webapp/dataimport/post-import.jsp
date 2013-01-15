@@ -92,6 +92,10 @@
                                     <em>May take a long time to complete. It is recommended to also check "Run scripts in background" option</em>
                                 </label></td>
                             </tr>
+                            <tr>
+                                <td><input type="checkbox" id="linkeddataTab" name="linkeddataTab"/></td>
+                                <td><label for="linkeddataTab">Generate linked data tab information</label></td>
+                            </tr>
                         </table>
                 </fieldset>
                 <fieldset><legend>Fore-/background</legend>

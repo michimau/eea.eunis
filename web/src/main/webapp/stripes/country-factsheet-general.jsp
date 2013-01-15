@@ -21,10 +21,10 @@
                 ${eunis:formatString(actionBean.country.areaName,"&nbsp;")}
             </td>
             <th scope="row">
-                ${eunis:cmsPhrase(actionBean.contentManagement, "ISO Three Letter Code:")}
+                ${eunis:cmsPhrase(actionBean.contentManagement, "Capital:")}
             </th>
             <td>
-                ${eunis:formatString(actionBean.country.iso3l,"&nbsp;")}
+                ${eunis:formatString(actionBean.country.capital,"&nbsp;")}
             </td>
         </tr>
         <tr>
@@ -35,38 +35,24 @@
                 ${eunis:formatString(actionBean.country.areaNameEnglish,"&nbsp;")}
             </td>
             <th scope="row">
-                ${eunis:cmsPhrase(actionBean.contentManagement, "ISO Numeric Code:")}
-            </th>
-            <td>
-                ${eunis:formatString(actionBean.country.isoN,"&nbsp;")}
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">
-                ${eunis:cmsPhrase(actionBean.contentManagement, "French country name:")}
-            </th>
-            <td>
-                ${eunis:formatString(actionBean.country.areaNameFrench,"&nbsp;")}
-            </td>
-            <th scope="row">
-                ${eunis:cmsPhrase(actionBean.contentManagement, "Capital:")}
-            </th>
-            <td>
-                ${eunis:formatString(actionBean.country.capital,"&nbsp;")}
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">
-                ${eunis:cmsPhrase(actionBean.contentManagement, "EUNIS area code:")}
-            </th>
-            <td>
-                ${eunis:formatString(actionBean.country.eunisAreaCode,"&nbsp;")}
-            </td>
-            <th scope="row">
                 ${eunis:cmsPhrase(actionBean.contentManagement, "Surface(km2):")}
             </th>
             <td>
                 ${eunis:formatString(actionBean.country.surface,"&nbsp;")}
+            </td>
+	    </tr>
+        <tr>
+   		    <th scope="row">
+                ${eunis:cmsPhrase(actionBean.contentManagement, "ISO Three Letter Code:")}
+            </th>
+            <td>
+                ${eunis:formatString(actionBean.country.iso3l,"&nbsp;")}
+            </td>
+             <th scope="row">
+                ${eunis:cmsPhrase(actionBean.contentManagement, "Population number:")}
+            </th>
+            <td>
+                ${eunis:formatString(actionBean.country.population,"&nbsp;")}
             </td>
         </tr>
         <tr>
@@ -76,12 +62,13 @@
             <td>
                 ${eunis:formatString(actionBean.country.iso2l,"&nbsp;")}
             </td>
-            <th scope="row">
-                ${eunis:cmsPhrase(actionBean.contentManagement, "Population number:")}
+             <th scope="row">
+                ${eunis:cmsPhrase(actionBean.contentManagement, "Population density:")}
             </th>
             <td>
-                ${eunis:formatString(actionBean.country.population,"&nbsp;")}
+                ${eunis:formatString(actionBean.country.popDensity,"&nbsp;")}
             </td>
+
         </tr>
     </table>
 

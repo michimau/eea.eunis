@@ -279,80 +279,8 @@
                   		</table>
                   		<br/>
 				  	</c:if>
-				  	<c:choose>
-						<c:when test="${actionBean.showSites}">
-						  	<c:choose>
-								<c:when test="${!empty actionBean.sites}">
-							  		<h2>
-					                  	${eunis:cmsPhrase(actionBean.contentManagement, 'Related sites for this designation')}
-					                </h2>
-					                <c:if test="${!empty actionBean.siteIds}">
-					                	<form name="gis" action="sites-gis-tool.jsp" target="_blank" method="post">
-						                  	<input type="hidden" name="sites" value="${actionBean.siteIds}" />
-						                  	<input id="showMap" type="submit" title="${eunis:cms(actionBean.contentManagement, 'show_map')}" name="Show map" value="${eunis:cms(actionBean.contentManagement, 'show_map')}" class="submitSearchButton" />
-						                </form>
-					                </c:if>
-					                <table summary="${eunis:cms(actionBean.contentManagement, 'sites')}" class="listing fullwidth">
-			                  			<thead>
-			                    			<tr>
-			                      				<th scope="col">
-			                        				${eunis:cmsPhrase(actionBean.contentManagement, 'Site code (in source data set)')}
-			                      				</th>
-			                      				<th scope="col">
-			                        				${eunis:cmsPhrase(actionBean.contentManagement, 'Source data set')}
-			                      				</th>
-			                      				<th scope="col">
-			                        				${eunis:cmsPhrase(actionBean.contentManagement, 'Geographical coverage')}
-			                      				</th>
-			                      				<th scope="col">
-			                        				${eunis:cmsPhrase(actionBean.contentManagement, 'Site name')}
-			                      				</th>
-			                    			</tr>
-			                  			</thead>
-			                  			<tbody>
-			                  				<c:forEach items="${actionBean.sites }" var="site" varStatus="loop">
-			                  					<tr ${loop.index % 2 == 0 ? '' : 'class="zebraeven"'}>
-			                    					<td>
-			                      						${eunis:formatString(site.idSite, "")}
-			                    					</td>
-			                    					<td>
-				                      					${eunis:translateSourceDB(site.sourceDB)}
-			                    					</td>
-			                    					<td>
-			                      						${eunis:formatString(site.country, "")}
-			                    					</td>
-			                    					<td>
-			                      						<a href="sites/${site.idSite}">${eunis:formatString(site.name, "")}</a>
-			                    					</td>
-			                  					</tr>
-			                  				</c:forEach>
-			                  			</tbody>
-			                  		</table>
-						  		</c:when>
-						  		<c:otherwise>
-									<br />
-					                <strong>
-					                  	${eunis:cmsPhrase(actionBean.contentManagement, 'This designation has not related sites.')}
-					                </strong>
-								</c:otherwise>
-							</c:choose>
-						</c:when>
-				  		<c:otherwise>
-				  			<c:if test="${actionBean.hasSites}">
-								<a title="${eunis:cms(actionBean.contentManagement, 'show_sites_in_page')}" href="designations/${actionBean.idGeo}:${actionBean.idDesig}?showSites=true&amp;fromWhere=${actionBean.fromWhere}">
-									${eunis:cmsPhrase(actionBean.contentManagement, 'Show sites for this designation type')}
-								</a>
-								${eunis:cmsTitle(actionBean.contentManagement, 'show_sites_in_page')}
-	                			<br />
-	                			<br />
-	                			<strong>
-	                  				${eunis:cmsPhrase(actionBean.contentManagement, 'Warning: This might take a long time.')}
-	                			</strong>
-	                		</c:if>
-						</c:otherwise>
-					</c:choose>
 				</c:when>
-				<c:otherwise>
+ 				<c:otherwise>
 					<br />
                 	<br />
                 	<strong>

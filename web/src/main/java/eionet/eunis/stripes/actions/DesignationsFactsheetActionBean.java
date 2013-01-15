@@ -30,21 +30,15 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
 
     private String idGeo = "";
     private String idDesig = "";
-    private boolean showSites = false;
     private String fromWhere = "";
-
     private String btrail;
     private String pageTitle = "";
     private String metaDescription = "";
-
     private String fromWho = "";
     private String country = "";
     private boolean isCountry = false;
     private String cddacount = "";
     private DesignationDcObjectDTO reference;
-    private List<DesignationPersist> sites;
-    private String siteIds = "";
-    private boolean hasSites = false;
 
     private Chm62edtDesignationsPersist factsheet;
 
@@ -112,29 +106,9 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
                         cddacount = "No";
                     }
                 }
-                try {
+               try {
                     reference = DaoFactory.getDaoFactory().getReferncesDao().getDesignationDcObject(idDesig, idGeo);
 
-                    if (showSites) {
-                        sites = SitesSearchUtility.findSitesForDesignation(idDesig, idGeo);
-                        int maxSitesPerMap = Utilities.checkedStringToInt(
-                                getContext().getInitParameter(
-                                        "MAX_SITES_PER_MAP"),
-                                        2000);
-
-                        if (sites.size() < maxSitesPerMap) {
-                            for (int i = 0; i < sites.size(); i++) {
-                                DesignationPersist site = sites.get(i);
-
-                                siteIds += "'" + site.getIdSite() + "'";
-                                if (i < sites.size() - 1) {
-                                    siteIds += ",";
-                                }
-                            }
-                        }
-                    }
-
-                    hasSites = getContext().getSqlUtilities().DesignationHasSites(idDesig, idGeo);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -189,13 +163,6 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
         this.idDesig = idDesig;
     }
 
-    public boolean isShowSites() {
-        return showSites;
-    }
-
-    public void setShowSites(boolean showSites) {
-        this.showSites = showSites;
-    }
 
     public String getFromWhere() {
         return fromWhere;
@@ -225,17 +192,6 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
         return reference;
     }
 
-    public List<DesignationPersist> getSites() {
-        return sites;
-    }
-
-    public boolean isHasSites() {
-        return hasSites;
-    }
-
-    public String getSiteIds() {
-        return siteIds;
-    }
 
     public String getTab() {
         return tab;

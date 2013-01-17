@@ -8,9 +8,6 @@
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
-<%@page import="ro.finsiel.eunis.backtrail.BacktrailObject,
-                 ro.finsiel.eunis.backtrail.BacktrailUtil,
-                java.util.Vector"%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <%@ page import="ro.finsiel.eunis.search.Utilities"%>
  <%--
@@ -42,30 +39,9 @@ Input parameters  on REQUEST:
   {
     dynHeaderDownloadLink = null;
   }
-  // Get the backtrail from string (order of objects is preserved).
-  Vector backtrailObjects = BacktrailUtil.parseBacktrailString( dynHeaderLocation, cm );
+
+
 %>
-<%--
-  <div id="portal-breadcrumbs">
-<%
-  for (int i = 0; i < backtrailObjects.size(); i++)
-  {
-    out.print( "<span dir='ltr'>" );
-    BacktrailObject backtrailObject = ( BacktrailObject ) backtrailObjects.elementAt(i);
-    if( i < backtrailObjects.size() - 1 )
-    {
-      backtrailObject.setCssStyle( "breadcrumbitem" );
-    }
-    else
-    {
-      backtrailObject.setCssStyle( "breadcrumbitemlast" );
-    }
-    out.print( backtrailObject.toURLString() );
-    out.print( "</span>" );
-  }
-%>
-  </div>
---%>
 <%
   if (null != dynHeaderPrintLink || null != dynHeaderDownloadLink)
   {

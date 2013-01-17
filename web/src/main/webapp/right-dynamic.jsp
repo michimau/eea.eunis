@@ -8,9 +8,7 @@
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
-<%@page import="ro.finsiel.eunis.backtrail.BacktrailObject,
-                 ro.finsiel.eunis.backtrail.BacktrailUtil,
-                java.util.Vector"%>
+
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <%@ page import="ro.finsiel.eunis.search.Utilities"%>
  <%--
@@ -45,7 +43,7 @@ Input parameters  on REQUEST:
     dynHeaderDownloadLink = null;
   }
   // Get the backtrail from string (order of objects is preserved).
-  Vector backtrailObjects = BacktrailUtil.parseBacktrailString( dynHeaderLocation, cm );
+
 %>
 <%
   if (null != dynHeaderPrintLink || null != dynHeaderDownloadLink || null != dynHeaderHelpLink || null != dynHeaderGoogleLink)

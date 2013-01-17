@@ -2,9 +2,9 @@ package ro.finsiel.eunis.factsheet.species;
 
 import java.util.List;
 
-
 /**
  * Wrapper for legal information about species, used in species factsheet.
+ *
  * @author finsiel
  */
 public class LegalStatusWrapper {
@@ -20,10 +20,12 @@ public class LegalStatusWrapper {
     /**
      * Create a new LegalStatusWrapper object.
      */
-    public LegalStatusWrapper() {}
+    public LegalStatusWrapper() {
+    }
 
     /**
      * Getter for comments property.
+     *
      * @return comments.
      */
     public String getComments() {
@@ -32,7 +34,9 @@ public class LegalStatusWrapper {
 
     /**
      * Setter for comments property.
-     * @param comments New value
+     *
+     * @param comments
+     *            New value
      */
     public void setComments(String comments) {
         this.comments = comments;
@@ -40,6 +44,7 @@ public class LegalStatusWrapper {
 
     /**
      * Getter for legalText property.
+     *
      * @return legalText.
      */
     public String getLegalText() {
@@ -48,7 +53,9 @@ public class LegalStatusWrapper {
 
     /**
      * Setter for legalText property.
-     * @param legalText New value
+     *
+     * @param legalText
+     *            New value
      */
     public void setLegalText(String legalText) {
         this.legalText = legalText;
@@ -56,6 +63,7 @@ public class LegalStatusWrapper {
 
     /**
      * Getter for url property.
+     *
      * @return url.
      */
     public String getUrl() {
@@ -64,7 +72,9 @@ public class LegalStatusWrapper {
 
     /**
      * Setter for url property.
-     * @param url url.
+     *
+     * @param url
+     *            url.
      */
     public void setUrl(String url) {
         this.url = url;
@@ -72,6 +82,7 @@ public class LegalStatusWrapper {
 
     /**
      * Getter for reference property.
+     *
      * @return reference.
      */
     public String getReference() {
@@ -80,7 +91,9 @@ public class LegalStatusWrapper {
 
     /**
      * Setter for reference property.
-     * @param reference reference.
+     *
+     * @param reference
+     *            reference.
      */
     public void setReference(String reference) {
         this.reference = reference;
@@ -88,6 +101,7 @@ public class LegalStatusWrapper {
 
     /**
      * Getter for refcd property (reference code).
+     *
      * @return refcd.
      */
     public String getRefcd() {
@@ -96,7 +110,9 @@ public class LegalStatusWrapper {
 
     /**
      * Setter for reference code property.
-     * @param refcd refcd.
+     *
+     * @param refcd
+     *            refcd.
      */
     public void setRefcd(String refcd) {
         this.refcd = refcd;
@@ -104,6 +120,7 @@ public class LegalStatusWrapper {
 
     /**
      * Getter for detailedReference property.
+     *
      * @return detailedReference.
      */
     public String getDetailedReference() {
@@ -112,7 +129,9 @@ public class LegalStatusWrapper {
 
     /**
      * Setter for detailedReference property.
-     * @param detailedReference detailedReference.
+     *
+     * @param detailedReference
+     *            detailedReference.
      */
     public void setDetailedReference(String detailedReference) {
         this.detailedReference = detailedReference;
@@ -120,6 +139,7 @@ public class LegalStatusWrapper {
 
     /**
      * Getter for area property.
+     *
      * @return area.
      */
     public String getArea() {
@@ -128,7 +148,9 @@ public class LegalStatusWrapper {
 
     /**
      * Setter for area property.
-     * @param area area.
+     *
+     * @param area
+     *            area.
      */
     public void setArea(String area) {
         this.area = area;
@@ -144,20 +166,20 @@ public class LegalStatusWrapper {
 
     /*
      * (non-Javadoc)
+     *
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
     public boolean equals(Object obj) {
-        LegalStatusWrapper obj2 = (LegalStatusWrapper) this;
-        List<LegalStatusWrapper> objects = (List<LegalStatusWrapper>) obj;
         boolean status = false;
-        for (LegalStatusWrapper object : objects) {
-            if ((object.idDc.compareTo(obj2.idDc) == 0 && isStringsEquals(object.area, obj2.area)
-                    && isStringsEquals(object.comments, obj2.comments)
-                    && isStringsEquals(object.detailedReference, obj2.detailedReference)
-                    && isStringsEquals(object.legalText, obj2.legalText) && isStringsEquals(object.refcd, obj2.refcd)
-                    && isStringsEquals(object.reference, obj2.reference) && isStringsEquals(object.url, obj2.url))
-                    && !(isAllNull(obj2))) {
+
+        if ((obj instanceof LegalStatusWrapper) && (this instanceof LegalStatusWrapper)) {
+            LegalStatusWrapper object = (LegalStatusWrapper) obj;
+            if ((isIntegerEquals(object.idDc, this.idDc) && isStringsEquals(object.area, this.area)
+                    && isStringsEquals(object.comments, this.comments)
+                    && isStringsEquals(object.detailedReference, this.detailedReference)
+                    && isStringsEquals(object.legalText, this.legalText) && isStringsEquals(object.refcd, this.refcd)
+                    && isStringsEquals(object.reference, this.reference) && isStringsEquals(object.url, this.url))) {
 
                 status = true;
             }
@@ -177,12 +199,15 @@ public class LegalStatusWrapper {
 
     }
 
-    private static boolean isAllNull(LegalStatusWrapper obj1) {
-        if (obj1.idDc == null && obj1.area == null && obj1.comments == null && obj1.detailedReference == null
-                && obj1.legalText == null && obj1.refcd == null && obj1.reference == null && obj1.url == null) {
+    private static boolean isIntegerEquals(Integer i1, Integer i2) {
+        if (i1 == null && i2 == null) {
             return true;
-        } else {
+        } else if ((i1 == null && i2 != null) || (i1 != null && i2 == null)) {
             return false;
+        } else {
+            return i1.equals(i2);
         }
+
     }
+
 }

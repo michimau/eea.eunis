@@ -737,15 +737,10 @@ public class SpeciesFactsheet {
                         }
                     }
 
-                    if (results.size() == 0) {
+                    if (!results.contains(legalStatus)){
                         results.add(legalStatus);
                     }
 
-                    if ((legalStatus.equals(results)) == false) {
-                        results.add(legalStatus);
-
-                    }
-                    
                 }
 
             }

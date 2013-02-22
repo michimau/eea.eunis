@@ -180,7 +180,9 @@ public class ReferencesDomain implements Paginable {
         return results;
     }
 
-    public static List<PairDTO> getSpeciesForAReference(String idDc, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD) throws CriteriaMissingException {
+    public static List<PairDTO>
+            getSpeciesForAReference(String idDc, String SQL_DRV, String SQL_URL, String SQL_USR, String SQL_PWD)
+                    throws CriteriaMissingException {
         List<PairDTO> results = new ArrayList<PairDTO>();
         Connection con = null;
         PreparedStatement ps = null;
@@ -193,16 +195,17 @@ public class ReferencesDomain implements Paginable {
             con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
 
             // SQL = "(SELECT DISTINCT H.SCIENTIFIC_NAME  " +
-            SQL = "SELECT DISTINCT H.ID_SPECIES,H.SCIENTIFIC_NAME  "
-                + "FROM CHM62EDT_SPECIES H "
-                + "INNER JOIN CHM62EDT_REPORTS B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
-                + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
-                + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC " +
-                "WHERE 1=1 " + condition
-                + // Note: 'SPECIES_GEO' isn't used in chm62edt_report_type
-                " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') "
-                + " GROUP BY H.SCIENTIFIC_NAME "
-                + " ORDER BY SCIENTIFIC_NAME";
+            SQL =
+                    "SELECT DISTINCT H.ID_SPECIES,H.SCIENTIFIC_NAME,H.AUTHOR   "
+                            + "FROM CHM62EDT_SPECIES H "
+                            + "INNER JOIN CHM62EDT_REPORTS B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
+                            + "INNER JOIN CHM62EDT_REPORT_TYPE K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
+                            + "INNER JOIN DC_INDEX A ON B.ID_DC = A.ID_DC "
+                            + "WHERE 1=1 "
+                            + condition
+                            + // Note: 'SPECIES_GEO' isn't used in chm62edt_report_type
+                            " AND K.LOOKUP_TYPE IN ('DISTRIBUTION_STATUS','LANGUAGE','CONSERVATION_STATUS','SPECIES_GEO','LEGAL_STATUS','SPECIES_STATUS','POPULATION_UNIT','TREND') "
+                            + " GROUP BY H.SCIENTIFIC_NAME " + " ORDER BY SCIENTIFIC_NAME";
 
             ps = con.prepareStatement(SQL);
             rs = ps.executeQuery(SQL);
@@ -211,11 +214,21 @@ public class ReferencesDomain implements Paginable {
                 while (!rs.isLast()) {
                     rs.next();
                     // results.addElement(rs.getString(1));
-                    PairDTO dto = new PairDTO();
 
-                    dto.setKey(rs.getString(1));
-                    dto.setValue(rs.getString(2));
-                    results.add(dto);
+                    PairDTO pair = new PairDTO();
+                    pair.setKey(rs.getString(1));
+                    String name = rs.getString(2);
+                    String author = rs.getString(3);
+                    if (author == null || author.isEmpty()) {
+                        author = "";
+                    } else if (!(author.startsWith("(") && author.endsWith(")"))) {
+                        author = ", (" + author + ")";
+                    } else {
+                        author = ", " + author;
+                    }
+                    pair.setValue(name + author);
+
+                    results.add(pair);
                 }
             }
 

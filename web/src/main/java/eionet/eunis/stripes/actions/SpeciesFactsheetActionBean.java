@@ -354,7 +354,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 for (int i = 0; i < consStatus.size(); i++) {
                     NationalThreatWrapper threat = consStatus.get(i);
                     String statusDesc =
-                            factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode()).replaceAll("'", " ")
+                            factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode(), threat.getIdConsStatus()).replaceAll("'", " ")
                             .replaceAll("\"", " ");
 
                     threat.setStatusDesc(statusDesc);

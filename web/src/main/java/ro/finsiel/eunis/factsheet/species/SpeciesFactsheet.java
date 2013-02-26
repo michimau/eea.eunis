@@ -459,11 +459,14 @@ public class SpeciesFactsheet {
                 List list1 =
                         new Chm62edtConservationStatusDomain()
                 .findWhere("ID_CONSERVATION_STATUS = '" + report.getIDLookup() + "'");
+
+
                 List list2 =
                         new Chm62edtCountryDomain().findWhere("AREA_NAME_EN not like 'ospar%' and ID_GEOSCOPE='"
                                 + report.getIdGeoscope() + "'");
 
                 if (list1.size() > 0 && list2.size() > 0) {
+
                     Chm62edtConservationStatusPersist consS = (Chm62edtConservationStatusPersist) list1.get(0);
 
                     threat.setStatus(consS.getName());
@@ -471,16 +474,46 @@ public class SpeciesFactsheet {
 
                     if (country.getIso2l() == null || (country.getIso2l() != null && country.getIso2l().equals(""))) {
                         if (!(country.getAreaNameEnglish() == null || country.getAreaNameEnglish().trim().indexOf("ospar") == 0)) {
-                            threat.setCountry(country.getAreaNameEnglish());
+
+
+                            String IntThrCode = consS.getCode();; //"International threat code" in table "CHM62EDT_CONSERVATION_STATUS"
+                            Integer idConsStatus = consS.getIdConsStatus();
                             String author = report.getSource();
+                            int year = Utilities.checkedStringToInt(report.getCreated(), 0);
+                            if(consS.getIdConsStatusLink() != 0 && !consS.getSource().toUpperCase().contains("IUCN")){
+
+                                List list3 =
+                                        new Chm62edtConservationStatusDomain()
+                                .findWhere("ID_CONSERVATION_STATUS = '"+consS.getIdConsStatusLink()+"'");
+                                 Chm62edtConservationStatusPersist  consS2 = (Chm62edtConservationStatusPersist) list3.get(0);
+                                 if(consS2.getSource().toUpperCase().contains("IUCN")){
+                                     IntThrCode = consS2.getCode();
+                                     idConsStatus =  consS2.getIdConsStatus();
+                                     author = consS2.getSource();
+                                 }
+                                 else if(!consS2.getSource().toUpperCase().contains("IUCN")){
+//                                   author = "";
+                                     IntThrCode = "";
+                                     idConsStatus = 0;
+                                 }
+                           }
+                            else if(consS.getIdConsStatusLink() == 0 && !consS.getSource().toUpperCase().contains("IUCN")){
+//                                author = "";
+                                IntThrCode = "";
+                                idConsStatus = 0;
+//                                year=0;
+                            }
+                            threat.setCountry(country.getAreaNameEnglish());
+
                             String dateStr = Utilities.formatReferencesYear(report.getCreated());
                             if (!dateStr.equalsIgnoreCase("")) {
                                 author += " (" + dateStr + ")";
                             }
-                            int year = Utilities.checkedStringToInt(report.getCreated(), 0);
+
                             threat.setReference(author);
                             threat.setSelection(country.getSelection());
-                            threat.setThreatCode(consS.getCode());
+                            threat.setThreatCode(IntThrCode);
+                            threat.setIdConsStatus(idConsStatus);
                             threat.setIdDc(report.getIdDc());
                             threat.setReferenceYear(year);
                             results.addElement(threat);
@@ -1759,13 +1792,16 @@ public class SpeciesFactsheet {
      * @param code Conservation code
      * @return Description
      */
-    public String getConservationStatusDescriptionByCode(String code) {
+    public String getConservationStatusDescriptionByCode(String code, Integer id) {
         if (code == null || code.trim().equals("")) {
             return "";
         }
         String result = "";
-        List conservations = new Chm62edtConservationStatusDomain().findWhere("CODE = '" + code + "'");
-
+        String idS="";
+        if(id!=null && id != 0){
+            idS = " AND ID_CONSERVATION_STATUS = '"+id+"'";
+        }
+        List conservations = new Chm62edtConservationStatusDomain().findWhere("CODE = '" + code + "'"+idS);
         if (conservations != null && conservations.size() > 0) {
             result = ((Chm62edtConservationStatusPersist) conservations.get(0)).getDescription();
         }

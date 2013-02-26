@@ -7,6 +7,8 @@ import net.sf.jrf.column.columnspecs.DateColumnSpec;
 import net.sf.jrf.column.columnoptions.NullableColumnOption;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
+import net.sf.jrf.join.JoinTable;
+import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 import java.util.List;
 
@@ -57,6 +59,12 @@ public class Chm62edtConservationStatusDomain extends AbstractDomain {
         this.addColumnSpec(
                 new IntegerColumnSpec("ID_DC", "getIdDc", "setIdDc",
                 DEFAULT_TO_NULL));
+
+    JoinTable dcIndex = new JoinTable("DC_INDEX", "ID_DC", "ID_DC");
+
+    dcIndex.addJoinColumn(new StringJoinColumn("SOURCE", "source", "setSource"));
+    this.addJoinTable(dcIndex);
+
     }
 
     /**

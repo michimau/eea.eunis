@@ -14,7 +14,8 @@ public class NationalThreatWrapper {
     private String threatCode = "";
     private int referenceYear = 0;
     private Integer idDc;
-  
+    private Integer idConsStatus = 0;
+
     // Additional field for species factsheet
     private String statusDesc = "";
 
@@ -173,6 +174,14 @@ public class NationalThreatWrapper {
 
     public void setStatusDesc(String statusDesc) {
         this.statusDesc = statusDesc;
+    }
+
+    public Integer getIdConsStatus() {
+        return idConsStatus;
+    }
+
+    public void setIdConsStatus(Integer idConsStatus) {
+        this.idConsStatus = idConsStatus;
     }
 
 }

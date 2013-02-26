@@ -18,6 +18,16 @@ public class Chm62edtConservationStatusPersist extends PersistentObject {
     private String name = null;
     private Date i_redBookDate = null;
     private Integer i_idConsStatusLink = null;
+    private String source= null;
+
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
 
     /**
      * Creates an new Chm62edtConservationStatusPersist object.

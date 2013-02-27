@@ -480,18 +480,18 @@ public class SpeciesFactsheet {
                             Integer idConsStatus = consS.getIdConsStatus();
                             String author = report.getSource();
                             int year = Utilities.checkedStringToInt(report.getCreated(), 0);
-                            if(consS.getIdConsStatusLink() != 0 && !consS.getSource().toUpperCase().contains("IUCN")){
+                            if(consS.getIdConsStatusLink() != 0 && consS.getSource() != null && !consS.getSource().toUpperCase().contains("IUCN")){
 
                                 List list3 =
                                         new Chm62edtConservationStatusDomain()
                                 .findWhere("ID_CONSERVATION_STATUS = '"+consS.getIdConsStatusLink()+"'");
                                  Chm62edtConservationStatusPersist  consS2 = (Chm62edtConservationStatusPersist) list3.get(0);
-                                 if(consS2.getSource().toUpperCase().contains("IUCN")){
+                                 if(consS2.getSource() != null && consS2.getSource().toUpperCase().contains("IUCN")){
                                      IntThrCode = consS2.getCode();
                                      idConsStatus =  consS2.getIdConsStatus();
                                      author = consS2.getSource();
                                  }
-                                 else if(!consS2.getSource().toUpperCase().contains("IUCN")){
+                                 else if(consS2.getSource() != null && !consS2.getSource().toUpperCase().contains("IUCN")){
 //                                   author = "";
                                      IntThrCode = "";
                                      idConsStatus = 0;

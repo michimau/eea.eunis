@@ -5,7 +5,7 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">n2000birds n2000other nutscodes</entry>
+  <entry key="queries">n2000birds n2000other nutscodes estatcodes</entry>
 
 <!-- -->
 <!-- N2000 birds query -->
@@ -57,6 +57,7 @@ LEFT JOIN chm62edt_nature_object_attributes AS c ON s.ID_NATURE_OBJECT=c.ID_NATU
 WHERE ID_GROUP_SPECIES<>5 ORDER BY a.OBJECT
 ]]></entry>
 
+
   <entry key="nutscodes.querytype">SPARQL</entry>
   <entry key="nutscodes.endpoint">http://semantic.eea.europa.eu/sparql</entry>
   <entry key="nutscodes.title">NUTS regions (including historic codes)</entry>
@@ -75,4 +76,32 @@ WHERE {
    OPTIONAL {?region ramon:enddate ?valid_to }
 } ORDER BY ?code
 ]]></entry>
+
+
+  <entry key="estatcodes.querytype">SPARQL</entry>
+  <entry key="estatcodes.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+  <entry key="estatcodes.title">Eurostat species code list with EUNIS species matches</entry>
+  <entry key="estatcodes.summary">The Eurostat species code list is primarily used for fishery statistics.
+The 3-alpha identifier is a unique code made of three letters that is widely used for the exchange of data with national correspondents and among fishery agencies.</entry>
+  <entry key="estatcodes..query"><![CDATA[
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ramon: <http://rdfdata.eionet.europa.eu/ramon/ontology/>
+PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+PREFIX dwc: <http://rs.tdwg.org/dwc/terms/>
+
+SELECT DISTINCT ?identifier ?label ?scientific_name ?eunisurl
+WHERE {
+  ?estatspecies skos:inScheme <http://rdfdata.eionet.europa.eu/eurostat/dic/species>;
+          a skos:Concept;
+            rdfs:label ?label;
+            skos:notation ?identifier .
+  OPTIONAL {
+    ?eunisurl e:sameSynonym ?estatspecies ;
+              dwc:scientificName ?scientific_name
+  }
+} ORDER BY ?identifier
+]]></entry>
+
+
 </properties>

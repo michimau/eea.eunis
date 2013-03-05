@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>Linked data queries for global queries</comment>
+<!-- -->
+<!-- The list of queries in this file. Separated by whitespace. -->
+<!-- -->
+  <entry key="queries">n2000birds n2000other nutscodes</entry>
+
+<!-- -->
+<!-- N2000 birds query -->
+<!-- -->
+  <entry key="n2000birds.querytype">SQL</entry>
+  <entry key="n2000birds.title">Natura 2000 codelist for bird species (SDF fields 3.2, 3.3)</entry>
+  <entry key="n2000birds.summary"><![CDATA[Codelist for bird species under Directive 2009/147/EC.
+In connection with the work on the checklist for reporting under Article 12 of the Birds Directive, the coding for Bird species has been extended. The Habitats Committee has been informed on the extended list (Meeting 25. Sept. 2011). This extended codelist is also available as reference table in the Natura 2000 database.
+]]></entry>
+
+<!-- Links are defined as {queryId}.link.{labelColumn}={linkColumn} -->
+<!-- If the label column in query is bound to ?filetitle and link itself to ?file -->
+<!-- then the property should be defined as: {queryId}.link.filetitle = file -->
+<!-- This will produce <a href="file">filetitle</a> in result row -->
+  <entry key="n2000birds.column.N2000CODE">N2000 Code</entry>
+  <entry key="n2000birds.link.SCIENTIFIC_NAME">FACTSHEET</entry>
+  <entry key="n2000birds.column.SCIENTIFIC_NAME">Species name</entry>
+  <entry key="n2000birds.column.AUTHOR">Author</entry>
+  <entry key="n2000birds.column.COMMENT">Comment</entry>
+
+  <entry key="sites.query"><![CDATA[
+SELECT a.OBJECT AS N2000CODE, SCIENTIFIC_NAME, AUTHOR, CONCAT('/species/',ID_SPECIES) AS FACTSHEET, c.OBJECT AS COMMENT
+FROM chm62edt_species AS s
+JOIN chm62edt_nature_object_attributes AS a ON s.ID_NATURE_OBJECT=a.ID_NATURE_OBJECT AND a.NAME="sameSynonymN2000"
+LEFT JOIN chm62edt_nature_object_attributes AS c ON s.ID_NATURE_OBJECT=c.ID_NATURE_OBJECT AND c.NAME="_n2000CodeComment"
+WHERE ID_GROUP_SPECIES=5 ORDER BY a.OBJECT
+]]></entry>
+
+
+<!-- -->
+<!-- N2000 other species query -->
+<!-- -->
+  <entry key="n2000other.querytype">SQL</entry>
+  <entry key="n2000other.title">Natura 2000 codelist for species (Annex II,IV,V) (SDF fields 3.2, 3.3)</entry>
+  <entry key="n2000other.summary"><![CDATA[In connection with the work on the checklist for reporting under Article 17 Habitats Directive, the coding for species has been extended. The Habitats Committee has been informed on the extended list (Meeting 26. April 2012). This codelist is also available as reference table in the Natura 2000 database.
+]]></entry>
+
+  <entry key="n2000other.column.N2000CODE">N2000 Code</entry>
+  <entry key="n2000other.link.SCIENTIFIC_NAME">FACTSHEET</entry>
+  <entry key="n2000other.column.SCIENTIFIC_NAME">Species name</entry>
+  <entry key="n2000other.column.AUTHOR">Author</entry>
+  <entry key="n2000other.column.COMMENT">Comment</entry>
+
+  <entry key="sites.query"><![CDATA[
+SELECT a.OBJECT AS N2000CODE, SCIENTIFIC_NAME, AUTHOR, CONCAT('/species/',ID_SPECIES) AS FACTSHEET, c.OBJECT AS COMMENT
+FROM chm62edt_species AS s
+JOIN chm62edt_nature_object_attributes AS a ON s.ID_NATURE_OBJECT=a.ID_NATURE_OBJECT AND a.NAME="sameSynonymN2000"
+LEFT JOIN chm62edt_nature_object_attributes AS c ON s.ID_NATURE_OBJECT=c.ID_NATURE_OBJECT AND c.NAME="_n2000CodeComment"
+WHERE ID_GROUP_SPECIES<>5 ORDER BY a.OBJECT
+]]></entry>
+
+  <entry key="nutscodes.querytype">SPARQL</entry>
+  <entry key="nutscodes.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+  <entry key="nutscodes.title">NUTS regions (including historic codes)</entry>
+  <entry key="nutscodes.summary">This is a list of NUTS codes queried as external data from EEA's Semantic Data Service.</entry>
+  <entry key="nutscodes..query"><![CDATA[
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ramon: <http://rdfdata.eionet.europa.eu/ramon/ontology/>
+
+SELECT DISTINCT ?code ?name ?valid_from ?valid_to
+WHERE {
+  ?region a ramon:NUTSRegion;
+            rdfs:label ?name;
+            ramon:code ?code
+   OPTIONAL {?region ramon:startdate ?valid_from }
+   OPTIONAL {?region ramon:enddate ?valid_to }
+} ORDER BY ?code
+]]></entry>
+</properties>

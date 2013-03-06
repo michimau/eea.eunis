@@ -5,71 +5,79 @@
 	<script type="text/javascript">
 	//<![CDATA[
 		dojo.require("esri.map");
+		dojo.require("esri.tasks.geometry");
 
 		var layer_dist, layer_range, map, n2000layer, cddalayer;
 		function init() {
 
-			var initExtent =  new esri.geometry.Extent({"xmin":-15.03125,"ymin":40.015625,"xmax":40.03125,"ymax":60.015625,"spatialReference":{"wkid":4326}});
+			var initExtent =  new esri.geometry.Extent({"xmin":-3222779.52198856,"ymin": 2736409.05279762,"xmax":7105006.15070147,"ymax": 11615622.1895779,"spatialReference":{"wkid":3857}})
+
 			map = new esri.Map("map",{extent:initExtent});
-			map.addLayer(new esri.layers.ArcGISDynamicMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"));
+		    map.addLayer(new esri.virtualearth.VETiledLayer({
+		          bingMapsKey: 'AgnYuBP56hftjLZf07GVhxQrm61_oH1Gkw2F1H5_NSWjyN5s1LKylQ1S3kMDTHb_',
+		          mapStyle: esri.virtualearth.VETiledLayer.MAP_STYLE_ROAD}));
 
-			n2000layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000_Dyna_WM/MapServer");
-			cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/CDDA_Dyna_WGS84/MapServer");
+			n2000layer = new esri.layers.GraphicsLayer();
 
-			// Distribution layer
-			var imageParameters_dist = new esri.layers.ImageParameters();
-			var layerDefs_dist = [];
-			layerDefs_dist[0] = "Type = 'habitat' and Code = '${actionBean.factsheet.code2000}'";
-			imageParameters_dist.layerDefinitions = layerDefs_dist;
-			imageParameters_dist.layerIds = [0];
-			imageParameters_dist.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
-			imageParameters_dist.transparent = true;
-			layer_dist = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_dist});
+			filterNatura2000('${actionBean.factsheet.code2000}');
+
+		    cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/CDDA_Dyna_WGS84/MapServer");
+
+		    // Distribution layer
+		    var imageParameters_dist = new esri.layers.ImageParameters();
+		    var layerDefs_dist = [];
+		    layerDefs_dist[4] = "Type = 'habitat' and Code = '${actionBean.factsheet.code2000}'";
+		    imageParameters_dist.layerDefinitions = layerDefs_dist;
+		    imageParameters_dist.layerIds = [4];
+		    imageParameters_dist.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
+		    imageParameters_dist.transparent = true;
+		    layer_dist = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_dist});
 
 			// Species Range layer
 			var imageParameters_range = new esri.layers.ImageParameters();
 			var layerDefs_range = [];
 			layerDefs_range[1] = "Type = 'habitat' and Code = '${actionBean.factsheet.code2000}'";
 			imageParameters_range.layerDefinitions = layerDefs_range;
-			imageParameters_range.layerIds = [1];
-			imageParameters_range.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
-			imageParameters_range.transparent = true;
-			layer_range = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_range});
+		    imageParameters_range.layerIds = [1];
+		    imageParameters_range.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
+		    imageParameters_range.transparent = true;
+		    layer_range = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_range});
 
 			map.addLayer(layer_dist);
 			initLayers();
       	}
 
 		function initLayers() {
+
 			var query = new esri.tasks.Query();
-			query.where = "Type = 'habitat' and Code = '${actionBean.factsheet.code2000}'";
+		    query.where = "Type = 'habitat' and Code = '${actionBean.factsheet.code2000}'";
 
-			// distribution layer
-			var queryTask = new esri.tasks.QueryTask("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer/0");
-			queryTask.execute(query, showResults);
+		    // distribution layer
+		    var queryTask = new esri.tasks.QueryTask("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer/4");
+		    queryTask.execute(query, showResults);
 
-			// range layer
-			queryTask = new esri.tasks.QueryTask("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer/1");
-			queryTask.execute(query, showResults);
+		    // range layer
+		    queryTask = new esri.tasks.QueryTask("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer/1");
+		    queryTask.execute(query, showResults);
 		}
 
-		var layersWithData = [];
-		var processedLayers = 0;
-		function showResults(results) {
-			if (results.features.length > 0) {
-				if (processedLayers == 0) {
-					layersWithData.push('distribution');
-				} else if (processedLayers == 1) {
-					layersWithData.push('range');
-				}
-			}
-			if (processedLayers == 1) {
-				layersWithData.push('natura');
-				layersWithData.push('cdda');
-				genList();
-			}
-			processedLayers++;
-		}
+	    var layersWithData = [];
+	    var processedLayers = 0;
+	    function showResults(results) {
+	      if (results.features.length > 0) {
+	        if (processedLayers == 0) {
+	          layersWithData.push('distribution');
+	        } else if (processedLayers == 1) {
+	          layersWithData.push('range');
+	        }
+	      }
+	      if (processedLayers == 1) {
+	        layersWithData.push('natura');
+	        layersWithData.push('cdda');
+	        genList();
+	      }
+	      processedLayers++;
+	    }
 
 		function genList() {
  			var nameList = {
@@ -135,6 +143,52 @@
 				}
 			}
 		}
+
+		function filterNatura2000(habitatcode){
+	        //build query task
+	        var queryTask = new esri.tasks.QueryTask("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000_Dyna_WM/MapServer/12");
+
+	        //build query filter
+	        var query = new esri.tasks.Query();
+	        query.returnGeometry = false;
+	        query.outFields = ["SITECODE"];
+	        query.where = "HABITATCODE  = '" + habitatcode + "'";
+	        //Can listen for onComplete event to process results or can use the callback option in the queryTask.execute method.
+	        dojo.connect(queryTask, "onComplete", function(featureSet) {
+	            var i,j,chunk = 70;
+	            for (i=0,j=featureSet.features.length; i<j; i+=chunk) {
+	                addGraphics(featureSet.features.slice(i,i+chunk));
+	            }
+
+	        });
+	        queryTask.execute(query);
+	    }
+
+	    var sfs = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,
+	                new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_NULL, new dojo.Color([255,0,0]), 2),
+	                new dojo.Color([255,0,0,0.75]));
+
+	    function addGraphics(habitatcodes){
+	        var ArrayhabitatsCode = new Array();
+	        for (var i = 0; i < habitatcodes.length; i++){
+	            ArrayhabitatsCode.push(habitatcodes[i].attributes.SITECODE);
+	        }
+	        //build query task
+	        var queryTask = new esri.tasks.QueryTask("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000_Dyna_WM/MapServer/0");
+
+	        //build query filter
+	        var query = new esri.tasks.Query();
+	        query.returnGeometry = true;
+	        query.outFields = ["SITECODE", "SITENAME"];
+	        query.where = "SITECODE  IN (" + "'" + ArrayhabitatsCode.join("','") + "')";
+	        //Can listen for onComplete event to process results or can use the callback option in the queryTask.execute method.
+	        dojo.connect(queryTask, "onComplete", function(featureSet) {
+	            dojo.forEach(featureSet.features, function(feature){
+	                n2000layer.add(new esri.Graphic(feature.geometry, sfs, feature.attributes, new esri.InfoTemplate("Natura 2000 site", "<span style='font-weight:bold'>Site code</span>: ${SITECODE}<br><span style='font-weight:bold'>Site name</span>: ${SITENAME}")));
+	            });
+	        });
+	        queryTask.execute(query);
+	    }
 
       	dojo.addOnLoad(init);
 	//]]>

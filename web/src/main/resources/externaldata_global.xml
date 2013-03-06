@@ -104,4 +104,29 @@ WHERE {
 ]]></entry>
 
 
+  <entry key="estatcodes.querytype">SPARQL</entry>
+  <entry key="estatcodes.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="estatcodes.title">Species with Habitats or Birds directive derogations</entry>
+  <entry key="estatcodes.summary">Any species mentioned on a derogation form</entry>
+  <entry key="estatcodes..query"><![CDATA[
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX h: <http://rdfdata.eionet.europa.eu/habdir/ontology/> 
+PREFIX dwc: <http://rs.tdwg.org/dwc/terms/>
+
+SELECT ?species ?speciesurl sql:GROUP_CONCAT(?country, ', ') AS ?countries
+WHERE {
+  {SELECT DISTINCT ?speciesurl ?country
+  WHERE { 
+    ?subj h:forSpecies ?speciesurl; 
+          h:countryRef ?countryurl. 
+    ?countryurl rdfs:label ?country
+  }}
+
+  ?speciesurl dwc:scientificName ?species
+}
+GROUP BY ?species ?speciesurl
+ORDER BY ?species
+]]></entry>
+
+
 </properties>

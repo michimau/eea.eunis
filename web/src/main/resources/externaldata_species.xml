@@ -35,41 +35,41 @@
 <!-- Query -->
 <!-- [IDENTIFIER] is replaced with actual species ID before query will be executed -->
   <entry key="deliveries.query"><![CDATA[
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX dc: <http://purl.org/dc/elements/1.1/> 
-PREFIX dct: <http://purl.org/dc/terms/> 
-PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
-PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#>
 
-SELECT DISTINCT xsd:date(?released) AS ?released ?coverage ?envelope ?envtitle 
-IRI(bif:concat(?sourcefile,'/manage_document')) AS ?file ?filetitle 
-WHERE { 
-	GRAPH ?sourcefile { 
-		_:reference ?pred <http://eunis.eea.europa.eu/species/[IDENTIFIER]> . 
-		OPTIONAL { 
-			_:reference rdfs:label ?label 
-		} 
-	} 
-	?envelope rod:hasFile ?sourcefile; 
-	rod:released ?released; 
-	rod:locality _:locurl; 
-	dc:title ?envtitle . 
-	_:locurl rdfs:label ?coverage . 
-	?sourcefile dc:title ?filetitle 
+SELECT DISTINCT xsd:date(?released) AS ?released ?coverage ?envelope ?envtitle
+IRI(bif:concat(?sourcefile,'/manage_document')) AS ?file ?filetitle
+WHERE {
+	GRAPH ?sourcefile {
+		_:reference ?pred <http://eunis.eea.europa.eu/species/[IDENTIFIER]> .
+		OPTIONAL {
+			_:reference rdfs:label ?label
+		}
+	}
+	?envelope rod:hasFile ?sourcefile;
+	rod:released ?released;
+	rod:locality _:locurl;
+	dc:title ?envtitle .
+	_:locurl rdfs:label ?coverage .
+	?sourcefile dc:title ?filetitle
 } ORDER BY DESC(?released)
 ]]></entry>
 
 <!-- Returns a list of species codes where the above query will return something -->
   <entry key="deliveries.codes"><![CDATA[
-PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
-PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> 
+PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#>
 
-SELECT DISTINCT ?speciescode 
-WHERE { 
- {    ?reference <http://rdfdata.eionet.europa.eu/habdir/ontology/forSpecies> ?speciesurl } 
- UNION 
- {    ?reference <http://rdfdata.eionet.europa.eu/habdir/article17/forSpecies> ?speciesurl } 
- ?speciesurl e:speciesCode ?speciescode 
+SELECT DISTINCT ?speciescode
+WHERE {
+ {    ?reference <http://rdfdata.eionet.europa.eu/habdir/ontology/forSpecies> ?speciesurl }
+ UNION
+ {    ?reference <http://rdfdata.eionet.europa.eu/habdir/article17/forSpecies> ?speciesurl }
+ ?speciesurl e:speciesCode ?speciescode
 }
 ]]></entry>
 
@@ -80,9 +80,9 @@ WHERE {
   <entry key="art17ranges.endpoint">http://cr.eionet.europa.eu/sparql</entry>
   <entry key="art17ranges.title">Ranges for this species reported under Article 17, Habitats Directive</entry>
 <!-- .summary - use HTML format - i.e. escape & and < -->
-  <entry key="art17ranges.summary"><![CDATA[Assessments on the conservation status of the habitat types 
-   and species of Community interest have been carried out in EU 25 for the period 2001-2006, 
-   compiled as part of the Habitats Directive - Article 17 reporting process. 
+  <entry key="art17ranges.summary"><![CDATA[Assessments on the conservation status of the habitat types
+   and species of Community interest have been carried out in EU 25 for the period 2001-2006,
+   compiled as part of the Habitats Directive - Article 17 reporting process.
    The data summary sheet for species conservation status provides an overview per biogeographical region.]]></entry>
   <entry key="art17ranges.column.pc_rsa">Percent</entry>
   <entry key="art17ranges.column.surfacerange">Surface of range</entry>
@@ -90,41 +90,41 @@ WHERE {
   <entry key="art17ranges.column.country">Country</entry>
   <entry key="art17ranges.column.range">Range reference</entry>
   <entry key="art17ranges.query"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/> 
-PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/> 
-PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/> 
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
 
-SELECT ?country ?region ?surfacerange "2001-2006" AS ?period ?pc_rsa ?conclusion ?trend 
-  bif:concat(?complementary_favourable_range_q, STR(?complementary_favourable_range)) AS ?favourable_range 
- ?quality 
-WHERE { 
-  ?subj a art17:Speciessummary ; 
-	art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>; 
-        art17:forCountry _:countryUrl; 
-        art17:forRegion _:regionUrl . 
-  _:regionUrl e:name ?region . 
-  _:countryUrl e:name ?country. 
-  OPTIONAL {?subj art17:range_surface_area ?surfacerange} 
-  OPTIONAL {?subj art17:percentage_range_surface_area ?pc_rsa} 
-  OPTIONAL {?subj art17:conclusion_range _:conclusion_rangeUrl . 
-            _:conclusion_rangeUrl o:name ?conclusion } 
-  OPTIONAL {?subj art17:range_trend ?trend} 
-  OPTIONAL {?subj art17:complementary_favourable_range_q ?complementary_favourable_range_q} 
-  OPTIONAL {?subj art17:complementary_favourable_range ?complementary_favourable_range} 
-  OPTIONAL {?subj art17:range_quality ?quality} 
+SELECT ?country ?region ?surfacerange "2001-2006" AS ?period ?pc_rsa ?conclusion ?trend
+  bif:concat(?complementary_favourable_range_q, STR(?complementary_favourable_range)) AS ?favourable_range
+ ?quality
+WHERE {
+  ?subj a art17:Speciessummary ;
+	art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
+        art17:forCountry _:countryUrl;
+        art17:forRegion _:regionUrl .
+  _:regionUrl e:name ?region .
+  _:countryUrl e:name ?country.
+  OPTIONAL {?subj art17:range_surface_area ?surfacerange}
+  OPTIONAL {?subj art17:percentage_range_surface_area ?pc_rsa}
+  OPTIONAL {?subj art17:conclusion_range _:conclusion_rangeUrl .
+            _:conclusion_rangeUrl o:name ?conclusion }
+  OPTIONAL {?subj art17:range_trend ?trend}
+  OPTIONAL {?subj art17:complementary_favourable_range_q ?complementary_favourable_range_q}
+  OPTIONAL {?subj art17:complementary_favourable_range ?complementary_favourable_range}
+  OPTIONAL {?subj art17:range_quality ?quality}
 } ORDER BY ?country ?region
 ]]></entry>
 
   <entry key="art17ranges.codes"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/> 
-PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/> 
-PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
-SELECT DISTINCT ?speciescode 
-WHERE { 
-  ?subj a art17:Speciessummary ; 
-        art17:forSpecies ?speciesurl. 
- ?speciesurl e:speciesCode ?speciescode 
+SELECT DISTINCT ?speciescode
+WHERE {
+  ?subj a art17:Speciessummary ;
+        art17:forSpecies ?speciesurl.
+ ?speciesurl e:speciesCode ?speciescode
 }
 ]]></entry>
 
@@ -136,56 +136,154 @@ WHERE {
   <entry key="art17populations.endpoint">http://cr.eionet.europa.eu/sparql</entry>
   <entry key="art17populations.title">Population distribution reported under Article 17, Habitats Directive</entry>
 <!-- .summary - use HTML format - i.e. escape & and < -->
-  <entry key="art17populations.summary"><![CDATA[Assessments on the conservation status of the habitat types 
-   and species of Community interest have been carried out in EU 25 for the period 2001-2006, 
-   compiled as part of the Habitats Directive - Article 17 reporting process. 
+  <entry key="art17populations.summary"><![CDATA[Assessments on the conservation status of the habitat types
+   and species of Community interest have been carried out in EU 25 for the period 2001-2006,
+   compiled as part of the Habitats Directive - Article 17 reporting process.
    The data summary sheet for species conservation status provides an overview per biogeographical region.]]></entry>
   <entry key="art17populations.query"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/> 
-PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/> 
-PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/> 
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
 
-SELECT ?country ?region ?minimum_size ?maximum_size ?unit 
- ?percentage_mean_size "2001-2006" AS ?period ?conclusion ?trend ?yearly_magnitude 
- bif:concat(?complementary_favourable_population_q, STR(?complementary_favourable_population)) AS ?favourable_population 
- ?quality 
-WHERE { 
-  ?subj a art17:Speciessummary ; 
-        art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>; 
-        art17:forCountry _:countryUrl; 
-        art17:forRegion _:regionUrl . 
- _:regionUrl e:name ?region . 
- _:countryUrl e:name ?country. 
-OPTIONAL {?subj art17:population_minimum_size ?minimum_size} 
-OPTIONAL {?subj art17:population_maximum_size ?maximum_size} 
-OPTIONAL {?subj art17:population_size_unit ?unit} 
-OPTIONAL {?subj art17:percentage_population_mean_size ?percentage_mean_size} 
-OPTIONAL {?subj art17:conclusion_population _:conclusion_populationUrl . 
-         _:conclusion_populationUrl o:name ?conclusion } 
-OPTIONAL {?subj art17:population_trend ?trend} 
-OPTIONAL {?subj art17:population_yearly_magnitude ?yearly_magnitude} 
-OPTIONAL {?subj art17:complementary_favourable_population_q ?complementary_favourable_population_q} 
-OPTIONAL {?subj art17:complementary_favourable_population ?complementary_favourable_population} 
-OPTIONAL {?subj art17:population_quality ?quality} 
+SELECT ?country ?region ?minimum_size ?maximum_size ?unit
+ ?percentage_mean_size "2001-2006" AS ?period ?conclusion ?trend ?yearly_magnitude
+ bif:concat(?complementary_favourable_population_q, STR(?complementary_favourable_population)) AS ?favourable_population
+ ?quality
+WHERE {
+  ?subj a art17:Speciessummary ;
+        art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
+        art17:forCountry _:countryUrl;
+        art17:forRegion _:regionUrl .
+ _:regionUrl e:name ?region .
+ _:countryUrl e:name ?country.
+OPTIONAL {?subj art17:population_minimum_size ?minimum_size}
+OPTIONAL {?subj art17:population_maximum_size ?maximum_size}
+OPTIONAL {?subj art17:population_size_unit ?unit}
+OPTIONAL {?subj art17:percentage_population_mean_size ?percentage_mean_size}
+OPTIONAL {?subj art17:conclusion_population _:conclusion_populationUrl .
+         _:conclusion_populationUrl o:name ?conclusion }
+OPTIONAL {?subj art17:population_trend ?trend}
+OPTIONAL {?subj art17:population_yearly_magnitude ?yearly_magnitude}
+OPTIONAL {?subj art17:complementary_favourable_population_q ?complementary_favourable_population_q}
+OPTIONAL {?subj art17:complementary_favourable_population ?complementary_favourable_population}
+OPTIONAL {?subj art17:population_quality ?quality}
 } ORDER BY ?country ?region
 ]]></entry>
 
   <entry key="art17populations.codes"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/> 
-PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/> 
-PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
-SELECT DISTINCT ?speciescode 
-WHERE { 
-  ?subj a art17:Speciessummary ; 
-        art17:forSpecies ?speciesurl. 
- ?speciesurl e:speciesCode ?speciescode 
+SELECT DISTINCT ?speciescode
+WHERE {
+  ?subj a art17:Speciessummary ;
+        art17:forSpecies ?speciesurl.
+ ?speciesurl e:speciesCode ?speciescode
 }
 ]]></entry>
 
 
 
+  <entry key="consStatusBiogeographical.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="consStatusBiogeographical.title">Population distribution reported under Article 17, Habitats Directive</entry>
+<!-- .summary - use HTML format - i.e. escape & and < -->
+  <entry key="consStatusBiogeographical.summary"><![CDATA[Assessments on the conservation status of the habitat types
+   and species of Community interest have been carried out in EU 25 for the period 2001-2006,
+   compiled as part of the Habitats Directive - Article 17 reporting process.
+   The data summary sheet for species conservation status provides an overview per biogeographical region.]]></entry>
+  <entry key="consStatusBiogeographical.query"><![CDATA[
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
 
+SELECT ?country ?region ?minimum_size ?maximum_size ?unit
+ ?percentage_mean_size "2001-2006" AS ?period ?conclusion ?trend ?yearly_magnitude
+ bif:concat(?complementary_favourable_population_q, STR(?complementary_favourable_population)) AS ?favourable_population
+ ?quality
+WHERE {
+  ?subj a art17:Speciessummary ;
+        art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
+        art17:forCountry _:countryUrl;
+        art17:forRegion _:regionUrl .
+ _:regionUrl e:name ?region .
+ _:countryUrl e:name ?country.
+OPTIONAL {?subj art17:population_minimum_size ?minimum_size}
+OPTIONAL {?subj art17:population_maximum_size ?maximum_size}
+OPTIONAL {?subj art17:population_size_unit ?unit}
+OPTIONAL {?subj art17:percentage_population_mean_size ?percentage_mean_size}
+OPTIONAL {?subj art17:conclusion_population _:conclusion_populationUrl .
+         _:conclusion_populationUrl o:name ?conclusion }
+OPTIONAL {?subj art17:population_trend ?trend}
+OPTIONAL {?subj art17:population_yearly_magnitude ?yearly_magnitude}
+OPTIONAL {?subj art17:complementary_favourable_population_q ?complementary_favourable_population_q}
+OPTIONAL {?subj art17:complementary_favourable_population ?complementary_favourable_population}
+OPTIONAL {?subj art17:population_quality ?quality}
+} ORDER BY ?country ?region
+]]></entry>
+
+  <entry key="consStatusBiogeographical.codes"><![CDATA[
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+
+SELECT DISTINCT ?speciescode
+WHERE {
+  ?subj a art17:Speciessummary ;
+        art17:forSpecies ?speciesurl.
+ ?speciesurl e:speciesCode ?speciescode
+}
+]]></entry>
+
+  <entry key="consStatusCountry.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="consStatusCountry.title">Population distribution reported under Article 17, Habitats Directive</entry>
+<!-- .summary - use HTML format - i.e. escape & and < -->
+  <entry key="consStatusCountry.summary"><![CDATA[Assessments on the conservation status of the habitat types
+   and species of Community interest have been carried out in EU 25 for the period 2001-2006,
+   compiled as part of the Habitats Directive - Article 17 reporting process.
+   The data summary sheet for species conservation status provides an overview per biogeographical region.]]></entry>
+  <entry key="consStatusCountry.query"><![CDATA[
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
+
+SELECT ?country ?region ?minimum_size ?maximum_size ?unit
+ ?percentage_mean_size "2001-2006" AS ?period ?conclusion ?trend ?yearly_magnitude
+ bif:concat(?complementary_favourable_population_q, STR(?complementary_favourable_population)) AS ?favourable_population
+ ?quality
+WHERE {
+  ?subj a art17:Speciessummary ;
+        art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
+        art17:forCountry _:countryUrl;
+        art17:forRegion _:regionUrl .
+ _:regionUrl e:name ?region .
+ _:countryUrl e:name ?country.
+OPTIONAL {?subj art17:population_minimum_size ?minimum_size}
+OPTIONAL {?subj art17:population_maximum_size ?maximum_size}
+OPTIONAL {?subj art17:population_size_unit ?unit}
+OPTIONAL {?subj art17:percentage_population_mean_size ?percentage_mean_size}
+OPTIONAL {?subj art17:conclusion_population _:conclusion_populationUrl .
+         _:conclusion_populationUrl o:name ?conclusion }
+OPTIONAL {?subj art17:population_trend ?trend}
+OPTIONAL {?subj art17:population_yearly_magnitude ?yearly_magnitude}
+OPTIONAL {?subj art17:complementary_favourable_population_q ?complementary_favourable_population_q}
+OPTIONAL {?subj art17:complementary_favourable_population ?complementary_favourable_population}
+OPTIONAL {?subj art17:population_quality ?quality}
+} ORDER BY ?country ?region
+]]></entry>
+
+  <entry key="consStatusCountry.codes"><![CDATA[
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+
+SELECT DISTINCT ?speciescode
+WHERE {
+  ?subj a art17:Speciessummary ;
+        art17:forSpecies ?speciesurl.
+ ?speciesurl e:speciesCode ?speciescode
+}
+]]></entry>
 
 
 
@@ -194,30 +292,30 @@ WHERE {
 <!-- .summary - use HTML format - i.e. escape & and < -->
   <entry key="derogationsreport.summary">EU member states are required to report derogations from protection efforts of species.</entry>
   <entry key="derogationsreport.query"><![CDATA[
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX h: <http://rdfdata.eionet.europa.eu/habdir/ontology/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX h: <http://rdfdata.eionet.europa.eu/habdir/ontology/>
 
 SELECT ?region ?from ?until ?justification ?activity ?impact
-WHERE { 
- ?subj h:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>; 
-       h:licenseValidFrom ?from; 
-       h:licenseValidUntil ?until; 
-       h:licensedJustification ?justification; 
-       h:activity ?activity; 
-       h:impactOnPopulation ?impact; 
-       h:region ?regionurl. 
-?regionurl rdfs:label ?region 
+WHERE {
+ ?subj h:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
+       h:licenseValidFrom ?from;
+       h:licenseValidUntil ?until;
+       h:licensedJustification ?justification;
+       h:activity ?activity;
+       h:impactOnPopulation ?impact;
+       h:region ?regionurl.
+?regionurl rdfs:label ?region
 } ORDER BY DESC(?from)
 ]]></entry>
 
   <entry key="derogationsreport.codes"><![CDATA[
-PREFIX h: <http://rdfdata.eionet.europa.eu/habdir/ontology/> 
-PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
+PREFIX h: <http://rdfdata.eionet.europa.eu/habdir/ontology/>
+PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
-SELECT DISTINCT ?speciescode 
-WHERE { 
-    _:subj h:forSpecies ?speciesurl. 
-    ?speciesurl e:speciesCode ?speciescode 
+SELECT DISTINCT ?speciescode
+WHERE {
+    _:subj h:forSpecies ?speciesurl.
+    ?speciesurl e:speciesCode ?speciescode
 }
 ]]></entry>
 
@@ -230,37 +328,37 @@ WHERE {
 <!-- .summary - use HTML format - i.e. escape & and < -->
   <entry key="vernacularnames.summary">Shows vernacular names from other databases that have implemented Linked Data.</entry>
   <entry key="vernacularnames.query"><![CDATA[
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
-PREFIX geospecies: <http://rdf.geospecies.org/ont/geospecies#> 
-PREFIX dwc: <http://rs.tdwg.org/dwc/terms/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+PREFIX geospecies: <http://rdf.geospecies.org/ont/geospecies#>
+PREFIX dwc: <http://rs.tdwg.org/dwc/terms/>
 
 SELECT DISTINCT ?otherspecies LANG(?vernacular) AS ?language ?vernacular
-WHERE { 
-  <http://eunis.eea.europa.eu/species/[IDENTIFIER]> eunis:sameSpecies ?otherspecies; 
-                                                    eunis:binomialName ?binomial. 
- { ?otherspecies rdfs:label ?vernacular } 
- UNION 
- { ?otherspecies geospecies:hasCommonName ?vernacular } 
- FILTER(STR(?binomial) != STR(?vernacular)) 
+WHERE {
+  <http://eunis.eea.europa.eu/species/[IDENTIFIER]> eunis:sameSpecies ?otherspecies;
+                                                    eunis:binomialName ?binomial.
+ { ?otherspecies rdfs:label ?vernacular }
+ UNION
+ { ?otherspecies geospecies:hasCommonName ?vernacular }
+ FILTER(STR(?binomial) != STR(?vernacular))
 } ORDER BY ?language
 ]]></entry>
 
   <entry key="vernacularnames.codes"><![CDATA[
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
-PREFIX geospecies: <http://rdf.geospecies.org/ont/geospecies#> 
-PREFIX dwc: <http://rs.tdwg.org/dwc/terms/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+PREFIX geospecies: <http://rdf.geospecies.org/ont/geospecies#>
+PREFIX dwc: <http://rs.tdwg.org/dwc/terms/>
 
-SELECT DISTINCT ?speciescode 
-WHERE { 
-  ?speciesurl eunis:sameSpecies ?otherspecies; 
-              eunis:binomialName ?binomial; 
-              eunis:speciesCode ?speciescode 
- { ?otherspecies rdfs:label ?vernacular } 
- UNION 
- { ?otherspecies geospecies:hasCommonName ?vernacular } 
- FILTER(STR(?binomial) != STR(?vernacular)) 
+SELECT DISTINCT ?speciescode
+WHERE {
+  ?speciesurl eunis:sameSpecies ?otherspecies;
+              eunis:binomialName ?binomial;
+              eunis:speciesCode ?speciescode
+ { ?otherspecies rdfs:label ?vernacular }
+ UNION
+ { ?otherspecies geospecies:hasCommonName ?vernacular }
+ FILTER(STR(?binomial) != STR(?vernacular))
 }
 ]]></entry>
 
@@ -275,32 +373,32 @@ WHERE {
   <entry key="landings.attribution"><![CDATA[<a href="http://ec.europa.eu/eurostat">Eurostat</a>
 ]]></entry>
 <!-- .summary - use HTML format - i.e. escape & and < -->
-  <entry key="landings.summary"><![CDATA[Shows Eurostat statistics on landings on this species in tonnes product weight 
-per country per year. The query combines the Eurostat datasets: 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_be</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_bg</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_cy</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_de</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_dk</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_ee</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_es</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_fi</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_fr</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_gr</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_ie</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_is</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_it</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_lt</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_lv</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_mt</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_nl</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_no</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_pl</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_pt</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_ro</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_se</a>, 
-<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_si</a>, 
-and <a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_uk</a>. 
+  <entry key="landings.summary"><![CDATA[Shows Eurostat statistics on landings on this species in tonnes product weight
+per country per year. The query combines the Eurostat datasets:
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_be</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_bg</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_cy</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_de</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_dk</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_ee</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_es</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_fi</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_fr</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_gr</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_ie</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_is</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_it</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_lt</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_lv</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_mt</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_nl</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_no</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_pl</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_pt</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_ro</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_se</a>,
+<a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_si</a>,
+and <a href="http://appsso.eurostat.ec.europa.eu/nui/show.do?lang=en&amp;dataset=fish_ld_be">fish_ld_uk</a>.
 (Currently a proof of concept query)
 ]]></entry>
   <entry key="landings.query"><![CDATA[
@@ -312,7 +410,7 @@ PREFIX dimension: <http://purl.org/linked-data/sdmx/2009/dimension#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
-SELECT ?country ?year ?landed ?unit 
+SELECT ?country ?year ?landed ?unit
 WHERE {
   GRAPH <http://eunis.eea.europa.eu/rdf/species.rdf.gz> {
    <http://eunis.eea.europa.eu/species/[IDENTIFIER]> eunis:sameSynonym ?uspecies
@@ -322,7 +420,7 @@ WHERE {
      e:dest <http://rdfdata.eionet.europa.eu/eurostat/dic/dest#0>;
      e:natvessr <http://rdfdata.eionet.europa.eu/eurostat/dic/natvessr#TOTAL>;
      e:unit <http://rdfdata.eionet.europa.eu/eurostat/dic/unit#TPW>, ?uunit;
-     e:geo ?ucountry; 
+     e:geo ?ucountry;
      dimension:timePeriod ?year;
      measure:obsValue ?landed.
  GRAPH <http://rdfdata.eionet.europa.eu/eea/countries.rdf> {
@@ -330,26 +428,26 @@ WHERE {
   ?eeacountry skos:prefLabel ?country.
  }
  GRAPH <http://rdfdata.eionet.europa.eu/eurostat/dic/unit.rdf> {
-  ?uunit skos:prefLabel ?unit. 
+  ?uunit skos:prefLabel ?unit.
  }
 }
 ORDER BY ?country ?year
 ]]></entry>
 
   <entry key="landings.codes"><![CDATA[
-PREFIX e: <http://rdfdata.eionet.europa.eu/eurostat/property#> 
-PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
+PREFIX e: <http://rdfdata.eionet.europa.eu/eurostat/property#>
+PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
-SELECT DISTINCT ?speciescode 
-WHERE { 
-  ?obsUri e:pres <http://rdfdata.eionet.europa.eu/eurostat/dic/pres#0>; 
-          e:dest <http://rdfdata.eionet.europa.eu/eurostat/dic/dest#0>; 
-          e:natvessr <http://rdfdata.eionet.europa.eu/eurostat/dic/natvessr#TOTAL>; 
-          e:unit <http://rdfdata.eionet.europa.eu/eurostat/dic/unit#TPW>; 
-          e:species ?uspecies. 
+SELECT DISTINCT ?speciescode
+WHERE {
+  ?obsUri e:pres <http://rdfdata.eionet.europa.eu/eurostat/dic/pres#0>;
+          e:dest <http://rdfdata.eionet.europa.eu/eurostat/dic/dest#0>;
+          e:natvessr <http://rdfdata.eionet.europa.eu/eurostat/dic/natvessr#TOTAL>;
+          e:unit <http://rdfdata.eionet.europa.eu/eurostat/dic/unit#TPW>;
+          e:species ?uspecies.
   GRAPH <http://eunis.eea.europa.eu/rdf/species.rdf.gz> {
       ?speciesurl eunis:sameSynonym ?uspecies.
-      ?speciesurl eunis:speciesCode ?speciescode 
+      ?speciesurl eunis:speciesCode ?speciescode
   }
 }
 ]]></entry>
@@ -367,9 +465,9 @@ WHERE {
 <!-- -->
   <entry key="birdlifedistribution.endpoint">http://semantic.eea.europa.eu/sparql</entry>
   <entry key="birdlifedistribution.title">Population distribution from "Birds in Europe" editions 1 and 2</entry>
-  <entry key="birdlifedistribution.summary"><![CDATA[These publications present a thorough and detailed 
- review of the conservation status of European birds. Based on detailed breeding 
- and wintering population data collected in each country, the report provides 
+  <entry key="birdlifedistribution.summary"><![CDATA[These publications present a thorough and detailed
+ review of the conservation status of European birds. Based on detailed breeding
+ and wintering population data collected in each country, the report provides
  a review of the population sizes and trends of Species of European Conservation Concern.]]></entry>
   <entry key="birdlifedistribution.attribution"><![CDATA[<a href="http://www.birdlife.org/">BirdLife International</a>]]></entry>
   <entry key="birdlifedistribution.column.country">Country</entry>
@@ -377,37 +475,37 @@ WHERE {
   <entry key="birdlifedistribution.column.observation">Min / Max (Units)</entry>
 <!--birdlifedistribution.column.date = Published -->
   <entry key="birdlifedistribution.query"><![CDATA[
-PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#> 
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX dcterms: <http://purl.org/dc/terms/> 
-PREFIX eea: <http://rdfdata.eionet.europa.eu/eea/ontology/> 
+PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX eea: <http://rdfdata.eionet.europa.eu/eea/ontology/>
 
 SELECT ?country ?biogeoregion
   bif:sprintf('%s/%s (%s)', str(?pop_min),str(?pop_max),?unit) AS ?observation
- ?period ?status ?quality ?source ?published 
+ ?period ?status ?quality ?source ?published
 
 WHERE {
 GRAPH <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz> {
-  ?subject b:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>; 
-           b:forCountry ?ucountry; 
-           a b:ConservationStatus; 
-           b:pop_min ?pop_min; 
-           b:pop_max ?pop_max; 
-           b:unit ?unit; 
-           dcterms:source ?usource 
-           FILTER(?usource IN (<http://rdfdata.eionet.europa.eu/eunis/references/1850>, 
-                               <http://rdfdata.eionet.europa.eu/eunis/references/1570>)) 
-  OPTIONAL {?subject b:reference_period ?period }  
-  OPTIONAL {?subject b:hasStatus ?hasStatus . 
-            ?hasStatus rdfs:label ?status }  
-  OPTIONAL {?subject b:hasInfoQuality ?hasInfoQuality . 
-            ?hasInfoQuality rdfs:label ?quality }  
-  ?usource dcterms:alternative ?source; 
-           dcterms:date ?published. 
-  ?ucountry rdfs:label ?country. 
+  ?subject b:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
+           b:forCountry ?ucountry;
+           a b:ConservationStatus;
+           b:pop_min ?pop_min;
+           b:pop_max ?pop_max;
+           b:unit ?unit;
+           dcterms:source ?usource
+           FILTER(?usource IN (<http://rdfdata.eionet.europa.eu/eunis/references/1850>,
+                               <http://rdfdata.eionet.europa.eu/eunis/references/1570>))
+  OPTIONAL {?subject b:reference_period ?period }
+  OPTIONAL {?subject b:hasStatus ?hasStatus .
+            ?hasStatus rdfs:label ?status }
+  OPTIONAL {?subject b:hasInfoQuality ?hasInfoQuality .
+            ?hasInfoQuality rdfs:label ?quality }
+  ?usource dcterms:alternative ?source;
+           dcterms:date ?published.
+  ?ucountry rdfs:label ?country.
  }
  OPTIONAL {
-  ?subject b:hasBioGeoRegion ?ubiogeoregion. 
+  ?subject b:hasBioGeoRegion ?ubiogeoregion.
   GRAPH <http://rdfdata.eionet.europa.eu/eea/biogeographic-regions.rdf> {
    ?ubiogeoregion eea:name ?biogeoregion
   }
@@ -417,24 +515,24 @@ GRAPH <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz> {
 ]]></entry>
 
   <entry key="birdlifedistribution.codes"><![CDATA[
-PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#> 
-PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
-PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#>
+PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 
-SELECT DISTINCT ?speciescode  
+SELECT DISTINCT ?speciescode
 
-WHERE { 
+WHERE {
  GRAPH <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz> {
- ?subject b:forSpecies ?speciesurl; 
-          a b:ConservationStatus; 
-          b:pop_min ?pop_min; 
-          b:pop_max ?pop_max; 
-          dcterms:source ?usource 
- FILTER(?usource IN (<http://rdfdata.eionet.europa.eu/eunis/references/1850>, 
+ ?subject b:forSpecies ?speciesurl;
+          a b:ConservationStatus;
+          b:pop_min ?pop_min;
+          b:pop_max ?pop_max;
+          dcterms:source ?usource
+ FILTER(?usource IN (<http://rdfdata.eionet.europa.eu/eunis/references/1850>,
                      <http://rdfdata.eionet.europa.eu/eunis/references/1570>))
- } 
+ }
  GRAPH <http://eunis.eea.europa.eu/rdf/species.rdf.gz> {
-  ?speciesurl eunis:speciesCode ?speciescode 
+  ?speciesurl eunis:speciesCode ?speciescode
  }
 }
 ]]></entry>
@@ -450,9 +548,9 @@ WHERE {
 <!-- -->
   <entry key="birdlifetrend.endpoint">http://semantic.eea.europa.eu/sparql</entry>
   <entry key="birdlifetrend.title">Population trends from "Birds in Europe" editions 1 and 2</entry>
-  <entry key="birdlifetrend.summary"><![CDATA[These publications present a thorough and detailed 
- review of the conservation status of European birds. Based on detailed breeding 
- and wintering population data collected in each country, the report provides 
+  <entry key="birdlifetrend.summary"><![CDATA[These publications present a thorough and detailed
+ review of the conservation status of European birds. Based on detailed breeding
+ and wintering population data collected in each country, the report provides
  a review of the population sizes and trends of Species of European Conservation Concern.]]></entry>
   <entry key="birdlifetrend.attribution"><![CDATA[<a href="http://www.birdlife.org/">BirdLife International</a>]]></entry>
   <entry key="birdlifetrend.column.country">Country</entry>
@@ -462,55 +560,55 @@ WHERE {
 <!--birdlifetrend.column.end_period = End period -->
 <!-- Note: GI and GL are referenced as countries -->
   <entry key="birdlifetrend.query"><![CDATA[
-PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#> 
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX dcterms: <http://purl.org/dc/terms/> 
-PREFIX eea: <http://rdfdata.eionet.europa.eu/eea/ontology/> 
+PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX eea: <http://rdfdata.eionet.europa.eu/eea/ontology/>
 
 SELECT ?country ?biogeoregion
  bif:sprintf('%s-%s',str(?start_period), str(?end_period)) AS ?period
- ?status ?trend ?quality ?source ?published 
-FROM <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz> 
-FROM <http://rdfdata.eionet.europa.eu/eea/biogeographic-regions.rdf> 
-WHERE { 
- ?subject b:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>; 
-          b:forCountry ?ucountry; 
-          a b:ConservationTrend; 
-          b:hasTrend ?utrend; 
-          dcterms:source ?usource 
-          FILTER(?usource IN (<http://rdfdata.eionet.europa.eu/eunis/references/1850>, 
-                              <http://rdfdata.eionet.europa.eu/eunis/references/1570>)) 
- OPTIONAL {?subject b:hasBioGeoRegion ?ubiogeoregion. 
-           ?ubiogeoregion eea:name ?biogeoregion }  
- OPTIONAL {?subject b:hasStatus ?hasStatus . 
-           ?hasStatus rdfs:label ?status }  
- OPTIONAL {?subject b:hasInfoQuality ?hasInfoQuality . 
-           ?hasInfoQuality rdfs:label ?quality }  
- OPTIONAL {?subject b:start_period ?start_period } 
- OPTIONAL {?subject b:end_period ?end_period } 
- ?usource dcterms:alternative ?source; 
-          dcterms:date ?published. 
- ?ucountry rdfs:label ?country. 
- ?utrend rdfs:label ?trend 
+ ?status ?trend ?quality ?source ?published
+FROM <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz>
+FROM <http://rdfdata.eionet.europa.eu/eea/biogeographic-regions.rdf>
+WHERE {
+ ?subject b:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
+          b:forCountry ?ucountry;
+          a b:ConservationTrend;
+          b:hasTrend ?utrend;
+          dcterms:source ?usource
+          FILTER(?usource IN (<http://rdfdata.eionet.europa.eu/eunis/references/1850>,
+                              <http://rdfdata.eionet.europa.eu/eunis/references/1570>))
+ OPTIONAL {?subject b:hasBioGeoRegion ?ubiogeoregion.
+           ?ubiogeoregion eea:name ?biogeoregion }
+ OPTIONAL {?subject b:hasStatus ?hasStatus .
+           ?hasStatus rdfs:label ?status }
+ OPTIONAL {?subject b:hasInfoQuality ?hasInfoQuality .
+           ?hasInfoQuality rdfs:label ?quality }
+ OPTIONAL {?subject b:start_period ?start_period }
+ OPTIONAL {?subject b:end_period ?end_period }
+ ?usource dcterms:alternative ?source;
+          dcterms:date ?published.
+ ?ucountry rdfs:label ?country.
+ ?utrend rdfs:label ?trend
 } ORDER BY ?country ?biogeoregion DESC(?published)
 ]]></entry>
 
   <entry key="birdlifetrend.codes"><![CDATA[
-PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#> 
-PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
-PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#>
+PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 
-SELECT DISTINCT ?speciescode  
-FROM <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz> 
-FROM <http://eunis.eea.europa.eu/rdf/species.rdf.gz> 
-WHERE { 
- ?subject b:forSpecies ?speciesurl; 
-          a b:ConservationTrend; 
-          b:hasTrend ?utrend; 
-          dcterms:source ?usource 
- FILTER(?usource IN (<http://rdfdata.eionet.europa.eu/eunis/references/1850>, 
-                     <http://rdfdata.eionet.europa.eu/eunis/references/1570>)) 
- ?speciesurl eunis:speciesCode ?speciescode 
+SELECT DISTINCT ?speciescode
+FROM <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz>
+FROM <http://eunis.eea.europa.eu/rdf/species.rdf.gz>
+WHERE {
+ ?subject b:forSpecies ?speciesurl;
+          a b:ConservationTrend;
+          b:hasTrend ?utrend;
+          dcterms:source ?usource
+ FILTER(?usource IN (<http://rdfdata.eionet.europa.eu/eunis/references/1850>,
+                     <http://rdfdata.eionet.europa.eu/eunis/references/1570>))
+ ?speciesurl eunis:speciesCode ?speciescode
 }]]></entry>
 
 
@@ -524,9 +622,9 @@ WHERE {
 <!-- -->
   <entry key="butterfliestrend.endpoint">http://semantic.eea.europa.eu/sparql</entry>
   <entry key="butterfliestrend.title">Population trends from Butterfly Conservation Europe</entry>
-  <entry key="butterfliestrend.summary"><![CDATA[The Red Data Book (1999) presents the first comprehensive 
- review of the status of butterflies across Europe and a new Red List for the 
- 576 resident species (this list includes the Asian part of Turkey). 
+  <entry key="butterfliestrend.summary"><![CDATA[The Red Data Book (1999) presents the first comprehensive
+ review of the status of butterflies across Europe and a new Red List for the
+ 576 resident species (this list includes the Asian part of Turkey).
  The report was compiled from information from a network of over 50 compilers from almost every country.]]></entry>
   <entry key="butterfliestrend.attribution"><![CDATA[<a href="http://www.bc-europe.org/">Butterfly Conservation Europe</a>]]></entry>
 <!--butterfliestrend.column.country = Country -->
@@ -535,49 +633,49 @@ WHERE {
 <!--butterfliestrend.column.start_period = Start period -->
 <!--butterfliestrend.column.end_period = End period -->
   <entry key="butterfliestrend.query"><![CDATA[
-PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#> 
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX dcterms: <http://purl.org/dc/terms/> 
-PREFIX eea: <http://rdfdata.eionet.europa.eu/eea/ontology/> 
+PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX eea: <http://rdfdata.eionet.europa.eu/eea/ontology/>
 
-SELECT ?country bif:sprintf('%s-%s',str(?start_period), str(?end_period)) AS ?period ?status ?trend ?quality ?source ?published 
-FROM <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz> 
-FROM <http://rdfdata.eionet.europa.eu/eea/biogeographic-regions.rdf> 
-FROM <http://rdfdata.eionet.europa.eu/eea/countries.rdf> 
-WHERE { 
- ?subject b:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>; 
-          b:forCountry ?ucountry; 
-          a b:ConservationTrend; 
-          b:hasTrend ?utrend; 
-          dcterms:source ?usource FILTER(?usource = <http://rdfdata.eionet.europa.eu/eunis/references/1851>) 
- OPTIONAL {?subject b:hasStatus ?hasStatus . 
-           ?hasStatus rdfs:label ?status }  
- OPTIONAL {?subject b:hasInfoQuality ?hasInfoQuality . 
-           ?hasInfoQuality rdfs:label ?quality }  
- OPTIONAL {?subject b:start_period ?start_period } 
- OPTIONAL {?subject b:end_period ?end_period } 
- ?usource dcterms:alternative ?source; 
-          dcterms:date ?published. 
- ?ucountry rdfs:label ?country. 
- ?utrend rdfs:label ?trend 
+SELECT ?country bif:sprintf('%s-%s',str(?start_period), str(?end_period)) AS ?period ?status ?trend ?quality ?source ?published
+FROM <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz>
+FROM <http://rdfdata.eionet.europa.eu/eea/biogeographic-regions.rdf>
+FROM <http://rdfdata.eionet.europa.eu/eea/countries.rdf>
+WHERE {
+ ?subject b:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
+          b:forCountry ?ucountry;
+          a b:ConservationTrend;
+          b:hasTrend ?utrend;
+          dcterms:source ?usource FILTER(?usource = <http://rdfdata.eionet.europa.eu/eunis/references/1851>)
+ OPTIONAL {?subject b:hasStatus ?hasStatus .
+           ?hasStatus rdfs:label ?status }
+ OPTIONAL {?subject b:hasInfoQuality ?hasInfoQuality .
+           ?hasInfoQuality rdfs:label ?quality }
+ OPTIONAL {?subject b:start_period ?start_period }
+ OPTIONAL {?subject b:end_period ?end_period }
+ ?usource dcterms:alternative ?source;
+          dcterms:date ?published.
+ ?ucountry rdfs:label ?country.
+ ?utrend rdfs:label ?trend
 } ORDER BY ?country ?biogeoregion DESC(?published)
 ]]></entry>
 
   <entry key="butterflieslifetrend.codes"><![CDATA[
-PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#> 
-PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
-PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#>
+PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 
-SELECT DISTINCT ?speciescode  
-FROM <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz> 
-FROM <http://eunis.eea.europa.eu/rdf/species.rdf.gz> 
-WHERE { 
- ?subject b:forSpecies ?speciesurl; 
-          a b:ConservationTrend; 
-          b:hasTrend ?utrend; 
-          dcterms:source ?usource 
- FILTER(?usource = <http://rdfdata.eionet.europa.eu/eunis/references/1851>) 
- ?speciesurl eunis:speciesCode ?speciescode 
+SELECT DISTINCT ?speciescode
+FROM <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz>
+FROM <http://eunis.eea.europa.eu/rdf/species.rdf.gz>
+WHERE {
+ ?subject b:forSpecies ?speciesurl;
+          a b:ConservationTrend;
+          b:hasTrend ?utrend;
+          dcterms:source ?usource
+ FILTER(?usource = <http://rdfdata.eionet.europa.eu/eunis/references/1851>)
+ ?speciesurl eunis:speciesCode ?speciescode
 }
 ]]></entry>
 
@@ -591,41 +689,41 @@ WHERE {
   <entry key="conservationstatus.title">Conservation status (National and International)</entry>
   <entry key="conservationstatus.summary"><![CDATA[Various Red List sources]]></entry>
   <entry key="conservationstatus.query"><![CDATA[
-PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#> 
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 
-SELECT ?country ?status ?source ?published 
-FROM <http://rdfdata.eionet.europa.eu/eunis/conservationstatus.rdf.gz> 
-FROM <http://rdfdata.eionet.europa.eu/eea/biogeographic-regions.rdf> 
-FROM <http://eunis.eea.europa.eu/rdf/countries.rdf.gz> 
-FROM <http://eunis.eea.europa.eu/rdf/references.rdf.gz> 
-WHERE { 
- ?subject b:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>; 
-          a b:SpeciesConservationStatus; 
-          dcterms:source ?usource. 
- ?subject  b:forCountry ?ucountry. 
-OPTIONAL { ?ucountry rdfs:label ?country} 
-OPTIONAL { ?usource dcterms:title ?source;  
-           dcterms:created ?published } 
- ?subject b:hasStatus ?hasStatus . 
- ?hasStatus rdfs:label ?status. 
+SELECT ?country ?status ?source ?published
+FROM <http://rdfdata.eionet.europa.eu/eunis/conservationstatus.rdf.gz>
+FROM <http://rdfdata.eionet.europa.eu/eea/biogeographic-regions.rdf>
+FROM <http://eunis.eea.europa.eu/rdf/countries.rdf.gz>
+FROM <http://eunis.eea.europa.eu/rdf/references.rdf.gz>
+WHERE {
+ ?subject b:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
+          a b:SpeciesConservationStatus;
+          dcterms:source ?usource.
+ ?subject  b:forCountry ?ucountry.
+OPTIONAL { ?ucountry rdfs:label ?country}
+OPTIONAL { ?usource dcterms:title ?source;
+           dcterms:created ?published }
+ ?subject b:hasStatus ?hasStatus .
+ ?hasStatus rdfs:label ?status.
 } ORDER BY ?country  DESC(?published)
 ]]></entry>
 
   <entry key="conservationstatus.codes"><![CDATA[
-PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#> 
-PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#> 
+PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#>
+PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
-SELECT DISTINCT ?speciescode 
-FROM <http://rdfdata.eionet.europa.eu/eunis/conservationstatus.rdf.gz> 
-FROM <http://eunis.eea.europa.eu/rdf/species.rdf.gz> 
-WHERE { 
- ?subject b:forSpecies ?speciesurl; 
-          a b:SpeciesConservationStatus; 
-          b:forCountry ?ucountry. 
- ?subject b:hasStatus ?hasStatus . 
- ?speciesurl eunis:speciesCode ?speciescode 
+SELECT DISTINCT ?speciescode
+FROM <http://rdfdata.eionet.europa.eu/eunis/conservationstatus.rdf.gz>
+FROM <http://eunis.eea.europa.eu/rdf/species.rdf.gz>
+WHERE {
+ ?subject b:forSpecies ?speciesurl;
+          a b:SpeciesConservationStatus;
+          b:forCountry ?ucountry.
+ ?subject b:hasStatus ?hasStatus .
+ ?speciesurl eunis:speciesCode ?speciescode
 }
 ]]></entry>
 </properties>

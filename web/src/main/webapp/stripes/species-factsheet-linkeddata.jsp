@@ -14,19 +14,25 @@
 				<h3>Select a query:</h3>
 				<dl>
 					<c:forEach items="${actionBean.queries}" var="query" varStatus="loop">
+						<c:choose>
+						<c:when test="${query.id eq 'art17country' || query.id eq 'art17biogeographical'}"/>
+						<c:otherwise>
 				 		<dt><a href="species/${actionBean.idSpecies}/linkeddata?query=${query.id}" rel="nofollow">${query.title}</a></dt>
 				 		<dd>${query.summary}</dd>
+						</c:otherwise>
+						</c:choose>
 			 		</c:forEach>
 			 	</dl>
 		 	</c:if>
  		</c:when>
+
  		<c:otherwise>
  			<c:if test="${not empty actionBean.queries}">
  				<div style="font-weight:bold">Select a query:</div>
  				<stripes:form action="/species/${actionBean.idSpecies}/linkeddata" method="post">
 				<p>
 	 				<stripes:select name="query">
-	 					<stripes:options-collection collection="${actionBean.queries}" label="title" value="id"/>
+	 					<stripes:options-collection collection="${actionBean.queriesWithOutConservationStatus}" label="title" value="id"/>
 			 		</stripes:select>
 			 		<stripes:submit name="linkeddata" value="Execute query"/>
 				</p>
@@ -34,11 +40,13 @@
  			</c:if>
 		 	<c:choose>
 			 	<c:when test="${not empty actionBean.queryResultCols && not empty actionBean.queryResultRows}">
-			 		<display:table name="actionBean.queryResultRows" class="sortable" pagesize="50" sort="list" requestURI="/species/${actionBean.idSpecies}/linkeddata">
-					    <c:forEach var="cl" items="${actionBean.queryResultCols}">
-					      	<display:column property="${cl.property}" title="${cl.title}" sortable="${cl.sortable}" decorator="eionet.eunis.util.decorators.ForeignDataColumnDecorator"/>
-					    </c:forEach>
-					</display:table>
+			 		<div style="width:100%; overflow-x:scroll;">
+				 		<display:table name="actionBean.queryResultRows" class="sortable" pagesize="50" sort="list" requestURI="/species/${actionBean.idSpecies}/linkeddata">
+						    <c:forEach var="cl" items="${actionBean.queryResultCols}">
+						      	<display:column property="${cl.property}" title="${cl.title}" sortable="${cl.sortable}" decorator="eionet.eunis.util.decorators.ForeignDataColumnDecorator"/>
+						    </c:forEach>
+						</display:table>
+					</div>
 					<c:if test="${not empty actionBean.attribution}">
 						<b>Source:</b> ${actionBean.attribution}
 					</c:if>

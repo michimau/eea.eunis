@@ -122,6 +122,11 @@
 		                	<%-- Related sites --%>
 		                	<stripes:layout-render name="/stripes/species-factsheet-sites.jsp"/>
 		                </c:if>
+		                <c:if test="${actionBean.tab == 'conservation_status'}">
+		                	<%-- Foreigndata --%>
+							<stripes:layout-render name="/stripes/species-factsheet-conservation-status.jsp"/>
+
+		                </c:if>
 		                <c:if test="${actionBean.tab == 'linkeddata'}">
 		                	<%-- Foreigndata --%>
 		                	<stripes:layout-render name="/stripes/species-factsheet-linkeddata.jsp"/>

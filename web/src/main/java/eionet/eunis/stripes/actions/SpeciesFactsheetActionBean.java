@@ -9,6 +9,7 @@ import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -61,7 +62,7 @@ import eionet.sparqlClient.helpers.ResultValue;
 public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     private static final String[] tabs = {"General information", "Vernacular names", "Geographical information", "Population",
-        "Trends", "Legal Instruments", "Habitat types", "Sites", "External data"};
+        "Trends", "Legal Instruments", "Habitat types", "Sites","Conservation status", "External data"};
 
     private static final Map<String, String[]> types = new HashMap<String, String[]>();
     static {
@@ -74,7 +75,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         types.put("LEGAL_INSTRUMENTS", new String[] {"legal", tabs[5]});
         types.put("HABITATS", new String[] {"habitats", tabs[6]});
         types.put("SITES", new String[] {"sites", tabs[7]});
-        types.put("LINKEDDATA", new String[] {"linkeddata", tabs[8]});
+        types.put("CONSERVATION_STATUS", new String[] {"conservation_status", tabs[8]});
+        types.put("LINKEDDATA", new String[] {"linkeddata", tabs[9]});
     }
 
     /** The argument given. Can be a species number or scientific name */
@@ -157,11 +159,19 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private List<SitesByNatureObjectPersist> subSpeciesSites;
     private String subMapIds;
 
+
+
     /** LinkedData tab variables. */
     private List<ForeignDataQueryDTO> queries;
+    private List<ForeignDataQueryDTO> queriesWithOutConservationStatus;
+    private ForeignDataQueryDTO conservationStatusQuery;
     private String query;
     private ArrayList<Map<String, Object>> queryResultCols;
     private ArrayList<HashMap<String, ResultValue>> queryResultRows;
+    private ArrayList<Map<String, Object>> queryResultColsBiogeographical;
+    private ArrayList<HashMap<String, ResultValue>> queryResultRowsBiogeographical;
+    private ArrayList<Map<String, Object>> queryResultColsCountry;
+    private ArrayList<HashMap<String, ResultValue>> queryResultRowsCountry;
     private String attribution;
 
     @DefaultHandler
@@ -222,9 +232,17 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             for (String tab : existingTabs) {
                 if (types.containsKey(tab)) {
                     String[] tabData = types.get(tab);
-                        tabsWithData.add(new Pair<String, String>(tabData[0], getContentManagement().cmsPhrase(tabData[1])));
+                        if(tabData[0].equals("linkeddata")){
+
+                            tabsWithData.add(new Pair<String, String>("conservation_status", getContentManagement().cmsPhrase("Conservation status")));
+                            tabsWithData.add(new Pair<String, String>("linkeddata", getContentManagement().cmsPhrase("External data")));
+                        }else{
+                            tabsWithData.add(new Pair<String, String>(tabData[0], getContentManagement().cmsPhrase(tabData[1])));
+                        }
                 }
             }
+
+
 
             specie = factsheet.getSpeciesNatureObject();
 
@@ -246,6 +264,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             if (tab != null && tab.equals("sites")) {
                 sitesTabActions();
+            }
+
+            if (tab != null && tab.equals("conservation_status")) {
+                conservationStatusTabActions(mainIdSpecies, specie.getIdNatureObject());
             }
 
             if (tab != null && tab.equals("linkeddata")) {
@@ -555,11 +577,19 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      * @param idSpecies - The species ID.
      */
     private void linkeddataTabActions(int idSpecies, Integer natObjId) {
+
         try {
             Properties props = new Properties();
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_species.xml"));
             LinkedData fd = new LinkedData(props, natObjId);
             queries = fd.getQueryObjects();
+
+            queriesWithOutConservationStatus = new  ArrayList<ForeignDataQueryDTO>();
+            for(ForeignDataQueryDTO q  : queries){
+                if(!q.getId().equals("consStatusBiogeographical") || !q.getId().equals("consStatusCountry")){
+                    queriesWithOutConservationStatus.add(q);
+                }
+            }
 
             if (!StringUtils.isBlank(query)) {
                 fd.executeQuery(query, idSpecies);
@@ -570,6 +600,41 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void conservationStatusTabActions(int idSpecies, Integer natObjId) {
+
+        try {
+            Properties props = new Properties();
+            props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_species.xml"));
+            LinkedData ld = new LinkedData(props, natObjId);
+
+            query = "consStatusCountry";
+            queries = ld.getQueryObjects();
+            if (!StringUtils.isBlank(query)) {
+
+                ld.executeQuery(query, idSpecies);
+                 queryResultColsCountry = ld.getCols();
+                 queryResultRowsCountry = ld.getRows();
+                attribution = ld.getAttribution();
+
+            }
+
+            query = "consStatusBiogeographical";
+            queries = ld.getQueryObjects();
+            if (!StringUtils.isBlank(query)) {
+
+                ld.executeQuery(query, idSpecies);
+                queryResultColsBiogeographical = ld.getCols();
+                queryResultRowsBiogeographical = ld.getRows();
+                attribution = ld.getAttribution();
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private String getIds(List<SitesByNatureObjectPersist> sites) {
@@ -592,6 +657,25 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
 
         return ids;
+    }
+
+
+
+
+    public ArrayList<Map<String, Object>> getQueryResultColsCountry() {
+        return queryResultColsCountry;
+    }
+
+    public ArrayList<HashMap<String, ResultValue>> getQueryResultRowsCountry() {
+        return queryResultRowsCountry;
+    }
+
+    public ArrayList<Map<String, Object>> getQueryResultColsBiogeographical() {
+        return queryResultColsBiogeographical;
+    }
+
+    public ArrayList<HashMap<String, ResultValue>> getQueryResultRowsBiogeographical() {
+        return queryResultRowsBiogeographical;
     }
 
     /**
@@ -989,4 +1073,15 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     public String getGbifCode() {
         return gbifCode;
     }
+
+    public ForeignDataQueryDTO getConservationStatusQuery() {
+        return conservationStatusQuery;
+    }
+
+    public List<ForeignDataQueryDTO> getQueriesWithOutConservationStatus() {
+        return queriesWithOutConservationStatus;
+    }
+
+
+
 }

@@ -119,4 +119,9 @@ public abstract class SitesSearchCriteria extends AbstractSearchCriteria {
      * Site species link.
      */
     public static final Integer CRITERIA_SPECIES = new Integer(21);
+    
+    /**
+     * Site ID.
+     */
+    public static final Integer CRITERIA_ID = new Integer(22);
 }

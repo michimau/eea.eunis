@@ -76,6 +76,7 @@ public class NameSearchCriteria extends SitesSearchCriteria {
         sqlMappings.put(CRITERIA_SOURCE_DB, "A.SOURCE_DB ");
         sqlMappings.put(CRITERIA_SIZE, "A.AREA ");
         sqlMappings.put(CRITERIA_COUNTRY, "C.AREA_NAME_EN ");
+        sqlMappings.put(CRITERIA_ID, "A.ID_SITE ");
     }
 
     /** Init the human mappings so you can represent this object in human language. */
@@ -88,6 +89,7 @@ public class NameSearchCriteria extends SitesSearchCriteria {
         humanMappings.put(CRITERIA_SOURCE_DB, "Database source");
         humanMappings.put(CRITERIA_SIZE, "Area size ");
         humanMappings.put(CRITERIA_COUNTRY, "Country ");
+        humanMappings.put(CRITERIA_ID, "Site id");
     }
 
     /** This method must be implementing by inheriting classes and should return the representation of an object as
@@ -133,9 +135,12 @@ public class NameSearchCriteria extends SitesSearchCriteria {
         StringBuffer sql = new StringBuffer();
 
         if (null != englishName && null != relationOp) {
-            sql.append("(");
+            sql.append("((");
             sql.append(Utilities.prepareSQLOperator((String) sqlMappings.get(CRITERIA_ENGLISH_NAME), englishName, relationOp));
-            sql.append(")");
+            sql.append(") OR (");
+            sql.append(Utilities.prepareSQLOperator((String) sqlMappings.get(CRITERIA_ID), englishName, Utilities.OPERATOR_CONTAINS));
+            
+            sql.append("))");
             if (null != country) {
                 // AND C.AREA_NAME_EN='FRANCE'
                 sql.append(" AND (C.AREA_NAME_EN='" + country + "')");

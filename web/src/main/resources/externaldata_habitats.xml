@@ -5,7 +5,7 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">deliveries art17ranges habitatdistribution</entry>
+  <entry key="queries">deliveries art17ranges art17distribution habitatdistribution</entry>
 
 <!-- -->
 <!-- .endpoint, .title and .query are mandatory for all queries -->
@@ -62,6 +62,43 @@ WHERE {
 <!-- .endpoint, .title and .query are mandatory for all queries -->
 <!-- .summary - use HTML format - i.e. escape & and < -->
 <!-- -->
+  <entry key="art17distribution.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="art17distribution.title">Distributions for this habitat type reported under Article 17, Habitats Directive</entry>
+<!-- .summary - use HTML format - i.e. escape & and < -->
+  <entry key="art17distribution.summary"><![CDATA[Assessments on the conservation status of the habitat types 
+   and species of Community interest have been carried out in EU 25 for the period 2001-2006, 
+   compiled as part of the Habitats Directive - Article 17 reporting process. 
+   The data summary sheet for habitat type conservation status provides an overview per biogeographical region.]]></entry>
+  <entry key="art17distribution.column.pc_rsa">Percent</entry>
+  <entry key="art17distribution.column.surefacearea">Surface area</entry>
+  <entry key="art17distribution.column.region">Region</entry>
+  <entry key="art17distribution.column.country">Country</entry>
+  <entry key="art17distribution.column.range">Range reference</entry>
+  <entry key="art17distribution.query"><![CDATA[
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/> 
+PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/> 
+PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/> 
+
+SELECT ?country ?region ?surefacearea ?pc_rsa ?conclusion ?trend ?favourable_area ?quality 
+WHERE { 
+  ?subj a ?rdfType ; 
+        art17:forHabitatType <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]>; 
+        art17:forRegion _:regionUrl . 
+  _:regionUrl e:name ?region . 
+OPTIONAL { ?subj  art17:forCountry _:countryUrl. 
+           _:countryUrl e:name ?country. } 
+OPTIONAL {?subj art17:coverage_surface_area ?surefacearea} 
+OPTIONAL {?subj art17:percentage_coverage_surface_area ?pc_rsa} 
+OPTIONAL {?subj art17:conclusion_area _:conclusion_areaUrl . 
+         _:conclusion_areaUrl o:name ?conclusion } 
+OPTIONAL {?subj art17:coverage_trend ?trend} 
+OPTIONAL {?subj art17:complementary_favourable_area ?favourable_area} 
+OPTIONAL {?subj art17:coverage_quality ?quality} 
+
+FILTER(?rdfType IN (art17:Habitattypesummary, art17:HabitatTypeManualAssessment)) 
+} ORDER BY ?country ?region
+]]></entry>
+
 
   <entry key="art17ranges.endpoint">http://cr.eionet.europa.eu/sparql</entry>
   <entry key="art17ranges.title">Ranges for this habitat type reported under Article 17, Habitats Directive</entry>
@@ -102,6 +139,10 @@ FILTER(?rdfType IN (art17:Habitattypesummary, art17:HabitatTypeManualAssessment)
 } ORDER BY ?country ?region
 ]]></entry>
 <!-- Additional rdf:type: art17:HabitatTypeAutomaticAssessment -->
+
+
+
+
 
   <entry key="habitatdistribution.endpoint">http://semantic.eea.europa.eu/sparql</entry>
   <entry key="habitatdistribution.title">Countries having this habitat type</entry>

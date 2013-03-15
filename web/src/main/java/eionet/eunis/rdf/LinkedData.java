@@ -4,6 +4,7 @@
 package eionet.eunis.rdf;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -196,5 +197,27 @@ public class LinkedData {
 
     public String getAttribution() {
         return attribution;
+    }
+
+    /**
+     *
+     * @param filterThese
+     * @return
+     */
+    public ArrayList<ForeignDataQueryDTO> getQueryObjects(String... filterThese) {
+
+        if (queryObjects == null || queryObjects.isEmpty() || filterThese == null || filterThese.length == 0) {
+            return queryObjects;
+        }
+
+        ArrayList<ForeignDataQueryDTO> resultList = new ArrayList<ForeignDataQueryDTO>();
+        List<String> theseOnly = Arrays.asList(filterThese);
+        for (ForeignDataQueryDTO queryObject : queryObjects) {
+            if (theseOnly.contains(queryObject.getId())) {
+                resultList.add(queryObject);
+            }
+        }
+
+        return resultList;
     }
 }

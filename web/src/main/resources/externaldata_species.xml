@@ -8,7 +8,7 @@
   <entry key="queries">deliveries derogationsreport vernacularnames
        landings art17ranges art17populations
        birdlifedistribution birdlifetrend
-	butterfliestrend</entry>
+	butterfliestrend conservationstatusBio conservationstatusCountry</entry>
 <!-- -->
 <!-- .endpoint, .title and .query are mandatory for all queries -->
 <!-- .summary - use HTML format - i.e. escape & and < -->
@@ -183,107 +183,6 @@ WHERE {
 }
 ]]></entry>
 
-
-
-  <entry key="consStatusBiogeographical.endpoint">http://cr.eionet.europa.eu/sparql</entry>
-  <entry key="consStatusBiogeographical.title">Population distribution reported under Article 17, Habitats Directive</entry>
-<!-- .summary - use HTML format - i.e. escape & and < -->
-  <entry key="consStatusBiogeographical.summary"><![CDATA[Assessments on the conservation status of the habitat types
-   and species of Community interest have been carried out in EU 25 for the period 2001-2006,
-   compiled as part of the Habitats Directive - Article 17 reporting process.
-   The data summary sheet for species conservation status provides an overview per biogeographical region.]]></entry>
-  <entry key="consStatusBiogeographical.query"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
-PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
-PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
-
-SELECT ?country ?region ?minimum_size ?maximum_size ?unit
- ?percentage_mean_size "2001-2006" AS ?period ?conclusion ?trend ?yearly_magnitude
- bif:concat(?complementary_favourable_population_q, STR(?complementary_favourable_population)) AS ?favourable_population
- ?quality
-WHERE {
-  ?subj a art17:Speciessummary ;
-        art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
-        art17:forCountry _:countryUrl;
-        art17:forRegion _:regionUrl .
- _:regionUrl e:name ?region .
- _:countryUrl e:name ?country.
-OPTIONAL {?subj art17:population_minimum_size ?minimum_size}
-OPTIONAL {?subj art17:population_maximum_size ?maximum_size}
-OPTIONAL {?subj art17:population_size_unit ?unit}
-OPTIONAL {?subj art17:percentage_population_mean_size ?percentage_mean_size}
-OPTIONAL {?subj art17:conclusion_population _:conclusion_populationUrl .
-         _:conclusion_populationUrl o:name ?conclusion }
-OPTIONAL {?subj art17:population_trend ?trend}
-OPTIONAL {?subj art17:population_yearly_magnitude ?yearly_magnitude}
-OPTIONAL {?subj art17:complementary_favourable_population_q ?complementary_favourable_population_q}
-OPTIONAL {?subj art17:complementary_favourable_population ?complementary_favourable_population}
-OPTIONAL {?subj art17:population_quality ?quality}
-} ORDER BY ?country ?region
-]]></entry>
-
-  <entry key="consStatusBiogeographical.codes"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
-PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
-PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
-
-SELECT DISTINCT ?speciescode
-WHERE {
-  ?subj a art17:Speciessummary ;
-        art17:forSpecies ?speciesurl.
- ?speciesurl e:speciesCode ?speciescode
-}
-]]></entry>
-
-  <entry key="consStatusCountry.endpoint">http://cr.eionet.europa.eu/sparql</entry>
-  <entry key="consStatusCountry.title">Population distribution reported under Article 17, Habitats Directive</entry>
-<!-- .summary - use HTML format - i.e. escape & and < -->
-  <entry key="consStatusCountry.summary"><![CDATA[Assessments on the conservation status of the habitat types
-   and species of Community interest have been carried out in EU 25 for the period 2001-2006,
-   compiled as part of the Habitats Directive - Article 17 reporting process.
-   The data summary sheet for species conservation status provides an overview per biogeographical region.]]></entry>
-  <entry key="consStatusCountry.query"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
-PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
-PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
-
-SELECT ?country ?region ?minimum_size ?maximum_size ?unit
- ?percentage_mean_size "2001-2006" AS ?period ?conclusion ?trend ?yearly_magnitude
- bif:concat(?complementary_favourable_population_q, STR(?complementary_favourable_population)) AS ?favourable_population
- ?quality
-WHERE {
-  ?subj a art17:Speciessummary ;
-        art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
-        art17:forCountry _:countryUrl;
-        art17:forRegion _:regionUrl .
- _:regionUrl e:name ?region .
- _:countryUrl e:name ?country.
-OPTIONAL {?subj art17:population_minimum_size ?minimum_size}
-OPTIONAL {?subj art17:population_maximum_size ?maximum_size}
-OPTIONAL {?subj art17:population_size_unit ?unit}
-OPTIONAL {?subj art17:percentage_population_mean_size ?percentage_mean_size}
-OPTIONAL {?subj art17:conclusion_population _:conclusion_populationUrl .
-         _:conclusion_populationUrl o:name ?conclusion }
-OPTIONAL {?subj art17:population_trend ?trend}
-OPTIONAL {?subj art17:population_yearly_magnitude ?yearly_magnitude}
-OPTIONAL {?subj art17:complementary_favourable_population_q ?complementary_favourable_population_q}
-OPTIONAL {?subj art17:complementary_favourable_population ?complementary_favourable_population}
-OPTIONAL {?subj art17:population_quality ?quality}
-} ORDER BY ?country ?region
-]]></entry>
-
-  <entry key="consStatusCountry.codes"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
-PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
-PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
-
-SELECT DISTINCT ?speciescode
-WHERE {
-  ?subj a art17:Speciessummary ;
-        art17:forSpecies ?speciesurl.
- ?speciesurl e:speciesCode ?speciescode
-}
-]]></entry>
 
 
 
@@ -726,4 +625,99 @@ WHERE {
  ?speciesurl eunis:speciesCode ?speciescode
 }
 ]]></entry>
+
+  <entry key="conservationstatusBio.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="conservationstatusBio.title">Biogeographical assessment of the conservation status of the species</entry>
+<!-- .summary - use HTML format - i.e. escape & and < -->
+  <entry key="conservationstatusBio.summary"><![CDATA[Biogeographical assessments on the conservation status of the habitat types
+   and species of Community interest have been carried out in EU 25 for the period 2001-2006,
+   compiled as part of the Habitats Directive - Article 17 reporting process.
+   The data summary sheet for species conservation status provides an overview per biogeographical region.]]></entry>
+  <entry key="conservationstatusBio.query"><![CDATA[
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
+
+SELECT ?region ?conclusion
+WHERE {
+  ?subj a art17:Speciessummary ;
+        art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
+        art17:forCountry _:countryUrl;
+        art17:forRegion _:regionUrl .
+ _:regionUrl e:name ?region .
+ _:countryUrl e:name ?country.
+OPTIONAL {?subj art17:population_minimum_size ?minimum_size}
+OPTIONAL {?subj art17:population_maximum_size ?maximum_size}
+OPTIONAL {?subj art17:population_size_unit ?unit}
+OPTIONAL {?subj art17:percentage_population_mean_size ?percentage_mean_size}
+OPTIONAL {?subj art17:conclusion_population _:conclusion_populationUrl .
+         _:conclusion_populationUrl o:name ?conclusion }
+OPTIONAL {?subj art17:population_trend ?trend}
+OPTIONAL {?subj art17:population_yearly_magnitude ?yearly_magnitude}
+OPTIONAL {?subj art17:complementary_favourable_population_q ?complementary_favourable_population_q}
+OPTIONAL {?subj art17:complementary_favourable_population ?complementary_favourable_population}
+OPTIONAL {?subj art17:population_quality ?quality}
+} ORDER BY ?country ?region
+]]></entry>
+
+  <entry key="conservationstatusBio.codes"><![CDATA[
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+
+SELECT DISTINCT ?speciescode
+WHERE {
+  ?subj a art17:Speciessummary ;
+        art17:forSpecies ?speciesurl.
+ ?speciesurl e:speciesCode ?speciescode
+}
+]]></entry>
+
+  <entry key="conservationstatusCountry.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="conservationstatusCountry.title">Country-level assessment of the conservation status of the species</entry>
+<!-- .summary - use HTML format - i.e. escape & and < -->
+  <entry key="conservationstatusCountry.summary"><![CDATA[Country-level assessments on the conservation status of the habitat types
+   and species of Community interest have been carried out in EU 25 for the period 2001-2006,
+   compiled as part of the Habitats Directive - Article 17 reporting process.
+   The data summary sheet for species conservation status provides an overview per biogeographical region.]]></entry>
+  <entry key="conservationstatusCountry.query"><![CDATA[
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
+
+SELECT ?country ?region ?conclusion
+WHERE {
+  ?subj a art17:Speciessummary ;
+        art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
+        art17:forCountry _:countryUrl;
+        art17:forRegion _:regionUrl .
+ _:regionUrl e:name ?region .
+ _:countryUrl e:name ?country.
+OPTIONAL {?subj art17:population_minimum_size ?minimum_size}
+OPTIONAL {?subj art17:population_maximum_size ?maximum_size}
+OPTIONAL {?subj art17:population_size_unit ?unit}
+OPTIONAL {?subj art17:percentage_population_mean_size ?percentage_mean_size}
+OPTIONAL {?subj art17:conclusion_population _:conclusion_populationUrl .
+         _:conclusion_populationUrl o:name ?conclusion }
+OPTIONAL {?subj art17:population_trend ?trend}
+OPTIONAL {?subj art17:population_yearly_magnitude ?yearly_magnitude}
+OPTIONAL {?subj art17:complementary_favourable_population_q ?complementary_favourable_population_q}
+OPTIONAL {?subj art17:complementary_favourable_population ?complementary_favourable_population}
+OPTIONAL {?subj art17:population_quality ?quality}
+} ORDER BY ?country ?region
+]]></entry>
+
+  <entry key="conservationstatusCountry.codes"><![CDATA[
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+
+SELECT DISTINCT ?speciescode
+WHERE {
+  ?subj a art17:Speciessummary ;
+        art17:forSpecies ?speciesurl.
+ ?speciesurl e:speciesCode ?speciescode
+}
+]]></entry>
+
 </properties>

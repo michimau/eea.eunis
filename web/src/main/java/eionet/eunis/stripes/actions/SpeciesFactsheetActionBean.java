@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -61,9 +61,11 @@ import eionet.sparqlClient.helpers.ResultValue;
 @UrlBinding("/species/{idSpecies}/{tab}")
 public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
+    /** */
     private static final String[] tabs = {"General information", "Vernacular names", "Geographical information", "Population",
-        "Trends", "Legal Instruments", "Habitat types", "Sites","Conservation status", "External data"};
+        "Trends", "Legal Instruments", "Habitat types", "Sites", "External data", "Conservation status"};
 
+    /** */
     private static final Map<String, String[]> types = new HashMap<String, String[]>();
     static {
         types.put("GENERAL_INFORMATION", new String[] {"general", tabs[0]});
@@ -75,9 +77,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         types.put("LEGAL_INSTRUMENTS", new String[] {"legal", tabs[5]});
         types.put("HABITATS", new String[] {"habitats", tabs[6]});
         types.put("SITES", new String[] {"sites", tabs[7]});
+        types.put("LINKEDDATA", new String[] {"linkeddata", tabs[8]});
         types.put("CONSERVATION_STATUS", new String[] {"conservation_status", tabs[8]});
-        types.put("LINKEDDATA", new String[] {"linkeddata", tabs[9]});
     }
+
+    /** */
+    public static final String[] CONSERVATION_STATUS_QUERIES = {"conservationstatusBio", "conservationstatusCountry"};
 
     /** The argument given. Can be a species number or scientific name */
     private String idSpecies;
@@ -159,21 +164,23 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private List<SitesByNatureObjectPersist> subSpeciesSites;
     private String subMapIds;
 
-
-
     /** LinkedData tab variables. */
     private List<ForeignDataQueryDTO> queries;
-    private List<ForeignDataQueryDTO> queriesWithOutConservationStatus;
-    private ForeignDataQueryDTO conservationStatusQuery;
     private String query;
     private ArrayList<Map<String, Object>> queryResultCols;
     private ArrayList<HashMap<String, ResultValue>> queryResultRows;
-    private ArrayList<Map<String, Object>> queryResultColsBiogeographical;
-    private ArrayList<HashMap<String, ResultValue>> queryResultRowsBiogeographical;
-    private ArrayList<Map<String, Object>> queryResultColsCountry;
-    private ArrayList<HashMap<String, ResultValue>> queryResultRowsCountry;
     private String attribution;
 
+    /** */
+    private LinkedHashMap<String, ArrayList<Map<String, Object>>> conservationStatusResultCols =
+            new LinkedHashMap<String, ArrayList<Map<String, Object>>>();
+    private LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>> conservationStatusResultRows =
+            new LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>>();
+
+    /**
+     *
+     * @return
+     */
     @DefaultHandler
     public Resolution index() {
         String idSpeciesText = null;
@@ -226,23 +233,22 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             SQLUtilities sqlUtil = getContext().getSqlUtilities();
 
-            // Decide what tabs to show
+            // Decide what tabs to show, based on tab display settings in the database
             List<String> existingTabs =
                     sqlUtil.getExistingTabPages(factsheet.getSpeciesNatureObject().getIdNatureObject().toString(), "SPECIES");
             for (String tab : existingTabs) {
                 if (types.containsKey(tab)) {
                     String[] tabData = types.get(tab);
-                        if(tabData[0].equals("linkeddata")){
-
-                            tabsWithData.add(new Pair<String, String>("conservation_status", getContentManagement().cmsPhrase("Conservation status")));
-                            tabsWithData.add(new Pair<String, String>("linkeddata", getContentManagement().cmsPhrase("External data")));
-                        }else{
-                            tabsWithData.add(new Pair<String, String>(tabData[0], getContentManagement().cmsPhrase(tabData[1])));
-                        }
+                    tabsWithData.add(new Pair<String, String>(tabData[0], getContentManagement().cmsPhrase(tabData[1])));
                 }
             }
 
-
+            // Show conservation status tab when there is a '_linkedDataQueries' attribute for this species in the related
+            // CHM62EDT_NATURE_OBJECT_ATTRIBUTES table, and it contains queries whose ID starts with "conservStats"
+            if (factsheet.hasExternalDataOnQueries(sqlUtil, CONSERVATION_STATUS_QUERIES)) {
+                tabsWithData.add(new Pair<String, String>("conservation_status", getContentManagement().cmsPhrase(
+                        "Conservation status")));
+            }
 
             specie = factsheet.getSpeciesNatureObject();
 
@@ -266,12 +272,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 sitesTabActions();
             }
 
-            if (tab != null && tab.equals("conservation_status")) {
-                conservationStatusTabActions(mainIdSpecies, specie.getIdNatureObject());
-            }
-
             if (tab != null && tab.equals("linkeddata")) {
                 linkeddataTabActions(mainIdSpecies, specie.getIdNatureObject());
+            }
+
+            if (tab != null && tab.equals("conservation_status")) {
+                conservationStatusTabActions(mainIdSpecies, specie.getIdNatureObject());
             }
         }
         String eeaHome = getContext().getInitParameter("EEA_HOME");
@@ -376,8 +382,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 for (int i = 0; i < consStatus.size(); i++) {
                     NationalThreatWrapper threat = consStatus.get(i);
                     String statusDesc =
-                            factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode(), threat.getIdConsStatus()).replaceAll("'", " ")
-                            .replaceAll("\"", " ");
+                            factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode(), threat.getIdConsStatus())
+                            .replaceAll("'", " ").replaceAll("\"", " ");
 
                     threat.setStatusDesc(statusDesc);
                     newList.add(threat);
@@ -432,10 +438,14 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private void geoTabActions() {
 
         // Get FAO code if one exists
-        faoCode = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getNatObjAttribute(specie.getIdNatureObject(), Constants.SAME_SPECIES_FIFAO);
+        faoCode =
+                DaoFactory.getDaoFactory().getSpeciesFactsheetDao()
+                .getNatObjAttribute(specie.getIdNatureObject(), Constants.SAME_SPECIES_FIFAO);
 
         // Get GBIF code if one exists
-        gbifCode = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().getNatObjAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_GBIF);
+        gbifCode =
+                DaoFactory.getDaoFactory().getSpeciesFactsheetDao()
+                .getNatObjAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_GBIF);
 
         bioRegions = SpeciesFactsheet.getBioRegionIterator(specie.getIdNatureObject(), factsheet.getIdSpecies());
         if (bioRegions.size() > 0) {
@@ -577,19 +587,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      * @param idSpecies - The species ID.
      */
     private void linkeddataTabActions(int idSpecies, Integer natObjId) {
-
         try {
             Properties props = new Properties();
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_species.xml"));
             LinkedData fd = new LinkedData(props, natObjId);
             queries = fd.getQueryObjects();
-
-            queriesWithOutConservationStatus = new  ArrayList<ForeignDataQueryDTO>();
-            for(ForeignDataQueryDTO q  : queries){
-                if(!q.getId().equals("consStatusBiogeographical") || !q.getId().equals("consStatusCountry")){
-                    queriesWithOutConservationStatus.add(q);
-                }
-            }
 
             if (!StringUtils.isBlank(query)) {
                 fd.executeQuery(query, idSpecies);
@@ -602,41 +604,35 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
+    /**
+     * Run the queries to be executed on "Conservation status" tab.
+     *
+     * @param idSpecies
+     * @param natObjId
+     */
     private void conservationStatusTabActions(int idSpecies, Integer natObjId) {
-
         try {
             Properties props = new Properties();
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_species.xml"));
-            LinkedData ld = new LinkedData(props, natObjId);
+            LinkedData fd = new LinkedData(props, natObjId);
+            queries = fd.getQueryObjects(CONSERVATION_STATUS_QUERIES);
 
-            query = "consStatusCountry";
-            queries = ld.getQueryObjects();
-            if (!StringUtils.isBlank(query)) {
-
-                ld.executeQuery(query, idSpecies);
-                 queryResultColsCountry = ld.getCols();
-                 queryResultRowsCountry = ld.getRows();
-                attribution = ld.getAttribution();
-
+            for (int i = 0; i < CONSERVATION_STATUS_QUERIES.length; i++) {
+                String queryId = CONSERVATION_STATUS_QUERIES[i];
+                fd.executeQuery(queryId, idSpecies);
+                conservationStatusResultCols.put(queryId, fd.getCols());
+                conservationStatusResultRows.put(queryId, fd.getRows());
             }
-
-            query = "consStatusBiogeographical";
-            queries = ld.getQueryObjects();
-            if (!StringUtils.isBlank(query)) {
-
-                ld.executeQuery(query, idSpecies);
-                queryResultColsBiogeographical = ld.getCols();
-                queryResultRowsBiogeographical = ld.getRows();
-                attribution = ld.getAttribution();
-
-            }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
+    /**
+     *
+     * @param sites
+     * @return
+     */
     private String getIds(List<SitesByNatureObjectPersist> sites) {
 
         int maxSitesPerMap = Utilities.checkedStringToInt(getContext().getInitParameter("MAX_SITES_PER_MAP"), 2000);
@@ -657,25 +653,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
 
         return ids;
-    }
-
-
-
-
-    public ArrayList<Map<String, Object>> getQueryResultColsCountry() {
-        return queryResultColsCountry;
-    }
-
-    public ArrayList<HashMap<String, ResultValue>> getQueryResultRowsCountry() {
-        return queryResultRowsCountry;
-    }
-
-    public ArrayList<Map<String, Object>> getQueryResultColsBiogeographical() {
-        return queryResultColsBiogeographical;
-    }
-
-    public ArrayList<HashMap<String, ResultValue>> getQueryResultRowsBiogeographical() {
-        return queryResultRowsBiogeographical;
     }
 
     /**
@@ -1074,14 +1051,17 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         return gbifCode;
     }
 
-    public ForeignDataQueryDTO getConservationStatusQuery() {
-        return conservationStatusQuery;
+    /**
+     * @return the conservationStatusResultCols
+     */
+    public LinkedHashMap<String, ArrayList<Map<String, Object>>> getConservationStatusResultCols() {
+        return conservationStatusResultCols;
     }
 
-    public List<ForeignDataQueryDTO> getQueriesWithOutConservationStatus() {
-        return queriesWithOutConservationStatus;
+    /**
+     * @return the conservationStatusResultRows
+     */
+    public LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>> getConservationStatusResultRows() {
+        return conservationStatusResultRows;
     }
-
-
-
 }

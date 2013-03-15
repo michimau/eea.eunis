@@ -1,10 +1,13 @@
 package ro.finsiel.eunis.factsheet.species;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.jrfTables.Chm62edtAbundanceDomain;
@@ -65,6 +68,7 @@ import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.factsheet.PublicationWrapper;
 import ro.finsiel.eunis.utilities.EunisUtil;
+import ro.finsiel.eunis.utilities.SQLUtilities;
 
 import com.ibm.icu.util.StringTokenizer;
 
@@ -78,27 +82,37 @@ import eionet.eunis.dto.TaxonomyTreeDTO;
  * @author finsiel
  */
 public class SpeciesFactsheet {
-    // ID_SPECIES from CHM62EDT_SPECIES
+
+    /** Log4J logger used for logging system */
+    private static Logger logger = Logger.getLogger(SpeciesFactsheet.class);
+
+    /** Query for detecting if the given species has any external data on conservation status. */
+    private static final String GET_LINKEDDATA_QUERIES_SQL = "select ATTRS.OBJECT"
+            + " from CHM62EDT_SPECIES as SPECIES left join CHM62EDT_NATURE_OBJECT_ATTRIBUTES as ATTRS"
+            + " on SPECIES.ID_NATURE_OBJECT=ATTRS.ID_NATURE_OBJECT where SPECIES.ID_SPECIES=? and ATTRS.NAME='_linkedDataQueries'";
+
+    /** ID_SPECIES from CHM62EDT_SPECIES */
     private Integer idSpecies = null;
-    // ID_SPECIES_LINK from CHM62EDT_SPECIES
+
+    /** ID_SPECIES_LINK from CHM62EDT_SPECIES */
     private Integer idSpeciesLink = null;
-    // Species object from database
+
+    /** Species object from database */
     private Chm62edtSpeciesPersist speciesObject = null;
-    // Taxonomic information for this species
+
+    /** Taxonomic information for this species */
     private FactsheetTaxcode taxcodeObject = null;
-    // Species' nature object
+
+    /** Species' nature object */
     private SpeciesNatureObjectPersist speciesNatureObject = null;
 
-    // Specifies if this factsheet exists or is invalid (species does not exists within DB)
+    /** Specifies if this factsheet exists or is invalid (species does not exists within DB) */
     private boolean exists = false;
-
-    // Log4J logger used for logging system
-    private static Logger logger = Logger.getLogger(SpeciesFactsheet.class);
 
     /**
      * Creates a new SpeciesFactsheet object.
      *
-     * @param idSpecies     ID_SPECIES from CHM62EDT_SPECIES.
+     * @param idSpecies ID_SPECIES from CHM62EDT_SPECIES.
      * @param idSpeciesLink ID_SPECIES_LINK from CHM62EDT_SPECIES.
      */
     public SpeciesFactsheet(Integer idSpecies, Integer idSpeciesLink) {
@@ -153,8 +167,8 @@ public class SpeciesFactsheet {
 
     /**
      * Species description as a human readable string in english language.
-     * @return Description of species scientific an vernacular name and localization
-     * within Europe.
+     *
+     * @return Description of species scientific an vernacular name and localization within Europe.
      */
     public String getSpeciesDescription() {
         String ret = "";
@@ -460,7 +474,6 @@ public class SpeciesFactsheet {
                         new Chm62edtConservationStatusDomain()
                 .findWhere("ID_CONSERVATION_STATUS = '" + report.getIDLookup() + "'");
 
-
                 List list2 =
                         new Chm62edtCountryDomain().findWhere("AREA_NAME_EN not like 'ospar%' and ID_GEOSCOPE='"
                                 + report.getIdGeoscope() + "'");
@@ -475,33 +488,32 @@ public class SpeciesFactsheet {
                     if (country.getIso2l() == null || (country.getIso2l() != null && country.getIso2l().equals(""))) {
                         if (!(country.getAreaNameEnglish() == null || country.getAreaNameEnglish().trim().indexOf("ospar") == 0)) {
 
-
-                            String IntThrCode = consS.getCode();; //"International threat code" in table "CHM62EDT_CONSERVATION_STATUS"
+                            String IntThrCode = consS.getCode();
+                            ; // "International threat code" in table "CHM62EDT_CONSERVATION_STATUS"
                             Integer idConsStatus = consS.getIdConsStatus();
                             String author = report.getSource();
                             int year = Utilities.checkedStringToInt(report.getCreated(), 0);
-                            if(consS.getIdConsStatusLink() != 0 && consS.getSource() != null && !consS.getSource().toUpperCase().contains("IUCN")){
+                            if (consS.getIdConsStatusLink() != 0 && consS.getSource() != null
+                                    && !consS.getSource().toUpperCase().contains("IUCN")) {
 
                                 List list3 =
-                                        new Chm62edtConservationStatusDomain()
-                                .findWhere("ID_CONSERVATION_STATUS = '"+consS.getIdConsStatusLink()+"'");
-                                 Chm62edtConservationStatusPersist  consS2 = (Chm62edtConservationStatusPersist) list3.get(0);
-                                 if(consS2.getSource() != null && consS2.getSource().toUpperCase().contains("IUCN")){
-                                     IntThrCode = consS2.getCode();
-                                     idConsStatus =  consS2.getIdConsStatus();
-                                     author = consS2.getSource();
-                                 }
-                                 else if(consS2.getSource() != null && !consS2.getSource().toUpperCase().contains("IUCN")){
-//                                   author = "";
-                                     IntThrCode = "";
-                                     idConsStatus = 0;
-                                 }
-                           }
-                            else if(consS.getIdConsStatusLink() == 0 && !consS.getSource().toUpperCase().contains("IUCN")){
-//                                author = "";
+                                        new Chm62edtConservationStatusDomain().findWhere("ID_CONSERVATION_STATUS = '"
+                                                + consS.getIdConsStatusLink() + "'");
+                                Chm62edtConservationStatusPersist consS2 = (Chm62edtConservationStatusPersist) list3.get(0);
+                                if (consS2.getSource() != null && consS2.getSource().toUpperCase().contains("IUCN")) {
+                                    IntThrCode = consS2.getCode();
+                                    idConsStatus = consS2.getIdConsStatus();
+                                    author = consS2.getSource();
+                                } else if (consS2.getSource() != null && !consS2.getSource().toUpperCase().contains("IUCN")) {
+                                    // author = "";
+                                    IntThrCode = "";
+                                    idConsStatus = 0;
+                                }
+                            } else if (consS.getIdConsStatusLink() == 0 && !consS.getSource().toUpperCase().contains("IUCN")) {
+                                // author = "";
                                 IntThrCode = "";
                                 idConsStatus = 0;
-//                                year=0;
+                                // year=0;
                             }
                             threat.setCountry(country.getAreaNameEnglish());
 
@@ -631,8 +643,7 @@ public class SpeciesFactsheet {
     }
 
     /**
-     * List of SpeciesNatureObjectPersist's.
-     * The query on SCIENTIFIC_NAME should not be necessary if the database is consistent
+     * List of SpeciesNatureObjectPersist's. The query on SCIENTIFIC_NAME should not be necessary if the database is consistent
      *
      * @return A list of SpeciesNatureObjectPersist with all subspecies of this species.
      */
@@ -770,7 +781,7 @@ public class SpeciesFactsheet {
                         }
                     }
 
-                    if (!results.contains(legalStatus)){
+                    if (!results.contains(legalStatus)) {
                         results.add(legalStatus);
                     }
 
@@ -786,8 +797,6 @@ public class SpeciesFactsheet {
 
         return results;
     }
-
-
 
     /**
      * Find information about legal area status.
@@ -1180,7 +1189,7 @@ public class SpeciesFactsheet {
      * Retrieve taxonomic information about a species.
      *
      * @param taxcodeID ID_TAXONOMY from CHM62EDT_TAXONOMY.
-     * @param level     Level (0, 1, 2 etc. for family, order, class, phylum etc.)
+     * @param level Level (0, 1, 2 etc. for family, order, class, phylum etc.)
      * @return Name.
      */
     public String getTaxonomicName(String taxcodeID, int level) {
@@ -1491,8 +1500,8 @@ public class SpeciesFactsheet {
     }
 
     /**
-     * Get the pictures available in database for this species. It queries the CHM62EDT_NATURE_OBJECT_PICTURE
-     * with ID_SPECIES ant NATURE_OBJECT_TYPE='Species'.
+     * Get the pictures available in database for this species. It queries the CHM62EDT_NATURE_OBJECT_PICTURE with ID_SPECIES ant
+     * NATURE_OBJECT_TYPE='Species'.
      *
      * @param limit - number of pictures returned
      * @param mainPic - query only main pic
@@ -1538,8 +1547,8 @@ public class SpeciesFactsheet {
     }
 
     /**
-     * Get the main picture available in database for this species. It queries the CHM62EDT_NATURE_OBJECT_PICTURE
-     * with ID_SPECIES and NATURE_OBJECT_TYPE='Species' AND MAIN_PIC = 1 .
+     * Get the main picture available in database for this species. It queries the CHM62EDT_NATURE_OBJECT_PICTURE with ID_SPECIES
+     * and NATURE_OBJECT_TYPE='Species' AND MAIN_PIC = 1 .
      *
      * @return A PictureDTO object.
      */
@@ -1626,7 +1635,7 @@ public class SpeciesFactsheet {
      * Find the value of an attribute for species, from CHM62EDT_REPORT_ATTRIBUTES.
      *
      * @param idReportAttribute ID_REPORT_ATTRIBUTES from CHM62EDT_REPORT_ATTRIBUTES.
-     * @param name              NAME from CHM62EDT_REPORT_ATTRIBUTES.
+     * @param name NAME from CHM62EDT_REPORT_ATTRIBUTES.
      * @return VALUE from CHM62EDT_REPORT_ATTRIBUTES.
      */
     private static String findReportAttributesValue(Integer idReportAttribute, String name) {
@@ -1652,7 +1661,7 @@ public class SpeciesFactsheet {
      * Find the value of an attribute for species, from CHM62EDT_REPORT_TYPE.
      *
      * @param idReportType ID_REPORT_TYPE from CHM62EDT_REPORT_TYPE.
-     * @param lookup_type  Name of the attribute (implemented: abundance, frequencies, faithfulness, species_status).
+     * @param lookup_type Name of the attribute (implemented: abundance, frequencies, faithfulness, species_status).
      * @return value associated with the given attribute.
      */
     private static String findReportTypeValue(Integer idReportType, String lookup_type) {
@@ -1797,14 +1806,56 @@ public class SpeciesFactsheet {
             return "";
         }
         String result = "";
-        String idS="";
-        if(id!=null && id != 0){
-            idS = " AND ID_CONSERVATION_STATUS = '"+id+"'";
+        String idS = "";
+        if (id != null && id != 0) {
+            idS = " AND ID_CONSERVATION_STATUS = '" + id + "'";
         }
-        List conservations = new Chm62edtConservationStatusDomain().findWhere("CODE = '" + code + "'"+idS);
+        List conservations = new Chm62edtConservationStatusDomain().findWhere("CODE = '" + code + "'" + idS);
         if (conservations != null && conservations.size() > 0) {
             result = ((Chm62edtConservationStatusPersist) conservations.get(0)).getDescription();
         }
         return (result == null ? "" : result);
+    }
+
+    /**
+     * Returns true if the given species has external data on any of the linked data queries supplied in the method input. Otherwise
+     * returns false.
+     *
+     * @param sqlUtil The {@link SQLUtilities} instance to use.
+     * @param queries The linked data queries to check.
+     * @return The boolean as indicated.
+     */
+    public boolean hasExternalDataOnQueries(SQLUtilities sqlUtil, String... queries) {
+
+        if (queries == null || queries.length == 0) {
+            return false;
+        }
+
+        ArrayList<Object> params = new ArrayList<Object>();
+        params.add(idSpecies);
+        List<Object> resultList = null;
+        try {
+            resultList = sqlUtil.executeQuery(GET_LINKEDDATA_QUERIES_SQL, params);
+        } catch (SQLException e) {
+            logger.error(
+                    "Failed to check if species (id=" + idSpecies + ") has external data on these queries: "
+                            + StringUtils.join(queries, ','), e);
+            return false;
+        }
+        if (resultList != null && !resultList.isEmpty()) {
+            Object queriesString = resultList.iterator().next();
+            if (queriesString != null) {
+                List<String> queriesWithData = Arrays.asList(StringUtils.split(queriesString.toString(), ", "));
+                if (queriesWithData != null && !queriesWithData.isEmpty()) {
+                    for (int i = 0; i < queries.length; i++) {
+                        if (queriesWithData.contains(queries[i])) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }

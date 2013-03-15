@@ -90,14 +90,14 @@
                     <input type="hidden" name="DB_BIOGENETIC" value="ON" />
                     <input type="hidden" name="DB_EMERALD" value="ON" />
                     <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_STARTS%>" />
-                    <label for="englishName"><%=cm.cmsPhrase("Search sites with names starting with:")%></label>
+                    <label for="englishName"><%=cm.cmsPhrase("Search sites by code or by name starting with:")%></label>
                     <input type="text"
                            size="32"
                            name="englishName"
                            id="englishName"
-                           value="<%=cm.cmsPhrase("Enter site name here...")%>"
-                           onfocus="if(this.value=='<%=cm.cmsPhrase("Enter site name here...")%>')this.value='';"
-                           onblur="if(this.value=='')this.value='<%=cm.cmsPhrase("Enter site name here...")%>';" />
+                           value="<%=cm.cmsPhrase("Enter code or site name here...")%>"
+                           onfocus="if(this.value=='<%=cm.cmsPhrase("Enter code or site name here...")%>')this.value='';"
+                           onblur="if(this.value=='')this.value='<%=cm.cmsPhrase("Enter code or site name here...")%>';" />
                     <input type="submit" value="<%=cm.cmsPhrase("Search")%>" name="Submit" class="submitSearchButton" title="<%=cm.cmsPhrase("Search")%>" />
                     <a href="fuzzy-search-help.jsp" title="<%=cm.cmsPhrase("Help on fuzzy search")%>"><img alt="" src="images/mini/help.jpg" border="0" style="vertical-align:middle" /></a>
                     <br />

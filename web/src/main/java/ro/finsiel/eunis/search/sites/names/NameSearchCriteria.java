@@ -231,7 +231,7 @@ public class NameSearchCriteria extends SitesSearchCriteria {
         StringBuffer ret = new StringBuffer();
 
         if (null != englishName && null != relationOp) {
-            ret.append(Utilities.prepareHumanString("Site name ", englishName, relationOp));
+            ret.append(Utilities.prepareHumanString("Site code contains or name ", englishName, relationOp));
         }
         if (null != country) {
             // AND C.AREA_NAME_EN='FRANCE'

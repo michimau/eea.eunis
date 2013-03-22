@@ -1,6 +1,11 @@
 package eionet.eunis.stripes.actions;
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,7 +23,7 @@ import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
-
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -48,9 +53,17 @@ import eionet.eunis.dto.LinkDTO;
 import eionet.eunis.dto.PictureDTO;
 import eionet.eunis.dto.SpeciesDistributionDTO;
 import eionet.eunis.rdf.LinkedData;
+import eionet.eunis.stripes.EunisActionBeanContext;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
 import eionet.sparqlClient.helpers.ResultValue;
+
+import java.io.InputStream;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
+
 
 /**
  * ActionBean for species factsheet. Data is loaded from {@link ro.finsiel.eunis.factsheet.species.SpeciesFactsheet} and
@@ -81,8 +94,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         types.put("CONSERVATION_STATUS", new String[] {"conservation_status", tabs[8]});
     }
 
-    /** */
-    public static final String[] CONSERVATION_STATUS_QUERIES = {"conservationstatusBio", "conservationstatusCountry"};
 
     /** The argument given. Can be a species number or scientific name */
     private String idSpecies;
@@ -177,6 +188,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>> conservationStatusResultRows =
             new LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>>();
 
+    private boolean rangeLayer;
+    private boolean distributionLayer;
+    private boolean conservationStatusQueriesExists;
+
     /**
      *
      * @return
@@ -245,7 +260,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             // Show conservation status tab when there is a '_linkedDataQueries' attribute for this species in the related
             // CHM62EDT_NATURE_OBJECT_ATTRIBUTES table, and it contains queries whose ID starts with "conservStats"
-            if (factsheet.hasExternalDataOnQueries(sqlUtil, CONSERVATION_STATUS_QUERIES)) {
+            if (factsheet.hasExternalDataOnQueries(sqlUtil, getConservationStatusQueries())) {
                 tabsWithData.add(new Pair<String, String>("conservation_status", getContentManagement().cmsPhrase(
                         "Conservation status")));
             }
@@ -490,7 +505,53 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 filename = mapserverURL + "/getmap.asp?" + parameters;
             }
         }
+
+      setRangeLayer(isSpeciesLayer(scientificName, 1));
+      setDistributionLayer(isSpeciesLayer(scientificName, 4));
     }
+
+
+    /**
+     * Checks that this species layer exist in discomap server.
+     * @param scientificName - species scientific name
+     * @param layerNumber - discomap layer number
+     * @return boolean
+     */
+    private boolean isSpeciesLayer(String scientificName, int layerNumber) {
+        boolean results = false;
+        if (scientificName != null && scientificName.isEmpty() == false && layerNumber > 0) {
+
+            String layerNumberS = Integer.toString(layerNumber);
+            String rawMapServerFindOperationUrl = getContext().getApplicationProperty("DISCOMAP_SERVER_BIO");
+            if (rawMapServerFindOperationUrl != null && rawMapServerFindOperationUrl.trim().length() > 0) {
+                String mapServerFindOperationUrl =
+                        rawMapServerFindOperationUrl.replace("#{scientific_name}", scientificName.replace(" ", "+").trim())
+                                .replace("#{layer_number}", layerNumberS);
+                try {
+
+                    String jsonTxt = IOUtils.toString(new URL(mapServerFindOperationUrl));
+                    JSONObject json = (JSONObject) JSONSerializer.toJSON(jsonTxt);
+                    JSONArray jArray = json.getJSONArray("results");
+                    if (jArray.isEmpty()) {
+
+                        results = false;
+                    } else {
+
+                        JSONObject jArray0 = jArray.getJSONObject(0); // jArray[0]
+                        JSONObject attributes = jArray0.getJSONObject("attributes");
+                        if (attributes.getString("Type").trim().equalsIgnoreCase("species")) {
+                            results = true;
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return results;
+    }
+
+
 
     /**
      * Populate the member variables used in the "grid" tab.
@@ -592,7 +653,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_species.xml"));
             LinkedData fd = new LinkedData(props, natObjId);
             queries = fd.getQueryObjects();
-
             if (!StringUtils.isBlank(query)) {
                 fd.executeQuery(query, idSpecies);
                 queryResultCols = fd.getCols();
@@ -612,21 +672,27 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      */
     private void conservationStatusTabActions(int idSpecies, Integer natObjId) {
         try {
+           String[]  conservationStatusQueries  = getConservationStatusQueries();
+
             Properties props = new Properties();
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_species.xml"));
             LinkedData fd = new LinkedData(props, natObjId);
-            queries = fd.getQueryObjects(CONSERVATION_STATUS_QUERIES);
-
-            for (int i = 0; i < CONSERVATION_STATUS_QUERIES.length; i++) {
-                String queryId = CONSERVATION_STATUS_QUERIES[i];
+            queries = fd.getQueryObjects(conservationStatusQueries);
+            for (int i = 0; i < conservationStatusQueries.length; i++) {
+                String queryId = conservationStatusQueries[i];
                 fd.executeQuery(queryId, idSpecies);
                 conservationStatusResultCols.put(queryId, fd.getCols());
                 conservationStatusResultRows.put(queryId, fd.getRows());
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
+
+
 
     /**
      *
@@ -653,6 +719,47 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
 
         return ids;
+    }
+    /**
+     *
+     * @return CONSERVATION_STATUS_QUERIES array in eunis.properties
+     */
+    private String[] getConservationStatusQueries(){
+
+        String property =
+                getContext().getApplicationProperty("CONSERVATION_STATUS_QUERIES");
+                if (property != null && property.trim().length() > 0) {
+                    conservationStatusQueriesExists = true;
+                    return StringUtils.split(property);
+                }
+                else{
+                    conservationStatusQueriesExists = false;
+                    return new String[0];
+                }
+
+     }
+
+
+
+    public boolean isConservationStatusQueriesExists() {
+        return conservationStatusQueriesExists;
+    }
+
+
+    public boolean isRangeLayer() {
+        return rangeLayer;
+    }
+
+    public void setRangeLayer(boolean rangeLayer) {
+        this.rangeLayer = rangeLayer;
+    }
+
+    public boolean isDistributionLayer() {
+        return distributionLayer;
+    }
+
+    public void setDistributionLayer(boolean distributionLayer) {
+        this.distributionLayer = distributionLayer;
     }
 
     /**

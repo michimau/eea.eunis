@@ -34,11 +34,13 @@
             </c:if>
             <c:choose>
                 <c:when test="${not empty actionBean.queryResultCols && not empty actionBean.queryResultRows}">
-                    <display:table name="actionBean.queryResultRows" class="sortable" pagesize="50" sort="list" requestURI="/species/${actionBean.idSpecies}/linkeddata">
-                        <c:forEach var="cl" items="${actionBean.queryResultCols}">
-                            <display:column property="${cl.property}" title="${cl.title}" sortable="${cl.sortable}" decorator="eionet.eunis.util.decorators.ForeignDataColumnDecorator"/>
-                        </c:forEach>
-                    </display:table>
+                    <div style="overflow-x:auto ">
+                        <display:table name="actionBean.queryResultRows" class="sortable" pagesize="30" sort="list" requestURI="/species/${actionBean.idSpecies}/linkeddata">
+                            <c:forEach var="cl" items="${actionBean.queryResultCols}">
+                                <display:column property="${cl.property}" title="${cl.title}" sortable="${cl.sortable}" decorator="eionet.eunis.util.decorators.ForeignDataColumnDecorator"/>
+                            </c:forEach>
+                        </display:table>
+                    </div>
                     <c:if test="${not empty actionBean.attribution}">
                         <b>Source:</b> ${actionBean.attribution}
                     </c:if>

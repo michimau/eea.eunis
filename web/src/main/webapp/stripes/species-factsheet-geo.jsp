@@ -98,23 +98,28 @@
                 // Species Distribution layer
                 var imageParameters_dist = new esri.layers.ImageParameters();
                 var layerDefs_dist = [];
-                layerDefs_dist[4] = "Type = 'species' and Assesment = '${actionBean.scientificName}'";
-                imageParameters_dist.layerDefinitions = layerDefs_dist;
-                imageParameters_dist.layerIds = [4];
-                imageParameters_dist.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
-                imageParameters_dist.transparent = true;
-                layer_dist = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_dist});
+                var isDistributionLayerExist = ${actionBean.distributionLayer};
+                if(isDistributionLayerExist){
+	                layerDefs_dist[4] = "Type = 'species' and Assesment = '${actionBean.scientificName}'";
+	                imageParameters_dist.layerDefinitions = layerDefs_dist;
+	                imageParameters_dist.layerIds = [4];
+	                imageParameters_dist.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
+	                imageParameters_dist.transparent = true;
+	                layer_dist = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_dist});
+                }
 
                 // Species Range layer
                 var imageParameters_range = new esri.layers.ImageParameters();
                 var layerDefs_range = [];
-                layerDefs_range[1] = "Type = 'species' and Assesment = '${actionBean.scientificName}'";
-                imageParameters_range.layerDefinitions = layerDefs_range;
-                imageParameters_range.layerIds = [1];
-                imageParameters_range.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
-                imageParameters_range.transparent = true;
-                layer_range = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_range});
-
+                var isRangeLayerExist = ${actionBean.rangeLayer};
+                if (isRangeLayerExist){
+	                layerDefs_range[1] = "Type = 'species' and Assesment = '${actionBean.scientificName}'";
+	                imageParameters_range.layerDefinitions = layerDefs_range;
+	                imageParameters_range.layerIds = [1];
+	                imageParameters_range.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
+	                imageParameters_range.transparent = true;
+	                layer_range = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Article17_Dyna_WGS84/MapServer", {"imageParameters":imageParameters_range});
+                }
                 map.addLayer(gbifLayer);
 			}
 
@@ -254,20 +259,24 @@
 						</dt>
 						<dd>Map depicts density of specimen and observational data. Source: <a href="http://data.gbif.org/species/${actionBean.gbifCode}">GBIF</a></dd>
 					</c:if>
-					<dt>
-						<label for="distribution">
-							<input type="checkbox" class="list_item" id="distribution" onclick="updateLayerVisibility('distribution');"/>
-							Distribution
-						</label>
-					</dt>
-					<dd>Distribution reported under Article 17, Habitats Directive</dd>
-					<dt>
-						<label for="range">
-							<input type="checkbox" class="list_item" id="range" onclick="updateLayerVisibility('range');"/>
-							Range
-						</label>
-					</dt>
-					<dd>Range reported under Article 17, Habitats Directive</dd>
+					<c:if test="${actionBean.distributionLayer}">
+						<dt>
+							<label for="distribution">
+								<input type="checkbox" class="list_item" id="distribution" onclick="updateLayerVisibility('distribution');"/>
+								Distribution
+							</label>
+						</dt>
+						<dd>Distribution reported under Article 17, Habitats Directive</dd>
+					</c:if>
+					<c:if test="${actionBean.rangeLayer}">
+						<dt>
+							<label for="range">
+								<input type="checkbox" class="list_item" id="range" onclick="updateLayerVisibility('range');"/>
+								Range
+							</label>
+						</dt>
+						<dd>Range reported under Article 17, Habitats Directive</dd>
+					</c:if>
 					<dt>
 						<label for="natura">
 							<input type="checkbox" class="list_item" id="natura" onclick="updateLayerVisibility('natura');"/>

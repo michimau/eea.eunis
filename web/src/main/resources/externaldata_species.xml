@@ -5,10 +5,10 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">deliveries derogationsreport vernacularnames
-       landings art17ranges art17populations
-       birdlifedistribution birdlifetrend
-	butterfliestrend conservationstatusBio conservationstatusCountry</entry>
+  <entry key="queries">deliveries derogationsreport landings
+      art17ranges art17populations
+      birdlifedistribution birdlifetrend
+      butterfliestrend conservationstatusBio conservationstatusCountry</entry>
 <!-- -->
 <!-- .endpoint, .title and .query are mandatory for all queries -->
 <!-- .summary - use HTML format - i.e. escape & and < -->
@@ -219,47 +219,6 @@ WHERE {
 ]]></entry>
 
 
-
-
-<!-- Show vernacular names from other databases -->
-  <entry key="vernacularnames.endpoint">http://semantic.eea.europa.eu/sparql</entry>
-  <entry key="vernacularnames.title">Vernacular names in other databases</entry>
-<!-- .summary - use HTML format - i.e. escape & and < -->
-  <entry key="vernacularnames.summary">Shows vernacular names from other databases that have implemented Linked Data.</entry>
-  <entry key="vernacularnames.query"><![CDATA[
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
-PREFIX geospecies: <http://rdf.geospecies.org/ont/geospecies#>
-PREFIX dwc: <http://rs.tdwg.org/dwc/terms/>
-
-SELECT DISTINCT ?otherspecies LANG(?vernacular) AS ?language ?vernacular
-WHERE {
-  <http://eunis.eea.europa.eu/species/[IDENTIFIER]> eunis:sameSpecies ?otherspecies;
-                                                    eunis:binomialName ?binomial.
- { ?otherspecies rdfs:label ?vernacular }
- UNION
- { ?otherspecies geospecies:hasCommonName ?vernacular }
- FILTER(STR(?binomial) != STR(?vernacular))
-} ORDER BY ?language
-]]></entry>
-
-  <entry key="vernacularnames.codes"><![CDATA[
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
-PREFIX geospecies: <http://rdf.geospecies.org/ont/geospecies#>
-PREFIX dwc: <http://rs.tdwg.org/dwc/terms/>
-
-SELECT DISTINCT ?speciescode
-WHERE {
-  ?speciesurl eunis:sameSpecies ?otherspecies;
-              eunis:binomialName ?binomial;
-              eunis:speciesCode ?speciescode
- { ?otherspecies rdfs:label ?vernacular }
- UNION
- { ?otherspecies geospecies:hasCommonName ?vernacular }
- FILTER(STR(?binomial) != STR(?vernacular))
-}
-]]></entry>
 
 
 

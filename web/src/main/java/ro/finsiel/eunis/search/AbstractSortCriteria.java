@@ -1,9 +1,9 @@
 package ro.finsiel.eunis.search;
 
 
-import ro.finsiel.eunis.exceptions.InitializationException;
-
 import java.util.Hashtable;
+
+import ro.finsiel.eunis.exceptions.InitializationException;
 
 
 /**

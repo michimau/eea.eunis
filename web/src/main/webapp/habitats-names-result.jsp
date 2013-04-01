@@ -40,24 +40,23 @@
   boolean showVernacularName = Utilities.checkedStringToBoolean(formBean.getShowVernacularName(), NameBean.HIDE);
   boolean newName = Utilities.checkedStringToBoolean(formBean.getNewName(), false);
   boolean noSoundex = Utilities.checkedStringToBoolean( formBean.getNoSoundex(), false );
+  boolean fuzzySearch = Utilities.checkedStringToBoolean(formBean.getFuzzySearch(), false);
   // Set number criteria for the search result
   int noCriteria = (null == formBean.getCriteriaSearch() ? 0 : formBean.getCriteriaSearch().length);
-
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
   Integer database = Utilities.checkedStringToInt(formBean.getDatabase(), NamesDomain.SEARCH_EUNIS);
   // The main paginator
-  NamePaginator paginator = new NamePaginator(new NamesDomain(formBean.toSearchCriteria(), formBean.getMainSearchCriteriasExtra(), formBean.toSortCriteria(), database));
+  NamePaginator paginator = new NamePaginator(new NamesDomain(formBean.toSearchCriteria(), formBean.getMainSearchCriteriasExtra(), formBean.toSortCriteria(), database, fuzzySearch));
   // Initialization
   paginator.setSortCriteria(formBean.toSortCriteria());
   paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
-  currentPage = paginator.setCurrentPage(currentPage);// Compute *REAL* current page (adjusted if user messes up)
-  int resultsCount = paginator.countResults();
+  currentPage = paginator.setCurrentPage(currentPage);// Compute *REAL* current page (adjusted if user messes up)  
   final String pageName = "habitats-names-result.jsp";
   int pagesCount = paginator.countPages();// This is used in @page include...
   int guid = 0;// This is used in @page include...
   // Now extract the results for the current page.
   List results = paginator.getPage(currentPage);
-
+  int resultsCount = paginator.countResults();
   // Prepare parameters for tsvlink
   Vector reportFields = new Vector();
   reportFields.addElement("sort");
@@ -79,7 +78,7 @@
       Chm62edtSoundexPersist t = (Chm62edtSoundexPersist) list.get(0);
       String soundexName = t.getName();
       try {
-        String URL = "habitats-names-result.jsp?showScientificName=true&deleteIndex=-1&sort=3&ascendency=1&showLevel=true&showCode=true&relationOp=4&noSoundex=false&searchString=" + soundexName + "&database=" + database + "&useScientific=true&useVernacular=true&newName=true&oldName=" + sname;
+        String URL = "habitats-names-result.jsp?showScientificName=true&deleteIndex=-1&sort=3&ascendency=1&showLevel=true&showCode=true&relationOp=4&noSoundex=false&searchString=" + soundexName + "&database=" + database + "&useScientific=true&useVernacular=true&newName=true&oldName=" + sname + "&fuzzySearch="+formBean.getFuzzySearch();
         response.sendRedirect(URL);
         return;
       } catch (Exception e) {

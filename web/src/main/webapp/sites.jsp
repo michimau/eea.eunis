@@ -89,6 +89,7 @@
                     <input type="hidden" name="DB_CORINE" value="ON" />
                     <input type="hidden" name="DB_BIOGENETIC" value="ON" />
                     <input type="hidden" name="DB_EMERALD" value="ON" />
+                    <input type="hidden" name="fuzzySearch" value="true" />
                     <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_STARTS%>" />
                     <label for="englishName"><%=cm.cmsPhrase("Search sites by code or by name starting with:")%></label>
                     <input type="text"

@@ -1,11 +1,10 @@
 package ro.finsiel.eunis.search.sites;
 
-
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
-
 
 /**
  * Base class for all search criterias used in sites search.
+ * 
  * @author finsiel
  */
 public abstract class SitesSearchCriteria extends AbstractSearchCriteria {
@@ -119,9 +118,27 @@ public abstract class SitesSearchCriteria extends AbstractSearchCriteria {
      * Site species link.
      */
     public static final Integer CRITERIA_SPECIES = new Integer(21);
-    
+
     /**
      * Site ID.
      */
     public static final Integer CRITERIA_ID = new Integer(22);
+
+    /**
+     * Returns criteria search string
+     * 
+     * @return criteria search keyword
+     */
+    public String getCriteriaSearch() {
+        return criteriaSearch;
+    }
+
+    /**
+     * Returns criteria type
+     * 
+     * @return criteria type
+     */
+    public Integer getCriteriaType() {
+        return criteriaType;
+    }
 }

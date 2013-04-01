@@ -102,10 +102,12 @@
 	String downloadLink = "javascript:openTSVDownload('reports/species/tsv-species-names.jsp?" + formBean.toURLParam(reportFields) + "')";
 	if( results.isEmpty() && !newName){
 		String sname;
-    	if(NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm)
+    	if(NameSearchCriteria.CRITERIA_SCIENTIFIC.intValue() == typeForm){
        		sname = formBean.getScientificName();
-    	else
+    	} else {
 	      	sname = formBean.getVernacularName();
+    	}
+    	
     	try {
     		String URL = "species-names-result.jsp?typeForm=0&showScientificName=true&showGroup=true&showOrder=true&showFamily=true&showVernacularNames=true&showValidName=true&relationOp=4&scientificName="+sname+"&searchSynonyms=true&newName=true";
     		URL += "&searchVernacular=" + searchVernacular;

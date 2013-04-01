@@ -1,15 +1,13 @@
 package ro.finsiel.eunis.search.habitats.names;
 
+import java.util.Hashtable;
 
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.Utilities;
-import ro.finsiel.eunis.jrfTables.habitats.names.NamesDomain;
-
-import java.util.Hashtable;
-
 
 /**
  * Search criteria used for habitats->references.
+ * 
  * @author finsiel
  */
 public class NameSearchCriteria extends AbstractSearchCriteria {
@@ -57,21 +55,24 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
 
     /**
      * Default constructor used for first search.
-     * @param searchString String to be searched
-     * @param relationOp Relation (IS/CONTAINS/STARTS)
-     * @param database Type of search: eunis / annex I
-     * @param useDescription Specify if search will use description or not
-     * @param useScientificName Use scientific name in search
-     * @param useVernacularName Use vernacular name in search
-     * @param isExtra Is another main search criteria.
+     * 
+     * @param searchString
+     *            String to be searched
+     * @param relationOp
+     *            Relation (IS/CONTAINS/STARTS)
+     * @param database
+     *            Type of search: eunis / annex I
+     * @param useDescription
+     *            Specify if search will use description or not
+     * @param useScientificName
+     *            Use scientific name in search
+     * @param useVernacularName
+     *            Use vernacular name in search
+     * @param isExtra
+     *            Is another main search criteria.
      */
-    public NameSearchCriteria(String searchString,
-            Integer relationOp,
-            Integer database,
-            boolean useDescription,
-            boolean useScientificName,
-            boolean useVernacularName,
-            boolean isExtra) {
+    public NameSearchCriteria(String searchString, Integer relationOp, Integer database, boolean useDescription,
+            boolean useScientificName, boolean useVernacularName, boolean isExtra) {
         _initSQLMappings(database);
         _initHumanMappings(database);
         this.searchString = searchString;
@@ -85,17 +86,19 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
 
     /**
      * This constructor is used for search in results.
-     * @param criteriaSearch String to be searched
-     * @param criteriaType Where to search
-     * @param oper Relation between criteriaSearch and criteriaType
-     * @param database What database to use: EUNIS or ANNEX I
-     * @param isExtra Is another main search criteria.
+     * 
+     * @param criteriaSearch
+     *            String to be searched
+     * @param criteriaType
+     *            Where to search
+     * @param oper
+     *            Relation between criteriaSearch and criteriaType
+     * @param database
+     *            What database to use: EUNIS or ANNEX I
+     * @param isExtra
+     *            Is another main search criteria.
      */
-    public NameSearchCriteria(String criteriaSearch,
-            Integer criteriaType,
-            Integer oper,
-            Integer database,
-            boolean isExtra) {
+    public NameSearchCriteria(String criteriaSearch, Integer criteriaType, Integer oper, Integer database, boolean isExtra) {
         _initSQLMappings(database);
         _initHumanMappings(database);
         this.criteriaSearch = criteriaSearch;
@@ -107,7 +110,9 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
 
     /**
      * Init the mappings used to compose the SQL query.
-     * @param database Not used.
+     * 
+     * @param database
+     *            Not used.
      */
     private void _initSQLMappings(Integer database) {
         if (null != sqlMappings) {
@@ -124,7 +129,9 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
 
     /**
      * Init the mappings used to compose the SQL query.
-     * @param database Not used.
+     * 
+     * @param database
+     *            Not used.
      */
     private void _initHumanMappings(Integer database) {
         if (null != humanMappings) {
@@ -139,9 +146,11 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
         humanMappings.put(CRITERIA_SCIENTIFIC_NAME, "Scientific name ");
     }
 
-    /** This method must be implementing by inheriting classes and should return the representation of an object as
-     * an URL, for example if implementing class has 2 params: county/region then this method should return:
-     * country=XXX&region=YYY, in order to put the object on the request to forward params to next page.
+    /**
+     * This method must be implementing by inheriting classes and should return the representation of an object as an URL, for
+     * example if implementing class has 2 params: county/region then this method should return: country=XXX&region=YYY, in order to
+     * put the object on the request to forward params to next page.
+     * 
      * @return An URL compatible representation of this object.
      */
     public String toURLParam() {
@@ -189,10 +198,20 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
     }
 
     /**
-     * Transform this object into an SQL representation.
+     * Transform this object into an SQL representation without fuzzy search.
+     * 
      * @return SQL string representing this object.
      */
     public String toSQL() {
+        return toSQL(false);
+    }
+
+    /**
+     * Transform this object into an SQL representation.
+     * 
+     * @return SQL string representing this object.
+     */
+    public String toSQL(boolean fuzzySearch) {
         StringBuffer sql = new StringBuffer();
 
         // Normal search
@@ -208,7 +227,16 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
                 if (addOROperator) {
                     sql.append(" OR ");
                 }
-                sql.append(Utilities.prepareSQLOperator("A.SCIENTIFIC_NAME", searchString, relationOp));
+
+                sql.append(Utilities.prepareSQLOperator("A.SCIENTIFIC_NAME", searchString, Utilities.OPERATOR_CONTAINS));
+
+                if (fuzzySearch) {
+                    String subSearchString = searchString.substring(0, 3);
+                    sql.append(" OR (A.SCIENTIFIC_NAME LIKE '%").append(subSearchString).append("%' AND levenshtein('")
+                            .append(subSearchString).append("', A.SCIENTIFIC_NAME) <= 10 ) ");
+                }
+
+                sql.append("  ");
                 addOROperator = true;
             }
             if (useVernacularName) {
@@ -226,12 +254,15 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
         return sql.toString();
     }
 
+    public boolean isUseScientificName() {
+        return useScientificName;
+    }
+
     /**
-     * This method implements a procedure from morphing the object into an web page FORM representation. What I meant
-     * to say is that I can say about an object for example:
-     * < INPUT type='hidden" name="searchCriteria" value="natrix">
-     * < INPUT type='hidden" name="oper" value="1">
-     * < INPUT type='hidden" name="searchType" value="1">.
+     * This method implements a procedure from morphing the object into an web page FORM representation. What I meant to say is that
+     * I can say about an object for example: < INPUT type='hidden" name="searchCriteria" value="natrix"> < INPUT type='hidden"
+     * name="oper" value="1"> < INPUT type='hidden" name="searchType" value="1">.
+     * 
      * @return Web page FORM representation of the object
      */
     public String toFORMParam() {
@@ -277,8 +308,10 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
         return form.toString();
     }
 
-    /** This method supplies a human readable string representation of this object. for example "Country is Romania"...
-     * so an representation of this object could be displayed on the page.
+    /**
+     * This method supplies a human readable string representation of this object. for example "Country is Romania"... so an
+     * representation of this object could be displayed on the page.
+     * 
      * @return A human readable representation of an object.
      */
     public String toHumanString() {
@@ -312,5 +345,13 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
             human.append(Utilities.prepareHumanString((String) humanMappings.get(criteriaType), criteriaSearch, oper));
         }
         return human.toString();
+    }
+
+    public String getSearchString() {
+        return searchString;
+    }
+
+    public void setSearchString(String searchString) {
+        this.searchString = searchString;
     }
 }

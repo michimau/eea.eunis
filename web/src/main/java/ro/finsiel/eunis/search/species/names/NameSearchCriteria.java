@@ -1,15 +1,14 @@
 package ro.finsiel.eunis.search.species.names;
 
+import java.util.Hashtable;
 
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 
-import java.util.Hashtable;
-
-
 /**
  * Search criteria used for species->names.
+ * 
  * @author finsiel
  */
 public class NameSearchCriteria extends AbstractSearchCriteria {
@@ -38,7 +37,7 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
     /** Vernacular name if coming from second form. */
     private String vernacularName = null;
 
-    /** Relation between scientificName or vernacularName (starts, contains, is).*/
+    /** Relation between scientificName or vernacularName (starts, contains, is). */
     private Integer relationOp = null;
 
     /** Language for vernacular name. */
@@ -54,8 +53,11 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
 
     /**
      * Main constructor, when doing initial search for scientific name.
-     * @param scientificName Scientific name or vernacular, depending which form we came from
-     * @param relationOp Relation used for search (starts, contains, is). Can be OPERATOR_IS/CONTAINS/STARTS
+     * 
+     * @param scientificName
+     *            Scientific name or vernacular, depending which form we came from
+     * @param relationOp
+     *            Relation used for search (starts, contains, is). Can be OPERATOR_IS/CONTAINS/STARTS
      */
     public NameSearchCriteria(String scientificName, Integer relationOp) {
         _initHumanMappings();
@@ -67,9 +69,13 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
 
     /**
      * Main constructor, when doing initial search for vernacular name.
-     * @param vernacularName Vernacular name searching for
-     * @param language ID of the language we're searching in (could also be 'any'
-     * @param relationOp Relation used for search (starts/is/contains). Can be OPERATOR_IS/CONTAINS/STARTS
+     * 
+     * @param vernacularName
+     *            Vernacular name searching for
+     * @param language
+     *            ID of the language we're searching in (could also be 'any'
+     * @param relationOp
+     *            Relation used for search (starts/is/contains). Can be OPERATOR_IS/CONTAINS/STARTS
      */
     public NameSearchCriteria(String vernacularName, String language, Integer relationOp) {
         _initHumanMappings();
@@ -82,9 +88,13 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
 
     /**
      * Second constructor used to construct filter search criterias (search in results).
-     * @param criteriaSearch Search string.
-     * @param criteriaType What we search for. Can be CRITERIA_GROUP/ORDER/SCIENTIFIC_NAME
-     * @param oper Type of relation between criteriaSearch & criteriaType. Can be OPERATOR_IS/CONTAINS/STARTS.
+     * 
+     * @param criteriaSearch
+     *            Search string.
+     * @param criteriaType
+     *            What we search for. Can be CRITERIA_GROUP/ORDER/SCIENTIFIC_NAME
+     * @param oper
+     *            Type of relation between criteriaSearch & criteriaType. Can be OPERATOR_IS/CONTAINS/STARTS.
      */
     public NameSearchCriteria(String criteriaSearch, Integer criteriaType, Integer oper) {
         _initHumanMappings();
@@ -135,9 +145,11 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
         humanMappings.put(CRITERIA_SCIENTIFIC_NAME, "Scientific name ");
     }
 
-    /** This method must be implementing by inheriting classes and should return the representation of an object as
-     * an URL, for example if implementing class has 2 params: county/region then this method should return:
-     * country=XXX&region=YYY, in order to put the object on the request to forward params to next page.
+    /**
+     * This method must be implementing by inheriting classes and should return the representation of an object as an URL, for
+     * example if implementing class has 2 params: county/region then this method should return: country=XXX&region=YYY, in order to
+     * put the object on the request to forward params to next page.
+     * 
      * @return An URL compatible representation of this object.
      */
     public String toURLParam() {
@@ -162,6 +174,7 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
 
     /**
      * Transform this object into an SQL representation.
+     * 
      * @return SQL string representing this object.
      */
     public String toSQL() {
@@ -176,9 +189,9 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
             String _criteria = null;
 
             // See if we are using query with any language or a specified language.
-            _criteria = (language.equalsIgnoreCase("any"))
-                    ? " AND I.NAME ='VERNACULAR_NAME' AND  I.VALUE "
-                    : " AND H.NAME_EN = '" + language + "' AND I.NAME ='VERNACULAR_NAME' AND I.VALUE ";
+            _criteria =
+                    (language.equalsIgnoreCase("any")) ? " AND I.NAME ='VERNACULAR_NAME' AND  I.VALUE " : " AND H.NAME_EN = '"
+                            + language + "' AND I.NAME ='VERNACULAR_NAME' AND I.VALUE ";
             sql.append(Utilities.prepareSQLOperator(_criteria, vernacularName, relationOp));
         }
         // Search in results
@@ -195,11 +208,10 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
     }
 
     /**
-     * This method implements a procedure from morphing the object into an web page FORM representation. What I meant
-     * to say is that I can say about an object for example:
-     * < INPUT type='hidden" name="searchCriteria" value="natrix">
-     * < INPUT type='hidden" name="oper" value="1">
-     * < INPUT type='hidden" name="searchType" value="1">
+     * This method implements a procedure from morphing the object into an web page FORM representation. What I meant to say is that
+     * I can say about an object for example: < INPUT type='hidden" name="searchCriteria" value="natrix"> < INPUT type='hidden"
+     * name="oper" value="1"> < INPUT type='hidden" name="searchType" value="1">
+     * 
      * @return Web page FORM representation of the object
      */
     public String toFORMParam() {
@@ -222,8 +234,10 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
         return url.toString();
     }
 
-    /** This method supplies a human readable string representation of this object. for example "Country is Romania"...
-     * so an representation of this object could be displayed on the page.
+    /**
+     * This method supplies a human readable string representation of this object. for example "Country is Romania"... so an
+     * representation of this object could be displayed on the page.
+     * 
      * @return A human readable representation of an object.
      */
     public String toHumanString() {
@@ -252,6 +266,7 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
 
     /**
      * Getter.
+     * 
      * @return scientificName
      */
     public String getScientificName() {
@@ -260,6 +275,7 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
 
     /**
      * Getter.
+     * 
      * @return relationOp
      */
     public Integer getRelationOp() {
@@ -268,6 +284,7 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
 
     /**
      * Getter.
+     * 
      * @return isMainCriteria
      */
     public boolean isMainCriteria() {

@@ -33,6 +33,14 @@ public abstract class AbstractSearchCriteria {
      * @return SQL string representing this object.
      */
     public abstract String toSQL();
+    
+    /**
+     * Transform this object into an SQL representation with option to use fuzzy search.
+     * @return SQL string representing this object.
+     */
+    public String toSQL(boolean fuzzySearch){
+        return toSQL();
+    }
 
     /**
      * This method implements a procedure from morphing the object into an web page FORM representation. What I meant

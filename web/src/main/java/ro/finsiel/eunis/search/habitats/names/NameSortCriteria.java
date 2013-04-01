@@ -1,12 +1,10 @@
 package ro.finsiel.eunis.search.habitats.names;
 
-
 import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.jrfTables.habitats.names.NamesDomain;
-
 
 /**
  * Sort criteria for habitats->names.
+ * 
  * @author finsiel
  */
 public class NameSortCriteria extends AbstractSortCriteria {
@@ -43,9 +41,13 @@ public class NameSortCriteria extends AbstractSortCriteria {
 
     /**
      * Ctor.
-     * @param sortCriteria Sort criteria.
-     * @param ascendency Ascendency.
-     * @param database Not used.
+     * 
+     * @param sortCriteria
+     *            Sort criteria.
+     * @param ascendency
+     *            Ascendency.
+     * @param database
+     *            Not used.
      */
     public NameSortCriteria(Integer sortCriteria, Integer ascendency, Integer database) {
         setSortCriteria(sortCriteria);

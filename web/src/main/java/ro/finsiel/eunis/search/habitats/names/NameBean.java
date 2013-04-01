@@ -1,5 +1,6 @@
 package ro.finsiel.eunis.search.habitats.names;
 
+import java.util.Vector;
 
 import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.jrfTables.habitats.names.NamesDomain;
@@ -7,12 +8,9 @@ import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
 import ro.finsiel.eunis.search.Utilities;
 
-import java.util.Vector;
-
-
 /**
  * Form bean used for habitats->names.
- *
+ * 
  * @author finsiel
  */
 public class NameBean extends AbstractFormBean {
@@ -107,9 +105,15 @@ public class NameBean extends AbstractFormBean {
     private String noSoundex = null;
 
     /**
+     * Use fuzzy search
+     */
+    private String fuzzySearch;
+
+    /**
      * Remove an criteria from the extra search criterias (ie when users deletes an search criteria from main search form.
-     *
-     * @param index index to be removed, must be pozitive and &lt getMainSearchCriteriasExtra().length..
+     * 
+     * @param index
+     *            index to be removed, must be pozitive and &lt getMainSearchCriteriasExtra().length..
      */
     public void removeCriteriaExtra(int index) {
         if (index < 0 && index >= relationOpExtra.length) {
@@ -120,8 +124,8 @@ public class NameBean extends AbstractFormBean {
 
         for (int i = 0; i < relationOpExtra.length; i++) {
             if (i != index) {
-                relationOpExtra[ i ] = this.relationOpExtra[ i ];
-                searchStringExtra[ i ] = this.searchStringExtra[ i ];
+                relationOpExtra[i] = this.relationOpExtra[i];
+                searchStringExtra[i] = this.searchStringExtra[i];
             }
         }
         this.relationOpExtra = relationOpExtra;
@@ -130,7 +134,7 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * This method is used to retrieve the basic criterias used to do the first search.
-     *
+     * 
      * @return First criterias used for search (when going from query page to result page)
      */
     public AbstractSearchCriteria getMainSearchCriteria() {
@@ -144,15 +148,15 @@ public class NameBean extends AbstractFormBean {
         if (null != searchString && null != database && null != relationOp) {
             Integer relationOp = Utilities.checkedStringToInt(this.relationOp, Utilities.OPERATOR_CONTAINS);
 
-            criteria = new NameSearchCriteria(searchString, relationOp, database, useDescription, useScientific, useVernacular,
-                    false);
+            criteria =
+                    new NameSearchCriteria(searchString, relationOp, database, useDescription, useScientific, useVernacular, false);
         }
         return criteria;
     }
 
     /**
      * Retrieve subsequent search criterias used for searching.
-     *
+     * 
      * @return Subsequent search criteria from main page.
      */
     public AbstractSearchCriteria[] getMainSearchCriteriasExtra() {
@@ -165,25 +169,24 @@ public class NameBean extends AbstractFormBean {
         // Extra main search criteria
         if (null != searchStringExtra && null != relationOpExtra) {
             for (int i = 0; i < searchStringExtra.length; i++) {
-                Integer _relationOp = Utilities.checkedStringToInt(relationOpExtra[ i ], Utilities.OPERATOR_CONTAINS);
+                Integer _relationOp = Utilities.checkedStringToInt(relationOpExtra[i], Utilities.OPERATOR_CONTAINS);
 
-                criterias.addElement(
-                        new NameSearchCriteria(searchStringExtra[ i ], _relationOp, database, useDescription, useScientific,
-                        useVernacular, true));
+                criterias.addElement(new NameSearchCriteria(searchStringExtra[i], _relationOp, database, useDescription,
+                        useScientific, useVernacular, true));
             }
         }
         AbstractSearchCriteria[] absCriterias = new AbstractSearchCriteria[criterias.size()];
 
         for (int i = 0; i < criterias.size(); i++) {
-            absCriterias[ i ] = (AbstractSearchCriteria) criterias.get(i);
+            absCriterias[i] = (AbstractSearchCriteria) criterias.get(i);
         }
         return absCriterias;
     }
 
     /**
-     * This method will transform the request parameters used for search back in search objects (AbstractSearchCriteria)
-     * in order to use them in searches...
-     *
+     * This method will transform the request parameters used for search back in search objects (AbstractSearchCriteria) in order to
+     * use them in searches...
+     * 
      * @return A list of AbstractSearchCriteria objects used to do the search.
      */
     public AbstractSearchCriteria[] toSearchCriteria() {
@@ -195,24 +198,24 @@ public class NameBean extends AbstractFormBean {
 
         if (null != criteriaSearch && null != oper && null != criteriaType) {
             for (int i = 0; i < criteriaSearch.length; i++) {
-                Integer _criteriaType = Utilities.checkedStringToInt(criteriaType[ i ], NameSearchCriteria.CRITERIA_SCIENTIFIC_NAME);
-                Integer _oper = Utilities.checkedStringToInt(oper[ i ], Utilities.OPERATOR_CONTAINS);
+                Integer _criteriaType = Utilities.checkedStringToInt(criteriaType[i], NameSearchCriteria.CRITERIA_SCIENTIFIC_NAME);
+                Integer _oper = Utilities.checkedStringToInt(oper[i], Utilities.OPERATOR_CONTAINS);
 
-                criterias.addElement(new NameSearchCriteria(criteriaSearch[ i ], _criteriaType, _oper, database, false));
+                criterias.addElement(new NameSearchCriteria(criteriaSearch[i], _criteriaType, _oper, database, false));
             }
         }
         AbstractSearchCriteria[] absCriterias = new AbstractSearchCriteria[criterias.size()];
 
         for (int i = 0; i < criterias.size(); i++) {
-            absCriterias[ i ] = (AbstractSearchCriteria) criterias.get(i);
+            absCriterias[i] = (AbstractSearchCriteria) criterias.get(i);
         }
         return absCriterias;
     }
 
     /**
-     * This method will transform the request parameters used for sorting back in search objects (AbstractSortCriteria)
-     * in order to use them in sorting, again...
-     *
+     * This method will transform the request parameters used for sorting back in search objects (AbstractSortCriteria) in order to
+     * use them in sorting, again...
+     * 
      * @return A list of AbstractSearchCriteria objects used to do the sorting
      */
     public AbstractSortCriteria[] toSortCriteria() {
@@ -223,20 +226,21 @@ public class NameBean extends AbstractFormBean {
         Integer database = Utilities.checkedStringToInt(this.database, NamesDomain.SEARCH_EUNIS);
 
         for (int i = 0; i < sort.length; i++) {
-            NameSortCriteria criteria = new NameSortCriteria(
-                    Utilities.checkedStringToInt(sort[ i ], NameSortCriteria.ASCENDENCY_NONE),
-                    Utilities.checkedStringToInt(ascendency[ i ], NameSortCriteria.ASCENDENCY_NONE), database);
+            NameSortCriteria criteria =
+                    new NameSortCriteria(Utilities.checkedStringToInt(sort[i], NameSortCriteria.ASCENDENCY_NONE),
+                            Utilities.checkedStringToInt(ascendency[i], NameSortCriteria.ASCENDENCY_NONE), database);
 
-            criterias[ i ] = criteria;
+            criterias[i] = criteria;
         }
         return criterias; // Note the upcast done here.
     }
 
     /**
-     * This method will transform the request parameters, back to an URL compatible type of request so that
-     * one should not manually write the URL.
-     *
-     * @param classFields Fields to be included in parameters.
+     * This method will transform the request parameters, back to an URL compatible type of request so that one should not manually
+     * write the URL.
+     * 
+     * @param classFields
+     *            Fields to be included in parameters.
      * @return An URL compatible type of representation(i.e.: >>param1=val1&param2=val2&param3=val3 etc.<<.
      */
     public String toURLParam(Vector classFields) {
@@ -247,7 +251,7 @@ public class NameBean extends AbstractFormBean {
             AbstractSearchCriteria[] searchCriterias = toSearchCriteria();
 
             for (int i = 0; i < searchCriterias.length; i++) {
-                AbstractSearchCriteria aSearch = searchCriterias[ i ];
+                AbstractSearchCriteria aSearch = searchCriterias[i];
 
                 url.append(aSearch.toURLParam());
             }
@@ -255,7 +259,7 @@ public class NameBean extends AbstractFormBean {
             AbstractSearchCriteria[] mainCriterias = getMainSearchCriteriasExtra();
 
             for (int i = 0; i < mainCriterias.length; i++) {
-                AbstractSearchCriteria criteria = mainCriterias[ i ];
+                AbstractSearchCriteria criteria = mainCriterias[i];
 
                 url.append(criteria.toURLParam());
             }
@@ -273,14 +277,18 @@ public class NameBean extends AbstractFormBean {
         if (null != showVernacularName && showVernacularName.equalsIgnoreCase("true")) {
             url.append(Utilities.writeURLParameter("showVernacularName", NameBean.SHOW.toString()));
         }
+        if (null != fuzzySearch && fuzzySearch.equalsIgnoreCase("true")) {
+            url.append(Utilities.writeURLParameter("fuzzySearch", NameBean.SHOW.toString()));
+        }
         return url.toString();
     }
 
     /**
-     * This method will transform the request parameters into a form compatible hidden input parameters, for example.
-     * &ltINPUT type="hidden" name="paramName" value="paramValue"&gt.
-     *
-     * @param classFields Fields to be included in parameters.
+     * This method will transform the request parameters into a form compatible hidden input parameters, for example. &ltINPUT
+     * type="hidden" name="paramName" value="paramValue"&gt.
+     * 
+     * @param classFields
+     *            Fields to be included in parameters.
      * @return An form compatible type of representation of request parameters.
      */
     public String toFORMParam(Vector classFields) {
@@ -291,7 +299,7 @@ public class NameBean extends AbstractFormBean {
             AbstractSearchCriteria[] searchCriterias = toSearchCriteria();
 
             for (int i = 0; i < searchCriterias.length; i++) {
-                AbstractSearchCriteria aSearch = searchCriterias[ i ];
+                AbstractSearchCriteria aSearch = searchCriterias[i];
 
                 form.append(aSearch.toFORMParam());
             }
@@ -299,7 +307,7 @@ public class NameBean extends AbstractFormBean {
             AbstractSearchCriteria[] mainCriterias = getMainSearchCriteriasExtra();
 
             for (int i = 0; i < mainCriterias.length; i++) {
-                AbstractSearchCriteria criteria = mainCriterias[ i ];
+                AbstractSearchCriteria criteria = mainCriterias[i];
 
                 form.append(criteria.toFORMParam());
             }
@@ -322,7 +330,7 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Getter for relationOp property - Operator for search (Is / Contains / Starts with).
-     *
+     * 
      * @return value of relationOp
      */
     public String getRelationOp() {
@@ -331,8 +339,9 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Setter for relationOp property - Operator for search (Is / Contains / Starts with).
-     *
-     * @param relationOp new value for relationOp
+     * 
+     * @param relationOp
+     *            new value for relationOp
      */
     public void setRelationOp(String relationOp) {
         this.relationOp = relationOp;
@@ -340,7 +349,7 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Getter for searchString property - Searched string.
-     *
+     * 
      * @return value of searchString
      */
     public String getSearchString() {
@@ -349,8 +358,9 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Setter for searchString property - Searched string.
-     *
-     * @param searchString new value for searchString
+     * 
+     * @param searchString
+     *            new value for searchString
      */
     public void setSearchString(String searchString) {
         if (null != searchString) {
@@ -362,7 +372,7 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Getter for database propety - Database searched (i.e. EUNIS / ANNEX I).
-     *
+     * 
      * @return value of database
      */
     public String getDatabase() {
@@ -371,8 +381,9 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Setter for database property - Database searched (i.e. EUNIS / ANNEX I).
-     *
-     * @param database new value for database
+     * 
+     * @param database
+     *            new value for database
      */
     public void setDatabase(String database) {
         this.database = database;
@@ -380,7 +391,7 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Getter for useScientific property - Do the search in scientific names.
-     *
+     * 
      * @return value of useScientific
      */
     public String getUseScientific() {
@@ -389,8 +400,9 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Setter for useScientific property - Do the search in scientific names.
-     *
-     * @param useScientific new value for useScientific
+     * 
+     * @param useScientific
+     *            new value for useScientific
      */
     public void setUseScientific(String useScientific) {
         this.useScientific = useScientific;
@@ -398,7 +410,7 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Getter for useVernacular property - Do the search in vernacular names.
-     *
+     * 
      * @return value of useVernacular
      */
     public String getUseVernacular() {
@@ -407,8 +419,9 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Setter for useVernacular property - Do the search in vernacular names.
-     *
-     * @param useVernacular new value for useVernacular
+     * 
+     * @param useVernacular
+     *            new value for useVernacular
      */
     public void setUseVernacular(String useVernacular) {
         this.useVernacular = useVernacular;
@@ -416,7 +429,7 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Getter for useDescription property - Do the search in descriptions.
-     *
+     * 
      * @return value of useDescription
      */
     public String getUseDescription() {
@@ -425,8 +438,9 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Setter for useDescription property - Do the search in descriptions.
-     *
-     * @param useDescription new value for useDescription
+     * 
+     * @param useDescription
+     *            new value for useDescription
      */
     public void setUseDescription(String useDescription) {
         this.useDescription = useDescription;
@@ -434,7 +448,7 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Getter for showLevel propety - Show / Hide Level column.
-     *
+     * 
      * @return value of showLevel
      */
     public String getShowLevel() {
@@ -443,8 +457,9 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Setter for showLevel property - Show / Hide Level column.
-     *
-     * @param showLevel new value for showLevel
+     * 
+     * @param showLevel
+     *            new value for showLevel
      */
     public void setShowLevel(String showLevel) {
         this.showLevel = showLevel;
@@ -452,7 +467,7 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Getter for showCode property - Show / Hide Code column.
-     *
+     * 
      * @return value of showCode
      */
     public String getShowCode() {
@@ -461,8 +476,9 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Setter for showCode property - Show / Hide Code column.
-     *
-     * @param showCode new value for showCode
+     * 
+     * @param showCode
+     *            new value for showCode
      */
     public void setShowCode(String showCode) {
         this.showCode = showCode;
@@ -470,7 +486,7 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Getter for showScientificName property - Show / Hide Scientific name column.
-     *
+     * 
      * @return value of showScientificName property
      */
     public String getShowScientificName() {
@@ -479,8 +495,9 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Setter for showScientificName property - Show / Hide Scientific name column.
-     *
-     * @param showScientificName new value for showScientificName
+     * 
+     * @param showScientificName
+     *            new value for showScientificName
      */
     public void setShowScientificName(String showScientificName) {
         this.showScientificName = showScientificName;
@@ -488,7 +505,7 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Getter for showVernacularName property - Show / Hide Vernacular names column.
-     *
+     * 
      * @return value of showVernacularName
      */
     public String getShowVernacularName() {
@@ -497,8 +514,9 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Setter for showVernacularName property - Show / Hide Vernacular names column.
-     *
-     * @param showVernacularName new value for showVernacularName
+     * 
+     * @param showVernacularName
+     *            new value for showVernacularName
      */
     public void setShowVernacularName(String showVernacularName) {
         this.showVernacularName = showVernacularName;
@@ -506,7 +524,7 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Getter for relationOpExtra property. Not currently used.
-     *
+     * 
      * @return relationOpExtra.
      */
     public String[] getRelationOpExtra() {
@@ -515,8 +533,9 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Setter for relationOpExtra property. Not currently used.
-     *
-     * @param relationOpExtra relationOpExtra.
+     * 
+     * @param relationOpExtra
+     *            relationOpExtra.
      */
     public void setRelationOpExtra(String[] relationOpExtra) {
         this.relationOpExtra = relationOpExtra;
@@ -524,7 +543,7 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Getter for searchStringExtra property. Not currently used.
-     *
+     * 
      * @return searchStringExtra.
      */
     public String[] getSearchStringExtra() {
@@ -533,8 +552,9 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Setter for searchStringExtra property. Not currently used.
-     *
-     * @param searchStringExtra searchStringExtra.
+     * 
+     * @param searchStringExtra
+     *            searchStringExtra.
      */
     public void setSearchStringExtra(String[] searchStringExtra) {
         this.searchStringExtra = searchStringExtra;
@@ -542,7 +562,7 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Getter for action property.
-     *
+     * 
      * @return action.
      */
     public String getAction() {
@@ -551,8 +571,9 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Setter for action property.
-     *
-     * @param action action.
+     * 
+     * @param action
+     *            action.
      */
     public void setAction(String action) {
         this.action = action;
@@ -560,7 +581,7 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Getter for deleteIndex property.
-     *
+     * 
      * @return deleteIndex.
      */
     public String getDeleteIndex() {
@@ -569,8 +590,9 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Setter for deleteIndex property.
-     *
-     * @param deleteIndex deleteIndex.
+     * 
+     * @param deleteIndex
+     *            deleteIndex.
      */
     public void setDeleteIndex(String deleteIndex) {
         this.deleteIndex = deleteIndex;
@@ -578,7 +600,7 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Getter for oldName property - Specifies searched name if name was chossen from soundex table.
-     *
+     * 
      * @return value of oldName property.
      */
     public String getOldName() {
@@ -587,8 +609,9 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Setter for oldName property - Specifies searched name if name was chossen from soundex table.
-     *
-     * @param oldName New value
+     * 
+     * @param oldName
+     *            New value
      */
     public void setOldName(String oldName) {
         this.oldName = oldName;
@@ -596,13 +619,14 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Test method.
-     *
-     * @param args Command line arguments.
+     * 
+     * @param args
+     *            Command line arguments.
      */
     public static void main(String[] args) {
-        String[] criteriaSearch = { "first string", "second string", "third string" };
-        String[] oper = { "0", "1", "2" };
-        String[] criteriaType = { "0", "1", "2" };
+        String[] criteriaSearch = {"first string", "second string", "third string"};
+        String[] oper = {"0", "1", "2"};
+        String[] criteriaType = {"0", "1", "2"};
         // Initializations
         NameBean bean = new NameBean();
 
@@ -613,21 +637,21 @@ public class NameBean extends AbstractFormBean {
         AbstractSearchCriteria[] criteria = bean.toSearchCriteria();
 
         for (int i = 0; i < criteria.length; i++) {
-            AbstractSearchCriteria aCrit = criteria[ i ];
+            AbstractSearchCriteria aCrit = criteria[i];
             // System.out.println("Criteria " + i + " : " + aCrit.toHumanString());
         }
         bean.removeCriteriaSearch(1);
         criteria = bean.toSearchCriteria();
         // System.out.println("=======================");
         for (int i = 0; i < criteria.length; i++) {
-            AbstractSearchCriteria aCrit = criteria[ i ];
+            AbstractSearchCriteria aCrit = criteria[i];
             // System.out.println("Criteria " + i + " : " + aCrit.toHumanString());
         }
     }
 
     /**
      * Getter.
-     *
+     * 
      * @return noSoundex
      */
     public String getNoSoundex() {
@@ -636,10 +660,30 @@ public class NameBean extends AbstractFormBean {
 
     /**
      * Setter.
-     *
-     * @param noSoundex New value
+     * 
+     * @param noSoundex
+     *            New value
      */
     public void setNoSoundex(String noSoundex) {
         this.noSoundex = noSoundex;
+    }
+
+    /**
+     * Getter for fuzzySearch.
+     * 
+     * @return searchVernacular
+     */
+    public String getFuzzySearch() {
+        return fuzzySearch;
+    }
+
+    /**
+     * Setter for fuzzySearch.
+     * 
+     * @param fuzzySearch
+     *            fuzzySearch
+     */
+    public void setFuzzySearch(String fuzzySearch) {
+        this.fuzzySearch = fuzzySearch;
     }
 }

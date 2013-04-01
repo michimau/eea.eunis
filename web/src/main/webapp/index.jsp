@@ -196,6 +196,7 @@
 			              						<input type="hidden" name="database" value="<%=NamesDomain.SEARCH_BOTH%>" />
 			              						<input type="hidden" name="useScientific" value="true" />
 			              						<input type="hidden" name="useVernacular" value="true" />
+			              						<input type="hidden" name="fuzzySearch" value="true" />
 			              						<input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
 			              						<label for="searchString">
 			                						<%=cm.cmsPhrase( "Habitat types" )%>
@@ -228,6 +229,7 @@
 			              						<input type="hidden" name="DB_BIOGENETIC" value="ON" />
 			              						<input type="hidden" name="DB_EMERALD" value="ON" />
 			              						<input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_CONTAINS%>" />
+			              						<input type="hidden" name="fuzzySearch" value="true" />
 			              						<label for="englishName">
 			                						<%=cm.cmsPhrase( "Sites" )%>
 			              						</label>&nbsp;

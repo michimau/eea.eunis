@@ -39,6 +39,7 @@
   boolean showSize = Utilities.checkedStringToBoolean(formBean.getShowSize(), NameBean.HIDE);
   boolean newName = Utilities.checkedStringToBoolean( formBean.getNewName(), false );
   boolean showYear = Utilities.checkedStringToBoolean( formBean.getShowYear(), false );
+  boolean fuzzySearch = Utilities.checkedStringToBoolean(formBean.getFuzzySearch(), false);
   boolean[] source = {
       formBean.getDB_NATURA2000() != null,
       formBean.getDB_CORINE() != null,
@@ -52,10 +53,10 @@
 
   // Initialization
   int currentPage = Utilities.checkedStringToInt(formBean.getCurrentPage(), 0);
-  NamePaginator paginator = new NamePaginator(new NameDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), SessionManager.getUsername(), source));
+  NamePaginator paginator = new NamePaginator(new NameDomain(formBean.toSearchCriteria(), formBean.toSortCriteria(), SessionManager.getUsername(), source, fuzzySearch));
   paginator.setSortCriteria(formBean.toSortCriteria());
   paginator.setPageSize(Utilities.checkedStringToInt(formBean.getPageSize(), AbstractPaginator.DEFAULT_PAGE_SIZE));
-  currentPage = paginator.setCurrentPage(currentPage);// Compute *REAL* current page (adjusted if user messes up)
+  
   final String pageName = "sites-names-result.jsp";
   int resultsCount = 0;
   int pagesCount = 0;// This is used in @page include...
@@ -64,17 +65,15 @@
   List results = new ArrayList();
   try
   {
-    pagesCount = paginator.countPages();
+    results = paginator.getPage(currentPage);
     resultsCount = paginator.countResults();
-    if ( resultsCount > 0 )
-    {
-      results = paginator.getPage(currentPage);
-    }
+    pagesCount = paginator.countPages();
   }
   catch( Exception ex )
   {
     ex.printStackTrace();
   }
+  currentPage = paginator.setCurrentPage(currentPage);// Compute *REAL* current page (adjusted if user messes up)
   // Prepare parameters for tsv
   Vector reportFields = new Vector();
   reportFields.addElement("sort");
@@ -99,7 +98,7 @@
       Chm62edtSoundexPersist t = (Chm62edtSoundexPersist) list.get(0);
       String soundexName = t.getName();
       try {
-        String URL = "sites-names-result.jsp?showName=true&showDesignationYear=true&showSourceDB=true&showCountry=true&showDesignationTypes=true&showCoordinates=true&showSize=true&relationOp=4&englishName="+soundexName+"&country=&yearMin=&yearMax=&Submit2=Search&DB_NATURA2000=ON&DB_CDDA_NATIONAL=ON&DB_DIPLOMA=ON&DB_CDDA_INTERNATIONAL=ON&DB_CORINE=ON&DB_BIOGENETIC=ON&newName=true&noSoundex=false&oldName="+sname;
+        String URL = "sites-names-result.jsp?showName=true&showDesignationYear=true&showSourceDB=true&showCountry=true&showDesignationTypes=true&showCoordinates=true&showSize=true&relationOp=4&englishName="+soundexName+"&country=&yearMin=&yearMax=&Submit2=Search&DB_NATURA2000=ON&DB_CDDA_NATIONAL=ON&DB_DIPLOMA=ON&DB_CDDA_INTERNATIONAL=ON&DB_CORINE=ON&DB_BIOGENETIC=ON&newName=true&noSoundex=false&oldName="+sname+"&fuzzySearch="+fuzzySearch;
         response.sendRedirect(URL);
         return;
       }  catch(Exception e) {

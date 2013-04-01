@@ -1,11 +1,10 @@
 package ro.finsiel.eunis.search.sites.names;
 
-
 import ro.finsiel.eunis.search.AbstractSortCriteria;
-
 
 /**
  * Sort cirteria for sites->names.
+ * 
  * @author finsiel
  */
 public class NameSortCriteria extends AbstractSortCriteria {
@@ -52,8 +51,11 @@ public class NameSortCriteria extends AbstractSortCriteria {
 
     /**
      * Ctor.
-     * @param sortCriteria Criteria used for sorting.
-     * @param ascendency Ascendency.
+     * 
+     * @param sortCriteria
+     *            Criteria used for sorting.
+     * @param ascendency
+     *            Ascendency.
      */
     public NameSortCriteria(Integer sortCriteria, Integer ascendency) {
         setSortCriteria(sortCriteria);
@@ -64,14 +66,13 @@ public class NameSortCriteria extends AbstractSortCriteria {
         possibleSorts.put(SORT_NAME, "A.NAME");
         possibleSorts.put(SORT_SIZE, "A.AREA");
         possibleSorts.put(SORT_COUNTRY, "C.AREA_NAME_EN");
-        possibleSorts.put(SORT_LAT,
-                "IF(A.LAT_NS='N',IF(A.LAT_DEG IS NULL,0,A.LAT_DEG)*3600 + IF(A.LAT_MIN IS NULL,0,A.LAT_MIN)*60 + IF(A.LAT_SEC IS NULL,0,A.LAT_SEC),(-1)*(IF(A.LAT_DEG IS NULL,0,A.LAT_DEG)*3600 + IF(A.LAT_MIN IS NULL,0,A.LAT_MIN)*60 + IF(A.LAT_SEC IS NULL,0,A.LAT_SEC)))"); // Order
-        possibleSorts.put(
-                SORT_LONG,
-                "IF(A.LONG_EW='E',IF(A.LONG_DEG IS NULL,0,A.LONG_DEG)*3600 +IF(A.LONG_MIN IS NULL,0,A.LONG_MIN)*60 + IF(A.LONG_SEC IS NULL,0,A.LONG_SEC),(-1)*(IF(A.LONG_DEG IS NULL,0,A.LONG_DEG) *3600 + IF(A.LONG_MIN IS NULL,0,A.LONG_MIN)*60 + IF(A.LONG_SEC IS NULL,0,A.LONG_SEC)))"); // Order
-        possibleSorts.put(
-                SORT_YEAR,
-                "CAST(CONCAT(" + "IF(A.source_db='BIOGENETIC',left(designation_date,4),''),"
+        possibleSorts
+                .put(SORT_LAT,
+                        "IF(A.LAT_NS='N',IF(A.LAT_DEG IS NULL,0,A.LAT_DEG)*3600 + IF(A.LAT_MIN IS NULL,0,A.LAT_MIN)*60 + IF(A.LAT_SEC IS NULL,0,A.LAT_SEC),(-1)*(IF(A.LAT_DEG IS NULL,0,A.LAT_DEG)*3600 + IF(A.LAT_MIN IS NULL,0,A.LAT_MIN)*60 + IF(A.LAT_SEC IS NULL,0,A.LAT_SEC)))"); // Order
+        possibleSorts
+                .put(SORT_LONG,
+                        "IF(A.LONG_EW='E',IF(A.LONG_DEG IS NULL,0,A.LONG_DEG)*3600 +IF(A.LONG_MIN IS NULL,0,A.LONG_MIN)*60 + IF(A.LONG_SEC IS NULL,0,A.LONG_SEC),(-1)*(IF(A.LONG_DEG IS NULL,0,A.LONG_DEG) *3600 + IF(A.LONG_MIN IS NULL,0,A.LONG_MIN)*60 + IF(A.LONG_SEC IS NULL,0,A.LONG_SEC)))"); // Order
+        possibleSorts.put(SORT_YEAR, "CAST(CONCAT(" + "IF(A.source_db='BIOGENETIC',left(designation_date,4),''),"
                 + "IF(A.source_db='CDDA_INTERNATIONAL',right(designation_date,4),''),"
                 + "IF(A.source_db='CDDA_NATIONAL',right(designation_date,4),''),"
                 + "IF(A.source_db='EMERALD',right(designation_date,4),''),"

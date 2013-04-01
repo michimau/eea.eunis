@@ -1,16 +1,15 @@
 package ro.finsiel.eunis.search.sites.names;
 
+import java.util.Vector;
 
-import ro.finsiel.eunis.search.sites.SitesFormBean;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
 import ro.finsiel.eunis.search.Utilities;
-
-import java.util.Vector;
-
+import ro.finsiel.eunis.search.sites.SitesFormBean;
 
 /**
  * Form bean used for sites->names.
+ * 
  * @author finsiel
  */
 public class NameBean extends SitesFormBean {
@@ -25,6 +24,7 @@ public class NameBean extends SitesFormBean {
     private String showDesignationYear = null;
     private String showCountry = null;
     private String showYear = null;
+    private String fuzzySearch;
 
     /** name was choosen from soundex data. */
     private String newName = null;
@@ -34,6 +34,7 @@ public class NameBean extends SitesFormBean {
 
     /**
      * This method is used to retrieve the basic criterias used to do the first search.
+     * 
      * @return First criterias used for search (when going from query page to result page)
      */
     public AbstractSearchCriteria getMainSearchCriteria() {
@@ -49,9 +50,10 @@ public class NameBean extends SitesFormBean {
     }
 
     /**
-     * This method will transform the request parameters used for search back in search objects (AbstractSearchCriteria).
-     * in order to use them in searches...
-     * @return  objects which are used for search / filter
+     * This method will transform the request parameters used for search back in search objects (AbstractSearchCriteria). in order
+     * to use them in searches...
+     * 
+     * @return objects which are used for search / filter
      */
     public AbstractSearchCriteria[] toSearchCriteria() {
         Vector criterias = new Vector();
@@ -73,13 +75,15 @@ public class NameBean extends SitesFormBean {
         NameSearchCriteria[] ret = new NameSearchCriteria[criterias.size()];
 
         for (int i = 0; i < ret.length; i++) {
-            ret[ i ] = (NameSearchCriteria) criterias.get(i);
+            ret[i] = (NameSearchCriteria) criterias.get(i);
         }
         return ret; // Note the upcast done here.
     }
 
-    /** This method will transform the request parameters used for sorting back in search objects (AbstractSortCriteria)
-     * in order to use them in sorting.
+    /**
+     * This method will transform the request parameters used for sorting back in search objects (AbstractSortCriteria) in order to
+     * use them in sorting.
+     * 
      * @return A list of AbstractSearchCriteria objects used to do the sorting
      */
     public AbstractSortCriteria[] toSortCriteria() {
@@ -89,8 +93,9 @@ public class NameBean extends SitesFormBean {
         AbstractSortCriteria criterias[] = new AbstractSortCriteria[sort.length];
 
         for (int i = 0; i < sort.length; i++) {
-            NameSortCriteria criteria = new NameSortCriteria(Utilities.checkedStringToInt(sort[i], NameSortCriteria.ASCENDENCY_NONE),
-                    Utilities.checkedStringToInt(ascendency[i], NameSortCriteria.ASCENDENCY_NONE));
+            NameSortCriteria criteria =
+                    new NameSortCriteria(Utilities.checkedStringToInt(sort[i], NameSortCriteria.ASCENDENCY_NONE),
+                            Utilities.checkedStringToInt(ascendency[i], NameSortCriteria.ASCENDENCY_NONE));
 
             criterias[i] = criteria;
         }
@@ -98,9 +103,11 @@ public class NameBean extends SitesFormBean {
     }
 
     /**
-     * This method will transform the request parameters, back to an URL compatible type of request so that
-     * one should not manually write the URL.
-     * @param classFields Fields to be included in parameters.
+     * This method will transform the request parameters, back to an URL compatible type of request so that one should not manually
+     * write the URL.
+     * 
+     * @param classFields
+     *            Fields to be included in parameters.
      * @return An URL compatible type of representation(i.e.: >>param1=val1&param2=val2&param3=val3 etc.<<.
      */
     public String toURLParam(Vector classFields) {
@@ -135,13 +142,19 @@ public class NameBean extends SitesFormBean {
         if (null != showDesignationYear) {
             ret.append(Utilities.writeURLParameter("showDesignationYear", showDesignationYear));
         }
+        if (null != fuzzySearch && fuzzySearch.equalsIgnoreCase("true")) {
+            ret.append(Utilities.writeURLParameter("fuzzySearch", NameBean.SHOW.toString()));
+        }
+
         return ret.toString();
     }
 
     /**
-     * This method will transform the request parameters into a form compatible hidden input parameters, for example.
-     * &ltINPUT type="hidden" name="paramName" value="paramValue"&gt.
-     * @param classFields Fields to be included in parameters.
+     * This method will transform the request parameters into a form compatible hidden input parameters, for example. &ltINPUT
+     * type="hidden" name="paramName" value="paramValue"&gt.
+     * 
+     * @param classFields
+     *            Fields to be included in parameters.
      * @return An form compatible type of representation of request parameters.
      */
     public String toFORMParam(Vector classFields) {
@@ -183,6 +196,7 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Getter for englishName property.
+     * 
      * @return englishName.
      */
     public String getEnglishName() {
@@ -191,7 +205,9 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Setter for englishName property.
-     * @param englishName englishName.
+     * 
+     * @param englishName
+     *            englishName.
      */
     public void setEnglishName(String englishName) {
         this.englishName = (null != englishName) ? englishName.trim() : englishName;
@@ -199,6 +215,7 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Getter for relationOp property.
+     * 
      * @return relationOp.
      */
     public String getRelationOp() {
@@ -207,7 +224,9 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Setter for relationOp property.
-     * @param relationOp relationOp.
+     * 
+     * @param relationOp
+     *            relationOp.
      */
     public void setRelationOp(String relationOp) {
         this.relationOp = relationOp;
@@ -215,6 +234,7 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Getter for showDesignationTypes property.
+     * 
      * @return showDesignationTypes.
      */
     public String getShowDesignationTypes() {
@@ -223,7 +243,9 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Setter for showDesignationTypes property.
-     * @param showDesignationTypes showDesignationTypes.
+     * 
+     * @param showDesignationTypes
+     *            showDesignationTypes.
      */
     public void setShowDesignationTypes(String showDesignationTypes) {
         this.showDesignationTypes = showDesignationTypes;
@@ -231,6 +253,7 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Getter for showDesignationYear property.
+     * 
      * @return showDesignationYear.
      */
     public String getShowDesignationYear() {
@@ -239,7 +262,9 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Setter for showDesignationYear property.
-     * @param showDesignationYear showDesignationYear.
+     * 
+     * @param showDesignationYear
+     *            showDesignationYear.
      */
     public void setShowDesignationYear(String showDesignationYear) {
         this.showDesignationYear = showDesignationYear;
@@ -247,6 +272,7 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Getter for showCoordinates property.
+     * 
      * @return showCoordinates.
      */
     public String getShowCoordinates() {
@@ -255,7 +281,9 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Setter for showCoordinates property.
-     * @param showCoordinates showCoordinates.
+     * 
+     * @param showCoordinates
+     *            showCoordinates.
      */
     public void setShowCoordinates(String showCoordinates) {
         this.showCoordinates = showCoordinates;
@@ -263,6 +291,7 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Getter for showName property.
+     * 
      * @return showName.
      */
     public String getShowName() {
@@ -271,7 +300,9 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Setter for showName property.
-     * @param showName showName.
+     * 
+     * @param showName
+     *            showName.
      */
     public void setShowName(String showName) {
         this.showName = showName;
@@ -279,6 +310,7 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Getter for showSize property.
+     * 
      * @return showSize.
      */
     public String getShowSize() {
@@ -287,7 +319,9 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Setter for showSize property.
-     * @param showSize showSize.
+     * 
+     * @param showSize
+     *            showSize.
      */
     public void setShowSize(String showSize) {
         this.showSize = showSize;
@@ -295,6 +329,7 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Getter for showSourceDB property.
+     * 
      * @return showSourceDB.
      */
     public String getShowSourceDB() {
@@ -303,7 +338,9 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Setter for showSourceDB property.
-     * @param showSourceDB showSourceDB.
+     * 
+     * @param showSourceDB
+     *            showSourceDB.
      */
     public void setShowSourceDB(String showSourceDB) {
         this.showSourceDB = showSourceDB;
@@ -311,6 +348,7 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Getter for showCountry property.
+     * 
      * @return showCountry.
      */
     public String getShowCountry() {
@@ -319,7 +357,9 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Setter for showCountry property.
-     * @param showCountry showCountry.
+     * 
+     * @param showCountry
+     *            showCountry.
      */
     public void setShowCountry(String showCountry) {
         this.showCountry = showCountry;
@@ -327,6 +367,7 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Getter for oldName property - Specifies searched name if name was chossen from soundex table.
+     * 
      * @return value of oldName property.
      */
     public String getOldName() {
@@ -335,7 +376,9 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Setter for oldName property - Specifies searched name if name was chossen from soundex table.
-     * @param oldName New value
+     * 
+     * @param oldName
+     *            New value
      */
     public void setOldName(String oldName) {
         this.oldName = oldName;
@@ -343,6 +386,7 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Getter.
+     * 
      * @return showYear
      */
     public String getShowYear() {
@@ -351,7 +395,9 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Setter.
-     * @param showYear New value
+     * 
+     * @param showYear
+     *            New value
      */
     public void setShowYear(String showYear) {
         this.showYear = showYear;
@@ -359,6 +405,7 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Getter.
+     * 
      * @return noSoundex
      */
     public String getNoSoundex() {
@@ -367,9 +414,30 @@ public class NameBean extends SitesFormBean {
 
     /**
      * Setter.
-     * @param noSoundex New value
+     * 
+     * @param noSoundex
+     *            New value
      */
     public void setNoSoundex(String noSoundex) {
         this.noSoundex = noSoundex;
+    }
+
+    /**
+     * Getter.
+     * 
+     * @return fuzzySearch
+     */
+    public String getFuzzySearch() {
+        return fuzzySearch;
+    }
+
+    /**
+     * Setter.
+     * 
+     * @param fuzzySearch
+     *            New value
+     */
+    public void setFuzzySearch(String fuzzySearch) {
+        this.fuzzySearch = fuzzySearch;
     }
 }

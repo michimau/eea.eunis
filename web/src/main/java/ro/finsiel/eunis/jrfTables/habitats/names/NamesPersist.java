@@ -7,7 +7,7 @@ import net.sf.jrf.domain.PersistentObject;
  * @since 29.01.2003
  * @version 1.0
  */
-public class NamesPersist extends PersistentObject {
+public class NamesPersist extends PersistentObject  implements Comparable<NamesPersist> {
 
   /** This is a database field. */
   private String i_idHabitat = null;
@@ -216,4 +216,9 @@ public class NamesPersist extends PersistentObject {
     i_scientificName = scientificName;
     this.markModifiedPersistentState();
   }
+
+    @Override
+    public int compareTo(NamesPersist other) {
+        return getScientificName().compareTo(other.getScientificName());
+    }
 }

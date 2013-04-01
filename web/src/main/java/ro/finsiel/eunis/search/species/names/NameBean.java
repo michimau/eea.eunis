@@ -1,12 +1,12 @@
 package ro.finsiel.eunis.search.species.names;
 
 
+import java.util.Vector;
+
 import ro.finsiel.eunis.formBeans.AbstractFormBean;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
 import ro.finsiel.eunis.search.Utilities;
-
-import java.util.Vector;
 
 
 /**

@@ -162,10 +162,11 @@ public class NameSearchCriteria extends SitesSearchCriteria {
             sql.append(") OR (");
             sql.append(Utilities.prepareSQLOperator((String) sqlMappings.get(CRITERIA_ID), englishName,
                     Utilities.OPERATOR_CONTAINS));
-
-            if (fuzzySearch) {
+            
+            int substringLength = 3;
+            if (fuzzySearch && englishName.length() >=substringLength) {
                 sql.append(") OR (");
-                String subSearchString = englishName.substring(0, 3);
+                String subSearchString = englishName.substring(0, substringLength);
                 sql.append(" " + sqlMappings.get(CRITERIA_ENGLISH_NAME) + "  LIKE '%" + subSearchString + "%' AND levenshtein('"
                         + subSearchString + "', " + sqlMappings.get(CRITERIA_ENGLISH_NAME) + ") <= 10 ");
             }

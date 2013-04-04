@@ -32,7 +32,7 @@
             <id>project-local</id>
             <name>project-local repository</name>
             <layout>default</layout>
-            <url>file:///C:/Users/Rait/Workspace_work/EUNIS2/3rdparty</url>
+            <url>file:///${basedir}/3rdparty</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>

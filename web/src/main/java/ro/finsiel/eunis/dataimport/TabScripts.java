@@ -175,7 +175,12 @@ public class TabScripts {
             // Update Linked data tab
             EunisUtil .writeLogMessage("LINKED DATA tab generation started. Time: "
                     + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
-            String linkeddataSql = "UPDATE chm62edt_tab_page_species t "
+
+            String linkeddataSql = "UPDATE chm62edt_tab_page_species SET LINKEDDATA = 'N'";
+            ps = con.prepareStatement(linkeddataSql);
+            ps.executeUpdate();
+
+            linkeddataSql = "UPDATE chm62edt_tab_page_species t "
                     + "JOIN chm62edt_nature_object_attributes a "
                     + "ON t.ID_NATURE_OBJECT=a.ID_NATURE_OBJECT AND a.NAME='_linkedDataQueries' "
                     + "SET LINKEDDATA = 'Y' WHERE LENGTH(OBJECT) > 0";
@@ -212,7 +217,12 @@ public class TabScripts {
             // Update Conservation status tab
             EunisUtil .writeLogMessage("CONSERVATION STATUS tab generation started. Time: "
                     + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
-            String linkeddataSql = "UPDATE chm62edt_tab_page_species t "
+
+            String linkeddataSql = "UPDATE chm62edt_tab_page_species SET CONSERVATION_STATUS = 'N'";
+            ps = con.prepareStatement(linkeddataSql);
+            ps.executeUpdate();
+
+            linkeddataSql = "UPDATE chm62edt_tab_page_species t "
                     + "JOIN chm62edt_nature_object_attributes a "
                     + "ON t.ID_NATURE_OBJECT=a.ID_NATURE_OBJECT AND a.NAME='_conservationStatusQueries' "
                     + "SET CONSERVATION_STATUS = 'Y' WHERE LENGTH(OBJECT) > 0";

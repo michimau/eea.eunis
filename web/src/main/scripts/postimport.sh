@@ -10,7 +10,7 @@ cp=$cp:@JRF.JAR@
 cp=$cp:$CLASSPATH
 
 if [ "$1" = "" ]; then
-    echo "Missing argument! Possible first arguments are: sites, species_tab, sites_tab, habitats_tab, linkeddata_tab, taxonomy_tree"
+    echo "Missing argument! Possible first arguments are: sites, species_tab, sites_tab, habitats_tab, linkeddata_tab, taxonomy_tree, conservation_status_tab"
 else
     $java -cp $cp eionet.eunis.scripts.PostImportScriptsCmd $@
 fi;

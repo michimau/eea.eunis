@@ -45,6 +45,7 @@ public class PostImportScripts extends HttpServlet {
             String habitatsTab = request.getParameter("habitatsTab");
             String sitesTab = request.getParameter("sitesTab");
             String linkeddataTab = request.getParameter("linkeddataTab");
+            String conservationstatusTab = request.getParameter("conservationstatusTab");
             String runBackground = request.getParameter("runBackground");
 
             try {
@@ -67,6 +68,7 @@ public class PostImportScripts extends HttpServlet {
                     jobDetail.getJobDataMap().put("sitesTab", sitesTab);
                     jobDetail.getJobDataMap().put("habitatsTab", habitatsTab);
                     jobDetail.getJobDataMap().put("linkeddataTab", linkeddataTab);
+                    jobDetail.getJobDataMap().put("conservationstatusTab", conservationstatusTab);
 
                     PostImportScriptsJobListener listener = new PostImportScriptsJobListener();
 
@@ -105,6 +107,9 @@ public class PostImportScripts extends HttpServlet {
                     }
                     if (linkeddataTab != null && linkeddataTab.equals("on")) {
                         scripts.setSpeciesLinkedDataTab();
+                    }
+                    if (conservationstatusTab != null && conservationstatusTab.equals("on")) {
+                        scripts.setSpeciesConservationStatusTab();
                     }
                 }
 

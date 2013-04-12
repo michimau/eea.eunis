@@ -284,7 +284,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         try {
             Properties props = new Properties();
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_habitats.xml"));
-            LinkedData fd = new LinkedData(props, null);
+            LinkedData fd = new LinkedData(props, null, "_linkedDataQueries");
             queries = fd.getQueryObjects();
 
             if (!StringUtils.isBlank(query)) {

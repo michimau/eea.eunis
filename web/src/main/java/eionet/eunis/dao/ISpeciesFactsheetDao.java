@@ -1,21 +1,19 @@
 package eionet.eunis.dao;
 
-
 import java.util.List;
 
 import eionet.eunis.stripes.actions.SpeciesFactsheetActionBean;
 
-
 /**
  * Helper Dao interface for {@link SpeciesFactsheetActionBean}.
  *
- * @author Aleksandr Ivanov
- * <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
+ * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 public interface ISpeciesFactsheetDao {
 
     /**
      * For given scientific name tries to find species id
+     *
      * @param scientificName - scientific name.
      *
      * @return species Id or 0 if not found.
@@ -24,16 +22,15 @@ public interface ISpeciesFactsheetDao {
 
     /**
      * For given species id returns scientific name
+     *
      * @param idSpecies id species.
      * @return scientific name or empty string, if nothing is found.
      */
     String getScientificName(int idSpecies);
 
     /**
-     * For given id species returns canonical id species.
-     * If given id species is a synonym to another specie - id of that specie is returned.
-     * If given id species is a canonical id species - it is returned.
-     * If given id is not found - 0 is returned.
+     * For given id species returns canonical id species. If given id species is a synonym to another specie - id of that specie is
+     * returned. If given id species is a canonical id species - it is returned. If given id is not found - 0 is returned.
      *
      * @param idSpecies id species.
      * @return
@@ -42,6 +39,7 @@ public interface ISpeciesFactsheetDao {
 
     /**
      * Fetch all species ids who are synonyms to given id species.
+     *
      * @param idSpecies - species id.
      * @return - null, IFF nothing is found, list of integers otherwise.
      */
@@ -70,31 +68,40 @@ public interface ISpeciesFactsheetDao {
      *
      * @param natObjId - ID_NATURE_OBJECT.
      * @param queryId.
+     * @param queriesName _linkedDataQueries or _conservationStatusQueries
      * @return boolean.
      */
-    boolean queryResultExists(Integer natObjId, String queryId);
+    boolean queryResultExists(Integer natObjId, String queryId, String queriesName);
 
     /**
-     * Insert _linkedDataQueries records into chm62edt_nature_object_attributes for each species
-     */
-    public void insertNatObLinkedData();
-
-    /**
-     * update _linkedDataQueries records in chm62edt_nature_object_attributes for each species
+     * Inserts the given attribute to for all species in chm62edt_nature_object_attributes table.
      *
-     * @param speciesIds.
-     * @param queryId.
+     * @param attrName
      */
-    public void updateNatObLinkedData(String speciesIds, String queryId);
+    public void insertNatureObjAttrForAll(String attrName);
 
     /**
-     * Remove leftovers
+     * Appends the given value to the OBJECT field of the given attribute of the given species in chm62edt_nature_object_attributes
+     * table.
+     *
+     * @param speciesIds
+     * @param attrName
+     * @param attrValue
      */
-    public void removeEmptyNatObLinkedData();
+    public void appendToNatureObjAttr(String speciesIds, String attrName, String attrValue);
 
     /**
-     * Remove previous records from chm62edt_nature_object_attributes
+     * Deletes all chm62edt_nature_object_attributes records where NAME matches the given attribute name and OBJECT is empty.
+     *
+     * @param attrName
      */
-    public void removeAllNatObLinkedData();
+    public void deleteEmptyNatureObjAttrsForAll(String attrName);
+
+    /**
+     * Deletes all chm62edt_nature_object_attributes where NAME matches the given attribute name.
+     *
+     * @param attrName
+     */
+    public void deleteNatureObjAttrsForAll(String attrName);
 
 }

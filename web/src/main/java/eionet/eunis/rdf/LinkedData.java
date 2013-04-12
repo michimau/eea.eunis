@@ -15,14 +15,16 @@ import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.utilities.EunisUtil;
 import eionet.eunis.dao.DaoFactory;
+import eionet.eunis.dao.ISpeciesFactsheetDao;
 import eionet.eunis.dto.ForeignDataQueryDTO;
 import eionet.sparqlClient.helpers.QueryExecutor;
 import eionet.sparqlClient.helpers.QueryResult;
 import eionet.sparqlClient.helpers.ResultValue;
 
 /**
- * @author Risto Alt
+ * A helper class for executing linked data queries.
  *
+ * @author Risto Alt
  */
 public class LinkedData {
 
@@ -46,15 +48,24 @@ public class LinkedData {
     /** Source of the data. */
     private String attribution;
 
-    public LinkedData(Properties props, Integer natObjId) throws Exception {
+    /**
+     * Create helper on the basis of given properties, and for the given queries of the given nature object.
+     *
+     * @param props
+     * @param natureObjId
+     * @param queriesName
+     * @throws Exception
+     */
+    public LinkedData(Properties props, Integer natureObjId, String queriesName) throws Exception {
         this.props = props;
         queries = props.getProperty("queries").split("\\s+");
 
         if (queries != null) {
             queryObjects = new ArrayList<ForeignDataQueryDTO>();
             for (String queryId : queries) {
-                boolean resultExists = DaoFactory.getDaoFactory().getSpeciesFactsheetDao().queryResultExists(natObjId, queryId);
-                if (natObjId == null || (natObjId != null && resultExists)) {
+                ISpeciesFactsheetDao dao = DaoFactory.getDaoFactory().getSpeciesFactsheetDao();
+                boolean resultExists = dao.queryResultExists(natureObjId, queryId, queriesName);
+                if (natureObjId == null || (natureObjId != null && resultExists)) {
                     ForeignDataQueryDTO dto = new ForeignDataQueryDTO();
                     dto.setId(queryId);
                     dto.setTitle(props.getProperty(queryId + ".title"));
@@ -66,6 +77,12 @@ public class LinkedData {
         }
     }
 
+    /**
+     *
+     * @param queryId
+     * @param id
+     * @throws Exception
+     */
     public void executeQuery(String queryId, int id) throws Exception {
 
         if (props != null && queryId != null) {
@@ -78,7 +95,6 @@ public class LinkedData {
                 if (query.contains("[IDENTIFIER]")) {
                     query = query.replace("[IDENTIFIER]", new Integer(id).toString());
                 }
-
                 QueryExecutor executor = new QueryExecutor();
                 executor.executeQuery(endpoint, query);
                 QueryResult result = executor.getResults();

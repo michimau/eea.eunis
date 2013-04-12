@@ -96,6 +96,10 @@
                                 <td><input type="checkbox" id="linkeddataTab" name="linkeddataTab"/></td>
                                 <td><label for="linkeddataTab">Generate linked data tab information</label></td>
                             </tr>
+                             <tr>
+                                <td><input type="checkbox" id="conservationstatusTab" name="conservationstatusTab"/></td>
+                                <td><label for="conservationstatusTab">Generate conservation status tab information</label></td>
+                            </tr>
                         </table>
                 </fieldset>
                 <fieldset><legend>Fore-/background</legend>

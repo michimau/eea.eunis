@@ -86,11 +86,6 @@ public class SpeciesFactsheet {
     /** Log4J logger used for logging system */
     private static Logger logger = Logger.getLogger(SpeciesFactsheet.class);
 
-    /** Query for detecting if the given species has any external data on conservation status. */
-    private static final String GET_LINKEDDATA_QUERIES_SQL = "select ATTRS.OBJECT"
-            + " from CHM62EDT_SPECIES as SPECIES left join CHM62EDT_NATURE_OBJECT_ATTRIBUTES as ATTRS"
-            + " on SPECIES.ID_NATURE_OBJECT=ATTRS.ID_NATURE_OBJECT where SPECIES.ID_SPECIES=? and ATTRS.NAME='_linkedDataQueries'";
-
     /** ID_SPECIES from CHM62EDT_SPECIES */
     private Integer idSpecies = null;
 
@@ -1818,24 +1813,30 @@ public class SpeciesFactsheet {
     }
 
     /**
-     * Returns true if the given species has external data on any of the linked data queries supplied in the method input. Otherwise
-     * returns false.
+     * Returns true if the given species has external data on any of the linked data queries or conservation Status queries supplied
+     * in the method input. Otherwise returns false.
      *
      * @param sqlUtil The {@link SQLUtilities} instance to use.
-     * @param queries The linked data queries to check.
+     * @param queries The linked data or conservation status queries to check. * @param queriesName _linkedDataQueries or
+     *            _conservationStatusQueries
      * @return The boolean as indicated.
      */
-    public boolean hasExternalDataOnQueries(SQLUtilities sqlUtil, String... queries) {
+    public boolean hasExternalDataOnQueries(SQLUtilities sqlUtil, String queriesName, String... queries) {
 
         if (queries == null || queries.length == 0) {
             return false;
         }
 
+        String queriesSQL =
+                "select ATTRS.OBJECT from CHM62EDT_SPECIES as SPECIES" + " left join CHM62EDT_NATURE_OBJECT_ATTRIBUTES as ATTRS"
+                        + " on SPECIES.ID_NATURE_OBJECT=ATTRS.ID_NATURE_OBJECT where SPECIES.ID_SPECIES=? and ATTRS.NAME='"
+                        + queriesName + "'";
+
         ArrayList<Object> params = new ArrayList<Object>();
         params.add(idSpecies);
         List<Object> resultList = null;
         try {
-            resultList = sqlUtil.executeQuery(GET_LINKEDDATA_QUERIES_SQL, params);
+            resultList = sqlUtil.executeQuery(queriesSQL, params);
         } catch (SQLException e) {
             logger.error(
                     "Failed to check if species (id=" + idSpecies + ") has external data on these queries: "

@@ -5,17 +5,24 @@ import java.util.ResourceBundle;
 import ro.finsiel.eunis.dataimport.TabScripts;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
+/**
+ * An executable the sets the values of Y/N columns in the chm62edt_tab_page_species table. The values that are set depend on
+ * various conditions and certain other scripts must be executed before this one (e.g. {@link LinkedDataQueriesScript}, etc).
+ *
+ * @author jaanus
+ */
 public class PostImportScriptsCmd {
 
     /**
+     *
      * @param args
      */
     public static void main(String[] args) {
 
         if (args.length == 0) {
             System.out.println("Missing argument!");
-            System.out
-            .println("Possible first arguments are: sites, species_tab, sites_tab, habitats_tab, linkeddata_tab, taxonomy_tree");
+            System.out.println("Possible first arguments are: sites, species_tab, sites_tab, habitats_tab"
+                    + ", linkeddata_tab, conservation_status_tab, taxonomy_tree");
         } else {
             try {
                 ResourceBundle props = ResourceBundle.getBundle("jrf");
@@ -44,6 +51,8 @@ public class PostImportScriptsCmd {
                         scripts.setTabHabitats();
                     } else if (args[0].equals("linkeddata_tab")) {
                         scripts.setSpeciesLinkedDataTab();
+                    } else if (args[0].equals("conservation_status_tab")) {
+                        scripts.setSpeciesConservationStatusTab();
                     }
                 }
 

@@ -1,6 +1,5 @@
 package eionet.eunis.scripts;
 
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,29 +13,36 @@ import eionet.sparqlClient.helpers.QueryExecutor;
 import eionet.sparqlClient.helpers.QueryResult;
 import eionet.sparqlClient.helpers.ResultValue;
 
-
+/**
+ *
+ * Updates records in chm62edt_nature_object_attributes table where NAME matches the given queries name, e.g. "_linkedDataQueries",
+ * "_conservationStatusQueries".
+ *
+ * @author Rait
+ */
 public class LinkedDataQueriesScript {
 
     /**
-     * @param args
+     * @param queriesName e.g. "_linkedDataQueries", "_conservationStatusQueries"
+     * @param queriesXMLFileName e.g. "externaldata_species.xml", "conservationstatus_species.xml"
      */
-    public static void main(String[] args) {
+    private static void queriesScript(String queriesName, String queriesXMLFileName) {
 
         try {
-            System.out.println("Linked data command started!");
+            System.out.println("Command started!");
 
             ISpeciesFactsheetDao dao = DaoFactory.getDaoFactory().getSpeciesFactsheetDao();
 
             // Remove previous records from chm62edt_nature_object_attributes
-            dao.removeAllNatObLinkedData();
+            dao.deleteNatureObjAttrsForAll(queriesName);
 
-            // Insert _linkedDataQueries records into chm62edt_nature_object_attributes for each species
-            dao.insertNatObLinkedData();
+            // Insert _Queries records into chm62edt_nature_object_attributes for each species
+            dao.insertNatureObjAttrForAll(queriesName);
 
-            // update _linkedDataQueries records in chm62edt_nature_object_attributes for each species
+            // update _Queries records in chm62edt_nature_object_attributes for each species
             String codes = "";
             Properties props = new Properties();
-            URL url = ClassLoader.getSystemResource("externaldata_species.xml");
+            URL url = ClassLoader.getSystemResource(queriesXMLFileName);
             props.loadFromXML(url.openStream());
             String[] queries = props.getProperty("queries").split("\\s+");
             for (String queryId : queries) {
@@ -63,20 +69,30 @@ public class LinkedDataQueriesScript {
                     }
                 }
                 if (!StringUtils.isBlank(codes)) {
-                    dao.updateNatObLinkedData(codes, queryId);
+                    dao.appendToNatureObjAttr(codes, queriesName, queryId);
                     codes = "";
                     System.out.println("Finished with query: " + queryId);
 
                 }
             }
             // Remove leftovers
-            dao.removeEmptyNatObLinkedData();
+            dao.deleteEmptyNatureObjAttrsForAll(queriesName);
 
-            System.out.println("Linked data command successfully finished!");
+            System.out.println("Command successfully finished!");
 
         } catch (Exception e) {
             System.out.println("Error occured: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+
+        queriesScript("_linkedDataQueries", "externaldata_species.xml");
+        queriesScript("_conservationStatusQueries", "conservationstatus_species.xml");
+    }
+
 }

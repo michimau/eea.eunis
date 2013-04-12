@@ -159,6 +159,7 @@ public class TabScripts {
     /**
      * Generate species linked data tab information for species. This method assumes that
      * all rows have been set to 'N' already.
+     *
      */
     public void setSpeciesLinkedDataTab() {
         Connection con = null;
@@ -185,6 +186,43 @@ public class TabScripts {
 
         } catch (Exception e) {
             EunisUtil.writeLogMessage("ERROR occured while generating species linked data tab information: "
+                    + e.getMessage(), cmd, sqlc);
+            e.printStackTrace();
+        } finally {
+            closeAll(con, ps, null);
+        }
+    }
+
+    /**
+     * Generate species conservation status tab information for species. This method assumes that
+     * all rows have been set to 'N' already.
+     *
+     */
+    public void setSpeciesConservationStatusTab() {
+        Connection con = null;
+        PreparedStatement ps = null;
+        SQLUtilities sqlc = new SQLUtilities();
+
+        try {
+            Class.forName(SQL_DRV);
+            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+
+            sqlc.Init(SQL_DRV, SQL_URL, SQL_USR, SQL_PWD);
+
+            // Update Conservation status tab
+            EunisUtil .writeLogMessage("CONSERVATION STATUS tab generation started. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
+            String linkeddataSql = "UPDATE chm62edt_tab_page_species t "
+                    + "JOIN chm62edt_nature_object_attributes a "
+                    + "ON t.ID_NATURE_OBJECT=a.ID_NATURE_OBJECT AND a.NAME='_conservationStatusQueries' "
+                    + "SET CONSERVATION_STATUS = 'Y' WHERE LENGTH(OBJECT) > 0";
+            ps = con.prepareStatement(linkeddataSql);
+            ps.executeUpdate();
+            EunisUtil.writeLogMessage("CONSERVATION STATUS tab generation finished. Time: "
+                    + new Timestamp(System.currentTimeMillis()), cmd, sqlc);
+
+        } catch (Exception e) {
+            EunisUtil.writeLogMessage("ERROR occured while generating species conservation status tab information: "
                     + e.getMessage(), cmd, sqlc);
             e.printStackTrace();
         } finally {

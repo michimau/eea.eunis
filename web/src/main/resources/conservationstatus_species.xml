@@ -5,54 +5,11 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">conservationstatus conservationstatusBio conservationstatusCountry</entry>
+  <entry key="queries">conservationstatusBio conservationstatusCountry</entry>
 <!-- -->
 <!-- .endpoint, .title and .query are mandatory for all queries -->
 <!-- .summary - use HTML format - i.e. escape & and < -->
 <!-- -->
-
- <entry key="conservationstatus.endpoint">http://semantic.eea.europa.eu/sparql</entry>
-  <entry key="conservationstatus.title">Conservation status (National and International)</entry>
-  <entry key="conservationstatus.summary"><![CDATA[Various Red List sources]]></entry>
-  <entry key="conservationstatus.query"><![CDATA[
-PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX dcterms: <http://purl.org/dc/terms/>
-
-SELECT ?country ?status ?source ?published
-FROM <http://rdfdata.eionet.europa.eu/eunis/conservationstatus.rdf.gz>
-FROM <http://rdfdata.eionet.europa.eu/eea/biogeographic-regions.rdf>
-FROM <http://eunis.eea.europa.eu/rdf/countries.rdf.gz>
-FROM <http://eunis.eea.europa.eu/rdf/references.rdf.gz>
-WHERE {
- ?subject b:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
-          a b:SpeciesConservationStatus;
-          dcterms:source ?usource.
- ?subject  b:forCountry ?ucountry.
-OPTIONAL { ?ucountry rdfs:label ?country}
-OPTIONAL { ?usource dcterms:title ?source;
-           dcterms:created ?published }
- ?subject b:hasStatus ?hasStatus .
- ?hasStatus rdfs:label ?status.
-} ORDER BY ?country  DESC(?published)
-]]></entry>
-
-  <entry key="conservationstatus.codes"><![CDATA[
-PREFIX b: <http://eunis.eea.europa.eu/rdf/schema.rdf#>
-PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
-
-SELECT DISTINCT ?speciescode
-FROM <http://rdfdata.eionet.europa.eu/eunis/conservationstatus.rdf.gz>
-FROM <http://eunis.eea.europa.eu/rdf/species.rdf.gz>
-WHERE {
- ?subject b:forSpecies ?speciesurl;
-          a b:SpeciesConservationStatus;
-          b:forCountry ?ucountry.
- ?subject b:hasStatus ?hasStatus .
- ?speciesurl eunis:speciesCode ?speciescode
-}
-]]></entry>
-
 
   <entry key="conservationstatusBio.endpoint">http://cr.eionet.europa.eu/sparql</entry>
   <entry key="conservationstatusBio.title">Biogeographical assessment of the conservation status of the species</entry>
@@ -66,7 +23,7 @@ PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
 PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
 PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
 
-SELECT ?region ?conclusion
+SELECT ?region ?conclusion "2001-2006" AS ?period
 WHERE {
   ?subj a art17:Speciessummary ;
         art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
@@ -113,7 +70,7 @@ PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
 PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
 PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
 
-SELECT ?country ?region ?conclusion
+SELECT ?country ?region ?conclusion "2001-2006" AS ?period
 WHERE {
   ?subj a art17:Speciessummary ;
         art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;

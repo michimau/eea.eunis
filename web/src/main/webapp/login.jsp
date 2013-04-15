@@ -88,7 +88,7 @@
               {
           %>
               <div class="error-msg">
-                  <%=cm.cms("Invalid login name or password")%>
+                  <%=cm.cmsPhrase("Invalid login name or password")%>
               </div>
           <%
               }

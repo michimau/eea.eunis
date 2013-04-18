@@ -27,8 +27,8 @@ SELECT ?coverage ?region ?conclusion "2001-2006" AS ?period
 WHERE {
     ?s a art17:SpeciesManualAssessment;
        art17:decision <http://rdfdata.eionet.europa.eu/art17report2008/decision/OK>;
+       art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
        art17:forRegion ?regionurl;
-       art17:forSpecies ?speciesurl;
        art17:conclusion_population ?conclusionurl;
        art17:forCountry ?countryurl;
        art17:assesment_speciesname ?reported_as.

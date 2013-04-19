@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>Conservation status queries for habitat types</comment>
+<!-- -->
+<!-- The list of queries in this file. Separated by whitespace. -->
+<!-- -->
+  <entry key="queries">conservationstatusBio conservationstatusCountry</entry>
+<!-- -->
+<!-- .endpoint, .title and .query are mandatory for all queries -->
+<!-- .summary - use HTML format - i.e. escape & and < -->
+<!-- -->
+
+  <entry key="conservationstatusBio.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="conservationstatusBio.title">Biogeographical assessment of the conservation status of the habitat types</entry>
+<!-- .summary - use HTML format - i.e. escape & and < -->
+  <entry key="conservationstatusBio.summary"><![CDATA[Biogeographical assessments on the conservation status of the habitat types
+   and species of Community interest have been carried out in EU 25 for the period 2001-2006,
+   compiled as part of the Habitats Directive - Article 17 reporting process.
+   The data summary sheet for habitat types conservation status provides an overview per biogeographical region.]]></entry>
+  <entry key="conservationstatusBio.query"><![CDATA[
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+
+SELECT ?coverage ?region ?conclusion "2001-2006" AS ?period
+WHERE {
+  ?s a art17:HabitatTypeManualAssessment;
+     art17:decision <http://rdfdata.eionet.europa.eu/art17report2008/decision/OK>;
+     art17:forHabitatType <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]>;
+     art17:forRegion _:regionUrl ;
+     art17:forCountry _:countryUrl ;
+     art17:conclusion_area _:conclusion_areaUrl . 
+   _:conclusion_areaUrl rdfs:label ?conclusion .
+   _:regionUrl rdfs:label ?region .
+   _:countryUrl rdfs:label ?coverage
+}
+]]></entry>
+
+  <entry key="conservationstatusBio.codes"><![CDATA[
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX h: <http://eunis.eea.europa.eu/rdf/habitats-schema.rdf#>
+
+SELECT DISTINCT ?habitatcode
+WHERE {
+  ?s a art17:HabitatTypeManualAssessment ;
+     art17:forHabitatType _:habitaturl .
+  _:habitaturl h:code ?habitatcode
+}
+]]></entry>
+
+  <entry key="conservationstatusCountry.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="conservationstatusCountry.title">Country-level assessment of the conservation status of the habitat types</entry>
+<!-- .summary - use HTML format - i.e. escape & and < -->
+  <entry key="conservationstatusCountry.summary"><![CDATA[Country-level assessments on the conservation status of the habitat types
+   and species of Community interest have been carried out in EU 25 for the period 2001-2006,
+   compiled as part of the Habitats Directive - Article 17 reporting process.
+   The data summary sheet for habitat types conservation status provides an overview per biogeographical region.]]></entry>
+  <entry key="conservationstatusCountry.query"><![CDATA[
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
+
+SELECT ?country ?region ?conclusion "2001-2006" AS ?period
+WHERE {
+  ?s a art17:Habitattypesummary ;
+     art17:forHabitatType <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]>;
+     art17:forCountry _:countryUrl;
+     art17:forRegion _:regionUrl .
+   _:regionUrl rdfs:label ?region .
+   _:countryUrl rdfs:label ?country
+OPTIONAL { ?s art17:conclusion_area _:conclusion_areaUrl .
+           _:conclusion_areaUrl rdfs:label ?conclusion }
+} ORDER BY ?country ?region
+]]></entry>
+
+  <entry key="conservationstatusCountry.codes"><![CDATA[
+PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX h: <http://eunis.eea.europa.eu/rdf/habitats-schema.rdf#>
+
+SELECT DISTINCT ?habitatcode
+WHERE {
+  ?s a art17:Habitattypesummary ;
+     art17:forHabitatType _:habitaturl .
+  _:habitaturl h:code ?habitatcode
+}
+]]></entry>
+
+</properties>

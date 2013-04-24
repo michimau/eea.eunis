@@ -27,7 +27,6 @@ import eionet.eunis.dto.PairDTO;
 import eionet.eunis.dto.ReferenceDTO;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.CustomPaginatedList;
-import eionet.eunis.util.DcTermsLabels;
 import eionet.eunis.util.Pair;
 
 
@@ -56,7 +55,7 @@ public class ReferencesActionBean extends AbstractStripesAction {
     private String sort;
     private String dir;
 
-    private Map<String, String> dcTermsLabels = new HashMap<String, String>();
+
 
     @DefaultHandler
     @DontValidate(ignoreBindingErrors = true)
@@ -79,7 +78,6 @@ public class ReferencesActionBean extends AbstractStripesAction {
 
             dcIndex = dao.getDcIndex(idref);
             dcAttributes = dao.getDcAttributes(idref);
-            dcTermsLabels = DcTermsLabels.getDctermslabels();
 
             btrail = "eea#" + eeaHome
             + ",home#index.jsp,references#references";
@@ -209,8 +207,6 @@ public class ReferencesActionBean extends AbstractStripesAction {
         return dcAttributes;
     }
 
-    public Map<String, String> getDcTermsLabels() {
-        return dcTermsLabels;
-    }
+
 
 }

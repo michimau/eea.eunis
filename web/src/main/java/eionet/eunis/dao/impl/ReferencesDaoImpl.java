@@ -135,7 +135,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
 
         try {
             con = getConnection();
-            preparedStatement = con.prepareStatement("SELECT NAME, OBJECT, OBJECTLANG, TYPE FROM DC_ATTRIBUTES WHERE ID_DC = ?");
+            preparedStatement = con.prepareStatement("SELECT a.NAME, b.LABEL, a.OBJECT, a.OBJECTLANG, a.TYPE from dc_attributes AS a LEFT OUTER JOIN dc_attribute_labels AS b ON a.NAME = b.NAME WHERE ID_DC = ?");
             preparedStatement.setString(1, idDc);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -143,7 +143,11 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
                 String object = rs.getString("OBJECT");
                 String lang = rs.getString("OBJECTLANG");
                 String type = rs.getString("TYPE");
-                AttributeDto attr = new AttributeDto(name, type, object, lang);
+                String label = rs.getString("LABEL");
+                if(label==null){
+                    label= name;
+                }
+                AttributeDto attr = new AttributeDto(name, type, object, lang , label);
                 ret.add(attr);
             }
         } catch (Exception e) {

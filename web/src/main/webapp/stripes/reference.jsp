@@ -1,6 +1,6 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 
-<%@ include file="/stripes/common/taglibs.jsp"%>	
+<%@ include file="/stripes/common/taglibs.jsp"%>
 
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Document - ${actionBean.dcIndex.title}">
 	<stripes:layout-component name="contents">
@@ -26,7 +26,7 @@
               		<c:choose>
               			<c:when test="${dataTab.id eq actionBean.tab}">
 	              			<li id="currenttab">
-	              				<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${dataTab.value}" 
+	              				<a title="${eunis:cmsPhrase(actionBean.contentManagement, 'show')} ${dataTab.value}"
 	              				href="references/${actionBean.idref}/${dataTab.id}">${dataTab.value}</a>
 	              			</li>
               			</c:when>
@@ -95,7 +95,7 @@
 						<c:if test="${!empty actionBean.dcAttributes}">
 							<c:forEach items="${actionBean.dcAttributes}" var="attr" varStatus="loop">
 								<tr ${loop.index % 2 != 0 ? '' : 'class="zebraeven"'}>
-									<th scope="row">${actionBean.dcTermsLabels[attr.name]}</th>
+									<th scope="row">${attr.label}</th>
 									<c:choose>
 				              			<c:when test="${attr.type == 'reference'}">
 					              			<td><a href="${eunis:replaceTags(attr.value)}">${eunis:replaceTags(attr.value)}</a></td>

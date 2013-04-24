@@ -100,8 +100,8 @@ public class ExternalObjectsDaoImpl extends MySqlBaseDao implements IExternalObj
             while (rs.next()) {
                 String name = rs.getString("NAME");
                 String object = rs.getString("OBJECT");
-                String type = rs.getString("TYPE");
-                AttributeDto attr = new AttributeDto(name, type, object);
+                String type = rs.getString("TYPE");                
+                AttributeDto attr = new AttributeDto(name, type, object, name);
                 ret.put(name, attr);
             }
         } catch (Exception e) {

@@ -88,8 +88,17 @@ updateText('<%=cm.cms("generating_pdf_wait")%>');
 <%
   pdfReport report = new pdfReport();
   out.flush();
+  String appHomeDir = application.getInitParameter( "APP_HOME" );
+  if (appHomeDir == null) {
+      appHomeDir = "";
+  }
   String temp_dir = application.getInitParameter( "TEMP_DIR" );
-  String linktopdf = getServletContext().getRealPath("/") + temp_dir;
+  if (temp_dir == null) {
+      temp_dir = "";
+  }
+
+  String linktopdf = appHomeDir + temp_dir;
+
   String filename = "SpeciesFactsheet_" + request.getSession().getId() + ".pdf";
 
   Paragraph header = new Paragraph();

@@ -30,11 +30,11 @@
   // Web content manager used in this page.
   WebContentManagement cm = SessionManager.getWebContent();
   String temp_dir = application.getInitParameter( "TEMP_DIR" );
-  String linktopdf = getServletContext().getRealPath("/") + temp_dir;
-  
+  String linktopdf = application.getInitParameter("APP_HOME") + temp_dir;
+
   String pdf_font = application.getInitParameter( "PDF_FONT" );
   String fontLocation = getServletContext().getRealPath("/") + pdf_font;
-  
+
   String filename = "SiteFactsheet_" + request.getSession().getId() + ".pdf";
   /// INPUT PARAMS: idHabitat
   String siteid = request.getParameter("idsite");

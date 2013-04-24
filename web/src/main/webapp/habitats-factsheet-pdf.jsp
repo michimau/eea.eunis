@@ -75,7 +75,7 @@
   String idHabitat = request.getParameter("idHabitat");
   pdfReport report = new pdfReport();
   String temp_dir = application.getInitParameter( "TEMP_DIR" );
-  String linktopdf = getServletContext().getInitParameter(Constants.APP_HOME_INIT_PARAM) + temp_dir;
+  String linktopdf = application.getInitParameter( "APP_HOME" ) + temp_dir;
   String filename = "HabitatFactsheet_" + request.getSession().getId() + ".pdf";
   out.flush();
   HabitatsFactsheet factsheet = new HabitatsFactsheet(idHabitat);

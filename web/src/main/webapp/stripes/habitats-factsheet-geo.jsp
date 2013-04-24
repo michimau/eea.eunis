@@ -7,7 +7,7 @@
 		dojo.require("esri.map");
 		dojo.require("esri.tasks.geometry");
 
-		var layer_dist, layer_range, map, n2000layer, cddalayer;
+		var layer_dist, layer_range, map, n2000layer, cddalayer, bio_regions_layer, river_basin_districts_layer;
 		function init() {
 
 			var initExtent =  new esri.geometry.Extent({"xmin":-3222779.52198856,"ymin": 2736409.05279762,"xmax":7105006.15070147,"ymax": 11615622.1895779,"spatialReference":{"wkid":3857}})
@@ -22,6 +22,12 @@
 			filterNatura2000('${actionBean.factsheet.code2000}');
 
 		    cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/CDDA_Dyna_WGS84/MapServer");
+
+		    bio_regions_layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/BiogeographicalRegions2008_Dyna_WGS84/MapServer");
+            bio_regions_layer.opacity = 0.5;
+
+            river_basin_districts_layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Water/RiverBasinDistrict_Dyna_WGS84/MapServer");
+            river_basin_districts_layer.opacity = 0.6;
 
 		    // Distribution layer
 		    var imageParameters_dist = new esri.layers.ImageParameters();
@@ -74,6 +80,8 @@
 	      if (processedLayers == 1) {
 	        layersWithData.push('natura');
 	        layersWithData.push('cdda');
+	        layersWithData.push('bio_regions');
+	        layersWithData.push('river_basin');
 	        genList();
 	      }
 	      processedLayers++;
@@ -84,14 +92,18 @@
 				"distribution": "Distribution",
 				"range": "Range",
 				"natura": "Natura 2000 sites",
-				"cdda": "Nationally designated sites"
+				"cdda": "Nationally designated sites",
+				"bio_regions":"Bio-geographical regions",
+				"river_basin":"River basin districts"
 			};
 
 			var descList = {
 				"distribution": "Distribution reported under Article 17, Habitats Directive",
 				"range": "Range reported under Article 17, Habitats Directive",
 				"natura": "",
-				"cdda": ""
+				"cdda": "",
+				"bio_regions":"",
+				"river_basin":""
 			};
 
 			var dl = document.createElement ("dl");
@@ -130,6 +142,10 @@
 					map.addLayer(n2000layer);
 				} else if (id == 'cdda') {
 					map.addLayer(cddalayer);
+				} else if (id == 'bio_regions') {
+					map.addLayer(bio_regions_layer);
+				} else if (id == 'river_basin') {
+					map.addLayer(river_basin_districts_layer);
 				}
 			} else {
 				if (id == 'distribution') {
@@ -140,6 +156,10 @@
 					map.removeLayer(n2000layer);
 				} else if (id == 'cdda') {
 					map.removeLayer(cddalayer);
+				} else if (id == 'bio_regions') {
+					map.removeLayer(bio_regions_layer);
+				} else if (id == 'river_basin') {
+					map.removeLayer(river_basin_districts_layer);
 				}
 			}
 		}

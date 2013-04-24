@@ -70,7 +70,7 @@
 				}
 			})
 
-			var layer_dist, layer_range, map, n2000layer, cddalayer, visible = [];
+			var layer_dist, layer_range, map, n2000layer, cddalayer, bio_regions_layer, river_basin_districts_layer,visible = [];
 			var faoDistLayer, gbifLayer;
 
 			var symbol = new esri.symbol.SimpleFillSymbol();
@@ -89,11 +89,18 @@
 
                 cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/CDDA_Dyna_WGS84/MapServer");
 
+                bio_regions_layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/BiogeographicalRegions2008_Dyna_WGS84/MapServer");
+                bio_regions_layer.opacity = 0.5;
+
+                river_basin_districts_layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Water/RiverBasinDistrict_Dyna_WGS84/MapServer");
+                river_basin_districts_layer.opacity = 0.6;
+
                 //Add species parameter to filter Natura 2000
                 filterNatura2000('${actionBean.scientificName}')
 
                 faoDistLayer = new my.FAODistLayer();
                 gbifLayer = new my.GBIFLayer();
+                gbifLayer.opacity = 0.5;
 
                 // Species Distribution layer
                 var imageParameters_dist = new esri.layers.ImageParameters();
@@ -219,6 +226,10 @@
 						map.addLayer(n2000layer);
 					} else if (id == 'cdda') {
 						map.addLayer(cddalayer);
+					} else if (id == 'bio_regions') {
+						map.addLayer(bio_regions_layer);
+					} else if (id == 'river_basin') {
+						map.addLayer(river_basin_districts_layer);
 					} else if (id == 'gbif') {
 						map.addLayer(gbifLayer);
 					}
@@ -233,6 +244,10 @@
 						map.removeLayer(n2000layer);
 					} else if (id == 'cdda') {
 						map.removeLayer(cddalayer);
+					} else if (id == 'bio_regions') {
+						map.removeLayer(bio_regions_layer);
+					} else if (id == 'river_basin') {
+						map.removeLayer(river_basin_districts_layer);
 					} else if (id == 'gbif') {
 						map.removeLayer(gbifLayer);
 					}
@@ -288,6 +303,20 @@
 						<label for="cdda">
 							<input type="checkbox" class="list_item" id="cdda" onclick="updateLayerVisibility('cdda');"/>
 							Nationally designated sites
+						</label>
+					</dt>
+					<dd></dd>
+					<dt>
+						<label for="bio_regions">
+							<input type="checkbox" class="list_item" id="bio_regions" onclick="updateLayerVisibility('bio_regions');"/>
+							Bio-geographical regions
+						</label>
+					</dt>
+					<dd></dd>
+					<dt>
+						<label for="river_basin">
+							<input type="checkbox" class="list_item" id="river_basin" onclick="updateLayerVisibility('river_basin');"/>
+							River basin districts
 						</label>
 					</dt>
 					<dd></dd>

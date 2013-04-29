@@ -2053,21 +2053,22 @@ public class HabitatsFactsheet {
      */
     public List<Chm62edtNatureObjectPicturePersist> getPicturesForHabitats(Integer limit, boolean mainPic) {
         List<Chm62edtNatureObjectPicturePersist> results = new ArrayList<Chm62edtNatureObjectPicturePersist>();
-
-        Chm62edtNatureObjectPictureDomain nop = new Chm62edtNatureObjectPictureDomain();
-        String where = "";
-        where += " ID_OBJECT='" + habitat.getIdHabitat() + "'";
-        where += " AND NATURE_OBJECT_TYPE='Habitats'";
-        if (mainPic) {
-            where += " AND MAIN_PIC = 1";
-        }
-        if (limit != null) {
-            where += " LIMIT " + limit;
-        }
-        try {
-            results = nop.findWhere(where);
-        } catch (Exception _ex) {
-            _ex.printStackTrace(System.err);
+        if(habitat!= null){
+            Chm62edtNatureObjectPictureDomain nop = new Chm62edtNatureObjectPictureDomain();
+            String where = "";
+            where += " ID_OBJECT='" + habitat.getIdHabitat() + "'";
+            where += " AND NATURE_OBJECT_TYPE='Habitats'";
+            if (mainPic) {
+                where += " AND MAIN_PIC = 1";
+            }
+            if (limit != null) {
+                where += " LIMIT " + limit;
+            }
+            try {
+                results = nop.findWhere(where);
+            } catch (Exception _ex) {
+                _ex.printStackTrace(System.err);
+            }
         }
         return results;
     }

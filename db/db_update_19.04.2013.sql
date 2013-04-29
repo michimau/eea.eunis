@@ -93,6 +93,6 @@ alter table dc_attributes change column NAME NAME varchar(100) not null;
 -- add foriegn key from dc_attribute.name to dc_attribute_labels.name
 --
 
-alter table dc_attributes add foreign key (NAME) references dc_attribute_labels(name) ON DELETE CASCADE ON UPDATE CASCADE;
+alter table dc_attributes add foreign key (NAME) references dc_attribute_labels(name) ON UPDATE CASCADE;
 
 

@@ -13,6 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <env>local</env>
+        <checkstyle.config.location>${basedir}/docs/checkstyle.xml</checkstyle.config.location>
     </properties>
 
     <parent>
@@ -239,4 +240,34 @@
             <version>1.1.2</version>
         </dependency>
     </dependencies>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <linkXref>false</linkXref>
+                    <sourceEncoding>utf-8</sourceEncoding>
+                    <minimumTokens>300</minimumTokens>
+                    <targetJdk>${java_version}</targetJdk>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <configLocation>${checkstyle.config.location}</configLocation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.3</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
 </project>

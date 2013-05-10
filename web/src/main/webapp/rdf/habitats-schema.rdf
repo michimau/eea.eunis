@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	 xmlns:owl="http://www.w3.org/2002/07/owl#"
+	 xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+	<owl:Ontology rdf:about="">
+		<rdfs:label>EUNIS habitat type schema</rdfs:label>
+	</owl:Ontology>
+
+	<rdfs:Class rdf:ID="HabitatType">
+		<rdfs:label>Habitat type</rdfs:label>
+	</rdfs:Class>
+
+	<rdf:Property rdf:ID="code">
+		<rdfs:label>EUNIS Code</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="natura2000Code">
+		<rdfs:label>Natura2000 code</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="annex1Code">
+		<rdfs:label>Habitats directive Annex 1 code</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="priority">
+		<rdfs:label>Is priority type</rdfs:label>
+		<rdfs:domain rdf:resource="#HabitatType"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="habitatCode">
+		<rdfs:label>Habitat code</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="classRef">
+		<rdfs:label>Class reference</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="codePart2">
+		<rdfs:label>Part two code</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="level">
+		<rdfs:label>Level</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="name">
+		<rdfs:label>Name</rdfs:label>
+		<rdfs:domain rdf:resource="#HabitatType"/>
+		<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#label"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="originallyPublishedCode">
+		<rdfs:label>Originally published code</rdfs:label>
+		<rdfs:domain rdf:resource="#HabitatType"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="typicalSpecies">
+		<rdfs:label>Typical species</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="description">
+		<rdfs:label>Description</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="hasReference">
+		<rdfs:label>Description source</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="comment">
+		<rdfs:label>Comment</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="nationalName">
+		<rdfs:label>National name</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="hasParent">
+		<rdfs:label>Parent type</rdfs:label>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="hasAncestor">
+		<rdfs:label>Ancester type</rdfs:label>
+	</rdf:Property>
+
+</rdf:RDF>

@@ -22,15 +22,15 @@
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
 
-SELECT ?coverage ?region ?conclusion "2001-2006" AS ?period
+SELECT ?coverage ?region ?future "2001-2006" AS ?period
 WHERE {
   ?s a art17:HabitatTypeManualAssessment;
      art17:decision <http://rdfdata.eionet.europa.eu/art17report2008/decision/OK>;
      art17:forHabitatType <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]>;
      art17:forRegion _:regionUrl ;
      art17:forCountry _:countryUrl ;
-     art17:conclusion_area _:conclusion_areaUrl . 
-   _:conclusion_areaUrl rdfs:label ?conclusion .
+     art17:conclusion_future _:conclusion_futureUrl . 
+   _:conclusion_futureUrl rdfs:label ?future .
    _:regionUrl rdfs:label ?region .
    _:countryUrl rdfs:label ?coverage
 }
@@ -60,7 +60,7 @@ PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
 PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
 PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
 
-SELECT ?country ?region ?conclusion "2001-2006" AS ?period
+SELECT ?country ?region ?future "2001-2006" AS ?period
 WHERE {
   ?s a art17:Habitattypesummary ;
      art17:forHabitatType <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]>;
@@ -68,8 +68,8 @@ WHERE {
      art17:forRegion _:regionUrl .
    _:regionUrl rdfs:label ?region .
    _:countryUrl rdfs:label ?country
-OPTIONAL { ?s art17:conclusion_area _:conclusion_areaUrl .
-           _:conclusion_areaUrl rdfs:label ?conclusion }
+OPTIONAL { ?s art17:conclusion_future _:conclusion_futureUrl .
+           _:conclusion_futureUrl rdfs:label ?future }
 } ORDER BY ?country ?region
 ]]></entry>
 

@@ -23,17 +23,17 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
 PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
-SELECT ?coverage ?region ?conclusion "2001-2006" AS ?period
+SELECT ?coverage ?region ?future "2001-2006" AS ?period
 WHERE {
     ?s a art17:SpeciesManualAssessment;
        art17:decision <http://rdfdata.eionet.europa.eu/art17report2008/decision/OK>;
        art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
        art17:forRegion ?regionurl;
-       art17:conclusion_population ?conclusionurl;
+       art17:conclusion_future ?conclusionurl;
        art17:forCountry ?countryurl;
        art17:assesment_speciesname ?reported_as.
   ?regionurl rdfs:label ?region .
-  ?conclusionurl rdfs:label ?conclusion.
+  ?conclusionurl rdfs:label ?future.
   ?countryurl rdfs:label ?coverage.
 }
 ]]></entry>
@@ -63,7 +63,7 @@ PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
 PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
 PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
 
-SELECT ?country ?region ?conclusion "2001-2006" AS ?period
+SELECT ?country ?region ?future "2001-2006" AS ?period
 WHERE {
   ?subj a art17:Speciessummary ;
         art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
@@ -71,8 +71,8 @@ WHERE {
         art17:forRegion _:regionUrl .
  _:regionUrl e:name ?region .
  _:countryUrl e:name ?country.
-OPTIONAL {?subj art17:conclusion_population _:conclusion_populationUrl .
-         _:conclusion_populationUrl o:name ?conclusion }
+OPTIONAL {?subj art17:conclusion_future _:conclusion_populationUrl .
+         _:conclusion_populationUrl o:name ?future }
 } ORDER BY ?country ?region
 ]]></entry>
 

@@ -20,26 +20,25 @@
    The data summary sheet for species conservation status provides an overview per biogeographical region.]]></entry>
   <entry key="conservationstatusBio.query"><![CDATA[
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX art17: <http://eunis.eea.europa.eu/rdf/art17report2008/ontology.rdf#>
 PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
-SELECT ?coverage ?region ?future "2001-2006" AS ?period
+SELECT ?coverage ?region ?assessment "2001-2006" AS ?period
 WHERE {
     ?s a art17:SpeciesManualAssessment;
-       art17:decision <http://rdfdata.eionet.europa.eu/art17report2008/decision/OK>;
        art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
        art17:forRegion ?regionurl;
-       art17:conclusion_future ?conclusionurl;
+       art17:conclusion_assessment ?conclusionUrl;
        art17:forCountry ?countryurl;
        art17:assesment_speciesname ?reported_as.
   ?regionurl rdfs:label ?region .
-  ?conclusionurl rdfs:label ?future.
+  ?conclusionUrl rdfs:label ?assessment.
   ?countryurl rdfs:label ?coverage.
 }
 ]]></entry>
 
   <entry key="conservationstatusBio.codes"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX art17: <http://eunis.eea.europa.eu/rdf/art17report2008/ontology.rdf#>
 PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
 PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
@@ -59,11 +58,11 @@ WHERE {
    compiled as part of the Habitats Directive - Article 17 reporting process.
    The data summary sheet for species conservation status provides an overview per biogeographical region.]]></entry>
   <entry key="conservationstatusCountry.query"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX art17: <http://eunis.eea.europa.eu/rdf/art17report2008/ontology.rdf#>
 PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
 PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
 
-SELECT ?country ?region ?future "2001-2006" AS ?period
+SELECT ?country ?region ?assessment "2001-2006" AS ?period
 WHERE {
   ?subj a art17:Speciessummary ;
         art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
@@ -71,13 +70,13 @@ WHERE {
         art17:forRegion _:regionUrl .
  _:regionUrl e:name ?region .
  _:countryUrl e:name ?country.
-OPTIONAL {?subj art17:conclusion_future _:conclusion_populationUrl .
-         _:conclusion_populationUrl o:name ?future }
+OPTIONAL {?subj art17:conclusion_assessment _:conclusionUrl .
+         _:conclusionUrl o:name ?assessment }
 } ORDER BY ?country ?region
 ]]></entry>
 
   <entry key="conservationstatusCountry.codes"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX art17: <http://eunis.eea.europa.eu/rdf/art17report2008/ontology.rdf#>
 PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
 PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 

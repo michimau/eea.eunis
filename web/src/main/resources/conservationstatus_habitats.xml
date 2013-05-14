@@ -20,24 +20,23 @@
    The data summary sheet for habitat types conservation status provides an overview per biogeographical region.]]></entry>
   <entry key="conservationstatusBio.query"><![CDATA[
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX art17: <http://eunis.eea.europa.eu/rdf/art17report2008/ontology.rdf#>
 
-SELECT ?coverage ?region ?future "2001-2006" AS ?period
+SELECT ?coverage ?region ?assessment "2001-2006" AS ?period
 WHERE {
   ?s a art17:HabitatTypeManualAssessment;
-     art17:decision <http://rdfdata.eionet.europa.eu/art17report2008/decision/OK>;
      art17:forHabitatType <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]>;
      art17:forRegion _:regionUrl ;
      art17:forCountry _:countryUrl ;
-     art17:conclusion_future _:conclusion_futureUrl . 
-   _:conclusion_futureUrl rdfs:label ?future .
+     art17:conclusion_assessment _:conclusionUrl . 
+   _:conclusionUrl rdfs:label ?assessment .
    _:regionUrl rdfs:label ?region .
    _:countryUrl rdfs:label ?coverage
 }
 ]]></entry>
 
   <entry key="conservationstatusBio.codes"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX art17: <http://eunis.eea.europa.eu/rdf/art17report2008/ontology.rdf#>
 PREFIX h: <http://eunis.eea.europa.eu/rdf/habitats-schema.rdf#>
 
 SELECT DISTINCT ?habitatcode
@@ -56,11 +55,11 @@ WHERE {
    compiled as part of the Habitats Directive - Article 17 reporting process.
    The data summary sheet for habitat types conservation status provides an overview per biogeographical region.]]></entry>
   <entry key="conservationstatusCountry.query"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX art17: <http://eunis.eea.europa.eu/rdf/art17report2008/ontology.rdf#>
 PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
 PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
 
-SELECT ?country ?region ?future "2001-2006" AS ?period
+SELECT ?country ?region ?assessment "2001-2006" AS ?period
 WHERE {
   ?s a art17:Habitattypesummary ;
      art17:forHabitatType <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]>;
@@ -68,13 +67,13 @@ WHERE {
      art17:forRegion _:regionUrl .
    _:regionUrl rdfs:label ?region .
    _:countryUrl rdfs:label ?country
-OPTIONAL { ?s art17:conclusion_future _:conclusion_futureUrl .
-           _:conclusion_futureUrl rdfs:label ?future }
+OPTIONAL { ?s art17:conclusion_assessment _:conclusionUrl .
+           _:conclusionUrl rdfs:label ?assessment }
 } ORDER BY ?country ?region
 ]]></entry>
 
   <entry key="conservationstatusCountry.codes"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
+PREFIX art17: <http://eunis.eea.europa.eu/rdf/art17report2008/ontology.rdf#>
 PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
 PREFIX h: <http://eunis.eea.europa.eu/rdf/habitats-schema.rdf#>
 

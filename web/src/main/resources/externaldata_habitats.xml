@@ -75,8 +75,8 @@ WHERE {
   <entry key="art17distribution.column.country">Country</entry>
   <entry key="art17distribution.column.range">Range reference</entry>
   <entry key="art17distribution.query"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/> 
-PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/> 
+PREFIX art17: <http://eunis.eea.europa.eu/rdf/art17report2008/ontology.rdf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/> 
 
 SELECT ?country ?region ?surefacearea ?pc_rsa ?conclusion ?trend ?favourable_area ?quality 
@@ -85,13 +85,14 @@ WHERE {
         art17:forHabitatType <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]>; 
         art17:forRegion _:regionUrl . 
   _:regionUrl e:name ?region . 
-OPTIONAL { ?subj  art17:forCountry _:countryUrl. 
-           _:countryUrl e:name ?country. } 
+OPTIONAL { ?subj  art17:forCountry _:countryUrl . 
+           _:countryUrl e:name ?country } 
 OPTIONAL {?subj art17:coverage_surface_area ?surefacearea} 
 OPTIONAL {?subj art17:percentage_coverage_surface_area ?pc_rsa} 
 OPTIONAL {?subj art17:conclusion_area _:conclusion_areaUrl . 
-         _:conclusion_areaUrl o:name ?conclusion } 
-OPTIONAL {?subj art17:coverage_trend ?trend} 
+         _:conclusion_areaUrl rdfs:label ?conclusion } 
+OPTIONAL {?subj art17:coverage_trend ?trendUrl .
+          ?trendUrl rdfs:label ?trend } 
 OPTIONAL {?subj art17:complementary_favourable_area ?favourable_area} 
 OPTIONAL {?subj art17:coverage_quality ?quality} 
 
@@ -113,8 +114,8 @@ FILTER(?rdfType IN (art17:Habitattypesummary, art17:HabitatTypeManualAssessment)
   <entry key="art17ranges.column.country">Country</entry>
   <entry key="art17ranges.column.range">Range reference</entry>
   <entry key="art17ranges.query"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/> 
-PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/> 
+PREFIX art17: <http://eunis.eea.europa.eu/rdf/art17report2008/ontology.rdf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/> 
 
 SELECT ?country ?region ?surfacerange ?pc_rsa ?conclusion ?trend 
@@ -125,13 +126,14 @@ WHERE {
         art17:forHabitatType <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]>; 
         art17:forRegion _:regionUrl . 
   _:regionUrl e:name ?region . 
-OPTIONAL { ?subj  art17:forCountry _:countryUrl. 
-           _:countryUrl e:name ?country. } 
+OPTIONAL { ?subj  art17:forCountry _:countryUrl . 
+           _:countryUrl e:name ?country } 
 OPTIONAL {?subj art17:range_surface_area ?surfacerange} 
 OPTIONAL {?subj art17:percentage_range_surface_area ?pc_rsa} 
 OPTIONAL {?subj art17:conclusion_range _:conclusion_rangeUrl . 
-         _:conclusion_rangeUrl o:name ?conclusion } 
-OPTIONAL {?subj art17:range_trend ?trend} 
+         _:conclusion_rangeUrl rdfs:label ?conclusion } 
+OPTIONAL {?subj art17:range_trend ?trendUrl .
+          ?trendUrl rdfs:label ?trend } 
 OPTIONAL {?subj art17:complementary_favourable_range_q ?complementary_favourable_range_q} 
 OPTIONAL {?subj art17:complementary_favourable_range ?complementary_favourable_range} 
 OPTIONAL {?subj art17:range_quality ?quality} 
@@ -160,13 +162,13 @@ FROM <http://rdfdata.eionet.europa.eu/eea/countries.rdf>
 WHERE { 
  ?subject e:forHabitat <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]>; 
           e:forCountry ?ucountry; 
-          dcterms:source ?usource. 
+          dcterms:source ?usource . 
  OPTIONAL {?subject e:hasBioGeoRegion ?ubiogeoregion . 
          ?ubiogeoregion eea:name ?biogeoregion }  
  OPTIONAL {?subject e:probability ?probability }  
  OPTIONAL {?subject e:comment ?comment }  
  ?usource dcterms:title ?source; 
-          dcterms:date ?date. 
+          dcterms:date ?date . 
  ?ucountry eea:name ?country 
 } ORDER BY DESC(?date) ?country ?biogeoregion
 ]]></entry>

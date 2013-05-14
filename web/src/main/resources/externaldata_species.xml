@@ -90,8 +90,8 @@ WHERE {
   <entry key="art17ranges.column.country">Country</entry>
   <entry key="art17ranges.column.range">Range reference</entry>
   <entry key="art17ranges.query"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
-PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX art17: <http://eunis.eea.europa.eu/rdf/art17report2008/ontology.rdf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
 
 SELECT ?country ?region ?surfacerange "2001-2006" AS ?period ?pc_rsa ?conclusion ?trend
@@ -107,8 +107,9 @@ WHERE {
   OPTIONAL {?subj art17:range_surface_area ?surfacerange}
   OPTIONAL {?subj art17:percentage_range_surface_area ?pc_rsa}
   OPTIONAL {?subj art17:conclusion_range _:conclusion_rangeUrl .
-            _:conclusion_rangeUrl o:name ?conclusion }
-  OPTIONAL {?subj art17:range_trend ?trend}
+            _:conclusion_rangeUrl rdfs:label ?conclusion }
+  OPTIONAL {?subj art17:range_trend ?trendUrl .
+          ?trendUrl rdfs:label ?trend } 
   OPTIONAL {?subj art17:complementary_favourable_range_q ?complementary_favourable_range_q}
   OPTIONAL {?subj art17:complementary_favourable_range ?complementary_favourable_range}
   OPTIONAL {?subj art17:range_quality ?quality}
@@ -116,8 +117,7 @@ WHERE {
 ]]></entry>
 
   <entry key="art17ranges.codes"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
-PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX art17: <http://eunis.eea.europa.eu/rdf/art17report2008/ontology.rdf#>
 PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
 SELECT DISTINCT ?speciescode
@@ -141,8 +141,8 @@ WHERE {
    compiled as part of the Habitats Directive - Article 17 reporting process.
    The data summary sheet for species conservation status provides an overview per biogeographical region.]]></entry>
   <entry key="art17populations.query"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
-PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX art17: <http://eunis.eea.europa.eu/rdf/art17report2008/ontology.rdf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX e: <http://rdfdata.eionet.europa.eu/eea/ontology/>
 
 SELECT ?country ?region ?minimum_size ?maximum_size ?unit
@@ -154,32 +154,32 @@ WHERE {
         art17:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
         art17:forCountry _:countryUrl;
         art17:forRegion _:regionUrl .
- _:regionUrl e:name ?region .
- _:countryUrl e:name ?country.
-OPTIONAL {?subj art17:population_minimum_size ?minimum_size}
-OPTIONAL {?subj art17:population_maximum_size ?maximum_size}
-OPTIONAL {?subj art17:population_size_unit ?unit}
-OPTIONAL {?subj art17:percentage_population_mean_size ?percentage_mean_size}
-OPTIONAL {?subj art17:conclusion_population _:conclusion_populationUrl .
-         _:conclusion_populationUrl o:name ?conclusion }
-OPTIONAL {?subj art17:population_trend ?trend}
-OPTIONAL {?subj art17:population_yearly_magnitude ?yearly_magnitude}
-OPTIONAL {?subj art17:complementary_favourable_population_q ?complementary_favourable_population_q}
-OPTIONAL {?subj art17:complementary_favourable_population ?complementary_favourable_population}
-OPTIONAL {?subj art17:population_quality ?quality}
+  _:regionUrl e:name ?region .
+  _:countryUrl e:name ?country.
+  OPTIONAL {?subj art17:population_minimum_size ?minimum_size}
+  OPTIONAL {?subj art17:population_maximum_size ?maximum_size}
+  OPTIONAL {?subj art17:population_size_unit ?unit}
+  OPTIONAL {?subj art17:percentage_population_mean_size ?percentage_mean_size}
+  OPTIONAL {?subj art17:conclusion_population _:conclusion_populationUrl .
+	   _:conclusion_populationUrl rdfs:label ?conclusion }
+  OPTIONAL {?subj art17:population_trend ?trendUrl .
+	    ?trendUrl rdfs:label ?trend } 
+  OPTIONAL {?subj art17:population_yearly_magnitude ?yearly_magnitude}
+  OPTIONAL {?subj art17:complementary_favourable_population_q ?complementary_favourable_population_q}
+  OPTIONAL {?subj art17:complementary_favourable_population ?complementary_favourable_population}
+  OPTIONAL {?subj art17:population_quality ?quality}
 } ORDER BY ?country ?region
 ]]></entry>
 
   <entry key="art17populations.codes"><![CDATA[
-PREFIX art17: <http://rdfdata.eionet.europa.eu/art17report2008/ontology/>
-PREFIX o: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX art17: <http://eunis.eea.europa.eu/rdf/art17report2008/ontology.rdf#>
 PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
 SELECT DISTINCT ?speciescode
 WHERE {
   ?subj a art17:Speciessummary ;
         art17:forSpecies ?speciesurl.
- ?speciesurl e:speciesCode ?speciescode
+  ?speciesurl e:speciesCode ?speciescode
 }
 ]]></entry>
 
@@ -343,7 +343,7 @@ SELECT ?country ?biogeoregion
  ?period ?status ?quality ?source ?published
 
 WHERE {
-GRAPH <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz> {
+ GRAPH <http://rdfdata.eionet.europa.eu/eunis/speciesconservation.rdf.gz> {
   ?subject b:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
            b:forCountry ?ucountry;
            a b:ConservationStatus;

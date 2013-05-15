@@ -50,9 +50,9 @@ public class PostImportScriptsCmd {
                     } else if (args[0].equals("habitats_tab")) {
                         scripts.setTabHabitats();
                     } else if (args[0].equals("linkeddata_tab")) {
-                        scripts.setSpeciesLinkedDataTab();
+                        scripts.setLinkedDataTab();
                     } else if (args[0].equals("conservation_status_tab")) {
-                        scripts.setSpeciesConservationStatusTab();
+                        scripts.setConservationStatusTab();
                     }
                 }
 

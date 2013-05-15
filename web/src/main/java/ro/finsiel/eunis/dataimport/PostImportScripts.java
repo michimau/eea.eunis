@@ -106,10 +106,10 @@ public class PostImportScripts extends HttpServlet {
                         scripts.setTabSites();
                     }
                     if (linkeddataTab != null && linkeddataTab.equals("on")) {
-                        scripts.setSpeciesLinkedDataTab();
+                        scripts.setLinkedDataTab();
                     }
                     if (conservationstatusTab != null && conservationstatusTab.equals("on")) {
-                        scripts.setSpeciesConservationStatusTab();
+                        scripts.setConservationStatusTab();
                     }
                 }
 

@@ -3,7 +3,7 @@ package eionet.eunis.stripes.actions;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.LinkedList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -17,6 +17,7 @@ import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 
 import ro.finsiel.eunis.factsheet.habitats.DescriptionWrapper;
 import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
@@ -37,7 +38,7 @@ import eionet.sparqlClient.helpers.ResultValue;
 /**
  * Action bean to handle habitats-factsheet functionality. Data is loaded from
  * {@link ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet}.
- *
+ * 
  * @author Risto Alt
  */
 @UrlBinding("/habitats/{idHabitat}/{tab}")
@@ -46,17 +47,19 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private String idHabitat = "";
 
     private static final String[] tabs = {"General information", "Geographical distribution", "Legal instruments",
-        "Habitat types", "Sites", "Species", "Other info"};
+        "Habitat types", "Sites", "Species", "Conservation status", "External data", "Other info"};
 
     private static final Map<String, String[]> types = new HashMap<String, String[]>();
     static {
         types.put("GENERAL_INFORMATION", new String[] {"general", tabs[0]});
-        //types.put("GEOGRAPHICAL_DISTRIBUTION", new String[] {"distribution", tabs[1]});
+        // types.put("GEOGRAPHICAL_DISTRIBUTION", new String[] {"distribution", tabs[1]});
         types.put("LEGAL_INSTRUMENTS", new String[] {"instruments", tabs[2]});
         types.put("HABITATS", new String[] {"habitats", tabs[3]});
         types.put("SITES", new String[] {"sites", tabs[4]});
         types.put("SPECIES", new String[] {"species", tabs[5]});
-        types.put("OTHER", new String[] {"other", tabs[6]});
+        types.put("CONSERVATION_STATUS", new String[] {"conservation_status", tabs[6]});
+        types.put("LINKEDDATA", new String[] {"linkeddata", tabs[7]});
+        types.put("OTHER", new String[] {"other", tabs[8]});
     }
 
     private static final Integer[] dictionary = {HabitatsFactsheet.OTHER_INFO_ALTITUDE, HabitatsFactsheet.OTHER_INFO_DEPTH,
@@ -79,7 +82,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private String tab;
     private boolean isMini;
     // tabs to display
-    private List<Pair<String, String>> tabsWithData = new LinkedList<Pair<String, String>>();
+    private List<Pair<String, String>> tabsWithData = new ArrayList<Pair<String, String>>();
 
     // Sites tab variables
     private List<SitesByNatureObjectPersist> sites;
@@ -103,6 +106,15 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     /** The site's external links. */
     private ArrayList<LinkDTO> links;
+
+    /** Conservation status tab specifics. */
+    private List<ForeignDataQueryDTO> conservationStatusQueries;
+    private String conservationStatusQuery;
+    private String conservationStatusAttribution;
+    private LinkedHashMap<String, ArrayList<Map<String, Object>>> conservationStatusQueryResultCols =
+            new LinkedHashMap<String, ArrayList<Map<String, Object>>>();
+    private LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>> conservationStatusQueryResultRows =
+            new LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>>();
 
     /**
      * This action bean only serves RDF through {@link RdfAware}.
@@ -146,9 +158,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             }
         }
 
-        // Always add linkeddata tab
-        tabsWithData.add(new Pair<String, String>("linkeddata", getContentManagement().cmsPhrase("External data")));
-
         if (factsheet.isAnnexI()) {
             tabsWithData.add(new Pair<String, String>("geo", "Geographical information"));
         }
@@ -158,7 +167,11 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         }
 
         if (tab != null && tab.equals("linkeddata")) {
-            linkeddataTabActions();
+            linkeddataTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
+        }
+
+        if (tab != null && tab.equals("conservation_status")) {
+            conservationStatusTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
         }
 
         if (tab != null && tab.equals("sites")) {
@@ -278,17 +291,20 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "linkeddata" tab.
-     *
+     * 
+     * @param habitatId
+     * @param natureObjectId
+     * 
      */
-    private void linkeddataTabActions() {
+    private void linkeddataTabActions(int habitatId, Integer natureObjectId) {
         try {
             Properties props = new Properties();
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_habitats.xml"));
-            LinkedData fd = new LinkedData(props, null, "_linkedDataQueries");
+            LinkedData fd = new LinkedData(props, natureObjectId, "_linkedDataQueries");
             queries = fd.getQueryObjects();
 
             if (!StringUtils.isBlank(query)) {
-                fd.executeQuery(query, Integer.parseInt(idHabitat));
+                fd.executeQuery(query, habitatId);
                 queryResultCols = fd.getCols();
                 queryResultRows = fd.getRows();
                 attribution = fd.getAttribution();
@@ -298,14 +314,45 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
+    private void conservationStatusTabActions(int habitatId, Integer natureObjectId) {
+        try {
+
+            Properties props = new Properties();
+            props.loadFromXML(getClass().getClassLoader().getResourceAsStream("conservationstatus_habitats.xml"));
+            LinkedData ld = new LinkedData(props, natureObjectId, "_conservationStatusQueries");
+            conservationStatusQueries = ld.getQueryObjects();
+            for (int i = 0; i < conservationStatusQueries.size(); i++) {
+                conservationStatusQuery = conservationStatusQueries.get(i).getId();
+                if (!StringUtils.isBlank(conservationStatusQuery)) {
+                    ld.executeQuery(conservationStatusQuery, habitatId);
+                    conservationStatusQueryResultCols.put(conservationStatusQuery, ld.getCols());
+                    conservationStatusQueryResultRows.put(conservationStatusQuery, ld.getRows());
+
+                    conservationStatusAttribution = ld.getAttribution();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @return
+     */
     public String getIdHabitat() {
         return idHabitat;
     }
 
+    /**
+     * @param idHabitat
+     */
     public void setIdHabitat(String idHabitat) {
         this.idHabitat = idHabitat;
     }
 
+    /**
+     * @return
+     */
     public HabitatsFactsheet getFactsheet() {
         return factsheet;
     }
@@ -348,7 +395,8 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param tab the tab to set
+     * @param tab
+     *            the tab to set
      */
     public void setTab(String tab) {
         this.tab = tab;
@@ -451,6 +499,41 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     public ArrayList<LinkDTO> getLinks() {
         return links;
+    }
+
+    /**
+     * @return the conservationStatusQueries
+     */
+    public List<ForeignDataQueryDTO> getConservationStatusQueries() {
+        return conservationStatusQueries;
+    }
+
+    /**
+     * @return the conservationStatusQuery
+     */
+    public String getConservationStatusQuery() {
+        return conservationStatusQuery;
+    }
+
+    /**
+     * @return the conservationStatusAttribution
+     */
+    public String getConservationStatusAttribution() {
+        return conservationStatusAttribution;
+    }
+
+    /**
+     * @return the conservationStatusQueryResultCols
+     */
+    public LinkedHashMap<String, ArrayList<Map<String, Object>>> getConservationStatusQueryResultCols() {
+        return conservationStatusQueryResultCols;
+    }
+
+    /**
+     * @return the conservationStatusQueryResultRows
+     */
+    public LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>> getConservationStatusQueryResultRows() {
+        return conservationStatusQueryResultRows;
     }
 
 }

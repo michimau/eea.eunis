@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -59,11 +58,10 @@ import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
 import eionet.sparqlClient.helpers.ResultValue;
 
-
 /**
  * ActionBean for species factsheet. Data is loaded from {@link ro.finsiel.eunis.factsheet.species.SpeciesFactsheet} and
  * {@link ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist}.
- *
+ * 
  * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 @UrlBinding("/species/{idSpecies}/{tab}")
@@ -89,7 +87,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         types.put("CONSERVATION_STATUS", new String[] {"conservation_status", tabs[9]});
     }
 
-
     /** The argument given. Can be a species number or scientific name */
     private String idSpecies;
     private int idSpeciesLink;
@@ -105,7 +102,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     /**
      * tabs to display.
      */
-    private List<Pair<String, String>> tabsWithData = new LinkedList<Pair<String, String>>();
+    private List<Pair<String, String>> tabsWithData = new ArrayList<Pair<String, String>>();
     /**
      * senior synonym name.
      */
@@ -181,9 +178,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private String conservationStatusQuery;
     private String conservationStatusAttribution;
 
-    private LinkedHashMap<String ,ArrayList<Map<String, Object>>> conservationStatusQueryResultCols= new  LinkedHashMap<String, ArrayList<Map<String, Object>>>();
-    private LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>> conservationStatusQueryResultRows= new LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>>();
-
+    private LinkedHashMap<String, ArrayList<Map<String, Object>>> conservationStatusQueryResultCols =
+            new LinkedHashMap<String, ArrayList<Map<String, Object>>>();
+    private LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>> conservationStatusQueryResultRows =
+            new LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>>();
 
     private boolean rangeLayer;
     private boolean distributionLayer;
@@ -192,7 +190,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private Map<String, List<Chm62edtNatureObjectAttributesPersist>> natureObjectAttributesMap;
 
     /**
-     *
+     * 
      * @return
      */
     @DefaultHandler
@@ -257,7 +255,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 }
             }
 
-
             specie = factsheet.getSpeciesNatureObject();
 
             if (tab != null && tab.equals("general")) {
@@ -309,8 +306,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "general" tab.
-     *
-     * @param mainIdSpecies - The species ID. Same as specie.getIdSpecies()
+     * 
+     * @param mainIdSpecies
+     *            - The species ID. Same as specie.getIdSpecies()
      */
     private void generalTabActions(int mainIdSpecies) {
 
@@ -422,9 +420,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Get value for given ID_NATURE_OBJECT and attribute name from chm62edt_nature_object_attributes table.
-     *
-     * @param id - The nature object ID.
-     * @param name - attribute name.
+     * 
+     * @param id
+     *            - The nature object ID.
+     * @param name
+     *            - attribute name.
      */
     private String getNatObjectAttribute(Integer id, String name) {
         String ret = null;
@@ -447,12 +447,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
         // Get FAO code if one exists
         faoCode =
-                DaoFactory.getDaoFactory().getSpeciesFactsheetDao()
+                DaoFactory.getDaoFactory().getNatureObjectAttrDao()
                 .getNatObjAttribute(specie.getIdNatureObject(), Constants.SAME_SPECIES_FIFAO);
 
         // Get GBIF code if one exists
         gbifCode =
-                DaoFactory.getDaoFactory().getSpeciesFactsheetDao()
+                DaoFactory.getDaoFactory().getNatureObjectAttrDao()
                 .getNatObjAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_GBIF);
 
         bioRegions = SpeciesFactsheet.getBioRegionIterator(specie.getIdNatureObject(), factsheet.getIdSpecies());
@@ -503,11 +503,13 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         setDistributionLayer(isSpeciesLayer(scientificName, 4));
     }
 
-
     /**
      * Checks that this species layer exist in discomap server.
-     * @param scientificName - species scientific name
-     * @param layerNumber - discomap layer number
+     * 
+     * @param scientificName
+     *            - species scientific name
+     * @param layerNumber
+     *            - discomap layer number
      * @return boolean
      */
     private boolean isSpeciesLayer(String scientificName, int layerNumber) {
@@ -543,8 +545,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
         return results;
     }
-
-
 
     /**
      * Populate the member variables used in the "grid" tab.
@@ -637,8 +637,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "linkeddata" tab.
-     *
-     * @param idSpecies - The species ID.
+     * 
+     * @param idSpecies
+     *            - The species ID.
      */
     private void linkeddataTabActions(int idSpecies, Integer natObjId) {
         try {
@@ -661,9 +662,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Run the queries to be executed on "Conservation status" tab.
-     *
+     * 
      * @param idSpecies
-     * @param natObjId -ID_NATURE_OBJECT
+     * @param natObjId
+     *            -ID_NATURE_OBJECT
      */
     private void conservationStatusTabActions(int idSpecies, Integer natObjId) {
         try {
@@ -685,13 +687,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
-
-
     /**
-     *
+     * 
      * @param sites
      * @return
      */
@@ -717,7 +716,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         return ids;
     }
 
-
     public LinkedHashMap<String, ArrayList<Map<String, Object>>> getConservationStatusQueryResultCols() {
         return conservationStatusQueryResultCols;
     }
@@ -734,11 +732,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         return conservationStatusQuery;
     }
 
-
     public String getConservationStatusAttribution() {
         return conservationStatusAttribution;
     }
-
 
     public boolean isRangeLayer() {
         return rangeLayer;
@@ -764,7 +760,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param factsheet the factsheet to set
+     * @param factsheet
+     *            the factsheet to set
      */
     public void setFactsheet(SpeciesFactsheet factsheet) {
         this.factsheet = factsheet;
@@ -778,7 +775,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param tab the currentTab to set
+     * @param tab
+     *            the currentTab to set
      */
     public void setTab(String tab) {
         this.tab = tab;
@@ -799,7 +797,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param idSpecies the idSpecies to set
+     * @param idSpecies
+     *            the idSpecies to set
      */
     public void setIdSpecies(String idSpecies) {
         this.idSpecies = idSpecies;
@@ -820,7 +819,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param idSpeciesLink the idSpeciesLink to set
+     * @param idSpeciesLink
+     *            the idSpeciesLink to set
      */
     public void setIdSpeciesLink(int idSpeciesLink) {
         this.idSpeciesLink = idSpeciesLink;
@@ -1153,7 +1153,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     *
+     * 
      * @return natureObjectAttributesMap - map of natureObjectAttributes names and Chm62edtNatureObjectAttributesPersist objects.
      */
     public Map<String, List<Chm62edtNatureObjectAttributesPersist>> getNatureObjectAttributesMap() {

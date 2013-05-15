@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.utilities.EunisUtil;
 import eionet.eunis.dao.DaoFactory;
-import eionet.eunis.dao.ISpeciesFactsheetDao;
+import eionet.eunis.dao.INatureObjectAttrDao;
 import eionet.eunis.dto.ForeignDataQueryDTO;
 import eionet.sparqlClient.helpers.QueryExecutor;
 import eionet.sparqlClient.helpers.QueryResult;
@@ -57,13 +57,19 @@ public class LinkedData {
      * @throws Exception
      */
     public LinkedData(Properties props, Integer natureObjId, String queriesName) throws Exception {
+
+        if (props == null) {
+            throw new IllegalArgumentException("Given properties map must not be null!");
+        }
+
         this.props = props;
         queries = props.getProperty("queries").split("\\s+");
 
         if (queries != null) {
+
             queryObjects = new ArrayList<ForeignDataQueryDTO>();
             for (String queryId : queries) {
-                ISpeciesFactsheetDao dao = DaoFactory.getDaoFactory().getSpeciesFactsheetDao();
+                INatureObjectAttrDao dao = DaoFactory.getDaoFactory().getNatureObjectAttrDao();
                 boolean resultExists = dao.queryResultExists(natureObjId, queryId, queriesName);
                 if (natureObjId == null || (natureObjId != null && resultExists)) {
                     ForeignDataQueryDTO dto = new ForeignDataQueryDTO();

@@ -38,14 +38,18 @@ import eionet.eunis.util.Pair;
 @UrlBinding("/references/{idref}/{tab}")
 public class ReferencesActionBean extends AbstractStripesAction {
 
+    /** */
+    public final static String DEFAULT_FILTER_VALUE = "Search reference by author or title here ...";
+
     private String idref;
     private CustomPaginatedList<ReferenceDTO> refs;
     private DcIndexDTO dcIndex;
     private List<AttributeDto> dcAttributes;
 
-    // selected tab
+    /** selected tab */
     private String tab;
-    // tabs to display
+
+    /** tabs to display */
     private List<Pair<String, String>> tabsWithData = new LinkedList<Pair<String, String>>();
 
     List<PairDTO> species = new ArrayList<PairDTO>();
@@ -55,12 +59,12 @@ public class ReferencesActionBean extends AbstractStripesAction {
     private String sort;
     private String dir;
 
-
+    /** References tab filter input and it's default phrase. */
+    private String filterPhrase = DEFAULT_FILTER_VALUE;
 
     @DefaultHandler
     @DontValidate(ignoreBindingErrors = true)
     public Resolution defaultAction() {
-
         if (tab == null || tab.length() == 0) {
             tab = "general";
         }
@@ -115,13 +119,15 @@ public class ReferencesActionBean extends AbstractStripesAction {
             setMetaDescription("references");
         } else {
             btrail = "eea#" + eeaHome + ",home#index.jsp,references";
-            refs = dao.getReferences(page, Integer.parseInt(defaultPageSize), sort, dir);
+            refs = dao.getReferences(page, Integer.parseInt(defaultPageSize), sort, dir, filterPhrase);
             setMetaDescription("references");
         }
         setBtrail(btrail);
 
         return new ForwardResolution(forwardPage);
     }
+
+
 
     public String getIdref() {
         return idref;
@@ -206,6 +212,25 @@ public class ReferencesActionBean extends AbstractStripesAction {
     public List<AttributeDto> getDcAttributes() {
         return dcAttributes;
     }
+
+
+    public String getFilterPhrase() {
+        return filterPhrase;
+    }
+
+
+    public void setFilterPhrase(String filterPhrase) {
+        this.filterPhrase = filterPhrase;
+    }
+
+
+
+    public String getDefaultFilterValue() {
+        return DEFAULT_FILTER_VALUE;
+    }
+
+
+
 
 
 

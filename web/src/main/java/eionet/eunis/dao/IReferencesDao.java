@@ -27,7 +27,7 @@ public interface IReferencesDao {
      * @param dir - sort direction
      * @return list
      */
-    CustomPaginatedList<ReferenceDTO> getReferences(int page, int defaltPageSize, String sort, String dir);
+    CustomPaginatedList<ReferenceDTO> getReferences(int page, int defaltPageSize, String sort, String dir, String likeSearch);
 
     /**
      * Returns all attributes from DC_ATTRIBUTES table for given ID_DC

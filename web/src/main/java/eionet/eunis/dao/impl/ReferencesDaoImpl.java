@@ -1,6 +1,5 @@
 package eionet.eunis.dao.impl;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,22 +21,21 @@ import eionet.eunis.dto.PairDTO;
 import eionet.eunis.dto.ReferenceDTO;
 import eionet.eunis.dto.readers.DcIndexDTOReader;
 import eionet.eunis.dto.readers.ReferenceDTOReader;
+import eionet.eunis.stripes.actions.ReferencesActionBean;
 import eionet.eunis.util.CustomPaginatedList;
 
-
 /**
- * @author Risto Alt
- * <a href="mailto:risto.alt@tieto.com">contact</a>
+ * @author Risto Alt <a href="mailto:risto.alt@tieto.com">contact</a>
  */
 public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
 
-    public ReferencesDaoImpl() {}
+    public ReferencesDaoImpl() {
+    }
 
     /**
-     * @see eionet.eunis.dao.IReferencesDao#getReferences(int page, int defaltPageSize, String sort, String dir)
-     * {@inheritDoc}
+     * @see eionet.eunis.dao.IReferencesDao#getReferences(int page, int defaltPageSize, String sort, String dir) {@inheritDoc}
      */
-    public CustomPaginatedList<ReferenceDTO> getReferences(int page, int defaltPageSize, String sort, String dir) {
+    public CustomPaginatedList<ReferenceDTO> getReferences(int page, int defaltPageSize, String sort, String dir, String like) {
 
         CustomPaginatedList<ReferenceDTO> ret = new CustomPaginatedList<ReferenceDTO>();
 
@@ -59,18 +57,36 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             }
         }
 
-        if (order != null && order.length() > 0 && dir != null && dir.length() > 0) {
+        if (order != null && order.length() > 0 ) {
+
+            if (dir == null || (!dir.equalsIgnoreCase("asc") && !dir.equalsIgnoreCase("desc"))) {
+                dir = "ASC";
+            }
             order = order + " " + dir.toUpperCase();
         }
 
         String query = "SELECT ID_DC, TITLE, ALTERNATIVE, SOURCE, CREATED FROM DC_INDEX";
+
+        String trimmedLike = "";
+        boolean likeAdded = false;
+        if (like != null) {
+            trimmedLike = like.trim();
+            if (trimmedLike.length() > 0 && !trimmedLike.equalsIgnoreCase(ReferencesActionBean.DEFAULT_FILTER_VALUE)) {
+                query = query + " WHERE (TITLE LIKE ? OR SOURCE LIKE ?) ";
+                likeAdded = true;
+            }
+        }
         if (order != null && order.length() > 0) {
             query = query + " ORDER BY " + order;
         }
         query = query + (defaltPageSize > 0 ? " LIMIT " + (offset > 0 ? offset + "," : "") + defaltPageSize : "");
         List<Object> values = new ArrayList<Object>();
-        ReferenceDTOReader rsReader = new ReferenceDTOReader();
+        if (likeAdded) {
+            values.add("%" + trimmedLike + "%");
+            values.add("%" + trimmedLike + "%");
+        }
 
+        ReferenceDTOReader rsReader = new ReferenceDTOReader();
         try {
 
             executeQuery(query, values, rsReader);
@@ -123,8 +139,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
     }
 
     /**
-     * @see eionet.eunis.dao.IReferencesDao#getDcAttributes(java.lang.String)
-     * {@inheritDoc}
+     * @see eionet.eunis.dao.IReferencesDao#getDcAttributes(java.lang.String) {@inheritDoc}
      */
     public List<AttributeDto> getDcAttributes(String idDc) {
         List<AttributeDto> ret = new ArrayList<AttributeDto>();
@@ -135,7 +150,8 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
 
         try {
             con = getConnection();
-            preparedStatement = con.prepareStatement("SELECT a.NAME, b.LABEL, a.OBJECT, a.OBJECTLANG, a.TYPE from dc_attributes AS a LEFT OUTER JOIN dc_attribute_labels AS b ON a.NAME = b.NAME WHERE ID_DC = ?");
+            preparedStatement =
+                    con.prepareStatement("SELECT a.NAME, b.LABEL, a.OBJECT, a.OBJECTLANG, a.TYPE from dc_attributes AS a LEFT OUTER JOIN dc_attribute_labels AS b ON a.NAME = b.NAME WHERE ID_DC = ?");
             preparedStatement.setString(1, idDc);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -144,10 +160,10 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
                 String lang = rs.getString("OBJECTLANG");
                 String type = rs.getString("TYPE");
                 String label = rs.getString("LABEL");
-                if(label==null){
-                    label= name;
+                if (label == null) {
+                    label = name;
                 }
-                AttributeDto attr = new AttributeDto(name, type, object, lang , label);
+                AttributeDto attr = new AttributeDto(name, type, object, lang, label);
                 ret.add(attr);
             }
         } catch (Exception e) {
@@ -159,8 +175,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
     }
 
     /**
-     * @see eionet.eunis.dao.IReferencesDao#getDcIndex(String id)
-     * {@inheritDoc}
+     * @see eionet.eunis.dao.IReferencesDao#getDcIndex(String id) {@inheritDoc}
      */
     public DcIndexDTO getDcIndex(String id) {
 
@@ -206,8 +221,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
     }
 
     /**
-     * @see eionet.eunis.dao.IReferencesDao#getDcObjects()
-     * {@inheritDoc}
+     * @see eionet.eunis.dao.IReferencesDao#getDcObjects() {@inheritDoc}
      */
     public List<DcIndexDTO> getDcObjects() {
 
@@ -230,7 +244,8 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
         return ret;
     }
 
-    public Integer insertSource(String title, String source, String publisher, String editor, String url, String year) throws Exception {
+    public Integer insertSource(String title, String source, String publisher, String editor, String url, String year)
+            throws Exception {
         Integer ret = null;
 
         if (source != null) {
@@ -239,8 +254,9 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             id_dc++;
             ret = new Integer(id_dc);
 
-            String insertIndex = "INSERT INTO dc_index (ID_DC, REFERENCE, COMMENT, REFCD, "
-                + "TITLE, PUBLISHER, CREATED, SOURCE, EDITOR, URL) VALUES (?,-1,'RED_LIST',0,?,?,?,?,?,?)";
+            String insertIndex =
+                    "INSERT INTO dc_index (ID_DC, REFERENCE, COMMENT, REFCD, "
+                            + "TITLE, PUBLISHER, CREATED, SOURCE, EDITOR, URL) VALUES (?,-1,'RED_LIST',0,?,?,?,?,?,?)";
 
             Connection con = null;
             PreparedStatement psIndex = null;
@@ -286,10 +302,10 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
 
         DesignationDcObjectDTO ret = null;
 
-        String query = "SELECT SOURCE, EDITOR, CREATED, TITLE, PUBLISHER "
-            + "FROM CHM62EDT_DESIGNATIONS "
-            + "INNER JOIN DC_INDEX ON (CHM62EDT_DESIGNATIONS.ID_DC = DC_INDEX.ID_DC) "
-            + "WHERE CHM62EDT_DESIGNATIONS.ID_DESIGNATION = ? AND CHM62EDT_DESIGNATIONS.ID_GEOSCOPE = ?";
+        String query =
+                "SELECT SOURCE, EDITOR, CREATED, TITLE, PUBLISHER " + "FROM CHM62EDT_DESIGNATIONS "
+                        + "INNER JOIN DC_INDEX ON (CHM62EDT_DESIGNATIONS.ID_DC = DC_INDEX.ID_DC) "
+                        + "WHERE CHM62EDT_DESIGNATIONS.ID_DESIGNATION = ? AND CHM62EDT_DESIGNATIONS.ID_GEOSCOPE = ?";
 
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -322,10 +338,10 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
 
         List<PairDTO> ret = new ArrayList<PairDTO>();
 
-        String query = "SELECT I.ID_DC, I.SOURCE, I.TITLE "
-            + "FROM chm62edt_reports AS R, chm62edt_report_type AS T, DC_INDEX AS I "
-            + "WHERE R.ID_REPORT_TYPE = T.ID_REPORT_TYPE AND T.LOOKUP_TYPE = 'CONSERVATION_STATUS' "
-            + "AND R.ID_DC = I.ID_DC GROUP BY R.ID_DC ORDER BY I.TITLE";
+        String query =
+                "SELECT I.ID_DC, I.SOURCE, I.TITLE " + "FROM chm62edt_reports AS R, chm62edt_report_type AS T, DC_INDEX AS I "
+                        + "WHERE R.ID_REPORT_TYPE = T.ID_REPORT_TYPE AND T.LOOKUP_TYPE = 'CONSERVATION_STATUS' "
+                        + "AND R.ID_DC = I.ID_DC GROUP BY R.ID_DC ORDER BY I.TITLE";
 
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -342,8 +358,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
                 String title = rs.getString("TITLE");
                 String source = rs.getString("SOURCE");
 
-                String heading = EunisUtil.threeDots(title, 50) + " (" + source
-                + ")";
+                String heading = EunisUtil.threeDots(title, 50) + " (" + source + ")";
                 PairDTO pair = new PairDTO();
 
                 pair.setKey(idDc);

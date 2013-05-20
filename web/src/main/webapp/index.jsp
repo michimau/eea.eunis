@@ -19,7 +19,7 @@
 <%@ page import="ro.finsiel.eunis.jrfTables.users.UserPersist"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.users.UserDomain"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <%
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home";
@@ -90,25 +90,26 @@
      }
 %>
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-	<head>
-		<jsp:include page="header-page.jsp" />
-		<link rel="alternate" type="application/rss+xml" title="EUNIS Database latest news" href="news.xml" />
-		<%
-		  WebContentManagement cm = SessionManager.getWebContent();
-		
-		  // If operation is logout.
-		  if( operation.equalsIgnoreCase( "logout" ) )
-		  {
-		    SessionManager.logout();
-		    SessionManager.setUsername(null);
-		    SessionManager.setPassword(null);
-		  }
-		%>
-  		<script language="JavaScript" src="<%=request.getContextPath()%>/script/index.js" type="text/javascript"></script>
-  		<title>
-    		<%=application.getInitParameter("PAGE_TITLE")%>
-    		<%=cm.cmsPhrase( "Welcome to EUNIS Database" )%>
-  		</title>
+    <head>
+        <base href="${actionBean.context.domainName}/${base}"/>
+        <jsp:include page="header-page.jsp" />
+        <link rel="alternate" type="application/rss+xml" title="EUNIS Database latest news" href="news.xml" />
+        <%
+          WebContentManagement cm = SessionManager.getWebContent();
+
+          // If operation is logout.
+          if( operation.equalsIgnoreCase( "logout" ) )
+          {
+            SessionManager.logout();
+            SessionManager.setUsername(null);
+            SessionManager.setPassword(null);
+          }
+        %>
+          <script language="JavaScript" src="<%=request.getContextPath()%>/script/index.js" type="text/javascript"></script>
+          <title>
+            <%=application.getInitParameter("PAGE_TITLE")%>
+            <%=cm.cmsPhrase( "Welcome to EUNIS Database" )%>
+          </title>
 <meta name="description" content="EUNIS provides access to: Information on Species, Habitat types and Sites taken into account in relevant international conventions or from International Red Lists; Specific data collected in the framework of the EEA's reporting activities, which also constitute a core set of data to be updated periodically."/>
   		<style type="text/css">
 			#portal-column-content #content {
@@ -246,36 +247,96 @@
 			              						<%=cm.cmsPhrase( "Advanced cross-search tool, linking species, habitat types and sites" )%>
 			            					</div>
 <%--
-			            					<a href="gis-tool.jsp"><strong><%=cm.cmsPhrase( "Interactive Maps" )%></strong></a>
-			            					&nbsp;
-			            					<a href="gis-tool.jsp" title="<%=cm.cmsPhrase("GIS Tool Interactive maps")%>"><img src="images/compass.jpg" width="29" height="29" style="width : 29px; height : 29px; border : 0px; vertical-align : middle;" alt="<%=cm.cmsPhrase("GIS Tool Interactive maps")%>" title="<%=cm.cmsPhrase("GIS Tool Interactive maps")%>" /></a>
-			            					<br />
-			            					<%=cm.cmsPhrase("Geographical information accessible within an interactive GIS tool allowing users to build maps or identify areas.")%>
-			            					<br />
+                                            <a href="gis-tool.jsp"><strong><%=cm.cmsPhrase( "Interactive Maps" )%></strong></a>
+                                            &nbsp;
+                                            <a href="gis-tool.jsp" title="<%=cm.cmsPhrase("GIS Tool Interactive maps")%>"><img src="images/compass.jpg" width="29" height="29" style="width : 29px; height : 29px; border : 0px; vertical-align : middle;" alt="<%=cm.cmsPhrase("GIS Tool Interactive maps")%>" title="<%=cm.cmsPhrase("GIS Tool Interactive maps")%>" /></a>
+                                            <br />
+                                            <%=cm.cmsPhrase("Geographical information accessible within an interactive GIS tool allowing users to build maps or identify areas.")%>
+                                            <br />
 --%>
-											<!-- END MAIN CONTENT -->
-			          					</div>
-		          					</div>
-	          					</div>
-	        				</div>
-        				</div>
-      				</div>
-      				<!-- end of main content block -->
-      				<!-- start of the left (by default at least) column -->
-      				<div id="portal-column-one">
-        				<div class="visualPadding">
-          					<jsp:include page="inc_column_left.jsp">
-            					<jsp:param name="page_name" value="index.jsp" />
-          					</jsp:include>
-        				</div>
-      				</div>
-      				<!-- end of the left (by default at least) column -->
-    			</div>
-    			<!-- end of the main and left columns -->
-    			<div class="visualClear"><!-- --></div>
-  			</div>
-  			<!-- end column wrapper -->
-  			<jsp:include page="footer-static.jsp" />
-		</div>
-	</body>
+                                            <!-- END MAIN CONTENT -->
+                                          </div>
+                                      </div>
+                                      <div class="visualClear"><!--&nbsp; --></div>
+                                      <div class="documentActions">
+                                        <h5 class="hiddenStructure">Document Actions</h5>
+                                        <h2 class="share-title">Share with others</h2>
+
+                                        <table class="table-document-actions">
+                                            <tr>
+                                                <td>
+                                                    <div id="socialmedia-list">
+                                                        <div id="delicious" class="social-box">
+                                                            <a href="http://www.delicious.com/save" onclick="window.open('http://www.delicious.com/save?v=5&amp;noui&amp;jump=close&amp;url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title), 'delicious','toolbar=no,width=550,height=550'); return false;">
+                                                                <img src="http://www.eea.europa.eu/delicious20x20.png" alt="Delicious">
+                                                            </a>
+                                                        </div>
+                                                        <div id="twitter" class="social-box">
+                                                            <a href="https://twitter.com/share" class="twitter-share-button"></a>
+                                                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                                                        </div>
+                                                        <div id="google" class="social-box">
+                                                            <g:plusone size="medium"></g:plusone>
+                                                            <script type="text/javascript">
+                                                                (function() {
+                                                                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                                                    po.src = 'https://apis.google.com/js/plusone.js';
+                                                                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                                                })();
+                                                            </script>
+                                                        </div>
+                                                        <div id="facebook" class="social-box">
+                                                            <div id="fb-root"></div>
+                                                            <script>
+                                                                (function(d, s, id) {
+                                                                    var js, fjs = d.getElementsByTagName(s)[0];
+                                                                    if (d.getElementById(id)) return;
+                                                                    js = d.createElement(s); js.id = id;
+                                                                    js.src = '//connect.facebook.net/en_GB/all.js#xfbml=1';
+                                                                    fjs.parentNode.insertBefore(js, fjs);
+                                                                }(document, 'script', 'facebook-jssdk'));
+                                                            </script>
+                                                            <div class="fb-like" data-send="true" data-layout="button_count" data-show-faces="false"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="align-right">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="javascript:this.print();"><img src="http://www.eea.europa.eu/templates/print_icon.gif"
+                                                            alt="<%=cm.cmsPhrase("Print this page")%>"
+                                                            title="<%=cm.cmsPhrase("Print this page")%>" /></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:toggleFullScreenMode();"><img src="http://www.eea.europa.eu/templates/fullscreenexpand_icon.gif"
+                                                            alt="<%=cm.cmsPhrase("Toggle full screen mode")%>"
+                                                            title="<%=cm.cmsPhrase("Toggle full screen mode")%>" /></a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                            </div>
+                    </div>
+                    <!-- end of the main column -->
+
+                    <!-- start of right column -->
+                    <div id="right-column" class="right-column-area">
+                      <div class="visualPadding">
+                        <jsp:include page="inc_column_left.jsp">
+                          <jsp:param name="page_name" value="index.jsp" />
+                        </jsp:include>
+                      </div>
+                    </div>
+                  <!-- end of the right (by default at least) column -->
+                </div>
+                <!-- end of the main and left columns -->
+                <div class="visualClear"><!-- --></div>
+              </div>
+              <!-- end column wrapper -->
+              <jsp:include page="footer-static.jsp" />
+        </div><!-- visual-portal-wrapper" -->
+    </body>
 </html>

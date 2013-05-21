@@ -134,7 +134,7 @@
                                       <div style="position: relative;height: 380px;">
                                           <div class="figure-right" style="display:inline; position: absolute; right:0; top:0;">
                                              <div class="figure">
-                                                 <img height="350" width="216" title="" alt="<%=cm.cmsPhrase("Image from EUNIS Database photo collection regarding Species, Habitat types and Sites")%>" src="images/intros/<%=Utilities.getIntroImage( application )%>" />
+                                                 <img height="350" width="216" title="" alt="<%=cm.cmsPhrase("Image from EUNIS Database photo collection regarding Species, Habitat types and Sites")%>" src="<%=request.getContextPath()%>/images/intros/<%=Utilities.getIntroImage( application )%>" />
                                              </div>
                                           </div>
                                           <div style="float:left; position: absolute; left:0; top:0; padding-right: 250px;">

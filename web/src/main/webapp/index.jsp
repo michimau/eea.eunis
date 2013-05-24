@@ -5,6 +5,7 @@
   - Description : Home page
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/stripes/common/taglibs.jsp"%>
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
@@ -19,7 +20,6 @@
 <%@ page import="ro.finsiel.eunis.jrfTables.users.UserPersist"%>
 <%@ page import="ro.finsiel.eunis.jrfTables.users.UserDomain"%>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
-<!DOCTYPE html>
 <%
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home";
@@ -89,40 +89,34 @@
        } catch (Exception e) {}
      }
 %>
-<html>
-    <head>
-        <base href="${actionBean.context.domainName}/${base}"/>
-        <jsp:include page="header-page.jsp" />
-        <link rel="alternate" type="application/rss+xml" title="EUNIS Database latest news" href="news.xml" />
-        <%
-          WebContentManagement cm = SessionManager.getWebContent();
+<%
+    WebContentManagement cm = SessionManager.getWebContent();
 
-          // If operation is logout.
-          if( operation.equalsIgnoreCase( "logout" ) )
-          {
-            SessionManager.logout();
-            SessionManager.setUsername(null);
-            SessionManager.setPassword(null);
-          }
-        %>
-          <script language="JavaScript" src="<%=request.getContextPath()%>/script/index.js" type="text/javascript"></script>
-          <title>
-            <%=application.getInitParameter("PAGE_TITLE")%>
-            <%=cm.cmsPhrase( "Welcome to EUNIS Database" )%>
-          </title>
+    // If operation is logout.
+    if( operation.equalsIgnoreCase( "logout" ) ){
+        SessionManager.logout();
+        SessionManager.setUsername(null);
+        SessionManager.setPassword(null);
+    }
+%>
+<%
+    String title = application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Welcome to EUNIS Database" );
+%>
+<c:set var="title" value="<%= title%>"></c:set>
+
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}">
+    <stripes:layout-component name="head">
+        <link rel="alternate" type="application/rss+xml" title="EUNIS Database latest news" href="news.xml" />
+        <script language="JavaScript" src="<%=request.getContextPath()%>/script/index.js" type="text/javascript"></script>
 <meta name="description" content="EUNIS provides access to: Information on Species, Habitat types and Sites taken into account in relevant international conventions or from International Red Lists; Specific data collected in the framework of the EEA's reporting activities, which also constitute a core set of data to be updated periodically."/>
-          <style type="text/css">
+        <style type="text/css">
             #portal-column-content #content {
                 margin-right: 0 ! important;
             }
         </style>
-      </head>
-      <body>
-        <jsp:include page="header.jsp" />
-        <div id="visual-portal-wrapper">
-              <!-- The wrapper div. It contains the three columns. -->
-              <div id="portal-columns">
-                        <div id="content" class="column-area">
+    </stripes:layout-component>
+
+    <stripes:layout-component name="contents">
                                 <jsp:include page="header-dynamic.jsp">
                                     <jsp:param name="location" value="<%=btrail%>"/>
                                 </jsp:include>
@@ -296,26 +290,5 @@
                                             </tr>
                                         </table>
                                     </div>
-
-                            </div>
-                    </div>
-                    <!-- end of the main column -->
-
-                    <!-- start of right column -->
-                    <div id="right-column" class="right-column-area">
-                      <div class="visualPadding">
-                        <jsp:include page="inc_column_left.jsp">
-                          <jsp:param name="page_name" value="index.jsp" />
-                        </jsp:include>
-                      </div>
-                    </div>
-                  <!-- end of the right (by default at least) column -->
-                </div>
-                <!-- end of the main and left columns -->
-                <div class="visualClear"><!-- --></div>
-              </div>
-              <!-- end column wrapper -->
-              <jsp:include page="footer-static.jsp" />
-        </div><!-- visual-portal-wrapper" -->
-    </body>
-</html>
+    </stripes:layout-component>
+</stripes:layout-render>

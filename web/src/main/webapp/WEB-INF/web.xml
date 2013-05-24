@@ -507,6 +507,12 @@
 
     <filter-mapping>
         <filter-name>StripesFilter</filter-name>
+        <url-pattern>/</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>StripesFilter</filter-name>
         <servlet-name>StripesDispatcher</servlet-name>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>

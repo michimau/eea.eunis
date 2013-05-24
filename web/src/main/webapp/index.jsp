@@ -89,7 +89,7 @@
        } catch (Exception e) {}
      }
 %>
-<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
+<html>
     <head>
         <base href="${actionBean.context.domainName}/${base}"/>
         <jsp:include page="header-page.jsp" />

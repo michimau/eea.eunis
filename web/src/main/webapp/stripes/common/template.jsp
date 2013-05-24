@@ -10,7 +10,7 @@
     <%@page contentType="text/html;charset=UTF-8"%>
 
     <!DOCTYPE html>
-    <html lang="${actionBean.context.sessionManager.currentLanguage}" xmlns="http://www.w3.org/1999/xhtml" xml:lang="${actionBean.context.sessionManager.currentLanguage}">
+    <html>
         <head>
             <base href="${actionBean.context.domainName}/${base}"/>
             <jsp:include page="/header-page.jsp">
@@ -33,23 +33,16 @@
         </head>
         <body>
             <jsp:include page="/header.jsp" />
-            <div id="overDiv" style="z-index: 1000; visibility: hidden; position: absolute"></div>
+            <!-- visual portal wrapper -->
             <div id="visual-portal-wrapper">
-                  <!-- The wrapper div. It contains the three columns. -->
-                  <c:choose>
-                    <c:when test="${empty layout}">
-                        <div id="portal-columns" class="visualColumnHideTwo">
-                    </c:when>
-                    <c:otherwise>
-                        <div id="portal-columns" class="${layout}">
-                    </c:otherwise>
-                </c:choose>
-                    <!-- start of the main and left columns -->
-                    <div id="visual-column-wrapper">
-                          <!-- start of main content block -->
-                          <div id="portal-column-content">
-                            <div id="content">
-                                  <div class="documentContent" id="region-content">
+
+                <!-- The wrapper div. It contains the two columns. -->
+                <div id="portal-columns">
+
+                    <!-- start of the content column -->
+                    <div id="portal-column-content">
+
+                        <div id="content">
                                     <jsp:include page="/header-dynamic.jsp">
                                           <jsp:param name="location" value="${actionBean.btrail}"/>
                                     </jsp:include>
@@ -86,20 +79,18 @@
                                 </stripes:layout-component>
 
                                 <stripes:layout-component name="contents"/>
-                                    <!-- END MAIN CONTENT -->
-                                  </div>
-                            </div>
-                          </div>
-                          <!-- end of main content block -->
-                    <stripes:layout-component name="foot"/>
-              <!-- end column wrapper -->
-              </div>
+                        </div>
+                        <!--END content -->
 
-              <!-- end of the main and left columns -->
-              <div class="visualClear"><!-- --></div>
-           </div>
-        </div>
-    <jsp:include page="/footer-static.jsp" />
+                    </div>
+                    <!-- END of the main content-column -->
+                    <stripes:layout-component name="foot"/>
+
+                </div>
+                <!-- END column wrapper -->
+            </div>
+            <!-- END visual portal wrapper -->
+        <jsp:include page="/footer-static.jsp" />
   </body>
 </html>
 </stripes:layout-definition>

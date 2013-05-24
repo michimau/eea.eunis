@@ -61,7 +61,7 @@ import eionet.sparqlClient.helpers.ResultValue;
 /**
  * ActionBean for species factsheet. Data is loaded from {@link ro.finsiel.eunis.factsheet.species.SpeciesFactsheet} and
  * {@link ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist}.
- * 
+ *
  * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 @UrlBinding("/species/{idSpecies}/{tab}")
@@ -190,7 +190,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private Map<String, List<Chm62edtNatureObjectAttributesPersist>> natureObjectAttributesMap;
 
     /**
-     * 
+     *
      * @return
      */
     @DefaultHandler
@@ -289,7 +289,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,factsheet";
 
         setBtrail(btrail);
-        return new ForwardResolution("/stripes/species-factsheet.layout.jsp");
+        return new ForwardResolution("/stripes/species-factsheet/species-factsheet.layout.jsp");
     }
 
     private int getSpeciesId() {
@@ -306,7 +306,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "general" tab.
-     * 
+     *
      * @param mainIdSpecies
      *            - The species ID. Same as specie.getIdSpecies()
      */
@@ -420,7 +420,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Get value for given ID_NATURE_OBJECT and attribute name from chm62edt_nature_object_attributes table.
-     * 
+     *
      * @param id
      *            - The nature object ID.
      * @param name
@@ -505,7 +505,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Checks that this species layer exist in discomap server.
-     * 
+     *
      * @param scientificName
      *            - species scientific name
      * @param layerNumber
@@ -637,7 +637,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "linkeddata" tab.
-     * 
+     *
      * @param idSpecies
      *            - The species ID.
      */
@@ -662,7 +662,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Run the queries to be executed on "Conservation status" tab.
-     * 
+     *
      * @param idSpecies
      * @param natObjId
      *            -ID_NATURE_OBJECT
@@ -690,7 +690,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * 
+     *
      * @param sites
      * @return
      */
@@ -1153,7 +1153,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * 
+     *
      * @return natureObjectAttributesMap - map of natureObjectAttributes names and Chm62edtNatureObjectAttributesPersist objects.
      */
     public Map<String, List<Chm62edtNatureObjectAttributesPersist>> getNatureObjectAttributesMap() {

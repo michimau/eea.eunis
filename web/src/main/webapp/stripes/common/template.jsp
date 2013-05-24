@@ -9,88 +9,70 @@
     --%>
     <%@page contentType="text/html;charset=UTF-8"%>
 
-    <!DOCTYPE html>
-    <html>
-        <head>
+<!DOCTYPE html>
+<html>
+    <head>
+        <c:if test="${eunis:exists(actionBean.context.domainName)}">
             <base href="${actionBean.context.domainName}/${base}"/>
-            <jsp:include page="/header-page.jsp">
-                <jsp:param name="metaDescription" value="${eunis:replaceTags(actionBean.metaDescription)}" />
-            </jsp:include>
+        </c:if>
+        <jsp:include page="/header-page.jsp">
+            <jsp:param name="metaDescription" value="${eunis:replaceTags(actionBean.metaDescription)}" />
+        </jsp:include>
 
-            <title>
-                <c:choose>
-                    <c:when test="${empty pageTitle}">
-                        EUNIS
-                    </c:when>
-                    <c:otherwise>
-                        ${eunis:replaceTags(pageTitle)}
-                    </c:otherwise>
-                </c:choose>
-            </title>
-            <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.7/js/dojo/dijit/themes/claro/claro.css"/>
-            <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.7"></script>
-            <stripes:layout-component name="head"/>
-        </head>
-        <body>
-            <jsp:include page="/header.jsp" />
-            <!-- visual portal wrapper -->
-            <div id="visual-portal-wrapper">
+        <title>
+            <c:choose>
+                <c:when test="${empty pageTitle}">EUNIS</c:when>
+                <c:otherwise>${eunis:replaceTags(pageTitle)}</c:otherwise>
+            </c:choose>
+        </title>
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/eunis.css" />
+        <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.7/js/dojo/dijit/themes/claro/claro.css"/>
+        <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.7"></script>
 
-                <!-- The wrapper div. It contains the two columns. -->
-                <div id="portal-columns">
+        <stripes:layout-component name="head"/>
+    </head>
+    <body>
+        <jsp:include page="/header.jsp" />
+        <!-- visual portal wrapper -->
+        <div id="visual-portal-wrapper">
 
-                    <!-- start of the content column -->
-                    <div id="portal-column-content">
+            <!-- The wrapper div. It contains the two columns. -->
+            <div id="portal-columns">
 
-                        <div id="content">
-                                    <jsp:include page="/header-dynamic.jsp">
-                                          <jsp:param name="location" value="${actionBean.btrail}"/>
-                                    </jsp:include>
-                                    <a name="documentContent"></a>
-                                    <!-- MAIN CONTENT -->
-                                    <stripes:layout-component name="messages">
-                                    <c:choose>
-                                        <c:when test="${actionBean.context.severity == 1}">
-                                            <div class="system-msg">
-                                                <stripes:messages/>
-                                            </div>
-                                        </c:when>
-                                        <c:when test="${actionBean.context.severity == 2}">
-                                            <div class="caution-msg">
-                                                <strong>Caution ...</strong>
-                                                <p><stripes:messages/></p>
-                                            </div>
-                                        </c:when>
-                                        <c:when test="${actionBean.context.severity == 3}">
-                                            <div class="warning-msg">
-                                                <strong>Warnings ...</strong>
-                                                <p><stripes:messages/></p>
-                                            </div>
-                                        </c:when>
-                                        <c:when test="${actionBean.context.severity == 4}">
-                                            <div class="error-msg">
-                                                <strong>Errors ...</strong>
-                                                <p><stripes:messages/></p>
-                                            </div>
-                                        </c:when>
-                                        <c:otherwise>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </stripes:layout-component>
+                <!-- start of the content column -->
+                <div id="portal-column-content">
 
-                                <stripes:layout-component name="contents"/>
+                    <div id="content">
+
+                        <!--  TODO check if this is really needed.
+                            It seems that it does not build btrail.
+                            Some old jsps (search results) uses downloadLinks to build TSV downloads
+                            Needs refactoring.
+                        -->
+                        <jsp:include page="/header-dynamic.jsp">
+                            <jsp:param name="location" value="${actionBean.btrail}" />
+                        </jsp:include>
+
+                        <!-- MESSAGES -->
+                        <stripes:layout-render name="/stripes/common/messages.jsp"/>
+
+
+                        <!-- MAIN CONTENT -->
+                        <stripes:layout-component name="contents"/>
+
                         </div>
                         <!--END content -->
-
                     </div>
                     <!-- END of the main content-column -->
-                    <stripes:layout-component name="foot"/>
 
+                    <!-- - TODO Check if we can replace foot by bottom menu  -->
+
+                    <stripes:layout-component name="foot"/>
                 </div>
                 <!-- END column wrapper -->
             </div>
             <!-- END visual portal wrapper -->
         <jsp:include page="/footer-static.jsp" />
-  </body>
+    </body>
 </html>
 </stripes:layout-definition>

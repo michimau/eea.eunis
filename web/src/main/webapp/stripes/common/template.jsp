@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <c:if test="${eunis:exists(actionBean.context.domainName)}">
+        <c:if test="${not empty actionBean.context.domainName}">
             <base href="${actionBean.context.domainName}/${base}"/>
         </c:if>
         <jsp:include page="/header-page.jsp">

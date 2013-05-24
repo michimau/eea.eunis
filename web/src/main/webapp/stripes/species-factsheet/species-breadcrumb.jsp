@@ -3,6 +3,12 @@
 <stripes:layout-definition>
     <!-- breadcrumbs -->
     <div id="portal-breadcrumbs" class='species-taxonomy'>
+        <span id="breadcrumbs-home">
+            <a href="${actionBean.context.domainName}">EUNIS Home</a>
+            <span class="breadcrumbSeparator">
+                &gt;
+            </span>
+        </span>
 
         <!--  FIXME link -->
         <c:forEach items="${actionBean.classifications}" var="classif" varStatus="loop">

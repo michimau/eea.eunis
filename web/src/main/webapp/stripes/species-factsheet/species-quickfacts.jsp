@@ -2,9 +2,8 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
                <!-- quick facts -->
-                <!-- TODO add name in English first and name in Latin in brackets. eg. Species: Iberian Lynx (Lynx pardinus) -->
+                <!-- TODO add name in English first and name in Latin in brackets. eg. Species: Iberian Lynx (Lynx pardinus) ?-->
                 <h1>Species: ${eunis:replaceTags(actionBean.scientificName)}
-                    <!-- TODO Check if synonym link is still needed -->
                     <c:if test="${actionBean.seniorSpecies != null}">
                         <span class="redirection-msg">&#8213; Synonym of <a href="${pageContext.request.contextPath}/species/${actionBean.seniorIdSpecies}"><strong>${actionBean.seniorSpecies }</strong></a></span>
                     </c:if>
@@ -13,18 +12,13 @@
                <!--  Gallery on left -->
                 <div class="left-area species">
 
-                    <!-- FIXME -->
                     <div class="gallery-slider">
                         <ul class="gallery-slider-wrapper-inner items">
-                            <li>
-                                <img src="./gallery_image.jpg" />
-                            </li>
-                            <li>
-                                <img src="./gallery_image2.jpg" />
-                            </li>
-                            <li>
-                                <img src="./gallery_image3.jpg" />
-                            </li>
+                            <c:forEach items="${actionBean.pics}" var="pic">
+                                <li>
+                                    <img src="${pic.path}/${pic.filename}" />
+                                </li>
+                            </c:forEach>
                         </ul>
 
                         <div class="gallery-slider-controls">
@@ -33,9 +27,10 @@
                             <a href="#" class="hiddenElement" id="dummy"> </a>
                         </div>
                     </div>
-
+                    <!-- TODO add link for authenticated users to upload/delete images -->
+                    <!-- TODO How to display pic license informtaion? -->
                     <p class="text-right">
-                        <a href="http://images.google.com/images?q=Lynx%20pardinus">More images</a>
+                        <a href="http://images.google.com/images?q=${eunis:replaceTags(actionBean.scientificName)}">More images</a>
                     </p>
                 </div>
 

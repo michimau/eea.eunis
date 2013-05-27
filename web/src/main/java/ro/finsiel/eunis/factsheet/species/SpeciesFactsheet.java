@@ -271,8 +271,8 @@ public class SpeciesFactsheet {
             // getSpeciesNatureObject().getIdNatureObject() + " GROUP BY H.ID_NATURE_OBJECT" );
             habitats =
                     new HabitatsNatureObjectReportTypeSpeciesDomain()
-            .findWhere("H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND C.ID_NATURE_OBJECT IN ( " + synonymsIDs
-                    + " ) GROUP BY H.ID_NATURE_OBJECT");
+                            .findWhere("H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND C.ID_NATURE_OBJECT IN ( " + synonymsIDs
+                                    + " ) GROUP BY H.ID_NATURE_OBJECT");
             if (habitats != null) {
                 for (Object habitat1 : habitats) {
                     HabitatsNatureObjectReportTypeSpeciesPersist habitat = (HabitatsNatureObjectReportTypeSpeciesPersist) habitat1;
@@ -411,7 +411,7 @@ public class SpeciesFactsheet {
 
                 List list1 =
                         new Chm62edtConservationStatusDomain()
-                .findWhere("ID_CONSERVATION_STATUS = '" + report.getIDLookup() + "'");
+                                .findWhere("ID_CONSERVATION_STATUS = '" + report.getIDLookup() + "'");
 
                 List list2 =
                         new Chm62edtCountryDomain().findWhere("AREA_NAME_EN not like 'ospar%' and ID_GEOSCOPE='"
@@ -467,7 +467,7 @@ public class SpeciesFactsheet {
 
                 List list1 =
                         new Chm62edtConservationStatusDomain()
-                .findWhere("ID_CONSERVATION_STATUS = '" + report.getIDLookup() + "'");
+                                .findWhere("ID_CONSERVATION_STATUS = '" + report.getIDLookup() + "'");
 
                 List list2 =
                         new Chm62edtCountryDomain().findWhere("AREA_NAME_EN not like 'ospar%' and ID_GEOSCOPE='"
@@ -686,7 +686,7 @@ public class SpeciesFactsheet {
 
                 String sql =
                         "LOOKUP_TYPE='CONSERVATION_STATUS' AND ID_GEOSCOPE='" + country.getIdGeoscope()
-                        + "' AND ID_NATURE_OBJECT IN (" + synonymsIDs + ")";
+                                + "' AND ID_NATURE_OBJECT IN (" + synonymsIDs + ")";
                 List<Chm62edtReportsPersist> reports = new Chm62edtReportsDomain().findWhere(sql);
 
                 if (reports.size() > 0) {
@@ -835,7 +835,7 @@ public class SpeciesFactsheet {
             // "') ORDER BY ID_REPORT_TYPE, ID_LOOKUP DESC";
             String sql =
                     " (LOOKUP_TYPE IN ('SPECIES_STATUS')) AND  (ID_NATURE_OBJECT IN ( " + synonymsIDs
-                    + " ) ) ORDER BY ID_REPORT_TYPE, ID_LOOKUP DESC";
+                            + " ) ) ORDER BY ID_REPORT_TYPE, ID_LOOKUP DESC";
 
             List<Chm62edtReportsPersist> list = new Chm62edtReportsDomain().findWhere(sql);
 
@@ -1592,6 +1592,41 @@ public class SpeciesFactsheet {
             _ex.printStackTrace(System.err);
         }
         return ret;
+    }
+
+    /**
+     * Get the all picture available in database for this species and return a list of PctureDto objects. It queries the
+     * CHM62EDT_NATURE_OBJECT_PICTURE with ID_SPECIES and NATURE_OBJECT_TYPE='Species'.
+     *
+     * @return A list of PictureDTO objects.
+     */
+    public List<PictureDTO> getPictures(String picturePath) {
+        List<PictureDTO> pics = new ArrayList<PictureDTO>();
+        PictureDTO pic = null;
+        try {
+            List<Chm62edtNatureObjectPicturePersist> pplist = getPicturesForSpecies(null, false);
+            if (pplist != null && pplist.size() > 0) {
+                for (Chm62edtNatureObjectPicturePersist pp : pplist){
+                    String desc = pp.getDescription();
+
+                    if (desc == null || desc.equals("")) {
+                        desc = getSpeciesObject().getScientificName();
+                    }
+
+                    pic = new PictureDTO();
+                    pic.setFilename(pp.getFileName());
+                    pic.setDescription(desc);
+                    pic.setSource(pp.getSource());
+                    pic.setSourceUrl(pp.getSourceUrl());
+                    pic.setPath(picturePath);
+                    pic.setLicense(pp.getLicense());
+                }
+                pics.add(pic);
+            }
+        } catch (Exception _ex) {
+            _ex.printStackTrace(System.err);
+        }
+        return pics;
     }
 
     /**

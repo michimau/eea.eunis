@@ -69,7 +69,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /** */
     private static final String[] tabs = {"General information", "Vernacular names", "Geographical information", "Population",
-        "Trends", "Legal Instruments", "Habitat types", "Sites", "External data", "Conservation status"};
+            "Trends", "Legal Instruments", "Habitat types", "Sites", "External data", "Conservation status"};
 
     /** */
     private static final Map<String, String[]> types = new HashMap<String, String[]>();
@@ -114,7 +114,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private int seniorIdSpecies;
 
     /** Variables for the "general" tab. */
-    private PictureDTO pic;
+    private List<PictureDTO> pics;
     private SpeciesNatureObjectPersist specie;
     private List<ClassificationDTO> classifications;
     private String authorDate;
@@ -307,17 +307,16 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     /**
      * Populate the member variables used in the "general" tab.
      *
-     * @param mainIdSpecies
-     *            - The species ID. Same as specie.getIdSpecies()
+     * @param mainIdSpecies - The species ID. Same as specie.getIdSpecies()
      */
     private void generalTabActions(int mainIdSpecies) {
 
         speciesBook = factsheet.getSpeciesBook();
         consStatus = factsheet.getConservationStatus(factsheet.getSpeciesObject());
 
-        // Get main picture
+        // Get all pictures for species
         String picturePath = getContext().getInitParameter("UPLOAD_DIR_PICTURES_SPECIES");
-        pic = factsheet.getMainPicture(picturePath, domainName);
+        pics = factsheet.getPictures(picturePath);
 
         List list = new Vector<Chm62edtTaxcodePersist>();
         try {
@@ -389,7 +388,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                     NationalThreatWrapper threat = consStatus.get(i);
                     String statusDesc =
                             factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode(), threat.getIdConsStatus())
-                            .replaceAll("'", " ").replaceAll("\"", " ");
+                                    .replaceAll("'", " ").replaceAll("\"", " ");
 
                     threat.setStatusDesc(statusDesc);
                     newList.add(threat);
@@ -421,10 +420,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     /**
      * Get value for given ID_NATURE_OBJECT and attribute name from chm62edt_nature_object_attributes table.
      *
-     * @param id
-     *            - The nature object ID.
-     * @param name
-     *            - attribute name.
+     * @param id - The nature object ID.
+     * @param name - attribute name.
      */
     private String getNatObjectAttribute(Integer id, String name) {
         String ret = null;
@@ -448,12 +445,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         // Get FAO code if one exists
         faoCode =
                 DaoFactory.getDaoFactory().getNatureObjectAttrDao()
-                .getNatObjAttribute(specie.getIdNatureObject(), Constants.SAME_SPECIES_FIFAO);
+                        .getNatObjAttribute(specie.getIdNatureObject(), Constants.SAME_SPECIES_FIFAO);
 
         // Get GBIF code if one exists
         gbifCode =
                 DaoFactory.getDaoFactory().getNatureObjectAttrDao()
-                .getNatObjAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_GBIF);
+                        .getNatObjAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_GBIF);
 
         bioRegions = SpeciesFactsheet.getBioRegionIterator(specie.getIdNatureObject(), factsheet.getIdSpecies());
         if (bioRegions.size() > 0) {
@@ -506,10 +503,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     /**
      * Checks that this species layer exist in discomap server.
      *
-     * @param scientificName
-     *            - species scientific name
-     * @param layerNumber
-     *            - discomap layer number
+     * @param scientificName - species scientific name
+     * @param layerNumber - discomap layer number
      * @return boolean
      */
     private boolean isSpeciesLayer(String scientificName, int layerNumber) {
@@ -521,7 +516,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             if (rawMapServerFindOperationUrl != null && rawMapServerFindOperationUrl.trim().length() > 0) {
                 String mapServerFindOperationUrl =
                         rawMapServerFindOperationUrl.replace("#{scientific_name}", scientificName.replace(" ", "+").trim())
-                        .replace("#{layer_number}", layerNumberS);
+                                .replace("#{layer_number}", layerNumberS);
                 try {
 
                     String jsonTxt = IOUtils.toString(new URL(mapServerFindOperationUrl));
@@ -638,8 +633,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     /**
      * Populate the member variables used in the "linkeddata" tab.
      *
-     * @param idSpecies
-     *            - The species ID.
+     * @param idSpecies - The species ID.
      */
     private void linkeddataTabActions(int idSpecies, Integer natObjId) {
         try {
@@ -664,8 +658,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      * Run the queries to be executed on "Conservation status" tab.
      *
      * @param idSpecies
-     * @param natObjId
-     *            -ID_NATURE_OBJECT
+     * @param natObjId -ID_NATURE_OBJECT
      */
     private void conservationStatusTabActions(int idSpecies, Integer natObjId) {
         try {
@@ -760,8 +753,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param factsheet
-     *            the factsheet to set
+     * @param factsheet the factsheet to set
      */
     public void setFactsheet(SpeciesFactsheet factsheet) {
         this.factsheet = factsheet;
@@ -775,8 +767,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param tab
-     *            the currentTab to set
+     * @param tab the currentTab to set
      */
     public void setTab(String tab) {
         this.tab = tab;
@@ -797,8 +788,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param idSpecies
-     *            the idSpecies to set
+     * @param idSpecies the idSpecies to set
      */
     public void setIdSpecies(String idSpecies) {
         this.idSpecies = idSpecies;
@@ -819,8 +809,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param idSpeciesLink
-     *            the idSpeciesLink to set
+     * @param idSpeciesLink the idSpeciesLink to set
      */
     public void setIdSpeciesLink(int idSpeciesLink) {
         this.idSpeciesLink = idSpeciesLink;
@@ -856,12 +845,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         return gridImage;
     }
 
-    public PictureDTO getPic() {
-        return pic;
+    public List<PictureDTO> getPics() {
+        return pics;
     }
 
-    public void setPic(PictureDTO pic) {
-        this.pic = pic;
+    public void setPics(List<PictureDTO> pics) {
+        this.pics = pics;
     }
 
     public SpeciesNatureObjectPersist getSpecie() {
@@ -1163,7 +1152,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             Integer currentNaturalObjectId = specie.getIdNatureObject();
             @SuppressWarnings("unchecked")
             List<Chm62edtNatureObjectAttributesPersist> natureObjectAttributes =
-            new Chm62edtNatureObjectAttributesDomain().findWhere("ID_NATURE_OBJECT= " + currentNaturalObjectId);
+                    new Chm62edtNatureObjectAttributesDomain().findWhere("ID_NATURE_OBJECT= " + currentNaturalObjectId);
             ;
             natureObjectAttributesMap = new HashMap<String, List<Chm62edtNatureObjectAttributesPersist>>();
             for (Chm62edtNatureObjectAttributesPersist noa : natureObjectAttributes) {

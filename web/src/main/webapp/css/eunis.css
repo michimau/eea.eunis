@@ -139,13 +139,13 @@ h2 {
 }
 
 .gallery-slider .button-prev {
-    background: url(button-gallery-previous.png) no-repeat left center;
+    background: url(../images/button-gallery-previous.png) no-repeat left center;
     left: 0px;
     opacity: 0.8;
 }
 
 .gallery-slider .button-next {
-    background: url(button-gallery-next.png) no-repeat right center;
+    background: url(../images/button-gallery-next.png) no-repeat right center;
     right: 9px;
     opacity: 0.8;
 }

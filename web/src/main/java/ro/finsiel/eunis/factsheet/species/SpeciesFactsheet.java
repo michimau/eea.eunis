@@ -1540,6 +1540,9 @@ public class SpeciesFactsheet {
         if (mainPic) {
             where += " AND MAIN_PIC = 1";
         }
+        else{
+            where += " AND MAIN_PIC = 0";
+        }
         if (limit != null) {
             where += " LIMIT " + limit;
         }
@@ -1634,7 +1637,7 @@ public class SpeciesFactsheet {
         try {
             List<Chm62edtNatureObjectPicturePersist> pplist = getPicturesForSpecies(null, false);
             if (pplist != null && pplist.size() > 0) {
-                for (Chm62edtNatureObjectPicturePersist pp : pplist){
+                for (Chm62edtNatureObjectPicturePersist pp : pplist) {
                     String desc = pp.getDescription();
 
                     if (desc == null || desc.equals("")) {
@@ -1648,8 +1651,8 @@ public class SpeciesFactsheet {
                     pic.setSourceUrl(pp.getSourceUrl());
                     pic.setPath(picturePath);
                     pic.setLicense(pp.getLicense());
+                    pics.add(pic);
                 }
-                pics.add(pic);
             }
         } catch (Exception _ex) {
             _ex.printStackTrace(System.err);

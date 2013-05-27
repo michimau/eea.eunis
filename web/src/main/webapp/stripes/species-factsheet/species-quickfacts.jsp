@@ -2,12 +2,6 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
                <!-- quick facts -->
-                <!-- TODO add name in English first and name in Latin in brackets. eg. Species: Iberian Lynx (Lynx pardinus) ?-->
-                <h1>Species: ${eunis:replaceTags(actionBean.scientificName)}
-                    <c:if test="${actionBean.seniorSpecies != null}">
-                        <span class="redirection-msg">&#8213; Synonym of <a href="${pageContext.request.contextPath}/species/${actionBean.seniorIdSpecies}"><strong>${actionBean.seniorSpecies }</strong></a></span>
-                    </c:if>
-                </h1>
 
                <!--  Gallery on left -->
                 <div class="left-area species">
@@ -16,7 +10,7 @@
                         <ul class="gallery-slider-wrapper-inner items">
                             <c:forEach items="${actionBean.pics}" var="pic">
                                 <li>
-                                    <img src="${pic.path}/${pic.filename}" />
+                                    <img src="${pic.path}/${pic.filename}" style="max-width:475px;max-height:267px;"/>
                                 </li>
                             </c:forEach>
                         </ul>

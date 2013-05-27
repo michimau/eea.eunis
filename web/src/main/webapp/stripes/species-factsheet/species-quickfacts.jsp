@@ -10,7 +10,7 @@
                         <ul class="gallery-slider-wrapper-inner items">
                             <c:forEach items="${actionBean.pics}" var="pic">
                                 <li>
-                                    <img src="${pic.path}/${pic.filename}" style="max-width:475px;max-height:267px;"/>
+                                    <img src="${pic.path}/${pic.filename}" title="${pic.description}" style="max-width:475px;max-height:267px;"/>
                                 </li>
                             </c:forEach>
                         </ul>

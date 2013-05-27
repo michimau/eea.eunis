@@ -2,7 +2,7 @@
 -- Downloaded from: http://www.jisaacks.com/find-similar-products-in-mysql-using-levenshtein-distance
 
 DELIMITER $$
-CREATE FUNCTION levenshtein( s1 VARCHAR(255), s2 VARCHAR(255) ) 
+CREATE FUNCTION f_levenshtein( s1 VARCHAR(255), s2 VARCHAR(255) ) 
   RETURNS INT 
   DETERMINISTIC 
   BEGIN 

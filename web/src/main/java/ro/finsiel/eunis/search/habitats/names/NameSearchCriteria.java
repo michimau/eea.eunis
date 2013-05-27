@@ -234,7 +234,7 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
                 if (fuzzySearch && searchString.length() >=substringLength) {
                     String subSearchString = searchString.substring(0, substringLength);
                     sql.append(" OR (A.SCIENTIFIC_NAME LIKE '%").append(subSearchString).append("%' AND levenshtein('")
-                            .append(subSearchString).append("', A.SCIENTIFIC_NAME) <= 10 ) ");
+                            .append(subSearchString.toLowerCase()).append("', LOWER(A.SCIENTIFIC_NAME)) <= 10 ) ");
                 }
 
                 sql.append("  ");

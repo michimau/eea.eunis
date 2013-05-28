@@ -3,6 +3,7 @@ package eionet.eunis.stripes.actions;
 import java.awt.Color;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -61,7 +62,7 @@ import eionet.sparqlClient.helpers.ResultValue;
 /**
  * ActionBean for species factsheet. Data is loaded from {@link ro.finsiel.eunis.factsheet.species.SpeciesFactsheet} and
  * {@link ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist}.
- *
+ * 
  * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 @UrlBinding("/species/{idSpecies}/{tab}")
@@ -189,8 +190,19 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     private Map<String, List<Chm62edtNatureObjectAttributesPersist>> natureObjectAttributesMap;
 
+    // QuickFactSheet params
+    private int synonymsCount;
+    private List synonyms;
+    private int vernNamesCount;
+    private int speciesSitesCount;
+    private Vector legalInstruments;
+    private int legalInstrumentCount;
+    private int habitatsCount;
+    private String authorYear;
+    private String pageUrl;
+
     /**
-     *
+     * 
      * @return
      */
     @DefaultHandler
@@ -289,7 +301,46 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         String btrail = "eea#" + eeaHome + ",home#index.jsp,species#species.jsp,factsheet";
 
         setBtrail(btrail);
+
+        // Set's all actionBean values for quickfactsheet
+        setQuickFactSheetValues();
+
         return new ForwardResolution("/stripes/species-factsheet/species-factsheet.layout.jsp");
+    }
+
+    /**
+     * Prepares all specific information for quickFacktSheet
+     * 
+     * @author Jaak Kapten
+     */
+    private void setQuickFactSheetValues() {
+        authorYear = SpeciesFactsheet.getBookDate(factsheet.getTaxcodeObject().IdDcTaxcode());
+
+        //SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
+         //= formatYear.format(authorDate);
+
+        scientificName = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getScientificName());
+        author = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getAuthor());
+        pageUrl = this.getContext().getRequest().getRequestURL().toString();
+        if (factsheet.exists()) {
+            synonyms = factsheet.getSynonymsIterator();
+            synonymsCount = synonyms.size();
+            vernNames = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());
+            vernNamesCount = vernNames.size();
+            speciesSites = factsheet.getSitesForSpecies();
+            speciesSitesCount = speciesSites.size();
+            legalInstruments = factsheet.getLegalStatus();
+            legalInstrumentCount = legalInstruments.size();
+            habitatsCount = factsheet.getHabitatsForSpecies().size();
+        }
+    }
+
+    public String getPageUrl() {
+        return pageUrl;
+    }
+
+    public void setPageUrl(String pageUrl) {
+        this.pageUrl = pageUrl;
     }
 
     private int getSpeciesId() {
@@ -306,8 +357,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "general" tab.
-     *
-     * @param mainIdSpecies - The species ID. Same as specie.getIdSpecies()
+     * 
+     * @param mainIdSpecies
+     *            - The species ID. Same as specie.getIdSpecies()
      */
     private void generalTabActions(int mainIdSpecies) {
 
@@ -419,9 +471,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Get value for given ID_NATURE_OBJECT and attribute name from chm62edt_nature_object_attributes table.
-     *
-     * @param id - The nature object ID.
-     * @param name - attribute name.
+     * 
+     * @param id
+     *            - The nature object ID.
+     * @param name
+     *            - attribute name.
      */
     private String getNatObjectAttribute(Integer id, String name) {
         String ret = null;
@@ -502,9 +556,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Checks that this species layer exist in discomap server.
-     *
-     * @param scientificName - species scientific name
-     * @param layerNumber - discomap layer number
+     * 
+     * @param scientificName
+     *            - species scientific name
+     * @param layerNumber
+     *            - discomap layer number
      * @return boolean
      */
     private boolean isSpeciesLayer(String scientificName, int layerNumber) {
@@ -632,8 +688,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "linkeddata" tab.
-     *
-     * @param idSpecies - The species ID.
+     * 
+     * @param idSpecies
+     *            - The species ID.
      */
     private void linkeddataTabActions(int idSpecies, Integer natObjId) {
         try {
@@ -656,9 +713,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Run the queries to be executed on "Conservation status" tab.
-     *
+     * 
      * @param idSpecies
-     * @param natObjId -ID_NATURE_OBJECT
+     * @param natObjId
+     *            -ID_NATURE_OBJECT
      */
     private void conservationStatusTabActions(int idSpecies, Integer natObjId) {
         try {
@@ -683,7 +741,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     *
+     * 
      * @param sites
      * @return
      */
@@ -753,7 +811,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param factsheet the factsheet to set
+     * @param factsheet
+     *            the factsheet to set
      */
     public void setFactsheet(SpeciesFactsheet factsheet) {
         this.factsheet = factsheet;
@@ -767,7 +826,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param tab the currentTab to set
+     * @param tab
+     *            the currentTab to set
      */
     public void setTab(String tab) {
         this.tab = tab;
@@ -788,7 +848,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param idSpecies the idSpecies to set
+     * @param idSpecies
+     *            the idSpecies to set
      */
     public void setIdSpecies(String idSpecies) {
         this.idSpecies = idSpecies;
@@ -809,7 +870,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param idSpeciesLink the idSpeciesLink to set
+     * @param idSpeciesLink
+     *            the idSpeciesLink to set
      */
     public void setIdSpeciesLink(int idSpeciesLink) {
         this.idSpeciesLink = idSpeciesLink;
@@ -1142,7 +1204,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     *
+     * 
      * @return natureObjectAttributesMap - map of natureObjectAttributes names and Chm62edtNatureObjectAttributesPersist objects.
      */
     public Map<String, List<Chm62edtNatureObjectAttributesPersist>> getNatureObjectAttributesMap() {
@@ -1169,5 +1231,69 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
         }
         return natureObjectAttributesMap;
+    }
+
+    public int getSynonymsCount() {
+        return synonymsCount;
+    }
+
+    public void setSynonymsCount(int synonymsCount) {
+        this.synonymsCount = synonymsCount;
+    }
+
+    public List getSynonyms() {
+        return synonyms;
+    }
+
+    public void setSynonyms(List synonyms) {
+        this.synonyms = synonyms;
+    }
+
+    public int getVernNamesCount() {
+        return vernNamesCount;
+    }
+
+    public void setVernNamesCount(int vernNamesCount) {
+        this.vernNamesCount = vernNamesCount;
+    }
+
+    public int getSpeciesSitesCount() {
+        return speciesSitesCount;
+    }
+
+    public void setSpeciesSitesCount(int speciesSitesCount) {
+        this.speciesSitesCount = speciesSitesCount;
+    }
+
+    public Vector getLegalInstruments() {
+        return legalInstruments;
+    }
+
+    public void setLegalInstruments(Vector legalInstruments) {
+        this.legalInstruments = legalInstruments;
+    }
+
+    public int getLegalInstrumentCount() {
+        return legalInstrumentCount;
+    }
+
+    public void setLegalInstrumentCount(int legalInstrumentCount) {
+        this.legalInstrumentCount = legalInstrumentCount;
+    }
+
+    public int getHabitatsCount() {
+        return habitatsCount;
+    }
+
+    public void setHabitatsCount(int habitatsCount) {
+        this.habitatsCount = habitatsCount;
+    }
+
+    public String getAuthorYear() {
+        return authorYear;
+    }
+
+    public void setAuthorYear(String authorYear) {
+        this.authorYear = authorYear;
     }
 }

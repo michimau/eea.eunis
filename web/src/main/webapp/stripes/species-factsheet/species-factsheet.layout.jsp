@@ -54,6 +54,7 @@
                 <%-- Areas where this species has been reported --%>
                 <stripes:layout-render name="/stripes/species-factsheet/species-reported.jsp"/>
 
+
                 <%-- Habitat types populated by species --%>
                 <stripes:layout-render name="/stripes/species-factsheet/species-habitats.jsp"/>
             </c:when>

@@ -2,6 +2,7 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
                 <!-- habitat types -->
+                <a name="habitat-types"></a>
                 <div class="habitat-types">
                     <h2 class="visualClear" id="habitat-types">Habitat types populated by species</h2>
                     <table summary="Open the statistical data for"

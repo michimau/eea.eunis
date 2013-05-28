@@ -15,9 +15,13 @@ public class NationalThreatWrapper {
     private int referenceYear = 0;
     private Integer idDc;
     private Integer idConsStatus = 0;
+    /** ID_DC in CHM62EDT_CONSERVATION_STATUS */
+    private Integer idDcConsStatus = 0;
+    private String eunisAreaCode;
 
-    // Additional field for species factsheet
+    // Additional fields for species factsheet
     private String statusDesc = "";
+    private String statusName = "";
 
     /**
      * Creates a new NationalThreatWrapper object.
@@ -182,6 +186,48 @@ public class NationalThreatWrapper {
 
     public void setIdConsStatus(Integer idConsStatus) {
         this.idConsStatus = idConsStatus;
+    }
+
+    /**
+     * @return the eunisAreaCode
+     */
+    public String getEunisAreaCode() {
+        return eunisAreaCode;
+    }
+
+    /**
+     * @param eunisAreaCode the eunisAreaCode to set
+     */
+    public void setEunisAreaCode(String eunisAreaCode) {
+        this.eunisAreaCode = eunisAreaCode;
+    }
+
+    /**
+     * @return the statusName
+     */
+    public String getStatusName() {
+        return statusName;
+    }
+
+    /**
+     * @param statusName the statusName to set
+     */
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
+    /**
+     * @return the idDcConsStatus
+     */
+    public Integer getIdDcConsStatus() {
+        return idDcConsStatus;
+    }
+
+    /**
+     * @param idDcConsStatus the idDcConsStatus to set
+     */
+    public void setIdDcConsStatus(Integer idDcConsStatus) {
+        this.idDcConsStatus = idDcConsStatus;
     }
 
 }

@@ -2,6 +2,7 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
                 <!-- species protection -->
+                <a name="protected"></a>
                 <h2 class="visualClear" id="protected">This species is being protected in Europe</h2>
 
                 <div class="left-area protected-sites">

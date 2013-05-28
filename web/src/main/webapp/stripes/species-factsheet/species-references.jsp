@@ -2,6 +2,7 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
                 <!-- detailed reference -->
+                <a name="legal-instruments"></a>
                 <div class='detailed-reference'>
                     <h3 class="visualClear" id="legal-instruments">Species is mentioned by the following legal instruments</h3>
 

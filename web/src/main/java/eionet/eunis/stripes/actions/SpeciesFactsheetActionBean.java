@@ -3,7 +3,6 @@ package eionet.eunis.stripes.actions;
 import java.awt.Color;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,7 +38,6 @@ import ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.DistributionWrapper;
 import ro.finsiel.eunis.jrfTables.species.factsheet.ReportsDistributionStatusPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
-import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist;
 import ro.finsiel.eunis.search.UniqueVector;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
@@ -62,7 +60,7 @@ import eionet.sparqlClient.helpers.ResultValue;
 /**
  * ActionBean for species factsheet. Data is loaded from {@link ro.finsiel.eunis.factsheet.species.SpeciesFactsheet} and
  * {@link ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist}.
- * 
+ *
  * @author Aleksandr Ivanov <a href="mailto:aleksandr.ivanov@tietoenator.com">contact</a>
  */
 @UrlBinding("/species/{idSpecies}/{tab}")
@@ -138,7 +136,15 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     /** NCBI number */
     private String ncbi;
     private ArrayList<LinkDTO> links;
+    /** List of conservation statuses. */
     private List<NationalThreatWrapper> consStatus;
+    /** Conservation status on World level. */
+    private NationalThreatWrapper consStatusWO;
+    /** Conservation status on European level. */
+    private NationalThreatWrapper consStatusEU;
+    /** Conservation status on EU25 level. */
+    private NationalThreatWrapper consStatusE25;
+
     private List<SpeciesNatureObjectPersist> subSpecies;
     private String domainName;
     private Hashtable<String, AttributeDto> natObjectAttributes;
@@ -202,7 +208,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private String pageUrl;
 
     /**
-     * 
+     *
      * @return
      */
     @DefaultHandler
@@ -294,7 +300,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
 
             if (tab != null && tab.equals("conservation_status")) {
-                conservationStatusTabActions(mainIdSpecies, specie.getIdNatureObject());
+                setConservationStatusDetails(mainIdSpecies, specie.getIdNatureObject());
             }
         }
         String eeaHome = getContext().getInitParameter("EEA_HOME");
@@ -305,19 +311,28 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         // Set's all actionBean values for quickfactsheet
         setQuickFactSheetValues();
 
+        setPictures();
+
+        // Sets data about international threat status
+        setConservationStatusData();
+
+        // Sets country level and biogeo conservation status
+        // TODO The methods executes SPARQL query. Consider caching the results or at least load the content with jQuery
+        setConservationStatusDetails(mainIdSpecies, specie.getIdNatureObject());
+
         return new ForwardResolution("/stripes/species-factsheet/species-factsheet.layout.jsp");
     }
 
     /**
      * Prepares all specific information for quickFacktSheet
-     * 
+     *
      * @author Jaak Kapten
      */
     private void setQuickFactSheetValues() {
         authorYear = SpeciesFactsheet.getBookDate(factsheet.getTaxcodeObject().IdDcTaxcode());
 
-        //SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
-         //= formatYear.format(authorDate);
+        // SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
+        // = formatYear.format(authorDate);
 
         scientificName = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getScientificName());
         author = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getAuthor());
@@ -332,6 +347,56 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             legalInstruments = factsheet.getLegalStatus();
             legalInstrumentCount = legalInstruments.size();
             habitatsCount = factsheet.getHabitatsForSpecies().size();
+        }
+    }
+
+    /**
+     * Set list of picture objects for gallery.
+     */
+    private void setPictures() {
+        String picturePath = getContext().getInitParameter("UPLOAD_DIR_PICTURES_SPECIES");
+        pics = factsheet.getPictures(picturePath);
+
+    }
+
+    /**
+     * Load and parse species conservation status data.
+     */
+    private void setConservationStatusData() {
+
+        if (factsheet != null) {
+
+            consStatus = factsheet.getConservationStatus(factsheet.getSpeciesObject());
+            Integer redlistCatIdDc = new Integer(getContext().getApplicationProperty("redlist.categories.id_dc"));
+
+            // List of species national threat status.
+            if (consStatus != null && consStatus.size() > 0) {
+                List<NationalThreatWrapper> newConsStatusList = new ArrayList<NationalThreatWrapper>();
+                for (int i = 0; i < consStatus.size(); i++) {
+                    NationalThreatWrapper threat = consStatus.get(i);
+
+                    if (threat.getReference() != null && threat.getReference().indexOf("IUCN") >= 0) {
+                        scientificNameURL = scientificName.replace(' ', '+');
+                    }
+                    // String statusDesc =
+                    // factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode(), threat.getIdConsStatus())
+                    // .replaceAll("'", " ").replaceAll("\"", " ");
+                    // threat.setStatusDesc(statusDesc);
+                    newConsStatusList.add(threat);
+
+                    //show only IUCN 2009 info in colored boxes
+                    if (redlistCatIdDc.equals(threat.getIdDcConsStatus())) {
+                        if ("WO".equals(threat.getEunisAreaCode())) {
+                            consStatusWO = threat;
+                        } else if ("EU".equals(threat.getEunisAreaCode())) {
+                            consStatusEU = threat;
+                        } else if ("E25".equals(threat.getEunisAreaCode())) {
+                            consStatusE25 = threat;
+                        }
+                    }
+                }
+                consStatus = newConsStatusList;
+            }
         }
     }
 
@@ -357,20 +422,15 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "general" tab.
-     * 
-     * @param mainIdSpecies
-     *            - The species ID. Same as specie.getIdSpecies()
+     *
+     * @param mainIdSpecies - The species ID. Same as specie.getIdSpecies()
      */
     private void generalTabActions(int mainIdSpecies) {
 
         speciesBook = factsheet.getSpeciesBook();
-        consStatus = factsheet.getConservationStatus(factsheet.getSpeciesObject());
 
         // Get all pictures for species
-        String picturePath = getContext().getInitParameter("UPLOAD_DIR_PICTURES_SPECIES");
-        pics = factsheet.getPictures(picturePath);
 
-        List list = new Vector<Chm62edtTaxcodePersist>();
         try {
             authorDate = SpeciesFactsheet.getBookAuthorDate(factsheet.getTaxcodeObject().IdDcTaxcode());
 
@@ -405,19 +465,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                     (scientificName.trim().indexOf(" ") >= 0 ? scientificName.trim().substring(scientificName.indexOf(" ") + 1)
                             : scientificName);
 
-            redlistLink = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SPECIES_REDLIST);
-
-            // List of species national threat status.
-            if (consStatus != null && consStatus.size() > 0) {
-                for (int i = 0; i < consStatus.size(); i++) {
-                    NationalThreatWrapper threat = consStatus.get(i);
-
-                    if (threat.getReference() != null && threat.getReference().indexOf("IUCN") >= 0) {
-                        scientificNameURL = scientificName.replace(' ', '+');
-                    }
-                }
-            }
-
             // World Register of Marine Species - also has seals etc.
             wormsid = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_WORMS);
 
@@ -432,21 +479,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             // Links to HMTL pages
             links = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(specie.getIdNatureObject());
-
-            if (consStatus.size() > 0) {
-                List<NationalThreatWrapper> newList = new ArrayList<NationalThreatWrapper>();
-
-                for (int i = 0; i < consStatus.size(); i++) {
-                    NationalThreatWrapper threat = consStatus.get(i);
-                    String statusDesc =
-                            factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode(), threat.getIdConsStatus())
-                                    .replaceAll("'", " ").replaceAll("\"", " ");
-
-                    threat.setStatusDesc(statusDesc);
-                    newList.add(threat);
-                }
-                consStatus = newList;
-            }
 
             subSpecies = factsheet.getSubspecies();
             if (!subSpecies.isEmpty()) {
@@ -463,6 +495,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 }
                 subSpecies = newList;
             }
+            redlistLink =
+                    getNatObjectAttribute(factsheet.getSpeciesNatureObject().getIdNatureObject(), Constants.SAME_SPECIES_REDLIST);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -471,11 +505,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Get value for given ID_NATURE_OBJECT and attribute name from chm62edt_nature_object_attributes table.
-     * 
-     * @param id
-     *            - The nature object ID.
-     * @param name
-     *            - attribute name.
+     *
+     * @param id - The nature object ID.
+     * @param name - attribute name.
      */
     private String getNatObjectAttribute(Integer id, String name) {
         String ret = null;
@@ -556,11 +588,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Checks that this species layer exist in discomap server.
-     * 
-     * @param scientificName
-     *            - species scientific name
-     * @param layerNumber
-     *            - discomap layer number
+     *
+     * @param scientificName - species scientific name
+     * @param layerNumber - discomap layer number
      * @return boolean
      */
     private boolean isSpeciesLayer(String scientificName, int layerNumber) {
@@ -688,9 +718,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "linkeddata" tab.
-     * 
-     * @param idSpecies
-     *            - The species ID.
+     *
+     * @param idSpecies - The species ID.
      */
     private void linkeddataTabActions(int idSpecies, Integer natObjId) {
         try {
@@ -713,12 +742,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Run the queries to be executed on "Conservation status" tab.
-     * 
+     *
      * @param idSpecies
-     * @param natObjId
-     *            -ID_NATURE_OBJECT
+     * @param natObjId -ID_NATURE_OBJECT
      */
-    private void conservationStatusTabActions(int idSpecies, Integer natObjId) {
+    private void setConservationStatusDetails(int idSpecies, Integer natObjId) {
         try {
 
             Properties props = new Properties();
@@ -741,7 +769,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * 
+     *
      * @param sites
      * @return
      */
@@ -811,8 +839,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param factsheet
-     *            the factsheet to set
+     * @param factsheet the factsheet to set
      */
     public void setFactsheet(SpeciesFactsheet factsheet) {
         this.factsheet = factsheet;
@@ -826,8 +853,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param tab
-     *            the currentTab to set
+     * @param tab the currentTab to set
      */
     public void setTab(String tab) {
         this.tab = tab;
@@ -848,8 +874,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param idSpecies
-     *            the idSpecies to set
+     * @param idSpecies the idSpecies to set
      */
     public void setIdSpecies(String idSpecies) {
         this.idSpecies = idSpecies;
@@ -870,8 +895,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * @param idSpeciesLink
-     *            the idSpeciesLink to set
+     * @param idSpeciesLink the idSpeciesLink to set
      */
     public void setIdSpeciesLink(int idSpeciesLink) {
         this.idSpeciesLink = idSpeciesLink;
@@ -1204,7 +1228,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
-     * 
+     *
      * @return natureObjectAttributesMap - map of natureObjectAttributes names and Chm62edtNatureObjectAttributesPersist objects.
      */
     public Map<String, List<Chm62edtNatureObjectAttributesPersist>> getNatureObjectAttributesMap() {
@@ -1296,4 +1320,26 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     public void setAuthorYear(String authorYear) {
         this.authorYear = authorYear;
     }
+
+    /**
+     * @return the consStatusWO
+     */
+    public NationalThreatWrapper getConsStatusWO() {
+        return consStatusWO;
+    }
+
+    /**
+     * @return the consStatusEU
+     */
+    public NationalThreatWrapper getConsStatusEU() {
+        return consStatusEU;
+    }
+
+    /**
+     * @return the consStatusE25
+     */
+    public NationalThreatWrapper getConsStatusE25() {
+        return consStatusE25;
+    }
+
 }

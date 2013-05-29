@@ -44,9 +44,9 @@
                             <a href="${ actionBean.pageUrl }#protected">${eunis:cmsPhrase(actionBean.contentManagement, 'sites in Europe')}</a>.</p>
 
                         <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Mentioned in')} <span class="quickfact-number">${ actionBean.legalInstrumentCount }</span>
-                            <a href="${ actionBean.pageUrl }#legal-instruments">legal instruments</a>.</p>
+                            <a href="${ actionBean.pageUrl }#legal-instruments">${eunis:cmsPhrase(actionBean.contentManagement, 'legal instruments')}</a>.</p>
                         <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Lives in')} <span class="quickfact-number">${ actionBean.habitatsCount }</span>
-                            <a href="${ actionBean.pageUrl }#habitat-types">habitat types</a>.</p>
+                            <a href="${ actionBean.pageUrl }#habitat-types">${eunis:cmsPhrase(actionBean.contentManagement, 'habitat types')}</a>.</p>
                             
                         <c:if test="${!empty actionBean.n2000id}">
                         	<p class="discreet">

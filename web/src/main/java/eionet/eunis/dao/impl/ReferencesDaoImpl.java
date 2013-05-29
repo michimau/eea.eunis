@@ -35,14 +35,13 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
     /**
      * @see eionet.eunis.dao.IReferencesDao#getReferences(int page, int defaltPageSize, String sort, String dir) {@inheritDoc}
      */
+    @Override
     public CustomPaginatedList<ReferenceDTO> getReferences(int page, int defaltPageSize, String sort, String dir, String like) {
 
         CustomPaginatedList<ReferenceDTO> ret = new CustomPaginatedList<ReferenceDTO>();
 
-        int offset = 0;
-        if (page > 1) {
-            offset = page * defaltPageSize;
-        }
+        page = Math.max(page, 1);
+        int offset = (page - 1) * defaltPageSize;
 
         String order = "";
         if (sort != null) {
@@ -57,7 +56,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             }
         }
 
-        if (order != null && order.length() > 0 ) {
+        if (order != null && order.length() > 0) {
 
             if (dir == null || (!dir.equalsIgnoreCase("asc") && !dir.equalsIgnoreCase("desc"))) {
                 dir = "ASC";
@@ -92,7 +91,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             executeQuery(query, values, rsReader);
             List<ReferenceDTO> docs = rsReader.getResultList();
 
-            int listSize = getReferencesCnt();
+            int listSize = getReferencesCnt(like);
             ret.setList(docs);
             ret.setFullListSize(listSize);
             ret.setObjectsPerPage(defaltPageSize);
@@ -114,11 +113,18 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
         return ret;
     }
 
-    private int getReferencesCnt() {
-
+    /**
+     *
+     * @param like
+     * @return
+     */
+    private int getReferencesCnt(String like) {
         int ret = 0;
-
+        String trimmedLike = like.trim();
         String query = "SELECT COUNT(*) FROM DC_INDEX";
+        if (trimmedLike.length() > 0 && !trimmedLike.equalsIgnoreCase(ReferencesActionBean.DEFAULT_FILTER_VALUE)) {
+            query += " WHERE (TITLE LIKE ? OR SOURCE LIKE ?) ";
+        }
         Connection con = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
@@ -127,6 +133,10 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
 
             con = getConnection();
             preparedStatement = con.prepareStatement(query);
+            if (trimmedLike.length() > 0 && !trimmedLike.equalsIgnoreCase(ReferencesActionBean.DEFAULT_FILTER_VALUE)) {
+                preparedStatement.setString(1, "%" + trimmedLike + "%");
+                preparedStatement.setString(2, "%" + trimmedLike + "%");
+            }
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 ret = rs.getInt(1);
@@ -141,6 +151,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
     /**
      * @see eionet.eunis.dao.IReferencesDao#getDcAttributes(java.lang.String) {@inheritDoc}
      */
+    @Override
     public List<AttributeDto> getDcAttributes(String idDc) {
         List<AttributeDto> ret = new ArrayList<AttributeDto>();
 
@@ -177,6 +188,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
     /**
      * @see eionet.eunis.dao.IReferencesDao#getDcIndex(String id) {@inheritDoc}
      */
+    @Override
     public DcIndexDTO getDcIndex(String id) {
 
         DcIndexDTO object = null;
@@ -223,6 +235,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
     /**
      * @see eionet.eunis.dao.IReferencesDao#getDcObjects() {@inheritDoc}
      */
+    @Override
     public List<DcIndexDTO> getDcObjects() {
 
         List<DcIndexDTO> ret = new ArrayList<DcIndexDTO>();
@@ -244,6 +257,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
         return ret;
     }
 
+    @Override
     public Integer insertSource(String title, String source, String publisher, String editor, String url, String year)
             throws Exception {
         Integer ret = null;
@@ -298,6 +312,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
         return maxIdInt;
     }
 
+    @Override
     public DesignationDcObjectDTO getDesignationDcObject(String idDesig, String idGeo) throws Exception {
 
         DesignationDcObjectDTO ret = null;
@@ -334,6 +349,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
         return ret;
     }
 
+    @Override
     public List<PairDTO> getRedListSources() throws Exception {
 
         List<PairDTO> ret = new ArrayList<PairDTO>();

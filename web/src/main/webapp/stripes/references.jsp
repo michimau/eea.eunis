@@ -8,7 +8,7 @@
         <!-- MAIN CONTENT value="${actionBean.defaultFilterValue}"-->
 
         <h2>References:</h2>
-        <stripes:form action="/references" method="post" name="f">
+        <stripes:form action="/references" method="get" name="f">
             <stripes:text size="38"
                 name="filterPhrase"
                 onfocus="if(this.value=='${actionBean.defaultFilterValue}')this.value='';"

@@ -1,11 +1,8 @@
 package eionet.eunis.stripes.actions;
 
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.DontValidate;
@@ -28,7 +25,6 @@ import eionet.eunis.dto.ReferenceDTO;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.CustomPaginatedList;
 import eionet.eunis.util.Pair;
-
 
 /**
  * Action bean for references.
@@ -55,7 +51,7 @@ public class ReferencesActionBean extends AbstractStripesAction {
     List<PairDTO> species = new ArrayList<PairDTO>();
     List<PairDTO> habitats = new ArrayList<PairDTO>();
 
-    private int page;
+    private int page = 1;
     private String sort;
     private String dir;
 
@@ -84,7 +80,7 @@ public class ReferencesActionBean extends AbstractStripesAction {
             dcAttributes = dao.getDcAttributes(idref);
 
             btrail = "eea#" + eeaHome
-            + ",home#index.jsp,references#references";
+                    + ",home#index.jsp,references#references";
             if (dcIndex != null && dcIndex.getTitle() != null) {
                 btrail += "," + dcIndex.getTitle();
             }
@@ -126,8 +122,6 @@ public class ReferencesActionBean extends AbstractStripesAction {
 
         return new ForwardResolution(forwardPage);
     }
-
-
 
     public String getIdref() {
         return idref;
@@ -213,25 +207,16 @@ public class ReferencesActionBean extends AbstractStripesAction {
         return dcAttributes;
     }
 
-
     public String getFilterPhrase() {
         return filterPhrase;
     }
-
 
     public void setFilterPhrase(String filterPhrase) {
         this.filterPhrase = filterPhrase;
     }
 
-
-
     public String getDefaultFilterValue() {
         return DEFAULT_FILTER_VALUE;
     }
-
-
-
-
-
 
 }

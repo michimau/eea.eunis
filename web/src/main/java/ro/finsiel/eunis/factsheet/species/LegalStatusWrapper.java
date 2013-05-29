@@ -16,6 +16,9 @@ public class LegalStatusWrapper {
     private String refcd = "";
     private String comments = "";
     private Integer idDc;
+    private String formattedUrl;
+
+    
 
     /**
      * Create a new LegalStatusWrapper object.
@@ -162,6 +165,14 @@ public class LegalStatusWrapper {
 
     public void setIdDc(Integer idDc) {
         this.idDc = idDc;
+    }
+    
+    public String getFormattedUrl() {
+        return formattedUrl;
+    }
+
+    public void setFormattedUrl(String formattedUrl) {
+        this.formattedUrl = formattedUrl;
     }
 
     /*

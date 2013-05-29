@@ -28,6 +28,7 @@ import org.apache.commons.lang.StringUtils;
 
 import ro.finsiel.eunis.ImageProcessing;
 import ro.finsiel.eunis.factsheet.species.GeographicalStatusWrapper;
+import ro.finsiel.eunis.factsheet.species.LegalStatusWrapper;
 import ro.finsiel.eunis.factsheet.species.NationalThreatWrapper;
 import ro.finsiel.eunis.factsheet.species.SpeciesFactsheet;
 import ro.finsiel.eunis.factsheet.species.ThreatColor;
@@ -207,6 +208,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private String authorYear;
     private String pageUrl;
 
+    // Legals params
+    private List<LegalStatusWrapper> legalStatuses;
+    private String unepWcmcPageLink; 
+
+
+
     /**
      *
      * @return
@@ -310,6 +317,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
         // Set's all actionBean values for quickfactsheet
         setQuickFactSheetValues();
+        // Set's all actionBean values for legals listing.
+        setLegalInstruments();
 
         setPictures();
 
@@ -348,6 +357,21 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             legalInstrumentCount = legalInstruments.size();
             habitatsCount = factsheet.getHabitatsForSpecies().size();
         }
+        
+        // For later refactoring. The following parameteres are used in QuickFactSheet, but initialized outside this method.
+        //
+        // links = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(specie.getIdNatureObject());
+        // ncbi
+        // specie.scientificName
+        // specie.genus
+        // speciesName
+        // faeu
+        // wormsid
+        // redlistLink
+        // kingdomname
+        // gbifLink2
+        // gbifLink
+        
     }
 
     /**
@@ -400,12 +424,47 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
-    public String getPageUrl() {
-        return pageUrl;
-    }
 
-    public void setPageUrl(String pageUrl) {
-        this.pageUrl = pageUrl;
+    /**
+     * 
+     * Prepares all specific information for legal instruments section
+     * 
+     * @author Jaak Kapten
+     * @return
+     */
+    private void setLegalInstruments() {
+        Vector legals = factsheet.getLegalStatus();
+
+        legalStatuses = new ArrayList<LegalStatusWrapper>();
+        for (int i = 0; i < legals.size(); i++) {
+            LegalStatusWrapper legalStatus = (LegalStatusWrapper) legals.get(i);
+            legalStatus.setDetailedReference(Utilities.formatString(Utilities.treatURLSpecialCharacters(legalStatus
+                    .getDetailedReference())));
+            legalStatus.setLegalText(Utilities.formatString(Utilities.treatURLSpecialCharacters(legalStatus.getLegalText())));
+            legalStatus.setComments(Utilities.treatURLSpecialCharacters(legalStatus.getComments()));
+
+            if (null != legalStatus.getUrl().replaceAll("#", "")) {
+                String sFormattedURL = Utilities.formatString(legalStatus.getUrl()).replaceAll("#", "");
+                if (sFormattedURL.length() > 50) {
+                    sFormattedURL = sFormattedURL.substring(0, 50) + "...";
+                }
+                legalStatus.setUrl(Utilities.formatString(Utilities.treatURLSpecialCharacters(legalStatus.getUrl())).replaceAll(
+                        "#", ""));
+                legalStatus.setFormattedUrl(sFormattedURL);
+            }
+
+            legalStatuses.add(legalStatus);
+        }
+        
+        links = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(specie.getIdNatureObject());
+        
+        for (LinkDTO link : links){
+            if (link.getName().toLowerCase().equals("unep-wcmc page")){
+                unepWcmcPageLink = link.getUrl();
+            }
+        }
+        
+
     }
 
     private int getSpeciesId() {
@@ -1342,4 +1401,29 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         return consStatusE25;
     }
 
+
+   
+    public List<LegalStatusWrapper> getLegalStatuses() {
+        return legalStatuses;
+    }
+
+    public void setLegalStatuses(List<LegalStatusWrapper> legalStatuses) {
+        this.legalStatuses = legalStatuses;
+    }
+
+    public String getPageUrl() {
+        return pageUrl;
+    }
+
+    public void setPageUrl(String pageUrl) {
+        this.pageUrl = pageUrl;
+    }
+    
+    public String getUnepWcmcPageLink() {
+        return unepWcmcPageLink;
+    }
+
+    public void setUnepWcmcPageLink(String unepWcmcPageLink) {
+        this.unepWcmcPageLink = unepWcmcPageLink;
+    }
 }

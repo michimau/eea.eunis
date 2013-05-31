@@ -39,6 +39,7 @@ import ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.DistributionWrapper;
 import ro.finsiel.eunis.jrfTables.species.factsheet.ReportsDistributionStatusPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
+import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.UniqueVector;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
@@ -54,6 +55,7 @@ import eionet.eunis.dto.LinkDTO;
 import eionet.eunis.dto.PictureDTO;
 import eionet.eunis.dto.SpeciesDistributionDTO;
 import eionet.eunis.rdf.LinkedData;
+import eionet.eunis.stripes.viewdto.SitesByNatureObjectViewDTO;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.Pair;
 import eionet.sparqlClient.helpers.ResultValue;
@@ -212,6 +214,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     // Legals params
     private List<LegalStatusWrapper> legalStatuses;
     private String unepWcmcPageLink; 
+    
+    // Sites
+    private List<SitesByNatureObjectViewDTO> speciesSitesTable;
 
 
 
@@ -300,7 +305,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
 
             if (tab != null && tab.equals("sites")) {
-                sitesTabActions();
+                setSites();
             }
 
             if (tab != null && tab.equals("linkeddata")) {
@@ -320,6 +325,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         setQuickFactSheetValues();
         // Set's all actionBean values for legals listing.
         setLegalInstruments();
+        // Set's all actionBean values for sites
+        setSites();
+        
 
         setPictures();
 
@@ -466,6 +474,44 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
         
 
+    }
+    
+    /**
+     * Populate the member variables used in the "sites" tab.
+     */
+    private void setSites() {
+
+        speciesSitesTable = new ArrayList<SitesByNatureObjectViewDTO>();
+        
+        // List of sites related to species.
+        speciesSites = factsheet.getSitesForSpecies();
+        
+        for (SitesByNatureObjectPersist site : speciesSites){
+            SitesByNatureObjectViewDTO speciesSite = new SitesByNatureObjectViewDTO();
+            
+            speciesSite.setIDSite(site.getIDSite());
+            speciesSite.setLatitude(site.getLatitude());
+            speciesSite.setLongitude(site.getLongitude());
+            speciesSite.setName(site.getName());
+            speciesSite.setSourceDB(site.getSourceDB());
+            speciesSite.setAreaNameEn(Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getAreaNameEn())));
+            
+            Chm62edtCountryPersist country = CountryUtil.findCountry(site.getAreaNameEn());
+            speciesSite.setAreaUrl("countries/"+Utilities.treatURLSpecialCharacters(country.getEunisAreaCode()));
+            speciesSite.setSiteNameUrl("sites/" + Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getIDSite())));
+            
+            speciesSitesTable.add(speciesSite);
+        }
+        
+        
+        
+        mapIds = getIds(speciesSites);
+        
+        
+
+        // List of sites related to subspecies.
+        subSpeciesSites = factsheet.getSitesForSubpecies();
+        subMapIds = getIds(subSpeciesSites);
     }
 
     private int getSpeciesId() {
@@ -776,19 +822,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
-    /**
-     * Populate the member variables used in the "sites" tab.
-     */
-    private void sitesTabActions() {
-
-        // List of sites related to species.
-        speciesSites = factsheet.getSitesForSpecies();
-        mapIds = getIds(speciesSites);
-
-        // List of sites related to subspecies.
-        subSpeciesSites = factsheet.getSitesForSubpecies();
-        subMapIds = getIds(subSpeciesSites);
-    }
+ 
 
     /**
      * Populate the member variables used in the "linkeddata" tab.
@@ -1384,5 +1418,13 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     public void setUnepWcmcPageLink(String unepWcmcPageLink) {
         this.unepWcmcPageLink = unepWcmcPageLink;
+    }
+
+    public List<SitesByNatureObjectViewDTO> getSpeciesSitesTable() {
+        return speciesSitesTable;
+    }
+
+    public void setSpeciesSitesTable(List<SitesByNatureObjectViewDTO> speciesSitesTable) {
+        this.speciesSitesTable = speciesSitesTable;
     }
 }

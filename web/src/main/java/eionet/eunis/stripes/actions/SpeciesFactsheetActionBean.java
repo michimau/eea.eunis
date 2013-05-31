@@ -499,6 +499,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             speciesSite.setAreaUrl("countries/"+Utilities.treatURLSpecialCharacters(country.getEunisAreaCode()));
             speciesSite.setSiteNameUrl("sites/" + Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getIDSite())));
             
+            if (site.getSourceDB().equals("NATURA2000")){
+                speciesSite.setNatura2000(true);
+            }
+            
             speciesSitesTable.add(speciesSite);
         }
         

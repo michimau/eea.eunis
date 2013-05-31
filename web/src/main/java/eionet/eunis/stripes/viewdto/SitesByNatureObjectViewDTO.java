@@ -10,6 +10,7 @@ public class SitesByNatureObjectViewDTO {
     private String Longitude = "";
     private String areaUrl = "";
     private String siteNameUrl = "";
+    private Boolean natura2000 = false;
     
     public String getIDSite() {
         return IDSite;
@@ -59,5 +60,13 @@ public class SitesByNatureObjectViewDTO {
     public void setSiteNameUrl(String siteNameUrl) {
         this.siteNameUrl = siteNameUrl;
     }
+    public Boolean getNatura2000() {
+        return natura2000;
+    }
+    public void setNatura2000(Boolean natura2000) {
+        this.natura2000 = natura2000;
+    }
+
+
     
 }

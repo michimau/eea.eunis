@@ -14,19 +14,19 @@
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}">
     <stripes:layout-component name="head">
         <!-- Custom js needed for Species page -->
-        <script type="text/javascript" src="<%=request.getContextPath()%>/script/gallery/gallery-slider.js"></script>
-        <script type="text/javascript" src="<%=request.getContextPath()%>/script/gallery/init.js"></script>
-        
-		<style>
-		.cell-title {
-		  font-weight: bold;
-		}
-		
-		.cell-effort-driven {
-		  text-align: center;
-		}
-		</style>
-		
+        <script type="text/javascript" src="<%=request.getContextPath()%>/script/gallery-slider.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/script/init.js"></script>
+
+        <style>
+        .cell-title {
+          font-weight: bold;
+        }
+
+        .cell-effort-driven {
+          text-align: center;
+        }
+        </style>
+
 
         <link rel="alternate" type="application/rdf+xml" title="RDF"
             href="${pageContext.request.contextPath}/species/${actionBean.idSpecies}/rdf" />

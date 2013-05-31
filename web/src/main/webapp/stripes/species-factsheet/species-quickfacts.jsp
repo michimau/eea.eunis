@@ -13,11 +13,11 @@
                         "theme_path": "${pageContext.request.contextPath}/images",
                         "nav_theme": ""}'>
                         <ul>
-                            <c:forEach items="${actionBean.pics}" var="pic">
+                            <c:forEach items="${actionBean.pics}" var="pic" varStatus="loop">
                                 <li>
                                     <div class="panel-overlay">
                                         <h3>${pic.description}</h3>
-                                        <p>
+                                        <p>${loop.index + 1}/${fn:length(actionBean.pics)}&nbsp;
                                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}:
                                             <c:choose>
                                                 <c:when test="${!empty pic.sourceUrl}">

@@ -212,7 +212,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     // Legals params
     private List<LegalStatusWrapper> legalStatuses;
-    private String unepWcmcPageLink; 
+    private String unepWcmcPageLink;
     
     // Sites
     private List<SitesByNatureObjectViewDTO> speciesSitesTable;
@@ -365,7 +365,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             legalInstrumentCount = legalInstruments.size();
             habitatsCount = factsheet.getHabitatsForSpecies().size();
         }
-        
+
         // For later refactoring. The following parameteres are used in QuickFactSheet, but initialized outside this method.
         //
         // links = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(specie.getIdNatureObject());
@@ -379,7 +379,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         // kingdomname
         // gbifLink2
         // gbifLink
-        
+
     }
 
     /**
@@ -399,7 +399,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         if (factsheet != null) {
 
             consStatus = factsheet.getConservationStatus(factsheet.getSpeciesObject());
-            Integer redlistCatIdDc = new Integer(getContext().getApplicationProperty("redlist.categories.id_dc"));
 
             // List of species national threat status.
             if (consStatus != null && consStatus.size() > 0) {
@@ -410,19 +409,18 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                     if (threat.getReference() != null && threat.getReference().indexOf("IUCN") >= 0) {
                         scientificNameURL = scientificName.replace(' ', '+');
                     }
-                    // String statusDesc =
-                    // factsheet.getConservationStatusDescriptionByCode(threat.getThreatCode(), threat.getIdConsStatus())
-                    // .replaceAll("'", " ").replaceAll("\"", " ");
-                    // threat.setStatusDesc(statusDesc);
                     newConsStatusList.add(threat);
 
-                    //show only IUCN 2009 info in colored boxes
-                    if (redlistCatIdDc.equals(threat.getIdDcConsStatus())) {
-                        if ("WO".equals(threat.getEunisAreaCode())) {
+                    if ("WO".equals(threat.getEunisAreaCode())) {
+                        if (consStatusWO == null || consStatusWO.getReferenceYear() < threat.getReferenceYear()) {
                             consStatusWO = threat;
-                        } else if ("EU".equals(threat.getEunisAreaCode())) {
+                        }
+                    } else if ("EU".equals(threat.getEunisAreaCode())) {
+                        if (consStatusEU == null || consStatusEU.getReferenceYear() < threat.getReferenceYear()) {
                             consStatusEU = threat;
-                        } else if ("E25".equals(threat.getEunisAreaCode())) {
+                        }
+                    } else if ("E25".equals(threat.getEunisAreaCode())) {
+                        if (consStatusE25 == null || consStatusE25.getReferenceYear() < threat.getReferenceYear()) {
                             consStatusE25 = threat;
                         }
                     }
@@ -434,9 +432,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
 
     /**
-     * 
+     *
      * Prepares all specific information for legal instruments section
-     * 
+     *
      * @author Jaak Kapten
      * @return
      */
@@ -463,15 +461,15 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             legalStatuses.add(legalStatus);
         }
-        
+
         links = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(specie.getIdNatureObject());
-        
+
         for (LinkDTO link : links){
             if (link.getName().toLowerCase().equals("unep-wcmc page")){
                 unepWcmcPageLink = link.getUrl();
             }
         }
-        
+
 
     }
     
@@ -1440,7 +1438,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     }
 
 
-   
+
     public List<LegalStatusWrapper> getLegalStatuses() {
         return legalStatuses;
     }
@@ -1456,7 +1454,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     public void setPageUrl(String pageUrl) {
         this.pageUrl = pageUrl;
     }
-    
+
     public String getUnepWcmcPageLink() {
         return unepWcmcPageLink;
     }

@@ -453,32 +453,31 @@ public class SpeciesFactsheet {
         Vector<NationalThreatWrapper> results = new Vector<NationalThreatWrapper>();
 
         try {
-            // List list = new Chm62edtReportsDomain().findWhere("LOOKUP_TYPE='CONSERVATION_STATUS' AND ID_NATURE_OBJECT='" +
-            // specie.getIdNatureObject() + "'");
+
             // search also on synonyms
             String synonymsIDs = getSpeciesSynonymsCommaSeparated(specie.getIdNatureObject(), specie.getIdSpecies());
-            // System.out.println("synonymsIDs = " + synonymsIDs);
-            List<Chm62edtReportsPersist> list =
+
+            List<Chm62edtReportsPersist> reportsList =
                     new Chm62edtReportsDomain().findWhere("LOOKUP_TYPE='CONSERVATION_STATUS' AND ID_NATURE_OBJECT IN ("
                             + synonymsIDs + ")");
 
-            for (Chm62edtReportsPersist report : list) {
+            for (Chm62edtReportsPersist report : reportsList) {
                 NationalThreatWrapper threat = new NationalThreatWrapper();
 
-                List list1 =
+                List consStatusList =
                         new Chm62edtConservationStatusDomain()
                                 .findWhere("ID_CONSERVATION_STATUS = '" + report.getIDLookup() + "'");
 
-                List list2 =
+                List countryList =
                         new Chm62edtCountryDomain().findWhere("AREA_NAME_EN not like 'ospar%' and ID_GEOSCOPE='"
                                 + report.getIdGeoscope() + "'");
 
-                if (list1.size() > 0 && list2.size() > 0) {
+                if (consStatusList.size() > 0 && countryList.size() > 0) {
 
-                    Chm62edtConservationStatusPersist consS = (Chm62edtConservationStatusPersist) list1.get(0);
+                    Chm62edtConservationStatusPersist consS = (Chm62edtConservationStatusPersist) consStatusList.get(0);
 
                     threat.setStatus(consS.getName());
-                    Chm62edtCountryPersist country = (Chm62edtCountryPersist) list2.get(0);
+                    Chm62edtCountryPersist country = (Chm62edtCountryPersist) countryList.get(0);
 
                     if (country.getIso2l() == null || (country.getIso2l() != null && country.getIso2l().equals(""))) {
                         if (!(country.getAreaNameEnglish() == null || country.getAreaNameEnglish().trim().indexOf("ospar") == 0)) {
@@ -490,14 +489,14 @@ public class SpeciesFactsheet {
                             String author = report.getSource();
                             String consDescription = consS.getDescription();
                             String consName = consS.getName();
-                            int year = Utilities.checkedStringToInt(report.getCreated(), 0);
+                            int year = Utilities.checkedStringToInt(Utilities.formatReferencesYear(report.getCreated()), 0);
                             if (consS.getIdConsStatusLink() != 0 && consS.getSource() != null
                                     && !consS.getSource().toUpperCase().contains("IUCN")) {
 
-                                List list3 =
+                                List consStatusList2 =
                                         new Chm62edtConservationStatusDomain().findWhere("ID_CONSERVATION_STATUS = '"
                                                 + consS.getIdConsStatusLink() + "'");
-                                Chm62edtConservationStatusPersist consS2 = (Chm62edtConservationStatusPersist) list3.get(0);
+                                Chm62edtConservationStatusPersist consS2 = (Chm62edtConservationStatusPersist) consStatusList2.get(0);
                                 if (consS2.getSource() != null && consS2.getSource().toUpperCase().contains("IUCN")) {
                                     IntThrCode = consS2.getCode();
                                     idConsStatus = consS2.getIdConsStatus();

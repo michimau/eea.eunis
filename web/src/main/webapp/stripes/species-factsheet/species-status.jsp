@@ -72,12 +72,12 @@
                             <div class="table-definition contain-float">
                                 <div class="width-12 contain-float">
                                     <span class="table-definition-target standardButton float-left">
-                                    See full table details
+                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'See full table details')}
                                     </span>
-                                    <a href="#threat-status-overlay" rel="#threat-status-overlay" class="float-right">Other resources</a>
+                                    <a href="#threat-status-overlay" rel="#threat-status-overlay" class="float-right">${eunis:cmsPhrase(actionBean.contentManagement, 'Other resources')}</a>
                                 </div>
                                 <div class="table-definition-body">
-                                    <table summary="International Threat Status" class="listing fullwidth">
+                                    <table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'International Threat Status')}" class="listing fullwidth">
                                         <colgroup><col style="width: 20%">
                                             <col style="width: 20%">
                                             <col style="width: 20%">
@@ -144,7 +144,6 @@
                     </div>
                 </div>
 
-                <!-- FIXME -->
                 <div class="right-area conservation-status">
                     <h3>EU's conservation status by biogeographical regions</h3>
 
@@ -156,92 +155,44 @@
                         <!-- Table definition dropdown example -->
                         <div class="table-definition contain-float">
                             <span class="table-definition-target standardButton float-left">
-                                See full table details
+                                ${eunis:cmsPhrase(actionBean.contentManagement, 'See full table details')}
                             </span>
                             <a href="#conservation-status-overlay" rel="#conservation-status-overlay" class="float-right">Other resources</a>
-                            <div class="table-definition-body visualClear">
-                                <div style="margin-top:20px">
-                                    <p style="font-weight:bold">Biogeographical
-                                        assessment of the conservation status of the
-                                        species:</p>
+                            <c:if test="${not empty actionBean.conservationStatusQueryResultRows}">
+                                <c:forEach items="${actionBean.conservationStatusQueries}" var="query">
+                                    <div class="table-definition-body visualClear">
+                                        <div style="margin-top:20px">
+                                            <p style="font-weight:bold">${eunis:cmsPhrase(actionBean.contentManagement, query.title)}:</p>
+                                            <c:set var="queryId" value="${query.id}"/>
 
-                                    <div style="overflow-x:auto">
-                                        <span class="pagebanner">One item found.</span>
-                                        <span class="pagelinks"><strong>1</strong></span>
-                                        <table style="margin-top:20px"
-                                               class="datatable listing inline-block">
-                                            <thead>
-                                            <tr>
-                                                <th class="dt_sortable">
-                                                    <a href="/species/1442/conservation_status?d-49653-s=0&amp;tab=conservation_status&amp;d-49653-o=2&amp;d-49653-p=1&amp;idSpecies=1442">coverage</a>
-                                                </th>
-                                                <th class="dt_sortable">
-                                                    <a href="/species/1442/conservation_status?d-49653-s=1&amp;tab=conservation_status&amp;d-49653-o=2&amp;d-49653-p=1&amp;idSpecies=1442">region</a>
-                                                </th>
-                                                <th class="dt_sortable">
-                                                    <a href="/species/1442/conservation_status?d-49653-s=2&amp;tab=conservation_status&amp;d-49653-o=2&amp;d-49653-p=1&amp;idSpecies=1442">assessment</a>
-                                                </th>
-                                                <th class="dt_sortable">
-                                                    <a href="/species/1442/conservation_status?d-49653-s=3&amp;tab=conservation_status&amp;d-49653-o=2&amp;d-49653-p=1&amp;idSpecies=1442">period</a>
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr class="zebraodd">
-                                                <td>EU25</td>
-                                                <td>Mediterranean</td>
-                                                <td>Bad (U2)</td>
-                                                <td>2001-2006</td></tr>
-                                            </tbody>
-                                        </table>
+                                            <div style="overflow-x:auto">
+                                                <span class="pagebanner">${fn:length(actionBean.conservationStatusQueryResultRows[queryId])} item<c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) != 1}">s</c:if> found.</span>
+                                                <table style="margin-top:20px" class="datatable listing inline-block">
+                                                    <thead>
+                                                        <tr>
+                                                            <c:forEach var="col" items="${actionBean.conservationStatusQueryResultCols[queryId]}">
+                                                                <th class="dt_sortable">
+                                                                 ${col.property}
+                                                                </th>
+                                                            </c:forEach>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach var="row" items="${actionBean.conservationStatusQueryResultRows[queryId]}">
+                                                            <tr>
+                                                                <c:forEach var="col" items="${actionBean.conservationStatusQueryResultCols[queryId]}">
+                                                                    <td>${row[col.property]}</td>
+                                                                </c:forEach>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div style="margin-top:20px">
-                                    <p style="font-weight:bold">Country-level
-                                        assessment of the conservation status of the
-                                        species:</p>
-
-                                    <div style="overflow-x:auto ">
-                                        <span class="pagebanner">2 items found, displaying all items.</span><span
-                                            class="pagelinks"><strong>1</strong></span>
-                                        <table style="margin-top:20px"
-                                               class="datatable listing inline-block">
-                                            <thead>
-                                            <tr>
-                                                <th class="dt_sortable">
-                                                    <a href="/species/1442/conservation_status?d-49653-s=0&amp;tab=conservation_status&amp;d-49653-o=2&amp;d-49653-p=1&amp;idSpecies=1442">country</a>
-                                                </th>
-                                                <th class="dt_sortable">
-                                                    <a href="/species/1442/conservation_status?d-49653-s=1&amp;tab=conservation_status&amp;d-49653-o=2&amp;d-49653-p=1&amp;idSpecies=1442">region</a>
-                                                </th>
-                                                <th class="dt_sortable">
-                                                    <a href="/species/1442/conservation_status?d-49653-s=2&amp;tab=conservation_status&amp;d-49653-o=2&amp;d-49653-p=1&amp;idSpecies=1442">assessment</a>
-                                                </th>
-                                                <th class="dt_sortable">
-                                                    <a href="/species/1442/conservation_status?d-49653-s=3&amp;tab=conservation_status&amp;d-49653-o=2&amp;d-49653-p=1&amp;idSpecies=1442">period</a>
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr class="zebraodd">
-                                                <td>Portugal</td>
-                                                <td>Mediterranean</td>
-                                                <td>Bad (U2)</td>
-                                                <td>2001-2006</td>
-                                            </tr>
-                                            <tr class="zebraeven">
-                                                <td>Spain</td>
-                                                <td>Mediterranean</td>
-                                                <td>Bad and deteriorating (U2-)</td>
-                                                <td>2001-2006</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                                </c:forEach>
+                            </c:if>
                         </div>
-
                         <!-- Conservation status other resources overlay -->
                         <div class="overlay" id="conservation-status-overlay">
                             <c:forEach items="${actionBean.links}" var="link" varStatus="loop">

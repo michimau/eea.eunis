@@ -296,7 +296,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
 
             if (tab != null && tab.equals("geo")) {
-                geoTabActions();
+                setGeoValues();
             }
 
             if (tab != null && tab.equals("grid")) {
@@ -326,6 +326,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         setLegalInstruments();
         // Set's all actionBean values for sites
         setSites();
+        // Set all reported area values
+        setGeoValues();
+        
         
 
         setPictures();
@@ -633,7 +636,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     /**
      * Populate the member variables used in the "geo" tab.
      */
-    private void geoTabActions() {
+    private void setGeoValues() {
 
         // Get FAO code if one exists
         faoCode =

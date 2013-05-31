@@ -48,7 +48,7 @@
 
                 <div class="right-area protected-sites-map">
                     <h3>Protected sites - Map</h3>
-                    <div id="map" class="map-view" style="width:500px; height:400px; border:2px solid #050505;"></div>
+                    <div id="sites-map" class="map-view" style="width:500px; height:400px; border:2px solid #050505;"></div>
                 </div>
 
 
@@ -67,7 +67,7 @@
 		            //Assig a value to the SITECODE
 		            var sitecode = ''
 		
-		            var map;
+		            var sitesMap;
 		            var natura2000Layer;
 		            var clc2006Layer;
 		            
@@ -76,19 +76,19 @@
 		            	
 		            	sitecode = id;
 		            	
-		            	if (map == null){
-		            		init();
+		            	if (sitesMap == null){
+		            		initSitesMap();
 		            	} else {
 			            	natura2000Layer.setDefinitionExpression("SITECODE='" + sitecode + "'");
-			            	loadGeometry(sitecode);
+			            	loadSitesGeometry(sitecode);
 		            	}
 		            }
 		
 		            //URL for Natura 2000 REST service in use
 		            function getSitesMapServiceNatura2000() { return 'http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000_Dyna_WM/MapServer'; }
 		
-		            function init() {
-		              map = new esri.Map("map", {logo:false, slider: true, nav: true});
+		            function initSitesMap() {
+		            	sitesMap = new esri.Map("sites-map", {logo:false, slider: true, nav: true});
 		
 		              //Creates a BING Maps object layer to add to the map
 		              veTileLayer = new esri.virtualearth.VETiledLayer({
@@ -97,7 +97,7 @@
 		              });
 		
 		              //Loads BING map
-		              map.addLayer(veTileLayer);
+		              sitesMap.addLayer(veTileLayer);
 		
 		              //Creates a Natura 2000 layer object based on the site of interest
 		              natura2000Layer = new esri.layers.FeatureLayer(getSitesMapServiceNatura2000() + "/0",{
@@ -113,13 +113,13 @@
 		              clc2006Layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Land/CLC2006_Dyna_WM/MapServer", {opacity:0.4});
 		
 		              // Loads Natura 2000 layer.
-		              map.addLayer(natura2000Layer);
+		              sitesMap.addLayer(natura2000Layer);
 		
-		              loadGeometry(sitecode);
+		              loadSitesGeometry(sitecode);
 		            }
 		
 		            //Function for zooming into the site of interest
-		            function loadGeometry(sitecode) {
+		            function loadSitesGeometry(sitecode) {
 		              var query = new esri.tasks.Query();
 		
 		              query.where = "SITECODE='" + sitecode + "'"
@@ -131,7 +131,7 @@
 		              dojo.connect(queryTask, "onComplete", function(featureSet) {
 		              polygon = featureSet.features[0].geometry;
 		              extent = polygon.getExtent();
-		              map.setExtent(extent.expand(2), true);
+		              sitesMap.setExtent(extent.expand(2), true);
 		              });
 		            };
 		
@@ -161,22 +161,22 @@
 		            function updateLayerVisibilityExt(layerCheckbox){
 		
 		            	layerCheckbox.checked = !layerCheckbox.checked;
-		            	updateLayerVisibility(layerCheckbox);
+		            	updateSitesLayerVisibility(layerCheckbox);
 		            }
 		
-		            function updateLayerVisibility(layerCheckbox){
+		            function updateSitesLayerVisibility(layerCheckbox){
 		
 		                if (layerCheckbox.checked) {
 		                    if (layerCheckbox.id == 'natura2000') {
-		                        map.addLayer(natura2000Layer);
+		                    	sitesMap.addLayer(natura2000Layer);
 		                    } else if (layerCheckbox.id == 'clc2006') {
-		                        map.addLayer(clc2006Layer);
+		                    	sitesMap.addLayer(clc2006Layer);
 		                    }
 		                } else {
 		                	if (layerCheckbox.id == 'natura2000') {
-		                        map.removeLayer(natura2000Layer);
+		                		sitesMap.removeLayer(natura2000Layer);
 		                    } else if (layerCheckbox.id == 'clc2006') {
-		                        map.removeLayer(clc2006Layer);
+		                    	sitesMap.removeLayer(clc2006Layer);
 		                    }
 		                }
 		            }

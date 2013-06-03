@@ -368,6 +368,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             dbAuthorString = dbAuthorString.substring(0, dbAuthorString.length() - 1);
         }
         
+        if (dbAuthorString.endsWith(")") && !dbAuthorString.contains("(")){
+            dbAuthorString = dbAuthorString.substring(0, dbAuthorString.length() - 1);
+        }
+        
         
         // Finding year number with regex
         
@@ -376,6 +380,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         if (matcher.find()) {
             authorYear = matcher.group();
             dbAuthorString = dbAuthorString.replace(authorYear, "");
+            dbAuthorString = dbAuthorString.replace("()", "");
             dbAuthorString = dbAuthorString.trim();
             if (dbAuthorString.endsWith(",")){
                 dbAuthorString = dbAuthorString.substring(0, dbAuthorString.length() - 1);
@@ -388,6 +393,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             dbAuthorString = "unknown";
         }
         
+        
+       
         author = dbAuthorString;
         
         

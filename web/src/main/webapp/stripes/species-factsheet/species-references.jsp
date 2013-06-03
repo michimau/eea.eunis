@@ -5,7 +5,7 @@
                 <!-- detailed reference -->
                 <a name="legal-instruments"></a>
                 <div class='detailed-reference'>
-                    <h3 class="visualClear" id="legal-instruments">${eunis:cmsPhrase(actionBean.contentManagement, 'Species is mentioned by the following legal instruments')}</h3>
+                    <h3 class="visualClear" id="legal-instruments">${eunis:cmsPhrase(actionBean.contentManagement, 'By means of the following legal instruments')}</h3>
 
                     <table summary="List of legal instruments"
                        class="listing fullwidth">

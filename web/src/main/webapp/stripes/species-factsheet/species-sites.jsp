@@ -6,10 +6,10 @@
 
                 <!-- species protection -->
                 <a name="protected"></a>
-                <h2 class="visualClear" id="protected">This species is being protected in Europe</h2>
+                <h2 class="visualClear" id="protected">Where is the species protected?</h2>
 
                 <div id="protected_sites_table" class="left-area protected-sites" style="height: 460px">
-                    <h3>Protected Sites (Natura 2000) - Table</h3>
+                    <h3>By Means of Protected Sites (Natura 2000)</h3>
                     <div class="scroll-auto" style="height: 400px">
                     <table id="listItem" summary="List of sites" class="sortable listing">
                         <thead>
@@ -47,7 +47,7 @@
                 
 
                 <div class="right-area protected-sites-map">
-                    <h3>Protected sites - Map</h3>
+                    <h3>Protected sites</h3>
                     <div id="sites-map" class="map-view" style="width:500px; height:400px; border:2px solid #050505;"></div>
                 </div>
 

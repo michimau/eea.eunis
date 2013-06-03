@@ -51,17 +51,18 @@
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'as')} "${ actionBean.scientificName }"  ${eunis:cmsPhrase(actionBean.contentManagement, 'by')} ${ actionBean.author }.</p>
 
                         <p>${eunis:cmsPhrase(actionBean.contentManagement, 'It has')} <span class="quickfact-number">${ actionBean.synonymsCount }</span>
-                            <a href="#synonyms-overlay" rel="#synonyms-overlay">${eunis:cmsPhrase(actionBean.contentManagement, 'scientific synonyms')}</a> ${eunis:cmsPhrase(actionBean.contentManagement, 'and')}
-                            <span class="quickfact-number">${ actionBean.vernNamesCount }</span>
-                            <a href="#common-names-overlay" rel="#common-names-overlay">${eunis:cmsPhrase(actionBean.contentManagement, 'common names')}</a>.</p>
+                            <a href="#synonyms-overlay" rel="#synonyms-overlay">${eunis:cmsPhrase(actionBean.contentManagement, 'scientific names')}</a> ${eunis:cmsPhrase(actionBean.contentManagement, 'and')} 
+                            <a href="#common-names-overlay" rel="#common-names-overlay">${eunis:cmsPhrase(actionBean.contentManagement, 'common names')}</a> ${eunis:cmsPhrase(actionBean.contentManagement, 'in')} 
+                            <span class="quickfact-number">${ actionBean.vernNamesCount }</span> ${eunis:cmsPhrase(actionBean.contentManagement, 'languages')}
+                            .</p>
 
                         <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Protected in')}  <span class="quickfact-number">${ actionBean.speciesSitesCount }</span>
-                            <a href="${ actionBean.pageUrl }#protected">${eunis:cmsPhrase(actionBean.contentManagement, 'sites in Europe')}</a>.</p>
+                            <a href="${ actionBean.pageUrl }#protected">${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 sites')}</a>.</p>
 
                         <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Mentioned in')} <span class="quickfact-number">${ actionBean.legalInstrumentCount }</span>
                             <a href="${ actionBean.pageUrl }#legal-instruments">${eunis:cmsPhrase(actionBean.contentManagement, 'legal instruments')}</a>.</p>
                         <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Lives in')} <span class="quickfact-number">${ actionBean.habitatsCount }</span>
-                            <a href="${ actionBean.pageUrl }#habitat-types">${eunis:cmsPhrase(actionBean.contentManagement, 'habitat types')}</a>.</p>
+                            <a href="${ actionBean.pageUrl }#habitat-types">${eunis:cmsPhrase(actionBean.contentManagement, 'habitats')}</a>.</p>
 
                         <c:if test="${!empty actionBean.n2000id}">
                             <p class="discreet">

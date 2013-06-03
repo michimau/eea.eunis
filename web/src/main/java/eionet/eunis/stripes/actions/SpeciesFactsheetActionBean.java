@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -356,7 +358,40 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         // = formatYear.format(authorDate);
 
         scientificName = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getScientificName());
-        author = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getAuthor());
+        
+        String dbAuthorString = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getAuthor());
+        
+        // Removing parentheses from beginning and end
+        dbAuthorString = dbAuthorString.trim();
+        if (dbAuthorString.startsWith("(") && dbAuthorString.endsWith(")")){
+            dbAuthorString = dbAuthorString.substring(1);
+            dbAuthorString = dbAuthorString.substring(0, dbAuthorString.length() - 1);
+        }
+        
+        
+        // Finding year number with regex
+        
+        Pattern pattern = Pattern.compile("\\d{4}");
+        Matcher matcher = pattern.matcher(dbAuthorString);
+        if (matcher.find()) {
+            authorYear = matcher.group();
+            dbAuthorString = dbAuthorString.replace(authorYear, "");
+            dbAuthorString = dbAuthorString.trim();
+            if (dbAuthorString.endsWith(",")){
+                dbAuthorString = dbAuthorString.substring(0, dbAuthorString.length() - 1);
+            }
+        } else {
+            authorYear = "unknown";
+        }
+        
+        if (dbAuthorString.trim().length() == 0){
+            dbAuthorString = "unknown";
+        }
+        
+        author = dbAuthorString;
+        
+        
+        
         pageUrl = this.getContext().getRequest().getRequestURL().toString();
         if (factsheet.exists()) {
             synonyms = factsheet.getSynonymsIterator();

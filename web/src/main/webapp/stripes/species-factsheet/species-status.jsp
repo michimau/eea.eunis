@@ -154,11 +154,11 @@
                     <div class="footer">
                         <!-- Table definition dropdown example -->
                         <div class="table-definition contain-float">
-                            <span class="table-definition-target standardButton float-left">
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'See full table details')}
-                            </span>
                             <a href="#conservation-status-overlay" rel="#conservation-status-overlay" class="float-right">Other resources</a>
                             <c:if test="${not empty actionBean.conservationStatusQueryResultRows}">
+								<span class="table-definition-target standardButton float-left">
+									${eunis:cmsPhrase(actionBean.contentManagement, 'See full table details')}
+								</span>
                                 <c:forEach items="${actionBean.conservationStatusQueries}" var="query">
                                     <div class="table-definition-body visualClear">
                                         <div style="margin-top:20px">

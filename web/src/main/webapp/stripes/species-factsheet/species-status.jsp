@@ -148,7 +148,7 @@
                     <h3>EU's conservation status by biogeographical regions</h3>
 
                     <div class="map-view">
-                        <img src="<%=request.getContextPath()%>/images/biogeograpical-service.png"/>
+                        <iframe src="http://discomap.eea.europa.eu/map/Filtermap/?webmap=7ddade4a57384b48ae2f4f020b6a813b&speciesname=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}" height="400px" width="500px"></iframe>
                     </div>
 
                     <div class="footer">

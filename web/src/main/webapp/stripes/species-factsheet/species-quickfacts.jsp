@@ -66,7 +66,7 @@
 
                         <c:if test="${!empty actionBean.n2000id}">
                             <p class="discreet">
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'N2000 code:')} ${actionBean.n2000id}
+                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 code:')} ${actionBean.n2000id}
                             </p>
                         </c:if>
 

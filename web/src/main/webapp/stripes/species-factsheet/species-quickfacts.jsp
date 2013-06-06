@@ -47,9 +47,6 @@
                 <div class="right-area quickfacts">
                     <h2>${eunis:cmsPhrase(actionBean.contentManagement, 'Quick facts')}</h2>
                     <div class="bold">
-                        <p class="firstParagraph">${eunis:cmsPhrase(actionBean.contentManagement, 'First named')} <span class="quickfact-number">${ actionBean.authorYear }</span>
-                            ${eunis:cmsPhrase(actionBean.contentManagement, 'as')} "${ actionBean.scientificName }"  ${eunis:cmsPhrase(actionBean.contentManagement, 'by')} ${ actionBean.author }.</p>
-
                         <p>${eunis:cmsPhrase(actionBean.contentManagement, 'It has')} <span class="quickfact-number">${ actionBean.synonymsCount }</span>
                             <a href="#synonyms-overlay" rel="#synonyms-overlay">${eunis:cmsPhrase(actionBean.contentManagement, 'scientific names')}</a> ${eunis:cmsPhrase(actionBean.contentManagement, 'and')} 
                             <a href="#common-names-overlay" rel="#common-names-overlay">${eunis:cmsPhrase(actionBean.contentManagement, 'common names')}</a> ${eunis:cmsPhrase(actionBean.contentManagement, 'in')} 

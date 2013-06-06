@@ -89,18 +89,7 @@
                                     <a title="${eunis:cmsPhrase(actionBean.contentManagement, 'Search species on UNEP-WCMC')}" href="http://www.unep-wcmc-apps.org/isdb/Taxonomy/tax-gs-search2.cfm?displaylanguage=ENG&amp;source=${actionBean.kingdomname}&amp;GenName=${actionBean.specie.genus}&amp;SpcName=${eunis:treatURLSpecialCharacters(actionBean.speciesName)}">${eunis:cmsPhrase(actionBean.contentManagement, 'UNEP-WCMC search')}</a>
                                   </p>
                             </c:if>
-                            <c:choose>
-                                <c:when test="${!empty actionBean.redlistLink}">
-                                    <p>
-                                        <a href="http://www.iucnredlist.org/apps/redlist/details/${actionBean.redlistLink}/0">${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red List page')}</a>
-                                    </p>
-                                </c:when>
-                                  <c:otherwise>
-                                    <p>
-                                          <a href="http://www.iucnredlist.org/apps/redlist/search/external?text=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}&amp;mode=">${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red List search')}</a>
-                                      </p>
-                                </c:otherwise>
-                            </c:choose>
+
                             <c:if test="${actionBean.factsheet.speciesGroup == 'fishes'}">
                                 <p>
                                     <a title="${eunis:cmsPhrase(actionBean.contentManagement, 'Search species on Fishbase')}" href="http://www.fishbase.de/Summary/SpeciesSummary.php?genusname=${actionBean.specie.genus}&amp;speciesname=${eunis:treatURLSpecialCharacters(actionBean.speciesName)}">${eunis:cmsPhrase(actionBean.contentManagement, 'Fishbase search')}</a>

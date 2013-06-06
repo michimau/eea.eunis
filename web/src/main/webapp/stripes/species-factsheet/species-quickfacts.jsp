@@ -58,9 +58,7 @@
 
                         <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Mentioned in')} <span class="quickfact-number">${ actionBean.legalInstrumentCount }</span>
                             <a href="${ actionBean.pageUrl }#legal-instruments">${eunis:cmsPhrase(actionBean.contentManagement, 'legal instruments')}</a>.</p>
-                        <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Lives in')} <span class="quickfact-number">${ actionBean.habitatsCount }</span>
-                            <a href="${ actionBean.pageUrl }#habitat-types">${eunis:cmsPhrase(actionBean.contentManagement, 'habitats')}</a>.</p>
-
+  
                         <c:if test="${!empty actionBean.n2000id}">
                             <p class="discreet">
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 code:')} ${actionBean.n2000id}

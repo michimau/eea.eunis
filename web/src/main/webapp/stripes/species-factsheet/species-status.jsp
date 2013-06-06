@@ -71,55 +71,7 @@
                             <!-- Table definition dropdown example -->
                             <div class="table-definition contain-float">
                                 <div class="width-12 contain-float">
-                                    <span class="table-definition-target standardButton float-left">
-                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'See full table details')}
-                                    </span>
                                     <a href="#threat-status-overlay" rel="#threat-status-overlay" class="float-right">${eunis:cmsPhrase(actionBean.contentManagement, 'Other resources')}</a>
-                                </div>
-                                <div class="table-definition-body">
-                                    <table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'International Threat Status')}" class="listing fullwidth">
-                                        <colgroup><col style="width: 20%">
-                                            <col style="width: 20%">
-                                            <col style="width: 20%">
-                                            <col style="width: 40%">
-                                        </colgroup>
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" style="cursor: pointer;"><img src="http://www.eea.europa.eu/arrowBlank.gif" height="6" width="9">
-                                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'Area')}
-                                                    <img src="http://www.eea.europa.eu/arrowUp.gif" height="6" width="9"></th>
-                                                <th scope="col" style="cursor: pointer;"><img src="http://www.eea.europa.eu/arrowBlank.gif" height="6" width="9">
-                                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'Status')}
-                                                    <img src="http://www.eea.europa.eu/arrowBlank.gif" height="6" width="9"></th>
-                                                <th scope="col" style="cursor: pointer;"><img src="http://www.eea.europa.eu/arrowBlank.gif" height="6" width="9">
-                                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'International threat code')}
-                                                    <img src="http://www.eea.europa.eu/arrowBlank.gif" height="6" width="9"></th>
-                                                <th scope="col" style="cursor: pointer;"><img src="http://www.eea.europa.eu/arrowBlank.gif" height="6" width="9">
-                                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'Reference')}
-                                                    <img src="http://www.eea.europa.eu/arrowBlank.gif" height="6" width="9"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach items="${actionBean.consStatus}" var="threat" varStatus="loop">
-                                                <tr>
-                                                    <td>
-                                                        ${eunis:treatURLSpecialCharacters(threat.country)}
-                                                    </td>
-                                                    <td>
-                                                        ${eunis:treatURLSpecialCharacters(threat.status)}
-                                                    </td>
-                                                    <td>
-                                                        <span class="boldUnderline" title="${eunis:treatURLSpecialCharacters(threat.statusDesc)}">
-                                                            ${eunis:treatURLSpecialCharacters(threat.threatCode)}
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        <a href="references/${threat.idDc}">${eunis:treatURLSpecialCharacters(threat.reference)}</a>
-                                                    </td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </c:if>

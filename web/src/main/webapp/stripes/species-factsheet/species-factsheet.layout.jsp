@@ -14,7 +14,6 @@
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}">
     <stripes:layout-component name="head">
         <!-- Custom js needed for Species page -->
-        <script type="text/javascript" src="<%=request.getContextPath()%>/script/gallery-slider.js"></script>
         <script type="text/javascript" src="<%=request.getContextPath()%>/script/init.js"></script>
 
         <style>

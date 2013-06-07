@@ -1,6 +1,7 @@
 package eionet.eunis.stripes.actions;
 
 import java.awt.Color;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -219,6 +220,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     // Sites
     private List<SitesByNatureObjectViewDTO> speciesSitesTable;
+    private List<SitesByNatureObjectViewDTO> subSpeciesSitesTable;
+    private String scientificNameUrlEncoded;
 
 
 
@@ -526,9 +529,16 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private void setSites() {
 
         speciesSitesTable = new ArrayList<SitesByNatureObjectViewDTO>();
+        subSpeciesSitesTable = new ArrayList<SitesByNatureObjectViewDTO>();
 
         // List of sites related to species.
         speciesSites = factsheet.getSitesForSpecies();
+        
+        try {
+            scientificNameUrlEncoded = URLEncoder.encode(scientificName, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         for (SitesByNatureObjectPersist site : speciesSites){
             SitesByNatureObjectViewDTO speciesSite = new SitesByNatureObjectViewDTO();
@@ -546,19 +556,35 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             if (site.getSourceDB().equals("NATURA2000")){
                 speciesSite.setNatura2000(true);
+                speciesSitesTable.add(speciesSite);
             }
-
-            speciesSitesTable.add(speciesSite);
         }
-
-
-
-        mapIds = getIds(speciesSites);
-
 
 
         // List of sites related to subspecies.
         subSpeciesSites = factsheet.getSitesForSubpecies();
+        
+        for (SitesByNatureObjectPersist site : subSpeciesSites){
+            SitesByNatureObjectViewDTO speciesSite = new SitesByNatureObjectViewDTO();
+
+            speciesSite.setIDSite(site.getIDSite());
+            speciesSite.setLatitude(site.getLatitude());
+            speciesSite.setLongitude(site.getLongitude());
+            speciesSite.setName(site.getName());
+            speciesSite.setSourceDB(site.getSourceDB());
+            speciesSite.setAreaNameEn(Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getAreaNameEn())));
+
+            Chm62edtCountryPersist country = CountryUtil.findCountry(site.getAreaNameEn());
+            speciesSite.setAreaUrl("countries/"+Utilities.treatURLSpecialCharacters(country.getEunisAreaCode()));
+            speciesSite.setSiteNameUrl("sites/" + Utilities.formatString(Utilities.treatURLSpecialCharacters(site.getIDSite())));
+
+            if (site.getSourceDB().equals("NATURA2000")){
+                speciesSite.setNatura2000(true);
+                subSpeciesSitesTable.add(speciesSite);
+            }
+        }
+        
+        mapIds = getIds(speciesSites);
         subMapIds = getIds(subSpeciesSites);
     }
 
@@ -1475,4 +1501,21 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     public void setSpeciesSitesTable(List<SitesByNatureObjectViewDTO> speciesSitesTable) {
         this.speciesSitesTable = speciesSitesTable;
     }
+
+    public String getScientificNameUrlEncoded() {
+        return scientificNameUrlEncoded;
+    }
+
+    public void setScientificNameUrlEncoded(String scientificNameUrlEncoded) {
+        this.scientificNameUrlEncoded = scientificNameUrlEncoded;
+    }
+
+    public List<SitesByNatureObjectViewDTO> getSubSpeciesSitesTable() {
+        return subSpeciesSitesTable;
+    }
+
+    public void setSubSpeciesSitesTable(List<SitesByNatureObjectViewDTO> subSpeciesSitesTable) {
+        this.subSpeciesSitesTable = subSpeciesSitesTable;
+    }
 }
+

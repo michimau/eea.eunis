@@ -13,54 +13,72 @@
                             <c:set var="statusCodeEU" value="${not empty actionBean.consStatusEU ? fn:toLowerCase(actionBean.consStatusEU.threatCode) : 'un' }"></c:set>
                             <c:set var="statusCodeE25" value="${not empty actionBean.consStatusE25 ? fn:toLowerCase(actionBean.consStatusE25.threatCode) : 'un' }"></c:set>
 
+                            <c:set var="statusCodeEU-title" value="${statusCodeEU eq 'un' ? 'Unknown threat level for the Europe' : actionBean.consStatusEU.statusDesc}"></c:set>
+                            <c:set var="statusCodeE25-title" value="${statusCodeE25 eq 'un' ? 'Unknown threat level for the EU' : actionBean.consStatusE25.statusDesc}"></c:set>
+
                             <div class="threat-status-${statusCodeWO} roundedCorners">
 
-                                <div class="text-right">
-                                    <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'World')}</p>
-                                    <c:choose>
-                                        <c:when test="${not empty actionBean.consStatusWO}">
-                                            <p class="threat-status-label small-text eea-flexible-tooltip-right" title="${actionBean.consStatusWO.statusDesc}">${actionBean.consStatusWO.statusName}</p>
-                                            <p class="threat-status-source"><a href="references/${actionBean.consStatusWO.idDc}">${eunis:treatURLSpecialCharacters(actionBean.consStatusWO.reference)}</a></p>
-                                        </c:when>
-                                        <c:otherwise>
+                                <c:choose>
+                                    <c:when test="${not empty actionBean.consStatusWO}">
+                                        <a href="references/${actionBean.consStatusWO.idDc}">
+                                            <div class="text-right eea-flexible-tooltip-right" title="${actionBean.consStatusWO.statusDesc}">
+                                                <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'World')}</p>
+                                                <p class="threat-status-label small-text">${actionBean.consStatusWO.statusName}</p>
+                                                <p class="threat-status-source">${eunis:treatURLSpecialCharacters(actionBean.consStatusWO.reference)}</p>
+                                            </div>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="text-right eea-flexible-tooltip-right" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Unknown threat level for the world')}">
+                                            <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'World')}</p>
                                             <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Unknown')}</p>
-                                            <p class="threat-status-source small-text eea-flexible-tooltip-right" title="Unknown threat level for the world">
+                                            <p class="threat-status-source small-text">
                                                 <img src="<%=request.getContextPath()%>/images/icon-questionmark.png"/></p>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
 
                                 <div class="threat-status-${statusCodeEU} roundedCorners width-11">
-                                    <div class="text-right">
-                                        <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Europe')}</p>
-                                        <c:choose>
-                                            <c:when test="${not empty actionBean.consStatusEU}">
-                                                <p class="threat-status-label small-text eea-flexible-tooltip-right" title="${actionBean.consStatusEU.statusDesc}">${actionBean.consStatusEU.statusName}</p>
-                                                <p class="threat-status-source"><a href="references/${actionBean.consStatusEU.idDc}">${eunis:treatURLSpecialCharacters(actionBean.consStatusEU.reference)}</a></p>
-                                            </c:when>
-                                            <c:otherwise>
+                                    <c:choose>
+                                        <c:when test="${not empty actionBean.consStatusEU}">
+                                            <a href="references/${actionBean.consStatusEU.idDc}">
+                                                <div class="text-right eea-flexible-tooltip-right" title="${actionBean.consStatusEU.statusDesc}">
+                                                    <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Europe')}</p>
+                                                    <p class="threat-status-label small-text">${actionBean.consStatusEU.statusName}</p>
+                                                    <p class="threat-status-source">${eunis:treatURLSpecialCharacters(actionBean.consStatusEU.reference)}</p>
+                                                </div>
+                                            </a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="text-right eea-flexible-tooltip-right" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Unknown threat level for the Europe')}">
+                                                <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Europe')}</p>
                                                 <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Unknown')}</p>
-                                                <p class="threat-status-source small-text eea-flexible-tooltip-right" title="Unknown threat level for the Europe">
+                                                <p class="threat-status-source small-text">
                                                     <img src="<%=request.getContextPath()%>/images/icon-questionmark.png"/></p>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </div>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
 
                                     <div class="threat-status-${statusCodeE25} roundedCorners width-9">
-                                        <div class="text-right">
-                                            <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'EU')}</p>
-                                            <c:choose>
-                                                <c:when test="${not empty actionBean.consStatusE25}">
-                                                    <p class="threat-status-label small-text eea-flexible-tooltip-right" title="${actionBean.consStatusE25.statusDesc}">${actionBean.consStatusE25.statusName}</p>
-                                                    <p class="threat-status-source"><a href="references/${actionBean.consStatusE25.idDc}">${eunis:treatURLSpecialCharacters(actionBean.consStatusE25.reference)}</a></p>
-                                                </c:when>
-                                                <c:otherwise>
+                                        <c:choose>
+                                            <c:when test="${not empty actionBean.consStatusE25}">
+                                                <a href="references/${actionBean.consStatusE25.idDc}">
+                                                    <div class="text-right eea-flexible-tooltip-right" title="${actionBean.consStatusE25.statusDesc}">
+                                                        <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'EU')}</p>
+                                                        <p class="threat-status-label small-text">${actionBean.consStatusE25.statusName}</p>
+                                                        <p class="threat-status-source">${eunis:treatURLSpecialCharacters(actionBean.consStatusE25.reference)}</p>
+                                                    </div>
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="text-right eea-flexible-tooltip-right" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Unknown threat level for the EU')}">
+                                                    <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'EU')}</p>
                                                     <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Unknown')}</p>
-                                                    <p class="threat-status-source small-text eea-flexible-tooltip-right" title="Unknown threat level for the EU">
+                                                    <p class="threat-status-source small-text">
                                                         <img src="<%=request.getContextPath()%>/images/icon-questionmark.png"/></p>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +106,7 @@
                                         <a href="http://www.iucnredlist.org/apps/redlist/search/external?text=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}&amp;mode=">${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red List search')}</a>
                                     </c:otherwise>
                                 </c:choose>
-				 <a href="http://ec.europa.eu/environment/nature/conservation/species/redlist/">${eunis:cmsPhrase(actionBean.contentManagement, 'European Red List (by European Commission)')}</a>
+                 <a href="http://ec.europa.eu/environment/nature/conservation/species/redlist/">${eunis:cmsPhrase(actionBean.contentManagement, 'European Red List (by European Commission)')}</a>
                             </p>
 
 
@@ -109,9 +127,9 @@
                         <div class="table-definition contain-float">
                             <a href="#conservation-status-overlay" rel="#conservation-status-overlay" class="float-right">Other resources</a>
                             <c:if test="${not empty actionBean.conservationStatusQueryResultRows}">
-								<span class="table-definition-target standardButton float-left">
-									${eunis:cmsPhrase(actionBean.contentManagement, 'See full table details')}
-								</span>
+                                <span class="table-definition-target standardButton float-left">
+                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'See full table details')}
+                                </span>
                                 <c:forEach items="${actionBean.conservationStatusQueries}" var="query">
                                     <div class="table-definition-body visualClear">
                                         <div style="margin-top:20px">

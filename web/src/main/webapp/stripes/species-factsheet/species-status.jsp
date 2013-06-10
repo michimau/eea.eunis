@@ -3,7 +3,10 @@
 <stripes:layout-definition>
                 <!-- species status -->
                 <h2>How is this species doing?</h2>
-
+                <p>Threat Status' concept in IUCN Red lists (on the left) of threatened or endangered species is somewhat 
+                different from EU's 'Conservation status' concept in the Habitats Directive (on the right). 
+                The Red Lists assess the distance from extinction, while EU's Conservation status assesses 
+                the distance from a defined favorable situation.</p>
                 <div class="left-area">
                     <div class="threat-status-indicator width-12">
                         <h3>${eunis:cmsPhrase(actionBean.contentManagement, 'International Threat Status')}</h3>

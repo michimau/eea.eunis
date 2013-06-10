@@ -10,7 +10,7 @@
 
 	                <c:choose>
 	                	<c:when test="${fn:length(actionBean.subSpeciesSitesTable) gt 0 }">
-							<div id="protected_sites_table" class="left-area protected-sites" style="height:720px">
+							<div id="protected_sites_table" class="left-area protected-sites" style="height:570px">
 	                	</c:when>
 	                	<c:otherwise>
 							<div id="protected_sites_table" class="left-area protected-sites" style="height:460px">
@@ -18,13 +18,22 @@
 	                </c:choose>
                 
                     <h3>By Means of Protected Sites (Natura 2000)</h3>
-                    <div class="scroll-auto" style="height: 400px">
+                    <c:choose>
+	                    <c:when test="${fn:length(actionBean.subSpeciesSitesTable) gt 0 }">
+	                    	<div class="scroll-auto" style="height: 250px">
+	                    </c:when>
+	                    <c:otherwise>
+	                    	<div class="scroll-auto" style="height: 400px">
+	                    </c:otherwise>
+                    </c:choose>
+                    
                     <table id="listItem" summary="List of sites" class="sortable listing">
                         <thead>
                         <tr>
+                            <th class="dt_sortable">Sitecode</th>
                             <th class="dt_sortable">Country</th>
                             <th class="dt_sortable">Site name</th>
-                            <th class="dt_sortable" style="width: 165px">Action</th>
+                            <th class="dt_sortable" style="width: 105px">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -33,17 +42,13 @@
 							<tr class="${loop.index % 2 == 0 ? 'zebraodd' : 'zebraeven'}">
 								
 								
-								
-                            	<td><a href="${ site.areaUrl }" title="Open factsheet for ${ site.areaNameEn }">${ site.areaNameEn }</a></td>
-                            	<td><a href="${ site.siteNameUrl }">${ site.name }</a></td>
-                            	<c:choose>
-									<c:when test="${ site.natura2000 }">
-										<td><a href="javascript:void(0);" onclick="setMapSiteId('${ site.IDSite }');">View ${ site.IDSite } on map</a></td>
-									</c:when>
-									<c:otherwise>
-										<td>${ site.IDSite }</td>
-									</c:otherwise>
-								</c:choose>
+								<td>${ site.IDSite }</td>
+                            	<td>${ site.areaNameEn }</td>
+                            	<td>${ site.name }</td>
+                            	<td>
+									<a href="javascript:void(0);" onclick="setMapSiteId('${ site.IDSite }');">Map</a>&nbsp;
+									<a href="${ site.siteNameUrl }">Site page</a>
+								</td>
 							</tr>
 						</c:forEach>
 						
@@ -58,28 +63,23 @@
 	                    <table id="listItem" summary="List of sites" class="sortable listing">
 	                        <thead>
 	                        <tr>
+	                        	<th class="dt_sortable">Sitecode</th>
 	                            <th class="dt_sortable">Country</th>
 	                            <th class="dt_sortable">Site name</th>
-	                            <th class="dt_sortable" style="width: 165px">Action</th>
+	                            <th class="dt_sortable" style="width: 105px">Action</th>
 	                        </tr>
 	                        </thead>
 	                        <tbody>
 	
 							<c:forEach items="${actionBean.subSpeciesSitesTable}" var="site" varStatus="loop">
 								<tr class="${loop.index % 2 == 0 ? 'zebraodd' : 'zebraeven'}">
-									
-									
-									
+									<td>${ site.IDSite }</td>
 	                            	<td><a href="${ site.areaUrl }" title="Open factsheet for ${ site.areaNameEn }">${ site.areaNameEn }</a></td>
 	                            	<td><a href="${ site.siteNameUrl }">${ site.name }</a></td>
-	                            	<c:choose>
-										<c:when test="${ site.natura2000 }">
-											<td><a href="javascript:void(0);" onclick="setMapSiteId('${ site.IDSite }');">View ${ site.IDSite } on map</a></td>
-										</c:when>
-										<c:otherwise>
-											<td>${ site.IDSite }</td>
-										</c:otherwise>
-									</c:choose>
+	                            	<td><a href="javascript:void(0);" onclick="setMapSiteId('${ site.IDSite }');">Map</a>&nbsp;
+									<a href="${ site.siteNameUrl }">Site page</a>
+									</td>
+	                            	
 								</tr>
 							</c:forEach>
 							

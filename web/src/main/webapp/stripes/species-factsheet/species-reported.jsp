@@ -278,6 +278,14 @@
 								<p class="discreet">Layer shows this species distribution which marks roughly where the species is found. Data source: <a href="http://www.eea.europa.eu/data-and-maps/data/article-17-database-habitats-directive-92-43-eec">Article 17 database</a>.</p>
 							</c:if>
 							
+							<c:if test="${not empty actionBean.faoCode}">
+								<label for="fao">
+									<input type="checkbox" class="list_item" id="fao" onclick="updateLayerVisibility('fao');"/>
+									Species distribution (reported by FAO) <!-- TODO: To add indicative year of last update -->
+								</label>
+								<p class="discreet">Layer shows this species distribution which marks roughly where the species is found. Data source: <a href="http://www.fao.org/figis/geoserver/factsheets/species.html">FAO Aquatic Species Distribution Map Viewer</a> © FAO</p>
+							</c:if> 
+							
 							<!-- TODO: To add the species tanges from IUCN
 							Species range (2012, IUCN Red List) [http://www.iucnredlist.org/technical-documents/spatial-data]
 							The species range marks roughly where the species could be found. 
@@ -329,13 +337,7 @@
 								Protected areas - all Natura 2000 sites [Permalink to latest version 52E54BF3-ACDB-4959-9165-F3E4469BE610]
 								-->
 	
-								<c:if test="${not empty actionBean.faoCode}">
-										<label for="fao">
-											<input type="checkbox" class="list_item" id="fao" onclick="updateLayerVisibility('fao');"/>
-											FAO distribution
-										</label>
-										<p class="discreet">Data source: <a href="http://www.fao.org/figis/geoserver/factsheets/species.html">FAO Aquatic Species Distribution Map Viewer</a> © FAO</p>
-								</c:if>                                
+                               
 							</fieldset>
                     </div>
 

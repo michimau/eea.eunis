@@ -336,9 +336,6 @@
                     <div class="right-area reported-areas-map">
                         <div class="map-view" id="report-map" style="width:600px; height:400px;">
                         </div>
-                        <p>Map depicts reported distribution of species by Member States</br>
-						<a href="#">Source: Art 17 Habitat Directive</a>
-						</p>
                     </div>
                 </div>
                 <!-- END species reported -->

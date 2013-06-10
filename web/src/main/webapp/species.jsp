@@ -5,6 +5,7 @@
   - Description : 'Species module' function - display links to all species searches.
 --%>
 <%@page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/stripes/common/taglibs.jsp"%>
 <%
   request.setCharacterEncoding( "UTF-8");
 %>
@@ -12,11 +13,8 @@
                 ro.finsiel.eunis.search.Utilities,
                 ro.finsiel.eunis.search.species.names.NameSortCriteria,
                 ro.finsiel.eunis.search.AbstractSortCriteria" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
-<html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
-  <head>
-    <jsp:include page="header-page.jsp" />
+
 <%
   WebContentManagement cm = SessionManager.getWebContent();
   int tab = Utilities.checkedStringToInt( request.getParameter( "tab" ), 0 );
@@ -24,6 +22,12 @@
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String btrail = "eea#" + eeaHome + ",home#index.jsp,species";
 %>
+
+<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cmsPhrase( "Species database" ) %>'></c:set>
+
+<stripes:layout-render name="/stripes/common/template-legacy.jsp" pageTitle="${title}" btrail="<%= btrail%>">
+    <stripes:layout-component name="head">
+
     <script language="JavaScript" type="text/javascript">
     //<![CDATA[
     function popIndicators(URL)
@@ -42,45 +46,14 @@
     }
     //]]>
     </script>
-    <title>
-        <%=application.getInitParameter("PAGE_TITLE")%>
-        <%=cm.cmsPhrase("Species database")%>
-    </title>
-  </head>
-  <body>
-  <div id="visual-portal-wrapper">
-    <jsp:include page="header.jsp" />
-    <!-- The wrapper div. It contains the three columns. -->
-    <div id="portal-columns" class="visualColumnHideTwo">
-      <!-- start of the main and left columns -->
-      <div id="visual-column-wrapper">
-        <!-- start of main content block -->
-        <div id="portal-column-content">
-          <div id="content">
-            <div class="documentContent" id="region-content">
-		<jsp:include page="header-dynamic.jsp">
-			<jsp:param name="location" value="<%=btrail%>"/>
-		</jsp:include>
+    </stripes:layout-component>
+    <stripes:layout-component name="contents">
+
               <a name="documentContent"></a>
               <img id="loading" alt="" title="<%=cm.cmsPhrase("Loading progress")%>" src="images/loading.gif" />
                 <h1 class="documentFirstHeading">
                   <%=cm.cmsPhrase( "Species search" )%>
                 </h1>
-              <div class="documentActions">
-                <h5 class="hiddenStructure"><%=cm.cmsPhrase("Document Actions")%></h5>
-                <ul>
-                  <li>
-                    <a href="javascript:this.print();">
-                    	<img src="http://webservices.eea.europa.eu/templates/print_icon.gif" alt="<%=cm.cmsPhrase("Print this page")%>" title="<%=cm.cmsPhrase("Print this page")%>" id="icon-print" />
-                    </a>
-                  </li>
-                  <li>
-                    <a href="javascript:toggleFullScreenMode();">
-                    	<img src="http://webservices.eea.europa.eu/templates/fullscreenexpand_icon.gif" alt="<%=cm.cmsPhrase("Toggle full screen mode")%>" title="<%=cm.cmsPhrase("Toggle full screen mode")%>" id="icon-full_screen" />
-                    </a>
-                  </li>
-                </ul>
-              </div>
 <!-- MAIN CONTENT -->
 
               <div class="documentDescription">
@@ -457,26 +430,5 @@
                 }
                 //]]>
                 </script>
-<!-- END MAIN CONTENT -->
-              </div>
-            </div>
-          </div>
-          <!-- end of main content block -->
-          <!-- start of the left (by default at least) column -->
-          <div id="portal-column-one">
-            <div class="visualPadding">
-              <jsp:include page="inc_column_left.jsp">
-                <jsp:param name="page_name" value="species.jsp"/>
-              </jsp:include>
-            </div>
-          </div>
-          <!-- end of the left (by default at least) column -->
-        </div>
-        <!-- end of the main and left columns -->
-        <div class="visualClear"><!-- --></div>
-      </div>
-      <!-- end column wrapper -->
-      <jsp:include page="footer-static.jsp" />
-    </div>
-  </body>
-</html>
+    </stripes:layout-component>
+</stripes:layout-render>

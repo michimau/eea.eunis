@@ -286,14 +286,7 @@
 									</label>
 								<p class="discreet">Distribution reported under Article 17, Habitats Directive</p>
 							</c:if>
-							<c:if test="${actionBean.rangeLayer}">
-									<label for="range">
-										<input type="checkbox" class="list_item" id="range" onclick="updateLayerVisibility('range');"/>
-										Range
-									</label>
-								<p class="discreet">Range reported under Article 17, Habitats Directive</p>
-							</c:if>
-							
+			
 							<label for="natura">
 								<input type="checkbox" class="list_item" id="natura" onclick="updateLayerVisibility('natura');"/>
 								Natura 2000 sites

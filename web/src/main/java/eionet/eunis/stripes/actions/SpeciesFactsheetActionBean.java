@@ -536,6 +536,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         
         try {
             scientificNameUrlEncoded = URLEncoder.encode(scientificName, "UTF-8");
+            scientificNameUrlEncoded = scientificNameUrlEncoded.replace("+", "%20");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

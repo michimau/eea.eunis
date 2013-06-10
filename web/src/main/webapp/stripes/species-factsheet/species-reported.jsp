@@ -269,58 +269,72 @@
                     <div class="left-area reported-areas-fieldset">
                         <fieldset>
                             <legend><strong>Select layer</strong></legend>
+			    
+							<c:if test="${actionBean.distributionLayer}">
+								<label for="distribution">
+										<input type="checkbox" class="list_item" id="distribution" onclick="updateLayerVisibility('distribution');"/>
+										Species distribution (2006, reported by EU Member States under Habitats Directive 92/43/EEC)
+								</label>
+								<p class="discreet">Layer shows this species distribution which marks roughly where the species is found. Data source: <a href="http://www.eea.europa.eu/data-and-maps/data/article-17-database-habitats-directive-92-43-eec">Article 17 database</a>.</p>
+							</c:if>
+							
+							<!-- TODO: To add the species tanges from IUCN
+							Species range (2012, IUCN Red List) [http://www.iucnredlist.org/technical-documents/spatial-data]
+							The species range marks roughly where the species could be found. 
+					                -->
 
 							<c:if test="${not empty actionBean.gbifCode}">
 								<label for="gbif">
 									<input type="checkbox" class="list_item" id="gbif" onclick="updateLayerVisibility('gbif');" checked="checked"/>
-									GBIF observations
+									Single observations (GBIF, Global Biodiversity Information Facility)
 								</label>
-								<p class="discreet">Map depicts density of specimen and observational data. Source: <a href="http://data.gbif.org/species/${actionBean.gbifCode}">GBIF</a></p>
+								<p class="discreet">Layer show observations of this species are given by museum collections and other scientific databases. Data source: <a href="http://data.gbif.org/species/${actionBean.gbifCode}">GBIF</a></p>
 							</c:if>
 
-
-							<c:if test="${actionBean.distributionLayer}">
-									<label for="distribution">
-										<input type="checkbox" class="list_item" id="distribution" onclick="updateLayerVisibility('distribution');"/>
-										Distribution
-									</label>
-								<p class="discreet">Distribution reported under Article 17, Habitats Directive</p>
-							</c:if>
-			
 							<label for="natura">
 								<input type="checkbox" class="list_item" id="natura" onclick="updateLayerVisibility('natura');"/>
-								Natura 2000 sites
+								Protected sites (2011, Natura 2000 network)
 							</label>
-							<p class="discreet">&nbsp;</p>
+							<p class="discreet">Layer shows protected sites aiming to protect this species at the European level. Data source: <a href="http://www.eea.europa.eu/data-and-maps/data/natura-2">Natura 2000 database</a>.</p>
 							</fieldset>
 							
 							
 							<fieldset>
 	                            <legend><strong>Base map - not species related</strong></legend>
-									<label for="cdda">
-										<input type="checkbox" class="list_item" id="cdda" onclick="updateLayerVisibility('cdda');"/>
-										Nationally designated sites
-									</label>
-									<p class="discreet">&nbsp;</p>
-	
-									<label for="bio_regions">
-										<input type="checkbox" class="list_item" id="bio_regions" onclick="updateLayerVisibility('bio_regions');"/>
-										Bio-geographical regions
-									</label>
-									<p class="discreet">&nbsp;</p>
-	
-									<label for="river_basin">
-										<input type="checkbox" class="list_item" id="river_basin" onclick="updateLayerVisibility('river_basin');"/>
-										River basin districts
-									</label>
-									<p class="discreet">&nbsp;</p>
+								<label for="cdda">
+									<input type="checkbox" class="list_item" id="cdda" onclick="updateLayerVisibility('cdda');"/>
+									Protected areas - all nationally designated areas (2011, CDDA)
+								</label>
+								<p class="discreet">Nationally designated areas are protected areas which directly or indirectly create protected areas. 
+								Data source: <a href="http://www.eea.europa.eu/data-and-maps/data/nationally-designated-areas-national-cdda-7">CDDA database</a>.</p>
+
+								<label for="bio_regions">
+									<input type="checkbox" class="list_item" id="bio_regions" onclick="updateLayerVisibility('bio_regions');"/>
+									Biogeographical regions (2012)
+								</label>
+								<p class="discreet">Biogeographical regions are defined by their <a href="http://www.eea.europa.eu/publications/report_2002_0524_1549099">ecological and geographical context</a>. 
+								Data source: <a href="http://www.eea.europa.eu/data-and-maps/data/biogeographical-regions-europe-1"></a></p>
+
+								<label for="river_basin">
+									<input type="checkbox" class="list_item" id="river_basin" onclick="updateLayerVisibility('river_basin');"/>
+									River basin districts <!-- TODO: To add year and source information. -->
+								</label>
+								<p class="discreet">&nbsp;</p>
+								
+								<!-- TODO: To add Corine Land Cover
+								Corine land cover [http://www.eea.europa.eu/data-and-maps/data/corine-land-cover-2000-clc2000-seamless-vector-database-4]
+								European land cover based on satellite imagery
+								-->
+								<!-- TODO: All Natura 2000 sites
+								Protected areas - all Natura 2000 sites [Permalink to latest version 52E54BF3-ACDB-4959-9165-F3E4469BE610]
+								-->
 	
 								<c:if test="${not empty actionBean.faoCode}">
 										<label for="fao">
 											<input type="checkbox" class="list_item" id="fao" onclick="updateLayerVisibility('fao');"/>
 											FAO distribution
 										</label>
-										<p class="discreet">Source: the <a href="http://www.fao.org/figis/geoserver/factsheets/species.html">FAO Aquatic Species Distribution Map Viewer</a> © FAO</p>
+										<p class="discreet">Data source: <a href="http://www.fao.org/figis/geoserver/factsheets/species.html">FAO Aquatic Species Distribution Map Viewer</a> © FAO</p>
 								</c:if>                                
 							</fieldset>
                     </div>

@@ -5,7 +5,7 @@
 <c:set var="notExistErrMsg" value="${eunis:cmsPhrase(actionBean.contentManagement, 'We are sorry, the requested species does not exist')}"/>
 <c:choose>
     <c:when test="${eunis:exists(actionBean.factsheet)}">
-        <c:set var="title" value="${actionBean.scientificName }"></c:set>
+        <c:set var="title" value="${actionBean.speciesTitle }"></c:set>
     </c:when>
     <c:otherwise>
         <c:set var="title" value="${notExistErrMsg}"></c:set>
@@ -43,7 +43,7 @@
                 <stripes:layout-render name="/stripes/species-factsheet/species-breadcrumb.jsp"/>
 
                 <!-- TODO add name in English first and name in Latin in brackets. eg. Species: Iberian Lynx (Lynx pardinus) ?-->
-                <h1>Species: ${eunis:replaceTags(actionBean.scientificName)}
+                <h1>Species: ${actionBean.speciesTitle}
                     <c:if test="${actionBean.seniorSpecies != null}">
                         <span class="redirection-msg">&#8213; Synonym of <a href="${pageContext.request.contextPath}/species/${actionBean.seniorIdSpecies}"><strong>${actionBean.seniorSpecies }</strong></a></span>
                     </c:if>

@@ -33,15 +33,16 @@
         <!--  FIXME link -->
         <span id="breadcrumbs-current" dir="ltr">
             ${eunis:cmsPhrase(actionBean.contentManagement, 'Species')}:
-            <a href="species/${actionBean.idSpecies }">${actionBean.scientificName }</a>
+            ${actionBean.scientificName }
             <span class="breadcrumbSeparator">
                 &gt;
             </span>
         </span>
 
         <!--  FIXME link -->
+        
         <span id="breadcrumbs-last" dir="ltr">
-            <a href="species/${actionBean.idSpecies }">See subspecies</a>
+            See subspecies
         </span>
     </div>
     <!-- END breadcrumbs -->

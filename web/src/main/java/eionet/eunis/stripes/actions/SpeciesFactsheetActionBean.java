@@ -214,6 +214,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private int habitatsCount;
     private String authorYear;
     private String pageUrl;
+    private String englishName = null;
+    private String speciesTitle;
 
     // Legals params
     private List<LegalStatusWrapper> legalStatuses;
@@ -279,6 +281,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             setMetaDescription(factsheet.getSpeciesDescription());
             scientificName = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getScientificName());
             author = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getAuthor());
+            
 
             SQLUtilities sqlUtil = getContext().getSqlUtilities();
 
@@ -350,6 +353,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
         return new ForwardResolution("/stripes/species-factsheet/species-factsheet.layout.jsp");
     }
+    
+    
+    
 
     /**
      * Prepares all specific information for quickFacktSheet
@@ -364,46 +370,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
         scientificName = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getScientificName());
         
-        String dbAuthorString = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getAuthor());
-        
-        // Removing parentheses from beginning and end
-        dbAuthorString = dbAuthorString.trim();
-        if (dbAuthorString.startsWith("(") && dbAuthorString.endsWith(")")){
-            dbAuthorString = dbAuthorString.substring(1);
-            dbAuthorString = dbAuthorString.substring(0, dbAuthorString.length() - 1);
-        }
-        
-        if (dbAuthorString.endsWith(")") && !dbAuthorString.contains("(")){
-            dbAuthorString = dbAuthorString.substring(0, dbAuthorString.length() - 1);
-        }
-        
-        
-        // Finding year number with regex
-        
-        Pattern pattern = Pattern.compile("\\d{4}");
-        Matcher matcher = pattern.matcher(dbAuthorString);
-        if (matcher.find()) {
-            authorYear = matcher.group();
-            dbAuthorString = dbAuthorString.replace(authorYear, "");
-            dbAuthorString = dbAuthorString.replace("()", "");
-            dbAuthorString = dbAuthorString.trim();
-            if (dbAuthorString.endsWith(",")){
-                dbAuthorString = dbAuthorString.substring(0, dbAuthorString.length() - 1);
-            }
-        } else {
-            authorYear = "unknown";
-        }
-        
-        if (dbAuthorString.trim().length() == 0){
-            dbAuthorString = "unknown";
-        }
-        
-        
-       
-        author = dbAuthorString;
-        
-        
-        
+        author = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getAuthor());;
+                
         pageUrl = this.getContext().getRequest().getRequestURL().toString();
         if (factsheet.exists()) {
             synonyms = factsheet.getSynonymsIterator();
@@ -415,6 +383,25 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             legalInstruments = factsheet.getLegalStatus();
             legalInstrumentCount = legalInstruments.size();
             habitatsCount = factsheet.getHabitatsForSpecies().size();
+            
+            for (VernacularNameWrapper vernName : vernNames){
+                if (vernName.getLanguageCode().toLowerCase().equals("en")){
+                    englishName = vernName.getName();
+                    break;
+                }
+            }
+            
+            speciesTitle = ""; 
+            if (englishName != null && englishName.trim().length() > 0){
+                speciesTitle += englishName +" - "; 
+            }
+            speciesTitle += scientificName;
+            
+            if (author != null && author.trim().length() > 0){
+                speciesTitle += " - "+author; 
+            }
+
+            
         }
 
         // For later refactoring. The following parameteres are used in QuickFactSheet, but initialized outside this method.
@@ -1532,6 +1519,34 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     public void setBreadcrumbClassificationExpands(List<String> breadcrumbClassificationExpands) {
         this.breadcrumbClassificationExpands = breadcrumbClassificationExpands;
+    }
+
+
+
+
+    public String getEnglishName() {
+        return englishName;
+    }
+
+
+
+
+    public void setEnglishName(String englishName) {
+        this.englishName = englishName;
+    }
+
+
+
+
+    public String getSpeciesTitle() {
+        return speciesTitle;
+    }
+
+
+
+
+    public void setSpeciesTitle(String speciesTitle) {
+        this.speciesTitle = speciesTitle;
     }
 }
 

@@ -122,6 +122,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private List<PictureDTO> pics;
     private SpeciesNatureObjectPersist specie;
     private List<ClassificationDTO> classifications;
+    private List<String> breadcrumbClassificationExpands;
     private String authorDate;
     private String gbifLink;
     private String gbifLink2;
@@ -613,11 +614,17 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
         try {
             authorDate = SpeciesFactsheet.getBookAuthorDate(factsheet.getTaxcodeObject().IdDcTaxcode());
-
+            breadcrumbClassificationExpands = new ArrayList<String>();
             classifications = factsheet.getClassifications();
             // Extract kingdom name
             if (classifications != null) {
+                String classificationExpand = "";
                 for (ClassificationDTO classif : classifications) {
+                    if (classificationExpand.length() > 0){
+                        classificationExpand+=",";    
+                    }
+                    classificationExpand += classif.getId().toString();
+                    breadcrumbClassificationExpands.add(classificationExpand);
                     if (classif.getLevel().equalsIgnoreCase("kingdom")) {
                         kingdomname = classif.getName();
                     }
@@ -1558,6 +1565,14 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     public void setSubSpeciesSitesTable(List<SitesByNatureObjectViewDTO> subSpeciesSitesTable) {
         this.subSpeciesSitesTable = subSpeciesSitesTable;
+    }
+
+    public List<String> getBreadcrumbClassificationExpands() {
+        return breadcrumbClassificationExpands;
+    }
+
+    public void setBreadcrumbClassificationExpands(List<String> breadcrumbClassificationExpands) {
+        this.breadcrumbClassificationExpands = breadcrumbClassificationExpands;
     }
 }
 

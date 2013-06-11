@@ -14,7 +14,7 @@
         <c:forEach items="${actionBean.classifications}" var="classif" varStatus="loop">
             <span id="breadcrumbs-${loop.index + 1}" dir="ltr">
                 ${classif.level}:
-                <a href="">${classif.name}</a>
+                <a href="species-taxonomic-browser.jsp?expand=${actionBean.breadcrumbClassificationExpands[loop.index]}#level_${classif.id}">${classif.name}</a>
                 <span class="breadcrumbSeparator">
                     &gt;
                 </span>
@@ -24,7 +24,7 @@
         <!--  FIXME link -->
         <span id="breadcrumbs-${fn:length(actionBean.classifications)+1}" dir="ltr">
             ${eunis:cmsPhrase(actionBean.contentManagement, 'Genus')}:
-            <a href="">${actionBean.specie.genus}</a>
+            ${actionBean.specie.genus}
             <span class="breadcrumbSeparator">
                 &gt;
             </span>
@@ -33,7 +33,7 @@
         <!--  FIXME link -->
         <span id="breadcrumbs-current" dir="ltr">
             ${eunis:cmsPhrase(actionBean.contentManagement, 'Species')}:
-            <a href="">${actionBean.scientificName }</a>
+            <a href="species/${actionBean.idSpecies }">${actionBean.scientificName }</a>
             <span class="breadcrumbSeparator">
                 &gt;
             </span>
@@ -41,7 +41,7 @@
 
         <!--  FIXME link -->
         <span id="breadcrumbs-last" dir="ltr">
-            <a href="">See subspecies</a>
+            <a href="species/${actionBean.idSpecies }">See subspecies</a>
         </span>
     </div>
     <!-- END breadcrumbs -->

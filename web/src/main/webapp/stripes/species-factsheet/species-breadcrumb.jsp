@@ -34,16 +34,62 @@
         <span id="breadcrumbs-current" dir="ltr">
             ${eunis:cmsPhrase(actionBean.contentManagement, 'Species')}:
             ${actionBean.scientificName }
-            <span class="breadcrumbSeparator">
-                &gt;
-            </span>
         </span>
 
         <!--  FIXME link -->
-        
-        <span id="breadcrumbs-last" dir="ltr">
-            See subspecies
-        </span>
+    
+		<c:if test="${!empty actionBean.subSpecies}">
+	        <span id="breadcrumbs-last" dir="ltr">
+	        	<span class="breadcrumbSeparator">
+	                &gt;
+	            </span>
+	            <a href="#subspecies-overlay" rel="#subspecies-overlay">See subspecies</a>
+	        </span>
+		</c:if>
     </div>
+    
+    
+    <c:if test="${!empty actionBean.subSpecies}">
+    	<div class='overlay' id="subspecies-overlay">
+	 		<table summary="${eunis:cmsPhrase(actionBean.contentManagement, 'List of subspecies')}" class="listing fullwidth">
+	   		<col style="width:39%"/>
+	   		<col style="width:59%"/>
+	   		
+	   		
+	   		<thead>
+			    <tr>
+			        <th scope="col" style="cursor: pointer;"><img
+			                src="http://www.eea.europa.eu/arrowBlank.gif"
+			                height="6" width="9">
+			                ${eunis:cmsPhrase(actionBean.contentManagement, 'Scientific name')}
+			                ${eunis:cmsTitle(actionBean.contentManagement, 'sort_results_on_this_column')}
+							<img src="http://www.eea.europa.eu/arrowUp.gif" height="6" width="9"></th>
+			        <th scope="col" style="cursor: pointer;"><img
+			                src="http://www.eea.europa.eu/arrowBlank.gif"
+			                height="6" width="9">
+			                ${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}
+							${eunis:cmsTitle(actionBean.contentManagement, 'sort_results_on_this_column')}
+					<img src="http://www.eea.europa.eu/arrowBlank.gif" height="6" width="9"></th>
+			    </tr>
+			</thead>
+	   		
+
+	   		<tbody>
+	    		<c:forEach items="${actionBean.subSpecies}" var="subspecie" varStatus="loop">
+	    			<tr ${loop.index % 2 == 0 ? '' : 'class="zebraeven"'}>
+	    				<td>
+	        				<a style="font-style : italic;" href="species/${subspecie.idSpecies}">${eunis:treatURLSpecialCharacters(subspecie.scientificName)}</a>
+	         					${eunis:treatURLSpecialCharacters(subspecie.author)}
+	      				</td>
+	      				<td>
+	          				${eunis:treatURLSpecialCharacters(subspecie.bookAuthorDate)}
+	      				</td>
+	    			</tr>
+	    		</c:forEach>
+	   		</tbody>
+	 		</table>
+ 		</div>
+	</c:if>
+    
     <!-- END breadcrumbs -->
 </stripes:layout-definition>

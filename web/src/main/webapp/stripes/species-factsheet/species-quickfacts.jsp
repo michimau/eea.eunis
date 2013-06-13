@@ -203,7 +203,7 @@
                             </tbody>
                         </table>
                     </div>
-
+                    
                     <div class='overlay' id="common-names-overlay">
                         <table summary="Vernacular names" class="listing fullwidth">
                             <thead>

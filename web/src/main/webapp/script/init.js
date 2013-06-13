@@ -15,8 +15,8 @@
                 // common configuration for each overlay
                 oneInstance: false,
                 closeOnClick: true,
-                top: 260,
-                onBeforeLoad: function (e) {
+                top: '15%',
+                onBeforeLoad: function () {
                     var $overlay = this.getOverlay(),
                         $trigger, text, uppercase_text;
                     // create overlay title if not found in the overlay body
@@ -110,9 +110,9 @@
 /*
 
  GalleryView - jQuery Content Gallery Plugin
- Author: 		Jack Anderson
- Version:		2.0 (May 5, 2009)
- Documentation: 	http://www.spaceforaname.com/galleryview/
+ Author:        Jack Anderson
+ Version:       2.0 (May 5, 2009)
+ Documentation:     http://www.spaceforaname.com/galleryview/
 
  Please use this development script if you intend to make changes to the
  plugin code.  For production sites, please use jquery.galleryview-2.0-pack.js.
@@ -174,7 +174,7 @@ var window_loaded = false;
 
 
         /************************************************/
-        /*	Plugin Methods								*/
+        /*  Plugin Methods                              */
         /************************************************/
 
             //Transition from current item to item 'i'
@@ -770,7 +770,7 @@ var window_loaded = false;
             });
 
             /************************************************/
-            /*	Apply CSS Styles							*/
+            /*  Apply CSS Styles                            */
             /************************************************/
             j_gallery.css({
                 'position':'relative',
@@ -779,7 +779,7 @@ var window_loaded = false;
             });
 
             /************************************************/
-            /*	Build filmstrip and/or panels				*/
+            /*  Build filmstrip and/or panels               */
             /************************************************/
             if(opts.show_filmstrip) {
                 buildFilmstrip();
@@ -790,7 +790,7 @@ var window_loaded = false;
             }
 
             /************************************************/
-            /*	Add events to various elements				*/
+            /*  Add events to various elements              */
             /************************************************/
             if(opts.show_panels && !opts.show_filmstrip && opts.keep_nav_buttons_visible) {
                 if(opts.hover_nav_buttons_images) {
@@ -851,7 +851,7 @@ var window_loaded = false;
 
 
             /****************************************************************/
-            /*	Initiate Automated Animation								*/
+            /*  Initiate Automated Animation                                */
             /****************************************************************/
 
                 //Hide loading box
@@ -870,7 +870,7 @@ var window_loaded = false;
         }
 
         /************************************************/
-        /*	Main Plugin Code							*/
+        /*  Main Plugin Code                            */
         /************************************************/
         return this.each(function() {
             //Hide <ul>
@@ -962,7 +962,7 @@ var window_loaded = false;
             }
 
             /************************************************/
-            /*	Determine transition method for filmstrip	*/
+            /*  Determine transition method for filmstrip   */
             /************************************************/
             //If more items than strip size, slide filmstrip
             //Otherwise, slide pointer
@@ -975,7 +975,7 @@ var window_loaded = false;
             iterator = (strip_size<item_count?item_count:0)+opts.start_frame-1;
 
             /************************************************/
-            /*	Determine dimensions of various elements	*/
+            /*  Determine dimensions of various elements    */
             /************************************************/
             filmstrip_margin = (opts.show_panels?getInt(j_filmstrip.css('marginTop')):0);
             j_filmstrip.css('margin','0px');
@@ -1019,7 +1019,7 @@ var window_loaded = false;
             gallery_padding = getInt(j_gallery.css('paddingTop'));
             j_gallery.css('padding','0px');
             /********************************************************/
-            /*	PLACE LOADING BOX OVER GALLERY UNTIL IMAGES LOAD	*/
+            /*  PLACE LOADING BOX OVER GALLERY UNTIL IMAGES LOAD    */
             /********************************************************/
             galleryPos = getPos(j_gallery[0]);
             $('<div>').addClass('loader').css({

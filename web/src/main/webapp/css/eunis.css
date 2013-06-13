@@ -282,7 +282,13 @@ h2 {
 .overlay-body {
     max-height: 500px;
     max-width: 600px;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.5em 1em 0 0em;
+}
+
+#content .overlay-body table {
+    padding: 0 0.1em 0 0;
 }
 
 /**** Temporary overrides ****/
@@ -386,6 +392,11 @@ div.overlay .formControls a {
 
 
 /* galleryView temporary overrides */
+
+.gallery {
+    visibility: hidden;
+}
+
 .gallery .nav-next,
 .gallery .nav-prev,
 .gallery .nav-next-overlay,

@@ -363,17 +363,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      * @author Jaak Kapten
      */
     private void setQuickFactSheetValues() {
-        authorYear = SpeciesFactsheet.getBookDate(factsheet.getTaxcodeObject().IdDcTaxcode());
-
-        // SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
-        // = formatYear.format(authorDate);
-
-        scientificName = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getScientificName());
-        
-        author = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getAuthor());;
-                
         pageUrl = this.getContext().getRequest().getRequestURL().toString();
         if (factsheet.exists()) {
+            authorYear = SpeciesFactsheet.getBookDate(factsheet.getTaxcodeObject().IdDcTaxcode());
+            scientificName = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getScientificName());
+            author = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getAuthor());;
             synonyms = factsheet.getSynonymsIterator();
             synonymsCount = synonyms.size();
             vernNames = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObject());

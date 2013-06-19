@@ -14,8 +14,8 @@
                             <c:set var="statusCodeEU" value="${not empty actionBean.consStatusEU ? fn:toLowerCase(actionBean.consStatusEU.threatCode) : 'un' }"></c:set>
                             <c:set var="statusCodeE25" value="${not empty actionBean.consStatusE25 ? fn:toLowerCase(actionBean.consStatusE25.threatCode) : 'un' }"></c:set>
 
-                            <c:set var="statusCodeEU-title" value="${statusCodeEU eq 'un' ? 'Unknown threat level for the Europe' : actionBean.consStatusEU.statusDesc}"></c:set>
-                            <c:set var="statusCodeE25-title" value="${statusCodeE25 eq 'un' ? 'Unknown threat level for the EU' : actionBean.consStatusE25.statusDesc}"></c:set>
+                            <c:set var="statusCodeEU-title" value="${statusCodeEU eq 'un' ? 'Not assessed threat level for the Europe' : actionBean.consStatusEU.statusDesc}"></c:set>
+                            <c:set var="statusCodeE25-title" value="${statusCodeE25 eq 'un' ? 'Not assessed threat level for the EU' : actionBean.consStatusE25.statusDesc}"></c:set>
 
                             <div class="threat-status-${statusCodeWO} roundedCorners">
 
@@ -30,9 +30,9 @@
                                         </a>
                                     </c:when>
                                     <c:otherwise>
-                                        <div class="text-right eea-flexible-tooltip-right" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Unknown threat level for the world')}">
+                                        <div class="text-right eea-flexible-tooltip-right" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed threat level for the world')}">
                                             <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'World')}</p>
-                                            <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Unknown')}</p>
+                                            <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
                                             <p class="threat-status-source small-text">
                                                 <img src="<%=request.getContextPath()%>/images/icon-questionmark.png"/></p>
                                         </div>
@@ -51,9 +51,9 @@
                                             </a>
                                         </c:when>
                                         <c:otherwise>
-                                            <div class="text-right eea-flexible-tooltip-right" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Unknown threat level for the Europe')}">
+                                            <div class="text-right eea-flexible-tooltip-right" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed threat level for the Europe')}">
                                                 <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Europe')}</p>
-                                                <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Unknown')}</p>
+                                                <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
                                                 <p class="threat-status-source small-text">
                                                     <img src="<%=request.getContextPath()%>/images/icon-questionmark.png"/></p>
                                             </div>
@@ -72,9 +72,9 @@
                                                 </a>
                                             </c:when>
                                             <c:otherwise>
-                                                <div class="text-right eea-flexible-tooltip-right" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Unknown threat level for the EU')}">
+                                                <div class="text-right eea-flexible-tooltip-right" title="${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed threat level for the EU')}">
                                                     <p class="threat-status-region x-small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'EU')}</p>
-                                                    <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Unknown')}</p>
+                                                    <p class="threat-status-label small-text">${eunis:cmsPhrase(actionBean.contentManagement, 'Not assessed')}</p>
                                                     <p class="threat-status-source small-text">
                                                         <img src="<%=request.getContextPath()%>/images/icon-questionmark.png"/></p>
                                                 </div>

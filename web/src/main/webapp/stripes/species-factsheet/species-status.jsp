@@ -3,13 +3,11 @@
 <stripes:layout-definition>
                 <!-- species status -->
                 <h2>How is this species doing?</h2>
-                <p>Threat Status' concept in IUCN Red lists (on the left) of threatened or endangered species is somewhat 
-                different from EU's 'Conservation status' concept in the Habitats Directive (on the right). 
-                The Red Lists assess the distance from extinction, while EU's Conservation status assesses 
-                the distance from a defined favorable situation.</p>
+
                 <div class="left-area">
                     <div class="threat-status-indicator width-12">
-                        <h3>${eunis:cmsPhrase(actionBean.contentManagement, 'International Threat Status')}</h3>
+                        <h3>${eunis:cmsPhrase(actionBean.contentManagement, 'International Threat Status (Red list)')}</h3>
+                        <p>The Threat Status' concept in IUCN Red lists assess the distance from extinction.</p>
                         <c:if test="${not empty actionBean.consStatus}">
 
                             <c:set var="statusCodeWO" value="${not empty actionBean.consStatusWO ? fn:toLowerCase(actionBean.consStatusWO.threatCode) : 'un'}"></c:set>
@@ -120,7 +118,7 @@
 
                 <div class="right-area conservation-status">
                     <h3>EU's conservation status by biogeographical regions</h3>
-
+                    <p>EU's conservation status assesses the distance from a defined favorable situation as described in the Habitats Directive.</p>
                     <div class="map-view">
                         <iframe src="http://discomap.eea.europa.eu/map/Filtermap/?webmap=7ddade4a57384b48ae2f4f020b6a813b&speciesname=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}" height="400px" width="500px"></iframe>
                     </div>

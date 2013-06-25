@@ -5,7 +5,7 @@
                 <!-- detailed reference -->
                 <a name="legal-instruments"></a>
                 <div class='detailed-reference'>
-                    <h3 class="visualClear" id="legal-instruments">${eunis:cmsPhrase(actionBean.contentManagement, 'By means of the following legal instruments')}</h3>
+                    <h3 class="visualClear" id="legal-instruments">${eunis:cmsPhrase(actionBean.contentManagement, 'By means of the following international legal instruments and agreements')}</h3>
 
                     <table summary="List of legal instruments"
                        class="listing fullwidth">
@@ -58,9 +58,7 @@
 						</tbody>
 					  </table>
                     
-                  <p>See also
-
-                      <a href="${ actionBean.unepWcmcPageLink }">${eunis:cmsPhrase(actionBean.contentManagement, 'UNEP-WCMC page')}</a>,
+                  <p>See also <a href="${ actionBean.unepWcmcPageLink }">${eunis:cmsPhrase(actionBean.contentManagement, 'UNEP-WCMC page')}</a>
                   </p>
                 </div>
                 <!-- END detailed reference -->

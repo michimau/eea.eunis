@@ -57,16 +57,21 @@
                             <a href="${ actionBean.pageUrl }#protected">${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 sites')}</a>.</p>
 
                         <p>${eunis:cmsPhrase(actionBean.contentManagement, 'Mentioned in')} <span class="quickfact-number">${ actionBean.legalInstrumentCount }</span>
-                            <a href="${ actionBean.pageUrl }#legal-instruments">${eunis:cmsPhrase(actionBean.contentManagement, 'legal instruments')}</a>.</p>
+                            <a href="${ actionBean.pageUrl }#legal-instruments">${eunis:cmsPhrase(actionBean.contentManagement, 'international legal instruments')}</a>.</p>
   
                         <c:if test="${!empty actionBean.n2000id}">
                             <p class="discreet">
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 code:')} ${actionBean.n2000id}
-                            </p>
+                            </p
                         </c:if>
+		     <h2>${eunis:cmsPhrase(actionBean.contentManagement, 'Main sections')}</h2>
+		     <ul>
+		       <li><a href="#species-status">How is this species doing?</a></li>
+		       <li><a href="#protected">Where is the species protected?</a></li>
+		       <li><a href="#species-reported">Where can the species be found?</a></li>
+		     </ul>
 
-
-                        <p><a href="#generic-references-overlay" rel="#generic-references-overlay" class="float-right">${eunis:cmsPhrase(actionBean.contentManagement, 'Other resources')}</a></p>
+                        <p><a href="#generic-references-overlay" rel="#generic-references-overlay" class="float-right standardButton">${eunis:cmsPhrase(actionBean.contentManagement, 'Other resources')}</a></p>
                     </div>
                     <!-- Generic other resources overlay -->
                     <div class="overlay" id="generic-references-overlay">

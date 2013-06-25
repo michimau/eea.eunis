@@ -2,6 +2,7 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
                 <!-- species status -->
+                <a name="species-status"></a>
                 <h2>How is this species doing?</h2>
 
                 <div class="left-area">
@@ -90,7 +91,7 @@
                             <!-- Table definition dropdown example -->
                             <div class="table-definition contain-float">
                                 <div class="width-12 contain-float">
-                                    <a href="#threat-status-overlay" rel="#threat-status-overlay" class="float-right">${eunis:cmsPhrase(actionBean.contentManagement, 'Other resources')}</a>
+                                    <a href="#threat-status-overlay" rel="#threat-status-overlay" class="float-right standardButton">${eunis:cmsPhrase(actionBean.contentManagement, 'Other resources')}</a>
                                 </div>
                             </div>
                         </c:if>
@@ -126,7 +127,7 @@
                     <div class="footer">
                         <!-- Table definition dropdown example -->
                         <div class="table-definition contain-float">
-                            <a href="#conservation-status-overlay" rel="#conservation-status-overlay" class="float-right">Other resources</a>
+                            <a href="#conservation-status-overlay" rel="#conservation-status-overlay" class="float-right standardButton">Other resources</a>
                             <c:if test="${not empty actionBean.conservationStatusQueryResultRows}">
                                 <span class="table-definition-target standardButton float-left">
                                     ${eunis:cmsPhrase(actionBean.contentManagement, 'See full table details')}

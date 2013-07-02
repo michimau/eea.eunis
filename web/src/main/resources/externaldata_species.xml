@@ -6,7 +6,9 @@
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
   <entry key="queries">deliveries derogationsreport
-       landings art17ranges art17populations
+       landings
+       art17ranges art17populations
+       natranges2012
        birdlifedistribution birdlifetrend
 	butterfliestrend </entry>
 <!-- -->
@@ -36,7 +38,6 @@
 <!-- [IDENTIFIER] is replaced with actual species ID before query will be executed -->
   <entry key="deliveries.query"><![CDATA[
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX e: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#>
@@ -53,9 +54,9 @@ WHERE {
 	?envelope rod:hasFile ?sourcefile;
 	rod:released ?released;
 	rod:locality _:locurl;
-	dc:title ?envtitle .
+	dct:title ?envtitle .
 	_:locurl rdfs:label ?coverage .
-	?sourcefile dc:title ?filetitle
+	?sourcefile dct:title ?filetitle
 } ORDER BY DESC(?released)
 ]]></entry>
 
@@ -184,6 +185,73 @@ WHERE {
 ]]></entry>
 
 
+  <entry key="natranges2012.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="natranges2012.title">Ranges for this species reported in 2013 under Article 17, Habitats Directive</entry>
+<!-- .summary - use HTML format - i.e. escape & and < -->
+  <entry key="natranges2012.summary"><![CDATA[Assessments on the conservation status of the habitat types 
+   and species of Community interest have been carried out in EU 25 for the period 2007-2012, 
+   compiled as part of the Habitats Directive - Article 17 reporting process. 
+   The data summary sheet for habitat type conservation status provides an overview per biogeographical region.]]></entry>
+  <entry key="natranges2012.column.filetitle">Source</entry>
+  <entry key="natranges2012.link.filetitle">sourcefile</entry>
+  <entry key="natranges2012.column.country">Country</entry>
+  <entry key="natranges2012.column.region">Region</entry>
+  <entry key="natranges2012.column.range_surface_area">Surface of range</entry>
+  <entry key="natranges2012.column.conclusion_range">Range conclusion</entry>
+  <entry key="natranges2012.column.range_trend">Range trend</entry>
+  <entry key="natranges2012.column.range_trend_period">Period</entry>
+  <entry key="natranges2012.query"><![CDATA[
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX dct: <http://purl.org/dc/terms/> 
+PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> 
+PREFIX a: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+
+SELECT ?filetitle
+   IRI(bif:concat('http://cdr.eionet.europa.eu/Converters/run_conversion?file=',SUBSTR(STR(?sourcefile),29),'&conv=354&source=remote')) AS ?sourcefile
+   ?country ?region 
+   ?range_surface_area ?conclusion_range
+  ?range_trend ?range_trend_period
+WHERE {
+  GRAPH ?sourcefile {
+    ?regionalrep a a:SpeciesRegionalReport ;
+                 a:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
+                 a:region ?regionUri;
+                 a:?range_trend_period ?range_trend_period;
+                 a:range_surface_area ?range_surface_area;
+                 a:range_trend ?range_trendU;
+                 a:conclusion_range ?conclusion_rangeU ;
+                 a:conclusion_future ?conclusion_futureU
+  }
+  ?envelope rod:hasFile ?sourcefile .
+  ?envelope rod:released ?released . FILTER(?released > "2012-01-01"^^xsd:date)
+  ?envelope rod:locality _:locurl .
+  _:locurl rdfs:label ?country .
+  ?envelope dct:title ?filetitle .
+
+  ?regionUri rdfs:label ?region .
+  ?conclusion_rangeU rdfs:label ?conclusion_range .
+  ?conclusion_futureU rdfs:label ?conclusion_future .
+  ?range_trendU rdfs:label ?range_trend
+}
+]]></entry>
+  <entry key="natranges2012.codes"><![CDATA[
+PREFIX a: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> 
+PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+
+SELECT DISTINCT ?speciescode
+WHERE { 
+  GRAPH ?sourcefile {
+    ?subj a a:SpeciesRegionalReport;
+          a:forSpecies ?speciesurl .
+  }
+  GRAPH <http://eunis.eea.europa.eu/rdf/species.rdf.gz> {
+    ?speciesurl eunis:speciesCode ?speciescode
+  }
+  ?envelope rod:hasFile ?sourcefile .
+  ?envelope rod:released ?released . FILTER(?released > "2012-01-01"^^xsd:date)
+}
+]]></entry>
 
 
   <entry key="derogationsreport.endpoint">http://cr.eionet.europa.eu/sparql</entry>

@@ -216,7 +216,7 @@ WHERE {
     ?regionalrep a a:SpeciesRegionalReport ;
                  a:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
                  a:region ?regionUri;
-                 a:?range_trend_period ?range_trend_period;
+                 a:range_trend_period ?range_trend_period;
                  a:range_surface_area ?range_surface_area;
                  a:range_trend ?range_trendU;
                  a:conclusion_range ?conclusion_rangeU ;

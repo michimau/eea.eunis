@@ -606,6 +606,11 @@
         <servlet-name>StripesDispatcher</servlet-name>
         <url-pattern>/countries/*</url-pattern>
     </servlet-mapping>
+    
+	<servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/externalglobal</url-pattern>
+    </servlet-mapping>
 
     <!-- Session expiration in minutes -->
     <session-config>

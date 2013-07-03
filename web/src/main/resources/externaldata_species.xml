@@ -211,7 +211,8 @@ PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#>
 PREFIX a: <http://rdfdata.eionet.europa.eu/article17/ontology/>
 
 SELECT ?filetitle
-   IRI(bif:concat('http://cdr.eionet.europa.eu/Converters/run_conversion?file=',SUBSTR(STR(?sourcefile),29),'&conv=354&source=remote')) AS ?sourcefile
+   IRI(bif:concat('http://cdr.eionet.europa.eu/Converters/run_conversion?file=',
+         SUBSTR(STR(?sourcefile),29),'&conv=354&source=remote#', ?speciescode)) AS ?sourcefile
    ?country ?region 
    ?range_surface_area ?conclusion_range
   ?range_trend ?range_trend_period
@@ -219,6 +220,7 @@ WHERE {
   GRAPH ?sourcefile {
     ?regionalrep a a:SpeciesRegionalReport ;
                  a:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
+                 a:speciescode ?speciescode;
                  a:region ?regionUri;
                  a:range_trend_period ?range_trend_period;
                  a:range_surface_area ?range_surface_area;
@@ -236,7 +238,7 @@ WHERE {
   ?conclusion_rangeU rdfs:label ?conclusion_range .
   ?conclusion_futureU rdfs:label ?conclusion_future .
   ?range_trendU rdfs:label ?range_trend
-}
+} ORDER BY ?country ?region
 ]]></entry>
   <entry key="natranges2012.codes"><![CDATA[
 PREFIX a: <http://rdfdata.eionet.europa.eu/article17/ontology/>
@@ -287,7 +289,8 @@ PREFIX a: <http://rdfdata.eionet.europa.eu/article17/ontology/>
 
 SELECT
    ?filetitle
-   IRI(bif:concat('http://cdr.eionet.europa.eu/Converters/run_conversion?file=',SUBSTR(STR(?sourcefile),29),'&conv=354&source=remote')) AS ?sourcefile
+   IRI(bif:concat('http://cdr.eionet.europa.eu/Converters/run_conversion?file=',
+       SUBSTR(STR(?sourcefile),29),'&conv=354&source=remote#', ?speciescode)) AS ?sourcefile
    ?country ?region 
    ?population_minimum_size ?population_maximum_size ?unit ?conclusion
    ?population_trend ?population_trend_period AS ?period
@@ -295,6 +298,7 @@ WHERE {
   GRAPH ?sourcefile {
     ?regionalrep a a:SpeciesRegionalReport ;
                  a:forSpecies <http://eunis.eea.europa.eu/species/[IDENTIFIER]>;
+                 a:speciescode ?speciescode;
                  a:region ?regionUri;
                  a:population_trend_period ?population_trend_period .
     OPTIONAL { ?regionalrep a:population_minimum_size ?population_minimum_size }
@@ -313,7 +317,7 @@ WHERE {
   ?conclusionU rdfs:label ?conclusion .
   ?unitU rdfs:label ?unit .
   ?population_trendU rdfs:label ?population_trend .
-}
+} ORDER BY ?country ?region
 ]]></entry>
   <entry key="natpopul2012.codes"><![CDATA[
 PREFIX a: <http://rdfdata.eionet.europa.eu/article17/ontology/>

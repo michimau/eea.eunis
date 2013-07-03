@@ -203,20 +203,21 @@ PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#>
 PREFIX a: <http://rdfdata.eionet.europa.eu/article17/ontology/>
 
 SELECT ?filetitle
-   IRI(bif:concat('http://cdr.eionet.europa.eu/Converters/run_conversion?file=',SUBSTR(STR(?sourcefile),29),'&conv=350&source=remote')) AS ?sourcefile
+   IRI(bif:concat('http://cdr.eionet.europa.eu/Converters/run_conversion?file=',
+      SUBSTR(STR(?sourcefile),29),'&conv=350&source=remote#', ?habitatcode)) AS ?sourcefile
    ?country ?region
    ?range_surface_area ?conclusion_range ?range_trend ?range_trend_period
 WHERE {
   GRAPH ?sourcefile {
-    ?typrep      a:forHabitat <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]>;
-                 a:hasRegionalReport ?regionalrep .
     ?regionalrep a a:HabitatTypeRegionalReport ;
-                  a:region ?regionUri;
-                  a:range_trend_period ?range_trend_period;
-                  a:range_surface_area ?range_surface_area;
-                  a:range_trend ?range_trendU;
-                  a:conclusion_range ?conclusion_rangeU ;
-                  a:conclusion_future ?conclusion_futureU
+                 a:forHabitat <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]>;
+                 a:habitatcode ?habitatcode;
+                 a:region ?regionUri;
+                 a:range_trend_period ?range_trend_period;
+                 a:range_surface_area ?range_surface_area;
+                 a:range_trend ?range_trendU;
+                 a:conclusion_range ?conclusion_rangeU ;
+                 a:conclusion_future ?conclusion_futureU
   }
   ?envelope rod:hasFile ?sourcefile .
   ?envelope rod:released ?released . FILTER(?released > "2012-01-01"^^xsd:date)
@@ -228,7 +229,7 @@ WHERE {
   ?conclusion_rangeU rdfs:label ?conclusion_range .
   ?conclusion_futureU rdfs:label ?conclusion_future .
   ?range_trendU rdfs:label ?range_trend
-}
+} ORDER BY ?country ?region
 ]]></entry>
   <entry key="natranges2012.codes"><![CDATA[
 PREFIX a: <http://rdfdata.eionet.europa.eu/article17/ontology/>

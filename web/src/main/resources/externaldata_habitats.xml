@@ -179,11 +179,15 @@ FILTER(?rdfType IN (art17:Habitattypesummary, art17:HabitatTypeManualAssessment)
 
   <entry key="natranges2012.endpoint">http://cr.eionet.europa.eu/sparql</entry>
   <entry key="natranges2012.title">Ranges for this habitat type reported in 2013 under Article 17, Habitats Directive</entry>
+  <entry key="natranges2012.attribution"><![CDATA[
+<div style="font-size:130%; background-color: #ff8080;border:1px solid gray;margin:1em 3em;padding:0.5em;text-align:center">Unvalidated data: country deliveries</div>
+]]></entry>
 <!-- .summary - use HTML format - i.e. escape & and < -->
   <entry key="natranges2012.summary"><![CDATA[Assessments on the conservation status of the habitat types 
    and species of Community interest have been carried out in EU 25 for the period 2007-2012, 
    compiled as part of the Habitats Directive - Article 17 reporting process. 
-   The data summary sheet for habitat type conservation status provides an overview per biogeographical region.]]></entry>
+   The data summary sheet for habitat type conservation status provides an overview per biogeographical region.
+]]></entry>
   <entry key="natranges2012.column.filetitle">Source</entry>
   <entry key="natranges2012.link.filetitle">sourcefile</entry>
   <entry key="natranges2012.column.country">Country</entry>

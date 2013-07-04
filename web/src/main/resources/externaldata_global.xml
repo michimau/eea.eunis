@@ -5,7 +5,9 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">n2000birds n2000other nutscodes estatcodes habides</entry>
+  <entry key="queries">n2000birds n2000other nutscodes estatcodes habides
+   art17delv2012s
+  </entry>
 
 <!-- -->
 <!-- N2000 birds query -->

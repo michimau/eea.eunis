@@ -130,4 +130,41 @@ ORDER BY ?species
 ]]></entry>
 
 
+  <entry key="art17delv2012s.querytype">SPARQL</entry>
+  <entry key="art17delv2012s.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="art17delv2012s.title">Species with 2013 deliveries on Habitats directive Art. 17</entry>
+  <entry key="art17delv2012s.summary"><![CDATA[Assessments on the conservation status of the habitat types 
+   and species of Community interest have been carried out in EU 27 for the period 2007-2012, 
+   compiled as part of the Habitats Directive - Article 17 reporting process. 
+   The table lists the species for which there were reports made.
+]]></entry>
+  <entry key="art17delv2012s.link.name">speciesurl</entry>
+  <entry key="art17delv2012s.query"><![CDATA[
+PREFIX a: <http://rdfdata.eionet.europa.eu/article17/ontology/>
+PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> 
+PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+PREFIX dwc: <http://rs.tdwg.org/dwc/terms/>
+
+SELECT ?speciesurl ?name sql:group_concat(?cc, ', ') AS ?countries
+WHERE { 
+ {
+  SELECT DISTINCT  ?speciesurl ?name ?cc
+  WHERE {
+  GRAPH ?sourcefile {
+    ?subj a a:SpeciesRegionalReport;
+          a:forSpecies ?speciesurl .
+  }
+  GRAPH <http://eunis.eea.europa.eu/rdf/species.rdf.gz> {
+    ?speciesurl dwc:scientificName ?name
+  }
+  ?envelope rod:hasFile ?sourcefile .
+  ?envelope rod:released ?released . FILTER(?released > "2013-01-01"^^xsd:date)
+  ?envelope rod:locality ?locurl .
+  ?locurl rod:loccode ?cc
+  } ORDER BY ?cc
+ }
+} GROUP BY ?speciesurl ?name
+ORDER BY ?name
+]]></entry>
+
 </properties>

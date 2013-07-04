@@ -25,7 +25,6 @@
                                     <stripes:link beanclass="${actionBean.class.name}" rel="nofollow">
                                         <c:out value="${query.title}"/>
                                         <stripes:param name="query" value="${query.id}"/>
-                                        <stripes:param name="execute" value=""/>
                                     </stripes:link>
                                 </dt>
                                 <dd>
@@ -42,21 +41,35 @@
                 
                     <div style="font-weight:bold">Select a query:</div>
                     <c:if test="${not empty actionBean.queries}">
-                        <stripes:form beanclass="${actionBean.class.name}" method="post">
+                        <stripes:form beanclass="${actionBean.class.name}" method="get">
 	                        <p>
 	                            <stripes:select name="query">
 	                                <stripes:options-collection collection="${actionBean.queries}" label="title" value="id"/>
 	                            </stripes:select>
-	                            <stripes:submit name="execute" value="Execute query"/>
+	                            <stripes:submit name="defaultEvent" value="Execute query"/>
 	                        </p>
                         </stripes:form>
                     </c:if>
                     <c:if test="${empty actionBean.queries}">
                         <p>No selectable queries were found! Please use the "Contact us" link if you think this is incorrect.</p>
                     </c:if>
-                    <div>
-                        <p>Here come the query results...</p>
-                    </div>
+                    <c:choose>
+                        <c:when test="${not empty actionBean.queryResultCols && not empty actionBean.queryResultRows}">
+							<div style="overflow-x:auto ">
+							    <display:table name="actionBean.queryResultRows" class="sortable" pagesize="30" sort="list" requestURI="${actionBean.urlBinding}">
+							        <c:forEach var="cl" items="${actionBean.queryResultCols}">
+							            <display:column property="${cl.property}" title="${cl.title}" sortable="${cl.sortable}" decorator="eionet.eunis.util.decorators.ForeignDataColumnDecorator"/>
+							              </c:forEach>
+							          </display:table>
+							      </div>
+							<c:if test="${not empty actionBean.attribution}">
+							    <b>Source:</b> ${actionBean.attribution}
+							</c:if>
+		                </c:when>
+		                <c:otherwise>
+		                    <div style="font-weight:bold">Query didn't return any result!</div>
+		                </c:otherwise>
+		            </c:choose>
                 </c:otherwise>
             </c:choose>
 

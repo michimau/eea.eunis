@@ -92,6 +92,7 @@ public class LinkedData {
 
     /**
      * Calls {@link #executeQuery(String, int)} with the integer argument set to -1.
+     *
      * @param queryId Query to execute.
      * @throws Exception Covers all exceptions.
      */
@@ -261,5 +262,21 @@ public class LinkedData {
         }
 
         return resultList;
+    }
+
+    /**
+     * Returns the given attribute of the given query.
+     *
+     * @param queryId The query's identifier.
+     * @param attrName The attribute's name.
+     * @return The value of the attribute.
+     */
+    public String getQueryAttribute(String queryId, String attrName) {
+
+        if (props == null) {
+            return null;
+        } else {
+            return props.getProperty(queryId + "." + attrName);
+        }
     }
 }

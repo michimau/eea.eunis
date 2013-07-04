@@ -1,6 +1,9 @@
 package eionet.eunis.stripes.actions;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -9,9 +12,11 @@ import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
 import eionet.eunis.dto.ForeignDataQueryDTO;
 import eionet.eunis.rdf.LinkedData;
+import eionet.sparqlClient.helpers.ResultValue;
 
 /**
  * ActionBean for global external data queries.
@@ -23,6 +28,15 @@ import eionet.eunis.rdf.LinkedData;
 @UrlBinding("/externalglobal")
 public class ExternalDataGlobalActionBean extends AbstractStripesAction {
 
+    /** The static Log4j logger for this class. */
+    private static final Logger LOGGER = Logger.getLogger(ExternalDataGlobalActionBean.class);
+
+    /** The name of the query-type attribute used in properties file. */
+    private static final String QUERY_TYPE_ATTRIBUTE = "querytype";
+
+    /** The notation of SPARQL query type. */
+    private static final String SPARQL_QUERY_TYPE = "SPARQL";
+
     /** The default JSP that this action bean resolutes to. */
     public static final String DEFAULT_JSP = "/stripes/global-external-data.jsp";
 
@@ -30,10 +44,19 @@ public class ExternalDataGlobalActionBean extends AbstractStripesAction {
     public static final String LINKED_DATA_PROPERTIES_FILE_NAME = "externaldata_global.xml";
 
     /** Linked data helper initialized from properties file. */
-    public static final LinkedData LINKED_DATA_HELPER = createLinkedDataHelper();
+    private LinkedData linkedDataHelper = createLinkedDataHelper();
 
     /** The query to be executed. This is query identifier, as it comes from the queries resource file. */
     private String query;
+
+    /** The columns of the executed query's result list, as they are returned by {@link LinkedData#getCols()}. */
+    private ArrayList<Map<String, Object>> queryResultCols;
+
+    /** The rows of the executed query's result list, as they are returned by {@link LinkedData#getRows()}. */
+    private ArrayList<HashMap<String, ResultValue>> queryResultRows;
+
+    /** The executed query result attribution, as it comes from {@link LinkedData#getAttribution()}. */
+    private String attribution;
 
     /**
      * The default event handler.
@@ -41,38 +64,48 @@ public class ExternalDataGlobalActionBean extends AbstractStripesAction {
      * @return Resolution to go to.
      */
     @DefaultHandler
-    public Resolution defaultHandler() {
-        return new ForwardResolution(DEFAULT_JSP);
-    }
+    public Resolution defaultEvent() {
 
-    /**
-     * Executes a linked-data query submitted by the user. The query is to be looked from {@link #query}.
-     * @return Resolution to go to.
-     */
-    public Resolution execute() {
         if (isQuerySelected()) {
-            showMessage("Selected query: " + query);
-        } else {
-            showWarning("No query selected!");
+
+            String queryType = linkedDataHelper.getQueryAttribute(query, QUERY_TYPE_ATTRIBUTE);
+            queryType = queryType == null ? StringUtils.EMPTY : queryType.trim();
+
+            if (queryType.equalsIgnoreCase(SPARQL_QUERY_TYPE)) {
+                try {
+                    linkedDataHelper.executeQuery(query, -1);
+                    queryResultCols = linkedDataHelper.getCols();
+                    queryResultRows = linkedDataHelper.getRows();
+                    attribution = linkedDataHelper.getAttribution();
+                    showMessage("Query \"" + query + "\" successfully executed, see results below.");
+                } catch (Exception e) {
+                    String msg = "The execution of query \"" + query + "\" failed with technical error: ";
+                    showWarning(msg + e);
+                    LOGGER.error(msg, e);
+                }
+            } else {
+                showWarning("Selected query type (" + queryType + ") not supported yet!");
+            }
         }
         return new ForwardResolution(DEFAULT_JSP);
     }
 
     /**
-     * Just a convenient accessor for JSP to access {@link #LINKED_DATA_HELPER}.
+     * Getter for {@link #linkedDataHelper}.
      *
-     * @return The {@link #LINKED_DATA_HELPER}.
+     * @return The {@link #linkedDataHelper}.
      */
     public LinkedData getLinkedDataHelper() {
-        return LINKED_DATA_HELPER;
+        return linkedDataHelper;
     }
 
     /**
-     * A JSP-convenient accessor for the {@link LinkedData#getQueryObjects()} of {@link #LINKED_DATA_HELPER}.
+     * A JSP-convenient accessor for the {@link LinkedData#getQueryObjects()} of {@link #linkedDataHelper}.
+     *
      * @return The list of query-objects in the linked data helper.
      */
     public List<ForeignDataQueryDTO> getQueries() {
-        return LINKED_DATA_HELPER == null ? null : LINKED_DATA_HELPER.getQueryObjects();
+        return linkedDataHelper == null ? null : linkedDataHelper.getQueryObjects();
     }
 
     /**
@@ -95,6 +128,27 @@ public class ExternalDataGlobalActionBean extends AbstractStripesAction {
      */
     public boolean isQuerySelected() {
         return StringUtils.isNotBlank(query);
+    }
+
+    /**
+     * @return the queryResultCols
+     */
+    public ArrayList<Map<String, Object>> getQueryResultCols() {
+        return queryResultCols;
+    }
+
+    /**
+     * @return the queryResultRows
+     */
+    public ArrayList<HashMap<String, ResultValue>> getQueryResultRows() {
+        return queryResultRows;
+    }
+
+    /**
+     * @return the attribution
+     */
+    public String getAttribution() {
+        return attribution;
     }
 
     /**

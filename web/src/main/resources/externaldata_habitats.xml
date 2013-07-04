@@ -6,7 +6,7 @@
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
   <entry key="queries">deliveries art17ranges art17distribution habitatdistribution
-  natranges2012  </entry>
+  natconcl2012  </entry>
 
 <!-- -->
 <!-- .endpoint, .title and .query are mandatory for all queries -->
@@ -177,26 +177,27 @@ FILTER(?rdfType IN (art17:Habitattypesummary, art17:HabitatTypeManualAssessment)
 ]]></entry>
 
 
-  <entry key="natranges2012.endpoint">http://cr.eionet.europa.eu/sparql</entry>
-  <entry key="natranges2012.title">Ranges for this habitat type reported in 2013 under Article 17, Habitats Directive</entry>
-  <entry key="natranges2012.attribution"><![CDATA[
+  <entry key="natconcl2012.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="natconcl2012.title">Conclusions for this habitat type reported in 2013 under Article 17, Habitats Directive</entry>
+  <entry key="natconcl2012.attribution"><![CDATA[
 <div style="font-size:130%; background-color: #ff8080;border:1px solid gray;margin:1em 3em;padding:0.5em;text-align:center">Unvalidated data: country deliveries</div>
 ]]></entry>
 <!-- .summary - use HTML format - i.e. escape & and < -->
-  <entry key="natranges2012.summary"><![CDATA[Assessments on the conservation status of the habitat types 
+  <entry key="natconcl2012.summary"><![CDATA[Assessments on the conservation status of the habitat types 
    and species of Community interest have been carried out in EU 25 for the period 2007-2012, 
    compiled as part of the Habitats Directive - Article 17 reporting process. 
    The data summary sheet for habitat type conservation status provides an overview per biogeographical region.
 ]]></entry>
-  <entry key="natranges2012.column.filetitle">Source</entry>
-  <entry key="natranges2012.link.filetitle">sourcefile</entry>
-  <entry key="natranges2012.column.country">Country</entry>
-  <entry key="natranges2012.column.region">Region</entry>
-  <entry key="natranges2012.column.range_surface_area">Surface of range</entry>
-  <entry key="natranges2012.column.conclusion_range">Range conclusion</entry>
-  <entry key="natranges2012.column.range_trend">Range trend</entry>
-  <entry key="natranges2012.column.range_trend_period">Period</entry>
-  <entry key="natranges2012.query"><![CDATA[
+  <entry key="natconcl2012.column.filetitle">Source</entry>
+  <entry key="natconcl2012.link.filetitle">sourcefile</entry>
+  <entry key="natconcl2012.column.country">Country</entry>
+  <entry key="natconcl2012.column.region">Region</entry>
+  <entry key="natconcl2012.column.conclusion_range">Range</entry>
+  <entry key="natconcl2012.column.conclusion_structure">Structure</entry>
+  <entry key="natconcl2012.column.conclusion_area">Area</entry>
+  <entry key="natconcl2012.column.conclusion_future">Future</entry>
+  <entry key="natconcl2012.column.conclusion_assessment">Overall</entry>
+  <entry key="natconcl2012.query"><![CDATA[
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 PREFIX dct: <http://purl.org/dc/terms/> 
 PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> 
@@ -206,32 +207,35 @@ SELECT ?filetitle
    IRI(bif:concat('http://cdr.eionet.europa.eu/Converters/run_conversion?file=',
       SUBSTR(STR(?sourcefile),29),'&conv=350&source=remote#', ?habitatcode)) AS ?sourcefile
    ?country ?region
-   ?range_surface_area ?conclusion_range ?range_trend ?range_trend_period
+   ?conclusion_range ?conclusion_structure ?conclusion_area ?conclusion_future ?conclusion_assessment
 WHERE {
   GRAPH ?sourcefile {
     ?regionalrep a a:HabitatTypeRegionalReport ;
                  a:forHabitat <http://eunis.eea.europa.eu/habitats/[IDENTIFIER]>;
                  a:habitatcode ?habitatcode;
-                 a:region ?regionUri;
-                 a:range_trend_period ?range_trend_period;
-                 a:range_surface_area ?range_surface_area;
-                 a:range_trend ?range_trendU;
-                 a:conclusion_range ?conclusion_rangeU ;
-                 a:conclusion_future ?conclusion_futureU
+                 a:region ?regionUri .
   }
+  OPTIONAL { ?regionalrep  a:conclusion_range _:conclusion_range .
+    _:conclusion_range rdfs:label ?conclusion_range }
+  OPTIONAL { ?regionalrep  a:conclusion_structure _:conclusion_structure .
+    _:conclusion_structure rdfs:label ?conclusion_structure }
+  OPTIONAL { ?regionalrep  a:conclusion_area _:conclusion_area .
+    _:conclusion_area rdfs:label ?conclusion_area }
+  OPTIONAL { ?regionalrep  a:conclusion_future _:conclusion_future .
+    _:conclusion_future rdfs:label ?conclusion_future }
+  OPTIONAL { ?regionalrep  a:conclusion_assessment _:conclusion_assessment .
+    _:conclusion_assessment rdfs:label ?conclusion_assessment }
   ?envelope rod:hasFile ?sourcefile .
-  ?envelope rod:released ?released . FILTER(?released > "2012-01-01"^^xsd:date)
+  ?envelope rod:released ?released . FILTER(?released > "2013-01-01"^^xsd:date)
   ?envelope rod:locality _:locurl .
   _:locurl rdfs:label ?country .
   ?envelope dct:title ?filetitle .
 
   ?regionUri rdfs:label ?region .
-  ?conclusion_rangeU rdfs:label ?conclusion_range .
-  ?conclusion_futureU rdfs:label ?conclusion_future .
-  ?range_trendU rdfs:label ?range_trend
+
 } ORDER BY ?country ?region
 ]]></entry>
-  <entry key="natranges2012.codes"><![CDATA[
+  <entry key="natconcl2012.codes"><![CDATA[
 PREFIX a: <http://rdfdata.eionet.europa.eu/article17/ontology/>
 PREFIX rod: <http://rod.eionet.europa.eu/schema.rdf#> 
 PREFIX eunis: <http://eunis.eea.europa.eu/rdf/habitats-schema.rdf#>
@@ -244,7 +248,7 @@ WHERE {
   }
   ?habitaturl eunis:code ?habitatcode .
   ?envelope rod:hasFile ?sourcefile .
-  ?envelope rod:released ?released . FILTER(?released > "2012-01-01"^^xsd:date)
+  ?envelope rod:released ?released . FILTER(?released > "2013-01-01"^^xsd:date)
 }
 ]]></entry>
 

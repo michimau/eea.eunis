@@ -69,14 +69,21 @@ public class LinkedData {
 
             queryObjects = new ArrayList<ForeignDataQueryDTO>();
             for (String queryId : queries) {
-                INatureObjectAttrDao dao = DaoFactory.getDaoFactory().getNatureObjectAttrDao();
-                boolean resultExists = dao.queryResultExists(natureObjId, queryId, queriesName);
+
+                boolean resultExists = false;
+                if (natureObjId != null) {
+                    INatureObjectAttrDao dao = DaoFactory.getDaoFactory().getNatureObjectAttrDao();
+                    resultExists = dao.queryResultExists(natureObjId, queryId, queriesName);
+                }
+
                 if (natureObjId == null || (natureObjId != null && resultExists)) {
                     ForeignDataQueryDTO dto = new ForeignDataQueryDTO();
                     dto.setId(queryId);
                     dto.setTitle(props.getProperty(queryId + ".title"));
                     dto.setSummary(props.getProperty(queryId + ".summary"));
                     dto.setQuery(props.getProperty(queryId + ".query"));
+                    dto.setQueryType(props.getProperty(queryId + ".querytype"));
+                    dto.setEndpoint(props.getProperty(queryId + ".endpoint"));
                     queryObjects.add(dto);
                 }
             }
@@ -84,22 +91,35 @@ public class LinkedData {
     }
 
     /**
+     * Calls {@link #executeQuery(String, int)} with the integer argument set to -1.
+     * @param queryId Query to execute.
+     * @throws Exception Covers all exceptions.
+     */
+    public void executeQuery(String queryId) throws Exception {
+        executeQuery(queryId, -1);
+    }
+
+    /**
+     * Executes the given external-data query for the given object id. All occurrences of "[IDENTIFIER]" in the query will be
+     * replaced by the supplied object id, unless the object id equals -1.
      *
-     * @param queryId
-     * @param id
-     * @throws Exception
+     * @param queryId The id of the query to execute.
+     * @param id The id of the object for which the query is executed.
+     * @throws Exception Covers all exceptions that might be thrown.
      */
     public void executeQuery(String queryId, int id) throws Exception {
 
         if (props != null && queryId != null) {
+
             String query = props.getProperty(queryId + ".query");
             String endpoint = props.getProperty(queryId + ".endpoint");
             attribution = props.getProperty(queryId + ".attribution");
 
             if (!StringUtils.isBlank(query) && !StringUtils.isBlank(endpoint)) {
+
                 // Replace [IDENTIFIER] in query
-                if (query.contains("[IDENTIFIER]")) {
-                    query = query.replace("[IDENTIFIER]", new Integer(id).toString());
+                if (id != -1 && query.contains("[IDENTIFIER]")) {
+                    query = query.replace("[IDENTIFIER]", String.valueOf(id));
                 }
                 QueryExecutor executor = new QueryExecutor();
                 executor.executeQuery(endpoint, query);

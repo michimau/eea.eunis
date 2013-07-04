@@ -1,13 +1,14 @@
 package eionet.eunis.stripes.actions;
 
 
-import org.apache.log4j.Logger;
-
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.SimpleMessage;
 import net.sourceforge.stripes.controller.AnnotatedClassActionResolver;
 import net.sourceforge.stripes.validation.SimpleError;
+
+import org.apache.log4j.Logger;
+
 import ro.finsiel.eunis.WebContentManagement;
 import eionet.eunis.stripes.EunisActionBeanContext;
 import eionet.eunis.util.Constants;
@@ -30,6 +31,7 @@ public class AbstractStripesAction implements ActionBean {
      * @see net.sourceforge.stripes.action.ActionBean#getContext()
      * {@inheritDoc}
      */
+    @Override
     public EunisActionBeanContext getContext() {
         return context;
     }
@@ -38,6 +40,7 @@ public class AbstractStripesAction implements ActionBean {
      * @see net.sourceforge.stripes.action.ActionBean#setContext(net.sourceforge.stripes.action.ActionBeanContext)
      * {@inheritDoc}
      */
+    @Override
     public void setContext(ActionBeanContext context) {
         this.context = (EunisActionBeanContext) context;
     }

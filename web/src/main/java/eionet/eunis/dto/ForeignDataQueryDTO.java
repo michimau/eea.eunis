@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.simpleframework.xml.Root;
 
 /**
- * 
+ *
  * @author Risto Alt
  */
 @Root
@@ -20,6 +20,8 @@ public class ForeignDataQueryDTO implements Serializable {
     private String title;
     private String summary;
     private String query;
+    private String queryType;
+    private String endpoint;
 
     public String getId() {
         return id;
@@ -51,5 +53,21 @@ public class ForeignDataQueryDTO implements Serializable {
 
     public void setQuery(String query) {
         this.query = query;
+    }
+
+    public String getQueryType() {
+        return queryType;
+    }
+
+    public void setQueryType(String queryType) {
+        this.queryType = queryType;
+    }
+
+    public String getEndpoint() {
+        return endpoint;
+    }
+
+    public void setEndpoint(String endpoint) {
+        this.endpoint = endpoint;
     }
 }

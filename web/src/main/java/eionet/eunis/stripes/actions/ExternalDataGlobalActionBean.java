@@ -1,108 +1,116 @@
 package eionet.eunis.stripes.actions;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
-import org.apache.commons.lang.StringUtils;
-
-import eionet.eunis.dto.ForeignDataQueryDTO;
-import eionet.eunis.rdf.LinkedData;
-import eionet.sparqlClient.helpers.ResultValue;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 
+import org.apache.commons.lang.StringUtils;
+
+import eionet.eunis.dto.ForeignDataQueryDTO;
+import eionet.eunis.rdf.LinkedData;
 
 /**
- * ActionBean for global external data queries
- * 
+ * ActionBean for global external data queries.
+ *
  * @author Jaak Kapten
+ * @author Jaanus Heinlaid
  */
 
 @UrlBinding("/externalglobal")
 public class ExternalDataGlobalActionBean extends AbstractStripesAction {
 
-    /** LinkedData tab variables. */
-    private List<ForeignDataQueryDTO> queries;
+    /** The default JSP that this action bean resolutes to. */
+    public static final String DEFAULT_JSP = "/stripes/global-external-data.jsp";
+
+    /** The name of the properties files from which the linked data helper will be created. */
+    public static final String LINKED_DATA_PROPERTIES_FILE_NAME = "externaldata_global.xml";
+
+    /** Linked data helper initialized from properties file. */
+    public static final LinkedData LINKED_DATA_HELPER = createLinkedDataHelper();
+
+    /** The query to be executed. This is query identifier, as it comes from the queries resource file. */
     private String query;
-    private ArrayList<Map<String, Object>> queryResultCols;
-    private ArrayList<HashMap<String, ResultValue>> queryResultRows;
-    private String attribution;
 
-    
-    @DefaultHandler
-    public Resolution index() {
-        linkeddata(1367, 4046);
-        return new ForwardResolution("/stripes/global-external-data.jsp");
-    }
-    
     /**
-     * Populate the member variables used in the "linkeddata" tab.
-     * 
-     * @param idSpecies
-     *            - The species ID.
+     * The default event handler.
+     *
+     * @return Resolution to go to.
      */
-    private void linkeddata(int idSpecies, Integer natObjId) {
-        try {
-            Properties props = new Properties();
-            props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_species.xml"));
-            LinkedData fd = new LinkedData(props, natObjId, "_linkedDataQueries");
-            queries = fd.getQueryObjects();
-            if (!StringUtils.isBlank(query)) {
+    @DefaultHandler
+    public Resolution defaultHandler() {
+        return new ForwardResolution(DEFAULT_JSP);
+    }
 
-                fd.executeQuery(query, idSpecies);
-                queryResultCols = fd.getCols();
-                queryResultRows = fd.getRows();
-
-                attribution = fd.getAttribution();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    /**
+     * Executes a linked-data query submitted by the user. The query is to be looked from {@link #query}.
+     * @return Resolution to go to.
+     */
+    public Resolution execute() {
+        if (isQuerySelected()) {
+            showMessage("Selected query: " + query);
+        } else {
+            showWarning("No query selected!");
         }
+        return new ForwardResolution(DEFAULT_JSP);
     }
 
+    /**
+     * Just a convenient accessor for JSP to access {@link #LINKED_DATA_HELPER}.
+     *
+     * @return The {@link #LINKED_DATA_HELPER}.
+     */
+    public LinkedData getLinkedDataHelper() {
+        return LINKED_DATA_HELPER;
+    }
+
+    /**
+     * A JSP-convenient accessor for the {@link LinkedData#getQueryObjects()} of {@link #LINKED_DATA_HELPER}.
+     * @return The list of query-objects in the linked data helper.
+     */
     public List<ForeignDataQueryDTO> getQueries() {
-        return queries;
+        return LINKED_DATA_HELPER == null ? null : LINKED_DATA_HELPER.getQueryObjects();
     }
 
-    public void setQueries(List<ForeignDataQueryDTO> queries) {
-        this.queries = queries;
-    }
-
+    /**
+     * @return the query
+     */
     public String getQuery() {
         return query;
     }
 
+    /**
+     * @param query the query to set
+     */
     public void setQuery(String query) {
         this.query = query;
     }
 
-    public ArrayList<Map<String, Object>> getQueryResultCols() {
-        return queryResultCols;
+    /**
+     *
+     * @return
+     */
+    public boolean isQuerySelected() {
+        return StringUtils.isNotBlank(query);
     }
 
-    public void setQueryResultCols(ArrayList<Map<String, Object>> queryResultCols) {
-        this.queryResultCols = queryResultCols;
-    }
+    /**
+     * Creates {@link LinkedData} helper from {@link #LINKED_DATA_PROPERTIES_FILE_NAME}.
+     *
+     * @return The created helper.
+     */
+    private static LinkedData createLinkedDataHelper() {
 
-    public ArrayList<HashMap<String, ResultValue>> getQueryResultRows() {
-        return queryResultRows;
+        Properties props = new Properties();
+        ClassLoader classLoader = ExternalDataGlobalActionBean.class.getClassLoader();
+        try {
+            props.loadFromXML(classLoader.getResourceAsStream(LINKED_DATA_PROPERTIES_FILE_NAME));
+            return new LinkedData(props, null, null);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load " + LINKED_DATA_PROPERTIES_FILE_NAME, e);
+        }
     }
-
-    public void setQueryResultRows(ArrayList<HashMap<String, ResultValue>> queryResultRows) {
-        this.queryResultRows = queryResultRows;
-    }
-
-    public String getAttribution() {
-        return attribution;
-    }
-
-    public void setAttribution(String attribution) {
-        this.attribution = attribution;
-    }
-    
 }

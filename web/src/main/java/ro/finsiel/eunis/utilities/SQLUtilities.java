@@ -420,21 +420,27 @@ public class SQLUtilities {
     }
 
     /**
-     * @param parameterizedSQL
-     * @param values
-     * @param rsReader
-     * @param conn
-     * @throws SQLException
+     * Executes given parameterized SQL statement with the given parameter values, passing the result set rows to the given reader.
+     * Uses connection created internally from arguments supplied via {@link #Init(String, String, String, String)}.
+     *
+     * @param parameterizedSQL The given parameterized SQL.
+     * @param values The given SQL parameter values.
+     * @param rsReader The given result set reader.
+     * @throws SQLException When executing the query and traversing its result.
      */
     public void executeQuery(String parameterizedSQL, List<Object> values, ResultSetBaseReader rsReader) throws SQLException {
-        ResultSet rs = null;
-        PreparedStatement pstmt = null;
-        Connection con = null;
 
         try {
             Class.forName(SQL_DRV);
-            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("Unable to locate JDBC driver: " + SQL_DRV, e);
+        }
 
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+        Connection con = null;
+        try {
+            con = DriverManager.getConnection(SQL_URL, SQL_USR, SQL_PWD);
             pstmt = prepareStatement(parameterizedSQL, values, con);
             rs = pstmt.executeQuery();
             if (rs != null) {
@@ -447,8 +453,6 @@ public class SQLUtilities {
                     }
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             try {
                 if (con != null) {
@@ -461,6 +465,7 @@ public class SQLUtilities {
                     pstmt.close();
                 }
             } catch (SQLException e) {
+                // Ignore closing exceptions.
             }
         }
 

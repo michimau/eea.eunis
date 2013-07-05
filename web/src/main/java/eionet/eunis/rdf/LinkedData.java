@@ -10,13 +10,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import net.sourceforge.stripes.action.ActionBeanContext;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.utilities.EunisUtil;
+import ro.finsiel.eunis.utilities.SQLUtilities;
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dao.INatureObjectAttrDao;
 import eionet.eunis.dto.ForeignDataQueryDTO;
+import eionet.eunis.util.sql.SPARQLQueryResultSQLReader;
 import eionet.sparqlClient.helpers.QueryExecutor;
 import eionet.sparqlClient.helpers.QueryResult;
 import eionet.sparqlClient.helpers.ResultValue;
@@ -27,6 +31,12 @@ import eionet.sparqlClient.helpers.ResultValue;
  * @author Risto Alt
  */
 public class LinkedData {
+
+    /** Placeholder for object identifier in the queries to be executed. */
+    private static final String IDENTIFIER_PLACEHOLDER = "[IDENTIFIER]";
+
+    /** Placeholder for the currently running EUNIS webapp context path in the queries to be executed. */
+    private static final String CONTEXT_PATH_PLACEHOLDER = "[CONTEXT_PATH]";
 
     private static final Logger logger = Logger.getLogger(LinkedData.class);
 
@@ -47,6 +57,8 @@ public class LinkedData {
     private ArrayList<Map<String, Object>> cols;
     /** Source of the data. */
     private String attribution;
+    /** The {@link ActionBeanContext} under which this particular {@link LinkedData} instance is exploited. */
+    private ActionBeanContext actionBeanContext;
 
     /**
      * Create helper on the basis of given properties, and for the given queries of the given nature object.
@@ -101,8 +113,8 @@ public class LinkedData {
     }
 
     /**
-     * Executes the given external-data query for the given object id. All occurrences of "[IDENTIFIER]" in the query will be
-     * replaced by the supplied object id, unless the object id equals -1.
+     * Executes the given external-data query for the given object id. All occurrences of {@link #IDENTIFIER_PLACEHOLDER} in the
+     * query will be replaced by the supplied object id.
      *
      * @param queryId The id of the query to execute.
      * @param id The id of the object for which the query is executed.
@@ -118,10 +130,16 @@ public class LinkedData {
 
             if (!StringUtils.isBlank(query) && !StringUtils.isBlank(endpoint)) {
 
-                // Replace [IDENTIFIER] in query
-                if (id != -1 && query.contains("[IDENTIFIER]")) {
-                    query = query.replace("[IDENTIFIER]", String.valueOf(id));
+                // Replace object identifier placeholder in query.
+                if (query.contains(IDENTIFIER_PLACEHOLDER)) {
+                    query = query.replace(IDENTIFIER_PLACEHOLDER, String.valueOf(id));
                 }
+
+                // Replace webapp context path placeholder in the query.
+                if (query.contains(CONTEXT_PATH_PLACEHOLDER)) {
+                    query = query.replace(CONTEXT_PATH_PLACEHOLDER, getContextPath());
+                }
+
                 QueryExecutor executor = new QueryExecutor();
                 executor.executeQuery(endpoint, query);
                 QueryResult result = executor.getResults();
@@ -132,6 +150,40 @@ public class LinkedData {
                 logger.error("query or endpoint is not defined in linkeddata properties file for: " + queryId);
             }
         }
+    }
+
+    /**
+     * Executes the assumed SQL query by the given identifier, using the given {@link SQLUtilities} as helper.
+     *
+     * @param queryId Given query identifier. The query must be an SQL query.
+     * @throws Exception Covers all exceptions.
+     */
+    public void executeSQLQuery(String queryId, SQLUtilities sqlUtilities) throws Exception {
+
+        if (StringUtils.isBlank(queryId)) {
+            throw new IllegalArgumentException("Query identifier must not be blank!");
+        }
+
+        if (sqlUtilities == null) {
+            throw new IllegalArgumentException("SQL utilities helper must not be null!");
+        }
+
+        String query = props.getProperty(queryId + ".query");
+        if (StringUtils.isBlank(query)) {
+            throw new IllegalArgumentException("No query behind the given query identifier!");
+        }
+
+        // Replace webapp context path placeholder in the query.
+        if (query.contains(CONTEXT_PATH_PLACEHOLDER)) {
+            query = query.replace(CONTEXT_PATH_PLACEHOLDER, getContextPath());
+        }
+
+        SPARQLQueryResultSQLReader sqlReader = new SPARQLQueryResultSQLReader();
+        sqlUtilities.executeQuery(query, null, sqlReader);
+
+        SPARQLQueryResultMock queryResultMock = new SPARQLQueryResultMock(sqlReader);
+        generateRows(queryId, queryResultMock);
+        generateCols(queryId, queryResultMock);
     }
 
     /**
@@ -277,6 +329,79 @@ public class LinkedData {
             return null;
         } else {
             return props.getProperty(queryId + "." + attrName);
+        }
+    }
+
+    /**
+     * @return the actionBeanContext
+     */
+    public ActionBeanContext getActionBeanContext() {
+        return actionBeanContext;
+    }
+
+    /**
+     * @param actionBeanContext the actionBeanContext to set
+     */
+    public void setActionBeanContext(ActionBeanContext actionBeanContext) {
+        this.actionBeanContext = actionBeanContext;
+    }
+
+    /**
+     * A null-safe getter for the webapp context path extracted from {@link #actionBeanContext}.
+     * If the latter is null then an empty string is returned.
+     *
+     * @return The context path.
+     */
+    private String getContextPath() {
+        return actionBeanContext == null ? StringUtils.EMPTY : actionBeanContext.getRequest().getContextPath();
+    }
+
+    /**
+     * An extension of {@link QueryResult} that can be initialized with results from {@link SPARQLQueryResultSQLReader}.
+     * Overrides {@link QueryResult#getRows()} and {@link QueryResult#getCols()} by returning the values of corresponding
+     * methods in {@link SPARQLQueryResultSQLReader}.
+     *
+     * @author jaanus
+     */
+    public static class SPARQLQueryResultMock extends QueryResult {
+    
+        /** Rows as the came from {@link SPARQLQueryResultSQLReader} at construction. */
+        private ArrayList<HashMap<String, ResultValue>> rows;
+    
+        /** Columns as the came from {@link SPARQLQueryResultSQLReader} at construction. */
+        private ArrayList<Map<String, Object>> cols;
+    
+        /**
+         * First calls {@link QueryResult#QueryResult(org.openrdf.query.TupleQueryResult)} and then creates an instance
+         * with rows and columns from the given {@link SPARQLQueryResultSQLReader}.
+         *
+         * @param sqlReader The given {@link SPARQLQueryResultSQLReader}.
+         * @throws Exception Thrown by super-class constructor.
+         */
+        private SPARQLQueryResultMock(SPARQLQueryResultSQLReader sqlReader) throws Exception {
+            super(null);
+            this.rows = sqlReader.getRows();
+            this.cols = sqlReader.getCols();
+        }
+    
+        /*
+         * (non-Javadoc)
+         *
+         * @see eionet.sparqlClient.helpers.QueryResult#getRows()
+         */
+        @Override
+        public ArrayList<HashMap<String, ResultValue>> getRows() {
+            return rows;
+        }
+    
+        /*
+         * (non-Javadoc)
+         *
+         * @see eionet.sparqlClient.helpers.QueryResult#getCols()
+         */
+        @Override
+        public ArrayList<Map<String, Object>> getCols() {
+            return cols;
         }
     }
 }

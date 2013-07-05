@@ -29,7 +29,7 @@ In connection with the work on the checklist for reporting under Article 12 of t
   <entry key="n2000birds.column.COMMENT">Comment</entry>
 
   <entry key="n2000birds.query"><![CDATA[
-SELECT a.OBJECT AS N2000CODE, SCIENTIFIC_NAME, AUTHOR, CONCAT('/species/',ID_SPECIES) AS FACTSHEET, c.OBJECT AS COMMENT
+SELECT a.OBJECT AS N2000CODE, SCIENTIFIC_NAME, AUTHOR, CONCAT('[CONTEXT_PATH]/species/',ID_SPECIES) AS FACTSHEET, c.OBJECT AS COMMENT
 FROM chm62edt_species AS s
 JOIN chm62edt_nature_object_attributes AS a ON s.ID_NATURE_OBJECT=a.ID_NATURE_OBJECT AND a.NAME="sameSynonymN2000"
 LEFT JOIN chm62edt_nature_object_attributes AS c ON s.ID_NATURE_OBJECT=c.ID_NATURE_OBJECT AND c.NAME="_n2000CodeComment"
@@ -52,7 +52,7 @@ WHERE ID_GROUP_SPECIES=5 ORDER BY a.OBJECT
   <entry key="n2000other.column.COMMENT">Comment</entry>
 
   <entry key="n2000other.query"><![CDATA[
-SELECT a.OBJECT AS N2000CODE, SCIENTIFIC_NAME, AUTHOR, CONCAT('/species/',ID_SPECIES) AS FACTSHEET, c.OBJECT AS COMMENT
+SELECT a.OBJECT AS N2000CODE, SCIENTIFIC_NAME, AUTHOR, CONCAT('[CONTEXT_PATH]/species/',ID_SPECIES) AS FACTSHEET, c.OBJECT AS COMMENT
 FROM chm62edt_species AS s
 JOIN chm62edt_nature_object_attributes AS a ON s.ID_NATURE_OBJECT=a.ID_NATURE_OBJECT AND a.NAME="sameSynonymN2000"
 LEFT JOIN chm62edt_nature_object_attributes AS c ON s.ID_NATURE_OBJECT=c.ID_NATURE_OBJECT AND c.NAME="_n2000CodeComment"

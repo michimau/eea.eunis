@@ -54,6 +54,9 @@
         <a class="navItemLevel1" href="<%=request.getContextPath()%>/combined-search.jsp" accesskey="c" title="<%=cm.cmsPhrase("Combined search tool")%>"><%=cm.cmsPhrase("Combined search")%></a>
       </li>
       <li class="navTreeItem visualNoMarker">
+        <a class="navItemLevel1" href="<%=request.getContextPath()%>/externalglobal" accesskey="x" title="<%=cm.cmsPhrase("Global queries for external data")%>"><%=cm.cmsPhrase("Global queries")%></a>
+      </li>
+      <li class="navTreeItem visualNoMarker">
         <a class="navItemLevel1" href="<%=request.getContextPath()%>/gis-tool.jsp" accesskey="u" title="<%=cm.cmsPhrase("Interactive maps")%>"><%=cm.cmsPhrase("Interactive maps")%></a>
       </li>
 <%--

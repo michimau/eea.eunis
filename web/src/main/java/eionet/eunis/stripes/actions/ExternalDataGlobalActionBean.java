@@ -34,14 +34,16 @@ public class ExternalDataGlobalActionBean extends AbstractStripesAction {
     /** The name of the query-type attribute used in properties file. */
     private static final String QUERY_TYPE_ATTRIBUTE = "querytype";
 
-    /** The notation of SPARQL query type. */
-    private static final String SPARQL_QUERY_TYPE = "SPARQL";
-
     /** The default JSP that this action bean resolutes to. */
     public static final String DEFAULT_JSP = "/stripes/global-external-data.jsp";
 
     /** The name of the properties files from which the linked data helper will be created. */
     public static final String LINKED_DATA_PROPERTIES_FILE_NAME = "externaldata_global.xml";
+
+    /** The query types supported by this action bean. */
+    public enum QueryType {
+        SQL, SPARQL
+    };
 
     /** Linked data helper initialized from properties file. */
     private LinkedData linkedDataHelper = createLinkedDataHelper();
@@ -71,16 +73,24 @@ public class ExternalDataGlobalActionBean extends AbstractStripesAction {
             String queryType = linkedDataHelper.getQueryAttribute(query, QUERY_TYPE_ATTRIBUTE);
             queryType = queryType == null ? StringUtils.EMPTY : queryType.trim();
 
-            if (queryType.equalsIgnoreCase(SPARQL_QUERY_TYPE)) {
+            boolean isSPARQL = queryType.equalsIgnoreCase(QueryType.SPARQL.name());
+            boolean isSQL = queryType.equalsIgnoreCase(QueryType.SQL.name());
+
+            if (isSPARQL || isSQL) {
                 try {
-                    linkedDataHelper.executeQuery(query, -1);
+                    linkedDataHelper.setActionBeanContext(getContext());
+                    if (isSPARQL) {
+                        linkedDataHelper.executeQuery(query, -1);
+                    } else {
+                        linkedDataHelper.executeSQLQuery(query, getContext().getSqlUtilities());
+                    }
                     queryResultCols = linkedDataHelper.getCols();
                     queryResultRows = linkedDataHelper.getRows();
                     attribution = linkedDataHelper.getAttribution();
                     showMessage("Query \"" + query + "\" successfully executed, see results below.");
                 } catch (Exception e) {
                     String msg = "The execution of query \"" + query + "\" failed with technical error: ";
-                    showWarning(msg + e);
+                    showWarning(msg + e.getMessage());
                     LOGGER.error(msg, e);
                 }
             } else {

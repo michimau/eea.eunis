@@ -1,0 +1,1736 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+     You can run this change log on your database as many times as you want, it will ignore the
+     changes that are already applied. It also means that you can't modify an existing revision.
+     Always add to the end.
+
+     Use the maven goals: liquibase:update, liquibase:status or liquibase:changelogSync
+      Potentially with -Dliquibase.dropFirst=true
+     $Id$
+ -->
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="roug" id="rev-1">
+        <sql>CREATE TABLE chm62edt_abundance (
+  ID_ABUNDANCE int(11) NOT NULL default '0',
+  CODE varchar(2) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_ABUNDANCE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-2">
+        <sql>CREATE TABLE chm62edt_activity_influence (
+  ID_ACTIVITY_INFLUENCE varchar(8) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_ACTIVITY_INFLUENCE),
+  UNIQUE KEY IDX_NAME (NAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-3">
+        <sql>CREATE TABLE chm62edt_activity_intensity (
+  ID_ACTIVITY_INTENSITY varchar(8) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_ACTIVITY_INTENSITY),
+  UNIQUE KEY IDX_NAME (NAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-4">
+        <sql>CREATE TABLE chm62edt_altitude (
+  ID_ALTITUDE int(11) NOT NULL default '0',
+  NAME varchar(64) NOT NULL default '''''',
+  DESCRIPTION text,
+  OLD_CODE varchar(2) default NULL,
+  PRIMARY KEY  (ID_ALTITUDE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-5">
+        <sql>CREATE TABLE chm62edt_area_legal_text (
+  ID_GEOSCOPE int(11) NOT NULL default '-1',
+  ID_DC int(11) NOT NULL default '-1',
+  LEGAL_DATE date NOT NULL default '0000-00-00',
+  ID_LEGAL_AREA_EVENT int(11) NOT NULL default '0',
+  DESCRIPTION text,
+  INPUT_DATE date default NULL,
+  PRIMARY KEY  (ID_GEOSCOPE,ID_DC,ID_LEGAL_AREA_EVENT,LEGAL_DATE),
+  KEY IDX_ID_DC (ID_DC),
+  KEY IDX_ID_LEGAL_AREA_EVENT (ID_LEGAL_AREA_EVENT)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-6">
+        <sql>CREATE TABLE chm62edt_biogeoregion (
+  ID_BIOGEOREGION int(11) NOT NULL default '-1',
+  ID_GEOSCOPE int(11) NOT NULL default '-1',
+  CODE varchar(2) NOT NULL default '''''',
+  CODE_EEA varchar(5) default NULL,
+  NAME varchar(128) NOT NULL default '''''',
+  SELECTION int(11) default NULL,
+  PRIMARY KEY  (ID_BIOGEOREGION,ID_GEOSCOPE),
+  KEY IDX_CODE (CODE),
+  KEY IDX_NAME (NAME),
+  KEY IDX_ID_GEOSCOPE (ID_GEOSCOPE),
+  KEY IDX_ID_BIOGEOREGION (ID_BIOGEOREGION)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-7">
+        <sql>CREATE TABLE chm62edt_chemistry (
+  ID_CHEMISTRY int(11) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION text,
+  PRIMARY KEY  (ID_CHEMISTRY)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-8">
+        <sql>CREATE TABLE chm62edt_class_code (
+  ID_CLASS_CODE int(11) NOT NULL default '0',
+  NAME varchar(255) NOT NULL default '''''',
+  SORT_ORDER smallint(6) default NULL,
+  UNVALIDATED_CODE char(1) default NULL,
+  CURRENT_DATA int(11) default NULL,
+  LEGAL int(11) default NULL,
+  ID_DC int(11) default NULL,
+  CURRENT_CLASSIFICATION tinyint(4) default NULL,
+  PRIMARY KEY  (ID_CLASS_CODE),
+  KEY IDX_SORT_ORDER (SORT_ORDER),
+  KEY IDX_LEGAL (LEGAL),
+  KEY IDX_NAME (NAME),
+  KEY IDX_CURRENT_CLASSIFICATION (CURRENT_CLASSIFICATION),
+  KEY IDX_ID_DC (ID_DC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-9">
+        <sql>CREATE TABLE chm62edt_climate (
+  ID_CLIMATE int(11) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION text,
+  PRIMARY KEY  (ID_CLIMATE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-10">
+        <sql>CREATE TABLE chm62edt_conservation_status (
+  ID_CONSERVATION_STATUS int(11) NOT NULL default '0',
+  CODE varchar(10) default NULL,
+  NAME varchar(128) default NULL,
+  DESCRIPTION text,
+  RED_BOOK_DATE date default NULL,
+  ID_CONSERVATION_STATUS_LINK int(11) default NULL,
+  ID_DC int(11) NOT NULL default '-1',
+  PRIMARY KEY  (ID_CONSERVATION_STATUS),
+  KEY IDX_ID_DC (ID_DC),
+  KEY IDX_ID_CONSERVATION_STATUS_LINK (ID_CONSERVATION_STATUS_LINK),
+  KEY IDX_CODE (CODE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-11">
+        <sql>CREATE TABLE chm62edt_country (
+  ID_COUNTRY int(11) NOT NULL default '-1',
+  ID_GEOSCOPE int(11) NOT NULL default '-1',
+  EUNIS_AREA_CODE varchar(3) NOT NULL default '''''',
+  AREA_NAME varchar(255) default NULL,
+  AREA_NAME_EN varchar(255) default NULL,
+  AREA_NAME_FR varchar(255) default NULL,
+  ISO_2L varchar(2) default NULL,
+  ISO_3L varchar(3) default NULL,
+  ISO_N smallint(6) default NULL,
+  ISO_2_WCMC varchar(2) default NULL,
+  ISO_3_WCMC varchar(3) default NULL,
+  ISO_3_WCMC_PARENT varchar(3) default NULL,
+  TEL_CODE smallint(6) default NULL,
+  AREUCD varchar(2) default NULL,
+  SORT_NUMBER int(11) default NULL,
+  COUNTRY_TYPE char(1) default NULL,
+  SURFACE int(11) default NULL,
+  NGO int(11) default NULL,
+  NUMBER_DESIGN_AREA int(11) default NULL,
+  SOURCE varchar(255) default NULL,
+  POLITICAL_STATUS varchar(100) default NULL,
+  POPULATION int(11) default NULL,
+  POP_DENSITY double default NULL,
+  CAPITAL varchar(64) default NULL,
+  CURRENCY_CODE varchar(3) default NULL,
+  CURRENCY_NAME varchar(64) default NULL,
+  LAT_MIN varchar(16) default NULL,
+  LAT_MAX varchar(16) default NULL,
+  LONG_MIN varchar(16) default NULL,
+  LONG_MAX varchar(16) default NULL,
+  ALT_MIN int(11) default NULL,
+  ALT_MAX int(11) default NULL,
+  SELECTION int(11) default NULL,
+  PRIMARY KEY  (ID_COUNTRY,ID_GEOSCOPE),
+  KEY IDX_ID_GEOSCOPE (ID_GEOSCOPE),
+  KEY IDX_AREA_NAME_EN (AREA_NAME_EN),
+  KEY IDX_EUNIS_AREA_CODE (EUNIS_AREA_CODE),
+  KEY IDX_ISO_2L (ISO_2L,ISO_3L),
+  KEY IDX_SELECTION (SELECTION),
+  KEY IDX_ISO_3L (ISO_3L)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-12">
+        <sql>CREATE TABLE chm62edt_country_biogeoregion (
+  CODE_BIOGEOREGION varchar(16) NOT NULL default '''''',
+  CODE_COUNTRY varchar(16) NOT NULL default '''''',
+  PERCENT int(11) default NULL,
+  PRIMARY KEY  (CODE_BIOGEOREGION,CODE_COUNTRY),
+  KEY IDX_CODE_COUNTRY (CODE_COUNTRY),
+  KEY IDX_CODE_BIOGEOREGION (CODE_BIOGEOREGION)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-13">
+        <sql>CREATE TABLE chm62edt_country_sites_factsheet (
+  SOURCE_DB varchar(50) NOT NULL default '''''',
+  AREA_NAME_EN varchar(254) NOT NULL default '''''',
+  NUMBER_OF_SITES varchar(255) default NULL,
+  NUMBER_OF_SPECIES varchar(255) default '0',
+  NUMBER_OF_HABITATS varchar(255) default '0',
+  NO_SITES_PER_SQUARE_KM varchar(255) default NULL,
+  PROCENT_NO_SITES_WITH_SURFACE_AVAILABLE varchar(255) default NULL,
+  TOTAL_SIZE varchar(255) default NULL,
+  AVG_SIZE varchar(255) default NULL,
+  NO_OF_PRIORITY_SITES varchar(255) default NULL,
+  TOTAL_SIZE_FOR_PRIORITY_SITES varchar(255) default NULL,
+  STANDARD_DEVIATION varchar(255) default NULL,
+  PRIMARY KEY  (SOURCE_DB,AREA_NAME_EN),
+  KEY IDX_SOURCE_DB (SOURCE_DB),
+  KEY IDX_AREA_NAME_EN (AREA_NAME_EN)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-14">
+        <sql>CREATE TABLE chm62edt_cover (
+  ID_COVER int(11) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_COVER)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-15">
+        <sql>CREATE TABLE chm62edt_depth (
+  ID_DEPTH int(11) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_DEPTH)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-16">
+        <sql>CREATE TABLE chm62edt_designations (
+  ID_DESIGNATION varchar(16) NOT NULL default '0',
+  ID_GEOSCOPE int(11) NOT NULL default '0',
+  ID_DC int(11) default NULL,
+  DESCRIPTION varchar(255) NOT NULL default '''''',
+  DESCRIPTION_EN varchar(255) default NULL,
+  DESCRIPTION_FR varchar(255) default NULL,
+  ORIGINAL_DATASOURCE varchar(255) default NULL,
+  CDDA_SITES char(1) default 'N',
+  TOTAL_AREA varchar(50) default NULL,
+  REFERENCE_AREA varchar(50) default NULL,
+  NATIONAL_LAW text,
+  NATIONAL_CATEGORY varchar(8) default NULL,
+  NATIONAL_LAW_REFERENCE text,
+  NATIONAL_LAW_AGENCY text,
+  DATA_SOURCE varchar(255) default NULL,
+  TOTAL_NUMBER int(11) default '0',
+  REFERENCE_NUMBER varchar(50) default NULL,
+  REFERENCE_DATE varchar(16) default NULL,
+  REMARK text,
+  REMARK_SOURCE varchar(255) default NULL,
+  SOURCE_DB varchar(32) NOT NULL default '''',
+  PRIMARY KEY  (ID_DESIGNATION,ID_GEOSCOPE),
+  KEY IDX_ID_DESIGNATION (ID_DESIGNATION),
+  KEY IDX_ID_GEOSCOPE (ID_GEOSCOPE),
+  KEY IDX_NATIONAL_CATEGORY (NATIONAL_CATEGORY),
+  KEY IDX_ID_DC (ID_DC),
+  KEY IDX_DESCRIPTION (DESCRIPTION),
+  KEY IDX_DESCRIPTION_EN (DESCRIPTION_EN),
+  KEY IDX_DESCRIPTION_FR (DESCRIPTION_FR)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-17">
+        <sql>CREATE TABLE chm62edt_distribution_status (
+  ID_DISTRIBUTION_STATUS int(11) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION text,
+  ID_DC int(11) NOT NULL default '-1',
+  PRIMARY KEY  (ID_DISTRIBUTION_STATUS),
+  KEY IDX_ID_DC (ID_DC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-18">
+        <sql>CREATE TABLE chm62edt_exposure (
+  ID_EXPOSURE int(11) NOT NULL default '0',
+  NAME varchar(128) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_EXPOSURE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-19">
+        <sql>CREATE TABLE chm62edt_faithfulness (
+  ID_FAITHFULNESS int(11) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(100) default NULL,
+  PRIMARY KEY  (ID_FAITHFULNESS)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-20">
+        <sql>CREATE TABLE chm62edt_frequencies (
+  ID_FREQUENCIES int(11) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_FREQUENCIES)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-21">
+        <sql>CREATE TABLE chm62edt_geomorph (
+  ID_GEOMORPH int(11) NOT NULL default '0',
+  NAME varchar(64) NOT NULL default '''''',
+  DESCRIPTION text,
+  OLD_CODE varchar(16) default NULL,
+  PRIMARY KEY  (ID_GEOMORPH)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-22">
+        <sql>CREATE TABLE chm62edt_geoscope (
+  ID_GEOSCOPE int(11) NOT NULL default '0',
+  ID_GEOSCOPE_PARENT int(11) NOT NULL default '-1',
+  ID_DC int(11) default '-1',
+  AREA_TYPE varchar(10) NOT NULL default '''''',
+  PRIMARY KEY  (ID_GEOSCOPE,ID_GEOSCOPE_PARENT),
+  KEY IDX_ID_GEOSCOPE (ID_GEOSCOPE),
+  KEY IDX_ID_DC (ID_DC),
+  KEY IDX_ID_GEOSCOPE_PARENT_GEOSCOPE (ID_GEOSCOPE_PARENT,ID_GEOSCOPE),
+  KEY IDX_ID_GEOSCOPE_PARENT (ID_GEOSCOPE_PARENT),
+  KEY IDX_AREA_TYPE (AREA_TYPE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-23">
+        <sql>CREATE TABLE chm62edt_global (
+  ID_GLOBAL varchar(8) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_GLOBAL),
+  UNIQUE KEY IDX_NAME (NAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-24">
+        <sql>CREATE TABLE chm62edt_glossary (
+  TERM varchar(64) NOT NULL default '''''',
+  ID_LANGUAGE int(11) NOT NULL default '25',
+  SOURCE varchar(255) NOT NULL default '''''',
+  DEFINITION text NOT NULL,
+  LINK_DESCRIPTION varchar(255) default NULL,
+  LINK_URL varchar(255) default NULL,
+  REFERENCE varchar(255) default NULL,
+  DATE_CHANGED varchar(100) default NULL,
+  CURRENT tinyint(4) default NULL,
+  ID_DC int(11) default NULL,
+  TERM_DOMAIN varchar(255) default NULL,
+  SEARCH_DOMAIN varchar(255) default NULL,
+  PRIMARY KEY  (TERM,ID_LANGUAGE,SOURCE),
+  KEY IDX_TERM (TERM),
+  KEY IDX_ID_DC (ID_DC),
+  KEY IDX_DEFINITION (DEFINITION(255))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-25">
+        <sql>CREATE TABLE chm62edt_grid (
+  NAME char(16) NOT NULL default '''''',
+  LATITUDE char(32) NOT NULL default '''''',
+  LONGITUDE char(32) NOT NULL default '''''',
+  ID_DC int(11) NOT NULL default '-1',
+  PROSPECT int(11) default NULL,
+  PRIMARY KEY  (NAME,LATITUDE,LONGITUDE,ID_DC),
+  KEY IDX_ID_DC (ID_DC),
+  KEY IDX_NAME (NAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-26">
+        <sql>CREATE TABLE chm62edt_group_species (
+  ID_GROUP_SPECIES int(11) NOT NULL default '0',
+  COMMON_NAME varchar(50) NOT NULL default '''''',
+  SCIENTIFIC_NAME varchar(50) NOT NULL default '''''',
+  SELECTION int(11) default NULL,
+  ID_DC int(11) default '-1',
+  PRIMARY KEY  (ID_GROUP_SPECIES),
+  KEY IDX_SCIENTIFIC_NAME (SCIENTIFIC_NAME),
+  KEY IDX_ID_DC (ID_DC),
+  KEY IDX_COMMON_NAME (COMMON_NAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-27">
+        <sql>CREATE TABLE chm62edt_habitat (
+  ID_HABITAT int(16) NOT NULL default '0',
+  ID_NATURE_OBJECT int(11) NOT NULL default '-1',
+  SCIENTIFIC_NAME varchar(255) default NULL,
+  DESCRIPTION text,
+  CODE_2000 varchar(4) default NULL,
+  CODE_ANNEX1 varchar(25) default NULL,
+  PRIORITY int(11) default NULL,
+  EUNIS_HABITAT_CODE varchar(16) NOT NULL default '',
+  CLASS_REF varchar(16) default NULL,
+  CODE_PART_2 varchar(64) default NULL,
+  LEVEL int(11) default NULL,
+  ORIGINALLY_PUBLISHED_CODE varchar(25) default NULL,
+  PRIMARY KEY  (ID_HABITAT),
+  UNIQUE KEY IDX_ID_NATURE_OBJECT (ID_NATURE_OBJECT),
+  KEY IDX_SCIENTIFIC_NAME (SCIENTIFIC_NAME),
+  KEY IDX_CODE_ANNEX1 (CODE_ANNEX1),
+  KEY IDX_EUNIS_HABITAT_CODE (EUNIS_HABITAT_CODE),
+  KEY IDX_LEVEL (LEVEL),
+  KEY IDX_DESCRIPTION (DESCRIPTION(255)),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-28">
+        <sql>CREATE TABLE chm62edt_habitat_change (
+  ID_HABITAT_CHANGE int(16) NOT NULL default '-1',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_HABITAT_CHANGE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-29">
+        <sql>CREATE TABLE chm62edt_habitat_class_code (
+  ID_HABITAT int(16) NOT NULL default '-1',
+  ID_CLASS_CODE int(11) NOT NULL default '-1',
+  TITLE varchar(255) NOT NULL default '''''',
+  RELATION_TYPE char(1) NOT NULL default '''',
+  CODE varchar(30) NOT NULL default '''''',
+  PRIMARY KEY  (ID_HABITAT,ID_CLASS_CODE,TITLE,RELATION_TYPE,CODE),
+  KEY IDX_ID_HABITAT (ID_HABITAT),
+  KEY IDX_ID_CLASS_CODE (ID_CLASS_CODE),
+  KEY IDX_CODE (CODE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-30">
+        <sql>CREATE TABLE chm62edt_habitat_description (
+  ID_HABITAT int(16) NOT NULL default '-1',
+  ID_LANGUAGE int(11) NOT NULL default '0',
+  DESCRIPTION text NOT NULL,
+  OWNER_TEXT text,
+  ID_DC int(11) default NULL,
+  PRIMARY KEY  (ID_HABITAT,ID_LANGUAGE,DESCRIPTION(255)),
+  KEY IDX_ID_DC (ID_DC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-31">
+        <sql>CREATE TABLE chm62edt_habitat_habitat (
+  ID_HABITAT int(16) NOT NULL default '-1',
+  ID_HABITAT_LINK int(16) NOT NULL default '-1',
+  RELATION_TYPE char(1) NOT NULL default '''',
+  PRIMARY KEY  (ID_HABITAT,ID_HABITAT_LINK,RELATION_TYPE),
+  KEY IDX_ID_HABITAT_LINK (ID_HABITAT,ID_HABITAT_LINK),
+  KEY IDX_ID_HABITAT_LINK_ID_HABITAT (ID_HABITAT_LINK,ID_HABITAT),
+  KEY IDX_ID_HABITAT (ID_HABITAT)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-32">
+        <sql>CREATE TABLE chm62edt_habitat_international_name (
+  ID_HABITAT int(11) NOT NULL default '0',
+  ID_LANGUAGE int(11) NOT NULL default '0',
+  INTERNATIONAL_NAME varchar(255) NOT NULL default '''''',
+  PRIMARY KEY  (ID_HABITAT,ID_LANGUAGE),
+  KEY IDX_ID_HABITAT (ID_HABITAT),
+  KEY IDX_ID_LANGUAGE (ID_LANGUAGE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-33">
+        <sql>CREATE TABLE chm62edt_habitat_key_navigation (
+  ID_PAGE int(11) default NULL,
+  PAGE_LEVEL int(11) default NULL,
+  PAGE_NAME varchar(255) default NULL,
+  PAGE_NOTES text,
+  ID_QUESTION varchar(10) default NULL,
+  QUESTION_CODE varchar(10) default NULL,
+  QUESTION_LABEL varchar(255) default NULL,
+  QUESTION_EXPLANATION text,
+  POSSIBLE_ANSWERS int(11) default NULL,
+  ID_ANSWER int(11) default NULL,
+  ANSWER_LABEL varchar(100) default NULL,
+  ID_QUESTION_LINK varchar(50) default NULL,
+  ID_HABITAT_LINK int(16) default NULL,
+  ADDITIONAL_INFO varchar(100) default NULL,
+  PAGE_CODE varchar(10) default NULL,
+  KEY IDX_HABITAT_KEY_NAVIGATION (ID_PAGE,PAGE_LEVEL,PAGE_NAME,ID_QUESTION,ID_ANSWER,ID_QUESTION_LINK,ID_HABITAT_LINK),
+  KEY IDX_PAGE_LEVEL (PAGE_LEVEL),
+  KEY IDX_PAGE_CODE (PAGE_CODE),
+  KEY IDX_QUESTION_CODE (QUESTION_CODE),
+  KEY IDX_ID_ANSWER (ID_ANSWER)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-34">
+        <sql>CREATE TABLE chm62edt_habitat_references (
+  ID_HABITAT int(16) NOT NULL default '-1',
+  ID_DC int(11) NOT NULL default '-1',
+  HAVE_SOURCE int(11) NOT NULL default '0',
+  HAVE_OTHER_REFERENCES int(11) NOT NULL default '0',
+  PRIMARY KEY  (ID_HABITAT,ID_DC),
+  KEY IDX_ID_HABITAT (ID_HABITAT),
+  KEY IDX_ID_DC (ID_DC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-35">
+        <sql>CREATE TABLE chm62edt_habitat_syntaxa (
+  ID_HABITAT int(16) NOT NULL default '-1',
+  ID_SYNTAXA int(11) NOT NULL default '-1',
+  RELATION_TYPE char(1) default NULL,
+  ID_SYNTAXA_SOURCE char(1) default NULL,
+  PRIMARY KEY  (ID_HABITAT,ID_SYNTAXA),
+  KEY IDX_RELATION_TYPE (RELATION_TYPE),
+  KEY IDX_ID_SYNTAXA_SOURCE (ID_SYNTAXA_SOURCE),
+  KEY IDX_ID_HABITAT (ID_HABITAT)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-36">
+        <sql>CREATE TABLE chm62edt_human_activity (
+  ID_HUMAN_ACTIVITY int(11) NOT NULL default '0',
+  NAME varchar(128) default NULL,
+  DESCRIPTION text,
+  PRIMARY KEY  (ID_HUMAN_ACTIVITY)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-37">
+        <sql>CREATE TABLE chm62edt_humidity (
+  ID_HUMIDITY int(11) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION text,
+  PRIMARY KEY  (ID_HUMIDITY)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-38">
+        <sql>CREATE TABLE chm62edt_impact (
+  ID_IMPACT int(11) NOT NULL default '0',
+  NAME varchar(255) default NULL,
+  DESCRIPTION text,
+  NATURA2000_CODE varchar(16) default NULL,
+  NATURA2000_NAME varchar(255) default NULL,
+  PRIMARY KEY  (ID_IMPACT)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-39">
+        <sql>CREATE TABLE chm62edt_info_quality (
+  ID_INFO_QUALITY int(11) NOT NULL default '0',
+  STATUS varchar(50) NOT NULL default '''''',
+  DESCRIPTION varchar(255) NOT NULL default '''''',
+  PRIMARY KEY  (ID_INFO_QUALITY)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-40">
+        <sql>CREATE TABLE chm62edt_isolation (
+  ID_ISOLATION varchar(8) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_ISOLATION),
+  UNIQUE KEY IDX_NAME (NAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-41">
+        <sql>CREATE TABLE chm62edt_language (
+  ID_LANGUAGE int(11) NOT NULL default '0',
+  CODE varchar(2) NOT NULL default '''''',
+  NAME_EN varchar(255) NOT NULL default '''''',
+  SELECTION int(11) default NULL,
+  NAME_FR varchar(255) default NULL,
+  NAME_DE varchar(255) default NULL,
+  FAMILY varchar(255) default NULL,
+  COMMENT varchar(255) default NULL,
+  PRIMARY KEY  (ID_LANGUAGE),
+  KEY IDX_CODE (CODE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-42">
+        <sql>CREATE TABLE chm62edt_legal_area_event (
+  ID_LEGAL_AREA_EVENT int(11) NOT NULL default '0',
+  NAME varchar(128) NOT NULL default '''''',
+  DESCRIPTION text,
+  PRIMARY KEY  (ID_LEGAL_AREA_EVENT)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-43">
+        <sql>CREATE TABLE chm62edt_legal_status (
+  ID_LEGAL_STATUS int(11) NOT NULL default '0',
+  ANNEX varchar(50) NOT NULL default '''''',
+  PRIORITY int(11) default NULL,
+  COMMENT text,
+  CODE varchar(8) default NULL,
+  PRIMARY KEY  (ID_LEGAL_STATUS)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-44">
+        <sql>CREATE TABLE chm62edt_life_form (
+  ID_LIFE_FORM int(11) NOT NULL default '0',
+  NAME varchar(128) default NULL,
+  DESCRIPTION text,
+  DATE_ADDED date default NULL,
+  PRIMARY KEY  (ID_LIFE_FORM)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-45">
+        <sql>CREATE TABLE chm62edt_light_intensity (
+  ID_LIGHT_INTENSITY int(11) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION text,
+  PRIMARY KEY  (ID_LIGHT_INTENSITY)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-46">
+        <sql>CREATE TABLE chm62edt_motivation (
+  ID_MOTIVATION int(11) NOT NULL default '0',
+  NAME varchar(128) default NULL,
+  DESCRIPTION text,
+  PRIMARY KEY  (ID_MOTIVATION)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-47">
+        <sql>CREATE TABLE chm62edt_natura2000_activity_code (
+  ID_ACTIVITY_CODE varchar(8) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_ACTIVITY_CODE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-48">
+        <sql>CREATE TABLE chm62edt_natura2000_conservation_code (
+  ID_CONSERVATION_CODE varchar(8) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_CONSERVATION_CODE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-49">
+        <sql>CREATE TABLE chm62edt_natura2000_motivation_code (
+  ID_MOTIVATION_CODE varchar(8) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_MOTIVATION_CODE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-50">
+        <sql>CREATE TABLE chm62edt_natura2000_site_type (
+  ID_SITE_TYPE varchar(8) NOT NULL default '0',
+  NAME varchar(255) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_SITE_TYPE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-51">
+        <sql>CREATE TABLE chm62edt_nature_object (
+  ID_NATURE_OBJECT int(11) NOT NULL default '0',
+  ID_DC int(11) NOT NULL default '-1',
+  ORIGINAL_CODE varchar(16) default NULL,
+  TYPE varchar(32) NOT NULL default '''''',
+  PRIMARY KEY  (ID_NATURE_OBJECT),
+  UNIQUE KEY ID_NATURE_OBJECT (ID_NATURE_OBJECT),
+  KEY IDX_TYPE (TYPE),
+  KEY IDX_ID_DC (ID_DC),
+  KEY IDX_ORIGINAL_CODE (ORIGINAL_CODE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-52">
+        <sql>CREATE TABLE chm62edt_nature_object_attributes (
+  ID_NATURE_OBJECT int(11) NOT NULL default '-1',
+  NAME varchar(50) NOT NULL default '',
+  OBJECT varchar(255) NOT NULL default '',
+  OBJECTLANG varchar(10) NOT NULL default '',
+  TYPE enum('reference','','string','integer','decimal','boolean','dateTime','date') default '',
+  PRIMARY KEY  (ID_NATURE_OBJECT,NAME,OBJECT,OBJECTLANG),
+  KEY ID_NATURE_OBJECT (ID_NATURE_OBJECT),
+  KEY PREDICATE (NAME),
+  KEY OBJECT (OBJECT),
+  CONSTRAINT chm62edt_nature_object_attributes_ibfk_1 FOREIGN KEY (ID_NATURE_OBJECT) REFERENCES chm62edt_nature_object (ID_NATURE_OBJECT) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-53">
+        <sql>CREATE TABLE chm62edt_nature_object_geoscope (
+  ID_NATURE_OBJECT int(11) NOT NULL default '-1',
+  ID_NATURE_OBJECT_LINK int(11) NOT NULL default '-1',
+  ID_DC int(11) NOT NULL default '-1',
+  ID_GEOSCOPE int(11) NOT NULL default '-1',
+  ID_REPORT_ATTRIBUTES int(11) NOT NULL default '-1',
+  PRIMARY KEY  (ID_NATURE_OBJECT,ID_NATURE_OBJECT_LINK,ID_DC,ID_GEOSCOPE,ID_REPORT_ATTRIBUTES),
+  KEY IDX_ID_NATURE_OBJECT_LINK (ID_NATURE_OBJECT_LINK),
+  KEY IDX_ID_GEOSCOPE (ID_GEOSCOPE),
+  KEY IDX_ID_REPORT_ATTRIBUTES (ID_REPORT_ATTRIBUTES),
+  KEY IDX_ID_NATURE_OBJECT (ID_NATURE_OBJECT),
+  KEY IDX_ID_DC (ID_DC),
+  KEY IDX_ID_NATURE_OBJECT_LINK_NATUR (ID_NATURE_OBJECT_LINK,ID_NATURE_OBJECT),
+  KEY IDX_ID_NATURE_OBJECT_GEOSCOPE (ID_NATURE_OBJECT,ID_GEOSCOPE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-54">
+        <sql>CREATE TABLE chm62edt_nature_object_links (
+  ID_NATURE_OBJECT int(11) NOT NULL default '-1',
+  LINK varchar(1024) default NULL,
+  LINKTEXT varchar(64) default NULL,
+  KEY ID_NATURE_OBJECT (ID_NATURE_OBJECT)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-55">
+        <sql>CREATE TABLE chm62edt_nature_object_picture (
+  ID_OBJECT varchar(16) NOT NULL default '-1',
+  NATURE_OBJECT_TYPE varchar(16) NOT NULL default '''''',
+  NAME varchar(128) NOT NULL default '''''',
+  FILE_NAME varchar(255) NOT NULL default '''''',
+  DESCRIPTION varchar(255) default NULL,
+  MAIN_PIC tinyint(1) NOT NULL default '0',
+  MAX_WIDTH int(10) unsigned default '0',
+  MAX_HEIGHT int(10) unsigned default '0',
+  SOURCE varchar(255) default '',
+  SOURCE_URL varchar(1024) default NULL,
+  LICENSE enum('','CC BY','CC BY-SA','CC BY-ND','CC BY-NC','CC BY-NC-SA','CC BY-NC-ND','Copyrighted','Public domain') default '',
+  KEY ID_OBJECT (ID_OBJECT),
+  KEY MAIN_PIC (MAIN_PIC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-56">
+        <sql>CREATE TABLE chm62edt_nature_object_report_type (
+  ID_NATURE_OBJECT int(11) NOT NULL default '-1',
+  ID_NATURE_OBJECT_LINK int(11) NOT NULL default '-1',
+  ID_GEOSCOPE int(11) default NULL,
+  ID_REPORT_TYPE int(11) NOT NULL default '-1',
+  ID_REPORT_ATTRIBUTES int(11) NOT NULL default '-1',
+  ID_DC int(11) NOT NULL default '-1',
+  PRIMARY KEY  (ID_NATURE_OBJECT,ID_NATURE_OBJECT_LINK,ID_REPORT_TYPE,ID_REPORT_ATTRIBUTES),
+  KEY IDX_ID_NATURE_OBJECT (ID_NATURE_OBJECT),
+  KEY IDX_ID_NATURE_OBJECT_LINK (ID_NATURE_OBJECT_LINK),
+  KEY IDX_ID_REPORT_ATTRIBUTES (ID_REPORT_ATTRIBUTES),
+  KEY IDX_ID_REPORT_TYPE (ID_REPORT_TYPE),
+  KEY IDX_ID_GEOSCOPE (ID_GEOSCOPE),
+  KEY IDX_ID_NATURE_OBJECT_LINK_NATUR (ID_NATURE_OBJECT_LINK,ID_NATURE_OBJECT),
+  KEY IDX_ID_NATURE_OBJECT_NATURE_LIN (ID_NATURE_OBJECT,ID_NATURE_OBJECT_LINK),
+  KEY IDX_ID_DC (ID_DC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-57">
+        <sql>CREATE TABLE chm62edt_population (
+  ID_POPULATION varchar(8) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_POPULATION),
+  UNIQUE KEY IDX_NAME (NAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-58">
+        <sql>CREATE TABLE chm62edt_population_unit (
+  ID_POPULATION_UNIT int(11) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_POPULATION_UNIT)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-59">
+        <sql>CREATE TABLE chm62edt_region_codes (
+  ID_REGION_CODE varchar(16) NOT NULL default '0',
+  NAME varchar(255) NOT NULL default '''''',
+  DESCRIPTION text,
+  PRIMARY KEY  (ID_REGION_CODE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-60">
+        <sql>CREATE TABLE chm62edt_relative_surface (
+  ID_RELATIVE_SURFACE varchar(8) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_RELATIVE_SURFACE),
+  UNIQUE KEY IDX_ID_RELATIVE_SURFACE (ID_RELATIVE_SURFACE),
+  UNIQUE KEY NAME (NAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-61">
+        <sql>CREATE TABLE chm62edt_report_attributes (
+  ID_REPORT_ATTRIBUTES int(11) NOT NULL default '0',
+  NAME varchar(64) NOT NULL default '''''',
+  TYPE varchar(16) default NULL,
+  VALUE text,
+  PRIMARY KEY  (ID_REPORT_ATTRIBUTES,NAME),
+  KEY IDX_NAME (NAME),
+  KEY IDX_NAME_ATTRIBUTES (NAME,ID_REPORT_ATTRIBUTES),
+  KEY IDX_VALUE (VALUE(255))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-62">
+        <sql>CREATE TABLE chm62edt_report_type (
+  ID_REPORT_TYPE int(11) NOT NULL default '0',
+  ID_LOOKUP varchar(50) NOT NULL default '-1',
+  LOOKUP_TYPE enum('ABUNDANCE','ALTITUDE','CHEMISTRY','CLIMATE','CONSERVATION_STATUS','COVER','DEPTH','DISTRIBUTION_STATUS','EXPOSURE','FREQUENCIES','GEOMORPH','GRID','HUMAN_ACTIVITY','HUMIDITY','IMPACT','INFO_QUALITY','LANGUAGE','LEGAL_STATUS','LIFE_FORM','LIGHT_INTENSITY','POPULATION_UNIT','REGION_CODE','SALINITY','SPATIAL','SPECIES_RICHNESS','SPECIES_STATUS','SUBSTRATE','TEMPERATURE','TEMPORAL','TREND','USAGE','WATER') NOT NULL,
+  PRIMARY KEY  (ID_REPORT_TYPE,ID_LOOKUP,LOOKUP_TYPE),
+  KEY IDX_LOOKUP_TYPE (LOOKUP_TYPE),
+  KEY IDX_ID_LOOKUP (ID_LOOKUP)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-63">
+        <sql>CREATE TABLE chm62edt_reports (
+  ID_NATURE_OBJECT int(11) NOT NULL default '-1',
+  ID_DC int(11) NOT NULL default '-1',
+  ID_GEOSCOPE int(11) NOT NULL default '-1',
+  ID_GEOSCOPE_LINK int(11) NOT NULL default '-1',
+  ID_REPORT_TYPE int(11) NOT NULL default '-1',
+  ID_REPORT_ATTRIBUTES int(11) NOT NULL default '-1',
+  PRIMARY KEY  (ID_NATURE_OBJECT,ID_DC,ID_GEOSCOPE,ID_GEOSCOPE_LINK,ID_REPORT_TYPE,ID_REPORT_ATTRIBUTES),
+  KEY IDX_ID_NATURE_OBJECT (ID_NATURE_OBJECT),
+  KEY IDX_ID_GEOSCOPE (ID_GEOSCOPE),
+  KEY IDX_ID_GEOSCOPE_LINK (ID_GEOSCOPE_LINK),
+  KEY IDX_ID_REPORT_ATTRIBUTES (ID_REPORT_ATTRIBUTES),
+  KEY IDX_ID_REPORT_TYPE (ID_REPORT_TYPE),
+  KEY IDX_ID_DC (ID_DC),
+  KEY IDX_ID_NATURE_OBJECT_TYPE (ID_NATURE_OBJECT,ID_REPORT_TYPE),
+  KEY IDX_ID_REPORT_TYPE_NATURE_OBJEC (ID_REPORT_TYPE,ID_NATURE_OBJECT)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-64">
+        <sql>CREATE TABLE chm62edt_representativity (
+  ID_REPRESENTATIVITY varchar(8) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_REPRESENTATIVITY),
+  UNIQUE KEY IDX_NAME (NAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-65">
+        <sql>CREATE TABLE chm62edt_representativity_code (
+  ID_REPRESENTATIVITY varchar(8) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION varchar(255) default NULL,
+  PRIMARY KEY  (ID_REPRESENTATIVITY),
+  UNIQUE KEY IDX_NAME (NAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-66">
+        <sql>CREATE TABLE chm62edt_salinity (
+  ID_SALINITY int(11) NOT NULL default '0',
+  NAME varchar(128) NOT NULL default '''''',
+  DESCRIPTION text,
+  OLD_CODE varchar(16) default NULL,
+  USED int(11) default NULL,
+  PRIMARY KEY  (ID_SALINITY)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-67">
+        <sql>CREATE TABLE chm62edt_site_attributes (
+  ID_SITE varchar(16) NOT NULL default '''''',
+  NAME varchar(128) NOT NULL default '''''',
+  TYPE varchar(16) NOT NULL default '''''',
+  VALUE longtext NOT NULL,
+  SOURCE_TABLE varchar(32) default NULL,
+  SOURCE_DB varchar(32) NOT NULL default '''''',
+  PRIMARY KEY  (ID_SITE,NAME,SOURCE_DB),
+  KEY IDX_ID_SITE (ID_SITE),
+  KEY IDX_TYPE (TYPE),
+  KEY IDX_NAME (NAME),
+  KEY IDX_ID_SITE_NAME (ID_SITE,NAME),
+  KEY IDX_SOURCE_TABLE (SOURCE_TABLE),
+  KEY IDX_SOURCE_DB (SOURCE_DB),
+  KEY IDX_VALUE (VALUE(255))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-68">
+        <sql>CREATE TABLE chm62edt_sites (
+  ID_SITE varchar(16) NOT NULL default '0',
+  ID_NATURE_OBJECT int(11) NOT NULL default '-1',
+  ID_DESIGNATION varchar(16) default NULL,
+  ID_GEOSCOPE int(11) default NULL,
+  RESPONDENT text,
+  NAME varchar(255) NOT NULL default '''''',
+  MANAGER text,
+  COMPLEX_NAME text,
+  DISTRICT_NAME text,
+  OWNERSHIP text,
+  HISTORY text,
+  CHARACTER text,
+  DESCRIPTION text,
+  MANAGEMENT_PLAN text,
+  IUCNAT text,
+  DESIGNATION_DATE varchar(50) default NULL,
+  COMPILATION_DATE varchar(50) NOT NULL default '',
+  PROPOSED_DATE varchar(50) default NULL,
+  CONFIRMED_DATE varchar(50) default NULL,
+  UPDATE_DATE varchar(50) default NULL,
+  SPA_DATE varchar(50) default NULL,
+  SAC_DATE varchar(50) default NULL,
+  NATIONAL_CODE text,
+  NATURA_2000 text,
+  NUTS varchar(50) default NULL,
+  AREA decimal(18,9) default NULL,
+  LENGTH decimal(18,9) default NULL,
+  LONG_EW char(1) default NULL,
+  LONG_DEG int(11) default NULL,
+  LONG_MIN int(11) default NULL,
+  LONG_SEC int(11) default NULL,
+  LAT_NS char(1) default NULL,
+  LAT_DEG int(11) default NULL,
+  LAT_MIN int(11) default NULL,
+  LAT_SEC int(11) default NULL,
+  ALT_MEAN int(11) default NULL,
+  ALT_MAX int(11) default NULL,
+  ALT_MIN int(11) default NULL,
+  LONGITUDE decimal(18,9) default NULL,
+  LATITUDE decimal(18,9) default NULL,
+  CATEGORY varchar(8) default NULL,
+  SOURCE_DB varchar(32) NOT NULL default '''''',
+  PRIMARY KEY  (ID_SITE),
+  UNIQUE KEY IDX_ID_NATURE_OBJECT (ID_NATURE_OBJECT),
+  KEY IDX_NAME (NAME),
+  KEY IDX_ALT_MIN (ALT_MIN),
+  KEY IDX_ALT_MAX (ALT_MAX),
+  KEY IDX_ALT_MEAN (ALT_MEAN),
+  KEY IDX_LATITUDE (LATITUDE),
+  KEY IDX_LONGITUDE (LONGITUDE),
+  KEY IDX_AREA (AREA),
+  KEY IDX_LENGTH (LENGTH),
+  KEY IDX_LONG_DEG (LONG_DEG),
+  KEY IDX_LONG_MIN (LONG_MIN),
+  KEY IDX_LONG_SEC (LONG_SEC),
+  KEY IDX_LAT_DEG (LAT_DEG),
+  KEY IDX_LAT_MIN (LAT_MIN),
+  KEY IDX_LAT_SEC (LAT_SEC),
+  KEY IDX_LAT_NS (LAT_NS),
+  KEY IDX_LONG_EW (LONG_EW),
+  KEY IDX_DESIGNATION_DATE (DESIGNATION_DATE),
+  KEY IDX_SOURCE_DB (SOURCE_DB),
+  CONSTRAINT chm62edt_sites_ibfk_1 FOREIGN KEY (ID_NATURE_OBJECT) REFERENCES chm62edt_nature_object (ID_NATURE_OBJECT)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-69">
+        <sql>CREATE TABLE chm62edt_sites_related_designations (
+  ID_SITE varchar(16) NOT NULL default '''''',
+  ID_DESIGNATION varchar(16) NOT NULL default '''''',
+  ID_GEOSCOPE int(11) NOT NULL default '0',
+  SEQUENCE smallint(6) NOT NULL default '0',
+  OVERLAP_TYPE varchar(16) default NULL,
+  OVERLAP varchar(50) default NULL,
+  DESIGNATED_SITE varchar(255) default NULL,
+  DESIGNATION_DATE varchar(16) default NULL,
+  SOURCE_DB varchar(32) NOT NULL default '''''',
+  SOURCE_TABLE varchar(16) default NULL,
+  PRIMARY KEY  (ID_SITE,ID_DESIGNATION,SEQUENCE,ID_GEOSCOPE,SOURCE_DB),
+  KEY IDX_ID_DESIGNATION (ID_DESIGNATION),
+  KEY IDX_ID_SITE (ID_SITE),
+  KEY IDX_ISO_3L (ID_GEOSCOPE),
+  KEY IDX_SOURCE_DB (SOURCE_DB),
+  KEY IDX_SEQUENCE (SEQUENCE),
+  KEY IDX_ID_DESIGNATION_ID_SITE (ID_DESIGNATION,ID_SITE),
+  KEY IDX_SOURCE_TABLE (SOURCE_TABLE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-70">
+        <sql>CREATE TABLE chm62edt_sites_sites (
+  ID_SITE varchar(16) NOT NULL default '''''',
+  ID_SITE_LINK varchar(16) NOT NULL default '''''',
+  SEQUENCE int(11) NOT NULL default '0',
+  RELATION_TYPE varchar(32) default NULL,
+  OVERLAP decimal(15,10) default NULL,
+  WITHIN_PROJECT int(11) default NULL,
+  SOURCE_TABLE varchar(16) default NULL,
+  PRIMARY KEY  (ID_SITE,ID_SITE_LINK,SEQUENCE),
+  KEY IDX_ID_SITE_ID_SITE_LINK (ID_SITE,ID_SITE_LINK),
+  KEY IDX_ID_SITE_LINK_ID_SITE (ID_SITE_LINK,ID_SITE),
+  KEY IDX_ID_SITE (ID_SITE),
+  KEY IDX_SOURCE_TABLE (SOURCE_TABLE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-71">
+        <sql>CREATE TABLE chm62edt_soundex (
+  NAME varchar(32) NOT NULL default '',
+  PHONETIC varchar(16) NOT NULL default '',
+  OBJECT_TYPE varchar(16) NOT NULL default '',
+  PRIMARY KEY  (NAME),
+  UNIQUE KEY IDX_NAME (NAME),
+  KEY IDX_OBJECT_TYPE (OBJECT_TYPE),
+  KEY IDX_PHONETIC (PHONETIC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-72">
+        <sql>CREATE TABLE chm62edt_spatial (
+  ID_SPATIAL int(11) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION text,
+  PRIMARY KEY  (ID_SPATIAL)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-73">
+        <sql>CREATE TABLE chm62edt_species (
+  ID_SPECIES int(11) NOT NULL default '0',
+  ID_NATURE_OBJECT int(11) NOT NULL default '-1',
+  SCIENTIFIC_NAME varchar(100) NOT NULL default '''''',
+  VALID_NAME int(11) default NULL,
+  ID_SPECIES_LINK int(11) default NULL,
+  TYPE_RELATED_SPECIES varchar(32) default NULL,
+  TEMPORARY_SELECT int(11) default NULL,
+  GENUS varchar(64) default NULL,
+  SPECIES_MAP varchar(7) default NULL,
+  ID_GROUP_SPECIES int(11) NOT NULL default '0',
+  ID_TAXONOMY int(11) default NULL,
+  AUTHOR varchar(255) default NULL,
+  IGNORE_ON_MATCH tinyint(4) NOT NULL default '0',
+  PRIMARY KEY  (ID_SPECIES),
+  UNIQUE KEY IDX_ID_NATURE_OBJECT (ID_NATURE_OBJECT),
+  KEY IDX_ID_GROUP_SPECIES (ID_GROUP_SPECIES),
+  KEY IDX_ID_SPECIES_LINK (ID_SPECIES_LINK),
+  KEY IDX_VALID_NAME (VALID_NAME),
+  KEY IDX_ID_TAXONOMY (ID_TAXONOMY),
+  KEY IDX_SCIENTIFIC_NAME (SCIENTIFIC_NAME),
+  KEY IDX_TYPE_RELATED_SPECIES (TYPE_RELATED_SPECIES),
+  KEY GENUS (GENUS),
+  CONSTRAINT chm62edt_species_ibfk_1 FOREIGN KEY (ID_NATURE_OBJECT) REFERENCES chm62edt_nature_object (ID_NATURE_OBJECT)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-74">
+        <sql>CREATE TABLE chm62edt_species_richness (
+  ID_SPECIES_RICHNESS int(11) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION text,
+  PRIMARY KEY  (ID_SPECIES_RICHNESS)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-75">
+        <sql>CREATE TABLE chm62edt_species_statistics_module (
+  AREA_NAME_EN varchar(255) NOT NULL default '''''',
+  NUMBER_OF_DISTINCT_SPECIES varchar(255) default NULL,
+  NUMBER_OF_SPECIES_NAMES varchar(255) default '0',
+  NUMBER_OF_VERNACULAR_NAMES varchar(255) default '0',
+  NUMBER_OF_LANGUAGES varchar(255) default NULL,
+  NUMBER_OF_LEGAL_STATUS varchar(255) default NULL,
+  NUMBER_OF_LEGAL_INSTRUMENTS varchar(255) default NULL,
+  NUMBER_OF_INTERN_CONS_STATUS varchar(255) default NULL,
+  NUMBER_OF_NATIONAL_CONS_STATUS varchar(255) default NULL,
+  NUMBER_OF_COUNTRIES_FOR_CONS_STATUS varchar(255) default NULL,
+  NUMBER_OF_GEOGRAPHICAL_DIST varchar(255) default NULL,
+  NUMBER_OF_GRID_DISTR varchar(255) default NULL,
+  PRIMARY KEY  (AREA_NAME_EN),
+  KEY IDX_AREA_NAME_EN (AREA_NAME_EN)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-76">
+        <sql>CREATE TABLE chm62edt_species_status (
+  ID_SPECIES_STATUS int(11) NOT NULL default '0',
+  DESCRIPTION varchar(255) NOT NULL default '''''',
+  SHORT_DEFINITION varchar(255) default NULL,
+  STATUS_CODE varchar(3) default NULL,
+  PRIMARY KEY  (ID_SPECIES_STATUS)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-77">
+        <sql>CREATE TABLE chm62edt_substrate (
+  ID_SUBSTRATE int(11) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION text,
+  PRIMARY KEY  (ID_SUBSTRATE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-78">
+        <sql>CREATE TABLE chm62edt_syntaxa (
+  ID_SYNTAXA int(11) NOT NULL default '0',
+  CODE varchar(8) NOT NULL default '''''',
+  NAME varchar(255) NOT NULL default '''''',
+  AUTHOR varchar(100) default NULL,
+  SYNTAXON int(11) default NULL,
+  PRIMARY KEY  (ID_SYNTAXA),
+  KEY IDX_CODE (CODE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-79">
+        <sql>CREATE TABLE chm62edt_syntaxa_source (
+  ID_SYNTAXA_SOURCE char(1) NOT NULL default '''',
+  SOURCE varchar(255) default NULL,
+  SOURCE_ABBREV varchar(50) default NULL,
+  ID_DC int(11) default '-1',
+  PRIMARY KEY  (ID_SYNTAXA_SOURCE),
+  KEY IDX_ID_DC (ID_DC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-80">
+        <sql>CREATE TABLE chm62edt_tab_page_habitats (
+  ID_NATURE_OBJECT int(11) NOT NULL default '0',
+  GENERAL_INFORMATION char(1) NOT NULL default 'Y',
+  GEOGRAPHICAL_DISTRIBUTION char(1) NOT NULL default 'N',
+  LEGAL_INSTRUMENTS char(1) NOT NULL default 'N',
+  SPECIES char(1) NOT NULL default 'N',
+  HABITATS char(1) NOT NULL default 'N',
+  SITES char(1) NOT NULL default 'N',
+  OTHER char(1) NOT NULL default 'N',
+  LINKEDDATA char(1) NOT NULL default 'N',
+  CONSERVATION_STATUS char(1) NOT NULL default 'N',
+  PRIMARY KEY  (ID_NATURE_OBJECT)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-81">
+        <sql>CREATE TABLE chm62edt_tab_page_sites (
+  ID_NATURE_OBJECT int(11) NOT NULL default '0',
+  GENERAL_INFORMATION char(1) NOT NULL default 'Y',
+  FAUNA_FLORA char(1) NOT NULL default 'N',
+  DESIGNATION char(1) NOT NULL default 'N',
+  HABITATS char(1) NOT NULL default 'N',
+  SITES char(1) NOT NULL default 'N',
+  OTHER char(1) NOT NULL default 'N',
+  PRIMARY KEY  (ID_NATURE_OBJECT)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-82">
+        <sql>CREATE TABLE chm62edt_tab_page_species (
+  ID_NATURE_OBJECT int(11) NOT NULL default '0',
+  GENERAL_INFORMATION char(1) NOT NULL default 'Y',
+  VERNACULAR_NAMES char(1) NOT NULL default 'N',
+  GEOGRAPHICAL_DISTRIBUTION char(1) NOT NULL default 'N',
+  POPULATION char(1) NOT NULL default 'N',
+  TRENDS char(1) NOT NULL default 'N',
+  `REFERENCES` char(1) NOT NULL default 'N',
+  GRID_DISTRIBUTION char(1) NOT NULL default 'N',
+  THREAT_STATUS char(1) NOT NULL default 'N',
+  LEGAL_INSTRUMENTS char(1) NOT NULL default 'N',
+  HABITATS char(1) NOT NULL default 'N',
+  SITES char(1) NOT NULL default 'N',
+  GBIF char(1) default 'N',
+  LINKEDDATA char(1) NOT NULL default 'N',
+  CONSERVATION_STATUS char(1) default 'N',
+  PRIMARY KEY  (ID_NATURE_OBJECT)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-83">
+        <sql>CREATE TABLE chm62edt_taxonomy (
+  ID_TAXONOMY int(11) NOT NULL,
+  LEVEL varchar(16) default NULL,
+  NAME varchar(45) default NULL,
+  GROUP varchar(8) default NULL,
+  ID_TAXONOMY_LINK int(11) default NULL,
+  ID_TAXONOMY_PARENT int(11) default NULL,
+  ID_DC int(11) default NULL,
+  NOTES varchar(255) default NULL,
+  TAXONOMY_TREE text,
+  pesimatch int(11) default '0',
+  PRIMARY KEY  (ID_TAXONOMY),
+  UNIQUE KEY ensureunique (LEVEL,NAME,ID_TAXONOMY_PARENT),
+  KEY IDX_GROUP (GROUP),
+  KEY IDX_NAME (NAME),
+  KEY IDX_ID_DC (ID_DC),
+  KEY IDX_ID_TAXONOMY_LINK (ID_TAXONOMY_LINK),
+  KEY IDX_LEVEL (LEVEL),
+  KEY ID_TAXONOMY_PARENT (ID_TAXONOMY_PARENT),
+  KEY TAXONOMY_TREE (TAXONOMY_TREE(255))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-84">
+        <sql>CREATE TABLE chm62edt_temperature (
+  ID_TEMPERATURE int(11) NOT NULL default '0',
+  NAME varchar(128) default NULL,
+  DESCRIPTION text,
+  PRIMARY KEY  (ID_TEMPERATURE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-85">
+        <sql>CREATE TABLE chm62edt_temporal (
+  ID_TEMPORAL int(11) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION text,
+  USED int(11) default NULL,
+  PRIMARY KEY  (ID_TEMPORAL)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-86">
+        <sql>CREATE TABLE chm62edt_trend (
+  ID_TREND int(11) NOT NULL default '0',
+  STATUS varchar(50) NOT NULL default '''''',
+  DESCRIPTION text,
+  PRIMARY KEY  (ID_TREND)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-87">
+        <sql>CREATE TABLE chm62edt_usage (
+  ID_USAGE int(11) NOT NULL default '0',
+  NAME varchar(64) default NULL,
+  DESCRIPTION text,
+  PRIMARY KEY  (ID_USAGE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-88">
+        <sql>CREATE TABLE chm62edt_water (
+  ID_WATER int(11) NOT NULL default '0',
+  NAME varchar(128) default NULL,
+  DESCRIPTION text,
+  PRIMARY KEY  (ID_WATER)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-89">
+        <sql>CREATE TABLE dc_attribute_labels (
+  NAME varchar(100) NOT NULL,
+  LABEL varchar(100) default NULL,
+  PRIMARY KEY  (NAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-90">
+        <sql>CREATE TABLE dc_attributes (
+  ID_DC int(11) NOT NULL,
+  NAME varchar(100) NOT NULL,
+  OBJECT text character set latin1 NOT NULL,
+  OBJECTLANG varchar(10) character set latin1 NOT NULL,
+  TYPE enum('reference','','string','integer','decimal','boolean','dateTime','date') character set latin1 default NULL,
+  PRIMARY KEY  (ID_DC,NAME(1),OBJECT(100),OBJECTLANG),
+  UNIQUE KEY ID_DC (ID_DC,NAME,OBJECT(155)),
+  KEY NAME (NAME),
+  CONSTRAINT dc_attributes_ibfk_1 FOREIGN KEY (NAME) REFERENCES dc_attribute_labels (NAME) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-91">
+        <sql>CREATE TABLE dc_index (
+  ID_DC int(11) NOT NULL,
+  COMMENT varchar(255) default NULL COMMENT 'Name of the table  from where derive ID_DC',
+  REFCD int(11) default NULL COMMENT 'Identifier of the original information source id',
+  REFERENCE int(11) default NULL COMMENT 'Link to legal reference',
+  SOURCE text,
+  EDITOR varchar(255) default NULL,
+  JOURNAL_TITLE varchar(255) default NULL,
+  BOOK_TITLE varchar(255) default NULL,
+  JOURNAL_ISSUE varchar(50) default NULL,
+  ISBN varchar(20) default NULL,
+  URL varchar(255) default NULL,
+  CREATED year(4) default NULL,
+  TITLE varchar(255) default NULL,
+  ALTERNATIVE varchar(255) default NULL,
+  PUBLISHER text,
+  PRIMARY KEY  (ID_DC),
+  KEY IDX_REFCD (REFCD),
+  KEY IDX_REFERENCE (REFERENCE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-92">
+        <sql>CREATE TABLE eunis_advanced_search (
+  ID_SESSION varchar(64) NOT NULL default '',
+  NATURE_OBJECT varchar(16) NOT NULL default '',
+  ID_NODE varchar(16) NOT NULL default '',
+  NODE_TYPE varchar(16) NOT NULL default '',
+  KEY IDX_EUNIS_ADVANCED_SEARCH (ID_SESSION,NATURE_OBJECT,ID_NODE,NODE_TYPE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-93">
+        <sql>CREATE TABLE eunis_advanced_search_criteria (
+  ID_SESSION varchar(64) NOT NULL default '',
+  NATURE_OBJECT varchar(16) NOT NULL default '',
+  ID_NODE varchar(16) NOT NULL default '',
+  ATTRIBUTE varchar(32) NOT NULL default '',
+  OPERATOR varchar(16) NOT NULL default '',
+  FIRST_VALUE varchar(128) NOT NULL default '',
+  LAST_VALUE varchar(128) default NULL,
+  KEY IDX_EUNIS_ADVANCED_SEARCH_CRIT (ID_SESSION,NATURE_OBJECT,ID_NODE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-94">
+        <sql>CREATE TABLE eunis_advanced_search_criteria_temp (
+  ID_SESSION varchar(64) NOT NULL default '',
+  NATURE_OBJECT varchar(16) NOT NULL default '',
+  ID_NODE varchar(16) NOT NULL default '',
+  ATTRIBUTE varchar(32) NOT NULL default '',
+  OPERATOR varchar(16) NOT NULL default '',
+  FIRST_VALUE varchar(128) NOT NULL default '',
+  LAST_VALUE varchar(128) default NULL,
+  KEY IDX_EUNIS_ADV_SEARCH_CRIT_TEMP (ID_SESSION,NATURE_OBJECT,ID_NODE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-95">
+        <sql>CREATE TABLE eunis_advanced_search_results (
+  ID_SESSION varchar(64) NOT NULL default '',
+  NATURE_OBJECT varchar(32) NOT NULL default '',
+  ID_NATURE_OBJECT int(16) NOT NULL default '0',
+  PRIMARY KEY  (ID_SESSION,NATURE_OBJECT,ID_NATURE_OBJECT)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-96">
+        <sql>CREATE TABLE eunis_advanced_search_temp (
+  ID_SESSION varchar(64) NOT NULL default '',
+  NATURE_OBJECT varchar(16) NOT NULL default '',
+  ID_NODE varchar(16) NOT NULL default '',
+  NODE_TYPE varchar(16) NOT NULL default '',
+  KEY IDX_EUNIS_ADVANCED_SEARCH_TEMP (ID_SESSION,NATURE_OBJECT,ID_NODE,NODE_TYPE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-97">
+        <sql>CREATE TABLE eunis_bookmarks (
+  USERNAME varchar(100) NOT NULL default '',
+  BOOKMARK text NOT NULL,
+  DESCRIPTION varchar(255) NOT NULL default '',
+  RECORD_DATE timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (USERNAME,BOOKMARK(255),DESCRIPTION),
+  UNIQUE KEY IDX_UNIQUE (DESCRIPTION,BOOKMARK(255),USERNAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-98">
+        <sql>CREATE TABLE eunis_combined_search (
+  ID_SESSION varchar(64) NOT NULL default '',
+  NATURE_OBJECT varchar(16) NOT NULL default '',
+  ID_NODE varchar(16) NOT NULL default '',
+  NODE_TYPE varchar(16) NOT NULL default '',
+  KEY IDX_EUNIS_COMBINED_SEARCH (ID_SESSION,NATURE_OBJECT,ID_NODE,NODE_TYPE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-99">
+        <sql>CREATE TABLE eunis_combined_search_criteria (
+  ID_SESSION varchar(64) NOT NULL default '',
+  NATURE_OBJECT varchar(16) NOT NULL default '',
+  ID_NODE varchar(16) NOT NULL default '',
+  ATTRIBUTE varchar(32) NOT NULL default '',
+  OPERATOR varchar(16) NOT NULL default '',
+  FIRST_VALUE varchar(128) NOT NULL default '',
+  LAST_VALUE varchar(128) default NULL,
+  KEY IDX_EUNIS_COMBINED_SEARCH_CRIT (ID_SESSION,NATURE_OBJECT,ID_NODE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-100">
+        <sql>CREATE TABLE eunis_combined_search_criteria_temp (
+  ID_SESSION varchar(64) NOT NULL default '',
+  NATURE_OBJECT varchar(16) NOT NULL default '',
+  ID_NODE varchar(16) NOT NULL default '',
+  ATTRIBUTE varchar(32) NOT NULL default '',
+  OPERATOR varchar(16) NOT NULL default '',
+  FIRST_VALUE varchar(128) NOT NULL default '',
+  LAST_VALUE varchar(128) default NULL,
+  KEY IDX_EUNIS_COMB_SEARCH_CRIT_TEMP (ID_SESSION,NATURE_OBJECT,ID_NODE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-101">
+        <sql>CREATE TABLE eunis_combined_search_results (
+  ID_SESSION varchar(64) NOT NULL default '',
+  ID_NATURE_OBJECT_SPECIES int(11) NOT NULL default '-1',
+  ID_NATURE_OBJECT_HABITATS int(11) NOT NULL default '-1',
+  ID_NATURE_OBJECT_SITES int(11) NOT NULL default '-1',
+  ID_NATURE_OBJECT int(11) NOT NULL default '-1',
+  ID_NATURE_OBJECT_COMBINATION_1 int(11) NOT NULL default '-1',
+  ID_NATURE_OBJECT_COMBINATION_2 int(11) NOT NULL default '-1',
+  ID_NATURE_OBJECT_COMBINATION_3 int(11) NOT NULL default '-1',
+  KEY ID_SESSION (ID_SESSION),
+  KEY ID_NATURE_OBJECT_SPECIES (ID_NATURE_OBJECT_SPECIES),
+  KEY ID_NATURE_OBJECT_HABITATS (ID_NATURE_OBJECT_HABITATS),
+  KEY ID_NATURE_OBJECT_SITES (ID_NATURE_OBJECT_SITES),
+  KEY ID_NATURE_OBJECT (ID_NATURE_OBJECT),
+  KEY ID_NATURE_OBJECT_COMBINATION_1 (ID_NATURE_OBJECT_COMBINATION_1),
+  KEY ID_NATURE_OBJECT_COMBINATION_2 (ID_NATURE_OBJECT_COMBINATION_2),
+  KEY ID_NATURE_OBJECT_COMBINATION_3 (ID_NATURE_OBJECT_COMBINATION_3)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-102">
+        <sql>CREATE TABLE eunis_combined_search_temp (
+  ID_SESSION varchar(64) NOT NULL default '',
+  NATURE_OBJECT varchar(16) NOT NULL default '',
+  ID_NODE varchar(16) NOT NULL default '',
+  NODE_TYPE varchar(16) NOT NULL default '',
+  KEY IDX_EUNIS_COMBINED_SEARCH_TEMP (ID_SESSION,NATURE_OBJECT,ID_NODE,NODE_TYPE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-103">
+        <sql>CREATE TABLE eunis_feedback (
+  ID_FEEDBACK int(11) NOT NULL,
+  FEEDBACK_TYPE varchar(32) default NULL,
+  MODULE varchar(32) default NULL,
+  COMMENT varchar(255) default NULL,
+  NAME varchar(64) default NULL,
+  EMAIL varchar(64) default NULL,
+  COMPANY varchar(64) default NULL,
+  ADDRESS varchar(255) default NULL,
+  PHONE varchar(32) default NULL,
+  FAX varchar(32) default NULL,
+  URL varchar(128) default NULL,
+  PRIMARY KEY  (ID_FEEDBACK)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-104">
+        <sql>CREATE TABLE eunis_group_search (
+  CRITERIA_NAME varchar(128) NOT NULL default '',
+  DESCRIPTION text,
+  USERNAME varchar(100) NOT NULL default '',
+  FROM_WHERE varchar(255) NOT NULL default '0',
+  RECORD_DATE timestamp NOT NULL default CURRENT_TIMESTAMP,
+  RECORD_AUTHOR varchar(16) NOT NULL default 'OPERATOR',
+  PRIMARY KEY  (CRITERIA_NAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-105">
+        <sql>CREATE TABLE eunis_group_search_criteria (
+  CRITERIA_NAME varchar(128) NOT NULL default '',
+  ID_EUNIS_GROUP_SEARCH_CRITERIA varchar(16) NOT NULL default '0',
+  CRITERIA_ATTRIBUTE varchar(128) NOT NULL default '',
+  CRITERIA_FORM_FIELD_ATTRIBUTE varchar(128) NOT NULL default '',
+  CRITERIA_OPERATOR varchar(16) NOT NULL default '',
+  CRITERIA_FORM_FIELD_OPERATOR varchar(128) default NULL,
+  CRITERIA_FIRST_VALUE varchar(128) NOT NULL default '',
+  CRITERIA_LAST_VALUE varchar(128) default NULL,
+  CRITERIA_BOOLEAN varchar(50) default NULL,
+  PRIMARY KEY  (CRITERIA_NAME,ID_EUNIS_GROUP_SEARCH_CRITERIA)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-106">
+        <sql>CREATE TABLE eunis_headlines (
+  CONTENT varchar(255) NOT NULL default '',
+  START_DATE date default NULL,
+  END_DATE date default NULL,
+  RECORD_DATE timestamp NOT NULL default '0000-00-00 00:00:00',
+  KEY IDX_START_DATE (START_DATE),
+  KEY IDX_END_DATE (END_DATE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-107">
+        <sql>CREATE TABLE eunis_import_log (
+  LOG_ID int(11) NOT NULL,
+  MESSAGE text,
+  CUR_TIMESTAMP timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (LOG_ID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-108">
+        <sql>CREATE TABLE eunis_iso_languages (
+  name varchar(32) default NULL,
+  code varchar(6) NOT NULL default ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-109">
+        <sql>CREATE TABLE eunis_related_reports (
+  FILE_NAME varchar(85) NOT NULL default '',
+  REPORT_NAME text,
+  APPROVED int(11) default NULL,
+  RECORD_DATE timestamp NOT NULL default CURRENT_TIMESTAMP,
+  RECORD_AUTHOR varchar(5) NOT NULL default 'OPERA',
+  PRIMARY KEY  (FILE_NAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-110">
+        <sql>CREATE TABLE eunis_rights (
+  RIGHTNAME varchar(250) NOT NULL default '',
+  DESCRIPTION varchar(255) default NULL,
+  RECORD_DATE timestamp NOT NULL default CURRENT_TIMESTAMP,
+  RECORD_AUTHOR varchar(16) NOT NULL default 'OPERATOR',
+  PRIMARY KEY  (RIGHTNAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-111">
+        <sql>CREATE TABLE eunis_roles (
+  ROLENAME varchar(64) NOT NULL default '',
+  DESCRIPTION varchar(255) default NULL,
+  RECORD_DATE timestamp NOT NULL default CURRENT_TIMESTAMP,
+  RECORD_AUTHOR varchar(16) NOT NULL default 'OPERATOR',
+  PRIMARY KEY  (ROLENAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-112">
+        <sql>CREATE TABLE eunis_roles_rights (
+  ROLENAME varchar(64) NOT NULL default '',
+  RIGHTNAME varchar(250) NOT NULL default '',
+  RECORD_DATE timestamp NOT NULL default CURRENT_TIMESTAMP,
+  RECORD_AUTHOR varchar(16) NOT NULL default 'OPERATOR',
+  PRIMARY KEY  (ROLENAME,RIGHTNAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-113">
+        <sql>CREATE TABLE eunis_save_advanced_search (
+  CRITERIA_NAME varchar(100) default NULL,
+  NATURE_OBJECT varchar(100) default NULL,
+  ID_NODE int(16) NOT NULL default '0',
+  NODE_TYPE varchar(16) default NULL,
+  DESCRIPTION text,
+  USERNAME varchar(100) default NULL,
+  RECORD_AUTHOR varchar(16) NOT NULL default '',
+  RECORD_DATE datetime default NULL,
+  FROM_WHERE varchar(100) default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-114">
+        <sql>CREATE TABLE eunis_save_advanced_search_criteria (
+  CRITERIA_NAME varchar(100) default NULL,
+  NATURE_OBJECT varchar(100) default NULL,
+  ID_NODE int(16) NOT NULL default '0',
+  ATTRIBUTE varchar(32) default NULL,
+  OPERATOR varchar(16) default NULL,
+  FIRST_VALUE varchar(128) default NULL,
+  LAST_VALUE varchar(128) default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-115">
+        <sql>CREATE TABLE eunis_session_log (
+  ID_SESSION varchar(255) NOT NULL default '',
+  USERNAME varchar(64) NOT NULL default '',
+  START datetime NOT NULL default '0000-00-00 00:00:00',
+  END datetime NOT NULL default '0000-00-00 00:00:00',
+  IP_ADDRESS varchar(32) NOT NULL default '',
+  PRIMARY KEY  (ID_SESSION,START)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-116">
+        <sql>CREATE TABLE eunis_users (
+  USERNAME varchar(100) NOT NULL default '',
+  FIRST_NAME varchar(255) default NULL,
+  LAST_NAME varchar(255) default NULL,
+  EMAIL varchar(64) default NULL,
+  LANG varchar(5) NOT NULL default 'en',
+  THEME_INDEX int(11) unsigned NOT NULL default '0',
+  LOGIN_DATE timestamp NOT NULL default '0000-00-00 00:00:00',
+  RECORD_DATE timestamp NOT NULL default CURRENT_TIMESTAMP,
+  RECORD_AUTHOR varchar(16) NOT NULL default 'OPERATOR',
+  PRIMARY KEY  (USERNAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-117">
+        <sql>CREATE TABLE eunis_users_roles (
+  USERNAME varchar(100) NOT NULL default '',
+  ROLENAME varchar(64) NOT NULL default '',
+  RECORD_DATE timestamp NOT NULL default CURRENT_TIMESTAMP,
+  RECORD_AUTHOR varchar(16) NOT NULL default 'OPERATOR',
+  PRIMARY KEY  (USERNAME,ROLENAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+
+    <changeSet author="roug" id="rev-118">
+        <sql>CREATE TABLE eunis_web_content (
+  ID_PAGE varchar(64) NOT NULL default '',
+  CONTENT text,
+  DESCRIPTION varchar(255) default NULL,
+  LANG varchar(64) NOT NULL default 'EN',
+  LANG_STATUS tinyint(4) default '1',
+  CONTENT_LENGTH tinyint(4) default '0',
+  RECORD_DATE timestamp NOT NULL default CURRENT_TIMESTAMP,
+  RECORD_AUTHOR varchar(16) default 'OPERATOR',
+  CONTENT_VALID tinyint(4) NOT NULL default '0',
+  PRIMARY KEY  (ID_PAGE,LANG,RECORD_DATE),
+  KEY IDX_RECORD_DATE (RECORD_DATE),
+  KEY IDX_ALL_FIELDS (ID_PAGE,CONTENT(64),DESCRIPTION(64),LANG,LANG_STATUS,CONTENT_LENGTH,RECORD_DATE,RECORD_AUTHOR),
+  KEY IDX_ID_PAGE (ID_PAGE),
+  KEY IDX_LANG (LANG)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
+    </changeSet>
+
+    <changeSet author="roug" id="rev-119">
+        <addForeignKeyConstraint
+            constraintName="chm62edt_habitat_ibfk_1"
+            baseTableName="chm62edt_habitat"
+            baseColumnNames="ID_NATURE_OBJECT"
+            referencedTableName="chm62edt_nature_object"
+            referencedColumnNames="ID_NATURE_OBJECT"
+        />
+    </changeSet>
+</databaseChangeLog>

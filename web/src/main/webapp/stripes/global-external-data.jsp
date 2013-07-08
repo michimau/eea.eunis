@@ -8,7 +8,7 @@
 
         <!-- MAIN CONTENT -->
 
-            <h2>Glogabl queries of external data:</h2>
+            <h2>Global queries of external data:</h2>
             
             <c:choose>
                 <c:when test="${!actionBean.querySelected}">
@@ -56,7 +56,7 @@
                     <c:choose>
                         <c:when test="${not empty actionBean.queryResultCols && not empty actionBean.queryResultRows}">
 							<div style="overflow-x:auto ">
-							    <display:table name="actionBean.queryResultRows" class="sortable" pagesize="30" sort="list" requestURI="${actionBean.urlBinding}">
+							    <display:table name="actionBean.queryResultRows" class="sortable" pagesize="100" sort="list" requestURI="${actionBean.urlBinding}">
 							        <c:forEach var="cl" items="${actionBean.queryResultCols}">
 							            <display:column property="${cl.property}" title="${cl.title}" sortable="${cl.sortable}" decorator="eionet.eunis.util.decorators.ForeignDataColumnDecorator"/>
 							              </c:forEach>

@@ -5,9 +5,25 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">n2000birds n2000other nutscodes estatcodes habides
+  <entry key="queries">n2000habitats n2000birds n2000other
+   nutscodes estatcodes habides
    art17delv2012s
   </entry>
+
+  <entry key="n2000habitats.querytype">SQL</entry>
+  <entry key="n2000habitats.title">Natura 2000 codelist of Annex I habitats (SDF field: 3.1)</entry>
+  <entry key="n2000habitats.summary"><![CDATA[Codelist for habitat types under Directive 2009/147/EC.
+]]></entry>
+  <entry key="n2000habitats.column.CODE_2000">N2000 Code</entry>
+  <entry key="n2000habitats.link.CODE_2000">FACTSHEET</entry>
+  <entry key="n2000habitats.column.PRIORITY">Priority</entry>
+  <entry key="n2000habitats.column.SCIENTIFIC_NAME">Habitat type name</entry>
+  <entry key="n2000habitats.query"><![CDATA[
+SELECT CONCAT('[CONTEXT_PATH]/habitats/',ID_HABITAT) AS FACTSHEET,
+CODE_2000, IF(PRIORITY=1,'*',NULL) AS PRIORITY, SCIENTIFIC_NAME
+FROM chm62edt_habitat
+WHERE CODE_2000 IS NOT NULL ORDER BY CODE_2000
+]]></entry>
 
 <!-- -->
 <!-- N2000 birds query -->

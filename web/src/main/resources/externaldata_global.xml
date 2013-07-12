@@ -66,13 +66,19 @@ WHERE ID_GROUP_SPECIES=5 ORDER BY a.OBJECT
   <entry key="n2000other.column.SCIENTIFIC_NAME">Species name</entry>
   <entry key="n2000other.column.AUTHOR">Author</entry>
   <entry key="n2000other.column.COMMENT">Comment</entry>
+  <entry key="n2000other.column.VALID_NAME">Valid name</entry>
+  <entry key="n2000other.link.VALID_NAME">VALIDLINK</entry>
 
   <entry key="n2000other.query"><![CDATA[
-SELECT a.OBJECT AS N2000CODE, SCIENTIFIC_NAME, AUTHOR, CONCAT('[CONTEXT_PATH]/species/',ID_SPECIES) AS FACTSHEET, c.OBJECT AS COMMENT
+SELECT a.OBJECT AS N2000CODE, s.SCIENTIFIC_NAME, s.AUTHOR,
+CONCAT('[CONTEXT_PATH]/species/',s.ID_SPECIES) AS FACTSHEET, c.OBJECT AS COMMENT,
+IF(s.ID_SPECIES != s.ID_SPECIES_LINK, v.SCIENTIFIC_NAME,NULL) AS VALID_NAME,
+IF(s.ID_SPECIES != s.ID_SPECIES_LINK, CONCAT('[CONTEXT_PATH]/species/',v.ID_SPECIES),NULL) AS VALIDLINK
 FROM chm62edt_species AS s
 JOIN chm62edt_nature_object_attributes AS a ON s.ID_NATURE_OBJECT=a.ID_NATURE_OBJECT AND a.NAME="sameSynonymN2000"
 LEFT JOIN chm62edt_nature_object_attributes AS c ON s.ID_NATURE_OBJECT=c.ID_NATURE_OBJECT AND c.NAME="_n2000CodeComment"
-WHERE ID_GROUP_SPECIES<>5 ORDER BY a.OBJECT
+JOIN chm62edt_species AS v ON s.ID_SPECIES_LINK = v.ID_SPECIES
+WHERE s.ID_GROUP_SPECIES<>5 ORDER BY a.OBJECT
 ]]></entry>
 
 

@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.displaytag.properties.SortOrderEnum;
 
 import ro.finsiel.eunis.search.Utilities;
@@ -120,7 +121,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
      */
     private int getReferencesCnt(String like) {
         int ret = 0;
-        String trimmedLike = like.trim();
+        String trimmedLike = like == null ? StringUtils.EMPTY : like.trim();
         String query = "SELECT COUNT(*) FROM DC_INDEX";
         if (trimmedLike.length() > 0 && !trimmedLike.equalsIgnoreCase(ReferencesActionBean.DEFAULT_FILTER_VALUE)) {
             query += " WHERE (TITLE LIKE ? OR SOURCE LIKE ?) ";

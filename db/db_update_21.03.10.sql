@@ -1,1 +1,0 @@
-alter table chm62edt_nature_object_picture add column MAIN_PIC tinyint(1) not null default 0;

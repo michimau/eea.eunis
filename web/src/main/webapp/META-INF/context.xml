@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+
+    <Resource
+        name="jdbc/liquibase"
+        auth="Container"
+        type="javax.sql.DataSource"
+        maxActive="30"
+        maxIdle="30"
+        maxWait="10000"
+        username="${mysql.user}"
+        password="${mysql.password}"
+        driverClassName="${mysql.driver}"
+        url="${mysql.url}${mysql.url.ending.escaped}"
+        validationQuery="SELECT 1"
+        testOnBorrow="true"
+        >
+    </Resource>
+
+</Context>

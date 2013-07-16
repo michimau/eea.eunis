@@ -429,7 +429,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
   KEY IDX_CODE_ANNEX1 (CODE_ANNEX1),
   KEY IDX_EUNIS_HABITAT_CODE (EUNIS_HABITAT_CODE),
   KEY IDX_LEVEL (LEVEL),
-  KEY IDX_DESCRIPTION (DESCRIPTION(255)),
+  KEY IDX_DESCRIPTION (DESCRIPTION(255))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql>
     </changeSet>
 
@@ -969,7 +969,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
   DISTRICT_NAME text,
   OWNERSHIP text,
   HISTORY text,
-  CHARACTER text,
+  `CHARACTER` text,
   DESCRIPTION text,
   MANAGEMENT_PLAN text,
   IUCNAT text,
@@ -1253,7 +1253,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
   ID_TAXONOMY int(11) NOT NULL,
   LEVEL varchar(16) default NULL,
   NAME varchar(45) default NULL,
-  GROUP varchar(8) default NULL,
+  `GROUP` varchar(8) default NULL,
   ID_TAXONOMY_LINK int(11) default NULL,
   ID_TAXONOMY_PARENT int(11) default NULL,
   ID_DC int(11) default NULL,
@@ -1262,7 +1262,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
   pesimatch int(11) default '0',
   PRIMARY KEY  (ID_TAXONOMY),
   UNIQUE KEY ensureunique (LEVEL,NAME,ID_TAXONOMY_PARENT),
-  KEY IDX_GROUP (GROUP),
+  KEY IDX_GROUP (`GROUP`),
   KEY IDX_NAME (NAME),
   KEY IDX_ID_DC (ID_DC),
   KEY IDX_ID_TAXONOMY_LINK (ID_TAXONOMY_LINK),
@@ -1733,4 +1733,5 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
             referencedColumnNames="ID_NATURE_OBJECT"
         />
     </changeSet>
+    
 </databaseChangeLog>

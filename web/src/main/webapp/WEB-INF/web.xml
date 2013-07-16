@@ -251,11 +251,34 @@
         <description>Number of countries displayed within maps retrieved from
             EEA map server</description>
     </context-param>
+    
+    <!-- Liquibase configuration. -->
+    
+    <context-param>
+        <param-name>liquibase.changelog</param-name>
+        <param-value>db/eunis-structure.xml</param-value>
+    </context-param>
 
-    <!--
-        Listener registered to cleanup the temporary files during a session,
-        when it expires
-    -->
+    <context-param>
+        <param-name>liquibase.datasource</param-name>
+        <param-value>java:comp/env/jdbc/liquibase</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>liquibase.onerror.fail</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>liquibase.contexts</param-name>
+        <param-value>production</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>liquibase.integration.servlet.LiquibaseServletListener</listener-class>
+    </listener>
+
+    <!-- Listener for cleanup of temporary files expired during a session. -->
     <listener>
         <listener-class>ro.finsiel.eunis.session.CleanupSessionListener</listener-class>
     </listener>

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.commons.lang.StringUtils;
+
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.formBeans.ReferencesSearchCriteria;
@@ -24,6 +26,9 @@ import eionet.eunis.dto.PairDTO;
  * @author finsiel
  **/
 public class ReferencesDomain implements Paginable {
+
+    /** Just to avoid constant re-creation of comma-and-space delimiter in below code. */
+    private static final String COMMA_AND_SPACE = ", ";
 
     /** Criterias applied for searching */
     private AbstractSearchCriteria[] searchCriteria = new AbstractSearchCriteria[0]; // 0 length means not criteria set
@@ -55,6 +60,7 @@ public class ReferencesDomain implements Paginable {
      * @param sortCriteria The criteria used for sorting
      * @return A list of objects which match query criteria
      */
+    @Override
     public List getResults(int offsetStart, int pageSize, AbstractSortCriteria[] sortCriteria) throws CriteriaMissingException {
 
         this.sortCriteria = sortCriteria;
@@ -212,22 +218,21 @@ public class ReferencesDomain implements Paginable {
 
             if (rs.isBeforeFirst()) {
                 while (!rs.isLast()) {
+
                     rs.next();
-                    // results.addElement(rs.getString(1));
+                    String speciesId = rs.getString(1);
+                    String speciesName = rs.getString(2);
+                    String speciesAuthor = rs.getString(3);
+
+                    String pairKey = speciesId;
+                    StringBuilder pairValue = new StringBuilder(speciesName);
+                    if (StringUtils.isNotBlank(speciesAuthor)) {
+                        pairValue.append(COMMA_AND_SPACE).append(speciesAuthor);
+                    }
 
                     PairDTO pair = new PairDTO();
-                    pair.setKey(rs.getString(1));
-                    String name = rs.getString(2);
-                    String author = rs.getString(3);
-                    if (author == null || author.isEmpty()) {
-                        author = "";
-                    } else if (!(author.startsWith("(") && author.endsWith(")"))) {
-                        author = ", (" + author + ")";
-                    } else {
-                        author = ", " + author;
-                    }
-                    pair.setValue(name + author);
-
+                    pair.setKey(pairKey);
+                    pair.setValue(pairValue.toString());
                     results.add(pair);
                 }
             }
@@ -246,6 +251,7 @@ public class ReferencesDomain implements Paginable {
      * Having the total number of results and the results displayed per page, the you could find the number of pages i.e.
      * @return Number of results found
      */
+    @Override
     public Long countResults() throws CriteriaMissingException {
         if (-1 == _resultCount.longValue()) {
             _resultCount = _rawCount();

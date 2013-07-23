@@ -2184,7 +2184,7 @@ public final class Utilities {
     }
 
     /**
-     * Replace strange characters (', ",`, �, \u0027) from a string with empty space.
+     * Replace strange characters (', ",`, ‘, \u0027) from a string with empty space.
      *
      * @param str String to be processed.
      * @return Processed string.
@@ -2200,8 +2200,10 @@ public final class Utilities {
         char ch = (char) 39;
         char chspace = (char) 32;
 
-        str = str.replaceAll("\"", replacement).replaceAll("'", replacement).replaceAll("\"", replacement).replaceAll("�", replacement).replaceAll("`", replacement).replaceAll("�", replacement).replaceAll("'", replacement).replaceAll(
-                "\u0027", replacement);
+        str = str.replaceAll("\"", replacement).replaceAll("'", replacement)
+                .replaceAll("\"", replacement).replaceAll("´", replacement)
+                .replaceAll("`", replacement).replaceAll("‘", replacement)
+                .replaceAll("'", replacement).replaceAll("\u0027", replacement);
         str = str.replace(ch, chspace);
 
         return str;

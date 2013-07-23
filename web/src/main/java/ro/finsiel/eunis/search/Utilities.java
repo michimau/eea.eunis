@@ -1379,7 +1379,7 @@ public final class Utilities {
      *
      * @param sourceDB The source database in human language
      * @return The string identifying the DB within database (ie. CDDA National corresponds to CDDA_NATIONAL).
-     * @see ro.finsiel.eunis.search.sites.SitesSearchUtility#translateSourceDBInvert;
+     * @see ro.finsiel.eunis.search.sites.SitesSearchUtility#translateSourceDBInvert(String)
      * @deprecated by ro.finsiel.eunis.search.sites.SitesSearchUtilities#translateSourceDBInvert;
      */
     @Deprecated
@@ -2651,7 +2651,7 @@ public final class Utilities {
 
         try {
             String appHome = application.getInitParameter(Constants.APP_HOME_INIT_PARAM);
-            File dir = new File (appHome, "/images/intros");
+            File dir = new File(appHome, "/images/intros");
             if (dir.exists() && dir.isDirectory()) {
                 java.io.File[] files = dir.listFiles();
 

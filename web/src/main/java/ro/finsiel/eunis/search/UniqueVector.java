@@ -58,6 +58,8 @@ public class UniqueVector {
 
     /**
      * Retrieve an list of elements in a String, separated by comma (ex: element1,element2,element3 etc.).
+     * Note: loops through the list backwards. By choice?
+     *
      * @return Elements in a string.
      */
     public String getElementsSeparatedByComma() {
@@ -103,6 +105,7 @@ public class UniqueVector {
     /**
      * Retrieve an element from vector from specified position.
      * If position is invalid, then null is returned.
+     *
      * @param i position.
      * @return String with element
      */
@@ -119,19 +122,4 @@ public class UniqueVector {
         return element;
     }
 
-    /**
-     * Test method.
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
-        UniqueVector v = new UniqueVector();
-
-        v.addElement("EE");
-        v.addElement("EE");
-        v.addElement("DD");
-        v.addElement("XX");
-        v.addElement("ZZ");
-        v.addElement("ZZ");
-        System.out.println(v.getElementsSeparatedByComma());
-    }
 }

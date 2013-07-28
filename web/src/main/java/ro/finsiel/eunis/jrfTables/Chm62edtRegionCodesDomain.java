@@ -32,7 +32,7 @@ public class Chm62edtRegionCodesDomain extends AbstractDomain {
 
         this.addColumnSpec(
                 new StringColumnSpec("ID_REGION_CODE", "getIdRegionCode",
-                "setIdRegionCode", DEFAULT_TO_NULL));
+                "setIdRegionCode", DEFAULT_TO_EMPTY_STRING, NATURAL_PRIMARY_KEY));
         this.addColumnSpec(
                 new StringColumnSpec("NAME", "getName", "setName",
                 DEFAULT_TO_NULL));

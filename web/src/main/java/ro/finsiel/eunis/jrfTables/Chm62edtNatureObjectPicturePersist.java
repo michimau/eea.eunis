@@ -4,7 +4,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 /**
  * 
- * @version $Revision: 1.1.1.1 $ $Date: 2003/12/09 08:34:51 $
+ * @version $Revision$ $Date$
  **/
 public class Chm62edtNatureObjectPicturePersist extends PersistentObject {
 

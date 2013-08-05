@@ -12,7 +12,7 @@ import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 /**
  *
- * @version $Revision: 1.1.1.1 $ $Date: 2003/12/09 08:35:13 $
+ * @version $Revision$ $Date$
  **/
 public class NatureObjectDcSourceDomain extends AbstractDomain {
 

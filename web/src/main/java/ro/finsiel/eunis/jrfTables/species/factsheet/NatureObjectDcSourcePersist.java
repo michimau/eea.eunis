@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  *
- * @version $Revision: 1.1.1.1 $ $Date: 2003/12/09 08:35:13 $
+ * @version $Revision$ $Date$
  **/
 public class NatureObjectDcSourcePersist extends PersistentObject {
 

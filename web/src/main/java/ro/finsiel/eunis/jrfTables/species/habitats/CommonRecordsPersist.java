@@ -266,7 +266,7 @@ public class CommonRecordsPersist extends PersistentObject {
 
     /**
      * Setter for a joined field.
-     * @@param comment
+     * @param comment
      **/
     public void setidDC(Integer comment) {
         this.idDC = comment;

@@ -11,8 +11,8 @@ import net.sf.jrf.domain.PersistentObject;
 
 /**
  *
- * @version $Revision: 1.2.0.0 $ $Date: 2005/03/29 $
- * @version $Revision: 1.1.1.1 $ $Date: 2003/12/09 08:34:52 $
+ * @version $Revision$ $Date$
+ * @version $Revision$ $Date$
  **/
 public class Chm62edtSitesAttributesPersist extends PersistentObject {
 

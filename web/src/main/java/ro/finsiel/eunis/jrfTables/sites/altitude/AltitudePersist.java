@@ -10,7 +10,7 @@ import ro.finsiel.eunis.search.sites.CoordinatesProvider;
 
 /**
  *
- * @version $Revision: 1.1.1.1 $ $Date: 2003/12/09 08:35:00 $
+ * @version $Revision$ $Date$
  **/
 public class AltitudePersist extends PersistentObject implements CoordinatesProvider {
 

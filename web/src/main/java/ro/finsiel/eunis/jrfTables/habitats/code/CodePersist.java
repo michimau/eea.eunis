@@ -5,7 +5,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 /**
  *
- * @version $Revision: 1.1.1.1 $ $Date: 2003/12/09 08:34:56 $
+ * @version $Revision$ $Date$
  **/
 public class CodePersist extends PersistentObject {
   // Sort this type of objects after their EUNIS CODE

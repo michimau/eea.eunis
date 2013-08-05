@@ -358,7 +358,7 @@ public class VernacularNamesPersist extends PersistentObject {
 
     /**
      * Setter for a joined field.
-     * @@param comment
+     * @param comment
      **/
     public void setLookupType(String comment) {
         lookupType = comment;
@@ -367,7 +367,7 @@ public class VernacularNamesPersist extends PersistentObject {
 
     /**
      * Setter for a joined  field.
-     * @@param comment
+     * @param comment
      **/
     public void setIDLookup(String comment) {
         IDLookup = comment;

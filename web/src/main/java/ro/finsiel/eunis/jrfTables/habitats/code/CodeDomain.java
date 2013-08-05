@@ -26,7 +26,7 @@ import java.util.List;
 
 /**
  *
- * @version $Revision: 1.2 $ $Date: 2004/08/04 10:32:34 $
+ * @version $Revision$ $Date$
  **/
 public class CodeDomain extends AbstractDomain implements Paginable {
   public static final Integer SEARCH_EUNIS = new Integer(0);

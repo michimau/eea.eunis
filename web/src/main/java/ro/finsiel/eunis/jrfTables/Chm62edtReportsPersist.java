@@ -1,7 +1,3 @@
-/*
- * $Id
- */
-
 package ro.finsiel.eunis.jrfTables;
 
 
@@ -10,7 +6,7 @@ import net.sf.jrf.domain.PersistentObject;
 
 /**
  *
- * @version $Revision: 1.1.1.1 $ $Date: 2003/12/09 08:34:51 $
+ * @version $Revision$ $Date$
  **/
 public class Chm62edtReportsPersist extends PersistentObject {
 
@@ -152,7 +148,7 @@ public class Chm62edtReportsPersist extends PersistentObject {
 
     /**
      * Setter for a joined field.
-     * @@param comment
+     * @param comment
      **/
     public void setLookupType(String comment) {
         lookupType = comment;
@@ -161,7 +157,7 @@ public class Chm62edtReportsPersist extends PersistentObject {
 
     /**
      * Setter for a joined  field.
-     * @@param comment
+     * @param comment
      **/
     public void setIDLookup(String comment) {
         IDLookup = comment;

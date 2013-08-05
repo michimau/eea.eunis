@@ -1377,7 +1377,6 @@ public class UsersUtility {
      * @param username user name
      * @param request request
      * @param manager who made this operation
-     * @param manager who made this operation
      * @param SQL_URL JDBC url.
      * @param SQL_USR JDBC user.
      * @param SQL_PWD JDBC password.

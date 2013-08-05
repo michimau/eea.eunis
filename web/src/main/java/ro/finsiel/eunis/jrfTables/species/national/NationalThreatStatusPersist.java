@@ -13,7 +13,7 @@ import java.util.StringTokenizer;
 
 /**
  *
- * @version $Revision: 1.1.1.1 $ $Date: 2003/12/09 08:35:17 $
+ * @version $Revision$ $Date$
  **/
 public class NationalThreatStatusPersist extends PersistentObject {
 

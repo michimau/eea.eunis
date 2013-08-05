@@ -24,7 +24,7 @@ import java.util.List;
 
 /**
  *
- * @version $Revision: 1.1.1.1 $ $Date: 2003/12/09 08:35:15 $
+ * @version $Revision$ $Date$
  **/
 public class InternationalThreatStatusDomain extends AbstractDomain implements Paginable {
 

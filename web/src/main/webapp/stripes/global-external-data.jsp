@@ -2,13 +2,13 @@
 
 <%@ include file="/stripes/common/taglibs.jsp"%>
 
-<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Glogabl queries of external data">
+<stripes:layout-render name="/stripes/common/template.jsp" pageTitle="Global queries">
 
     <stripes:layout-component name="contents">
 
         <!-- MAIN CONTENT -->
 
-            <h2>Global queries of external data:</h2>
+            <h2>Global queries of external data</h2>
             
             <c:choose>
                 <c:when test="${!actionBean.querySelected}">
